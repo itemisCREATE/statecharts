@@ -40,9 +40,10 @@
     <eOperations name="getFeatureConfiguration" eType="#//FeatureConfiguration">
       <eParameters name="featureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statechart" eType="ecore:EClass ../../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Statechart"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementRef" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="#//FeatureConfiguration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FeatureParameterValue">
     <eOperations name="setValue">

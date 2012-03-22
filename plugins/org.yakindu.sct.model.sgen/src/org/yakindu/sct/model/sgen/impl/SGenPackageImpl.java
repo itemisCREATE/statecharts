@@ -342,7 +342,7 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getGeneratorEntry_Statechart() {
+	public EReference getGeneratorEntry_ElementRef() {
         return (EReference)getGeneratorEntry().getEStructuralFeatures().get(0);
 	}
 
@@ -353,6 +353,15 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 */
 	public EReference getGeneratorEntry_Features() {
         return (EReference)getGeneratorEntry().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGeneratorEntry_ContentType() {
+        return (EAttribute)getGeneratorEntry().getEStructuralFeatures().get(2);
 	}
 
 	/**

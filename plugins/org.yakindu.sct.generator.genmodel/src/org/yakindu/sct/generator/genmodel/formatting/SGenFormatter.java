@@ -50,7 +50,7 @@ public class SGenFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().around(g.getFeatureConfigurationRule());
 		c.setLinewrap().around(g.getFeatureParameterValueRule());
 		c.setNoLinewrap().after(
-				g.getGeneratorEntryAccess().getStatechartKeyword_0());
+				g.getGeneratorEntryAccess().getContentTypeAssignment_0());
 		c.setNoLinewrap().after(
 				g.getFeatureConfigurationAccess().getFeatureKeyword_1());
 		c.setNoLinewrap().before(

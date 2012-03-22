@@ -2860,11 +2860,9 @@ rule__GeneratorEntry__Group__0__Impl
     }
 :
 (
-{ before(grammarAccess.getGeneratorEntryAccess().getStatechartKeyword_0()); }
-
-	'statechart' 
-
-{ after(grammarAccess.getGeneratorEntryAccess().getStatechartKeyword_0()); }
+{ before(grammarAccess.getGeneratorEntryAccess().getContentTypeAssignment_0()); }
+(rule__GeneratorEntry__ContentTypeAssignment_0)
+{ after(grammarAccess.getGeneratorEntryAccess().getContentTypeAssignment_0()); }
 )
 
 ;
@@ -2891,9 +2889,9 @@ rule__GeneratorEntry__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getGeneratorEntryAccess().getStatechartAssignment_1()); }
-(rule__GeneratorEntry__StatechartAssignment_1)
-{ after(grammarAccess.getGeneratorEntryAccess().getStatechartAssignment_1()); }
+{ before(grammarAccess.getGeneratorEntryAccess().getElementRefAssignment_1()); }
+(rule__GeneratorEntry__ElementRefAssignment_1)
+{ after(grammarAccess.getGeneratorEntryAccess().getElementRefAssignment_1()); }
 )
 
 ;
@@ -12725,18 +12723,33 @@ finally {
 	restoreStackSize(stackSize);
 }
 
-rule__GeneratorEntry__StatechartAssignment_1
+rule__GeneratorEntry__ContentTypeAssignment_0
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartCrossReference_1_0()); }
-(
-{ before(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartQIDParserRuleCall_1_0_1()); }
-	ruleQID{ after(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartQIDParserRuleCall_1_0_1()); }
+{ before(grammarAccess.getGeneratorEntryAccess().getContentTypeIDTerminalRuleCall_0_0()); }
+	RULE_ID{ after(grammarAccess.getGeneratorEntryAccess().getContentTypeIDTerminalRuleCall_0_0()); }
 )
-{ after(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartCrossReference_1_0()); }
+
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+rule__GeneratorEntry__ElementRefAssignment_1
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getGeneratorEntryAccess().getElementRefEObjectCrossReference_1_0()); }
+(
+{ before(grammarAccess.getGeneratorEntryAccess().getElementRefEObjectQIDParserRuleCall_1_0_1()); }
+	ruleQID{ after(grammarAccess.getGeneratorEntryAccess().getElementRefEObjectQIDParserRuleCall_1_0_1()); }
+)
+{ after(grammarAccess.getGeneratorEntryAccess().getElementRefEObjectCrossReference_1_0()); }
 )
 
 ;

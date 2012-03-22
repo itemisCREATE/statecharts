@@ -32,6 +32,8 @@ public class GeneratorExtensions {
 	private static final String ATTRIBUTE_CLASS = "class";
 	private static final String ATTRIBUTE_ID = "id";
 	private static final String ATTRIBUTE_NAME = "name";
+	private static final String ATTRIBUTE_CONTENT_TYPE = "contentType";
+	private static final String ATTRIBUTE_ELEMENT_REF_TYPE = "elementRefType";
 	@SuppressWarnings("unused")
 	private static final String ATTRIBUTE_ICON = "icon";
 
@@ -69,6 +71,20 @@ public class GeneratorExtensions {
 			// ImageDescriptor descriptor = ImageDescriptor.createFromFile(
 			// getClass(), iconPath);
 			// return descriptor.createImage();
+		}
+
+		public String getContentType() {
+			return configElement.getAttribute(ATTRIBUTE_CONTENT_TYPE);
+		}
+
+		public Class<?> getElementRefType() {
+			try {
+				return Class.forName(configElement
+						.getAttribute(ATTRIBUTE_ELEMENT_REF_TYPE));
+			} catch (Exception e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
 
 		@Override
@@ -122,7 +138,8 @@ public class GeneratorExtensions {
 		return Iterables.find(getGeneratorDescriptors(),
 				new Predicate<GeneratorDescriptor>() {
 					public boolean apply(GeneratorDescriptor input) {
-						return input != null && input.getId() != null && input.getId().equals(generatorId);
+						return input != null && input.getId() != null
+								&& input.getId().equals(generatorId);
 					}
 				});
 	}

@@ -284,13 +284,13 @@ public interface SGenPackage extends EPackage {
 	int GENERATOR_ENTRY = 5;
 
 	/**
-	 * The feature id for the '<em><b>Statechart</b></em>' reference.
+	 * The feature id for the '<em><b>Element Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_ENTRY__STATECHART = 0;
+	int GENERATOR_ENTRY__ELEMENT_REF = 0;
 
 	/**
 	 * The feature id for the '<em><b>Features</b></em>' containment reference list.
@@ -302,13 +302,22 @@ public interface SGenPackage extends EPackage {
 	int GENERATOR_ENTRY__FEATURES = 1;
 
 	/**
+	 * The feature id for the '<em><b>Content Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GENERATOR_ENTRY__CONTENT_TYPE = 2;
+
+	/**
 	 * The number of structural features of the '<em>Generator Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERATOR_ENTRY_FEATURE_COUNT = 2;
+	int GENERATOR_ENTRY_FEATURE_COUNT = 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl <em>Feature Parameter Value</em>}' class.
@@ -587,15 +596,15 @@ public interface SGenPackage extends EPackage {
 	EClass getGeneratorEntry();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sgen.GeneratorEntry#getStatechart <em>Statechart</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sgen.GeneratorEntry#getElementRef <em>Element Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Statechart</em>'.
-	 * @see org.yakindu.sct.model.sgen.GeneratorEntry#getStatechart()
+	 * @return the meta object for the reference '<em>Element Ref</em>'.
+	 * @see org.yakindu.sct.model.sgen.GeneratorEntry#getElementRef()
 	 * @see #getGeneratorEntry()
 	 * @generated
 	 */
-	EReference getGeneratorEntry_Statechart();
+	EReference getGeneratorEntry_ElementRef();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgen.GeneratorEntry#getFeatures <em>Features</em>}'.
@@ -607,6 +616,17 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getGeneratorEntry_Features();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.GeneratorEntry#getContentType <em>Content Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Content Type</em>'.
+	 * @see org.yakindu.sct.model.sgen.GeneratorEntry#getContentType()
+	 * @see #getGeneratorEntry()
+	 * @generated
+	 */
+	EAttribute getGeneratorEntry_ContentType();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.FeatureParameterValue <em>Feature Parameter Value</em>}'.
@@ -864,12 +884,12 @@ public interface SGenPackage extends EPackage {
 		EClass GENERATOR_ENTRY = eINSTANCE.getGeneratorEntry();
 
 		/**
-		 * The meta object literal for the '<em><b>Statechart</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Element Ref</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference GENERATOR_ENTRY__STATECHART = eINSTANCE.getGeneratorEntry_Statechart();
+		EReference GENERATOR_ENTRY__ELEMENT_REF = eINSTANCE.getGeneratorEntry_ElementRef();
 
 		/**
 		 * The meta object literal for the '<em><b>Features</b></em>' containment reference list feature.
@@ -878,6 +898,14 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EReference GENERATOR_ENTRY__FEATURES = eINSTANCE.getGeneratorEntry_Features();
+
+		/**
+		 * The meta object literal for the '<em><b>Content Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GENERATOR_ENTRY__CONTENT_TYPE = eINSTANCE.getGeneratorEntry_ContentType();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.FeatureParameterValueImpl <em>Feature Parameter Value</em>}' class.

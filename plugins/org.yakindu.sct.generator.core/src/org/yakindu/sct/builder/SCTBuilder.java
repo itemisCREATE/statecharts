@@ -50,21 +50,24 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	private static final String SGEN_FILE_EXTENSION = "sgen";
 	public static final String BUILDER_ID = "org.yakindu.sct.builder.SCTBuilder";
 
-	private final class GeneratorForStatechart implements
+	private final class ElementRefGenerator implements
 			Predicate<GeneratorEntry> {
-		private final Statechart statechart;
 
-		private GeneratorForStatechart(Statechart statechart) {
-			this.statechart = statechart;
+		private final EObject eobject;
+
+		private ElementRefGenerator(EObject eobject) {
+			this.eobject = eobject;
 		}
 
 		public boolean apply(GeneratorEntry input) {
 			// return input.getStatechart().equals(statechart);
-			return statechart != null
-					&& input.getStatechart() != null
-					&& !input.getStatechart().eIsProxy()
-					&& input.getStatechart().getName()
-							.equals(statechart.getName());
+			//FIXME
+			return false;
+//			return statechart != null
+//					&& input.getStatechart() != null
+//					&& !input.getStatechart().eIsProxy()
+//					&& input.getStatechart().getName()
+//							.equals(statechart.getName());
 		}
 	}
 
@@ -241,7 +244,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 		return genModel != null
 				&& !genModel.getEntries().isEmpty()
 				&& Iterables.any(genModel.getEntries(),
-						new GeneratorForStatechart(statechart));
+						new ElementRefGenerator(statechart));
 	}
 
 	@SuppressWarnings("unchecked")

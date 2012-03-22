@@ -18,8 +18,9 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgen.GeneratorEntry#getStatechart <em>Statechart</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.GeneratorEntry#getElementRef <em>Element Ref</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.GeneratorEntry#getFeatures <em>Features</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.GeneratorEntry#getContentType <em>Content Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,30 +30,30 @@ import org.yakindu.sct.model.sgraph.Statechart;
  */
 public interface GeneratorEntry extends EObject {
 	/**
-	 * Returns the value of the '<em><b>Statechart</b></em>' reference.
+	 * Returns the value of the '<em><b>Element Ref</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Statechart</em>' reference isn't clear,
+	 * If the meaning of the '<em>Element Ref</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Statechart</em>' reference.
-	 * @see #setStatechart(Statechart)
-	 * @see org.yakindu.sct.model.sgen.SGenPackage#getGeneratorEntry_Statechart()
+	 * @return the value of the '<em>Element Ref</em>' reference.
+	 * @see #setElementRef(EObject)
+	 * @see org.yakindu.sct.model.sgen.SGenPackage#getGeneratorEntry_ElementRef()
 	 * @model
 	 * @generated
 	 */
-	Statechart getStatechart();
+	EObject getElementRef();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sgen.GeneratorEntry#getStatechart <em>Statechart</em>}' reference.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgen.GeneratorEntry#getElementRef <em>Element Ref</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Statechart</em>' reference.
-	 * @see #getStatechart()
+	 * @param value the new value of the '<em>Element Ref</em>' reference.
+	 * @see #getElementRef()
 	 * @generated
 	 */
-	void setStatechart(Statechart value);
+	void setElementRef(EObject value);
 
 	/**
 	 * Returns the value of the '<em><b>Features</b></em>' containment reference list.
@@ -69,6 +70,32 @@ public interface GeneratorEntry extends EObject {
 	 * @generated
 	 */
 	EList<FeatureConfiguration> getFeatures();
+
+	/**
+	 * Returns the value of the '<em><b>Content Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Content Type</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Content Type</em>' attribute.
+	 * @see #setContentType(String)
+	 * @see org.yakindu.sct.model.sgen.SGenPackage#getGeneratorEntry_ContentType()
+	 * @model
+	 * @generated
+	 */
+	String getContentType();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgen.GeneratorEntry#getContentType <em>Content Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Content Type</em>' attribute.
+	 * @see #getContentType()
+	 * @generated
+	 */
+	void setContentType(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

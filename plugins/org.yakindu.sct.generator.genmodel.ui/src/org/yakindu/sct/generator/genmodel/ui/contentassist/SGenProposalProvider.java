@@ -16,11 +16,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.model.sgen.GeneratorModel;
 
 import com.google.common.collect.Lists;
 
@@ -31,6 +33,21 @@ import com.google.common.collect.Lists;
  */
 @SuppressWarnings("restriction")
 public class SGenProposalProvider extends AbstractSGenProposalProvider {
+
+	@Override
+	public void completeGeneratorEntry_ContentType(EObject model,
+			Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+
+		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(model,
+				GeneratorModel.class);
+		GeneratorDescriptor descriptor = GeneratorExtensions
+				.getGeneratorDescriptorForId(generatorModel.getGeneratorId());
+		ICompletionProposal proposal = createCompletionProposal(
+				descriptor.getContentType(), context);
+		acceptor.accept(proposal);
+	}
+
 	@Override
 	public void completeGeneratorModel_GeneratorId(EObject model,
 			Assignment assignment, ContentAssistContext context,
@@ -38,10 +55,10 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 		Iterable<GeneratorDescriptor> descriptions = GeneratorExtensions
 				.getGeneratorDescriptors();
 		for (GeneratorDescriptor desc : descriptions) {
-			//FIXME NullPointerCheck: desc could be Null
 			ICompletionProposal proposal = createCompletionProposal(
-					desc.getId(), new StyledString((desc.getName()!=null) ? desc.getName() : "null"),
-					desc.getImage(), context);
+					desc.getId(),
+					new StyledString((desc.getName() != null) ? desc.getName()
+							: "null"), desc.getImage(), context);
 			acceptor.accept(proposal);
 		}
 	}

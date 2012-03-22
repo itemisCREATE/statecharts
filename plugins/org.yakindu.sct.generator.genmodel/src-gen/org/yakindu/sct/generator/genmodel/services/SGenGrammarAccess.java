@@ -67,33 +67,37 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	public class GeneratorEntryElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "GeneratorEntry");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cStatechartKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cStatechartAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cStatechartStatechartCrossReference_1_0 = (CrossReference)cStatechartAssignment_1.eContents().get(0);
-		private final RuleCall cStatechartStatechartQIDParserRuleCall_1_0_1 = (RuleCall)cStatechartStatechartCrossReference_1_0.eContents().get(1);
+		private final Assignment cContentTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cContentTypeIDTerminalRuleCall_0_0 = (RuleCall)cContentTypeAssignment_0.eContents().get(0);
+		private final Assignment cElementRefAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final CrossReference cElementRefEObjectCrossReference_1_0 = (CrossReference)cElementRefAssignment_1.eContents().get(0);
+		private final RuleCall cElementRefEObjectQIDParserRuleCall_1_0_1 = (RuleCall)cElementRefEObjectCrossReference_1_0.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		private final Assignment cFeaturesAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final RuleCall cFeaturesFeatureConfigurationParserRuleCall_3_0 = (RuleCall)cFeaturesAssignment_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//GeneratorEntry returns gen::GeneratorEntry:
-		//	"statechart" statechart=[sct::Statechart|QID] "{" features+=FeatureConfiguration* "}";
+		//	contentType=ID elementRef=[ecore::EObject|QID] "{" features+=FeatureConfiguration* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"statechart" statechart=[sct::Statechart|QID] "{" features+=FeatureConfiguration* "}"
+		//contentType=ID elementRef=[ecore::EObject|QID] "{" features+=FeatureConfiguration* "}"
 		public Group getGroup() { return cGroup; }
 
-		//"statechart"
-		public Keyword getStatechartKeyword_0() { return cStatechartKeyword_0; }
+		//contentType=ID
+		public Assignment getContentTypeAssignment_0() { return cContentTypeAssignment_0; }
 
-		//statechart=[sct::Statechart|QID]
-		public Assignment getStatechartAssignment_1() { return cStatechartAssignment_1; }
+		//ID
+		public RuleCall getContentTypeIDTerminalRuleCall_0_0() { return cContentTypeIDTerminalRuleCall_0_0; }
 
-		//[sct::Statechart|QID]
-		public CrossReference getStatechartStatechartCrossReference_1_0() { return cStatechartStatechartCrossReference_1_0; }
+		//elementRef=[ecore::EObject|QID]
+		public Assignment getElementRefAssignment_1() { return cElementRefAssignment_1; }
+
+		//[ecore::EObject|QID]
+		public CrossReference getElementRefEObjectCrossReference_1_0() { return cElementRefEObjectCrossReference_1_0; }
 
 		//QID
-		public RuleCall getStatechartStatechartQIDParserRuleCall_1_0_1() { return cStatechartStatechartQIDParserRuleCall_1_0_1; }
+		public RuleCall getElementRefEObjectQIDParserRuleCall_1_0_1() { return cElementRefEObjectQIDParserRuleCall_1_0_1; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_2() { return cLeftCurlyBracketKeyword_2; }
@@ -273,7 +277,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GeneratorEntry returns gen::GeneratorEntry:
-	//	"statechart" statechart=[sct::Statechart|QID] "{" features+=FeatureConfiguration* "}";
+	//	contentType=ID elementRef=[ecore::EObject|QID] "{" features+=FeatureConfiguration* "}";
 	public GeneratorEntryElements getGeneratorEntryAccess() {
 		return (pGeneratorEntry != null) ? pGeneratorEntry : (pGeneratorEntry = new GeneratorEntryElements());
 	}

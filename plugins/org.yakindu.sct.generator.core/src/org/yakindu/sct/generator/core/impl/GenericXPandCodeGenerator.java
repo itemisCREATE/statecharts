@@ -69,7 +69,7 @@ public class GenericXPandCodeGenerator extends AbstractXpandBasedCodeGenerator {
 			project = ResourcesPlugin.getWorkspace().getRoot()
 					.getProject(projectName.getStringValue());
 		} else {
-			URI uri = entry.getStatechart().eResource().getURI();
+			URI uri = entry.getElementRef().eResource().getURI();
 			project = ResourcesPlugin.getWorkspace().getRoot()
 					.getFile(new Path(uri.toPlatformString(true))).getProject();
 		}

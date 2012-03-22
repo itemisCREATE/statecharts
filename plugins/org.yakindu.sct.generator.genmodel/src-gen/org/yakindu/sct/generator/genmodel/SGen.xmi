@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
   <xtext:Grammar name="org.yakindu.sct.generator.genmodel.SGen" usedGrammars="/1">
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
+      <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
+    </metamodelDeclarations>
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="gen">
       <ePackage href="http://www.yakindu.org/sct/statechart/SGen#/"/>
     </metamodelDeclarations>
@@ -11,7 +14,7 @@
       <ePackage href="http://www.eclipse.org/xtext/xbase/Xbase#/"/>
     </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="GeneratorModel">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//GeneratorModel"/>
       </type>
       <alternatives xsi:type="xtext:Group">
@@ -28,15 +31,17 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="GeneratorEntry">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//GeneratorEntry"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <elements xsi:type="xtext:Keyword" value="statechart"/>
-        <elements xsi:type="xtext:Assignment" feature="statechart" operator="=">
+        <elements xsi:type="xtext:Assignment" feature="contentType" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.11"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="elementRef" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/sgraph/2.0.0#//Statechart"/>
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
           </terminal>
@@ -49,19 +54,19 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="FeatureConfiguration">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//FeatureConfiguration"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
-          <type metamodel="/0/@metamodelDeclarations.0">
+          <type metamodel="/0/@metamodelDeclarations.1">
             <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//FeatureConfiguration"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Keyword" value="feature"/>
         <elements xsi:type="xtext:Assignment" feature="type" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//FeatureType"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.11"/>
@@ -75,18 +80,18 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="FeatureParameterValue">
-      <type metamodel="/0/@metamodelDeclarations.0">
+      <type metamodel="/0/@metamodelDeclarations.1">
         <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//FeatureParameterValue"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <elements xsi:type="xtext:Action">
-          <type metamodel="/0/@metamodelDeclarations.0">
+          <type metamodel="/0/@metamodelDeclarations.1">
             <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//FeatureParameterValue"/>
           </type>
         </elements>
         <elements xsi:type="xtext:Assignment" feature="parameter" operator="=">
           <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
+            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.yakindu.org/sct/statechart/SGen#//FeatureParameter"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.11"/>
@@ -99,7 +104,7 @@
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="QID">
-      <type metamodel="/1/@metamodelDeclarations.2">
+      <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">

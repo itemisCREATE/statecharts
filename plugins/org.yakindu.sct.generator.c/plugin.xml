@@ -6,6 +6,8 @@
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
             class="org.yakindu.sct.generator.c.CCodeGenerator"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             description="YAKINDU C Code Generator"
             id="yakindu::c"
             name="YAKINDU C Code Generator">

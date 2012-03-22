@@ -12,6 +12,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
@@ -28,8 +29,9 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorEntryImpl#getStatechart <em>Statechart</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorEntryImpl#getElementRef <em>Element Ref</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorEntryImpl#getFeatures <em>Features</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.impl.GeneratorEntryImpl#getContentType <em>Content Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,13 +39,14 @@ import org.yakindu.sct.model.sgraph.Statechart;
  */
 public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 	/**
-	 * The cached value of the '{@link #getStatechart() <em>Statechart</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getStatechart()
+	 * The cached value of the '{@link #getElementRef() <em>Element Ref</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getElementRef()
 	 * @generated
 	 * @ordered
 	 */
-	protected Statechart statechart;
+	protected EObject elementRef;
 
 	/**
 	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
@@ -53,6 +56,26 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 	 * @ordered
 	 */
 	protected EList<FeatureConfiguration> features;
+
+	/**
+	 * The default value of the '{@link #getContentType() <em>Content Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContentType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONTENT_TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getContentType() <em>Content Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getContentType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String contentType = CONTENT_TYPE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -72,38 +95,41 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Statechart getStatechart() {
-		if (statechart != null && statechart.eIsProxy()) {
-			InternalEObject oldStatechart = (InternalEObject)statechart;
-			statechart = (Statechart)eResolveProxy(oldStatechart);
-			if (statechart != oldStatechart) {
+	public EObject getElementRef() {
+		if (elementRef != null && elementRef.eIsProxy()) {
+			InternalEObject oldElementRef = (InternalEObject)elementRef;
+			elementRef = eResolveProxy(oldElementRef);
+			if (elementRef != oldElementRef) {
 				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SGenPackage.GENERATOR_ENTRY__STATECHART, oldStatechart, statechart));
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SGenPackage.GENERATOR_ENTRY__ELEMENT_REF, oldElementRef, elementRef));
 			}
 		}
-		return statechart;
+		return elementRef;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Statechart basicGetStatechart() {
-		return statechart;
+	public EObject basicGetElementRef() {
+		return elementRef;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setStatechart(Statechart newStatechart) {
-		Statechart oldStatechart = statechart;
-		statechart = newStatechart;
+	public void setElementRef(EObject newElementRef) {
+		EObject oldElementRef = elementRef;
+		elementRef = newElementRef;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGenPackage.GENERATOR_ENTRY__STATECHART, oldStatechart, statechart));
+			eNotify(new ENotificationImpl(this, Notification.SET, SGenPackage.GENERATOR_ENTRY__ELEMENT_REF, oldElementRef, elementRef));
 	}
 
 	/**
@@ -115,6 +141,27 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 			features = new EObjectContainmentEList<FeatureConfiguration>(FeatureConfiguration.class, this, SGenPackage.GENERATOR_ENTRY__FEATURES);
 		}
 		return features;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getContentType() {
+		return contentType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setContentType(String newContentType) {
+		String oldContentType = contentType;
+		contentType = newContentType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGenPackage.GENERATOR_ENTRY__CONTENT_TYPE, oldContentType, contentType));
 	}
 
 	/**
@@ -158,11 +205,13 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SGenPackage.GENERATOR_ENTRY__STATECHART:
-				if (resolve) return getStatechart();
-				return basicGetStatechart();
+			case SGenPackage.GENERATOR_ENTRY__ELEMENT_REF:
+				if (resolve) return getElementRef();
+				return basicGetElementRef();
 			case SGenPackage.GENERATOR_ENTRY__FEATURES:
 				return getFeatures();
+			case SGenPackage.GENERATOR_ENTRY__CONTENT_TYPE:
+				return getContentType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -175,12 +224,15 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SGenPackage.GENERATOR_ENTRY__STATECHART:
-				setStatechart((Statechart)newValue);
+			case SGenPackage.GENERATOR_ENTRY__ELEMENT_REF:
+				setElementRef((EObject)newValue);
 				return;
 			case SGenPackage.GENERATOR_ENTRY__FEATURES:
 				getFeatures().clear();
 				getFeatures().addAll((Collection<? extends FeatureConfiguration>)newValue);
+				return;
+			case SGenPackage.GENERATOR_ENTRY__CONTENT_TYPE:
+				setContentType((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -193,11 +245,14 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SGenPackage.GENERATOR_ENTRY__STATECHART:
-				setStatechart((Statechart)null);
+			case SGenPackage.GENERATOR_ENTRY__ELEMENT_REF:
+				setElementRef((EObject)null);
 				return;
 			case SGenPackage.GENERATOR_ENTRY__FEATURES:
 				getFeatures().clear();
+				return;
+			case SGenPackage.GENERATOR_ENTRY__CONTENT_TYPE:
+				setContentType(CONTENT_TYPE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -210,12 +265,30 @@ public class GeneratorEntryImpl extends EObjectImpl implements GeneratorEntry {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SGenPackage.GENERATOR_ENTRY__STATECHART:
-				return statechart != null;
+			case SGenPackage.GENERATOR_ENTRY__ELEMENT_REF:
+				return elementRef != null;
 			case SGenPackage.GENERATOR_ENTRY__FEATURES:
 				return features != null && !features.isEmpty();
+			case SGenPackage.GENERATOR_ENTRY__CONTENT_TYPE:
+				return CONTENT_TYPE_EDEFAULT == null ? contentType != null : !CONTENT_TYPE_EDEFAULT.equals(contentType);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (contentType: ");
+		result.append(contentType);
+		result.append(')');
+		return result.toString();
 	}
 
 } // GeneratorEntryImpl
