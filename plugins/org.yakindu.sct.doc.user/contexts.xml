@@ -2,23 +2,29 @@
 <?NLS TYPE="org.eclipse.help.contexts"?>
 <contexts>
    <context id="sc_editor_graphical_viewer">
-      <description>Enter short description here!</description>
-      <topic href="help/01_Overview/overview.html" label="Getting Started"/>
+      <description>With the YAKINDU Statechart editor you create or modify state models.</description>
+      <topic href="help/03_Concepts/concepts.html#YAKINDUStatechartEditor" label="Yakindu state chart editor"/>
+        <topic href="help/05_Reference/reference.html#Statechartelements" label="Reference about the statechart elements"/>
+    <topic href="help/02_Getting_Started/getting_started.html#Firststeps:myfirststatemachine" label="First steps creating a state machine"/>
+  
    </context>
    <context id="sc_properties_entry_entrykind" title="YAKINDU Statechart Element Properties">
-      <description>Enter short description of the Entry Kind property here.</description>
-      <topic href="help/07_Reference/sc_reference.html#EntryKind" label="Entry Kind Property"/>
+      <description>Init, history and shallow history states are pseudo states used to express special aspects.</description>
+      <topic href="help/05_Reference/reference.html#Initialstateandfinalstate" label="Init state"/>
+      <topic href="help/05_Reference/reference.html#ShallowHistory" label="Shallow History state"/>
+        <topic href="help/05_Reference/reference.html#DeepHistory" label="Deep History state"/>
    </context>
    <context id="sc_properties_state_expression" title="YAKINDU Statechart Element Properties">
-      <description>Enter short description of the State Expression property here.</description>
-      <topic href="help/07_Reference/sc_reference.html#StateExpression" label="State Expression Property"/>
+      <description>States are the central elements of a state machine.</description>
+      <topic href="help/05_Reference/reference.html#States" label="State"/>
    </context>
    <context id="sc_properties_statechart_expression" title="YAKINDU Statechart Element Properties">
-      <description>Enter short description of the Statechart Expression property here.</description>
-      <topic href="help/07_Reference/sc_reference.html#StatechartExpression" label="Statechart Expression Property"/>
+      <description>Expressions are used to declare events, variables etc. and to define behavior.</description>
+      <topic href="help/05_Reference/reference.html#Expressions" label="Expression reference"/>
    </context>
    <context id="sc_properties_transition_expression" title="YAKINDU Statechart Element Properties">
-      <description>Enter short descripton of the Transition Expression property here.</description>
-      <topic href="help/07_Reference/sc_reference.html#TransitionExpression" label="Transition Expression Property"/>
+      <description>A transition is the transfer of one state to another. Transitions are diagrammed as arrows and can carry events and actions but must not.</description>
+      <topic href="help/05_Reference/reference.html#Transitions" label="Transitions reference"/>
+      
    </context>
 </contexts>
