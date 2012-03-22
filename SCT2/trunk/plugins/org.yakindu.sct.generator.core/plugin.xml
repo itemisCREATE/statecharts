@@ -26,7 +26,9 @@
        point="org.yakindu.sct.generator.core.generator">
     <SCTGenerator
           class="org.yakindu.sct.generator.core.impl.GenericXPandCodeGenerator"
+          contentType="statechart"
           description="Generate Code using Xpand Templates"
+          elementRefType="org.yakindu.sct.model.sgraph.Statechart"
           id="yakindu::xpand"
           name="Custom Xpand-based Generator">
     </SCTGenerator>
@@ -34,10 +36,12 @@
  <extension
        point="org.yakindu.sct.generator.core.generator">
    <SCTGenerator
-          class="org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator"
-          description="Generate Code using Xpand Templates"
-          id="yakindu::generic"
-          name="Custom Xtend2/Java-based Generator">
+         class="org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator"
+         contentType="statechart"
+         description="Generate Code using Xpand Templates"
+         elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+         id="yakindu::generic"
+         name="Custom Xtend2/Java-based Generator">
     </SCTGenerator>
  </extension>
   <extension
@@ -104,5 +108,4 @@
          </visibility>
       </objectContribution>
    </extension>
-
 </plugin>

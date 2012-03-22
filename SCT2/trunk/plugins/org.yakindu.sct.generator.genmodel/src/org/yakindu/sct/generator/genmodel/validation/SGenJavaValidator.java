@@ -24,6 +24,7 @@ import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
+import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
@@ -47,6 +48,23 @@ import com.google.common.collect.Lists;
  * 
  */
 public class SGenJavaValidator extends AbstractSGenJavaValidator {
+
+	@Check
+	public void checkContentType(GeneratorEntry entry) {
+		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(entry,
+				GeneratorModel.class);
+		GeneratorDescriptor descriptor = GeneratorExtensions
+				.getGeneratorDescriptorForId(generatorModel.getGeneratorId());
+		String contentType = entry.getContentType();
+		if (contentType == null || contentType.trim().length() == 0) {
+			return;
+		}
+		if (!contentType.equals(descriptor.getContentType())) {
+			error("Unknown content type '" + contentType + "'",
+					SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
+		}
+	}
+
 	@Check
 	public void checkParameterValueType(
 			final FeatureParameterValue parameterValue) {
@@ -168,7 +186,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			if (!configuredTypes.contains(featureType.getName()))
 				error(String.format("Missing required feature %s",
 						featureType.getName()),
-						SGenPackage.Literals.GENERATOR_ENTRY__STATECHART);
+						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
 		}
 	}
 
@@ -178,8 +196,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 				.getRootContainer(configuration);
 		Iterable<LibraryDescriptor> libraryDescriptors = LibraryExtensions
 				.getLibraryDescriptor(model.getGeneratorId());
-		
-		
+
 		Iterable<String> requiredParameters = transform(
 				filter(concat(transform(
 						filter(concat(transform(
@@ -190,7 +207,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 						isRequiredParamter()), getName());
 
 		List<String> configuredParameters = Lists.newArrayList();
-		
+
 		for (FeatureParameterValue featureParameterValue : configuration
 				.getParameterValues()) {
 			configuredParameters.add(featureParameterValue.getParameter()

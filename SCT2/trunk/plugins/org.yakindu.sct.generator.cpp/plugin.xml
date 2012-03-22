@@ -7,6 +7,8 @@
       <SCTGenerator
             class="org.yakindu.sct.generator.cpp.CppCodeGenerator"
             description="YAKINDU.org C++ Code Generator"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             id="yakindu::cpp"
             name="YAKINDU C++ Code Generator">
       </SCTGenerator>

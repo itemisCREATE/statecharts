@@ -189,7 +189,8 @@ public class SGenParser extends AbstractContentAssistParser {
 					put(grammarAccess.getJvmTypeParameterAccess().getGroup_1_0(), "rule__JvmTypeParameter__Group_1_0__0");
 					put(grammarAccess.getGeneratorModelAccess().getGeneratorIdAssignment_2(), "rule__GeneratorModel__GeneratorIdAssignment_2");
 					put(grammarAccess.getGeneratorModelAccess().getEntriesAssignment_4(), "rule__GeneratorModel__EntriesAssignment_4");
-					put(grammarAccess.getGeneratorEntryAccess().getStatechartAssignment_1(), "rule__GeneratorEntry__StatechartAssignment_1");
+					put(grammarAccess.getGeneratorEntryAccess().getContentTypeAssignment_0(), "rule__GeneratorEntry__ContentTypeAssignment_0");
+					put(grammarAccess.getGeneratorEntryAccess().getElementRefAssignment_1(), "rule__GeneratorEntry__ElementRefAssignment_1");
 					put(grammarAccess.getGeneratorEntryAccess().getFeaturesAssignment_3(), "rule__GeneratorEntry__FeaturesAssignment_3");
 					put(grammarAccess.getFeatureConfigurationAccess().getTypeAssignment_2(), "rule__FeatureConfiguration__TypeAssignment_2");
 					put(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4(), "rule__FeatureConfiguration__ParameterValuesAssignment_4");

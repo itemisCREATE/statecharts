@@ -150,11 +150,25 @@ ruleGeneratorEntry returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-(	otherlv_0='statechart' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getGeneratorEntryAccess().getStatechartKeyword_0());
-    }
+((
 (
+		lv_contentType_0_0=RULE_ID
+		{
+			newLeafNode(lv_contentType_0_0, grammarAccess.getGeneratorEntryAccess().getContentTypeIDTerminalRuleCall_0_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getGeneratorEntryRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"contentType",
+        		lv_contentType_0_0, 
+        		"ID");
+	    }
+
+)
+)(
 (
 		{
 			if ($current==null) {
@@ -162,7 +176,7 @@ ruleGeneratorEntry returns [EObject current=null]
 	        }
         }
 		{ 
-	        newCompositeNode(grammarAccess.getGeneratorEntryAccess().getStatechartStatechartCrossReference_1_0()); 
+	        newCompositeNode(grammarAccess.getGeneratorEntryAccess().getElementRefEObjectCrossReference_1_0()); 
 	    }
 		ruleQID		{ 
 	        afterParserOrEnumRuleCall();

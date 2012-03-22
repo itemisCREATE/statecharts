@@ -61,8 +61,8 @@ public abstract class AbstractSExecModelGenerator extends
 	protected void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		if (this instanceof IExecutionFlowGenerator) {
 			IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) this;
-			flowGenerator.generate(
-					createExecutionFlow(entry.getStatechart(), entry), entry);
+			flowGenerator.generate(createExecutionFlow(statechart, entry),
+					entry);
 		}
 		super.runGenerator(statechart, entry);
 	}
@@ -108,23 +108,16 @@ public abstract class AbstractSExecModelGenerator extends
 
 	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow,
 			Output output) {
-
 		ResourceSet resourceSet = new ResourceSetImpl();
-
 		resourceSet
 				.getResourceFactoryRegistry()
 				.getExtensionToFactoryMap()
 				.put(Resource.Factory.Registry.DEFAULT_EXTENSION,
 						new XMIResourceFactoryImpl());
-
-		URI fileURI = entry.getStatechart().eResource().getURI()
+		URI fileURI = entry.getElementRef().eResource().getURI()
 				.trimFileExtension().appendFileExtension(SEXEC_FILE_EXTENSION);
-		// URI fileURI = URI.createFileURI(new
-		// File("mylibrary.xmi").getAbsolutePath());
-
 		Resource resource = resourceSet.createResource(fileURI);
 		resource.getContents().add(flow);
-
 		try {
 			resource.save(Collections.EMPTY_MAP);
 		} catch (IOException e) {

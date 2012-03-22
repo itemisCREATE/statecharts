@@ -983,11 +983,12 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (statechart=[Statechart|QID] features+=FeatureConfiguration*)
+	 *     (contentType=ID elementRef=[EObject|QID] features+=FeatureConfiguration*)
 	 *
 	 * Features:
-	 *    statechart[1, 1]
+	 *    elementRef[1, 1]
 	 *    features[0, *]
+	 *    contentType[1, 1]
 	 */
 	protected void sequence_GeneratorEntry(EObject context, GeneratorEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

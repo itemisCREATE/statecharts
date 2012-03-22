@@ -22,6 +22,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
+import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
@@ -57,7 +59,27 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 		if (reference.getName().equals("parameter")) {
 			return scope_Parameter(context, reference);
 		}
+		if (reference.getName().equals("elementRef")) {
+			return scope_GeneratorEntry_elementRef(context, reference);
+		}
 		return super.getScope(context, reference);
+	}
+
+	private IScope scope_GeneratorEntry_elementRef(final EObject context,
+			final EReference reference) {
+		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil2
+				.getRootContainer(context);
+		String id = generatorModel.getGeneratorId();
+		final GeneratorDescriptor desc = GeneratorExtensions
+				.getGeneratorDescriptorForId(id);
+		final Class<?> elementRefType = desc.getElementRefType();
+		return new FilteringScope(getDelegate().getScope(context, reference),
+				new Predicate<IEObjectDescription>() {
+					public boolean apply(IEObjectDescription input) {
+						return elementRefType.isAssignableFrom(input
+								.getEClass().getInstanceClass());
+					}
+				});
 	}
 
 	private IScope scope_Parameter(final EObject context, EReference reference) {
@@ -107,7 +129,6 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptor(generatorId);
 		for (LibraryDescriptor desc : libraryDescriptor) {
-			//FIXME Error, if URL could not be resolved
 			Resource library = resourceSet.getResource(desc.getURI(), true);
 			FeatureResourceDescription description = new FeatureResourceDescription(
 					library);

@@ -100,11 +100,12 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	}
 
 	public final void generate(GeneratorEntry entry) {
-		writeToConsole(String.format("Generating Statechart %s ...", entry
-				.getStatechart().getName()));
+		Statechart statechart = (Statechart) entry.getElementRef();
+		writeToConsole(String.format("Generating Statechart %s ...",
+				statechart.getName()));
 		try {
 			prepareGenerator(entry);
-			runGenerator(entry.getStatechart(), entry);
+			runGenerator(statechart, entry);
 			writeToConsole("Done.");
 		} catch (Exception e) {
 			writeToConsole(e);

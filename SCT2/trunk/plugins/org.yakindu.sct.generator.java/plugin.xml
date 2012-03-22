@@ -7,6 +7,8 @@
             class="org.yakindu.sct.generator.java.JavaSCTGenerator"
             description="YAKINDU Java Code Generator"
             id="yakindu::java"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             name="YAKINDU Java Code Generator">
       </SCTGenerator>
    </extension>
