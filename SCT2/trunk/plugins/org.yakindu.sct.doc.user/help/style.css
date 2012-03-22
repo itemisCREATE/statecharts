@@ -18,7 +18,13 @@ margin-right:10px;
 margin-left:5px;
 display:block;
 color:#6d0479;
+}
 
+li code {
+display:inline;
+border:0px;
+margin:0px;
+color:#000;
 }
 
 h2 {

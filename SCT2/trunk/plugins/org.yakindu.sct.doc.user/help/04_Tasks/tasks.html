@@ -1,9 +1,133 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head>
-<link rel="stylesheet" type="text/css" href="../style.css"></link>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body><h1 id="Tasks">Tasks</h1><h2 id="Modelingastatemachine">Modeling a statemachine</h2><ol><li>Make sure the YAKINDU Modeling perspective is active.</li><li>Create a new project.</li><li>Click <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Other...</strong> &gt; <strong>YAKINDU</strong> &gt; <strong>YAKINDU Statechart Model</strong>. </li><li>Click <strong>Next</strong> name the sct file and click <strong>Finish</strong></li><li>The YAKINDU statechart editor opens on the statechart model. It already has an initial state and an unnamed simple state connected by a transition.</li><li>Now you can add states and transitions from the palette.</li></ol><p>To edit the states and transitions you can use the properties view. It has an integrated Xtext support. This makes correct editing easier. You can also change the appearance of the model elements. </p><p>On the palette you will also find a composite submachine state. This is a state that contains a complete statemachine. You can choose an existing statemachine or create a new one.</p><h3 id="Relatedtopics">Related topics</h3><p><a href="http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=0_4_0#Statechartelements">Statemachine Elements reference</a><br/><a href="http://127.0.0.1:49330/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_1#Statechartdescriptionlanguage">Textual modeling lanuage  Reference</a></p><h2 id="Validatingastatemachine">Validating a statemachine</h2><p>The statemachine is validated automatically during build. The elements that cause problems get error markers. You can find the details about the problems on the problems view.</p><h2 id="Simulatingastatemachine">Simulating a statemachine</h2><p>The YAKINDU simulation engine supports simulation modes:</p><ul><li>event driven</li><li>cycle based</li></ul><p>The default setting is <em>cycle based</em> with a cycle period of 200 ms. In this mode the simulation engine processes the state machine transitions in steps of the given cycle duration. The following statechart illustrates this. It is simulated cycle based with a cycle period of 3 seconds.</p><p><img border="0" src="images/cycleBasedVsEventDriven.png"/></p><p>What happend during simulation is the following:</p><ol><li>After 3s <strong>init</strong> switches to <strong>pre1</strong></li><li>After 3 further seconds recursive transition to <strong>pre1</strong> is processed (not after 2s the transition says)</li><li>After 3 further seconds recursive transition to <strong>pre1</strong> is processed again and the condition becomes <strong>true</strong> so <strong>result</strong> gets activated</li></ol><p>In contrast to cycle based the event driven simulation mode concentrates on the events of a state machine. The same state machine above could be simulated as follows:</p><ol><li>Immediately <strong>init</strong> switches to <strong>pre1</strong></li><li>Immediately the event <strong>touch</strong> is raised twice</li><li>The condition becomes true so that the <strong>result</strong> state is reached after 2 or 3 seconds instead of 9 </li></ol><p>Start a simulation with the different modes as follows</p><ol><li>Make sure the YAKINDU Simulation Perspectiv is opened.</li><li>Start the simulation by clicking <strong>Run</strong> &gt; <strong>Run Configurations...</strong>.</li><li>Select the statechart you want to simulate and the simulation mode.</li><li><strong>Apply</strong> the setting and <strong>Run</strong> the simulation.</li></ol><p><img border="0" src="images/simulationRunConfiguration.png"/></p><p><a href="http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=0_2_1#Simulation">Simulation Concept</a><br/><a href="http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=1_2_5#YakinduSCSimulationperspective">Simulation perspective</a><br/><a href="http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=1_2_7#SimulationView">Simulation View</a></p><h2 id="GeneratingJavacode">Generating Java code</h2><p>To generate Java code you need a java genmodel.</p><ol><li>Click <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Other...</strong> &gt; <strong>Yakindu Statechart Genmodel</strong></li><li>Type a name and click <strong>Next</strong></li><li>Choose <strong>YAKINDU Java Code Generator</strong></li><li>Check the model(s) to generate code from and click <strong>Finish</strong></li></ol><p><img border="0" src="images/genmodelwizardchooselanguage.jpg"/></p><p>The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked <strong>Project</strong> &gt; <strong>Build Automatically</strong>. If not click <strong>Project</strong> &gt; <strong>Clean...</strong> &gt; <strong>Clean all</strong> to run the generator.</p><pre><code>GeneratorModel for yakindu::java {
+<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>tasks</title>
+		<link type="text/css" rel="stylesheet" href="../style.css"/>
+	</head>
+	<body>
+		<h1 id="Tasks">Tasks</h1>
+		<h2 id="Modelingastatemachine">Modeling a statemachine</h2>
+		<ol>
+			<li>Make sure the YAKINDU Modeling perspective is active.</li>
+			<li>Create a new project.</li>
+			<li>Click 
+				<strong>File</strong> &gt; 
+				<strong>New</strong> &gt; 
+				<strong>Other...</strong> &gt; 
+				<strong>YAKINDU</strong> &gt; 
+				<strong>YAKINDU Statechart Model</strong>. 
+			</li>
+			<li>Click 
+				<strong>Next</strong> name the sct file and click 
+				<strong>Finish</strong>
+			</li>
+			<li>The YAKINDU statechart editor opens on the statechart model. It already has an initial state and an unnamed simple state connected by a transition.</li>
+			<li>Now you can add states and transitions from the palette.</li>
+		</ol>
+		<p>To edit the states and transitions you can use the properties view. It has an integrated Xtext support. This makes correct editing easier. You can also change the appearance of the model elements. </p>
+		<p>On the palette you will also find a composite submachine state. This is a state that contains a complete statemachine. You can choose an existing statemachine or create a new one.</p>
+		<h3 id="Relatedtopics">Related topics</h3>
+		<p>
+			<a href="http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=0_4_0#Statechartelements">Statemachine Elements reference</a>
+			<br/>
+			<a href="http://127.0.0.1:49330/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_1#Statechartdescriptionlanguage">Textual modeling lanuage  Reference</a>
+		</p>
+		<h2 id="Validatingastatemachine">Validating a statemachine</h2>
+		<p>The statemachine is validated automatically during build. The elements that cause problems get error markers. You can find the details about the problems on the problems view.</p>
+		<h2 id="Simulatingastatemachine">Simulating a statemachine</h2>
+		<p>The YAKINDU simulation engine supports simulation modes:</p>
+		<ul>
+			<li>event driven</li>
+			<li>cycle based</li>
+		</ul>
+		<p>The default setting is 
+			<em>cycle based</em> with a cycle period of 200 ms. In this mode the simulation engine processes the state machine transitions in steps of the given cycle duration. The following statechart illustrates this. It is simulated cycle based with a cycle period of 3 seconds.
+		</p>
+		<p>
+			<img border="0" src="images/cycleBasedVsEventDriven.png"/>
+		</p>
+		<p>What happend during simulation is the following:</p>
+		<ol>
+			<li>After 3s 
+				<strong>init</strong> switches to 
+				<strong>pre1</strong>
+			</li>
+			<li>After 3 further seconds recursive transition to 
+				<strong>pre1</strong> is processed (not after 2s the transition says)
+			</li>
+			<li>After 3 further seconds recursive transition to 
+				<strong>pre1</strong> is processed again and the condition becomes 
+				<strong>true</strong> so 
+				<strong>result</strong> gets activated
+			</li>
+		</ol>
+		<p>In contrast to cycle based the event driven simulation mode concentrates on the events of a state machine. The same state machine above could be simulated as follows:</p>
+		<ol>
+			<li>Immediately 
+				<strong>init</strong> switches to 
+				<strong>pre1</strong>
+			</li>
+			<li>Immediately the event 
+				<strong>touch</strong> is raised twice
+			</li>
+			<li>The condition becomes true so that the 
+				<strong>result</strong> state is reached after 2 or 3 seconds instead of 9 
+			</li>
+		</ol>
+		<p>Start a simulation with the different modes as follows</p>
+		<ol>
+			<li>Make sure the YAKINDU Simulation Perspectiv is opened.</li>
+			<li>Start the simulation by clicking 
+				<strong>Run</strong> &gt; 
+				<strong>Run Configurations...</strong>.
+			</li>
+			<li>Select the statechart you want to simulate and the simulation mode.</li>
+			<li>
+				<strong>Apply</strong> the setting and 
+				<strong>Run</strong> the simulation.
+			</li>
+		</ol>
+		<p>
+			<img border="0" src="images/simulationRunConfiguration.png"/>
+		</p>
+		<p>
+			<a href="http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=0_2_1#Simulation">Simulation Concept</a>
+			<br/>
+			<a href="http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=1_2_5#YakinduSCSimulationperspective">Simulation perspective</a>
+			<br/>
+			<a href="http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=1_2_7#SimulationView">Simulation View</a>
+		</p>
+		<h2 id="GeneratingJavacode">Generating Java code</h2>
+		<p>To generate Java code you need a java genmodel.</p>
+		<ol>
+			<li>Click 
+				<strong>File</strong> &gt; 
+				<strong>New</strong> &gt; 
+				<strong>Other...</strong> &gt; 
+				<strong>Yakindu Statechart Genmodel</strong>
+			</li>
+			<li>Type a name and click 
+				<strong>Next</strong>
+			</li>
+			<li>Choose 
+				<strong>YAKINDU Java Code Generator</strong>
+			</li>
+			<li>Check the model(s) to generate code from and click 
+				<strong>Finish</strong>
+			</li>
+		</ol>
+		<p>
+			<img border="0" src="images/genmodelwizardchooselanguage.jpg"/>
+		</p>
+		<p>The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked 
+			<strong>Project</strong> &gt; 
+			<strong>Build Automatically</strong>. If not click 
+			<strong>Project</strong> &gt; 
+			<strong>Clean...</strong> &gt; 
+			<strong>Clean all</strong> to run the generator.
+		</p>
+		<pre><code>GeneratorModel for yakindu::java {
 
 	statechart coffeeMachine {
 
@@ -23,7 +147,34 @@
 }
 
 
-</code></pre><h2 id="GeneratingCcode">Generating C code</h2><p>To generate C code you need a C genmodel.</p><ol><li>Click <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Other...</strong> &gt; <strong>Yakindu Statechart Genmodel</strong></li><li>Type a name and click <strong>Next</strong></li><li>Choose <strong>YAKINDU C Code Generator</strong></li><li>Check the model(s) to generate code from and click <strong>Finish</strong></li></ol><p>The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked <strong>Project</strong> &gt; <strong>Build Automatically</strong>. If not click <strong>Project</strong> &gt; <strong>Clean...</strong> &gt; <strong>Clean all</strong> to run the generator.</p><pre><code>GeneratorModel for yakindu::c {
+</code></pre>
+		<h2 id="GeneratingCcode">Generating C code</h2>
+		<p>To generate C code you need a C genmodel.</p>
+		<ol>
+			<li>Click 
+				<strong>File</strong> &gt; 
+				<strong>New</strong> &gt; 
+				<strong>Other...</strong> &gt; 
+				<strong>Yakindu Statechart Genmodel</strong>
+			</li>
+			<li>Type a name and click 
+				<strong>Next</strong>
+			</li>
+			<li>Choose 
+				<strong>YAKINDU C Code Generator</strong>
+			</li>
+			<li>Check the model(s) to generate code from and click 
+				<strong>Finish</strong>
+			</li>
+		</ol>
+		<p>The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked 
+			<strong>Project</strong> &gt; 
+			<strong>Build Automatically</strong>. If not click 
+			<strong>Project</strong> &gt; 
+			<strong>Clean...</strong> &gt; 
+			<strong>Clean all</strong> to run the generator.
+		</p>
+		<pre><code>GeneratorModel for yakindu::c {
 
 	statechart coffeeMachine {
 
@@ -55,7 +206,34 @@
 }
 
 
-</code></pre><h2 id="GeneratingCCode">Generating C++ Code</h2><p>To generate C++ code you need a C++ genmodel.</p><ol><li>Click <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Other...</strong> &gt; <strong>Yakindu Statechart Genmodel</strong></li><li>Type a name and click <strong>Next</strong></li><li>Choose <strong>YAKINDU C++ Code Generator</strong></li><li>Check the model(s) to generate code from and click <strong>Finish</strong></li></ol><p>The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked <strong>Project</strong> &gt; <strong>Build Automatically</strong>. If not click <strong>Project</strong> &gt; <strong>Clean...</strong> &gt; <strong>Clean all</strong> to run the generator.</p><pre><code>GeneratorModel for yakindu::cpp {
+</code></pre>
+		<h2 id="GeneratingCCode">Generating C++ Code</h2>
+		<p>To generate C++ code you need a C++ genmodel.</p>
+		<ol>
+			<li>Click 
+				<strong>File</strong> &gt; 
+				<strong>New</strong> &gt; 
+				<strong>Other...</strong> &gt; 
+				<strong>Yakindu Statechart Genmodel</strong>
+			</li>
+			<li>Type a name and click 
+				<strong>Next</strong>
+			</li>
+			<li>Choose 
+				<strong>YAKINDU C++ Code Generator</strong>
+			</li>
+			<li>Check the model(s) to generate code from and click 
+				<strong>Finish</strong>
+			</li>
+		</ol>
+		<p>The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked 
+			<strong>Project</strong> &gt; 
+			<strong>Build Automatically</strong>. If not click 
+			<strong>Project</strong> &gt; 
+			<strong>Clean...</strong> &gt; 
+			<strong>Clean all</strong> to run the generator.
+		</p>
+		<pre><code>GeneratorModel for yakindu::cpp {
 
 	statechart coffeeMachine {
 
@@ -85,4 +263,6 @@
 		}
 	}
 }
-</code></pre></body></html>
+</code></pre>
+	</body>
+</html>
