@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.generator.core.GeneratorExecutor;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -46,6 +47,8 @@ import com.google.common.collect.Sets;
  */
 public class SCTBuilder extends IncrementalProjectBuilder {
 
+	// TODO Remove dependency to fileextension and read referenced elements from
+	// genmodels instead.
 	private static final String SCT_FILE_EXTENSION = "sct";
 	private static final String SGEN_FILE_EXTENSION = "sgen";
 	public static final String BUILDER_ID = "org.yakindu.sct.builder.SCTBuilder";
@@ -53,21 +56,20 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 	private final class ElementRefGenerator implements
 			Predicate<GeneratorEntry> {
 
-		private final EObject eobject;
+		private final URI uri;
 
 		private ElementRefGenerator(EObject eobject) {
-			this.eobject = eobject;
+			if (EcoreUtil.getURI(eobject) != null) {
+				uri = EcoreUtil.getURI(eobject);
+			} else {
+				uri = null;
+			}
 		}
 
 		public boolean apply(GeneratorEntry input) {
-			// return input.getStatechart().equals(statechart);
-			//FIXME
-			return false;
-//			return statechart != null
-//					&& input.getStatechart() != null
-//					&& !input.getStatechart().eIsProxy()
-//					&& input.getStatechart().getName()
-//							.equals(statechart.getName());
+			return uri != null && input.getElementRef() != null
+					&& !input.getElementRef().eIsProxy()
+					&& uri.equals(EcoreUtil.getURI(input.getElementRef()));
 		}
 	}
 
@@ -159,6 +161,7 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 			}
 		} else if (SCT_FILE_EXTENSION
 				.equals(changedResource.getFileExtension())) {
+			// TODO rely on indexed genmodel and referenced objects uri
 			final Statechart statechart = loadFromResource(changedResource);
 			try {
 				changedResource.getProject().accept(new IResourceVisitor() {
