@@ -30,12 +30,13 @@ getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(
 getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|!e.type.isVoid());
 
 getDefaultInterface(ExecutionFlow this) :
-	getInterfaceScope().select(interface|interface.name == null);
+	getInterfaceScope().select(interface|interface.name == null || interface.name == "");
 
-List getDefaultInterfaceValuedEvents(ExecutionFlow this):
+boolean hasDefaultInterfaceValuedEvents(ExecutionFlow this):
 	if (!getDefaultInterface().isEmpty) then
-		getDefaultInterface().get(0).declarations.typeSelect(EventDefinition).select(e|!e.type.isVoid());
-
+		!getDefaultInterface().get(0).declarations.typeSelect(EventDefinition).select(e|!e.type.isVoid()).isEmpty
+		else false;
+		
 getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSelect(TimeEvent);
 
 boolean isTimedStatemachine(ExecutionFlow this) :
