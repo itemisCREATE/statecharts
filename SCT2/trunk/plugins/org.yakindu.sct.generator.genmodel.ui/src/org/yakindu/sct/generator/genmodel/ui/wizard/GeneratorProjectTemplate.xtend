@@ -346,6 +346,8 @@ class GeneratorProjectTemplate {
 		            description="«data.generatorDescription.escapeForXml»"
 		            id="«data.generatorId»"
 		            name="«data.generatorName.escapeForXml»">
+		            contentType="statechart"
+		            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
 		      </SCTGenerator>
 		   </extension>
 		«IF data.typeLibrary»
