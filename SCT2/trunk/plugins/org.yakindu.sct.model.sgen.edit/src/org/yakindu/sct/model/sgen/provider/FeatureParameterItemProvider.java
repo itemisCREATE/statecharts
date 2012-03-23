@@ -134,10 +134,9 @@ public class FeatureParameterItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((FeatureParameter)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_FeatureParameter_type") :
-			getString("_UI_FeatureParameter_type") + " " + label;
+		String label = ((FeatureParameter) object).getName();
+		return label == null || label.length() == 0 ? getString("_UI_FeatureParameter_type")
+				: getString("_UI_FeatureParameter_type") + " " + label;
 	}
 
 	/**
