@@ -228,7 +228,8 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		valueColumn.getColumn().setWidth(100);
 		valueColumn.setEditingSupport(new MultiEditingSupport(viewer,
 				new BooleanEditingSupport(viewer), new IntegerEditingSupport(
-						viewer), new RealEditingSupport(viewer), new StringEditingSupport(viewer)));
+						viewer), new RealEditingSupport(viewer),
+				new StringEditingSupport(viewer)));
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 		viewer.setContentProvider(new ExecutionContextContentProvider());
 
@@ -283,8 +284,6 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 				public void run() {
 					viewer.setInput(null);
 					clockUpdater.setTerminated(true);
-					lblRealTime.setText(INITIAL_TIME);
-					lblVirtualTime.setText(INITIAL_TIME);
 				}
 			});
 			break;
@@ -322,20 +321,23 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 								.getAdapter(IExecutionFacade.class);
 						VirtualClock virtualClock = facade
 								.getExecutionContext().getVirtualClock();
-						if (lblVirtualTime != null
-								&& !lblVirtualTime.isDisposed()) {
-							String text = DurationFormatUtils.formatDuration(
-									virtualClock.getTime()
-											- virtualClock.getStartTime(),
-									PATTERN);
-							lblVirtualTime.setText(text);
-						}
-						if (lblRealTime != null && !lblRealTime.isDisposed()) {
-							String text = DurationFormatUtils.formatDuration(
-									System.currentTimeMillis()
-											- virtualClock.getStartTime(),
-									PATTERN);
-							lblRealTime.setText(text);
+						if (virtualClock.getStartTime() > 0) {
+							if (lblVirtualTime != null
+									&& !lblVirtualTime.isDisposed()) {
+								String text = DurationFormatUtils
+										.formatDuration(virtualClock.getTime()
+												- virtualClock.getStartTime(),
+												PATTERN);
+								lblVirtualTime.setText(text);
+							}
+							if (lblRealTime != null
+									&& !lblRealTime.isDisposed()) {
+								String text = DurationFormatUtils.formatDuration(
+										System.currentTimeMillis()
+												- virtualClock.getStartTime(),
+										PATTERN);
+								lblRealTime.setText(text);
+							}
 						}
 					}
 				});
@@ -345,6 +347,13 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 					e.printStackTrace();
 				}
 			}
+			// reset the lbls when updater terminated
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					lblRealTime.setText(INITIAL_TIME);
+					lblVirtualTime.setText(INITIAL_TIME);
+				}
+			});
 		}
 
 		public boolean isTerminated() {
