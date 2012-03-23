@@ -80,7 +80,8 @@ public abstract class AbstractEditorPropertySection extends
 		super.dispose();
 		if (bindingContext != null)
 			bindingContext.dispose();
-		toolkit.dispose();
+		if (toolkit != null)
+			toolkit.dispose();
 	}
 
 	@Override
@@ -151,8 +152,8 @@ public abstract class AbstractEditorPropertySection extends
 		return getEObject();
 	}
 
-
-	protected void createHelpWidget(final Composite parent, final Control control, String helpId) {
+	protected void createHelpWidget(final Composite parent,
+			final Control control, String helpId) {
 		final ImageHyperlink helpWidget = toolkit.createImageHyperlink(parent,
 				SWT.CENTER);
 		Image defaultImage = PlatformUI.getWorkbench().getSharedImages()
@@ -178,5 +179,5 @@ public abstract class AbstractEditorPropertySection extends
 				.getHelpSystem();
 		helpSystem.setHelp(control, helpId);
 	}
-	
+
 }
