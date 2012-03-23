@@ -56,7 +56,6 @@ public class StatechartPropertySection extends
 		createSpecificationControl(leftColumn);
 	}
 
-
 	@Override
 	protected void createRightColumnControls(Composite rightColumn) {
 		createNameControl(rightColumn);
@@ -80,18 +79,18 @@ public class StatechartPropertySection extends
 				.applyTo(orderElementControl);
 	}
 
-	private void createSpecificationControl(Composite parent) {
+	private void createSpecificationControl(final Composite parent) {
 		Injector injector = getInjector(SemanticTarget.StatechartSpecification);
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
-					| SWT.V_SCROLL);
+					| SWT.V_SCROLL | SWT.WRAP);
 			enableXtext(textControl, injector);
 			createHelpWidget(parent, textControl,
 					HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(textControl);
 	}
 
 	@Override

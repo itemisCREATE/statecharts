@@ -90,14 +90,14 @@ public class StatePropertySection extends
 		Injector injector = getInjector(SemanticTarget.StateSpecification);
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER
-					| SWT.V_SCROLL);
+					| SWT.V_SCROLL | SWT.WRAP);
 			enableXtext(txtSpecification, injector);
 			createHelpWidget(parent, txtSpecification,
 					HelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true)
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
 				.applyTo(txtSpecification);
 	}
 
