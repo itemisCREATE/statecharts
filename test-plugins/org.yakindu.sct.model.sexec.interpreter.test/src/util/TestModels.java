@@ -36,30 +36,40 @@ public class TestModels {
 
 	private static final String GUARD = "Guard.sct";
 	private static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
+	private static final String DEEP_HISTORY = "DeepHistory.sct";
 
 	@Inject
 	private ModelSequencer sequencer;
 
 	/**
 	 * <img src="../../images/Guard.png" /> <br />
-	 * Creates a simple {@link Statechart} with two States and one Transition
+	 * 
 	 * @return the {@link ExecutionFlow}
 	 * @throws IOException
 	 */
 	public ExecutionFlow createGuardModel() throws IOException {
 		return loadFromResource(GUARD);
 	}
-	
+
 	/**
 	 * <img src="../../images/SimpleHierachy.png" /> <br />
-	 * Creates a simple {@link Statechart} with two States and one Transition
+	 * 
 	 * @return the {@link ExecutionFlow}
 	 * @throws IOException
 	 */
 	public ExecutionFlow createSimpleHierachyModel() throws IOException {
 		return loadFromResource(SIMPLE_HIERACHY);
 	}
-	
+
+	/**
+	 * <img src="../../images/DeepHistory.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createDeepHistoryModel() throws IOException {
+		return loadFromResource(DEEP_HISTORY);
+	}
 
 	/**
 	 * Helper method - loads a testmodel from the Testmodel directory

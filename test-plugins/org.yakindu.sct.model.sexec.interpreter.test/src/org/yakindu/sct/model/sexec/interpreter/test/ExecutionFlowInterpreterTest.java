@@ -23,9 +23,8 @@ import util.AbstractExecutionFlowTest;
  */
 public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 
-
 	@Test
-	public void testSimpleTransition() throws Exception {
+	public void testSimpleGuard() throws Exception {
 		loadAndconfigureInterpreter(models.createGuardModel());
 		assertIsActive("A");
 		assertVarValue("MyVar", 0);
@@ -43,14 +42,41 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 		interpreter.runCycle();
 		assertIsActive("B");
 	}
+
 	@Test
-	public void testsimpleHierachy() throws IOException{
+	public void testsimpleHierachy() throws IOException {
 		loadAndconfigureInterpreter(models.createSimpleHierachyModel());
 		assertIsActive("A");
 		context().raiseEvent("Event1", null);
 		interpreter.runCycle();
 		assertIsActive("B");
 		assertIsActive("B1");
+	}
+
+	@Test
+	public void testDeepHistory() throws IOException {
+		loadAndconfigureInterpreter(models.createDeepHistoryModel());
+		assertIsActive("State1");
+		context().raiseEvent("event1", null);
+		interpreter.runCycle();
+		interpreter.runCycle();
+		interpreter.runCycle();
+		assertIsActive("State2");
+		assertIsActive("State4");
+		assertIsActive("State6");
+		context().raiseEvent("event2", null);
+		interpreter.runCycle();
+		assertIsActive("State1");
+		context().raiseEvent("event1", null);
+		interpreter.runCycle();
+		interpreter.runCycle();
+		interpreter.runCycle();
+		//Now, the deep history states should be active
+		assertIsActive("State2");
+		assertIsActive("State4");
+		assertIsActive("State6");
+		
+		
 	}
 
 }
