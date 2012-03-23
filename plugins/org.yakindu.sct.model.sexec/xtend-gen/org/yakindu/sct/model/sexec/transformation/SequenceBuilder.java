@@ -3,7 +3,6 @@ package org.yakindu.sct.model.sexec.transformation;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -588,10 +587,8 @@ public class SequenceBuilder {
           ArrayList<ExecutionScope> _parentScopes_1 = this.sexec.parentScopes(region);
           exitScopes.removeAll(_parentScopes_1);
           exitScopes.remove(s);
-          LinkedList<ArrayList<ExecutionScope>> _newLinkedList = CollectionLiterals.<ArrayList<ExecutionScope>>newLinkedList(exitScopes);
-          List<ArrayList<ExecutionScope>> _reverse = ListExtensions.<ArrayList<ExecutionScope>>reverse(_newLinkedList);
-          final Function2<Sequence,ArrayList<ExecutionScope>,Sequence> _function_1 = new Function2<Sequence,ArrayList<ExecutionScope>,Sequence>() {
-              public Sequence apply(final Sequence cs , final ArrayList<ExecutionScope> exitScope) {
+          final Function2<Sequence,ExecutionScope,Sequence> _function_1 = new Function2<Sequence,ExecutionScope,Sequence>() {
+              public Sequence apply(final Sequence cs , final ExecutionScope exitScope) {
                 Sequence _xblockexpression = null;
                 {
                   boolean _operator_and_1 = false;
@@ -615,7 +612,7 @@ public class SequenceBuilder {
                 return _xblockexpression;
               }
             };
-          IterableExtensions.<ArrayList<ExecutionScope>, Sequence>fold(_reverse, caseSeq, _function_1);
+          IterableExtensions.<ExecutionScope, Sequence>fold(exitScopes, caseSeq, _function_1);
           Sequence _exitSequence = s.getExitSequence();
           boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_exitSequence, null);
           if (_operator_notEquals_1) {
