@@ -776,6 +776,12 @@ public class GeneratorProjectTemplate {
     _builder.append(_escapeForXml_1, "            ");
     _builder.append("\">");
     _builder.newLineIfNotEmpty();
+    _builder.append("            ");
+    _builder.append("contentType=\"statechart\"");
+    _builder.newLine();
+    _builder.append("            ");
+    _builder.append("elementRefType=\"org.yakindu.sct.model.sgraph.Statechart\"");
+    _builder.newLine();
     _builder.append("      ");
     _builder.append("</SCTGenerator>");
     _builder.newLine();
