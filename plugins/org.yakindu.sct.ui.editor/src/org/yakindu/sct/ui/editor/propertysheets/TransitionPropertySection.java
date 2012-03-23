@@ -48,13 +48,13 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
-					| SWT.V_SCROLL);
+					| SWT.V_SCROLL | SWT.WRAP);
 			enableXtext(textControl, injector);
 			createHelpWidget(parent, textControl,HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(textControl);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(textControl);
 
 	}
 
