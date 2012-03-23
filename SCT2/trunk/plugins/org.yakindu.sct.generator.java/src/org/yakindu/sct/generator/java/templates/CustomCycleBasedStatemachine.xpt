@@ -328,7 +328,7 @@ import «entry.getBasePackageName()».EventVector;
 «ELSE-»
 	import «entry.getBasePackageName()».IStatemachine;
 «ENDIF-»
-«IF !getInternalScopeValuedEvents().isEmpty || !getDefaultInterfaceValuedEvents().isEmpty-»
+«IF !getInternalScopeValuedEvents().isEmpty  || hasDefaultInterfaceValuedEvents()-»
 	import «entry.getBasePackageName()».ValuedEvent;
 «ENDIF-»
 «IF getStatemachineExtension(entry) != null-»
