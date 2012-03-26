@@ -33,7 +33,7 @@ import com.google.inject.util.Modules;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class AbstractExecutionFlowTest {
+public abstract class AbstractExecutionFlowTest {
 	@Inject
 	protected IExecutionFlowInterpreter interpreter;
 	@Inject

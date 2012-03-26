@@ -41,7 +41,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class AbstractSTextTest {
+public abstract class AbstractSTextTest {
 
 	@Inject
 	private IParser parser;
