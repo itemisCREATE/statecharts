@@ -46,9 +46,16 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 	protected Module createModule(GeneratorEntry entry) {
 		Module defaultModule = super.createModule(entry);
 
-		String overridingModuleClass = entry
-				.getFeatureConfiguration(TEMPLATE_FEATURE)
-				.getParameterValue(CONFIGURATION_MODULE).getStringValue();
+		String overridingModuleClass = null;
+		FeatureConfiguration featureConfiguration = entry
+				.getFeatureConfiguration(TEMPLATE_FEATURE);
+		if (featureConfiguration != null) {
+			FeatureParameterValue parameterValue = featureConfiguration
+					.getParameterValue(CONFIGURATION_MODULE);
+			if (parameterValue != null) {
+				overridingModuleClass = parameterValue.getStringValue();
+			}
+		}
 		if (!Strings.isEmpty(overridingModuleClass)) {
 			try {
 				Class<?> moduleClass = getClassLoader(entry).loadClass(
