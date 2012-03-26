@@ -24,6 +24,8 @@ import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Inject;
 
+import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
+
 /**
  * Provides access to the testmodels.
  * 
@@ -84,6 +86,10 @@ public class TestModels {
 		URI uri = URI.createPlatformPluginURI(TESTMODEL_DIR + fileName, true);
 		ResourceSetImpl impl = new ResourceSetImpl();
 		Resource resource = impl.getResource(uri, true);
+		Assert.assertTrue(
+				"Statechart resources have to be InjectMemberResourece but was '"
+						+ resource.getClass().getCanonicalName() + "'",
+				resource instanceof InjectMembersResource);
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
 		Assert.assertNotNull(statechart);
