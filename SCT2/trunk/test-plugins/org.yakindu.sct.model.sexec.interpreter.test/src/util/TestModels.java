@@ -12,11 +12,11 @@ package util;
 
 import java.io.IOException;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.junit.Assert;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -80,13 +80,15 @@ public class TestModels {
 	 * @throws IOException
 	 */
 	private ExecutionFlow loadFromResource(String fileName) throws IOException {
-		Assert.isNotNull(fileName);
+		Assert.assertNotNull(fileName);
 		URI uri = URI.createPlatformPluginURI(TESTMODEL_DIR + fileName, true);
 		ResourceSetImpl impl = new ResourceSetImpl();
 		Resource resource = impl.getResource(uri, true);
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
-		Assert.isNotNull(statechart);
-		return sequencer.transform(statechart);
+		Assert.assertNotNull(statechart);
+		final ExecutionFlow flow = sequencer.transform(statechart);
+		Assert.assertNotNull(flow);
+		return flow;
 	}
 }
