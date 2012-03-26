@@ -15,6 +15,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
+import org.yakindu.sct.ui.editor.policies.TransitionExpressionComponentEditPolicy;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
@@ -34,6 +35,9 @@ public class TransitionExpressionEditPart extends
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
+		installEditPolicy(
+				EditPolicy.COMPONENT_ROLE,
+				new TransitionExpressionComponentEditPolicy());
 		installEditPolicy(
 				EditPolicy.SELECTION_FEEDBACK_ROLE,
 				new ContextSensitiveHelpPolicy(
