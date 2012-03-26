@@ -12,13 +12,13 @@
 package org.yakindu.sct.model.stext.validation;
 
 /**
- * checked Exception thrown by the {@link StaticTypeAnalyzer} if a type
+ * runtime Exception thrown by the {@link StaticTypeAnalyzer} if a type
  * conformance check fails.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class TypeCheckException extends Exception {
+public class TypeCheckException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
