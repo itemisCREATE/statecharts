@@ -10,7 +10,7 @@
  *  
  */
 package org.yakindu.sct.model.stext.validation
- 
+
 import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression
 import org.yakindu.sct.model.sgraph.Statement
@@ -46,6 +46,13 @@ import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
 import org.yakindu.base.types.Feature
 import javax.lang.model.element.TypeElement
 import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.validation.ITypeAnalyzer
+import org.yakindu.base.types.LibrariesExtensions
+import org.yakindu.base.types.scope.TypeLibraryLocation
+import org.yakindu.base.types.TypesPackage
+import org.yakindu.base.types.TypesFactory
+import org.yakindu.sct.model.stext.stext.StringLiteral
+import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor
  
 /**
  * 
@@ -54,136 +61,150 @@ import org.yakindu.sct.model.stext.stext.FeatureCall
  * @author andreas muelder - Initial contribution and API
  * 
  */
-class StaticTypeAnalyzer {
+class StaticTypeAnalyzer implements ITypeAnalyzer {
 	
-// begin TODO: externalize this
-	def isBoolean(Type type){
-		return type != null && type.name == "boolean";	
+	@Inject TypeLibraryLocation$Registry libraries
+	ErrorAcceptor acceptor
+	
+	def void setErrorAcceptor(ErrorAcceptor acceptor2) {
+		acceptor = acceptor2
 	}
 	
-	def isInteger(Type type){
-		return type != null && (type.name =="integer" || type.name =="int");
-	}
-	
-	def isReal(Type type){
-		return type != null && type.name == "real";	
-	}
-// end TODO
-	
-	def dispatch check(Statement statement){
+	def dispatch inferType(Statement statement){
 		null
+	}
+	
+	def check(Statement stmt) {
+		stmt.inferType
 	}
 	
 	/**
 	 * Check Variable assignments
 	 */
-	def dispatch check(AssignmentExpression assignment){
-		var valueType = assignment.expression.check
-		var type = assignment.varRef.check
-		if(type == typeof(Boolean) && !(valueType == typeof(Boolean))){
-			error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
+	def dispatch inferType(AssignmentExpression assignment){
+		var valueType = assignment.expression.inferType
+		var type = assignment.varRef.inferType
+		
+		if(!isAssignable(type, valueType)){
+			error("Can not assign a value of type " + valueType.name + " to a variable of type " + type.name)
+			return null 
 		}
-		else if(type == typeof(Number) && !(valueType == typeof(Number))){
-			error("Can not assign a value of type " + valueType.simpleName + " to a variable of type " + type)
-		}
-		return null 
+		return type
 	}
 	/**
 	 * Check Event value assignments
 	 */
-	def dispatch check(EventRaisingExpression eventRaising){
-		var valueType = eventRaising.value.check
-		var type = eventRaising.event.check
-		if(type == typeof(Boolean) && !(valueType == typeof(Boolean))){
-			error("Can not assign a value of type " + valueType.simpleName + " to an event of type " + type)
+	def dispatch inferType(EventRaisingExpression eventRaising){
+		var valueType = eventRaising.value.inferType
+		var type = eventRaising.event.inferType
+		
+		if(!isAssignable(type, valueType)){
+			error("Can not assign a value of type " + valueType.name + " to a variable of type " + type.name)
+			return null 
 		}
-		else if (type == typeof(Number) && !(valueType == typeof(Number))){
-			error("Can not assign a value of type " + valueType.simpleName + " to an event of type " + type)
-		}
-		return null 
+		return type
 	}
 	
-	
-	
-	def dispatch check(LogicalAndExpression expression){
-		assertIsBoolean(expression.leftOperand.check, '&&')
-		assertIsBoolean(expression.rightOperand.check, '&&')
-		typeof(Boolean)
+	def dispatch inferType(LogicalAndExpression expression){
+		return assertBooleanTypes(expression.leftOperand.inferType,
+			expression.rightOperand.inferType,'&&')
 	}
-	def dispatch check(LogicalOrExpression expression){
-		assertIsBoolean(expression.leftOperand.check,'||')
-		assertIsBoolean(expression.rightOperand.check,'||')
-		typeof(Boolean)
+	def dispatch inferType(LogicalOrExpression expression){
+		return assertBooleanTypes(expression.leftOperand.inferType,
+			expression.rightOperand.inferType,'||')
 	}
-	def dispatch check(LogicalNotExpression expression){
-		assertIsBoolean(expression.operand.check,'!')
-		typeof(Boolean)
+	def assertBooleanTypes(Type left, Type right, String literal) {
+		if (assertIsBoolean(left,literal) != null
+			&& assertIsBoolean(right, literal) != null) {
+				return combine(left, right)
+			}
+		return null;
 	}
-	def dispatch check(BitwiseAndExpression expression){
-		assertIsNumber(expression.leftOperand.check,'&')
-		assertIsNumber(expression.rightOperand.check,'&')
-		typeof(Number)
+	def dispatch inferType(LogicalNotExpression expression){
+		val type = expression.operand.inferType
+		return assertIsBoolean(type,'!')
 	}
-	def dispatch check(BitwiseOrExpression expression){
-		assertIsNumber(expression.leftOperand.check,'|')
-		assertIsNumber(expression.rightOperand.check,'|')
-		typeof(Number)
+	def dispatch inferType(BitwiseAndExpression expression){
+		return assertNumericalTypes(expression.leftOperand.inferType, 
+			expression.rightOperand.inferType,'&')
 	}
-	def dispatch check(BitwiseXorExpression expression){
-		assertIsNumber(expression.leftOperand.check,'^')
-		assertIsNumber(expression.rightOperand.check,'^')
-		typeof(Number)
+	def dispatch inferType(BitwiseOrExpression expression){
+		return assertNumericalTypes(expression.leftOperand.inferType, 
+			expression.rightOperand.inferType,'|')
 	}
-	def dispatch check(LogicalRelationExpression expression){ 
-		var leftType = expression.leftOperand.check
-		var rightType = expression.rightOperand.check
-		if(leftType != rightType){
+	def dispatch inferType(BitwiseXorExpression expression){
+		return assertNumericalTypes(expression.leftOperand.inferType, 
+			expression.rightOperand.inferType,'^')
+	}
+	def dispatch inferType(LogicalRelationExpression expression){ 
+		val leftType = expression.leftOperand.inferType
+		val rightType = expression.rightOperand.inferType
+		val combined = combine(leftType, rightType)
+		if(combined == null){
 			error("Incompatible operands " +leftType.name + " and " + rightType.name + " for operator '" + expression.operator.literal+"'")
 		}
 		//If both types are boolean, only relational operators Equals and not_Equals are allowed
-		if(leftType == typeof(Boolean) && rightType == typeof(Boolean)){
+		if(leftType.^boolean && rightType.^boolean){
 			if(expression.operator != RelationalOperator::EQUALS && expression.operator != RelationalOperator::NOT_EQUALS){
 				error("operator '" + expression.operator.literal + "' can not be applied to boolean values!")
+				return null
 			}
 		}
-		return typeof(Boolean) 
+		return combined
 		
 	}
-	def dispatch check(NumericalAddSubtractExpression expression){
-		assertIsNumber(expression.leftOperand.check, expression.operator.literal)
-		assertIsNumber(expression.rightOperand.check, expression.operator.literal)
-		typeof(Number)
+	
+	def assertNumericalTypes(Type left, Type right, String literal) {
+		if (assertIsNumber(left, literal) != null
+			&& assertIsNumber(right, literal) != null) {
+				return combine(left, right)
+		}
+		return null;
 	}
-	def dispatch check(NumericalMultiplyDivideExpression expression){
-		assertIsNumber(expression.leftOperand.check, expression.operator.literal)
-		assertIsNumber(expression.rightOperand.check, expression.operator.literal)
-		typeof(Number)
+	
+	def dispatch inferType(NumericalAddSubtractExpression expression){
+		return assertNumericalTypes(expression.leftOperand.inferType, 
+			expression.rightOperand.inferType, expression.operator.literal
+		)
 	}
-	def dispatch check(NumericalUnaryExpression expression){
-		assertIsNumber(expression.operand.check, expression.operator.literal)
-		typeof(Number)
+	def dispatch inferType(NumericalMultiplyDivideExpression expression){
+		return assertNumericalTypes(expression.leftOperand.inferType, 
+			expression.rightOperand.inferType, expression.operator.literal
+		)
+	}
+	def dispatch Type inferType(NumericalUnaryExpression expression){
+		val type = expression.operand.inferType
+		return assertIsNumber(type, expression.operator.literal)
 	}	
-	def dispatch check(PrimitiveValueExpression expression){
-		expression.value.type
+	def dispatch inferType(PrimitiveValueExpression expression){
+		val Type t = expression.value.getType
+		return t
 	}
-	def dispatch check(ShiftExpression expression){
+	def dispatch inferType(ShiftExpression expression){
 		//TODO: Implement me
 	}
-	def dispatch check(ConditionalExpression expression){
-		//TODO: Implement me
+	def dispatch inferType(ConditionalExpression expression){
+		val condType = expression.condition.inferType
+		if (!condType.^boolean) {
+			error("Condition type have to be boolean")
+			return null;
+		}
+		val trueType = expression.trueCase.inferType
+		val falseType = expression.falseCase.inferType
+		return combine(trueType, falseType)
 	} 
 	
-	def dispatch check(FeatureCall featureCall){
-		return featureCall.feature.type.toJavaType
+	def dispatch inferType(FeatureCall featureCall){
+		return featureCall.feature.type
 	}
 	
-	def dispatch check (TypedElementReferenceExpression expression){
+	def dispatch inferType(TypedElementReferenceExpression expression){
 		var reference  = expression.reference
 		if(reference instanceof VariableDefinition){
-			return (reference as VariableDefinition).type.toJavaType
+			return (reference as VariableDefinition).type
 		}
 		if(reference instanceof EventDefinition){
-			return typeof(Boolean)
+			return createBoolean
 		}
 		null
 		
@@ -195,47 +216,142 @@ class StaticTypeAnalyzer {
 //			return (declaration as VariableDefinition).type.toJavaType
 //		}
 //		return null;
-//	}
-	def dispatch check(EventValueReferenceExpression expression){
+//	}	
+
+	def createBoolean() {
+		val type = TypesFactory::eINSTANCE.createType()
+		type.name = "boolean"
+		return type
+	}
+	def dispatch inferType(EventValueReferenceExpression expression){
 		//TODO: Implement me
 	}
 	
-	def dispatch type(IntLiteral literal){
-		return typeof(Number)
+	def dispatch getType(IntLiteral literal){
+		return createInteger
+	}
+
+	def createInteger() {
+		val type = TypesFactory::eINSTANCE.createType()
+		type.name = "integer"
+		return type
 	} 
 	
-	def dispatch type(BoolLiteral bool){
-		return typeof(Boolean)
+	def dispatch getType(BoolLiteral bool){
+		return createBoolean
 	}
 	
-	def dispatch type(RealLiteral literal){
-		return typeof(Number)
+	def dispatch getType(RealLiteral literal){
+		return createReal
+	}
+	def dispatch getType(StringLiteral literal){
+		return createString
+	}
+	def createReal() {
+		val type = TypesFactory::eINSTANCE.createType()
+		type.name = "real"
+		return type
+	}
+	def createString() {
+		val type = TypesFactory::eINSTANCE.createType()
+		type.name = "string"
+		return type
 	}
 	
-	def toJavaType(Type type){
-		if(isBoolean(type)){
-			return typeof(Boolean)
-		}
-		else if(isInteger(type)){
-			return typeof(Number)
-		}
-		else if(isReal(type)){
-			return typeof(Number)
-		} 
-		return typeof(Void)
-	}
+//	def toJavaType(Type type){
+//		if(isBoolean(type)){
+//			return typeof(Boolean)
+//		}
+//		else if(isInteger(type)){
+//			return typeof(Number)
+//		}
+//		else if(isReal(type)){
+//			return typeof(Number)
+//		} 
+//		return typeof(Void)
+//	}
 	
-	def assertIsNumber(Object object, String operator){
-		if(!(object == typeof(Number)))
+	def Type assertIsNumber(Type object, String operator){
+		if(!object.real && !object.integer) {
 			error("operator '" +operator+"' can only be applied to numbers!")
+			return null
+		}
+		return object
 	}
-	def assertIsBoolean(Object object, String operator){
-		if(!(object == typeof(Boolean)))
+	def Type assertIsBoolean(Type object, String operator){
+		if(!object.^boolean) {
 			error("operator '" +operator+"' can only be applied to boolean values!")
+		}
+		return object
 	}
 	
 	def error(String msg){
-		throw new TypeCheckException(msg)
+		if (acceptor != null) {
+			acceptor.acceptError(msg)
+		}
+	}
+	
+	
+	override isBoolean(Type type){
+		return type != null && type.name == "boolean";	
+	}
+	
+	override isInteger(Type type){
+		return type != null && (type.name =="integer" || type.name =="int");
+	}
+	
+	override isReal(Type type){
+		return type != null && type.name == "real";	
+	}
+	override isString(Type type) {
+		return type != null && type.name == "string";	
+	}
+	def dispatch inferType(Expression expr) {
+		return null;
+	}
+	
+	override isAssignable(Type expected, Type actual) {
+		if (expected.equals(combine(expected, actual))) {
+			return true
+		}
+		if ((expected.integer || expected.real) && (actual.integer || actual.real)) {
+			return true
+		}
+		return false
+	}
+	
+	override combine(Type typeOne, Type typeTwo) {
+		if (typeOne.equals(typeTwo) 
+			|| typeOne.name.equals(typeTwo.name)) {
+			return typeOne;
+		}
+		val typesOne = typeOne.allSuperTypes
+		val typesTwo = typeTwo.allSuperTypes
+		
+		val superType = typesOne.findFirst(t|typesTwo.contains(t))
+		if (superType != null) {
+			return superType
+		}
+		
+		return null;
+	}
+	
+	def allSuperTypes(Type type) {
+		val types = <Type>newLinkedHashSet()
+		types.add(type)
+		var newSuperTypes = <Type>newArrayList()
+		newSuperTypes.addAll(type.superTypes)
+		while (!newSuperTypes.empty) {
+			val oldSuperTypes = newSuperTypes
+			newSuperTypes = <Type>newArrayList()
+			for (superType : oldSuperTypes) {
+				if (!types.contains(superType)) {
+					types.add(superType)
+					newSuperTypes.addAll(superType.superTypes)
+				}
+			}
+		}
+		return types
 	}
 
 }

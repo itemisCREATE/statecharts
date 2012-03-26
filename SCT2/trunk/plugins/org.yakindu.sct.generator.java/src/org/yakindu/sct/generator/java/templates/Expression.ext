@@ -14,6 +14,7 @@ import sgraph;
 
 extension org::yakindu::sct::generator::java::templates::Naming;
 extension org::yakindu::sct::generator::java::templates::TypeModelExtensions;
+extension org::yakindu::sct::generator::core::extensions::TypeAnalyzerExtensions;
 
 String toCode(Void void) :
 	"/*toCode() called with NULL element. Polymorphic resolver could not match callable method!*/";
@@ -94,7 +95,10 @@ String toCode(LogicalNotExpression expression) :
   	" !" + expression.operand.toCode();
 
 String toCode(LogicalRelationExpression expression) :
-   "("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
+	if (expression.leftOperand.inferType().isString()) then
+		"("+expression.leftOperand.toCode()+"==null?"+expression.rightOperand.toCode()+"==null:"+expression.leftOperand.toCode()+".equals("+expression.rightOperand.toCode()+"))"
+	else
+		"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
     
 String toCode(BitwiseAndExpression expression) :
   	"("+expression.leftOperand.toCode() + " & " + expression.rightOperand.toCode()+")";
