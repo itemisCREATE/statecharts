@@ -151,8 +151,16 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	}
 
 	@Override
+	protected void doSetValue(Object value) {
+		super.doSetValue(value);
+		// Reset the undo manager to prevend deletion of complete text if the
+		// user hits ctrl+z after cell editor opens
+		xtextAdapter.sourceviewer.getUndoManager().reset();
+	}
+
+	@Override
 	public boolean isUndoEnabled() {
-		return xtextAdapter.sourceviewer.getUndoManager().undoable();
+		return true;
 	}
 
 	@Override
@@ -162,7 +170,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 
 	@Override
 	public boolean isRedoEnabled() {
-		return xtextAdapter.sourceviewer.getUndoManager().redoable();
+		return true;
 	}
 
 	@Override
