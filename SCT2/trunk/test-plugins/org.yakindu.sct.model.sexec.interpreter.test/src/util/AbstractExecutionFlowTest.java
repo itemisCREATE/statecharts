@@ -11,6 +11,7 @@
 package util;
 
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.fail;
 
 import java.util.Set;
@@ -59,6 +60,8 @@ public class AbstractExecutionFlowTest {
 
 	protected void assertVarValue(String variableName, Object value) {
 		ExecutionVariable variable = context().getVariable(variableName);
+		assertNotNull("Variable '" + variableName + "' is not defined",
+				variable);
 		assertEquals(variable.getValue(), value);
 	}
 
