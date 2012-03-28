@@ -15,7 +15,6 @@ import static org.junit.Assert.assertTrue;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.parser.IParser;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -44,8 +43,6 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 
 	@Inject
 	private ITypeAnalyzer analyzer;
-	@Inject
-	IParser parser;
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 
