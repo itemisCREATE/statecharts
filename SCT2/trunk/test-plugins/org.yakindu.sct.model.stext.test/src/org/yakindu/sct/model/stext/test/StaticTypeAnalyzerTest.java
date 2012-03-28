@@ -12,14 +12,9 @@ package org.yakindu.sct.model.stext.test;
 
 import static org.junit.Assert.assertTrue;
 
-import java.io.StringReader;
-
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,6 +23,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
+import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.ErrorAcceptor;
 import org.yakindu.sct.model.stext.validation.ITypeAnalyzer;
 import org.yakindu.sct.model.stext.validation.TypeCheckException;
@@ -40,7 +37,7 @@ import com.google.inject.Inject;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
-public class StaticTypeAnalyzerTest {
+public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 
 	@Inject
 	private ITypeAnalyzer analyzer;
@@ -61,21 +58,26 @@ public class StaticTypeAnalyzerTest {
 		assertTrue(analyzer.isInteger(inferType("1")));
 		assertTrue(analyzer.isInteger(inferType("-1")));
 		assertTrue(analyzer.isInteger(inferType("0")));
+		assertTrue(analyzer.isInteger(inferType("myInt")));
 		// real
 		assertTrue(analyzer.isReal(inferType("1.0")));
 		assertTrue(analyzer.isReal(inferType("-1.0")));
 		assertTrue(analyzer.isReal(inferType("0.0")));
+		assertTrue(analyzer.isReal(inferType("myReal")));
 		// string
 		assertTrue(analyzer.isString(inferType("'42'")));
+		assertTrue(analyzer.isString(inferType("myString")));
 		// boolean
 		assertTrue(analyzer.isBoolean(inferType("true")));
 		assertTrue(analyzer.isBoolean(inferType("false")));
+		assertTrue(analyzer.isBoolean(inferType("myBool")));
 	}
 
 	// Add
 	@Test
 	public void testAddSuccess() {
 		assertTrue(analyzer.isInteger(inferType("1 + 2")));
+		assertTrue(analyzer.isInteger(inferType("myInt + 2")));
 		assertTrue(analyzer.isReal(inferType("1.0 + 2")));
 		assertTrue(analyzer.isReal(inferType("2 + 1.0")));
 		assertTrue(analyzer.isInteger(inferType("1 + 2 + 3.0")));
@@ -123,12 +125,20 @@ public class StaticTypeAnalyzerTest {
 		inferType("3.0 + 'string'");
 	}
 
+	@Test
+	public void testAddException8() {
+		expectOperatorPlusException();
+		inferType("myInt + 'string'");
+	}
+
 	// substract
 	@Test
 	public void testSubstractSuccess() {
 		assertTrue(analyzer.isInteger(inferType("1 - 2")));
+		assertTrue(analyzer.isInteger(inferType("myInt - 2")));
 		assertTrue(analyzer.isReal(inferType("1.0 - 2")));
 		assertTrue(analyzer.isReal(inferType("2 - 1.0")));
+		assertTrue(analyzer.isReal(inferType("myReal - 1.0")));
 		assertTrue(analyzer.isInteger(inferType("1 - 2 - 3.0")));
 	}
 
@@ -174,10 +184,17 @@ public class StaticTypeAnalyzerTest {
 		inferType("3.0 -  'string'");
 	}
 
+	@Test
+	public void testSubstractException8() {
+		expectOperatorSubstractException();
+		inferType("myReal -  'string'");
+	}
+
 	// multiply
 	@Test
 	public void testMultiplySuccess() {
 		assertTrue(analyzer.isInteger(inferType("1 * 2")));
+		assertTrue(analyzer.isReal(inferType("myInt * myReal")));
 		assertTrue(analyzer.isReal(inferType("1.0 * 2")));
 		assertTrue(analyzer.isReal(inferType("2 * 1.0")));
 		assertTrue(analyzer.isInteger(inferType("1 * 2 * 3.0")));
@@ -225,10 +242,17 @@ public class StaticTypeAnalyzerTest {
 		inferType("3.0 *  'string'");
 	}
 
+	@Test
+	public void testMultiplyException8() {
+		expectOperatorMultiplyException();
+		inferType("myReal *  'string'");
+	}
+
 	// divide
 	@Test
 	public void testDivideSuccess() {
 		assertTrue(analyzer.isInteger(inferType("1 / 2")));
+		assertTrue(analyzer.isInteger(inferType("1 / myInt")));
 		assertTrue(analyzer.isReal(inferType("1.0 / 2")));
 		assertTrue(analyzer.isReal(inferType("2 / 1.0")));
 		assertTrue(analyzer.isInteger(inferType("1 / 2 / 3.0")));
@@ -276,12 +300,19 @@ public class StaticTypeAnalyzerTest {
 		inferType("3.0 /  'string'");
 	}
 
+	@Test
+	public void testDivideException8() {
+		expectOperatorDivideException();
+		inferType("3.0 /  myString");
+	}
+
 	// mod
 	@Test
 	public void testModSuccess() {
 		assertTrue(analyzer.isInteger(inferType("1 % 2")));
 		assertTrue(analyzer.isReal(inferType("1.0 % 2")));
 		assertTrue(analyzer.isReal(inferType("2 % 1.0")));
+		assertTrue(analyzer.isReal(inferType("2 % myReal")));
 		assertTrue(analyzer.isInteger(inferType("1 % 2 % 3.0")));
 	}
 
@@ -327,14 +358,22 @@ public class StaticTypeAnalyzerTest {
 		inferType("3.0 % 'string'");
 	}
 
+	@Test
+	public void testModException8() {
+		expectOperatorModException();
+		inferType("3.0 % myString");
+	}
+
 	// Logical And Or Not
 	@Test
 	public void testLogicalSuccess() {
 		assertTrue(analyzer.isBoolean(inferType("true || false")));
+		assertTrue(analyzer.isBoolean(inferType("true || myBool")));
 		assertTrue(analyzer.isBoolean(inferType("true || false && true")));
 		assertTrue(analyzer
 				.isBoolean(inferType("true || true &&( false || true)")));
 		assertTrue(analyzer.isBoolean(inferType("!true")));
+		assertTrue(analyzer.isBoolean(inferType("!myBool")));
 		assertTrue(analyzer.isBoolean(inferType("!true && !false")));
 	}
 
@@ -392,27 +431,36 @@ public class StaticTypeAnalyzerTest {
 		inferType("!'Test'");
 	}
 
-	// LogicalRelation 
+	@Test
+	public void testLogicalException10() {
+		expectLogicalNotException();
+		inferType("!myString");
+	}
+
+	// LogicalRelation
 	@Test
 	public void testLogicalRelationSuccess() {
 		assertTrue(analyzer.isBoolean(inferType("5 < 3")));
 		assertTrue(analyzer.isBoolean(inferType("5.0 < 3")));
+		assertTrue(analyzer.isBoolean(inferType("5.0 < myInt")));
 
 		assertTrue(analyzer.isBoolean(inferType("5 <= 3")));
 		assertTrue(analyzer.isBoolean(inferType("5.0 <= 3")));
+		assertTrue(analyzer.isBoolean(inferType("5.0 <= myInt")));
 
 		assertTrue(analyzer.isBoolean(inferType("5 > 3")));
 		assertTrue(analyzer.isBoolean(inferType("5.0 >= 3")));
+		assertTrue(analyzer.isBoolean(inferType("5.0 >= myInt")));
 
 		assertTrue(analyzer.isBoolean(inferType("5 == 3")));
 		assertTrue(analyzer.isBoolean(inferType("'string' == 'string'")));
 		assertTrue(analyzer.isBoolean(inferType("5.0 == 3")));
-		assertTrue(analyzer.isBoolean(inferType("true == false")));
+		assertTrue(analyzer.isBoolean(inferType("true == myBool")));
 
 		assertTrue(analyzer.isBoolean(inferType("5 != 3")));
 		assertTrue(analyzer.isBoolean(inferType("'string' != 'string'")));
 		assertTrue(analyzer.isBoolean(inferType("5.0 != 3")));
-		assertTrue(analyzer.isBoolean(inferType("true != false")));
+		assertTrue(analyzer.isBoolean(inferType("true != myBool")));
 	}
 
 	@Test
@@ -558,11 +606,33 @@ public class StaticTypeAnalyzerTest {
 				.expectMessage("Incompatible operands real and boolean for operator '!='");
 		inferType("1.0 != false");
 	}
+	@Test
+	public void testAssignmentSuccess() {
+		inferType("myInt = 5 * 3");
+		inferType("myBool = true || false");
+		inferType("myString = 'string'");
+		inferType("myReal = 2.0 - 7");
+	}
+
+	@Test
+	public void testAssignmentException1() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
+		inferType("myInt = true");
+	}
+	@Test
+	public void testAssignmentException2() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("Can not assign a value of type boolean to a variable of type boolean");
+		inferType("myInt = myBoolean");
+	}
 
 	@Test
 	public void testComplexExpressionsSuccess() {
-		analyzer.isBoolean(inferType("((((3 * 7) + 5) % 2) > 97) || false"));
-		analyzer.isBoolean(inferType("!true != false && (3 > (7 * 5 + 3))"));
+		analyzer.isBoolean(inferType("((((3 * myInt) + 5) % 2) > 97) || false"));
+		analyzer.isBoolean(inferType("!true != myBool && (3 > (myReal * 5 + 3))"));
 	}
 
 	// TODO: BitwiseOrExpression, BitwiseAndExpression, BitwiseXOrExpression
@@ -614,10 +684,8 @@ public class StaticTypeAnalyzerTest {
 	}
 
 	protected Type inferType(String expression) {
-		ParserRule rule = XtextFactory.eINSTANCE.createParserRule();
-		rule.setName("Expression");
-		IParseResult parse = parser.parse(rule, new StringReader(expression));
-		EObject statement = parse.getRootASTElement();
+		EObject statement = super.parseExpression(expression,
+				super.createDefaultScope(), "Expression");
 		return analyzer.inferType((Statement) statement);
 	}
 

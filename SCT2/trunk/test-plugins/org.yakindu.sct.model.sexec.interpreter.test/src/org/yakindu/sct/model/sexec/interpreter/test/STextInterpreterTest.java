@@ -12,30 +12,34 @@ package org.yakindu.sct.model.sexec.interpreter.test;
 
 import static junit.framework.Assert.assertEquals;
 
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.yakindu.sct.model.sexec.interpreter.stext.StextStatementInterpreter;
+import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
+import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
+import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionContextImpl;
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
-import util.AbstractSTextTest;
+import com.google.inject.Inject;
 
+
+@RunWith(XtextRunner.class)
+@InjectWith(STextInjectorProvider.class)
 public class STextInterpreterTest extends AbstractSTextTest {
 
-//	@Test
-//	public void testRaise() {
-//		executeWithDefaultScope("raise abc");
-//		assertTrue(getContext().getRaisedEvents().size() == 1);
-//	}
-//
-//	@Test
-//	public void testRaiseWithValue() {
-//		executeWithDefaultScope("raise abc:42");
-//		assertTrue(getContext().getRaisedEvents().size() == 1);
-//		assertEquals(42, getContext().getRaisedEvents().get(0).getValue());
-//	}
-
-//	@Test
-//	public void testProcedureCall() {
-//		executeWithDefaultScope("foo()");
-//		assertEquals("foo", getContext().lastProcedureId);
-//	}
+	@Inject
+	private ExecutionContextImpl context;
+	@Inject
+	private StextStatementInterpreter interpreter;
 
 	@Test
 	public void testIntVariableAssignment() {
@@ -58,36 +62,21 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testBoolFalseVariableAssignment() {
 		executeWithDefaultScope("myBool = false");
-		assertEquals(false, getContext().getVariable("myBool")
-				.getValue());
+		assertEquals(false, getContext().getVariable("myBool").getValue());
 	}
 
 	@Test
 	public void testFloatVariableAssignment() {
-		executeWithDefaultScope("myFloat = 42.0");
-		assertEquals(42.0f, getContext().getVariable("myFloat")
-				.getValue());
+		executeWithDefaultScope("myReal = 42.0");
+		assertEquals(42.0f, getContext().getVariable("myReal").getValue());
 	}
 
-	//
-	// @Test
-	// public void testStringVariableAssignment() {
-	// executeWithDefaultScope("a = \"fortytwo\";");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals("fortytwo", scope.getValue("a"));
-	// }
-	//
-	// @Test
-	// public void testIntStringVariableAssignment() {
-	// executeWithDefaultScope("a = \"42\";");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals("42", scope.getValue("a"));
-	// }
-	//
+	@Test
+	public void testStringVariableAssignment() {
+		executeWithDefaultScope("myString = 'fortytwo'");
+		assertEquals("fortytwo", getStringValue());
+	}
+
 	@Test
 	public void testConditionalTrue() {
 		executeWithDefaultScope("myInt = true ? 42 : 1");
@@ -115,30 +104,26 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testBooleanAnd() {
 		executeWithDefaultScope("myBool = true && false");
-		assertEquals(false, getContext().getVariable("myBool")
-				.getValue());
+		assertEquals(false, getContext().getVariable("myBool").getValue());
 	}
 
 	@Test
 	public void testBitwiseXor() {
 		executeWithDefaultScope("myInt = 0xF0F0 ^ 0xFF00");
-		assertEquals(0x0FF0, getContext().getVariable("myInt")
-				.getValue());
+		assertEquals(0x0FF0, getContext().getVariable("myInt").getValue());
 
 	}
 
 	@Test
 	public void testBitwiseOr() {
 		executeWithDefaultScope("myInt = 0xF0F0 | 0xFFFF");
-		assertEquals(0xFFFF, getContext().getVariable("myInt")
-				.getValue());
+		assertEquals(0xFFFF, getContext().getVariable("myInt").getValue());
 	}
 
 	@Test
 	public void testBitwiseAnd() {
 		executeWithDefaultScope("myInt = 0xF0F0 & 0xFFFF");
-		assertEquals(0x0F0F0, getContext().getVariable("myInt")
-				.getValue());
+		assertEquals(0x0F0F0, getContext().getVariable("myInt").getValue());
 	}
 
 	@Test
@@ -158,6 +143,11 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("myBool = 1.0f == 1.0f");
 		assertEquals(true, getBoolValue());
 	}
+	@Test
+	public void testStringEqual() {
+		executeWithDefaultScope("myBool = 'string' == 'string'");
+		assertEquals(true, getBoolValue());
+	}
 
 	@Test
 	public void testBoolNotEqual() {
@@ -174,6 +164,11 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testFloatNotEqual() {
 		executeWithDefaultScope("myBool = 1.0f != 2.0f");
+		assertEquals(true, getBoolValue());
+	}
+	@Test
+	public void testStringNotEqual() {
+		executeWithDefaultScope("myBool = 'string' != 'string2'");
 		assertEquals(true, getBoolValue());
 	}
 
@@ -236,7 +231,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatPositive() {
-		executeWithDefaultScope("myFloat = +1.0");
+		executeWithDefaultScope("myReal = +1.0");
 		assertEquals(1.0f, getFloatValue());
 	}
 
@@ -262,7 +257,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatNegative() {
-		executeWithDefaultScope("myFloat = -1.0f");
+		executeWithDefaultScope("myReal = -1.0f");
 		assertEquals(-1.0f, getFloatValue());
 	}
 
@@ -274,7 +269,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatPlus() {
-		executeWithDefaultScope("myFloat = 42.0 + 1.0");
+		executeWithDefaultScope("myReal = 42.0 + 1.0");
 		assertEquals(43.0f, getFloatValue());
 	}
 
@@ -286,7 +281,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatMinus() {
-		executeWithDefaultScope("myFloat = 42.0f - 1.0f");
+		executeWithDefaultScope("myReal = 42.0f - 1.0f");
 		assertEquals(41.0f, getFloatValue());
 	}
 
@@ -298,7 +293,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatMultiply() {
-		executeWithDefaultScope("myFloat = 42.0f * 2.0f");
+		executeWithDefaultScope("myReal = 42.0f * 2.0f");
 		assertEquals(84.0f, getFloatValue());
 	}
 
@@ -310,7 +305,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatDivide() {
-		executeWithDefaultScope("myFloat = 42.0f / 2.0f");
+		executeWithDefaultScope("myReal = 42.0f / 2.0f");
 		assertEquals(21.0f, getFloatValue());
 	}
 
@@ -322,7 +317,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatModulo() {
-		executeWithDefaultScope("myFloat = 42.0f % 2.0f");
+		executeWithDefaultScope("myReal = 42.0f % 2.0f");
 		assertEquals(0.0f, getFloatValue());
 	}
 
@@ -468,9 +463,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatPlusAssign() {
-		executeWithDefaultScope("myFloat = 42.0");
+		executeWithDefaultScope("myReal = 42.0");
 		System.out.println(getFloatValue());
-		executeWithDefaultScope("myFloat+=42.0");
+		executeWithDefaultScope("myReal+=42.0");
 		assertEquals(84.0f, getFloatValue());
 	}
 
@@ -483,8 +478,8 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatMinusAssign() {
-		executeWithDefaultScope("myFloat=42.0f");
-		executeWithDefaultScope("myFloat-=10.0");
+		executeWithDefaultScope("myReal=42.0f");
+		executeWithDefaultScope("myReal-=10.0");
 		assertEquals(32.0f, getFloatValue());
 	}
 
@@ -497,8 +492,8 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatMultAssign() {
-		executeWithDefaultScope("myFloat=42.0f");
-		executeWithDefaultScope("myFloat*=1.0");
+		executeWithDefaultScope("myReal=42.0f");
+		executeWithDefaultScope("myReal*=1.0");
 		assertEquals(42.0f, getFloatValue());
 	}
 
@@ -511,8 +506,8 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatDivAssign() {
-		executeWithDefaultScope("myFloat=42.0f");
-		executeWithDefaultScope("myFloat/=1.0f");
+		executeWithDefaultScope("myReal=42.0f");
+		executeWithDefaultScope("myReal/=1.0f");
 		assertEquals(42.0f, getFloatValue());
 	}
 
@@ -525,8 +520,8 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatModAssign() {
-		executeWithDefaultScope("myFloat=42.0f");
-		executeWithDefaultScope("myFloat%=1.0f");
+		executeWithDefaultScope("myReal=42.0f");
+		executeWithDefaultScope("myReal%=1.0f");
 		assertEquals(0.0f, getFloatValue());
 	}
 
@@ -626,11 +621,98 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	// }
 	// }
 
-	@Test public void testPlainTrue() {
+	@Test
+	public void testPlainTrue() {
 		assertEquals(true, executeExpression("", "true"));
 	}
-	
-	@Test public void testPlainFalse() {
+
+	@Test
+	public void testPlainFalse() {
 		assertEquals(false, executeExpression("", "false"));
 	}
+
+	// Convenience...
+
+	@Before
+	public void setup() {
+		initContext();
+	}
+
+	private void initContext() {
+		// "event abc operation foo() var myInt : integer var MyBool : boolean
+		// var myReal : real
+		ExecutionVariable myInt = new ExecutionVariable("myInt", Integer.class,
+				0);
+		context.declareVariable(myInt);
+		ExecutionVariable myBool = new ExecutionVariable("myBool",
+				Boolean.class, false);
+		context.declareVariable(myBool);
+		ExecutionVariable myReal = new ExecutionVariable("myReal",
+				Float.class, 0.0f);
+		context.declareVariable(myReal);
+		ExecutionVariable myString = new ExecutionVariable("myString",
+				String.class, "");
+		context.declareVariable(myString);
+		ExecutionEvent event = new ExecutionEvent("abc", Integer.class);
+		context.declareEvent(event);
+	}
+
+	protected Object getBoolValue() {
+		return context.getVariable("myBool").getValue();
+	}
+
+	protected Object getIntValue() {
+		return context.getVariable("myInt").getValue();
+	}
+
+	protected Object getFloatValue() {
+		return context.getVariable("myReal").getValue();
+	}
+
+	protected Object getStringValue() {
+		return context.getVariable("myString").getValue();
+	}
+
+	protected Object executeWithDefaultScope(String expression) {
+		Scope defaultScope = createDefaultScope();
+		Expression statement = (Expression) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
+		return interpreter.evaluateStatement(statement, context);
+	}
+
+	protected Object execute(String scope, String expression) {
+		Scope defaultScope = createContextScope(scope);
+		Expression statement = (Expression) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
+		return interpreter.evaluateStatement(statement, context);
+	}
+
+	protected Object executeExpression(String scope, String expression) {
+		Scope defaultScope = createContextScope(scope);
+		Statement statement = (Statement) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
+		return interpreter.evaluateStatement(statement, context);
+	}
+
+	public IExecutionContext getContext() {
+		return context;
+	}
+
+	@After
+	public void tearDown() {
+		context = null;
+	}
+
+	protected static final class TestExecutionContext extends
+			ExecutionContextImpl {
+
+		public String lastProcedureId;
+
+		@Override
+		public void call(String procedureId) {
+			super.call(procedureId);
+			lastProcedureId = procedureId;
+		}
+	}
+
 }
