@@ -21,7 +21,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.SGenPackage;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
