@@ -723,7 +723,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	}
 
 	private Scope createValuedEventsScope() {
-		return createContextScope("internal: var myBool : boolean event intEvent : integer, event boolEvent : boolean, event realEvent : real, event stringEvent : string");
+		return createContextScope("internal: var myBool : boolean event intEvent : integer event boolEvent : boolean event realEvent : real event stringEvent : string");
 	}
 
 	protected Type inferType(String expression) {
