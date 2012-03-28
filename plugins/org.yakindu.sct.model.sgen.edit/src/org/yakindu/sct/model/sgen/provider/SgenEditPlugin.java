@@ -7,13 +7,9 @@
 package org.yakindu.sct.model.sgen.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.xtext.common.types.provider.TypesEditPlugin;
-
 import org.yakindu.base.base.provider.BaseEditPlugin;
-
 import org.yakindu.sct.model.sgraph.provider.SGraphEditPlugin;
 
 /**

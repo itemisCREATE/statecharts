@@ -8,7 +8,6 @@ package org.yakindu.sct.model.sgen;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * <!-- begin-user-doc -->
