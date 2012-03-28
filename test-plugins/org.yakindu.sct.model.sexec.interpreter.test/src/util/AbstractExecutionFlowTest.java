@@ -18,15 +18,11 @@ import java.util.Set;
 
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.model.sexec.interpreter.InterpreterModule;
-import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
-import com.google.inject.Guice;
 import com.google.inject.Inject;
-import com.google.inject.util.Modules;
 
 /**
  * 
@@ -39,12 +35,6 @@ public abstract class AbstractExecutionFlowTest {
 	@Inject
 	protected TestModels models;
 
-	public AbstractExecutionFlowTest() {
-		Guice.createInjector(
-				Modules.override(new SequencerModule()).with(
-						new InterpreterModule())).injectMembers(this);
-	}
-
 	protected IExecutionContext context() {
 		return interpreter.getExecutionContext();
 	}
@@ -54,10 +44,7 @@ public abstract class AbstractExecutionFlowTest {
 		interpreter.enter();
 	}
 
-	//
 	// -> Assertion methods...
-	//
-
 	protected void assertVarValue(String variableName, Object value) {
 		ExecutionVariable variable = context().getVariable(variableName);
 		assertNotNull("Variable '" + variableName + "' is not defined",
