@@ -81,7 +81,26 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 		assertIsActive("State2");
 		assertIsActive("State4");
 		assertIsActive("State6");
-
+	}
+	@Test
+	public void testStateIsActive() throws IOException{
+		loadAndconfigureInterpreter(models.createStateIsActiveModel());
+		assertIsActive("R1A");
+		assertIsActive("R2A");
+		context().raiseEvent("Event1", null);
+		interpreter.runCycle();
+		interpreter.runCycle();
+		assertIsActive("R1B");
+		assertIsActive("R2B");
+	}
+	@Test
+	public void testValuedEvents() throws IOException{
+		loadAndconfigureInterpreter(models.createValuedEventsModel());
+		assertIsActive("A");
+		assertIsActive("B");
+		interpreter.runCycle();
+		assertIsActive("C");
+		assertVarValue("myVar", 42);
 	}
 
 }

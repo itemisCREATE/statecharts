@@ -39,6 +39,8 @@ public class TestModels {
 	private static final String GUARD = "Guard.sct";
 	private static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
 	private static final String DEEP_HISTORY = "DeepHistory.sct";
+	private static final String STATE_ACTIVE = "StateIsActive.sct";
+	private static final String VALUED_EVENTS = "ValuedEvents.sct";
 
 	@Inject
 	private ModelSequencer sequencer;
@@ -71,6 +73,24 @@ public class TestModels {
 	 */
 	public ExecutionFlow createDeepHistoryModel() throws IOException {
 		return loadFromResource(DEEP_HISTORY);
+	}
+	/**
+	 * <img src="../../images/StateIsActive.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createStateIsActiveModel() throws IOException {
+		return loadFromResource(STATE_ACTIVE);
+	}
+	/**
+	 * <img src="../../images/ValuedEvents.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createValuedEventsModel() throws IOException {
+		return loadFromResource(VALUED_EVENTS);
 	}
 
 	/**
