@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.stext.test;
+package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
