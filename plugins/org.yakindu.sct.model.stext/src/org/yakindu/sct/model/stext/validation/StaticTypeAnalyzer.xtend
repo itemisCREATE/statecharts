@@ -203,7 +203,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 			return (reference as VariableDefinition).type
 		}
 		if(reference instanceof EventDefinition){
-			return (reference as EventDefinition).type
+			createBoolean
 		}
 		null
 		

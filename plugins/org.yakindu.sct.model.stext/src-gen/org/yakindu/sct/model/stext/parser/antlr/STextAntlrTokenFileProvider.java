@@ -4,6 +4,7 @@
 package org.yakindu.sct.model.stext.parser.antlr;
 
 import java.io.InputStream;
+
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
 public class STextAntlrTokenFileProvider implements IAntlrTokenFileProvider {

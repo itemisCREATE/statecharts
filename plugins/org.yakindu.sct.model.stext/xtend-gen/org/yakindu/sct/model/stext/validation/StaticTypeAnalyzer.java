@@ -45,8 +45,8 @@ import org.yakindu.sct.model.stext.stext.StringLiteral;
 import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.UnaryOperator;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.model.stext.validation.ErrorAcceptor;
 import org.yakindu.sct.model.stext.validation.ITypeAnalyzer;
+import org.yakindu.sct.model.stext.validation.ITypeCheckErrorAcceptor;
 
 @SuppressWarnings("all")
 public class StaticTypeAnalyzer implements ITypeAnalyzer {
@@ -54,11 +54,8 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   @Inject
   private Registry libraries;
   
-  private ErrorAcceptor acceptor;
-  
-  public void setErrorAcceptor(final ErrorAcceptor acceptor2) {
-    this.acceptor = acceptor2;
-  }
+  @Inject
+  private ITypeCheckErrorAcceptor acceptor;
   
   protected Type _inferType(final Statement statement) {
     return null;
@@ -248,7 +245,8 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
           }
         }
       }
-      return combined;
+      Type _createBoolean = this.createBoolean();
+      return _createBoolean;
     }
   }
   
@@ -359,8 +357,7 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
         return _type;
       }
       if ((reference instanceof org.yakindu.sct.model.stext.stext.EventDefinition)) {
-        Type _createBoolean = this.createBoolean();
-        return _createBoolean;
+        this.createBoolean();
       }
       _xblockexpression = (null);
     }
@@ -586,6 +583,28 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
         _operator_or = BooleanExtensions.operator_or(_equals, _equals_1);
       }
       if (_operator_or) {
+        return typeOne;
+      }
+      boolean _operator_and = false;
+      boolean _isInteger = this.isInteger(typeOne);
+      if (!_isInteger) {
+        _operator_and = false;
+      } else {
+        boolean _isReal = this.isReal(typeTwo);
+        _operator_and = BooleanExtensions.operator_and(_isInteger, _isReal);
+      }
+      if (_operator_and) {
+        return typeTwo;
+      }
+      boolean _operator_and_1 = false;
+      boolean _isReal_1 = this.isReal(typeOne);
+      if (!_isReal_1) {
+        _operator_and_1 = false;
+      } else {
+        boolean _isInteger_1 = this.isInteger(typeTwo);
+        _operator_and_1 = BooleanExtensions.operator_and(_isReal_1, _isInteger_1);
+      }
+      if (_operator_and_1) {
         return typeOne;
       }
       LinkedHashSet<Type> _allSuperTypes = this.allSuperTypes(typeOne);
