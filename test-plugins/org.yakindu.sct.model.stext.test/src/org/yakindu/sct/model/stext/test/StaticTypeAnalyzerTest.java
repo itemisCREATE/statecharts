@@ -10,12 +10,12 @@
  */
 package org.yakindu.sct.model.stext.test;
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -27,7 +27,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
-import org.yakindu.sct.model.stext.validation.ErrorAcceptor;
 import org.yakindu.sct.model.stext.validation.ITypeAnalyzer;
 import org.yakindu.sct.model.stext.validation.TypeCheckException;
 
@@ -45,11 +44,6 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	private ITypeAnalyzer analyzer;
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
-
-	@Before
-	public void setup() {
-		analyzer.setErrorAcceptor(new ErrorAcceptor());
-	}
 
 	// Unary
 	@Test
@@ -78,9 +72,9 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	public void testAddSuccess() {
 		assertTrue(analyzer.isInteger(inferType("1 + 2")));
 		assertTrue(analyzer.isInteger(inferType("myInt + 2")));
-		assertTrue(analyzer.isReal(inferType("1.0 + 2")));
+		assertTrue(analyzer.isReal(inferType("1.1 + 2")));
 		assertTrue(analyzer.isReal(inferType("2 + 1.0")));
-		assertTrue(analyzer.isInteger(inferType("1 + 2 + 3.0")));
+		assertTrue(analyzer.isReal(inferType("1 + 2 + 3.0")));
 	}
 
 	@Test
@@ -139,7 +133,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 		assertTrue(analyzer.isReal(inferType("1.0 - 2")));
 		assertTrue(analyzer.isReal(inferType("2 - 1.0")));
 		assertTrue(analyzer.isReal(inferType("myReal - 1.0")));
-		assertTrue(analyzer.isInteger(inferType("1 - 2 - 3.0")));
+		assertTrue(analyzer.isReal(inferType("1 - 2 - 3.0")));
 	}
 
 	@Test
@@ -197,7 +191,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 		assertTrue(analyzer.isReal(inferType("myInt * myReal")));
 		assertTrue(analyzer.isReal(inferType("1.0 * 2")));
 		assertTrue(analyzer.isReal(inferType("2 * 1.0")));
-		assertTrue(analyzer.isInteger(inferType("1 * 2 * 3.0")));
+		assertTrue(analyzer.isReal(inferType("1 * 2 * 3.0")));
 	}
 
 	@Test
@@ -255,7 +249,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 		assertTrue(analyzer.isInteger(inferType("1 / myInt")));
 		assertTrue(analyzer.isReal(inferType("1.0 / 2")));
 		assertTrue(analyzer.isReal(inferType("2 / 1.0")));
-		assertTrue(analyzer.isInteger(inferType("1 / 2 / 3.0")));
+		assertTrue(analyzer.isReal(inferType("1 / 2 / 3.0")));
 	}
 
 	@Test
@@ -313,7 +307,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 		assertTrue(analyzer.isReal(inferType("1.0 % 2")));
 		assertTrue(analyzer.isReal(inferType("2 % 1.0")));
 		assertTrue(analyzer.isReal(inferType("2 % myReal")));
-		assertTrue(analyzer.isInteger(inferType("1 % 2 % 3.0")));
+		assertTrue(analyzer.isReal(inferType("1 % 2 % 3.0")));
 	}
 
 	@Test
@@ -627,14 +621,15 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	public void testAssignmentException2() {
 		exception.expect(TypeCheckException.class);
 		exception
-				.expectMessage("Can not assign a value of type boolean to a variable of type boolean");
-		inferType("myInt = myBoolean");
+				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
+		inferType("myInt = myBool");
 	}
 
 	@Test
 	public void testComplexExpressionsSuccess() {
 		analyzer.isBoolean(inferType("((((3 * myInt) + 5) % 2) > 97) || false"));
 		analyzer.isBoolean(inferType("!true != myBool && (3 > (myReal * 5 + 3))"));
+		analyzer.isInteger(inferType("3 * 3 + 7 / (3 * myInt % 8)"));
 	}
 
 	// TODO: BitwiseOrExpression, BitwiseAndExpression, BitwiseXOrExpression
@@ -734,6 +729,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	protected Type inferType(String expression) {
 		EObject statement = super.parseExpression(expression,
 				super.createDefaultScope(), Expression.class.getSimpleName());
+		assertNotNull(statement);
 		return analyzer.inferType((Statement) statement);
 	}
 

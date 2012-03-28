@@ -63,12 +63,11 @@ import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor
  */
 class StaticTypeAnalyzer implements ITypeAnalyzer {
 	
-	@Inject TypeLibraryLocation$Registry libraries
-	ErrorAcceptor acceptor
+	@Inject 
+	TypeLibraryLocation$Registry libraries
+	@Inject
+	ITypeCheckErrorAcceptor acceptor
 	
-	override void setErrorAcceptor(ErrorAcceptor acceptor2) {
-		acceptor = acceptor2
-	}
 	
 	def dispatch inferType(Statement statement){
 		null
@@ -150,7 +149,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 				return null
 			}
 		}
-		return combined
+		return createBoolean
 		
 	}
 	
@@ -210,14 +209,6 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		
 	}
 	
-//	def dispatch check(ElementReferenceExpression expression){
-//		var declaration = expression.value
-//		if(declaration instanceof VariableDefinition){
-//			return (declaration as VariableDefinition).type.toJavaType
-//		}
-//		return null;
-//	}	
-
 	def createBoolean() {
 		val type = TypesFactory::eINSTANCE.createType()
 		type.name = "boolean"
@@ -312,6 +303,13 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 			|| typeOne.name.equals(typeTwo.name)) {
 			return typeOne;
 		}
+		if(typeOne.integer && typeTwo.real){
+			return typeTwo
+		}
+		if(typeOne.real && typeTwo.integer){
+			return typeOne
+		}
+		
 		val typesOne = typeOne.allSuperTypes
 		val typesTwo = typeTwo.allSuperTypes
 		

@@ -19,8 +19,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(StaticTypeAnalyzer.class)
 public interface ITypeAnalyzer {
 
-	public void setErrorAcceptor(final ErrorAcceptor acceptor);
-
 	boolean isBoolean(Type type);
 
 	boolean isInteger(Type type);
