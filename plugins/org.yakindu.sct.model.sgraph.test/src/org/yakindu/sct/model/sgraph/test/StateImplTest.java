@@ -1,18 +1,28 @@
+/**
+ * Copyright (c) 2011 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
 package org.yakindu.sct.model.sgraph.test;
 
-import static org.junit.Assert.*;
-import org.eclipse.emf.common.util.BasicDiagnostic;
+import junit.framework.TestCase;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.util.SGraphValidator;
-import org.yakindu.sct.model.stext.stext.StextFactory;
-
-import junit.framework.TestCase;
-
+/**
+ * 
+ * @author schwertfeger
+ *
+ */
 public class StateImplTest extends TestCase {
 	protected SGraphFactory factory;
 
