@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_mYUJQHjXEeGKl8JlHfi_Yg" specification="internal:&#xD;&#xA;event IntegerEvent : integer&#xD;&#xA;var myVar : integer" name="ValuedEvents">
+  <sgraph:Statechart xmi:id="_mYUJQHjXEeGKl8JlHfi_Yg" specification="interface:&#xD;&#xA;in event event1&#xD;&#xA;interface:&#xD;&#xA;in event event2" name="ValuedEvents">
     <regions xmi:id="_mYUwUnjXEeGKl8JlHfi_Yg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_mYXMkXjXEeGKl8JlHfi_Yg">
         <outgoingTransitions xmi:id="_mYcsIXjXEeGKl8JlHfi_Yg" target="_mYZo0XjXEeGKl8JlHfi_Yg"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_mYZo0XjXEeGKl8JlHfi_Yg" specification="entry / raise IntegerEvent : 2 * 21" name="A" incomingTransitions="_mYcsIXjXEeGKl8JlHfi_Yg"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_mYZo0XjXEeGKl8JlHfi_Yg" specification="" name="A" incomingTransitions="_mYcsIXjXEeGKl8JlHfi_Yg"/>
     </regions>
     <regions xmi:id="_4BMZkHjZEeGKl8JlHfi_Yg">
       <vertices xsi:type="sgraph:Entry" xmi:id="_4h2PkHjZEeGKl8JlHfi_Yg">
@@ -65,7 +65,7 @@
       <children xsi:type="notation:Shape" xmi:id="_mYfvcHjXEeGKl8JlHfi_Yg" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_mYfvcXjXEeGKl8JlHfi_Yg"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_mYgWgHjXEeGKl8JlHfi_Yg" x="10" y="10" width="236" height="91"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_mYgWgHjXEeGKl8JlHfi_Yg" x="20" y="40" width="236" height="91"/>
     </children>
     <children xmi:id="_4BWxoHjZEeGKl8JlHfi_Yg" type="Region" element="_4BMZkHjZEeGKl8JlHfi_Yg">
       <children xsi:type="notation:DecorationNode" xmi:id="_4BX_wHjZEeGKl8JlHfi_Yg" type="RegionName">
