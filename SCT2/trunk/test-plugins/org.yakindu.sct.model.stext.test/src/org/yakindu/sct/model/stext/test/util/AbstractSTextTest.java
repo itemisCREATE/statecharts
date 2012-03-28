@@ -12,6 +12,7 @@ package org.yakindu.sct.model.stext.test.util;
 
 import java.io.StringReader;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
@@ -42,17 +43,19 @@ public abstract class AbstractSTextTest {
 
 	protected EObject parseExpression(String expression, Scope context,
 			String ruleName) {
+		resource.setURI(URI.createPlatformPluginURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
 		IParseResult result = parser.parse(parserRule, new StringReader(
 				expression));
 		EObject rootASTElement = result.getRootASTElement();
 		resource.getContents().add(rootASTElement);
-		if (context != null)
-			resource.getContents().add(context);
 		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
+		if (context != null) {
+			linker.linkModel(context, diagnosticsConsumer);
+			resource.getContents().add(context);
+		}
 		linker.linkModel(result.getRootASTElement(), diagnosticsConsumer);
-		linker.linkModel(context, diagnosticsConsumer);
 		if (result.hasSyntaxErrors()) {
 			StringBuilder errorMessages = new StringBuilder();
 			Iterable<INode> syntaxErrors = result.getSyntaxErrors();
