@@ -7,7 +7,6 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.yakindu.base.types.Property;
-
 import org.yakindu.sct.model.sgraph.Variable;
 
 /**

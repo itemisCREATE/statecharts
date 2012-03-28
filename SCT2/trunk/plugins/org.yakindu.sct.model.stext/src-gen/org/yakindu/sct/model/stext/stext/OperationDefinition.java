@@ -7,10 +7,8 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
-
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
-
 import org.yakindu.sct.model.sgraph.Declaration;
 
 /**

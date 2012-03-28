@@ -8,19 +8,14 @@ package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Trigger;
-
 import org.yakindu.sct.model.sgraph.impl.DeclarationImpl;
-
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionProperties;
 import org.yakindu.sct.model.stext.stext.StextPackage;
