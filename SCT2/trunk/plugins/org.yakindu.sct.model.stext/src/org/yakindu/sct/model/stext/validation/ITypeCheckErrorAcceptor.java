@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 itemis AG and others.
+ * Copyright (c) 2012 itemis AG and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -11,9 +11,10 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
-public class ErrorAcceptor {
+import com.google.inject.ImplementedBy;
 
-	public void acceptError(String msg) {
-		throw new TypeCheckException(msg);
-	}
+@ImplementedBy(ExceptionErrorAcceptor.class)
+public interface ITypeCheckErrorAcceptor {
+
+	public void acceptError(String msg);
 }

@@ -52,8 +52,8 @@ public abstract class AbstractSTextTest {
 		resource.getContents().add(rootASTElement);
 		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
 		if (context != null) {
-			linker.linkModel(context, diagnosticsConsumer);
 			resource.getContents().add(context);
+			linker.linkModel(context, diagnosticsConsumer);
 		}
 		linker.linkModel(result.getRootASTElement(), diagnosticsConsumer);
 		if (result.hasSyntaxErrors()) {

@@ -43,14 +43,11 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
 
@@ -60,15 +57,21 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
  * Several validations for nonsensical expressions.
  * 
  * @author muehlbrandt
+ * @auhor muelder
  * 
  */
 public class STextJavaValidator extends AbstractSTextJavaValidator {
+
+	public static final String ONLY_ONE_INTERFACE = "Only one default/unnamed interface is allowed.";
+	public static final String IN_OUT_DECLARATIONS = "In/Out declarations are not allowed in internal scope.";
+	public static final String LOCAL_DECLARATIONS = "Local declarations are not allowed in interface scope.";
 
 	@Inject
 	private StaticTypeAnalyzer analyzer;
 
 	@Check
 	public void checkOperationArguments(final FeatureCall call) {
+		// TODO: TypeCheck Operations
 		if (call.getFeature() instanceof Operation) {
 			Operation operation = (Operation) call.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
@@ -186,32 +189,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkVariableDefinition(VariableDefinition variable) {
-		if (variable.eContainer() instanceof SimpleScope) {
-			error("Variables can not be defined in states.", variable,
-					BasePackage.Literals.NAMED_ELEMENT__NAME,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-		}
-	}
-	@Check(CheckType.FAST)
 	public void checkEventDefinition(EventDefinition event) {
 		if (event.eContainer() instanceof InterfaceScope
 				&& event.getDirection() == Direction.LOCAL) {
-			error("Local declarations are not allowed in interface scope.",
+			error(LOCAL_DECLARATIONS,
 					StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
 		}
 		if (event.eContainer() instanceof InternalScope
 				&& event.getDirection() != Direction.LOCAL) {
-			error("In/Out declarations are not allowed in internal scope.",
+			error(IN_OUT_DECLARATIONS,
 					StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
-		}
-	}
-	@Check(CheckType.FAST)
-	public void checkOperationDefinition(OperationDefinition operation) {
-		if (operation.eContainer() instanceof SimpleScope) {
-			error("Operations can not be defined in states.", operation,
-					StextPackage.Literals.OPERATION_DEFINITION__PARAMS,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
 
@@ -236,18 +223,15 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 		if (defaultInterfaces.size() > 1) {
-			for (InterfaceScope scope : defaultInterfaces) {
-				error("It can only exist one default/unnamed interface", scope,
-						BasePackage.Literals.NAMED_ELEMENT__NAME,
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-			}
+			error(ONLY_ONE_INTERFACE, statechart,
+					BasePackage.Literals.NAMED_ELEMENT__NAME,
+					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
-	
+
 	@Check
 	public void checkExpression(final Statement statement) {
 		try {
-			analyzer.setErrorAcceptor(new ErrorAcceptor());
 			analyzer.check(statement);
 		} catch (TypeCheckException e) {
 			error(e.getMessage(), null);
