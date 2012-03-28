@@ -66,7 +66,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	@Inject TypeLibraryLocation$Registry libraries
 	ErrorAcceptor acceptor
 	
-	def void setErrorAcceptor(ErrorAcceptor acceptor2) {
+	override void setErrorAcceptor(ErrorAcceptor acceptor2) {
 		acceptor = acceptor2
 	}
 	
@@ -258,19 +258,6 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		return type
 	}
 	
-//	def toJavaType(Type type){
-//		if(isBoolean(type)){
-//			return typeof(Boolean)
-//		}
-//		else if(isInteger(type)){
-//			return typeof(Number)
-//		}
-//		else if(isReal(type)){
-//			return typeof(Number)
-//		} 
-//		return typeof(Void)
-//	}
-	
 	def Type assertIsNumber(Type object, String operator){
 		if(!object.real && !object.integer) {
 			error("operator '" +operator+"' can only be applied to numbers!")
@@ -284,7 +271,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		}
 		return object
 	}
-	
+	 
 	def error(String msg){
 		if (acceptor != null) {
 			acceptor.acceptError(msg)

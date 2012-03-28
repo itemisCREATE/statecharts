@@ -67,14 +67,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Inject
 	private StaticTypeAnalyzer analyzer;
 
-	// @Check
-	// public void checkOperationCall(final FeatureCall call) {
-	// if (! (call.getFeature() instanceof Operation) /*&&
-	// !call.isOperationCall()*/) {
-	// error(call.getFeature().getName()
-	// + " is not an operation ", null);
-	// }
-	// }
 	@Check
 	public void checkOperationArguments(final FeatureCall call) {
 		if (call.getFeature() instanceof Operation) {
@@ -84,20 +76,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			if (parameters.size() != args.size()) {
 				error("Wrong number of arguments, expected " + parameters, null);
 			}
-		}
-	}
-
-	@Check
-	public void checkExpression(final Statement statement) {
-		try {
-			analyzer.setErrorAcceptor(new ErrorAcceptor());
-			analyzer.check(statement);
-		} catch (TypeCheckException e) {
-			error(e.getMessage(), null);
-		} catch (IllegalArgumentException e) {
-			// This happens, when the expression is not completed for Unhandled
-			// parameter types: [null]
-			// We can safely ignore this exception
 		}
 	}
 
@@ -208,14 +186,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkVariable(VariableDefinition variable) {
+	public void checkVariableDefinition(VariableDefinition variable) {
 		if (variable.eContainer() instanceof SimpleScope) {
 			error("Variables can not be defined in states.", variable,
 					BasePackage.Literals.NAMED_ELEMENT__NAME,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
-
 	@Check(CheckType.FAST)
 	public void checkEventDefinition(EventDefinition event) {
 		if (event.eContainer() instanceof InterfaceScope
@@ -229,9 +206,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
 		}
 	}
-
 	@Check(CheckType.FAST)
-	public void checkOperation(OperationDefinition operation) {
+	public void checkOperationDefinition(OperationDefinition operation) {
 		if (operation.eContainer() instanceof SimpleScope) {
 			error("Operations can not be defined in states.", operation,
 					StextPackage.Literals.OPERATION_DEFINITION__PARAMS,
@@ -265,6 +241,20 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 						BasePackage.Literals.NAMED_ELEMENT__NAME,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 			}
+		}
+	}
+	
+	@Check
+	public void checkExpression(final Statement statement) {
+		try {
+			analyzer.setErrorAcceptor(new ErrorAcceptor());
+			analyzer.check(statement);
+		} catch (TypeCheckException e) {
+			error(e.getMessage(), null);
+		} catch (IllegalArgumentException e) {
+			// This happens, when the expression is not completed for Unhandled
+			// parameter types: [null]
+			// We can safely ignore this exception
 		}
 	}
 
