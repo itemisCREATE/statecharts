@@ -12,15 +12,21 @@ package org.yakindu.sct.model.sexec.interpreter.test;
 
 import java.io.IOException;
 
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import util.AbstractExecutionFlowTest;
+import util.SExecInjectionProvider;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@RunWith(XtextRunner.class)
+@InjectWith(SExecInjectionProvider.class)
 public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 
 	@Test
@@ -71,12 +77,11 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 		interpreter.runCycle();
 		interpreter.runCycle();
 		interpreter.runCycle();
-		//Now, the deep history states should be active
+		// Now, the deep history states should be active
 		assertIsActive("State2");
 		assertIsActive("State4");
 		assertIsActive("State6");
-		
-		
+
 	}
 
 }

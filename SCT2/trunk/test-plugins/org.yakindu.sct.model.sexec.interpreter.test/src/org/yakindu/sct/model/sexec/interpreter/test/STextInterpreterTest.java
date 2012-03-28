@@ -31,7 +31,11 @@ import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
 import com.google.inject.Inject;
 
-
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
 public class STextInterpreterTest extends AbstractSTextTest {
@@ -143,6 +147,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("myBool = 1.0f == 1.0f");
 		assertEquals(true, getBoolValue());
 	}
+
 	@Test
 	public void testStringEqual() {
 		executeWithDefaultScope("myBool = 'string' == 'string'");
@@ -166,6 +171,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("myBool = 1.0f != 2.0f");
 		assertEquals(true, getBoolValue());
 	}
+
 	@Test
 	public void testStringNotEqual() {
 		executeWithDefaultScope("myBool = 'string' != 'string2'");
@@ -647,8 +653,8 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		ExecutionVariable myBool = new ExecutionVariable("myBool",
 				Boolean.class, false);
 		context.declareVariable(myBool);
-		ExecutionVariable myReal = new ExecutionVariable("myReal",
-				Float.class, 0.0f);
+		ExecutionVariable myReal = new ExecutionVariable("myReal", Float.class,
+				0.0f);
 		context.declareVariable(myReal);
 		ExecutionVariable myString = new ExecutionVariable("myString",
 				String.class, "");
