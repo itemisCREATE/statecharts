@@ -22,7 +22,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.yakindu.base.types.Type;
+import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.ErrorAcceptor;
@@ -606,6 +609,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				.expectMessage("Incompatible operands real and boolean for operator '!='");
 		inferType("1.0 != false");
 	}
+
 	@Test
 	public void testAssignmentSuccess() {
 		inferType("myInt = 5 * 3");
@@ -621,6 +625,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
 		inferType("myInt = true");
 	}
+
 	@Test
 	public void testAssignmentException2() {
 		exception.expect(TypeCheckException.class);
@@ -636,6 +641,48 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	}
 
 	// TODO: BitwiseOrExpression, BitwiseAndExpression, BitwiseXOrExpression
+
+	@Test
+	public void testEventRaisingSuccess() {
+
+		Scope context = createValuedEventsScope();
+		// int events
+		EObject statement = super.parseExpression("raise intEvent : 42",
+				context, EventRaisingExpression.class.getSimpleName());
+		analyzer.inferType((Statement) statement);
+		// bool events
+		statement = super.parseExpression("raise boolEvent : myBool", context,
+				EventRaisingExpression.class.getSimpleName());
+		analyzer.inferType((Statement) statement);
+		// real events
+		statement = super.parseExpression("raise realEvent : 2.0 - 3.0",
+				context, EventRaisingExpression.class.getSimpleName());
+		analyzer.inferType((Statement) statement);
+		// string events
+		statement = super.parseExpression("raise stringEvent : 'string'",
+				context, EventRaisingExpression.class.getSimpleName());
+		analyzer.inferType((Statement) statement);
+	}
+
+	public void testEventRaisingException1() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
+		EObject statement = super.parseExpression("raise intEvent : true",
+				createValuedEventsScope(),
+				EventRaisingExpression.class.getSimpleName());
+		analyzer.inferType((Statement) statement);
+	}
+
+	public void testEventRaisingException2() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
+		EObject statement = super.parseExpression("raise intEvent : myBool",
+				createValuedEventsScope(),
+				EventRaisingExpression.class.getSimpleName());
+		analyzer.inferType((Statement) statement);
+	}
 
 	/**
 	 * Convenience from here...
@@ -683,9 +730,13 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				.expectMessage("operator '!' can only be applied to boolean values!");
 	}
 
+	private Scope createValuedEventsScope() {
+		return createContextScope("internal: var myBool : boolean event intEvent : integer, event boolEvent : boolean, event realEvent : real, event stringEvent : string");
+	}
+
 	protected Type inferType(String expression) {
 		EObject statement = super.parseExpression(expression,
-				super.createDefaultScope(), "Expression");
+				super.createDefaultScope(), Expression.class.getSimpleName());
 		return analyzer.inferType((Statement) statement);
 	}
 
