@@ -14,6 +14,7 @@ import org.eclipse.xtext.service.AbstractElementFinder.*;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess;
 
+@SuppressWarnings("all")
 @Singleton
 public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	
