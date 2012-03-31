@@ -53,6 +53,7 @@ import org.yakindu.base.types.TypesPackage
 import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor
+import org.eclipse.xtext.EcoreUtil2
  
 /**
  * 
@@ -203,7 +204,10 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 			return (reference as VariableDefinition).type
 		}
 		if(reference instanceof EventDefinition){
-			createBoolean
+			if(expression.eContainer instanceof EventRaisingExpression)
+				return (reference as EventDefinition).type
+			else
+				return createBoolean
 		}
 		null
 		

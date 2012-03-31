@@ -633,7 +633,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	}
 
 	// TODO: BitwiseOrExpression, BitwiseAndExpression, BitwiseXOrExpression
-
+	
 	@Test
 	public void testEventRaisingSuccess() {
 
@@ -655,7 +655,13 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				context, EventRaisingExpression.class.getSimpleName());
 		analyzer.inferType((Statement) statement);
 	}
-
+	@Test
+	public void testEventIsRaisedSuccess(){
+		EObject statement = super.parseExpression("myBool = abc",
+				createDefaultScope(), Expression.class.getSimpleName());
+		analyzer.inferType((Statement) statement);
+	}
+	@Test
 	public void testEventRaisingException1() {
 		exception.expect(TypeCheckException.class);
 		exception
@@ -665,7 +671,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				EventRaisingExpression.class.getSimpleName());
 		analyzer.inferType((Statement) statement);
 	}
-
+	@Test
 	public void testEventRaisingException2() {
 		exception.expect(TypeCheckException.class);
 		exception
@@ -675,7 +681,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				EventRaisingExpression.class.getSimpleName());
 		analyzer.inferType((Statement) statement);
 	}
-
+	
 	/**
 	 * Convenience from here...
 	 */
@@ -723,7 +729,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	}
 
 	private Scope createValuedEventsScope() {
-		return createContextScope("internal: var myBool : boolean event intEvent : integer event boolEvent : boolean event realEvent : real event stringEvent : string");
+		return createContextScope("internal: var myBool : boolean event intEvent : integer = 22 event boolEvent : boolean event realEvent : real event stringEvent : string");
 	}
 
 	protected Type inferType(String expression) {

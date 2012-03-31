@@ -26,6 +26,7 @@ import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -48,6 +49,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
 
@@ -230,7 +232,26 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check
+	public void checkVariableDefinitionInitialValue(
+			VariableDefinition definition) {
+		Type definitionType = definition.getType();
+
+		try {
+			Type inferType = analyzer.inferType(definition.getInitialValue());
+			Type combine = analyzer.combine(definitionType, inferType);
+			if (combine == null) {
+				error("Can not assign a value of type '" + inferType.getName()
+						+ "' to a variable of type '" + definitionType + "'",
+						StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
+			}
+		} catch (TypeCheckException e) {
+			error(e.getMessage(), null);
+		}
+	}
+
+	@Check
 	public void checkExpression(final Statement statement) {
+		System.out.println(statement);
 		try {
 			analyzer.check(statement);
 		} catch (TypeCheckException e) {
