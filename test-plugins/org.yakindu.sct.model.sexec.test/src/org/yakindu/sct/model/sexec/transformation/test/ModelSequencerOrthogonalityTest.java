@@ -1,18 +1,28 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.junit.Assert.*;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
-import static org.yakindu.sct.model.sexec.transformation.test.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findStateFullyQualified;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createState;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createTransition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEntryAssignment;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createExitAssignment;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
 
 import org.junit.Test;
-import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.StateSwitch;
-import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Region;

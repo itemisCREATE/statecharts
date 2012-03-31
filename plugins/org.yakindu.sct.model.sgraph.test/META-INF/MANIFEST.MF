@@ -12,3 +12,4 @@ Require-Bundle: org.yakindu.sct.model.sgraph;bundle-version="1.0.0",
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Vendor: YAKINDU
+Export-Package: org.yakindu.sct.model.sgraph.test.util

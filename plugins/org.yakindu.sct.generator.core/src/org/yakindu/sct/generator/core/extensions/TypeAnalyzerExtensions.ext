@@ -20,3 +20,9 @@ boolean isBoolean(Type t):
 
 boolean isString(Type t):
 	JAVA org.yakindu.sct.generator.core.extensions.TypeAnalyzerExtensions.isString(org.yakindu.base.types.Type);
+
+boolean isVoid(Type t):
+	t.name == null || t.name == "void";
+
+boolean isVoid(Void v):
+	true;

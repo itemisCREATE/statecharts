@@ -1,24 +1,18 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntry;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createEntryAssignment;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createInterfaceScope;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createRegion;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createState;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createStatechart;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createTransition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil._createVariableDefinition;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createState;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createTransition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEntryAssignment;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
 
-import java.util.ArrayList;
-
-import org.eclipse.emf.common.util.EList;
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -30,17 +24,12 @@ import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.Step;
-import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.MinimalTSC;
-import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.InitializingTSC;
-import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.OrthogonalFlatTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.SimpleFlatTSC;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
