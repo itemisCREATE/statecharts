@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -23,6 +24,7 @@ import org.yakindu.sct.model.stext.stext.BitwiseOrExpression;
 import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
@@ -357,7 +359,14 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
         return _type;
       }
       if ((reference instanceof org.yakindu.sct.model.stext.stext.EventDefinition)) {
-        this.createBoolean();
+        EObject _eContainer = expression.eContainer();
+        if ((_eContainer instanceof org.yakindu.sct.model.stext.stext.EventRaisingExpression)) {
+          Type _type_1 = ((EventDefinition) reference).getType();
+          return _type_1;
+        } else {
+          Type _createBoolean = this.createBoolean();
+          return _createBoolean;
+        }
       }
       _xblockexpression = (null);
     }
