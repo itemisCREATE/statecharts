@@ -93,7 +93,7 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	@Override
 	public EditPart getTargetEditPart(Request request) {
 
-		if (request.getType().toString() == RequestConstants.REQ_PASTE) {
+		if (RequestConstants.REQ_PASTE.equals(request.getType().toString())) {
 			for (Object object : getChildren()) {
 				if (object instanceof RegionCompartmentEditPart) {
 					return (EditPart) object;
