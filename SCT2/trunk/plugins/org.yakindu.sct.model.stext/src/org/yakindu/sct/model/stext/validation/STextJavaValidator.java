@@ -71,9 +71,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Inject
 	private StaticTypeAnalyzer analyzer;
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkOperationArguments(final FeatureCall call) {
-		// TODO: TypeCheck Operations
 		if (call.getFeature() instanceof Operation) {
 			Operation operation = (Operation) call.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
@@ -231,11 +230,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkVariableDefinitionInitialValue(
 			VariableDefinition definition) {
 		Type definitionType = definition.getType();
-
+		if(definition.getInitialValue() == null)
+			return;
 		try {
 			Type inferType = analyzer.inferType(definition.getInitialValue());
 			Type combine = analyzer.combine(definitionType, inferType);
@@ -244,14 +244,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 						+ "' to a variable of type '" + definitionType + "'",
 						StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
 			}
-		} catch (TypeCheckException e) {
+		} catch (Exception e) {
 			error(e.getMessage(), null);
 		}
 	}
 
-	@Check
+	@Check(CheckType.FAST)
 	public void checkExpression(final Statement statement) {
-		System.out.println(statement);
 		try {
 			analyzer.check(statement);
 		} catch (TypeCheckException e) {
