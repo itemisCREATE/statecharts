@@ -15,7 +15,6 @@ import com.google.inject.Injector;
  * @author axel terfloth
  * 
  */
-@SuppressWarnings("unused")
 public class ModelSequencerTest extends Assert {
 
 	@Inject

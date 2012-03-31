@@ -10,6 +10,9 @@
 import stext;
 import sexec;
 import sgraph;
+import types;
+
+extension org::yakindu::sct::generator::core::extensions::TypeAnalyzerExtensions;
 
 List getDeclaredVariables(ExecutionFlow flow) : flow.scopes.declarations.typeSelect(VariableDefinition);
 
@@ -17,15 +20,15 @@ getInterfaceScope(ExecutionFlow this) : scopes.typeSelect(InterfaceScope);
 getInterfaceScopeDeclarations(ExecutionFlow this) : getInterfaceScope().declarations;
 getInterfaceScopeVariables(ExecutionFlow this) : getInterfaceScopeDeclarations().typeSelect(VariableDefinition);
 getInterfaceScopeEvents(ExecutionFlow this) : getInterfaceScopeDeclarations().typeSelect(EventDefinition);
-getInterfaceScopeVoidEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type==Type::void);
-getInterfaceScopeValuedEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type!=Type::void);
+getInterfaceScopeVoidEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|e.type.isVoid());
+getInterfaceScopeValuedEvents(ExecutionFlow this) : getInterfaceScopeEvents().select(e|!e.type.isVoid());
 
 getInternalScope(ExecutionFlow this) : scopes.typeSelect(InternalScope);
 getInternalScopeDeclarations(ExecutionFlow this) : getInternalScope().declarations;
 getInternalScopeVariables(ExecutionFlow this) :	getInternalScopeDeclarations().typeSelect(VariableDefinition);
 getInternalScopeEvents(ExecutionFlow this) : getInternalScopeDeclarations().typeSelect(EventDefinition);
-getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(e|e.type==Type::void);
-getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|e.type!=Type::void);
+getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(e|e.type.isVoid());
+getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|!e.type.isVoid());
 
 getTimeEvents(ExecutionFlow this) : scopes.typeSelect(Scope).declarations.typeSelect(TimeEvent);
 
@@ -36,13 +39,13 @@ boolean hasOutgoingEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).isEmpty;
 
 boolean hasOutgoingVoidEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|event.type == Type::void).isEmpty;
+	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|event.type.isVoid()).isEmpty;
 	
 boolean hasOutgoingValuedEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|event.type != Type::void).isEmpty;
+	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|!event.type.isVoid()).isEmpty;
 
 boolean hasEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.type == Type::void).isEmpty;
+	!declarations.typeSelect(EventDefinition).select(event|event.type.isVoid()).isEmpty;
 	
 boolean hasValuedEvents(Scope this) :
-	!declarations.typeSelect(EventDefinition).select(event|event.type != Type::void).isEmpty;
+	!declarations.typeSelect(EventDefinition).select(event|!event.type.isVoid()).isEmpty;

@@ -1,26 +1,29 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.junit.Assert.*;
-import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
+import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.flattenSequenceStepsAsList;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory.*;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
 
 import java.util.List;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.CheckRef;
-import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
-import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
-import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
