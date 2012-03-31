@@ -201,22 +201,6 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
       Expression _rightOperand = expression.getRightOperand();
       Type _inferType_1 = this.inferType(_rightOperand);
       final Type rightType = _inferType_1;
-      Type _combine = this.combine(leftType, rightType);
-      final Type combined = _combine;
-      boolean _operator_equals = ObjectExtensions.operator_equals(combined, null);
-      if (_operator_equals) {
-        String _name = leftType.getName();
-        String _operator_plus = StringExtensions.operator_plus("Incompatible operands ", _name);
-        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " and ");
-        String _name_1 = rightType.getName();
-        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _name_1);
-        String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, " for operator \'");
-        RelationalOperator _operator = expression.getOperator();
-        String _literal = _operator.getLiteral();
-        String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, _literal);
-        String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "\'");
-        this.error(_operator_plus_5);
-      }
       boolean _operator_and = false;
       boolean _isBoolean = this.isBoolean(leftType);
       if (!_isBoolean) {
@@ -227,23 +211,42 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
       }
       if (_operator_and) {
         boolean _operator_and_1 = false;
-        RelationalOperator _operator_1 = expression.getOperator();
-        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_operator_1, RelationalOperator.EQUALS);
+        RelationalOperator _operator = expression.getOperator();
+        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_operator, RelationalOperator.EQUALS);
         if (!_operator_notEquals) {
           _operator_and_1 = false;
         } else {
-          RelationalOperator _operator_2 = expression.getOperator();
-          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_operator_2, RelationalOperator.NOT_EQUALS);
+          RelationalOperator _operator_1 = expression.getOperator();
+          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_operator_1, RelationalOperator.NOT_EQUALS);
           _operator_and_1 = BooleanExtensions.operator_and(_operator_notEquals, _operator_notEquals_1);
         }
         if (_operator_and_1) {
           {
+            RelationalOperator _operator_2 = expression.getOperator();
+            String _literal = _operator_2.getLiteral();
+            String _operator_plus = StringExtensions.operator_plus("operator \'", _literal);
+            String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\' can not be applied to boolean values!");
+            this.error(_operator_plus_1);
+            return null;
+          }
+        }
+      } else {
+        {
+          Type _combine = this.combine(leftType, rightType);
+          final Type combined = _combine;
+          boolean _operator_equals = ObjectExtensions.operator_equals(combined, null);
+          if (_operator_equals) {
+            String _name = leftType==null?(String)null:leftType.getName();
+            String _operator_plus_2 = StringExtensions.operator_plus("Incompatible operands ", _name);
+            String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, " and ");
+            String _name_1 = rightType==null?(String)null:rightType.getName();
+            String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, _name_1);
+            String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, " for operator \'");
             RelationalOperator _operator_3 = expression.getOperator();
             String _literal_1 = _operator_3.getLiteral();
-            String _operator_plus_6 = StringExtensions.operator_plus("operator \'", _literal_1);
-            String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, "\' can not be applied to boolean values!");
+            String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, _literal_1);
+            String _operator_plus_7 = StringExtensions.operator_plus(_operator_plus_6, "\'");
             this.error(_operator_plus_7);
-            return null;
           }
         }
       }
@@ -383,7 +386,9 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   }
   
   protected Type _inferType(final EventValueReferenceExpression expression) {
-    return null;
+    Expression _value = expression.getValue();
+    Type _inferType = this.inferType(_value);
+    return _inferType;
   }
   
   protected Type _getType(final IntLiteral literal) {
@@ -582,16 +587,27 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   public Type combine(final Type typeOne, final Type typeTwo) {
     {
       boolean _operator_or = false;
+      boolean _operator_equals = ObjectExtensions.operator_equals(typeOne, null);
+      if (_operator_equals) {
+        _operator_or = true;
+      } else {
+        boolean _operator_equals_1 = ObjectExtensions.operator_equals(typeTwo, null);
+        _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+      }
+      if (_operator_or) {
+        return null;
+      }
+      boolean _operator_or_1 = false;
       boolean _equals = typeOne.equals(typeTwo);
       if (_equals) {
-        _operator_or = true;
+        _operator_or_1 = true;
       } else {
         String _name = typeOne.getName();
         String _name_1 = typeTwo.getName();
         boolean _equals_1 = _name.equals(_name_1);
-        _operator_or = BooleanExtensions.operator_or(_equals, _equals_1);
+        _operator_or_1 = BooleanExtensions.operator_or(_equals, _equals_1);
       }
-      if (_operator_or) {
+      if (_operator_or_1) {
         return typeOne;
       }
       boolean _operator_and = false;

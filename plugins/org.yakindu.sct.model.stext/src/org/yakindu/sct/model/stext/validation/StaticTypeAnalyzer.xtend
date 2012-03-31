@@ -139,16 +139,18 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	def dispatch inferType(LogicalRelationExpression expression){ 
 		val leftType = expression.leftOperand.inferType
 		val rightType = expression.rightOperand.inferType
-		val combined = combine(leftType, rightType)
-		if(combined == null){
-			error("Incompatible operands " +leftType.name + " and " + rightType.name + " for operator '" + expression.operator.literal+"'")
-		}
 		//If both types are boolean, only relational operators Equals and not_Equals are allowed
 		if(leftType.^boolean && rightType.^boolean){
 			if(expression.operator != RelationalOperator::EQUALS && expression.operator != RelationalOperator::NOT_EQUALS){
 				error("operator '" + expression.operator.literal + "' can not be applied to boolean values!")
 				return null
 			}
+		} else {
+			val combined = combine(leftType, rightType)
+			if(combined == null){
+				error("Incompatible operands " +leftType?.name + " and " + rightType?.name + " for operator '" + expression.operator.literal+"'")
+		}
+		
 		}
 		return createBoolean
 		
@@ -219,7 +221,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		return type
 	}
 	def dispatch inferType(EventValueReferenceExpression expression){
-		//TODO: Implement me
+		return inferType(expression.value)
 	}
 	
 	def dispatch getType(IntLiteral literal){
@@ -303,6 +305,9 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	}
 	
 	override combine(Type typeOne, Type typeTwo) {
+		if (typeOne == null || typeTwo == null) {
+			return null;
+		}
 		if (typeOne.equals(typeTwo) 
 			|| typeOne.name.equals(typeTwo.name)) {
 			return typeOne;
