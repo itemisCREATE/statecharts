@@ -52,7 +52,7 @@ public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	protected boolean shouldDeleteView(View view) {
 		if (ViewType.NOTE.equals(view.getType())
-				| ViewType.NOTEATTACHMENT.equals(view.getType())
+				|| ViewType.NOTEATTACHMENT.equals(view.getType())
 				|| ViewType.TEXT.equals(view.getType())) {
 			return false;
 		}
