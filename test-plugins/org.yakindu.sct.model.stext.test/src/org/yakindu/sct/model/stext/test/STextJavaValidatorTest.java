@@ -151,6 +151,22 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		// Nothing to do, checked by Typeanalyzer tests
 	}
 
+	@Test
+	public void checkVariableDefinitionInitialValue() {
+		// Success
+		EObject model = super.parseExpression(
+				"interface: var myBool : boolean = !true", null,
+				StatechartSpecification.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertDiagnosticsCount(0);
+		// Fail
+		model = super.parseExpression("interface: var myBool : boolean = 5",
+				null, StatechartSpecification.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertDiagnosticsCount(1);
+		result.assertErrorContains("Can not assign a value of type 'integer' to a variable of type 'boolean'");
+	}
+
 	/**
 	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name
