@@ -101,7 +101,7 @@ public class RegionCompartmentCanonicalEditPolicy extends
 	protected boolean shouldDeleteView(View view) {
 		//#Bug 349119 
 		if (ViewType.NOTE.equals(view.getType())
-				| ViewType.NOTEATTACHMENT.equals(view.getType())
+				|| ViewType.NOTEATTACHMENT.equals(view.getType())
 				|| ViewType.TEXT.equals(view.getType())) {
 			return false;
 		}
