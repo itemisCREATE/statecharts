@@ -80,10 +80,10 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
       boolean _operator_not = BooleanExtensions.operator_not(_isAssignable);
       if (_operator_not) {
         {
-          String _name = valueType.getName();
+          String _name = valueType==null?(String)null:valueType.getName();
           String _operator_plus = StringExtensions.operator_plus("Can not assign a value of type ", _name);
           String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " to a variable of type ");
-          String _name_1 = type.getName();
+          String _name_1 = type==null?(String)null:type.getName();
           String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _name_1);
           this.error(_operator_plus_2);
           return null;
@@ -105,10 +105,10 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
       boolean _operator_not = BooleanExtensions.operator_not(_isAssignable);
       if (_operator_not) {
         {
-          String _name = valueType.getName();
+          String _name = valueType==null?(String)null:valueType.getName();
           String _operator_plus = StringExtensions.operator_plus("Can not assign a value of type ", _name);
           String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, " to a variable of type ");
-          String _name_1 = type.getName();
+          String _name_1 = type==null?(String)null:type.getName();
           String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _name_1);
           this.error(_operator_plus_2);
           return null;
@@ -223,7 +223,7 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
         if (_operator_and_1) {
           {
             RelationalOperator _operator_2 = expression.getOperator();
-            String _literal = _operator_2.getLiteral();
+            String _literal = _operator_2==null?(String)null:_operator_2.getLiteral();
             String _operator_plus = StringExtensions.operator_plus("operator \'", _literal);
             String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\' can not be applied to boolean values!");
             this.error(_operator_plus_1);
@@ -362,8 +362,15 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
         return _type;
       }
       if ((reference instanceof org.yakindu.sct.model.stext.stext.EventDefinition)) {
+        boolean _operator_or = false;
         EObject _eContainer = expression.eContainer();
         if ((_eContainer instanceof org.yakindu.sct.model.stext.stext.EventRaisingExpression)) {
+          _operator_or = true;
+        } else {
+          EObject _eContainer_1 = expression.eContainer();
+          _operator_or = BooleanExtensions.operator_or((_eContainer instanceof org.yakindu.sct.model.stext.stext.EventRaisingExpression), (_eContainer_1 instanceof org.yakindu.sct.model.stext.stext.EventValueReferenceExpression));
+        }
+        if (_operator_or) {
           Type _type_1 = ((EventDefinition) reference).getType();
           return _type_1;
         } else {
@@ -551,7 +558,7 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   public boolean isAssignable(final Type expected, final Type actual) {
     {
       Type _combine = this.combine(expected, actual);
-      boolean _equals = expected.equals(_combine);
+      boolean _equals = expected==null?false:expected.equals(_combine);
       if (_equals) {
         return true;
       }

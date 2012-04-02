@@ -251,6 +251,9 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		return new Predicate<NamedElement>() {
 
 			public boolean apply(NamedElement input) {
+				if (name == null) {
+					return (input == null);
+				}
 				return name.equals(input.getName());
 			}
 		};
