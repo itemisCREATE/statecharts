@@ -198,7 +198,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	} 
 	
 	def dispatch inferType(FeatureCall featureCall){
-		return featureCall.feature.type
+		return featureCall.feature?.type
 	}
 	
 	def dispatch inferType(TypedElementReferenceExpression expression){

@@ -348,7 +348,7 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   
   protected Type _inferType(final FeatureCall featureCall) {
     Feature _feature = featureCall.getFeature();
-    Type _type = _feature.getType();
+    Type _type = _feature==null?(Type)null:_feature.getType();
     return _type;
   }
   

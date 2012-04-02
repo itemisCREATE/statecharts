@@ -942,16 +942,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getOperationDefinition_Params()
-  {
-    return (EReference)operationDefinitionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getLocalReaction()
   {
     return localReactionEClass;
@@ -1952,6 +1942,26 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getTypedElementReferenceExpression_OperationCall()
+  {
+    return (EAttribute)typedElementReferenceExpressionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTypedElementReferenceExpression_Args()
+  {
+    return (EReference)typedElementReferenceExpressionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getEventValueReferenceExpression()
   {
     return eventValueReferenceExpressionEClass;
@@ -2149,7 +2159,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEReference(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
 
     operationDefinitionEClass = createEClass(OPERATION_DEFINITION);
-    createEReference(operationDefinitionEClass, OPERATION_DEFINITION__PARAMS);
 
     localReactionEClass = createEClass(LOCAL_REACTION);
     createEReference(localReactionEClass, LOCAL_REACTION__PROPERTIES);
@@ -2294,6 +2303,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     typedElementReferenceExpressionEClass = createEClass(TYPED_ELEMENT_REFERENCE_EXPRESSION);
     createEReference(typedElementReferenceExpressionEClass, TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE);
+    createEAttribute(typedElementReferenceExpressionEClass, TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL);
+    createEReference(typedElementReferenceExpressionEClass, TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS);
 
     eventValueReferenceExpressionEClass = createEClass(EVENT_VALUE_REFERENCE_EXPRESSION);
     createEReference(eventValueReferenceExpressionEClass, EVENT_VALUE_REFERENCE_EXPRESSION__VALUE);
@@ -2448,7 +2459,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEReference(getVariableDefinition_InitialValue(), this.getExpression(), null, "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getOperationDefinition_Params(), theTypesPackage.getParameter(), null, "params", null, 0, -1, OperationDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getLocalReaction_Properties(), this.getReactionProperties(), null, "properties", null, 0, 1, LocalReaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2593,6 +2603,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     initEClass(typedElementReferenceExpressionEClass, TypedElementReferenceExpression.class, "TypedElementReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTypedElementReferenceExpression_Reference(), theBasePackage.getNamedElement(), null, "reference", null, 0, 1, TypedElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTypedElementReferenceExpression_OperationCall(), ecorePackage.getEBoolean(), "operationCall", null, 0, 1, TypedElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTypedElementReferenceExpression_Args(), this.getExpression(), null, "args", null, 0, -1, TypedElementReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eventValueReferenceExpressionEClass, EventValueReferenceExpression.class, "EventValueReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getEventValueReferenceExpression_Value(), this.getExpression(), null, "value", null, 0, 1, EventValueReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

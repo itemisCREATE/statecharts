@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -44,7 +43,6 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl#getOwningType <em>Owning Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl#getParams <em>Params</em>}</li>
  * </ul>
  * </p>
  *
@@ -71,16 +69,6 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
    * @ordered
    */
   protected EList<Parameter> parameters;
-
-  /**
-   * The cached value of the '{@link #getParams() <em>Params</em>}' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getParams()
-   * @generated
-   * @ordered
-   */
-  protected EList<Parameter> params;
 
   /**
    * <!-- begin-user-doc -->
@@ -210,20 +198,6 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Parameter> getParams()
-  {
-    if (params == null)
-    {
-      params = new EObjectContainmentEList<Parameter>(Parameter.class, this, StextPackage.OPERATION_DEFINITION__PARAMS);
-    }
-    return params;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @SuppressWarnings("unchecked")
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
@@ -254,8 +228,6 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
         return basicSetOwningType(null, msgs);
       case StextPackage.OPERATION_DEFINITION__PARAMETERS:
         return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-      case StextPackage.OPERATION_DEFINITION__PARAMS:
-        return ((InternalEList<?>)getParams()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -293,8 +265,6 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
         return getOwningType();
       case StextPackage.OPERATION_DEFINITION__PARAMETERS:
         return getParameters();
-      case StextPackage.OPERATION_DEFINITION__PARAMS:
-        return getParams();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -320,10 +290,6 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
         getParameters().clear();
         getParameters().addAll((Collection<? extends Parameter>)newValue);
         return;
-      case StextPackage.OPERATION_DEFINITION__PARAMS:
-        getParams().clear();
-        getParams().addAll((Collection<? extends Parameter>)newValue);
-        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -347,9 +313,6 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
       case StextPackage.OPERATION_DEFINITION__PARAMETERS:
         getParameters().clear();
         return;
-      case StextPackage.OPERATION_DEFINITION__PARAMS:
-        getParams().clear();
-        return;
     }
     super.eUnset(featureID);
   }
@@ -370,8 +333,6 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
         return getOwningType() != null;
       case StextPackage.OPERATION_DEFINITION__PARAMETERS:
         return parameters != null && !parameters.isEmpty();
-      case StextPackage.OPERATION_DEFINITION__PARAMS:
-        return params != null && !params.isEmpty();
     }
     return super.eIsSet(featureID);
   }

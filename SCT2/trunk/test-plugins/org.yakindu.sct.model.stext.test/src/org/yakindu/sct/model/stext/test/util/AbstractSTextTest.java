@@ -14,6 +14,7 @@ import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -23,9 +24,12 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 
 import com.google.inject.Inject;
+
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * 
@@ -38,8 +42,25 @@ public abstract class AbstractSTextTest {
 	private IParser parser;
 	@Inject
 	private ILinker linker;
-	@Inject
 	private XtextResource resource;
+
+	@Inject
+	protected void setResource(final XtextResource resource) {
+		this.resource = resource;
+		resource.eAdapters().add(
+				new ContextElementAdapter(
+						new ContextElementAdapter.IContextElementProvider() {
+							public EObject getContextObject() {
+								return (EObject) EcoreUtil.getObjectByType(
+										resource.getContents(),
+										SGraphPackage.Literals.STATECHART);
+							}
+						}));
+	}
+
+	protected XtextResource getResource() {
+		return resource;
+	}
 
 	protected EObject parseExpression(String expression, Scope context,
 			String ruleName) {
@@ -85,5 +106,4 @@ public abstract class AbstractSTextTest {
 	protected Scope createDefaultScope() {
 		return createContextScope("internal: in event abc : integer operation foo() var myInt : integer var myBool : boolean var myReal : real var myString : string");
 	}
-
 }
