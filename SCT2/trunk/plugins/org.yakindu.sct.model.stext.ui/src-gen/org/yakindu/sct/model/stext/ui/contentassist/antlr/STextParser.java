@@ -157,7 +157,7 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStateRootAccess().getDefAssignment_1(), "rule__StateRoot__DefAssignment_1");
 					put(grammarAccess.getTransitionRootAccess().getDefAssignment_1(), "rule__TransitionRoot__DefAssignment_1");
 					put(grammarAccess.getStatechartSpecificationAccess().getNamespaceAssignment_1_1(), "rule__StatechartSpecification__NamespaceAssignment_1_1");
-					put(grammarAccess.getStatechartSpecificationAccess().getDefinitionScopesAssignment_2(), "rule__StatechartSpecification__DefinitionScopesAssignment_2");
+					put(grammarAccess.getStatechartSpecificationAccess().getScopesAssignment_2(), "rule__StatechartSpecification__ScopesAssignment_2");
 					put(grammarAccess.getStateSpecificationAccess().getScopeAssignment(), "rule__StateSpecification__ScopeAssignment");
 					put(grammarAccess.getTransitionSpecificationAccess().getReactionAssignment(), "rule__TransitionSpecification__ReactionAssignment");
 					put(grammarAccess.getStateScopeAccess().getDeclarationsAssignment_1(), "rule__StateScope__DeclarationsAssignment_1");
