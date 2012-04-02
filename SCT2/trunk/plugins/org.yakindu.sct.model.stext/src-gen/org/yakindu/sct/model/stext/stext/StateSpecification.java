@@ -2,11 +2,11 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.ecore.EObject;
+
 import org.yakindu.sct.model.sgraph.Scope;
 
 /**

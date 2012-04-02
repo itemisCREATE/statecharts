@@ -21,14 +21,13 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
@@ -214,7 +213,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkInterfaceScope(Statechart statechart) {
+	public void checkInterfaceScope(ScopedElement statechart) {
 		List<InterfaceScope> defaultInterfaces = new LinkedList<InterfaceScope>();
 
 		for (Scope scope : statechart.getScopes()) {
@@ -224,8 +223,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 		if (defaultInterfaces.size() > 1) {
-			error(ONLY_ONE_INTERFACE, statechart,
-					BasePackage.Literals.NAMED_ELEMENT__NAME,
+			error(ONLY_ONE_INTERFACE, statechart, null,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
 	}
@@ -234,7 +232,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public void checkVariableDefinitionInitialValue(
 			VariableDefinition definition) {
 		Type definitionType = definition.getType();
-		if(definition.getInitialValue() == null)
+		if (definition.getInitialValue() == null)
 			return;
 		try {
 			Type inferType = analyzer.inferType(definition.getInitialValue());

@@ -17,7 +17,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.stext.stext.StatechartScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 
 import de.itemis.xtext.utils.gmf.resource.AbstractXtextMemberInjectionService;
@@ -30,7 +29,8 @@ import de.itemis.xtext.utils.gmf.resource.IMemberInjectionService;
  * @author andreas muelder (andreas.muelder@itemis.de)
  * 
  */
-public class StatechartInjectionService extends
+public class StatechartInjectionService
+		extends
 		AbstractXtextMemberInjectionService<Statechart, StatechartSpecification> {
 
 	public boolean isServiceFor(EObject object) {
@@ -39,7 +39,7 @@ public class StatechartInjectionService extends
 
 	@Override
 	public void setFeatures(Statechart original, StatechartSpecification rootAST) {
-		EList<StatechartScope> definitionScopes = rootAST.getDefinitionScopes();
+		EList<Scope> definitionScopes = rootAST.getScopes();
 		original.getScopes().clear();
 		original.setNamespace(rootAST.getNamespace());
 		original.getScopes().addAll(definitionScopes);
@@ -53,6 +53,5 @@ public class StatechartInjectionService extends
 	public String getParserRule() {
 		return StatechartSpecification.class.getSimpleName();
 	}
-	
 
 }

@@ -14,22 +14,19 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+
+import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
 
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartSpecification} object.
@@ -38,7 +35,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * @generated
  */
 public class StatechartSpecificationItemProvider
-  extends ItemProviderAdapter
+  extends ScopedElementItemProvider
   implements
     IEditingDomainItemProvider,
     IStructuredItemContentProvider,
@@ -70,65 +67,8 @@ public class StatechartSpecificationItemProvider
     {
       super.getPropertyDescriptors(object);
 
-      addNamespacePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
-  }
-
-  /**
-   * This adds a property descriptor for the Namespace feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void addNamespacePropertyDescriptor(Object object)
-  {
-    itemPropertyDescriptors.add
-      (createItemPropertyDescriptor
-        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-         getResourceLocator(),
-         getString("_UI_StatechartSpecification_namespace_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_StatechartSpecification_namespace_feature", "_UI_StatechartSpecification_type"),
-         StextPackage.Literals.STATECHART_SPECIFICATION__NAMESPACE,
-         true,
-         false,
-         false,
-         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-         null,
-         null));
-  }
-
-  /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
-  {
-    if (childrenFeatures == null)
-    {
-      super.getChildrenFeatures(object);
-      childrenFeatures.add(StextPackage.Literals.STATECHART_SPECIFICATION__DEFINITION_SCOPES);
-    }
-    return childrenFeatures;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  protected EStructuralFeature getChildFeature(Object object, Object child)
-  {
-    // Check the type of the specified child object and return the proper feature to use for
-    // adding (see {@link AddCommand}) it as a child.
-
-    return super.getChildFeature(object, child);
   }
 
   /**
@@ -169,16 +109,6 @@ public class StatechartSpecificationItemProvider
   public void notifyChanged(Notification notification)
   {
     updateChildren(notification);
-
-    switch (notification.getFeatureID(StatechartSpecification.class))
-    {
-      case StextPackage.STATECHART_SPECIFICATION__NAMESPACE:
-        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-        return;
-      case StextPackage.STATECHART_SPECIFICATION__DEFINITION_SCOPES:
-        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-        return;
-    }
     super.notifyChanged(notification);
   }
 
@@ -196,18 +126,23 @@ public class StatechartSpecificationItemProvider
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.STATECHART_SPECIFICATION__DEFINITION_SCOPES,
+        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
          StextFactory.eINSTANCE.createStatechartScope()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.STATECHART_SPECIFICATION__DEFINITION_SCOPES,
+        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
          StextFactory.eINSTANCE.createInterfaceScope()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.STATECHART_SPECIFICATION__DEFINITION_SCOPES,
+        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
          StextFactory.eINSTANCE.createInternalScope()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
+         StextFactory.eINSTANCE.createSimpleScope()));
   }
 
   /**
