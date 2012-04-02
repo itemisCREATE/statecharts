@@ -23,12 +23,15 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.yakindu.base.types.Operation;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
@@ -88,7 +91,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getGroup().eContents()));
 		}
 
-		if (contentAssistContext.getCurrentModel() instanceof InterfaceScope) {
+		EObject currentModel = contentAssistContext.getCurrentModel();
+		if (currentModel instanceof InterfaceScope) {
 			keywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess()
 					.getGroup().eContents()));
 			keywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess()
@@ -101,7 +105,22 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getLOCALLocalKeyword_0_0());
 		}
 
-		if (contentAssistContext.getCurrentModel() instanceof InternalScope) {
+		if (currentModel instanceof FeatureCall) {
+			FeatureCall featureCall = (FeatureCall) currentModel;
+			if (!(featureCall.getFeature() instanceof Operation)) {
+				keywords.add(grammarAccess.getFeatureCallAccess()
+						.getOperationCallLeftParenthesisKeyword_1_3_0_0());
+			}
+		}
+		if (currentModel instanceof TypedElementReferenceExpression) {
+			TypedElementReferenceExpression referenceExpression = (TypedElementReferenceExpression) currentModel;
+			if (!(referenceExpression.getReference() instanceof Operation)) {
+				keywords.add(grammarAccess
+						.getTypedElementReferenceExpressionAccess()
+						.getOperationCallLeftParenthesisKeyword_2_0_0());
+			}
+		}
+		if (currentModel instanceof InternalScope) {
 			keywords.add(grammarAccess.getDirectionAccess()
 					.getINInKeyword_1_0());
 			keywords.add(grammarAccess.getDirectionAccess()
