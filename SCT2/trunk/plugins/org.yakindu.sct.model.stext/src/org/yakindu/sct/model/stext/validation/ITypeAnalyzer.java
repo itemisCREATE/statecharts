@@ -27,6 +27,8 @@ public interface ITypeAnalyzer {
 
 	boolean isString(Type type);
 
+	boolean isVoid(Type type);
+
 	Type inferType(Statement expr);
 
 	boolean isAssignable(Type expected, Type actual);

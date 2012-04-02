@@ -24,6 +24,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
@@ -633,7 +634,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	}
 
 	// TODO: BitwiseOrExpression, BitwiseAndExpression, BitwiseXOrExpression
-	
+
 	@Test
 	public void testEventRaisingSuccess() {
 
@@ -655,12 +656,39 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				context, EventRaisingExpression.class.getSimpleName());
 		analyzer.inferType((Statement) statement);
 	}
+
 	@Test
-	public void testEventIsRaisedSuccess(){
+	public void testValueOfSuccess() {
+		Scope context = createValuedEventsScope();
+		// int events
+		EObject statement = super.parseExpression("valueof(intEvent)", context,
+				EventValueReferenceExpression.class.getSimpleName());
+		analyzer.isInteger(analyzer.inferType((Statement) statement));
+		// bool events
+		statement = super.parseExpression("valueof(boolEvent)", context,
+				EventValueReferenceExpression.class.getSimpleName());
+		analyzer.isBoolean(analyzer.inferType((Statement) statement));
+		// real events
+		statement = super.parseExpression("valueof(realEvent)", context,
+				EventValueReferenceExpression.class.getSimpleName());
+		analyzer.isReal(analyzer.inferType((Statement) statement));
+		// string events
+		statement = super.parseExpression("valueof(stringEvent)", context,
+				EventValueReferenceExpression.class.getSimpleName());
+		analyzer.isString(analyzer.inferType((Statement) statement));
+		// void events
+		statement = super.parseExpression("valueof(voidEvent)", context,
+				EventValueReferenceExpression.class.getSimpleName());
+		analyzer.isVoid(analyzer.inferType((Statement) statement));
+	}
+
+	@Test
+	public void testEventIsRaisedSuccess() {
 		EObject statement = super.parseExpression("myBool = abc",
 				createDefaultScope(), Expression.class.getSimpleName());
 		analyzer.inferType((Statement) statement);
 	}
+
 	@Test
 	public void testEventRaisingException1() {
 		exception.expect(TypeCheckException.class);
@@ -671,6 +699,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				EventRaisingExpression.class.getSimpleName());
 		analyzer.inferType((Statement) statement);
 	}
+
 	@Test
 	public void testEventRaisingException2() {
 		exception.expect(TypeCheckException.class);
@@ -681,7 +710,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 				EventRaisingExpression.class.getSimpleName());
 		analyzer.inferType((Statement) statement);
 	}
-	
+
 	/**
 	 * Convenience from here...
 	 */
@@ -729,7 +758,7 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	}
 
 	private Scope createValuedEventsScope() {
-		return createContextScope("internal: var myBool : boolean event intEvent : integer = 22 event boolEvent : boolean event realEvent : real event stringEvent : string");
+		return createContextScope("internal: var myBool : boolean event intEvent : integer = 22 event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void");
 	}
 
 	protected Type inferType(String expression) {
