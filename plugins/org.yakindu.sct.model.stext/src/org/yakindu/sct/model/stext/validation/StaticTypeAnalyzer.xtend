@@ -290,6 +290,9 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	override isReal(Type type){
 		return type != null && type.name == "real";	
 	}
+	override isVoid(Type type){
+		return type == null || type.name == "void";	
+	}
 	override isString(Type type) {
 		return type != null && type.name == "string";	
 	}

@@ -83,9 +83,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		Scope context = (Scope) parseExpression(
 				"interface if : operation myOperation(param1 : integer, param2: boolean)",
 				null, InterfaceScope.class.getSimpleName());
-		Statechart sc = _createStatechart("myStatechart");
-		getResource().getContents().add(sc);
-		sc.getScopes().add(context);
 		EObject model = super.parseExpression("if.myOperation(5,true)",
 				context, Expression.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
@@ -98,9 +95,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	@Test
 	public void checkOperationArguments_TypedElementReferenceExpression() {
 		Scope context = createContextScope("internal: operation myOperation(param1 : integer, param2: boolean)");
-		Statechart sc = _createStatechart("myStatechart");
-		getResource().getContents().add(sc);
-		sc.getScopes().add(context);
 		EObject model = super.parseExpression("myOperation(5,true)", context,
 				Expression.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
@@ -112,9 +106,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		Scope context = (Scope) parseExpression(
 				"interface if : in event a : integer", null,
 				InterfaceScope.class.getSimpleName());
-		Statechart sc = _createStatechart("myStatechart");
-		getResource().getContents().add(sc);
-		sc.getScopes().add(context);
 		EObject model = super.parseExpression("if.a / raise if.a", context,
 				TransitionSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);

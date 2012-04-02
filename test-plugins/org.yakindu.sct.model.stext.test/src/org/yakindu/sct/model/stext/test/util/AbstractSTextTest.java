@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.stext.test.util;
 
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
+
 import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
@@ -26,8 +28,10 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
@@ -42,11 +46,11 @@ public abstract class AbstractSTextTest {
 	private IParser parser;
 	@Inject
 	private ILinker linker;
-	private XtextResource resource;
-
 	@Inject
-	protected void setResource(final XtextResource resource) {
-		this.resource = resource;
+	private Provider<XtextResource> resourceProvider;
+
+	protected XtextResource getResource() {
+		final XtextResource resource = resourceProvider.get();
 		resource.eAdapters().add(
 				new ContextElementAdapter(
 						new ContextElementAdapter.IContextElementProvider() {
@@ -56,14 +60,15 @@ public abstract class AbstractSTextTest {
 										SGraphPackage.Literals.STATECHART);
 							}
 						}));
-	}
-
-	protected XtextResource getResource() {
 		return resource;
 	}
 
 	protected EObject parseExpression(String expression, Scope context,
 			String ruleName) {
+		XtextResource resource = getResource();
+		Statechart sc = _createStatechart("myStatechart");
+		resource.getContents().add(sc);
+		sc.getScopes().add(context);
 		resource.setURI(URI.createPlatformPluginURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);

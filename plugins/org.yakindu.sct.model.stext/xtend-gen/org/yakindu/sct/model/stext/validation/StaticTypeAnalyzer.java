@@ -538,6 +538,19 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
     return _operator_and;
   }
   
+  public boolean isVoid(final Type type) {
+    boolean _operator_or = false;
+    boolean _operator_equals = ObjectExtensions.operator_equals(type, null);
+    if (_operator_equals) {
+      _operator_or = true;
+    } else {
+      String _name = type.getName();
+      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name, "void");
+      _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+    }
+    return _operator_or;
+  }
+  
   public boolean isString(final Type type) {
     boolean _operator_and = false;
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
