@@ -722,12 +722,12 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
-		private final Assignment cParamsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
-		private final RuleCall cParamsParameterParserRuleCall_4_0_0 = (RuleCall)cParamsAssignment_4_0.eContents().get(0);
+		private final Assignment cParametersAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
+		private final RuleCall cParametersParameterParserRuleCall_4_0_0 = (RuleCall)cParametersAssignment_4_0.eContents().get(0);
 		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
 		private final Keyword cCommaKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Assignment cParamsAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
-		private final RuleCall cParamsParameterParserRuleCall_4_1_1_0 = (RuleCall)cParamsAssignment_4_1_1.eContents().get(0);
+		private final Assignment cParametersAssignment_4_1_1 = (Assignment)cGroup_4_1.eContents().get(1);
+		private final RuleCall cParametersParameterParserRuleCall_4_1_1_0 = (RuleCall)cParametersAssignment_4_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		private final Group cGroup_6 = (Group)cGroup.eContents().get(6);
 		private final Keyword cColonKeyword_6_0 = (Keyword)cGroup_6.eContents().get(0);
@@ -736,11 +736,11 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeTypeFQNParserRuleCall_6_1_0_1 = (RuleCall)cTypeTypeCrossReference_6_1_0.eContents().get(1);
 		
 		//OperationDefinition:
-		//	{OperationDefinition} "operation" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" (":"
+		//	{OperationDefinition} "operation" name=ID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (":"
 		//	type=[types::Type|FQN])?;
 		public ParserRule getRule() { return rule; }
 
-		//{OperationDefinition} "operation" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" (":"
+		//{OperationDefinition} "operation" name=ID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (":"
 		//type=[types::Type|FQN])?
 		public Group getGroup() { return cGroup; }
 
@@ -759,26 +759,26 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//"("
 		public Keyword getLeftParenthesisKeyword_3() { return cLeftParenthesisKeyword_3; }
 
-		//(params+=Parameter ("," params+=Parameter)*)?
+		//(parameters+=Parameter ("," parameters+=Parameter)*)?
 		public Group getGroup_4() { return cGroup_4; }
 
-		//params+=Parameter
-		public Assignment getParamsAssignment_4_0() { return cParamsAssignment_4_0; }
+		//parameters+=Parameter
+		public Assignment getParametersAssignment_4_0() { return cParametersAssignment_4_0; }
 
 		//Parameter
-		public RuleCall getParamsParameterParserRuleCall_4_0_0() { return cParamsParameterParserRuleCall_4_0_0; }
+		public RuleCall getParametersParameterParserRuleCall_4_0_0() { return cParametersParameterParserRuleCall_4_0_0; }
 
-		//("," params+=Parameter)*
+		//("," parameters+=Parameter)*
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//","
 		public Keyword getCommaKeyword_4_1_0() { return cCommaKeyword_4_1_0; }
 
-		//params+=Parameter
-		public Assignment getParamsAssignment_4_1_1() { return cParamsAssignment_4_1_1; }
+		//parameters+=Parameter
+		public Assignment getParametersAssignment_4_1_1() { return cParametersAssignment_4_1_1; }
 
 		//Parameter
-		public RuleCall getParamsParameterParserRuleCall_4_1_1_0() { return cParamsParameterParserRuleCall_4_1_1_0; }
+		public RuleCall getParametersParameterParserRuleCall_4_1_1_0() { return cParametersParameterParserRuleCall_4_1_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_5() { return cRightParenthesisKeyword_5; }
@@ -2272,12 +2272,25 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cReferenceAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cReferenceNamedElementCrossReference_1_0 = (CrossReference)cReferenceAssignment_1.eContents().get(0);
 		private final RuleCall cReferenceNamedElementIDTerminalRuleCall_1_0_1 = (RuleCall)cReferenceNamedElementCrossReference_1_0.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cOperationCallAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final Keyword cOperationCallLeftParenthesisKeyword_2_0_0 = (Keyword)cOperationCallAssignment_2_0.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Assignment cArgsAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
+		private final RuleCall cArgsExpressionParserRuleCall_2_1_0_0 = (RuleCall)cArgsAssignment_2_1_0.eContents().get(0);
+		private final Group cGroup_2_1_1 = (Group)cGroup_2_1.eContents().get(1);
+		private final Keyword cCommaKeyword_2_1_1_0 = (Keyword)cGroup_2_1_1.eContents().get(0);
+		private final Assignment cArgsAssignment_2_1_1_1 = (Assignment)cGroup_2_1_1.eContents().get(1);
+		private final RuleCall cArgsExpressionParserRuleCall_2_1_1_1_0 = (RuleCall)cArgsAssignment_2_1_1_1.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
 		//TypedElementReferenceExpression returns Expression:
-		//	{TypedElementReferenceExpression} reference=[base::NamedElement];
+		//	{TypedElementReferenceExpression} reference=[base::NamedElement] (=> operationCall?="(" (args+=Expression (","
+		//	args+=Expression)*)? ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{TypedElementReferenceExpression} reference=[base::NamedElement]
+		//{TypedElementReferenceExpression} reference=[base::NamedElement] (=> operationCall?="(" (args+=Expression (","
+		//args+=Expression)*)? ")")?
 		public Group getGroup() { return cGroup; }
 
 		//{TypedElementReferenceExpression}
@@ -2291,6 +2304,39 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ID
 		public RuleCall getReferenceNamedElementIDTerminalRuleCall_1_0_1() { return cReferenceNamedElementIDTerminalRuleCall_1_0_1; }
+
+		//(=> operationCall?="(" (args+=Expression ("," args+=Expression)*)? ")")?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//=> operationCall?="("
+		public Assignment getOperationCallAssignment_2_0() { return cOperationCallAssignment_2_0; }
+
+		//"("
+		public Keyword getOperationCallLeftParenthesisKeyword_2_0_0() { return cOperationCallLeftParenthesisKeyword_2_0_0; }
+
+		//(args+=Expression ("," args+=Expression)*)?
+		public Group getGroup_2_1() { return cGroup_2_1; }
+
+		//args+=Expression
+		public Assignment getArgsAssignment_2_1_0() { return cArgsAssignment_2_1_0; }
+
+		//Expression
+		public RuleCall getArgsExpressionParserRuleCall_2_1_0_0() { return cArgsExpressionParserRuleCall_2_1_0_0; }
+
+		//("," args+=Expression)*
+		public Group getGroup_2_1_1() { return cGroup_2_1_1; }
+
+		//","
+		public Keyword getCommaKeyword_2_1_1_0() { return cCommaKeyword_2_1_1_0; }
+
+		//args+=Expression
+		public Assignment getArgsAssignment_2_1_1_1() { return cArgsAssignment_2_1_1_1; }
+
+		//Expression
+		public RuleCall getArgsExpressionParserRuleCall_2_1_1_1_0() { return cArgsExpressionParserRuleCall_2_1_1_1_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
 	}
 
 	public class EventValueReferenceExpressionElements extends AbstractParserRuleElementFinder {
@@ -3304,7 +3350,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OperationDefinition:
-	//	{OperationDefinition} "operation" name=ID "(" (params+=Parameter ("," params+=Parameter)*)? ")" (":"
+	//	{OperationDefinition} "operation" name=ID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (":"
 	//	type=[types::Type|FQN])?;
 	public OperationDefinitionElements getOperationDefinitionAccess() {
 		return (pOperationDefinition != null) ? pOperationDefinition : (pOperationDefinition = new OperationDefinitionElements());
@@ -3752,7 +3798,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//TypedElementReferenceExpression returns Expression:
-	//	{TypedElementReferenceExpression} reference=[base::NamedElement];
+	//	{TypedElementReferenceExpression} reference=[base::NamedElement] (=> operationCall?="(" (args+=Expression (","
+	//	args+=Expression)*)? ")")?;
 	public TypedElementReferenceExpressionElements getTypedElementReferenceExpressionAccess() {
 		return (pTypedElementReferenceExpression != null) ? pTypedElementReferenceExpression : (pTypedElementReferenceExpression = new TypedElementReferenceExpressionElements());
 	}

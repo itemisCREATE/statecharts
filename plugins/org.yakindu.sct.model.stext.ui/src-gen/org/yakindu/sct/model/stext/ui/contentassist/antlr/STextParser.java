@@ -145,6 +145,9 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFeatureCallAccess().getGroup_1_3_1(), "rule__FeatureCall__Group_1_3_1__0");
 					put(grammarAccess.getFeatureCallAccess().getGroup_1_3_1_1(), "rule__FeatureCall__Group_1_3_1_1__0");
 					put(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup(), "rule__TypedElementReferenceExpression__Group__0");
+					put(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2(), "rule__TypedElementReferenceExpression__Group_2__0");
+					put(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2_1(), "rule__TypedElementReferenceExpression__Group_2_1__0");
+					put(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2_1_1(), "rule__TypedElementReferenceExpression__Group_2_1_1__0");
 					put(grammarAccess.getEventValueReferenceExpressionAccess().getGroup(), "rule__EventValueReferenceExpression__Group__0");
 					put(grammarAccess.getActiveStateReferenceExpressionAccess().getGroup(), "rule__ActiveStateReferenceExpression__Group__0");
 					put(grammarAccess.getBoolLiteralAccess().getGroup(), "rule__BoolLiteral__Group__0");
@@ -176,8 +179,8 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVariableDefinitionAccess().getTypeAssignment_5(), "rule__VariableDefinition__TypeAssignment_5");
 					put(grammarAccess.getVariableDefinitionAccess().getInitialValueAssignment_6_1(), "rule__VariableDefinition__InitialValueAssignment_6_1");
 					put(grammarAccess.getOperationDefinitionAccess().getNameAssignment_2(), "rule__OperationDefinition__NameAssignment_2");
-					put(grammarAccess.getOperationDefinitionAccess().getParamsAssignment_4_0(), "rule__OperationDefinition__ParamsAssignment_4_0");
-					put(grammarAccess.getOperationDefinitionAccess().getParamsAssignment_4_1_1(), "rule__OperationDefinition__ParamsAssignment_4_1_1");
+					put(grammarAccess.getOperationDefinitionAccess().getParametersAssignment_4_0(), "rule__OperationDefinition__ParametersAssignment_4_0");
+					put(grammarAccess.getOperationDefinitionAccess().getParametersAssignment_4_1_1(), "rule__OperationDefinition__ParametersAssignment_4_1_1");
 					put(grammarAccess.getOperationDefinitionAccess().getTypeAssignment_6_1(), "rule__OperationDefinition__TypeAssignment_6_1");
 					put(grammarAccess.getParameterAccess().getNameAssignment_0(), "rule__Parameter__NameAssignment_0");
 					put(grammarAccess.getParameterAccess().getTypeAssignment_2(), "rule__Parameter__TypeAssignment_2");
@@ -230,6 +233,9 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFeatureCallAccess().getArgsAssignment_1_3_1_0(), "rule__FeatureCall__ArgsAssignment_1_3_1_0");
 					put(grammarAccess.getFeatureCallAccess().getArgsAssignment_1_3_1_1_1(), "rule__FeatureCall__ArgsAssignment_1_3_1_1_1");
 					put(grammarAccess.getTypedElementReferenceExpressionAccess().getReferenceAssignment_1(), "rule__TypedElementReferenceExpression__ReferenceAssignment_1");
+					put(grammarAccess.getTypedElementReferenceExpressionAccess().getOperationCallAssignment_2_0(), "rule__TypedElementReferenceExpression__OperationCallAssignment_2_0");
+					put(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsAssignment_2_1_0(), "rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0");
+					put(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsAssignment_2_1_1_1(), "rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1");
 					put(grammarAccess.getEventValueReferenceExpressionAccess().getValueAssignment_3(), "rule__EventValueReferenceExpression__ValueAssignment_3");
 					put(grammarAccess.getActiveStateReferenceExpressionAccess().getValueAssignment_3(), "rule__ActiveStateReferenceExpression__ValueAssignment_3");
 					put(grammarAccess.getBoolLiteralAccess().getValueAssignment_1(), "rule__BoolLiteral__ValueAssignment_1");

@@ -63,6 +63,7 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
  */
 public class STextJavaValidator extends AbstractSTextJavaValidator {
 
+	public static final String FEATURE_CALL_TO_SCOPE = "FEATURE_CALL_TO_SCOPE";
 	public static final String ONLY_ONE_INTERFACE = "Only one default/unnamed interface is allowed.";
 	public static final String IN_OUT_DECLARATIONS = "In/Out declarations are not allowed in internal scope.";
 	public static final String LOCAL_DECLARATIONS = "Local declarations are not allowed in interface scope.";
@@ -71,7 +72,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	private StaticTypeAnalyzer analyzer;
 
 	@Check(CheckType.FAST)
-	public void checkOperationArguments(final FeatureCall call) {
+	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
 		if (call.getFeature() instanceof Operation) {
 			Operation operation = (Operation) call.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
@@ -79,6 +80,43 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			if (parameters.size() != args.size()) {
 				error("Wrong number of arguments, expected " + parameters, null);
 			}
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkOperationArguments_TypedElementReferenceExpression(
+			final TypedElementReferenceExpression call) {
+		if (call.getReference() instanceof Operation) {
+			Operation operation = (Operation) call.getReference();
+			EList<Parameter> parameters = operation.getParameters();
+			EList<Expression> args = call.getArgs();
+			if (parameters.size() != args.size()) {
+				error("Wrong number of arguments, expected " + parameters, null);
+			}
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkFeatureCall(FeatureCall call) {
+		if (call.eContainer() instanceof FeatureCall) {
+			return;
+		}
+		if (call.getFeature() instanceof Scope) {
+			error("A variable, event or operation is required",
+					StextPackage.Literals.FEATURE_CALL__FEATURE,
+					INSIGNIFICANT_INDEX, FEATURE_CALL_TO_SCOPE);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkFeatureCall(TypedElementReferenceExpression call) {
+		if (call.eContainer() instanceof FeatureCall) {
+			return;
+		}
+		if (call.getReference() instanceof Scope) {
+			error("A variable, event or operation is required",
+					StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+					INSIGNIFICANT_INDEX, FEATURE_CALL_TO_SCOPE);
 		}
 	}
 

@@ -116,7 +116,6 @@ public class OperationDefinitionItemProvider
     {
       super.getChildrenFeatures(object);
       childrenFeatures.add(TypesPackage.Literals.OPERATION__PARAMETERS);
-      childrenFeatures.add(StextPackage.Literals.OPERATION_DEFINITION__PARAMS);
     }
     return childrenFeatures;
   }
@@ -177,7 +176,6 @@ public class OperationDefinitionItemProvider
     switch (notification.getFeatureID(OperationDefinition.class))
     {
       case StextPackage.OPERATION_DEFINITION__PARAMETERS:
-      case StextPackage.OPERATION_DEFINITION__PARAMS:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
         return;
     }
@@ -200,36 +198,6 @@ public class OperationDefinitionItemProvider
       (createChildParameter
         (TypesPackage.Literals.OPERATION__PARAMETERS,
          TypesFactory.eINSTANCE.createParameter()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.OPERATION_DEFINITION__PARAMS,
-         TypesFactory.eINSTANCE.createParameter()));
-  }
-
-  /**
-   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
-  {
-    Object childFeature = feature;
-    Object childObject = child;
-
-    boolean qualify =
-      childFeature == TypesPackage.Literals.OPERATION__PARAMETERS ||
-      childFeature == StextPackage.Literals.OPERATION_DEFINITION__PARAMS;
-
-    if (qualify)
-    {
-      return getString
-        ("_UI_CreateChild_text2",
-         new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-    }
-    return super.getCreateChildText(owner, feature, child, selection);
   }
 
   /**

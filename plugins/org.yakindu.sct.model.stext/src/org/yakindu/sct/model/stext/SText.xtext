@@ -101,7 +101,7 @@ VariableDefinition:
 OperationDeclaration returns sgraph::Declaration: OperationDefinition;
 OperationFeature returns types::Operation: OperationDefinition;
 OperationDefinition:
-	{OperationDefinition} 'operation' name=ID '(' (params+=Parameter (',' params+=Parameter)*)? ')' (':' type=[types::Type|FQN])?;
+	{OperationDefinition} 'operation' name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':' type=[types::Type|FQN])?;
 
 Parameter returns types::Parameter:
 	name=ID ':' type=[types::Type|FQN]
@@ -264,17 +264,18 @@ PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
 
 FeatureCall returns Expression:
-	 TypedElementReferenceExpression  ({FeatureCall.owner=current} '.' feature=[types::Feature]
-	 	 (	=>operationCall?='(' 
-				(
-				    (args+=Expression (',' args+=Expression)*)?
-				)? 
+	TypedElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[types::Feature]
+		(	=>operationCall?='('
+				(args+=Expression (',' args+=Expression)*)?
 			')')?
 	 )*
 ;
 
 TypedElementReferenceExpression returns Expression:
-	{TypedElementReferenceExpression} reference=[base::NamedElement|ID]
+	{TypedElementReferenceExpression} reference=[base::NamedElement|ID] 
+		(	=>operationCall?='(' 
+				(args+=Expression (',' args+=Expression)*)?
+			')')?
 ;
 
 EventValueReferenceExpression returns Expression:

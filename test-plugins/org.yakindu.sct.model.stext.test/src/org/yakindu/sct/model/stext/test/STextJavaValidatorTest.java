@@ -13,6 +13,8 @@ package org.yakindu.sct.model.stext.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_TO_SCOPE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_DECLARATIONS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DECLARATIONS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
@@ -36,6 +38,8 @@ import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
+import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
@@ -72,16 +76,59 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * @see STextJavaValidator#checkOperationArguments(org.yakindu.sct.model.stext.stext.FeatureCall)
+	 * @see STextJavaValidator#checkOperationArguments_FeatureCall(org.yakindu.sct.model.stext.stext.FeatureCall)
 	 */
 	@Test
-	@Ignore("Test error")
-	public void checkOperationArguments() {
-		Scope context = createContextScope("internal: operation myOperation(param1 : Integer, param2: Boolean)");
+	public void checkOperationArguments_FeatureCall() {
+		Scope context = (Scope) parseExpression(
+				"interface if : operation myOperation(param1 : integer, param2: boolean)",
+				null, InterfaceScope.class.getSimpleName());
+		Statechart sc = _createStatechart("myStatechart");
+		getResource().getContents().add(sc);
+		sc.getScopes().add(context);
+		EObject model = super.parseExpression("if.myOperation(5,true)",
+				context, Expression.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertOK();
+	}
+
+	/**
+	 * @see STextJavaValidator#checkOperationArguments_TypedElementReferenceExpression(TypedElementReferenceExpression)
+	 */
+	@Test
+	public void checkOperationArguments_TypedElementReferenceExpression() {
+		Scope context = createContextScope("internal: operation myOperation(param1 : integer, param2: boolean)");
+		Statechart sc = _createStatechart("myStatechart");
+		getResource().getContents().add(sc);
+		sc.getScopes().add(context);
 		EObject model = super.parseExpression("myOperation(5,true)", context,
 				Expression.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
+	}
+
+	@Test
+	public void checkFeatureCall() {
+		Scope context = (Scope) parseExpression(
+				"interface if : in event a : integer", null,
+				InterfaceScope.class.getSimpleName());
+		Statechart sc = _createStatechart("myStatechart");
+		getResource().getContents().add(sc);
+		sc.getScopes().add(context);
+		EObject model = super.parseExpression("if.a / raise if.a", context,
+				TransitionSpecification.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertOK();
+
+		model = super.parseExpression("if / raise if.a", context,
+				TransitionSpecification.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(FEATURE_CALL_TO_SCOPE);
+
+		model = super.parseExpression("if.a / raise if", context,
+				TransitionSpecification.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(FEATURE_CALL_TO_SCOPE);
 	}
 
 	/**
