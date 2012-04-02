@@ -13,13 +13,19 @@ package org.yakindu.sct.model.stext.test;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ENTRY_EXIT_TRIGGER_NOT_ALLOWED;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_HAS_NO_EFFECT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_TO_SCOPE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_DECLARATIONS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DECLARATIONS;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_REACTIONS_NOT_ALLOWED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
 
 import java.lang.reflect.Method;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -29,7 +35,6 @@ import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.validation.Check;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -37,6 +42,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
@@ -127,18 +133,92 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	 * @see STextJavaValidator#checkReactionTrigger(org.yakindu.sct.model.stext.stext.ReactionTrigger)
 	 */
 	@Test
-	@Ignore("Implement me")
 	public void checkReactionTrigger() {
-		fail("implement me");
+		// ENTRY, EXIT, ALWAYS, ONCYCLE not allowed in transitions
+		Scope context = (Scope) parseExpression(
+				"internal : event a : integer var myVar : integer", null,
+				InternalScope.class.getSimpleName());
+		EObject model = super.parseExpression("entry / myVar = 5", context,
+				TransitionSpecification.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
+
+		model = super.parseExpression("exit / myVar = 5", context,
+				TransitionSpecification.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
+
+		model = super.parseExpression("oncycle / myVar = 5", context,
+				TransitionSpecification.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
+
+		model = super.parseExpression("always / myVar = 5", context,
+				TransitionSpecification.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
+
+		// ENTRY / EXIT not allowed in definition
+		model = (StatechartSpecification) parseExpression(
+				"internal : var a : integer entry / a=2", null,
+				StatechartSpecification.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
+
+		model = (StatechartSpecification) parseExpression(
+				"internal : var a : integer exit / a=2", null,
+				StatechartSpecification.class.getSimpleName());
+		validationResult = tester.validate(model);
+		validationResult.assertError(ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
 	}
 
 	/**
 	 * @see STextJavaValidator#checkReactionEffectActions(org.yakindu.sct.model.stext.stext.ReactionEffect)
 	 */
 	@Test
-	@Ignore("Implement me")
 	public void checkReactionEffectActions() {
-		fail("Implement me");
+		Scope s1 = (InternalScope) parseExpression(
+				"internal : var a : integer event e operation o () : void",
+				null, InternalScope.class.getSimpleName());
+		Scope s2 = (InterfaceScope) parseExpression(
+				"interface if : var a : integer in event e operation o()",
+				null, InterfaceScope.class.getSimpleName());
+
+		EObject model = super.parseExpression("a", s1,
+				ReactionEffect.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
+
+		model = super.parseExpression("1+3", s1,
+				ReactionEffect.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
+
+		model = super.parseExpression("valueof(e)", s1,
+				ReactionEffect.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
+
+		model = super.parseExpression("o()", s1,
+				ReactionEffect.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertOK();
+
+		model = super.parseExpression("if.a", s2,
+				ReactionEffect.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
+
+		model = super.parseExpression("valueof(if.e)", s2,
+				ReactionEffect.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
+
+		model = super.parseExpression("if.o", s2,
+				ReactionEffect.class.getSimpleName());
+		result = tester.validate(model);
+		result.assertOK();
+
 	}
 
 	/**
@@ -167,12 +247,14 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	}
 
 	/**
+	 * @throws ParseException
 	 * @see STextJavaValidator#checkLocalReaction(org.yakindu.sct.model.stext.stext.LocalReaction)
 	 */
 	@Test
-	@Ignore("Implement me")
-	public void checkLocalReaction() {
-		fail("Implement me");
+	public void checkLocalReaction() throws ParseException {
+		if (new Date().after(new SimpleDateFormat().parse("01.05.12 12:00"))) {
+			fail("Local Reaction should be activated for Statecharts again");
+		}
 	}
 
 	/**

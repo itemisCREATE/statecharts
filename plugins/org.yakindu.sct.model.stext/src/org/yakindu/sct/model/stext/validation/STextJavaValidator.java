@@ -63,6 +63,9 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
  */
 public class STextJavaValidator extends AbstractSTextJavaValidator {
 
+	public static final String FEATURE_CALL_HAS_NO_EFFECT = "FeatureCall has no effect";
+	public static final String ENTRY_EXIT_TRIGGER_NOT_ALLOWED = "Entry/Exit trigger not allowed";
+	public static final String LOCAL_REACTIONS_NOT_ALLOWED = "Local reactions not allowed";
 	public static final String FEATURE_CALL_TO_SCOPE = "FEATURE_CALL_TO_SCOPE";
 	public static final String ONLY_ONE_INTERFACE = "Only one default/unnamed interface is allowed.";
 	public static final String IN_OUT_DECLARATIONS = "In/Out declarations are not allowed in internal scope.";
@@ -132,17 +135,20 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 							|| eventSpec instanceof OnCycleEvent || eventSpec instanceof AlwaysEvent)) {
 
 				error("entry, exit, oncycle and always events are allowed as local reactions only.",
-						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS);
+						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
+						INSIGNIFICANT_INDEX, LOCAL_REACTIONS_NOT_ALLOWED);
 			}
 
 			// Context StatechartDefiniton
 			if (isStatechartDefinitionChild(reactionTrigger)) {
 				if (eventSpec instanceof EntryEvent) {
 					error("Entry events are not allowed in statechart definition.",
-							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS);
+							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
+							INSIGNIFICANT_INDEX, ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
 				} else if (eventSpec instanceof ExitEvent) {
 					error("Exit events are not allowed in statechart definition.",
-							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS);
+							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
+							INSIGNIFICANT_INDEX, ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
 				}
 			}
 		}
@@ -167,7 +173,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				} else {
 					error("Action has no effect.",
 							StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-							effect.getActions().indexOf(exp));
+							effect.getActions().indexOf(exp),
+							FEATURE_CALL_HAS_NO_EFFECT);
 				}
 
 			}
@@ -179,23 +186,18 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '" + call.getFeature().getName()
 						+ "' has no effect.", call,
-						StextPackage.Literals.FEATURE_CALL__FEATURE, 0);
+						StextPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (call.getFeature() instanceof Event) {
 				error("Access to event '" + call.getFeature().getName()
 						+ "' has no effect.", call,
-						StextPackage.Literals.FEATURE_CALL__FEATURE, 0);
+						StextPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + call.getFeature().getName()
 						+ "' has no effect.", call,
-						StextPackage.Literals.FEATURE_CALL__FEATURE, 0);
-			}
-
-			if (call.getOwner() != null) {
-				if (call.getOwner() instanceof FeatureCall)
-					checkFeatureCallEffect((FeatureCall) call.getOwner());
-				else if (call.getOwner() instanceof TypedElementReferenceExpression)
-					checkTypedElementReferenceEffect((TypedElementReferenceExpression) call
-							.getOwner());
+						StextPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 
@@ -209,19 +211,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 						+ "' has no effect.",
 						ter,
 						StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
-						0);
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (ter.getReference() instanceof Event) {
 				error("Access to event '" + ter.getReference().getName()
 						+ "' has no effect.",
 						ter,
 						StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
-						0);
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + ter.getReference().getName()
 						+ "' has no effect.",
 						ter,
 						StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
-						0);
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -240,15 +242,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 	}
 
-	@Check(CheckType.FAST)
-	public void checkLocalReaction(LocalReaction localReaction) {
-		if (localReaction.eContainer() instanceof InterfaceScope) {
-			error("Local reactions are not allowed in interface scope.",
-					localReaction,
-					StextPackage.Literals.LOCAL_REACTION__PROPERTIES,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
-		}
-	}
+	// Check not possible by grammar. Testcase shows now error until 1.5.'12
+	// because it will be neccessary again, if
+	// entry in statechart is available again
+	// @Check(CheckType.FAST)
+	// public void checkLocalReaction(LocalReaction localReaction) {
+	// if (localReaction.eContainer() instanceof InterfaceScope) {
+	// error("Local reactions are not allowed in interface scope.",
+	// localReaction,
+	// StextPackage.Literals.LOCAL_REACTION__PROPERTIES,
+	// ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+	// LOCAL_REACTIONS_NOT_ALLOWED);
+	// }
+	// }
 
 	@Check(CheckType.FAST)
 	public void checkInterfaceScope(ScopedElement statechart) {
