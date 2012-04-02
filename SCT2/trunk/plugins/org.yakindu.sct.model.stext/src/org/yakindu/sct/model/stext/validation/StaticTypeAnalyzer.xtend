@@ -54,6 +54,7 @@ import org.yakindu.base.types.TypesFactory
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor
 import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.stext.stext.EventDerivation
  
 /**
  * 
@@ -86,7 +87,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		var type = assignment.varRef.inferType
 		
 		if(!isAssignable(type, valueType)){
-			error("Can not assign a value of type " + valueType.name + " to a variable of type " + type.name)
+			error("Can not assign a value of type " + valueType?.name + " to a variable of type " + type?.name)
 			return null 
 		}
 		return type
@@ -99,7 +100,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		var type = eventRaising.event.inferType
 		
 		if(!isAssignable(type, valueType)){
-			error("Can not assign a value of type " + valueType.name + " to a variable of type " + type.name)
+			error("Can not assign a value of type " + valueType?.name + " to a variable of type " + type?.name)
 			return null 
 		}
 		return type
@@ -142,7 +143,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		//If both types are boolean, only relational operators Equals and not_Equals are allowed
 		if(leftType.^boolean && rightType.^boolean){
 			if(expression.operator != RelationalOperator::EQUALS && expression.operator != RelationalOperator::NOT_EQUALS){
-				error("operator '" + expression.operator.literal + "' can not be applied to boolean values!")
+				error("operator '" + expression.operator?.literal + "' can not be applied to boolean values!")
 				return null
 			}
 		} else {
@@ -206,7 +207,9 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 			return (reference as VariableDefinition).type
 		}
 		if(reference instanceof EventDefinition){
-			if(expression.eContainer instanceof EventRaisingExpression)
+			if(expression.eContainer instanceof EventRaisingExpression
+				|| expression.eContainer instanceof EventValueReferenceExpression
+			)
 				return (reference as EventDefinition).type
 			else
 				return createBoolean
@@ -295,7 +298,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	}
 	
 	override isAssignable(Type expected, Type actual) {
-		if (expected.equals(combine(expected, actual))) {
+		if (expected?.equals(combine(expected, actual))) {
 			return true
 		}
 		if ((expected.integer || expected.real) && (actual.integer || actual.real)) {

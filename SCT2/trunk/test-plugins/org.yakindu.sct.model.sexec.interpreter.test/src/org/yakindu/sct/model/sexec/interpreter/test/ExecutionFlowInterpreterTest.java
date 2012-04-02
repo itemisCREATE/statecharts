@@ -97,7 +97,6 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 	}
 
 	@Test
-	@Ignore("Error in execution flow transformation")
 	public void testValuedEvents() throws IOException {
 		loadAndconfigureInterpreter(models.createValuedEventsModel());
 		assertIsActive("A");
