@@ -68,7 +68,9 @@ public abstract class AbstractSTextTest {
 		XtextResource resource = getResource();
 		Statechart sc = _createStatechart("myStatechart");
 		resource.getContents().add(sc);
-		sc.getScopes().add(context);
+		if (context != null) {
+			sc.getScopes().add(context);
+		}
 		resource.setURI(URI.createPlatformPluginURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
