@@ -66,9 +66,9 @@ public abstract class AbstractSTextTest {
 	protected EObject parseExpression(String expression, Scope context,
 			String ruleName) {
 		XtextResource resource = getResource();
-		Statechart sc = _createStatechart("myStatechart");
-		resource.getContents().add(sc);
 		if (context != null) {
+			Statechart sc = _createStatechart("myStatechart");
+			resource.getContents().add(sc);
 			sc.getScopes().add(context);
 		}
 		resource.setURI(URI.createPlatformPluginURI("path", true));
