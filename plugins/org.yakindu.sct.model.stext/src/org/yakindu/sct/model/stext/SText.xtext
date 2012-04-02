@@ -30,10 +30,15 @@ TransitionRoot:
 	/* ---- start rules ----
 Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
 */
+ScopedElement returns sgraph::ScopedElement: 
+	StatechartSpecification
+;
+
+
 StatechartSpecification:
 	{StatechartSpecification}
 	('namespace' namespace=FQN)?
-	(definitionScopes+=StatechartScope)*;
+	(scopes+=StatechartScope)*;
 
 StateSpecification:
 	scope=StateScope;

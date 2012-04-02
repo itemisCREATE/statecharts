@@ -282,6 +282,8 @@ ruleTransitionRoot returns [EObject current=null]
 
 
 
+
+
 // Entry rule entryRuleStatechartSpecification
 entryRuleStatechartSpecification returns [EObject current=null] 
 	:
@@ -327,16 +329,16 @@ ruleStatechartSpecification returns [EObject current=null]
 ))?(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getStatechartSpecificationAccess().getDefinitionScopesStatechartScopeParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getStatechartSpecificationAccess().getScopesStatechartScopeParserRuleCall_2_0()); 
 	    }
-		lv_definitionScopes_3_0=ruleStatechartScope		{
+		lv_scopes_3_0=ruleStatechartScope		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getStatechartSpecificationRule());
 	        }
        		add(
        			$current, 
-       			"definitionScopes",
-        		lv_definitionScopes_3_0, 
+       			"scopes",
+        		lv_scopes_3_0, 
         		"StatechartScope");
 	        afterParserOrEnumRuleCall();
 	    }

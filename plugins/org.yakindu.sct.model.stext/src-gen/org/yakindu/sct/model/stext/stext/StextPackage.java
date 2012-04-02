@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext;
 
@@ -11,6 +10,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
@@ -204,22 +204,22 @@ public interface StextPackage extends EPackage
   int STATECHART_SPECIFICATION = 5;
 
   /**
+   * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATECHART_SPECIFICATION__SCOPES = SGraphPackage.SCOPED_ELEMENT__SCOPES;
+
+  /**
    * The feature id for the '<em><b>Namespace</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATECHART_SPECIFICATION__NAMESPACE = 0;
-
-  /**
-   * The feature id for the '<em><b>Definition Scopes</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATECHART_SPECIFICATION__DEFINITION_SCOPES = 1;
+  int STATECHART_SPECIFICATION__NAMESPACE = SGraphPackage.SCOPED_ELEMENT__NAMESPACE;
 
   /**
    * The number of structural features of the '<em>Statechart Specification</em>' class.
@@ -228,7 +228,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int STATECHART_SPECIFICATION_FEATURE_COUNT = 2;
+  int STATECHART_SPECIFICATION_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl <em>State Specification</em>}' class.
@@ -2353,28 +2353,6 @@ public interface StextPackage extends EPackage
   EClass getStatechartSpecification();
 
   /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getNamespace <em>Namespace</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Namespace</em>'.
-   * @see org.yakindu.sct.model.stext.stext.StatechartSpecification#getNamespace()
-   * @see #getStatechartSpecification()
-   * @generated
-   */
-  EAttribute getStatechartSpecification_Namespace();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.StatechartSpecification#getDefinitionScopes <em>Definition Scopes</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Definition Scopes</em>'.
-   * @see org.yakindu.sct.model.stext.stext.StatechartSpecification#getDefinitionScopes()
-   * @see #getStatechartSpecification()
-   * @generated
-   */
-  EReference getStatechartSpecification_DefinitionScopes();
-
-  /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.StateSpecification <em>State Specification</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3876,22 +3854,6 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EClass STATECHART_SPECIFICATION = eINSTANCE.getStatechartSpecification();
-
-    /**
-     * The meta object literal for the '<em><b>Namespace</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATECHART_SPECIFICATION__NAMESPACE = eINSTANCE.getStatechartSpecification_Namespace();
-
-    /**
-     * The meta object literal for the '<em><b>Definition Scopes</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATECHART_SPECIFICATION__DEFINITION_SCOPES = eINSTANCE.getStatechartSpecification_DefinitionScopes();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.StateSpecificationImpl <em>State Specification</em>}' class.

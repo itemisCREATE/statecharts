@@ -2,88 +2,32 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+
 import org.eclipse.emf.ecore.util.Switch;
+
 import org.yakindu.base.base.NamedElement;
+
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypedElement;
+
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
-import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
-import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.AssignmentExpression;
-import org.yakindu.sct.model.stext.stext.BitwiseAndExpression;
-import org.yakindu.sct.model.stext.stext.BitwiseOrExpression;
-import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
-import org.yakindu.sct.model.stext.stext.BoolLiteral;
-import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
-import org.yakindu.sct.model.stext.stext.ConditionalExpression;
-import org.yakindu.sct.model.stext.stext.DefRoot;
-import org.yakindu.sct.model.stext.stext.DefaultEvent;
-import org.yakindu.sct.model.stext.stext.EntryEvent;
-import org.yakindu.sct.model.stext.stext.EntryPointSpec;
-import org.yakindu.sct.model.stext.stext.Entrypoint;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.EventDerivation;
-import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
-import org.yakindu.sct.model.stext.stext.EventSpec;
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
-import org.yakindu.sct.model.stext.stext.ExitEvent;
-import org.yakindu.sct.model.stext.stext.ExitPointSpec;
-import org.yakindu.sct.model.stext.stext.Exitpoint;
-import org.yakindu.sct.model.stext.stext.Expression;
-import org.yakindu.sct.model.stext.stext.FeatureCall;
-import org.yakindu.sct.model.stext.stext.HexLiteral;
-import org.yakindu.sct.model.stext.stext.IntLiteral;
-import org.yakindu.sct.model.stext.stext.InterfaceScope;
-import org.yakindu.sct.model.stext.stext.InternalScope;
-import org.yakindu.sct.model.stext.stext.Literal;
-import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression;
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression;
-import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression;
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
-import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
-import org.yakindu.sct.model.stext.stext.OnCycleEvent;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
-import org.yakindu.sct.model.stext.stext.ReactionEffect;
-import org.yakindu.sct.model.stext.stext.ReactionProperties;
-import org.yakindu.sct.model.stext.stext.ReactionProperty;
-import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.RealLiteral;
-import org.yakindu.sct.model.stext.stext.RegularEventSpec;
-import org.yakindu.sct.model.stext.stext.Root;
-import org.yakindu.sct.model.stext.stext.ShiftExpression;
-import org.yakindu.sct.model.stext.stext.SimpleScope;
-import org.yakindu.sct.model.stext.stext.StateRoot;
-import org.yakindu.sct.model.stext.stext.StateSpecification;
-import org.yakindu.sct.model.stext.stext.StatechartRoot;
-import org.yakindu.sct.model.stext.stext.StatechartScope;
-import org.yakindu.sct.model.stext.stext.StatechartSpecification;
-import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.StringLiteral;
-import org.yakindu.sct.model.stext.stext.TimeEventSpec;
-import org.yakindu.sct.model.stext.stext.TransitionReaction;
-import org.yakindu.sct.model.stext.stext.TransitionRoot;
-import org.yakindu.sct.model.stext.stext.TransitionSpecification;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
+
+import org.yakindu.sct.model.stext.stext.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -190,6 +134,7 @@ public class StextSwitch<T> extends Switch<T>
       {
         StatechartSpecification statechartSpecification = (StatechartSpecification)theEObject;
         T result = caseStatechartSpecification(statechartSpecification);
+        if (result == null) result = caseScopedElement(statechartSpecification);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1647,6 +1592,22 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseActiveStateReferenceExpression(ActiveStateReferenceExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Scoped Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Scoped Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseScopedElement(ScopedElement object)
   {
     return null;
   }

@@ -3,16 +3,11 @@
 */
 package org.yakindu.sct.model.stext.parseTreeConstruction;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.Group;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.emf.ecore.*;
+import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
+
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 
 import com.google.inject.Inject;
@@ -41,75 +36,76 @@ protected class ThisRootNode extends RootToken {
 			case 2: return new StatechartRoot_Group(this, this, 2, inst);
 			case 3: return new StateRoot_Group(this, this, 3, inst);
 			case 4: return new TransitionRoot_Group(this, this, 4, inst);
-			case 5: return new StatechartSpecification_Group(this, this, 5, inst);
-			case 6: return new StateSpecification_ScopeAssignment(this, this, 6, inst);
-			case 7: return new TransitionSpecification_ReactionAssignment(this, this, 7, inst);
-			case 8: return new Scope_Alternatives(this, this, 8, inst);
-			case 9: return new StateScope_Group(this, this, 9, inst);
-			case 10: return new StatechartScope_Alternatives(this, this, 10, inst);
-			case 11: return new NamedInterfaceScope_InterfaceScopeParserRuleCall(this, this, 11, inst);
-			case 12: return new InterfaceScope_Group(this, this, 12, inst);
-			case 13: return new InternalScope_Group(this, this, 13, inst);
-			case 14: return new Declaration_Alternatives(this, this, 14, inst);
-			case 15: return new EventDeclarartion_EventDefinitionParserRuleCall(this, this, 15, inst);
-			case 16: return new EventFeature_EventDefinitionParserRuleCall(this, this, 16, inst);
-			case 17: return new EventDefinition_Group(this, this, 17, inst);
-			case 18: return new EventDerivation_Group(this, this, 18, inst);
-			case 19: return new VariableDeclaration_VariableDefinitionParserRuleCall(this, this, 19, inst);
-			case 20: return new VariableFeature_VariableDefinitionParserRuleCall(this, this, 20, inst);
-			case 21: return new VariableDefinition_Group(this, this, 21, inst);
-			case 22: return new OperationDeclaration_OperationDefinitionParserRuleCall(this, this, 22, inst);
-			case 23: return new OperationFeature_OperationDefinitionParserRuleCall(this, this, 23, inst);
-			case 24: return new OperationDefinition_Group(this, this, 24, inst);
-			case 25: return new Parameter_Group(this, this, 25, inst);
-			case 26: return new Entrypoint_Group(this, this, 26, inst);
-			case 27: return new Exitpoint_Group(this, this, 27, inst);
-			case 28: return new Reaction_Alternatives(this, this, 28, inst);
-			case 29: return new LocalReaction_Group(this, this, 29, inst);
-			case 30: return new TransitionReaction_Group(this, this, 30, inst);
-			case 31: return new ReactionTrigger_Group(this, this, 31, inst);
-			case 32: return new ReactionEffect_Group(this, this, 32, inst);
-			case 33: return new ReactionProperties_Group(this, this, 33, inst);
-			case 34: return new ReactionProperty_Alternatives(this, this, 34, inst);
-			case 35: return new EntryPointSpec_Group(this, this, 35, inst);
-			case 36: return new ExitPointSpec_Group(this, this, 36, inst);
-			case 37: return new EventSpec_Alternatives(this, this, 37, inst);
-			case 38: return new RegularEventSpec_EventAssignment(this, this, 38, inst);
-			case 39: return new TimeEventSpec_Group(this, this, 39, inst);
-			case 40: return new BuiltinEventSpec_Alternatives(this, this, 40, inst);
-			case 41: return new EntryEvent_Group(this, this, 41, inst);
-			case 42: return new ExitEvent_Group(this, this, 42, inst);
-			case 43: return new OnCycleEvent_Group(this, this, 43, inst);
-			case 44: return new AlwaysEvent_Group(this, this, 44, inst);
-			case 45: return new DefaultEvent_Group(this, this, 45, inst);
-			case 46: return new EventRaisingExpression_Group(this, this, 46, inst);
-			case 47: return new StatementExpression_ExpressionParserRuleCall(this, this, 47, inst);
-			case 48: return new Expression_AssignmentExpressionParserRuleCall(this, this, 48, inst);
-			case 49: return new AssignmentExpression_Group(this, this, 49, inst);
-			case 50: return new ConditionalExpression_Group(this, this, 50, inst);
-			case 51: return new LogicalOrExpression_Group(this, this, 51, inst);
-			case 52: return new LogicalAndExpression_Group(this, this, 52, inst);
-			case 53: return new LogicalNotExpression_Alternatives(this, this, 53, inst);
-			case 54: return new BitwiseXorExpression_Group(this, this, 54, inst);
-			case 55: return new BitwiseOrExpression_Group(this, this, 55, inst);
-			case 56: return new BitwiseAndExpression_Group(this, this, 56, inst);
-			case 57: return new LogicalRelationExpression_Group(this, this, 57, inst);
-			case 58: return new ShiftExpression_Group(this, this, 58, inst);
-			case 59: return new NumericalAddSubtractExpression_Group(this, this, 59, inst);
-			case 60: return new NumericalMultiplyDivideExpression_Group(this, this, 60, inst);
-			case 61: return new NumericalUnaryExpression_Alternatives(this, this, 61, inst);
-			case 62: return new PrimaryExpression_Alternatives(this, this, 62, inst);
-			case 63: return new PrimitiveValueExpression_Group(this, this, 63, inst);
-			case 64: return new FeatureCall_Group(this, this, 64, inst);
-			case 65: return new TypedElementReferenceExpression_Group(this, this, 65, inst);
-			case 66: return new EventValueReferenceExpression_Group(this, this, 66, inst);
-			case 67: return new ActiveStateReferenceExpression_Group(this, this, 67, inst);
-			case 68: return new Literal_Alternatives(this, this, 68, inst);
-			case 69: return new BoolLiteral_Group(this, this, 69, inst);
-			case 70: return new IntLiteral_Group(this, this, 70, inst);
-			case 71: return new RealLiteral_Group(this, this, 71, inst);
-			case 72: return new HexLiteral_Group(this, this, 72, inst);
-			case 73: return new StringLiteral_Group(this, this, 73, inst);
+			case 5: return new ScopedElement_StatechartSpecificationParserRuleCall(this, this, 5, inst);
+			case 6: return new StatechartSpecification_Group(this, this, 6, inst);
+			case 7: return new StateSpecification_ScopeAssignment(this, this, 7, inst);
+			case 8: return new TransitionSpecification_ReactionAssignment(this, this, 8, inst);
+			case 9: return new Scope_Alternatives(this, this, 9, inst);
+			case 10: return new StateScope_Group(this, this, 10, inst);
+			case 11: return new StatechartScope_Alternatives(this, this, 11, inst);
+			case 12: return new NamedInterfaceScope_InterfaceScopeParserRuleCall(this, this, 12, inst);
+			case 13: return new InterfaceScope_Group(this, this, 13, inst);
+			case 14: return new InternalScope_Group(this, this, 14, inst);
+			case 15: return new Declaration_Alternatives(this, this, 15, inst);
+			case 16: return new EventDeclarartion_EventDefinitionParserRuleCall(this, this, 16, inst);
+			case 17: return new EventFeature_EventDefinitionParserRuleCall(this, this, 17, inst);
+			case 18: return new EventDefinition_Group(this, this, 18, inst);
+			case 19: return new EventDerivation_Group(this, this, 19, inst);
+			case 20: return new VariableDeclaration_VariableDefinitionParserRuleCall(this, this, 20, inst);
+			case 21: return new VariableFeature_VariableDefinitionParserRuleCall(this, this, 21, inst);
+			case 22: return new VariableDefinition_Group(this, this, 22, inst);
+			case 23: return new OperationDeclaration_OperationDefinitionParserRuleCall(this, this, 23, inst);
+			case 24: return new OperationFeature_OperationDefinitionParserRuleCall(this, this, 24, inst);
+			case 25: return new OperationDefinition_Group(this, this, 25, inst);
+			case 26: return new Parameter_Group(this, this, 26, inst);
+			case 27: return new Entrypoint_Group(this, this, 27, inst);
+			case 28: return new Exitpoint_Group(this, this, 28, inst);
+			case 29: return new Reaction_Alternatives(this, this, 29, inst);
+			case 30: return new LocalReaction_Group(this, this, 30, inst);
+			case 31: return new TransitionReaction_Group(this, this, 31, inst);
+			case 32: return new ReactionTrigger_Group(this, this, 32, inst);
+			case 33: return new ReactionEffect_Group(this, this, 33, inst);
+			case 34: return new ReactionProperties_Group(this, this, 34, inst);
+			case 35: return new ReactionProperty_Alternatives(this, this, 35, inst);
+			case 36: return new EntryPointSpec_Group(this, this, 36, inst);
+			case 37: return new ExitPointSpec_Group(this, this, 37, inst);
+			case 38: return new EventSpec_Alternatives(this, this, 38, inst);
+			case 39: return new RegularEventSpec_EventAssignment(this, this, 39, inst);
+			case 40: return new TimeEventSpec_Group(this, this, 40, inst);
+			case 41: return new BuiltinEventSpec_Alternatives(this, this, 41, inst);
+			case 42: return new EntryEvent_Group(this, this, 42, inst);
+			case 43: return new ExitEvent_Group(this, this, 43, inst);
+			case 44: return new OnCycleEvent_Group(this, this, 44, inst);
+			case 45: return new AlwaysEvent_Group(this, this, 45, inst);
+			case 46: return new DefaultEvent_Group(this, this, 46, inst);
+			case 47: return new EventRaisingExpression_Group(this, this, 47, inst);
+			case 48: return new StatementExpression_ExpressionParserRuleCall(this, this, 48, inst);
+			case 49: return new Expression_AssignmentExpressionParserRuleCall(this, this, 49, inst);
+			case 50: return new AssignmentExpression_Group(this, this, 50, inst);
+			case 51: return new ConditionalExpression_Group(this, this, 51, inst);
+			case 52: return new LogicalOrExpression_Group(this, this, 52, inst);
+			case 53: return new LogicalAndExpression_Group(this, this, 53, inst);
+			case 54: return new LogicalNotExpression_Alternatives(this, this, 54, inst);
+			case 55: return new BitwiseXorExpression_Group(this, this, 55, inst);
+			case 56: return new BitwiseOrExpression_Group(this, this, 56, inst);
+			case 57: return new BitwiseAndExpression_Group(this, this, 57, inst);
+			case 58: return new LogicalRelationExpression_Group(this, this, 58, inst);
+			case 59: return new ShiftExpression_Group(this, this, 59, inst);
+			case 60: return new NumericalAddSubtractExpression_Group(this, this, 60, inst);
+			case 61: return new NumericalMultiplyDivideExpression_Group(this, this, 61, inst);
+			case 62: return new NumericalUnaryExpression_Alternatives(this, this, 62, inst);
+			case 63: return new PrimaryExpression_Alternatives(this, this, 63, inst);
+			case 64: return new PrimitiveValueExpression_Group(this, this, 64, inst);
+			case 65: return new FeatureCall_Group(this, this, 65, inst);
+			case 66: return new TypedElementReferenceExpression_Group(this, this, 66, inst);
+			case 67: return new EventValueReferenceExpression_Group(this, this, 67, inst);
+			case 68: return new ActiveStateReferenceExpression_Group(this, this, 68, inst);
+			case 69: return new Literal_Alternatives(this, this, 69, inst);
+			case 70: return new BoolLiteral_Group(this, this, 70, inst);
+			case 71: return new IntLiteral_Group(this, this, 71, inst);
+			case 72: return new RealLiteral_Group(this, this, 72, inst);
+			case 73: return new HexLiteral_Group(this, this, 73, inst);
+			case 74: return new StringLiteral_Group(this, this, 74, inst);
 			default: return null;
 		}	
 	}	
@@ -648,16 +644,62 @@ protected class TransitionRoot_DefAssignment_1 extends AssignmentToken  {
 /************ end Rule TransitionRoot ****************/
 
 
-/************ begin Rule StatechartSpecification ****************
+/************ begin Rule ScopedElement ****************
  *
  * / * ---- start rules ----
  * Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
- * * / StatechartSpecification:
- * 	{StatechartSpecification} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*;
+ * * / ScopedElement returns sgraph::ScopedElement:
+ * 	StatechartSpecification;
  *
  **/
 
-// {StatechartSpecification} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*
+// StatechartSpecification
+protected class ScopedElement_StatechartSpecificationParserRuleCall extends RuleCallToken {
+	
+	public ScopedElement_StatechartSpecificationParserRuleCall(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getScopedElementAccess().getStatechartSpecificationParserRuleCall();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new StatechartSpecification_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getStatechartSpecificationAccess().getStatechartSpecificationAction_0().getType().getClassifier())
+			return null;
+		if(checkForRecursion(StatechartSpecification_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+/************ end Rule ScopedElement ****************/
+
+
+/************ begin Rule StatechartSpecification ****************
+ *
+ * StatechartSpecification:
+ * 	{StatechartSpecification} ("namespace" namespace=FQN)? scopes+=StatechartScope*;
+ *
+ **/
+
+// {StatechartSpecification} ("namespace" namespace=FQN)? scopes+=StatechartScope*
 protected class StatechartSpecification_Group extends GroupToken {
 	
 	public StatechartSpecification_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -672,7 +714,7 @@ protected class StatechartSpecification_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new StatechartSpecification_DefinitionScopesAssignment_2(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new StatechartSpecification_ScopesAssignment_2(lastRuleCallOrigin, this, 0, inst);
 			case 1: return new StatechartSpecification_Group_1(lastRuleCallOrigin, this, 1, inst);
 			case 2: return new StatechartSpecification_StatechartSpecificationAction_0(lastRuleCallOrigin, this, 2, inst);
 			default: return null;
@@ -793,16 +835,16 @@ protected class StatechartSpecification_NamespaceAssignment_1_1 extends Assignme
 }
 
 
-// definitionScopes+=StatechartScope*
-protected class StatechartSpecification_DefinitionScopesAssignment_2 extends AssignmentToken  {
+// scopes+=StatechartScope*
+protected class StatechartSpecification_ScopesAssignment_2 extends AssignmentToken  {
 	
-	public StatechartSpecification_DefinitionScopesAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public StatechartSpecification_ScopesAssignment_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getStatechartSpecificationAccess().getDefinitionScopesAssignment_2();
+		return grammarAccess.getStatechartSpecificationAccess().getScopesAssignment_2();
 	}
 
     @Override
@@ -815,13 +857,13 @@ protected class StatechartSpecification_DefinitionScopesAssignment_2 extends Ass
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("definitionScopes",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("definitionScopes");
+		if((value = eObjectConsumer.getConsumable("scopes",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("scopes");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getStatechartScopeRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getStatechartSpecificationAccess().getDefinitionScopesStatechartScopeParserRuleCall_2_0(); 
+				element = grammarAccess.getStatechartSpecificationAccess().getScopesStatechartScopeParserRuleCall_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -833,7 +875,7 @@ protected class StatechartSpecification_DefinitionScopesAssignment_2 extends Ass
 	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new StatechartSpecification_DefinitionScopesAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
+			case 0: return new StatechartSpecification_ScopesAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
 			case 1: return new StatechartSpecification_Group_1(lastRuleCallOrigin, next, actIndex, consumed);
 			case 2: return new StatechartSpecification_StatechartSpecificationAction_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;

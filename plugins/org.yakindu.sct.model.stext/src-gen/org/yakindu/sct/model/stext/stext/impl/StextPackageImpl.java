@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
-
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
@@ -11,10 +10,15 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.yakindu.base.base.BasePackage;
+
 import org.yakindu.base.types.TypesPackage;
+
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AdditiveOperator;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
@@ -751,26 +755,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EClass getStatechartSpecification()
   {
     return statechartSpecificationEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getStatechartSpecification_Namespace()
-  {
-    return (EAttribute)statechartSpecificationEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getStatechartSpecification_DefinitionScopes()
-  {
-    return (EReference)statechartSpecificationEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -2138,8 +2122,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEReference(transitionRootEClass, TRANSITION_ROOT__DEF);
 
     statechartSpecificationEClass = createEClass(STATECHART_SPECIFICATION);
-    createEAttribute(statechartSpecificationEClass, STATECHART_SPECIFICATION__NAMESPACE);
-    createEReference(statechartSpecificationEClass, STATECHART_SPECIFICATION__DEFINITION_SCOPES);
 
     stateSpecificationEClass = createEClass(STATE_SPECIFICATION);
     createEReference(stateSpecificationEClass, STATE_SPECIFICATION__SCOPE);
@@ -2368,6 +2350,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     statechartRootEClass.getESuperTypes().add(this.getDefRoot());
     stateRootEClass.getESuperTypes().add(this.getDefRoot());
     transitionRootEClass.getESuperTypes().add(this.getDefRoot());
+    statechartSpecificationEClass.getESuperTypes().add(theSGraphPackage.getScopedElement());
     statechartScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
     interfaceScopeEClass.getESuperTypes().add(this.getStatechartScope());
     interfaceScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
@@ -2438,8 +2421,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEReference(getTransitionRoot_Def(), this.getTransitionSpecification(), null, "def", null, 0, 1, TransitionRoot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(statechartSpecificationEClass, StatechartSpecification.class, "StatechartSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getStatechartSpecification_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getStatechartSpecification_DefinitionScopes(), this.getStatechartScope(), null, "definitionScopes", null, 0, -1, StatechartSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(stateSpecificationEClass, StateSpecification.class, "StateSpecification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getStateSpecification_Scope(), theSGraphPackage.getScope(), null, "scope", null, 0, 1, StateSpecification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

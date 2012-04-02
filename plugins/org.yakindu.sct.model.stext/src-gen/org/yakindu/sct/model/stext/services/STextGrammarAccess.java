@@ -4,26 +4,14 @@
 
 package org.yakindu.sct.model.stext.services;
 
-import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EnumLiteralDeclaration;
-import org.eclipse.xtext.EnumRule;
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
-import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.UnorderedGroup;
-import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
-import org.eclipse.xtext.service.AbstractElementFinder.AbstractGrammarElementFinder;
-import org.eclipse.xtext.service.GrammarProvider;
-
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.Inject;
+
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.service.GrammarProvider;
+import org.eclipse.xtext.service.AbstractElementFinder.*;
+
+import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
 public class STextGrammarAccess extends AbstractGrammarElementFinder {
@@ -144,6 +132,20 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getDefTransitionSpecificationParserRuleCall_1_0() { return cDefTransitionSpecificationParserRuleCall_1_0; }
 	}
 
+	public class ScopedElementElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ScopedElement");
+		private final RuleCall cStatechartSpecificationParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		/// * ---- start rules ----
+		//Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
+		// * / ScopedElement returns sgraph::ScopedElement:
+		//	StatechartSpecification;
+		public ParserRule getRule() { return rule; }
+
+		//StatechartSpecification
+		public RuleCall getStatechartSpecificationParserRuleCall() { return cStatechartSpecificationParserRuleCall; }
+	}
+
 	public class StatechartSpecificationElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StatechartSpecification");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -152,16 +154,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cNamespaceKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cNamespaceAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final RuleCall cNamespaceFQNParserRuleCall_1_1_0 = (RuleCall)cNamespaceAssignment_1_1.eContents().get(0);
-		private final Assignment cDefinitionScopesAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cDefinitionScopesStatechartScopeParserRuleCall_2_0 = (RuleCall)cDefinitionScopesAssignment_2.eContents().get(0);
+		private final Assignment cScopesAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cScopesStatechartScopeParserRuleCall_2_0 = (RuleCall)cScopesAssignment_2.eContents().get(0);
 		
-		/// * ---- start rules ----
-		//Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
-		// * / StatechartSpecification:
-		//	{StatechartSpecification} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*;
+		//StatechartSpecification:
+		//	{StatechartSpecification} ("namespace" namespace=FQN)? scopes+=StatechartScope*;
 		public ParserRule getRule() { return rule; }
 
-		//{StatechartSpecification} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*
+		//{StatechartSpecification} ("namespace" namespace=FQN)? scopes+=StatechartScope*
 		public Group getGroup() { return cGroup; }
 
 		//{StatechartSpecification}
@@ -179,11 +179,11 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//FQN
 		public RuleCall getNamespaceFQNParserRuleCall_1_1_0() { return cNamespaceFQNParserRuleCall_1_1_0; }
 
-		//definitionScopes+=StatechartScope*
-		public Assignment getDefinitionScopesAssignment_2() { return cDefinitionScopesAssignment_2; }
+		//scopes+=StatechartScope*
+		public Assignment getScopesAssignment_2() { return cScopesAssignment_2; }
 
 		//StatechartScope
-		public RuleCall getDefinitionScopesStatechartScopeParserRuleCall_2_0() { return cDefinitionScopesStatechartScopeParserRuleCall_2_0; }
+		public RuleCall getScopesStatechartScopeParserRuleCall_2_0() { return cScopesStatechartScopeParserRuleCall_2_0; }
 	}
 
 	public class StateSpecificationElements extends AbstractParserRuleElementFinder {
@@ -2925,6 +2925,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private StatechartRootElements pStatechartRoot;
 	private StateRootElements pStateRoot;
 	private TransitionRootElements pTransitionRoot;
+	private ScopedElementElements pScopedElement;
 	private StatechartSpecificationElements pStatechartSpecification;
 	private StateSpecificationElements pStateSpecification;
 	private TransitionSpecificationElements pTransitionSpecification;
@@ -3084,8 +3085,18 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 	/// * ---- start rules ----
 	//Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
-	// * / StatechartSpecification:
-	//	{StatechartSpecification} ("namespace" namespace=FQN)? definitionScopes+=StatechartScope*;
+	// * / ScopedElement returns sgraph::ScopedElement:
+	//	StatechartSpecification;
+	public ScopedElementElements getScopedElementAccess() {
+		return (pScopedElement != null) ? pScopedElement : (pScopedElement = new ScopedElementElements());
+	}
+	
+	public ParserRule getScopedElementRule() {
+		return getScopedElementAccess().getRule();
+	}
+
+	//StatechartSpecification:
+	//	{StatechartSpecification} ("namespace" namespace=FQN)? scopes+=StatechartScope*;
 	public StatechartSpecificationElements getStatechartSpecificationAccess() {
 		return (pStatechartSpecification != null) ? pStatechartSpecification : (pStatechartSpecification = new StatechartSpecificationElements());
 	}
