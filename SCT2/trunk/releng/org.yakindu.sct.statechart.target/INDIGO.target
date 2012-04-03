@@ -4,7 +4,7 @@
 <target name="INDIGO" sequenceNumber="16">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.yakindu.base.feature.group" version="1.0.0.201203071056"/>
+<unit id="org.yakindu.base.feature.group" version="1.0.0.201203261110"/>
 <repository location="http://updates.yakindu.com/indigo/integration"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
