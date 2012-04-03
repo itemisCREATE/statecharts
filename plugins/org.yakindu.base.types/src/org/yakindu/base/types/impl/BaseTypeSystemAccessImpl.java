@@ -52,7 +52,10 @@ public class BaseTypeSystemAccessImpl implements ITypeSystemAccess {
 	}
 
 	public boolean isAssignable(Type expected, Type actual) {
-		if (expected.getName().equals(combine(expected, actual).getName())) {
+		Type combine = combine(expected, actual);
+		if(combine == null)
+			return false;
+		if (expected.getName().equals(combine.getName())) {
 			return true;
 		}
 		if ((isInteger(expected) || isReal(expected))
