@@ -13,7 +13,7 @@ import sexec;
 import sgraph;
 
 Type inferType(Statement stmt):
-	JAVA org.yakindu.sct.generator.core.extensions.TypeAnalyzerExtensions.inferType(org.yakindu.sct.model.sgraph.Statement);
+	JAVA org.yakindu.sct.generator.core.extensions.TypeAnalyzerExtensions.getType(org.yakindu.sct.model.sgraph.Statement);
 
 boolean isBoolean(Type t):
 	JAVA org.yakindu.sct.generator.core.extensions.TypeAnalyzerExtensions.isBoolean(org.yakindu.base.types.Type);

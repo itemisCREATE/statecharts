@@ -45,8 +45,8 @@ public class TypeAnalyzerExtensions implements IExecutionContextAware {
 		return typeAnalyzer.isString(type);
 	}
 
-	public Type inferType(Statement stmt) {
-		return typeAnalyzer.inferType(stmt);
+	public Type getType(Statement stmt) {
+		return typeAnalyzer.getType(stmt);
 	}
 
 }
