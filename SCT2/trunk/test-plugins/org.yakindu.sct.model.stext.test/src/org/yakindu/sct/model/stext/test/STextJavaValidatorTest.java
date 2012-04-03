@@ -20,12 +20,14 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_D
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DECLARATIONS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_REACTIONS_NOT_ALLOWED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 
 import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -251,7 +253,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void checkLocalReaction() throws ParseException {
-		if (new Date().after(new SimpleDateFormat().parse("01.05.12 12:00"))) {
+		if (new Date().after(new Date(1335866400000l))) { // 1.5.2012 12:00
 			fail("Local Reaction should be activated for Statecharts again");
 		}
 	}
@@ -265,8 +267,9 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 				"interface: in event event1 interface: in event event2", null,
 				StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
-		result.assertDiagnosticsCount(1);
-		result.assertErrorContains(ONLY_ONE_INTERFACE);
+		result.assertDiagnosticsCount(2);
+		result.assertAll(errorCode(ONLY_ONE_INTERFACE),
+				errorCode(ONLY_ONE_INTERFACE));
 	}
 
 	/**

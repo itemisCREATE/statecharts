@@ -282,14 +282,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			for (InterfaceScope scope : defaultInterfaces) {
 				error(ONLY_ONE_INTERFACE, scope, grammarAccess
 						.getInterfaceScopeAccess().getInterfaceKeyword_1(),
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+						ONLY_ONE_INTERFACE);
 			}
 		}
 	}
 
 	protected void error(String message, EObject source, Keyword keyword,
-			int index) {
-		final String code = null;
+			int index, String code) {
 		final String[] issueData = null;
 		ICompositeNode rootNode = NodeModelUtils.findActualNodeFor(source);
 		if (rootNode != null) {
@@ -304,8 +304,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 
-		error(ONLY_ONE_INTERFACE, source, (EStructuralFeature) null,
-				ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+		error(message, source, (EStructuralFeature) null,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
 
 	}
 
