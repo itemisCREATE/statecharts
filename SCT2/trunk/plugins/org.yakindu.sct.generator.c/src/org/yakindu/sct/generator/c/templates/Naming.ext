@@ -1,8 +1,8 @@
 import ecore;
 import base;
-import sgraph;
 import stext;
 import sexec;
+import sgraph;
 import sgen; 
 
 
@@ -60,13 +60,13 @@ cached String functionName(Step step) :
 	(step.isReactSequence()) ? step.reactSequenceFunctionName() : (
 	(step.isShallowEnterSequence()) ? step.shallowEnterSequenceFunctionName() : (
 	(step.isDeepEnterSequence()) ? step.deepEnterSequenceFunctionName() : (
-	" !! unknown function type !!" )))))))));
+	" !! unknown function type "+step+" in "+step.eContainer.toString()+" !!" )))))))));
 
 
 ExecutionState state(Step this) : (ExecutionState) this.eContainer;
 ExecutionScope scope(Step this) : (ExecutionScope) this.eContainer;
 
-boolean isEffect(Step step) : Reaction.isInstance(step.eContainer) ;
+boolean isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 boolean isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
 boolean isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
 boolean isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
@@ -127,6 +127,9 @@ String reactFunctionName(sexec::Reaction this) :
 
 String reactFunctionName(ExecutionNode this) :  
 	  this.stName() + "_react_" + this.getStateName();
+
+String reactFunctionName(ExecutionFlow this) :  
+	  this.stName() + "_react_" + this.getStateName();
  
 
 
@@ -156,10 +159,6 @@ String shallowEnterFunction(Step this) :
 String deepEnterFunction(Step this) :  
 	  this.deepEnterSequenceFunctionName() + "("+ handleAddition() + ")";
 
-/* for some reason, this is handled completely different */ 
-String reactFunction(sexec::Reaction this) :  
-	  this.reactFunctionName() + "("+ handleAddition() + ")";
-
 String reactFunction(ExecutionNode this) :  
 	  this.reactFunctionName() + "("+ handleAddition() + ")";
 
@@ -169,6 +168,7 @@ String getStateName(Step this) : this.eContainer.getStateName();
 String getStateName(emf::EObject this) : (this.eContainer != null)?this.eContainer.getStateName():"unkown";
 String getStateName(ExecutionEntry this) : this.getStateFqn();
 String getStateName(ExecutionState this) : this.getStateFqn();
+String getStateName(ExecutionFlow this) : this.name;
 String getStateName(ExecutionRegion this) : 
 	if (ExecutionState.isInstance(superScope)) 
 	then (
@@ -226,7 +226,7 @@ String getEventEnumName(types::Feature this) : "/* EventEnum requested, but got 
 String getEventEnumName(Expression this) : "/* EventEnum requested, but got Expression: "+this+" */";
 
 String getEventName(Event this) : this.eContainer.getScopeName().toFirstUpper() + this.getNameWA().toFirstUpper();
-String getEventName(EventDefinition this) : name.toFirstUpper();
+String getEventName(EventDefinition this) : this.eContainer.getScopeName().toFirstUpper() + "_" +name.toFirstUpper();
 String getEventName(FeatureCall this) : feature.getEventName();
 String getEventName(base::NamedElement this) : "/* Event expected, but got NamedElement: "+this+" */";
 String getEventName(TypedElementReferenceExpression this) : reference.getEventName();

@@ -519,8 +519,10 @@ public class «getCycleBasedStatemachineName()» «getStatemachineExtension(entry)»
 	«ENDIF»
 	
 
+«EXPAND ConditionMethodsImplement FOR this-»
 «EXPAND ConditionMethodsImplement FOREACH this.states-»
 «EXPAND ConditionMethodsImplement FOREACH this.nodes-»
+«EXPAND StatementMethodsImplement FOR this-»
 «EXPAND StatementMethodsImplement FOREACH this.states-»
 «EXPAND StatementMethodsImplement FOREACH this.nodes-»
 «EXPAND EnterMethodImplement FOREACH this.states-»

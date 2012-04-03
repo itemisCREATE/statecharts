@@ -95,12 +95,9 @@ if («statemachineHandleName()»->base.base.history[«region.historyVector.offset»]
   ENDDEFINE»
 
 «DEFINE ActionCode FOR CheckRef -»
-  «IF this.check != null -» 
- #error Action Code for CheckRef missing
-  «REM»
-  «this.check.functionName()»(handle) «
-  «ENDREM»
-  «ELSE -»
+  «IF this.check != null -»
+  «getComment()-»
+  «this.check.functionName()»(«statemachineHandleName()») «ELSE -»
  «getBoolTrue()» «
   ENDIF -»«
 ENDDEFINE»
@@ -154,13 +151,13 @@ sc_boolean «r.check.checkFunction()» {
 
 «DEFINE StatementMethodsProto FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
-static void «r.reactFunction()»;
+static void «r.effect.functionName()»(«handleAddition()»);
  «ENDFOREACH -»
 «ENDDEFINE»
 
 «DEFINE StatementMethodsImplement FOR ExecutionNode -»
   «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
-void «r.reactFunction()»
+void «r.effect.functionName()»(«handleAddition()»)
 {   
   «EXPAND ActionCode FOR r.effect -»
 }
@@ -294,8 +291,10 @@ static «StName()» static_«statemachineHandleName()»;
 static «StName()»* «statemachineHandleName()»;
 «ENDIF»
 
+«EXPAND ConditionMethodsProto FOR this -»
 «EXPAND ConditionMethodsProto FOREACH this.states -»
 «EXPAND ConditionMethodsProto FOREACH this.nodes -»
+«EXPAND StatementMethodsProto FOR this -»
 «EXPAND StatementMethodsProto FOREACH this.states -»
 «EXPAND StatementMethodsProto FOREACH this.nodes -»
 «EXPAND EnterMethodProto FOREACH this.states -»
@@ -309,8 +308,10 @@ static «StName()»* «statemachineHandleName()»;
 «EXPAND ReactMethodsProto FOREACH this.states -»
 «EXPAND ReactMethodsProto FOREACH this.nodes -»
 
+«EXPAND ConditionMethodsImplement FOR this -»
 «EXPAND ConditionMethodsImplement FOREACH this.states -»
 «EXPAND ConditionMethodsImplement FOREACH this.nodes -»
+«EXPAND StatementMethodsImplement FOR this -»
 «EXPAND StatementMethodsImplement FOREACH this.states -»
 «EXPAND StatementMethodsImplement FOREACH this.nodes -»
 «EXPAND EnterMethodImplement FOREACH this.states -»
