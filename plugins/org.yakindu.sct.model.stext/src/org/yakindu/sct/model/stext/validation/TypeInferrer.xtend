@@ -58,22 +58,23 @@ import org.yakindu.sct.model.stext.stext.EventDerivation
 import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.emf.ecore.util.EcoreUtil
 import com.google.inject.Provider
+import org.yakindu.base.types.ITypeSystemAccess
  
 /**
  * 
- * The Static type analyzer checks an expression AST for type conformance
+ * The TypeInferrer checks an expression AST for type conformance
  * 
  * @author andreas muelder - Initial contribution and API
- * 
+ *  
  */
-class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICacheableTypeAnalyzer {
+class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferrer, org.yakindu.sct.model.stext.validation.TypeInferrerCache$ICacheableTypeAnalyzer {
 	
 	@Inject 
 	TypeLibraryLocation$Registry libraries
-	@Inject
-	ITypeCheckErrorAcceptor acceptor
-	
-	@Inject StaticTypeAnalyzerCache cache
+	@Inject extension
+	ITypeSystemAccess ts 
+	@Inject 
+	org.yakindu.sct.model.stext.validation.TypeInferrerCache cache
 	
 	override getType(Statement stmt) {
 		cache.get(stmt, this)
@@ -94,7 +95,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICach
 		var valueType = assignment.expression.getType
 		var type = assignment.varRef.getType
 		
-		if(!isAssignable(type, valueType)){
+		if(!type.isAssignable(valueType)){
 			error("Can not assign a value of type " + valueType?.name + " to a variable of type " + type?.name)
 			return null 
 		}
@@ -106,8 +107,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICach
 	def dispatch inferType(EventRaisingExpression eventRaising){
 		var valueType = eventRaising.value.getType
 		var type = eventRaising.event.getType
-		
-		if(!isAssignable(type, valueType)){
+		if(!type.isAssignable(valueType)){
 			error("Can not assign a value of type " + valueType?.name + " to a variable of type " + type?.name)
 			return null 
 		}
@@ -125,7 +125,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICach
 	def assertBooleanTypes(Type left, Type right, String literal) {
 		if (assertIsBoolean(left,literal) != null
 			&& assertIsBoolean(right, literal) != null) {
-				return combine(left, right)
+				return left.combine(right)
 			}
 		return null;
 	}
@@ -155,20 +155,20 @@ class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICach
 				return null
 			}
 		} else {
-			val combined = combine(leftType, rightType)
+			val combined = leftType.combine(rightType)
 			if(combined == null){
 				error("Incompatible operands " +leftType?.name + " and " + rightType?.name + " for operator '" + expression.operator.literal+"'")
 		}
 		
 		}
-		return createBoolean
+		return ts.^boolean
 		
 	}
 	
 	def assertNumericalTypes(Type left, Type right, String literal) {
 		if (assertIsNumber(left, literal) != null
 			&& assertIsNumber(right, literal) != null) {
-				return combine(left, right)
+				return left.combine(right)
 		}
 		return null;
 	}
@@ -202,7 +202,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICach
 		}
 		val trueType = expression.trueCase.getType
 		val falseType = expression.falseCase.getType
-		return combine(trueType, falseType)
+		return trueType.combine(falseType)
 	} 
 	
 	def dispatch inferType(FeatureCall featureCall){
@@ -220,50 +220,30 @@ class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICach
 			)
 				return (reference as EventDefinition).type
 			else
-				return createBoolean
+				return ts.^boolean
 		}
 		null
 		
 	}
 	
-	def createBoolean() {
-		val type = TypesFactory::eINSTANCE.createType()
-		type.name = "boolean"
-		return type
-	}
+	
 	def dispatch inferType(EventValueReferenceExpression expression){
 		return getType(expression.value)
 	}
 	
 	def dispatch getType(IntLiteral literal){
-		return createInteger
+		return ts.integer
 	}
-
-	def createInteger() {
-		val type = TypesFactory::eINSTANCE.createType()
-		type.name = "integer"
-		return type
-	} 
 	
 	def dispatch getType(BoolLiteral bool){
-		return createBoolean
+		return ts.^boolean
 	}
 	
 	def dispatch getType(RealLiteral literal){
-		return createReal
+		return ts.real
 	}
 	def dispatch getType(StringLiteral literal){
-		return createString
-	}
-	def createReal() {
-		val type = TypesFactory::eINSTANCE.createType()
-		type.name = "real"
-		return type
-	}
-	def createString() {
-		val type = TypesFactory::eINSTANCE.createType()
-		type.name = "string"
-		return type
+		return ts.string
 	}
 	
 	def Type assertIsNumber(Type object, String operator){
@@ -281,85 +261,11 @@ class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICach
 	}
 	 
 	def error(String msg){
-		if (acceptor != null) {
-			acceptor.acceptError(msg)
-		}
+		throw new TypeCheckException(msg)
 	}
 	
-	
-	override isBoolean(Type type){
-		return type != null && type.name == "boolean";	
-	}
-	
-	override isInteger(Type type){
-		return type != null && (type.name =="integer" || type.name =="int");
-	}
-	
-	override isReal(Type type){
-		return type != null && type.name == "real";	
-	}
-	override isVoid(Type type){
-		return type == null || type.name == "void";	
-	}
-	override isString(Type type) {
-		return type != null && type.name == "string";	
-	}
 	def dispatch inferType(Expression expr) {
 		return null;
-	}
-	
-	override isAssignable(Type expected, Type actual) {
-		if (expected?.equals(combine(expected, actual))) {
-			return true
-		}
-		if ((expected.integer || expected.real) && (actual.integer || actual.real)) {
-			return true
-		}
-		return false
-	}
-	
-	override combine(Type typeOne, Type typeTwo) {
-		if (typeOne == null || typeTwo == null) {
-			return null;
-		}
-		if (typeOne.equals(typeTwo) 
-			|| typeOne.name.equals(typeTwo.name)) {
-			return typeOne;
-		}
-		if(typeOne.integer && typeTwo.real){
-			return typeTwo
-		}
-		if(typeOne.real && typeTwo.integer){
-			return typeOne
-		}
-		
-		val typesOne = typeOne.allSuperTypes
-		val typesTwo = typeTwo.allSuperTypes
-		
-		val superType = typesOne.findFirst(t|typesTwo.contains(t))
-		if (superType != null) {
-			return superType
-		}
-		
-		return null;
-	}
-	
-	def allSuperTypes(Type type) {
-		val types = <Type>newLinkedHashSet()
-		types.add(type)
-		var newSuperTypes = <Type>newArrayList()
-		newSuperTypes.addAll(type.superTypes)
-		while (!newSuperTypes.empty) {
-			val oldSuperTypes = newSuperTypes
-			newSuperTypes = <Type>newArrayList()
-			for (superType : oldSuperTypes) {
-				if (!types.contains(superType)) {
-					types.add(superType)
-					newSuperTypes.addAll(superType.superTypes)
-				}
-			}
-		}
-		return types
 	}
 
 }

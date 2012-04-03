@@ -70,6 +70,7 @@ import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.TraceBeginRunCycle
 import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.TraceEndRunCycle
+import org.yakindu.base.types.ITypeSystemAccess
 
 /**
  * 
@@ -86,7 +87,10 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	@Inject
 	StextNameProvider provider
 	@Inject 
-	ITimingService timingService 
+	ITimingService timingService
+	@Inject extension
+	ITypeSystemAccess ts
+	 
 	@Inject
 	@Named("InterpreterName")
 	String interpreterName
@@ -164,39 +168,19 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	} 
 
 
-// begin TODO: this should be externalized
-	def isBoolean(Type type){
-		return type != null && type.name == "boolean"
-	}
-	
-	def isInteger(Type type){
-		return type != null && type.name == "integer"
-	}
-	
-	def isReal(Type type){
-		return type != null && type.name == "real"
-	}
-	
-	def isVoid(Type type){
-		return type == null || type.name == "void"
-	}
-	def isString(Type type){
-		return type != null && type.name =="string"
-	}
-// end TODO
 
 	def dispatch addToScope(VariableDefinition variable){
 		var fqName = provider.qualifiedName(variable).toString
-		if(isBoolean(variable.type)){
+		if(variable.type.^boolean){
 			executionContext.declareVariable(new ExecutionVariable(fqName ,typeof(Boolean),false))
 		}
-		else if (isInteger(variable.type)){
+		else if (variable.type.integer){
 			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Integer),0))
 		}
-		else if(isReal(variable.type)){
+		else if(variable.type.real){
 			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Float),Float::parseFloat("0.0")))
 		}
-		else if (isString(variable.type)){
+		else if (variable.type.string){
 			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(String),""))
 		}
 		null 
@@ -204,19 +188,19 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	
 	def dispatch addToScope(EventDefinition event){
 		var fqName = provider.qualifiedName(event).toString
-		if(isBoolean(event.type)){
+		if(event.type.^boolean){
 				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Boolean),null))
 		}
-		else if(isInteger(event.type)){
+		else if(event.type.integer){
 			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Integer),null))
 		}
-		else if(isReal(event.type)){
+		else if(event.type.real){
 			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Float),null))
 		}
-		else if(isVoid(event.type)){
+		else if(event.type.^void){
 				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Void)))
 		}
-		else if (isString(event.type)){
+		else if (event.type.string){
 			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(String),""))
 		}
 		null 

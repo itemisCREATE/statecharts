@@ -4,10 +4,14 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.yakindu.base.types.ITypeSystemAccess;
+import org.yakindu.base.types.impl.BaseTypeSystemAccessImpl;
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.scoping.NamespaceLocalScopeResolver;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
+import org.yakindu.sct.model.stext.validation.ITypeInferrer;
+import org.yakindu.sct.model.stext.validation.TypeInferrer;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -42,6 +46,14 @@ public class STextRuntimeModule extends
 	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
 		return StextValueConverterService.class;
+	}
+	
+	public Class<? extends ITypeSystemAccess> bindITypeSystemAccess(){
+		return BaseTypeSystemAccessImpl.class;
+	}
+	
+	public Class<? extends ITypeInferrer> bindITypeInferrer(){
+		return TypeInferrer.class;
 	}
 	
 	
