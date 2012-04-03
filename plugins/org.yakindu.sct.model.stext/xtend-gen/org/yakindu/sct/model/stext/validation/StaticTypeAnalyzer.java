@@ -49,9 +49,11 @@ import org.yakindu.sct.model.stext.stext.UnaryOperator;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.validation.ITypeAnalyzer;
 import org.yakindu.sct.model.stext.validation.ITypeCheckErrorAcceptor;
+import org.yakindu.sct.model.stext.validation.StaticTypeAnalyzerCache;
+import org.yakindu.sct.model.stext.validation.StaticTypeAnalyzerCache.ICacheableTypeAnalyzer;
 
 @SuppressWarnings("all")
-public class StaticTypeAnalyzer implements ITypeAnalyzer {
+public class StaticTypeAnalyzer implements ITypeAnalyzer, ICacheableTypeAnalyzer {
   
   @Inject
   private Registry libraries;
@@ -59,23 +61,31 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   @Inject
   private ITypeCheckErrorAcceptor acceptor;
   
+  @Inject
+  private StaticTypeAnalyzerCache cache;
+  
+  public Type getType(final Statement stmt) {
+    Type _get = this.cache.get(stmt, this);
+    return _get;
+  }
+  
   protected Type _inferType(final Statement statement) {
     return null;
   }
   
   public Type check(final Statement stmt) {
-    Type _inferType = this.inferType(stmt);
-    return _inferType;
+    Type _type = this.getType(stmt);
+    return _type;
   }
   
   protected Type _inferType(final AssignmentExpression assignment) {
     {
       Expression _expression = assignment.getExpression();
-      Type _inferType = this.inferType(_expression);
-      Type valueType = _inferType;
+      Type _type = this.getType(_expression);
+      Type valueType = _type;
       Expression _varRef = assignment.getVarRef();
-      Type _inferType_1 = this.inferType(_varRef);
-      Type type = _inferType_1;
+      Type _type_1 = this.getType(_varRef);
+      Type type = _type_1;
       boolean _isAssignable = this.isAssignable(type, valueType);
       boolean _operator_not = BooleanExtensions.operator_not(_isAssignable);
       if (_operator_not) {
@@ -96,11 +106,11 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   protected Type _inferType(final EventRaisingExpression eventRaising) {
     {
       Expression _value = eventRaising.getValue();
-      Type _inferType = this.inferType(_value);
-      Type valueType = _inferType;
+      Type _type = this.getType(_value);
+      Type valueType = _type;
       Expression _event = eventRaising.getEvent();
-      Type _inferType_1 = this.inferType(_event);
-      Type type = _inferType_1;
+      Type _type_1 = this.getType(_event);
+      Type type = _type_1;
       boolean _isAssignable = this.isAssignable(type, valueType);
       boolean _operator_not = BooleanExtensions.operator_not(_isAssignable);
       if (_operator_not) {
@@ -120,19 +130,19 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   
   protected Type _inferType(final LogicalAndExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
-    Type _inferType = this.inferType(_leftOperand);
+    Type _type = this.getType(_leftOperand);
     Expression _rightOperand = expression.getRightOperand();
-    Type _inferType_1 = this.inferType(_rightOperand);
-    Type _assertBooleanTypes = this.assertBooleanTypes(_inferType, _inferType_1, "&&");
+    Type _type_1 = this.getType(_rightOperand);
+    Type _assertBooleanTypes = this.assertBooleanTypes(_type, _type_1, "&&");
     return _assertBooleanTypes;
   }
   
   protected Type _inferType(final LogicalOrExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
-    Type _inferType = this.inferType(_leftOperand);
+    Type _type = this.getType(_leftOperand);
     Expression _rightOperand = expression.getRightOperand();
-    Type _inferType_1 = this.inferType(_rightOperand);
-    Type _assertBooleanTypes = this.assertBooleanTypes(_inferType, _inferType_1, "||");
+    Type _type_1 = this.getType(_rightOperand);
+    Type _assertBooleanTypes = this.assertBooleanTypes(_type, _type_1, "||");
     return _assertBooleanTypes;
   }
   
@@ -159,8 +169,8 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   protected Type _inferType(final LogicalNotExpression expression) {
     {
       Expression _operand = expression.getOperand();
-      Type _inferType = this.inferType(_operand);
-      final Type type = _inferType;
+      Type _type = this.getType(_operand);
+      final Type type = _type;
       Type _assertIsBoolean = this.assertIsBoolean(type, "!");
       return _assertIsBoolean;
     }
@@ -168,39 +178,39 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   
   protected Type _inferType(final BitwiseAndExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
-    Type _inferType = this.inferType(_leftOperand);
+    Type _type = this.getType(_leftOperand);
     Expression _rightOperand = expression.getRightOperand();
-    Type _inferType_1 = this.inferType(_rightOperand);
-    Type _assertNumericalTypes = this.assertNumericalTypes(_inferType, _inferType_1, "&");
+    Type _type_1 = this.getType(_rightOperand);
+    Type _assertNumericalTypes = this.assertNumericalTypes(_type, _type_1, "&");
     return _assertNumericalTypes;
   }
   
   protected Type _inferType(final BitwiseOrExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
-    Type _inferType = this.inferType(_leftOperand);
+    Type _type = this.getType(_leftOperand);
     Expression _rightOperand = expression.getRightOperand();
-    Type _inferType_1 = this.inferType(_rightOperand);
-    Type _assertNumericalTypes = this.assertNumericalTypes(_inferType, _inferType_1, "|");
+    Type _type_1 = this.getType(_rightOperand);
+    Type _assertNumericalTypes = this.assertNumericalTypes(_type, _type_1, "|");
     return _assertNumericalTypes;
   }
   
   protected Type _inferType(final BitwiseXorExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
-    Type _inferType = this.inferType(_leftOperand);
+    Type _type = this.getType(_leftOperand);
     Expression _rightOperand = expression.getRightOperand();
-    Type _inferType_1 = this.inferType(_rightOperand);
-    Type _assertNumericalTypes = this.assertNumericalTypes(_inferType, _inferType_1, "^");
+    Type _type_1 = this.getType(_rightOperand);
+    Type _assertNumericalTypes = this.assertNumericalTypes(_type, _type_1, "^");
     return _assertNumericalTypes;
   }
   
   protected Type _inferType(final LogicalRelationExpression expression) {
     {
       Expression _leftOperand = expression.getLeftOperand();
-      Type _inferType = this.inferType(_leftOperand);
-      final Type leftType = _inferType;
+      Type _type = this.getType(_leftOperand);
+      final Type leftType = _type;
       Expression _rightOperand = expression.getRightOperand();
-      Type _inferType_1 = this.inferType(_rightOperand);
-      final Type rightType = _inferType_1;
+      Type _type_1 = this.getType(_rightOperand);
+      final Type rightType = _type_1;
       boolean _operator_and = false;
       boolean _isBoolean = this.isBoolean(leftType);
       if (!_isBoolean) {
@@ -277,31 +287,31 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   
   protected Type _inferType(final NumericalAddSubtractExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
-    Type _inferType = this.inferType(_leftOperand);
+    Type _type = this.getType(_leftOperand);
     Expression _rightOperand = expression.getRightOperand();
-    Type _inferType_1 = this.inferType(_rightOperand);
+    Type _type_1 = this.getType(_rightOperand);
     AdditiveOperator _operator = expression.getOperator();
     String _literal = _operator.getLiteral();
-    Type _assertNumericalTypes = this.assertNumericalTypes(_inferType, _inferType_1, _literal);
+    Type _assertNumericalTypes = this.assertNumericalTypes(_type, _type_1, _literal);
     return _assertNumericalTypes;
   }
   
   protected Type _inferType(final NumericalMultiplyDivideExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
-    Type _inferType = this.inferType(_leftOperand);
+    Type _type = this.getType(_leftOperand);
     Expression _rightOperand = expression.getRightOperand();
-    Type _inferType_1 = this.inferType(_rightOperand);
+    Type _type_1 = this.getType(_rightOperand);
     MultiplicativeOperator _operator = expression.getOperator();
     String _literal = _operator.getLiteral();
-    Type _assertNumericalTypes = this.assertNumericalTypes(_inferType, _inferType_1, _literal);
+    Type _assertNumericalTypes = this.assertNumericalTypes(_type, _type_1, _literal);
     return _assertNumericalTypes;
   }
   
   protected Type _inferType(final NumericalUnaryExpression expression) {
     {
       Expression _operand = expression.getOperand();
-      Type _inferType = this.inferType(_operand);
-      final Type type = _inferType;
+      Type _type = this.getType(_operand);
+      final Type type = _type;
       UnaryOperator _operator = expression.getOperator();
       String _literal = _operator.getLiteral();
       Type _assertIsNumber = this.assertIsNumber(type, _literal);
@@ -325,8 +335,8 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   protected Type _inferType(final ConditionalExpression expression) {
     {
       Expression _condition = expression.getCondition();
-      Type _inferType = this.inferType(_condition);
-      final Type condType = _inferType;
+      Type _type = this.getType(_condition);
+      final Type condType = _type;
       boolean _isBoolean = this.isBoolean(condType);
       boolean _operator_not = BooleanExtensions.operator_not(_isBoolean);
       if (_operator_not) {
@@ -336,11 +346,11 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
         }
       }
       Expression _trueCase = expression.getTrueCase();
-      Type _inferType_1 = this.inferType(_trueCase);
-      final Type trueType = _inferType_1;
+      Type _type_1 = this.getType(_trueCase);
+      final Type trueType = _type_1;
       Expression _falseCase = expression.getFalseCase();
-      Type _inferType_2 = this.inferType(_falseCase);
-      final Type falseType = _inferType_2;
+      Type _type_2 = this.getType(_falseCase);
+      final Type falseType = _type_2;
       Type _combine = this.combine(trueType, falseType);
       return _combine;
     }
@@ -394,8 +404,8 @@ public class StaticTypeAnalyzer implements ITypeAnalyzer {
   
   protected Type _inferType(final EventValueReferenceExpression expression) {
     Expression _value = expression.getValue();
-    Type _inferType = this.inferType(_value);
-    return _inferType;
+    Type _type = this.getType(_value);
+    return _type;
   }
   
   protected Type _getType(final IntLiteral literal) {
