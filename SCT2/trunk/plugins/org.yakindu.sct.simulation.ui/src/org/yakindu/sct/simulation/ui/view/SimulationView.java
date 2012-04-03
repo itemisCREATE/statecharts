@@ -350,8 +350,12 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 			// reset the lbls when updater terminated
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
-					lblRealTime.setText(INITIAL_TIME);
-					lblVirtualTime.setText(INITIAL_TIME);
+					if (lblRealTime != null && !lblRealTime.isDisposed()) {
+						lblRealTime.setText(INITIAL_TIME);
+					}
+					if (lblVirtualTime != null && !lblVirtualTime.isDisposed()) {
+						lblVirtualTime.setText(INITIAL_TIME);
+					}
 				}
 			});
 		}
