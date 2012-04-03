@@ -15,8 +15,8 @@ On the palette you will also find a composite submachine state. This is a state 
 
 h3. Related topics
 
-"Statemachine Elements reference":http://127.0.0.1:50304/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=0_4_0#Statechartelements
-"Textual modeling lanuage  Reference":http://127.0.0.1:49330/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_1#Statechartdescriptionlanguage
+"Statemachine Elements reference":../05_Reference/reference.html#Statechartelements
+"Textual modeling lanuage  Reference":../05_Reference/reference.html#Statechartdescriptionlanguage
 
 
 h2. Validating a statemachine
@@ -55,9 +55,9 @@ Start a simulation with the different modes as follows
 
 !images/simulationRunConfiguration.png!
 
-"Simulation Concept":http://127.0.0.1:50051/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=0_2_1#Simulation
-"Simulation perspective":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=1_2_5#YakinduSCSimulationperspective
-"Simulation View":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/03_Concepts/concepts.html?path=1_2_7#SimulationView
+"Simulation Concept":../03_Concepts/concepts.html#Simulation
+"Simulation perspective":../03_Concepts/concepts.html#YakinduSCSimulationperspective
+"Simulation View":../03_Concepts/concepts.html#SimulationView
 
 h2. Generating Java code
 

@@ -445,15 +445,15 @@ h3. Generator model for C
 
 h4. Feature Outlet
 
-The feature is similar to the target language Java ("Java Feature Outlet":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureOutlet).
+The feature is similar to the target language Java.
 
 h4. Feature LicenseHeader
 
-The feature is similar to the target language Java ("Java Feature LicenseHeader":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureLicenseHeader)
+The feature is similar to the target language Java.
 
 h4. Feature Debug
 
-The feature is similar to the target language Java ("Java Feature Debug":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureDebug)
+The feature is similar to the target language Java.
 
 h4. Feature CCodeFeature
 
@@ -470,15 +470,15 @@ h3. Generator model for C++
 
 h4. Feature Outlet
 
-The feature is similar to the target language Java ("Java Feature Outlet":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureOutlet).
+The feature is similar to the target language Java.
 
 h4. Feature LicenseHeader
 
-The feature is similar to the target language Java ("Java Feature LicenseHeader":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureLicenseHeader)
+The feature is similar to the target language Java.
 
 h4. Feature Debug
 
-The feature is similar to the target language Java ("Java Feature Debug":http://127.0.0.1:51417/help/topic/org.yakindu.sct.doc.user/help/05_Reference/reference.html?path=1_4_4_0_0#FeatureDebug)
+The feature is similar to the target language Java.
 
 h4. Feature FunctionInlining
 
