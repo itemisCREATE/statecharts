@@ -11,11 +11,13 @@
 package org.yakindu.sct.model.stext.scoping;
 
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.ASSIGNMENT_EXPRESSION;
+import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.BITWISE_AND_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.BITWISE_OR_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.BITWISE_XOR_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.CONDITIONAL_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION;
+import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOCAL_REACTION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOGICAL_AND_EXPRESSION;
@@ -35,11 +37,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.yakindu.base.types.TypesPackage;
 
 import com.google.common.base.Predicate;
-
+import com.google.common.base.Predicates;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -99,42 +104,64 @@ public class ContextPredicateProvider {
 	private static final VariablePredicate VARIABLES = new VariablePredicate();
 	private static final EventPredicate EVENTS = new EventPredicate();
 	private static final VariableOperationPredicate VARIABLES_AND_OPERATIONS = new VariableOperationPredicate();
+	private static final Predicate<IEObjectDescription> ALL = Predicates
+			.<IEObjectDescription> alwaysTrue();
 
-	private final Map<EClass, Predicate<IEObjectDescription>> filter;
+	private final Map<Pair<EClass, EReference>, Predicate<IEObjectDescription>> filter;
 
 	public ContextPredicateProvider() {
-		filter = new HashMap<EClass, Predicate<IEObjectDescription>>();
+		filter = new HashMap<Pair<EClass, EReference>, Predicate<IEObjectDescription>>();
 		initMap();
 	}
 
-	protected void initMap() {
-		filter.put(ASSIGNMENT_EXPRESSION, VARIABLES);
-		filter.put(CONDITIONAL_EXPRESSION, VARIABLES_AND_OPERATIONS);
-		filter.put(LOGICAL_OR_EXPRESSION, VARIABLES_AND_OPERATIONS);
-		filter.put(LOGICAL_AND_EXPRESSION, VARIABLES_AND_OPERATIONS);
-		filter.put(LOGICAL_NOT_EXPRESSION, VARIABLES_AND_OPERATIONS);
-		filter.put(BITWISE_XOR_EXPRESSION, VARIABLES);
-		filter.put(BITWISE_OR_EXPRESSION, VARIABLES);
-		filter.put(BITWISE_AND_EXPRESSION, VARIABLES);
-		filter.put(LOGICAL_RELATION_EXPRESSION, VARIABLES_AND_OPERATIONS);
-		filter.put(SHIFT_EXPRESSION, VARIABLES);
-		filter.put(NUMERICAL_ADD_SUBTRACT_EXPRESSION, VARIABLES_AND_OPERATIONS);
-		filter.put(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION,
-				VARIABLES_AND_OPERATIONS);
-		filter.put(NUMERICAL_UNARY_EXPRESSION, VARIABLES_AND_OPERATIONS);
-		filter.put(EVENT_RAISING_EXPRESSION, EVENTS);
-		filter.put(REGULAR_EVENT_SPEC, EVENTS);
-		filter.put(EVENT_VALUE_REFERENCE_EXPRESSION, EVENTS);
-		filter.put(REACTION_EFFECT, VARIABLES_AND_OPERATIONS);
-		filter.put(TRANSITION_REACTION, VARIABLES_AND_OPERATIONS);
-		filter.put(TRANSITION_SPECIFICATION, EVENTS);
-		filter.put(LOCAL_REACTION, VARIABLES_AND_OPERATIONS);
+	private Pair<EClass, EReference> key(EClass eClass) {
+		return Tuples.create(eClass, null);
 	}
 
-	public Predicate<IEObjectDescription> getPredicate(EClass clazz) {
-		Predicate<IEObjectDescription> predicate = filter.get(clazz);
+	private Pair<EClass, EReference> key(EClass eClass, EReference ref) {
+		return Tuples.create(eClass, ref);
+	}
+
+	protected void initMap() {
+		filter.put(key(ASSIGNMENT_EXPRESSION), VARIABLES);
+		filter.put(
+				key(ASSIGNMENT_EXPRESSION, ASSIGNMENT_EXPRESSION__EXPRESSION),
+				ALL);
+		filter.put(key(CONDITIONAL_EXPRESSION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(LOGICAL_OR_EXPRESSION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(LOGICAL_AND_EXPRESSION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(LOGICAL_NOT_EXPRESSION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(BITWISE_XOR_EXPRESSION), VARIABLES);
+		filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES);
+		filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES);
+		filter.put(key(LOGICAL_RELATION_EXPRESSION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(SHIFT_EXPRESSION), VARIABLES);
+		filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION),
+				VARIABLES_AND_OPERATIONS);
+		filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
+				VARIABLES_AND_OPERATIONS);
+		filter.put(key(NUMERICAL_UNARY_EXPRESSION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(EVENT_RAISING_EXPRESSION), EVENTS);
+		filter.put(
+				key(EVENT_RAISING_EXPRESSION, EVENT_RAISING_EXPRESSION__VALUE),
+				VARIABLES_AND_OPERATIONS);
+		filter.put(key(REGULAR_EVENT_SPEC), EVENTS);
+		filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS);
+		filter.put(key(REACTION_EFFECT), VARIABLES_AND_OPERATIONS);
+		filter.put(key(TRANSITION_REACTION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(TRANSITION_SPECIFICATION), EVENTS);
+		filter.put(key(LOCAL_REACTION), VARIABLES_AND_OPERATIONS);
+	}
+
+	public Predicate<IEObjectDescription> getPredicate(EClass clazz,
+			EReference reference) {
+		Predicate<IEObjectDescription> predicate = filter.get(key(clazz,
+				reference));
 		if (predicate == null) {
-			return EMPTY_PREDICATE;
+			predicate = filter.get(key(clazz, null));
+			if (predicate == null) {
+				return EMPTY_PREDICATE;
+			}
 		}
 		return predicate;
 	}

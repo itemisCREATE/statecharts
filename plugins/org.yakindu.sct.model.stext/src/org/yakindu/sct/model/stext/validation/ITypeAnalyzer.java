@@ -19,20 +19,34 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(StaticTypeAnalyzer.class)
 public interface ITypeAnalyzer {
 
+	/** true, if this type represents a boolean */
 	boolean isBoolean(Type type);
 
+	/** true, if this type represents an integer */
 	boolean isInteger(Type type);
 
+	/** true, if this type represents a real */
 	boolean isReal(Type type);
 
+	/** true, if this type represents a string */
 	boolean isString(Type type);
 
+	/** true, if this type represents void */
 	boolean isVoid(Type type);
 
-	Type inferType(Statement expr);
+	/** Cached type calculation of the statements type */
+	Type getType(Statement expr);
 
+	/**
+	 * @return true, iff the actual type is assignable to the expected type.
+	 *         (i.e. actual is a subtype of expected)
+	 */
 	boolean isAssignable(Type expected, Type actual);
 
+	/**
+	 * calculates the common supertype of typeOne and typeTwo (Could be one of
+	 * them)
+	 */
 	Type combine(Type typeOne, Type typeTwo);
 
 }

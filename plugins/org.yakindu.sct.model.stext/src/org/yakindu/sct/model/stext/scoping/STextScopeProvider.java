@@ -71,7 +71,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			final EObject context, EReference reference) {
 		IScope namdScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
-		Predicate<IEObjectDescription> predicate = calcuateFilterPredicate(context);
+		Predicate<IEObjectDescription> predicate = calcuateFilterPredicate(
+				context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
 		return new SimpleScope(Iterables.concat(namdScope.getAllElements(),
 				unnamedScope.getAllElements()));
@@ -80,7 +81,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_FeatureCall_feature(final FeatureCall context,
 			EReference reference) {
 
-		Predicate<IEObjectDescription> predicate = calcuateFilterPredicate(context);
+		Predicate<IEObjectDescription> predicate = calcuateFilterPredicate(
+				context, reference);
 		Expression owner = context.getOwner();
 		if (owner instanceof TypedElementReferenceExpression) {
 			NamedElement element = ((TypedElementReferenceExpression) owner)
@@ -111,14 +113,16 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	// OK
 	private Predicate<IEObjectDescription> calcuateFilterPredicate(
-			final EObject context) {
+			final EObject context, final EReference reference) {
 		Predicate<IEObjectDescription> predicate = null;
 		EObject container = context;
+		EReference ref = reference;
 		while (container != null) {
-			predicate = predicateProvider.getPredicate(container.eClass());
+			predicate = predicateProvider.getPredicate(container.eClass(), ref);
 			if (!(predicate instanceof EmptyPredicate)) {
 				break;
 			}
+			ref = (EReference) container.eContainingFeature();
 			container = container.eContainer();
 		}
 		return predicate;
@@ -170,8 +174,9 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	protected Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil
-				.getExistingAdapter(context.eResource(), ContextElementAdapter.class);
-		
+				.getExistingAdapter(context.eResource(),
+						ContextElementAdapter.class);
+
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(provider
 				.getElement().eResource().getContents(),
 				SGraphPackage.Literals.STATECHART);

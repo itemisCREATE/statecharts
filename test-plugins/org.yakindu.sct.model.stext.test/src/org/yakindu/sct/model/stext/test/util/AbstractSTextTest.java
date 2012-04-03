@@ -66,11 +66,6 @@ public abstract class AbstractSTextTest {
 	protected EObject parseExpression(String expression, Scope context,
 			String ruleName) {
 		XtextResource resource = getResource();
-		if (context != null) {
-			Statechart sc = _createStatechart("myStatechart");
-			resource.getContents().add(sc);
-			sc.getScopes().add(context);
-		}
 		resource.setURI(URI.createPlatformPluginURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
@@ -80,6 +75,9 @@ public abstract class AbstractSTextTest {
 		resource.getContents().add(rootASTElement);
 		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
 		if (context != null) {
+			Statechart sc = _createStatechart("");
+			resource.getContents().add(sc);
+			sc.getScopes().add(context);
 			resource.getContents().add(context);
 			linker.linkModel(context, diagnosticsConsumer);
 		}
