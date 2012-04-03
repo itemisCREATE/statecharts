@@ -55,6 +55,9 @@ import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.sct.model.stext.stext.EventDerivation
+import org.eclipse.xtext.util.OnChangeEvictingCache
+import org.eclipse.emf.ecore.util.EcoreUtil
+import com.google.inject.Provider
  
 /**
  * 
@@ -63,28 +66,33 @@ import org.yakindu.sct.model.stext.stext.EventDerivation
  * @author andreas muelder - Initial contribution and API
  * 
  */
-class StaticTypeAnalyzer implements ITypeAnalyzer {
+class StaticTypeAnalyzer implements ITypeAnalyzer, StaticTypeAnalyzerCache$ICacheableTypeAnalyzer {
 	
 	@Inject 
 	TypeLibraryLocation$Registry libraries
 	@Inject
 	ITypeCheckErrorAcceptor acceptor
 	
+	@Inject StaticTypeAnalyzerCache cache
+	
+	override getType(Statement stmt) {
+		cache.get(stmt, this)
+	}
 	
 	def dispatch inferType(Statement statement){
 		null
 	}
 	
 	def check(Statement stmt) {
-		stmt.inferType
+		stmt.getType
 	}
 	
 	/**
 	 * Check Variable assignments
 	 */
 	def dispatch inferType(AssignmentExpression assignment){
-		var valueType = assignment.expression.inferType
-		var type = assignment.varRef.inferType
+		var valueType = assignment.expression.getType
+		var type = assignment.varRef.getType
 		
 		if(!isAssignable(type, valueType)){
 			error("Can not assign a value of type " + valueType?.name + " to a variable of type " + type?.name)
@@ -96,8 +104,8 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	 * Check Event value assignments
 	 */
 	def dispatch inferType(EventRaisingExpression eventRaising){
-		var valueType = eventRaising.value.inferType
-		var type = eventRaising.event.inferType
+		var valueType = eventRaising.value.getType
+		var type = eventRaising.event.getType
 		
 		if(!isAssignable(type, valueType)){
 			error("Can not assign a value of type " + valueType?.name + " to a variable of type " + type?.name)
@@ -107,12 +115,12 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	}
 	
 	def dispatch inferType(LogicalAndExpression expression){
-		return assertBooleanTypes(expression.leftOperand.inferType,
-			expression.rightOperand.inferType,'&&')
+		return assertBooleanTypes(expression.leftOperand.getType,
+			expression.rightOperand.getType,'&&')
 	}
 	def dispatch inferType(LogicalOrExpression expression){
-		return assertBooleanTypes(expression.leftOperand.inferType,
-			expression.rightOperand.inferType,'||')
+		return assertBooleanTypes(expression.leftOperand.getType,
+			expression.rightOperand.getType,'||')
 	}
 	def assertBooleanTypes(Type left, Type right, String literal) {
 		if (assertIsBoolean(left,literal) != null
@@ -122,24 +130,24 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		return null;
 	}
 	def dispatch inferType(LogicalNotExpression expression){
-		val type = expression.operand.inferType
+		val type = expression.operand.getType
 		return assertIsBoolean(type,'!')
 	}
 	def dispatch inferType(BitwiseAndExpression expression){
-		return assertNumericalTypes(expression.leftOperand.inferType, 
-			expression.rightOperand.inferType,'&')
+		return assertNumericalTypes(expression.leftOperand.getType, 
+			expression.rightOperand.getType,'&')
 	}
 	def dispatch inferType(BitwiseOrExpression expression){
-		return assertNumericalTypes(expression.leftOperand.inferType, 
-			expression.rightOperand.inferType,'|')
+		return assertNumericalTypes(expression.leftOperand.getType, 
+			expression.rightOperand.getType,'|')
 	}
 	def dispatch inferType(BitwiseXorExpression expression){
-		return assertNumericalTypes(expression.leftOperand.inferType, 
-			expression.rightOperand.inferType,'^')
+		return assertNumericalTypes(expression.leftOperand.getType, 
+			expression.rightOperand.getType,'^')
 	}
 	def dispatch inferType(LogicalRelationExpression expression){ 
-		val leftType = expression.leftOperand.inferType
-		val rightType = expression.rightOperand.inferType
+		val leftType = expression.leftOperand.getType
+		val rightType = expression.rightOperand.getType
 		//If both types are boolean, only relational operators Equals and not_Equals are allowed
 		if(leftType.^boolean && rightType.^boolean){
 			if(expression.operator != RelationalOperator::EQUALS && expression.operator != RelationalOperator::NOT_EQUALS){
@@ -166,17 +174,17 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 	}
 	
 	def dispatch inferType(NumericalAddSubtractExpression expression){
-		return assertNumericalTypes(expression.leftOperand.inferType, 
-			expression.rightOperand.inferType, expression.operator.literal
+		return assertNumericalTypes(expression.leftOperand.getType, 
+			expression.rightOperand.getType, expression.operator.literal
 		)
 	}
 	def dispatch inferType(NumericalMultiplyDivideExpression expression){
-		return assertNumericalTypes(expression.leftOperand.inferType, 
-			expression.rightOperand.inferType, expression.operator.literal
+		return assertNumericalTypes(expression.leftOperand.getType, 
+			expression.rightOperand.getType, expression.operator.literal
 		)
 	}
 	def dispatch Type inferType(NumericalUnaryExpression expression){
-		val type = expression.operand.inferType
+		val type = expression.operand.getType
 		return assertIsNumber(type, expression.operator.literal)
 	}	
 	def dispatch inferType(PrimitiveValueExpression expression){
@@ -187,13 +195,13 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		//TODO: Implement me
 	}
 	def dispatch inferType(ConditionalExpression expression){
-		val condType = expression.condition.inferType
+		val condType = expression.condition.getType
 		if (!condType.^boolean) {
 			error("Condition type have to be boolean")
 			return null;
 		}
-		val trueType = expression.trueCase.inferType
-		val falseType = expression.falseCase.inferType
+		val trueType = expression.trueCase.getType
+		val falseType = expression.falseCase.getType
 		return combine(trueType, falseType)
 	} 
 	
@@ -224,7 +232,7 @@ class StaticTypeAnalyzer implements ITypeAnalyzer {
 		return type
 	}
 	def dispatch inferType(EventValueReferenceExpression expression){
-		return inferType(expression.value)
+		return getType(expression.value)
 	}
 	
 	def dispatch getType(IntLiteral literal){
