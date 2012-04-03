@@ -17,7 +17,12 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -29,6 +34,7 @@ import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.Direction;
@@ -256,6 +262,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	// }
 	// }
 
+	@Inject
+	STextGrammarAccess grammarAccess;
+
 	@Check(CheckType.FAST)
 	public void checkInterfaceScope(ScopedElement statechart) {
 		List<InterfaceScope> defaultInterfaces = new LinkedList<InterfaceScope>();
@@ -267,9 +276,69 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 		if (defaultInterfaces.size() > 1) {
-			error(ONLY_ONE_INTERFACE, statechart, null,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+			for (InterfaceScope scope : defaultInterfaces) {
+				error(ONLY_ONE_INTERFACE, scope, grammarAccess
+						.getInterfaceScopeAccess().getInterfaceKeyword_1(),
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+			}
 		}
+	}
+
+	protected void error(String message, EObject source, Keyword keyword,
+			int index) {
+		final String code = null;
+		final String[] issueData = null;
+		ICompositeNode rootNode = NodeModelUtils.findActualNodeFor(source);
+		if (rootNode != null) {
+			INode child = findNode(source, false, rootNode, keyword,
+					new int[] { index });
+			if (child != null) {
+				int offset = child.getTotalOffset();
+				int length = child.getTotalLength();
+				getMessageAcceptor().acceptError(message, source, offset,
+						length, code, issueData);
+				return;
+			}
+		}
+
+		error(ONLY_ONE_INTERFACE, source, (EStructuralFeature) null,
+				ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
+
+	}
+
+	private INode findNode(EObject source, boolean sourceFound, INode root,
+			Keyword keyword, int[] index) {
+		if (sourceFound && root.getSemanticElement() != source) {
+			return null;
+		}
+		if (root.getSemanticElement() == source) {
+			sourceFound = true;
+		}
+		EObject grammarElement = root.getGrammarElement();
+		// .equals or == does not work because sub grammars use their own
+		// Modules with custom
+		// grammarAccess instance and .equals is not overwritten.
+		if (grammarElement instanceof Keyword
+				&& keyword.getValue().equals(
+						((Keyword) grammarElement).getValue())) {
+			if (index[0] != INSIGNIFICANT_INDEX) {
+				index[0]--;
+			}
+			if (index[0] == 0 || index[0] == INSIGNIFICANT_INDEX) {
+				return root;
+			}
+		}
+		if (root instanceof ICompositeNode) {
+			ICompositeNode node = (ICompositeNode) root;
+			for (INode child : node.getChildren()) {
+				INode result = findNode(source, sourceFound, child, keyword,
+						index);
+				if (result != null) {
+					return result;
+				}
+			}
+		}
+		return null;
 	}
 
 	@Check(CheckType.FAST)
