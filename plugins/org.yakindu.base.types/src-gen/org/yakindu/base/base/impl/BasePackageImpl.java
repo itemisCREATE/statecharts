@@ -8,20 +8,18 @@ package org.yakindu.base.base.impl;
 
 import java.io.IOException;
 import java.net.URL;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.yakindu.base.base.BaseFactory;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
