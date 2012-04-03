@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<toc topic="help/user/03_Concepts/concepts.html" label="concepts">
+	<topic href="help/user/03_Concepts/concepts.html" label="Yakindu Statechart tool concepts">
+		<topic href="help/user/03_Concepts/concepts.html#Modeling" label="Modeling"></topic>
+		<topic href="help/user/03_Concepts/concepts.html#Simulation" label="Simulation"></topic>
+		<topic href="help/user/03_Concepts/concepts.html#CodeGeneration" label="Code Generation"></topic>
+		<topic href="help/user/03_Concepts/concepts.html#Domainspecificadaptability" label="Domain specific adaptability"></topic>
+		<topic href="help/user/03_Concepts/concepts.html#YakinduSCModelingperspective" label="Yakindu SC Modeling perspective"></topic>
+		<topic href="help/user/03_Concepts/concepts.html#YakinduSCSimulationperspective" label="Yakindu SC Simulation perspective"></topic>
+		<topic href="help/user/03_Concepts/concepts.html#YAKINDUStatechartEditor" label="YAKINDU Statechart Editor"></topic>
+		<topic href="help/user/03_Concepts/concepts.html#SimulationView" label="Simulation View"></topic>
+		<topic href="help/user/03_Concepts/concepts.html#YAKINDUSCTNature" label="YAKINDU SCT Nature"></topic>
+	</topic>
+</toc>
