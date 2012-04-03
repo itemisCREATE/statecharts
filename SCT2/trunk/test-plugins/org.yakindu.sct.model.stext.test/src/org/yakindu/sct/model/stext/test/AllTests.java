@@ -19,7 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(value = Suite.class)
-@SuiteClasses(value = { StaticTypeAnalyzerTest.class,
+@SuiteClasses(value = { TypeInferrerTest.class,
 		STextJavaValidatorTest.class })
 public class AllTests {
 

@@ -11,10 +11,24 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
+import org.yakindu.base.types.Type;
+import org.yakindu.sct.model.sgraph.Statement;
+
 import com.google.inject.ImplementedBy;
 
-@ImplementedBy(ExceptionErrorAcceptor.class)
-public interface ITypeCheckErrorAcceptor {
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+@ImplementedBy(TypeInferrer.class)
+public interface ITypeInferrer {
+	/**
+	 * infers the type for a given {@link Statement}
+	 * 
+	 * @throws TypeCheckException
+	 *             if the Statement is invalid
+	 */
+	Type getType(Statement expr) throws TypeCheckException;
 
-	public void acceptError(String msg);
 }

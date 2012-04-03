@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sexec.interpreter;
 
+import org.yakindu.base.types.ITypeSystemAccess;
+import org.yakindu.base.types.impl.BaseTypeSystemAccessImpl;
 import org.yakindu.sct.model.sexec.interpreter.impl.ExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.impl.TimerTaskTimingService;
 import org.yakindu.sct.model.sexec.interpreter.stext.StextStatementInterpreter;
@@ -42,5 +44,6 @@ public class InterpreterModule implements Module {
 		binder.bind(ITimingService.class).to(TimerTaskTimingService.class);
 		binder.bind(IExecutionFlowInterpreter.class).to(
 				ExecutionFlowInterpreter.class);
+		binder.bind(ITypeSystemAccess.class).to(BaseTypeSystemAccessImpl.class);
 	}
 }

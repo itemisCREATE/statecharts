@@ -20,6 +20,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -28,7 +29,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
-import org.yakindu.sct.model.stext.validation.ITypeAnalyzer;
+import org.yakindu.sct.model.stext.validation.ITypeInferrer;
 import org.yakindu.sct.model.stext.validation.TypeCheckException;
 
 import com.google.inject.Inject;
@@ -39,33 +40,35 @@ import com.google.inject.Inject;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
-public class StaticTypeAnalyzerTest extends AbstractSTextTest {
+public class TypeInferrerTest extends AbstractSTextTest {
 
 	@Inject
-	private ITypeAnalyzer analyzer;
+	private ITypeInferrer analyzer;
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
+	@Inject
+	private ITypeSystemAccess ts;
 
 	// Unary
 	@Test
 	public void testUnarySuccess() {
 		// int
-		assertTrue(analyzer.isInteger(getType("1")));
-		assertTrue(analyzer.isInteger(getType("-1")));
-		assertTrue(analyzer.isInteger(getType("0")));
-		assertTrue(analyzer.isInteger(getType("myInt")));
+		assertTrue(ts.isInteger(getType("1")));
+		assertTrue(ts.isInteger(getType("-1")));
+		assertTrue(ts.isInteger(getType("0")));
+		assertTrue(ts.isInteger(getType("myInt")));
 		// real
-		assertTrue(analyzer.isReal(getType("1.0")));
-		assertTrue(analyzer.isReal(getType("-1.0")));
-		assertTrue(analyzer.isReal(getType("0.0")));
-		assertTrue(analyzer.isReal(getType("myReal")));
+		assertTrue(ts.isReal(getType("1.0")));
+		assertTrue(ts.isReal(getType("-1.0")));
+		assertTrue(ts.isReal(getType("0.0")));
+		assertTrue(ts.isReal(getType("myReal")));
 		// string
-		assertTrue(analyzer.isString(getType("'42'")));
-		assertTrue(analyzer.isString(getType("myString")));
+		assertTrue(ts.isString(getType("'42'")));
+		assertTrue(ts.isString(getType("myString")));
 		// boolean
-		assertTrue(analyzer.isBoolean(getType("true")));
-		assertTrue(analyzer.isBoolean(getType("false")));
-		assertTrue(analyzer.isBoolean(getType("myBool")));
+		assertTrue(ts.isBoolean(getType("true")));
+		assertTrue(ts.isBoolean(getType("false")));
+		assertTrue(ts.isBoolean(getType("myBool")));
 	}
 
 	// Add
@@ -74,13 +77,13 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 		Statement statement = (Statement) super.parseExpression("1+2",
 				super.createDefaultScope(), Expression.class.getSimpleName());
 		analyzer.getType(statement);
-		assertTrue(analyzer.isInteger(analyzer.getType(statement)));
+		assertTrue(ts.isInteger(analyzer.getType(statement)));
 
-		assertTrue(analyzer.isInteger(getType("1 + 2")));
-		assertTrue(analyzer.isInteger(getType("myInt + 2")));
-		assertTrue(analyzer.isReal(getType("1.1 + 2")));
-		assertTrue(analyzer.isReal(getType("2 + 1.0")));
-		assertTrue(analyzer.isReal(getType("1 + 2 + 3.0")));
+		assertTrue(ts.isInteger(getType("1 + 2")));
+		assertTrue(ts.isInteger(getType("myInt + 2")));
+		assertTrue(ts.isReal(getType("1.1 + 2")));
+		assertTrue(ts.isReal(getType("2 + 1.0")));
+		assertTrue(ts.isReal(getType("1 + 2 + 3.0")));
 	}
 
 	@Test
@@ -134,12 +137,12 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	// substract
 	@Test
 	public void testSubstractSuccess() {
-		assertTrue(analyzer.isInteger(getType("1 - 2")));
-		assertTrue(analyzer.isInteger(getType("myInt - 2")));
-		assertTrue(analyzer.isReal(getType("1.0 - 2")));
-		assertTrue(analyzer.isReal(getType("2 - 1.0")));
-		assertTrue(analyzer.isReal(getType("myReal - 1.0")));
-		assertTrue(analyzer.isReal(getType("1 - 2 - 3.0")));
+		assertTrue(ts.isInteger(getType("1 - 2")));
+		assertTrue(ts.isInteger(getType("myInt - 2")));
+		assertTrue(ts.isReal(getType("1.0 - 2")));
+		assertTrue(ts.isReal(getType("2 - 1.0")));
+		assertTrue(ts.isReal(getType("myReal - 1.0")));
+		assertTrue(ts.isReal(getType("1 - 2 - 3.0")));
 	}
 
 	@Test
@@ -193,11 +196,11 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	// multiply
 	@Test
 	public void testMultiplySuccess() {
-		assertTrue(analyzer.isInteger(getType("1 * 2")));
-		assertTrue(analyzer.isReal(getType("myInt * myReal")));
-		assertTrue(analyzer.isReal(getType("1.0 * 2")));
-		assertTrue(analyzer.isReal(getType("2 * 1.0")));
-		assertTrue(analyzer.isReal(getType("1 * 2 * 3.0")));
+		assertTrue(ts.isInteger(getType("1 * 2")));
+		assertTrue(ts.isReal(getType("myInt * myReal")));
+		assertTrue(ts.isReal(getType("1.0 * 2")));
+		assertTrue(ts.isReal(getType("2 * 1.0")));
+		assertTrue(ts.isReal(getType("1 * 2 * 3.0")));
 	}
 
 	@Test
@@ -251,11 +254,11 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	// divide
 	@Test
 	public void testDivideSuccess() {
-		assertTrue(analyzer.isInteger(getType("1 / 2")));
-		assertTrue(analyzer.isInteger(getType("1 / myInt")));
-		assertTrue(analyzer.isReal(getType("1.0 / 2")));
-		assertTrue(analyzer.isReal(getType("2 / 1.0")));
-		assertTrue(analyzer.isReal(getType("1 / 2 / 3.0")));
+		assertTrue(ts.isInteger(getType("1 / 2")));
+		assertTrue(ts.isInteger(getType("1 / myInt")));
+		assertTrue(ts.isReal(getType("1.0 / 2")));
+		assertTrue(ts.isReal(getType("2 / 1.0")));
+		assertTrue(ts.isReal(getType("1 / 2 / 3.0")));
 	}
 
 	@Test
@@ -309,11 +312,11 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	// mod
 	@Test
 	public void testModSuccess() {
-		assertTrue(analyzer.isInteger(getType("1 % 2")));
-		assertTrue(analyzer.isReal(getType("1.0 % 2")));
-		assertTrue(analyzer.isReal(getType("2 % 1.0")));
-		assertTrue(analyzer.isReal(getType("2 % myReal")));
-		assertTrue(analyzer.isReal(getType("1 % 2 % 3.0")));
+		assertTrue(ts.isInteger(getType("1 % 2")));
+		assertTrue(ts.isReal(getType("1.0 % 2")));
+		assertTrue(ts.isReal(getType("2 % 1.0")));
+		assertTrue(ts.isReal(getType("2 % myReal")));
+		assertTrue(ts.isReal(getType("1 % 2 % 3.0")));
 	}
 
 	@Test
@@ -367,14 +370,14 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	// Logical And Or Not
 	@Test
 	public void testLogicalSuccess() {
-		assertTrue(analyzer.isBoolean(getType("true || false")));
-		assertTrue(analyzer.isBoolean(getType("true || myBool")));
-		assertTrue(analyzer.isBoolean(getType("true || false && true")));
-		assertTrue(analyzer
+		assertTrue(ts.isBoolean(getType("true || false")));
+		assertTrue(ts.isBoolean(getType("true || myBool")));
+		assertTrue(ts.isBoolean(getType("true || false && true")));
+		assertTrue(ts
 				.isBoolean(getType("true || true &&( false || true)")));
-		assertTrue(analyzer.isBoolean(getType("!true")));
-		assertTrue(analyzer.isBoolean(getType("!myBool")));
-		assertTrue(analyzer.isBoolean(getType("!true && !false")));
+		assertTrue(ts.isBoolean(getType("!true")));
+		assertTrue(ts.isBoolean(getType("!myBool")));
+		assertTrue(ts.isBoolean(getType("!true && !false")));
 	}
 
 	@Test
@@ -440,27 +443,27 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 	// LogicalRelation
 	@Test
 	public void testLogicalRelationSuccess() {
-		assertTrue(analyzer.isBoolean(getType("5 < 3")));
-		assertTrue(analyzer.isBoolean(getType("5.0 < 3")));
-		assertTrue(analyzer.isBoolean(getType("5.0 < myInt")));
+		assertTrue(ts.isBoolean(getType("5 < 3")));
+		assertTrue(ts.isBoolean(getType("5.0 < 3")));
+		assertTrue(ts.isBoolean(getType("5.0 < myInt")));
 
-		assertTrue(analyzer.isBoolean(getType("5 <= 3")));
-		assertTrue(analyzer.isBoolean(getType("5.0 <= 3")));
-		assertTrue(analyzer.isBoolean(getType("5.0 <= myInt")));
+		assertTrue(ts.isBoolean(getType("5 <= 3")));
+		assertTrue(ts.isBoolean(getType("5.0 <= 3")));
+		assertTrue(ts.isBoolean(getType("5.0 <= myInt")));
 
-		assertTrue(analyzer.isBoolean(getType("5 > 3")));
-		assertTrue(analyzer.isBoolean(getType("5.0 >= 3")));
-		assertTrue(analyzer.isBoolean(getType("5.0 >= myInt")));
+		assertTrue(ts.isBoolean(getType("5 > 3")));
+		assertTrue(ts.isBoolean(getType("5.0 >= 3")));
+		assertTrue(ts.isBoolean(getType("5.0 >= myInt")));
 
-		assertTrue(analyzer.isBoolean(getType("5 == 3")));
-		assertTrue(analyzer.isBoolean(getType("'string' == 'string'")));
-		assertTrue(analyzer.isBoolean(getType("5.0 == 3")));
-		assertTrue(analyzer.isBoolean(getType("true == myBool")));
+		assertTrue(ts.isBoolean(getType("5 == 3")));
+		assertTrue(ts.isBoolean(getType("'string' == 'string'")));
+		assertTrue(ts.isBoolean(getType("5.0 == 3")));
+		assertTrue(ts.isBoolean(getType("true == myBool")));
 
-		assertTrue(analyzer.isBoolean(getType("5 != 3")));
-		assertTrue(analyzer.isBoolean(getType("'string' != 'string'")));
-		assertTrue(analyzer.isBoolean(getType("5.0 != 3")));
-		assertTrue(analyzer.isBoolean(getType("true != myBool")));
+		assertTrue(ts.isBoolean(getType("5 != 3")));
+		assertTrue(ts.isBoolean(getType("'string' != 'string'")));
+		assertTrue(ts.isBoolean(getType("5.0 != 3")));
+		assertTrue(ts.isBoolean(getType("true != myBool")));
 	}
 
 	@Test
@@ -633,9 +636,9 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 
 	@Test
 	public void testComplexExpressionsSuccess() {
-		analyzer.isBoolean(getType("((((3 * myInt) + 5) % 2) > 97) || false"));
-		analyzer.isBoolean(getType("!true != myBool && (3 > (myReal * 5 + 3))"));
-		analyzer.isInteger(getType("3 * 3 + 7 / (3 * myInt % 8)"));
+		ts.isBoolean(getType("((((3 * myInt) + 5) % 2) > 97) || false"));
+		ts.isBoolean(getType("!true != myBool && (3 > (myReal * 5 + 3))"));
+		ts.isInteger(getType("3 * 3 + 7 / (3 * myInt % 8)"));
 	}
 
 	// TODO: BitwiseOrExpression, BitwiseAndExpression, BitwiseXOrExpression
@@ -668,23 +671,23 @@ public class StaticTypeAnalyzerTest extends AbstractSTextTest {
 		// int events
 		EObject statement = super.parseExpression("valueof(intEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		analyzer.isInteger(analyzer.getType((Statement) statement));
+		ts.isInteger(analyzer.getType((Statement) statement));
 		// bool events
 		statement = super.parseExpression("valueof(boolEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		analyzer.isBoolean(analyzer.getType((Statement) statement));
+		ts.isBoolean(analyzer.getType((Statement) statement));
 		// real events
 		statement = super.parseExpression("valueof(realEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		analyzer.isReal(analyzer.getType((Statement) statement));
+		ts.isReal(analyzer.getType((Statement) statement));
 		// string events
 		statement = super.parseExpression("valueof(stringEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		analyzer.isString(analyzer.getType((Statement) statement));
+		ts.isString(analyzer.getType((Statement) statement));
 		// void events
 		statement = super.parseExpression("valueof(voidEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		analyzer.isVoid(analyzer.getType((Statement) statement));
+		ts.isVoid(analyzer.getType((Statement) statement));
 	}
 
 	@Test

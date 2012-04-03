@@ -27,6 +27,7 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.base.types.Event;
+import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
@@ -78,7 +79,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String LOCAL_DECLARATIONS = "Local declarations are not allowed in interface scope.";
 
 	@Inject
-	private StaticTypeAnalyzer analyzer;
+	private ITypeInferrer analyzer;
+	@Inject
+	private ITypeSystemAccess tsAccess;
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
@@ -348,8 +351,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (definition.getInitialValue() == null)
 			return;
 		try {
-			Type inferType = analyzer.inferType(definition.getInitialValue());
-			Type combine = analyzer.combine(definitionType, inferType);
+			Type inferType = analyzer.getType(definition.getInitialValue());
+			Type combine = tsAccess.combine(definitionType, inferType);
 			if (combine == null) {
 				error("Can not assign a value of type '" + inferType.getName()
 						+ "' to a variable of type '" + definitionType + "'",
@@ -363,7 +366,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Check(CheckType.FAST)
 	public void checkExpression(final Statement statement) {
 		try {
-			analyzer.check(statement);
+			analyzer.getType(statement);
 		} catch (TypeCheckException e) {
 			error(e.getMessage(), null);
 		} catch (IllegalArgumentException e) {

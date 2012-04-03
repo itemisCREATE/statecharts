@@ -5,13 +5,13 @@ import com.google.inject.name.Named;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
+import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
@@ -72,6 +72,9 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   @Inject
   private ITimingService timingService;
+  
+  @Inject
+  private ITypeSystemAccess ts;
   
   @Inject
   @Named("InterpreterName")
@@ -174,71 +177,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     }
   }
   
-  public boolean isBoolean(final Type type) {
-    boolean _operator_and = false;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
-    } else {
-      String _name = type.getName();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "boolean");
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
-    }
-    return _operator_and;
-  }
-  
-  public boolean isInteger(final Type type) {
-    boolean _operator_and = false;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
-    } else {
-      String _name = type.getName();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "integer");
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
-    }
-    return _operator_and;
-  }
-  
-  public boolean isReal(final Type type) {
-    boolean _operator_and = false;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
-    } else {
-      String _name = type.getName();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "real");
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
-    }
-    return _operator_and;
-  }
-  
-  public boolean isVoid(final Type type) {
-    boolean _operator_or = false;
-    boolean _operator_equals = ObjectExtensions.operator_equals(type, null);
-    if (_operator_equals) {
-      _operator_or = true;
-    } else {
-      String _name = type.getName();
-      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_name, "void");
-      _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
-    }
-    return _operator_or;
-  }
-  
-  public boolean isString(final Type type) {
-    boolean _operator_and = false;
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(type, null);
-    if (!_operator_notEquals) {
-      _operator_and = false;
-    } else {
-      String _name = type.getName();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_name, "string");
-      _operator_and = BooleanExtensions.operator_and(_operator_notEquals, _operator_equals);
-    }
-    return _operator_and;
-  }
-  
   protected Object _addToScope(final VariableDefinition variable) throws NumberFormatException {
     Object _xblockexpression = null;
     {
@@ -246,26 +184,26 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       String _string = _qualifiedName.toString();
       String fqName = _string;
       Type _type = variable.getType();
-      boolean _isBoolean = this.isBoolean(_type);
+      boolean _isBoolean = this.ts.isBoolean(_type);
       if (_isBoolean) {
         ExecutionVariable _executionVariable = new ExecutionVariable(fqName, java.lang.Boolean.class, ((Boolean)false));
         this.executionContext.declareVariable(_executionVariable);
       } else {
         Type _type_1 = variable.getType();
-        boolean _isInteger = this.isInteger(_type_1);
+        boolean _isInteger = this.ts.isInteger(_type_1);
         if (_isInteger) {
           ExecutionVariable _executionVariable_1 = new ExecutionVariable(fqName, java.lang.Integer.class, ((Integer)0));
           this.executionContext.declareVariable(_executionVariable_1);
         } else {
           Type _type_2 = variable.getType();
-          boolean _isReal = this.isReal(_type_2);
+          boolean _isReal = this.ts.isReal(_type_2);
           if (_isReal) {
             float _parseFloat = Float.parseFloat("0.0");
             ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, java.lang.Float.class, ((Float)_parseFloat));
             this.executionContext.declareVariable(_executionVariable_2);
           } else {
             Type _type_3 = variable.getType();
-            boolean _isString = this.isString(_type_3);
+            boolean _isString = this.ts.isString(_type_3);
             if (_isString) {
               ExecutionVariable _executionVariable_3 = new ExecutionVariable(fqName, java.lang.String.class, "");
               this.executionContext.declareVariable(_executionVariable_3);
@@ -285,31 +223,31 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       String _string = _qualifiedName.toString();
       String fqName = _string;
       Type _type = event.getType();
-      boolean _isBoolean = this.isBoolean(_type);
+      boolean _isBoolean = this.ts.isBoolean(_type);
       if (_isBoolean) {
         ExecutionEvent _executionEvent = new ExecutionEvent(fqName, java.lang.Boolean.class, null);
         this.executionContext.declareEvent(_executionEvent);
       } else {
         Type _type_1 = event.getType();
-        boolean _isInteger = this.isInteger(_type_1);
+        boolean _isInteger = this.ts.isInteger(_type_1);
         if (_isInteger) {
           ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, java.lang.Integer.class, null);
           this.executionContext.declareEvent(_executionEvent_1);
         } else {
           Type _type_2 = event.getType();
-          boolean _isReal = this.isReal(_type_2);
+          boolean _isReal = this.ts.isReal(_type_2);
           if (_isReal) {
             ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, java.lang.Float.class, null);
             this.executionContext.declareEvent(_executionEvent_2);
           } else {
             Type _type_3 = event.getType();
-            boolean _isVoid = this.isVoid(_type_3);
+            boolean _isVoid = this.ts.isVoid(_type_3);
             if (_isVoid) {
               ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, java.lang.Void.class);
               this.executionContext.declareEvent(_executionEvent_3);
             } else {
               Type _type_4 = event.getType();
-              boolean _isString = this.isString(_type_4);
+              boolean _isString = this.ts.isString(_type_4);
               if (_isString) {
                 ExecutionEvent _executionEvent_4 = new ExecutionEvent(fqName, java.lang.String.class, "");
                 this.executionContext.declareEvent(_executionEvent_4);
