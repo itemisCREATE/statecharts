@@ -103,6 +103,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 
 	override initialize(ExecutionFlow flow) {
 		this.flow = flow;
+		externalExecutionContext = new BufferingExecutionContext(executionContext)
 		for(scope : flow.scopes){
 			scope.declareContents
 		} 
@@ -115,7 +116,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		brc = SexecFactory::eINSTANCE.createTraceBeginRunCycle
 		erc = SexecFactory::eINSTANCE.createTraceEndRunCycle
 		
-		externalExecutionContext = new BufferingExecutionContext(executionContext)
 	}
 	
 	override tearDown(){
@@ -173,7 +173,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		var fqName = provider.qualifiedName(variable).toString
 		if(variable.type.^boolean){
 			executionContext.declareVariable(new ExecutionVariable(fqName ,typeof(Boolean),false))
-		}
+		} 
 		else if (variable.type.integer){
 			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Integer),0))
 		}
