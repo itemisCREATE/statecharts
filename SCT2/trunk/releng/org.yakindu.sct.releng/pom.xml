@@ -10,11 +10,23 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.13.0</tycho-version>
+		<tycho-version>0.14.1</tycho-version>
+		<tycho-eclipserun-plugin.version>0.14.0</tycho-eclipserun-plugin.version>
 		<antrun-version>1.6</antrun-version>
 		<xtextUtilsRepository>https://builds.itemis.de/jenkins/view/YAKINDU%202/job/XTEXT_UTILS/lastSuccessfulBuild/</xtextUtilsRepository>
 	</properties>
-
+	<repositories>
+		<repository>
+	      <id>indigo</id>
+	      <layout>p2</layout>
+	      <url>http://download.eclipse.org/releases/indigo</url>
+	    </repository>
+		<repository>
+	      <id>eclipse37</id>
+	      <layout>p2</layout>
+	      <url>http://download.eclipse.org/eclipse/updates/3.7</url>
+	    </repository>
+	</repositories>
 	<build>
 		<plugins>
 			<plugin>
