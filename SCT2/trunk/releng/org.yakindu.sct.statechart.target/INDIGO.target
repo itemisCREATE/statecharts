@@ -3,11 +3,11 @@
 
 <target name="INDIGO" sequenceNumber="18">
 <locations>
-<location includeAllPlatforms="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.platform.ide" version="3.7.2.M20120208-0800"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.7/"/>
 </location>
-<location includeAllPlatforms="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="2.0.1.v201108020636"/>
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.7.2.v20120130-0943"/>
 <unit id="org.eclipse.gef.sdk.feature.group" version="3.7.2.v20110927-2020-7G7W77A5WNgIRPdWXDIbNTSQPdQL"/>
@@ -16,7 +16,7 @@
 <unit id="org.eclipse.xpand.sdk.feature.group" version="1.1.1.v201108020519"/>
 <repository location="http://download.eclipse.org/releases/indigo"/>
 </location>
-<location includeAllPlatforms="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<location includeAllPlatforms="true" includeMode="slicer" includeSource="true" type="InstallableUnit">
 <unit id="org.yakindu.base.feature.group" version="1.0.0.201204031411"/>
 <repository location="http://updates.yakindu.com/indigo/integration"/>
 </location>
