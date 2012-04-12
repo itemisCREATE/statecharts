@@ -1,0 +1,44 @@
+To execute this build as a Hudson build job, you have to configure the following:
+
+Parameterized-build:
++ Run Parameter
+	Name: promotionSource
+	Project: YAKINDU_SCT2_CI
+	Description: Select the build to be promoted.
+
++ Selection
+	Name: promotionTarget
+	Selections:
+		indigo/integration
+		indigo/milestones
+		indigo/releases
+	Description:
+		Select the update site to promote to.
+
+Source-Code-Management:
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/releng
+	Location: releng
+ 
+Build:
+
++ Invoke Maven 3
+	Goals
+		clean install
+	POM File
+		org.yakindu.sct.releng/promote-pom.xml
+	Properties
+		promotionSource=${env.promotionSource}
+		promotionTarget=${env.promotionTarget}
+	Profiles
+	JVM Options
+	Private Maven-Repository: Checked
+		
+	
+Post-Build-Actions:
++ Send build artifacts over SSH
+	Name: Yakindu Update Site
+	Source files: releng/org.yakindu.sct.releng/target/local-update-site/**
+	Remove prefix: releng/org.yakindu.sct.releng/target/local-update-site
+	Remote directory: /yakindu/${promotionTarget}
+		
