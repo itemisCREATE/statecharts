@@ -26,18 +26,27 @@ Build:
 
 + Invoke Maven 3
 	Goals
-		clean verify -PCI,Indigo.target -s ../build/org.yakindu.sct.releng/settings.xml
+		clean
+	POM File
+		../build/org.yakindu.sct.releng/pom.xml
+	Properties
+		xtextUtilsRepository=${env.xtextUtilsRepository}
+		tycho.mode=maven
+NOTE: This is for parameterized build with dependency to the xtextUtils Job. The URL should point to an repository with XtextUtils.
+	JVM Options
+	Private Maven-Repository: Checked
+
+
++ Invoke Maven 3
+	Goals
+		verify -PCI,Indigo.target -s ../build/org.yakindu.sct.releng/settings.xml
 	POM File
 		../build/org.yakindu.sct.releng/pom.xml
 	Profiles
 		CI,Indigo.target
 	Properties
 		xtextUtilsRepository=${env.xtextUtilsRepository}
-NOTE: This is for parameterized build with dependency to the xtextUtils Job. The URL should point to an repository with XtextUtils.
-	JVM Options
-	Private Maven-Repository: Checked
 
-		
 + Execute Shell
 	Command
 		if [ -d "update-site" ]; then
