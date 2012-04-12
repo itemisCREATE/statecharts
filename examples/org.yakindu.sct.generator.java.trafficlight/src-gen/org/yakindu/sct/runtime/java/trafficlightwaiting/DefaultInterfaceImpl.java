@@ -13,9 +13,9 @@ package org.yakindu.sct.runtime.java.trafficlightwaiting;
 import org.yakindu.sct.runtime.java.Event;
 
 public class DefaultInterfaceImpl implements IDefaultInterfaceImpl {
-	protected final Event<Events> EventKeypress1 = new Event<Events>(
+	protected final Event<Events> Keypress1 = new Event<Events>(
 			Events.Keypress1, 0);
-	protected final Event<Events> EventKeypress2 = new Event<Events>(
+	protected final Event<Events> Keypress2 = new Event<Events>(
 			Events.Keypress2, 0);
 
 	protected TrafficLightWaitingCycleBasedStatemachine statemachine;
@@ -31,7 +31,7 @@ public class DefaultInterfaceImpl implements IDefaultInterfaceImpl {
 	}
 
 	public Event<Events> getEventKeypress1() {
-		return EventKeypress1;
+		return Keypress1;
 	}
 
 	public void raiseKeypress2() {
@@ -39,7 +39,7 @@ public class DefaultInterfaceImpl implements IDefaultInterfaceImpl {
 	}
 
 	public Event<Events> getEventKeypress2() {
-		return EventKeypress2;
+		return Keypress2;
 	}
 
 }
