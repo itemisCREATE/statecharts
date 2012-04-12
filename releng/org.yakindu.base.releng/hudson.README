@@ -41,7 +41,7 @@ Build:
 
 + Invoke Maven 3
 	Goals
-		clean verify
+		clean verify -s ../build/org.yakindu.base.releng/settings.xml
 	POM File
 		../build/org.yakindu.base.releng/pom.xml
 	Profiles
