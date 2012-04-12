@@ -20,6 +20,7 @@ import org.yakindu.sct.runtime.java.ITimerService;
 
 public class TrafficLightWaitingCycleBasedStatemachine
 		implements
+			DefaultInterface,
 			ITimedStatemachine {
 
 	private enum TimeEvents {
@@ -149,6 +150,14 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	protected IDefaultInterfaceImpl getDefaultInterfaceImpl() {
 		return defaultInterface;
+	}
+
+	public void raiseKeypress1() {
+		getDefaultInterface().raiseKeypress1();
+	}
+
+	public void raiseKeypress2() {
+		getDefaultInterface().raiseKeypress2();
 	}
 
 	public void enter() {
@@ -336,6 +345,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactPedWaiting() {
 	}
@@ -465,6 +475,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactWaitOff() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl()
@@ -592,6 +603,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactStreetAttention() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl()
@@ -686,6 +698,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactStreetRed() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl()
@@ -779,6 +792,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactPedestrianGreen() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl()
@@ -872,6 +886,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactPedestrianRed() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl()
@@ -966,6 +981,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactStreetPrepare() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl()
@@ -1061,6 +1077,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactOff() {
 	}
@@ -1111,6 +1128,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactYellowOff() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl()
@@ -1159,6 +1177,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();
