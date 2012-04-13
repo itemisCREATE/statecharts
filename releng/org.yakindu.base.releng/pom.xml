@@ -10,20 +10,16 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.13.0</tycho-version>
+		<tycho-version>0.14.1</tycho-version>
 		<antrun-version>1.6</antrun-version>
+		<p2.target.repository>file:../org.yakindu.base.target.repository/target/repository</p2.target.repository>
 	</properties>
 	<repositories>
 		<repository>
-	      <id>indigo</id>
-	      <layout>p2</layout>
-	      <url>http://download.eclipse.org/releases/indigo</url>
-	    </repository>
-		<repository>
-	      <id>eclipse37</id>
-	      <layout>p2</layout>
-	      <url>http://download.eclipse.org/eclipse/updates/3.7</url>
-	    </repository>
+			<id>target</id>
+			<layout>p2</layout>
+			<url>${p2.target.repository}</url>
+		</repository>
 	</repositories>
 	<build>
 		<plugins>
@@ -130,14 +126,6 @@
 						<version>${tycho-version}</version>
 						<configuration>
 							<!-- add target file content to target platform -->
-							<target>
-								<artifact>
-									<groupId>org.yakindu.base</groupId>
-									<artifactId>org.yakindu.base.target</artifactId>
-									<version>1.0.0-SNAPSHOT</version>
-									<classifier>INDIGO_SR1</classifier>
-								</artifact>
-							</target>
 							<environments>
 								<environment>
 									<os>linux</os>
@@ -186,7 +174,6 @@
 		<module>../de.itemis.xtext.utils.jface.source-feature</module>
 		<module>../org.yakindu.base-feature</module>
 		<module>../org.yakindu.base.repository</module>
-		<module>../org.yakindu.base.target</module>
 	</modules>
 
 </project>
