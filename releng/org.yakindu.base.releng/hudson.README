@@ -1,8 +1,14 @@
 To execute this build as a Hudson build job, you have to configure the following:
 
+Parameterized-build:
++ Run Parameter
+	Name: base.target.job
+	Project: YAKINDU_Base_target
+	Description: Select the build to be promoted.
+
 Source-Code-Management:
 + SVN
-	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/releng
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng
 	Location: releng
 + SVN
 	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/de.itemis.xtext.utils/plugins
@@ -44,6 +50,8 @@ Build:
 		clean verify -s ../build/org.yakindu.base.releng/settings.xml
 	POM File
 		../build/org.yakindu.base.releng/pom.xml
+	Properties
+		p2.target.repository=${env.base.target.job}artifact/update-site
 	Profiles
 	JVM Options
 

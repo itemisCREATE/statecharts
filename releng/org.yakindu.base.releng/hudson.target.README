@@ -1,0 +1,29 @@
+To execute this build as a Hudson build job, you have to configure the following:
+
+Source-Code-Management:
++ SVN
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng
+	Location: releng
+ 
+Build:
++ Invoke Maven 3
+	Goals
+		clean verify
+	POM File
+		org.yakindu.base.target.parent/pom.xml
+	Profiles
+	JVM Options
+
++ Execute Shell
+	Command
+		if [ -d "update-site" ]; then
+			rm -fr update-site
+		fi
+		mkdir update-site
+		cp -R releng/org.yakindu.base.target.repository/target/repository/* update-site/
+	
+Post-Build-Actions:
++ Archive the artifacs
+	Files to archive
+		update-site/**
+		
