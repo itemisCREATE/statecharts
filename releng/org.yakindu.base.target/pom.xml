@@ -5,9 +5,9 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.yakindu.base</groupId>
-		<artifactId>org.yakindu.base.releng</artifactId>
+		<artifactId>org.yakindu.base.target.parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
-		<relativePath>../org.yakindu.base.releng/pom.xml</relativePath>
+		<relativePath>../org.yakindu.base.target.parent/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.base.target</artifactId>
 	<packaging>pom</packaging>

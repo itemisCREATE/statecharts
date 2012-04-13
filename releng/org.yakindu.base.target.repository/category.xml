@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.emf.sdk_2.7.1.v20110913-1526.jar" id="org.eclipse.emf.sdk" version="2.7.1.v20110913-1526">
+      <category name="3rdParty"/>
+   </feature>
+   <feature url="features/org.eclipse.gmf.runtime.notation.sdk_1.5.0.v20110426-2159-47D08xGD6ExNBM7CIJa3CIKK9t84.jar" id="org.eclipse.gmf.runtime.notation.sdk" version="1.5.0.v20110426-2159-47D08xGD6ExNBM7CIJa3CIKK9t84">
+      <category name="3rdParty"/>
+   </feature>
+   <feature url="features/org.eclipse.gmf.runtime.sdk_1.5.0.v20110607-1200-67N09E9QnChoWswz-3wf_rz0kQ8Y.jar" id="org.eclipse.gmf.runtime.sdk" version="1.5.0.v20110607-1200-67N09E9QnChoWswz-3wf_rz0kQ8Y">
+      <category name="3rdParty"/>
+   </feature>
+   <feature url="features/org.eclipse.xtext.sdk_2.0.1.v201108020636.jar" id="org.eclipse.xtext.sdk" version="2.0.1.v201108020636">
+      <category name="3rdParty"/>
+   </feature>
+   <feature url="features/org.eclipse.platform_3.7.2.v20120207-1839-9gF7UHPDFxGjd-PqDr2jX_4yKaumkoHTz04_q-q.jar" id="org.eclipse.platform" version="3.7.2.v20120207-1839-9gF7UHPDFxGjd-PqDr2jX_4yKaumkoHTz04_q-q">
+      <category name="3rdParty"/>
+   </feature>
+   <category-def name="3rdParty" label="3rdParty Yakindu Base target"/>
+</site>
