@@ -1,4 +1,5 @@
 To execute this build as a Hudson build job, you have to configure the following:
+JobName: YAKINDU_Base_target
 
 Source-Code-Management:
 + SVN
