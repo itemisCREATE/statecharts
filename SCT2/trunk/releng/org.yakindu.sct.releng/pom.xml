@@ -13,19 +13,9 @@
 		<tycho-version>0.14.1</tycho-version>
 		<tycho-eclipserun-plugin.version>0.14.0</tycho-eclipserun-plugin.version>
 		<antrun-version>1.6</antrun-version>
+		<p2.target.repository>file:../org.yakindu.base.target.repository/target/repository</p2.target.repository>
+		<p2.base.repository>file:../org.yakindu.base.repository/target/repository</p2.base.repository>
 	</properties>
-	<repositories>
-		<repository>
-	      <id>indigo</id>
-	      <layout>p2</layout>
-	      <url>http://download.eclipse.org/releases/indigo</url>
-	    </repository>
-		<repository>
-	      <id>eclipse37</id>
-	      <layout>p2</layout>
-	      <url>http://download.eclipse.org/eclipse/updates/3.7</url>
-	    </repository>
-	</repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -124,10 +114,75 @@
 
 	<profiles>
 		<profile>
-			<id>Indigo.target</id>
+			<id>local-target</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
+			<repositories>
+				<repository>
+			      <id>target</id>
+			      <layout>p2</layout>
+			      <url>${p2.target.repository}</url>
+			    </repository>
+				<repository>
+			      <id>base</id>
+			      <layout>p2</layout>
+			      <url>${p2.base.repository}</url>
+			    </repository>
+			</repositories>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<environments>
+								<environment>
+									<os>linux</os>
+									<ws>gtk</ws>
+									<arch>x86</arch>
+								</environment>
+								<environment>
+									<os>linux</os>
+									<ws>gtk</ws>
+									<arch>x86_64</arch>
+								</environment>
+								<environment>
+									<os>win32</os>
+									<ws>win32</ws>
+									<arch>x86</arch>
+								</environment>
+								<environment>
+									<os>win32</os>
+									<ws>win32</ws>
+									<arch>x86_64</arch>
+								</environment>
+								<environment>
+									<os>macosx</os>
+									<ws>cocoa</ws>
+									<arch>x86_64</arch>
+								</environment>
+							</environments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>Indigo.target</id>
+			<repositories>
+				<repository>
+			      <id>indigo</id>
+			      <layout>p2</layout>
+			      <url>http://download.eclipse.org/releases/indigo</url>
+			    </repository>
+				<repository>
+			      <id>eclipse37</id>
+			      <layout>p2</layout>
+			      <url>http://download.eclipse.org/eclipse/updates/3.7</url>
+			    </repository>
+			</repositories>
 			<build>
 				<plugins>
 					<plugin>
@@ -175,11 +230,14 @@
 					</plugin>
 				</plugins>
 			</build>
+			<modules>
+				<module>../org.yakindu.sct.statechart.target</module>
+			</modules>
 		</profile>
 	</profiles>
 
 	<modules>
-		<module>../org.yakindu.sct.statechart.target</module>
+	<!--	<module>../org.yakindu.sct.statechart.target</module> -->
 		<module>../org.yakindu.sct.doc.user</module>
 		<module>../org.yakindu.sct.generator.core</module>
 		<module>../org.yakindu.sct.generator.genmodel</module>
