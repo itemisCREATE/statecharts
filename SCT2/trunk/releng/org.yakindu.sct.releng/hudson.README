@@ -1,5 +1,15 @@
 To execute this build as a Hudson build job, you have to configure the following:
 
+Parameterized-build:
++ Run Parameter
+	Name: base.target.job
+	Project: YAKINDU_Base_target
+	Description: Build from target to use for target repository
++ Run Parameter
+	Name: base.repository.job
+	Project: YAKINDU_Base_CI
+	Description: 
+
 Source-Code-Management:
 + SVN
 	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/releng
@@ -10,6 +20,9 @@ Source-Code-Management:
 + SVN
 	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/features
 	Location: sct2_repository/features
++ SVN
+	URL: https://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/test-plugins
+	Location: sct2_repository/test-plugins
     
 Build:
 + Execute Shell
@@ -30,7 +43,6 @@ Build:
 	POM File
 		../build/org.yakindu.sct.releng/pom.xml
 	Properties
-		xtextUtilsRepository=${env.xtextUtilsRepository}
 		tycho.mode=maven
 	JVM Options
 	Private Maven-Repository: Checked
@@ -42,8 +54,11 @@ Build:
 	POM File
 		../build/org.yakindu.sct.releng/pom.xml
 	Profiles
-		CI,Indigo.target
+		CI
 	Properties
+		p2.target.repository=${env.base.target.job}artifact/update-site
+		p2.base.repository=${env.base.repository.job}artifact/update-site
+	Private Maven-Repository: Checked
 
 + Execute Shell
 	Command
