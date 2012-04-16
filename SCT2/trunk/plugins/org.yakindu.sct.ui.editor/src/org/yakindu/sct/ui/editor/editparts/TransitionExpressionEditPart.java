@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+* Copyright (c) 2011 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -35,11 +35,9 @@ public class TransitionExpressionEditPart extends
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(
-				EditPolicy.COMPONENT_ROLE,
+		installEditPolicy(EditPolicy.COMPONENT_ROLE,
 				new TransitionExpressionComponentEditPolicy());
-		installEditPolicy(
-				EditPolicy.SELECTION_FEEDBACK_ROLE,
+		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE,
 				new ContextSensitiveHelpPolicy(
 						HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION));
 	}
