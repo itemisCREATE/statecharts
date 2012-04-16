@@ -11,6 +11,7 @@
  */
 package org.yakindu.sct.model.stext.test;
 
+import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ENTRY_EXIT_TRIGGER_NOT_ALLOWED;
@@ -20,14 +21,11 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_D
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DECLARATIONS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_REACTIONS_NOT_ALLOWED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
-import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 
 import java.lang.reflect.Method;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -108,6 +106,10 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		validationResult.assertOK();
 	}
 
+	/**
+	 * @see STextJavaValidator#checkFeatureCall(org.yakindu.sct.model.stext.stext.FeatureCall)
+	 * @see STextJavaValidator#checkFeatureCall(TypedElementReferenceExpression)
+	 */
 	@Test
 	public void checkFeatureCall() {
 		Scope context = (Scope) parseExpression(
