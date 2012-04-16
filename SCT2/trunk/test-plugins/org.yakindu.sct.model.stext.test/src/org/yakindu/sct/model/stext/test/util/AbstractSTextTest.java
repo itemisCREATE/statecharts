@@ -63,6 +63,10 @@ public abstract class AbstractSTextTest {
 		return resource;
 	}
 
+	protected EObject parseExpression(String expression, String ruleName) {
+		return parseExpression(expression, null, ruleName);
+	}
+
 	protected EObject parseExpression(String expression, Scope context,
 			String ruleName) {
 		XtextResource resource = getResource();
