@@ -10,7 +10,23 @@
   <servers/>
   <mirrors>
     <mirror>
-      <id>Reserve</id>
+      <id>Reserve1</id>
+      <name>itemis</name>
+      <url>http://reserve.itemis.de/eclipse/releases/indigo</url>
+      <mirrorOf>http://download.eclipse.org/releases/indigo</mirrorOf>
+      <layout>p2</layout>
+      <mirrorOfLayouts>p2</mirrorOfLayouts>
+    </mirror>
+    <mirror>
+      <id>Reserve2</id>
+      <name>itemis</name>
+      <url>http://reserve.itemis.de/eclipse/eclipse/updates/3.7</url>
+      <mirrorOf>http://download.eclipse.org/eclipse/updates/3.7</mirrorOf>
+      <layout>p2</layout>
+      <mirrorOfLayouts>p2</mirrorOfLayouts>
+    </mirror>
+    <mirror>
+      <id>Reserve5</id>
       <name>itemis</name>
       <url>http://reserve.itemis.de/eclipse/releases/indigo</url>
       <mirrorOf>indigo</mirrorOf>
@@ -18,7 +34,7 @@
       <mirrorOfLayouts>p2</mirrorOfLayouts>
     </mirror>
     <mirror>
-      <id>Reserve3</id>
+      <id>Reserve7</id>
       <name>eclipse37</name>
       <url>http://reserve.itemis.de/eclipse/eclipse/updates/3.7</url>
       <mirrorOf>eclipse37</mirrorOf>
