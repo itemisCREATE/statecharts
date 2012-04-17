@@ -75,7 +75,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testAddSuccess() {
 		Statement statement = (Statement) super.parseExpression("1+2",
-				super.createDefaultScope(), Expression.class.getSimpleName());
+				super.internalScope(), Expression.class.getSimpleName());
 		analyzer.getType(statement);
 		assertTrue(ts.isInteger(analyzer.getType(statement)));
 
@@ -693,7 +693,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testEventIsRaisedSuccess() {
 		EObject statement = super.parseExpression("myBool = abc",
-				createDefaultScope(), Expression.class.getSimpleName());
+				internalScope(), Expression.class.getSimpleName());
 		analyzer.getType((Statement) statement);
 	}
 
@@ -766,12 +766,12 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	}
 
 	private Scope createValuedEventsScope() {
-		return createContextScope("internal: var myBool : boolean event intEvent : integer = 22 event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void");
+		return createInternalScope("internal: var myBool : boolean event intEvent : integer = 22 event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void");
 	}
 
 	protected Type getType(String expression) {
 		EObject statement = super.parseExpression(expression,
-				super.createDefaultScope(), Expression.class.getSimpleName());
+				super.internalScope(), Expression.class.getSimpleName());
 		assertNotNull(statement);
 		return analyzer.getType((Statement) statement);
 	}

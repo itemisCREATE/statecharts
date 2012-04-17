@@ -29,6 +29,8 @@ import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.stext.InterfaceScope;
+import org.yakindu.sct.model.stext.stext.InternalScope;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -104,15 +106,48 @@ public abstract class AbstractSTextTest {
 		return rootASTElement;
 	}
 
-	protected Scope createContextScope(String contextScope) {
+	protected Scope createInternalScope(String contextScope) {
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
-		parserRule.setName("InternalScope");
+		parserRule.setName(InternalScope.class.getSimpleName());
 		IParseResult result = parser.parse(parserRule, new StringReader(
 				contextScope));
 		return (Scope) result.getRootASTElement();
 	}
 
-	protected Scope createDefaultScope() {
-		return createContextScope("internal: in event abc : integer operation foo() var myInt : integer var myBool : boolean var myReal : real var myString : string");
+	protected Scope createInterfaceScope(String contextScope) {
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setName(InterfaceScope.class.getSimpleName());
+		IParseResult result = parser.parse(parserRule, new StringReader(
+				contextScope));
+		return (Scope) result.getRootASTElement();
+	}
+
+	/**
+	 * <pre>
+	 * internal: 
+	 * 	 in event abc : integer 
+	 *   in event event1
+	 * 	 operation foo() 
+	 *   operation myOpp1() :integer
+	 * 	 var myInt : integer 
+	 * 	 var myBool : boolean 
+	 * 	 var myReal : real 
+	 * 	 var myString : string
+	 * </pre>
+	 */
+	protected Scope internalScope() {
+		return createInternalScope("internal: in event abc : integer in event event1 operation foo() operation myOpp1() :integer var myInt : integer var myBool : boolean var myReal : real var myString : string");
+	}
+
+	/**
+	 * <pre>
+	 * "interface ABC:
+	 *     operation myOpp2() 
+	 *     myParamOpp(param1 : integer, param2 : boolean ) : string
+	 *     in event event2"
+	 * </pre>
+	 */
+	protected Scope interfaceScope() {
+		return createInterfaceScope("interface ABC : operation myParamOpp(param1 : integer, param2 : boolean ) : string operation myOpp2() in event event2 in event event3");
 	}
 }

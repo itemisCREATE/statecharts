@@ -99,7 +99,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void checkOperationArguments_TypedElementReferenceExpression() {
-		Scope context = createContextScope("internal: operation myOperation(param1 : integer, param2: boolean)");
+		Scope context = createInternalScope("internal: operation myOperation(param1 : integer, param2: boolean)");
 		EObject model = super.parseExpression("myOperation(5,true)", context,
 				Expression.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
