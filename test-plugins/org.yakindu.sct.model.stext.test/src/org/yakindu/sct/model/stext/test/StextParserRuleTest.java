@@ -17,7 +17,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.Entrypoint;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.Exitpoint;
@@ -25,6 +24,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
@@ -156,8 +156,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	public void testReactionTrigger() {
 		String rule = ReactionTrigger.class.getSimpleName();
-		Scope scope = createContextScope("internal : event event1");
-		parseExpression("event1", scope, rule);
+		// Internal Scope
+		parseExpression("event1", internalScope(), rule);
 		parseExpression("after 10 s", rule);
 		parseExpression("after 10 ms", rule);
 		parseExpression("after 10 us", rule);
@@ -169,12 +169,31 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("always", rule);
 		parseExpression("default", rule);
 		parseExpression("else", rule);
+		parseExpression("event1, after 10s", internalScope(), rule);
+		parseExpression("event1, after 10s, every 10 ms", internalScope(), rule);
+		parseExpression("event1, after 10s [false == true]", internalScope(),
+				rule);
+		parseExpression("event1, after 10s [5  > 10]", internalScope(), rule);
+		parseExpression("ABC.event2", interfaceScope(), rule);
+	}
 
-		parseExpression("event1, after 10s", scope, rule);
+	/**
+	 * ReactionEffect returns sgraph::Effect: {ReactionEffect}
+	 * actions+=(Expression | EventRaisingExpression) (=> ';'
+	 * actions+=(Expression|EventRaisingExpression) )* ; // (';')?;
+	 */
+	@Test
+	public void testReactionEffect() {
+		String rule = ReactionEffect.class.getSimpleName();
+		parseExpression("raise event1", internalScope(), rule);
+		parseExpression("myInt = 5", internalScope(), rule);
+		parseExpression("myOpp1()", internalScope(), rule);
+		parseExpression("myInt = myOpp1()", internalScope(), rule);
 
-		parseExpression("event1, after 10s, every 10 ms", scope, rule);
-		parseExpression("event1, after 10s [false == true]", scope, rule);
-		parseExpression("event1, after 10s [5  > 10]", scope, rule);
+		parseExpression("raise ABC.event2", interfaceScope(), rule);
+		parseExpression("ABC.myOpp2()", interfaceScope(), rule);
+		parseExpression("ABC.myOpp2(5,false)", interfaceScope(), rule);
+		parseExpression("ABC.myOpp2(); raise ABC.event2 ", interfaceScope(), rule);
 
 	}
 
@@ -200,14 +219,14 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	 * (declarations+=(EventDeclarartion | VariableDeclaration |
 	 * OperationDeclaration | LocalReaction))*;
 	 */
+	@Test
 	public void testInternalScope() {
 		String rule = InternalScope.class.getSimpleName();
 		parseExpression("internal :", rule);
 		parseExpression("internal : event Event1", rule);
 		parseExpression("internal : var myVar : integer", rule);
 		parseExpression("internal : operation myOpp()", rule);
-		parseExpression("interface DEF : exitpoint abc", rule);
-		parseExpression("interface : entrypoint abc", rule);
+		parseExpression("internal : every 10 ms / raise abc", internalScope(), rule);
 	}
 
 }
