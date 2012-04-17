@@ -3,15 +3,15 @@ JobName: YAKINDU_Base_target
 
 Source-Code-Management:
 + SVN
-	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng
-	Location: releng
+	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng/org.yakindu.base.target
+	Location: org.yakindu.base.target
  
 Build:
 + Invoke Maven 3
 	Goals
 		clean verify
 	POM File
-		org.yakindu.base.target.parent/pom.xml
+		pom.xml
 	Profiles
 	JVM Options
 
@@ -21,7 +21,7 @@ Build:
 			rm -fr update-site
 		fi
 		mkdir update-site
-		cp -R releng/org.yakindu.base.target.repository/target/repository/* update-site/
+		cp -R org.yakindu.base.target/target/repository/* update-site/
 	
 Post-Build-Actions:
 + Archive the artifacs
