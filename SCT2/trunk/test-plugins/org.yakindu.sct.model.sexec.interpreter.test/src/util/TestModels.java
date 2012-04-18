@@ -41,6 +41,7 @@ public class TestModels {
 	private static final String DEEP_HISTORY = "DeepHistory.sct";
 	private static final String STATE_ACTIVE = "StateIsActive.sct";
 	private static final String VALUED_EVENTS = "ValuedEvents.sct";
+	private static final String FEATURE_CALLS = "FeatureCalls.sct";
 
 	@Inject
 	private ModelSequencer sequencer;
@@ -74,6 +75,7 @@ public class TestModels {
 	public ExecutionFlow createDeepHistoryModel() throws IOException {
 		return loadFromResource(DEEP_HISTORY);
 	}
+
 	/**
 	 * <img src="../../images/StateIsActive.png" /> <br />
 	 * 
@@ -83,6 +85,7 @@ public class TestModels {
 	public ExecutionFlow createStateIsActiveModel() throws IOException {
 		return loadFromResource(STATE_ACTIVE);
 	}
+
 	/**
 	 * <img src="../../images/ValuedEvents.png" /> <br />
 	 * 
@@ -91,6 +94,15 @@ public class TestModels {
 	 */
 	public ExecutionFlow createValuedEventsModel() throws IOException {
 		return loadFromResource(VALUED_EVENTS);
+	}
+	/**
+	 * <img src="../../images/FeatureCalls.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createFeatureCallModel() throws IOException {
+		return loadFromResource(FEATURE_CALLS);
 	}
 
 	/**

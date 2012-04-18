@@ -105,4 +105,16 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 		assertVarValue("myVar", 42);
 	}
 
+	@Test
+	public void testFeatureCall() throws Exception {
+		loadAndconfigureInterpreter(models.createFeatureCallModel());
+		assertIsActive("A");
+		interpreter.runCycle();
+		context().raiseEvent("MyInterface.Event1", null);
+		interpreter.runCycle();
+		interpreter.runCycle();
+		assertIsActive("B");
+		assertVarValue("MyInterface.myInt", 42);
+	}
+
 }
