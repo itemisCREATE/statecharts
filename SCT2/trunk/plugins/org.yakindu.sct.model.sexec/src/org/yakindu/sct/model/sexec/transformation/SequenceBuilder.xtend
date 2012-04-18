@@ -1,5 +1,5 @@
 package org.yakindu.sct.model.sexec.transformation
- 
+
 import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -380,7 +380,7 @@ class SequenceBuilder {
 	def createInitialization(VariableDefinition vd) {
 		val execution = sexec.factory.createExecution
 		val assignment = stext.factory.createAssignmentExpression 
-		val reference = stext.factory.createTypedElementReferenceExpression
+		val reference = stext.factory.createElementReferenceExpression
 		reference.reference = vd
 		assignment.varRef = reference
 		assignment.operator = AssignmentOperator::ASSIGN

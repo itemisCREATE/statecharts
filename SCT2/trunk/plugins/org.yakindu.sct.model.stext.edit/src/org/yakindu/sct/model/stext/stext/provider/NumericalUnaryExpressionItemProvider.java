@@ -281,7 +281,7 @@ public class NumericalUnaryExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

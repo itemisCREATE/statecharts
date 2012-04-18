@@ -590,12 +590,12 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION:
       {
-        TypedElementReferenceExpression typedElementReferenceExpression = (TypedElementReferenceExpression)theEObject;
-        T result = caseTypedElementReferenceExpression(typedElementReferenceExpression);
-        if (result == null) result = caseExpression(typedElementReferenceExpression);
-        if (result == null) result = caseStatement(typedElementReferenceExpression);
+        ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)theEObject;
+        T result = caseElementReferenceExpression(elementReferenceExpression);
+        if (result == null) result = caseExpression(elementReferenceExpression);
+        if (result == null) result = caseStatement(elementReferenceExpression);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -1550,17 +1550,17 @@ public class StextSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Typed Element Reference Expression</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Element Reference Expression</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Typed Element Reference Expression</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Element Reference Expression</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseTypedElementReferenceExpression(TypedElementReferenceExpression object)
+  public T caseElementReferenceExpression(ElementReferenceExpression object)
   {
     return null;
   }

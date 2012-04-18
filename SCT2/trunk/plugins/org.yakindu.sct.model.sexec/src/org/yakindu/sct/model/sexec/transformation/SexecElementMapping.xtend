@@ -65,6 +65,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.EcoreUtil2
 import org.yakindu.sct.model.sgraph.CompositeElement
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
  
 
 @Singleton class SexecElementMapping {
@@ -209,13 +210,7 @@ import org.yakindu.sct.model.sgraph.CompositeElement
 	}
 
 	def dispatch Expression raised(RegularEventSpec e) {
-		val r = stext.factory.createTypedElementReferenceExpression
-//		val event = e.event
-//		val target = switch (event) {
-//			FeatureCall: event.feature
-//			TypedElementReferenceExpression: event.reference
-//		}
-//		r.reference = (target as EventDefinition).create
+		val r = stext.factory.createElementReferenceExpression
 		r.reference = e.resolveRegularEventSpec(e.eContainer)
 		return r
 	} 	 
@@ -223,12 +218,12 @@ import org.yakindu.sct.model.sgraph.CompositeElement
 	def dispatch NamedElement resolveRegularEventSpec(Object o, Object context) { null }
 	def dispatch NamedElement resolveRegularEventSpec(RegularEventSpec re, Object context) { if ( re.event != null ) re.event.resolveRegularEventSpec(re) }
 	def dispatch NamedElement resolveRegularEventSpec(FeatureCall fc, Object context) { if (fc.feature != null) fc.feature.resolveRegularEventSpec(fc) }
-	def dispatch NamedElement resolveRegularEventSpec(TypedElementReferenceExpression ter, Object context) { if (ter.reference != null) ter.reference.resolveRegularEventSpec(ter) }
+	def dispatch NamedElement resolveRegularEventSpec(ElementReferenceExpression ter, Object context) { if (ter.reference != null) ter.reference.resolveRegularEventSpec(ter) }
 	def dispatch NamedElement resolveRegularEventSpec(EventDefinition ed, Object context) { ed.create }
 	
 	
 	def dispatch Expression raised(TimeEventSpec e) {
-		val r = stext.factory.createTypedElementReferenceExpression
+		val r = stext.factory.createElementReferenceExpression
 		r.reference = e.createDerivedEvent
 		return r
 	}

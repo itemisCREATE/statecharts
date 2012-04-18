@@ -283,7 +283,7 @@ public class LogicalRelationExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_RELATION_EXPRESSION__LEFT_OPERAND,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -383,7 +383,7 @@ public class LogicalRelationExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_RELATION_EXPRESSION__RIGHT_OPERAND,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

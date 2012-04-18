@@ -158,12 +158,12 @@ class ModelSequencer {
 		val allContent = EcoreUtil2::eAllContentsAsList(flow)
 		val declared = allContent.filter(e | e instanceof EventDefinition || e instanceof VariableDefinition || e instanceof OperationDefinition).toSet
 		
-		allContent.filter(typeof(TypedElementReferenceExpression)).forEach( ere | ere.retarget(declared) )
+		allContent.filter(typeof(ElementReferenceExpression)).forEach( ere | ere.retarget(declared) )
 		allContent.filter(typeof(FeatureCall)).forEach( call|call.retarget(declared))
 	}
 	
 	
-	def retarget(TypedElementReferenceExpression ere, Collection<EObject> declared) {
+	def retarget(ElementReferenceExpression ere, Collection<EObject> declared) {
 		if (ere.reference != null && ! declared.contains(ere.reference) ) {
 			val r = ere.reference.replaced 
 			if (r != null) ere.reference = r
@@ -178,14 +178,14 @@ class ModelSequencer {
 	}
 	
 	
-	def dispatch Declaration replaced(NamedElement ne) {
+	def dispatch Declaration replaced(EObject ne) {
 		try {
-			println("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.name)
+			println("Replace with unknown eObject called: "+if (ne ==null) "null" else ne.fullyQualifiedName)
 			
-			LogFactory::getLog(typeof(ModelSequencer)).error("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.name)
+			LogFactory::getLog(typeof(ModelSequencer)).error("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.fullyQualifiedName)
 		} catch (LogConfigurationException e) {
 			e.printStackTrace
-			println("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.name)
+			println("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.fullyQualifiedName)
 		}
 		null;
 	}

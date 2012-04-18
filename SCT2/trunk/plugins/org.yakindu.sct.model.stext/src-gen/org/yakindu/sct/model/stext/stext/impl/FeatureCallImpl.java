@@ -14,14 +14,13 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
-import org.yakindu.base.types.Feature;
 
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
@@ -63,7 +62,7 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * @generated
    * @ordered
    */
-  protected Feature feature;
+  protected EObject feature;
 
   /**
    * The default value of the '{@link #isOperationCall() <em>Operation Call</em>}' attribute.
@@ -169,12 +168,12 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public Feature getFeature()
+  public EObject getFeature()
   {
     if (feature != null && feature.eIsProxy())
     {
       InternalEObject oldFeature = (InternalEObject)feature;
-      feature = (Feature)eResolveProxy(oldFeature);
+      feature = eResolveProxy(oldFeature);
       if (feature != oldFeature)
       {
         if (eNotificationRequired())
@@ -189,7 +188,7 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public Feature basicGetFeature()
+  public EObject basicGetFeature()
   {
     return feature;
   }
@@ -199,9 +198,9 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFeature(Feature newFeature)
+  public void setFeature(EObject newFeature)
   {
-    Feature oldFeature = feature;
+    EObject oldFeature = feature;
     feature = newFeature;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.FEATURE_CALL__FEATURE, oldFeature, feature));
@@ -300,7 +299,7 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
         setOwner((Expression)newValue);
         return;
       case StextPackage.FEATURE_CALL__FEATURE:
-        setFeature((Feature)newValue);
+        setFeature((EObject)newValue);
         return;
       case StextPackage.FEATURE_CALL__OPERATION_CALL:
         setOperationCall((Boolean)newValue);
@@ -327,7 +326,7 @@ public class FeatureCallImpl extends ExpressionImpl implements FeatureCall
         setOwner((Expression)null);
         return;
       case StextPackage.FEATURE_CALL__FEATURE:
-        setFeature((Feature)null);
+        setFeature((EObject)null);
         return;
       case StextPackage.FEATURE_CALL__OPERATION_CALL:
         setOperationCall(OPERATION_CALL_EDEFAULT);

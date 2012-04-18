@@ -5070,25 +5070,25 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleFeatureCall"
 
 
-    // $ANTLR start "entryRuleTypedElementReferenceExpression"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1703:1: entryRuleTypedElementReferenceExpression : ruleTypedElementReferenceExpression EOF ;
-    public final void entryRuleTypedElementReferenceExpression() throws RecognitionException {
+    // $ANTLR start "entryRuleElementReferenceExpression"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1703:1: entryRuleElementReferenceExpression : ruleElementReferenceExpression EOF ;
+    public final void entryRuleElementReferenceExpression() throws RecognitionException {
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1704:1: ( ruleTypedElementReferenceExpression EOF )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1705:1: ruleTypedElementReferenceExpression EOF
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1704:1: ( ruleElementReferenceExpression EOF )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1705:1: ruleElementReferenceExpression EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionRule()); 
+               before(grammarAccess.getElementReferenceExpressionRule()); 
             }
-            pushFollow(FOLLOW_ruleTypedElementReferenceExpression_in_entryRuleTypedElementReferenceExpression3562);
-            ruleTypedElementReferenceExpression();
+            pushFollow(FOLLOW_ruleElementReferenceExpression_in_entryRuleElementReferenceExpression3562);
+            ruleElementReferenceExpression();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionRule()); 
+               after(grammarAccess.getElementReferenceExpressionRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTypedElementReferenceExpression3569); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleElementReferenceExpression3569); if (state.failed) return ;
 
             }
 
@@ -5101,30 +5101,30 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleTypedElementReferenceExpression"
+    // $ANTLR end "entryRuleElementReferenceExpression"
 
 
-    // $ANTLR start "ruleTypedElementReferenceExpression"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1712:1: ruleTypedElementReferenceExpression : ( ( rule__TypedElementReferenceExpression__Group__0 ) ) ;
-    public final void ruleTypedElementReferenceExpression() throws RecognitionException {
+    // $ANTLR start "ruleElementReferenceExpression"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1712:1: ruleElementReferenceExpression : ( ( rule__ElementReferenceExpression__Group__0 ) ) ;
+    public final void ruleElementReferenceExpression() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1716:2: ( ( ( rule__TypedElementReferenceExpression__Group__0 ) ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1717:1: ( ( rule__TypedElementReferenceExpression__Group__0 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1716:2: ( ( ( rule__ElementReferenceExpression__Group__0 ) ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1717:1: ( ( rule__ElementReferenceExpression__Group__0 ) )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1717:1: ( ( rule__TypedElementReferenceExpression__Group__0 ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1718:1: ( rule__TypedElementReferenceExpression__Group__0 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1717:1: ( ( rule__ElementReferenceExpression__Group__0 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1718:1: ( rule__ElementReferenceExpression__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getGroup()); 
             }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1719:1: ( rule__TypedElementReferenceExpression__Group__0 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1719:2: rule__TypedElementReferenceExpression__Group__0
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1719:1: ( rule__ElementReferenceExpression__Group__0 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:1719:2: rule__ElementReferenceExpression__Group__0
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group__0_in_ruleTypedElementReferenceExpression3595);
-            rule__TypedElementReferenceExpression__Group__0();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group__0_in_ruleElementReferenceExpression3595);
+            rule__ElementReferenceExpression__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -5132,7 +5132,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getGroup()); 
             }
 
             }
@@ -5152,7 +5152,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleTypedElementReferenceExpression"
+    // $ANTLR end "ruleElementReferenceExpression"
 
 
     // $ANTLR start "entryRuleEventValueReferenceExpression"
@@ -26375,28 +26375,28 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__FeatureCall__Group__0__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9113:1: rule__FeatureCall__Group__0__Impl : ( ruleTypedElementReferenceExpression ) ;
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9113:1: rule__FeatureCall__Group__0__Impl : ( ruleElementReferenceExpression ) ;
     public final void rule__FeatureCall__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9117:1: ( ( ruleTypedElementReferenceExpression ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9118:1: ( ruleTypedElementReferenceExpression )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9117:1: ( ( ruleElementReferenceExpression ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9118:1: ( ruleElementReferenceExpression )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9118:1: ( ruleTypedElementReferenceExpression )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9119:1: ruleTypedElementReferenceExpression
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9118:1: ( ruleElementReferenceExpression )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9119:1: ruleElementReferenceExpression
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getTypedElementReferenceExpressionParserRuleCall_0()); 
+               before(grammarAccess.getFeatureCallAccess().getElementReferenceExpressionParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleTypedElementReferenceExpression_in_rule__FeatureCall__Group__0__Impl18533);
-            ruleTypedElementReferenceExpression();
+            pushFollow(FOLLOW_ruleElementReferenceExpression_in_rule__FeatureCall__Group__0__Impl18533);
+            ruleElementReferenceExpression();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getTypedElementReferenceExpressionParserRuleCall_0()); 
+               after(grammarAccess.getFeatureCallAccess().getElementReferenceExpressionParserRuleCall_0()); 
             }
 
             }
@@ -27480,23 +27480,23 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__FeatureCall__Group_1_3_1_1__1__Impl"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group__0"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9507:1: rule__TypedElementReferenceExpression__Group__0 : rule__TypedElementReferenceExpression__Group__0__Impl rule__TypedElementReferenceExpression__Group__1 ;
-    public final void rule__TypedElementReferenceExpression__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group__0"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9507:1: rule__ElementReferenceExpression__Group__0 : rule__ElementReferenceExpression__Group__0__Impl rule__ElementReferenceExpression__Group__1 ;
+    public final void rule__ElementReferenceExpression__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9511:1: ( rule__TypedElementReferenceExpression__Group__0__Impl rule__TypedElementReferenceExpression__Group__1 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9512:2: rule__TypedElementReferenceExpression__Group__0__Impl rule__TypedElementReferenceExpression__Group__1
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9511:1: ( rule__ElementReferenceExpression__Group__0__Impl rule__ElementReferenceExpression__Group__1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9512:2: rule__ElementReferenceExpression__Group__0__Impl rule__ElementReferenceExpression__Group__1
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group__0__Impl_in_rule__TypedElementReferenceExpression__Group__019304);
-            rule__TypedElementReferenceExpression__Group__0__Impl();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group__0__Impl_in_rule__ElementReferenceExpression__Group__019304);
+            rule__ElementReferenceExpression__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group__1_in_rule__TypedElementReferenceExpression__Group__019307);
-            rule__TypedElementReferenceExpression__Group__1();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group__1_in_rule__ElementReferenceExpression__Group__019307);
+            rule__ElementReferenceExpression__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27515,12 +27515,12 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group__0"
+    // $ANTLR end "rule__ElementReferenceExpression__Group__0"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group__0__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9519:1: rule__TypedElementReferenceExpression__Group__0__Impl : ( () ) ;
-    public final void rule__TypedElementReferenceExpression__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group__0__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9519:1: rule__ElementReferenceExpression__Group__0__Impl : ( () ) ;
+    public final void rule__ElementReferenceExpression__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -27532,7 +27532,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9525:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getTypedElementReferenceExpressionAction_0()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getElementReferenceExpressionAction_0()); 
             }
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9526:1: ()
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9528:1: 
@@ -27540,7 +27540,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getTypedElementReferenceExpressionAction_0()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getElementReferenceExpressionAction_0()); 
             }
 
             }
@@ -27556,110 +27556,26 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group__0__Impl"
+    // $ANTLR end "rule__ElementReferenceExpression__Group__0__Impl"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group__1"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9538:1: rule__TypedElementReferenceExpression__Group__1 : rule__TypedElementReferenceExpression__Group__1__Impl rule__TypedElementReferenceExpression__Group__2 ;
-    public final void rule__TypedElementReferenceExpression__Group__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9542:1: ( rule__TypedElementReferenceExpression__Group__1__Impl rule__TypedElementReferenceExpression__Group__2 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9543:2: rule__TypedElementReferenceExpression__Group__1__Impl rule__TypedElementReferenceExpression__Group__2
-            {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group__1__Impl_in_rule__TypedElementReferenceExpression__Group__119365);
-            rule__TypedElementReferenceExpression__Group__1__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group__2_in_rule__TypedElementReferenceExpression__Group__119368);
-            rule__TypedElementReferenceExpression__Group__2();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group__1"
-
-
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group__1__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9550:1: rule__TypedElementReferenceExpression__Group__1__Impl : ( ( rule__TypedElementReferenceExpression__ReferenceAssignment_1 ) ) ;
-    public final void rule__TypedElementReferenceExpression__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group__1"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9538:1: rule__ElementReferenceExpression__Group__1 : rule__ElementReferenceExpression__Group__1__Impl rule__ElementReferenceExpression__Group__2 ;
+    public final void rule__ElementReferenceExpression__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9554:1: ( ( ( rule__TypedElementReferenceExpression__ReferenceAssignment_1 ) ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9555:1: ( ( rule__TypedElementReferenceExpression__ReferenceAssignment_1 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9542:1: ( rule__ElementReferenceExpression__Group__1__Impl rule__ElementReferenceExpression__Group__2 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9543:2: rule__ElementReferenceExpression__Group__1__Impl rule__ElementReferenceExpression__Group__2
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9555:1: ( ( rule__TypedElementReferenceExpression__ReferenceAssignment_1 ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9556:1: ( rule__TypedElementReferenceExpression__ReferenceAssignment_1 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getReferenceAssignment_1()); 
-            }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9557:1: ( rule__TypedElementReferenceExpression__ReferenceAssignment_1 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9557:2: rule__TypedElementReferenceExpression__ReferenceAssignment_1
-            {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__ReferenceAssignment_1_in_rule__TypedElementReferenceExpression__Group__1__Impl19395);
-            rule__TypedElementReferenceExpression__ReferenceAssignment_1();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group__1__Impl_in_rule__ElementReferenceExpression__Group__119365);
+            rule__ElementReferenceExpression__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getReferenceAssignment_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group__1__Impl"
-
-
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group__2"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9567:1: rule__TypedElementReferenceExpression__Group__2 : rule__TypedElementReferenceExpression__Group__2__Impl ;
-    public final void rule__TypedElementReferenceExpression__Group__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9571:1: ( rule__TypedElementReferenceExpression__Group__2__Impl )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9572:2: rule__TypedElementReferenceExpression__Group__2__Impl
-            {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group__2__Impl_in_rule__TypedElementReferenceExpression__Group__219425);
-            rule__TypedElementReferenceExpression__Group__2__Impl();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group__2_in_rule__ElementReferenceExpression__Group__119368);
+            rule__ElementReferenceExpression__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27678,26 +27594,110 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group__2"
+    // $ANTLR end "rule__ElementReferenceExpression__Group__1"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group__2__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9578:1: rule__TypedElementReferenceExpression__Group__2__Impl : ( ( rule__TypedElementReferenceExpression__Group_2__0 )? ) ;
-    public final void rule__TypedElementReferenceExpression__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group__1__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9550:1: rule__ElementReferenceExpression__Group__1__Impl : ( ( rule__ElementReferenceExpression__ReferenceAssignment_1 ) ) ;
+    public final void rule__ElementReferenceExpression__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9582:1: ( ( ( rule__TypedElementReferenceExpression__Group_2__0 )? ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9583:1: ( ( rule__TypedElementReferenceExpression__Group_2__0 )? )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9554:1: ( ( ( rule__ElementReferenceExpression__ReferenceAssignment_1 ) ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9555:1: ( ( rule__ElementReferenceExpression__ReferenceAssignment_1 ) )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9583:1: ( ( rule__TypedElementReferenceExpression__Group_2__0 )? )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9584:1: ( rule__TypedElementReferenceExpression__Group_2__0 )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9555:1: ( ( rule__ElementReferenceExpression__ReferenceAssignment_1 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9556:1: ( rule__ElementReferenceExpression__ReferenceAssignment_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getReferenceAssignment_1()); 
             }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9585:1: ( rule__TypedElementReferenceExpression__Group_2__0 )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9557:1: ( rule__ElementReferenceExpression__ReferenceAssignment_1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9557:2: rule__ElementReferenceExpression__ReferenceAssignment_1
+            {
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__ReferenceAssignment_1_in_rule__ElementReferenceExpression__Group__1__Impl19395);
+            rule__ElementReferenceExpression__ReferenceAssignment_1();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getElementReferenceExpressionAccess().getReferenceAssignment_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ElementReferenceExpression__Group__1__Impl"
+
+
+    // $ANTLR start "rule__ElementReferenceExpression__Group__2"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9567:1: rule__ElementReferenceExpression__Group__2 : rule__ElementReferenceExpression__Group__2__Impl ;
+    public final void rule__ElementReferenceExpression__Group__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9571:1: ( rule__ElementReferenceExpression__Group__2__Impl )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9572:2: rule__ElementReferenceExpression__Group__2__Impl
+            {
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group__2__Impl_in_rule__ElementReferenceExpression__Group__219425);
+            rule__ElementReferenceExpression__Group__2__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ElementReferenceExpression__Group__2"
+
+
+    // $ANTLR start "rule__ElementReferenceExpression__Group__2__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9578:1: rule__ElementReferenceExpression__Group__2__Impl : ( ( rule__ElementReferenceExpression__Group_2__0 )? ) ;
+    public final void rule__ElementReferenceExpression__Group__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9582:1: ( ( ( rule__ElementReferenceExpression__Group_2__0 )? ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9583:1: ( ( rule__ElementReferenceExpression__Group_2__0 )? )
+            {
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9583:1: ( ( rule__ElementReferenceExpression__Group_2__0 )? )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9584:1: ( rule__ElementReferenceExpression__Group_2__0 )?
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getElementReferenceExpressionAccess().getGroup_2()); 
+            }
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9585:1: ( rule__ElementReferenceExpression__Group_2__0 )?
             int alt67=2;
             int LA67_0 = input.LA(1);
 
@@ -27706,10 +27706,10 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
             switch (alt67) {
                 case 1 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9585:2: rule__TypedElementReferenceExpression__Group_2__0
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9585:2: rule__ElementReferenceExpression__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2__0_in_rule__TypedElementReferenceExpression__Group__2__Impl19452);
-                    rule__TypedElementReferenceExpression__Group_2__0();
+                    pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2__0_in_rule__ElementReferenceExpression__Group__2__Impl19452);
+                    rule__ElementReferenceExpression__Group_2__0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -27720,7 +27720,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getGroup_2()); 
             }
 
             }
@@ -27740,26 +27740,26 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group__2__Impl"
+    // $ANTLR end "rule__ElementReferenceExpression__Group__2__Impl"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2__0"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9601:1: rule__TypedElementReferenceExpression__Group_2__0 : rule__TypedElementReferenceExpression__Group_2__0__Impl rule__TypedElementReferenceExpression__Group_2__1 ;
-    public final void rule__TypedElementReferenceExpression__Group_2__0() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2__0"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9601:1: rule__ElementReferenceExpression__Group_2__0 : rule__ElementReferenceExpression__Group_2__0__Impl rule__ElementReferenceExpression__Group_2__1 ;
+    public final void rule__ElementReferenceExpression__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9605:1: ( rule__TypedElementReferenceExpression__Group_2__0__Impl rule__TypedElementReferenceExpression__Group_2__1 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9606:2: rule__TypedElementReferenceExpression__Group_2__0__Impl rule__TypedElementReferenceExpression__Group_2__1
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9605:1: ( rule__ElementReferenceExpression__Group_2__0__Impl rule__ElementReferenceExpression__Group_2__1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9606:2: rule__ElementReferenceExpression__Group_2__0__Impl rule__ElementReferenceExpression__Group_2__1
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2__0__Impl_in_rule__TypedElementReferenceExpression__Group_2__019489);
-            rule__TypedElementReferenceExpression__Group_2__0__Impl();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2__0__Impl_in_rule__ElementReferenceExpression__Group_2__019489);
+            rule__ElementReferenceExpression__Group_2__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2__1_in_rule__TypedElementReferenceExpression__Group_2__019492);
-            rule__TypedElementReferenceExpression__Group_2__1();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2__1_in_rule__ElementReferenceExpression__Group_2__019492);
+            rule__ElementReferenceExpression__Group_2__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27778,30 +27778,30 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2__0"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2__0"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2__0__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9613:1: rule__TypedElementReferenceExpression__Group_2__0__Impl : ( ( rule__TypedElementReferenceExpression__OperationCallAssignment_2_0 ) ) ;
-    public final void rule__TypedElementReferenceExpression__Group_2__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2__0__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9613:1: rule__ElementReferenceExpression__Group_2__0__Impl : ( ( rule__ElementReferenceExpression__OperationCallAssignment_2_0 ) ) ;
+    public final void rule__ElementReferenceExpression__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9617:1: ( ( ( rule__TypedElementReferenceExpression__OperationCallAssignment_2_0 ) ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9618:1: ( ( rule__TypedElementReferenceExpression__OperationCallAssignment_2_0 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9617:1: ( ( ( rule__ElementReferenceExpression__OperationCallAssignment_2_0 ) ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9618:1: ( ( rule__ElementReferenceExpression__OperationCallAssignment_2_0 ) )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9618:1: ( ( rule__TypedElementReferenceExpression__OperationCallAssignment_2_0 ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9619:1: ( rule__TypedElementReferenceExpression__OperationCallAssignment_2_0 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9618:1: ( ( rule__ElementReferenceExpression__OperationCallAssignment_2_0 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9619:1: ( rule__ElementReferenceExpression__OperationCallAssignment_2_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getOperationCallAssignment_2_0()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getOperationCallAssignment_2_0()); 
             }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9620:1: ( rule__TypedElementReferenceExpression__OperationCallAssignment_2_0 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9620:2: rule__TypedElementReferenceExpression__OperationCallAssignment_2_0
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9620:1: ( rule__ElementReferenceExpression__OperationCallAssignment_2_0 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9620:2: rule__ElementReferenceExpression__OperationCallAssignment_2_0
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__OperationCallAssignment_2_0_in_rule__TypedElementReferenceExpression__Group_2__0__Impl19519);
-            rule__TypedElementReferenceExpression__OperationCallAssignment_2_0();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__OperationCallAssignment_2_0_in_rule__ElementReferenceExpression__Group_2__0__Impl19519);
+            rule__ElementReferenceExpression__OperationCallAssignment_2_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27809,7 +27809,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getOperationCallAssignment_2_0()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getOperationCallAssignment_2_0()); 
             }
 
             }
@@ -27829,26 +27829,26 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2__0__Impl"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2__0__Impl"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2__1"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9630:1: rule__TypedElementReferenceExpression__Group_2__1 : rule__TypedElementReferenceExpression__Group_2__1__Impl rule__TypedElementReferenceExpression__Group_2__2 ;
-    public final void rule__TypedElementReferenceExpression__Group_2__1() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2__1"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9630:1: rule__ElementReferenceExpression__Group_2__1 : rule__ElementReferenceExpression__Group_2__1__Impl rule__ElementReferenceExpression__Group_2__2 ;
+    public final void rule__ElementReferenceExpression__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9634:1: ( rule__TypedElementReferenceExpression__Group_2__1__Impl rule__TypedElementReferenceExpression__Group_2__2 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9635:2: rule__TypedElementReferenceExpression__Group_2__1__Impl rule__TypedElementReferenceExpression__Group_2__2
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9634:1: ( rule__ElementReferenceExpression__Group_2__1__Impl rule__ElementReferenceExpression__Group_2__2 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9635:2: rule__ElementReferenceExpression__Group_2__1__Impl rule__ElementReferenceExpression__Group_2__2
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2__1__Impl_in_rule__TypedElementReferenceExpression__Group_2__119549);
-            rule__TypedElementReferenceExpression__Group_2__1__Impl();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2__1__Impl_in_rule__ElementReferenceExpression__Group_2__119549);
+            rule__ElementReferenceExpression__Group_2__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2__2_in_rule__TypedElementReferenceExpression__Group_2__119552);
-            rule__TypedElementReferenceExpression__Group_2__2();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2__2_in_rule__ElementReferenceExpression__Group_2__119552);
+            rule__ElementReferenceExpression__Group_2__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27867,26 +27867,26 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2__1"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2__1"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2__1__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9642:1: rule__TypedElementReferenceExpression__Group_2__1__Impl : ( ( rule__TypedElementReferenceExpression__Group_2_1__0 )? ) ;
-    public final void rule__TypedElementReferenceExpression__Group_2__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2__1__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9642:1: rule__ElementReferenceExpression__Group_2__1__Impl : ( ( rule__ElementReferenceExpression__Group_2_1__0 )? ) ;
+    public final void rule__ElementReferenceExpression__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9646:1: ( ( ( rule__TypedElementReferenceExpression__Group_2_1__0 )? ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9647:1: ( ( rule__TypedElementReferenceExpression__Group_2_1__0 )? )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9646:1: ( ( ( rule__ElementReferenceExpression__Group_2_1__0 )? ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9647:1: ( ( rule__ElementReferenceExpression__Group_2_1__0 )? )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9647:1: ( ( rule__TypedElementReferenceExpression__Group_2_1__0 )? )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9648:1: ( rule__TypedElementReferenceExpression__Group_2_1__0 )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9647:1: ( ( rule__ElementReferenceExpression__Group_2_1__0 )? )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9648:1: ( rule__ElementReferenceExpression__Group_2_1__0 )?
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2_1()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getGroup_2_1()); 
             }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9649:1: ( rule__TypedElementReferenceExpression__Group_2_1__0 )?
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9649:1: ( rule__ElementReferenceExpression__Group_2_1__0 )?
             int alt68=2;
             int LA68_0 = input.LA(1);
 
@@ -27895,10 +27895,10 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
             switch (alt68) {
                 case 1 :
-                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9649:2: rule__TypedElementReferenceExpression__Group_2_1__0
+                    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9649:2: rule__ElementReferenceExpression__Group_2_1__0
                     {
-                    pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2_1__0_in_rule__TypedElementReferenceExpression__Group_2__1__Impl19579);
-                    rule__TypedElementReferenceExpression__Group_2_1__0();
+                    pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2_1__0_in_rule__ElementReferenceExpression__Group_2__1__Impl19579);
+                    rule__ElementReferenceExpression__Group_2_1__0();
 
                     state._fsp--;
                     if (state.failed) return ;
@@ -27909,7 +27909,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2_1()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getGroup_2_1()); 
             }
 
             }
@@ -27929,21 +27929,21 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2__1__Impl"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2__1__Impl"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2__2"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9659:1: rule__TypedElementReferenceExpression__Group_2__2 : rule__TypedElementReferenceExpression__Group_2__2__Impl ;
-    public final void rule__TypedElementReferenceExpression__Group_2__2() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2__2"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9659:1: rule__ElementReferenceExpression__Group_2__2 : rule__ElementReferenceExpression__Group_2__2__Impl ;
+    public final void rule__ElementReferenceExpression__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9663:1: ( rule__TypedElementReferenceExpression__Group_2__2__Impl )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9664:2: rule__TypedElementReferenceExpression__Group_2__2__Impl
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9663:1: ( rule__ElementReferenceExpression__Group_2__2__Impl )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9664:2: rule__ElementReferenceExpression__Group_2__2__Impl
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2__2__Impl_in_rule__TypedElementReferenceExpression__Group_2__219610);
-            rule__TypedElementReferenceExpression__Group_2__2__Impl();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2__2__Impl_in_rule__ElementReferenceExpression__Group_2__219610);
+            rule__ElementReferenceExpression__Group_2__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -27962,12 +27962,12 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2__2"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2__2"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2__2__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9670:1: rule__TypedElementReferenceExpression__Group_2__2__Impl : ( ')' ) ;
-    public final void rule__TypedElementReferenceExpression__Group_2__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2__2__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9670:1: rule__ElementReferenceExpression__Group_2__2__Impl : ( ')' ) ;
+    public final void rule__ElementReferenceExpression__Group_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -27979,11 +27979,11 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9676:1: ')'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getRightParenthesisKeyword_2_2()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getRightParenthesisKeyword_2_2()); 
             }
-            match(input,61,FOLLOW_61_in_rule__TypedElementReferenceExpression__Group_2__2__Impl19638); if (state.failed) return ;
+            match(input,61,FOLLOW_61_in_rule__ElementReferenceExpression__Group_2__2__Impl19638); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getRightParenthesisKeyword_2_2()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getRightParenthesisKeyword_2_2()); 
             }
 
             }
@@ -28003,110 +28003,26 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2__2__Impl"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2__2__Impl"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2_1__0"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9695:1: rule__TypedElementReferenceExpression__Group_2_1__0 : rule__TypedElementReferenceExpression__Group_2_1__0__Impl rule__TypedElementReferenceExpression__Group_2_1__1 ;
-    public final void rule__TypedElementReferenceExpression__Group_2_1__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9699:1: ( rule__TypedElementReferenceExpression__Group_2_1__0__Impl rule__TypedElementReferenceExpression__Group_2_1__1 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9700:2: rule__TypedElementReferenceExpression__Group_2_1__0__Impl rule__TypedElementReferenceExpression__Group_2_1__1
-            {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2_1__0__Impl_in_rule__TypedElementReferenceExpression__Group_2_1__019675);
-            rule__TypedElementReferenceExpression__Group_2_1__0__Impl();
-
-            state._fsp--;
-            if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2_1__1_in_rule__TypedElementReferenceExpression__Group_2_1__019678);
-            rule__TypedElementReferenceExpression__Group_2_1__1();
-
-            state._fsp--;
-            if (state.failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2_1__0"
-
-
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2_1__0__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9707:1: rule__TypedElementReferenceExpression__Group_2_1__0__Impl : ( ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0 ) ) ;
-    public final void rule__TypedElementReferenceExpression__Group_2_1__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2_1__0"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9695:1: rule__ElementReferenceExpression__Group_2_1__0 : rule__ElementReferenceExpression__Group_2_1__0__Impl rule__ElementReferenceExpression__Group_2_1__1 ;
+    public final void rule__ElementReferenceExpression__Group_2_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9711:1: ( ( ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0 ) ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9712:1: ( ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9699:1: ( rule__ElementReferenceExpression__Group_2_1__0__Impl rule__ElementReferenceExpression__Group_2_1__1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9700:2: rule__ElementReferenceExpression__Group_2_1__0__Impl rule__ElementReferenceExpression__Group_2_1__1
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9712:1: ( ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0 ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9713:1: ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0 )
-            {
-            if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsAssignment_2_1_0()); 
-            }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9714:1: ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9714:2: rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0
-            {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0_in_rule__TypedElementReferenceExpression__Group_2_1__0__Impl19705);
-            rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2_1__0__Impl_in_rule__ElementReferenceExpression__Group_2_1__019675);
+            rule__ElementReferenceExpression__Group_2_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-
-            }
-
-            if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsAssignment_2_1_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2_1__0__Impl"
-
-
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2_1__1"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9724:1: rule__TypedElementReferenceExpression__Group_2_1__1 : rule__TypedElementReferenceExpression__Group_2_1__1__Impl ;
-    public final void rule__TypedElementReferenceExpression__Group_2_1__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9728:1: ( rule__TypedElementReferenceExpression__Group_2_1__1__Impl )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9729:2: rule__TypedElementReferenceExpression__Group_2_1__1__Impl
-            {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2_1__1__Impl_in_rule__TypedElementReferenceExpression__Group_2_1__119735);
-            rule__TypedElementReferenceExpression__Group_2_1__1__Impl();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2_1__1_in_rule__ElementReferenceExpression__Group_2_1__019678);
+            rule__ElementReferenceExpression__Group_2_1__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -28125,26 +28041,110 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2_1__1"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2_1__0"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2_1__1__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9735:1: rule__TypedElementReferenceExpression__Group_2_1__1__Impl : ( ( rule__TypedElementReferenceExpression__Group_2_1_1__0 )* ) ;
-    public final void rule__TypedElementReferenceExpression__Group_2_1__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2_1__0__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9707:1: rule__ElementReferenceExpression__Group_2_1__0__Impl : ( ( rule__ElementReferenceExpression__ArgsAssignment_2_1_0 ) ) ;
+    public final void rule__ElementReferenceExpression__Group_2_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9739:1: ( ( ( rule__TypedElementReferenceExpression__Group_2_1_1__0 )* ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9740:1: ( ( rule__TypedElementReferenceExpression__Group_2_1_1__0 )* )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9711:1: ( ( ( rule__ElementReferenceExpression__ArgsAssignment_2_1_0 ) ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9712:1: ( ( rule__ElementReferenceExpression__ArgsAssignment_2_1_0 ) )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9740:1: ( ( rule__TypedElementReferenceExpression__Group_2_1_1__0 )* )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9741:1: ( rule__TypedElementReferenceExpression__Group_2_1_1__0 )*
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9712:1: ( ( rule__ElementReferenceExpression__ArgsAssignment_2_1_0 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9713:1: ( rule__ElementReferenceExpression__ArgsAssignment_2_1_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2_1_1()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getArgsAssignment_2_1_0()); 
             }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9742:1: ( rule__TypedElementReferenceExpression__Group_2_1_1__0 )*
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9714:1: ( rule__ElementReferenceExpression__ArgsAssignment_2_1_0 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9714:2: rule__ElementReferenceExpression__ArgsAssignment_2_1_0
+            {
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__ArgsAssignment_2_1_0_in_rule__ElementReferenceExpression__Group_2_1__0__Impl19705);
+            rule__ElementReferenceExpression__ArgsAssignment_2_1_0();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+            if ( state.backtracking==0 ) {
+               after(grammarAccess.getElementReferenceExpressionAccess().getArgsAssignment_2_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2_1__0__Impl"
+
+
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2_1__1"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9724:1: rule__ElementReferenceExpression__Group_2_1__1 : rule__ElementReferenceExpression__Group_2_1__1__Impl ;
+    public final void rule__ElementReferenceExpression__Group_2_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9728:1: ( rule__ElementReferenceExpression__Group_2_1__1__Impl )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9729:2: rule__ElementReferenceExpression__Group_2_1__1__Impl
+            {
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2_1__1__Impl_in_rule__ElementReferenceExpression__Group_2_1__119735);
+            rule__ElementReferenceExpression__Group_2_1__1__Impl();
+
+            state._fsp--;
+            if (state.failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2_1__1"
+
+
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2_1__1__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9735:1: rule__ElementReferenceExpression__Group_2_1__1__Impl : ( ( rule__ElementReferenceExpression__Group_2_1_1__0 )* ) ;
+    public final void rule__ElementReferenceExpression__Group_2_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9739:1: ( ( ( rule__ElementReferenceExpression__Group_2_1_1__0 )* ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9740:1: ( ( rule__ElementReferenceExpression__Group_2_1_1__0 )* )
+            {
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9740:1: ( ( rule__ElementReferenceExpression__Group_2_1_1__0 )* )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9741:1: ( rule__ElementReferenceExpression__Group_2_1_1__0 )*
+            {
+            if ( state.backtracking==0 ) {
+               before(grammarAccess.getElementReferenceExpressionAccess().getGroup_2_1_1()); 
+            }
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9742:1: ( rule__ElementReferenceExpression__Group_2_1_1__0 )*
             loop69:
             do {
                 int alt69=2;
@@ -28157,10 +28157,10 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
 
                 switch (alt69) {
             	case 1 :
-            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9742:2: rule__TypedElementReferenceExpression__Group_2_1_1__0
+            	    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9742:2: rule__ElementReferenceExpression__Group_2_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2_1_1__0_in_rule__TypedElementReferenceExpression__Group_2_1__1__Impl19762);
-            	    rule__TypedElementReferenceExpression__Group_2_1_1__0();
+            	    pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2_1_1__0_in_rule__ElementReferenceExpression__Group_2_1__1__Impl19762);
+            	    rule__ElementReferenceExpression__Group_2_1_1__0();
 
             	    state._fsp--;
             	    if (state.failed) return ;
@@ -28174,7 +28174,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             } while (true);
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getGroup_2_1_1()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getGroup_2_1_1()); 
             }
 
             }
@@ -28194,26 +28194,26 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2_1__1__Impl"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2_1__1__Impl"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2_1_1__0"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9756:1: rule__TypedElementReferenceExpression__Group_2_1_1__0 : rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl rule__TypedElementReferenceExpression__Group_2_1_1__1 ;
-    public final void rule__TypedElementReferenceExpression__Group_2_1_1__0() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2_1_1__0"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9756:1: rule__ElementReferenceExpression__Group_2_1_1__0 : rule__ElementReferenceExpression__Group_2_1_1__0__Impl rule__ElementReferenceExpression__Group_2_1_1__1 ;
+    public final void rule__ElementReferenceExpression__Group_2_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9760:1: ( rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl rule__TypedElementReferenceExpression__Group_2_1_1__1 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9761:2: rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl rule__TypedElementReferenceExpression__Group_2_1_1__1
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9760:1: ( rule__ElementReferenceExpression__Group_2_1_1__0__Impl rule__ElementReferenceExpression__Group_2_1_1__1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9761:2: rule__ElementReferenceExpression__Group_2_1_1__0__Impl rule__ElementReferenceExpression__Group_2_1_1__1
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl_in_rule__TypedElementReferenceExpression__Group_2_1_1__019797);
-            rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2_1_1__0__Impl_in_rule__ElementReferenceExpression__Group_2_1_1__019797);
+            rule__ElementReferenceExpression__Group_2_1_1__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2_1_1__1_in_rule__TypedElementReferenceExpression__Group_2_1_1__019800);
-            rule__TypedElementReferenceExpression__Group_2_1_1__1();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2_1_1__1_in_rule__ElementReferenceExpression__Group_2_1_1__019800);
+            rule__ElementReferenceExpression__Group_2_1_1__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -28232,12 +28232,12 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2_1_1__0"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2_1_1__0"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9768:1: rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl : ( ',' ) ;
-    public final void rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2_1_1__0__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9768:1: rule__ElementReferenceExpression__Group_2_1_1__0__Impl : ( ',' ) ;
+    public final void rule__ElementReferenceExpression__Group_2_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -28249,11 +28249,11 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9774:1: ','
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getCommaKeyword_2_1_1_0()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getCommaKeyword_2_1_1_0()); 
             }
-            match(input,62,FOLLOW_62_in_rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl19828); if (state.failed) return ;
+            match(input,62,FOLLOW_62_in_rule__ElementReferenceExpression__Group_2_1_1__0__Impl19828); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getCommaKeyword_2_1_1_0()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getCommaKeyword_2_1_1_0()); 
             }
 
             }
@@ -28273,21 +28273,21 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2_1_1__0__Impl"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2_1_1__1"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9787:1: rule__TypedElementReferenceExpression__Group_2_1_1__1 : rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl ;
-    public final void rule__TypedElementReferenceExpression__Group_2_1_1__1() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2_1_1__1"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9787:1: rule__ElementReferenceExpression__Group_2_1_1__1 : rule__ElementReferenceExpression__Group_2_1_1__1__Impl ;
+    public final void rule__ElementReferenceExpression__Group_2_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9791:1: ( rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9792:2: rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9791:1: ( rule__ElementReferenceExpression__Group_2_1_1__1__Impl )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9792:2: rule__ElementReferenceExpression__Group_2_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl_in_rule__TypedElementReferenceExpression__Group_2_1_1__119859);
-            rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__Group_2_1_1__1__Impl_in_rule__ElementReferenceExpression__Group_2_1_1__119859);
+            rule__ElementReferenceExpression__Group_2_1_1__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -28306,30 +28306,30 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2_1_1__1"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2_1_1__1"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9798:1: rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl : ( ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1 ) ) ;
-    public final void rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__Group_2_1_1__1__Impl"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9798:1: rule__ElementReferenceExpression__Group_2_1_1__1__Impl : ( ( rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1 ) ) ;
+    public final void rule__ElementReferenceExpression__Group_2_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9802:1: ( ( ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1 ) ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9803:1: ( ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9802:1: ( ( ( rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1 ) ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9803:1: ( ( rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1 ) )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9803:1: ( ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1 ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9804:1: ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9803:1: ( ( rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9804:1: ( rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsAssignment_2_1_1_1()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getArgsAssignment_2_1_1_1()); 
             }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9805:1: ( rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9805:2: rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9805:1: ( rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:9805:2: rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1
             {
-            pushFollow(FOLLOW_rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1_in_rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl19886);
-            rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1();
+            pushFollow(FOLLOW_rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1_in_rule__ElementReferenceExpression__Group_2_1_1__1__Impl19886);
+            rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -28337,7 +28337,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsAssignment_2_1_1_1()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getArgsAssignment_2_1_1_1()); 
             }
 
             }
@@ -28357,7 +28357,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl"
+    // $ANTLR end "rule__ElementReferenceExpression__Group_2_1_1__1__Impl"
 
 
     // $ANTLR start "rule__EventValueReferenceExpression__Group__0"
@@ -33652,23 +33652,23 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11701:1: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getFeatureFeatureCrossReference_1_2_0()); 
+               before(grammarAccess.getFeatureCallAccess().getFeatureEObjectCrossReference_1_2_0()); 
             }
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11702:1: ( RULE_ID )
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11703:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getFeatureCallAccess().getFeatureFeatureIDTerminalRuleCall_1_2_0_1()); 
+               before(grammarAccess.getFeatureCallAccess().getFeatureEObjectIDTerminalRuleCall_1_2_0_1()); 
             }
             match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FeatureCall__FeatureAssignment_1_223807); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getFeatureFeatureIDTerminalRuleCall_1_2_0_1()); 
+               after(grammarAccess.getFeatureCallAccess().getFeatureEObjectIDTerminalRuleCall_1_2_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getFeatureCallAccess().getFeatureFeatureCrossReference_1_2_0()); 
+               after(grammarAccess.getFeatureCallAccess().getFeatureEObjectCrossReference_1_2_0()); 
             }
 
             }
@@ -33834,9 +33834,9 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__FeatureCall__ArgsAssignment_1_3_1_1_1"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__ReferenceAssignment_1"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11767:1: rule__TypedElementReferenceExpression__ReferenceAssignment_1 : ( ( RULE_ID ) ) ;
-    public final void rule__TypedElementReferenceExpression__ReferenceAssignment_1() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__ReferenceAssignment_1"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11767:1: rule__ElementReferenceExpression__ReferenceAssignment_1 : ( ( RULE_ID ) ) ;
+    public final void rule__ElementReferenceExpression__ReferenceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -33848,23 +33848,23 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11773:1: ( RULE_ID )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getReferenceNamedElementCrossReference_1_0()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getReferenceEObjectCrossReference_1_0()); 
             }
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11774:1: ( RULE_ID )
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11775:1: RULE_ID
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getReferenceNamedElementIDTerminalRuleCall_1_0_1()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getReferenceEObjectIDTerminalRuleCall_1_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__TypedElementReferenceExpression__ReferenceAssignment_123952); if (state.failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ElementReferenceExpression__ReferenceAssignment_123952); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getReferenceNamedElementIDTerminalRuleCall_1_0_1()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getReferenceEObjectIDTerminalRuleCall_1_0_1()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getReferenceNamedElementCrossReference_1_0()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getReferenceEObjectCrossReference_1_0()); 
             }
 
             }
@@ -33884,12 +33884,12 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__ReferenceAssignment_1"
+    // $ANTLR end "rule__ElementReferenceExpression__ReferenceAssignment_1"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__OperationCallAssignment_2_0"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11786:1: rule__TypedElementReferenceExpression__OperationCallAssignment_2_0 : ( ( '(' ) ) ;
-    public final void rule__TypedElementReferenceExpression__OperationCallAssignment_2_0() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__OperationCallAssignment_2_0"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11786:1: rule__ElementReferenceExpression__OperationCallAssignment_2_0 : ( ( '(' ) ) ;
+    public final void rule__ElementReferenceExpression__OperationCallAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -33901,23 +33901,23 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11792:1: ( '(' )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0()); 
             }
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11793:1: ( '(' )
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11794:1: '('
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0()); 
             }
-            match(input,60,FOLLOW_60_in_rule__TypedElementReferenceExpression__OperationCallAssignment_2_023992); if (state.failed) return ;
+            match(input,60,FOLLOW_60_in_rule__ElementReferenceExpression__OperationCallAssignment_2_023992); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0()); 
             }
 
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getOperationCallLeftParenthesisKeyword_2_0_0()); 
             }
 
             }
@@ -33937,12 +33937,12 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__OperationCallAssignment_2_0"
+    // $ANTLR end "rule__ElementReferenceExpression__OperationCallAssignment_2_0"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11809:1: rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0 : ( ruleExpression ) ;
-    public final void rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__ArgsAssignment_2_1_0"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11809:1: rule__ElementReferenceExpression__ArgsAssignment_2_1_0 : ( ruleExpression ) ;
+    public final void rule__ElementReferenceExpression__ArgsAssignment_2_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -33954,15 +33954,15 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11815:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsExpressionParserRuleCall_2_1_0_0()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getArgsExpressionParserRuleCall_2_1_0_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__TypedElementReferenceExpression__ArgsAssignment_2_1_024031);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ElementReferenceExpression__ArgsAssignment_2_1_024031);
             ruleExpression();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsExpressionParserRuleCall_2_1_0_0()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getArgsExpressionParserRuleCall_2_1_0_0()); 
             }
 
             }
@@ -33982,12 +33982,12 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0"
+    // $ANTLR end "rule__ElementReferenceExpression__ArgsAssignment_2_1_0"
 
 
-    // $ANTLR start "rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11824:1: rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1 : ( ruleExpression ) ;
-    public final void rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1() throws RecognitionException {
+    // $ANTLR start "rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11824:1: rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1 : ( ruleExpression ) ;
+    public final void rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -33999,15 +33999,15 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:11830:1: ruleExpression
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsExpressionParserRuleCall_2_1_1_1_0()); 
+               before(grammarAccess.getElementReferenceExpressionAccess().getArgsExpressionParserRuleCall_2_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_124062);
+            pushFollow(FOLLOW_ruleExpression_in_rule__ElementReferenceExpression__ArgsAssignment_2_1_1_124062);
             ruleExpression();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getTypedElementReferenceExpressionAccess().getArgsExpressionParserRuleCall_2_1_1_1_0()); 
+               after(grammarAccess.getElementReferenceExpressionAccess().getArgsExpressionParserRuleCall_2_1_1_1_0()); 
             }
 
             }
@@ -34027,7 +34027,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1"
+    // $ANTLR end "rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1"
 
 
     // $ANTLR start "rule__EventValueReferenceExpression__ValueAssignment_3"
@@ -34693,9 +34693,9 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleFeatureCall_in_entryRuleFeatureCall3502 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleFeatureCall3509 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group__0_in_ruleFeatureCall3535 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypedElementReferenceExpression_in_entryRuleTypedElementReferenceExpression3562 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTypedElementReferenceExpression3569 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group__0_in_ruleTypedElementReferenceExpression3595 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleElementReferenceExpression_in_entryRuleElementReferenceExpression3562 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleElementReferenceExpression3569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group__0_in_ruleElementReferenceExpression3595 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEventValueReferenceExpression_in_entryRuleEventValueReferenceExpression3622 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleEventValueReferenceExpression3629 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EventValueReferenceExpression__Group__0_in_ruleEventValueReferenceExpression3655 = new BitSet(new long[]{0x0000000000000002L});
@@ -35298,7 +35298,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__PrimitiveValueExpression__ValueAssignment_1_in_rule__PrimitiveValueExpression__Group__1__Impl18469 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group__0__Impl_in_rule__FeatureCall__Group__018503 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group__1_in_rule__FeatureCall__Group__018506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypedElementReferenceExpression_in_rule__FeatureCall__Group__0__Impl18533 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleElementReferenceExpression_in_rule__FeatureCall__Group__0__Impl18533 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group__1__Impl_in_rule__FeatureCall__Group__118562 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_1__0_in_rule__FeatureCall__Group__1__Impl18589 = new BitSet(new long[]{0x0000000000000002L,0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_1__0__Impl_in_rule__FeatureCall__Group_1__018624 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000002L});
@@ -35329,31 +35329,31 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_62_in_rule__FeatureCall__Group_1_3_1_1__0__Impl19212 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__Group_1_3_1_1__1__Impl_in_rule__FeatureCall__Group_1_3_1_1__119243 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__FeatureCall__ArgsAssignment_1_3_1_1_1_in_rule__FeatureCall__Group_1_3_1_1__1__Impl19270 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group__0__Impl_in_rule__TypedElementReferenceExpression__Group__019304 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group__1_in_rule__TypedElementReferenceExpression__Group__019307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group__1__Impl_in_rule__TypedElementReferenceExpression__Group__119365 = new BitSet(new long[]{0x1000000000000000L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group__2_in_rule__TypedElementReferenceExpression__Group__119368 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__ReferenceAssignment_1_in_rule__TypedElementReferenceExpression__Group__1__Impl19395 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group__2__Impl_in_rule__TypedElementReferenceExpression__Group__219425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2__0_in_rule__TypedElementReferenceExpression__Group__2__Impl19452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2__0__Impl_in_rule__TypedElementReferenceExpression__Group_2__019489 = new BitSet(new long[]{0x3000008C000003F0L,0x00000000000C4000L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2__1_in_rule__TypedElementReferenceExpression__Group_2__019492 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__OperationCallAssignment_2_0_in_rule__TypedElementReferenceExpression__Group_2__0__Impl19519 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2__1__Impl_in_rule__TypedElementReferenceExpression__Group_2__119549 = new BitSet(new long[]{0x3000008C000003F0L,0x00000000000C4000L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2__2_in_rule__TypedElementReferenceExpression__Group_2__119552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2_1__0_in_rule__TypedElementReferenceExpression__Group_2__1__Impl19579 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2__2__Impl_in_rule__TypedElementReferenceExpression__Group_2__219610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_61_in_rule__TypedElementReferenceExpression__Group_2__2__Impl19638 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2_1__0__Impl_in_rule__TypedElementReferenceExpression__Group_2_1__019675 = new BitSet(new long[]{0x4000000000000000L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2_1__1_in_rule__TypedElementReferenceExpression__Group_2_1__019678 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__ArgsAssignment_2_1_0_in_rule__TypedElementReferenceExpression__Group_2_1__0__Impl19705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2_1__1__Impl_in_rule__TypedElementReferenceExpression__Group_2_1__119735 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2_1_1__0_in_rule__TypedElementReferenceExpression__Group_2_1__1__Impl19762 = new BitSet(new long[]{0x4000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl_in_rule__TypedElementReferenceExpression__Group_2_1_1__019797 = new BitSet(new long[]{0x1000008C000003F0L,0x00000000000C4000L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2_1_1__1_in_rule__TypedElementReferenceExpression__Group_2_1_1__019800 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_rule__TypedElementReferenceExpression__Group_2_1_1__0__Impl19828 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl_in_rule__TypedElementReferenceExpression__Group_2_1_1__119859 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_1_in_rule__TypedElementReferenceExpression__Group_2_1_1__1__Impl19886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group__0__Impl_in_rule__ElementReferenceExpression__Group__019304 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group__1_in_rule__ElementReferenceExpression__Group__019307 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group__1__Impl_in_rule__ElementReferenceExpression__Group__119365 = new BitSet(new long[]{0x1000000000000000L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group__2_in_rule__ElementReferenceExpression__Group__119368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__ReferenceAssignment_1_in_rule__ElementReferenceExpression__Group__1__Impl19395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group__2__Impl_in_rule__ElementReferenceExpression__Group__219425 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2__0_in_rule__ElementReferenceExpression__Group__2__Impl19452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2__0__Impl_in_rule__ElementReferenceExpression__Group_2__019489 = new BitSet(new long[]{0x3000008C000003F0L,0x00000000000C4000L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2__1_in_rule__ElementReferenceExpression__Group_2__019492 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__OperationCallAssignment_2_0_in_rule__ElementReferenceExpression__Group_2__0__Impl19519 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2__1__Impl_in_rule__ElementReferenceExpression__Group_2__119549 = new BitSet(new long[]{0x3000008C000003F0L,0x00000000000C4000L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2__2_in_rule__ElementReferenceExpression__Group_2__119552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2_1__0_in_rule__ElementReferenceExpression__Group_2__1__Impl19579 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2__2__Impl_in_rule__ElementReferenceExpression__Group_2__219610 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_61_in_rule__ElementReferenceExpression__Group_2__2__Impl19638 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2_1__0__Impl_in_rule__ElementReferenceExpression__Group_2_1__019675 = new BitSet(new long[]{0x4000000000000000L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2_1__1_in_rule__ElementReferenceExpression__Group_2_1__019678 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__ArgsAssignment_2_1_0_in_rule__ElementReferenceExpression__Group_2_1__0__Impl19705 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2_1__1__Impl_in_rule__ElementReferenceExpression__Group_2_1__119735 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2_1_1__0_in_rule__ElementReferenceExpression__Group_2_1__1__Impl19762 = new BitSet(new long[]{0x4000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2_1_1__0__Impl_in_rule__ElementReferenceExpression__Group_2_1_1__019797 = new BitSet(new long[]{0x1000008C000003F0L,0x00000000000C4000L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2_1_1__1_in_rule__ElementReferenceExpression__Group_2_1_1__019800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_62_in_rule__ElementReferenceExpression__Group_2_1_1__0__Impl19828 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__Group_2_1_1__1__Impl_in_rule__ElementReferenceExpression__Group_2_1_1__119859 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ElementReferenceExpression__ArgsAssignment_2_1_1_1_in_rule__ElementReferenceExpression__Group_2_1_1__1__Impl19886 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EventValueReferenceExpression__Group__0__Impl_in_rule__EventValueReferenceExpression__Group__019920 = new BitSet(new long[]{0x0000000000000000L,0x0000000000040000L});
     public static final BitSet FOLLOW_rule__EventValueReferenceExpression__Group__1_in_rule__EventValueReferenceExpression__Group__019923 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__EventValueReferenceExpression__Group__1__Impl_in_rule__EventValueReferenceExpression__Group__119981 = new BitSet(new long[]{0x1000000000000000L});
@@ -35483,10 +35483,10 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_60_in_rule__FeatureCall__OperationCallAssignment_1_3_023847 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__FeatureCall__ArgsAssignment_1_3_1_023886 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__FeatureCall__ArgsAssignment_1_3_1_1_123917 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__TypedElementReferenceExpression__ReferenceAssignment_123952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_rule__TypedElementReferenceExpression__OperationCallAssignment_2_023992 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__TypedElementReferenceExpression__ArgsAssignment_2_1_024031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__TypedElementReferenceExpression__ArgsAssignment_2_1_1_124062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__ElementReferenceExpression__ReferenceAssignment_123952 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_60_in_rule__ElementReferenceExpression__OperationCallAssignment_2_023992 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ElementReferenceExpression__ArgsAssignment_2_1_024031 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpression_in_rule__ElementReferenceExpression__ArgsAssignment_2_1_1_124062 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFeatureCall_in_rule__EventValueReferenceExpression__ValueAssignment_324093 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFQN_in_rule__ActiveStateReferenceExpression__ValueAssignment_324128 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_BOOL_in_rule__BoolLiteral__ValueAssignment_124163 = new BitSet(new long[]{0x0000000000000002L});

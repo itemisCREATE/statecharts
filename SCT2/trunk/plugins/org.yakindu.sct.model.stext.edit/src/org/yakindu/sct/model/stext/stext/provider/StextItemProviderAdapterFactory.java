@@ -1527,28 +1527,28 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression} instances.
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression} instances.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TypedElementReferenceExpressionItemProvider typedElementReferenceExpressionItemProvider;
+  protected ElementReferenceExpressionItemProvider elementReferenceExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression}.
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression}.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
   @Override
-  public Adapter createTypedElementReferenceExpressionAdapter()
+  public Adapter createElementReferenceExpressionAdapter()
   {
-    if (typedElementReferenceExpressionItemProvider == null)
+    if (elementReferenceExpressionItemProvider == null)
     {
-      typedElementReferenceExpressionItemProvider = new TypedElementReferenceExpressionItemProvider(this);
+      elementReferenceExpressionItemProvider = new ElementReferenceExpressionItemProvider(this);
     }
 
-    return typedElementReferenceExpressionItemProvider;
+    return elementReferenceExpressionItemProvider;
   }
 
   /**
@@ -1770,7 +1770,7 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (numericalUnaryExpressionItemProvider != null) numericalUnaryExpressionItemProvider.dispose();
     if (primitiveValueExpressionItemProvider != null) primitiveValueExpressionItemProvider.dispose();
     if (featureCallItemProvider != null) featureCallItemProvider.dispose();
-    if (typedElementReferenceExpressionItemProvider != null) typedElementReferenceExpressionItemProvider.dispose();
+    if (elementReferenceExpressionItemProvider != null) elementReferenceExpressionItemProvider.dispose();
     if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
     if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
   }

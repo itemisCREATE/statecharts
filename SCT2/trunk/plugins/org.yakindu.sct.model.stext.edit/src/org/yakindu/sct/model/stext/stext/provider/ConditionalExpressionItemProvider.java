@@ -251,7 +251,7 @@ public class ConditionalExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -351,7 +351,7 @@ public class ConditionalExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -451,7 +451,7 @@ public class ConditionalExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

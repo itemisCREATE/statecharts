@@ -31,7 +31,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
@@ -112,11 +112,11 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 						.getOperationCallLeftParenthesisKeyword_1_3_0_0());
 			}
 		}
-		if (currentModel instanceof TypedElementReferenceExpression) {
-			TypedElementReferenceExpression referenceExpression = (TypedElementReferenceExpression) currentModel;
+		if (currentModel instanceof ElementReferenceExpression) {
+			ElementReferenceExpression referenceExpression = (ElementReferenceExpression) currentModel;
 			if (!(referenceExpression.getReference() instanceof Operation)) {
 				keywords.add(grammarAccess
-						.getTypedElementReferenceExpressionAccess()
+						.getElementReferenceExpressionAccess()
 						.getOperationCallLeftParenthesisKeyword_2_0_0());
 			}
 		}

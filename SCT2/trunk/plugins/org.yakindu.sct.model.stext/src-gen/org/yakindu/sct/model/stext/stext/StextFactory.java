@@ -549,13 +549,13 @@ public interface StextFactory extends EFactory
   FeatureCall createFeatureCall();
 
   /**
-   * Returns a new object of class '<em>Typed Element Reference Expression</em>'.
+   * Returns a new object of class '<em>Element Reference Expression</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Typed Element Reference Expression</em>'.
+   * @return a new object of class '<em>Element Reference Expression</em>'.
    * @generated
    */
-  TypedElementReferenceExpression createTypedElementReferenceExpression();
+  ElementReferenceExpression createElementReferenceExpression();
 
   /**
    * Returns a new object of class '<em>Event Value Reference Expression</em>'.

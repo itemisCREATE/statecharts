@@ -2066,14 +2066,14 @@ public interface StextPackage extends EPackage
   int FEATURE_CALL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 4;
 
   /**
-   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TypedElementReferenceExpressionImpl <em>Typed Element Reference Expression</em>}' class.
+   * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.ElementReferenceExpressionImpl <em>Element Reference Expression</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.yakindu.sct.model.stext.stext.impl.TypedElementReferenceExpressionImpl
-   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTypedElementReferenceExpression()
+   * @see org.yakindu.sct.model.stext.stext.impl.ElementReferenceExpressionImpl
+   * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getElementReferenceExpression()
    * @generated
    */
-  int TYPED_ELEMENT_REFERENCE_EXPRESSION = 58;
+  int ELEMENT_REFERENCE_EXPRESSION = 58;
 
   /**
    * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -2082,7 +2082,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE = EXPRESSION_FEATURE_COUNT + 0;
+  int ELEMENT_REFERENCE_EXPRESSION__REFERENCE = EXPRESSION_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Operation Call</b></em>' attribute.
@@ -2091,7 +2091,7 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL = EXPRESSION_FEATURE_COUNT + 1;
+  int ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Args</b></em>' containment reference list.
@@ -2100,16 +2100,16 @@ public interface StextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS = EXPRESSION_FEATURE_COUNT + 2;
+  int ELEMENT_REFERENCE_EXPRESSION__ARGS = EXPRESSION_FEATURE_COUNT + 2;
 
   /**
-   * The number of structural features of the '<em>Typed Element Reference Expression</em>' class.
+   * The number of structural features of the '<em>Element Reference Expression</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPED_ELEMENT_REFERENCE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
+  int ELEMENT_REFERENCE_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.EventValueReferenceExpressionImpl <em>Event Value Reference Expression</em>}' class.
@@ -3587,47 +3587,47 @@ public interface StextPackage extends EPackage
   EReference getFeatureCall_Args();
 
   /**
-   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression <em>Typed Element Reference Expression</em>}'.
+   * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression <em>Element Reference Expression</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Typed Element Reference Expression</em>'.
-   * @see org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
+   * @return the meta object for class '<em>Element Reference Expression</em>'.
+   * @see org.yakindu.sct.model.stext.stext.ElementReferenceExpression
    * @generated
    */
-  EClass getTypedElementReferenceExpression();
+  EClass getElementReferenceExpression();
 
   /**
-   * Returns the meta object for the reference '{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#getReference <em>Reference</em>}'.
+   * Returns the meta object for the reference '{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression#getReference <em>Reference</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference '<em>Reference</em>'.
-   * @see org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#getReference()
-   * @see #getTypedElementReferenceExpression()
+   * @see org.yakindu.sct.model.stext.stext.ElementReferenceExpression#getReference()
+   * @see #getElementReferenceExpression()
    * @generated
    */
-  EReference getTypedElementReferenceExpression_Reference();
+  EReference getElementReferenceExpression_Reference();
 
   /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#isOperationCall <em>Operation Call</em>}'.
+   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression#isOperationCall <em>Operation Call</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Operation Call</em>'.
-   * @see org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#isOperationCall()
-   * @see #getTypedElementReferenceExpression()
+   * @see org.yakindu.sct.model.stext.stext.ElementReferenceExpression#isOperationCall()
+   * @see #getElementReferenceExpression()
    * @generated
    */
-  EAttribute getTypedElementReferenceExpression_OperationCall();
+  EAttribute getElementReferenceExpression_OperationCall();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#getArgs <em>Args</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression#getArgs <em>Args</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Args</em>'.
-   * @see org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#getArgs()
-   * @see #getTypedElementReferenceExpression()
+   * @see org.yakindu.sct.model.stext.stext.ElementReferenceExpression#getArgs()
+   * @see #getElementReferenceExpression()
    * @generated
    */
-  EReference getTypedElementReferenceExpression_Args();
+  EReference getElementReferenceExpression_Args();
 
   /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression <em>Event Value Reference Expression</em>}'.
@@ -4909,14 +4909,14 @@ public interface StextPackage extends EPackage
     EReference FEATURE_CALL__ARGS = eINSTANCE.getFeatureCall_Args();
 
     /**
-     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.TypedElementReferenceExpressionImpl <em>Typed Element Reference Expression</em>}' class.
+     * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.ElementReferenceExpressionImpl <em>Element Reference Expression</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.yakindu.sct.model.stext.stext.impl.TypedElementReferenceExpressionImpl
-     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTypedElementReferenceExpression()
+     * @see org.yakindu.sct.model.stext.stext.impl.ElementReferenceExpressionImpl
+     * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getElementReferenceExpression()
      * @generated
      */
-    EClass TYPED_ELEMENT_REFERENCE_EXPRESSION = eINSTANCE.getTypedElementReferenceExpression();
+    EClass ELEMENT_REFERENCE_EXPRESSION = eINSTANCE.getElementReferenceExpression();
 
     /**
      * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
@@ -4924,7 +4924,7 @@ public interface StextPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE = eINSTANCE.getTypedElementReferenceExpression_Reference();
+    EReference ELEMENT_REFERENCE_EXPRESSION__REFERENCE = eINSTANCE.getElementReferenceExpression_Reference();
 
     /**
      * The meta object literal for the '<em><b>Operation Call</b></em>' attribute feature.
@@ -4932,7 +4932,7 @@ public interface StextPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL = eINSTANCE.getTypedElementReferenceExpression_OperationCall();
+    EAttribute ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL = eINSTANCE.getElementReferenceExpression_OperationCall();
 
     /**
      * The meta object literal for the '<em><b>Args</b></em>' containment reference list feature.
@@ -4940,7 +4940,7 @@ public interface StextPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS = eINSTANCE.getTypedElementReferenceExpression_Args();
+    EReference ELEMENT_REFERENCE_EXPRESSION__ARGS = eINSTANCE.getElementReferenceExpression_Args();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.EventValueReferenceExpressionImpl <em>Event Value Reference Expression</em>}' class.

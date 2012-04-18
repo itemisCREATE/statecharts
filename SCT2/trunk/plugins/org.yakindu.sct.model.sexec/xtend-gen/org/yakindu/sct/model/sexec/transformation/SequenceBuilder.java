@@ -53,9 +53,9 @@ import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 @SuppressWarnings("all")
@@ -760,8 +760,8 @@ public class SequenceBuilder {
       AssignmentExpression _createAssignmentExpression = _factory_1.createAssignmentExpression();
       final AssignmentExpression assignment = _createAssignmentExpression;
       StextFactory _factory_2 = this.stext.factory();
-      TypedElementReferenceExpression _createTypedElementReferenceExpression = _factory_2.createTypedElementReferenceExpression();
-      final TypedElementReferenceExpression reference = _createTypedElementReferenceExpression;
+      ElementReferenceExpression _createElementReferenceExpression = _factory_2.createElementReferenceExpression();
+      final ElementReferenceExpression reference = _createElementReferenceExpression;
       reference.setReference(vd);
       assignment.setVarRef(reference);
       assignment.setOperator(AssignmentOperator.ASSIGN);

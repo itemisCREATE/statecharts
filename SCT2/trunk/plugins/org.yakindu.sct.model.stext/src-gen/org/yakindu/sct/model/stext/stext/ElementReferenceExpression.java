@@ -8,27 +8,27 @@ package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.yakindu.base.base.NamedElement;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>Typed Element Reference Expression</b></em>'.
+ * A representation of the model object '<em><b>Element Reference Expression</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#getReference <em>Reference</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#isOperationCall <em>Operation Call</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#getArgs <em>Args</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression#isOperationCall <em>Operation Call</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression#getArgs <em>Args</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.yakindu.sct.model.stext.stext.StextPackage#getTypedElementReferenceExpression()
+ * @see org.yakindu.sct.model.stext.stext.StextPackage#getElementReferenceExpression()
  * @model
  * @generated
  */
-public interface TypedElementReferenceExpression extends Expression
+public interface ElementReferenceExpression extends Expression
 {
   /**
    * Returns the value of the '<em><b>Reference</b></em>' reference.
@@ -39,22 +39,22 @@ public interface TypedElementReferenceExpression extends Expression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Reference</em>' reference.
-   * @see #setReference(NamedElement)
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getTypedElementReferenceExpression_Reference()
+   * @see #setReference(EObject)
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getElementReferenceExpression_Reference()
    * @model
    * @generated
    */
-  NamedElement getReference();
+  EObject getReference();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#getReference <em>Reference</em>}' reference.
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression#getReference <em>Reference</em>}' reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Reference</em>' reference.
    * @see #getReference()
    * @generated
    */
-  void setReference(NamedElement value);
+  void setReference(EObject value);
 
   /**
    * Returns the value of the '<em><b>Operation Call</b></em>' attribute.
@@ -66,14 +66,14 @@ public interface TypedElementReferenceExpression extends Expression
    * <!-- end-user-doc -->
    * @return the value of the '<em>Operation Call</em>' attribute.
    * @see #setOperationCall(boolean)
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getTypedElementReferenceExpression_OperationCall()
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getElementReferenceExpression_OperationCall()
    * @model
    * @generated
    */
   boolean isOperationCall();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression#isOperationCall <em>Operation Call</em>}' attribute.
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression#isOperationCall <em>Operation Call</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @param value the new value of the '<em>Operation Call</em>' attribute.
@@ -92,10 +92,10 @@ public interface TypedElementReferenceExpression extends Expression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Args</em>' containment reference list.
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getTypedElementReferenceExpression_Args()
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getElementReferenceExpression_Args()
    * @model containment="true"
    * @generated
    */
   EList<Expression> getArgs();
 
-} // TypedElementReferenceExpression
+} // ElementReferenceExpression

@@ -304,7 +304,7 @@ public class FeatureCallItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -404,7 +404,7 @@ public class FeatureCallItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
