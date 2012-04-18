@@ -680,21 +680,21 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	protected Object executeWithDefaultScope(String expression) {
-		Scope defaultScope = createDefaultScope();
+		Scope defaultScope = internalScope();
 		Expression statement = (Expression) parseExpression(expression,
 				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object execute(String scope, String expression) {
-		Scope defaultScope = createContextScope(scope);
+		Scope defaultScope = createInternalScope(scope);
 		Expression statement = (Expression) parseExpression(expression,
 				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object executeExpression(String scope, String expression) {
-		Scope defaultScope = createContextScope(scope);
+		Scope defaultScope = createInternalScope(scope);
 		Statement statement = (Statement) parseExpression(expression,
 				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
