@@ -3,11 +3,11 @@ package org.yakindu.sct.model.sexec.interpreter.stext;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.types.Feature;
 import org.yakindu.sct.model.sexec.interpreter.stext.AbstractStatementInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.stext.CoreFunction;
 import org.yakindu.sct.model.sgraph.RegularState;
@@ -23,6 +23,7 @@ import org.yakindu.sct.model.stext.stext.BitwiseOrExpression;
 import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
@@ -44,7 +45,6 @@ import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.ShiftExpression;
 import org.yakindu.sct.model.stext.stext.ShiftOperator;
 import org.yakindu.sct.model.stext.stext.StringLiteral;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.UnaryOperator;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
@@ -77,7 +77,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     Object _xblockexpression = null;
     {
       Expression _varRef = assignment.getVarRef();
-      NamedElement _variable = this.variable(_varRef);
+      EObject _variable = this.variable(_varRef);
       QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_variable);
       String _string = _fullyQualifiedName.toString();
       ExecutionVariable _variable_1 = this.context.getVariable(_string);
@@ -107,11 +107,11 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _xblockexpression;
   }
   
-  protected NamedElement _variable(final TypedElementReferenceExpression e) {
-    NamedElement _xifexpression = null;
-    NamedElement _reference = e.getReference();
+  protected EObject _variable(final ElementReferenceExpression e) {
+    EObject _xifexpression = null;
+    EObject _reference = e.getReference();
     if ((_reference instanceof org.yakindu.sct.model.stext.stext.VariableDefinition)) {
-      NamedElement _reference_1 = e.getReference();
+      EObject _reference_1 = e.getReference();
       _xifexpression = _reference_1;
     } else {
       _xifexpression = null;
@@ -119,11 +119,11 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _xifexpression;
   }
   
-  protected NamedElement _variable(final FeatureCall e) {
-    Feature _xifexpression = null;
-    Feature _feature = e.getFeature();
+  protected EObject _variable(final FeatureCall e) {
+    EObject _xifexpression = null;
+    EObject _feature = e.getFeature();
     if ((_feature instanceof org.yakindu.sct.model.stext.stext.VariableDefinition)) {
-      Feature _feature_1 = e.getFeature();
+      EObject _feature_1 = e.getFeature();
       _xifexpression = _feature_1;
     } else {
       _xifexpression = null;
@@ -131,11 +131,11 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _xifexpression;
   }
   
-  protected NamedElement _event(final TypedElementReferenceExpression e) {
-    NamedElement _xifexpression = null;
-    NamedElement _reference = e.getReference();
+  protected EObject _event(final ElementReferenceExpression e) {
+    EObject _xifexpression = null;
+    EObject _reference = e.getReference();
     if ((_reference instanceof org.yakindu.sct.model.stext.stext.EventDefinition)) {
-      NamedElement _reference_1 = e.getReference();
+      EObject _reference_1 = e.getReference();
       _xifexpression = _reference_1;
     } else {
       _xifexpression = null;
@@ -143,11 +143,11 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _xifexpression;
   }
   
-  protected NamedElement _event(final FeatureCall e) {
-    Feature _xifexpression = null;
-    Feature _feature = e.getFeature();
+  protected EObject _event(final FeatureCall e) {
+    EObject _xifexpression = null;
+    EObject _feature = e.getFeature();
     if ((_feature instanceof org.yakindu.sct.model.stext.stext.EventDefinition)) {
-      Feature _feature_1 = e.getFeature();
+      EObject _feature_1 = e.getFeature();
       _xifexpression = _feature_1;
     } else {
       _xifexpression = null;
@@ -162,7 +162,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_value, null);
       if (_operator_notEquals) {
         Expression _event = eventRaising.getEvent();
-        NamedElement _event_1 = this.event(_event);
+        EObject _event_1 = this.event(_event);
         QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_event_1);
         String _string = _fullyQualifiedName.toString();
         Expression _value_1 = eventRaising.getValue();
@@ -170,7 +170,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
         this.context.raiseEvent(_string, _execute);
       } else {
         Expression _event_2 = eventRaising.getEvent();
-        NamedElement _event_3 = this.event(_event_2);
+        EObject _event_3 = this.event(_event_2);
         QualifiedName _fullyQualifiedName_1 = this.provider.getFullyQualifiedName(_event_3);
         String _string_1 = _fullyQualifiedName_1.toString();
         this.context.raiseEvent(_string_1, null);
@@ -194,9 +194,9 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     }
   }
   
-  protected Object _execute(final TypedElementReferenceExpression expression) {
+  protected Object _execute(final ElementReferenceExpression expression) {
     {
-      NamedElement _reference = expression.getReference();
+      EObject _reference = expression.getReference();
       QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_reference);
       String _string = _fullyQualifiedName.toString();
       ExecutionVariable _variable = this.context.getVariable(_string);
@@ -206,7 +206,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
         Object _value = variableRef.getValue();
         return _value;
       }
-      NamedElement _reference_1 = expression.getReference();
+      EObject _reference_1 = expression.getReference();
       QualifiedName _fullyQualifiedName_1 = this.provider.getFullyQualifiedName(_reference_1);
       String _string_1 = _fullyQualifiedName_1.toString();
       boolean _isEventRaised = this.context.isEventRaised(_string_1);
@@ -233,27 +233,20 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _xblockexpression;
   }
   
-  protected String _name(final FeatureCall e) {
-    Feature _feature = e.getFeature();
-    String _name = _feature.getName();
-    return _name;
-  }
-  
-  protected String _name(final TypedElementReferenceExpression e) {
-    NamedElement _reference = e.getReference();
-    String _name = _reference.getName();
-    return _name;
+  public String name(final EObject e) {
+    String _apply = SimpleAttributeResolver.NAME_RESOLVER.apply(e);
+    return _apply;
   }
   
   protected String _qname(final FeatureCall e) {
-    Feature _feature = e.getFeature();
+    EObject _feature = e.getFeature();
     QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_feature);
     String _string = _fullyQualifiedName.toString();
     return _string;
   }
   
-  protected String _qname(final TypedElementReferenceExpression e) {
-    NamedElement _reference = e.getReference();
+  protected String _qname(final ElementReferenceExpression e) {
+    EObject _reference = e.getReference();
     QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_reference);
     String _string = _fullyQualifiedName.toString();
     return _string;
@@ -413,12 +406,12 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     {
       boolean _isOperationCall = call.isOperationCall();
       if (_isOperationCall) {
-        Feature _feature = call.getFeature();
-        String _name = _feature.getName();
+        EObject _feature = call.getFeature();
+        String _name = this.name(_feature);
         this.context.call(_name);
       } else {
         {
-          Feature _feature_1 = call.getFeature();
+          EObject _feature_1 = call.getFeature();
           QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_feature_1);
           String _string = _fullyQualifiedName.toString();
           ExecutionVariable _variable = this.context.getVariable(_string);
@@ -428,7 +421,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
             Object _value = variableRef.getValue();
             return _value;
           }
-          Feature _feature_2 = call.getFeature();
+          EObject _feature_2 = call.getFeature();
           QualifiedName _fullyQualifiedName_1 = this.provider.getFullyQualifiedName(_feature_2);
           String _string_1 = _fullyQualifiedName_1.toString();
           boolean _isEventRaised = this.context.isEventRaised(_string_1);
@@ -484,6 +477,8 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       return _execute((BitwiseXorExpression)expression);
     } else if ((expression instanceof ConditionalExpression)) {
       return _execute((ConditionalExpression)expression);
+    } else if ((expression instanceof ElementReferenceExpression)) {
+      return _execute((ElementReferenceExpression)expression);
     } else if ((expression instanceof EventRaisingExpression)) {
       return _execute((EventRaisingExpression)expression);
     } else if ((expression instanceof EventValueReferenceExpression)) {
@@ -508,8 +503,6 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       return _execute((PrimitiveValueExpression)expression);
     } else if ((expression instanceof ShiftExpression)) {
       return _execute((ShiftExpression)expression);
-    } else if ((expression instanceof TypedElementReferenceExpression)) {
-      return _execute((TypedElementReferenceExpression)expression);
     } else if ((expression instanceof Statement)) {
       return _execute((Statement)expression);
     } else {
@@ -518,33 +511,22 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     }
   }
   
-  public NamedElement variable(final Expression e) {
-    if ((e instanceof FeatureCall)) {
+  public EObject variable(final Expression e) {
+    if ((e instanceof ElementReferenceExpression)) {
+      return _variable((ElementReferenceExpression)e);
+    } else if ((e instanceof FeatureCall)) {
       return _variable((FeatureCall)e);
-    } else if ((e instanceof TypedElementReferenceExpression)) {
-      return _variable((TypedElementReferenceExpression)e);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(e).toString());
     }
   }
   
-  public NamedElement event(final Expression e) {
-    if ((e instanceof FeatureCall)) {
+  public EObject event(final Expression e) {
+    if ((e instanceof ElementReferenceExpression)) {
+      return _event((ElementReferenceExpression)e);
+    } else if ((e instanceof FeatureCall)) {
       return _event((FeatureCall)e);
-    } else if ((e instanceof TypedElementReferenceExpression)) {
-      return _event((TypedElementReferenceExpression)e);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(e).toString());
-    }
-  }
-  
-  public String name(final Expression e) {
-    if ((e instanceof FeatureCall)) {
-      return _name((FeatureCall)e);
-    } else if ((e instanceof TypedElementReferenceExpression)) {
-      return _name((TypedElementReferenceExpression)e);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(e).toString());
@@ -552,10 +534,10 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
   }
   
   public String qname(final Expression e) {
-    if ((e instanceof FeatureCall)) {
+    if ((e instanceof ElementReferenceExpression)) {
+      return _qname((ElementReferenceExpression)e);
+    } else if ((e instanceof FeatureCall)) {
       return _qname((FeatureCall)e);
-    } else if ((e instanceof TypedElementReferenceExpression)) {
-      return _qname((TypedElementReferenceExpression)e);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         java.util.Arrays.<Object>asList(e).toString());

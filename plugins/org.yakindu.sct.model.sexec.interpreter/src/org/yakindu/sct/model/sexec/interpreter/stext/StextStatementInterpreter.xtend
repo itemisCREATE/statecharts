@@ -46,7 +46,7 @@ import org.yakindu.sct.model.sgraph.Scope
 import com.google.inject.Inject
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.HexLiteral
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.AssignmentExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
@@ -54,6 +54,10 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.impl.StringLiteralImpl
 import org.yakindu.sct.model.stext.stext.StringLiteral
+import org.yakindu.base.types.Feature
+import org.yakindu.base.base.NamedElement
+import org.eclipse.xtext.util.SimpleAttributeResolver
+import org.eclipse.emf.ecore.EObject
 
 /**
  * 
@@ -91,7 +95,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 	
 	
-	def dispatch variable(TypedElementReferenceExpression e) {
+	def dispatch variable(ElementReferenceExpression e) {
 		if (e.reference instanceof VariableDefinition) e.reference else null	
 	} 
 	
@@ -101,7 +105,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 	
 
-	def dispatch event(TypedElementReferenceExpression e) {
+	def dispatch event(ElementReferenceExpression e) {
 		if (e.reference instanceof EventDefinition) e.reference else null	
 	} 
 	
@@ -128,7 +132,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		}
 	} 
 	
-	def dispatch execute(TypedElementReferenceExpression expression){
+	def dispatch execute(ElementReferenceExpression expression){
 		var variableRef = context.getVariable(expression.reference.fullyQualifiedName.toString)
 		if(variableRef != null){
 			return variableRef.getValue
@@ -145,29 +149,16 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		null;
 	}
 	
-	def dispatch name(FeatureCall e) {
-		e.feature.name
-	}
-	def dispatch name(TypedElementReferenceExpression e) {
-		e.reference.name
+	def name(EObject e) {
+		 return SimpleAttributeResolver::NAME_RESOLVER.apply(e)
 	}
 
 	def dispatch qname(FeatureCall e) {
 		return e.feature.fullyQualifiedName.toString
-//		if( e.feature.eContainer instanceof InterfaceScope) {
-//			val scope = (e.feature.eContainer as InterfaceScope)
-//			if (scope.name != null && ! scope.name.empty)  return scope.name + "." + e.feature.name	
-//		}
-//		return e.feature.name
 	}
 
-	def dispatch qname(TypedElementReferenceExpression e) {
+	def dispatch qname(ElementReferenceExpression e) {
 		e.reference.fullyQualifiedName.toString
-//		if( e.reference.eContainer instanceof InterfaceScope) {
-//			val scope = (e.reference.eContainer as InterfaceScope)
-//			if (scope.name != null && ! scope.name.empty)  return scope.name + "." + e.reference.name	
-//		}
-//		return e.reference.name
 	}
 	
 	def dispatch execute(ActiveStateReferenceExpression expression){
