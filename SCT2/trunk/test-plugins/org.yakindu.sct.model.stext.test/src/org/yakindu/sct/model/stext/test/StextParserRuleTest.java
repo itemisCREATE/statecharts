@@ -22,9 +22,11 @@ import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.Exitpoint;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
+import org.yakindu.sct.model.stext.stext.ReactionProperties;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
@@ -193,10 +195,34 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("raise ABC.event2", interfaceScope(), rule);
 		parseExpression("ABC.myOpp2()", interfaceScope(), rule);
 		parseExpression("ABC.myOpp2(5,false)", interfaceScope(), rule);
-		parseExpression("ABC.myOpp2(); raise ABC.event2 ", interfaceScope(), rule);
+		parseExpression("ABC.myOpp2(); raise ABC.event2 ", interfaceScope(),
+				rule);
 
 	}
 
+	/**
+	 * ReactionProperties: {ReactionProperties} (properties+=ReactionProperty)*;
+	 */
+	@Test
+	public void testReactionProperties() {
+		String rule = ReactionProperties.class.getSimpleName();
+		parseExpression("> ABC.EntryPoint", interfaceScope(), rule);
+		parseExpression("ABC.ExitPoint >", interfaceScope(), rule);
+	}
+
+	/**
+	 * LocalReaction: (trigger=ReactionTrigger) =>('/' effect=ReactionEffect)
+	 * ('#' properties=ReactionProperties)?;
+	 */
+	@Test
+	public void tesLocalReaction() {
+		//TODO: Does it make sense to use Entry points in an entry local reaction?
+		String rule = LocalReaction.class.getSimpleName();
+		parseExpression("entry [ABC.myInt > 10] / raise ABC.event2 # > ABC.EntryPoint", interfaceScope(), rule);
+	}
+	
+	
+	
 	/**
 	 * {InterfaceScope} 'interface' (name=ID)? ':'
 	 * (declarations+=(EventDeclarartion | VariableDeclaration |
@@ -226,7 +252,17 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("internal : event Event1", rule);
 		parseExpression("internal : var myVar : integer", rule);
 		parseExpression("internal : operation myOpp()", rule);
-		parseExpression("internal : every 10 ms / raise abc", internalScope(), rule);
+		parseExpression("internal : every 10 ms / raise abc", internalScope(),
+				rule);
+	}
+
+	/**
+	 * StateScope returns sgraph::Scope: {SimpleScope}
+	 * (declarations+=(LocalReaction | Entrypoint | Exitpoint))*;
+	 */
+	@Test
+	public void testStateScope() {
+
 	}
 
 }
