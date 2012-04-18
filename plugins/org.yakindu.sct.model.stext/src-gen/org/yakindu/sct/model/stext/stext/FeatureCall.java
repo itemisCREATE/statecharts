@@ -8,7 +8,7 @@ package org.yakindu.sct.model.stext.stext;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.yakindu.base.types.Feature;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -66,12 +66,12 @@ public interface FeatureCall extends Expression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Feature</em>' reference.
-   * @see #setFeature(Feature)
+   * @see #setFeature(EObject)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getFeatureCall_Feature()
    * @model
    * @generated
    */
-  Feature getFeature();
+  EObject getFeature();
 
   /**
    * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.FeatureCall#getFeature <em>Feature</em>}' reference.
@@ -81,7 +81,7 @@ public interface FeatureCall extends Expression
    * @see #getFeature()
    * @generated
    */
-  void setFeature(Feature value);
+  void setFeature(EObject value);
 
   /**
    * Returns the value of the '<em><b>Operation Call</b></em>' attribute.

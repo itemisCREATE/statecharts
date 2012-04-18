@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.types.Feature;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -54,6 +53,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.DefaultEvent;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
@@ -69,7 +69,6 @@ import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 @SuppressWarnings("all")
@@ -583,8 +582,8 @@ public class SexecElementMapping {
   protected Expression _raised(final RegularEventSpec e) {
     {
       StextFactory _factory = this.stext.factory();
-      TypedElementReferenceExpression _createTypedElementReferenceExpression = _factory.createTypedElementReferenceExpression();
-      final TypedElementReferenceExpression r = _createTypedElementReferenceExpression;
+      ElementReferenceExpression _createElementReferenceExpression = _factory.createElementReferenceExpression();
+      final ElementReferenceExpression r = _createElementReferenceExpression;
       EObject _eContainer = e.eContainer();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(e, _eContainer);
       r.setReference(_resolveRegularEventSpec);
@@ -610,22 +609,22 @@ public class SexecElementMapping {
   
   protected NamedElement _resolveRegularEventSpec(final FeatureCall fc, final Object context) {
     NamedElement _xifexpression = null;
-    Feature _feature = fc.getFeature();
+    EObject _feature = fc.getFeature();
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_feature, null);
     if (_operator_notEquals) {
-      Feature _feature_1 = fc.getFeature();
+      EObject _feature_1 = fc.getFeature();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(_feature_1, fc);
       _xifexpression = _resolveRegularEventSpec;
     }
     return _xifexpression;
   }
   
-  protected NamedElement _resolveRegularEventSpec(final TypedElementReferenceExpression ter, final Object context) {
+  protected NamedElement _resolveRegularEventSpec(final ElementReferenceExpression ter, final Object context) {
     NamedElement _xifexpression = null;
-    NamedElement _reference = ter.getReference();
+    EObject _reference = ter.getReference();
     boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_reference, null);
     if (_operator_notEquals) {
-      NamedElement _reference_1 = ter.getReference();
+      EObject _reference_1 = ter.getReference();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(_reference_1, ter);
       _xifexpression = _resolveRegularEventSpec;
     }
@@ -640,8 +639,8 @@ public class SexecElementMapping {
   protected Expression _raised(final TimeEventSpec e) {
     {
       StextFactory _factory = this.stext.factory();
-      TypedElementReferenceExpression _createTypedElementReferenceExpression = _factory.createTypedElementReferenceExpression();
-      final TypedElementReferenceExpression r = _createTypedElementReferenceExpression;
+      ElementReferenceExpression _createElementReferenceExpression = _factory.createElementReferenceExpression();
+      final ElementReferenceExpression r = _createElementReferenceExpression;
       TimeEvent _createDerivedEvent = this.createDerivedEvent(e);
       r.setReference(_createDerivedEvent);
       return r;
@@ -732,12 +731,12 @@ public class SexecElementMapping {
     if ((ed instanceof EventDefinition)
          && (context instanceof Object)) {
       return _resolveRegularEventSpec((EventDefinition)ed, (Object)context);
+    } else if ((ed instanceof ElementReferenceExpression)
+         && (context instanceof Object)) {
+      return _resolveRegularEventSpec((ElementReferenceExpression)ed, (Object)context);
     } else if ((ed instanceof FeatureCall)
          && (context instanceof Object)) {
       return _resolveRegularEventSpec((FeatureCall)ed, (Object)context);
-    } else if ((ed instanceof TypedElementReferenceExpression)
-         && (context instanceof Object)) {
-      return _resolveRegularEventSpec((TypedElementReferenceExpression)ed, (Object)context);
     } else if ((ed instanceof RegularEventSpec)
          && (context instanceof Object)) {
       return _resolveRegularEventSpec((RegularEventSpec)ed, (Object)context);

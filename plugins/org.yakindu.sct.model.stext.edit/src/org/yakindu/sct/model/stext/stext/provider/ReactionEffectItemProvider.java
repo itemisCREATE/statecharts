@@ -251,7 +251,7 @@ public class ReactionEffectItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

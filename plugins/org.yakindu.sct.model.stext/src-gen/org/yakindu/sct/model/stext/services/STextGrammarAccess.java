@@ -2181,13 +2181,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	public class FeatureCallElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureCall");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cTypedElementReferenceExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cElementReferenceExpressionParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cFeatureCallOwnerAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Keyword cFullStopKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
 		private final Assignment cFeatureAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
-		private final CrossReference cFeatureFeatureCrossReference_1_2_0 = (CrossReference)cFeatureAssignment_1_2.eContents().get(0);
-		private final RuleCall cFeatureFeatureIDTerminalRuleCall_1_2_0_1 = (RuleCall)cFeatureFeatureCrossReference_1_2_0.eContents().get(1);
+		private final CrossReference cFeatureEObjectCrossReference_1_2_0 = (CrossReference)cFeatureAssignment_1_2.eContents().get(0);
+		private final RuleCall cFeatureEObjectIDTerminalRuleCall_1_2_0_1 = (RuleCall)cFeatureEObjectCrossReference_1_2_0.eContents().get(1);
 		private final Group cGroup_1_3 = (Group)cGroup_1.eContents().get(3);
 		private final Assignment cOperationCallAssignment_1_3_0 = (Assignment)cGroup_1_3.eContents().get(0);
 		private final Keyword cOperationCallLeftParenthesisKeyword_1_3_0_0 = (Keyword)cOperationCallAssignment_1_3_0.eContents().get(0);
@@ -2201,18 +2201,18 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightParenthesisKeyword_1_3_2 = (Keyword)cGroup_1_3.eContents().get(2);
 		
 		//FeatureCall returns Expression:
-		//	TypedElementReferenceExpression ({FeatureCall.owner=current} "." feature=[types::Feature] (=> operationCall?="("
+		//	ElementReferenceExpression ({FeatureCall.owner=current} "." feature=[ecore::EObject] (=> operationCall?="("
 		//	(args+=Expression ("," args+=Expression)*)? ")")?)*;
 		public ParserRule getRule() { return rule; }
 
-		//TypedElementReferenceExpression ({FeatureCall.owner=current} "." feature=[types::Feature] (=> operationCall?="("
+		//ElementReferenceExpression ({FeatureCall.owner=current} "." feature=[ecore::EObject] (=> operationCall?="("
 		//(args+=Expression ("," args+=Expression)*)? ")")?)*
 		public Group getGroup() { return cGroup; }
 
-		//TypedElementReferenceExpression
-		public RuleCall getTypedElementReferenceExpressionParserRuleCall_0() { return cTypedElementReferenceExpressionParserRuleCall_0; }
+		//ElementReferenceExpression
+		public RuleCall getElementReferenceExpressionParserRuleCall_0() { return cElementReferenceExpressionParserRuleCall_0; }
 
-		//({FeatureCall.owner=current} "." feature=[types::Feature] (=> operationCall?="(" (args+=Expression (","
+		//({FeatureCall.owner=current} "." feature=[ecore::EObject] (=> operationCall?="(" (args+=Expression (","
 		//args+=Expression)*)? ")")?)*
 		public Group getGroup_1() { return cGroup_1; }
 
@@ -2222,14 +2222,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//"."
 		public Keyword getFullStopKeyword_1_1() { return cFullStopKeyword_1_1; }
 
-		//feature=[types::Feature]
+		//feature=[ecore::EObject]
 		public Assignment getFeatureAssignment_1_2() { return cFeatureAssignment_1_2; }
 
-		//[types::Feature]
-		public CrossReference getFeatureFeatureCrossReference_1_2_0() { return cFeatureFeatureCrossReference_1_2_0; }
+		//[ecore::EObject]
+		public CrossReference getFeatureEObjectCrossReference_1_2_0() { return cFeatureEObjectCrossReference_1_2_0; }
 
 		//ID
-		public RuleCall getFeatureFeatureIDTerminalRuleCall_1_2_0_1() { return cFeatureFeatureIDTerminalRuleCall_1_2_0_1; }
+		public RuleCall getFeatureEObjectIDTerminalRuleCall_1_2_0_1() { return cFeatureEObjectIDTerminalRuleCall_1_2_0_1; }
 
 		//(=> operationCall?="(" (args+=Expression ("," args+=Expression)*)? ")")?
 		public Group getGroup_1_3() { return cGroup_1_3; }
@@ -2265,13 +2265,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getRightParenthesisKeyword_1_3_2() { return cRightParenthesisKeyword_1_3_2; }
 	}
 
-	public class TypedElementReferenceExpressionElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypedElementReferenceExpression");
+	public class ElementReferenceExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ElementReferenceExpression");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cTypedElementReferenceExpressionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cElementReferenceExpressionAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cReferenceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cReferenceNamedElementCrossReference_1_0 = (CrossReference)cReferenceAssignment_1.eContents().get(0);
-		private final RuleCall cReferenceNamedElementIDTerminalRuleCall_1_0_1 = (RuleCall)cReferenceNamedElementCrossReference_1_0.eContents().get(1);
+		private final CrossReference cReferenceEObjectCrossReference_1_0 = (CrossReference)cReferenceAssignment_1.eContents().get(0);
+		private final RuleCall cReferenceEObjectIDTerminalRuleCall_1_0_1 = (RuleCall)cReferenceEObjectCrossReference_1_0.eContents().get(1);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Assignment cOperationCallAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
 		private final Keyword cOperationCallLeftParenthesisKeyword_2_0_0 = (Keyword)cOperationCallAssignment_2_0.eContents().get(0);
@@ -2284,26 +2284,26 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cArgsExpressionParserRuleCall_2_1_1_1_0 = (RuleCall)cArgsAssignment_2_1_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
 		
-		//TypedElementReferenceExpression returns Expression:
-		//	{TypedElementReferenceExpression} reference=[base::NamedElement] (=> operationCall?="(" (args+=Expression (","
+		//ElementReferenceExpression returns Expression:
+		//	{ElementReferenceExpression} reference=[ecore::EObject] (=> operationCall?="(" (args+=Expression (","
 		//	args+=Expression)*)? ")")?;
 		public ParserRule getRule() { return rule; }
 
-		//{TypedElementReferenceExpression} reference=[base::NamedElement] (=> operationCall?="(" (args+=Expression (","
+		//{ElementReferenceExpression} reference=[ecore::EObject] (=> operationCall?="(" (args+=Expression (","
 		//args+=Expression)*)? ")")?
 		public Group getGroup() { return cGroup; }
 
-		//{TypedElementReferenceExpression}
-		public Action getTypedElementReferenceExpressionAction_0() { return cTypedElementReferenceExpressionAction_0; }
+		//{ElementReferenceExpression}
+		public Action getElementReferenceExpressionAction_0() { return cElementReferenceExpressionAction_0; }
 
-		//reference=[base::NamedElement]
+		//reference=[ecore::EObject]
 		public Assignment getReferenceAssignment_1() { return cReferenceAssignment_1; }
 
-		//[base::NamedElement]
-		public CrossReference getReferenceNamedElementCrossReference_1_0() { return cReferenceNamedElementCrossReference_1_0; }
+		//[ecore::EObject]
+		public CrossReference getReferenceEObjectCrossReference_1_0() { return cReferenceEObjectCrossReference_1_0; }
 
 		//ID
-		public RuleCall getReferenceNamedElementIDTerminalRuleCall_1_0_1() { return cReferenceNamedElementIDTerminalRuleCall_1_0_1; }
+		public RuleCall getReferenceEObjectIDTerminalRuleCall_1_0_1() { return cReferenceEObjectIDTerminalRuleCall_1_0_1; }
 
 		//(=> operationCall?="(" (args+=Expression ("," args+=Expression)*)? ")")?
 		public Group getGroup_2() { return cGroup_2; }
@@ -3035,7 +3035,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private PrimaryExpressionElements pPrimaryExpression;
 	private PrimitiveValueExpressionElements pPrimitiveValueExpression;
 	private FeatureCallElements pFeatureCall;
-	private TypedElementReferenceExpressionElements pTypedElementReferenceExpression;
+	private ElementReferenceExpressionElements pElementReferenceExpression;
 	private EventValueReferenceExpressionElements pEventValueReferenceExpression;
 	private ActiveStateReferenceExpressionElements pActiveStateReferenceExpression;
 	private LiteralElements pLiteral;
@@ -3787,7 +3787,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureCall returns Expression:
-	//	TypedElementReferenceExpression ({FeatureCall.owner=current} "." feature=[types::Feature] (=> operationCall?="("
+	//	ElementReferenceExpression ({FeatureCall.owner=current} "." feature=[ecore::EObject] (=> operationCall?="("
 	//	(args+=Expression ("," args+=Expression)*)? ")")?)*;
 	public FeatureCallElements getFeatureCallAccess() {
 		return (pFeatureCall != null) ? pFeatureCall : (pFeatureCall = new FeatureCallElements());
@@ -3797,15 +3797,15 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getFeatureCallAccess().getRule();
 	}
 
-	//TypedElementReferenceExpression returns Expression:
-	//	{TypedElementReferenceExpression} reference=[base::NamedElement] (=> operationCall?="(" (args+=Expression (","
+	//ElementReferenceExpression returns Expression:
+	//	{ElementReferenceExpression} reference=[ecore::EObject] (=> operationCall?="(" (args+=Expression (","
 	//	args+=Expression)*)? ")")?;
-	public TypedElementReferenceExpressionElements getTypedElementReferenceExpressionAccess() {
-		return (pTypedElementReferenceExpression != null) ? pTypedElementReferenceExpression : (pTypedElementReferenceExpression = new TypedElementReferenceExpressionElements());
+	public ElementReferenceExpressionElements getElementReferenceExpressionAccess() {
+		return (pElementReferenceExpression != null) ? pElementReferenceExpression : (pElementReferenceExpression = new ElementReferenceExpressionElements());
 	}
 	
-	public ParserRule getTypedElementReferenceExpressionRule() {
-		return getTypedElementReferenceExpressionAccess().getRule();
+	public ParserRule getElementReferenceExpressionRule() {
+		return getElementReferenceExpressionAccess().getRule();
 	}
 
 	//EventValueReferenceExpression returns Expression:

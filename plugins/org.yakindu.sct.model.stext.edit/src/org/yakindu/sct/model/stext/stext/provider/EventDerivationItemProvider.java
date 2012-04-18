@@ -252,7 +252,7 @@ public class EventDerivationItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_DERIVATION__CONDITION,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -352,7 +352,7 @@ public class EventDerivationItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_DERIVATION__VALUE,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

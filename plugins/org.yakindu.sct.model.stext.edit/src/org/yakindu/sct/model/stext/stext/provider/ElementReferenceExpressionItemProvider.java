@@ -25,17 +25,17 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypedElementReferenceExpressionItemProvider
+public class ElementReferenceExpressionItemProvider
   extends ExpressionItemProvider
   implements
     IEditingDomainItemProvider,
@@ -50,7 +50,7 @@ public class TypedElementReferenceExpressionItemProvider
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypedElementReferenceExpressionItemProvider(AdapterFactory adapterFactory)
+  public ElementReferenceExpressionItemProvider(AdapterFactory adapterFactory)
   {
     super(adapterFactory);
   }
@@ -86,9 +86,9 @@ public class TypedElementReferenceExpressionItemProvider
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_TypedElementReferenceExpression_reference_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_TypedElementReferenceExpression_reference_feature", "_UI_TypedElementReferenceExpression_type"),
-         StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+         getString("_UI_ElementReferenceExpression_reference_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_ElementReferenceExpression_reference_feature", "_UI_ElementReferenceExpression_type"),
+         StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
          true,
          false,
          true,
@@ -109,9 +109,9 @@ public class TypedElementReferenceExpressionItemProvider
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_TypedElementReferenceExpression_operationCall_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_TypedElementReferenceExpression_operationCall_feature", "_UI_TypedElementReferenceExpression_type"),
-         StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL,
+         getString("_UI_ElementReferenceExpression_operationCall_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_ElementReferenceExpression_operationCall_feature", "_UI_ElementReferenceExpression_type"),
+         StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL,
          true,
          false,
          false,
@@ -134,7 +134,7 @@ public class TypedElementReferenceExpressionItemProvider
     if (childrenFeatures == null)
     {
       super.getChildrenFeatures(object);
-      childrenFeatures.add(StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS);
+      childrenFeatures.add(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS);
     }
     return childrenFeatures;
   }
@@ -154,7 +154,7 @@ public class TypedElementReferenceExpressionItemProvider
   }
 
   /**
-   * This returns TypedElementReferenceExpression.gif.
+   * This returns ElementReferenceExpression.gif.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -162,7 +162,7 @@ public class TypedElementReferenceExpressionItemProvider
   @Override
   public Object getImage(Object object)
   {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/TypedElementReferenceExpression"));
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/ElementReferenceExpression"));
   }
 
   /**
@@ -174,8 +174,8 @@ public class TypedElementReferenceExpressionItemProvider
   @Override
   public String getText(Object object)
   {
-    TypedElementReferenceExpression typedElementReferenceExpression = (TypedElementReferenceExpression)object;
-    return getString("_UI_TypedElementReferenceExpression_type") + " " + typedElementReferenceExpression.isOperationCall();
+    ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)object;
+    return getString("_UI_ElementReferenceExpression_type") + " " + elementReferenceExpression.isOperationCall();
   }
 
   /**
@@ -190,12 +190,12 @@ public class TypedElementReferenceExpressionItemProvider
   {
     updateChildren(notification);
 
-    switch (notification.getFeatureID(TypedElementReferenceExpression.class))
+    switch (notification.getFeatureID(ElementReferenceExpression.class))
     {
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
         return;
     }
@@ -216,102 +216,102 @@ public class TypedElementReferenceExpressionItemProvider
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createEventRaisingExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createConditionalExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createLogicalOrExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createLogicalAndExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createLogicalNotExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createBitwiseXorExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createBitwiseOrExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createBitwiseAndExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createLogicalRelationExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createShiftExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createNumericalUnaryExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createPrimitiveValueExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createFeatureCall()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createEventValueReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS,
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
   }
 

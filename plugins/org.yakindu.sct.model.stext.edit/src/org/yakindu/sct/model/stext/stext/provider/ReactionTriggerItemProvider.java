@@ -298,7 +298,7 @@ public class ReactionTriggerItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

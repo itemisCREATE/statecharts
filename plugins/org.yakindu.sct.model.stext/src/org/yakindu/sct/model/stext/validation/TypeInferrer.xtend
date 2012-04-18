@@ -204,12 +204,12 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		val falseType = expression.falseCase.getType
 		return trueType.combine(falseType)
 	} 
-	
+	//TODO: Remove dependency to base types
 	def dispatch inferType(FeatureCall featureCall){
-		return featureCall.feature?.type
+		return (featureCall.feature as Feature)?.type
 	}
 	
-	def dispatch inferType(TypedElementReferenceExpression expression){
+	def dispatch inferType(ElementReferenceExpression expression){
 		var reference  = expression.reference
 		if(reference instanceof VariableDefinition){
 			return (reference as VariableDefinition).type

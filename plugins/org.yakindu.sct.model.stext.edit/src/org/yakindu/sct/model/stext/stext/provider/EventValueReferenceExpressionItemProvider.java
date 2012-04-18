@@ -247,7 +247,7 @@ public class EventValueReferenceExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

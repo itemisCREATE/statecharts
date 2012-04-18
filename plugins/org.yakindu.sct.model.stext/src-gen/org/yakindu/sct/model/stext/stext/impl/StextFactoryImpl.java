@@ -127,7 +127,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.NUMERICAL_UNARY_EXPRESSION: return createNumericalUnaryExpression();
       case StextPackage.PRIMITIVE_VALUE_EXPRESSION: return createPrimitiveValueExpression();
       case StextPackage.FEATURE_CALL: return createFeatureCall();
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION: return createTypedElementReferenceExpression();
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
       case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
       case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION: return createActiveStateReferenceExpression();
       default:
@@ -844,10 +844,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public TypedElementReferenceExpression createTypedElementReferenceExpression()
+  public ElementReferenceExpression createElementReferenceExpression()
   {
-    TypedElementReferenceExpressionImpl typedElementReferenceExpression = new TypedElementReferenceExpressionImpl();
-    return typedElementReferenceExpression;
+    ElementReferenceExpressionImpl elementReferenceExpression = new ElementReferenceExpressionImpl();
+    return elementReferenceExpression;
   }
 
   /**

@@ -247,7 +247,7 @@ public class RegularEventSpecItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

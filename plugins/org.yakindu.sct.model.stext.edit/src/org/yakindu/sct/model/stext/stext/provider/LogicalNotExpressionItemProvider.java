@@ -247,7 +247,7 @@ public class LogicalNotExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.LOGICAL_NOT_EXPRESSION__OPERAND,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

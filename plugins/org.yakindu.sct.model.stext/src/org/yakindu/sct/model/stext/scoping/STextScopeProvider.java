@@ -26,18 +26,17 @@ import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -84,8 +83,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		Predicate<IEObjectDescription> predicate = calcuateFilterPredicate(
 				context, reference);
 		Expression owner = context.getOwner();
-		if (owner instanceof TypedElementReferenceExpression) {
-			NamedElement element = ((TypedElementReferenceExpression) owner)
+		if (owner instanceof ElementReferenceExpression) {
+			EObject element = ((ElementReferenceExpression) owner)
 					.getReference();
 			if (element instanceof Scope) {
 				IScope scope = Scopes.scopeFor(((Scope) element)
@@ -99,7 +98,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			}
 
 		} else if (owner instanceof FeatureCall) {
-			Feature feature = ((FeatureCall) owner).getFeature();
+			Feature feature = (Feature) ((FeatureCall) owner).getFeature();
 			IScope scope = Scopes.scopeFor(allFeatures(feature.getType()));
 			if (feature instanceof Type) {
 				IScope featureTypeScope = Scopes.scopeFor(

@@ -386,9 +386,9 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createFeatureCallAdapter();
       }
       @Override
-      public Adapter caseTypedElementReferenceExpression(TypedElementReferenceExpression object)
+      public Adapter caseElementReferenceExpression(ElementReferenceExpression object)
       {
-        return createTypedElementReferenceExpressionAdapter();
+        return createElementReferenceExpressionAdapter();
       }
       @Override
       public Adapter caseEventValueReferenceExpression(EventValueReferenceExpression object)
@@ -1368,16 +1368,16 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression <em>Typed Element Reference Expression</em>}'.
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression <em>Element Reference Expression</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
+   * @see org.yakindu.sct.model.stext.stext.ElementReferenceExpression
    * @generated
    */
-  public Adapter createTypedElementReferenceExpressionAdapter()
+  public Adapter createElementReferenceExpressionAdapter()
   {
     return null;
   }

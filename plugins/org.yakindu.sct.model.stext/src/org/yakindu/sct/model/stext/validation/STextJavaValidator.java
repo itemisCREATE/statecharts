@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -39,6 +40,7 @@ import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.Direction;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
@@ -54,7 +56,6 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
@@ -62,7 +63,7 @@ import com.google.inject.Inject;
 import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 
 /**
- * Several validations for nonsensical expressions.
+ * s Several validations for nonsensical expressions.
  * 
  * @author muehlbrandt
  * @auhor muelder
@@ -82,6 +83,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	private ITypeInferrer analyzer;
 	@Inject
 	private ITypeSystemAccess tsAccess;
+	@Inject
+	private IQualifiedNameProvider nameProvider;
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
@@ -97,7 +100,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_TypedElementReferenceExpression(
-			final TypedElementReferenceExpression call) {
+			final ElementReferenceExpression call) {
 		if (call.getReference() instanceof Operation) {
 			Operation operation = (Operation) call.getReference();
 			EList<Parameter> parameters = operation.getParameters();
@@ -121,13 +124,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkFeatureCall(TypedElementReferenceExpression call) {
+	public void checkFeatureCall(ElementReferenceExpression call) {
 		if (call.eContainer() instanceof FeatureCall) {
 			return;
 		}
 		if (call.getReference() instanceof Scope) {
 			error("A variable, event or operation is required",
-					StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+					StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
 					INSIGNIFICANT_INDEX, FEATURE_CALL_TO_SCOPE);
 		}
 	}
@@ -177,8 +180,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 				if (exp instanceof FeatureCall) {
 					checkFeatureCallEffect((FeatureCall) exp);
-				} else if (exp instanceof TypedElementReferenceExpression) {
-					checkTypedElementReferenceEffect((TypedElementReferenceExpression) exp);
+				} else if (exp instanceof ElementReferenceExpression) {
+					checkElementReferenceEffect((ElementReferenceExpression) exp);
 				} else {
 					error("Action has no effect.",
 							StextPackage.Literals.REACTION_EFFECT__ACTIONS,
@@ -193,17 +196,20 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	protected void checkFeatureCallEffect(FeatureCall call) {
 		if (!(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
-				error("Access to property '" + call.getFeature().getName()
+				error("Access to property '"
+						+ nameProvider.getFullyQualifiedName(call.getFeature())
 						+ "' has no effect.", call,
 						StextPackage.Literals.FEATURE_CALL__FEATURE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (call.getFeature() instanceof Event) {
-				error("Access to event '" + call.getFeature().getName()
+				error("Access to event '"
+						+ nameProvider.getFullyQualifiedName(call.getFeature())
 						+ "' has no effect.", call,
 						StextPackage.Literals.FEATURE_CALL__FEATURE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
-				error("Access to feature '" + call.getFeature().getName()
+				error("Access to feature '"
+						+ nameProvider.getFullyQualifiedName(call.getFeature())
 						+ "' has no effect.", call,
 						StextPackage.Literals.FEATURE_CALL__FEATURE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
@@ -212,26 +218,28 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	}
 
-	protected void checkTypedElementReferenceEffect(
-			TypedElementReferenceExpression ter) {
-		if (!(ter.getReference() instanceof Operation)) {
-			if (ter.getReference() instanceof Property) {
-				error("Access to property '" + ter.getReference().getName()
-						+ "' has no effect.",
-						ter,
-						StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
+		if (!(refExp.getReference() instanceof Operation)) {
+			if (refExp.getReference() instanceof Property) {
+				error("Access to property '"
+						+ nameProvider.getFullyQualifiedName(refExp
+								.getReference()) + "' has no effect.",
+						refExp,
+						StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
-			} else if (ter.getReference() instanceof Event) {
-				error("Access to event '" + ter.getReference().getName()
-						+ "' has no effect.",
-						ter,
-						StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+			} else if (refExp.getReference() instanceof Event) {
+				error("Access to event '"
+						+ nameProvider.getFullyQualifiedName(refExp
+								.getReference()) + "' has no effect.",
+						refExp,
+						StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
-				error("Access to feature '" + ter.getReference().getName()
-						+ "' has no effect.",
-						ter,
-						StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+				error("Access to feature '"
+						+ nameProvider.getFullyQualifiedName(refExp
+								.getReference()) + "' has no effect.",
+						refExp,
+						StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}

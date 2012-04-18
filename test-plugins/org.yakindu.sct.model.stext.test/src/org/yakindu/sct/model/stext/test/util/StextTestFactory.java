@@ -12,6 +12,7 @@ import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
@@ -31,7 +32,6 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
 
@@ -86,16 +86,16 @@ public class StextTestFactory extends StextFactoryImpl {
 			ReactionTrigger rt) {
 		RegularEventSpec e1Spec = StextFactory.eINSTANCE
 				.createRegularEventSpec();
-		e1Spec.setEvent(_createTypedElementReferenceExpression(e1));
+		e1Spec.setEvent(_createElementReferenceExpression(e1));
 		if (rt != null)
 			rt.getTriggers().add(e1Spec);
 		return e1Spec;
 	}
 
-	public static TypedElementReferenceExpression _createTypedElementReferenceExpression(
+	public static ElementReferenceExpression _createElementReferenceExpression(
 			NamedElement target) {
-		TypedElementReferenceExpression referenceExpression = StextFactory.eINSTANCE
-				.createTypedElementReferenceExpression();
+		ElementReferenceExpression referenceExpression = StextFactory.eINSTANCE
+				.createElementReferenceExpression();
 		referenceExpression.setReference(target);
 		return referenceExpression;
 	}
@@ -252,7 +252,7 @@ public class StextTestFactory extends StextFactoryImpl {
 			ReactionEffect e) {
 		AssignmentExpression assignment = StextFactory.eINSTANCE
 				.createAssignmentExpression();
-		assignment.setVarRef(_createTypedElementReferenceExpression(v));
+		assignment.setVarRef(_createElementReferenceExpression(v));
 		assignment.setOperator(op);
 		assignment.setExpression(expression);
 		if (e != null)

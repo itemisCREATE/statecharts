@@ -283,7 +283,7 @@ public class NumericalMultiplyDivideExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__LEFT_OPERAND,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -383,7 +383,7 @@ public class NumericalMultiplyDivideExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION__RIGHT_OPERAND,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

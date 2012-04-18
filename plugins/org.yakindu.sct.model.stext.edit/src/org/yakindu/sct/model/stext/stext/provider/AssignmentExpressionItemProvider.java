@@ -284,7 +284,7 @@ public class AssignmentExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -384,7 +384,7 @@ public class AssignmentExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
-         StextFactory.eINSTANCE.createTypedElementReferenceExpression()));
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter

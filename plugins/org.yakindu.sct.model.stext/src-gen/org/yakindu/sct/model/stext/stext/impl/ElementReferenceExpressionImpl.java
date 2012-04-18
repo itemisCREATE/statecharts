@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -21,28 +22,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.yakindu.base.base.NamedElement;
-
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Typed Element Reference Expression</b></em>'.
+ * An implementation of the model object '<em><b>Element Reference Expression</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TypedElementReferenceExpressionImpl#getReference <em>Reference</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TypedElementReferenceExpressionImpl#isOperationCall <em>Operation Call</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.TypedElementReferenceExpressionImpl#getArgs <em>Args</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.ElementReferenceExpressionImpl#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.ElementReferenceExpressionImpl#isOperationCall <em>Operation Call</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.ElementReferenceExpressionImpl#getArgs <em>Args</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TypedElementReferenceExpressionImpl extends ExpressionImpl implements TypedElementReferenceExpression
+public class ElementReferenceExpressionImpl extends ExpressionImpl implements ElementReferenceExpression
 {
   /**
    * The cached value of the '{@link #getReference() <em>Reference</em>}' reference.
@@ -52,7 +51,7 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
    * @generated
    * @ordered
    */
-  protected NamedElement reference;
+  protected EObject reference;
 
   /**
    * The default value of the '{@link #isOperationCall() <em>Operation Call</em>}' attribute.
@@ -89,7 +88,7 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  protected TypedElementReferenceExpressionImpl()
+  protected ElementReferenceExpressionImpl()
   {
     super();
   }
@@ -102,7 +101,7 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.TYPED_ELEMENT_REFERENCE_EXPRESSION;
+    return StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION;
   }
 
   /**
@@ -110,16 +109,16 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public NamedElement getReference()
+  public EObject getReference()
   {
     if (reference != null && reference.eIsProxy())
     {
       InternalEObject oldReference = (InternalEObject)reference;
-      reference = (NamedElement)eResolveProxy(oldReference);
+      reference = eResolveProxy(oldReference);
       if (reference != oldReference)
       {
         if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE, oldReference, reference));
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, oldReference, reference));
       }
     }
     return reference;
@@ -130,7 +129,7 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public NamedElement basicGetReference()
+  public EObject basicGetReference()
   {
     return reference;
   }
@@ -140,12 +139,12 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setReference(NamedElement newReference)
+  public void setReference(EObject newReference)
   {
-    NamedElement oldReference = reference;
+    EObject oldReference = reference;
     reference = newReference;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE, oldReference, reference));
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, oldReference, reference));
   }
 
   /**
@@ -168,7 +167,7 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
     boolean oldOperationCall = operationCall;
     operationCall = newOperationCall;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL, oldOperationCall, operationCall));
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL, oldOperationCall, operationCall));
   }
 
   /**
@@ -180,7 +179,7 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
   {
     if (args == null)
     {
-      args = new EObjectContainmentEList<Expression>(Expression.class, this, StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS);
+      args = new EObjectContainmentEList<Expression>(Expression.class, this, StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS);
     }
     return args;
   }
@@ -195,7 +194,7 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
   {
     switch (featureID)
     {
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
         return ((InternalEList<?>)getArgs()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -211,12 +210,12 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
   {
     switch (featureID)
     {
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__REFERENCE:
         if (resolve) return getReference();
         return basicGetReference();
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
         return isOperationCall();
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
         return getArgs();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -233,13 +232,13 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
   {
     switch (featureID)
     {
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE:
-        setReference((NamedElement)newValue);
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__REFERENCE:
+        setReference((EObject)newValue);
         return;
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
         setOperationCall((Boolean)newValue);
         return;
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
         getArgs().clear();
         getArgs().addAll((Collection<? extends Expression>)newValue);
         return;
@@ -257,13 +256,13 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
   {
     switch (featureID)
     {
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE:
-        setReference((NamedElement)null);
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__REFERENCE:
+        setReference((EObject)null);
         return;
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
         setOperationCall(OPERATION_CALL_EDEFAULT);
         return;
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
         getArgs().clear();
         return;
     }
@@ -280,11 +279,11 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
   {
     switch (featureID)
     {
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__REFERENCE:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__REFERENCE:
         return reference != null;
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
         return operationCall != OPERATION_CALL_EDEFAULT;
-      case StextPackage.TYPED_ELEMENT_REFERENCE_EXPRESSION__ARGS:
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
         return args != null && !args.isEmpty();
     }
     return super.eIsSet(featureID);
@@ -307,4 +306,4 @@ public class TypedElementReferenceExpressionImpl extends ExpressionImpl implemen
     return result.toString();
   }
 
-} //TypedElementReferenceExpressionImpl
+} //ElementReferenceExpressionImpl
