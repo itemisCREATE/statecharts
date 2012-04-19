@@ -224,12 +224,13 @@ String getEventEnumName(EventDefinition this) : "ev_" + this.eContainer.getScope
 String getEventEnumName(FeatureCall this) : feature.getEventEnumName();
 String getEventEnumName(types::Feature this) : "/* EventEnum requested, but got Feature: "+this+" */";
 String getEventEnumName(Expression this) : "/* EventEnum requested, but got Expression: "+this+" */";
+String getEventEnumName(EObject this) : null;
 
 String getEventName(Event this) : this.eContainer.getScopeName().toFirstUpper() + this.getNameWA().toFirstUpper();
 String getEventName(EventDefinition this) : this.eContainer.getScopeName().toFirstUpper() + "_" +name.toFirstUpper();
 String getEventName(FeatureCall this) : feature.getEventName();
-String getEventName(base::NamedElement this) : "/* Event expected, but got NamedElement: "+this+" */";
-String getEventName(TypedElementReferenceExpression this) : reference.getEventName();
+String getEventName(EObject this) : "/* Event expected, but got NamedElement: "+this+" */";
+String getEventName(ElementReferenceExpression this) : reference.getEventName();
 String getEventName(types::Event this) : this.eContainer.getScopeName().toFirstUpper() + this.name.toFirstUpper();
 String getEventName(types::Feature this) : "/* Event expected, but got Feature: "+this+" */";
 String getEventName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
@@ -238,9 +239,9 @@ String getInterfaceName(EventRaisingExpression this) :
 	"iface" + (( this.event.getEvent().eContainer.getScopeName() == "default")?"":this.event.getEvent().eContainer.getScopeName().toFirstUpper());
 
 EventDefinition getEvent(Expression e) : null;
-EventDefinition getEvent(NamedElement e) : null;
+EventDefinition getEvent(EObject e) : null;
 EventDefinition getEvent(FeatureCall this) : feature.getEvent();
-EventDefinition getEvent(TypedElementReferenceExpression this) : reference.getEvent();
+EventDefinition getEvent(ElementReferenceExpression this) : reference.getEvent();
 EventDefinition getEvent(EventDefinition this) : this;
 
 String getScopeName(emf::EObject eo) :
