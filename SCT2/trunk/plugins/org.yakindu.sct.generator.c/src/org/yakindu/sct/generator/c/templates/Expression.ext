@@ -170,9 +170,9 @@ Set[EventDefinition] getLocalEvents(InternalScope interface) :
 	interface.declarations.typeSelect(EventDefinition).select(e|e.direction == Direction::LOCAL);
 
 // is this just relevant for events?
-String toCCode(TypedElementReferenceExpression ref) :
+String toCCode(ElementReferenceExpression ref) :
 	ref.reference.toCCode();
-String toCCode(base::NamedElement ref) :
+String toCCode(EObject ref) :
 	"/* toCode not defined for: "+ref+" */";
 String toCCode(Feature ref) :
 	"/* toCode not defined for: "+ref+" */";
