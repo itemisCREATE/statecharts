@@ -205,7 +205,7 @@ String getContext(ElementReferenceExpression this) :
 String getContext(FeatureCall this) : 
 	this.feature.getContext();
 
-String getContext(base::NamedElement this) : 
+String getContext(EObject this) : 
 	"/* getContext for unknown element: "+this+"*/";
 	
 String getContext(EventDefinition this) : 
@@ -218,8 +218,6 @@ String getContext(Event this) :
 		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
 	else 
 		"";
-String getContext(EObject this):
-	null;
 		
 String getInterfaceExtension(Scope this, GeneratorEntry entry):
 	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getInterfaceExtensions(org.yakindu.sct.model.sgraph.Scope, org.yakindu.sct.model.sgen.GeneratorEntry);
