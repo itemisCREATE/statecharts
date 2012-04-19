@@ -75,8 +75,6 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInternalScopeAccess().getGroup(), "rule__InternalScope__Group__0");
 					put(grammarAccess.getEventDefinitionAccess().getGroup(), "rule__EventDefinition__Group__0");
 					put(grammarAccess.getEventDefinitionAccess().getGroup_3(), "rule__EventDefinition__Group_3__0");
-					put(grammarAccess.getEventDerivationAccess().getGroup(), "rule__EventDerivation__Group__0");
-					put(grammarAccess.getEventDerivationAccess().getGroup_2(), "rule__EventDerivation__Group_2__0");
 					put(grammarAccess.getVariableDefinitionAccess().getGroup(), "rule__VariableDefinition__Group__0");
 					put(grammarAccess.getVariableDefinitionAccess().getGroup_6(), "rule__VariableDefinition__Group_6__0");
 					put(grammarAccess.getOperationDefinitionAccess().getGroup(), "rule__OperationDefinition__Group__0");
@@ -170,9 +168,6 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getEventDefinitionAccess().getDirectionAssignment_0(), "rule__EventDefinition__DirectionAssignment_0");
 					put(grammarAccess.getEventDefinitionAccess().getNameAssignment_2(), "rule__EventDefinition__NameAssignment_2");
 					put(grammarAccess.getEventDefinitionAccess().getTypeAssignment_3_1(), "rule__EventDefinition__TypeAssignment_3_1");
-					put(grammarAccess.getEventDefinitionAccess().getDerivationAssignment_4(), "rule__EventDefinition__DerivationAssignment_4");
-					put(grammarAccess.getEventDerivationAccess().getConditionAssignment_1(), "rule__EventDerivation__ConditionAssignment_1");
-					put(grammarAccess.getEventDerivationAccess().getValueAssignment_2_1(), "rule__EventDerivation__ValueAssignment_2_1");
 					put(grammarAccess.getVariableDefinitionAccess().getReadonlyAssignment_2_0(), "rule__VariableDefinition__ReadonlyAssignment_2_0");
 					put(grammarAccess.getVariableDefinitionAccess().getExternalAssignment_2_1(), "rule__VariableDefinition__ExternalAssignment_2_1");
 					put(grammarAccess.getVariableDefinitionAccess().getNameAssignment_3(), "rule__VariableDefinition__NameAssignment_3");
