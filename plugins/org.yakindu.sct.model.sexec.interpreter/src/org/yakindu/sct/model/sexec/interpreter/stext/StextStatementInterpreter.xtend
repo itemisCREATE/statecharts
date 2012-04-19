@@ -9,55 +9,40 @@
  * 
  */
 package org.yakindu.sct.model.sexec.interpreter.stext
- 
-import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter
-import org.yakindu.sct.simulation.core.IExecutionContext
+
+import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.sct.model.sgraph.Statement
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
-import org.yakindu.sct.model.stext.stext.RelationalOperator
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.IntLiteral
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.RealLiteral
-import org.yakindu.sct.simulation.core.ScopeVariable
-import org.yakindu.sct.simulation.core.ScopeEvent
-import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
+import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
+import org.yakindu.sct.model.stext.stext.AssignmentExpression
+import org.yakindu.sct.model.stext.stext.AssignmentOperator
 import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
 import org.yakindu.sct.model.stext.stext.BitwiseOrExpression
 import org.yakindu.sct.model.stext.stext.BitwiseXorExpression
+import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.ConditionalExpression
-import org.yakindu.sct.model.stext.stext.EventRaisedReferenceExpression
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression
-import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
-import org.yakindu.sct.model.stext.stext.OperationCall
-import org.yakindu.sct.model.stext.stext.ShiftExpression
-import org.yakindu.sct.model.stext.stext.AssignmentOperator
-import org.yakindu.sct.simulation.core.runtime.IExecutionContext
-import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.sgraph.Scope
-import com.google.inject.Inject
-import org.yakindu.sct.model.stext.naming.StextNameProvider
-import org.yakindu.sct.model.stext.stext.HexLiteral
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
-import org.yakindu.sct.model.stext.stext.FeatureCall
-import org.yakindu.sct.model.stext.stext.AssignmentExpression
-import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.impl.StringLiteralImpl
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.HexLiteral
+import org.yakindu.sct.model.stext.stext.IntLiteral
+import org.yakindu.sct.model.stext.stext.LogicalAndExpression
+import org.yakindu.sct.model.stext.stext.LogicalNotExpression
+import org.yakindu.sct.model.stext.stext.LogicalOrExpression
+import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
+import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
+import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
+import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.stext.stext.RealLiteral
+import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.StringLiteral
-import org.yakindu.base.types.Feature
-import org.yakindu.base.base.NamedElement
-import org.eclipse.xtext.util.SimpleAttributeResolver
-import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.simulation.core.runtime.IExecutionContext
 
 /**
  * 

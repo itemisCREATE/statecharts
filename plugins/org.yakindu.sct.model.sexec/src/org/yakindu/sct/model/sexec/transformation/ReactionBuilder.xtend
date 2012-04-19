@@ -1,25 +1,23 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import org.yakindu.sct.model.sgraph.Entry
-import com.google.inject.Inject
-import org.yakindu.sct.model.sgraph.EntryKind
-import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sexec.StateSwitch
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sexec.ExecutionRegion
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sexec.Check
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.sgraph.Choice
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sgraph.FinalState
-import org.eclipse.xtext.EcoreUtil2
 import com.google.common.collect.Iterables
+import com.google.inject.Inject
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping

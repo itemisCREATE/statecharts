@@ -1,38 +1,32 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
-
-import com.google.inject.Inject
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.ExecutionState
+import java.util.ArrayList
+import java.util.List
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
-import java.util.List
-import java.util.ArrayList
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.sexec.If
-import org.yakindu.sct.model.sexec.Call
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.SexecFactory
-import org.yakindu.sct.model.sgraph.SGraphFactory
-import org.yakindu.sct.model.stext.stext.StextFactory
-import org.yakindu.sct.model.sexec.StateSwitch
-import org.yakindu.sct.model.sexec.StateCase
-import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.sct.model.sexec.ExecutionRegion
-import org.yakindu.sct.model.sexec.HistoryEntry
 import org.yakindu.sct.model.sexec.ExecutionChoice
 import org.yakindu.sct.model.sexec.ExecutionEntry
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.sexec.If
+import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.SexecFactory
+import org.yakindu.sct.model.sexec.StateCase
+import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.stext.stext.StextFactory
+
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
  
 class FlowOptimizer {
-
-	@Inject extension IQualifiedNameProvider qfnProvider
-	@Inject extension SexecElementMapping factory
 	
 	boolean _inlineReactions        def inlineReactions(boolean b)      {_inlineReactions = b}
 	boolean _inlineEntryActions     def inlineEntryActions(boolean b)   {_inlineEntryActions = b}

@@ -1,28 +1,23 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
-import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sgraph.FinalState
-import org.yakindu.sct.model.sgraph.State
 import com.google.inject.Inject
 import com.google.inject.name.Named
-import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sexec.ExecutionRegion
-import java.util.List
-import org.yakindu.sct.model.sgraph.RegularState
 import java.util.ArrayList
-import org.yakindu.sct.model.sexec.StateSwitch
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.AssignmentOperator
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.ExecutionScope
-import org.yakindu.sct.model.sgraph.Entry
-import org.yakindu.sct.model.sgraph.EntryKind
-import org.yakindu.sct.model.sexec.StateVectorType
+import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.stext.stext.AssignmentOperator
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 
 class SequenceBuilder {
 	

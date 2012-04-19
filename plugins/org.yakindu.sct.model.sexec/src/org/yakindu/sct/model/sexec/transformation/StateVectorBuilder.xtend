@@ -1,20 +1,17 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
-
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.FinalState
 import com.google.inject.Inject
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.StateVector
-import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Choice
-import org.yakindu.sct.model.sexec.ExecutionRegion
-import org.yakindu.sct.model.sgraph.EntryKind
-import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Vertex
+
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 
 class StateVectorBuilder {
 	

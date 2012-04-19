@@ -1,33 +1,27 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sgraph.FinalState
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.Region
+import java.util.ArrayList
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
-import org.eclipse.xtext.EcoreUtil2
-import java.util.ArrayList
+import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.stext.stext.OperationCall
-import org.yakindu.sct.model.stext.stext.Operation
-import org.yakindu.sct.model.sgraph.Entry
-import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.Declaration
+import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StructureMapping {
 	 
 	@Inject extension SexecElementMapping mapping
-	@Inject extension SexecExtensions sexec
-	@Inject extension SgraphExtensions sgraph
 	@Inject extension StatechartExtensions sct
 	
 	
@@ -129,7 +123,6 @@ class StructureMapping {
 	//
 
 	def ExecutionFlow mapPseudoStates(Statechart statechart, ExecutionFlow r){
-		val allChoices = statechart.allChoices
 		r.nodes.addAll( statechart.allChoices.map( choice | choice.create ) );
 		r.nodes.addAll( statechart.allEntries.map( entry | entry.create ) );
 		return r
