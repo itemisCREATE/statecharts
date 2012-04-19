@@ -13,6 +13,7 @@ package org.yakindu.sct.generator.genmodel.ui.wizard;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -94,7 +95,12 @@ public class ModelCreator {
 			Resource resource = set.getResource(desc.getURI(), true);
 			FeatureTypeLibrary lib = (FeatureTypeLibrary) resource
 					.getContents().get(0);
-			features.addAll(lib.getTypes());
+			EList<FeatureType> types = lib.getTypes();
+			// Only add the required features to the default model
+			for (FeatureType featureType : types) {
+				if (!featureType.isOptional())
+					features.add(featureType);
+			}
 		}
 		return features;
 	}
