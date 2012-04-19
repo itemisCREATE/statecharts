@@ -1,45 +1,43 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
-
-import org.yakindu.sct.model.sgraph.State
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.stext.stext.ReactionEffect
-import org.yakindu.sct.model.sgraph.Statement
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.IntLiteral
-import org.yakindu.sct.model.stext.stext.TimeUnit
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
-import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.sgraph.Effect
-import org.yakindu.sct.model.sexec.Execution
+import java.util.List
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sexec.Execution
+import org.yakindu.sct.model.sexec.ExecutionChoice
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Reaction
-import org.yakindu.sct.model.sgraph.Transition
-import org.yakindu.sct.model.sexec.Check
-import org.yakindu.sct.model.sgraph.Trigger
-import org.yakindu.sct.model.stext.stext.ReactionTrigger
-import org.yakindu.sct.model.stext.stext.LocalReaction
-import java.util.List
-import org.yakindu.sct.model.stext.stext.RegularEventSpec
-import org.yakindu.sct.model.stext.stext.OnCycleEvent
-import org.yakindu.sct.model.stext.stext.AlwaysEvent
-import org.yakindu.sct.model.sgraph.RegularState
-import java.util.ArrayList
-import org.yakindu.sct.model.sexec.StateSwitch
-import org.yakindu.sct.model.sexec.ExecutionScope
-import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sgraph.Effect
 import org.yakindu.sct.model.sgraph.Entry
-import org.yakindu.sct.model.sexec.ExecutionChoice
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.sgraph.Trigger
+import org.yakindu.sct.model.stext.stext.AlwaysEvent
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.IntLiteral
+import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
+import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
+import org.yakindu.sct.model.stext.stext.OnCycleEvent
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.stext.stext.ReactionEffect
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.stext.stext.TimeUnit
+
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
  
 
 class BehaviorMapping {
@@ -49,9 +47,6 @@ class BehaviorMapping {
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping factory
 	@Inject extension SgraphExtensions sgraph
-	@Inject extension StextExtensions stext
-	@Inject extension StateVectorBuilder svBuilder
-	@Inject extension SequenceBuilder seqBuilder
 	@Inject extension TraceExtensions trace
 
 
@@ -379,7 +374,6 @@ class BehaviorMapping {
 				RegularState: source.create
 			}
 		
-		val target = t.target
 		var executionTarget = switch (source) {
 				RegularState: source.create
 			}

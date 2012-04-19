@@ -1,29 +1,28 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
-
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.Trigger
-import org.yakindu.sct.model.sgraph.Reaction
-import org.yakindu.sct.model.sgraph.Transition
-import java.util.List
 import java.util.ArrayList
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import java.util.List
 import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.sgraph.ReactiveElement
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Choice
+import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.Reaction
+import org.yakindu.sct.model.sgraph.ReactiveElement
+import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.sgraph.Trigger
+import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.EntryEvent
 import org.yakindu.sct.model.stext.stext.ExitEvent
+import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
-import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.stext.stext.StextFactory
-import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+
+import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
  
 class StatechartExtensions {
 	

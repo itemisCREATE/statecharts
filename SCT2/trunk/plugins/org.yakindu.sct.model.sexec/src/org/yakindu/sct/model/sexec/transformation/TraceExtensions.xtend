@@ -1,13 +1,12 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import org.yakindu.sct.model.sexec.Reaction
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.ExecutionState
 import com.google.inject.Inject
 import com.google.inject.name.Named
+import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sexec.ExecutionRegion
 
 class TraceExtensions {
 	

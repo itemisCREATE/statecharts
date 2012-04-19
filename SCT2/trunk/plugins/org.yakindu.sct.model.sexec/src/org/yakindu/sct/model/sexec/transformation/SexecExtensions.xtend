@@ -1,23 +1,14 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import org.yakindu.sct.model.sexec.SexecFactory
-import org.yakindu.sct.model.sexec.ExecutionState
+import java.util.List
 import org.yakindu.sct.model.sexec.EnterState
-import com.google.inject.Inject
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sexec.ExecutionScope
+import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.ExitState
+import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.OnCycleEvent
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.AlwaysEvent
-import org.yakindu.sct.model.stext.stext.EventSpec
-import org.yakindu.sct.model.stext.stext.RegularEventSpec
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sexec.ExecutionScope
-import java.util.Collections
-import java.util.List
-import org.yakindu.sct.model.sexec.ExecutionRegion
 
 class SexecExtensions {
 	

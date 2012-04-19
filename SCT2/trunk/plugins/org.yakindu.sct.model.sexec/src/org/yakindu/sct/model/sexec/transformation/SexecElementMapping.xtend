@@ -1,71 +1,55 @@
 package org.yakindu.sct.model.sexec.transformation
 
-/**
- * This extension class defines all factory (create) functions that are required 
- * for creating a flow element based on a statechrt source element. Thus most create functions are parametrized 
- * by elements from the source statechart. 
- * 
- * @author axel terfloth
- */ 
-
 import com.google.inject.Inject
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-
-import org.yakindu.sct.model.sexec.SexecFactory
-import org.yakindu.sct.model.stext.stext.StextFactory
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sgraph.Scope
+import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sexec.Check
-import org.yakindu.sct.model.stext.stext.ReactionTrigger
-import org.yakindu.sct.model.sexec.Reaction
-import org.yakindu.sct.model.sgraph.Transition
-import org.yakindu.sct.model.sexec.CheckRef
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.eclipse.xtext.util.Strings
+import org.yakindu.base.base.NamedElement
 import org.yakindu.sct.model.sexec.Call
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sexec.CheckRef
+import org.yakindu.sct.model.sexec.ExecutionChoice
+import org.yakindu.sct.model.sexec.ExecutionEntry
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sexec.ScheduleTimeEvent
+import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sexec.ScheduleTimeEvent
-import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
-import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Choice
-import org.yakindu.sct.model.sexec.ExecutionChoice
-import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sgraph.CompositeElement
+import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
-import com.google.inject.Singleton
+import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.stext.stext.AlwaysEvent
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.DefaultEvent
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.EventSpec
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.LocalReaction
+import org.yakindu.sct.model.stext.stext.OnCycleEvent
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.ReactionTrigger
+import org.yakindu.sct.model.stext.stext.RegularEventSpec
+import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.EventSpec
-import org.yakindu.sct.model.stext.stext.RegularEventSpec
-import org.yakindu.sct.model.stext.stext.OnCycleEvent
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.AlwaysEvent
-import org.yakindu.sct.model.stext.stext.DefaultEvent
-import org.yakindu.sct.model.stext.stext.OperationCall
-import org.yakindu.sct.model.stext.stext.Operation
-import org.yakindu.sct.model.sgraph.Entry
-import org.yakindu.sct.model.sexec.ExecutionEntry
-import org.yakindu.sct.model.sgraph.EntryKind
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
-import org.yakindu.sct.model.stext.stext.FeatureCall
-import org.yakindu.base.base.NamedElement
-import org.apache.commons.logging.LogFactory
-import org.apache.commons.logging.LogConfigurationException
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.eclipse.xtext.util.Strings
-import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.sct.model.sgraph.CompositeElement
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.VariableDefinition
  
 
 @Singleton class SexecElementMapping {

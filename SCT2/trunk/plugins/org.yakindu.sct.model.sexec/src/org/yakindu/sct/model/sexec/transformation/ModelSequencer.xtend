@@ -1,107 +1,32 @@
 package org.yakindu.sct.model.sexec.transformation
 
-import org.yakindu.sct.model.sgraph.Statechart
-import org.eclipse.xtext.xtend2.lib.EObjectExtensions
-import org.eclipse.xtext.xbase.lib.CollectionExtensions
-import org.eclipse.emf.common.util.TreeIterator
 import com.google.inject.Inject
-import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.sct.model.sexec.Cycle
-import org.yakindu.sct.model.sgraph.Transition
-import org.yakindu.sct.model.sexec.If
-import org.yakindu.sct.model.sgraph.Trigger
-import org.yakindu.sct.model.stext.stext.ReactionTrigger
-import org.yakindu.sct.model.sgraph.Statement
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.EventSpec
-import org.yakindu.sct.model.stext.stext.RegularEventSpec
-import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.model.sexec.Step
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sgraph.Region
-import org.yakindu.sct.model.sgraph.Entry
-import org.yakindu.sct.model.sgraph.SGraphPackage
-import org.yakindu.sct.model.sexec.EnterState
-import org.yakindu.sct.model.sexec.ExitState
-import org.yakindu.sct.model.sexec.Check
-import org.yakindu.sct.model.sexec.Reaction
-import org.yakindu.sct.model.sexec.Sequence
-import org.yakindu.sct.model.stext.stext.ReactionEffect
-import org.yakindu.sct.model.sgraph.Effect
-import org.yakindu.sct.model.sexec.Execution
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
-import org.yakindu.sct.model.stext.stext.StextPackage
-import java.util.List
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.stext.stext.Assignment
-import org.yakindu.sct.model.sgraph.Variable
-import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.stext.stext.EntryEvent
-import org.yakindu.sct.model.stext.stext.ExitEvent
-import org.eclipse.xtext.common.services.Ecore2XtextTerminalConverters
-import org.eclipse.emf.ecore.util.EcoreUtil$AbstractFilteredSettingsIterator
-import java.util.ArrayList
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.stext.stext.TimeEventType
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.TimeUnit
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
-import org.yakindu.sct.model.sexec.StateSwitch
-import org.yakindu.sct.model.stext.stext.OnCycleEvent
-import org.yakindu.sct.model.stext.stext.AlwaysEvent
-import org.yakindu.sct.model.stext.stext.IntLiteral
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.model.sgraph.FinalState
-import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sgraph.Choice
-import org.yakindu.sct.model.sexec.ExecutionChoice
-import org.yakindu.sct.model.stext.stext.DefaultEvent
-import org.yakindu.sct.model.sexec.ExecutionNode
-import com.google.inject.name.Named
-import org.yakindu.sct.model.sexec.ExecutionRegion
-import org.yakindu.sct.model.sexec.ExecutionScope
-import org.yakindu.sct.model.sexec.StateVector
-import org.yakindu.sct.model.stext.stext.OperationCall
-import org.yakindu.sct.model.stext.stext.Operation
-import java.util.Set
 import java.util.Collection
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
-import org.yakindu.base.base.NamedElement
-import org.apache.commons.logging.LogFactory
-import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.apache.commons.logging.LogConfigurationException
+import org.apache.commons.logging.LogFactory
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.types.Feature
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sgraph.Declaration
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class ModelSequencer {
 	 
 	@Inject extension IQualifiedNameProvider qfnProvider
 	@Inject extension SexecElementMapping mapping
-	@Inject extension StatechartExtensions sct
-	@Inject extension SgraphExtensions sgraph
-	@Inject extension StextExtensions stext
-	@Inject extension SexecExtensions sexec
 	@Inject extension StructureMapping structureMapping
 	@Inject extension BehaviorMapping behaviorMapping
 	@Inject extension ReactionBuilder reactBuilder
 	@Inject extension SequenceBuilder seqBuilder
 	@Inject extension StateVectorBuilder svBuilder
-	@Inject extension TraceExtensions trace
-	
-	@Inject
-	@Named("ADD_TRACES") 
-	boolean _addTraceSteps 
-	
 	
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
