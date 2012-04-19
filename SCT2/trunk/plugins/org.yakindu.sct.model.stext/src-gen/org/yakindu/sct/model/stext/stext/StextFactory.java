@@ -135,15 +135,6 @@ public interface StextFactory extends EFactory
   EventDefinition createEventDefinition();
 
   /**
-   * Returns a new object of class '<em>Event Derivation</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Event Derivation</em>'.
-   * @generated
-   */
-  EventDerivation createEventDerivation();
-
-  /**
    * Returns a new object of class '<em>Variable Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

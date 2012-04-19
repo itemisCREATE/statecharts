@@ -26,7 +26,6 @@ import org.yakindu.sct.model.sgraph.impl.EventImpl;
 
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.EventDerivation;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -39,7 +38,6 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.EventDefinitionImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.EventDefinitionImpl#getOwningType <em>Owning Type</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.EventDefinitionImpl#getDirection <em>Direction</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.EventDefinitionImpl#getDerivation <em>Derivation</em>}</li>
  * </ul>
  * </p>
  *
@@ -76,16 +74,6 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
    * @ordered
    */
   protected Direction direction = DIRECTION_EDEFAULT;
-
-  /**
-   * The cached value of the '{@link #getDerivation() <em>Derivation</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getDerivation()
-   * @generated
-   * @ordered
-   */
-  protected EventDerivation derivation;
 
   /**
    * <!-- begin-user-doc -->
@@ -224,54 +212,6 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
    * <!-- end-user-doc -->
    * @generated
    */
-  public EventDerivation getDerivation()
-  {
-    return derivation;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetDerivation(EventDerivation newDerivation, NotificationChain msgs)
-  {
-    EventDerivation oldDerivation = derivation;
-    derivation = newDerivation;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_DEFINITION__DERIVATION, oldDerivation, newDerivation);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setDerivation(EventDerivation newDerivation)
-  {
-    if (newDerivation != derivation)
-    {
-      NotificationChain msgs = null;
-      if (derivation != null)
-        msgs = ((InternalEObject)derivation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.EVENT_DEFINITION__DERIVATION, null, msgs);
-      if (newDerivation != null)
-        msgs = ((InternalEObject)newDerivation).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.EVENT_DEFINITION__DERIVATION, null, msgs);
-      msgs = basicSetDerivation(newDerivation, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.EVENT_DEFINITION__DERIVATION, newDerivation, newDerivation));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -297,8 +237,6 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
     {
       case StextPackage.EVENT_DEFINITION__OWNING_TYPE:
         return basicSetOwningType(null, msgs);
-      case StextPackage.EVENT_DEFINITION__DERIVATION:
-        return basicSetDerivation(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -336,8 +274,6 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
         return getOwningType();
       case StextPackage.EVENT_DEFINITION__DIRECTION:
         return getDirection();
-      case StextPackage.EVENT_DEFINITION__DERIVATION:
-        return getDerivation();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -360,9 +296,6 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
         return;
       case StextPackage.EVENT_DEFINITION__DIRECTION:
         setDirection((Direction)newValue);
-        return;
-      case StextPackage.EVENT_DEFINITION__DERIVATION:
-        setDerivation((EventDerivation)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -387,9 +320,6 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
       case StextPackage.EVENT_DEFINITION__DIRECTION:
         setDirection(DIRECTION_EDEFAULT);
         return;
-      case StextPackage.EVENT_DEFINITION__DERIVATION:
-        setDerivation((EventDerivation)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -410,8 +340,6 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
         return getOwningType() != null;
       case StextPackage.EVENT_DEFINITION__DIRECTION:
         return direction != DIRECTION_EDEFAULT;
-      case StextPackage.EVENT_DEFINITION__DERIVATION:
-        return derivation != null;
     }
     return super.eIsSet(featureID);
   }

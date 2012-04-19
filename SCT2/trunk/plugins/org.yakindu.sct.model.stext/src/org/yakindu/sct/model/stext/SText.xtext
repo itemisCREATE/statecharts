@@ -81,10 +81,10 @@ Declaration returns sgraph::Declaration:
 EventDeclarartion returns sgraph::Event: EventDefinition;
 EventFeature returns types::Event : EventDefinition;
 EventDefinition:
-	 (direction=Direction)? 'event' name=ID (':' type=[types::Type|FQN])? (derivation=EventDerivation)?;
+	 (direction=Direction)? 'event' name=ID (':' type=[types::Type|FQN])?;// (derivation=EventDerivation)?;
 
-EventDerivation:
-	'=' condition=Expression (':' value=Expression)?;
+//EventDerivation:
+//	'=' condition=Expression (':' value=Expression)?;
 
 enum Direction:
 	LOCAL='local' | IN='in' | OUT='out';

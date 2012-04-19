@@ -377,31 +377,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventDerivation} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected EventDerivationItemProvider eventDerivationItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventDerivation}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createEventDerivationAdapter()
-  {
-    if (eventDerivationItemProvider == null)
-    {
-      eventDerivationItemProvider = new EventDerivationItemProvider(this);
-    }
-
-    return eventDerivationItemProvider;
-  }
-
-  /**
    * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.VariableDefinition} instances.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1724,7 +1699,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (interfaceScopeItemProvider != null) interfaceScopeItemProvider.dispose();
     if (internalScopeItemProvider != null) internalScopeItemProvider.dispose();
     if (eventDefinitionItemProvider != null) eventDefinitionItemProvider.dispose();
-    if (eventDerivationItemProvider != null) eventDerivationItemProvider.dispose();
     if (variableDefinitionItemProvider != null) variableDefinitionItemProvider.dispose();
     if (operationDefinitionItemProvider != null) operationDefinitionItemProvider.dispose();
     if (localReactionItemProvider != null) localReactionItemProvider.dispose();

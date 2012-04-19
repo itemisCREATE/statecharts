@@ -17,7 +17,6 @@ import org.yakindu.sct.model.sgraph.Event;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.EventDefinition#getDirection <em>Direction</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.EventDefinition#getDerivation <em>Derivation</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,31 +54,5 @@ public interface EventDefinition extends Event, org.yakindu.base.types.Event
    * @generated
    */
   void setDirection(Direction value);
-
-  /**
-   * Returns the value of the '<em><b>Derivation</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Derivation</em>' containment reference isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Derivation</em>' containment reference.
-   * @see #setDerivation(EventDerivation)
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getEventDefinition_Derivation()
-   * @model containment="true"
-   * @generated
-   */
-  EventDerivation getDerivation();
-
-  /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EventDefinition#getDerivation <em>Derivation</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Derivation</em>' containment reference.
-   * @see #getDerivation()
-   * @generated
-   */
-  void setDerivation(EventDerivation value);
 
 } // EventDefinition
