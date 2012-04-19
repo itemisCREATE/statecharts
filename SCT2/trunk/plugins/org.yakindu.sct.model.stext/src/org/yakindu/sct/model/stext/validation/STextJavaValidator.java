@@ -54,7 +54,6 @@ import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -149,19 +148,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				error("entry, exit, oncycle and always events are allowed as local reactions only.",
 						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
 						INSIGNIFICANT_INDEX, LOCAL_REACTIONS_NOT_ALLOWED);
-			}
-
-			// Context StatechartDefiniton
-			if (isStatechartDefinitionChild(reactionTrigger)) {
-				if (eventSpec instanceof EntryEvent) {
-					error("Entry events are not allowed in statechart definition.",
-							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
-							INSIGNIFICANT_INDEX, ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
-				} else if (eventSpec instanceof ExitEvent) {
-					error("Exit events are not allowed in statechart definition.",
-							StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
-							INSIGNIFICANT_INDEX, ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
-				}
 			}
 		}
 	}
@@ -382,16 +368,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			// parameter types: [null]
 			// We can safely ignore this exception
 		}
-	}
-
-	private boolean isStatechartDefinitionChild(EObject element) {
-		while (element.eContainer() != null) {
-			if (element.eContainer() instanceof StatechartSpecification) {
-				return true;
-			}
-			element = element.eContainer();
-		}
-		return false;
 	}
 
 	@Override

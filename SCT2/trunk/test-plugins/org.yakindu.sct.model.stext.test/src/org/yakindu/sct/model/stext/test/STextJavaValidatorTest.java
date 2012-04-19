@@ -14,7 +14,6 @@ package org.yakindu.sct.model.stext.test;
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ENTRY_EXIT_TRIGGER_NOT_ALLOWED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_HAS_NO_EFFECT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_TO_SCOPE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_DECLARATIONS;
@@ -159,19 +158,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
-
-		// ENTRY / EXIT not allowed in definition
-		model = (StatechartSpecification) parseExpression(
-				"internal : var a : integer entry / a=2", null,
-				StatechartSpecification.class.getSimpleName());
-		validationResult = tester.validate(model);
-		validationResult.assertError(ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
-
-		model = (StatechartSpecification) parseExpression(
-				"internal : var a : integer exit / a=2", null,
-				StatechartSpecification.class.getSimpleName());
-		validationResult = tester.validate(model);
-		validationResult.assertError(ENTRY_EXIT_TRIGGER_NOT_ALLOWED);
 	}
 
 	/**
