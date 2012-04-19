@@ -18,6 +18,7 @@
 		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
 		<updateSiteUrl>http://updates.yakindu.com/${promotionTarget}</updateSiteUrl>
 		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
+		<tycho.extras.version>0.14.0</tycho.extras.version>
 	</properties>
 
 	<build>
@@ -25,7 +26,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-p2-extras-plugin</artifactId>
-				<version>${tycho-version}</version>
+				<version>${tycho.extras.version}</version>
 				<inherited>false</inherited>
 				<executions>
 					<execution>
