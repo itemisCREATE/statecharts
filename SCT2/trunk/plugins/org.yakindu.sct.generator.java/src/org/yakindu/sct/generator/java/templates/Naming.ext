@@ -12,6 +12,7 @@ import stext;
 import sexec;
 import sgraph;
 import sgen;
+import ecore;
 
 extension org::yakindu::sct::generator::java::templates::Expression;
 extension org::yakindu::sct::generator::java::templates::ExecutionModelExtensions;
@@ -111,8 +112,8 @@ String getName(ExecutionFlow this) :
 
 String getVarName(VariableDefinition this) :
 	"Var"+name.toFirstUpper();
-String getVarName(base::NamedElement this) : "/* Variable expected, but got: "+this+" */";
-String getVarName(TypedElementReferenceExpression this) : this.reference.getVarName();
+String getVarName(EObject this) : "/* Variable expected, but got: "+this+" */";
+String getVarName(ElementReferenceExpression this) : this.reference.getVarName();
 String getVarName(FeatureCall this) : this.feature.getVarName();
 String getVarName(Expression this) : "/* Variable expected, but got Expression: "+this+" */";
 
@@ -123,8 +124,8 @@ String getEventName(Event this) :
 String getEventName(EventDefinition this) :
 	getNameWA().toFirstUpper();
 
-String getEventName(base::NamedElement this) : "/* Event expected, but got: "+this+" */";
-String getEventName(TypedElementReferenceExpression this) : this.reference.getEventName();
+String getEventName(EObject this) : "/* Event expected, but got: "+this+" */";
+String getEventName(ElementReferenceExpression this) : this.reference.getEventName();
 String getEventName(FeatureCall this) : this.feature.getEventName();
 String getEventName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
 
@@ -198,7 +199,7 @@ String getContext(VariableDefinition this) :
 String getContext(Expression this) : 
 	"/* getContext for unknown element: "+this+"*/";
 
-String getContext(TypedElementReferenceExpression this) : 
+String getContext(ElementReferenceExpression this) : 
 	this.reference.getContext();
 
 String getContext(FeatureCall this) : 
@@ -217,7 +218,9 @@ String getContext(Event this) :
 		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
 	else 
 		"";
-	
+String getContext(EObject this):
+	null;
+		
 String getInterfaceExtension(Scope this, GeneratorEntry entry):
 	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getInterfaceExtensions(org.yakindu.sct.model.sgraph.Scope, org.yakindu.sct.model.sgen.GeneratorEntry);
 		

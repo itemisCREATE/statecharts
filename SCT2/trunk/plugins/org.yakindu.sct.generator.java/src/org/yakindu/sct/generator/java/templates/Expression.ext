@@ -8,6 +8,7 @@
   	Joern Seger - Initial contribution and API
   	Markus Muehlbrandt - Java adaptions
  */
+ import ecore;
 import stext;
 import sexec;
 import sgraph;
@@ -25,9 +26,9 @@ String toCode(Void o, String statechartReference) :
 String toCode(Expression expression) : 
 	"/* Unknown expression: "+expression+" */"; 
 
-String toCode(TypedElementReferenceExpression ref) :
+String toCode(ElementReferenceExpression ref) :
 	ref.reference.toCode();
-String toCode(base::NamedElement ref) :
+String toCode(EObject ref) :
 	"/* toCode not defined for: "+ref+" */";
 String toCode(types::Feature ref) :
 	"/* toCode not defined for: "+ref+" */";
@@ -172,8 +173,8 @@ String toCode(EventRaisingExpression this) :
 		event.getContext().toFirstLower()+"raise"+event.getEventName()+"();";
 		
 String getInitialValue(EventDefinition this) :
-	if derivation != null then
-		derivation.condition.toCode()
-	else
-		//if no initial value expression is declared set default value to avoid npe exceptions
-		type.getInitialValue();
+	//if derivation != null then
+	//	derivation.condition.toCode()
+	//else
+	//if no initial value expression is declared set default value to avoid npe exceptions
+	type.getInitialValue();
