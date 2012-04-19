@@ -102,8 +102,6 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * TODO: Discuss EventDerivation
-	 * 
 	 * EventDefinition: (direction=Direction)? 'event' name=ID (':'
 	 * type=[types::Type|FQN])? (derivation=EventDerivation)?;
 	 */
@@ -216,9 +214,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void tesLocalReaction() {
-		//TODO: Does it make sense to use Entry points in an entry local reaction?
 		String rule = LocalReaction.class.getSimpleName();
-		parseExpression("entry [ABC.myInt > 10] / raise ABC.event2 # > ABC.EntryPoint", interfaceScope(), rule);
+		parseExpression("entry [ABC.myInt > 10] / raise ABC.event2 #", interfaceScope(), rule);
 	}
 	
 	
