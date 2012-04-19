@@ -156,11 +156,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createEventDefinitionAdapter();
       }
       @Override
-      public Adapter caseEventDerivation(EventDerivation object)
-      {
-        return createEventDerivationAdapter();
-      }
-      @Override
       public Adapter caseVariableDefinition(VariableDefinition object)
       {
         return createVariableDefinitionAdapter();
@@ -673,21 +668,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEventDefinitionAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EventDerivation <em>Event Derivation</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.EventDerivation
-   * @generated
-   */
-  public Adapter createEventDerivationAdapter()
   {
     return null;
   }

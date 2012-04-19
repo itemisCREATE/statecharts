@@ -81,7 +81,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.INTERFACE_SCOPE: return createInterfaceScope();
       case StextPackage.INTERNAL_SCOPE: return createInternalScope();
       case StextPackage.EVENT_DEFINITION: return createEventDefinition();
-      case StextPackage.EVENT_DERIVATION: return createEventDerivation();
       case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
       case StextPackage.OPERATION_DEFINITION: return createOperationDefinition();
       case StextPackage.LOCAL_REACTION: return createLocalReaction();
@@ -331,17 +330,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     EventDefinitionImpl eventDefinition = new EventDefinitionImpl();
     return eventDefinition;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EventDerivation createEventDerivation()
-  {
-    EventDerivationImpl eventDerivation = new EventDerivationImpl();
-    return eventDerivation;
   }
 
   /**

@@ -496,14 +496,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cTypeAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final CrossReference cTypeTypeCrossReference_3_1_0 = (CrossReference)cTypeAssignment_3_1.eContents().get(0);
 		private final RuleCall cTypeTypeFQNParserRuleCall_3_1_0_1 = (RuleCall)cTypeTypeCrossReference_3_1_0.eContents().get(1);
-		private final Assignment cDerivationAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cDerivationEventDerivationParserRuleCall_4_0 = (RuleCall)cDerivationAssignment_4.eContents().get(0);
 		
+		//// (derivation=EventDerivation)?;
 		//EventDefinition:
-		//	direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?;
+		//	direction=Direction? "event" name=ID (":" type=[types::Type|FQN])?;
 		public ParserRule getRule() { return rule; }
 
-		//direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?
+		//direction=Direction? "event" name=ID (":" type=[types::Type|FQN])?
 		public Group getGroup() { return cGroup; }
 
 		//direction=Direction?
@@ -535,52 +534,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//FQN
 		public RuleCall getTypeTypeFQNParserRuleCall_3_1_0_1() { return cTypeTypeFQNParserRuleCall_3_1_0_1; }
-
-		//derivation=EventDerivation?
-		public Assignment getDerivationAssignment_4() { return cDerivationAssignment_4; }
-
-		//EventDerivation
-		public RuleCall getDerivationEventDerivationParserRuleCall_4_0() { return cDerivationEventDerivationParserRuleCall_4_0; }
-	}
-
-	public class EventDerivationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventDerivation");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cConditionAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cConditionExpressionParserRuleCall_1_0 = (RuleCall)cConditionAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cColonKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cValueAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cValueExpressionParserRuleCall_2_1_0 = (RuleCall)cValueAssignment_2_1.eContents().get(0);
-		
-		//EventDerivation:
-		//	"=" condition=Expression (":" value=Expression)?;
-		public ParserRule getRule() { return rule; }
-
-		//"=" condition=Expression (":" value=Expression)?
-		public Group getGroup() { return cGroup; }
-
-		//"="
-		public Keyword getEqualsSignKeyword_0() { return cEqualsSignKeyword_0; }
-
-		//condition=Expression
-		public Assignment getConditionAssignment_1() { return cConditionAssignment_1; }
-
-		//Expression
-		public RuleCall getConditionExpressionParserRuleCall_1_0() { return cConditionExpressionParserRuleCall_1_0; }
-
-		//(":" value=Expression)?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//":"
-		public Keyword getColonKeyword_2_0() { return cColonKeyword_2_0; }
-
-		//value=Expression
-		public Assignment getValueAssignment_2_1() { return cValueAssignment_2_1; }
-
-		//Expression
-		public RuleCall getValueExpressionParserRuleCall_2_1_0() { return cValueExpressionParserRuleCall_2_1_0; }
 	}
 
 	public class VariableDeclarationElements extends AbstractParserRuleElementFinder {
@@ -2578,6 +2531,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final EnumLiteralDeclaration cOUTEnumLiteralDeclaration_2 = (EnumLiteralDeclaration)cAlternatives.eContents().get(2);
 		private final Keyword cOUTOutKeyword_2_0 = (Keyword)cOUTEnumLiteralDeclaration_2.eContents().get(0);
 		
+		////EventDerivation:
+		////	'=' condition=Expression (':' value=Expression)?;
 		//enum Direction:
 		//	LOCAL="local" | IN="in" | OUT="out";
 		public EnumRule getRule() { return rule; }
@@ -2985,7 +2940,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private EventDeclarartionElements pEventDeclarartion;
 	private EventFeatureElements pEventFeature;
 	private EventDefinitionElements pEventDefinition;
-	private EventDerivationElements pEventDerivation;
 	private DirectionElements unknownRuleDirection;
 	private VariableDeclarationElements pVariableDeclaration;
 	private VariableFeatureElements pVariableFeature;
@@ -3268,8 +3222,9 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getEventFeatureAccess().getRule();
 	}
 
+	//// (derivation=EventDerivation)?;
 	//EventDefinition:
-	//	direction=Direction? "event" name=ID (":" type=[types::Type|FQN])? derivation=EventDerivation?;
+	//	direction=Direction? "event" name=ID (":" type=[types::Type|FQN])?;
 	public EventDefinitionElements getEventDefinitionAccess() {
 		return (pEventDefinition != null) ? pEventDefinition : (pEventDefinition = new EventDefinitionElements());
 	}
@@ -3278,16 +3233,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getEventDefinitionAccess().getRule();
 	}
 
-	//EventDerivation:
-	//	"=" condition=Expression (":" value=Expression)?;
-	public EventDerivationElements getEventDerivationAccess() {
-		return (pEventDerivation != null) ? pEventDerivation : (pEventDerivation = new EventDerivationElements());
-	}
-	
-	public ParserRule getEventDerivationRule() {
-		return getEventDerivationAccess().getRule();
-	}
-
+	////EventDerivation:
+	////	'=' condition=Expression (':' value=Expression)?;
 	//enum Direction:
 	//	LOCAL="local" | IN="in" | OUT="out";
 	public DirectionElements getDirectionAccess() {
