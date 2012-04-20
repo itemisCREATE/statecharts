@@ -23,6 +23,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+/**
+ * Runtime service for state machines to execute a run to completion step
+ * periodically.
+ * 
+ */
 public class RuntimeService {
 
 	private Timer timer = new Timer();
@@ -43,10 +48,23 @@ public class RuntimeService {
 		}
 	};
 
+	/**
+	 * Create runtime service.
+	 * 
+	 * @param cyclePeriod
+	 *            : The period with which the registered state machines run
+	 *            cycle method is called.
+	 */
 	public RuntimeService(long cyclePeriod) {
 		timer.scheduleAtFixedRate(timerTask, 0, cyclePeriod);
 	}
 
+	/**
+	 * Adds the given state machine to runtime service.
+	 * 
+	 * @param statemachine
+	 * @return {@code true} if state machine is added properly.
+	 */
 	public boolean addStatemachine(IStatemachine statemachine) {
 		lock.writeLock().lock();
 		boolean ret = statemachineSet.add(statemachine);
@@ -54,6 +72,12 @@ public class RuntimeService {
 		return ret;
 	}
 
+	/**
+	 * Removes the given state machine from runtime service.
+	 * 
+	 * @param statemachine
+	 * @return {@code true} if state machine is removed properly.
+	 */
 	public boolean removeStatemachine(IStatemachine statemachine) {
 		lock.writeLock().lock();
 		boolean ret = statemachineSet.remove(statemachine);
@@ -61,6 +85,9 @@ public class RuntimeService {
 		return ret;
 	}
 
+	/**
+	 * Ends the runtime service.
+	 */
 	public void cancel() {
 		timer.cancel();
 	}

@@ -242,6 +242,7 @@ public class Test_LocalActionsCycleBasedStatemachine extends NotificationSender
 			}
 
 		}
+
 	}
 	private void reactState2() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent3())) {
@@ -269,6 +270,7 @@ public class Test_LocalActionsCycleBasedStatemachine extends NotificationSender
 			}
 
 		}
+
 	}
 	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();
