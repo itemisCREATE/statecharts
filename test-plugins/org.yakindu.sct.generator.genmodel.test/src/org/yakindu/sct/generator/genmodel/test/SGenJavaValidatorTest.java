@@ -1,6 +1,16 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
 package org.yakindu.sct.generator.genmodel.test;
 
-import static org.junit.Assert.assertNotNull;
+import static junit.framework.Assert.fail;
 
 import java.lang.reflect.Method;
 
@@ -15,17 +25,12 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
-import org.yakindu.sct.model.sgen.FeatureConfiguration;
-import org.yakindu.sct.model.sgen.FeatureParameterValue;
-import org.yakindu.sct.model.sgen.GeneratorEntry;
-import org.yakindu.sct.model.sgen.GeneratorModel;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import static junit.framework.Assert.*;
 
 /**
  * @author andreas muelder - Initial contribution and API

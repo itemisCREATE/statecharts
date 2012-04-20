@@ -23,7 +23,6 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
-import org.yakindu.sct.model.sgraph.Scope;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -43,11 +42,6 @@ public abstract class AbstractSGenTest {
 	private Provider<XtextResource> resourceProvider;
 
 	protected EObject parseExpression(String expression, String ruleName) {
-		return parseExpression(expression, null, ruleName);
-	}
-
-	protected EObject parseExpression(String expression, Scope context,
-			String ruleName) {
 		XtextResource resource = resourceProvider.get();
 		resource.setURI(URI.createPlatformPluginURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();

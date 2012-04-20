@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.genmodel.test;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
@@ -24,5 +25,44 @@ import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 @RunWith(XtextRunner.class)
 @InjectWith(SGenInjectorProvider.class)
 public class SGenParserRuleTest extends AbstractSGenTest {
-	
+
+	/**
+	 * GeneratorModel returns gen::GeneratorModel: 'GeneratorModel' 'for'
+	 * generatorId=QID '{' (entries+=GeneratorEntry)+ '}';
+	 */
+	@Test
+	public void testGeneratorModel() {
+
+	}
+
+	/**
+	 * GeneratorEntry returns gen::GeneratorEntry: contentType=ID
+	 * elementRef=[ecore::EObject|QID] '{' (features+=FeatureConfiguration)*
+	 * '}';
+	 */
+	@Test
+	public void testGeneratorEntry() {
+
+	}
+
+	/**
+	 * FeatureConfiguration returns gen::FeatureConfiguration:
+	 * {gen::FeatureConfiguration} 'feature' type=[gen::FeatureType] '{'
+	 * (parameterValues+=FeatureParameterValue)+ '}';
+	 */
+	@Test
+	public void testFeatureConfiguration() {
+
+	}
+
+	/**
+	 * FeatureParameterValue returns gen::FeatureParameterValue:
+	 * {gen::FeatureParameterValue} parameter=[gen::FeatureParameter] '='
+	 * expression=Literal;
+	 */
+	@Test
+	public void testFeatureParameterValue() {
+
+	}
+
 }
