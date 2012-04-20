@@ -15,8 +15,10 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.yakindu.sct.runtime.java.EventNotification;
-
+/**
+ * Default timer service implementation.
+ * 
+ */
 public class TimerService implements ITimerService {
 
 	private final Timer timer = new Timer();

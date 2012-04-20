@@ -13,6 +13,12 @@ package org.yakindu.sct.runtime.java;
 import java.util.Collection;
 import java.util.Iterator;
 
+/**
+ * 
+ * The {@code EventVector} stores the events that occurred during a cycle.
+ * 
+ * @param <E>
+ */
 public class EventVector<E extends Event<? extends Enum<?>>>
 		implements
 			Collection<E> {
