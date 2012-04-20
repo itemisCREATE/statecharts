@@ -6,8 +6,18 @@
 		</topic>
 		<topic href="help/user/04_Tasks/tasks.html#Validatingastatemachine" label="Validating a statemachine"></topic>
 		<topic href="help/user/04_Tasks/tasks.html#Simulatingastatemachine" label="Simulating a statemachine"></topic>
-		<topic href="help/user/04_Tasks/tasks.html#GeneratingJavacode" label="Generating Java code"></topic>
-		<topic href="help/user/04_Tasks/tasks.html#GeneratingCcode" label="Generating C code"></topic>
-		<topic href="help/user/04_Tasks/tasks.html#GeneratingCCode" label="Generating C++ Code"></topic>
+		<topic href="help/user/04_Tasks/tasks.html#GeneratingCode" label="Generating Code"></topic>
+		<topic href="help/user/04_Tasks/tasks.html#CoreFeatures" label="Core Features">
+			<topic href="help/user/04_Tasks/tasks.html#Outlet" label="Outlet"></topic>
+			<topic href="help/user/04_Tasks/tasks.html#LicenseHeader" label="LicenseHeader"></topic>
+			<topic href="help/user/04_Tasks/tasks.html#FunctionInlining" label="FunctionInlining"></topic>
+		</topic>
+		<topic href="help/user/04_Tasks/tasks.html#JavaGeneratorFeatures" label="Java Generator Features">
+			<topic href="help/user/04_Tasks/tasks.html#Naming" label="Naming"></topic>
+			<topic href="help/user/04_Tasks/tasks.html#GeneralFeatures" label="GeneralFeatures
+TBD"></topic>
+		</topic>
+		<topic href="help/user/04_Tasks/tasks.html#CGeneratorFetures" label="C Generator Fetures
+TBD"></topic>
 	</topic>
 </toc>
