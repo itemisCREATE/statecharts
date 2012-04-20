@@ -42,6 +42,7 @@ public class TestModels {
 	private static final String STATE_ACTIVE = "StateIsActive.sct";
 	private static final String VALUED_EVENTS = "ValuedEvents.sct";
 	private static final String FEATURE_CALLS = "FeatureCalls.sct";
+	private static final String STATECHART_LOCAL_REACTIONS = "StatechartLocalReactions.sct";
 
 	@Inject
 	private ModelSequencer sequencer;
@@ -103,6 +104,15 @@ public class TestModels {
 	 */
 	public ExecutionFlow createFeatureCallModel() throws IOException {
 		return loadFromResource(FEATURE_CALLS);
+	}
+	/**
+	 * <img src="../../images/StatechartLocalReactions.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createStatechartLocalReactionsModel() throws IOException {
+		return loadFromResource(STATECHART_LOCAL_REACTIONS);
 	}
 
 	/**
