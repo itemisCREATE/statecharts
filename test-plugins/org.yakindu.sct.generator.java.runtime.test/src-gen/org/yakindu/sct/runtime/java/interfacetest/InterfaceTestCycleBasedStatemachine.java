@@ -237,6 +237,7 @@ public class InterfaceTestCycleBasedStatemachine extends NotificationSender
 				}
 			}
 		}
+
 	}
 	private void reactState2() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1())) {
@@ -247,6 +248,7 @@ public class InterfaceTestCycleBasedStatemachine extends NotificationSender
 			stateVector[0] = State.State1;
 
 		}
+
 	}
 	private void reactState3() {
 		if (occuredEvents.contains(getInterfaceOtherImpl().getEventEvent3())) {
@@ -256,6 +258,7 @@ public class InterfaceTestCycleBasedStatemachine extends NotificationSender
 			stateVector[0] = State.State1;
 
 		}
+
 	}
 	private void reactState4() {
 		if (occuredEvents.contains(getInterfaceThirdImpl().getEventEvent5())) {
@@ -265,6 +268,7 @@ public class InterfaceTestCycleBasedStatemachine extends NotificationSender
 			stateVector[0] = State.State1;
 
 		}
+
 	}
 	public void runCycle() {
 		outEvents.clear();

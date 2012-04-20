@@ -22,8 +22,12 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import «entry.getBasePackageName()».EventNotification;
+«REM»import «entry.getBasePackageName()».EventNotification;«ENDREM»
 
+/**
+ * Default timer service implementation.
+ * 
+ */
 public class TimerService implements ITimerService {
 
 	private final Timer timer = new Timer();

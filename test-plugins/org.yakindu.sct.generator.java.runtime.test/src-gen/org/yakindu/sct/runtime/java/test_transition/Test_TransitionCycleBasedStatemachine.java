@@ -194,7 +194,7 @@ public class Test_TransitionCycleBasedStatemachine extends NotificationSender
 	}
 
 	public void exit() {
-		//Handle exit of all possible states (of ) at position 0...
+		//Handle exit of all possible states (of region0) at position 0...
 		switch (stateVector[0]) {
 
 			case State1 :
@@ -302,6 +302,7 @@ public class Test_TransitionCycleBasedStatemachine extends NotificationSender
 				}
 			}
 		}
+
 	}
 	private void reactState2() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent6())) {
@@ -316,6 +317,7 @@ public class Test_TransitionCycleBasedStatemachine extends NotificationSender
 			stateVector[0] = State.State1;
 
 		}
+
 	}
 	public void runCycle() {
 		cycleStartTime = System.currentTimeMillis();

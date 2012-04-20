@@ -179,18 +179,18 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 
 			case State8 :
 
-				historyVector[0] = stateVector[0];
-
 				historyVector[1] = stateVector[0];
+
+				historyVector[0] = stateVector[0];
 				stateVector[0] = State.$NullState$;
 
 				break;
 
 			case State9 :
 
-				historyVector[0] = stateVector[0];
-
 				historyVector[1] = stateVector[0];
+
+				historyVector[0] = stateVector[0];
 				stateVector[0] = State.$NullState$;
 
 				break;
@@ -208,7 +208,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 
 	}
 
-	private void shallowEnterSequenceState20() {
+	private void shallowEnterSequenceState2Region0() {
 		//Handle shallow history entry of null
 		switch (historyVector[0]) {
 
@@ -247,7 +247,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 		}
 	}
 
-	private void shallowEnterSequenceState70() {
+	private void shallowEnterSequenceState7Region0() {
 		//Handle shallow history entry of null
 		switch (historyVector[1]) {
 
@@ -274,7 +274,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 			//Enter the region with shallow history
 			if (historyVector[0] != State.$NullState$) {
 
-				shallowEnterSequenceState20();
+				shallowEnterSequenceState2Region0();
 			} else {
 				nextStateIndex = 0;
 				stateVector[0] = State.State3;
@@ -282,6 +282,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState2() {
 	}
@@ -289,7 +290,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
 
 			historyVector[0] = stateVector[0];
-			//Handle exit of all possible states (of null) at position 0...
+			//Handle exit of all possible states (of region0) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -339,6 +340,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState4() {
 	}
@@ -346,7 +348,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
 
 			historyVector[0] = stateVector[0];
-			//Handle exit of all possible states (of null) at position 0...
+			//Handle exit of all possible states (of region0) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -388,7 +390,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 		} else {
 			if (occuredEvents.contains(getDefaultInterfaceImpl()
 					.getEventEvent4())) {
-				//Handle exit of all possible states (of null) at position 0...
+				//Handle exit of all possible states (of region0) at position 0...
 				switch (stateVector[0]) {
 
 					case State6 :
@@ -425,7 +427,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 					//Enter the region with shallow history
 					if (historyVector[1] != State.$NullState$) {
 
-						shallowEnterSequenceState70();
+						shallowEnterSequenceState7Region0();
 					} else {
 						nextStateIndex = 0;
 						stateVector[0] = State.State8;
@@ -437,6 +439,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState7() {
 	}
@@ -444,7 +447,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
 
 			historyVector[0] = stateVector[0];
-			//Handle exit of all possible states (of null) at position 0...
+			//Handle exit of all possible states (of region0) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -486,7 +489,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 		} else {
 			if (occuredEvents.contains(getDefaultInterfaceImpl()
 					.getEventEvent4())) {
-				//Handle exit of all possible states (of null) at position 0...
+				//Handle exit of all possible states (of region0) at position 0...
 				switch (stateVector[0]) {
 
 					case State6 :
@@ -520,7 +523,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 						.getEventEvent6())) {
 
 					historyVector[1] = stateVector[0];
-					//Handle exit of all possible states (of null) at position 0...
+					//Handle exit of all possible states (of region0) at position 0...
 					switch (stateVector[0]) {
 
 						case State8 :
@@ -555,12 +558,13 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState9() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
 
 			historyVector[0] = stateVector[0];
-			//Handle exit of all possible states (of null) at position 0...
+			//Handle exit of all possible states (of region0) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -602,7 +606,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 		} else {
 			if (occuredEvents.contains(getDefaultInterfaceImpl()
 					.getEventEvent4())) {
-				//Handle exit of all possible states (of null) at position 0...
+				//Handle exit of all possible states (of region0) at position 0...
 				switch (stateVector[0]) {
 
 					case State6 :
@@ -636,7 +640,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 						.getEventEvent6())) {
 
 					historyVector[1] = stateVector[0];
-					//Handle exit of all possible states (of null) at position 0...
+					//Handle exit of all possible states (of region0) at position 0...
 					switch (stateVector[0]) {
 
 						case State8 :
@@ -671,12 +675,13 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState5() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent2())) {
 
 			historyVector[0] = stateVector[0];
-			//Handle exit of all possible states (of null) at position 0...
+			//Handle exit of all possible states (of region0) at position 0...
 			switch (stateVector[0]) {
 
 				case State3 :
@@ -718,6 +723,7 @@ public class Test_ShallowHistoryCycleBasedStatemachine
 		} else {
 
 		}
+
 	}
 	public void runCycle() {
 		outEvents.clear();

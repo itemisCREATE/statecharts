@@ -369,6 +369,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 				}
 			}
 		}
+
 	}
 	private void reactState2() {
 	}
@@ -544,6 +545,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState4() {
 	}
@@ -712,6 +714,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState6() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
@@ -878,6 +881,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState9() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
@@ -1109,6 +1113,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState7() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
@@ -1273,6 +1278,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	private void reactState8() {
 		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent10())) {
@@ -1357,6 +1363,7 @@ public class Test_ParallelRegionsCycleBasedStatemachine
 			}
 
 		}
+
 	}
 	public void runCycle() {
 		outEvents.clear();

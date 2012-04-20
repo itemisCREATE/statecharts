@@ -233,6 +233,7 @@ public class Test_ExpressionCycleBasedStatemachine extends NotificationSender
 			stateVector[0] = State.State2;
 
 		}
+
 	}
 	private void reactState2() {
 		if ((occuredEvents.contains(getDefaultInterfaceImpl().getEventEvent1()) && (getDefaultInterfaceImpl()
@@ -255,6 +256,7 @@ public class Test_ExpressionCycleBasedStatemachine extends NotificationSender
 					getDefaultInterfaceImpl().getVarVar1() + (1));
 
 		}
+
 	}
 	public void runCycle() {
 		outEvents.clear();

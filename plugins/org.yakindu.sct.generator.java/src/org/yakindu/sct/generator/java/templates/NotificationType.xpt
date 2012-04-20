@@ -17,6 +17,9 @@ Contributors:
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
+/**
+ * Enum to define possible notification types.
+ */
 public enum NotificationType {
 	EventNotification, VariableNotification, RuntimeCycleNotification
 }
