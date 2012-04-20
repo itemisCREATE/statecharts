@@ -13,7 +13,6 @@ Workflow {
     bean = StandaloneSetup {
         scanClassPath = true
         platformUri = "${runtimeProject}/.."
-     	registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel"
 		registerGenModelFile = "platform:/resource/org.yakindu.sct.model.sgen/model/emf/sgen.genmodel"
     }
@@ -116,9 +115,6 @@ Workflow {
 
             // provides the necessary bindings for java types integration
             fragment = types.TypesGeneratorFragment {}
-
-            // generates the required bindings only if the grammar inherits from Xbase
-            fragment = xbase.XbaseGeneratorFragment {}
 
             // provides a preference page for template proposals
             fragment = templates.CodetemplatesGeneratorFragment {}

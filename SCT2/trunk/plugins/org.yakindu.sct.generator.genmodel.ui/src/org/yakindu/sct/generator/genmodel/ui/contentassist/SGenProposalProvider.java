@@ -10,29 +10,29 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.contentassist;
 
-import java.util.ArrayList;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
-
-import com.google.common.collect.Lists;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@SuppressWarnings("restriction")
 public class SGenProposalProvider extends AbstractSGenProposalProvider {
+
+	@Override
+	public IEObjectHover getHover() {
+		return super.getHover();
+	}
 
 	@Override
 	public void completeGeneratorEntry_ContentType(EObject model,
@@ -63,18 +63,11 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 		}
 	}
 
-	public void createProposals(ContentAssistContext context,
+	@Override
+	public void completeFeatureConfiguration_ParameterValues(EObject model,
+			Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
-		super.createProposals(context, acceptor);
-
-	}
-
-	protected boolean isKeywordWorthyToPropose(Keyword keyword) {
-		if (keyword.getValue().length() == 1) {
-			ArrayList<String> whiteList = Lists.newArrayList("{", "}", "=");
-			if (whiteList.contains(keyword.getValue()))
-				return true;
-		}
-		return super.isKeywordWorthyToPropose(keyword);
+		super.completeFeatureConfiguration_ParameterValues(model, assignment,
+				context, acceptor);
 	}
 }

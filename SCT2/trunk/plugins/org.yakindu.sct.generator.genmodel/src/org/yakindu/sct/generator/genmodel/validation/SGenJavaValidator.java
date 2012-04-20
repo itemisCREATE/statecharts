@@ -27,6 +27,7 @@ import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
+import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -34,8 +35,12 @@ import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
+import org.yakindu.sct.model.sgen.IntLiteral;
+import org.yakindu.sct.model.sgen.Literal;
 import org.yakindu.sct.model.sgen.ParameterTypes;
+import org.yakindu.sct.model.sgen.RealLiteral;
 import org.yakindu.sct.model.sgen.SGenPackage;
+import org.yakindu.sct.model.sgen.StringLiteral;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -70,27 +75,27 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			final FeatureParameterValue parameterValue) {
 		if (parameterValue == null || parameterValue.getExpression() == null)
 			return;
-		Object value = parameterValue.getValue();
+		Literal value = parameterValue.getExpression();
 		ParameterTypes parameterType = parameterValue.getParameter()
 				.getParameterType();
 		switch (parameterType) {
 		case BOOLEAN:
-			if (!(value instanceof Boolean))
+			if (!(value instanceof BoolLiteral))
 				error("Incompatible type, Boolean expected",
 						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case INTEGER:
-			if (!(value instanceof Integer))
+			if (!(value instanceof IntLiteral))
 				error("Incompatible type, Integer expected",
 						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case FLOAT:
-			if (!(value instanceof Float))
+			if (!(value instanceof RealLiteral))
 				error("Incompatible type, Float expected",
 						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case STRING:
-			if (!(value instanceof String))
+			if (!(value instanceof StringLiteral))
 				error("Incompatible type, String expected",
 						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
@@ -99,7 +104,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkParameterValue(final FeatureParameterValue value) {
-		if (value.getExpression() == null || value.getValue() == null)
+		if (value.getExpression() == null || value.getExpression() == null)
 			return;
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(value);

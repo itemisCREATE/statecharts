@@ -12,8 +12,6 @@ package org.yakindu.sct.generator.genmodel;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
-import org.eclipse.xtext.resource.XtextResource;
-import org.yakindu.sct.generator.genmodel.resource.XBaseInterpreterResource;
 
 /**
  * Use this class to register components to be used at runtime / without the
@@ -27,9 +25,5 @@ public class SGenRuntimeModule extends
 		return SimpleNameProvider.class;
 	}
 
-	@Override
-	public Class<? extends XtextResource> bindXtextResource() {
-		return XBaseInterpreterResource.class;
-	}
 
 }

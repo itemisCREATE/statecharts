@@ -1,9 +1,8 @@
-grammar org.yakindu.sct.generator.genmodel.SGen with org.eclipse.xtext.xbase.Xbase
+grammar org.yakindu.sct.generator.genmodel.SGen with org.eclipse.xtext.common.Terminals
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 import "platform:/resource/org.yakindu.sct.model.sgen/model/emf/sgen.ecore" as gen
 import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sct
-import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 
 /**
  * @author Andreas Muelder
@@ -24,7 +23,29 @@ FeatureConfiguration returns gen::FeatureConfiguration:
 	'}';
 
 FeatureParameterValue returns gen::FeatureParameterValue:
-	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] '=' expression=XLiteral;
+	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] '=' expression=Literal;
+
+Literal returns gen::Literal:
+	BoolLiteral | IntLiteral | RealLiteral | StringLiteral;
+
+BoolLiteral returns gen::BoolLiteral:
+	{gen::BoolLiteral} value=BOOL;
+
+IntLiteral returns gen::IntLiteral:
+	{gen::IntLiteral} value=INT;
+
+RealLiteral returns gen::RealLiteral:
+	{gen::RealLiteral} value=FLOAT;
+
+StringLiteral returns gen::StringLiteral:
+	{gen::StringLiteral} value=STRING;
+
+terminal BOOL returns ecore::EBoolean:
+	'true' | 'false' | 'yes' | 'no';
+
+terminal FLOAT returns ecore::EFloat:
+	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F' | 'd' | 'D')?;
+	
 
 QID:
 	ID (('::' | '.') ID)*; 
