@@ -246,6 +246,7 @@
 		<module>../org.yakindu.sct.model.sexec.edit</module>
 		<module>../org.yakindu.sct.model.sexec.interpreter</module>
 		<module>../org.yakindu.sct.model.sexec.interpreter.test</module>
+		<module>../org.yakindu.sct.model.sexec.test</module>
 		<module>../org.yakindu.sct.model.sgen</module>
 		<module>../org.yakindu.sct.model.sgen.edit</module>
 		<module>../org.yakindu.sct.model.sgraph</module>
