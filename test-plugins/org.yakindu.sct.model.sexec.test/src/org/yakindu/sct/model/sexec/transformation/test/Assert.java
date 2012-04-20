@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -26,12 +27,12 @@ import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 
 public class Assert {
 
@@ -63,12 +64,14 @@ public class Assert {
 		assertEquals(operator, assignment.getOperator());
 
 		Expression varRef = assignment.getVarRef();
-		if (varRef instanceof TypedElementReferenceExpression) {
-			TypedElementReferenceExpression elementRef = (TypedElementReferenceExpression) varRef;
-			assertEquals(variableName, elementRef.getReference().getName());
+		if (varRef instanceof ElementReferenceExpression) {
+			ElementReferenceExpression elementRef = (ElementReferenceExpression) varRef;
+			assertEquals(variableName,
+					((NamedElement) elementRef.getReference()).getName());
 		} else if (varRef instanceof FeatureCall) {
 			FeatureCall call = (FeatureCall) varRef;
-			assertEquals(variableName, call.getFeature().getName());
+			assertEquals(variableName,
+					((NamedElement) call.getFeature()).getName());
 		}
 		assertExpressionEquals(value, assignment.getExpression());
 	}

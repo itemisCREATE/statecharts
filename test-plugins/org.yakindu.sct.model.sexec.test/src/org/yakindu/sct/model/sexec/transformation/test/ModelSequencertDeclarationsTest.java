@@ -38,7 +38,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
@@ -119,7 +119,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0))
 				.getSteps().get(0);
 
-		TypedElementReferenceExpression _ere = (TypedElementReferenceExpression) _if
+		ElementReferenceExpression _ere = (ElementReferenceExpression) _if
 				.getCheck().getCondition();
 		assertSame(_e1, _ere.getReference());
 	}

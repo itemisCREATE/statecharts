@@ -64,7 +64,7 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencerStateTest extends ModelSequencerTest {
@@ -718,8 +718,8 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		LogicalRelationExpression lr2_equals = StextFactory.eINSTANCE
 				.createLogicalRelationExpression();
 		lr2_equals.setOperator(RelationalOperator.EQUALS);
-		TypedElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE
-				.createTypedElementReferenceExpression();
+		ElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE
+				.createElementReferenceExpression();
 		lr2_varRef.setReference(v1);
 		PrimitiveValueExpression lr2_value = _createValue(42);
 		lr2_equals.setLeftOperand(lr2_varRef);
@@ -734,8 +734,8 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		LogicalRelationExpression lr3_equals = StextFactory.eINSTANCE
 				.createLogicalRelationExpression();
 		lr3_equals.setOperator(RelationalOperator.EQUALS);
-		TypedElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE
-				.createTypedElementReferenceExpression();
+		ElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE
+				.createElementReferenceExpression();
 		lr3_varRef.setReference(v1);
 		PrimitiveValueExpression lr3_value = _createValue(0);
 		lr3_equals.setLeftOperand(lr3_varRef);
@@ -769,7 +769,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		// check first local reaction
 		If _lr1 = (If) _seq.getSteps().get(0);
-		assertClass(TypedElementReferenceExpression.class, _lr1.getCheck()
+		assertClass(ElementReferenceExpression.class, _lr1.getCheck()
 				.getCondition());
 		assertSame(s1.getReactions().get(1).getCheck().getCondition(), _lr1
 				.getCheck().getCondition());
@@ -822,8 +822,8 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		LogicalRelationExpression lr2_equals = StextFactory.eINSTANCE
 				.createLogicalRelationExpression();
 		lr2_equals.setOperator(RelationalOperator.EQUALS);
-		TypedElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE
-				.createTypedElementReferenceExpression();
+		ElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE
+				.createElementReferenceExpression();
 		lr2_varRef.setReference(v1);
 		PrimitiveValueExpression lr2_value = _createValue(42);
 		lr2_equals.setLeftOperand(lr2_varRef);
@@ -838,8 +838,8 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		LogicalRelationExpression lr3_equals = StextFactory.eINSTANCE
 				.createLogicalRelationExpression();
 		lr3_equals.setOperator(RelationalOperator.EQUALS);
-		TypedElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE
-				.createTypedElementReferenceExpression();
+		ElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE
+				.createElementReferenceExpression();
 		lr3_varRef.setReference(v1);
 		PrimitiveValueExpression lr3_value = _createValue(0);
 		lr3_equals.setLeftOperand(lr3_varRef);
@@ -866,7 +866,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		// check first local reaction
 		If _lr1 = (If) _seq.getSteps().get(0);
-		assertClass(TypedElementReferenceExpression.class, _lr1.getCheck()
+		assertClass(ElementReferenceExpression.class, _lr1.getCheck()
 				.getCondition());
 		assertSame(s1.getReactions().get(0).getCheck().getCondition(), _lr1
 				.getCheck().getCondition());
@@ -978,7 +978,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		If _lr1 = (If) assertedSequence(
 				assertedSequence(_seq.getSteps().get(0)).getSteps().get(0))
 				.getSteps().get(0);
-		assertClass(TypedElementReferenceExpression.class, _lr1.getCheck()
+		assertClass(ElementReferenceExpression.class, _lr1.getCheck()
 				.getCondition());
 		assertSame(s1.getReactions().get(0).getCheck().getCondition(), _lr1
 				.getCheck().getCondition());
