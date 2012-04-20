@@ -59,124 +59,121 @@ Start a simulation with the different modes as follows
 "Simulation perspective":../03_Concepts/concepts.html#YakinduSCSimulationperspective
 "Simulation View":../03_Concepts/concepts.html#SimulationView
 
-h2. Generating Java code
+h2. Generating Code
 
-To generate Java code you need a java genmodel.
+For code generation, Yakindu Statechart Tools uses a textual generator model called *SGen*, that can be used to configure the code generation process. It can be created either by using the provided wizard or by creating a new text file with the file extension '.sgen'.
+To create a generator model with the wizard,
 
 # Click *File* > *New* > *Other...* > *Yakindu Statechart Genmodel*
 # Type a name and click *Next*
-# Choose *YAKINDU Java Code Generator*
+# Choose the desired generator, i.e. *YAKINDU Java Code Generator*
 # Check the model(s) to generate code from and click *Finish*
-
 
 !images/genmodelwizardchooselanguage.jpg!
 
-The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked *Project* > *Build Automatically*. If not click *Project* > *Clean...* > *Clean all* to run the generator.
+The result is an .sgen file of the following format: 
 
 bc.. 
-GeneratorModel for yakindu::java {
-
-	statechart coffeeMachine {
-
-		feature Outlet {
-			targetProject = "org.terra.coffee.machine"
-			targetFolder = "src-gen"			
-		}
-
-		feature Debug {
-			dumpSexec = false			
-		}
-
-		feature licenseHeader {
-			licenseText = "Copyright by itemis AG"			
+GeneratorModel for [GeneratorId] {
+	statechart [StatechartReference] {
+		feature [Feature] {
+			[ParameterName] = [ParameterValue]
 		}
 	}
 }
+p. The [GeneratorId] is the unique id of the Generator. Yakindu Statechart Tools currently supports the following Generators out of the box:
+# yakindu::java - Generator ID for the Java Code Generator 
+# yakindu::c - Generator ID for the C Code Generator
+# yakindu::cpp - Generator ID for the C++ Code Generator
+
+p. One GeneratorModel can contain several [StatechartReference]s. These are crossreference to statechart models for which the code should be generated. 
+For each referenced Statechart, the generator process can be configured with [Feature]s. Each Feature consists of several parameters. These parameters can be configured with [ParameterName] = [ParameterValue].
+ 
+The Generator Model will be build automatically if you checked *Project* > *Build Automatically*. If you want to execute only one Generator Model, you can select  
+*Generate Statechart Artifacts* from the *Package Explorer's* context menu.
+
+h2. Core Features
+
+The following section describes the *Core Features* which are available for each Code Generator:
 
 
-h2. Generating C code
+h4. Outlet
 
-To generate C code you need a C genmodel.
+The *Outlet* feature specifies the target project and folder for the generated artifacts. It is a *required* feature and consists of the following parameters:
+# __targetProject__  (String): The project where the generated artifacts are stored  
+# __targetFolder__  (String): The folder where the generated artifacts are stored
 
-# Click *File* > *New* > *Other...* > *Yakindu Statechart Genmodel*
-# Type a name and click *Next*
-# Choose *YAKINDU C Code Generator*
-# Check the model(s) to generate code from and click *Finish*
-
-The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked *Project* > *Build Automatically*. If not click *Project* > *Clean...* > *Clean all* to run the generator.
+Example configuration:
 
 bc.. 
-GeneratorModel for yakindu::c {
-
-	statechart coffeeMachine {
-
-		feature Outlet {
-			targetProject = "org.terra.coffee.machine"
-			targetFolder = "src-gen"
-		}
-
-		feature Debug {
-			dumpSexec = false
-		}
-
-		feature licenseHeader {
-			licenseText = "Enter license text here"
-		}
-		
-		feature FunctionInlining {
-			inlineChoices=true
-			inlineEnterRegion=true
-			inlineEnterSequences=true
-			inlineEntries=true
-			inlineEntryActions=true
-			inlineExitActions=true
-			inlineExitRegion=true
-			inlineExitSequences=true
-			inlineReactions=true
-		}
-	}
+feature Outlet {
+	targetProject = "ExampleProject"
+	targetFolder = "src-gen"
 }
+p. ==<!-- End Outlet -->==
 
+h4. LicenseHeader
 
-h2. Generating C++ Code
+The *LicenseHeader* feature specifies the license text that should be added as a header to the generated artifacts. It is an *optinal* feature and consists of the following parameters:
 
-To generate C++ code you need a C++ genmodel.
+# __licenseText__  (String): The license text to add as a header  
 
-# Click *File* > *New* > *Other...* > *Yakindu Statechart Genmodel*
-# Type a name and click *Next*
-# Choose *YAKINDU C++ Code Generator*
-# Check the model(s) to generate code from and click *Finish*
-
-The result is an .sgen file that opens in the editor. It will look similar to the following and you can use it to generate Java code. It will be build automatically if you checked *Project* > *Build Automatically*. If not click *Project* > *Clean...* > *Clean all* to run the generator.
+Example configuration:
 
 bc.. 
-GeneratorModel for yakindu::cpp {
+feature LicenseHeader {
+	licenseText = "Copyright (c) 2012 committers of YAKINDU and others."
+}
+p. ==<!-- End LicenseHeader -->==
 
-	statechart coffeeMachine {
+h4. FunctionInlining
 
-		feature Outlet {
-			targetProject = "org.terra.coffee.machine"
-			targetFolder = "src-gen"
-		}
+The *FunctionInlining* feature allows the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance because less operation calls are neccessary. 
+It is an *optinal* feature and consists of the following parameters:
 
-		feature Debug {
-			dumpSexec = false
-		}
+# __inlineReactions__  (Boolean): Inlines the expression for reactions
+# __inlineEntryActions__  (Boolean): Inlines the expression for entry actions
+# __inlineExitActions__  (Boolean): Inlines the expression for exit actions
+# __inlineEnterSequences__  (Boolean): Inlines the expression for enter sequences
+# __inlineExitSequences__  (Boolean): Inlines the expression for exit sequences
+# __inlineChoices__  (Boolean): Inlines the expression for choices
+# __inlineEnterRegion__  (Boolean): Inlines the expression for enter regions
+# __inlineExitRegion__  (Boolean): Inlines the expression for exit regions
+# __inlineEntries__  (Boolean): Inlines the expression for entries 
 
-		feature licenseHeader {
-			licenseText = "Enter license text here"
-		}
-		
-		feature FunctionInlining {
-			inlineChoices=true
-			inlineEnterRegion=true
-			inlineEnterSequences=true
-			inlineEntries=true
-			inlineEntryActions=true
-			inlineExitActions=true
-			inlineExitRegion=true
-			inlineExitSequences=true
-			inlineReactions=true
-		}
-	}
+Example configuration:
+
+bc.. 
+feature FunctionInlining {
+	inlineChoices = false
+	inlineEnterRegion = true
+	inlineEntries = true
+}
+p. ==<!-- End FunctionInlining -->==
+
+h2. Java Generator Features
+
+h4. Naming
+
+The *Naming* feature allows the configuration of package names as well as class name prefix / suffix.
+It is an *optinal* feature and consists of the following parameters:
+
+# __basePackage__  (Boolean): Inlines the expression for reactions
+# __implementationSuffix__  (Boolean): Inlines the expression for entry actions
+
+Example configuration:
+
+bc.. 
+feature Naming {
+	basePackage = "org.yakindu.sct"
+	implementationSuffix = "Impl"
+}
+p. ==<!-- End Naming -->==	
+
+h4. GeneralFeatures
+TBD
+
+h2. C Generator Fetures
+TBD
+
 }
