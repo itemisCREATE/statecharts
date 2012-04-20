@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.yakindu.sct</groupId>
+		<artifactId>org.yakindu.sct.releng</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../org.yakindu.sct.releng/pom.xml</relativePath>
+	</parent>
+	<artifactId>org.yakindu.sct.model.sexec.test</artifactId>
+	<groupId>org.yakindu.sct.plugins</groupId>
+	<packaging>eclipse-test-plugin</packaging>
+	
+	<profiles>
+		<profile>
+			<id>CI</id>
+			<!-- Test failures are collected by jenkins and evaluated for instable builds -->
+			<properties>
+				<testFailureIgnore>true</testFailureIgnore>
+			</properties>
+		</profile>
+		<profile>
+			<id>macosx</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
+			<properties>
+				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread</test.vmargs>
+			</properties>
+		</profile>
+		<profile>
+			<id>other-os</id>
+			<activation>
+				<os>
+					<family>!mac</family>
+				</os>
+			</activation>
+			<properties>
+				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m</test.vmargs>
+			</properties>
+		</profile>
+	</profiles>
+	
+	<properties>
+		<testFailureIgnore>false</testFailureIgnore>
+	</properties>
+	
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-surefire-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<configuration>
+					<!-- 
+					<includes>
+						<include>**/All*Tests.class</include>
+					</includes>
+					 -->
+					<excludes>
+						<exclude>**/util/TestModels.class</exclude>
+					</excludes>
+					<useUIHarness>false</useUIHarness>
+					<useUIThread>false</useUIThread>
+					<testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
+					<argLine>${test.vmargs}</argLine>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>plugin-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
