@@ -10,10 +10,14 @@
  * 
  */
 package org.yakindu.base.types;
+
+import com.google.inject.ImplementedBy;
+
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@ImplementedBy(org.yakindu.base.types.impl.BaseTypeSystemAccessImpl.class)
 public interface ITypeSystemAccess {
 
 	/** true, if this type represents a boolean */
