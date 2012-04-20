@@ -123,7 +123,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 				.getParameterValue(OUTLET_FEATURE_TARGET_FOLDER);
 
 		String absoluteTargetFolder = getTargetProject(entry).getLocation()
-				.toOSString() + File.separator + targetFolder.getValue();
+				.toOSString() + File.separator + targetFolder.getExpression().toString();
 		Output output = new OutputImpl();
 		Outlet outlet = new Outlet(absoluteTargetFolder);
 		for (PostProcessor postProcessor : getPostProcessors()) {

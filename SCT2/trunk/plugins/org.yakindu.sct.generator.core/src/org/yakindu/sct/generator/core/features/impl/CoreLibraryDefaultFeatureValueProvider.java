@@ -19,6 +19,7 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICE
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
+import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -54,7 +55,7 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)
 				&& !projectExists(parameterValue.getStringValue()))
 			return warning(String.format("The Project %s does not exist",
-					parameterValue.getValue()));
+					parameterValue.getExpression()));
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)) {
 			FeatureParameterValue targetProjectParam = parameterValue
 					.getFeatureConfiguration().getParameterValue(
@@ -66,11 +67,11 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 							parameterValue.getStringValue())) {
 				return warning(String.format(
 						"The Folder %s does not exist in Project %s",
-						parameterValue.getValue(), targetProjectName));
+						parameterValue.getExpression(), targetProjectName));
 			}
 		}
 		if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)
-				&& !(parameterValue.getValue() instanceof Boolean)) {
+				&& !(parameterValue.getExpression() instanceof BoolLiteral)) {
 			return error("Illegal Value. Must be 'true' or 'false'");
 		}
 		return Status.OK_STATUS;
