@@ -14,7 +14,7 @@
 «IMPORT stext»
 «IMPORT sgraph»
 «IMPORT sgen»
-
+ 
 «DEFINE main(sgen::GeneratorEntry entry) FOR sexec::ExecutionFlow-»
 «FILE this.name+'.txt' -»
 The name of the Statemachine is '«this.name-»'
