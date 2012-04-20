@@ -12,15 +12,14 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-import org.eclipse.xtext.xbase.XBooleanLiteral;
-import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XStringLiteral;
-import org.eclipse.xtext.xbase.XbaseFactory;
-import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
+import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.Literal;
+import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
+import org.yakindu.sct.model.sgen.StringLiteral;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -55,7 +54,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected XExpression expression;
+	protected Literal expression;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -123,17 +122,17 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public XExpression getExpression() {
+	public Literal getExpression() {
 		return expression;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(XExpression newExpression,
-			NotificationChain msgs) {
-		XExpression oldExpression = expression;
+	public NotificationChain basicSetExpression(Literal newExpression, NotificationChain msgs) {
+		Literal oldExpression = expression;
 		expression = newExpression;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION, oldExpression, newExpression);
@@ -143,10 +142,11 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setExpression(XExpression newExpression) {
+	public void setExpression(Literal newExpression) {
 		if (newExpression != expression) {
 			NotificationChain msgs = null;
 			if (expression != null)
@@ -166,7 +166,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public void setValue(String string) {
-		XStringLiteral literal = XbaseFactory.eINSTANCE.createXStringLiteral();
+		StringLiteral literal = SGenFactory.eINSTANCE.createStringLiteral();
 		literal.setValue(string);
 		setExpression(literal);
 	}
@@ -177,9 +177,8 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public void setValue(boolean boolean_) {
-		XBooleanLiteral literal = XbaseFactory.eINSTANCE
-				.createXBooleanLiteral();
-		literal.setIsTrue(boolean_);
+		BoolLiteral literal = SGenFactory.eINSTANCE.createBoolLiteral();
+		literal.setValue(boolean_);
 		setExpression(literal);
 	}
 
@@ -189,14 +188,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public String getStringValue() {
-		return (String) getInterpreter().evaluate(getExpression()).getResult();
-	}
-
-	private IExpressionInterpreter getInterpreter() {
-		if (eResource() instanceof IExpressionInterpreter) {
-			return (IExpressionInterpreter) eResource();
-		}
-		throw new IllegalStateException();
+		return ((StringLiteral)expression).getValue();
 	}
 
 	/**
@@ -205,17 +197,9 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public boolean getBooleanValue() {
-		return (Boolean) getInterpreter().evaluate(getExpression()).getResult();
+		return ((BoolLiteral)expression).isValue();
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public Object getValue() {
-		return getInterpreter().evaluate(getExpression()).getResult();
-	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -292,7 +276,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 				setParameter((FeatureParameter)newValue);
 				return;
 			case SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION:
-				setExpression((XExpression)newValue);
+				setExpression((Literal)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -309,7 +293,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 				setParameter((FeatureParameter)null);
 				return;
 			case SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION:
-				setExpression((XExpression)null);
+				setExpression((Literal)null);
 				return;
 		}
 		super.eUnset(featureID);

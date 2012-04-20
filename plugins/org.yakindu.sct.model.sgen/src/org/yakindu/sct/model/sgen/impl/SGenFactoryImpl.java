@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.model.sgen.*;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -76,6 +77,10 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 			case SGenPackage.GENERATOR_ENTRY: return createGeneratorEntry();
 			case SGenPackage.FEATURE_PARAMETER_VALUE: return createFeatureParameterValue();
 			case SGenPackage.FEATURE_TYPE_LIBRARY: return createFeatureTypeLibrary();
+			case SGenPackage.BOOL_LITERAL: return createBoolLiteral();
+			case SGenPackage.INT_LITERAL: return createIntLiteral();
+			case SGenPackage.REAL_LITERAL: return createRealLiteral();
+			case SGenPackage.STRING_LITERAL: return createStringLiteral();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -189,6 +194,46 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	public FeatureTypeLibrary createFeatureTypeLibrary() {
 		FeatureTypeLibraryImpl featureTypeLibrary = new FeatureTypeLibraryImpl();
 		return featureTypeLibrary;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BoolLiteral createBoolLiteral() {
+		BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
+		return boolLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public IntLiteral createIntLiteral() {
+		IntLiteralImpl intLiteral = new IntLiteralImpl();
+		return intLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RealLiteral createRealLiteral() {
+		RealLiteralImpl realLiteral = new RealLiteralImpl();
+		return realLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public StringLiteral createStringLiteral() {
+		StringLiteralImpl stringLiteral = new StringLiteralImpl();
+		return stringLiteral;
 	}
 
 	/**

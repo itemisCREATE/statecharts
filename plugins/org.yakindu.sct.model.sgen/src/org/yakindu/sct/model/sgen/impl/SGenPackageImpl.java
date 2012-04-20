@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
+import org.yakindu.base.base.BasePackage;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
@@ -101,6 +102,41 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass literalEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass boolLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass intLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass realLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass stringLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum parameterTypesEEnum = null;
 
 	/**
@@ -148,8 +184,7 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		SGraphPackage.eINSTANCE.eClass();
-		XbasePackage.eINSTANCE.eClass();
+		BasePackage.eINSTANCE.eClass();
 
 		// Load packages
 		theSGenPackage.loadPackage();
@@ -431,6 +466,102 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 */
 	public EAttribute getFeatureTypeLibrary_Name() {
         return (EAttribute)getFeatureTypeLibrary().getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getLiteral() {
+		if (literalEClass == null) {
+			literalEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(9);
+		}
+		return literalEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBoolLiteral() {
+		if (boolLiteralEClass == null) {
+			boolLiteralEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(10);
+		}
+		return boolLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBoolLiteral_Value() {
+        return (EAttribute)getBoolLiteral().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getIntLiteral() {
+		if (intLiteralEClass == null) {
+			intLiteralEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(11);
+		}
+		return intLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getIntLiteral_Value() {
+        return (EAttribute)getIntLiteral().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRealLiteral() {
+		if (realLiteralEClass == null) {
+			realLiteralEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(12);
+		}
+		return realLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRealLiteral_Value() {
+        return (EAttribute)getRealLiteral().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStringLiteral() {
+		if (stringLiteralEClass == null) {
+			stringLiteralEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(13);
+		}
+		return stringLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringLiteral_Value() {
+        return (EAttribute)getStringLiteral().getEStructuralFeatures().get(0);
 	}
 
 	/**
