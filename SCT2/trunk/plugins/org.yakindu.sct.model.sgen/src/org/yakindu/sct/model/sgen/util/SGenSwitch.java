@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgen.*;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -124,6 +125,40 @@ public class SGenSwitch<T> extends Switch<T> {
 			case SGenPackage.FEATURE_TYPE_LIBRARY: {
 				FeatureTypeLibrary featureTypeLibrary = (FeatureTypeLibrary)theEObject;
 				T result = caseFeatureTypeLibrary(featureTypeLibrary);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGenPackage.LITERAL: {
+				Literal literal = (Literal)theEObject;
+				T result = caseLiteral(literal);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGenPackage.BOOL_LITERAL: {
+				BoolLiteral boolLiteral = (BoolLiteral)theEObject;
+				T result = caseBoolLiteral(boolLiteral);
+				if (result == null) result = caseLiteral(boolLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGenPackage.INT_LITERAL: {
+				IntLiteral intLiteral = (IntLiteral)theEObject;
+				T result = caseIntLiteral(intLiteral);
+				if (result == null) result = caseLiteral(intLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGenPackage.REAL_LITERAL: {
+				RealLiteral realLiteral = (RealLiteral)theEObject;
+				T result = caseRealLiteral(realLiteral);
+				if (result == null) result = caseLiteral(realLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGenPackage.STRING_LITERAL: {
+				StringLiteral stringLiteral = (StringLiteral)theEObject;
+				T result = caseStringLiteral(stringLiteral);
+				if (result == null) result = caseLiteral(stringLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -248,6 +283,81 @@ public class SGenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseFeatureTypeLibrary(FeatureTypeLibrary object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLiteral(Literal object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bool Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bool Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBoolLiteral(BoolLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Int Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Int Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIntLiteral(IntLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Real Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Real Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseRealLiteral(RealLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringLiteral(StringLiteral object) {
 		return null;
 	}
 

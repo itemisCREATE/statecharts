@@ -7,7 +7,6 @@
 package org.yakindu.sct.model.sgen;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.XExpression;
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -26,7 +25,6 @@ import org.eclipse.xtext.xbase.XExpression;
  * @model
  * @generated
  */
-@SuppressWarnings("restriction")
 public interface FeatureParameterValue extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Parameter</b></em>' reference. <!--
@@ -85,22 +83,22 @@ public interface FeatureParameterValue extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(XExpression)
+	 * @see #setExpression(Literal)
 	 * @see org.yakindu.sct.model.sgen.SGenPackage#getFeatureParameterValue_Expression()
 	 * @model containment="true"
 	 * @generated
 	 */
-	XExpression getExpression();
+	Literal getExpression();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.sct.model.sgen.FeatureParameterValue#getExpression <em>Expression</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @param value the new value of the '<em>Expression</em>' containment reference.
 	 * @see #getExpression()
 	 * @generated
 	 */
-	void setExpression(XExpression value);
+	void setExpression(Literal value);
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -130,6 +128,5 @@ public interface FeatureParameterValue extends EObject {
 	 */
 	boolean getBooleanValue();
 	
-	Object getValue();
 
 } // FeatureParameterValue
