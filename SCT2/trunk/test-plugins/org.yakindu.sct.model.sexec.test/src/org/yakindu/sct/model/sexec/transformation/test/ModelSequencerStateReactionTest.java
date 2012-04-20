@@ -22,6 +22,7 @@ import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVari
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
 
 import org.junit.Test;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.If;
@@ -40,6 +41,7 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.Literal;
@@ -54,7 +56,6 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencerStateReactionTest extends ModelSequencerTest {
@@ -73,7 +74,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statement s = behaviorMapping.buildCondition(tr1);
 
-		assertClass(TypedElementReferenceExpression.class, s);
+		assertClass(ElementReferenceExpression.class, s);
 	}
 
 	/**
@@ -97,9 +98,9 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Statement s = behaviorMapping.buildCondition(tr1);
 
 		assertTrue(s instanceof LogicalOrExpression);
-		assertClass(TypedElementReferenceExpression.class,
+		assertClass(ElementReferenceExpression.class,
 				((LogicalOrExpression) s).getLeftOperand());
-		assertClass(TypedElementReferenceExpression.class,
+		assertClass(ElementReferenceExpression.class,
 				((LogicalOrExpression) s).getRightOperand());
 	}
 
@@ -163,23 +164,23 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Reaction reaction = behaviorMapping.mapTransition(t);
 
 		assertTrue(reaction.getCheck().getCondition() instanceof LogicalOrExpression);
-		assertClass(TypedElementReferenceExpression.class,
+		assertClass(ElementReferenceExpression.class,
 				((LogicalOrExpression) reaction.getCheck().getCondition())
 						.getLeftOperand());
-		assertClass(TypedElementReferenceExpression.class,
+		assertClass(ElementReferenceExpression.class,
 				((LogicalOrExpression) reaction.getCheck().getCondition())
 						.getRightOperand());
 
 		assertEquals(
 				e1.getName(),
-				((TypedElementReferenceExpression) ((LogicalOrExpression) reaction
+				((NamedElement) ((ElementReferenceExpression) ((LogicalOrExpression) reaction
 						.getCheck().getCondition()).getLeftOperand())
-						.getReference().getName());
+						.getReference()).getName());
 		assertEquals(
 				e2.getName(),
-				((TypedElementReferenceExpression) ((LogicalOrExpression) reaction
+				((NamedElement) ((ElementReferenceExpression) ((LogicalOrExpression) reaction
 						.getCheck().getCondition()).getRightOperand())
-						.getReference().getName());
+						.getReference()).getName());
 	}
 
 	@Test
@@ -211,16 +212,16 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		PrimitiveValueExpression guardCheck = (PrimitiveValueExpression) and
 				.getRightOperand();
 
-		assertClass(TypedElementReferenceExpression.class,
+		assertClass(ElementReferenceExpression.class,
 				triggerCheck.getLeftOperand());
-		assertClass(TypedElementReferenceExpression.class,
+		assertClass(ElementReferenceExpression.class,
 				triggerCheck.getRightOperand());
 		assertEquals(e1.getName(),
-				((TypedElementReferenceExpression) triggerCheck
-						.getLeftOperand()).getReference().getName());
+				((NamedElement) ((ElementReferenceExpression) triggerCheck
+						.getLeftOperand()).getReference()).getName());
 		assertEquals(e2.getName(),
-				((TypedElementReferenceExpression) triggerCheck
-						.getRightOperand()).getReference().getName());
+				((NamedElement) ((ElementReferenceExpression) triggerCheck
+						.getRightOperand()).getReference()).getName());
 
 		assertBoolLiteral(false, guardCheck.getValue());
 	}
@@ -283,7 +284,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		If _if = (If) SCTTestUtil.flattenSequenceStepsAsList(
 				flow.getStates().get(0).getReactSequence()).get(0);
 
-		TypedElementReferenceExpression _ere = (TypedElementReferenceExpression) _if
+		ElementReferenceExpression _ere = (ElementReferenceExpression) _if
 				.getCheck().getCondition();
 		assertSame(te, _ere.getReference());
 
