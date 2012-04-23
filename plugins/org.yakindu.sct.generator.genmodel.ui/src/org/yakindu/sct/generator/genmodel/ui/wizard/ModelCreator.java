@@ -59,7 +59,7 @@ public class ModelCreator {
 		GeneratorEntry entry = factory.createGeneratorEntry();
 		entry.setContentType("statechart");
 		entry.setElementRef(statechart);
-		List<FeatureType> featureTypes = getFeatureTypes();
+		List<FeatureType> featureTypes = getFeatureTypes(generatorId);
 		for (FeatureType featureType : featureTypes) {
 			FeatureConfiguration config = createFeatureConfiguration(
 					statechart, featureType);
@@ -86,7 +86,7 @@ public class ModelCreator {
 		return null;
 	}
 
-	public List<FeatureType> getFeatureTypes() {
+	public static List<FeatureType> getFeatureTypes(String generatorId) {
 		ArrayList<FeatureType> features = Lists.newArrayList();
 		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
 				.getLibraryDescriptor(generatorId);

@@ -21,10 +21,8 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.yakindu.base.base.BasePackage;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
  * <!-- begin-user-doc -->

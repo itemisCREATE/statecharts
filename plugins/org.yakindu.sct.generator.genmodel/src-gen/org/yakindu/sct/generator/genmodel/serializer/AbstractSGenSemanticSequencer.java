@@ -129,11 +129,11 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (type=[FeatureType|ID] parameterValues+=FeatureParameterValue+)
+	 *     (type=[FeatureType|ID] parameterValues+=FeatureParameterValue*)
 	 *
 	 * Features:
 	 *    type[1, 1]
-	 *    parameterValues[1, *]
+	 *    parameterValues[0, *]
 	 */
 	protected void sequence_FeatureConfiguration(EObject context, FeatureConfiguration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -169,10 +169,10 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	
 	/**
 	 * Constraint:
-	 *     (generatorId=QID entries+=GeneratorEntry+)
+	 *     (generatorId=QID entries+=GeneratorEntry*)
 	 *
 	 * Features:
-	 *    entries[1, *]
+	 *    entries[0, *]
 	 *    generatorId[1, 1]
 	 */
 	protected void sequence_GeneratorModel(EObject context, GeneratorModel semanticObject) {

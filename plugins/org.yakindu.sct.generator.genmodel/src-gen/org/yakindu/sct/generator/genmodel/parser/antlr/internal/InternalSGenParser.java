@@ -117,7 +117,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleGeneratorModel"
-    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:76:1: ruleGeneratorModel returns [EObject current=null] : (otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )+ otherlv_5= '}' ) ;
+    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:76:1: ruleGeneratorModel returns [EObject current=null] : (otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )* otherlv_5= '}' ) ;
     public final EObject ruleGeneratorModel() throws RecognitionException {
         EObject current = null;
 
@@ -133,11 +133,11 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:79:28: ( (otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )+ otherlv_5= '}' ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:80:1: (otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )+ otherlv_5= '}' )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:79:28: ( (otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )* otherlv_5= '}' ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:80:1: (otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )* otherlv_5= '}' )
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:80:1: (otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )+ otherlv_5= '}' )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:80:3: otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )+ otherlv_5= '}'
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:80:1: (otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )* otherlv_5= '}' )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:80:3: otherlv_0= 'GeneratorModel' otherlv_1= 'for' ( (lv_generatorId_2_0= ruleQID ) ) otherlv_3= '{' ( (lv_entries_4_0= ruleGeneratorEntry ) )* otherlv_5= '}'
             {
             otherlv_0=(Token)match(input,13,FOLLOW_13_in_ruleGeneratorModel122); 
 
@@ -182,8 +182,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getGeneratorModelAccess().getLeftCurlyBracketKeyword_3());
                 
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:110:1: ( (lv_entries_4_0= ruleGeneratorEntry ) )+
-            int cnt1=0;
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:110:1: ( (lv_entries_4_0= ruleGeneratorEntry ) )*
             loop1:
             do {
                 int alt1=2;
@@ -228,12 +227,8 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt1 >= 1 ) break loop1;
-                        EarlyExitException eee =
-                            new EarlyExitException(1, input);
-                        throw eee;
+            	    break loop1;
                 }
-                cnt1++;
             } while (true);
 
             otherlv_5=(Token)match(input,16,FOLLOW_16_in_ruleGeneratorModel201); 
@@ -484,7 +479,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFeatureConfiguration"
-    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:229:1: ruleFeatureConfiguration returns [EObject current=null] : ( () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )+ otherlv_5= '}' ) ;
+    // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:229:1: ruleFeatureConfiguration returns [EObject current=null] : ( () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )* otherlv_5= '}' ) ;
     public final EObject ruleFeatureConfiguration() throws RecognitionException {
         EObject current = null;
 
@@ -498,11 +493,11 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:232:28: ( ( () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )+ otherlv_5= '}' ) )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:233:1: ( () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )+ otherlv_5= '}' )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:232:28: ( ( () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )* otherlv_5= '}' ) )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:233:1: ( () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )* otherlv_5= '}' )
             {
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:233:1: ( () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )+ otherlv_5= '}' )
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:233:2: () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )+ otherlv_5= '}'
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:233:1: ( () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )* otherlv_5= '}' )
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:233:2: () otherlv_1= 'feature' ( (otherlv_2= RULE_ID ) ) otherlv_3= '{' ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )* otherlv_5= '}'
             {
             // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:233:2: ()
             // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:234:5: 
@@ -544,8 +539,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
 
                 	newLeafNode(otherlv_3, grammarAccess.getFeatureConfigurationAccess().getLeftCurlyBracketKeyword_3());
                 
-            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:260:1: ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )+
-            int cnt3=0;
+            // ../org.yakindu.sct.generator.genmodel/src-gen/org/yakindu/sct/generator/genmodel/parser/antlr/internal/InternalSGen.g:260:1: ( (lv_parameterValues_4_0= ruleFeatureParameterValue ) )*
             loop3:
             do {
                 int alt3=2;
@@ -590,12 +584,8 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt3 >= 1 ) break loop3;
-                        EarlyExitException eee =
-                            new EarlyExitException(3, input);
-                        throw eee;
+            	    break loop3;
                 }
-                cnt3++;
             } while (true);
 
             otherlv_5=(Token)match(input,16,FOLLOW_16_in_ruleFeatureConfiguration521); 
@@ -1542,7 +1532,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_13_in_ruleGeneratorModel122 = new BitSet(new long[]{0x0000000000004000L});
     public static final BitSet FOLLOW_14_in_ruleGeneratorModel134 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_ruleQID_in_ruleGeneratorModel155 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleGeneratorModel167 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_15_in_ruleGeneratorModel167 = new BitSet(new long[]{0x0000000000010010L});
     public static final BitSet FOLLOW_ruleGeneratorEntry_in_ruleGeneratorModel188 = new BitSet(new long[]{0x0000000000010010L});
     public static final BitSet FOLLOW_16_in_ruleGeneratorModel201 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleGeneratorEntry_in_entryRuleGeneratorEntry237 = new BitSet(new long[]{0x0000000000000000L});
@@ -1556,7 +1546,7 @@ public class InternalSGenParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_EOF_in_entryRuleFeatureConfiguration409 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_17_in_ruleFeatureConfiguration455 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureConfiguration475 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleFeatureConfiguration487 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_15_in_ruleFeatureConfiguration487 = new BitSet(new long[]{0x0000000000010010L});
     public static final BitSet FOLLOW_ruleFeatureParameterValue_in_ruleFeatureConfiguration508 = new BitSet(new long[]{0x0000000000010010L});
     public static final BitSet FOLLOW_16_in_ruleFeatureConfiguration521 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFeatureParameterValue_in_entryRuleFeatureParameterValue557 = new BitSet(new long[]{0x0000000000000000L});

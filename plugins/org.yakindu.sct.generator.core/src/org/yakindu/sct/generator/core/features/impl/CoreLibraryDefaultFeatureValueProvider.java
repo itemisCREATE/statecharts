@@ -12,17 +12,17 @@ package org.yakindu.sct.generator.core.features.impl;
 
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LIBRARY_NAME;
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_TEXT;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_TEXT;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -37,12 +37,12 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 
 	@Override
 	protected void setDefaultValue(FeatureParameterValue parameterValue,
-			Statechart statechart) {
+			EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)) {
 			parameterValue.setValue("src-gen");
 		} else if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)) {
-			parameterValue.setValue(getProject(statechart).getName());
+			parameterValue.setValue(getProject(contextElement).getName());
 		} else if (DEBUG_FEATURE_DUMP_SEXEC.equals(parameterName)) {
 			parameterValue.setValue(false);
 		} else if (LICENSE_TEXT.equals(parameterName)) {

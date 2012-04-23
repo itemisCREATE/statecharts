@@ -35,7 +35,6 @@ import org.yakindu.sct.model.sgen.StringLiteral;
  *
  * @generated
  */
-@SuppressWarnings("restriction")
 public class FeatureParameterValueImpl extends EObjectImpl implements
 		FeatureParameterValue {
 	/**
@@ -188,7 +187,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public String getStringValue() {
-		return ((StringLiteral)expression).getValue();
+		return expression.toString();
 	}
 
 	/**

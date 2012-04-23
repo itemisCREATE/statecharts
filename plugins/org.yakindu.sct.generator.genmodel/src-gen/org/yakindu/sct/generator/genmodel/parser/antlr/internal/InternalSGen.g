@@ -125,7 +125,7 @@ ruleGeneratorModel returns [EObject current=null]
 	    }
 
 )
-)+	otherlv_5='}' 
+)*	otherlv_5='}' 
     {
     	newLeafNode(otherlv_5, grammarAccess.getGeneratorModelAccess().getRightCurlyBracketKeyword_5());
     }
@@ -275,7 +275,7 @@ ruleFeatureConfiguration returns [EObject current=null]
 	    }
 
 )
-)+	otherlv_5='}' 
+)*	otherlv_5='}' 
     {
     	newLeafNode(otherlv_5, grammarAccess.getFeatureConfigurationAccess().getRightCurlyBracketKeyword_5());
     }

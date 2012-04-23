@@ -16,10 +16,10 @@ import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureCo
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -37,10 +37,10 @@ public class GenericJavaLibraryDefaultValueProvider extends
 
 	@Override
 	protected void setDefaultValue(FeatureParameterValue parameterValue,
-			Statechart statechart) {
+			EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (GENERATOR_PROJECT.equals(parameterName)) {
-			parameterValue.setValue(getProject(statechart).getName());
+			parameterValue.setValue(getProject(contextElement).getName());
 		} else if (GENERATOR_CLASS.equals(parameterName)) {
 			parameterValue.setValue("org.yakindu.sct.generator.Generator");
 		}

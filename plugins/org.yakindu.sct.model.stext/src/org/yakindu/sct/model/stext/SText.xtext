@@ -84,7 +84,7 @@ EventDefinition:
 	 (direction=Direction)? 'event' name=ID (':' type=[types::Type|FQN])?;// (derivation=EventDerivation)?;
 
 //EventDerivation:
-//	'=' condition=Expression (':' value=Expression)?;
+//	 (':' value=Expression)?;
 
 enum Direction:
 	LOCAL='local' | IN='in' | OUT='out';

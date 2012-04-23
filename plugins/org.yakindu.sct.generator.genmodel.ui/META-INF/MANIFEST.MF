@@ -34,5 +34,6 @@ Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.generator.genmodel.ui.contentassist.antlr,
+ org.yakindu.sct.generator.genmodel.ui.help,
  org.yakindu.sct.generator.genmodel.ui.internal
 Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator

@@ -25,7 +25,7 @@ public class HelpSystemDocumentationProvider extends
 		AbstractHelpSystemDocumentationProvider implements
 		IEObjectDocumentationProvider {
 
-	private static final String EMPTY_STRING = "";
+	public static final String EMPTY_DOCUMENTATION = "";
 
 	@Override
 	protected String getContextId() {
@@ -49,7 +49,7 @@ public class HelpSystemDocumentationProvider extends
 				return getFeatureTypeDocumentation(type.getName());
 			}
 		}
-		return EMPTY_STRING;
+		return EMPTY_DOCUMENTATION;
 	}
 
 	protected String getFeatureTypeDocumentation(String name) {
@@ -59,6 +59,6 @@ public class HelpSystemDocumentationProvider extends
 		if (beginIndex >= 0 && endIndex >= 0 && endIndex > beginIndex) {
 			return helpContent.substring(beginIndex, endIndex);
 		}
-		return EMPTY_STRING;
+		return EMPTY_DOCUMENTATION;
 	}
 }

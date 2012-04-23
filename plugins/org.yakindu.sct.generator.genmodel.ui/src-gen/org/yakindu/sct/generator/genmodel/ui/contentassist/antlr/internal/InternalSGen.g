@@ -539,16 +539,9 @@ rule__GeneratorModel__Group__4__Impl
     }
 :
 (
-(
-{ before(grammarAccess.getGeneratorModelAccess().getEntriesAssignment_4()); }
-(rule__GeneratorModel__EntriesAssignment_4)
-{ after(grammarAccess.getGeneratorModelAccess().getEntriesAssignment_4()); }
-)
-(
 { before(grammarAccess.getGeneratorModelAccess().getEntriesAssignment_4()); }
 (rule__GeneratorModel__EntriesAssignment_4)*
 { after(grammarAccess.getGeneratorModelAccess().getEntriesAssignment_4()); }
-)
 )
 
 ;
@@ -897,16 +890,9 @@ rule__FeatureConfiguration__Group__4__Impl
     }
 :
 (
-(
-{ before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4()); }
-(rule__FeatureConfiguration__ParameterValuesAssignment_4)
-{ after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4()); }
-)
-(
 { before(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4()); }
 (rule__FeatureConfiguration__ParameterValuesAssignment_4)*
 { after(grammarAccess.getFeatureConfigurationAccess().getParameterValuesAssignment_4()); }
-)
 )
 
 ;

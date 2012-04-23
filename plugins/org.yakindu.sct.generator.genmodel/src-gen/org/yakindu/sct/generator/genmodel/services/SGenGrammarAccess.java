@@ -32,10 +32,10 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		/// **
 		// * @author Andreas Muelder
 		// * / GeneratorModel returns gen::GeneratorModel:
-		//	"GeneratorModel" "for" generatorId=QID "{" entries+=GeneratorEntry+ "}";
+		//	"GeneratorModel" "for" generatorId=QID "{" entries+=GeneratorEntry* "}";
 		public ParserRule getRule() { return rule; }
 
-		//"GeneratorModel" "for" generatorId=QID "{" entries+=GeneratorEntry+ "}"
+		//"GeneratorModel" "for" generatorId=QID "{" entries+=GeneratorEntry* "}"
 		public Group getGroup() { return cGroup; }
 
 		//"GeneratorModel"
@@ -53,7 +53,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//entries+=GeneratorEntry+
+		//entries+=GeneratorEntry*
 		public Assignment getEntriesAssignment_4() { return cEntriesAssignment_4; }
 
 		//GeneratorEntry
@@ -125,10 +125,10 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//FeatureConfiguration returns gen::FeatureConfiguration:
-		//	{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}";
+		//	{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue* "}";
 		public ParserRule getRule() { return rule; }
 
-		//{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}"
+		//{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue* "}"
 		public Group getGroup() { return cGroup; }
 
 		//{gen::FeatureConfiguration}
@@ -149,7 +149,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_3() { return cLeftCurlyBracketKeyword_3; }
 
-		//parameterValues+=FeatureParameterValue+
+		//parameterValues+=FeatureParameterValue*
 		public Assignment getParameterValuesAssignment_4() { return cParameterValuesAssignment_4; }
 
 		//FeatureParameterValue
@@ -397,7 +397,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	/// **
 	// * @author Andreas Muelder
 	// * / GeneratorModel returns gen::GeneratorModel:
-	//	"GeneratorModel" "for" generatorId=QID "{" entries+=GeneratorEntry+ "}";
+	//	"GeneratorModel" "for" generatorId=QID "{" entries+=GeneratorEntry* "}";
 	public GeneratorModelElements getGeneratorModelAccess() {
 		return (pGeneratorModel != null) ? pGeneratorModel : (pGeneratorModel = new GeneratorModelElements());
 	}
@@ -417,7 +417,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureConfiguration returns gen::FeatureConfiguration:
-	//	{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue+ "}";
+	//	{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue* "}";
 	public FeatureConfigurationElements getFeatureConfigurationAccess() {
 		return (pFeatureConfiguration != null) ? pFeatureConfiguration : (pFeatureConfiguration = new FeatureConfigurationElements());
 	}

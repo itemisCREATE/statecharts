@@ -7,7 +7,7 @@
  * Contributors:
  * 	committers of YAKINDU - initial API and implementation
  * 
- */
+ */ 
 package org.yakindu.sct.generator.genmodel.ui.wizard
 
 import org.eclipse.xtext.generator.IGenerator
