@@ -41,6 +41,7 @@ public abstract class AbstractSGenTest {
 	@Inject
 	private Provider<XtextResource> resourceProvider;
 
+	
 	protected EObject parseExpression(String expression, String ruleName) {
 		XtextResource resource = resourceProvider.get();
 		resource.setURI(URI.createPlatformPluginURI("path", true));

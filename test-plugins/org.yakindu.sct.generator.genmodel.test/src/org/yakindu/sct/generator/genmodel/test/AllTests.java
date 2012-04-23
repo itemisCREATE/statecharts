@@ -19,8 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(value = Suite.class)
-@SuiteClasses(value = { SGenJavaValidatorTest.class, SGenParserRuleTest.class,
-		HelpIntegrationTest.class })
+@SuiteClasses(value = { SGenJavaValidatorTest.class, HelpIntegrationTest.class })
 public class AllTests {
 
 }

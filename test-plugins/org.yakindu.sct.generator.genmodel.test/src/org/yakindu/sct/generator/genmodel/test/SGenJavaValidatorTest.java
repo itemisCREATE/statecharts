@@ -14,6 +14,7 @@ import static junit.framework.Assert.fail;
 
 import java.lang.reflect.Method;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -28,6 +29,8 @@ import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.GeneratorModel;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -65,7 +68,11 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void checkContentType() {
-		fail("Implement me");
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { unkownType Example {}}",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate(UNKNOWN_CONTENT_TYPE));
 	}
 
 	/**
@@ -74,42 +81,79 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void checkParameterValueType() {
-		EObject result = parseExpression(
-				"feature Outlet { targetFolder = 'folder' }",
-				FeatureConfiguration.class.getSimpleName());
-		AssertableDiagnostics validate = tester.validate(result);
-		validate.assertOK();
-
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { statechart Example { feature Outlet { targetFolder = true }}}",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate(INCOMPATIBLE_TYPE_STRING_EXPECTED));
 	}
 
+	/**
+	 * @see SGenJavaValidator#checkParameterValue(org.yakindu.sct.model.sgen.FeatureParameterValue)
+	 */
 	@Test
 	public void checkParameterValue() {
-		fail("Implement me");
+		// Nothing to test
 	}
 
+	/**
+	 * @see SGenJavaValidator#checkGeneratorExists(GeneratorModel)
+	 */
 	@Test
 	public void checkGeneratorExists() {
-		fail("Implement me");
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::unknown {}",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate(UNKOWN_GENERATOR));
 	}
 
+	/**
+	 * @see SGenJavaValidator#checkDuplicateGeneratorEntryFeature(FeatureConfiguration)
+	 */
 	@Test
 	public void checkDuplicateGeneratorEntryFeature() {
-		fail("Implement me");
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { statechart Example { feature Outlet { } feature Outlet { }}}",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate(DUPLICATE_FEATURE));
 	}
 
+	/**
+	 * @see SGenJavaValidator#checkDuplicateFeatureParameter(org.yakindu.sct.model.sgen.FeatureParameterValue)
+	 */
 	@Test
 	public void checkDuplicateFeatureParameter() {
-		fail("Implement me");
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { statechart Example { feature Outlet { targetFolder = true  targetFolder = true }}}",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate(DUPLICATE_PARAMETER));
 	}
 
+	/**
+	 * @see SGenJavaValidator#checkRequiredFeatures(org.yakindu.sct.model.sgen.GeneratorEntry)
+	 */
 	@Test
 	public void checkRequiredFeatures() {
-		fail("Implement me");
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { statechart Example {}}",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate(MISSING_REQUIRED_FEATURE));
 	}
 
+	/**
+	 * @see SGenJavaValidator#checkRequiredParameters(FeatureConfiguration)
+	 */
 	@Test
 	public void checkRequiredParameters() {
-		fail("Implement me");
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { statechart Example { feature Outlet {}}}",
+				GeneratorModel.class.getSimpleName());
+		AssertableDiagnostics result = tester.validate(model);
+		result.assertAny(new MsgPredicate(MISSING_REQUIRED_PARAMETER));
 	}
 
 	/**
@@ -133,5 +177,20 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 						+ checkMethod.getName());
 			}
 		}
+	}
+
+	public static final class MsgPredicate implements
+			AssertableDiagnostics.DiagnosticPredicate {
+
+		private final String msg;
+
+		public MsgPredicate(String msg) {
+			this.msg = msg;
+		}
+
+		public boolean apply(Diagnostic input) {
+			return input.getMessage().contains(msg);
+		}
+
 	}
 }
