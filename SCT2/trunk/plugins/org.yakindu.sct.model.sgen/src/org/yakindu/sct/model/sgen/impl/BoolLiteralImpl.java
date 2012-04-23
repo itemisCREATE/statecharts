@@ -16,23 +16,23 @@ import org.yakindu.sct.model.sgen.BoolLiteral;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Bool Literal</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>Bool Literal</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.sgen.impl.BoolLiteralImpl#isValue <em>Value</em>}</li>
+ * <li>{@link org.yakindu.sct.model.sgen.impl.BoolLiteralImpl#isValue <em>Value
+ * </em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class BoolLiteralImpl extends LiteralImpl implements BoolLiteral {
 	/**
 	 * The default value of the '{@link #isValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isValue()
 	 * @generated
 	 * @ordered
@@ -41,8 +41,8 @@ public class BoolLiteralImpl extends LiteralImpl implements BoolLiteral {
 
 	/**
 	 * The cached value of the '{@link #isValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #isValue()
 	 * @generated
 	 * @ordered
@@ -50,8 +50,8 @@ public class BoolLiteralImpl extends LiteralImpl implements BoolLiteral {
 	protected boolean value = VALUE_EDEFAULT;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected BoolLiteralImpl() {
@@ -59,8 +59,8 @@ public class BoolLiteralImpl extends LiteralImpl implements BoolLiteral {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -69,8 +69,8 @@ public class BoolLiteralImpl extends LiteralImpl implements BoolLiteral {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean isValue() {
@@ -78,89 +78,84 @@ public class BoolLiteralImpl extends LiteralImpl implements BoolLiteral {
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setValue(boolean newValue) {
 		boolean oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGenPackage.BOOL_LITERAL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET,
+					SGenPackage.BOOL_LITERAL__VALUE, oldValue, value));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SGenPackage.BOOL_LITERAL__VALUE:
-				return isValue();
+		case SGenPackage.BOOL_LITERAL__VALUE:
+			return isValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SGenPackage.BOOL_LITERAL__VALUE:
-				setValue((Boolean)newValue);
-				return;
+		case SGenPackage.BOOL_LITERAL__VALUE:
+			setValue((Boolean) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SGenPackage.BOOL_LITERAL__VALUE:
-				setValue(VALUE_EDEFAULT);
-				return;
+		case SGenPackage.BOOL_LITERAL__VALUE:
+			setValue(VALUE_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SGenPackage.BOOL_LITERAL__VALUE:
-				return value != VALUE_EDEFAULT;
+		case SGenPackage.BOOL_LITERAL__VALUE:
+			return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
+		return String.valueOf(value);
 	}
 
-} //BoolLiteralImpl
+} // BoolLiteralImpl

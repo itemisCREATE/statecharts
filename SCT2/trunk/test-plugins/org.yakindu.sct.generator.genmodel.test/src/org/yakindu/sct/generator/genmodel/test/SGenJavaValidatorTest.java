@@ -14,8 +14,10 @@ import static junit.framework.Assert.fail;
 
 import java.lang.reflect.Method;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
 import org.eclipse.xtext.validation.Check;
 import org.junit.After;
@@ -25,6 +27,7 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
+import org.yakindu.sct.model.sgen.FeatureConfiguration;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -57,14 +60,26 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 		tester = null;
 	}
 
+	/**
+	 * @see SGenJavaValidator#checkContentType(org.yakindu.sct.model.sgen.GeneratorEntry)
+	 */
 	@Test
 	public void checkContentType() {
 		fail("Implement me");
 	}
 
+	/**
+	 * @see SGenJavaValidator#checkParameterValueType(org.yakindu.sct.model.sgen.FeatureParameterValue)
+	 * 
+	 */
 	@Test
 	public void checkParameterValueType() {
-		fail("Implement me");
+		EObject result = parseExpression(
+				"feature Outlet { targetFolder = 'folder' }",
+				FeatureConfiguration.class.getSimpleName());
+		AssertableDiagnostics validate = tester.validate(result);
+		validate.assertOK();
+
 	}
 
 	@Test

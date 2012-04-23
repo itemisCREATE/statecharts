@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.generator.genmodel;
 
+import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 
@@ -25,5 +27,9 @@ public class SGenRuntimeModule extends
 		return SimpleNameProvider.class;
 	}
 
+	@Override
+	public Class<? extends ILinker> bindILinker() {
+		return Linker.class;
+	}
 
 }

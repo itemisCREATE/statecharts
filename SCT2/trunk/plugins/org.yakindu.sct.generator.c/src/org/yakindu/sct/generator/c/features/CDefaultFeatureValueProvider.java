@@ -12,10 +12,10 @@ package org.yakindu.sct.generator.c.features;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -31,8 +31,8 @@ public class CDefaultFeatureValueProvider extends
 
 	@Override
 	protected void setDefaultValue(FeatureParameterValue parameterValue,
-			Statechart statechart) {
-		//TODO: Implement my default properties
+			EObject contextElement) {
+		// TODO: Implement my default properties
 	}
 
 	public IStatus validateParameterValue(FeatureParameterValue value) {

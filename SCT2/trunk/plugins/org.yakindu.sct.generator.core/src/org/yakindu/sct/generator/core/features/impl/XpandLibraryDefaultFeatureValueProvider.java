@@ -16,10 +16,10 @@ import static org.yakindu.sct.generator.core.features.IXpandFeatureConstants.TEM
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -37,14 +37,14 @@ public class XpandLibraryDefaultFeatureValueProvider extends
 
 	@Override
 	protected void setDefaultValue(final FeatureParameterValue parameterValue,
-			final Statechart statechart) {
+			final EObject contextElement) {
 		String parameterName = parameterValue.getParameter().getName();
 		if (TEMPLATE_FEATURE_TEMPLATE_PATH.equals(parameterName)) {
 			parameterValue
 					.setValue("org::yakindu::sct::generator::xpand::Main::main");
 		}
 		if (TEMPLATE_FEATURE_TEMPLATE_PROJECT.equals(parameterName)) {
-			parameterValue.setValue(getProject(statechart).getName());
+			parameterValue.setValue(getProject(contextElement).getName());
 		}
 	}
 

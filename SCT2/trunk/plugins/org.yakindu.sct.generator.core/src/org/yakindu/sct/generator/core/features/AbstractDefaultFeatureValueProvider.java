@@ -16,13 +16,13 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.GeneratorActivator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.SGenFactory;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -35,16 +35,17 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 	protected static final SGenFactory factory = SGenFactory.eINSTANCE;
 
 	protected abstract void setDefaultValue(
-			FeatureParameterValue parameterValue, Statechart statechart);
+			FeatureParameterValue parameterValue, EObject contextElement);
 
 	public final FeatureConfiguration createDefaultFeatureConfiguration(
-			FeatureType type, Statechart statechart) {
+			FeatureType type, EObject contextElement) {
 		FeatureConfiguration config = createConfiguration(type);
 		EList<FeatureParameter> parameters = type.getParameters();
 		for (FeatureParameter parameter : parameters) {
 			FeatureParameterValue parameterValue = createParameterValue(
-					parameter, statechart);
-			if (parameterValue != null && parameterValue.getExpression() != null) {
+					parameter, contextElement);
+			if (parameterValue != null
+					&& parameterValue.getExpression() != null) {
 				config.getParameterValues().add(parameterValue);
 			}
 		}
@@ -52,11 +53,11 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 	}
 
 	protected FeatureParameterValue createParameterValue(
-			FeatureParameter parameter, Statechart statechart) {
+			FeatureParameter parameter, EObject contextElement) {
 		FeatureParameterValue parameterValue = factory
 				.createFeatureParameterValue();
 		parameterValue.setParameter(parameter);
-		setDefaultValue(parameterValue, statechart);
+		setDefaultValue(parameterValue, contextElement);
 		return parameterValue;
 	}
 
@@ -67,15 +68,15 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 	}
 
 	/**
-	 * get the {@link IProject} containing the given {@link Statechart}
+	 * get the {@link IProject} containing the given {@link EObject}
 	 * 
 	 */
-	protected IProject getProject(Statechart statechart) {
+	protected IProject getProject(EObject contextElement) {
 		return ResourcesPlugin
 				.getWorkspace()
 				.getRoot()
 				.getFile(
-						new Path(statechart.eResource().getURI()
+						new Path(contextElement.eResource().getURI()
 								.toPlatformString(true))).getProject();
 	}
 

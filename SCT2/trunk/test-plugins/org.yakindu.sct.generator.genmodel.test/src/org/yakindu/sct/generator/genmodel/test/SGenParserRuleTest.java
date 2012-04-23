@@ -10,12 +10,15 @@
  */
 package org.yakindu.sct.generator.genmodel.test;
 
+import static junit.framework.Assert.fail;
+
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
+import org.yakindu.sct.model.sgen.GeneratorModel;
 
 /**
  * 
@@ -28,11 +31,11 @@ public class SGenParserRuleTest extends AbstractSGenTest {
 
 	/**
 	 * GeneratorModel returns gen::GeneratorModel: 'GeneratorModel' 'for'
-	 * generatorId=QID '{' (entries+=GeneratorEntry)+ '}';
+	 * generatorId=QID '{' (entries+=GeneratorEntry)* '}';
 	 */
 	@Test
 	public void testGeneratorModel() {
-
+		parseExpression("GeneratorModel for yakindu::java { }", GeneratorModel.class.getSimpleName());
 	}
 
 	/**
@@ -42,7 +45,7 @@ public class SGenParserRuleTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void testGeneratorEntry() {
-
+		fail("Implement me");
 	}
 
 	/**
@@ -52,7 +55,7 @@ public class SGenParserRuleTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void testFeatureConfiguration() {
-
+		fail("Implement me");
 	}
 
 	/**
@@ -62,7 +65,7 @@ public class SGenParserRuleTest extends AbstractSGenTest {
 	 */
 	@Test
 	public void testFeatureParameterValue() {
-
+		fail("Implement me");
 	}
 
 }

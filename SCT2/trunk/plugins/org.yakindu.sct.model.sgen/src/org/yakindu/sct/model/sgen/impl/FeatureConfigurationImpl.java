@@ -126,6 +126,8 @@ public class FeatureConfigurationImpl extends EObjectImpl implements
 	 * @generated NOT
 	 */
 	public FeatureParameterValue getParameterValue(String parameterName) {
+		if(parameterValues == null)
+			return null;
 		for (FeatureParameterValue value : parameterValues) {
 			if (value.getParameter().getName() != null
 					&& value.getParameter().getName().equals(parameterName)) {

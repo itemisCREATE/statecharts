@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * Test that checks if all Generator Features have a corresponding documentation
+ * Checks if all Generator Features have a corresponding documentation
  * section in the user guide.
  * 
  * @author andreas muelder - Initial contribution and API

@@ -12,9 +12,8 @@ package org.yakindu.sct.generator.java.features;
 
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.BASE_PACKAGE;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.IMPLEMENTATION_SUFFIX;
-import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_NAME;
 import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.JAVA_KEYWORDS;
-import org.yakindu.sct.generator.java.features.JavaFeatureConstants;
+import static org.yakindu.sct.generator.java.features.IJavaFeatureConstants.LIBRARY_NAME;
 
 import java.util.Arrays;
 import java.util.regex.Matcher;
@@ -22,10 +21,10 @@ import java.util.regex.Pattern;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -40,10 +39,10 @@ public class JavaFeatureValueProvider extends
 
 	@Override
 	protected void setDefaultValue(FeatureParameterValue parameterValue,
-			Statechart statechart) {
+			EObject contextElement) {
 		if (parameterValue.getParameter().getName().equals(BASE_PACKAGE)) {
-			parameterValue.setValue("org.yakindu.sct."
-					+ JavaFeatureConstants.getValidStatemachineName(statechart.getName()));
+			parameterValue.setValue("org.yakindu.sct");
+					//+ JavaFeatureConstants.getValidStatemachineName(statechart.getName()));
 		} else if (parameterValue.getParameter().getName()
 				.equals(IMPLEMENTATION_SUFFIX)) {
 			parameterValue.setValue("impl");
