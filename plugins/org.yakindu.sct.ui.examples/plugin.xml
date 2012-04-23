@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.yakindu.sct.ui.Examples" 
+				  name="YAKINDU Examples" 
+				  parentCategory="org.eclipse.ui.Examples" />
+	</extension>
+
+	<!-- org.yakindu.sct.example.trafficlight -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.yakindu.sct.example.trafficlight" 
+			name="Trafficlight Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.yakindu.sct.ui.Examples"
+			icon="icons/logo-16.png" 
+			project="true">
+			<description>A hands-on tutorial to try out The YAKINDU Statechart Tools</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.yakindu.sct.example.trafficlight" pageImage="icons/logo-16.png">
+		 <projectDescriptor name="org.yakindu.sct.examples.trafficlight" contentURI="contents/org.yakindu.sct.examples.trafficlight.zip" description="Trafficlight example with java generated source code"/>
+	  </example>
+   </extension>
+</plugin>
