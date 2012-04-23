@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Trafficlight
-Bundle-SymbolicName: org.yakindu.sct.examples.generator.java.trafficlight
+Bundle-SymbolicName: org.yakindu.sct.examples.trafficlight
 Bundle-Version: 1.0.0.qualifier
 Export-Package: org.yakindu.sct.examples.java.trafficlight,
  org.yakindu.sct.runtime.java,
