@@ -96,6 +96,8 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 						FeatureConfiguration configuration = EcoreUtil2
 								.getContainerOfType(context,
 										FeatureConfiguration.class);
+						if(configuration == null || configuration.getType() == null)
+							return false;
 						String featureName = configuration.getType().getName();
 						if (featureName == null) {
 							return false;
