@@ -241,6 +241,7 @@
 		<module>../org.yakindu.sct.doc.user</module>
 		<module>../org.yakindu.sct.generator.core</module>
 		<module>../org.yakindu.sct.generator.genmodel</module>
+		<module>../org.yakindu.sct.generator.genmodel.test</module>
 		<module>../org.yakindu.sct.generator.genmodel.ui</module>
 		<module>../org.yakindu.sct.model.sexec</module>
 		<module>../org.yakindu.sct.model.sexec.edit</module>
@@ -262,6 +263,7 @@
 		<module>../org.yakindu.sct.simulation.ui</module>
 		<module>../org.yakindu.sct.ui</module>
 		<module>../org.yakindu.sct.ui.editor</module>
+		<module>../org.yakindu.sct.ui.examples</module>
 		<module>../org.yakindu.sct.ui.integration.stext</module>
 		<module>../org.yakindu.sct.ui.navigator</module>
 		<module>../org.yakindu.sct-feature</module>
