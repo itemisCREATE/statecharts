@@ -116,17 +116,17 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 		assertIsActive("B");
 		assertVarValue("MyInterface.myInt", 42);
 	}
-//	@Test
-//	public void testStatechartLocalReactionsCall() throws Exception {
-//		loadAndconfigureInterpreter(models.createStatechartLocalReactionsModel());
-//		assertIsActive("S1");
-//		assertVarValue("myInt", 0);
-//		interpreter.runCycle();
-//		assertVarValue("myInt", 1);
-//		interpreter.runCycle();
-//		assertVarValue("myInt", 2);
-//		interpreter.runCycle();
-//		assertVarValue("myInt", 3);
-//	}
+	@Test
+	public void testStatechartLocalReactionsCall() throws Exception {
+		loadAndconfigureInterpreter(models.createStatechartLocalReactionsModel());
+		assertIsActive("S1");
+		assertVarValue("myInt", 0);
+		interpreter.runCycle();
+		assertVarValue("myInt", 1);
+		interpreter.runCycle();
+		assertVarValue("myInt", 2);
+		interpreter.runCycle();
+		assertVarValue("myInt", 3);
+	}
 
 }
