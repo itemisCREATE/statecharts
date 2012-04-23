@@ -10,20 +10,18 @@
  */
 package org.yakindu.sct.generator.genmodel.test.util;
 
-import org.eclipse.xtext.junit4.IInjectorProvider;
-
-import com.google.inject.Guice;
-import com.google.inject.Injector;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.yakindu.sct.generator.genmodel.SGenRuntimeModule;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SGenInjectorProvider implements IInjectorProvider {
+public class SGenTestRuntimeModule extends SGenRuntimeModule {
 
-	public Injector getInjector() {
-		return Guice.createInjector(new SGenTestRuntimeModule());
+	@Override
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return SGenTestScopeProvider.class;
 	}
-
 }

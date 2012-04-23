@@ -33,6 +33,7 @@ Export-Package: org.yakindu.sct.generator.genmodel,
  org.yakindu.sct.generator.genmodel.parser.antlr,
  org.yakindu.sct.generator.genmodel.parser.antlr.internal,
  org.yakindu.sct.generator.genmodel.resource,
+ org.yakindu.sct.generator.genmodel.scoping,
  org.yakindu.sct.generator.genmodel.serializer,
  org.yakindu.sct.generator.genmodel.services,
  org.yakindu.sct.generator.genmodel.validation

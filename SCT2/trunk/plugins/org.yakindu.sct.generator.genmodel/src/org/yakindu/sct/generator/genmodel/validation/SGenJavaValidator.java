@@ -54,6 +54,17 @@ import com.google.common.collect.Lists;
  */
 public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
+	public static final String MISSING_REQUIRED_PARAMETER = "Missing required Parameter";
+	public static final String MISSING_REQUIRED_FEATURE = "Missing required feature";
+	public static final String DUPLICATE_PARAMETER = "Duplicate parameter!";
+	public static final String DUPLICATE_FEATURE = "Duplicate feature!";
+	public static final String UNKOWN_GENERATOR = "Unkown Generator";
+	public static final String INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED = "Incompatible type, Boolean expected";
+	public static final String INCOMPATIBLE_TYPE_INTEGER_EXPECTED = "Incompatible type, Integer expected";
+	public static final String INCOMPATIBLE_TYPE_FLOAT_EXPECTED = "Incompatible type, Float expected";
+	public static final String INCOMPATIBLE_TYPE_STRING_EXPECTED = "Incompatible type, String expected";
+	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
+
 	@Check
 	public void checkContentType(GeneratorEntry entry) {
 		GeneratorModel generatorModel = EcoreUtil2.getContainerOfType(entry,
@@ -65,7 +76,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			return;
 		}
 		if (!contentType.equals(descriptor.getContentType())) {
-			error("Unknown content type '" + contentType + "'",
+			error(UNKNOWN_CONTENT_TYPE + contentType + "'",
 					SGenPackage.Literals.GENERATOR_ENTRY__CONTENT_TYPE);
 		}
 	}
@@ -81,22 +92,22 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		switch (parameterType) {
 		case BOOLEAN:
 			if (!(value instanceof BoolLiteral))
-				error("Incompatible type, Boolean expected",
+				error(INCOMPATIBLE_TYPE_BOOLEAN_EXPECTED,
 						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case INTEGER:
 			if (!(value instanceof IntLiteral))
-				error("Incompatible type, Integer expected",
+				error(INCOMPATIBLE_TYPE_INTEGER_EXPECTED,
 						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case FLOAT:
 			if (!(value instanceof RealLiteral))
-				error("Incompatible type, Float expected",
+				error(INCOMPATIBLE_TYPE_FLOAT_EXPECTED,
 						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		case STRING:
 			if (!(value instanceof StringLiteral))
-				error("Incompatible type, String expected",
+				error(INCOMPATIBLE_TYPE_STRING_EXPECTED,
 						SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 			break;
 		}
@@ -133,7 +144,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			GeneratorExtensions.getGeneratorDescriptorForId(model
 					.getGeneratorId());
 		} catch (NoSuchElementException e) {
-			error(String.format("Unkown Generator %s!", model.getGeneratorId()),
+			error(String.format(UNKOWN_GENERATOR + " %s!",
+					model.getGeneratorId()),
 					SGenPackage.Literals.GENERATOR_MODEL__GENERATOR_ID);
 		}
 	}
@@ -150,7 +162,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 					}
 				});
 		if (Iterables.size(filter) > 1) {
-			error("Duplicate feature!",
+			error(DUPLICATE_FEATURE,
 					SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
 		}
 
@@ -168,7 +180,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 					}
 				});
 		if (Iterables.size(filter) > 1) {
-			error("Duplicate parameter!",
+			error(DUPLICATE_PARAMETER,
 					SGenPackage.Literals.FEATURE_PARAMETER_VALUE__PARAMETER);
 		}
 	}
@@ -189,7 +201,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		}
 		for (FeatureType featureType : requiredFeatures) {
 			if (!configuredTypes.contains(featureType.getName()))
-				error(String.format("Missing required feature %s",
+				error(String.format(MISSING_REQUIRED_FEATURE + " %s",
 						featureType.getName()),
 						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
 		}
@@ -220,7 +232,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		}
 		for (String string : requiredParameters) {
 			if (!configuredParameters.contains(string))
-				error(String.format("Missing required Parameter %s", string),
+				error(String.format(MISSING_REQUIRED_PARAMETER + " %s", string),
 						SGenPackage.Literals.FEATURE_CONFIGURATION__TYPE);
 		}
 	}

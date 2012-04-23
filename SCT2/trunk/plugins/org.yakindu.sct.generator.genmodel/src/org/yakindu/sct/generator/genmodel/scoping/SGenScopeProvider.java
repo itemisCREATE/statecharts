@@ -65,7 +65,7 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 		return super.getScope(context, reference);
 	}
 
-	private IScope scope_GeneratorEntry_elementRef(final EObject context,
+	protected IScope scope_GeneratorEntry_elementRef(final EObject context,
 			final EReference reference) {
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil2
 				.getRootContainer(context);
@@ -82,7 +82,7 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 				});
 	}
 
-	private IScope scope_Parameter(final EObject context, EReference reference) {
+	protected IScope scope_Parameter(final EObject context, EReference reference) {
 		IScope libraryScope = getLibraryScope(context.eResource());
 		return new FilteringScope(libraryScope,
 				new Predicate<IEObjectDescription>() {
@@ -109,7 +109,7 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 				});
 	}
 
-	private IScope scope_Type(EObject context, EReference reference) {
+	protected IScope scope_Type(EObject context, EReference reference) {
 		IScope libraryScope = getLibraryScope(context.eResource());
 		return new FilteringScope(libraryScope,
 				new Predicate<IEObjectDescription>() {
@@ -120,7 +120,7 @@ public class SGenScopeProvider extends XbaseScopeProvider {
 				});
 	}
 
-	private SimpleScope getLibraryScope(Resource resource) {
+	protected SimpleScope getLibraryScope(Resource resource) {
 		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil
 				.getObjectByType(resource.getContents(),
 						SGenPackage.Literals.GENERATOR_MODEL);
