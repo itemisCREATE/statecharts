@@ -1,25 +1,11 @@
-	GeneratorModel for yakindu::java {
+GeneratorModel for yakindu::java {
 	statechart TrafficLightWaiting {
-
+		
 		feature Outlet {
-			targetProject = "org.yakindu.sct.examples.generator.java.trafficlight"
+			targetProject = "org.yakindu.sct.examples.trafficlight"
 			targetFolder = "src-gen"
 		}
 
-		feature licenseHeader {
-			licenseText = 
-"
-Copyright (c) 2011 committers of YAKINDU and others. 
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
- 
-Contributors:
-	committers of YAKINDU - initial API and implementation
-"
-		}
-		
 		feature GeneralFeatures {
 			EventBasedStatemachine = true
 			InterfaceObserverSupport = false
@@ -27,14 +13,6 @@ Contributors:
 			RuntimeService = true
 		}
 
-		//create a dump file of execution model (sexec)
-		//This feature is disabled by default if it's not declared explicit in a generator model.
-		feature Debug {
-			dumpSexec = false
-		}
-
-		//This feature reduces the amount of generated methods.
-		//The FunctionInlining is enabled by default if it's not declared explicit in a generator model.
 		feature FunctionInlining {
 			inlineChoices = true
 			inlineEnterSequences = true
