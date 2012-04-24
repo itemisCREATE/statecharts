@@ -91,7 +91,6 @@ public class LocalReactionItemProvider
       super.getChildrenFeatures(object);
       childrenFeatures.add(SGraphPackage.Literals.REACTION__TRIGGER);
       childrenFeatures.add(SGraphPackage.Literals.REACTION__EFFECT);
-      childrenFeatures.add(StextPackage.Literals.LOCAL_REACTION__PROPERTIES);
     }
     return childrenFeatures;
   }
@@ -153,7 +152,6 @@ public class LocalReactionItemProvider
     {
       case StextPackage.LOCAL_REACTION__TRIGGER:
       case StextPackage.LOCAL_REACTION__EFFECT:
-      case StextPackage.LOCAL_REACTION__PROPERTIES:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
         return;
     }
@@ -181,11 +179,6 @@ public class LocalReactionItemProvider
       (createChildParameter
         (SGraphPackage.Literals.REACTION__EFFECT,
          StextFactory.eINSTANCE.createReactionEffect()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.LOCAL_REACTION__PROPERTIES,
-         StextFactory.eINSTANCE.createReactionProperties()));
   }
 
   /**
