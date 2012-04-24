@@ -85,6 +85,8 @@ p. The [GeneratorId] is the unique id of the Generator. Yakindu Statechart Tools
 # yakindu::java - Generator ID for the Java Code Generator 
 # yakindu::c - Generator ID for the C Code Generator
 # yakindu::cpp - Generator ID for the C++ Code Generator
+# yakindu::xpand - Generator ID for custom Xpand based Code Generators
+# yakindu::generic - Generator ID for custom Java based Code Generators  
 
 p. One GeneratorModel can contain several [StatechartReference]s. These are crossreference to statechart models for which the code should be generated. 
 For each referenced Statechart, the generator process can be configured with [Feature]s. Each Feature consists of several parameters. These parameters can be configured with [ParameterName] = [ParameterValue].
@@ -176,4 +178,48 @@ TBD
 h2. C Generator Fetures
 TBD
 
+h2. Create Custom Code Generators
+
+YAKINDU Statechart Tools provides a rich feature set to supports custom code generators out of the box. 
+These code generators can be either written in Java, "Xtend":http://www.eclipse.org/xtend/ or in "Xpand":http://www.eclipse.org/modeling/m2t/?project=xpand
+ 
+h3. Writing a custom code generator with Xtend2/Java
+
+First, you have to create a new Xtend2 generator project. Click *File* > *New* > *Other...* > *YAKINDU* > *YAKINDU Xtend2/Java Generator Project* to create a new Xtend2 Generator Project. 
+
+!images/xtendGenerator.png!
+
+The wizards asks for a *Project name* and the name of the *Generator class*, where you have to specify a full qualified class name. If you check the *Use Xtend* checkbox, the Generator class will be initially created as an xtend class. Otherwise, Java will be used for the generator.
+
+The check box *Configure for Plugin Export* adds all required extension point registrations to the new project that it can be exported as a plugin and deployed in different SCT2 installations.The Generator Model can refer to the new Generator Plugin via its unique *Generator ID*. If you want to contribute custom Generator Features for your Code Generator, check the *Create Feature Library* check box.  
+
+After a click on *Finish* a new project is created in your workspace. All required plugin dependencies and extension points are registered and you can start to write your code generator based on the ExecutionFlow meta model [Link].
+
+h3. Executing a custom Xtend2/Java code generator
+
+If you have configured your plugin for Plugin Export, you could use eclipse export wizard to create a deployable plugin and copy it to your plugins folder of your eclipse installation. You can refer to your plugin via its unique generator id from your Generator Model.
+Since this is not very convenient, YAKINDU provides a way to execute your generator while you are developing it.
+Therefore, you have to Create a new *Generator Model* with the generator id *yakindu::generic*, either by using the *New Statechart Generator Model* wizard or by simple creating a new text file with the file extension *.sgen*. the following feature allows to configure your code generator.
+
+h4. Generator
+
+The *Generator* feature allows the configuration of a custom code generator located in the workspace and written in Java or another JVM language. It is a *required* feature and consists of the following parameters:
+# __generatorProject__  (String): The name of the generator project   
+# __generatorClass__  (String): The name of the code generator class.
+
+Example configuration:
+
+bc.. 
+feature Generator {
+	generatorProject = "org.yakindu.sct.mygenerator"
+	generatorClass = "org.yakindu.sct.MyGenerator"
 }
+		
+p. ==<!-- End Generator -->==
+
+
+
+
+
+
+
