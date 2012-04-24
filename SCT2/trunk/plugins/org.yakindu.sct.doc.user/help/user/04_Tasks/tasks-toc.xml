@@ -19,5 +19,8 @@ TBD"></topic>
 		</topic>
 		<topic href="help/user/04_Tasks/tasks.html#CGeneratorFetures" label="C Generator Fetures
 TBD"></topic>
+		<topic href="help/user/04_Tasks/tasks.html#CreateCustomCodeGenerators" label="Create Custom Code Generators">
+			<topic href="help/user/04_Tasks/tasks.html#HowtowriteacustomcodegeneratorwithXtend2Java" label="How to write a custom code generator with Xtend2/Java"></topic>
+		</topic>
 	</topic>
 </toc>
