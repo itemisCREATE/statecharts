@@ -65,9 +65,9 @@ String getInterfaceName(EventRaisingExpression event) :
 	"interface" + (( ((InterfaceScope)event.event.getEvent().eContainer).name == null)?"":((InterfaceScope)event.event.getEvent().eContainer).name.toFirstUpper());
 
 EventDefinition getEvent(Expression e) : null;
-EventDefinition getEvent(base::NamedElement e) : null;
+EventDefinition getEvent(ecore::EObject e) : null;
 EventDefinition getEvent(FeatureCall this) : feature.getEvent();
-EventDefinition getEvent(TypedElementReferenceExpression this) : reference.getEvent();
+EventDefinition getEvent(ElementReferenceExpression this) : reference.getEvent();
 EventDefinition getEvent(EventDefinition this) : this;
 
 String addValue(EventRaisingExpression event) :
@@ -104,8 +104,8 @@ String toCppCode(NumericalMultiplyDivideExpression expression) :
   	expression.leftOperand.toCppCode() + getOperator(expression.operator) + expression.rightOperand.toCppCode();
 
 // is this just relevant for events?
-String toCppCode(TypedElementReferenceExpression ev) :
-    " eventSet.check( ev_" + ev.reference.name.toLowerCase() + ") ";
+String toCppCode(ElementReferenceExpression ev) :
+    " eventSet.check( ev_" + ev.reference.name().toLowerCase() + ") ";
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {

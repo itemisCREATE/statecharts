@@ -112,8 +112,8 @@ take_«this.step.name -»()
 «ENDDEFINE»
 
 
-«DEFINE code FOR TypedElementReferenceExpression -»
-«this.reference.name -»
+«DEFINE code FOR ElementReferenceExpression -»
+«this.reference-»
 «ENDDEFINE»
 
 

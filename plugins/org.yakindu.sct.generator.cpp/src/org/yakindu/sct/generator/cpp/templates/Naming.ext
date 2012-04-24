@@ -2,17 +2,19 @@ import stext;
 import sexec;
 import ecore;
 import sgraph;
+import base;
 
 //TODO Workaround for error in Typesystem
 String name(Declaration this) : this.metaType.getProperty("name").toString();
 String name(Vertex this) : this.metaType.getProperty("name").toString();
+String name(EObject this): this.metaType.getProperty("name").toString();
 
 String name(Expression this):
 	"/*Name of "+this+"*/";
 String name(FeatureCall this):
-	feature.name;
-String name(TypedElementReferenceExpression this):
-	reference.name;
+	feature.name();
+String name(ElementReferenceExpression this):
+	reference.name();
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
 
