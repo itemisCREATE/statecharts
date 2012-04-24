@@ -766,7 +766,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	}
 
 	private Scope createValuedEventsScope() {
-		return createInternalScope("internal: var myBool : boolean event intEvent : integer = 22 event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void");
+		return createInternalScope("internal: var myBool : boolean event intEvent : integer  event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void");
 	}
 
 	protected Type getType(String expression) {
