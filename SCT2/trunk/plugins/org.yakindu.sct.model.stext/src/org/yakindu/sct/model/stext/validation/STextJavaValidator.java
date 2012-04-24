@@ -74,6 +74,7 @@ import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
  */
 public class STextJavaValidator extends AbstractSTextJavaValidator {
 
+	public static final String CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION = "A choice should have one outgoing default transition";
 	public static final String FEATURE_CALL_HAS_NO_EFFECT = "FeatureCall has no effect";
 	public static final String ENTRY_EXIT_TRIGGER_NOT_ALLOWED = "Entry/Exit trigger not allowed";
 	public static final String LOCAL_REACTIONS_NOT_ALLOWED = "Local reactions not allowed";
@@ -389,7 +390,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				found = true;
 		}
 		if (!found)
-			warning("A choice should have one outgoing default transition",
+			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION,
 					SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 	}
 
