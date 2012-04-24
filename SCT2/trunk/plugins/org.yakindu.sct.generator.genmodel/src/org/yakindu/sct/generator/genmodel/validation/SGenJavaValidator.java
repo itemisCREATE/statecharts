@@ -54,6 +54,7 @@ import com.google.common.collect.Lists;
  */
 public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
+	// Error messages
 	public static final String MISSING_REQUIRED_PARAMETER = "Missing required Parameter";
 	public static final String MISSING_REQUIRED_FEATURE = "Missing required feature";
 	public static final String DUPLICATE_PARAMETER = "Duplicate parameter!";
@@ -64,6 +65,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String INCOMPATIBLE_TYPE_FLOAT_EXPECTED = "Incompatible type, Float expected";
 	public static final String INCOMPATIBLE_TYPE_STRING_EXPECTED = "Incompatible type, String expected";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
+	//Failure codes
+	public static final String CODE_REQUIRED_FEATURE = "code_req_feature";
 
 	@Check
 	public void checkContentType(GeneratorEntry entry) {
@@ -203,7 +206,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			if (!configuredTypes.contains(featureType.getName()))
 				error(String.format(MISSING_REQUIRED_FEATURE + " %s",
 						featureType.getName()),
-						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF);
+						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,CODE_REQUIRED_FEATURE, featureType.getName());
 		}
 	}
 
