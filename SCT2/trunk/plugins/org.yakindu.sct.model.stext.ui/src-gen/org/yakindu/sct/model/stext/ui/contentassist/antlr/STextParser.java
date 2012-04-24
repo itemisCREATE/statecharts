@@ -89,7 +89,6 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getLocalReactionAccess().getGroup(), "rule__LocalReaction__Group__0");
 					put(grammarAccess.getLocalReactionAccess().getGroup_1(), "rule__LocalReaction__Group_1__0");
 					put(grammarAccess.getLocalReactionAccess().getGroup_1_0(), "rule__LocalReaction__Group_1_0__0");
-					put(grammarAccess.getLocalReactionAccess().getGroup_2(), "rule__LocalReaction__Group_2__0");
 					put(grammarAccess.getTransitionReactionAccess().getGroup(), "rule__TransitionReaction__Group__0");
 					put(grammarAccess.getTransitionReactionAccess().getGroup_2(), "rule__TransitionReaction__Group_2__0");
 					put(grammarAccess.getTransitionReactionAccess().getGroup_3(), "rule__TransitionReaction__Group_3__0");
@@ -183,7 +182,6 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getExitpointAccess().getNameAssignment_2(), "rule__Exitpoint__NameAssignment_2");
 					put(grammarAccess.getLocalReactionAccess().getTriggerAssignment_0(), "rule__LocalReaction__TriggerAssignment_0");
 					put(grammarAccess.getLocalReactionAccess().getEffectAssignment_1_0_1(), "rule__LocalReaction__EffectAssignment_1_0_1");
-					put(grammarAccess.getLocalReactionAccess().getPropertiesAssignment_2_1(), "rule__LocalReaction__PropertiesAssignment_2_1");
 					put(grammarAccess.getTransitionReactionAccess().getTriggerAssignment_1(), "rule__TransitionReaction__TriggerAssignment_1");
 					put(grammarAccess.getTransitionReactionAccess().getEffectAssignment_2_1(), "rule__TransitionReaction__EffectAssignment_2_1");
 					put(grammarAccess.getTransitionReactionAccess().getPropertiesAssignment_3_1(), "rule__TransitionReaction__PropertiesAssignment_3_1");
