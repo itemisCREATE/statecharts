@@ -4927,7 +4927,6 @@ rule__LocalReaction__Group__1
     }
 :
 	rule__LocalReaction__Group__1__Impl
-	rule__LocalReaction__Group__2
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -4948,36 +4947,6 @@ rule__LocalReaction__Group__1__Impl
 finally {
 	restoreStackSize(stackSize);
 }
-
-
-rule__LocalReaction__Group__2
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__LocalReaction__Group__2__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__LocalReaction__Group__2__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getLocalReactionAccess().getGroup_2()); }
-(rule__LocalReaction__Group_2__0)?
-{ after(grammarAccess.getLocalReactionAccess().getGroup_2()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
 
 
 
@@ -5065,69 +5034,6 @@ rule__LocalReaction__Group_1_0__1__Impl
 { before(grammarAccess.getLocalReactionAccess().getEffectAssignment_1_0_1()); }
 (rule__LocalReaction__EffectAssignment_1_0_1)
 { after(grammarAccess.getLocalReactionAccess().getEffectAssignment_1_0_1()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-
-
-
-
-rule__LocalReaction__Group_2__0
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__LocalReaction__Group_2__0__Impl
-	rule__LocalReaction__Group_2__1
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__LocalReaction__Group_2__0__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getLocalReactionAccess().getNumberSignKeyword_2_0()); }
-
-	'#' 
-
-{ after(grammarAccess.getLocalReactionAccess().getNumberSignKeyword_2_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-
-rule__LocalReaction__Group_2__1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-	rule__LocalReaction__Group_2__1__Impl
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__LocalReaction__Group_2__1__Impl
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getLocalReactionAccess().getPropertiesAssignment_2_1()); }
-(rule__LocalReaction__PropertiesAssignment_2_1)
-{ after(grammarAccess.getLocalReactionAccess().getPropertiesAssignment_2_1()); }
 )
 
 ;
@@ -10814,21 +10720,6 @@ rule__LocalReaction__EffectAssignment_1_0_1
 (
 { before(grammarAccess.getLocalReactionAccess().getEffectReactionEffectParserRuleCall_1_0_1_0()); }
 	ruleReactionEffect{ after(grammarAccess.getLocalReactionAccess().getEffectReactionEffectParserRuleCall_1_0_1_0()); }
-)
-
-;
-finally {
-	restoreStackSize(stackSize);
-}
-
-rule__LocalReaction__PropertiesAssignment_2_1
-    @init {
-		int stackSize = keepStackSize();
-    }
-:
-(
-{ before(grammarAccess.getLocalReactionAccess().getPropertiesReactionPropertiesParserRuleCall_2_1_0()); }
-	ruleReactionProperties{ after(grammarAccess.getLocalReactionAccess().getPropertiesReactionPropertiesParserRuleCall_2_1_0()); }
 )
 
 ;
