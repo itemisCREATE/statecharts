@@ -66,7 +66,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	@Inject
 	private ContextPredicateProvider predicateProvider;
 
-	public IScope scope_TypedElementReferenceExpression_reference(
+	public IScope scope_ElementReferenceExpression_reference(
 			final EObject context, EReference reference) {
 		IScope namdScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
