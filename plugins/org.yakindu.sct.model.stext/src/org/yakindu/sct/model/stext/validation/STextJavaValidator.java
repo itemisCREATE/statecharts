@@ -33,12 +33,16 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
+import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
+import org.yakindu.sct.model.stext.stext.DefaultEvent;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -368,6 +372,25 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			// parameter types: [null]
 			// We can safely ignore this exception
 		}
+	}
+
+	@Check
+	public void checkChoiceWithoutDefaultTransition(final Choice choice) {
+		boolean found = false;
+		for (Transition transition : choice.getOutgoingTransitions()) {
+			ReactionTrigger casted = (ReactionTrigger) transition.getTrigger();
+			if (casted.getTriggers().size() > 0) {
+				for (EventSpec spec : casted.getTriggers()) {
+					if (spec instanceof DefaultEvent) {
+						found = true;
+					}
+				}
+			} else
+				found = true;
+		}
+		if (!found)
+			warning("A choice should have one outgoing default transition",
+					SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 	}
 
 	@Override
