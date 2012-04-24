@@ -127,7 +127,7 @@ Reaction returns sgraph::Reaction:
 	LocalReaction | TransitionReaction;
 
 LocalReaction:
-	(trigger=ReactionTrigger) =>('/' effect=ReactionEffect) ('#' properties=ReactionProperties)?;
+	(trigger=ReactionTrigger) =>('/' effect=ReactionEffect); //('#' properties=ReactionProperties)?;
 
 TransitionReaction:
 	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;

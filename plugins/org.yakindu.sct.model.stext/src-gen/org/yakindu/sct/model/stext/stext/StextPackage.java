@@ -655,22 +655,13 @@ public interface StextPackage extends EPackage
   int LOCAL_REACTION__EFFECT = SGraphPackage.DECLARATION_FEATURE_COUNT + 1;
 
   /**
-   * The feature id for the '<em><b>Properties</b></em>' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int LOCAL_REACTION__PROPERTIES = SGraphPackage.DECLARATION_FEATURE_COUNT + 2;
-
-  /**
    * The number of structural features of the '<em>Local Reaction</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.DECLARATION_FEATURE_COUNT + 3;
+  int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.DECLARATION_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionReactionImpl <em>Transition Reaction</em>}' class.
@@ -2473,17 +2464,6 @@ public interface StextPackage extends EPackage
   EClass getLocalReaction();
 
   /**
-   * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.LocalReaction#getProperties <em>Properties</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference '<em>Properties</em>'.
-   * @see org.yakindu.sct.model.stext.stext.LocalReaction#getProperties()
-   * @see #getLocalReaction()
-   * @generated
-   */
-  EReference getLocalReaction_Properties();
-
-  /**
    * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.TransitionReaction <em>Transition Reaction</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3924,14 +3904,6 @@ public interface StextPackage extends EPackage
      * @generated
      */
     EClass LOCAL_REACTION = eINSTANCE.getLocalReaction();
-
-    /**
-     * The meta object literal for the '<em><b>Properties</b></em>' containment reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference LOCAL_REACTION__PROPERTIES = eINSTANCE.getLocalReaction_Properties();
 
     /**
      * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionReactionImpl <em>Transition Reaction</em>}' class.

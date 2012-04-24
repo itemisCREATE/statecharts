@@ -3873,12 +3873,13 @@ protected class Reaction_TransitionReactionParserRuleCall_1 extends RuleCallToke
 
 /************ begin Rule LocalReaction ****************
  *
+ * //('#' properties=ReactionProperties)?;
  * LocalReaction:
- * 	trigger=ReactionTrigger => ("/" effect=ReactionEffect) ("#" properties=ReactionProperties)?;
+ * 	trigger=ReactionTrigger => ("/" effect=ReactionEffect);
  *
  **/
 
-// trigger=ReactionTrigger => ("/" effect=ReactionEffect) ("#" properties=ReactionProperties)?
+// trigger=ReactionTrigger => ("/" effect=ReactionEffect)
 protected class LocalReaction_Group extends GroupToken {
 	
 	public LocalReaction_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3893,8 +3894,7 @@ protected class LocalReaction_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new LocalReaction_Group_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new LocalReaction_Group_1(lastRuleCallOrigin, this, 1, inst);
+			case 0: return new LocalReaction_Group_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4065,97 +4065,6 @@ protected class LocalReaction_EffectAssignment_1_0_1 extends AssignmentToken  {
 	}	
 }
 
-
-
-// ("#" properties=ReactionProperties)?
-protected class LocalReaction_Group_2 extends GroupToken {
-	
-	public LocalReaction_Group_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getLocalReactionAccess().getGroup_2();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new LocalReaction_PropertiesAssignment_2_1(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// "#"
-protected class LocalReaction_NumberSignKeyword_2_0 extends KeywordToken  {
-	
-	public LocalReaction_NumberSignKeyword_2_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getLocalReactionAccess().getNumberSignKeyword_2_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new LocalReaction_Group_1(lastRuleCallOrigin, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-}
-
-// properties=ReactionProperties
-protected class LocalReaction_PropertiesAssignment_2_1 extends AssignmentToken  {
-	
-	public LocalReaction_PropertiesAssignment_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
-		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getLocalReactionAccess().getPropertiesAssignment_2_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
-		switch(index) {
-			case 0: return new ReactionProperties_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}
-
-    @Override	
-	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("properties",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("properties");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getReactionPropertiesRule().getType().getClassifier())) {
-				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getLocalReactionAccess().getPropertiesReactionPropertiesParserRuleCall_2_1_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
-		if(value == inst.getEObject() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new LocalReaction_NumberSignKeyword_2_0(lastRuleCallOrigin, next, actIndex, consumed);
-			default: return null;
-		}	
-	}	
-}
 
 
 
