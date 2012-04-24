@@ -1139,14 +1139,15 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append("import org.eclipse.core.runtime.Status;");
     _builder.newLine();
+    _builder.append("import org.eclipse.emf.ecore.EObject;");
+    _builder.newLine();
     _builder.append("import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;");
     _builder.newLine();
     _builder.append("import org.yakindu.sct.model.sgen.FeatureParameterValue;");
     _builder.newLine();
     _builder.append("import org.yakindu.sct.model.sgen.FeatureTypeLibrary;");
     _builder.newLine();
-    _builder.append("import org.yakindu.sct.model.sgraph.Statechart;");
-    _builder.newLine();
+    _builder.append("\t");
     _builder.newLine();
     _builder.append("/**");
     _builder.newLine();
@@ -1184,7 +1185,7 @@ public class GeneratorProjectTemplate {
     _builder.append("protected void setDefaultValue(FeatureParameterValue parameterValue,");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("Statechart statechart) {");
+    _builder.append("EObject context) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("String parameterName = parameterValue.getParameter().getName();");

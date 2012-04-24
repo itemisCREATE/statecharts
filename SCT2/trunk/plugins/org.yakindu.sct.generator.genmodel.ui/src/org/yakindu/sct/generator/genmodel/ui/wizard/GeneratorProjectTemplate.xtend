@@ -475,11 +475,11 @@ class GeneratorProjectTemplate {
 		
 		import org.eclipse.core.runtime.IStatus;
 		import org.eclipse.core.runtime.Status;
+		import org.eclipse.emf.ecore.EObject;
 		import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 		import org.yakindu.sct.model.sgen.FeatureParameterValue;
 		import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
-		import org.yakindu.sct.model.sgraph.Statechart;
-		
+			
 		/**
 		 * Default value provider for «data.generatorName» feature library
 		 */
@@ -492,7 +492,7 @@ class GeneratorProjectTemplate {
 
 			@Override
 			protected void setDefaultValue(FeatureParameterValue parameterValue,
-					Statechart statechart) {
+					EObject context) {
 				String parameterName = parameterValue.getParameter().getName();
 				if (MY_PARAMETER.equals(parameterName)) {
 					parameterValue.setValue("default value");
