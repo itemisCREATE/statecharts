@@ -904,16 +904,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSolidusKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cEffectAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
 		private final RuleCall cEffectReactionEffectParserRuleCall_1_0_1_0 = (RuleCall)cEffectAssignment_1_0_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cNumberSignKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cPropertiesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final RuleCall cPropertiesReactionPropertiesParserRuleCall_2_1_0 = (RuleCall)cPropertiesAssignment_2_1.eContents().get(0);
 		
+		////('#' properties=ReactionProperties)?;
 		//LocalReaction:
-		//	trigger=ReactionTrigger => ("/" effect=ReactionEffect) ("#" properties=ReactionProperties)?;
+		//	trigger=ReactionTrigger => ("/" effect=ReactionEffect);
 		public ParserRule getRule() { return rule; }
 
-		//trigger=ReactionTrigger => ("/" effect=ReactionEffect) ("#" properties=ReactionProperties)?
+		//trigger=ReactionTrigger => ("/" effect=ReactionEffect)
 		public Group getGroup() { return cGroup; }
 
 		//trigger=ReactionTrigger
@@ -936,18 +933,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ReactionEffect
 		public RuleCall getEffectReactionEffectParserRuleCall_1_0_1_0() { return cEffectReactionEffectParserRuleCall_1_0_1_0; }
-
-		//("#" properties=ReactionProperties)?
-		public Group getGroup_2() { return cGroup_2; }
-
-		//"#"
-		public Keyword getNumberSignKeyword_2_0() { return cNumberSignKeyword_2_0; }
-
-		//properties=ReactionProperties
-		public Assignment getPropertiesAssignment_2_1() { return cPropertiesAssignment_2_1; }
-
-		//ReactionProperties
-		public RuleCall getPropertiesReactionPropertiesParserRuleCall_2_1_0() { return cPropertiesReactionPropertiesParserRuleCall_2_1_0; }
 	}
 
 	public class TransitionReactionElements extends AbstractParserRuleElementFinder {
@@ -2532,7 +2517,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cOUTOutKeyword_2_0 = (Keyword)cOUTEnumLiteralDeclaration_2.eContents().get(0);
 		
 		////EventDerivation:
-		////	'=' condition=Expression (':' value=Expression)?;
+		////	 (':' value=Expression)?;
 		//enum Direction:
 		//	LOCAL="local" | IN="in" | OUT="out";
 		public EnumRule getRule() { return rule; }
@@ -3234,7 +3219,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	////EventDerivation:
-	////	'=' condition=Expression (':' value=Expression)?;
+	////	 (':' value=Expression)?;
 	//enum Direction:
 	//	LOCAL="local" | IN="in" | OUT="out";
 	public DirectionElements getDirectionAccess() {
@@ -3359,8 +3344,9 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getReactionAccess().getRule();
 	}
 
+	////('#' properties=ReactionProperties)?;
 	//LocalReaction:
-	//	trigger=ReactionTrigger => ("/" effect=ReactionEffect) ("#" properties=ReactionProperties)?;
+	//	trigger=ReactionTrigger => ("/" effect=ReactionEffect);
 	public LocalReactionElements getLocalReactionAccess() {
 		return (pLocalReaction != null) ? pLocalReaction : (pLocalReaction = new LocalReactionElements());
 	}

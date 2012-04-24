@@ -95,9 +95,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//VariableDefinition/initialValue"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//OperationDefinition"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//LocalReaction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//LocalReaction/properties"/>
-    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//LocalReaction"/>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TransitionReaction">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/src-gen/org/yakindu/sct/model/stext/SText.ecore#//TransitionReaction/properties"/>
     </genClasses>

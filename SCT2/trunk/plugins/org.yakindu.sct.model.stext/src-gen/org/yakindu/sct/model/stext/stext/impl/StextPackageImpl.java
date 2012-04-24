@@ -905,16 +905,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getLocalReaction_Properties()
-  {
-    return (EReference)localReactionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getTransitionReaction()
   {
     return transitionReactionEClass;
@@ -2109,7 +2099,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     operationDefinitionEClass = createEClass(OPERATION_DEFINITION);
 
     localReactionEClass = createEClass(LOCAL_REACTION);
-    createEReference(localReactionEClass, LOCAL_REACTION__PROPERTIES);
 
     transitionReactionEClass = createEClass(TRANSITION_REACTION);
     createEReference(transitionReactionEClass, TRANSITION_REACTION__PROPERTIES);
@@ -2404,7 +2393,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getLocalReaction_Properties(), this.getReactionProperties(), null, "properties", null, 0, 1, LocalReaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(transitionReactionEClass, TransitionReaction.class, "TransitionReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getTransitionReaction_Properties(), this.getReactionProperties(), null, "properties", null, 0, 1, TransitionReaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

@@ -22,7 +22,6 @@ import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.impl.DeclarationImpl;
 
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.ReactionProperties;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
@@ -34,7 +33,6 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getEffect <em>Effect</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -61,16 +59,6 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
    * @ordered
    */
   protected Effect effect;
-
-  /**
-   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getProperties()
-   * @generated
-   * @ordered
-   */
-  protected ReactionProperties properties;
 
   /**
    * <!-- begin-user-doc -->
@@ -194,54 +182,6 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReactionProperties getProperties()
-  {
-    return properties;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NotificationChain basicSetProperties(ReactionProperties newProperties, NotificationChain msgs)
-  {
-    ReactionProperties oldProperties = properties;
-    properties = newProperties;
-    if (eNotificationRequired())
-    {
-      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.LOCAL_REACTION__PROPERTIES, oldProperties, newProperties);
-      if (msgs == null) msgs = notification; else msgs.add(notification);
-    }
-    return msgs;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setProperties(ReactionProperties newProperties)
-  {
-    if (newProperties != properties)
-    {
-      NotificationChain msgs = null;
-      if (properties != null)
-        msgs = ((InternalEObject)properties).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.LOCAL_REACTION__PROPERTIES, null, msgs);
-      if (newProperties != null)
-        msgs = ((InternalEObject)newProperties).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.LOCAL_REACTION__PROPERTIES, null, msgs);
-      msgs = basicSetProperties(newProperties, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.LOCAL_REACTION__PROPERTIES, newProperties, newProperties));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -251,8 +191,6 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
         return basicSetTrigger(null, msgs);
       case StextPackage.LOCAL_REACTION__EFFECT:
         return basicSetEffect(null, msgs);
-      case StextPackage.LOCAL_REACTION__PROPERTIES:
-        return basicSetProperties(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -271,8 +209,6 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
         return getTrigger();
       case StextPackage.LOCAL_REACTION__EFFECT:
         return getEffect();
-      case StextPackage.LOCAL_REACTION__PROPERTIES:
-        return getProperties();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -292,9 +228,6 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
         return;
       case StextPackage.LOCAL_REACTION__EFFECT:
         setEffect((Effect)newValue);
-        return;
-      case StextPackage.LOCAL_REACTION__PROPERTIES:
-        setProperties((ReactionProperties)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -316,9 +249,6 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
       case StextPackage.LOCAL_REACTION__EFFECT:
         setEffect((Effect)null);
         return;
-      case StextPackage.LOCAL_REACTION__PROPERTIES:
-        setProperties((ReactionProperties)null);
-        return;
     }
     super.eUnset(featureID);
   }
@@ -337,8 +267,6 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
         return trigger != null;
       case StextPackage.LOCAL_REACTION__EFFECT:
         return effect != null;
-      case StextPackage.LOCAL_REACTION__PROPERTIES:
-        return properties != null;
     }
     return super.eIsSet(featureID);
   }

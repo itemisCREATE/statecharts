@@ -28,6 +28,7 @@ import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionProperties;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
@@ -215,7 +216,17 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	public void tesLocalReaction() {
 		String rule = LocalReaction.class.getSimpleName();
-		parseExpression("entry [ABC.myInt > 10] / raise ABC.event2 #", interfaceScope(), rule);
+		parseExpression("entry [ABC.myInt > 10] / raise ABC.event2", interfaceScope(), rule);
+	}
+	
+	/**
+	 * TransitionReaction:
+	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
+	 */
+	@Test
+	public void testTransitionReaction(){
+		String rule = TransitionReaction.class.getSimpleName();
+		parseExpression("after 10 s / raise ABC.event2 # > ABC.EntryPoint", interfaceScope(), rule);
 	}
 	
 	

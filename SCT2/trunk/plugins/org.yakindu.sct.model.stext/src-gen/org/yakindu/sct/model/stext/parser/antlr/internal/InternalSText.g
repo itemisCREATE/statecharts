@@ -1498,29 +1498,7 @@ ruleReactionEffect
 	    }
 
 )
-)))(	otherlv_3='#' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getLocalReactionAccess().getNumberSignKeyword_2_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getLocalReactionAccess().getPropertiesReactionPropertiesParserRuleCall_2_1_0()); 
-	    }
-		lv_properties_4_0=ruleReactionProperties		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getLocalReactionRule());
-	        }
-       		set(
-       			$current, 
-       			"properties",
-        		lv_properties_4_0, 
-        		"ReactionProperties");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))?)
+))))
 ;
 
 
