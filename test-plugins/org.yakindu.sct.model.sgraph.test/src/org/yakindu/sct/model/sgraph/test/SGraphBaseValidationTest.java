@@ -10,24 +10,26 @@
  */
 package org.yakindu.sct.model.sgraph.test;
 
-import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS;
+import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_ENTRY_WITH_TRIGGER;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_ENTRY_WITH_IN_TRANS;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_NODE_NOT_REACHABLE;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_STATE_WITHOUT_NAME;
 import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_ENTRY_WITH_TRIGGER;
 
 import java.util.HashMap;
-
-import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.junit.Before;
 import org.junit.Test;
+import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -297,7 +299,7 @@ public class SGraphBaseValidationTest {
 	}
 
 	/**
-	 * A final state should have at least one incoming transition.
+	 * A final state should have no outgoing transitions
 	 */
 	@Test
 	public void testFinalStateOutgoingTransitions() {
@@ -318,6 +320,29 @@ public class SGraphBaseValidationTest {
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics,
 				SGraphValidator.ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
+	}
+
+	/**
+	 * A choice must have at least one outgoing transition
+	 */
+	@Test
+	public void testChoiceOutgoingTransitions() {
+		statechart = factory.createStatechart();
+		Region region = factory.createRegion();
+		statechart.getRegions().add(region);
+		Choice choice = factory.createChoice();
+		region.getVertices().add(choice);
+		State state = factory.createState();
+		region.getVertices().add(state);
+
+		createTransition(state, choice);
+
+		assertFalse(validator.validate(choice, diagnostics,
+				new HashMap<Object, Object>()));
+
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics,
+				SGraphValidator.ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
 	}
 
 	protected Transition createTransition(Vertex source, Vertex target) {

@@ -69,7 +69,7 @@ public class SGraphValidator extends EObjectValidator {
 	public static final String ISSUE_SUBMACHINESTATE_WITHOUT_SUBMACHINE = "Selected Submachine can not be resolved.";
 	public static final String ISSUE_SUBMACHINESTATE__CYCLE = "A submachine state can not contain itself as as Submachine.";
 	public static final String ISSUE_ENTRY_WITH_TRIGGER = "Outgoing Transitions from Entries can not have a Trigger or Guard.";
-
+	public static final String ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION = "A choice must have at least one outgoing transition.";
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -243,9 +243,6 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null)
 			result &= validateVertex_IncomingTransitionCount(pseudostate,
 					diagnostics, context);
-		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(pseudostate,
-					diagnostics, context);
 		return result;
 	}
 
@@ -280,9 +277,6 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null)
 			result &= validateVertex_IncomingTransitionCount(vertex,
 					diagnostics, context);
-		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(vertex,
-					diagnostics, context);
 		return result;
 	}
 
@@ -313,8 +307,7 @@ public class SGraphValidator extends EObjectValidator {
 				}
 			}
 			return error(vertex, diagnostics, ISSUE_NODE_NOT_REACHABLE);
-		}
-		else if (vertex.getIncomingTransitions().size() == 0
+		} else if (vertex.getIncomingTransitions().size() == 0
 				&& !(vertex instanceof Entry)) {
 			return error(vertex, diagnostics, ISSUE_NODE_NOT_REACHABLE);
 		}
@@ -323,37 +316,6 @@ public class SGraphValidator extends EObjectValidator {
 				&& ((Entry) vertex).getKind().equals(EntryKind.INITIAL)) {
 			return warning(vertex, diagnostics,
 					ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
-		}
-
-		return true;
-	}
-
-	/**
-	 * Validates the OutgoingTransitionCount constraint of '<em>Vertex</em>'.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public boolean validateVertex_OutgoingTransitionCount(Vertex vertex,
-			DiagnosticChain diagnostics, Map<Object, Object> context) {
-
-		if ((vertex.getOutgoingTransitions().size() > 0)
-				&& (vertex instanceof FinalState)) {
-			return warning(vertex, diagnostics,
-					ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
-		}
-
-		if (vertex.getOutgoingTransitions().size() == 0
-				&& vertex instanceof Entry
-				&& ((Entry) vertex).getKind().equals(EntryKind.INITIAL)) {
-			return warning(vertex, diagnostics,
-					ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
-		}
-
-		if (vertex.getOutgoingTransitions().size() > 1
-				&& vertex instanceof Entry) {
-			return error(vertex, diagnostics,
-					ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
 		}
 
 		return true;
@@ -448,9 +410,25 @@ public class SGraphValidator extends EObjectValidator {
 			result &= validateVertex_IncomingTransitionCount(finalState,
 					diagnostics, context);
 		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(finalState,
+			result &= validateFinalState_OutgoingTransitionCount(finalState,
 					diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the OutgoingTransitionCount constraint of '<em>Final State</em>
+	 * '. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean validateFinalState_OutgoingTransitionCount(
+			FinalState finalState, DiagnosticChain diagnostics,
+			Map<Object, Object> context) {
+		if ((finalState.getOutgoingTransitions().size() > 0)) {
+			return warning(finalState, diagnostics,
+					ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
+		}
+		return true;
 	}
 
 	/**
@@ -483,9 +461,6 @@ public class SGraphValidator extends EObjectValidator {
 			result &= validate_EveryMapEntryUnique(state, diagnostics, context);
 		if (result || diagnostics != null)
 			result &= validateVertex_IncomingTransitionCount(state,
-					diagnostics, context);
-		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(state,
 					diagnostics, context);
 		if (result || diagnostics != null)
 			result &= validateState_NameIsNotEmpty(state, diagnostics, context);
@@ -550,9 +525,6 @@ public class SGraphValidator extends EObjectValidator {
 					context);
 		if (result || diagnostics != null)
 			result &= validateVertex_IncomingTransitionCount(regularState,
-					diagnostics, context);
-		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(regularState,
 					diagnostics, context);
 		return result;
 	}
@@ -620,9 +592,24 @@ public class SGraphValidator extends EObjectValidator {
 			result &= validateVertex_IncomingTransitionCount(choice,
 					diagnostics, context);
 		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(choice,
+			result &= validateChoice_OutgoingTransitionCount(choice,
 					diagnostics, context);
 		return result;
+	}
+
+	/**
+	 * Validates the OutgoingTransitionCount constraint of '<em>Choice</em>'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean validateChoice_OutgoingTransitionCount(Choice choice,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		// Choice without outgoing transition
+		if (choice.getOutgoingTransitions().size() == 0) {
+			return error(choice, diagnostics, ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
+		}
+		return true;
 	}
 
 	/**
@@ -667,10 +654,10 @@ public class SGraphValidator extends EObjectValidator {
 			result &= validateVertex_IncomingTransitionCount(entry,
 					diagnostics, context);
 		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(entry,
-					diagnostics, context);
-		if (result || diagnostics != null)
 			result &= validateEntry_DisallowTrigger(entry, diagnostics, context);
+		if (result || diagnostics != null)
+			result &= validateEntry_OutgoingTransitionCount(entry, diagnostics,
+					context);
 		return result;
 	}
 
@@ -692,6 +679,26 @@ public class SGraphValidator extends EObjectValidator {
 				}
 				return false;
 			}
+		}
+		return true;
+	}
+
+	/**
+	 * Validates the OutgoingTransitionCount constraint of '<em>Entry</em>'.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public boolean validateEntry_OutgoingTransitionCount(Entry entry,
+			DiagnosticChain diagnostics, Map<Object, Object> context) {
+		if (entry.getOutgoingTransitions().size() == 0
+				&& ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
+			return warning(entry, diagnostics,
+					ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
+		}
+		if (entry.getOutgoingTransitions().size() > 1) {
+			return error(entry, diagnostics,
+					ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS);
 		}
 		return true;
 	}
@@ -791,9 +798,6 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null)
 			result &= validateVertex_IncomingTransitionCount(exit, diagnostics,
 					context);
-		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(exit, diagnostics,
-					context);
 		return result;
 	}
 
@@ -853,9 +857,6 @@ public class SGraphValidator extends EObjectValidator {
 		if (result || diagnostics != null)
 			result &= validateVertex_IncomingTransitionCount(synchronization,
 					diagnostics, context);
-		if (result || diagnostics != null)
-			result &= validateVertex_OutgoingTransitionCount(synchronization,
-					diagnostics, context);
 		return result;
 	}
 
@@ -913,19 +914,19 @@ public class SGraphValidator extends EObjectValidator {
 	}
 
 	protected boolean warning(Vertex vertex, DiagnosticChain diagnostics,
-			String messagen) {
+			String message) {
 		if (diagnostics != null) {
 			diagnostics.add(new BasicDiagnostic(Diagnostic.WARNING,
-					DIAGNOSTIC_SOURCE, 0, messagen, new Object[] { vertex }));
+					DIAGNOSTIC_SOURCE, 0, message, new Object[] { vertex }));
 		}
 		return false;
 	}
 
 	protected boolean error(Vertex vertex, DiagnosticChain diagnostics,
-			String messagen) {
+			String message) {
 		if (diagnostics != null) {
 			diagnostics.add(new BasicDiagnostic(Diagnostic.ERROR,
-					DIAGNOSTIC_SOURCE, 0, messagen, new Object[] { vertex }));
+					DIAGNOSTIC_SOURCE, 0, message, new Object[] { vertex }));
 		}
 		return false;
 	}

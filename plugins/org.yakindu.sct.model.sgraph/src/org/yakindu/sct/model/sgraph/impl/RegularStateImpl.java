@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sgraph.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
