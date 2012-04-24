@@ -266,7 +266,9 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	public void checkExpression() {
 		// Nothing to do, checked by Typeanalyzer tests
 	}
-
+	/**
+	 * @see STextJavaValidator#checkVariableDefinitionInitialValue(org.yakindu.sct.model.stext.stext.VariableDefinition)
+	 */
 	@Test
 	public void checkVariableDefinitionInitialValue() {
 		// Success
@@ -281,6 +283,13 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
 		result.assertErrorContains("Can not assign a value of type 'integer' to a variable of type 'boolean'");
+	}
+	/**
+	 * @see STextJavaValidator#checkChoiceWithoutDefaultTransition(org.yakindu.sct.model.sgraph.Choice)
+	 */
+	@Test
+	public void checkChoiceWithoutDefaultTransition(){
+		//TODO
 	}
 
 	/**
