@@ -29,7 +29,7 @@ import org.yakindu.base.base.NamedElement;
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getVertex()
  * @model abstract="true"
- *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='IncomingTransitionCount OutgoingTransitionCount'"
+ *        annotation="http://www.eclipse.org/emf/2002/Ecore constraints='IncomingTransitionCount'"
  * @generated
  */
 public interface Vertex extends NamedElement {

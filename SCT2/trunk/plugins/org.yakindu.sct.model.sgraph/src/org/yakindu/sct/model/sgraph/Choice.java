@@ -24,7 +24,7 @@ package org.yakindu.sct.model.sgraph;
  * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getChoice()
- * @model
+ * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='OutgoingTransitionCount'"
  * @generated
  */
 public interface Choice extends Pseudostate {
