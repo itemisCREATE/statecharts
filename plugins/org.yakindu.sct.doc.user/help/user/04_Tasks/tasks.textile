@@ -61,10 +61,10 @@ Start a simulation with the different modes as follows
 
 h2. Generating Code
 
-For code generation, Yakindu Statechart Tools uses a textual generator model called *SGen*, that can be used to configure the code generation process. It can be created either by using the provided wizard or by creating a new text file with the file extension '.sgen'.
+For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called *SGen*. It can be created either by using the provided wizard *Yakindu Statechart Generator Model* or by creating a new text file with the file extension '.sgen'.
 To create a generator model with the wizard,
 
-# Click *File* > *New* > *Other...* > *Yakindu Statechart Genmodel*
+# Click *File* > *New* > *Other...* > *Yakindu Statechart Generator Model*
 # Type a name and click *Next*
 # Choose the desired generator, i.e. *YAKINDU Java Code Generator*
 # Check the model(s) to generate code from and click *Finish*
@@ -81,29 +81,27 @@ GeneratorModel for [GeneratorId] {
 		}
 	}
 }
-p. The [GeneratorId] is the unique id of the Generator. Yakindu Statechart Tools currently supports the following Generators out of the box:
+p. The [GeneratorId] is the unique id of the Generator. Currently, the following Generators are supported out of the box:
+
 # yakindu::java - Generator ID for the Java Code Generator 
 # yakindu::c - Generator ID for the C Code Generator
 # yakindu::cpp - Generator ID for the C++ Code Generator
 # yakindu::xpand - Generator ID for custom Xpand based Code Generators
 # yakindu::generic - Generator ID for custom Java based Code Generators  
 
-p. One GeneratorModel can contain several [StatechartReference]s. These are crossreference to statechart models for which the code should be generated. 
-For each referenced Statechart, the generator process can be configured with [Feature]s. Each Feature consists of several parameters. These parameters can be configured with [ParameterName] = [ParameterValue].
+One GeneratorModel can contain several [StatechartReference]s. These are cross references to statechart models for which the code should be generated. For each reference, the generator process can be configured with [Feature]s. Each Feature consists of several parameters. These parameters can be configured with [ParameterName] = [ParameterValue].
  
-The Generator Model will be build automatically if you checked *Project* > *Build Automatically*. If you want to execute only one Generator Model, you can select  
-*Generate Statechart Artifacts* from the *Package Explorer's* context menu.
+The Generator Model is executed by a builder. Thus, the artifacts are generated automatically if *Project* > *Build Automatically* is checked. If you want to execute your Generator Model by hand, select *Generate Statechart Artifacts* from the *Package Explorer's* context menu.
 
 h2. Core Features
 
-The following section describes the *Core Features* which are available for each Code Generator:
-
+The following section describes the *Core Features* which are available for all code generators:
 
 h4. Outlet
 
 The *Outlet* feature specifies the target project and folder for the generated artifacts. It is a *required* feature and consists of the following parameters:
-# __targetProject__  (String): The project where the generated artifacts are stored  
-# __targetFolder__  (String): The folder where the generated artifacts are stored
+# __targetProject__  (String, required): The project to store the generated artifacts  
+# __targetFolder__  (String, required): The folder to store the generated artifacts
 
 Example configuration:
 
@@ -116,9 +114,9 @@ p. ==<!-- End Outlet -->==
 
 h4. LicenseHeader
 
-The *LicenseHeader* feature specifies the license text that should be added as a header to the generated artifacts. It is an *optinal* feature and consists of the following parameters:
+The *LicenseHeader* feature specifies the license text that should be added as a header to the generated artifacts. It is an *optional* feature and consists of the following parameters:
 
-# __licenseText__  (String): The license text to add as a header  
+# __licenseText__  (String, required): The license text to add as a header  
 
 Example configuration:
 
@@ -130,18 +128,18 @@ p. ==<!-- End LicenseHeader -->==
 
 h4. FunctionInlining
 
-The *FunctionInlining* feature allows the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance because less operation calls are neccessary. 
+The *FunctionInlining* feature allows the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance because less operation calls are necessary. 
 It is an *optinal* feature and consists of the following parameters:
 
-# __inlineReactions__  (Boolean): Inlines the expression for reactions
-# __inlineEntryActions__  (Boolean): Inlines the expression for entry actions
-# __inlineExitActions__  (Boolean): Inlines the expression for exit actions
-# __inlineEnterSequences__  (Boolean): Inlines the expression for enter sequences
-# __inlineExitSequences__  (Boolean): Inlines the expression for exit sequences
-# __inlineChoices__  (Boolean): Inlines the expression for choices
-# __inlineEnterRegion__  (Boolean): Inlines the expression for enter regions
-# __inlineExitRegion__  (Boolean): Inlines the expression for exit regions
-# __inlineEntries__  (Boolean): Inlines the expression for entries 
+# __inlineReactions__  (Boolean, optional): Inlines the expression for reactions
+# __inlineEntryActions__  (Boolean, optional): Inlines the expression for entry actions
+# __inlineExitActions__  (Boolean, optional): Inlines the expression for exit actions
+# __inlineEnterSequences__  (Boolean, optional): Inlines the expression for enter sequences
+# __inlineExitSequences__  (Boolean, optional): Inlines the expression for exit sequences
+# __inlineChoices__  (Boolean, optional): Inlines the expression for choices
+# __inlineEnterRegion__  (Boolean, optional): Inlines the expression for enter regions
+# __inlineExitRegion__  (Boolean, optional): Inlines the expression for exit regions
+# __inlineEntries__  (Boolean, optional): Inlines the expression for entries 
 
 Example configuration:
 
@@ -153,15 +151,30 @@ feature FunctionInlining {
 }
 p. ==<!-- End FunctionInlining -->==
 
+h4. Debug
+
+The *Debug* feature dumps the Execution Model to the target folder as xmi model. It is an *optional* feature and consists of the following parameters:
+
+# __dumpSexec__  (Boolean, required): The license text to add as a header  
+
+Example configuration:
+
+bc.. 
+feature Debug {
+	dumpSexec = true
+}
+
+p. ==<!-- End Debug -->==
+
 h2. Java Generator Features
 
 h4. Naming
 
 The *Naming* feature allows the configuration of package names as well as class name prefix / suffix.
-It is an *optinal* feature and consists of the following parameters:
+It is an *optional* feature and consists of the following parameters:
 
-# __basePackage__  (Boolean): Inlines the expression for reactions
-# __implementationSuffix__  (Boolean): Inlines the expression for entry actions
+# __basePackage__  (Boolean, required): The package to create for the generated java classes
+# __implementationSuffix__  (Boolean, optional): The suffix for the implementing classes
 
 Example configuration:
 
@@ -172,16 +185,38 @@ feature Naming {
 }
 p. ==<!-- End Naming -->==	
 
+
 h4. GeneralFeatures
-TBD
+
+The *GeneralFeatures* feature allows to configure additional services to generate with the statemachine. Per default, all parameters are configured to __false__ It is an *optional* feature and consists of the following parameters:
+
+# __EventBasedStatemachine__ (Boolean, optional): Enables/disables the generation of a cycle based statemachine implementation
+# __InterfaceObserverSupport__ (Boolean, optional): Enables/disables the generation of listener interfaces for the statemachine
+# __RuntimeService__ (Boolean, optional): Enables/disables the generation of a runtime service that triggers the runcycle of a cycle based statemachine
+# __TimerService__ (Boolean, optional): Enables/disables the generation of a timer service implementation using __java.util.Timer__
+# __GenericInterfaceSupport__ (Boolean, optional): Enables/disables the generation of generic interfaces
+# __StatemachineFactorySupport__ (Boolean, optional): Enables/disables  the generation of a factory class
+
+Example configuration:
+
+bc.. 
+feature GeneralFeatures {
+	EventBasedStatemachine = true
+	InterfaceObserverSupport = true
+	RuntimeService = true
+	TimerService = true
+	GenericInterfaceSupport = true
+	StatemachineFactorySupport = true
+}
+
+p. ==<!-- End GeneralFeatures -->==			
 
 h2. C Generator Fetures
 TBD
 
 h2. Create Custom Code Generators
 
-YAKINDU Statechart Tools provides a rich feature set to supports custom code generators out of the box. 
-These code generators can be either written in Java, "Xtend":http://www.eclipse.org/xtend/ or in "Xpand":http://www.eclipse.org/modeling/m2t/?project=xpand
+YAKINDU Statechart Tools provides a rich feature set to supports custom code generators out of the box. These code generators can be either written in Java, "Xtend":http://www.eclipse.org/xtend/ or in "Xpand":http://www.eclipse.org/modeling/m2t/?project=xpand
  
 h3. Writing a custom code generator with Xtend2/Java
 
@@ -189,23 +224,24 @@ First, you have to create a new Xtend2 generator project. Click *File* > *New* >
 
 !images/xtendGenerator.png!
 
-The wizards asks for a *Project name* and the name of the *Generator class*, where you have to specify a full qualified class name. If you check the *Use Xtend* checkbox, the Generator class will be initially created as an xtend class. Otherwise, Java will be used for the generator.
+The wizards asks for a *Project name* and the name of the *Generator class*, where you have to specify a full qualified class name. If you check the *Use Xtend* checkbox, the Generator class will be initially created as an "Xtend":http://www.eclipse.org/xtend/ class. Otherwise, Java will be used for the generator.
 
-The check box *Configure for Plugin Export* adds all required extension point registrations to the new project that it can be exported as a plugin and deployed in different SCT2 installations.The Generator Model can refer to the new Generator Plugin via its unique *Generator ID*. If you want to contribute custom Generator Features for your Code Generator, check the *Create Feature Library* check box.  
+The check box *Configure for Plugin Export* adds all required extension point registrations to the new project for exporting as a plugin The Generator Model can refer to the new Generator Plugin via its unique *Generator ID*. If you want to contribute custom generator features for your code generator, check the *Create Feature Library* check box.  
 
-After a click on *Finish* a new project is created in your workspace. All required plugin dependencies and extension points are registered and you can start to write your code generator based on the ExecutionFlow meta model [Link].
+After click on *Finish* a new project is created in your workspace. All required plugin dependencies and extension points are registered and you can start to write your code generator based on the ExecutionFlow meta model [Link].
 
 h3. Executing a custom Xtend2/Java code generator
 
-If you have configured your plugin for Plugin Export, you could use eclipse export wizard to create a deployable plugin and copy it to your plugins folder of your eclipse installation. You can refer to your plugin via its unique generator id from your Generator Model.
-Since this is not very convenient, YAKINDU provides a way to execute your generator while you are developing it.
-Therefore, you have to Create a new *Generator Model* with the generator id *yakindu::generic*, either by using the *New Statechart Generator Model* wizard or by simple creating a new text file with the file extension *.sgen*. the following feature allows to configure your code generator.
+YAKINDU Statechart Tools provide a convenient way to execute your generator while you are developing it.
+Therefore, you have to create a new *Generator Model* with the generator id *yakindu::generic*, either by using the *New Statechart Generator Model* wizard or by simple creating a new text file with the file extension *.sgen*. the following feature allows to configure your code generator.
 
 h4. Generator
 
 The *Generator* feature allows the configuration of a custom code generator located in the workspace and written in Java or another JVM language. It is a *required* feature and consists of the following parameters:
-# __generatorProject__  (String): The name of the generator project   
-# __generatorClass__  (String): The name of the code generator class.
+
+# __generatorProject__  (String, required): The name of the generator project   
+# __generatorClass__  (String, required): The full qualified class name of the code generator class.
+# __configurationModule__ (String, optional): The full qualified class name for a guice module to configure the code generator 
 
 Example configuration:
 
@@ -216,10 +252,6 @@ feature Generator {
 }
 		
 p. ==<!-- End Generator -->==
-
-
-
-
 
 
 
