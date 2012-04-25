@@ -3,11 +3,11 @@ JobName: YAKINDU_SCT2_CI
 
 Parameterized-build:
 + Run Parameter
-	Name: base.target.job
+	Name: base_target_job
 	Project: YAKINDU_Base_target
 	Description: Build from target to use for target repository
 + Run Parameter
-	Name: base.repository.job
+	Name: base_repository_job
 	Project: YAKINDU_Base_CI
 	Description: 
 
@@ -26,6 +26,11 @@ Source-Code-Management:
 	Location: sct2_repository/test-plugins
     
 Build:
++ Execute Shell
+	Command
+		echo base_target_job: ${base_target_job}
+		echo base_repository_job: ${base_repository_job}
+
 + Execute Shell
     Command 
 		if [ -d "build" ]; then
@@ -57,8 +62,8 @@ Build:
 	Profiles
 		CI
 	Properties
-		p2.target.repository=${env.base.target.job}artifact/update-site
-		p2.base.repository=${env.base.repository.job}artifact/update-site
+		p2.target.repository=${env.base_target_job}artifact/update-site
+		p2.base.repository=${env.base_repository_job}artifact/update-site
 	Private Maven-Repository: Checked
 
 + Execute Shell
