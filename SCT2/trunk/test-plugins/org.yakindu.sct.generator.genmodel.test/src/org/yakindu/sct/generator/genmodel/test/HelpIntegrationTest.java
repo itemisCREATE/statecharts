@@ -34,8 +34,8 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * Checks if all Generator Features have a corresponding documentation
- * section in the user guide.
+ * Checks if all Generator Features have a corresponding documentation section
+ * in the user guide.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
@@ -47,6 +47,8 @@ public class HelpIntegrationTest {
 	private static final String YAKINDU_JAVA = "yakindu::java";
 	private static final String YAKINDU_C = "yakindu::c";
 	private static final String YAKINDU_CPP = "yakindu::cpp";
+	private static final String YAKINDU_GENERIC = "yakindu::generic";
+	private static final String YAKINDU_XPAND = "yakindu::xpand";
 	@Inject
 	private IEObjectDocumentationProvider documentationProvider;
 	@Inject
@@ -78,6 +80,26 @@ public class HelpIntegrationTest {
 		if (missingDocumentation.size() > 0) {
 			fail("Missing generator feature(s) documentation for generator "
 					+ YAKINDU_CPP + ": " + missingDocumentation);
+		}
+
+	}
+
+	@Test
+	public void checkGenericGeneratorFeatureDocumentation() {
+		List<String> missingDocumentation = getFeaturesWithoutDocumentation(YAKINDU_GENERIC);
+		if (missingDocumentation.size() > 0) {
+			fail("Missing generator feature(s) documentation for generator "
+					+ YAKINDU_GENERIC + ": " + missingDocumentation);
+		}
+
+	}
+
+	@Test
+	public void checkXpandGeneratorFeatureDocumentation() {
+		List<String> missingDocumentation = getFeaturesWithoutDocumentation(YAKINDU_XPAND);
+		if (missingDocumentation.size() > 0) {
+			fail("Missing generator feature(s) documentation for generator "
+					+ YAKINDU_XPAND + ": " + missingDocumentation);
 		}
 
 	}
