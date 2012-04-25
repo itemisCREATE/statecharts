@@ -3,7 +3,8 @@
       id="org.yakindu.sct"
       label="Yakindu Statechart Tools (SCT) 2"
       version="1.0.0.qualifier"
-      provider-name="YAKINDU">
+      provider-name="YAKINDU"
+      plugin="org.yakindu.sct.doc.user">
 
    <description url="">
       %description
