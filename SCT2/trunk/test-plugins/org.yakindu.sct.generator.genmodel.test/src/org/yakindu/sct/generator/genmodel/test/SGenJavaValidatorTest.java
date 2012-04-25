@@ -141,6 +141,11 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 				"GeneratorModel for yakindu::java { statechart Example {}}",
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
+		Iterable<Diagnostic> allDiagnostics = result.getAllDiagnostics();
+		System.err.println("All diagnostics");
+		for (Diagnostic diagnostic : allDiagnostics) {
+			System.err.println(diagnostic.getMessage());
+		}
 		result.assertAny(new MsgPredicate(MISSING_REQUIRED_FEATURE));
 	}
 
