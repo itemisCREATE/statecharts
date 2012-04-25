@@ -52,7 +52,7 @@ public class HelpIntegrationTest {
 	private static final String YAKINDU_GENERIC = "yakindu::generic";
 	private static final String YAKINDU_XPAND = "yakindu::xpand";
 	@Inject
-	private HelpSystemDocumentationProvider documentationProvider;
+	private IEObjectDocumentationProvider documentationProvider;
 	@Inject
 	private XtextResourceSet resourceSet;
 	@Inject
