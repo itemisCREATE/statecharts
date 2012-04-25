@@ -10,8 +10,10 @@
  */
 package org.yakindu.sct.generator.genmodel.test.util;
 
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.yakindu.sct.generator.genmodel.SGenRuntimeModule;
+import org.yakindu.sct.generator.genmodel.ui.help.HelpSystemDocumentationProvider;
 
 /**
  * 
@@ -23,5 +25,9 @@ public class SGenTestRuntimeModule extends SGenRuntimeModule {
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return SGenTestScopeProvider.class;
+	}
+	
+	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
+		return HelpSystemDocumentationProvider.class;
 	}
 }

@@ -15,6 +15,7 @@ import static junit.framework.Assert.fail;
 import java.util.List;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -47,7 +48,7 @@ public class HelpIntegrationTest {
 	private static final String YAKINDU_C = "yakindu::c";
 	private static final String YAKINDU_CPP = "yakindu::cpp";
 	@Inject
-	private HelpSystemDocumentationProvider documentationProvider;
+	private IEObjectDocumentationProvider documentationProvider;
 	@Inject
 	private XtextResourceSet resourceSet;
 	@Inject
