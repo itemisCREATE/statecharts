@@ -3,7 +3,7 @@ JobName: YAKINDU_Base_CI
 
 Parameterized-build:
 + Run Parameter
-	Name: base.target.job
+	Name: base_target_job
 	Project: YAKINDU_Base_target
 	Description: Select the build to be promoted.
 
@@ -32,6 +32,10 @@ Source-Code-Management:
  
 Build:
 + Execute Shell
+	Command
+		echo base_target_job: ${base_target_job}
+
++ Execute Shell
     Command 
     	if [ -d "build" ]; then
 		   rm -fr build
@@ -52,7 +56,7 @@ Build:
 	POM File
 		../build/org.yakindu.base.releng/pom.xml
 	Properties
-		p2.target.repository=${env.base.target.job}artifact/update-site
+		p2.target.repository=${env.base_target_job}artifact/update-site
 	Profiles
 	JVM Options
 
