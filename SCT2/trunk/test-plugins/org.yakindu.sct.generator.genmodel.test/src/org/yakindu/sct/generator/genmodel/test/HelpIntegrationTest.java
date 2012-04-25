@@ -14,6 +14,7 @@ import static junit.framework.Assert.fail;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -27,6 +28,7 @@ import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescri
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.ui.help.HelpSystemDocumentationProvider;
+import org.yakindu.sct.model.sgen.SGenPackage;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -50,7 +52,7 @@ public class HelpIntegrationTest {
 	private static final String YAKINDU_GENERIC = "yakindu::generic";
 	private static final String YAKINDU_XPAND = "yakindu::xpand";
 	@Inject
-	private IEObjectDocumentationProvider documentationProvider;
+	private HelpSystemDocumentationProvider documentationProvider;
 	@Inject
 	private XtextResourceSet resourceSet;
 	@Inject
@@ -118,8 +120,11 @@ public class HelpIntegrationTest {
 		}
 		List<String> missingDocumentation = Lists.newArrayList();
 		for (IEObjectDescription desc : allElements) {
-			String documentation = documentationProvider.getDocumentation(desc
-					.getEObjectOrProxy());
+			if (desc.getEClass() != SGenPackage.Literals.FEATURE_TYPE)
+				continue;
+			EObject eObjectOrProxy = desc.getEObjectOrProxy();
+			String documentation = documentationProvider
+					.getDocumentation(eObjectOrProxy);
 			if (documentation == null
 					|| HelpSystemDocumentationProvider.EMPTY_DOCUMENTATION
 							.equals(documentation)) {
