@@ -176,12 +176,14 @@ public class OrderElementControl extends Composite {
 		public void selectionChanged(SelectionChangedEvent event) {
 			IEditorPart lastActiveEditor = ActiveEditorTracker
 					.getLastActiveEditor();
-			if (lastActiveEditor instanceof DiagramDocumentEditor) {
+			EObject selectedObject = getSelectedObject();
+			if (lastActiveEditor instanceof DiagramDocumentEditor
+					&& selectedObject != null) {
 				IGraphicalEditPart editPart = EditPartUtils
 						.findEditPartForSemanticElement(
 								((DiagramDocumentEditor) lastActiveEditor)
 										.getDiagramGraphicalViewer()
-										.getRootEditPart(), getSelectedObject());
+										.getRootEditPart(), selectedObject);
 				if (editPart != null) {
 					((DiagramDocumentEditor) lastActiveEditor)
 							.getDiagramGraphicalViewer().select(editPart);
