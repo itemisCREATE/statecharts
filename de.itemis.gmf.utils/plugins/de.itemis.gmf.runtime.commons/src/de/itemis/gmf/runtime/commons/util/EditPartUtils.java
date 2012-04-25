@@ -15,6 +15,9 @@ public class EditPartUtils {
 	@SuppressWarnings("unchecked")
 	public static IGraphicalEditPart findEditPartForSemanticElement(
 			EditPart editPart, EObject semanticElement) {
+		if (semanticElement == null) {
+			return null;
+		}
 		if (editPart instanceof IGraphicalEditPart) {
 			EObject resolveSemanticElement = ((IGraphicalEditPart) editPart)
 					.resolveSemanticElement();
