@@ -86,8 +86,39 @@ int test_initialization_and_first_entry()
 
 }
 
+/*@Test: test_default_var1 test behavior of var1 in default interface */
+int test_string_compare_and_assignment()
+{
+	Test_ExpressionStatemachine machine;
+	Timer dummyTimer;
+	EventPool eventPool;
 
+	/*@Desc: setup initial statemachine */
+	setupStatemachine(&machine, &dummyTimer, &eventPool);
 
+	/*@Desc: check whether var6 from default interface is initially set to "foo" */
+	assert( strcmp(test_Expression_if_get_var6(&machine.iface), "foo") == 0);
+	printf("var6: %s\n", test_Expression_if_get_var6(&machine.iface));
+
+	/*@Desc: set var5 to "true" to avoid other transition */
+	test_Expression_if_set_var5(&machine.iface, bool_true);
+
+	/*@Desc: raise event1 on default interface with value 5 (actually unused) */
+	test_Expression_if_raise_event1(&machine.iface, 5);
+
+	/*@Desc: run an explicit cycle */
+	test_ExpressionStatemachine_runCycle(&machine);
+	printf("var6: %s\n", test_Expression_if_get_var6(&machine.iface));
+
+	/*@Desc: check whether var6 from default interface is initially set to "foo" */
+	assert( strcmp(test_Expression_if_get_var6(&machine.iface), "bar") == 0);
+
+	/*@Desc: teardown statemachine */
+	teardownStatemachine(&machine, &dummyTimer, &eventPool);
+
+	return 0;
+
+}
 
 /*@Test: test_default_var1 test behavior of var1 in default and other interface */
 int test_default_other_var1()
@@ -281,6 +312,8 @@ int main(int argc, char** argv)
 		return test_default_other_var2_var3();
 	case 4:
 		return test_onCycle();
+	case 5:
+		return test_string_compare_and_assignment();
 	}
 
 	return 0;

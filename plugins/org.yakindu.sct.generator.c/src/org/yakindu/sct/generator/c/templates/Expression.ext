@@ -6,6 +6,7 @@ import types;
 
 extension org::yakindu::sct::generator::c::templates::Naming;
 extension org::yakindu::sct::generator::c::templates::Constants;
+extension org::yakindu::sct::generator::core::extensions::TypeAnalyzerExtensions;
 
 InterfaceScope getInterfaceScope(AssignmentExpression this) : ((InterfaceScope)this.varRef.eContainer);
 
@@ -22,6 +23,9 @@ String toCCode(Statement statement) :
 
 String toCCode(Literal lit) :
    "Unknown Literal Type" ;
+
+String toCCode(StringLiteral lit) :
+   "\""+lit.value+"\"" ;
 
 String toCCode(BoolLiteral bLit) :
    (bLit.value == true) ? getBoolTrue() : getBoolFalse(); 
@@ -79,7 +83,10 @@ String toCCode(LogicalNotExpression expression) :
   	" ~" + " ( " + expression.operand.toCCode() + " ) ";
 
 String toCCode(LogicalRelationExpression expression) :
-   " ( " + expression.leftOperand.toCCode() + " ) " + getOperator(expression.operator) + " ( " + expression.rightOperand.toCCode() + " ) ";
+	if (expression.leftOperand.inferType().isString()) then
+		"("+expression.leftOperand.toCCode()+"==NULL?"+expression.rightOperand.toCCode()+"==NULL:strcmp("+expression.leftOperand.toCCode()+", "+expression.rightOperand.toCCode()+")==0)"
+	else
+		" ( " + expression.leftOperand.toCCode() + " ) " + getOperator(expression.operator) + " ( " + expression.rightOperand.toCCode() + " ) ";
     
 String toCCode(BitwiseAndExpression expression) :
   	" ( " + expression.leftOperand.toCCode() + " ) " + " & " + " ( " + expression.rightOperand.toCCode() + " ) ";
