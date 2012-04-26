@@ -25,12 +25,9 @@ import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
-import org.eclipse.gef.commands.Command;
-import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.GroupRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CreationEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
@@ -129,17 +126,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		// installEditPolicy(EditPolicyRoles.SEMANTIC_ROLE,
-		// new RelationshipSemanticEditPolicy());
-		// We don't want to allow creation for parent editpart on a State
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
-				new CreationEditPolicy() {
-					@Override
-					protected Command getCreateElementAndViewCommand(
-							CreateViewAndElementRequest request) {
-						return UnexecutableCommand.INSTANCE;
-					}
-				});
+		removeEditPolicy(EditPolicyRoles.CREATION_ROLE);
 
 		if (isCollapsed()) {
 			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
