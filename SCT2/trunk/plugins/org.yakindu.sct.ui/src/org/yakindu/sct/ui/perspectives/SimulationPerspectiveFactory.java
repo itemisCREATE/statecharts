@@ -50,7 +50,6 @@ public class SimulationPerspectiveFactory implements IPerspectiveFactory {
 	}
 
 	private void defineActions(IPageLayout layout) {
-		layout.addNewWizardShortcut("org.yakindu.sct.ui.editor.StatechartDiagramWizard");
 		layout.addPerspectiveShortcut(IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_MODELING);
 		layout.addActionSet("org.eclipse.debug.ui.launchActionSet");
 	}
