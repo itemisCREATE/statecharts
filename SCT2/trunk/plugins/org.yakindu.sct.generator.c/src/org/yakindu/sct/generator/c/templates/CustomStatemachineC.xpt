@@ -284,6 +284,7 @@ void «deepEnterSequence.deepEnterFunction()»
 #define «STNAME()»_FRIENDS
 
 #include "«StName()».h"
+#include <stdlib.h>
 
 «IF this.isSingleton() == true»
 /* singleton handle and singleton handle pointer declaration */

@@ -17,6 +17,7 @@ Templates for the main statechart c file.
 «FILE 'Statemachine_cy.c'»
 «getLicenseHeader()»
 #include <stdlib.h>
+#include <string.h>
 #include "definition.h"
 #include "Statemachine_cy.h"
 

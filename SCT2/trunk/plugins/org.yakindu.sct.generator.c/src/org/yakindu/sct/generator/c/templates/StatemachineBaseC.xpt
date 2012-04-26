@@ -18,6 +18,7 @@ Templates for the main statechart c file.
 «getLicenseHeader()»
 #include "StatemachineBase.h"
 #include <stdlib.h>
+#include <string.h>
 
 void statemachineBase_init(StatemachineBase* handle, uint16_t maxStates, uint16_t maxHistorys, Timer* _timer)
 {
