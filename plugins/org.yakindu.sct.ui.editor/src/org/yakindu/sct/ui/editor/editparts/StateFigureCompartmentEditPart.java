@@ -23,8 +23,8 @@ import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.ui.editor.policies.CompartmentCreationEditPolicy;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCanonicalEditPolicy;
+import org.yakindu.sct.ui.editor.policies.StateCompartmentCreationEditPolicy;
 
 import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy;
 
@@ -59,7 +59,7 @@ public class StateFigureCompartmentEditPart extends
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
-				new CompartmentCreationEditPolicy());
+				new StateCompartmentCreationEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
 				new StateCompartmentCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
