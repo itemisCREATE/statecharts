@@ -34,6 +34,40 @@
                   </and>
                </or>
          </triggerPoints>
+         <commonWizard
+               type="new"
+               wizardId="org.yakindu.sct.ui.editor.StatechartDiagramWizard">
+          <enablement>
+ 		   <with
+  		    variable="activeWorkbenchWindow.activePerspective">
+    		 <or>
+    		  <equals
+     		   value="org.yakindu.sct.ui.ModelingPerspective">
+   		   </equals>
+   		   <equals
+     		   value="org.yakindu.sct.ui.SimulationPerspective">
+   		   </equals>
+   		   </or>
+ 		   </with>
+  		</enablement>
+         </commonWizard>
+         <commonWizard
+               type="new"
+               wizardId="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard">
+            <enablement>
+ 		   <with
+  		    variable="activeWorkbenchWindow.activePerspective">
+    		  <or>
+    		  <equals
+     		   value="org.yakindu.sct.ui.ModelingPerspective">
+   		   </equals>
+   		   <equals
+     		   value="org.yakindu.sct.ui.SimulationPerspective">
+   		   </equals>
+   		   </or>
+ 		   </with>
+  		</enablement>
+         </commonWizard>
       </navigatorContent>
        <actionProvider
             id="org.eclipse.ui.navigator.navigatorActionProvider"
