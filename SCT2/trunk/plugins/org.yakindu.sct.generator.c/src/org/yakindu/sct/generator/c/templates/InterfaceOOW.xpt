@@ -41,6 +41,11 @@ public:
 «ENDIF»
 «ENDFOREACH» 
 
+«FOREACH interface.declarations.typeSelect(OperationDefinition) AS operation -»
+    «asCType(operation.type)» «operation.name»(«
+	FOREACH operation.parameters AS param ITERATOR iter»«IF iter.counter0>0», «ENDIF»«asCType(param.type)» «param.name»«ENDFOREACH»);
+«ENDFOREACH» 
+
 «FOREACH interface.getOutEvents() AS event -»
     sc_boolean is_«event.name»_raised(«IF !event.type.isVoid() -»«event.type.asCType()»* value«ENDIF» );
 «ENDFOREACH»
@@ -79,7 +84,7 @@ inline void «interface.interfaceClassNameOOW()»::raise_«event.name»(«IF !event.t
 inline «asCType(variable.type)» «interface.interfaceClassNameOOW()»::get_«variable.name»()
 {
 	return «interface.interfaceName()»_get_«variable.name.toFirstLower()»(«interface.interfaceObjectName()»); 
-}   
+}
 «IF variable.readonly == false -»
 inline void «interface.interfaceClassNameOOW()»::set_«variable.name»(«asCType(variable.type)» value)
 {
@@ -88,6 +93,13 @@ inline void «interface.interfaceClassNameOOW()»::set_«variable.name»(«asCType(va
 «ENDIF»
 «ENDFOREACH» 
 
+«FOREACH interface.declarations.typeSelect(OperationDefinition) AS operation»
+inline «asCType(operation.type)» «interface.interfaceClassNameOOW()»::«operation.name»(«
+	FOREACH operation.parameters AS param ITERATOR iter»«IF iter.counter0>0», «ENDIF»«asCType(param.type)» «param.name»«ENDFOREACH») {
+	«IF !operation.type.isVoid()»return «ENDIF»«operation.getMethodName()»(«interface.interfaceObjectName()»«IF !isSingleton()», «ENDIF»«
+	FOREACH operation.parameters AS param ITERATOR iter»«IF iter.counter0>0», «ENDIF»«param.name»«ENDFOREACH»);
+}
+«ENDFOREACH» 
 
 #endif
 
