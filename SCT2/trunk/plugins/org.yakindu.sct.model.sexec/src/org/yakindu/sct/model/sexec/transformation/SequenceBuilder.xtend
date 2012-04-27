@@ -345,6 +345,8 @@ class SequenceBuilder {
 			}
 		} 
 		
+		if (flow.exitAction != null) exitSequence.steps.add(flow.exitAction.newCall)
+		
 		flow.exitSequence = exitSequence
 		return exitSequence
 	}
@@ -360,6 +362,8 @@ class SequenceBuilder {
 				enterSequence.steps.add(vd.createInitialization)
 			}
 		}
+		
+		if (flow.entryAction != null) enterSequence.steps.add(flow.entryAction.newCall)
 		
 		for ( r : sc.regions) {
 			val execRegion = r.create

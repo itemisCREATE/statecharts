@@ -21,6 +21,8 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getHistoryVector <em>History Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getEntryAction <em>Entry Action</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitAction <em>Exit Action</em>}</li>
  * </ul>
  * </p>
  *
@@ -102,5 +104,57 @@ public interface ExecutionFlow extends ScopedElement, ExecutionScope, ExecutionN
 	 * @generated
 	 */
 	void setHistoryVector(StateVector value);
+
+	/**
+	 * Returns the value of the '<em><b>Entry Action</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Entry Action</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Entry Action</em>' containment reference.
+	 * @see #setEntryAction(Step)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow_EntryAction()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Step getEntryAction();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getEntryAction <em>Entry Action</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Entry Action</em>' containment reference.
+	 * @see #getEntryAction()
+	 * @generated
+	 */
+	void setEntryAction(Step value);
+
+	/**
+	 * Returns the value of the '<em><b>Exit Action</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Exit Action</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Exit Action</em>' containment reference.
+	 * @see #setExitAction(Step)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow_ExitAction()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Step getExitAction();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitAction <em>Exit Action</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Exit Action</em>' containment reference.
+	 * @see #getExitAction()
+	 * @generated
+	 */
+	void setExitAction(Step value);
 
 } // ExecutionFlow

@@ -244,13 +244,31 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__HISTORY_VECTOR = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
+	 * The feature id for the '<em><b>Entry Action</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__ENTRY_ACTION = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Exit Action</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_FLOW__EXIT_ACTION = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 15;
+
+	/**
 	 * The number of structural features of the '<em>Execution Flow</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 14;
+	int EXECUTION_FLOW_FEATURE_COUNT = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
@@ -2234,6 +2252,28 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionFlow_HistoryVector();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getEntryAction <em>Entry Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Entry Action</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getEntryAction()
+	 * @see #getExecutionFlow()
+	 * @generated
+	 */
+	EReference getExecutionFlow_EntryAction();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitAction <em>Exit Action</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Exit Action</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionFlow#getExitAction()
+	 * @see #getExecutionFlow()
+	 * @generated
+	 */
+	EReference getExecutionFlow_ExitAction();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionNode <em>Execution Node</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3188,6 +3228,22 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_FLOW__HISTORY_VECTOR = eINSTANCE.getExecutionFlow_HistoryVector();
+
+		/**
+		 * The meta object literal for the '<em><b>Entry Action</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_FLOW__ENTRY_ACTION = eINSTANCE.getExecutionFlow_EntryAction();
+
+		/**
+		 * The meta object literal for the '<em><b>Exit Action</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_FLOW__EXIT_ACTION = eINSTANCE.getExecutionFlow_ExitAction();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionNodeImpl <em>Execution Node</em>}' class.
