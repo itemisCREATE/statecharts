@@ -253,7 +253,7 @@ class BehaviorMapping {
 						|| t instanceof TimeEventSpec 
 						|| t instanceof OnCycleEvent 
 						|| t instanceof AlwaysEvent
-					).toList.empty
+					).empty
 				)
 				.map(t | t.mapReaction)
 		)
