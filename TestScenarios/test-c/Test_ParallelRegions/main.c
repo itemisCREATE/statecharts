@@ -18,7 +18,14 @@
 
 #define MAXEVENTSPERTYPE 4
 const char* stateName[10] = {"State1", "State2", "State3", "State4", "State5", "State6", "State7", "State8", "State9", "noState"};
-const int EnumTostateStr[10] = { _State1, _State2, _State3, _State4, _State5, _State6, _State7, _State8, _State9, last_state };
+const int EnumTostateStr[10] = { _Test_ParallelRegions_mainRegion_State1, _Test_ParallelRegions_mainRegion_State2,
+		_Test_ParallelRegions_mainRegion_State2_Region1_State3,
+		_Test_ParallelRegions_mainRegion_State2_Region1_State4,
+		_Test_ParallelRegions_mainRegion_State2_Region1_State4_Region2_State5,
+		_Test_ParallelRegions_mainRegion_State2_Region1_State4_Region2_State6,
+		_Test_ParallelRegions_mainRegion_State2_Region3_State7,
+		_Test_ParallelRegions_mainRegion_State2_Region3_State8,
+		_Test_ParallelRegions_mainRegion_State2_Region1_State4_Region4_State9, last_state };
 
 const char* getStateString(uint32_t index)
 {

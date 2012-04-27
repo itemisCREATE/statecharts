@@ -277,7 +277,7 @@ int test_third_interface_good()
 	InterfaceTestStatemachine* machine;
 	Timer dummyTimer;
 	EventPool eventPool;
-	boolean retVal = bool_false;
+	sc_boolean retVal = bool_false;
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&dummyTimer, &eventPool);
@@ -340,7 +340,7 @@ int test_third_interface_bad()
 	Timer dummyTimer;
 	EventPool eventPool;
 
-	boolean retVal = bool_false;
+	sc_boolean retVal = bool_false;
 
 	/*@Desc: setup initial statemachine */
 	setupStatemachine(&dummyTimer, &eventPool);

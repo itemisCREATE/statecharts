@@ -1,18 +1,15 @@
 GeneratorModel for yakindu::c {
 	statechart InterfaceTest {
-		feature Debug { 
-			dumpSexec = true
-		} 
 		feature	Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/InterfaceTest"
-		}    
+			targetFolder = "src-gen-c-sgltn/InterfaceTest"
+		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = false
+			Singleton = true
 			DebugType = ""
 		}
-	feature LicenseHeader {
+		feature LicenseHeader {
 			licenseText = "
  # Copyright (c) 2011 committers of YAKINDU and others.
  # All rights reserved. This program and the accompanying materials
@@ -24,23 +21,15 @@ GeneratorModel for yakindu::c {
  #     committers of YAKINDU - initial API and implementation
  "
 		}
-//		feature FunctionInlining {
-//			inlineChoices = false
-//			inlineEnterSequences = false
-//			inlineEntryActions = false
-//			inlineExitActions = false
-//			inlineExitSequences = false
-//			inlineReactions = false
-//		}
 	}
 	statechart Test_DeepHistory {
 		feature Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/Test_DeepHistory"
+			targetFolder = "src-gen-c-sgltn/Test_DeepHistory"
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = false
+			Singleton = true
 			DebugType = ""
 		}
 		feature LicenseHeader {
@@ -60,15 +49,12 @@ GeneratorModel for yakindu::c {
 	statechart Test_Expression {
 		feature Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/Test_Expression"
-		}
-		feature Debug {
-			dumpSexec = true 
+			targetFolder = "src-gen-c-sgltn/Test_Expression"
 		}
 		feature CCodeFeature {
-			DebugType = "none"
 			InterfaceEventListener = true
-			Singleton = false
+			Singleton = true
+			DebugType = ""
 		}
 		feature LicenseHeader {
 			licenseText = "
@@ -87,18 +73,12 @@ GeneratorModel for yakindu::c {
 	statechart Test_Hierarchy {
 		feature Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/Test_Hierarchy"
+			targetFolder = "src-gen-c-sgltn/Test_Hierarchy"
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = false
+			Singleton = true
 			DebugType = ""
-		}
-				feature FunctionInlining {
-			inlineEnterSequences = false
-			inlineExitSequences = false
-			inlineEnterRegion = false
-			inlineExitRegion = false
 		}
 		feature LicenseHeader {
 			licenseText = "
@@ -114,16 +94,13 @@ GeneratorModel for yakindu::c {
 		}
 	}
 	statechart Test_LocalActions {
-		feature Debug {
-			dumpSexec = true
-		}
 		feature Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/Test_LocalActions"
+			targetFolder = "src-gen-c-sgltn/Test_LocalActions"
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = false
+			Singleton = true
 			DebugType = ""
 		}
 		feature LicenseHeader {
@@ -136,17 +113,17 @@ GeneratorModel for yakindu::c {
  #
  # Contributors:
  #     committers of YAKINDU - initial API and implementation
- " 
+ "
 		}
 	}
 	statechart Test_ParallelRegions {
 		feature Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/Test_ParallelRegions"
+			targetFolder = "src-gen-c-sgltn/Test_ParallelRegions"
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = false
+			Singleton = true
 			DebugType = ""
 		}
 		feature LicenseHeader {
@@ -165,11 +142,11 @@ GeneratorModel for yakindu::c {
 	statechart Test_ShallowHistory {
 		feature Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/Test_ShallowHistory"
+			targetFolder = "src-gen-c-sgltn/Test_ShallowHistory"
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = false
+			Singleton = true
 			DebugType = ""
 		}
 		feature LicenseHeader {
@@ -188,16 +165,16 @@ GeneratorModel for yakindu::c {
 	statechart Test_DeepHistory {
 		feature Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/Test_DeepHistory"
+			targetFolder = "src-gen-c-sgltn/Test_DeepHistory"
+		}
+		feature Debug {
+			dumpSexec = true
 		}
 		feature CCodeFeature {
-			InterfaceEventListener = true
-			Singleton = false
 			DebugType = ""
+			InterfaceEventListener = true
+			Singleton = true
 		}
-				feature Debug { 
-			dumpSexec = true
-		} 
 		feature LicenseHeader {
 			licenseText = "
  # Copyright (c) 2011 committers of YAKINDU and others.
@@ -211,14 +188,15 @@ GeneratorModel for yakindu::c {
  "
 		}
 	}
+	
 	statechart Test_Transition {
 		feature Outlet {
 			targetProject = "TestScenarios"
-			targetFolder = "src-gen-c/Test_Transition"
+			targetFolder = "src-gen-c-sgltn/Test_Transition"
 		}
 		feature CCodeFeature {
 			InterfaceEventListener = true
-			Singleton = false
+			Singleton = true
 			DebugType = ""
 		}
 		feature LicenseHeader {

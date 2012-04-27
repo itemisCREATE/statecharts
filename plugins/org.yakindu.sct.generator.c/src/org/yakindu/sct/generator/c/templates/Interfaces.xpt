@@ -69,6 +69,10 @@ extern void «interface.interfaceName()»_set_«variable.getName()»(«handleInterfac
 «ENDIF»
 «ENDFOREACH» 
 
+«FOREACH interface.declarations.typeSelect(OperationDefinition) AS operation -»
+extern «asCType(operation.type)» «operation.getMethodName()»(«handleInterfaceAddition(interface)»«IF !isSingleton()», «ENDIF»«
+	FOREACH operation.parameters AS param ITERATOR iter»«IF iter.counter0>0», «ENDIF»«asCType(param.type)» «param.name»«ENDFOREACH»);
+«ENDFOREACH» 
 
 extern void «interface.interfaceName()»_reset_event(«handleInterfaceAddition(interface)»);
 
@@ -109,6 +113,7 @@ IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type
 «this.getLicenseHeader()»
 #include "«interface.interfaceClassName()».h"
 #include <stdlib.h>
+#include <string.h>
 
 «IF this.isSingleton()»
 static «interfaceClassName(interface)»* handle;
@@ -140,6 +145,7 @@ void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»S
 «ENDFOREACH-»
 «ENDIF-»
 «ENDLET-»
+
 	/* */ 
 	«interface.interfaceName()»_reset_event(handle);
 
@@ -154,6 +160,19 @@ void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»S
 #endif
 
 }
+
+«IF !interface.declarations.typeSelect(OperationDefinition).isEmpty-»
+#ifndef USE_MANUAL_OPERATION_IMPLEMENTATION
+«FOREACH interface.declarations.typeSelect(OperationDefinition) AS operation -»
+«asCType(operation.type)» «operation.getMethodName()»(«handleInterfaceAddition(interface)»«IF !isSingleton()», «ENDIF»«
+	FOREACH operation.parameters AS param ITERATOR iter»«IF iter.counter0>0», «ENDIF»«asCType(param.type)» «param.name»«ENDFOREACH»)
+{
+	/** Default implementation of operation «operation.getMethodName()» */
+	return«IF !operation.type.isVoid()» «operation.type.defaultType()»«ENDIF-»;
+}
+«ENDFOREACH-» 
+#endif //USE_MANUAL_OPERATION_IMPLEMENTATION
+«ENDIF»
 
 «IF this.isSingleton()»
 void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(interface)»* _handle)

@@ -1,0 +1,11 @@
+For all tests, the sources have to be generated before.
+Then:
+
+mkdir build
+cd build
+
+#Testing singleton 
+cmake -DCOMPILE_SINGLETON=true .. ; make && ctest
+
+#Testing multi instances
+cmake -DCOMPILE_SINGLETON=false .. ; make && ctest

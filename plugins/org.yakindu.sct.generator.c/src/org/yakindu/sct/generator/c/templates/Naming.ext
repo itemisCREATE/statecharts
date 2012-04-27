@@ -163,6 +163,11 @@ String reactFunction(ExecutionNode this) :
 	  this.reactFunctionName() + "("+ handleAddition() + ")";
 
 String getName(VariableDefinition this): name.toFirstLower();
+String getName(OperationDefinition this): name.toFirstLower();
+
+String getMethodName(OperationDefinition def): getMethodName(def, def.eContainer);
+String getMethodName(OperationDefinition def, InterfaceScope scope): ((ExecutionFlow)def.eRootContainer).name.toFirstLower()+"_if"+(scope.name != null? "_"+scope.name:"")+"_"+def.name;
+String getMethodName(OperationDefinition def, emf::EObject scope): ((ExecutionFlow)def.eRootContainer).name.toFirstLower()+"_if"+"_"+def.name;
 
 String getStateName(Step this) : this.eContainer.getStateName(); 
 String getStateName(emf::EObject this) : (this.eContainer != null)?this.eContainer.getStateName():"unkown";
@@ -235,8 +240,19 @@ String getEventName(types::Event this) : this.eContainer.getScopeName().toFirstU
 String getEventName(types::Feature this) : "/* Event expected, but got Feature: "+this+" */";
 String getEventName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
 
+String getInterface(VariableDefinition var) : ((InterfaceScope)var.eContainer).interfaceObjectName();
+
+String getInterface(OperationDefinition var) : ((InterfaceScope)var.eContainer).interfaceObjectName();
+
 String getInterfaceName(EventRaisingExpression this) :
 	"iface" + (( this.event.getEvent().eContainer.getScopeName() == "default")?"":this.event.getEvent().eContainer.getScopeName().toFirstUpper());
+
+String getInterfaceCallComma(emf::EObject ref):  ref.getInterfaceCall()==""?"":ref.getInterfaceCall()+", ";
+String getInterfaceCallComma(EObject ref): ref.getInterfaceCall()==""?"":ref.getInterfaceCall()+", ";
+String getInterfaceCall(EObject ref): "";
+String getInterfaceCall(ElementReferenceExpression ref): ref.reference.getInterfaceCall();
+String getInterfaceCall(FeatureCall ref): ref.feature.getInterfaceCall();
+String getInterfaceCall(OperationDefinition ref): ref.isSingleton()?"":"&"+ref.statemachineHandleName() + "->" + ref.getInterface();
 
 EventDefinition getEvent(Expression e) : null;
 EventDefinition getEvent(EObject e) : null;

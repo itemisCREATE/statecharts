@@ -45,17 +45,17 @@ String toCCode(PrimitiveValueExpression primValue) :
 /* Assignment */
 String toCCode(AssignmentExpression assignment) :
   switch (assignment.operator) {
-  case (AssignmentOperator::assign) : assignment.varRef.toCCode() + " = " + assignment.expression.toCCode() + ";"  
-  case (AssignmentOperator::multAssign) : assignment.varRef.toCCode() + " *= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::divAssign) : assignment.varRef.toCCode() + " /= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::modAssign) : assignment.varRef.toCCode() + " %= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::addAssign) : assignment.varRef.toCCode() + " += " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::subAssign) : assignment.varRef.toCCode() + " -= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::leftShiftAssign) : assignment.varRef.toCCode() + " <<= "+ assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::rightShiftAssign) : assignment.varRef.toCCode() + " >>= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::andAssign) : assignment.varRef.toCCode() + " &= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::xorAssign) : assignment.varRef.toCCode() + " ^= " + assignment.expression.toCCode() + ";"
-  case (AssignmentOperator::orAssign) : assignment.varRef.toCCode() + " |= " + assignment.expression.toCCode() + ";"
+  case (AssignmentOperator::assign) : assignment.varRef.toCCode() + " = " + assignment.expression.toCCode() 
+  case (AssignmentOperator::multAssign) : assignment.varRef.toCCode() + " *= " + assignment.expression.toCCode()
+  case (AssignmentOperator::divAssign) : assignment.varRef.toCCode() + " /= " + assignment.expression.toCCode()
+  case (AssignmentOperator::modAssign) : assignment.varRef.toCCode() + " %= " + assignment.expression.toCCode()
+  case (AssignmentOperator::addAssign) : assignment.varRef.toCCode() + " += " + assignment.expression.toCCode()
+  case (AssignmentOperator::subAssign) : assignment.varRef.toCCode() + " -= " + assignment.expression.toCCode()
+  case (AssignmentOperator::leftShiftAssign) : assignment.varRef.toCCode() + " <<= "+ assignment.expression.toCCode()
+  case (AssignmentOperator::rightShiftAssign) : assignment.varRef.toCCode() + " >>= " + assignment.expression.toCCode()
+  case (AssignmentOperator::andAssign) : assignment.varRef.toCCode() + " &= " + assignment.expression.toCCode()
+  case (AssignmentOperator::xorAssign) : assignment.varRef.toCCode() + " ^= " + assignment.expression.toCCode()
+  case (AssignmentOperator::orAssign) : assignment.varRef.toCCode() + " |= " + assignment.expression.toCCode()
   default : ""
   };
 		
@@ -111,9 +111,6 @@ String toCCode(NumericalUnaryExpression expression) :
 
 ExecutionFlow getExecutionFlow(InterfaceScope this) : ((ExecutionFlow)this.eContainer);
 String interfaceObjectName(InterfaceScope this) : "iface" + ((this.name == null)?"":this.name.toFirstUpper());
-
-String getInterface(VariableDefinition var) :
-	((InterfaceScope)var.eContainer).interfaceObjectName();
 
 String getOperator(AdditiveOperator operator) : 
     switch(operator) {
@@ -178,16 +175,20 @@ Set[EventDefinition] getLocalEvents(InternalScope interface) :
 
 // is this just relevant for events?
 String toCCode(ElementReferenceExpression ref) :
-	ref.reference.toCCode();
+	ref.reference.toCCode()+ (if (ref.operationCall) then "("+ref.getInterfaceCallComma()+ref.args.toCCode().toString(",")+")" else "");
+
 String toCCode(EObject ref) :
 	"/* toCode not defined for: "+ref+" */";
 String toCCode(Feature ref) :
 	"/* toCode not defined for: "+ref+" */";
 String toCCode(FeatureCall ref) :
-	ref.feature.toCCode();
+	ref.feature.toCCode()+ (if (ref.operationCall) then "("+ref.getInterfaceCallComma()+ref.args.toCCode().toString(",")+")" else "");
 
 String toCCode(Declaration dec) :
 	"Declartion type not specified";
+
+String toCCode(OperationDefinition dec) :
+	" " +dec.getMethodName();
 
 String toCCode(TimeEvent time_ev) :
     " ( eventSet_check( &"+time_ev.statemachineHandleName()+"->base.eventSet, " + time_ev.getEventEnumName() + ") ) ";

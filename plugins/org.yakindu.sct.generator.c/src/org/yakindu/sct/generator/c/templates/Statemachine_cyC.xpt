@@ -77,8 +77,6 @@ void statemachine_cy_destruct(Statemachine_cy* handle) {
 
 void statemachine_cy_runCycle(Statemachine_cy* handle) {
 
-	uint32_t i;
-
 	/* delete all outgoing events */
 	eventSet_clean_output(&handle->eventSet);
 	
