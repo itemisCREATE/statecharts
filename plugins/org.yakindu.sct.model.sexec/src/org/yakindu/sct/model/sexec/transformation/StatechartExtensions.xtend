@@ -67,6 +67,22 @@ class StatechartExtensions {
 	
 	
 	/** 
+	 * Provides a list of all TimeEventSpecs that are defined in the context of 'statechart'.
+	 */
+	def List<TimeEventSpec> timeEventSpecs(Statechart state) { 
+		// TODO: also query local reactions
+		var tesList = new ArrayList<TimeEventSpec>()
+
+		state.localReactions.fold(tesList, 
+			[s, r | {
+				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
+				s
+			}]
+		)
+				
+		return tesList
+	}
+	/** 
 	 * Provides a list of all TimeEventSpecs that are defined in the context of 'state'.
 	 */
 	def List<TimeEventSpec> timeEventSpecs(State state) { 
@@ -136,14 +152,14 @@ class StatechartExtensions {
 		return sc.allContentsIterable.filter( typeof(Entry) )
 	}
 	
-	def List<LocalReaction> entryReactions(State state) {
+	def List<LocalReaction> entryReactions(ReactiveElement state) {
 		state.localReactions
 			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof EntryEvent))
 			.map(lr | lr as LocalReaction)
 			.toList	
 	} 
 	
-	def List<LocalReaction> exitReactions(State state) {
+	def List<LocalReaction> exitReactions(ReactiveElement state) {
 		state.localReactions
 			.filter(r | ((r as LocalReaction).trigger as ReactionTrigger).triggers.exists( t | t instanceof ExitEvent))
 			.map(lr | lr as LocalReaction)

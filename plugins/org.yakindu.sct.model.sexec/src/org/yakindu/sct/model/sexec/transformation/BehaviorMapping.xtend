@@ -51,6 +51,22 @@ class BehaviorMapping {
 
 
 	def ExecutionFlow mapEntryActions(Statechart statechart, ExecutionFlow r){
+		val seq = sexec.factory.createSequence
+		seq.name = "entryAction"
+		seq.comment = "Entry action for statechart '" + statechart.name + "'."
+		
+		for (tes : statechart.timeEventSpecs ) {
+			val timeEvent = tes.createDerivedEvent
+			val scheduleStep = timeEvent.newScheduleTimeEvent(tes.buildValueExpression)
+			seq.steps.add(scheduleStep)
+		}	
+		
+		statechart.entryReactions
+			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.forEach(e | if (e != null) { seq.steps.add(e) })
+		
+		r.entryAction = seq
+		
 		val allStates = statechart.allRegularStates.filter(typeof(State))
 		allStates.forEach( s | { s.create.entryAction = s.mapEntryAction() null } )
 		return r
@@ -90,6 +106,23 @@ class BehaviorMapping {
 	}
 
 	def ExecutionFlow mapExitActions(Statechart statechart, ExecutionFlow r){
+		val seq = sexec.factory.createSequence
+		seq.name = "exitAction"
+		seq.comment = "Exit action for state '" + statechart.name + "'."
+		
+		
+		for (tes : statechart.timeEventSpecs ) {
+			val timeEvent = tes.createDerivedEvent
+			val unscheduleStep = timeEvent.newUnscheduleTimeEvent()
+			seq.steps.add(unscheduleStep)
+		}	
+		
+		statechart.exitReactions
+			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.forEach(e | if (e != null) { seq.steps.add(e) })
+		
+		r.exitAction = seq
+		
 		val allStates = statechart.allRegularStates.filter(typeof(State))
 		allStates.forEach( s | { s.create.exitAction = s.mapExitAction() null } )
 		return r

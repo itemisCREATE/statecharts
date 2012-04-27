@@ -30,6 +30,7 @@ import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.StateVector;
+import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
 
 /**
@@ -53,6 +54,8 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getNodes <em>Nodes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getHistoryVector <em>History Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEntryAction <em>Entry Action</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitAction <em>Exit Action</em>}</li>
  * </ul>
  * </p>
  *
@@ -218,6 +221,26 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected StateVector historyVector;
+
+	/**
+	 * The cached value of the '{@link #getEntryAction() <em>Entry Action</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getEntryAction()
+	 * @generated
+	 * @ordered
+	 */
+	protected Step entryAction;
+
+	/**
+	 * The cached value of the '{@link #getExitAction() <em>Exit Action</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExitAction()
+	 * @generated
+	 * @ordered
+	 */
+	protected Step exitAction;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -582,6 +605,92 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Step getEntryAction() {
+		return entryAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetEntryAction(Step newEntryAction, NotificationChain msgs) {
+		Step oldEntryAction = entryAction;
+		entryAction = newEntryAction;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__ENTRY_ACTION, oldEntryAction, newEntryAction);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setEntryAction(Step newEntryAction) {
+		if (newEntryAction != entryAction) {
+			NotificationChain msgs = null;
+			if (entryAction != null)
+				msgs = ((InternalEObject)entryAction).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__ENTRY_ACTION, null, msgs);
+			if (newEntryAction != null)
+				msgs = ((InternalEObject)newEntryAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__ENTRY_ACTION, null, msgs);
+			msgs = basicSetEntryAction(newEntryAction, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__ENTRY_ACTION, newEntryAction, newEntryAction));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Step getExitAction() {
+		return exitAction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExitAction(Step newExitAction, NotificationChain msgs) {
+		Step oldExitAction = exitAction;
+		exitAction = newExitAction;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__EXIT_ACTION, oldExitAction, newExitAction);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExitAction(Step newExitAction) {
+		if (newExitAction != exitAction) {
+			NotificationChain msgs = null;
+			if (exitAction != null)
+				msgs = ((InternalEObject)exitAction).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__EXIT_ACTION, null, msgs);
+			if (newExitAction != null)
+				msgs = ((InternalEObject)newExitAction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__EXIT_ACTION, null, msgs);
+			msgs = basicSetExitAction(newExitAction, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__EXIT_ACTION, newExitAction, newExitAction));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Reaction> getReactions() {
 		if (reactions == null) {
 			reactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SexecPackage.EXECUTION_FLOW__REACTIONS);
@@ -702,6 +811,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return basicSetHistoryVector(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__ENTRY_ACTION:
+				return basicSetEntryAction(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
+				return basicSetExitAction(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -744,6 +857,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getRegions();
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return getHistoryVector();
+			case SexecPackage.EXECUTION_FLOW__ENTRY_ACTION:
+				return getEntryAction();
+			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
+				return getExitAction();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -804,6 +921,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				setHistoryVector((StateVector)newValue);
 				return;
+			case SexecPackage.EXECUTION_FLOW__ENTRY_ACTION:
+				setEntryAction((Step)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
+				setExitAction((Step)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -858,6 +981,12 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				setHistoryVector((StateVector)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__ENTRY_ACTION:
+				setEntryAction((Step)null);
+				return;
+			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
+				setExitAction((Step)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -898,6 +1027,10 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return regions != null && !regions.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 				return historyVector != null;
+			case SexecPackage.EXECUTION_FLOW__ENTRY_ACTION:
+				return entryAction != null;
+			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
+				return exitAction != null;
 		}
 		return super.eIsSet(featureID);
 	}
