@@ -17,7 +17,6 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
@@ -29,10 +28,6 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
  */
 public class SGenProposalProvider extends AbstractSGenProposalProvider {
 
-	@Override
-	public IEObjectHover getHover() {
-		return super.getHover();
-	}
 
 	@Override
 	public void completeGeneratorEntry_ContentType(EObject model,

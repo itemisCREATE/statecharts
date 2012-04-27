@@ -20,18 +20,19 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
@@ -128,7 +129,9 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		}
 
 		if (!keywords.contains(keyword)) {
-			super.completeKeyword(keyword, contentAssistContext, acceptor);
+			super.completeKeyword(keyword, contentAssistContext,
+					new AcceptorDelegate(acceptor));
+
 		}
 	}
 
@@ -236,4 +239,38 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		ConfigurableCompletionProposal castedProposal = (ConfigurableCompletionProposal) proposal;
 		castedProposal.setPriority(castedProposal.getPriority() + delta);
 	}
+
+	/**
+	 * The acceptor delegate creates a Dummy EObject of type Keyword for the
+	 * User Help Hover integration
+	 * 
+	 */
+	public class AcceptorDelegate implements ICompletionProposalAcceptor {
+
+		private final ICompletionProposalAcceptor delegate;
+
+		public AcceptorDelegate(ICompletionProposalAcceptor delegate) {
+			this.delegate = delegate;
+		}
+
+		@Override
+		public void accept(ICompletionProposal proposal) {
+			if (proposal instanceof ConfigurableCompletionProposal) {
+				Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
+				keyword.setValue(proposal.getDisplayString());
+				((ConfigurableCompletionProposal) proposal)
+						.setAdditionalProposalInfo(keyword);
+				((ConfigurableCompletionProposal) proposal)
+						.setHover(STextProposalProvider.this.getHover());
+			}
+			delegate.accept(proposal);
+		}
+
+		@Override
+		public boolean canAcceptMoreProposals() {
+			return delegate.canAcceptMoreProposals();
+		}
+
+	}
+
 }

@@ -8,11 +8,14 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
+import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.yakindu.sct.generator.genmodel.ui.help.GenModelEObjectHover;
-import org.yakindu.sct.generator.genmodel.ui.help.HelpSystemDocumentationProvider;
+import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
 import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlightingCalculator;
 import org.yakindu.sct.generator.genmodel.ui.templates.SGenTemplateProposalProvider;
+
+import de.itemis.utils.jface.viewers.help.CrossRefObjectTextHover;
+import de.itemis.utils.jface.viewers.help.HelpHoverProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -28,22 +31,27 @@ public class SGenUiModule extends
 	}
 
 	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
-		return HelpSystemDocumentationProvider.class;
+		return SGenUserHelpDocumentationProvider.class;
 	}
 	
 	public Class<? extends DispatchingEObjectTextHover> bindDispatchingEObjectTextHover(){
-		return GenModelEObjectHover.class;
+		return CrossRefObjectTextHover.class;
 	}
 
+	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
+		return HelpHoverProvider.class;
+	}
+	
 	@Override
 	public Class<? extends IEObjectHover> bindIEObjectHover() {
-		return GenModelEObjectHover.class;
+		return CrossRefObjectTextHover.class;
 	}
 
 	@Override
 	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
 		return SGenTemplateProposalProvider.class;
 	}
+	
 	
 	
 

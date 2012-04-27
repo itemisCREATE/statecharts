@@ -27,7 +27,7 @@ import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
-import org.yakindu.sct.generator.genmodel.ui.help.HelpSystemDocumentationProvider;
+import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 import com.google.common.collect.Iterables;
@@ -126,7 +126,7 @@ public class HelpIntegrationTest {
 			String documentation = documentationProvider
 					.getDocumentation(eObjectOrProxy);
 			if (documentation == null
-					|| HelpSystemDocumentationProvider.EMPTY_DOCUMENTATION
+					|| SGenUserHelpDocumentationProvider.EMPTY_DOCUMENTATION
 							.equals(documentation)) {
 				missingDocumentation.add(desc.getName().toString());
 			}
