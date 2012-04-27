@@ -7,13 +7,13 @@ import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
-import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 import de.itemis.utils.jface.viewers.help.CrossRefObjectTextHover;
+import de.itemis.utils.jface.viewers.help.HelpHoverProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -40,7 +40,7 @@ public class STextUiModule extends
 	}
 
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
-		return CustomCSSHelpHoverProvider.class;
+		return HelpHoverProvider.class;
 	}
 
 	@Override
