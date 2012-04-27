@@ -4,7 +4,7 @@ GeneratorModel for yakindu::java {
 			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
-		
+
 		feature GeneralFeatures{
 			EventBasedStatemachine = true
 			InterfaceObserverSupport = true
@@ -13,8 +13,8 @@ GeneratorModel for yakindu::java {
 			GenericInterfaceSupport = true
 		}
 		
-		feature licenseHeader {
-			licenseText = 
+		feature LicenseHeader {
+	  		licenseText = 
 "
 Copyright (c) 2011 committers of YAKINDU and others. 
 All rights reserved. This program and the accompanying materials
@@ -41,7 +41,7 @@ Contributors:
 			GenericInterfaceSupport = true
 		}
 		
-		feature licenseHeader {
+		feature LicenseHeader {
 			licenseText = 
 "
 Copyright (c) 2011 committers of YAKINDU and others. 
@@ -70,7 +70,7 @@ Contributors:
 			GenericInterfaceSupport = true
 		}
 		
-		feature licenseHeader {
+		feature LicenseHeader {
 			licenseText =
 "
 Copyright (c) 2011 committers of YAKINDU and others. 
@@ -99,7 +99,7 @@ Contributors:
 			GenericInterfaceSupport = true
 		}
 		
-		feature licenseHeader {
+		feature LicenseHeader {
 			licenseText =
 "
 Copyright (c) 2011 committers of YAKINDU and others. 
@@ -128,7 +128,7 @@ Contributors:
 			GenericInterfaceSupport = true
 		}
 		
-		feature licenseHeader {
+		feature LicenseHeader {
 			licenseText =
 "
 Copyright (c) 2011 committers of YAKINDU and others. 
@@ -157,7 +157,7 @@ Contributors:
 			GenericInterfaceSupport = true
 		}
 		
-		feature licenseHeader {
+		feature LicenseHeader {
 			licenseText =
 "
 Copyright (c) 2011 committers of YAKINDU and others. 
@@ -195,7 +195,7 @@ Contributors:
 			GenericInterfaceSupport = true
 		}
 		
-		feature licenseHeader {
+		feature LicenseHeader {
 			licenseText = 
 "
 Copyright (c) 2011 committers of YAKINDU and others. 
@@ -224,7 +224,7 @@ Contributors:
 			GenericInterfaceSupport = true
 		}	
 		
-		feature licenseHeader {
+		feature LicenseHeader {
 			licenseText = 
 "
 Copyright (c) 2011 committers of YAKINDU and others. 
