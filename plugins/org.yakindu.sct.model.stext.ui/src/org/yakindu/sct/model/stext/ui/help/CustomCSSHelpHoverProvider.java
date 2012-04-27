@@ -16,10 +16,13 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import org.eclipse.jface.internal.text.html.BrowserInformationControl;
+import org.eclipse.jface.internal.text.html.HTMLPrinter;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
 import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.editors.text.EditorsUI;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
@@ -35,17 +38,36 @@ import de.itemis.utils.jface.viewers.help.HelpHoverProvider;
  * have the status line visible. (Not possible to set the bg color of the status
  * line)
  * 
+ * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 @SuppressWarnings("restriction")
 public class CustomCSSHelpHoverProvider extends HelpHoverProvider {
 
+	private String fgStyleSheet = null;
+
+	@Inject(optional = true)
+	@Named("org.eclipse.xtext.ui.editor.hover.XtextEditorHover.font")
+	private String fontSymbolicName = "org.eclipse.jdt.ui.javadocfont"; //$NON-NLS-1$ 
+
 	@Inject
 	@Named("stylesheet")
 	private String styleSheetFileName;
 
 	private HoverControlCreator hoverControlCreator;
+
+	protected String getStyleSheet() {
+		if (fgStyleSheet == null)
+			fgStyleSheet = loadStyleSheet();
+		String css = fgStyleSheet;
+		if (css != null) {
+			FontData fontData = JFaceResources.getFontRegistry().getFontData(
+					fontSymbolicName)[0];
+			css = HTMLPrinter.convertTopLevelFont(css, fontData);
+		}
+		return css;
+	}
 
 	protected String loadStyleSheet() {
 		URL styleSheetURL = STextActivator.getInstance().getBundle()
