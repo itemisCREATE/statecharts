@@ -689,8 +689,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertNotNull(s3.getReactSequence());
 
 		step = s3.getReactSequence().getSteps().get(0);
-		_if = (If) assertedSequence(assertedSequence(step).getSteps().get(0))
-				.getSteps().get(0);
+		_if = (If) step;
 		assertNotNull(_if.getThenStep());
 		assertClass(Call.class, _if.getThenStep());
 		assertNotNull(_if.getElseStep());

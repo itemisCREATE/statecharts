@@ -381,6 +381,7 @@ public class HistoryTest extends ModelSequencerTest {
 		Sequence enterSequence = flow.getEnterSequence();
 		ExecutionRegion _r = (ExecutionRegion) _s1.getSuperScope();
 
-		assertCall(enterSequence, 0, _r.getEnterSequence());
+		assertCall(enterSequence, 0, flow.getEntryAction());
+		assertCall(enterSequence, 1, _r.getEnterSequence());
 	}
 }

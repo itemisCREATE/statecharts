@@ -54,9 +54,9 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 
 		assertNotNull(flow.getEnterSequence());
-		assertEquals(1, flow.getEnterSequence().getSteps().size());
+		assertEquals(2, flow.getEnterSequence().getSteps().size());
 
-		assertCall(flow.getEnterSequence(), 0, flow.getStates().get(0)
+		assertCall(flow.getEnterSequence(), 1, flow.getStates().get(0)
 				.getSuperScope().getEnterSequence());
 
 		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequence(),
@@ -75,16 +75,17 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 
 		assertNotNull(flow.getEnterSequence());
-		assertEquals(2, flow.getEnterSequence().getSteps().size());
+		assertEquals(3, flow.getEnterSequence().getSteps().size());
 
-		assertCall(flow.getEnterSequence(), 0, flow.getStates().get(0)
+		assertCall(flow.getEnterSequence(), 0, flow.getEntryAction());
+		assertCall(flow.getEnterSequence(), 1, flow.getStates().get(0)
 				.getSuperScope().getEnterSequence());
 		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequence(),
 				0, flow.getNodes().get(0).getReactSequence());
 		assertCall(flow.getNodes().get(0).getReactSequence(), 0, flow
 				.getStates().get(0).getEnterSequence());
 
-		assertCall(flow.getEnterSequence(), 1, flow.getStates().get(2)
+		assertCall(flow.getEnterSequence(), 2, flow.getStates().get(2)
 				.getSuperScope().getEnterSequence());
 		assertCall(flow.getStates().get(2).getSuperScope().getEnterSequence(),
 				0, flow.getNodes().get(1).getReactSequence());
@@ -103,10 +104,11 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 
 		assertNotNull(flow.getEnterSequence());
-		assertEquals(1, flow.getEnterSequence().getSteps().size());
+		assertEquals(2, flow.getEnterSequence().getSteps().size());
 
 		assertAssignment(flow.getEnterSequence(), 0, "e1",
 				AssignmentOperator.ASSIGN, "true");
+		assertCall(flow.getEnterSequence(), 1, flow.getEntryAction());
 	}
 
 	@Test
