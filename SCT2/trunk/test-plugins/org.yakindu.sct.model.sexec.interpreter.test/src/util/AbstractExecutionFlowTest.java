@@ -49,7 +49,7 @@ public abstract class AbstractExecutionFlowTest {
 		ExecutionVariable variable = context().getVariable(variableName);
 		assertNotNull("Variable '" + variableName + "' is not defined",
 				variable);
-		assertEquals(variable.getValue(), value);
+		assertEquals(value, variable.getValue());
 	}
 
 	protected void assertIsActive(String stateName) {
