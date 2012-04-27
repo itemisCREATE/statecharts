@@ -75,7 +75,7 @@ if («statemachineHandleName()»->base.base.history[«region.historyVector.offset»]
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Execution»
-	«this.statement.toCCode()»
+	«this.statement.toCCode()»;
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call»
@@ -285,6 +285,7 @@ void «deepEnterSequence.deepEnterFunction()»
 
 #include "«StName()».h"
 #include <stdlib.h>
+#include <string.h>
 
 «IF this.isSingleton() == true»
 /* singleton handle and singleton handle pointer declaration */
@@ -366,12 +367,11 @@ void «stName()»_init(«this.handleAdditionComma()» Timer* timer, EventPool* event
 «IF this.isSingleton() == true»
 «StName()»* «scName()»_get_handle()
 { return «statemachineHandleName()»; } 
-«ELSE»
+«ENDIF»
 «FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
-extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName().toFirstLower()»(«handleAddition()»)
+extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«handleAddition()»)
 {  return &«statemachineHandleName()»->«interface.interfaceObjectName()»; }
 «ENDFOREACH»
-«ENDIF»
 
 void «stName()»_enter(«handleAddition()»)
 {

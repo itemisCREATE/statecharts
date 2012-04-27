@@ -51,7 +51,7 @@ public class GeneratorEntryAccess {
 		}
 
 		public boolean isAdapterForType(Object type) {
-			return false;
+			return type == ProxyAdapter.class;
 		}
 	}
 }
