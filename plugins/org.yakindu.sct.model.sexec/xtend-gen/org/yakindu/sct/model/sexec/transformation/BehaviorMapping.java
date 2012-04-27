@@ -642,8 +642,7 @@ public class BehaviorMapping {
                   }
                 };
               Iterable<EventSpec> _filter_1 = IterableExtensions.<EventSpec>filter(_triggers_1, _function_1);
-              List<EventSpec> _list = IterableExtensions.<EventSpec>toList(_filter_1);
-              boolean _isEmpty_1 = _list.isEmpty();
+              boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_1);
               boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
               _operator_or = BooleanExtensions.operator_or(_isEmpty, _operator_not);
             }
