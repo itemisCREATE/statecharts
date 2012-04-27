@@ -16,21 +16,20 @@ import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureType;
 
+import de.itemis.utils.jface.viewers.help.AbstractUserHelpDocumentationProvider;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class HelpSystemDocumentationProvider extends
-		AbstractHelpSystemDocumentationProvider implements
+public class SGenUserHelpDocumentationProvider extends
+		AbstractUserHelpDocumentationProvider implements
 		IEObjectDocumentationProvider {
 
-	public static final String EMPTY_DOCUMENTATION = "";
+	private static final String PLUGIN_ID = "org.yakindu.sct.ui.editor";
+	private static final String CONTEXT_ID = "sgen_feature";
 
-	@Override
-	protected String getContextId() {
-		return "org.yakindu.sct.ui.editor.sc_genmodel_features";
-	}
 
 	public String getDocumentation(EObject o) {
 		if (o instanceof FeatureConfiguration) {
@@ -53,11 +52,12 @@ public class HelpSystemDocumentationProvider extends
 	}
 
 	protected String getFeatureTypeDocumentation(String name) {
-		String helpContent = parseHelpContent();
-		int beginIndex = helpContent.indexOf("<h4 id=\"" + name + "\">");
-		int endIndex = helpContent.indexOf("<!-- End " + name + " -->");
+		name = CONTEXT_ID + "_" + name.toLowerCase();
+		String userHelp = getHelp(PLUGIN_ID + "." + CONTEXT_ID);
+		int beginIndex = userHelp.indexOf("<!-- Start " + name + " -->");
+		int endIndex = userHelp.indexOf("<!-- End " + name + " -->");
 		if (beginIndex >= 0 && endIndex >= 0 && endIndex > beginIndex) {
-			return helpContent.substring(beginIndex, endIndex);
+			return userHelp.substring(beginIndex, endIndex);
 		}
 		return EMPTY_DOCUMENTATION;
 	}
