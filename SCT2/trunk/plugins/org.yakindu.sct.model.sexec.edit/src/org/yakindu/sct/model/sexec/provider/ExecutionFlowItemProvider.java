@@ -204,6 +204,8 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__NODES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__REGIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION);
 		}
 		return childrenFeatures;
 	}
@@ -271,6 +273,8 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__NODES:
 			case SexecPackage.EXECUTION_FLOW__REGIONS:
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
+			case SexecPackage.EXECUTION_FLOW__ENTRY_ACTION:
+			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -352,6 +356,196 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR,
 				 SexecFactory.eINSTANCE.createStateVector()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createCheck()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createCheckRef()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createIf()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createExecution()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createEnterState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createExitState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createScheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createStateSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createTraceStateEntered()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createTraceStateExited()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createTraceBeginRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createCheck()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createCheckRef()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createIf()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createExecution()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createEnterState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createExitState()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createScheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createUnscheduleTimeEvent()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createStateSwitch()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createTraceStateEntered()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createTraceStateExited()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createTraceBeginRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
 	}
 
 	/**
@@ -371,6 +565,8 @@ public class ExecutionFlowItemProvider
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATES ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES;
 
