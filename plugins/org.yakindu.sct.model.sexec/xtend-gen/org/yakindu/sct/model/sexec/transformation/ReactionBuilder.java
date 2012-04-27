@@ -34,6 +34,7 @@ import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
 import org.yakindu.sct.model.sexec.StateCase;
 import org.yakindu.sct.model.sexec.StateSwitch;
+import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TraceNodeExecuted;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
@@ -248,25 +249,60 @@ public class ReactionBuilder {
       ExecutionState _create = this.mapping.create(state);
       final ExecutionState execState = _create;
       List<RegularState> _parentStates = this.sgraph.parentStates(state);
-      final List<RegularState> parents = _parentStates;
-      final Function1<RegularState,ExecutionNode> _function = new Function1<RegularState,ExecutionNode>() {
-          public ExecutionNode apply(final RegularState p) {
+      final Function1<RegularState,ExecutionState> _function = new Function1<RegularState,ExecutionState>() {
+          public ExecutionState apply(final RegularState p) {
             ExecutionState _create_1 = ReactionBuilder.this.mapping.create(p);
-            return ((ExecutionNode) _create_1);
+            return ((ExecutionState) _create_1);
           }
         };
-      List<ExecutionNode> _map = ListExtensions.<RegularState, ExecutionNode>map(parents, _function);
+      List<ExecutionState> _map = ListExtensions.<RegularState, ExecutionState>map(_parentStates, _function);
+      final Function1<ExecutionState,Boolean> _function_1 = new Function1<ExecutionState,Boolean>() {
+          public Boolean apply(final ExecutionState p_1) {
+            StateVector _stateVector = p_1.getStateVector();
+            int _offset = _stateVector.getOffset();
+            StateVector _stateVector_1 = execState.getStateVector();
+            int _offset_1 = _stateVector_1.getOffset();
+            boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_offset), ((Integer)_offset_1));
+            return ((Boolean)_operator_equals);
+          }
+        };
+      Iterable<ExecutionState> _filter = IterableExtensions.<ExecutionState>filter(_map, _function_1);
+      final Iterable<ExecutionState> parents = _filter;
+      Iterable<ExecutionNode> _xifexpression = null;
       EObject _rootContainer = EcoreUtil.getRootContainer(execState);
-      HashSet<ExecutionNode> _newHashSet = CollectionLiterals.<ExecutionNode>newHashSet(((ExecutionNode) _rootContainer));
-      Iterable<ExecutionNode> _concat = Iterables.<ExecutionNode>concat(_map, _newHashSet);
-      final Iterable<ExecutionNode> parentNodes = _concat;
-      final Function2<Sequence,ExecutionNode,Sequence> _function_1 = new Function2<Sequence,ExecutionNode,Sequence>() {
+      StateVector _stateVector_2 = ((ExecutionFlow) _rootContainer).getStateVector();
+      int _offset_2 = _stateVector_2.getOffset();
+      StateVector _stateVector_3 = execState.getStateVector();
+      int _offset_3 = _stateVector_3.getOffset();
+      boolean _operator_equals_1 = ObjectExtensions.operator_equals(((Integer)_offset_2), ((Integer)_offset_3));
+      if (_operator_equals_1) {
+        final Function1<ExecutionState,ExecutionNode> _function_2 = new Function1<ExecutionState,ExecutionNode>() {
+            public ExecutionNode apply(final ExecutionState p_2) {
+              return ((ExecutionNode) p_2);
+            }
+          };
+        Iterable<ExecutionNode> _map_1 = IterableExtensions.<ExecutionState, ExecutionNode>map(parents, _function_2);
+        EObject _rootContainer_1 = EcoreUtil.getRootContainer(execState);
+        HashSet<ExecutionNode> _newHashSet = CollectionLiterals.<ExecutionNode>newHashSet(((ExecutionNode) _rootContainer_1));
+        Iterable<ExecutionNode> _concat = Iterables.<ExecutionNode>concat(_map_1, _newHashSet);
+        _xifexpression = _concat;
+      } else {
+        final Function1<ExecutionState,ExecutionNode> _function_3 = new Function1<ExecutionState,ExecutionNode>() {
+            public ExecutionNode apply(final ExecutionState p_3) {
+              return ((ExecutionNode) p_3);
+            }
+          };
+        Iterable<ExecutionNode> _map_2 = IterableExtensions.<ExecutionState, ExecutionNode>map(parents, _function_3);
+        _xifexpression = _map_2;
+      }
+      final Iterable<ExecutionNode> parentNodes = _xifexpression;
+      final Function2<Sequence,ExecutionNode,Sequence> _function_4 = new Function2<Sequence,ExecutionNode,Sequence>() {
           public Sequence apply(final Sequence r , final ExecutionNode s) {
             Sequence _createReactionSequence = ReactionBuilder.this.createReactionSequence(s, r);
             return _createReactionSequence;
           }
         };
-      Sequence _fold = IterableExtensions.<ExecutionNode, Sequence>fold(parentNodes, null, _function_1);
+      Sequence _fold = IterableExtensions.<ExecutionNode, Sequence>fold(parentNodes, null, _function_4);
       execState.setReactSequence(_fold);
       Sequence _reactSequence = execState.getReactSequence();
       _reactSequence.setName("react");

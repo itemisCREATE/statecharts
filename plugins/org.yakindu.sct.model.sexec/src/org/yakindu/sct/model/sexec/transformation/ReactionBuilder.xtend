@@ -18,6 +18,7 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.sexec.ExecutionState
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
@@ -95,8 +96,10 @@ class ReactionBuilder {
 	def Sequence defineCycle(RegularState state) {
 	
 		val execState = state.create
-		val parents = state.parentStates
-		val parentNodes = Iterables::concat(parents.map(p|p.create as ExecutionNode),newHashSet(EcoreUtil2::getRootContainer(execState) as ExecutionNode))
+		val parents = state.parentStates.map(p|p.create as ExecutionState).filter(p|p.stateVector.offset == execState.stateVector.offset)
+		val parentNodes = if ((EcoreUtil2::getRootContainer(execState) as ExecutionFlow).stateVector.offset == execState.stateVector.offset)
+			Iterables::concat(parents.map(p|p as ExecutionNode),newHashSet(EcoreUtil2::getRootContainer(execState) as ExecutionNode))
+			else parents.map(p|p as ExecutionNode)
 		execState.reactSequence = parentNodes.fold(null, [r, s | {
 			s.createReactionSequence(r)
 		}])
