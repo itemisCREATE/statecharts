@@ -93,7 +93,6 @@ h2. Statechart description language
 
 The textual description language is used to declare and describe behaviors in the state machine. It is case sensitive.
 
-
 h3. Typesystem
 
 The language has an integrated small typesystem with the following simple types:
@@ -198,13 +197,18 @@ An operation is called similar to other programming languages with the operation
 
 h3. Scopes
 
+==<!-- Start stext_keyword_namespace -->==
+
 h4. Namespace
 
 The language allows to define unique namespaces, which can be used to qualify references to the statechart.
 
-
 bc.. 
 namespace trafficlights
+
+p. ==<!-- End stext_keyword_namespace -->==
+==<!-- Start stext_keyword_interface -->==
+
 h4. interface scope
 
 Declarations in the interface scope are externally visible. They can be shared within the environment.
@@ -217,6 +221,10 @@ out event event3
 var variable1 : real
 entrypoint entry1
 exitpoint exit1
+
+p. ==<!-- End stext_keyword_interface -->==
+==<!-- Start stext_keyword_internal -->==
+
 h4. internal scope
 
 Declarations made in an internal scope are only visible for contained states.
@@ -230,11 +238,14 @@ local event localEvent3: localEvent || localEvent2 : 25
 operation localOperation (integer, integer): integer
 localEvent3 / raise NamedInterface.event3 :
 localOperation(valueOf(localEvent),NamedInterface.variable1);
+
+p. ==<!-- End stext_keyword_internal -->==
+
 h3. Declarations
 
 Within scopes there can be declarations of Events, Variables, Operations, LocalReactions, EntryPoints and ExitPoints.
 
-
+==<!-- Start stext_keyword_event -->==
 
 h3. Events
 
@@ -256,6 +267,11 @@ internal:
 event localEvent1: integer
 local event localEvent2 = NamedInterface.event1 || localEvent1
 local event localEvent3 = localEvent2 || 25
+
+p. ==<!-- End stext_keyword_event -->==
+
+==<!-- Start stext_keyword_var -->==
+
 h3. Variables
 
 Variables can have different visibilities. They can be visible for the environment:
@@ -270,9 +286,14 @@ p. Variables can be referenced by the environment.
 
 bc.. 
 var external variable3: integer = 34
+
+p. ==<!-- End stext_keyword_var -->==
+
 h3. Actions
 
 Actions are key constructs in state machines to model behavior. The YAKINDU SCT 2 knows the following kinds of actions.
+
+==<!-- Start stext_keyword_after -->==
 
 h4. after
 
@@ -283,33 +304,58 @@ after 1s
 after 345mics
 after 4050ns
 after 1234ms
+
+p. ==<!-- End stext_keyword_after -->==
+==<!-- Start stext_keyword_always -->==
+
 h4. always
 
 The keyword always is used only for local reactions that are executed always.
+
+==<!-- End stext_keyword_always -->==
+==<!-- Start stext_keyword_default -->==
 
 h4. default
 
 The keyword default marks transitions that are always accomplished.
 
+==<!-- End stext_keyword_else -->==
+==<!-- Start stext_keyword_else -->==
+
 h4. else
 
 The keyword _else_ marks transitions that are carried out in case of a condition. ???
+
+==<!-- End stext_keyword_else -->==
+==<!-- Start stext_keyword_entry -->==
 
 h4. entry
 
 The keyword entry marks actions that are carried out on entering a state.
 
+==<!-- End stext_keyword_entry -->==
+==<!-- Start stext_keyword_every -->==
+
 h4. every
 
 _Every_ marks a periodic transition.
+
+==<!-- End stext_keyword_every -->==
+==<!-- Start stext_keyword_exit -->==
 
 h4. exit
 
 _Exit_ marks actions on leaving a state.
 
+==<!-- End stext_keyword_exit -->==
+==<!-- Start stext_keyword_oncycle -->==
+
 h4. onCycle
 
 _OnCycle_ marks actions that are carried out.
+
+==<!-- End stext_keyword_oncycle -->==
+==<!-- Start stext_keyword_operation -->==
 
 h3. Operations
 
@@ -318,6 +364,9 @@ Operations can have none, one or multiple parameters. The parameters are only de
 bc.. 
 operation localOperation (integer, integer):integer
 localEvent3/ raise NamedInterface3.event1
+
+p. ==<!-- End stext_keyword_operation -->==
+
 h3. LocalReactions
 
 Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is  declared as follows:
@@ -342,18 +391,27 @@ p. Local reactions can have priority values. These are defined by a following # 
 bc.. 
 localEvent2 / NamedInterface.variable2 += 3; #1
 localEvent3 / NamedInterface.variable4 += 2.0; #2
+
+p. ==<!-- Start stext_keyword_entrypoint -->==
+
 h3. EntryPoints
 
 Every state chart has an entry point. An entry point can be declared like the following:
 
 bc.. 
 entrypoint entry1
+
+p. ==<!-- End stext_keyword_entrypoint -->==
+==<!-- Start stext_keyword_exitpoint -->==
+
 h3. ExitPoints
 
 Every state chart has an exit point. This exit point can be declared like the following.
 
 bc.. 
 exitpoint exit1
+p. ==<!-- End stext_keyword_exitpoint -->==
+
 h2. SGraph
 
 SGraph is the metamodel for the graphical part of the statechart editor. It owns all core elements of a state machine like states, pseudostates, transitons etc. but it describes how these elements shall be shown by the editor.

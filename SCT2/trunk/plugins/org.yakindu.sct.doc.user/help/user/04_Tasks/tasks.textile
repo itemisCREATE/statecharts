@@ -97,6 +97,7 @@ h2. Core Features
 
 The following section describes the *Core Features* which are available for all code generators:
 
+==<!-- Start sgen_feature_outlet -->==
 h4. Outlet
 
 The *Outlet* feature specifies the target project and folder for the generated artifacts. It is a *required* feature and consists of the following parameters:
@@ -110,8 +111,8 @@ feature Outlet {
 	targetProject = "ExampleProject"
 	targetFolder = "src-gen"
 }
-p. ==<!-- End Outlet -->==
-
+p. ==<!-- End sgen_feature_outlet -->==
+==<!-- Start sgen_feature_licenseheader -->==
 h4. LicenseHeader
 
 The *LicenseHeader* feature specifies the license text that should be added as a header to the generated artifacts. It is an *optional* feature and consists of the following parameters:
@@ -124,8 +125,8 @@ bc..
 feature LicenseHeader {
 	licenseText = "Copyright (c) 2012 committers of YAKINDU and others."
 }
-p. ==<!-- End LicenseHeader -->==
-
+p. ==<!-- End sgen_feature_licenseheader -->==
+==<!-- Start sgen_feature_functioninlining -->==
 h4. FunctionInlining
 
 The *FunctionInlining* feature allows the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance because less operation calls are necessary. 
@@ -149,8 +150,8 @@ feature FunctionInlining {
 	inlineEnterRegion = true
 	inlineEntries = true
 }
-p. ==<!-- End FunctionInlining -->==
-
+p. ==<!-- End sgen_feature_functioninlining -->==
+==<!-- Start sgen_feature_debug -->==
 h4. Debug
 
 The *Debug* feature dumps the Execution Model to the target folder as xmi model. It is an *optional* feature and consists of the following parameters:
@@ -164,9 +165,11 @@ feature Debug {
 	dumpSexec = true
 }
 
-p. ==<!-- End Debug -->==
+p. ==<!-- End sgen_feature_debug -->==
 
 h2. Java Generator Features
+
+==<!-- Start sgen_feature_naming -->==
 
 h4. Naming
 
@@ -183,8 +186,8 @@ feature Naming {
 	basePackage = "org.yakindu.sct"
 	implementationSuffix = "Impl"
 }
-p. ==<!-- End Naming -->==	
-
+p. ==<!-- End sgen_feature_naming -->==	
+==<!-- Start sgen_feature_generalfeatures -->==	
 
 h4. GeneralFeatures
 
@@ -209,7 +212,7 @@ feature GeneralFeatures {
 	StatemachineFactorySupport = true
 }
 
-p. ==<!-- End GeneralFeatures -->==			
+p. ==<!-- End sgen_feature_generalfeatures -->==			
 
 h2. C Generator Fetures
 TBD
@@ -235,6 +238,8 @@ h3. Executing a custom Xtend2/Java code generator
 YAKINDU Statechart Tools provide a convenient way to execute your generator while you are developing it.
 Therefore, you have to create a new *Generator Model* with the generator id *yakindu::generic*, either by using the *New Statechart Generator Model* wizard or by simple creating a new text file with the file extension *.sgen*. the following feature allows to configure your code generator.
 
+==<!-- Start sgen_feature_generator -->==
+
 h4. Generator
 
 The *Generator* feature allows the configuration of a custom code generator located in the workspace and written in Java or another JVM language. It is a *required* feature and consists of the following parameters:
@@ -251,7 +256,7 @@ feature Generator {
 	generatorClass = "org.yakindu.sct.MyGenerator"
 }
 		
-p. ==<!-- End Generator -->==
+p. ==<!-- End sgen_feature_generator -->==
 
 
 

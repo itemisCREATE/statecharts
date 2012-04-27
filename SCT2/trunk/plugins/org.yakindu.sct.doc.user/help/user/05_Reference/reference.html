@@ -224,10 +224,15 @@ event checkValidity : boolean
 		</p>
 		<p>An operation is called similar to other programming languages with the operation name and passing concrete parameters. The parameters can be expressions.</p>
 		<h3 id="Scopes">Scopes</h3>
+		<p><!-- Start stext_keyword_namespace --></p>
 		<h4 id="Namespace">Namespace</h4>
 		<p>The language allows to define unique namespaces, which can be used to qualify references to the statechart.</p>
 		<pre><code>namespace trafficlights
+
 </code></pre>
+		<p><!-- End stext_keyword_namespace -->
+			<br/><!-- Start stext_keyword_interface -->
+		</p>
 		<h4 id="interfacescope">interface scope</h4>
 		<p>Declarations in the interface scope are externally visible. They can be shared within the environment.</p>
 		<pre><code>interface NamedInterface:
@@ -236,7 +241,11 @@ out event event3
 var variable1 : real
 entrypoint entry1
 exitpoint exit1
+
 </code></pre>
+		<p><!-- End stext_keyword_interface -->
+			<br/><!-- Start stext_keyword_internal -->
+		</p>
 		<h4 id="internalscope">internal scope</h4>
 		<p>Declarations made in an internal scope are only visible for contained states.</p>
 		<pre><code>internal:
@@ -247,9 +256,12 @@ local event localEvent3: localEvent || localEvent2 : 25
 operation localOperation (integer, integer): integer
 localEvent3 / raise NamedInterface.event3 :
 localOperation(valueOf(localEvent),NamedInterface.variable1);
+
 </code></pre>
+		<p><!-- End stext_keyword_internal --></p>
 		<h3 id="Declarations">Declarations</h3>
 		<p>Within scopes there can be declarations of Events, Variables, Operations, LocalReactions, EntryPoints and ExitPoints.</p>
+		<p><!-- Start stext_keyword_event --></p>
 		<h3 id="Events">Events</h3>
 		<p>Within interface scope events have an direction. They can either be ingoing or outgoing:</p>
 		<pre><code>interface NamedInterface:
@@ -265,7 +277,10 @@ event localEvent1 : integer
 event localEvent1: integer
 local event localEvent2 = NamedInterface.event1 || localEvent1
 local event localEvent3 = localEvent2 || 25
+
 </code></pre>
+		<p><!-- End stext_keyword_event --></p>
+		<p><!-- Start stext_keyword_var --></p>
 		<h3 id="Variables">Variables</h3>
 		<p>Variables can have different visibilities. They can be visible for the environment:</p>
 		<pre><code>var variable1: real
@@ -277,9 +292,12 @@ local event localEvent3 = localEvent2 || 25
 </code></pre>
 		<p>Variables can be referenced by the environment.</p>
 		<pre><code>var external variable3: integer = 34
+
 </code></pre>
+		<p><!-- End stext_keyword_var --></p>
 		<h3 id="Actions">Actions</h3>
 		<p>Actions are key constructs in state machines to model behavior. The YAKINDU SCT 2 knows the following kinds of actions.</p>
+		<p><!-- Start stext_keyword_after --></p>
 		<h4 id="after">after</h4>
 		<p>With the keyword 
 			<em>after</em> you can model a transition after a certain period of time:
@@ -288,34 +306,61 @@ local event localEvent3 = localEvent2 || 25
 after 345mics
 after 4050ns
 after 1234ms
+
 </code></pre>
+		<p><!-- End stext_keyword_after -->
+			<br/><!-- Start stext_keyword_always -->
+		</p>
 		<h4 id="always">always</h4>
 		<p>The keyword always is used only for local reactions that are executed always.</p>
+		<p><!-- End stext_keyword_always -->
+			<br/><!-- Start stext_keyword_default -->
+		</p>
 		<h4 id="default">default</h4>
 		<p>The keyword default marks transitions that are always accomplished.</p>
+		<p><!-- End stext_keyword_else -->
+			<br/><!-- Start stext_keyword_else -->
+		</p>
 		<h4 id="else">else</h4>
 		<p>The keyword 
 			<em>else</em> marks transitions that are carried out in case of a condition. ???
 		</p>
+		<p><!-- End stext_keyword_else -->
+			<br/><!-- Start stext_keyword_entry -->
+		</p>
 		<h4 id="entry">entry</h4>
 		<p>The keyword entry marks actions that are carried out on entering a state.</p>
+		<p><!-- End stext_keyword_entry -->
+			<br/><!-- Start stext_keyword_every -->
+		</p>
 		<h4 id="every">every</h4>
 		<p>
 			<em>Every</em> marks a periodic transition.
+		</p>
+		<p><!-- End stext_keyword_every -->
+			<br/><!-- Start stext_keyword_exit -->
 		</p>
 		<h4 id="exit">exit</h4>
 		<p>
 			<em>Exit</em> marks actions on leaving a state.
 		</p>
+		<p><!-- End stext_keyword_exit -->
+			<br/><!-- Start stext_keyword_oncycle -->
+		</p>
 		<h4 id="onCycle">onCycle</h4>
 		<p>
 			<em>OnCycle</em> marks actions that are carried out.
+		</p>
+		<p><!-- End stext_keyword_oncycle -->
+			<br/><!-- Start stext_keyword_operation -->
 		</p>
 		<h3 id="Operations">Operations</h3>
 		<p>Operations can have none, one or multiple parameters. The parameters are only declarated by their type. An operation can have one return type similar to Java.</p>
 		<pre><code>operation localOperation (integer, integer):integer
 localEvent3/ raise NamedInterface3.event1
+
 </code></pre>
+		<p><!-- End stext_keyword_operation --></p>
 		<h3 id="LocalReactions">LocalReactions</h3>
 		<p>Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is  declared as follows:</p>
 		<pre><code>LocalReaction: ReactionTrigger '/' ReactionEffect ('#' ReactionProperties)?
@@ -335,15 +380,22 @@ localEvent1 / raise NamedInterface.event3 : localOperation (valueOf(localEvent),
 		<p>Local reactions can have priority values. These are defined by a following # and the integer number of priority:</p>
 		<pre><code>localEvent2 / NamedInterface.variable2 += 3; #1
 localEvent3 / NamedInterface.variable4 += 2.0; #2
+
 </code></pre>
+		<p><!-- Start stext_keyword_entrypoint --></p>
 		<h3 id="EntryPoints">EntryPoints</h3>
 		<p>Every state chart has an entry point. An entry point can be declared like the following:</p>
 		<pre><code>entrypoint entry1
+
 </code></pre>
+		<p><!-- End stext_keyword_entrypoint -->
+			<br/><!-- Start stext_keyword_exitpoint -->
+		</p>
 		<h3 id="ExitPoints">ExitPoints</h3>
 		<p>Every state chart has an exit point. This exit point can be declared like the following.</p>
 		<pre><code>exitpoint exit1
 </code></pre>
+		<p><!-- End stext_keyword_exitpoint --></p>
 		<h2 id="SGraph">SGraph</h2>
 		<p>SGraph is the metamodel for the graphical part of the statechart editor. It owns all core elements of a state machine like states, pseudostates, transitons etc. but it describes how these elements shall be shown by the editor.</p>
 		<h2 id="SExec">SExec</h2>

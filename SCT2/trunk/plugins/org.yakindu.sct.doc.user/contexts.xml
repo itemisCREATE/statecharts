@@ -27,7 +27,10 @@
       <topic href="help/user/05_Reference/reference.html#Transitions" label="Transitions reference"/>
  	     
    </context>
-   <context id="sc_genmodel_features" title="Genmodel Features">
-      <topic href="help/user/04_Tasks/tasks.html" label="Outlet"/>
+   <context id="sgen_feature" title="Genmodel Features">
+      <topic href="help/user/04_Tasks/tasks.html" label="Help_Topic"/>
+   </context>
+   <context id="stext_keyword">
+      <topic href="help/user/05_Reference/reference.html" label="Help_Topic"/>
    </context>
 </contexts>
