@@ -253,7 +253,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			this.delegate = delegate;
 		}
 
-		@Override
 		public void accept(ICompletionProposal proposal) {
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
@@ -266,7 +265,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			delegate.accept(proposal);
 		}
 
-		@Override
 		public boolean canAcceptMoreProposals() {
 			return delegate.canAcceptMoreProposals();
 		}
