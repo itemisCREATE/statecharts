@@ -162,7 +162,17 @@ public class StextTestFactory extends StextFactoryImpl {
 				StextFactory.eINSTANCE.createEntryEvent());
 	}
 
+	public static LocalReaction _createEntryAction(Statechart parent) {
+		return _createLocalReaction(parent,
+				StextFactory.eINSTANCE.createEntryEvent());
+	}
+
 	public static LocalReaction _createExitAction(State parent) {
+		return _createLocalReaction(parent,
+				StextFactory.eINSTANCE.createExitEvent());
+	}
+
+	public static LocalReaction _createExitAction(Statechart parent) {
 		return _createLocalReaction(parent,
 				StextFactory.eINSTANCE.createExitEvent());
 	}
