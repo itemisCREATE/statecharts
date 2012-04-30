@@ -39,6 +39,7 @@ import org.yakindu.sct.model.stext.stext.TimeUnit
 
 import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
  
+ 
 
 class BehaviorMapping {
 
@@ -48,6 +49,7 @@ class BehaviorMapping {
 	@Inject extension SexecElementMapping factory
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension TraceExtensions trace
+	@Inject extension SequenceBuilder sb
 
 
 	def ExecutionFlow mapEntryActions(Statechart statechart, ExecutionFlow r){
@@ -151,48 +153,33 @@ class BehaviorMapping {
 		if (seq.steps.size > 0) seq else null
 	}
 
-	def Statement buildValueExpression(TimeEventSpec tes) {
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-		val IntLiteral intLit = stext.factory.createIntLiteral
-		intLit.value = tes.value
-		pve.value = intLit
+//	def Statement divide(Expression stmnt, long divisor) {
+//		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
+//		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
+//		val IntLiteral intLit = stext.factory.createIntLiteral
+//		intLit.value = divisor.intValue
+//		pve.value = intLit
+//		
+//		div.operator = MultiplicativeOperator::DIV
+//		div.leftOperand = stmnt
+//		div.rightOperand = pve
+//		
+//		div
+//	}
 	
-		switch (tes.unit) {
-			case TimeUnit::MILLISECOND : pve
-			case TimeUnit::MICROSECOND : pve.divide(1000)
-			case TimeUnit::NANOSECOND  : pve.divide(1000000)
-			case TimeUnit::SECOND      : pve.multiply(1000)
-			default : pve
-		} 
-	}
-	
-	def Statement divide(Expression stmnt, long divisor) {
-		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-		val IntLiteral intLit = stext.factory.createIntLiteral
-		intLit.value = divisor.intValue
-		pve.value = intLit
-		
-		div.operator = MultiplicativeOperator::DIV
-		div.leftOperand = stmnt
-		div.rightOperand = pve
-		
-		div
-	}
-	
-	def Statement multiply(Expression stmnt, long factor) {
-		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-		val IntLiteral intLit = stext.factory.createIntLiteral
-		intLit.value = factor.intValue
-		pve.value = intLit
-		
-		div.operator = MultiplicativeOperator::MUL
-		div.leftOperand = stmnt
-		div.rightOperand = pve
-		
-		div
-	}
+//	def Statement multiply(Expression stmnt, long factor) {
+//		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
+//		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
+//		val IntLiteral intLit = stext.factory.createIntLiteral
+//		intLit.value = factor.intValue
+//		pve.value = intLit
+//		
+//		div.operator = MultiplicativeOperator::MUL
+//		div.leftOperand = stmnt
+//		div.rightOperand = pve
+//		
+//		div
+//	}
 	
 		
 	def dispatch Sequence mapEffect(Effect effect) {}
@@ -435,5 +422,22 @@ class BehaviorMapping {
 		else if ( triggerCheck != null )  triggerCheck
 		else guard
 	}
+	
+	
+//	def Statement buildValueExpression(TimeEventSpec tes) {
+//		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
+//		val IntLiteral intLit = stext.factory.createIntLiteral
+//		intLit.value = tes.value
+//		pve.value = intLit
+//	
+//		switch (tes.unit) {
+//			case TimeUnit::MILLISECOND : pve
+//			case TimeUnit::MICROSECOND : pve.divide(1000)
+//			case TimeUnit::NANOSECOND  : pve.divide(1000000)
+//			case TimeUnit::SECOND      : pve.multiply(1000)
+//			default : pve
+//		} 
+//	}
+	
 	
 }

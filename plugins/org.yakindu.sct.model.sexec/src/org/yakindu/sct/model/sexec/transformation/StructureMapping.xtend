@@ -139,6 +139,7 @@ class StructureMapping {
 		var content = EcoreUtil2::eAllContentsAsList(statechart)
 		val allStates = content.filter(typeof(State))
 		allStates.forEach( s | s.mapTimeEventSpecs)
+		statechart.mapTimeEventSpecs
 		return r
 	}
 	
@@ -156,6 +157,23 @@ class StructureMapping {
 			val timeEvent = tes.createDerivedEvent
 			timeEvent.name = state.name + "_time_event_" + timeEventSpecs.indexOf(tes);
 			state.statechart.create.timeEventScope.declarations.add(timeEvent);
+			result.add(timeEvent);
+			
+		}	
+		
+		result
+	}
+	
+	
+	def mapTimeEventSpecs(Statechart statechart) {
+		
+		val timeEventSpecs = statechart.timeEventSpecs
+		
+		val result = new ArrayList<TimeEvent>();
+		for (tes : timeEventSpecs ) {
+			val timeEvent = tes.createDerivedEvent
+			timeEvent.name = statechart.name + "_time_event_" + timeEventSpecs.indexOf(tes);
+			statechart.create.timeEventScope.declarations.add(timeEvent);
 			result.add(timeEvent);
 			
 		}	

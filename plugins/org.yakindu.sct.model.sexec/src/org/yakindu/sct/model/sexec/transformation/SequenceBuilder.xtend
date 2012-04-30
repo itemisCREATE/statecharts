@@ -18,9 +18,18 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
+import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.stext.stext.IntLiteral
+import org.yakindu.sct.model.stext.stext.TimeUnit
 
 class SequenceBuilder {
 	
+	@Inject extension StatechartExtensions sc
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension StextExtensions stext
 	@Inject extension SexecExtensions sexec
@@ -351,17 +360,25 @@ class SequenceBuilder {
 		return exitSequence
 	}
 	
+	 
+	
 	def defineStatechartEnterSequence(ExecutionFlow flow, Statechart sc) {
 
 		val enterSequence = sexec.factory.createSequence
 		enterSequence.name = "enter"
 		enterSequence.comment = "Default enter sequence for statechart " + sc.name
-		
+	    	
 		for (VariableDefinition vd : sc.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))) {
 			if (vd.initialValue != null) {
-				enterSequence.steps.add(vd.createInitialization)
+		 		enterSequence.steps.add(vd.createInitialization)
 			}
 		}
+		
+		for (tes : sc.timeEventSpecs ) {
+			val timeEvent = tes.createDerivedEvent    
+			val scheduleStep = timeEvent.newScheduleTimeEvent(tes.buildValueExpression)
+			enterSequence.steps.add(scheduleStep)
+		}	
 		
 		if (flow.entryAction != null) enterSequence.steps.add(flow.entryAction.newCall)
 		
@@ -387,6 +404,51 @@ class SequenceBuilder {
 		execution.statement = assignment
 		return execution
 	}
+		
 	
+	
+	def Statement buildValueExpression(TimeEventSpec tes) {
+		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
+		val IntLiteral intLit = stext.factory.createIntLiteral
+		intLit.value = tes.value
+		pve.value = intLit
+	
+		switch (tes.unit) {
+			case TimeUnit::MILLISECOND : pve
+			case TimeUnit::MICROSECOND : pve.divide(1000)
+			case TimeUnit::NANOSECOND  : pve.divide(1000000)
+			case TimeUnit::SECOND      : pve.multiply(1000)
+			default : pve
+		} 
+	}
+	
+	def Statement divide(Expression stmnt, long divisor) {
+		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
+		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
+		val IntLiteral intLit = stext.factory.createIntLiteral
+		intLit.value = divisor.intValue
+		pve.value = intLit
+		
+		div.operator = MultiplicativeOperator::DIV
+		div.leftOperand = stmnt
+		div.rightOperand = pve
+		
+		div
+	}
+	
+	def Statement multiply(Expression stmnt, long factor) {
+		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
+		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
+		val IntLiteral intLit = stext.factory.createIntLiteral
+		intLit.value = factor.intValue
+		pve.value = intLit
+		
+		div.operator = MultiplicativeOperator::MUL
+		div.leftOperand = stmnt
+		div.rightOperand = pve
+		
+		div
+	}
+
 	
 }
