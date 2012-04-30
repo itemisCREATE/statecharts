@@ -445,7 +445,7 @@ int test_namespaces()
 			interfaceTest_if_third_get_v1(&machine.ifaceThird) < 52.84 );
 
 	/*@Desc: check if v1 of other interface is still 8877 */
-	assert( interfaceTest_if_other_get_v1(&machine.ifaceOther) == 8877 );
+	assert( interfaceTest_if_other_get_v1(&machine.ifaceOther) == 10 );
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&machine, &dummyTimer, &eventPool);

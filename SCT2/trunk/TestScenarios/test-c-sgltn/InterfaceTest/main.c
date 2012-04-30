@@ -7,6 +7,7 @@
 #include "DummyTimer.h"
 #include "InterfaceTestStatemachine.h"
 #include "InterfaceTestEvent.h"
+#include "definition.h"
 
 #define MAXEVENTSPERTYPE 4
 const char* stateName[6] = {"State1", "State2", "State3", "State4", "State5", "State6"};
@@ -468,7 +469,7 @@ int test_namespaces()
 			interfaceTest_if_third_get_v1() < 52.84 );
 
 	/*@Desc: check if v1 of other interface is still 8877 */
-	assert( interfaceTest_if_other_get_v1() == 8877 );
+	assert( interfaceTest_if_other_get_v1() == 10 );
 
 	/*@Desc: teardown statemachine */
 	teardownStatemachine(&dummyTimer, &eventPool);

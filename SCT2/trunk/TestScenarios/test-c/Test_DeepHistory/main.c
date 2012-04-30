@@ -18,7 +18,8 @@
 
 #define MAXEVENTSPERTYPE 4
 const char* stateName[10] = {"State1", "State2", "State3", "State4", "State5", "State6", "State7", "State8", "State9", "noState"};
-const int EnumTostateStr[10] = { _Test_DeepHistory_mainRegion_State1,
+const int EnumTostateStr[10] = { 
+		_Test_DeepHistory_mainRegion_State1,
 		_Test_DeepHistory_mainRegion_State2,
 		_Test_DeepHistory_mainRegion_State2_region0_State3,
 		_Test_DeepHistory_mainRegion_State2_region0_State4,

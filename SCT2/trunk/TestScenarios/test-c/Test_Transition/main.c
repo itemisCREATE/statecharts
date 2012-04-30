@@ -18,7 +18,10 @@
 
 #define MAXEVENTSPERTYPE 4
 const char* stateName[3] = {"State1", "State2", "noState"};
-const int EnumTostateStr[3] = { _Test_Transition_region0_State1, _Test_Transition_region0_State2, last_state };
+const int EnumTostateStr[3] = {
+		_Test_Transition_region0_State1,
+	    _Test_Transition_region0_State2,
+	    last_state };
 
 const char* getStateString(uint32_t index)
 {
