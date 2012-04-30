@@ -39,7 +39,6 @@ import org.yakindu.sct.model.stext.stext.TimeUnit
 
 import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
  
- 
 
 class BehaviorMapping {
 

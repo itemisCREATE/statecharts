@@ -8,6 +8,7 @@ import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sgraph.RegularState
 
+
 class TraceExtensions {
 	
 	@Inject extension SexecExtensions sexec

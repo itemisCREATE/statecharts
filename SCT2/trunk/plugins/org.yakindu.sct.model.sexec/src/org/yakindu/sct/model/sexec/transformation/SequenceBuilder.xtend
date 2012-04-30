@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.IntLiteral
 import org.yakindu.sct.model.stext.stext.TimeUnit
 
+
 class SequenceBuilder {
 	
 	@Inject extension StatechartExtensions sc
