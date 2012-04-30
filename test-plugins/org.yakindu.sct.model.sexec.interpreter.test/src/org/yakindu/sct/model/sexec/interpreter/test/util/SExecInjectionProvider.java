@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package util;
+package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.sct.model.sexec.interpreter.InterpreterModule;
