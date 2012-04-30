@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package util;
+package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -21,6 +21,8 @@ import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
+
+import util.TestModels;
 
 import com.google.inject.Inject;
 
