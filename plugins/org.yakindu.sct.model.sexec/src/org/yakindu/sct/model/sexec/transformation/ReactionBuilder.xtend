@@ -20,6 +20,7 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.sexec.ExecutionState
 
+
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping
 	@Inject extension SexecExtensions sexec

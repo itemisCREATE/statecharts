@@ -37,8 +37,7 @@ class FlowOptimizer {
 	boolean _inlineExitSequences    def inlineExitSequences(boolean b)  {_inlineExitSequences = b}
 	boolean _inlineChoices          def inlineChoices(boolean b)        {_inlineChoices = b}
 	boolean _inlineEntries          def inlineEntries(boolean b)        {_inlineEntries = b}
-	
-	
+
 	
 	def ExecutionFlow transform(ExecutionFlow flow) {
 		

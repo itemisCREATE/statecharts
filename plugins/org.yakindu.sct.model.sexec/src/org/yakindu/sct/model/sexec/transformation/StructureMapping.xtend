@@ -19,6 +19,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
+
 class StructureMapping {
 	 
 	@Inject extension SexecElementMapping mapping

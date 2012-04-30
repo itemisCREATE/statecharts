@@ -32,6 +32,7 @@ class ModelSequencer {
 	 * TRANSFORMATION ROOT
 	 */ 
 
+
 	def ExecutionFlow transform(Statechart sc) {
 		val ef = sc.create
 		

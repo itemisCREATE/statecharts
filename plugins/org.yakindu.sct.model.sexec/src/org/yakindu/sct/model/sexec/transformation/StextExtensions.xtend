@@ -3,6 +3,7 @@ package org.yakindu.sct.model.sexec.transformation
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.Expression
 
+
 class StextExtensions {
 	
 	def factory() { StextFactory::eINSTANCE }

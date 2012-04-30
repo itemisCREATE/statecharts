@@ -10,6 +10,7 @@ import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
 
+
 class SexecExtensions {
 	
 	def factory() { SexecFactory::eINSTANCE }

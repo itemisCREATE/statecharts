@@ -13,6 +13,7 @@ import org.yakindu.sct.model.sgraph.Vertex
 
 import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 
+
 class StateVectorBuilder {
 	
 	@Inject extension SexecExtensions sexec

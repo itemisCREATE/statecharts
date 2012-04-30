@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject
 import java.util.ArrayList
 import org.yakindu.sct.model.sgraph.EntryKind
 
+
 class SgraphExtensions {
 	
 	def factory() { SGraphFactory::eINSTANCE }
