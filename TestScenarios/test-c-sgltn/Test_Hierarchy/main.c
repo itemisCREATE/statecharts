@@ -18,11 +18,18 @@
 
 #define MAXEVENTSPERTYPE 4
 const char* stateName[13] = {"State1", "State2", "State3", "State4", "State5", "State6", "State7", "State8", "State9", "State10", "State11", "State12", "none"};
-const int EnumTostateStr[10] = { _Test_Hierarchy_mainRegion_State1, _Test_Hierarchy_mainRegion_State2, _Test_Hierarchy_mainRegion_State2_Region2_State3, _Test_Hierarchy_mainRegion_State2_Region2_State4,
-		_Test_Hierarchy_mainRegion_State2_Region2_State4_Region4_State5, _Test_Hierarchy_mainRegion_State2_Region2_State4_Region4_State6,
-		_Test_Hierarchy_mainRegion_State2_Region2_State4_Region4_State6_Region6_State7,
-		_Test_Hierarchy_mainRegion_State2_Region2_State4_Region4_State6_Region6_State8,
-		_Test_Hierarchy_mainRegion_State1_Region1_State9, _Test_Hierarchy_mainRegion_State1_Region1_State10 };
+const int EnumTostateStr[10] = {
+	      _Test_Hierarchy_mainRegion_State1,
+	      _Test_Hierarchy_mainRegion_State2,
+	      _Test_Hierarchy_mainRegion_State2_Region2_State3,
+	      _Test_Hierarchy_mainRegion_State2_Region2_State4,
+	      _Test_Hierarchy_mainRegion_State2_Region2_State4_Region4_State5,
+	      _Test_Hierarchy_mainRegion_State2_Region2_State4_Region4_State6,
+	      _Test_Hierarchy_mainRegion_State2_Region2_State4_Region4_State6_Region6_State7,
+	      _Test_Hierarchy_mainRegion_State2_Region2_State4_Region4_State6_Region6_State8,
+	      _Test_Hierarchy_mainRegion_State1_Region1_State9,
+	      _Test_Hierarchy_mainRegion_State1_Region1_State10
+};
 
 const char* getStateString(uint32_t index)
 {

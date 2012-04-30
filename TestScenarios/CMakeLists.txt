@@ -4,10 +4,10 @@ enable_testing()
 
 if (CMAKE_COMPILER_IS_GNUCC)
 #add_definitions( -Wall -O0 -g)
-SET(CMAKE_C_FLAGS "-O3 -Wall") # -fprofile-arcs -ftest-coverage")
+SET(CMAKE_C_FLAGS "-O0 -g -Wall -fprofile-arcs -ftest-coverage")
  
-#SET(CMAKE_SHARED_LINKER_FLAGS="-fprofile-arcs -ftest-coverage")
-#SET(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
+SET(CMAKE_SHARED_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
+SET(CMAKE_EXE_LINKER_FLAGS "-fprofile-arcs -ftest-coverage")
 
 endif (CMAKE_COMPILER_IS_GNUCC)
 
@@ -37,7 +37,7 @@ add_subdirectory(test-c-sgltn/Test_Hierarchy)
 add_subdirectory(test-c-sgltn/Test_ParallelRegions)
 add_subdirectory(test-c-sgltn/Test_Transition)
 add_subdirectory(test-c-sgltn/Test_ShallowHistory)
-add_subdirectory(test-c-sgltn/Test_DeepHistory)
+# add_subdirectory(test-c-sgltn/Test_DeepHistory)
 add_subdirectory(test-c-sgltn/Test_LocalActions)
 
 else (COMPILE_SINGLETON)
@@ -64,10 +64,10 @@ add_subdirectory(test-c/Test_LocalActions)
 
 if (CMAKE_COMPILER_IS_GNUCC)
 
-add_subdirectory(test-c/TimingTest_ParallelRegions)
+# add_subdirectory(test-c/TimingTest_ParallelRegions)
 
 endif (CMAKE_COMPILER_IS_GNUCC)
 
-# add_subdirectory(test-cppwrapper/InterfaceTest)
+add_subdirectory(test-cppwrapper/InterfaceTest)
 
 endif (COMPILE_SINGLETON)

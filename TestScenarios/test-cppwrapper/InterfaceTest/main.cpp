@@ -23,16 +23,16 @@ int test_default_interface_good()
 	integer retval;
 
 	InterfaceTestStatemachineOOW machine(&dummyTimer);
-	InterfaceTestIfOO interfaceTestIf = machine.get_iface();
-	InterfaceTestIfOtherOO interfaceTestIfOther = machine.get_ifaceOther();
-	InterfaceTestIfThirdOO interfaceTestIfThird = machine.get_ifaceThird();
+	InterfaceTestIfOO* interfaceTestIf = machine.get_iface();
+	InterfaceTestIfOtherOO* interfaceTestIfOther = machine.get_ifaceOther();
+	InterfaceTestIfThirdOO* interfaceTestIfThird = machine.get_ifaceThird();
 
 	/*@Desc: check the initial state */
 	std::cout << "actual State: "<< stateName[machine.getStates()[0]] << std::endl;
 	assert( stateName[machine.getStates()[0]] == "State1");
 
 	/*@Desc: raise event1 on default interface */
-	interfaceTestIf.raise_event1();
+	interfaceTestIf->raise_event1();
 
 	/*@DescInfo: Initial value for the guard is 2.3, which is bigger than 0, so the transition should be taken */
 
@@ -44,13 +44,13 @@ int test_default_interface_good()
 	assert( stateName[machine.getStates()[0]] == "State2");
 
 	/*@Desc: check if the entry event2 is raised */
-	assert( interfaceTestIf.is_event2_raised(&retval) == bool_true );
+	assert( interfaceTestIf->is_event2_raised(&retval) == bool_true );
 
 	/*@Desc: check if the return value of event2 is set to 22 */
 	assert( retval == 22 );
 
 	/*@Desc: raise event1 on default interface */
-	interfaceTestIf.raise_event1();
+	interfaceTestIf->raise_event1();
 
 	/*@Desc: run an explicit cycle */
 	machine.runCycle();
@@ -60,7 +60,7 @@ int test_default_interface_good()
 	assert( stateName[machine.getStates()[0]] == "State1");
 
 	/*@Desc: check whether event2 is not raised any more */
-	assert( interfaceTestIf.is_event2_raised(&retval) == bool_false );
+	assert( interfaceTestIf->is_event2_raised(&retval) == bool_false );
 
 	return 0;
 }
@@ -75,20 +75,20 @@ int test_default_interface_bad()
 	integer retval = 55;
 
 	InterfaceTestStatemachineOOW machine(&dummyTimer);
-	InterfaceTestIfOO interfaceTestIf = machine.get_iface();
-	InterfaceTestIfOtherOO interfaceTestIfOther = machine.get_ifaceOther();
-	InterfaceTestIfThirdOO interfaceTestIfThird = machine.get_ifaceThird();
+	InterfaceTestIfOO* interfaceTestIf = machine.get_iface();
+	InterfaceTestIfOtherOO* interfaceTestIfOther = machine.get_ifaceOther();
+	InterfaceTestIfThirdOO* interfaceTestIfThird = machine.get_ifaceThird();
 
 	/*@Desc: check the initial state */
 	std::cout << "actual State: "<< stateName[machine.getStates()[0]] << std::endl;
 	assert( stateName[machine.getStates()[0]] == "State1");
 
 	/*@Desc: set variable var2 to -12.6 */
-	interfaceTestIf.set_var2(-12.6);
+	interfaceTestIf->set_var2(-12.6);
 	//interfaceTest_if_set_var2(&machine.interface, -12.6);
 
 	/*@Desc: raise event1 on default interface */
-	interfaceTestIf.raise_event1();
+	interfaceTestIf->raise_event1();
 //	interfaceTest_if_raise_event1(&machine.interface);
 
 	/*@DescInfo: Transition should not be taken, as guard with var2 is less than 0 */
@@ -102,17 +102,17 @@ int test_default_interface_bad()
 	assert( stateName[machine.getStates()[0]] == "State1");
 
 	/*@Desc: check if the entry event2 is NOT raised */
-	assert( interfaceTestIf.is_event2_raised(&retval) == bool_false );
+	assert( interfaceTestIf->is_event2_raised(&retval) == bool_false );
 
 	/*@Desc: check if the original retval has not been changed */
 	assert( retval == 55 );
 
 	/*@Desc: raise event1 on default interface */
-	interfaceTestIf.raise_event1();
+	interfaceTestIf->raise_event1();
 	//interfaceTest_if_raise_event1(&machine.interface);
 
 	/*@Desc: set variable var2 to 213.55 (>0) */
-	interfaceTestIf.set_var2(213.55);
+	interfaceTestIf->set_var2(213.55);
 	//interfaceTest_if_set_var2(&machine.interface, 213.55);
 
 	/*@Desc: run an explicit cycle */
@@ -124,7 +124,7 @@ int test_default_interface_bad()
 	assert( stateName[machine.getStates()[0]] == "State2");
 
 	/*@Desc: check whether event2 is raised */
-	assert( interfaceTestIf.is_event2_raised(&retval) == bool_true );
+	assert( interfaceTestIf->is_event2_raised(&retval) == bool_true );
 	//assert( interfaceTest_if_is_event2_raised(&machine.interface, &retval) == bool_true );
 
 
