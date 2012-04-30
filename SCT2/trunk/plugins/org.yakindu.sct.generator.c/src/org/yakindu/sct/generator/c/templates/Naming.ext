@@ -247,8 +247,9 @@ String getInterface(OperationDefinition var) : ((InterfaceScope)var.eContainer).
 String getInterfaceName(EventRaisingExpression this) :
 	"iface" + (( this.event.getEvent().eContainer.getScopeName() == "default")?"":this.event.getEvent().eContainer.getScopeName().toFirstUpper());
 
-String getInterfaceCallComma(emf::EObject ref):  ref.getInterfaceCall()==""?"":ref.getInterfaceCall()+", ";
+String getInterfaceCallComma(emf::EObject ref):  ref.getInterfaceCall()=="" ? "":ref.getInterfaceCall()+", ";
 String getInterfaceCallComma(EObject ref): ref.getInterfaceCall()==""?"":ref.getInterfaceCall()+", ";
+String getInterfaceCall(emf::EObject ref): "";
 String getInterfaceCall(EObject ref): "";
 String getInterfaceCall(ElementReferenceExpression ref): ref.reference.getInterfaceCall();
 String getInterfaceCall(FeatureCall ref): ref.feature.getInterfaceCall();
