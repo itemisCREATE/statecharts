@@ -53,6 +53,8 @@ String StateEnumName(ExecutionState state) :
 cached String functionName(Step step) : 
 	(step.isEffect()) ? step.actionFunctionName() : (
 	(step.isReactionCheck()) ? step.checkFunctionName() : (
+	(step.isStatemachineEntryAction()) ? step.statemachineEntryActionFunctionName() : ( 
+	(step.isStatemachineExitAction()) ? step.statemachineExitActionFunctionName() : ( 
 	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
 	(step.isExitAction()) ? step.exitActionFunctionName() : (
 	(step.isEnterSequence()) ? step.enterSequenceFunctionName() : ( 
@@ -60,14 +62,17 @@ cached String functionName(Step step) :
 	(step.isReactSequence()) ? step.reactSequenceFunctionName() : (
 	(step.isShallowEnterSequence()) ? step.shallowEnterSequenceFunctionName() : (
 	(step.isDeepEnterSequence()) ? step.deepEnterSequenceFunctionName() : (
-	" !! unknown function type "+step+" in "+step.eContainer.toString()+" !!" )))))))));
+	" !! unknown function type "+step+" in "+step.eContainer.toString()+" !!" )))))))))));
 
 
 ExecutionState state(Step this) : (ExecutionState) this.eContainer;
+ExecutionState flow(Step this) : (ExecutionFlow) this.eContainer;
 ExecutionScope scope(Step this) : (ExecutionScope) this.eContainer;
 
 boolean isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 boolean isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
+boolean isStatemachineEntryAction(Step step) : ExecutionFlow.isInstance(step.eContainer) && step.flow().entryAction == step;
+boolean isStatemachineExitAction(Step step) : ExecutionFlow.isInstance(step.eContainer) && step.flow().exitAction == step;
 boolean isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
 boolean isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
 boolean isEnterSequence(Step step) : ExecutionScope.isInstance(step.eContainer) && step.scope().enterSequence == step;
@@ -99,6 +104,12 @@ String actionFunctionName(Step this) :
 
 String checkFunctionName(Step this) :  
 	  this.stName() + "_condition_" + this.getStateName() + "_" + this.getReactionName();
+
+String statemachineEntryActionFunctionName(Step this) :  
+	  this.stName() + "_entryActions_statemachine";
+
+String statemachineExitActionFunctionName(Step this) :  
+	  this.stName() + "_exitActions_statemachine";
 
 String entryActionFunctionName(Step this) :  
 	  this.stName() + "_entryActions_" + this.getStateName();
@@ -141,6 +152,12 @@ String actionFunction(Step this) :
 String checkFunction(Step this) :  
 	  this.checkFunctionName() + "("+ handleAddition() + ")";
 
+String statemachineEntryActionFunction(Step this) :  
+	  this.statemachineEntryActionFunctionName() + "("+ handleAddition() + ")";
+ 
+String statemachineExitActionFunction(Step this) :  
+	  this.statemachineExitActionFunctionName() + "("+ handleAddition() + ")";
+ 
 String entryActionFunction(Step this) :  
 	  this.entryActionFunctionName() + "("+ handleAddition() + ")";
  
