@@ -82,8 +82,8 @@ if («statemachineHandleName()»->base.base.history[«region.historyVector.offset»]
 «this.step.functionName()»(«IF isSingleton() == false»«this.statemachineHandleName()»«ENDIF»);
 «ENDDEFINE»
 
-«DEFINE ActionCode FOR Sequence»
-  «EXPAND ActionCode FOREACH this.steps»
+«DEFINE ActionCode FOR Sequence -»
+  «EXPAND ActionCode FOREACH this.steps -»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Check -»
@@ -185,6 +185,39 @@ void «this.reactFunction()-»
 «ENDIF -»
 «ENDDEFINE»
 
+
+«DEFINE EnterMethodProto FOR ExecutionFlow -»
+«IF this.entryAction != null && entryAction.caller.size > 0 -»
+static void «entryAction.statemachineEntryActionFunction() -»;
+«ENDIF -»
+«ENDDEFINE»
+
+«DEFINE EnterMethodImplement FOR ExecutionFlow -»
+«IF this.entryAction != null && entryAction.caller.size > 0»
+void «entryAction.statemachineEntryActionFunction()»
+{
+«EXPAND ActionCode FOR this.entryAction -»
+}
+«ENDIF -»
+«ENDDEFINE»
+
+«DEFINE ExitMethodProto FOR ExecutionFlow -»
+«IF this.exitAction != null && exitAction.caller.size > 0 -»
+static void «this.exitAction.statemachineExitActionFunction() -»;
+«ENDIF -»
+«ENDDEFINE»
+
+«DEFINE ExitMethodImplement FOR ExecutionFlow -»
+«IF this.exitAction != null && exitAction.caller.size > 0 -»
+void «this.exitAction.statemachineExitActionFunction()»
+{
+«EXPAND ActionCode FOR this.exitAction -»
+}
+«ENDIF -»
+«ENDDEFINE»
+
+
+
 «DEFINE EnterMethodProto FOR ExecutionState -»
 «IF this.entryAction != null && entryAction.caller.size > 0 -»
 static void «entryAction.entryActionFunction()»;
@@ -277,6 +310,7 @@ void «deepEnterSequence.deepEnterFunction()»
 «ENDIF -»
 «ENDDEFINE»
 
+
 «DEFINE file FOR ExecutionFlow»
 «FILE StName()+'.c'»
 «this.getLicenseHeader()»
@@ -293,12 +327,16 @@ static «StName()» static_«statemachineHandleName()»;
 static «StName()»* «statemachineHandleName()»;
 «ENDIF»
 
+// function prototypes
+
 «EXPAND ConditionMethodsProto FOR this -»
 «EXPAND ConditionMethodsProto FOREACH this.states -»
 «EXPAND ConditionMethodsProto FOREACH this.nodes -»
 «EXPAND StatementMethodsProto FOR this -»
 «EXPAND StatementMethodsProto FOREACH this.states -»
 «EXPAND StatementMethodsProto FOREACH this.nodes -»
+«EXPAND EnterMethodProto FOR this -»
+«EXPAND ExitMethodProto FOR this -»
 «EXPAND EnterMethodProto FOREACH this.states -»
 «EXPAND ExitMethodProto FOREACH this.states -»
 «EXPAND EnterSequenceProto FOREACH this.states -»
@@ -310,12 +348,17 @@ static «StName()»* «statemachineHandleName()»;
 «EXPAND ReactMethodsProto FOREACH this.states -»
 «EXPAND ReactMethodsProto FOREACH this.nodes -»
 
+
+// function implementations
+
 «EXPAND ConditionMethodsImplement FOR this -»
 «EXPAND ConditionMethodsImplement FOREACH this.states -»
 «EXPAND ConditionMethodsImplement FOREACH this.nodes -»
 «EXPAND StatementMethodsImplement FOR this -»
 «EXPAND StatementMethodsImplement FOREACH this.states -»
 «EXPAND StatementMethodsImplement FOREACH this.nodes -»
+«EXPAND EnterMethodImplement FOR this -»
+«EXPAND ExitMethodImplement FOR this -»
 «EXPAND EnterMethodImplement FOREACH this.states -»
 «EXPAND ExitMethodImplement FOREACH this.states -»
 «EXPAND EnterSequenceImplement FOREACH this.states -»
