@@ -10,15 +10,11 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.templates
 
-import org.yakindu.sct.model.sgen.FeatureType
 import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.sgen.FeatureParameter
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider
-import org.eclipse.xtend.typesystem.emf.EcoreUtil2
-import org.yakindu.base.types.LibraryDescriptor
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions
-import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.FeatureConfiguration
+import org.yakindu.sct.model.sgen.FeatureParameter
+import org.yakindu.sct.model.sgen.FeatureType
 import org.yakindu.sct.model.sgen.ParameterTypes
 
 /**
@@ -32,10 +28,10 @@ class SGenProposalCreator {
 		EObject context){
 			 var defaultConfiguration  = defaultProvider.createDefaultFeatureConfiguration(featureType,context)
 			'''
-			feature «featureType.name» {
-				«FOR param :featureType.parameters»
-				«param.name» = «defaultConfiguration.value(param)»
-				«ENDFOR»
+			feature Â«featureType.nameÂ» {
+				Â«FOR param :featureType.parametersÂ»
+				Â«param.nameÂ» = Â«defaultConfiguration.value(param)Â»
+				Â«ENDFORÂ»
 			}
 			'''.toString
 		}
@@ -44,7 +40,7 @@ class SGenProposalCreator {
 		 var defaultValue = value.getParameterValue(param.name)
 		 if(defaultValue != null) {
 		 	if(param.parameterType.equals(ParameterTypes::STRING))
-		 		return ''' "«defaultValue.expression»" '''.toString
+		 		return ''' "Â«defaultValue.expressionÂ»" '''.toString
 		 	else
 		 		return defaultValue.expression
 		 }
