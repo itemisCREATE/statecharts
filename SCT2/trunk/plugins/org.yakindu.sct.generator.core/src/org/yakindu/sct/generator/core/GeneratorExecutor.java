@@ -41,6 +41,8 @@ public class GeneratorExecutor {
 		String generatorId = model.getGeneratorId();
 		GeneratorDescriptor description = GeneratorExtensions
 				.getGeneratorDescriptorForId(generatorId);
+		if (description == null)
+			return;
 		final ISCTGenerator generator = description.createGenerator();
 		final EList<GeneratorEntry> entries = model.getEntries();
 		Job generatorJob = new Job("Execute SCT Genmodel " + file.getName()) {

@@ -13,6 +13,8 @@ package org.yakindu.sct.generator.core.extensions;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.newArrayList;
 
+import java.util.NoSuchElementException;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
@@ -133,15 +135,23 @@ public class GeneratorExtensions {
 		return generatorDescriptors;
 	}
 
+	/**
+	 * returns the Generator Descriptor for the given generator id, or null, if
+	 * the id is unknown
+	 */
 	public static GeneratorDescriptor getGeneratorDescriptorForId(
 			final String generatorId) {
-		return Iterables.find(getGeneratorDescriptors(),
-				new Predicate<GeneratorDescriptor>() {
-					public boolean apply(GeneratorDescriptor input) {
-						return input != null && input.getId() != null
-								&& input.getId().equals(generatorId);
-					}
-				});
+		try {
+			return Iterables.find(getGeneratorDescriptors(),
+					new Predicate<GeneratorDescriptor>() {
+						public boolean apply(GeneratorDescriptor input) {
+							return input != null && input.getId() != null
+									&& input.getId().equals(generatorId);
+						}
+					});
+		} catch (NoSuchElementException ex) {
+			return null;
+		}
 	}
 
 	private static final class CreateGeneratorDescriptor implements
