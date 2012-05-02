@@ -250,20 +250,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 	}
 
-	// Check not possible by grammar. Testcase shows now error until 1.5.'12
-	// because it will be neccessary again, if
-	// entry in statechart is available again
-	// @Check(CheckType.FAST)
-	// public void checkLocalReaction(LocalReaction localReaction) {
-	// if (localReaction.eContainer() instanceof InterfaceScope) {
-	// error("Local reactions are not allowed in interface scope.",
-	// localReaction,
-	// StextPackage.Literals.LOCAL_REACTION__PROPERTIES,
-	// ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-	// LOCAL_REACTIONS_NOT_ALLOWED);
-	// }
-	// }
-
 	@Inject
 	STextGrammarAccess grammarAccess;
 
