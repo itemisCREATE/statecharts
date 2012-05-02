@@ -12,6 +12,7 @@ package util;
 
 import java.io.IOException;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -22,6 +23,8 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Inject;
+
+import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 
 /**
  * Provides access to the testmodels.
@@ -123,7 +126,8 @@ public class TestModels {
 	 * @return the {@link ExecutionFlow}
 	 * @throws IOException
 	 */
-	public ExecutionFlow loadExecutionFlowFromResource(String fileName) throws IOException {
+	public ExecutionFlow loadExecutionFlowFromResource(String fileName)
+			throws IOException {
 		Statechart statechart = loadStatechartFromResource(fileName);
 		final ExecutionFlow flow = sequencer.transform(statechart);
 		return flow;
@@ -133,6 +137,7 @@ public class TestModels {
 		URI uri = URI.createPlatformPluginURI(TESTMODEL_DIR + fileName, true);
 		ResourceSetImpl impl = new ResourceSetImpl();
 		Resource resource = impl.getResource(uri, true);
+		Assert.isTrue(resource instanceof InjectMembersResource);
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
 		return statechart;
