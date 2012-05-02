@@ -24,6 +24,9 @@ Source-Code-Management:
 + SVN
 	URL: https://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/test-plugins
 	Location: sct2_repository/test-plugins
++ SVN
+	URL: https://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples
+	Location: sct2_repository/examples
     
 Build:
 + Execute Shell
@@ -41,6 +44,7 @@ Build:
 		cp -R sct2_repository/plugins/* build/
 		cp -R sct2_repository/features/* build/
 		cp -R sct2_repository/test-plugins/* build/
+		cp -R sct2_repository/examples/* build/
 
 
 + Invoke Maven 3
