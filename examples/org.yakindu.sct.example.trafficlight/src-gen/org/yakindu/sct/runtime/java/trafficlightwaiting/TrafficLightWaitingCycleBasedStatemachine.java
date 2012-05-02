@@ -1,13 +1,3 @@
-/**
-Copyright (c) 2011 committers of YAKINDU and others. 
-All rights reserved. This program and the accompanying materials
-are made available under the terms of the Eclipse Public License v1.0
-which accompanies this distribution, and is available at
-http://www.eclipse.org/legal/epl-v10.html
- 
-Contributors:
-	committers of YAKINDU - initial API and implementation
- */
 package org.yakindu.sct.runtime.java.trafficlightwaiting;
 
 import java.util.Collection;
@@ -152,16 +142,18 @@ public class TrafficLightWaitingCycleBasedStatemachine
 		return defaultInterface;
 	}
 
-	public void raiseKeypress1() {
-		getDefaultInterface().raiseKeypress1();
+	public void raisePedestrianRequest() {
+		getDefaultInterface().raisePedestrianRequest();
 	}
 
-	public void raiseKeypress2() {
-		getDefaultInterface().raiseKeypress2();
+	public void raiseOnOff() {
+		getDefaultInterface().raiseOnOff();
 	}
 
 	public void enter() {
 		cycleStartTime = System.currentTimeMillis();
+
+		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@759376db (name: entryAction) (comment: Entry action for statechart 'TrafficLightWaiting'.)();
 		getInterfaceTrafficLightImpl().setVarRed(false);
 		getInterfaceTrafficLightImpl().setVarYellow(false);
 		getInterfaceTrafficLightImpl().setVarGreen(true);
@@ -247,13 +239,13 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				break;
 		}
 
+		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@6e1f487e (name: exitAction) (comment: Exit action for state 'TrafficLightWaiting'.)();
 	}
 
 	private void reactOn() {
 	}
 	private void reactStreetGreen() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -323,13 +315,14 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			getTimerService().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			getInterfaceTrafficLightImpl().setVarYellow(true);
+			getInterfacePedestrianImpl().setVarRequest(true);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.YellowOn;
 
 		} else {
 			if (occuredEvents.contains(getDefaultInterfaceImpl()
-					.getEventKeypress1())) {
+					.getEventPedestrianRequest())) {
 				stateVector[0] = State.$NullState$;
 
 				getTimerService().setTimer(PedWaiting_time_event_0, (7 * 1000),
@@ -350,8 +343,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	private void reactPedWaiting() {
 	}
 	private void reactWaitOn() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -421,6 +413,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			getTimerService().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			getInterfaceTrafficLightImpl().setVarYellow(true);
+			getInterfacePedestrianImpl().setVarRequest(true);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.YellowOn;
@@ -478,8 +471,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 	private void reactWaitOff() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -549,6 +541,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			getTimerService().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			getInterfaceTrafficLightImpl().setVarYellow(true);
+			getInterfacePedestrianImpl().setVarRequest(true);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.YellowOn;
@@ -606,8 +599,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 	private void reactStreetAttention() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -677,6 +669,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			getTimerService().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			getInterfaceTrafficLightImpl().setVarYellow(true);
+			getInterfacePedestrianImpl().setVarRequest(true);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.YellowOn;
@@ -701,8 +694,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 	private void reactStreetRed() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -772,6 +764,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			getTimerService().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			getInterfaceTrafficLightImpl().setVarYellow(true);
+			getInterfacePedestrianImpl().setVarRequest(true);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.YellowOn;
@@ -795,8 +788,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 	private void reactPedestrianGreen() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -866,6 +858,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			getTimerService().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			getInterfaceTrafficLightImpl().setVarYellow(true);
+			getInterfacePedestrianImpl().setVarRequest(true);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.YellowOn;
@@ -889,8 +882,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 	private void reactPedestrianRed() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -960,6 +952,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			getTimerService().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			getInterfaceTrafficLightImpl().setVarYellow(true);
+			getInterfacePedestrianImpl().setVarRequest(true);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.YellowOn;
@@ -984,8 +977,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 	private void reactStreetPrepare() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -1055,6 +1047,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 			getTimerService().setTimer(YellowOn_time_event_0, 500,
 					cycleStartTime);
 			getInterfaceTrafficLightImpl().setVarYellow(true);
+			getInterfacePedestrianImpl().setVarRequest(true);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.YellowOn;
@@ -1082,8 +1075,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 	private void reactOff() {
 	}
 	private void reactYellowOn() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -1121,6 +1113,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				getTimerService().setTimer(YellowOff_time_event_0, 500,
 						cycleStartTime);
 				getInterfaceTrafficLightImpl().setVarYellow(false);
+				getInterfacePedestrianImpl().setVarRequest(false);
 
 				nextStateIndex = 0;
 				stateVector[0] = State.YellowOff;
@@ -1131,8 +1124,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 
 	}
 	private void reactYellowOff() {
-		if (occuredEvents.contains(getDefaultInterfaceImpl()
-				.getEventKeypress2())) {
+		if (occuredEvents.contains(getDefaultInterfaceImpl().getEventOnOff())) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -1170,6 +1162,7 @@ public class TrafficLightWaitingCycleBasedStatemachine
 				getTimerService().setTimer(YellowOn_time_event_0, 500,
 						cycleStartTime);
 				getInterfaceTrafficLightImpl().setVarYellow(true);
+				getInterfacePedestrianImpl().setVarRequest(true);
 
 				nextStateIndex = 0;
 				stateVector[0] = State.YellowOn;
