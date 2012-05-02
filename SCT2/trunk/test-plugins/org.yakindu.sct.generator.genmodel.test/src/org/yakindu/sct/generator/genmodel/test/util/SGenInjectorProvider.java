@@ -11,8 +11,8 @@
 package org.yakindu.sct.generator.genmodel.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
+import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 /**
@@ -23,7 +23,8 @@ import com.google.inject.Injector;
 public class SGenInjectorProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
-		return Guice.createInjector(new SGenTestRuntimeModule());
+		return SGenActivator.getInstance().getInjector(
+				"org.yakindu.sct.generator.genmodel.SGen");
 	}
 
 }
