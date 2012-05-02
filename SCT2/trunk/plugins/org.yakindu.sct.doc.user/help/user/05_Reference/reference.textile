@@ -31,7 +31,7 @@ h3. Transitions
 
 A transition is the transfer of one state to another. Transitions are diagrammed as arrows and can carry events and actions but must not. 
 
-The syntax of events and actions is defined by a textual description language (#Statechartdescriptionlanguage). Please refer to the documentation section "Events":#Events for more details. For more details on Actions refer to the chapter "Actions":#Actions.
+The syntax of events and actions is defined by a textual description language (#Statechartdescriptionlanguage). Please refer to the documentation section "Events":#Events for more details. For more details on Actions refer to the chapter "Actions":#ReactionTriggers.
 
 If a state has more than one outgoing transition without event that transition is carried out first that was modeled first.
 
@@ -113,6 +113,8 @@ var stringVar : string
 var voidVar : void
 event addInt : integer
 event checkValidity : boolean
+ 
+
 h3. Expressions
 
 Expressions can be defined similar to other programming languages. The language offers operators to define logical expressions, bitwise arithmetic, and arithmetic expressions and bit shifting.
@@ -289,70 +291,97 @@ var external variable3: integer = 34
 
 p. ==<!-- End stext_keyword_var -->==
 
-h3. Actions
+h3. Reaction Triggers
 
 Actions are key constructs in state machines to model behavior. The YAKINDU SCT 2 knows the following kinds of actions.
+
+
 
 ==<!-- Start stext_keyword_after -->==
 
 h4. after
 
-With the keyword _after_ you can model a transition after a certain period of time:
+The _after_ trigger specifies one-shot time events. 
 
-bc.. 
-after 1s
-after 345mics
-after 4050ns
-after 1234ms
+After the specified time the reaction is triggered. An _after_ trigger can be used in transitions of states as well in local reactions of states and statecharts. The specified time starts when the state or statechart is entered. 
+
+bc. after 20 s
+
+Structure: 
+
+@after@ _@time@_ (_@unit@_)? 
+
+The time unit can be:
+
+* ==<!-- Start stext_keyword_s -->== s - seconds ==<!-- End stext_keyword_s -->==
+* ==<!-- Start stext_keyword_ms -->== ms - milliseconds ==<!-- End stext_keyword_ms -->==
+* ==<!-- Start stext_keyword_us -->== us - microseconds ==<!-- End stext_keyword_us -->==
+* ==<!-- Start stext_keyword_ns -->== ns - nanoseconds ==<!-- End stext_keyword_ns -->==
+* empty - implies seconds
 
 p. ==<!-- End stext_keyword_after -->==
-==<!-- Start stext_keyword_always -->==
-
-h4. always
-
-The keyword always is used only for local reactions that are executed always.
-
-==<!-- End stext_keyword_always -->==
-==<!-- Start stext_keyword_default -->==
-
-h4. default
-
-The keyword default marks transitions that are always accomplished.
-
-==<!-- End stext_keyword_else -->==
-==<!-- Start stext_keyword_else -->==
-
-h4. else
-
-The keyword _else_ marks transitions that are carried out in case of a condition. ???
-
-==<!-- End stext_keyword_else -->==
-==<!-- Start stext_keyword_entry -->==
-
-h4. entry
-
-The keyword entry marks actions that are carried out on entering a state.
-
-==<!-- End stext_keyword_entry -->==
 ==<!-- Start stext_keyword_every -->==
 
 h4. every
 
-_Every_ marks a periodic transition.
+The _every_ trigger specifies periodic time events. 
+
+The reaction is triggered periodically after the specified time. An _every_ trigger can be used in transitions of states as well in local reactions of states and statecharts. The specified time starts when the state or statechart is entered and repeats periodically. 
+
+bc. every 200 ms
+
+Structure: 
+
+@every@ _@time@_ (_@unit@_)? 
+
+The time unit can be:
+
+* s - seconds
+* ms - milliseconds
+* us - microseconds
+* ns - nanoseconds
+* empty - implies seconds
 
 ==<!-- End stext_keyword_every -->==
+==<!-- Start stext_keyword_always -->==
+
+h4. always
+
+This trigger is always true and enables a reaction to be executed in every run to completion step (RTS). It is equivalent to _oncycle_.
+
+==<!-- End stext_keyword_always -->==
+
+==<!-- Start stext_keyword_default -->==
+==<!-- Start stext_keyword_else -->==
+
+
+h4. default, else
+
+The _default_ trigger is equivalent to the _else_ trigger. It is intended for use for the outgoing transitions of _choice_ pseudo states, to make sure that always an outgoing transition can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. 
+
+==<!-- End stext_keyword_else -->==
+==<!-- End stext_keyword_default -->==
+
+
+==<!-- Start stext_keyword_entry -->==
+
+h4. entry
+
+An _entry_ trigger marks actions that are carried out on entering a state or state machine.
+
+==<!-- End stext_keyword_entry -->==
 ==<!-- Start stext_keyword_exit -->==
 
 h4. exit
 
-_Exit_ marks actions on leaving a state.
+An _exit_ trigger marks actions that are carried out on exiting a state or state machine.
 
 ==<!-- End stext_keyword_exit -->==
 ==<!-- Start stext_keyword_oncycle -->==
 
-h4. onCycle
+h4. oncycle
 
-_OnCycle_ marks actions that are carried out.
+The _oncycle_ trigger is always true and enables a reaction to be executed in every run to completion step (RTS). It is equivalent to _always_.
 
 ==<!-- End stext_keyword_oncycle -->==
 ==<!-- Start stext_keyword_operation -->==

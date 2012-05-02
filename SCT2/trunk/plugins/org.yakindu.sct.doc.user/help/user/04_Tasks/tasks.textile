@@ -98,6 +98,7 @@ h2. Core Features
 The following section describes the *Core Features* which are available for all code generators:
 
 ==<!-- Start sgen_feature_outlet -->==
+
 h4. Outlet
 
 The *Outlet* feature specifies the target project and folder for the generated artifacts. It is a *required* feature and consists of the following parameters:
@@ -113,6 +114,7 @@ feature Outlet {
 }
 p. ==<!-- End sgen_feature_outlet -->==
 ==<!-- Start sgen_feature_licenseheader -->==
+
 h4. LicenseHeader
 
 The *LicenseHeader* feature specifies the license text that should be added as a header to the generated artifacts. It is an *optional* feature and consists of the following parameters:
@@ -127,6 +129,7 @@ feature LicenseHeader {
 }
 p. ==<!-- End sgen_feature_licenseheader -->==
 ==<!-- Start sgen_feature_functioninlining -->==
+
 h4. FunctionInlining
 
 The *FunctionInlining* feature allows the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance because less operation calls are necessary. 
@@ -152,6 +155,7 @@ feature FunctionInlining {
 }
 p. ==<!-- End sgen_feature_functioninlining -->==
 ==<!-- Start sgen_feature_debug -->==
+
 h4. Debug
 
 The *Debug* feature dumps the Execution Model to the target folder as xmi model. It is an *optional* feature and consists of the following parameters:
@@ -214,8 +218,31 @@ feature GeneralFeatures {
 
 p. ==<!-- End sgen_feature_generalfeatures -->==			
 
-h2. C Generator Fetures
-TBD
+h2. C Generator Features
+
+==<!-- Start sgen_feature_ccodefeature -->==	
+
+h4. CCodeFeature
+
+The *GeneralFeatures* feature allows to configure additional services to generate with the statemachine. Per default, all parameters are configured to __false__ It is an *optional* feature and consists of the following parameters:
+
+# __DebugType__ (Boolean, optional): Enables/disables the generation of a cycle based statemachine implementation
+# __InterfaceEventListener__ (Boolean, optional): Enables/disables the generation of listener interfaces for the statemachine
+# __Singleton__ (Boolean, optional): Enables/disables the generation of a runtime service that triggers the runcycle of a cycle based statemachine
+
+Example configuration:
+
+bc.. 
+feature GeneralFeatures {
+	EventBasedStatemachine = true
+	InterfaceObserverSupport = true
+	RuntimeService = true
+	TimerService = true
+	GenericInterfaceSupport = true
+	StatemachineFactorySupport = true
+}
+
+p. ==<!-- End sgen_feature_generalfeatures -->==			
 
 h2. Create Custom Code Generators
 

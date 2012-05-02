@@ -7,7 +7,12 @@
 		<topic href="help/user/04_Tasks/tasks.html#Validatingastatemachine" label="Validating a statemachine"></topic>
 		<topic href="help/user/04_Tasks/tasks.html#Simulatingastatemachine" label="Simulating a statemachine"></topic>
 		<topic href="help/user/04_Tasks/tasks.html#GeneratingCode" label="Generating Code"></topic>
-		<topic href="help/user/04_Tasks/tasks.html#CoreFeatures" label="Core Features"></topic>
+		<topic href="help/user/04_Tasks/tasks.html#CoreFeatures" label="Core Features">
+			<topic href="help/user/04_Tasks/tasks.html#Outlet" label="Outlet"></topic>
+			<topic href="help/user/04_Tasks/tasks.html#LicenseHeader" label="LicenseHeader"></topic>
+			<topic href="help/user/04_Tasks/tasks.html#FunctionInlining" label="FunctionInlining"></topic>
+			<topic href="help/user/04_Tasks/tasks.html#Debug" label="Debug"></topic>
+		</topic>
 		<topic href="help/user/04_Tasks/tasks.html#JavaGeneratorFeatures" label="Java Generator Features">
 			<topic href="help/user/04_Tasks/tasks.html#Naming" label="Naming"></topic>
 			<topic href="help/user/04_Tasks/tasks.html#GeneralFeatures" label="GeneralFeatures"></topic>
