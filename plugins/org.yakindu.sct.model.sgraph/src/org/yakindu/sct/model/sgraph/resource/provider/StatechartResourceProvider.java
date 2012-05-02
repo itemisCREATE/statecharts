@@ -45,7 +45,7 @@ public class StatechartResourceProvider extends DefaultResourceServiceProvider {
 
 	@Override
 	public boolean canHandle(URI uri) {
-		return uri.fileExtension().endsWith("sct");
+		return uri.fileExtension().toLowerCase().equals("sct");
 	}
 
 }
