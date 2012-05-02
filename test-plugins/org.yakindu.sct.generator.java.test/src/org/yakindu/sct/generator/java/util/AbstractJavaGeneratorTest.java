@@ -62,12 +62,11 @@ public abstract class AbstractJavaGeneratorTest {
 	@Before
 	public void setup() {
 		compiler = ToolProvider.getSystemJavaCompiler();
-		Assert.assertNotNull("No JDK 1.06 found", compiler);
 	}
 
 	public List<Diagnostic<? extends JavaFileObject>> generateAndCompile(
 			Statechart statechart) throws Exception {
-
+		Assert.assertNotNull("No JDK 1.06 found", compiler);
 		GeneratorEntry entry = createGeneratorEntry("JavaGeneratorProject",
 				SRC_GEN);
 		entry.setElementRef(statechart);
