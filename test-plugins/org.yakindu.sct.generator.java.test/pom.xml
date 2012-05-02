@@ -12,11 +12,12 @@
 	<artifactId>org.yakindu.sct.generator.java.test</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-test-plugin</packaging>
-	
+
 	<profiles>
 		<profile>
 			<id>CI</id>
-			<!-- Test failures are collected by jenkins and evaluated for instable builds -->
+			<!-- Test failures are collected by jenkins and evaluated for instable 
+				builds -->
 			<properties>
 				<testFailureIgnore>true</testFailureIgnore>
 			</properties>
@@ -29,7 +30,8 @@
 				</os>
 			</activation>
 			<properties>
-				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread</test.vmargs>
+				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread
+				</test.vmargs>
 			</properties>
 		</profile>
 		<profile>
@@ -44,11 +46,11 @@
 			</properties>
 		</profile>
 	</profiles>
-	
+
 	<properties>
 		<testFailureIgnore>false</testFailureIgnore>
 	</properties>
-	
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
@@ -57,10 +59,17 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<useUIHarness>false</useUIHarness>
-					<useUIThread>false</useUIThread>
+					<useUIHarness>true</useUIHarness>
+					<useUIThread>true</useUIThread>
 					<testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
 					<argLine>${test.vmargs}</argLine>
+<!-- 					<dependencies> -->
+<!-- 						<dependency> -->
+<!-- 							<artifactid>org.eclipse.platform.ide</artifactid> -->
+<!-- 							<version>0.0.0</version> -->
+<!-- 							<type>eclipse-feature</type> -->
+<!-- 						</dependency> -->
+<!-- 					</dependencies> -->
 				</configuration>
 			</plugin>
 			<plugin>
