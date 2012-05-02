@@ -106,6 +106,11 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	private void failOnError(
 			List<Diagnostic<? extends JavaFileObject>> diagnostics) {
+		System.out.println("Diagnostic size is " + diagnostics);
+		for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
+			System.out.println(diagnostic.getKind());
+			System.out.println(diagnostic.getMessage(Locale.getDefault()));
+		}
 		Assert.assertNotNull(diagnostics);
 		for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
 			if (diagnostic.getKind() == Kind.ERROR) {
