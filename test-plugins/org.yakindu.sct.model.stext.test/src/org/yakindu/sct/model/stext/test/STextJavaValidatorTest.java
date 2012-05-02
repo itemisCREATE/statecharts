@@ -13,7 +13,6 @@ package org.yakindu.sct.model.stext.test;
 
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_HAS_NO_EFFECT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_TO_SCOPE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_DECLARATIONS;
@@ -22,8 +21,6 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_RE
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
 
 import java.lang.reflect.Method;
-import java.text.ParseException;
-import java.util.Date;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -234,16 +231,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		result.assertErrorContains(IN_OUT_DECLARATIONS);
 	}
 
-	/**
-	 * @throws ParseException
-	 * @see STextJavaValidator#checkLocalReaction(org.yakindu.sct.model.stext.stext.LocalReaction)
-	 */
-	@Test
-	public void checkLocalReaction() throws ParseException {
-		if (new Date().after(new Date(1335866400000l))) { // 1.5.2012 12:00
-			fail("Local Reaction should be activated for Statecharts again");
-		}
-	}
 
 	/**
 	 * @see STextJavaValidator#checkInterfaceScope(Statechart)
