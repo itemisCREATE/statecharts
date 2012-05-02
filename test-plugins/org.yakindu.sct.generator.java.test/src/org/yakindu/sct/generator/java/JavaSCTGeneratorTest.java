@@ -105,8 +105,9 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	}
 
 	private void failOnError(
-			List<Diagnostic<? extends JavaFileObject>> testModel) {
-		for (Diagnostic<? extends JavaFileObject> diagnostic : testModel) {
+			List<Diagnostic<? extends JavaFileObject>> diagnostics) {
+		Assert.assertNotNull(diagnostics);
+		for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
 			if (diagnostic.getKind() == Kind.ERROR) {
 				Assert.fail(diagnostic.getMessage(Locale.getDefault()));
 			}
