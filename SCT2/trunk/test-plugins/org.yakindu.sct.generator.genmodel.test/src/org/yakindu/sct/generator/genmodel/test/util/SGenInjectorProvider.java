@@ -10,10 +10,15 @@
  */
 package org.yakindu.sct.generator.genmodel.test.util;
 
+import static com.google.inject.Guice.createInjector;
+import static com.google.inject.util.Modules.override;
+
 import org.eclipse.xtext.junit4.IInjectorProvider;
+import org.yakindu.sct.generator.genmodel.ui.SGenUiModule;
 import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
 
 import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * 
@@ -23,8 +28,14 @@ import com.google.inject.Injector;
 public class SGenInjectorProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
-		return SGenActivator.getInstance().getInjector(
-				"org.yakindu.sct.generator.genmodel.SGen");
+		return createInjector(override(
+				override(new SGenTestRuntimeModule()).with(
+						getSharedStateModule())).with(
+				new SGenUiModule(SGenActivator.getInstance())));
+	}
+
+	protected Module getSharedStateModule() {
+		return new org.eclipse.xtext.ui.shared.SharedStateModule();
 	}
 
 }
