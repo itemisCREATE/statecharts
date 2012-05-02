@@ -1,0 +1,21 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.2 http://maven.apache.org/xsd/assembly-1.1.2.xsd">
+  <id>content</id>
+  <formats>
+    <format>zip</format>
+  </formats>
+  <includeBaseDirectory>false</includeBaseDirectory>
+  <fileSets>
+    <fileSet>
+      <directory>${basedir}</directory>
+      <excludes>
+        <exclude>pom.xml</exclude>
+        <exclude>assembly.xml</exclude>
+        <exclude>target/**</exclude>
+        <exclude>bin/**</exclude>
+        <exclude>target</exclude>
+      </excludes>
+    </fileSet>
+  </fileSets>
+</assembly>
