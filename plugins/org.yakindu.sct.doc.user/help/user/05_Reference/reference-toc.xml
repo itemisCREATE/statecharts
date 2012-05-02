@@ -38,15 +38,14 @@
 			<topic href="help/user/05_Reference/reference.html#Declarations" label="Declarations"></topic>
 			<topic href="help/user/05_Reference/reference.html#Events" label="Events"></topic>
 			<topic href="help/user/05_Reference/reference.html#Variables" label="Variables"></topic>
-			<topic href="help/user/05_Reference/reference.html#Actions" label="Actions">
+			<topic href="help/user/05_Reference/reference.html#ReactionTriggers" label="Reaction Triggers">
 				<topic href="help/user/05_Reference/reference.html#after" label="after"></topic>
-				<topic href="help/user/05_Reference/reference.html#always" label="always"></topic>
-				<topic href="help/user/05_Reference/reference.html#default" label="default"></topic>
-				<topic href="help/user/05_Reference/reference.html#else" label="else"></topic>
-				<topic href="help/user/05_Reference/reference.html#entry" label="entry"></topic>
 				<topic href="help/user/05_Reference/reference.html#every" label="every"></topic>
+				<topic href="help/user/05_Reference/reference.html#always" label="always"></topic>
+				<topic href="help/user/05_Reference/reference.html#defaultelse" label="default, else"></topic>
+				<topic href="help/user/05_Reference/reference.html#entry" label="entry"></topic>
 				<topic href="help/user/05_Reference/reference.html#exit" label="exit"></topic>
-				<topic href="help/user/05_Reference/reference.html#onCycle" label="onCycle"></topic>
+				<topic href="help/user/05_Reference/reference.html#oncycle" label="oncycle"></topic>
 			</topic>
 			<topic href="help/user/05_Reference/reference.html#Operations" label="Operations"></topic>
 			<topic href="help/user/05_Reference/reference.html#LocalReactions" label="LocalReactions"></topic>
