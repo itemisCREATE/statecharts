@@ -71,6 +71,8 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		String id = generatorModel.getGeneratorId();
 		final GeneratorDescriptor desc = GeneratorExtensions
 				.getGeneratorDescriptorForId(id);
+		if (desc == null)
+			return IScope.NULLSCOPE;
 		final Class<?> elementRefType = desc.getElementRefType();
 		return new FilteringScope(getDelegate().getScope(context, reference),
 				new Predicate<IEObjectDescription>() {
@@ -95,7 +97,8 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 						FeatureConfiguration configuration = EcoreUtil2
 								.getContainerOfType(context,
 										FeatureConfiguration.class);
-						if(configuration == null || configuration.getType() == null)
+						if (configuration == null
+								|| configuration.getType() == null)
 							return false;
 						String featureName = configuration.getType().getName();
 						if (featureName == null) {

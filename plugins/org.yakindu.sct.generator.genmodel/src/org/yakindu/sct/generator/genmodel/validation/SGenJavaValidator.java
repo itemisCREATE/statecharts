@@ -15,7 +15,6 @@ import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Iterables.transform;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -23,8 +22,8 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
-import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
+import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.BoolLiteral;
@@ -65,7 +64,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String INCOMPATIBLE_TYPE_FLOAT_EXPECTED = "Incompatible type, Float expected";
 	public static final String INCOMPATIBLE_TYPE_STRING_EXPECTED = "Incompatible type, String expected";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
-	//Failure codes
+	// Failure codes
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature";
 
 	@Check
@@ -74,6 +73,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 				GeneratorModel.class);
 		GeneratorDescriptor descriptor = GeneratorExtensions
 				.getGeneratorDescriptorForId(generatorModel.getGeneratorId());
+		if (descriptor == null)
+			return;
 		String contentType = entry.getContentType();
 		if (contentType == null || contentType.trim().length() == 0) {
 			return;
@@ -143,10 +144,9 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 	@Check
 	public void checkGeneratorExists(GeneratorModel model) {
-		try {
-			GeneratorExtensions.getGeneratorDescriptorForId(model
-					.getGeneratorId());
-		} catch (NoSuchElementException e) {
+		GeneratorDescriptor descriptor = GeneratorExtensions
+				.getGeneratorDescriptorForId(model.getGeneratorId());
+		if (descriptor == null) {
 			error(String.format(UNKOWN_GENERATOR + " %s!",
 					model.getGeneratorId()),
 					SGenPackage.Literals.GENERATOR_MODEL__GENERATOR_ID);
@@ -206,7 +206,8 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			if (!configuredTypes.contains(featureType.getName()))
 				error(String.format(MISSING_REQUIRED_FEATURE + " %s",
 						featureType.getName()),
-						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,CODE_REQUIRED_FEATURE, featureType.getName());
+						SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,
+						CODE_REQUIRED_FEATURE, featureType.getName());
 		}
 	}
 

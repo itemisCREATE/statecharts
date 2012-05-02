@@ -28,7 +28,6 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
  */
 public class SGenProposalProvider extends AbstractSGenProposalProvider {
 
-
 	@Override
 	public void completeGeneratorEntry_ContentType(EObject model,
 			Assignment assignment, ContentAssistContext context,
@@ -38,6 +37,8 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 				GeneratorModel.class);
 		GeneratorDescriptor descriptor = GeneratorExtensions
 				.getGeneratorDescriptorForId(generatorModel.getGeneratorId());
+		if (descriptor == null)
+			return;
 		ICompletionProposal proposal = createCompletionProposal(
 				descriptor.getContentType(), context);
 		acceptor.accept(proposal);
