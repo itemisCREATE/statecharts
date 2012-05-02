@@ -47,12 +47,13 @@ public abstract class AbstractJavaGeneratorTest {
 
 	public IMarker[] generateAndCompile(
 			Statechart statechart) throws Exception {
-		GeneratorEntry entry = createGeneratorEntry("JavaGeneratorProject",
+		GeneratorEntry entry = createGeneratorEntry(statechart.getName(),
 				SRC_GEN);
 		entry.setElementRef(statechart);
 		IProject targetProject = GeneratorUtils.getTargetProject(entry);
 		targetProject.delete(true, new NullProgressMonitor());
 		generator.generate(entry);
+		targetProject = GeneratorUtils.getTargetProject(entry);
 		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
 				new NullProgressMonitor());
 		IMarker[] markers = targetProject.findMarkers(IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER,
