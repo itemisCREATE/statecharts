@@ -19,9 +19,9 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
@@ -42,8 +42,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@SuppressWarnings("restriction")
-public class SGenScopeProvider extends XbaseScopeProvider {
+public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject
 	private XtextResourceSet resourceSet;
