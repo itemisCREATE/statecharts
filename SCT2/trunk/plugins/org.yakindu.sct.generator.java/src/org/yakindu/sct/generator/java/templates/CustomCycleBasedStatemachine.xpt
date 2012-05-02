@@ -230,7 +230,7 @@ else {
 				getOccuredEvents().add(«event.getEventName()»);
 			}
 		«ENDIF-»
-		private «event.getEventType()» «event.getter()» {
+		private «event.getEventType()» get«event.getEventName()»() {
 			return «event.getEventName()»;
 		}
 	
