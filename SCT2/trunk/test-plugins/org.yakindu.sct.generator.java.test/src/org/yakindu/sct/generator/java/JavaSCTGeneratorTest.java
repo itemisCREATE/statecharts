@@ -18,13 +18,8 @@ import static util.TestModels.STATECHART_LOCAL_REACTIONS;
 import static util.TestModels.STATE_ACTIVE;
 import static util.TestModels.VALUED_EVENTS;
 
-import java.util.List;
-import java.util.Locale;
-
-import javax.tools.Diagnostic;
-import javax.tools.Diagnostic.Kind;
-import javax.tools.JavaFileObject;
-
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Assert;
@@ -104,19 +99,12 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	}
 
-	private void failOnError(
-			List<Diagnostic<? extends JavaFileObject>> diagnostics) {
-		System.out.println("Diagnostic size is " + diagnostics);
-		for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
-			System.out.println(diagnostic.getKind());
-			System.out.println(diagnostic.getMessage(Locale.getDefault()));
-		}
-		Assert.assertNotNull(diagnostics);
-		for (Diagnostic<? extends JavaFileObject> diagnostic : diagnostics) {
-			if (diagnostic.getKind() == Kind.ERROR) {
-				Assert.fail(diagnostic.getMessage(Locale.getDefault()));
+	private void failOnError(IMarker[] diagnostics) throws CoreException {
+		for (IMarker diagnostic : diagnostics) {
+			int severity = (Integer) diagnostic.getAttribute("severity");
+			if (severity == IMarker.SEVERITY_ERROR) {
+				Assert.fail(diagnostic.getAttribute(IMarker.MESSAGE, ""));
 			}
 		}
 	}
-
 }

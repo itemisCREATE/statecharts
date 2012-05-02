@@ -10,26 +10,12 @@
  */
 package org.yakindu.sct.generator.java.util;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.tools.Diagnostic;
-import javax.tools.DiagnosticCollector;
-import javax.tools.JavaCompiler;
-import javax.tools.JavaFileObject;
-import javax.tools.StandardJavaFileManager;
-import javax.tools.ToolProvider;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.junit.Assert;
-import org.junit.Before;
+import org.eclipse.jdt.core.IJavaModelMarker;
 import org.yakindu.sct.generator.core.util.GeneratorUtils;
 import org.yakindu.sct.generator.java.JavaSCTGenerator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
@@ -57,41 +43,21 @@ public abstract class AbstractJavaGeneratorTest {
 
 	@Inject
 	protected JavaSCTGenerator generator;
-	private JavaCompiler compiler;
 
-	@Before
-	public void setup() {
-		compiler = ToolProvider.getSystemJavaCompiler();
-	}
 
-	public List<Diagnostic<? extends JavaFileObject>> generateAndCompile(
+	public IMarker[] generateAndCompile(
 			Statechart statechart) throws Exception {
-		Assert.assertNotNull("No JDK 1.06 found", compiler);
 		GeneratorEntry entry = createGeneratorEntry("JavaGeneratorProject",
 				SRC_GEN);
 		entry.setElementRef(statechart);
 		IProject targetProject = GeneratorUtils.getTargetProject(entry);
 		targetProject.delete(true, new NullProgressMonitor());
 		generator.generate(entry);
-		IFolder folder = targetProject.getFolder(SRC_GEN);
-		Iterable<File> javaSourceFiles = getJavaSourceFiles(folder);
-		return compile(javaSourceFiles);
-	}
-
-	private List<Diagnostic<? extends JavaFileObject>> compile(
-			Iterable<File> ioFiles) throws IOException {
-		StandardJavaFileManager fileManager = compiler.getStandardFileManager(
-				null, null, null);
-		try {
-			Iterable<? extends JavaFileObject> compilationUnits = fileManager
-					.getJavaFileObjectsFromFiles(ioFiles);
-			DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
-			compiler.getTask(null, fileManager, diagnostics, null, null,
-					compilationUnits).call();
-			return diagnostics.getDiagnostics();
-		} finally {
-			fileManager.close();
-		}
+		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
+				new NullProgressMonitor());
+		IMarker[] markers = targetProject.findMarkers(IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER,
+				true, IResource.DEPTH_INFINITE);
+		return markers;
 	}
 
 	private GeneratorEntry createGeneratorEntry(String targetProject,
@@ -121,33 +87,6 @@ public abstract class AbstractJavaGeneratorTest {
 		config.getParameterValues().add(targetFolderValue);
 		entry.getFeatures().add(config);
 		return entry;
-	}
-
-	private Iterable<File> getJavaSourceFiles(IResource folder)
-			throws CoreException {
-		List<IFile> files = new ArrayList<IFile>();
-		getFilesToCompile(folder, files);
-		System.out.println("Files to compile " + files);
-		List<File> ioFiles = new ArrayList<File>();
-		for (IFile iFile : files) {
-			ioFiles.add(iFile.getRawLocation().makeAbsolute().toFile());
-		}
-		System.out.println("IO Files " + ioFiles);
-		return ioFiles;
-	}
-
-	private void getFilesToCompile(IResource resource, List<IFile> toAdd)
-			throws CoreException {
-		if (resource instanceof IFolder) {
-			IResource[] members = ((IFolder) resource).members();
-			for (IResource iResource : members) {
-				getFilesToCompile(iResource, toAdd);
-			}
-		} else if (resource instanceof IFile) {
-			if (resource.getFileExtension().equals("java")) {
-				toAdd.add((IFile) resource);
-			}
-		}
 	}
 
 }
