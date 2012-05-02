@@ -127,10 +127,12 @@ public abstract class AbstractJavaGeneratorTest {
 			throws CoreException {
 		List<IFile> files = new ArrayList<IFile>();
 		getFilesToCompile(folder, files);
+		System.out.println("Files to compile " + files);
 		List<File> ioFiles = new ArrayList<File>();
 		for (IFile iFile : files) {
 			ioFiles.add(iFile.getRawLocation().makeAbsolute().toFile());
 		}
+		System.out.println("IO Files " + ioFiles);
 		return ioFiles;
 	}
 
