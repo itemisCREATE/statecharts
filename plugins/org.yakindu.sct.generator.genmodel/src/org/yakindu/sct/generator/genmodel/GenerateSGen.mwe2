@@ -114,7 +114,7 @@ Workflow {
             // }
 
             // provides the necessary bindings for java types integration
-            fragment = types.TypesGeneratorFragment {}
+//            fragment = types.TypesGeneratorFragment {}
 
             // provides a preference page for template proposals
             fragment = templates.CodetemplatesGeneratorFragment {}
