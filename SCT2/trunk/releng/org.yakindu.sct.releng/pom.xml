@@ -17,6 +17,11 @@
 		<p2.base.repository>file:../org.yakindu.base.repository/target/repository</p2.base.repository>
 	</properties>
 	<build>
+		<!--resources>
+			<resource>
+				<directory> [your folder here] </directory>
+			</resource>
+		</resources-->
 		<plugins>
 			<plugin>
 				<!-- enable tycho build extension -->
@@ -110,6 +115,18 @@
 				</dependencies>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<profiles>
@@ -120,15 +137,15 @@
 			</activation>
 			<repositories>
 				<repository>
-			      <id>target</id>
-			      <layout>p2</layout>
-			      <url>${p2.target.repository}</url>
-			    </repository>
+					<id>target</id>
+					<layout>p2</layout>
+					<url>${p2.target.repository}</url>
+				</repository>
 				<repository>
-			      <id>base</id>
-			      <layout>p2</layout>
-			      <url>${p2.base.repository}</url>
-			    </repository>
+					<id>base</id>
+					<layout>p2</layout>
+					<url>${p2.base.repository}</url>
+				</repository>
 			</repositories>
 			<build>
 				<plugins>
@@ -173,15 +190,15 @@
 			<id>Indigo.target</id>
 			<repositories>
 				<repository>
-			      <id>indigo</id>
-			      <layout>p2</layout>
-			      <url>http://download.eclipse.org/releases/indigo</url>
-			    </repository>
+					<id>indigo</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/releases/indigo</url>
+				</repository>
 				<repository>
-			      <id>eclipse37</id>
-			      <layout>p2</layout>
-			      <url>http://download.eclipse.org/eclipse/updates/3.7</url>
-			    </repository>
+					<id>eclipse37</id>
+					<layout>p2</layout>
+					<url>http://download.eclipse.org/eclipse/updates/3.7</url>
+				</repository>
 			</repositories>
 			<build>
 				<plugins>
@@ -237,8 +254,9 @@
 	</profiles>
 
 	<modules>
-	<!--	<module>../org.yakindu.sct.statechart.target</module> -->
+		<!-- <module>../org.yakindu.sct.statechart.target</module> -->
 		<module>../org.yakindu.sct.doc.user</module>
+		<module>../org.yakindu.sct.example.trafficlight</module>
 		<module>../org.yakindu.sct.generator.core</module>
 		<module>../org.yakindu.sct.generator.genmodel</module>
 		<module>../org.yakindu.sct.generator.genmodel.test</module>

@@ -56,7 +56,7 @@ Build:
 
 + Invoke Maven 3
 	Goals
-		verify -PCI,Indigo.target -s ../build/org.yakindu.sct.releng/settings.xml
+		verify -PCI -s ../build/org.yakindu.sct.releng/settings.xml
 	POM File
 		../build/org.yakindu.sct.releng/pom.xml
 	Profiles

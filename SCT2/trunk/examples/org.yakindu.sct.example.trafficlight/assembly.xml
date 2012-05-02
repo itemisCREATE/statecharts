@@ -14,6 +14,7 @@
         <exclude>assembly.xml</exclude>
         <exclude>target/**</exclude>
         <exclude>bin/**</exclude>
+        <exclude>**/.svn/**</exclude>
         <exclude>target</exclude>
       </excludes>
     </fileSet>
