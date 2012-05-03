@@ -12,7 +12,7 @@
 	<properties>
 		<tycho-version>0.14.1</tycho-version>
 		<antrun-version>1.6</antrun-version>
-		<p2.target.repository>file:../org.yakindu.base.target.repository/target/repository</p2.target.repository>
+		<p2.target.repository>file:../org.yakindu.base.target/target/repository</p2.target.repository>
 	</properties>
 	<repositories>
 		<repository>
