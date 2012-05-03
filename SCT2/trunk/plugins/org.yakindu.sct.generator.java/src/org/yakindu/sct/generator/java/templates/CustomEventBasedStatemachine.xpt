@@ -25,7 +25,7 @@ import java.util.LinkedList;
 import «entry.getBasePackageName()».Event;
 
 «IF isTimedStatemachine()-»
-	import org.yakindu.sct.runtime.java.TimeEvent;
+	import «entry.getBasePackageName()».TimeEvent;
 «ENDIF-»
 
 public class «getEventBasedStatemachineName()» extends «getCycleBasedStatemachineName()» {
