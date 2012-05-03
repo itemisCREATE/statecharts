@@ -17,12 +17,16 @@
 			<topic href="help/user/04_Tasks/tasks.html#Naming" label="Naming"></topic>
 			<topic href="help/user/04_Tasks/tasks.html#GeneralFeatures" label="GeneralFeatures"></topic>
 		</topic>
-		<topic href="help/user/04_Tasks/tasks.html#CGeneratorFetures" label="C Generator Fetures
-TBD"></topic>
+		<topic href="help/user/04_Tasks/tasks.html#CGeneratorFeatures" label="C Generator Features">
+			<topic href="help/user/04_Tasks/tasks.html#CCodeFeature" label="CCodeFeature"></topic>
+		</topic>
 		<topic href="help/user/04_Tasks/tasks.html#CreateCustomCodeGenerators" label="Create Custom Code Generators">
 			<topic href="help/user/04_Tasks/tasks.html#WritingacustomcodegeneratorwithXtend2Java" label="Writing a custom code generator with Xtend2/Java"></topic>
 			<topic href="help/user/04_Tasks/tasks.html#ExecutingacustomXtend2Javacodegenerator" label="Executing a custom Xtend2/Java code generator">
 				<topic href="help/user/04_Tasks/tasks.html#Generator" label="Generator"></topic>
+			</topic>
+			<topic href="help/user/04_Tasks/tasks.html#ExecutingacustomXpandcodegenerator" label="Executing a custom Xpand code generator">
+				<topic href="help/user/04_Tasks/tasks.html#Template" label="Template"></topic>
 			</topic>
 		</topic>
 	</topic>

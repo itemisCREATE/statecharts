@@ -224,25 +224,21 @@ h2. C Generator Features
 
 h4. CCodeFeature
 
-The *GeneralFeatures* feature allows to configure additional services to generate with the statemachine. Per default, all parameters are configured to __false__ It is an *optional* feature and consists of the following parameters:
+The *CCodeFeature* feature allows to configure c code specific generator properties. It is an *optional* feature and consists of the following parameters:
 
-# __DebugType__ (Boolean, optional): Enables/disables the generation of a cycle based statemachine implementation
-# __InterfaceEventListener__ (Boolean, optional): Enables/disables the generation of listener interfaces for the statemachine
-# __Singleton__ (Boolean, optional): Enables/disables the generation of a runtime service that triggers the runcycle of a cycle based statemachine
+# __InterfaceEventListener__ (Boolean, mandatory): generates listener interface for notification of outgoing events.
+# __Singleton__ (Boolean, mandatory): generates a statically allocated singleton variant of the state machine that does not allow multiple instances.
+# __DebugType__ (String, optional): don't use this property - it will be removed
 
 Example configuration:
 
 bc.. 
-feature GeneralFeatures {
-	EventBasedStatemachine = true
-	InterfaceObserverSupport = true
-	RuntimeService = true
-	TimerService = true
-	GenericInterfaceSupport = true
-	StatemachineFactorySupport = true
+feature CCodeFeature {
+	InterfaceEventListerner = true
+	Singleton = true
 }
 
-p. ==<!-- End sgen_feature_generalfeatures -->==			
+p. ==<!-- End sgen_feature_ccodefeature -->==			
 
 h2. Create Custom Code Generators
 
