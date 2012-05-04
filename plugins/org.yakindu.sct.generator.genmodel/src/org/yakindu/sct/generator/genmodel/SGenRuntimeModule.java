@@ -10,10 +10,12 @@
  */
 package org.yakindu.sct.generator.genmodel;
 
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
+import org.yakindu.sct.generator.genmodel.valueconverter.SGenValueConverter;
 
 /**
  * Use this class to register components to be used at runtime / without the
@@ -30,6 +32,11 @@ public class SGenRuntimeModule extends
 	@Override
 	public Class<? extends ILinker> bindILinker() {
 		return Linker.class;
+	}
+	
+	@Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return SGenValueConverter.class;
 	}
 
 }
