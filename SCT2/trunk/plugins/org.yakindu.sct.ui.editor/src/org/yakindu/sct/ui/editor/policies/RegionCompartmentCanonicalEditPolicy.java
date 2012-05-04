@@ -58,13 +58,16 @@ public class RegionCompartmentCanonicalEditPolicy extends
 			Collection<View> children) {
 		// Connections should only be included, when the source vertex is
 		// contained in the region this edit policy belongs to
-		Transition transition = (Transition) connection.getElement();
-		Vertex source = transition.getSource();
-		if (!getSemanticHost().getVertices().contains(source)) {
-			return false;
+		EObject element = (EObject) connection.getElement();
+		if (element instanceof Transition) {
+			Vertex source = ((Transition) element).getSource();
+			if (!getSemanticHost().getVertices().contains(source)) {
+				return false;
+			}
 		}
 		return super.shouldIncludeConnection(connection, children);
 	}
+
 
 	@Override
 	protected EObject getSourceElement(EObject relationship) {
