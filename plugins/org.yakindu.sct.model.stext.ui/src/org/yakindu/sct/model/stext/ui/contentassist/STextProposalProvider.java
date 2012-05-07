@@ -32,7 +32,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.SimpleScope;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
-import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
@@ -57,78 +57,74 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	public void completeKeyword(Keyword keyword,
 			ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
-		List<Keyword> keywords = new ArrayList<Keyword>();
+		List<Keyword> suppressKeywords = new ArrayList<Keyword>();
 		// context Transition
-		if (contentAssistContext.getRootModel() instanceof TransitionReaction) {
-			keywords.addAll(getKeywords(grammarAccess.getEntryEventAccess()
+		if (contentAssistContext.getRootModel() instanceof TransitionSpecification) {
+			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess()
 					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getExitEventAccess()
-					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
-					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess()
 					.getGroup().eContents()));
 		}
 		// context States
 		else if (contentAssistContext.getRootModel() instanceof SimpleScope) {
-			keywords.addAll(getKeywords(grammarAccess
+			suppressKeywords.addAll(getKeywords(grammarAccess
 					.getVariableDefinitionAccess().getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess
+			suppressKeywords.addAll(getKeywords(grammarAccess
 					.getEventDefinitionAccess().getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getExitpointAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getExitpointAccess()
 					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getEntrypointAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getEntrypointAccess()
 					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getDirectionAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess()
 					.getAlternatives().eContents()));
-			keywords.addAll(getKeywords(grammarAccess
+			suppressKeywords.addAll(getKeywords(grammarAccess
 					.getOperationDefinitionAccess().getGroup().eContents()));
 		}
 		// context Statechart
 		else if (contentAssistContext.getRootModel() instanceof StatechartSpecification) {
-			keywords.addAll(getKeywords(grammarAccess.getExitEventAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess()
 					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getEntryEventAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess()
 					.getGroup().eContents()));
 		}
 
 		EObject currentModel = contentAssistContext.getCurrentModel();
 		if (currentModel instanceof InterfaceScope) {
-			keywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess()
 					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess()
 					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
 					.getGroup().eContents()));
-			keywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess()
+			suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess()
 					.getAlternatives().eContents()));
-			keywords.add(grammarAccess.getDirectionAccess()
+			suppressKeywords.add(grammarAccess.getDirectionAccess()
 					.getLOCALLocalKeyword_0_0());
 		}
 
 		if (currentModel instanceof FeatureCall) {
 			FeatureCall featureCall = (FeatureCall) currentModel;
 			if (!(featureCall.getFeature() instanceof Operation)) {
-				keywords.add(grammarAccess.getFeatureCallAccess()
+				suppressKeywords.add(grammarAccess.getFeatureCallAccess()
 						.getOperationCallLeftParenthesisKeyword_1_3_0_0());
 			}
 		}
 		if (currentModel instanceof ElementReferenceExpression) {
 			ElementReferenceExpression referenceExpression = (ElementReferenceExpression) currentModel;
 			if (!(referenceExpression.getReference() instanceof Operation)) {
-				keywords.add(grammarAccess
+				suppressKeywords.add(grammarAccess
 						.getElementReferenceExpressionAccess()
 						.getOperationCallLeftParenthesisKeyword_2_0_0());
 			}
 		}
 		if (currentModel instanceof InternalScope) {
-			keywords.add(grammarAccess.getDirectionAccess()
+			suppressKeywords.add(grammarAccess.getDirectionAccess()
 					.getINInKeyword_1_0());
-			keywords.add(grammarAccess.getDirectionAccess()
+			suppressKeywords.add(grammarAccess.getDirectionAccess()
 					.getOUTOutKeyword_2_0());
 		}
 
-		if (!keywords.contains(keyword)) {
+		if (!suppressKeywords.contains(keyword)) {
 			super.completeKeyword(keyword, contentAssistContext,
 					new AcceptorDelegate(acceptor));
 
@@ -268,7 +264,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		public boolean canAcceptMoreProposals() {
 			return delegate.canAcceptMoreProposals();
 		}
-
 	}
 
 }
