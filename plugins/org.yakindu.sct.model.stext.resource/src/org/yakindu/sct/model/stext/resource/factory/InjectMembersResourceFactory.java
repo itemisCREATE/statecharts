@@ -11,12 +11,9 @@
 package org.yakindu.sct.model.stext.resource.factory;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.xtext.Constants;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.resource.SGraphInjectMembersResource;
 import org.yakindu.sct.model.stext.resource.services.StateInjectionService;
 import org.yakindu.sct.model.stext.resource.services.StatechartInjectionService;
@@ -27,8 +24,6 @@ import com.google.inject.Injector;
 import com.google.inject.name.Named;
 
 import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 
 /**
  * ResourceFactory for the {@link InjectMembersResource} with services for the
@@ -61,14 +56,6 @@ public class InjectMembersResourceFactory extends XMIResourceFactoryImpl {
 		resource.getServices().add(stateService);
 		resource.getServices().add(statechartService);
 		resource.setLanguageName(languageName);
-		resource.eAdapters().add(
-				new ContextElementAdapter(new IContextElementProvider() {
-					public EObject getContextObject() {
-						return (EObject) EcoreUtil.getObjectByType(
-								resource.getContents(),
-								SGraphPackage.Literals.STATECHART);
-					}
-				}));
 		return resource;
 	}
 }
