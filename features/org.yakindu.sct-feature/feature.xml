@@ -36,7 +36,6 @@
       <import plugin="org.apache.commons.logging"/>
       <import plugin="org.eclipse.xtext.builder"/>
       <import plugin="org.eclipse.xtext.xbase.lib"/>
-      <import plugin="org.eclipse.xtext.xtend2.lib"/>
       <import plugin="org.eclipse.ui.editors"/>
       <import plugin="org.eclipse.ui.ide"/>
       <import plugin="org.eclipse.xtext.ui.shared"/>
@@ -60,7 +59,6 @@
       <import plugin="org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide"/>
       <import plugin="org.eclipse.draw2d"/>
       <import plugin="org.eclipse.gmf.runtime.draw2d.ui"/>
-      <import plugin="com.google.collect"/>
       <import plugin="com.google.inject"/>
       <import plugin="de.itemis.xtext.utils.jface" version="1.0.0" match="compatible"/>
       <import plugin="de.itemis.gmf.runtime.commons" version="1.0.0" match="greaterOrEqual"/>
@@ -81,6 +79,7 @@
       <import plugin="org.eclipse.emf.mwe.utils"/>
       <import plugin="org.eclipse.jface.text"/>
       <import feature="org.yakindu.base" version="1.0.0.qualifier"/>
+      <import plugin="com.google.guava"/>
    </requires>
 
    <plugin
