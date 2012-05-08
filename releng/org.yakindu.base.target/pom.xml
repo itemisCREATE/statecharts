@@ -15,14 +15,9 @@
 
 	<repositories>
 		<repository>
-			<id>indigo</id>
+			<id>juno</id>
 			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/indigo</url>
-		</repository>
-		<repository>
-			<id>eclipse37</id>
-			<layout>p2</layout>
-			<url>http://download.eclipse.org/eclipse/updates/3.7</url>
+			<url>http://download.eclipse.org/releases/juno</url>
 		</repository>
 	</repositories>
 
@@ -73,9 +68,9 @@
 									<artifacts>
 										<artifact>
 											<!-- note: the file name must be ${classifier}.target -->
-											<file>INDIGO_SR1.target</file>
+											<file>Juno.target</file>
 											<type>target</type>
-											<classifier>INDIGO_SR1</classifier>
+											<classifier>Juno</classifier>
 										</artifact>
 									</artifacts>
 								</configuration>
@@ -93,7 +88,7 @@
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
 									<version>1.0.0-SNAPSHOT</version>
-									<classifier>INDIGO_SR1</classifier>
+									<classifier>Juno</classifier>
 								</artifact>
 							</target>
 							<environments>
