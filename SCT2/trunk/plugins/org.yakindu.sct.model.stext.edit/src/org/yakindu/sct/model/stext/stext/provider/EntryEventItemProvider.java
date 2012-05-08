@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.yakindu.sct.model.stext.stext.provider;
 

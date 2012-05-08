@@ -116,7 +116,10 @@ protected class ThisRootNode extends RootToken {
  * / * ---- root rules ----
  * These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
  * into a single grammar. 
- * * / Root:
+ * * /
+ * 
+ * Root:
+ * 
  * 	roots+=DefRoot*;
  *
  **/
@@ -173,6 +176,7 @@ protected class Root_RootsAssignment extends AssignmentToken  {
 /************ begin Rule DefRoot ****************
  *
  * DefRoot:
+ * 
  * 	StatechartRoot | StateRoot | TransitionRoot;
  *
  **/
@@ -325,6 +329,7 @@ protected class DefRoot_TransitionRootParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule StatechartRoot ****************
  *
  * StatechartRoot:
+ * 
  * 	"@@statechart@@" def=StatechartSpecification;
  *
  **/
@@ -432,6 +437,7 @@ protected class StatechartRoot_DefAssignment_1 extends AssignmentToken  {
 /************ begin Rule StateRoot ****************
  *
  * StateRoot:
+ * 
  * 	"@@state@@" def=StateSpecification;
  *
  **/
@@ -539,6 +545,7 @@ protected class StateRoot_DefAssignment_1 extends AssignmentToken  {
 /************ begin Rule TransitionRoot ****************
  *
  * TransitionRoot:
+ * 
  * 	"@@transition@@" def=TransitionSpecification;
  *
  **/
@@ -647,7 +654,10 @@ protected class TransitionRoot_DefAssignment_1 extends AssignmentToken  {
  *
  * / * ---- start rules ----
  * Define the starting points used by the statechart integration. These rules hook in the concrete rules of the specific grammar.
- * * / ScopedElement returns sgraph::ScopedElement:
+ * * /
+ * 
+ * ScopedElement returns sgraph::ScopedElement:
+ * 
  * 	StatechartSpecification;
  *
  **/
@@ -694,6 +704,7 @@ protected class ScopedElement_StatechartSpecificationParserRuleCall extends Rule
 /************ begin Rule StatechartSpecification ****************
  *
  * StatechartSpecification:
+ * 
  * 	{StatechartSpecification} ("namespace" namespace=FQN)? scopes+=StatechartScope*;
  *
  **/
@@ -889,6 +900,7 @@ protected class StatechartSpecification_ScopesAssignment_2 extends AssignmentTok
 /************ begin Rule StateSpecification ****************
  *
  * StateSpecification:
+ * 
  * 	scope=StateScope;
  *
  **/
@@ -946,6 +958,7 @@ protected class StateSpecification_ScopeAssignment extends AssignmentToken  {
 /************ begin Rule TransitionSpecification ****************
  *
  * TransitionSpecification:
+ * 
  * 	reaction=TransitionReaction;
  *
  **/
@@ -1004,7 +1017,10 @@ protected class TransitionSpecification_ReactionAssignment extends AssignmentTok
  *
  * / * ---- scope rules ----
  * Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
- * * / Scope returns sgraph::Scope:
+ * * /
+ * 
+ * Scope returns sgraph::Scope:
+ * 
  * 	StateScope | StatechartScope;
  *
  **/
@@ -1121,7 +1137,8 @@ protected class Scope_StatechartScopeParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule StateScope ****************
  *
  * // a SimpleScope is used for states and regions
- * StateScope returns sgraph::Scope:
+ *  StateScope returns sgraph::Scope:
+ * 
  * 	{SimpleScope} declarations+=(LocalReaction | Entrypoint | Exitpoint)*;
  *
  **/
@@ -1256,7 +1273,8 @@ protected class StateScope_DeclarationsAssignment_1 extends AssignmentToken  {
 /************ begin Rule StatechartScope ****************
  *
  * // defines the poosible scopes for statecharts
- * StatechartScope:
+ *  StatechartScope:
+ * 
  * 	InterfaceScope | InternalScope;
  *
  **/
@@ -1371,6 +1389,7 @@ protected class StatechartScope_InternalScopeParserRuleCall_1 extends RuleCallTo
 /************ begin Rule NamedInterfaceScope ****************
  *
  * NamedInterfaceScope returns base::NamedElement:
+ * 
  * 	InterfaceScope;
  *
  **/
@@ -1417,12 +1436,15 @@ protected class NamedInterfaceScope_InterfaceScopeParserRuleCall extends RuleCal
 /************ begin Rule InterfaceScope ****************
  *
  * InterfaceScope:
+ * 
  * 	{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDeclarartion | VariableDeclaration |
+ * 
  * 	OperationDeclaration | Entrypoint | Exitpoint)*;
  *
  **/
 
 // {InterfaceScope} "interface" name=ID? ":" declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration
+// 
 // | Entrypoint | Exitpoint)*
 protected class InterfaceScope_Group extends GroupToken {
 	
@@ -1652,12 +1674,15 @@ protected class InterfaceScope_DeclarationsAssignment_4 extends AssignmentToken 
 /************ begin Rule InternalScope ****************
  *
  * InternalScope:
+ * 
  * 	{InternalScope} "internal" ":" declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration |
+ * 
  * 	LocalReaction)*;
  *
  **/
 
 // {InternalScope} "internal" ":" declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration |
+// 
 // LocalReaction)*
 protected class InternalScope_Group extends GroupToken {
 	
@@ -1842,7 +1867,10 @@ protected class InternalScope_DeclarationsAssignment_3 extends AssignmentToken  
 /************ begin Rule Declaration ****************
  *
  * / * ---- declarations ----
- * a definition is a top level element of a definition scope. * / Declaration returns sgraph::Declaration:
+ * a definition is a top level element of a definition scope. * / Declaration returns
+ * 
+ * sgraph::Declaration:
+ * 
  * 	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction | Entrypoint | Exitpoint;
  *
  **/
@@ -2109,6 +2137,7 @@ protected class Declaration_ExitpointParserRuleCall_5 extends RuleCallToken {
 /************ begin Rule EventDeclarartion ****************
  *
  * / * ---- event definition ---- * / EventDeclarartion returns sgraph::Event:
+ * 
  * 	EventDefinition;
  *
  **/
@@ -2155,6 +2184,7 @@ protected class EventDeclarartion_EventDefinitionParserRuleCall extends RuleCall
 /************ begin Rule EventFeature ****************
  *
  * EventFeature returns types::Event:
+ * 
  * 	EventDefinition;
  *
  **/
@@ -2201,7 +2231,8 @@ protected class EventFeature_EventDefinitionParserRuleCall extends RuleCallToken
 /************ begin Rule EventDefinition ****************
  *
  * // (derivation=EventDerivation)?;
- * EventDefinition:
+ *  EventDefinition:
+ * 
  * 	direction=Direction? "event" name=ID (":" type=[types::Type|FQN])?;
  *
  **/
@@ -2414,6 +2445,7 @@ protected class EventDefinition_TypeAssignment_3_1 extends AssignmentToken  {
 /************ begin Rule VariableDeclaration ****************
  *
  * / * ---- variable definition ---- * / VariableDeclaration returns sgraph::Variable:
+ * 
  * 	VariableDefinition;
  *
  **/
@@ -2460,6 +2492,7 @@ protected class VariableDeclaration_VariableDefinitionParserRuleCall extends Rul
 /************ begin Rule VariableFeature ****************
  *
  * VariableFeature returns types::Property:
+ * 
  * 	VariableDefinition;
  *
  **/
@@ -2506,12 +2539,15 @@ protected class VariableFeature_VariableDefinitionParserRuleCall extends RuleCal
 /************ begin Rule VariableDefinition ****************
  *
  * VariableDefinition:
+ * 
  * 	{VariableDefinition} "var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=[types::Type|FQN] ("="
+ * 
  * 	initialValue=Expression)?;
  *
  **/
 
 // {VariableDefinition} "var" (readonly?="readonly"? & external?="external"?) name=ID ":" type=[types::Type|FQN] ("="
+// 
 // initialValue=Expression)?
 protected class VariableDefinition_Group extends GroupToken {
 	
@@ -2875,6 +2911,7 @@ protected class VariableDefinition_InitialValueAssignment_6_1 extends Assignment
 /************ begin Rule OperationDeclaration ****************
  *
  * / * ---- operation definition ---- * / OperationDeclaration returns sgraph::Declaration:
+ * 
  * 	OperationDefinition;
  *
  **/
@@ -2921,6 +2958,7 @@ protected class OperationDeclaration_OperationDefinitionParserRuleCall extends R
 /************ begin Rule OperationFeature ****************
  *
  * OperationFeature returns types::Operation:
+ * 
  * 	OperationDefinition;
  *
  **/
@@ -2967,12 +3005,15 @@ protected class OperationFeature_OperationDefinitionParserRuleCall extends RuleC
 /************ begin Rule OperationDefinition ****************
  *
  * OperationDefinition:
+ * 
  * 	{OperationDefinition} "operation" name=ID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (":"
+ * 
  * 	type=[types::Type|FQN])?;
  *
  **/
 
 // {OperationDefinition} "operation" name=ID "(" (parameters+=Parameter ("," parameters+=Parameter)*)? ")" (":"
+// 
 // type=[types::Type|FQN])?
 protected class OperationDefinition_Group extends GroupToken {
 	
@@ -3381,6 +3422,7 @@ protected class OperationDefinition_TypeAssignment_6_1 extends AssignmentToken  
 /************ begin Rule Parameter ****************
  *
  * Parameter returns types::Parameter:
+ * 
  * 	name=ID ":" type=[types::Type|FQN];
  *
  **/
@@ -3513,6 +3555,7 @@ protected class Parameter_TypeAssignment_2 extends AssignmentToken  {
 /************ begin Rule Entrypoint ****************
  *
  * / * ---- entrypoint definition ---- * / Entrypoint returns sgraph::Declaration:
+ * 
  * 	{Entrypoint} "entrypoint" name=ID;
  *
  **/
@@ -3635,6 +3678,7 @@ protected class Entrypoint_NameAssignment_2 extends AssignmentToken  {
 /************ begin Rule Exitpoint ****************
  *
  * / * ---- exitpoint definition ---- * / Exitpoint returns sgraph::Declaration:
+ * 
  * 	{Exitpoint} "exitpoint" name=ID;
  *
  **/
@@ -3759,7 +3803,10 @@ protected class Exitpoint_NameAssignment_2 extends AssignmentToken  {
  *
  * / * ---- reaction rules ----
  * Define the structure of reactions that are central for describing the statecharts behavior. 
- * * / Reaction returns sgraph::Reaction:
+ * * /
+ * 
+ * Reaction returns sgraph::Reaction:
+ * 
  * 	LocalReaction | TransitionReaction;
  *
  **/
@@ -3874,7 +3921,8 @@ protected class Reaction_TransitionReactionParserRuleCall_1 extends RuleCallToke
 /************ begin Rule LocalReaction ****************
  *
  * //('#' properties=ReactionProperties)?;
- * LocalReaction:
+ *  LocalReaction:
+ * 
  * 	trigger=ReactionTrigger => ("/" effect=ReactionEffect);
  *
  **/
@@ -4074,6 +4122,7 @@ protected class LocalReaction_EffectAssignment_1_0_1 extends AssignmentToken  {
 /************ begin Rule TransitionReaction ****************
  *
  * TransitionReaction:
+ * 
  * 	{TransitionReaction} trigger=ReactionTrigger? ("/" effect=ReactionEffect)? ("#" properties=ReactionProperties)?;
  *
  **/
@@ -4374,12 +4423,15 @@ protected class TransitionReaction_PropertiesAssignment_3_1 extends AssignmentTo
 /************ begin Rule ReactionTrigger ****************
  *
  * ReactionTrigger returns sgraph::Trigger:
+ * 
  * 	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "["
+ * 
  * 	guardExpression=Expression "]");
  *
  **/
 
 // {ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "["
+// 
 // guardExpression=Expression "]")
 protected class ReactionTrigger_Group extends GroupToken {
 	
@@ -4436,6 +4488,7 @@ protected class ReactionTrigger_ReactionTriggerAction_0 extends ActionToken  {
 }
 
 // triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "[" guardExpression=Expression
+// 
 // "]"
 protected class ReactionTrigger_Alternatives_1 extends AlternativesToken {
 
@@ -4857,8 +4910,11 @@ protected class ReactionTrigger_RightSquareBracketKeyword_1_1_2 extends KeywordT
 /************ begin Rule ReactionEffect ****************
  *
  * // (';')?;
- * ReactionEffect returns sgraph::Effect:
- * 	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (";" actions+=(Expression | EventRaisingExpression))*;
+ *  ReactionEffect returns sgraph::Effect:
+ * 
+ * 	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (";" actions+=(Expression |
+ * 
+ * 	EventRaisingExpression))*;
  *
  **/
 
@@ -5083,6 +5139,7 @@ protected class ReactionEffect_ActionsAssignment_2_1 extends AssignmentToken  {
 /************ begin Rule ReactionProperties ****************
  *
  * ReactionProperties:
+ * 
  * 	{ReactionProperties} properties+=ReactionProperty*;
  *
  **/
@@ -5197,6 +5254,7 @@ protected class ReactionProperties_PropertiesAssignment_1 extends AssignmentToke
 /************ begin Rule ReactionProperty ****************
  *
  * ReactionProperty:
+ * 
  * 	EntryPointSpec | ExitPointSpec;
  *
  **/
@@ -5311,6 +5369,7 @@ protected class ReactionProperty_ExitPointSpecParserRuleCall_1 extends RuleCallT
 /************ begin Rule EntryPointSpec ****************
  *
  * EntryPointSpec:
+ * 
  * 	">" entrypoint=[Entrypoint|FQN];
  *
  **/
@@ -5409,6 +5468,7 @@ protected class EntryPointSpec_EntrypointAssignment_1 extends AssignmentToken  {
 /************ begin Rule ExitPointSpec ****************
  *
  * ExitPointSpec:
+ * 
  * 	exitpoint=[Exitpoint|FQN] ">";
  *
  **/
@@ -5507,6 +5567,7 @@ protected class ExitPointSpec_GreaterThanSignKeyword_1 extends KeywordToken  {
 /************ begin Rule EventSpec ****************
  *
  * EventSpec:
+ * 
  * 	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
  *
  **/
@@ -5667,6 +5728,7 @@ protected class EventSpec_BuiltinEventSpecParserRuleCall_2 extends RuleCallToken
 /************ begin Rule RegularEventSpec ****************
  *
  * RegularEventSpec:
+ * 
  * 	event=FeatureCall;
  *
  **/
@@ -5724,7 +5786,8 @@ protected class RegularEventSpec_EventAssignment extends AssignmentToken  {
 /************ begin Rule TimeEventSpec ****************
  *
  * // TODO: redefine after trigger - we need to use it with clocks
- * TimeEventSpec:
+ *  TimeEventSpec:
+ * 
  * 	type=TimeEventType value=INT unit=TimeUnit?;
  *
  **/
@@ -5867,7 +5930,8 @@ protected class TimeEventSpec_UnitAssignment_2 extends AssignmentToken  {
 /************ begin Rule BuiltinEventSpec ****************
  *
  * //TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
- * BuiltinEventSpec:
+ *  BuiltinEventSpec:
+ * 
  * 	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent | DefaultEvent;
  *
  **/
@@ -6096,6 +6160,7 @@ protected class BuiltinEventSpec_DefaultEventParserRuleCall_4 extends RuleCallTo
 /************ begin Rule EntryEvent ****************
  *
  * EntryEvent:
+ * 
  * 	{EntryEvent} "entry";
  *
  **/
@@ -6184,6 +6249,7 @@ protected class EntryEvent_EntryKeyword_1 extends KeywordToken  {
 /************ begin Rule ExitEvent ****************
  *
  * ExitEvent:
+ * 
  * 	{ExitEvent} "exit";
  *
  **/
@@ -6272,6 +6338,7 @@ protected class ExitEvent_ExitKeyword_1 extends KeywordToken  {
 /************ begin Rule OnCycleEvent ****************
  *
  * OnCycleEvent:
+ * 
  * 	{OnCycleEvent} "oncycle";
  *
  **/
@@ -6360,6 +6427,7 @@ protected class OnCycleEvent_OncycleKeyword_1 extends KeywordToken  {
 /************ begin Rule AlwaysEvent ****************
  *
  * AlwaysEvent:
+ * 
  * 	{AlwaysEvent} "always";
  *
  **/
@@ -6448,6 +6516,7 @@ protected class AlwaysEvent_AlwaysKeyword_1 extends KeywordToken  {
 /************ begin Rule DefaultEvent ****************
  *
  * DefaultEvent:
+ * 
  * 	{DefaultEvent} ("default" | "else");
  *
  **/
@@ -6559,9 +6628,10 @@ protected class DefaultEvent_DefaultKeyword_1_0 extends KeywordToken  {
 /************ begin Rule EventRaisingExpression ****************
  *
  * // ****************
- * // Expression Grammar
- * // ****************
- * EventRaisingExpression returns Expression:
+ *  // Expression Grammar
+ *  // ****************
+ *  EventRaisingExpression returns Expression:
+ * 
  * 	{EventRaisingExpression} "raise" event=FeatureCall (":" value=Expression)?;
  *
  **/
@@ -6788,6 +6858,7 @@ protected class EventRaisingExpression_ValueAssignment_3_1 extends AssignmentTok
 /************ begin Rule StatementExpression ****************
  *
  * StatementExpression returns sgraph::Statement:
+ * 
  * 	Expression;
  *
  **/
@@ -6851,6 +6922,7 @@ protected class StatementExpression_ExpressionParserRuleCall extends RuleCallTok
 /************ begin Rule Expression ****************
  *
  * Expression:
+ * 
  * 	AssignmentExpression;
  *
  **/
@@ -6914,12 +6986,15 @@ protected class Expression_AssignmentExpressionParserRuleCall extends RuleCallTo
 /************ begin Rule AssignmentExpression ****************
  *
  * AssignmentExpression returns Expression:
+ * 
  * 	ConditionalExpression ({AssignmentExpression.varRef=current} operator=AssignmentOperator
+ * 
  * 	expression=ConditionalExpression)*;
  *
  **/
 
 // ConditionalExpression ({AssignmentExpression.varRef=current} operator=AssignmentOperator
+// 
 // expression=ConditionalExpression)*
 protected class AssignmentExpression_Group extends GroupToken {
 	
@@ -7148,12 +7223,15 @@ protected class AssignmentExpression_ExpressionAssignment_1_2 extends Assignment
 /************ begin Rule ConditionalExpression ****************
  *
  * ConditionalExpression returns Expression:
+ * 
  * 	LogicalOrExpression ({ConditionalExpression.condition=current} "?" trueCase=LogicalOrExpression ":"
+ * 
  * 	falseCase=LogicalOrExpression)?;
  *
  **/
 
 // LogicalOrExpression ({ConditionalExpression.condition=current} "?" trueCase=LogicalOrExpression ":"
+// 
 // falseCase=LogicalOrExpression)?
 protected class ConditionalExpression_Group extends GroupToken {
 	
@@ -7437,6 +7515,7 @@ protected class ConditionalExpression_FalseCaseAssignment_1_4 extends Assignment
 /************ begin Rule LogicalOrExpression ****************
  *
  * LogicalOrExpression returns Expression:
+ * 
  * 	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} "||" rightOperand=LogicalAndExpression)*;
  *
  **/
@@ -7657,6 +7736,7 @@ protected class LogicalOrExpression_RightOperandAssignment_1_2 extends Assignmen
 /************ begin Rule LogicalAndExpression ****************
  *
  * LogicalAndExpression returns Expression:
+ * 
  * 	LogicalNotExpression ({LogicalAndExpression.leftOperand=current} "&&" rightOperand=LogicalNotExpression)*;
  *
  **/
@@ -7877,6 +7957,7 @@ protected class LogicalAndExpression_RightOperandAssignment_1_2 extends Assignme
 /************ begin Rule LogicalNotExpression ****************
  *
  * LogicalNotExpression returns Expression:
+ * 
  * 	BitwiseXorExpression | {LogicalNotExpression} "!" operand=BitwiseXorExpression;
  *
  **/
@@ -8093,6 +8174,7 @@ protected class LogicalNotExpression_OperandAssignment_1_2 extends AssignmentTok
 /************ begin Rule BitwiseXorExpression ****************
  *
  * BitwiseXorExpression returns Expression:
+ * 
  * 	BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} "^" rightOperand=BitwiseOrExpression)*;
  *
  **/
@@ -8313,6 +8395,7 @@ protected class BitwiseXorExpression_RightOperandAssignment_1_2 extends Assignme
 /************ begin Rule BitwiseOrExpression ****************
  *
  * BitwiseOrExpression returns Expression:
+ * 
  * 	BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} "|" rightOperand=BitwiseAndExpression)*;
  *
  **/
@@ -8533,6 +8616,7 @@ protected class BitwiseOrExpression_RightOperandAssignment_1_2 extends Assignmen
 /************ begin Rule BitwiseAndExpression ****************
  *
  * BitwiseAndExpression returns Expression:
+ * 
  * 	LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} "&" rightOperand=LogicalRelationExpression)*;
  *
  **/
@@ -8753,12 +8837,15 @@ protected class BitwiseAndExpression_RightOperandAssignment_1_2 extends Assignme
 /************ begin Rule LogicalRelationExpression ****************
  *
  * LogicalRelationExpression returns Expression:
+ * 
  * 	ShiftExpression ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
+ * 
  * 	rightOperand=ShiftExpression)*;
  *
  **/
 
 // ShiftExpression ({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
+// 
 // rightOperand=ShiftExpression)*
 protected class LogicalRelationExpression_Group extends GroupToken {
 	
@@ -8987,12 +9074,15 @@ protected class LogicalRelationExpression_RightOperandAssignment_1_2 extends Ass
 /************ begin Rule ShiftExpression ****************
  *
  * ShiftExpression returns Expression:
+ * 
  * 	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+ * 
  * 	rightOperand=NumericalAddSubtractExpression)*;
  *
  **/
 
 // NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+// 
 // rightOperand=NumericalAddSubtractExpression)*
 protected class ShiftExpression_Group extends GroupToken {
 	
@@ -9221,12 +9311,15 @@ protected class ShiftExpression_RightOperandAssignment_1_2 extends AssignmentTok
 /************ begin Rule NumericalAddSubtractExpression ****************
  *
  * NumericalAddSubtractExpression returns Expression:
+ * 
  * 	NumericalMultiplyDivideExpression ({NumericalAddSubtractExpression.leftOperand=current} operator=AdditiveOperator
+ * 
  * 	rightOperand=NumericalMultiplyDivideExpression)*;
  *
  **/
 
 // NumericalMultiplyDivideExpression ({NumericalAddSubtractExpression.leftOperand=current} operator=AdditiveOperator
+// 
 // rightOperand=NumericalMultiplyDivideExpression)*
 protected class NumericalAddSubtractExpression_Group extends GroupToken {
 	
@@ -9309,6 +9402,7 @@ protected class NumericalAddSubtractExpression_NumericalMultiplyDivideExpression
 }
 
 // ({NumericalAddSubtractExpression.leftOperand=current} operator=AdditiveOperator
+// 
 // rightOperand=NumericalMultiplyDivideExpression)*
 protected class NumericalAddSubtractExpression_Group_1 extends GroupToken {
 	
@@ -9456,12 +9550,15 @@ protected class NumericalAddSubtractExpression_RightOperandAssignment_1_2 extend
 /************ begin Rule NumericalMultiplyDivideExpression ****************
  *
  * NumericalMultiplyDivideExpression returns Expression:
+ * 
  * 	NumericalUnaryExpression ({NumericalMultiplyDivideExpression.leftOperand=current} operator=MultiplicativeOperator
+ * 
  * 	rightOperand=NumericalUnaryExpression)*;
  *
  **/
 
 // NumericalUnaryExpression ({NumericalMultiplyDivideExpression.leftOperand=current} operator=MultiplicativeOperator
+// 
 // rightOperand=NumericalUnaryExpression)*
 protected class NumericalMultiplyDivideExpression_Group extends GroupToken {
 	
@@ -9544,6 +9641,7 @@ protected class NumericalMultiplyDivideExpression_NumericalUnaryExpressionParser
 }
 
 // ({NumericalMultiplyDivideExpression.leftOperand=current} operator=MultiplicativeOperator
+// 
 // rightOperand=NumericalUnaryExpression)*
 protected class NumericalMultiplyDivideExpression_Group_1 extends GroupToken {
 	
@@ -9691,6 +9789,7 @@ protected class NumericalMultiplyDivideExpression_RightOperandAssignment_1_2 ext
 /************ begin Rule NumericalUnaryExpression ****************
  *
  * NumericalUnaryExpression returns Expression:
+ * 
  * 	PrimaryExpression | {NumericalUnaryExpression} operator=UnaryOperator operand=PrimaryExpression;
  *
  **/
@@ -9919,12 +10018,15 @@ protected class NumericalUnaryExpression_OperandAssignment_1_2 extends Assignmen
 /************ begin Rule PrimaryExpression ****************
  *
  * PrimaryExpression returns Expression:
+ * 
  * 	PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression | "("
+ * 
  * 	Expression ")";
  *
  **/
 
 // PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression | "(" Expression
+// 
 // ")"
 protected class PrimaryExpression_Alternatives extends AlternativesToken {
 
@@ -10228,6 +10330,7 @@ protected class PrimaryExpression_RightParenthesisKeyword_4_2 extends KeywordTok
 /************ begin Rule PrimitiveValueExpression ****************
  *
  * PrimitiveValueExpression returns Expression:
+ * 
  * 	{PrimitiveValueExpression} value=Literal;
  *
  **/
@@ -10340,12 +10443,15 @@ protected class PrimitiveValueExpression_ValueAssignment_1 extends AssignmentTok
 /************ begin Rule FeatureCall ****************
  *
  * FeatureCall returns Expression:
+ * 
  * 	ElementReferenceExpression ({FeatureCall.owner=current} "." feature=[ecore::EObject] (=> operationCall?="("
+ * 
  * 	(args+=Expression ("," args+=Expression)*)? ")")?)*;
  *
  **/
 
 // ElementReferenceExpression ({FeatureCall.owner=current} "." feature=[ecore::EObject] (=> operationCall?="("
+// 
 // (args+=Expression ("," args+=Expression)*)? ")")?)*
 protected class FeatureCall_Group extends GroupToken {
 	
@@ -10414,6 +10520,7 @@ protected class FeatureCall_ElementReferenceExpressionParserRuleCall_0 extends R
 }
 
 // ({FeatureCall.owner=current} "." feature=[ecore::EObject] (=> operationCall?="(" (args+=Expression (","
+// 
 // args+=Expression)*)? ")")?)*
 protected class FeatureCall_Group_1 extends GroupToken {
 	
@@ -10783,12 +10890,15 @@ protected class FeatureCall_RightParenthesisKeyword_1_3_2 extends KeywordToken  
 /************ begin Rule ElementReferenceExpression ****************
  *
  * ElementReferenceExpression returns Expression:
+ * 
  * 	{ElementReferenceExpression} reference=[ecore::EObject] (=> operationCall?="(" (args+=Expression (","
+ * 
  * 	args+=Expression)*)? ")")?;
  *
  **/
 
 // {ElementReferenceExpression} reference=[ecore::EObject] (=> operationCall?="(" (args+=Expression (","
+// 
 // args+=Expression)*)? ")")?
 protected class ElementReferenceExpression_Group extends GroupToken {
 	
@@ -11131,6 +11241,7 @@ protected class ElementReferenceExpression_RightParenthesisKeyword_2_2 extends K
 /************ begin Rule EventValueReferenceExpression ****************
  *
  * EventValueReferenceExpression returns Expression:
+ * 
  * 	{EventValueReferenceExpression} "valueof" "(" value=FeatureCall ")";
  *
  **/
@@ -11309,6 +11420,7 @@ protected class EventValueReferenceExpression_RightParenthesisKeyword_4 extends 
 /************ begin Rule ActiveStateReferenceExpression ****************
  *
  * ActiveStateReferenceExpression returns Expression:
+ * 
  * 	{ActiveStateReferenceExpression} "active" "(" value=[sgraph::State|FQN] ")";
  *
  **/
@@ -11478,6 +11590,7 @@ protected class ActiveStateReferenceExpression_RightParenthesisKeyword_4 extends
 /************ begin Rule Literal ****************
  *
  * Literal:
+ * 
  * 	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral;
  *
  **/
@@ -11706,6 +11819,7 @@ protected class Literal_StringLiteralParserRuleCall_4 extends RuleCallToken {
 /************ begin Rule BoolLiteral ****************
  *
  * BoolLiteral:
+ * 
  * 	{BoolLiteral} value=BOOL;
  *
  **/
@@ -11806,6 +11920,7 @@ protected class BoolLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule IntLiteral ****************
  *
  * IntLiteral:
+ * 
  * 	{IntLiteral} value=INT;
  *
  **/
@@ -11906,6 +12021,7 @@ protected class IntLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule RealLiteral ****************
  *
  * RealLiteral:
+ * 
  * 	{RealLiteral} value=FLOAT;
  *
  **/
@@ -12006,6 +12122,7 @@ protected class RealLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule HexLiteral ****************
  *
  * HexLiteral:
+ * 
  * 	{HexLiteral} value=HEX;
  *
  **/
@@ -12106,6 +12223,7 @@ protected class HexLiteral_ValueAssignment_1 extends AssignmentToken  {
 /************ begin Rule StringLiteral ****************
  *
  * StringLiteral:
+ * 
  * 	{StringLiteral} value=STRING;
  *
  **/

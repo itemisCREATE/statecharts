@@ -1,9 +1,9 @@
 package org.yakindu.sct.generator.genmodel.ui.templates;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -12,14 +12,15 @@ import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.Literal;
 import org.yakindu.sct.model.sgen.ParameterTypes;
 
+/**
+ * @author andreas muelder - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class SGenProposalCreator {
-  
   public String createProposal(final FeatureType featureType, final IDefaultFeatureValueProvider defaultProvider, final EObject context) {
     String _xblockexpression = null;
     {
-      FeatureConfiguration _createDefaultFeatureConfiguration = defaultProvider.createDefaultFeatureConfiguration(featureType, context);
-      FeatureConfiguration defaultConfiguration = _createDefaultFeatureConfiguration;
+      FeatureConfiguration defaultConfiguration = defaultProvider.createDefaultFeatureConfiguration(featureType, context);
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("feature ");
       String _name = featureType.getName();
@@ -50,10 +51,9 @@ public class SGenProposalCreator {
     Object _xblockexpression = null;
     {
       String _name = param.getName();
-      FeatureParameterValue _parameterValue = value.getParameterValue(_name);
-      FeatureParameterValue defaultValue = _parameterValue;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(defaultValue, null);
-      if (_operator_notEquals) {
+      FeatureParameterValue defaultValue = value.getParameterValue(_name);
+      boolean _notEquals = (!Objects.equal(defaultValue, null));
+      if (_notEquals) {
         ParameterTypes _parameterType = param.getParameterType();
         boolean _equals = _parameterType.equals(ParameterTypes.STRING);
         if (_equals) {
@@ -63,37 +63,35 @@ public class SGenProposalCreator {
           Literal _expression = defaultValue.getExpression();
           _builder.append(_expression, " ");
           _builder.append("\" ");
-          String _string = _builder.toString();
-          return _string;
+          return _builder.toString();
         } else {
-          Literal _expression_1 = defaultValue.getExpression();
-          return _expression_1;
+          return defaultValue.getExpression();
         }
       }
       ParameterTypes _parameterType_1 = param.getParameterType();
-      final ParameterTypes __valOfSwitchOver = _parameterType_1;
-      boolean matched = false;
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,ParameterTypes.STRING)) {
-          matched=true;
+      final ParameterTypes _switchValue = _parameterType_1;
+      boolean _matched = false;
+      if (!_matched) {
+        if (Objects.equal(_switchValue,ParameterTypes.STRING)) {
+          _matched=true;
           return "\"\"";
         }
       }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,ParameterTypes.BOOLEAN)) {
-          matched=true;
+      if (!_matched) {
+        if (Objects.equal(_switchValue,ParameterTypes.BOOLEAN)) {
+          _matched=true;
           return "false";
         }
       }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,ParameterTypes.FLOAT)) {
-          matched=true;
+      if (!_matched) {
+        if (Objects.equal(_switchValue,ParameterTypes.FLOAT)) {
+          _matched=true;
           return "0.0";
         }
       }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,ParameterTypes.INTEGER)) {
-          matched=true;
+      if (!_matched) {
+        if (Objects.equal(_switchValue,ParameterTypes.INTEGER)) {
+          _matched=true;
           return "0";
         }
       }

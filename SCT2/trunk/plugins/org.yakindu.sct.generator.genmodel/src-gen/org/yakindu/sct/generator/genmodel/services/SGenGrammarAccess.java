@@ -32,6 +32,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		/// **
 		// * @author Andreas Muelder
 		// * / GeneratorModel returns gen::GeneratorModel:
+		//
 		//	"GeneratorModel" "for" generatorId=QID "{" entries+=GeneratorEntry* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -77,6 +78,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//GeneratorEntry returns gen::GeneratorEntry:
+		//
 		//	contentType=ID elementRef=[ecore::EObject|QID] "{" features+=FeatureConfiguration* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -125,6 +127,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cRightCurlyBracketKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//FeatureConfiguration returns gen::FeatureConfiguration:
+		//
 		//	{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue* "}";
 		public ParserRule getRule() { return rule; }
 
@@ -171,6 +174,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpressionLiteralParserRuleCall_3_0 = (RuleCall)cExpressionAssignment_3.eContents().get(0);
 		
 		//FeatureParameterValue returns gen::FeatureParameterValue:
+		//
 		//	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] "=" expression=Literal;
 		public ParserRule getRule() { return rule; }
 
@@ -208,6 +212,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cStringLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//Literal returns gen::Literal:
+		//
 		//	BoolLiteral | IntLiteral | RealLiteral | StringLiteral;
 		public ParserRule getRule() { return rule; }
 
@@ -235,6 +240,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueBOOLTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//BoolLiteral returns gen::BoolLiteral:
+		//
 		//	{gen::BoolLiteral} value=BOOL;
 		public ParserRule getRule() { return rule; }
 
@@ -259,6 +265,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueINTTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//IntLiteral returns gen::IntLiteral:
+		//
 		//	{gen::IntLiteral} value=INT;
 		public ParserRule getRule() { return rule; }
 
@@ -283,6 +290,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueFLOATTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//RealLiteral returns gen::RealLiteral:
+		//
 		//	{gen::RealLiteral} value=FLOAT;
 		public ParserRule getRule() { return rule; }
 
@@ -307,6 +315,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cValueSTRINGTerminalRuleCall_1_0 = (RuleCall)cValueAssignment_1.eContents().get(0);
 		
 		//StringLiteral returns gen::StringLiteral:
+		//
 		//	{gen::StringLiteral} value=STRING;
 		public ParserRule getRule() { return rule; }
 
@@ -334,6 +343,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//QID:
+		//
 		//	ID (("::" | ".") ID)*;
 		public ParserRule getRule() { return rule; }
 
@@ -397,6 +407,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	/// **
 	// * @author Andreas Muelder
 	// * / GeneratorModel returns gen::GeneratorModel:
+	//
 	//	"GeneratorModel" "for" generatorId=QID "{" entries+=GeneratorEntry* "}";
 	public GeneratorModelElements getGeneratorModelAccess() {
 		return (pGeneratorModel != null) ? pGeneratorModel : (pGeneratorModel = new GeneratorModelElements());
@@ -407,6 +418,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//GeneratorEntry returns gen::GeneratorEntry:
+	//
 	//	contentType=ID elementRef=[ecore::EObject|QID] "{" features+=FeatureConfiguration* "}";
 	public GeneratorEntryElements getGeneratorEntryAccess() {
 		return (pGeneratorEntry != null) ? pGeneratorEntry : (pGeneratorEntry = new GeneratorEntryElements());
@@ -417,6 +429,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureConfiguration returns gen::FeatureConfiguration:
+	//
 	//	{gen::FeatureConfiguration} "feature" type=[gen::FeatureType] "{" parameterValues+=FeatureParameterValue* "}";
 	public FeatureConfigurationElements getFeatureConfigurationAccess() {
 		return (pFeatureConfiguration != null) ? pFeatureConfiguration : (pFeatureConfiguration = new FeatureConfigurationElements());
@@ -427,6 +440,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureParameterValue returns gen::FeatureParameterValue:
+	//
 	//	{gen::FeatureParameterValue} parameter=[gen::FeatureParameter] "=" expression=Literal;
 	public FeatureParameterValueElements getFeatureParameterValueAccess() {
 		return (pFeatureParameterValue != null) ? pFeatureParameterValue : (pFeatureParameterValue = new FeatureParameterValueElements());
@@ -437,6 +451,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Literal returns gen::Literal:
+	//
 	//	BoolLiteral | IntLiteral | RealLiteral | StringLiteral;
 	public LiteralElements getLiteralAccess() {
 		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
@@ -447,6 +462,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//BoolLiteral returns gen::BoolLiteral:
+	//
 	//	{gen::BoolLiteral} value=BOOL;
 	public BoolLiteralElements getBoolLiteralAccess() {
 		return (pBoolLiteral != null) ? pBoolLiteral : (pBoolLiteral = new BoolLiteralElements());
@@ -457,6 +473,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//IntLiteral returns gen::IntLiteral:
+	//
 	//	{gen::IntLiteral} value=INT;
 	public IntLiteralElements getIntLiteralAccess() {
 		return (pIntLiteral != null) ? pIntLiteral : (pIntLiteral = new IntLiteralElements());
@@ -467,6 +484,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//RealLiteral returns gen::RealLiteral:
+	//
 	//	{gen::RealLiteral} value=FLOAT;
 	public RealLiteralElements getRealLiteralAccess() {
 		return (pRealLiteral != null) ? pRealLiteral : (pRealLiteral = new RealLiteralElements());
@@ -477,6 +495,7 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//StringLiteral returns gen::StringLiteral:
+	//
 	//	{gen::StringLiteral} value=STRING;
 	public StringLiteralElements getStringLiteralAccess() {
 		return (pStringLiteral != null) ? pStringLiteral : (pStringLiteral = new StringLiteralElements());
@@ -487,18 +506,21 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal BOOL returns ecore::EBoolean:
+	//
 	//	"true" | "false" | "yes" | "no";
 	public TerminalRule getBOOLRule() {
 		return (tBOOL != null) ? tBOOL : (tBOOL = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "BOOL"));
 	} 
 
 	//terminal FLOAT returns ecore::EFloat:
+	//
 	//	(INT "." INT) ("e" ("-" | "+") INT)? ("f" | "F" | "d" | "D")?;
 	public TerminalRule getFLOATRule() {
 		return (tFLOAT != null) ? tFLOAT : (tFLOAT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "FLOAT"));
 	} 
 
 	//QID:
+	//
 	//	ID (("::" | ".") ID)*;
 	public QIDElements getQIDAccess() {
 		return (pQID != null) ? pQID : (pQID = new QIDElements());
@@ -509,43 +531,51 @@ public class SGenGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal ID:
+	//
 	//	"^"? ("a".."z" | "A".."Z" | "_") ("a".."z" | "A".."Z" | "_" | "0".."9")*;
 	public TerminalRule getIDRule() {
 		return gaTerminals.getIDRule();
 	} 
 
 	//terminal INT returns ecore::EInt:
+	//
 	//	"0".."9"+;
 	public TerminalRule getINTRule() {
 		return gaTerminals.getINTRule();
 	} 
 
 	//terminal STRING:
+	//
 	//	"\"" ("\\" ("b" | "t" | "n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\""))* "\"" | "\'" ("\\" ("b" | "t" |
+	//
 	//	"n" | "f" | "r" | "u" | "\"" | "\'" | "\\") | !("\\" | "\'"))* "\'";
 	public TerminalRule getSTRINGRule() {
 		return gaTerminals.getSTRINGRule();
 	} 
 
 	//terminal ML_COMMENT:
+	//
 	//	"/ *"->"* /";
 	public TerminalRule getML_COMMENTRule() {
 		return gaTerminals.getML_COMMENTRule();
 	} 
 
 	//terminal SL_COMMENT:
+	//
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
 	} 
 
 	//terminal WS:
+	//
 	//	(" " | "\t" | "\r" | "\n")+;
 	public TerminalRule getWSRule() {
 		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:
+	//
 	//	.;
 	public TerminalRule getANY_OTHERRule() {
 		return gaTerminals.getANY_OTHERRule();

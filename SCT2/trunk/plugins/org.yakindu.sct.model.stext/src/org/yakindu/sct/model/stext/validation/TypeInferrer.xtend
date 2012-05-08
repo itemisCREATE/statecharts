@@ -11,54 +11,37 @@
  */
 package org.yakindu.sct.model.stext.validation
 
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression
+import com.google.inject.Inject
+import org.yakindu.base.types.Feature
+import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sgraph.Statement
-import org.yakindu.sct.model.stext.stext.RealLiteral
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.IntLiteral
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression
+import org.yakindu.sct.model.stext.stext.AssignmentExpression
 import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
 import org.yakindu.sct.model.stext.stext.BitwiseOrExpression
 import org.yakindu.sct.model.stext.stext.BitwiseXorExpression
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.ConditionalExpression
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.IntLiteral
+import org.yakindu.sct.model.stext.stext.LogicalAndExpression
+import org.yakindu.sct.model.stext.stext.LogicalNotExpression
+import org.yakindu.sct.model.stext.stext.LogicalOrExpression
 import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
-import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.model.stext.stext.EventRaisedReferenceExpression
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
-import org.yakindu.sct.model.stext.stext.ConditionalExpression
-import org.yakindu.sct.model.stext.stext.EventRaising
-import org.yakindu.sct.model.stext.stext.Assignment
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.RelationalOperator
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import com.google.inject.Inject
-import org.eclipse.xtext.validation.ValidationMessageAcceptor
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.base.types.Type
-import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.sct.model.stext.stext.AssignmentExpression
-import org.yakindu.sct.model.stext.stext.TypedElementReferenceExpression
-import org.yakindu.base.types.Feature
-import javax.lang.model.element.TypeElement
-import org.yakindu.sct.model.stext.stext.FeatureCall
-import org.yakindu.sct.model.stext.validation.ITypeAnalyzer
-import org.yakindu.base.types.LibrariesExtensions
-import org.yakindu.base.types.scope.TypeLibraryLocation
-import org.yakindu.base.types.TypesPackage
-import org.yakindu.base.types.TypesFactory
+import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.StringLiteral
-import org.eclipse.xtext.validation.AbstractValidationMessageAcceptor
-import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.sct.model.stext.stext.EventDerivation
-import org.eclipse.xtext.util.OnChangeEvictingCache
-import org.eclipse.emf.ecore.util.EcoreUtil
-import com.google.inject.Provider
-import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.stext.stext.VariableDefinition
  
 /**
  * 
@@ -69,8 +52,6 @@ import org.yakindu.base.types.ITypeSystemAccess
  */
 class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferrer, org.yakindu.sct.model.stext.validation.TypeInferrerCache$ICacheableTypeAnalyzer {
 	
-	@Inject 
-	TypeLibraryLocation$Registry libraries
 	@Inject extension
 	ITypeSystemAccess ts 
 	@Inject 
@@ -188,7 +169,7 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		return assertIsNumber(type, expression.operator.literal)
 	}	
 	def dispatch inferType(PrimitiveValueExpression expression){
-		val Type t = expression.value.getType
+		val Type t = expression.value.literalType
 		return t
 	}
 	def dispatch inferType(ShiftExpression expression){
@@ -231,18 +212,18 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		return getType(expression.value)
 	}
 	
-	def dispatch getType(IntLiteral literal){
+	def dispatch getLiteralType(IntLiteral literal){
 		return ts.integer
 	}
 	
-	def dispatch getType(BoolLiteral bool){
+	def dispatch getLiteralType(BoolLiteral bool){
 		return ts.^boolean
 	}
 	
-	def dispatch getType(RealLiteral literal){
+	def dispatch getLiteralType(RealLiteral literal){
 		return ts.real
 	}
-	def dispatch getType(StringLiteral literal){
+	def dispatch getLiteralType(StringLiteral literal){
 		return ts.string
 	}
 	

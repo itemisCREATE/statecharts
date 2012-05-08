@@ -17,7 +17,6 @@ import org.yakindu.sct.model.stext.stext.AssignmentOperator
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
 import org.yakindu.sct.model.sgraph.Statement
@@ -100,7 +99,8 @@ class SequenceBuilder {
 	}
 	
 	def void defineShallowEnterSequences(ExecutionFlow flow, Statechart sc) {
-		for ( r : sc.allContentsIterable.filter(typeof(Region))) {
+		val contents =  sc.eAllContents
+		for ( r : contents.filter(typeof(Region)).toIterable) {
 			if (r.requireShallowHistory) {
 				val execRegion = r.create
 				val seq = sexec.factory.createSequence

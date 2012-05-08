@@ -20,8 +20,6 @@ Require-Bundle: org.yakindu.sct.generator.genmodel;visibility:=reexport,
  org.eclipse.core.resources,
  org.eclipse.xtend,
  org.eclipse.xpand,
- org.eclipse.xtext.xtend2;bundle-version="2.0.0",
- org.eclipse.xtext.xtend2.lib;bundle-version="2.0.0",
  org.yakindu.sct.ui.editor;bundle-version="1.0.0",
  org.eclipse.xtext.xbase.ui,
  org.apache.commons.lang,
@@ -29,12 +27,14 @@ Require-Bundle: org.yakindu.sct.generator.genmodel;visibility:=reexport,
  org.eclipse.help;bundle-version="3.5.100",
  org.yakindu.sct.doc.user;bundle-version="1.0.0",
  org.eclipse.emf.mwe2.language.ui;bundle-version="2.0.1",
- de.itemis.xtext.utils.jface;bundle-version="1.0.0"
+ de.itemis.xtext.utils.jface;bundle-version="1.0.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.3.0"
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.generator.genmodel.ui,
  org.yakindu.sct.generator.genmodel.ui.contentassist.antlr,
  org.yakindu.sct.generator.genmodel.ui.help,
- org.yakindu.sct.generator.genmodel.ui.internal
+ org.yakindu.sct.generator.genmodel.ui.internal,
+ org.yakindu.sct.generator.genmodel.ui.contentassist
 Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator

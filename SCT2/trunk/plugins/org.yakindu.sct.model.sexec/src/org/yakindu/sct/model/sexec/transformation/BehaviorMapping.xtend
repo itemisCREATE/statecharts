@@ -25,19 +25,13 @@ import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.IntLiteral
 import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import org.yakindu.sct.model.stext.stext.OnCycleEvent
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.stext.stext.TimeUnit
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
  
 
 class BehaviorMapping {
@@ -199,7 +193,7 @@ class BehaviorMapping {
 	}
 	
 	def ExecutionFlow mapTransitions(Statechart statechart, ExecutionFlow r){
-		var content = statechart.allContentsIterable
+		var content = statechart.eAllContents
 		val allStates = content.filter(typeof(State))
 		allStates.forEach( s | s.mapStateTransition);
 		return r
@@ -244,7 +238,7 @@ class BehaviorMapping {
 				.map(t | t.mapReaction)
 		)
 		
-		var content = statechart.allContentsIterable
+		var content = statechart.eAllContents
 		val allStates = content.filter(typeof(State))
 		allStates.forEach( s | (s as State).mapStateLocalReactions);
 		return r

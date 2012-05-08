@@ -109,7 +109,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		null
 	}
 	
-	def dispatch execute(ConditionalExpression expression){
+	def dispatch Object execute(ConditionalExpression expression){
 		if(expression.condition.execute as Boolean ){
 			return expression.trueCase.execute
 		}else{

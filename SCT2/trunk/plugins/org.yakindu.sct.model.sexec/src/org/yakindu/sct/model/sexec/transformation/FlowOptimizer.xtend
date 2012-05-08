@@ -24,7 +24,6 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.StextFactory
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
  
 class FlowOptimizer {
 	
@@ -54,8 +53,8 @@ class FlowOptimizer {
 		if (_inlineExitActions)   flow.states.forEach( state | state.exitAction.inline )
 		if (_inlineEnterSequences) flow.states.forEach( state | state.enterSequence.inline )
 		if (_inlineExitSequences)  flow.states.forEach( state | state.exitSequence.inline )
-		if (_inlineExitRegion) flow.allContentsIterable.filter(typeof(ExecutionRegion)).forEach( region | region.exitSequence.inline )
-		if (_inlineEnterRegion) flow.allContentsIterable.filter(typeof(ExecutionRegion)).forEach( region | region.enterSequence.inline )
+		if (_inlineExitRegion) flow.eAllContents.filter(typeof(ExecutionRegion)).forEach( region | region.exitSequence.inline )
+		if (_inlineEnterRegion) flow.eAllContents.filter(typeof(ExecutionRegion)).forEach( region | region.enterSequence.inline )
 
 				
 		if (_inlineChoices) {
@@ -73,7 +72,7 @@ class FlowOptimizer {
 	
 	// REPLACE TRUE IF STEPS
 	def replaceTrueIfs(ExecutionFlow flow) {
-		flow.allContentsIterable.filter(typeof(If)).filter( i | i.check.alwaysTrue ).forEach( i | i.substituteBy(i.thenStep) );
+		flow.eAllContents.filter(typeof(If)).filter( i | i.check.alwaysTrue ).forEach( i | i.substituteBy(i.thenStep) );
 	}
 	
 	def substituteBy(Step orig, Step substitute) {

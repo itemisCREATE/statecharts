@@ -1,21 +1,22 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.EObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.Execution;
@@ -52,16 +53,18 @@ import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 
 @SuppressWarnings("all")
 public class BehaviorMapping {
-  
   @Inject
   private StatechartExtensions sc;
   
@@ -84,97 +87,85 @@ public class BehaviorMapping {
   private SequenceBuilder sb;
   
   public ExecutionFlow mapEntryActions(final Statechart statechart, final ExecutionFlow r) {
-    {
-      SexecFactory _factory = this.sexec.factory();
-      Sequence _createSequence = _factory.createSequence();
-      final Sequence seq = _createSequence;
-      seq.setName("entryAction");
-      String _name = statechart.getName();
-      String _operator_plus = StringExtensions.operator_plus("Entry action for statechart \'", _name);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\'.");
-      seq.setComment(_operator_plus_1);
-      List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(statechart);
-      for (final TimeEventSpec tes : _timeEventSpecs) {
-        {
-          TimeEvent _createDerivedEvent = this.factory.createDerivedEvent(tes);
-          final TimeEvent timeEvent = _createDerivedEvent;
-          Statement _buildValueExpression = this.sb.buildValueExpression(tes);
-          ScheduleTimeEvent _newScheduleTimeEvent = this.factory.newScheduleTimeEvent(timeEvent, _buildValueExpression);
-          final ScheduleTimeEvent scheduleStep = _newScheduleTimeEvent;
-          EList<Step> _steps = seq.getSteps();
-          _steps.add(scheduleStep);
-        }
+    SexecFactory _factory = this.sexec.factory();
+    final Sequence seq = _factory.createSequence();
+    seq.setName("entryAction");
+    String _name = statechart.getName();
+    String _plus = ("Entry action for statechart \'" + _name);
+    String _plus_1 = (_plus + "\'.");
+    seq.setComment(_plus_1);
+    List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(statechart);
+    for (final TimeEventSpec tes : _timeEventSpecs) {
+      {
+        final TimeEvent timeEvent = this.factory.createDerivedEvent(tes);
+        Statement _buildValueExpression = this.sb.buildValueExpression(tes);
+        final ScheduleTimeEvent scheduleStep = this.factory.newScheduleTimeEvent(timeEvent, _buildValueExpression);
+        EList<Step> _steps = seq.getSteps();
+        _steps.add(scheduleStep);
       }
-      List<LocalReaction> _entryReactions = this.sc.entryReactions(statechart);
-      final Function1<LocalReaction,Sequence> _function = new Function1<LocalReaction,Sequence>() {
-          public Sequence apply(final LocalReaction lr) {
-            Sequence _xifexpression = null;
-            Effect _effect = lr.getEffect();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_effect, null);
-            if (_operator_notEquals) {
-              Effect _effect_1 = lr.getEffect();
-              Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
-              _xifexpression = _mapEffect;
-            } else {
-              _xifexpression = null;
-            }
-            return _xifexpression;
-          }
-        };
-      List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_entryReactions, _function);
-      final Function1<Sequence,Boolean> _function_1 = new Function1<Sequence,Boolean>() {
-          public Boolean apply(final Sequence e) {
-            Boolean _xifexpression_1 = null;
-            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(e, null);
-            if (_operator_notEquals_1) {
-              EList<Step> _steps_1 = seq.getSteps();
-              boolean _add = _steps_1.add(e);
-              _xifexpression_1 = _add;
-            }
-            return _xifexpression_1;
-          }
-        };
-      IterableExtensions.<Sequence>forEach(_map, _function_1);
-      r.setEntryAction(seq);
-      List<RegularState> _allRegularStates = this.sc.allRegularStates(statechart);
-      Iterable<State> _filter = IterableExtensions.<State>filter(_allRegularStates, org.yakindu.sct.model.sgraph.State.class);
-      final Iterable<State> allStates = _filter;
-      final Function1<State,Object> _function_2 = new Function1<State,Object>() {
-          public Object apply(final State s) {
-            Object _xblockexpression = null;
-            {
-              ExecutionState _create = BehaviorMapping.this.factory.create(s);
-              Step _mapEntryAction = BehaviorMapping.this.mapEntryAction(s);
-              _create.setEntryAction(_mapEntryAction);
-              _xblockexpression = (null);
-            }
-            return _xblockexpression;
-          }
-        };
-      IterableExtensions.<State>forEach(allStates, _function_2);
-      return r;
     }
+    List<LocalReaction> _entryReactions = this.sc.entryReactions(statechart);
+    final Function1<LocalReaction,Sequence> _function = new Function1<LocalReaction,Sequence>() {
+        public Sequence apply(final LocalReaction lr) {
+          Sequence _xifexpression = null;
+          Effect _effect = lr.getEffect();
+          boolean _notEquals = (!Objects.equal(_effect, null));
+          if (_notEquals) {
+            Effect _effect_1 = lr.getEffect();
+            Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
+            _xifexpression = _mapEffect;
+          } else {
+            _xifexpression = null;
+          }
+          return _xifexpression;
+        }
+      };
+    List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_entryReactions, _function);
+    final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
+        public void apply(final Sequence e) {
+          boolean _notEquals = (!Objects.equal(e, null));
+          if (_notEquals) {
+            EList<Step> _steps = seq.getSteps();
+            _steps.add(e);
+          }
+        }
+      };
+    IterableExtensions.<Sequence>forEach(_map, _function_1);
+    r.setEntryAction(seq);
+    List<RegularState> _allRegularStates = this.sc.allRegularStates(statechart);
+    final Iterable<State> allStates = Iterables.<State>filter(_allRegularStates, State.class);
+    final Procedure1<State> _function_2 = new Procedure1<State>() {
+        public void apply(final State s) {
+          ExecutionState _create = BehaviorMapping.this.factory.create(s);
+          Step _mapEntryAction = BehaviorMapping.this.mapEntryAction(s);
+          _create.setEntryAction(_mapEntryAction);
+          /* null */
+        }
+      };
+    IterableExtensions.<State>forEach(allStates, _function_2);
+    return r;
   }
   
+  /**
+   * The entry action sequence of a state consist all action that are specified with the 'entry' pseudo trigger within local reactions
+   * and all scheduling actions for time triggers.
+   */
   public Step mapEntryAction(final State state) {
     Sequence _xblockexpression = null;
     {
       SexecFactory _factory = this.sexec.factory();
-      Sequence _createSequence = _factory.createSequence();
-      final Sequence seq = _createSequence;
+      final Sequence seq = _factory.createSequence();
       seq.setName("entryAction");
       String _name = state.getName();
-      String _operator_plus = StringExtensions.operator_plus("Entry action for state \'", _name);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\'.");
-      seq.setComment(_operator_plus_1);
+      String _plus = ("Entry action for state \'" + _name);
+      String _plus_1 = (_plus + "\'.");
+      seq.setComment(_plus_1);
       List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(state);
       for (final TimeEventSpec tes : _timeEventSpecs) {
         {
-          TimeEvent _createDerivedEvent = this.factory.createDerivedEvent(tes);
-          final TimeEvent timeEvent = _createDerivedEvent;
+          final TimeEvent timeEvent = this.factory.createDerivedEvent(tes);
           Statement _buildValueExpression = this.sb.buildValueExpression(tes);
-          ScheduleTimeEvent _newScheduleTimeEvent = this.factory.newScheduleTimeEvent(timeEvent, _buildValueExpression);
-          final ScheduleTimeEvent scheduleStep = _newScheduleTimeEvent;
+          final ScheduleTimeEvent scheduleStep = this.factory.newScheduleTimeEvent(timeEvent, _buildValueExpression);
           EList<Step> _steps = seq.getSteps();
           _steps.add(scheduleStep);
         }
@@ -184,8 +175,8 @@ public class BehaviorMapping {
           public Sequence apply(final LocalReaction lr) {
             Sequence _xifexpression = null;
             Effect _effect = lr.getEffect();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_effect, null);
-            if (_operator_notEquals) {
+            boolean _notEquals = (!Objects.equal(_effect, null));
+            if (_notEquals) {
               Effect _effect_1 = lr.getEffect();
               Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
               _xifexpression = _mapEffect;
@@ -196,155 +187,134 @@ public class BehaviorMapping {
           }
         };
       List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_entryReactions, _function);
-      final Function1<Sequence,Boolean> _function_1 = new Function1<Sequence,Boolean>() {
-          public Boolean apply(final Sequence e) {
-            Boolean _xifexpression_1 = null;
-            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(e, null);
-            if (_operator_notEquals_1) {
-              EList<Step> _steps_1 = seq.getSteps();
-              boolean _add = _steps_1.add(e);
-              _xifexpression_1 = _add;
+      final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
+          public void apply(final Sequence e) {
+            boolean _notEquals = (!Objects.equal(e, null));
+            if (_notEquals) {
+              EList<Step> _steps = seq.getSteps();
+              _steps.add(e);
             }
-            return _xifexpression_1;
           }
         };
       IterableExtensions.<Sequence>forEach(_map, _function_1);
-      Sequence _xifexpression_2 = null;
-      EList<Step> _steps_2 = seq.getSteps();
-      int _size = _steps_2.size();
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
-      if (_operator_greaterThan) {
-        _xifexpression_2 = seq;
+      Sequence _xifexpression = null;
+      EList<Step> _steps = seq.getSteps();
+      int _size = _steps.size();
+      boolean _greaterThan = (_size > 0);
+      if (_greaterThan) {
+        _xifexpression = seq;
       } else {
-        _xifexpression_2 = null;
+        _xifexpression = null;
       }
-      _xblockexpression = (_xifexpression_2);
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
   
   public ExecutionFlow mapChoiceTransitions(final Statechart statechart, final ExecutionFlow r) {
-    {
-      Iterable<Choice> _allChoices = this.sc.allChoices(statechart);
-      final Function1<Choice,ExecutionChoice> _function = new Function1<Choice,ExecutionChoice>() {
-          public ExecutionChoice apply(final Choice choice) {
-            ExecutionChoice _mapChoiceTransition = BehaviorMapping.this.mapChoiceTransition(choice);
-            return _mapChoiceTransition;
-          }
-        };
-      IterableExtensions.<Choice>forEach(_allChoices, _function);
-      return r;
-    }
+    Iterable<Choice> _allChoices = this.sc.allChoices(statechart);
+    final Procedure1<Choice> _function = new Procedure1<Choice>() {
+        public void apply(final Choice choice) {
+          BehaviorMapping.this.mapChoiceTransition(choice);
+        }
+      };
+    IterableExtensions.<Choice>forEach(_allChoices, _function);
+    return r;
   }
   
   public ExecutionChoice mapChoiceTransition(final Choice choice) {
-    {
-      ExecutionChoice _create = this.factory.create(choice);
-      final ExecutionChoice _choice = _create;
-      EList<Reaction> _reactions = _choice.getReactions();
-      EList<Transition> _outgoingTransitions = choice.getOutgoingTransitions();
-      final Function1<Transition,Reaction> _function = new Function1<Transition,Reaction>() {
-          public Reaction apply(final Transition t) {
-            Reaction _mapTransition = BehaviorMapping.this.mapTransition(t);
-            return _mapTransition;
-          }
-        };
-      List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
-      _reactions.addAll(_map);
-      return _choice;
-    }
+    final ExecutionChoice _choice = this.factory.create(choice);
+    EList<Reaction> _reactions = _choice.getReactions();
+    EList<Transition> _outgoingTransitions = choice.getOutgoingTransitions();
+    final Function1<Transition,Reaction> _function = new Function1<Transition,Reaction>() {
+        public Reaction apply(final Transition t) {
+          Reaction _mapTransition = BehaviorMapping.this.mapTransition(t);
+          return _mapTransition;
+        }
+      };
+    List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
+    _reactions.addAll(_map);
+    return _choice;
   }
   
   public ExecutionFlow mapExitActions(final Statechart statechart, final ExecutionFlow r) {
-    {
-      SexecFactory _factory = this.sexec.factory();
-      Sequence _createSequence = _factory.createSequence();
-      final Sequence seq = _createSequence;
-      seq.setName("exitAction");
-      String _name = statechart.getName();
-      String _operator_plus = StringExtensions.operator_plus("Exit action for state \'", _name);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\'.");
-      seq.setComment(_operator_plus_1);
-      List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(statechart);
-      for (final TimeEventSpec tes : _timeEventSpecs) {
-        {
-          TimeEvent _createDerivedEvent = this.factory.createDerivedEvent(tes);
-          final TimeEvent timeEvent = _createDerivedEvent;
-          UnscheduleTimeEvent _newUnscheduleTimeEvent = this.factory.newUnscheduleTimeEvent(timeEvent);
-          final UnscheduleTimeEvent unscheduleStep = _newUnscheduleTimeEvent;
-          EList<Step> _steps = seq.getSteps();
-          _steps.add(unscheduleStep);
-        }
+    SexecFactory _factory = this.sexec.factory();
+    final Sequence seq = _factory.createSequence();
+    seq.setName("exitAction");
+    String _name = statechart.getName();
+    String _plus = ("Exit action for state \'" + _name);
+    String _plus_1 = (_plus + "\'.");
+    seq.setComment(_plus_1);
+    List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(statechart);
+    for (final TimeEventSpec tes : _timeEventSpecs) {
+      {
+        final TimeEvent timeEvent = this.factory.createDerivedEvent(tes);
+        final UnscheduleTimeEvent unscheduleStep = this.factory.newUnscheduleTimeEvent(timeEvent);
+        EList<Step> _steps = seq.getSteps();
+        _steps.add(unscheduleStep);
       }
-      List<LocalReaction> _exitReactions = this.sc.exitReactions(statechart);
-      final Function1<LocalReaction,Sequence> _function = new Function1<LocalReaction,Sequence>() {
-          public Sequence apply(final LocalReaction lr) {
-            Sequence _xifexpression = null;
-            Effect _effect = lr.getEffect();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_effect, null);
-            if (_operator_notEquals) {
-              Effect _effect_1 = lr.getEffect();
-              Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
-              _xifexpression = _mapEffect;
-            } else {
-              _xifexpression = null;
-            }
-            return _xifexpression;
-          }
-        };
-      List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_exitReactions, _function);
-      final Function1<Sequence,Boolean> _function_1 = new Function1<Sequence,Boolean>() {
-          public Boolean apply(final Sequence e) {
-            Boolean _xifexpression_1 = null;
-            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(e, null);
-            if (_operator_notEquals_1) {
-              EList<Step> _steps_1 = seq.getSteps();
-              boolean _add = _steps_1.add(e);
-              _xifexpression_1 = _add;
-            }
-            return _xifexpression_1;
-          }
-        };
-      IterableExtensions.<Sequence>forEach(_map, _function_1);
-      r.setExitAction(seq);
-      List<RegularState> _allRegularStates = this.sc.allRegularStates(statechart);
-      Iterable<State> _filter = IterableExtensions.<State>filter(_allRegularStates, org.yakindu.sct.model.sgraph.State.class);
-      final Iterable<State> allStates = _filter;
-      final Function1<State,Object> _function_2 = new Function1<State,Object>() {
-          public Object apply(final State s) {
-            Object _xblockexpression = null;
-            {
-              ExecutionState _create = BehaviorMapping.this.factory.create(s);
-              Step _mapExitAction = BehaviorMapping.this.mapExitAction(s);
-              _create.setExitAction(_mapExitAction);
-              _xblockexpression = (null);
-            }
-            return _xblockexpression;
-          }
-        };
-      IterableExtensions.<State>forEach(allStates, _function_2);
-      return r;
     }
+    List<LocalReaction> _exitReactions = this.sc.exitReactions(statechart);
+    final Function1<LocalReaction,Sequence> _function = new Function1<LocalReaction,Sequence>() {
+        public Sequence apply(final LocalReaction lr) {
+          Sequence _xifexpression = null;
+          Effect _effect = lr.getEffect();
+          boolean _notEquals = (!Objects.equal(_effect, null));
+          if (_notEquals) {
+            Effect _effect_1 = lr.getEffect();
+            Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
+            _xifexpression = _mapEffect;
+          } else {
+            _xifexpression = null;
+          }
+          return _xifexpression;
+        }
+      };
+    List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_exitReactions, _function);
+    final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
+        public void apply(final Sequence e) {
+          boolean _notEquals = (!Objects.equal(e, null));
+          if (_notEquals) {
+            EList<Step> _steps = seq.getSteps();
+            _steps.add(e);
+          }
+        }
+      };
+    IterableExtensions.<Sequence>forEach(_map, _function_1);
+    r.setExitAction(seq);
+    List<RegularState> _allRegularStates = this.sc.allRegularStates(statechart);
+    final Iterable<State> allStates = Iterables.<State>filter(_allRegularStates, State.class);
+    final Procedure1<State> _function_2 = new Procedure1<State>() {
+        public void apply(final State s) {
+          ExecutionState _create = BehaviorMapping.this.factory.create(s);
+          Step _mapExitAction = BehaviorMapping.this.mapExitAction(s);
+          _create.setExitAction(_mapExitAction);
+          /* null */
+        }
+      };
+    IterableExtensions.<State>forEach(allStates, _function_2);
+    return r;
   }
   
+  /**
+   * The exit action sequence of a state consist all action that are specified with the 'exit' pseudo trigger within local reactions
+   * and all unscheduling actions for time triggers.
+   */
   public Step mapExitAction(final State state) {
     Sequence _xblockexpression = null;
     {
       SexecFactory _factory = this.sexec.factory();
-      Sequence _createSequence = _factory.createSequence();
-      final Sequence seq = _createSequence;
+      final Sequence seq = _factory.createSequence();
       seq.setName("exitAction");
       String _name = state.getName();
-      String _operator_plus = StringExtensions.operator_plus("Exit action for state \'", _name);
-      String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\'.");
-      seq.setComment(_operator_plus_1);
+      String _plus = ("Exit action for state \'" + _name);
+      String _plus_1 = (_plus + "\'.");
+      seq.setComment(_plus_1);
       List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(state);
       for (final TimeEventSpec tes : _timeEventSpecs) {
         {
-          TimeEvent _createDerivedEvent = this.factory.createDerivedEvent(tes);
-          final TimeEvent timeEvent = _createDerivedEvent;
-          UnscheduleTimeEvent _newUnscheduleTimeEvent = this.factory.newUnscheduleTimeEvent(timeEvent);
-          final UnscheduleTimeEvent unscheduleStep = _newUnscheduleTimeEvent;
+          final TimeEvent timeEvent = this.factory.createDerivedEvent(tes);
+          final UnscheduleTimeEvent unscheduleStep = this.factory.newUnscheduleTimeEvent(timeEvent);
           EList<Step> _steps = seq.getSteps();
           _steps.add(unscheduleStep);
         }
@@ -354,8 +324,8 @@ public class BehaviorMapping {
           public Sequence apply(final LocalReaction lr) {
             Sequence _xifexpression = null;
             Effect _effect = lr.getEffect();
-            boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_effect, null);
-            if (_operator_notEquals) {
+            boolean _notEquals = (!Objects.equal(_effect, null));
+            if (_notEquals) {
               Effect _effect_1 = lr.getEffect();
               Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
               _xifexpression = _mapEffect;
@@ -366,29 +336,26 @@ public class BehaviorMapping {
           }
         };
       List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_exitReactions, _function);
-      final Function1<Sequence,Boolean> _function_1 = new Function1<Sequence,Boolean>() {
-          public Boolean apply(final Sequence e) {
-            Boolean _xifexpression_1 = null;
-            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(e, null);
-            if (_operator_notEquals_1) {
-              EList<Step> _steps_1 = seq.getSteps();
-              boolean _add = _steps_1.add(e);
-              _xifexpression_1 = _add;
+      final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
+          public void apply(final Sequence e) {
+            boolean _notEquals = (!Objects.equal(e, null));
+            if (_notEquals) {
+              EList<Step> _steps = seq.getSteps();
+              _steps.add(e);
             }
-            return _xifexpression_1;
           }
         };
       IterableExtensions.<Sequence>forEach(_map, _function_1);
-      Sequence _xifexpression_2 = null;
-      EList<Step> _steps_2 = seq.getSteps();
-      int _size = _steps_2.size();
-      boolean _operator_greaterThan = ComparableExtensions.<Integer>operator_greaterThan(((Integer)_size), ((Integer)0));
-      if (_operator_greaterThan) {
-        _xifexpression_2 = seq;
+      Sequence _xifexpression = null;
+      EList<Step> _steps = seq.getSteps();
+      int _size = _steps.size();
+      boolean _greaterThan = (_size > 0);
+      if (_greaterThan) {
+        _xifexpression = seq;
       } else {
-        _xifexpression_2 = null;
+        _xifexpression = null;
       }
-      _xblockexpression = (_xifexpression_2);
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }
@@ -398,38 +365,33 @@ public class BehaviorMapping {
   }
   
   protected Sequence _mapEffect(final ReactionEffect effect) {
-    Sequence _xifexpression = null;
     EList<Expression> _actions = effect.getActions();
     boolean _isEmpty = _actions.isEmpty();
-    boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-    if (_operator_not) {
-      {
-        SexecFactory _factory = this.sexec.factory();
-        Sequence _createSequence = _factory.createSequence();
-        final Sequence sequence = _createSequence;
-        sequence.setName("reaction_action");
-        EList<Step> _steps = sequence.getSteps();
-        EList<Expression> _actions_1 = effect.getActions();
-        final Function1<Expression,Execution> _function = new Function1<Expression,Execution>() {
-            public Execution apply(final Expression stmnt) {
-              Execution _mapToExecution = BehaviorMapping.this.mapToExecution(stmnt);
-              return _mapToExecution;
-            }
-          };
-        List<Execution> _map = ListExtensions.<Expression, Execution>map(_actions_1, _function);
-        _steps.addAll(_map);
-        return sequence;
-      }
+    boolean _not = (!_isEmpty);
+    if (_not) {
+      SexecFactory _factory = this.sexec.factory();
+      final Sequence sequence = _factory.createSequence();
+      sequence.setName("reaction_action");
+      EList<Step> _steps = sequence.getSteps();
+      EList<Expression> _actions_1 = effect.getActions();
+      final Function1<Expression,Execution> _function = new Function1<Expression,Execution>() {
+          public Execution apply(final Expression stmnt) {
+            Execution _mapToExecution = BehaviorMapping.this.mapToExecution(stmnt);
+            return _mapToExecution;
+          }
+        };
+      List<Execution> _map = ListExtensions.<Expression, Execution>map(_actions_1, _function);
+      _steps.addAll(_map);
+      return sequence;
     }
-    return _xifexpression;
+    return null;
   }
   
   public Execution mapToExecution(final Statement stmnt) {
     Execution _xblockexpression = null;
     {
       SexecFactory _factory = this.sexec.factory();
-      Execution _createExecution = _factory.createExecution();
-      final Execution exec = _createExecution;
+      final Execution exec = _factory.createExecution();
       Statement _copy = EcoreUtil.<Statement>copy(stmnt);
       exec.setStatement(_copy);
       _xblockexpression = (exec);
@@ -438,55 +400,44 @@ public class BehaviorMapping {
   }
   
   public ExecutionFlow mapTransitions(final Statechart statechart, final ExecutionFlow r) {
-    {
-      Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(statechart);
-      Iterable<EObject> content = _allContentsIterable;
-      Iterable<State> _filter = IterableExtensions.<State>filter(content, org.yakindu.sct.model.sgraph.State.class);
-      final Iterable<State> allStates = _filter;
-      final Function1<State,ExecutionState> _function = new Function1<State,ExecutionState>() {
-          public ExecutionState apply(final State s) {
-            ExecutionState _mapStateTransition = BehaviorMapping.this.mapStateTransition(s);
-            return _mapStateTransition;
-          }
-        };
-      IterableExtensions.<State>forEach(allStates, _function);
-      return r;
-    }
+    TreeIterator<EObject> content = statechart.eAllContents();
+    final Iterator<State> allStates = Iterators.<State>filter(content, State.class);
+    final Procedure1<State> _function = new Procedure1<State>() {
+        public void apply(final State s) {
+          BehaviorMapping.this.mapStateTransition(s);
+        }
+      };
+    IteratorExtensions.<State>forEach(allStates, _function);
+    return r;
   }
   
   public ExecutionState mapStateTransition(final State state) {
-    {
-      ExecutionState _create = this.factory.create(state);
-      final ExecutionState _state = _create;
-      EList<Reaction> _reactions = _state.getReactions();
-      EList<Transition> _outgoingTransitions = state.getOutgoingTransitions();
-      final Function1<Transition,Reaction> _function = new Function1<Transition,Reaction>() {
-          public Reaction apply(final Transition t) {
-            Reaction _mapTransition = BehaviorMapping.this.mapTransition(t);
-            return _mapTransition;
-          }
-        };
-      List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
-      _reactions.addAll(_map);
-      return _state;
-    }
+    final ExecutionState _state = this.factory.create(state);
+    EList<Reaction> _reactions = _state.getReactions();
+    EList<Transition> _outgoingTransitions = state.getOutgoingTransitions();
+    final Function1<Transition,Reaction> _function = new Function1<Transition,Reaction>() {
+        public Reaction apply(final Transition t) {
+          Reaction _mapTransition = BehaviorMapping.this.mapTransition(t);
+          return _mapTransition;
+        }
+      };
+    List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
+    _reactions.addAll(_map);
+    return _state;
   }
   
   public Reaction mapTransition(final Transition t) {
-    {
-      Reaction _create = this.factory.create(t);
-      final Reaction r = _create;
-      Trigger _trigger = t.getTrigger();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_trigger, null);
-      if (_operator_notEquals) {
-        Trigger _trigger_1 = t.getTrigger();
-        Check _mapToCheck = this.mapToCheck(_trigger_1);
-        r.setCheck(_mapToCheck);
-      }
-      Sequence _mapToEffect = this.mapToEffect(t, r);
-      r.setEffect(_mapToEffect);
-      return r;
+    final Reaction r = this.factory.create(t);
+    Trigger _trigger = t.getTrigger();
+    boolean _notEquals = (!Objects.equal(_trigger, null));
+    if (_notEquals) {
+      Trigger _trigger_1 = t.getTrigger();
+      Check _mapToCheck = this.mapToCheck(_trigger_1);
+      r.setCheck(_mapToCheck);
     }
+    Sequence _mapToEffect = this.mapToEffect(t, r);
+    r.setEffect(_mapToEffect);
+    return r;
   }
   
   protected Check _mapToCheck(final Trigger tr) {
@@ -494,171 +445,157 @@ public class BehaviorMapping {
   }
   
   protected Check _mapToCheck(final ReactionTrigger tr) {
-    {
-      Check _createCheck = this.factory.createCheck(tr);
-      final Check check = _createCheck;
-      Statement _buildCondition = this.buildCondition(tr);
-      check.setCondition(_buildCondition);
-      return check;
-    }
+    final Check check = this.factory.createCheck(tr);
+    Statement _buildCondition = this.buildCondition(tr);
+    check.setCondition(_buildCondition);
+    return check;
   }
   
   public ExecutionFlow mapLocalReactions(final Statechart statechart, final ExecutionFlow r) {
-    {
-      EList<Reaction> _reactions = r.getReactions();
-      EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = statechart.getLocalReactions();
-      Iterable<LocalReaction> _filter = IterableExtensions.<LocalReaction>filter(_localReactions, org.yakindu.sct.model.stext.stext.LocalReaction.class);
-      final Function1<LocalReaction,Boolean> _function = new Function1<LocalReaction,Boolean>() {
-          public Boolean apply(final LocalReaction lr) {
-            boolean _operator_or = false;
-            Trigger _trigger = lr.getTrigger();
-            EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
-            boolean _isEmpty = _triggers.isEmpty();
-            if (_isEmpty) {
-              _operator_or = true;
-            } else {
-              Trigger _trigger_1 = lr.getTrigger();
-              EList<EventSpec> _triggers_1 = ((ReactionTrigger) _trigger_1).getTriggers();
-              final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
-                  public Boolean apply(final EventSpec t) {
-                    boolean _operator_or_1 = false;
-                    boolean _operator_or_2 = false;
-                    boolean _operator_or_3 = false;
-                    if ((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec)) {
-                      _operator_or_3 = true;
-                    } else {
-                      _operator_or_3 = BooleanExtensions.operator_or((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec), (t instanceof org.yakindu.sct.model.stext.stext.TimeEventSpec));
-                    }
-                    if (_operator_or_3) {
-                      _operator_or_2 = true;
-                    } else {
-                      _operator_or_2 = BooleanExtensions.operator_or(_operator_or_3, (t instanceof org.yakindu.sct.model.stext.stext.OnCycleEvent));
-                    }
-                    if (_operator_or_2) {
-                      _operator_or_1 = true;
-                    } else {
-                      _operator_or_1 = BooleanExtensions.operator_or(_operator_or_2, (t instanceof org.yakindu.sct.model.stext.stext.AlwaysEvent));
-                    }
-                    return ((Boolean)_operator_or_1);
+    EList<Reaction> _reactions = r.getReactions();
+    EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = statechart.getLocalReactions();
+    Iterable<LocalReaction> _filter = Iterables.<LocalReaction>filter(_localReactions, LocalReaction.class);
+    final Function1<LocalReaction,Boolean> _function = new Function1<LocalReaction,Boolean>() {
+        public Boolean apply(final LocalReaction lr) {
+          boolean _or = false;
+          Trigger _trigger = lr.getTrigger();
+          EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
+          boolean _isEmpty = _triggers.isEmpty();
+          if (_isEmpty) {
+            _or = true;
+          } else {
+            Trigger _trigger_1 = lr.getTrigger();
+            EList<EventSpec> _triggers_1 = ((ReactionTrigger) _trigger_1).getTriggers();
+            final Function1<EventSpec,Boolean> _function = new Function1<EventSpec,Boolean>() {
+                public Boolean apply(final EventSpec t) {
+                  boolean _or = false;
+                  boolean _or_1 = false;
+                  boolean _or_2 = false;
+                  if ((t instanceof RegularEventSpec)) {
+                    _or_2 = true;
+                  } else {
+                    _or_2 = ((t instanceof RegularEventSpec) || (t instanceof TimeEventSpec));
                   }
-                };
-              Iterable<EventSpec> _filter_1 = IterableExtensions.<EventSpec>filter(_triggers_1, _function_1);
-              boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter_1);
-              boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
-              _operator_or = BooleanExtensions.operator_or(_isEmpty, _operator_not);
-            }
-            return ((Boolean)_operator_or);
+                  if (_or_2) {
+                    _or_1 = true;
+                  } else {
+                    _or_1 = (_or_2 || (t instanceof OnCycleEvent));
+                  }
+                  if (_or_1) {
+                    _or = true;
+                  } else {
+                    _or = (_or_1 || (t instanceof AlwaysEvent));
+                  }
+                  return Boolean.valueOf(_or);
+                }
+              };
+            Iterable<EventSpec> _filter = IterableExtensions.<EventSpec>filter(_triggers_1, _function);
+            boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
+            boolean _not = (!_isEmpty_1);
+            _or = (_isEmpty || _not);
           }
-        };
-      Iterable<LocalReaction> _filter_2 = IterableExtensions.<LocalReaction>filter(_filter, _function);
-      final Function1<LocalReaction,Reaction> _function_2 = new Function1<LocalReaction,Reaction>() {
-          public Reaction apply(final LocalReaction t_1) {
-            Reaction _mapReaction = BehaviorMapping.this.mapReaction(t_1);
-            return _mapReaction;
-          }
-        };
-      Iterable<Reaction> _map = IterableExtensions.<LocalReaction, Reaction>map(_filter_2, _function_2);
-      CollectionExtensions.<Reaction>addAll(_reactions, _map);
-      Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(statechart);
-      Iterable<EObject> content = _allContentsIterable;
-      Iterable<State> _filter_3 = IterableExtensions.<State>filter(content, org.yakindu.sct.model.sgraph.State.class);
-      final Iterable<State> allStates = _filter_3;
-      final Function1<State,ExecutionState> _function_3 = new Function1<State,ExecutionState>() {
-          public ExecutionState apply(final State s) {
-            ExecutionState _mapStateLocalReactions = BehaviorMapping.this.mapStateLocalReactions(((State) s));
-            return _mapStateLocalReactions;
-          }
-        };
-      IterableExtensions.<State>forEach(allStates, _function_3);
-      return r;
-    }
+          return Boolean.valueOf(_or);
+        }
+      };
+    Iterable<LocalReaction> _filter_1 = IterableExtensions.<LocalReaction>filter(_filter, _function);
+    final Function1<LocalReaction,Reaction> _function_1 = new Function1<LocalReaction,Reaction>() {
+        public Reaction apply(final LocalReaction t) {
+          Reaction _mapReaction = BehaviorMapping.this.mapReaction(t);
+          return _mapReaction;
+        }
+      };
+    Iterable<Reaction> _map = IterableExtensions.<LocalReaction, Reaction>map(_filter_1, _function_1);
+    Iterables.<Reaction>addAll(_reactions, _map);
+    TreeIterator<EObject> content = statechart.eAllContents();
+    final Iterator<State> allStates = Iterators.<State>filter(content, State.class);
+    final Procedure1<State> _function_2 = new Procedure1<State>() {
+        public void apply(final State s) {
+          BehaviorMapping.this.mapStateLocalReactions(((State) s));
+        }
+      };
+    IteratorExtensions.<State>forEach(allStates, _function_2);
+    return r;
   }
   
   public ExecutionState mapStateLocalReactions(final State state) {
-    {
-      ExecutionState _create = this.factory.create(state);
-      final ExecutionState _state = _create;
-      EList<Reaction> _reactions = _state.getReactions();
-      EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = state.getLocalReactions();
-      Iterable<LocalReaction> _filter = IterableExtensions.<LocalReaction>filter(_localReactions, org.yakindu.sct.model.stext.stext.LocalReaction.class);
-      final Function1<LocalReaction,Boolean> _function = new Function1<LocalReaction,Boolean>() {
-          public Boolean apply(final LocalReaction lr) {
-            boolean _operator_or = false;
-            Trigger _trigger = lr.getTrigger();
-            EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
-            boolean _isEmpty = _triggers.isEmpty();
-            if (_isEmpty) {
-              _operator_or = true;
-            } else {
-              Trigger _trigger_1 = lr.getTrigger();
-              EList<EventSpec> _triggers_1 = ((ReactionTrigger) _trigger_1).getTriggers();
-              final Function1<EventSpec,Boolean> _function_1 = new Function1<EventSpec,Boolean>() {
-                  public Boolean apply(final EventSpec t) {
-                    boolean _operator_or_1 = false;
-                    boolean _operator_or_2 = false;
-                    boolean _operator_or_3 = false;
-                    if ((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec)) {
-                      _operator_or_3 = true;
-                    } else {
-                      _operator_or_3 = BooleanExtensions.operator_or((t instanceof org.yakindu.sct.model.stext.stext.RegularEventSpec), (t instanceof org.yakindu.sct.model.stext.stext.TimeEventSpec));
-                    }
-                    if (_operator_or_3) {
-                      _operator_or_2 = true;
-                    } else {
-                      _operator_or_2 = BooleanExtensions.operator_or(_operator_or_3, (t instanceof org.yakindu.sct.model.stext.stext.OnCycleEvent));
-                    }
-                    if (_operator_or_2) {
-                      _operator_or_1 = true;
-                    } else {
-                      _operator_or_1 = BooleanExtensions.operator_or(_operator_or_2, (t instanceof org.yakindu.sct.model.stext.stext.AlwaysEvent));
-                    }
-                    return ((Boolean)_operator_or_1);
+    final ExecutionState _state = this.factory.create(state);
+    EList<Reaction> _reactions = _state.getReactions();
+    EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = state.getLocalReactions();
+    Iterable<LocalReaction> _filter = Iterables.<LocalReaction>filter(_localReactions, LocalReaction.class);
+    final Function1<LocalReaction,Boolean> _function = new Function1<LocalReaction,Boolean>() {
+        public Boolean apply(final LocalReaction lr) {
+          boolean _or = false;
+          Trigger _trigger = lr.getTrigger();
+          EList<EventSpec> _triggers = ((ReactionTrigger) _trigger).getTriggers();
+          boolean _isEmpty = _triggers.isEmpty();
+          if (_isEmpty) {
+            _or = true;
+          } else {
+            Trigger _trigger_1 = lr.getTrigger();
+            EList<EventSpec> _triggers_1 = ((ReactionTrigger) _trigger_1).getTriggers();
+            final Function1<EventSpec,Boolean> _function = new Function1<EventSpec,Boolean>() {
+                public Boolean apply(final EventSpec t) {
+                  boolean _or = false;
+                  boolean _or_1 = false;
+                  boolean _or_2 = false;
+                  if ((t instanceof RegularEventSpec)) {
+                    _or_2 = true;
+                  } else {
+                    _or_2 = ((t instanceof RegularEventSpec) || (t instanceof TimeEventSpec));
                   }
-                };
-              Iterable<EventSpec> _filter_1 = IterableExtensions.<EventSpec>filter(_triggers_1, _function_1);
-              List<EventSpec> _list = IterableExtensions.<EventSpec>toList(_filter_1);
-              boolean _isEmpty_1 = _list.isEmpty();
-              boolean _operator_not = BooleanExtensions.operator_not(_isEmpty_1);
-              _operator_or = BooleanExtensions.operator_or(_isEmpty, _operator_not);
-            }
-            return ((Boolean)_operator_or);
+                  if (_or_2) {
+                    _or_1 = true;
+                  } else {
+                    _or_1 = (_or_2 || (t instanceof OnCycleEvent));
+                  }
+                  if (_or_1) {
+                    _or = true;
+                  } else {
+                    _or = (_or_1 || (t instanceof AlwaysEvent));
+                  }
+                  return Boolean.valueOf(_or);
+                }
+              };
+            Iterable<EventSpec> _filter = IterableExtensions.<EventSpec>filter(_triggers_1, _function);
+            List<EventSpec> _list = IterableExtensions.<EventSpec>toList(_filter);
+            boolean _isEmpty_1 = _list.isEmpty();
+            boolean _not = (!_isEmpty_1);
+            _or = (_isEmpty || _not);
           }
-        };
-      Iterable<LocalReaction> _filter_2 = IterableExtensions.<LocalReaction>filter(_filter, _function);
-      final Function1<LocalReaction,Reaction> _function_2 = new Function1<LocalReaction,Reaction>() {
-          public Reaction apply(final LocalReaction t_1) {
-            Reaction _mapReaction = BehaviorMapping.this.mapReaction(t_1);
-            return _mapReaction;
-          }
-        };
-      Iterable<Reaction> _map = IterableExtensions.<LocalReaction, Reaction>map(_filter_2, _function_2);
-      CollectionExtensions.<Reaction>addAll(_reactions, _map);
-      return _state;
-    }
+          return Boolean.valueOf(_or);
+        }
+      };
+    Iterable<LocalReaction> _filter_1 = IterableExtensions.<LocalReaction>filter(_filter, _function);
+    final Function1<LocalReaction,Reaction> _function_1 = new Function1<LocalReaction,Reaction>() {
+        public Reaction apply(final LocalReaction t) {
+          Reaction _mapReaction = BehaviorMapping.this.mapReaction(t);
+          return _mapReaction;
+        }
+      };
+    Iterable<Reaction> _map = IterableExtensions.<LocalReaction, Reaction>map(_filter_1, _function_1);
+    Iterables.<Reaction>addAll(_reactions, _map);
+    return _state;
   }
   
   public Reaction mapReaction(final LocalReaction lr) {
-    {
-      Reaction _create = this.factory.create(lr);
-      final Reaction r = _create;
-      Trigger _trigger = lr.getTrigger();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_trigger, null);
-      if (_operator_notEquals) {
-        Trigger _trigger_1 = lr.getTrigger();
-        Check _mapToCheck = this.mapToCheck(_trigger_1);
-        r.setCheck(_mapToCheck);
-      }
-      Sequence _mapToEffect = this.mapToEffect(lr);
-      r.setEffect(_mapToEffect);
-      return r;
+    final Reaction r = this.factory.create(lr);
+    Trigger _trigger = lr.getTrigger();
+    boolean _notEquals = (!Objects.equal(_trigger, null));
+    if (_notEquals) {
+      Trigger _trigger_1 = lr.getTrigger();
+      Check _mapToCheck = this.mapToCheck(_trigger_1);
+      r.setCheck(_mapToCheck);
     }
+    Sequence _mapToEffect = this.mapToEffect(lr);
+    r.setEffect(_mapToEffect);
+    return r;
   }
   
   public Sequence mapToEffect(final LocalReaction lr) {
     Sequence _xifexpression = null;
     Effect _effect = lr.getEffect();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_effect, null);
-    if (_operator_notEquals) {
+    boolean _notEquals = (!Objects.equal(_effect, null));
+    if (_notEquals) {
       Effect _effect_1 = lr.getEffect();
       Sequence _mapEffect = this.mapEffect(_effect_1);
       _xifexpression = _mapEffect;
@@ -667,184 +604,168 @@ public class BehaviorMapping {
   }
   
   public Sequence mapToEffect(final Transition t, final Reaction r) {
-    {
-      SexecFactory _factory = this.sexec.factory();
-      Sequence _createSequence = _factory.createSequence();
-      final Sequence sequence = _createSequence;
-      Iterable<State> _exitStates = this.exitStates(t);
-      State _last = IterableExtensions.<State>last(_exitStates);
-      final State topExitState = _last;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(topExitState, null);
-      if (_operator_notEquals) {
-        {
-          ExecutionState _create = this.factory.create(topExitState);
-          Sequence _exitSequence = _create.getExitSequence();
-          final Sequence exitSequence = _exitSequence;
-          boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(exitSequence, null);
-          if (_operator_notEquals_1) {
-            EList<Step> _steps = sequence.getSteps();
-            Call _newCall = this.factory.newCall(exitSequence);
-            _steps.add(_newCall);
-          }
-        }
+    SexecFactory _factory = this.sexec.factory();
+    final Sequence sequence = _factory.createSequence();
+    Iterable<State> _exitStates = this.exitStates(t);
+    final State topExitState = IterableExtensions.<State>last(_exitStates);
+    boolean _notEquals = (!Objects.equal(topExitState, null));
+    if (_notEquals) {
+      ExecutionState _create = this.factory.create(topExitState);
+      final Sequence exitSequence = _create.getExitSequence();
+      boolean _notEquals_1 = (!Objects.equal(exitSequence, null));
+      if (_notEquals_1) {
+        EList<Step> _steps = sequence.getSteps();
+        Call _newCall = this.factory.newCall(exitSequence);
+        _steps.add(_newCall);
       }
-      Effect _effect = t.getEffect();
-      boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(_effect, null);
-      if (_operator_notEquals_2) {
-        EList<Step> _steps_1 = sequence.getSteps();
-        Effect _effect_1 = t.getEffect();
-        Sequence _mapEffect = this.mapEffect(_effect_1);
-        _steps_1.add(_mapEffect);
-      }
-      boolean _isAddTraceSteps = this.trace.isAddTraceSteps();
-      if (_isAddTraceSteps) {
-        EList<Step> _steps_2 = sequence.getSteps();
-        ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(r);
-        CollectionExtensions.<Step>operator_add(_steps_2, _newTraceReactionFired);
-      }
-      List<ExecutionScope> _entryScopes = this.entryScopes(t);
-      Iterable<ExecutionScope> _drop = IterableExtensions.<ExecutionScope>drop(_entryScopes, 1);
-      List<ExecutionScope> _list = IterableExtensions.<ExecutionScope>toList(_drop);
-      List<ExecutionScope> _reverse = ListExtensions.<ExecutionScope>reverse(_list);
-      final Function2<Sequence,ExecutionScope,Sequence> _function = new Function2<Sequence,ExecutionScope,Sequence>() {
-          public Sequence apply(final Sequence seq , final ExecutionScope scope) {
-            Sequence _xblockexpression = null;
-            {
-              if ((scope instanceof org.yakindu.sct.model.sexec.ExecutionRegion)) {
-                {
-                  ExecutionScope _superScope = scope.getSuperScope();
-                  EList<ExecutionScope> _subScopes = _superScope.getSubScopes();
-                  final EList<ExecutionScope> siblingRegions = _subScopes;
-                  int _indexOf = siblingRegions.indexOf(scope);
-                  Iterable<ExecutionScope> _take = IterableExtensions.<ExecutionScope>take(siblingRegions, _indexOf);
-                  for (final ExecutionScope region : _take) {
-                    Sequence _enterSequence = region.getEnterSequence();
-                    boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(_enterSequence, null);
-                    if (_operator_notEquals_3) {
-                      EList<Step> _steps_3 = seq.getSteps();
-                      Sequence _enterSequence_1 = region.getEnterSequence();
-                      Call _newCall_1 = BehaviorMapping.this.factory.newCall(_enterSequence_1);
-                      _steps_3.add(_newCall_1);
-                    }
-                  }
-                }
-              }
-              if ((scope instanceof org.yakindu.sct.model.sexec.ExecutionState)) {
-                {
-                  Step _entryAction = ((ExecutionState) scope).getEntryAction();
-                  boolean _operator_notEquals_4 = ObjectExtensions.operator_notEquals(_entryAction, null);
-                  if (_operator_notEquals_4) {
-                    EList<Step> _steps_4 = seq.getSteps();
-                    Step _entryAction_1 = ((ExecutionState) scope).getEntryAction();
-                    Call _newCall_2 = BehaviorMapping.this.factory.newCall(_entryAction_1);
-                    _steps_4.add(_newCall_2);
-                  }
-                  boolean _isAddTraceSteps_1 = BehaviorMapping.this.trace.isAddTraceSteps();
-                  if (_isAddTraceSteps_1) {
-                    EList<Step> _steps_5 = seq.getSteps();
-                    TraceStateEntered _newTraceStateEntered = BehaviorMapping.this.trace.newTraceStateEntered(((ExecutionState) scope));
-                    _steps_5.add(_newTraceStateEntered);
-                  }
-                }
-              }
-              _xblockexpression = (seq);
-            }
-            return _xblockexpression;
-          }
-        };
-      IterableExtensions.<ExecutionScope, Sequence>fold(_reverse, sequence, _function);
-      Vertex _target = t.getTarget();
-      boolean _operator_notEquals_5 = ObjectExtensions.operator_notEquals(_target, null);
-      if (_operator_notEquals_5) {
-        Vertex _target_1 = t.getTarget();
-        if ((_target_1 instanceof org.yakindu.sct.model.sgraph.RegularState)) {
-          EList<Step> _steps_6 = sequence.getSteps();
-          Vertex _target_2 = t.getTarget();
-          ExecutionState _create_1 = this.factory.create(((RegularState) _target_2));
-          Sequence _enterSequence_2 = _create_1.getEnterSequence();
-          Call _newCall_3 = this.factory.newCall(_enterSequence_2);
-          _steps_6.add(_newCall_3);
-        } else {
-          Vertex _target_3 = t.getTarget();
-          if ((_target_3 instanceof org.yakindu.sct.model.sgraph.Choice)) {
-            EList<Step> _steps_7 = sequence.getSteps();
-            Vertex _target_4 = t.getTarget();
-            ExecutionChoice _create_2 = this.factory.create(((Choice) _target_4));
-            Sequence _reactSequence = _create_2.getReactSequence();
-            Call _newCall_4 = this.factory.newCall(_reactSequence);
-            _steps_7.add(_newCall_4);
-          } else {
-            Vertex _target_5 = t.getTarget();
-            if ((_target_5 instanceof org.yakindu.sct.model.sgraph.Entry)) {
-              EList<Step> _steps_8 = sequence.getSteps();
-              Vertex _target_6 = t.getTarget();
-              ExecutionEntry _create_3 = this.factory.create(((Entry) _target_6));
-              Sequence _reactSequence_1 = _create_3.getReactSequence();
-              Call _newCall_5 = this.factory.newCall(_reactSequence_1);
-              _steps_8.add(_newCall_5);
-            }
-          }
-        }
-      }
-      List<ExecutionScope> _entryScopes_1 = this.entryScopes(t);
-      Iterable<ExecutionScope> _drop_1 = IterableExtensions.<ExecutionScope>drop(_entryScopes_1, 1);
-      final Function2<Sequence,ExecutionScope,Sequence> _function_1 = new Function2<Sequence,ExecutionScope,Sequence>() {
-          public Sequence apply(final Sequence seq_1 , final ExecutionScope scope_1) {
-            Sequence _xblockexpression_1 = null;
-            {
-              if ((scope_1 instanceof org.yakindu.sct.model.sexec.ExecutionRegion)) {
-                {
-                  ExecutionScope _superScope_1 = scope_1.getSuperScope();
-                  EList<ExecutionScope> _subScopes_1 = _superScope_1.getSubScopes();
-                  final EList<ExecutionScope> siblingRegions_1 = _subScopes_1;
-                  int _indexOf_1 = siblingRegions_1.indexOf(scope_1);
-                  int _operator_plus = IntegerExtensions.operator_plus(((Integer)_indexOf_1), ((Integer)1));
-                  Iterable<ExecutionScope> _drop_2 = IterableExtensions.<ExecutionScope>drop(siblingRegions_1, _operator_plus);
-                  for (final ExecutionScope region_1 : _drop_2) {
-                    Sequence _enterSequence_3 = region_1.getEnterSequence();
-                    boolean _operator_notEquals_6 = ObjectExtensions.operator_notEquals(_enterSequence_3, null);
-                    if (_operator_notEquals_6) {
-                      EList<Step> _steps_9 = seq_1.getSteps();
-                      Sequence _enterSequence_4 = region_1.getEnterSequence();
-                      Call _newCall_6 = BehaviorMapping.this.factory.newCall(_enterSequence_4);
-                      _steps_9.add(_newCall_6);
-                    }
-                  }
-                }
-              }
-              _xblockexpression_1 = (seq_1);
-            }
-            return _xblockexpression_1;
-          }
-        };
-      IterableExtensions.<ExecutionScope, Sequence>fold(_drop_1, sequence, _function_1);
-      return sequence;
     }
+    Effect _effect = t.getEffect();
+    boolean _notEquals_2 = (!Objects.equal(_effect, null));
+    if (_notEquals_2) {
+      EList<Step> _steps_1 = sequence.getSteps();
+      Effect _effect_1 = t.getEffect();
+      Sequence _mapEffect = this.mapEffect(_effect_1);
+      _steps_1.add(_mapEffect);
+    }
+    boolean _isAddTraceSteps = this.trace.isAddTraceSteps();
+    if (_isAddTraceSteps) {
+      EList<Step> _steps_2 = sequence.getSteps();
+      ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(r);
+      _steps_2.add(_newTraceReactionFired);
+    }
+    List<ExecutionScope> _entryScopes = this.entryScopes(t);
+    Iterable<ExecutionScope> _drop = IterableExtensions.<ExecutionScope>drop(_entryScopes, 1);
+    List<ExecutionScope> _list = IterableExtensions.<ExecutionScope>toList(_drop);
+    List<ExecutionScope> _reverse = ListExtensions.<ExecutionScope>reverse(_list);
+    final Function2<Sequence,ExecutionScope,Sequence> _function = new Function2<Sequence,ExecutionScope,Sequence>() {
+        public Sequence apply(final Sequence seq, final ExecutionScope scope) {
+          Sequence _xblockexpression = null;
+          {
+            if ((scope instanceof ExecutionRegion)) {
+              ExecutionScope _superScope = scope.getSuperScope();
+              final EList<ExecutionScope> siblingRegions = _superScope.getSubScopes();
+              int _indexOf = siblingRegions.indexOf(scope);
+              Iterable<ExecutionScope> _take = IterableExtensions.<ExecutionScope>take(siblingRegions, _indexOf);
+              for (final ExecutionScope region : _take) {
+                Sequence _enterSequence = region.getEnterSequence();
+                boolean _notEquals = (!Objects.equal(_enterSequence, null));
+                if (_notEquals) {
+                  EList<Step> _steps = seq.getSteps();
+                  Sequence _enterSequence_1 = region.getEnterSequence();
+                  Call _newCall = BehaviorMapping.this.factory.newCall(_enterSequence_1);
+                  _steps.add(_newCall);
+                }
+              }
+            }
+            if ((scope instanceof ExecutionState)) {
+              Step _entryAction = ((ExecutionState) scope).getEntryAction();
+              boolean _notEquals_1 = (!Objects.equal(_entryAction, null));
+              if (_notEquals_1) {
+                EList<Step> _steps_1 = seq.getSteps();
+                Step _entryAction_1 = ((ExecutionState) scope).getEntryAction();
+                Call _newCall_1 = BehaviorMapping.this.factory.newCall(_entryAction_1);
+                _steps_1.add(_newCall_1);
+              }
+              boolean _isAddTraceSteps = BehaviorMapping.this.trace.isAddTraceSteps();
+              if (_isAddTraceSteps) {
+                EList<Step> _steps_2 = seq.getSteps();
+                TraceStateEntered _newTraceStateEntered = BehaviorMapping.this.trace.newTraceStateEntered(((ExecutionState) scope));
+                _steps_2.add(_newTraceStateEntered);
+              }
+            }
+            _xblockexpression = (seq);
+          }
+          return _xblockexpression;
+        }
+      };
+    IterableExtensions.<ExecutionScope, Sequence>fold(_reverse, sequence, _function);
+    Vertex _target = t.getTarget();
+    boolean _notEquals_3 = (!Objects.equal(_target, null));
+    if (_notEquals_3) {
+      Vertex _target_1 = t.getTarget();
+      if ((_target_1 instanceof RegularState)) {
+        EList<Step> _steps_3 = sequence.getSteps();
+        Vertex _target_2 = t.getTarget();
+        ExecutionState _create_1 = this.factory.create(((RegularState) _target_2));
+        Sequence _enterSequence = _create_1.getEnterSequence();
+        Call _newCall_1 = this.factory.newCall(_enterSequence);
+        _steps_3.add(_newCall_1);
+      } else {
+        Vertex _target_3 = t.getTarget();
+        if ((_target_3 instanceof Choice)) {
+          EList<Step> _steps_4 = sequence.getSteps();
+          Vertex _target_4 = t.getTarget();
+          ExecutionChoice _create_2 = this.factory.create(((Choice) _target_4));
+          Sequence _reactSequence = _create_2.getReactSequence();
+          Call _newCall_2 = this.factory.newCall(_reactSequence);
+          _steps_4.add(_newCall_2);
+        } else {
+          Vertex _target_5 = t.getTarget();
+          if ((_target_5 instanceof Entry)) {
+            EList<Step> _steps_5 = sequence.getSteps();
+            Vertex _target_6 = t.getTarget();
+            ExecutionEntry _create_3 = this.factory.create(((Entry) _target_6));
+            Sequence _reactSequence_1 = _create_3.getReactSequence();
+            Call _newCall_3 = this.factory.newCall(_reactSequence_1);
+            _steps_5.add(_newCall_3);
+          }
+        }
+      }
+    }
+    List<ExecutionScope> _entryScopes_1 = this.entryScopes(t);
+    Iterable<ExecutionScope> _drop_1 = IterableExtensions.<ExecutionScope>drop(_entryScopes_1, 1);
+    final Function2<Sequence,ExecutionScope,Sequence> _function_1 = new Function2<Sequence,ExecutionScope,Sequence>() {
+        public Sequence apply(final Sequence seq, final ExecutionScope scope) {
+          Sequence _xblockexpression = null;
+          {
+            if ((scope instanceof ExecutionRegion)) {
+              ExecutionScope _superScope = scope.getSuperScope();
+              final EList<ExecutionScope> siblingRegions = _superScope.getSubScopes();
+              int _indexOf = siblingRegions.indexOf(scope);
+              int _plus = (_indexOf + 1);
+              Iterable<ExecutionScope> _drop = IterableExtensions.<ExecutionScope>drop(siblingRegions, _plus);
+              for (final ExecutionScope region : _drop) {
+                Sequence _enterSequence = region.getEnterSequence();
+                boolean _notEquals = (!Objects.equal(_enterSequence, null));
+                if (_notEquals) {
+                  EList<Step> _steps = seq.getSteps();
+                  Sequence _enterSequence_1 = region.getEnterSequence();
+                  Call _newCall = BehaviorMapping.this.factory.newCall(_enterSequence_1);
+                  _steps.add(_newCall);
+                }
+              }
+            }
+            _xblockexpression = (seq);
+          }
+          return _xblockexpression;
+        }
+      };
+    IterableExtensions.<ExecutionScope, Sequence>fold(_drop_1, sequence, _function_1);
+    return sequence;
   }
   
   public List<ExecutionScope> entryScopes(final Transition t) {
     List<ExecutionScope> _xblockexpression = null;
     {
       Vertex _target = t.getTarget();
-      List<EObject> _containers = this.sgraph.containers(_target);
-      final List<EObject> l = _containers;
+      final List<EObject> l = this.sgraph.containers(_target);
       Vertex _source = t.getSource();
-      List<EObject> _containers_1 = this.sgraph.containers(_source);
-      l.removeAll(_containers_1);
+      List<EObject> _containers = this.sgraph.containers(_source);
+      l.removeAll(_containers);
       final Function1<EObject,ExecutionScope> _function = new Function1<EObject,ExecutionScope>() {
           public ExecutionScope apply(final EObject c) {
             ExecutionScope _xifexpression = null;
-            if ((c instanceof org.yakindu.sct.model.sgraph.RegularState)) {
+            if ((c instanceof RegularState)) {
               ExecutionState _create = BehaviorMapping.this.factory.create(((RegularState) c));
               _xifexpression = ((ExecutionScope) _create);
             } else {
               ExecutionScope _xifexpression_1 = null;
-              if ((c instanceof org.yakindu.sct.model.sgraph.Region)) {
+              if ((c instanceof Region)) {
                 ExecutionRegion _create_1 = BehaviorMapping.this.factory.create(((Region) c));
                 _xifexpression_1 = ((ExecutionScope) _create_1);
               } else {
                 ExecutionScope _xifexpression_2 = null;
-                if ((c instanceof org.yakindu.sct.model.sgraph.Statechart)) {
+                if ((c instanceof Statechart)) {
                   ExecutionFlow _create_2 = BehaviorMapping.this.factory.create(((Statechart) c));
                   _xifexpression_2 = ((ExecutionScope) _create_2);
                 }
@@ -866,12 +787,11 @@ public class BehaviorMapping {
     Iterable<State> _xblockexpression = null;
     {
       Vertex _source = t.getSource();
-      List<EObject> _containers = this.sgraph.containers(_source);
-      final List<EObject> l = _containers;
+      final List<EObject> l = this.sgraph.containers(_source);
       Vertex _target = t.getTarget();
-      List<EObject> _containers_1 = this.sgraph.containers(_target);
-      l.removeAll(_containers_1);
-      Iterable<State> _filter = IterableExtensions.<State>filter(l, org.yakindu.sct.model.sgraph.State.class);
+      List<EObject> _containers = this.sgraph.containers(_target);
+      l.removeAll(_containers);
+      Iterable<State> _filter = Iterables.<State>filter(l, State.class);
       _xblockexpression = (_filter);
     }
     return _xblockexpression;
@@ -881,12 +801,11 @@ public class BehaviorMapping {
     Iterable<State> _xblockexpression = null;
     {
       Vertex _target = t.getTarget();
-      List<EObject> _containers = this.sgraph.containers(_target);
-      final List<EObject> l = _containers;
+      final List<EObject> l = this.sgraph.containers(_target);
       Vertex _source = t.getSource();
-      List<EObject> _containers_1 = this.sgraph.containers(_source);
-      l.removeAll(_containers_1);
-      Iterable<State> _filter = IterableExtensions.<State>filter(l, org.yakindu.sct.model.sgraph.State.class);
+      List<EObject> _containers = this.sgraph.containers(_source);
+      l.removeAll(_containers);
+      Iterable<State> _filter = Iterables.<State>filter(l, State.class);
       _xblockexpression = (_filter);
     }
     return _xblockexpression;
@@ -895,36 +814,32 @@ public class BehaviorMapping {
   public Iterable<ExecutionScope> exitScopes(final Transition t) {
     Iterable<ExecutionScope> _xblockexpression = null;
     {
-      Vertex _source = t.getSource();
-      final Vertex source = _source;
+      final Vertex source = t.getSource();
       ExecutionState _switchResult = null;
-      final Vertex source_1 = source;
-      boolean matched = false;
-      if (!matched) {
-        if (source_1 instanceof RegularState) {
-          final RegularState source_2 = (RegularState) source_1;
-          matched=true;
-          ExecutionState _create = this.factory.create(source_2);
+      boolean _matched = false;
+      if (!_matched) {
+        if (source instanceof RegularState) {
+          final RegularState _regularState = (RegularState)source;
+          _matched=true;
+          ExecutionState _create = this.factory.create(_regularState);
           _switchResult = _create;
         }
       }
       ExecutionState executionSource = _switchResult;
       ExecutionState _switchResult_1 = null;
-      final Vertex source_3 = source;
-      boolean matched_1 = false;
-      if (!matched_1) {
-        if (source_3 instanceof RegularState) {
-          final RegularState source_4 = (RegularState) source_3;
-          matched_1=true;
-          ExecutionState _create_1 = this.factory.create(source_4);
-          _switchResult_1 = _create_1;
+      boolean _matched_1 = false;
+      if (!_matched_1) {
+        if (source instanceof RegularState) {
+          final RegularState _regularState = (RegularState)source;
+          _matched_1=true;
+          ExecutionState _create = this.factory.create(_regularState);
+          _switchResult_1 = _create;
         }
       }
       ExecutionState executionTarget = _switchResult_1;
-      List<EObject> _containers = this.sgraph.containers(executionSource);
-      final List<EObject> l = _containers;
-      List<EObject> _containers_1 = this.sgraph.containers(executionTarget);
-      l.removeAll(_containers_1);
+      final List<EObject> l = this.sgraph.containers(executionSource);
+      List<EObject> _containers = this.sgraph.containers(executionTarget);
+      l.removeAll(_containers);
       _xblockexpression = (null);
     }
     return _xblockexpression;
@@ -940,34 +855,33 @@ public class BehaviorMapping {
       Expression _xifexpression = null;
       EList<EventSpec> _triggers = t.getTriggers();
       boolean _isEmpty = _triggers.isEmpty();
-      boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-      if (_operator_not) {
+      boolean _not = (!_isEmpty);
+      if (_not) {
         EList<EventSpec> _triggers_1 = t.getTriggers();
-        Iterable<EventSpec> _reverseView = ListExtensions.<EventSpec>reverseView(_triggers_1);
+        List<EventSpec> _reverseView = ListExtensions.<EventSpec>reverseView(_triggers_1);
         final Function2<Expression,EventSpec,Expression> _function = new Function2<Expression,EventSpec,Expression>() {
-            public Expression apply(final Expression s , final EventSpec e) {
-              Expression _xblockexpression_1 = null;
+            public Expression apply(final Expression s, final EventSpec e) {
+              Expression _xblockexpression = null;
               {
-                Expression _raised = BehaviorMapping.this.factory.raised(e);
-                final Expression raised = _raised;
-                Expression _xifexpression_1 = null;
-                boolean _operator_equals = ObjectExtensions.operator_equals(raised, null);
-                if (_operator_equals) {
-                  _xifexpression_1 = s;
+                final Expression raised = BehaviorMapping.this.factory.raised(e);
+                Expression _xifexpression = null;
+                boolean _equals = Objects.equal(raised, null);
+                if (_equals) {
+                  _xifexpression = s;
                 } else {
-                  Expression _xifexpression_2 = null;
-                  boolean _operator_equals_1 = ObjectExtensions.operator_equals(s, null);
-                  if (_operator_equals_1) {
-                    _xifexpression_2 = raised;
+                  Expression _xifexpression_1 = null;
+                  boolean _equals_1 = Objects.equal(s, null);
+                  if (_equals_1) {
+                    _xifexpression_1 = raised;
                   } else {
                     Expression _or = BehaviorMapping.this.stext.or(raised, s);
-                    _xifexpression_2 = _or;
+                    _xifexpression_1 = _or;
                   }
-                  _xifexpression_1 = _xifexpression_2;
+                  _xifexpression = _xifexpression_1;
                 }
-                _xblockexpression_1 = (_xifexpression_1);
+                _xblockexpression = (_xifexpression);
               }
-              return _xblockexpression_1;
+              return _xblockexpression;
             }
           };
         Expression _fold = IterableExtensions.<EventSpec, Expression>fold(_reverseView, ((Expression) null), _function);
@@ -976,74 +890,74 @@ public class BehaviorMapping {
         _xifexpression = null;
       }
       final Expression triggerCheck = _xifexpression;
-      Expression _xifexpression_3 = null;
+      Expression _xifexpression_1 = null;
       Expression _guardExpression = t.getGuardExpression();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_guardExpression, null);
-      if (_operator_notEquals) {
+      boolean _notEquals = (!Objects.equal(_guardExpression, null));
+      if (_notEquals) {
         Expression _guardExpression_1 = t.getGuardExpression();
         Expression _copy = EcoreUtil.<Expression>copy(_guardExpression_1);
-        _xifexpression_3 = _copy;
+        _xifexpression_1 = _copy;
       } else {
-        _xifexpression_3 = null;
+        _xifexpression_1 = null;
       }
-      final Expression guard = _xifexpression_3;
-      Expression _xifexpression_4 = null;
-      boolean _operator_and = false;
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(triggerCheck, null);
-      if (!_operator_notEquals_1) {
-        _operator_and = false;
+      final Expression guard = _xifexpression_1;
+      Expression _xifexpression_2 = null;
+      boolean _and = false;
+      boolean _notEquals_1 = (!Objects.equal(triggerCheck, null));
+      if (!_notEquals_1) {
+        _and = false;
       } else {
-        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(guard, null);
-        _operator_and = BooleanExtensions.operator_and(_operator_notEquals_1, _operator_notEquals_2);
+        boolean _notEquals_2 = (!Objects.equal(guard, null));
+        _and = (_notEquals_1 && _notEquals_2);
       }
-      if (_operator_and) {
-        Expression _and = this.stext.and(triggerCheck, guard);
-        _xifexpression_4 = _and;
+      if (_and) {
+        Expression _and_1 = this.stext.and(triggerCheck, guard);
+        _xifexpression_2 = _and_1;
       } else {
-        Expression _xifexpression_5 = null;
-        boolean _operator_notEquals_3 = ObjectExtensions.operator_notEquals(triggerCheck, null);
-        if (_operator_notEquals_3) {
-          _xifexpression_5 = triggerCheck;
+        Expression _xifexpression_3 = null;
+        boolean _notEquals_3 = (!Objects.equal(triggerCheck, null));
+        if (_notEquals_3) {
+          _xifexpression_3 = triggerCheck;
         } else {
-          _xifexpression_5 = guard;
+          _xifexpression_3 = guard;
         }
-        _xifexpression_4 = _xifexpression_5;
+        _xifexpression_2 = _xifexpression_3;
       }
-      _xblockexpression = (_xifexpression_4);
+      _xblockexpression = (_xifexpression_2);
     }
     return _xblockexpression;
   }
   
   public Sequence mapEffect(final Effect effect) {
-    if ((effect instanceof ReactionEffect)) {
+    if (effect instanceof ReactionEffect) {
       return _mapEffect((ReactionEffect)effect);
-    } else if ((effect instanceof Effect)) {
-      return _mapEffect((Effect)effect);
+    } else if (effect != null) {
+      return _mapEffect(effect);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(effect).toString());
+        Arrays.<Object>asList(effect).toString());
     }
   }
   
   public Check mapToCheck(final Trigger tr) {
-    if ((tr instanceof ReactionTrigger)) {
+    if (tr instanceof ReactionTrigger) {
       return _mapToCheck((ReactionTrigger)tr);
-    } else if ((tr instanceof Trigger)) {
-      return _mapToCheck((Trigger)tr);
+    } else if (tr != null) {
+      return _mapToCheck(tr);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(tr).toString());
+        Arrays.<Object>asList(tr).toString());
     }
   }
   
   public Statement buildCondition(final Trigger t) {
-    if ((t instanceof ReactionTrigger)) {
+    if (t instanceof ReactionTrigger) {
       return _buildCondition((ReactionTrigger)t);
-    } else if ((t instanceof Trigger)) {
-      return _buildCondition((Trigger)t);
+    } else if (t != null) {
+      return _buildCondition(t);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(t).toString());
+        Arrays.<Object>asList(t).toString());
     }
   }
 }

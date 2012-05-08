@@ -10,35 +10,24 @@
  */ 
 package org.yakindu.sct.generator.genmodel.ui.wizard
 
-import org.eclipse.xtext.generator.IGenerator
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.eclipse.core.runtime.IProgressMonitor
+import java.io.BufferedInputStream
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.util.Collections
+import org.apache.commons.lang.StringEscapeUtils
 import org.eclipse.core.resources.IContainer
-import org.eclipse.core.runtime.Path
+import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.core.resources.IResource
-import org.eclipse.xtend.shared.ui.wizards.EclipseHelper
 import org.eclipse.core.resources.ResourcesPlugin
-import org.apache.commons.lang.StringEscapeUtils
-import org.eclipse.jdt.core.JavaCore
-import org.eclipse.jdt.core.IJavaProject
-import org.eclipse.xtend.shared.ui.core.builder.XtendXpandNature
-import org.eclipse.core.resources.IProjectDescription
-import org.eclipse.xtend.shared.ui.core.builder.XtendXpandBuilder
-import org.eclipse.core.resources.IFile
-import org.eclipse.xtext.xtend2.lib.StringConcatenation
-import java.io.ByteArrayInputStream
-import org.eclipse.core.resources.IProject
+import org.eclipse.core.runtime.IProgressMonitor
+import org.eclipse.core.runtime.Path
 import org.eclipse.core.runtime.SubProgressMonitor
-import java.io.ByteArrayOutputStream
-import java.io.BufferedInputStream
-import org.yakindu.sct.model.sgen.SGenFactory
-import org.yakindu.sct.model.sgen.ParameterTypes
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.common.util.URI
-import java.util.Collections
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
+import org.yakindu.sct.model.sgen.ParameterTypes
+import org.yakindu.sct.model.sgen.SGenFactory
 
 /**
  * 
@@ -178,7 +167,7 @@ class GeneratorProjectTemplate {
 		resource.save(Collections::emptyMap)
 	}
 	
-	def write(IFile file, StringConcatenation content) {
+	def write(IFile file, CharSequence content) {
 		file.write(content.toString)
 	}
 

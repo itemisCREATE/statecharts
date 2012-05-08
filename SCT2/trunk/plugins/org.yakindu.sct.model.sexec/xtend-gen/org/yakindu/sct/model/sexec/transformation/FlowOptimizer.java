@@ -1,17 +1,21 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.EObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -38,7 +42,6 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 
 @SuppressWarnings("all")
 public class FlowOptimizer {
-  
   private boolean _inlineReactions;
   
   public boolean inlineReactions(final boolean b) {
@@ -107,160 +110,128 @@ public class FlowOptimizer {
     {
       this.replaceTrueIfs(flow);
       if (this._inlineReactions) {
-        {
-          this.inlineReactionChecks(flow);
-          this.inlineReactionEffects(flow);
-        }
+        this.inlineReactionChecks(flow);
+        this.inlineReactionEffects(flow);
       }
       if (this._inlineEntryActions) {
         EList<ExecutionState> _states = flow.getStates();
-        final Function1<ExecutionState,Step> _function = new Function1<ExecutionState,Step>() {
-            public Step apply(final ExecutionState state) {
+        final Procedure1<ExecutionState> _function = new Procedure1<ExecutionState>() {
+            public void apply(final ExecutionState state) {
               Step _entryAction = state.getEntryAction();
-              Step _inline = FlowOptimizer.this.inline(_entryAction);
-              return _inline;
+              FlowOptimizer.this.inline(_entryAction);
             }
           };
         IterableExtensions.<ExecutionState>forEach(_states, _function);
       }
       if (this._inlineExitActions) {
         EList<ExecutionState> _states_1 = flow.getStates();
-        final Function1<ExecutionState,Step> _function_1 = new Function1<ExecutionState,Step>() {
-            public Step apply(final ExecutionState state_1) {
-              Step _exitAction = state_1.getExitAction();
-              Step _inline_1 = FlowOptimizer.this.inline(_exitAction);
-              return _inline_1;
+        final Procedure1<ExecutionState> _function_1 = new Procedure1<ExecutionState>() {
+            public void apply(final ExecutionState state) {
+              Step _exitAction = state.getExitAction();
+              FlowOptimizer.this.inline(_exitAction);
             }
           };
         IterableExtensions.<ExecutionState>forEach(_states_1, _function_1);
       }
       if (this._inlineEnterSequences) {
         EList<ExecutionState> _states_2 = flow.getStates();
-        final Function1<ExecutionState,Step> _function_2 = new Function1<ExecutionState,Step>() {
-            public Step apply(final ExecutionState state_2) {
-              Sequence _enterSequence = state_2.getEnterSequence();
-              Step _inline_2 = FlowOptimizer.this.inline(_enterSequence);
-              return _inline_2;
+        final Procedure1<ExecutionState> _function_2 = new Procedure1<ExecutionState>() {
+            public void apply(final ExecutionState state) {
+              Sequence _enterSequence = state.getEnterSequence();
+              FlowOptimizer.this.inline(_enterSequence);
             }
           };
         IterableExtensions.<ExecutionState>forEach(_states_2, _function_2);
       }
       if (this._inlineExitSequences) {
         EList<ExecutionState> _states_3 = flow.getStates();
-        final Function1<ExecutionState,Step> _function_3 = new Function1<ExecutionState,Step>() {
-            public Step apply(final ExecutionState state_3) {
-              Sequence _exitSequence = state_3.getExitSequence();
-              Step _inline_3 = FlowOptimizer.this.inline(_exitSequence);
-              return _inline_3;
+        final Procedure1<ExecutionState> _function_3 = new Procedure1<ExecutionState>() {
+            public void apply(final ExecutionState state) {
+              Sequence _exitSequence = state.getExitSequence();
+              FlowOptimizer.this.inline(_exitSequence);
             }
           };
         IterableExtensions.<ExecutionState>forEach(_states_3, _function_3);
       }
       if (this._inlineExitRegion) {
-        Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(flow);
-        Iterable<ExecutionRegion> _filter = IterableExtensions.<ExecutionRegion>filter(_allContentsIterable, org.yakindu.sct.model.sexec.ExecutionRegion.class);
-        final Function1<ExecutionRegion,Step> _function_4 = new Function1<ExecutionRegion,Step>() {
-            public Step apply(final ExecutionRegion region) {
-              Sequence _exitSequence_1 = region.getExitSequence();
-              Step _inline_4 = FlowOptimizer.this.inline(_exitSequence_1);
-              return _inline_4;
+        TreeIterator<EObject> _eAllContents = flow.eAllContents();
+        Iterator<ExecutionRegion> _filter = Iterators.<ExecutionRegion>filter(_eAllContents, ExecutionRegion.class);
+        final Procedure1<ExecutionRegion> _function_4 = new Procedure1<ExecutionRegion>() {
+            public void apply(final ExecutionRegion region) {
+              Sequence _exitSequence = region.getExitSequence();
+              FlowOptimizer.this.inline(_exitSequence);
             }
           };
-        IterableExtensions.<ExecutionRegion>forEach(_filter, _function_4);
+        IteratorExtensions.<ExecutionRegion>forEach(_filter, _function_4);
       }
       if (this._inlineEnterRegion) {
-        Iterable<EObject> _allContentsIterable_1 = EObjectExtensions.allContentsIterable(flow);
-        Iterable<ExecutionRegion> _filter_1 = IterableExtensions.<ExecutionRegion>filter(_allContentsIterable_1, org.yakindu.sct.model.sexec.ExecutionRegion.class);
-        final Function1<ExecutionRegion,Step> _function_5 = new Function1<ExecutionRegion,Step>() {
-            public Step apply(final ExecutionRegion region_1) {
-              Sequence _enterSequence_1 = region_1.getEnterSequence();
-              Step _inline_5 = FlowOptimizer.this.inline(_enterSequence_1);
-              return _inline_5;
+        TreeIterator<EObject> _eAllContents_1 = flow.eAllContents();
+        Iterator<ExecutionRegion> _filter_1 = Iterators.<ExecutionRegion>filter(_eAllContents_1, ExecutionRegion.class);
+        final Procedure1<ExecutionRegion> _function_5 = new Procedure1<ExecutionRegion>() {
+            public void apply(final ExecutionRegion region) {
+              Sequence _enterSequence = region.getEnterSequence();
+              FlowOptimizer.this.inline(_enterSequence);
             }
           };
-        IterableExtensions.<ExecutionRegion>forEach(_filter_1, _function_5);
+        IteratorExtensions.<ExecutionRegion>forEach(_filter_1, _function_5);
       }
       if (this._inlineChoices) {
-        {
-          EList<ExecutionNode> _nodes = flow.getNodes();
-          Iterable<ExecutionChoice> _filter_2 = IterableExtensions.<ExecutionChoice>filter(_nodes, org.yakindu.sct.model.sexec.ExecutionChoice.class);
-          final Function1<ExecutionChoice,ExecutionChoice> _function_6 = new Function1<ExecutionChoice,ExecutionChoice>() {
-              public ExecutionChoice apply(final ExecutionChoice node) {
-                ExecutionChoice _xblockexpression_1 = null;
-                {
-                  EList<Reaction> _reactions = node.getReactions();
-                  final Function1<Reaction,Step> _function_7 = new Function1<Reaction,Step>() {
-                      public Step apply(final Reaction r) {
-                        Step _xblockexpression_2 = null;
-                        {
-                          Check _check = r.getCheck();
-                          FlowOptimizer.this.inline(_check);
-                          Step _effect = r.getEffect();
-                          Step _inline_6 = FlowOptimizer.this.inline(_effect);
-                          _xblockexpression_2 = (_inline_6);
-                        }
-                        return _xblockexpression_2;
-                      }
-                    };
-                  IterableExtensions.<Reaction>forEach(_reactions, _function_7);
-                  _xblockexpression_1 = (node);
-                }
-                return _xblockexpression_1;
-              }
-            };
-          IterableExtensions.<ExecutionChoice>forEach(_filter_2, _function_6);
-          EList<ExecutionNode> _nodes_1 = flow.getNodes();
-          Iterable<ExecutionChoice> _filter_3 = IterableExtensions.<ExecutionChoice>filter(_nodes_1, org.yakindu.sct.model.sexec.ExecutionChoice.class);
-          final Function1<ExecutionChoice,Step> _function_8 = new Function1<ExecutionChoice,Step>() {
-              public Step apply(final ExecutionChoice node_1) {
-                Sequence _reactSequence = node_1.getReactSequence();
-                Step _inline_7 = FlowOptimizer.this.inline(_reactSequence);
-                return _inline_7;
-              }
-            };
-          IterableExtensions.<ExecutionChoice>forEach(_filter_3, _function_8);
-        }
+        EList<ExecutionNode> _nodes = flow.getNodes();
+        Iterable<ExecutionChoice> _filter_2 = Iterables.<ExecutionChoice>filter(_nodes, ExecutionChoice.class);
+        final Procedure1<ExecutionChoice> _function_6 = new Procedure1<ExecutionChoice>() {
+            public void apply(final ExecutionChoice node) {
+              EList<Reaction> _reactions = node.getReactions();
+              final Procedure1<Reaction> _function = new Procedure1<Reaction>() {
+                  public void apply(final Reaction r) {
+                    Check _check = r.getCheck();
+                    FlowOptimizer.this.inline(_check);
+                    Step _effect = r.getEffect();
+                    FlowOptimizer.this.inline(_effect);
+                  }
+                };
+              IterableExtensions.<Reaction>forEach(_reactions, _function);
+              /*node;*/
+            }
+          };
+        IterableExtensions.<ExecutionChoice>forEach(_filter_2, _function_6);
+        EList<ExecutionNode> _nodes_1 = flow.getNodes();
+        Iterable<ExecutionChoice> _filter_3 = Iterables.<ExecutionChoice>filter(_nodes_1, ExecutionChoice.class);
+        final Procedure1<ExecutionChoice> _function_7 = new Procedure1<ExecutionChoice>() {
+            public void apply(final ExecutionChoice node) {
+              Sequence _reactSequence = node.getReactSequence();
+              FlowOptimizer.this.inline(_reactSequence);
+            }
+          };
+        IterableExtensions.<ExecutionChoice>forEach(_filter_3, _function_7);
       }
       if (this._inlineEntries) {
-        {
-          EList<ExecutionNode> _nodes_2 = flow.getNodes();
-          Iterable<ExecutionEntry> _filter_4 = IterableExtensions.<ExecutionEntry>filter(_nodes_2, org.yakindu.sct.model.sexec.ExecutionEntry.class);
-          final Function1<ExecutionEntry,ExecutionEntry> _function_9 = new Function1<ExecutionEntry,ExecutionEntry>() {
-              public ExecutionEntry apply(final ExecutionEntry node_2) {
-                ExecutionEntry _xblockexpression_3 = null;
-                {
-                  EList<Reaction> _reactions_1 = node_2.getReactions();
-                  final Function1<Reaction,Step> _function_10 = new Function1<Reaction,Step>() {
-                      public Step apply(final Reaction r_1) {
-                        Step _xblockexpression_4 = null;
-                        {
-                          Check _check_1 = r_1.getCheck();
-                          FlowOptimizer.this.inline(_check_1);
-                          Step _effect_1 = r_1.getEffect();
-                          Step _inline_8 = FlowOptimizer.this.inline(_effect_1);
-                          _xblockexpression_4 = (_inline_8);
-                        }
-                        return _xblockexpression_4;
-                      }
-                    };
-                  IterableExtensions.<Reaction>forEach(_reactions_1, _function_10);
-                  _xblockexpression_3 = (node_2);
-                }
-                return _xblockexpression_3;
-              }
-            };
-          IterableExtensions.<ExecutionEntry>forEach(_filter_4, _function_9);
-          EList<ExecutionNode> _nodes_3 = flow.getNodes();
-          Iterable<ExecutionEntry> _filter_5 = IterableExtensions.<ExecutionEntry>filter(_nodes_3, org.yakindu.sct.model.sexec.ExecutionEntry.class);
-          final Function1<ExecutionEntry,Step> _function_11 = new Function1<ExecutionEntry,Step>() {
-              public Step apply(final ExecutionEntry node_3) {
-                Sequence _reactSequence_1 = node_3.getReactSequence();
-                Step _inline_9 = FlowOptimizer.this.inline(_reactSequence_1);
-                return _inline_9;
-              }
-            };
-          IterableExtensions.<ExecutionEntry>forEach(_filter_5, _function_11);
-        }
+        EList<ExecutionNode> _nodes_2 = flow.getNodes();
+        Iterable<ExecutionEntry> _filter_4 = Iterables.<ExecutionEntry>filter(_nodes_2, ExecutionEntry.class);
+        final Procedure1<ExecutionEntry> _function_8 = new Procedure1<ExecutionEntry>() {
+            public void apply(final ExecutionEntry node) {
+              EList<Reaction> _reactions = node.getReactions();
+              final Procedure1<Reaction> _function = new Procedure1<Reaction>() {
+                  public void apply(final Reaction r) {
+                    Check _check = r.getCheck();
+                    FlowOptimizer.this.inline(_check);
+                    Step _effect = r.getEffect();
+                    FlowOptimizer.this.inline(_effect);
+                  }
+                };
+              IterableExtensions.<Reaction>forEach(_reactions, _function);
+              /*node;*/
+            }
+          };
+        IterableExtensions.<ExecutionEntry>forEach(_filter_4, _function_8);
+        EList<ExecutionNode> _nodes_3 = flow.getNodes();
+        Iterable<ExecutionEntry> _filter_5 = Iterables.<ExecutionEntry>filter(_nodes_3, ExecutionEntry.class);
+        final Procedure1<ExecutionEntry> _function_9 = new Procedure1<ExecutionEntry>() {
+            public void apply(final ExecutionEntry node) {
+              Sequence _reactSequence = node.getReactSequence();
+              FlowOptimizer.this.inline(_reactSequence);
+            }
+          };
+        IterableExtensions.<ExecutionEntry>forEach(_filter_5, _function_9);
       }
       _xblockexpression = (flow);
     }
@@ -268,24 +239,23 @@ public class FlowOptimizer {
   }
   
   public void replaceTrueIfs(final ExecutionFlow flow) {
-    Iterable<EObject> _allContentsIterable = EObjectExtensions.allContentsIterable(flow);
-    Iterable<If> _filter = IterableExtensions.<If>filter(_allContentsIterable, org.yakindu.sct.model.sexec.If.class);
+    TreeIterator<EObject> _eAllContents = flow.eAllContents();
+    Iterator<If> _filter = Iterators.<If>filter(_eAllContents, If.class);
     final Function1<If,Boolean> _function = new Function1<If,Boolean>() {
         public Boolean apply(final If i) {
           Check _check = i.getCheck();
           boolean _alwaysTrue = FlowOptimizer.this.alwaysTrue(_check);
-          return ((Boolean)_alwaysTrue);
+          return Boolean.valueOf(_alwaysTrue);
         }
       };
-    Iterable<If> _filter_1 = IterableExtensions.<If>filter(_filter, _function);
-    final Function1<If,Step> _function_1 = new Function1<If,Step>() {
-        public Step apply(final If i_1) {
-          Step _thenStep = i_1.getThenStep();
-          Step _substituteBy = FlowOptimizer.this.substituteBy(i_1, _thenStep);
-          return _substituteBy;
+    Iterator<If> _filter_1 = IteratorExtensions.<If>filter(_filter, _function);
+    final Procedure1<If> _function_1 = new Procedure1<If>() {
+        public void apply(final If i) {
+          Step _thenStep = i.getThenStep();
+          FlowOptimizer.this.substituteBy(i, _thenStep);
         }
       };
-    IterableExtensions.<If>forEach(_filter_1, _function_1);
+    IteratorExtensions.<If>forEach(_filter_1, _function_1);
   }
   
   public Step substituteBy(final Step orig, final Step substitute) {
@@ -316,13 +286,13 @@ public class FlowOptimizer {
     Step _xblockexpression = null;
     {
       Step _thenStep = parent.getThenStep();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_thenStep, orig);
-      if (_operator_equals) {
+      boolean _equals = Objects.equal(_thenStep, orig);
+      if (_equals) {
         parent.setThenStep(subst);
       } else {
         Step _elseStep = parent.getElseStep();
-        boolean _operator_equals_1 = ObjectExtensions.operator_equals(_elseStep, orig);
-        if (_operator_equals_1) {
+        boolean _equals_1 = Objects.equal(_elseStep, orig);
+        if (_equals_1) {
           parent.setElseStep(subst);
         }
       }
@@ -332,33 +302,29 @@ public class FlowOptimizer {
   }
   
   public boolean alwaysTrue(final Check check) {
-    {
-      boolean _operator_and = false;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(check, null);
-      if (!_operator_notEquals) {
-        _operator_and = false;
-      } else {
-        Statement _condition = check.getCondition();
-        _operator_and = BooleanExtensions.operator_and(_operator_notEquals, (_condition instanceof org.yakindu.sct.model.stext.stext.PrimitiveValueExpression));
-      }
-      if (_operator_and) {
-        {
-          Statement _condition_1 = check.getCondition();
-          final PrimitiveValueExpression pve = ((PrimitiveValueExpression) _condition_1);
-          boolean _operator_and_1 = false;
-          Literal _value = pve.getValue();
-          if (!(_value instanceof org.yakindu.sct.model.stext.stext.BoolLiteral)) {
-            _operator_and_1 = false;
-          } else {
-            Literal _value_1 = pve.getValue();
-            boolean _isValue = ((BoolLiteral) _value_1).isValue();
-            _operator_and_1 = BooleanExtensions.operator_and((_value instanceof org.yakindu.sct.model.stext.stext.BoolLiteral), _isValue);
-          }
-          return _operator_and_1;
-        }
-      }
-      return false;
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(check, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      Statement _condition = check.getCondition();
+      _and = (_notEquals && (_condition instanceof PrimitiveValueExpression));
     }
+    if (_and) {
+      Statement _condition_1 = check.getCondition();
+      final PrimitiveValueExpression pve = ((PrimitiveValueExpression) _condition_1);
+      boolean _and_1 = false;
+      Literal _value = pve.getValue();
+      if (!(_value instanceof BoolLiteral)) {
+        _and_1 = false;
+      } else {
+        Literal _value_1 = pve.getValue();
+        boolean _isValue = ((BoolLiteral) _value_1).isValue();
+        _and_1 = ((_value instanceof BoolLiteral) && _isValue);
+      }
+      return _and_1;
+    }
+    return false;
   }
   
   protected boolean _empty(final Step step) {
@@ -368,16 +334,15 @@ public class FlowOptimizer {
   protected boolean _empty(final Sequence seq) {
     EList<Step> _steps = seq.getSteps();
     int _size = _steps.size();
-    boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_size), ((Integer)0));
-    return _operator_equals;
+    boolean _equals = (_size == 0);
+    return _equals;
   }
   
   public void inlineReactionChecks(final ExecutionFlow flow) {
     EList<ExecutionState> _states = flow.getStates();
-    final Function1<ExecutionState,ExecutionState> _function = new Function1<ExecutionState,ExecutionState>() {
-        public ExecutionState apply(final ExecutionState state) {
-          ExecutionState _inlineReactionChecks = FlowOptimizer.this.inlineReactionChecks(state);
-          return _inlineReactionChecks;
+    final Procedure1<ExecutionState> _function = new Procedure1<ExecutionState>() {
+        public void apply(final ExecutionState state) {
+          FlowOptimizer.this.inlineReactionChecks(state);
         }
       };
     IterableExtensions.<ExecutionState>forEach(_states, _function);
@@ -394,12 +359,10 @@ public class FlowOptimizer {
           }
         };
       List<Check> _map = ListExtensions.<Reaction, Check>map(_reactions, _function);
-      List<Check> _list = IterableExtensions.<Check>toList(_map);
-      final List<Check> checks = _list;
-      final Function1<Check,Check> _function_1 = new Function1<Check,Check>() {
-          public Check apply(final Check c) {
-            Check _inline = FlowOptimizer.this.inline(c);
-            return _inline;
+      final List<Check> checks = IterableExtensions.<Check>toList(_map);
+      final Procedure1<Check> _function_1 = new Procedure1<Check>() {
+          public void apply(final Check c) {
+            FlowOptimizer.this.inline(c);
           }
         };
       IterableExtensions.<Check>forEach(checks, _function_1);
@@ -411,21 +374,18 @@ public class FlowOptimizer {
   public Check inline(final Check c) {
     Check _xblockexpression = null;
     {
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(c, null);
-      if (_operator_notEquals) {
-        {
-          ArrayList<CheckRef> _arrayList = new ArrayList<CheckRef>();
-          final List<CheckRef> cRefs = _arrayList;
-          EList<CheckRef> _refs = c.getRefs();
-          cRefs.addAll(_refs);
-          for (final CheckRef ref : cRefs) {
-            {
-              Check _copy = EcoreUtil.<Check>copy(c);
-              final Check clone = _copy;
-              EObject _eContainer = ref.eContainer();
-              this.substitute(_eContainer, ref, clone);
-              ref.setCheck(null);
-            }
+      boolean _notEquals = (!Objects.equal(c, null));
+      if (_notEquals) {
+        ArrayList<CheckRef> _arrayList = new ArrayList<CheckRef>();
+        final List<CheckRef> cRefs = _arrayList;
+        EList<CheckRef> _refs = c.getRefs();
+        cRefs.addAll(_refs);
+        for (final CheckRef ref : cRefs) {
+          {
+            final Check clone = EcoreUtil.<Check>copy(c);
+            EObject _eContainer = ref.eContainer();
+            this.substitute(_eContainer, ref, clone);
+            ref.setCheck(null);
           }
         }
       }
@@ -442,8 +402,8 @@ public class FlowOptimizer {
     Check _xblockexpression = null;
     {
       Check _check = owner.getCheck();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_check, pre);
-      if (_operator_equals) {
+      boolean _equals = Objects.equal(_check, pre);
+      if (_equals) {
         owner.setCheck(post);
       }
       _xblockexpression = (post);
@@ -453,10 +413,9 @@ public class FlowOptimizer {
   
   public void inlineReactionEffects(final ExecutionFlow flow) {
     EList<ExecutionState> _states = flow.getStates();
-    final Function1<ExecutionState,ExecutionState> _function = new Function1<ExecutionState,ExecutionState>() {
-        public ExecutionState apply(final ExecutionState state) {
-          ExecutionState _inlineReactionEffects = FlowOptimizer.this.inlineReactionEffects(state);
-          return _inlineReactionEffects;
+    final Procedure1<ExecutionState> _function = new Procedure1<ExecutionState>() {
+        public void apply(final ExecutionState state) {
+          FlowOptimizer.this.inlineReactionEffects(state);
         }
       };
     IterableExtensions.<ExecutionState>forEach(_states, _function);
@@ -473,12 +432,10 @@ public class FlowOptimizer {
           }
         };
       List<Step> _map = ListExtensions.<Reaction, Step>map(_reactions, _function);
-      List<Step> _list = IterableExtensions.<Step>toList(_map);
-      final List<Step> effects = _list;
-      final Function1<Step,Step> _function_1 = new Function1<Step,Step>() {
-          public Step apply(final Step e) {
-            Step _inline = FlowOptimizer.this.inline(e);
-            return _inline;
+      final List<Step> effects = IterableExtensions.<Step>toList(_map);
+      final Procedure1<Step> _function_1 = new Procedure1<Step>() {
+          public void apply(final Step e) {
+            FlowOptimizer.this.inline(e);
           }
         };
       IterableExtensions.<Step>forEach(effects, _function_1);
@@ -488,54 +445,47 @@ public class FlowOptimizer {
   }
   
   public void inlineEntryAndExitActions(final ExecutionFlow flow) {
-    {
-      EList<ExecutionState> _states = flow.getStates();
-      final Function1<ExecutionState,Step> _function = new Function1<ExecutionState,Step>() {
-          public Step apply(final ExecutionState state) {
-            Step _entryAction = state.getEntryAction();
-            Step _inline = FlowOptimizer.this.inline(_entryAction);
-            return _inline;
-          }
-        };
-      IterableExtensions.<ExecutionState>forEach(_states, _function);
-      EList<ExecutionState> _states_1 = flow.getStates();
-      final Function1<ExecutionState,Step> _function_1 = new Function1<ExecutionState,Step>() {
-          public Step apply(final ExecutionState state_1) {
-            Step _exitAction = state_1.getExitAction();
-            Step _inline_1 = FlowOptimizer.this.inline(_exitAction);
-            return _inline_1;
-          }
-        };
-      IterableExtensions.<ExecutionState>forEach(_states_1, _function_1);
-    }
+    EList<ExecutionState> _states = flow.getStates();
+    final Procedure1<ExecutionState> _function = new Procedure1<ExecutionState>() {
+        public void apply(final ExecutionState state) {
+          Step _entryAction = state.getEntryAction();
+          FlowOptimizer.this.inline(_entryAction);
+        }
+      };
+    IterableExtensions.<ExecutionState>forEach(_states, _function);
+    EList<ExecutionState> _states_1 = flow.getStates();
+    final Procedure1<ExecutionState> _function_1 = new Procedure1<ExecutionState>() {
+        public void apply(final ExecutionState state) {
+          Step _exitAction = state.getExitAction();
+          FlowOptimizer.this.inline(_exitAction);
+        }
+      };
+    IterableExtensions.<ExecutionState>forEach(_states_1, _function_1);
   }
   
   public Step inline(final Step step) {
     Step _xblockexpression = null;
     {
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(step, null);
-      if (_operator_notEquals) {
-        {
-          ArrayList<Call> _arrayList = new ArrayList<Call>();
-          final List<Call> calls = _arrayList;
-          EList<Call> _caller = step.getCaller();
-          calls.addAll(_caller);
-          for (final Call caller : calls) {
-            {
-              Step _stepCopy = this.stepCopy(step);
-              final Step clone = _stepCopy;
-              EObject _eContainer = caller.eContainer();
-              boolean _substituteCall = this.substituteCall(_eContainer, caller, clone);
-              if (_substituteCall) {
-                caller.setStep(null);
-              } else {
-                String _operator_plus = StringExtensions.operator_plus("Did not substitute \'", step);
-                String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "\' call from \'");
-                EObject _eContainer_1 = caller.eContainer();
-                String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, _eContainer_1);
-                String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, "\'.");
-                System.out.println(_operator_plus_3);
-              }
+      boolean _notEquals = (!Objects.equal(step, null));
+      if (_notEquals) {
+        ArrayList<Call> _arrayList = new ArrayList<Call>();
+        final List<Call> calls = _arrayList;
+        EList<Call> _caller = step.getCaller();
+        calls.addAll(_caller);
+        for (final Call caller : calls) {
+          {
+            final Step clone = this.stepCopy(step);
+            EObject _eContainer = caller.eContainer();
+            boolean _substituteCall = this.substituteCall(_eContainer, caller, clone);
+            if (_substituteCall) {
+              caller.setStep(null);
+            } else {
+              String _plus = ("Did not substitute \'" + step);
+              String _plus_1 = (_plus + "\' call from \'");
+              EObject _eContainer_1 = caller.eContainer();
+              String _plus_2 = (_plus_1 + _eContainer_1);
+              String _plus_3 = (_plus_2 + "\'.");
+              System.out.println(_plus_3);
             }
           }
         }
@@ -550,79 +500,59 @@ public class FlowOptimizer {
   }
   
   protected boolean _substituteCall(final StateCase owner, final Call pre, final Step post) {
-    {
-      Step _step = owner.getStep();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_step, pre);
-      if (_operator_equals) {
-        {
-          owner.setStep(post);
-          return true;
-        }
-      }
-      return false;
+    Step _step = owner.getStep();
+    boolean _equals = Objects.equal(_step, pre);
+    if (_equals) {
+      owner.setStep(post);
+      return true;
     }
+    return false;
   }
   
   protected boolean _substituteCall(final HistoryEntry owner, final Call pre, final Step post) {
-    {
-      Step _initialStep = owner.getInitialStep();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_initialStep, pre);
-      if (_operator_equals) {
-        {
-          owner.setInitialStep(post);
-          return true;
-        }
-      }
-      Step _historyStep = owner.getHistoryStep();
-      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_historyStep, pre);
-      if (_operator_equals_1) {
-        {
-          owner.setHistoryStep(post);
-          return true;
-        }
-      }
-      return false;
+    Step _initialStep = owner.getInitialStep();
+    boolean _equals = Objects.equal(_initialStep, pre);
+    if (_equals) {
+      owner.setInitialStep(post);
+      return true;
     }
+    Step _historyStep = owner.getHistoryStep();
+    boolean _equals_1 = Objects.equal(_historyStep, pre);
+    if (_equals_1) {
+      owner.setHistoryStep(post);
+      return true;
+    }
+    return false;
   }
   
   protected boolean _substituteCall(final Sequence owner, final Call call, final Step step) {
-    {
-      EList<Step> _steps = owner.getSteps();
-      boolean _contains = _steps.contains(call);
-      if (_contains) {
-        {
-          EList<Step> _steps_1 = owner.getSteps();
-          EList<Step> _steps_2 = owner.getSteps();
-          int _indexOf = _steps_2.indexOf(call);
-          _steps_1.set(_indexOf, step);
-          return true;
-        }
-      }
-      return false;
+    EList<Step> _steps = owner.getSteps();
+    boolean _contains = _steps.contains(call);
+    if (_contains) {
+      EList<Step> _steps_1 = owner.getSteps();
+      EList<Step> _steps_2 = owner.getSteps();
+      int _indexOf = _steps_2.indexOf(call);
+      _steps_1.set(_indexOf, step);
+      return true;
     }
+    return false;
   }
   
   protected boolean _substituteCall(final If owner, final Call call, final Step step) {
-    {
-      Step _thenStep = owner.getThenStep();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_thenStep, call);
-      if (_operator_equals) {
-        {
-          owner.setThenStep(step);
-          return true;
-        }
-      } else {
-        Step _elseStep = owner.getElseStep();
-        boolean _operator_equals_1 = ObjectExtensions.operator_equals(_elseStep, call);
-        if (_operator_equals_1) {
-          {
-            owner.setElseStep(step);
-            return true;
-          }
-        }
+    Step _thenStep = owner.getThenStep();
+    boolean _equals = Objects.equal(_thenStep, call);
+    if (_equals) {
+      owner.setThenStep(step);
+      return true;
+    } else {
+      Step _elseStep = owner.getElseStep();
+      boolean _equals_1 = Objects.equal(_elseStep, call);
+      if (_equals_1) {
+        owner.setElseStep(step);
+        return true;
       }
-      return false;
     }
+    return false;
   }
   
   protected Step _stepCopy(final Step step) {
@@ -634,8 +564,7 @@ public class FlowOptimizer {
     Sequence _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      Sequence _createSequence = _sexecFactory.createSequence();
-      final Sequence _copy = _createSequence;
+      final Sequence _copy = _sexecFactory.createSequence();
       String _name = seq.getName();
       _copy.setName(_name);
       String _comment = seq.getComment();
@@ -659,8 +588,7 @@ public class FlowOptimizer {
     If _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      If _createIf = _sexecFactory.createIf();
-      final If _copy = _createIf;
+      final If _copy = _sexecFactory.createIf();
       String _name = _if.getName();
       _copy.setName(_name);
       String _comment = _if.getComment();
@@ -670,8 +598,8 @@ public class FlowOptimizer {
       _copy.setCheck(((Check) _stepCopy));
       Step _xifexpression = null;
       Step _thenStep = _if.getThenStep();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_thenStep, null);
-      if (_operator_notEquals) {
+      boolean _notEquals = (!Objects.equal(_thenStep, null));
+      if (_notEquals) {
         Step _thenStep_1 = _if.getThenStep();
         Step _stepCopy_1 = this.stepCopy(_thenStep_1);
         _xifexpression = _stepCopy_1;
@@ -681,8 +609,8 @@ public class FlowOptimizer {
       _copy.setThenStep(_xifexpression);
       Step _xifexpression_1 = null;
       Step _elseStep = _if.getElseStep();
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_elseStep, null);
-      if (_operator_notEquals_1) {
+      boolean _notEquals_1 = (!Objects.equal(_elseStep, null));
+      if (_notEquals_1) {
         Step _elseStep_1 = _if.getElseStep();
         Step _stepCopy_2 = this.stepCopy(_elseStep_1);
         _xifexpression_1 = _stepCopy_2;
@@ -699,8 +627,7 @@ public class FlowOptimizer {
     Call _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      Call _createCall = _sexecFactory.createCall();
-      final Call _copy = _createCall;
+      final Call _copy = _sexecFactory.createCall();
       String _name = call.getName();
       _copy.setName(_name);
       String _comment = call.getComment();
@@ -716,8 +643,7 @@ public class FlowOptimizer {
     CheckRef _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      CheckRef _createCheckRef = _sexecFactory.createCheckRef();
-      final CheckRef _copy = _createCheckRef;
+      final CheckRef _copy = _sexecFactory.createCheckRef();
       String _name = cref.getName();
       _copy.setName(_name);
       String _comment = cref.getComment();
@@ -733,8 +659,7 @@ public class FlowOptimizer {
     HistoryEntry _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      HistoryEntry _createHistoryEntry = _sexecFactory.createHistoryEntry();
-      final HistoryEntry _copy = _createHistoryEntry;
+      final HistoryEntry _copy = _sexecFactory.createHistoryEntry();
       String _name = cref.getName();
       _copy.setName(_name);
       String _comment = cref.getComment();
@@ -758,8 +683,7 @@ public class FlowOptimizer {
     StateSwitch _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      StateSwitch _createStateSwitch = _sexecFactory.createStateSwitch();
-      final StateSwitch _copy = _createStateSwitch;
+      final StateSwitch _copy = _sexecFactory.createStateSwitch();
       String _name = _switch.getName();
       _copy.setName(_name);
       String _comment = _switch.getComment();
@@ -785,8 +709,7 @@ public class FlowOptimizer {
     StateCase _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      StateCase _createStateCase = _sexecFactory.createStateCase();
-      final StateCase _copy = _createStateCase;
+      final StateCase _copy = _sexecFactory.createStateCase();
       ExecutionState _state = _case.getState();
       _copy.setState(_state);
       Step _step = _case.getStep();
@@ -810,88 +733,78 @@ public class FlowOptimizer {
   }
   
   public Step substitute(final Object owner, final Step pre, final Step post) {
-    if ((owner instanceof If)
-         && (pre instanceof Check)
-         && (post instanceof Check)) {
+    if (owner instanceof If
+         && pre instanceof Check
+         && post instanceof Check) {
       return _substitute((If)owner, (Check)pre, (Check)post);
-    } else if ((owner instanceof If)
-         && (pre instanceof Step)
-         && (post instanceof Step)) {
-      return _substitute((If)owner, (Step)pre, (Step)post);
-    } else if ((owner instanceof Sequence)
-         && (pre instanceof Step)
-         && (post instanceof Step)) {
-      return _substitute((Sequence)owner, (Step)pre, (Step)post);
-    } else if ((owner instanceof EObject)
-         && (pre instanceof Check)
-         && (post instanceof Check)) {
+    } else if (owner instanceof If
+         && pre != null
+         && post != null) {
+      return _substitute((If)owner, pre, post);
+    } else if (owner instanceof Sequence
+         && pre != null
+         && post != null) {
+      return _substitute((Sequence)owner, pre, post);
+    } else if (owner instanceof EObject
+         && pre instanceof Check
+         && post instanceof Check) {
       return _substitute((EObject)owner, (Check)pre, (Check)post);
-    } else if ((owner instanceof Object)
-         && (pre instanceof Step)
-         && (post instanceof Step)) {
-      return _substitute((Object)owner, (Step)pre, (Step)post);
+    } else if (owner != null
+         && pre != null
+         && post != null) {
+      return _substitute(owner, pre, post);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(owner, pre, post).toString());
+        Arrays.<Object>asList(owner, pre, post).toString());
     }
   }
   
   public boolean empty(final Step seq) {
-    if ((seq instanceof Sequence)) {
+    if (seq instanceof Sequence) {
       return _empty((Sequence)seq);
-    } else if ((seq instanceof Step)) {
-      return _empty((Step)seq);
+    } else if (seq != null) {
+      return _empty(seq);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(seq).toString());
+        Arrays.<Object>asList(seq).toString());
     }
   }
   
   public boolean substituteCall(final EObject owner, final Call pre, final Step post) {
-    if ((owner instanceof HistoryEntry)
-         && (pre instanceof Call)
-         && (post instanceof Step)) {
-      return _substituteCall((HistoryEntry)owner, (Call)pre, (Step)post);
-    } else if ((owner instanceof If)
-         && (pre instanceof Call)
-         && (post instanceof Step)) {
-      return _substituteCall((If)owner, (Call)pre, (Step)post);
-    } else if ((owner instanceof Sequence)
-         && (pre instanceof Call)
-         && (post instanceof Step)) {
-      return _substituteCall((Sequence)owner, (Call)pre, (Step)post);
-    } else if ((owner instanceof StateCase)
-         && (pre instanceof Call)
-         && (post instanceof Step)) {
-      return _substituteCall((StateCase)owner, (Call)pre, (Step)post);
-    } else if ((owner instanceof EObject)
-         && (pre instanceof Call)
-         && (post instanceof Step)) {
-      return _substituteCall((EObject)owner, (Call)pre, (Step)post);
+    if (owner instanceof HistoryEntry) {
+      return _substituteCall((HistoryEntry)owner, pre, post);
+    } else if (owner instanceof If) {
+      return _substituteCall((If)owner, pre, post);
+    } else if (owner instanceof Sequence) {
+      return _substituteCall((Sequence)owner, pre, post);
+    } else if (owner instanceof StateCase) {
+      return _substituteCall((StateCase)owner, pre, post);
+    } else if (owner != null) {
+      return _substituteCall(owner, pre, post);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(owner, pre, post).toString());
+        Arrays.<Object>asList(owner, pre, post).toString());
     }
   }
   
   public Step stepCopy(final Step cref) {
-    if ((cref instanceof CheckRef)) {
+    if (cref instanceof CheckRef) {
       return _stepCopy((CheckRef)cref);
-    } else if ((cref instanceof Call)) {
+    } else if (cref instanceof Call) {
       return _stepCopy((Call)cref);
-    } else if ((cref instanceof HistoryEntry)) {
+    } else if (cref instanceof HistoryEntry) {
       return _stepCopy((HistoryEntry)cref);
-    } else if ((cref instanceof If)) {
+    } else if (cref instanceof If) {
       return _stepCopy((If)cref);
-    } else if ((cref instanceof Sequence)) {
+    } else if (cref instanceof Sequence) {
       return _stepCopy((Sequence)cref);
-    } else if ((cref instanceof StateSwitch)) {
+    } else if (cref instanceof StateSwitch) {
       return _stepCopy((StateSwitch)cref);
-    } else if ((cref instanceof Step)) {
-      return _stepCopy((Step)cref);
+    } else if (cref != null) {
+      return _stepCopy(cref);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(cref).toString());
+        Arrays.<Object>asList(cref).toString());
     }
   }
 }

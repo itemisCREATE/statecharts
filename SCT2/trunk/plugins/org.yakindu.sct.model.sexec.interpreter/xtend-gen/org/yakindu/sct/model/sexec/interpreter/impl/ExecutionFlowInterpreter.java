@@ -1,16 +1,14 @@
 package org.yakindu.sct.model.sexec.interpreter.impl;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.naming.QualifiedName;
-import org.eclipse.xtext.xbase.lib.ComparableExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sexec.Call;
@@ -49,16 +47,17 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade;
-import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 
+/**
+ * @author andreas muelder - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter, IExecutionContextListener {
-  
   @Inject
   private IStatementInterpreter interpreter;
   
@@ -88,28 +87,26 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   private TraceEndRunCycle erc;
   
-  public void initialize(final ExecutionFlow flow) throws NumberFormatException {
-    {
-      this.flow = flow;
-      EList<Scope> _scopes = flow.getScopes();
-      for (final Scope scope : _scopes) {
-        this.declareContents(scope);
-      }
-      StateVector _stateVector = flow.getStateVector();
-      int _size = _stateVector.getSize();
-      this.executionContext.initStateConfigurationVector(_size);
-      this.executionContext.addExecutionContextListener(this);
-      VirtualClock _virtualClock = this.executionContext.getVirtualClock();
-      this.timingService.init(_virtualClock);
-      VirtualClock _virtualClock_1 = this.executionContext.getVirtualClock();
-      _virtualClock_1.start();
-      TraceBeginRunCycle _createTraceBeginRunCycle = SexecFactory.eINSTANCE.createTraceBeginRunCycle();
-      this.brc = _createTraceBeginRunCycle;
-      TraceEndRunCycle _createTraceEndRunCycle = SexecFactory.eINSTANCE.createTraceEndRunCycle();
-      this.erc = _createTraceEndRunCycle;
-      BufferingExecutionContext _bufferingExecutionContext = new BufferingExecutionContext(this.executionContext);
-      this.externalExecutionContext = _bufferingExecutionContext;
+  public void initialize(final ExecutionFlow flow) {
+    this.flow = flow;
+    BufferingExecutionContext _bufferingExecutionContext = new BufferingExecutionContext(this.executionContext);
+    this.externalExecutionContext = _bufferingExecutionContext;
+    EList<Scope> _scopes = flow.getScopes();
+    for (final Scope scope : _scopes) {
+      this.declareContents(scope);
     }
+    StateVector _stateVector = flow.getStateVector();
+    int _size = _stateVector.getSize();
+    this.executionContext.initStateConfigurationVector(_size);
+    this.executionContext.addExecutionContextListener(this);
+    VirtualClock _virtualClock = this.executionContext.getVirtualClock();
+    this.timingService.init(_virtualClock);
+    VirtualClock _virtualClock_1 = this.executionContext.getVirtualClock();
+    _virtualClock_1.start();
+    TraceBeginRunCycle _createTraceBeginRunCycle = SexecFactory.eINSTANCE.createTraceBeginRunCycle();
+    this.brc = _createTraceBeginRunCycle;
+    TraceEndRunCycle _createTraceEndRunCycle = SexecFactory.eINSTANCE.createTraceEndRunCycle();
+    this.erc = _createTraceEndRunCycle;
   }
   
   public void tearDown() {
@@ -124,88 +121,84 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return this.externalExecutionContext;
   }
   
-  protected void _declareContents(final InternalScope scope) throws NumberFormatException {
+  protected void _declareContents(final InternalScope scope) {
     EList<Declaration> _declarations = scope.getDeclarations();
     for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
-  protected void _declareContents(final Scope scope) throws NumberFormatException {
+  protected void _declareContents(final Scope scope) {
     EList<Declaration> _declarations = scope.getDeclarations();
     for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
-  protected void _declareContents(final InterfaceScope scope) throws NumberFormatException {
+  protected void _declareContents(final InterfaceScope scope) {
     EList<Declaration> _declarations = scope.getDeclarations();
     for (final Declaration declaration : _declarations) {
       this.addToScope(declaration);
     }
   }
   
-  public void runCycle() throws ExecutionException {
-    {
-      this.externalExecutionContext.flush();
-      this.nextSVIdx = 0;
-      this.execute(this.brc);
-      ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
-      int _size = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).size();
-      boolean _operator_lessThan = ComparableExtensions.<Integer>operator_lessThan(((Integer)this.nextSVIdx), ((Integer)_size));
-      Boolean _xwhileexpression = _operator_lessThan;
-      while (_xwhileexpression) {
-        {
-          ExecutionState[] _stateConfiguration_1 = this.executionContext.getStateConfiguration();
-          ExecutionState _get = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_1)).get(this.nextSVIdx);
-          ExecutionState state = _get;
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(state, null);
-          if (_operator_notEquals) {
-            Sequence _reactSequence = state.getReactSequence();
-            this.execute(_reactSequence);
-          }
-          int _operator_plus = IntegerExtensions.operator_plus(((Integer)this.nextSVIdx), ((Integer)1));
-          this.nextSVIdx = _operator_plus;
+  public void runCycle() {
+    this.externalExecutionContext.flush();
+    this.nextSVIdx = 0;
+    this.execute(this.brc);
+    ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
+    int _size = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).size();
+    boolean _lessThan = (this.nextSVIdx < _size);
+    boolean _while = _lessThan;
+    while (_while) {
+      {
+        ExecutionState[] _stateConfiguration_1 = this.executionContext.getStateConfiguration();
+        ExecutionState state = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_1)).get(this.nextSVIdx);
+        boolean _notEquals = (!Objects.equal(state, null));
+        if (_notEquals) {
+          Sequence _reactSequence = state.getReactSequence();
+          this.execute(_reactSequence);
         }
-        ExecutionState[] _stateConfiguration_2 = this.executionContext.getStateConfiguration();
-        int _size_1 = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_2)).size();
-        boolean _operator_lessThan_1 = ComparableExtensions.<Integer>operator_lessThan(((Integer)this.nextSVIdx), ((Integer)_size_1));
-        _xwhileexpression = _operator_lessThan_1;
+        int _plus = (this.nextSVIdx + 1);
+        this.nextSVIdx = _plus;
       }
-      this.executionContext.resetRaisedEvents();
-      this.execute(this.erc);
+      ExecutionState[] _stateConfiguration_1 = this.executionContext.getStateConfiguration();
+      int _size_1 = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_1)).size();
+      boolean _lessThan_1 = (this.nextSVIdx < _size_1);
+      _while = _lessThan_1;
     }
+    this.executionContext.resetRaisedEvents();
+    this.execute(this.erc);
   }
   
-  protected Object _addToScope(final VariableDefinition variable) throws NumberFormatException {
+  protected Object _addToScope(final VariableDefinition variable) {
     Object _xblockexpression = null;
     {
       QualifiedName _qualifiedName = this.provider.qualifiedName(variable);
-      String _string = _qualifiedName.toString();
-      String fqName = _string;
+      String fqName = _qualifiedName.toString();
       Type _type = variable.getType();
       boolean _isBoolean = this.ts.isBoolean(_type);
       if (_isBoolean) {
-        ExecutionVariable _executionVariable = new ExecutionVariable(fqName, java.lang.Boolean.class, ((Boolean)false));
+        ExecutionVariable _executionVariable = new ExecutionVariable(fqName, Boolean.class, Boolean.valueOf(false));
         this.executionContext.declareVariable(_executionVariable);
       } else {
         Type _type_1 = variable.getType();
         boolean _isInteger = this.ts.isInteger(_type_1);
         if (_isInteger) {
-          ExecutionVariable _executionVariable_1 = new ExecutionVariable(fqName, java.lang.Integer.class, ((Integer)0));
+          ExecutionVariable _executionVariable_1 = new ExecutionVariable(fqName, Integer.class, Integer.valueOf(0));
           this.executionContext.declareVariable(_executionVariable_1);
         } else {
           Type _type_2 = variable.getType();
           boolean _isReal = this.ts.isReal(_type_2);
           if (_isReal) {
             float _parseFloat = Float.parseFloat("0.0");
-            ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, java.lang.Float.class, ((Float)_parseFloat));
+            ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, Float.class, Float.valueOf(_parseFloat));
             this.executionContext.declareVariable(_executionVariable_2);
           } else {
             Type _type_3 = variable.getType();
             boolean _isString = this.ts.isString(_type_3);
             if (_isString) {
-              ExecutionVariable _executionVariable_3 = new ExecutionVariable(fqName, java.lang.String.class, "");
+              ExecutionVariable _executionVariable_3 = new ExecutionVariable(fqName, String.class, "");
               this.executionContext.declareVariable(_executionVariable_3);
             }
           }
@@ -220,36 +213,35 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     Object _xblockexpression = null;
     {
       QualifiedName _qualifiedName = this.provider.qualifiedName(event);
-      String _string = _qualifiedName.toString();
-      String fqName = _string;
+      String fqName = _qualifiedName.toString();
       Type _type = event.getType();
       boolean _isBoolean = this.ts.isBoolean(_type);
       if (_isBoolean) {
-        ExecutionEvent _executionEvent = new ExecutionEvent(fqName, java.lang.Boolean.class, null);
+        ExecutionEvent _executionEvent = new ExecutionEvent(fqName, Boolean.class, null);
         this.executionContext.declareEvent(_executionEvent);
       } else {
         Type _type_1 = event.getType();
         boolean _isInteger = this.ts.isInteger(_type_1);
         if (_isInteger) {
-          ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, java.lang.Integer.class, null);
+          ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, Integer.class, null);
           this.executionContext.declareEvent(_executionEvent_1);
         } else {
           Type _type_2 = event.getType();
           boolean _isReal = this.ts.isReal(_type_2);
           if (_isReal) {
-            ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, java.lang.Float.class, null);
+            ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, Float.class, null);
             this.executionContext.declareEvent(_executionEvent_2);
           } else {
             Type _type_3 = event.getType();
             boolean _isVoid = this.ts.isVoid(_type_3);
             if (_isVoid) {
-              ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, java.lang.Void.class);
+              ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, Void.class);
               this.executionContext.declareEvent(_executionEvent_3);
             } else {
               Type _type_4 = event.getType();
               boolean _isString = this.ts.isString(_type_4);
               if (_isString) {
-                ExecutionEvent _executionEvent_4 = new ExecutionEvent(fqName, java.lang.String.class, "");
+                ExecutionEvent _executionEvent_4 = new ExecutionEvent(fqName, String.class, "");
                 this.executionContext.declareEvent(_executionEvent_4);
               }
             }
@@ -265,14 +257,14 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     Object _xblockexpression = null;
     {
       String _name = event.getName();
-      ExecutionEvent _executionEvent = new ExecutionEvent(_name, java.lang.Long.class);
+      ExecutionEvent _executionEvent = new ExecutionEvent(_name, Long.class);
       this.executionContext.declareEvent(_executionEvent);
       _xblockexpression = (null);
     }
     return _xblockexpression;
   }
   
-  public void enter() throws ExecutionException {
+  public void enter() {
     Sequence _enterSequence = this.flow.getEnterSequence();
     EList<Step> _steps = _enterSequence.getSteps();
     for (final Step step : _steps) {
@@ -281,12 +273,12 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   }
   
   protected Object _execute(final Step step) {
-    String _operator_plus = StringExtensions.operator_plus("Missing dispatch function for ", step);
-    String _println = InputOutput.<String>println(_operator_plus);
+    String _plus = ("Missing dispatch function for " + step);
+    String _println = InputOutput.<String>println(_plus);
     return _println;
   }
   
-  protected Object _execute(final Call call) throws ExecutionException {
+  protected Object _execute(final Call call) {
     Object _xblockexpression = null;
     {
       Step _step = call.getStep();
@@ -305,18 +297,15 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
-  protected Object _execute(final Check check) throws ExecutionException {
-    {
-      Statement _condition = check.getCondition();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_condition, null);
-      if (_operator_equals) {
-        return ((Boolean)true);
-      }
-      Statement _condition_1 = check.getCondition();
-      Object _evaluateStatement = this.interpreter.evaluateStatement(_condition_1, this.executionContext);
-      Object interpreterResult = _evaluateStatement;
-      return interpreterResult;
+  protected Object _execute(final Check check) {
+    Statement _condition = check.getCondition();
+    boolean _equals = Objects.equal(_condition, null);
+    if (_equals) {
+      return Boolean.valueOf(true);
     }
+    Statement _condition_1 = check.getCondition();
+    Object interpreterResult = this.interpreter.evaluateStatement(_condition_1, this.executionContext);
+    return interpreterResult;
   }
   
   protected Object _execute(final EnterState enterState) {
@@ -337,21 +326,21 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
-  protected Object _execute(final HistoryEntry entry) throws ExecutionException {
+  protected Object _execute(final HistoryEntry entry) {
     Object _xblockexpression = null;
     {
       ExecutionRegion _region = entry.getRegion();
       ExecutionState _historyStateConfiguration = this.executionContext.getHistoryStateConfiguration(_region);
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_historyStateConfiguration, null);
-      if (_operator_notEquals) {
+      boolean _notEquals = (!Objects.equal(_historyStateConfiguration, null));
+      if (_notEquals) {
         Step _historyStep = entry.getHistoryStep();
         this.execute(_historyStep);
       } else {
         Step _initialStep = entry.getInitialStep();
-        boolean _operator_equals = ObjectExtensions.operator_equals(_initialStep, null);
-        if (_operator_equals) {
-          String _operator_plus = StringExtensions.operator_plus("Missing initial transition ", entry);
-          InputOutput.<String>println(_operator_plus);
+        boolean _equals = Objects.equal(_initialStep, null);
+        if (_equals) {
+          String _plus = ("Missing initial transition " + entry);
+          InputOutput.<String>println(_plus);
         } else {
           Step _initialStep_1 = entry.getInitialStep();
           this.execute(_initialStep_1);
@@ -362,7 +351,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
-  protected Object _execute(final Execution execution) throws ExecutionException {
+  protected Object _execute(final Execution execution) {
     Statement _statement = execution.getStatement();
     Object _evaluateStatement = this.interpreter.evaluateStatement(_statement, this.executionContext);
     return _evaluateStatement;
@@ -381,19 +370,18 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
-  protected Object _execute(final If ifStep) throws ExecutionException {
+  protected Object _execute(final If ifStep) {
     Object _xblockexpression = null;
     {
       Check _check = ifStep.getCheck();
-      Object _execute = this.execute(_check);
-      Object check = _execute;
-      if (((Boolean) check)) {
+      Object check = this.execute(_check);
+      if ((((Boolean) check)).booleanValue()) {
         Step _thenStep = ifStep.getThenStep();
         this.execute(_thenStep);
       } else {
         Step _elseStep = ifStep.getElseStep();
-        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_elseStep, null);
-        if (_operator_notEquals) {
+        boolean _notEquals = (!Objects.equal(_elseStep, null));
+        if (_notEquals) {
           Step _elseStep_1 = ifStep.getElseStep();
           this.execute(_elseStep_1);
         }
@@ -403,7 +391,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
-  protected Object _execute(final Sequence sequence) throws ExecutionException {
+  protected Object _execute(final Sequence sequence) {
     Object _xblockexpression = null;
     {
       EList<Step> _steps = sequence.getSteps();
@@ -425,24 +413,20 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
-  protected Object _execute(final StateSwitch stateSwitch) throws ExecutionException {
+  protected Object _execute(final StateSwitch stateSwitch) {
     Object _xblockexpression = null;
     {
-      ExecutionRegion _historyRegion = stateSwitch.getHistoryRegion();
-      final ExecutionRegion historyRegion = _historyRegion;
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(historyRegion, null);
-      if (_operator_notEquals) {
-        {
-          ExecutionState _historyStateConfiguration = this.executionContext.getHistoryStateConfiguration(historyRegion);
-          final ExecutionState historyState = _historyStateConfiguration;
-          EList<StateCase> _cases = stateSwitch.getCases();
-          for (final StateCase stateCase : _cases) {
-            ExecutionState _state = stateCase.getState();
-            boolean _operator_equals = ObjectExtensions.operator_equals(historyState, _state);
-            if (_operator_equals) {
-              Step _step = stateCase.getStep();
-              this.execute(_step);
-            }
+      final ExecutionRegion historyRegion = stateSwitch.getHistoryRegion();
+      boolean _notEquals = (!Objects.equal(historyRegion, null));
+      if (_notEquals) {
+        final ExecutionState historyState = this.executionContext.getHistoryStateConfiguration(historyRegion);
+        EList<StateCase> _cases = stateSwitch.getCases();
+        for (final StateCase stateCase : _cases) {
+          ExecutionState _state = stateCase.getState();
+          boolean _equals = Objects.equal(historyState, _state);
+          if (_equals) {
+            Step _step = stateCase.getStep();
+            this.execute(_step);
           }
         }
       } else {
@@ -462,17 +446,15 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return _xblockexpression;
   }
   
-  protected Object _execute(final ScheduleTimeEvent scheduleTimeEvent) throws ExecutionException {
+  protected Object _execute(final ScheduleTimeEvent scheduleTimeEvent) {
     Object _xblockexpression = null;
     {
-      TimeEvent _timeEvent = scheduleTimeEvent.getTimeEvent();
-      TimeEvent timeEvent = _timeEvent;
+      TimeEvent timeEvent = scheduleTimeEvent.getTimeEvent();
       Statement _timeValue = scheduleTimeEvent.getTimeValue();
-      Object _evaluateStatement = this.interpreter.evaluateStatement(_timeValue, this.executionContext);
-      Object duration = _evaluateStatement;
+      Object duration = this.interpreter.evaluateStatement(_timeValue, this.executionContext);
       String _name = timeEvent.getName();
       boolean _isPeriodic = timeEvent.isPeriodic();
-      this.timingService.scheduleTimeEvent(this.externalExecutionContext, _name, _isPeriodic, ((Integer) duration));
+      this.timingService.scheduleTimeEvent(this.externalExecutionContext, _name, _isPeriodic, (((Integer) duration)).intValue());
       _xblockexpression = (null);
     }
     return _xblockexpression;
@@ -499,64 +481,67 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     this.timingService.setTimeScaleFactor(newFactor);
   }
   
-  public void declareContents(final Scope scope) throws NumberFormatException {
-    if ((scope instanceof InterfaceScope)) {
+  public void declareContents(final Scope scope) {
+    if (scope instanceof InterfaceScope) {
       _declareContents((InterfaceScope)scope);
-    } else if ((scope instanceof InternalScope)) {
+      return;
+    } else if (scope instanceof InternalScope) {
       _declareContents((InternalScope)scope);
-    } else if ((scope instanceof Scope)) {
-      _declareContents((Scope)scope);
+      return;
+    } else if (scope != null) {
+      _declareContents(scope);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(scope).toString());
+        Arrays.<Object>asList(scope).toString());
     }
   }
   
-  public Object addToScope(final Declaration event) throws NumberFormatException {
-    if ((event instanceof TimeEvent)) {
+  public Object addToScope(final Declaration event) {
+    if (event instanceof TimeEvent) {
       return _addToScope((TimeEvent)event);
-    } else if ((event instanceof EventDefinition)) {
+    } else if (event instanceof EventDefinition) {
       return _addToScope((EventDefinition)event);
-    } else if ((event instanceof VariableDefinition)) {
+    } else if (event instanceof VariableDefinition) {
       return _addToScope((VariableDefinition)event);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(event).toString());
+        Arrays.<Object>asList(event).toString());
     }
   }
   
-  public Object execute(final Step call) throws ExecutionException {
-    if ((call instanceof Call)) {
+  public Object execute(final Step call) {
+    if (call instanceof Call) {
       return _execute((Call)call);
-    } else if ((call instanceof Check)) {
+    } else if (call instanceof Check) {
       return _execute((Check)call);
-    } else if ((call instanceof EnterState)) {
+    } else if (call instanceof EnterState) {
       return _execute((EnterState)call);
-    } else if ((call instanceof Execution)) {
+    } else if (call instanceof Execution) {
       return _execute((Execution)call);
-    } else if ((call instanceof ExitState)) {
+    } else if (call instanceof ExitState) {
       return _execute((ExitState)call);
-    } else if ((call instanceof HistoryEntry)) {
+    } else if (call instanceof HistoryEntry) {
       return _execute((HistoryEntry)call);
-    } else if ((call instanceof If)) {
+    } else if (call instanceof If) {
       return _execute((If)call);
-    } else if ((call instanceof SaveHistory)) {
+    } else if (call instanceof SaveHistory) {
       return _execute((SaveHistory)call);
-    } else if ((call instanceof ScheduleTimeEvent)) {
+    } else if (call instanceof ScheduleTimeEvent) {
       return _execute((ScheduleTimeEvent)call);
-    } else if ((call instanceof Sequence)) {
+    } else if (call instanceof Sequence) {
       return _execute((Sequence)call);
-    } else if ((call instanceof StateSwitch)) {
+    } else if (call instanceof StateSwitch) {
       return _execute((StateSwitch)call);
-    } else if ((call instanceof Trace)) {
+    } else if (call instanceof Trace) {
       return _execute((Trace)call);
-    } else if ((call instanceof UnscheduleTimeEvent)) {
+    } else if (call instanceof UnscheduleTimeEvent) {
       return _execute((UnscheduleTimeEvent)call);
-    } else if ((call instanceof Step)) {
-      return _execute((Step)call);
+    } else if (call != null) {
+      return _execute(call);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(call).toString());
+        Arrays.<Object>asList(call).toString());
     }
   }
 }

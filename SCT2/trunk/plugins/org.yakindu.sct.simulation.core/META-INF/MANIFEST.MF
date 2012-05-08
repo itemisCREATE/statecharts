@@ -11,7 +11,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph,
  org.eclipse.jdt.debug,
  org.yakindu.sct.model.sexec;bundle-version="1.0.0",
- com.google.collect;bundle-version="1.0.0"
+ com.google.guava;bundle-version="10.0.1"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.core,

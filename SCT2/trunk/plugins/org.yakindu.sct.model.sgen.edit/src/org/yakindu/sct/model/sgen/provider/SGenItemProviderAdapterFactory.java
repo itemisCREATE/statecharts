@@ -258,6 +258,98 @@ public class SGenItemProviderAdapterFactory extends SGenAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgen.BoolLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BoolLiteralItemProvider boolLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgen.BoolLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBoolLiteralAdapter() {
+		if (boolLiteralItemProvider == null) {
+			boolLiteralItemProvider = new BoolLiteralItemProvider(this);
+		}
+
+		return boolLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgen.IntLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected IntLiteralItemProvider intLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgen.IntLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createIntLiteralAdapter() {
+		if (intLiteralItemProvider == null) {
+			intLiteralItemProvider = new IntLiteralItemProvider(this);
+		}
+
+		return intLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgen.RealLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RealLiteralItemProvider realLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgen.RealLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRealLiteralAdapter() {
+		if (realLiteralItemProvider == null) {
+			realLiteralItemProvider = new RealLiteralItemProvider(this);
+		}
+
+		return realLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgen.StringLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StringLiteralItemProvider stringLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgen.StringLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStringLiteralAdapter() {
+		if (stringLiteralItemProvider == null) {
+			stringLiteralItemProvider = new StringLiteralItemProvider(this);
+		}
+
+		return stringLiteralItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -364,6 +456,10 @@ public class SGenItemProviderAdapterFactory extends SGenAdapterFactory implement
 		if (generatorEntryItemProvider != null) generatorEntryItemProvider.dispose();
 		if (featureParameterValueItemProvider != null) featureParameterValueItemProvider.dispose();
 		if (featureTypeLibraryItemProvider != null) featureTypeLibraryItemProvider.dispose();
+		if (boolLiteralItemProvider != null) boolLiteralItemProvider.dispose();
+		if (intLiteralItemProvider != null) intLiteralItemProvider.dispose();
+		if (realLiteralItemProvider != null) realLiteralItemProvider.dispose();
+		if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
 	}
 
 }

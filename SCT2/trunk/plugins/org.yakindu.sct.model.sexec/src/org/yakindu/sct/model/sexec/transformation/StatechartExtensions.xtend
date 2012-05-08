@@ -22,7 +22,6 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
  
  
 class StatechartExtensions {
@@ -166,7 +165,7 @@ class StatechartExtensions {
 	}
 
 	def Iterable<Entry> allEntries(Statechart sc) {
-		return sc.allContentsIterable.filter( typeof(Entry) )
+		return sc.eAllContents.filter( typeof(Entry)).toIterable
 	}
 	
 	def List<LocalReaction> entryReactions(ReactiveElement state) {

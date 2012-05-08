@@ -24,6 +24,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
+import org.yakindu.sct.model.sgen.SGenFactory;
 import org.yakindu.sct.model.sgen.SGenPackage;
 
 /**
@@ -70,26 +71,26 @@ public class FeatureParameterValueItemProvider extends ItemProviderAdapter
 	 * @generated
 	 */
 	protected void addParameterPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_FeatureParameterValue_parameter_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_FeatureParameterValue_parameter_feature",
-						"_UI_FeatureParameterValue_type"),
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__PARAMETER, true,
-				false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FeatureParameterValue_parameter_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FeatureParameterValue_parameter_feature", "_UI_FeatureParameterValue_type"),
+				 SGenPackage.Literals.FEATURE_PARAMETER_VALUE__PARAMETER,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -97,38 +98,32 @@ public class FeatureParameterValueItemProvider extends ItemProviderAdapter
 			Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures
-					.add(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
+			childrenFeatures.add(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION);
 		}
 		return childrenFeatures;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns FeatureParameterValue.gif. <!-- begin-user-doc --> <!--
+	 * This returns FeatureParameterValue.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(
-				object,
-				getResourceLocator().getImage(
-						"full/obj16/FeatureParameterValue"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FeatureParameterValue"));
 	}
 
 	/**
@@ -144,11 +139,10 @@ public class FeatureParameterValueItemProvider extends ItemProviderAdapter
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -156,10 +150,9 @@ public class FeatureParameterValueItemProvider extends ItemProviderAdapter
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FeatureParameterValue.class)) {
-		case SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION:
-			fireNotifyChanged(new ViewerNotification(notification,
-					notification.getNotifier(), true, false));
-			return;
+			case SGenPackage.FEATURE_PARAMETER_VALUE__EXPRESSION:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
 		}
 		super.notifyChanged(notification);
 	}
@@ -176,101 +169,25 @@ public class FeatureParameterValueItemProvider extends ItemProviderAdapter
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXIfExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
+				 SGenFactory.eINSTANCE.createBoolLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXSwitchExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
+				 SGenFactory.eINSTANCE.createIntLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXBlockExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
+				 SGenFactory.eINSTANCE.createRealLiteral()));
 
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXVariableDeclaration()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXMemberFeatureCall()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXFeatureCall()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXConstructorCall()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXBooleanLiteral()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXNullLiteral()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXIntLiteral()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXStringLiteral()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXClosure()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXCastedExpression()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXBinaryOperation()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXUnaryOperation()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXForLoopExpression()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXDoWhileExpression()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXWhileExpression()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXTypeLiteral()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXInstanceOfExpression()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXThrowExpression()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXTryCatchFinallyExpression()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXAssignment()));
-
-		newChildDescriptors.add(createChildParameter(
-				SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
-				XbaseFactory.eINSTANCE.createXReturnExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGenPackage.Literals.FEATURE_PARAMETER_VALUE__EXPRESSION,
+				 SGenFactory.eINSTANCE.createStringLiteral()));
 	}
 
 	/**
