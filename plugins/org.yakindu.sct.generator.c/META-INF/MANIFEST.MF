@@ -5,7 +5,6 @@ Bundle-SymbolicName: org.yakindu.sct.generator.c;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.yakindu.sct.model.sexec,
  org.eclipse.jdt.core,
- org.eclipse.xtend.profiler;resolution:=optional,
  org.apache.commons.logging,
  org.apache.log4j;resolution:=optional,
  com.ibm.icu,
