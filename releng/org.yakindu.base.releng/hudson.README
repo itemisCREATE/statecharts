@@ -29,7 +29,27 @@ Source-Code-Management:
 + SVN
 	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/features
 	Location: base_repository/features
- 
+
+Build environment:
++ Send files or execute commands over SSH after the build runs
+	Server: Yakindu Projects.itemis.de
+	Command:
+		if [ -e base/juno/snapshot ]; then 
+		 if [ -e base/juno/snapshot_backup ]; then
+		  rm -r base/juno/snapshot_backup;
+		 fi
+		 mv base/juno/snapshot base/juno/snapshot_backup;
+		fi
++ Send files or execute commands over SSH after the build runs
+	Server: Yakindu Projects.itemis.de
+	Source files: update-site/**
+	Remove prefix: update-site
+	Remote directory: base/juno/snapshot
+	Command:
+		if [ -e base/juno/snapshot -a -e base/juno/snapshot_backup ]; then
+		 rm -r base/juno/snapshot_backup;
+		fi
+
 Build:
 + Execute Shell
 	Command
