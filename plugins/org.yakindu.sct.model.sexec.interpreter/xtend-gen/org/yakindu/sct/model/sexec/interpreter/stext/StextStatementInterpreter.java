@@ -94,7 +94,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
         this.context.setVariableValue(_name, result);
       } else {
         AssignmentOperator _operator_1 = assignment.getOperator();
-        String _name_1 = _operator_1.name();
+        String _name_1 = _operator_1.getName();
         String operator = AbstractStatementInterpreter.assignFunctionMap.get(_name_1);
         String _name_2 = scopeVariable.getName();
         Object _value = scopeVariable.getValue();
@@ -319,7 +319,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     Expression _leftOperand = expression.getLeftOperand();
     Expression _rightOperand = expression.getRightOperand();
     RelationalOperator _operator = expression.getOperator();
-    String _name = _operator.name();
+    String _name = _operator.getName();
     Object _executeBinaryCoreFunction = this.executeBinaryCoreFunction(_leftOperand, _rightOperand, _name);
     return _executeBinaryCoreFunction;
   }
@@ -328,8 +328,8 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     Expression _leftOperand = expression.getLeftOperand();
     Expression _rightOperand = expression.getRightOperand();
     AdditiveOperator _operator = expression.getOperator();
-    String _name = _operator.name();
-    Object _executeBinaryCoreFunction = this.executeBinaryCoreFunction(_leftOperand, _rightOperand, _name);
+    String _literal = _operator.getLiteral();
+    Object _executeBinaryCoreFunction = this.executeBinaryCoreFunction(_leftOperand, _rightOperand, _literal);
     return _executeBinaryCoreFunction;
   }
   
@@ -337,7 +337,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     Expression _leftOperand = expression.getLeftOperand();
     Expression _rightOperand = expression.getRightOperand();
     MultiplicativeOperator _operator = expression.getOperator();
-    String _name = _operator.name();
+    String _name = _operator.getName();
     Object _executeBinaryCoreFunction = this.executeBinaryCoreFunction(_leftOperand, _rightOperand, _name);
     return _executeBinaryCoreFunction;
   }
@@ -346,7 +346,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     Expression _leftOperand = expression.getLeftOperand();
     Expression _rightOperand = expression.getRightOperand();
     ShiftOperator _operator = expression.getOperator();
-    String _name = _operator.name();
+    String _name = _operator.getName();
     Object _executeBinaryCoreFunction = this.executeBinaryCoreFunction(_leftOperand, _rightOperand, _name);
     return _executeBinaryCoreFunction;
   }
@@ -354,7 +354,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
   protected Object _execute(final NumericalUnaryExpression expression) {
     Expression _operand = expression.getOperand();
     UnaryOperator _operator = expression.getOperator();
-    String _name = _operator.name();
+    String _name = _operator.getName();
     Object _executeUnaryCoreFunction = this.executeUnaryCoreFunction(_operand, _name);
     return _executeUnaryCoreFunction;
   }

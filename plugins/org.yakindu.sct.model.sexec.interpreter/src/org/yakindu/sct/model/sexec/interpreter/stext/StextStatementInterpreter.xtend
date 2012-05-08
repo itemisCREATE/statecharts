@@ -73,7 +73,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if(assignment.operator == AssignmentOperator::ASSIGN){
 			context.setVariableValue(scopeVariable.getName, result)
 		}else{
-			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.name)
+			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
 			context.setVariableValue(scopeVariable.name, evaluate(operator, scopeVariable.getValue,result))
 		}
 		null		
@@ -184,19 +184,19 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, CoreFunction::BIT_XOR)		
 	}
 	def dispatch execute(LogicalRelationExpression expression){
-		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.name)
+		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.getName())
 	}
 	def dispatch execute(NumericalAddSubtractExpression expression){
-		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.name)
+		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.literal)
 	}
 	def dispatch execute(NumericalMultiplyDivideExpression expression){
-		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.name)
+		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.getName())
 	}
 	def dispatch execute(ShiftExpression expression){
-		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.name)
+		executeBinaryCoreFunction(expression.leftOperand, expression.rightOperand, expression.operator.getName())
 	}
 	def dispatch execute(NumericalUnaryExpression expression){
-		executeUnaryCoreFunction(expression.operand, expression.operator.name)
+		executeUnaryCoreFunction(expression.operand, expression.operator.getName())
 	}	
 	
 	def executeBinaryCoreFunction(Statement leftStatement, Statement rightStatement, String operator){
