@@ -4,7 +4,6 @@ Bundle-Name: Java Generator PlugIn
 Bundle-SymbolicName: org.yakindu.sct.generator.java;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.jdt.core;bundle-version="3.5.0",
- org.eclipse.xtend.profiler;resolution:=optional,
  org.apache.commons.logging,
  org.apache.log4j;resolution:=optional,
  com.ibm.icu;bundle-version="4.0.1",
