@@ -11,7 +11,6 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 
-import static extension org.eclipse.xtext.xtend2.lib.EObjectExtensions.*
 
 
 class StateVectorBuilder {
@@ -23,7 +22,7 @@ class StateVectorBuilder {
 	
 	def defineHistoryVector(ExecutionFlow flow, Statechart sc) {
 		var offset = -1
-		for ( r : sc.allContentsIterable.filter(typeof(Region)) ) {
+		for ( r : sc.eAllContents.filter(typeof(Region)).toIterable) {
 			if (r.requireHistory) {
 				offset = offset+1
 				val er = r.create

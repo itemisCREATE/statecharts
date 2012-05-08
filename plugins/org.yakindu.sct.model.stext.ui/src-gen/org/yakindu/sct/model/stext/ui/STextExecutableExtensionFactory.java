@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.yakindu.sct.model.stext.ui.internal.STextActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class STextExecutableExtensionFactory extends AbstractGuiceAwareExecutabl
 
 	@Override
 	protected Bundle getBundle() {
-		return org.yakindu.sct.model.stext.ui.internal.STextActivator.getInstance().getBundle();
+		return STextActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.yakindu.sct.model.stext.ui.internal.STextActivator.getInstance().getInjector("org.yakindu.sct.model.stext.SText");
+		return STextActivator.getInstance().getInjector(STextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT);
 	}
 	
 }

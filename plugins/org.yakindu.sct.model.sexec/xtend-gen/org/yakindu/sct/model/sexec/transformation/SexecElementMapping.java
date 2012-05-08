@@ -1,8 +1,11 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -11,10 +14,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.Call;
@@ -74,7 +76,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
 @SuppressWarnings("all")
 @Singleton
 public class SexecElementMapping {
-  
   @Inject
   private IQualifiedNameProvider qfnProvider;
   
@@ -90,428 +91,484 @@ public class SexecElementMapping {
   @Inject
   private SexecExtensions sexec;
   
-  private final HashMap<ArrayList<?>,ExecutionFlow> _createCache_create = new HashMap<ArrayList<?>,ExecutionFlow>();
-  
   public ExecutionFlow create(final Statechart statechart) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(statechart);
-    final ExecutionFlow r;
+    final ExecutionFlow _result;
     synchronized (_createCache_create) {
       if (_createCache_create.containsKey(_cacheKey)) {
         return _createCache_create.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionFlow _createExecutionFlow = _sexecFactory.createExecutionFlow();
-      r = _createExecutionFlow;
-      _createCache_create.put(_cacheKey, r);
+      _result = _createExecutionFlow;
+      _createCache_create.put(_cacheKey, _result);
     }
-    {
-      String _name = statechart.getName();
-      r.setName(_name);
-      r.setSourceElement(statechart);
-    }
-    return r;
+    _init_create(_result, statechart);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,InterfaceScope> _createCache_create_1 = new HashMap<ArrayList<?>,InterfaceScope>();
+  private final HashMap<ArrayList<?>,ExecutionFlow> _createCache_create = CollectionLiterals.newHashMap();
+  
+  private void _init_create(final ExecutionFlow r, final Statechart statechart) {
+    String _name = statechart.getName();
+    r.setName(_name);
+    r.setSourceElement(statechart);
+  }
   
   protected Scope _create(final InterfaceScope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
-    final InterfaceScope r;
+    final InterfaceScope _result;
     synchronized (_createCache_create_1) {
       if (_createCache_create_1.containsKey(_cacheKey)) {
         return _createCache_create_1.get(_cacheKey);
       }
       StextFactory _stextFactory = this.stextFactory();
       InterfaceScope _createInterfaceScope = _stextFactory.createInterfaceScope();
-      r = _createInterfaceScope;
-      _createCache_create_1.put(_cacheKey, r);
+      _result = _createInterfaceScope;
+      _createCache_create_1.put(_cacheKey, _result);
     }
-    String _name = scope.getName();
-    r.setName(_name);
-    return r;
+    _init_create_1(_result, scope);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,InternalScope> _createCache_create_2 = new HashMap<ArrayList<?>,InternalScope>();
+  private final HashMap<ArrayList<?>,Scope> _createCache_create_1 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_1(final InterfaceScope r, final InterfaceScope scope) {
+    String _name = scope.getName();
+    r.setName(_name);
+  }
   
   protected Scope _create(final Scope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
-    final InternalScope r;
+    final InternalScope _result;
     synchronized (_createCache_create_2) {
       if (_createCache_create_2.containsKey(_cacheKey)) {
         return _createCache_create_2.get(_cacheKey);
       }
       StextFactory _stextFactory = this.stextFactory();
       InternalScope _createInternalScope = _stextFactory.createInternalScope();
-      r = _createInternalScope;
-      _createCache_create_2.put(_cacheKey, r);
+      _result = _createInternalScope;
+      _createCache_create_2.put(_cacheKey, _result);
     }
-    return r;
+    _init_create_2(_result, scope);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,Scope> _createCache_timeEventScope = new HashMap<ArrayList<?>,Scope>();
+  private final HashMap<ArrayList<?>,Scope> _createCache_create_2 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_2(final InternalScope r, final Scope scope) {
+  }
   
   public Scope timeEventScope(final ExecutionFlow flow) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(flow);
-    final Scope r;
+    final Scope _result;
     synchronized (_createCache_timeEventScope) {
       if (_createCache_timeEventScope.containsKey(_cacheKey)) {
         return _createCache_timeEventScope.get(_cacheKey);
       }
       SGraphFactory _factory = this.sgraph.factory();
       Scope _createScope = _factory.createScope();
-      r = _createScope;
-      _createCache_timeEventScope.put(_cacheKey, r);
+      _result = _createScope;
+      _createCache_timeEventScope.put(_cacheKey, _result);
     }
-    EList<Scope> _scopes = flow.getScopes();
-    _scopes.add(r);
-    return r;
+    _init_timeEventScope(_result, flow);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,EventDefinition> _createCache_create_3 = new HashMap<ArrayList<?>,EventDefinition>();
+  private final HashMap<ArrayList<?>,Scope> _createCache_timeEventScope = CollectionLiterals.newHashMap();
+  
+  private void _init_timeEventScope(final Scope r, final ExecutionFlow flow) {
+    EList<Scope> _scopes = flow.getScopes();
+    _scopes.add(r);
+  }
   
   public EventDefinition create(final EventDefinition event) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(event);
-    final EventDefinition r;
+    final EventDefinition _result;
     synchronized (_createCache_create_3) {
       if (_createCache_create_3.containsKey(_cacheKey)) {
         return _createCache_create_3.get(_cacheKey);
       }
       EventDefinition _copy = EcoreUtil.<EventDefinition>copy(event);
-      r = _copy;
-      _createCache_create_3.put(_cacheKey, r);
+      _result = _copy;
+      _createCache_create_3.put(_cacheKey, _result);
     }
-    return r;
+    _init_create_3(_result, event);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,VariableDefinition> _createCache_create_4 = new HashMap<ArrayList<?>,VariableDefinition>();
+  private final HashMap<ArrayList<?>,EventDefinition> _createCache_create_3 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_3(final EventDefinition r, final EventDefinition event) {
+  }
   
   public VariableDefinition create(final VariableDefinition v) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(v);
-    final VariableDefinition r;
+    final VariableDefinition _result;
     synchronized (_createCache_create_4) {
       if (_createCache_create_4.containsKey(_cacheKey)) {
         return _createCache_create_4.get(_cacheKey);
       }
       VariableDefinition _copy = EcoreUtil.<VariableDefinition>copy(v);
-      r = _copy;
-      _createCache_create_4.put(_cacheKey, r);
+      _result = _copy;
+      _createCache_create_4.put(_cacheKey, _result);
     }
-    return r;
+    _init_create_4(_result, v);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,OperationDefinition> _createCache_create_5 = new HashMap<ArrayList<?>,OperationDefinition>();
+  private final HashMap<ArrayList<?>,VariableDefinition> _createCache_create_4 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_4(final VariableDefinition r, final VariableDefinition v) {
+  }
   
   public OperationDefinition create(final OperationDefinition v) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(v);
-    final OperationDefinition r;
+    final OperationDefinition _result;
     synchronized (_createCache_create_5) {
       if (_createCache_create_5.containsKey(_cacheKey)) {
         return _createCache_create_5.get(_cacheKey);
       }
       OperationDefinition _copy = EcoreUtil.<OperationDefinition>copy(v);
-      r = _copy;
-      _createCache_create_5.put(_cacheKey, r);
+      _result = _copy;
+      _createCache_create_5.put(_cacheKey, _result);
     }
-    return r;
+    _init_create_5(_result, v);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionState> _createCache_create_6 = new HashMap<ArrayList<?>,ExecutionState>();
+  private final HashMap<ArrayList<?>,OperationDefinition> _createCache_create_5 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_5(final OperationDefinition r, final OperationDefinition v) {
+  }
   
   public ExecutionState create(final RegularState state) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(state);
-    final ExecutionState r;
+    final ExecutionState _result;
     synchronized (_createCache_create_6) {
       if (_createCache_create_6.containsKey(_cacheKey)) {
         return _createCache_create_6.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionState _createExecutionState = _sexecFactory.createExecutionState();
-      r = _createExecutionState;
-      _createCache_create_6.put(_cacheKey, r);
+      _result = _createExecutionState;
+      _createCache_create_6.put(_cacheKey, _result);
     }
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(state, null);
-    if (_operator_notEquals) {
-      {
-        Region _parentRegion = state.getParentRegion();
-        EList<Vertex> _vertices = _parentRegion.getVertices();
-        Iterable<FinalState> _filter = IterableExtensions.<FinalState>filter(_vertices, org.yakindu.sct.model.sgraph.FinalState.class);
-        List<FinalState> _list = IterableExtensions.<FinalState>toList(_filter);
-        int _indexOf = _list.indexOf(state);
-        final int n = _indexOf;
-        String _xifexpression = null;
-        if ((state instanceof org.yakindu.sct.model.sgraph.FinalState)) {
-          String _operator_plus = StringExtensions.operator_plus("_final_", ((Integer)n));
-          _xifexpression = _operator_plus;
-        } else {
-          String _name = state.getName();
-          _xifexpression = _name;
-        }
-        r.setSimpleName(_xifexpression);
-        QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(state);
-        String _string = _fullyQualifiedName.toString();
-        String _replaceAll = _string.replaceAll(" ", "");
-        r.setName(_replaceAll);
-        r.setSourceElement(state);
-      }
-    }
-    return r;
+    _init_create_6(_result, state);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionChoice> _createCache_create_7 = new HashMap<ArrayList<?>,ExecutionChoice>();
+  private final HashMap<ArrayList<?>,ExecutionState> _createCache_create_6 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_6(final ExecutionState r, final RegularState state) {
+    boolean _notEquals = (!Objects.equal(state, null));
+    if (_notEquals) {
+      Region _parentRegion = state.getParentRegion();
+      EList<Vertex> _vertices = _parentRegion.getVertices();
+      Iterable<FinalState> _filter = Iterables.<FinalState>filter(_vertices, FinalState.class);
+      List<FinalState> _list = IterableExtensions.<FinalState>toList(_filter);
+      final int n = _list.indexOf(state);
+      String _xifexpression = null;
+      if ((state instanceof FinalState)) {
+        String _plus = ("_final_" + Integer.valueOf(n));
+        _xifexpression = _plus;
+      } else {
+        String _name = state.getName();
+        _xifexpression = _name;
+      }
+      r.setSimpleName(_xifexpression);
+      QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(state);
+      String _string = _fullyQualifiedName.toString();
+      String _replaceAll = _string.replaceAll(" ", "");
+      r.setName(_replaceAll);
+      r.setSourceElement(state);
+    }
+  }
   
   public ExecutionChoice create(final Choice choice) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(choice);
-    final ExecutionChoice r;
+    final ExecutionChoice _result;
     synchronized (_createCache_create_7) {
       if (_createCache_create_7.containsKey(_cacheKey)) {
         return _createCache_create_7.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionChoice _createExecutionChoice = _sexecFactory.createExecutionChoice();
-      r = _createExecutionChoice;
-      _createCache_create_7.put(_cacheKey, r);
+      _result = _createExecutionChoice;
+      _createCache_create_7.put(_cacheKey, _result);
     }
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(choice, null);
-    if (_operator_notEquals) {
-      {
-        Region _parentRegion = choice.getParentRegion();
-        EList<Vertex> _vertices = _parentRegion.getVertices();
-        Iterable<Choice> _filter = IterableExtensions.<Choice>filter(_vertices, org.yakindu.sct.model.sgraph.Choice.class);
-        List<Choice> _list = IterableExtensions.<Choice>toList(_filter);
-        int _indexOf = _list.indexOf(choice);
-        final int n = _indexOf;
-        String _operator_plus = StringExtensions.operator_plus("_choice", ((Integer)n));
-        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, "_");
-        r.setSimpleName(_operator_plus_1);
-        QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(choice);
-        String _string = _fullyQualifiedName.toString();
-        String _replaceAll = _string.replaceAll(" ", "");
-        r.setName(_replaceAll);
-        r.setSourceElement(choice);
-        SexecFactory _sexecFactory_1 = this.sexecFactory();
-        Sequence _createSequence = _sexecFactory_1.createSequence();
-        r.setReactSequence(_createSequence);
-      }
-    }
-    return r;
+    _init_create_7(_result, choice);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionEntry> _createCache_create_8 = new HashMap<ArrayList<?>,ExecutionEntry>();
+  private final HashMap<ArrayList<?>,ExecutionChoice> _createCache_create_7 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_7(final ExecutionChoice r, final Choice choice) {
+    boolean _notEquals = (!Objects.equal(choice, null));
+    if (_notEquals) {
+      Region _parentRegion = choice.getParentRegion();
+      EList<Vertex> _vertices = _parentRegion.getVertices();
+      Iterable<Choice> _filter = Iterables.<Choice>filter(_vertices, Choice.class);
+      List<Choice> _list = IterableExtensions.<Choice>toList(_filter);
+      final int n = _list.indexOf(choice);
+      String _plus = ("_choice" + Integer.valueOf(n));
+      String _plus_1 = (_plus + "_");
+      r.setSimpleName(_plus_1);
+      QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(choice);
+      String _string = _fullyQualifiedName.toString();
+      String _replaceAll = _string.replaceAll(" ", "");
+      r.setName(_replaceAll);
+      r.setSourceElement(choice);
+      SexecFactory _sexecFactory = this.sexecFactory();
+      Sequence _createSequence = _sexecFactory.createSequence();
+      r.setReactSequence(_createSequence);
+    }
+  }
   
   public ExecutionEntry create(final Entry entry) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(entry);
-    final ExecutionEntry r;
+    final ExecutionEntry _result;
     synchronized (_createCache_create_8) {
       if (_createCache_create_8.containsKey(_cacheKey)) {
         return _createCache_create_8.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionEntry _createExecutionEntry = _sexecFactory.createExecutionEntry();
-      r = _createExecutionEntry;
-      _createCache_create_8.put(_cacheKey, r);
+      _result = _createExecutionEntry;
+      _createCache_create_8.put(_cacheKey, _result);
     }
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(entry, null);
-    if (_operator_notEquals) {
-      {
-        EObject _eContainer = entry.eContainer();
-        final Region region = ((Region) _eContainer);
-        String _name = region.getName();
-        String _firstUpper = StringExtensions.toFirstUpper(_name);
-        final String regionName = _firstUpper;
-        String _xifexpression = null;
-        EObject _eContainer_1 = region.eContainer();
-        if ((_eContainer_1 instanceof org.yakindu.sct.model.sgraph.State)) {
-          EObject _eContainer_2 = region.eContainer();
-          String _name_1 = ((State) _eContainer_2).getName();
-          String _firstUpper_1 = StringExtensions.toFirstUpper(_name_1);
-          _xifexpression = _firstUpper_1;
-        }
-        final String stateName = _xifexpression;
-        String _xifexpression_1 = null;
-        String _name_2 = entry.getName();
-        boolean _isEmpty = _name_2==null?false:_name_2.isEmpty();
-        boolean _operator_not = BooleanExtensions.operator_not(_isEmpty);
-        if (_operator_not) {
-          String _name_3 = entry.getName();
-          _xifexpression_1 = _name_3;
-        } else {
-          _xifexpression_1 = "_entry_Default";
-        }
-        final String entryName = _xifexpression_1;
-        String _xifexpression_2 = null;
-        boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(regionName, null);
-        if (_operator_notEquals_1) {
-          _xifexpression_2 = regionName;
-        } else {
-          _xifexpression_2 = "";
-        }
-        String _operator_plus = StringExtensions.operator_plus(_xifexpression_2, "_");
-        String _xifexpression_3 = null;
-        boolean _operator_notEquals_2 = ObjectExtensions.operator_notEquals(stateName, null);
-        if (_operator_notEquals_2) {
-          _xifexpression_3 = stateName;
-        } else {
-          _xifexpression_3 = "";
-        }
-        String _operator_plus_1 = StringExtensions.operator_plus(_operator_plus, _xifexpression_3);
-        String _operator_plus_2 = StringExtensions.operator_plus(_operator_plus_1, "_");
-        String _operator_plus_3 = StringExtensions.operator_plus(_operator_plus_2, entryName);
-        r.setSimpleName(_operator_plus_3);
-        QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(entry);
-        String _string = _fullyQualifiedName.toString();
-        String _replaceAll = _string.replaceAll(" ", "");
-        r.setName(_replaceAll);
-        r.setSourceElement(entry);
-        SexecFactory _factory = this.sexec.factory();
-        Sequence _createSequence = _factory.createSequence();
-        final Sequence seq = _createSequence;
-        seq.setName("react");
-        String _switchResult = null;
-        EntryKind _kind = entry.getKind();
-        final EntryKind __valOfSwitchOver = _kind;
-        boolean matched = false;
-        if (!matched) {
-          if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.INITIAL)) {
-            matched=true;
-            _switchResult = "initial ";
-          }
-        }
-        if (!matched) {
-          if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.DEEP_HISTORY)) {
-            matched=true;
-            _switchResult = "deep history ";
-          }
-        }
-        if (!matched) {
-          if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,EntryKind.SHALLOW_HISTORY)) {
-            matched=true;
-            _switchResult = "shallow history ";
-          }
-        }
-        if (!matched) {
-          _switchResult = "";
-        }
-        String _operator_plus_4 = StringExtensions.operator_plus("Default react sequence for ", _switchResult);
-        String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, "entry ");
-        String _name_4 = entry.getName();
-        String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, _name_4);
-        seq.setComment(_operator_plus_6);
-        r.setReactSequence(seq);
-      }
-    }
-    return r;
+    _init_create_8(_result, entry);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionRegion> _createCache_create_9 = new HashMap<ArrayList<?>,ExecutionRegion>();
+  private final HashMap<ArrayList<?>,ExecutionEntry> _createCache_create_8 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_8(final ExecutionEntry r, final Entry entry) {
+    boolean _notEquals = (!Objects.equal(entry, null));
+    if (_notEquals) {
+      EObject _eContainer = entry.eContainer();
+      final Region region = ((Region) _eContainer);
+      String _name = region.getName();
+      final String regionName = StringExtensions.toFirstUpper(_name);
+      String _xifexpression = null;
+      EObject _eContainer_1 = region.eContainer();
+      if ((_eContainer_1 instanceof State)) {
+        EObject _eContainer_2 = region.eContainer();
+        String _name_1 = ((State) _eContainer_2).getName();
+        String _firstUpper = StringExtensions.toFirstUpper(_name_1);
+        _xifexpression = _firstUpper;
+      }
+      final String stateName = _xifexpression;
+      String _xifexpression_1 = null;
+      String _name_2 = entry.getName();
+      boolean _isEmpty = _name_2==null?false:_name_2.isEmpty();
+      boolean _not = (!_isEmpty);
+      if (_not) {
+        String _name_3 = entry.getName();
+        _xifexpression_1 = _name_3;
+      } else {
+        _xifexpression_1 = "_entry_Default";
+      }
+      final String entryName = _xifexpression_1;
+      String _xifexpression_2 = null;
+      boolean _notEquals_1 = (!Objects.equal(regionName, null));
+      if (_notEquals_1) {
+        _xifexpression_2 = regionName;
+      } else {
+        _xifexpression_2 = "";
+      }
+      String _plus = (new Function0<String>() {
+        public String apply() {
+          String _xifexpression = null;
+          boolean _notEquals = (!Objects.equal(regionName, null));
+          if (_notEquals) {
+            _xifexpression = regionName;
+          } else {
+            _xifexpression = "";
+          }
+          return _xifexpression;
+        }
+      }.apply() + "_");
+      String _xifexpression_3 = null;
+      boolean _notEquals_2 = (!Objects.equal(stateName, null));
+      if (_notEquals_2) {
+        _xifexpression_3 = stateName;
+      } else {
+        _xifexpression_3 = "";
+      }
+      String _plus_1 = (_plus + new Function0<Object>() {
+        public Object apply() {
+          String _xifexpression = null;
+          boolean _notEquals = (!Objects.equal(stateName, null));
+          if (_notEquals) {
+            _xifexpression = stateName;
+          } else {
+            _xifexpression = "";
+          }
+          return _xifexpression;
+        }
+      }.apply());
+      String _plus_2 = (_plus_1 + "_");
+      String _plus_3 = (_plus_2 + entryName);
+      r.setSimpleName(_plus_3);
+      QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(entry);
+      String _string = _fullyQualifiedName.toString();
+      String _replaceAll = _string.replaceAll(" ", "");
+      r.setName(_replaceAll);
+      r.setSourceElement(entry);
+      SexecFactory _factory = this.sexec.factory();
+      final Sequence seq = _factory.createSequence();
+      seq.setName("react");
+      String _switchResult = null;
+      EntryKind _kind = entry.getKind();
+      final EntryKind _switchValue = _kind;
+      boolean _matched = false;
+      if (!_matched) {
+        if (Objects.equal(_switchValue,EntryKind.INITIAL)) {
+          _matched=true;
+          _switchResult = "initial ";
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(_switchValue,EntryKind.DEEP_HISTORY)) {
+          _matched=true;
+          _switchResult = "deep history ";
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(_switchValue,EntryKind.SHALLOW_HISTORY)) {
+          _matched=true;
+          _switchResult = "shallow history ";
+        }
+      }
+      if (!_matched) {
+        _switchResult = "";
+      }
+      String _plus_4 = ("Default react sequence for " + _switchResult);
+      String _plus_5 = (_plus_4 + "entry ");
+      String _name_4 = entry.getName();
+      String _plus_6 = (_plus_5 + _name_4);
+      seq.setComment(_plus_6);
+      r.setReactSequence(seq);
+    }
+  }
   
   public ExecutionRegion create(final Region region) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(region);
-    final ExecutionRegion r;
+    final ExecutionRegion _result;
     synchronized (_createCache_create_9) {
       if (_createCache_create_9.containsKey(_cacheKey)) {
         return _createCache_create_9.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionRegion _createExecutionRegion = _sexecFactory.createExecutionRegion();
-      r = _createExecutionRegion;
-      _createCache_create_9.put(_cacheKey, r);
+      _result = _createExecutionRegion;
+      _createCache_create_9.put(_cacheKey, _result);
     }
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(region, null);
-    if (_operator_notEquals) {
-      {
-        String _name = region.getName();
-        boolean _isEmpty = Strings.isEmpty(_name);
-        if (_isEmpty) {
-          {
-            EObject _eContainer = region.eContainer();
-            final CompositeElement container = ((CompositeElement) _eContainer);
-            EList<Region> _regions = container.getRegions();
-            int _indexOf = _regions.indexOf(region);
-            final int index = _indexOf;
-            String _operator_plus = StringExtensions.operator_plus("region", ((Integer)index));
-            r.setName(_operator_plus);
-          }
-        } else {
-          String _name_1 = region.getName();
-          r.setName(_name_1);
-        }
-        r.setSourceElement(region);
-      }
-    }
-    return r;
+    _init_create_9(_result, region);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,Check> _createCache_createCheck = new HashMap<ArrayList<?>,Check>();
+  private final HashMap<ArrayList<?>,ExecutionRegion> _createCache_create_9 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_9(final ExecutionRegion r, final Region region) {
+    boolean _notEquals = (!Objects.equal(region, null));
+    if (_notEquals) {
+      String _name = region.getName();
+      boolean _isEmpty = Strings.isEmpty(_name);
+      if (_isEmpty) {
+        EObject _eContainer = region.eContainer();
+        final CompositeElement container = ((CompositeElement) _eContainer);
+        EList<Region> _regions = container.getRegions();
+        final int index = _regions.indexOf(region);
+        String _plus = ("region" + Integer.valueOf(index));
+        r.setName(_plus);
+      } else {
+        String _name_1 = region.getName();
+        r.setName(_name_1);
+      }
+      r.setSourceElement(region);
+    }
+  }
   
   public Check createCheck(final ReactionTrigger tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
-    final Check r;
+    final Check _result;
     synchronized (_createCache_createCheck) {
       if (_createCache_createCheck.containsKey(_cacheKey)) {
         return _createCache_createCheck.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       Check _createCheck = _sexecFactory.createCheck();
-      r = _createCheck;
-      _createCache_createCheck.put(_cacheKey, r);
+      _result = _createCheck;
+      _createCache_createCheck.put(_cacheKey, _result);
     }
+    _init_createCheck(_result, tr);
+    return _result;
+  }
+  
+  private final HashMap<ArrayList<?>,Check> _createCache_createCheck = CollectionLiterals.newHashMap();
+  
+  private void _init_createCheck(final Check r, final ReactionTrigger tr) {
     Reaction _reaction = this.sce.reaction(tr);
     String _id = this.sce.id(_reaction);
     r.setName(_id);
-    return r;
   }
-  
-  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_10 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
   
   public org.yakindu.sct.model.sexec.Reaction create(final Transition tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
-    final org.yakindu.sct.model.sexec.Reaction r;
+    final org.yakindu.sct.model.sexec.Reaction _result;
     synchronized (_createCache_create_10) {
       if (_createCache_create_10.containsKey(_cacheKey)) {
         return _createCache_create_10.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
-      r = _createReaction;
-      _createCache_create_10.put(_cacheKey, r);
+      _result = _createReaction;
+      _createCache_create_10.put(_cacheKey, _result);
     }
-    {
-      String _id = this.sce.id(tr);
-      r.setName(_id);
-      r.setTransition(true);
-      r.setSourceElement(tr);
-    }
-    return r;
+    _init_create_10(_result, tr);
+    return _result;
   }
   
-  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_11 = new HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction>();
+  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_10 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_10(final org.yakindu.sct.model.sexec.Reaction r, final Transition tr) {
+    String _id = this.sce.id(tr);
+    r.setName(_id);
+    r.setTransition(true);
+    r.setSourceElement(tr);
+  }
   
   public org.yakindu.sct.model.sexec.Reaction create(final LocalReaction lr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
-    final org.yakindu.sct.model.sexec.Reaction r;
+    final org.yakindu.sct.model.sexec.Reaction _result;
     synchronized (_createCache_create_11) {
       if (_createCache_create_11.containsKey(_cacheKey)) {
         return _createCache_create_11.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
-      r = _createReaction;
-      _createCache_create_11.put(_cacheKey, r);
+      _result = _createReaction;
+      _createCache_create_11.put(_cacheKey, _result);
     }
-    {
-      String _id = this.sce.id(lr);
-      r.setName(_id);
-      r.setTransition(false);
-    }
-    return r;
+    _init_create_11(_result, lr);
+    return _result;
+  }
+  
+  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_11 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_11(final org.yakindu.sct.model.sexec.Reaction r, final LocalReaction lr) {
+    String _id = this.sce.id(lr);
+    r.setName(_id);
+    r.setTransition(false);
   }
   
   public CheckRef newRef(final Check check) {
     CheckRef _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      CheckRef _createCheckRef = _sexecFactory.createCheckRef();
-      final CheckRef r = _createCheckRef;
+      final CheckRef r = _sexecFactory.createCheckRef();
       r.setCheck(check);
       _xblockexpression = (r);
     }
@@ -522,8 +579,7 @@ public class SexecElementMapping {
     Call _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      Call _createCall = _sexecFactory.createCall();
-      final Call r = _createCall;
+      final Call r = _sexecFactory.createCall();
       r.setStep(step);
       _xblockexpression = (r);
     }
@@ -534,8 +590,7 @@ public class SexecElementMapping {
     ScheduleTimeEvent _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      ScheduleTimeEvent _createScheduleTimeEvent = _sexecFactory.createScheduleTimeEvent();
-      final ScheduleTimeEvent r = _createScheduleTimeEvent;
+      final ScheduleTimeEvent r = _sexecFactory.createScheduleTimeEvent();
       r.setTimeEvent(te);
       r.setTimeValue(timeValue);
       _xblockexpression = (r);
@@ -547,32 +602,35 @@ public class SexecElementMapping {
     UnscheduleTimeEvent _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
-      UnscheduleTimeEvent _createUnscheduleTimeEvent = _sexecFactory.createUnscheduleTimeEvent();
-      final UnscheduleTimeEvent r = _createUnscheduleTimeEvent;
+      final UnscheduleTimeEvent r = _sexecFactory.createUnscheduleTimeEvent();
       r.setTimeEvent(te);
       _xblockexpression = (r);
     }
     return _xblockexpression;
   }
   
-  private final HashMap<ArrayList<?>,TimeEvent> _createCache_createDerivedEvent = new HashMap<ArrayList<?>,TimeEvent>();
-  
   public TimeEvent createDerivedEvent(final TimeEventSpec tes) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tes);
-    final TimeEvent r;
+    final TimeEvent _result;
     synchronized (_createCache_createDerivedEvent) {
       if (_createCache_createDerivedEvent.containsKey(_cacheKey)) {
         return _createCache_createDerivedEvent.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       TimeEvent _createTimeEvent = _sexecFactory.createTimeEvent();
-      r = _createTimeEvent;
-      _createCache_createDerivedEvent.put(_cacheKey, r);
+      _result = _createTimeEvent;
+      _createCache_createDerivedEvent.put(_cacheKey, _result);
     }
+    _init_createDerivedEvent(_result, tes);
+    return _result;
+  }
+  
+  private final HashMap<ArrayList<?>,TimeEvent> _createCache_createDerivedEvent = CollectionLiterals.newHashMap();
+  
+  private void _init_createDerivedEvent(final TimeEvent r, final TimeEventSpec tes) {
     TimeEventType _type = tes.getType();
-    boolean _operator_equals = ObjectExtensions.operator_equals(_type, TimeEventType.EVERY);
-    r.setPeriodic(_operator_equals);
-    return r;
+    boolean _equals = Objects.equal(_type, TimeEventType.EVERY);
+    r.setPeriodic(_equals);
   }
   
   protected Expression _raised(final EventSpec e) {
@@ -580,15 +638,12 @@ public class SexecElementMapping {
   }
   
   protected Expression _raised(final RegularEventSpec e) {
-    {
-      StextFactory _factory = this.stext.factory();
-      ElementReferenceExpression _createElementReferenceExpression = _factory.createElementReferenceExpression();
-      final ElementReferenceExpression r = _createElementReferenceExpression;
-      EObject _eContainer = e.eContainer();
-      NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(e, _eContainer);
-      r.setReference(_resolveRegularEventSpec);
-      return r;
-    }
+    StextFactory _factory = this.stext.factory();
+    final ElementReferenceExpression r = _factory.createElementReferenceExpression();
+    EObject _eContainer = e.eContainer();
+    NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(e, _eContainer);
+    r.setReference(_resolveRegularEventSpec);
+    return r;
   }
   
   protected NamedElement _resolveRegularEventSpec(final Object o, final Object context) {
@@ -598,8 +653,8 @@ public class SexecElementMapping {
   protected NamedElement _resolveRegularEventSpec(final RegularEventSpec re, final Object context) {
     NamedElement _xifexpression = null;
     Expression _event = re.getEvent();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_event, null);
-    if (_operator_notEquals) {
+    boolean _notEquals = (!Objects.equal(_event, null));
+    if (_notEquals) {
       Expression _event_1 = re.getEvent();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(_event_1, re);
       _xifexpression = _resolveRegularEventSpec;
@@ -610,8 +665,8 @@ public class SexecElementMapping {
   protected NamedElement _resolveRegularEventSpec(final FeatureCall fc, final Object context) {
     NamedElement _xifexpression = null;
     EObject _feature = fc.getFeature();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_feature, null);
-    if (_operator_notEquals) {
+    boolean _notEquals = (!Objects.equal(_feature, null));
+    if (_notEquals) {
       EObject _feature_1 = fc.getFeature();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(_feature_1, fc);
       _xifexpression = _resolveRegularEventSpec;
@@ -622,8 +677,8 @@ public class SexecElementMapping {
   protected NamedElement _resolveRegularEventSpec(final ElementReferenceExpression ter, final Object context) {
     NamedElement _xifexpression = null;
     EObject _reference = ter.getReference();
-    boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_reference, null);
-    if (_operator_notEquals) {
+    boolean _notEquals = (!Objects.equal(_reference, null));
+    if (_notEquals) {
       EObject _reference_1 = ter.getReference();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(_reference_1, ter);
       _xifexpression = _resolveRegularEventSpec;
@@ -637,56 +692,41 @@ public class SexecElementMapping {
   }
   
   protected Expression _raised(final TimeEventSpec e) {
-    {
-      StextFactory _factory = this.stext.factory();
-      ElementReferenceExpression _createElementReferenceExpression = _factory.createElementReferenceExpression();
-      final ElementReferenceExpression r = _createElementReferenceExpression;
-      TimeEvent _createDerivedEvent = this.createDerivedEvent(e);
-      r.setReference(_createDerivedEvent);
-      return r;
-    }
+    StextFactory _factory = this.stext.factory();
+    final ElementReferenceExpression r = _factory.createElementReferenceExpression();
+    TimeEvent _createDerivedEvent = this.createDerivedEvent(e);
+    r.setReference(_createDerivedEvent);
+    return r;
   }
   
   protected Expression _raised(final OnCycleEvent e) {
-    {
-      StextFactory _factory = this.stext.factory();
-      PrimitiveValueExpression _createPrimitiveValueExpression = _factory.createPrimitiveValueExpression();
-      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
-      StextFactory _factory_1 = this.stext.factory();
-      BoolLiteral _createBoolLiteral = _factory_1.createBoolLiteral();
-      final BoolLiteral boolLit = _createBoolLiteral;
-      boolLit.setValue(true);
-      r.setValue(boolLit);
-      return r;
-    }
+    StextFactory _factory = this.stext.factory();
+    final PrimitiveValueExpression r = _factory.createPrimitiveValueExpression();
+    StextFactory _factory_1 = this.stext.factory();
+    final BoolLiteral boolLit = _factory_1.createBoolLiteral();
+    boolLit.setValue(true);
+    r.setValue(boolLit);
+    return r;
   }
   
   protected Expression _raised(final AlwaysEvent e) {
-    {
-      StextFactory _factory = this.stext.factory();
-      PrimitiveValueExpression _createPrimitiveValueExpression = _factory.createPrimitiveValueExpression();
-      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
-      StextFactory _factory_1 = this.stext.factory();
-      BoolLiteral _createBoolLiteral = _factory_1.createBoolLiteral();
-      final BoolLiteral boolLit = _createBoolLiteral;
-      boolLit.setValue(true);
-      r.setValue(boolLit);
-      return r;
-    }
+    StextFactory _factory = this.stext.factory();
+    final PrimitiveValueExpression r = _factory.createPrimitiveValueExpression();
+    StextFactory _factory_1 = this.stext.factory();
+    final BoolLiteral boolLit = _factory_1.createBoolLiteral();
+    boolLit.setValue(true);
+    r.setValue(boolLit);
+    return r;
   }
   
   protected Expression _raised(final DefaultEvent e) {
-    {
-      StextFactory _factory = this.stext.factory();
-      PrimitiveValueExpression _createPrimitiveValueExpression = _factory.createPrimitiveValueExpression();
-      final PrimitiveValueExpression r = _createPrimitiveValueExpression;
-      StextFactory _factory_1 = this.stext.factory();
-      BoolLiteral _createBoolLiteral = _factory_1.createBoolLiteral();
-      final BoolLiteral boolLit = _createBoolLiteral;
-      boolLit.setValue(true);
-      r.setValue(boolLit);
-      return r;
-    }
+    StextFactory _factory = this.stext.factory();
+    final PrimitiveValueExpression r = _factory.createPrimitiveValueExpression();
+    StextFactory _factory_1 = this.stext.factory();
+    final BoolLiteral boolLit = _factory_1.createBoolLiteral();
+    boolLit.setValue(true);
+    r.setValue(boolLit);
+    return r;
   }
   
   public SexecFactory sexecFactory() {
@@ -698,54 +738,49 @@ public class SexecElementMapping {
   }
   
   public Scope create(final Scope scope) {
-    if ((scope instanceof InterfaceScope)) {
+    if (scope instanceof InterfaceScope) {
       return _create((InterfaceScope)scope);
-    } else if ((scope instanceof Scope)) {
-      return _create((Scope)scope);
+    } else if (scope != null) {
+      return _create(scope);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(scope).toString());
+        Arrays.<Object>asList(scope).toString());
     }
   }
   
   public Expression raised(final EventSpec e) {
-    if ((e instanceof AlwaysEvent)) {
+    if (e instanceof AlwaysEvent) {
       return _raised((AlwaysEvent)e);
-    } else if ((e instanceof DefaultEvent)) {
+    } else if (e instanceof DefaultEvent) {
       return _raised((DefaultEvent)e);
-    } else if ((e instanceof OnCycleEvent)) {
+    } else if (e instanceof OnCycleEvent) {
       return _raised((OnCycleEvent)e);
-    } else if ((e instanceof RegularEventSpec)) {
+    } else if (e instanceof RegularEventSpec) {
       return _raised((RegularEventSpec)e);
-    } else if ((e instanceof TimeEventSpec)) {
+    } else if (e instanceof TimeEventSpec) {
       return _raised((TimeEventSpec)e);
-    } else if ((e instanceof EventSpec)) {
-      return _raised((EventSpec)e);
+    } else if (e != null) {
+      return _raised(e);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(e).toString());
+        Arrays.<Object>asList(e).toString());
     }
   }
   
   public NamedElement resolveRegularEventSpec(final Object ed, final Object context) {
-    if ((ed instanceof EventDefinition)
-         && (context instanceof Object)) {
-      return _resolveRegularEventSpec((EventDefinition)ed, (Object)context);
-    } else if ((ed instanceof ElementReferenceExpression)
-         && (context instanceof Object)) {
-      return _resolveRegularEventSpec((ElementReferenceExpression)ed, (Object)context);
-    } else if ((ed instanceof FeatureCall)
-         && (context instanceof Object)) {
-      return _resolveRegularEventSpec((FeatureCall)ed, (Object)context);
-    } else if ((ed instanceof RegularEventSpec)
-         && (context instanceof Object)) {
-      return _resolveRegularEventSpec((RegularEventSpec)ed, (Object)context);
-    } else if ((ed instanceof Object)
-         && (context instanceof Object)) {
-      return _resolveRegularEventSpec((Object)ed, (Object)context);
+    if (ed instanceof EventDefinition) {
+      return _resolveRegularEventSpec((EventDefinition)ed, context);
+    } else if (ed instanceof ElementReferenceExpression) {
+      return _resolveRegularEventSpec((ElementReferenceExpression)ed, context);
+    } else if (ed instanceof FeatureCall) {
+      return _resolveRegularEventSpec((FeatureCall)ed, context);
+    } else if (ed instanceof RegularEventSpec) {
+      return _resolveRegularEventSpec((RegularEventSpec)ed, context);
+    } else if (ed != null) {
+      return _resolveRegularEventSpec(ed, context);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        java.util.Arrays.<Object>asList(ed, context).toString());
+        Arrays.<Object>asList(ed, context).toString());
     }
   }
 }

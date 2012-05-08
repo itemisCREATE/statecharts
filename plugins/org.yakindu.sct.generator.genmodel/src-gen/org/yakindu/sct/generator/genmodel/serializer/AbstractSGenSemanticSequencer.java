@@ -111,9 +111,6 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     value=BOOL
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_BoolLiteral(EObject context, BoolLiteral semanticObject) {
 		if(errorAcceptor != null) {
@@ -130,10 +127,6 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (type=[FeatureType|ID] parameterValues+=FeatureParameterValue*)
-	 *
-	 * Features:
-	 *    type[1, 1]
-	 *    parameterValues[0, *]
 	 */
 	protected void sequence_FeatureConfiguration(EObject context, FeatureConfiguration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -143,10 +136,6 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (parameter=[FeatureParameter|ID] expression=Literal)
-	 *
-	 * Features:
-	 *    parameter[1, 1]
-	 *    expression[1, 1]
 	 */
 	protected void sequence_FeatureParameterValue(EObject context, FeatureParameterValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -156,11 +145,6 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (contentType=ID elementRef=[EObject|QID] features+=FeatureConfiguration*)
-	 *
-	 * Features:
-	 *    elementRef[1, 1]
-	 *    features[0, *]
-	 *    contentType[1, 1]
 	 */
 	protected void sequence_GeneratorEntry(EObject context, GeneratorEntry semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -170,10 +154,6 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     (generatorId=QID entries+=GeneratorEntry*)
-	 *
-	 * Features:
-	 *    entries[0, *]
-	 *    generatorId[1, 1]
 	 */
 	protected void sequence_GeneratorModel(EObject context, GeneratorModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -183,9 +163,6 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     value=INT
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_IntLiteral(EObject context, IntLiteral semanticObject) {
 		if(errorAcceptor != null) {
@@ -202,9 +179,6 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     value=FLOAT
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_RealLiteral(EObject context, RealLiteral semanticObject) {
 		if(errorAcceptor != null) {
@@ -221,9 +195,6 @@ public class AbstractSGenSemanticSequencer extends AbstractSemanticSequencer {
 	/**
 	 * Constraint:
 	 *     value=STRING
-	 *
-	 * Features:
-	 *    value[1, 1]
 	 */
 	protected void sequence_StringLiteral(EObject context, StringLiteral semanticObject) {
 		if(errorAcceptor != null) {

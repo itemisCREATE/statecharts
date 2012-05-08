@@ -8,6 +8,8 @@ import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;
 
+import org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator;
+
 /**
  * This class was generated. Customizations should only happen in a newly
  * introduced subclass. 
@@ -16,12 +18,12 @@ public class SGenExecutableExtensionFactory extends AbstractGuiceAwareExecutable
 
 	@Override
 	protected Bundle getBundle() {
-		return org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator.getInstance().getBundle();
+		return SGenActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator.getInstance().getInjector("org.yakindu.sct.generator.genmodel.SGen");
+		return SGenActivator.getInstance().getInjector(SGenActivator.ORG_YAKINDU_SCT_GENERATOR_GENMODEL_SGEN);
 	}
 	
 }

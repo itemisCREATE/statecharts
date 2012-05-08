@@ -7,7 +7,6 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 
 @SuppressWarnings("all")
 public class StextExtensions {
-  
   public StextFactory factory() {
     return StextFactory.eINSTANCE;
   }
@@ -16,8 +15,7 @@ public class StextExtensions {
     LogicalOrExpression _xblockexpression = null;
     {
       StextFactory _factory = this.factory();
-      LogicalOrExpression _createLogicalOrExpression = _factory.createLogicalOrExpression();
-      final LogicalOrExpression or = _createLogicalOrExpression;
+      final LogicalOrExpression or = _factory.createLogicalOrExpression();
       or.setLeftOperand(left);
       or.setRightOperand(right);
       _xblockexpression = (or);
@@ -29,8 +27,7 @@ public class StextExtensions {
     LogicalAndExpression _xblockexpression = null;
     {
       StextFactory _factory = this.factory();
-      LogicalAndExpression _createLogicalAndExpression = _factory.createLogicalAndExpression();
-      final LogicalAndExpression or = _createLogicalAndExpression;
+      final LogicalAndExpression or = _factory.createLogicalAndExpression();
       or.setLeftOperand(left);
       or.setRightOperand(right);
       _xblockexpression = (or);

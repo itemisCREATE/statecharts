@@ -19,7 +19,6 @@ import org.yakindu.sct.model.sgraph.RegularState;
 
 @SuppressWarnings("all")
 public class TraceExtensions {
-  
   @Inject
   private SexecExtensions sexec;
   
@@ -38,8 +37,7 @@ public class TraceExtensions {
     ReactionFired _xblockexpression = null;
     {
       SexecFactory _factory = this.sexec.factory();
-      ReactionFired _createReactionFired = _factory.createReactionFired();
-      final ReactionFired rf = _createReactionFired;
+      final ReactionFired rf = _factory.createReactionFired();
       rf.setReaction(r);
       _xblockexpression = (rf);
     }
@@ -50,8 +48,7 @@ public class TraceExtensions {
     TraceNodeExecuted _xblockexpression = null;
     {
       SexecFactory _factory = this.sexec.factory();
-      TraceNodeExecuted _createTraceNodeExecuted = _factory.createTraceNodeExecuted();
-      final TraceNodeExecuted t = _createTraceNodeExecuted;
+      final TraceNodeExecuted t = _factory.createTraceNodeExecuted();
       t.setNode(node);
       _xblockexpression = (t);
     }
@@ -62,8 +59,7 @@ public class TraceExtensions {
     TraceStateEntered _xblockexpression = null;
     {
       SexecFactory _factory = this.sexec.factory();
-      TraceStateEntered _createTraceStateEntered = _factory.createTraceStateEntered();
-      final TraceStateEntered t = _createTraceStateEntered;
+      final TraceStateEntered t = _factory.createTraceStateEntered();
       t.setState(state);
       _xblockexpression = (t);
     }
@@ -74,16 +70,15 @@ public class TraceExtensions {
     TraceStateExited _xblockexpression = null;
     {
       SexecFactory _factory = this.sexec.factory();
-      TraceStateExited _createTraceStateExited = _factory.createTraceStateExited();
-      final TraceStateExited t = _createTraceStateExited;
+      final TraceStateExited t = _factory.createTraceStateExited();
       t.setState(state);
       _xblockexpression = (t);
     }
     return _xblockexpression;
   }
   
-  public Boolean traceStateExited(final Sequence seq, final ExecutionState state) {
-    Boolean _xifexpression = null;
+  public boolean traceStateExited(final Sequence seq, final ExecutionState state) {
+    boolean _xifexpression = false;
     boolean _isAddTraceSteps = this.isAddTraceSteps();
     if (_isAddTraceSteps) {
       EList<Step> _steps = seq.getSteps();
@@ -94,12 +89,12 @@ public class TraceExtensions {
     return _xifexpression;
   }
   
-  public Boolean traceStateExited(final Sequence seq, final RegularState state) {
-    Boolean _xifexpression = null;
+  public boolean traceStateExited(final Sequence seq, final RegularState state) {
+    boolean _xifexpression = false;
     boolean _isAddTraceSteps = this.isAddTraceSteps();
     if (_isAddTraceSteps) {
       ExecutionState _create = this.mapping.create(state);
-      Boolean _traceStateExited = this.traceStateExited(seq, _create);
+      boolean _traceStateExited = this.traceStateExited(seq, _create);
       _xifexpression = _traceStateExited;
     }
     return _xifexpression;

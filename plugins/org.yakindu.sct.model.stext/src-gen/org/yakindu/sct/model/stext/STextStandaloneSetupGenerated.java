@@ -39,6 +39,5 @@ public class STextStandaloneSetupGenerated implements ISetup {
 
 
 
-
 	}
 }

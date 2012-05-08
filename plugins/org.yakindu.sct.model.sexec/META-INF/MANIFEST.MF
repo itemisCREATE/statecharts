@@ -13,10 +13,8 @@ Export-Package: org.yakindu.sct.model.sexec,
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
- com.google.collect,
  com.google.inject,
  org.eclipse.xtext.xbase.lib,
- org.eclipse.xtext.xtend2.lib,
  org.eclipse.xtext,
  org.yakindu.sct.model.stext
 Bundle-ActivationPolicy: lazy

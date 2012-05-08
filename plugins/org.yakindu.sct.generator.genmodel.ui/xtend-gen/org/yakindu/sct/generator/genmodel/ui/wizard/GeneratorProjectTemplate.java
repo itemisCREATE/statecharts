@@ -1,11 +1,10 @@
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
+import com.google.common.base.Objects;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.Collections;
 import java.util.Map;
 import org.apache.commons.lang.StringEscapeUtils;
@@ -17,7 +16,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -27,11 +25,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
-import org.eclipse.xtext.xtend2.lib.StringConcatenation;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.yakindu.sct.generator.genmodel.ui.wizard.GeneratorType;
 import org.yakindu.sct.generator.genmodel.ui.wizard.ProjectData;
 import org.yakindu.sct.model.sgen.FeatureParameter;
@@ -40,9 +35,11 @@ import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
 import org.yakindu.sct.model.sgen.ParameterTypes;
 import org.yakindu.sct.model.sgen.SGenFactory;
 
+/**
+ * @author holger willebrandt - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class GeneratorProjectTemplate {
-  
   private IProgressMonitor monitor;
   
   public IProgressMonitor setMonitor(final IProgressMonitor monitor) {
@@ -50,137 +47,130 @@ public class GeneratorProjectTemplate {
     return _monitor;
   }
   
-  public void generate(final ProjectData data) throws IOException, UnsupportedEncodingException, CoreException {
-    {
-      this.monitor.beginTask("Create YAKINDU Xpand Generator Project", 16);
-      IWorkspace _workspace = ResourcesPlugin.getWorkspace();
-      IWorkspaceRoot _root = _workspace.getRoot();
-      String _projectName = data.getProjectName();
-      IProject _project = _root.getProject(_projectName);
-      final IProject project = _project;
-      SubProgressMonitor _sub = this.sub(this.monitor);
-      project.create(_sub);
-      SubProgressMonitor _sub_1 = this.sub(this.monitor);
-      project.open(_sub_1);
-      this.monitor.worked(1);
-      this.createFolder(project, "src");
-      GeneratorType _generatorType = data.getGeneratorType();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_generatorType, GeneratorType.Xtend);
-      if (_operator_equals) {
-        this.createFolder(project, "xtend-gen");
-      }
-      IFile _file = project.getFile(".settings/org.eclipse.core.resources.prefs");
-      String _encoding = ResourcesPlugin.getEncoding();
-      StringConcatenation _projectSettings = this.projectSettings(data, _encoding);
-      this.write(_file, _projectSettings);
-      IFile _file_1 = project.getFile(".settings/org.eclipse.jdt.core.prefs");
-      StringConcatenation _jdtSettings = this.jdtSettings(data);
-      this.write(_file_1, _jdtSettings);
-      GeneratorType _generatorType_1 = data.getGeneratorType();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_generatorType_1, GeneratorType.Java);
-      if (_operator_notEquals) {
-        IFile _file_2 = project.getFile(".settings/org.eclipse.xtend.shared.ui.prefs");
-        StringConcatenation _xpandSettings = this.xpandSettings(data);
-        this.write(_file_2, _xpandSettings);
-      }
-      IFile _file_3 = project.getFile("build.properties");
-      StringConcatenation _buildProperties = this.buildProperties(data);
-      this.write(_file_3, _buildProperties);
-      IFile _file_4 = project.getFile("META-INF/MANIFEST.MF");
-      StringConcatenation _manifest = this.manifest(data);
-      this.write(_file_4, _manifest);
-      boolean _isPluginExport = data.isPluginExport();
-      if (_isPluginExport) {
-        {
+  public Object generate(final ProjectData data) {
+    try {
+      Object _xblockexpression = null;
+      {
+        this.monitor.beginTask("Create YAKINDU Xpand Generator Project", 16);
+        IWorkspace _workspace = ResourcesPlugin.getWorkspace();
+        IWorkspaceRoot _root = _workspace.getRoot();
+        final IProject project = _root.getProject(data.projectName);
+        SubProgressMonitor _sub = this.sub(this.monitor);
+        project.create(_sub);
+        SubProgressMonitor _sub_1 = this.sub(this.monitor);
+        project.open(_sub_1);
+        this.monitor.worked(1);
+        this.createFolder(project, "src");
+        boolean _equals = Objects.equal(data.generatorType, GeneratorType.Xtend);
+        if (_equals) {
+          this.createFolder(project, "xtend-gen");
+        }
+        IFile _file = project.getFile(".settings/org.eclipse.core.resources.prefs");
+        String _encoding = ResourcesPlugin.getEncoding();
+        CharSequence _projectSettings = this.projectSettings(data, _encoding);
+        this.write(_file, _projectSettings);
+        IFile _file_1 = project.getFile(".settings/org.eclipse.jdt.core.prefs");
+        CharSequence _jdtSettings = this.jdtSettings(data);
+        this.write(_file_1, _jdtSettings);
+        boolean _notEquals = (!Objects.equal(data.generatorType, GeneratorType.Java));
+        if (_notEquals) {
+          IFile _file_2 = project.getFile(".settings/org.eclipse.xtend.shared.ui.prefs");
+          CharSequence _xpandSettings = this.xpandSettings(data);
+          this.write(_file_2, _xpandSettings);
+        }
+        IFile _file_3 = project.getFile("build.properties");
+        CharSequence _buildProperties = this.buildProperties(data);
+        this.write(_file_3, _buildProperties);
+        IFile _file_4 = project.getFile("META-INF/MANIFEST.MF");
+        CharSequence _manifest = this.manifest(data);
+        this.write(_file_4, _manifest);
+        if (data.pluginExport) {
           IFile _file_5 = project.getFile("plugin.xml");
-          StringConcatenation _plugin = this.plugin(data);
+          CharSequence _plugin = this.plugin(data);
           this.write(_file_5, _plugin);
-          GeneratorType _generatorType_2 = data.getGeneratorType();
-          boolean _operator_equals_1 = ObjectExtensions.operator_equals(_generatorType_2, GeneratorType.Xpand);
-          if (_operator_equals_1) {
-            String _generatorClass = data.getGeneratorClass();
-            String _javaFilename = this.javaFilename(_generatorClass);
-            String _operator_plus = StringExtensions.operator_plus("src/", _javaFilename);
-            IFile _file_6 = project.getFile(_operator_plus);
-            StringConcatenation _xpandGenerator = this.xpandGenerator(data);
+          boolean _equals_1 = Objects.equal(data.generatorType, GeneratorType.Xpand);
+          if (_equals_1) {
+            String _javaFilename = this.javaFilename(data.generatorClass);
+            String _plus = ("src/" + _javaFilename);
+            IFile _file_6 = project.getFile(_plus);
+            CharSequence _xpandGenerator = this.xpandGenerator(data);
             this.write(_file_6, _xpandGenerator);
           }
-          boolean _isTypeLibrary = data.isTypeLibrary();
-          if (_isTypeLibrary) {
-            {
-              this.createFolder(project, "library");
-              IFile _file_7 = project.getFile("library/FeatureTypeLibrary.xmi");
-              FeatureTypeLibrary _featureLibrary = this.featureLibrary(data);
-              this.write(_file_7, _featureLibrary);
-              String _providerClass = this.providerClass(data);
-              String _javaFilename_1 = this.javaFilename(_providerClass);
-              String _operator_plus_1 = StringExtensions.operator_plus("src/", _javaFilename_1);
-              IFile _file_8 = project.getFile(_operator_plus_1);
-              StringConcatenation _defaultProvider = this.defaultProvider(data);
-              this.write(_file_8, _defaultProvider);
-              String _libraryConstantsClass = this.libraryConstantsClass(data);
-              String _javaFilename_2 = this.javaFilename(_libraryConstantsClass);
-              String _operator_plus_2 = StringExtensions.operator_plus("src/", _javaFilename_2);
-              IFile _file_9 = project.getFile(_operator_plus_2);
-              StringConcatenation _libraryConstants = this.libraryConstants(data);
-              this.write(_file_9, _libraryConstants);
-            }
+          if (data.typeLibrary) {
+            this.createFolder(project, "library");
+            IFile _file_7 = project.getFile("library/FeatureTypeLibrary.xmi");
+            FeatureTypeLibrary _featureLibrary = this.featureLibrary(data);
+            this.write(_file_7, _featureLibrary);
+            String _providerClass = this.providerClass(data);
+            String _javaFilename_1 = this.javaFilename(_providerClass);
+            String _plus_1 = ("src/" + _javaFilename_1);
+            IFile _file_8 = project.getFile(_plus_1);
+            CharSequence _defaultProvider = this.defaultProvider(data);
+            this.write(_file_8, _defaultProvider);
+            String _libraryConstantsClass = this.libraryConstantsClass(data);
+            String _javaFilename_2 = this.javaFilename(_libraryConstantsClass);
+            String _plus_2 = ("src/" + _javaFilename_2);
+            IFile _file_9 = project.getFile(_plus_2);
+            CharSequence _libraryConstants = this.libraryConstants(data);
+            this.write(_file_9, _libraryConstants);
           }
         }
-      }
-      IFile _file_10 = project.getFile(".classpath");
-      StringConcatenation _classpath = this.classpath(data);
-      this.write(_file_10, _classpath);
-      IFile _file_11 = project.getFile(".project");
-      StringConcatenation _projectFile = this.projectFile(data);
-      this.write(_file_11, _projectFile);
-      GeneratorType _generatorType_3 = data.getGeneratorType();
-      final GeneratorType __valOfSwitchOver = _generatorType_3;
-      boolean matched = false;
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,GeneratorType.Xpand)) {
-          matched=true;
-          String _targetPackage = this.targetPackage(data);
-          String _asFolder = this.asFolder(_targetPackage);
-          String _operator_plus_3 = StringExtensions.operator_plus("src/", _asFolder);
-          String _operator_plus_4 = StringExtensions.operator_plus(_operator_plus_3, "/");
-          String _templateName = this.templateName(data);
-          String _operator_plus_5 = StringExtensions.operator_plus(_operator_plus_4, _templateName);
-          String _operator_plus_6 = StringExtensions.operator_plus(_operator_plus_5, ".xpt");
-          IFile _file_12 = project.getFile(_operator_plus_6);
-          String _fromMyFolder = this.fromMyFolder("XpandDefaultTemplate.xpt");
-          String _resource = this.resource(_fromMyFolder, "iso-8859-1");
-          this.write(_file_12, _resource);
+        IFile _file_10 = project.getFile(".classpath");
+        CharSequence _classpath = this.classpath(data);
+        this.write(_file_10, _classpath);
+        IFile _file_11 = project.getFile(".project");
+        CharSequence _projectFile = this.projectFile(data);
+        this.write(_file_11, _projectFile);
+        Object _switchResult = null;
+        final GeneratorType _switchValue = data.generatorType;
+        boolean _matched = false;
+        if (!_matched) {
+          if (Objects.equal(_switchValue,GeneratorType.Xpand)) {
+            _matched=true;
+            String _targetPackage = this.targetPackage(data);
+            String _asFolder = this.asFolder(_targetPackage);
+            String _plus_3 = ("src/" + _asFolder);
+            String _plus_4 = (_plus_3 + "/");
+            String _templateName = this.templateName(data);
+            String _plus_5 = (_plus_4 + _templateName);
+            String _plus_6 = (_plus_5 + ".xpt");
+            IFile _file_12 = project.getFile(_plus_6);
+            String _fromMyFolder = this.fromMyFolder("XpandDefaultTemplate.xpt");
+            String _resource = this.resource(_fromMyFolder, "iso-8859-1");
+            this.write(_file_12, _resource);
+          }
         }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,GeneratorType.Xtend)) {
-          matched=true;
-          String _generatorClass_1 = data.getGeneratorClass();
-          String _xtendFilename = this.xtendFilename(_generatorClass_1);
-          String _operator_plus_7 = StringExtensions.operator_plus("src/", _xtendFilename);
-          IFile _file_13 = project.getFile(_operator_plus_7);
-          StringConcatenation _xtendGenerator = this.xtendGenerator(data);
-          this.write(_file_13, _xtendGenerator);
+        if (!_matched) {
+          if (Objects.equal(_switchValue,GeneratorType.Xtend)) {
+            _matched=true;
+            String _xtendFilename = this.xtendFilename(data.generatorClass);
+            String _plus_7 = ("src/" + _xtendFilename);
+            IFile _file_13 = project.getFile(_plus_7);
+            CharSequence _xtendGenerator = this.xtendGenerator(data);
+            this.write(_file_13, _xtendGenerator);
+          }
         }
-      }
-      if (!matched) {
-        if (org.eclipse.xtext.xbase.lib.ObjectExtensions.operator_equals(__valOfSwitchOver,GeneratorType.Java)) {
-          matched=true;
-          String _generatorClass_2 = data.getGeneratorClass();
-          String _javaFilename_3 = this.javaFilename(_generatorClass_2);
-          String _operator_plus_8 = StringExtensions.operator_plus("src/", _javaFilename_3);
-          IFile _file_14 = project.getFile(_operator_plus_8);
-          StringConcatenation _javaGenerator = this.javaGenerator(data);
-          this.write(_file_14, _javaGenerator);
+        if (!_matched) {
+          if (Objects.equal(_switchValue,GeneratorType.Java)) {
+            _matched=true;
+            String _javaFilename_3 = this.javaFilename(data.generatorClass);
+            String _plus_8 = ("src/" + _javaFilename_3);
+            IFile _file_14 = project.getFile(_plus_8);
+            CharSequence _javaGenerator = this.javaGenerator(data);
+            this.write(_file_14, _javaGenerator);
+          }
         }
+        _xblockexpression = (_switchResult);
       }
+      return _xblockexpression;
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
   public String fromMyFolder(final String s) {
-    String _operator_plus = StringExtensions.operator_plus("org/yakindu/sct/generator/genmodel/ui/wizard/", s);
-    return _operator_plus;
+    String _plus = ("org/yakindu/sct/generator/genmodel/ui/wizard/" + s);
+    return _plus;
   }
   
   public SubProgressMonitor sub(final IProgressMonitor mon) {
@@ -190,18 +180,15 @@ public class GeneratorProjectTemplate {
   
   public String templateName(final ProjectData data) {
     String _xifexpression = null;
-    boolean _operator_or = false;
-    boolean _isPluginExport = data.isPluginExport();
-    if (_isPluginExport) {
-      _operator_or = true;
+    boolean _or = false;
+    if (data.pluginExport) {
+      _or = true;
     } else {
-      GeneratorType _generatorType = data.getGeneratorType();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_generatorType, GeneratorType.Xpand);
-      _operator_or = BooleanExtensions.operator_or(_isPluginExport, _operator_notEquals);
+      boolean _notEquals = (!Objects.equal(data.generatorType, GeneratorType.Xpand));
+      _or = (data.pluginExport || _notEquals);
     }
-    if (_operator_or) {
-      String _generatorClass = data.getGeneratorClass();
-      String _simpleName = this.simpleName(_generatorClass);
+    if (_or) {
+      String _simpleName = this.simpleName(data.generatorClass);
       _xifexpression = _simpleName;
     } else {
       _xifexpression = "Main";
@@ -211,10 +198,8 @@ public class GeneratorProjectTemplate {
   
   public String targetPackage(final ProjectData data) {
     String _xifexpression = null;
-    boolean _isPluginExport = data.isPluginExport();
-    if (_isPluginExport) {
-      String _generatorClass = data.getGeneratorClass();
-      String _packageName = this.packageName(_generatorClass);
+    if (data.pluginExport) {
+      String _packageName = this.packageName(data.generatorClass);
       _xifexpression = _packageName;
     } else {
       _xifexpression = "org.yakindu.sct.generator.xpand";
@@ -234,8 +219,8 @@ public class GeneratorProjectTemplate {
   
   public String simpleName(final String s) {
     int _lastIndexOf = s.lastIndexOf(".");
-    int _operator_plus = IntegerExtensions.operator_plus(((Integer)_lastIndexOf), ((Integer)1));
-    String _substring = s.substring(_operator_plus);
+    int _plus = (_lastIndexOf + 1);
+    String _substring = s.substring(_plus);
     return _substring;
   }
   
@@ -246,80 +231,73 @@ public class GeneratorProjectTemplate {
   }
   
   public String providerClass(final ProjectData data) {
-    String _generatorClass = data.getGeneratorClass();
-    String _operator_plus = StringExtensions.operator_plus(_generatorClass, "DefaultValueProvider");
-    return _operator_plus;
+    String _plus = (data.generatorClass + "DefaultValueProvider");
+    return _plus;
   }
   
   public String libraryConstantsClass(final ProjectData data) {
     String _providerClass = this.providerClass(data);
     String _packageName = this.packageName(_providerClass);
-    String _operator_plus = StringExtensions.operator_plus(_packageName, ".IFeatureConstants");
-    return _operator_plus;
+    String _plus = (_packageName + ".IFeatureConstants");
+    return _plus;
   }
   
   public String javaFilename(final String s) {
     String _replaceAll = s.replaceAll("\\.", "/");
-    String _operator_plus = StringExtensions.operator_plus(_replaceAll, ".java");
-    return _operator_plus;
+    String _plus = (_replaceAll + ".java");
+    return _plus;
   }
   
   public String xtendFilename(final String s) {
     String _replaceAll = s.replaceAll("\\.", "/");
-    String _operator_plus = StringExtensions.operator_plus(_replaceAll, ".xtend");
-    return _operator_plus;
+    String _plus = (_replaceAll + ".xtend");
+    return _plus;
   }
   
   public FeatureTypeLibrary featureLibrary(final ProjectData data) {
-    {
-      final SGenFactory factory = SGenFactory.eINSTANCE;
-      FeatureTypeLibrary _createFeatureTypeLibrary = factory.createFeatureTypeLibrary();
-      final FeatureTypeLibrary lib = _createFeatureTypeLibrary;
-      String _generatorName = data.getGeneratorName();
-      lib.setName(_generatorName);
-      FeatureType _createFeatureType = factory.createFeatureType();
-      final FeatureType type = _createFeatureType;
-      type.setName("MyFeature");
-      FeatureParameter _createFeatureParameter = factory.createFeatureParameter();
-      final FeatureParameter parameter = _createFeatureParameter;
-      parameter.setName("MyParameter");
-      parameter.setParameterType(ParameterTypes.STRING);
-      EList<FeatureParameter> _parameters = type.getParameters();
-      _parameters.add(parameter);
-      EList<FeatureType> _types = lib.getTypes();
-      _types.add(type);
-      return lib;
-    }
+    final SGenFactory factory = SGenFactory.eINSTANCE;
+    final FeatureTypeLibrary lib = factory.createFeatureTypeLibrary();
+    lib.setName(data.generatorName);
+    final FeatureType type = factory.createFeatureType();
+    type.setName("MyFeature");
+    final FeatureParameter parameter = factory.createFeatureParameter();
+    parameter.setName("MyParameter");
+    parameter.setParameterType(ParameterTypes.STRING);
+    EList<FeatureParameter> _parameters = type.getParameters();
+    _parameters.add(parameter);
+    EList<FeatureType> _types = lib.getTypes();
+    _types.add(type);
+    return lib;
   }
   
-  public void write(final IFile file, final EObject object) throws IOException {
-    {
+  public void write(final IFile file, final EObject object) {
+    try {
       IPath _fullPath = file.getFullPath();
       String _string = _fullPath.toString();
-      URI _createPlatformResourceURI = URI.createPlatformResourceURI(_string, true);
-      final URI uri = _createPlatformResourceURI;
+      final URI uri = URI.createPlatformResourceURI(_string, true);
       ResourceSetImpl _resourceSetImpl = new ResourceSetImpl();
       final ResourceSetImpl resourceSet = _resourceSetImpl;
-      Resource _createResource = resourceSet.createResource(uri);
-      final Resource resource = _createResource;
+      final Resource resource = resourceSet.createResource(uri);
       EList<EObject> _contents = resource.getContents();
       _contents.add(object);
       Map<Object,Object> _emptyMap = Collections.<Object, Object>emptyMap();
       resource.save(_emptyMap);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public void write(final IFile file, final StringConcatenation content) throws IOException, UnsupportedEncodingException, CoreException {
+  public void write(final IFile file, final CharSequence content) {
     String _string = content.toString();
     this.write(file, _string);
   }
   
-  public void write(final IFile file, final String content) throws IOException, UnsupportedEncodingException, CoreException {
-    {
+  public void write(final IFile file, final String content) {
+    try {
       IContainer _parent = file.getParent();
       boolean _exists = _parent.exists();
-      boolean _operator_not = BooleanExtensions.operator_not(_exists);
-      if (_operator_not) {
+      boolean _not = (!_exists);
+      if (_not) {
         IContainer _parent_1 = file.getParent();
         SubProgressMonitor _sub = this.sub(this.monitor);
         this.createFolderHierarchy(((IFolder) _parent_1), _sub);
@@ -334,59 +312,61 @@ public class GeneratorProjectTemplate {
           SubProgressMonitor _sub_1 = this.sub(this.monitor);
           file.setContents(stream, true, true, _sub_1);
         } else {
-          {
-            SubProgressMonitor _sub_2 = this.sub(this.monitor);
-            final SubProgressMonitor submonitor = _sub_2;
-            file.create(stream, true, submonitor);
-            String _encoding = ResourcesPlugin.getEncoding();
-            file.setCharset(_encoding, submonitor);
-          }
+          final SubProgressMonitor submonitor = this.sub(this.monitor);
+          file.create(stream, true, submonitor);
+          String _encoding = ResourcesPlugin.getEncoding();
+          file.setCharset(_encoding, submonitor);
         }
-      } catch (final Exception e) { 
-        e.printStackTrace();
+      } catch (final Throwable _t) {
+        if (_t instanceof Exception) {
+          final Exception e = (Exception)_t;
+          e.printStackTrace();
+        } else {
+          throw Exceptions.sneakyThrow(_t);
+        }
       } finally {
         stream.close();
       }
       this.monitor.worked(1);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public void createFolder(final IContainer container, final String folderPath) throws CoreException {
-    {
-      Path _path = new Path(folderPath);
-      IFolder _folder = container.getFolder(_path);
-      SubProgressMonitor _sub = this.sub(this.monitor);
-      this.createFolderHierarchy(_folder, _sub);
-      this.monitor.worked(1);
-    }
+  public void createFolder(final IContainer container, final String folderPath) {
+    Path _path = new Path(folderPath);
+    IFolder _folder = container.getFolder(_path);
+    SubProgressMonitor _sub = this.sub(this.monitor);
+    this.createFolderHierarchy(_folder, _sub);
+    this.monitor.worked(1);
   }
   
-  public Object createFolderHierarchy(final IFolder folder, final IProgressMonitor submonitor) throws CoreException {
-    Object _xifexpression = null;
-    boolean _exists = folder.exists();
-    boolean _operator_not = BooleanExtensions.operator_not(_exists);
-    if (_operator_not) {
-      {
-        boolean _operator_and = false;
+  public void createFolderHierarchy(final IFolder folder, final IProgressMonitor submonitor) {
+    try {
+      boolean _exists = folder.exists();
+      boolean _not = (!_exists);
+      if (_not) {
+        boolean _and = false;
         IContainer _parent = folder.getParent();
         boolean _exists_1 = _parent.exists();
-        boolean _operator_not_1 = BooleanExtensions.operator_not(_exists_1);
-        if (!_operator_not_1) {
-          _operator_and = false;
+        boolean _not_1 = (!_exists_1);
+        if (!_not_1) {
+          _and = false;
         } else {
           IContainer _parent_1 = folder.getParent();
           int _type = _parent_1.getType();
-          boolean _operator_equals = ObjectExtensions.operator_equals(((Integer)_type), ((Integer)IResource.FOLDER));
-          _operator_and = BooleanExtensions.operator_and(_operator_not_1, _operator_equals);
+          boolean _equals = (_type == IResource.FOLDER);
+          _and = (_not_1 && _equals);
         }
-        if (_operator_and) {
+        if (_and) {
           IContainer _parent_2 = folder.getParent();
           this.createFolderHierarchy(((IFolder) _parent_2), submonitor);
         }
         folder.create(true, true, this.monitor);
       }
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _xifexpression;
   }
   
   public String escapeForXml(final String s) {
@@ -394,48 +374,51 @@ public class GeneratorProjectTemplate {
     return _escapeXml;
   }
   
-  public String resource(final String path, final String encoding) throws IOException, UnsupportedEncodingException {
-    String _xblockexpression = null;
-    {
-      Thread _currentThread = Thread.currentThread();
-      ClassLoader _contextClassLoader = _currentThread.getContextClassLoader();
-      InputStream _resourceAsStream = _contextClassLoader.getResourceAsStream(path);
-      final InputStream inStream = _resourceAsStream;
-      ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
-      final ByteArrayOutputStream outStream = _byteArrayOutputStream;
-      String _xtrycatchfinallyexpression = null;
-      try {
-        String _xblockexpression_1 = null;
-        {
-          BufferedInputStream _bufferedInputStream = new BufferedInputStream(inStream);
-          final BufferedInputStream buffer = _bufferedInputStream;
-          int result = 0;
-          int _read = buffer.read();
-          int _result = result = _read;
-          int _operator_minus = IntegerExtensions.operator_minus(1);
-          boolean _operator_notEquals = ObjectExtensions.operator_notEquals(((Integer)_result), ((Integer)_operator_minus));
-          Boolean _xwhileexpression = _operator_notEquals;
-          while (_xwhileexpression) {
-            outStream.write(((byte) result));
-            int _read_1 = buffer.read();
-            int _result_1 = result = _read_1;
-            int _operator_minus_1 = IntegerExtensions.operator_minus(1);
-            boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(((Integer)_result_1), ((Integer)_operator_minus_1));
-            _xwhileexpression = _operator_notEquals_1;
+  public String resource(final String path, final String encoding) {
+    try {
+      String _xblockexpression = null;
+      {
+        Thread _currentThread = Thread.currentThread();
+        ClassLoader _contextClassLoader = _currentThread.getContextClassLoader();
+        final InputStream inStream = _contextClassLoader.getResourceAsStream(path);
+        ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
+        final ByteArrayOutputStream outStream = _byteArrayOutputStream;
+        String _xtrycatchfinallyexpression = null;
+        try {
+          String _xblockexpression_1 = null;
+          {
+            BufferedInputStream _bufferedInputStream = new BufferedInputStream(inStream);
+            final BufferedInputStream buffer = _bufferedInputStream;
+            int result = 0;
+            int _read = buffer.read();
+            int _result = result = _read;
+            int _minus = (-1);
+            boolean _notEquals = (_result != _minus);
+            boolean _while = _notEquals;
+            while (_while) {
+              outStream.write(((byte) result));
+              int _read_1 = buffer.read();
+              int _result_1 = result = _read_1;
+              int _minus_1 = (-1);
+              boolean _notEquals_1 = (_result_1 != _minus_1);
+              _while = _notEquals_1;
+            }
+            String _string = outStream.toString(encoding);
+            _xblockexpression_1 = (_string);
           }
-          String _string = outStream.toString(encoding);
-          _xblockexpression_1 = (_string);
+          _xtrycatchfinallyexpression = _xblockexpression_1;
+        } finally {
+          inStream.close();
         }
-        _xtrycatchfinallyexpression = _xblockexpression_1;
-      } finally {
-        inStream.close();
+        _xblockexpression = (_xtrycatchfinallyexpression);
       }
-      _xblockexpression = (_xtrycatchfinallyexpression);
+      return _xblockexpression;
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
     }
-    return _xblockexpression;
   }
   
-  public StringConcatenation projectFile(final ProjectData data) {
+  public CharSequence projectFile(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     _builder.newLine();
@@ -443,8 +426,7 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append("\t");
     _builder.append("<name>");
-    String _projectName = data.getProjectName();
-    _builder.append(_projectName, "	");
+    _builder.append(data.projectName, "	");
     _builder.append("</name>");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -460,9 +442,8 @@ public class GeneratorProjectTemplate {
     _builder.append("<buildSpec>");
     _builder.newLine();
     {
-      GeneratorType _generatorType = data.getGeneratorType();
-      boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_generatorType, GeneratorType.Java);
-      if (_operator_notEquals) {
+      boolean _notEquals = (!Objects.equal(data.generatorType, GeneratorType.Java));
+      if (_notEquals) {
         _builder.append("\t\t");
         _builder.append("<buildCommand>");
         _builder.newLine();
@@ -529,9 +510,8 @@ public class GeneratorProjectTemplate {
     _builder.append("</buildCommand>");
     _builder.newLine();
     {
-      GeneratorType _generatorType_1 = data.getGeneratorType();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_generatorType_1, GeneratorType.Xtend);
-      if (_operator_equals) {
+      boolean _equals = Objects.equal(data.generatorType, GeneratorType.Xtend);
+      if (_equals) {
         _builder.append("\t\t");
         _builder.append("<buildCommand>");
         _builder.newLine();
@@ -565,18 +545,16 @@ public class GeneratorProjectTemplate {
     _builder.append("<nature>org.eclipse.pde.PluginNature</nature>");
     _builder.newLine();
     {
-      GeneratorType _generatorType_2 = data.getGeneratorType();
-      boolean _operator_notEquals_1 = ObjectExtensions.operator_notEquals(_generatorType_2, GeneratorType.Java);
-      if (_operator_notEquals_1) {
+      boolean _notEquals_1 = (!Objects.equal(data.generatorType, GeneratorType.Java));
+      if (_notEquals_1) {
         _builder.append("\t\t");
         _builder.append("<nature>org.eclipse.xtend.shared.ui.xtendXPandNature</nature>");
         _builder.newLine();
       }
     }
     {
-      GeneratorType _generatorType_3 = data.getGeneratorType();
-      boolean _operator_equals_1 = ObjectExtensions.operator_equals(_generatorType_3, GeneratorType.Xtend);
-      if (_operator_equals_1) {
+      boolean _equals_1 = Objects.equal(data.generatorType, GeneratorType.Xtend);
+      if (_equals_1) {
         _builder.append("\t\t");
         _builder.append("<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>");
         _builder.newLine();
@@ -590,16 +568,15 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation classpath(final ProjectData data) {
+  public CharSequence classpath(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     _builder.newLine();
     _builder.append("<classpath>");
     _builder.newLine();
     {
-      GeneratorType _generatorType = data.getGeneratorType();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_generatorType, GeneratorType.Xtend);
-      if (_operator_equals) {
+      boolean _equals = Objects.equal(data.generatorType, GeneratorType.Xtend);
+      if (_equals) {
         _builder.append("\t");
         _builder.append("<classpathentry kind=\"src\" path=\"xtend-gen\"/>");
         _builder.newLine();
@@ -622,19 +599,17 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation manifest(final ProjectData data) {
+  public CharSequence manifest(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Manifest-Version: 1.0");
     _builder.newLine();
     _builder.append("Bundle-ManifestVersion: 2");
     _builder.newLine();
     _builder.append("Bundle-Name: ");
-    String _projectName = data.getProjectName();
-    _builder.append(_projectName, "");
+    _builder.append(data.projectName, "");
     _builder.newLineIfNotEmpty();
     _builder.append("Bundle-SymbolicName: ");
-    String _projectName_1 = data.getProjectName();
-    _builder.append(_projectName_1, "");
+    _builder.append(data.projectName, "");
     _builder.append("; singleton:=true");
     _builder.newLineIfNotEmpty();
     _builder.append("Bundle-Version: 1.0.0");
@@ -666,17 +641,15 @@ public class GeneratorProjectTemplate {
     _builder.append("org.eclipse.jface.text;bundle-version=\"3.5.0\",");
     _builder.newLine();
     {
-      boolean _operator_or = false;
-      GeneratorType _generatorType = data.getGeneratorType();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_generatorType, GeneratorType.Xpand);
-      if (_operator_equals) {
-        _operator_or = true;
+      boolean _or = false;
+      boolean _equals = Objects.equal(data.generatorType, GeneratorType.Xpand);
+      if (_equals) {
+        _or = true;
       } else {
-        GeneratorType _generatorType_1 = data.getGeneratorType();
-        boolean _operator_equals_1 = ObjectExtensions.operator_equals(_generatorType_1, GeneratorType.Xtend);
-        _operator_or = BooleanExtensions.operator_or(_operator_equals, _operator_equals_1);
+        boolean _equals_1 = Objects.equal(data.generatorType, GeneratorType.Xtend);
+        _or = (_equals || _equals_1);
       }
-      if (_operator_or) {
+      if (_or) {
         _builder.append(" ", "");
         _builder.append("org.eclipse.xpand;bundle-version=\"0.7.0\",");
         _builder.newLineIfNotEmpty();
@@ -692,9 +665,8 @@ public class GeneratorProjectTemplate {
       }
     }
     {
-      GeneratorType _generatorType_2 = data.getGeneratorType();
-      boolean _operator_equals_2 = ObjectExtensions.operator_equals(_generatorType_2, GeneratorType.Xtend);
-      if (_operator_equals_2) {
+      boolean _equals_2 = Objects.equal(data.generatorType, GeneratorType.Xtend);
+      if (_equals_2) {
         _builder.append(" ", "");
         _builder.append("org.eclipse.xtext.xbase.lib;bundle-version=\"2.0.1\",");
         _builder.newLineIfNotEmpty();
@@ -704,16 +676,14 @@ public class GeneratorProjectTemplate {
       }
     }
     {
-      boolean _operator_or_1 = false;
-      boolean _isPluginExport = data.isPluginExport();
-      if (_isPluginExport) {
-        _operator_or_1 = true;
+      boolean _or_1 = false;
+      if (data.pluginExport) {
+        _or_1 = true;
       } else {
-        GeneratorType _generatorType_3 = data.getGeneratorType();
-        boolean _operator_notEquals = ObjectExtensions.operator_notEquals(_generatorType_3, GeneratorType.Xpand);
-        _operator_or_1 = BooleanExtensions.operator_or(_isPluginExport, _operator_notEquals);
+        boolean _notEquals = (!Objects.equal(data.generatorType, GeneratorType.Xpand));
+        _or_1 = (data.pluginExport || _notEquals);
       }
-      if (_operator_or_1) {
+      if (_or_1) {
         _builder.append(" ", "");
         _builder.append("org.yakindu.sct.generator.core;bundle-version=\"1.0.0\",");
         _builder.newLineIfNotEmpty();
@@ -736,7 +706,7 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation plugin(final ProjectData data) {
+  public CharSequence plugin(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
     _builder.newLine();
@@ -752,27 +722,23 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append("      ");
     _builder.append("<SCTGenerator class=\"");
-    String _generatorClass = data.getGeneratorClass();
-    _builder.append(_generatorClass, "      ");
+    _builder.append(data.generatorClass, "      ");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
     _builder.append("description=\"");
-    String _generatorDescription = data.getGeneratorDescription();
-    String _escapeForXml = this.escapeForXml(_generatorDescription);
+    String _escapeForXml = this.escapeForXml(data.generatorDescription);
     _builder.append(_escapeForXml, "            ");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
     _builder.append("id=\"");
-    String _generatorId = data.getGeneratorId();
-    _builder.append(_generatorId, "            ");
+    _builder.append(data.generatorId, "            ");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
     _builder.append("            ");
     _builder.append("name=\"");
-    String _generatorName = data.getGeneratorName();
-    String _escapeForXml_1 = this.escapeForXml(_generatorName);
+    String _escapeForXml_1 = this.escapeForXml(data.generatorName);
     _builder.append(_escapeForXml_1, "            ");
     _builder.append("\"");
     _builder.newLineIfNotEmpty();
@@ -789,8 +755,7 @@ public class GeneratorProjectTemplate {
     _builder.append("</extension>");
     _builder.newLine();
     {
-      boolean _isTypeLibrary = data.isTypeLibrary();
-      if (_isTypeLibrary) {
+      if (data.typeLibrary) {
         _builder.append("<extension");
         _builder.newLine();
         _builder.append("      ");
@@ -798,8 +763,7 @@ public class GeneratorProjectTemplate {
         _builder.newLine();
         _builder.append("   ");
         _builder.append("<FeatureLibrary generatorId=\"");
-        String _generatorId_1 = data.getGeneratorId();
-        _builder.append(_generatorId_1, "   ");
+        _builder.append(data.generatorId, "   ");
         _builder.append("\" ");
         _builder.newLineIfNotEmpty();
         _builder.append("   ");
@@ -810,8 +774,7 @@ public class GeneratorProjectTemplate {
         _builder.newLineIfNotEmpty();
         _builder.append("         ");
         _builder.append("uri=\"platform:/plugin/");
-        String _projectName = data.getProjectName();
-        _builder.append(_projectName, "         ");
+        _builder.append(data.projectName, "         ");
         _builder.append("/library/FeatureTypeLibrary.xmi\">");
         _builder.newLineIfNotEmpty();
         _builder.append("   ");
@@ -826,11 +789,10 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation xpandGenerator(final ProjectData data) {
+  public CharSequence xpandGenerator(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _generatorClass = data.getGeneratorClass();
-    String _packageName = this.packageName(_generatorClass);
+    String _packageName = this.packageName(data.generatorClass);
     _builder.append(_packageName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -842,8 +804,7 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append(" ");
     _builder.append("* Generator using Xpand template \"");
-    String _generatorClass_1 = data.getGeneratorClass();
-    String _javaPathToXpand = this.javaPathToXpand(_generatorClass_1);
+    String _javaPathToXpand = this.javaPathToXpand(data.generatorClass);
     _builder.append(_javaPathToXpand, " ");
     _builder.append("::main\"");
     _builder.newLineIfNotEmpty();
@@ -851,8 +812,7 @@ public class GeneratorProjectTemplate {
     _builder.append("*/");
     _builder.newLine();
     _builder.append("public class ");
-    String _generatorClass_2 = data.getGeneratorClass();
-    String _simpleName = this.simpleName(_generatorClass_2);
+    String _simpleName = this.simpleName(data.generatorClass);
     _builder.append(_simpleName, "");
     _builder.append(" extends AbstractXpandBasedCodeGenerator {");
     _builder.newLineIfNotEmpty();
@@ -865,8 +825,7 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return \"");
-    String _generatorClass_3 = data.getGeneratorClass();
-    String _javaPathToXpand_1 = this.javaPathToXpand(_generatorClass_3);
+    String _javaPathToXpand_1 = this.javaPathToXpand(data.generatorClass);
     _builder.append(_javaPathToXpand_1, "		");
     _builder.append("::main\";");
     _builder.newLineIfNotEmpty();
@@ -878,11 +837,10 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation javaGenerator(final ProjectData data) {
+  public CharSequence javaGenerator(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _generatorClass = data.getGeneratorClass();
-    String _packageName = this.packageName(_generatorClass);
+    String _packageName = this.packageName(data.generatorClass);
     _builder.append(_packageName, "");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
@@ -903,8 +861,7 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
-    String _generatorClass_1 = data.getGeneratorClass();
-    String _simpleName = this.simpleName(_generatorClass_1);
+    String _simpleName = this.simpleName(data.generatorClass);
     _builder.append(_simpleName, "");
     _builder.append(" extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator{");
     _builder.newLineIfNotEmpty();
@@ -1005,11 +962,10 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation xtendGenerator(final ProjectData data) {
+  public CharSequence xtendGenerator(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
-    String _generatorClass = data.getGeneratorClass();
-    String _packageName = this.packageName(_generatorClass);
+    String _packageName = this.packageName(data.generatorClass);
     _builder.append(_packageName, "");
     _builder.newLineIfNotEmpty();
     _builder.newLine();
@@ -1029,8 +985,7 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.newLine();
     _builder.append("class ");
-    String _generatorClass_1 = data.getGeneratorClass();
-    String _simpleName = this.simpleName(_generatorClass_1);
+    String _simpleName = this.simpleName(data.generatorClass);
     _builder.append(_simpleName, "");
     _builder.append(" extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator {");
     _builder.newLineIfNotEmpty();
@@ -1115,7 +1070,7 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation defaultProvider(final ProjectData data) {
+  public CharSequence defaultProvider(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     String _providerClass = this.providerClass(data);
@@ -1153,8 +1108,7 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append(" ");
     _builder.append("* Default value provider for ");
-    String _generatorName = data.getGeneratorName();
-    _builder.append(_generatorName, " ");
+    _builder.append(data.generatorName, " ");
     _builder.append(" feature library");
     _builder.newLineIfNotEmpty();
     _builder.append(" ");
@@ -1226,7 +1180,7 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation libraryConstants(final ProjectData data) {
+  public CharSequence libraryConstants(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package ");
     String _libraryConstantsClass = this.libraryConstantsClass(data);
@@ -1243,8 +1197,7 @@ public class GeneratorProjectTemplate {
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.append("public static final String LIBRARY_NAME = \"");
-    String _generatorName = data.getGeneratorName();
-    _builder.append(_generatorName, "	");
+    _builder.append(data.generatorName, "	");
     _builder.append("\";");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
@@ -1258,7 +1211,7 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation projectSettings(final ProjectData data, final String encoding) {
+  public CharSequence projectSettings(final ProjectData data, final String encoding) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("eclipse.preferences.version=1");
     _builder.newLine();
@@ -1268,7 +1221,7 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation xpandSettings(final ProjectData data) {
+  public CharSequence xpandSettings(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("eclipse.preferences.version=1");
     _builder.newLine();
@@ -1279,7 +1232,7 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation jdtSettings(final ProjectData data) {
+  public CharSequence jdtSettings(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("eclipse.preferences.version=1");
     _builder.newLine();
@@ -1292,13 +1245,12 @@ public class GeneratorProjectTemplate {
     return _builder;
   }
   
-  public StringConcatenation buildProperties(final ProjectData data) {
+  public CharSequence buildProperties(final ProjectData data) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("source.. = src");
     {
-      GeneratorType _generatorType = data.getGeneratorType();
-      boolean _operator_equals = ObjectExtensions.operator_equals(_generatorType, GeneratorType.Xtend);
-      if (_operator_equals) {
+      boolean _equals = Objects.equal(data.generatorType, GeneratorType.Xtend);
+      if (_equals) {
         _builder.append(",\\");
         _builder.newLineIfNotEmpty();
         _builder.append("\t");
@@ -1307,10 +1259,10 @@ public class GeneratorProjectTemplate {
       }
     }
     {
-      boolean _isPluginExport = data.isPluginExport();
-      if (_isPluginExport) {
+      if (data.pluginExport) {
         _builder.append("bin.includes = META-INF/,.,plugin.xml");
-        _builder.newLine();} else {
+        _builder.newLine();
+      } else {
         _builder.append("bin.includes = META-INF/,.");
         _builder.newLine();
       }

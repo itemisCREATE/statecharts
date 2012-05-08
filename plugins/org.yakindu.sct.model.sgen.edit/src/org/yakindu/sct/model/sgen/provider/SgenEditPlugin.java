@@ -44,8 +44,6 @@ public final class SgenEditPlugin extends EMFPlugin {
 	public SgenEditPlugin() {
 		super
 		  (new ResourceLocator [] {
-		     SGraphEditPlugin.INSTANCE,
-		     TypesEditPlugin.INSTANCE,
 		     BaseEditPlugin.INSTANCE,
 		   });
 	}
