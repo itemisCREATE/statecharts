@@ -87,10 +87,11 @@ public abstract class AbstractEditorPropertySection extends
 	@Override
 	public final void createControls(Composite parent,
 			TabbedPropertySheetPage aTabbedPropertySheetPage) {
+		toolkit = new FormToolkit(parent.getDisplay());
+		toolkit.setBorderStyle(SWT.BORDER);
 		super.createControls(parent, aTabbedPropertySheetPage);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
 		parent.setLayout(new GridLayout(1, true));
-		toolkit = new FormToolkit(parent.getDisplay());
 		form = toolkit.createForm(parent);
 		toolkit.decorateFormHeading(form);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(form);
