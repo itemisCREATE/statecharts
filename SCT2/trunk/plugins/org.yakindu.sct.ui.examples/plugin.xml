@@ -20,7 +20,7 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.yakindu.sct.example.trafficlight" pageImage="icons/logo-16.png">
-		 <projectDescriptor name="org.yakindu.sct.examples.trafficlight" contentURI="contents/org.yakindu.sct.example.trafficlight.zip" description="Trafficlight example with java generated source code"/>
+		 <projectDescriptor name="org.yakindu.sct.examples.trafficlight" contentURI="contents/org.yakindu.sct.examples.trafficlight.zip" description="Trafficlight example with java generated source code"/>
 	  </example>
    </extension>
 </plugin>

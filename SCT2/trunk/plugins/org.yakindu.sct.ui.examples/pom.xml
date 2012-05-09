@@ -29,11 +29,11 @@
 							<artifactItems>
 								<artifactItem>
 									<groupId>org.yakindu.sct.examples</groupId>
-									<artifactId>org.yakindu.sct.example.trafficlight</artifactId>
+									<artifactId>org.yakindu.sct.examples.trafficlight</artifactId>
 									<version>${project.version}</version>
 									<type>zip</type>
 									<classifier>content</classifier>
-									<destFileName>org.yakindu.sct.example.trafficlight.zip</destFileName>
+									<destFileName>org.yakindu.sct.examples.trafficlight.zip</destFileName>
 								</artifactItem>
 							</artifactItems>
 							<overWriteIfNewer>true</overWriteIfNewer>
