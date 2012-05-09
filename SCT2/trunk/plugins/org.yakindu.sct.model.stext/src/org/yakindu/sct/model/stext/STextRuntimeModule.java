@@ -16,7 +16,7 @@ import org.yakindu.sct.model.stext.validation.TypeInferrer;
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
-import de.itemis.xtext.utils.gmf.resource.InjectMembersLazyLinker;
+import de.itemis.xtext.utils.gmf.resource.InjectMembersLinker;
 
 /**
  * Use this class to register components to be used at runtime / without the
@@ -35,7 +35,7 @@ public class STextRuntimeModule extends
 
 	@Override
 	public Class<? extends ILinker> bindILinker() {
-		return InjectMembersLazyLinker.class;
+		return InjectMembersLinker.class;
 	}
 
 	@Override
