@@ -91,6 +91,7 @@ public class StatePropertySection extends
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL | SWT.WRAP);
+			((StyledText)txtSpecification).setAlwaysShowScrollBars(false);
 			enableXtext(txtSpecification, injector);
 			createHelpWidget(parent, txtSpecification,
 					HelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
