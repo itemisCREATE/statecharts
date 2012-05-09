@@ -7,7 +7,7 @@
 		<version>1.0.0-SNAPSHOT</version> <relativePath>../org.yakindu.sct.releng/pom.xml</relativePath> 
 		</parent -->
 	<groupId>org.yakindu.sct.examples</groupId>
-	<artifactId>org.yakindu.sct.example.trafficlight</artifactId>
+	<artifactId>org.yakindu.sct.examples.trafficlight</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
