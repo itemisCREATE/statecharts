@@ -9,9 +9,9 @@ Parameterized-build:
 + Selection
 	Name: promotionTarget
 	Selections:
-		indigo/integration
-		indigo/milestones
-		indigo/releases
+		juno/integration
+		juno/milestones
+		juno/releases
 	Description:
 		Select the update site to promote to.
 
