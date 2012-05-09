@@ -72,7 +72,7 @@ public class StatechartTextExpressionEditPart extends
 
 	@Override
 	protected int getEditorStyles() {
-		return SWT.MULTI;
+		return SWT.MULTI | SWT.V_SCROLL;
 	}
 
 }

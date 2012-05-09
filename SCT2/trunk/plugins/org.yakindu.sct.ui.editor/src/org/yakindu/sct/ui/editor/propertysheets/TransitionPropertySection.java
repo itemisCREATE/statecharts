@@ -49,6 +49,7 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL | SWT.WRAP);
+			((StyledText)textControl).setAlwaysShowScrollBars(false);
 			enableXtext(textControl, injector);
 			createHelpWidget(parent, textControl,HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		} else {
