@@ -74,7 +74,8 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 		if (Strings.isEmpty(scName)) {
 			return null;
 		}
-		QualifiedName name = nameConverter.toQualifiedName(scName);
+		QualifiedName name = QualifiedName.create(identifierConverter
+				.toIdentifier(ele.getName()));
 		if (!Strings.isEmpty(ele.getNamespace())) {
 			name = nameConverter.toQualifiedName(ele.getNamespace()).append(
 					name);
