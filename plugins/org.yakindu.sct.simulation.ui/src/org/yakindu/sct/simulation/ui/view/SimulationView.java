@@ -83,6 +83,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		DebugUITools.getDebugContextManager().addDebugContextListener(this);
 		DebugPlugin.getDefault().addDebugEventListener(this);
 		kit = new FormToolkit(Display.getDefault());
+		kit.setBorderStyle(SWT.BORDER);
 		font = new Font(Display.getDefault(), new FontData("Courier", 10,
 				SWT.BOLD));
 		clockUpdater = new ClockUpdater();
