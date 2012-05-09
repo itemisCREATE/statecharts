@@ -40,7 +40,6 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
-import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.DefaultEvent;
 import org.yakindu.sct.model.stext.stext.Direction;
@@ -55,7 +54,6 @@ import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -142,15 +140,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Check(CheckType.FAST)
 	public void checkReactionTrigger(ReactionTrigger reactionTrigger) {
 		for (EventSpec eventSpec : reactionTrigger.getTriggers()) {
-
-			// Allow only entries, exit, oncycle and always as event for local
-			// reactions.
 			if (!(reactionTrigger.eContainer() instanceof LocalReaction)
 					&& (eventSpec instanceof EntryEvent
-							|| eventSpec instanceof ExitEvent
-							|| eventSpec instanceof OnCycleEvent || eventSpec instanceof AlwaysEvent)) {
+							|| eventSpec instanceof ExitEvent)){
 
-				error("entry, exit, oncycle and always events are allowed as local reactions only.",
+				error("entry and exit events are allowed as local reactions only.",
 						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
 						INSIGNIFICANT_INDEX, LOCAL_REACTIONS_NOT_ALLOWED);
 			}
