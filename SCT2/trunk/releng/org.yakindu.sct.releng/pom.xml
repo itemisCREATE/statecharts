@@ -256,7 +256,7 @@
 	<modules>
 		<!-- <module>../org.yakindu.sct.statechart.target</module> -->
 		<module>../org.yakindu.sct.doc.user</module>
-		<module>../org.yakindu.sct.example.trafficlight</module>
+		<module>../org.yakindu.sct.examples.trafficlight</module>
 		<module>../org.yakindu.sct.generator.core</module>
 		<module>../org.yakindu.sct.generator.genmodel</module>
 		<module>../org.yakindu.sct.generator.genmodel.test</module>
