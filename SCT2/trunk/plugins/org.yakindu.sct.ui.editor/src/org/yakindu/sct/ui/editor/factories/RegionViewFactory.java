@@ -19,7 +19,10 @@ import org.eclipse.gmf.runtime.emf.core.util.EObjectAdapter;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.swt.graphics.RGB;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
@@ -49,13 +52,25 @@ public class RegionViewFactory extends AbstractShapeViewFactory {
 				SemanticHints.REGION_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
 
-		// Create regions default style
+	}
+
+	@Override
+	protected void initializeFromPreferences(View view) {
+		super.initializeFromPreferences(view);
+		IPreferenceStore store = (IPreferenceStore) getPreferencesHint()
+				.getPreferenceStore();
+		if (store == null) {
+			return;
+		}
+
+		// Create region default styles
 		ShapeStyle style = (ShapeStyle) view
 				.getStyle(NotationPackage.Literals.SHAPE_STYLE);
-		style.setFillColor(FigureUtilities
-				.RGBToInteger(StatechartColorConstants.REGION_BG_COLOR.getRGB()));
-		style.setLineColor(FigureUtilities
-				.RGBToInteger(StatechartColorConstants.REGION_LINE_COLOR.getRGB()));
-
+		RGB fillRGB = PreferenceConverter.getColor(store,
+				StatechartPreferenceConstants.PREF_REGION_BACKGROUND);
+		style.setFillColor(FigureUtilities.RGBToInteger(fillRGB));
+		RGB lineRGB = PreferenceConverter.getColor(store,
+				StatechartPreferenceConstants.PREF_REGION_LINE);
+		style.setLineColor(FigureUtilities.RGBToInteger(lineRGB));
 	}
 }
