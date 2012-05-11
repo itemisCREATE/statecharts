@@ -187,7 +187,7 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 
 	public QualifiedName qualifiedName(Region ele) {
 		QualifiedName qualifiedNameFromConverter = null;
-		if (ele.getName() == null) {
+		if (ele.getName() == null || ele.getName().isEmpty()) {
 			if (ele.eContainer() instanceof CompositeElement) {
 				CompositeElement parent = (CompositeElement) ele.eContainer();
 				int index = parent.getRegions().indexOf(ele);
