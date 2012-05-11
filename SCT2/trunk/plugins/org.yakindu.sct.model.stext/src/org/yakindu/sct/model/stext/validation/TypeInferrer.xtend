@@ -187,7 +187,12 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 	} 
 	//TODO: Remove dependency to base types
 	def dispatch inferType(FeatureCall featureCall){
-		return (featureCall.feature as Feature)?.type
+		if (featureCall.feature instanceof Feature) {
+			return (featureCall.feature as Feature)?.type
+		} else {
+			error("Type of FeatureCall is unknown: "+featureCall)			
+			return null;
+		}
 	}
 	
 	def dispatch inferType(ElementReferenceExpression expression){
