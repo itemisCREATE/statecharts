@@ -13,7 +13,6 @@ package org.yakindu.sct.ui.editor.factories;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.AbstractShapeViewFactory;
@@ -25,7 +24,10 @@ import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
+import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.preference.PreferenceConverter;
+import org.eclipse.swt.graphics.RGB;
+import org.yakindu.sct.ui.editor.preferences.StatechartPreferenceConstants;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
@@ -34,7 +36,7 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  * 
  */
 public class StateViewFactory extends AbstractShapeViewFactory {
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void decorateView(View containerView, View view,
@@ -48,13 +50,13 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 		if (eObject != null) {
 			eObjectAdapter = new EObjectAdapter(eObject);
 		}
-		//State name
+		// State name
 		FactoryUtils.createLabel(view, SemanticHints.STATE_NAME);
-		//Text compartment
+		// Text compartment
 		getViewService().createNode(eObjectAdapter, view,
 				SemanticHints.STATE_TEXT_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
-		//Figure compartment
+		// Figure compartment
 		getViewService().createNode(eObjectAdapter, view,
 				SemanticHints.STATE_FIGURE_COMPARTMENT, ViewUtil.APPEND, true,
 				getPreferencesHint());
@@ -66,15 +68,26 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 		layout.setBooleanValue(false);
 		view.getStyles().add(layout);
 
+		IPreferenceStore store = (IPreferenceStore) getPreferencesHint()
+				.getPreferenceStore();
+		if (store == null) {
+			return;
+		}
 		// Create states default styles
 		ShapeStyle style = (ShapeStyle) view
 				.getStyle(NotationPackage.Literals.SHAPE_STYLE);
-		style.setFillColor(FigureUtilities
-				.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR.getRGB()));
-		style.setLineColor(FigureUtilities
-				.RGBToInteger(ColorConstants.lightGray.getRGB()));
+		RGB fillRGB = PreferenceConverter.getColor(store,
+				StatechartPreferenceConstants.PREF_STATE_BACKGROUND);
+		style.setFillColor(FigureUtilities.RGBToInteger(fillRGB));
+		RGB lineRGB = PreferenceConverter.getColor(store,
+				StatechartPreferenceConstants.PREF_STATE_LINE);
+		style.setLineColor(FigureUtilities.RGBToInteger(lineRGB));
 	}
 
+	@Override
+	protected void initializeFromPreferences(View view) {
+		super.initializeFromPreferences(view);
+	}
 
 	@Override
 	protected List<Style> createStyles(View view) {

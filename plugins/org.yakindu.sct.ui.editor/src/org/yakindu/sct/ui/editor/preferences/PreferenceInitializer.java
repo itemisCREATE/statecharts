@@ -51,6 +51,23 @@ public class PreferenceInitializer extends DiagramPreferenceInitializer
 		prefs.setLayoutSetting(DefaultPaletteViewerPreferences.LAYOUT_COLUMNS);
 		prefs.setCurrentUseLargeIcons(true);
 		prefs.setFontData(new FontData("Verdana", 8, SWT.NONE));
+
+		// State line and background color
+		PreferenceConverter.setDefault(getPreferenceStore(),
+				StatechartPreferenceConstants.PREF_STATE_BACKGROUND,
+				StatechartColorConstants.STATE_BG_COLOR.getRGB());
+		PreferenceConverter.setDefault(getPreferenceStore(),
+				StatechartPreferenceConstants.PREF_STATE_LINE,
+				StatechartColorConstants.STATE_LINE_COLOR.getRGB());
+
+		// Region fill color
+		PreferenceConverter.setDefault(getPreferenceStore(),
+				StatechartPreferenceConstants.PREF_REGION_BACKGROUND,
+				StatechartColorConstants.REGION_BG_COLOR.getRGB());
+		PreferenceConverter.setDefault(getPreferenceStore(),
+				StatechartPreferenceConstants.PREF_REGION_LINE,
+				StatechartColorConstants.REGION_LINE_COLOR.getRGB());
+
 	}
 
 	@Override
