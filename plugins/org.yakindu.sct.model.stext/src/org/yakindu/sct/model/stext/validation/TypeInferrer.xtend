@@ -189,8 +189,10 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 	def dispatch inferType(FeatureCall featureCall){
 		if (featureCall.feature instanceof Feature) {
 			return (featureCall.feature as Feature)?.type
-		} else {
+		} else if (featureCall.feature !=null) {
 			error("Type of FeatureCall is unknown: "+featureCall)			
+			return null;
+		} else {
 			return null;
 		}
 	}
