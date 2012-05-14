@@ -132,7 +132,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void checkReactionTrigger() {
-		// ENTRY, EXIT, ALWAYS, ONCYCLE not allowed in transitions
+		// ENTRY, EXIT not allowed in transitions
 		Scope context = (Scope) parseExpression(
 				"internal : event a : integer var myVar : integer", null,
 				InternalScope.class.getSimpleName());
@@ -149,12 +149,12 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		model = super.parseExpression("oncycle / myVar = 5", context,
 				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
-		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
+		validationResult.assertOK();
 
 		model = super.parseExpression("always / myVar = 5", context,
 				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
-		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
+		validationResult.assertOK();
 	}
 
 	/**
