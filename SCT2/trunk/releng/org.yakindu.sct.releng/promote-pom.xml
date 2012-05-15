@@ -73,7 +73,7 @@
 					<plugin>
 						<groupId>org.eclipse.tycho.extras</groupId>
 						<artifactId>tycho-p2-extras-plugin</artifactId>
-						<version>${tycho-extras-version}</version>
+						<version>${tycho.extras.version}</version>
 						<inherited>false</inherited>
 						<executions>
 							<execution>
