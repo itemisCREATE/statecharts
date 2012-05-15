@@ -1,10 +1,10 @@
+
 package org.yakindu.sct.simulation.ui.model.presenter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
 import org.yakindu.sct.model.sexec.TraceEndRunCycle;
@@ -53,8 +53,13 @@ public class ExecutionPathDynamicNotationHandler extends
 		cycleUpdates.clear();
 
 		for (EObject obj : previousActive) {
-			cycleUpdates.add(new IHighlightingSupport.Highlight(obj, null));
+			// remove highlighting of previously active state only if it is not
+			// currently active (which is the case for self-transitions)
+			if (!active.contains(obj)) {
+				cycleUpdates.add(new IHighlightingSupport.Highlight(obj, null));
+			}
 		}
+
 		previousActive.clear();
 
 		for (EObject obj : executionPathElements) {
@@ -84,9 +89,8 @@ public class ExecutionPathDynamicNotationHandler extends
 		RegularState state = (RegularState) trace.getState().getSourceElement();
 
 		active.remove(state);
-		// We copy the state here, otherwise the previous active states would be
-		// deleted in visualizeSteps cycleUpdates.clear() for self transitions
-		previousActive.add(EcoreUtil.copy(state));
+		previousActive.add(state);
+
 		cycleUpdates.add(new IHighlightingSupport.Highlight(trace.getState()
 				.getSourceElement(), VERTEX_TRANSIENT_PARAMS));
 
