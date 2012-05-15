@@ -39,7 +39,7 @@ Build:
 	Properties
 		promotionSource=${env.promotionSource}
 		promotionTarget=${env.promotionTarget}
-		AppendToExistingRepository=${env.appendToExistingRepository}
+		appendToExistingRepository=${env.appendToExistingRepository}
 	Profiles
 	JVM Options
 	Private Maven-Repository: Checked
