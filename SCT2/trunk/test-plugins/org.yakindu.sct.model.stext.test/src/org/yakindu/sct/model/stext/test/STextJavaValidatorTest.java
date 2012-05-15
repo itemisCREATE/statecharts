@@ -38,6 +38,7 @@ import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
+import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
@@ -99,6 +100,31 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 				Expression.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
+	}
+
+	/**
+	 * @see STextJavaValidator#checkGuardHasBooleanExpression(org.yakindu.sct.model.stext.stext.ReactionTrigger)
+	 */
+	@Test
+	public void checkGuardHasBooleanExpression() {
+		EObject expression = super.parseExpression("[3 * 3]",
+				ReactionTrigger.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(expression);
+		validationResult
+				.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
+
+		Scope context = createInternalScope("internal: var myInt : integer var myBool : boolean = true)");
+		expression = super.parseExpression("[myInt = 5]", context,
+				ReactionTrigger.class.getSimpleName());
+		validationResult = tester.validate(expression);
+		validationResult
+				.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
+
+		expression = super.parseExpression("[myInt <= 5 || !myBool ]", context,
+				ReactionTrigger.class.getSimpleName());
+		validationResult = tester.validate(expression);
+		validationResult.assertOK();
+
 	}
 
 	/**
@@ -231,7 +257,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		result.assertErrorContains(IN_OUT_DECLARATIONS);
 	}
 
-
 	/**
 	 * @see STextJavaValidator#checkInterfaceScope(Statechart)
 	 */
@@ -253,6 +278,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	public void checkExpression() {
 		// Nothing to do, checked by Typeanalyzer tests
 	}
+
 	/**
 	 * @see STextJavaValidator#checkVariableDefinitionInitialValue(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
@@ -271,12 +297,13 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		result.assertDiagnosticsCount(1);
 		result.assertErrorContains("Can not assign a value of type 'integer' to a variable of type 'boolean'");
 	}
+
 	/**
 	 * @see STextJavaValidator#checkChoiceWithoutDefaultTransition(org.yakindu.sct.model.sgraph.Choice)
 	 */
 	@Test
-	public void checkChoiceWithoutDefaultTransition(){
-		//TODO
+	public void checkChoiceWithoutDefaultTransition() {
+		// TODO
 	}
 
 	/**
