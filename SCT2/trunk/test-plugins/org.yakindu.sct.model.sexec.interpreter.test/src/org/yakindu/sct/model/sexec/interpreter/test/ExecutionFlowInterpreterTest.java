@@ -19,7 +19,6 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTest;
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
 
-
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -47,6 +46,47 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 		context().raiseEvent("Event1", null);
 		interpreter.runCycle();
 		assertIsActive("B");
+	}
+
+	private static final int DELAY = 10;
+
+	@Test
+	public void testTimeTrigger() throws Exception {
+		loadAndconfigureInterpreter(models.createTimeTrigger());
+		assertIsActive("StateA");
+		assertVarValue("value", 0);
+		Thread.sleep(50);
+		interpreter.runCycle();
+		assertIsActive("StateA");
+		Thread.sleep(50);
+		interpreter.runCycle();
+		assertIsActive("StateB");
+		for (int i = 0; i < 10; i++) {
+			assertVarValue("value", i);
+			Thread.sleep(200 + DELAY);
+			interpreter.runCycle();
+		}
+		interpreter.runCycle();
+		assertIsActive("StateA");
+	}
+
+	@Test
+	public void testAlwaysOncycle() throws Exception {
+		loadAndconfigureInterpreter(models.createAlwaysOncycle());
+		assertIsActive("StateA");
+		for (int i = 0; i < 5; i++) {
+			assertVarValue("value", i);
+			interpreter.runCycle();
+		}
+		interpreter.runCycle();
+		assertIsActive("StateB");
+		assertVarValue("value", 0);
+		for (int i = 0; i < 5; i++) {
+			assertVarValue("value", i);
+			interpreter.runCycle();
+		}
+		interpreter.runCycle();
+		assertIsActive("StateA");
 	}
 
 	@Test
@@ -116,9 +156,11 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 		assertIsActive("B");
 		assertVarValue("MyInterface.myInt", 42);
 	}
+
 	@Test
 	public void testStatechartLocalReactionsCall() throws Exception {
-		loadAndconfigureInterpreter(models.createStatechartLocalReactionsModel());
+		loadAndconfigureInterpreter(models
+				.createStatechartLocalReactionsModel());
 		assertIsActive("S1");
 		assertVarValue("myInt", 0);
 		interpreter.runCycle();
