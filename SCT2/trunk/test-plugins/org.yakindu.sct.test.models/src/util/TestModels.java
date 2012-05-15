@@ -37,6 +37,8 @@ public class TestModels {
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/";
 
 	public static final String GUARD = "Guard.sct";
+	public static final String ALWAYS_ONCYCLE = "AlwaysOncycle.sct";
+	public static final String TIME_TRIGGER = "TimeTrigger.sct";
 	public static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
 	public static final String DEEP_HISTORY = "DeepHistory.sct";
 	public static final String STATE_ACTIVE = "StateIsActive.sct";
@@ -55,6 +57,26 @@ public class TestModels {
 	 */
 	public ExecutionFlow createGuardModel() throws IOException {
 		return loadExecutionFlowFromResource(GUARD);
+	}
+
+	/**
+	 * <img src="../../images/TimeTrigger.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createTimeTrigger() throws IOException {
+		return loadExecutionFlowFromResource(TIME_TRIGGER);
+	}
+
+	/**
+	 * <img src="../../images/AlwaysOncycle.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createAlwaysOncycle() throws IOException {
+		return loadExecutionFlowFromResource(ALWAYS_ONCYCLE);
 	}
 
 	/**
