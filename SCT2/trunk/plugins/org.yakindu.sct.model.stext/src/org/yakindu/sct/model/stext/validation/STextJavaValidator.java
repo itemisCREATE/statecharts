@@ -80,9 +80,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String ONLY_ONE_INTERFACE = "Only one default/unnamed interface is allowed.";
 	public static final String IN_OUT_DECLARATIONS = "In/Out declarations are not allowed in internal scope.";
 	public static final String LOCAL_DECLARATIONS = "Local declarations are not allowed in interface scope.";
+	public static final String GUARD_EXPRESSION = "The evaluation result of a guard expression must be of type boolean";
 
 	@Inject
-	private ITypeInferrer analyzer;
+	private ITypeInferrer inferrer;
 	@Inject
 	private ITypeSystemAccess tsAccess;
 	@Inject
@@ -138,12 +139,22 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
+	public void checkGuardHasBooleanExpression(ReactionTrigger trigger) {
+		if (trigger.getGuardExpression() == null)
+			return;
+		Type type = inferrer.getType(trigger.getGuardExpression());
+		if (!tsAccess.isBoolean(type)) {
+			error(GUARD_EXPRESSION,
+					StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
+		}
+
+	}
+
+	@Check(CheckType.FAST)
 	public void checkReactionTrigger(ReactionTrigger reactionTrigger) {
 		for (EventSpec eventSpec : reactionTrigger.getTriggers()) {
 			if (!(reactionTrigger.eContainer() instanceof LocalReaction)
-					&& (eventSpec instanceof EntryEvent
-							|| eventSpec instanceof ExitEvent)){
-
+					&& (eventSpec instanceof EntryEvent || eventSpec instanceof ExitEvent)) {
 				error("entry and exit events are allowed as local reactions only.",
 						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
 						INSIGNIFICANT_INDEX, LOCAL_REACTIONS_NOT_ALLOWED);
@@ -288,41 +299,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	}
 
-	private INode findNode(EObject source, boolean sourceFound, INode root,
-			Keyword keyword, int[] index) {
-		if (sourceFound && root.getSemanticElement() != source) {
-			return null;
-		}
-		if (root.getSemanticElement() == source) {
-			sourceFound = true;
-		}
-		EObject grammarElement = root.getGrammarElement();
-		// .equals or == does not work because sub grammars use their own
-		// Modules with custom
-		// grammarAccess instance and .equals is not overwritten.
-		if (grammarElement instanceof Keyword
-				&& keyword.getValue().equals(
-						((Keyword) grammarElement).getValue())) {
-			if (index[0] != INSIGNIFICANT_INDEX) {
-				index[0]--;
-			}
-			if (index[0] == 0 || index[0] == INSIGNIFICANT_INDEX) {
-				return root;
-			}
-		}
-		if (root instanceof ICompositeNode) {
-			ICompositeNode node = (ICompositeNode) root;
-			for (INode child : node.getChildren()) {
-				INode result = findNode(source, sourceFound, child, keyword,
-						index);
-				if (result != null) {
-					return result;
-				}
-			}
-		}
-		return null;
-	}
-
 	@Check(CheckType.FAST)
 	public void checkVariableDefinitionInitialValue(
 			VariableDefinition definition) {
@@ -330,7 +306,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (definition.getInitialValue() == null)
 			return;
 		try {
-			Type inferType = analyzer.getType(definition.getInitialValue());
+			Type inferType = inferrer.getType(definition.getInitialValue());
 			Type combine = tsAccess.combine(definitionType, inferType);
 			if (combine == null) {
 				error("Can not assign a value of type '" + inferType.getName()
@@ -345,7 +321,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Check(CheckType.FAST)
 	public void checkExpression(final Statement statement) {
 		try {
-			analyzer.getType(statement);
+			inferrer.getType(statement);
 		} catch (TypeCheckException e) {
 			error(e.getMessage(), null);
 		} catch (IllegalArgumentException e) {
@@ -381,5 +357,40 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (resource instanceof InjectMembersResource)
 			return ((InjectMembersResource) resource).getLanguageName();
 		return super.getCurrentLanguage(context, eObject);
+	}
+
+	private INode findNode(EObject source, boolean sourceFound, INode root,
+			Keyword keyword, int[] index) {
+		if (sourceFound && root.getSemanticElement() != source) {
+			return null;
+		}
+		if (root.getSemanticElement() == source) {
+			sourceFound = true;
+		}
+		EObject grammarElement = root.getGrammarElement();
+		// .equals or == does not work because sub grammars use their own
+		// Modules with custom
+		// grammarAccess instance and .equals is not overwritten.
+		if (grammarElement instanceof Keyword
+				&& keyword.getValue().equals(
+						((Keyword) grammarElement).getValue())) {
+			if (index[0] != INSIGNIFICANT_INDEX) {
+				index[0]--;
+			}
+			if (index[0] == 0 || index[0] == INSIGNIFICANT_INDEX) {
+				return root;
+			}
+		}
+		if (root instanceof ICompositeNode) {
+			ICompositeNode node = (ICompositeNode) root;
+			for (INode child : node.getChildren()) {
+				INode result = findNode(source, sourceFound, child, keyword,
+						index);
+				if (result != null) {
+					return result;
+				}
+			}
+		}
+		return null;
 	}
 }
