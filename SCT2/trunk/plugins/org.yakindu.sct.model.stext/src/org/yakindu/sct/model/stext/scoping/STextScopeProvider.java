@@ -20,12 +20,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
+import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -53,10 +55,35 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
  */
 public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
+	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
+
+		private ErrorHandler<T> delegate;
+
+		public ErrorHandlerDelegate(ErrorHandler<T> delegate) {
+			this.delegate = delegate;
+
+		}
+
+		public T handle(Object[] params, Throwable throwable) {
+			if (!(throwable instanceof NoSuchMethodException)) {
+				throwable.printStackTrace();
+			} else {
+				// System.out.println(STextScopeProvider.class.getSimpleName()
+				// + ": NoSuchMethodException");
+			}
+			return delegate.handle(params, throwable);
+		}
+
+	}
+
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		try {
-			return super.getScope(context, reference);
+			ErrorHandler<IScope> originalHandler = getErrorHandler();
+			setErrorHandler(new ErrorHandlerDelegate<IScope>(originalHandler));
+			IScope scope = super.getScope(context, reference);
+			setErrorHandler(originalHandler);
+			return scope;
 		} catch (Throwable t) {
 			t.printStackTrace();
 			return null;
@@ -176,10 +203,13 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 				.getExistingAdapter(context.eResource(),
 						ContextElementAdapter.class);
 
-		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(provider
-				.getElement().eResource().getContents(),
-				SGraphPackage.Literals.STATECHART);
-		return statechart;
+		if (provider == null) {
+			return EcoreUtil2.getContainerOfType(context, Statechart.class);
+		} else {
+			return (Statechart) EcoreUtil.getObjectByType(provider.getElement()
+					.eResource().getContents(),
+					SGraphPackage.Literals.STATECHART);
+		}
 	}
 
 	/**
