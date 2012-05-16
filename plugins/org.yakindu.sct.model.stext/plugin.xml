@@ -6,7 +6,7 @@
     <package 
        uri = "http://www.yakindu.org/sct/statechart/SText" 
        class = "org.yakindu.sct.model.stext.stext.StextPackage"
-       genModel = "org/yakindu/sct/model/stext/SText.genmodel" /> 
+       genModel = "model/SText.genmodel" /> 
 	
   </extension>
    <extension
