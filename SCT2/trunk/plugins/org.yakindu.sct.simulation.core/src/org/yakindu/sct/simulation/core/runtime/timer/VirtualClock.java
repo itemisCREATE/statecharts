@@ -30,6 +30,15 @@ public class VirtualClock {
 	private long realTime;
 	// virtual time in ms since last factor change
 	private long virtualTime;
+	// accumulated suspend time in ms
+	private long accumulatedSuspendTime;
+	// last time stamp in which the clock was suspended
+	private long startSuspendTime;
+	// flag to decide if the clock is currently suspended
+	private boolean isSuspended;
+	// factor to set after the clock is resumed (only if it is greater than
+	// zero))
+	private double factorToSet;
 
 	private List<PropertyChangeListener> _listeners;
 
@@ -40,28 +49,50 @@ public class VirtualClock {
 	private double factor = 1.0d;
 
 	public synchronized void start() {
+		reset();
 		startTime = System.currentTimeMillis();
 		virtualTime = System.currentTimeMillis();
 		realTime = System.currentTimeMillis();
 	}
 
-	public synchronized void pause() {
-		
+	public synchronized void suspend() {
+		startSuspendTime = System.currentTimeMillis();
+		isSuspended = true;
+	}
+
+	public synchronized void resume() {
+		accumulatedSuspendTime += System.currentTimeMillis() - startSuspendTime;
+		isSuspended = false;
+		if (factorToSet > 0) {
+			setFactor(factorToSet);
+			factorToSet = 0;
+		}
 	}
 
 	public synchronized void stop() {
+		reset();
+	}
+
+	private void reset() {
 		virtualTime = 0;
 		realTime = 0;
 		startTime = 0;
+		accumulatedSuspendTime = 0;
+		startSuspendTime = 0;
+		factorToSet = 0;
 	}
 
 	public synchronized void setFactor(double factor) {
-		virtualTime = getTime();
-		realTime = System.currentTimeMillis();
-		double oldFactor = this.factor;
-		this.factor = factor;
-		notifyListeners(new PropertyChangeEvent(this, "factor", oldFactor,
-				factor));
+		if (!isSuspended) {
+			virtualTime = getTime();
+			realTime = System.currentTimeMillis() - getPauseTime();
+			double oldFactor = this.factor;
+			this.factor = factor;
+			notifyListeners(new PropertyChangeEvent(this, "factor", oldFactor,
+					factor));
+		} else {
+			factorToSet = factor;
+		}
 	}
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -79,9 +110,22 @@ public class VirtualClock {
 	}
 
 	public synchronized long getTime() {
-		long difference = System.currentTimeMillis() - this.realTime;
+		long difference = System.currentTimeMillis() - getPauseTime()
+				- this.realTime;
 		difference = (long) (difference * factor);
 		return virtualTime + difference;
+	}
+
+	public long getPauseTime() {
+		if (isSuspended) {
+			return (System.currentTimeMillis() - startSuspendTime)
+					+ accumulatedSuspendTime;
+		}
+		return this.accumulatedSuspendTime;
+	}
+
+	public long getAccumulatedSuspendTime() {
+		return accumulatedSuspendTime;
 	}
 
 	public synchronized double getFactor() {
