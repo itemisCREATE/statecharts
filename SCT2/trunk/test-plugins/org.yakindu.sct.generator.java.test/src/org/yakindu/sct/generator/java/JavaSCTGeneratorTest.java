@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.generator.java;
 
-import static util.TestModels.DEEP_HISTORY;
+import static util.TestModels.*;
 import static util.TestModels.FEATURE_CALLS;
 import static util.TestModels.GUARD;
 import static util.TestModels.SIMPLE_HIERACHY;
@@ -95,6 +95,21 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	public void testStatechartLocalReactionsModel() throws Exception {
 		Statechart statechart = models
 				.loadStatechartFromResource(STATECHART_LOCAL_REACTIONS);
+		failOnError(generateAndCompile(statechart));
+
+	}
+
+	@Test
+	public void testAlwaysOnCycleModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(ALWAYS_ONCYCLE);
+		failOnError(generateAndCompile(statechart));
+
+	}
+
+	@Test
+	public void testTimeTriggerModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(TIME_TRIGGER);
 		failOnError(generateAndCompile(statechart));
 
 	}
