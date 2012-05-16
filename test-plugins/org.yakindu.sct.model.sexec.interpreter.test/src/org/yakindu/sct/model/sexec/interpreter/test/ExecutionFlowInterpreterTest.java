@@ -58,7 +58,7 @@ public class ExecutionFlowInterpreterTest extends AbstractExecutionFlowTest {
 		Thread.sleep(50);
 		interpreter.runCycle();
 		assertIsActive("StateA");
-		Thread.sleep(50);
+		Thread.sleep(50 + DELAY);
 		interpreter.runCycle();
 		assertIsActive("StateB");
 		for (int i = 0; i < 10; i++) {
