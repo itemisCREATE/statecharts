@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.yakindu.sct.simulation.core.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.yakindu.sct.simulation.core.test.Activator
+Bundle-Vendor: Yakindu
+Require-Bundle: org.eclipse.core.runtime,
+ org.junit4;bundle-version="4.8.1",
+ org.yakindu.sct.simulation.core;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
