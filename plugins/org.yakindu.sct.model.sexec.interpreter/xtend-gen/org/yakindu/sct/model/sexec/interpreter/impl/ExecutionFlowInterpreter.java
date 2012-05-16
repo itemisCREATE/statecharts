@@ -37,7 +37,6 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.ITimingService;
-import org.yakindu.sct.model.sexec.interpreter.impl.BufferingExecutionContext;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -64,8 +63,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   @Inject
   private IExecutionContext executionContext;
   
-  private BufferingExecutionContext externalExecutionContext;
-  
   @Inject
   private StextNameProvider provider;
   
@@ -89,8 +86,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   public void initialize(final ExecutionFlow flow) {
     this.flow = flow;
-    BufferingExecutionContext _bufferingExecutionContext = new BufferingExecutionContext(this.executionContext);
-    this.externalExecutionContext = _bufferingExecutionContext;
     EList<Scope> _scopes = flow.getScopes();
     for (final Scope scope : _scopes) {
       this.declareContents(scope);
@@ -117,10 +112,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     return this.interpreterName;
   }
   
-  public IExecutionContext getExecutionContext() {
-    return this.externalExecutionContext;
-  }
-  
   protected void _declareContents(final InternalScope scope) {
     EList<Declaration> _declarations = scope.getDeclarations();
     for (final Declaration declaration : _declarations) {
@@ -143,7 +134,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   }
   
   public void runCycle() {
-    this.externalExecutionContext.flush();
+    this.executionContext.flush();
     this.nextSVIdx = 0;
     this.execute(this.brc);
     ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
@@ -454,7 +445,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       Object duration = this.interpreter.evaluateStatement(_timeValue, this.executionContext);
       String _name = timeEvent.getName();
       boolean _isPeriodic = timeEvent.isPeriodic();
-      this.timingService.scheduleTimeEvent(this.externalExecutionContext, _name, _isPeriodic, (((Integer) duration)).intValue());
+      this.timingService.scheduleTimeEvent(this.executionContext, _name, _isPeriodic, (((Integer) duration)).intValue());
       _xblockexpression = (null);
     }
     return _xblockexpression;
@@ -479,6 +470,10 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   public void timeScaleFactorChanged(final double oldFactor, final double newFactor) {
     this.timingService.setTimeScaleFactor(newFactor);
+  }
+  
+  public IExecutionContext getExecutionContext() {
+    return this.executionContext;
   }
   
   public void declareContents(final Scope scope) {

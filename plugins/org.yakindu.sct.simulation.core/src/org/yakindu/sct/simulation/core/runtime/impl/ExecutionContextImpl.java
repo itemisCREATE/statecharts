@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,7 +29,6 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 
 /**
  * 
@@ -40,6 +40,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	private List<ExecutionVariable> variables;
 	private List<ExecutionEvent> declaredEvents;
+	protected List<ExecutionEvent> scheduledToRaiseEvents;
 	protected List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
 	private Map<Integer, ExecutionState> historyStateConfig;
@@ -50,6 +51,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		variables = new ArrayList<ExecutionVariable>();
 		declaredEvents = new ArrayList<ExecutionEvent>();
 		raisedEvents = new ArrayList<ExecutionEvent>();
+		scheduledToRaiseEvents = new ArrayList<ExecutionEvent>();
 		timeScaleFactor = 1.0d;
 		virtualClock = new VirtualClock();
 		activeStateConfig = null;
@@ -62,6 +64,12 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		}
 	}
 
+	public List<ExecutionEvent> getScheduledToRaiseEvents() {
+		synchronized (scheduledToRaiseEvents) {
+			return Collections.unmodifiableList(scheduledToRaiseEvents);
+		}
+	}
+
 	public void declareEvent(ExecutionEvent event) {
 		synchronized (declaredEvents) {
 			declaredEvents.add(event);
@@ -71,6 +79,10 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	public List<ExecutionEvent> getRaisedEvents() {
 		return Collections.unmodifiableList(raisedEvents);
 	}
+	
+	public List<ExecutionEvent> getScheduledEvents() {
+		return Collections.unmodifiableList(scheduledToRaiseEvents);
+	}
 
 	public void resetRaisedEvents() {
 		synchronized (raisedEvents) {
@@ -79,6 +91,18 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	}
 
 	public void raiseEvent(String eventName, Object value) {
+		ExecutionEvent event = getDeclaredEvent(eventName);
+		if (event == null)
+			throw new ExecutionException("Event with name " + eventName
+					+ " is undefined!");
+		ExecutionEvent eventCopy = event.getCopy();
+		if (value != null) {
+			eventCopy.setValue(value);
+		}
+		scheduledToRaiseEvents.add(eventCopy);
+	}
+
+	protected void raiseEventInternal(String eventName, Object value) {
 		synchronized (raisedEvents) {
 			ExecutionEvent event = getDeclaredEvent(eventName);
 			if (event == null)
@@ -91,6 +115,13 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 			raisedEvents.add(eventCopy);
 			notifyEventRaised(eventCopy);
 		}
+	}
+
+	public void flush() {
+		for (ExecutionEvent event : scheduledToRaiseEvents) {
+			raiseEventInternal(event.getName(), event.getValue());
+		}
+		scheduledToRaiseEvents.clear();
 	}
 
 	@Override
@@ -217,5 +248,37 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	public VirtualClock getVirtualClock() {
 		return virtualClock;
+	}
+
+	public void unraiseEvent(String eventName) {
+		synchronized (raisedEvents) {
+			Iterator<ExecutionEvent> iterator = raisedEvents.iterator();
+			while (iterator.hasNext()) {
+				if (iterator.next().getName().equals(eventName)) {
+					iterator.remove();
+				}
+			}
+		}
+	}
+	public void unscheduleEvent(String eventName) {
+		synchronized (scheduledToRaiseEvents) {
+			Iterator<ExecutionEvent> iterator = scheduledToRaiseEvents.iterator();
+			while (iterator.hasNext()) {
+				if (iterator.next().getName().equals(eventName)) {
+					iterator.remove();
+				}
+			}
+		}
+	}
+
+	public boolean isEventScheduled(String name) {
+		synchronized (scheduledToRaiseEvents) {
+			for (ExecutionEvent event : scheduledToRaiseEvents) {
+				if (name.equals(event.getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
