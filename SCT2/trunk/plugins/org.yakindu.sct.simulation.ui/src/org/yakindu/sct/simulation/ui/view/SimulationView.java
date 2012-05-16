@@ -10,7 +10,8 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
-import org.apache.commons.lang.time.DurationFormatUtils;
+import static org.apache.commons.lang.time.DurationFormatUtils.formatDuration;
+
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugEvent;
@@ -70,6 +71,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		IDebugEventSetListener {
 
 	private static final String INITIAL_TIME = "00:00:00:00";
+
 	private TreeViewer viewer;
 	private SCTDebugTarget debugTarget;
 	private Text scaleFactor;
@@ -183,7 +185,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 
 	private void createClocks(Composite parent) {
 		// Virtual Clock
-		Label label = kit.createLabel(parent, "virtual time:");
+		Label label = kit.createLabel(parent, "scaled time:");
 		GridDataFactory.fillDefaults().applyTo(label);
 		lblVirtualTime = new Label(parent, SWT.NONE);
 		lblVirtualTime.setFont(font);
@@ -192,7 +194,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		GridDataFactory.fillDefaults().grab(true, false).span(2, 0)
 				.applyTo(lblVirtualTime);
 		// Real time clock
-		Label label2 = kit.createLabel(parent, "real time:");
+		Label label2 = kit.createLabel(parent, "time:");
 		GridDataFactory.fillDefaults().applyTo(label2);
 		lblRealTime = new Label(parent, SWT.NONE);
 		lblRealTime.setFont(font);
@@ -239,10 +241,17 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 				Object firstElement = ((IStructuredSelection) event
 						.getSelection()).getFirstElement();
 				if (firstElement instanceof ExecutionEvent) {
+					ExecutionEvent casted = (ExecutionEvent) firstElement;
 					IExecutionContext input = (IExecutionContext) viewer
 							.getInput();
-					input.raiseEvent(((ExecutionEvent) firstElement).getName(),
-							null);
+					if (input.isEventRaised(casted.getName())) {
+						input.unraiseEvent(casted.getName());
+					} else if (input.isEventScheduled(casted.getName())) {
+						input.unscheduleEvent(casted.getName());
+					} else {
+						input.raiseEvent(casted.getName(), null);
+					}
+					viewer.refresh();
 				}
 			}
 		});
@@ -288,6 +297,12 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 				}
 			});
 			break;
+		case DebugEvent.SUSPEND:
+			getClock().suspend();
+			break;
+		case DebugEvent.RESUME:
+			getClock().resume();
+			break;
 		}
 	}
 
@@ -309,56 +324,30 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		mgr.add(hideTimeEvent);
 	}
 
+	protected VirtualClock getClock() {
+		IExecutionFacade facade = (IExecutionFacade) debugTarget
+				.getAdapter(IExecutionFacade.class);
+		VirtualClock virtualClock = facade.getExecutionContext()
+				.getVirtualClock();
+		return virtualClock;
+	}
+
 	public class ClockUpdater implements Runnable {
 
-		private static final String PATTERN = "HH:mm:ss:SS";
 		private boolean terminated = false;
+		private UpdateUIThread updateUI = new UpdateUIThread();
+		private StopClock resetLabel = new StopClock();
 
 		public void run() {
 			while (!terminated) {
-				Display.getDefault().asyncExec(new Runnable() {
-					public void run() {
-						IExecutionFacade facade = (IExecutionFacade) debugTarget
-								.getAdapter(IExecutionFacade.class);
-						VirtualClock virtualClock = facade
-								.getExecutionContext().getVirtualClock();
-						if (virtualClock.getStartTime() > 0) {
-							if (lblVirtualTime != null
-									&& !lblVirtualTime.isDisposed()) {
-								String text = DurationFormatUtils
-										.formatDuration(virtualClock.getTime()
-												- virtualClock.getStartTime(),
-												PATTERN);
-								lblVirtualTime.setText(text);
-							}
-							if (lblRealTime != null
-									&& !lblRealTime.isDisposed()) {
-								String text = DurationFormatUtils.formatDuration(
-										System.currentTimeMillis()
-												- virtualClock.getStartTime(),
-										PATTERN);
-								lblRealTime.setText(text);
-							}
-						}
-					}
-				});
+				Display.getDefault().asyncExec(updateUI);
 				try {
 					Thread.sleep(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}
-			// reset the lbls when updater terminated
-			Display.getDefault().asyncExec(new Runnable() {
-				public void run() {
-					if (lblRealTime != null && !lblRealTime.isDisposed()) {
-						lblRealTime.setText(INITIAL_TIME);
-					}
-					if (lblVirtualTime != null && !lblVirtualTime.isDisposed()) {
-						lblVirtualTime.setText(INITIAL_TIME);
-					}
-				}
-			});
+			Display.getDefault().asyncExec(resetLabel);
 		}
 
 		public boolean isTerminated() {
@@ -367,6 +356,42 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 
 		public void setTerminated(boolean terminated) {
 			this.terminated = terminated;
+		}
+	}
+
+	private final class StopClock implements Runnable {
+		public void run() {
+			if (lblRealTime != null && !lblRealTime.isDisposed()) {
+				lblRealTime.setText(INITIAL_TIME);
+			}
+			if (lblVirtualTime != null && !lblVirtualTime.isDisposed()) {
+				lblVirtualTime.setText(INITIAL_TIME);
+			}
+		}
+	}
+
+	private final class UpdateUIThread implements Runnable {
+
+		private static final String PATTERN = "HH:mm:ss:SS";
+
+		public void run() {
+			// if (!debugTarget.isSuspended()) {
+			VirtualClock virtualClock = getClock();
+			if (virtualClock.getStartTime() > 0) {
+				if (lblVirtualTime != null && !lblVirtualTime.isDisposed()) {
+					String text = formatDuration(virtualClock.getTime()
+							- virtualClock.getStartTime(), PATTERN);
+					lblVirtualTime.setText(text);
+				}
+				if (lblRealTime != null && !lblRealTime.isDisposed()) {
+					String text = formatDuration(
+							System.currentTimeMillis()
+									- virtualClock.getPauseTime()
+									- virtualClock.getStartTime(), PATTERN);
+					lblRealTime.setText(text);
+				}
+			}
+			// }
 		}
 	}
 

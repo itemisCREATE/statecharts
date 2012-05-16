@@ -11,33 +11,23 @@
 
 package org.yakindu.sct.simulation.core.runtime.impl;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-
-import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
+import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeController;
 
 /**
  * Event Driven implementation of the {@link IExecutionFacadeController}.
  * 
- * RunCycle is invoked on the {@link IExecutionFacade} each time a event is
- * raised.
- * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public class EventDrivenExecutionFacadeController extends
-		AbstractExecutionFacadeController implements IExecutionContextListener {
+		AbstractExecutionFacadeController {
 
 	private Thread cycleRunner;
 
-	private BlockingQueue<ExecutionEvent> events;
-
 	public EventDrivenExecutionFacadeController(IExecutionFacade facade) {
 		super(facade);
-		facade.getExecutionContext().addExecutionContextListener(this);
-		events = new LinkedBlockingQueue<ExecutionEvent>();
 	}
 
 	public void start() {
@@ -60,30 +50,15 @@ public class EventDrivenExecutionFacadeController extends
 		super.terminate();
 	}
 
-	public void eventRaised(ExecutionEvent event) {
-		events.add(event);
-	}
-
-	public void variableValueChanged(ExecutionVariable variable) {
-		// Nothing to do
-	}
-
 	private final class CycleRunner implements Runnable {
 		public void run() {
-			try {
-				while (!terminated && !suspended) {
-					events.take();
-					if (facade.getExecutionContext().getRaisedEvents().size() > 0) {
-						facade.runCycle();
-					}
+			while (!terminated && !suspended) {
+				IExecutionContext context = facade.getExecutionContext();
+				if (context.getRaisedEvents().size() > 0
+						|| context.getScheduledEvents().size() > 0) {
+					facade.runCycle();
 				}
-			} catch (InterruptedException e) {
-				e.printStackTrace();
 			}
 		}
-	}
-
-	public void timeScaleFactorChanged(double oldFactor, double newFactor) {
-
 	}
 }

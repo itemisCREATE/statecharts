@@ -58,7 +58,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	IStatementInterpreter interpreter
 	@Inject
 	IExecutionContext executionContext
-	BufferingExecutionContext externalExecutionContext
 	@Inject
 	StextNameProvider provider
 	@Inject 
@@ -78,7 +77,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 
 	override initialize(ExecutionFlow flow) {
 		this.flow = flow;
-		externalExecutionContext = new BufferingExecutionContext(executionContext)
 		for(scope : flow.scopes){
 			scope.declareContents
 		} 
@@ -101,10 +99,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		interpreterName
 	}
 	
-	override getExecutionContext(){
-		return externalExecutionContext
-	}
-	
 	def dispatch declareContents(InternalScope scope) {
 		for(declaration : scope.declarations){
 				declaration.addToScope
@@ -124,8 +118,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 	
 	override runCycle() {
-		
-		externalExecutionContext.flush
+		executionContext.flush
 		
 		nextSVIdx = 0; // this is a member that can be manipulated during state reactions in case of orthogonality
 		
@@ -288,7 +281,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	def dispatch execute(ScheduleTimeEvent scheduleTimeEvent){
 		var timeEvent = scheduleTimeEvent.timeEvent
 		var duration = interpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
-		timingService.scheduleTimeEvent(externalExecutionContext,timeEvent.name,timeEvent.periodic, duration as Integer)
+		timingService.scheduleTimeEvent(executionContext,timeEvent.name,timeEvent.periodic, duration as Integer)
 		null
 	}
 	
@@ -308,4 +301,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	override void timeScaleFactorChanged(double oldFactor, double newFactor){
 		timingService.setTimeScaleFactor(newFactor)
 	}
+
+	override getExecutionContext() {
+		return executionContext;
+	}
+	
 }

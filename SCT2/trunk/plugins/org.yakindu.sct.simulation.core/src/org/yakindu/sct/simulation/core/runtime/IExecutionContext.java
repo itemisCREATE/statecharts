@@ -42,10 +42,16 @@ public interface IExecutionContext {
 	 */
 	public List<ExecutionEvent> getRaisedEvents();
 
+	public List<ExecutionEvent> getScheduledEvents();
+
 	/**
 	 * Clears the collection of raised events
 	 */
 	public void resetRaisedEvents();
+
+	public void unraiseEvent(String eventName);
+
+	public void flush();
 
 	/**
 	 * Raises an event with an value, can be null
@@ -60,6 +66,8 @@ public interface IExecutionContext {
 	 * Returns true if the given event is currently raised, false otherwise
 	 */
 	public boolean isEventRaised(String eventName);
+
+	public boolean isEventScheduled(String name);
 
 	/**
 	 * Returns a readonly (!) List of all variables
@@ -131,5 +139,7 @@ public interface IExecutionContext {
 	public void saveHistoryStateConfiguration(ExecutionRegion region);
 
 	public abstract ExecutionEvent getDeclaredEvent(String eventName);
+
+	public void unscheduleEvent(String eventName);
 
 }
