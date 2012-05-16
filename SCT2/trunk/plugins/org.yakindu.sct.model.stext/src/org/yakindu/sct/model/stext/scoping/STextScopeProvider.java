@@ -16,6 +16,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -59,17 +61,19 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 		private ErrorHandler<T> delegate;
 
+		public static final Log LOG = LogFactory
+				.getLog(STextScopeProvider.class);
+
 		public ErrorHandlerDelegate(ErrorHandler<T> delegate) {
 			this.delegate = delegate;
 
 		}
 
 		public T handle(Object[] params, Throwable throwable) {
-			if (!(throwable instanceof NoSuchMethodException)) {
-				throwable.printStackTrace();
+			if (throwable instanceof NoSuchMethodException) {
+				LOG.debug("Error in scope method, using fallback", throwable);
 			} else {
-				// System.out.println(STextScopeProvider.class.getSimpleName()
-				// + ": NoSuchMethodException");
+				LOG.warn("Error in scope method, using fallback", throwable);
 			}
 			return delegate.handle(params, throwable);
 		}
