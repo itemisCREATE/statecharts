@@ -4,9 +4,9 @@ generate stext "http://www.yakindu.org/sct/statechart/SText"
 
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
-import "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore" as sgraph
-import "platform:/resource/org.yakindu.base.types/model/types.ecore" as types
-import "platform:/resource/org.yakindu.base.types/model/base.ecore" as base
+import "http://www.yakindu.org/sct/sgraph/2.0.0" as sgraph
+import "http://www.yakindu.org/base/types/2.0.0" as types
+import "http://www.yakindu.org/base/base/2.0.0" as base
 
 /* ---- root rules ----
 These root rules are not relevant for the grammar integration in the statechart. They just integrate the different start rules consistently 
