@@ -41,6 +41,8 @@ Workflow {
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment {
 				generateEdit = true
+				genModel = "model/SText.genmodel"
+				xmiModelDirectory = "model"
 			}
 
 			// the serialization component
