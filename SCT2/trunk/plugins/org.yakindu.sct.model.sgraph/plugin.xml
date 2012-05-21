@@ -19,4 +19,11 @@
             class="org.yakindu.sct.model.sgraph.SGraphPackage"
             genModel="model/emf/sgraph.genmodel"/>
    </extension>
+      <extension
+         point="org.eclipse.emf.ecore.uri_mapping">
+      <mapping
+            source="platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore"
+            target="model/emf/sgraph.ecore">
+      </mapping>
+   </extension>
 </plugin>
