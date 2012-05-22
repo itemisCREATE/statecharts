@@ -26,8 +26,34 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.sct.model.sgraph.Choice;
+import org.yakindu.sct.model.sgraph.ChoiceKind;
+import org.yakindu.sct.model.sgraph.CompositeElement;
+import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Effect;
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.Event;
+import org.yakindu.sct.model.sgraph.Exit;
+import org.yakindu.sct.model.sgraph.FinalState;
+import org.yakindu.sct.model.sgraph.Pseudostate;
+import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactiveElement;
+import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.ScopedElement;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
+import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.sgraph.Synchronization;
+import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.Variable;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.util.SGraphValidator;
 
 /**
@@ -43,13 +69,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public static final String copyright = "Copyright (c) 2011 committers of YAKINDU and others.\r\nAll rights reserved. This program and the accompanying materials\r\nare made available under the terms of the Eclipse Public License v1.0\r\nwhich accompanies this distribution, and is available at\r\nhttp://www.eclipse.org/legal/epl-v10.html\r\nContributors:\r\ncommitters of YAKINDU - initial API and implementation\r\n";
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected String packageFilename = "sgraph.ecore";
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -267,6 +286,8 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
+	 * @see #createPackageContents()
+	 * @see #initializePackageContents()
 	 * @generated
 	 */
 	public static SGraphPackage init() {
@@ -280,11 +301,11 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		// Initialize simple dependencies
 		BasePackage.eINSTANCE.eClass();
 
-		// Load packages
-		theSGraphPackage.loadPackage();
+		// Create package meta-data objects
+		theSGraphPackage.createPackageContents();
 
-		// Fix loaded packages
-		theSGraphPackage.fixPackageContents();
+		// Initialize created meta-data
+		theSGraphPackage.initializePackageContents();
 
 		// Register package validator
 		EValidator.Registry.INSTANCE.put
@@ -310,9 +331,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getPseudostate() {
-		if (pseudostateEClass == null) {
-			pseudostateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(0);
-		}
 		return pseudostateEClass;
 	}
 
@@ -322,9 +340,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getVertex() {
-		if (vertexEClass == null) {
-			vertexEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(1);
-		}
 		return vertexEClass;
 	}
 
@@ -334,7 +349,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getVertex_ParentRegion() {
-        return (EReference)getVertex().getEStructuralFeatures().get(0);
+		return (EReference)vertexEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -343,7 +358,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getVertex_IncomingTransitions() {
-        return (EReference)getVertex().getEStructuralFeatures().get(1);
+		return (EReference)vertexEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -352,7 +367,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getVertex_OutgoingTransitions() {
-        return (EReference)getVertex().getEStructuralFeatures().get(2);
+		return (EReference)vertexEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -361,9 +376,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getRegion() {
-		if (regionEClass == null) {
-			regionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(2);
-		}
 		return regionEClass;
 	}
 
@@ -373,7 +385,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getRegion_Vertices() {
-        return (EReference)getRegion().getEStructuralFeatures().get(0);
+		return (EReference)regionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -382,7 +394,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getRegion_Priority() {
-        return (EAttribute)getRegion().getEStructuralFeatures().get(1);
+		return (EAttribute)regionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -391,7 +403,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getRegion_Composite() {
-        return (EReference)getRegion().getEStructuralFeatures().get(2);
+		return (EReference)regionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -400,9 +412,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getTransition() {
-		if (transitionEClass == null) {
-			transitionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(3);
-		}
 		return transitionEClass;
 	}
 
@@ -412,7 +421,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getTransition_Target() {
-        return (EReference)getTransition().getEStructuralFeatures().get(0);
+		return (EReference)transitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -421,7 +430,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getTransition_Source() {
-        return (EReference)getTransition().getEStructuralFeatures().get(1);
+		return (EReference)transitionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -430,7 +439,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getTransition_Priority() {
-        return (EAttribute)getTransition().getEStructuralFeatures().get(2);
+		return (EAttribute)transitionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -439,9 +448,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getFinalState() {
-		if (finalStateEClass == null) {
-			finalStateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(4);
-		}
 		return finalStateEClass;
 	}
 
@@ -451,9 +457,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getState() {
-		if (stateEClass == null) {
-			stateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(21);
-		}
 		return stateEClass;
 	}
 
@@ -463,7 +466,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_Orthogonal() {
-        return (EAttribute)getState().getEStructuralFeatures().get(0);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -472,7 +475,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getState_Substatechart() {
-        return (EReference)getState().getEStructuralFeatures().get(1);
+		return (EReference)stateEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -481,7 +484,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_SubstatechartId() {
-        return (EAttribute)getState().getEStructuralFeatures().get(2);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -490,7 +493,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_Subchart() {
-        return (EAttribute)getState().getEStructuralFeatures().get(3);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -499,7 +502,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_Simple() {
-        return (EAttribute)getState().getEStructuralFeatures().get(4);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -508,7 +511,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_Composite() {
-        return (EAttribute)getState().getEStructuralFeatures().get(5);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -517,7 +520,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getState_Leaf() {
-        return (EAttribute)getState().getEStructuralFeatures().get(6);
+		return (EAttribute)stateEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -526,9 +529,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getStatement() {
-		if (statementEClass == null) {
-			statementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(22);
-		}
 		return statementEClass;
 	}
 
@@ -538,9 +538,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getRegularState() {
-		if (regularStateEClass == null) {
-			regularStateEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(23);
-		}
 		return regularStateEClass;
 	}
 
@@ -550,9 +547,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getCompositeElement() {
-		if (compositeElementEClass == null) {
-			compositeElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(25);
-		}
 		return compositeElementEClass;
 	}
 
@@ -562,7 +556,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getCompositeElement_Regions() {
-        return (EReference)getCompositeElement().getEStructuralFeatures().get(0);
+		return (EReference)compositeElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -571,9 +565,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getVariable() {
-		if (variableEClass == null) {
-			variableEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(5);
-		}
 		return variableEClass;
 	}
 
@@ -583,9 +574,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getEvent() {
-		if (eventEClass == null) {
-			eventEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(6);
-		}
 		return eventEClass;
 	}
 
@@ -595,9 +583,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getChoice() {
-		if (choiceEClass == null) {
-			choiceEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(7);
-		}
 		return choiceEClass;
 	}
 
@@ -607,7 +592,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getChoice_Kind() {
-        return (EAttribute)getChoice().getEStructuralFeatures().get(0);
+		return (EAttribute)choiceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -616,9 +601,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getStatechart() {
-		if (statechartEClass == null) {
-			statechartEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(8);
-		}
 		return statechartEClass;
 	}
 
@@ -628,9 +610,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getEntry() {
-		if (entryEClass == null) {
-			entryEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(9);
-		}
 		return entryEClass;
 	}
 
@@ -640,7 +619,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getEntry_Kind() {
-        return (EAttribute)getEntry().getEStructuralFeatures().get(0);
+		return (EAttribute)entryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -649,9 +628,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getTrigger() {
-		if (triggerEClass == null) {
-			triggerEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(10);
-		}
 		return triggerEClass;
 	}
 
@@ -661,9 +637,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getEffect() {
-		if (effectEClass == null) {
-			effectEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(11);
-		}
 		return effectEClass;
 	}
 
@@ -673,9 +646,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getSpecificationElement() {
-		if (specificationElementEClass == null) {
-			specificationElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(12);
-		}
 		return specificationElementEClass;
 	}
 
@@ -685,7 +655,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getSpecificationElement_Specification() {
-        return (EAttribute)getSpecificationElement().getEStructuralFeatures().get(0);
+		return (EAttribute)specificationElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -694,9 +664,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getDeclaration() {
-		if (declarationEClass == null) {
-			declarationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(13);
-		}
 		return declarationEClass;
 	}
 
@@ -706,9 +673,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getReaction() {
-		if (reactionEClass == null) {
-			reactionEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(14);
-		}
 		return reactionEClass;
 	}
 
@@ -718,7 +682,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getReaction_Trigger() {
-        return (EReference)getReaction().getEStructuralFeatures().get(0);
+		return (EReference)reactionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -727,7 +691,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getReaction_Effect() {
-        return (EReference)getReaction().getEStructuralFeatures().get(1);
+		return (EReference)reactionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -736,9 +700,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getReactiveElement() {
-		if (reactiveElementEClass == null) {
-			reactiveElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(16);
-		}
 		return reactiveElementEClass;
 	}
 
@@ -748,7 +709,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getReactiveElement_Reactions() {
-        return (EReference)getReactiveElement().getEStructuralFeatures().get(0);
+		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -757,7 +718,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getReactiveElement_LocalReactions() {
-        return (EReference)getReactiveElement().getEStructuralFeatures().get(1);
+		return (EReference)reactiveElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -766,9 +727,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getExit() {
-		if (exitEClass == null) {
-			exitEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(17);
-		}
 		return exitEClass;
 	}
 
@@ -778,9 +736,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getScope() {
-		if (scopeEClass == null) {
-			scopeEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(18);
-		}
 		return scopeEClass;
 	}
 
@@ -790,7 +745,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getScope_Declarations() {
-        return (EReference)getScope().getEStructuralFeatures().get(0);
+		return (EReference)scopeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -799,7 +754,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getScope_Events() {
-        return (EReference)getScope().getEStructuralFeatures().get(1);
+		return (EReference)scopeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -808,7 +763,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getScope_Variables() {
-        return (EReference)getScope().getEStructuralFeatures().get(2);
+		return (EReference)scopeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -817,9 +772,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getScopedElement() {
-		if (scopedElementEClass == null) {
-			scopedElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(19);
-		}
 		return scopedElementEClass;
 	}
 
@@ -829,7 +781,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EReference getScopedElement_Scopes() {
-        return (EReference)getScopedElement().getEStructuralFeatures().get(0);
+		return (EReference)scopedElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -838,7 +790,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EAttribute getScopedElement_Namespace() {
-        return (EAttribute)getScopedElement().getEStructuralFeatures().get(1);
+		return (EAttribute)scopedElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -847,9 +799,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EClass getSynchronization() {
-		if (synchronizationEClass == null) {
-			synchronizationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(20);
-		}
 		return synchronizationEClass;
 	}
 
@@ -859,9 +808,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EEnum getEntryKind() {
-		if (entryKindEEnum == null) {
-			entryKindEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(15);
-		}
 		return entryKindEEnum;
 	}
 
@@ -871,9 +817,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	public EEnum getChoiceKind() {
-		if (choiceKindEEnum == null) {
-			choiceKindEEnum = (EEnum)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI).getEClassifiers().get(24);
-		}
 		return choiceKindEEnum;
 	}
 
@@ -891,65 +834,325 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private boolean isLoaded = false;
+	private boolean isCreated = false;
 
 	/**
-	 * Laods the package and any sub-packages from their serialized form.
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void loadPackage() {
-		if (isLoaded) return;
-		isLoaded = true;
+	public void createPackageContents() {
+		if (isCreated) return;
+		isCreated = true;
 
-		URL url = getClass().getResource(packageFilename);
-		if (url == null) {
-			throw new RuntimeException("Missing serialized package: " + packageFilename);
-		}
-		URI uri = URI.createURI(url.toString());
-		Resource resource = new EcoreResourceFactoryImpl().createResource(uri);
-		try {
-			resource.load(null);
-		}
-		catch (IOException exception) {
-			throw new WrappedException(exception);
-		}
-		initializeFromLoadedEPackage(this, (EPackage)resource.getContents().get(0));
+		// Create classes and their features
+		pseudostateEClass = createEClass(PSEUDOSTATE);
+
+		vertexEClass = createEClass(VERTEX);
+		createEReference(vertexEClass, VERTEX__PARENT_REGION);
+		createEReference(vertexEClass, VERTEX__INCOMING_TRANSITIONS);
+		createEReference(vertexEClass, VERTEX__OUTGOING_TRANSITIONS);
+
+		regionEClass = createEClass(REGION);
+		createEReference(regionEClass, REGION__VERTICES);
+		createEAttribute(regionEClass, REGION__PRIORITY);
+		createEReference(regionEClass, REGION__COMPOSITE);
+
+		transitionEClass = createEClass(TRANSITION);
+		createEReference(transitionEClass, TRANSITION__TARGET);
+		createEReference(transitionEClass, TRANSITION__SOURCE);
+		createEAttribute(transitionEClass, TRANSITION__PRIORITY);
+
+		finalStateEClass = createEClass(FINAL_STATE);
+
+		variableEClass = createEClass(VARIABLE);
+
+		eventEClass = createEClass(EVENT);
+
+		choiceEClass = createEClass(CHOICE);
+		createEAttribute(choiceEClass, CHOICE__KIND);
+
+		statechartEClass = createEClass(STATECHART);
+
+		entryEClass = createEClass(ENTRY);
+		createEAttribute(entryEClass, ENTRY__KIND);
+
+		triggerEClass = createEClass(TRIGGER);
+
+		effectEClass = createEClass(EFFECT);
+
+		specificationElementEClass = createEClass(SPECIFICATION_ELEMENT);
+		createEAttribute(specificationElementEClass, SPECIFICATION_ELEMENT__SPECIFICATION);
+
+		declarationEClass = createEClass(DECLARATION);
+
+		reactionEClass = createEClass(REACTION);
+		createEReference(reactionEClass, REACTION__TRIGGER);
+		createEReference(reactionEClass, REACTION__EFFECT);
+
+		reactiveElementEClass = createEClass(REACTIVE_ELEMENT);
+		createEReference(reactiveElementEClass, REACTIVE_ELEMENT__REACTIONS);
+		createEReference(reactiveElementEClass, REACTIVE_ELEMENT__LOCAL_REACTIONS);
+
+		exitEClass = createEClass(EXIT);
+
+		scopeEClass = createEClass(SCOPE);
+		createEReference(scopeEClass, SCOPE__DECLARATIONS);
+		createEReference(scopeEClass, SCOPE__EVENTS);
+		createEReference(scopeEClass, SCOPE__VARIABLES);
+
+		scopedElementEClass = createEClass(SCOPED_ELEMENT);
+		createEReference(scopedElementEClass, SCOPED_ELEMENT__SCOPES);
+		createEAttribute(scopedElementEClass, SCOPED_ELEMENT__NAMESPACE);
+
+		synchronizationEClass = createEClass(SYNCHRONIZATION);
+
+		stateEClass = createEClass(STATE);
+		createEAttribute(stateEClass, STATE__ORTHOGONAL);
+		createEReference(stateEClass, STATE__SUBSTATECHART);
+		createEAttribute(stateEClass, STATE__SUBSTATECHART_ID);
+		createEAttribute(stateEClass, STATE__SUBCHART);
+		createEAttribute(stateEClass, STATE__SIMPLE);
+		createEAttribute(stateEClass, STATE__COMPOSITE);
+		createEAttribute(stateEClass, STATE__LEAF);
+
+		statementEClass = createEClass(STATEMENT);
+
+		regularStateEClass = createEClass(REGULAR_STATE);
+
+		compositeElementEClass = createEClass(COMPOSITE_ELEMENT);
+		createEReference(compositeElementEClass, COMPOSITE_ELEMENT__REGIONS);
+
+		// Create enums
+		entryKindEEnum = createEEnum(ENTRY_KIND);
+		choiceKindEEnum = createEEnum(CHOICE_KIND);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private boolean isInitialized = false;
+
+	/**
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initializePackageContents() {
+		if (isInitialized) return;
+		isInitialized = true;
+
+		// Initialize package
+		setName(eNAME);
+		setNsPrefix(eNS_PREFIX);
+		setNsURI(eNS_URI);
+
+		// Obtain other dependent packages
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
+
+		// Add supertypes to classes
+		pseudostateEClass.getESuperTypes().add(this.getVertex());
+		vertexEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		regionEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		transitionEClass.getESuperTypes().add(this.getSpecificationElement());
+		transitionEClass.getESuperTypes().add(this.getReaction());
+		finalStateEClass.getESuperTypes().add(this.getRegularState());
+		variableEClass.getESuperTypes().add(this.getDeclaration());
+		eventEClass.getESuperTypes().add(this.getDeclaration());
+		choiceEClass.getESuperTypes().add(this.getPseudostate());
+		statechartEClass.getESuperTypes().add(this.getSpecificationElement());
+		statechartEClass.getESuperTypes().add(this.getReactiveElement());
+		statechartEClass.getESuperTypes().add(this.getScopedElement());
+		statechartEClass.getESuperTypes().add(this.getCompositeElement());
+		statechartEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		entryEClass.getESuperTypes().add(this.getPseudostate());
+		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		exitEClass.getESuperTypes().add(this.getPseudostate());
+		synchronizationEClass.getESuperTypes().add(this.getPseudostate());
+		stateEClass.getESuperTypes().add(this.getSpecificationElement());
+		stateEClass.getESuperTypes().add(this.getReactiveElement());
+		stateEClass.getESuperTypes().add(this.getScopedElement());
+		stateEClass.getESuperTypes().add(this.getRegularState());
+		stateEClass.getESuperTypes().add(this.getCompositeElement());
+		regularStateEClass.getESuperTypes().add(this.getVertex());
+
+		// Initialize classes and features; add operations and parameters
+		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(vertexEClass, Vertex.class, "Vertex", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVertex_ParentRegion(), this.getRegion(), this.getRegion_Vertices(), "parentRegion", null, 1, 1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getVertex_IncomingTransitions(), this.getTransition(), this.getTransition_Target(), "incomingTransitions", null, 0, -1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getVertex_OutgoingTransitions(), this.getTransition(), this.getTransition_Source(), "outgoingTransitions", null, 0, -1, Vertex.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+
+		initEClass(regionEClass, Region.class, "Region", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getRegion_Vertices(), this.getVertex(), this.getVertex_ParentRegion(), "vertices", null, 0, -1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getRegion_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getRegion_Composite(), this.getCompositeElement(), this.getCompositeElement_Regions(), "composite", null, 1, 1, Region.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(transitionEClass, Transition.class, "Transition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTransition_Target(), this.getVertex(), this.getVertex_IncomingTransitions(), "target", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEReference(getTransition_Source(), this.getVertex(), this.getVertex_OutgoingTransitions(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
+		initEAttribute(getTransition_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(finalStateEClass, FinalState.class, "FinalState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(variableEClass, Variable.class, "Variable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(choiceEClass, Choice.class, "Choice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getChoice_Kind(), this.getChoiceKind(), "kind", null, 0, 1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(statechartEClass, Statechart.class, "Statechart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(entryEClass, Entry.class, "Entry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEntry_Kind(), this.getEntryKind(), "kind", null, 0, 1, Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(triggerEClass, Trigger.class, "Trigger", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(effectEClass, Effect.class, "Effect", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(specificationElementEClass, SpecificationElement.class, "SpecificationElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getSpecificationElement_Specification(), ecorePackage.getEString(), "specification", null, 0, 1, SpecificationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(reactionEClass, Reaction.class, "Reaction", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReaction_Trigger(), this.getTrigger(), null, "trigger", null, 0, 1, Reaction.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReaction_Effect(), this.getEffect(), null, "effect", null, 0, 1, Reaction.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(reactiveElementEClass, ReactiveElement.class, "ReactiveElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReactiveElement_Reactions(), this.getReaction(), null, "reactions", null, 0, -1, ReactiveElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getReactiveElement_LocalReactions(), this.getReaction(), null, "localReactions", null, 0, -1, ReactiveElement.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(exitEClass, Exit.class, "Exit", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScope_Declarations(), this.getDeclaration(), null, "declarations", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Events(), this.getEvent(), null, "events", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Variables(), this.getVariable(), null, "variables", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(scopedElementEClass, ScopedElement.class, "ScopedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getScopedElement_Scopes(), this.getScope(), null, "scopes", null, 0, -1, ScopedElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getScopedElement_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, ScopedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(synchronizationEClass, Synchronization.class, "Synchronization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(stateEClass, State.class, "State", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getState_Orthogonal(), ecorePackage.getEBoolean(), "orthogonal", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getState_Substatechart(), this.getStatechart(), null, "substatechart", null, 0, 1, State.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_SubstatechartId(), ecorePackage.getEString(), "substatechartId", null, 0, 1, State.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Subchart(), ecorePackage.getEBoolean(), "subchart", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Simple(), ecorePackage.getEBoolean(), "simple", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Composite(), ecorePackage.getEBoolean(), "composite", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getState_Leaf(), ecorePackage.getEBoolean(), "leaf", null, 0, 1, State.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+
+		initEClass(statementEClass, Statement.class, "Statement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(regularStateEClass, RegularState.class, "RegularState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(compositeElementEClass, CompositeElement.class, "CompositeElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompositeElement_Regions(), this.getRegion(), this.getRegion_Composite(), "regions", null, 0, -1, CompositeElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(entryKindEEnum, EntryKind.class, "EntryKind");
+		addEEnumLiteral(entryKindEEnum, EntryKind.INITIAL);
+		addEEnumLiteral(entryKindEEnum, EntryKind.SHALLOW_HISTORY);
+		addEEnumLiteral(entryKindEEnum, EntryKind.DEEP_HISTORY);
+
+		initEEnum(choiceKindEEnum, ChoiceKind.class, "ChoiceKind");
+		addEEnumLiteral(choiceKindEEnum, ChoiceKind.DYNAMIC);
+		addEEnumLiteral(choiceKindEEnum, ChoiceKind.STATIC);
+
+		// Create resource
 		createResource(eNS_URI);
+
+		// Create annotations
+		// http://www.eclipse.org/emf/2002/Ecore
+		createEcoreAnnotations();
+		// InjectMembers
+		createInjectMembersAnnotations();
 	}
 
 	/**
+	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private boolean isFixed = false;
-
-	/**
-	 * Fixes up the loaded package, to make it appear as if it had been programmatically built.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void fixPackageContents() {
-		if (isFixed) return;
-		isFixed = true;
-		fixEClassifiers();
+	protected void createEcoreAnnotations() {
+		String source = "http://www.eclipse.org/emf/2002/Ecore";			
+		addAnnotation
+		  (vertexEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "IncomingTransitionCount"
+		   });		
+		addAnnotation
+		  (regionEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "ExactlyOneInitialState"
+		   });			
+		addAnnotation
+		  (finalStateEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "OutgoingTransitionCount"
+		   });		
+		addAnnotation
+		  (choiceEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "OutgoingTransitionCount"
+		   });			
+		addAnnotation
+		  (entryEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "DisallowTrigger OutgoingTransitionCount"
+		   });			
+		addAnnotation
+		  (stateEClass, 
+		   source, 
+		   new String[] {
+			 "constraints", "NameIsNotEmpty"
+		   });
 	}
 
 	/**
-	 * Sets the instance class on the given classifier.
+	 * Initializes the annotations for <b>InjectMembers</b>.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	protected void fixInstanceClass(EClassifier eClassifier) {
-		if (eClassifier.getInstanceClassName() == null) {
-			eClassifier.setInstanceClassName("org.yakindu.sct.model.sgraph." + eClassifier.getName());
-			setGeneratedClassName(eClassifier);
-		}
+	protected void createInjectMembersAnnotations() {
+		String source = "InjectMembers";					
+		addAnnotation
+		  (transitionEClass, 
+		   source, 
+		   new String[] {
+		   });				
+		addAnnotation
+		  (statechartEClass, 
+		   source, 
+		   new String[] {
+		   });			
+		addAnnotation
+		  (stateEClass, 
+		   source, 
+		   new String[] {
+		   });	
 	}
 
 } //SGraphPackageImpl
