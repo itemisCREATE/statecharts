@@ -42,6 +42,9 @@ import org.yakindu.sct.model.stext.stext.RelationalOperator
 import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
+import org.yakindu.sct.model.stext.stext.UnaryOperator
+import org.yakindu.sct.model.stext.stext.HexLiteral
  
 /**
  * 
@@ -115,17 +118,21 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		return assertIsBoolean(type,'!')
 	}
 	def dispatch inferType(BitwiseAndExpression expression){
-		return assertNumericalTypes(expression.leftOperand.getType, 
-			expression.rightOperand.getType,'&')
+		assertIsInteger(expression.leftOperand.getType, '&');
+		assertIsInteger(expression.rightOperand.getType, '&');
+		return integer
 	}
 	def dispatch inferType(BitwiseOrExpression expression){
-		return assertNumericalTypes(expression.leftOperand.getType, 
-			expression.rightOperand.getType,'|')
+		assertIsInteger(expression.leftOperand.getType, '|');
+		assertIsInteger(expression.rightOperand.getType, '|');
+		return integer
 	}
 	def dispatch inferType(BitwiseXorExpression expression){
-		return assertNumericalTypes(expression.leftOperand.getType, 
-			expression.rightOperand.getType,'^')
+		assertIsInteger(expression.leftOperand.getType, '^');
+		assertIsInteger(expression.rightOperand.getType, '^');
+		return integer
 	}
+	
 	def dispatch inferType(LogicalRelationExpression expression){ 
 		val leftType = expression.leftOperand.getType
 		val rightType = expression.rightOperand.getType
@@ -146,9 +153,9 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		
 	}
 	
-	def assertNumericalTypes(Type left, Type right, String literal) {
-		if (assertIsNumber(left, literal) != null
-			&& assertIsNumber(right, literal) != null) {
+	def assertNumericalTypes(Type left, Type right, String operator) {
+		if (assertIsNumber(left, operator) != null
+			&& assertIsNumber(right, operator) != null) {
 				return left.combine(right)
 		}
 		return null;
@@ -166,14 +173,23 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 	}
 	def dispatch Type inferType(NumericalUnaryExpression expression){
 		val type = expression.operand.getType
+		if(expression.operator == UnaryOperator::COMPLEMENT){
+			return assertIsInteger(type, expression.operator.literal)
+		}
 		return assertIsNumber(type, expression.operator.literal)
 	}	
 	def dispatch inferType(PrimitiveValueExpression expression){
 		val Type t = expression.value.literalType
 		return t
 	}
+	
+	def dispatch inferType(ActiveStateReferenceExpression expression){
+		return ts.boolean	
+	}
+	
 	def dispatch inferType(ShiftExpression expression){
-		//TODO: Implement me
+		assertIsInteger(expression.leftOperand.type, expression.operator.literal)
+		assertIsInteger(expression.rightOperand.type, expression.operator.literal)
 	}
 	def dispatch inferType(ConditionalExpression expression){
 		val condType = expression.condition.getType
@@ -219,6 +235,12 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		return getType(expression.value)
 	}
 	
+	
+	def dispatch getLiteralType(HexLiteral literal){
+		return ts.integer
+	}
+	
+	
 	def dispatch getLiteralType(IntLiteral literal){
 		return ts.integer
 	}
@@ -232,6 +254,14 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 	}
 	def dispatch getLiteralType(StringLiteral literal){
 		return ts.string
+	}
+	
+	def Type assertIsInteger(Type object, String operator){
+		if(!object.integer){
+			error("operator '" +operator+"' can only be applied to integers!")
+			return null
+		}
+		return object
 	}
 	
 	def Type assertIsNumber(Type object, String operator){
