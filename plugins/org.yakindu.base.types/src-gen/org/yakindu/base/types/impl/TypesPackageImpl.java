@@ -20,6 +20,14 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Feature;
+import org.yakindu.base.types.Library;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.Property;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -29,13 +37,6 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected String packageFilename = "types.ecore";
-
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -134,11 +135,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Initialize simple dependencies
 		BasePackage.eINSTANCE.eClass();
 
-		// Load packages
-		theTypesPackage.loadPackage();
+		// Create package meta-data objects
+		theTypesPackage.createPackageContents();
 
-		// Fix loaded packages
-		theTypesPackage.fixPackageContents();
+		// Initialize created meta-data
+		theTypesPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theTypesPackage.freeze();
@@ -154,9 +155,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EClass getType() {
-		if (typeEClass == null) {
-			typeEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(1);
-		}
 		return typeEClass;
 	}
 
@@ -165,7 +163,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getType_Features() {
-        return (EReference)getType().getEStructuralFeatures().get(0);
+		return (EReference)typeEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -173,7 +171,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getType_SuperTypes() {
-        return (EReference)getType().getEStructuralFeatures().get(1);
+		return (EReference)typeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -181,7 +179,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getType_OwningLibrary() {
-        return (EReference)getType().getEStructuralFeatures().get(2);
+		return (EReference)typeEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -189,9 +187,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EClass getFeature() {
-		if (featureEClass == null) {
-			featureEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(2);
-		}
 		return featureEClass;
 	}
 
@@ -200,7 +195,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getFeature_OwningType() {
-        return (EReference)getFeature().getEStructuralFeatures().get(0);
+		return (EReference)featureEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -208,9 +203,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EClass getOperation() {
-		if (operationEClass == null) {
-			operationEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(3);
-		}
 		return operationEClass;
 	}
 
@@ -219,7 +211,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getOperation_Parameters() {
-        return (EReference)getOperation().getEStructuralFeatures().get(0);
+		return (EReference)operationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -227,9 +219,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EClass getProperty() {
-		if (propertyEClass == null) {
-			propertyEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(4);
-		}
 		return propertyEClass;
 	}
 
@@ -238,9 +227,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EClass getParameter() {
-		if (parameterEClass == null) {
-			parameterEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(5);
-		}
 		return parameterEClass;
 	}
 
@@ -249,7 +235,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getParameter_OwningOperation() {
-        return (EReference)getParameter().getEStructuralFeatures().get(0);
+		return (EReference)parameterEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -257,9 +243,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EClass getTypedElement() {
-		if (typedElementEClass == null) {
-			typedElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(6);
-		}
 		return typedElementEClass;
 	}
 
@@ -268,7 +251,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getTypedElement_Type() {
-        return (EReference)getTypedElement().getEStructuralFeatures().get(0);
+		return (EReference)typedElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -276,9 +259,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EClass getLibrary() {
-		if (libraryEClass == null) {
-			libraryEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(0);
-		}
 		return libraryEClass;
 	}
 
@@ -287,7 +267,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EReference getLibrary_Types() {
-        return (EReference)getLibrary().getEStructuralFeatures().get(0);
+		return (EReference)libraryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -295,7 +275,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EAttribute getLibrary_Id() {
-        return (EAttribute)getLibrary().getEStructuralFeatures().get(1);
+		return (EAttribute)libraryEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -304,9 +284,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	public EClass getEvent() {
-		if (eventEClass == null) {
-			eventEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI).getEClassifiers().get(7);
-		}
 		return eventEClass;
 	}
 
@@ -323,65 +300,114 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private boolean isLoaded = false;
+	private boolean isCreated = false;
 
 	/**
-	 * Laods the package and any sub-packages from their serialized form.
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void loadPackage() {
-		if (isLoaded) return;
-		isLoaded = true;
+	public void createPackageContents() {
+		if (isCreated) return;
+		isCreated = true;
 
-		URL url = getClass().getResource(packageFilename);
-		if (url == null) {
-			throw new RuntimeException("Missing serialized package: " + packageFilename);
-		}
-		URI uri = URI.createURI(url.toString());
-		Resource resource = new EcoreResourceFactoryImpl().createResource(uri);
-		try {
-			resource.load(null);
-		}
-		catch (IOException exception) {
-			throw new WrappedException(exception);
-		}
-		initializeFromLoadedEPackage(this, (EPackage)resource.getContents().get(0));
+		// Create classes and their features
+		libraryEClass = createEClass(LIBRARY);
+		createEReference(libraryEClass, LIBRARY__TYPES);
+		createEAttribute(libraryEClass, LIBRARY__ID);
+
+		typeEClass = createEClass(TYPE);
+		createEReference(typeEClass, TYPE__FEATURES);
+		createEReference(typeEClass, TYPE__SUPER_TYPES);
+		createEReference(typeEClass, TYPE__OWNING_LIBRARY);
+
+		featureEClass = createEClass(FEATURE);
+		createEReference(featureEClass, FEATURE__OWNING_TYPE);
+
+		operationEClass = createEClass(OPERATION);
+		createEReference(operationEClass, OPERATION__PARAMETERS);
+
+		propertyEClass = createEClass(PROPERTY);
+
+		parameterEClass = createEClass(PARAMETER);
+		createEReference(parameterEClass, PARAMETER__OWNING_OPERATION);
+
+		typedElementEClass = createEClass(TYPED_ELEMENT);
+		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
+
+		eventEClass = createEClass(EVENT);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private boolean isInitialized = false;
+
+	/**
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initializePackageContents() {
+		if (isInitialized) return;
+		isInitialized = true;
+
+		// Initialize package
+		setName(eNAME);
+		setNsPrefix(eNS_PREFIX);
+		setNsURI(eNS_URI);
+
+		// Obtain other dependent packages
+		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
+
+		// Add supertypes to classes
+		typeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		featureEClass.getESuperTypes().add(this.getTypedElement());
+		featureEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		operationEClass.getESuperTypes().add(this.getFeature());
+		propertyEClass.getESuperTypes().add(this.getFeature());
+		parameterEClass.getESuperTypes().add(this.getTypedElement());
+		parameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		eventEClass.getESuperTypes().add(this.getFeature());
+
+		// Initialize classes and features; add operations and parameters
+		initEClass(libraryEClass, Library.class, "Library", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLibrary_Types(), this.getType(), this.getType_OwningLibrary(), "types", null, 0, -1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getLibrary_Id(), ecorePackage.getEString(), "id", null, 0, 1, Library.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeEClass, Type.class, "Type", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getType_Features(), this.getFeature(), this.getFeature_OwningType(), "features", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getType_SuperTypes(), this.getType(), null, "superTypes", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getType_OwningLibrary(), this.getLibrary(), this.getLibrary_Types(), "owningLibrary", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(featureEClass, Feature.class, "Feature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getFeature_OwningType(), this.getType(), this.getType_Features(), "owningType", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(operationEClass, Operation.class, "Operation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOperation_Parameters(), this.getParameter(), this.getParameter_OwningOperation(), "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameter_OwningOperation(), this.getOperation(), this.getOperation_Parameters(), "owningOperation", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typedElementEClass, TypedElement.class, "TypedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypedElement_Type(), this.getType(), null, "type", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Create resource
 		createResource(eNS_URI);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private boolean isFixed = false;
-
-	/**
-	 * Fixes up the loaded package, to make it appear as if it had been programmatically built.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void fixPackageContents() {
-		if (isFixed) return;
-		isFixed = true;
-		fixEClassifiers();
-	}
-
-	/**
-	 * Sets the instance class on the given classifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected void fixInstanceClass(EClassifier eClassifier) {
-		if (eClassifier.getInstanceClassName() == null) {
-			eClassifier.setInstanceClassName("org.yakindu.base.types." + eClassifier.getName());
-			setGeneratedClassName(eClassifier);
-		}
 	}
 
 } // TypesPackageImpl

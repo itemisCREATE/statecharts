@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.yakindu.base.base.BaseFactory;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,12 +29,6 @@ import org.yakindu.base.base.BasePackage;
  * @generated
  */
 public class BasePackageImpl extends EPackageImpl implements BasePackage {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected String packageFilename = "base.ecore";
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -75,6 +70,8 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #eNS_URI
+	 * @see #createPackageContents()
+	 * @see #initializePackageContents()
 	 * @generated
 	 */
 	public static BasePackage init() {
@@ -85,11 +82,11 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 
 		isInited = true;
 
-		// Load packages
-		theBasePackage.loadPackage();
+		// Create package meta-data objects
+		theBasePackage.createPackageContents();
 
-		// Fix loaded packages
-		theBasePackage.fixPackageContents();
+		// Initialize created meta-data
+		theBasePackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theBasePackage.freeze();
@@ -106,9 +103,6 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	public EClass getNamedElement() {
-		if (namedElementEClass == null) {
-			namedElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI).getEClassifiers().get(0);
-		}
 		return namedElementEClass;
 	}
 
@@ -118,7 +112,7 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * @generated
 	 */
 	public EAttribute getNamedElement_Name() {
-        return (EAttribute)getNamedElement().getEStructuralFeatures().get(0);
+		return (EAttribute)namedElementEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -135,65 +129,59 @@ public class BasePackageImpl extends EPackageImpl implements BasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private boolean isLoaded = false;
+	private boolean isCreated = false;
 
 	/**
-	 * Laods the package and any sub-packages from their serialized form.
+	 * Creates the meta-model objects for the package.  This method is
+	 * guarded to have no affect on any invocation but its first.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void loadPackage() {
-		if (isLoaded) return;
-		isLoaded = true;
+	public void createPackageContents() {
+		if (isCreated) return;
+		isCreated = true;
 
-		URL url = getClass().getResource(packageFilename);
-		if (url == null) {
-			throw new RuntimeException("Missing serialized package: " + packageFilename);
-		}
-		URI uri = URI.createURI(url.toString());
-		Resource resource = new EcoreResourceFactoryImpl().createResource(uri);
-		try {
-			resource.load(null);
-		}
-		catch (IOException exception) {
-			throw new WrappedException(exception);
-		}
-		initializeFromLoadedEPackage(this, (EPackage)resource.getContents().get(0));
+		// Create classes and their features
+		namedElementEClass = createEClass(NAMED_ELEMENT);
+		createEAttribute(namedElementEClass, NAMED_ELEMENT__NAME);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private boolean isInitialized = false;
+
+	/**
+	 * Complete the initialization of the package and its meta-model.  This
+	 * method is guarded to have no affect on any invocation but its first.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void initializePackageContents() {
+		if (isInitialized) return;
+		isInitialized = true;
+
+		// Initialize package
+		setName(eNAME);
+		setNsPrefix(eNS_PREFIX);
+		setNsURI(eNS_URI);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
+
+		// Add supertypes to classes
+
+		// Initialize classes and features; add operations and parameters
+		initEClass(namedElementEClass, NamedElement.class, "NamedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getNamedElement_Name(), ecorePackage.getEString(), "name", null, 0, 1, NamedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Create resource
 		createResource(eNS_URI);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private boolean isFixed = false;
-
-	/**
-	 * Fixes up the loaded package, to make it appear as if it had been programmatically built.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void fixPackageContents() {
-		if (isFixed) return;
-		isFixed = true;
-		fixEClassifiers();
-	}
-
-	/**
-	 * Sets the instance class on the given classifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected void fixInstanceClass(EClassifier eClassifier) {
-		if (eClassifier.getInstanceClassName() == null) {
-			eClassifier.setInstanceClassName("org.yakindu.base.base." + eClassifier.getName());
-			setGeneratedClassName(eClassifier);
-		}
 	}
 
 } //BasePackageImpl
