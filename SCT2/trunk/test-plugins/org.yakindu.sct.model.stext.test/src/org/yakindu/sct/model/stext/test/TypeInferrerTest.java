@@ -29,6 +29,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
+import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
 import org.yakindu.sct.model.stext.validation.ITypeInferrer;
 import org.yakindu.sct.model.stext.validation.TypeCheckException;
 
@@ -54,6 +55,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	public void testUnarySuccess() {
 		// int
 		assertTrue(ts.isInteger(getType("1")));
+		assertTrue(ts.isInteger(getType("0x0F")));
 		assertTrue(ts.isInteger(getType("-1")));
 		assertTrue(ts.isInteger(getType("0")));
 		assertTrue(ts.isInteger(getType("myInt")));
@@ -80,6 +82,9 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isInteger(analyzer.getType(statement)));
 
 		assertTrue(ts.isInteger(getType("1 + 2")));
+		assertTrue(ts.isInteger(getType("1 + 0x0F")));
+		assertTrue(ts.isInteger(getType("0x0F + 0x0F")));
+		assertTrue(ts.isInteger(getType("myInt + 0x0F")));
 		assertTrue(ts.isInteger(getType("myInt + 2")));
 		assertTrue(ts.isReal(getType("1.1 + 2")));
 		assertTrue(ts.isReal(getType("2 + 1.0")));
@@ -138,6 +143,9 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testSubstractSuccess() {
 		assertTrue(ts.isInteger(getType("1 - 2")));
+		assertTrue(ts.isInteger(getType("0x0F - 2")));
+		assertTrue(ts.isInteger(getType("0x0F - 0x0F")));
+		assertTrue(ts.isInteger(getType("0x0F- myInt")));
 		assertTrue(ts.isInteger(getType("myInt - 2")));
 		assertTrue(ts.isReal(getType("1.0 - 2")));
 		assertTrue(ts.isReal(getType("2 - 1.0")));
@@ -197,6 +205,8 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testMultiplySuccess() {
 		assertTrue(ts.isInteger(getType("1 * 2")));
+		assertTrue(ts.isInteger(getType("1 * 0x0F")));
+		assertTrue(ts.isInteger(getType("0x0F * myInt")));
 		assertTrue(ts.isReal(getType("myInt * myReal")));
 		assertTrue(ts.isReal(getType("1.0 * 2")));
 		assertTrue(ts.isReal(getType("2 * 1.0")));
@@ -256,6 +266,9 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	public void testDivideSuccess() {
 		assertTrue(ts.isInteger(getType("1 / 2")));
 		assertTrue(ts.isInteger(getType("1 / myInt")));
+		assertTrue(ts.isInteger(getType("1 / 0x0F")));
+		assertTrue(ts.isInteger(getType("0x0F / 0x0F")));
+		assertTrue(ts.isInteger(getType("myInt / 0x0F")));
 		assertTrue(ts.isReal(getType("1.0 / 2")));
 		assertTrue(ts.isReal(getType("2 / 1.0")));
 		assertTrue(ts.isReal(getType("1 / 2 / 3.0")));
@@ -313,6 +326,9 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testModSuccess() {
 		assertTrue(ts.isInteger(getType("1 % 2")));
+		assertTrue(ts.isInteger(getType("1 % 0x0F")));
+		assertTrue(ts.isInteger(getType("0x0F % 0x0F")));
+		assertTrue(ts.isInteger(getType("myInt % 0x0F")));
 		assertTrue(ts.isReal(getType("1.0 % 2")));
 		assertTrue(ts.isReal(getType("2 % 1.0")));
 		assertTrue(ts.isReal(getType("2 % myReal")));
@@ -373,8 +389,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isBoolean(getType("true || false")));
 		assertTrue(ts.isBoolean(getType("true || myBool")));
 		assertTrue(ts.isBoolean(getType("true || false && true")));
-		assertTrue(ts
-				.isBoolean(getType("true || true &&( false || true)")));
+		assertTrue(ts.isBoolean(getType("true || true &&( false || true)")));
 		assertTrue(ts.isBoolean(getType("!true")));
 		assertTrue(ts.isBoolean(getType("!myBool")));
 		assertTrue(ts.isBoolean(getType("!true && !false")));
@@ -613,6 +628,9 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Test
 	public void testAssignmentSuccess() {
 		getType("myInt = 5 * 3");
+		getType("myInt = 0x0F * 3");
+		getType("myInt = 0x0F * 0x0F");
+		getType("myInt = myInt * 0x0F");
 		getType("myBool = true || false");
 		getType("myString = 'string'");
 		getType("myReal = 2.0 - 7");
@@ -634,14 +652,191 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		getType("myInt = myBool");
 	}
 
+	/**
+	 * the {@link STextTestScopeProvider} adds a dummy state named 'chart.r1.A'
+	 * to the Scope.
+	 */
+	@Test
+	public void testActiveSuccess() throws Exception {
+		assertTrue(ts.isBoolean(getType("active(chart.r1.A)")));
+		assertTrue(ts.isBoolean(getType("!active(chart.r1.A)")));
+		assertTrue(ts.isBoolean(getType("true || active(chart.r1.A)")));
+		assertTrue(ts.isBoolean(getType("active(chart.r1.A) && false")));
+		assertTrue(ts.isBoolean(getType("myBool = active(chart.r1.A)")));
+	}
+
+	@Test
+	public void testActiveException1() throws Exception {
+		expectOperatorPlusException();
+		getType("active(chart.r1.A) + 1");
+	}
+
+	@Test
+	public void testActiveException2() throws Exception {
+		expectOperatorSubstractException();
+		getType("active(chart.r1.A) -1");
+	}
+
+	@Test
+	public void testActiveException3() throws Exception {
+		expectOperatorMultiplyException();
+		getType("active(chart.r1.A) *1");
+	}
+
+	@Test
+	public void testActiveException4() throws Exception {
+		expectOperatorDivideException();
+		getType("active(chart.r1.A) /1");
+	}
+
+	@Test
+	public void testActiveException5() throws Exception {
+		expectOperatorModException();
+		getType("active(chart.r1.A) % true");
+	}
+
+	@Test
+	public void testActiveException6() throws Exception {
+		expectLogicalAndException();
+		getType("active(chart.r1.A) && myInt");
+	}
+
+	@Test
+	public void testActiveException7() throws Exception {
+		expectLogicalOrException();
+		getType("active(chart.r1.A) || myString");
+	}
+
+	@Test
+	public void testActiveException8() throws Exception {
+		expectLogicalNotException();
+		getType("active(chart.r1.A) && !myString");
+	}
+
+	@Test
+	public void testBitwiseLogicalRelationSuccess() {
+		assertTrue(ts.isInteger(getType(" 5 & 3")));
+		assertTrue(ts.isInteger(getType(" 5 | 3")));
+		assertTrue(ts.isInteger(getType(" 5 ^ 3")));
+		assertTrue(ts.isInteger(getType(" ~3")));
+		assertTrue(ts.isInteger(getType("3 << 2")));
+		assertTrue(ts.isInteger(getType("5 >> 2")));
+	}
+
+	@Test
+	public void testBitwiseAndException1() throws Exception {
+		expectBitwiseAndException();
+		getType(" 5 & true");
+	}
+
+	@Test
+	public void testBitwiseAndException2() throws Exception {
+		expectBitwiseAndException();
+		getType(" 5 & 1.0");
+	}
+
+	@Test
+	public void testBitwiseAndException3() throws Exception {
+		expectBitwiseAndException();
+		getType(" 5 & 'myString'");
+	}
+
+	@Test
+	public void testBitwiseOrException1() throws Exception {
+		expectBitwiseOrException();
+		getType(" 5 | true");
+	}
+
+	@Test
+	public void testBitwiseOrException2() throws Exception {
+		expectBitwiseOrException();
+		getType(" 5 | 1.0");
+	}
+
+	@Test
+	public void testBitwiseOrException3() throws Exception {
+		expectBitwiseOrException();
+		getType(" 5 | myString");
+	}
+
+	@Test
+	public void testBitwiseXorException1() throws Exception {
+		expectBitwiseXorException();
+		getType(" 5 ^ true");
+	}
+
+	@Test
+	public void testBitwiseXorException2() throws Exception {
+		expectBitwiseXorException();
+		getType(" 5 ^ 7.0");
+	}
+
+	@Test
+	public void testBitwiseXorException3() throws Exception {
+		expectBitwiseXorException();
+		getType(" 5 ^ myString");
+	}
+
+	@Test
+	public void testBitwiseComplementException1() throws Exception {
+		expectBitwiseComplementException();
+		getType(" ~true");
+	}
+
+	@Test
+	public void testBitwiseComplementException2() throws Exception {
+		expectBitwiseComplementException();
+		getType(" ~9.0 ");
+	}
+
+	@Test
+	public void testBitwiseComplementException3() throws Exception {
+		expectBitwiseComplementException();
+		getType(" ~myString");
+	}
+
+	@Test
+	public void testBitwiseLeftShiftException1() throws Exception {
+		expectBitwiseLeftShiftException();
+		getType(" 5 << true");
+	}
+
+	@Test
+	public void testBitwiseLeftShiftException2() throws Exception {
+		expectBitwiseLeftShiftException();
+		getType(" 5 << 7.0");
+	}
+
+	@Test
+	public void testBitwiseLeftShiftException3() throws Exception {
+		expectBitwiseLeftShiftException();
+		getType(" 5 << myString");
+	}
+
+	@Test
+	public void testBitwiseRightShiftException1() throws Exception {
+		expectBitwiseRightShiftException();
+		getType(" 5 >> true");
+	}
+
+	@Test
+	public void testBitwiseRightShiftException2() throws Exception {
+		expectBitwiseRightShiftException();
+		getType(" 5 >> 7.0");
+	}
+
+	@Test
+	public void testBitwiseRightShiftException3() throws Exception {
+		expectBitwiseRightShiftException();
+		getType(" 5 >> myString");
+	}
+
 	@Test
 	public void testComplexExpressionsSuccess() {
 		ts.isBoolean(getType("((((3 * myInt) + 5) % 2) > 97) || false"));
 		ts.isBoolean(getType("!true != myBool && (3 > (myReal * 5 + 3))"));
 		ts.isInteger(getType("3 * 3 + 7 / (3 * myInt % 8)"));
 	}
-
-	// TODO: BitwiseOrExpression, BitwiseAndExpression, BitwiseXOrExpression
 
 	@Test
 	public void testEventRaisingSuccess() {
@@ -763,6 +958,48 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		exception.expect(TypeCheckException.class);
 		exception
 				.expectMessage("operator '!' can only be applied to boolean values!");
+	}
+
+	private void expectBitwiseAndException() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("operator '&' can only be applied to integers!");
+
+	}
+
+	private void expectBitwiseOrException() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("operator '|' can only be applied to integers!");
+
+	}
+
+	private void expectBitwiseXorException() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("operator '^' can only be applied to integers!");
+
+	}
+
+	private void expectBitwiseComplementException() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("operator '~' can only be applied to integers!");
+
+	}
+
+	private void expectBitwiseLeftShiftException() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("operator '<<' can only be applied to integers!");
+
+	}
+
+	private void expectBitwiseRightShiftException() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("operator '>>' can only be applied to integers!");
+
 	}
 
 	private Scope createValuedEventsScope() {
