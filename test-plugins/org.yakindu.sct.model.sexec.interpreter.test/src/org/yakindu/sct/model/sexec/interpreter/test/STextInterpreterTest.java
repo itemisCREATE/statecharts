@@ -333,37 +333,11 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		assertEquals(168, getIntValue());
 	}
 
-	// @Test
-	// public void testFloatLeft() {
-	// try {
-	// executeWithDefaultScope("a = 42.0f << 2.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(168, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
-
 	@Test
 	public void testIntRight() {
 		executeWithDefaultScope("myInt = 42 >> 2");
 		assertEquals(10, getIntValue());
 	}
-
-	// @Test
-	// public void testFloatRight() {
-	// try {
-	// executeWithDefaultScope("a = 42.0f >> 2.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(168, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
 
 	@Test
 	public void testIntAnd() {
@@ -371,38 +345,11 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		assertEquals(8, getIntValue());
 	}
 
-	//
-	// @Test
-	// public void testFloatAnd() {
-	// try {
-	// executeWithDefaultScope("a= 9.0f & 12.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(8.0f, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
-
 	@Test
 	public void testIntXor() {
 		executeWithDefaultScope("myInt= 9 ^ 12");
 		assertEquals(5, getIntValue());
 	}
-
-	// @Test
-	// public void testFloatXor() {
-	// try {
-	// executeWithDefaultScope("a= 9.0f ^ 12.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(5.0f, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
 
 	@Test
 	public void testIntOr() {
@@ -410,37 +357,11 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		assertEquals(13, getIntValue());
 	}
 
-	// @Test
-	// public void testFloatOr() {
-	// try {
-	// executeWithDefaultScope("a= 9.0f | 12.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(13.0f, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
-
 	@Test
 	public void testIntBitComplement() {
 		executeWithDefaultScope("myInt= ~9");
 		assertEquals(-10, getIntValue());
 	}
-
-	// @Test
-	// public void testFloatBitComplement() {
-	// try {
-	// executeWithDefaultScope("a= ~9.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(-10.0f, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
 
 	@Test
 	public void testNot() {
@@ -530,102 +451,6 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("myReal%=1.0f");
 		assertEquals(0.0f, getFloatValue());
 	}
-
-	@Test
-	public void testIntLeftAssign() {
-		executeWithDefaultScope("myInt=42");
-		executeWithDefaultScope("myInt<<=1");
-		assertEquals(84, getIntValue());
-	}
-
-	// @Test
-	// public void testFloatLeftAssign() {
-	// try {
-	// executeWithDefaultScope("a=42.0f; a<<=1.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(168, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
-
-	// @Test
-	// public void testIntRightAssign() {
-	// executeWithDefaultScope("a=42; a>>=1;");
-	// assertEquals(21, scope.getValue("a"));
-	// }
-
-	// @Test
-	// public void testFloatRightAssign() {
-	// try {
-	// executeWithDefaultScope("a=42.0f; a>>=1.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(168, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
-	//
-	// @Test
-	// public void testIntAndAssign() {
-	// executeWithDefaultScope("a=9; a&=12;");
-	// assertEquals(8, scope.getValue("a"));
-	// }
-	//
-	// @Test
-	// public void testFloatAndAssign() {
-	// try {
-	// executeWithDefaultScope("a=42.0f; a&=1.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(168, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
-	//
-	// @Test
-	// public void testIntXorAssign() {
-	// executeWithDefaultScope("a=9; a^=12;");
-	// assertEquals(5, scope.getValue("a"));
-	// }
-
-	// @Test
-	// public void testFloatXorAssign() {
-	// try {
-	// executeWithDefaultScope("a=42.0f; a^=1.0f;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(168, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
-	//
-	// @Test
-	// public void testIntOrAssign() {
-	// executeWithDefaultScope("a=9; a|=12;");
-	// assertEquals(13, scope.getValue("a"));
-	// }
-
-	// @Test
-	// public void testFloatOrAssign() {
-	// try {
-	// executeWithDefaultScope("a=42.0; a|=1.0;");
-	// scope.addVariable(new RTVariable("a"));
-	// stmt.execute(scope);
-	//
-	// assertEquals(168, scope.getValue("a"));
-	// fail("EvaluationException expected");
-	// } catch (EvaluationException e) {
-	// }
-	// }
 
 	@Test
 	public void testPlainTrue() {
