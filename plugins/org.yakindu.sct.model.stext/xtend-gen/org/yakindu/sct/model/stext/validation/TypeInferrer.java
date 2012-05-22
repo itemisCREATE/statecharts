@@ -8,6 +8,7 @@ import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AdditiveOperator;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.BitwiseAndExpression;
@@ -21,6 +22,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
+import org.yakindu.sct.model.stext.stext.HexLiteral;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
@@ -35,6 +37,7 @@ import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.ShiftExpression;
+import org.yakindu.sct.model.stext.stext.ShiftOperator;
 import org.yakindu.sct.model.stext.stext.StringLiteral;
 import org.yakindu.sct.model.stext.stext.UnaryOperator;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -156,25 +159,31 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   protected Type _inferType(final BitwiseAndExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
     Type _type = this.getType(_leftOperand);
+    this.assertIsInteger(_type, "&");
     Expression _rightOperand = expression.getRightOperand();
     Type _type_1 = this.getType(_rightOperand);
-    return this.assertNumericalTypes(_type, _type_1, "&");
+    this.assertIsInteger(_type_1, "&");
+    return this.ts.getInteger();
   }
   
   protected Type _inferType(final BitwiseOrExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
     Type _type = this.getType(_leftOperand);
+    this.assertIsInteger(_type, "|");
     Expression _rightOperand = expression.getRightOperand();
     Type _type_1 = this.getType(_rightOperand);
-    return this.assertNumericalTypes(_type, _type_1, "|");
+    this.assertIsInteger(_type_1, "|");
+    return this.ts.getInteger();
   }
   
   protected Type _inferType(final BitwiseXorExpression expression) {
     Expression _leftOperand = expression.getLeftOperand();
     Type _type = this.getType(_leftOperand);
+    this.assertIsInteger(_type, "^");
     Expression _rightOperand = expression.getRightOperand();
     Type _type_1 = this.getType(_rightOperand);
-    return this.assertNumericalTypes(_type, _type_1, "^");
+    this.assertIsInteger(_type_1, "^");
+    return this.ts.getInteger();
   }
   
   protected Type _inferType(final LogicalRelationExpression expression) {
@@ -229,14 +238,14 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     return this.ts.getBoolean();
   }
   
-  public Type assertNumericalTypes(final Type left, final Type right, final String literal) {
+  public Type assertNumericalTypes(final Type left, final Type right, final String operator) {
     boolean _and = false;
-    Type _assertIsNumber = this.assertIsNumber(left, literal);
+    Type _assertIsNumber = this.assertIsNumber(left, operator);
     boolean _notEquals = (!Objects.equal(_assertIsNumber, null));
     if (!_notEquals) {
       _and = false;
     } else {
-      Type _assertIsNumber_1 = this.assertIsNumber(right, literal);
+      Type _assertIsNumber_1 = this.assertIsNumber(right, operator);
       boolean _notEquals_1 = (!Objects.equal(_assertIsNumber_1, null));
       _and = (_notEquals && _notEquals_1);
     }
@@ -270,8 +279,15 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     Expression _operand = expression.getOperand();
     final Type type = this.getType(_operand);
     UnaryOperator _operator = expression.getOperator();
-    String _literal = _operator.getLiteral();
-    return this.assertIsNumber(type, _literal);
+    boolean _equals = Objects.equal(_operator, UnaryOperator.COMPLEMENT);
+    if (_equals) {
+      UnaryOperator _operator_1 = expression.getOperator();
+      String _literal = _operator_1.getLiteral();
+      return this.assertIsInteger(type, _literal);
+    }
+    UnaryOperator _operator_2 = expression.getOperator();
+    String _literal_1 = _operator_2.getLiteral();
+    return this.assertIsNumber(type, _literal_1);
   }
   
   protected Type _inferType(final PrimitiveValueExpression expression) {
@@ -280,8 +296,26 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     return t;
   }
   
+  protected Type _inferType(final ActiveStateReferenceExpression expression) {
+    return this.ts.getBoolean();
+  }
+  
   protected Type _inferType(final ShiftExpression expression) {
-    return null;
+    Type _xblockexpression = null;
+    {
+      Expression _leftOperand = expression.getLeftOperand();
+      Type _type = this.getType(_leftOperand);
+      ShiftOperator _operator = expression.getOperator();
+      String _literal = _operator.getLiteral();
+      this.assertIsInteger(_type, _literal);
+      Expression _rightOperand = expression.getRightOperand();
+      Type _type_1 = this.getType(_rightOperand);
+      ShiftOperator _operator_1 = expression.getOperator();
+      String _literal_1 = _operator_1.getLiteral();
+      Type _assertIsInteger = this.assertIsInteger(_type_1, _literal_1);
+      _xblockexpression = (_assertIsInteger);
+    }
+    return _xblockexpression;
   }
   
   protected Type _inferType(final ConditionalExpression expression) {
@@ -302,7 +336,20 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   
   protected Type _inferType(final FeatureCall featureCall) {
     EObject _feature = featureCall.getFeature();
-    return ((Feature) _feature)==null?(Type)null:((Feature) _feature).getType();
+    if ((_feature instanceof Feature)) {
+      EObject _feature_1 = featureCall.getFeature();
+      return ((Feature) _feature_1)==null?(Type)null:((Feature) _feature_1).getType();
+    } else {
+      EObject _feature_2 = featureCall.getFeature();
+      boolean _notEquals = (!Objects.equal(_feature_2, null));
+      if (_notEquals) {
+        String _plus = ("Type of FeatureCall is unknown: " + featureCall);
+        this.error(_plus);
+        return null;
+      } else {
+        return null;
+      }
+    }
   }
   
   protected Type _inferType(final ElementReferenceExpression expression) {
@@ -337,6 +384,10 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     return this.getType(_value);
   }
   
+  protected Type _getLiteralType(final HexLiteral literal) {
+    return this.ts.getInteger();
+  }
+  
   protected Type _getLiteralType(final IntLiteral literal) {
     return this.ts.getInteger();
   }
@@ -351,6 +402,18 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   
   protected Type _getLiteralType(final StringLiteral literal) {
     return this.ts.getString();
+  }
+  
+  public Type assertIsInteger(final Type object, final String operator) {
+    boolean _isInteger = this.ts.isInteger(object);
+    boolean _not = (!_isInteger);
+    if (_not) {
+      String _plus = ("operator \'" + operator);
+      String _plus_1 = (_plus + "\' can only be applied to integers!");
+      this.error(_plus_1);
+      return null;
+    }
+    return object;
   }
   
   public Type assertIsNumber(final Type object, final String operator) {
@@ -393,56 +456,60 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     return null;
   }
   
-  public Type inferType(final Statement assignment) {
-    if (assignment instanceof AssignmentExpression) {
-      return _inferType((AssignmentExpression)assignment);
-    } else if (assignment instanceof BitwiseAndExpression) {
-      return _inferType((BitwiseAndExpression)assignment);
-    } else if (assignment instanceof BitwiseOrExpression) {
-      return _inferType((BitwiseOrExpression)assignment);
-    } else if (assignment instanceof BitwiseXorExpression) {
-      return _inferType((BitwiseXorExpression)assignment);
-    } else if (assignment instanceof ConditionalExpression) {
-      return _inferType((ConditionalExpression)assignment);
-    } else if (assignment instanceof ElementReferenceExpression) {
-      return _inferType((ElementReferenceExpression)assignment);
-    } else if (assignment instanceof EventRaisingExpression) {
-      return _inferType((EventRaisingExpression)assignment);
-    } else if (assignment instanceof EventValueReferenceExpression) {
-      return _inferType((EventValueReferenceExpression)assignment);
-    } else if (assignment instanceof FeatureCall) {
-      return _inferType((FeatureCall)assignment);
-    } else if (assignment instanceof LogicalAndExpression) {
-      return _inferType((LogicalAndExpression)assignment);
-    } else if (assignment instanceof LogicalNotExpression) {
-      return _inferType((LogicalNotExpression)assignment);
-    } else if (assignment instanceof LogicalOrExpression) {
-      return _inferType((LogicalOrExpression)assignment);
-    } else if (assignment instanceof LogicalRelationExpression) {
-      return _inferType((LogicalRelationExpression)assignment);
-    } else if (assignment instanceof NumericalAddSubtractExpression) {
-      return _inferType((NumericalAddSubtractExpression)assignment);
-    } else if (assignment instanceof NumericalMultiplyDivideExpression) {
-      return _inferType((NumericalMultiplyDivideExpression)assignment);
-    } else if (assignment instanceof NumericalUnaryExpression) {
-      return _inferType((NumericalUnaryExpression)assignment);
-    } else if (assignment instanceof PrimitiveValueExpression) {
-      return _inferType((PrimitiveValueExpression)assignment);
-    } else if (assignment instanceof ShiftExpression) {
-      return _inferType((ShiftExpression)assignment);
-    } else if (assignment instanceof Expression) {
-      return _inferType((Expression)assignment);
-    } else if (assignment != null) {
-      return _inferType(assignment);
+  public Type inferType(final Statement expression) {
+    if (expression instanceof ActiveStateReferenceExpression) {
+      return _inferType((ActiveStateReferenceExpression)expression);
+    } else if (expression instanceof AssignmentExpression) {
+      return _inferType((AssignmentExpression)expression);
+    } else if (expression instanceof BitwiseAndExpression) {
+      return _inferType((BitwiseAndExpression)expression);
+    } else if (expression instanceof BitwiseOrExpression) {
+      return _inferType((BitwiseOrExpression)expression);
+    } else if (expression instanceof BitwiseXorExpression) {
+      return _inferType((BitwiseXorExpression)expression);
+    } else if (expression instanceof ConditionalExpression) {
+      return _inferType((ConditionalExpression)expression);
+    } else if (expression instanceof ElementReferenceExpression) {
+      return _inferType((ElementReferenceExpression)expression);
+    } else if (expression instanceof EventRaisingExpression) {
+      return _inferType((EventRaisingExpression)expression);
+    } else if (expression instanceof EventValueReferenceExpression) {
+      return _inferType((EventValueReferenceExpression)expression);
+    } else if (expression instanceof FeatureCall) {
+      return _inferType((FeatureCall)expression);
+    } else if (expression instanceof LogicalAndExpression) {
+      return _inferType((LogicalAndExpression)expression);
+    } else if (expression instanceof LogicalNotExpression) {
+      return _inferType((LogicalNotExpression)expression);
+    } else if (expression instanceof LogicalOrExpression) {
+      return _inferType((LogicalOrExpression)expression);
+    } else if (expression instanceof LogicalRelationExpression) {
+      return _inferType((LogicalRelationExpression)expression);
+    } else if (expression instanceof NumericalAddSubtractExpression) {
+      return _inferType((NumericalAddSubtractExpression)expression);
+    } else if (expression instanceof NumericalMultiplyDivideExpression) {
+      return _inferType((NumericalMultiplyDivideExpression)expression);
+    } else if (expression instanceof NumericalUnaryExpression) {
+      return _inferType((NumericalUnaryExpression)expression);
+    } else if (expression instanceof PrimitiveValueExpression) {
+      return _inferType((PrimitiveValueExpression)expression);
+    } else if (expression instanceof ShiftExpression) {
+      return _inferType((ShiftExpression)expression);
+    } else if (expression instanceof Expression) {
+      return _inferType((Expression)expression);
+    } else if (expression != null) {
+      return _inferType(expression);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(assignment).toString());
+        Arrays.<Object>asList(expression).toString());
     }
   }
   
   public Type getLiteralType(final Literal bool) {
     if (bool instanceof BoolLiteral) {
       return _getLiteralType((BoolLiteral)bool);
+    } else if (bool instanceof HexLiteral) {
+      return _getLiteralType((HexLiteral)bool);
     } else if (bool instanceof IntLiteral) {
       return _getLiteralType((IntLiteral)bool);
     } else if (bool instanceof RealLiteral) {
