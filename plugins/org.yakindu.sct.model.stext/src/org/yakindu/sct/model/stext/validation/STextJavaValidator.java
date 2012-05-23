@@ -142,10 +142,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public void checkGuardHasBooleanExpression(ReactionTrigger trigger) {
 		if (trigger.getGuardExpression() == null)
 			return;
-		Type type = inferrer.getType(trigger.getGuardExpression());
-		if (!tsAccess.isBoolean(type)) {
-			error(GUARD_EXPRESSION,
-					StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
+		try {
+			Type type = inferrer.getType(trigger.getGuardExpression());
+			if (!tsAccess.isBoolean(type)) {
+				error(GUARD_EXPRESSION,
+						StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
+			}
+		} catch (TypeCheckException ex) {
+			//This is handled by checkExpression
 		}
 
 	}
