@@ -84,7 +84,6 @@ public abstract class AbstractSTextTest {
 			Statechart sc = _createStatechart("");
 			resource.getContents().add(sc);
 			sc.getScopes().add(context);
-			resource.getContents().add(context);
 			linker.linkModel(context, diagnosticsConsumer);
 		}
 		linker.linkModel(result.getRootASTElement(), diagnosticsConsumer);
