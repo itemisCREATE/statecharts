@@ -48,7 +48,7 @@ Workflow {
 			fragment = ecore.EcoreGeneratorFragment {
 				generateEdit = true
 				genModel = "model/SText.genmodel"
-				xmiModelDirectory = "model"
+				xmiModelDirectory = "${runtimeProject}/model"
 			}
 
 			// the serialization component
