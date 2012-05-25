@@ -13,6 +13,7 @@
 		<tycho-version>0.14.1</tycho-version>
 		<antrun-version>1.6</antrun-version>
 		<p2.target.repository>file:../org.yakindu.base.target/target/repository</p2.target.repository>
+		<tycho-extras-version>0.14.0</tycho-extras-version>
 	</properties>
 	<repositories>
 		<repository>
@@ -168,10 +169,10 @@
 		<module>../de.itemis.gmf.runtime.commons-feature</module>
 		<module>../de.itemis.xtext.utils.gmf</module>
 		<module>../de.itemis.xtext.utils.gmf-feature</module>
-		<module>../de.itemis.xtext.utils.gmf.source-feature</module>
+<!-- 		<module>../de.itemis.xtext.utils.gmf.source-feature</module> -->
 		<module>../de.itemis.xtext.utils.jface</module>
 		<module>../de.itemis.xtext.utils.jface-feature</module>
-		<module>../de.itemis.xtext.utils.jface.source-feature</module>
+<!-- 		<module>../de.itemis.xtext.utils.jface.source-feature</module> -->
 		<module>../org.yakindu.base-feature</module>
 		<module>../org.yakindu.base.repository</module>
 	</modules>
