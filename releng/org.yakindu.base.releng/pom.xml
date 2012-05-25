@@ -49,7 +49,8 @@
 										<echo
 											message="Replacing @build@ token within about.mappings with build id." />
 										<replace file="about.mappings">
-											<replacefilter token="@build@" value="${unqualifiedVersion}.${buildQualifier}" />
+											<replacefilter token="@build@"
+												value="${unqualifiedVersion}.${buildQualifier}" />
 										</replace>
 									</then>
 								</if>
@@ -59,7 +60,8 @@
 										<echo
 											message="Replacing @build@ token within javadocOptions.txt with build id." />
 										<replace file="javadocOptions.txt">
-											<replacefilter token="@build@" value="${unqualifiedVersion}.${buildQualifier}" />
+											<replacefilter token="@build@"
+												value="${unqualifiedVersion}.${buildQualifier}" />
 										</replace>
 									</then>
 								</if>
@@ -82,7 +84,8 @@
 										<echo
 											message="Replacing back build id within about.mappings with @build@ token." />
 										<replace file="about.mappings">
-											<replacefilter token="${unqualifiedVersion}.${buildQualifier}" value="@build@" />
+											<replacefilter token="${unqualifiedVersion}.${buildQualifier}"
+												value="@build@" />
 										</replace>
 									</then>
 								</if>
@@ -92,7 +95,8 @@
 										<echo
 											message="Replacing back build id within javadocOptions.txt with @build@ token." />
 										<replace file="javadocOptions.txt">
-											<replacefilter token="${unqualifiedVersion}.${buildQualifier}" value="@build@" />
+											<replacefilter token="${unqualifiedVersion}.${buildQualifier}"
+												value="@build@" />
 										</replace>
 									</then>
 								</if>
@@ -112,6 +116,38 @@
 				</dependencies>
 			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.eclipse.tycho.extras</groupId>
+					<artifactId>tycho-source-feature-plugin</artifactId>
+					<version>${tycho-extras-version}</version>
+					<executions>
+						<execution>
+							<id>source-feature</id>
+							<phase>package</phase>
+							<goals>
+								<goal>source-feature</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<executions>
+						<execution>
+							<id>attached-p2-metadata</id>
+							<phase>package</phase>
+							<goals>
+								<goal>p2-metadata</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	<profiles>
 		<profile>
@@ -169,10 +205,10 @@
 		<module>../de.itemis.gmf.runtime.commons-feature</module>
 		<module>../de.itemis.xtext.utils.gmf</module>
 		<module>../de.itemis.xtext.utils.gmf-feature</module>
-<!-- 		<module>../de.itemis.xtext.utils.gmf.source-feature</module> -->
+		<!-- <module>../de.itemis.xtext.utils.gmf.source-feature</module> -->
 		<module>../de.itemis.xtext.utils.jface</module>
 		<module>../de.itemis.xtext.utils.jface-feature</module>
-<!-- 		<module>../de.itemis.xtext.utils.jface.source-feature</module> -->
+		<!-- <module>../de.itemis.xtext.utils.jface.source-feature</module> -->
 		<module>../org.yakindu.base-feature</module>
 		<module>../org.yakindu.base.repository</module>
 	</modules>
