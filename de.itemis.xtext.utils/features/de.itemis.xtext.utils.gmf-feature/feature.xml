@@ -17,10 +17,6 @@
       %license
    </license>
 
-   <includes
-         id="de.itemis.xtext.utils.gmf.source"
-         version="0.0.0"/>
-
    <requires>
       <import plugin="org.eclipse.core.runtime" version="3.6.0" match="compatible"/>
       <import plugin="org.eclipse.xtext.ui" version="2.0.0" match="compatible"/>
