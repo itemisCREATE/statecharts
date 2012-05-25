@@ -25,16 +25,9 @@
          id="de.itemis.xtext.utils.gmf"
          version="0.0.0"/>
 
-   <includes
-         id="de.itemis.xtext.utils.gmf.source"
-         version="0.0.0"/>
 
    <includes
          id="de.itemis.xtext.utils.jface"
-         version="0.0.0"/>
-
-   <includes
-         id="de.itemis.xtext.utils.jface.source"
          version="0.0.0"/>
 
    <plugin
@@ -51,21 +44,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.base.types.source"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.base.types.scope"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.base.types.scope.source"
          download-size="0"
          install-size="0"
          version="0.0.0"
