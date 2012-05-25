@@ -11,7 +11,7 @@
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
 		<tycho-version>0.14.1</tycho-version>
-		<tycho-eclipserun-plugin.version>0.14.0</tycho-eclipserun-plugin.version>
+		<tycho-extras-version>0.14.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
 		<p2.target.repository>file:../org.yakindu.base.target/target/repository</p2.target.repository>
 		<p2.base.repository>file:../org.yakindu.base.repository/target/repository</p2.base.repository>
@@ -124,6 +124,34 @@
 					<configuration>
 						<encoding>UTF-8</encoding>
 					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho.extras</groupId>
+					<artifactId>tycho-source-feature-plugin</artifactId>
+					<version>${tycho-extras-version}</version>
+					<executions>
+						<execution>
+							<id>source-feature</id>
+							<phase>package</phase>
+							<goals>
+								<goal>source-feature</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<executions>
+						<execution>
+							<id>attached-p2-metadata</id>
+							<phase>package</phase>
+							<goals>
+								<goal>p2-metadata</goal>
+							</goals>
+						</execution>
+					</executions>
 				</plugin>
 			</plugins>
 		</pluginManagement>
