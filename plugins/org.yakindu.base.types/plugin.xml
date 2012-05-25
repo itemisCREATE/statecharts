@@ -26,11 +26,15 @@
          point="org.eclipse.emf.ecore.uri_mapping">
       <mapping
             source="platform:/resource/org.yakindu.base.types/model/base.ecore"
-            target="model/base.ecore">
+            target="platform:/plugin/org.yakindu.base.types/model/base.ecore">
+      </mapping>
+      <mapping
+            source="../org.yakindu.base.types/model/base.ecore"
+            target="platform:/plugin/org.yakindu.base.types/model/base.ecore">
       </mapping>
       <mapping
             source="platform:/resource/org.yakindu.base.types/model/types.ecore"
-            target="model/types.ecore">
+            target="platform:/plugin/org.yakindu.base.types/model/types.ecore">
       </mapping>
    </extension>
 
