@@ -55,7 +55,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	@Inject
 	extension StextNameProvider provider 
 	
-	IExecutionContext context
+	protected IExecutionContext context
 	
 	override Object evaluateStatement(Statement statement,
 			IExecutionContext context){
