@@ -3,6 +3,9 @@
    <feature url="features/org.yakindu.base_1.0.0.qualifier.jar" id="org.yakindu.base" version="1.0.0.qualifier">
       <category name="Xtext Integration Utilities"/>
    </feature>
+   <feature url="features/org.yakindu.base.source_1.0.0.qualifier.jar" id="org.yakindu.base.source" version="1.0.0.qualifier">
+      <category name="Xtext Integration Utilities"/>
+   </feature>
    <feature url="features/de.itemis.xtext.utils.jface_1.0.0.qualifier.jar" id="de.itemis.xtext.utils.jface" version="1.0.0.qualifier">
       <category name="Xtext Integration Utilities"/>
    </feature>
