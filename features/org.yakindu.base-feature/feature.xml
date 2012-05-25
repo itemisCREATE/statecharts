@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.base"
-      label="Yakindu Base"
+      label="%featureName"
       version="1.0.0.qualifier"
       provider-name="YAKINDU">
 
@@ -25,7 +25,6 @@
          id="de.itemis.xtext.utils.gmf"
          version="0.0.0"/>
 
-
    <includes
          id="de.itemis.xtext.utils.jface"
          version="0.0.0"/>
@@ -36,6 +35,7 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
+
    <plugin
          id="org.yakindu.base.types.edit"
          download-size="0"
