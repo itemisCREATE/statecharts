@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="de.itemis.xtext.utils.jface"
-      label="Xtext JFace Integration (XJI)"
+      label="%featureName"
       version="1.0.0.qualifier"
       provider-name="itemis AG">
 
