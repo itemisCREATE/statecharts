@@ -190,7 +190,6 @@ public class FlowOptimizer {
                   }
                 };
               IterableExtensions.<Reaction>forEach(_reactions, _function);
-              /*node;*/
             }
           };
         IterableExtensions.<ExecutionChoice>forEach(_filter_2, _function_6);
@@ -219,7 +218,6 @@ public class FlowOptimizer {
                   }
                 };
               IterableExtensions.<Reaction>forEach(_reactions, _function);
-              /*node;*/
             }
           };
         IterableExtensions.<ExecutionEntry>forEach(_filter_4, _function_8);

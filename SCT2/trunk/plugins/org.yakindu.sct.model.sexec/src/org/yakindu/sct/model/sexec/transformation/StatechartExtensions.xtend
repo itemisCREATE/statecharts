@@ -28,12 +28,12 @@ class StatechartExtensions {
 	
 	
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart */
-	def int maxOrthogonality(Statechart sc) {
+	def dispatch int maxOrthogonality(Statechart sc) {
 		sc.regions.fold(0, [o, r | r.maxOrthogonality + o])
 	}
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a region */
-	def int maxOrthogonality(Region r) {
+	def dispatch int maxOrthogonality(Region r) {
 		r.vertices.fold(0, [s, v | {
 			val mo = v.maxOrthogonality
 			if (mo > s) mo else s }])

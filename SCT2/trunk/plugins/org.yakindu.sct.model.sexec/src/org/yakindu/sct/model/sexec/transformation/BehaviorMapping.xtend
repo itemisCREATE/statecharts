@@ -63,7 +63,7 @@ class BehaviorMapping {
 		r.entryAction = seq
 		
 		val allStates = statechart.allRegularStates.filter(typeof(State))
-		allStates.forEach( s | { s.create.entryAction = s.mapEntryAction() null } )
+		allStates.forEach( s | { s.create.entryAction = s.mapEntryAction()  } )
 		return r
 	}
 
@@ -119,7 +119,7 @@ class BehaviorMapping {
 		r.exitAction = seq
 		
 		val allStates = statechart.allRegularStates.filter(typeof(State))
-		allStates.forEach( s | { s.create.exitAction = s.mapExitAction() null } )
+		allStates.forEach( s | { s.create.exitAction = s.mapExitAction() } )
 		return r
 	}
 

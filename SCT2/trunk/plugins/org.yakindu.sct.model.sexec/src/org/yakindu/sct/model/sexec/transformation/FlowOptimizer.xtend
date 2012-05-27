@@ -58,11 +58,11 @@ class FlowOptimizer {
 
 				
 		if (_inlineChoices) {
-			flow.nodes.filter(typeof(ExecutionChoice)).forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline }) node })
+			flow.nodes.filter(typeof(ExecutionChoice)).forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline })  })
 			flow.nodes.filter(typeof(ExecutionChoice)).forEach( node | node.reactSequence.inline )
 		}
 		if (_inlineEntries) {
-			flow.nodes.filter(typeof(ExecutionEntry)).forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline }) node })
+			flow.nodes.filter(typeof(ExecutionEntry)).forEach( node | { node.reactions.forEach( r | { r.check.inline r.effect.inline })  })
 			flow.nodes.filter(typeof(ExecutionEntry)).forEach( node | node.reactSequence.inline )
 		}
 

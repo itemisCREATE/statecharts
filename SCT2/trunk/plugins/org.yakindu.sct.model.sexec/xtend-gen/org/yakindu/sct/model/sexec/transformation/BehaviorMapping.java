@@ -139,7 +139,6 @@ public class BehaviorMapping {
           ExecutionState _create = BehaviorMapping.this.factory.create(s);
           Step _mapEntryAction = BehaviorMapping.this.mapEntryAction(s);
           _create.setEntryAction(_mapEntryAction);
-          /* null */
         }
       };
     IterableExtensions.<State>forEach(allStates, _function_2);
@@ -289,7 +288,6 @@ public class BehaviorMapping {
           ExecutionState _create = BehaviorMapping.this.factory.create(s);
           Step _mapExitAction = BehaviorMapping.this.mapExitAction(s);
           _create.setExitAction(_mapExitAction);
-          /* null */
         }
       };
     IterableExtensions.<State>forEach(allStates, _function_2);
