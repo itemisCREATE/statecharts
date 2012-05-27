@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
+import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -91,7 +91,7 @@ public class SequenceBuilder {
   private TraceExtensions trace;
   
   @Inject
-  @Named("ADD_TRACES")
+  @Named(value = "ADD_TRACES")
   private boolean _addTraceSteps;
   
   public void defineDeepEnterSequences(final ExecutionFlow flow, final Statechart sc) {
@@ -438,7 +438,7 @@ public class SequenceBuilder {
     int _size = sVector.getSize();
     int _plus_1 = (_offset_1 + _size);
     int _minus = (_plus_1 - 1);
-    Iterable<Integer> _upTo = IntegerExtensions.upTo(_offset, _minus);
+    IntegerRange _upTo = new IntegerRange(_offset, _minus);
     for (final Integer i : _upTo) {
       {
         final StateSwitch sSwitch = this.defineExitSwitch(execRegion, leafStates, (i).intValue());

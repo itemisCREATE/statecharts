@@ -26,7 +26,7 @@ public class TraceExtensions {
   private SexecElementMapping mapping;
   
   @Inject
-  @Named("ADD_TRACES")
+  @Named(value = "ADD_TRACES")
   private boolean _addTraceSteps;
   
   public boolean isAddTraceSteps() {

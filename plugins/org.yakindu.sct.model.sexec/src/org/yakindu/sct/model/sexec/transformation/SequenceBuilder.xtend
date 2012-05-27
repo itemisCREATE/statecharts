@@ -436,7 +436,7 @@ class SequenceBuilder {
 		
 		div
 	}
-	
+	 
 	def Statement multiply(Expression stmnt, long factor) {
 		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
 		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 

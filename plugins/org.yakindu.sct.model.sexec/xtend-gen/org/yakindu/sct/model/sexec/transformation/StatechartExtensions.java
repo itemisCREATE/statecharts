@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -41,7 +42,7 @@ public class StatechartExtensions {
   /**
    * calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart
    */
-  public int maxOrthogonality(final Statechart sc) {
+  protected int _maxOrthogonality(final Statechart sc) {
     EList<Region> _regions = sc.getRegions();
     final Function2<Integer,Region,Integer> _function = new Function2<Integer,Region,Integer>() {
         public Integer apply(final Integer o, final Region r) {
@@ -57,7 +58,7 @@ public class StatechartExtensions {
   /**
    * calculates the maximum orthogonality (maximum number of possible active leaf states) of a region
    */
-  public int maxOrthogonality(final Region r) {
+  protected int _maxOrthogonality(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
     final Function2<Integer,Vertex,Integer> _function = new Function2<Integer,Vertex,Integer>() {
         public Integer apply(final Integer s, final Vertex v) {
@@ -399,11 +400,15 @@ public class StatechartExtensions {
     return StextFactory.eINSTANCE;
   }
   
-  public int maxOrthogonality(final Vertex s) {
+  public int maxOrthogonality(final NamedElement s) {
     if (s instanceof State) {
       return _maxOrthogonality((State)s);
-    } else if (s != null) {
-      return _maxOrthogonality(s);
+    } else if (s instanceof Region) {
+      return _maxOrthogonality((Region)s);
+    } else if (s instanceof Statechart) {
+      return _maxOrthogonality((Statechart)s);
+    } else if (s instanceof Vertex) {
+      return _maxOrthogonality((Vertex)s);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(s).toString());

@@ -73,8 +73,8 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
-@SuppressWarnings("all")
 @Singleton
+@SuppressWarnings("all")
 public class SexecElementMapping {
   @Inject
   private IQualifiedNameProvider qfnProvider;
@@ -107,7 +107,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionFlow> _createCache_create = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionFlow> _createCache_create = CollectionLiterals.newHashMap();
   
   private void _init_create(final ExecutionFlow r, final Statechart statechart) {
     String _name = statechart.getName();
@@ -131,7 +131,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,Scope> _createCache_create_1 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Scope> _createCache_create_1 = CollectionLiterals.newHashMap();
   
   private void _init_create_1(final InterfaceScope r, final InterfaceScope scope) {
     String _name = scope.getName();
@@ -154,7 +154,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,Scope> _createCache_create_2 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Scope> _createCache_create_2 = CollectionLiterals.newHashMap();
   
   private void _init_create_2(final InternalScope r, final Scope scope) {
   }
@@ -175,7 +175,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,Scope> _createCache_timeEventScope = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Scope> _createCache_timeEventScope = CollectionLiterals.newHashMap();
   
   private void _init_timeEventScope(final Scope r, final ExecutionFlow flow) {
     EList<Scope> _scopes = flow.getScopes();
@@ -197,7 +197,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,EventDefinition> _createCache_create_3 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,EventDefinition> _createCache_create_3 = CollectionLiterals.newHashMap();
   
   private void _init_create_3(final EventDefinition r, final EventDefinition event) {
   }
@@ -217,7 +217,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,VariableDefinition> _createCache_create_4 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,VariableDefinition> _createCache_create_4 = CollectionLiterals.newHashMap();
   
   private void _init_create_4(final VariableDefinition r, final VariableDefinition v) {
   }
@@ -237,7 +237,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,OperationDefinition> _createCache_create_5 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,OperationDefinition> _createCache_create_5 = CollectionLiterals.newHashMap();
   
   private void _init_create_5(final OperationDefinition r, final OperationDefinition v) {
   }
@@ -258,7 +258,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionState> _createCache_create_6 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionState> _createCache_create_6 = CollectionLiterals.newHashMap();
   
   private void _init_create_6(final ExecutionState r, final RegularState state) {
     boolean _notEquals = (!Objects.equal(state, null));
@@ -301,7 +301,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionChoice> _createCache_create_7 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionChoice> _createCache_create_7 = CollectionLiterals.newHashMap();
   
   private void _init_create_7(final ExecutionChoice r, final Choice choice) {
     boolean _notEquals = (!Objects.equal(choice, null));
@@ -341,7 +341,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionEntry> _createCache_create_8 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionEntry> _createCache_create_8 = CollectionLiterals.newHashMap();
   
   private void _init_create_8(final ExecutionEntry r, final Entry entry) {
     boolean _notEquals = (!Objects.equal(entry, null));
@@ -377,8 +377,8 @@ public class SexecElementMapping {
       } else {
         _xifexpression_2 = "";
       }
-      String _plus = (new Function0<String>() {
-        public String apply() {
+      String _plus = (new Function0<Object>() {
+        public Object apply() {
           String _xifexpression = null;
           boolean _notEquals = (!Objects.equal(regionName, null));
           if (_notEquals) {
@@ -396,8 +396,8 @@ public class SexecElementMapping {
       } else {
         _xifexpression_3 = "";
       }
-      String _plus_1 = (_plus + new Function0<Object>() {
-        public Object apply() {
+      String _plus_1 = (_plus + new Function0<String>() {
+        public String apply() {
           String _xifexpression = null;
           boolean _notEquals = (!Objects.equal(stateName, null));
           if (_notEquals) {
@@ -469,7 +469,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,ExecutionRegion> _createCache_create_9 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionRegion> _createCache_create_9 = CollectionLiterals.newHashMap();
   
   private void _init_create_9(final ExecutionRegion r, final Region region) {
     boolean _notEquals = (!Objects.equal(region, null));
@@ -507,7 +507,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,Check> _createCache_createCheck = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Check> _createCache_createCheck = CollectionLiterals.newHashMap();
   
   private void _init_createCheck(final Check r, final ReactionTrigger tr) {
     Reaction _reaction = this.sce.reaction(tr);
@@ -531,7 +531,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_10 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_10 = CollectionLiterals.newHashMap();
   
   private void _init_create_10(final org.yakindu.sct.model.sexec.Reaction r, final Transition tr) {
     String _id = this.sce.id(tr);
@@ -556,7 +556,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_11 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_11 = CollectionLiterals.newHashMap();
   
   private void _init_create_11(final org.yakindu.sct.model.sexec.Reaction r, final LocalReaction lr) {
     String _id = this.sce.id(lr);
@@ -625,7 +625,7 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<?>,TimeEvent> _createCache_createDerivedEvent = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,TimeEvent> _createCache_createDerivedEvent = CollectionLiterals.newHashMap();
   
   private void _init_createDerivedEvent(final TimeEvent r, final TimeEventSpec tes) {
     TimeEventType _type = tes.getType();
