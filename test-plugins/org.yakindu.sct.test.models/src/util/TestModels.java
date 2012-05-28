@@ -44,6 +44,8 @@ public class TestModels {
 	public static final String STATE_ACTIVE = "StateIsActive.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
 	public static final String FEATURE_CALLS = "FeatureCalls.sct";
+	public static final String SYNC_JOIN = "SyncJoin.sct";
+	public static final String SYNC_FORK = "SyncFork.sct";
 	public static final String STATECHART_LOCAL_REACTIONS = "StatechartLocalReactions.sct";
 
 	@Inject
@@ -138,6 +140,28 @@ public class TestModels {
 	public ExecutionFlow createStatechartLocalReactionsModel()
 			throws IOException {
 		return loadExecutionFlowFromResource(STATECHART_LOCAL_REACTIONS);
+	}
+
+	/**
+	 * <img src="../../images/SyncJoin.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createSyncJoinModel()
+			throws IOException {
+		return loadExecutionFlowFromResource(SYNC_JOIN);
+	}
+
+	/**
+	 * <img src="../../images/SyncFork.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createSyncForkModel()
+			throws IOException {
+		return loadExecutionFlowFromResource(SYNC_FORK);
 	}
 
 	/**
