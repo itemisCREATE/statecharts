@@ -12,7 +12,6 @@ package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.fail;
 
 import java.util.Set;
 
@@ -41,11 +40,27 @@ public abstract class AbstractExecutionFlowTest {
 		return interpreter.getExecutionContext();
 	}
 
-	protected void loadAndconfigureInterpreter(ExecutionFlow flow) {
+	protected void initInterpreter(ExecutionFlow flow) {
 		interpreter.initialize(flow);
 		interpreter.enter();
 	}
 
+	protected int getInteger(String varName){
+		ExecutionVariable variable = context().getVariable(varName);
+		return (Integer) variable.getValue();
+	}
+	protected int getBoolean(String varName){
+		ExecutionVariable variable = context().getVariable(varName);
+		return (Integer) variable.getValue();
+	}
+	protected int getReal(String varName){
+		ExecutionVariable variable = context().getVariable(varName);
+		return (Integer) variable.getValue();
+	}
+	protected int getString(String varName){
+		ExecutionVariable variable = context().getVariable(varName);
+		return (Integer) variable.getValue();
+	}
 	// -> Assertion methods...
 	protected void assertVarValue(String variableName, Object value) {
 		ExecutionVariable variable = context().getVariable(variableName);
@@ -54,15 +69,22 @@ public abstract class AbstractExecutionFlowTest {
 		assertEquals(value, variable.getValue());
 	}
 
-	protected void assertIsActive(String stateName) {
+	
+	protected boolean isActive(String stateName) {
 		Set<RegularState> allActiveStates = context().getAllActiveStates();
 		for (RegularState regularState : allActiveStates) {
 			if (regularState.getName().equals(stateName)) {
-				return;
+				return true;
 			}
 		}
-		fail("Expected active state " + stateName + " but was "
-				+ allActiveStates);
+		return false;
 	}
+	protected void raiseEvent(String eventName){
+		context().raiseEvent(eventName, null);
+	}
+	protected void raiseEvent(String eventName, Object value){
+		context().raiseEvent(eventName, value);
+	}
+
 
 }
