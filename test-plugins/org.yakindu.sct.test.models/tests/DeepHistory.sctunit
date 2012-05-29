@@ -16,7 +16,7 @@ testcase for DeepHistory  {
 		raise event2
 		cycle
 		assert active ( DeepHistory.mainRegion.State1)
-		assert active ( DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
+		assert !active ( DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
 		
 		// Reenter State2. State9 should be activated (History of State2).
 		raise event1
@@ -25,5 +25,5 @@ testcase for DeepHistory  {
 		assert active (DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
 
 	}
-	}
+}
 

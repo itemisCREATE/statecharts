@@ -1,10 +1,11 @@
-testcase for StateIsActiveTest {
-	test stateIsActiveTest{
-		assert active (StateIsActiveTest.R1.R1A )
-		assert active (StateIsActiveTest.R2.R2A)
+testcase for StateIsActive{
+	test stateIsActive{
+		assert active (StateIsActive.R1.R1A )
+		assert active (StateIsActive.R2.R2A)
 		raise Event1
 		cycle
-		assert active(StateIsActiveTest.R1.R1B)
-		assert active (StateIsActiveTest.R2.R2B)
-	}
+		cycle //Todo warum 2 cycle?
+		assert active(StateIsActive.R1.R1B)
+		assert active (StateIsActive.R2.R2B)
+	} 
 }
