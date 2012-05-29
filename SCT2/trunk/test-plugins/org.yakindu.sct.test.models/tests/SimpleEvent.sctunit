@@ -1,0 +1,8 @@
+testcase for SimpleEvent {
+	test simpleEventTest {
+		assert active (SimpleEvent.main_region.A)
+		raise Event1
+		cycle
+		assert active (SimpleEvent.main_region.B)
+	}
+}

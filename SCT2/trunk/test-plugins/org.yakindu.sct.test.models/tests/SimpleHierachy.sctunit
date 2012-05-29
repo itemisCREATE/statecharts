@@ -1,0 +1,9 @@
+testcase for SimpleHierachy {
+	test simpleHierachyTest {
+		assert active (SimpleHierachy.main_region.A)
+		raise Event1
+		cycle
+		assert active (SimpleHierachy.main_region.B)
+		assert active (SimpleHierachy.main_region.B.subregion1.B1)
+	}
+}

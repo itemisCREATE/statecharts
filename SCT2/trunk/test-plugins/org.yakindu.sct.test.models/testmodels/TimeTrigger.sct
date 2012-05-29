@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_XoS0wPZlEeCSetPXFd1ZUw" specification="internal:&#xA;&#xA;var value:integer&#xA;" name="Test_ReactionTrigger">
+  <sgraph:Statechart xmi:id="_XoS0wPZlEeCSetPXFd1ZUw" specification="internal:&#xA;&#xA;var value:integer&#xA;" name="TimeTrigger">
     <regions xmi:id="_XoTb0vZlEeCSetPXFd1ZUw" name="mainRegion">
       <vertices xsi:type="sgraph:Entry" xmi:id="_Dd7OAPimEeCPG5ImOgba0Q">
         <outgoingTransitions xmi:id="_lRPkEJ6VEeGsX9UkwAVdHQ" specification="" target="_hjQ2cJ6VEeGsX9UkwAVdHQ"/>
@@ -8,7 +8,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_hjQ2cJ6VEeGsX9UkwAVdHQ" specification="entry / value = 0" name="StateA" incomingTransitions="_lRPkEJ6VEeGsX9UkwAVdHQ _q-xVUJ6aEeGsX9UkwAVdHQ">
         <outgoingTransitions xmi:id="_5Y_8gJ6VEeGsX9UkwAVdHQ" specification="after 100 ms" target="_1Qf2EJ6VEeGsX9UkwAVdHQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_1Qf2EJ6VEeGsX9UkwAVdHQ" specification="every 200  ms / value+=1" name="StateB" incomingTransitions="_5Y_8gJ6VEeGsX9UkwAVdHQ">
+      <vertices xsi:type="sgraph:State" xmi:id="_1Qf2EJ6VEeGsX9UkwAVdHQ" specification="every 20 ms / value+=1" name="StateB" incomingTransitions="_5Y_8gJ6VEeGsX9UkwAVdHQ">
         <outgoingTransitions xmi:id="_q-xVUJ6aEeGsX9UkwAVdHQ" specification="[value == 10]" target="_hjQ2cJ6VEeGsX9UkwAVdHQ"/>
       </vertices>
     </regions>

@@ -1,0 +1,9 @@
+testcase for TimeTrigger {
+	test timeTriggerTest {
+		assert active ( TimeTrigger.mainRegion.StateA )
+		wait 110
+		assert active (TimeTrigger.mainRegion.StateB)
+		wait 220
+		assert active (TimeTrigger.mainRegion.StateA)		
+		}
+} 

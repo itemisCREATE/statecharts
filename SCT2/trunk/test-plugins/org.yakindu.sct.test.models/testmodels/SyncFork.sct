@@ -201,10 +201,22 @@
         <children xsi:type="notation:Shape" xmi:id="_DBsYoKioEeG5WeGhg2moBQ" type="Synchronization" element="_DBjOsKioEeG5WeGhg2moBQ" fontName="Verdana" lineColor="4210752">
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_DBsYoaioEeG5WeGhg2moBQ" x="73" y="127"/>
         </children>
+        <children xsi:type="notation:Shape" xmi:id="_qVmTgKjBEeG5WeGhg2moBQ" type="Note" fontName="Verdana" description="A fork specifies a state configuration that has to be entered by a transition. The target states must be orthogonal to each other but non orthogonal to the source state." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+          <children xsi:type="notation:BasicDecorationNode" xmi:id="_qVm6kKjBEeG5WeGhg2moBQ" type="DiagramName">
+            <element xsi:nil="true"/>
+          </children>
+          <children xsi:type="notation:BasicDecorationNode" xmi:id="_qVm6kajBEeG5WeGhg2moBQ" type="Description">
+            <element xsi:nil="true"/>
+          </children>
+          <styles xsi:type="notation:TextStyle" xmi:id="_qVmTgajBEeG5WeGhg2moBQ"/>
+          <styles xsi:type="notation:LineTypeStyle" xmi:id="_qVmTgqjBEeG5WeGhg2moBQ"/>
+          <element xsi:nil="true"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_qVmTg6jBEeG5WeGhg2moBQ" x="-48" y="259" width="175" height="176"/>
+        </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PtAcqimEeG5WeGhg2moBQ"/>
       </children>
       <styles xsi:type="notation:ShapeStyle" xmi:id="_0PqkMaimEeG5WeGhg2moBQ" fontName="Verdana" fillColor="15790320" lineColor="12632256"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PtngKimEeG5WeGhg2moBQ" x="152" y="10" width="465" height="411"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PtngKimEeG5WeGhg2moBQ" x="152" y="10" width="465" height="491"/>
     </children>
     <children xsi:type="notation:Shape" xmi:id="_0Px486imEeG5WeGhg2moBQ" type="StatechartText" fontName="Verdana" lineColor="4210752">
       <children xsi:type="notation:DecorationNode" xmi:id="_0Px49aimEeG5WeGhg2moBQ" type="StatechartName">
@@ -215,18 +227,6 @@
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PygA6imEeG5WeGhg2moBQ"/>
       </children>
       <layoutConstraint xsi:type="notation:Bounds" xmi:id="_0PygBKimEeG5WeGhg2moBQ" x="10" y="10" width="143" height="411"/>
-    </children>
-    <children xsi:type="notation:Shape" xmi:id="_qVmTgKjBEeG5WeGhg2moBQ" type="Note" fontName="Verdana" description="A fork specifies a state configuration that has to be entered by a transition. The target states must be orthogonal to each other but non orthogonal to the source state." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
-      <children xsi:type="notation:BasicDecorationNode" xmi:id="_qVm6kKjBEeG5WeGhg2moBQ" type="DiagramName">
-        <element xsi:nil="true"/>
-      </children>
-      <children xsi:type="notation:BasicDecorationNode" xmi:id="_qVm6kajBEeG5WeGhg2moBQ" type="Description">
-        <element xsi:nil="true"/>
-      </children>
-      <styles xsi:type="notation:TextStyle" xmi:id="_qVmTgajBEeG5WeGhg2moBQ"/>
-      <styles xsi:type="notation:LineTypeStyle" xmi:id="_qVmTgqjBEeG5WeGhg2moBQ"/>
-      <element xsi:nil="true"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_qVmTg6jBEeG5WeGhg2moBQ" x="56" y="308" width="173" height="109"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_0PovAaimEeG5WeGhg2moBQ"/>
     <edges xmi:id="_0PxR4KimEeG5WeGhg2moBQ" type="Transition" element="_0PwDw6imEeG5WeGhg2moBQ" source="_0PtngqimEeG5WeGhg2moBQ" target="_0Pu1oaimEeG5WeGhg2moBQ">

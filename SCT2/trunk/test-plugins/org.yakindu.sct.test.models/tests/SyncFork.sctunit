@@ -1,0 +1,6 @@
+testcase for SyncFork{
+	test syncForkTest{
+		assert active (SyncFork.main_region.A)
+		
+	}
+}

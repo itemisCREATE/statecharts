@@ -1,0 +1,16 @@
+testcase for PriorityValues {
+	test transitionPriority {
+		assert active (PriorityValues.main_region.A)
+		raise event1
+		assert active(PriorityValues.main_region.C)
+	}
+	
+	test regionPriority{
+		assert active (PriorityValues.someRegion.A)
+		raise event2
+		assert active(PriorityValues.someRegion.B)
+		assert !active(PriorityValues.main_region.E)
+		
+	}
+	
+}

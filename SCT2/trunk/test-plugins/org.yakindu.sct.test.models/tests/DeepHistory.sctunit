@@ -1,0 +1,29 @@
+testcase for DeepHistory  {
+	test deepHistoryTest {
+		// Change active states to State9;
+		raise event1
+		cycle
+		raise event3
+		cycle
+		raise event5
+		cycle
+		raise event7
+		cycle
+		assert !active (DeepHistory.mainRegion.State1)
+		assert active (DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
+		
+		// Leave State2. State4 and State9 should be saved as history.
+		raise event2
+		cycle
+		assert active ( DeepHistory.mainRegion.State1)
+		assert active ( DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
+		
+		// Reenter State2. State9 should be activated (History of State2).
+		raise event1
+		cycle
+		assert !active (DeepHistory.mainRegion.State1)
+		assert active (DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
+
+	}
+	}
+
