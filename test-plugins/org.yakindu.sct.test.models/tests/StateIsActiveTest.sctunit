@@ -1,0 +1,10 @@
+testcase for StateIsActiveTest {
+	test stateIsActiveTest{
+		assert active (StateIsActiveTest.R1.R1A )
+		assert active (StateIsActiveTest.R2.R2A)
+		raise Event1
+		cycle
+		assert active(StateIsActiveTest.R1.R1B)
+		assert active (StateIsActiveTest.R2.R2B)
+	}
+}

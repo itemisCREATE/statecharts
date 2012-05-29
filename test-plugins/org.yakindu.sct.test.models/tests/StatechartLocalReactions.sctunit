@@ -1,0 +1,15 @@
+testcase for StatechartLocalReactions {
+	test statechartLocalReactionsTest {
+		assert active (StatechartLocalReactions.main_region.S1)
+		assert active (StatechartLocalReactions.region2.a)
+		while [ myInt < 10 ] {
+			assert active (StatechartLocalReactions.region2.a)
+			if[myInt%2 == 0]{
+				assert active (StatechartLocalReactions.main_region.S2)
+			}else {
+				assert active (StatechartLocalReactions.main_region.S1)
+			}
+			cycle
+		}
+	}
+}

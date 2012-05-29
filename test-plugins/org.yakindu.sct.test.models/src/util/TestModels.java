@@ -36,20 +36,73 @@ public class TestModels {
 
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/";
 
-	public static final String GUARD = "Guard.sct";
 	public static final String ALWAYS_ONCYCLE = "AlwaysOncycle.sct";
-	public static final String TIME_TRIGGER = "TimeTrigger.sct";
-	public static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
+	public static final String CHOICE = "ChoiceJunction.sct";
 	public static final String DEEP_HISTORY = "DeepHistory.sct";
-	public static final String STATE_ACTIVE = "StateIsActive.sct";
-	public static final String VALUED_EVENTS = "ValuedEvents.sct";
 	public static final String FEATURE_CALLS = "FeatureCalls.sct";
-	public static final String SYNC_JOIN = "SyncJoin.sct";
-	public static final String SYNC_FORK = "SyncFork.sct";
+	public static final String GUARD = "Guard.sct";
+	public static final String PRIORITY_VALUES = "PriorityValues.sct";
+	public static final String SHALLOW_HISTORY = "ShallowHistory.sct";
+	public static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
 	public static final String STATECHART_LOCAL_REACTIONS = "StatechartLocalReactions.sct";
+	public static final String STATE_ACTIVE = "StateIsActive.sct";
+	public static final String SYNC_FORK = "SyncFork.sct";
+	public static final String SYNC_JOIN = "SyncJoin.sct";
+	public static final String TIME_TRIGGER = "TimeTrigger.sct";
+	public static final String VALUED_EVENTS = "ValuedEvents.sct";
 
 	@Inject
 	private ModelSequencer sequencer;
+
+	/**
+	 * <img src="../../images/PriorityValues.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createPriorityValueModel() throws IOException {
+		return loadExecutionFlowFromResource(PRIORITY_VALUES);
+	}
+
+	/**
+	 * <img src="../../images/ShallowHistory.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createShallowHistoryModel() throws IOException {
+		return loadExecutionFlowFromResource(SHALLOW_HISTORY);
+	}
+
+	/**
+	 * <img src="../../images/SyncFork.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createSyncForkModel() throws IOException {
+		return loadExecutionFlowFromResource(SYNC_FORK);
+	}
+
+	/**
+	 * <img src="../../images/SyncJoin.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createSyncJoinModel() throws IOException {
+		return loadExecutionFlowFromResource(SYNC_JOIN);
+	}
+
+	/**
+	 * <img src="../../images/Choice.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createChoiceJunctionModel() throws IOException {
+		return loadExecutionFlowFromResource(CHOICE);
+	}
 
 	/**
 	 * <img src="../../images/Guard.png" /> <br />
@@ -140,28 +193,6 @@ public class TestModels {
 	public ExecutionFlow createStatechartLocalReactionsModel()
 			throws IOException {
 		return loadExecutionFlowFromResource(STATECHART_LOCAL_REACTIONS);
-	}
-
-	/**
-	 * <img src="../../images/SyncJoin.png" /> <br />
-	 * 
-	 * @return the {@link ExecutionFlow}
-	 * @throws IOException
-	 */
-	public ExecutionFlow createSyncJoinModel()
-			throws IOException {
-		return loadExecutionFlowFromResource(SYNC_JOIN);
-	}
-
-	/**
-	 * <img src="../../images/SyncFork.png" /> <br />
-	 * 
-	 * @return the {@link ExecutionFlow}
-	 * @throws IOException
-	 */
-	public ExecutionFlow createSyncForkModel()
-			throws IOException {
-		return loadExecutionFlowFromResource(SYNC_FORK);
 	}
 
 	/**

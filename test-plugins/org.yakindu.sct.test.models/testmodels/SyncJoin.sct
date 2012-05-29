@@ -227,7 +227,7 @@
       <styles xsi:type="notation:TextStyle" xmi:id="_qVmTgajBEeG5WeGhg2moBQ"/>
       <styles xsi:type="notation:LineTypeStyle" xmi:id="_qVmTgqjBEeG5WeGhg2moBQ"/>
       <element xsi:nil="true"/>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_qVmTg6jBEeG5WeGhg2moBQ" x="624" y="56" width="173" height="109"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_qVmTg6jBEeG5WeGhg2moBQ" x="624" y="56" width="307" height="110"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_0PovAaimEeG5WeGhg2moBQ"/>
     <edges xmi:id="_0PxR4KimEeG5WeGhg2moBQ" type="Transition" element="_0PwDw6imEeG5WeGhg2moBQ" source="_0PtngqimEeG5WeGhg2moBQ" target="_tijWgKinEeG5WeGhg2moBQ">
