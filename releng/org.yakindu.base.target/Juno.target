@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?>
-
-<target name="Juno_M7" sequenceNumber="5">
+<?pde version="3.8"?><target name="Juno_M7" sequenceNumber="5">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.feature.group" version="4.2.0.v20120403-2031-9JF7AHAoFubtejCDPq10ko7QRnMxFWssaY95Md"/>
-<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20120426-1529-7P7OFvNFLWUl7UmDUz0O8_a2"/>
-<unit id="org.eclipse.platform.source.feature.group" version="4.2.0.v20120403-2031-9JF7AHAoFubtejCDPq10ko7QRnMxFWssaY95Md"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.8.0.v20120507-0712"/>
-<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.5.0.v20110426-2159-47D08xGD6ExNBM7CIJa3CIKK9t84"/>
-<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.5.0.v20110607-1200-67N09E9QnChoWswz-3wf_rz0kQ8Y"/>
-<unit id="org.eclipse.xtend.sdk.feature.group" version="2.3.0.v201205081025"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.3.0.v201205081025"/>
+<unit id="org.eclipse.platform.feature.group" version="4.2.0.v20120508-1726-9JF7AHAqFubtejDDfoF2l-HHS1O-6drthz0eMMd"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20120511-1952-7P7OFvNFLWUl7Um_6DOA-b_"/>
+<unit id="org.eclipse.platform.source.feature.group" version="4.2.0.v20120508-1726-9JF7AHAqFubtejDDfoF2l-HHS1O-6drthz0eMMd"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.8.0.v20120521-0706"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.6.0.v20120327-2213-47F08xGD6FxMBN7CJFV3CIKK9t84"/>
+<unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.6.0.v20120517-1809-67R09E9QuFflXswwIO_z0E3d4k_X"/>
+<unit id="org.eclipse.xtend.sdk.feature.group" version="2.3.0.v201205220958"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.3.0.v201205220958"/>
 <repository location="http://download.eclipse.org/releases/juno"/>
 </location>
 </locations>
