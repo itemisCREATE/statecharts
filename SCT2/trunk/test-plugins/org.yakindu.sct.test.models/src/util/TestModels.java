@@ -37,7 +37,7 @@ public class TestModels {
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/";
 
 	public static final String ALWAYS_ONCYCLE = "AlwaysOncycle.sct";
-	public static final String CHOICE = "ChoiceJunction.sct";
+	public static final String CHOICE = "Choice.sct";
 	public static final String DEEP_HISTORY = "DeepHistory.sct";
 	public static final String FEATURE_CALLS = "FeatureCalls.sct";
 	public static final String GUARD = "Guard.sct";

@@ -1,21 +1,3 @@
-/**
- * loadAndconfigureInterpreter(models.createGuardModel());
-		assertIsActive("A");
-		assertVarValue("MyVar", 0);
-		context().raiseEvent("Event1", null);
-		interpreter.runCycle();
-		assertIsActive("A");
-		context().raiseEvent("Event2", null);
-		interpreter.runCycle();
-		assertVarValue("MyVar", 10);
-		assertIsActive("B");
-		context().raiseEvent("Return", null);
-		interpreter.runCycle();
-		assertIsActive("A");
-		context().raiseEvent("Event1", null);
-		interpreter.runCycle();
-		assertIsActive("B");
- */
 testcase for Guard {
 	test guardTest {
 		assert active (Guard.main_region.A)
