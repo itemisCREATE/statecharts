@@ -1,0 +1,143 @@
+«REM»
+Copyright (c) 2011 committers of YAKINDU and others.
+All rights reserved. This program and the accompanying materials
+are made available under the terms of the Eclipse Public License v1.0
+which accompanies this distribution, and is available at
+http://www.eclipse.org/legal/epl-v10.html
+Contributors:
+	Markus Muehlbrandt - Initial contribution and API
+«ENDREM»
+«IMPORT stext»
+«IMPORT types»
+
+«EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
+«EXTENSION org::yakindu::sct::generator::java::templates::TypeModelExtensions»
+«EXTENSION org::yakindu::sct::generator::java::templates::Expression»
+«EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
+«EXTENSION org::yakindu::sct::generator::java::templates::Naming»
+
+«DEFINE InterfaceImpl(sgen::GeneratorEntry entry) FOR InterfaceScope»
+private final class «getInterfaceImplName()» implements «getInterfaceName()» {
+	
+	«IF createInterfaceObserverSupport(entry) && hasOutgoingEvents()-»
+		private List<«getInterfaceListenerName()»> listeners = new LinkedList<«getInterfaceListenerName()»>();
+		
+		public List<«getInterfaceListenerName()»> getListeners() {
+			return listeners;
+		}
+	«ENDIF-»
+	
+	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+		
+		private boolean «event.getEventIdentifier()»;
+		
+		«IF event.direction == Direction::OUT-»
+			private boolean «event.getOutEventIdentifier()»;
+		«ENDIF-»
+		
+		«IF !event.type.isVoid()-»
+			private «event.type.getJavaType()» «event.getEventValueIdentifier()»;
+		«ENDIF-»
+		
+		«IF event.direction == Direction::IN-»
+			«IF !event.type.isVoid()-»
+				public void raise«event.getEventName()»(«event.type.getJavaType()» value) {
+					«event.getEventIdentifier()» = true;
+					«event.getEventValueIdentifier()» = value;
+				}
+				
+				private «event.type.getJavaType()» get«event.getEventName()»Value() {
+					«event.getIllegalAccessValidation()»
+					return «event.getEventValueIdentifier()»;
+				}
+				
+			«ELSE-»
+				public void raise«event.getEventName()»() {
+					«event.getEventIdentifier()» = true;
+				}
+				
+			«ENDIF-»
+		«ENDIF-»
+		
+		«IF event.direction == Direction::OUT-»
+			
+			public boolean isRaised«event.getEventName()»() {
+				return «event.getOutEventIdentifier()»;
+			}
+			
+			«IF !event.type.isVoid()-»
+				private void raise«event.getEventName()»(«event.type.getJavaType()» value) {
+					«event.getOutEventIdentifier()» = true;
+					«event.getEventIdentifier()» = true;
+					«event.getEventValueIdentifier()» = value;
+					«IF createInterfaceObserverSupport(entry)-»
+					for («getInterfaceListenerName()» listener : listeners) {
+						listener.on«event.getEventName()»Raised(value);
+					}
+					«ENDIF-»
+				}
+				
+				public «event.type.getJavaType()» get«event.getEventName()»Value() {
+					«event.getIllegalAccessValidation()»
+					return «event.getEventValueIdentifier()»;
+				}
+			«ELSE-»
+				private void raise«event.getEventName()»() {
+					«event.getOutEventIdentifier()» = true;
+					«event.getEventIdentifier()» = true;
+					«IF createInterfaceObserverSupport(entry)-»
+						for («getInterfaceListenerName()» listener : listeners) {
+							listener.on«event.getEventName()»Raised();
+						}
+					«ENDIF-»
+				}
+			«ENDIF-»
+		«ENDIF-»
+		«REM»
+		«IF event.direction == Direction::LOCAL-»
+			«IF !event.type.isVoid()-»
+				private «event.type.getJavaType()» get«event.getEventName()»Value() {
+					«event.getIllegalAccessValidation()»
+					return «event.getEventValueIdentifier()»;
+				}
+				
+			«ENDIF-»
+		«ENDIF-»
+		«ENDREM»
+	«ENDFOREACH-»
+	
+	«FOREACH declarations.typeSelect(VariableDefinition) AS variable-»
+			
+			private «variable.type.getJavaType()» «variable.getVariableIdentifier()»«variable.getInitialValueAssignment()»;
+			
+			public «variable.type.getJavaType()» get«variable.getVarName()»() {
+				return «variable.getVariableIdentifier()»;
+			}
+			
+			«IF  !variable.readonly-»
+				public void set«variable.getVarName()»(«variable.type.getJavaType()» value) {
+					«variable.getVariableIdentifier()» = value;
+				}
+			«ENDIF-»
+	«ENDFOREACH-»
+	
+	«IF hasEvents()-»
+		public void clearEvents() {
+		«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+			«event.getEventIdentifier()» = false;
+		«ENDFOREACH-»
+		}
+		
+	«ENDIF-»
+	«IF hasOutgoingEvents()-»
+		public void clearOutEvents() {
+		«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+			«IF event.direction == Direction::OUT-»
+				«event.getOutEventIdentifier()» = false;
+			«ENDIF-»
+		«ENDFOREACH-»
+		}
+		
+	«ENDIF-»
+}
+«ENDDEFINE»

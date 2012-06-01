@@ -16,13 +16,10 @@ Contributors:
 «getLicenseHeader(entry)»
 package «entry.getBasePackageName()»;
 
-import «entry.getBasePackageName()».ITimerNotificationListener;
-
 /**
  * Interface for state machines which use timed event triggers.
  */
-public interface ITimedStatemachine extends IStatemachine,
-		ITimerNotificationListener {
+public interface ITimedStatemachine {
 
 	/**
 	 * Set the {@link ITimerService} for the state machine. It must be set
@@ -39,6 +36,14 @@ public interface ITimedStatemachine extends IStatemachine,
 	 * @return {@link ITimerService}
 	 */
 	public ITimerService getTimerService();
+
+	/**
+	 * Callback method if a {@link TimeEvent} occurred.
+	 * 
+	 * @param timeEvent
+	 */
+	public void onTimeEventRaised(TimeEvent timeEvent);
 }
+
 «ENDFILE-»
 «ENDDEFINE»

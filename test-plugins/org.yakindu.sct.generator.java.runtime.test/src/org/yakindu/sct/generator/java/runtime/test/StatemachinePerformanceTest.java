@@ -3,10 +3,9 @@ package org.yakindu.sct.generator.java.runtime.test;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.test_hierarchy.Test_HierarchyCycleBasedStatemachine;
-import org.yakindu.sct.runtime.java.test_hierarchy.Test_HierarchyCycleBasedStatemachine.State;
-import org.yakindu.sct.runtime.java.test_parallelregions.DefaultInterface;
-import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCycleBasedStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy.Test_hierarchyStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy.Test_hierarchyStatemachine.State;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_parallelregionsStatemachine;
 
 public class StatemachinePerformanceTest {
 
@@ -80,8 +79,7 @@ public class StatemachinePerformanceTest {
 	@Test
 	public void testPerformance_ParallelRegions_() throws Exception {
 
-		final Test_ParallelRegionsCycleBasedStatemachine sm_1 = new Test_ParallelRegionsCycleBasedStatemachine();
-		final DefaultInterface di = sm_1.getDefaultInterface();
+		final Test_parallelregionsStatemachine sm_1 = new Test_parallelregionsStatemachine();
 		sm_1.init();
 		sm_1.enter();
 
@@ -89,39 +87,39 @@ public class StatemachinePerformanceTest {
 
 			public void runCycles() {
 
-				di.raiseEvent1();
+				sm_1.raiseEvent1();
 				sm_1.runCycle();
 				cycles++;
 				assertTrue(sm_1
-						.isStateActive(Test_ParallelRegionsCycleBasedStatemachine.State.State3));
+						.isStateActive(Test_parallelregionsStatemachine.State.State3));
 				assertTrue(sm_1
-						.isStateActive(Test_ParallelRegionsCycleBasedStatemachine.State.State7));
+						.isStateActive(Test_parallelregionsStatemachine.State.State7));
 
-				di.raiseEvent10();
-				sm_1.runCycle();
-				cycles++;
-				assertTrue(sm_1
-						.isStateActive(Test_ParallelRegionsCycleBasedStatemachine.State.State1));
-
-				di.raiseEvent12();
+				sm_1.raiseEvent10();
 				sm_1.runCycle();
 				cycles++;
 				assertTrue(sm_1
-						.isStateActive(Test_ParallelRegionsCycleBasedStatemachine.State.State8));
+						.isStateActive(Test_parallelregionsStatemachine.State.State1));
 
-				di.raiseEvent2();
-				sm_1.runCycle();
-				cycles++;
-
-				di.raiseEvent6();
-				sm_1.runCycle();
-				cycles++;
-
-				di.raiseEvent7();
+				sm_1.raiseEvent12();
 				sm_1.runCycle();
 				cycles++;
 				assertTrue(sm_1
-						.isStateActive(Test_ParallelRegionsCycleBasedStatemachine.State.State1));
+						.isStateActive(Test_parallelregionsStatemachine.State.State8));
+
+				sm_1.raiseEvent2();
+				sm_1.runCycle();
+				cycles++;
+
+				sm_1.raiseEvent6();
+				sm_1.runCycle();
+				cycles++;
+
+				sm_1.raiseEvent7();
+				sm_1.runCycle();
+				cycles++;
+				assertTrue(sm_1
+						.isStateActive(Test_parallelregionsStatemachine.State.State1));
 			}
 
 		}
@@ -248,43 +246,41 @@ public class StatemachinePerformanceTest {
 	@Test
 	public void testPerformance_Hierarchy() throws Exception {
 
-		final Test_HierarchyCycleBasedStatemachine sm = new Test_HierarchyCycleBasedStatemachine();
+		final Test_hierarchyStatemachine sm = new Test_hierarchyStatemachine();
 
 		sm.init();
 		sm.enter();
-		final org.yakindu.sct.runtime.java.test_hierarchy.DefaultInterface di = sm
-				.getDefaultInterface();
 
 		class TestRunner extends SMRunner {
 
 			public void runCycles() {
 
-				di.raiseEvent1();
+				sm.raiseEvent1();
 				sm.runCycle();
 				cycles++;
 				assertTrue(sm.isStateActive(State.State3));
 
-				di.raiseEvent2();
+				sm.raiseEvent2();
 				sm.runCycle();
 				cycles++;
 				assertTrue(sm.isStateActive(State.State5));
 
-				di.raiseEvent3();
+				sm.raiseEvent3();
 				sm.runCycle();
 				cycles++;
 				assertTrue(sm.isStateActive(State.State7));
 
-				di.raiseEvent4();
+				sm.raiseEvent4();
 				sm.runCycle();
 				assertTrue(sm.isStateActive(State.State8));
 				cycles++;
 
-				di.raiseEvent5();
+				sm.raiseEvent5();
 				sm.runCycle();
 				assertTrue(sm.isStateActive(State.State7));
 				cycles++;
 
-				di.raiseEvent6();
+				sm.raiseEvent6();
 				sm.runCycle();
 				cycles++;
 				assertTrue(sm.isStateActive(State.State9));

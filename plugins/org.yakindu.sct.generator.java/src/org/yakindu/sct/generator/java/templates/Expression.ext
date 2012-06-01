@@ -8,7 +8,7 @@
   	Joern Seger - Initial contribution and API
   	Markus Muehlbrandt - Java adaptions
  */
- import ecore;
+import ecore;
 import stext;
 import sexec;
 import sgraph;
@@ -86,7 +86,7 @@ String toCode(StringLiteral expression) :
 	"\"" + expression.value.toString() + "\"";
 
 String toCode(EventValueReferenceExpression expression):
-	expression.value.getContext().toFirstLower()+"getEvent"+expression.value.getEventName()+"().getValue()";
+	expression.value.getContext().toFirstLower()+expression.value.getEventValueIdentifier();
 
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
@@ -123,11 +123,13 @@ String toCode(NumericalUnaryExpression expression) :
     getOperator(expression.operator) + " ( " + expression.operand.toCode() + " ) ";
 
 String toCode(TimeEvent exp) :
-	"occuredEvents.contains("+getEventName(exp)+")";
+	"timeEvents["+getEventIdentifier(exp)+".getIndex()]";
+	
 String toCode(VariableDefinition exp) :
 	getContext(exp)+"get"+exp.getVarName()+"()";
+	
 String toCode(EventDefinition exp) :
-	"occuredEvents.contains("+exp.getContext().toFirstLower()+exp.getter()+")";
+	exp.getContext()+exp.getEventIdentifier();
 
 String toCode(ActiveStateReferenceExpression this):
 	"isStateActive(State."+this.value.getName()+")";

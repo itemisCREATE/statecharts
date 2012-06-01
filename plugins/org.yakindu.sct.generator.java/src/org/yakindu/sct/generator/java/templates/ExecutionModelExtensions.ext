@@ -51,6 +51,9 @@ boolean hasIncomingValuedEvents(Scope this) :
 boolean hasOutgoingEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).isEmpty;
 
+boolean hasOutgoingEvents(ExecutionFlow this):
+	!getInterfaceScopeEvents().select(event|event.direction == Direction::OUT).isEmpty;
+
 boolean hasOutgoingVoidEvents(Scope this) :
 	!declarations.typeSelect(EventDefinition).select(event|event.direction == Direction::OUT).select(event|event.type.isVoid()).isEmpty;
 	
