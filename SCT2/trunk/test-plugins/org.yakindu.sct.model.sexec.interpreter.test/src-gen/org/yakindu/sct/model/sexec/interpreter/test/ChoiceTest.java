@@ -24,7 +24,6 @@ import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for Choice
  */
-@SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ChoiceTest extends AbstractExecutionFlowTest {
@@ -41,30 +40,30 @@ public class ChoiceTest extends AbstractExecutionFlowTest {
 	public void choiceTest() throws Exception {
 		assertTrue(isActive("A"));
 		assertTrue(getInteger("value") == 4);
-		raiseEvent("pressKey");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("B"));
 		assertTrue(getInteger("value") == 3);
-		raiseEvent("pressKey");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("A"));
-		raiseEvent("pressKey");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C"));
 		assertTrue(getInteger("value") == 2);
-		raiseEvent("pressKey");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("B"));
 		assertTrue(getInteger("value") == 1);
-		raiseEvent("pressKey");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("A"));
 		assertTrue(getInteger("value") == 1);
-		raiseEvent("pressKey");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C"));
 		assertTrue(getInteger("value") == 0);
-		raiseEvent("pressKey");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("A"));
 	}

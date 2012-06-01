@@ -278,6 +278,15 @@ public interface SexecFactory extends EFactory {
 	HistoryEntry createHistoryEntry();
 
 	/**
+	 * Returns a new object of class '<em>Execution Synchronization</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Synchronization</em>'.
+	 * @generated
+	 */
+	ExecutionSynchronization createExecutionSynchronization();
+
+	/**
 	 * Returns a new object of class '<em>Check Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

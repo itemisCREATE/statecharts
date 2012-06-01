@@ -24,7 +24,6 @@ import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for AlwaysOncycle
  */
-@SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class AlwaysOncycleTest extends AbstractExecutionFlowTest {

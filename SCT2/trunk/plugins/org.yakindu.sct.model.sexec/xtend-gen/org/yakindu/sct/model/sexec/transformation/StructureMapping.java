@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.transformation.SexecElementMapping;
 import org.yakindu.sct.model.sexec.transformation.StatechartExtensions;
@@ -33,6 +34,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
@@ -204,6 +206,16 @@ public class StructureMapping {
       };
     Iterable<ExecutionEntry> _map_1 = IterableExtensions.<Entry, ExecutionEntry>map(_allEntries, _function_1);
     Iterables.<ExecutionNode>addAll(_nodes_1, _map_1);
+    EList<ExecutionNode> _nodes_2 = r.getNodes();
+    Iterable<Synchronization> _allSynchronizations = this.sct.allSynchronizations(statechart);
+    final Function1<Synchronization,ExecutionSynchronization> _function_2 = new Function1<Synchronization,ExecutionSynchronization>() {
+        public ExecutionSynchronization apply(final Synchronization sync) {
+          ExecutionSynchronization _create = StructureMapping.this.mapping.create(sync);
+          return _create;
+        }
+      };
+    Iterable<ExecutionSynchronization> _map_2 = IterableExtensions.<Synchronization, ExecutionSynchronization>map(_allSynchronizations, _function_2);
+    Iterables.<ExecutionNode>addAll(_nodes_2, _map_2);
     return r;
   }
   

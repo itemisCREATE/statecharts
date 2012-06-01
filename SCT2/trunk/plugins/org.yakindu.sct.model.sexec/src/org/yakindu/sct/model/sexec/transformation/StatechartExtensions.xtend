@@ -21,6 +21,7 @@ import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.sgraph.Synchronization
 
  
  
@@ -166,6 +167,10 @@ class StatechartExtensions {
 
 	def Iterable<Entry> allEntries(Statechart sc) {
 		return sc.eAllContents.filter( typeof(Entry)).toIterable
+	}
+	
+	def Iterable<Synchronization> allSynchronizations(Statechart sc) {
+		return sc.eAllContents.filter( typeof(Synchronization)).toIterable
 	}
 	
 	def List<LocalReaction> entryReactions(ReactiveElement state) {

@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
@@ -45,11 +46,13 @@ import org.yakindu.sct.model.sexec.transformation.TraceExtensions;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -234,6 +237,32 @@ public class BehaviorMapping {
     List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
     _reactions.addAll(_map);
     return _choice;
+  }
+  
+  public ExecutionFlow mapSyncTransitions(final Statechart statechart, final ExecutionFlow r) {
+    Iterable<Synchronization> _allSynchronizations = this.sc.allSynchronizations(statechart);
+    final Procedure1<Synchronization> _function = new Procedure1<Synchronization>() {
+        public void apply(final Synchronization sync) {
+          BehaviorMapping.this.mapSyncTransition(sync);
+        }
+      };
+    IterableExtensions.<Synchronization>forEach(_allSynchronizations, _function);
+    return r;
+  }
+  
+  public ExecutionSynchronization mapSyncTransition(final Synchronization sync) {
+    final ExecutionSynchronization _sync = this.factory.create(sync);
+    EList<Reaction> _reactions = _sync.getReactions();
+    EList<Transition> _outgoingTransitions = sync.getOutgoingTransitions();
+    final Function1<Transition,Reaction> _function = new Function1<Transition,Reaction>() {
+        public Reaction apply(final Transition t) {
+          Reaction _mapTransition = BehaviorMapping.this.mapTransition(t);
+          return _mapTransition;
+        }
+      };
+    List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
+    _reactions.addAll(_map);
+    return _sync;
   }
   
   public ExecutionFlow mapExitActions(final Statechart statechart, final ExecutionFlow r) {
@@ -425,6 +454,12 @@ public class BehaviorMapping {
   }
   
   public Reaction mapTransition(final Transition t) {
+    Vertex _source = t.getSource();
+    Vertex _target = t.getTarget();
+    return this.mapTransition(t, _source, _target);
+  }
+  
+  protected Reaction _mapTransition(final Transition t, final Vertex source, final Vertex target) {
     final Reaction r = this.factory.create(t);
     Trigger _trigger = t.getTrigger();
     boolean _notEquals = (!Objects.equal(_trigger, null));
@@ -436,6 +471,96 @@ public class BehaviorMapping {
     Sequence _mapToEffect = this.mapToEffect(t, r);
     r.setEffect(_mapToEffect);
     return r;
+  }
+  
+  /**
+   * Ignore transitions from pseudostates to synchronization nodes.
+   * 
+   * TODO: introduce validation
+   */
+  protected Reaction _mapTransition(final Transition t, final Pseudostate source, final Synchronization target) {
+    return null;
+  }
+  
+  /**
+   * Transitions to synchronization points are part of joins and must be handled specifically.
+   */
+  protected Reaction _mapTransition(final Transition t, final State source, final Synchronization target) {
+    final Reaction r = this.factory.create(t);
+    Trigger _trigger = t.getTrigger();
+    boolean _notEquals = (!Objects.equal(_trigger, null));
+    if (_notEquals) {
+      Trigger _trigger_1 = t.getTrigger();
+      Check _mapToCheck = this.mapToCheck(_trigger_1);
+      r.setCheck(_mapToCheck);
+    } else {
+      SexecFactory _sexecFactory = this.factory.sexecFactory();
+      Check _createCheck = _sexecFactory.createCheck();
+      r.setCheck(_createCheck);
+      Check _check = r.getCheck();
+      ExecutionSynchronization _create = this.factory.create(target);
+      String _name = _create.getName();
+      String _plus = (_name + "join_check");
+      _check.setName(_plus);
+    }
+    Check _check_1 = r.getCheck();
+    Statement condition = _check_1.getCondition();
+    EList<Transition> _incomingTransitions = target.getIncomingTransitions();
+    final Function1<Transition,Boolean> _function = new Function1<Transition,Boolean>() {
+        public Boolean apply(final Transition trans) {
+          boolean _notEquals = (!Objects.equal(trans, t));
+          return Boolean.valueOf(_notEquals);
+        }
+      };
+    Iterable<Transition> _filter = IterableExtensions.<Transition>filter(_incomingTransitions, _function);
+    for (final Transition trans : _filter) {
+      Vertex _source = trans.getSource();
+      if ((_source instanceof State)) {
+        Vertex _source_1 = trans.getSource();
+        Expression _active = this.stext.active(((State) _source_1));
+        Statement _conjunct = this.conjunct(condition, _active);
+        condition = _conjunct;
+        Trigger _trigger_2 = trans.getTrigger();
+        boolean _notEquals_1 = (!Objects.equal(_trigger_2, null));
+        if (_notEquals_1) {
+          Trigger _trigger_3 = trans.getTrigger();
+          Statement _buildCondition = this.buildCondition(_trigger_3);
+          Statement _conjunct_1 = this.conjunct(condition, _buildCondition);
+          condition = _conjunct_1;
+        }
+      }
+    }
+    Check _check_2 = r.getCheck();
+    _check_2.setCondition(condition);
+    Sequence _mapToEffect = this.mapToEffect(t, r);
+    r.setEffect(_mapToEffect);
+    return r;
+  }
+  
+  public Statement conjunct(final Statement c1, final Statement c2) {
+    Statement _xifexpression = null;
+    boolean _and = false;
+    boolean _notEquals = (!Objects.equal(c1, null));
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      boolean _notEquals_1 = (!Objects.equal(c2, null));
+      _and = (_notEquals && _notEquals_1);
+    }
+    if (_and) {
+      Expression _and_1 = this.stext.and(((Expression) c1), ((Expression) c2));
+      _xifexpression = _and_1;
+    } else {
+      Statement _xifexpression_1 = null;
+      boolean _notEquals_2 = (!Objects.equal(c1, null));
+      if (_notEquals_2) {
+        _xifexpression_1 = c1;
+      } else {
+        _xifexpression_1 = c2;
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
   }
   
   protected Check _mapToCheck(final Trigger tr) {
@@ -706,6 +831,16 @@ public class BehaviorMapping {
             Sequence _reactSequence_1 = _create_3.getReactSequence();
             Call _newCall_3 = this.factory.newCall(_reactSequence_1);
             _steps_5.add(_newCall_3);
+          } else {
+            Vertex _target_7 = t.getTarget();
+            if ((_target_7 instanceof Synchronization)) {
+              EList<Step> _steps_6 = sequence.getSteps();
+              Vertex _target_8 = t.getTarget();
+              ExecutionSynchronization _create_4 = this.factory.create(((Synchronization) _target_8));
+              Sequence _reactSequence_2 = _create_4.getReactSequence();
+              Call _newCall_4 = this.factory.newCall(_reactSequence_2);
+              _steps_6.add(_newCall_4);
+            }
           }
         }
       }
@@ -934,6 +1069,22 @@ public class BehaviorMapping {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(effect).toString());
+    }
+  }
+  
+  public Reaction mapTransition(final Transition t, final Vertex source, final Vertex target) {
+    if (source instanceof State
+         && target instanceof Synchronization) {
+      return _mapTransition(t, (State)source, (Synchronization)target);
+    } else if (source instanceof Pseudostate
+         && target instanceof Synchronization) {
+      return _mapTransition(t, (Pseudostate)source, (Synchronization)target);
+    } else if (source != null
+         && target != null) {
+      return _mapTransition(t, source, target);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(t, source, target).toString());
     }
   }
   

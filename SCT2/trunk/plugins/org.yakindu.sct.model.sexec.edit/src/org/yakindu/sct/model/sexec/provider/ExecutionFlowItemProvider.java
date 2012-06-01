@@ -349,6 +349,11 @@ public class ExecutionFlowItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__NODES,
+				 SexecFactory.eINSTANCE.createExecutionSynchronization()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__REGIONS,
 				 SexecFactory.eINSTANCE.createExecutionRegion()));
 

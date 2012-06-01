@@ -718,6 +718,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionSynchronization} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExecutionSynchronizationItemProvider executionSynchronizationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ExecutionSynchronization}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExecutionSynchronizationAdapter() {
+		if (executionSynchronizationItemProvider == null) {
+			executionSynchronizationItemProvider = new ExecutionSynchronizationItemProvider(this);
+		}
+
+		return executionSynchronizationItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.CheckRef} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -916,6 +939,7 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (traceEndRunCycleItemProvider != null) traceEndRunCycleItemProvider.dispose();
 		if (saveHistoryItemProvider != null) saveHistoryItemProvider.dispose();
 		if (historyEntryItemProvider != null) historyEntryItemProvider.dispose();
+		if (executionSynchronizationItemProvider != null) executionSynchronizationItemProvider.dispose();
 	}
 
 }

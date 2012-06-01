@@ -24,7 +24,6 @@ import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for SimpleHierachy
  */
-@SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class SimpleHierachyTest extends AbstractExecutionFlowTest {
@@ -40,7 +39,9 @@ public class SimpleHierachyTest extends AbstractExecutionFlowTest {
 	@Test
 	public void simpleHierachyTest() throws Exception {
 		assertTrue(isActive("A"));
-		raiseEvent("Event1");
+		raiseEvent("");
+		raiseEvent("");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("B"));
 		assertTrue(isActive("B1"));

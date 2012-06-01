@@ -31,6 +31,11 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.sgraph.Synchronization
+import org.yakindu.sct.model.sgraph.Pseudostate
+import org.yakindu.sct.model.sgraph.Synchronization
+import org.yakindu.sct.model.sexec.ExecutionSynchronization
 
  
 
@@ -98,6 +103,17 @@ class BehaviorMapping {
 		val _choice = choice.create
 		_choice.reactions.addAll( choice.outgoingTransitions.map(t | t.mapTransition) )
 		return _choice
+	}
+
+	def ExecutionFlow mapSyncTransitions(Statechart statechart, ExecutionFlow r) {
+		statechart.allSynchronizations.forEach( sync | sync.mapSyncTransition);		
+		return r
+	}
+
+	def ExecutionSynchronization mapSyncTransition(Synchronization sync) {
+		val _sync = sync.create
+		_sync.reactions.addAll( sync.outgoingTransitions.map(t | t.mapTransition) )
+		return _sync
 	}
 
 	def ExecutionFlow mapExitActions(Statechart statechart, ExecutionFlow r){
@@ -207,12 +223,64 @@ class BehaviorMapping {
 	}
 	 
 	def Reaction mapTransition(Transition t) {
+		return mapTransition(t, t.source, t.target);
+	}
+	
+	
+	def dispatch Reaction mapTransition(Transition t, Vertex source, Vertex target) {
 		val r = t.create 
 		if (t.trigger != null) r.check = mapToCheck(t.trigger)
 		r.effect = mapToEffect(t, r)
 		
 		return r
 	}
+	
+	
+	/** Ignore transitions from pseudostates to synchronization nodes.
+	 * 
+	 * TODO: introduce validation
+	 */
+	def dispatch Reaction mapTransition(Transition t, Pseudostate source, Synchronization target) {
+		return null
+	}
+	
+	/** Transitions to synchronization points are part of joins and must be handled specifically. */
+	def dispatch Reaction mapTransition(Transition t, State source, Synchronization target) {
+		val r = t.create 
+		
+		// create a check for the reaction
+		if (t.trigger != null) r.check = mapToCheck(t.trigger)
+		else {
+			r.check = sexecFactory.createCheck
+			r.check.name = target.create.name + "join_check"
+		} 
+		
+		// build the condition
+		var Statement condition = r.check.condition
+//		if (t.trigger != null) condition = t.trigger.buildCondition
+		
+		for ( trans : target.incomingTransitions.filter( trans | trans != t )) { 
+			if (trans.source instanceof State) { 
+				condition = condition.conjunct(stext.active(trans.source as State))
+				if (trans.trigger != null) condition = condition.conjunct(trans.trigger.buildCondition)			
+			}
+		}
+		r.check.condition = condition	
+		
+		// map effects
+		// TODO: add effects of sibling transitions
+		r.effect = mapToEffect(t, r)
+		
+		return r
+	}
+	
+	
+	def Statement conjunct(Statement c1, Statement c2) {
+		if (c1 != null && c2 != null ) stext.and(c1 as Expression, c2 as Expression)
+		else if (c1 != null) c1
+		else c2
+	}
+	
 	
 	def dispatch Check mapToCheck(Trigger tr) { null }
 	  
@@ -333,8 +401,9 @@ class BehaviorMapping {
 				sequence.steps.add((t.target as Choice).create.reactSequence.newCall )	
 			} else if ( t.target instanceof Entry ) {
 				sequence.steps.add((t.target as Entry).create.reactSequence.newCall )	
+			} else if ( t.target instanceof Synchronization ) {
+				sequence.steps.add((t.target as Synchronization).create.reactSequence.newCall )	
 			}
-				
 		}
 		
 		

@@ -10,6 +10,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -375,6 +376,15 @@ public class SexecSwitch<T> extends Switch<T> {
 				T result = caseHistoryEntry(historyEntry);
 				if (result == null) result = caseStep(historyEntry);
 				if (result == null) result = caseNamedElement(historyEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.EXECUTION_SYNCHRONIZATION: {
+				ExecutionSynchronization executionSynchronization = (ExecutionSynchronization)theEObject;
+				T result = caseExecutionSynchronization(executionSynchronization);
+				if (result == null) result = caseExecutionNode(executionSynchronization);
+				if (result == null) result = caseMappedElement(executionSynchronization);
+				if (result == null) result = caseNamedElement(executionSynchronization);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -844,6 +854,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseHistoryEntry(HistoryEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Execution Synchronization</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Execution Synchronization</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExecutionSynchronization(ExecutionSynchronization object) {
 		return null;
 	}
 

@@ -2198,6 +2198,71 @@ public interface SexecPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionSynchronizationImpl <em>Execution Synchronization</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.ExecutionSynchronizationImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionSynchronization()
+	 * @generated
+	 */
+	int EXECUTION_SYNCHRONIZATION = 33;
+
+	/**
+	 * The feature id for the '<em><b>Source Element</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION__SOURCE_ELEMENT = EXECUTION_NODE__SOURCE_ELEMENT;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION__NAME = EXECUTION_NODE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION__REACTIONS = EXECUTION_NODE__REACTIONS;
+
+	/**
+	 * The feature id for the '<em><b>Simple Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION__SIMPLE_NAME = EXECUTION_NODE__SIMPLE_NAME;
+
+	/**
+	 * The feature id for the '<em><b>React Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION__REACT_SEQUENCE = EXECUTION_NODE__REACT_SEQUENCE;
+
+	/**
+	 * The number of structural features of the '<em>Execution Synchronization</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SYNCHRONIZATION_FEATURE_COUNT = EXECUTION_NODE_FEATURE_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionFlow <em>Execution Flow</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3092,6 +3157,16 @@ public interface SexecPackage extends EPackage {
 	EReference getHistoryEntry_HistoryStep();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionSynchronization <em>Execution Synchronization</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Execution Synchronization</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionSynchronization
+	 * @generated
+	 */
+	EClass getExecutionSynchronization();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.CheckRef <em>Check Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3918,6 +3993,16 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference HISTORY_ENTRY__HISTORY_STEP = eINSTANCE.getHistoryEntry_HistoryStep();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionSynchronizationImpl <em>Execution Synchronization</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.ExecutionSynchronizationImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getExecutionSynchronization()
+		 * @generated
+		 */
+		EClass EXECUTION_SYNCHRONIZATION = eINSTANCE.getExecutionSynchronization();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.CheckRefImpl <em>Check Ref</em>}' class.

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_0Png4KimEeG5WeGhg2moBQ" specification="&#xA;interface :&#xA;&#x9;in event e&#xA;&#x9;in event f&#xA;&#x9;var x : integer = 0" name="SyncJoin">
+  <sgraph:Statechart xmi:id="_0Png4KimEeG5WeGhg2moBQ" specification="&#xA;interface :&#xA;&#x9;in event e : void&#xA;&#x9;in event f : void&#xA;&#x9;in event jc&#xA;&#x9;in event jd&#xA;" name="SyncJoin">
     <regions xmi:id="_0PovAqimEeG5WeGhg2moBQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_0PtngaimEeG5WeGhg2moBQ">
         <outgoingTransitions xmi:id="_0PwDw6imEeG5WeGhg2moBQ" target="_tiWiMKinEeG5WeGhg2moBQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_0PuOl6imEeG5WeGhg2moBQ" name="A" incomingTransitions="_Eg6IoKioEeG5WeGhg2moBQ">
-        <outgoingTransitions xmi:id="_j3fnoKjBEeG5WeGhg2moBQ" specification="e, f" target="_tiWiMKinEeG5WeGhg2moBQ"/>
+        <outgoingTransitions xmi:id="_j3fnoKjBEeG5WeGhg2moBQ" specification="e,f" target="_tiWiMKinEeG5WeGhg2moBQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_tiWiMKinEeG5WeGhg2moBQ" name="B" incomingTransitions="_0PwDw6imEeG5WeGhg2moBQ _j3fnoKjBEeG5WeGhg2moBQ">
         <regions xmi:id="_tiZlgKinEeG5WeGhg2moBQ" name="r1">
@@ -17,7 +17,7 @@
             <outgoingTransitions xmi:id="_IFECgKjBEeG5WeGhg2moBQ" specification="e" target="_G_gIoKjBEeG5WeGhg2moBQ"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_G_gIoKjBEeG5WeGhg2moBQ" name="C2" incomingTransitions="_IFECgKjBEeG5WeGhg2moBQ">
-            <outgoingTransitions xmi:id="_OkRhoKjBEeG5WeGhg2moBQ" specification="e" target="_DBjOsKioEeG5WeGhg2moBQ"/>
+            <outgoingTransitions xmi:id="_OkRhoKjBEeG5WeGhg2moBQ" specification="jc" target="_DBjOsKioEeG5WeGhg2moBQ"/>
           </vertices>
         </regions>
         <regions xmi:id="_wOuB0KinEeG5WeGhg2moBQ" name="r2">
@@ -28,7 +28,7 @@
             <outgoingTransitions xmi:id="_Lr3KEKjBEeG5WeGhg2moBQ" specification="f" target="_LrdhcKjBEeG5WeGhg2moBQ"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_LrdhcKjBEeG5WeGhg2moBQ" name="D2" incomingTransitions="_Lr3KEKjBEeG5WeGhg2moBQ">
-            <outgoingTransitions xmi:id="_FO34gKjBEeG5WeGhg2moBQ" specification="f" target="_DBjOsKioEeG5WeGhg2moBQ"/>
+            <outgoingTransitions xmi:id="_FO34gKjBEeG5WeGhg2moBQ" specification="jd" target="_DBjOsKioEeG5WeGhg2moBQ"/>
           </vertices>
         </regions>
       </vertices>
