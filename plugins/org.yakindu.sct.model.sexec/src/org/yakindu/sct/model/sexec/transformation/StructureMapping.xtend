@@ -126,13 +126,14 @@ class StructureMapping {
 	def ExecutionFlow mapPseudoStates(Statechart statechart, ExecutionFlow r){
 		r.nodes.addAll( statechart.allChoices.map( choice | choice.create ) );
 		r.nodes.addAll( statechart.allEntries.map( entry | entry.create ) );
+		r.nodes.addAll( statechart.allSynchronizations.map( sync | sync.create ) );
 		return r
 	}
 
 	
 	
 	//==========================================================================
-	// PSEUDO STATE MAPPING
+	// TIME EVENT MAPPING
 	//
 	
 	/** Time trigger will be mapped to execution model time events for each real state. */
@@ -145,9 +146,6 @@ class StructureMapping {
 	}
 	
 	
-	//==========================================================================
-	// TIME EVENT MAPPING
-	//
 	
 	def mapTimeEventSpecs(State state) {
 		

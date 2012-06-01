@@ -53,7 +53,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	private ILaunch launch;
 
-	private IExecutionFacade facade;
+	protected IExecutionFacade facade;
 
 	private boolean stepping = false;
 	private boolean terminated = false;

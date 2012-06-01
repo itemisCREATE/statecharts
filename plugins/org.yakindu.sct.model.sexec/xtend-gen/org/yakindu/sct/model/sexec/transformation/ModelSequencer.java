@@ -83,6 +83,7 @@ public class ModelSequencer {
     this.behaviorMapping.mapTransitions(sc, ef);
     this.behaviorMapping.mapLocalReactions(sc, ef);
     this.behaviorMapping.mapChoiceTransitions(sc, ef);
+    this.behaviorMapping.mapSyncTransitions(sc, ef);
     this.reactBuilder.defineEntryReactions(sc, ef);
     this.reactBuilder.defineRegularStateReactions(ef, sc);
     this.reactBuilder.definePseudoStateReactions(ef, sc);

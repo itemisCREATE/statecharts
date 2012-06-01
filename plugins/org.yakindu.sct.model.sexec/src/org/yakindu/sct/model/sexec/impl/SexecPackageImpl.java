@@ -24,6 +24,7 @@ import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.ExitState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
@@ -265,6 +266,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass historyEntryEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass executionSynchronizationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1112,6 +1120,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExecutionSynchronization() {
+		return executionSynchronizationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getCheckRef() {
 		return checkRefEClass;
 	}
@@ -1321,6 +1338,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEAttribute(historyEntryEClass, HISTORY_ENTRY__DEEP);
 		createEReference(historyEntryEClass, HISTORY_ENTRY__REGION);
 		createEReference(historyEntryEClass, HISTORY_ENTRY__HISTORY_STEP);
+
+		executionSynchronizationEClass = createEClass(EXECUTION_SYNCHRONIZATION);
 	}
 
 	/**
@@ -1391,6 +1410,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		traceEndRunCycleEClass.getESuperTypes().add(this.getTrace());
 		saveHistoryEClass.getESuperTypes().add(this.getStep());
 		historyEntryEClass.getESuperTypes().add(this.getStep());
+		executionSynchronizationEClass.getESuperTypes().add(this.getExecutionNode());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(mappedElementEClass, MappedElement.class, "MappedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1516,6 +1536,8 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEAttribute(getHistoryEntry_Deep(), ecorePackage.getEBoolean(), "deep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getHistoryEntry_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getHistoryEntry_HistoryStep(), this.getStep(), null, "historyStep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(executionSynchronizationEClass, ExecutionSynchronization.class, "ExecutionSynchronization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

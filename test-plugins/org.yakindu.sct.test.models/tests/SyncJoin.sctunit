@@ -1,0 +1,95 @@
+testcase for SyncJoin {
+	
+	
+//	test syncJoin_C2_Waits 'test intention' { 
+  
+	test syncJoin_C2_Waits {   
+		
+		assert active (SyncJoin.main_region.B)
+		assert active (SyncJoin.main_region.B.r1.C1)
+		assert active (SyncJoin.main_region.B.r2.D1)
+		// state configuration assertion: assert active (SyncJoin.main_region.B, SyncJoin.main_region.B.r1.C1, SyncJoin.main_region.B.r2.D1)
+		   		
+		   		
+		raise e
+		cycle 
+		assert active (SyncJoin.main_region.B.r1.C2)
+		assert active (SyncJoin.main_region.B.r2.D1)
+		 
+		// require configuration C2Waits 
+		raise jc
+		cycle 
+		assert active (SyncJoin.main_region.B.r1.C2)
+		assert active (SyncJoin.main_region.B.r2.D1)
+		
+		raise jd
+		cycle
+		assert active (SyncJoin.main_region.B.r1.C2)
+		assert active (SyncJoin.main_region.B.r2.D1)
+		
+		// 'If all required triggers exist' 'but the lower priority state is not active no join transition must be taken.' 
+		raise jc
+		raise jd
+		cycle
+		assert active (SyncJoin.main_region.B.r1.C2)
+		assert active (SyncJoin.main_region.B.r2.D1)
+		
+		raise f
+		cycle
+		assert active (SyncJoin.main_region.B.r1.C2)
+		assert active (SyncJoin.main_region.B.r2.D2)
+		
+		raise jc
+		cycle 
+		assert active (SyncJoin.main_region.B.r1.C2)
+		assert active (SyncJoin.main_region.B.r2.D2)
+		
+		raise jd
+		cycle
+		assert active (SyncJoin.main_region.B.r1.C2)
+		assert active (SyncJoin.main_region.B.r2.D2)
+		
+
+		raise jc
+		raise jd
+		cycle
+		assert active (SyncJoin.main_region.A)
+	}
+	
+	test syncJoin_D2_Waits {   
+		
+		assert active (SyncJoin.main_region.B)
+		assert active (SyncJoin.main_region.B.r1.C1)
+		assert active (SyncJoin.main_region.B.r2.D1)
+		   		
+		raise f
+		cycle 
+		assert active (SyncJoin.main_region.B.r1.C1)
+		assert active (SyncJoin.main_region.B.r2.D2)
+		 
+		raise jc
+		cycle 
+		assert active (SyncJoin.main_region.B.r1.C1)
+		assert active (SyncJoin.main_region.B.r2.D2)
+		
+		raise jd
+		cycle
+		assert active (SyncJoin.main_region.B.r1.C1)
+		assert active (SyncJoin.main_region.B.r2.D2)
+		
+		// 'If all required triggers exist' 'but the lower priority state is not active no join transition must be taken.' 
+		raise jc
+		raise jd
+		cycle
+		assert active (SyncJoin.main_region.B.r1.C1)
+		assert active (SyncJoin.main_region.B.r2.D2)
+		
+		raise e
+		cycle
+		assert active (SyncJoin.main_region.B.r1.C2)
+		assert active (SyncJoin.main_region.B.r2.D2)
+				
+	}
+	
+	
+}

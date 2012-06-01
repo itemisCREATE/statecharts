@@ -11,7 +11,6 @@
 package org.yakindu.sct.model.sexec.interpreter.test;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTest;
@@ -38,16 +37,12 @@ public class TimeTriggerTest extends AbstractExecutionFlowTest {
 		ExecutionFlow flow = models.loadExecutionFlowFromResource("TimeTrigger.sct");
 		initInterpreter(flow);
 	}
-
-	@Ignore
+	@Test
 	public void timeTriggerTest() throws Exception {
 		assertTrue(isActive("StateA"));
 		Thread.sleep(110);
 		assertTrue(isActive("StateB"));
-		while(getInteger("value") < 10) {
-			interpreter.runCycle();
-			Thread.sleep(10);
-		}
+		Thread.sleep(220);
 		assertTrue(isActive("StateA"));
 	}
 }

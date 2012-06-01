@@ -23,7 +23,8 @@ testcase for DeepHistory  {
 		cycle
 		assert !active (DeepHistory.mainRegion.State1)
 		assert active (DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
-
+	
+	
 	}
 }
 

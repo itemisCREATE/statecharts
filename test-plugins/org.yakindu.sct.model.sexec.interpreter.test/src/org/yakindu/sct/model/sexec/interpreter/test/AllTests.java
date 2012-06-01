@@ -13,7 +13,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		DeepHistoryTest.class, GuardTest.class, PriorityValuesTest.class,
 		ShallowHistoryTest.class, SimpleEventTest.class,
 		SimpleHierachyTest.class, StatechartLocalReactionsTest.class,
-		StateIsActiveTest.class })
+		StateIsActiveTest.class,
+		SyncJoinTest.class})
 public class AllTests {
 
 }

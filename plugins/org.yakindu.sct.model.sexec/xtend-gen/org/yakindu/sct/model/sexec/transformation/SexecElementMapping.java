@@ -27,6 +27,7 @@ import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
@@ -50,6 +51,7 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
@@ -453,25 +455,65 @@ public class SexecElementMapping {
     }
   }
   
-  public ExecutionRegion create(final Region region) {
-    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(region);
-    final ExecutionRegion _result;
+  public ExecutionSynchronization create(final Synchronization sync) {
+    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(sync);
+    final ExecutionSynchronization _result;
     synchronized (_createCache_create_9) {
       if (_createCache_create_9.containsKey(_cacheKey)) {
         return _createCache_create_9.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
-      ExecutionRegion _createExecutionRegion = _sexecFactory.createExecutionRegion();
-      _result = _createExecutionRegion;
+      ExecutionSynchronization _createExecutionSynchronization = _sexecFactory.createExecutionSynchronization();
+      _result = _createExecutionSynchronization;
       _createCache_create_9.put(_cacheKey, _result);
     }
-    _init_create_9(_result, region);
+    _init_create_9(_result, sync);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,ExecutionRegion> _createCache_create_9 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionSynchronization> _createCache_create_9 = CollectionLiterals.newHashMap();
   
-  private void _init_create_9(final ExecutionRegion r, final Region region) {
+  private void _init_create_9(final ExecutionSynchronization r, final Synchronization sync) {
+    boolean _notEquals = (!Objects.equal(sync, null));
+    if (_notEquals) {
+      Region _parentRegion = sync.getParentRegion();
+      EList<Vertex> _vertices = _parentRegion.getVertices();
+      Iterable<Synchronization> _filter = Iterables.<Synchronization>filter(_vertices, Synchronization.class);
+      List<Synchronization> _list = IterableExtensions.<Synchronization>toList(_filter);
+      final int n = _list.indexOf(sync);
+      String _plus = ("_sync" + Integer.valueOf(n));
+      String _plus_1 = (_plus + "_");
+      r.setSimpleName(_plus_1);
+      QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(sync);
+      String _string = _fullyQualifiedName.toString();
+      String _replaceAll = _string.replaceAll(" ", "");
+      r.setName(_replaceAll);
+      r.setSourceElement(sync);
+      SexecFactory _sexecFactory = this.sexecFactory();
+      Sequence _createSequence = _sexecFactory.createSequence();
+      r.setReactSequence(_createSequence);
+    }
+  }
+  
+  public ExecutionRegion create(final Region region) {
+    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(region);
+    final ExecutionRegion _result;
+    synchronized (_createCache_create_10) {
+      if (_createCache_create_10.containsKey(_cacheKey)) {
+        return _createCache_create_10.get(_cacheKey);
+      }
+      SexecFactory _sexecFactory = this.sexecFactory();
+      ExecutionRegion _createExecutionRegion = _sexecFactory.createExecutionRegion();
+      _result = _createExecutionRegion;
+      _createCache_create_10.put(_cacheKey, _result);
+    }
+    _init_create_10(_result, region);
+    return _result;
+  }
+  
+  private final HashMap<ArrayList<? extends Object>,ExecutionRegion> _createCache_create_10 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_10(final ExecutionRegion r, final Region region) {
     boolean _notEquals = (!Objects.equal(region, null));
     if (_notEquals) {
       String _name = region.getName();
@@ -518,31 +560,6 @@ public class SexecElementMapping {
   public org.yakindu.sct.model.sexec.Reaction create(final Transition tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
     final org.yakindu.sct.model.sexec.Reaction _result;
-    synchronized (_createCache_create_10) {
-      if (_createCache_create_10.containsKey(_cacheKey)) {
-        return _createCache_create_10.get(_cacheKey);
-      }
-      SexecFactory _sexecFactory = this.sexecFactory();
-      org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
-      _result = _createReaction;
-      _createCache_create_10.put(_cacheKey, _result);
-    }
-    _init_create_10(_result, tr);
-    return _result;
-  }
-  
-  private final HashMap<ArrayList<? extends Object>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_10 = CollectionLiterals.newHashMap();
-  
-  private void _init_create_10(final org.yakindu.sct.model.sexec.Reaction r, final Transition tr) {
-    String _id = this.sce.id(tr);
-    r.setName(_id);
-    r.setTransition(true);
-    r.setSourceElement(tr);
-  }
-  
-  public org.yakindu.sct.model.sexec.Reaction create(final LocalReaction lr) {
-    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
-    final org.yakindu.sct.model.sexec.Reaction _result;
     synchronized (_createCache_create_11) {
       if (_createCache_create_11.containsKey(_cacheKey)) {
         return _createCache_create_11.get(_cacheKey);
@@ -552,13 +569,38 @@ public class SexecElementMapping {
       _result = _createReaction;
       _createCache_create_11.put(_cacheKey, _result);
     }
-    _init_create_11(_result, lr);
+    _init_create_11(_result, tr);
     return _result;
   }
   
   private final HashMap<ArrayList<? extends Object>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_11 = CollectionLiterals.newHashMap();
   
-  private void _init_create_11(final org.yakindu.sct.model.sexec.Reaction r, final LocalReaction lr) {
+  private void _init_create_11(final org.yakindu.sct.model.sexec.Reaction r, final Transition tr) {
+    String _id = this.sce.id(tr);
+    r.setName(_id);
+    r.setTransition(true);
+    r.setSourceElement(tr);
+  }
+  
+  public org.yakindu.sct.model.sexec.Reaction create(final LocalReaction lr) {
+    final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
+    final org.yakindu.sct.model.sexec.Reaction _result;
+    synchronized (_createCache_create_12) {
+      if (_createCache_create_12.containsKey(_cacheKey)) {
+        return _createCache_create_12.get(_cacheKey);
+      }
+      SexecFactory _sexecFactory = this.sexecFactory();
+      org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
+      _result = _createReaction;
+      _createCache_create_12.put(_cacheKey, _result);
+    }
+    _init_create_12(_result, lr);
+    return _result;
+  }
+  
+  private final HashMap<ArrayList<? extends Object>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_12 = CollectionLiterals.newHashMap();
+  
+  private void _init_create_12(final org.yakindu.sct.model.sexec.Reaction r, final LocalReaction lr) {
     String _id = this.sce.id(lr);
     r.setName(_id);
     r.setTransition(false);

@@ -62,6 +62,7 @@ class ModelSequencer {
 		sc.mapTransitions(ef)
 		sc.mapLocalReactions(ef)
 		sc.mapChoiceTransitions(ef)
+		sc.mapSyncTransitions(ef)
 		
 		sc.defineEntryReactions(ef)
 		ef.defineRegularStateReactions(sc)

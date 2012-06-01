@@ -8,6 +8,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
@@ -23,6 +24,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
+import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
@@ -48,6 +50,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.Literal;
@@ -146,6 +149,13 @@ public class ReactionBuilder {
         }
       };
     IterableExtensions.<Choice>forEach(_allChoices, _function);
+    Iterable<Synchronization> _allSynchronizations = this.sct.allSynchronizations(sc);
+    final Procedure1<Synchronization> _function_1 = new Procedure1<Synchronization>() {
+        public void apply(final Synchronization sync) {
+          ReactionBuilder.this.defineReaction(sync);
+        }
+      };
+    IterableExtensions.<Synchronization>forEach(_allSynchronizations, _function_1);
   }
   
   public Sequence defineReaction(final Choice choice) {
@@ -190,6 +200,35 @@ public class ReactionBuilder {
       _steps_2.add(0, _newTraceNodeExecuted);
     }
     return execChoice.getReactSequence();
+  }
+  
+  /**
+   * TODO : support fork...
+   */
+  public Sequence defineReaction(final Synchronization sync) {
+    final ExecutionSynchronization execSync = this.mapping.create(sync);
+    EList<Reaction> _reactions = execSync.getReactions();
+    final Reaction _default_ = IterableExtensions.<Reaction>head(_reactions);
+    Sequence _reactSequence = execSync.getReactSequence();
+    EList<Step> _steps = _reactSequence.getSteps();
+    Step _effect = _default_.getEffect();
+    CollectionExtensions.<Step>addAll(_steps, _effect);
+    Sequence _reactSequence_1 = execSync.getReactSequence();
+    _reactSequence_1.setName("react");
+    Sequence _reactSequence_2 = execSync.getReactSequence();
+    String _name = sync.getName();
+    String _plus = ("The reactions of state " + _name);
+    String _plus_1 = (_plus + ".");
+    _reactSequence_2.setComment(_plus_1);
+    boolean _isAddTraceSteps = this.trace.isAddTraceSteps();
+    if (_isAddTraceSteps) {
+      Sequence _reactSequence_3 = execSync.getReactSequence();
+      EList<Step> _steps_1 = _reactSequence_3.getSteps();
+      ExecutionSynchronization _create = this.mapping.create(sync);
+      TraceNodeExecuted _newTraceNodeExecuted = this.trace.newTraceNodeExecuted(_create);
+      _steps_1.add(0, _newTraceNodeExecuted);
+    }
+    return execSync.getReactSequence();
   }
   
   public boolean alwaysTrue(final Check check) {

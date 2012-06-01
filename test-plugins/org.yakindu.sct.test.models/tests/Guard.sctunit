@@ -1,6 +1,6 @@
 testcase for Guard {
 	test guardTest {
 		assert active (Guard.main_region.A)
-		
+	
 	}
 }

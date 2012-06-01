@@ -73,7 +73,7 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   private ITypeSystemAccess ts;
   
   @Inject
-  @Named("InterpreterName")
+  @Named(value = "InterpreterName")
   private String interpreterName;
   
   private ExecutionFlow flow;

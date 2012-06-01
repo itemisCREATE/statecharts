@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sgraph.Synchronization
 
 
 class ReactionBuilder {
@@ -61,6 +62,7 @@ class ReactionBuilder {
 	def definePseudoStateReactions(ExecutionFlow flow, Statechart sc) {
 		
 		sc.allChoices().forEach( choice | choice.defineReaction() )
+		sc.allSynchronizations().forEach( sync | sync.defineReaction() )
 	}
 	
 
@@ -82,6 +84,26 @@ class ReactionBuilder {
 		if ( trace.addTraceSteps ) execChoice.reactSequence.steps.add(0,choice.create.newTraceNodeExecuted)
 		
 		return execChoice.reactSequence
+	}	
+	
+	/**
+	 * TODO : support fork...
+	 */
+	def Sequence defineReaction(Synchronization sync) {
+	
+		val execSync = sync.create
+		
+		// move the default transition to the end of the reaction list
+		val _default_ = execSync.reactions.head
+		
+		execSync.reactSequence.steps.addAll(_default_.effect)
+
+		execSync.reactSequence.name = 'react'
+		execSync.reactSequence.comment = 'The reactions of state ' + sync.name + '.'
+		
+		if ( trace.addTraceSteps ) execSync.reactSequence.steps.add(0,sync.create.newTraceNodeExecuted)
+		
+		return execSync.reactSequence
 	}	
 	
 

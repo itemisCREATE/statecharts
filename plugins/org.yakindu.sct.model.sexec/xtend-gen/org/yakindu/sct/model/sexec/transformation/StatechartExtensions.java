@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -300,6 +301,12 @@ public class StatechartExtensions {
     TreeIterator<EObject> _eAllContents = sc.eAllContents();
     Iterator<Entry> _filter = Iterators.<Entry>filter(_eAllContents, Entry.class);
     return IteratorExtensions.<Entry>toIterable(_filter);
+  }
+  
+  public Iterable<Synchronization> allSynchronizations(final Statechart sc) {
+    TreeIterator<EObject> _eAllContents = sc.eAllContents();
+    Iterator<Synchronization> _filter = Iterators.<Synchronization>filter(_eAllContents, Synchronization.class);
+    return IteratorExtensions.<Synchronization>toIterable(_filter);
   }
   
   public List<LocalReaction> entryReactions(final ReactiveElement state) {

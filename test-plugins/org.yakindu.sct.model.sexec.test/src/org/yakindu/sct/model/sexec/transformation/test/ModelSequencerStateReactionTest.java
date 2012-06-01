@@ -160,6 +160,11 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Transition t = SGraphFactory.eINSTANCE.createTransition();
 		t.setTrigger(tr1);
+		
+		Statechart sc = _createStatechart("test");
+		Region region = _createRegion("r1", sc);
+		t.setSource(_createState("A", region));
+		t.setTarget(_createState("B", region));
 
 		Reaction reaction = behaviorMapping.mapTransition(t);
 
@@ -199,6 +204,11 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Transition t = SGraphFactory.eINSTANCE.createTransition();
 		t.setTrigger(tr1);
 
+		Statechart sc = _createStatechart("test");
+		Region region = _createRegion("r1", sc);
+		t.setSource(_createState("A", region));
+		t.setTarget(_createState("B", region));
+
 		Reaction reaction = behaviorMapping.mapTransition(t);
 
 		// now check the expression structure ...
@@ -236,6 +246,11 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Transition t = SGraphFactory.eINSTANCE.createTransition();
 		t.setTrigger(tr1);
 
+		Statechart sc = _createStatechart("test");
+		Region region = _createRegion("r1", sc);
+		t.setSource(_createState("A", region));
+		t.setTarget(_createState("B", region));
+		
 		Reaction reaction = behaviorMapping.mapTransition(t);
 
 		// now check the expression structure ...

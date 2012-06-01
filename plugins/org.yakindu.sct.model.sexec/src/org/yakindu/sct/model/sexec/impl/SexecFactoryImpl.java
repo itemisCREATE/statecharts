@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.model.sexec.*;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -120,6 +121,7 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.TRACE_END_RUN_CYCLE: return createTraceEndRunCycle();
 			case SexecPackage.SAVE_HISTORY: return createSaveHistory();
 			case SexecPackage.HISTORY_ENTRY: return createHistoryEntry();
+			case SexecPackage.EXECUTION_SYNCHRONIZATION: return createExecutionSynchronization();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -403,6 +405,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public HistoryEntry createHistoryEntry() {
 		HistoryEntryImpl historyEntry = new HistoryEntryImpl();
 		return historyEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionSynchronization createExecutionSynchronization() {
+		ExecutionSynchronizationImpl executionSynchronization = new ExecutionSynchronizationImpl();
+		return executionSynchronization;
 	}
 
 	/**

@@ -61,7 +61,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
   @Inject
   private StextNameProvider provider;
   
-  private IExecutionContext context;
+  protected IExecutionContext context;
   
   public Object evaluateStatement(final Statement statement, final IExecutionContext context) {
     Object _xblockexpression = null;

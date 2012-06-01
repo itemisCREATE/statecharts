@@ -50,6 +50,8 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sexec.ExecutionSynchronization
+import org.yakindu.sct.model.sgraph.Synchronization
  
 
 
@@ -129,6 +131,18 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 			r.reactSequence = seq
 		}
 	}
+	
+	
+	def ExecutionSynchronization create r : sexecFactory.createExecutionSynchronization create(Synchronization sync){
+		if (sync != null) {
+			val n = sync.parentRegion.vertices.filter( typeof ( Synchronization) ).toList.indexOf(sync)
+			r.simpleName =   "_sync" + n + "_"
+			r.name = sync.fullyQualifiedName.toString.replaceAll(" ", "")	
+			r.sourceElement = sync	
+			r.reactSequence = sexecFactory.createSequence
+		}
+	}
+
 	
 	
 	def ExecutionRegion create r : sexecFactory.createExecutionRegion create(Region region){
