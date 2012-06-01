@@ -6,16 +6,16 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.test_deephistory.Test_DeepHistoryCycleBasedStatemachine;
-import org.yakindu.sct.runtime.java.test_deephistory.Test_DeepHistoryCycleBasedStatemachine.State;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_deephistory.Test_deephistoryStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_deephistory.Test_deephistoryStatemachine.State;
 
 public class TestDeepHistoryCycleBasedStatemachine {
 
-	private Test_DeepHistoryCycleBasedStatemachine statemachine;
+	private Test_deephistoryStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new Test_DeepHistoryCycleBasedStatemachine();
+		statemachine = new Test_deephistoryStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}

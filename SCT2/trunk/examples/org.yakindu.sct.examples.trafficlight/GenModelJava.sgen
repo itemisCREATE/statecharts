@@ -7,9 +7,12 @@ GeneratorModel for yakindu::java {
 			targetFolder = "src-gen"
 		}
 
+		feature Naming {
+			basePackage = "org.yakindu.sct.examples.trafficlight.cyclebased"
+		}
 
 		feature GeneralFeatures {
-			EventBasedStatemachine = true
+			EventBasedStatemachine = false
 			InterfaceObserverSupport = false
 			TimerService = true
 			RuntimeService = true
@@ -35,7 +38,7 @@ http://www.eclipse.org/legal/epl-v10.html
 
 Contributors:
     committers of YAKINDU - initial API and implementation
-â"
+ï¿½"
 		}
 		
 	}

@@ -12,16 +12,15 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingCycleBasedStatemachine;
 
 /**
- * This class cares about setting up the UI of the pesestrian crossing and delegates the state machine handling to the concrete subcasses.
+ * This class cares about setting up the UI of the pesestrian crossing and
+ * delegates the state machine handling to the concrete subcasses.
  * 
  * @author terfloth
  */
 public abstract class CrossingDemoBase {
 
-	protected TrafficLightWaitingCycleBasedStatemachine statemachine;
 	protected Shell shell;
 	protected Display display;
 	protected CrossingFigure crossing;
@@ -32,38 +31,36 @@ public abstract class CrossingDemoBase {
 		super();
 	}
 
-	
 	protected abstract void setUpAndRunStatemachine();
+
 	protected abstract void tearDownStatemachine();
 
 	protected abstract void readStatemachineOutput();
 
 	protected abstract void pedestrianRequestButtonClicked();
+
 	protected abstract void onOffButtonClicked();
 
-
 	public void runTrafficLight() {
-	
+
 		setUpAndRunStatemachine();
 		createUIContent();
-	
+
 		shell.open();
 		while (!shell.isDisposed()) {
 			// update traffic lights
 			readStatemachineOutput();
-	
+
 			crossing.repaint();
-	
+
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
-		
+
 		tearDownStatemachine();
 	}
 
-
-	
 	protected void createUIContent() {
 		display = Display.getDefault();
 		shell = new Shell(display);
@@ -72,17 +69,17 @@ public abstract class CrossingDemoBase {
 		GridLayout shellLayout = new GridLayout();
 		shellLayout.numColumns = 1;
 		shell.setLayout(shellLayout);
-	
+
 		LightweightSystem lws = createLightweightsystem(shell);
-		createButtonComposite(statemachine, shell);
-	
+		createButtonComposite(shell);
+
 		crossing = new CrossingFigure();
 		lws.setContents(crossing);
 		trafficLightFigure = new TrafficLightFigure();
 		crossing.add(trafficLightFigure);
 		crossing.getLayoutManager().setConstraint(trafficLightFigure,
 				new Rectangle(275, 75, 35, 90));
-	
+
 		pedestrianLightFigure = new PedestrianLightFigure();
 		crossing.add(pedestrianLightFigure);
 		crossing.getLayoutManager().setConstraint(pedestrianLightFigure,
@@ -90,7 +87,7 @@ public abstract class CrossingDemoBase {
 	}
 
 	protected LightweightSystem createLightweightsystem(Shell shell) {
-	
+
 		FigureCanvas canvas = new FigureCanvas(shell);
 		GridData canvasGridData = new GridData();
 		canvasGridData.horizontalAlignment = GridData.FILL;
@@ -102,7 +99,7 @@ public abstract class CrossingDemoBase {
 		return lws;
 	}
 
-	protected void createButtonComposite(final TrafficLightWaitingCycleBasedStatemachine statemachine, Shell shell) {
+	protected void createButtonComposite(Shell shell) {
 		// create a composite to hold the buttons
 		Composite buttonComposite = new Composite(shell, SWT.NO_SCROLL);
 		GridData buttonCompositeGridData = new GridData();
@@ -112,29 +109,26 @@ public abstract class CrossingDemoBase {
 		FillLayout buttonCompositeLayout = new FillLayout();
 		buttonCompositeLayout.type = SWT.HORIZONTAL;
 		buttonComposite.setLayout(new FillLayout());
-	
+
 		// create a button and event handlers
-		
+
 		Button pedestrianRequest = new Button(buttonComposite, SWT.PUSH);
 		pedestrianRequest.setText("pedestrian request");
 		pedestrianRequest.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(
-					final org.eclipse.swt.widgets.Event event) {
+			public void handleEvent(final org.eclipse.swt.widgets.Event event) {
 				pedestrianRequestButtonClicked();
 			}
 
 		});
-		
+
 		Button onOff = new Button(buttonComposite, SWT.PUSH);
 		onOff.setText("on / off");
 		onOff.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(
-					final org.eclipse.swt.widgets.Event event) {
+			public void handleEvent(final org.eclipse.swt.widgets.Event event) {
 				onOffButtonClicked();
 			}
 
 		});
 	}
-
 
 }

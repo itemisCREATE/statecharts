@@ -17,9 +17,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.test_parallelregions.DefaultInterface;
-import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCycleBasedStatemachine;
-import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCycleBasedStatemachine.State;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_parallelregionsStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_parallelregionsStatemachine.State;
 
 /**
  * Testcases for 'InterfaceTest' cycle based statemachine.
@@ -29,11 +28,11 @@ import org.yakindu.sct.runtime.java.test_parallelregions.Test_ParallelRegionsCyc
  */
 public class TestParallelRegionsCycleBasedStatemachine {
 
-	private Test_ParallelRegionsCycleBasedStatemachine sm;
+	private Test_parallelregionsStatemachine sm;
 
 	@Before
 	public void setUp() {
-		sm = new Test_ParallelRegionsCycleBasedStatemachine();
+		sm = new Test_parallelregionsStatemachine();
 		sm.init();
 		sm.enter();
 	}
@@ -114,36 +113,35 @@ public class TestParallelRegionsCycleBasedStatemachine {
 
 	@Test
 	public void testEntryAndExitExecution() {
-		DefaultInterface di = sm;
 
-		di.raiseEvent1();
+		sm.raiseEvent1();
 		sm.runCycle();
 		// Exit State1
 		int hierarchy = 2;
 		// Entry State2
 		hierarchy += 3;
-		assertEquals(7, di.getVarReg3());
-		assertEquals(hierarchy, di.getVarHierarchy());
+		assertEquals(7, sm.getReg3());
+		assertEquals(hierarchy, sm.getHierarchy());
 
-		di.raiseEvent5();
+		sm.raiseEvent5();
 		sm.runCycle();
-		assertEquals(8, di.getVarReg3());
+		assertEquals(8, sm.getReg3());
 
-		di.raiseEvent6();
+		sm.raiseEvent6();
 		sm.runCycle();
-		di.raiseEvent3();
+		sm.raiseEvent3();
 		sm.runCycle();
 		// Exit State1
 		hierarchy = 2;
-		assertEquals(-1, di.getVarReg3());
-		assertEquals(hierarchy, di.getVarHierarchy());
+		assertEquals(-1, sm.getReg3());
+		assertEquals(hierarchy, sm.getHierarchy());
 
-		di.raiseEvent1();
+		sm.raiseEvent1();
 		sm.runCycle();
 		// Entry State2
 		hierarchy += 3;
 
-		di.raiseEvent2();
+		sm.raiseEvent2();
 		sm.runCycle();
 		// Entry State4
 		hierarchy *= 4;
@@ -151,9 +149,9 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		hierarchy += 10;
 		// Entry State5
 		hierarchy += 5;
-		assertEquals(hierarchy, di.getVarHierarchy());
+		assertEquals(hierarchy, sm.getHierarchy());
 
-		di.raiseEvent8();
+		sm.raiseEvent8();
 		sm.runCycle();
 		// Exit State9
 		hierarchy -= 10;
@@ -163,10 +161,10 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		hierarchy /= 4;
 		// Exit State 2
 		hierarchy -= 3;
-		assertEquals(hierarchy, di.getVarHierarchy());
+		assertEquals(hierarchy, sm.getHierarchy());
 
 		// Jump to State6 && State9
-		di.raiseEvent11();
+		sm.raiseEvent11();
 		sm.runCycle();
 		// Exit State1
 		hierarchy = 2;
@@ -178,7 +176,7 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		hierarchy += 10;
 		// Entry State6
 		hierarchy += 6;
-		assertEquals(hierarchy, di.getVarHierarchy());
+		assertEquals(hierarchy, sm.getHierarchy());
 	}
 
 }

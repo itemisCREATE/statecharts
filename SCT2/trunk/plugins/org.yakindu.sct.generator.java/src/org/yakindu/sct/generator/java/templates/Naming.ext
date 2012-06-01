@@ -27,14 +27,23 @@ String getStatemachineName(String name) :
 	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getValidStatemachineName(java.lang.String);
 
 String getStatemachineName(ExecutionFlow this) : 
-	 name.getStatemachineName();
+	 name.getStatemachineName().toFirstUpper();
+
+String getStatemachineClassName(ExecutionFlow this) : 
+	getStatemachineName() + "Statemachine";
+
+String getStatemachineInterfaceName(ExecutionFlow this) :
+	"I" + getStatemachineClassName();
 
 String getEventBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "EventBasedStatemachine";
 String getCycleBasedStatemachineName(ExecutionFlow this) : name.toFirstUpper() + "CycleBasedStatemachine";
 String getCycleBasedStatemachineName(InterfaceScope this) : ((ExecutionFlow)eContainer).getCycleBasedStatemachineName();
+String getCycleBasedStatemachineInterfaceName(ExecutionFlow this): "I" + getCycleBasedStatemachineName();
+
+
 String getStatemachineFactoryName(ExecutionFlow this) : name.getStatemachineName().toFirstUpper() + "StatemachineFactory";
 
-String getStatemachineInterfaceTypes(ExecutionFlow this, GeneratorEntry entry):
+String getStatemachineInterfaceExtensions(ExecutionFlow this, GeneratorEntry entry):
 	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getStatemachineInterfaceTypes(org.yakindu.sct.model.sexec.ExecutionFlow, org.yakindu.sct.model.sgen.GeneratorEntry);
 
 String getInterfaceName(InterfaceScope this) :  
@@ -42,7 +51,12 @@ String getInterfaceName(InterfaceScope this) :
 		"Interface" + name.toFirstUpper()
 	else
 		"DefaultInterface";
-		 
+
+String getInterfaceListenerName(InterfaceScope this) :
+	getInterfaceName()+"Listener";
+
+String getInterfaceIdentifier(InterfaceScope this) : getInterfaceName().toFirstLower();
+	 
 String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
 
 String getIInterfaceImplName(InterfaceScope this) : "I" + getInterfaceName() + "Impl";
@@ -74,7 +88,16 @@ String getInitialValueAssignment(VariableDefinition this) :
 	else
 		null;
 
-String getValueName(VariableDefinition this) : "var" + name.toFirstUpper();
+String getIllegalAccessEventIdentifier(EventDefinition this) :
+	if (direction == Direction::OUT) then 
+		getOutEventIdentifier()
+	else 
+		getEventIdentifier();
+
+String getIllegalAccessValidation(EventDefinition this) :
+	"if (!" + getIllegalAccessEventIdentifier() + ") throw new IllegalStateException(\"Illegal event value acces. Event " +getEventName() + " is not raised!\");";
+
+String getValueName(VariableDefinition this) : name.toFirstUpper();
 
 String getter(VariableDefinition this) : "get" + getValueName().toFirstUpper() + "()";
 
@@ -111,7 +134,7 @@ String getName(ExecutionFlow this) :
 	name.replaceAll(" ","").toFirstUpper();
 
 String getVarName(VariableDefinition this) :
-	"Var"+name.toFirstUpper();
+	name.toFirstUpper();
 String getVarName(EObject this) : "/* Variable expected, but got: "+this+" */";
 String getVarName(ElementReferenceExpression this) : this.reference.getVarName();
 String getVarName(FeatureCall this) : this.feature.getVarName();
@@ -125,16 +148,31 @@ String getEventName(EventDefinition this) :
 	getNameWA().toFirstUpper();
 
 String getEventName(EObject this) : "/* Event expected, but got: "+this+" */";
+String getEventValueIdentifier(EObject this) : "/* Event expected, but got: "+this+" */";
 String getEventName(ElementReferenceExpression this) : this.reference.getEventName();
+String getEventValueIdentifier(ElementReferenceExpression this) : this.reference.getEventValueIdentifier();
 String getEventName(FeatureCall this) : this.feature.getEventName();
+String getEventValueIdentifier(FeatureCall this) : this.feature.getEventValueIdentifier();
 String getEventName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
 
 String getter(Event this) :
-	"getEvent"+this.getEventName()+"()";
+	"get"+this.getEventName()+"()";
 
 String getEventName(TimeEvent this) :
 	name.replaceAll(" ","").toFirstUpper();
-				
+
+String getEventIdentifier(Event this):
+	getEventName().toFirstLower();
+
+String getOutEventIdentifier(Event this):
+	getEventName().toFirstLower()+"Out";
+
+String getEventValueIdentifier(EventDefinition this):
+	getEventName().toFirstLower()+"Value";
+
+String getVariableIdentifier(VariableDefinition this):
+	getVarName().toFirstLower();
+	
 cached String functionName(Step step) : 
 	(step.isEffect()) ? step.actionFunctionName() : (
 	(step.isReactionCheck()) ? step.checkFunctionName() : (
@@ -187,12 +225,12 @@ ExecutionState state(Step this) : (ExecutionState) eContainer;
 
 String getContext(Variable this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
-		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
+		getInterfaceIdentifier((InterfaceScope)eContainer)+"."
 	else 
 		"";
 String getContext(VariableDefinition this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
-		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
+		getInterfaceIdentifier((InterfaceScope)eContainer)+"."
 	else 
 		"";
 		
@@ -210,18 +248,18 @@ String getContext(EObject this) :
 	
 String getContext(EventDefinition this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
-		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
+		getInterfaceIdentifier((InterfaceScope)eContainer)+"."
 	else 
 		"";
 String getContext(Event this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
-		"get"+getInterfaceImplName((InterfaceScope)eContainer)+"()."
+		getInterfaceIdentifier((InterfaceScope)eContainer)+"."
 	else 
 		"";
 		
 String getInterfaceExtension(Scope this, GeneratorEntry entry):
 	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getInterfaceExtensions(org.yakindu.sct.model.sgraph.Scope, org.yakindu.sct.model.sgen.GeneratorEntry);
-		
+
 String getInterfaceImplExtension(Scope this, GeneratorEntry entry):
 	if ((hasVariables() || hasOutgoingEvents()) && entry.createInterfaceObserverSupport()) then
 		" extends NotificationSender"

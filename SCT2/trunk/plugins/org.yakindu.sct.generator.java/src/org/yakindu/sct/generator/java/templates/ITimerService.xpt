@@ -36,8 +36,7 @@ public interface ITimerService {
 	 *            run cycle was called. Can be used to produce a more accurate
 	 *            timing behavior.
 	 */
-	public void setTimer(TimeEvent<? extends Enum<?>> event, long time,
-			long cycleStartTime);
+	public void setTimer(TimeEvent event, long time, long cycleStartTime);
 
 	/**
 	 * Unset the given {@link TimeEvent}. Use to unset cyclic repeated time
@@ -45,7 +44,7 @@ public interface ITimerService {
 	 * 
 	 * @param event
 	 */
-	public void resetTimer(TimeEvent<? extends Enum<?>> event);
+	public void resetTimer(TimeEvent event);
 
 	/**
 	 * Cancel timer service. Use this to end possible timing threads and free
@@ -53,5 +52,6 @@ public interface ITimerService {
 	 */
 	public void cancel();
 }
+
 «ENDFILE-»
 «ENDDEFINE»

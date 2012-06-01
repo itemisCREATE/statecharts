@@ -1,0 +1,68 @@
+package org.yakindu.sct.generator.java.runtime.cyclebased.interfacetest;
+
+import java.util.List;
+import org.yakindu.sct.generator.java.runtime.cyclebased.IStatemachine;
+
+public interface IInterfacetestStatemachine extends IStatemachine {
+
+	public interface DefaultInterface {
+
+		public void raiseEvent1();
+		public boolean isRaisedEvent2();
+
+		public int getEvent2Value();
+
+		public boolean getVar1();
+		public void setVar1(boolean value);
+		public double getVar2();
+		public void setVar2(double value);
+		public int getVar3();
+		public void setVar3(int value);
+
+		public List<DefaultInterfaceListener> getListeners();
+	}
+
+	public interface DefaultInterfaceListener {
+		public void onEvent2Raised(int value);
+	}
+
+	public interface InterfaceOther {
+
+		public void raiseEvent3();
+		public boolean isRaisedEvent4();
+
+		public int getV1();
+		public void setV1(int value);
+
+		public List<InterfaceOtherListener> getListeners();
+	}
+
+	public interface InterfaceOtherListener {
+
+		public void onEvent4Raised();
+	}
+
+	public interface InterfaceThird {
+
+		public void raiseEvent5();
+		public boolean isRaisedEvent6();
+
+		public boolean getEvent6Value();
+
+		public double getV1();
+		public void setV1(double value);
+
+		public List<InterfaceThirdListener> getListeners();
+	}
+
+	public interface InterfaceThirdListener {
+		public void onEvent6Raised(boolean value);
+	}
+
+	public DefaultInterface getDefaultInterface();
+
+	public InterfaceOther getInterfaceOther();
+
+	public InterfaceThird getInterfaceThird();
+
+}

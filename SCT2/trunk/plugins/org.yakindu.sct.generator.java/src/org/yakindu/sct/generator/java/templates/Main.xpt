@@ -22,66 +22,21 @@ Contributors:
 	
 	«EXPAND ITimedStatemachine::file(entry) FOR this»
 	
-	«EXPAND ITimerService::file(entry) FOR this»
+	«EXPAND TimeEvent::file(entry) FOR this»
 	
-	«EXPAND ITimerNotificationListener::file(entry) FOR this»
+	«EXPAND ITimerService::file(entry) FOR this»
 	
 	«IF entry.createTimerService()»
 		«EXPAND TimerService::file(entry) FOR this»
 	«ENDIF»
 	
-	«IF entry.createStatemachineFactory()»
-		«EXPAND IStatemachineCreationFactory::file(entry) FOR this»
-		«EXPAND CustomStatemachineCreationFactory::file(entry) FOR this»
-	«ENDIF»
-	
-	«IF entry.createGenericInterfaceSupport()»
-		«EXPAND IGenericAccessInterface::file(entry) FOR this»
-		«EXPAND IGenericAccessStatemachine::file(entry) FOR this»
-	«ENDIF»
-	
 	«IF entry.createRuntimeService()»
 		«EXPAND RuntimeService::file(entry) FOR this»
-		«EXPAND RuntimeCycleNotification::file(entry) FOR this»
 	«ENDIF»
 	
-	«EXPAND Event::file(entry) FOR this»
+	«EXPAND StatemachineInterface::file(entry) FOR this»
 	
-	«EXPAND EventVector::file(entry) FOR this»
-	
-	«EXPAND ValuedEvent::file(entry) FOR this»
-	
-	«EXPAND TimeEvent::file(entry) FOR this»
-	
-	«EXPAND EventNotification::file(entry) FOR this»
-	
-	«EXPAND VariableNotification::file(entry) FOR this»
-	
-	«EXPAND INotificationListener::file(entry) FOR this»
-	
-	«EXPAND INotificationSender::file(entry) FOR this»
-	
-	«EXPAND Notification::file(entry) FOR this»
-	
-	«EXPAND NotificationSender::file(entry) FOR this»
-	
-	«EXPAND NotificationType::file(entry) FOR this»
-	
-	«REM» concrete files «ENDREM»
-	«FOREACH this.scopes.typeSelect(InterfaceScope) AS scope»
-	«EXPAND CustomInterface::file(entry) FOR scope»
-	«EXPAND CustomIInterfaceImpl::file(entry) FOR scope»
-	«EXPAND CustomInterfaceImpl::file(entry) FOR scope»
-	«IF entry.createEventBasedStatemachine() && scope.hasIncomingEvents()»
-		«EXPAND CustomEventBasedInterfaceImpl::file(entry) FOR scope»
-	«ENDIF»
-	«ENDFOREACH»
-	
-	«EXPAND CustomCycleBasedStatemachine::file(entry) FOR this»
-	
-	«IF entry.createEventBasedStatemachine()»
-		«EXPAND CustomEventBasedStatemachine::file(entry) FOR this»
-	«ENDIF»
+	«EXPAND StatemachineCycleBased::file(entry) FOR this»
 
 «ENDDEFINE»
 

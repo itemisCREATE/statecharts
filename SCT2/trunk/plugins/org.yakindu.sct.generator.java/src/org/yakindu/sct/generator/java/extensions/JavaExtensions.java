@@ -19,23 +19,20 @@ public class JavaExtensions implements IJavaFeatureConstants {
 			ExecutionFlow flow, GeneratorEntry entry) {
 
 		String interfaces = "";
-
+		
 		if (hasGenericInterfaceSupport(entry)) {
 			interfaces += "IGenericAccessStatemachine, ";
 		}
 		
-		if (hasDefaultInterface(flow)) {
-			interfaces += "DefaultInterface,";
-		}
+//		if (hasDefaultInterface(flow)) {
+//			interfaces += "DefaultInterface,";
+//		}
 
 		if (isTimedStatemachine(flow)) {
-			interfaces += "ITimedStatemachine";
+			interfaces += "ITimedStatemachine,";
 		}
-
-		else {
-			interfaces += "IStatemachine";
-		}
-
+		
+		interfaces += "IStatemachine";
 		return interfaces;
 	}
 

@@ -10,30 +10,32 @@
  */
 package org.yakindu.sct.examples.java.trafficlight;
 
+import org.yakindu.sct.examples.trafficlight.cyclebased.TimerService;
+import org.yakindu.sct.examples.trafficlight.cyclebased.trafficlightwaiting.TrafficlightwaitingStatemachine;
+
 /**
- * Example to show how to integrate the generated statemachine code into existing projects.
+ * Example to show how to integrate the generated statemachine code into
+ * existing projects.
  * 
  * @author a.nyssen - initial API and implementation
  * @author m.muehlbrandt - adaptions to new statemachine code.
  * @author terfloth - refactoring
  */
-import org.yakindu.sct.runtime.java.TimerService;
-import org.yakindu.sct.runtime.java.trafficlightwaiting.TrafficLightWaitingCycleBasedStatemachine;
 
 public class CrossingDemoCycleBased extends CrossingDemoBase {
 
-	
+	private TrafficlightwaitingStatemachine statemachine;
+
 	public static void main(String[] args) {
-		
+
 		new CrossingDemoCycleBased().runTrafficLight();
 	}
 
-	
 	@Override
 	protected void setUpAndRunStatemachine() {
-		
-		statemachine = new TrafficLightWaitingCycleBasedStatemachine();
-		
+
+		statemachine = new TrafficlightwaitingStatemachine();
+
 		Thread thread = new Thread() {
 			@Override
 			public void run() {
@@ -57,38 +59,37 @@ public class CrossingDemoCycleBased extends CrossingDemoBase {
 		thread.start();
 	}
 
-
 	@Override
 	protected void tearDownStatemachine() {
 		// End TimerHandler and timing thread.
-		statemachine.getTimerService() .cancel();
+		statemachine.getTimerService().cancel();
 	}
-
 
 	@Override
 	protected void readStatemachineOutput() {
-		trafficLightFigure.setRed(statemachine.getInterfaceTrafficLight().getVarRed());
-		trafficLightFigure.setYellow(statemachine.getInterfaceTrafficLight().getVarYellow());
-		trafficLightFigure.setGreen(statemachine.getInterfaceTrafficLight().getVarGreen());
-	
-		pedestrianLightFigure.setWhite(statemachine.getInterfacePedestrian().getVarRequest());
-		pedestrianLightFigure.setRed(statemachine.getInterfacePedestrian().getVarRed());
-		pedestrianLightFigure.setGreen(statemachine.getInterfacePedestrian().getVarGreen());
-	}
+		trafficLightFigure.setRed(statemachine.getInterfaceTrafficLight()
+				.getRed());
+		trafficLightFigure.setYellow(statemachine.getInterfaceTrafficLight()
+				.getYellow());
+		trafficLightFigure.setGreen(statemachine.getInterfaceTrafficLight()
+				.getGreen());
 
+		pedestrianLightFigure.setWhite(statemachine.getInterfacePedestrian()
+				.getRequest());
+		pedestrianLightFigure.setRed(statemachine.getInterfacePedestrian()
+				.getRed());
+		pedestrianLightFigure.setGreen(statemachine.getInterfacePedestrian()
+				.getGreen());
+	}
 
 	@Override
 	protected void pedestrianRequestButtonClicked() {
 		statemachine.raisePedestrianRequest(); // raise event in statemachine
 	}
 
-
 	@Override
 	protected void onOffButtonClicked() {
 		statemachine.raiseOnOff(); // raise event in statemachine
 	}
-	
-	
-	
-	
+
 }

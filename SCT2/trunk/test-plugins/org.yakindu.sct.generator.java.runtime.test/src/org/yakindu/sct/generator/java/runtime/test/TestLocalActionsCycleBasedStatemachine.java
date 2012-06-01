@@ -16,9 +16,9 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.runtime.java.TimerService;
-import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCycleBasedStatemachine;
-import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCycleBasedStatemachine.State;
+import org.yakindu.sct.generator.java.runtime.cyclebased.TimerService;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_localactions.Test_localactionsStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_localactions.Test_localactionsStatemachine.State;
 
 /**
  * Testcases for 'Test_LocalActions' cycle based statemachine.
@@ -28,7 +28,7 @@ import org.yakindu.sct.runtime.java.test_localactions.Test_LocalActionsCycleBase
  */
 public class TestLocalActionsCycleBasedStatemachine {
 
-	private Test_LocalActionsCycleBasedStatemachine statemachine;
+	private Test_localactionsStatemachine statemachine;
 
 	// Define the error threshold in ms. 10 ms are required to satisfy
 	// soft-realtime requirements.
@@ -41,7 +41,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 
 	@Before
 	public void setUp() {
-		statemachine = new Test_LocalActionsCycleBasedStatemachine();
+		statemachine = new Test_localactionsStatemachine();
 		statemachine.setTimerService(new TimerService());
 		statemachine.init();
 		statemachine.enter();
@@ -53,9 +53,9 @@ public class TestLocalActionsCycleBasedStatemachine {
 		statemachine = null;
 	}
 
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalStateException.class)
 	public void testExceptionHandling() {
-		Test_LocalActionsCycleBasedStatemachine statemachine = new Test_LocalActionsCycleBasedStatemachine();
+		Test_localactionsStatemachine statemachine = new Test_localactionsStatemachine();
 		statemachine.enter();
 	}
 
@@ -63,7 +63,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 	public void testStatemachineEntry() {
 		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
 				statemachine.isStateActive(State.State1));
-		assertEquals("Variable i not set to 1", 1, statemachine.getVarI());
+		assertEquals("Variable i not set to 1", 1, statemachine.getI());
 	}
 
 	@Test
@@ -71,24 +71,24 @@ public class TestLocalActionsCycleBasedStatemachine {
 		final long time = System.currentTimeMillis();
 
 		assertEquals("Error in local reaction \"Entry / i=1;\" of State1", 1,
-				statemachine.getVarI());
+				statemachine.getI());
 
 		statemachine.runCycle();
 		assertEquals("Error in local reaction \"onCycle / i=2;\" of State1", 2,
-				statemachine.getVarI());
+				statemachine.getI());
 
 		statemachine.raiseEvent2();
 		statemachine.runCycle();
 		assertEquals("Error in local reaction \"Event2 / i=3;\" of State1", 3,
-				statemachine.getVarI());
+				statemachine.getI());
 
 		// Check timer behavior
-		while (statemachine.getVarC() < 10) {
+		while (statemachine.getC() < 10) {
 			statemachine.runCycle();
 			Thread.sleep(junitSleepTime);
 		}
 		final long time2 = System.currentTimeMillis() - time;
-		final long expectedTime = statemachine.getVarC() * 100;
+		final long expectedTime = statemachine.getC() * 100;
 		final long delta = time2 - expectedTime;
 		assertTrue("Timer threshold overflow in State 1. Delta is " + delta
 				+ " ms. Threshold is: " + timerThreshold + " ms.",
@@ -103,20 +103,20 @@ public class TestLocalActionsCycleBasedStatemachine {
 		final long time = System.currentTimeMillis();
 
 		assertEquals("Error in local reaction \"exit / i=0;\" of State1", 0,
-				statemachine.getVarI());
+				statemachine.getI());
 
 		assertEquals("Error in local reaction \"entry / j=0;\" of State2", 1,
-				statemachine.getVarJ());
+				statemachine.getJ());
 
 		// Check local reaction for Event2
 		statemachine.raiseEvent2();
 		statemachine.runCycle();
 		assertEquals(
 				"Error in local reaction \"Event2, Event4 / j=2;\" of State2",
-				2, statemachine.getVarJ());
+				2, statemachine.getJ());
 
 		// Check timer behavior
-		while (statemachine.getVarJ() != 3) {
+		while (statemachine.getJ() != 3) {
 			statemachine.runCycle();
 			Thread.sleep(junitSleepTime);
 		}
@@ -133,12 +133,12 @@ public class TestLocalActionsCycleBasedStatemachine {
 		statemachine.runCycle();
 		assertEquals(
 				"Error in local reaction \"Event2, Event4 / j=2;\" of State2",
-				2, statemachine.getVarJ());
+				2, statemachine.getJ());
 
 		// Check local reaction for exit
 		statemachine.raiseEvent3();
 		statemachine.runCycle();
 		assertEquals("Error in local reaction \"exit / j=0;\" of State2", 0,
-				statemachine.getVarJ());
+				statemachine.getJ());
 	}
 }
