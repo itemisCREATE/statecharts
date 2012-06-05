@@ -31,10 +31,10 @@ import java.util.List;
 
 «DEFINE FieldDeclarations(sgen::GeneratorEntry entry) FOR ExecutionFlow»
 	«FOREACH getInternalScopeEvents() AS event-»
-		private final boolean «event.getEventIdentifier()»;
+		private boolean «event.getEventIdentifier()»;
 		
 		«IF !event.type.isVoid()-»
-		private final «event.type.getJavaType()» «event.getEventValueIdentifier()»;
+		private «event.type.getJavaType()» «event.getEventValueIdentifier()»;
 		
 		«ENDIF-»
 	«ENDFOREACH-»
