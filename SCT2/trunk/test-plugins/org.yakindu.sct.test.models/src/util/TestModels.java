@@ -43,6 +43,7 @@ public class TestModels {
 	public static final String GUARD = "Guard.sct";
 	public static final String PRIORITY_VALUES = "PriorityValues.sct";
 	public static final String SHALLOW_HISTORY = "ShallowHistory.sct";
+	public static final String SIMPLE_EVENT = "SimpleEvent.sct";
 	public static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
 	public static final String STATECHART_LOCAL_REACTIONS = "StatechartLocalReactions.sct";
 	public static final String STATE_ACTIVE = "StateIsActive.sct";
@@ -54,6 +55,16 @@ public class TestModels {
 	@Inject
 	private ModelSequencer sequencer;
 
+	/**
+	 * <img src="../../images/SimpleEvent.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createSimpleEventModel() throws IOException {
+		return loadExecutionFlowFromResource(SIMPLE_EVENT);
+	}
+	
 	/**
 	 * <img src="../../images/PriorityValues.png" /> <br />
 	 * 
