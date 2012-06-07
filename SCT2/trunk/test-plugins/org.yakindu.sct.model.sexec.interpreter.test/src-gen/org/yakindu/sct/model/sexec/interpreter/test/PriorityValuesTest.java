@@ -24,6 +24,7 @@ import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for PriorityValues
  */
+@SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class PriorityValuesTest extends AbstractExecutionFlowTest {
@@ -39,14 +40,14 @@ public class PriorityValuesTest extends AbstractExecutionFlowTest {
 	@Test
 	public void transitionPriority() throws Exception {
 		assertTrue(isActive("A"));
-		raiseEvent("");
+		raiseEvent("event1");
 		interpreter.runCycle();
 		assertTrue(isActive("C"));
 	}
 	@Test
 	public void regionPriority() throws Exception {
 		assertTrue(isActive("A"));
-		raiseEvent("");
+		raiseEvent("event2");
 		interpreter.runCycle();
 		assertTrue(isActive("B"));
 		assertTrue(!isActive("E"));

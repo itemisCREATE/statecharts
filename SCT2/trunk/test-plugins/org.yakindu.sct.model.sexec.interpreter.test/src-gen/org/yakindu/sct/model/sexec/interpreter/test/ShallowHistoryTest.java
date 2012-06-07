@@ -24,6 +24,7 @@ import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for ShallowHistory
  */
+@SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class ShallowHistoryTest extends AbstractExecutionFlowTest {
@@ -38,33 +39,33 @@ public class ShallowHistoryTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void shallowHistoryTest() throws Exception {
-		raiseEvent("");
+		raiseEvent("event1");
 		interpreter.runCycle();
-		raiseEvent("");
+		raiseEvent("event3");
 		interpreter.runCycle();
-		raiseEvent("");
+		raiseEvent("event5");
 		interpreter.runCycle();
-		raiseEvent("");
+		raiseEvent("event7");
 		interpreter.runCycle();
 		assertTrue(!isActive("State1"));
 		assertTrue(isActive("State9"));
-		raiseEvent("");
+		raiseEvent("event6");
 		interpreter.runCycle();
 		assertTrue(!isActive("State9"));
 		assertTrue(isActive("State6"));
-		raiseEvent("");
+		raiseEvent("event5");
 		interpreter.runCycle();
 		assertTrue(!isActive("State8"));
 		assertTrue(isActive("State9"));
-		raiseEvent("");
+		raiseEvent("event2");
 		interpreter.runCycle();
 		assertTrue(!isActive("State9"));
 		assertTrue(isActive("State1"));
-		raiseEvent("");
+		raiseEvent("event1");
 		interpreter.runCycle();
 		assertTrue(isActive("State6"));
 		assertTrue(!isActive("State1"));
-		raiseEvent("");
+		raiseEvent("event5");
 		interpreter.runCycle();
 		assertTrue(!isActive("State6"));
 		assertTrue(isActive("State9"));
