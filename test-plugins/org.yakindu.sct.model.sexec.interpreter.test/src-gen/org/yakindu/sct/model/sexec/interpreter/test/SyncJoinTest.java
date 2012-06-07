@@ -1,13 +1,13 @@
 /**
-* Copyright (c) 2012 committers of YAKINDU and others.
-* All rights reserved. This program and the accompanying materials
-* are made available under the terms of the Eclipse Public License v1.0
-* which accompanies this distribution, and is available at
-* http://www.eclipse.org/legal/epl-v10.html
-*
-* Contributors:
-*     committers of YAKINDU - initial API and implementation
-*/
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
 package org.yakindu.sct.model.sexec.interpreter.test;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -19,7 +19,7 @@ import com.google.inject.Inject;
 import org.junit.Before;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
-import util.TestModels;	
+import util.TestModels;
 import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for SyncJoin
@@ -28,13 +28,14 @@ import static junit.framework.Assert.*;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class SyncJoinTest extends AbstractExecutionFlowTest {
-	
+
 	@Inject
 	private TestModels models;
-	
+
 	@Before
-	public void setup() throws Exception{
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("SyncJoin.sct");
+	public void setup() throws Exception {
+		ExecutionFlow flow = models
+				.loadExecutionFlowFromResource("SyncJoin.sct");
 		initInterpreter(flow);
 	}
 	@Test
@@ -42,37 +43,37 @@ public class SyncJoinTest extends AbstractExecutionFlowTest {
 		assertTrue(isActive("B"));
 		assertTrue(isActive("C1"));
 		assertTrue(isActive("D1"));
-		raiseEvent("e");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D1"));
-		raiseEvent("jc");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D1"));
-		raiseEvent("jd");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D1"));
-		raiseEvent("jc");
-		raiseEvent("jd");
+		raiseEvent("");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D1"));
-		raiseEvent("f");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D2"));
-		raiseEvent("jc");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D2"));
-		raiseEvent("jd");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D2"));
-		raiseEvent("jc");
-		raiseEvent("jd");
+		raiseEvent("");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("A"));
 	}
@@ -81,24 +82,24 @@ public class SyncJoinTest extends AbstractExecutionFlowTest {
 		assertTrue(isActive("B"));
 		assertTrue(isActive("C1"));
 		assertTrue(isActive("D1"));
-		raiseEvent("f");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C1"));
 		assertTrue(isActive("D2"));
-		raiseEvent("jc");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C1"));
 		assertTrue(isActive("D2"));
-		raiseEvent("jd");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C1"));
 		assertTrue(isActive("D2"));
-		raiseEvent("jc");
-		raiseEvent("jd");
+		raiseEvent("");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C1"));
 		assertTrue(isActive("D2"));
-		raiseEvent("e");
+		raiseEvent("");
 		interpreter.runCycle();
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D2"));
