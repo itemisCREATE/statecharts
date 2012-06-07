@@ -41,9 +41,9 @@ public class SimpleHierachyTest extends AbstractExecutionFlowTest {
 	@Test
 	public void simpleHierachyTest() throws Exception {
 		assertTrue(isActive("A"));
-		raiseEvent("");
-		raiseEvent("");
-		raiseEvent("");
+		raiseEvent("Event1");
+		raiseEvent("Event1");
+		raiseEvent("Event1");
 		interpreter.runCycle();
 		assertTrue(isActive("B"));
 		assertTrue(isActive("B1"));

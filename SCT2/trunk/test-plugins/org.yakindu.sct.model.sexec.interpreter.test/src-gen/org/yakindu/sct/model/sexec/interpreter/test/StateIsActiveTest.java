@@ -42,7 +42,7 @@ public class StateIsActiveTest extends AbstractExecutionFlowTest {
 	public void stateIsActive() throws Exception {
 		assertTrue(isActive("R1A"));
 		assertTrue(isActive("R2A"));
-		raiseEvent("");
+		raiseEvent("Event1");
 		interpreter.runCycle();
 		interpreter.runCycle();
 		assertTrue(isActive("R1B"));
