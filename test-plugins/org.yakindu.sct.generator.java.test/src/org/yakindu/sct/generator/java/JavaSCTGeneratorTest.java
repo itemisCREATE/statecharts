@@ -17,12 +17,14 @@ import static util.TestModels.FEATURE_CALLS;
 import static util.TestModels.GUARD;
 import static util.TestModels.PRIORITY_VALUES;
 import static util.TestModels.SHALLOW_HISTORY;
+import static util.TestModels.SIMPLE_EVENT;
 import static util.TestModels.SIMPLE_HIERACHY;
 import static util.TestModels.STATECHART_LOCAL_REACTIONS;
 import static util.TestModels.STATE_ACTIVE;
 import static util.TestModels.SYNC_FORK;
 import static util.TestModels.SYNC_JOIN;
 import static util.TestModels.TIME_TRIGGER;
+import static util.TestModels.VALUED_EVENTS;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
@@ -54,29 +56,9 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	private TestModels models;
 
 	@Test
-	public void testGuardModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(GUARD);
-		failOnError(generateAndCompile(statechart));
-	}
-
-	@Test
-	public void testSimpleHierachyModel() throws Exception {
+	public void testAlwaysOnCycleModel() throws Exception {
 		Statechart statechart = models
-				.loadStatechartFromResource(SIMPLE_HIERACHY);
-		failOnError(generateAndCompile(statechart));
-
-	}
-
-	@Test
-	public void testDeepHistoryModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(DEEP_HISTORY);
-		failOnError(generateAndCompile(statechart));
-
-	}
-
-	@Test
-	public void testStateActiveModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(STATE_ACTIVE);
+				.loadStatechartFromResource(ALWAYS_ONCYCLE);
 		failOnError(generateAndCompile(statechart));
 
 	}
@@ -89,32 +71,8 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	}
 
 	@Test
-	public void testAlwaysOnCycleModel() throws Exception {
-		Statechart statechart = models
-				.loadStatechartFromResource(ALWAYS_ONCYCLE);
-		failOnError(generateAndCompile(statechart));
-
-	}
-
-	@Test
-	public void testPriorityValuesModel() throws Exception {
-		Statechart statechart = models
-				.loadStatechartFromResource(PRIORITY_VALUES);
-		failOnError(generateAndCompile(statechart));
-
-	}
-
-	@Test
-	public void testShallowHistoryModel() throws Exception {
-		Statechart statechart = models
-				.loadStatechartFromResource(SHALLOW_HISTORY);
-		failOnError(generateAndCompile(statechart));
-
-	}
-
-	@Test
-	public void testTimeTriggerModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(TIME_TRIGGER);
+	public void testDeepHistoryModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(DEEP_HISTORY);
 		failOnError(generateAndCompile(statechart));
 
 	}
@@ -128,9 +86,49 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	}
 
 	@Test
+	public void testGuardModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(GUARD);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testPriorityValuesModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(PRIORITY_VALUES);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testShallowHistoryModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(SHALLOW_HISTORY);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testSimpleEventModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(SIMPLE_EVENT);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testSimpleHierachyModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(SIMPLE_HIERACHY);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
 	public void testStatechartLocalReactionsModel() throws Exception {
 		Statechart statechart = models
 				.loadStatechartFromResource(STATECHART_LOCAL_REACTIONS);
+		failOnError(generateAndCompile(statechart));
+
+	}
+
+	@Test
+	public void testStateActiveModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(STATE_ACTIVE);
 		failOnError(generateAndCompile(statechart));
 
 	}
@@ -144,6 +142,19 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	@Test
 	public void testSyncJoinModel() throws Exception {
 		Statechart statechart = models.loadStatechartFromResource(SYNC_JOIN);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testTimeTriggerModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(TIME_TRIGGER);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testValuedEventsModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(VALUED_EVENTS);
 		failOnError(generateAndCompile(statechart));
 	}
 
