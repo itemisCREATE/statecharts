@@ -12,13 +12,13 @@ package org.yakindu.sct.ui.editor.editor.figures;
 
 import org.eclipse.draw2d.PolygonDecoration;
 import org.eclipse.draw2d.RotatableDecoration;
-import org.eclipse.draw2d.geometry.PointList;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.PolylineConnectionEx;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
+
 /**
  * 
  * @author muelder
- *
+ * 
  */
 public class TransitionFigure extends PolylineConnectionEx {
 
@@ -29,6 +29,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 		setLineWidth(mapMode.DPtoLP(1));
 		setTargetDecoration(createTargetDecoration());
 	}
+
 	protected IMapMode getMapMode() {
 		return mapMode;
 	}
@@ -37,11 +38,7 @@ public class TransitionFigure extends PolylineConnectionEx {
 		PolygonDecoration df = new PolygonDecoration();
 		df.setFill(true);
 		df.setLineWidth(getMapMode().DPtoLP(1));
-		PointList pl = new PointList();
-		pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(-1));
-		pl.addPoint(getMapMode().DPtoLP(-1), getMapMode().DPtoLP(1));
-		pl.addPoint(getMapMode().DPtoLP(0), getMapMode().DPtoLP(0));
-		df.setTemplate(pl);
+		df.setTemplate(PolygonDecoration.TRIANGLE_TIP);
 		return df;
 	}
 }
