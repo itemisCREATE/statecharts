@@ -14,6 +14,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.custom.StyleRange;
+import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
@@ -70,7 +71,14 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			if (event.getName().contains("time_event")) {
 				cell.setImage(SimulationImages.TIMEEVENT.image());
 			} else {
-				cell.setImage(SimulationImages.EVENT.image());
+				IExecutionContext context = (IExecutionContext) getViewer()
+						.getInput();
+				if (context.isEventRaised(event.getName())
+						|| context.isEventScheduled(event.getName())) {
+					cell.setImage(SimulationImages.EVENT_ENABLED.image());
+				} else {
+					cell.setImage(SimulationImages.EVENT_DISABLED.image());
+				}
 			}
 		} else if (element instanceof ExecutionVariable) {
 			ExecutionVariable variable = (ExecutionVariable) element;
