@@ -14,6 +14,10 @@ public enum SimulationImages {
 	EVENT("icons/Event.gif"),
 	
 	TIMEEVENT("icons/TimeEvent.gif"),
+	
+	EVENT_ENABLED("icons/Event_enabled.gif"),
+	
+	EVENT_DISABLED("icons/Event_disabled.gif"),
 
 	VARIABLE("icons/Variable.gif"),
 	
