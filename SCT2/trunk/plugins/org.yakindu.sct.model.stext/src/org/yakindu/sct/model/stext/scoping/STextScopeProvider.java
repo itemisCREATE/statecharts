@@ -113,32 +113,35 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 		Predicate<IEObjectDescription> predicate = calcuateFilterPredicate(
 				context, reference);
+		
 		Expression owner = context.getOwner();
+		EObject element = null;
 		if (owner instanceof ElementReferenceExpression) {
-			EObject element = ((ElementReferenceExpression) owner)
-					.getReference();
-			if (element instanceof Scope) {
-				IScope scope = Scopes.scopeFor(((Scope) element)
-						.getDeclarations());
-				return new FilteringScope(scope, predicate);
-			} else if (element instanceof Type && element instanceof Feature) {
-				EList<Feature> features = ((Type) element).getFeatures();
-				IScope scope = Scopes.scopeFor(features, Scopes
-						.scopeFor(allFeatures(((Feature) element).getType())));
-				return new FilteringScope(scope, predicate);
-			}
-
-		} else if (owner instanceof FeatureCall) {
-			Feature feature = (Feature) ((FeatureCall) owner).getFeature();
-			IScope scope = Scopes.scopeFor(allFeatures(feature.getType()));
-			if (feature instanceof Type) {
-				IScope featureTypeScope = Scopes.scopeFor(
-						allFeatures((Type) feature), scope);
-				return new FilteringScope(featureTypeScope, predicate);
-			}
-			return new FilteringScope(scope, predicate);
+			element = ((ElementReferenceExpression) owner) .getReference();
+		} else if (owner instanceof FeatureCall ) {
+			element = ((FeatureCall)owner).getFeature();
+		} else {
+			return getDelegate().getScope(context, reference);
 		}
-		return getDelegate().getScope(context, reference);
+
+		IScope scope = IScope.NULLSCOPE;
+		
+		if (element instanceof Scope) {
+			scope = Scopes.scopeFor(((Scope) element).getDeclarations());
+			scope = new FilteringScope(scope, predicate);
+		} 
+		
+		if (element instanceof Type ) {
+			scope = Scopes.scopeFor(allFeatures((Type) element), scope);
+			scope = new FilteringScope(scope, predicate);
+		}
+
+		if (element instanceof Feature) {
+			scope = Scopes.scopeFor(allFeatures(((Feature) element).getType()),scope);
+			scope = new FilteringScope(scope, predicate);
+		}
+
+		return scope;
 	}
 
 	// OK
