@@ -3,9 +3,8 @@ package org.yakindu.sct.generator.java.runtime.test;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy.Test_hierarchyStatemachine;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy.Test_hierarchyStatemachine.State;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_parallelregionsStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy.Test_HierarchyStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_ParallelRegionsStatemachine;
 
 public class StatemachinePerformanceTest {
 
@@ -79,7 +78,7 @@ public class StatemachinePerformanceTest {
 	@Test
 	public void testPerformance_ParallelRegions_() throws Exception {
 
-		final Test_parallelregionsStatemachine sm_1 = new Test_parallelregionsStatemachine();
+		final Test_ParallelRegionsStatemachine sm_1 = new Test_ParallelRegionsStatemachine();
 		sm_1.init();
 		sm_1.enter();
 
@@ -91,21 +90,21 @@ public class StatemachinePerformanceTest {
 				sm_1.runCycle();
 				cycles++;
 				assertTrue(sm_1
-						.isStateActive(Test_parallelregionsStatemachine.State.State3));
+						.isStateActive(Test_ParallelRegionsStatemachine.State.MainRegion_State2_Region1_State3));
 				assertTrue(sm_1
-						.isStateActive(Test_parallelregionsStatemachine.State.State7));
+						.isStateActive(Test_ParallelRegionsStatemachine.State.MainRegion_State2_Region3_State7));
 
 				sm_1.raiseEvent10();
 				sm_1.runCycle();
 				cycles++;
 				assertTrue(sm_1
-						.isStateActive(Test_parallelregionsStatemachine.State.State1));
+						.isStateActive(Test_ParallelRegionsStatemachine.State.MainRegion_State1));
 
 				sm_1.raiseEvent12();
 				sm_1.runCycle();
 				cycles++;
 				assertTrue(sm_1
-						.isStateActive(Test_parallelregionsStatemachine.State.State8));
+						.isStateActive(Test_ParallelRegionsStatemachine.State.MainRegion_State2_Region3_State8));
 
 				sm_1.raiseEvent2();
 				sm_1.runCycle();
@@ -119,7 +118,7 @@ public class StatemachinePerformanceTest {
 				sm_1.runCycle();
 				cycles++;
 				assertTrue(sm_1
-						.isStateActive(Test_parallelregionsStatemachine.State.State1));
+						.isStateActive(Test_ParallelRegionsStatemachine.State.MainRegion_State1));
 			}
 
 		}
@@ -246,7 +245,7 @@ public class StatemachinePerformanceTest {
 	@Test
 	public void testPerformance_Hierarchy() throws Exception {
 
-		final Test_hierarchyStatemachine sm = new Test_hierarchyStatemachine();
+		final Test_HierarchyStatemachine sm = new Test_HierarchyStatemachine();
 
 		sm.init();
 		sm.enter();
@@ -258,32 +257,32 @@ public class StatemachinePerformanceTest {
 				sm.raiseEvent1();
 				sm.runCycle();
 				cycles++;
-				assertTrue(sm.isStateActive(State.State3));
+				assertTrue(sm.isStateActive(Test_HierarchyStatemachine.State.MainRegion_State2_Region2_State3));
 
 				sm.raiseEvent2();
 				sm.runCycle();
 				cycles++;
-				assertTrue(sm.isStateActive(State.State5));
+				assertTrue(sm.isStateActive(Test_HierarchyStatemachine.State.MainRegion_State2_Region2_State4_Region4_State5));
 
 				sm.raiseEvent3();
 				sm.runCycle();
 				cycles++;
-				assertTrue(sm.isStateActive(State.State7));
+				assertTrue(sm.isStateActive(Test_HierarchyStatemachine.State.MainRegion_State2_Region2_State4_Region4_State6_Region6_State7));
 
 				sm.raiseEvent4();
 				sm.runCycle();
-				assertTrue(sm.isStateActive(State.State8));
+				assertTrue(sm.isStateActive(Test_HierarchyStatemachine.State.MainRegion_State2_Region2_State4_Region4_State6_Region6_State8));
 				cycles++;
 
 				sm.raiseEvent5();
 				sm.runCycle();
-				assertTrue(sm.isStateActive(State.State7));
+				assertTrue(sm.isStateActive(Test_HierarchyStatemachine.State.MainRegion_State2_Region2_State4_Region4_State6_Region6_State7));
 				cycles++;
 
 				sm.raiseEvent6();
 				sm.runCycle();
 				cycles++;
-				assertTrue(sm.isStateActive(State.State9));
+				assertTrue(sm.isStateActive(Test_HierarchyStatemachine.State.MainRegion_State1_Region1_State9));
 
 			}
 

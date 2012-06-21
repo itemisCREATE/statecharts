@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy.Test_hierarchyStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy.Test_HierarchyStatemachine;
 
 /**
  * Testcases for 'Test_LocalActions' cycle based statemachine.
@@ -25,11 +25,11 @@ import org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy.Test_hie
  */
 public class TestHierarchyCycleBasedStatemachine {
 
-	private Test_hierarchyStatemachine statemachine;
+	private Test_HierarchyStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new Test_hierarchyStatemachine();
+		statemachine = new Test_HierarchyStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}

@@ -17,8 +17,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_parallelregionsStatemachine;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_parallelregionsStatemachine.State;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_ParallelRegionsStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Test_ParallelRegionsStatemachine.State;
 
 /**
  * Testcases for 'InterfaceTest' cycle based statemachine.
@@ -28,11 +28,11 @@ import org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions.Te
  */
 public class TestParallelRegionsCycleBasedStatemachine {
 
-	private Test_parallelregionsStatemachine sm;
+	private Test_ParallelRegionsStatemachine sm;
 
 	@Before
 	public void setUp() {
-		sm = new Test_parallelregionsStatemachine();
+		sm = new Test_ParallelRegionsStatemachine();
 		sm.init();
 		sm.enter();
 	}
@@ -44,8 +44,8 @@ public class TestParallelRegionsCycleBasedStatemachine {
 
 	@Test
 	public void testStatemachineEnter() {
-		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				sm.isStateActive(State.State1));
+		assertTrue("Statemachine isn't in State: " + State.MainRegion_State1.name() + ".",
+				sm.isStateActive(State.MainRegion_State1));
 	}
 
 	@Test
@@ -53,30 +53,30 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		sm.raiseEvent1();
 		sm.runCycle();
 		// Test if state is changed to State3 && State7
-		assertTrue(sm.isStateActive(State.State3));
-		assertTrue(sm.isStateActive(State.State7));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State3));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region3_State7));
 
 		sm.raiseEvent5();
 		sm.runCycle();
 		// Test if state is changed to State3 && State8
-		assertTrue(sm.isStateActive(State.State3));
-		assertTrue(sm.isStateActive(State.State8));
-		assertFalse(sm.isStateActive(State.State7));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State3));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region3_State8));
+		assertFalse(sm.isStateActive(State.MainRegion_State2_Region3_State7));
 
 		sm.raiseEvent6();
 		sm.runCycle();
 		// Test if state is changed to State3 && State7
-		assertTrue(sm.isStateActive(State.State3));
-		assertTrue(sm.isStateActive(State.State7));
-		assertFalse(sm.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State3));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region3_State7));
+		assertFalse(sm.isStateActive(State.MainRegion_State2_Region3_State8));
 
 		sm.raiseEvent3();
 		sm.runCycle();
 		// Test if state is back to State1
-		assertTrue(sm.isStateActive(State.State1));
-		assertFalse(sm.isStateActive(State.State3));
-		assertFalse(sm.isStateActive(State.State7));
-		assertFalse(sm.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.MainRegion_State1));
+		assertFalse(sm.isStateActive(State.MainRegion_State2_Region1_State3));
+		assertFalse(sm.isStateActive(State.MainRegion_State2_Region3_State7));
+		assertFalse(sm.isStateActive(State.MainRegion_State2_Region3_State8));
 	}
 
 	@Test
@@ -84,31 +84,31 @@ public class TestParallelRegionsCycleBasedStatemachine {
 		sm.raiseEvent1();
 		sm.runCycle();
 		// Test if state is changed to State3 && State7
-		assertTrue(sm.isStateActive(State.State3));
-		assertTrue(sm.isStateActive(State.State7));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State3));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region3_State7));
 
 		sm.raiseEvent2();
 		sm.runCycle();
 		// Test if state is changed to State9, State5 and State7
-		assertTrue(sm.isStateActive(State.State9));
-		assertTrue(sm.isStateActive(State.State5));
-		assertTrue(sm.isStateActive(State.State7));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State4_Region4_State9));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State4_Region2_State5));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region3_State7));
 
 		sm.raiseEvent3();
 		sm.runCycle();
 		// Test if state is changed to State9, State6 and State8
-		assertTrue(sm.isStateActive(State.State9));
-		assertTrue(sm.isStateActive(State.State6));
-		assertFalse(sm.isStateActive(State.State7));
-		assertTrue(sm.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State4_Region4_State9));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State4_Region2_State6));
+		assertFalse(sm.isStateActive(State.MainRegion_State2_Region3_State7));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region3_State8));
 
 		sm.raiseEvent6();
 		sm.runCycle();
 		// Test if state is changed to State9, State6 and State8
-		assertTrue(sm.isStateActive(State.State9));
-		assertTrue(sm.isStateActive(State.State6));
-		assertTrue(sm.isStateActive(State.State7));
-		assertFalse(sm.isStateActive(State.State8));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State4_Region4_State9));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region1_State4_Region2_State6));
+		assertTrue(sm.isStateActive(State.MainRegion_State2_Region3_State7));
+		assertFalse(sm.isStateActive(State.MainRegion_State2_Region3_State8));
 	}
 
 	@Test

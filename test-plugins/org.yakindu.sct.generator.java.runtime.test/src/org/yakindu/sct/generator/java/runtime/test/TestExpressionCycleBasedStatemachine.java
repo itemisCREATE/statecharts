@@ -5,15 +5,15 @@ import static org.junit.Assert.assertEquals;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_expression.Test_expressionStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_expression.Test_ExpressionStatemachine;
 
 public class TestExpressionCycleBasedStatemachine {
 
-	private Test_expressionStatemachine statemachine;
+	private Test_ExpressionStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new Test_expressionStatemachine();
+		statemachine = new Test_ExpressionStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}
@@ -31,7 +31,7 @@ public class TestExpressionCycleBasedStatemachine {
 		statemachine.raiseEvent1(0);
 		statemachine.runCycle();
 		assertEquals("Other.Var1 value not set correct: ", false, statemachine
-				.getInterfaceOther().getVar1());
+				.getSCIOther().getVar1());
 		assertEquals("Default.Var2 value not set correct: ", 1,
 				statemachine.getVar2());
 		assertEquals("Default.Var4 value not set correct: ", 22.3,
@@ -43,7 +43,7 @@ public class TestExpressionCycleBasedStatemachine {
 
 		statemachine.runCycle();
 		assertEquals("Other.Var1 value not set correct: ", false, statemachine
-				.getInterfaceOther().getVar1());
+				.getSCIOther().getVar1());
 		assertEquals("Default.Var2 value not set correct: ", 1,
 				statemachine.getVar2());
 		assertEquals("Default.Var4 value not set correct: ", 22.3,
@@ -55,7 +55,7 @@ public class TestExpressionCycleBasedStatemachine {
 
 		statemachine.runCycle();
 		assertEquals("Other.Var1 value not set correct: ", false, statemachine
-				.getInterfaceOther().getVar1());
+				.getSCIOther().getVar1());
 		assertEquals("Default.Var2 value not set correct: ", 1,
 				statemachine.getVar2());
 		assertEquals("Default.Var4 value not set correct: ", 22.3,
