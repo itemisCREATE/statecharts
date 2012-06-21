@@ -116,7 +116,7 @@ private final class «getInterfaceImplName()» implements «getInterfaceName()» {
 			
 			«IF  !variable.readonly-»
 				public void set«variable.getVarName()»(«variable.type.getJavaType()» value) {
-					«variable.getVariableIdentifier()» = value;
+					this.«variable.getVariableIdentifier()» = value;
 				}
 			«ENDIF-»
 	«ENDFOREACH-»

@@ -54,7 +54,7 @@ String getBasePackageName(GeneratorEntry entry):
 		&& entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getBasePackage())!=null then
 		entry.getFeatureConfiguration(getNamingFeature()).getParameterValue(getBasePackage()).getStringValue()
 	else
-		"org.yakindu.sct.runtime.java";
+		"org.yakindu.scr";
 
 String getBasePackagePath(GeneratorEntry entry):
 	entry.getBasePackageName().replaceAll("\\.","/");

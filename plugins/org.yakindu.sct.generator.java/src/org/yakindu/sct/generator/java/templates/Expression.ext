@@ -86,7 +86,7 @@ String toCode(StringLiteral expression) :
 	"\"" + expression.value.toString() + "\"";
 
 String toCode(EventValueReferenceExpression expression):
-	expression.value.getContext().toFirstLower()+expression.value.getEventValueIdentifier();
+	expression.value.getContext().toFirstLower() + expression.value.getEventValueIdentifier();
 
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
