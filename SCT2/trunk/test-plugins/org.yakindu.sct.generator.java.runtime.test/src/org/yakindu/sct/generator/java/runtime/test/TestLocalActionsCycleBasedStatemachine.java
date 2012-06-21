@@ -17,8 +17,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.generator.java.runtime.cyclebased.TimerService;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_localactions.Test_localactionsStatemachine;
-import org.yakindu.sct.generator.java.runtime.cyclebased.test_localactions.Test_localactionsStatemachine.State;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_localactions.Test_LocalActionsStatemachine;
+import org.yakindu.sct.generator.java.runtime.cyclebased.test_localactions.Test_LocalActionsStatemachine.State;
 
 /**
  * Testcases for 'Test_LocalActions' cycle based statemachine.
@@ -28,7 +28,7 @@ import org.yakindu.sct.generator.java.runtime.cyclebased.test_localactions.Test_
  */
 public class TestLocalActionsCycleBasedStatemachine {
 
-	private Test_localactionsStatemachine statemachine;
+	private Test_LocalActionsStatemachine statemachine;
 
 	// Define the error threshold in ms. 10 ms are required to satisfy
 	// soft-realtime requirements.
@@ -41,7 +41,7 @@ public class TestLocalActionsCycleBasedStatemachine {
 
 	@Before
 	public void setUp() {
-		statemachine = new Test_localactionsStatemachine();
+		statemachine = new Test_LocalActionsStatemachine();
 		statemachine.setTimerService(new TimerService());
 		statemachine.init();
 		statemachine.enter();
@@ -55,14 +55,14 @@ public class TestLocalActionsCycleBasedStatemachine {
 
 	@Test(expected = IllegalStateException.class)
 	public void testExceptionHandling() {
-		Test_localactionsStatemachine statemachine = new Test_localactionsStatemachine();
+		Test_LocalActionsStatemachine statemachine = new Test_LocalActionsStatemachine();
 		statemachine.enter();
 	}
 
 	@Test
 	public void testStatemachineEntry() {
-		assertTrue("Statemachine isn't in State: " + State.State1.name() + ".",
-				statemachine.isStateActive(State.State1));
+		assertTrue("Statemachine isn't in State: " + State.MainRegion_State1.name() + ".",
+				statemachine.isStateActive(State.MainRegion_State1));
 		assertEquals("Variable i not set to 1", 1, statemachine.getI());
 	}
 

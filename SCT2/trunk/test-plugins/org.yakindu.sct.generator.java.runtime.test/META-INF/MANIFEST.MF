@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Test
+Bundle-SymbolicName: org.yakindu.sct.generator.java.runtime.test
+Bundle-Version: 1.0.0.qualifier
+Export-Package: org.yakindu.sct.generator.java.runtime.cyclebased,
+ org.yakindu.sct.generator.java.runtime.cyclebased.interfacetest,
+ org.yakindu.sct.generator.java.runtime.cyclebased.test_deephistory,
+ org.yakindu.sct.generator.java.runtime.cyclebased.test_expression,
+ org.yakindu.sct.generator.java.runtime.cyclebased.test_hierarchy,
+ org.yakindu.sct.generator.java.runtime.cyclebased.test_localactions,
+ org.yakindu.sct.generator.java.runtime.cyclebased.test_parallelregions,
+ org.yakindu.sct.generator.java.runtime.cyclebased.test_shallowhistory,
+ org.yakindu.sct.generator.java.runtime.cyclebased.test_transition,
+ org.yakindu.sct.generator.java.runtime.test
+Require-Bundle: org.yakindu.sct.test.models;bundle-version="1.0.0"
