@@ -19,12 +19,11 @@ extension org::yakindu::sct::generator::java::templates::ExecutionModelExtension
 extension org::yakindu::sct::generator::java::templates::GenmodelEntries;
 extension org::yakindu::sct::generator::java::templates::TypeModelExtensions;
 
-//TODO Workaround (WA) for error in Typesystem
-String getNameWA(Declaration this) : this.metaType.getProperty("name").get(this).toString();
-String getNameWA(Vertex this) : this.metaType.getProperty("name").get(this).toString();
+boolean isJavaKeyword(String token) :
+	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.isJavaKeyword(java.lang.String);
 
 String getStatemachineName(String name) :
-	JAVA org.yakindu.sct.generator.java.features.JavaFeatureConstants.getValidStatemachineName(java.lang.String);
+	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getValidStatemachineName(java.lang.String);
 
 String getStatemachineName(ExecutionFlow this) : 
 	 name.getStatemachineName().toFirstUpper();
@@ -47,10 +46,10 @@ String getStatemachineInterfaceExtensions(ExecutionFlow this, GeneratorEntry ent
 	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getStatemachineInterfaceTypes(org.yakindu.sct.model.sexec.ExecutionFlow, org.yakindu.sct.model.sgen.GeneratorEntry);
 
 String getInterfaceName(InterfaceScope this) :  
-	if name!=null then
-		"Interface" + name.toFirstUpper()
+	if name!=null && !name.toLowerCase().matches("default") then
+		"SCI" + name.toFirstUpper()
 	else
-		"DefaultInterface";
+		"SCIDefault";
 
 String getInterfaceListenerName(InterfaceScope this) :
 	getInterfaceName()+"Listener";
@@ -97,15 +96,21 @@ String getIllegalAccessEventIdentifier(EventDefinition this) :
 String getIllegalAccessValidation(EventDefinition this) :
 	"if (!" + getIllegalAccessEventIdentifier() + ") throw new IllegalStateException(\"Illegal event value acces. Event " +getEventName() + " is not raised!\");";
 
-String getValueName(VariableDefinition this) : name.toFirstUpper();
+//String getVariableName(VariableDefinition this) : name.toFirstUpper();
 
-String getter(VariableDefinition this) : "get" + getValueName().toFirstUpper() + "()";
+String getter(VariableDefinition this) : "get" + getVarName().toFirstUpper() + "()";
 
-String getName(ExecutionState this) :
-	simpleName.replaceAll(" ","").toFirstUpper();
-	
+String getExecutionStateName(ExecutionState state) :
+	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions. getFullQualifiedStateName(org.yakindu.sct.model.sexec.ExecutionState);
+
+String getName(ExecutionState this):
+	getExecutionStateName().toFirstUpper();
+
+String getStateName(State state):
+	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions. getFullQualifiedStateName(org.yakindu.sct.model.sgraph.State);
+
 String getName(State this) :
-	this.getNameWA().replaceAll(" ","").toFirstUpper();
+	getStateName().toFirstUpper();
 	
 String getName(ExecutionNode this) :
 	simpleName.replaceAll(" ","").toFirstUpper();
@@ -133,33 +138,51 @@ private getNullSafeRegionName(ExecutionRegion this) :
 String getName(ExecutionFlow this) :
 	name.replaceAll(" ","").toFirstUpper();
 
-String getVarName(VariableDefinition this) :
-	name.toFirstUpper();
 String getVarName(EObject this) : "/* Variable expected, but got: "+this+" */";
-String getVarName(ElementReferenceExpression this) : this.reference.getVarName();
-String getVarName(FeatureCall this) : this.feature.getVarName();
 String getVarName(Expression this) : "/* Variable expected, but got Expression: "+this+" */";
+String getVarName(FeatureCall this) : this.feature.getVarName();
+String getVarName(ElementReferenceExpression this) : this.reference.getVarName();
+String getVarName(VariableDefinition this) : 
+	if (isJavaKeyword(name)) then
+		"Var" + name.toFirstUpper()
+	else
+		name.toFirstUpper();
 
+String getVariableIdentifier(VariableDefinition this):
+	getVarName().toFirstLower();
+
+//TODO Workaround (WA) for error in Typesystem
+String getNameWA(Declaration this) : 
+	metaType.getProperty("name").get(this).toString();
+	
+String getNameWA(Vertex this) : 
+	metaType.getProperty("name").get(this).toString();
 
 String getEventName(Event this) :
-	getNameWA().toFirstUpper();
+	if (isJavaKeyword(getNameWA())) then
+		"Event" + getNameWA().toFirstUpper()
+	else
+		getNameWA().toFirstUpper();
 
 String getEventName(EventDefinition this) :
-	getNameWA().toFirstUpper();
+	if (isJavaKeyword(getNameWA())) then
+		"Event" + getNameWA().toFirstUpper()
+	else
+		getNameWA().toFirstUpper();
 
 String getEventName(EObject this) : "/* Event expected, but got: "+this+" */";
-String getEventValueIdentifier(EObject this) : "/* Event expected, but got: "+this+" */";
-String getEventName(ElementReferenceExpression this) : this.reference.getEventName();
-String getEventValueIdentifier(ElementReferenceExpression this) : this.reference.getEventValueIdentifier();
-String getEventName(FeatureCall this) : this.feature.getEventName();
-String getEventValueIdentifier(FeatureCall this) : this.feature.getEventValueIdentifier();
 String getEventName(Expression this) : "/* Event expected, but got Expression: "+this+" */";
+String getEventName(FeatureCall this) : this.feature.getEventName();
+String getEventName(ElementReferenceExpression this) : this.reference.getEventName();
 
-String getter(Event this) :
-	"get"+this.getEventName()+"()";
+String getEventValueIdentifier(EObject this) : "/* Valued Event expected, but got: "+this+" */";
+String getEventValueIdentifier(Expression this) : "/* Valued Event expected, but got Expression: "+this+" */";
+String getEventValueIdentifier(FeatureCall this) : this.feature.getEventValueIdentifier();
+String getEventValueIdentifier(ElementReferenceExpression this) : this.reference.getEventValueIdentifier();
 
-String getEventName(TimeEvent this) :
-	name.replaceAll(" ","").toFirstUpper();
+String getter(Event this) : "get"+this.getEventName()+"()";
+
+String getEventName(TimeEvent this) : name.replaceAll(" ","").toFirstUpper();
 
 String getEventIdentifier(Event this):
 	getEventName().toFirstLower();
@@ -169,9 +192,6 @@ String getOutEventIdentifier(Event this):
 
 String getEventValueIdentifier(EventDefinition this):
 	getEventName().toFirstLower()+"Value";
-
-String getVariableIdentifier(VariableDefinition this):
-	getVarName().toFirstLower();
 	
 cached String functionName(Step step) : 
 	(step.isEffect()) ? step.actionFunctionName() : (

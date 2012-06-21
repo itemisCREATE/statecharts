@@ -12,10 +12,6 @@ package org.yakindu.sct.generator.java.features;
 
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_HEADER;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICENSE_TEXT;
-
-import java.util.Arrays;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 /**
  * 
  * @author muehlbrandt
@@ -68,18 +64,5 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 	
 	public static final String getStatemachineFactorySupport() {
 		return STATEMACHINE_FACTORY_SUPPORT;
-	}
-	
-	public static final String getValidStatemachineName(String name) {
-		//remove whitespaces;
-		String newName = name.replace(" ", "").toLowerCase();
-		for (String keyword : Arrays.asList(JAVA_KEYWORDS)) {				
-			Pattern pattern= Pattern.compile("^" +keyword+"$");
-			Matcher matcher = pattern.matcher(name);
-			if  (matcher.find()) {
-				newName += "Statemachine";
-			}
-		}
-		return newName;
 	}
 }

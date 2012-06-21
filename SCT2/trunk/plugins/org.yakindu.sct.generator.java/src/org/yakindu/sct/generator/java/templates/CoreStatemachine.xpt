@@ -61,7 +61,7 @@ import java.util.List;
 	};
 	
 	«FOREACH getInternalScopeVariables() AS variable-»
-	private «variable.type.getJavaType()» «variable.getValueName()»«variable.getInitialValueAssignment()»;
+	private «variable.type.getJavaType()» «variable.getVariableIdentifier()»«variable.getInitialValueAssignment()»;
 	
 	«ENDFOREACH-»
 	«IF hasHistory()-»
@@ -305,7 +305,7 @@ else {
 		return «variable.getVariableIdentifier()»;
 	}
 	
-	private void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value) {
+	private void set«variable.getVarName().toFirstUpper()»(«variable.type.getJavaType()» value) {
 		«variable.getVariableIdentifier()» = value;
 	}	
 	
@@ -344,8 +344,8 @@ else {
 		return «getInterfaceIdentifier()».«variable.getter()»;
 	}
 	
-	public void set«variable.getValueName().toFirstUpper()»(«variable.type.getJavaType()» value) {
-		«getInterfaceIdentifier()».set«variable.getValueName().toFirstUpper()»(value);
+	public void set«variable.getVarName().toFirstUpper()»(«variable.type.getJavaType()» value) {
+		«getInterfaceIdentifier()».set«variable.getVarName().toFirstUpper()»(value);
 	}	
 	«ENDFOREACH-»
 	
