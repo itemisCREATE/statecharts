@@ -1,6 +1,6 @@
 GeneratorModel for yakindu::java {
 
-	statechart  TrafficLightWaiting {
+	statechart TrafficLightWaiting {
 	 	
 		feature Outlet {
 			targetProject = "org.yakindu.sct.examples.trafficlight"
