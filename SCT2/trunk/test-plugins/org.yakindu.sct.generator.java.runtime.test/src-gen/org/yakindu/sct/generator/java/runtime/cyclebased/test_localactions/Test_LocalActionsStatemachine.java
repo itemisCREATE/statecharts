@@ -191,8 +191,7 @@ public class Test_LocalActionsStatemachine
 			throw new IllegalStateException("TimerService not set.");
 		}
 		cycleStartTime = System.currentTimeMillis();
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@45ef4ff7 (name: entryAction) (comment: Entry action for statechart 'Test_LocalActions'.)();
+		entryActionTest_LocalActions();
 		getTimerService().setTimer(state1_time_event_0, 100, cycleStartTime);
 		sCIDefault.setI(1);
 
@@ -223,7 +222,15 @@ public class Test_LocalActionsStatemachine
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@4b8fe477 (name: exitAction) (comment: Exit action for state 'Test_LocalActions'.)();
+		exitActionTest_LocalActions();
+	}
+
+	private void entryActionTest_LocalActions() {
+
+	}
+
+	private void exitActionTest_LocalActions() {
+
 	}
 
 	private void reactMainRegion_State1() {

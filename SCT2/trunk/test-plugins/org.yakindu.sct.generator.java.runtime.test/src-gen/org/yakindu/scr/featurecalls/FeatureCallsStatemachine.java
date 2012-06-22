@@ -73,8 +73,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	}
 
 	public void enter() {
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@4718f92 (name: entryAction) (comment: Entry action for statechart 'FeatureCalls'.)();
+		entryActionFeatureCalls();
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_A;
 
@@ -98,7 +97,15 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@700579af (name: exitAction) (comment: Exit action for state 'FeatureCalls'.)();
+		exitActionFeatureCalls();
+	}
+
+	private void entryActionFeatureCalls() {
+
+	}
+
+	private void exitActionFeatureCalls() {
+
 	}
 
 	private void reactMain_region_A() {

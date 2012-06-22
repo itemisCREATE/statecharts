@@ -1,24 +1,34 @@
-package org.yakindu.scr.guard;
+package org.yakindu.scr.simpleevent;
 
-public class GuardStatemachine implements IGuardStatemachine {
+public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
-	private boolean event1;
+	private final class SCIDefaultImpl implements SCIDefault {
 
-	private boolean event2;
+		private boolean event1;
 
-	private boolean eventReturn;
+		public void raiseEvent1() {
+			event1 = true;
+		}
+
+		public void clearEvents() {
+			event1 = false;
+		}
+
+	}
+
+	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
 		Main_region_A, Main_region_B, $NullState$
 	};
 
-	private int myVar = 0;
-
 	private final State[] stateVector = new State[1];
 
 	private int nextStateIndex;
 
-	public GuardStatemachine() {
+	public SimpleEventStatemachine() {
+
+		sCIDefault = new SCIDefaultImpl();
 
 	}
 
@@ -32,6 +42,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	protected void clearEvents() {
+		sCIDefault.clearEvents();
 
 	}
 
@@ -47,29 +58,16 @@ public class GuardStatemachine implements IGuardStatemachine {
 		return false;
 	}
 
-	private void raiseEvent1() {
-		event1 = true;
+	public SCIDefault getSCIDefault() {
+		return sCIDefault;
 	}
 
-	private void raiseEvent2() {
-		event2 = true;
-	}
-
-	private void raiseEventReturn() {
-		eventReturn = true;
-	}
-
-	private int getMyVar() {
-		return myVar;
-	}
-
-	private void setMyVar(int value) {
-		myVar = value;
+	public void raiseEvent1() {
+		sCIDefault.raiseEvent1();
 	}
 
 	public void enter() {
-		setMyVar(0);
-		entryActionGuard();
+		entryActionSimpleEvent();
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_A;
 
@@ -93,47 +91,28 @@ public class GuardStatemachine implements IGuardStatemachine {
 				break;
 		}
 
-		exitActionGuard();
+		exitActionSimpleEvent();
 	}
 
-	private void entryActionGuard() {
+	private void entryActionSimpleEvent() {
 
 	}
 
-	private void exitActionGuard() {
+	private void exitActionSimpleEvent() {
 
 	}
 
 	private void reactMain_region_A() {
-		if ((event1 && (getMyVar() == 10))) {
+		if (sCIDefault.event1) {
 			stateVector[0] = State.$NullState$;
-
-			setMyVar(10);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_B;
 
-		} else {
-			if (event2) {
-				stateVector[0] = State.$NullState$;
-
-				setMyVar(10);
-
-				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_B;
-
-			}
 		}
 
 	}
 	private void reactMain_region_B() {
-		if (eventReturn) {
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
-		}
 
 	}
 

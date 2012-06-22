@@ -160,8 +160,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	}
 
 	public void enter() {
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@60d6d6d4 (name: entryAction) (comment: Entry action for statechart 'DeepHistory'.)();
+		entryActionDeepHistory();
 		nextStateIndex = 0;
 		stateVector[0] = State.MainRegion_State1;
 
@@ -225,7 +224,15 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@711cbb75 (name: exitAction) (comment: Exit action for state 'DeepHistory'.)();
+		exitActionDeepHistory();
+	}
+
+	private void entryActionDeepHistory() {
+
+	}
+
+	private void exitActionDeepHistory() {
+
 	}
 
 	private void deepEnterSequenceMainRegion_State2Region0() {
@@ -239,19 +246,16 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State6 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4Region0();
 
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State7__region0_State8 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4Region0();
 
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State7__region0_State9 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4Region0();
 
 				break;
@@ -278,13 +282,11 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State7__region0_State8 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4__region0_State7Region0();
 
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State7__region0_State9 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4__region0_State7Region0();
 
 				break;
@@ -321,7 +323,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 			//Enter the region with deep history
 			if (historyVector[0] != State.$NullState$) {
-
 				deepEnterSequenceMainRegion_State2Region0();
 			} else {
 				nextStateIndex = 0;

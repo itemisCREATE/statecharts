@@ -276,8 +276,7 @@ public class Test_TransitionStatemachine
 			throw new IllegalStateException("TimerService not set.");
 		}
 		cycleStartTime = System.currentTimeMillis();
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@3d351f14 (name: entryAction) (comment: Entry action for statechart 'Test_Transition'.)();
+		entryActionTest_Transition();
 		getTimerService().setTimer(state1_time_event_0, (10 * 1000),
 				cycleStartTime);
 		getTimerService().setTimer(state1_time_event_1, 100, cycleStartTime);
@@ -307,7 +306,15 @@ public class Test_TransitionStatemachine
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@7e89746a (name: exitAction) (comment: Exit action for state 'Test_Transition'.)();
+		exitActionTest_Transition();
+	}
+
+	private void entryActionTest_Transition() {
+
+	}
+
+	private void exitActionTest_Transition() {
+
 	}
 
 	private void react_region0_State1() {

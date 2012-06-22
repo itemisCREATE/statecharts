@@ -95,8 +95,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	public void enter() {
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@d9c3cf2 (name: entryAction) (comment: Entry action for statechart 'ValuedEvents'.)();
+		entryActionValuedEvents();
 		sCIDefault.raiseIntegerEvent((2 * 21));
 
 		nextStateIndex = 0;
@@ -137,7 +136,15 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@3f2a1ab3 (name: exitAction) (comment: Exit action for state 'ValuedEvents'.)();
+		exitActionValuedEvents();
+	}
+
+	private void entryActionValuedEvents() {
+
+	}
+
+	private void exitActionValuedEvents() {
+
 	}
 
 	private void reactMain_region_A() {

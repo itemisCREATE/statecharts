@@ -1,5 +1,5 @@
 testcase for AlwaysOncycle {
-	test alwaysOncycleTest {
+	 test alwaysOncycleTest {
 		assert active (AlwaysOncycle.main_region.StateA)
 		while [value < 5] {
 			cycle

@@ -1,24 +1,34 @@
-package org.yakindu.scr.guard;
+package org.yakindu.scr.simplehierachy;
 
-public class GuardStatemachine implements IGuardStatemachine {
+public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
-	private boolean event1;
+	private final class SCIDefaultImpl implements SCIDefault {
 
-	private boolean event2;
+		private boolean event1;
 
-	private boolean eventReturn;
+		public void raiseEvent1() {
+			event1 = true;
+		}
+
+		public void clearEvents() {
+			event1 = false;
+		}
+
+	}
+
+	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, Main_region_B, $NullState$
+		Main_region_A, Main_region_B, Main_region_B_subregion1_B1, $NullState$
 	};
-
-	private int myVar = 0;
 
 	private final State[] stateVector = new State[1];
 
 	private int nextStateIndex;
 
-	public GuardStatemachine() {
+	public SimpleHierachyStatemachine() {
+
+		sCIDefault = new SCIDefaultImpl();
 
 	}
 
@@ -32,6 +42,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	protected void clearEvents() {
+		sCIDefault.clearEvents();
 
 	}
 
@@ -47,29 +58,16 @@ public class GuardStatemachine implements IGuardStatemachine {
 		return false;
 	}
 
-	private void raiseEvent1() {
-		event1 = true;
+	public SCIDefault getSCIDefault() {
+		return sCIDefault;
 	}
 
-	private void raiseEvent2() {
-		event2 = true;
-	}
-
-	private void raiseEventReturn() {
-		eventReturn = true;
-	}
-
-	private int getMyVar() {
-		return myVar;
-	}
-
-	private void setMyVar(int value) {
-		myVar = value;
+	public void raiseEvent1() {
+		sCIDefault.raiseEvent1();
 	}
 
 	public void enter() {
-		setMyVar(0);
-		entryActionGuard();
+		entryActionSimpleHierachy();
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_A;
 
@@ -84,7 +82,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 				break;
 
-			case Main_region_B :
+			case Main_region_B_subregion1_B1 :
 				stateVector[0] = State.$NullState$;
 
 				break;
@@ -93,47 +91,30 @@ public class GuardStatemachine implements IGuardStatemachine {
 				break;
 		}
 
-		exitActionGuard();
+		exitActionSimpleHierachy();
 	}
 
-	private void entryActionGuard() {
+	private void entryActionSimpleHierachy() {
 
 	}
 
-	private void exitActionGuard() {
+	private void exitActionSimpleHierachy() {
 
 	}
 
 	private void reactMain_region_A() {
-		if ((event1 && (getMyVar() == 10))) {
+		if (sCIDefault.event1) {
 			stateVector[0] = State.$NullState$;
 
-			setMyVar(10);
-
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_B;
+			stateVector[0] = State.Main_region_B_subregion1_B1;
 
-		} else {
-			if (event2) {
-				stateVector[0] = State.$NullState$;
-
-				setMyVar(10);
-
-				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_B;
-
-			}
 		}
 
 	}
 	private void reactMain_region_B() {
-		if (eventReturn) {
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
-		}
+	}
+	private void reactMain_region_B_subregion1_B1() {
 
 	}
 
@@ -149,6 +130,9 @@ public class GuardStatemachine implements IGuardStatemachine {
 					break;
 				case Main_region_B :
 					reactMain_region_B();
+					break;
+				case Main_region_B_subregion1_B1 :
+					reactMain_region_B_subregion1_B1();
 					break;
 				default :
 					// $NullState$

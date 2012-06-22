@@ -268,8 +268,7 @@ public class Test_HierarchyStatemachine implements ITest_HierarchyStatemachine {
 
 	public void enter() {
 		sCIDefault.setS1(0);
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@260c3299 (name: entryAction) (comment: Entry action for statechart 'Test_Hierarchy'.)();
+		entryActionTest_Hierarchy();
 		sCIDefault.setS1(1);
 
 		sCIDefault.setS1(sCIDefault.getS1() + (1));
@@ -345,7 +344,15 @@ public class Test_HierarchyStatemachine implements ITest_HierarchyStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@4281f1c8 (name: exitAction) (comment: Exit action for state 'Test_Hierarchy'.)();
+		exitActionTest_Hierarchy();
+	}
+
+	private void entryActionTest_Hierarchy() {
+
+	}
+
+	private void exitActionTest_Hierarchy() {
+
 	}
 
 	private void reactMainRegion_State1() {

@@ -151,8 +151,7 @@ public class Test_ShallowHistoryStatemachine
 	}
 
 	public void enter() {
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@641e9be3 (name: entryAction) (comment: Entry action for statechart 'Test_ShallowHistory'.)();
+		entryActionTest_ShallowHistory();
 		nextStateIndex = 0;
 		stateVector[0] = State.MainRegion_State1;
 
@@ -210,7 +209,15 @@ public class Test_ShallowHistoryStatemachine
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@31a48956 (name: exitAction) (comment: Exit action for state 'Test_ShallowHistory'.)();
+		exitActionTest_ShallowHistory();
+	}
+
+	private void entryActionTest_ShallowHistory() {
+
+	}
+
+	private void exitActionTest_ShallowHistory() {
+
 	}
 
 	private void shallowEnterSequenceMainRegion_State2Region0() {
@@ -278,7 +285,6 @@ public class Test_ShallowHistoryStatemachine
 
 			//Enter the region with shallow history
 			if (historyVector[0] != State.$NullState$) {
-
 				shallowEnterSequenceMainRegion_State2Region0();
 			} else {
 				nextStateIndex = 0;
@@ -428,7 +434,6 @@ public class Test_ShallowHistoryStatemachine
 
 					//Enter the region with shallow history
 					if (historyVector[1] != State.$NullState$) {
-
 						shallowEnterSequenceMainRegion_State2__region0_State4__region0_State7Region0();
 					} else {
 						nextStateIndex = 0;

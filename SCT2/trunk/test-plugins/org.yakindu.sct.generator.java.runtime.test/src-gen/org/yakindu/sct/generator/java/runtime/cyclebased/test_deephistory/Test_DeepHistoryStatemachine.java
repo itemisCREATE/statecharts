@@ -162,8 +162,7 @@ public class Test_DeepHistoryStatemachine
 	}
 
 	public void enter() {
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@70ecfebc (name: entryAction) (comment: Entry action for statechart 'Test_DeepHistory'.)();
+		entryActionTest_DeepHistory();
 		nextStateIndex = 0;
 		stateVector[0] = State.MainRegion_State1;
 
@@ -227,7 +226,15 @@ public class Test_DeepHistoryStatemachine
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@1479bbe2 (name: exitAction) (comment: Exit action for state 'Test_DeepHistory'.)();
+		exitActionTest_DeepHistory();
+	}
+
+	private void entryActionTest_DeepHistory() {
+
+	}
+
+	private void exitActionTest_DeepHistory() {
+
 	}
 
 	private void deepEnterSequenceMainRegion_State2Region0() {
@@ -241,19 +248,16 @@ public class Test_DeepHistoryStatemachine
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State6 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4Region0();
 
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State7__region0_State8 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4Region0();
 
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State7__region0_State9 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4Region0();
 
 				break;
@@ -280,13 +284,11 @@ public class Test_DeepHistoryStatemachine
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State7__region0_State8 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4__region0_State7Region0();
 
 				break;
 
 			case MainRegion_State2__region0_State4__region0_State7__region0_State9 :
-
 				deepEnterSequenceMainRegion_State2__region0_State4__region0_State7Region0();
 
 				break;
@@ -323,7 +325,6 @@ public class Test_DeepHistoryStatemachine
 
 			//Enter the region with deep history
 			if (historyVector[0] != State.$NullState$) {
-
 				deepEnterSequenceMainRegion_State2Region0();
 			} else {
 				nextStateIndex = 0;

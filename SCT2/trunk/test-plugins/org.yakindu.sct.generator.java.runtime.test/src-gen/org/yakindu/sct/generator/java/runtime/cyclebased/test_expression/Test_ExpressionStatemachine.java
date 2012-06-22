@@ -287,8 +287,7 @@ public class Test_ExpressionStatemachine
 		sCIDefault.setVar4(43.3);
 		sCIDefault.setVar5(false);
 		sCIDefault.setVar6("foo");
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@36a6b26e (name: entryAction) (comment: Entry action for statechart 'Test_Expression'.)();
+		entryActionTest_Expression();
 		sCIDefault.setVar3(sCIDefault.getVar3()
 				+ ((sCIDefault.getVar2() * sCIDefault.getVar3())));
 
@@ -318,7 +317,15 @@ public class Test_ExpressionStatemachine
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@110f1712 (name: exitAction) (comment: Exit action for state 'Test_Expression'.)();
+		exitActionTest_Expression();
+	}
+
+	private void entryActionTest_Expression() {
+
+	}
+
+	private void exitActionTest_Expression() {
+
 	}
 
 	private void reactMainRegion_state1() {
@@ -374,8 +381,8 @@ public class Test_ExpressionStatemachine
 
 		} else {
 			sCIDefault.setVar1(sCIDefault.getVar1() + (1));
-			/* toCode not defined for: org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl@5a04d557 (name: op1) */
-			/* toCode not defined for: org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl@34979855 (name: op2) */
+			/* toCode not defined for: org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl@30460869 (name: op1) */
+			/* toCode not defined for: org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl@64350a8 (name: op2) */
 
 		}
 
