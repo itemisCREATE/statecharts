@@ -6,6 +6,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistC
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
+import org.yakindu.sct.model.sgraph.ui.shared.Access2;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
@@ -25,6 +26,11 @@ public class STextUiModule extends
 
 	public STextUiModule(AbstractUIPlugin plugin) {
 		super(plugin);
+	}
+
+	@Override
+	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
+		return Access2.getJavaProjectsState();
 	}
 
 	public Class<? extends StatefulFactory> bindStatefulFactory() {
@@ -47,7 +53,6 @@ public class STextUiModule extends
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
 		return CustomCSSHelpHoverProvider.class;
 	}
-
 
 	@Override
 	public void configure(Binder binder) {
