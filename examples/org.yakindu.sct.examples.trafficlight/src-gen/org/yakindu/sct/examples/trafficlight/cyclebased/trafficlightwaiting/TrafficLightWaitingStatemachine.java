@@ -215,8 +215,7 @@ public class TrafficLightWaitingStatemachine
 			throw new IllegalStateException("TimerService not set.");
 		}
 		cycleStartTime = System.currentTimeMillis();
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@5139bf8d (name: entryAction) (comment: Entry action for statechart 'TrafficLightWaiting'.)();
+		entryActionTrafficLightWaiting();
 		sCITrafficLight.setRed(false);
 		sCITrafficLight.setYellow(false);
 		sCITrafficLight.setGreen(true);
@@ -302,7 +301,15 @@ public class TrafficLightWaitingStatemachine
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@108a6823 (name: exitAction) (comment: Exit action for state 'TrafficLightWaiting'.)();
+		exitActionTrafficLightWaiting();
+	}
+
+	private void entryActionTrafficLightWaiting() {
+
+	}
+
+	private void exitActionTrafficLightWaiting() {
+
 	}
 
 	private void reactMain_region_on() {
