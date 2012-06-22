@@ -107,8 +107,7 @@ public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 			throw new IllegalStateException("TimerService not set.");
 		}
 		cycleStartTime = System.currentTimeMillis();
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@4e86ecca (name: entryAction) (comment: Entry action for statechart 'TimeTrigger'.)();
+		entryActionTimeTrigger();
 		getTimerService().setTimer(stateA_time_event_0, 100, cycleStartTime);
 		sCIDefault.setValue(0);
 
@@ -137,7 +136,15 @@ public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@1d60e50b (name: exitAction) (comment: Exit action for state 'TimeTrigger'.)();
+		exitActionTimeTrigger();
+	}
+
+	private void entryActionTimeTrigger() {
+
+	}
+
+	private void exitActionTimeTrigger() {
+
 	}
 
 	private void reactMainRegion_StateA() {

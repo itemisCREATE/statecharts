@@ -149,8 +149,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	public void enter() {
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@9b64fac (name: entryAction) (comment: Entry action for statechart 'ShallowHistory'.)();
+		entryActionShallowHistory();
 		nextStateIndex = 0;
 		stateVector[0] = State.MainRegion_State1;
 
@@ -208,7 +207,15 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@1674b452 (name: exitAction) (comment: Exit action for state 'ShallowHistory'.)();
+		exitActionShallowHistory();
+	}
+
+	private void entryActionShallowHistory() {
+
+	}
+
+	private void exitActionShallowHistory() {
+
 	}
 
 	private void shallowEnterSequenceMainRegion_State2Region0() {
@@ -276,7 +283,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 			//Enter the region with shallow history
 			if (historyVector[0] != State.$NullState$) {
-
 				shallowEnterSequenceMainRegion_State2Region0();
 			} else {
 				nextStateIndex = 0;
@@ -426,7 +432,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 					//Enter the region with shallow history
 					if (historyVector[1] != State.$NullState$) {
-
 						shallowEnterSequenceMainRegion_State2__region0_State4__region0_State7Region0();
 					} else {
 						nextStateIndex = 0;

@@ -120,9 +120,8 @@ getTimerService().resetTimer(«timeEvent.getEventIdentifier()»);
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call-»
-
-«getComment()-»
-«step.functionName()»();
+	«getComment()-»
+	«step.functionName()»();
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Sequence-»
@@ -214,6 +213,22 @@ else {
 		«EXPAND ActionCode FOREACH reactSequence.steps-»
 	}
 	«ENDIF -»
+«ENDDEFINE»
+
+«DEFINE EnterMethodImplement FOR ExecutionFlow-»
+	«IF this.entryAction != null && entryAction.caller.size > 0 -»
+	private void «entryAction.statechartEntryActionFunctionName()»() {
+		«EXPAND ActionCode FOR this.entryAction-»
+	}
+	«ENDIF-»
+«ENDDEFINE»
+
+«DEFINE ExitMethodImplement FOR ExecutionFlow-»
+	«IF this.exitAction != null && exitAction.caller.size > 0 -»
+	private void «this.exitAction.statechartExitActionFunctionName()»() {
+		«EXPAND ActionCode FOR this.exitAction-»
+	}
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE EnterMethodImplement FOR ExecutionState-»

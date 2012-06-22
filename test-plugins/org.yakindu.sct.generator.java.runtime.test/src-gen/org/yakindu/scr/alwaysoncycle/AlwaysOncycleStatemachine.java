@@ -70,8 +70,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	public void enter() {
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@404734a (name: entryAction) (comment: Entry action for statechart 'AlwaysOncycle'.)();
+		entryActionAlwaysOncycle();
 		sCIDefault.setValue(0);
 
 		nextStateIndex = 0;
@@ -98,7 +97,15 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@1b01bcee (name: exitAction) (comment: Exit action for state 'AlwaysOncycle'.)();
+		exitActionAlwaysOncycle();
+	}
+
+	private void entryActionAlwaysOncycle() {
+
+	}
+
+	private void exitActionAlwaysOncycle() {
+
 	}
 
 	private void reactMain_region_StateA() {

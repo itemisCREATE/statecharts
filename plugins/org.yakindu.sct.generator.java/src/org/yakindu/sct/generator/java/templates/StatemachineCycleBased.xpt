@@ -133,7 +133,8 @@ public class «getStatemachineClassName()» implements «getStatemachineInterfaceNa
 		}
 	«ENDIF»
 	
-
+«EXPAND CoreStatemachine::EnterMethodImplement FOR this»
+«EXPAND CoreStatemachine::ExitMethodImplement FOR this»
 «EXPAND CoreStatemachine::ConditionMethodsImplement FOR this-»
 «EXPAND CoreStatemachine::ConditionMethodsImplement FOREACH this.states-»
 «EXPAND CoreStatemachine::ConditionMethodsImplement FOREACH this.nodes-»

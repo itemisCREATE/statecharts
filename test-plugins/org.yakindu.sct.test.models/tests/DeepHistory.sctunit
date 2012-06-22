@@ -9,7 +9,8 @@ testcase for DeepHistory  {
 		cycle
 		raise event7
 		cycle
-		assert event1
+		//Not possible to assert event1 because it is an IN event.
+		//assert event1
 		
 		assert !active (DeepHistory.mainRegion.State1)
 		assert active (DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)

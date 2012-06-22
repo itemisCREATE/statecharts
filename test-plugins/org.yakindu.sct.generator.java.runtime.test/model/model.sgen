@@ -78,7 +78,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart SimpleEvent {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 
@@ -89,7 +89,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart SimpleHierachy {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 
@@ -100,7 +100,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart StateIsActive {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 
@@ -111,7 +111,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart StatechartLocalReactions {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 
@@ -122,7 +122,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart SyncFork {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
 			targetFolder = "src-gen"
 		}
 

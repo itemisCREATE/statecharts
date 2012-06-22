@@ -78,8 +78,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	public void enter() {
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@5e0a614c (name: entryAction) (comment: Entry action for statechart 'PriorityValues'.)();
+		entryActionPriorityValues();
 		nextStateIndex = 0;
 		stateVector[0] = State.SomeRegion_A;
 
@@ -138,7 +137,15 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@64ba3fc1 (name: exitAction) (comment: Exit action for state 'PriorityValues'.)();
+		exitActionPriorityValues();
+	}
+
+	private void entryActionPriorityValues() {
+
+	}
+
+	private void exitActionPriorityValues() {
+
 	}
 
 	private void reactSomeRegion_A() {

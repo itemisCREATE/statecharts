@@ -298,8 +298,7 @@ public class InterfaceTestStatemachine implements IInterfaceTestStatemachine {
 		sCIDefault.setVar2(2.3);
 		sCIDefault.setVar3(1);
 		sCIOther.setV1(5);
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@119d4893 (name: entryAction) (comment: Entry action for statechart 'InterfaceTest'.)();
+		entryActionInterfaceTest();
 		nextStateIndex = 0;
 		stateVector[0] = State.MainRegion_state1;
 
@@ -334,7 +333,15 @@ public class InterfaceTestStatemachine implements IInterfaceTestStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@4a269585 (name: exitAction) (comment: Exit action for state 'InterfaceTest'.)();
+		exitActionInterfaceTest();
+	}
+
+	private void entryActionInterfaceTest() {
+
+	}
+
+	private void exitActionInterfaceTest() {
+
 	}
 
 	private void reactMainRegion_state1() {

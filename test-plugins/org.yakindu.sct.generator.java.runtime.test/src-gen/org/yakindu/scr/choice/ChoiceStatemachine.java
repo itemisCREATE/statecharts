@@ -86,8 +86,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	public void enter() {
 		sCIDefault.setValue(4);
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@31a9c687 (name: entryAction) (comment: Entry action for statechart 'Choice'.)();
+		entryActionChoice();
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_A;
 
@@ -116,7 +115,15 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@5b27706d (name: exitAction) (comment: Exit action for state 'Choice'.)();
+		exitActionChoice();
+	}
+
+	private void entryActionChoice() {
+
+	}
+
+	private void exitActionChoice() {
+
 	}
 
 	private void reactMain_region_A() {

@@ -248,8 +248,7 @@ public class Test_ParallelRegionsStatemachine
 
 	public void enter() {
 		sCIDefault.setReg3(-(1));
-
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@182ac83f (name: entryAction) (comment: Entry action for statechart 'Test_ParallelRegions'.)();
+		entryActionTest_ParallelRegions();
 		nextStateIndex = 0;
 		stateVector[0] = State.MainRegion_State1;
 
@@ -322,7 +321,15 @@ public class Test_ParallelRegionsStatemachine
 				break;
 		}
 
-		// unknown function type org.yakindu.sct.model.sexec.impl.SequenceImpl@60188b9b (name: exitAction) (comment: Exit action for state 'Test_ParallelRegions'.)();
+		exitActionTest_ParallelRegions();
+	}
+
+	private void entryActionTest_ParallelRegions() {
+
+	}
+
+	private void exitActionTest_ParallelRegions() {
+
 	}
 
 	private void reactMainRegion_State1() {

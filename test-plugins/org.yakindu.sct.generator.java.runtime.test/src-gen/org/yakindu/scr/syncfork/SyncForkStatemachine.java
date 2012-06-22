@@ -1,6 +1,6 @@
-package org.yakindu.scr.syncjoin;
+package org.yakindu.scr.syncfork;
 
-public class SyncJoinStatemachine implements ISyncJoinStatemachine {
+public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 	private final class SCIDefaultImpl implements SCIDefault {
 
@@ -16,23 +16,9 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			f = true;
 		}
 
-		private boolean jc;
-
-		public void raiseJc() {
-			jc = true;
-		}
-
-		private boolean jd;
-
-		public void raiseJd() {
-			jd = true;
-		}
-
 		public void clearEvents() {
 			e = false;
 			f = false;
-			jc = false;
-			jd = false;
 		}
 
 	}
@@ -47,7 +33,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	private int nextStateIndex;
 
-	public SyncJoinStatemachine() {
+	public SyncForkStatemachine() {
 
 		sCIDefault = new SCIDefaultImpl();
 
@@ -91,21 +77,10 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		sCIDefault.raiseF();
 	}
 
-	public void raiseJc() {
-		sCIDefault.raiseJc();
-	}
-
-	public void raiseJd() {
-		sCIDefault.raiseJd();
-	}
-
 	public void enter() {
-		entryActionSyncJoin();
+		entryActionSyncFork();
 		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_B_r1_C1;
-
-		nextStateIndex = 1;
-		stateVector[1] = State.Main_region_B_r2_D1;
+		stateVector[0] = State.Main_region_A;
 
 	}
 
@@ -148,27 +123,34 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				break;
 		}
 
-		exitActionSyncJoin();
+		exitActionSyncFork();
 	}
 
-	private void entryActionSyncJoin() {
+	private void entryActionSyncFork() {
 
 	}
 
-	private void exitActionSyncJoin() {
+	private void exitActionSyncFork() {
 
 	}
 
 	private void reactMain_region_A() {
-		if ((sCIDefault.e || sCIDefault.f)) {
+		if (sCIDefault.e) {
 			stateVector[0] = State.$NullState$;
 
-			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_B_r1_C1;
+			react_sync0_();
 
-			nextStateIndex = 1;
-			stateVector[1] = State.Main_region_B_r2_D1;
+		} else {
+			if (sCIDefault.f) {
+				stateVector[0] = State.$NullState$;
 
+				nextStateIndex = 0;
+				stateVector[0] = State.Main_region_B_r1_C1;
+
+				nextStateIndex = 1;
+				stateVector[1] = State.Main_region_B_r2_D1;
+
+			}
 		}
 
 	}
@@ -176,16 +158,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 	private void reactMain_region_B_r1_C1() {
 		if (sCIDefault.e) {
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_B_r1_C2;
-
-		}
-
-	}
-	private void reactMain_region_B_r1_C2() {
-		if (((sCIDefault.jc && isStateActive(State.Main_region_B_r2_D2)) && sCIDefault.jd)) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -220,7 +192,61 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 					break;
 			}
 
-			react_sync0_();
+			nextStateIndex = 0;
+			stateVector[0] = State.Main_region_A;
+
+		} else {
+			if (sCIDefault.f) {
+				stateVector[0] = State.$NullState$;
+
+				nextStateIndex = 0;
+				stateVector[0] = State.Main_region_B_r1_C2;
+
+			}
+
+		}
+
+	}
+	private void reactMain_region_B_r1_C2() {
+		if (sCIDefault.e) {
+			//Handle exit of all possible states (of r1) at position 0...
+			switch (stateVector[0]) {
+
+				case Main_region_B_r1_C1 :
+					stateVector[0] = State.$NullState$;
+
+					break;
+
+				case Main_region_B_r1_C2 :
+					stateVector[0] = State.$NullState$;
+
+					break;
+
+				default :
+					break;
+			}
+
+			//Handle exit of all possible states (of r2) at position 1...
+			switch (stateVector[1]) {
+
+				case Main_region_B_r2_D1 :
+					stateVector[1] = State.$NullState$;
+
+					break;
+
+				case Main_region_B_r2_D2 :
+					stateVector[1] = State.$NullState$;
+
+					break;
+
+				default :
+					break;
+			}
+
+			nextStateIndex = 0;
+			stateVector[0] = State.Main_region_A;
+
+		} else {
 
 		}
 
@@ -235,48 +261,13 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		}
 	}
 	private void reactMain_region_B_r2_D2() {
-		if (((sCIDefault.jd && isStateActive(State.Main_region_B_r1_C2)) && sCIDefault.jc)) {
-			//Handle exit of all possible states (of r1) at position 0...
-			switch (stateVector[0]) {
-
-				case Main_region_B_r1_C1 :
-					stateVector[0] = State.$NullState$;
-
-					break;
-
-				case Main_region_B_r1_C2 :
-					stateVector[0] = State.$NullState$;
-
-					break;
-
-				default :
-					break;
-			}
-
-			//Handle exit of all possible states (of r2) at position 1...
-			switch (stateVector[1]) {
-
-				case Main_region_B_r2_D1 :
-					stateVector[1] = State.$NullState$;
-
-					break;
-
-				case Main_region_B_r2_D2 :
-					stateVector[1] = State.$NullState$;
-
-					break;
-
-				default :
-					break;
-			}
-
-			react_sync0_();
-
-		}
 	}
 	private void react_sync0_() {
 		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
+		stateVector[0] = State.Main_region_B_r1_C2;
+
+		nextStateIndex = 1;
+		stateVector[1] = State.Main_region_B_r2_D1;
 
 	}
 

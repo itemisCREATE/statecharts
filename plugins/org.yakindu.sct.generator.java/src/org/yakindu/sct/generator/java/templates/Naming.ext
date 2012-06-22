@@ -196,14 +196,17 @@ String getEventValueIdentifier(EventDefinition this):
 cached String functionName(Step step) : 
 	(step.isEffect()) ? step.actionFunctionName() : (
 	(step.isReactionCheck()) ? step.checkFunctionName() : (
-	(step.isEntryAction()) ? step.entryActionFunctionName() : ( 
-	(step.isExitAction()) ? step.exitActionFunctionName() :  (
+	(step.isStatechartEntryAction()) ? step.statechartEntryActionFunctionName() : ( 
+	(step.isStatechartExitAction()) ? step.statechartExitActionFunctionName() : ( 
+	(step.isStateEntryAction()) ? step.entryActionFunctionName() : ( 
+	(step.isStateExitAction()) ? step.exitActionFunctionName() :  (
 	(step.isEnterSequence()) ? step.enterSequenceName() : (
 	(step.isDeepEnterSequence()) ? step.deepEnterSequenceName() : (
 	(step.isShallowEnterSequence()) ? step.shallowEnterSequenceName() : (
 	(step.isExitSequence()) ? step.exitSequenceName() : (
 	(step.isReactSequence()) ? step.reactSequenceName() :
-	" // unknown function type "+step ))))))));
+	
+	" // unknown function type " + step.name + " --- Container: " + step.eContainer ))))))))));
  
 String statemachineEntryFunctionName(EnterState this):
 	if (this.name != null) then
@@ -213,6 +216,8 @@ String statemachineEntryFunctionName(EnterState this):
 
 String actionFunctionName(Step this) : "actions" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
 String checkFunctionName(Step this) : "condition" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
+String statechartEntryActionFunctionName(Step this) : "entryAction" + getName(parentStatechart());
+String statechartExitActionFunctionName(Step this) : "exitAction" + getName(parentStatechart());
 String entryActionFunctionName(Step this) : "entryAction" + getName(state()); 
 String exitActionFunctionName(Step this) : "exitAction" + getName(state());
 String enterSequenceName(Step this) : "enterSequence"+getName(state()); 
@@ -231,17 +236,20 @@ String reactSequenceName(Step this) : "react"+getName(state());
 
 isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);
-isEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
-isExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
+isStatechartEntryAction(Step step) : ExecutionFlow.isInstance(step.eContainer) && step.parentStatechart().entryAction == step;
+isStatechartExitAction(Step step) : ExecutionFlow.isInstance(step.eContainer) && step.parentStatechart().exitAction == step;
+isStateEntryAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().entryAction == step;
+isStateExitAction(Step step) : ExecutionState.isInstance(step.eContainer) && step.state().exitAction == step;
 isEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "enterSequence";
 isDeepEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "deepEnterSequence";
 isShallowEnterSequence(Step step) : Sequence.isInstance(step) && step.name == "shallowEnterSequence";
 isExitSequence(Step step) : Sequence.isInstance(step) && step.name == "exitSequence";
 isReactSequence(Step step) : Sequence.isInstance(step) && step.name == "react";
 
-Reaction reaction(Step this) : (Reaction) this.eContainer ;
+Reaction reaction(Step this) : (Reaction) eContainer ;
 ExecutionState state(Reaction this) : (ExecutionState) eContainer;
 ExecutionState state(Step this) : (ExecutionState) eContainer;
+ExecutionFlow parentStatechart(Step this) : (ExecutionFlow) eContainer;
 
 String getContext(Variable this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
