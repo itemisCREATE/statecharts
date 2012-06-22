@@ -198,6 +198,7 @@
 	</profiles>
 
 	<modules>
+		<module>../org.yakindu.base.shared.ui</module>
 		<module>../org.yakindu.base.types</module>
 		<module>../org.yakindu.base.types.edit</module>
 		<module>../org.yakindu.base.types.scope</module>
