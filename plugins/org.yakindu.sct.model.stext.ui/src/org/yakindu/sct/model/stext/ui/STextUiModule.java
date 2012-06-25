@@ -6,6 +6,13 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistC
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
@@ -53,5 +60,31 @@ public class STextUiModule extends
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named("stylesheet"))
 				.toInstance("/StextHoverStyleSheet.css");
+	}
+
+	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
+		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			return Access.getJavaProjectsState();
+		} else {
+			return Access.getWorkspaceProjectsState();
+		}
+	}
+
+	@Override
+	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
+		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			return XtextResourceSetProvider.class;
+		} else {
+			return SimpleResourceSetProvider.class;
+		}
+	}
+
+	@Override
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			return JavaClassPathResourceForIEditorInputFactory.class;
+		} else {
+			return ResourceForIEditorInputFactory.class;
+		}
 	}
 }
