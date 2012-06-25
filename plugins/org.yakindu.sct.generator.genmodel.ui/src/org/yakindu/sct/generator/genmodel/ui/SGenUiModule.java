@@ -9,7 +9,14 @@ import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
+import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
+import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
+import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
 import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlightingCalculator;
 import org.yakindu.sct.generator.genmodel.ui.templates.SGenTemplateProposalProvider;
@@ -33,15 +40,15 @@ public class SGenUiModule extends
 	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
 		return SGenUserHelpDocumentationProvider.class;
 	}
-	
-	public Class<? extends DispatchingEObjectTextHover> bindDispatchingEObjectTextHover(){
+
+	public Class<? extends DispatchingEObjectTextHover> bindDispatchingEObjectTextHover() {
 		return CrossRefObjectTextHover.class;
 	}
 
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
 		return HelpHoverProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends IEObjectHover> bindIEObjectHover() {
 		return CrossRefObjectTextHover.class;
@@ -51,8 +58,31 @@ public class SGenUiModule extends
 	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
 		return SGenTemplateProposalProvider.class;
 	}
-	
-	
-	
+
+	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
+		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			return Access.getJavaProjectsState();
+		} else {
+			return Access.getWorkspaceProjectsState();
+		}
+	}
+
+	@Override
+	public Class<? extends IResourceSetProvider> bindIResourceSetProvider() {
+		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			return XtextResourceSetProvider.class;
+		} else {
+			return SimpleResourceSetProvider.class;
+		}
+	}
+
+	@Override
+	public Class<? extends IResourceForEditorInputFactory> bindIResourceForEditorInputFactory() {
+		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
+			return JavaClassPathResourceForIEditorInputFactory.class;
+		} else {
+			return ResourceForIEditorInputFactory.class;
+		}
+	}
 
 }
