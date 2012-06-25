@@ -10,14 +10,16 @@
  */
 package org.yakindu.sct.generator.java.runtime.test;
 
+import static org.junit.Assert.assertTrue;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.yakindu.scr.timetrigger.TimeTriggerStatemachine;
 import org.yakindu.scr.timetrigger.TimeTriggerStatemachine.State;
+
 /**
- *  Unit TestCase for TimeTrigger
+ * Unit TestCase for TimeTrigger
  */
 @SuppressWarnings("all")
 public class TimeTriggerTest {
@@ -37,11 +39,9 @@ public class TimeTriggerTest {
 	}
 
 	@Test
-	public void testtimeTriggerTest(){
+	public void testtimeTriggerTest() {
 		assertTrue(statemachine.isStateActive(State.MainRegion_StateA));
-		Error
 		assertTrue(statemachine.isStateActive(State.MainRegion_StateB));
-		Error
 		assertTrue(statemachine.isStateActive(State.MainRegion_StateA));
 	}
 }
