@@ -914,6 +914,17 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		analyzer.getType((Statement) statement);
 	}
 
+	@Test
+	public void testEventRaisingException3() {
+		Scope context = createValuedEventsScope();
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("Can not assign a value of type null to a variable of type string");
+		EObject statement = super.parseExpression("raise stringEvent", context,
+				EventRaisingExpression.class.getSimpleName());
+		analyzer.getType((Statement) statement);
+	}
+
 	/**
 	 * Convenience from here...
 	 */
