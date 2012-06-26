@@ -83,7 +83,7 @@ public class StatechartLaunchShortcut implements ILaunchShortcut,
 							.getName()));
 
 			newConfig.setAttribute(FILE_NAME, file.getFullPath().toString());
-			newConfig.setAttribute(OPERATION_CLASS, "org.yakindu.Operations");
+//			newConfig.setAttribute(OPERATION_CLASS, "org.yakindu.Operations");
 			return newConfig.doSave();
 
 		} catch (CoreException e) {
