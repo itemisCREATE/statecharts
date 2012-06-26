@@ -30,6 +30,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
+import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -43,6 +44,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.factories.FactoryUtils;
@@ -65,6 +67,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	private boolean openOnCreate = true;
 
+	protected PreferencesHint preferencesHint = DiagramActivator.DIAGRAM_PREFERENCES_HINT;
+
 	private IWorkbench workbench;
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -72,7 +76,6 @@ public class CreationWizard extends Wizard implements INewWizard {
 		this.selection = selection;
 		setWindowTitle("New YAKINDU Statechart");
 		setNeedsProgressMonitor(true);
-
 	}
 
 	@Override
@@ -126,7 +129,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 		return false;
 	}
 
-	protected Resource createDiagram(URI diagramURI, URI modelURI,
+	protected Resource createDiagram(final URI diagramURI, final URI modelURI,
 			IProgressMonitor progressMonitor) {
 		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
 				.createEditingDomain();
@@ -141,7 +144,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 					IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 
-				FactoryUtils.createStatechartModel(resource);
+				FactoryUtils.createStatechartModel(resource, preferencesHint);
 
 				try {
 					resource.save(getSaveOptions());
@@ -195,6 +198,17 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	public void setOpenOnCreate(boolean openOnCreate) {
 		this.openOnCreate = openOnCreate;
+	}
+
+	/**
+	 * Set the preference hint for preferences of new created diagrams
+	 * 
+	 * @param hint
+	 *            the PreferenceHint for the PreferenceStore (mostly from
+	 *            Activator)
+	 */
+	protected void setPreferenceHint(PreferencesHint hint) {
+		preferencesHint = hint;
 	}
 
 }
