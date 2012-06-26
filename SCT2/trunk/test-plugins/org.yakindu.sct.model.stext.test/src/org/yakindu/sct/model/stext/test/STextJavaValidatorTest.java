@@ -136,12 +136,12 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		Scope context = (Scope) parseExpression(
 				"interface if : in event a : integer", null,
 				InterfaceScope.class.getSimpleName());
-		EObject model = super.parseExpression("if.a / raise if.a", context,
+		EObject model = super.parseExpression("if.a / raise if.a:1", context,
 				TransitionSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 
-		model = super.parseExpression("if / raise if.a", context,
+		model = super.parseExpression("if / raise if.a:1", context,
 				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(FEATURE_CALL_TO_SCOPE);
