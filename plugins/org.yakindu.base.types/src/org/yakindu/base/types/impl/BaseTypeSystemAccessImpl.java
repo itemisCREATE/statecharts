@@ -26,14 +26,16 @@ public class BaseTypeSystemAccessImpl implements ITypeSystemAccess {
 
 	@Override
 	public boolean isBoolean(Type type) {
-		return type != null && (type.getName().equalsIgnoreCase("boolean")
-				|| type.getName().equalsIgnoreCase("bool"));
+		return type != null
+				&& (type.getName().equalsIgnoreCase("boolean") || type
+						.getName().equalsIgnoreCase("bool"));
 	}
 
 	@Override
 	public boolean isInteger(Type type) {
-		return type != null && (type.getName().equalsIgnoreCase("integer")
-				|| type.getName().equalsIgnoreCase("int"));
+		return type != null
+				&& (type.getName().equalsIgnoreCase("integer") || type
+						.getName().equalsIgnoreCase("int"));
 	}
 
 	@Override
@@ -52,9 +54,12 @@ public class BaseTypeSystemAccessImpl implements ITypeSystemAccess {
 	}
 
 	public boolean isAssignable(Type expected, Type actual) {
+		if (expected == null && actual == null)
+			return true;
 		Type combine = combine(expected, actual);
-		if(combine == null)
+		if (combine == null) {
 			return false;
+		}
 		if (expected.getName().equals(combine.getName())) {
 			return true;
 		}
@@ -64,7 +69,7 @@ public class BaseTypeSystemAccessImpl implements ITypeSystemAccess {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public Type getBoolean() {
 		Type type = TypesFactory.eINSTANCE.createType();
@@ -73,18 +78,19 @@ public class BaseTypeSystemAccessImpl implements ITypeSystemAccess {
 	}
 
 	@Override
-	public Type  getInteger() {
+	public Type getInteger() {
 		Type type = TypesFactory.eINSTANCE.createType();
 		type.setName("integer");
 		return type;
-	} 
-	
+	}
+
 	@Override
 	public Type getReal() {
 		Type type = TypesFactory.eINSTANCE.createType();
 		type.setName("real");
 		return type;
 	}
+
 	@Override
 	public Type getString() {
 		Type type = TypesFactory.eINSTANCE.createType();
