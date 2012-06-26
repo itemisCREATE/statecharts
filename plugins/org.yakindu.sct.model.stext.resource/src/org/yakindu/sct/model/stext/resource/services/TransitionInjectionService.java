@@ -12,8 +12,11 @@ package org.yakindu.sct.model.stext.resource.services;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 
 import de.itemis.xtext.utils.gmf.resource.AbstractXtextMemberInjectionService;
@@ -39,8 +42,15 @@ public class TransitionInjectionService
 
 	@Override
 	public void setFeatures(Transition original, TransitionSpecification rootAST) {
-		original.setTrigger(rootAST.getReaction().getTrigger());
-		original.setEffect(rootAST.getReaction().getEffect());
+		Trigger trigger = null;
+		Effect effect = null;
+		if (rootAST.getReaction() != null) {
+			TransitionReaction reaction = rootAST.getReaction();
+			trigger = reaction.getTrigger();
+			effect = reaction.getEffect();
+		}
+		original.setTrigger(trigger);
+		original.setEffect(effect);
 
 	}
 

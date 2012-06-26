@@ -42,7 +42,9 @@ public class StatechartInjectionService
 		EList<Scope> definitionScopes = rootAST.getScopes();
 		original.getScopes().clear();
 		original.setNamespace(rootAST.getNamespace());
-		original.getScopes().addAll(definitionScopes);
+		if (definitionScopes != null) {
+			original.getScopes().addAll(definitionScopes);
+		}
 	}
 
 	public EStructuralFeature getSourceFeature() {

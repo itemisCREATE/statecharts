@@ -41,10 +41,13 @@ public class StateInjectionService extends
 	@Override
 	public void setFeatures(State original, StateSpecification rootAST) {
 		Scope localScope = SGraphFactory.eINSTANCE.createScope();
-		EList<Declaration> declarations = rootAST.getScope().getDeclarations();
-		localScope.getDeclarations().addAll(declarations);
 		original.getScopes().clear();
-		original.getScopes().add(localScope);
+		if (rootAST.getScope() != null) {
+			EList<Declaration> declarations = rootAST.getScope()
+					.getDeclarations();
+			localScope.getDeclarations().addAll(declarations);
+			original.getScopes().add(localScope);
+		}
 	}
 
 	public boolean isServiceFor(EObject object) {
