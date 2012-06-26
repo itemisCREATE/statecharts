@@ -60,8 +60,16 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   private TypeInferrerCache cache;
   
   public Type getType(final Statement stmt) {
-    Type _get = this.cache.get(stmt, this);
-    return _get;
+    Type _xblockexpression = null;
+    {
+      boolean _equals = Objects.equal(stmt, null);
+      if (_equals) {
+        return null;
+      }
+      Type _get = this.cache.get(stmt, this);
+      _xblockexpression = (_get);
+    }
+    return _xblockexpression;
   }
   
   protected Type _inferType(final Statement statement) {

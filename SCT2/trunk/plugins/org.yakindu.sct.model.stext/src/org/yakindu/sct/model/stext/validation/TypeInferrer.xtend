@@ -61,6 +61,9 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 	org.yakindu.sct.model.stext.validation.TypeInferrerCache cache
 	
 	override getType(Statement stmt) {
+		if (stmt == null) {
+			return null;
+		}
 		cache.get(stmt, this)
 	}
 	

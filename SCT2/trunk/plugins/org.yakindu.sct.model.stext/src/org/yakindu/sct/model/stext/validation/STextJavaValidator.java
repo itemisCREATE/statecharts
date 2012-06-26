@@ -149,7 +149,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 						StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
 			}
 		} catch (TypeCheckException ex) {
-			//This is handled by checkExpression
+			// This is handled by checkExpression
 		}
 
 	}
@@ -194,7 +194,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	protected void checkFeatureCallEffect(FeatureCall call) {
-		if (!(call.getFeature() instanceof Operation)) {
+		if (call.getFeature() != null
+				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '"
 						+ nameProvider.getFullyQualifiedName(call.getFeature())
