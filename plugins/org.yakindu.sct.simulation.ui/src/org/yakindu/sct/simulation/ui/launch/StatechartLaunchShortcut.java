@@ -57,7 +57,7 @@ public class StatechartLaunchShortcut implements ILaunchShortcut,
 		final ILaunchManager launchManager = DebugPlugin.getDefault()
 				.getLaunchManager();
 		final ILaunchConfigurationType configType = launchManager
-				.getLaunchConfigurationType(CONFIG_TYPE);
+				.getLaunchConfigurationType(getConfigType());
 		ILaunchConfiguration launchConfig = findLaunchConfiguration(configType,
 				file);
 		if (launchConfig != null) {
@@ -68,17 +68,22 @@ public class StatechartLaunchShortcut implements ILaunchShortcut,
 		}
 	}
 
-	private ILaunchConfiguration createNewLaunchConfiguration(IFile file) {
+	protected String getConfigType() {
+		return CONFIG_TYPE;
+	}
+
+	protected ILaunchConfiguration createNewLaunchConfiguration(IFile file) {
 		final ILaunchManager launchManager = DebugPlugin.getDefault()
 				.getLaunchManager();
 		final ILaunchConfigurationType configType = launchManager
-				.getLaunchConfigurationType(CONFIG_TYPE);
+				.getLaunchConfigurationType(getConfigType());
 		try {
 			ILaunchConfigurationWorkingCopy newConfig = configType.newInstance(
 					null, launchManager.generateLaunchConfigurationName(file
 							.getName()));
 
 			newConfig.setAttribute(FILE_NAME, file.getFullPath().toString());
+			newConfig.setAttribute(OPERATION_CLASS, "org.yakindu.Operations");
 			return newConfig.doSave();
 
 		} catch (CoreException e) {
