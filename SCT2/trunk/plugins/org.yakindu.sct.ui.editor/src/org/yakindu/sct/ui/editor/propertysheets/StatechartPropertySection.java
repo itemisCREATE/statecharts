@@ -84,14 +84,15 @@ public class StatechartPropertySection extends
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL | SWT.WRAP);
-			((StyledText)textControl).setAlwaysShowScrollBars(false);
+			((StyledText) textControl).setAlwaysShowScrollBars(false);
 			enableXtext(textControl, injector);
 			createHelpWidget(parent, textControl,
 					HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(textControl);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
+				.applyTo(textControl);
 	}
 
 	@Override
@@ -127,7 +128,9 @@ public class StatechartPropertySection extends
 
 	@Override
 	public void dispose() {
-		orderElementControl.dispose();
+		if (orderElementControl != null) {
+			orderElementControl.dispose();
+		}
 		super.dispose();
 	}
 
