@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Juno_M7" sequenceNumber="5">
+<?pde version="3.8"?>
+
+<target name="Juno_M7" sequenceNumber="5">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.feature.group" version="4.2.0.v20120508-1726-9JF7AHAqFubtejDDfoF2l-HHS1O-6drthz0eMMd"/>
-<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20120511-1952-7P7OFvNFLWUl7Um_6DOA-b_"/>
-<unit id="org.eclipse.platform.source.feature.group" version="4.2.0.v20120508-1726-9JF7AHAqFubtejDDfoF2l-HHS1O-6drthz0eMMd"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.8.0.v20120521-0706"/>
+<unit id="org.eclipse.platform.feature.group" version="4.2.0.v20120608-135145-9JF7BHV8FyMteji0Oi_ePMz0xuZ8TVo7lV0z0ecb"/>
+<unit id="org.eclipse.equinox.executable.feature.group" version="3.6.0.v20120522-1813-7P7OG2BFLWUl7UmbVUO9iCm"/>
+<unit id="org.eclipse.platform.source.feature.group" version="4.2.0.v20120608-135145-9JF7BHV8FyMteji0Oi_ePMz0xuZ8TVo7lV0z0ecb"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.8.0.v20120608-0554"/>
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.6.0.v20120327-2213-47F08xGD6FxMBN7CJFV3CIKK9t84"/>
 <unit id="org.eclipse.gmf.runtime.sdk.feature.group" version="1.6.0.v20120517-1809-67R09E9QuFflXswwIO_z0E3d4k_X"/>
-<unit id="org.eclipse.xtend.sdk.feature.group" version="2.3.0.v201205220958"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.3.0.v201205220958"/>
+<unit id="org.eclipse.xtend.sdk.feature.group" version="2.3.0.v201206120633"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.3.0.v201206120633"/>
 <repository location="http://download.eclipse.org/releases/juno"/>
 </location>
 </locations>
