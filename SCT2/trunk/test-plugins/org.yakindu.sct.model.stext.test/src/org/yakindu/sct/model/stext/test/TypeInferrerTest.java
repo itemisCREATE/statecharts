@@ -924,6 +924,23 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				EventRaisingExpression.class.getSimpleName());
 		analyzer.getType((Statement) statement);
 	}
+	
+	@Test
+	public void testOperationSuccess(){
+		EObject statement = super.parseExpression("myInt = myOpp1()",
+				internalScope(), Expression.class.getSimpleName());
+		analyzer.getType((Statement) statement);
+	}
+	
+	@Test
+	public void testOperationException1(){
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("Can not assign a value of type integer to a variable of type boolean");
+		EObject statement = super.parseExpression("myBool = myOpp1()",
+				internalScope(), Expression.class.getSimpleName());
+		analyzer.getType((Statement) statement);
+	}
 
 	/**
 	 * Convenience from here...
