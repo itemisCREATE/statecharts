@@ -860,6 +860,11 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		statement = super.parseExpression("raise stringEvent : 'string'",
 				context, EventRaisingExpression.class.getSimpleName());
 		analyzer.getType((Statement) statement);
+		// no valued Events
+		statement = super.parseExpression("raise event1", internalScope(),
+				EventRaisingExpression.class.getSimpleName());
+		analyzer.getType((Statement) statement);
+
 	}
 
 	@Test
