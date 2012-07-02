@@ -1,0 +1,36 @@
+testcase for IntegerExpressions {
+	
+	test integerExpressions {
+		assert active (IntegerExpressions.main_region.StateA)
+		assert myInt1 == 10
+		assert myInt2 == 5
+		raise e1 
+		cycle 
+		  
+		// comparison
+		assert less == false
+		assert greater == true
+		assert equalOrLess == false
+		assert equalOrGreater == true
+		assert equal == false
+		assert notEqual == true 
+		
+		//
+		assert plus == 15
+		assert minus == 5
+		assert multiply == 50
+		assert division == 2
+		assert modulo == 0
+		
+		//
+		assert negat == -10
+		//TODO  assert complement == -10 
+		
+		//
+		assert multiAssign == 20
+		assert divAssign == 2
+		assert plusAssign == 12
+		assert minusAssign == -8
+		assert moduloAssign == 0
+		}
+	}

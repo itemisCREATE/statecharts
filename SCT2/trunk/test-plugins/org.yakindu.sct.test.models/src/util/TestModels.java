@@ -36,6 +36,9 @@ public class TestModels {
 
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/";
 
+	public static final String BIT_EXPRESSIONS = "BitExpressions.sct";
+	public static final String INTEGER_EXPRESSIONS = "IntegerExpressions.sct";
+	public static final String BOOLEAN_EXPRESSIONS = "BooleanExpressions.sct";
 	public static final String ALWAYS_ONCYCLE = "AlwaysOncycle.sct";
 	public static final String CHOICE = "Choice.sct";
 	public static final String DEEP_HISTORY = "DeepHistory.sct";
@@ -61,10 +64,41 @@ public class TestModels {
 	 * @return the {@link ExecutionFlow}
 	 * @throws IOException
 	 */
+	public ExecutionFlow createBitExpressions() throws IOException {
+		return loadExecutionFlowFromResource(BIT_EXPRESSIONS);
+	}
+
+	/**
+	 * <img src="../../images/IntegerExpressions.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createIntegerExpressions() throws IOException {
+		return loadExecutionFlowFromResource(INTEGER_EXPRESSIONS);
+	}
+
+	/**
+	 * <img src="../../images/BooleanExpressions.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+
+	public ExecutionFlow createBooleanExpressions() throws IOException {
+		return loadExecutionFlowFromResource(BOOLEAN_EXPRESSIONS);
+	}
+
+	/**
+	 * <img src="../../images/BitExpressions.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
 	public ExecutionFlow createSimpleEventModel() throws IOException {
 		return loadExecutionFlowFromResource(SIMPLE_EVENT);
 	}
-	
+
 	/**
 	 * <img src="../../images/PriorityValues.png" /> <br />
 	 * 

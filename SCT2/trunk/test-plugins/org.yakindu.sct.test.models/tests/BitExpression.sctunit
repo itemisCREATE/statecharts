@@ -1,0 +1,18 @@
+testcase for BitExpressions{
+	
+	test BitExpressions {
+		assert active ( BitExpressions.main_region.StateA)
+		assert myBit1 == 5
+		assert myBit2 == 7
+		raise e1
+		cycle
+		
+		assert active (BitExpressions.main_region.StateB)
+		assert leftBitshift == 10
+		assert rightBitshift == 2
+		assert complementBitshift == -6
+		assert bitwiseAnd == 5
+		assert bitwiseOr == 7
+		assert bitwiseXor == 2	 
+	}   
+}      
