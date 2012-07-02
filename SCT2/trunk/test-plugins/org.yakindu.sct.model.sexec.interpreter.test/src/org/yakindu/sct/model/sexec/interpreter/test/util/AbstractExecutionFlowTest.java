@@ -45,22 +45,26 @@ public abstract class AbstractExecutionFlowTest {
 		interpreter.enter();
 	}
 
-	protected int getInteger(String varName){
+	protected int getInteger(String varName) {
 		ExecutionVariable variable = context().getVariable(varName);
 		return (Integer) variable.getValue();
 	}
-	protected int getBoolean(String varName){
+
+	protected boolean getBoolean(String varName) {
 		ExecutionVariable variable = context().getVariable(varName);
-		return (Integer) variable.getValue();
+		return (Boolean) variable.getValue();
 	}
-	protected int getReal(String varName){
+
+	protected double getReal(String varName) {
 		ExecutionVariable variable = context().getVariable(varName);
-		return (Integer) variable.getValue();
+		return (Double) variable.getValue();
 	}
-	protected int getString(String varName){
+
+	protected String getString(String varName) {
 		ExecutionVariable variable = context().getVariable(varName);
-		return (Integer) variable.getValue();
+		return (String) variable.getValue();
 	}
+
 	// -> Assertion methods...
 	protected void assertVarValue(String variableName, Object value) {
 		ExecutionVariable variable = context().getVariable(variableName);
@@ -69,7 +73,6 @@ public abstract class AbstractExecutionFlowTest {
 		assertEquals(value, variable.getValue());
 	}
 
-	
 	protected boolean isActive(String stateName) {
 		Set<RegularState> allActiveStates = context().getAllActiveStates();
 		for (RegularState regularState : allActiveStates) {
@@ -79,12 +82,13 @@ public abstract class AbstractExecutionFlowTest {
 		}
 		return false;
 	}
-	protected void raiseEvent(String eventName){
+
+	protected void raiseEvent(String eventName) {
 		context().raiseEvent(eventName, null);
 	}
-	protected void raiseEvent(String eventName, Object value){
+
+	protected void raiseEvent(String eventName, Object value) {
 		context().raiseEvent(eventName, value);
 	}
-
 
 }
