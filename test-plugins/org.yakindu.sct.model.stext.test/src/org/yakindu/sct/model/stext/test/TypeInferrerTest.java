@@ -721,6 +721,8 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isInteger(getType(" ~3")));
 		assertTrue(ts.isInteger(getType("3 << 2")));
 		assertTrue(ts.isInteger(getType("5 >> 2")));
+		assertTrue(ts.isInteger(getType("myInt << 4")));
+		assertTrue(ts.isInteger(getType("myInt >> 4")));
 	}
 
 	@Test
@@ -924,16 +926,16 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				EventRaisingExpression.class.getSimpleName());
 		analyzer.getType((Statement) statement);
 	}
-	
+
 	@Test
-	public void testOperationSuccess(){
+	public void testOperationSuccess() {
 		EObject statement = super.parseExpression("myInt = myOpp1()",
 				internalScope(), Expression.class.getSimpleName());
 		analyzer.getType((Statement) statement);
 	}
-	
+
 	@Test
-	public void testOperationException1(){
+	public void testOperationException1() {
 		exception.expect(TypeCheckException.class);
 		exception
 				.expectMessage("Can not assign a value of type integer to a variable of type boolean");
