@@ -66,11 +66,7 @@ public class GeneratorExecutor {
 		Resource resource = null;
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(),
 				true);
-		// if (provider != null) {
-		// resource = provider.get(file.getProject()).getResource(uri, true);
-		// } else {
 		resource = new ResourceSetImpl().getResource(uri, true);
-		// }
 		return resource;
 	}
 
