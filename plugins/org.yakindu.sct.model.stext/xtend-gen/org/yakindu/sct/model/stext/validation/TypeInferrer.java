@@ -33,6 +33,7 @@ import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
@@ -361,30 +362,35 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   }
   
   protected Type _inferType(final ElementReferenceExpression expression) {
-    Type _xblockexpression = null;
-    {
-      EObject reference = expression.getReference();
-      if ((reference instanceof VariableDefinition)) {
-        return ((VariableDefinition) reference).getType();
-      }
-      if ((reference instanceof EventDefinition)) {
-        boolean _or = false;
-        EObject _eContainer = expression.eContainer();
-        if ((_eContainer instanceof EventRaisingExpression)) {
-          _or = true;
-        } else {
-          EObject _eContainer_1 = expression.eContainer();
-          _or = ((_eContainer instanceof EventRaisingExpression) || (_eContainer_1 instanceof EventValueReferenceExpression));
-        }
-        if (_or) {
-          return ((EventDefinition) reference).getType();
-        } else {
-          return this.ts.getBoolean();
-        }
-      }
-      _xblockexpression = (null);
+    EObject _reference = expression.getReference();
+    return this.inferType(_reference, expression);
+  }
+  
+  protected Type _inferType(final EObject object, final ElementReferenceExpression expression) {
+    return null;
+  }
+  
+  protected Type _inferType(final VariableDefinition definition, final ElementReferenceExpression expression) {
+    return definition.getType();
+  }
+  
+  protected Type _inferType(final EventDefinition definition, final ElementReferenceExpression expression) {
+    boolean _or = false;
+    EObject _eContainer = expression.eContainer();
+    if ((_eContainer instanceof EventRaisingExpression)) {
+      _or = true;
+    } else {
+      EObject _eContainer_1 = expression.eContainer();
+      _or = ((_eContainer instanceof EventRaisingExpression) || (_eContainer_1 instanceof EventValueReferenceExpression));
     }
-    return _xblockexpression;
+    if (_or) {
+      return definition.getType();
+    }
+    return this.ts.getBoolean();
+  }
+  
+  protected Type _inferType(final OperationDefinition definition, final ElementReferenceExpression expression) {
+    return definition.getType();
   }
   
   protected Type _inferType(final EventValueReferenceExpression expression) {
@@ -510,6 +516,21 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(expression).toString());
+    }
+  }
+  
+  public Type inferType(final EObject definition, final ElementReferenceExpression expression) {
+    if (definition instanceof EventDefinition) {
+      return _inferType((EventDefinition)definition, expression);
+    } else if (definition instanceof OperationDefinition) {
+      return _inferType((OperationDefinition)definition, expression);
+    } else if (definition instanceof VariableDefinition) {
+      return _inferType((VariableDefinition)definition, expression);
+    } else if (definition != null) {
+      return _inferType(definition, expression);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(definition, expression).toString());
     }
   }
   

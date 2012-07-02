@@ -45,6 +45,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.UnaryOperator
 import org.yakindu.sct.model.stext.stext.HexLiteral
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.eclipse.emf.ecore.EObject
  
 /**
  * 
@@ -215,34 +217,35 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 			return null;
 		}
 	}
-	
+	 
 	def dispatch inferType(ElementReferenceExpression expression){
-		var reference  = expression.reference
-		if(reference instanceof VariableDefinition){
-			return (reference as VariableDefinition).type
-		}
-		if(reference instanceof EventDefinition){
-			if(expression.eContainer instanceof EventRaisingExpression
-				|| expression.eContainer instanceof EventValueReferenceExpression
-			)
-				return (reference as EventDefinition).type
-			else
-				return ts.^boolean
-		}
-		null
-		
+		return expression.reference.inferType(expression)
 	}
-	
+	def dispatch inferType(EObject object, ElementReferenceExpression expression) {
+		//	
+	}
+	def dispatch inferType(VariableDefinition definition,ElementReferenceExpression expression) {
+		return definition.type
+	}
+
+	def dispatch inferType(EventDefinition definition,ElementReferenceExpression expression) {
+		if(expression.eContainer instanceof EventRaisingExpression
+				|| expression.eContainer instanceof EventValueReferenceExpression)
+			return definition.type
+		return ts.^boolean
+	}
+
+	def dispatch inferType(OperationDefinition definition,ElementReferenceExpression expression) {
+		return definition.type
+	}
 	
 	def dispatch inferType(EventValueReferenceExpression expression){
 		return getType(expression.value)
 	}
 	
-	
 	def dispatch getLiteralType(HexLiteral literal){
 		return ts.integer
 	}
-	
 	
 	def dispatch getLiteralType(IntLiteral literal){
 		return ts.integer
