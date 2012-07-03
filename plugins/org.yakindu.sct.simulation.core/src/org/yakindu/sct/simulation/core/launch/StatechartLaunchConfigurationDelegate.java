@@ -34,8 +34,8 @@ public class StatechartLaunchConfigurationDelegate extends
 	public void launch(ILaunchConfiguration configuration, String mode,
 			ILaunch launch, IProgressMonitor monitor) throws CoreException {
 		String filename = configuration.getAttribute(
-				IStatechartLaunchParameters.FILE_NAME, "");
-
+				IStatechartLaunchParameters.FILE_NAME,
+				IStatechartLaunchParameters.DEFAULT_FILE_NAME);
 		IDebugTarget target = new SCTDebugTarget(launch,
 				ResourceUtil.loadStatechart(filename));
 		launch.addDebugTarget(target);
