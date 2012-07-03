@@ -38,9 +38,12 @@ public class SimpleEventTest {
 
 	@Test
 	public void testsimpleEventTest() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue("Expected A to be active",
+				statemachine.isStateActive(State.Main_region_A));
+		assertTrue(5 == 5);
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue("Expected B to be active",
+				statemachine.isStateActive(State.Main_region_B));
 	}
 }

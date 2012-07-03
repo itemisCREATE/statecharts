@@ -138,8 +138,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		if (sCIDefault.e) {
 			stateVector[0] = State.$NullState$;
 
-			react_sync0_();
-
 		} else {
 			if (sCIDefault.f) {
 				stateVector[0] = State.$NullState$;
@@ -261,14 +259,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		}
 	}
 	private void reactMain_region_B_r2_D2() {
-	}
-	private void react_sync0_() {
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_B_r1_C2;
-
-		nextStateIndex = 1;
-		stateVector[1] = State.Main_region_B_r2_D1;
-
 	}
 
 	public void runCycle() {

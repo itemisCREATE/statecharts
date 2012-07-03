@@ -164,5 +164,38 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+	statechart BooleanExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	statechart BitExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	statechart IntegerExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
 
 }
