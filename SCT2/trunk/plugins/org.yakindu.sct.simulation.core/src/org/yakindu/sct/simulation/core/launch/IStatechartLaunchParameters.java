@@ -29,5 +29,7 @@ public interface IStatechartLaunchParameters {
 
 	String IS_EVENT_DRIVEN = "eventDriven";
 	boolean DEFAULT_IS_EVENT_DRIVEN = false;
+	
+	String OPERATION_CLASS = "operationClass";
 
 }

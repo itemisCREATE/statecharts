@@ -25,8 +25,11 @@ public abstract class AbstractExecutionFacade implements IExecutionFacade {
 
 	private List<IExecutionTraceListener> _listeners;
 
+	private List<Object> _callbacks;
+
 	public AbstractExecutionFacade() {
 		_listeners = new ArrayList<IExecutionTraceListener>();
+		_callbacks = new ArrayList<Object>();
 	}
 
 	public void addTraceListener(IExecutionTraceListener listener) {
@@ -50,4 +53,22 @@ public abstract class AbstractExecutionFacade implements IExecutionFacade {
 			}
 		}
 	}
+
+	public void addCallbackObject(Object object) {
+		synchronized (_callbacks) {
+			_callbacks.add(object);
+		}
+	}
+
+	public void removeCallbackObject(Object object) {
+		synchronized (_callbacks) {
+			_callbacks.remove(object);
+		}
+	}
+
+	public List<Object> getCallbacks() {
+		return _callbacks;
+	}
+	
+	
 }

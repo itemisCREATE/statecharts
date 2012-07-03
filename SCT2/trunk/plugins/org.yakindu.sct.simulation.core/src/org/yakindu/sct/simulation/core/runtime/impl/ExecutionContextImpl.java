@@ -79,7 +79,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	public List<ExecutionEvent> getRaisedEvents() {
 		return Collections.unmodifiableList(raisedEvents);
 	}
-	
+
 	public List<ExecutionEvent> getScheduledEvents() {
 		return Collections.unmodifiableList(scheduledToRaiseEvents);
 	}
@@ -99,7 +99,9 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		if (value != null) {
 			eventCopy.setValue(value);
 		}
-		scheduledToRaiseEvents.add(eventCopy);
+		synchronized (scheduledToRaiseEvents) {
+			scheduledToRaiseEvents.add(eventCopy);
+		}
 	}
 
 	protected void raiseEventInternal(String eventName, Object value) {
@@ -118,10 +120,12 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	}
 
 	public void flush() {
-		for (ExecutionEvent event : scheduledToRaiseEvents) {
-			raiseEventInternal(event.getName(), event.getValue());
+		synchronized (scheduledToRaiseEvents) {
+			for (ExecutionEvent event : scheduledToRaiseEvents) {
+				raiseEventInternal(event.getName(), event.getValue());
+			}
+			scheduledToRaiseEvents.clear();
 		}
-		scheduledToRaiseEvents.clear();
 	}
 
 	@Override
@@ -260,9 +264,11 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 			}
 		}
 	}
+
 	public void unscheduleEvent(String eventName) {
 		synchronized (scheduledToRaiseEvents) {
-			Iterator<ExecutionEvent> iterator = scheduledToRaiseEvents.iterator();
+			Iterator<ExecutionEvent> iterator = scheduledToRaiseEvents
+					.iterator();
 			while (iterator.hasNext()) {
 				if (iterator.next().getName().equals(eventName)) {
 					iterator.remove();

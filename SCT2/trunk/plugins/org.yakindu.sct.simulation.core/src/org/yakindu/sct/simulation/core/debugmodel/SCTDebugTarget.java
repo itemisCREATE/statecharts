@@ -16,17 +16,21 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IMarkerDelta;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
+import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
 import org.yakindu.sct.model.sexec.TraceStateExited;
@@ -81,7 +85,30 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		IExecutionFacadeFactory factory = getExecutionFacadeFactory(statechart);
 		facade = factory.createExecutionFacade(statechart);
 		facade.addTraceListener(this);
+		initFacadeCallbacks(WorkspaceSynchronizer.getFile(
+				statechart.eResource()).getProject());
 		initFacadeController();
+	}
+
+	private void initFacadeCallbacks(IProject project) {
+		ClassLoader classLoader = new WorkspaceClassLoaderFactory()
+				.createClassLoader(project);
+		ILaunchConfiguration config = launch.getLaunchConfiguration();
+		try {
+			String clazz = config.getAttribute(OPERATION_CLASS, "");
+			if (clazz != null && clazz.trim().length() > 0) {
+				Class<?> loadClass = classLoader.loadClass(clazz);
+				facade.addCallbackObject(loadClass.newInstance());
+			}
+		} catch (CoreException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void initFacadeController() throws CoreException {
@@ -101,15 +128,12 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	protected IExecutionFacadeFactory getExecutionFacadeFactory(Statechart sc) {
 		Iterable<ExecutionFactoryDescriptor> executionFactoryDescriptor = ExecutionFactoryExtensions
 				.getExecutionFactoryDescriptor();
-		
-		for ( ExecutionFactoryDescriptor desc : executionFactoryDescriptor) {
+
+		for (ExecutionFactoryDescriptor desc : executionFactoryDescriptor) {
 			IExecutionFacadeFactory f = desc.createExecutableExtensionFactory();
-			if ( f.isApplicable(sc) ) return f;
+			if (f.isApplicable(sc))
+				return f;
 		}
-		// TODO: Handle more than one registered factory
-//		ExecutionFactoryDescriptor next = executionFactoryDescriptor.iterator()
-//				.next();
-//		return next.createExecutableExtensionFactory();
 		return null;
 	}
 
