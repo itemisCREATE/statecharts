@@ -22,8 +22,10 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -103,7 +105,12 @@ public class CreationWizard extends Wizard implements INewWizard {
 						PerspectiveUtil.switchToModelingPerspective(workbench
 								.getActiveWorkbenchWindow());
 					} catch (PartInitException e) {
-						e.printStackTrace();
+						DiagramActivator
+								.getDefault()
+								.getLog()
+								.log(new Status(IStatus.WARNING,
+										DiagramActivator.PLUGIN_ID,
+										"Editor can't be opened", e));
 					}
 				}
 			}
@@ -124,9 +131,19 @@ public class CreationWizard extends Wizard implements INewWizard {
 			IWorkbenchPage page = PlatformUI.getWorkbench()
 					.getActiveWorkbenchWindow().getActivePage();
 			return null != page.openEditor(new FileEditorInput(
-					(IFile) workspaceResource), StatechartDiagramEditor.ID);
+					(IFile) workspaceResource), getEditorID());
 		}
 		return false;
+	}
+
+	/**
+	 * Returns the Editor ID of the editor to open, after a new diagram was
+	 * created Override for subclasses with custom editors.
+	 * 
+	 * @return the ID of the editor.
+	 */
+	protected String getEditorID() {
+		return StatechartDiagramEditor.ID;
 	}
 
 	protected Resource createDiagram(final URI diagramURI, final URI modelURI,
