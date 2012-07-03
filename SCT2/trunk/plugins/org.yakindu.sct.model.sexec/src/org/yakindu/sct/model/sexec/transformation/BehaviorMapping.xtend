@@ -32,7 +32,6 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sexec.ExecutionSynchronization
