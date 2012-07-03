@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.ui.launch.tabs;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -31,6 +32,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ResourceListSelectionDialog;
+import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 import org.yakindu.sct.simulation.core.launch.IStatechartLaunchParameters;
 import org.yakindu.sct.simulation.ui.SimulationImages;
 
@@ -44,7 +46,6 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 	private Text modelfile;
 	private Text cyclePeriod;
 	private Text operationClass;
-	private Button btnSelect;
 	private Button btnCycle;
 	private Button btnEvent;
 
@@ -67,13 +68,11 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		Group propertyGroup = new Group(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
 		propertyGroup.setText("Operation Class:");
-		propertyGroup.setLayout(new GridLayout(2, false));
+		propertyGroup.setLayout(new GridLayout(1, false));
 		operationClass = new Text(propertyGroup, SWT.BORDER);
 		operationClass.addListener(SWT.Modify, new UpdateListener());
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(operationClass);
-		btnSelect = new Button(propertyGroup, SWT.PUSH);
-		btnSelect.setText("browse...");
-		btnSelect.addListener(SWT.Selection, new UpdateListener());
+		GridDataFactory.fillDefaults().grab(true, false)
+				.applyTo(operationClass);
 	}
 
 	private void createExecutionTypeControls(Composite parent) {
@@ -142,6 +141,8 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		try {
 			modelfile.setText(configuration.getAttribute(FILE_NAME,
 					DEFAULT_FILE_NAME));
+			operationClass.setText(configuration.getAttribute(OPERATION_CLASS,
+					DEFAULT_OPERATION_CLASS));
 			cyclePeriod.setText(String.valueOf(configuration.getAttribute(
 					CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD)));
 			btnCycle.setSelection(configuration.getAttribute(IS_CYCLE_BASED,
@@ -195,6 +196,31 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 			setErrorMessage("Cycle Period must be a number!");
 			return false;
 		}
+		String operationClass = this.operationClass.getText();
+		if (operationClass != null && operationClass.trim().length() > 0) {
+			// check if class exists
+			IProject project = ResourcesPlugin.getWorkspace().getRoot()
+					.findMember(model).getProject();
+			ClassLoader classLoader = new WorkspaceClassLoaderFactory()
+					.createClassLoader(project);
+			try {
+				Class<?> loadClass = classLoader.loadClass(operationClass);
+				loadClass.newInstance();
+			} catch (ClassNotFoundException e) {
+				setErrorMessage("Class " + operationClass
+						+ " not found in project " + project.getName() + "!");
+				return false;
+			} catch (InstantiationException e) {
+				setErrorMessage("Could not instantiate class " + operationClass
+						+ "! (No default constructor available?) ");
+				return false;
+			} catch (IllegalAccessException e) {
+				setErrorMessage("Could not access class constructor for class"
+						+ operationClass + "!");
+				return false;
+			}
+		}
+		// check for default c'tor
 		return super.isValid(launchConfig);
 	}
 
