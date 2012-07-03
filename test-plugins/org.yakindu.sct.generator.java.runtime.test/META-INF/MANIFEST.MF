@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Test
-Bundle-SymbolicName: org.yakindu.sct.generator.java.runtime.test
+Bundle-SymbolicName: org.yakindu.sct.generator.java.test
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.yakindu.sct.generator.java;bundle-version="1.0.0",
  org.junit;bundle-version="4.8.2",
