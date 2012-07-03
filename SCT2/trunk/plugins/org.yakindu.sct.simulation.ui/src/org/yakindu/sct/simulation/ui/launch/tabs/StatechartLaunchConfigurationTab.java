@@ -43,6 +43,8 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	private Text modelfile;
 	private Text cyclePeriod;
+	private Text operationClass;
+	private Button btnSelect;
 	private Button btnCycle;
 	private Button btnEvent;
 
@@ -56,8 +58,22 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	private void createFileSelectionGroup(Composite comp) {
 		createModelFileGroup(comp);
+		createOperationClassGroup(comp);
 		createExecutionTypeControls(comp);
 		createCyclePeriodGroup(comp);
+	}
+
+	private void createOperationClassGroup(Composite parent) {
+		Group propertyGroup = new Group(parent, SWT.NONE);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(propertyGroup);
+		propertyGroup.setText("Operation Class:");
+		propertyGroup.setLayout(new GridLayout(2, false));
+		operationClass = new Text(propertyGroup, SWT.BORDER);
+		operationClass.addListener(SWT.Modify, new UpdateListener());
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(operationClass);
+		btnSelect = new Button(propertyGroup, SWT.PUSH);
+		btnSelect.setText("browse...");
+		btnSelect.addListener(SWT.Selection, new UpdateListener());
 	}
 
 	private void createExecutionTypeControls(Composite parent) {
@@ -140,6 +156,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	public void performApply(ILaunchConfigurationWorkingCopy configuration) {
 		configuration.setAttribute(FILE_NAME, modelfile.getText());
+		configuration.setAttribute(OPERATION_CLASS, operationClass.getText());
 		if (isCyclePeriodValid()) {
 			configuration.setAttribute(CYCLE_PERIOD, getCyclePeriod());
 		}
