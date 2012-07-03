@@ -113,6 +113,10 @@ String toCode(BitwiseOrExpression expression) :
 String toCode(BitwiseXorExpression expression) :
   	"("+expression.leftOperand.toCode() + " ^ " + expression.rightOperand.toCode()+")";
 
+String toCode(ShiftExpression expression) :
+  	"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
+  	
+
 String toCode(NumericalAddSubtractExpression expression) :
   	"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
   	
@@ -140,14 +144,20 @@ String getOperator(AdditiveOperator operator) :
     	case AdditiveOperator::minus : " - "
     	default : ""
     };
-    
+
+String getOperator(ShiftOperator operator) :
+	switch(operator){
+		case ShiftOperator::left : " << "
+		case ShiftOperator::right : " >> "
+		default : ""
+	};
+
 String getOperator(UnaryOperator operator) :
 	switch (operator) {
 	  case (UnaryOperator::negative) : " -"
 	  case (UnaryOperator::positive) : " + "
 	  case (UnaryOperator::complement) : " ~ "
-	  default : ""
-	};
+	  default : ""	};
 
 String getOperator(MultiplicativeOperator operator) : 
     switch(operator) {
