@@ -185,7 +185,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	}
 	private void reactMain_region_B_r1_C2() {
-		if (((sCIDefault.jc && isStateActive(State.Main_region_B_r2_D2)) && sCIDefault.jd)) {
+		if (sCIDefault.jc) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -219,8 +219,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 				default :
 					break;
 			}
-
-			react_sync0_();
 
 		}
 
@@ -235,7 +233,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		}
 	}
 	private void reactMain_region_B_r2_D2() {
-		if (((sCIDefault.jd && isStateActive(State.Main_region_B_r1_C2)) && sCIDefault.jc)) {
+		if (sCIDefault.jd) {
 			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
 
@@ -270,14 +268,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 					break;
 			}
 
-			react_sync0_();
-
 		}
-	}
-	private void react_sync0_() {
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
 	}
 
 	public void runCycle() {
