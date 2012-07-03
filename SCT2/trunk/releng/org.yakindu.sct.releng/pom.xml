@@ -138,9 +138,6 @@
 							</goals>
 							<configuration>
 								<sources>
-									<source>src-gen</source>
-								</sources>
-								<sources>
 									<source>${project.build.directory}/xtend-gen</source>
 								</sources>
 							</configuration>
@@ -185,9 +182,36 @@
 						</execution>
 					</executions>
 				</plugin>
+				<plugin>
+					<groupId>org.eclipse.xtend</groupId>
+					<artifactId>xtend-maven-plugin</artifactId>
+					<version>2.3.0</version>
+					<configuration>
+						<!-- need to prefix by basedir to generate to currently built module -->
+						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
+					</configuration>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 	</build>
+
+	<pluginRepositories>
+		<!-- Fornax Workflow Runner plugin -->
+		<pluginRepository>
+			<id>fornax</id>
+			<url>http://www.fornax-platform.org/m2/repository</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
+		<pluginRepository>
+			<id>eclipse-xtend</id>
+			<url>http://build.eclipse.org/common/xtend/maven</url>
+		</pluginRepository>
+	</pluginRepositories>
 
 	<profiles>
 		<profile>
