@@ -8,25 +8,25 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java.runtime.test;
+package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine;
-import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine.State;
+import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine;
+import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine.State;
 /**
- *  Unit TestCase for AlwaysOncycle
+ *  Unit TestCase for BooleanExpressions
  */
 @SuppressWarnings("all")
-public class AlwaysOncycleTest {
+public class BooleanExpressionsTest {
 
-	private AlwaysOncycleStatemachine statemachine;
+	private BooleanExpressionsStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new AlwaysOncycleStatemachine();
+		statemachine = new BooleanExpressionsStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}
@@ -37,19 +37,17 @@ public class AlwaysOncycleTest {
 	}
 
 	@Test
-	public void testalwaysOncycleTest() {
+	public void testbooleanExpressions() {
 		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
-		while (statemachine.getValue() < 5) {
-			statemachine.runCycle();
-			assertTrue(statemachine.isStateActive(State.Main_region_StateA));
-		}
+		assertTrue(statemachine.getMyBool1() == true);
+		assertTrue(statemachine.getMyBool2() == false);
+		statemachine.raiseE1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.Main_region_StateB));
-		while (statemachine.getValue() < 5) {
-			statemachine.runCycle();
-			assertTrue(statemachine.isStateActive(State.Main_region_StateB));
-		}
-		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
+		assertTrue(statemachine.getAnd() == false);
+		assertTrue(statemachine.getOr() == true);
+		assertTrue(statemachine.getNot() == false);
+		assertTrue(statemachine.getEqual() == false);
+		assertTrue(statemachine.getNotequal() == true);
 	}
 }

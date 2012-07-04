@@ -8,25 +8,25 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java.runtime.test;
+package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine;
-import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine.State;
+import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine;
+import org.yakindu.scr.alwaysoncycle.AlwaysOncycleStatemachine.State;
 /**
- *  Unit TestCase for BitExpressions
+ *  Unit TestCase for AlwaysOncycle
  */
 @SuppressWarnings("all")
-public class BitExpressionsTest {
+public class AlwaysOncycleTest {
 
-	private BitExpressionsStatemachine statemachine;
+	private AlwaysOncycleStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new BitExpressionsStatemachine();
+		statemachine = new AlwaysOncycleStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}
@@ -37,18 +37,19 @@ public class BitExpressionsTest {
 	}
 
 	@Test
-	public void testBitExpressions() {
+	public void testalwaysOncycleTest() {
 		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
-		assertTrue(statemachine.getMyBit1() == 5);
-		assertTrue(statemachine.getMyBit2() == 7);
-		statemachine.raiseE1();
+		while (statemachine.getValue() < 5) {
+			statemachine.runCycle();
+			assertTrue(statemachine.isStateActive(State.Main_region_StateA));
+		}
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.Main_region_StateB));
-		assertTrue(statemachine.getLeftBitshift() == 10);
-		assertTrue(statemachine.getRightBitshift() == 2);
-		assertTrue(statemachine.getComplementBitshift() == -6);
-		assertTrue(statemachine.getBitwiseAnd() == 5);
-		assertTrue(statemachine.getBitwiseOr() == 7);
-		assertTrue(statemachine.getBitwiseXor() == 2);
+		while (statemachine.getValue() < 5) {
+			statemachine.runCycle();
+			assertTrue(statemachine.isStateActive(State.Main_region_StateB));
+		}
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
 	}
 }

@@ -8,25 +8,25 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java.runtime.test;
+package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.stateisactive.StateIsActiveStatemachine;
-import org.yakindu.scr.stateisactive.StateIsActiveStatemachine.State;
+import org.yakindu.scr.simpleevent.SimpleEventStatemachine;
+import org.yakindu.scr.simpleevent.SimpleEventStatemachine.State;
 /**
- *  Unit TestCase for StateIsActive
+ *  Unit TestCase for SimpleEvent
  */
 @SuppressWarnings("all")
-public class StateIsActiveTest {
+public class SimpleEventTest {
 
-	private StateIsActiveStatemachine statemachine;
+	private SimpleEventStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new StateIsActiveStatemachine();
+		statemachine = new SimpleEventStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}
@@ -37,13 +37,13 @@ public class StateIsActiveTest {
 	}
 
 	@Test
-	public void teststateIsActive() {
-		assertTrue(statemachine.isStateActive(State.R1_R1A));
-		assertTrue(statemachine.isStateActive(State.R2_R2A));
+	public void testsimpleEventTest() {
+		assertTrue("Expected A to be active",
+				statemachine.isStateActive(State.Main_region_A));
+		assertTrue(5 == 5);
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.R1_R1B));
-		assertTrue(statemachine.isStateActive(State.R2_R2B));
+		assertTrue("Expected B to be active",
+				statemachine.isStateActive(State.Main_region_B));
 	}
 }

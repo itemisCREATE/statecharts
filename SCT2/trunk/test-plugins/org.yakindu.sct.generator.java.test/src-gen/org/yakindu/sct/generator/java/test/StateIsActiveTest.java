@@ -8,25 +8,25 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java.runtime.test;
+package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.valuedevents.ValuedEventsStatemachine;
-import org.yakindu.scr.valuedevents.ValuedEventsStatemachine.State;
+import org.yakindu.scr.stateisactive.StateIsActiveStatemachine;
+import org.yakindu.scr.stateisactive.StateIsActiveStatemachine.State;
 /**
- *  Unit TestCase for ValuedEvents
+ *  Unit TestCase for StateIsActive
  */
 @SuppressWarnings("all")
-public class ValuedEventsTest {
+public class StateIsActiveTest {
 
-	private ValuedEventsStatemachine statemachine;
+	private StateIsActiveStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new ValuedEventsStatemachine();
+		statemachine = new StateIsActiveStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}
@@ -37,10 +37,13 @@ public class ValuedEventsTest {
 	}
 
 	@Test
-	public void testvaluedEventTest() {
+	public void teststateIsActive() {
+		assertTrue(statemachine.isStateActive(State.R1_R1A));
+		assertTrue(statemachine.isStateActive(State.R2_R2A));
+		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
-		assertTrue(statemachine.isStateActive(State._region1_C));
-		assertTrue(statemachine.getMyVar() == 42);
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.R1_R1B));
+		assertTrue(statemachine.isStateActive(State.R2_R2B));
 	}
 }
