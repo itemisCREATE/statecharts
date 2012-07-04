@@ -37,6 +37,8 @@ public class TestModels {
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/";
 
 	public static final String BIT_EXPRESSIONS = "BitExpressions.sct";
+	public static final String REAL_EXPRESSIONS = "RealExpressions.sct";
+	public static final String STRING_EXPRESSIONS = "StringExpressions.sct";
 	public static final String INTEGER_EXPRESSIONS = "IntegerExpressions.sct";
 	public static final String BOOLEAN_EXPRESSIONS = "BooleanExpressions.sct";
 	public static final String ALWAYS_ONCYCLE = "AlwaysOncycle.sct";
@@ -66,6 +68,25 @@ public class TestModels {
 	 */
 	public ExecutionFlow createBitExpressions() throws IOException {
 		return loadExecutionFlowFromResource(BIT_EXPRESSIONS);
+	}
+
+	/**
+	 * <img src="../../images/RealExpressions.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createRealExpressions() throws IOException {
+		return loadExecutionFlowFromResource(REAL_EXPRESSIONS);
+	}
+	/**
+	 * <img src="../../images/StringExpressions.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createStringExpressions() throws IOException {
+		return loadExecutionFlowFromResource(STRING_EXPRESSIONS);
 	}
 
 	/**
