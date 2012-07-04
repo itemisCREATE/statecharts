@@ -1,7 +1,7 @@
 GeneratorModel for yakindu::java {
 	statechart AlwaysOncycle {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -12,7 +12,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart Choice {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -23,7 +23,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart DeepHistory {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -34,7 +34,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart FeatureCalls {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -45,7 +45,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart Guard {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -56,7 +56,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart PriorityValues {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -67,7 +67,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart ShallowHistory {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -78,7 +78,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart SimpleEvent {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -89,7 +89,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart SimpleHierachy {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -100,7 +100,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart StateIsActive {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -111,7 +111,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart StatechartLocalReactions {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -122,7 +122,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart SyncFork {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -133,7 +133,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart SyncJoin {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -144,7 +144,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart TimeTrigger {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -155,7 +155,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart ValuedEvents {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -166,7 +166,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart BooleanExpressions {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -177,7 +177,7 @@ GeneratorModel for yakindu::java {
 	}
 	statechart BitExpressions {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
@@ -188,7 +188,29 @@ GeneratorModel for yakindu::java {
 	}
 	statechart IntegerExpressions {
 		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.runtime.test"
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	statechart RealExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	statechart StringExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
 		}
 
