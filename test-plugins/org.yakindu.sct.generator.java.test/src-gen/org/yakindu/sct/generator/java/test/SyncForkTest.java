@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java.runtime.test;
+package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
 import org.junit.Before;
@@ -39,5 +39,23 @@ public class SyncForkTest {
 	@Test
 	public void testsyncForkTest() {
 		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		statemachine.raiseF();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.Main_region_B_r1_C1));
+		assertTrue(statemachine.isStateActive(State.Main_region_B_r2_D1));
+		statemachine.raiseF();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.Main_region_B_r1_C2));
+		assertTrue(statemachine.isStateActive(State.Main_region_B_r2_D2));
+		statemachine.raiseE();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		statemachine.raiseF();
+		statemachine.runCycle();
+		assertTrue(!statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.Main_region_B_r1_C2));
+		assertTrue(statemachine.isStateActive(State.Main_region_B_r2_D2));
 	}
 }

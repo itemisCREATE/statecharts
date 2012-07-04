@@ -8,25 +8,25 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java.runtime.test;
+package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.guard.GuardStatemachine;
-import org.yakindu.scr.guard.GuardStatemachine.State;
+import org.yakindu.scr.valuedevents.ValuedEventsStatemachine;
+import org.yakindu.scr.valuedevents.ValuedEventsStatemachine.State;
 /**
- *  Unit TestCase for Guard
+ *  Unit TestCase for ValuedEvents
  */
 @SuppressWarnings("all")
-public class GuardTest {
+public class ValuedEventsTest {
 
-	private GuardStatemachine statemachine;
+	private ValuedEventsStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new GuardStatemachine();
+		statemachine = new ValuedEventsStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}
@@ -37,7 +37,10 @@ public class GuardTest {
 	}
 
 	@Test
-	public void testguardTest() {
+	public void testvaluedEventTest() {
+		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State._region1_C));
+		assertTrue(statemachine.getMyVar() == 42);
 	}
 }

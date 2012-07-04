@@ -8,25 +8,25 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java.runtime.test;
+package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine;
-import org.yakindu.scr.booleanexpressions.BooleanExpressionsStatemachine.State;
+import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine;
+import org.yakindu.scr.bitexpressions.BitExpressionsStatemachine.State;
 /**
- *  Unit TestCase for BooleanExpressions
+ *  Unit TestCase for BitExpressions
  */
 @SuppressWarnings("all")
-public class BooleanExpressionsTest {
+public class BitExpressionsTest {
 
-	private BooleanExpressionsStatemachine statemachine;
+	private BitExpressionsStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new BooleanExpressionsStatemachine();
+		statemachine = new BitExpressionsStatemachine();
 		statemachine.init();
 		statemachine.enter();
 	}
@@ -37,17 +37,18 @@ public class BooleanExpressionsTest {
 	}
 
 	@Test
-	public void testbooleanExpressions() {
+	public void testBitExpressions() {
 		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
-		assertTrue(statemachine.getMyBool1() == true);
-		assertTrue(statemachine.getMyBool2() == false);
+		assertTrue(statemachine.getMyBit1() == 5);
+		assertTrue(statemachine.getMyBit2() == 7);
 		statemachine.raiseE1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.Main_region_StateB));
-		assertTrue(statemachine.getAnd() == false);
-		assertTrue(statemachine.getOr() == true);
-		assertTrue(statemachine.getNot() == false);
-		assertTrue(statemachine.getEqual() == false);
-		assertTrue(statemachine.getNotequal() == true);
+		assertTrue(statemachine.getLeftBitshift() == 10);
+		assertTrue(statemachine.getRightBitshift() == 2);
+		assertTrue(statemachine.getComplementBitshift() == -6);
+		assertTrue(statemachine.getBitwiseAnd() == 5);
+		assertTrue(statemachine.getBitwiseOr() == 7);
+		assertTrue(statemachine.getBitwiseXor() == 2);
 	}
 }
