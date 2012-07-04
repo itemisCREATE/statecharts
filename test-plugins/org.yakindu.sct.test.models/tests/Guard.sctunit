@@ -1,6 +1,25 @@
 testcase for Guard {
 	test guardTest {
 		assert active (Guard.main_region.A)
-	
+		raise Event1
+		cycle
+		
+		assert active (Guard.main_region.A)
+		raise Event2 
+		cycle
+		
+		assert active (Guard.main_region.B)
+		raise Return
+		cycle
+		
+		assert active (Guard.main_region.A)
+		raise Event1 
+		cycle
+		
+		assert active (Guard.main_region.B)
+		raise Return
+		cycle
+		 
+		assert active (Guard.main_region.A)  
 	}
-}
+}  

@@ -1,6 +1,28 @@
 testcase for SyncFork{
 	test syncForkTest{
 		assert active (SyncFork.main_region.A)
+		raise f
+		cycle
 		
-	}
-}
+		assert active (SyncFork.main_region.B)
+		assert active (SyncFork.main_region.B.r1.C1)
+		assert active (SyncFork.main_region.B.r2.D1)
+		
+		raise f 
+		cycle
+		assert active (SyncFork.main_region.B)
+		assert active (SyncFork.main_region.B.r1.C2	)	
+		assert active (SyncFork.main_region.B.r2.D2)
+		
+		raise e
+		cycle
+		assert active (SyncFork.main_region.A)
+		
+		raise f
+		cycle
+		assert !active (SyncFork.main_region.B)
+		assert active (SyncFork.main_region.B.r1.C2)
+		assert active (SyncFork.main_region.B.r2.D2)
+				
+	} 
+}   

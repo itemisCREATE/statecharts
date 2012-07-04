@@ -1,8 +1,11 @@
 testcase for SimpleEvent {
 	test simpleEventTest {
-		assert active (SimpleEvent.main_region.A)
+		assert active (SimpleEvent.main_region.A) "Expected A to be active"
+		assert 5 == 5
 		raise Event1
 		cycle
-		assert active (SimpleEvent.main_region.B)
-	}
-}
+		assert active (SimpleEvent.main_region.B) "Expected B to be active"
+		      
+	}        
+}  
+                
