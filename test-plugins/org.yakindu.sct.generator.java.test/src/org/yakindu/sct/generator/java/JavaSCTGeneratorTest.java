@@ -56,16 +56,16 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	private TestModels models;
 
 	@Test
-	public void testAlwaysOnCycleModel() throws Exception {
-		Statechart statechart = models
-				.loadStatechartFromResource(ALWAYS_ONCYCLE);
+	public void testChoiceModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(CHOICE);
 		failOnError(generateAndCompile(statechart));
 
 	}
 
 	@Test
-	public void testChoiceModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(CHOICE);
+	public void testAlwaysOnCycleModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(ALWAYS_ONCYCLE);
 		failOnError(generateAndCompile(statechart));
 
 	}
