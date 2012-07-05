@@ -58,7 +58,7 @@ public abstract class AbstractJavaGeneratorTest {
 					.getProjects();
 			throw new IllegalStateException("Target Project "
 					+ targetProject.getName()
-					+ " does not exist! Existing projects are " + projects);
+					+ " does not exist! Existing projects are " + projects[0].getName());
 		}
 		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
 				new NullProgressMonitor());
