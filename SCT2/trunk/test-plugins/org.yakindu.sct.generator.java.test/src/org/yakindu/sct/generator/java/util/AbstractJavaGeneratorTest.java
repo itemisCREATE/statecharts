@@ -14,6 +14,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaModelMarker;
 import org.yakindu.sct.generator.core.util.GeneratorUtils;
@@ -44,9 +45,7 @@ public abstract class AbstractJavaGeneratorTest {
 	@Inject
 	protected JavaSCTGenerator generator;
 
-
-	public IMarker[] generateAndCompile(
-			Statechart statechart) throws Exception {
+	public IMarker[] generateAndCompile(Statechart statechart) throws Exception {
 		GeneratorEntry entry = createGeneratorEntry(statechart.getName(),
 				SRC_GEN);
 		entry.setElementRef(statechart);
@@ -54,10 +53,18 @@ public abstract class AbstractJavaGeneratorTest {
 		targetProject.delete(true, new NullProgressMonitor());
 		generator.generate(entry);
 		targetProject = GeneratorUtils.getTargetProject(entry);
+		if (!targetProject.exists()) {
+			IProject[] projects = ResourcesPlugin.getWorkspace().getRoot()
+					.getProjects();
+			throw new IllegalStateException("Target Project "
+					+ targetProject.getName()
+					+ " does not exist! Existing projects are " + projects);
+		}
 		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
 				new NullProgressMonitor());
-		IMarker[] markers = targetProject.findMarkers(IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER,
-				true, IResource.DEPTH_INFINITE);
+		IMarker[] markers = targetProject.findMarkers(
+				IJavaModelMarker.JAVA_MODEL_PROBLEM_MARKER, true,
+				IResource.DEPTH_INFINITE);
 		return markers;
 	}
 
