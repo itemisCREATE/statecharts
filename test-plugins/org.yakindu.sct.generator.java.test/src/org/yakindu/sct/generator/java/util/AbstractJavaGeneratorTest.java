@@ -54,11 +54,9 @@ public abstract class AbstractJavaGeneratorTest {
 		generator.generate(entry);
 		targetProject = GeneratorUtils.getTargetProject(entry);
 		if (!targetProject.exists()) {
-			IProject[] projects = ResourcesPlugin.getWorkspace().getRoot()
-					.getProjects();
 			throw new IllegalStateException("Target Project "
 					+ targetProject.getName()
-					+ " does not exist! Existing projects are " + projects[0].getName());
+					+ " does not exist!");
 		}
 		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
 				new NullProgressMonitor());
