@@ -31,28 +31,24 @@ private final class «getInterfaceImplName()» implements «getInterfaceName()» {
 		
 		private boolean «event.getEventIdentifier()»;
 		
-		«IF event.direction == Direction::OUT-»
-			private boolean «event.getOutEventIdentifier()»;
-		«ENDIF-»
-		
 		«IF !event.type.isVoid()-»
 			private «event.type.getJavaType()» «event.getEventValueIdentifier()»;
 		«ENDIF-»
 		
 		«IF event.direction == Direction::IN-»
 			«IF !event.type.isVoid()-»
-				public void raise«event.getEventName()»(«event.type.getJavaType()» value) {
+				public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
 					«event.getEventIdentifier()» = true;
 					«event.getEventValueIdentifier()» = value;
 				}
 				
-				private «event.type.getJavaType()» get«event.getEventName()»Value() {
+				private «event.type.getJavaType()» get«event.name.toFirstUpper()»Value() {
 					«event.getIllegalAccessValidation()»
 					return «event.getEventValueIdentifier()»;
 				}
 				
 			«ELSE-»
-				public void raise«event.getEventName()»() {
+				public void raise«event.name.toFirstUpper()»() {
 					«event.getEventIdentifier()» = true;
 				}
 				
@@ -61,33 +57,31 @@ private final class «getInterfaceImplName()» implements «getInterfaceName()» {
 		
 		«IF event.direction == Direction::OUT-»
 			
-			public boolean isRaised«event.getEventName()»() {
-				return «event.getOutEventIdentifier()»;
+			public boolean isRaised«event.name.toFirstUpper()»() {
+				return «event.getEventIdentifier()»;
 			}
 			
 			«IF !event.type.isVoid()-»
-				private void raise«event.getEventName()»(«event.type.getJavaType()» value) {
-					«event.getOutEventIdentifier()» = true;
+				private void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value) {
 					«event.getEventIdentifier()» = true;
 					«event.getEventValueIdentifier()» = value;
 					«IF createInterfaceObserverSupport(entry)-»
 					for («getInterfaceListenerName()» listener : listeners) {
-						listener.on«event.getEventName()»Raised(value);
+						listener.on«event.name.toFirstUpper()»Raised(value);
 					}
 					«ENDIF-»
 				}
 				
-				public «event.type.getJavaType()» get«event.getEventName()»Value() {
+				public «event.type.getJavaType()» get«event.name.toFirstUpper()»Value() {
 					«event.getIllegalAccessValidation()»
 					return «event.getEventValueIdentifier()»;
 				}
 			«ELSE-»
-				private void raise«event.getEventName()»() {
-					«event.getOutEventIdentifier()» = true;
+				private void raise«event.name.toFirstUpper()»() {
 					«event.getEventIdentifier()» = true;
 					«IF createInterfaceObserverSupport(entry)-»
 						for («getInterfaceListenerName()» listener : listeners) {
-							listener.on«event.getEventName()»Raised();
+							listener.on«event.name.toFirstUpper()»Raised();
 						}
 					«ENDIF-»
 				}
@@ -96,7 +90,7 @@ private final class «getInterfaceImplName()» implements «getInterfaceName()» {
 		«REM»
 		«IF event.direction == Direction::LOCAL-»
 			«IF !event.type.isVoid()-»
-				private «event.type.getJavaType()» get«event.getEventName()»Value() {
+				private «event.type.getJavaType()» get«event.name.toFirstUpper()»Value() {
 					«event.getIllegalAccessValidation()»
 					return «event.getEventValueIdentifier()»;
 				}
@@ -124,7 +118,9 @@ private final class «getInterfaceImplName()» implements «getInterfaceName()» {
 	«IF hasEvents()-»
 		public void clearEvents() {
 		«FOREACH declarations.typeSelect(EventDefinition) AS event-»
+			«IF event.direction != Direction::OUT-»
 			«event.getEventIdentifier()» = false;
+			«ENDIF-»
 		«ENDFOREACH-»
 		}
 		
@@ -133,7 +129,7 @@ private final class «getInterfaceImplName()» implements «getInterfaceName()» {
 		public void clearOutEvents() {
 		«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 			«IF event.direction == Direction::OUT-»
-				«event.getOutEventIdentifier()» = false;
+				«event.getEventIdentifier()» = false;
 			«ENDIF-»
 		«ENDFOREACH-»
 		}

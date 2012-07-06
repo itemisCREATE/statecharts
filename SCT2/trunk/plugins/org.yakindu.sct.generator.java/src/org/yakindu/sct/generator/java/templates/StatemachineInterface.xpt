@@ -38,15 +38,15 @@ public interface «getStatemachineInterfaceName()» extends «getStatemachineInterf
 		«FOREACH interface.declarations.typeSelect(EventDefinition) AS event-»
 		«IF  event.direction ==  Direction::IN-»
 			«IF !event.type.isVoid()-»
-				public void raise«event.getEventName()»(«event.type.getJavaType()» value);
+				public void raise«event.name.toFirstUpper()»(«event.type.getJavaType()» value);
 			«ELSE»
-				public void raise«event.getEventName()»();
+				public void raise«event.name.toFirstUpper()»();
 			«ENDIF-»
 		«ELSEIF event.direction ==  Direction::OUT-»
-			public boolean isRaised«event.getEventName()»();
+			public boolean isRaised«event.name.toFirstUpper()»();
 		
 			«IF !event.type.isVoid()-»
-				public «event.type.getJavaType()» get«event.getEventName()»Value();
+				public «event.type.getJavaType()» get«event.name.toFirstUpper()»Value();
 			«ENDIF-»	
 		«ENDIF-»
 		«ENDFOREACH-»
@@ -68,9 +68,9 @@ public interface «getStatemachineInterfaceName()» extends «getStatemachineInterf
 			«FOREACH interface.declarations.typeSelect(EventDefinition) AS event-»
 			«IF  event.direction ==  Direction::OUT-»
 				«IF !event.type.isVoid()-»
-				public void on«event.getEventName()»Raised(«event.type.getJavaType()» value);
+				public void on«event.name.toFirstUpper()»Raised(«event.type.getJavaType()» value);
 				«ELSE»
-				public void on«event.getEventName()»Raised();
+				public void on«event.name.toFirstUpper()»Raised();
 				«ENDIF-»	
 			«ENDIF-»
 			«ENDFOREACH-»
