@@ -126,6 +126,8 @@ getTimerService().resetTimer(«timeEvent.getEventIdentifier()»);
 		«LET statement.toCode() AS statement-»
 		«statement.subString(1,statement.length-1)»;
 		«ENDLET-»
+	«REM»«ELSEIF  ElementReferenceExpression.isInstance(statement)-»
+		«ENDREM»
 	«ELSE-»
 		«statement.toCode()»;
 	«ENDIF-»
