@@ -1,5 +1,8 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -8,15 +11,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
@@ -95,8 +94,8 @@ public class BehaviorMapping {
     final Sequence seq = _factory.createSequence();
     seq.setName("entryAction");
     String _name = statechart.getName();
-    String _plus = ObjectExtensions.operator_plus("Entry action for statechart \'", _name);
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, "\'.");
+    String _plus = ("Entry action for statechart \'" + _name);
+    String _plus_1 = (_plus + "\'.");
     seq.setComment(_plus_1);
     List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(statechart);
     for (final TimeEventSpec tes : _timeEventSpecs) {
@@ -113,7 +112,7 @@ public class BehaviorMapping {
         public Sequence apply(final LocalReaction lr) {
           Sequence _xifexpression = null;
           Effect _effect = lr.getEffect();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_effect, null);
+          boolean _notEquals = (!Objects.equal(_effect, null));
           if (_notEquals) {
             Effect _effect_1 = lr.getEffect();
             Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
@@ -127,7 +126,7 @@ public class BehaviorMapping {
     List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_entryReactions, _function);
     final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
         public void apply(final Sequence e) {
-          boolean _notEquals = ObjectExtensions.operator_notEquals(e, null);
+          boolean _notEquals = (!Objects.equal(e, null));
           if (_notEquals) {
             EList<Step> _steps = seq.getSteps();
             _steps.add(e);
@@ -137,7 +136,7 @@ public class BehaviorMapping {
     IterableExtensions.<Sequence>forEach(_map, _function_1);
     r.setEntryAction(seq);
     List<RegularState> _allRegularStates = this.sc.allRegularStates(statechart);
-    final Iterable<State> allStates = IterableExtensions.<State>filter(_allRegularStates, State.class);
+    final Iterable<State> allStates = Iterables.<State>filter(_allRegularStates, State.class);
     final Procedure1<State> _function_2 = new Procedure1<State>() {
         public void apply(final State s) {
           ExecutionState _create = BehaviorMapping.this.factory.create(s);
@@ -160,8 +159,8 @@ public class BehaviorMapping {
       final Sequence seq = _factory.createSequence();
       seq.setName("entryAction");
       String _name = state.getName();
-      String _plus = ObjectExtensions.operator_plus("Entry action for state \'", _name);
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, "\'.");
+      String _plus = ("Entry action for state \'" + _name);
+      String _plus_1 = (_plus + "\'.");
       seq.setComment(_plus_1);
       List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(state);
       for (final TimeEventSpec tes : _timeEventSpecs) {
@@ -178,7 +177,7 @@ public class BehaviorMapping {
           public Sequence apply(final LocalReaction lr) {
             Sequence _xifexpression = null;
             Effect _effect = lr.getEffect();
-            boolean _notEquals = ObjectExtensions.operator_notEquals(_effect, null);
+            boolean _notEquals = (!Objects.equal(_effect, null));
             if (_notEquals) {
               Effect _effect_1 = lr.getEffect();
               Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
@@ -192,7 +191,7 @@ public class BehaviorMapping {
       List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_entryReactions, _function);
       final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
           public void apply(final Sequence e) {
-            boolean _notEquals = ObjectExtensions.operator_notEquals(e, null);
+            boolean _notEquals = (!Objects.equal(e, null));
             if (_notEquals) {
               EList<Step> _steps = seq.getSteps();
               _steps.add(e);
@@ -203,7 +202,7 @@ public class BehaviorMapping {
       Sequence _xifexpression = null;
       EList<Step> _steps = seq.getSteps();
       int _size = _steps.size();
-      boolean _greaterThan = IntegerExtensions.operator_greaterThan(_size, 0);
+      boolean _greaterThan = (_size > 0);
       if (_greaterThan) {
         _xifexpression = seq;
       } else {
@@ -271,8 +270,8 @@ public class BehaviorMapping {
     final Sequence seq = _factory.createSequence();
     seq.setName("exitAction");
     String _name = statechart.getName();
-    String _plus = ObjectExtensions.operator_plus("Exit action for state \'", _name);
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, "\'.");
+    String _plus = ("Exit action for state \'" + _name);
+    String _plus_1 = (_plus + "\'.");
     seq.setComment(_plus_1);
     List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(statechart);
     for (final TimeEventSpec tes : _timeEventSpecs) {
@@ -288,7 +287,7 @@ public class BehaviorMapping {
         public Sequence apply(final LocalReaction lr) {
           Sequence _xifexpression = null;
           Effect _effect = lr.getEffect();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_effect, null);
+          boolean _notEquals = (!Objects.equal(_effect, null));
           if (_notEquals) {
             Effect _effect_1 = lr.getEffect();
             Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
@@ -302,7 +301,7 @@ public class BehaviorMapping {
     List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_exitReactions, _function);
     final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
         public void apply(final Sequence e) {
-          boolean _notEquals = ObjectExtensions.operator_notEquals(e, null);
+          boolean _notEquals = (!Objects.equal(e, null));
           if (_notEquals) {
             EList<Step> _steps = seq.getSteps();
             _steps.add(e);
@@ -312,7 +311,7 @@ public class BehaviorMapping {
     IterableExtensions.<Sequence>forEach(_map, _function_1);
     r.setExitAction(seq);
     List<RegularState> _allRegularStates = this.sc.allRegularStates(statechart);
-    final Iterable<State> allStates = IterableExtensions.<State>filter(_allRegularStates, State.class);
+    final Iterable<State> allStates = Iterables.<State>filter(_allRegularStates, State.class);
     final Procedure1<State> _function_2 = new Procedure1<State>() {
         public void apply(final State s) {
           ExecutionState _create = BehaviorMapping.this.factory.create(s);
@@ -335,8 +334,8 @@ public class BehaviorMapping {
       final Sequence seq = _factory.createSequence();
       seq.setName("exitAction");
       String _name = state.getName();
-      String _plus = ObjectExtensions.operator_plus("Exit action for state \'", _name);
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, "\'.");
+      String _plus = ("Exit action for state \'" + _name);
+      String _plus_1 = (_plus + "\'.");
       seq.setComment(_plus_1);
       List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(state);
       for (final TimeEventSpec tes : _timeEventSpecs) {
@@ -352,7 +351,7 @@ public class BehaviorMapping {
           public Sequence apply(final LocalReaction lr) {
             Sequence _xifexpression = null;
             Effect _effect = lr.getEffect();
-            boolean _notEquals = ObjectExtensions.operator_notEquals(_effect, null);
+            boolean _notEquals = (!Objects.equal(_effect, null));
             if (_notEquals) {
               Effect _effect_1 = lr.getEffect();
               Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
@@ -366,7 +365,7 @@ public class BehaviorMapping {
       List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_exitReactions, _function);
       final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
           public void apply(final Sequence e) {
-            boolean _notEquals = ObjectExtensions.operator_notEquals(e, null);
+            boolean _notEquals = (!Objects.equal(e, null));
             if (_notEquals) {
               EList<Step> _steps = seq.getSteps();
               _steps.add(e);
@@ -377,7 +376,7 @@ public class BehaviorMapping {
       Sequence _xifexpression = null;
       EList<Step> _steps = seq.getSteps();
       int _size = _steps.size();
-      boolean _greaterThan = IntegerExtensions.operator_greaterThan(_size, 0);
+      boolean _greaterThan = (_size > 0);
       if (_greaterThan) {
         _xifexpression = seq;
       } else {
@@ -395,7 +394,7 @@ public class BehaviorMapping {
   protected Sequence _mapEffect(final ReactionEffect effect) {
     EList<Expression> _actions = effect.getActions();
     boolean _isEmpty = _actions.isEmpty();
-    boolean _not = BooleanExtensions.operator_not(_isEmpty);
+    boolean _not = (!_isEmpty);
     if (_not) {
       SexecFactory _factory = this.sexec.factory();
       final Sequence sequence = _factory.createSequence();
@@ -429,7 +428,7 @@ public class BehaviorMapping {
   
   public ExecutionFlow mapTransitions(final Statechart statechart, final ExecutionFlow r) {
     TreeIterator<EObject> content = statechart.eAllContents();
-    final Iterator<State> allStates = IteratorExtensions.<State>filter(content, State.class);
+    final Iterator<State> allStates = Iterators.<State>filter(content, State.class);
     final Procedure1<State> _function = new Procedure1<State>() {
         public void apply(final State s) {
           BehaviorMapping.this.mapStateTransition(s);
@@ -463,7 +462,7 @@ public class BehaviorMapping {
   protected Reaction _mapTransition(final Transition t, final Vertex source, final Vertex target) {
     final Reaction r = this.factory.create(t);
     Trigger _trigger = t.getTrigger();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_trigger, null);
+    boolean _notEquals = (!Objects.equal(_trigger, null));
     if (_notEquals) {
       Trigger _trigger_1 = t.getTrigger();
       Check _mapToCheck = this.mapToCheck(_trigger_1);
@@ -489,7 +488,7 @@ public class BehaviorMapping {
   protected Reaction _mapTransition(final Transition t, final State source, final Synchronization target) {
     final Reaction r = this.factory.create(t);
     Trigger _trigger = t.getTrigger();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_trigger, null);
+    boolean _notEquals = (!Objects.equal(_trigger, null));
     if (_notEquals) {
       Trigger _trigger_1 = t.getTrigger();
       Check _mapToCheck = this.mapToCheck(_trigger_1);
@@ -501,7 +500,7 @@ public class BehaviorMapping {
       Check _check = r.getCheck();
       ExecutionSynchronization _create = this.factory.create(target);
       String _name = _create.getName();
-      String _plus = ObjectExtensions.operator_plus(_name, "join_check");
+      String _plus = (_name + "join_check");
       _check.setName(_plus);
     }
     Check _check_1 = r.getCheck();
@@ -509,7 +508,7 @@ public class BehaviorMapping {
     EList<Transition> _incomingTransitions = target.getIncomingTransitions();
     final Function1<Transition,Boolean> _function = new Function1<Transition,Boolean>() {
         public Boolean apply(final Transition trans) {
-          boolean _notEquals = ObjectExtensions.operator_notEquals(trans, t);
+          boolean _notEquals = (!Objects.equal(trans, t));
           return Boolean.valueOf(_notEquals);
         }
       };
@@ -522,7 +521,7 @@ public class BehaviorMapping {
         Statement _conjunct = this.conjunct(condition, _active);
         condition = _conjunct;
         Trigger _trigger_2 = trans.getTrigger();
-        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_trigger_2, null);
+        boolean _notEquals_1 = (!Objects.equal(_trigger_2, null));
         if (_notEquals_1) {
           Trigger _trigger_3 = trans.getTrigger();
           Statement _buildCondition = this.buildCondition(_trigger_3);
@@ -541,19 +540,19 @@ public class BehaviorMapping {
   public Statement conjunct(final Statement c1, final Statement c2) {
     Statement _xifexpression = null;
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(c1, null);
+    boolean _notEquals = (!Objects.equal(c1, null));
     if (!_notEquals) {
       _and = false;
     } else {
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(c2, null);
-      _and = BooleanExtensions.operator_and(_notEquals, _notEquals_1);
+      boolean _notEquals_1 = (!Objects.equal(c2, null));
+      _and = (_notEquals && _notEquals_1);
     }
     if (_and) {
       Expression _and_1 = this.stext.and(((Expression) c1), ((Expression) c2));
       _xifexpression = _and_1;
     } else {
       Statement _xifexpression_1 = null;
-      boolean _notEquals_2 = ObjectExtensions.operator_notEquals(c1, null);
+      boolean _notEquals_2 = (!Objects.equal(c1, null));
       if (_notEquals_2) {
         _xifexpression_1 = c1;
       } else {
@@ -578,7 +577,7 @@ public class BehaviorMapping {
   public ExecutionFlow mapLocalReactions(final Statechart statechart, final ExecutionFlow r) {
     EList<Reaction> _reactions = r.getReactions();
     EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = statechart.getLocalReactions();
-    Iterable<LocalReaction> _filter = IterableExtensions.<LocalReaction>filter(_localReactions, LocalReaction.class);
+    Iterable<LocalReaction> _filter = Iterables.<LocalReaction>filter(_localReactions, LocalReaction.class);
     final Function1<LocalReaction,Boolean> _function = new Function1<LocalReaction,Boolean>() {
         public Boolean apply(final LocalReaction lr) {
           boolean _or = false;
@@ -598,26 +597,25 @@ public class BehaviorMapping {
                   if ((t instanceof RegularEventSpec)) {
                     _or_2 = true;
                   } else {
-                    _or_2 = BooleanExtensions.operator_or(
-                      (t instanceof RegularEventSpec), (t instanceof TimeEventSpec));
+                    _or_2 = ((t instanceof RegularEventSpec) || (t instanceof TimeEventSpec));
                   }
                   if (_or_2) {
                     _or_1 = true;
                   } else {
-                    _or_1 = BooleanExtensions.operator_or(_or_2, (t instanceof OnCycleEvent));
+                    _or_1 = (_or_2 || (t instanceof OnCycleEvent));
                   }
                   if (_or_1) {
                     _or = true;
                   } else {
-                    _or = BooleanExtensions.operator_or(_or_1, (t instanceof AlwaysEvent));
+                    _or = (_or_1 || (t instanceof AlwaysEvent));
                   }
                   return Boolean.valueOf(_or);
                 }
               };
             Iterable<EventSpec> _filter = IterableExtensions.<EventSpec>filter(_triggers_1, _function);
             boolean _isEmpty_1 = IterableExtensions.isEmpty(_filter);
-            boolean _not = BooleanExtensions.operator_not(_isEmpty_1);
-            _or = BooleanExtensions.operator_or(_isEmpty, _not);
+            boolean _not = (!_isEmpty_1);
+            _or = (_isEmpty || _not);
           }
           return Boolean.valueOf(_or);
         }
@@ -630,9 +628,9 @@ public class BehaviorMapping {
         }
       };
     Iterable<Reaction> _map = IterableExtensions.<LocalReaction, Reaction>map(_filter_1, _function_1);
-    CollectionExtensions.<Reaction>addAll(_reactions, _map);
+    Iterables.<Reaction>addAll(_reactions, _map);
     TreeIterator<EObject> content = statechart.eAllContents();
-    final Iterator<State> allStates = IteratorExtensions.<State>filter(content, State.class);
+    final Iterator<State> allStates = Iterators.<State>filter(content, State.class);
     final Procedure1<State> _function_2 = new Procedure1<State>() {
         public void apply(final State s) {
           BehaviorMapping.this.mapStateLocalReactions(((State) s));
@@ -646,7 +644,7 @@ public class BehaviorMapping {
     final ExecutionState _state = this.factory.create(state);
     EList<Reaction> _reactions = _state.getReactions();
     EList<org.yakindu.sct.model.sgraph.Reaction> _localReactions = state.getLocalReactions();
-    Iterable<LocalReaction> _filter = IterableExtensions.<LocalReaction>filter(_localReactions, LocalReaction.class);
+    Iterable<LocalReaction> _filter = Iterables.<LocalReaction>filter(_localReactions, LocalReaction.class);
     final Function1<LocalReaction,Boolean> _function = new Function1<LocalReaction,Boolean>() {
         public Boolean apply(final LocalReaction lr) {
           boolean _or = false;
@@ -666,18 +664,17 @@ public class BehaviorMapping {
                   if ((t instanceof RegularEventSpec)) {
                     _or_2 = true;
                   } else {
-                    _or_2 = BooleanExtensions.operator_or(
-                      (t instanceof RegularEventSpec), (t instanceof TimeEventSpec));
+                    _or_2 = ((t instanceof RegularEventSpec) || (t instanceof TimeEventSpec));
                   }
                   if (_or_2) {
                     _or_1 = true;
                   } else {
-                    _or_1 = BooleanExtensions.operator_or(_or_2, (t instanceof OnCycleEvent));
+                    _or_1 = (_or_2 || (t instanceof OnCycleEvent));
                   }
                   if (_or_1) {
                     _or = true;
                   } else {
-                    _or = BooleanExtensions.operator_or(_or_1, (t instanceof AlwaysEvent));
+                    _or = (_or_1 || (t instanceof AlwaysEvent));
                   }
                   return Boolean.valueOf(_or);
                 }
@@ -685,8 +682,8 @@ public class BehaviorMapping {
             Iterable<EventSpec> _filter = IterableExtensions.<EventSpec>filter(_triggers_1, _function);
             List<EventSpec> _list = IterableExtensions.<EventSpec>toList(_filter);
             boolean _isEmpty_1 = _list.isEmpty();
-            boolean _not = BooleanExtensions.operator_not(_isEmpty_1);
-            _or = BooleanExtensions.operator_or(_isEmpty, _not);
+            boolean _not = (!_isEmpty_1);
+            _or = (_isEmpty || _not);
           }
           return Boolean.valueOf(_or);
         }
@@ -699,14 +696,14 @@ public class BehaviorMapping {
         }
       };
     Iterable<Reaction> _map = IterableExtensions.<LocalReaction, Reaction>map(_filter_1, _function_1);
-    CollectionExtensions.<Reaction>addAll(_reactions, _map);
+    Iterables.<Reaction>addAll(_reactions, _map);
     return _state;
   }
   
   public Reaction mapReaction(final LocalReaction lr) {
     final Reaction r = this.factory.create(lr);
     Trigger _trigger = lr.getTrigger();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_trigger, null);
+    boolean _notEquals = (!Objects.equal(_trigger, null));
     if (_notEquals) {
       Trigger _trigger_1 = lr.getTrigger();
       Check _mapToCheck = this.mapToCheck(_trigger_1);
@@ -720,7 +717,7 @@ public class BehaviorMapping {
   public Sequence mapToEffect(final LocalReaction lr) {
     Sequence _xifexpression = null;
     Effect _effect = lr.getEffect();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_effect, null);
+    boolean _notEquals = (!Objects.equal(_effect, null));
     if (_notEquals) {
       Effect _effect_1 = lr.getEffect();
       Sequence _mapEffect = this.mapEffect(_effect_1);
@@ -734,11 +731,11 @@ public class BehaviorMapping {
     final Sequence sequence = _factory.createSequence();
     Iterable<State> _exitStates = this.exitStates(t);
     final State topExitState = IterableExtensions.<State>last(_exitStates);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(topExitState, null);
+    boolean _notEquals = (!Objects.equal(topExitState, null));
     if (_notEquals) {
       ExecutionState _create = this.factory.create(topExitState);
       final Sequence exitSequence = _create.getExitSequence();
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(exitSequence, null);
+      boolean _notEquals_1 = (!Objects.equal(exitSequence, null));
       if (_notEquals_1) {
         EList<Step> _steps = sequence.getSteps();
         Call _newCall = this.factory.newCall(exitSequence);
@@ -746,7 +743,7 @@ public class BehaviorMapping {
       }
     }
     Effect _effect = t.getEffect();
-    boolean _notEquals_2 = ObjectExtensions.operator_notEquals(_effect, null);
+    boolean _notEquals_2 = (!Objects.equal(_effect, null));
     if (_notEquals_2) {
       EList<Step> _steps_1 = sequence.getSteps();
       Effect _effect_1 = t.getEffect();
@@ -757,7 +754,7 @@ public class BehaviorMapping {
     if (_isAddTraceSteps) {
       EList<Step> _steps_2 = sequence.getSteps();
       ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(r);
-      CollectionExtensions.<ReactionFired>operator_add(_steps_2, _newTraceReactionFired);
+      _steps_2.add(_newTraceReactionFired);
     }
     List<ExecutionScope> _entryScopes = this.entryScopes(t);
     Iterable<ExecutionScope> _drop = IterableExtensions.<ExecutionScope>drop(_entryScopes, 1);
@@ -774,7 +771,7 @@ public class BehaviorMapping {
               Iterable<ExecutionScope> _take = IterableExtensions.<ExecutionScope>take(siblingRegions, _indexOf);
               for (final ExecutionScope region : _take) {
                 Sequence _enterSequence = region.getEnterSequence();
-                boolean _notEquals = ObjectExtensions.operator_notEquals(_enterSequence, null);
+                boolean _notEquals = (!Objects.equal(_enterSequence, null));
                 if (_notEquals) {
                   EList<Step> _steps = seq.getSteps();
                   Sequence _enterSequence_1 = region.getEnterSequence();
@@ -785,7 +782,7 @@ public class BehaviorMapping {
             }
             if ((scope instanceof ExecutionState)) {
               Step _entryAction = ((ExecutionState) scope).getEntryAction();
-              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_entryAction, null);
+              boolean _notEquals_1 = (!Objects.equal(_entryAction, null));
               if (_notEquals_1) {
                 EList<Step> _steps_1 = seq.getSteps();
                 Step _entryAction_1 = ((ExecutionState) scope).getEntryAction();
@@ -806,7 +803,7 @@ public class BehaviorMapping {
       };
     IterableExtensions.<ExecutionScope, Sequence>fold(_reverse, sequence, _function);
     Vertex _target = t.getTarget();
-    boolean _notEquals_3 = ObjectExtensions.operator_notEquals(_target, null);
+    boolean _notEquals_3 = (!Objects.equal(_target, null));
     if (_notEquals_3) {
       Vertex _target_1 = t.getTarget();
       if ((_target_1 instanceof RegularState)) {
@@ -858,11 +855,11 @@ public class BehaviorMapping {
               ExecutionScope _superScope = scope.getSuperScope();
               final EList<ExecutionScope> siblingRegions = _superScope.getSubScopes();
               int _indexOf = siblingRegions.indexOf(scope);
-              int _plus = IntegerExtensions.operator_plus(_indexOf, 1);
+              int _plus = (_indexOf + 1);
               Iterable<ExecutionScope> _drop = IterableExtensions.<ExecutionScope>drop(siblingRegions, _plus);
               for (final ExecutionScope region : _drop) {
                 Sequence _enterSequence = region.getEnterSequence();
-                boolean _notEquals = ObjectExtensions.operator_notEquals(_enterSequence, null);
+                boolean _notEquals = (!Objects.equal(_enterSequence, null));
                 if (_notEquals) {
                   EList<Step> _steps = seq.getSteps();
                   Sequence _enterSequence_1 = region.getEnterSequence();
@@ -927,7 +924,7 @@ public class BehaviorMapping {
       Vertex _target = t.getTarget();
       List<EObject> _containers = this.sgraph.containers(_target);
       l.removeAll(_containers);
-      Iterable<State> _filter = IterableExtensions.<State>filter(l, State.class);
+      Iterable<State> _filter = Iterables.<State>filter(l, State.class);
       _xblockexpression = (_filter);
     }
     return _xblockexpression;
@@ -941,7 +938,7 @@ public class BehaviorMapping {
       Vertex _source = t.getSource();
       List<EObject> _containers = this.sgraph.containers(_source);
       l.removeAll(_containers);
-      Iterable<State> _filter = IterableExtensions.<State>filter(l, State.class);
+      Iterable<State> _filter = Iterables.<State>filter(l, State.class);
       _xblockexpression = (_filter);
     }
     return _xblockexpression;
@@ -991,7 +988,7 @@ public class BehaviorMapping {
       Expression _xifexpression = null;
       EList<EventSpec> _triggers = t.getTriggers();
       boolean _isEmpty = _triggers.isEmpty();
-      boolean _not = BooleanExtensions.operator_not(_isEmpty);
+      boolean _not = (!_isEmpty);
       if (_not) {
         EList<EventSpec> _triggers_1 = t.getTriggers();
         List<EventSpec> _reverseView = ListExtensions.<EventSpec>reverseView(_triggers_1);
@@ -1001,12 +998,12 @@ public class BehaviorMapping {
               {
                 final Expression raised = BehaviorMapping.this.factory.raised(e);
                 Expression _xifexpression = null;
-                boolean _equals = ObjectExtensions.operator_equals(raised, null);
+                boolean _equals = Objects.equal(raised, null);
                 if (_equals) {
                   _xifexpression = s;
                 } else {
                   Expression _xifexpression_1 = null;
-                  boolean _equals_1 = ObjectExtensions.operator_equals(s, null);
+                  boolean _equals_1 = Objects.equal(s, null);
                   if (_equals_1) {
                     _xifexpression_1 = raised;
                   } else {
@@ -1028,7 +1025,7 @@ public class BehaviorMapping {
       final Expression triggerCheck = _xifexpression;
       Expression _xifexpression_1 = null;
       Expression _guardExpression = t.getGuardExpression();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_guardExpression, null);
+      boolean _notEquals = (!Objects.equal(_guardExpression, null));
       if (_notEquals) {
         Expression _guardExpression_1 = t.getGuardExpression();
         Expression _copy = EcoreUtil.<Expression>copy(_guardExpression_1);
@@ -1039,19 +1036,19 @@ public class BehaviorMapping {
       final Expression guard = _xifexpression_1;
       Expression _xifexpression_2 = null;
       boolean _and = false;
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(triggerCheck, null);
+      boolean _notEquals_1 = (!Objects.equal(triggerCheck, null));
       if (!_notEquals_1) {
         _and = false;
       } else {
-        boolean _notEquals_2 = ObjectExtensions.operator_notEquals(guard, null);
-        _and = BooleanExtensions.operator_and(_notEquals_1, _notEquals_2);
+        boolean _notEquals_2 = (!Objects.equal(guard, null));
+        _and = (_notEquals_1 && _notEquals_2);
       }
       if (_and) {
         Expression _and_1 = this.stext.and(triggerCheck, guard);
         _xifexpression_2 = _and_1;
       } else {
         Expression _xifexpression_3 = null;
-        boolean _notEquals_3 = ObjectExtensions.operator_notEquals(triggerCheck, null);
+        boolean _notEquals_3 = (!Objects.equal(triggerCheck, null));
         if (_notEquals_3) {
           _xifexpression_3 = triggerCheck;
         } else {

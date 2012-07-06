@@ -1,16 +1,14 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -42,14 +40,14 @@ public class SgraphExtensions {
   
   public List<RegularState> parentStates(final RegularState s) {
     List<EObject> _containers = this.containers(s);
-    Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(_containers, RegularState.class);
+    Iterable<RegularState> _filter = Iterables.<RegularState>filter(_containers, RegularState.class);
     List<RegularState> _list = IterableExtensions.<RegularState>toList(_filter);
     return _list;
   }
   
   public List<RegularState> parentStates(final Region s) {
     List<EObject> _containers = this.containers(s);
-    Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(_containers, RegularState.class);
+    Iterable<RegularState> _filter = Iterables.<RegularState>filter(_containers, RegularState.class);
     List<RegularState> _list = IterableExtensions.<RegularState>toList(_filter);
     return _list;
   }
@@ -62,9 +60,9 @@ public class SgraphExtensions {
   }
   
   public void collectContainers(final EObject obj, final List<EObject> containerList) {
-    CollectionExtensions.<EObject>operator_add(containerList, obj);
+    containerList.add(obj);
     EObject _eContainer = obj==null?(EObject)null:obj.eContainer();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_eContainer, null);
+    boolean _notEquals = (!Objects.equal(_eContainer, null));
     if (_notEquals) {
       EObject _eContainer_1 = obj.eContainer();
       this.collectContainers(_eContainer_1, containerList);
@@ -73,7 +71,7 @@ public class SgraphExtensions {
   
   public Iterable<Entry> collectEntries(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
-    Iterable<Entry> _filter = IterableExtensions.<Entry>filter(_vertices, Entry.class);
+    Iterable<Entry> _filter = Iterables.<Entry>filter(_vertices, Entry.class);
     return _filter;
   }
   
@@ -88,22 +86,22 @@ public class SgraphExtensions {
             boolean _or = false;
             boolean _or_1 = false;
             String _name = v.getName();
-            boolean _equals = ObjectExtensions.operator_equals(_name, null);
+            boolean _equals = Objects.equal(_name, null);
             if (_equals) {
               _or_1 = true;
             } else {
               String _name_1 = v.getName();
               boolean _equals_1 = "".equals(_name_1);
-              _or_1 = BooleanExtensions.operator_or(_equals, _equals_1);
+              _or_1 = (_equals || _equals_1);
             }
             if (_or_1) {
               _or = true;
             } else {
               String _name_2 = v.getName();
-              boolean _equals_2 = ObjectExtensions.operator_equals(_name_2, "default");
-              _or = BooleanExtensions.operator_or(_or_1, _equals_2);
+              boolean _equals_2 = Objects.equal(_name_2, "default");
+              _or = (_or_1 || _equals_2);
             }
-            _and = BooleanExtensions.operator_and((v instanceof Entry), _or);
+            _and = ((v instanceof Entry) && _or);
           }
           return Boolean.valueOf(_and);
         }
@@ -119,12 +117,12 @@ public class SgraphExtensions {
   public State target(final Entry entry) {
     State _xifexpression = null;
     EList<Transition> _outgoingTransitions = entry==null?(EList<Transition>)null:entry.getOutgoingTransitions();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_outgoingTransitions, null);
+    boolean _notEquals = (!Objects.equal(_outgoingTransitions, null));
     if (_notEquals) {
       State _xifexpression_1 = null;
       EList<Transition> _outgoingTransitions_1 = entry.getOutgoingTransitions();
       int _size = _outgoingTransitions_1.size();
-      boolean _greaterThan = IntegerExtensions.operator_greaterThan(_size, 0);
+      boolean _greaterThan = (_size > 0);
       if (_greaterThan) {
         State _xblockexpression = null;
         {
@@ -147,7 +145,7 @@ public class SgraphExtensions {
   public List<RegularState> collectLeafStates(final RegularState state, final List<RegularState> leafStates) {
     boolean _isLeaf = this.isLeaf(state);
     if (_isLeaf) {
-      CollectionExtensions.<RegularState>operator_add(leafStates, state);
+      leafStates.add(state);
     } else {
       if ((state instanceof State)) {
         final State s = ((State) state);
@@ -177,15 +175,15 @@ public class SgraphExtensions {
   
   public boolean requireDeepHistory(final Region r) {
     List<EObject> _containers = this.containers(r);
-    Iterable<Region> _filter = IterableExtensions.<Region>filter(_containers, Region.class);
+    Iterable<Region> _filter = Iterables.<Region>filter(_containers, Region.class);
     final Function1<Region,Boolean> _function = new Function1<Region,Boolean>() {
         public Boolean apply(final Region p) {
           EList<Vertex> _vertices = p.getVertices();
-          Iterable<Entry> _filter = IterableExtensions.<Entry>filter(_vertices, Entry.class);
+          Iterable<Entry> _filter = Iterables.<Entry>filter(_vertices, Entry.class);
           final Function1<Entry,Boolean> _function = new Function1<Entry,Boolean>() {
               public Boolean apply(final Entry v) {
                 EntryKind _kind = v.getKind();
-                boolean _equals = ObjectExtensions.operator_equals(_kind, EntryKind.DEEP_HISTORY);
+                boolean _equals = Objects.equal(_kind, EntryKind.DEEP_HISTORY);
                 return Boolean.valueOf(_equals);
               }
             };
@@ -199,11 +197,11 @@ public class SgraphExtensions {
   
   public boolean requireShallowHistory(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
-    Iterable<Entry> _filter = IterableExtensions.<Entry>filter(_vertices, Entry.class);
+    Iterable<Entry> _filter = Iterables.<Entry>filter(_vertices, Entry.class);
     final Function1<Entry,Boolean> _function = new Function1<Entry,Boolean>() {
         public Boolean apply(final Entry v) {
           EntryKind _kind = v.getKind();
-          boolean _equals = ObjectExtensions.operator_equals(_kind, EntryKind.SHALLOW_HISTORY);
+          boolean _equals = Objects.equal(_kind, EntryKind.SHALLOW_HISTORY);
           return Boolean.valueOf(_equals);
         }
       };
@@ -218,7 +216,7 @@ public class SgraphExtensions {
       _or = true;
     } else {
       boolean _requireShallowHistory = this.requireShallowHistory(r);
-      _or = BooleanExtensions.operator_or(_requireDeepHistory, _requireShallowHistory);
+      _or = (_requireDeepHistory || _requireShallowHistory);
     }
     return _or;
   }

@@ -1,6 +1,8 @@
 package org.yakindu.sct.model.sexec.transformation;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import java.util.ArrayList;
@@ -11,18 +13,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
@@ -113,12 +110,12 @@ public class SequenceBuilder {
   
   public void defineDeepEnterSequence(final Region r) {
     EList<Vertex> _vertices = r.getVertices();
-    Iterable<State> _filter = IterableExtensions.<State>filter(_vertices, State.class);
+    Iterable<State> _filter = Iterables.<State>filter(_vertices, State.class);
     for (final State s : _filter) {
       this.defineDeepEnterSequence(s);
     }
     boolean _requireDeepHistory = this.sgraph.requireDeepHistory(r);
-    boolean _not = BooleanExtensions.operator_not(_requireDeepHistory);
+    boolean _not = (!_requireDeepHistory);
     if (_not) {
       return;
     }
@@ -127,11 +124,11 @@ public class SequenceBuilder {
     final Sequence seq = _factory.createSequence();
     seq.setName("deepEnterSequence");
     String _name = r.getName();
-    String _plus = ObjectExtensions.operator_plus("deep enterSequence with history in child ", _name);
+    String _plus = ("deep enterSequence with history in child " + _name);
     seq.setComment(_plus);
     EList<Step> _steps = seq.getSteps();
     StateSwitch _defineDeepHistorySwitch = this.defineDeepHistorySwitch(r);
-    CollectionExtensions.<StateSwitch>operator_add(_steps, _defineDeepHistorySwitch);
+    _steps.add(_defineDeepHistorySwitch);
     execRegion.setDeepEnterSequence(seq);
   }
   
@@ -143,11 +140,11 @@ public class SequenceBuilder {
     int _offset = _stateVector.getOffset();
     sSwitch.setStateConfigurationIdx(_offset);
     String _name = r.getName();
-    String _plus = ObjectExtensions.operator_plus("Handle deep history entry of ", _name);
+    String _plus = ("Handle deep history entry of " + _name);
     sSwitch.setComment(_plus);
     sSwitch.setHistoryRegion(execRegion);
     EList<Vertex> _vertices = r.getVertices();
-    Iterable<State> _filter = IterableExtensions.<State>filter(_vertices, State.class);
+    Iterable<State> _filter = Iterables.<State>filter(_vertices, State.class);
     for (final State child : _filter) {
       ArrayList<RegularState> _newArrayList = CollectionLiterals.<RegularState>newArrayList();
       List<RegularState> _collectLeafStates = this.sgraph.collectLeafStates(child, _newArrayList);
@@ -157,7 +154,7 @@ public class SequenceBuilder {
             StateVector _stateVector = _create.getStateVector();
             int _offset = _stateVector.getOffset();
             int _stateConfigurationIdx = sSwitch.getStateConfigurationIdx();
-            boolean _equals = IntegerExtensions.operator_equals(_offset, _stateConfigurationIdx);
+            boolean _equals = (_offset == _stateConfigurationIdx);
             return Boolean.valueOf(_equals);
           }
         };
@@ -169,31 +166,31 @@ public class SequenceBuilder {
           final Sequence seq = _factory_1.createSequence();
           seq.setName("enterSequence");
           String _name_1 = child.getName();
-          String _plus_1 = ObjectExtensions.operator_plus("enterSequence with history in child ", _name_1);
-          String _plus_2 = ObjectExtensions.operator_plus(_plus_1, " for leaf ");
+          String _plus_1 = ("enterSequence with history in child " + _name_1);
+          String _plus_2 = (_plus_1 + " for leaf ");
           String _name_2 = childLeaf.getName();
-          String _plus_3 = ObjectExtensions.operator_plus(_plus_2, _name_2);
+          String _plus_3 = (_plus_2 + _name_2);
           seq.setComment(_plus_3);
           boolean _isLeaf = execChild.isLeaf();
           if (_isLeaf) {
             EList<Step> _steps = seq.getSteps();
             Sequence _enterSequence = execChild.getEnterSequence();
             Call _newCall = this.mapping.newCall(_enterSequence);
-            CollectionExtensions.<Call>operator_add(_steps, _newCall);
+            _steps.add(_newCall);
           } else {
             Step _entryAction = execChild.getEntryAction();
-            boolean _notEquals = ObjectExtensions.operator_notEquals(_entryAction, null);
+            boolean _notEquals = (!Objects.equal(_entryAction, null));
             if (_notEquals) {
               EList<Step> _steps_1 = seq.getSteps();
               Step _entryAction_1 = execChild.getEntryAction();
               Call _newCall_1 = this.mapping.newCall(_entryAction_1);
-              CollectionExtensions.<Call>operator_add(_steps_1, _newCall_1);
+              _steps_1.add(_newCall_1);
             }
             boolean _isAddTraceSteps = this.trace.isAddTraceSteps();
             if (_isAddTraceSteps) {
               EList<Step> _steps_2 = seq.getSteps();
               TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(execChild);
-              CollectionExtensions.<TraceStateEntered>operator_add(_steps_2, _newTraceStateEntered);
+              _steps_2.add(_newTraceStateEntered);
             }
             EList<Region> _regions = child.getRegions();
             for (final Region childRegion : _regions) {
@@ -201,13 +198,13 @@ public class SequenceBuilder {
               ExecutionRegion _create = this.mapping.create(childRegion);
               Sequence _deepEnterSequence = _create.getDeepEnterSequence();
               Call _newCall_2 = this.mapping.newCall(_deepEnterSequence);
-              CollectionExtensions.<Call>operator_add(_steps_3, _newCall_2);
+              _steps_3.add(_newCall_2);
             }
           }
           EList<StateCase> _cases = sSwitch.getCases();
           ExecutionState _create_1 = this.mapping.create(childLeaf);
           StateCase _newCase = this.sexec.newCase(_create_1, seq);
-          CollectionExtensions.<StateCase>operator_add(_cases, _newCase);
+          _cases.add(_newCase);
         }
       }
     }
@@ -216,7 +213,7 @@ public class SequenceBuilder {
   
   public void defineShallowEnterSequences(final ExecutionFlow flow, final Statechart sc) {
     final TreeIterator<EObject> contents = sc.eAllContents();
-    Iterator<Region> _filter = IteratorExtensions.<Region>filter(contents, Region.class);
+    Iterator<Region> _filter = Iterators.<Region>filter(contents, Region.class);
     Iterable<Region> _iterable = IteratorExtensions.<Region>toIterable(_filter);
     for (final Region r : _iterable) {
       boolean _requireShallowHistory = this.sgraph.requireShallowHistory(r);
@@ -226,11 +223,11 @@ public class SequenceBuilder {
         final Sequence seq = _factory.createSequence();
         seq.setName("shallowEnterSequence");
         String _name = r.getName();
-        String _plus = ObjectExtensions.operator_plus("shallow enterSequence with history in child ", _name);
+        String _plus = ("shallow enterSequence with history in child " + _name);
         seq.setComment(_plus);
         EList<Step> _steps = seq.getSteps();
         StateSwitch _defineShallowHistorySwitch = this.defineShallowHistorySwitch(r);
-        CollectionExtensions.<StateSwitch>operator_add(_steps, _defineShallowHistorySwitch);
+        _steps.add(_defineShallowHistorySwitch);
         execRegion.setShallowEnterSequence(seq);
       }
     }
@@ -244,12 +241,12 @@ public class SequenceBuilder {
     int _offset = _stateVector.getOffset();
     sSwitch.setStateConfigurationIdx(_offset);
     String _name = r.getName();
-    String _plus = ObjectExtensions.operator_plus("Handle shallow history entry of ", _name);
+    String _plus = ("Handle shallow history entry of " + _name);
     sSwitch.setComment(_plus);
     ExecutionRegion _create = this.mapping.create(r);
     sSwitch.setHistoryRegion(_create);
     EList<Vertex> _vertices = r.getVertices();
-    Iterable<State> _filter = IterableExtensions.<State>filter(_vertices, State.class);
+    Iterable<State> _filter = Iterables.<State>filter(_vertices, State.class);
     for (final State child : _filter) {
       {
         final ExecutionState execChild = this.mapping.create(child);
@@ -261,7 +258,7 @@ public class SequenceBuilder {
               StateVector _stateVector = _create.getStateVector();
               int _offset = _stateVector.getOffset();
               int _stateConfigurationIdx = sSwitch.getStateConfigurationIdx();
-              boolean _equals = IntegerExtensions.operator_equals(_offset, _stateConfigurationIdx);
+              boolean _equals = (_offset == _stateConfigurationIdx);
               return Boolean.valueOf(_equals);
             }
           };
@@ -272,7 +269,7 @@ public class SequenceBuilder {
           Sequence _enterSequence = execChild.getEnterSequence();
           Call _newCall = this.mapping.newCall(_enterSequence);
           StateCase _newCase = this.sexec.newCase(_create_1, _newCall);
-          CollectionExtensions.<StateCase>operator_add(_cases, _newCase);
+          _cases.add(_newCase);
         }
       }
     }
@@ -295,7 +292,7 @@ public class SequenceBuilder {
     final Sequence seq = _factory.createSequence();
     seq.setName("enterSequence");
     String _name = r.getName();
-    String _plus = ObjectExtensions.operator_plus("Default enter sequence for region ", _name);
+    String _plus = ("Default enter sequence for region " + _name);
     seq.setComment(_plus);
     EList<Vertex> _vertices = r.getVertices();
     for (final Vertex s : _vertices) {
@@ -304,13 +301,13 @@ public class SequenceBuilder {
     Entry _entry = this.sgraph.entry(r);
     final ExecutionEntry entryNode = _entry==null?(ExecutionEntry)null:this.mapping.create(_entry);
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(entryNode, null);
+    boolean _notEquals = (!Objects.equal(entryNode, null));
     if (!_notEquals) {
       _and = false;
     } else {
       Sequence _reactSequence = entryNode.getReactSequence();
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_reactSequence, null);
-      _and = BooleanExtensions.operator_and(_notEquals, _notEquals_1);
+      boolean _notEquals_1 = (!Objects.equal(_reactSequence, null));
+      _and = (_notEquals && _notEquals_1);
     }
     if (_and) {
       EList<Step> _steps = seq.getSteps();
@@ -330,10 +327,10 @@ public class SequenceBuilder {
     final Sequence seq = _factory.createSequence();
     seq.setName("enterSequence");
     String _name = state.getName();
-    String _plus = ObjectExtensions.operator_plus("Default enter sequence for state ", _name);
+    String _plus = ("Default enter sequence for state " + _name);
     seq.setComment(_plus);
     Step _entryAction = execState.getEntryAction();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_entryAction, null);
+    boolean _notEquals = (!Objects.equal(_entryAction, null));
     if (_notEquals) {
       EList<Step> _steps = seq.getSteps();
       Step _entryAction_1 = execState.getEntryAction();
@@ -343,11 +340,11 @@ public class SequenceBuilder {
     if (this._addTraceSteps) {
       EList<Step> _steps_1 = seq.getSteps();
       TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(execState);
-      CollectionExtensions.<TraceStateEntered>operator_add(_steps_1, _newTraceStateEntered);
+      _steps_1.add(_newTraceStateEntered);
     }
     EList<Step> _steps_2 = seq.getSteps();
     EnterState _newEnterStateStep = this.sexec.newEnterStateStep(execState);
-    CollectionExtensions.<EnterState>operator_add(_steps_2, _newEnterStateStep);
+    _steps_2.add(_newEnterStateStep);
     execState.setEnterSequence(seq);
   }
   
@@ -357,10 +354,10 @@ public class SequenceBuilder {
     final Sequence seq = _factory.createSequence();
     seq.setName("enterSequence");
     String _name = state.getName();
-    String _plus = ObjectExtensions.operator_plus("Default enter sequence for state ", _name);
+    String _plus = ("Default enter sequence for state " + _name);
     seq.setComment(_plus);
     Step _entryAction = execState.getEntryAction();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_entryAction, null);
+    boolean _notEquals = (!Objects.equal(_entryAction, null));
     if (_notEquals) {
       EList<Step> _steps = seq.getSteps();
       Step _entryAction_1 = execState.getEntryAction();
@@ -370,13 +367,13 @@ public class SequenceBuilder {
     if (this._addTraceSteps) {
       EList<Step> _steps_1 = seq.getSteps();
       TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(execState);
-      CollectionExtensions.<TraceStateEntered>operator_add(_steps_1, _newTraceStateEntered);
+      _steps_1.add(_newTraceStateEntered);
     }
     boolean _isLeaf = execState.isLeaf();
     if (_isLeaf) {
       EList<Step> _steps_2 = seq.getSteps();
       EnterState _newEnterStateStep = this.sexec.newEnterStateStep(execState);
-      CollectionExtensions.<EnterState>operator_add(_steps_2, _newEnterStateStep);
+      _steps_2.add(_newEnterStateStep);
     } else {
       EList<Region> _regions = state.getRegions();
       for (final Region r : _regions) {
@@ -384,7 +381,7 @@ public class SequenceBuilder {
           this.defineStateEnterSequence(r);
           final ExecutionRegion execRegion = this.mapping.create(r);
           Sequence _enterSequence = execRegion.getEnterSequence();
-          boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+          boolean _notEquals_1 = (!Objects.equal(_enterSequence, null));
           if (_notEquals_1) {
             EList<Step> _steps_3 = seq.getSteps();
             Sequence _enterSequence_1 = execRegion.getEnterSequence();
@@ -413,18 +410,18 @@ public class SequenceBuilder {
     final Sequence seq = _factory.createSequence();
     seq.setName("exitSequence");
     String _name = r.getName();
-    String _plus = ObjectExtensions.operator_plus("Default exit sequence for region ", _name);
+    String _plus = ("Default exit sequence for region " + _name);
     seq.setComment(_plus);
     EList<Vertex> _vertices = r.getVertices();
     for (final Vertex s : _vertices) {
       this.defineStateExitSequence(s);
     }
     StateVector _historyVector = execRegion.getHistoryVector();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_historyVector, null);
+    boolean _notEquals = (!Objects.equal(_historyVector, null));
     if (_notEquals) {
       EList<Step> _steps = seq.getSteps();
       SaveHistory _newSaveHistory = this.sexec.newSaveHistory(execRegion);
-      CollectionExtensions.<SaveHistory>operator_add(_steps, _newSaveHistory);
+      _steps.add(_newSaveHistory);
     }
     ArrayList<RegularState> _arrayList = new ArrayList<RegularState>();
     List<RegularState> _collectLeafStates = this.sgraph.collectLeafStates(r, _arrayList);
@@ -439,9 +436,9 @@ public class SequenceBuilder {
     int _offset = sVector.getOffset();
     int _offset_1 = sVector.getOffset();
     int _size = sVector.getSize();
-    int _plus_1 = IntegerExtensions.operator_plus(_offset_1, _size);
-    int _minus = IntegerExtensions.operator_minus(_plus_1, 1);
-    IntegerRange _upTo = IntegerExtensions.operator_upTo(_offset, _minus);
+    int _plus_1 = (_offset_1 + _size);
+    int _minus = (_plus_1 - 1);
+    IntegerRange _upTo = new IntegerRange(_offset, _minus);
     for (final Integer i : _upTo) {
       {
         final StateSwitch sSwitch = this.defineExitSwitch(execRegion, leafStates, (i).intValue());
@@ -463,11 +460,11 @@ public class SequenceBuilder {
     seq.setComment("Default exit sequence for final state.");
     EList<Step> _steps = seq.getSteps();
     ExitState _newExitStateStep = this.sexec.newExitStateStep(execState);
-    CollectionExtensions.<ExitState>operator_add(_steps, _newExitStateStep);
+    _steps.add(_newExitStateStep);
     if (this._addTraceSteps) {
       EList<Step> _steps_1 = seq.getSteps();
       TraceStateExited _newTraceStateExited = this.trace.newTraceStateExited(execState);
-      CollectionExtensions.<TraceStateExited>operator_add(_steps_1, _newTraceStateExited);
+      _steps_1.add(_newTraceStateExited);
     }
     execState.setExitSequence(seq);
   }
@@ -478,13 +475,13 @@ public class SequenceBuilder {
     final Sequence seq = _factory.createSequence();
     seq.setName("exitSequence");
     String _name = state.getName();
-    String _plus = ObjectExtensions.operator_plus("Default exit sequence for state ", _name);
+    String _plus = ("Default exit sequence for state " + _name);
     seq.setComment(_plus);
     boolean _isLeaf = execState.isLeaf();
     if (_isLeaf) {
       EList<Step> _steps = seq.getSteps();
       ExitState _newExitStateStep = this.sexec.newExitStateStep(execState);
-      CollectionExtensions.<ExitState>operator_add(_steps, _newExitStateStep);
+      _steps.add(_newExitStateStep);
     } else {
       EList<Region> _regions = state.getRegions();
       for (final Region r : _regions) {
@@ -492,7 +489,7 @@ public class SequenceBuilder {
           this.defineStateExitSequence(r);
           final ExecutionRegion execRegion = this.mapping.create(r);
           Sequence _exitSequence = execRegion.getExitSequence();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_exitSequence, null);
+          boolean _notEquals = (!Objects.equal(_exitSequence, null));
           if (_notEquals) {
             EList<Step> _steps_1 = seq.getSteps();
             Sequence _exitSequence_1 = execRegion.getExitSequence();
@@ -503,7 +500,7 @@ public class SequenceBuilder {
       }
     }
     Step _exitAction = execState.getExitAction();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_exitAction, null);
+    boolean _notEquals = (!Objects.equal(_exitAction, null));
     if (_notEquals) {
       EList<Step> _steps_1 = seq.getSteps();
       Step _exitAction_1 = execState.getExitAction();
@@ -513,7 +510,7 @@ public class SequenceBuilder {
     if (this._addTraceSteps) {
       EList<Step> _steps_2 = seq.getSteps();
       TraceStateExited _newTraceStateExited = this.trace.newTraceStateExited(execState);
-      CollectionExtensions.<TraceStateExited>operator_add(_steps_2, _newTraceStateExited);
+      _steps_2.add(_newTraceStateExited);
     }
     execState.setExitSequence(seq);
   }
@@ -523,25 +520,25 @@ public class SequenceBuilder {
     StateSwitch sSwitch = _factory.createStateSwitch();
     sSwitch.setStateConfigurationIdx(pos);
     String _name = region.getName();
-    String _plus = ObjectExtensions.operator_plus("Handle exit of all possible states (of ", _name);
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, ") at position ");
+    String _plus = ("Handle exit of all possible states (of " + _name);
+    String _plus_1 = (_plus + ") at position ");
     int _stateConfigurationIdx = sSwitch.getStateConfigurationIdx();
-    String _plus_2 = StringExtensions.operator_plus(_plus_1, Integer.valueOf(_stateConfigurationIdx));
-    String _plus_3 = ObjectExtensions.operator_plus(_plus_2, "...");
+    String _plus_2 = (_plus_1 + Integer.valueOf(_stateConfigurationIdx));
+    String _plus_3 = (_plus_2 + "...");
     sSwitch.setComment(_plus_3);
     final Function1<ExecutionState,Boolean> _function = new Function1<ExecutionState,Boolean>() {
         public Boolean apply(final ExecutionState rs) {
           boolean _and = false;
           StateVector _stateVector = rs.getStateVector();
           int _size = _stateVector.getSize();
-          boolean _equals = IntegerExtensions.operator_equals(_size, 1);
+          boolean _equals = (_size == 1);
           if (!_equals) {
             _and = false;
           } else {
             StateVector _stateVector_1 = rs.getStateVector();
             int _offset = _stateVector_1.getOffset();
-            boolean _equals_1 = IntegerExtensions.operator_equals(_offset, pos);
-            _and = BooleanExtensions.operator_and(_equals, _equals_1);
+            boolean _equals_1 = (_offset == pos);
+            _and = (_equals && _equals_1);
           }
           return Boolean.valueOf(_and);
         }
@@ -564,14 +561,14 @@ public class SequenceBuilder {
                   _and = false;
                 } else {
                   StateVector _historyVector = ((ExecutionRegion) exitScope).getHistoryVector();
-                  boolean _notEquals = ObjectExtensions.operator_notEquals(_historyVector, null);
-                  _and = BooleanExtensions.operator_and((exitScope instanceof ExecutionRegion), _notEquals);
+                  boolean _notEquals = (!Objects.equal(_historyVector, null));
+                  _and = ((exitScope instanceof ExecutionRegion) && _notEquals);
                 }
                 if (_and) {
                   final ExecutionRegion execRegion = ((ExecutionRegion) exitScope);
                   EList<Step> _steps = cs.getSteps();
                   SaveHistory _newSaveHistory = SequenceBuilder.this.sexec.newSaveHistory(execRegion);
-                  CollectionExtensions.<SaveHistory>operator_add(_steps, _newSaveHistory);
+                  _steps.add(_newSaveHistory);
                 }
                 _xblockexpression = (cs);
               }
@@ -580,12 +577,12 @@ public class SequenceBuilder {
           };
         IterableExtensions.<ExecutionScope, Sequence>fold(exitScopes, caseSeq, _function_1);
         Sequence _exitSequence = s.getExitSequence();
-        boolean _notEquals = ObjectExtensions.operator_notEquals(_exitSequence, null);
+        boolean _notEquals = (!Objects.equal(_exitSequence, null));
         if (_notEquals) {
           EList<Step> _steps = caseSeq.getSteps();
           Sequence _exitSequence_1 = s.getExitSequence();
           Call _newCall = this.mapping.newCall(_exitSequence_1);
-          CollectionExtensions.<Call>operator_add(_steps, _newCall);
+          _steps.add(_newCall);
         }
         final Function2<Sequence,ExecutionScope,Sequence> _function_2 = new Function2<Sequence,ExecutionScope,Sequence>() {
             public Sequence apply(final Sequence cs, final ExecutionScope exitScope) {
@@ -599,13 +596,13 @@ public class SequenceBuilder {
                   int _last = SequenceBuilder.this.sexec.last(_stateVector);
                   StateVector _stateVector_1 = exitScope.getStateVector();
                   int _last_1 = SequenceBuilder.this.sexec.last(_stateVector_1);
-                  boolean _equals = IntegerExtensions.operator_equals(_last, _last_1);
-                  _and = BooleanExtensions.operator_and((exitScope instanceof ExecutionState), _equals);
+                  boolean _equals = (_last == _last_1);
+                  _and = ((exitScope instanceof ExecutionState) && _equals);
                 }
                 if (_and) {
                   final ExecutionState execState = ((ExecutionState) exitScope);
                   Step _exitAction = execState.getExitAction();
-                  boolean _notEquals = ObjectExtensions.operator_notEquals(_exitAction, null);
+                  boolean _notEquals = (!Objects.equal(_exitAction, null));
                   if (_notEquals) {
                     EList<Step> _steps = cs.getSteps();
                     Step _exitAction_1 = execState.getExitAction();
@@ -626,7 +623,7 @@ public class SequenceBuilder {
         IterableExtensions.<ExecutionScope, Sequence>fold(exitScopes, caseSeq, _function_2);
         EList<Step> _steps_1 = caseSeq.getSteps();
         boolean _isEmpty = _steps_1.isEmpty();
-        boolean _not = BooleanExtensions.operator_not(_isEmpty);
+        boolean _not = (!_isEmpty);
         if (_not) {
           EList<StateCase> _cases = sSwitch.getCases();
           StateCase _newCase = this.sexec.newCase(s, caseSeq);
@@ -642,14 +639,14 @@ public class SequenceBuilder {
     final Sequence exitSequence = _factory.createSequence();
     exitSequence.setName("exit");
     String _name = sc.getName();
-    String _plus = ObjectExtensions.operator_plus("Default exit sequence for statechart ", _name);
+    String _plus = ("Default exit sequence for statechart " + _name);
     exitSequence.setComment(_plus);
     EList<Region> _regions = sc.getRegions();
     for (final Region r : _regions) {
       {
         final ExecutionRegion execRegion = this.mapping.create(r);
         Sequence _exitSequence = execRegion.getExitSequence();
-        boolean _notEquals = ObjectExtensions.operator_notEquals(_exitSequence, null);
+        boolean _notEquals = (!Objects.equal(_exitSequence, null));
         if (_notEquals) {
           EList<Step> _steps = exitSequence.getSteps();
           Sequence _exitSequence_1 = execRegion.getExitSequence();
@@ -659,7 +656,7 @@ public class SequenceBuilder {
       }
     }
     Step _exitAction = flow.getExitAction();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_exitAction, null);
+    boolean _notEquals = (!Objects.equal(_exitAction, null));
     if (_notEquals) {
       EList<Step> _steps = exitSequence.getSteps();
       Step _exitAction_1 = flow.getExitAction();
@@ -675,7 +672,7 @@ public class SequenceBuilder {
     final Sequence enterSequence = _factory.createSequence();
     enterSequence.setName("enter");
     String _name = sc.getName();
-    String _plus = ObjectExtensions.operator_plus("Default enter sequence for statechart ", _name);
+    String _plus = ("Default enter sequence for statechart " + _name);
     enterSequence.setComment(_plus);
     EList<Scope> _scopes = sc.getScopes();
     final Function1<Scope,EList<Variable>> _function = new Function1<Scope,EList<Variable>>() {
@@ -685,11 +682,11 @@ public class SequenceBuilder {
         }
       };
     List<EList<Variable>> _map = ListExtensions.<Scope, EList<Variable>>map(_scopes, _function);
-    Iterable<Variable> _flatten = IterableExtensions.<Variable>flatten(_map);
-    Iterable<VariableDefinition> _filter = IterableExtensions.<VariableDefinition>filter(_flatten, VariableDefinition.class);
+    Iterable<Variable> _flatten = Iterables.<Variable>concat(_map);
+    Iterable<VariableDefinition> _filter = Iterables.<VariableDefinition>filter(_flatten, VariableDefinition.class);
     for (final VariableDefinition vd : _filter) {
       Expression _initialValue = vd.getInitialValue();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_initialValue, null);
+      boolean _notEquals = (!Objects.equal(_initialValue, null));
       if (_notEquals) {
         EList<Step> _steps = enterSequence.getSteps();
         Execution _createInitialization = this.createInitialization(vd);
@@ -707,7 +704,7 @@ public class SequenceBuilder {
       }
     }
     Step _entryAction = flow.getEntryAction();
-    boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_entryAction, null);
+    boolean _notEquals_1 = (!Objects.equal(_entryAction, null));
     if (_notEquals_1) {
       EList<Step> _steps_1 = enterSequence.getSteps();
       Step _entryAction_1 = flow.getEntryAction();
@@ -719,7 +716,7 @@ public class SequenceBuilder {
       {
         final ExecutionRegion execRegion = this.mapping.create(r);
         Sequence _enterSequence = execRegion.getEnterSequence();
-        boolean _notEquals_2 = ObjectExtensions.operator_notEquals(_enterSequence, null);
+        boolean _notEquals_2 = (!Objects.equal(_enterSequence, null));
         if (_notEquals_2) {
           EList<Step> _steps_2 = enterSequence.getSteps();
           Sequence _enterSequence_1 = execRegion.getEnterSequence();

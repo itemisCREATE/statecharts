@@ -1,5 +1,6 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.HashSet;
@@ -7,15 +8,12 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
@@ -80,7 +78,7 @@ public class ReactionBuilder {
     final Sequence sequence = _factory.createSequence();
     sequence.setName("react");
     String _name = sc.getName();
-    String _plus = ObjectExtensions.operator_plus("The reactions of statechart ", _name);
+    String _plus = ("The reactions of statechart " + _name);
     sequence.setComment(_plus);
     List<RegularState> _allRegularStates = this.sct.allRegularStates(sc);
     final Function1<RegularState,Boolean> _function = new Function1<RegularState,Boolean>() {
@@ -93,7 +91,7 @@ public class ReactionBuilder {
     SexecFactory _factory_1 = this.sexec.factory();
     final StateSwitch sSwitch = _factory_1.createStateSwitch();
     EList<Step> _steps = sequence.getSteps();
-    CollectionExtensions.<StateSwitch>operator_add(_steps, sSwitch);
+    _steps.add(sSwitch);
     final Function1<RegularState,ExecutionState> _function_1 = new Function1<RegularState,ExecutionState>() {
         public ExecutionState apply(final RegularState s) {
           ExecutionState _create = ReactionBuilder.this.mapping.create(s);
@@ -110,7 +108,7 @@ public class ReactionBuilder {
         Call _newCall = this.mapping.newCall(_reactSequence);
         sCase.setStep(_newCall);
         EList<StateCase> _cases = sSwitch.getCases();
-        CollectionExtensions.<StateCase>operator_add(_cases, sCase);
+        _cases.add(sCase);
       }
     }
     flow.setReactSequence(sequence);
@@ -119,7 +117,7 @@ public class ReactionBuilder {
   
   public ExecutionFlow defineRegularStateReactions(final ExecutionFlow flow, final Statechart sc) {
     final List<RegularState> states = this.sct.allRegularStates(sc);
-    Iterable<State> _filter = IterableExtensions.<State>filter(states, State.class);
+    Iterable<State> _filter = Iterables.<State>filter(states, State.class);
     final Function1<State,Boolean> _function = new Function1<State,Boolean>() {
         public Boolean apply(final State s) {
           boolean _isSimple = s.isSimple();
@@ -133,7 +131,7 @@ public class ReactionBuilder {
         }
       };
     IterableExtensions.<State>forEach(_filter_1, _function_1);
-    Iterable<FinalState> _filter_2 = IterableExtensions.<FinalState>filter(states, FinalState.class);
+    Iterable<FinalState> _filter_2 = Iterables.<FinalState>filter(states, FinalState.class);
     final Procedure1<FinalState> _function_2 = new Procedure1<FinalState>() {
         public void apply(final FinalState s) {
           ReactionBuilder.this.defineCycle(s);
@@ -173,12 +171,12 @@ public class ReactionBuilder {
     Iterable<Reaction> _filter = IterableExtensions.<Reaction>filter(_reactions, _function);
     List<Reaction> _list = IterableExtensions.<Reaction>toList(_filter);
     final Reaction _default_ = IterableExtensions.<Reaction>head(_list);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_default_, null);
+    boolean _notEquals = (!Objects.equal(_default_, null));
     if (_notEquals) {
       EList<Reaction> _reactions_1 = execChoice.getReactions();
       EList<Reaction> _reactions_2 = execChoice.getReactions();
       int _size = _reactions_2.size();
-      int _minus = IntegerExtensions.operator_minus(_size, 1);
+      int _minus = (_size - 1);
       _reactions_1.move(_minus, _default_);
     }
     final Sequence stateReaction = this.createReactionSequence(execChoice, null);
@@ -190,8 +188,8 @@ public class ReactionBuilder {
     _reactSequence_1.setName("react");
     Sequence _reactSequence_2 = execChoice.getReactSequence();
     String _name = choice.getName();
-    String _plus = ObjectExtensions.operator_plus("The reactions of state ", _name);
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, ".");
+    String _plus = ("The reactions of state " + _name);
+    String _plus_1 = (_plus + ".");
     _reactSequence_2.setComment(_plus_1);
     boolean _isAddTraceSteps = this.trace.isAddTraceSteps();
     if (_isAddTraceSteps) {
@@ -219,8 +217,8 @@ public class ReactionBuilder {
     _reactSequence_1.setName("react");
     Sequence _reactSequence_2 = execSync.getReactSequence();
     String _name = sync.getName();
-    String _plus = ObjectExtensions.operator_plus("The reactions of state ", _name);
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, ".");
+    String _plus = ("The reactions of state " + _name);
+    String _plus_1 = (_plus + ".");
     _reactSequence_2.setComment(_plus_1);
     boolean _isAddTraceSteps = this.trace.isAddTraceSteps();
     if (_isAddTraceSteps) {
@@ -235,12 +233,12 @@ public class ReactionBuilder {
   
   public boolean alwaysTrue(final Check check) {
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(check, null);
+    boolean _notEquals = (!Objects.equal(check, null));
     if (!_notEquals) {
       _and = false;
     } else {
       Statement _condition = check.getCondition();
-      _and = BooleanExtensions.operator_and(_notEquals, (_condition instanceof PrimitiveValueExpression));
+      _and = (_notEquals && (_condition instanceof PrimitiveValueExpression));
     }
     if (_and) {
       Statement _condition_1 = check.getCondition();
@@ -252,7 +250,7 @@ public class ReactionBuilder {
       } else {
         Literal _value_1 = pve.getValue();
         boolean _isValue = ((BoolLiteral) _value_1).isValue();
-        _and_1 = BooleanExtensions.operator_and((_value instanceof BoolLiteral), _isValue);
+        _and_1 = ((_value instanceof BoolLiteral) && _isValue);
       }
       return _and_1;
     }
@@ -275,7 +273,7 @@ public class ReactionBuilder {
           int _offset = _stateVector.getOffset();
           StateVector _stateVector_1 = execState.getStateVector();
           int _offset_1 = _stateVector_1.getOffset();
-          boolean _equals = IntegerExtensions.operator_equals(_offset, _offset_1);
+          boolean _equals = (_offset == _offset_1);
           return Boolean.valueOf(_equals);
         }
       };
@@ -286,7 +284,7 @@ public class ReactionBuilder {
     int _offset = _stateVector.getOffset();
     StateVector _stateVector_1 = execState.getStateVector();
     int _offset_1 = _stateVector_1.getOffset();
-    boolean _equals = IntegerExtensions.operator_equals(_offset, _offset_1);
+    boolean _equals = (_offset == _offset_1);
     if (_equals) {
       final Function1<ExecutionState,ExecutionNode> _function_2 = new Function1<ExecutionState,ExecutionNode>() {
           public ExecutionNode apply(final ExecutionState p) {
@@ -320,8 +318,8 @@ public class ReactionBuilder {
     _reactSequence.setName("react");
     Sequence _reactSequence_1 = execState.getReactSequence();
     String _name = state.getName();
-    String _plus = ObjectExtensions.operator_plus("The reactions of state ", _name);
-    String _plus_1 = ObjectExtensions.operator_plus(_plus, ".");
+    String _plus = ("The reactions of state " + _name);
+    String _plus_1 = (_plus + ".");
     _reactSequence_1.setComment(_plus_1);
     return execState.getReactSequence();
   }
@@ -334,7 +332,7 @@ public class ReactionBuilder {
     final Function1<Reaction,Boolean> _function = new Function1<Reaction,Boolean>() {
         public Boolean apply(final Reaction r) {
           boolean _isTransition = r.isTransition();
-          boolean _not = BooleanExtensions.operator_not(_isTransition);
+          boolean _not = (!_isTransition);
           return Boolean.valueOf(_not);
         }
       };
@@ -362,10 +360,10 @@ public class ReactionBuilder {
       };
     List<If> _map = ListExtensions.<Reaction, If>map(localReactions, _function_1);
     _steps.addAll(_map);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(localStep, null);
+    boolean _notEquals = (!Objects.equal(localStep, null));
     if (_notEquals) {
       EList<Step> _steps_1 = localSteps.getSteps();
-      CollectionExtensions.<Step>operator_add(_steps_1, localStep);
+      _steps_1.add(localStep);
     }
     EList<Step> _steps_2 = localSteps.getSteps();
     boolean _isEmpty = _steps_2.isEmpty();
@@ -401,12 +399,12 @@ public class ReactionBuilder {
         }
       };
     final Step transitionStep = IterableExtensions.<Reaction, Step>fold(_reverseView, ((Step) localSteps), _function_3);
-    boolean _notEquals_1 = ObjectExtensions.operator_notEquals(transitionStep, null);
+    boolean _notEquals_1 = (!Objects.equal(transitionStep, null));
     if (_notEquals_1) {
       EList<Step> _steps_3 = cycle.getSteps();
       _steps_3.add(transitionStep);
     } else {
-      boolean _notEquals_2 = ObjectExtensions.operator_notEquals(localSteps, null);
+      boolean _notEquals_2 = (!Objects.equal(localSteps, null));
       if (_notEquals_2) {
         EList<Step> _steps_4 = cycle.getSteps();
         _steps_4.add(localSteps);
@@ -441,17 +439,17 @@ public class ReactionBuilder {
       }
       boolean _xifexpression = false;
       EntryKind _kind = e.getKind();
-      boolean _equals = ObjectExtensions.operator_equals(_kind, EntryKind.INITIAL);
+      boolean _equals = Objects.equal(_kind, EntryKind.INITIAL);
       if (_equals) {
         boolean _xifexpression_1 = false;
         boolean _and = false;
-        boolean _notEquals = ObjectExtensions.operator_notEquals(target, null);
+        boolean _notEquals = (!Objects.equal(target, null));
         if (!_notEquals) {
           _and = false;
         } else {
           Sequence _enterSequence = target.getEnterSequence();
-          boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_enterSequence, null);
-          _and = BooleanExtensions.operator_and(_notEquals, _notEquals_1);
+          boolean _notEquals_1 = (!Objects.equal(_enterSequence, null));
+          _and = (_notEquals && _notEquals_1);
         }
         if (_and) {
           boolean _xblockexpression_1 = false;
@@ -463,12 +461,12 @@ public class ReactionBuilder {
               Transition _get = _outgoingTransitions.get(0);
               Reaction _create = this.mapping.create(_get);
               ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(_create);
-              CollectionExtensions.<ReactionFired>operator_add(_steps_1, _newTraceReactionFired);
+              _steps_1.add(_newTraceReactionFired);
             }
             EList<Step> _steps_2 = seq.getSteps();
             Sequence _enterSequence_1 = target.getEnterSequence();
             Call _newCall = this.mapping.newCall(_enterSequence_1);
-            boolean _add = CollectionExtensions.<Call>operator_add(_steps_2, _newCall);
+            boolean _add = _steps_2.add(_newCall);
             _xblockexpression_1 = (_add);
           }
           _xifexpression_1 = _xblockexpression_1;
@@ -477,7 +475,7 @@ public class ReactionBuilder {
       } else {
         boolean _xifexpression_2 = false;
         EntryKind _kind_1 = e.getKind();
-        boolean _equals_1 = ObjectExtensions.operator_equals(_kind_1, EntryKind.SHALLOW_HISTORY);
+        boolean _equals_1 = Objects.equal(_kind_1, EntryKind.SHALLOW_HISTORY);
         if (_equals_1) {
           boolean _xblockexpression_2 = false;
           {
@@ -490,13 +488,13 @@ public class ReactionBuilder {
             ExecutionRegion _create = this.mapping.create(((Region) _eContainer));
             entryStep.setRegion(_create);
             boolean _and_1 = false;
-            boolean _notEquals_2 = ObjectExtensions.operator_notEquals(target, null);
+            boolean _notEquals_2 = (!Objects.equal(target, null));
             if (!_notEquals_2) {
               _and_1 = false;
             } else {
               Sequence _enterSequence_1 = target.getEnterSequence();
-              boolean _notEquals_3 = ObjectExtensions.operator_notEquals(_enterSequence_1, null);
-              _and_1 = BooleanExtensions.operator_and(_notEquals_2, _notEquals_3);
+              boolean _notEquals_3 = (!Objects.equal(_enterSequence_1, null));
+              _and_1 = (_notEquals_2 && _notEquals_3);
             }
             if (_and_1) {
               boolean _isAddTraceSteps_1 = this.trace.isAddTraceSteps();
@@ -506,7 +504,7 @@ public class ReactionBuilder {
                 Transition _get = _outgoingTransitions.get(0);
                 Reaction _create_1 = this.mapping.create(_get);
                 ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(_create_1);
-                CollectionExtensions.<ReactionFired>operator_add(_steps_1, _newTraceReactionFired);
+                _steps_1.add(_newTraceReactionFired);
               }
               Sequence _enterSequence_2 = target.getEnterSequence();
               Call _newCall = this.mapping.newCall(_enterSequence_2);
@@ -518,14 +516,14 @@ public class ReactionBuilder {
             Call _newCall_1 = this.mapping.newCall(_shallowEnterSequence);
             entryStep.setHistoryStep(_newCall_1);
             EList<Step> _steps_2 = seq.getSteps();
-            boolean _add = CollectionExtensions.<HistoryEntry>operator_add(_steps_2, entryStep);
+            boolean _add = _steps_2.add(entryStep);
             _xblockexpression_2 = (_add);
           }
           _xifexpression_2 = _xblockexpression_2;
         } else {
           boolean _xifexpression_3 = false;
           EntryKind _kind_2 = e.getKind();
-          boolean _equals_2 = ObjectExtensions.operator_equals(_kind_2, EntryKind.DEEP_HISTORY);
+          boolean _equals_2 = Objects.equal(_kind_2, EntryKind.DEEP_HISTORY);
           if (_equals_2) {
             boolean _xblockexpression_3 = false;
             {
@@ -538,13 +536,13 @@ public class ReactionBuilder {
               entryStep.setRegion(_create);
               entryStep.setDeep(true);
               boolean _and_1 = false;
-              boolean _notEquals_2 = ObjectExtensions.operator_notEquals(target, null);
+              boolean _notEquals_2 = (!Objects.equal(target, null));
               if (!_notEquals_2) {
                 _and_1 = false;
               } else {
                 Sequence _enterSequence_1 = target.getEnterSequence();
-                boolean _notEquals_3 = ObjectExtensions.operator_notEquals(_enterSequence_1, null);
-                _and_1 = BooleanExtensions.operator_and(_notEquals_2, _notEquals_3);
+                boolean _notEquals_3 = (!Objects.equal(_enterSequence_1, null));
+                _and_1 = (_notEquals_2 && _notEquals_3);
               }
               if (_and_1) {
                 boolean _isAddTraceSteps_1 = this.trace.isAddTraceSteps();
@@ -554,7 +552,7 @@ public class ReactionBuilder {
                   Transition _get = _outgoingTransitions.get(0);
                   Reaction _create_1 = this.mapping.create(_get);
                   ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(_create_1);
-                  CollectionExtensions.<ReactionFired>operator_add(_steps_1, _newTraceReactionFired);
+                  _steps_1.add(_newTraceReactionFired);
                 }
                 Sequence _enterSequence_2 = target.getEnterSequence();
                 Call _newCall = this.mapping.newCall(_enterSequence_2);
@@ -566,7 +564,7 @@ public class ReactionBuilder {
               Call _newCall_1 = this.mapping.newCall(_deepEnterSequence);
               entryStep.setHistoryStep(_newCall_1);
               EList<Step> _steps_2 = seq.getSteps();
-              boolean _add = CollectionExtensions.<HistoryEntry>operator_add(_steps_2, entryStep);
+              boolean _add = _steps_2.add(entryStep);
               _xblockexpression_3 = (_add);
             }
             _xifexpression_3 = _xblockexpression_3;

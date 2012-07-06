@@ -1,5 +1,8 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -10,12 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -48,7 +48,7 @@ public class StatechartExtensions {
     final Function2<Integer,Region,Integer> _function = new Function2<Integer,Region,Integer>() {
         public Integer apply(final Integer o, final Region r) {
           int _maxOrthogonality = StatechartExtensions.this.maxOrthogonality(r);
-          int _plus = IntegerExtensions.operator_plus(_maxOrthogonality, (o).intValue());
+          int _plus = (_maxOrthogonality + (o).intValue());
           return Integer.valueOf(_plus);
         }
       };
@@ -67,7 +67,7 @@ public class StatechartExtensions {
           {
             final int mo = StatechartExtensions.this.maxOrthogonality(v);
             int _xifexpression = (int) 0;
-            boolean _greaterThan = IntegerExtensions.operator_greaterThan(mo, (s).intValue());
+            boolean _greaterThan = (mo > (s).intValue());
             if (_greaterThan) {
               _xifexpression = mo;
             } else {
@@ -96,13 +96,13 @@ public class StatechartExtensions {
     Integer _xifexpression = null;
     EList<Region> _regions = s.getRegions();
     int _size = _regions.size();
-    boolean _greaterThan = IntegerExtensions.operator_greaterThan(_size, 0);
+    boolean _greaterThan = (_size > 0);
     if (_greaterThan) {
       EList<Region> _regions_1 = s.getRegions();
       final Function2<Integer,Region,Integer> _function = new Function2<Integer,Region,Integer>() {
           public Integer apply(final Integer o, final Region r) {
             int _maxOrthogonality = StatechartExtensions.this.maxOrthogonality(r);
-            int _plus = IntegerExtensions.operator_plus(_maxOrthogonality, (o).intValue());
+            int _plus = (_maxOrthogonality + (o).intValue());
             return Integer.valueOf(_plus);
           }
         };
@@ -151,7 +151,7 @@ public class StatechartExtensions {
           ArrayList<TimeEventSpec> _xblockexpression = null;
           {
             List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(r);
-            Iterable<TimeEventSpec> _filter = IterableExtensions.<TimeEventSpec>filter(_eAllContentsAsList, TimeEventSpec.class);
+            Iterable<TimeEventSpec> _filter = Iterables.<TimeEventSpec>filter(_eAllContentsAsList, TimeEventSpec.class);
             final Procedure1<TimeEventSpec> _function = new Procedure1<TimeEventSpec>() {
                 public void apply(final TimeEventSpec tes) {
                   s.add(tes);
@@ -179,7 +179,7 @@ public class StatechartExtensions {
           ArrayList<TimeEventSpec> _xblockexpression = null;
           {
             List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(r);
-            Iterable<TimeEventSpec> _filter = IterableExtensions.<TimeEventSpec>filter(_eAllContentsAsList, TimeEventSpec.class);
+            Iterable<TimeEventSpec> _filter = Iterables.<TimeEventSpec>filter(_eAllContentsAsList, TimeEventSpec.class);
             final Procedure1<TimeEventSpec> _function = new Procedure1<TimeEventSpec>() {
                 public void apply(final TimeEventSpec tes) {
                   s.add(tes);
@@ -198,7 +198,7 @@ public class StatechartExtensions {
           ArrayList<TimeEventSpec> _xblockexpression = null;
           {
             List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(r);
-            Iterable<TimeEventSpec> _filter = IterableExtensions.<TimeEventSpec>filter(_eAllContentsAsList, TimeEventSpec.class);
+            Iterable<TimeEventSpec> _filter = Iterables.<TimeEventSpec>filter(_eAllContentsAsList, TimeEventSpec.class);
             final Procedure1<TimeEventSpec> _function = new Procedure1<TimeEventSpec>() {
                 public void apply(final TimeEventSpec tes) {
                   s.add(tes);
@@ -226,7 +226,7 @@ public class StatechartExtensions {
           ArrayList<TimeEventSpec> _xblockexpression = null;
           {
             List<EObject> _eAllContentsAsList = EcoreUtil2.eAllContentsAsList(r);
-            Iterable<TimeEventSpec> _filter = IterableExtensions.<TimeEventSpec>filter(_eAllContentsAsList, TimeEventSpec.class);
+            Iterable<TimeEventSpec> _filter = Iterables.<TimeEventSpec>filter(_eAllContentsAsList, TimeEventSpec.class);
             final Procedure1<TimeEventSpec> _function = new Procedure1<TimeEventSpec>() {
                 public void apply(final TimeEventSpec tes) {
                   s.add(tes);
@@ -281,31 +281,31 @@ public class StatechartExtensions {
   
   public List<RegularState> allRegularStates(final Statechart sc) {
     List<EObject> content = EcoreUtil2.eAllContentsAsList(sc);
-    final Iterable<RegularState> allStates = IterableExtensions.<RegularState>filter(content, RegularState.class);
+    final Iterable<RegularState> allStates = Iterables.<RegularState>filter(content, RegularState.class);
     return IterableExtensions.<RegularState>toList(allStates);
   }
   
   public List<Region> allRegions(final Statechart sc) {
     List<EObject> content = EcoreUtil2.eAllContentsAsList(sc);
-    final Iterable<Region> allRegions = IterableExtensions.<Region>filter(content, Region.class);
+    final Iterable<Region> allRegions = Iterables.<Region>filter(content, Region.class);
     return IterableExtensions.<Region>toList(allRegions);
   }
   
   public Iterable<Choice> allChoices(final Statechart sc) {
     List<EObject> content = EcoreUtil2.eAllContentsAsList(sc);
-    final Iterable<Choice> allChoices = IterableExtensions.<Choice>filter(content, Choice.class);
+    final Iterable<Choice> allChoices = Iterables.<Choice>filter(content, Choice.class);
     return allChoices;
   }
   
   public Iterable<Entry> allEntries(final Statechart sc) {
     TreeIterator<EObject> _eAllContents = sc.eAllContents();
-    Iterator<Entry> _filter = IteratorExtensions.<Entry>filter(_eAllContents, Entry.class);
+    Iterator<Entry> _filter = Iterators.<Entry>filter(_eAllContents, Entry.class);
     return IteratorExtensions.<Entry>toIterable(_filter);
   }
   
   public Iterable<Synchronization> allSynchronizations(final Statechart sc) {
     TreeIterator<EObject> _eAllContents = sc.eAllContents();
-    Iterator<Synchronization> _filter = IteratorExtensions.<Synchronization>filter(_eAllContents, Synchronization.class);
+    Iterator<Synchronization> _filter = Iterators.<Synchronization>filter(_eAllContents, Synchronization.class);
     return IteratorExtensions.<Synchronization>toIterable(_filter);
   }
   
@@ -371,7 +371,7 @@ public class StatechartExtensions {
   protected String _id(final Transition t) {
     Object _xifexpression = null;
     Vertex _source = t.getSource();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_source, null);
+    boolean _notEquals = (!Objects.equal(_source, null));
     if (_notEquals) {
       Vertex _source_1 = t.getSource();
       EList<Transition> _outgoingTransitions = _source_1.getOutgoingTransitions();
@@ -380,8 +380,7 @@ public class StatechartExtensions {
     } else {
       _xifexpression = "";
     }
-    String _plus = StringExtensions.operator_plus(
-      "tr", ((Comparable<Object>)_xifexpression));
+    String _plus = ("tr" + ((Comparable<Object>)_xifexpression));
     return _plus;
   }
   
@@ -391,7 +390,7 @@ public class StatechartExtensions {
   protected String _id(final LocalReaction t) {
     Object _xifexpression = null;
     ReactiveElement _reactiveElement = this.reactiveElement(t);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_reactiveElement, null);
+    boolean _notEquals = (!Objects.equal(_reactiveElement, null));
     if (_notEquals) {
       ReactiveElement _reactiveElement_1 = this.reactiveElement(t);
       EList<Reaction> _localReactions = _reactiveElement_1.getLocalReactions();
@@ -400,8 +399,7 @@ public class StatechartExtensions {
     } else {
       _xifexpression = "";
     }
-    String _plus = StringExtensions.operator_plus(
-      "lr", ((Comparable<Object>)_xifexpression));
+    String _plus = ("lr" + ((Comparable<Object>)_xifexpression));
     return _plus;
   }
   

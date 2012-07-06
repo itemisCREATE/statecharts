@@ -82,6 +82,25 @@ import org.yakindu.sct.model.sgraph.Synchronization
 		flow.scopes.add(r);
 	}
 	
+	def cleanup() {
+		_createCache_create.clear
+		_createCache_createCheck.clear
+		_createCache_createDerivedEvent.clear
+		_createCache_create_1.clear
+		_createCache_create_10.clear
+		_createCache_create_11.clear
+		_createCache_create_12.clear
+		_createCache_create_2.clear
+		_createCache_create_3.clear
+		_createCache_create_4.clear
+		_createCache_create_5.clear
+		_createCache_create_6.clear
+		_createCache_create_7.clear
+		_createCache_create_8.clear
+		_createCache_create_9.clear
+		_createCache_timeEventScope.clear
+	}
+	
 	
 	def EventDefinition create r : EcoreUtil::copy(event) create(EventDefinition event) {}
 	
