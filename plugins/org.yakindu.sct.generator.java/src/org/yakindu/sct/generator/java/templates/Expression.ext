@@ -180,9 +180,12 @@ String getOperator(RelationalOperator operator) :
 	
 String toCode(EventRaisingExpression this) :
 	if this.value != null then
-		event.getContext().toFirstLower()+"raise"+event.getEventName()+"("+value.toCode()+");"
+		event.getContext().toFirstLower()+"raise"+event.getEventName()+"("+value.toCode()+")"
 	else
-		event.getContext().toFirstLower()+"raise"+event.getEventName()+"();";
+		event.getContext().toFirstLower()+"raise"+event.getEventName()+"()";
+		
+String toCode(OperationDefinition this) :
+	"//" + getContext() + "operationCallback." + name + "()";
 		
 String getInitialValue(EventDefinition this) :
 	//if derivation != null then

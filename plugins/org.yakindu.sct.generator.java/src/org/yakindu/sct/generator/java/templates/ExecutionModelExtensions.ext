@@ -80,4 +80,15 @@ int getEventsCount(ExecutionFlow this):
 
 int getOffset(Scope scope):
 	JAVA org.yakindu.sct.generator.java.extensions.ExecutionModelExtensions.getOffset(org.yakindu.sct.model.sgraph.Scope);
-					
+
+boolean hasOperations(InterfaceScope this) :
+	!declarations.typeSelect(OperationDefinition).isEmpty;
+
+boolean hasOperations(InternalScope this) :
+	!declarations.typeSelect(OperationDefinition).isEmpty;
+
+getOperations(InterfaceScope this) :
+	declarations.typeSelect(OperationDefinition);
+
+getOperations(InternalScope this) :
+	declarations.typeSelect(OperationDefinition);			

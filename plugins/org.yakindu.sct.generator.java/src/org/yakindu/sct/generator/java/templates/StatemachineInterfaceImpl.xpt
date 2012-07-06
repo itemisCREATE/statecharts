@@ -27,6 +27,15 @@ private final class «getInterfaceImplName()» implements «getInterfaceName()» {
 		}
 	«ENDIF-»
 	
+	«IF hasOperations()-»
+		private «getInterfaceOperationCallbackName()» operationCallback;
+		
+		public void set«getInterfaceOperationCallbackName()»(
+				«getInterfaceOperationCallbackName()» operationCallback) {
+			this.operationCallback = operationCallback;
+		}
+	«ENDIF-»
+	
 	«FOREACH declarations.typeSelect(EventDefinition) AS event-»
 		
 		private boolean «event.getEventIdentifier()»;

@@ -18,6 +18,15 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::GenmodelEntries»
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
+«DEFINE operationSignature FOR OperationDefinition»
+	public void «name»(«FOREACH parameters AS parameter ITERATOR iter-»
+							«IF iter.counter0 > 0-»
+								,
+							«ENDIF-»
+								«parameter.type.getJavaType()» «parameter.name»
+						«ENDFOREACH-»);
+«ENDDEFINE»
+
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»
 «FILE getImplementationPackagePath(entry)+"/"+getStatemachineInterfaceName()+'.java'-»
 «getLicenseHeader(entry)»
@@ -61,6 +70,10 @@ public interface «getStatemachineInterfaceName()» extends «getStatemachineInterf
 		«IF createInterfaceObserverSupport(entry) && hasOutgoingEvents(interface)-»
 		public List<«interface.getInterfaceListenerName()»> getListeners();
 		«ENDIF-»
+		
+		«IF interface.hasOperations()-»
+		public void set«interface.getInterfaceOperationCallbackName()»(«interface.getInterfaceOperationCallbackName()» operationCallback);
+		«ENDIF-»
 	}
 	
 	«IF createInterfaceObserverSupport(entry) && hasOutgoingEvents(interface)-»
@@ -76,10 +89,29 @@ public interface «getStatemachineInterfaceName()» extends «getStatemachineInterf
 			«ENDFOREACH-»
 		}
 		«ENDIF-»
+	«IF interface.hasOperations()-»
+		public interface «interface.getInterfaceOperationCallbackName()» {
+		«FOREACH interface.getOperations() AS operation»
+			«EXPAND operationSignature FOR operation»
+		«ENDFOREACH»
+		}
+		«ENDIF-»
 	«ENDFOREACH»
 	
 	«FOREACH scopes.typeSelect(InterfaceScope) AS interface»
 	public «interface.getInterfaceName()» get«interface.getInterfaceName()»();
+	«ENDFOREACH»
+	
+	«FOREACH scopes.typeSelect(InternalScope) AS internal»
+	«IF internal.hasOperations()-»
+		public interface «internal.getInternalOperationCallbackName()» {
+			«FOREACH internal.getOperations() AS operation»
+			«EXPAND operationSignature FOR operation»
+			«ENDFOREACH»
+		}
+		
+		public void set«internal.getInternalOperationCallbackName()»(«internal.getInternalOperationCallbackName()» operationCallback);
+	«ENDIF-»
 	«ENDFOREACH»
 }
 «ENDFILE-»

@@ -54,6 +54,12 @@ String getInterfaceName(InterfaceScope this) :
 String getInterfaceListenerName(InterfaceScope this) :
 	getInterfaceName()+"Listener";
 
+String getInterfaceOperationCallbackName(InterfaceScope this) :
+	getInterfaceName()+"OperationCallback";
+
+String getInternalOperationCallbackName(InternalScope this) :
+	"InternalOperationCallback";
+
 String getInterfaceIdentifier(InterfaceScope this) : getInterfaceName().toFirstLower();
 	 
 String getInterfaceImplName(InterfaceScope this) :  getInterfaceName() + "Impl";
@@ -279,12 +285,19 @@ String getContext(EventDefinition this) :
 		getInterfaceIdentifier((InterfaceScope)eContainer)+"."
 	else 
 		"";
+
 String getContext(Event this) : 
 	if (InterfaceScope.isInstance(eContainer)) then  
 		getInterfaceIdentifier((InterfaceScope)eContainer)+"."
 	else 
 		"";
-		
+
+String getContext(OperationDefinition this) : 
+	if (InterfaceScope.isInstance(eContainer)) then  
+		getInterfaceIdentifier((InterfaceScope)eContainer)+"."
+	else 
+		"";
+
 String getInterfaceExtension(Scope this, GeneratorEntry entry):
 	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getInterfaceExtensions(org.yakindu.sct.model.sgraph.Scope, org.yakindu.sct.model.sgen.GeneratorEntry);
 
