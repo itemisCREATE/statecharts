@@ -77,6 +77,12 @@ import java.util.List;
 	
 	private long cycleStartTime;
 	«ENDIF-»
+	
+	«FOREACH scopes.typeSelect(InternalScope) AS internal-»
+	«IF internal.hasOperations()-»
+		private «internal.getInternalOperationCallbackName()» operationCallback;
+	«ENDIF-»
+	«ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Step-»
@@ -116,13 +122,13 @@ getTimerService().resetTimer(«timeEvent.getEventIdentifier()»);
 
 «DEFINE ActionCode FOR Execution-»
 	«getComment()-»
-	«IF AssignmentExpression.isInstance(statement)»
-	«LET statement.toCode() AS statement»
-	«statement.subString(1,statement.length-1)»;
-	«ENDLET»
-	«ELSE»
-	«statement.toCode()»;
-	«ENDIF»
+	«IF AssignmentExpression.isInstance(statement)-»
+		«LET statement.toCode() AS statement-»
+		«statement.subString(1,statement.length-1)»;
+		«ENDLET-»
+	«ELSE-»
+		«statement.toCode()»;
+	«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call-»
@@ -329,7 +335,15 @@ else {
 	private void set«variable.getVarName().toFirstUpper()»(«variable.type.getJavaType()» value) {
 		«variable.getVariableIdentifier()» = value;
 	}	
+	«ENDFOREACH-»
 	
+	«FOREACH scopes.typeSelect(InternalScope) AS internal-»
+	«IF internal.hasOperations()-»
+		public void set«internal.getInternalOperationCallbackName()»(
+				«internal.getInternalOperationCallbackName()» operationCallback) {
+			this.operationCallback = operationCallback;
+		}
+	«ENDIF-»
 	«ENDFOREACH-»
 «ENDDEFINE»
 
