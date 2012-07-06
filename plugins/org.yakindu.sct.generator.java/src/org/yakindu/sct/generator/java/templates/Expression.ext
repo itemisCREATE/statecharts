@@ -28,10 +28,13 @@ String toCode(Expression expression) :
 
 String toCode(ElementReferenceExpression ref) :
 	ref.reference.toCode();
+	
 String toCode(EObject ref) :
 	"/* toCode not defined for: "+ref+" */";
+	
 String toCode(types::Feature ref) :
 	"/* toCode not defined for: "+ref+" */";
+	
 String toCode(FeatureCall ref) :
 	ref.feature.toCode();
 
@@ -46,28 +49,25 @@ String toCode(Literal literal) :
 String toCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCode();
 	
-String getterCall(AssignmentExpression this) :
-	getContext(varRef).toFirstLower()+"get"+ varRef.getVarName().toFirstUpper()+ "()";
-	
-String setterCall(AssignmentExpression this, String expression) :
-	getContext(varRef).toFirstLower()+"set" + varRef.getVarName().toFirstUpper() + "(" + expression + ");";
+String getVariableIdentifier(AssignmentExpression this) :
+	getContext(varRef).toFirstLower() + varRef.getVarName().toFirstLower();
 
 /* Assignment */
 String toCode(AssignmentExpression this) :
-  switch (operator) {
-  case AssignmentOperator::assign : setterCall(expression.toCode())
-  case AssignmentOperator::multAssign : setterCall(getterCall() + " * (" + expression.toCode() + ")")
-  case AssignmentOperator::divAssign : setterCall(getterCall() + " / (" + expression.toCode() + ")")
-  case AssignmentOperator::modAssign : setterCall(getterCall() + " % (" + expression.toCode() + ")")
-  case AssignmentOperator::addAssign : setterCall(getterCall() + " + (" + expression.toCode() + ")")
-  case AssignmentOperator::subAssign : setterCall(getterCall() + " - (" + expression.toCode() + ")")
-  case AssignmentOperator::andAssign : setterCall(getterCall() + " & (" + expression.toCode() + ")")
-  case AssignmentOperator::xorAssign : setterCall(getterCall() + " ^ (" + expression.toCode() + ")")
-  case AssignmentOperator::orAssign : setterCall(getterCall() + " ^ (" + expression.toCode() + ")")
-  case AssignmentOperator::leftShiftAssign : setterCall(getterCall() + " << ("+ expression.toCode() + ")")
-  case AssignmentOperator::rightShiftAssign : setterCall(getterCall() + " >> (" + expression.toCode() + ")")  
-  default : ""
-  };
+	switch (operator) {
+		case AssignmentOperator::assign :"(" + getVariableIdentifier() + " = " + expression.toCode() + ")"
+		case AssignmentOperator::multAssign : "(" + getVariableIdentifier() + " *= " + expression.toCode() + ")"
+		case AssignmentOperator::divAssign : "(" + getVariableIdentifier() + " /= " + expression.toCode() + ")"
+		case AssignmentOperator::modAssign : "(" + getVariableIdentifier() + " %= " + expression.toCode() + ")"
+		case AssignmentOperator::addAssign : "(" + getVariableIdentifier() + " += " + expression.toCode() + ")"
+		case AssignmentOperator::subAssign : "(" + getVariableIdentifier() + " -= " + expression.toCode() + ")"
+		case AssignmentOperator::andAssign : "(" + getVariableIdentifier() + " &= " + expression.toCode() + ")"
+		case AssignmentOperator::xorAssign : "(" + getVariableIdentifier() + " ^= " + expression.toCode() + ")"
+		case AssignmentOperator::orAssign : "(" + getVariableIdentifier() + " != " + expression.toCode() + ")"
+		case AssignmentOperator::leftShiftAssign : "(" + getVariableIdentifier() + " <<= "+ expression.toCode() + ")"
+		case AssignmentOperator::rightShiftAssign : "(" + getVariableIdentifier() + " >>= " + expression.toCode() + ")"
+		default : ""
+};
 		
 /* Literals */
 String toCode(BoolLiteral expression) :
@@ -90,10 +90,10 @@ String toCode(EventValueReferenceExpression expression):
 
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
-  	"("+expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode()+")";
+  	"(" + expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode() + ")";
   	
 String toCode(LogicalAndExpression expression) :
-  	"("+expression.leftOperand.toCode() + " && " + expression.rightOperand.toCode()+")";
+  	"("+expression.leftOperand.toCode() + " && " + expression.rightOperand.toCode() + ")";
 
 String toCode(LogicalNotExpression expression) :
   	" !" + expression.operand.toCode();
@@ -130,7 +130,7 @@ String toCode(TimeEvent exp) :
 	"timeEvents["+getEventIdentifier(exp)+".getIndex()]";
 	
 String toCode(VariableDefinition exp) :
-	getContext(exp)+"get"+exp.getVarName()+"()";
+	getContext(exp) + exp.getVariableIdentifier();
 	
 String toCode(EventDefinition exp) :
 	exp.getContext()+exp.getEventIdentifier();
