@@ -1,13 +1,11 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
@@ -27,7 +25,7 @@ public class SexecExtensions {
   
   public EnterState newEnterStateStep(final ExecutionState s) {
     EnterState ess = null;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(s, null);
+    boolean _notEquals = (!Objects.equal(s, null));
     if (_notEquals) {
       SexecFactory _factory = this.factory();
       EnterState _createEnterState = _factory.createEnterState();
@@ -39,7 +37,7 @@ public class SexecExtensions {
   
   public ExitState newExitStateStep(final ExecutionState s) {
     ExitState ess = null;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(s, null);
+    boolean _notEquals = (!Objects.equal(s, null));
     if (_notEquals) {
       SexecFactory _factory = this.factory();
       ExitState _createExitState = _factory.createExitState();
@@ -67,7 +65,7 @@ public class SexecExtensions {
   protected List<ExecutionState> _collectLeafStates(final ExecutionState state, final List<ExecutionState> leafStates) {
     boolean _isLeaf = state.isLeaf();
     if (_isLeaf) {
-      CollectionExtensions.<ExecutionState>operator_add(leafStates, state);
+      leafStates.add(state);
     } else {
       EList<ExecutionScope> _subScopes = state.getSubScopes();
       for (final ExecutionScope r : _subScopes) {
@@ -88,8 +86,8 @@ public class SexecExtensions {
   public int last(final StateVector sv) {
     int _offset = sv.getOffset();
     int _size = sv.getSize();
-    int _plus = IntegerExtensions.operator_plus(_offset, _size);
-    int _minus = IntegerExtensions.operator_minus(_plus, 1);
+    int _plus = (_offset + _size);
+    int _minus = (_plus - 1);
     return _minus;
   }
   
@@ -101,7 +99,7 @@ public class SexecExtensions {
   public ArrayList<ExecutionScope> parentScopes(final ExecutionScope scope) {
     final ArrayList<ExecutionScope> parents = CollectionLiterals.<ExecutionScope>newArrayList();
     ExecutionScope s = scope;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(s, null);
+    boolean _notEquals = (!Objects.equal(s, null));
     boolean _while = _notEquals;
     while (_while) {
       {
@@ -109,7 +107,7 @@ public class SexecExtensions {
         ExecutionScope _superScope = s.getSuperScope();
         s = _superScope;
       }
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(s, null);
+      boolean _notEquals_1 = (!Objects.equal(s, null));
       _while = _notEquals_1;
     }
     return parents;

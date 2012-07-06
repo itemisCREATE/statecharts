@@ -1,5 +1,7 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,13 +9,10 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
 import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -85,12 +84,12 @@ public class StructureMapping {
     List<Declaration> _map = ListExtensions.<Declaration, Declaration>map(_declarations_1, _function);
     final Function1<Declaration,Boolean> _function_1 = new Function1<Declaration,Boolean>() {
         public Boolean apply(final Declaration e) {
-          boolean _notEquals = ObjectExtensions.operator_notEquals(e, null);
+          boolean _notEquals = (!Objects.equal(e, null));
           return Boolean.valueOf(_notEquals);
         }
       };
     Iterable<Declaration> _filter = IterableExtensions.<Declaration>filter(_map, _function_1);
-    CollectionExtensions.<Declaration>addAll(_declarations, _filter);
+    Iterables.<Declaration>addAll(_declarations, _filter);
     return _scope;
   }
   
@@ -174,7 +173,7 @@ public class StructureMapping {
     }
     EList<ExecutionScope> _subScopes = _region.getSubScopes();
     EList<Vertex> _vertices = region.getVertices();
-    Iterable<RegularState> _filter = IterableExtensions.<RegularState>filter(_vertices, RegularState.class);
+    Iterable<RegularState> _filter = Iterables.<RegularState>filter(_vertices, RegularState.class);
     final Function1<RegularState,ExecutionScope> _function = new Function1<RegularState,ExecutionScope>() {
         public ExecutionScope apply(final RegularState v) {
           ExecutionState _create = StructureMapping.this.mapping.create(v);
@@ -182,7 +181,7 @@ public class StructureMapping {
         }
       };
     Iterable<ExecutionScope> _map = IterableExtensions.<RegularState, ExecutionScope>map(_filter, _function);
-    CollectionExtensions.<ExecutionScope>addAll(_subScopes, _map);
+    Iterables.<ExecutionScope>addAll(_subScopes, _map);
     return _region;
   }
   
@@ -196,7 +195,7 @@ public class StructureMapping {
         }
       };
     Iterable<ExecutionChoice> _map = IterableExtensions.<Choice, ExecutionChoice>map(_allChoices, _function);
-    CollectionExtensions.<ExecutionNode>addAll(_nodes, _map);
+    Iterables.<ExecutionNode>addAll(_nodes, _map);
     EList<ExecutionNode> _nodes_1 = r.getNodes();
     Iterable<Entry> _allEntries = this.sct.allEntries(statechart);
     final Function1<Entry,ExecutionEntry> _function_1 = new Function1<Entry,ExecutionEntry>() {
@@ -206,7 +205,7 @@ public class StructureMapping {
         }
       };
     Iterable<ExecutionEntry> _map_1 = IterableExtensions.<Entry, ExecutionEntry>map(_allEntries, _function_1);
-    CollectionExtensions.<ExecutionNode>addAll(_nodes_1, _map_1);
+    Iterables.<ExecutionNode>addAll(_nodes_1, _map_1);
     EList<ExecutionNode> _nodes_2 = r.getNodes();
     Iterable<Synchronization> _allSynchronizations = this.sct.allSynchronizations(statechart);
     final Function1<Synchronization,ExecutionSynchronization> _function_2 = new Function1<Synchronization,ExecutionSynchronization>() {
@@ -216,7 +215,7 @@ public class StructureMapping {
         }
       };
     Iterable<ExecutionSynchronization> _map_2 = IterableExtensions.<Synchronization, ExecutionSynchronization>map(_allSynchronizations, _function_2);
-    CollectionExtensions.<ExecutionNode>addAll(_nodes_2, _map_2);
+    Iterables.<ExecutionNode>addAll(_nodes_2, _map_2);
     return r;
   }
   
@@ -225,7 +224,7 @@ public class StructureMapping {
    */
   public ExecutionFlow mapTimeEvents(final Statechart statechart, final ExecutionFlow r) {
     List<EObject> content = EcoreUtil2.eAllContentsAsList(statechart);
-    final Iterable<State> allStates = IterableExtensions.<State>filter(content, State.class);
+    final Iterable<State> allStates = Iterables.<State>filter(content, State.class);
     final Procedure1<State> _function = new Procedure1<State>() {
         public void apply(final State s) {
           StructureMapping.this.mapTimeEventSpecs(s);
@@ -246,9 +245,9 @@ public class StructureMapping {
         {
           final TimeEvent timeEvent = this.mapping.createDerivedEvent(tes);
           String _name = state.getName();
-          String _plus = ObjectExtensions.operator_plus(_name, "_time_event_");
+          String _plus = (_name + "_time_event_");
           int _indexOf = timeEventSpecs.indexOf(tes);
-          String _plus_1 = StringExtensions.operator_plus(_plus, Integer.valueOf(_indexOf));
+          String _plus_1 = (_plus + Integer.valueOf(_indexOf));
           timeEvent.setName(_plus_1);
           Statechart _statechart = this.sct.statechart(state);
           ExecutionFlow _create = this.mapping.create(_statechart);
@@ -273,9 +272,9 @@ public class StructureMapping {
         {
           final TimeEvent timeEvent = this.mapping.createDerivedEvent(tes);
           String _name = statechart.getName();
-          String _plus = ObjectExtensions.operator_plus(_name, "_time_event_");
+          String _plus = (_name + "_time_event_");
           int _indexOf = timeEventSpecs.indexOf(tes);
-          String _plus_1 = StringExtensions.operator_plus(_plus, Integer.valueOf(_indexOf));
+          String _plus_1 = (_plus + Integer.valueOf(_indexOf));
           timeEvent.setName(_plus_1);
           ExecutionFlow _create = this.mapping.create(statechart);
           Scope _timeEventScope = this.mapping.timeEventScope(_create);

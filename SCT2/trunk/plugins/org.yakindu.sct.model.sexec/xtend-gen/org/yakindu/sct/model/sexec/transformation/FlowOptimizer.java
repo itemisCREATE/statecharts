@@ -1,5 +1,8 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -8,15 +11,11 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -156,7 +155,7 @@ public class FlowOptimizer {
       }
       if (this._inlineExitRegion) {
         TreeIterator<EObject> _eAllContents = flow.eAllContents();
-        Iterator<ExecutionRegion> _filter = IteratorExtensions.<ExecutionRegion>filter(_eAllContents, ExecutionRegion.class);
+        Iterator<ExecutionRegion> _filter = Iterators.<ExecutionRegion>filter(_eAllContents, ExecutionRegion.class);
         final Procedure1<ExecutionRegion> _function_4 = new Procedure1<ExecutionRegion>() {
             public void apply(final ExecutionRegion region) {
               Sequence _exitSequence = region.getExitSequence();
@@ -167,7 +166,7 @@ public class FlowOptimizer {
       }
       if (this._inlineEnterRegion) {
         TreeIterator<EObject> _eAllContents_1 = flow.eAllContents();
-        Iterator<ExecutionRegion> _filter_1 = IteratorExtensions.<ExecutionRegion>filter(_eAllContents_1, ExecutionRegion.class);
+        Iterator<ExecutionRegion> _filter_1 = Iterators.<ExecutionRegion>filter(_eAllContents_1, ExecutionRegion.class);
         final Procedure1<ExecutionRegion> _function_5 = new Procedure1<ExecutionRegion>() {
             public void apply(final ExecutionRegion region) {
               Sequence _enterSequence = region.getEnterSequence();
@@ -178,7 +177,7 @@ public class FlowOptimizer {
       }
       if (this._inlineChoices) {
         EList<ExecutionNode> _nodes = flow.getNodes();
-        Iterable<ExecutionChoice> _filter_2 = IterableExtensions.<ExecutionChoice>filter(_nodes, ExecutionChoice.class);
+        Iterable<ExecutionChoice> _filter_2 = Iterables.<ExecutionChoice>filter(_nodes, ExecutionChoice.class);
         final Procedure1<ExecutionChoice> _function_6 = new Procedure1<ExecutionChoice>() {
             public void apply(final ExecutionChoice node) {
               EList<Reaction> _reactions = node.getReactions();
@@ -195,7 +194,7 @@ public class FlowOptimizer {
           };
         IterableExtensions.<ExecutionChoice>forEach(_filter_2, _function_6);
         EList<ExecutionNode> _nodes_1 = flow.getNodes();
-        Iterable<ExecutionChoice> _filter_3 = IterableExtensions.<ExecutionChoice>filter(_nodes_1, ExecutionChoice.class);
+        Iterable<ExecutionChoice> _filter_3 = Iterables.<ExecutionChoice>filter(_nodes_1, ExecutionChoice.class);
         final Procedure1<ExecutionChoice> _function_7 = new Procedure1<ExecutionChoice>() {
             public void apply(final ExecutionChoice node) {
               Sequence _reactSequence = node.getReactSequence();
@@ -206,7 +205,7 @@ public class FlowOptimizer {
       }
       if (this._inlineEntries) {
         EList<ExecutionNode> _nodes_2 = flow.getNodes();
-        Iterable<ExecutionEntry> _filter_4 = IterableExtensions.<ExecutionEntry>filter(_nodes_2, ExecutionEntry.class);
+        Iterable<ExecutionEntry> _filter_4 = Iterables.<ExecutionEntry>filter(_nodes_2, ExecutionEntry.class);
         final Procedure1<ExecutionEntry> _function_8 = new Procedure1<ExecutionEntry>() {
             public void apply(final ExecutionEntry node) {
               EList<Reaction> _reactions = node.getReactions();
@@ -223,7 +222,7 @@ public class FlowOptimizer {
           };
         IterableExtensions.<ExecutionEntry>forEach(_filter_4, _function_8);
         EList<ExecutionNode> _nodes_3 = flow.getNodes();
-        Iterable<ExecutionEntry> _filter_5 = IterableExtensions.<ExecutionEntry>filter(_nodes_3, ExecutionEntry.class);
+        Iterable<ExecutionEntry> _filter_5 = Iterables.<ExecutionEntry>filter(_nodes_3, ExecutionEntry.class);
         final Procedure1<ExecutionEntry> _function_9 = new Procedure1<ExecutionEntry>() {
             public void apply(final ExecutionEntry node) {
               Sequence _reactSequence = node.getReactSequence();
@@ -239,7 +238,7 @@ public class FlowOptimizer {
   
   public void replaceTrueIfs(final ExecutionFlow flow) {
     TreeIterator<EObject> _eAllContents = flow.eAllContents();
-    Iterator<If> _filter = IteratorExtensions.<If>filter(_eAllContents, If.class);
+    Iterator<If> _filter = Iterators.<If>filter(_eAllContents, If.class);
     final Function1<If,Boolean> _function = new Function1<If,Boolean>() {
         public Boolean apply(final If i) {
           Check _check = i.getCheck();
@@ -285,12 +284,12 @@ public class FlowOptimizer {
     Step _xblockexpression = null;
     {
       Step _thenStep = parent.getThenStep();
-      boolean _equals = ObjectExtensions.operator_equals(_thenStep, orig);
+      boolean _equals = Objects.equal(_thenStep, orig);
       if (_equals) {
         parent.setThenStep(subst);
       } else {
         Step _elseStep = parent.getElseStep();
-        boolean _equals_1 = ObjectExtensions.operator_equals(_elseStep, orig);
+        boolean _equals_1 = Objects.equal(_elseStep, orig);
         if (_equals_1) {
           parent.setElseStep(subst);
         }
@@ -302,12 +301,12 @@ public class FlowOptimizer {
   
   public boolean alwaysTrue(final Check check) {
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(check, null);
+    boolean _notEquals = (!Objects.equal(check, null));
     if (!_notEquals) {
       _and = false;
     } else {
       Statement _condition = check.getCondition();
-      _and = BooleanExtensions.operator_and(_notEquals, (_condition instanceof PrimitiveValueExpression));
+      _and = (_notEquals && (_condition instanceof PrimitiveValueExpression));
     }
     if (_and) {
       Statement _condition_1 = check.getCondition();
@@ -319,7 +318,7 @@ public class FlowOptimizer {
       } else {
         Literal _value_1 = pve.getValue();
         boolean _isValue = ((BoolLiteral) _value_1).isValue();
-        _and_1 = BooleanExtensions.operator_and((_value instanceof BoolLiteral), _isValue);
+        _and_1 = ((_value instanceof BoolLiteral) && _isValue);
       }
       return _and_1;
     }
@@ -333,7 +332,7 @@ public class FlowOptimizer {
   protected boolean _empty(final Sequence seq) {
     EList<Step> _steps = seq.getSteps();
     int _size = _steps.size();
-    boolean _equals = IntegerExtensions.operator_equals(_size, 0);
+    boolean _equals = (_size == 0);
     return _equals;
   }
   
@@ -373,7 +372,7 @@ public class FlowOptimizer {
   public Check inline(final Check c) {
     Check _xblockexpression = null;
     {
-      boolean _notEquals = ObjectExtensions.operator_notEquals(c, null);
+      boolean _notEquals = (!Objects.equal(c, null));
       if (_notEquals) {
         ArrayList<CheckRef> _arrayList = new ArrayList<CheckRef>();
         final List<CheckRef> cRefs = _arrayList;
@@ -401,7 +400,7 @@ public class FlowOptimizer {
     Check _xblockexpression = null;
     {
       Check _check = owner.getCheck();
-      boolean _equals = ObjectExtensions.operator_equals(_check, pre);
+      boolean _equals = Objects.equal(_check, pre);
       if (_equals) {
         owner.setCheck(post);
       }
@@ -465,7 +464,7 @@ public class FlowOptimizer {
   public Step inline(final Step step) {
     Step _xblockexpression = null;
     {
-      boolean _notEquals = ObjectExtensions.operator_notEquals(step, null);
+      boolean _notEquals = (!Objects.equal(step, null));
       if (_notEquals) {
         ArrayList<Call> _arrayList = new ArrayList<Call>();
         final List<Call> calls = _arrayList;
@@ -479,11 +478,11 @@ public class FlowOptimizer {
             if (_substituteCall) {
               caller.setStep(null);
             } else {
-              String _plus = StringExtensions.operator_plus("Did not substitute \'", step);
-              String _plus_1 = ObjectExtensions.operator_plus(_plus, "\' call from \'");
+              String _plus = ("Did not substitute \'" + step);
+              String _plus_1 = (_plus + "\' call from \'");
               EObject _eContainer_1 = caller.eContainer();
-              String _plus_2 = StringExtensions.operator_plus(_plus_1, _eContainer_1);
-              String _plus_3 = ObjectExtensions.operator_plus(_plus_2, "\'.");
+              String _plus_2 = (_plus_1 + _eContainer_1);
+              String _plus_3 = (_plus_2 + "\'.");
               System.out.println(_plus_3);
             }
           }
@@ -500,7 +499,7 @@ public class FlowOptimizer {
   
   protected boolean _substituteCall(final StateCase owner, final Call pre, final Step post) {
     Step _step = owner.getStep();
-    boolean _equals = ObjectExtensions.operator_equals(_step, pre);
+    boolean _equals = Objects.equal(_step, pre);
     if (_equals) {
       owner.setStep(post);
       return true;
@@ -510,13 +509,13 @@ public class FlowOptimizer {
   
   protected boolean _substituteCall(final HistoryEntry owner, final Call pre, final Step post) {
     Step _initialStep = owner.getInitialStep();
-    boolean _equals = ObjectExtensions.operator_equals(_initialStep, pre);
+    boolean _equals = Objects.equal(_initialStep, pre);
     if (_equals) {
       owner.setInitialStep(post);
       return true;
     }
     Step _historyStep = owner.getHistoryStep();
-    boolean _equals_1 = ObjectExtensions.operator_equals(_historyStep, pre);
+    boolean _equals_1 = Objects.equal(_historyStep, pre);
     if (_equals_1) {
       owner.setHistoryStep(post);
       return true;
@@ -539,13 +538,13 @@ public class FlowOptimizer {
   
   protected boolean _substituteCall(final If owner, final Call call, final Step step) {
     Step _thenStep = owner.getThenStep();
-    boolean _equals = ObjectExtensions.operator_equals(_thenStep, call);
+    boolean _equals = Objects.equal(_thenStep, call);
     if (_equals) {
       owner.setThenStep(step);
       return true;
     } else {
       Step _elseStep = owner.getElseStep();
-      boolean _equals_1 = ObjectExtensions.operator_equals(_elseStep, call);
+      boolean _equals_1 = Objects.equal(_elseStep, call);
       if (_equals_1) {
         owner.setElseStep(step);
         return true;
@@ -597,7 +596,7 @@ public class FlowOptimizer {
       _copy.setCheck(((Check) _stepCopy));
       Step _xifexpression = null;
       Step _thenStep = _if.getThenStep();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_thenStep, null);
+      boolean _notEquals = (!Objects.equal(_thenStep, null));
       if (_notEquals) {
         Step _thenStep_1 = _if.getThenStep();
         Step _stepCopy_1 = this.stepCopy(_thenStep_1);
@@ -608,7 +607,7 @@ public class FlowOptimizer {
       _copy.setThenStep(_xifexpression);
       Step _xifexpression_1 = null;
       Step _elseStep = _if.getElseStep();
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_elseStep, null);
+      boolean _notEquals_1 = (!Objects.equal(_elseStep, null));
       if (_notEquals_1) {
         Step _elseStep_1 = _if.getElseStep();
         Step _stepCopy_2 = this.stepCopy(_elseStep_1);

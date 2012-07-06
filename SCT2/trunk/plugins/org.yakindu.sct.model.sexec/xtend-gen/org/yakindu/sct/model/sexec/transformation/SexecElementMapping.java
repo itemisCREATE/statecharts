@@ -1,6 +1,7 @@
 package org.yakindu.sct.model.sexec.transformation;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import java.util.ArrayList;
@@ -13,11 +14,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.Call;
@@ -185,6 +184,25 @@ public class SexecElementMapping {
     _scopes.add(r);
   }
   
+  public void cleanup() {
+    this._createCache_create.clear();
+    this._createCache_createCheck.clear();
+    this._createCache_createDerivedEvent.clear();
+    this._createCache_create_1.clear();
+    this._createCache_create_10.clear();
+    this._createCache_create_11.clear();
+    this._createCache_create_12.clear();
+    this._createCache_create_2.clear();
+    this._createCache_create_3.clear();
+    this._createCache_create_4.clear();
+    this._createCache_create_5.clear();
+    this._createCache_create_6.clear();
+    this._createCache_create_7.clear();
+    this._createCache_create_8.clear();
+    this._createCache_create_9.clear();
+    this._createCache_timeEventScope.clear();
+  }
+  
   public EventDefinition create(final EventDefinition event) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(event);
     final EventDefinition _result;
@@ -264,16 +282,16 @@ public class SexecElementMapping {
   private final HashMap<ArrayList<? extends Object>,ExecutionState> _createCache_create_6 = CollectionLiterals.newHashMap();
   
   private void _init_create_6(final ExecutionState r, final RegularState state) {
-    boolean _notEquals = ObjectExtensions.operator_notEquals(state, null);
+    boolean _notEquals = (!Objects.equal(state, null));
     if (_notEquals) {
       Region _parentRegion = state.getParentRegion();
       EList<Vertex> _vertices = _parentRegion.getVertices();
-      Iterable<FinalState> _filter = IterableExtensions.<FinalState>filter(_vertices, FinalState.class);
+      Iterable<FinalState> _filter = Iterables.<FinalState>filter(_vertices, FinalState.class);
       List<FinalState> _list = IterableExtensions.<FinalState>toList(_filter);
       final int n = _list.indexOf(state);
       String _xifexpression = null;
       if ((state instanceof FinalState)) {
-        String _plus = StringExtensions.operator_plus("_final_", Integer.valueOf(n));
+        String _plus = ("_final_" + Integer.valueOf(n));
         _xifexpression = _plus;
       } else {
         String _name = state.getName();
@@ -307,15 +325,15 @@ public class SexecElementMapping {
   private final HashMap<ArrayList<? extends Object>,ExecutionChoice> _createCache_create_7 = CollectionLiterals.newHashMap();
   
   private void _init_create_7(final ExecutionChoice r, final Choice choice) {
-    boolean _notEquals = ObjectExtensions.operator_notEquals(choice, null);
+    boolean _notEquals = (!Objects.equal(choice, null));
     if (_notEquals) {
       Region _parentRegion = choice.getParentRegion();
       EList<Vertex> _vertices = _parentRegion.getVertices();
-      Iterable<Choice> _filter = IterableExtensions.<Choice>filter(_vertices, Choice.class);
+      Iterable<Choice> _filter = Iterables.<Choice>filter(_vertices, Choice.class);
       List<Choice> _list = IterableExtensions.<Choice>toList(_filter);
       final int n = _list.indexOf(choice);
-      String _plus = StringExtensions.operator_plus("_choice", Integer.valueOf(n));
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, "_");
+      String _plus = ("_choice" + Integer.valueOf(n));
+      String _plus_1 = (_plus + "_");
       r.setSimpleName(_plus_1);
       QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(choice);
       String _string = _fullyQualifiedName.toString();
@@ -347,7 +365,7 @@ public class SexecElementMapping {
   private final HashMap<ArrayList<? extends Object>,ExecutionEntry> _createCache_create_8 = CollectionLiterals.newHashMap();
   
   private void _init_create_8(final ExecutionEntry r, final Entry entry) {
-    boolean _notEquals = ObjectExtensions.operator_notEquals(entry, null);
+    boolean _notEquals = (!Objects.equal(entry, null));
     if (_notEquals) {
       EObject _eContainer = entry.eContainer();
       final Region region = ((Region) _eContainer);
@@ -365,7 +383,7 @@ public class SexecElementMapping {
       String _xifexpression_1 = null;
       String _name_2 = entry.getName();
       boolean _isEmpty = _name_2==null?false:_name_2.isEmpty();
-      boolean _not = BooleanExtensions.operator_not(_isEmpty);
+      boolean _not = (!_isEmpty);
       if (_not) {
         String _name_3 = entry.getName();
         _xifexpression_1 = _name_3;
@@ -374,16 +392,16 @@ public class SexecElementMapping {
       }
       final String entryName = _xifexpression_1;
       String _xifexpression_2 = null;
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(regionName, null);
+      boolean _notEquals_1 = (!Objects.equal(regionName, null));
       if (_notEquals_1) {
         _xifexpression_2 = regionName;
       } else {
         _xifexpression_2 = "";
       }
-      String _plus = ObjectExtensions.operator_plus(new Function0<Object>() {
+      String _plus = (new Function0<Object>() {
         public Object apply() {
           String _xifexpression = null;
-          boolean _notEquals = ObjectExtensions.operator_notEquals(regionName, null);
+          boolean _notEquals = (!Objects.equal(regionName, null));
           if (_notEquals) {
             _xifexpression = regionName;
           } else {
@@ -391,18 +409,18 @@ public class SexecElementMapping {
           }
           return _xifexpression;
         }
-      }.apply(), "_");
+      }.apply() + "_");
       String _xifexpression_3 = null;
-      boolean _notEquals_2 = ObjectExtensions.operator_notEquals(stateName, null);
+      boolean _notEquals_2 = (!Objects.equal(stateName, null));
       if (_notEquals_2) {
         _xifexpression_3 = stateName;
       } else {
         _xifexpression_3 = "";
       }
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, new Function0<String>() {
+      String _plus_1 = (_plus + new Function0<String>() {
         public String apply() {
           String _xifexpression = null;
-          boolean _notEquals = ObjectExtensions.operator_notEquals(stateName, null);
+          boolean _notEquals = (!Objects.equal(stateName, null));
           if (_notEquals) {
             _xifexpression = stateName;
           } else {
@@ -411,8 +429,8 @@ public class SexecElementMapping {
           return _xifexpression;
         }
       }.apply());
-      String _plus_2 = ObjectExtensions.operator_plus(_plus_1, "_");
-      String _plus_3 = ObjectExtensions.operator_plus(_plus_2, entryName);
+      String _plus_2 = (_plus_1 + "_");
+      String _plus_3 = (_plus_2 + entryName);
       r.setSimpleName(_plus_3);
       QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(entry);
       String _string = _fullyQualifiedName.toString();
@@ -447,10 +465,10 @@ public class SexecElementMapping {
       if (!_matched) {
         _switchResult = "";
       }
-      String _plus_4 = ObjectExtensions.operator_plus("Default react sequence for ", _switchResult);
-      String _plus_5 = ObjectExtensions.operator_plus(_plus_4, "entry ");
+      String _plus_4 = ("Default react sequence for " + _switchResult);
+      String _plus_5 = (_plus_4 + "entry ");
       String _name_4 = entry.getName();
-      String _plus_6 = ObjectExtensions.operator_plus(_plus_5, _name_4);
+      String _plus_6 = (_plus_5 + _name_4);
       seq.setComment(_plus_6);
       r.setReactSequence(seq);
     }
@@ -475,15 +493,15 @@ public class SexecElementMapping {
   private final HashMap<ArrayList<? extends Object>,ExecutionSynchronization> _createCache_create_9 = CollectionLiterals.newHashMap();
   
   private void _init_create_9(final ExecutionSynchronization r, final Synchronization sync) {
-    boolean _notEquals = ObjectExtensions.operator_notEquals(sync, null);
+    boolean _notEquals = (!Objects.equal(sync, null));
     if (_notEquals) {
       Region _parentRegion = sync.getParentRegion();
       EList<Vertex> _vertices = _parentRegion.getVertices();
-      Iterable<Synchronization> _filter = IterableExtensions.<Synchronization>filter(_vertices, Synchronization.class);
+      Iterable<Synchronization> _filter = Iterables.<Synchronization>filter(_vertices, Synchronization.class);
       List<Synchronization> _list = IterableExtensions.<Synchronization>toList(_filter);
       final int n = _list.indexOf(sync);
-      String _plus = StringExtensions.operator_plus("_sync", Integer.valueOf(n));
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, "_");
+      String _plus = ("_sync" + Integer.valueOf(n));
+      String _plus_1 = (_plus + "_");
       r.setSimpleName(_plus_1);
       QualifiedName _fullyQualifiedName = this.qfnProvider.getFullyQualifiedName(sync);
       String _string = _fullyQualifiedName.toString();
@@ -515,7 +533,7 @@ public class SexecElementMapping {
   private final HashMap<ArrayList<? extends Object>,ExecutionRegion> _createCache_create_10 = CollectionLiterals.newHashMap();
   
   private void _init_create_10(final ExecutionRegion r, final Region region) {
-    boolean _notEquals = ObjectExtensions.operator_notEquals(region, null);
+    boolean _notEquals = (!Objects.equal(region, null));
     if (_notEquals) {
       String _name = region.getName();
       boolean _isEmpty = Strings.isEmpty(_name);
@@ -524,7 +542,7 @@ public class SexecElementMapping {
         final CompositeElement container = ((CompositeElement) _eContainer);
         EList<Region> _regions = container.getRegions();
         final int index = _regions.indexOf(region);
-        String _plus = StringExtensions.operator_plus("region", Integer.valueOf(index));
+        String _plus = ("region" + Integer.valueOf(index));
         r.setName(_plus);
       } else {
         String _name_1 = region.getName();
@@ -672,7 +690,7 @@ public class SexecElementMapping {
   
   private void _init_createDerivedEvent(final TimeEvent r, final TimeEventSpec tes) {
     TimeEventType _type = tes.getType();
-    boolean _equals = ObjectExtensions.operator_equals(_type, TimeEventType.EVERY);
+    boolean _equals = Objects.equal(_type, TimeEventType.EVERY);
     r.setPeriodic(_equals);
   }
   
@@ -696,7 +714,7 @@ public class SexecElementMapping {
   protected NamedElement _resolveRegularEventSpec(final RegularEventSpec re, final Object context) {
     NamedElement _xifexpression = null;
     Expression _event = re.getEvent();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_event, null);
+    boolean _notEquals = (!Objects.equal(_event, null));
     if (_notEquals) {
       Expression _event_1 = re.getEvent();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(_event_1, re);
@@ -708,7 +726,7 @@ public class SexecElementMapping {
   protected NamedElement _resolveRegularEventSpec(final FeatureCall fc, final Object context) {
     NamedElement _xifexpression = null;
     EObject _feature = fc.getFeature();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_feature, null);
+    boolean _notEquals = (!Objects.equal(_feature, null));
     if (_notEquals) {
       EObject _feature_1 = fc.getFeature();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(_feature_1, fc);
@@ -720,7 +738,7 @@ public class SexecElementMapping {
   protected NamedElement _resolveRegularEventSpec(final ElementReferenceExpression ter, final Object context) {
     NamedElement _xifexpression = null;
     EObject _reference = ter.getReference();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_reference, null);
+    boolean _notEquals = (!Objects.equal(_reference, null));
     if (_notEquals) {
       EObject _reference_1 = ter.getReference();
       NamedElement _resolveRegularEventSpec = this.resolveRegularEventSpec(_reference_1, ter);

@@ -1,5 +1,6 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -7,7 +8,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
-import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -42,14 +42,14 @@ public class StateVectorBuilder {
   private SgraphExtensions sgraph;
   
   public void defineHistoryVector(final ExecutionFlow flow, final Statechart sc) {
-    int offset = IntegerExtensions.operator_minus(1);
+    int offset = (-1);
     TreeIterator<EObject> _eAllContents = sc.eAllContents();
-    Iterator<Region> _filter = IteratorExtensions.<Region>filter(_eAllContents, Region.class);
+    Iterator<Region> _filter = Iterators.<Region>filter(_eAllContents, Region.class);
     Iterable<Region> _iterable = IteratorExtensions.<Region>toIterable(_filter);
     for (final Region r : _iterable) {
       boolean _requireHistory = this.sgraph.requireHistory(r);
       if (_requireHistory) {
-        int _plus = IntegerExtensions.operator_plus(offset, 1);
+        int _plus = (offset + 1);
         offset = _plus;
         final ExecutionRegion er = this.mapping.create(r);
         SexecFactory _factory = this.sexec.factory();
@@ -61,8 +61,8 @@ public class StateVectorBuilder {
         _historyVector_1.setSize(1);
       }
     }
-    int _minus = IntegerExtensions.operator_minus(1);
-    boolean _notEquals = IntegerExtensions.operator_notEquals(offset, _minus);
+    int _minus = (-1);
+    boolean _notEquals = (offset != _minus);
     if (_notEquals) {
       SexecFactory _factory_1 = this.sexec.factory();
       StateVector _createStateVector_1 = _factory_1.createStateVector();
@@ -70,7 +70,7 @@ public class StateVectorBuilder {
       StateVector _historyVector_2 = flow.getHistoryVector();
       _historyVector_2.setOffset(0);
       StateVector _historyVector_3 = flow.getHistoryVector();
-      int _plus_1 = IntegerExtensions.operator_plus(offset, 1);
+      int _plus_1 = (offset + 1);
       _historyVector_3.setSize(_plus_1);
     }
   }
@@ -80,7 +80,7 @@ public class StateVectorBuilder {
     EList<Region> _regions = sc.getRegions();
     for (final Region r : _regions) {
       int _defineStateVectors = this.defineStateVectors(r, offset);
-      int _plus = IntegerExtensions.operator_plus(offset, _defineStateVectors);
+      int _plus = (offset + _defineStateVectors);
       offset = _plus;
     }
     SexecFactory _factory = this.sexec.factory();
@@ -100,7 +100,7 @@ public class StateVectorBuilder {
     final Function2<Integer,Region,Integer> _function = new Function2<Integer,Region,Integer>() {
         public Integer apply(final Integer o, final Region r) {
           int _maxOrthogonality = StateVectorBuilder.this.sc.maxOrthogonality(r);
-          int _plus = IntegerExtensions.operator_plus(_maxOrthogonality, (o).intValue());
+          int _plus = (_maxOrthogonality + (o).intValue());
           return Integer.valueOf(_plus);
         }
       };
@@ -119,7 +119,7 @@ public class StateVectorBuilder {
           {
             final int mo = StateVectorBuilder.this.defineStateVectors(v, offset);
             int _xifexpression = (int) 0;
-            boolean _greaterThan = IntegerExtensions.operator_greaterThan(mo, (s).intValue());
+            boolean _greaterThan = (mo > (s).intValue());
             if (_greaterThan) {
               _xifexpression = mo;
             } else {
@@ -156,13 +156,13 @@ public class StateVectorBuilder {
     int maxOrthogonality = 0;
     EList<Region> _regions = s.getRegions();
     int _size = _regions.size();
-    boolean _greaterThan = IntegerExtensions.operator_greaterThan(_size, 0);
+    boolean _greaterThan = (_size > 0);
     if (_greaterThan) {
       EList<Region> _regions_1 = s.getRegions();
       for (final Region r : _regions_1) {
-        int _plus = IntegerExtensions.operator_plus(offset, maxOrthogonality);
+        int _plus = (offset + maxOrthogonality);
         int _defineStateVectors = this.defineStateVectors(r, _plus);
-        int _plus_1 = IntegerExtensions.operator_plus(maxOrthogonality, _defineStateVectors);
+        int _plus_1 = (maxOrthogonality + _defineStateVectors);
         maxOrthogonality = _plus_1;
       }
     } else {
