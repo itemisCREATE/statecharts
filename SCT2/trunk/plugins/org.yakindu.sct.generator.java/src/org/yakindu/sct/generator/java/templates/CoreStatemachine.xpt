@@ -116,7 +116,13 @@ getTimerService().resetTimer(«timeEvent.getEventIdentifier()»);
 
 «DEFINE ActionCode FOR Execution-»
 	«getComment()-»
-	«statement.toCode()»
+	«IF AssignmentExpression.isInstance(statement)»
+	«LET statement.toCode() AS statement»
+	«statement.subString(1,statement.length-1)»;
+	«ENDLET»
+	«ELSE»
+	«statement.toCode()»;
+	«ENDIF»
 «ENDDEFINE»
 
 «DEFINE ActionCode FOR Call-»
