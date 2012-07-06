@@ -26,8 +26,17 @@ String toCode(Void o, String statechartReference) :
 String toCode(Expression expression) : 
 	"/* Unknown expression: "+expression+" */"; 
 
+String toCode(OperationDefinition this) :
+	"//" + getContext() + "operationCallback." + name;
+
+//String toCode(List[Expression] this):
+//	select(e|true).toCode();
+
 String toCode(ElementReferenceExpression ref) :
-	ref.reference.toCode();
+	if (ref.operationCall) then
+		 (ref.reference.toCode() + "("+ ref.args.toCode() + ")")
+	else 
+		ref.reference.toCode();
 	
 String toCode(EObject ref) :
 	"/* toCode not defined for: "+ref+" */";
@@ -183,9 +192,6 @@ String toCode(EventRaisingExpression this) :
 		event.getContext().toFirstLower()+"raise"+event.getEventName()+"("+value.toCode()+")"
 	else
 		event.getContext().toFirstLower()+"raise"+event.getEventName()+"()";
-		
-String toCode(OperationDefinition this) :
-	"//" + getContext() + "operationCallback." + name + "()";
 		
 String getInitialValue(EventDefinition this) :
 	//if derivation != null then
