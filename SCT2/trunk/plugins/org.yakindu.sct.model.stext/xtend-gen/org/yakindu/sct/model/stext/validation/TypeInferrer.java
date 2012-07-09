@@ -1,11 +1,9 @@
 package org.yakindu.sct.model.stext.validation;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.xbase.lib.BooleanExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.base.types.Type;
@@ -65,7 +63,7 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   public Type getType(final Statement stmt) {
     Type _xblockexpression = null;
     {
-      boolean _equals = ObjectExtensions.operator_equals(stmt, null);
+      boolean _equals = Objects.equal(stmt, null);
       if (_equals) {
         return null;
       }
@@ -93,13 +91,13 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     Expression _varRef = assignment.getVarRef();
     Type type = this.getType(_varRef);
     boolean _isAssignable = this.ts.isAssignable(type, valueType);
-    boolean _not = BooleanExtensions.operator_not(_isAssignable);
+    boolean _not = (!_isAssignable);
     if (_not) {
       String _name = valueType==null?(String)null:valueType.getName();
-      String _plus = ObjectExtensions.operator_plus("Can not assign a value of type ", _name);
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, " to a variable of type ");
+      String _plus = ("Can not assign a value of type " + _name);
+      String _plus_1 = (_plus + " to a variable of type ");
       String _name_1 = type==null?(String)null:type.getName();
-      String _plus_2 = ObjectExtensions.operator_plus(_plus_1, _name_1);
+      String _plus_2 = (_plus_1 + _name_1);
       this.error(_plus_2);
       return null;
     }
@@ -115,13 +113,13 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     Expression _event = eventRaising.getEvent();
     Type type = this.getType(_event);
     boolean _isAssignable = this.ts.isAssignable(type, valueType);
-    boolean _not = BooleanExtensions.operator_not(_isAssignable);
+    boolean _not = (!_isAssignable);
     if (_not) {
       String _name = valueType==null?(String)null:valueType.getName();
-      String _plus = ObjectExtensions.operator_plus("Can not assign a value of type ", _name);
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, " to a variable of type ");
+      String _plus = ("Can not assign a value of type " + _name);
+      String _plus_1 = (_plus + " to a variable of type ");
       String _name_1 = type==null?(String)null:type.getName();
-      String _plus_2 = ObjectExtensions.operator_plus(_plus_1, _name_1);
+      String _plus_2 = (_plus_1 + _name_1);
       this.error(_plus_2);
       return null;
     }
@@ -147,13 +145,13 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   public Type assertBooleanTypes(final Type left, final Type right, final String literal) {
     boolean _and = false;
     Type _assertIsBoolean = this.assertIsBoolean(left, literal);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_assertIsBoolean, null);
+    boolean _notEquals = (!Objects.equal(_assertIsBoolean, null));
     if (!_notEquals) {
       _and = false;
     } else {
       Type _assertIsBoolean_1 = this.assertIsBoolean(right, literal);
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_assertIsBoolean_1, null);
-      _and = BooleanExtensions.operator_and(_notEquals, _notEquals_1);
+      boolean _notEquals_1 = (!Objects.equal(_assertIsBoolean_1, null));
+      _and = (_notEquals && _notEquals_1);
     }
     if (_and) {
       return this.ts.combine(left, right);
@@ -208,41 +206,41 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
       _and = false;
     } else {
       boolean _isBoolean_1 = this.ts.isBoolean(rightType);
-      _and = BooleanExtensions.operator_and(_isBoolean, _isBoolean_1);
+      _and = (_isBoolean && _isBoolean_1);
     }
     if (_and) {
       boolean _and_1 = false;
       RelationalOperator _operator = expression.getOperator();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_operator, RelationalOperator.EQUALS);
+      boolean _notEquals = (!Objects.equal(_operator, RelationalOperator.EQUALS));
       if (!_notEquals) {
         _and_1 = false;
       } else {
         RelationalOperator _operator_1 = expression.getOperator();
-        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_operator_1, RelationalOperator.NOT_EQUALS);
-        _and_1 = BooleanExtensions.operator_and(_notEquals, _notEquals_1);
+        boolean _notEquals_1 = (!Objects.equal(_operator_1, RelationalOperator.NOT_EQUALS));
+        _and_1 = (_notEquals && _notEquals_1);
       }
       if (_and_1) {
         RelationalOperator _operator_2 = expression.getOperator();
         String _literal = _operator_2==null?(String)null:_operator_2.getLiteral();
-        String _plus = ObjectExtensions.operator_plus("operator \'", _literal);
-        String _plus_1 = ObjectExtensions.operator_plus(_plus, "\' can not be applied to boolean values!");
+        String _plus = ("operator \'" + _literal);
+        String _plus_1 = (_plus + "\' can not be applied to boolean values!");
         this.error(_plus_1);
         return null;
       }
     } else {
       final Type combined = this.ts.combine(leftType, rightType);
-      boolean _equals = ObjectExtensions.operator_equals(combined, null);
+      boolean _equals = Objects.equal(combined, null);
       if (_equals) {
         String _name = leftType==null?(String)null:leftType.getName();
-        String _plus_2 = ObjectExtensions.operator_plus("Incompatible operands ", _name);
-        String _plus_3 = ObjectExtensions.operator_plus(_plus_2, " and ");
+        String _plus_2 = ("Incompatible operands " + _name);
+        String _plus_3 = (_plus_2 + " and ");
         String _name_1 = rightType==null?(String)null:rightType.getName();
-        String _plus_4 = ObjectExtensions.operator_plus(_plus_3, _name_1);
-        String _plus_5 = ObjectExtensions.operator_plus(_plus_4, " for operator \'");
+        String _plus_4 = (_plus_3 + _name_1);
+        String _plus_5 = (_plus_4 + " for operator \'");
         RelationalOperator _operator_3 = expression.getOperator();
         String _literal_1 = _operator_3.getLiteral();
-        String _plus_6 = ObjectExtensions.operator_plus(_plus_5, _literal_1);
-        String _plus_7 = ObjectExtensions.operator_plus(_plus_6, "\'");
+        String _plus_6 = (_plus_5 + _literal_1);
+        String _plus_7 = (_plus_6 + "\'");
         this.error(_plus_7);
       }
     }
@@ -252,13 +250,13 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   public Type assertNumericalTypes(final Type left, final Type right, final String operator) {
     boolean _and = false;
     Type _assertIsNumber = this.assertIsNumber(left, operator);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_assertIsNumber, null);
+    boolean _notEquals = (!Objects.equal(_assertIsNumber, null));
     if (!_notEquals) {
       _and = false;
     } else {
       Type _assertIsNumber_1 = this.assertIsNumber(right, operator);
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_assertIsNumber_1, null);
-      _and = BooleanExtensions.operator_and(_notEquals, _notEquals_1);
+      boolean _notEquals_1 = (!Objects.equal(_assertIsNumber_1, null));
+      _and = (_notEquals && _notEquals_1);
     }
     if (_and) {
       return this.ts.combine(left, right);
@@ -290,7 +288,7 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     Expression _operand = expression.getOperand();
     final Type type = this.getType(_operand);
     UnaryOperator _operator = expression.getOperator();
-    boolean _equals = ObjectExtensions.operator_equals(_operator, UnaryOperator.COMPLEMENT);
+    boolean _equals = Objects.equal(_operator, UnaryOperator.COMPLEMENT);
     if (_equals) {
       UnaryOperator _operator_1 = expression.getOperator();
       String _literal = _operator_1.getLiteral();
@@ -333,7 +331,7 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     Expression _condition = expression.getCondition();
     final Type condType = this.getType(_condition);
     boolean _isBoolean = this.ts.isBoolean(condType);
-    boolean _not = BooleanExtensions.operator_not(_isBoolean);
+    boolean _not = (!_isBoolean);
     if (_not) {
       this.error("Condition type have to be boolean");
       return null;
@@ -352,9 +350,9 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
       return ((Feature) _feature_1)==null?(Type)null:((Feature) _feature_1).getType();
     } else {
       EObject _feature_2 = featureCall.getFeature();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_feature_2, null);
+      boolean _notEquals = (!Objects.equal(_feature_2, null));
       if (_notEquals) {
-        String _plus = StringExtensions.operator_plus("Type of FeatureCall is unknown: ", featureCall);
+        String _plus = ("Type of FeatureCall is unknown: " + featureCall);
         this.error(_plus);
         return null;
       } else {
@@ -383,7 +381,7 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
       _or = true;
     } else {
       EObject _eContainer_1 = expression.eContainer();
-      _or = BooleanExtensions.operator_or((_eContainer instanceof EventRaisingExpression), (_eContainer_1 instanceof EventValueReferenceExpression));
+      _or = ((_eContainer instanceof EventRaisingExpression) || (_eContainer_1 instanceof EventValueReferenceExpression));
     }
     if (_or) {
       return definition.getType();
@@ -422,10 +420,10 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   
   public Type assertIsInteger(final Type object, final String operator) {
     boolean _isInteger = this.ts.isInteger(object);
-    boolean _not = BooleanExtensions.operator_not(_isInteger);
+    boolean _not = (!_isInteger);
     if (_not) {
-      String _plus = ObjectExtensions.operator_plus("operator \'", operator);
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, "\' can only be applied to integers!");
+      String _plus = ("operator \'" + operator);
+      String _plus_1 = (_plus + "\' can only be applied to integers!");
       this.error(_plus_1);
       return null;
     }
@@ -435,17 +433,17 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   public Type assertIsNumber(final Type object, final String operator) {
     boolean _and = false;
     boolean _isReal = this.ts.isReal(object);
-    boolean _not = BooleanExtensions.operator_not(_isReal);
+    boolean _not = (!_isReal);
     if (!_not) {
       _and = false;
     } else {
       boolean _isInteger = this.ts.isInteger(object);
-      boolean _not_1 = BooleanExtensions.operator_not(_isInteger);
-      _and = BooleanExtensions.operator_and(_not, _not_1);
+      boolean _not_1 = (!_isInteger);
+      _and = (_not && _not_1);
     }
     if (_and) {
-      String _plus = ObjectExtensions.operator_plus("operator \'", operator);
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, "\' can only be applied to numbers!");
+      String _plus = ("operator \'" + operator);
+      String _plus_1 = (_plus + "\' can only be applied to numbers!");
       this.error(_plus_1);
       return null;
     }
@@ -454,10 +452,10 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   
   public Type assertIsBoolean(final Type object, final String operator) {
     boolean _isBoolean = this.ts.isBoolean(object);
-    boolean _not = BooleanExtensions.operator_not(_isBoolean);
+    boolean _not = (!_isBoolean);
     if (_not) {
-      String _plus = ObjectExtensions.operator_plus("operator \'", operator);
-      String _plus_1 = ObjectExtensions.operator_plus(_plus, "\' can only be applied to boolean values!");
+      String _plus = ("operator \'" + operator);
+      String _plus_1 = (_plus + "\' can only be applied to boolean values!");
       this.error(_plus_1);
     }
     return object;
