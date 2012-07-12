@@ -52,6 +52,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sexec.ExecutionSynchronization
 import org.yakindu.sct.model.sgraph.Synchronization
+import org.yakindu.sct.model.sexec.ExecutionNode
  
 
 
@@ -65,7 +66,7 @@ import org.yakindu.sct.model.sgraph.Synchronization
 	@Inject extension SexecExtensions sexec
 	
 
-	def ExecutionFlow create r : sexecFactory.createExecutionFlow create(Statechart statechart){
+	def  ExecutionFlow create r : sexecFactory.createExecutionFlow create(Statechart statechart){
 		r.name = statechart.name
 		r.sourceElement = statechart
 	}
@@ -108,7 +109,7 @@ import org.yakindu.sct.model.sgraph.Synchronization
 	
 	def OperationDefinition create r : EcoreUtil::copy(v) create(OperationDefinition v) {}
 	
-	
+	 
 	def ExecutionState create r : sexecFactory.createExecutionState create(RegularState state){
 		if (state != null) {
 			val n = state.parentRegion.vertices.filter(typeof (FinalState)).toList.indexOf(state)
@@ -269,6 +270,14 @@ import org.yakindu.sct.model.sgraph.Synchronization
 		r.value = boolLit
 		return r
 	}
+
+
+	def dispatch ExecutionNode mapped(State s) { s.create }
+	def dispatch ExecutionNode mapped(FinalState s) { s.create }
+	def dispatch ExecutionNode mapped(Choice s) { s.create }
+	def dispatch ExecutionNode mapped(Entry s) { s.create }
+	def dispatch ExecutionNode mapped(Synchronization s) { s.create }
+
 
 	//--------- UTILS ---------------
 	def sexecFactory() { SexecFactory::eINSTANCE }

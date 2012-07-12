@@ -39,8 +39,8 @@ class ModelSequencer {
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
 		sc.mapScopes(ef)
 		sc.mapRegularStates(ef)
-		sc.mapRegions(ef)
 		sc.mapPseudoStates(ef)
+		sc.mapRegions(ef)
 		sc.mapTimeEvents(ef)
 
 		// calculate state vectors

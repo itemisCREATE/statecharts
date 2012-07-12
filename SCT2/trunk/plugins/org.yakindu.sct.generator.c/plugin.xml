@@ -12,6 +12,14 @@
             id="yakindu::c"
             name="YAKINDU C Code Generator">
       </SCTGenerator>
+      <SCTGenerator
+            class="org.yakindu.sct.generator.c.CSCTGenerator"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            description="SCT C Code Generator"
+            id="yakindu::c_new"
+            name="SCT C Code Generator">
+      </SCTGenerator>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
@@ -20,12 +28,21 @@
             generatorId="yakindu::c"
             uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
+      <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider"
+            generatorId="yakindu::c_new"
+            uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibrary.xmi">
+      </FeatureLibrary>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.extensions">
       <ExtensionGeneratorMapping
             fileExtension="sct"
             generatorId="yakindu::c">
+      </ExtensionGeneratorMapping>
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::c_new">
       </ExtensionGeneratorMapping>
    </extension>
 </plugin>

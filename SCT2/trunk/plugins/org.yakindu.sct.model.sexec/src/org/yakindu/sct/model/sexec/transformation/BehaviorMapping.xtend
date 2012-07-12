@@ -35,6 +35,13 @@ import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sexec.ExecutionSynchronization
+import apple.awt.CRenderer$Tracer
+import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sexec.ExecutionEntry
+import java.util.ArrayList
+import java.util.HashSet
+import java.util.Set
 
  
 
@@ -111,7 +118,14 @@ class BehaviorMapping {
 
 	def ExecutionSynchronization mapSyncTransition(Synchronization sync) {
 		val _sync = sync.create
-		_sync.reactions.addAll( sync.outgoingTransitions.map(t | t.mapTransition) )
+		val transitions = sync.outgoingTransitions
+		val r = transitions.head.create
+		_sync.reactions.add(r)
+		
+		// map multiple transitions to one reaction
+		r.effect = transitions.mapToEffect(r)
+		
+//		_sync.reactions.addAll( sync.outgoingTransitions.map(t | t.mapTransition) )
 		return _sync
 	}
 
@@ -229,7 +243,7 @@ class BehaviorMapping {
 	def dispatch Reaction mapTransition(Transition t, Vertex source, Vertex target) {
 		val r = t.create 
 		if (t.trigger != null) r.check = mapToCheck(t.trigger)
-		r.effect = mapToEffect(t, r)
+		r.effect = mapToEffect(newArrayList(t), r)
 		
 		return r
 	}
@@ -258,7 +272,11 @@ class BehaviorMapping {
 		var Statement condition = r.check.condition
 //		if (t.trigger != null) condition = t.trigger.buildCondition
 		
-		for ( trans : target.incomingTransitions.filter( trans | trans != t )) { 
+		val joinTransitions = target.incomingTransitions
+			.filter( jt | jt.source instanceof State)
+			.sortBy( jt | (jt.source as State).create.stateVector.offset )
+		
+		for ( trans : joinTransitions.filter( trans | trans != t )) { 
 			if (trans.source instanceof State) { 
 				condition = condition.conjunct(stext.active(trans.source as State))
 				if (trans.trigger != null) condition = condition.conjunct(trans.trigger.buildCondition)			
@@ -266,9 +284,8 @@ class BehaviorMapping {
 		}
 		r.check.condition = condition	
 		
-		// map effects
-		// TODO: add effects of sibling transitions
-		r.effect = mapToEffect(t, r)
+		// map effects of all transitions as a compound effect
+		r.effect = mapToEffect(joinTransitions, r)
 		
 		return r
 	}
@@ -365,67 +382,154 @@ class BehaviorMapping {
 
 		// define entry behavior of the transition
 		
-		// first process all composite states on the path to the target state in top-down-order
-		t.entryScopes().drop(1).toList.reverse.fold(sequence, [seq, scope | {
-			if (scope instanceof ExecutionRegion) { 
-				// if we enter a region than we have to process the sibling regions
-			
-				val siblingRegions = scope.superScope.subScopes
-				
-				// process higher order sibling regions
-				for ( region : siblingRegions.take(siblingRegions.indexOf(scope)) ) {
-					if (region.enterSequence != null) {
-						seq.steps.add(region.enterSequence.newCall)
-					}
-				}
-			} 
-			
-			if (scope instanceof ExecutionState) {
-				// perform entry on the transition path 			
-				if ((scope as ExecutionState).entryAction != null) seq.steps.add((scope as ExecutionState).entryAction.newCall)
-				if ( trace.addTraceSteps ) seq.steps.add( (scope as ExecutionState).newTraceStateEntered )
-				
-			}
-			seq
-		}])
+		sequence.steps.addAll( mapToStateConfigurationEnterSequence( newArrayList(t) ).steps )
 		
-		
-		// second process the target state entry behavior
-		if (t.target != null ) {
-
-			// perform entry on the transition path 			
-			if ( t.target instanceof RegularState) {
-				sequence.steps.add((t.target as RegularState).create.enterSequence.newCall )	
-			} else if ( t.target instanceof Choice ) {
-				sequence.steps.add((t.target as Choice).create.reactSequence.newCall )	
-			} else if ( t.target instanceof Entry ) {
-				sequence.steps.add((t.target as Entry).create.reactSequence.newCall )	
-			} else if ( t.target instanceof Synchronization ) {
-				sequence.steps.add((t.target as Synchronization).create.reactSequence.newCall )	
-			}
-		}
-		
-		
-		// third - process all entry behavior that has to be executed after the target state behavior in bottom-up-order
-		
-		t.entryScopes().drop(1).fold(sequence, [seq, scope | {
-			if (scope instanceof ExecutionRegion) { 
-				// if we enter a region than we have to process the sibling regions
-			
-				val siblingRegions = scope.superScope.subScopes
-				
-				// process lower order sibling regions 
-				for ( region : siblingRegions.drop(siblingRegions.indexOf(scope)+1) ) {
-					if (region.enterSequence != null) {
-						seq.steps.add(region.enterSequence.newCall)
-					}
-				}
-			} 
-			seq
-		}])
 		
 		return sequence
 	}
+	
+	/**
+	 * Creates a compound effect that can consist of multiple transitions.
+	 */
+	def Sequence mapToEffect(List<Transition> transitions, Reaction r) {
+		val sequence = sexec.factory.createSequence 
+
+		// define exit behavior of transition
+		
+		// first process the exit behavior of orthogonal states that hase to be performed before source exit
+		val exitStates = transitions.get(0).exitStates.toList
+		for ( t : transitions ) {
+			exitStates.retainAll(t.exitStates.toList)
+		}
+		val topExitState = exitStates.last
+		
+		if (topExitState != null) {
+			val exitSequence = topExitState.create.exitSequence
+			if (exitSequence != null) {
+				sequence.steps.add(exitSequence.newCall)
+			}
+		}
+
+		// map transition actions
+		for ( t : transitions ) {
+			if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
+			if (trace.addTraceSteps) { sequence.steps += t.create.newTraceReactionFired() }
+		}
+	
+	
+		// define entry behavior of the transition	
+		sequence.steps.addAll( mapToStateConfigurationEnterSequence( transitions ).steps )
+		
+		return sequence
+	}
+	
+	/**
+	 * Calcuates a sequence to enter one or more states. Entering multiple states is required for fork, where parts of a state 
+	 * configuration is specified.
+	 */
+	def Sequence mapToStateConfigurationEnterSequence(List<Transition> transitions) {
+	
+		// precondition : common source vertex
+		// ? precondition : targets are Regular States ?
+		
+		val sequence = sexec.factory.createSequence 
+
+		// determine start entry scope
+		val entryScopes = transitions.get(0).entryScopes.drop(1).toList.reverse
+		for ( t: transitions ) {
+			entryScopes.retainAll(t.entryScopes)
+		}
+		val entryScope = entryScopes.head
+		
+		// determine all target vertices
+		val targets = transitions.map( t | t.target.mapped)
+		
+		// recursively extend the sequence by entering the scope for the specified targets		
+		if (entryScope != null) entryScope.addEnterStepsForTargetsToSequence( targets, sequence)	
+		else {
+			for ( t : targets ) t.addEnterStepsForTargetsToSequence(targets, sequence)
+ 		}	
+	
+		return sequence
+	}
+	
+	
+
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionState it, List<ExecutionNode> targets, Sequence seq) {
+
+		if ( targets.contains(it) ) {
+			seq.steps.add( it.enterSequence.newCall )		
+		}
+		else {
+			if ( it.entryAction != null ) seq.steps.add(it.entryAction.newCall)
+			if ( trace.addTraceSteps ) seq.steps.add(it.newTraceStateEntered)
+			
+			for (  subScope : it.subScopes ) {
+				subScope.addEnterStepsForTargetsToSequence(targets, seq)
+			}
+		}
+
+	}
+
+
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionRegion it, List<ExecutionNode> targets, Sequence seq) {
+		
+		// if a target is a direct node
+		val target =  targets.filter( t | it.nodes.contains( t )).head 
+		if (target != null) {
+			target.addEnterStepsForTargetsToSequence(targets, seq)
+			return
+		}
+		
+		// if the execution region contains targets 
+		if ( allNodes.exists( n | targets.contains(n) ) ) {
+			for ( s : subScopes ) {
+				if ( s.allNodes.exists( n | targets.contains(n)))
+					s.addEnterStepsForTargetsToSequence(targets, seq)
+			}
+		} else {
+			seq.steps.add(it.enterSequence.newCall)
+		}
+	}
+	
+	
+	def dispatch Set<ExecutionNode> allNodes(ExecutionRegion it) {
+		val allNodes = new HashSet<ExecutionNode>()
+		allNodes.addAll(nodes)
+
+		for ( s : subScopes ) {
+			allNodes.addAll( s.allNodes )
+		}
+		
+		allNodes
+	}
+	
+	def dispatch Set<ExecutionNode> allNodes(ExecutionState it) {
+		val allNodes = new HashSet<ExecutionNode>()
+		allNodes.add(it)
+
+		for ( s : subScopes ) {
+			allNodes.addAll( s.allNodes )
+		}
+		
+		allNodes
+	}
+		
+	
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionChoice it, List<ExecutionNode> targets, Sequence seq) {
+		seq.steps.add( reactSequence.newCall )	
+	}
+	
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionEntry it, List<ExecutionNode> targets, Sequence seq) {
+		seq.steps.add( reactSequence.newCall )	
+	}
+	
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionSynchronization it, List<ExecutionNode> targets, Sequence seq) {
+		seq.steps.add( reactSequence.newCall )	
+	}
+	
+	
+	
 	
 	def List<ExecutionScope> entryScopes(Transition t) {
 		val l = t.target.containers

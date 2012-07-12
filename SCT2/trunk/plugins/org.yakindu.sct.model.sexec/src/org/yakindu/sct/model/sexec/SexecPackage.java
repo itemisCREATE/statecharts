@@ -753,13 +753,22 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_REGION__HISTORY_VECTOR = EXECUTION_SCOPE_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Nodes</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_REGION__NODES = EXECUTION_SCOPE_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Execution Region</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_REGION_FEATURE_COUNT = EXECUTION_SCOPE_FEATURE_COUNT + 3;
+	int EXECUTION_REGION_FEATURE_COUNT = EXECUTION_SCOPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl <em>Execution Entry</em>}' class.
@@ -2522,6 +2531,17 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionRegion_HistoryVector();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.yakindu.sct.model.sexec.ExecutionRegion#getNodes <em>Nodes</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Nodes</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionRegion#getNodes()
+	 * @see #getExecutionRegion()
+	 * @generated
+	 */
+	EReference getExecutionRegion_Nodes();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.ExecutionEntry <em>Execution Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3463,6 +3483,14 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference EXECUTION_REGION__HISTORY_VECTOR = eINSTANCE.getExecutionRegion_HistoryVector();
+
+		/**
+		 * The meta object literal for the '<em><b>Nodes</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXECUTION_REGION__NODES = eINSTANCE.getExecutionRegion_Nodes();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionEntryImpl <em>Execution Entry</em>}' class.

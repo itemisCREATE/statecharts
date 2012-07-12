@@ -580,6 +580,15 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getExecutionRegion_Nodes() {
+		return (EReference)executionRegionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExecutionEntry() {
 		return executionEntryEClass;
 	}
@@ -1247,6 +1256,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(executionRegionEClass, EXECUTION_REGION__DEEP_ENTER_SEQUENCE);
 		createEReference(executionRegionEClass, EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE);
 		createEReference(executionRegionEClass, EXECUTION_REGION__HISTORY_VECTOR);
+		createEReference(executionRegionEClass, EXECUTION_REGION__NODES);
 
 		executionEntryEClass = createEClass(EXECUTION_ENTRY);
 
@@ -1445,6 +1455,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getExecutionRegion_DeepEnterSequence(), this.getSequence(), null, "deepEnterSequence", null, 0, 1, ExecutionRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionRegion_ShallowEnterSequence(), this.getSequence(), null, "shallowEnterSequence", null, 0, 1, ExecutionRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionRegion_HistoryVector(), this.getStateVector(), null, "historyVector", null, 0, 1, ExecutionRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionRegion_Nodes(), this.getExecutionNode(), null, "nodes", null, 0, -1, ExecutionRegion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionEntryEClass, ExecutionEntry.class, "ExecutionEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

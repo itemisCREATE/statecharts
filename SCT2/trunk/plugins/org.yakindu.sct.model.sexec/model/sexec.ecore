@@ -52,6 +52,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="historyVector" eType="#//StateVector"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nodes" upperBound="-1"
+        eType="#//ExecutionNode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEntry" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionChoice" eSuperTypes="#//ExecutionNode"/>
