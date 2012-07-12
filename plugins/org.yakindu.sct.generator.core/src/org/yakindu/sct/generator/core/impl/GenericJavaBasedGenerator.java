@@ -10,15 +10,18 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
+import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_FOLDER;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.CONFIGURATION_MODULE;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_CLASS;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.TEMPLATE_FEATURE;
+import static org.yakindu.sct.generator.core.util.GeneratorUtils.getOutletFeatureConfiguration;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator;
@@ -38,15 +41,17 @@ import com.google.inject.util.Modules;
  */
 public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
+	
 	@Override
 	protected com.google.inject.Injector createInjector(GeneratorEntry entry) {
 		return Guice.createInjector(createModule(entry));
 	}
 
 	@Override
-	protected Module createModule(GeneratorEntry entry) {
+	protected Module createModule(final GeneratorEntry entry) {
 		Module defaultModule = super.createModule(entry);
 
+		
 		String overridingModuleClass = null;
 		FeatureConfiguration featureConfiguration = entry
 				.getFeatureConfiguration(TEMPLATE_FEATURE);
@@ -95,6 +100,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 		String templateClass = entry.getFeatureConfiguration(TEMPLATE_FEATURE)
 				.getParameterValue(GENERATOR_CLASS).getStringValue();
 		final ClassLoader classLoader = getClassLoader(entry);
+		IFileSystemAccess fsa = getFileSystemAccess(entry);
 		try {
 			Class<?> delegateGeneratorClass = (Class<?>) classLoader
 					.loadClass(templateClass);
@@ -105,7 +111,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 			}
 			if (delegate instanceof IExecutionFlowGenerator) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(createExecutionFlow(flow, entry), entry);
+				flowGenerator.generate(createExecutionFlow(flow, entry), entry, fsa);
 			}
 			if (delegate instanceof ISGraphGenerator) {
 				ISGraphGenerator graphGenerator = (ISGraphGenerator) delegate;
@@ -138,4 +144,25 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 		return project;
 	}
 
+	
+	/**
+	 * Provides a pre configured IFileSystemAccess instance
+	 */
+	public IFileSystemAccess getFileSystemAccess(GeneratorEntry entry) {
+		
+		SimpleResourceFileSystemAccess fileSystemAccess = new SimpleResourceFileSystemAccess(); 
+		fileSystemAccess.setProject(getTargetProject(entry));
+		
+		FeatureConfiguration outletConfig = getOutletFeatureConfiguration(entry);
+		String targetFolder = outletConfig
+				.getParameterValue(OUTLET_FEATURE_TARGET_FOLDER).getExpression().toString();		
+		
+		fileSystemAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, targetFolder);
+		
+		
+		return fileSystemAccess;
+	}
+	
+	
+	
 }

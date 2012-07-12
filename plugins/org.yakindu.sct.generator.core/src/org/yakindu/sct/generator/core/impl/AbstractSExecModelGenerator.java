@@ -62,7 +62,7 @@ public abstract class AbstractSExecModelGenerator extends
 		if (this instanceof IExecutionFlowGenerator) {
 			IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) this;
 			flowGenerator.generate(createExecutionFlow(statechart, entry),
-					entry);
+					entry, null);
 		}
 		super.runGenerator(statechart, entry);
 	}

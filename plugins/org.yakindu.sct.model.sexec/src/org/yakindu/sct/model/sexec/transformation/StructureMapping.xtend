@@ -18,6 +18,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgraph.Vertex
 
 
 class StructureMapping {
@@ -114,6 +115,7 @@ class StructureMapping {
 		else _region.superScope = (region.composite as State).create
 
 		_region.subScopes.addAll( region.vertices.filter( typeof(RegularState) ).map( v | v.create as ExecutionScope ) )
+		_region.nodes.addAll( region.vertices.filter( typeof(Vertex) ).map( v | v.mapped  ) )
 
 		return _region
 	}

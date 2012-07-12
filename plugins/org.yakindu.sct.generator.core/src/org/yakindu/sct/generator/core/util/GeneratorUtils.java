@@ -75,6 +75,7 @@ public class GeneratorUtils {
 		return project;
 	}
 
+	/** Gets the target folder path as a File that includes the project location */
 	public static File getTargetFolder(GeneratorEntry entry) {
 		String targetFolder = getOutletFeatureConfiguration(entry)
 				.getParameterValue(

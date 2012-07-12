@@ -6,11 +6,15 @@
  */
 package org.yakindu.sct.model.sexec.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecPackage;
@@ -26,6 +30,7 @@ import org.yakindu.sct.model.sexec.StateVector;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl#getDeepEnterSequence <em>Deep Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl#getShallowEnterSequence <em>Shallow Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl#getHistoryVector <em>History Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionRegionImpl#getNodes <em>Nodes</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,6 +64,15 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * @ordered
 	 */
 	protected StateVector historyVector;
+	/**
+	 * The cached value of the '{@link #getNodes() <em>Nodes</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getNodes()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExecutionNode> nodes;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -212,6 +226,18 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ExecutionNode> getNodes() {
+		if (nodes == null) {
+			nodes = new EObjectResolvingEList<ExecutionNode>(ExecutionNode.class, this, SexecPackage.EXECUTION_REGION__NODES);
+		}
+		return nodes;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -239,6 +265,8 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 				return getShallowEnterSequence();
 			case SexecPackage.EXECUTION_REGION__HISTORY_VECTOR:
 				return getHistoryVector();
+			case SexecPackage.EXECUTION_REGION__NODES:
+				return getNodes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -248,6 +276,7 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -259,6 +288,10 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 				return;
 			case SexecPackage.EXECUTION_REGION__HISTORY_VECTOR:
 				setHistoryVector((StateVector)newValue);
+				return;
+			case SexecPackage.EXECUTION_REGION__NODES:
+				getNodes().clear();
+				getNodes().addAll((Collection<? extends ExecutionNode>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -281,6 +314,9 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 			case SexecPackage.EXECUTION_REGION__HISTORY_VECTOR:
 				setHistoryVector((StateVector)null);
 				return;
+			case SexecPackage.EXECUTION_REGION__NODES:
+				getNodes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -299,6 +335,8 @@ public class ExecutionRegionImpl extends ExecutionScopeImpl implements Execution
 				return shallowEnterSequence != null;
 			case SexecPackage.EXECUTION_REGION__HISTORY_VECTOR:
 				return historyVector != null;
+			case SexecPackage.EXECUTION_REGION__NODES:
+				return nodes != null && !nodes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -6,6 +6,8 @@
  */
 package org.yakindu.sct.model.sexec;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +20,7 @@ package org.yakindu.sct.model.sexec;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getDeepEnterSequence <em>Deep Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getShallowEnterSequence <em>Shallow Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getHistoryVector <em>History Vector</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionRegion#getNodes <em>Nodes</em>}</li>
  * </ul>
  * </p>
  *
@@ -104,4 +107,20 @@ public interface ExecutionRegion extends ExecutionScope {
 	 * @generated
 	 */
 	void setHistoryVector(StateVector value);
+
+	/**
+	 * Returns the value of the '<em><b>Nodes</b></em>' reference list.
+	 * The list contents are of type {@link org.yakindu.sct.model.sexec.ExecutionNode}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Nodes</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Nodes</em>' reference list.
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionRegion_Nodes()
+	 * @model
+	 * @generated
+	 */
+	EList<ExecutionNode> getNodes();
 } // ExecutionRegion
