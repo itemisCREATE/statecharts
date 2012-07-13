@@ -51,8 +51,8 @@ public class XtextFakeResourceContext {
 
 	protected void initXtextFakeResourceSet() {
 		fakeResourceSet.getResources().add(fakeResource);
-//		fakeResourceSet.getLoadOptions().put(
-//				ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
+		// fakeResourceSet.getLoadOptions().put(
+		// ResourceDescriptionsProvider.LIVE_SCOPE, Boolean.TRUE);
 	}
 
 	protected ResourceSet getFakeResourceSet() {
@@ -65,8 +65,11 @@ public class XtextFakeResourceContext {
 
 	protected void initXtextFakeResource() {
 		// add the fake resource (add an uri to it, first)
-		String activeProject = getActiveProject().getName();
-		fakeResource.setURI(createFakeResourceUri(activeProject));
+		IProject activeProject = getActiveProject();
+		// fallback to avoid dependency on open editor
+		String activeProjectName = activeProject != null ? activeProject
+				.getName() : "fakeResource";
+		fakeResource.setURI(createFakeResourceUri(activeProjectName));
 	}
 
 	public XtextResource getFakeResource() {
@@ -108,8 +111,7 @@ public class XtextFakeResourceContext {
 		// contained in the resource set may be problematic, so we temporarily
 		// remove it
 		fakeResourceSet.getResources().remove(fakeResource);
-		contextProvider.populateFakeResourceSet(fakeResourceSet,
-				fakeResource);
+		contextProvider.populateFakeResourceSet(fakeResourceSet, fakeResource);
 		fakeResourceSet.getResources().add(fakeResource);
 	}
 
