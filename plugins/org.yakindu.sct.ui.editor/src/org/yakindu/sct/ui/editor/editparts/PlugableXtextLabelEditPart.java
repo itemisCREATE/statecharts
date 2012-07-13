@@ -106,7 +106,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 		}
 	}
 
-	private EAttribute getFeature() {
+	protected EAttribute getFeature() {
 		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
 
