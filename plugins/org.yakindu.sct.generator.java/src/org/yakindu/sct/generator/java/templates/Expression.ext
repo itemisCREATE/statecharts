@@ -27,17 +27,14 @@ String toCode(Expression expression) :
 	"/* Unknown expression: "+expression+" */"; 
 
 String toCode(OperationDefinition this) :
-	"//" + getContext() + "operationCallback." + name;
-
-//String toCode(List[Expression] this):
-//	select(e|true).toCode();
+	getContext() + "operationCallback." + name;
 
 String toCode(ElementReferenceExpression ref) :
 	if (ref.operationCall) then
-		 (ref.reference.toCode() + "("+ ref.args.toCode() + ")")
+		 ref.reference.toCode() + "("+ ref.args.toCode().toString(", ") + ")"
 	else 
 		ref.reference.toCode();
-	
+
 String toCode(EObject ref) :
 	"/* toCode not defined for: "+ref+" */";
 	
