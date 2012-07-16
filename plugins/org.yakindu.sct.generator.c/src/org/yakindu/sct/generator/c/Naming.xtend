@@ -7,6 +7,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class Naming {
 
@@ -14,6 +15,10 @@ class Naming {
 	
 	def module(ExecutionFlow it) {
 		name.asIdentifier.toFirstUpper	
+	}
+	
+	def client(String it) {
+		it + "Required"	
 	}
 	
 	def timerModule(ExecutionFlow it) {
@@ -88,6 +93,10 @@ class Naming {
 	def asSetter(VariableDefinition it) {
 		scope.functionPrefix + '_set_' + name.asIdentifier.toFirstLower	
 	}
+
+	def asFunction(OperationDefinition it) {
+		scope.functionPrefix + '_' + name.asIdentifier.toFirstLower	
+	}
 	
 	
 	def h(String it) { it + ".h" }
@@ -100,4 +109,9 @@ class Naming {
 		replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', '_')
 	}
 	
+	
+	def dispatch scopeDescription(Scope it) '''scope'''
+	
+	def dispatch scopeDescription(InterfaceScope it) '''«IF name==null || name.empty»default interface scope«ELSE»interface scope '«name»'«ENDIF»'''
+	def dispatch scopeDescription(InternalScope it) '''internal scope'''
 }

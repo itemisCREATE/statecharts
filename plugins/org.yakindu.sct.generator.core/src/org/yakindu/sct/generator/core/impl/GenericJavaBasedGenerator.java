@@ -91,7 +91,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 	protected ClassLoader getClassLoader(GeneratorEntry entry) {
 		IProject project = getLookupRoot(entry);
 		final ClassLoader classLoader = new WorkspaceClassLoaderFactory()
-				.createClassLoader(project);
+				.createClassLoader(project, getClass().getClassLoader());
 		return classLoader;
 	}
 
@@ -106,10 +106,21 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 					.loadClass(templateClass);
 			Object delegate = getInjector(entry).getInstance(
 					delegateGeneratorClass);
+			
+			Class<?> iType_ = (Class<?>) getClass().getClassLoader()
+					.loadClass("org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator"); 
+			Class<?> iType__ = IExecutionFlowGenerator.class;
+			Class<?> iType = (Class<?>) classLoader
+					.loadClass("org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator"); 
+			
 			if (delegate instanceof AbstractWorkspaceGenerator) {
 				((AbstractWorkspaceGenerator) delegate).setBridge(bridge);
 			}
 			if (delegate instanceof IExecutionFlowGenerator) {
+				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
+				flowGenerator.generate(createExecutionFlow(flow, entry), entry, fsa);
+			}
+			if (iType.isInstance(delegate)) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
 				flowGenerator.generate(createExecutionFlow(flow, entry), entry, fsa);
 			}
