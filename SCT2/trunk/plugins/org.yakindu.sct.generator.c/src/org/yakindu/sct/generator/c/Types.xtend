@@ -24,13 +24,15 @@ class Types {
 		
 		#include <stdint.h>
 		 				
-		typedef int_fast16_t sc_short;
+		typedef int_fast16_t  sc_short;
 		typedef uint_fast16_t sc_ushort;
-		typedef int32_t sc_integer; 
-		typedef uint32_t sc_uinteger; 
+		typedef int32_t       sc_integer; 
+		typedef uint32_t      sc_uinteger; 
+		typedef double        sc_real;
+		typedef char*         sc_string;
 		typedef enum { bool_false = 0, bool_true = 1 } sc_boolean;
-		typedef double sc_real;
-		typedef char* sc_string;
+		
+		typedef uint32_t      sc_eventid;
 		
 		#ifdef __cplusplus
 		}

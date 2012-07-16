@@ -15,29 +15,23 @@ import org.yakindu.sct.model.sgraph.Statechart
 class CSCTGenerator implements IExecutionFlowGenerator {
 	 
 	@Inject extension Types
-	@Inject extension Timer 
 	@Inject extension Statemachine
+	@Inject extension StatemachineC
+	@Inject extension StatemachineRequired
  	
 
-//	override public runGenerator(Statechart statechart, GeneratorEntry entry) {
-//		entry.injector.injectMembers(this);
-//		
-//		val flow = statechart.createExecutionFlow(entry)
-//		//val fsa = entry.fileSystemAccess
-//				
-//		flow.generateStatemachineH(statechart, fsa)
-//	}
-	
-	
 	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
 		flow.generateTypesH(flow.sourceElement as Statechart, fsa)
 		
-		flow.generateTimerH(flow.sourceElement as Statechart, fsa)
-		flow.generateTimerC(flow.sourceElement as Statechart, fsa)
+//		flow.generateTimerH(flow.sourceElement as Statechart, fsa)
+//		flow.generateTimerC(flow.sourceElement as Statechart, fsa)
 
 		flow.generateStatemachineH(flow.sourceElement as Statechart, fsa)
+		flow.generateStatemachineClientH(flow.sourceElement as Statechart, fsa)
+
+		flow.generateStatemachineC(flow.sourceElement as Statechart, fsa)
 
 	}
 

@@ -54,14 +54,23 @@ public class WorkspaceClassLoaderFactory {
 	/**
 	 * Creates a {@link ClassLoader} that can be used to load resources from the
 	 * workspace.
+	 * 
+	 * @deprecated use factory method that takes a parent {@link ClassLoader}
 	 */
 	public ClassLoader createClassLoader(IProject project) {
+		return createClassLoader(project, WorkspaceClassLoaderFactory.class.getClassLoader());
+	}
+
+	/**
+	 * Creates a {@link ClassLoader} that can be used to load resources from the
+	 * workspace.
+	 */
+	public ClassLoader createClassLoader(IProject project, ClassLoader parent) {
 		final List<URL> urls = Lists.newArrayList();
 
 		addClasspathEntries(project, urls);
 
-		return URLClassLoader.newInstance(urls.toArray(new URL[urls.size()]),
-				WorkspaceClassLoaderFactory.class.getClassLoader());
+		return URLClassLoader.newInstance(urls.toArray(new URL[urls.size()]), parent);
 	}
 
 	protected void addClasspathEntries(IProject project, List<URL> urls) {

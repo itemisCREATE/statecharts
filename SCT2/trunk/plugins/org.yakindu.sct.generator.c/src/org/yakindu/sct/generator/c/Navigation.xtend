@@ -9,16 +9,27 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import java.util.ArrayList
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.eclipse.emf.ecore.EObject
 
 class Navigation {
 	
-	def ExecutionFlow flow(Scope scope) {
+	def dispatch ExecutionFlow flow(Scope scope) {
 		if (scope.eContainer instanceof ExecutionFlow) scope.eContainer as ExecutionFlow
 		else null
 	}
 	
-	def ExecutionFlow flow(Declaration it) {
+	def dispatch ExecutionFlow flow(Declaration it) {
 		scope?.flow
+	}
+	
+	def dispatch ExecutionFlow flow(EObject it) {
+		eContainer.flow
+	}
+	
+	def dispatch ExecutionFlow flow(ExecutionFlow it) {
+		it
 	}
 	
 	def Scope scope(Declaration it) {
@@ -39,4 +50,9 @@ class Navigation {
 		type != null && type.name != 'void'
 	}
 	
+	def operations(ExecutionFlow it) {
+		scopes.fold(new ArrayList<OperationDefinition>(), [ l, s | l.addAll(s.declarations.filter( typeof(OperationDefinition))) return l ])
+	}
+	
+
 }
