@@ -60,6 +60,7 @@ class ModelSequencer {
 		ef.defineStatechartExitSequence(sc)
 		
 		sc.mapTransitions(ef)
+		sc.mapEntries(ef)
 		sc.mapLocalReactions(ef)
 		sc.mapChoiceTransitions(ef)
 		sc.mapSyncTransitions(ef)

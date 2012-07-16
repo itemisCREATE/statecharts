@@ -1,28 +1,36 @@
 package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
+import java.util.HashSet
 import java.util.List
+import java.util.Set
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionChoice
+import org.yakindu.sct.model.sexec.ExecutionEntry
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.ExecutionSynchronization
 import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Effect
 import org.yakindu.sct.model.sgraph.Entry
+import org.yakindu.sct.model.sgraph.Pseudostate
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
+import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.LocalReaction
@@ -31,17 +39,6 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sgraph.Pseudostate
-import org.yakindu.sct.model.sgraph.Synchronization
-import org.yakindu.sct.model.sexec.ExecutionSynchronization
-import apple.awt.CRenderer$Tracer
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sgraph.FinalState
-import org.yakindu.sct.model.sexec.ExecutionEntry
-import java.util.ArrayList
-import java.util.HashSet
-import java.util.Set
 
  
 
@@ -290,6 +287,10 @@ class BehaviorMapping {
 		return r
 	}
 	
+	def ExecutionFlow mapEntries(Statechart statechart, ExecutionFlow r) {
+		r.nodes.addAll(statechart.eAllContents.filter(typeof(Entry)).map(e|e.create).toList)
+		r
+	}
 	
 	def Statement conjunct(Statement c1, Statement c2) {
 		if (c1 != null && c2 != null ) stext.and(c1 as Expression, c2 as Expression)

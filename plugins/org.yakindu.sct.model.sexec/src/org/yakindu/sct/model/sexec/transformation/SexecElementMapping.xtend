@@ -12,8 +12,10 @@ import org.yakindu.sct.model.sexec.CheckRef
 import org.yakindu.sct.model.sexec.ExecutionChoice
 import org.yakindu.sct.model.sexec.ExecutionEntry
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.ExecutionSynchronization
 import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.SexecFactory
@@ -31,6 +33,7 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.BoolLiteral
@@ -50,9 +53,6 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.ExecutionSynchronization
-import org.yakindu.sct.model.sgraph.Synchronization
-import org.yakindu.sct.model.sexec.ExecutionNode
  
 
 
@@ -129,7 +129,6 @@ import org.yakindu.sct.model.sexec.ExecutionNode
 		}
 	}
 
-
 	def ExecutionEntry create r : sexecFactory.createExecutionEntry create(Entry entry){
 		if (entry != null) {
 			val region = entry.eContainer as Region
@@ -149,6 +148,7 @@ import org.yakindu.sct.model.sexec.ExecutionNode
 				}+"entry " + entry.name
 
 			r.reactSequence = seq
+			entry.outgoingTransitions.forEach(t | r.reactions+=t.create)
 		}
 	}
 	

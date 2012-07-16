@@ -17,6 +17,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sexec.Call;
@@ -25,9 +26,11 @@ import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
 import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExecutionSynchronization;
+import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
@@ -43,7 +46,6 @@ import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -471,6 +473,15 @@ public class SexecElementMapping {
       String _plus_6 = (_plus_5 + _name_4);
       seq.setComment(_plus_6);
       r.setReactSequence(seq);
+      EList<Transition> _outgoingTransitions = entry.getOutgoingTransitions();
+      final Procedure1<Transition> _function = new Procedure1<Transition>() {
+          public void apply(final Transition t) {
+            EList<Reaction> _reactions = r.getReactions();
+            Reaction _create = SexecElementMapping.this.create(t);
+            _reactions.add(_create);
+          }
+        };
+      IterableExtensions.<Transition>forEach(_outgoingTransitions, _function);
     }
   }
   
@@ -571,20 +582,20 @@ public class SexecElementMapping {
   private final HashMap<ArrayList<? extends Object>,Check> _createCache_createCheck = CollectionLiterals.newHashMap();
   
   private void _init_createCheck(final Check r, final ReactionTrigger tr) {
-    Reaction _reaction = this.sce.reaction(tr);
+    org.yakindu.sct.model.sgraph.Reaction _reaction = this.sce.reaction(tr);
     String _id = this.sce.id(_reaction);
     r.setName(_id);
   }
   
-  public org.yakindu.sct.model.sexec.Reaction create(final Transition tr) {
+  public Reaction create(final Transition tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
-    final org.yakindu.sct.model.sexec.Reaction _result;
+    final Reaction _result;
     synchronized (_createCache_create_11) {
       if (_createCache_create_11.containsKey(_cacheKey)) {
         return _createCache_create_11.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
-      org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
+      Reaction _createReaction = _sexecFactory.createReaction();
       _result = _createReaction;
       _createCache_create_11.put(_cacheKey, _result);
     }
@@ -592,24 +603,24 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_11 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Reaction> _createCache_create_11 = CollectionLiterals.newHashMap();
   
-  private void _init_create_11(final org.yakindu.sct.model.sexec.Reaction r, final Transition tr) {
+  private void _init_create_11(final Reaction r, final Transition tr) {
     String _id = this.sce.id(tr);
     r.setName(_id);
     r.setTransition(true);
     r.setSourceElement(tr);
   }
   
-  public org.yakindu.sct.model.sexec.Reaction create(final LocalReaction lr) {
+  public Reaction create(final LocalReaction lr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
-    final org.yakindu.sct.model.sexec.Reaction _result;
+    final Reaction _result;
     synchronized (_createCache_create_12) {
       if (_createCache_create_12.containsKey(_cacheKey)) {
         return _createCache_create_12.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
-      org.yakindu.sct.model.sexec.Reaction _createReaction = _sexecFactory.createReaction();
+      Reaction _createReaction = _sexecFactory.createReaction();
       _result = _createReaction;
       _createCache_create_12.put(_cacheKey, _result);
     }
@@ -617,9 +628,9 @@ public class SexecElementMapping {
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,org.yakindu.sct.model.sexec.Reaction> _createCache_create_12 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Reaction> _createCache_create_12 = CollectionLiterals.newHashMap();
   
-  private void _init_create_12(final org.yakindu.sct.model.sexec.Reaction r, final LocalReaction lr) {
+  private void _init_create_12(final Reaction r, final LocalReaction lr) {
     String _id = this.sce.id(lr);
     r.setName(_id);
     r.setTransition(false);
@@ -790,6 +801,31 @@ public class SexecElementMapping {
     return r;
   }
   
+  protected ExecutionNode _mapped(final State s) {
+    ExecutionState _create = this.create(s);
+    return _create;
+  }
+  
+  protected ExecutionNode _mapped(final FinalState s) {
+    ExecutionState _create = this.create(s);
+    return _create;
+  }
+  
+  protected ExecutionNode _mapped(final Choice s) {
+    ExecutionChoice _create = this.create(s);
+    return _create;
+  }
+  
+  protected ExecutionNode _mapped(final Entry s) {
+    ExecutionEntry _create = this.create(s);
+    return _create;
+  }
+  
+  protected ExecutionNode _mapped(final Synchronization s) {
+    ExecutionSynchronization _create = this.create(s);
+    return _create;
+  }
+  
   public SexecFactory sexecFactory() {
     return SexecFactory.eINSTANCE;
   }
@@ -842,6 +878,23 @@ public class SexecElementMapping {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(ed, context).toString());
+    }
+  }
+  
+  public ExecutionNode mapped(final Vertex s) {
+    if (s instanceof Choice) {
+      return _mapped((Choice)s);
+    } else if (s instanceof Entry) {
+      return _mapped((Entry)s);
+    } else if (s instanceof FinalState) {
+      return _mapped((FinalState)s);
+    } else if (s instanceof State) {
+      return _mapped((State)s);
+    } else if (s instanceof Synchronization) {
+      return _mapped((Synchronization)s);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(s).toString());
     }
   }
 }

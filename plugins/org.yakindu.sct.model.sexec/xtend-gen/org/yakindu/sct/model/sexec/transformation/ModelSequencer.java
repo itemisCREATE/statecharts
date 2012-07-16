@@ -67,8 +67,8 @@ public class ModelSequencer {
     final ExecutionFlow ef = this.mapping.create(sc);
     this.structureMapping.mapScopes(sc, ef);
     this.structureMapping.mapRegularStates(sc, ef);
-    this.structureMapping.mapRegions(sc, ef);
     this.structureMapping.mapPseudoStates(sc, ef);
+    this.structureMapping.mapRegions(sc, ef);
     this.structureMapping.mapTimeEvents(sc, ef);
     this.svBuilder.defineStateVector(ef, sc);
     this.svBuilder.defineHistoryVector(ef, sc);
@@ -81,6 +81,7 @@ public class ModelSequencer {
     this.seqBuilder.defineStatechartEnterSequence(ef, sc);
     this.seqBuilder.defineStatechartExitSequence(ef, sc);
     this.behaviorMapping.mapTransitions(sc, ef);
+    this.behaviorMapping.mapEntries(sc, ef);
     this.behaviorMapping.mapLocalReactions(sc, ef);
     this.behaviorMapping.mapChoiceTransitions(sc, ef);
     this.behaviorMapping.mapSyncTransitions(sc, ef);
