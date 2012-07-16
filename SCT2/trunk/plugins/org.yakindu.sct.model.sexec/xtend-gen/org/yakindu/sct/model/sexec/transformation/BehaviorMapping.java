@@ -4,13 +4,17 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -23,6 +27,7 @@ import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionChoice;
 import org.yakindu.sct.model.sexec.ExecutionEntry;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.ExecutionNode;
 import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
@@ -32,6 +37,7 @@ import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.SexecFactory;
+import org.yakindu.sct.model.sexec.StateVector;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
@@ -252,16 +258,13 @@ public class BehaviorMapping {
   
   public ExecutionSynchronization mapSyncTransition(final Synchronization sync) {
     final ExecutionSynchronization _sync = this.factory.create(sync);
+    final EList<Transition> transitions = sync.getOutgoingTransitions();
+    Transition _head = IterableExtensions.<Transition>head(transitions);
+    final Reaction r = this.factory.create(_head);
     EList<Reaction> _reactions = _sync.getReactions();
-    EList<Transition> _outgoingTransitions = sync.getOutgoingTransitions();
-    final Function1<Transition,Reaction> _function = new Function1<Transition,Reaction>() {
-        public Reaction apply(final Transition t) {
-          Reaction _mapTransition = BehaviorMapping.this.mapTransition(t);
-          return _mapTransition;
-        }
-      };
-    List<Reaction> _map = ListExtensions.<Transition, Reaction>map(_outgoingTransitions, _function);
-    _reactions.addAll(_map);
+    _reactions.add(r);
+    Sequence _mapToEffect = this.mapToEffect(transitions, r);
+    r.setEffect(_mapToEffect);
     return _sync;
   }
   
@@ -468,7 +471,8 @@ public class BehaviorMapping {
       Check _mapToCheck = this.mapToCheck(_trigger_1);
       r.setCheck(_mapToCheck);
     }
-    Sequence _mapToEffect = this.mapToEffect(t, r);
+    ArrayList<Transition> _newArrayList = CollectionLiterals.<Transition>newArrayList(t);
+    Sequence _mapToEffect = this.mapToEffect(_newArrayList, r);
     r.setEffect(_mapToEffect);
     return r;
   }
@@ -507,13 +511,30 @@ public class BehaviorMapping {
     Statement condition = _check_1.getCondition();
     EList<Transition> _incomingTransitions = target.getIncomingTransitions();
     final Function1<Transition,Boolean> _function = new Function1<Transition,Boolean>() {
+        public Boolean apply(final Transition jt) {
+          Vertex _source = jt.getSource();
+          return Boolean.valueOf((_source instanceof State));
+        }
+      };
+    Iterable<Transition> _filter = IterableExtensions.<Transition>filter(_incomingTransitions, _function);
+    final Function1<Transition,Integer> _function_1 = new Function1<Transition,Integer>() {
+        public Integer apply(final Transition jt) {
+          Vertex _source = jt.getSource();
+          ExecutionState _create = BehaviorMapping.this.factory.create(((State) _source));
+          StateVector _stateVector = _create.getStateVector();
+          int _offset = _stateVector.getOffset();
+          return Integer.valueOf(_offset);
+        }
+      };
+    final List<Transition> joinTransitions = IterableExtensions.<Transition, Integer>sortBy(_filter, _function_1);
+    final Function1<Transition,Boolean> _function_2 = new Function1<Transition,Boolean>() {
         public Boolean apply(final Transition trans) {
           boolean _notEquals = (!Objects.equal(trans, t));
           return Boolean.valueOf(_notEquals);
         }
       };
-    Iterable<Transition> _filter = IterableExtensions.<Transition>filter(_incomingTransitions, _function);
-    for (final Transition trans : _filter) {
+    Iterable<Transition> _filter_1 = IterableExtensions.<Transition>filter(joinTransitions, _function_2);
+    for (final Transition trans : _filter_1) {
       Vertex _source = trans.getSource();
       if ((_source instanceof State)) {
         Vertex _source_1 = trans.getSource();
@@ -532,9 +553,29 @@ public class BehaviorMapping {
     }
     Check _check_2 = r.getCheck();
     _check_2.setCondition(condition);
-    Sequence _mapToEffect = this.mapToEffect(t, r);
+    Sequence _mapToEffect = this.mapToEffect(joinTransitions, r);
     r.setEffect(_mapToEffect);
     return r;
+  }
+  
+  public ExecutionFlow mapEntries(final Statechart statechart, final ExecutionFlow r) {
+    ExecutionFlow _xblockexpression = null;
+    {
+      EList<ExecutionNode> _nodes = r.getNodes();
+      TreeIterator<EObject> _eAllContents = statechart.eAllContents();
+      Iterator<Entry> _filter = Iterators.<Entry>filter(_eAllContents, Entry.class);
+      final Function1<Entry,ExecutionEntry> _function = new Function1<Entry,ExecutionEntry>() {
+          public ExecutionEntry apply(final Entry e) {
+            ExecutionEntry _create = BehaviorMapping.this.factory.create(e);
+            return _create;
+          }
+        };
+      Iterator<ExecutionEntry> _map = IteratorExtensions.<Entry, ExecutionEntry>map(_filter, _function);
+      List<ExecutionEntry> _list = IteratorExtensions.<ExecutionEntry>toList(_map);
+      _nodes.addAll(_list);
+      _xblockexpression = (r);
+    }
+    return _xblockexpression;
   }
   
   public Statement conjunct(final Statement c1, final Statement c2) {
@@ -756,125 +797,229 @@ public class BehaviorMapping {
       ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(r);
       _steps_2.add(_newTraceReactionFired);
     }
-    List<ExecutionScope> _entryScopes = this.entryScopes(t);
-    Iterable<ExecutionScope> _drop = IterableExtensions.<ExecutionScope>drop(_entryScopes, 1);
-    List<ExecutionScope> _list = IterableExtensions.<ExecutionScope>toList(_drop);
-    List<ExecutionScope> _reverse = ListExtensions.<ExecutionScope>reverse(_list);
-    final Function2<Sequence,ExecutionScope,Sequence> _function = new Function2<Sequence,ExecutionScope,Sequence>() {
-        public Sequence apply(final Sequence seq, final ExecutionScope scope) {
-          Sequence _xblockexpression = null;
-          {
-            if ((scope instanceof ExecutionRegion)) {
-              ExecutionScope _superScope = scope.getSuperScope();
-              final EList<ExecutionScope> siblingRegions = _superScope.getSubScopes();
-              int _indexOf = siblingRegions.indexOf(scope);
-              Iterable<ExecutionScope> _take = IterableExtensions.<ExecutionScope>take(siblingRegions, _indexOf);
-              for (final ExecutionScope region : _take) {
-                Sequence _enterSequence = region.getEnterSequence();
-                boolean _notEquals = (!Objects.equal(_enterSequence, null));
-                if (_notEquals) {
-                  EList<Step> _steps = seq.getSteps();
-                  Sequence _enterSequence_1 = region.getEnterSequence();
-                  Call _newCall = BehaviorMapping.this.factory.newCall(_enterSequence_1);
-                  _steps.add(_newCall);
-                }
-              }
-            }
-            if ((scope instanceof ExecutionState)) {
-              Step _entryAction = ((ExecutionState) scope).getEntryAction();
-              boolean _notEquals_1 = (!Objects.equal(_entryAction, null));
-              if (_notEquals_1) {
-                EList<Step> _steps_1 = seq.getSteps();
-                Step _entryAction_1 = ((ExecutionState) scope).getEntryAction();
-                Call _newCall_1 = BehaviorMapping.this.factory.newCall(_entryAction_1);
-                _steps_1.add(_newCall_1);
-              }
-              boolean _isAddTraceSteps = BehaviorMapping.this.trace.isAddTraceSteps();
-              if (_isAddTraceSteps) {
-                EList<Step> _steps_2 = seq.getSteps();
-                TraceStateEntered _newTraceStateEntered = BehaviorMapping.this.trace.newTraceStateEntered(((ExecutionState) scope));
-                _steps_2.add(_newTraceStateEntered);
-              }
-            }
-            _xblockexpression = (seq);
-          }
-          return _xblockexpression;
+    EList<Step> _steps_3 = sequence.getSteps();
+    ArrayList<Transition> _newArrayList = CollectionLiterals.<Transition>newArrayList(t);
+    Sequence _mapToStateConfigurationEnterSequence = this.mapToStateConfigurationEnterSequence(_newArrayList);
+    EList<Step> _steps_4 = _mapToStateConfigurationEnterSequence.getSteps();
+    _steps_3.addAll(_steps_4);
+    return sequence;
+  }
+  
+  /**
+   * Creates a compound effect that can consist of multiple transitions.
+   */
+  public Sequence mapToEffect(final List<Transition> transitions, final Reaction r) {
+    SexecFactory _factory = this.sexec.factory();
+    final Sequence sequence = _factory.createSequence();
+    Transition _get = transitions.get(0);
+    Iterable<State> _exitStates = this.exitStates(_get);
+    final List<State> exitStates = IterableExtensions.<State>toList(_exitStates);
+    for (final Transition t : transitions) {
+      Iterable<State> _exitStates_1 = this.exitStates(t);
+      List<State> _list = IterableExtensions.<State>toList(_exitStates_1);
+      exitStates.retainAll(_list);
+    }
+    final State topExitState = IterableExtensions.<State>last(exitStates);
+    boolean _notEquals = (!Objects.equal(topExitState, null));
+    if (_notEquals) {
+      ExecutionState _create = this.factory.create(topExitState);
+      final Sequence exitSequence = _create.getExitSequence();
+      boolean _notEquals_1 = (!Objects.equal(exitSequence, null));
+      if (_notEquals_1) {
+        EList<Step> _steps = sequence.getSteps();
+        Call _newCall = this.factory.newCall(exitSequence);
+        _steps.add(_newCall);
+      }
+    }
+    for (final Transition t_1 : transitions) {
+      {
+        Effect _effect = t_1.getEffect();
+        boolean _notEquals_2 = (!Objects.equal(_effect, null));
+        if (_notEquals_2) {
+          EList<Step> _steps_1 = sequence.getSteps();
+          Effect _effect_1 = t_1.getEffect();
+          Sequence _mapEffect = this.mapEffect(_effect_1);
+          _steps_1.add(_mapEffect);
         }
-      };
-    IterableExtensions.<ExecutionScope, Sequence>fold(_reverse, sequence, _function);
-    Vertex _target = t.getTarget();
-    boolean _notEquals_3 = (!Objects.equal(_target, null));
-    if (_notEquals_3) {
-      Vertex _target_1 = t.getTarget();
-      if ((_target_1 instanceof RegularState)) {
-        EList<Step> _steps_3 = sequence.getSteps();
-        Vertex _target_2 = t.getTarget();
-        ExecutionState _create_1 = this.factory.create(((RegularState) _target_2));
-        Sequence _enterSequence = _create_1.getEnterSequence();
-        Call _newCall_1 = this.factory.newCall(_enterSequence);
-        _steps_3.add(_newCall_1);
-      } else {
-        Vertex _target_3 = t.getTarget();
-        if ((_target_3 instanceof Choice)) {
-          EList<Step> _steps_4 = sequence.getSteps();
-          Vertex _target_4 = t.getTarget();
-          ExecutionChoice _create_2 = this.factory.create(((Choice) _target_4));
-          Sequence _reactSequence = _create_2.getReactSequence();
-          Call _newCall_2 = this.factory.newCall(_reactSequence);
-          _steps_4.add(_newCall_2);
-        } else {
-          Vertex _target_5 = t.getTarget();
-          if ((_target_5 instanceof Entry)) {
-            EList<Step> _steps_5 = sequence.getSteps();
-            Vertex _target_6 = t.getTarget();
-            ExecutionEntry _create_3 = this.factory.create(((Entry) _target_6));
-            Sequence _reactSequence_1 = _create_3.getReactSequence();
-            Call _newCall_3 = this.factory.newCall(_reactSequence_1);
-            _steps_5.add(_newCall_3);
-          } else {
-            Vertex _target_7 = t.getTarget();
-            if ((_target_7 instanceof Synchronization)) {
-              EList<Step> _steps_6 = sequence.getSteps();
-              Vertex _target_8 = t.getTarget();
-              ExecutionSynchronization _create_4 = this.factory.create(((Synchronization) _target_8));
-              Sequence _reactSequence_2 = _create_4.getReactSequence();
-              Call _newCall_4 = this.factory.newCall(_reactSequence_2);
-              _steps_6.add(_newCall_4);
-            }
-          }
+        boolean _isAddTraceSteps = this.trace.isAddTraceSteps();
+        if (_isAddTraceSteps) {
+          EList<Step> _steps_2 = sequence.getSteps();
+          Reaction _create_1 = this.factory.create(t_1);
+          ReactionFired _newTraceReactionFired = this.trace.newTraceReactionFired(_create_1);
+          _steps_2.add(_newTraceReactionFired);
         }
       }
     }
-    List<ExecutionScope> _entryScopes_1 = this.entryScopes(t);
-    Iterable<ExecutionScope> _drop_1 = IterableExtensions.<ExecutionScope>drop(_entryScopes_1, 1);
-    final Function2<Sequence,ExecutionScope,Sequence> _function_1 = new Function2<Sequence,ExecutionScope,Sequence>() {
-        public Sequence apply(final Sequence seq, final ExecutionScope scope) {
-          Sequence _xblockexpression = null;
-          {
-            if ((scope instanceof ExecutionRegion)) {
-              ExecutionScope _superScope = scope.getSuperScope();
-              final EList<ExecutionScope> siblingRegions = _superScope.getSubScopes();
-              int _indexOf = siblingRegions.indexOf(scope);
-              int _plus = (_indexOf + 1);
-              Iterable<ExecutionScope> _drop = IterableExtensions.<ExecutionScope>drop(siblingRegions, _plus);
-              for (final ExecutionScope region : _drop) {
-                Sequence _enterSequence = region.getEnterSequence();
-                boolean _notEquals = (!Objects.equal(_enterSequence, null));
-                if (_notEquals) {
-                  EList<Step> _steps = seq.getSteps();
-                  Sequence _enterSequence_1 = region.getEnterSequence();
-                  Call _newCall = BehaviorMapping.this.factory.newCall(_enterSequence_1);
-                  _steps.add(_newCall);
-                }
-              }
-            }
-            _xblockexpression = (seq);
-          }
-          return _xblockexpression;
+    EList<Step> _steps_1 = sequence.getSteps();
+    Sequence _mapToStateConfigurationEnterSequence = this.mapToStateConfigurationEnterSequence(transitions);
+    EList<Step> _steps_2 = _mapToStateConfigurationEnterSequence.getSteps();
+    _steps_1.addAll(_steps_2);
+    return sequence;
+  }
+  
+  /**
+   * Calcuates a sequence to enter one or more states. Entering multiple states is required for fork, where parts of a state
+   * configuration is specified.
+   */
+  public Sequence mapToStateConfigurationEnterSequence(final List<Transition> transitions) {
+    SexecFactory _factory = this.sexec.factory();
+    final Sequence sequence = _factory.createSequence();
+    Transition _get = transitions.get(0);
+    List<ExecutionScope> _entryScopes = this.entryScopes(_get);
+    Iterable<ExecutionScope> _drop = IterableExtensions.<ExecutionScope>drop(_entryScopes, 1);
+    List<ExecutionScope> _list = IterableExtensions.<ExecutionScope>toList(_drop);
+    final List<ExecutionScope> entryScopes = ListExtensions.<ExecutionScope>reverse(_list);
+    for (final Transition t : transitions) {
+      List<ExecutionScope> _entryScopes_1 = this.entryScopes(t);
+      entryScopes.retainAll(_entryScopes_1);
+    }
+    final ExecutionScope entryScope = IterableExtensions.<ExecutionScope>head(entryScopes);
+    final Function1<Transition,ExecutionNode> _function = new Function1<Transition,ExecutionNode>() {
+        public ExecutionNode apply(final Transition t) {
+          Vertex _target = t.getTarget();
+          ExecutionNode _mapped = BehaviorMapping.this.factory.mapped(_target);
+          return _mapped;
         }
       };
-    IterableExtensions.<ExecutionScope, Sequence>fold(_drop_1, sequence, _function_1);
+    final List<ExecutionNode> targets = ListExtensions.<Transition, ExecutionNode>map(transitions, _function);
+    boolean _notEquals = (!Objects.equal(entryScope, null));
+    if (_notEquals) {
+      this.addEnterStepsForTargetsToSequence(entryScope, targets, sequence);
+    } else {
+      for (final ExecutionNode t_1 : targets) {
+        this.addEnterStepsForTargetsToSequence(t_1, targets, sequence);
+      }
+    }
     return sequence;
+  }
+  
+  protected void _addEnterStepsForTargetsToSequence(final ExecutionState it, final List<ExecutionNode> targets, final Sequence seq) {
+    boolean _contains = targets.contains(it);
+    if (_contains) {
+      EList<Step> _steps = seq.getSteps();
+      Sequence _enterSequence = it.getEnterSequence();
+      Call _newCall = this.factory.newCall(_enterSequence);
+      _steps.add(_newCall);
+    } else {
+      Step _entryAction = it.getEntryAction();
+      boolean _notEquals = (!Objects.equal(_entryAction, null));
+      if (_notEquals) {
+        EList<Step> _steps_1 = seq.getSteps();
+        Step _entryAction_1 = it.getEntryAction();
+        Call _newCall_1 = this.factory.newCall(_entryAction_1);
+        _steps_1.add(_newCall_1);
+      }
+      boolean _isAddTraceSteps = this.trace.isAddTraceSteps();
+      if (_isAddTraceSteps) {
+        EList<Step> _steps_2 = seq.getSteps();
+        TraceStateEntered _newTraceStateEntered = this.trace.newTraceStateEntered(it);
+        _steps_2.add(_newTraceStateEntered);
+      }
+      EList<ExecutionScope> _subScopes = it.getSubScopes();
+      for (final ExecutionScope subScope : _subScopes) {
+        this.addEnterStepsForTargetsToSequence(subScope, targets, seq);
+      }
+    }
+  }
+  
+  protected void _addEnterStepsForTargetsToSequence(final ExecutionRegion it, final List<ExecutionNode> targets, final Sequence seq) {
+    final Function1<ExecutionNode,Boolean> _function = new Function1<ExecutionNode,Boolean>() {
+        public Boolean apply(final ExecutionNode t) {
+          EList<ExecutionNode> _nodes = it.getNodes();
+          boolean _contains = _nodes.contains(t);
+          return Boolean.valueOf(_contains);
+        }
+      };
+    Iterable<ExecutionNode> _filter = IterableExtensions.<ExecutionNode>filter(targets, _function);
+    final ExecutionNode target = IterableExtensions.<ExecutionNode>head(_filter);
+    boolean _notEquals = (!Objects.equal(target, null));
+    if (_notEquals) {
+      this.addEnterStepsForTargetsToSequence(target, targets, seq);
+      return;
+    }
+    Set<ExecutionNode> _allNodes = this.allNodes(it);
+    final Function1<ExecutionNode,Boolean> _function_1 = new Function1<ExecutionNode,Boolean>() {
+        public Boolean apply(final ExecutionNode n) {
+          boolean _contains = targets.contains(n);
+          return Boolean.valueOf(_contains);
+        }
+      };
+    boolean _exists = IterableExtensions.<ExecutionNode>exists(_allNodes, _function_1);
+    if (_exists) {
+      EList<ExecutionScope> _subScopes = it.getSubScopes();
+      for (final ExecutionScope s : _subScopes) {
+        Set<ExecutionNode> _allNodes_1 = this.allNodes(s);
+        final Function1<ExecutionNode,Boolean> _function_2 = new Function1<ExecutionNode,Boolean>() {
+            public Boolean apply(final ExecutionNode n) {
+              boolean _contains = targets.contains(n);
+              return Boolean.valueOf(_contains);
+            }
+          };
+        boolean _exists_1 = IterableExtensions.<ExecutionNode>exists(_allNodes_1, _function_2);
+        if (_exists_1) {
+          this.addEnterStepsForTargetsToSequence(s, targets, seq);
+        }
+      }
+    } else {
+      EList<Step> _steps = seq.getSteps();
+      Sequence _enterSequence = it.getEnterSequence();
+      Call _newCall = this.factory.newCall(_enterSequence);
+      _steps.add(_newCall);
+    }
+  }
+  
+  protected Set<ExecutionNode> _allNodes(final ExecutionRegion it) {
+    HashSet<ExecutionNode> _xblockexpression = null;
+    {
+      HashSet<ExecutionNode> _hashSet = new HashSet<ExecutionNode>();
+      final HashSet<ExecutionNode> allNodes = _hashSet;
+      EList<ExecutionNode> _nodes = it.getNodes();
+      Iterables.<ExecutionNode>addAll(allNodes, _nodes);
+      EList<ExecutionScope> _subScopes = it.getSubScopes();
+      for (final ExecutionScope s : _subScopes) {
+        Set<ExecutionNode> _allNodes = this.allNodes(s);
+        Iterables.<ExecutionNode>addAll(allNodes, _allNodes);
+      }
+      _xblockexpression = (allNodes);
+    }
+    return _xblockexpression;
+  }
+  
+  protected Set<ExecutionNode> _allNodes(final ExecutionState it) {
+    HashSet<ExecutionNode> _xblockexpression = null;
+    {
+      HashSet<ExecutionNode> _hashSet = new HashSet<ExecutionNode>();
+      final HashSet<ExecutionNode> allNodes = _hashSet;
+      allNodes.add(it);
+      EList<ExecutionScope> _subScopes = it.getSubScopes();
+      for (final ExecutionScope s : _subScopes) {
+        Set<ExecutionNode> _allNodes = this.allNodes(s);
+        Iterables.<ExecutionNode>addAll(allNodes, _allNodes);
+      }
+      _xblockexpression = (allNodes);
+    }
+    return _xblockexpression;
+  }
+  
+  protected void _addEnterStepsForTargetsToSequence(final ExecutionChoice it, final List<ExecutionNode> targets, final Sequence seq) {
+    EList<Step> _steps = seq.getSteps();
+    Sequence _reactSequence = it.getReactSequence();
+    Call _newCall = this.factory.newCall(_reactSequence);
+    _steps.add(_newCall);
+  }
+  
+  protected void _addEnterStepsForTargetsToSequence(final ExecutionEntry it, final List<ExecutionNode> targets, final Sequence seq) {
+    EList<Step> _steps = seq.getSteps();
+    Sequence _reactSequence = it.getReactSequence();
+    Call _newCall = this.factory.newCall(_reactSequence);
+    _steps.add(_newCall);
+  }
+  
+  protected void _addEnterStepsForTargetsToSequence(final ExecutionSynchronization it, final List<ExecutionNode> targets, final Sequence seq) {
+    EList<Step> _steps = seq.getSteps();
+    Sequence _reactSequence = it.getReactSequence();
+    Call _newCall = this.factory.newCall(_reactSequence);
+    _steps.add(_newCall);
   }
   
   public List<ExecutionScope> entryScopes(final Transition t) {
@@ -1096,6 +1241,39 @@ public class BehaviorMapping {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(tr).toString());
+    }
+  }
+  
+  public void addEnterStepsForTargetsToSequence(final EObject it, final List<ExecutionNode> targets, final Sequence seq) {
+    if (it instanceof ExecutionChoice) {
+      _addEnterStepsForTargetsToSequence((ExecutionChoice)it, targets, seq);
+      return;
+    } else if (it instanceof ExecutionEntry) {
+      _addEnterStepsForTargetsToSequence((ExecutionEntry)it, targets, seq);
+      return;
+    } else if (it instanceof ExecutionRegion) {
+      _addEnterStepsForTargetsToSequence((ExecutionRegion)it, targets, seq);
+      return;
+    } else if (it instanceof ExecutionState) {
+      _addEnterStepsForTargetsToSequence((ExecutionState)it, targets, seq);
+      return;
+    } else if (it instanceof ExecutionSynchronization) {
+      _addEnterStepsForTargetsToSequence((ExecutionSynchronization)it, targets, seq);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, targets, seq).toString());
+    }
+  }
+  
+  public Set<ExecutionNode> allNodes(final ExecutionScope it) {
+    if (it instanceof ExecutionRegion) {
+      return _allNodes((ExecutionRegion)it);
+    } else if (it instanceof ExecutionState) {
+      return _allNodes((ExecutionState)it);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it).toString());
     }
   }
   

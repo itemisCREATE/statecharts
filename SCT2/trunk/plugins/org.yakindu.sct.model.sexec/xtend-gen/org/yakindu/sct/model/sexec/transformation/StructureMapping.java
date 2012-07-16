@@ -182,6 +182,17 @@ public class StructureMapping {
       };
     Iterable<ExecutionScope> _map = IterableExtensions.<RegularState, ExecutionScope>map(_filter, _function);
     Iterables.<ExecutionScope>addAll(_subScopes, _map);
+    EList<ExecutionNode> _nodes = _region.getNodes();
+    EList<Vertex> _vertices_1 = region.getVertices();
+    Iterable<Vertex> _filter_1 = Iterables.<Vertex>filter(_vertices_1, Vertex.class);
+    final Function1<Vertex,ExecutionNode> _function_1 = new Function1<Vertex,ExecutionNode>() {
+        public ExecutionNode apply(final Vertex v) {
+          ExecutionNode _mapped = StructureMapping.this.mapping.mapped(v);
+          return _mapped;
+        }
+      };
+    Iterable<ExecutionNode> _map_1 = IterableExtensions.<Vertex, ExecutionNode>map(_filter_1, _function_1);
+    Iterables.<ExecutionNode>addAll(_nodes, _map_1);
     return _region;
   }
   
