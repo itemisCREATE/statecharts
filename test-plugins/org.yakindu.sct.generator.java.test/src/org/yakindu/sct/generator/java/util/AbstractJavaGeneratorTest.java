@@ -14,7 +14,6 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaModelMarker;
 import org.yakindu.sct.generator.core.util.GeneratorUtils;
@@ -52,11 +51,12 @@ public abstract class AbstractJavaGeneratorTest {
 		IProject targetProject = GeneratorUtils.getTargetProject(entry);
 		targetProject.delete(true, new NullProgressMonitor());
 		generator.generate(entry);
+		targetProject.getWorkspace().build(
+				IncrementalProjectBuilder.INCREMENTAL_BUILD, null);
 		targetProject = GeneratorUtils.getTargetProject(entry);
 		if (!targetProject.exists()) {
 			throw new IllegalStateException("Target Project "
-					+ targetProject.getName()
-					+ " does not exist!");
+					+ targetProject.getName() + " does not exist!");
 		}
 		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
 				new NullProgressMonitor());
