@@ -216,12 +216,17 @@ public class TrafficLightWaitingStatemachine
 		}
 		cycleStartTime = System.currentTimeMillis();
 		entryActionTrafficLightWaiting();
-		sCITrafficLight.setRed(false);
-		sCITrafficLight.setYellow(false);
-		sCITrafficLight.setGreen(true);
-		sCIPedestrian.setRed(true);
-		sCIPedestrian.setGreen(false);
-		sCIPedestrian.setRequest(false);
+		sCITrafficLight.red = false;
+
+		sCITrafficLight.yellow = false;
+
+		sCITrafficLight.green = true;
+
+		sCIPedestrian.red = true;
+
+		sCIPedestrian.green = false;
+
+		sCIPedestrian.request = false;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_on_r1_StreetGreen;
@@ -242,7 +247,7 @@ public class TrafficLightWaitingStatemachine
 				getTimerService().resetTimer(waitOn_time_event_0);
 
 				getTimerService().resetTimer(pedWaiting_time_event_0);
-				sCIPedestrian.setRequest(false);
+				sCIPedestrian.request = false;
 
 				break;
 
@@ -251,7 +256,7 @@ public class TrafficLightWaitingStatemachine
 				getTimerService().resetTimer(waitOff_time_event_0);
 
 				getTimerService().resetTimer(pedWaiting_time_event_0);
-				sCIPedestrian.setRequest(false);
+				sCIPedestrian.request = false;
 
 				break;
 
@@ -329,7 +334,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOn_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -338,7 +343,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOff_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -376,16 +381,21 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setGreen(false);
-			sCITrafficLight.setYellow(false);
-			sCIPedestrian.setRed(false);
-			sCIPedestrian.setGreen(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.green = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCIPedestrian.red = false;
+
+			sCIPedestrian.green = false;
 
 			getTimerService().setTimer(yellowOn_time_event_0, 500,
 					cycleStartTime);
-			sCITrafficLight.setYellow(true);
-			sCIPedestrian.setRequest(true);
+			sCITrafficLight.yellow = true;
+
+			sCIPedestrian.request = true;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_off_r1_YellowOn;
@@ -399,7 +409,7 @@ public class TrafficLightWaitingStatemachine
 
 				getTimerService().setTimer(waitOn_time_event_0, 500,
 						cycleStartTime);
-				sCIPedestrian.setRequest(true);
+				sCIPedestrian.request = true;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_on_r1_PedWaiting_r1_waitOn;
@@ -426,7 +436,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOn_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -435,7 +445,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOff_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -473,16 +483,21 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setGreen(false);
-			sCITrafficLight.setYellow(false);
-			sCIPedestrian.setRed(false);
-			sCIPedestrian.setGreen(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.green = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCIPedestrian.red = false;
+
+			sCIPedestrian.green = false;
 
 			getTimerService().setTimer(yellowOn_time_event_0, 500,
 					cycleStartTime);
-			sCITrafficLight.setYellow(true);
-			sCIPedestrian.setRequest(true);
+			sCITrafficLight.yellow = true;
+
+			sCIPedestrian.request = true;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_off_r1_YellowOn;
@@ -509,13 +524,15 @@ public class TrafficLightWaitingStatemachine
 				}
 
 				getTimerService().resetTimer(pedWaiting_time_event_0);
-				sCIPedestrian.setRequest(false);
+				sCIPedestrian.request = false;
 
 				getTimerService().setTimer(streetAttention_time_event_0,
 						(2 * 1000), cycleStartTime);
-				sCITrafficLight.setRed(false);
-				sCITrafficLight.setYellow(true);
-				sCITrafficLight.setGreen(false);
+				sCITrafficLight.red = false;
+
+				sCITrafficLight.yellow = true;
+
+				sCITrafficLight.green = false;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_on_r1_StreetAttention;
@@ -527,7 +544,7 @@ public class TrafficLightWaitingStatemachine
 
 					getTimerService().setTimer(waitOff_time_event_0, 500,
 							cycleStartTime);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					nextStateIndex = 0;
 					stateVector[0] = State.Main_region_on_r1_PedWaiting_r1_waitOff;
@@ -554,7 +571,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOn_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -563,7 +580,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOff_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -601,16 +618,21 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setGreen(false);
-			sCITrafficLight.setYellow(false);
-			sCIPedestrian.setRed(false);
-			sCIPedestrian.setGreen(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.green = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCIPedestrian.red = false;
+
+			sCIPedestrian.green = false;
 
 			getTimerService().setTimer(yellowOn_time_event_0, 500,
 					cycleStartTime);
-			sCITrafficLight.setYellow(true);
-			sCIPedestrian.setRequest(true);
+			sCITrafficLight.yellow = true;
+
+			sCIPedestrian.request = true;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_off_r1_YellowOn;
@@ -637,13 +659,15 @@ public class TrafficLightWaitingStatemachine
 				}
 
 				getTimerService().resetTimer(pedWaiting_time_event_0);
-				sCIPedestrian.setRequest(false);
+				sCIPedestrian.request = false;
 
 				getTimerService().setTimer(streetAttention_time_event_0,
 						(2 * 1000), cycleStartTime);
-				sCITrafficLight.setRed(false);
-				sCITrafficLight.setYellow(true);
-				sCITrafficLight.setGreen(false);
+				sCITrafficLight.red = false;
+
+				sCITrafficLight.yellow = true;
+
+				sCITrafficLight.green = false;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_on_r1_StreetAttention;
@@ -655,7 +679,7 @@ public class TrafficLightWaitingStatemachine
 
 					getTimerService().setTimer(waitOn_time_event_0, 500,
 							cycleStartTime);
-					sCIPedestrian.setRequest(true);
+					sCIPedestrian.request = true;
 
 					nextStateIndex = 0;
 					stateVector[0] = State.Main_region_on_r1_PedWaiting_r1_waitOn;
@@ -682,7 +706,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOn_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -691,7 +715,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOff_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -729,16 +753,21 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setGreen(false);
-			sCITrafficLight.setYellow(false);
-			sCIPedestrian.setRed(false);
-			sCIPedestrian.setGreen(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.green = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCIPedestrian.red = false;
+
+			sCIPedestrian.green = false;
 
 			getTimerService().setTimer(yellowOn_time_event_0, 500,
 					cycleStartTime);
-			sCITrafficLight.setYellow(true);
-			sCIPedestrian.setRequest(true);
+			sCITrafficLight.yellow = true;
+
+			sCIPedestrian.request = true;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_off_r1_YellowOn;
@@ -750,9 +779,11 @@ public class TrafficLightWaitingStatemachine
 
 				getTimerService().setTimer(streetRed_time_event_0, (2 * 1000),
 						cycleStartTime);
-				sCITrafficLight.setRed(true);
-				sCITrafficLight.setYellow(false);
-				sCITrafficLight.setGreen(false);
+				sCITrafficLight.red = true;
+
+				sCITrafficLight.yellow = false;
+
+				sCITrafficLight.green = false;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_on_r1_StreetRed;
@@ -777,7 +808,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOn_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -786,7 +817,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOff_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -824,16 +855,21 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setGreen(false);
-			sCITrafficLight.setYellow(false);
-			sCIPedestrian.setRed(false);
-			sCIPedestrian.setGreen(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.green = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCIPedestrian.red = false;
+
+			sCIPedestrian.green = false;
 
 			getTimerService().setTimer(yellowOn_time_event_0, 500,
 					cycleStartTime);
-			sCITrafficLight.setYellow(true);
-			sCIPedestrian.setRequest(true);
+			sCITrafficLight.yellow = true;
+
+			sCIPedestrian.request = true;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_off_r1_YellowOn;
@@ -845,8 +881,9 @@ public class TrafficLightWaitingStatemachine
 
 				getTimerService().setTimer(pedestrianGreen_time_event_0,
 						(7 * 1000), cycleStartTime);
-				sCIPedestrian.setRed(false);
-				sCIPedestrian.setGreen(true);
+				sCIPedestrian.red = false;
+
+				sCIPedestrian.green = true;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_on_r1_PedestrianGreen;
@@ -871,7 +908,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOn_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -880,7 +917,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOff_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -918,16 +955,21 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setGreen(false);
-			sCITrafficLight.setYellow(false);
-			sCIPedestrian.setRed(false);
-			sCIPedestrian.setGreen(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.green = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCIPedestrian.red = false;
+
+			sCIPedestrian.green = false;
 
 			getTimerService().setTimer(yellowOn_time_event_0, 500,
 					cycleStartTime);
-			sCITrafficLight.setYellow(true);
-			sCIPedestrian.setRequest(true);
+			sCITrafficLight.yellow = true;
+
+			sCIPedestrian.request = true;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_off_r1_YellowOn;
@@ -939,8 +981,9 @@ public class TrafficLightWaitingStatemachine
 
 				getTimerService().setTimer(pedestrianRed_time_event_0,
 						(5 * 1000), cycleStartTime);
-				sCIPedestrian.setRed(true);
-				sCIPedestrian.setGreen(false);
+				sCIPedestrian.red = true;
+
+				sCIPedestrian.green = false;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_on_r1_PedestrianRed;
@@ -965,7 +1008,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOn_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -974,7 +1017,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOff_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -1012,16 +1055,21 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setGreen(false);
-			sCITrafficLight.setYellow(false);
-			sCIPedestrian.setRed(false);
-			sCIPedestrian.setGreen(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.green = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCIPedestrian.red = false;
+
+			sCIPedestrian.green = false;
 
 			getTimerService().setTimer(yellowOn_time_event_0, 500,
 					cycleStartTime);
-			sCITrafficLight.setYellow(true);
-			sCIPedestrian.setRequest(true);
+			sCITrafficLight.yellow = true;
+
+			sCIPedestrian.request = true;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_off_r1_YellowOn;
@@ -1033,9 +1081,11 @@ public class TrafficLightWaitingStatemachine
 
 				getTimerService().setTimer(streetPrepare_time_event_0,
 						(2 * 1000), cycleStartTime);
-				sCITrafficLight.setRed(true);
-				sCITrafficLight.setYellow(true);
-				sCITrafficLight.setGreen(false);
+				sCITrafficLight.red = true;
+
+				sCITrafficLight.yellow = true;
+
+				sCITrafficLight.green = false;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_on_r1_StreetPrepare;
@@ -1060,7 +1110,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOn_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -1069,7 +1119,7 @@ public class TrafficLightWaitingStatemachine
 					getTimerService().resetTimer(waitOff_time_event_0);
 
 					getTimerService().resetTimer(pedWaiting_time_event_0);
-					sCIPedestrian.setRequest(false);
+					sCIPedestrian.request = false;
 
 					break;
 
@@ -1107,16 +1157,21 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setGreen(false);
-			sCITrafficLight.setYellow(false);
-			sCIPedestrian.setRed(false);
-			sCIPedestrian.setGreen(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.green = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCIPedestrian.red = false;
+
+			sCIPedestrian.green = false;
 
 			getTimerService().setTimer(yellowOn_time_event_0, 500,
 					cycleStartTime);
-			sCITrafficLight.setYellow(true);
-			sCIPedestrian.setRequest(true);
+			sCITrafficLight.yellow = true;
+
+			sCIPedestrian.request = true;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_off_r1_YellowOn;
@@ -1126,12 +1181,17 @@ public class TrafficLightWaitingStatemachine
 				stateVector[0] = State.$NullState$;
 				getTimerService().resetTimer(streetPrepare_time_event_0);
 
-				sCITrafficLight.setRed(false);
-				sCITrafficLight.setYellow(false);
-				sCITrafficLight.setGreen(true);
-				sCIPedestrian.setRed(true);
-				sCIPedestrian.setGreen(false);
-				sCIPedestrian.setRequest(false);
+				sCITrafficLight.red = false;
+
+				sCITrafficLight.yellow = false;
+
+				sCITrafficLight.green = true;
+
+				sCIPedestrian.red = true;
+
+				sCIPedestrian.green = false;
+
+				sCIPedestrian.request = false;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_on_r1_StreetGreen;
@@ -1164,12 +1224,17 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setYellow(false);
-			sCITrafficLight.setGreen(true);
-			sCIPedestrian.setRed(true);
-			sCIPedestrian.setGreen(false);
-			sCIPedestrian.setRequest(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCITrafficLight.green = true;
+
+			sCIPedestrian.red = true;
+
+			sCIPedestrian.green = false;
+
+			sCIPedestrian.request = false;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_on_r1_StreetGreen;
@@ -1181,8 +1246,9 @@ public class TrafficLightWaitingStatemachine
 
 				getTimerService().setTimer(yellowOff_time_event_0, 500,
 						cycleStartTime);
-				sCITrafficLight.setYellow(false);
-				sCIPedestrian.setRequest(false);
+				sCITrafficLight.yellow = false;
+
+				sCIPedestrian.request = false;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_off_r1_YellowOff;
@@ -1213,12 +1279,17 @@ public class TrafficLightWaitingStatemachine
 					break;
 			}
 
-			sCITrafficLight.setRed(false);
-			sCITrafficLight.setYellow(false);
-			sCITrafficLight.setGreen(true);
-			sCIPedestrian.setRed(true);
-			sCIPedestrian.setGreen(false);
-			sCIPedestrian.setRequest(false);
+			sCITrafficLight.red = false;
+
+			sCITrafficLight.yellow = false;
+
+			sCITrafficLight.green = true;
+
+			sCIPedestrian.red = true;
+
+			sCIPedestrian.green = false;
+
+			sCIPedestrian.request = false;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_on_r1_StreetGreen;
@@ -1230,8 +1301,9 @@ public class TrafficLightWaitingStatemachine
 
 				getTimerService().setTimer(yellowOn_time_event_0, 500,
 						cycleStartTime);
-				sCITrafficLight.setYellow(true);
-				sCIPedestrian.setRequest(true);
+				sCITrafficLight.yellow = true;
+
+				sCIPedestrian.request = true;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_off_r1_YellowOn;

@@ -12,7 +12,6 @@ GeneratorModel for yakindu::java {
 		}
 
 		feature GeneralFeatures {
-			EventBasedStatemachine = false
 			InterfaceObserverSupport = false
 			TimerService = true
 			RuntimeService = true
