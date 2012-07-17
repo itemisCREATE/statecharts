@@ -1,19 +1,17 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.Check
 import java.util.List
+import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sgraph.Statechart
 
 class StatemachineC {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
-	@Inject extension Base
 	@Inject extension FlowCode
 	
 	
@@ -25,6 +23,7 @@ class StatemachineC {
 	
 	def statemachineCContent(ExecutionFlow it) '''
 		#include "«module.h»"
+		#include "«typesModule.h»"
 		#include <stdlib.h>
 		#include <string.h>
 
@@ -33,13 +32,13 @@ class StatemachineC {
 		
 		«functionPrototypes»
 		
-		// function implementations
-
 		«initFunction»
 		
 		«enterFunction»
 		
 		«exitFunction»
+		
+		«functionImplementations»
 	'''
 	
 	
@@ -78,112 +77,81 @@ class StatemachineC {
 		}
 	'''
 	
+	
+	/* ===================================================================================
+	 * Handling decralartion of function prototypes
+	 */
+	 
+	/** */
 	def functionPrototypes(ExecutionFlow it) '''
 		// prototypes of all internal functions
 		
-		«checkFunctionPrototypes»
-		«effectFunctionPrototypes»
-		«entryActionFunctionPrototypes»
-		«exitActionFunctionPrototypes»
-		«enterSequenceFunctionPrototypes»
-		«exitSequenceFunctionPrototypes»
-		«reactFunctionPrototypes»
+		«checkFunctions.toPrototypes»
+		«effectFunctions.toPrototypes»
+		«entryActionFunctions.toPrototypes»
+		«exitActionFunctions.toPrototypes»
+		«enterSequenceFunctions.toPrototypes»
+		«exitSequenceFunctions.toPrototypes»
+		«reactFunctions.toPrototypes»
 		
 	'''
 	 
 	 
-	def checkFunctionPrototypes(ExecutionFlow it) '''
-		«referencedChecks.checkFunctionPrototypes»
-		«FOR s : states»«s.referencedChecks.checkFunctionPrototypes»«ENDFOR»
-		«FOR n : nodes»«n.referencedChecks.checkFunctionPrototypes»«ENDFOR»
-	'''
-	
-	def checkFunctionPrototypes(Iterable<Check> it) '''
-		«FOR c : it»«c.checkFunctionPrototype»«ENDFOR»
-	'''
-	
-	def checkFunctionPrototype(Check it) '''
-		static sc_boolean «asCheckFunction»(«scHandleDecl»);
-	'''
-	
-	
-	
-	def effectFunctionPrototypes(ExecutionFlow it) '''
-		«referencedEffects.effectFunctionPrototypes»
-		«FOR s : states»«s.referencedEffects.effectFunctionPrototypes»«ENDFOR»
-		«FOR n : nodes»«n.referencedEffects.effectFunctionPrototypes»«ENDFOR»
-	'''
-	
-	def effectFunctionPrototypes(Iterable<Step> it) '''
-		«FOR c : it»«c.effectFunctionPrototype»«ENDFOR»
-	'''
-	
-	def effectFunctionPrototype(Step it) '''
-		static sc_boolean «asEffectFunction»(«scHandleDecl»);
-	'''
-	
-	
-	
-	def entryActionFunctionPrototypes(ExecutionFlow it) '''
-		«if (entryAction.called) entryAction.entryActionFunctionPrototype»
-		«FOR s : states»«if (s.entryAction.called) s.entryAction.entryActionFunctionPrototype»«ENDFOR»
-	'''
-	
-	def entryActionFunctionPrototype(Step it) '''
-		static void «asEntryActionFunction»(«scHandleDecl»);
-	'''
-	
-	
-	def exitActionFunctionPrototypes(ExecutionFlow it) '''
-		«if (exitAction.called) exitAction.exitActionFunctionPrototype»
-		«FOR s : states»«if (s.exitAction.called) s.exitAction.exitActionFunctionPrototype»«ENDFOR»
-	'''
-	
-	def exitActionFunctionPrototype(Step it) '''
-		static void «asExitActionFunction»(«scHandleDecl»);
-	'''
-	
-	
-	def enterSequenceFunctionPrototypes(ExecutionFlow it) '''
-		«if (enterSequence.called) enterSequence.enterSequenceFunctionPrototype»
-		«FOR s : states»«if (s.enterSequence.called) s.enterSequence.enterSequenceFunctionPrototype»«ENDFOR»
-		«FOR r : regions»
-			«if (r.enterSequence.called) r.enterSequence.enterSequenceFunctionPrototype»
-			«if (r.deepEnterSequence.called) r.enterSequence.deepEnterSequenceFunctionPrototype»
-			«if (r.shallowEnterSequence.called) r.enterSequence.shallowEnterSequenceFunctionPrototype»
+	def toPrototypes(List<Step> steps) '''
+		«FOR s : steps»
+			«s.functionPrototype»
 		«ENDFOR»
 	'''
 	
-	def enterSequenceFunctionPrototype(Step it) '''
-		static void «asEnterSequenceFunction»(«scHandleDecl»);
+	def dispatch functionPrototype(Check it) '''
+		static sc_boolean «asCheckFunction»(«scHandleDecl»);
 	'''
 	
-	def deepEnterSequenceFunctionPrototype(Step it) '''
-		static void «asDeepEnterSequenceFunction»(«scHandleDecl»);
-	'''
-	
-	def shallowEnterSequenceFunctionPrototype(Step it) '''
-		static void «asShallowEnterSequenceFunction»(«scHandleDecl»);
-	'''
-	
-	
-	def exitSequenceFunctionPrototypes(ExecutionFlow it) '''
-		«if (enterSequence.called) exitSequence.exitSequenceFunctionPrototype»
-		«FOR s : states»«if (s.exitSequence.called) s.exitSequence.exitSequenceFunctionPrototype»«ENDFOR»
-		«FOR r : regions»«if (r.exitSequence.called) r.exitSequence.exitSequenceFunctionPrototype»«ENDFOR»
-	'''
-	
-	def exitSequenceFunctionPrototype(Step it) '''
-		static void «asExitSequenceFunction»(«scHandleDecl»);
-	'''
-	
-	def reactFunctionPrototypes(ExecutionFlow it) '''
-		«if (reactSequence.called) reactSequence.reactFunctionPrototype»
-		«FOR s : states»«if (s.reactSequence.called) s.reactSequence.reactFunctionPrototype»«ENDFOR»
-		«FOR n : nodes»«if (n.reactSequence.called) n.reactSequence.reactFunctionPrototype»«ENDFOR»
-	'''
-	
-	def reactFunctionPrototype(Step it) '''
-		static void «asReactFunction»(«scHandleDecl»);
+	def dispatch functionPrototype(Step it) '''
+		static void «functionName»(«scHandleDecl»);
 	'''	
+	
+	
+	
+	/* ===================================================================================
+	 * Handling implementation of internal functions
+	 */
+	 
+	/** */
+	def functionImplementations(ExecutionFlow it) '''
+		// implementations of all internal functions
+		
+		«checkFunctions.toImplementation»
+		«effectFunctions.toImplementation»
+		«entryActionFunctions.toImplementation»
+		«exitActionFunctions.toImplementation»
+		«enterSequenceFunctions.toImplementation»
+		«exitSequenceFunctions.toImplementation»
+		«reactFunctions.toImplementation»
+		
+	'''
+	 
+	def toImplementation(List<Step> steps) '''
+		«FOR s : steps»
+			«s.functionImplementation»
+		«ENDFOR»
+	'''
+	
+	def dispatch functionImplementation(Check it) '''
+		«stepComment»
+		static sc_boolean «asCheckFunction»(«scHandleDecl») {
+			return «code»;
+		}
+		
+	'''
+	
+	def dispatch functionImplementation(Step it) '''
+		«stepComment»
+		static void «functionName»(«scHandleDecl») {
+			«code»
+		}
+		
+	'''
+	
+	
 }

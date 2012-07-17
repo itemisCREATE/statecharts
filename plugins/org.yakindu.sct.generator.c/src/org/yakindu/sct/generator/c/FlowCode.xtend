@@ -21,10 +21,9 @@ class FlowCode {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
+	@Inject extension ActionCode
 	
-	def expCode (Statement it) '''
-		#warning TODO: generate code for «getClass().name»
-	'''
+	
  
 	def stepComment(Step it) '''
 		«IF comment != null && ! comment.empty»
@@ -70,7 +69,7 @@ class FlowCode {
 	def dispatch code(ScheduleTimeEvent it) '''
 		«stepComment»
 		// TODO: schedule time event id:
-		«flow.type.toFirstLower»_setTimer( EVID , «timeValue.expCode», «IF timeEvent.periodic»true«ELSE»false«ENDIF»);
+		«flow.type.toFirstLower»_setTimer( EVID , «timeValue.code», «IF timeEvent.periodic»true«ELSE»false«ENDIF»);
 	'''
 
 	def dispatch code(UnscheduleTimeEvent it) '''
@@ -79,26 +78,24 @@ class FlowCode {
 		«flow.type.toFirstLower»_unsetTimer( EVID );		
 	'''
 
-	def dispatch code(Execution it) '''
-		«statement.expCode»
-	'''
+	def dispatch code(Execution it) 
+		'''«statement.code»;'''
 	
-	def dispatch code(Call it) '''
-		#warning TODO: call function(handle)
-	'''
+	def dispatch code(Call it) 
+		'''«step.functionName»(«scHandle»);'''
 
 	def dispatch code(Sequence it) '''
 		«stepComment»
-		«FOR s : steps»«s.code»«ENDFOR»
+		«FOR s : steps»
+			«s.code»
+		«ENDFOR»
 	'''	
 
-	def dispatch code(Check it) '''
-		«IF condition != null»«condition.expCode»«ELSE»true«ENDIF»
-	'''
+	def dispatch code(Check it) 
+		'''«IF condition != null»«condition.code»«ELSE»bool_true«ENDIF»'''
 	
-	def dispatch code(CheckRef it) '''
-		«IF check != null»callcheckfunc(handle)«ELSE»true«ENDIF»
-	'''
+	def dispatch code(CheckRef it) 
+		'''«IF check != null»callcheckfunc(handle)«ELSE»bool_true«ENDIF»'''
 
 	def dispatch code(If it) '''
 		«stepComment»
