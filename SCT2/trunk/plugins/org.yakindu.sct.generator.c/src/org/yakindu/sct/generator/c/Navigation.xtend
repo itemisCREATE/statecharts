@@ -20,6 +20,9 @@ import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import java.util.List
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.FeatureCall
 
 class Navigation {
 	
@@ -170,5 +173,13 @@ class Navigation {
 	def dispatch isReactSequence(ExecutionNode it, Step s) { reactSequence == s }
 	def dispatch isReactSequence(EObject it, Step s) { false }
 	
-
+	def dispatch Declaration definition(ElementReferenceExpression it) {
+		if (reference instanceof Declaration) reference as Declaration
+	}
+	def dispatch Declaration definition(FeatureCall it) {
+		if (feature instanceof Declaration) feature as Declaration
+	}
+	def dispatch Declaration definition(Expression it) { null }
+	
+		
 }

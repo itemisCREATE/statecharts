@@ -158,7 +158,10 @@ class Naming {
 	
 	def dispatch String elementName(ExecutionNode it) { name }	
 	
-	def dispatch String elementName(ExecutionFlow it) { "" }	
+	def dispatch String elementName(ExecutionFlow it) { "" }
+	
+	def raised(CharSequence it) { it + '_raised' }	
+	def value(CharSequence it)  { it + '_value' }	
 	
 	
 	
