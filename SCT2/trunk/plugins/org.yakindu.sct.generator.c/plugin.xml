@@ -13,7 +13,7 @@
             name="YAKINDU C Code Generator">
       </SCTGenerator>
       <SCTGenerator
-            class="org.yakindu.sct.generator.c.CSCTGenerator"
+            class="org.yakindu.sct.generator.c.CCodeGenerator2"
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             description="SCT C Code Generator"

@@ -97,8 +97,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 	@Override
 	public void runGenerator(Statechart flow, GeneratorEntry entry) {
-		String templateClass = entry.getFeatureConfiguration(TEMPLATE_FEATURE)
-				.getParameterValue(GENERATOR_CLASS).getStringValue();
+		String templateClass = getTemplateClassName(entry);
 		final ClassLoader classLoader = getClassLoader(entry);
 		IFileSystemAccess fsa = getFileSystemAccess(entry);
 		try {
@@ -132,6 +131,11 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 			e.printStackTrace();
 			writeToConsole(e);
 		}
+	}
+
+	protected String getTemplateClassName(GeneratorEntry entry) {
+		return entry.getFeatureConfiguration(TEMPLATE_FEATURE)
+				.getParameterValue(GENERATOR_CLASS).getStringValue();
 	}
 
 	/**

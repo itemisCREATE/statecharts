@@ -12,6 +12,10 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import java.util.ArrayList
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.Step
 
 class Navigation {
 	
@@ -54,5 +58,18 @@ class Navigation {
 		scopes.fold(new ArrayList<OperationDefinition>(), [ l, s | l.addAll(s.declarations.filter( typeof(OperationDefinition))) return l ])
 	}
 	
+	def dispatch Reaction reaction(Check it) { eContainer as Reaction }
+	def dispatch Reaction reaction(EObject it) { eContainer?.reaction }
+	def dispatch Reaction reaction(Reaction it) { it }
+
+	def referencedChecks(ExecutionNode it) {
+		reactions.filter( r | r.check != null && r.check.refs.size > 0).map( r | r.check )
+	}
+
+	def referencedEffects(ExecutionNode it) {
+		reactions.filter( r | r.effect != null && r.effect.caller.size > 0).map( r | r.effect )
+	}
+
+	def isCalled(Step it) { it != null && caller.size > 0 }
 
 }
