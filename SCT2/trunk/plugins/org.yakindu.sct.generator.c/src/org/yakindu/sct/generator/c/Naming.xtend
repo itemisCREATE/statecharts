@@ -110,6 +110,21 @@ class Naming {
 	}
 		
 	
+	def functionName(Step it) {
+		switch (it) {
+			case isEntryAction: asEntryActionFunction
+			case isExitAction : asExitActionFunction
+			case isEffect : asEffectFunction
+			case isEnterSequence : asEnterSequenceFunction
+			case isDeepEnterSequence : asDeepEnterSequenceFunction
+			case isShallowEnterSequence : asShallowEnterSequenceFunction
+			case isExitSequence : asExitSequenceFunction
+			case isReactSequence : asReactFunction
+			default : ""
+		} 
+	}
+	
+	
 	def asCheckFunction(Check it) { functionName(newArrayList('check', elementName, reaction.name)) }
 	 
 	def asEffectFunction(Step it) { functionName(newArrayList('effect', elementName, reaction.name)) }
@@ -165,5 +180,5 @@ class Naming {
 	
 	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
 	
-	def scHandle() { 'handle_' }
+	def scHandle() { 'handle' }
 }
