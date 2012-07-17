@@ -38,12 +38,12 @@ class FlowCode {
 
 	def dispatch code(SaveHistory it) '''
 		«stepComment»
-		handle->historyVector[«region.historyVector.offset»] = handle->stateConfVector[«region.stateVector.offset»];
+		«scHandle»->historyVector[«region.historyVector.offset»] = «scHandle»->stateConfVector[«region.stateVector.offset»];
 	'''
 	
 	def dispatch code(HistoryEntry it) '''
 		«stepComment»
-		if (handle->historyVector[«region.historyVector.offset»] != last_state) {
+		if («scHandle»->historyVector[«region.historyVector.offset»] != last_state) {
 			«historyStep.code»
 		} else {
 			«initialStep.code»
@@ -53,9 +53,9 @@ class FlowCode {
 	def dispatch code(StateSwitch it) '''
 		«stepComment»
 		«IF historyRegion != null»
-			switch(handle->historyVector[ «historyRegion.historyVector.offset» ]) {
+			switch(«scHandle»->historyVector[ «historyRegion.historyVector.offset» ]) {
 		«ELSE»
-			switch(handle->stateConfVector[ «stateConfigurationIdx» ]) {
+			switch(«scHandle»->stateConfVector[ «stateConfigurationIdx» ]) {
 		«ENDIF»
 			«FOR caseid : cases»
 				case «caseid.state.name.asIdentifier» : {
@@ -111,12 +111,12 @@ class FlowCode {
 	'''
 	
 	def dispatch code(EnterState it) '''
-		handle->stateConfVector[«state.stateVector.offset»] = «state.name.asIdentifier»;
-		handle->stateConfVectorPosition = «state.stateVector.offset»;
+		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.name.asIdentifier»;
+		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 
 	def dispatch code(ExitState it) '''
-		handle->stateConfVector[«state.stateVector.offset»] = last_state;
-		handle->stateConfVectorPosition = «state.stateVector.offset»;
+		«scHandle»->stateConfVector[«state.stateVector.offset»] = last_state;
+		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 }

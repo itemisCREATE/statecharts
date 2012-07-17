@@ -8,6 +8,13 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.sexec.Check
+import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sexec.ExecutionScope
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.ExecutionNode
+import java.util.List
 
 class Naming {
 
@@ -73,6 +80,10 @@ class Naming {
 		type.toFirstLower	
 	}
 
+	def functionPrefix(ExecutionFlow it) {
+		type.toFirstLower	
+	}
+
 
 	def asRaiser(EventDefinition it) {
 		scope.functionPrefix + '_raise_' + name.asIdentifier.toFirstLower	
@@ -97,6 +108,43 @@ class Naming {
 	def asFunction(OperationDefinition it) {
 		scope.functionPrefix + '_' + name.asIdentifier.toFirstLower	
 	}
+		
+	
+	def asCheckFunction(Check it) { functionName(newArrayList('check', elementName, reaction.name)) }
+	 
+	def asEffectFunction(Step it) { functionName(newArrayList('effect', elementName, reaction.name)) }
+	 
+	def asEntryActionFunction(Step it) { functionName('entryaction') }
+	
+	def asExitActionFunction(Step it) { functionName('exitaction') }
+	 
+	def asEnterSequenceFunction(Step it) { functionName('entersequence') }
+		 
+	def asDeepEnterSequenceFunction(Step it) { functionName('deepentersequence') }
+	 
+	def asShallowEnterSequenceFunction(Step it) { functionName('shallowentersequence') }
+	 
+	def asExitSequenceFunction(Step it) { functionName('exitsequence') }
+	 
+	def asReactFunction(Step it) { functionName('react') }
+	
+	
+	def functionName(Step it, String fName) { functionName(newArrayList(fName, elementName)) }
+	
+	def functionName(EObject it, List<String> segments) {
+		flow.functionPrefix + segments.fold("", [s, seg | s + if (seg.empty) "" else "_" + seg]).asIdentifier
+	}
+
+	def dispatch String elementName(EObject it) { eContainer.elementName }
+	
+	def dispatch String elementName(ExecutionScope it) { (if (superScope != null && ! superScope.elementName.empty) superScope.elementName + "_" else "") + name }	
+	
+	def dispatch String elementName(ExecutionState it) { (if (superScope != null && ! superScope.elementName.empty) superScope.elementName + "_" else "") + simpleName }	
+	
+	def dispatch String elementName(ExecutionNode it) { name }	
+	
+	def dispatch String elementName(ExecutionFlow it) { "" }	
+	
 	
 	
 	def h(String it) { it + ".h" }
@@ -114,4 +162,8 @@ class Naming {
 	
 	def dispatch scopeDescription(InterfaceScope it) '''«IF name==null || name.empty»default interface scope«ELSE»interface scope '«name»'«ENDIF»'''
 	def dispatch scopeDescription(InternalScope it) '''internal scope'''
+	
+	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
+	
+	def scHandle() { 'handle_' }
 }
