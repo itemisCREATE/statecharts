@@ -259,7 +259,7 @@
    <extension
          point="org.eclipse.gmf.runtime.diagram.ui.paletteProviders">
       <paletteProvider
-            class="org.eclipse.gmf.runtime.diagram.ui.providers.DefaultPaletteProvider">
+            class="org.yakindu.sct.ui.editor.providers.StatechartPaletteProvider">
          <contribution
                factoryClass="org.yakindu.sct.ui.editor.editor.StatechartDiagramPaletteFactory">
             <entry
