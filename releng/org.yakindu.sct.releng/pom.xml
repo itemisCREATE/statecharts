@@ -117,6 +117,17 @@
 		</plugins>
 		<pluginManagement>
 			<plugins>
+				<!-- TYCHO -->
+				<plugin>
+					<groupId>${tycho-groupid}</groupId>
+					<artifactId>tycho-compiler-plugin</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<encoding>UTF-8</encoding>
+						<source>6.0</source>
+						<target>6.0</target>
+					</configuration>
+				</plugin>
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
@@ -215,18 +226,28 @@
 
 	<profiles>
 		<profile>
+			<id>builds-target</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<p2.target.repository>https://builds.itemis.de/jenkins/job/YAKINDU_Base_target/lastSuccessfulBuild/artifact/update-site</p2.target.repository>
+				<p2.base.repository>https://projects.itemis.de/data/yakindu/base/juno/snapshot/</p2.base.repository>
+			</properties>
+		</profile>
+		<profile>
 			<id>local-target</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<repositories>
 				<repository>
-					<id>target</id>
+					<id>yakindu-target</id>
 					<layout>p2</layout>
 					<url>${p2.target.repository}</url>
 				</repository>
 				<repository>
-					<id>base</id>
+					<id>yakindu-base</id>
 					<layout>p2</layout>
 					<url>${p2.base.repository}</url>
 				</repository>
