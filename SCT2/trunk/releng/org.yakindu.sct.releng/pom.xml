@@ -200,6 +200,11 @@
 					<configuration>
 						<!-- need to prefix by basedir to generate to currently built module -->
 						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
+						<dependency>
+						  <groupId>org.antlr</groupId>
+						  <artifactId>antlr-runtime</artifactId>
+						  <version>3.2</version>
+						</dependency>
 					</configuration>
 				</plugin>
 			</plugins>
