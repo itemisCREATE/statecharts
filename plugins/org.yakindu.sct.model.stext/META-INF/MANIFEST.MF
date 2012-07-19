@@ -41,5 +41,4 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.stext.util,
  org.yakindu.sct.model.stext.validation
 Eclipse-BundleShape: dir
-Bundle-ClassPath: org.yakindu.sct.model.stext.jar,
- .
+Bundle-ClassPath: .
