@@ -19,6 +19,7 @@ class Statemachine {
 	@Inject extension Navigation
 	@Inject extension Base
 	
+	
 	def generateStatemachineH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
 		 fsa.generateFile(flow.module.h, flow.statemachineHContent )
 	}

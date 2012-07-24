@@ -1,36 +1,39 @@
 package org.yakindu.sct.generator.c
 
-import org.yakindu.sct.model.sgraph.Statement
-import org.yakindu.sct.model.stext.stext.Literal
-import org.yakindu.sct.model.stext.stext.StringLiteral
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.IntLiteral
-import org.yakindu.sct.model.stext.stext.RealLiteral
-import org.yakindu.sct.model.stext.stext.HexLiteral
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.AssignmentExpression
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.eclipse.emf.ecore.EObject
 import com.google.inject.Inject
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression
-import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.stext.stext.EventRaisingExpression
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
-import org.yakindu.sct.model.stext.validation.ITypeInferrer
+import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.sgraph.Event
+import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.sgraph.Variable
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
+import org.yakindu.sct.model.stext.stext.AssignmentExpression
 import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
 import org.yakindu.sct.model.stext.stext.BitwiseOrExpression
 import org.yakindu.sct.model.stext.stext.BitwiseXorExpression
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.HexLiteral
+import org.yakindu.sct.model.stext.stext.IntLiteral
+import org.yakindu.sct.model.stext.stext.Literal
+import org.yakindu.sct.model.stext.stext.LogicalAndExpression
+import org.yakindu.sct.model.stext.stext.LogicalNotExpression
+import org.yakindu.sct.model.stext.stext.LogicalOrExpression
+import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
-import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
+import org.yakindu.sct.model.stext.stext.RealLiteral
+import org.yakindu.sct.model.stext.stext.StringLiteral
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.validation.ITypeInferrer
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class ActionCode {
 	
@@ -40,27 +43,56 @@ class ActionCode {
 	@Inject extension ITypeSystemAccess
 	
 	
-		/** todo externalize */
+	/** todo externalize */
 	def dispatch access (VariableDefinition it) 
 		'''«scHandle»->«scope.instance».«name.asIdentifier»'''
+
+	/** todo externalize */
+	def dispatch access (OperationDefinition it) 
+		'''«asFunction»'''
 		
 	/** todo externalize */
-	def dispatch access (EventDefinition it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier»'''
-		
-	/** todo externalize */
-	def dispatch access (TimeEvent it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier»'''
-		
+	def dispatch access (Event it) 
+		'''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
+				
 	def dispatch access (EObject it) 
-		'''#warning can't access elements of type «getClass().name»'''
+		'''#error cannot access elements of type «getClass().name» '''
 		
 	
+	def valueAccess(Event it) 
+		'''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
+	
+	
+	
+	/* Refering to declared elements */
+	
+	def dispatch code (ElementReferenceExpression it) {
+		code(it.definition)
+	}
+		
+	def dispatch code (FeatureCall it) {
+		code(it.definition)
+	}
+		
+	def dispatch code (Expression it, Event target) 
+		'''«target.access»'''
+		
+	def dispatch code (Expression it, VariableDefinition target) 
+		'''«target.access»'''
+	
+	def dispatch code (ElementReferenceExpression it, OperationDefinition target) 
+		'''«target.access»(«FOR arg:args SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+	
+	def dispatch code (FeatureCall it, OperationDefinition target) 
+		'''«target.access»(«FOR arg:args SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+	
+	/*  */
 	
 	def dispatch code (Statement it) 
 		'''#error TODO: generate code for «getClass().name»'''
 
 	
+	/* HANDLING LITERALS */
 	def dispatch code (Literal it)
 		'''#error unknown literal type «getClass().name» '''
 	
@@ -77,19 +109,11 @@ class ActionCode {
 		'''«value.toString»'''	
 		
 	def dispatch code (HexLiteral it) 
-		'''«value.toString»'''	
+		'''0x«Integer::toHexString(value)»'''	
 
 	def dispatch code (PrimitiveValueExpression it) 
 		'''«value.code»'''	
 
-	/* Refering to declared elements */
-	
-	def dispatch code (ElementReferenceExpression it) 
-		'''«reference.access.raised»'''
-		
-	def dispatch code (FeatureCall it) 
-		'''«feature.access.raised»'''
-		
 		
 	/* Statements */
 	
@@ -99,9 +123,9 @@ class ActionCode {
 	def dispatch code (EventRaisingExpression it)
 		'''
 		«IF value != null»
-			«event.definition.access.value» = «value.code»;
+			«event.definition.event.valueAccess» = «value.code»;
 		«ENDIF»
-		«event.definition.access.raised» = bool_true'''	
+		«event.definition.event.access» = bool_true'''	
 
 
 	/* Logical Expressions */
@@ -111,17 +135,14 @@ class ActionCode {
 		
 	def dispatch code (LogicalAndExpression it)
 		'''«rightOperand.code» && «leftOperand.code»'''
-		
+	 	
 	def dispatch code (LogicalNotExpression it)
 		'''! «operand.code»'''
 		
 	def dispatch code (LogicalRelationExpression it) '''
 		«IF leftOperand.type.isString»
 			(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
-		«ELSE»
-			«leftOperand.code»«operator.literal»«rightOperand.code»
-		«ENDIF»
-		'''
+		«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 	
 	/* Bitwise Operations */
 	
@@ -148,7 +169,7 @@ class ActionCode {
 	
 	/* TODO: check if event is active */
 	def dispatch code (EventValueReferenceExpression it)
-		'''«value.definition.code.value»'''
+		'''«value.definition.event.valueAccess»'''
 	
 	def dispatch code (ActiveStateReferenceExpression it)
 		'''isActive(«value.name.asIdentifier»)'''

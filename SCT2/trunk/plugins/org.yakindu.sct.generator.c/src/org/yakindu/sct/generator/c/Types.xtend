@@ -23,6 +23,7 @@ class Types {
 		#endif 
 		
 		#include <stdint.h>
+		#include <stdbool.h>
 		 				
 		typedef int_fast16_t  sc_short;
 		typedef uint_fast16_t sc_ushort;
@@ -32,7 +33,7 @@ class Types {
 		typedef char*         sc_string;
 		typedef enum { bool_false = 0, bool_true = 1 } sc_boolean;
 		
-		typedef uint32_t      sc_eventid;
+		typedef void*         sc_eventid;
 		
 		#ifdef __cplusplus
 		}

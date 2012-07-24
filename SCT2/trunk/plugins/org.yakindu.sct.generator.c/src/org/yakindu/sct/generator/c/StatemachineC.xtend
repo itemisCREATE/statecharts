@@ -7,6 +7,7 @@ import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.Execution
 
 class StatemachineC {
 	
@@ -19,13 +20,16 @@ class StatemachineC {
 		 fsa.generateFile(flow.module.c, flow.statemachineCContent )
 	}
 	
-	
+	def test(ExecutionFlow it) {
+	 	eAllContents.filter( typeof(Execution) ).last
+	}
 	
 	def statemachineCContent(ExecutionFlow it) '''
-		#include "«module.h»"
-		#include "«typesModule.h»"
 		#include <stdlib.h>
 		#include <string.h>
+		#include "«typesModule.h»"
+		#include "«module.h»"
+		#include "«module.client.h»"
 
 		/*! \file Implementation of the state machine '«name»'
 		*/
@@ -38,6 +42,14 @@ class StatemachineC {
 		
 		«exitFunction»
 		
+		«runCycleFunction»
+
+		«raiseTimeEventFunction»
+
+		«isActiveFunction»
+		
+		«interfaceFunctions»
+				
 		«functionImplementations»
 	'''
 	
@@ -77,6 +89,25 @@ class StatemachineC {
 		}
 	'''
 	
+	def runCycleFunction(ExecutionFlow it) '''
+		#warning generate runCycle
+	'''
+	
+	def raiseTimeEventFunction(ExecutionFlow it) '''
+		#warning generate raiseTimeEvent
+	'''
+	
+	def isActiveFunction(ExecutionFlow it) '''
+		#warning generate isActive
+	'''
+	
+	/* ===================================================================================
+	 * Implementation of interface element accessor functions
+	 */
+	
+	def interfaceFunctions(ExecutionFlow it) '''
+		#warning generate interface functions
+	'''
 	
 	/* ===================================================================================
 	 * Handling decralartion of function prototypes

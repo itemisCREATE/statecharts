@@ -112,6 +112,7 @@ class Naming {
 	
 	def functionName(Step it) {
 		switch (it) {
+			case isCheckFunction : asCheckFunction
 			case isEntryAction: asEntryActionFunction
 			case isExitAction : asExitActionFunction
 			case isEffect : asEffectFunction
@@ -125,7 +126,7 @@ class Naming {
 	}
 	
 	
-	def asCheckFunction(Check it) { functionName(newArrayList('check', elementName, reaction.name)) }
+	def asCheckFunction(Step it) { functionName(newArrayList('check', elementName, reaction.name)) }
 	 
 	def asEffectFunction(Step it) { functionName(newArrayList('effect', elementName, reaction.name)) }
 	 
