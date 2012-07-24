@@ -32,7 +32,7 @@ class FlowCode {
 	'''
 	
 	def dispatch code(Step it) '''
-		#warning ActionCode for Step '«getClass().name»' not defined
+		#error ActionCode for Step '«getClass().name»' not defined
 	'''
 
 	def dispatch code(SaveHistory it) '''
@@ -68,14 +68,12 @@ class FlowCode {
 
 	def dispatch code(ScheduleTimeEvent it) '''
 		«stepComment»
-		// TODO: schedule time event id:
-		«flow.type.toFirstLower»_setTimer( EVID , «timeValue.code», «IF timeEvent.periodic»true«ELSE»false«ENDIF»);
+		«flow.type.toFirstLower»_setTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.name.asIdentifier»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
 	'''
 
 	def dispatch code(UnscheduleTimeEvent it) '''
 		«stepComment»
-		// TODO: unschedule time event id:
-		«flow.type.toFirstLower»_unsetTimer( EVID );		
+		«flow.type.toFirstLower»_unsetTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.name.asIdentifier»_raised) );		
 	'''
 
 	def dispatch code(Execution it) 
@@ -85,17 +83,25 @@ class FlowCode {
 		'''«step.functionName»(«scHandle»);'''
 
 	def dispatch code(Sequence it) '''
-		«stepComment»
-		«FOR s : steps»
-			«s.code»
-		«ENDFOR»
+«««		«IF comment != null»
+«««			{
+				«stepComment»
+				«FOR s : steps»
+					«s.code»
+				«ENDFOR»
+«««			}
+«««		«ELSE»
+«««			«FOR s : steps»
+«««				«s.code»
+«««			«ENDFOR»
+«««		«ENDIF»
 	'''	
 
 	def dispatch code(Check it) 
 		'''«IF condition != null»«condition.code»«ELSE»bool_true«ENDIF»'''
 	
 	def dispatch code(CheckRef it) 
-		'''«IF check != null»callcheckfunc(handle)«ELSE»bool_true«ENDIF»'''
+		'''«IF check != null»«check.functionName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
 
 	def dispatch code(If it) '''
 		«stepComment»

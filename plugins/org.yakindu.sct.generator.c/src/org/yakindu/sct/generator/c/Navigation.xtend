@@ -1,28 +1,26 @@
 package org.yakindu.sct.generator.c
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import java.util.Collection
-import org.yakindu.sct.model.sexec.StateVector
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import java.util.ArrayList
-import org.yakindu.sct.model.stext.stext.OperationDefinition
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.Check
-import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionRegion
-import java.util.List
+import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sexec.StateVector
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sgraph.Declaration
+import org.yakindu.sct.model.sgraph.Event
+import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 class Navigation {
 	
@@ -42,6 +40,11 @@ class Navigation {
 	def dispatch ExecutionFlow flow(ExecutionFlow it) {
 		it
 	}
+	
+	
+	def Event event(Declaration it) {
+		if ( it instanceof Event ) it as Event else null 	
+	} 
 	
 	def Scope scope(Declaration it) {
 		if (eContainer instanceof Scope) eContainer as Scope
@@ -172,6 +175,10 @@ class Navigation {
 	def isReactSequence(Step it) { eContainer.isReactSequence(it) }
 	def dispatch isReactSequence(ExecutionNode it, Step s) { reactSequence == s }
 	def dispatch isReactSequence(EObject it, Step s) { false }
+	
+	
+	def isCheckFunction(Step it) { it instanceof Check }
+	
 	
 	def dispatch Declaration definition(ElementReferenceExpression it) {
 		if (reference instanceof Declaration) reference as Declaration

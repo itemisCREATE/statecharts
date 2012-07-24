@@ -18,6 +18,8 @@ class CSCTGenerator implements IExecutionFlowGenerator {
 	@Inject extension Statemachine
 	@Inject extension StatemachineC
 	@Inject extension StatemachineRequired
+	
+//	@Inject protected GeneratorEntry entry
  	
 
 	
