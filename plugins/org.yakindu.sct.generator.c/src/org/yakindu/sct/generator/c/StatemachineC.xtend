@@ -90,7 +90,32 @@ class StatemachineC {
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		#warning generate runCycle
+		void runCycle(«scHandleDecl») {
+			
+			//clearOutEvents();
+			
+			for («scHandle»->stateConfVectorPosition = 0;
+				«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
+				«scHandle»->stateConfVectorPosition++) {
+					
+				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition]) {
+				«FOR state : states»
+					«IF state.reactSequence!=null»
+					case «state.name.asIdentifier» : {
+						«state.reactSequence.functionName»(«scHandle»);
+						break;
+					}
+					«ENDIF»
+				«ENDFOR»
+				default: {
+					break;
+				}
+
+			}
+
+			//clearInEvents();
+			}
+		}
 	'''
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
