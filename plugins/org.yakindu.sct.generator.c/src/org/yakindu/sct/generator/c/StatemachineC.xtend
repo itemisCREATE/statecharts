@@ -42,6 +42,10 @@ class StatemachineC {
 		
 		«exitFunction»
 		
+		«clearInEventsFunction»
+		
+		«clearOutEventsFunction»
+		
 		«runCycleFunction»
 
 		«raiseTimeEventFunction»
@@ -89,10 +93,32 @@ class StatemachineC {
 		}
 	'''
 	
+	def clearInEventsFunction(ExecutionFlow it) '''
+		static void clearInEvents(«scHandleDecl») {
+			«FOR scope : it.scopes»
+				«FOR event : scope.incomingEvents»
+				«scHandle»->«scope.instance».«event.name.asIdentifier»_raised = false;
+				«ENDFOR»
+			«ENDFOR»
+		}
+	'''
+	
+	def clearOutEventsFunction(ExecutionFlow it) '''
+		static void clearOutEvents(«scHandleDecl») {
+			«FOR scope : it.scopes»
+				«FOR event : scope.outgoingEvents»
+				«scHandle»->«scope.instance».«event.name.asIdentifier»_raised = false;
+				«ENDFOR»
+			«ENDFOR»
+			«IF hasLocalScope»
+			«ENDIF»
+		}
+	'''
+	
 	def runCycleFunction(ExecutionFlow it) '''
 		void runCycle(«scHandleDecl») {
 			
-			//clearOutEvents();
+			clearOutEvents(«scHandle»);
 			
 			for («scHandle»->stateConfVectorPosition = 0;
 				«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
@@ -107,14 +133,12 @@ class StatemachineC {
 					}
 					«ENDIF»
 				«ENDFOR»
-				default: {
+				default:
 					break;
 				}
-
 			}
-
-			//clearInEvents();
-			}
+			
+			clearInEvents(«scHandle»);
 		}
 	'''
 	
@@ -149,6 +173,8 @@ class StatemachineC {
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
 		«reactFunctions.toPrototypes»
+		static void clearInEvents(«scHandleDecl»);
+		static void clearOutEvents(«scHandleDecl»);
 		
 	'''
 	 
