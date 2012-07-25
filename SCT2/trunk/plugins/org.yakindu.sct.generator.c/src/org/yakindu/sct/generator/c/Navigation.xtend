@@ -23,6 +23,8 @@ import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Navigation {
 	
@@ -70,24 +72,24 @@ class Navigation {
 		scopes.fold(new ArrayList<OperationDefinition>(), [ l, s | l.addAll(s.declarations.filter( typeof(OperationDefinition))) return l ])
 	}
 	
-	def List<Event> getIncomingEvents(Scope scope) {
-		val events = new ArrayList<Event>()
-		scope.declarations.filter(typeof(EventDefinition)).forEach(ev | if (ev.direction == Direction::IN) events += ev)
+	def List<EventDefinition> getIncomingEvents(Scope it) {
+		val events = new ArrayList<EventDefinition>()
+		declarations.filter(typeof(EventDefinition)).forEach(ev | if (ev.direction == Direction::IN) events += ev)
 		return events
 	}
 	
-	def boolean hasIncomingEvents(Scope scope) {
-		return !scope.incomingEvents.empty
+	def boolean hasIncomingEvents(Scope it) {
+		return !incomingEvents.empty
 	}
 	
-	def List<Event> getOutgoingEvents(Scope scope) {
-		val events = new ArrayList<Event>()
+	def List<EventDefinition> getOutgoingEvents(Scope scope) {
+		val events = new ArrayList<EventDefinition>()
 		scope.declarations.filter(typeof(EventDefinition)).forEach(ev | if (ev.direction == Direction::OUT) events += ev)
 		return events
 	}
 	
-	def boolean hasOutgoingEvents(Scope scope) {
-		return !scope.outgoingEvents.empty
+	def boolean hasOutgoingEvents(Scope it) {
+		return !outgoingEvents.empty
 	}
 	
 	def InternalScope getLocalScope(ExecutionFlow it) {
@@ -96,6 +98,14 @@ class Navigation {
 	
 	def boolean hasLocalScope(ExecutionFlow it) {
 		return localScope != null;
+	}
+	
+	def Iterable<VariableDefinition> getVariableDefinitions(Scope it) {
+		return declarations.filter(typeof(VariableDefinition))
+	} 
+	
+	def Iterable<InterfaceScope> getInterfaceScopes(ExecutionFlow it) {
+		return scopes.filter(typeof(InterfaceScope))
 	}
 	
 	def dispatch Reaction reaction(Check it) { eContainer as Reaction }

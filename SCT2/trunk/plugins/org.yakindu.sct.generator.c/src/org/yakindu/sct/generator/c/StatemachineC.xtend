@@ -4,16 +4,17 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sexec.Execution
 
 class StatemachineC {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension FlowCode
+	@Inject extension Base
 	
 	
 	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
@@ -100,6 +101,11 @@ class StatemachineC {
 				«scHandle»->«scope.instance».«event.name.asIdentifier»_raised = false;
 				«ENDFOR»
 			«ENDFOR»
+			«IF hasLocalScope»
+				«FOR event : localScope.events»
+				«scHandle»->«localScope.instance».«event.name.asIdentifier»_raised = false; 
+				«ENDFOR»
+			«ENDIF»
 		}
 	'''
 	
@@ -110,8 +116,6 @@ class StatemachineC {
 				«scHandle»->«scope.instance».«event.name.asIdentifier»_raised = false;
 				«ENDFOR»
 			«ENDFOR»
-			«IF hasLocalScope»
-			«ENDIF»
 		}
 	'''
 	
@@ -155,7 +159,40 @@ class StatemachineC {
 	 */
 	
 	def interfaceFunctions(ExecutionFlow it) '''
-		#warning generate interface functions
+		«FOR scope : interfaceScopes»
+			«FOR event : scope.incomingEvents»
+				void «event.asRaiser»(«scHandleDecl»«event.valueParams») {
+					«IF event.hasValue»
+					«scHandle»->«scope.instance».«event.name.value» = value;
+					«ENDIF»
+					«scHandle»->«scope.instance».«event.name.asIdentifier»_raised = true;
+				}
+			«ENDFOR»
+			
+			«FOR event : scope.outgoingEvents»
+				sc_boolean «event.asRaised»(«scHandleDecl») {
+					return «scHandle»->«scope.instance».«event.name.asIdentifier»_raised;
+				}
+				«IF event.hasValue» 
+					«event.type.cPrimitive» «event.asGetter»(«scHandleDecl») {
+						//TODO: Check if event is not raised
+						return «scHandle»->«scope.instance».«event.name.value»;
+					}
+				«ENDIF»
+			«ENDFOR»
+			
+			«FOR variable : scope.variableDefinitions»
+				 «variable.type.cPrimitive» «variable.asGetter»(«scHandleDecl») {
+				 	return «scHandle»->«scope.instance».«variable.name.asIdentifier»;
+				 }
+				 
+				«IF !variable.readonly»
+void «variable.asSetter»(«scHandleDecl», «variable.type.cPrimitive» value) {
+	«scHandle»->«scope.instance».«variable.name.asIdentifier» = value;
+} 
+				«ENDIF»
+			«ENDFOR»
+		«ENDFOR»
 	'''
 	
 	/* ===================================================================================
