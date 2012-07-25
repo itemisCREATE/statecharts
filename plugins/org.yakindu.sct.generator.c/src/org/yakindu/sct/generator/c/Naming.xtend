@@ -18,6 +18,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class Naming {
 
 	@Inject extension Navigation
+	@Inject extension Base
 	
 	def module(ExecutionFlow it) {
 		name.asIdentifier.toFirstUpper	
@@ -184,4 +185,9 @@ class Naming {
 	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
 	
 	def scHandle() { 'handle' }
+	
+	def valueParams(EventDefinition it) {
+		if (hasValue) ', ' + type.cPrimitive + ' value' 
+		else ''
+	}
 }

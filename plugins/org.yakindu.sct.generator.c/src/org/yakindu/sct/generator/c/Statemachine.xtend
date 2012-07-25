@@ -101,7 +101,7 @@ class Statemachine {
 	def dispatch structDeclaration(Declaration it) ''''''
 	
 	
-	def dispatch scopeTypeDecl(Scope it) '''
+	def scopeTypeDecl(Scope it) '''
 		//! Type definition of the data structure for the «it.type» interface scope.
 		typedef struct {
 			«FOR d : declarations »
@@ -148,7 +148,7 @@ class Statemachine {
 	def dispatch functionPrototypes(EventDefinition it) '''
 		«IF direction == Direction::IN»
 		/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «type.cPrimitive» «asRaiser»(«it.flow.type»* handle«valueParams»);
+		extern void «asRaiser»(«it.flow.type»* handle«valueParams»);
 		
 		«ELSE»
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
@@ -170,9 +170,4 @@ class Statemachine {
 			extern void «asSetter»(«it.flow.type»* handle, «type.cPrimitive» value);
 		«ENDIF»
 	'''
-
-	def valueParams(EventDefinition it) {
-		if (hasValue) ', ' + type.cPrimitive + ' value' 
-		else ''
-	}
 }
