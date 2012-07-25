@@ -1,20 +1,19 @@
 package org.yakindu.sct.generator.c
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.stext.stext.InterfaceScope
 import com.google.inject.Inject
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.sexec.Check
+import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.ExecutionNode
-import java.util.List
+import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Naming {
 

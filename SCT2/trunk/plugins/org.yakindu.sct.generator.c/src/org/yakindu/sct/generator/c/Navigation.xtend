@@ -21,6 +21,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.Direction
+import org.yakindu.sct.model.stext.stext.InternalScope
 
 class Navigation {
 	
@@ -57,7 +59,7 @@ class Navigation {
 	}
 	
 	def isTimed (ExecutionFlow it) {
-		scopes.filter( s | s.declarations.filter( typeof(TimeEvent) ).size > 0).size > 0
+		scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].size > 0
 	}
 	
 	def hasValue (EventDefinition it) {
@@ -68,12 +70,40 @@ class Navigation {
 		scopes.fold(new ArrayList<OperationDefinition>(), [ l, s | l.addAll(s.declarations.filter( typeof(OperationDefinition))) return l ])
 	}
 	
+	def List<Event> getIncomingEvents(Scope scope) {
+		val events = new ArrayList<Event>()
+		scope.declarations.filter(typeof(EventDefinition)).forEach(ev | if (ev.direction == Direction::IN) events += ev)
+		return events
+	}
+	
+	def boolean hasIncomingEvents(Scope scope) {
+		return !scope.incomingEvents.empty
+	}
+	
+	def List<Event> getOutgoingEvents(Scope scope) {
+		val events = new ArrayList<Event>()
+		scope.declarations.filter(typeof(EventDefinition)).forEach(ev | if (ev.direction == Direction::OUT) events += ev)
+		return events
+	}
+	
+	def boolean hasOutgoingEvents(Scope scope) {
+		return !scope.outgoingEvents.empty
+	}
+	
+	def InternalScope getLocalScope(ExecutionFlow it) {
+		return it.scopes.filter(typeof(InternalScope)).head
+	}
+	
+	def boolean hasLocalScope(ExecutionFlow it) {
+		return localScope != null;
+	}
+	
 	def dispatch Reaction reaction(Check it) { eContainer as Reaction }
 	def dispatch Reaction reaction(EObject it) { eContainer?.reaction }
 	def dispatch Reaction reaction(Reaction it) { it }
 
 	def referencedChecks(ExecutionNode it) {
-		reactions.filter( r | r.check != null && r.check.refs.size > 0).map( r | r.check )
+		reactions.filter( r | r.check != null && r.check.refs.size > 0).map[it.check]
 	}
 
 	def referencedEffects(ExecutionNode it) {
