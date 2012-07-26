@@ -14,6 +14,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgraph.Event
 
 class Naming {
 
@@ -197,4 +198,23 @@ class Naming {
 		if (hasValue) ', ' + type.cPrimitive + ' value' 
 		else ''
 	}
+	
+	/** todo externalize */
+	def dispatch access (VariableDefinition it) 
+		'''«scHandle»->«scope.instance».«name.asIdentifier»'''
+
+	/** todo externalize */
+	def dispatch access (OperationDefinition it) 
+		'''«asFunction»'''
+		
+	/** todo externalize */
+	def dispatch access (Event it) 
+		'''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
+				
+	def dispatch access (EObject it) 
+		'''#error cannot access elements of type «getClass().name» '''
+		
+	
+	def valueAccess(Event it) 
+		'''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
 }

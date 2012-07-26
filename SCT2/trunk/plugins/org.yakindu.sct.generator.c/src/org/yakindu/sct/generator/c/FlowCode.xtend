@@ -15,7 +15,6 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
-import org.yakindu.sct.model.sgraph.Statement
 
 class FlowCode {
 	
