@@ -31,14 +31,16 @@ class Types {
 		typedef uint32_t      sc_uinteger; 
 		typedef double        sc_real;
 		typedef char*         sc_string;
-		typedef enum { bool_false = 0, bool_true = 1 } sc_boolean;
 		
 		typedef void*         sc_eventid;
 		
 		#ifdef __cplusplus
 		}
 		#endif 
-		 
+		#define sc_boolean bool
+		#define bool_true true
+		#define bool_false false
+
 		#endif /* «typesModule.define»_H_ */
 	'''
 }

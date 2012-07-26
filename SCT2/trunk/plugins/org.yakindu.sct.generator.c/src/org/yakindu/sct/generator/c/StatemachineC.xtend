@@ -98,12 +98,12 @@ class StatemachineC {
 		static void clearInEvents(«scHandleDecl») {
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
-				«event.access» = false;
+				«event.access» = bool_false;
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasLocalScope»
 				«FOR event : localScope.events»
-				«event.access» = false; 
+				«event.access» = bool_false; 
 				«ENDFOR»
 			«ENDIF»
 		}
@@ -113,14 +113,14 @@ class StatemachineC {
 		static void clearOutEvents(«scHandleDecl») {
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
-				«event.access» = false;
+				«event.access» = bool_false;
 				«ENDFOR»
 			«ENDFOR»
 		}
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void runCycle(«scHandleDecl») {
+		void «type.toFirstLower»_runCycle(«scHandleDecl») {
 			
 			clearOutEvents(«scHandle»);
 			
@@ -162,11 +162,11 @@ class StatemachineC {
 			switch (state) {
 				«FOR s : states»
 				case «s.name.asIdentifier» : 
-					return «IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»;
+					return (sc_boolean)«IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»;
 					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.name.asIdentifier»
 						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»;«ENDIF»
 				«ENDFOR»
-				default: return false;
+				default: return bool_false;
 			}
 		}
 	'''
@@ -182,7 +182,7 @@ class StatemachineC {
 					«IF event.hasValue»
 					«event.valueAccess» = value;
 					«ENDIF»
-					«event.access» = true;
+					«event.access» = bool_true;
 				}
 			«ENDFOR»
 			
