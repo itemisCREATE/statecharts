@@ -96,6 +96,10 @@ class Navigation {
 		return it.scopes.filter(typeof(InternalScope)).head
 	}
 	
+	def Scope getTimeEventScope(ExecutionFlow it) {
+		return 	scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].head
+	}
+	
 	def boolean hasLocalScope(ExecutionFlow it) {
 		return localScope != null;
 	}
@@ -120,6 +124,31 @@ class Navigation {
 		reactions.filter( r | r.effect != null && r.effect.caller.size > 0).map( r | r.effect )
 	}
 
+
+	def dispatch List<ExecutionState> subStates(ExecutionState it) {
+		subScopes.fold(new ArrayList<ExecutionState>, 
+			[a, s | 
+				a.addAll(s.subStates)
+				a
+			]
+		)
+	} 
+	
+	def dispatch List<ExecutionState> subStates(ExecutionRegion it) {
+		subScopes.fold(new ArrayList<ExecutionState>, 
+			[a, s | 
+				a.add(s as ExecutionState)
+				a.addAll(s.subStates)
+				a
+			]
+		)
+	} 
+	
+	def dispatch List<ExecutionState> subStates(ExecutionScope it) {
+		return new ArrayList<ExecutionState>()
+	}
+	
+	
 	def isCalled(Step it) { it != null && caller.size > 0 }
 	
 	

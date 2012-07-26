@@ -59,13 +59,16 @@ class Statemachine {
 
 			«IF timed»
 				/*! Raises a time event. */
-				extern void «type.toFirstLower»_raiseTimeEvent(«type»* handle, sc_eventid evid);
+				extern void «nameOfRaiseTimeEventFunction»(«type»* handle, sc_eventid evid);
 			«ENDIF»
 			
 			«FOR s : it.scopes.filter( typeof(InterfaceScope) )»
 				«s.scopeFunctionPrototypes»
 				
 			«ENDFOR»
+			
+			/*! Checks if the specified state is active. */
+			extern sc_boolean «nameOfIsActiveFunction»(«scHandleDecl», «statesEnumType» state);
 			
 			#ifdef __cplusplus
 			}

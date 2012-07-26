@@ -84,6 +84,13 @@ class Naming {
 		type.toFirstLower	
 	}
 
+	def nameOfRaiseTimeEventFunction(ExecutionFlow it) {
+		type.toFirstLower + "_raiseTimeEvent"
+	}
+
+	def nameOfIsActiveFunction(ExecutionFlow it) {
+		type.toFirstLower + "_isActive"
+	}
 
 	def asRaiser(EventDefinition it) {
 		scope.functionPrefix + '_raise_' + name.asIdentifier.toFirstLower	

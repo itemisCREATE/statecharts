@@ -147,11 +147,28 @@ class StatemachineC {
 	'''
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
-		#warning generate raiseTimeEvent
+		«IF timed»
+			void «nameOfRaiseTimeEventFunction»(«type»* handle, sc_eventid evid) {
+				if ( ((intptr_t)evid) >= ((intptr_t)&(«scHandle»->timeEvents))
+					&&  ((intptr_t)evid) < ((intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
+					*(sc_boolean*)evid = bool_true;
+				}		
+			}
+		«ENDIF»
 	'''
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		#warning generate isActive
+		sc_boolean «nameOfIsActiveFunction»(«scHandleDecl», «statesEnumType» state) {
+			switch (state) {
+				«FOR s : states»
+				case «s.name.asIdentifier» : 
+					return «IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»;
+					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.name.asIdentifier»
+						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»;«ENDIF»
+				«ENDFOR»
+				default: return false;
+			}
+		}
 	'''
 	
 	/* ===================================================================================
@@ -182,14 +199,13 @@ class StatemachineC {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				 «variable.type.cPrimitive» «variable.asGetter»(«scHandleDecl») {
-				 	return «scHandle»->«scope.instance».«variable.name.asIdentifier»;
-				 }
-				 
-				«IF !variable.readonly»
-void «variable.asSetter»(«scHandleDecl», «variable.type.cPrimitive» value) {
-	«scHandle»->«scope.instance».«variable.name.asIdentifier» = value;
-} 
+				«variable.type.cPrimitive» «variable.asGetter»(«scHandleDecl») {
+					return «scHandle»->«scope.instance».«variable.name.asIdentifier»;
+				}
+				«IF !variable.readonly »
+				void «variable.asSetter»(«scHandleDecl», «variable.type.cPrimitive» value) {
+					«scHandle»->«scope.instance».«variable.name.asIdentifier» = value;
+				}
 				«ENDIF»
 			«ENDFOR»
 		«ENDFOR»
