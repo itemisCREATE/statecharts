@@ -5,7 +5,6 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ITypeSystemAccess
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.Statement
-import org.yakindu.sct.model.sgraph.Variable
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.AssignmentExpression
 import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
@@ -15,6 +14,7 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.HexLiteral
 import org.yakindu.sct.model.stext.stext.IntLiteral
@@ -32,8 +32,6 @@ import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.validation.ITypeInferrer
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class ActionCode {
 	
@@ -41,28 +39,6 @@ class ActionCode {
 	@Inject extension Navigation
 	@Inject extension ITypeInferrer
 	@Inject extension ITypeSystemAccess
-	
-	
-	/** todo externalize */
-	def dispatch access (VariableDefinition it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier»'''
-
-	/** todo externalize */
-	def dispatch access (OperationDefinition it) 
-		'''«asFunction»'''
-		
-	/** todo externalize */
-	def dispatch access (Event it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
-				
-	def dispatch access (EObject it) 
-		'''#error cannot access elements of type «getClass().name» '''
-		
-	
-	def valueAccess(Event it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
-	
-	
 	
 	/* Refering to declared elements */
 	

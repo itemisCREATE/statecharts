@@ -98,12 +98,12 @@ class StatemachineC {
 		static void clearInEvents(«scHandleDecl») {
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
-				«scHandle»->«scope.instance».«event.name.asIdentifier»_raised = false;
+				«event.access» = false;
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasLocalScope»
 				«FOR event : localScope.events»
-				«scHandle»->«localScope.instance».«event.name.asIdentifier»_raised = false; 
+				«event.access» = false; 
 				«ENDFOR»
 			«ENDIF»
 		}
@@ -113,7 +113,7 @@ class StatemachineC {
 		static void clearOutEvents(«scHandleDecl») {
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
-				«scHandle»->«scope.instance».«event.name.asIdentifier»_raised = false;
+				«event.access» = false;
 				«ENDFOR»
 			«ENDFOR»
 		}
@@ -180,31 +180,31 @@ class StatemachineC {
 			«FOR event : scope.incomingEvents»
 				void «event.asRaiser»(«scHandleDecl»«event.valueParams») {
 					«IF event.hasValue»
-					«scHandle»->«scope.instance».«event.name.value» = value;
+					«event.valueAccess» = value;
 					«ENDIF»
-					«scHandle»->«scope.instance».«event.name.asIdentifier»_raised = true;
+					«event.access» = true;
 				}
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
 				sc_boolean «event.asRaised»(«scHandleDecl») {
-					return «scHandle»->«scope.instance».«event.name.asIdentifier»_raised;
+					return «event.access»;
 				}
 				«IF event.hasValue» 
 					«event.type.cPrimitive» «event.asGetter»(«scHandleDecl») {
 						//TODO: Check if event is not raised
-						return «scHandle»->«scope.instance».«event.name.value»;
+						return «event.valueAccess»;
 					}
 				«ENDIF»
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
 				«variable.type.cPrimitive» «variable.asGetter»(«scHandleDecl») {
-					return «scHandle»->«scope.instance».«variable.name.asIdentifier»;
+					return «variable.access»;
 				}
 				«IF !variable.readonly »
 				void «variable.asSetter»(«scHandleDecl», «variable.type.cPrimitive» value) {
-					«scHandle»->«scope.instance».«variable.name.asIdentifier» = value;
+					«variable.access» = value;
 				}
 				«ENDIF»
 			«ENDFOR»
