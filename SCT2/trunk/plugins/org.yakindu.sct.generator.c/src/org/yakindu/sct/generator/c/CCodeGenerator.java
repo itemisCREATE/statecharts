@@ -1,35 +1,16 @@
-/**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Contributors:
- *     committers of YAKINDU - initial API and implementation
- */
 package org.yakindu.sct.generator.c;
 
-import org.eclipse.core.resources.IProject;
-import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
+import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgraph.Statechart;
 
-/**
- * 
- * @author andreas muelder - Initial contribution and API
- * 
- */
-public class CCodeGenerator extends AbstractXpandBasedCodeGenerator {
+public class CCodeGenerator extends GenericJavaBasedGenerator {
 
 	@Override
-	public String getTemplatePath() {
-		return "org::yakindu::sct::generator::c::templates::Main::main";
+	public void runGenerator(Statechart flow, GeneratorEntry entry) {
+		CSCTGenerator delegate = getInjector(entry).getInstance(CSCTGenerator.class);		
+		delegate.generate(createExecutionFlow(flow, entry), entry, getFileSystemAccess(entry));
 	}
 
-	@Override
-	protected void createProject(IProject project, GeneratorEntry entry) {
-		super.createProject(project, entry);
-		// TODO: Set up right project description with C related stuff here...
-	}
-
+	
 }

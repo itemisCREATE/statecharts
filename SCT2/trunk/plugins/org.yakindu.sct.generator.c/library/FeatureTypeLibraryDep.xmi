@@ -5,4 +5,17 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:sgen="http://www.yakindu.org/sct/statechart/SGen"
     xsi:schemaLocation="http://www.yakindu.org/sct/statechart/SGen ../../org.yakindu.sct.model.sgen/model/emf/sgen.ecore"
-    name="C Generator"/>
+    name="C Generator (deprecated)">
+  <types name="CCodeFeature"
+      optional="true">
+    <parameters
+        name="InterfaceEventListener"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="Singleton"
+        parameterType="BOOLEAN"/>
+    <parameters
+        name="DebugType"
+        optional="true"/>
+  </types>
+</sgen:FeatureTypeLibrary>
