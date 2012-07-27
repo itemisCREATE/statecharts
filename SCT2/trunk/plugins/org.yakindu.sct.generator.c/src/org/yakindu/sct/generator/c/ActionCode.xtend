@@ -1,7 +1,6 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.ITypeSystemAccess
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.Statement
@@ -32,6 +31,7 @@ import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.validation.ITypeInferrer
+import org.yakindu.sct.model.stext.stext.ShiftExpression
 
 class ActionCode {
 	
@@ -123,22 +123,24 @@ class ActionCode {
 	/* Bitwise Operations */
 	
 	def dispatch code (BitwiseAndExpression it)
-		'''«rightOperand.code» & «leftOperand.code»'''
+		'''«leftOperand.code» & «rightOperand.code»'''
 	
 	def dispatch code (BitwiseOrExpression it)
-		'''«rightOperand.code» | «leftOperand.code»'''
+		'''«leftOperand.code» | «rightOperand.code»'''
 	
 	def dispatch code (BitwiseXorExpression it)
-		'''«rightOperand.code» ^ «leftOperand.code»'''
+		'''«leftOperand.code» ^ «rightOperand.code»'''
 	
+	def dispatch code (ShiftExpression it)
+		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
 
 	/* Numerical operations */
 	
 	def dispatch code (NumericalAddSubtractExpression it)
-		'''«rightOperand.code» «operator.literal» «leftOperand.code»'''
+		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
 	
 	def dispatch code (NumericalMultiplyDivideExpression it)
-		'''«rightOperand.code» «operator.literal» «leftOperand.code»'''
+		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
 	
 	def dispatch code (NumericalUnaryExpression it)
 		'''«operator.literal» «operand.code»'''

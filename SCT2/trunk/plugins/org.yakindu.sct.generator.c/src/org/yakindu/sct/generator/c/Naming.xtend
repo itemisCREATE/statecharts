@@ -80,7 +80,29 @@ class Naming {
 	def functionPrefix(Scope it) {
 		type.toFirstLower	
 	}
-
+	
+	def dispatch last_state(ExecutionFlow it) {
+		module + "_last_state"
+	}
+	
+	def dispatch last_state(Step it) {
+		execution_flow.module + "_last_state"
+	}
+	
+	def ExecutionFlow execution_flow(EObject element) {
+		var ret = element;
+		
+		while (ret != null) {
+			if (ret instanceof ExecutionFlow) {
+				return ret as ExecutionFlow
+			}
+			else {
+				ret = ret.eContainer;
+			}	
+		}
+		return null;
+	}
+	
 	def functionPrefix(ExecutionFlow it) {
 		type.toFirstLower	
 	}

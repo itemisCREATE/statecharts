@@ -83,7 +83,7 @@ class Statemachine {
 			«FOR state : states »
 			«state.name.asIdentifier» ,
 			«ENDFOR»
-			last_state
+			«last_state»
 		} «statesEnumType»;
 	'''
 
