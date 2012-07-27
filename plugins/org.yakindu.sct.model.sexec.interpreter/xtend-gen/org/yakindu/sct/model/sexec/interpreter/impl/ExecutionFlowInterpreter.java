@@ -44,6 +44,7 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
@@ -162,97 +163,167 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     this.execute(this.erc);
   }
   
-  protected Object _addToScope(final VariableDefinition variable) {
-    Object _xblockexpression = null;
-    {
-      QualifiedName _qualifiedName = this.provider.qualifiedName(variable);
-      String fqName = _qualifiedName.toString();
-      Type _type = variable.getType();
-      boolean _isBoolean = this.ts.isBoolean(_type);
-      if (_isBoolean) {
-        ExecutionVariable _executionVariable = new ExecutionVariable(fqName, Boolean.class, Boolean.valueOf(false));
-        this.executionContext.declareVariable(_executionVariable);
+  protected void _addToScope(final VariableDefinition variable) {
+    QualifiedName _qualifiedName = this.provider.qualifiedName(variable);
+    String fqName = _qualifiedName.toString();
+    Type _type = variable.getType();
+    boolean _isBoolean = this.ts.isBoolean(_type);
+    if (_isBoolean) {
+      ExecutionVariable _executionVariable = new ExecutionVariable(fqName, Boolean.class, Boolean.valueOf(false));
+      this.executionContext.declareVariable(_executionVariable);
+    } else {
+      Type _type_1 = variable.getType();
+      boolean _isInteger = this.ts.isInteger(_type_1);
+      if (_isInteger) {
+        ExecutionVariable _executionVariable_1 = new ExecutionVariable(fqName, Integer.class, Integer.valueOf(0));
+        this.executionContext.declareVariable(_executionVariable_1);
       } else {
-        Type _type_1 = variable.getType();
-        boolean _isInteger = this.ts.isInteger(_type_1);
-        if (_isInteger) {
-          ExecutionVariable _executionVariable_1 = new ExecutionVariable(fqName, Integer.class, Integer.valueOf(0));
-          this.executionContext.declareVariable(_executionVariable_1);
+        Type _type_2 = variable.getType();
+        boolean _isReal = this.ts.isReal(_type_2);
+        if (_isReal) {
+          float _parseFloat = Float.parseFloat("0.0");
+          ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, Float.class, Float.valueOf(_parseFloat));
+          this.executionContext.declareVariable(_executionVariable_2);
         } else {
-          Type _type_2 = variable.getType();
-          boolean _isReal = this.ts.isReal(_type_2);
-          if (_isReal) {
-            float _parseFloat = Float.parseFloat("0.0");
-            ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, Float.class, Float.valueOf(_parseFloat));
-            this.executionContext.declareVariable(_executionVariable_2);
-          } else {
-            Type _type_3 = variable.getType();
-            boolean _isString = this.ts.isString(_type_3);
-            if (_isString) {
-              ExecutionVariable _executionVariable_3 = new ExecutionVariable(fqName, String.class, "");
-              this.executionContext.declareVariable(_executionVariable_3);
-            }
+          Type _type_3 = variable.getType();
+          boolean _isString = this.ts.isString(_type_3);
+          if (_isString) {
+            ExecutionVariable _executionVariable_3 = new ExecutionVariable(fqName, String.class, "");
+            this.executionContext.declareVariable(_executionVariable_3);
           }
         }
       }
-      _xblockexpression = (null);
     }
-    return _xblockexpression;
   }
   
-  protected Object _addToScope(final EventDefinition event) {
-    Object _xblockexpression = null;
-    {
-      QualifiedName _qualifiedName = this.provider.qualifiedName(event);
-      String fqName = _qualifiedName.toString();
-      Type _type = event.getType();
-      boolean _isBoolean = this.ts.isBoolean(_type);
-      if (_isBoolean) {
-        ExecutionEvent _executionEvent = new ExecutionEvent(fqName, Boolean.class, null);
-        this.executionContext.declareEvent(_executionEvent);
-      } else {
-        Type _type_1 = event.getType();
-        boolean _isInteger = this.ts.isInteger(_type_1);
-        if (_isInteger) {
-          ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, Integer.class, null);
-          this.executionContext.declareEvent(_executionEvent_1);
-        } else {
-          Type _type_2 = event.getType();
-          boolean _isReal = this.ts.isReal(_type_2);
-          if (_isReal) {
-            ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, Float.class, null);
-            this.executionContext.declareEvent(_executionEvent_2);
-          } else {
-            Type _type_3 = event.getType();
-            boolean _isVoid = this.ts.isVoid(_type_3);
-            if (_isVoid) {
-              ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, Void.class);
-              this.executionContext.declareEvent(_executionEvent_3);
-            } else {
-              Type _type_4 = event.getType();
-              boolean _isString = this.ts.isString(_type_4);
-              if (_isString) {
-                ExecutionEvent _executionEvent_4 = new ExecutionEvent(fqName, String.class, "");
-                this.executionContext.declareEvent(_executionEvent_4);
-              }
-            }
-          }
-        }
-      }
-      _xblockexpression = (null);
-    }
-    return _xblockexpression;
-  }
-  
-  protected Object _addToScope(final TimeEvent event) {
-    Object _xblockexpression = null;
-    {
-      String _name = event.getName();
-      ExecutionEvent _executionEvent = new ExecutionEvent(_name, Long.class);
+  protected void _addToScope(final EventDefinition event) {
+    QualifiedName _qualifiedName = this.provider.qualifiedName(event);
+    String fqName = _qualifiedName.toString();
+    Type _type = event.getType();
+    boolean _isBoolean = this.ts.isBoolean(_type);
+    if (_isBoolean) {
+      ExecutionEvent _executionEvent = new ExecutionEvent(fqName, Boolean.class, null);
       this.executionContext.declareEvent(_executionEvent);
-      _xblockexpression = (null);
+    } else {
+      Type _type_1 = event.getType();
+      boolean _isInteger = this.ts.isInteger(_type_1);
+      if (_isInteger) {
+        ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, Integer.class, null);
+        this.executionContext.declareEvent(_executionEvent_1);
+      } else {
+        Type _type_2 = event.getType();
+        boolean _isReal = this.ts.isReal(_type_2);
+        if (_isReal) {
+          ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, Float.class, null);
+          this.executionContext.declareEvent(_executionEvent_2);
+        } else {
+          Type _type_3 = event.getType();
+          boolean _isVoid = this.ts.isVoid(_type_3);
+          if (_isVoid) {
+            ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, Void.class);
+            this.executionContext.declareEvent(_executionEvent_3);
+          } else {
+            Type _type_4 = event.getType();
+            boolean _isString = this.ts.isString(_type_4);
+            if (_isString) {
+              ExecutionEvent _executionEvent_4 = new ExecutionEvent(fqName, String.class, "");
+              this.executionContext.declareEvent(_executionEvent_4);
+            }
+          }
+        }
+      }
     }
-    return _xblockexpression;
+  }
+  
+  protected void _addToScope(final OperationDefinition op) {
+    QualifiedName _qualifiedName = this.provider.qualifiedName(op);
+    String fqName = _qualifiedName.toString();
+    Type _type = op.getType();
+    Class<? extends Object> type = this.mappedType(_type);
+    Object _defaultValue = this.defaultValue(type);
+    ExecutionVariable _executionVariable = new ExecutionVariable(fqName, type, _defaultValue);
+    this.executionContext.declareVariable(_executionVariable);
+  }
+  
+  public Class<? extends Object> mappedType(final Type it) {
+    Class<? extends Object> _xifexpression = null;
+    boolean _isBoolean = this.ts.isBoolean(it);
+    if (_isBoolean) {
+      _xifexpression = Boolean.class;
+    } else {
+      Class<? extends Object> _xifexpression_1 = null;
+      boolean _isInteger = this.ts.isInteger(it);
+      if (_isInteger) {
+        _xifexpression_1 = Integer.class;
+      } else {
+        Class<? extends Object> _xifexpression_2 = null;
+        boolean _isReal = this.ts.isReal(it);
+        if (_isReal) {
+          _xifexpression_2 = Float.class;
+        } else {
+          Class<? extends Object> _xifexpression_3 = null;
+          boolean _isVoid = this.ts.isVoid(it);
+          if (_isVoid) {
+            _xifexpression_3 = Void.class;
+          } else {
+            Class<String> _xifexpression_4 = null;
+            boolean _isString = this.ts.isString(it);
+            if (_isString) {
+              _xifexpression_4 = String.class;
+            } else {
+              _xifexpression_4 = null;
+            }
+            _xifexpression_3 = _xifexpression_4;
+          }
+          _xifexpression_2 = _xifexpression_3;
+        }
+        _xifexpression_1 = _xifexpression_2;
+      }
+      _xifexpression = _xifexpression_1;
+    }
+    return _xifexpression;
+  }
+  
+  public Object defaultValue(final Class<? extends Object> type) {
+    Object _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(type,Boolean.class)) {
+        _matched=true;
+        _switchResult = true;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,Integer.class)) {
+        _matched=true;
+        _switchResult = 0;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,Float.class)) {
+        _matched=true;
+        _switchResult = 0.0;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,Void.class)) {
+        _matched=true;
+        _switchResult = null;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(type,String.class)) {
+        _matched=true;
+        _switchResult = "";
+      }
+    }
+    return ((Comparable<Object>)_switchResult);
+  }
+  
+  protected void _addToScope(final TimeEvent event) {
+    String _name = event.getName();
+    ExecutionEvent _executionEvent = new ExecutionEvent(_name, Long.class);
+    this.executionContext.declareEvent(_executionEvent);
   }
   
   public void enter() {
@@ -492,13 +563,19 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     }
   }
   
-  public Object addToScope(final Declaration event) {
+  public void addToScope(final Declaration event) {
     if (event instanceof TimeEvent) {
-      return _addToScope((TimeEvent)event);
+      _addToScope((TimeEvent)event);
+      return;
     } else if (event instanceof EventDefinition) {
-      return _addToScope((EventDefinition)event);
+      _addToScope((EventDefinition)event);
+      return;
+    } else if (event instanceof OperationDefinition) {
+      _addToScope((OperationDefinition)event);
+      return;
     } else if (event instanceof VariableDefinition) {
-      return _addToScope((VariableDefinition)event);
+      _addToScope((VariableDefinition)event);
+      return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(event).toString());
