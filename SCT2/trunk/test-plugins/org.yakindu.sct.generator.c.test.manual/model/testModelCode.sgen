@@ -1,0 +1,72 @@
+GeneratorModel for yakindu::generic {
+
+	statechart AlwaysOncycle {
+		
+		feature Generator {   
+			generatorProject =  "org.yakindu.sct.generator.c" 
+			generatorClass =  "org.yakindu.sct.generator.c.CSCTGenerator" 
+//			configurationModule = ""
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test.manual"
+			targetFolder = "src-gen/AlwaysOncycle" 
+		}
+	}
+	
+	statechart BitExpressions {
+		
+		feature Generator {   
+			generatorProject =  "org.yakindu.sct.generator.c" 
+			generatorClass =  "org.yakindu.sct.generator.c.CSCTGenerator" 
+//			configurationModule = ""
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test.manual"
+			targetFolder = "src-gen/BitExpressions" 
+		}
+	}
+	
+	statechart TimeTrigger {
+		
+		feature Generator {   
+			generatorProject =  "org.yakindu.sct.generator.c" 
+			generatorClass =  "org.yakindu.sct.generator.c.CSCTGenerator" 
+//			configurationModule = ""
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test.manual"
+			targetFolder = "src-gen/TimeTrigger" 
+		}
+	}
+
+	statechart ShallowHistory {
+		
+		feature Generator {   
+			generatorProject =  "org.yakindu.sct.generator.c" 
+			generatorClass =  "org.yakindu.sct.generator.c.CSCTGenerator" 
+//			configurationModule = ""
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test.manual"
+			targetFolder = "src-gen/ShallowHistory" 
+		}
+	}
+	
+	statechart DeepHistory {
+		
+		feature Generator {   
+			generatorProject =  "org.yakindu.sct.generator.c" 
+			generatorClass =  "org.yakindu.sct.generator.c.CSCTGenerator" 
+//			configurationModule = ""
+		}
+
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.c.test.manual"
+			targetFolder = "src-gen/DeepHistory" 
+		}
+	}
+} 

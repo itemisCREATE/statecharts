@@ -1,0 +1,6 @@
+#include "gtest/gtest.h"
+#include "AlwaysOncycle.cc"
+#include "BitExpressions.cc"
+#include "DeepHistory.cc"
+#include "ShallowHistory.cc"
+#include "TimeTrigger.cc"
