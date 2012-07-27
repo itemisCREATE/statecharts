@@ -65,11 +65,11 @@ class StatemachineC {
 			int i;
 
 			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
-				«scHandle»->stateConfVector[i] = last_state;
+				«scHandle»->stateConfVector[i] = «last_state»;
 			
 			«IF ! historyVector.empty»
 			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
-				«scHandle»->historyVector[i] = last_state;
+				«scHandle»->historyVector[i] = «last_state»;
 			«ENDIF»
 			
 			«scHandle»->stateConfVectorPosition = 0;
@@ -162,9 +162,9 @@ class StatemachineC {
 			switch (state) {
 				«FOR s : states»
 				case «s.name.asIdentifier» : 
-					return (sc_boolean)«IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»;
+					return (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»
 					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.name.asIdentifier»
-						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»;«ENDIF»
+						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»«ENDIF»);
 				«ENDFOR»
 				default: return bool_false;
 			}

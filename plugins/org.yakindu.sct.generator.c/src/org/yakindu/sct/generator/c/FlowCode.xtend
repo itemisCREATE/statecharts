@@ -41,7 +41,7 @@ class FlowCode {
 	
 	def dispatch code(HistoryEntry it) '''
 		«stepComment»
-		if («scHandle»->historyVector[«region.historyVector.offset»] != last_state) {
+		if («scHandle»->historyVector[«region.historyVector.offset»] != «last_state») {
 			«historyStep.code»
 		} else {
 			«initialStep.code»
@@ -118,7 +118,7 @@ class FlowCode {
 	'''
 
 	def dispatch code(ExitState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = last_state;
+		«scHandle»->stateConfVector[«state.stateVector.offset»] = «last_state»;
 		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 }
