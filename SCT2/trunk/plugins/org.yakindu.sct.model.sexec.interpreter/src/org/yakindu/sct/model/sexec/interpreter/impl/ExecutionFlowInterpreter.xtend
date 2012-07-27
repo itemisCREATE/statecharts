@@ -46,6 +46,8 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContext
 import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable
+import org.yakindu.base.types.Type
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 /**
  * 
@@ -137,7 +139,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 
 
 
-	def dispatch addToScope(VariableDefinition variable){
+	def dispatch void addToScope(VariableDefinition variable){
 		var fqName = provider.qualifiedName(variable).toString
 		if(variable.type.^boolean){
 			executionContext.declareVariable(new ExecutionVariable(fqName ,typeof(Boolean),false))
@@ -151,10 +153,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		else if (variable.type.string){
 			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(String),""))
 		}
-		null 
 	}  
 	
-	def dispatch addToScope(EventDefinition event){
+	def dispatch void addToScope(EventDefinition event){
 		var fqName = provider.qualifiedName(event).toString
 		if(event.type.^boolean){
 				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Boolean),null))
@@ -171,15 +172,40 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		else if (event.type.string){
 			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(String),""))
 		}
-		null 
-	} 
-	
-	def dispatch addToScope(TimeEvent event){
-		executionContext.declareEvent(new ExecutionEvent(event.name, typeof(Long)))
-		null 
+		 
 	}
 	
 	
+	def dispatch void addToScope(OperationDefinition op){
+		var fqName = provider.qualifiedName(op).toString
+		var type = op.type.mappedType
+		
+		executionContext.declareVariable(new ExecutionVariable(fqName, type, type.defaultValue))
+	}
+	
+	def Class<?> mappedType(Type it) {
+		if(it.^boolean)		{ typeof(Boolean) } 
+		else if(it.integer)	{ typeof(Integer) }
+		else if(it.real)	{ typeof(Float) }
+		else if(it.^void)	{ typeof(Void)	}
+		else if(it.string)	{ typeof(String) }
+		else null 
+	} 
+	
+	def Object defaultValue(Class<?> type) {
+		switch (type) {
+			case typeof(Boolean) : true
+			case typeof(Integer) : 0
+			case typeof(Float) : 0.0
+			case typeof(Void) : null
+			case typeof(String) : ""
+		}
+	}
+	
+	def dispatch void addToScope(TimeEvent event){
+		executionContext.declareEvent(new ExecutionEvent(event.name, typeof(Long))) 
+	}
+
 	override enter() {
 		for(step : flow.enterSequence.steps){
 			step.execute
