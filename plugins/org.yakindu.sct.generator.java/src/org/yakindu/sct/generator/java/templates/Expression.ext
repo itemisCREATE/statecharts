@@ -27,7 +27,7 @@ String toCode(Expression expression) :
 	"/* Unknown expression: "+expression+" */"; 
 
 String toCode(OperationDefinition this) :
-	getContext() + "operationCallback." + name;
+	getContext() + "operationCallback." + identifier();
 
 String toCode(ElementReferenceExpression ref) :
 	if (ref.operationCall) then

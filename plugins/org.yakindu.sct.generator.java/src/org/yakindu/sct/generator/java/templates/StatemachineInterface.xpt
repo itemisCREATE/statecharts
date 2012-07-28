@@ -19,12 +19,18 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::Naming»
 
 «DEFINE operationSignature FOR OperationDefinition»
-	public void «name»(«FOREACH parameters AS parameter ITERATOR iter-»
-							«IF iter.counter0 > 0-»
-								,
-							«ENDIF-»
-								«parameter.type.getJavaType()» «parameter.name»
-						«ENDFOREACH-»);
+	public «type.getJavaType()» «identifier()»(
+		«FOREACH parameters AS parameter ITERATOR iter-»
+			«IF iter.counter0 > 0-»
+				,
+			«ENDIF-»
+			«parameter.type.getJavaType()» 
+			«IF parameter.name.isJavaKeyword()-»
+				«parameter.name + "Arg"»
+			«ELSE-»
+				«parameter.name»
+			«ENDIF-»
+		«ENDFOREACH-»);
 «ENDDEFINE»
 
 «DEFINE file(sgen::GeneratorEntry entry) FOR ExecutionFlow-»

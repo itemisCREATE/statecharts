@@ -86,6 +86,11 @@ String getEventType(EventDefinition this) :
 	else
 		"ValuedEvent<Events, "+type.getJavaClassType()+">";
 
+String identifier(OperationDefinition this) :
+	if name.isJavaKeyword() then
+		name + "Operation"
+	else
+		name;
 	
 String getInitialValueAssignment(VariableDefinition this) : 
 	if initialValue != null then
