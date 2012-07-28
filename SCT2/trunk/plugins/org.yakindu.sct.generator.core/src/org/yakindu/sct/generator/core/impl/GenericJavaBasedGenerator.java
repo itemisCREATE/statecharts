@@ -41,7 +41,6 @@ import com.google.inject.util.Modules;
  */
 public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
-	
 	@Override
 	protected com.google.inject.Injector createInjector(GeneratorEntry entry) {
 		return Guice.createInjector(createModule(entry));
@@ -51,7 +50,6 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 	protected Module createModule(final GeneratorEntry entry) {
 		Module defaultModule = super.createModule(entry);
 
-		
 		String overridingModuleClass = null;
 		FeatureConfiguration featureConfiguration = entry
 				.getFeatureConfiguration(TEMPLATE_FEATURE);
@@ -105,23 +103,27 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 					.loadClass(templateClass);
 			Object delegate = getInjector(entry).getInstance(
 					delegateGeneratorClass);
-			
-			Class<?> iType_ = (Class<?>) getClass().getClassLoader()
-					.loadClass("org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator"); 
+
+			Class<?> iType_ = (Class<?>) getClass()
+					.getClassLoader()
+					.loadClass(
+							"org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator");
 			Class<?> iType__ = IExecutionFlowGenerator.class;
 			Class<?> iType = (Class<?>) classLoader
-					.loadClass("org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator"); 
-			
+					.loadClass("org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator");
+
 			if (delegate instanceof AbstractWorkspaceGenerator) {
 				((AbstractWorkspaceGenerator) delegate).setBridge(bridge);
 			}
 			if (delegate instanceof IExecutionFlowGenerator) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(createExecutionFlow(flow, entry), entry, fsa);
+				flowGenerator.generate(createExecutionFlow(flow, entry), entry,
+						fsa);
 			}
 			if (iType.isInstance(delegate)) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(createExecutionFlow(flow, entry), entry, fsa);
+				flowGenerator.generate(createExecutionFlow(flow, entry), entry,
+						fsa);
 			}
 			if (delegate instanceof ISGraphGenerator) {
 				ISGraphGenerator graphGenerator = (ISGraphGenerator) delegate;
@@ -159,25 +161,29 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 		return project;
 	}
 
-	
 	/**
 	 * Provides a pre configured IFileSystemAccess instance
 	 */
 	public IFileSystemAccess getFileSystemAccess(GeneratorEntry entry) {
-		
-		SimpleResourceFileSystemAccess fileSystemAccess = new SimpleResourceFileSystemAccess(); 
+
+		SimpleResourceFileSystemAccess fileSystemAccess = new SimpleResourceFileSystemAccess();
 		fileSystemAccess.setProject(getTargetProject(entry));
-		
+
 		FeatureConfiguration outletConfig = getOutletFeatureConfiguration(entry);
 		String targetFolder = outletConfig
-				.getParameterValue(OUTLET_FEATURE_TARGET_FOLDER).getExpression().toString();		
+				.getParameterValue(OUTLET_FEATURE_TARGET_FOLDER)
+				.getExpression().toString();
+
+		fileSystemAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT,
+				targetFolder);
 		
-		fileSystemAccess.setOutputPath(IFileSystemAccess.DEFAULT_OUTPUT, targetFolder);
-		
-		
+		if (fileSystemAccess.getOutputConfigurations().get(
+				IFileSystemAccess.DEFAULT_OUTPUT) != null) {
+			fileSystemAccess.getOutputConfigurations()
+					.get(IFileSystemAccess.DEFAULT_OUTPUT)
+					.setCreateOutputDirectory(true);
+		}
 		return fileSystemAccess;
 	}
-	
-	
-	
+
 }
