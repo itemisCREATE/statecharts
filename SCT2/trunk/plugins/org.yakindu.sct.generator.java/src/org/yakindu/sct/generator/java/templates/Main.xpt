@@ -16,7 +16,7 @@ Contributors:
 «EXTENSION org::yakindu::sct::generator::java::templates::ExecutionModelExtensions»
 
 «DEFINE main(sgen::GeneratorEntry entry) FOR ExecutionFlow»
-	
+	 
 	«REM» base package files «ENDREM»
 	«EXPAND IStatemachine::file(entry) FOR this»
 	
