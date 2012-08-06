@@ -15,11 +15,23 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgraph.Event
+import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.model.sgraph.State
 
 class Naming {
 
-	@Inject extension Navigation
-	@Inject extension Base
+	@Inject
+	extension Navigation
+	
+	@Inject
+	extension Base
+	
+	@Inject
+	private StextNameProvider provider;
+	
+	def getFullyQualifiedName(State state) {
+		provider.getFullyQualifiedName(state).toString.asIdentifier
+	}
 	
 	def module(ExecutionFlow it) {
 		name.asIdentifier.toFirstUpper	

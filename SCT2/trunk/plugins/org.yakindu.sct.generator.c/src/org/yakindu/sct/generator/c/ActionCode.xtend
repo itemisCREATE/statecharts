@@ -150,6 +150,6 @@ class ActionCode {
 		'''«value.definition.event.valueAccess»'''
 	
 	def dispatch code (ActiveStateReferenceExpression it)
-		'''isActive(«value.name.asIdentifier»)'''
+		'''«flow.nameOfIsActiveFunction»(«scHandle», «value.fullyQualifiedName»)'''
 	
 }
