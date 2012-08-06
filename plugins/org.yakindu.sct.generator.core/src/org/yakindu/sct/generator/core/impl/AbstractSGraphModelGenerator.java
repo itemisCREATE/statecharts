@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.PrintWriter;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
@@ -162,7 +163,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	}
 
 	protected final void writeToConsole(String line) {
-		if (!info.isClosed()) {
+		if (!info.isClosed() && PlatformUI.isWorkbenchRunning()) {
 			info.println(line);
 		}
 	}
