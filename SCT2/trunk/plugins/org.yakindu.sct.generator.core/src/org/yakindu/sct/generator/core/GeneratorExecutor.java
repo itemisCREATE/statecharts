@@ -28,6 +28,7 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
  * 
  * @author andreas muelder - Initial contribution and API
  * @author holger willebrandt - refactoring
+ * @author markus mühlbrandt - added executeGenerator for generator models
  */
 public class GeneratorExecutor {
 
@@ -60,6 +61,21 @@ public class GeneratorExecutor {
 		generatorJob.setRule(file.getProject().getWorkspace().getRuleFactory()
 				.buildRule());
 		generatorJob.schedule();
+	}
+	
+	public void executeGenerator(GeneratorModel model) {
+
+		String generatorId = model.getGeneratorId();
+		GeneratorDescriptor description = GeneratorExtensions
+				.getGeneratorDescriptorForId(generatorId);
+		if (description == null)
+			return;
+		final ISCTGenerator generator = description.createGenerator();
+		final EList<GeneratorEntry> entries = model.getEntries();
+		
+		for (GeneratorEntry generatorEntry : entries) {
+			generator.generate(generatorEntry);
+		}
 	}
 
 	protected Resource loadResource(IFile file) {
