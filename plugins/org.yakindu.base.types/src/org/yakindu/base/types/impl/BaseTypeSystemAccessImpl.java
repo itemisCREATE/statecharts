@@ -53,18 +53,20 @@ public class BaseTypeSystemAccessImpl implements ITypeSystemAccess {
 		return type != null && type.getName().equalsIgnoreCase("string");
 	}
 
-	public boolean isAssignable(Type expected, Type actual) {
-		if (expected == null && actual == null)
+	public boolean isAssignable(Type varType, Type valType) {
+		if (varType == null && valType == null)
 			return true;
-		Type combine = combine(expected, actual);
+		Type combine = combine(varType, valType);
 		if (combine == null) {
 			return false;
 		}
-		if (expected.getName().equals(combine.getName())) {
+		if (varType.getName().equals(combine.getName())) {
 			return true;
 		}
-		if ((isInteger(expected) || isReal(expected))
-				&& (isInteger(actual) || isReal(actual))) {
+		if ((isInteger(varType)) && (isInteger(valType))) {
+			return true;
+		}
+		if ((isReal(varType)) && (isInteger(valType) || isReal(valType))) {
 			return true;
 		}
 		return false;

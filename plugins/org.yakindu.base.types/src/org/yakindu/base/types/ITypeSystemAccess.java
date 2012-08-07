@@ -35,7 +35,7 @@ public interface ITypeSystemAccess {
 	/** true, if this type represents void */
 	boolean isVoid(Type type);
 
-	boolean isAssignable(Type expected, Type actual);
+	boolean isAssignable(Type varType, Type valType);
 
 	Type combine(Type typeOne, Type typeTwo);
 
