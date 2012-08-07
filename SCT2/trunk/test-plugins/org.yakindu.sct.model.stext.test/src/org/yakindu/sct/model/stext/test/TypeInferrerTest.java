@@ -950,6 +950,15 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	}
 
 	/**
+	 * 
+	 * exception.expect(TypeCheckException.class); exception .expectMessage(
+	 * "Can not assign a value of type integer to a variable of type boolean");
+	 * EObject statement = super.parseExpression("myBool = myOpp1()", null,
+	 * VariableDefinition); analyzer.getType((Statement) statement);
+	 * 
+	 */
+
+	/**
 	 * Convenience from here...
 	 */
 	private void expectOperatorPlusException() {
