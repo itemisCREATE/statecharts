@@ -9,6 +9,8 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -48,6 +50,9 @@ public class StructureMapping {
   
   @Inject
   private StatechartExtensions sct;
+  
+  @Inject
+  private IQualifiedNameProvider _iQualifiedNameProvider;
   
   /**
    * maps all required scope defined in the statechart to the execution flow.
@@ -255,8 +260,8 @@ public class StructureMapping {
       for (final TimeEventSpec tes : timeEventSpecs) {
         {
           final TimeEvent timeEvent = this.mapping.createDerivedEvent(tes);
-          String _name = state.getName();
-          String _plus = (_name + "_time_event_");
+          QualifiedName _fullyQualifiedName = this._iQualifiedNameProvider.getFullyQualifiedName(state);
+          String _plus = (_fullyQualifiedName + "_time_event_");
           int _indexOf = timeEventSpecs.indexOf(tes);
           String _plus_1 = (_plus + Integer.valueOf(_indexOf));
           timeEvent.setName(_plus_1);
