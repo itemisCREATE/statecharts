@@ -19,12 +19,14 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgraph.Vertex
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 
 class StructureMapping {
 	 
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatechartExtensions sct
+	@Inject extension IQualifiedNameProvider
 	
 	
 	//==========================================================================
@@ -156,7 +158,7 @@ class StructureMapping {
 		val result = new ArrayList<TimeEvent>();
 		for (tes : timeEventSpecs ) {
 			val timeEvent = tes.createDerivedEvent
-			timeEvent.name = state.name + "_time_event_" + timeEventSpecs.indexOf(tes);
+			timeEvent.name = state.fullyQualifiedName + "_time_event_" + timeEventSpecs.indexOf(tes);
 			state.statechart.create.timeEventScope.declarations.add(timeEvent);
 			result.add(timeEvent);
 			
