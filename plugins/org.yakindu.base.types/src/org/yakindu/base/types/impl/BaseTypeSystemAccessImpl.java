@@ -56,6 +56,8 @@ public class BaseTypeSystemAccessImpl implements ITypeSystemAccess {
 	public boolean isAssignable(Type varType, Type valType) {
 		if (varType == null && valType == null)
 			return true;
+		if (isVoid(varType) && valType == null)
+			return true;
 		Type combine = combine(varType, valType);
 		if (combine == null) {
 			return false;
