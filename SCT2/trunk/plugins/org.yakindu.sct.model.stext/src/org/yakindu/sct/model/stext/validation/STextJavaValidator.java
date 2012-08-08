@@ -307,15 +307,15 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Check(CheckType.FAST)
 	public void checkVariableDefinitionInitialValue(
 			VariableDefinition definition) {
-		Type definitionType = definition.getType();
+		Type varType = definition.getType();
 		if (definition.getInitialValue() == null)
 			return;
 		try {
-			Type inferType = inferrer.getType(definition.getInitialValue());
-			Type combine = tsAccess.combine(definitionType, inferType);
-			if (combine == null) {
-				error("Can not assign a value of type '" + inferType.getName()
-						+ "' to a variable of type '" + definitionType + "'",
+			Type valType = inferrer.getType(definition.getInitialValue());
+			Type combine = tsAccess.combine(valType, varType);
+			if (combine == null || !tsAccess.isAssignable(varType, valType)) {
+				error("Can not assign a value of type '" + valType.getName()
+						+ "' to a variable of type '" + varType + "'",
 						StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
 			}
 		} catch (Exception e) {
