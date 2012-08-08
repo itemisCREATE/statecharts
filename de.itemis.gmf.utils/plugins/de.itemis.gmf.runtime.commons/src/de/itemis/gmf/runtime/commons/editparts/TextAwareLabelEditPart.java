@@ -15,8 +15,10 @@ import static org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants.REQ_D
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
@@ -35,6 +37,8 @@ import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.graphics.Color;
 
 import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
+import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker;
+import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDoubleClickCallback;
 
 /**
  * This is a common abstract base class for all Label which are
@@ -140,6 +144,22 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 
 	public IContentAssistProcessor getCompletionProcessor() {
 		return null;
+	}
+	/**
+	 * Performs direct edit on double click
+	 */
+	@Override
+	public DragTracker getDragTracker(final Request request) {
+		if (request instanceof SelectionRequest
+				&& ((SelectionRequest) request).getLastButtonPressed() == 3)
+			return null;
+		IDoubleClickCallback callback = new IDoubleClickCallback() {
+			public void handleDoubleClick(int btn) {
+				performDirectEditRequest(request);
+			}
+		};
+		return new DoubleClickDirectEditDragTracker(this,
+				getTopGraphicEditPart(), callback);
 	}
 
 	@Override
