@@ -243,7 +243,22 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		}
 	}
 
-	// TODO: removeChildvisual
+	@Override
+	protected void removeChildVisual(EditPart childEditPart) {
+		if (childEditPart instanceof StateFigureCompartmentEditPart) {
+			IFigure pane = getPrimaryShape().getFigureCompartmentPane();
+			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
+					.getFigure();
+			pane.remove(compartmentFigure);
+		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
+			IFigure pane = getPrimaryShape().getTextCompartmentPane();
+			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
+					.getFigure();
+			pane.remove(compartmentFigure);
+		} else {
+			super.removeChildVisual(childEditPart);
+		}
+	}
 
 	@Override
 	protected void addNotationalListeners() {
