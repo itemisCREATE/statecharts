@@ -23,7 +23,6 @@ import static util.TestModels.STATECHART_LOCAL_REACTIONS;
 import static util.TestModels.STATE_ACTIVE;
 import static util.TestModels.SYNC_FORK;
 import static util.TestModels.SYNC_JOIN;
-import static util.TestModels.TIME_TRIGGER;
 import static util.TestModels.VALUED_EVENTS;
 
 import org.eclipse.core.resources.IMarker;
@@ -142,12 +141,6 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	@Test
 	public void testSyncJoinModel() throws Exception {
 		Statechart statechart = models.loadStatechartFromResource(SYNC_JOIN);
-		failOnError(generateAndCompile(statechart));
-	}
-
-	@Test
-	public void testTimeTriggerModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(TIME_TRIGGER);
 		failOnError(generateAndCompile(statechart));
 	}
 
