@@ -5,8 +5,10 @@ import org.yakindu.scr.ITimerService;
 
 public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 
-	private final TimeEvent stateA_time_event_0 = new TimeEvent(false, 0);
-	private final TimeEvent stateB_time_event_0 = new TimeEvent(true, 1);
+	private final TimeEvent timeTrigger_mainRegion_StateA_time_event_0 = new TimeEvent(
+			false, 0);
+	private final TimeEvent timeTrigger_mainRegion_StateB_time_event_0 = new TimeEvent(
+			true, 1);
 
 	private final boolean[] timeEvents = new boolean[2];
 
@@ -42,8 +44,8 @@ public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 
 		sCIDefault = new SCIDefaultImpl();
 
-		stateA_time_event_0.setStatemachine(this);
-		stateB_time_event_0.setStatemachine(this);
+		timeTrigger_mainRegion_StateA_time_event_0.setStatemachine(this);
+		timeTrigger_mainRegion_StateB_time_event_0.setStatemachine(this);
 
 	}
 
@@ -70,12 +72,25 @@ public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case MainRegion_StateA :
+				return stateVector[0] == State.MainRegion_StateA;
+
+			case MainRegion_StateB :
+				return stateVector[0] == State.MainRegion_StateB;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public void setTimerService(ITimerService timerService) {
@@ -108,8 +123,9 @@ public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 		}
 		cycleStartTime = System.currentTimeMillis();
 		entryActionTimeTrigger();
-		getTimerService().setTimer(stateA_time_event_0, 100, cycleStartTime);
-		sCIDefault.setValue(0);
+		getTimerService().setTimer(timeTrigger_mainRegion_StateA_time_event_0,
+				100, cycleStartTime);
+		sCIDefault.value = 0;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.MainRegion_StateA;
@@ -122,13 +138,15 @@ public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 
 			case MainRegion_StateA :
 				stateVector[0] = State.$NullState$;
-				getTimerService().resetTimer(stateA_time_event_0);
+				getTimerService().resetTimer(
+						timeTrigger_mainRegion_StateA_time_event_0);
 
 				break;
 
 			case MainRegion_StateB :
 				stateVector[0] = State.$NullState$;
-				getTimerService().resetTimer(stateB_time_event_0);
+				getTimerService().resetTimer(
+						timeTrigger_mainRegion_StateB_time_event_0);
 
 				break;
 
@@ -148,11 +166,14 @@ public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 	}
 
 	private void reactMainRegion_StateA() {
-		if (timeEvents[stateA_time_event_0.getIndex()]) {
+		if (timeEvents[timeTrigger_mainRegion_StateA_time_event_0.getIndex()]) {
 			stateVector[0] = State.$NullState$;
-			getTimerService().resetTimer(stateA_time_event_0);
+			getTimerService().resetTimer(
+					timeTrigger_mainRegion_StateA_time_event_0);
 
-			getTimerService().setTimer(stateB_time_event_0, 20, cycleStartTime);
+			getTimerService().setTimer(
+					timeTrigger_mainRegion_StateB_time_event_0, 20,
+					cycleStartTime);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.MainRegion_StateB;
@@ -161,20 +182,23 @@ public class TimeTriggerStatemachine implements ITimeTriggerStatemachine {
 
 	}
 	private void reactMainRegion_StateB() {
-		if ((sCIDefault.getValue() == 10)) {
+		if ((sCIDefault.value == 10)) {
 			stateVector[0] = State.$NullState$;
-			getTimerService().resetTimer(stateB_time_event_0);
+			getTimerService().resetTimer(
+					timeTrigger_mainRegion_StateB_time_event_0);
 
-			getTimerService()
-					.setTimer(stateA_time_event_0, 100, cycleStartTime);
-			sCIDefault.setValue(0);
+			getTimerService().setTimer(
+					timeTrigger_mainRegion_StateA_time_event_0, 100,
+					cycleStartTime);
+			sCIDefault.value = 0;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.MainRegion_StateA;
 
 		} else {
-			if (timeEvents[stateB_time_event_0.getIndex()]) {
-				sCIDefault.setValue(sCIDefault.getValue() + (1));
+			if (timeEvents[timeTrigger_mainRegion_StateB_time_event_0
+					.getIndex()]) {
+				sCIDefault.value += 1;
 
 			}
 

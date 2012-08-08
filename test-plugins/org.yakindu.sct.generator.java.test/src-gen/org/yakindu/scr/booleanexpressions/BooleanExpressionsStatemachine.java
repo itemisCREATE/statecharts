@@ -122,12 +122,25 @@ public class BooleanExpressionsStatemachine
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_StateA :
+				return stateVector[0] == State.Main_region_StateA;
+
+			case Main_region_StateB :
+				return stateVector[0] == State.Main_region_StateB;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -190,8 +203,9 @@ public class BooleanExpressionsStatemachine
 
 	public void enter() {
 		entryActionBooleanExpressions();
-		sCIDefault.setMyBool1(true);
-		sCIDefault.setMyBool2(false);
+		sCIDefault.myBool1 = true;
+
+		sCIDefault.myBool2 = false;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_StateA;
@@ -231,15 +245,15 @@ public class BooleanExpressionsStatemachine
 		if (sCIDefault.e1) {
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.setAnd((sCIDefault.getMyBool1() && sCIDefault
-					.getMyBool2()));
-			sCIDefault.setOr((sCIDefault.getMyBool1() || sCIDefault
-					.getMyBool2()));
-			sCIDefault.setNot(!sCIDefault.getMyBool1());
-			sCIDefault.setEqual((sCIDefault.getMyBool1() == sCIDefault
-					.getMyBool2()));
-			sCIDefault.setNotequal((sCIDefault.getMyBool1() != sCIDefault
-					.getMyBool2()));
+			sCIDefault.and = (sCIDefault.myBool1 && sCIDefault.myBool2);
+
+			sCIDefault.or = (sCIDefault.myBool1 || sCIDefault.myBool2);
+
+			sCIDefault.not = !sCIDefault.myBool1;
+
+			sCIDefault.equal = (sCIDefault.myBool1 == sCIDefault.myBool2);
+
+			sCIDefault.notequal = (sCIDefault.myBool1 != sCIDefault.myBool2);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_StateB;

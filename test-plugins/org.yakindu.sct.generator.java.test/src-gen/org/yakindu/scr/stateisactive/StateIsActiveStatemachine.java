@@ -50,12 +50,31 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case R1_R1A :
+				return stateVector[0] == State.R1_R1A;
+
+			case R1_R1B :
+				return stateVector[0] == State.R1_R1B;
+
+			case R2_R2A :
+				return stateVector[1] == State.R2_R2A;
+
+			case R2_R2B :
+				return stateVector[1] == State.R2_R2B;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {

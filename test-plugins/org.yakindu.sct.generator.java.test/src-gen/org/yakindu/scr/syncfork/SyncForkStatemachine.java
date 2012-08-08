@@ -57,12 +57,40 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_A :
+				return stateVector[0] == State.Main_region_A;
+
+			case Main_region_B :
+				return stateVector[0].ordinal() >= State.Main_region_B
+						.ordinal()
+						&& stateVector[0].ordinal() <= State.Main_region_B_r2_D2
+								.ordinal();
+
+			case Main_region_B_r1_C1 :
+				return stateVector[0] == State.Main_region_B_r1_C1;
+
+			case Main_region_B_r1_C2 :
+				return stateVector[0] == State.Main_region_B_r1_C2;
+
+			case Main_region_B_r2_D1 :
+				return stateVector[1] == State.Main_region_B_r2_D1;
+
+			case Main_region_B_r2_D2 :
+				return stateVector[1] == State.Main_region_B_r2_D2;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -137,6 +165,8 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	private void reactMain_region_A() {
 		if (sCIDefault.e) {
 			stateVector[0] = State.$NullState$;
+
+			react_sync0_();
 
 		} else {
 			if (sCIDefault.f) {
@@ -259,6 +289,14 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		}
 	}
 	private void reactMain_region_B_r2_D2() {
+	}
+	private void react_sync0_() {
+		nextStateIndex = 0;
+		stateVector[0] = State.Main_region_B_r1_C2;
+
+		nextStateIndex = 1;
+		stateVector[1] = State.Main_region_B_r2_D2;
+
 	}
 
 	public void runCycle() {

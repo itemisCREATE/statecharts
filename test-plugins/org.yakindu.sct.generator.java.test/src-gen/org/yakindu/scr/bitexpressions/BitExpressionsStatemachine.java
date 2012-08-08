@@ -130,12 +130,25 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_StateA :
+				return stateVector[0] == State.Main_region_StateA;
+
+			case Main_region_StateB :
+				return stateVector[0] == State.Main_region_StateB;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -205,8 +218,9 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
 	public void enter() {
 		entryActionBitExpressions();
-		sCIDefault.setMyBit1(5);
-		sCIDefault.setMyBit2(7);
+		sCIDefault.myBit1 = 5;
+
+		sCIDefault.myBit2 = 7;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_StateA;
@@ -246,15 +260,17 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		if (sCIDefault.e1) {
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.setLeftBitshift((sCIDefault.getMyBit1() << 1));
-			sCIDefault.setRightBitshift((sCIDefault.getMyBit1() >> 1));
-			sCIDefault.setComplementBitshift(~(sCIDefault.getMyBit1()));
-			sCIDefault.setBitwiseAnd((sCIDefault.getMyBit1() & sCIDefault
-					.getMyBit2()));
-			sCIDefault.setBitwiseOr((sCIDefault.getMyBit1() | sCIDefault
-					.getMyBit2()));
-			sCIDefault.setBitwiseXor((sCIDefault.getMyBit1() ^ sCIDefault
-					.getMyBit2()));
+			sCIDefault.leftBitshift = (sCIDefault.myBit1 << 1);
+
+			sCIDefault.rightBitshift = (sCIDefault.myBit1 >> 1);
+
+			sCIDefault.complementBitshift = ~(sCIDefault.myBit1);
+
+			sCIDefault.bitwiseAnd = (sCIDefault.myBit1 & sCIDefault.myBit2);
+
+			sCIDefault.bitwiseOr = (sCIDefault.myBit1 | sCIDefault.myBit2);
+
+			sCIDefault.bitwiseXor = (sCIDefault.myBit1 ^ sCIDefault.myBit2);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_StateB;

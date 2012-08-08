@@ -2,23 +2,57 @@ package org.yakindu.scr.guard;
 
 public class GuardStatemachine implements IGuardStatemachine {
 
-	private boolean event1;
+	private final class SCIDefaultImpl implements SCIDefault {
 
-	private boolean event2;
+		private boolean event1;
 
-	private boolean eventReturn;
+		public void raiseEvent1() {
+			event1 = true;
+		}
+
+		private boolean event2;
+
+		public void raiseEvent2() {
+			event2 = true;
+		}
+
+		private boolean eventReturn;
+
+		public void raiseReturn() {
+			eventReturn = true;
+		}
+
+		private int myVar = 0;
+
+		public int getMyVar() {
+			return myVar;
+		}
+
+		public void setMyVar(int value) {
+			this.myVar = value;
+		}
+
+		public void clearEvents() {
+			event1 = false;
+			event2 = false;
+			eventReturn = false;
+		}
+
+	}
+
+	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
 		Main_region_A, Main_region_B, $NullState$
 	};
-
-	private int myVar = 0;
 
 	private final State[] stateVector = new State[1];
 
 	private int nextStateIndex;
 
 	public GuardStatemachine() {
+
+		sCIDefault = new SCIDefaultImpl();
 
 	}
 
@@ -32,6 +66,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	protected void clearEvents() {
+		sCIDefault.clearEvents();
 
 	}
 
@@ -39,36 +74,54 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_A :
+				return stateVector[0] == State.Main_region_A;
+
+			case Main_region_B :
+				return stateVector[0] == State.Main_region_B;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
-	private void raiseEvent1() {
-		event1 = true;
+	public SCIDefault getSCIDefault() {
+		return sCIDefault;
 	}
 
-	private void raiseEvent2() {
-		event2 = true;
+	public void raiseEvent1() {
+		sCIDefault.raiseEvent1();
 	}
 
-	private void raiseEventReturn() {
-		eventReturn = true;
+	public void raiseEvent2() {
+		sCIDefault.raiseEvent2();
 	}
 
-	private int getMyVar() {
-		return myVar;
+	public void raiseReturn() {
+		sCIDefault.raiseReturn();
 	}
 
-	private void setMyVar(int value) {
-		myVar = value;
+	public int getMyVar() {
+		return sCIDefault.getMyVar();
+	}
+
+	public void setMyVar(int value) {
+		sCIDefault.setMyVar(value);
 	}
 
 	public void enter() {
-		setMyVar(0);
+		sCIDefault.myVar = 0;
+
 		entryActionGuard();
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_A;
@@ -105,19 +158,19 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	private void reactMain_region_A() {
-		if ((event1 && (getMyVar() == 10))) {
+		if ((sCIDefault.event1 && (sCIDefault.myVar == 10))) {
 			stateVector[0] = State.$NullState$;
 
-			setMyVar(10);
+			sCIDefault.myVar = 10;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_B;
 
 		} else {
-			if (event2) {
+			if (sCIDefault.event2) {
 				stateVector[0] = State.$NullState$;
 
-				setMyVar(10);
+				sCIDefault.myVar = 10;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_B;
@@ -127,7 +180,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	}
 	private void reactMain_region_B() {
-		if (eventReturn) {
+		if (sCIDefault.eventReturn) {
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;

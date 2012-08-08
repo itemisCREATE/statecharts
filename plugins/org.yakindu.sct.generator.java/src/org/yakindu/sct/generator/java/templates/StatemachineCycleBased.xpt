@@ -82,12 +82,23 @@ public class «getStatemachineClassName()» implements «getStatemachineInterfaceNa
 	}
 	
 	public boolean isStateActive(State state){
+		switch (state) {
+			«FOREACH states AS s»
+			case «s.getName()» : 
+				return «IF s.leaf»stateVector[«s.stateVector.offset»] == State.«s.getName()»
+				«ELSE»stateVector[«s.stateVector.offset»].ordinal() >= State.«s.getName()».ordinal()
+					&& stateVector[«s.stateVector.offset»].ordinal() <= State.«s.getSubStates().last().getName()».ordinal()«ENDIF»;
+			«ENDFOREACH»
+			default: return false;
+		}
+		/*
 		for (int i=0;i<stateVector.length;i++){
 			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		*/
 	}
 	
 	«IF isTimedStatemachine()-»

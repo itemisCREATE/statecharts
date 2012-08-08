@@ -51,12 +51,28 @@ public class StatechartLocalReactionsStatemachine
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_S1 :
+				return stateVector[0] == State.Main_region_S1;
+
+			case Main_region_S2 :
+				return stateVector[0] == State.Main_region_S2;
+
+			case Region2_a :
+				return stateVector[1] == State.Region2_a;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -126,7 +142,7 @@ public class StatechartLocalReactionsStatemachine
 		return true;
 	}
 	private void actionsStatechartLocalReactionsLr0() {
-		sCIDefault.setMyInt(sCIDefault.getMyInt() + (1));
+		sCIDefault.myInt += 1;
 
 	}
 

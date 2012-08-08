@@ -60,12 +60,25 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_A :
+				return stateVector[0] == State.Main_region_A;
+
+			case Main_region_B :
+				return stateVector[0] == State.Main_region_B;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIMyInterface getSCIMyInterface() {
@@ -112,7 +125,7 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		if (sCIMyInterface.event1) {
 			stateVector[0] = State.$NullState$;
 
-			sCIMyInterface.setMyInt(42);
+			sCIMyInterface.myInt = 42;
 
 			sCIMyInterface.raiseEvent1();
 
