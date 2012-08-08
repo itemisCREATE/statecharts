@@ -54,7 +54,6 @@ public class TestModels {
 	public static final String STATE_ACTIVE = "StateIsActive.sct";
 	public static final String SYNC_FORK = "SyncFork.sct";
 	public static final String SYNC_JOIN = "SyncJoin.sct";
-	public static final String TIME_TRIGGER = "TimeTrigger.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
 
 	@Inject
@@ -178,16 +177,6 @@ public class TestModels {
 	 */
 	public ExecutionFlow createGuardModel() throws IOException {
 		return loadExecutionFlowFromResource(GUARD);
-	}
-
-	/**
-	 * <img src="../../images/TimeTrigger.png" /> <br />
-	 * 
-	 * @return the {@link ExecutionFlow}
-	 * @throws IOException
-	 */
-	public ExecutionFlow createTimeTrigger() throws IOException {
-		return loadExecutionFlowFromResource(TIME_TRIGGER);
 	}
 
 	/**
