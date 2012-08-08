@@ -76,7 +76,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
 			context.setVariableValue(scopeVariable.name, evaluate(operator, scopeVariable.getValue,result))
 		}
-		null		
+		result		
 	}
 	
 	
@@ -87,6 +87,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	
 	def dispatch variable(FeatureCall e) {
 		if (e.feature instanceof VariableDefinition) e.feature else null
+	}
+	
+	def dispatch variable(AssignmentExpression e) {
+		return e.varRef.variable as EObject
 	}
 	
 
