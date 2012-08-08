@@ -104,12 +104,55 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case MainRegion_State1 :
+				return stateVector[0] == State.MainRegion_State1;
+
+			case MainRegion_State2 :
+				return stateVector[0].ordinal() >= State.MainRegion_State2
+						.ordinal()
+						&& stateVector[0].ordinal() <= State.MainRegion_State2__region0_State5
+								.ordinal();
+
+			case MainRegion_State2__region0_State3 :
+				return stateVector[0] == State.MainRegion_State2__region0_State3;
+
+			case MainRegion_State2__region0_State4 :
+				return stateVector[0].ordinal() >= State.MainRegion_State2__region0_State4
+						.ordinal()
+						&& stateVector[0].ordinal() <= State.MainRegion_State2__region0_State4__region0_State7__region0_State9
+								.ordinal();
+
+			case MainRegion_State2__region0_State4__region0_State6 :
+				return stateVector[0] == State.MainRegion_State2__region0_State4__region0_State6;
+
+			case MainRegion_State2__region0_State4__region0_State7 :
+				return stateVector[0].ordinal() >= State.MainRegion_State2__region0_State4__region0_State7
+						.ordinal()
+						&& stateVector[0].ordinal() <= State.MainRegion_State2__region0_State4__region0_State7__region0_State9
+								.ordinal();
+
+			case MainRegion_State2__region0_State4__region0_State7__region0_State8 :
+				return stateVector[0] == State.MainRegion_State2__region0_State4__region0_State7__region0_State8;
+
+			case MainRegion_State2__region0_State4__region0_State7__region0_State9 :
+				return stateVector[0] == State.MainRegion_State2__region0_State4__region0_State7__region0_State9;
+
+			case MainRegion_State2__region0_State5 :
+				return stateVector[0] == State.MainRegion_State2__region0_State5;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {

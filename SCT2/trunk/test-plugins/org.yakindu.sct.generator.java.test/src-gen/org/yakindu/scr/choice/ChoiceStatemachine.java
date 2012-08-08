@@ -60,12 +60,28 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_A :
+				return stateVector[0] == State.Main_region_A;
+
+			case Main_region_B :
+				return stateVector[0] == State.Main_region_B;
+
+			case Main_region_C :
+				return stateVector[0] == State.Main_region_C;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -85,7 +101,8 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	public void enter() {
-		sCIDefault.setValue(4);
+		sCIDefault.value = 4;
+
 		entryActionChoice();
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_A;
@@ -130,14 +147,14 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		if (sCIDefault.pressKey) {
 			stateVector[0] = State.$NullState$;
 
-			if (((sCIDefault.getValue() % 2) == 0)) {
-				sCIDefault.setValue(sCIDefault.getValue() - (1));
+			if (((sCIDefault.value % 2) == 0)) {
+				sCIDefault.value -= 1;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_B;
 
 			} else {
-				sCIDefault.setValue(sCIDefault.getValue() - (1));
+				sCIDefault.value -= 1;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_C;
@@ -161,8 +178,8 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		if (sCIDefault.pressKey) {
 			stateVector[0] = State.$NullState$;
 
-			if ((sCIDefault.getValue() == 2)) {
-				sCIDefault.setValue(sCIDefault.getValue() - (1));
+			if ((sCIDefault.value == 2)) {
+				sCIDefault.value -= 1;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.Main_region_B;

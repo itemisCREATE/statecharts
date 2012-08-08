@@ -70,12 +70,28 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_A :
+				return stateVector[0] == State.Main_region_A;
+
+			case _region1_B :
+				return stateVector[1] == State._region1_B;
+
+			case _region1_C :
+				return stateVector[1] == State._region1_C;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -154,7 +170,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		if (sCIDefault.integerEvent) {
 			stateVector[1] = State.$NullState$;
 
-			sCIDefault.setMyVar(sCIDefault.integerEventValue);
+			sCIDefault.myVar = sCIDefault.integerEventValue;
 
 			nextStateIndex = 1;
 			stateVector[1] = State._region1_C;

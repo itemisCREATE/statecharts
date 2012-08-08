@@ -50,12 +50,31 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_A :
+				return stateVector[0] == State.Main_region_A;
+
+			case Main_region_B :
+				return stateVector[0].ordinal() >= State.Main_region_B
+						.ordinal()
+						&& stateVector[0].ordinal() <= State.Main_region_B_subregion1_B1
+								.ordinal();
+
+			case Main_region_B_subregion1_B1 :
+				return stateVector[0] == State.Main_region_B_subregion1_B1;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {

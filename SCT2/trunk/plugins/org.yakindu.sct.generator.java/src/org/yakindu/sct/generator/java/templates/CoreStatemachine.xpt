@@ -55,9 +55,9 @@ import java.util.List;
 	
 	public enum State {
 		«FOREACH states AS state-»
-	      «state.getName()»,
-	    «ENDFOREACH-»
-	    «getNullStateName()»
+			«state.getName()»,
+		«ENDFOREACH-»
+		«getNullStateName()»
 	};
 	
 	«FOREACH getInternalScopeVariables() AS variable-»

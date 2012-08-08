@@ -29,6 +29,9 @@ getInternalScopeEvents(ExecutionFlow this) : getInternalScopeDeclarations().type
 getInternalScopeVoidEvents(ExecutionFlow this) :getInternalScopeEvents().select(e|e.type.isVoid());
 getInternalScopeValuedEvents(ExecutionFlow this) : getInternalScopeEvents().select(e|!e.type.isVoid());
 
+List[ExecutionState] getSubStates(ExecutionState state) :
+	JAVA org.yakindu.sct.generator.java.extensions.ExecutionModelExtensions.getSubStates(org.yakindu.sct.model.sexec.ExecutionState);
+
 getDefaultInterface(ExecutionFlow this) :
 	getInterfaceScope().select(interface|interface.name == null || interface.name == "");
 

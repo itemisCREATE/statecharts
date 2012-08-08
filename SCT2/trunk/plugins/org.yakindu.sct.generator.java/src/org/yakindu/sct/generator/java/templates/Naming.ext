@@ -193,7 +193,7 @@ String getEventValueIdentifier(ElementReferenceExpression this) : this.reference
 
 String getter(Event this) : "get"+this.getEventName()+"()";
 
-String getEventName(TimeEvent this) : name.replaceAll(" ","").toFirstUpper();
+String getEventName(TimeEvent this) : name.replaceAll("\\.","_").toFirstUpper();
 
 String getEventIdentifier(Event this):
 	getEventName().toFirstLower();

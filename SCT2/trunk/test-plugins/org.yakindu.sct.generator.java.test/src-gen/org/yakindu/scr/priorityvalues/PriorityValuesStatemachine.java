@@ -57,12 +57,40 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case SomeRegion_A :
+				return stateVector[0] == State.SomeRegion_A;
+
+			case SomeRegion_B :
+				return stateVector[0] == State.SomeRegion_B;
+
+			case Main_region_A :
+				return stateVector[1] == State.Main_region_A;
+
+			case Main_region_B :
+				return stateVector[1] == State.Main_region_B;
+
+			case Main_region_C :
+				return stateVector[1] == State.Main_region_C;
+
+			case Main_region_D :
+				return stateVector[1] == State.Main_region_D;
+
+			case Main_region_E :
+				return stateVector[1] == State.Main_region_E;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {

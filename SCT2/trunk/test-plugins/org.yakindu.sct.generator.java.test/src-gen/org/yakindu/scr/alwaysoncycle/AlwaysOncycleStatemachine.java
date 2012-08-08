@@ -49,12 +49,25 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	public boolean isStateActive(State state) {
-		for (int i = 0; i < stateVector.length; i++) {
-			if (stateVector[i] == state) {
+		switch (state) {
+
+			case Main_region_StateA :
+				return stateVector[0] == State.Main_region_StateA;
+
+			case Main_region_StateB :
+				return stateVector[0] == State.Main_region_StateB;
+
+			default :
+				return false;
+		}
+		/*
+		for (int i=0;i<stateVector.length;i++){
+			if (stateVector[i]==state) {
 				return true;
 			}
 		}
 		return false;
+		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -71,7 +84,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	public void enter() {
 		entryActionAlwaysOncycle();
-		sCIDefault.setValue(0);
+		sCIDefault.value = 0;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_StateA;
@@ -84,7 +97,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 			case Main_region_StateA :
 				stateVector[0] = State.$NullState$;
-				sCIDefault.setValue(0);
+				sCIDefault.value = 0;
 
 				break;
 
@@ -109,30 +122,30 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	}
 
 	private void reactMain_region_StateA() {
-		if ((sCIDefault.getValue() == 5)) {
+		if ((sCIDefault.value == 5)) {
 			stateVector[0] = State.$NullState$;
-			sCIDefault.setValue(0);
+			sCIDefault.value = 0;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_StateB;
 
 		} else {
-			sCIDefault.setValue(sCIDefault.getValue() + (1));
+			sCIDefault.value += 1;
 
 		}
 
 	}
 	private void reactMain_region_StateB() {
-		if ((sCIDefault.getValue() == 5)) {
+		if ((sCIDefault.value == 5)) {
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.setValue(0);
+			sCIDefault.value = 0;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_StateA;
 
 		} else {
-			sCIDefault.setValue(sCIDefault.getValue() + (1));
+			sCIDefault.value += 1;
 
 		}
 

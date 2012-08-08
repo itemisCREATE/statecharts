@@ -1,8 +1,8 @@
-package org.yakindu.scr.integerexpressions;
+package org.yakindu.scr.realexpressions;
 
-public class IntegerExpressionsStatemachine
+public class RealExpressionsStatemachine
 		implements
-			IIntegerExpressionsStatemachine {
+			IRealExpressionsStatemachine {
 
 	private final class SCIDefaultImpl implements SCIDefault {
 
@@ -12,24 +12,24 @@ public class IntegerExpressionsStatemachine
 			e1 = true;
 		}
 
-		private int myInt1;
+		private double myReal1;
 
-		public int getMyInt1() {
-			return myInt1;
+		public double getMyReal1() {
+			return myReal1;
 		}
 
-		public void setMyInt1(int value) {
-			this.myInt1 = value;
+		public void setMyReal1(double value) {
+			this.myReal1 = value;
 		}
 
-		private int myInt2;
+		private double myReal2;
 
-		public int getMyInt2() {
-			return myInt2;
+		public double getMyReal2() {
+			return myReal2;
 		}
 
-		public void setMyInt2(int value) {
-			this.myInt2 = value;
+		public void setMyReal2(double value) {
+			this.myReal2 = value;
 		}
 
 		private boolean less;
@@ -92,63 +92,63 @@ public class IntegerExpressionsStatemachine
 			this.notEqual = value;
 		}
 
-		private int plus;
+		private boolean plus;
 
-		public int getPlus() {
+		public boolean getPlus() {
 			return plus;
 		}
 
-		public void setPlus(int value) {
+		public void setPlus(boolean value) {
 			this.plus = value;
 		}
 
-		private int minus;
+		private boolean minus;
 
-		public int getMinus() {
+		public boolean getMinus() {
 			return minus;
 		}
 
-		public void setMinus(int value) {
+		public void setMinus(boolean value) {
 			this.minus = value;
 		}
 
-		private int multiply;
+		private boolean multiply;
 
-		public int getMultiply() {
+		public boolean getMultiply() {
 			return multiply;
 		}
 
-		public void setMultiply(int value) {
+		public void setMultiply(boolean value) {
 			this.multiply = value;
 		}
 
-		private int division;
+		private boolean division;
 
-		public int getDivision() {
+		public boolean getDivision() {
 			return division;
 		}
 
-		public void setDivision(int value) {
+		public void setDivision(boolean value) {
 			this.division = value;
 		}
 
-		private int modulo;
+		private boolean modulo;
 
-		public int getModulo() {
+		public boolean getModulo() {
 			return modulo;
 		}
 
-		public void setModulo(int value) {
+		public void setModulo(boolean value) {
 			this.modulo = value;
 		}
 
-		private int negat;
+		private double negat;
 
-		public int getNegat() {
+		public double getNegat() {
 			return negat;
 		}
 
-		public void setNegat(int value) {
+		public void setNegat(double value) {
 			this.negat = value;
 		}
 
@@ -162,53 +162,53 @@ public class IntegerExpressionsStatemachine
 			this.complement = value;
 		}
 
-		private int multiAssign = 2;
+		private double multiAssign = 2.2;
 
-		public int getMultiAssign() {
+		public double getMultiAssign() {
 			return multiAssign;
 		}
 
-		public void setMultiAssign(int value) {
+		public void setMultiAssign(double value) {
 			this.multiAssign = value;
 		}
 
-		private int divAssign = 20;
+		private double divAssign = 22.79;
 
-		public int getDivAssign() {
+		public double getDivAssign() {
 			return divAssign;
 		}
 
-		public void setDivAssign(int value) {
+		public void setDivAssign(double value) {
 			this.divAssign = value;
 		}
 
-		private int plusAssign = 2;
+		private double plusAssign = 2.2;
 
-		public int getPlusAssign() {
+		public double getPlusAssign() {
 			return plusAssign;
 		}
 
-		public void setPlusAssign(int value) {
+		public void setPlusAssign(double value) {
 			this.plusAssign = value;
 		}
 
-		private int minusAssign = 2;
+		private double minusAssign = 8.6;
 
-		public int getMinusAssign() {
+		public double getMinusAssign() {
 			return minusAssign;
 		}
 
-		public void setMinusAssign(int value) {
+		public void setMinusAssign(double value) {
 			this.minusAssign = value;
 		}
 
-		private int moduloAssign = 20;
+		private boolean moduloAssign;
 
-		public int getModuloAssign() {
+		public boolean getModuloAssign() {
 			return moduloAssign;
 		}
 
-		public void setModuloAssign(int value) {
+		public void setModuloAssign(boolean value) {
 			this.moduloAssign = value;
 		}
 
@@ -228,7 +228,7 @@ public class IntegerExpressionsStatemachine
 
 	private int nextStateIndex;
 
-	public IntegerExpressionsStatemachine() {
+	public RealExpressionsStatemachine() {
 
 		sCIDefault = new SCIDefaultImpl();
 
@@ -281,19 +281,19 @@ public class IntegerExpressionsStatemachine
 		sCIDefault.raiseE1();
 	}
 
-	public int getMyInt1() {
-		return sCIDefault.getMyInt1();
+	public double getMyReal1() {
+		return sCIDefault.getMyReal1();
 	}
 
-	public void setMyInt1(int value) {
-		sCIDefault.setMyInt1(value);
+	public void setMyReal1(double value) {
+		sCIDefault.setMyReal1(value);
 	}
-	public int getMyInt2() {
-		return sCIDefault.getMyInt2();
+	public double getMyReal2() {
+		return sCIDefault.getMyReal2();
 	}
 
-	public void setMyInt2(int value) {
-		sCIDefault.setMyInt2(value);
+	public void setMyReal2(double value) {
+		sCIDefault.setMyReal2(value);
 	}
 	public boolean getLess() {
 		return sCIDefault.getLess();
@@ -337,46 +337,46 @@ public class IntegerExpressionsStatemachine
 	public void setNotEqual(boolean value) {
 		sCIDefault.setNotEqual(value);
 	}
-	public int getPlus() {
+	public boolean getPlus() {
 		return sCIDefault.getPlus();
 	}
 
-	public void setPlus(int value) {
+	public void setPlus(boolean value) {
 		sCIDefault.setPlus(value);
 	}
-	public int getMinus() {
+	public boolean getMinus() {
 		return sCIDefault.getMinus();
 	}
 
-	public void setMinus(int value) {
+	public void setMinus(boolean value) {
 		sCIDefault.setMinus(value);
 	}
-	public int getMultiply() {
+	public boolean getMultiply() {
 		return sCIDefault.getMultiply();
 	}
 
-	public void setMultiply(int value) {
+	public void setMultiply(boolean value) {
 		sCIDefault.setMultiply(value);
 	}
-	public int getDivision() {
+	public boolean getDivision() {
 		return sCIDefault.getDivision();
 	}
 
-	public void setDivision(int value) {
+	public void setDivision(boolean value) {
 		sCIDefault.setDivision(value);
 	}
-	public int getModulo() {
+	public boolean getModulo() {
 		return sCIDefault.getModulo();
 	}
 
-	public void setModulo(int value) {
+	public void setModulo(boolean value) {
 		sCIDefault.setModulo(value);
 	}
-	public int getNegat() {
+	public double getNegat() {
 		return sCIDefault.getNegat();
 	}
 
-	public void setNegat(int value) {
+	public void setNegat(double value) {
 		sCIDefault.setNegat(value);
 	}
 	public boolean getComplement() {
@@ -386,57 +386,55 @@ public class IntegerExpressionsStatemachine
 	public void setComplement(boolean value) {
 		sCIDefault.setComplement(value);
 	}
-	public int getMultiAssign() {
+	public double getMultiAssign() {
 		return sCIDefault.getMultiAssign();
 	}
 
-	public void setMultiAssign(int value) {
+	public void setMultiAssign(double value) {
 		sCIDefault.setMultiAssign(value);
 	}
-	public int getDivAssign() {
+	public double getDivAssign() {
 		return sCIDefault.getDivAssign();
 	}
 
-	public void setDivAssign(int value) {
+	public void setDivAssign(double value) {
 		sCIDefault.setDivAssign(value);
 	}
-	public int getPlusAssign() {
+	public double getPlusAssign() {
 		return sCIDefault.getPlusAssign();
 	}
 
-	public void setPlusAssign(int value) {
+	public void setPlusAssign(double value) {
 		sCIDefault.setPlusAssign(value);
 	}
-	public int getMinusAssign() {
+	public double getMinusAssign() {
 		return sCIDefault.getMinusAssign();
 	}
 
-	public void setMinusAssign(int value) {
+	public void setMinusAssign(double value) {
 		sCIDefault.setMinusAssign(value);
 	}
-	public int getModuloAssign() {
+	public boolean getModuloAssign() {
 		return sCIDefault.getModuloAssign();
 	}
 
-	public void setModuloAssign(int value) {
+	public void setModuloAssign(boolean value) {
 		sCIDefault.setModuloAssign(value);
 	}
 
 	public void enter() {
-		sCIDefault.multiAssign = 2;
+		sCIDefault.multiAssign = 2.2;
 
-		sCIDefault.divAssign = 20;
+		sCIDefault.divAssign = 22.79;
 
-		sCIDefault.plusAssign = 2;
+		sCIDefault.plusAssign = 2.2;
 
-		sCIDefault.minusAssign = 2;
+		sCIDefault.minusAssign = 8.6;
 
-		sCIDefault.moduloAssign = 20;
+		entryActionRealExpressions();
+		sCIDefault.myReal1 = 5.3;
 
-		entryActionIntegerExpressions();
-		sCIDefault.myInt1 = 10;
-
-		sCIDefault.myInt2 = 5;
+		sCIDefault.myReal2 = 10.6;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_StateA;
@@ -461,14 +459,14 @@ public class IntegerExpressionsStatemachine
 				break;
 		}
 
-		exitActionIntegerExpressions();
+		exitActionRealExpressions();
 	}
 
-	private void entryActionIntegerExpressions() {
+	private void entryActionRealExpressions() {
 
 	}
 
-	private void exitActionIntegerExpressions() {
+	private void exitActionRealExpressions() {
 
 	}
 
@@ -476,39 +474,39 @@ public class IntegerExpressionsStatemachine
 		if (sCIDefault.e1) {
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.less = (sCIDefault.myInt1 < sCIDefault.myInt2);
+			sCIDefault.less = (sCIDefault.myReal1 < sCIDefault.myReal2);
 
-			sCIDefault.greater = (sCIDefault.myInt1 > sCIDefault.myInt2);
+			sCIDefault.greater = (sCIDefault.myReal1 > sCIDefault.myReal2);
 
-			sCIDefault.equalOrLess = (sCIDefault.myInt1 <= sCIDefault.myInt2);
+			sCIDefault.equalOrLess = (sCIDefault.myReal1 <= sCIDefault.myReal2);
 
-			sCIDefault.equalOrGreater = (sCIDefault.myInt1 >= sCIDefault.myInt2);
+			sCIDefault.equalOrGreater = (sCIDefault.myReal1 >= sCIDefault.myReal2);
 
-			sCIDefault.equal = (sCIDefault.myInt1 == sCIDefault.myInt2);
+			sCIDefault.equal = (sCIDefault.myReal1 == sCIDefault.myReal2);
 
-			sCIDefault.notEqual = (sCIDefault.myInt1 != sCIDefault.myInt2);
+			sCIDefault.notEqual = (sCIDefault.myReal1 != sCIDefault.myReal2);
 
-			sCIDefault.plus = (sCIDefault.myInt1 + sCIDefault.myInt2);
+			sCIDefault.plus = ((15.89 <= (sCIDefault.myReal1 + sCIDefault.myReal2)) && ((sCIDefault.myReal1 + sCIDefault.myReal2) <= 16.91));
 
-			sCIDefault.minus = (sCIDefault.myInt1 - sCIDefault.myInt2);
+			sCIDefault.minus = ((5.29 <= (sCIDefault.myReal2 - sCIDefault.myReal1)) && ((sCIDefault.myReal1 - sCIDefault.myReal2) <= 5.31));
 
-			sCIDefault.multiply = (sCIDefault.myInt1 * sCIDefault.myInt2);
+			sCIDefault.multiply = ((56.17 <= (sCIDefault.myReal1 * sCIDefault.myReal2)) && ((sCIDefault.myReal1 * sCIDefault.myReal2) <= 56.19));
 
-			sCIDefault.division = (sCIDefault.myInt1 / sCIDefault.myInt2);
+			sCIDefault.division = ((1.9 <= (sCIDefault.myReal2 / sCIDefault.myReal1)) && ((sCIDefault.myReal1 / sCIDefault.myReal2) <= 2.1));
 
-			sCIDefault.modulo = (sCIDefault.myInt1 % sCIDefault.myInt2);
+			sCIDefault.modulo = ((-(0.1) <= (sCIDefault.myReal2 % sCIDefault.myReal1)) && ((sCIDefault.myReal1 % sCIDefault.myReal2) <= 0.1));
 
-			sCIDefault.negat = -(sCIDefault.myInt1);
+			sCIDefault.negat = -(sCIDefault.myReal1);
 
-			sCIDefault.multiAssign *= sCIDefault.myInt1;
+			sCIDefault.multiAssign *= sCIDefault.myReal1;
 
-			sCIDefault.divAssign /= sCIDefault.myInt1;
+			sCIDefault.divAssign /= sCIDefault.myReal1;
 
-			sCIDefault.plusAssign += sCIDefault.myInt1;
+			sCIDefault.plusAssign += sCIDefault.myReal1;
 
-			sCIDefault.minusAssign -= sCIDefault.myInt1;
+			sCIDefault.minusAssign -= sCIDefault.myReal1;
 
-			sCIDefault.moduloAssign %= sCIDefault.myInt1;
+			sCIDefault.moduloAssign = (-(0.1) <= (sCIDefault.myReal1 %= sCIDefault.myReal1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_StateB;
