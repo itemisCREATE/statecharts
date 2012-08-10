@@ -40,5 +40,20 @@ public class GuardTest extends AbstractExecutionFlowTest {
 	@Test
 	public void guardTest() throws Exception {
 		assertTrue(isActive("A"));
+		raiseEvent("Event1");
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
+		raiseEvent("Event2");
+		interpreter.runCycle();
+		assertTrue(isActive("B"));
+		raiseEvent("Return");
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
+		raiseEvent("Event1");
+		interpreter.runCycle();
+		assertTrue(isActive("B"));
+		raiseEvent("Return");
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
 	}
 }
