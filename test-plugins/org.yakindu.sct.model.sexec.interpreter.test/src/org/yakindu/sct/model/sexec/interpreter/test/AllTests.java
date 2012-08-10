@@ -9,12 +9,14 @@ import org.junit.runners.Suite.SuiteClasses;
  * 
  */
 @RunWith(value = Suite.class)
-@SuiteClasses({ AlwaysOncycleTest.class, ChoiceTest.class,
-		DeepHistoryTest.class, GuardTest.class, PriorityValuesTest.class,
+@SuiteClasses({ AlwaysOncycleTest.class, BooleanExpressionsTest.class,
+		ChoiceTest.class, DeepHistoryTest.class, GuardTest.class,
+		IntegerExpressionsTest.class, PriorityValuesTest.class,
+		RaiseEventTest.class, SameNameDifferentRegionTest.class,
 		ShallowHistoryTest.class, SimpleEventTest.class,
 		SimpleHierachyTest.class, StatechartLocalReactionsTest.class,
-		StateIsActiveTest.class,
-		SyncJoinTest.class})
+		StateIsActiveTest.class, SyncJoinTest.class, SyncJoinTest.class,
+		ValuedEventsTest.class })
 public class AllTests {
 
 }
