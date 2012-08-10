@@ -20,9 +20,9 @@ testcase for SyncFork{
 		
 		raise f
 		cycle
-		assert !active (SyncFork.main_region.B)
-		assert active (SyncFork.main_region.B.r1.C2)
-		assert active (SyncFork.main_region.B.r2.D2)
+		assert active (SyncFork.main_region.B)
+		assert active (SyncFork.main_region.B.r1.C1)
+		assert active (SyncFork.main_region.B.r2.D1)
 				
 	} 
-}   
+}
