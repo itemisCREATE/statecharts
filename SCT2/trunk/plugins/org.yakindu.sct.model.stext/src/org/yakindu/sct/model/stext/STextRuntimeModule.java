@@ -29,7 +29,6 @@ public class STextRuntimeModule extends
 		org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
 
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		super.bindIGlobalScopeProvider();
 		return STextGlobalScopeProvider.class;
 	}
 
