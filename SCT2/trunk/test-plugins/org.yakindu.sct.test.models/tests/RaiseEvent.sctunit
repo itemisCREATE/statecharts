@@ -1,0 +1,11 @@
+testcase for RaiseEvent {
+	test raiseEvent {
+		assert active ( RaiseEvent.second_region.SateA)
+		assert active (RaiseEvent.main_region.StateA)
+		raise e2
+		cycle
+		cycle
+		assert active (RaiseEvent.second_region.StateB)
+		assert active (RaiseEvent.main_region.StateB)
+	}
+}

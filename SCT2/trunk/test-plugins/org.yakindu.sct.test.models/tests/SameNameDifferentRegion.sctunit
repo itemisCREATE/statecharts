@@ -1,0 +1,13 @@
+testcase for SameNameDifferentRegion {
+	test sameNameDifferenRegionTest {
+		assert active ( SameNameDifferentRegion.main_region.StateA)
+		raise e1
+		cycle
+		assert active (SameNameDifferentRegion.main_region.StateB)
+		assert active (SameNameDifferentRegion.main_region.StateB.r1.StateA)
+		raise e1
+		cycle
+		assert active (SameNameDifferentRegion.main_region.StateB) 
+		assert active (SameNameDifferentRegion.main_region.StateB.r1.StateB) 
+	}
+}
