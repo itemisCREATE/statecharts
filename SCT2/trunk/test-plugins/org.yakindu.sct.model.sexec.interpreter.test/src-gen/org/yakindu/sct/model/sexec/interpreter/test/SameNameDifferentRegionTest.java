@@ -22,12 +22,12 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import util.TestModels;
 import static junit.framework.Assert.*;
 /**
- *  Unit TestCase for SyncFork
+ *  Unit TestCase for SameNameDifferentRegion
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class SyncForkTest extends AbstractExecutionFlowTest {
+public class SameNameDifferentRegionTest extends AbstractExecutionFlowTest {
 
 	@Inject
 	private TestModels models;
@@ -35,29 +35,19 @@ public class SyncForkTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("SyncFork.sct");
+				.loadExecutionFlowFromResource("SameNameDifferentRegion.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void syncForkTest() throws Exception {
-		assertTrue(isActive("A"));
-		raiseEvent("f");
+	public void sameNameDifferenRegionTest() throws Exception {
+		assertTrue(isActive("StateA"));
+		raiseEvent("e1");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D1"));
-		raiseEvent("f");
+		assertTrue(isActive("StateB"));
+		assertTrue(isActive("StateA"));
+		raiseEvent("e1");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D2"));
-		raiseEvent("e");
-		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		raiseEvent("f");
-		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D1"));
+		assertTrue(isActive("StateB"));
+		assertTrue(isActive("StateB"));
 	}
 }

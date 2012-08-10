@@ -22,12 +22,12 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import util.TestModels;
 import static junit.framework.Assert.*;
 /**
- *  Unit TestCase for SyncFork
+ *  Unit TestCase for RaiseEvent
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class SyncForkTest extends AbstractExecutionFlowTest {
+public class RaiseEventTest extends AbstractExecutionFlowTest {
 
 	@Inject
 	private TestModels models;
@@ -35,29 +35,17 @@ public class SyncForkTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("SyncFork.sct");
+				.loadExecutionFlowFromResource("RaiseEvent.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void syncForkTest() throws Exception {
-		assertTrue(isActive("A"));
-		raiseEvent("f");
+	public void raiseEvent() throws Exception {
+		assertTrue(isActive("SateA"));
+		assertTrue(isActive("StateA"));
+		raiseEvent("e2");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D1"));
-		raiseEvent("f");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C2"));
-		assertTrue(isActive("D2"));
-		raiseEvent("e");
-		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		raiseEvent("f");
-		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(isActive("C1"));
-		assertTrue(isActive("D1"));
+		assertTrue(isActive("StateB"));
+		assertTrue(isActive("StateB"));
 	}
 }
