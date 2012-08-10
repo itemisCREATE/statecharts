@@ -11,16 +11,25 @@
 package org.yakindu.sct.generator.java;
 
 import static util.TestModels.ALWAYS_ONCYCLE;
+import static util.TestModels.BIT_EXPRESSIONS;
+import static util.TestModels.BOOLEAN_EXPRESSIONS;
 import static util.TestModels.CHOICE;
+import static util.TestModels.C_KEYWORDS_M;
 import static util.TestModels.DEEP_HISTORY;
 import static util.TestModels.FEATURE_CALLS;
 import static util.TestModels.GUARD;
+import static util.TestModels.INTEGER_EXPRESSIONS;
+import static util.TestModels.JAVA_KEYWORDS_M;
 import static util.TestModels.PRIORITY_VALUES;
+import static util.TestModels.RAISE_EVENTS;
+import static util.TestModels.REAL_EXPRESSIONS;
+import static util.TestModels.SAME_NAME_DIFFERENT_REGION;
 import static util.TestModels.SHALLOW_HISTORY;
 import static util.TestModels.SIMPLE_EVENT;
 import static util.TestModels.SIMPLE_HIERACHY;
 import static util.TestModels.STATECHART_LOCAL_REACTIONS;
 import static util.TestModels.STATE_ACTIVE;
+import static util.TestModels.STRING_EXPRESSIONS;
 import static util.TestModels.SYNC_FORK;
 import static util.TestModels.SYNC_JOIN;
 import static util.TestModels.VALUED_EVENTS;
@@ -54,11 +63,13 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	@Inject
 	private TestModels models;
 
-	@Test
-	public void testChoiceModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(CHOICE);
-		failOnError(generateAndCompile(statechart));
-
+	private void failOnError(IMarker[] diagnostics) throws CoreException {
+		for (IMarker diagnostic : diagnostics) {
+			int severity = (Integer) diagnostic.getAttribute("severity");
+			if (severity == IMarker.SEVERITY_ERROR) {
+				Assert.fail(diagnostic.getAttribute(IMarker.MESSAGE, ""));
+			}
+		}
 	}
 
 	@Test
@@ -67,6 +78,36 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 				.loadStatechartFromResource(ALWAYS_ONCYCLE);
 		failOnError(generateAndCompile(statechart));
 
+	}
+
+	@Test 
+	public void testBitExpressionsModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(BIT_EXPRESSIONS);  
+		failOnError(generateAndCompile(statechart));
+		
+	}
+	
+	@Test 
+	public void testBooleanExpressionsModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(BOOLEAN_EXPRESSIONS);  
+		failOnError(generateAndCompile(statechart));
+		
+	}
+	
+	@Test
+	public void testChoiceModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(CHOICE);
+		failOnError(generateAndCompile(statechart));
+
+	}
+
+	@Test
+	public void testCKeywordsModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(C_KEYWORDS_M);
+		failOnError(generateAndCompile(statechart));
+		
 	}
 
 	@Test
@@ -91,9 +132,42 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	}
 
 	@Test
+	public void testIntegerExpressionsModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(INTEGER_EXPRESSIONS);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testJavaKeywordsModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(JAVA_KEYWORDS_M);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
 	public void testPriorityValuesModel() throws Exception {
 		Statechart statechart = models
 				.loadStatechartFromResource(PRIORITY_VALUES);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testRaiseEventModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(RAISE_EVENTS);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testRealExpressionsModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(REAL_EXPRESSIONS);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testSameNameDifferentRegionModel() throws Exception {
+		Statechart statechart = models
+				.loadStatechartFromResource(SAME_NAME_DIFFERENT_REGION);
 		failOnError(generateAndCompile(statechart));
 	}
 
@@ -110,6 +184,7 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 		failOnError(generateAndCompile(statechart));
 	}
 
+
 	@Test
 	public void testSimpleHierachyModel() throws Exception {
 		Statechart statechart = models
@@ -119,17 +194,23 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	@Test
 	public void testStatechartLocalReactionsModel() throws Exception {
-		Statechart statechart = models
-				.loadStatechartFromResource(STATECHART_LOCAL_REACTIONS);
+		Statechart statechart = models.loadStatechartFromResource(STATECHART_LOCAL_REACTIONS);
 		failOnError(generateAndCompile(statechart));
-
 	}
+
 
 	@Test
 	public void testStateActiveModel() throws Exception {
 		Statechart statechart = models.loadStatechartFromResource(STATE_ACTIVE);
 		failOnError(generateAndCompile(statechart));
 
+	}
+ 
+	@Test
+	public void testStringExpressionsModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(STRING_EXPRESSIONS);
+		failOnError(generateAndCompile(statechart));
+		
 	}
 
 	@Test
@@ -149,14 +230,5 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 		Statechart statechart = models
 				.loadStatechartFromResource(VALUED_EVENTS);
 		failOnError(generateAndCompile(statechart));
-	}
-
-	private void failOnError(IMarker[] diagnostics) throws CoreException {
-		for (IMarker diagnostic : diagnostics) {
-			int severity = (Integer) diagnostic.getAttribute("severity");
-			if (severity == IMarker.SEVERITY_ERROR) {
-				Assert.fail(diagnostic.getAttribute(IMarker.MESSAGE, ""));
-			}
-		}
 	}
 }
