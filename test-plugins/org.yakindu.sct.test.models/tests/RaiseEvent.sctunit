@@ -1,4 +1,4 @@
-testcase for RaiseEvent {
+testgroup RaiseEvent for statechart RaiseEvent {
 	test raiseEvent {
 		assert active ( RaiseEvent.second_region.SateA)
 		assert active (RaiseEvent.main_region.StateA)

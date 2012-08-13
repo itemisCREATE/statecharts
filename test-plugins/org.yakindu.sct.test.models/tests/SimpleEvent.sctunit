@@ -1,4 +1,4 @@
-testcase for SimpleEvent {
+testgroup simpleEvent for statechart SimpleEvent {
 	test simpleEventTest {
 		assert active (SimpleEvent.main_region.A) "Expected A to be active"
 		assert 5 == 5

@@ -1,4 +1,4 @@
-testcase for PriorityValues {
+testgroup PriorityValues for statechart PriorityValues {
 	test transitionPriority {
 		assert active (PriorityValues.main_region.A)
 		raise event1

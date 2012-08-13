@@ -1,4 +1,4 @@
-testcase for DeepHistory  {
+testgroup DeepHistory for statechart DeepHistory {
 	test deepHistoryTest {
 		// Change active states to State9;
 		raise event1
@@ -27,7 +27,7 @@ testcase for DeepHistory  {
 		assert !active (DeepHistory.mainRegion.State1)
 		assert active (DeepHistory.mainRegion.State2._region0.State4._region0.State7._region0.State9)
 	
-	
 	}
 }
 
+ 

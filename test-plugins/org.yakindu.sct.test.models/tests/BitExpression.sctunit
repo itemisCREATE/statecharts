@@ -1,4 +1,4 @@
-testcase for BitExpressions{
+testgroup BitExpressions for statechart BitExpressions {
 	
 	test BitExpressions {
 		assert active ( BitExpressions.main_region.StateA)

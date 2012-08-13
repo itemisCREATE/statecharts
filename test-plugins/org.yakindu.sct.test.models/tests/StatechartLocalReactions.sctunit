@@ -1,4 +1,4 @@
-testcase for StatechartLocalReactions {
+testgroup StatechartLocalReactions for statechart StatechartLocalReactions {
 	test statechartLocalReactionsTest {
 		assert active (StatechartLocalReactions.main_region.S1)
 		assert active (StatechartLocalReactions.region2.a)

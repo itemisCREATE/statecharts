@@ -1,4 +1,4 @@
-testcase for ShallowHistory { 
+testgroup ShallowHistory for statechart ShallowHistory {
 	test shallowHistoryTest {
 		// Change active states to State9;
 		raise event1
