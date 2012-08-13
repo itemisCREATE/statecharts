@@ -1,4 +1,4 @@
-testcase for SyncFork{
+testgroup SyncFork for statechart SyncFork {
 	test syncForkTest{
 		assert active (SyncFork.main_region.A)
 		raise f
@@ -23,6 +23,6 @@ testcase for SyncFork{
 		assert active (SyncFork.main_region.B)
 		assert active (SyncFork.main_region.B.r1.C1)
 		assert active (SyncFork.main_region.B.r2.D1)
-				
+		
 	} 
 }

@@ -1,4 +1,4 @@
-testcase for SameNameDifferentRegion {
+testgroup SameNameDifferentRegion for statechart SameNameDifferentRegion {
 	test sameNameDifferenRegionTest {
 		assert active ( SameNameDifferentRegion.main_region.StateA)
 		raise e1

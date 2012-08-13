@@ -1,4 +1,4 @@
-testcase for ValuedEvents {
+testgroup ValuedEvent for statechart ValuedEvents {
 	test valuedEventTest {
 		cycle
 		assert active(ValuedEvents.main_region.A)

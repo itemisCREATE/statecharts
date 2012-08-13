@@ -1,5 +1,4 @@
-testcase for BooleanExpressions {
-	
+testgroup BooleanExpressions for statechart BooleanExpressions {
 	test booleanExpressions {
 		assert active (BooleanExpressions.main_region.StateA)
 		assert myBool1 == true

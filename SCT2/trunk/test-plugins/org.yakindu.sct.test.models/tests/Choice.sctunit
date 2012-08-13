@@ -1,32 +1,32 @@
-testcase for Choice {
-	test choiceTest {
-		assert active (Choice.main_region.A)
-		assert value == 4
-		raise pressKey
-		cycle
-		assert active (Choice.main_region.B)
-		assert value == 3
-		raise pressKey
-		cycle
-		assert active (Choice.main_region.A)
-		raise pressKey
-		cycle
-		assert active (Choice.main_region.C)
-		assert value == 2
-		raise pressKey
-		cycle
-		assert active (Choice.main_region.B)
-		assert value == 1
-		raise pressKey
-		cycle
-		assert active (Choice.main_region.A)
-		assert value == 1
-		raise pressKey
-		cycle
-		assert active (Choice.main_region.C)
-		assert value == 0
-		raise pressKey
-		cycle
-		assert active (Choice.main_region.A)
-	}
+testgroup Choice for statechart Choice { 
+	test choiceTest { 
+		assert active (Choice.main_region.A ) 
+		assert value == 4 
+		raise pressKey 
+		cycle 
+		assert active (Choice.main_region.B ) 
+		assert value == 3 
+		raise pressKey 
+		cycle 
+		assert active (Choice.main_region.A ) 
+		raise pressKey 
+		cycle 
+		assert active (Choice.main_region.C ) 
+		assert value == 2 
+		raise pressKey 
+		cycle 
+		assert active (Choice.main_region.B ) 
+		assert value == 1 
+		raise pressKey 
+		cycle 
+		assert active (Choice.main_region.A ) 
+		assert value == 1 
+		raise pressKey 
+		cycle 
+		assert active (Choice.main_region.C ) 
+		assert value == 0 
+		raise pressKey 
+		cycle 
+		assert active (Choice.main_region.A ) 
+	} 
 }

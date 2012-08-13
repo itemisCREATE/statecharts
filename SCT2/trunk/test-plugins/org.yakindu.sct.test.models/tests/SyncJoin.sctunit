@@ -1,6 +1,4 @@
-testcase for SyncJoin {
-	
-	
+testgroup SyncJoin for statechart SyncJoin {
 //	test syncJoin_C2_Waits 'test intention' { 
   
 	test syncJoin_C2_Waits {   
