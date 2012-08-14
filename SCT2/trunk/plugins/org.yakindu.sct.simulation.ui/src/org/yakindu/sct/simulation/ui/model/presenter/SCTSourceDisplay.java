@@ -109,7 +109,8 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener 
 					.getAdapter(IExecutionFacade.class);
 			if (_handler.containsKey(facade)) {
 				IDynamicNotationHandler handler = _handler.get(facade);
-				handler.getHighlightingSupport().releaseEditor();
+				if (handler.getHighlightingSupport().isLocked())
+					handler.getHighlightingSupport().releaseEditor();
 				facade.removeTraceListener(handler);
 				_handler.remove(facade);
 			}
