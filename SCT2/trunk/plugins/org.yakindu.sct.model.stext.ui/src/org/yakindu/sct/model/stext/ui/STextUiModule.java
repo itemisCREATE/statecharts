@@ -1,5 +1,6 @@
 package org.yakindu.sct.model.stext.ui;
 
+import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
+import org.yakindu.sct.model.stext.ui.hyperlink.NullHyperlinkDetector;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -62,6 +64,12 @@ public class STextUiModule extends
 				.toInstance("/StextHoverStyleSheet.css");
 	}
 
+	
+	@Override
+	public Class<? extends IHyperlinkDetector> bindIHyperlinkDetector() {
+		return NullHyperlinkDetector.class;
+	}
+	
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
 			return Access.getJavaProjectsState();
