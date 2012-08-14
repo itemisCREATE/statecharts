@@ -290,4 +290,9 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 				|| trace instanceof TraceStateExited)
 			fireChangeEvent(DebugEvent.CONTENT);
 	}
+
+	public Statechart getStatechart() {
+		return statechart;
+	}
+
 }

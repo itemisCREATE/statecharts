@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -23,6 +24,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.debug.core.DebugEvent;
+import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.core.ILaunch;
@@ -30,6 +32,7 @@ import org.eclipse.debug.core.ILaunchListener;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.util.ResourceUtil;
@@ -138,16 +141,37 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener,
 	private List<IFile> changedFiles = new ArrayList<IFile>();
 
 	public synchronized void resourceChanged(IResourceChangeEvent event) {
+		if (event.getType() == IResourceChangeEvent.PRE_CLOSE)
+			handleCloseEvent(event);
+
 		IResourceDelta delta = event.getDelta();
 		try {
 			changedFiles.clear();
-			delta.accept(this);
+			if (delta != null)
+				delta.accept(this);
 			if (changedFiles.size() > 0) {
 				handleHotModelReplacement();
 			}
 
 		} catch (CoreException e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void handleCloseEvent(IResourceChangeEvent event) {
+		if (event.getResource() instanceof IProject) {
+			IProject project = ((IProject) event.getResource());
+			for (SCTDebugTarget target : activeTargets) {
+				IFile file = WorkspaceSynchronizer.getFile(target
+						.getStatechart().eResource());
+				if (project.equals(file.getProject())) {
+					try {
+						target.terminate();
+					} catch (DebugException e) {
+						e.printStackTrace();
+					}
+				}
+			}
 		}
 	}
 
