@@ -23,7 +23,6 @@ import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
  */
 public class NullHyperlinkDetector implements IHyperlinkDetector {
 
-	@Override
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer,
 			IRegion region, boolean canShowMultipleHyperlinks) {
 		return null;
