@@ -5,9 +5,28 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 //TODO: The testsuite should be generated too
 @RunWith(Suite.class)
-@SuiteClasses({ AlwaysOncycleTest.class, BitExpressionsTest.class,
-		ChoiceTest.class, IntegerExpressionsTest.class,
-		PriorityValuesTest.class, ShallowHistoryTest.class })
+@SuiteClasses({ 
+	AlwaysOncycle.class, 
+	BitExpressions.class,
+	BooleanExpressions.class,
+	Choice.class, 
+	DeepHistory.class,
+	//FeatureCalls.class,
+	Guard.class,
+	IntegerExpressions.class,
+	PriorityValues.class,
+	RaiseEvent.class,
+	//RealExpressions.class,
+	SameNameDifferentRegion.class,
+	ShallowHistory.class,
+	SimpleEvent.class,
+	SimpleHietachy.class,
+	StatechartLocalReactions.class,
+	StateIsActive.class,
+	SyncFork.class,
+	SyncJoin.class,
+	ValuedEvent.class
+	})
 public class AllGUnitTests {
 
 }

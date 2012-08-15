@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
-	statechart BitExpressions {
+	statechart SyncJoin {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "BitExpressions"
+			targetFolder = "SyncJoin"
 		}
 	}
 }
