@@ -98,16 +98,8 @@ String getInitialValueAssignment(VariableDefinition this) :
 	else
 		null;
 
-String getIllegalAccessEventIdentifier(EventDefinition this) :
-	if (direction == Direction::OUT) then 
-		getOutEventIdentifier()
-	else 
-		getEventIdentifier();
-
 String getIllegalAccessValidation(EventDefinition this) :
-	"if (!" + getIllegalAccessEventIdentifier() + ") throw new IllegalStateException(\"Illegal event value acces. Event " +getEventName() + " is not raised!\");";
-
-//String getVariableName(VariableDefinition this) : name.toFirstUpper();
+	"if (!" + getEventIdentifier() + ") throw new IllegalStateException(\"Illegal event value acces. Event " +getEventName() + " is not raised!\");";
 
 String getter(VariableDefinition this) : "get" + getVarName().toFirstUpper() + "()";
 
