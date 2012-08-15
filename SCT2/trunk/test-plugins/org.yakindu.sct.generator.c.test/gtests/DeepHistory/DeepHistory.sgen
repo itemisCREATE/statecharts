@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
-	statechart BitExpressions {
+	statechart DeepHistory {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "BitExpressions"
+			targetFolder = "DeepHistory"
 		}
 	}
 }

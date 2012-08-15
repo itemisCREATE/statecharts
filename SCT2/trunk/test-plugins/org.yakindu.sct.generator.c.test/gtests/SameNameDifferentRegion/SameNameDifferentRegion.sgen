@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
-	statechart BitExpressions {
+	statechart SameNameDifferentRegion {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "BitExpressions"
+			targetFolder = "SameNameDifferentRegion"
 		}
 	}
 }
