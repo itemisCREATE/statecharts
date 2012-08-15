@@ -18,17 +18,15 @@ import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.Request;
-import org.eclipse.gef.requests.SelectionRequest;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.tools.DragEditPartsTrackerEx;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
-
-import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDoubleClickCallback;
 
 /**
  * Abstract base implementation for all external {@link LabelEditPart} that use
@@ -100,16 +98,16 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart
 	 */
 	@Override
 	public DragTracker getDragTracker(final Request request) {
-		if (request instanceof SelectionRequest
-				&& ((SelectionRequest) request).getLastButtonPressed() == 3)
-			return null;
-		IDoubleClickCallback callback = new IDoubleClickCallback() {
-			public void handleDoubleClick(int btn) {
+		return new DragEditPartsTrackerEx(this) {
+			protected boolean isMove() {
+				return true;
+			}
+
+			protected boolean handleDoubleClick(int button) {
 				performDirectEditRequest(request);
+				return super.handleDoubleClick(button);
 			}
 		};
-		return new DoubleClickDirectEditDragTracker(this,
-				getTopGraphicEditPart(), callback);
 	}
 
 	@Override
