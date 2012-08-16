@@ -173,7 +173,7 @@ h4. Unary arithmetic operators
 
 |positive | + |
 |negative | - |
-|circa	| ~ |
+|complement	| ~ |
 
 
 h3. Statements
@@ -393,8 +393,34 @@ Operations can have none, one or multiple parameters. The parameters are only de
 bc.. 
 operation localOperation (integer, integer):integer
 localEvent3/ raise NamedInterface3.event1
+p. 
+==<!-- End stext_keyword_operation -->==
 
-p. ==<!-- End stext_keyword_operation -->==
+h3. Build-In Functions
+ 
+==<!-- Start stext_keyword_valueof -->==
+	
+h4. valueof(event)
+
+Returns the value of an valued event that it passed to the function as parameter.
+
+bc.. 
+myVar = valueof(myEvent)
+p. 
+
+==<!-- End stext_keyword_valueof -->==
+
+==<!-- Start stext_keyword_active -->==
+
+h4. active(state)
+
+Returns "true" if a state is active or "false" otherwise.
+
+bc.. 
+myBool = active(StateA)
+p. 
+
+==<!-- End stext_keyword_active -->==
 
 h3. LocalReactions
 
