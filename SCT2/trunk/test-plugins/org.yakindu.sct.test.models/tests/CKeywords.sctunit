@@ -1,0 +1,10 @@
+testgroup CKeywords for statechart CKeywords { 
+	test CKeywordsTest { 
+		assert active ( CKeywords.auto.char ) 
+		raise auto 
+		cycle 
+		assert active (CKeywords.auto.const ) 
+		assert active ( CKeywords.auto.const.switch.case )
+		assert active ( CKeywords.auto.const.switch.case.enum.asm ) 
+	} 
+}

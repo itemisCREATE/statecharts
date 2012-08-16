@@ -1,6 +1,8 @@
 testsuite AllTests { 
-	AlwaysOncycle , BitExpressions , BooleanExpressions ,
-	Choice , DeepHistory , FeatureCalls , Guard , IntegerExpressions ,
+	AlwaysOncycle , BitExpressions , BooleanExpressions , CKeywords,
+	Choice , DeepHistory,
+	//FeatureCalls,
+	Guard , IntegerExpressions ,
 	PriorityValues , RaiseEvent , SameNameDifferentRegion , ShallowHistory ,
 	SimpleHietachy , StateIsActive , StatechartLocalReactions , SyncFork ,
 	SyncJoin , ValuedEvent , simpleEvent 
