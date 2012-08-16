@@ -15,8 +15,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.internal.text.html.BrowserInformationControl;
 import org.eclipse.jface.internal.text.html.HTMLPrinter;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
 import org.eclipse.jface.text.DefaultInformationControl;
@@ -24,7 +27,11 @@ import org.eclipse.jface.text.IInformationControl;
 import org.eclipse.jface.text.IInformationControlCreator;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.EditorsUI;
+import org.eclipse.ui.help.IWorkbenchHelpSystem;
+import org.eclipse.xtext.ui.editor.hover.html.IXtextBrowserInformationControl;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
 import com.google.inject.Inject;
@@ -56,6 +63,7 @@ public class CustomCSSHelpHoverProvider extends HelpHoverProvider {
 	private String styleSheetFileName;
 
 	private HoverControlCreator hoverControlCreator;
+	private PresenterControlCreator presenterControlCreator;
 
 	protected String getStyleSheet() {
 		if (fgStyleSheet == null)
@@ -98,6 +106,12 @@ public class CustomCSSHelpHoverProvider extends HelpHoverProvider {
 		return null;
 	}
 
+	public IInformationControlCreator getInformationPresenterControlCreator() {
+		if (presenterControlCreator == null)
+			presenterControlCreator = new CustomPresenterControlCreator();
+		return presenterControlCreator;
+	}
+
 	public IInformationControlCreator getHoverControlCreator() {
 		if (hoverControlCreator == null)
 			hoverControlCreator = new HoverControlCreator(
@@ -135,6 +149,36 @@ public class CustomCSSHelpHoverProvider extends HelpHoverProvider {
 						tooltipAffordanceString);
 			}
 		}
+	}
+
+	public class CustomPresenterControlCreator extends PresenterControlCreator {
+
+		protected void configureControl(
+				IXtextBrowserInformationControl control, ToolBarManager tbm,
+				String font) {
+			OpenInHelpAction openHelpAction = new OpenInHelpAction();
+			openHelpAction.setEnabled(true);
+			tbm.add(openHelpAction);
+			tbm.update(true);
+		};
 
 	}
+
+	private static final class OpenInHelpAction extends Action {
+
+		public OpenInHelpAction() {
+			setText("Open user guide");
+			setImageDescriptor(ImageDescriptor.createFromImage(PlatformUI
+					.getWorkbench().getSharedImages()
+					.getImage(ISharedImages.IMG_LCL_LINKTO_HELP)));
+		}
+
+		@Override
+		public void run() {
+			final IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench()
+					.getHelpSystem();
+			helpSystem.displayHelp("org.yakindu.sct.ui.editor.stext_keyword");
+		};
+	}
+
 }
