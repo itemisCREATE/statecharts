@@ -131,7 +131,7 @@ class StatemachineC {
 				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition]) {
 				«FOR state : states»
 					«IF state.reactSequence!=null»
-					case «state.name.asIdentifier» : {
+					case «state.name.asEscapedIdentifier» : {
 						«state.reactSequence.functionName»(«scHandle»);
 						break;
 					}

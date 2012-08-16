@@ -1,6 +1,7 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import java.util.Arrays
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -17,8 +18,10 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.sgraph.State
+import java.util.regex.Pattern
+import java.util.regex.Matcher
 
-class Naming {
+class Naming implements INaming{
 
 	@Inject
 	extension Navigation
@@ -27,10 +30,10 @@ class Naming {
 	extension Base
 	
 	@Inject
-	private StextNameProvider provider;
+	private StextNameProvider provider
 	
 	def getFullyQualifiedName(State state) {
-		provider.getFullyQualifiedName(state).toString.asIdentifier
+		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
 	}
 	
 	def module(ExecutionFlow it) {
@@ -218,6 +221,13 @@ class Naming {
 		replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', '_')
 	}
 	
+	def asEscapedIdentifier(String it) {
+		var s = it
+		if (s.isCKeyword) {
+			s = s + '_ID'
+		}
+		return s.asIdentifier
+	} 
 	
 	def dispatch scopeDescription(Scope it) '''scope'''
 	
@@ -235,7 +245,7 @@ class Naming {
 	
 	/** todo externalize */
 	def dispatch access (VariableDefinition it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier»'''
+		'''«scHandle»->«scope.instance».«name.asEscapedIdentifier»'''
 
 	/** todo externalize */
 	def dispatch access (OperationDefinition it) 
@@ -251,4 +261,16 @@ class Naming {
 	
 	def valueAccess(Event it) 
 		'''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
+		
+	def boolean isCKeyword(String name) {
+		var String lowName = name.toLowerCase();
+		for (String keyword : Arrays::asList(C_KEYWORDS)) {
+			var Pattern pattern = Pattern::compile("^" + keyword + "$");
+			var Matcher matcher = pattern.matcher(lowName);
+			if (matcher.find()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
