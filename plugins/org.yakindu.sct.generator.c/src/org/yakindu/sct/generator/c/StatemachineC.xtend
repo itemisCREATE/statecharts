@@ -73,7 +73,10 @@ class StatemachineC {
 			«ENDIF»
 			
 			«scHandle»->stateConfVectorPosition = 0;
-
+		
+		clearInEvents(handle);
+		clearOutEvents(handle);
+		
 			// TODO: initialize all events ...
 			// TODO: initialize all variables ... (set default values - here or inenter sequence ?!?)
 
