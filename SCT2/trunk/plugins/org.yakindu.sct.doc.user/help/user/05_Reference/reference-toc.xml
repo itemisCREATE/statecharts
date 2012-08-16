@@ -48,6 +48,10 @@
 				<topic href="help/user/05_Reference/reference.html#oncycle" label="oncycle"></topic>
 			</topic>
 			<topic href="help/user/05_Reference/reference.html#Operations" label="Operations"></topic>
+			<topic href="help/user/05_Reference/reference.html#BuildInFunctions" label="Build-In Functions">
+				<topic href="help/user/05_Reference/reference.html#valueofevent" label="valueof(event)"></topic>
+				<topic href="help/user/05_Reference/reference.html#activestate" label="active(state)"></topic>
+			</topic>
 			<topic href="help/user/05_Reference/reference.html#LocalReactions" label="LocalReactions"></topic>
 			<topic href="help/user/05_Reference/reference.html#EntryPoints" label="EntryPoints"></topic>
 			<topic href="help/user/05_Reference/reference.html#ExitPoints" label="ExitPoints"></topic>
