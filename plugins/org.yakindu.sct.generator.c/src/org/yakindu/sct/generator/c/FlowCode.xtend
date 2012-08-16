@@ -113,7 +113,7 @@ class FlowCode {
 	'''
 	
 	def dispatch code(EnterState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.name.asIdentifier»;
+		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.name.asEscapedIdentifier»;
 		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 

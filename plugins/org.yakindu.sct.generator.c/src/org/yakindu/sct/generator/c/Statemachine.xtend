@@ -81,7 +81,7 @@ class Statemachine {
 		//! enumeration of all states 
 		typedef enum {
 			«FOR state : states »
-			«state.name.asIdentifier» ,
+			«state.name.asEscapedIdentifier» ,
 			«ENDFOR»
 			«last_state»
 		} «statesEnumType»;
@@ -98,7 +98,7 @@ class Statemachine {
 	'''
 
 	def dispatch structDeclaration(VariableDefinition it) '''
-		«IF type.name != 'void'»«type.cPrimitive»  «name.asIdentifier»;«ENDIF»
+		«IF type.name != 'void'»«type.cPrimitive»  «name.asEscapedIdentifier»;«ENDIF»
 	'''
 	
 	def dispatch structDeclaration(Declaration it) ''''''
