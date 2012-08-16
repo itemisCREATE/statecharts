@@ -1,0 +1,12 @@
+testgroup StringExpressions for statechart StringExpressions	{
+	test StringExpressionsTest {
+		assert active (StringExpressions.main_region.StateA)
+		assert myString == "hello"
+		assert myString2 == "world"
+		raise e1
+		cycle
+		assert active (StringExpressions.main_region.StateB)
+		assert equals == false
+		assert notEqual == true
+	}
+}
