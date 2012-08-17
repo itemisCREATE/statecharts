@@ -20,7 +20,7 @@ import org.yakindu.scr.stringexpressions.StringExpressionsStatemachine.State;
  *  Unit TestCase for StringExpressions
  */
 @SuppressWarnings("all")
-public class StringExpressions {
+public class StringExpressionsTest {
 
 	private StringExpressionsStatemachine statemachine;
 
