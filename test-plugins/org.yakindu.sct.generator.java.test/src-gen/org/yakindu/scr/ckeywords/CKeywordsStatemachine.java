@@ -289,7 +289,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		Auto_char, Auto_const, Auto_const_switch_case, Auto_const_switch_case_enum_asm, $NullState$
 	};
 
-	private State[] historyVector = new State[6];
+	private State[] historyVector = new State[2];
 
 	private final State[] stateVector = new State[1];
 
@@ -306,7 +306,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			stateVector[i] = State.$NullState$;
 		}
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 2; i++) {
 			historyVector[i] = State.$NullState$;
 		}
 		clearEvents();
@@ -617,6 +617,15 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 				break;
 
+			case Auto_const_switch_case_enum_asm :
+
+				historyVector[1] = stateVector[0];
+
+				historyVector[0] = stateVector[0];
+				stateVector[0] = State.$NullState$;
+
+				break;
+
 			default :
 				break;
 		}
@@ -705,6 +714,67 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 			case Auto_const_switch_case_enum_asm :
 
+				//Enter the region with deep history
+				if (historyVector[1] != State.$NullState$) {
+					deepEnterSequenceAuto_const_switch_caseEnum();
+				} else {
+					sCIDefault.varCase = false;
+
+					sCIDefault.varDo = 0;
+
+					sCIDefault.varContinue = false;
+
+					sCIDefault.varDouble = false;
+
+					sCIDefault.varEnum = false;
+
+					sCIDefault.extern = false;
+
+					sCIDefault.varFloat = false;
+
+					sCIDefault.varFor = false;
+
+					sCIDefault.varGoto = false;
+
+					sCIDefault.varIf = false;
+
+					sCIDefault.varInt = false;
+
+					sCIDefault.varLong = false;
+
+					sCIDefault.register = false;
+
+					sCIDefault.varReturn = false;
+
+					sCIDefault.varShort = false;
+
+					sCIDefault.signed = false;
+
+					sCIDefault.sizeof = false;
+
+					sCIDefault.varStatic = false;
+
+					sCIDefault.struct = false;
+
+					sCIDefault.varSwitch = false;
+
+					sCIDefault.typedef = false;
+
+					sCIDefault.union = false;
+
+					sCIDefault.unsigned = false;
+
+					sCIDefault.varVoid = false;
+
+					sCIDefault.varVolatile = false;
+
+					sCIDefault.varWhile = false;
+
+					nextStateIndex = 0;
+					stateVector[0] = State.Auto_const_switch_case_enum_asm;
+
+				}
+
 				break;
 
 			default :
@@ -717,6 +787,74 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			stateVector[0] = State.$NullState$;
 
 			sCIDefault.varDo += 1;
+
+			//Enter the region with shallow history
+			if (historyVector[0] != State.$NullState$) {
+				shallowEnterSequenceAuto_constSwitch();
+			} else {
+
+				//Enter the region with deep history
+				if (historyVector[1] != State.$NullState$) {
+					deepEnterSequenceAuto_const_switch_caseEnum();
+				} else {
+					sCIDefault.varCase = false;
+
+					sCIDefault.varDo = 0;
+
+					sCIDefault.varContinue = false;
+
+					sCIDefault.varDouble = false;
+
+					sCIDefault.varEnum = false;
+
+					sCIDefault.extern = false;
+
+					sCIDefault.varFloat = false;
+
+					sCIDefault.varFor = false;
+
+					sCIDefault.varGoto = false;
+
+					sCIDefault.varIf = false;
+
+					sCIDefault.varInt = false;
+
+					sCIDefault.varLong = false;
+
+					sCIDefault.register = false;
+
+					sCIDefault.varReturn = false;
+
+					sCIDefault.varShort = false;
+
+					sCIDefault.signed = false;
+
+					sCIDefault.sizeof = false;
+
+					sCIDefault.varStatic = false;
+
+					sCIDefault.struct = false;
+
+					sCIDefault.varSwitch = false;
+
+					sCIDefault.typedef = false;
+
+					sCIDefault.union = false;
+
+					sCIDefault.unsigned = false;
+
+					sCIDefault.varVoid = false;
+
+					sCIDefault.varVolatile = false;
+
+					sCIDefault.varWhile = false;
+
+					nextStateIndex = 0;
+					stateVector[0] = State.Auto_const_switch_case_enum_asm;
+
+				}
+
+			}
 
 		}
 
