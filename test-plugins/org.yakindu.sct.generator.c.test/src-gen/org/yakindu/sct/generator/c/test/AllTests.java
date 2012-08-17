@@ -19,7 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		DeepHistory.class, Guard.class, IntegerExpressions.class,
 		PriorityValues.class, RaiseEvent.class, SameNameDifferentRegion.class,
 		ShallowHistory.class, SimpleHietachy.class, StateIsActive.class,
-		StatechartLocalReactions.class, SyncFork.class, SyncJoin.class,
-		ValuedEvent.class, SimpleEvent.class})
+		StatechartLocalReactions.class, StringExpressions.class,
+		SyncFork.class, SyncJoin.class, ValuedEvent.class, SimpleEvent.class})
 public class AllTests {
 }
