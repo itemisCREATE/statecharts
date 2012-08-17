@@ -200,7 +200,7 @@ public class StringExpressionsStatemachine
 
 			sCIDefault.notEqual = (sCIDefault.myString == null
 					? sCIDefault.myString2 == null
-					: sCIDefault.myString.equals(sCIDefault.myString2));
+					: !sCIDefault.myString.equals(sCIDefault.myString2));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_StateB;

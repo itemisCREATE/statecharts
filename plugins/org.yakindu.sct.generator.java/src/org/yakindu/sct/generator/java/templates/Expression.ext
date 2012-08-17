@@ -106,10 +106,18 @@ String toCode(LogicalNotExpression expression) :
 
 String toCode(LogicalRelationExpression expression) :
 	if (expression.leftOperand.inferType().isString()) then
-		"("+expression.leftOperand.toCode()+"==null?"+expression.rightOperand.toCode()+"==null:"+expression.leftOperand.toCode()+".equals("+expression.rightOperand.toCode()+"))"
+		expression.logicalString()
 	else
 		"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
-    
+
+String logicalString(LogicalRelationExpression expression) : 
+if(expression.operator == RelationalOperator::equals) then
+	"("+expression.leftOperand.toCode()+"==null?"+expression.rightOperand.toCode()+"==null:"+expression.leftOperand.toCode()+".equals("+expression.rightOperand.toCode()+"))"
+else if(expression.operator == RelationalOperator::notEquals) then
+	"("+expression.leftOperand.toCode()+"==null?"+expression.rightOperand.toCode()+"==null:!"+expression.leftOperand.toCode()+".equals("+expression.rightOperand.toCode()+"))"
+;
+
+
 String toCode(BitwiseAndExpression expression) :
   	"("+expression.leftOperand.toCode() + " & " + expression.rightOperand.toCode()+")";
 
