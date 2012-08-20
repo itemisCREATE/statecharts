@@ -13,12 +13,11 @@ package org.yakindu.sct.model.sexec.interpreter.impl;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.yakindu.sct.model.sexec.interpreter.ITimingService;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer.VirtualTimerTask;
 
 /**
  * Implementation of {@link ITimingService} interface using standard
@@ -28,12 +27,13 @@ import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer.VirtualTimerTa
  */
 public class TimerTaskTimingService implements ITimingService {
 
-	private VirtualTimer timer;
+	private Timer timer;
 
-	private Map<String, VirtualTimerTask> timerTasks;
+	private Map<String, TimerTask> timerTasks;
 
 	public TimerTaskTimingService() {
-		timerTasks = new HashMap<String, VirtualTimerTask>();
+		timer = new Timer();
+		timerTasks = new HashMap<String, TimerTask>();
 	}
 
 	public void scheduleTimeEvent(IExecutionContext context, String eventName,
@@ -41,18 +41,18 @@ public class TimerTaskTimingService implements ITimingService {
 		TimeEventTask timeEventTask = new TimeEventTask(context, eventName);
 		timerTasks.put(eventName, timeEventTask);
 		if (isPeriodical) {
-			timer.schedulePeriodicalTask(timeEventTask, duration, duration);
+			timer.scheduleAtFixedRate(timeEventTask, duration, duration);
 		} else {
-			timer.scheduleTask(timeEventTask, duration);
+			timer.schedule(timeEventTask, duration);
 		}
 	}
 
 	public void unscheduleTimeEvent(String eventName) {
-		VirtualTimerTask timerTask = timerTasks.get(eventName);
+		TimerTask timerTask = timerTasks.get(eventName);
 		timerTask.cancel();
 	}
 
-	public class TimeEventTask extends VirtualTimerTask {
+	public class TimeEventTask extends TimerTask {
 
 		private final IExecutionContext context;
 		private final String eventName;
@@ -76,23 +76,11 @@ public class TimerTaskTimingService implements ITimingService {
 	}
 
 	public void stop() {
-		Collection<VirtualTimerTask> values = timerTasks.values();
-		for (VirtualTimerTask timerTask : values) {
+		Collection<TimerTask> values = timerTasks.values();
+		for (TimerTask timerTask : values) {
 			timerTask.cancel();
 		}
 		timer.cancel();
-	}
-
-	public void init(VirtualClock clock) {
-		timer = new VirtualTimer(clock);
-	}
-
-	public void setTimeScaleFactor(double factor) {
-		timer.getClock().setFactor(factor);
-	}
-
-	public VirtualTimer getTimer() {
-		return timer;
 	}
 
 }

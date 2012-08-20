@@ -84,9 +84,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		} 
 		executionContext.initStateConfigurationVector(flow.stateVector.size)
 		executionContext.addExecutionContextListener(this);
-	
-		timingService.init(executionContext.virtualClock)
-		executionContext.virtualClock.start
 		
 		brc = SexecFactory::eINSTANCE.createTraceBeginRunCycle
 		erc = SexecFactory::eINSTANCE.createTraceEndRunCycle
@@ -322,10 +319,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 
 	override void variableValueChanged(ExecutionVariable variable){
 		
-	}
-
-	override void timeScaleFactorChanged(double oldFactor, double newFactor){
-		timingService.setTimeScaleFactor(newFactor)
 	}
 
 	override getExecutionContext() {
