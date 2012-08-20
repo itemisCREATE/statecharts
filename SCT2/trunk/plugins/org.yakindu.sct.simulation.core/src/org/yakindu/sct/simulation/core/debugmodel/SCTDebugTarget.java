@@ -143,6 +143,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	public void stepOver() {
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.STEP_OVER));
+		facade.runCycle();
 	}
 
 	public IThread[] getThreads() throws DebugException {

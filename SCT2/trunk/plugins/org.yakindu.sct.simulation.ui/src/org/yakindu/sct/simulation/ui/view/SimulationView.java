@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.simulation.ui.view;
 
-import static org.apache.commons.lang.time.DurationFormatUtils.formatDuration;
-
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.PlatformObject;
 import org.eclipse.debug.core.DebugEvent;
@@ -21,10 +19,8 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.debug.ui.contexts.DebugContextEvent;
 import org.eclipse.debug.ui.contexts.IDebugContextListener;
-import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -32,27 +28,17 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Scale;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.forms.widgets.FormToolkit;
-import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.part.ViewPart;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
@@ -70,16 +56,10 @@ import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
 public class SimulationView extends ViewPart implements IDebugContextListener,
 		IDebugEventSetListener {
 
-	private static final String INITIAL_TIME = "00:00:00:00";
-
 	private TreeViewer viewer;
 	private SCTDebugTarget debugTarget;
-	private Text scaleFactor;
 	private FormToolkit kit;
 	private Font font;
-	private Label lblVirtualTime;
-	private Label lblRealTime;
-	private ClockUpdater clockUpdater;
 
 	public SimulationView() {
 		DebugUITools.getDebugContextManager().addDebugContextListener(this);
@@ -88,12 +68,10 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		kit.setBorderStyle(SWT.BORDER);
 		font = new Font(Display.getDefault(), new FontData("Courier", 10,
 				SWT.BOLD));
-		clockUpdater = new ClockUpdater();
 	}
 
 	@Override
 	public void dispose() {
-		clockUpdater.setTerminated(true);
 		super.dispose();
 		DebugUITools.getDebugContextManager().removeDebugContextListener(this);
 		DebugPlugin.getDefault().removeDebugEventListener(this);
@@ -103,17 +81,9 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 	@Override
 	public void createPartControl(Composite parent) {
 		parent.setLayout(new FillLayout(SWT.VERTICAL));
-		SashForm sashForm = new SashForm(parent, SWT.VERTICAL | SWT.SMOOTH);
-		sashForm.setSashWidth(5);
-		sashForm.setBackground(ColorConstants.white);
-		sashForm.setLayout(new FillLayout());
-		Composite top = kit.createComposite(sashForm);
+		Composite top = kit.createComposite(parent);
 		top.setLayout(new FillLayout(SWT.VERTICAL));
-		Composite bottom = kit.createComposite(sashForm);
-		bottom.setLayout(new FillLayout(SWT.VERTICAL));
-		sashForm.setWeights(new int[] { 3, 2 });
 		createViewer(top);
-		createTimeScalingSection(bottom);
 		hookActions();
 		setActiveSession();
 	}
@@ -136,82 +106,6 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 	@Override
 	public void setFocus() {
 		viewer.getTree().setFocus();
-	}
-
-	private void createTimeScalingSection(Composite parent) {
-		Section section = kit.createSection(parent, Section.TITLE_BAR);
-		section.setText("time scaling");
-		Composite client = kit.createComposite(section);
-		client.setLayout(new GridLayout(3, false));
-		section.setClient(client);
-		createClocks(client);
-		createScalingControls(client);
-	}
-
-	private void createScalingControls(Composite client) {
-		final Scale scale = new Scale(client, SWT.NONE);
-		scale.setMinimum(1);
-		scale.setMaximum(100);
-		scale.setSelection(50);
-		scale.setPageIncrement(5);
-		scale.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				int selection = scale.getSelection();
-				if (selection > 50) {
-					selection = selection - 50;
-					scaleFactor.setText(String.valueOf(1.0d * selection));
-				} else if (selection == 50) {
-					scaleFactor.setText(String.valueOf(1.0d));
-				} else {
-					selection = 50 - selection;
-					scaleFactor.setText(String.valueOf(1.0d / selection));
-				}
-				applyScaleFactor();
-			}
-		});
-		GridDataFactory.fillDefaults().span(3, 0).applyTo(scale);
-		Label label = kit.createLabel(client, "scale factor: ");
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(label);
-		scaleFactor = kit.createText(client, "1.0");
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(scaleFactor);
-		final Button setScale = kit.createButton(client, "apply", SWT.PUSH);
-		setScale.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				applyScaleFactor();
-			}
-		});
-		GridDataFactory.fillDefaults().applyTo(setScale);
-	}
-
-	private void createClocks(Composite parent) {
-		// Virtual Clock
-		Label label = kit.createLabel(parent, "scaled time:");
-		GridDataFactory.fillDefaults().applyTo(label);
-		lblVirtualTime = new Label(parent, SWT.NONE);
-		lblVirtualTime.setFont(font);
-		lblVirtualTime.setText(INITIAL_TIME);
-
-		GridDataFactory.fillDefaults().grab(true, false).span(2, 0)
-				.applyTo(lblVirtualTime);
-		// Real time clock
-		Label label2 = kit.createLabel(parent, "time:");
-		GridDataFactory.fillDefaults().applyTo(label2);
-		lblRealTime = new Label(parent, SWT.NONE);
-		lblRealTime.setFont(font);
-		lblRealTime.setText(INITIAL_TIME);
-		GridDataFactory.fillDefaults().grab(true, false).span(2, 0)
-				.applyTo(lblRealTime);
-
-	}
-
-	private void applyScaleFactor() {
-		try {
-			double factor = Double.parseDouble(scaleFactor.getText());
-			IExecutionFacade facade = (IExecutionFacade) debugTarget
-					.getAdapter(IExecutionFacade.class);
-			facade.getExecutionContext().setTimeScaleFactor(factor);
-		} catch (NumberFormatException ex) {
-		}
 	}
 
 	protected Viewer createViewer(Composite parent) {
@@ -277,8 +171,6 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 
 	private void setInput(SCTDebugTarget newTarget) {
 		refreshInput(newTarget);
-		clockUpdater.setTerminated(false);
-		new Thread(clockUpdater).start();
 	}
 
 	public void handleDebugEvents(DebugEvent[] events) {
@@ -293,15 +185,12 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
 					viewer.setInput(null);
-					clockUpdater.setTerminated(true);
 				}
 			});
 			break;
 		case DebugEvent.SUSPEND:
-			getClock().suspend();
 			break;
 		case DebugEvent.RESUME:
-			getClock().resume();
 			break;
 		}
 	}
@@ -323,76 +212,4 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		IAction hideTimeEvent = new HideTimeEventsAction(true);
 		mgr.add(hideTimeEvent);
 	}
-
-	protected VirtualClock getClock() {
-		IExecutionFacade facade = (IExecutionFacade) debugTarget
-				.getAdapter(IExecutionFacade.class);
-		VirtualClock virtualClock = facade.getExecutionContext()
-				.getVirtualClock();
-		return virtualClock;
-	}
-
-	public class ClockUpdater implements Runnable {
-
-		private boolean terminated = false;
-		private UpdateUIThread updateUI = new UpdateUIThread();
-		private StopClock resetLabel = new StopClock();
-
-		public void run() {
-			while (!terminated) {
-				Display.getDefault().asyncExec(updateUI);
-				try {
-					Thread.sleep(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-			Display.getDefault().asyncExec(resetLabel);
-		}
-
-		public boolean isTerminated() {
-			return terminated;
-		}
-
-		public void setTerminated(boolean terminated) {
-			this.terminated = terminated;
-		}
-	}
-
-	private final class StopClock implements Runnable {
-		public void run() {
-			if (lblRealTime != null && !lblRealTime.isDisposed()) {
-				lblRealTime.setText(INITIAL_TIME);
-			}
-			if (lblVirtualTime != null && !lblVirtualTime.isDisposed()) {
-				lblVirtualTime.setText(INITIAL_TIME);
-			}
-		}
-	}
-
-	private final class UpdateUIThread implements Runnable {
-
-		private static final String PATTERN = "HH:mm:ss:SS";
-
-		public void run() {
-			// if (!debugTarget.isSuspended()) {
-			VirtualClock virtualClock = getClock();
-			if (virtualClock.getStartTime() > 0) {
-				if (lblVirtualTime != null && !lblVirtualTime.isDisposed()) {
-					String text = formatDuration(virtualClock.getTime()
-							- virtualClock.getStartTime(), PATTERN);
-					lblVirtualTime.setText(text);
-				}
-				if (lblRealTime != null && !lblRealTime.isDisposed()) {
-					String text = formatDuration(
-							System.currentTimeMillis()
-									- virtualClock.getPauseTime()
-									- virtualClock.getStartTime(), PATTERN);
-					lblRealTime.setText(text);
-				}
-			}
-			// }
-		}
-	}
-
 }

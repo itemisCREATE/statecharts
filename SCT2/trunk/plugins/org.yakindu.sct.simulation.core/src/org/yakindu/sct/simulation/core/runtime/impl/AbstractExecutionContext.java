@@ -60,13 +60,6 @@ public abstract class AbstractExecutionContext implements IExecutionContext {
 		}
 	}
 	
-	public void notifyTimeScaleFactorChanged(double oldFactor, double newFactor) {
-		synchronized (_listeners) {
-			for (IExecutionContextListener listener : _listeners) {
-				listener.timeScaleFactorChanged(oldFactor, newFactor);
-			}
-		}
-	}
 
 	public ExecutionEvent getDeclaredEvent(String eventName) {
 		return null;

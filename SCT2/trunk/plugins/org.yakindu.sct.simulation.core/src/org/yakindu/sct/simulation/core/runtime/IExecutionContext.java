@@ -18,7 +18,6 @@ import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 
 /**
  * 
@@ -122,12 +121,6 @@ public interface IExecutionContext {
 	 */
 	public void removeExecutionContextListener(
 			IExecutionContextListener listener);
-
-	public double getTimeScaleFactor();
-
-	public void setTimeScaleFactor(double factor);
-
-	public VirtualClock getVirtualClock();
 
 	/**
 	 * 
