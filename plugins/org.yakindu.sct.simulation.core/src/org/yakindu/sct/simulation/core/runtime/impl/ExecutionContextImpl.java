@@ -26,7 +26,6 @@ import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualClock;
 
 import com.google.common.collect.Maps;
 
@@ -44,16 +43,12 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	protected List<ExecutionEvent> raisedEvents;
 	private ExecutionState[] activeStateConfig;
 	private Map<Integer, ExecutionState> historyStateConfig;
-	private double timeScaleFactor;
-	private VirtualClock virtualClock;
 
 	public ExecutionContextImpl() {
 		variables = new ArrayList<ExecutionVariable>();
 		declaredEvents = new ArrayList<ExecutionEvent>();
 		raisedEvents = new ArrayList<ExecutionEvent>();
 		scheduledToRaiseEvents = new ArrayList<ExecutionEvent>();
-		timeScaleFactor = 1.0d;
-		virtualClock = new VirtualClock();
 		activeStateConfig = null;
 		historyStateConfig = null;
 	}
@@ -240,19 +235,6 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		return result;
 	}
 
-	public double getTimeScaleFactor() {
-		return timeScaleFactor;
-	}
-
-	public void setTimeScaleFactor(double factor) {
-		double oldFactor = timeScaleFactor;
-		timeScaleFactor = factor;
-		notifyTimeScaleFactorChanged(oldFactor, factor);
-	}
-
-	public VirtualClock getVirtualClock() {
-		return virtualClock;
-	}
 
 	public void unraiseEvent(String eventName) {
 		synchronized (raisedEvents) {

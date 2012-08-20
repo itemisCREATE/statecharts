@@ -10,10 +10,11 @@
  */
 package org.yakindu.sct.simulation.core.runtime.impl;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeController;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer.VirtualTimerTask;
 
 /**
  * Cycle based implementation of {@link IExecutionFacadeController}.
@@ -27,7 +28,7 @@ import org.yakindu.sct.simulation.core.runtime.timer.VirtualTimer.VirtualTimerTa
 public class CycleBasedExecutionFacadeController extends
 		AbstractExecutionFacadeController {
 
-	private VirtualTimer timer;
+	private Timer timer;
 
 	private long cyclePeriod;
 
@@ -35,18 +36,18 @@ public class CycleBasedExecutionFacadeController extends
 			long cyclePeriod) {
 		super(facade);
 		this.cyclePeriod = cyclePeriod;
-		timer = new VirtualTimer(facade.getExecutionContext().getVirtualClock());
+		timer = new Timer();
 	}
 
 	protected void scheduleCycle() {
 		if (!terminated && !suspended) {
-			VirtualTimerTask virtualTimerTask = new VirtualTimerTask() {
+			TimerTask virtualTimerTask = new TimerTask() {
 				public void run() {
 					facade.runCycle();
 					scheduleCycle();
 				}
 			};
-			timer.scheduleTask(virtualTimerTask, cyclePeriod);
+			timer.schedule(virtualTimerTask, cyclePeriod);
 		}
 	}
 
@@ -54,7 +55,7 @@ public class CycleBasedExecutionFacadeController extends
 		super.start();
 		scheduleCycle();
 	}
-
+	
 	public void resume() {
 		super.resume();
 		scheduleCycle();

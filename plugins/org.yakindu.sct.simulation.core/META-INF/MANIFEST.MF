@@ -23,5 +23,4 @@ Export-Package: org.yakindu.sct.simulation.core,
  org.yakindu.sct.simulation.core.launch,
  org.yakindu.sct.simulation.core.runtime,
  org.yakindu.sct.simulation.core.runtime.impl,
- org.yakindu.sct.simulation.core.runtime.timer,
  org.yakindu.sct.simulation.core.util

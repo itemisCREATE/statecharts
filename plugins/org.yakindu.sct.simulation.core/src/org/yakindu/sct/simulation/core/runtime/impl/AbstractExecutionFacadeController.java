@@ -47,7 +47,10 @@ public abstract class AbstractExecutionFacadeController implements
 	public void terminate() {
 		terminated = true;
 		facade.tearDown();
-		facade.getExecutionContext().getVirtualClock().stop();
+	}
+	
+	public void step() {
+		facade.runCycle();		
 	}
 
 }

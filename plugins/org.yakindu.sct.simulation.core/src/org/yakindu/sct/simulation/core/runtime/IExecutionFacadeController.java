@@ -25,6 +25,8 @@ public interface IExecutionFacadeController {
 	public void start();
 
 	public void suspend();
+	
+	public void step();
 
 	public void resume();
 

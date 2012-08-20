@@ -12,15 +12,12 @@ package org.yakindu.sct.simulation.core.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-import org.yakindu.sct.simulation.core.runtime.timer.VirtualClockTest;
 
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
 @RunWith(value = Suite.class)
-@SuiteClasses(value = { VirtualClockTest.class })
 public class AllTests {
 
 }

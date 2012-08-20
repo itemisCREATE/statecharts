@@ -29,8 +29,4 @@ public interface IExecutionContextListener {
 	 * called when a variable value changed
 	 */
 	public void variableValueChanged(ExecutionVariable variable);
-	/**
-	 * Called when the timeScaleFactor changed
-	 */
-	public void timeScaleFactorChanged(double oldFactor, double newFactor);
 }
