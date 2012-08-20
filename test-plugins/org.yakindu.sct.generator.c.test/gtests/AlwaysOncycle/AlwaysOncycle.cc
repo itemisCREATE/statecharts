@@ -8,6 +8,7 @@
 * Contributors:
 *     committers of YAKINDU - initial API and implementation
 */
+#include <string>
 #include "gtest/gtest.h"
 #include "AlwaysOncycle.h"
 
