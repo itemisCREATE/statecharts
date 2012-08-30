@@ -227,7 +227,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	public void testTransitionReaction(){
 		String rule = TransitionReaction.class.getSimpleName();
-		parseExpression("after 10 s / raise ABC.event2 # > ABC.EntryPoint", interfaceScope(), rule);
+		parseExpression("after 10 s / raise ABC.event2", interfaceScope(), rule);
 	}
 	
 	
@@ -245,8 +245,6 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("interface : in event Event1", rule);
 		parseExpression("interface ABC : var myVar : integer", rule);
 		parseExpression("interface : operation myOpp()", rule);
-		parseExpression("interface DEF : exitpoint abc", rule);
-		parseExpression("interface : entrypoint abc", rule);
 	}
 
 	/**
