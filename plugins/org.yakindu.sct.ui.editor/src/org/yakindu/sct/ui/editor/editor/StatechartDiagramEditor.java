@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.draw2d.ConnectionLayer;
+import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
@@ -148,7 +149,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 			ConnectionLayer connectionLayer = (ConnectionLayer) ((LayerManager) rootEditPart)
 					.getLayer(LayerConstants.CONNECTION_LAYER);
 			connectionLayer
-					.setClippingStrategy(new FixedViewportAwareConnectionLayerClippingStrategy(
+					.setClippingStrategy(new ViewportAwareConnectionLayerClippingStrategy(
 							connectionLayer));
 		}
 	}
