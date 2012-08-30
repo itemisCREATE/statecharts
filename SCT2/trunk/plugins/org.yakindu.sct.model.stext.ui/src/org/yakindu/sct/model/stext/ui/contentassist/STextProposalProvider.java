@@ -71,10 +71,10 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getVariableDefinitionAccess().getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess
 					.getEventDefinitionAccess().getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getExitpointAccess()
-					.getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getEntrypointAccess()
-					.getGroup().eContents()));
+//			suppressKeywords.addAll(getKeywords(grammarAccess.getExitpointAccess()
+//					.getGroup().eContents()));
+//			suppressKeywords.addAll(getKeywords(grammarAccess.getEntrypointAccess()
+//					.getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess()
 					.getAlternatives().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess

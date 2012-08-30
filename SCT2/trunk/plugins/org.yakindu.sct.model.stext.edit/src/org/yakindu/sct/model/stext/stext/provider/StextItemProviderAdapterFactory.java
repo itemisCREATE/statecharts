@@ -474,106 +474,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ReactionProperties} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ReactionPropertiesItemProvider reactionPropertiesItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ReactionProperties}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createReactionPropertiesAdapter()
-  {
-    if (reactionPropertiesItemProvider == null)
-    {
-      reactionPropertiesItemProvider = new ReactionPropertiesItemProvider(this);
-    }
-
-    return reactionPropertiesItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ReactionProperty} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ReactionPropertyItemProvider reactionPropertyItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ReactionProperty}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createReactionPropertyAdapter()
-  {
-    if (reactionPropertyItemProvider == null)
-    {
-      reactionPropertyItemProvider = new ReactionPropertyItemProvider(this);
-    }
-
-    return reactionPropertyItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EntryPointSpec} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected EntryPointSpecItemProvider entryPointSpecItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EntryPointSpec}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createEntryPointSpecAdapter()
-  {
-    if (entryPointSpecItemProvider == null)
-    {
-      entryPointSpecItemProvider = new EntryPointSpecItemProvider(this);
-    }
-
-    return entryPointSpecItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ExitPointSpec} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ExitPointSpecItemProvider exitPointSpecItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ExitPointSpec}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createExitPointSpecAdapter()
-  {
-    if (exitPointSpecItemProvider == null)
-    {
-      exitPointSpecItemProvider = new ExitPointSpecItemProvider(this);
-    }
-
-    return exitPointSpecItemProvider;
-  }
-
-  /**
    * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventSpec} instances.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -996,56 +896,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     }
 
     return simpleScopeItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Entrypoint} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected EntrypointItemProvider entrypointItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Entrypoint}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createEntrypointAdapter()
-  {
-    if (entrypointItemProvider == null)
-    {
-      entrypointItemProvider = new EntrypointItemProvider(this);
-    }
-
-    return entrypointItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Exitpoint} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected ExitpointItemProvider exitpointItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Exitpoint}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createExitpointAdapter()
-  {
-    if (exitpointItemProvider == null)
-    {
-      exitpointItemProvider = new ExitpointItemProvider(this);
-    }
-
-    return exitpointItemProvider;
   }
 
   /**
@@ -1700,10 +1550,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (operationDefinitionItemProvider != null) operationDefinitionItemProvider.dispose();
     if (localReactionItemProvider != null) localReactionItemProvider.dispose();
     if (transitionReactionItemProvider != null) transitionReactionItemProvider.dispose();
-    if (reactionPropertiesItemProvider != null) reactionPropertiesItemProvider.dispose();
-    if (reactionPropertyItemProvider != null) reactionPropertyItemProvider.dispose();
-    if (entryPointSpecItemProvider != null) entryPointSpecItemProvider.dispose();
-    if (exitPointSpecItemProvider != null) exitPointSpecItemProvider.dispose();
     if (eventSpecItemProvider != null) eventSpecItemProvider.dispose();
     if (regularEventSpecItemProvider != null) regularEventSpecItemProvider.dispose();
     if (timeEventSpecItemProvider != null) timeEventSpecItemProvider.dispose();
@@ -1721,8 +1567,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (hexLiteralItemProvider != null) hexLiteralItemProvider.dispose();
     if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
     if (simpleScopeItemProvider != null) simpleScopeItemProvider.dispose();
-    if (entrypointItemProvider != null) entrypointItemProvider.dispose();
-    if (exitpointItemProvider != null) exitpointItemProvider.dispose();
     if (reactionTriggerItemProvider != null) reactionTriggerItemProvider.dispose();
     if (reactionEffectItemProvider != null) reactionEffectItemProvider.dispose();
     if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();

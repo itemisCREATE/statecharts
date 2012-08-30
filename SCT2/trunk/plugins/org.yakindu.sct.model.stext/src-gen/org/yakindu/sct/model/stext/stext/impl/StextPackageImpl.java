@@ -32,15 +32,11 @@ import org.yakindu.sct.model.stext.stext.DefaultEvent;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
-import org.yakindu.sct.model.stext.stext.EntryPointSpec;
-import org.yakindu.sct.model.stext.stext.Entrypoint;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
-import org.yakindu.sct.model.stext.stext.ExitPointSpec;
-import org.yakindu.sct.model.stext.stext.Exitpoint;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.HexLiteral;
@@ -61,8 +57,6 @@ import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
-import org.yakindu.sct.model.stext.stext.ReactionProperties;
-import org.yakindu.sct.model.stext.stext.ReactionProperty;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
@@ -213,34 +207,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass reactionPropertiesEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass reactionPropertyEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass entryPointSpecEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass exitPointSpecEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass eventSpecEClass = null;
 
   /**
@@ -354,20 +320,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass simpleScopeEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass entrypointEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass exitpointEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -911,86 +863,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getTransitionReaction_Properties()
-  {
-    return (EReference)transitionReactionEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getReactionProperties()
-  {
-    return reactionPropertiesEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getReactionProperties_Properties()
-  {
-    return (EReference)reactionPropertiesEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getReactionProperty()
-  {
-    return reactionPropertyEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getEntryPointSpec()
-  {
-    return entryPointSpecEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getEntryPointSpec_Entrypoint()
-  {
-    return (EReference)entryPointSpecEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getExitPointSpec()
-  {
-    return exitPointSpecEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getExitPointSpec_Exitpoint()
-  {
-    return (EReference)exitPointSpecEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getEventSpec()
   {
     return eventSpecEClass;
@@ -1244,26 +1116,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EClass getSimpleScope()
   {
     return simpleScopeEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getEntrypoint()
-  {
-    return entrypointEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getExitpoint()
-  {
-    return exitpointEClass;
   }
 
   /**
@@ -2097,18 +1949,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     localReactionEClass = createEClass(LOCAL_REACTION);
 
     transitionReactionEClass = createEClass(TRANSITION_REACTION);
-    createEReference(transitionReactionEClass, TRANSITION_REACTION__PROPERTIES);
-
-    reactionPropertiesEClass = createEClass(REACTION_PROPERTIES);
-    createEReference(reactionPropertiesEClass, REACTION_PROPERTIES__PROPERTIES);
-
-    reactionPropertyEClass = createEClass(REACTION_PROPERTY);
-
-    entryPointSpecEClass = createEClass(ENTRY_POINT_SPEC);
-    createEReference(entryPointSpecEClass, ENTRY_POINT_SPEC__ENTRYPOINT);
-
-    exitPointSpecEClass = createEClass(EXIT_POINT_SPEC);
-    createEReference(exitPointSpecEClass, EXIT_POINT_SPEC__EXITPOINT);
 
     eventSpecEClass = createEClass(EVENT_SPEC);
 
@@ -2152,10 +1992,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     createEAttribute(stringLiteralEClass, STRING_LITERAL__VALUE);
 
     simpleScopeEClass = createEClass(SIMPLE_SCOPE);
-
-    entrypointEClass = createEClass(ENTRYPOINT);
-
-    exitpointEClass = createEClass(EXITPOINT);
 
     reactionTriggerEClass = createEClass(REACTION_TRIGGER);
     createEReference(reactionTriggerEClass, REACTION_TRIGGER__TRIGGERS);
@@ -2308,8 +2144,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
     transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
-    entryPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
-    exitPointSpecEClass.getESuperTypes().add(this.getReactionProperty());
     regularEventSpecEClass.getESuperTypes().add(this.getEventSpec());
     timeEventSpecEClass.getESuperTypes().add(this.getEventSpec());
     builtinEventSpecEClass.getESuperTypes().add(this.getEventSpec());
@@ -2325,8 +2159,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     hexLiteralEClass.getESuperTypes().add(this.getLiteral());
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
     simpleScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
-    entrypointEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
-    exitpointEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     reactionTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
     reactionEffectEClass.getESuperTypes().add(theSGraphPackage.getEffect());
     eventRaisingExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -2391,18 +2223,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(transitionReactionEClass, TransitionReaction.class, "TransitionReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getTransitionReaction_Properties(), this.getReactionProperties(), null, "properties", null, 0, 1, TransitionReaction.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(reactionPropertiesEClass, ReactionProperties.class, "ReactionProperties", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getReactionProperties_Properties(), this.getReactionProperty(), null, "properties", null, 0, -1, ReactionProperties.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(reactionPropertyEClass, ReactionProperty.class, "ReactionProperty", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(entryPointSpecEClass, EntryPointSpec.class, "EntryPointSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEntryPointSpec_Entrypoint(), this.getEntrypoint(), null, "entrypoint", null, 0, 1, EntryPointSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(exitPointSpecEClass, ExitPointSpec.class, "ExitPointSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getExitPointSpec_Exitpoint(), this.getExitpoint(), null, "exitpoint", null, 0, 1, ExitPointSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eventSpecEClass, EventSpec.class, "EventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2446,10 +2266,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEAttribute(getStringLiteral_Value(), ecorePackage.getEString(), "value", null, 0, 1, StringLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleScopeEClass, SimpleScope.class, "SimpleScope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(entrypointEClass, Entrypoint.class, "Entrypoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(exitpointEClass, Exitpoint.class, "Exitpoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(reactionTriggerEClass, ReactionTrigger.class, "ReactionTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReactionTrigger_Triggers(), this.getEventSpec(), null, "triggers", null, 0, -1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

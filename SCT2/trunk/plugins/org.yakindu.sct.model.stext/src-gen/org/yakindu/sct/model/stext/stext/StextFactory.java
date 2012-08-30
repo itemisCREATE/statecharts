@@ -167,42 +167,6 @@ public interface StextFactory extends EFactory
   TransitionReaction createTransitionReaction();
 
   /**
-   * Returns a new object of class '<em>Reaction Properties</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reaction Properties</em>'.
-   * @generated
-   */
-  ReactionProperties createReactionProperties();
-
-  /**
-   * Returns a new object of class '<em>Reaction Property</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Reaction Property</em>'.
-   * @generated
-   */
-  ReactionProperty createReactionProperty();
-
-  /**
-   * Returns a new object of class '<em>Entry Point Spec</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entry Point Spec</em>'.
-   * @generated
-   */
-  EntryPointSpec createEntryPointSpec();
-
-  /**
-   * Returns a new object of class '<em>Exit Point Spec</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Exit Point Spec</em>'.
-   * @generated
-   */
-  ExitPointSpec createExitPointSpec();
-
-  /**
    * Returns a new object of class '<em>Event Spec</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -354,24 +318,6 @@ public interface StextFactory extends EFactory
    * @generated
    */
   SimpleScope createSimpleScope();
-
-  /**
-   * Returns a new object of class '<em>Entrypoint</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Entrypoint</em>'.
-   * @generated
-   */
-  Entrypoint createEntrypoint();
-
-  /**
-   * Returns a new object of class '<em>Exitpoint</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Exitpoint</em>'.
-   * @generated
-   */
-  Exitpoint createExitpoint();
 
   /**
    * Returns a new object of class '<em>Reaction Trigger</em>'.

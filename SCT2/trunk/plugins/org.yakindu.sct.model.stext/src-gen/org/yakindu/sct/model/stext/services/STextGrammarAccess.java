@@ -7,6 +7,8 @@ package org.yakindu.sct.model.stext.services;
 import com.google.inject.Singleton;
 import com.google.inject.Inject;
 
+import java.util.List;
+
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.service.GrammarProvider;
 import org.eclipse.xtext.service.AbstractElementFinder.*;
@@ -261,37 +263,25 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cSimpleScopeAction_0 = (Action)cGroup.eContents().get(0);
 		private final Assignment cDeclarationsAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Alternatives cDeclarationsAlternatives_1_0 = (Alternatives)cDeclarationsAssignment_1.eContents().get(0);
-		private final RuleCall cDeclarationsLocalReactionParserRuleCall_1_0_0 = (RuleCall)cDeclarationsAlternatives_1_0.eContents().get(0);
-		private final RuleCall cDeclarationsEntrypointParserRuleCall_1_0_1 = (RuleCall)cDeclarationsAlternatives_1_0.eContents().get(1);
-		private final RuleCall cDeclarationsExitpointParserRuleCall_1_0_2 = (RuleCall)cDeclarationsAlternatives_1_0.eContents().get(2);
+		private final RuleCall cDeclarationsLocalReactionParserRuleCall_1_0 = (RuleCall)cDeclarationsAssignment_1.eContents().get(0);
 		
 		//// a SimpleScope is used for states and regions
 		// StateScope returns sgraph::Scope:
 		//
-		//	{SimpleScope} declarations+=(LocalReaction | Entrypoint | Exitpoint)*;
+		//	{SimpleScope} / **| Entrypoint | Exitpoint * / declarations+=LocalReaction*;
 		public ParserRule getRule() { return rule; }
 
-		//{SimpleScope} declarations+=(LocalReaction | Entrypoint | Exitpoint)*
+		//{SimpleScope} / **| Entrypoint | Exitpoint * / declarations+=LocalReaction*
 		public Group getGroup() { return cGroup; }
 
 		//{SimpleScope}
 		public Action getSimpleScopeAction_0() { return cSimpleScopeAction_0; }
 
-		//declarations+=(LocalReaction | Entrypoint | Exitpoint)*
+		/// **| Entrypoint | Exitpoint * / declarations+=LocalReaction*
 		public Assignment getDeclarationsAssignment_1() { return cDeclarationsAssignment_1; }
 
-		//LocalReaction | Entrypoint | Exitpoint
-		public Alternatives getDeclarationsAlternatives_1_0() { return cDeclarationsAlternatives_1_0; }
-
 		//LocalReaction
-		public RuleCall getDeclarationsLocalReactionParserRuleCall_1_0_0() { return cDeclarationsLocalReactionParserRuleCall_1_0_0; }
-
-		//Entrypoint
-		public RuleCall getDeclarationsEntrypointParserRuleCall_1_0_1() { return cDeclarationsEntrypointParserRuleCall_1_0_1; }
-
-		//Exitpoint
-		public RuleCall getDeclarationsExitpointParserRuleCall_1_0_2() { return cDeclarationsExitpointParserRuleCall_1_0_2; }
+		public RuleCall getDeclarationsLocalReactionParserRuleCall_1_0() { return cDeclarationsLocalReactionParserRuleCall_1_0; }
 	}
 
 	public class StatechartScopeElements extends AbstractParserRuleElementFinder {
@@ -342,19 +332,19 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDeclarationsEventDeclarartionParserRuleCall_4_0_0 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(0);
 		private final RuleCall cDeclarationsVariableDeclarationParserRuleCall_4_0_1 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(1);
 		private final RuleCall cDeclarationsOperationDeclarationParserRuleCall_4_0_2 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(2);
-		private final RuleCall cDeclarationsEntrypointParserRuleCall_4_0_3 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(3);
-		private final RuleCall cDeclarationsExitpointParserRuleCall_4_0_4 = (RuleCall)cDeclarationsAlternatives_4_0.eContents().get(4);
 		
 		//InterfaceScope:
 		//
 		//	{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDeclarartion | VariableDeclaration |
 		//
-		//	OperationDeclaration | Entrypoint | Exitpoint)*;
+		//	/ **| Entrypoint |
+		//	Exitpoint* / OperationDeclaration)*;
 		public ParserRule getRule() { return rule; }
 
-		//{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration
+		//{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDeclarartion | VariableDeclaration |
 		//
-		//| Entrypoint | Exitpoint)*
+		/// **| Entrypoint |
+		//	Exitpoint* / OperationDeclaration)*
 		public Group getGroup() { return cGroup; }
 
 		//{InterfaceScope}
@@ -372,10 +362,12 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//":"
 		public Keyword getColonKeyword_3() { return cColonKeyword_3; }
 
-		//declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration | Entrypoint | Exitpoint)*
+		//declarations+=(EventDeclarartion | VariableDeclaration | / **| Entrypoint |
+		//	Exitpoint* / OperationDeclaration)*
 		public Assignment getDeclarationsAssignment_4() { return cDeclarationsAssignment_4; }
 
-		//EventDeclarartion | VariableDeclaration | OperationDeclaration | Entrypoint | Exitpoint
+		//EventDeclarartion | VariableDeclaration | / **| Entrypoint |
+		//	Exitpoint* / OperationDeclaration
 		public Alternatives getDeclarationsAlternatives_4_0() { return cDeclarationsAlternatives_4_0; }
 
 		//EventDeclarartion
@@ -384,14 +376,9 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//VariableDeclaration
 		public RuleCall getDeclarationsVariableDeclarationParserRuleCall_4_0_1() { return cDeclarationsVariableDeclarationParserRuleCall_4_0_1; }
 
-		//OperationDeclaration
+		/// **| Entrypoint |
+		//	Exitpoint* / OperationDeclaration
 		public RuleCall getDeclarationsOperationDeclarationParserRuleCall_4_0_2() { return cDeclarationsOperationDeclarationParserRuleCall_4_0_2; }
-
-		//Entrypoint
-		public RuleCall getDeclarationsEntrypointParserRuleCall_4_0_3() { return cDeclarationsEntrypointParserRuleCall_4_0_3; }
-
-		//Exitpoint
-		public RuleCall getDeclarationsExitpointParserRuleCall_4_0_4() { return cDeclarationsExitpointParserRuleCall_4_0_4; }
 	}
 
 	public class InternalScopeElements extends AbstractParserRuleElementFinder {
@@ -454,18 +441,16 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cVariableDeclarationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cOperationDeclarationParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cLocalReactionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cEntrypointParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cExitpointParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		/// * ---- declarations ----
-		//a definition is a top level element of a definition scope. * / Declaration returns
+		//a definition is a top level element of a definition scope. * / / ** | Entrypoint | Exitpoint* /
 		//
-		//sgraph::Declaration:
+		//Declaration returns sgraph::Declaration:
 		//
-		//	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction | Entrypoint | Exitpoint;
+		//	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction;
 		public ParserRule getRule() { return rule; }
 
-		//EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction | Entrypoint | Exitpoint
+		//EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//EventDeclarartion
@@ -479,12 +464,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//LocalReaction
 		public RuleCall getLocalReactionParserRuleCall_3() { return cLocalReactionParserRuleCall_3; }
-
-		//Entrypoint
-		public RuleCall getEntrypointParserRuleCall_4() { return cEntrypointParserRuleCall_4; }
-
-		//Exitpoint
-		public RuleCall getExitpointParserRuleCall_5() { return cExitpointParserRuleCall_5; }
 	}
 
 	public class EventDeclarartionElements extends AbstractParserRuleElementFinder {
@@ -830,64 +809,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getTypeTypeFQNParserRuleCall_2_0_1() { return cTypeTypeFQNParserRuleCall_2_0_1; }
 	}
 
-	public class EntrypointElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Entrypoint");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cEntrypointAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cEntrypointKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		
-		/// * ---- entrypoint definition ---- * / Entrypoint returns sgraph::Declaration:
-		//
-		//	{Entrypoint} "entrypoint" name=ID;
-		public ParserRule getRule() { return rule; }
-
-		//{Entrypoint} "entrypoint" name=ID
-		public Group getGroup() { return cGroup; }
-
-		//{Entrypoint}
-		public Action getEntrypointAction_0() { return cEntrypointAction_0; }
-
-		//"entrypoint"
-		public Keyword getEntrypointKeyword_1() { return cEntrypointKeyword_1; }
-
-		//name=ID
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-	}
-
-	public class ExitpointElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Exitpoint");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cExitpointAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cExitpointKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameIDTerminalRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		
-		/// * ---- exitpoint definition ---- * / Exitpoint returns sgraph::Declaration:
-		//
-		//	{Exitpoint} "exitpoint" name=ID;
-		public ParserRule getRule() { return rule; }
-
-		//{Exitpoint} "exitpoint" name=ID
-		public Group getGroup() { return cGroup; }
-
-		//{Exitpoint}
-		public Action getExitpointAction_0() { return cExitpointAction_0; }
-
-		//"exitpoint"
-		public Keyword getExitpointKeyword_1() { return cExitpointKeyword_1; }
-
-		//name=ID
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_2_0() { return cNameIDTerminalRuleCall_2_0; }
-	}
-
 	public class FQNElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FQN");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -896,6 +817,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
+		/// * ---- entrypoint definition ---- * / //Entrypoint returns sgraph::Declaration:
+		// //	{Entrypoint} 'entrypoint' name=ID;
+		//
+		//
+		/// * ---- exitpoint definition ---- * / //Exitpoint returns sgraph::Declaration:
+		// //	{Exitpoint} 'exitpoint' name=ID;
+		//
+		//
 		/// * ---- Datatype rules ---- * / FQN:
 		//
 		//	ID ("." ID)*;
@@ -994,17 +923,13 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSolidusKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cEffectAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cEffectReactionEffectParserRuleCall_2_1_0 = (RuleCall)cEffectAssignment_2_1.eContents().get(0);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cNumberSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final Assignment cPropertiesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cPropertiesReactionPropertiesParserRuleCall_3_1_0 = (RuleCall)cPropertiesAssignment_3_1.eContents().get(0);
 		
-		//TransitionReaction:
+		/// ** ('#' properties=ReactionProperties) ?* / TransitionReaction:
 		//
-		//	{TransitionReaction} trigger=ReactionTrigger? ("/" effect=ReactionEffect)? ("#" properties=ReactionProperties)?;
+		//	{TransitionReaction} trigger=ReactionTrigger? ("/" effect=ReactionEffect)?;
 		public ParserRule getRule() { return rule; }
 
-		//{TransitionReaction} trigger=ReactionTrigger? ("/" effect=ReactionEffect)? ("#" properties=ReactionProperties)?
+		//{TransitionReaction} trigger=ReactionTrigger? ("/" effect=ReactionEffect)?
 		public Group getGroup() { return cGroup; }
 
 		//{TransitionReaction}
@@ -1027,18 +952,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ReactionEffect
 		public RuleCall getEffectReactionEffectParserRuleCall_2_1_0() { return cEffectReactionEffectParserRuleCall_2_1_0; }
-
-		//("#" properties=ReactionProperties)?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"#"
-		public Keyword getNumberSignKeyword_3_0() { return cNumberSignKeyword_3_0; }
-
-		//properties=ReactionProperties
-		public Assignment getPropertiesAssignment_3_1() { return cPropertiesAssignment_3_1; }
-
-		//ReactionProperties
-		public RuleCall getPropertiesReactionPropertiesParserRuleCall_3_1_0() { return cPropertiesReactionPropertiesParserRuleCall_3_1_0; }
 	}
 
 	public class ReactionTriggerElements extends AbstractParserRuleElementFinder {
@@ -1196,110 +1109,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getActionsEventRaisingExpressionParserRuleCall_2_1_0_1() { return cActionsEventRaisingExpressionParserRuleCall_2_1_0_1; }
 	}
 
-	public class ReactionPropertiesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReactionProperties");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cReactionPropertiesAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cPropertiesAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cPropertiesReactionPropertyParserRuleCall_1_0 = (RuleCall)cPropertiesAssignment_1.eContents().get(0);
-		
-		//ReactionProperties:
-		//
-		//	{ReactionProperties} properties+=ReactionProperty*;
-		public ParserRule getRule() { return rule; }
-
-		//{ReactionProperties} properties+=ReactionProperty*
-		public Group getGroup() { return cGroup; }
-
-		//{ReactionProperties}
-		public Action getReactionPropertiesAction_0() { return cReactionPropertiesAction_0; }
-
-		//properties+=ReactionProperty*
-		public Assignment getPropertiesAssignment_1() { return cPropertiesAssignment_1; }
-
-		//ReactionProperty
-		public RuleCall getPropertiesReactionPropertyParserRuleCall_1_0() { return cPropertiesReactionPropertyParserRuleCall_1_0; }
-	}
-
-	public class ReactionPropertyElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ReactionProperty");
-		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cEntryPointSpecParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cExitPointSpecParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		
-		//ReactionProperty:
-		//
-		//	EntryPointSpec | ExitPointSpec;
-		public ParserRule getRule() { return rule; }
-
-		//EntryPointSpec | ExitPointSpec
-		public Alternatives getAlternatives() { return cAlternatives; }
-
-		//EntryPointSpec
-		public RuleCall getEntryPointSpecParserRuleCall_0() { return cEntryPointSpecParserRuleCall_0; }
-
-		//ExitPointSpec
-		public RuleCall getExitPointSpecParserRuleCall_1() { return cExitPointSpecParserRuleCall_1; }
-	}
-
-	public class EntryPointSpecElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryPointSpec");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cEntrypointAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final CrossReference cEntrypointEntrypointCrossReference_1_0 = (CrossReference)cEntrypointAssignment_1.eContents().get(0);
-		private final RuleCall cEntrypointEntrypointFQNParserRuleCall_1_0_1 = (RuleCall)cEntrypointEntrypointCrossReference_1_0.eContents().get(1);
-		
-		//EntryPointSpec:
-		//
-		//	">" entrypoint=[Entrypoint|FQN];
-		public ParserRule getRule() { return rule; }
-
-		//">" entrypoint=[Entrypoint|FQN]
-		public Group getGroup() { return cGroup; }
-
-		//">"
-		public Keyword getGreaterThanSignKeyword_0() { return cGreaterThanSignKeyword_0; }
-
-		//entrypoint=[Entrypoint|FQN]
-		public Assignment getEntrypointAssignment_1() { return cEntrypointAssignment_1; }
-
-		//[Entrypoint|FQN]
-		public CrossReference getEntrypointEntrypointCrossReference_1_0() { return cEntrypointEntrypointCrossReference_1_0; }
-
-		//FQN
-		public RuleCall getEntrypointEntrypointFQNParserRuleCall_1_0_1() { return cEntrypointEntrypointFQNParserRuleCall_1_0_1; }
-	}
-
-	public class ExitPointSpecElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExitPointSpec");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cExitpointAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cExitpointExitpointCrossReference_0_0 = (CrossReference)cExitpointAssignment_0.eContents().get(0);
-		private final RuleCall cExitpointExitpointFQNParserRuleCall_0_0_1 = (RuleCall)cExitpointExitpointCrossReference_0_0.eContents().get(1);
-		private final Keyword cGreaterThanSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//ExitPointSpec:
-		//
-		//	exitpoint=[Exitpoint|FQN] ">";
-		public ParserRule getRule() { return rule; }
-
-		//exitpoint=[Exitpoint|FQN] ">"
-		public Group getGroup() { return cGroup; }
-
-		//exitpoint=[Exitpoint|FQN]
-		public Assignment getExitpointAssignment_0() { return cExitpointAssignment_0; }
-
-		//[Exitpoint|FQN]
-		public CrossReference getExitpointExitpointCrossReference_0_0() { return cExitpointExitpointCrossReference_0_0; }
-
-		//FQN
-		public RuleCall getExitpointExitpointFQNParserRuleCall_0_0_1() { return cExitpointExitpointFQNParserRuleCall_0_0_1; }
-
-		//">"
-		public Keyword getGreaterThanSignKeyword_1() { return cGreaterThanSignKeyword_1; }
-	}
-
 	public class EventSpecElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventSpec");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1307,7 +1116,19 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTimeEventSpecParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cBuiltinEventSpecParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		//EventSpec:
+		////ReactionProperties:
+		// //	{ReactionProperties} (properties+=ReactionProperty)*;
+		// //ReactionProperty:
+		//
+		//
+		////	EntryPointSpec | ExitPointSpec;
+		// //EntryPointSpec:
+		// //	'>' entrypoint=[Entrypoint|FQN];
+		// //ExitPointSpec:
+		//
+		//
+		////	exitpoint=[Exitpoint|FQN] '>';
+		// EventSpec:
 		//
 		//	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 		public ParserRule getRule() { return rule; }
@@ -3063,18 +2884,12 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private OperationFeatureElements pOperationFeature;
 	private OperationDefinitionElements pOperationDefinition;
 	private ParameterElements pParameter;
-	private EntrypointElements pEntrypoint;
-	private ExitpointElements pExitpoint;
 	private FQNElements pFQN;
 	private ReactionElements pReaction;
 	private LocalReactionElements pLocalReaction;
 	private TransitionReactionElements pTransitionReaction;
 	private ReactionTriggerElements pReactionTrigger;
 	private ReactionEffectElements pReactionEffect;
-	private ReactionPropertiesElements pReactionProperties;
-	private ReactionPropertyElements pReactionProperty;
-	private EntryPointSpecElements pEntryPointSpec;
-	private ExitPointSpecElements pExitPointSpec;
 	private EventSpecElements pEventSpec;
 	private RegularEventSpecElements pRegularEventSpec;
 	private TimeEventSpecElements pTimeEventSpec;
@@ -3124,19 +2939,36 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private TerminalRule tHEX;
 	private TerminalRule tFLOAT;
 	
-	private final GrammarProvider grammarProvider;
+	private final Grammar grammar;
 
 	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
 	public STextGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
-		this.grammarProvider = grammarProvider;
+		this.grammar = internalFindGrammar(grammarProvider);
 		this.gaTerminals = gaTerminals;
 	}
 	
-	public Grammar getGrammar() {	
-		return grammarProvider.getGrammar(this);
+	protected Grammar internalFindGrammar(GrammarProvider grammarProvider) {
+		Grammar grammar = grammarProvider.getGrammar(this);
+		while (grammar != null) {
+			if ("org.yakindu.sct.model.stext.SText".equals(grammar.getName())) {
+				return grammar;
+			}
+			List<Grammar> grammars = grammar.getUsedGrammars();
+			if (!grammars.isEmpty()) {
+				grammar = grammars.iterator().next();
+			} else {
+				return null;
+			}
+		}
+		return grammar;
+	}
+	
+	
+	public Grammar getGrammar() {
+		return grammar;
 	}
 	
 
@@ -3271,7 +3103,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	//// a SimpleScope is used for states and regions
 	// StateScope returns sgraph::Scope:
 	//
-	//	{SimpleScope} declarations+=(LocalReaction | Entrypoint | Exitpoint)*;
+	//	{SimpleScope} / **| Entrypoint | Exitpoint * / declarations+=LocalReaction*;
 	public StateScopeElements getStateScopeAccess() {
 		return (pStateScope != null) ? pStateScope : (pStateScope = new StateScopeElements());
 	}
@@ -3307,7 +3139,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	//
 	//	{InterfaceScope} "interface" name=ID? ":" declarations+=(EventDeclarartion | VariableDeclaration |
 	//
-	//	OperationDeclaration | Entrypoint | Exitpoint)*;
+	//	/ **| Entrypoint |
+	//	Exitpoint* / OperationDeclaration)*;
 	public InterfaceScopeElements getInterfaceScopeAccess() {
 		return (pInterfaceScope != null) ? pInterfaceScope : (pInterfaceScope = new InterfaceScopeElements());
 	}
@@ -3330,11 +3163,11 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	/// * ---- declarations ----
-	//a definition is a top level element of a definition scope. * / Declaration returns
+	//a definition is a top level element of a definition scope. * / / ** | Entrypoint | Exitpoint* /
 	//
-	//sgraph::Declaration:
+	//Declaration returns sgraph::Declaration:
 	//
-	//	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction | Entrypoint | Exitpoint;
+	//	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction;
 	public DeclarationElements getDeclarationAccess() {
 		return (pDeclaration != null) ? pDeclaration : (pDeclaration = new DeclarationElements());
 	}
@@ -3471,28 +3304,14 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getParameterAccess().getRule();
 	}
 
-	/// * ---- entrypoint definition ---- * / Entrypoint returns sgraph::Declaration:
+	/// * ---- entrypoint definition ---- * / //Entrypoint returns sgraph::Declaration:
+	// //	{Entrypoint} 'entrypoint' name=ID;
 	//
-	//	{Entrypoint} "entrypoint" name=ID;
-	public EntrypointElements getEntrypointAccess() {
-		return (pEntrypoint != null) ? pEntrypoint : (pEntrypoint = new EntrypointElements());
-	}
-	
-	public ParserRule getEntrypointRule() {
-		return getEntrypointAccess().getRule();
-	}
-
-	/// * ---- exitpoint definition ---- * / Exitpoint returns sgraph::Declaration:
 	//
-	//	{Exitpoint} "exitpoint" name=ID;
-	public ExitpointElements getExitpointAccess() {
-		return (pExitpoint != null) ? pExitpoint : (pExitpoint = new ExitpointElements());
-	}
-	
-	public ParserRule getExitpointRule() {
-		return getExitpointAccess().getRule();
-	}
-
+	/// * ---- exitpoint definition ---- * / //Exitpoint returns sgraph::Declaration:
+	// //	{Exitpoint} 'exitpoint' name=ID;
+	//
+	//
 	/// * ---- Datatype rules ---- * / FQN:
 	//
 	//	ID ("." ID)*;
@@ -3531,9 +3350,9 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getLocalReactionAccess().getRule();
 	}
 
-	//TransitionReaction:
+	/// ** ('#' properties=ReactionProperties) ?* / TransitionReaction:
 	//
-	//	{TransitionReaction} trigger=ReactionTrigger? ("/" effect=ReactionEffect)? ("#" properties=ReactionProperties)?;
+	//	{TransitionReaction} trigger=ReactionTrigger? ("/" effect=ReactionEffect)?;
 	public TransitionReactionElements getTransitionReactionAccess() {
 		return (pTransitionReaction != null) ? pTransitionReaction : (pTransitionReaction = new TransitionReactionElements());
 	}
@@ -3569,51 +3388,19 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getReactionEffectAccess().getRule();
 	}
 
-	//ReactionProperties:
+	////ReactionProperties:
+	// //	{ReactionProperties} (properties+=ReactionProperty)*;
+	// //ReactionProperty:
 	//
-	//	{ReactionProperties} properties+=ReactionProperty*;
-	public ReactionPropertiesElements getReactionPropertiesAccess() {
-		return (pReactionProperties != null) ? pReactionProperties : (pReactionProperties = new ReactionPropertiesElements());
-	}
-	
-	public ParserRule getReactionPropertiesRule() {
-		return getReactionPropertiesAccess().getRule();
-	}
-
-	//ReactionProperty:
 	//
-	//	EntryPointSpec | ExitPointSpec;
-	public ReactionPropertyElements getReactionPropertyAccess() {
-		return (pReactionProperty != null) ? pReactionProperty : (pReactionProperty = new ReactionPropertyElements());
-	}
-	
-	public ParserRule getReactionPropertyRule() {
-		return getReactionPropertyAccess().getRule();
-	}
-
-	//EntryPointSpec:
+	////	EntryPointSpec | ExitPointSpec;
+	// //EntryPointSpec:
+	// //	'>' entrypoint=[Entrypoint|FQN];
+	// //ExitPointSpec:
 	//
-	//	">" entrypoint=[Entrypoint|FQN];
-	public EntryPointSpecElements getEntryPointSpecAccess() {
-		return (pEntryPointSpec != null) ? pEntryPointSpec : (pEntryPointSpec = new EntryPointSpecElements());
-	}
-	
-	public ParserRule getEntryPointSpecRule() {
-		return getEntryPointSpecAccess().getRule();
-	}
-
-	//ExitPointSpec:
 	//
-	//	exitpoint=[Exitpoint|FQN] ">";
-	public ExitPointSpecElements getExitPointSpecAccess() {
-		return (pExitPointSpec != null) ? pExitPointSpec : (pExitPointSpec = new ExitPointSpecElements());
-	}
-	
-	public ParserRule getExitPointSpecRule() {
-		return getExitPointSpecAccess().getRule();
-	}
-
-	//EventSpec:
+	////	exitpoint=[Exitpoint|FQN] '>';
+	// EventSpec:
 	//
 	//	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 	public EventSpecElements getEventSpecAccess() {

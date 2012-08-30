@@ -136,16 +136,6 @@ public class StatechartScopeItemProvider
       (createChildParameter
         (SGraphPackage.Literals.SCOPE__DECLARATIONS,
          StextFactory.eINSTANCE.createLocalReaction()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createEntrypoint()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPE__DECLARATIONS,
-         StextFactory.eINSTANCE.createExitpoint()));
   }
 
   /**
