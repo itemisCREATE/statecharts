@@ -18,7 +18,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.ui.editor.validation.IMarkerType;
 
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 
@@ -27,8 +26,7 @@ import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
  * @author muelder
  * 
  */
-public class ExpressionDirectEditPolicy extends DirectEditPolicy implements
-		IMarkerType {
+public class ExpressionDirectEditPolicy extends DirectEditPolicy {
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
