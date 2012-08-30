@@ -94,19 +94,7 @@
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//OperationDefinition"/>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//LocalReaction"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TransitionReaction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TransitionReaction/properties"/>
-    </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionProperties">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionProperties/properties"/>
-    </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionProperty"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EntryPointSpec">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EntryPointSpec/entrypoint"/>
-    </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ExitPointSpec">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ExitPointSpec/exitpoint"/>
-    </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TransitionReaction"/>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventSpec"/>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//RegularEventSpec">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//RegularEventSpec/event"/>
@@ -140,8 +128,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StringLiteral/value"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//SimpleScope"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Entrypoint"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Exitpoint"/>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionTrigger">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionTrigger/triggers"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionTrigger/guardExpression"/>

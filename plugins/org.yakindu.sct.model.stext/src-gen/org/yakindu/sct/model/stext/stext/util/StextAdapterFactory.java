@@ -172,26 +172,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createTransitionReactionAdapter();
       }
       @Override
-      public Adapter caseReactionProperties(ReactionProperties object)
-      {
-        return createReactionPropertiesAdapter();
-      }
-      @Override
-      public Adapter caseReactionProperty(ReactionProperty object)
-      {
-        return createReactionPropertyAdapter();
-      }
-      @Override
-      public Adapter caseEntryPointSpec(EntryPointSpec object)
-      {
-        return createEntryPointSpecAdapter();
-      }
-      @Override
-      public Adapter caseExitPointSpec(ExitPointSpec object)
-      {
-        return createExitPointSpecAdapter();
-      }
-      @Override
       public Adapter caseEventSpec(EventSpec object)
       {
         return createEventSpecAdapter();
@@ -275,16 +255,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseSimpleScope(SimpleScope object)
       {
         return createSimpleScopeAdapter();
-      }
-      @Override
-      public Adapter caseEntrypoint(Entrypoint object)
-      {
-        return createEntrypointAdapter();
-      }
-      @Override
-      public Adapter caseExitpoint(Exitpoint object)
-      {
-        return createExitpointAdapter();
       }
       @Override
       public Adapter caseReactionTrigger(ReactionTrigger object)
@@ -729,66 +699,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ReactionProperties <em>Reaction Properties</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.ReactionProperties
-   * @generated
-   */
-  public Adapter createReactionPropertiesAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ReactionProperty <em>Reaction Property</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.ReactionProperty
-   * @generated
-   */
-  public Adapter createReactionPropertyAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EntryPointSpec <em>Entry Point Spec</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.EntryPointSpec
-   * @generated
-   */
-  public Adapter createEntryPointSpecAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ExitPointSpec <em>Exit Point Spec</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.ExitPointSpec
-   * @generated
-   */
-  public Adapter createExitPointSpecAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EventSpec <em>Event Spec</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1039,36 +949,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSimpleScopeAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.Entrypoint <em>Entrypoint</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.Entrypoint
-   * @generated
-   */
-  public Adapter createEntrypointAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.Exitpoint <em>Exitpoint</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.Exitpoint
-   * @generated
-   */
-  public Adapter createExitpointAdapter()
   {
     return null;
   }

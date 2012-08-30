@@ -13,20 +13,18 @@ package org.yakindu.sct.model.stext.test;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.yakindu.sct.model.stext.stext.Entrypoint;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.Exitpoint;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
-import org.yakindu.sct.model.stext.stext.ReactionProperties;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -138,15 +136,17 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	}
 
 	@Test
+	@Ignore("Disabled entry / exit points for release")
 	public void testEntryPoint() {
-		String rule = Entrypoint.class.getSimpleName();
-		parseExpression("entrypoint MyentryPoint", rule);
+		//String rule = Entrypoint.class.getSimpleName();
+		//parseExpression("entrypoint MyentryPoint", rule);
 	}
 
 	@Test
+	@Ignore("Disabled entry / exit points for release")
 	public void testExitPoint() {
-		String rule = Exitpoint.class.getSimpleName();
-		parseExpression("exitpoint MyentryPoint", rule);
+		//String rule = Exitpoint.class.getSimpleName();
+		//parseExpression("exitpoint MyentryPoint", rule);
 	}
 
 	/**
@@ -203,10 +203,11 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	 * ReactionProperties: {ReactionProperties} (properties+=ReactionProperty)*;
 	 */
 	@Test
+	@Ignore("Disabled entry / exit points for release")
 	public void testReactionProperties() {
-		String rule = ReactionProperties.class.getSimpleName();
-		parseExpression("> ABC.EntryPoint", interfaceScope(), rule);
-		parseExpression("ABC.ExitPoint >", interfaceScope(), rule);
+//		String rule = ReactionProperties.class.getSimpleName();
+//		parseExpression("> ABC.EntryPoint", interfaceScope(), rule);
+//		parseExpression("ABC.ExitPoint >", interfaceScope(), rule);
 	}
 
 	/**

@@ -232,36 +232,6 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.REACTION_PROPERTIES:
-      {
-        ReactionProperties reactionProperties = (ReactionProperties)theEObject;
-        T result = caseReactionProperties(reactionProperties);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.REACTION_PROPERTY:
-      {
-        ReactionProperty reactionProperty = (ReactionProperty)theEObject;
-        T result = caseReactionProperty(reactionProperty);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.ENTRY_POINT_SPEC:
-      {
-        EntryPointSpec entryPointSpec = (EntryPointSpec)theEObject;
-        T result = caseEntryPointSpec(entryPointSpec);
-        if (result == null) result = caseReactionProperty(entryPointSpec);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.EXIT_POINT_SPEC:
-      {
-        ExitPointSpec exitPointSpec = (ExitPointSpec)theEObject;
-        T result = caseExitPointSpec(exitPointSpec);
-        if (result == null) result = caseReactionProperty(exitPointSpec);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case StextPackage.EVENT_SPEC:
       {
         EventSpec eventSpec = (EventSpec)theEObject;
@@ -398,24 +368,6 @@ public class StextSwitch<T> extends Switch<T>
         SimpleScope simpleScope = (SimpleScope)theEObject;
         T result = caseSimpleScope(simpleScope);
         if (result == null) result = caseScope(simpleScope);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.ENTRYPOINT:
-      {
-        Entrypoint entrypoint = (Entrypoint)theEObject;
-        T result = caseEntrypoint(entrypoint);
-        if (result == null) result = caseDeclaration(entrypoint);
-        if (result == null) result = caseNamedElement(entrypoint);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.EXITPOINT:
-      {
-        Exitpoint exitpoint = (Exitpoint)theEObject;
-        T result = caseExitpoint(exitpoint);
-        if (result == null) result = caseDeclaration(exitpoint);
-        if (result == null) result = caseNamedElement(exitpoint);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -867,70 +819,6 @@ public class StextSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Reaction Properties</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reaction Properties</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseReactionProperties(ReactionProperties object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Reaction Property</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Reaction Property</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseReactionProperty(ReactionProperty object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Entry Point Spec</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Entry Point Spec</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEntryPointSpec(EntryPointSpec object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Exit Point Spec</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Exit Point Spec</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseExitPointSpec(ExitPointSpec object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Event Spec</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -1198,38 +1086,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseSimpleScope(SimpleScope object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Entrypoint</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Entrypoint</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseEntrypoint(Entrypoint object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Exitpoint</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Exitpoint</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseExitpoint(Exitpoint object)
   {
     return null;
   }

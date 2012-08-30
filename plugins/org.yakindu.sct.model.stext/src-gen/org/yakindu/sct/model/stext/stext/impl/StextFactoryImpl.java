@@ -81,10 +81,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.OPERATION_DEFINITION: return createOperationDefinition();
       case StextPackage.LOCAL_REACTION: return createLocalReaction();
       case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
-      case StextPackage.REACTION_PROPERTIES: return createReactionProperties();
-      case StextPackage.REACTION_PROPERTY: return createReactionProperty();
-      case StextPackage.ENTRY_POINT_SPEC: return createEntryPointSpec();
-      case StextPackage.EXIT_POINT_SPEC: return createExitPointSpec();
       case StextPackage.EVENT_SPEC: return createEventSpec();
       case StextPackage.REGULAR_EVENT_SPEC: return createRegularEventSpec();
       case StextPackage.TIME_EVENT_SPEC: return createTimeEventSpec();
@@ -102,8 +98,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.HEX_LITERAL: return createHexLiteral();
       case StextPackage.STRING_LITERAL: return createStringLiteral();
       case StextPackage.SIMPLE_SCOPE: return createSimpleScope();
-      case StextPackage.ENTRYPOINT: return createEntrypoint();
-      case StextPackage.EXITPOINT: return createExitpoint();
       case StextPackage.REACTION_TRIGGER: return createReactionTrigger();
       case StextPackage.REACTION_EFFECT: return createReactionEffect();
       case StextPackage.EVENT_RAISING_EXPRESSION: return createEventRaisingExpression();
@@ -377,50 +371,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public ReactionProperties createReactionProperties()
-  {
-    ReactionPropertiesImpl reactionProperties = new ReactionPropertiesImpl();
-    return reactionProperties;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ReactionProperty createReactionProperty()
-  {
-    ReactionPropertyImpl reactionProperty = new ReactionPropertyImpl();
-    return reactionProperty;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EntryPointSpec createEntryPointSpec()
-  {
-    EntryPointSpecImpl entryPointSpec = new EntryPointSpecImpl();
-    return entryPointSpec;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public ExitPointSpec createExitPointSpec()
-  {
-    ExitPointSpecImpl exitPointSpec = new ExitPointSpecImpl();
-    return exitPointSpec;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EventSpec createEventSpec()
   {
     EventSpecImpl eventSpec = new EventSpecImpl();
@@ -601,28 +551,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     SimpleScopeImpl simpleScope = new SimpleScopeImpl();
     return simpleScope;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Entrypoint createEntrypoint()
-  {
-    EntrypointImpl entrypoint = new EntrypointImpl();
-    return entrypoint;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Exitpoint createExitpoint()
-  {
-    ExitpointImpl exitpoint = new ExitpointImpl();
-    return exitpoint;
   }
 
   /**
