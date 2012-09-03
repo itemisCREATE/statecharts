@@ -18,15 +18,17 @@ import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.draw2d.AncestorListener;
+import org.eclipse.draw2d.CompoundBorder;
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.TextUtilities;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.editparts.ZoomManager;
 import org.eclipse.gef.tools.CellEditorLocator;
-import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.core.util.Log;
 import org.eclipse.gmf.runtime.common.core.util.Trace;
 import org.eclipse.gmf.runtime.diagram.ui.internal.DiagramUIDebugOptions;
@@ -50,6 +52,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -72,7 +75,7 @@ import de.itemis.xtext.utils.jface.viewers.context.IXtextFakeContextResourcesPro
  * 
  */
 @SuppressWarnings("restriction")
-public class XtextDirectEditManager extends DirectEditManager {
+public class XtextDirectEditManager extends DirectEditManagerEx {
 
 	/**
 	 * content assist background color
@@ -283,10 +286,17 @@ public class XtextDirectEditManager extends DirectEditManager {
 	 */
 	protected CellEditor createCellEditorOn(Composite composite) {
 
+		
+		Composite parent = new Composite(composite, SWT.None);
+		FillLayout fillLayout = new FillLayout();
+		fillLayout.marginWidth = 10;
+		parent.setLayout(fillLayout);
+		
+		
 		// if the client has overridden this class and provided their own editor
 		// type, then we should use that
 		if (editorType != null) {
-			return super.createCellEditorOn(composite);
+			return super.createCellEditorOn(parent);
 		}
 		XtextStyledTextCellEditorEx editor;
 		if (fakeProvider != null) {
@@ -664,6 +674,8 @@ public class XtextDirectEditManager extends DirectEditManager {
 			listenersAttached = true;
 		}
 	}
+	
+	
 
 	public void showFeedback() {
 		try {
@@ -672,6 +684,16 @@ public class XtextDirectEditManager extends DirectEditManager {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	/**
+	 * Overridden to enlarge the cell editor frame for a control decorator
+	 */
+	protected IFigure getCellEditorFrame() {
+		IFigure cellEditorFrame = super.getCellEditorFrame();
+		cellEditorFrame.setBorder(new CompoundBorder(new MarginBorder(
+				new Insets(0, 10, 0, 0)), BORDER_FRAME));
+		return cellEditorFrame;
 	}
 
 	@Override

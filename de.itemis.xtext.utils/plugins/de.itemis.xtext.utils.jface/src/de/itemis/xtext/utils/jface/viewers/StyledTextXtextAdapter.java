@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.bindings.keys.KeyStroke;
+import org.eclipse.jface.fieldassist.ControlDecoration;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IDocumentPartitioner;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.AnnotationModel;
@@ -11,6 +13,9 @@ import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISharedTextColors;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.PlatformUI;
@@ -83,6 +88,8 @@ public class StyledTextXtextAdapter {
 
 	private StyledText styledText;
 
+	private ControlDecoration decoration;
+
 	public StyledTextXtextAdapter(Injector injector,
 			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
@@ -149,6 +156,32 @@ public class StyledTextXtextAdapter {
 				.getService(IFocusService.class);
 		service.addFocusTracker(styledText, StyledText.class.getCanonicalName());
 
+		// add JDT Style code completion hint decoration
+		createContentAssistDecoration(styledText);
+	}
+
+	private void createContentAssistDecoration(StyledText styledText) {
+		decoration = new ControlDecoration(styledText, SWT.TOP | SWT.LEFT);
+		decoration.setShowHover(true);
+		decoration.setShowOnlyOnFocus(true);
+
+		final Image image = ImageDescriptor.createFromFile(
+				XtextStyledTextCellEditor.class,
+				"images/content_assist_cue.gif").createImage();
+		decoration.setImage(image);
+		decoration
+				.setDescriptionText("Content Assist Available (CTRL + Space)");
+		decoration.setMarginWidth(2);
+		styledText.addDisposeListener(new DisposeListener() {
+			public void widgetDisposed(DisposeEvent e) {
+				if (decoration != null) {
+					decoration.dispose();
+				}
+				if (image != null) {
+					image.dispose();
+				}
+			}
+		});
 	}
 
 	protected ValidationJob createValidationJob() {
