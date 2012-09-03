@@ -64,7 +64,7 @@ public class InjectMembersResource extends GMFResource implements
 		parseAll();
 	}
 
-	private void parseAll() {
+	protected void parseAll() {
 		parsing = true;
 		diagnostics.clear();
 		long t = System.currentTimeMillis();
@@ -110,7 +110,7 @@ public class InjectMembersResource extends GMFResource implements
 		}
 	}
 
-	private IMemberInjectionService receiveInjectionService(
+	protected IMemberInjectionService receiveInjectionService(
 			EObject currentObject) {
 		// first come first serve
 		for (IMemberInjectionService service : services) {
@@ -122,7 +122,7 @@ public class InjectMembersResource extends GMFResource implements
 				+ currentObject);
 	}
 
-	private void reparse(IMemberInjectionService service, EObject currentObject) {
+	protected void reparse(IMemberInjectionService service, EObject currentObject) {
 		service.injectMembers(currentObject);
 		registerReparseAdapter(service, currentObject);
 		diagnostics.addAll(service.getDiagnostics());
@@ -134,7 +134,7 @@ public class InjectMembersResource extends GMFResource implements
 	 * 
 	 * @param object
 	 */
-	private void registerReparseAdapter(IMemberInjectionService service,
+	protected void registerReparseAdapter(IMemberInjectionService service,
 			EObject object) {
 		Adapter existingAdapter = EcoreUtil.getExistingAdapter(object,
 				ReparseAdapter.class);
@@ -159,10 +159,10 @@ public class InjectMembersResource extends GMFResource implements
 	 * @author andreas muelder
 	 * 
 	 */
-	private final class ReparseAdapter extends AdapterImpl {
+	protected final class ReparseAdapter extends AdapterImpl {
 		public final EStructuralFeature expressionFeature;
 
-		private ReparseAdapter(EObject currentObject,
+		protected ReparseAdapter(EObject currentObject,
 				EStructuralFeature expressionFeature,
 				IMemberInjectionService service) {
 			this.expressionFeature = expressionFeature;
