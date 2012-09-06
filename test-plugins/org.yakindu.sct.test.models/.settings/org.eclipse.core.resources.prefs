@@ -1,3 +1,7 @@
 eclipse.preferences.version=1
 encoding//testmodels/AlwaysOncycle.sct=UTF-8
+encoding//testmodels/ExitOnSelfTransition.sct=UTF-8
+encoding//testmodels/GuardedEntry.sct=UTF-8
+encoding//testmodels/GuardedExit.sct=UTF-8
+encoding//testmodels/InternalEventLifeCycle.sct=UTF-8
 encoding//testmodels/SyncJoin.sct=UTF-8

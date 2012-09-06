@@ -16,9 +16,11 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({AlwaysOncycle.class, BitExpressions.class,
 		BooleanExpressions.class, CKeywords.class, Choice.class,
-		DeepHistory.class, Guard.class, IntegerExpressions.class,
-		PriorityValues.class, RaiseEvent.class, SameNameDifferentRegion.class,
-		ShallowHistory.class, SimpleHietachy.class, StateIsActive.class,
+		DeepHistory.class, ExitOnSelfTransition.class, Guard.class,
+		GuardedEntry.class, GuardedExit.class, IntegerExpressions.class,
+		InternalEventLifeCycle.class, PriorityValues.class, RaiseEvent.class,
+		SameNameDifferentRegion.class, ShallowHistory.class,
+		SimpleHietachy.class, StateIsActive.class,
 		StatechartLocalReactions.class, StringExpressions.class,
 		SyncFork.class, SyncJoin.class, ValuedEvent.class, SimpleEvent.class})
 public class AllTests {

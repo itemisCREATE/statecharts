@@ -14,6 +14,16 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 			this.value = value;
 		}
 
+		private boolean v2;
+
+		public boolean getV2() {
+			return v2;
+		}
+
+		public void setV2(boolean value) {
+			this.v2 = value;
+		}
+
 	}
 
 	private SCIDefaultImpl sCIDefault;
@@ -80,6 +90,13 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	public void setValue(int value) {
 		sCIDefault.setValue(value);
+	}
+	public boolean getV2() {
+		return sCIDefault.getV2();
+	}
+
+	public void setV2(boolean value) {
+		sCIDefault.setV2(value);
 	}
 
 	public void enter() {

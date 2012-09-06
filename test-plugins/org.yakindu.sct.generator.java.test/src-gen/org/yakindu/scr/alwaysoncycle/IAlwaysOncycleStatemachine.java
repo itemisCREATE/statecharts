@@ -8,6 +8,8 @@ public interface IAlwaysOncycleStatemachine extends IStatemachine {
 
 		public int getValue();
 		public void setValue(int value);
+		public boolean getV2();
+		public void setV2(boolean value);
 
 	}
 

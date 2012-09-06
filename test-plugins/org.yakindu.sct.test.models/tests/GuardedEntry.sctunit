@@ -1,0 +1,53 @@
+
+testgroup GuardedEntry for statechart GuardedEntry{
+	
+	test EntryNotTakenOnStatechartEnter { 
+		
+		assert active(GuardedEntry.main_region.A)
+		assert done == false
+		  
+	} 
+
+	test EntryTakenOnStatechartEnter 
+	{  
+		guard = true
+		
+		// enter 
+		assert false "sctunit does not allow modifiing variables before entering the state machine!"
+		
+		assert active(GuardedEntry.main_region.A)
+		assert done == true
+	}  
+	 
+	test EntryTakenInTransition { 
+
+		assert active(GuardedEntry.main_region.A)
+		raise e
+		cycle
+		assert active(GuardedEntry.main_region.B)
+		
+		guard = true
+		done = false
+		raise e
+		cycle
+		assert active(GuardedEntry.main_region.A)
+		assert done
+	} 
+		
+	test EntryNotTakenInTransition { 
+
+		assert active(GuardedEntry.main_region.A)
+		raise e
+		cycle
+		assert active(GuardedEntry.main_region.B)
+		
+		guard = false
+		done = false
+		raise e
+		cycle
+		assert active(GuardedEntry.main_region.A)
+		assert !done
+	} 
+		
+}
+	

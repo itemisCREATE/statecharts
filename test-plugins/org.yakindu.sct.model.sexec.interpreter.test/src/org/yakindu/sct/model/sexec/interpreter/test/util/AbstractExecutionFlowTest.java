@@ -65,6 +65,26 @@ public abstract class AbstractExecutionFlowTest {
 		return (String) variable.getValue();
 	}
 
+	protected int setInteger(String varName, int v) {
+		context().setVariableValue(varName, (Integer)v);
+		return v;
+	}
+
+	protected boolean setBoolean(String varName, boolean v) {
+		context().setVariableValue(varName, (Boolean)v);
+		return v;
+	}
+
+	protected double setReal(String varName, double v) {
+		context().setVariableValue(varName, (Double) v);
+		return v;
+	}
+
+	protected String setString(String varName, String v) {
+		context().setVariableValue(varName, v);
+		return v;
+	}
+
 	// -> Assertion methods...
 	protected void assertVarValue(String variableName, Object value) {
 		ExecutionVariable variable = context().getVariable(variableName);

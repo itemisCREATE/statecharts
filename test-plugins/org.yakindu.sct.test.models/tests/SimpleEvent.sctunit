@@ -7,5 +7,5 @@ testgroup simpleEvent for statechart SimpleEvent {
 		assert active (SimpleEvent.main_region.B) "Expected B to be active"
 		      
 	}        
-}  
+}
                 
