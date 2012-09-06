@@ -749,13 +749,8 @@ public class SequenceBuilder {
   public Statement buildValueExpression(final TimeEventSpec tes) {
     Statement _xblockexpression = null;
     {
-      StextFactory _factory = this.stext.factory();
-      final PrimitiveValueExpression pve = _factory.createPrimitiveValueExpression();
-      StextFactory _factory_1 = this.stext.factory();
-      final IntLiteral intLit = _factory_1.createIntLiteral();
-      int _value = tes.getValue();
-      intLit.setValue(_value);
-      pve.setValue(intLit);
+      Expression _value = tes.getValue();
+      final Expression pve = EcoreUtil.<Expression>copy(_value);
       Statement _switchResult = null;
       TimeUnit _unit = tes.getUnit();
       final TimeUnit _switchValue = _unit;
