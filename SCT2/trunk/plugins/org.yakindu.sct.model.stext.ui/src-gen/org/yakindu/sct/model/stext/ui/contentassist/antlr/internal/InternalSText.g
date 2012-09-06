@@ -5424,7 +5424,7 @@ rule__TimeEventSpec__Group__2__Impl
 :
 (
 { before(grammarAccess.getTimeEventSpecAccess().getUnitAssignment_2()); }
-(rule__TimeEventSpec__UnitAssignment_2)?
+(rule__TimeEventSpec__UnitAssignment_2)
 { after(grammarAccess.getTimeEventSpecAccess().getUnitAssignment_2()); }
 )
 
@@ -10149,8 +10149,8 @@ rule__TimeEventSpec__ValueAssignment_1
     }
 :
 (
-{ before(grammarAccess.getTimeEventSpecAccess().getValueINTTerminalRuleCall_1_0()); }
-	RULE_INT{ after(grammarAccess.getTimeEventSpecAccess().getValueINTTerminalRuleCall_1_0()); }
+{ before(grammarAccess.getTimeEventSpecAccess().getValueConditionalExpressionParserRuleCall_1_0()); }
+	ruleConditionalExpression{ after(grammarAccess.getTimeEventSpecAccess().getValueConditionalExpressionParserRuleCall_1_0()); }
 )
 
 ;

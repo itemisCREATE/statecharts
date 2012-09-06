@@ -156,7 +156,7 @@ public class StextTestFactory extends StextFactoryImpl {
 	}
 
 	public static TimeEventSpec _createTimeEventSpec(TimeEventType type,
-			int value, TimeUnit unit, ReactionTrigger rt) {
+			Expression value, TimeUnit unit, ReactionTrigger rt) {
 		TimeEventSpec timeTrigger = StextFactory.eINSTANCE
 				.createTimeEventSpec();
 		timeTrigger.setType(type);
@@ -189,7 +189,7 @@ public class StextTestFactory extends StextFactoryImpl {
 	}
 
 	public static LocalReaction _createTimeTriggeredReaction(State parent,
-			TimeEventType type, int value, TimeUnit unit) {
+			TimeEventType type, Expression value, TimeUnit unit) {
 		// TimeEventSpec timeTrigger =
 		// StextFactory.eINSTANCE.createTimeEventSpec();
 		// timeTrigger.setType(type);
