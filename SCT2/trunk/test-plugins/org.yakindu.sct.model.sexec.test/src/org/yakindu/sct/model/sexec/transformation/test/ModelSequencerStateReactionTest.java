@@ -278,7 +278,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Transition t = _createTransition(s, s);
 		ReactionTrigger tr1 = _createReactionTrigger(t);
-		_createTimeEventSpec(TimeEventType.AFTER, 1, TimeUnit.SECOND, tr1);
+		_createTimeEventSpec(TimeEventType.AFTER, _createValue(1), TimeUnit.SECOND, tr1);
 
 		AssignmentExpression assign = _createVariableAssignment(v1,
 				AssignmentOperator.ASSIGN, _createValue(42),
@@ -341,7 +341,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		State s = _createState("s", r);
 
 		LocalReaction timeTriggeredReaction = _createTimeTriggeredReaction(s,
-				TimeEventType.AFTER, 2, TimeUnit.MILLISECOND);
+				TimeEventType.AFTER, _createValue(2), TimeUnit.MILLISECOND);
 		AssignmentExpression assign = _createVariableAssignment(v1,
 				AssignmentOperator.ASSIGN, _createValue(42),
 				(ReactionEffect) timeTriggeredReaction.getEffect());
