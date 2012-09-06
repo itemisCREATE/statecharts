@@ -1,4 +1,5 @@
 testgroup AlwaysOncycle for statechart AlwaysOncycle {
+	
 	 test alwaysOncycleTest {
 		assert active (AlwaysOncycle.main_region.StateA)
 		while [value < 5] {
