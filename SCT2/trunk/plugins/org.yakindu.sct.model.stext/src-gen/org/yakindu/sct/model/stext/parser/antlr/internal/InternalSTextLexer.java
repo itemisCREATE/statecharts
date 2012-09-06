@@ -32,7 +32,7 @@ public class InternalSTextLexer extends Lexer {
     public static final int RULE_ANY_OTHER=13;
     public static final int T__21=21;
     public static final int T__20=20;
-    public static final int RULE_BOOL=6;
+    public static final int RULE_BOOL=5;
     public static final int T__61=61;
     public static final int EOF=-1;
     public static final int T__60=60;
@@ -52,7 +52,7 @@ public class InternalSTextLexer extends Lexer {
     public static final int T__17=17;
     public static final int T__14=14;
     public static final int T__59=59;
-    public static final int RULE_INT=5;
+    public static final int RULE_INT=6;
     public static final int T__50=50;
     public static final int T__42=42;
     public static final int T__43=43;

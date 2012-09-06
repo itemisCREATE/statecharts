@@ -53,30 +53,30 @@ public interface TimeEventSpec extends EventSpec
   void setType(TimeEventType value);
 
   /**
-   * Returns the value of the '<em><b>Value</b></em>' attribute.
+   * Returns the value of the '<em><b>Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Value</em>' attribute isn't clear,
+   * If the meaning of the '<em>Value</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' attribute.
-   * @see #setValue(int)
+   * @return the value of the '<em>Value</em>' containment reference.
+   * @see #setValue(Expression)
    * @see org.yakindu.sct.model.stext.stext.StextPackage#getTimeEventSpec_Value()
-   * @model
+   * @model containment="true"
    * @generated
    */
-  int getValue();
+  Expression getValue();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getValue <em>Value</em>}' attribute.
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getValue <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' attribute.
+   * @param value the new value of the '<em>Value</em>' containment reference.
    * @see #getValue()
    * @generated
    */
-  void setValue(int value);
+  void setValue(Expression value);
 
   /**
    * Returns the value of the '<em><b>Unit</b></em>' attribute.

@@ -537,9 +537,9 @@
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.36"/>
         </elements>
         <elements xsi:type="xtext:Assignment" feature="value" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.47"/>
         </elements>
-        <elements xsi:type="xtext:Assignment" cardinality="?" feature="unit" operator="=">
+        <elements xsi:type="xtext:Assignment" feature="unit" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.77"/>
         </elements>
       </alternatives>

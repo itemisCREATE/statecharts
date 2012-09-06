@@ -1759,19 +1759,19 @@ ruleTimeEventSpec returns [EObject current=null]
 )
 )(
 (
-		lv_value_1_0=RULE_INT
-		{
-			newLeafNode(lv_value_1_0, grammarAccess.getTimeEventSpecAccess().getValueINTTerminalRuleCall_1_0()); 
-		}
-		{
+		{ 
+	        newCompositeNode(grammarAccess.getTimeEventSpecAccess().getValueConditionalExpressionParserRuleCall_1_0()); 
+	    }
+		lv_value_1_0=ruleConditionalExpression		{
 	        if ($current==null) {
-	            $current = createModelElement(grammarAccess.getTimeEventSpecRule());
+	            $current = createModelElementForParent(grammarAccess.getTimeEventSpecRule());
 	        }
-       		setWithLastConsumed(
+       		set(
        			$current, 
        			"value",
         		lv_value_1_0, 
-        		"INT");
+        		"ConditionalExpression");
+	        afterParserOrEnumRuleCall();
 	    }
 
 )
@@ -1793,7 +1793,7 @@ ruleTimeEventSpec returns [EObject current=null]
 	    }
 
 )
-)?)
+))
 ;
 
 
