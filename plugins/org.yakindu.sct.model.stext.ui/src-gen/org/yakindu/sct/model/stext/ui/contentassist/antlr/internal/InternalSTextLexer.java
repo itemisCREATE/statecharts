@@ -32,7 +32,7 @@ public class InternalSTextLexer extends Lexer {
     public static final int RULE_ANY_OTHER=13;
     public static final int T__21=21;
     public static final int T__20=20;
-    public static final int RULE_BOOL=6;
+    public static final int RULE_BOOL=5;
     public static final int T__61=61;
     public static final int EOF=-1;
     public static final int T__60=60;
@@ -52,7 +52,7 @@ public class InternalSTextLexer extends Lexer {
     public static final int T__17=17;
     public static final int T__14=14;
     public static final int T__59=59;
-    public static final int RULE_INT=5;
+    public static final int RULE_INT=6;
     public static final int T__50=50;
     public static final int T__42=42;
     public static final int T__43=43;
@@ -2893,18 +2893,18 @@ public class InternalSTextLexer extends Lexer {
         "\171\1\uffff\1\172\1\145\1\172\1\156\1\uffff\1\145\3\uffff\1\172"+
         "\1\uffff\1\172\1\uffff\2\172\4\uffff";
     static final String DFA16_acceptS =
-        "\22\uffff\1\32\6\uffff\1\52\1\uffff\1\57\1\60\1\61\1\62\1\63\1"+
-        "\64\1\65\1\uffff\1\73\5\uffff\1\111\2\uffff\1\116\1\117\1\uffff"+
-        "\1\111\14\uffff\1\37\1\10\1\11\1\27\1\12\1\114\1\115\1\30\1\13\1"+
-        "\31\1\14\1\25\1\15\1\26\1\uffff\1\34\1\33\1\uffff\1\36\1\35\1\20"+
-        "\1\75\1\101\1\21\1\77\1\22\1\74\1\100\1\32\1\40\1\76\1\41\6\uffff"+
-        "\1\52\1\uffff\1\57\1\60\1\61\1\62\1\63\1\64\1\65\2\uffff\1\73\3"+
-        "\uffff\1\107\1\112\1\uffff\1\110\1\113\1\116\10\uffff\1\4\6\uffff"+
-        "\1\16\1\23\1\17\1\24\1\42\1\43\1\44\1\uffff\1\106\1\uffff\1\47\20"+
-        "\uffff\1\5\7\uffff\1\55\6\uffff\1\2\3\uffff\1\67\17\uffff\1\7\1"+
-        "\54\1\66\1\uffff\1\3\4\uffff\1\6\5\uffff\1\72\7\uffff\1\71\1\103"+
-        "\4\uffff\1\1\4\uffff\1\70\1\uffff\1\45\1\46\1\102\1\uffff\1\105"+
-        "\1\uffff\1\53\2\uffff\1\104\1\51\1\56\1\50";
+        "\22\uffff\1\32\6\uffff\1\52\1\uffff\1\57\1\60\1\61\1\62\1\63\1\64"+
+        "\1\65\1\uffff\1\73\5\uffff\1\111\2\uffff\1\116\1\117\1\uffff\1\111"+
+        "\14\uffff\1\37\1\10\1\11\1\27\1\12\1\114\1\115\1\30\1\13\1\31\1"+
+        "\14\1\25\1\15\1\26\1\uffff\1\34\1\33\1\uffff\1\36\1\35\1\20\1\75"+
+        "\1\101\1\21\1\77\1\22\1\74\1\100\1\32\1\40\1\76\1\41\6\uffff\1\52"+
+        "\1\uffff\1\57\1\60\1\61\1\62\1\63\1\64\1\65\2\uffff\1\73\3\uffff"+
+        "\1\107\1\112\1\uffff\1\110\1\113\1\116\10\uffff\1\4\6\uffff\1\16"+
+        "\1\23\1\17\1\24\1\42\1\43\1\44\1\uffff\1\106\1\uffff\1\47\20\uffff"+
+        "\1\5\7\uffff\1\55\6\uffff\1\2\3\uffff\1\67\17\uffff\1\7\1\54\1\66"+
+        "\1\uffff\1\3\4\uffff\1\6\5\uffff\1\72\7\uffff\1\71\1\103\4\uffff"+
+        "\1\1\4\uffff\1\70\1\uffff\1\45\1\46\1\102\1\uffff\1\105\1\uffff"+
+        "\1\53\2\uffff\1\104\1\51\1\56\1\50";
     static final String DFA16_specialS =
         "\1\2\51\uffff\1\1\1\0\u00c9\uffff}>";
     static final String[] DFA16_transitionS = {
