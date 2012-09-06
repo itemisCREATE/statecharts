@@ -65,6 +65,11 @@ public class «getStatemachineClassName()» implements «getStatemachineInterfaceNa
 				«interface.getInterfaceIdentifier()».clearEvents();
 			«ENDIF-»
 		«ENDFOREACH-»
+		«FOREACH this.getInternalScope() AS internal-»
+			«FOREACH internal.events AS event-»
+				«event.getEventIdentifier()» = false;
+			«ENDFOREACH»
+		«ENDFOREACH»
 		
 		«IF isTimedStatemachine()-»
 		for (int i=0; i<timeEvents.length; i++) {
