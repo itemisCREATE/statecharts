@@ -763,7 +763,7 @@ public interface StextPackage extends EPackage
   int TIME_EVENT_SPEC__TYPE = EVENT_SPEC_FEATURE_COUNT + 0;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' attribute.
+   * The feature id for the '<em><b>Value</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -2354,15 +2354,15 @@ public interface StextPackage extends EPackage
   EAttribute getTimeEventSpec_Type();
 
   /**
-   * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getValue <em>Value</em>}'.
+   * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getValue <em>Value</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Value</em>'.
+   * @return the meta object for the containment reference '<em>Value</em>'.
    * @see org.yakindu.sct.model.stext.stext.TimeEventSpec#getValue()
    * @see #getTimeEventSpec()
    * @generated
    */
-  EAttribute getTimeEventSpec_Value();
+  EReference getTimeEventSpec_Value();
 
   /**
    * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.TimeEventSpec#getUnit <em>Unit</em>}'.
@@ -3686,12 +3686,12 @@ public interface StextPackage extends EPackage
     EAttribute TIME_EVENT_SPEC__TYPE = eINSTANCE.getTimeEventSpec_Type();
 
     /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+     * The meta object literal for the '<em><b>Value</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute TIME_EVENT_SPEC__VALUE = eINSTANCE.getTimeEventSpec_Value();
+    EReference TIME_EVENT_SPEC__VALUE = eINSTANCE.getTimeEventSpec_Value();
 
     /**
      * The meta object literal for the '<em><b>Unit</b></em>' attribute feature.

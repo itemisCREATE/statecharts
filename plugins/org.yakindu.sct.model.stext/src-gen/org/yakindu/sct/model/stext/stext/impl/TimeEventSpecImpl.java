@@ -3,11 +3,14 @@
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
@@ -51,24 +54,14 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
   protected TimeEventType type = TYPE_EDEFAULT;
 
   /**
-   * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+   * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getValue()
    * @generated
    * @ordered
    */
-  protected static final int VALUE_EDEFAULT = 0;
-
-  /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getValue()
-   * @generated
-   * @ordered
-   */
-  protected int value = VALUE_EDEFAULT;
+  protected Expression value;
 
   /**
    * The default value of the '{@link #getUnit() <em>Unit</em>}' attribute.
@@ -139,7 +132,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
    * <!-- end-user-doc -->
    * @generated
    */
-  public int getValue()
+  public Expression getValue()
   {
     return value;
   }
@@ -149,12 +142,37 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setValue(int newValue)
+  public NotificationChain basicSetValue(Expression newValue, NotificationChain msgs)
   {
-    int oldValue = value;
+    Expression oldValue = value;
     value = newValue;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TIME_EVENT_SPEC__VALUE, oldValue, value));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.TIME_EVENT_SPEC__VALUE, oldValue, newValue);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setValue(Expression newValue)
+  {
+    if (newValue != value)
+    {
+      NotificationChain msgs = null;
+      if (value != null)
+        msgs = ((InternalEObject)value).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.TIME_EVENT_SPEC__VALUE, null, msgs);
+      if (newValue != null)
+        msgs = ((InternalEObject)newValue).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.TIME_EVENT_SPEC__VALUE, null, msgs);
+      msgs = basicSetValue(newValue, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TIME_EVENT_SPEC__VALUE, newValue, newValue));
   }
 
   /**
@@ -178,6 +196,22 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
     unit = newUnit == null ? UNIT_EDEFAULT : newUnit;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TIME_EVENT_SPEC__UNIT, oldUnit, unit));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case StextPackage.TIME_EVENT_SPEC__VALUE:
+        return basicSetValue(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -214,7 +248,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
         setType((TimeEventType)newValue);
         return;
       case StextPackage.TIME_EVENT_SPEC__VALUE:
-        setValue((Integer)newValue);
+        setValue((Expression)newValue);
         return;
       case StextPackage.TIME_EVENT_SPEC__UNIT:
         setUnit((TimeUnit)newValue);
@@ -237,7 +271,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
         setType(TYPE_EDEFAULT);
         return;
       case StextPackage.TIME_EVENT_SPEC__VALUE:
-        setValue(VALUE_EDEFAULT);
+        setValue((Expression)null);
         return;
       case StextPackage.TIME_EVENT_SPEC__UNIT:
         setUnit(UNIT_EDEFAULT);
@@ -259,7 +293,7 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
       case StextPackage.TIME_EVENT_SPEC__TYPE:
         return type != TYPE_EDEFAULT;
       case StextPackage.TIME_EVENT_SPEC__VALUE:
-        return value != VALUE_EDEFAULT;
+        return value != null;
       case StextPackage.TIME_EVENT_SPEC__UNIT:
         return unit != UNIT_EDEFAULT;
     }
@@ -279,8 +313,6 @@ public class TimeEventSpecImpl extends EventSpecImpl implements TimeEventSpec
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (type: ");
     result.append(type);
-    result.append(", value: ");
-    result.append(value);
     result.append(", unit: ");
     result.append(unit);
     result.append(')');

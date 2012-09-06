@@ -101,7 +101,7 @@
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec/type"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec/unit"/>
     </genClasses>
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//BuiltinEventSpec"/>

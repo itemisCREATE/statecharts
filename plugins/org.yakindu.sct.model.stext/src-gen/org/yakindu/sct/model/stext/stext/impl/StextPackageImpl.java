@@ -913,9 +913,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getTimeEventSpec_Value()
+  public EReference getTimeEventSpec_Value()
   {
-    return (EAttribute)timeEventSpecEClass.getEStructuralFeatures().get(1);
+    return (EReference)timeEventSpecEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -1957,7 +1957,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     timeEventSpecEClass = createEClass(TIME_EVENT_SPEC);
     createEAttribute(timeEventSpecEClass, TIME_EVENT_SPEC__TYPE);
-    createEAttribute(timeEventSpecEClass, TIME_EVENT_SPEC__VALUE);
+    createEReference(timeEventSpecEClass, TIME_EVENT_SPEC__VALUE);
     createEAttribute(timeEventSpecEClass, TIME_EVENT_SPEC__UNIT);
 
     builtinEventSpecEClass = createEClass(BUILTIN_EVENT_SPEC);
@@ -2231,7 +2231,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     initEClass(timeEventSpecEClass, TimeEventSpec.class, "TimeEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getTimeEventSpec_Type(), this.getTimeEventType(), "type", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getTimeEventSpec_Value(), ecorePackage.getEInt(), "value", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTimeEventSpec_Value(), this.getExpression(), null, "value", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTimeEventSpec_Unit(), this.getTimeUnit(), "unit", null, 0, 1, TimeEventSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(builtinEventSpecEClass, BuiltinEventSpec.class, "BuiltinEventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
