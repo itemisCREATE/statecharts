@@ -409,10 +409,11 @@ class SequenceBuilder {
 	
 	
 	def Statement buildValueExpression(TimeEventSpec tes) {
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-		val IntLiteral intLit = stext.factory.createIntLiteral
-		intLit.value = tes.value
-		pve.value = intLit
+//		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
+//		val IntLiteral intLit = stext.factory.createIntLiteral
+//		intLit.value = tes.value
+//		pve.value = intLit
+		val pve = tes.value.copy
 	
 		switch (tes.unit) {
 			case TimeUnit::MILLISECOND : pve
