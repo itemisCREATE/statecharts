@@ -109,6 +109,11 @@ class StatemachineC {
 				«event.access» = bool_false; 
 				«ENDFOR»
 			«ENDIF»
+			«IF timed»
+				«FOR event : timeEventScope.events»
+				«event.access» = bool_false; 
+				«ENDFOR»
+			«ENDIF»
 		}
 	'''
 	
