@@ -1,0 +1,29 @@
+
+testgroup GuardedExit for statechart GuardedExit {
+		 
+	test ExitTaken { 
+
+		assert active(GuardedExit.main_region.A)
+		assert ! guard
+		raise e
+		
+		cycle
+
+		assert active(GuardedExit.main_region.B)
+		assert ! done 
+	} 
+		
+	test ExitNotTaken { 
+
+		assert active(GuardedExit.main_region.A)
+		guard = true
+		raise e
+		
+		cycle
+
+		assert active(GuardedExit.main_region.B)
+		assert done 
+	} 
+		
+}
+	
