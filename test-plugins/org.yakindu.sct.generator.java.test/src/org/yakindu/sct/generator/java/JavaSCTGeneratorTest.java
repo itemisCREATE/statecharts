@@ -33,6 +33,7 @@ import static util.TestModels.STRING_EXPRESSIONS;
 import static util.TestModels.SYNC_FORK;
 import static util.TestModels.SYNC_JOIN;
 import static util.TestModels.VALUED_EVENTS;
+import static util.TestModels.PARENTHESIS;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
@@ -80,22 +81,22 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	}
 
-	@Test 
+	@Test
 	public void testBitExpressionsModel() throws Exception {
 		Statechart statechart = models
-				.loadStatechartFromResource(BIT_EXPRESSIONS);  
+				.loadStatechartFromResource(BIT_EXPRESSIONS);
 		failOnError(generateAndCompile(statechart));
-		
+
 	}
-	
-	@Test 
+
+	@Test
 	public void testBooleanExpressionsModel() throws Exception {
 		Statechart statechart = models
-				.loadStatechartFromResource(BOOLEAN_EXPRESSIONS);  
+				.loadStatechartFromResource(BOOLEAN_EXPRESSIONS);
 		failOnError(generateAndCompile(statechart));
-		
+
 	}
-	
+
 	@Test
 	public void testChoiceModel() throws Exception {
 		Statechart statechart = models.loadStatechartFromResource(CHOICE);
@@ -107,7 +108,7 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	public void testCKeywordsModel() throws Exception {
 		Statechart statechart = models.loadStatechartFromResource(C_KEYWORDS_M);
 		failOnError(generateAndCompile(statechart));
-		
+
 	}
 
 	@Test
@@ -133,13 +134,21 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	@Test
 	public void testIntegerExpressionsModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(INTEGER_EXPRESSIONS);
+		Statechart statechart = models
+				.loadStatechartFromResource(INTEGER_EXPRESSIONS);
 		failOnError(generateAndCompile(statechart));
 	}
 
 	@Test
 	public void testJavaKeywordsModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(JAVA_KEYWORDS_M);
+		Statechart statechart = models
+				.loadStatechartFromResource(JAVA_KEYWORDS_M);
+		failOnError(generateAndCompile(statechart));
+	}
+
+	@Test
+	public void testParenthesisModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(PARENTHESIS);
 		failOnError(generateAndCompile(statechart));
 	}
 
@@ -152,8 +161,7 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	@Test
 	public void testRaiseEventModel() throws Exception {
-		Statechart statechart = models
-				.loadStatechartFromResource(RAISE_EVENTS);
+		Statechart statechart = models.loadStatechartFromResource(RAISE_EVENTS);
 		failOnError(generateAndCompile(statechart));
 	}
 
@@ -184,7 +192,6 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 		failOnError(generateAndCompile(statechart));
 	}
 
-
 	@Test
 	public void testSimpleHierachyModel() throws Exception {
 		Statechart statechart = models
@@ -194,10 +201,10 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	@Test
 	public void testStatechartLocalReactionsModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(STATECHART_LOCAL_REACTIONS);
+		Statechart statechart = models
+				.loadStatechartFromResource(STATECHART_LOCAL_REACTIONS);
 		failOnError(generateAndCompile(statechart));
 	}
-
 
 	@Test
 	public void testStateActiveModel() throws Exception {
@@ -205,12 +212,13 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 		failOnError(generateAndCompile(statechart));
 
 	}
- 
+
 	@Test
 	public void testStringExpressionsModel() throws Exception {
-		Statechart statechart = models.loadStatechartFromResource(STRING_EXPRESSIONS);
+		Statechart statechart = models
+				.loadStatechartFromResource(STRING_EXPRESSIONS);
 		failOnError(generateAndCompile(statechart));
-		
+
 	}
 
 	@Test
