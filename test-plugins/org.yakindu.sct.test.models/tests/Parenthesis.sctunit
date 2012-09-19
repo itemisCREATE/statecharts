@@ -1,0 +1,8 @@
+testgroup Parenthesis for statechart Parenthesis {
+	
+	test simple {
+		
+		assert active (Parenthesis.mainRegion.A)
+		assert erg == 8
+	}
+}
