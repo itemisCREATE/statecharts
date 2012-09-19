@@ -44,6 +44,7 @@ public class TestModels {
 	public static final String GUARD = "Guard.sct";
 	public static final String INTEGER_EXPRESSIONS = "IntegerExpressions.sct";
 	public static final String JAVA_KEYWORDS_M = "JavaKeywords.sct";
+	public static final String PARENTHESIS = "Parenthesis.sct";
 	public static final String PRIORITY_VALUES = "PriorityValues.sct";
 	public static final String RAISE_EVENTS = "RaiseEvent.sct";
 	public static final String REAL_EXPRESSIONS = "RealExpressions.sct";
@@ -164,6 +165,18 @@ public class TestModels {
 		return loadExecutionFlowFromResource(JAVA_KEYWORDS_M);
 	}
 
+	
+	/**
+	 * <img src="../../images/Parenthesis.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createParenthesisModel() throws IOException {
+		return loadExecutionFlowFromResource(PARENTHESIS);
+	}
+	
+		
 	/**
 	 * <img src="../../images/PriorityValues.png" /> <br />
 	 * 
