@@ -88,6 +88,19 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+	
+	statechart Parenthesis {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	
 	statechart PriorityValues {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -99,6 +112,7 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+	
 	statechart ShallowHistory {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
