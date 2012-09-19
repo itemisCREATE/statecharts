@@ -18,8 +18,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		BooleanExpressions.class, CKeywords.class, Choice.class,
 		DeepHistory.class, ExitOnSelfTransition.class, Guard.class,
 		GuardedEntry.class, GuardedExit.class, IntegerExpressions.class,
-		InternalEventLifeCycle.class, PriorityValues.class, RaiseEvent.class,
-		SameNameDifferentRegion.class, ShallowHistory.class,
+		InternalEventLifeCycle.class, Parenthesis.class, PriorityValues.class,
+		RaiseEvent.class, SameNameDifferentRegion.class, ShallowHistory.class,
 		SimpleHietachy.class, StateIsActive.class,
 		StatechartLocalReactions.class, StringExpressions.class,
 		SyncFork.class, SyncJoin.class, ValuedEvent.class, SimpleEvent.class})
