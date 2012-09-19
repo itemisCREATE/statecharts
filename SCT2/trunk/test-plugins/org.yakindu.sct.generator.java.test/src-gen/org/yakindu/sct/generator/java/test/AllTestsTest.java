@@ -19,7 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		DeepHistoryTest.class, ExitOnSelfTransitionTest.class, GuardTest.class,
 		GuardedEntryTest.class, GuardedExitTest.class,
 		IntegerExpressionsTest.class, InternalEventLifeCycleTest.class,
-		PriorityValuesTest.class, RaiseEventTest.class,
+		ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
 		SameNameDifferentRegionTest.class, ShallowHistoryTest.class,
 		SimpleHietachyTest.class, StateIsActiveTest.class,
 		StatechartLocalReactionsTest.class, StringExpressionsTest.class,

@@ -5,10 +5,10 @@ testsuite AllTests {
 	//FeatureCalls,
 	Guard, 
 	GuardedEntry,
-	GuardedExit,
+	GuardedExit, 
 	IntegerExpressions,
 	InternalEventLifeCycle,
-	PriorityValues , RaiseEvent , SameNameDifferentRegion , ShallowHistory ,
+	Parenthesis, PriorityValues , RaiseEvent , SameNameDifferentRegion , ShallowHistory ,
 	SimpleHietachy , StateIsActive , StatechartLocalReactions , StringExpressions, SyncFork ,
 	SyncJoin , ValuedEvent , simpleEvent 
 } 
