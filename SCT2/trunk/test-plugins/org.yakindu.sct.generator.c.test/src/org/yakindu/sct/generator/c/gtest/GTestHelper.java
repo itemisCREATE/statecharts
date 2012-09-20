@@ -156,7 +156,7 @@ public class GTestHelper {
 	}
 
 	protected List<String> createCommand() {
-		//String gTestDirectory = getGTestDirectory();
+		String gTestDirectory = getGTestDirectory();
 
 		List<String> includes = new ArrayList<String>();
 		getIncludes(includes);
@@ -168,11 +168,11 @@ public class GTestHelper {
 		command.add(getCompilerCommand());
 		command.add("-o");
 		command.add(getFileName(getTestProgram()));
-		//command.add("-I" + gTestDirectory + "/include");
+		if (gTestDirectory != null) command.add("-I" + gTestDirectory + "/include");
 		for (String include : includes) {
 			command.add("-I" + include);
 		}
-		//command.add("-L" + gTestDirectory);
+		if (gTestDirectory != null) command.add("-L" + gTestDirectory);
 		for (String sourceFile : sourceFiles) {
 			command.add(sourceFile);
 		}
@@ -190,16 +190,16 @@ public class GTestHelper {
 		return "gcc";
 	}
 
-//	/**
-//	 * @return
-//	 */
-//	private String getGTestDirectory() {
-//		String gTestDirectory = System.getenv("GTEST_DIR");
+	/**
+	 * @return
+	 */
+	private String getGTestDirectory() {
+		String gTestDirectory = System.getenv("GTEST_DIR");
 //		if (gTestDirectory == null) {
 //			throw new RuntimeException("GTEST_DIR environment variable not set");
 //		}
-//		return gTestDirectory;
-//	}
+		return gTestDirectory;
+	}
 
 	protected String getFileName(String path) {
 		return new Path(path).lastSegment();

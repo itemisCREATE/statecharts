@@ -105,6 +105,8 @@ public class GTestRunner extends Runner {
 		while ((count = reader.read(buffer)) != -1) {
 			sb.append(buffer, 0, count);
 		}
+		reader.close();
+		is.close();
 		return sb;
 	}
 
