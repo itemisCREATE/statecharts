@@ -1,0 +1,23 @@
+Executing the C tests.
+
+Preconditions:
+
+In order to run the C test the google test framework (gtest) must be installed.
+
+To locate the required gtest headers and libraries the environment variable 'GTEST_DIR' is used. 
+This directory has to contain the 'gtest' and 'gtest_main' libs as well as the folder 'includes' 
+that has to contain the required header files.
+
+If no environment variable is set then the test try to find the headers at the default systems header and library locations.
+
+Please consult the gtest documentation for installation and build instructions (cmake based build seems to fit best).
+
+
+
+Running the tests:
+
+The C tests are wrapped by Junit tests. Simply run these as Junit-Plugin tests and make sure that the PermGenSpace is big enough ( -XX:MaxPermSize=256m ).
+
+Running as plugin tests is necessary since several resources required for the test are loaded from the plugin bundle.
+
+  
