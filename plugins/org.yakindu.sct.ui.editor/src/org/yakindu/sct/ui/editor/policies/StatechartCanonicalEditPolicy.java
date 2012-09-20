@@ -12,6 +12,8 @@ package org.yakindu.sct.ui.editor.policies;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
@@ -19,6 +21,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
+import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
 
 /**
  * 
@@ -39,13 +42,20 @@ public class StatechartCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	@Override
 	public IGraphicalEditPart getHost() {
-		return (IGraphicalEditPart) super.getHost
-		();
+		return (IGraphicalEditPart) super.getHost();
+	}
+	
+	@Override
+	protected String getFactoryHint(IAdaptable elementAdapter) {
+		EObject modelElement = (EObject) elementAdapter
+				.getAdapter(EObject.class);
+		String factoryHint = SemanticHintUtil.getSemanticHint(modelElement);
+		return factoryHint;
 	}
 
 	@Override
 	protected boolean shouldDeleteView(View view) {
-		//#Bug 349119 
+		// #Bug 349119
 		if (ViewType.NOTE.equals(view.getType())
 				|| ViewType.NOTEATTACHMENT.equals(view.getType())
 				|| ViewType.TEXT.equals(view.getType())) {
