@@ -17,7 +17,7 @@ testgroup GuardedEntry for statechart GuardedEntry{
 		
 		assert active(GuardedEntry.main_region.A)
 		assert done == true
-	}  
+	}   
 	 
 	test EntryTakenInTransition { 
 
