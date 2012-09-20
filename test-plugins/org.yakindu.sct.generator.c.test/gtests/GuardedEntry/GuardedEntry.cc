@@ -23,7 +23,7 @@ TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	guardedEntry_enter(&handle);
-	guardedEntryIface_set_guard(true);
+	guardedEntryIface_set_guard(&handle, true);
 	EXPECT_TRUE(false);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle) == true);
@@ -36,8 +36,8 @@ TEST(StatemachineTest, EntryTakenInTransition) {
 	guardedEntryIface_raise_e(&handle);
 	guardedEntry_runCycle(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_B));
-	guardedEntryIface_set_guard(true);
-	guardedEntryIface_set_done(false);
+	guardedEntryIface_set_guard(&handle, true);
+	guardedEntryIface_set_done(&handle, false);
 	guardedEntryIface_raise_e(&handle);
 	guardedEntry_runCycle(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
@@ -51,8 +51,8 @@ TEST(StatemachineTest, EntryNotTakenInTransition) {
 	guardedEntryIface_raise_e(&handle);
 	guardedEntry_runCycle(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_B));
-	guardedEntryIface_set_guard(false);
-	guardedEntryIface_set_done(false);
+	guardedEntryIface_set_guard(&handle, false);
+	guardedEntryIface_set_done(&handle, false);
 	guardedEntryIface_raise_e(&handle);
 	guardedEntry_runCycle(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));

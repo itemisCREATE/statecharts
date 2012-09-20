@@ -28,7 +28,7 @@ TEST(StatemachineTest, ExitNotTaken) {
 	guardedExit_init(&handle);
 	guardedExit_enter(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_A));
-	guardedExitIface_set_guard(true);
+	guardedExitIface_set_guard(&handle, true);
 	guardedExitIface_raise_e(&handle);
 	guardedExit_runCycle(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_B));
