@@ -1,4 +1,4 @@
-
+ 
 testgroup GuardedExit for statechart GuardedExit {
 		 
 	test ExitTaken { 
