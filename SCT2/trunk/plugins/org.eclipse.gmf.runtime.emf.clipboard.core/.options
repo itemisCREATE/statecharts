@@ -1,0 +1,14 @@
+# Debugging options for the org.eclipse.gmf.runtime.emf.clipboard.core plug-in
+
+# Turn on general debugging for the org.eclipse.gmf.runtime.emf.clipboard.core plug-in
+org.eclipse.gmf.runtime.emf.clipboard.core/debug=true
+
+# Trace when exceptions are caught
+org.eclipse.gmf.runtime.emf.clipboard.core/debug/exceptions/catching=false
+# Trace when exceptions are thrown
+org.eclipse.gmf.runtime.emf.clipboard.core/debug/exceptions/throwing=false
+
+# Trace when methods are entered
+org.eclipse.gmf.runtime.emf.clipboard.core/debug/methods/entering=false
+# Trace when methods are exited
+org.eclipse.gmf.runtime.emf.clipboard.core/debug/methods/exiting=false
