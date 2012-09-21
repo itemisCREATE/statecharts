@@ -22,7 +22,7 @@
 				<executions>
 					<executions>
 					  <execution>
-					    <id>some-id</id>
+					    <id>source-feature</id>
 					    <phase>none</phase>
 					  </execution>
 					</executions> 
