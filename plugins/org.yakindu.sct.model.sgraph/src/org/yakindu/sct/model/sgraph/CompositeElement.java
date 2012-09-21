@@ -50,7 +50,7 @@ public interface CompositeElement extends EObject {
 	 * @return the value of the '<em>Regions</em>' containment reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getCompositeElement_Regions()
 	 * @see org.yakindu.sct.model.sgraph.Region#getComposite
-	 * @model opposite="composite" containment="true"
+	 * @model opposite="composite" containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<Region> getRegions();

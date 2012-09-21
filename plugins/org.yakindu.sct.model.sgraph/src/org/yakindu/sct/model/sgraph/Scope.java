@@ -50,7 +50,7 @@ public interface Scope extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Declarations</em>' containment reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getScope_Declarations()
-	 * @model containment="true"
+	 * @model containment="true" resolveProxies="true"
 	 * @generated
 	 */
 	EList<Declaration> getDeclarations();

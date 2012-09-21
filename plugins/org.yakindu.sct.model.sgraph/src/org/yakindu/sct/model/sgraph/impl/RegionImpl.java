@@ -106,7 +106,7 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	 */
 	public EList<Vertex> getVertices() {
 		if (vertices == null) {
-			vertices = new EObjectContainmentWithInverseEList<Vertex>(Vertex.class, this, SGraphPackage.REGION__VERTICES, SGraphPackage.VERTEX__PARENT_REGION);
+			vertices = new EObjectContainmentWithInverseEList.Resolving<Vertex>(Vertex.class, this, SGraphPackage.REGION__VERTICES, SGraphPackage.VERTEX__PARENT_REGION);
 		}
 		return vertices;
 	}
@@ -140,6 +140,16 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	public CompositeElement getComposite() {
 		if (eContainerFeatureID() != SGraphPackage.REGION__COMPOSITE) return null;
 		return (CompositeElement)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public CompositeElement basicGetComposite() {
+		if (eContainerFeatureID() != SGraphPackage.REGION__COMPOSITE) return null;
+		return (CompositeElement)eInternalContainer();
 	}
 
 	/**
@@ -235,7 +245,8 @@ public class RegionImpl extends NamedElementImpl implements Region {
 			case SGraphPackage.REGION__PRIORITY:
 				return getPriority();
 			case SGraphPackage.REGION__COMPOSITE:
-				return getComposite();
+				if (resolve) return getComposite();
+				return basicGetComposite();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -297,7 +308,7 @@ public class RegionImpl extends NamedElementImpl implements Region {
 			case SGraphPackage.REGION__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
 			case SGraphPackage.REGION__COMPOSITE:
-				return getComposite() != null;
+				return basicGetComposite() != null;
 		}
 		return super.eIsSet(featureID);
 	}
