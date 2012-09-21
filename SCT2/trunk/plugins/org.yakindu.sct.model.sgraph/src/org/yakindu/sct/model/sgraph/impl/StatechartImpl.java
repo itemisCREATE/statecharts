@@ -176,7 +176,7 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 	 */
 	public EList<Scope> getScopes() {
 		if (scopes == null) {
-			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, SGraphPackage.STATECHART__SCOPES);
+			scopes = new EObjectContainmentEList.Resolving<Scope>(Scope.class, this, SGraphPackage.STATECHART__SCOPES);
 		}
 		return scopes;
 	}
@@ -209,7 +209,7 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 	 */
 	public EList<Region> getRegions() {
 		if (regions == null) {
-			regions = new EObjectContainmentWithInverseEList<Region>(Region.class, this, SGraphPackage.STATECHART__REGIONS, SGraphPackage.REGION__COMPOSITE);
+			regions = new EObjectContainmentWithInverseEList.Resolving<Region>(Region.class, this, SGraphPackage.STATECHART__REGIONS, SGraphPackage.REGION__COMPOSITE);
 		}
 		return regions;
 	}

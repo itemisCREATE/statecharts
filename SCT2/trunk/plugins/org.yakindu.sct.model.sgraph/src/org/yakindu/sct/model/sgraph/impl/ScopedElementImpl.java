@@ -103,7 +103,7 @@ public abstract class ScopedElementImpl extends EObjectImpl implements ScopedEle
 	 */
 	public EList<Scope> getScopes() {
 		if (scopes == null) {
-			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, SGraphPackage.SCOPED_ELEMENT__SCOPES);
+			scopes = new EObjectContainmentEList.Resolving<Scope>(Scope.class, this, SGraphPackage.SCOPED_ELEMENT__SCOPES);
 		}
 		return scopes;
 	}

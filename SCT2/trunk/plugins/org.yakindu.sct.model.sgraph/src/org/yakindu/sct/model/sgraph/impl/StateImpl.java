@@ -278,7 +278,7 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	 */
 	public EList<Scope> getScopes() {
 		if (scopes == null) {
-			scopes = new EObjectContainmentEList<Scope>(Scope.class, this, SGraphPackage.STATE__SCOPES);
+			scopes = new EObjectContainmentEList.Resolving<Scope>(Scope.class, this, SGraphPackage.STATE__SCOPES);
 		}
 		return scopes;
 	}
@@ -331,6 +331,16 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Region basicGetParentRegion() {
+		if (eContainerFeatureID() != SGraphPackage.STATE__PARENT_REGION) return null;
+		return (Region)eInternalContainer();
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -377,7 +387,7 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	 */
 	public EList<Transition> getOutgoingTransitions() {
 		if (outgoingTransitions == null) {
-			outgoingTransitions = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, SGraphPackage.STATE__OUTGOING_TRANSITIONS, SGraphPackage.TRANSITION__SOURCE);
+			outgoingTransitions = new EObjectContainmentWithInverseEList.Resolving<Transition>(Transition.class, this, SGraphPackage.STATE__OUTGOING_TRANSITIONS, SGraphPackage.TRANSITION__SOURCE);
 		}
 		return outgoingTransitions;
 	}
@@ -388,7 +398,7 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	 */
 	public EList<Region> getRegions() {
 		if (regions == null) {
-			regions = new EObjectContainmentWithInverseEList<Region>(Region.class, this, SGraphPackage.STATE__REGIONS, SGraphPackage.REGION__COMPOSITE);
+			regions = new EObjectContainmentWithInverseEList.Resolving<Region>(Region.class, this, SGraphPackage.STATE__REGIONS, SGraphPackage.REGION__COMPOSITE);
 		}
 		return regions;
 	}
@@ -589,7 +599,8 @@ public class StateImpl extends SpecificationElementImpl implements State {
 			case SGraphPackage.STATE__NAME:
 				return getName();
 			case SGraphPackage.STATE__PARENT_REGION:
-				return getParentRegion();
+				if (resolve) return getParentRegion();
+				return basicGetParentRegion();
 			case SGraphPackage.STATE__INCOMING_TRANSITIONS:
 				return getIncomingTransitions();
 			case SGraphPackage.STATE__OUTGOING_TRANSITIONS:
@@ -714,7 +725,7 @@ public class StateImpl extends SpecificationElementImpl implements State {
 			case SGraphPackage.STATE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SGraphPackage.STATE__PARENT_REGION:
-				return getParentRegion() != null;
+				return basicGetParentRegion() != null;
 			case SGraphPackage.STATE__INCOMING_TRANSITIONS:
 				return incomingTransitions != null && !incomingTransitions.isEmpty();
 			case SGraphPackage.STATE__OUTGOING_TRANSITIONS:

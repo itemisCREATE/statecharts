@@ -81,7 +81,7 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 */
 	public EList<Declaration> getDeclarations() {
 		if (declarations == null) {
-			declarations = new EObjectContainmentEList<Declaration>(Declaration.class, this, SGraphPackage.SCOPE__DECLARATIONS);
+			declarations = new EObjectContainmentEList.Resolving<Declaration>(Declaration.class, this, SGraphPackage.SCOPE__DECLARATIONS);
 		}
 		return declarations;
 	}

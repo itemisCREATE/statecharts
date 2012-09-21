@@ -99,7 +99,7 @@ public interface Vertex extends NamedElement {
 	 * @return the value of the '<em>Outgoing Transitions</em>' containment reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getVertex_OutgoingTransitions()
 	 * @see org.yakindu.sct.model.sgraph.Transition#getSource
-	 * @model opposite="source" containment="true" ordered="false"
+	 * @model opposite="source" containment="true" resolveProxies="true" ordered="false"
 	 * @generated
 	 */
 	EList<Transition> getOutgoingTransitions();

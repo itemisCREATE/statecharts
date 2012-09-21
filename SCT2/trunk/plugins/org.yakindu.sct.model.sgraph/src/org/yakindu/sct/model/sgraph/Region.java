@@ -52,7 +52,7 @@ public interface Region extends NamedElement {
 	 * @return the value of the '<em>Vertices</em>' containment reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getRegion_Vertices()
 	 * @see org.yakindu.sct.model.sgraph.Vertex#getParentRegion
-	 * @model opposite="parentRegion" containment="true" ordered="false"
+	 * @model opposite="parentRegion" containment="true" resolveProxies="true" ordered="false"
 	 * @generated
 	 */
 	EList<Vertex> getVertices();

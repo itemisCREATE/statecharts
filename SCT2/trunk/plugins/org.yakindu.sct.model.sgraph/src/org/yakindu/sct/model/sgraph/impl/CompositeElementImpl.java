@@ -80,7 +80,7 @@ public abstract class CompositeElementImpl extends EObjectImpl implements Compos
 	 */
 	public EList<Region> getRegions() {
 		if (regions == null) {
-			regions = new EObjectContainmentWithInverseEList<Region>(Region.class, this, SGraphPackage.COMPOSITE_ELEMENT__REGIONS, SGraphPackage.REGION__COMPOSITE);
+			regions = new EObjectContainmentWithInverseEList.Resolving<Region>(Region.class, this, SGraphPackage.COMPOSITE_ELEMENT__REGIONS, SGraphPackage.REGION__COMPOSITE);
 		}
 		return regions;
 	}

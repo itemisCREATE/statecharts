@@ -105,6 +105,16 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Region basicGetParentRegion() {
+		if (eContainerFeatureID() != SGraphPackage.VERTEX__PARENT_REGION) return null;
+		return (Region)eInternalContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public NotificationChain basicSetParentRegion(Region newParentRegion, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newParentRegion, SGraphPackage.VERTEX__PARENT_REGION, msgs);
 		return msgs;
@@ -150,7 +160,7 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex {
 	 */
 	public EList<Transition> getOutgoingTransitions() {
 		if (outgoingTransitions == null) {
-			outgoingTransitions = new EObjectContainmentWithInverseEList<Transition>(Transition.class, this, SGraphPackage.VERTEX__OUTGOING_TRANSITIONS, SGraphPackage.TRANSITION__SOURCE);
+			outgoingTransitions = new EObjectContainmentWithInverseEList.Resolving<Transition>(Transition.class, this, SGraphPackage.VERTEX__OUTGOING_TRANSITIONS, SGraphPackage.TRANSITION__SOURCE);
 		}
 		return outgoingTransitions;
 	}
@@ -217,7 +227,8 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SGraphPackage.VERTEX__PARENT_REGION:
-				return getParentRegion();
+				if (resolve) return getParentRegion();
+				return basicGetParentRegion();
 			case SGraphPackage.VERTEX__INCOMING_TRANSITIONS:
 				return getIncomingTransitions();
 			case SGraphPackage.VERTEX__OUTGOING_TRANSITIONS:
@@ -280,7 +291,7 @@ public abstract class VertexImpl extends NamedElementImpl implements Vertex {
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
 			case SGraphPackage.VERTEX__PARENT_REGION:
-				return getParentRegion() != null;
+				return basicGetParentRegion() != null;
 			case SGraphPackage.VERTEX__INCOMING_TRANSITIONS:
 				return incomingTransitions != null && !incomingTransitions.isEmpty();
 			case SGraphPackage.VERTEX__OUTGOING_TRANSITIONS:

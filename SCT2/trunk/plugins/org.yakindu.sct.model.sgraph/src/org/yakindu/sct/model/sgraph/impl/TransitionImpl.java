@@ -123,6 +123,29 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	 * @generated
 	 */
 	public Trigger getTrigger() {
+		if (trigger != null && trigger.eIsProxy()) {
+			InternalEObject oldTrigger = (InternalEObject)trigger;
+			trigger = (Trigger)eResolveProxy(oldTrigger);
+			if (trigger != oldTrigger) {
+				InternalEObject newTrigger = (InternalEObject)trigger;
+				NotificationChain msgs = oldTrigger.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.TRANSITION__TRIGGER, null, null);
+				if (newTrigger.eInternalContainer() == null) {
+					msgs = newTrigger.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.TRANSITION__TRIGGER, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SGraphPackage.TRANSITION__TRIGGER, oldTrigger, trigger));
+			}
+		}
+		return trigger;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Trigger basicGetTrigger() {
 		return trigger;
 	}
 
@@ -166,6 +189,29 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	 * @generated
 	 */
 	public Effect getEffect() {
+		if (effect != null && effect.eIsProxy()) {
+			InternalEObject oldEffect = (InternalEObject)effect;
+			effect = (Effect)eResolveProxy(oldEffect);
+			if (effect != oldEffect) {
+				InternalEObject newEffect = (InternalEObject)effect;
+				NotificationChain msgs = oldEffect.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.TRANSITION__EFFECT, null, null);
+				if (newEffect.eInternalContainer() == null) {
+					msgs = newEffect.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SGraphPackage.TRANSITION__EFFECT, null, msgs);
+				}
+				if (msgs != null) msgs.dispatch();
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SGraphPackage.TRANSITION__EFFECT, oldEffect, effect));
+			}
+		}
+		return effect;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Effect basicGetEffect() {
 		return effect;
 	}
 
@@ -271,6 +317,16 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	public Vertex getSource() {
 		if (eContainerFeatureID() != SGraphPackage.TRANSITION__SOURCE) return null;
 		return (Vertex)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Vertex basicGetSource() {
+		if (eContainerFeatureID() != SGraphPackage.TRANSITION__SOURCE) return null;
+		return (Vertex)eInternalContainer();
 	}
 
 	/**
@@ -388,14 +444,17 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case SGraphPackage.TRANSITION__TRIGGER:
-				return getTrigger();
+				if (resolve) return getTrigger();
+				return basicGetTrigger();
 			case SGraphPackage.TRANSITION__EFFECT:
-				return getEffect();
+				if (resolve) return getEffect();
+				return basicGetEffect();
 			case SGraphPackage.TRANSITION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
 			case SGraphPackage.TRANSITION__SOURCE:
-				return getSource();
+				if (resolve) return getSource();
+				return basicGetSource();
 			case SGraphPackage.TRANSITION__PRIORITY:
 				return getPriority();
 		}
@@ -471,7 +530,7 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 			case SGraphPackage.TRANSITION__TARGET:
 				return target != null;
 			case SGraphPackage.TRANSITION__SOURCE:
-				return getSource() != null;
+				return basicGetSource() != null;
 			case SGraphPackage.TRANSITION__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
 		}

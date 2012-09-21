@@ -48,7 +48,7 @@ public interface Reaction extends EObject {
 	 * @return the value of the '<em>Trigger</em>' containment reference.
 	 * @see #setTrigger(Trigger)
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getReaction_Trigger()
-	 * @model containment="true" transient="true"
+	 * @model containment="true" resolveProxies="true" transient="true"
 	 * @generated
 	 */
 	Trigger getTrigger();
@@ -74,7 +74,7 @@ public interface Reaction extends EObject {
 	 * @return the value of the '<em>Effect</em>' containment reference.
 	 * @see #setEffect(Effect)
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getReaction_Effect()
-	 * @model containment="true" transient="true"
+	 * @model containment="true" resolveProxies="true" transient="true"
 	 * @generated
 	 */
 	Effect getEffect();

@@ -49,7 +49,7 @@ public interface ScopedElement extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Scopes</em>' containment reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getScopedElement_Scopes()
-	 * @model containment="true" transient="true"
+	 * @model containment="true" resolveProxies="true" transient="true"
 	 * @generated
 	 */
 	EList<Scope> getScopes();
