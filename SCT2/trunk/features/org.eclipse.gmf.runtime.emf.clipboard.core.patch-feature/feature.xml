@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.eclipse.gmf.runtime.emf.clipboard.core.patch"
+      label="Copy Paste Patch"
+      version="1.0.0"
+      provider-name="Yakindu">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <requires>
+      <import feature="org.eclipse.gmf.runtime.sdk" version="0.0.0" patch="true"/>
+   </requires>
+
+   <plugin
+         id="org.eclipse.gmf.runtime.emf.clipboard.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
