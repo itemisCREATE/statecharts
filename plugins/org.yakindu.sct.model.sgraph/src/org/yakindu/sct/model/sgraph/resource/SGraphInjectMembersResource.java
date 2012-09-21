@@ -25,7 +25,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.xmi.XMLLoad;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -60,10 +59,6 @@ public class SGraphInjectMembersResource extends InjectMembersResource {
 
 	public SGraphInjectMembersResource(URI uri) {
 		super(uri);
-	}
-
-	protected XMLLoad createXMLLoad() {
-		return new SGraphLoad(createXMLHelper());
 	}
 
 	@Override
