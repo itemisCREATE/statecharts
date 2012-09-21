@@ -18,6 +18,11 @@
       %license
    </license>
 
+   <includes
+         id="org.eclipse.gmf.runtime.emf.clipboard.core.patch"
+         version="0.0.0"
+         optional="true"/>
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
