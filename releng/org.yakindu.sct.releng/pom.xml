@@ -364,7 +364,9 @@
 	</profiles>
 
 	<modules>
-		<!-- <module>../org.yakindu.sct.statechart.target</module> -->
+		<module>../org.eclipse.gmf.runtime.emf.clipboard.core</module>
+		<module>../org.eclipse.gmf.runtime.emf.clipboard.core.patch-feature</module>
+	
 		<module>../org.yakindu.sct.commons</module>
 		<module>../org.yakindu.sct.doc.user</module>
 		<module>../org.yakindu.sct.examples.trafficlight</module>
