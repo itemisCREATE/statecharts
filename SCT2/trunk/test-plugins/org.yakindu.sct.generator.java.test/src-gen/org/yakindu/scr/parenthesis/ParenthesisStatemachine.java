@@ -81,7 +81,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 	public void enter() {
 		entryActionParenthesis();
-		sCIDefault.erg = (4 * (3 - 1));
+		sCIDefault.erg = 4 * (3 - 1);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.MainRegion_A;

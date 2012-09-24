@@ -55,6 +55,9 @@ String toCode(Literal literal) :
 String toCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCode();
 	
+String toCode(ParenthesizedExpression e) :
+	"(" + e.expression.toCode() + ")";
+	
 String getVariableIdentifier(AssignmentExpression this) :
 	getContext(varRef).toFirstLower() + varRef.getVarName().toFirstLower();
 
@@ -132,10 +135,10 @@ String toCode(ShiftExpression expression) :
   	
 
 String toCode(NumericalAddSubtractExpression expression) :
-  	"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
+  	expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
   	
 String toCode(NumericalMultiplyDivideExpression expression) :
-  	"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
+  	expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
 
 String toCode(NumericalUnaryExpression expression) :
     getOperator(expression.operator) + " ( " + expression.operand.toCode() + " ) ";

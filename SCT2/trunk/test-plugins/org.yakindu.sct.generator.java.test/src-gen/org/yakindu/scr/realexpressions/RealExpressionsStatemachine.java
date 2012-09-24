@@ -486,15 +486,15 @@ public class RealExpressionsStatemachine
 
 			sCIDefault.notEqual = (sCIDefault.myReal1 != sCIDefault.myReal2);
 
-			sCIDefault.plus = ((15.89 <= (sCIDefault.myReal1 + sCIDefault.myReal2)) && ((sCIDefault.myReal1 + sCIDefault.myReal2) <= 16.91));
+			sCIDefault.plus = (((15.89 <= (sCIDefault.myReal1 + sCIDefault.myReal2)) && ((sCIDefault.myReal1 + sCIDefault.myReal2) <= 16.91)));
 
-			sCIDefault.minus = ((5.29 <= (sCIDefault.myReal2 - sCIDefault.myReal1)) && ((sCIDefault.myReal1 - sCIDefault.myReal2) <= 5.31));
+			sCIDefault.minus = (((5.29 <= (sCIDefault.myReal2 - sCIDefault.myReal1)) && ((sCIDefault.myReal1 - sCIDefault.myReal2) <= 5.31)));
 
-			sCIDefault.multiply = ((56.17 <= (sCIDefault.myReal1 * sCIDefault.myReal2)) && ((sCIDefault.myReal1 * sCIDefault.myReal2) <= 56.19));
+			sCIDefault.multiply = (((56.17 <= (sCIDefault.myReal1 * sCIDefault.myReal2)) && ((sCIDefault.myReal1 * sCIDefault.myReal2) <= 56.19)));
 
-			sCIDefault.division = ((1.9 <= (sCIDefault.myReal2 / sCIDefault.myReal1)) && ((sCIDefault.myReal1 / sCIDefault.myReal2) <= 2.1));
+			sCIDefault.division = (((1.9 <= (sCIDefault.myReal2 / sCIDefault.myReal1)) && ((sCIDefault.myReal1 / sCIDefault.myReal2) <= 2.1)));
 
-			sCIDefault.modulo = ((-(0.1) <= (sCIDefault.myReal2 % sCIDefault.myReal1)) && ((sCIDefault.myReal1 % sCIDefault.myReal2) <= 0.1));
+			sCIDefault.modulo = (((-(0.1) <= (sCIDefault.myReal2 % sCIDefault.myReal1)) && ((sCIDefault.myReal1 % sCIDefault.myReal2) <= 0.1)));
 
 			sCIDefault.negat = -(sCIDefault.myReal1);
 
@@ -506,7 +506,7 @@ public class RealExpressionsStatemachine
 
 			sCIDefault.minusAssign -= sCIDefault.myReal1;
 
-			sCIDefault.moduloAssign = (-(0.1) <= (sCIDefault.myReal1 %= sCIDefault.myReal1));
+			sCIDefault.moduloAssign = ((-(0.1) <= ((sCIDefault.myReal1 %= sCIDefault.myReal1))));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_StateB;

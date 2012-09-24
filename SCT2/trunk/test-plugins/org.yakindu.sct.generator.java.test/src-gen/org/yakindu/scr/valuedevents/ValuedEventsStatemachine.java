@@ -112,7 +112,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	public void enter() {
 		entryActionValuedEvents();
-		sCIDefault.raiseIntegerEvent((2 * 21));
+		sCIDefault.raiseIntegerEvent(2 * 21);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.Main_region_A;
