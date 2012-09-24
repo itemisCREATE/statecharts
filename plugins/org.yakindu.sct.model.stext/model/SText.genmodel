@@ -216,5 +216,8 @@
     <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ActiveStateReferenceExpression">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ActiveStateReferenceExpression/value"/>
     </genClasses>
+    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ParenthesizedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ParenthesizedExpression/expression"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

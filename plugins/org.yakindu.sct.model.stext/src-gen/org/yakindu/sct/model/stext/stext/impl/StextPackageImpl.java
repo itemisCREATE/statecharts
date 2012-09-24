@@ -55,6 +55,7 @@ import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
 import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -467,6 +468,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass activeStateReferenceExpressionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass parenthesizedExpressionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -1793,6 +1801,26 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getParenthesizedExpression()
+  {
+    return parenthesizedExpressionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getParenthesizedExpression_Expression()
+  {
+    return (EReference)parenthesizedExpressionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getDirection()
   {
     return directionEEnum;
@@ -2081,6 +2109,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     activeStateReferenceExpressionEClass = createEClass(ACTIVE_STATE_REFERENCE_EXPRESSION);
     createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
 
+    parenthesizedExpressionEClass = createEClass(PARENTHESIZED_EXPRESSION);
+    createEReference(parenthesizedExpressionEClass, PARENTHESIZED_EXPRESSION__EXPRESSION);
+
     // Create enums
     directionEEnum = createEEnum(DIRECTION);
     timeEventTypeEEnum = createEEnum(TIME_EVENT_TYPE);
@@ -2180,6 +2211,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     elementReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
     eventValueReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
     activeStateReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
+    parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
     initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2354,6 +2386,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     initEClass(activeStateReferenceExpressionEClass, ActiveStateReferenceExpression.class, "ActiveStateReferenceExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(parenthesizedExpressionEClass, ParenthesizedExpression.class, "ParenthesizedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getParenthesizedExpression_Expression(), this.getExpression(), null, "expression", null, 0, 1, ParenthesizedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(directionEEnum, Direction.class, "Direction");

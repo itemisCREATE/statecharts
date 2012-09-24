@@ -16,7 +16,7 @@ Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.eclipse.ui.workbench;resolution:=optional
 Export-Package: org.yakindu.sct.model.stext.test,
  org.yakindu.sct.model.stext.test.util,
- org.yakindu.sct.model.stext.test
+ org.yakindu.sct.model.stext
 Import-Package: org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",

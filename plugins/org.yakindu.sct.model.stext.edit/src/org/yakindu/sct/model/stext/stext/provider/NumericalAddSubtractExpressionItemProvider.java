@@ -294,6 +294,11 @@ public class NumericalAddSubtractExpressionItemProvider
 
     newChildDescriptors.add
       (createChildParameter
+        (StextPackage.Literals.NUMERICAL_ADD_SUBTRACT_EXPRESSION__LEFT_OPERAND,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
         (StextPackage.Literals.NUMERICAL_ADD_SUBTRACT_EXPRESSION__RIGHT_OPERAND,
          StextFactory.eINSTANCE.createExpression()));
 
@@ -391,6 +396,11 @@ public class NumericalAddSubtractExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.NUMERICAL_ADD_SUBTRACT_EXPRESSION__RIGHT_OPERAND,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.NUMERICAL_ADD_SUBTRACT_EXPRESSION__RIGHT_OPERAND,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

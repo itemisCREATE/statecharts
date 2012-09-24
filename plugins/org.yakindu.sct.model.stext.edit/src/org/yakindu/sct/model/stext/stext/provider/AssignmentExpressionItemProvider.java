@@ -294,6 +294,11 @@ public class AssignmentExpressionItemProvider
 
     newChildDescriptors.add
       (createChildParameter
+        (StextPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
         (StextPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
          StextFactory.eINSTANCE.createExpression()));
 
@@ -391,6 +396,11 @@ public class AssignmentExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

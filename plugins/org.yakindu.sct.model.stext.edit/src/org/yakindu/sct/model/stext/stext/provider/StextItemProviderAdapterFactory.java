@@ -1424,6 +1424,31 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ParenthesizedExpression} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ParenthesizedExpressionItemProvider parenthesizedExpressionItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ParenthesizedExpression}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createParenthesizedExpressionAdapter()
+  {
+    if (parenthesizedExpressionItemProvider == null)
+    {
+      parenthesizedExpressionItemProvider = new ParenthesizedExpressionItemProvider(this);
+    }
+
+    return parenthesizedExpressionItemProvider;
+  }
+
+  /**
    * This returns the root adapter factory that contains this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1588,6 +1613,7 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (elementReferenceExpressionItemProvider != null) elementReferenceExpressionItemProvider.dispose();
     if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
     if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
+    if (parenthesizedExpressionItemProvider != null) parenthesizedExpressionItemProvider.dispose();
   }
 
 }

@@ -314,6 +314,11 @@ public class FeatureCallItemProvider
 
     newChildDescriptors.add
       (createChildParameter
+        (StextPackage.Literals.FEATURE_CALL__OWNER,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
         (StextPackage.Literals.FEATURE_CALL__ARGS,
          StextFactory.eINSTANCE.createExpression()));
 
@@ -411,6 +416,11 @@ public class FeatureCallItemProvider
       (createChildParameter
         (StextPackage.Literals.FEATURE_CALL__ARGS,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.FEATURE_CALL__ARGS,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

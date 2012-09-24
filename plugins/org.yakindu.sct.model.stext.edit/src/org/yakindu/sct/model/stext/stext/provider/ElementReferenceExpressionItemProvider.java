@@ -309,6 +309,11 @@ public class ElementReferenceExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
 }

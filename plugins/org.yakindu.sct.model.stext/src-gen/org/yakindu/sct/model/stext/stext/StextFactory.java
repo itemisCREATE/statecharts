@@ -509,6 +509,15 @@ public interface StextFactory extends EFactory
   ActiveStateReferenceExpression createActiveStateReferenceExpression();
 
   /**
+   * Returns a new object of class '<em>Parenthesized Expression</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Parenthesized Expression</em>'.
+   * @generated
+   */
+  ParenthesizedExpression createParenthesizedExpression();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

@@ -259,6 +259,11 @@ public class ReactionEffectItemProvider
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

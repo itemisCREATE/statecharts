@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
@@ -398,6 +399,11 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     return this.getType(_value);
   }
   
+  protected Type _inferType(final ParenthesizedExpression e) {
+    Expression _expression = e.getExpression();
+    return this.getType(_expression);
+  }
+  
   protected Type _getLiteralType(final HexLiteral literal) {
     return this.ts.getInteger();
   }
@@ -505,6 +511,8 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
       return _inferType((NumericalMultiplyDivideExpression)expression);
     } else if (expression instanceof NumericalUnaryExpression) {
       return _inferType((NumericalUnaryExpression)expression);
+    } else if (expression instanceof ParenthesizedExpression) {
+      return _inferType((ParenthesizedExpression)expression);
     } else if (expression instanceof PrimitiveValueExpression) {
       return _inferType((PrimitiveValueExpression)expression);
     } else if (expression instanceof ShiftExpression) {

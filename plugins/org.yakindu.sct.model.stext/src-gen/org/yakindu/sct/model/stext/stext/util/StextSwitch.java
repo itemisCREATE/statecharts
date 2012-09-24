@@ -558,6 +558,15 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case StextPackage.PARENTHESIZED_EXPRESSION:
+      {
+        ParenthesizedExpression parenthesizedExpression = (ParenthesizedExpression)theEObject;
+        T result = caseParenthesizedExpression(parenthesizedExpression);
+        if (result == null) result = caseExpression(parenthesizedExpression);
+        if (result == null) result = caseStatement(parenthesizedExpression);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -1422,6 +1431,22 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseActiveStateReferenceExpression(ActiveStateReferenceExpression object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Parenthesized Expression</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Parenthesized Expression</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseParenthesizedExpression(ParenthesizedExpression object)
   {
     return null;
   }

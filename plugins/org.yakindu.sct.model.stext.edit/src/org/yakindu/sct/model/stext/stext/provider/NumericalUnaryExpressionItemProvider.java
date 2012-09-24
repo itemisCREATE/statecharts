@@ -289,6 +289,11 @@ public class NumericalUnaryExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
 }

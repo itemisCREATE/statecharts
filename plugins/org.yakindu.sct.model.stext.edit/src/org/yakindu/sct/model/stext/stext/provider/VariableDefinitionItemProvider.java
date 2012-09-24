@@ -342,6 +342,11 @@ public class VariableDefinitionItemProvider
       (createChildParameter
         (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

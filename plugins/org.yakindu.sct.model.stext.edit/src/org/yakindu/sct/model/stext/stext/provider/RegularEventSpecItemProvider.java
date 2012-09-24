@@ -255,6 +255,11 @@ public class RegularEventSpecItemProvider
       (createChildParameter
         (StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
 }

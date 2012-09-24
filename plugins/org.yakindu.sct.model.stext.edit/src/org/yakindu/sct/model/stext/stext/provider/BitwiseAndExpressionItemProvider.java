@@ -260,6 +260,11 @@ public class BitwiseAndExpressionItemProvider
 
     newChildDescriptors.add
       (createChildParameter
+        (StextPackage.Literals.BITWISE_AND_EXPRESSION__LEFT_OPERAND,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
         (StextPackage.Literals.BITWISE_AND_EXPRESSION__RIGHT_OPERAND,
          StextFactory.eINSTANCE.createExpression()));
 
@@ -357,6 +362,11 @@ public class BitwiseAndExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.BITWISE_AND_EXPRESSION__RIGHT_OPERAND,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.BITWISE_AND_EXPRESSION__RIGHT_OPERAND,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

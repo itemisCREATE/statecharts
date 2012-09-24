@@ -255,6 +255,11 @@ public class LogicalNotExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.LOGICAL_NOT_EXPRESSION__OPERAND,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.LOGICAL_NOT_EXPRESSION__OPERAND,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
 }
