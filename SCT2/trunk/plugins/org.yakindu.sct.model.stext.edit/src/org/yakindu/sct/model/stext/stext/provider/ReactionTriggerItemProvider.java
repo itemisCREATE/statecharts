@@ -306,6 +306,11 @@ public class ReactionTriggerItemProvider
       (createChildParameter
         (StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

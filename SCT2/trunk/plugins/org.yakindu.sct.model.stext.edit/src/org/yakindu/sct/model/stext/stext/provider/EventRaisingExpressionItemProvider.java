@@ -260,6 +260,11 @@ public class EventRaisingExpressionItemProvider
 
     newChildDescriptors.add
       (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
         (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
          StextFactory.eINSTANCE.createExpression()));
 
@@ -357,6 +362,11 @@ public class EventRaisingExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

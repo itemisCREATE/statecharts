@@ -1879,18 +1879,16 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cFeatureCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cActiveStateReferenceExpressionParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cEventValueReferenceExpressionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final Group cGroup_4 = (Group)cAlternatives.eContents().get(4);
-		private final Keyword cLeftParenthesisKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
-		private final RuleCall cExpressionParserRuleCall_4_1 = (RuleCall)cGroup_4.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
+		private final RuleCall cParenthesizedExpressionParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
+		////	| '(' Expression ')'
 		//PrimaryExpression returns Expression:
-		//	PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression | "("
-		//	Expression ")";
+		//	PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression |
+		//	ParenthesizedExpression;
 		public ParserRule getRule() { return rule; }
 
-		//PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression | "(" Expression
-		//")"
+		//PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression |
+		//ParenthesizedExpression
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//PrimitiveValueExpression
@@ -1905,17 +1903,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//EventValueReferenceExpression
 		public RuleCall getEventValueReferenceExpressionParserRuleCall_3() { return cEventValueReferenceExpressionParserRuleCall_3; }
 
-		//"(" Expression ")"
-		public Group getGroup_4() { return cGroup_4; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_4_0() { return cLeftParenthesisKeyword_4_0; }
-
-		//Expression
-		public RuleCall getExpressionParserRuleCall_4_1() { return cExpressionParserRuleCall_4_1; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_4_2() { return cRightParenthesisKeyword_4_2; }
+		//ParenthesizedExpression
+		public RuleCall getParenthesizedExpressionParserRuleCall_4() { return cParenthesizedExpressionParserRuleCall_4; }
 	}
 
 	public class PrimitiveValueExpressionElements extends AbstractParserRuleElementFinder {
@@ -2177,6 +2166,38 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//")"
 		public Keyword getRightParenthesisKeyword_4() { return cRightParenthesisKeyword_4; }
+	}
+
+	public class ParenthesizedExpressionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParenthesizedExpression");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cParenthesizedExpressionAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cExpressionAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cExpressionExpressionParserRuleCall_2_0 = (RuleCall)cExpressionAssignment_2.eContents().get(0);
+		private final Keyword cRightParenthesisKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		
+		//ParenthesizedExpression returns Expression:
+		//	{ParenthesizedExpression} "(" expression=Expression ")";
+		public ParserRule getRule() { return rule; }
+
+		//{ParenthesizedExpression} "(" expression=Expression ")"
+		public Group getGroup() { return cGroup; }
+
+		//{ParenthesizedExpression}
+		public Action getParenthesizedExpressionAction_0() { return cParenthesizedExpressionAction_0; }
+
+		//"("
+		public Keyword getLeftParenthesisKeyword_1() { return cLeftParenthesisKeyword_1; }
+
+		//expression=Expression
+		public Assignment getExpressionAssignment_2() { return cExpressionAssignment_2; }
+
+		//Expression
+		public RuleCall getExpressionExpressionParserRuleCall_2_0() { return cExpressionExpressionParserRuleCall_2_0; }
+
+		//")"
+		public Keyword getRightParenthesisKeyword_3() { return cRightParenthesisKeyword_3; }
 	}
 
 	public class LiteralElements extends AbstractParserRuleElementFinder {
@@ -2797,6 +2818,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private ElementReferenceExpressionElements pElementReferenceExpression;
 	private EventValueReferenceExpressionElements pEventValueReferenceExpression;
 	private ActiveStateReferenceExpressionElements pActiveStateReferenceExpression;
+	private ParenthesizedExpressionElements pParenthesizedExpression;
 	private LiteralElements pLiteral;
 	private BoolLiteralElements pBoolLiteral;
 	private IntLiteralElements pIntLiteral;
@@ -3494,9 +3516,10 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getNumericalUnaryExpressionAccess().getRule();
 	}
 
+	////	| '(' Expression ')'
 	//PrimaryExpression returns Expression:
-	//	PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression | "("
-	//	Expression ")";
+	//	PrimitiveValueExpression | FeatureCall | ActiveStateReferenceExpression | EventValueReferenceExpression |
+	//	ParenthesizedExpression;
 	public PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return (pPrimaryExpression != null) ? pPrimaryExpression : (pPrimaryExpression = new PrimaryExpressionElements());
 	}
@@ -3555,6 +3578,16 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getActiveStateReferenceExpressionRule() {
 		return getActiveStateReferenceExpressionAccess().getRule();
+	}
+
+	//ParenthesizedExpression returns Expression:
+	//	{ParenthesizedExpression} "(" expression=Expression ")";
+	public ParenthesizedExpressionElements getParenthesizedExpressionAccess() {
+		return (pParenthesizedExpression != null) ? pParenthesizedExpression : (pParenthesizedExpression = new ParenthesizedExpressionElements());
+	}
+	
+	public ParserRule getParenthesizedExpressionRule() {
+		return getParenthesizedExpressionAccess().getRule();
 	}
 
 	//Literal:

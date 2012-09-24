@@ -37,6 +37,7 @@ import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - additional tests
  * 
  */
 @RunWith(XtextRunner.class)
@@ -949,6 +950,15 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		analyzer.getType((Statement) statement);
 	}
 
+	
+	@Test public void parenthesizedExpression() {
+		assertTrue(ts.isBoolean(getType("( true || false )")));
+		assertTrue(ts.isInteger(getType("( 5 )")));
+		assertTrue(ts.isReal(getType("( 7.5 / 1.2 )")));
+		assertTrue(ts.isString(getType("( 'abc' )")));
+	}
+	
+	
 	/**
 	 * 
 	 * exception.expect(TypeCheckException.class); exception .expectMessage(

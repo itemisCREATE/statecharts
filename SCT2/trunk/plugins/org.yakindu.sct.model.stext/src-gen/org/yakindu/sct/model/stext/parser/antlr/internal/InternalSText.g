@@ -3049,24 +3049,16 @@ rulePrimaryExpression returns [EObject current=null]
         afterParserOrEnumRuleCall();
     }
 
-    |(	otherlv_4='(' 
-    {
-    	newLeafNode(otherlv_4, grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_4_0());
-    }
-
+    |
     { 
-        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getExpressionParserRuleCall_4_1()); 
+        newCompositeNode(grammarAccess.getPrimaryExpressionAccess().getParenthesizedExpressionParserRuleCall_4()); 
     }
-    this_Expression_5=ruleExpression
+    this_ParenthesizedExpression_4=ruleParenthesizedExpression
     { 
-        $current = $this_Expression_5.current; 
+        $current = $this_ParenthesizedExpression_4.current; 
         afterParserOrEnumRuleCall();
     }
-	otherlv_6=')' 
-    {
-    	newLeafNode(otherlv_6, grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_4_2());
-    }
-))
+)
 ;
 
 
@@ -3444,6 +3436,59 @@ ruleActiveStateReferenceExpression returns [EObject current=null]
 )	otherlv_4=')' 
     {
     	newLeafNode(otherlv_4, grammarAccess.getActiveStateReferenceExpressionAccess().getRightParenthesisKeyword_4());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleParenthesizedExpression
+entryRuleParenthesizedExpression returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getParenthesizedExpressionRule()); }
+	 iv_ruleParenthesizedExpression=ruleParenthesizedExpression 
+	 { $current=$iv_ruleParenthesizedExpression.current; } 
+	 EOF 
+;
+
+// Rule ParenthesizedExpression
+ruleParenthesizedExpression returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getParenthesizedExpressionAccess().getParenthesizedExpressionAction_0(),
+            $current);
+    }
+)	otherlv_1='(' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getParenthesizedExpressionAccess().getLeftParenthesisKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getParenthesizedExpressionAccess().getExpressionExpressionParserRuleCall_2_0()); 
+	    }
+		lv_expression_2_0=ruleExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getParenthesizedExpressionRule());
+	        }
+       		set(
+       			$current, 
+       			"expression",
+        		lv_expression_2_0, 
+        		"Expression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)	otherlv_3=')' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getParenthesizedExpressionAccess().getRightParenthesisKeyword_3());
     }
 )
 ;

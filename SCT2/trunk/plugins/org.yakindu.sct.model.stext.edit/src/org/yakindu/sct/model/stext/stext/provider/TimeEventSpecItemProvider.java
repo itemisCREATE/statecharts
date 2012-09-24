@@ -314,6 +314,11 @@ public class TimeEventSpecItemProvider
       (createChildParameter
         (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
 }

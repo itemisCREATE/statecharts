@@ -362,6 +362,11 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createActiveStateReferenceExpressionAdapter();
       }
       @Override
+      public Adapter caseParenthesizedExpression(ParenthesizedExpression object)
+      {
+        return createParenthesizedExpressionAdapter();
+      }
+      @Override
       public Adapter caseScopedElement(ScopedElement object)
       {
         return createScopedElementAdapter();
@@ -1264,6 +1269,21 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createActiveStateReferenceExpressionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ParenthesizedExpression <em>Parenthesized Expression</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.ParenthesizedExpression
+   * @generated
+   */
+  public Adapter createParenthesizedExpressionAdapter()
   {
     return null;
   }

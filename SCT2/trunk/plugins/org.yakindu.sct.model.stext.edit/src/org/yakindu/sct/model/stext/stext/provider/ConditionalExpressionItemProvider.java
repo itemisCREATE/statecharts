@@ -262,6 +262,11 @@ public class ConditionalExpressionItemProvider
 
     newChildDescriptors.add
       (createChildParameter
+        (StextPackage.Literals.CONDITIONAL_EXPRESSION__CONDITION,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
         (StextPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
          StextFactory.eINSTANCE.createExpression()));
 
@@ -362,6 +367,11 @@ public class ConditionalExpressionItemProvider
 
     newChildDescriptors.add
       (createChildParameter
+        (StextPackage.Literals.CONDITIONAL_EXPRESSION__TRUE_CASE,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
         (StextPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
          StextFactory.eINSTANCE.createExpression()));
 
@@ -459,6 +469,11 @@ public class ConditionalExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.CONDITIONAL_EXPRESSION__FALSE_CASE,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

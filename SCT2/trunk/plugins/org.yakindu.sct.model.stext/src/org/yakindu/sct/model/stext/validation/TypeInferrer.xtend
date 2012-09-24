@@ -10,7 +10,7 @@
  *  
  */
 package org.yakindu.sct.model.stext.validation
-
+ 
 import com.google.inject.Inject
 import org.yakindu.base.types.Feature
 import org.yakindu.base.types.ITypeSystemAccess
@@ -47,6 +47,7 @@ import org.yakindu.sct.model.stext.stext.UnaryOperator
 import org.yakindu.sct.model.stext.stext.HexLiteral
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
  
 /**
  * 
@@ -241,6 +242,10 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 	
 	def dispatch inferType(EventValueReferenceExpression expression){
 		return getType(expression.value)
+	}
+	
+	def dispatch inferType(ParenthesizedExpression e){
+		return getType(e.expression)
 	}
 	
 	def dispatch getLiteralType(HexLiteral literal){

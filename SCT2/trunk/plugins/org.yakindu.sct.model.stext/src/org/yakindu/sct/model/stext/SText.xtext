@@ -269,7 +269,10 @@ PrimaryExpression returns Expression:
 	PrimitiveValueExpression 
 	| FeatureCall 
 	| ActiveStateReferenceExpression 
-	| EventValueReferenceExpression  | '(' Expression ')'; 
+	| EventValueReferenceExpression  
+	| ParenthesizedExpression
+//	| '(' Expression ')'
+; 
 
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
@@ -295,6 +298,10 @@ EventValueReferenceExpression returns Expression:
 ActiveStateReferenceExpression returns Expression:
 	{ActiveStateReferenceExpression} 'active' '(' value=[sgraph::State|FQN] ')';
 	
+
+ParenthesizedExpression returns Expression: 
+	{ParenthesizedExpression} '(' expression=Expression ')'
+;
 
 Literal:
 	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral;

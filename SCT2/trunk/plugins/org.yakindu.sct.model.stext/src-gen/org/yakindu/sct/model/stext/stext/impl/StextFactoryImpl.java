@@ -119,6 +119,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
       case StextPackage.EVENT_VALUE_REFERENCE_EXPRESSION: return createEventValueReferenceExpression();
       case StextPackage.ACTIVE_STATE_REFERENCE_EXPRESSION: return createActiveStateReferenceExpression();
+      case StextPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -782,6 +783,17 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     ActiveStateReferenceExpressionImpl activeStateReferenceExpression = new ActiveStateReferenceExpressionImpl();
     return activeStateReferenceExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ParenthesizedExpression createParenthesizedExpression()
+  {
+    ParenthesizedExpressionImpl parenthesizedExpression = new ParenthesizedExpressionImpl();
+    return parenthesizedExpression;
   }
 
   /**

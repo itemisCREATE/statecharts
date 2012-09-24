@@ -255,6 +255,11 @@ public class EventValueReferenceExpressionItemProvider
       (createChildParameter
         (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
          StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
 }
