@@ -289,7 +289,7 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
-		}
+ 		}
 	}
 
 	statechart RaiseEvent {
@@ -316,6 +316,18 @@ GeneratorModel for yakindu::java {
 		}
 	}
 	statechart SameNameDifferentRegion {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	
+	statechart PerformanceTest {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"

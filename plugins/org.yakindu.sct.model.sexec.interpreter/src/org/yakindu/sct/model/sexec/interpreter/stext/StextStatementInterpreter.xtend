@@ -43,6 +43,7 @@ import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
 
 /**
  * 
@@ -226,6 +227,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		
 		null
 	}
+
+	def dispatch execute(ParenthesizedExpression e){
+		e.expression.execute()
+	}
+	
 	
 	def dispatch execute(PrimitiveValueExpression expression){
 		return expression.value.valueLiteral

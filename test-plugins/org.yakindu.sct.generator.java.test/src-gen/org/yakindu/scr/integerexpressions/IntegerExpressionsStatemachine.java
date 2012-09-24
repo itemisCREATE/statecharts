@@ -476,27 +476,27 @@ public class IntegerExpressionsStatemachine
 		if (sCIDefault.e1) {
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.less = (sCIDefault.myInt1 < sCIDefault.myInt2);
+			sCIDefault.less = ((sCIDefault.myInt1 < sCIDefault.myInt2));
 
-			sCIDefault.greater = (sCIDefault.myInt1 > sCIDefault.myInt2);
+			sCIDefault.greater = ((sCIDefault.myInt1 > sCIDefault.myInt2));
 
-			sCIDefault.equalOrLess = (sCIDefault.myInt1 <= sCIDefault.myInt2);
+			sCIDefault.equalOrLess = ((sCIDefault.myInt1 <= sCIDefault.myInt2));
 
-			sCIDefault.equalOrGreater = (sCIDefault.myInt1 >= sCIDefault.myInt2);
+			sCIDefault.equalOrGreater = ((sCIDefault.myInt1 >= sCIDefault.myInt2));
 
-			sCIDefault.equal = (sCIDefault.myInt1 == sCIDefault.myInt2);
+			sCIDefault.equal = ((sCIDefault.myInt1 == sCIDefault.myInt2));
 
-			sCIDefault.notEqual = (sCIDefault.myInt1 != sCIDefault.myInt2);
+			sCIDefault.notEqual = ((sCIDefault.myInt1 != sCIDefault.myInt2));
 
-			sCIDefault.plus = (sCIDefault.myInt1 + sCIDefault.myInt2);
+			sCIDefault.plus = sCIDefault.myInt1 + sCIDefault.myInt2;
 
-			sCIDefault.minus = (sCIDefault.myInt1 - sCIDefault.myInt2);
+			sCIDefault.minus = sCIDefault.myInt1 - sCIDefault.myInt2;
 
-			sCIDefault.multiply = (sCIDefault.myInt1 * sCIDefault.myInt2);
+			sCIDefault.multiply = sCIDefault.myInt1 * sCIDefault.myInt2;
 
-			sCIDefault.division = (sCIDefault.myInt1 / sCIDefault.myInt2);
+			sCIDefault.division = sCIDefault.myInt1 / sCIDefault.myInt2;
 
-			sCIDefault.modulo = (sCIDefault.myInt1 % sCIDefault.myInt2);
+			sCIDefault.modulo = sCIDefault.myInt1 % sCIDefault.myInt2;
 
 			sCIDefault.negat = -(sCIDefault.myInt1);
 

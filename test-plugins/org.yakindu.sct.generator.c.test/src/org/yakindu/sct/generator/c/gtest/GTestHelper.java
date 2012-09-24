@@ -71,9 +71,27 @@ public class GTestHelper {
 					.directory(directory);
 			Process process = processBuilder.redirectErrorStream(true).start();
 			String message = readProcessInputStream(process);
-			process.waitFor();
+			
+			boolean wait = true;
+			int exitCode = 0;
+			
+			do {
+				wait = false;
 
-			if (process.exitValue() != 0) {
+				// waiting fro the processes termination
+				try {
+					process.waitFor();
+				} catch ( InterruptedException e ) { /* we ignore if waiting was interrupted ... */ }
+
+				// if we get an exit code then we know that the process is finished
+				try {
+					exitCode = process.exitValue();
+				} catch ( IllegalThreadStateException e ) {
+					wait = true; // if we get an exception then the process has not finisched ...
+				}
+			} while (wait);
+
+			if (exitCode != 0) {
 				throw new RuntimeException("Compilation failed (exit status "
 						+ process.exitValue() + "):\n" + message);
 			}
@@ -168,6 +186,7 @@ public class GTestHelper {
 		command.add(getCompilerCommand());
 		command.add("-o");
 		command.add(getFileName(getTestProgram()));
+		command.add("-O2");
 		if (gTestDirectory != null) command.add("-I" + gTestDirectory + "/include");
 		for (String include : includes) {
 			command.add("-I" + include);
@@ -180,6 +199,7 @@ public class GTestHelper {
 		command.add("-lgtest_main");
 		command.add("-lstdc++");
 		command.add("-pthread");
+//		command.add("-pg");
 		return command;
 	}
 

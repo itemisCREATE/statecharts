@@ -42,6 +42,9 @@ String toCCode(HexLiteral hLit) :
 String toCCode(PrimitiveValueExpression primValue) :
 	primValue.value.toCCode();
 
+String toCCode(ParenthesizedExpression e) :
+	"(" + e.expression.toCCode() + ")";
+
 /* Assignment */
 String toCCode(AssignmentExpression assignment) :
   switch (assignment.operator) {

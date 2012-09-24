@@ -253,7 +253,7 @@ public class BooleanExpressionsStatemachine
 
 			sCIDefault.equal = (sCIDefault.myBool1 == sCIDefault.myBool2);
 
-			sCIDefault.notequal = (sCIDefault.myBool1 != sCIDefault.myBool2);
+			sCIDefault.notequal = ((sCIDefault.myBool1 != sCIDefault.myBool2));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.Main_region_StateB;

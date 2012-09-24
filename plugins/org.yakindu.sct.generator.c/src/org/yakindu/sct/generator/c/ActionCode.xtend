@@ -32,6 +32,7 @@ import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.validation.ITypeInferrer
 import org.yakindu.sct.model.stext.stext.ShiftExpression
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
 
 class ActionCode {
 	
@@ -151,5 +152,8 @@ class ActionCode {
 	
 	def dispatch code (ActiveStateReferenceExpression it)
 		'''«flow.nameOfIsActiveFunction»(«scHandle», «value.fullyQualifiedName»)'''
+	
+	def dispatch code (ParenthesizedExpression it)
+		'''(«expression.code»)'''
 	
 }
