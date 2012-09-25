@@ -10,6 +10,17 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+	statechart AssignmentAsExpression {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
 	statechart Choice {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"

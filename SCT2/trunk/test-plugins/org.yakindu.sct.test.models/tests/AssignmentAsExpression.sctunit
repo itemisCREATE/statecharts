@@ -1,0 +1,16 @@
+
+testgroup AssignmentAsExpression for statechart AssignmentAsExpression{
+	
+	 
+	  test simpleAssignment{ 
+	  	
+	  	assert active(AssignmentAsExpression.main_region.A) 
+	  	
+	  	assert b == 5
+	  	assert a == 9
+	  	
+	  }
+	  	 
+	 
+}
+	
