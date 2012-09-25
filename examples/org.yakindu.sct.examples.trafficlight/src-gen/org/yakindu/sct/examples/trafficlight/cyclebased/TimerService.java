@@ -53,5 +53,6 @@ public class TimerService implements ITimerService {
 	 */
 	public void cancel() {
 		timer.cancel();
+		timer.purge();
 	}
 }
