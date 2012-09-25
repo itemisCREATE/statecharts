@@ -15,9 +15,10 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({AlwaysOncycleTest.class, BitExpressionsTest.class,
-		BooleanExpressionsTest.class, CKeywordsTest.class, ChoiceTest.class,
-		DeepHistoryTest.class, ExitOnSelfTransitionTest.class, GuardTest.class,
+@SuiteClasses({AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
+		BitExpressionsTest.class, BooleanExpressionsTest.class,
+		CKeywordsTest.class, ChoiceTest.class, DeepHistoryTest.class,
+		ExitOnSelfTransitionTest.class, GuardTest.class,
 		GuardedEntryTest.class, GuardedExitTest.class,
 		IntegerExpressionsTest.class, InternalEventLifeCycleTest.class,
 		ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
