@@ -64,17 +64,17 @@ String getVariableIdentifier(AssignmentExpression this) :
 /* Assignment */
 String toCode(AssignmentExpression this) :
 	switch (operator) {
-		case AssignmentOperator::assign :"(" + getVariableIdentifier() + " = " + expression.toCode() + ")"
-		case AssignmentOperator::multAssign : "(" + getVariableIdentifier() + " *= " + expression.toCode() + ")"
-		case AssignmentOperator::divAssign : "(" + getVariableIdentifier() + " /= " + expression.toCode() + ")"
-		case AssignmentOperator::modAssign : "(" + getVariableIdentifier() + " %= " + expression.toCode() + ")"
-		case AssignmentOperator::addAssign : "(" + getVariableIdentifier() + " += " + expression.toCode() + ")"
-		case AssignmentOperator::subAssign : "(" + getVariableIdentifier() + " -= " + expression.toCode() + ")"
-		case AssignmentOperator::andAssign : "(" + getVariableIdentifier() + " &= " + expression.toCode() + ")"
-		case AssignmentOperator::xorAssign : "(" + getVariableIdentifier() + " ^= " + expression.toCode() + ")"
-		case AssignmentOperator::orAssign : "(" + getVariableIdentifier() + " != " + expression.toCode() + ")"
-		case AssignmentOperator::leftShiftAssign : "(" + getVariableIdentifier() + " <<= "+ expression.toCode() + ")"
-		case AssignmentOperator::rightShiftAssign : "(" + getVariableIdentifier() + " >>= " + expression.toCode() + ")"
+		case AssignmentOperator::assign : getVariableIdentifier() + " = " + expression.toCode()
+		case AssignmentOperator::multAssign : getVariableIdentifier() + " *= " + expression.toCode()
+		case AssignmentOperator::divAssign : getVariableIdentifier() + " /= " + expression.toCode()
+		case AssignmentOperator::modAssign : getVariableIdentifier() + " %= " + expression.toCode()
+		case AssignmentOperator::addAssign : getVariableIdentifier() + " += " + expression.toCode()
+		case AssignmentOperator::subAssign : getVariableIdentifier() + " -= " + expression.toCode()
+		case AssignmentOperator::andAssign : getVariableIdentifier() + " &= " + expression.toCode()
+		case AssignmentOperator::xorAssign : getVariableIdentifier() + " ^= " + expression.toCode()
+		case AssignmentOperator::orAssign : getVariableIdentifier() + " != " + expression.toCode()
+		case AssignmentOperator::leftShiftAssign : getVariableIdentifier() + " <<= "+ expression.toCode()
+		case AssignmentOperator::rightShiftAssign : getVariableIdentifier() + " >>= " + expression.toCode()
 		default : ""
 };
 		
@@ -99,10 +99,10 @@ String toCode(EventValueReferenceExpression expression):
 
 /* Logical Expressions */
 String toCode(LogicalOrExpression expression) :
-  	"(" + expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode() + ")";
+  	expression.leftOperand.toCode() + " || " + expression.rightOperand.toCode();
   	
 String toCode(LogicalAndExpression expression) :
-  	"("+expression.leftOperand.toCode() + " && " + expression.rightOperand.toCode() + ")";
+  	expression.leftOperand.toCode() + " && " + expression.rightOperand.toCode();
 
 String toCode(LogicalNotExpression expression) :
   	" !" + expression.operand.toCode();
@@ -111,27 +111,27 @@ String toCode(LogicalRelationExpression expression) :
 	if (expression.leftOperand.inferType().isString()) then
 		expression.logicalString()
 	else
-		"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
+		expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
 
 String logicalString(LogicalRelationExpression expression) : 
 if(expression.operator == RelationalOperator::equals) then
-	"("+expression.leftOperand.toCode()+"==null?"+expression.rightOperand.toCode()+"==null:"+expression.leftOperand.toCode()+".equals("+expression.rightOperand.toCode()+"))"
+	expression.leftOperand.toCode() + "== null?" + expression.rightOperand.toCode() + " ==null :" + expression.leftOperand.toCode()+".equals("+expression.rightOperand.toCode()+")"
 else if(expression.operator == RelationalOperator::notEquals) then
-	"("+expression.leftOperand.toCode()+"==null?"+expression.rightOperand.toCode()+"==null:!"+expression.leftOperand.toCode()+".equals("+expression.rightOperand.toCode()+"))"
+	expression.leftOperand.toCode() + "== null?" + expression.rightOperand.toCode() + " ==null : !" + expression.leftOperand.toCode()+".equals("+expression.rightOperand.toCode()+")"
 ;
 
 
 String toCode(BitwiseAndExpression expression) :
-  	"("+expression.leftOperand.toCode() + " & " + expression.rightOperand.toCode()+")";
+  	expression.leftOperand.toCode() + " & " + expression.rightOperand.toCode();
 
 String toCode(BitwiseOrExpression expression) :
-  	"("+expression.leftOperand.toCode() + " | " + expression.rightOperand.toCode()+")";
+  	expression.leftOperand.toCode() + " | " + expression.rightOperand.toCode();
 
 String toCode(BitwiseXorExpression expression) :
-  	"("+expression.leftOperand.toCode() + " ^ " + expression.rightOperand.toCode()+")";
+  	expression.leftOperand.toCode() + " ^ " + expression.rightOperand.toCode();
 
 String toCode(ShiftExpression expression) :
-  	"("+expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode()+")";
+  	expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
   	
 
 String toCode(NumericalAddSubtractExpression expression) :
@@ -141,7 +141,7 @@ String toCode(NumericalMultiplyDivideExpression expression) :
   	expression.leftOperand.toCode() + getOperator(expression.operator) + expression.rightOperand.toCode();
 
 String toCode(NumericalUnaryExpression expression) :
-    getOperator(expression.operator) + " ( " + expression.operand.toCode() + " ) ";
+    getOperator(expression.operator) + expression.operand.toCode();
 
 String toCode(TimeEvent exp) :
 	"timeEvents["+getEventIdentifier(exp)+".getIndex()]";

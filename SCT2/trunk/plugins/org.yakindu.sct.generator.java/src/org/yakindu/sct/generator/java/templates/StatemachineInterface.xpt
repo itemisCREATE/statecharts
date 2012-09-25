@@ -94,7 +94,7 @@ public interface «getStatemachineInterfaceName()» extends «getStatemachineInterf
 			«ENDIF-»
 			«ENDFOREACH-»
 		}
-		«ENDIF-»
+	«ENDIF-»
 	«IF interface.hasOperations()-»
 		public interface «interface.getInterfaceOperationCallbackName()» {
 		«FOREACH interface.getOperations() AS operation»
