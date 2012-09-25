@@ -34,7 +34,7 @@ public class RuntimeService {
 
 	private static RuntimeService runtimeService;
 
-	private Timer timer = new Timer();
+	private Timer timer = null;
 
 	private Map<Long, StatemachineTimerTask> timerTasks = new HashMap<Long, StatemachineTimerTask>();
 
@@ -128,6 +128,11 @@ public class RuntimeService {
 			StatemachineTimerTask timerTask = new StatemachineTimerTask();
 			timerTasks.put(cyclePeriod, timerTask);
 			boolean ret = timerTask.addStatemachine(statemachine);
+			// Create a new Timer instance if runtime service was cancelled
+			// before
+			if (timer == null) {
+				timer = new Timer();
+			}
 			timer.scheduleAtFixedRate(timerTask, 0, cyclePeriod);
 			return ret;
 		}
@@ -156,12 +161,12 @@ public class RuntimeService {
 	/**
 	 * Cancels the execution of statemachines for the given cycle period. This
 	 * stops the execution of statemachines which are registered for the given
-	 * cycle period and cancels the executing timer task.
+	 * cycle period and cancels the executing {@link TimerTask}.
 	 * 
 	 * @return {@code true} if poperly cancelled
 	 */
 	public boolean cancelAll(long cyclePeriod) {
-		if (timerTasks.containsKey(cyclePeriod)) {
+		if (timer != null && timerTasks.containsKey(cyclePeriod)) {
 			TimerTask task = timerTasks.get(cyclePeriod);
 			task.cancel();
 			timer.purge();
@@ -201,6 +206,20 @@ public class RuntimeService {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 * Cancels the execution of all registered statemachines. This cancels the
+	 * executing {@link Timer} freeing all allocated resources and terminates
+	 * all existing execution threads.
+	 */
+	public void cancelTimer() {
+		if (timer != null) {
+			timer.cancel();
+			timer.purge();
+			timerTasks.clear();
+			timer = null;
+		}
 	}
 }
 «ENDFILE-»
