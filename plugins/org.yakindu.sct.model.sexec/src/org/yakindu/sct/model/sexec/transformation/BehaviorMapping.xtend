@@ -545,6 +545,7 @@ class BehaviorMapping {
 	def Iterable<State> exitStates(Transition t) {
 		val l = t.source.containers
 		l.removeAll(t.target.containers)
+		if (t.source == t.target) l.add(0, t.source)
 		l.filter( typeof(State) )
 	}
 

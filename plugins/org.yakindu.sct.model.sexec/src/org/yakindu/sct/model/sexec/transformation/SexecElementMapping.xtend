@@ -71,11 +71,11 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 		r.sourceElement = statechart
 	}
 
-	def dispatch Scope create r : stextFactory.createInterfaceScope  create(InterfaceScope scope) {
+	def dispatch Scope create r : stextFactory.createInterfaceScope  createScope(InterfaceScope scope) {
 		r.name = scope.name
 	}
 	
-	def dispatch Scope create r : stextFactory.createInternalScope  create(Scope scope) {}
+	def dispatch Scope create r : stextFactory.createInternalScope  createScope(Scope scope) {}
 	
 	
 	
@@ -89,8 +89,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 		_createCache_createDerivedEvent.clear
 		_createCache_create_1.clear
 		_createCache_create_10.clear
-		_createCache_create_11.clear
-		_createCache_create_12.clear
+		_createCache_createScope.clear
+		_createCache_createScope_1.clear
 		_createCache_create_2.clear
 		_createCache_create_3.clear
 		_createCache_create_4.clear

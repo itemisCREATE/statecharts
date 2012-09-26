@@ -77,7 +77,7 @@ public class StructureMapping {
   }
   
   public Scope map(final Scope scope) {
-    final Scope _scope = this.mapping.create(scope);
+    final Scope _scope = this.mapping.createScope(scope);
     EList<Declaration> _declarations = _scope.getDeclarations();
     EList<Declaration> _declarations_1 = scope.getDeclarations();
     final Function1<Declaration,Declaration> _function = new Function1<Declaration,Declaration>() {

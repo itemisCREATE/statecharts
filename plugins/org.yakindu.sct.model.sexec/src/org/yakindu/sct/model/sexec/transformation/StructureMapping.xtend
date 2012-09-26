@@ -47,7 +47,7 @@ class StructureMapping {
 	 *  
 	 */
 	def Scope map(Scope scope) {
-		val _scope = scope.create
+		val _scope = scope.createScope
 		_scope.declarations.addAll(scope.declarations.map(decl | decl.map).filter(e | e != null))
 		return _scope
 	}

@@ -119,48 +119,48 @@ public class SexecElementMapping {
     r.setSourceElement(statechart);
   }
   
-  protected Scope _create(final InterfaceScope scope) {
+  protected Scope _createScope(final InterfaceScope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
     final InterfaceScope _result;
-    synchronized (_createCache_create_1) {
-      if (_createCache_create_1.containsKey(_cacheKey)) {
-        return _createCache_create_1.get(_cacheKey);
+    synchronized (_createCache_createScope) {
+      if (_createCache_createScope.containsKey(_cacheKey)) {
+        return _createCache_createScope.get(_cacheKey);
       }
       StextFactory _stextFactory = this.stextFactory();
       InterfaceScope _createInterfaceScope = _stextFactory.createInterfaceScope();
       _result = _createInterfaceScope;
-      _createCache_create_1.put(_cacheKey, _result);
+      _createCache_createScope.put(_cacheKey, _result);
     }
-    _init_create_1(_result, scope);
+    _init_createScope(_result, scope);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,Scope> _createCache_create_1 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Scope> _createCache_createScope = CollectionLiterals.newHashMap();
   
-  private void _init_create_1(final InterfaceScope r, final InterfaceScope scope) {
+  private void _init_createScope(final InterfaceScope r, final InterfaceScope scope) {
     String _name = scope.getName();
     r.setName(_name);
   }
   
-  protected Scope _create(final Scope scope) {
+  protected Scope _createScope(final Scope scope) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(scope);
     final InternalScope _result;
-    synchronized (_createCache_create_2) {
-      if (_createCache_create_2.containsKey(_cacheKey)) {
-        return _createCache_create_2.get(_cacheKey);
+    synchronized (_createCache_createScope_1) {
+      if (_createCache_createScope_1.containsKey(_cacheKey)) {
+        return _createCache_createScope_1.get(_cacheKey);
       }
       StextFactory _stextFactory = this.stextFactory();
       InternalScope _createInternalScope = _stextFactory.createInternalScope();
       _result = _createInternalScope;
-      _createCache_create_2.put(_cacheKey, _result);
+      _createCache_createScope_1.put(_cacheKey, _result);
     }
-    _init_create_2(_result, scope);
+    _init_createScope_1(_result, scope);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,Scope> _createCache_create_2 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Scope> _createCache_createScope_1 = CollectionLiterals.newHashMap();
   
-  private void _init_create_2(final InternalScope r, final Scope scope) {
+  private void _init_createScope_1(final InternalScope r, final Scope scope) {
   }
   
   public Scope timeEventScope(final ExecutionFlow flow) {
@@ -192,8 +192,8 @@ public class SexecElementMapping {
     this._createCache_createDerivedEvent.clear();
     this._createCache_create_1.clear();
     this._createCache_create_10.clear();
-    this._createCache_create_11.clear();
-    this._createCache_create_12.clear();
+    this._createCache_createScope.clear();
+    this._createCache_createScope_1.clear();
     this._createCache_create_2.clear();
     this._createCache_create_3.clear();
     this._createCache_create_4.clear();
@@ -208,82 +208,82 @@ public class SexecElementMapping {
   public EventDefinition create(final EventDefinition event) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(event);
     final EventDefinition _result;
-    synchronized (_createCache_create_3) {
-      if (_createCache_create_3.containsKey(_cacheKey)) {
-        return _createCache_create_3.get(_cacheKey);
+    synchronized (_createCache_create_1) {
+      if (_createCache_create_1.containsKey(_cacheKey)) {
+        return _createCache_create_1.get(_cacheKey);
       }
       EventDefinition _copy = EcoreUtil.<EventDefinition>copy(event);
       _result = _copy;
-      _createCache_create_3.put(_cacheKey, _result);
+      _createCache_create_1.put(_cacheKey, _result);
     }
-    _init_create_3(_result, event);
+    _init_create_1(_result, event);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,EventDefinition> _createCache_create_3 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,EventDefinition> _createCache_create_1 = CollectionLiterals.newHashMap();
   
-  private void _init_create_3(final EventDefinition r, final EventDefinition event) {
+  private void _init_create_1(final EventDefinition r, final EventDefinition event) {
   }
   
   public VariableDefinition create(final VariableDefinition v) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(v);
     final VariableDefinition _result;
-    synchronized (_createCache_create_4) {
-      if (_createCache_create_4.containsKey(_cacheKey)) {
-        return _createCache_create_4.get(_cacheKey);
+    synchronized (_createCache_create_2) {
+      if (_createCache_create_2.containsKey(_cacheKey)) {
+        return _createCache_create_2.get(_cacheKey);
       }
       VariableDefinition _copy = EcoreUtil.<VariableDefinition>copy(v);
       _result = _copy;
-      _createCache_create_4.put(_cacheKey, _result);
+      _createCache_create_2.put(_cacheKey, _result);
     }
-    _init_create_4(_result, v);
+    _init_create_2(_result, v);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,VariableDefinition> _createCache_create_4 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,VariableDefinition> _createCache_create_2 = CollectionLiterals.newHashMap();
   
-  private void _init_create_4(final VariableDefinition r, final VariableDefinition v) {
+  private void _init_create_2(final VariableDefinition r, final VariableDefinition v) {
   }
   
   public OperationDefinition create(final OperationDefinition v) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(v);
     final OperationDefinition _result;
-    synchronized (_createCache_create_5) {
-      if (_createCache_create_5.containsKey(_cacheKey)) {
-        return _createCache_create_5.get(_cacheKey);
+    synchronized (_createCache_create_3) {
+      if (_createCache_create_3.containsKey(_cacheKey)) {
+        return _createCache_create_3.get(_cacheKey);
       }
       OperationDefinition _copy = EcoreUtil.<OperationDefinition>copy(v);
       _result = _copy;
-      _createCache_create_5.put(_cacheKey, _result);
+      _createCache_create_3.put(_cacheKey, _result);
     }
-    _init_create_5(_result, v);
+    _init_create_3(_result, v);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,OperationDefinition> _createCache_create_5 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,OperationDefinition> _createCache_create_3 = CollectionLiterals.newHashMap();
   
-  private void _init_create_5(final OperationDefinition r, final OperationDefinition v) {
+  private void _init_create_3(final OperationDefinition r, final OperationDefinition v) {
   }
   
   public ExecutionState create(final RegularState state) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(state);
     final ExecutionState _result;
-    synchronized (_createCache_create_6) {
-      if (_createCache_create_6.containsKey(_cacheKey)) {
-        return _createCache_create_6.get(_cacheKey);
+    synchronized (_createCache_create_4) {
+      if (_createCache_create_4.containsKey(_cacheKey)) {
+        return _createCache_create_4.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionState _createExecutionState = _sexecFactory.createExecutionState();
       _result = _createExecutionState;
-      _createCache_create_6.put(_cacheKey, _result);
+      _createCache_create_4.put(_cacheKey, _result);
     }
-    _init_create_6(_result, state);
+    _init_create_4(_result, state);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,ExecutionState> _createCache_create_6 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionState> _createCache_create_4 = CollectionLiterals.newHashMap();
   
-  private void _init_create_6(final ExecutionState r, final RegularState state) {
+  private void _init_create_4(final ExecutionState r, final RegularState state) {
     boolean _notEquals = (!Objects.equal(state, null));
     if (_notEquals) {
       Region _parentRegion = state.getParentRegion();
@@ -311,22 +311,22 @@ public class SexecElementMapping {
   public ExecutionChoice create(final Choice choice) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(choice);
     final ExecutionChoice _result;
-    synchronized (_createCache_create_7) {
-      if (_createCache_create_7.containsKey(_cacheKey)) {
-        return _createCache_create_7.get(_cacheKey);
+    synchronized (_createCache_create_5) {
+      if (_createCache_create_5.containsKey(_cacheKey)) {
+        return _createCache_create_5.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionChoice _createExecutionChoice = _sexecFactory.createExecutionChoice();
       _result = _createExecutionChoice;
-      _createCache_create_7.put(_cacheKey, _result);
+      _createCache_create_5.put(_cacheKey, _result);
     }
-    _init_create_7(_result, choice);
+    _init_create_5(_result, choice);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,ExecutionChoice> _createCache_create_7 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionChoice> _createCache_create_5 = CollectionLiterals.newHashMap();
   
-  private void _init_create_7(final ExecutionChoice r, final Choice choice) {
+  private void _init_create_5(final ExecutionChoice r, final Choice choice) {
     boolean _notEquals = (!Objects.equal(choice, null));
     if (_notEquals) {
       Region _parentRegion = choice.getParentRegion();
@@ -351,22 +351,22 @@ public class SexecElementMapping {
   public ExecutionEntry create(final Entry entry) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(entry);
     final ExecutionEntry _result;
-    synchronized (_createCache_create_8) {
-      if (_createCache_create_8.containsKey(_cacheKey)) {
-        return _createCache_create_8.get(_cacheKey);
+    synchronized (_createCache_create_6) {
+      if (_createCache_create_6.containsKey(_cacheKey)) {
+        return _createCache_create_6.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionEntry _createExecutionEntry = _sexecFactory.createExecutionEntry();
       _result = _createExecutionEntry;
-      _createCache_create_8.put(_cacheKey, _result);
+      _createCache_create_6.put(_cacheKey, _result);
     }
-    _init_create_8(_result, entry);
+    _init_create_6(_result, entry);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,ExecutionEntry> _createCache_create_8 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionEntry> _createCache_create_6 = CollectionLiterals.newHashMap();
   
-  private void _init_create_8(final ExecutionEntry r, final Entry entry) {
+  private void _init_create_6(final ExecutionEntry r, final Entry entry) {
     boolean _notEquals = (!Objects.equal(entry, null));
     if (_notEquals) {
       EObject _eContainer = entry.eContainer();
@@ -488,22 +488,22 @@ public class SexecElementMapping {
   public ExecutionSynchronization create(final Synchronization sync) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(sync);
     final ExecutionSynchronization _result;
-    synchronized (_createCache_create_9) {
-      if (_createCache_create_9.containsKey(_cacheKey)) {
-        return _createCache_create_9.get(_cacheKey);
+    synchronized (_createCache_create_7) {
+      if (_createCache_create_7.containsKey(_cacheKey)) {
+        return _createCache_create_7.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionSynchronization _createExecutionSynchronization = _sexecFactory.createExecutionSynchronization();
       _result = _createExecutionSynchronization;
-      _createCache_create_9.put(_cacheKey, _result);
+      _createCache_create_7.put(_cacheKey, _result);
     }
-    _init_create_9(_result, sync);
+    _init_create_7(_result, sync);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,ExecutionSynchronization> _createCache_create_9 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionSynchronization> _createCache_create_7 = CollectionLiterals.newHashMap();
   
-  private void _init_create_9(final ExecutionSynchronization r, final Synchronization sync) {
+  private void _init_create_7(final ExecutionSynchronization r, final Synchronization sync) {
     boolean _notEquals = (!Objects.equal(sync, null));
     if (_notEquals) {
       Region _parentRegion = sync.getParentRegion();
@@ -528,22 +528,22 @@ public class SexecElementMapping {
   public ExecutionRegion create(final Region region) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(region);
     final ExecutionRegion _result;
-    synchronized (_createCache_create_10) {
-      if (_createCache_create_10.containsKey(_cacheKey)) {
-        return _createCache_create_10.get(_cacheKey);
+    synchronized (_createCache_create_8) {
+      if (_createCache_create_8.containsKey(_cacheKey)) {
+        return _createCache_create_8.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       ExecutionRegion _createExecutionRegion = _sexecFactory.createExecutionRegion();
       _result = _createExecutionRegion;
-      _createCache_create_10.put(_cacheKey, _result);
+      _createCache_create_8.put(_cacheKey, _result);
     }
-    _init_create_10(_result, region);
+    _init_create_8(_result, region);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,ExecutionRegion> _createCache_create_10 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,ExecutionRegion> _createCache_create_8 = CollectionLiterals.newHashMap();
   
-  private void _init_create_10(final ExecutionRegion r, final Region region) {
+  private void _init_create_8(final ExecutionRegion r, final Region region) {
     boolean _notEquals = (!Objects.equal(region, null));
     if (_notEquals) {
       String _name = region.getName();
@@ -590,22 +590,22 @@ public class SexecElementMapping {
   public Reaction create(final Transition tr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(tr);
     final Reaction _result;
-    synchronized (_createCache_create_11) {
-      if (_createCache_create_11.containsKey(_cacheKey)) {
-        return _createCache_create_11.get(_cacheKey);
+    synchronized (_createCache_create_9) {
+      if (_createCache_create_9.containsKey(_cacheKey)) {
+        return _createCache_create_9.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       Reaction _createReaction = _sexecFactory.createReaction();
       _result = _createReaction;
-      _createCache_create_11.put(_cacheKey, _result);
+      _createCache_create_9.put(_cacheKey, _result);
     }
-    _init_create_11(_result, tr);
+    _init_create_9(_result, tr);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,Reaction> _createCache_create_11 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Reaction> _createCache_create_9 = CollectionLiterals.newHashMap();
   
-  private void _init_create_11(final Reaction r, final Transition tr) {
+  private void _init_create_9(final Reaction r, final Transition tr) {
     String _id = this.sce.id(tr);
     r.setName(_id);
     r.setTransition(true);
@@ -615,22 +615,22 @@ public class SexecElementMapping {
   public Reaction create(final LocalReaction lr) {
     final ArrayList<?>_cacheKey = CollectionLiterals.newArrayList(lr);
     final Reaction _result;
-    synchronized (_createCache_create_12) {
-      if (_createCache_create_12.containsKey(_cacheKey)) {
-        return _createCache_create_12.get(_cacheKey);
+    synchronized (_createCache_create_10) {
+      if (_createCache_create_10.containsKey(_cacheKey)) {
+        return _createCache_create_10.get(_cacheKey);
       }
       SexecFactory _sexecFactory = this.sexecFactory();
       Reaction _createReaction = _sexecFactory.createReaction();
       _result = _createReaction;
-      _createCache_create_12.put(_cacheKey, _result);
+      _createCache_create_10.put(_cacheKey, _result);
     }
-    _init_create_12(_result, lr);
+    _init_create_10(_result, lr);
     return _result;
   }
   
-  private final HashMap<ArrayList<? extends Object>,Reaction> _createCache_create_12 = CollectionLiterals.newHashMap();
+  private final HashMap<ArrayList<? extends Object>,Reaction> _createCache_create_10 = CollectionLiterals.newHashMap();
   
-  private void _init_create_12(final Reaction r, final LocalReaction lr) {
+  private void _init_create_10(final Reaction r, final LocalReaction lr) {
     String _id = this.sce.id(lr);
     r.setName(_id);
     r.setTransition(false);
@@ -834,11 +834,11 @@ public class SexecElementMapping {
     return StextFactory.eINSTANCE;
   }
   
-  public Scope create(final Scope scope) {
+  public Scope createScope(final Scope scope) {
     if (scope instanceof InterfaceScope) {
-      return _create((InterfaceScope)scope);
+      return _createScope((InterfaceScope)scope);
     } else if (scope != null) {
-      return _create(scope);
+      return _createScope(scope);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(scope).toString());
