@@ -1069,6 +1069,13 @@ public class BehaviorMapping {
       Vertex _target = t.getTarget();
       List<EObject> _containers = this.sgraph.containers(_target);
       l.removeAll(_containers);
+      Vertex _source_1 = t.getSource();
+      Vertex _target_1 = t.getTarget();
+      boolean _equals = Objects.equal(_source_1, _target_1);
+      if (_equals) {
+        Vertex _source_2 = t.getSource();
+        l.add(0, _source_2);
+      }
       Iterable<State> _filter = Iterables.<State>filter(l, State.class);
       _xblockexpression = (_filter);
     }

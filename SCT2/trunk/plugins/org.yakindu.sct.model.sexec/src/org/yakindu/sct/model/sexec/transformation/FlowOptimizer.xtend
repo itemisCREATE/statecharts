@@ -291,12 +291,12 @@ class FlowOptimizer {
 		_copy.name = _switch.name
 		_copy.comment = _switch.comment
 		_copy.stateConfigurationIdx = _switch.stateConfigurationIdx
-		_copy.cases.addAll( _switch.cases.map( c | c.stepCopy ))
+		_copy.cases.addAll( _switch.cases.map( c | c.caseCopy ))
 		
 		_copy
 	}
 	
-	def StateCase stepCopy(StateCase _case) {
+	def StateCase caseCopy(StateCase _case) {
 		val _copy = sexecFactory.createStateCase
 		_copy.state = _case.state
 		_copy.step = _case.step.stepCopy

@@ -692,8 +692,8 @@ public class FlowOptimizer {
       EList<StateCase> _cases_1 = _switch.getCases();
       final Function1<StateCase,StateCase> _function = new Function1<StateCase,StateCase>() {
           public StateCase apply(final StateCase c) {
-            StateCase _stepCopy = FlowOptimizer.this.stepCopy(c);
-            return _stepCopy;
+            StateCase _caseCopy = FlowOptimizer.this.caseCopy(c);
+            return _caseCopy;
           }
         };
       List<StateCase> _map = ListExtensions.<StateCase, StateCase>map(_cases_1, _function);
@@ -703,7 +703,7 @@ public class FlowOptimizer {
     return _xblockexpression;
   }
   
-  public StateCase stepCopy(final StateCase _case) {
+  public StateCase caseCopy(final StateCase _case) {
     StateCase _xblockexpression = null;
     {
       SexecFactory _sexecFactory = this.sexecFactory();
