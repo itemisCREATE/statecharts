@@ -179,6 +179,9 @@ public class SGraphNameProvider extends DefaultDeclarativeQualifiedNameProvider 
 	}
 
 	public QualifiedName qualifiedName(State ele) {
+		if (ele.getName() == null) {
+			return null;
+		}
 		QualifiedName qualifiedNameFromConverter = QualifiedName
 				.create(identifierConverter.toIdentifier(ele.getName()));
 
