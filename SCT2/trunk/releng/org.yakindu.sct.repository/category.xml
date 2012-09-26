@@ -21,8 +21,6 @@
    <feature url="features/org.yakindu.sct.sdk_1.0.0.qualifier.jar" id="org.yakindu.sct.sdk" version="1.0.0.qualifier">
       <category name="Yakindu SCT 2"/>
    </feature>
-   <feature url="features/org.eclipse.gmf.runtime.emf.clipboard.core.patch_1.0.0.qualifier.jar" id="org.eclipse.gmf.runtime.emf.clipboard.core.patch" version="1.0.0.qualifier" patch="true"/>
-   <feature url="features/org.eclipse.gmf.runtime.sdk_1.6.0.v20120517-1809-67R09E9QuFflXswwIO_z0E3d4k_X.jar" id="org.eclipse.gmf.runtime.sdk" version="1.6.0.v20120517-1809-67R09E9QuFflXswwIO_z0E3d4k_X"/>
    <category-def name="Yakindu SCT 2" label="Yakindu SCT 2">
       <description>
          Yakindu Statechart Tools (SCT) Version 2

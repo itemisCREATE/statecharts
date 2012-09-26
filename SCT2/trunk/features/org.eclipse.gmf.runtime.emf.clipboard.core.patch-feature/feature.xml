@@ -18,7 +18,7 @@
    </license>
 
    <requires>
-      <import feature="org.eclipse.gmf.runtime.sdk" version="0.0.0" patch="true"/>
+      <import feature="org.eclipse.gmf" version="1.6.0.v20120517-1809-7d9X7FFYnmMJUVOKcqPSgIiK281V" patch="true"/>
    </requires>
 
    <plugin
