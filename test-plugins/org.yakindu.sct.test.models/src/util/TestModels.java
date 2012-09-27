@@ -21,10 +21,9 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
 import com.google.inject.Inject;
-
-import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
 
 /**
  * Provides access to the testmodels.
@@ -337,7 +336,7 @@ public class TestModels {
 		URI uri = URI.createPlatformPluginURI(TESTMODEL_DIR + fileName, true);
 		ResourceSetImpl impl = new ResourceSetImpl();
 		Resource resource = impl.getResource(uri, true);
-		Assert.isTrue(resource instanceof InjectMembersResource);
+		Assert.isTrue(resource instanceof AbstractSCTResource);
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
 		return statechart;
