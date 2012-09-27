@@ -11,6 +11,7 @@
 package de.itemis.gmf.runtime.commons.decorators;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.listener.DiagramEventBroker;
 import org.eclipse.gmf.runtime.diagram.core.listener.NotificationListener;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
@@ -24,8 +25,14 @@ import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
  */
 public abstract class BaseDecorator extends AbstractDecorator {
 
+	private EObject semanticElement;
+
 	public BaseDecorator(IDecoratorTarget decoratorTarget) {
 		super(decoratorTarget);
+		gep = (IGraphicalEditPart) getDecoratorTarget().getAdapter(
+				IGraphicalEditPart.class);
+		semanticElement = gep.resolveSemanticElement();
+
 	}
 
 	private NotificationListener notificationListener = new NotificationListener() {
@@ -34,15 +41,12 @@ public abstract class BaseDecorator extends AbstractDecorator {
 			refresh();
 		}
 	};
+	private IGraphicalEditPart gep;
 
 	public void activate() {
-		IGraphicalEditPart gep = (IGraphicalEditPart) getDecoratorTarget()
-				.getAdapter(IGraphicalEditPart.class);
-		assert gep != null;
 
 		DiagramEventBroker.getInstance(gep.getEditingDomain())
-				.addNotificationListener(gep.resolveSemanticElement(),
-						notificationListener);
+				.addNotificationListener(semanticElement, notificationListener);
 	}
 
 	public void deactivate() {
@@ -52,7 +56,7 @@ public abstract class BaseDecorator extends AbstractDecorator {
 		assert gep != null;
 
 		DiagramEventBroker.getInstance(gep.getEditingDomain())
-				.removeNotificationListener(gep.resolveSemanticElement(),
+				.removeNotificationListener(semanticElement,
 						notificationListener);
 	}
 
