@@ -11,7 +11,6 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +18,6 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -28,7 +26,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
-import org.eclipse.xtext.validation.EValidatorRegistrar;
+import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.ITypeSystemAccess;
@@ -40,12 +38,10 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
-import org.yakindu.sct.model.sgraph.SpecificationElement;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
-import org.yakindu.sct.model.sgraph.util.SGraphValidator;
+import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
+import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.DefaultEvent;
@@ -76,6 +72,7 @@ import com.google.inject.name.Named;
  * @auhor muelder
  * 
  */
+@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	public static final String CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION = "A choice should have one outgoing default transition";
@@ -97,34 +94,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
-
-	@Inject
-	public void register(EValidatorRegistrar registrar) {
-		super.register(registrar);
-		registrar.register(SGraphPackage.eINSTANCE, new SGraphValidator());
-	}
-
-	@Check(CheckType.FAST)
-	public void checkUnresolvableProxies(Statechart sc) {
-		AbstractSCTResource resource = (AbstractSCTResource) sc.eResource();
-		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource
-				.getLinkingDiagnostics().asMap().entrySet()) {
-			for (Diagnostic diag : entry.getValue()) {
-				error(diag.getMessage(), entry.getKey(), null, -1);
-			}
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkSyntaxErrors(Statechart sc) {
-		AbstractSCTResource resource = (AbstractSCTResource) sc.eResource();
-		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource
-				.getSyntaxDiagnostics().asMap().entrySet()) {
-			for (Diagnostic diag : entry.getValue()) {
-				error(diag.getMessage(), entry.getKey(), null, -1);
-			}
-		}
-	}
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {

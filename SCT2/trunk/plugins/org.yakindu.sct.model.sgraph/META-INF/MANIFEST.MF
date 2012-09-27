@@ -11,7 +11,8 @@ Export-Package: org.yakindu.sct.model.sgraph,
  org.yakindu.sct.model.sgraph.naming,
  org.yakindu.sct.model.sgraph.resource,
  org.yakindu.sct.model.sgraph.resource.provider,
- org.yakindu.sct.model.sgraph.util
+ org.yakindu.sct.model.sgraph.util,
+ org.yakindu.sct.model.sgraph.validation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.emf.ecore.xmi,
