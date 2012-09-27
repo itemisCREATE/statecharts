@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.Choice;
@@ -46,7 +45,6 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.model.sgraph.util.SGraphValidator;
 
 /**
  * <!-- begin-user-doc -->
@@ -298,15 +296,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		// Initialize created meta-data
 		theSGraphPackage.initializePackageContents();
-
-		// Register package validator
-		EValidator.Registry.INSTANCE.put
-			(theSGraphPackage, 
-			 new EValidator.Descriptor() {
-				 public EValidator getEValidator() {
-					 return SGraphValidator.INSTANCE;
-				 }
-			 });
 
 		// Mark meta-data to indicate it can't be changed
 		theSGraphPackage.freeze();
@@ -1068,83 +1057,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		// Create resource
 		createResource(eNS_URI);
-
-		// Create annotations
-		// http://www.eclipse.org/emf/2002/Ecore
-		createEcoreAnnotations();
-		// InjectMembers
-		createInjectMembersAnnotations();
-	}
-
-	/**
-	 * Initializes the annotations for <b>http://www.eclipse.org/emf/2002/Ecore</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createEcoreAnnotations() {
-		String source = "http://www.eclipse.org/emf/2002/Ecore";			
-		addAnnotation
-		  (vertexEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "IncomingTransitionCount"
-		   });		
-		addAnnotation
-		  (regionEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "ExactlyOneInitialState"
-		   });			
-		addAnnotation
-		  (finalStateEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "OutgoingTransitionCount"
-		   });		
-		addAnnotation
-		  (choiceEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "OutgoingTransitionCount"
-		   });			
-		addAnnotation
-		  (entryEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "DisallowTrigger OutgoingTransitionCount"
-		   });			
-		addAnnotation
-		  (stateEClass, 
-		   source, 
-		   new String[] {
-			 "constraints", "NameIsNotEmpty"
-		   });
-	}
-
-	/**
-	 * Initializes the annotations for <b>InjectMembers</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void createInjectMembersAnnotations() {
-		String source = "InjectMembers";					
-		addAnnotation
-		  (transitionEClass, 
-		   source, 
-		   new String[] {
-		   });				
-		addAnnotation
-		  (statechartEClass, 
-		   source, 
-		   new String[] {
-		   });			
-		addAnnotation
-		  (stateEClass, 
-		   source, 
-		   new String[] {
-		   });	
 	}
 
 } //SGraphPackageImpl

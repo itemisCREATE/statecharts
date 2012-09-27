@@ -28,7 +28,7 @@ import org.yakindu.base.base.NamedElement;
  * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getRegion()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='ExactlyOneInitialState'"
+ * @model
  * @generated
  */
 public interface Region extends NamedElement {

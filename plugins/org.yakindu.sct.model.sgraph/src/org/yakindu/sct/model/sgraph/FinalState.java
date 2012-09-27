@@ -19,7 +19,7 @@ package org.yakindu.sct.model.sgraph;
  *
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getFinalState()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='OutgoingTransitionCount'"
+ * @model
  * @generated
  */
 public interface FinalState extends RegularState {

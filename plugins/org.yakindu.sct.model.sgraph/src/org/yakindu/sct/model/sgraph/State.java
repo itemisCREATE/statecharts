@@ -30,7 +30,7 @@ package org.yakindu.sct.model.sgraph;
  * </p>
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getState()
- * @model annotation="http://www.eclipse.org/emf/2002/Ecore constraints='NameIsNotEmpty'"
+ * @model
  * @generated
  */
 public interface State extends SpecificationElement, ReactiveElement, ScopedElement, RegularState, CompositeElement {
