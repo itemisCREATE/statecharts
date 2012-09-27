@@ -581,12 +581,14 @@
     <extension id="org.yakindu.sct.ui.editor.diagnostic" name="Statechart Diagram problems" point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.core.resources.problemmarker"/>
       <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <super type="org.eclipse.xtext.ui.check.fast" />
       <persistent value="true"/>
    </extension>   
    
     <extension id="org.yakindu.sct.ui.editor.xtext.diagnostic" name="Statechart Expression problems" point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.core.resources.problemmarker"/>
       <super type="org.eclipse.gmf.runtime.common.ui.services.marker"/>
+      <super type="org.eclipse.xtext.ui.check.fast" />
       <persistent value="true"/>
    </extension>   
   
