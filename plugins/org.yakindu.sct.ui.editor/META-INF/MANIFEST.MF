@@ -62,5 +62,6 @@ Export-Package: org.yakindu.sct.ui.editor,
  org.yakindu.sct.ui.editor.providers,
  org.yakindu.sct.ui.editor.submachine,
  org.yakindu.sct.ui.editor.utils,
+ org.yakindu.sct.ui.editor.validation,
  org.yakindu.sct.ui.editor.wizards
 Bundle-Vendor: YAKINDU

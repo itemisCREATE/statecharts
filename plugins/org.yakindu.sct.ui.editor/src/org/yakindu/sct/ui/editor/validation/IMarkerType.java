@@ -19,10 +19,7 @@ import org.yakindu.sct.ui.editor.DiagramActivator;
  */
 public interface IMarkerType {
 
-	public static final String DIAGRAM_MARKER_TYPE = DiagramActivator.PLUGIN_ID
+	public static final String SCT_MARKER_TYPE = DiagramActivator.PLUGIN_ID
 			+ ".diagnostic";
-
-	public static final String XTEXT_MARKER_TYPE = DiagramActivator.PLUGIN_ID
-			+ ".xtext.diagnostic";
 
 }

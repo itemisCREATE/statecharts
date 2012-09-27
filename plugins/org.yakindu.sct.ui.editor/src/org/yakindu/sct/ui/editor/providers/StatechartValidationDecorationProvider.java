@@ -78,10 +78,6 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 			Object model = editPart.getModel();
 			if ((model instanceof View)) {
 				View view = (View) model;
-				// FIXME
-				// if (!(view instanceof Edge) && !view.isSetElement()) {
-				// return;
-				// }
 			}
 			EditDomain ed = editPart.getViewer().getEditDomain();
 			if (!(ed instanceof DiagramEditDomain)) {
@@ -175,9 +171,7 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 			List<IMarker> markers = Lists.newArrayList();
 			try {
 				markers.addAll(Arrays.asList(resource.findMarkers(
-						DIAGRAM_MARKER_TYPE, true, IResource.DEPTH_INFINITE)));
-				markers.addAll(Arrays.asList(resource.findMarkers(
-						XTEXT_MARKER_TYPE, true, IResource.DEPTH_INFINITE)));
+						SCT_MARKER_TYPE, true, IResource.DEPTH_INFINITE)));
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
@@ -354,8 +348,7 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 		}
 
 		public void handleMarkerChanged(IMarker marker) {
-			if (!DIAGRAM_MARKER_TYPE.equals(getType(marker))
-					&& !XTEXT_MARKER_TYPE.equals(getType(marker))) {
+			if (!SCT_MARKER_TYPE.equals(getType(marker))) {
 				return;
 			}
 			String viewId = marker

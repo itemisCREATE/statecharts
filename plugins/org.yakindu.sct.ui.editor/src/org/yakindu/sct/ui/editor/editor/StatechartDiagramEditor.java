@@ -10,12 +10,15 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
@@ -35,9 +38,15 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
-import org.yakindu.sct.ui.editor.validation.ValidationAction;
+import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
+
+import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
 
@@ -52,13 +61,28 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
+
 		@Override
 		public void resourceSetChanged(ResourceSetChangeEvent event) {
-			validate();
+			for (Notification notification : event.getNotifications()) {
+				if (notification.getNotifier() instanceof EObject
+						&& notification.getEventType() != Notification.REMOVING_ADAPTER
+						&& notification.getEventType() != Notification.RESOLVE) {
+					EObject eObject = (EObject) notification.getNotifier();
+					if (SGraphPackage.eINSTANCE == eObject.eClass()
+							.getEPackage()) {
+						validationJob.cancel();
+						validationJob.schedule();
+						return;
+					}
+				}
+			}
 		}
 	};
 
 	private DirtyStateListener domainAdapter;
+
+	private SCTValidationJob validationJob;
 
 	public StatechartDiagramEditor() {
 		super(true);
@@ -70,6 +94,18 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		super.init(site, input);
 		getEditingDomain().addResourceSetListener(validationListener);
 		checkXtextNature();
+		initValidationJob();
+	}
+
+	private void initValidationJob() {
+		final IFile file = ((IFileEditorInput) getEditorInput()).getFile();
+		validationJob = new SCTValidationJob(getDiagram());
+		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
+				.getRegisteredProvider(SemanticTarget.StatechartSpecification,
+						file.getFileExtension());
+		Injector injector = registeredProvider.getInjector();
+		injector.injectMembers(validationJob);
+		validationJob.setRule(file);
 	}
 
 	private void checkXtextNature() {
@@ -101,18 +137,6 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		domainAdapter = new DirtyStateListener();
 		domain.addResourceSetListener(domainAdapter);
 		return domain;
-	}
-
-	@Override
-	protected void sanityCheckState(IEditorInput input) {
-		super.sanityCheckState(input);
-		validate();
-	}
-
-	protected void validate() {
-		if (getDiagram() != null) {
-			ValidationAction.validate(getDiagramEditPart(), getDiagram());
-		}
 	}
 
 	public void gotoMarker(IMarker marker) {
@@ -156,6 +180,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 
 	@Override
 	public void dispose() {
+		validationJob.cancel();
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
 		domainAdapter.dispose();

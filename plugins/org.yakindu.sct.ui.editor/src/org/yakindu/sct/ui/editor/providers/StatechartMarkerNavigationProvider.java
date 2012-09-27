@@ -68,7 +68,7 @@ public class StatechartMarkerNavigationProvider extends
 
 		try {
 			String type = marker.getType();
-			if (type.equals(XTEXT_MARKER_TYPE)) {
+			if (type.equals(SCT_MARKER_TYPE)) {
 				final DirectEditRequest request = new DirectEditRequest();
 				request.setDirectEditFeature(SGraphPackage.eINSTANCE
 						.getSpecificationElement_Specification());
