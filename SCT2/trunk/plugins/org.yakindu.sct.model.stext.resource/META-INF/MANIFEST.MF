@@ -17,5 +17,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.model.stext.resource,
  org.yakindu.sct.model.stext.resource.factory,
- org.yakindu.sct.model.stext.resource.provider,
- org.yakindu.sct.model.stext.resource.services
+ org.yakindu.sct.model.stext.resource.provider

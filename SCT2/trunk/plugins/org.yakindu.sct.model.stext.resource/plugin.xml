@@ -6,7 +6,7 @@
  <extension
          point="org.eclipse.emf.ecore.extension_parser">
       <parser
-            class="org.yakindu.sct.model.stext.resource.factory.ExpressionsExecutableExtensionFactory:org.yakindu.sct.model.stext.resource.factory.InjectMembersResourceFactory"
+            class="org.yakindu.sct.model.stext.resource.factory.ExpressionsExecutableExtensionFactory:org.yakindu.sct.model.stext.resource.factory.StextResourceFactory"
             type="sct">
       </parser>
    </extension>

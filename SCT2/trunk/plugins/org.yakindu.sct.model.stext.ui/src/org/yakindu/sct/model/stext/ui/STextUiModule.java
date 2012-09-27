@@ -10,14 +10,22 @@ import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
+import org.eclipse.xtext.ui.validation.MarkerTypeProvider;
+import org.eclipse.xtext.validation.IDiagnosticConverter;
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerCreator;
+import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
 import org.yakindu.sct.model.stext.ui.hyperlink.NullHyperlinkDetector;
+import org.yakindu.sct.model.stext.ui.validation.SCTDiagnosticConverterImpl;
+import org.yakindu.sct.model.stext.ui.validation.SCTResourceValidatorImpl;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -57,6 +65,22 @@ public class STextUiModule extends
 		return CustomCSSHelpHoverProvider.class;
 	}
 
+	public Class<? extends IDiagnosticConverter> bindIDiagnosticConverter() {
+		return SCTDiagnosticConverterImpl.class;
+	}
+
+	public Class<? extends MarkerCreator> bindMarkerCreator() {
+		return SCTMarkerCreator.class;
+	}
+
+	public Class<? extends MarkerTypeProvider> bindMarkerTypeProvider() {
+		return SCTMarkerTypeProvider.class;
+	}
+
+	public Class<? extends IResourceValidator> bindIResourceValidator() {
+		return SCTResourceValidatorImpl.class;
+	}
+
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
@@ -64,12 +88,11 @@ public class STextUiModule extends
 				.toInstance("/StextHoverStyleSheet.css");
 	}
 
-	
 	@Override
 	public Class<? extends IHyperlinkDetector> bindIHyperlinkDetector() {
 		return NullHyperlinkDetector.class;
 	}
-	
+
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
 			return Access.getJavaProjectsState();

@@ -11,6 +11,7 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,8 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.ITypeSystemAccess;
@@ -37,8 +40,12 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
+import org.yakindu.sct.model.sgraph.util.SGraphValidator;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.DefaultEvent;
@@ -60,8 +67,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.Inject;
-
-import de.itemis.xtext.utils.gmf.resource.InjectMembersResource;
+import com.google.inject.name.Named;
 
 /**
  * s Several validations for nonsensical expressions.
@@ -88,6 +94,37 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	private ITypeSystemAccess tsAccess;
 	@Inject
 	private IQualifiedNameProvider nameProvider;
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
+
+	@Inject
+	public void register(EValidatorRegistrar registrar) {
+		super.register(registrar);
+		registrar.register(SGraphPackage.eINSTANCE, new SGraphValidator());
+	}
+
+	@Check(CheckType.FAST)
+	public void checkUnresolvableProxies(Statechart sc) {
+		AbstractSCTResource resource = (AbstractSCTResource) sc.eResource();
+		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource
+				.getLinkingDiagnostics().asMap().entrySet()) {
+			for (Diagnostic diag : entry.getValue()) {
+				error(diag.getMessage(), entry.getKey(), null, -1);
+			}
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkSyntaxErrors(Statechart sc) {
+		AbstractSCTResource resource = (AbstractSCTResource) sc.eResource();
+		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource
+				.getSyntaxDiagnostics().asMap().entrySet()) {
+			for (Diagnostic diag : entry.getValue()) {
+				error(diag.getMessage(), entry.getKey(), null, -1);
+			}
+		}
+	}
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
@@ -358,10 +395,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Override
 	protected String getCurrentLanguage(Map<Object, Object> context,
 			EObject eObject) {
-		Resource resource = eObject.eResource();
-		if (resource instanceof InjectMembersResource)
-			return ((InjectMembersResource) resource).getLanguageName();
-		return super.getCurrentLanguage(context, eObject);
+		return languageName;
+
 	}
 
 	private INode findNode(EObject source, boolean sourceFound, INode root,
