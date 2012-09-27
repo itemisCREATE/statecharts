@@ -16,6 +16,8 @@ import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
@@ -62,6 +64,8 @@ public abstract class AbstractSTextTest {
 										SGraphPackage.Literals.STATECHART);
 							}
 						}));
+		ResourceSet set = new ResourceSetImpl();
+		set.getResources().add(resource);
 		return resource;
 	}
 
@@ -72,7 +76,7 @@ public abstract class AbstractSTextTest {
 	protected EObject parseExpression(String expression, Scope context,
 			String ruleName) {
 		XtextResource resource = getResource();
-		resource.setURI(URI.createPlatformPluginURI("path", true));
+		resource.setURI(URI.createURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
 		IParseResult result = parser.parse(parserRule, new StringReader(
