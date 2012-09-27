@@ -35,7 +35,6 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 	public void convertValidatorDiagnostic(final Diagnostic diagnostic,
 			final IAcceptor<Issue> acceptor) {
 		super.convertValidatorDiagnostic(diagnostic, new IAcceptor<Issue>() {
-			@Override
 			public void accept(Issue t) {
 				if (diagnostic.getData().get(0) instanceof EObject) {
 					EObject eObject = (EObject) diagnostic.getData().get(0);
