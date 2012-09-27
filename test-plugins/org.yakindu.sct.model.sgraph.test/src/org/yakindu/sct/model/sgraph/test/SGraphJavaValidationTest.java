@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+ * Copyright (c) 2012 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,20 +15,27 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS;
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_ENTRY_WITH_TRIGGER;
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS;
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_INITIAL_ENTRY_WITH_IN_TRANS;
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_NODE_NOT_REACHABLE;
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_STATE_WITHOUT_NAME;
-import static org.yakindu.sct.model.sgraph.util.SGraphValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_ENTRY_WITH_TRIGGER;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_FINAL_STATE_OUTGOING_TRANSITION;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_INITIAL_ENTRY_WITH_IN_TRANS;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_NODE_NOT_REACHABLE;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_NAME;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.validation.Check;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
@@ -40,29 +47,40 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.model.sgraph.util.SGraphValidator;
+import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.validation.STextJavaValidator;
+
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * Test of all validation rules that test very basic properties of statecharts.
  * 
  * @author terfloth
  */
-public class SGraphBaseValidationTest {
+@RunWith(XtextRunner.class)
+@InjectWith(SGraphTestInjectorProvider.class)
+public class SGraphJavaValidationTest {
 
 	static {
 		// set up EMF - the EPackage.Registry requires a context class loader
 		// ...
 		if (Thread.currentThread().getContextClassLoader() == null) {
 			Thread.currentThread().setContextClassLoader(
-					SGraphBaseValidationTest.class.getClassLoader());
+					SGraphJavaValidationTest.class.getClassLoader());
 		}
 		SGraphPackage.eINSTANCE.eClass();
 	}
 
 	protected SGraphFactory factory;
 	protected StextFactory sTextFactory;
-	protected SGraphValidator validator;
+
+	@Inject
+	protected SGraphJavaValidator validator;
+
 	protected BasicDiagnostic diagnostics;
 
 	protected Statechart statechart;
@@ -71,7 +89,6 @@ public class SGraphBaseValidationTest {
 
 	@Before
 	public void setUp() throws Exception {
-		validator = new SGraphValidator();
 		diagnostics = new BasicDiagnostic();
 		factory = SGraphFactory.eINSTANCE;
 		sTextFactory = StextFactory.eINSTANCE;
@@ -91,7 +108,7 @@ public class SGraphBaseValidationTest {
 	 * A regular state must have a name.
 	 */
 	@Test
-	public void testStateWithoutName() {
+	public void stateWithoutName() {
 		prepareStateTest();
 
 		state.setName(null);
@@ -104,7 +121,7 @@ public class SGraphBaseValidationTest {
 	 * A states name must not be empty.
 	 */
 	@Test
-	public void testStateWithEmptyName() {
+	public void nameIsNotEmpty() {
 		prepareStateTest();
 
 		state.setName("");
@@ -117,7 +134,7 @@ public class SGraphBaseValidationTest {
 	 * A state name with just white spaces is not valid.
 	 */
 	@Test
-	public void testStateWithWhitespaceName() {
+	public void stateWithWhitespaceName() {
 		prepareStateTest();
 
 		state.setName(" 	");
@@ -130,7 +147,7 @@ public class SGraphBaseValidationTest {
 	 * A state must be reachable.
 	 */
 	@Test
-	public void testStateUnreachable() {
+	public void vertexNotReachable() {
 		prepareStateTest();
 
 		assertFalse(validator.validate(state, diagnostics,
@@ -142,7 +159,7 @@ public class SGraphBaseValidationTest {
 	 * A regular state may be a dead end.
 	 */
 	@Test
-	public void testStateDeadEnd() {
+	public void stateDeadEnd() {
 		prepareStateTest();
 
 		validator.validate(state, diagnostics, new HashMap<Object, Object>());
@@ -153,7 +170,7 @@ public class SGraphBaseValidationTest {
 	 * A valid regular state must produce no issues.
 	 */
 	@Test
-	public void testValidState() {
+	public void validState() {
 		prepareStateTest();
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
@@ -168,7 +185,7 @@ public class SGraphBaseValidationTest {
 	 * An initial entry should have no incoming transition
 	 */
 	@Test
-	public void testInitialEntryWithIncomingTransition() {
+	public void incomingTransitionCount() {
 		prepareStateTest();
 
 		Entry entry = factory.createEntry();
@@ -176,8 +193,7 @@ public class SGraphBaseValidationTest {
 		createTransition(state, entry);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
+		validator.validate(entry, diagnostics, new HashMap<Object, Object>());
 		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITH_IN_TRANS);
 	}
 
@@ -185,7 +201,7 @@ public class SGraphBaseValidationTest {
 	 * A valid entry should have No issues
 	 */
 	@Test
-	public void testValidInitialEntry() {
+	public void validInitialEntry() {
 		prepareStateTest();
 
 		Entry entry = factory.createEntry();
@@ -202,15 +218,14 @@ public class SGraphBaseValidationTest {
 	 * An initial entry should have an outgoing transition
 	 */
 	@Test
-	public void testInitialEntryWithoutOutTransition() {
+	public void initialEntryWithoutOutTransition() {
 		prepareStateTest();
 
 		Entry entry = factory.createEntry();
 		region.getVertices().add(entry);
 
 		assertEquals(EntryKind.INITIAL, entry.getKind());
-		assertFalse(validator.validate(entry, diagnostics,
-				new HashMap<Object, Object>()));
+		validator.validate(entry, diagnostics, new HashMap<Object, Object>());
 		assertWarning(diagnostics, ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS);
 	}
 
@@ -218,7 +233,7 @@ public class SGraphBaseValidationTest {
 	 * An entry should not have more than one outgoing transition
 	 */
 	@Test
-	public void testEntryMultipleOutTransition() {
+	public void entryMultipleOutTransition() {
 		prepareStateTest();
 
 		Entry entry = factory.createEntry();
@@ -248,7 +263,7 @@ public class SGraphBaseValidationTest {
 	}
 
 	@Test
-	public void testEntryWithTriggeredTransition() {
+	public void disallowTrigger() {
 		prepareStateTest();
 
 		Entry entry = factory.createEntry();
@@ -265,7 +280,7 @@ public class SGraphBaseValidationTest {
 	 * A final state should have at least one incoming transition.
 	 */
 	@Test
-	public void testFinalStateIsolated() {
+	public void finalStateIsolated() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -283,7 +298,7 @@ public class SGraphBaseValidationTest {
 	 * A positive case for a valid final state.
 	 */
 	@Test
-	public void testFinalStateValid() {
+	public void finalStateValid() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -302,7 +317,7 @@ public class SGraphBaseValidationTest {
 	 * A final state should have no outgoing transitions
 	 */
 	@Test
-	public void testFinalStateOutgoingTransitions() {
+	public void outgoingTransitionCount() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -314,19 +329,18 @@ public class SGraphBaseValidationTest {
 		createTransition(state, finalState);
 		createTransition(finalState, state);
 
-		assertFalse(validator.validate(finalState, diagnostics,
-				new HashMap<Object, Object>()));
+		validator.validate(finalState, diagnostics,
+				new HashMap<Object, Object>());
 
 		assertIssueCount(diagnostics, 1);
-		assertWarning(diagnostics,
-				SGraphValidator.ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
+		assertWarning(diagnostics, ISSUE_FINAL_STATE_OUTGOING_TRANSITION);
 	}
 
 	/**
 	 * A choice must have at least one outgoing transition
 	 */
 	@Test
-	public void testChoiceOutgoingTransitions() {
+	public void choiceOutgoingTransitions() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -341,8 +355,30 @@ public class SGraphBaseValidationTest {
 				new HashMap<Object, Object>()));
 
 		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics,
-				SGraphValidator.ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
+		assertError(diagnostics, ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
+	}
+
+	/**
+	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
+	 * method in this class with the same name
+	 */
+	//TODO: Create abstract test class for SGraphJavaValidatorTest and STextJAvaValidatorTest
+	@Test
+	public void testAllChecksHaveTests() throws Exception {
+		Iterable<Method> methods = Lists.newArrayList(SGraphJavaValidator.class
+				.getMethods());
+		methods = Iterables.filter(methods, new Predicate<Method>() {
+			public boolean apply(Method input) {
+				return input.getAnnotation(Check.class) != null;
+			}
+		});
+		for (Method checkMethod : methods) {
+			Method testMethod = getClass().getMethod(checkMethod.getName());
+			assertNotNull(
+					"Missing @Test Annotation for method "
+							+ checkMethod.getName(),
+					testMethod.getAnnotation(Test.class));
+		}
 	}
 
 	protected Transition createTransition(Vertex source, Vertex target) {
