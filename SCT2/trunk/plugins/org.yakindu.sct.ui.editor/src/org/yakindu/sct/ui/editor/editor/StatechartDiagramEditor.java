@@ -59,6 +59,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
+	private static final int DELAY = 200; //ms
 
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
 
@@ -72,7 +73,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 					if (SGraphPackage.eINSTANCE == eObject.eClass()
 							.getEPackage()) {
 						validationJob.cancel();
-						validationJob.schedule();
+						validationJob.schedule(DELAY);
 						return;
 					}
 				}
@@ -186,4 +187,5 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		domainAdapter.dispose();
 		super.dispose();
 	}
+	
 }
