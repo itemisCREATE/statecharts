@@ -365,6 +365,22 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	}
 
 	/**
+	 * @see STextJavaValidator#checkUnresolvableProxies(Statechart)
+	 */
+	@Test
+	public void checkUnresolvableProxies() {
+		// Nothing to do
+	}
+
+	/**
+	 * @see STextJavaValidator#checkcheckSyntaxErrors(Statechart)
+	 */
+	@Test
+	public void checkSyntaxErrors() {
+		// Nothing to do
+	}
+
+	/**
 	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name
 	 */
