@@ -6,7 +6,11 @@ import org.eclipse.xtext.Constants;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.name.Names;
-
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class SGraphTestModule implements Module {
 
 	public void configure(Binder binder) {
