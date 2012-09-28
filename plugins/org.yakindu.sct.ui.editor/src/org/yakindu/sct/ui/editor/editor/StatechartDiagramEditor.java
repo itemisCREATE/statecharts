@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
@@ -59,7 +60,7 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
-	private static final int DELAY = 200; //ms
+	private static final int DELAY = 200; // ms
 
 	private ResourceSetListener validationListener = new ResourceSetListenerImpl() {
 
@@ -70,11 +71,12 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 						&& notification.getEventType() != Notification.REMOVING_ADAPTER
 						&& notification.getEventType() != Notification.RESOLVE) {
 					EObject eObject = (EObject) notification.getNotifier();
-					if (SGraphPackage.eINSTANCE == eObject.eClass()
-							.getEPackage()) {
-						validationJob.cancel();
-						validationJob.schedule(DELAY);
-						return;
+					for (EClass eClass : eObject.eClass().getEAllSuperTypes()) {
+						if (SGraphPackage.eINSTANCE == eClass.getEPackage()) {
+							validationJob.cancel();
+							validationJob.schedule(DELAY);
+							return;
+						}
 					}
 				}
 			}
@@ -187,5 +189,5 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		domainAdapter.dispose();
 		super.dispose();
 	}
-	
+
 }
