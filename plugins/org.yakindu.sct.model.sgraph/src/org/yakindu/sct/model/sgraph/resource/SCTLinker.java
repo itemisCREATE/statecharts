@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.impl.CompositeNodeWithSemanticElement;
 
 /**
@@ -28,7 +29,21 @@ public class SCTLinker extends LazyLinker {
 		// this is an Xtext model element.
 		if (EcoreUtil.getAdapter(obj.eAdapters(),
 				CompositeNodeWithSemanticElement.class) != null) {
-			super.clearReference(obj, ref);
+			try {
+				obj.eSetDeliver(false);
+				super.clearReference(obj, ref);
+			} finally {
+				obj.eSetDeliver(true);
+			}
+		}
+	}
+
+	protected void createAndSetProxy(EObject obj, INode node, EReference eRef) {
+		try {
+			obj.eSetDeliver(false);
+			super.createAndSetProxy(obj, node, eRef);
+		} finally {
+			obj.eSetDeliver(true);
 		}
 	}
 }
