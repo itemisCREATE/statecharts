@@ -34,6 +34,9 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void checkUnresolvableProxies(Statechart sc) {
+		if (!(sc.eResource() instanceof AbstractSCTResource)) {
+			return;
+		}
 		AbstractSCTResource resource = (AbstractSCTResource) sc.eResource();
 		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource
 				.getLinkingDiagnostics().asMap().entrySet()) {
@@ -45,6 +48,9 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void checkSyntaxErrors(Statechart sc) {
+		if (!(sc.eResource() instanceof AbstractSCTResource)) {
+			return;
+		}
 		AbstractSCTResource resource = (AbstractSCTResource) sc.eResource();
 		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource
 				.getSyntaxDiagnostics().asMap().entrySet()) {
