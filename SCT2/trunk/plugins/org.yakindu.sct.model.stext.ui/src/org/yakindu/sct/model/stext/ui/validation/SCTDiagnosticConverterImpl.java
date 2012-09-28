@@ -36,6 +36,7 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 			final IAcceptor<Issue> acceptor) {
 		super.convertValidatorDiagnostic(diagnostic, new IAcceptor<Issue>() {
 			public void accept(Issue t) {
+				boolean notAccepted = true;
 				if (diagnostic.getData().get(0) instanceof EObject) {
 					EObject eObject = (EObject) diagnostic.getData().get(0);
 					if (eObject != null && eObject.eResource() != null) {
@@ -50,11 +51,14 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 								acceptor.accept(new SCTMarkerCreator.WrappingIssue(
 										t, notationView.eResource()
 												.getURIFragment(notationView)));
+								notAccepted = false;
 							}
 						}
 					}
 				}
-				acceptor.accept(t);
+				if (notAccepted) {
+					acceptor.accept(t);
+				}
 			}
 		});
 	}
