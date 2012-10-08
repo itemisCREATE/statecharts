@@ -110,7 +110,7 @@ String getName(ExecutionState this):
 	getExecutionStateName().toFirstUpper();
 
 String getStateName(State state):
-	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions. getFullQualifiedStateName(org.yakindu.sct.model.sgraph.State);
+	JAVA org.yakindu.sct.generator.java.extensions.JavaExtensions.getFullQualifiedStateName(org.yakindu.sct.model.sgraph.State);
 
 String getName(State this) :
 	getStateName().toFirstUpper();
@@ -219,23 +219,24 @@ String statemachineEntryFunctionName(EnterState this):
 
 String actionFunctionName(Step this) : "actions" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
 String checkFunctionName(Step this) : "condition" + getName(reaction().state()) + this.reaction().name.toFirstUpper(); 
+String enterSequenceName(Step this) : "enterSequence"+getName(state()); 
+String deepEnterSequenceName(Step this) : ((ExecutionRegion)this.eContainer).deepEnterSequenceName();
+String exitSequenceName(Step this) : "exitSequence"+getName(state()); 
+String reactSequenceName(Step this) : "react"+getName(state()); 
+
 String statechartEntryActionFunctionName(Step this) : "entryAction" + getName(parentStatechart());
 String statechartExitActionFunctionName(Step this) : "exitAction" + getName(parentStatechart());
 String entryActionFunctionName(Step this) : "entryAction" + getName(state()); 
 String exitActionFunctionName(Step this) : "exitAction" + getName(state());
-String enterSequenceName(Step this) : "enterSequence"+getName(state()); 
 String enterSequenceName(ExecutionState this) : "enterSequence"+getName();
 String enterSequenceName(ExecutionRegion this) : "enterSequence"+getName();
-String deepEnterSequenceName(Step this) : ((ExecutionRegion)this.eContainer).deepEnterSequenceName();
 String deepEnterSequenceName(ExecutionRegion this) : "deepEnterSequence"+getName();
 String shallowEnterSequenceName(Step this) : ((ExecutionRegion)this.eContainer).shallowEnterSequenceName();
 String shallowEnterSequenceName(ExecutionRegion this) : "shallowEnterSequence"+getName();
 String enterSequenceName(ExecutionFlow this) : "enter";
-String exitSequenceName(Step this) : "exitSequence"+getName(state()); 
 String exitSequenceName(ExecutionState this) : "exitSequence"+getName();
 String exitSequenceName(ExecutionRegion this) : "exitSequence"+getName();
 String exitSequenceName(ExecutionFlow this) : "exit";
-String reactSequenceName(Step this) : "react"+getName(state()); 
 
 isEffect(Step step) : (! Check.isInstance(step)) && Reaction.isInstance(step.eContainer) ;
 isReactionCheck(Step step) : Reaction.isInstance(step.eContainer) && Check.isInstance(step);

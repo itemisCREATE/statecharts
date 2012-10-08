@@ -57,24 +57,21 @@ String toCode(PrimitiveValueExpression primValue) :
 	
 String toCode(ParenthesizedExpression e) :
 	"(" + e.expression.toCode() + ")";
-	
-String getVariableIdentifier(AssignmentExpression this) :
-	getContext(varRef).toFirstLower() + varRef.getVarName().toFirstLower();
 
 /* Assignment */
 String toCode(AssignmentExpression this) :
 	switch (operator) {
-		case AssignmentOperator::assign : getVariableIdentifier() + " = " + expression.toCode()
-		case AssignmentOperator::multAssign : getVariableIdentifier() + " *= " + expression.toCode()
-		case AssignmentOperator::divAssign : getVariableIdentifier() + " /= " + expression.toCode()
-		case AssignmentOperator::modAssign : getVariableIdentifier() + " %= " + expression.toCode()
-		case AssignmentOperator::addAssign : getVariableIdentifier() + " += " + expression.toCode()
-		case AssignmentOperator::subAssign : getVariableIdentifier() + " -= " + expression.toCode()
-		case AssignmentOperator::andAssign : getVariableIdentifier() + " &= " + expression.toCode()
-		case AssignmentOperator::xorAssign : getVariableIdentifier() + " ^= " + expression.toCode()
-		case AssignmentOperator::orAssign : getVariableIdentifier() + " != " + expression.toCode()
-		case AssignmentOperator::leftShiftAssign : getVariableIdentifier() + " <<= "+ expression.toCode()
-		case AssignmentOperator::rightShiftAssign : getVariableIdentifier() + " >>= " + expression.toCode()
+		case AssignmentOperator::assign : varRef.toCode() + " = " + expression.toCode()
+		case AssignmentOperator::multAssign : varRef.toCode() + " *= " + expression.toCode()
+		case AssignmentOperator::divAssign : varRef.toCode() + " /= " + expression.toCode()
+		case AssignmentOperator::modAssign : varRef.toCode() + " %= " + expression.toCode()
+		case AssignmentOperator::addAssign : varRef.toCode() + " += " + expression.toCode()
+		case AssignmentOperator::subAssign : varRef.toCode() + " -= " + expression.toCode()
+		case AssignmentOperator::andAssign : varRef.toCode() + " &= " + expression.toCode()
+		case AssignmentOperator::xorAssign : varRef.toCode() + " ^= " + expression.toCode()
+		case AssignmentOperator::orAssign : varRef.toCode() + " != " + expression.toCode()
+		case AssignmentOperator::leftShiftAssign : varRef.toCode() + " <<= "+ expression.toCode()
+		case AssignmentOperator::rightShiftAssign : varRef.toCode() + " >>= " + expression.toCode()
 		default : ""
 };
 		

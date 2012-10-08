@@ -6,14 +6,27 @@
       <SCTGenerator
             class="org.yakindu.sct.generator.java.JavaSCTGenerator"
             description="YAKINDU Java Code Generator"
+            id="yakindu::javadep"
+            contentType="statechart"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            name="YAKINDU Java Xpand Code Generator (deprecated)">
+      </SCTGenerator>
+       <SCTGenerator
+            class="org.yakindu.sct.generator.java.JavaCodeGenerator"
+            description="YAKINDU Java Xtend2 Code Generator"
             id="yakindu::java"
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
-            name="YAKINDU Java Code Generator">
+            name="YAKINDU Java Xtend2 Code Generator">
       </SCTGenerator>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
+      <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.java.features.JavaFeatureValueProvider"
+            generatorId="yakindu::javadep"
+            uri="platform:/plugin/org.yakindu.sct.generator.java/library/FeatureTypeLibrary.xmi">
+      </FeatureLibrary>
       <FeatureLibrary
             defaultProvider="org.yakindu.sct.generator.java.features.JavaFeatureValueProvider"
             generatorId="yakindu::java"
@@ -24,7 +37,11 @@
          point="org.yakindu.sct.generator.core.extensions">
       <ExtensionGeneratorMapping
             fileExtension="sct"
-            generatorId="yakindu::java"></ExtensionGeneratorMapping>
+            generatorId="yakindu::javadep"></ExtensionGeneratorMapping>
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::java">
+      </ExtensionGeneratorMapping>
    </extension>
 
 </plugin>
