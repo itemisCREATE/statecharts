@@ -40,6 +40,7 @@ public class InternalEventLifeCycleTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void InternalEventLifeCycleTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		assertTrue(isActive("C"));
 		raiseEvent("e");

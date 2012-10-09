@@ -40,6 +40,7 @@ public class AlwaysOncycleTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void alwaysOncycleTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("StateA"));
 		while (getInteger("value") < 5) {
 			interpreter.runCycle();

@@ -40,6 +40,7 @@ public class PerformanceTestTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void test_100_000() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		while (getInteger("c") < 100000) {
 			if (isActive("A")) {
@@ -57,6 +58,7 @@ public class PerformanceTestTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void test_1_000_000() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		while (getInteger("c") < 1000000) {
 			if (isActive("A")) {
@@ -74,6 +76,7 @@ public class PerformanceTestTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void test_10_000_000() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		while (getInteger("c") < 10000000) {
 			if (isActive("A")) {

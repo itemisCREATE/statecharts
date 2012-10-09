@@ -40,6 +40,7 @@ public class SyncForkTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void syncForkTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		raiseEvent("f");
 		interpreter.runCycle();

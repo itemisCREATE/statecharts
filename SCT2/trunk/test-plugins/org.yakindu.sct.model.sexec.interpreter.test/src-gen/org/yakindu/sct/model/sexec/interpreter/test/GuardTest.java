@@ -39,6 +39,7 @@ public class GuardTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void guardTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		raiseEvent("Event1");
 		interpreter.runCycle();

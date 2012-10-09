@@ -40,6 +40,7 @@ public class CKeywordsTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void CKeywordsTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("char"));
 		raiseEvent("auto");
 		interpreter.runCycle();

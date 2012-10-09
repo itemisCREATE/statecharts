@@ -40,6 +40,7 @@ public class StringExpressionsTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void StringExpressionsTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("StateA"));
 		assertTrue(getString("myString").equals("hello"));
 		assertTrue(getString("myString2").equals("world"));

@@ -40,6 +40,7 @@ public class PriorityValuesTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void transitionPriority() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		raiseEvent("event1");
 		interpreter.runCycle();
@@ -47,6 +48,7 @@ public class PriorityValuesTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void regionPriority() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		raiseEvent("event2");
 		interpreter.runCycle();

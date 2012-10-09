@@ -40,6 +40,7 @@ public class ShallowHistoryTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void shallowHistoryTest() throws Exception {
+		interpreter.enter();
 		raiseEvent("event1");
 		interpreter.runCycle();
 		raiseEvent("event3");
