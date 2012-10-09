@@ -28,7 +28,6 @@ public class GuardedEntryTest {
 	public void setUp() {
 		statemachine = new GuardedEntryStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,11 +37,13 @@ public class GuardedEntryTest {
 
 	@Test
 	public void testEntryNotTakenOnStatechartEnter() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getDone() == false);
 	}
 	@Test
 	public void testEntryTakenOnStatechartEnter() {
+		statemachine.enter();
 		statemachine.setGuard(true);
 		assertTrue(
 				"sctunit does not allow modifiing variables before entering the state machine!",
@@ -52,6 +53,7 @@ public class GuardedEntryTest {
 	}
 	@Test
 	public void testEntryTakenInTransition() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE();
 		statemachine.runCycle();
@@ -65,6 +67,7 @@ public class GuardedEntryTest {
 	}
 	@Test
 	public void testEntryNotTakenInTransition() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE();
 		statemachine.runCycle();

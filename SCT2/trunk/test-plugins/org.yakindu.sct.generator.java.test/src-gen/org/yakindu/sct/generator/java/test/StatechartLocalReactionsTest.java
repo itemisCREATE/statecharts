@@ -28,7 +28,6 @@ public class StatechartLocalReactionsTest {
 	public void setUp() {
 		statemachine = new StatechartLocalReactionsStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class StatechartLocalReactionsTest {
 
 	@Test
 	public void teststatechartLocalReactionsTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_S1));
 		assertTrue(statemachine.isStateActive(State.region2_a));
 		while (statemachine.getMyInt() < 10) {

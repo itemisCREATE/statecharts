@@ -28,7 +28,6 @@ public class BooleanExpressionsTest {
 	public void setUp() {
 		statemachine = new BooleanExpressionsStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class BooleanExpressionsTest {
 
 	@Test
 	public void testbooleanExpressions() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyBool1() == true);
 		assertTrue(statemachine.getMyBool2() == false);

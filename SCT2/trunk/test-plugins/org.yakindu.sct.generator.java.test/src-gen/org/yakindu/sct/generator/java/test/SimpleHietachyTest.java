@@ -28,7 +28,6 @@ public class SimpleHietachyTest {
 	public void setUp() {
 		statemachine = new SimpleHierachyStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class SimpleHietachyTest {
 
 	@Test
 	public void testsimpleHierachyTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();

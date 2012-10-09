@@ -28,7 +28,6 @@ public class ParenthesisTest {
 	public void setUp() {
 		statemachine = new ParenthesisStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class ParenthesisTest {
 
 	@Test
 	public void testsimple() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mainRegion_A));
 		assertTrue(statemachine.getErg() == 8);
 	}

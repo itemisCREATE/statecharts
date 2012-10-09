@@ -28,7 +28,6 @@ public class SimpleEventTest {
 	public void setUp() {
 		statemachine = new SimpleEventStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class SimpleEventTest {
 
 	@Test
 	public void testsimpleEventTest() {
+		statemachine.enter();
 		assertTrue("Expected A to be active",
 				statemachine.isStateActive(State.main_region_A));
 		assertTrue(5 == 5);

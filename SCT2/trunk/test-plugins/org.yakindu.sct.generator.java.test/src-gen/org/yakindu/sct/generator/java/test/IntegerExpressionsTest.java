@@ -28,7 +28,6 @@ public class IntegerExpressionsTest {
 	public void setUp() {
 		statemachine = new IntegerExpressionsStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class IntegerExpressionsTest {
 
 	@Test
 	public void testintegerExpressions() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyInt1() == 10);
 		assertTrue(statemachine.getMyInt2() == 5);

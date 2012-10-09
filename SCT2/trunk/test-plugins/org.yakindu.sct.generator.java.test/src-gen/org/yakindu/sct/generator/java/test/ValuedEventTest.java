@@ -28,7 +28,6 @@ public class ValuedEventTest {
 	public void setUp() {
 		statemachine = new ValuedEventsStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class ValuedEventTest {
 
 	@Test
 	public void testvaluedEventTest() {
+		statemachine.enter();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.isStateActive(State._region1_C));

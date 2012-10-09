@@ -28,7 +28,6 @@ public class InternalEventLifeCycleTest {
 	public void setUp() {
 		statemachine = new InternalEventLifeCycleStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class InternalEventLifeCycleTest {
 
 	@Test
 	public void testInternalEventLifeCycleTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_A));
 		assertTrue(statemachine.isStateActive(State.r2_C));
 		statemachine.raiseE();

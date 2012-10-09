@@ -28,7 +28,6 @@ public class StringExpressionsTest {
 	public void setUp() {
 		statemachine = new StringExpressionsStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class StringExpressionsTest {
 
 	@Test
 	public void testStringExpressionsTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyString().equals("hello"));
 		assertTrue(statemachine.getMyString2().equals("world"));

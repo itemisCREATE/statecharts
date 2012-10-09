@@ -28,7 +28,6 @@ public class GuardTest {
 	public void setUp() {
 		statemachine = new GuardStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class GuardTest {
 
 	@Test
 	public void testguardTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseEvent1();
 		statemachine.runCycle();

@@ -28,7 +28,6 @@ public class ChoiceTest {
 	public void setUp() {
 		statemachine = new ChoiceStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class ChoiceTest {
 
 	@Test
 	public void testchoiceTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getValue() == 4);
 		statemachine.raisePressKey();

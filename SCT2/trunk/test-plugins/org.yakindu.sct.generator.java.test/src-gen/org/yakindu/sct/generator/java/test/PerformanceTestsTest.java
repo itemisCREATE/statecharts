@@ -28,7 +28,6 @@ public class PerformanceTestsTest {
 	public void setUp() {
 		statemachine = new PerformanceTestStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class PerformanceTestsTest {
 
 	@Test
 	public void testtest_100_000() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
 		while (statemachine.getC() < 100000) {
 			if (statemachine.isStateActive(State.mr_A)) {
@@ -55,6 +55,7 @@ public class PerformanceTestsTest {
 	}
 	@Test
 	public void testtest_1_000_000() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
 		while (statemachine.getC() < 1000000) {
 			if (statemachine.isStateActive(State.mr_A)) {
@@ -72,6 +73,7 @@ public class PerformanceTestsTest {
 	}
 	@Test
 	public void testtest_10_000_000() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.mr_A));
 		while (statemachine.getC() < 10000000) {
 			if (statemachine.isStateActive(State.mr_A)) {

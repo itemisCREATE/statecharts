@@ -28,7 +28,6 @@ public class SyncJoinTest {
 	public void setUp() {
 		statemachine = new SyncJoinStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class SyncJoinTest {
 
 	@Test
 	public void testsyncJoin_C2_Waits() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D1));
@@ -77,6 +77,7 @@ public class SyncJoinTest {
 	}
 	@Test
 	public void testsyncJoin_D2_Waits() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D1));

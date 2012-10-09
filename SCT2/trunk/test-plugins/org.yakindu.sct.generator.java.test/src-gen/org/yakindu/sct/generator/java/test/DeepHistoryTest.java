@@ -28,7 +28,6 @@ public class DeepHistoryTest {
 	public void setUp() {
 		statemachine = new DeepHistoryStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class DeepHistoryTest {
 
 	@Test
 	public void testdeepHistoryTest() {
+		statemachine.enter();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
 		statemachine.raiseEvent3();
