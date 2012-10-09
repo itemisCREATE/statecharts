@@ -1,5 +1,8 @@
 testgroup SyncFork for statechart SyncFork {
 	test syncForkTest{
+		
+		enter
+		
 		assert active (SyncFork.main_region.A)
 		raise f
 		cycle

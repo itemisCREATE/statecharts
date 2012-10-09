@@ -2,6 +2,8 @@
 testgroup ExitOnSelfTransition for statechart ExitOnSelfTransition {
 	test ExitOnSelfTransitionTest { 
 		
+		enter
+		
 		assert active(ExitOnSelfTransition.main_region.A) 
 		assert entryCount == 1 
 		assert exitCount == 0

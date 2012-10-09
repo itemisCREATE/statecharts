@@ -4,6 +4,8 @@ testgroup PerformanceTests for statechart PerformanceTest {
 	
 	test test_100_000 {
 				
+		enter		
+				
 		assert active(PerformanceTest.mr.A) 
 		
 		while [ c < 100000 ] {
@@ -26,6 +28,8 @@ testgroup PerformanceTests for statechart PerformanceTest {
 	 
 	//----------------
 	test test_1_000_000 {
+			
+		enter	
 				
 		assert active(PerformanceTest.mr.A) 
 		
@@ -47,6 +51,8 @@ testgroup PerformanceTests for statechart PerformanceTest {
 	}
 	 
 	test test_10_000_000 {
+				
+		enter		
 				
 		assert active(PerformanceTest.mr.A) 
 		

@@ -1,5 +1,8 @@
 testgroup ShallowHistory for statechart ShallowHistory {
 	test shallowHistoryTest {
+		
+		enter
+		
 		// Change active states to State9;
 		raise event1
 		cycle

@@ -1,5 +1,8 @@
 testgroup StringExpressions for statechart StringExpressions	{
 	test StringExpressionsTest {
+		
+		enter
+		
 		assert active (StringExpressions.main_region.StateA)
 		assert myString == "hello"
 		assert myString2 == "world"

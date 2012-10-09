@@ -3,6 +3,8 @@ testgroup GuardedExit for statechart GuardedExit {
 		 
 	test ExitTaken { 
 
+		enter
+
 		assert active(GuardedExit.main_region.A)
 		assert ! guard
 		raise e
@@ -13,7 +15,9 @@ testgroup GuardedExit for statechart GuardedExit {
 		assert ! done 
 	} 
 		
-	test ExitNotTaken { 
+	test ExitNotTaken {
+		
+		enter 
 
 		assert active(GuardedExit.main_region.A)
 		guard = true

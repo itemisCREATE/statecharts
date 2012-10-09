@@ -1,6 +1,9 @@
 testgroup DeepHistory for statechart DeepHistory {
 	test deepHistoryTest {
 		// Change active states to State9;
+		
+		enter
+		
 		raise event1
 		cycle
 		raise event3
