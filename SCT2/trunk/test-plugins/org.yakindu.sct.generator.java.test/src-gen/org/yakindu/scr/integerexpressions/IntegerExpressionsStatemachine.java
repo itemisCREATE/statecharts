@@ -221,7 +221,7 @@ public class IntegerExpressionsStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_StateA, Main_region_StateB, $NullState$
+		main_region_StateA, main_region_StateB, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -243,6 +243,46 @@ public class IntegerExpressionsStatemachine
 		clearOutEvents();
 	}
 
+	public void enter() {
+		sCIDefault.multiAssign = 2;
+
+		sCIDefault.divAssign = 20;
+
+		sCIDefault.plusAssign = 2;
+
+		sCIDefault.minusAssign = 2;
+
+		sCIDefault.moduloAssign = 20;
+
+		entryAction();
+
+		sCIDefault.myInt1 = 10;
+
+		sCIDefault.myInt2 = 5;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_StateB :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -253,24 +293,13 @@ public class IntegerExpressionsStatemachine
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_StateA :
-				return stateVector[0] == State.Main_region_StateA;
-
-			case Main_region_StateB :
-				return stateVector[0] == State.Main_region_StateB;
-
+			case main_region_StateA :
+				return stateVector[0] == State.main_region_StateA;
+			case main_region_StateB :
+				return stateVector[0] == State.main_region_StateB;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -422,71 +451,31 @@ public class IntegerExpressionsStatemachine
 		sCIDefault.setModuloAssign(value);
 	}
 
-	public void enter() {
-		sCIDefault.multiAssign = 2;
-
-		sCIDefault.divAssign = 20;
-
-		sCIDefault.plusAssign = 2;
-
-		sCIDefault.minusAssign = 2;
-
-		sCIDefault.moduloAssign = 20;
-
-		entryActionIntegerExpressions();
-		sCIDefault.myInt1 = 10;
-
-		sCIDefault.myInt2 = 5;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_StateA;
-
+	/* Entry action for statechart 'IntegerExpressions'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_StateA :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_StateB :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionIntegerExpressions();
+	/* Exit action for state 'IntegerExpressions'. */
+	private void exitAction() {
 	}
 
-	private void entryActionIntegerExpressions() {
-
-	}
-
-	private void exitActionIntegerExpressions() {
-
-	}
-
+	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
 		if (sCIDefault.e1) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.less = ((sCIDefault.myInt1 < sCIDefault.myInt2));
+			sCIDefault.less = (sCIDefault.myInt1 < sCIDefault.myInt2);
 
-			sCIDefault.greater = ((sCIDefault.myInt1 > sCIDefault.myInt2));
+			sCIDefault.greater = (sCIDefault.myInt1 > sCIDefault.myInt2);
 
-			sCIDefault.equalOrLess = ((sCIDefault.myInt1 <= sCIDefault.myInt2));
+			sCIDefault.equalOrLess = (sCIDefault.myInt1 <= sCIDefault.myInt2);
 
-			sCIDefault.equalOrGreater = ((sCIDefault.myInt1 >= sCIDefault.myInt2));
+			sCIDefault.equalOrGreater = (sCIDefault.myInt1 >= sCIDefault.myInt2);
 
-			sCIDefault.equal = ((sCIDefault.myInt1 == sCIDefault.myInt2));
+			sCIDefault.equal = (sCIDefault.myInt1 == sCIDefault.myInt2);
 
-			sCIDefault.notEqual = ((sCIDefault.myInt1 != sCIDefault.myInt2));
+			sCIDefault.notEqual = (sCIDefault.myInt1 != sCIDefault.myInt2);
 
 			sCIDefault.plus = sCIDefault.myInt1 + sCIDefault.myInt2;
 
@@ -498,7 +487,7 @@ public class IntegerExpressionsStatemachine
 
 			sCIDefault.modulo = sCIDefault.myInt1 % sCIDefault.myInt2;
 
-			sCIDefault.negat = -(sCIDefault.myInt1);
+			sCIDefault.negat = -sCIDefault.myInt1;
 
 			sCIDefault.multiAssign *= sCIDefault.myInt1;
 
@@ -511,13 +500,12 @@ public class IntegerExpressionsStatemachine
 			sCIDefault.moduloAssign %= sCIDefault.myInt1;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_StateB;
-
+			stateVector[0] = State.main_region_StateB;
 		}
-
 	}
-	private void reactMain_region_StateB() {
 
+	/* The reactions of state StateB. */
+	private void reactMain_region_StateB() {
 	}
 
 	public void runCycle() {
@@ -527,10 +515,10 @@ public class IntegerExpressionsStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_StateA :
+				case main_region_StateA :
 					reactMain_region_StateA();
 					break;
-				case Main_region_StateB :
+				case main_region_StateB :
 					reactMain_region_StateB();
 					break;
 				default :

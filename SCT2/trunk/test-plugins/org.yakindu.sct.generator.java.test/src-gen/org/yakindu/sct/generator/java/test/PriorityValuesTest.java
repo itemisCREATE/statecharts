@@ -38,17 +38,17 @@ public class PriorityValuesTest {
 
 	@Test
 	public void testtransitionPriority() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_C));
+		assertTrue(statemachine.isStateActive(State.main_region_C));
 	}
 	@Test
 	public void testregionPriority() {
-		assertTrue(statemachine.isStateActive(State.SomeRegion_A));
+		assertTrue(statemachine.isStateActive(State.someRegion_A));
 		statemachine.raiseEvent2();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.SomeRegion_B));
-		assertTrue(!statemachine.isStateActive(State.Main_region_E));
+		assertTrue(statemachine.isStateActive(State.someRegion_B));
+		assertTrue(!statemachine.isStateActive(State.main_region_E));
 	}
 }

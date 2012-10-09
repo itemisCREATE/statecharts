@@ -16,10 +16,10 @@ public class GuardStatemachine implements IGuardStatemachine {
 			event2 = true;
 		}
 
-		private boolean eventReturn;
+		private boolean return_ID;
 
 		public void raiseReturn() {
-			eventReturn = true;
+			return_ID = true;
 		}
 
 		private int myVar = 0;
@@ -35,7 +35,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		public void clearEvents() {
 			event1 = false;
 			event2 = false;
-			eventReturn = false;
+			return_ID = false;
 		}
 
 	}
@@ -43,7 +43,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, Main_region_B, $NullState$
+		main_region_A, main_region_B, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -65,6 +65,34 @@ public class GuardStatemachine implements IGuardStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		sCIDefault.myVar = 0;
+
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -75,24 +103,13 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
-			case Main_region_B :
-				return stateVector[0] == State.Main_region_B;
-
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
+			case main_region_B :
+				return stateVector[0] == State.main_region_B;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -102,11 +119,9 @@ public class GuardStatemachine implements IGuardStatemachine {
 	public void raiseEvent1() {
 		sCIDefault.raiseEvent1();
 	}
-
 	public void raiseEvent2() {
 		sCIDefault.raiseEvent2();
 	}
-
 	public void raiseReturn() {
 		sCIDefault.raiseReturn();
 	}
@@ -119,75 +134,46 @@ public class GuardStatemachine implements IGuardStatemachine {
 		sCIDefault.setMyVar(value);
 	}
 
-	public void enter() {
-		sCIDefault.myVar = 0;
-
-		entryActionGuard();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
+	/* Entry action for statechart 'Guard'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_B :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionGuard();
+	/* Exit action for state 'Guard'. */
+	private void exitAction() {
 	}
 
-	private void entryActionGuard() {
-
-	}
-
-	private void exitActionGuard() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if ((sCIDefault.event1 && (sCIDefault.myVar == 10))) {
+		if (sCIDefault.event1 && sCIDefault.myVar == 10) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			sCIDefault.myVar = 10;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_B;
-
+			stateVector[0] = State.main_region_B;
 		} else {
 			if (sCIDefault.event2) {
+				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
 				sCIDefault.myVar = 10;
 
 				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_B;
-
+				stateVector[0] = State.main_region_B;
 			}
 		}
-
 	}
+
+	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (sCIDefault.eventReturn) {
+		if (sCIDefault.return_ID) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
+			stateVector[0] = State.main_region_A;
 		}
-
 	}
 
 	public void runCycle() {
@@ -197,10 +183,10 @@ public class GuardStatemachine implements IGuardStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
-				case Main_region_B :
+				case main_region_B :
 					reactMain_region_B();
 					break;
 				default :

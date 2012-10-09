@@ -38,12 +38,12 @@ public class StateIsActiveTest {
 
 	@Test
 	public void teststateIsActive() {
-		assertTrue(statemachine.isStateActive(State.R1_R1A));
-		assertTrue(statemachine.isStateActive(State.R2_R2A));
+		assertTrue(statemachine.isStateActive(State.r1_R1A));
+		assertTrue(statemachine.isStateActive(State.r2_R2A));
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.R1_R1B));
-		assertTrue(statemachine.isStateActive(State.R2_R2B));
+		assertTrue(statemachine.isStateActive(State.r1_R1B));
+		assertTrue(statemachine.isStateActive(State.r2_R2B));
 	}
 }

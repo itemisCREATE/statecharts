@@ -4,484 +4,484 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	private final class SCIDefaultImpl implements SCIDefault {
 
-		private boolean eventWhile;
+		private boolean while_ID;
 
 		public void raiseWhile() {
-			eventWhile = true;
+			while_ID = true;
 		}
 
-		private boolean varAbstract;
+		private boolean abstract_ID;
 
-		public boolean getVarAbstract() {
-			return varAbstract;
+		public boolean getAbstract() {
+			return abstract_ID;
 		}
 
-		public void setVarAbstract(boolean value) {
-			this.varAbstract = value;
+		public void setAbstract(boolean value) {
+			this.abstract_ID = value;
 		}
 
-		private boolean varAssert;
+		private boolean assert_ID;
 
-		public boolean getVarAssert() {
-			return varAssert;
+		public boolean getAssert() {
+			return assert_ID;
 		}
 
-		public void setVarAssert(boolean value) {
-			this.varAssert = value;
+		public void setAssert(boolean value) {
+			this.assert_ID = value;
 		}
 
-		private boolean varBoolean;
+		private boolean boolean_ID;
 
-		public boolean getVarBoolean() {
-			return varBoolean;
+		public boolean getBoolean() {
+			return boolean_ID;
 		}
 
-		public void setVarBoolean(boolean value) {
-			this.varBoolean = value;
+		public void setBoolean(boolean value) {
+			this.boolean_ID = value;
 		}
 
-		private boolean varBreak;
+		private boolean break_ID;
 
-		public boolean getVarBreak() {
-			return varBreak;
+		public boolean getBreak() {
+			return break_ID;
 		}
 
-		public void setVarBreak(boolean value) {
-			this.varBreak = value;
+		public void setBreak(boolean value) {
+			this.break_ID = value;
 		}
 
-		private boolean varByte;
+		private boolean byte_ID;
 
-		public boolean getVarByte() {
-			return varByte;
+		public boolean getByte() {
+			return byte_ID;
 		}
 
-		public void setVarByte(boolean value) {
-			this.varByte = value;
+		public void setByte(boolean value) {
+			this.byte_ID = value;
 		}
 
-		private boolean varCase;
+		private boolean case_ID;
 
-		public boolean getVarCase() {
-			return varCase;
+		public boolean getCase() {
+			return case_ID;
 		}
 
-		public void setVarCase(boolean value) {
-			this.varCase = value;
+		public void setCase(boolean value) {
+			this.case_ID = value;
 		}
 
-		private boolean varCatch;
+		private boolean catch_ID;
 
-		public boolean getVarCatch() {
-			return varCatch;
+		public boolean getCatch() {
+			return catch_ID;
 		}
 
-		public void setVarCatch(boolean value) {
-			this.varCatch = value;
+		public void setCatch(boolean value) {
+			this.catch_ID = value;
 		}
 
-		private boolean varChar;
+		private boolean char_ID;
 
-		public boolean getVarChar() {
-			return varChar;
+		public boolean getChar() {
+			return char_ID;
 		}
 
-		public void setVarChar(boolean value) {
-			this.varChar = value;
+		public void setChar(boolean value) {
+			this.char_ID = value;
 		}
 
-		private boolean varClass;
+		private boolean class_ID;
 
-		public boolean getVarClass() {
-			return varClass;
+		public boolean getClass_ID() {
+			return class_ID;
 		}
 
-		public void setVarClass(boolean value) {
-			this.varClass = value;
+		public void setClass_ID(boolean value) {
+			this.class_ID = value;
 		}
 
-		private boolean varConst;
+		private boolean const_ID;
 
-		public boolean getVarConst() {
-			return varConst;
+		public boolean getConst() {
+			return const_ID;
 		}
 
-		public void setVarConst(boolean value) {
-			this.varConst = value;
+		public void setConst(boolean value) {
+			this.const_ID = value;
 		}
 
-		private boolean varContinue;
+		private boolean continue_ID;
 
-		public boolean getVarContinue() {
-			return varContinue;
+		public boolean getContinue() {
+			return continue_ID;
 		}
 
-		public void setVarContinue(boolean value) {
-			this.varContinue = value;
+		public void setContinue(boolean value) {
+			this.continue_ID = value;
 		}
 
-		private boolean varDo;
+		private boolean do_ID;
 
-		public boolean getVarDo() {
-			return varDo;
+		public boolean getDo() {
+			return do_ID;
 		}
 
-		public void setVarDo(boolean value) {
-			this.varDo = value;
+		public void setDo(boolean value) {
+			this.do_ID = value;
 		}
 
-		private boolean varDouble;
+		private boolean double_ID;
 
-		public boolean getVarDouble() {
-			return varDouble;
+		public boolean getDouble() {
+			return double_ID;
 		}
 
-		public void setVarDouble(boolean value) {
-			this.varDouble = value;
+		public void setDouble(boolean value) {
+			this.double_ID = value;
 		}
 
-		private boolean varEnum;
+		private boolean enum_ID;
 
-		public boolean getVarEnum() {
-			return varEnum;
+		public boolean getEnum() {
+			return enum_ID;
 		}
 
-		public void setVarEnum(boolean value) {
-			this.varEnum = value;
+		public void setEnum(boolean value) {
+			this.enum_ID = value;
 		}
 
-		private boolean varExtends;
+		private boolean extends_ID;
 
-		public boolean getVarExtends() {
-			return varExtends;
+		public boolean getExtends() {
+			return extends_ID;
 		}
 
-		public void setVarExtends(boolean value) {
-			this.varExtends = value;
+		public void setExtends(boolean value) {
+			this.extends_ID = value;
 		}
 
-		private boolean varFinal;
+		private boolean final_ID;
 
-		public boolean getVarFinal() {
-			return varFinal;
+		public boolean getFinal() {
+			return final_ID;
 		}
 
-		public void setVarFinal(boolean value) {
-			this.varFinal = value;
+		public void setFinal(boolean value) {
+			this.final_ID = value;
 		}
 
-		private boolean varFinally;
+		private boolean finally_ID;
 
-		public boolean getVarFinally() {
-			return varFinally;
+		public boolean getFinally() {
+			return finally_ID;
 		}
 
-		public void setVarFinally(boolean value) {
-			this.varFinally = value;
+		public void setFinally(boolean value) {
+			this.finally_ID = value;
 		}
 
-		private boolean varFloat;
+		private boolean float_ID;
 
-		public boolean getVarFloat() {
-			return varFloat;
+		public boolean getFloat() {
+			return float_ID;
 		}
 
-		public void setVarFloat(boolean value) {
-			this.varFloat = value;
+		public void setFloat(boolean value) {
+			this.float_ID = value;
 		}
 
-		private boolean varFor;
+		private boolean for_ID;
 
-		public boolean getVarFor() {
-			return varFor;
+		public boolean getFor() {
+			return for_ID;
 		}
 
-		public void setVarFor(boolean value) {
-			this.varFor = value;
+		public void setFor(boolean value) {
+			this.for_ID = value;
 		}
 
-		private boolean varGoto;
+		private boolean goto_ID;
 
-		public boolean getVarGoto() {
-			return varGoto;
+		public boolean getGoto() {
+			return goto_ID;
 		}
 
-		public void setVarGoto(boolean value) {
-			this.varGoto = value;
+		public void setGoto(boolean value) {
+			this.goto_ID = value;
 		}
 
-		private boolean varIf;
+		private boolean if_ID;
 
-		public boolean getVarIf() {
-			return varIf;
+		public boolean getIf() {
+			return if_ID;
 		}
 
-		public void setVarIf(boolean value) {
-			this.varIf = value;
+		public void setIf(boolean value) {
+			this.if_ID = value;
 		}
 
-		private boolean varImplements;
+		private boolean implements_ID;
 
-		public boolean getVarImplements() {
-			return varImplements;
+		public boolean getImplements() {
+			return implements_ID;
 		}
 
-		public void setVarImplements(boolean value) {
-			this.varImplements = value;
+		public void setImplements(boolean value) {
+			this.implements_ID = value;
 		}
 
-		private boolean varImport;
+		private boolean import_ID;
 
-		public boolean getVarImport() {
-			return varImport;
+		public boolean getImport() {
+			return import_ID;
 		}
 
-		public void setVarImport(boolean value) {
-			this.varImport = value;
+		public void setImport(boolean value) {
+			this.import_ID = value;
 		}
 
-		private boolean varInstanceof;
+		private boolean instanceof_ID;
 
-		public boolean getVarInstanceof() {
-			return varInstanceof;
+		public boolean getInstanceof() {
+			return instanceof_ID;
 		}
 
-		public void setVarInstanceof(boolean value) {
-			this.varInstanceof = value;
+		public void setInstanceof(boolean value) {
+			this.instanceof_ID = value;
 		}
 
-		private boolean varInt;
+		private boolean int_ID;
 
-		public boolean getVarInt() {
-			return varInt;
+		public boolean getInt() {
+			return int_ID;
 		}
 
-		public void setVarInt(boolean value) {
-			this.varInt = value;
+		public void setInt(boolean value) {
+			this.int_ID = value;
 		}
 
-		private boolean varLong;
+		private boolean long_ID;
 
-		public boolean getVarLong() {
-			return varLong;
+		public boolean getLong() {
+			return long_ID;
 		}
 
-		public void setVarLong(boolean value) {
-			this.varLong = value;
+		public void setLong(boolean value) {
+			this.long_ID = value;
 		}
 
-		private boolean varNative;
+		private boolean native_ID;
 
-		public boolean getVarNative() {
-			return varNative;
+		public boolean getNative() {
+			return native_ID;
 		}
 
-		public void setVarNative(boolean value) {
-			this.varNative = value;
+		public void setNative(boolean value) {
+			this.native_ID = value;
 		}
 
-		private boolean varNew;
+		private boolean new_ID;
 
-		public boolean getVarNew() {
-			return varNew;
+		public boolean getNew() {
+			return new_ID;
 		}
 
-		public void setVarNew(boolean value) {
-			this.varNew = value;
+		public void setNew(boolean value) {
+			this.new_ID = value;
 		}
 
-		private boolean varNull;
+		private boolean null_ID;
 
-		public boolean getVarNull() {
-			return varNull;
+		public boolean getNull() {
+			return null_ID;
 		}
 
-		public void setVarNull(boolean value) {
-			this.varNull = value;
+		public void setNull(boolean value) {
+			this.null_ID = value;
 		}
 
-		private boolean varPackage;
+		private boolean package_ID;
 
-		public boolean getVarPackage() {
-			return varPackage;
+		public boolean getPackage() {
+			return package_ID;
 		}
 
-		public void setVarPackage(boolean value) {
-			this.varPackage = value;
+		public void setPackage(boolean value) {
+			this.package_ID = value;
 		}
 
-		private boolean varPrivate;
+		private boolean private_ID;
 
-		public boolean getVarPrivate() {
-			return varPrivate;
+		public boolean getPrivate() {
+			return private_ID;
 		}
 
-		public void setVarPrivate(boolean value) {
-			this.varPrivate = value;
+		public void setPrivate(boolean value) {
+			this.private_ID = value;
 		}
 
-		private boolean varProtected;
+		private boolean protected_ID;
 
-		public boolean getVarProtected() {
-			return varProtected;
+		public boolean getProtected() {
+			return protected_ID;
 		}
 
-		public void setVarProtected(boolean value) {
-			this.varProtected = value;
+		public void setProtected(boolean value) {
+			this.protected_ID = value;
 		}
 
-		private boolean varPublic;
+		private boolean public_ID;
 
-		public boolean getVarPublic() {
-			return varPublic;
+		public boolean getPublic() {
+			return public_ID;
 		}
 
-		public void setVarPublic(boolean value) {
-			this.varPublic = value;
+		public void setPublic(boolean value) {
+			this.public_ID = value;
 		}
 
-		private boolean varReturn;
+		private boolean return_ID;
 
-		public boolean getVarReturn() {
-			return varReturn;
+		public boolean getReturn() {
+			return return_ID;
 		}
 
-		public void setVarReturn(boolean value) {
-			this.varReturn = value;
+		public void setReturn(boolean value) {
+			this.return_ID = value;
 		}
 
-		private boolean varShort;
+		private boolean short_ID;
 
-		public boolean getVarShort() {
-			return varShort;
+		public boolean getShort() {
+			return short_ID;
 		}
 
-		public void setVarShort(boolean value) {
-			this.varShort = value;
+		public void setShort(boolean value) {
+			this.short_ID = value;
 		}
 
-		private boolean varStatic;
+		private boolean static_ID;
 
-		public boolean getVarStatic() {
-			return varStatic;
+		public boolean getStatic() {
+			return static_ID;
 		}
 
-		public void setVarStatic(boolean value) {
-			this.varStatic = value;
+		public void setStatic(boolean value) {
+			this.static_ID = value;
 		}
 
-		private boolean varStrictfp;
+		private boolean strictfp_ID;
 
-		public boolean getVarStrictfp() {
-			return varStrictfp;
+		public boolean getStrictfp() {
+			return strictfp_ID;
 		}
 
-		public void setVarStrictfp(boolean value) {
-			this.varStrictfp = value;
+		public void setStrictfp(boolean value) {
+			this.strictfp_ID = value;
 		}
 
-		private boolean varSuper;
+		private boolean super_ID;
 
-		public boolean getVarSuper() {
-			return varSuper;
+		public boolean getSuper() {
+			return super_ID;
 		}
 
-		public void setVarSuper(boolean value) {
-			this.varSuper = value;
+		public void setSuper(boolean value) {
+			this.super_ID = value;
 		}
 
-		private boolean varSwitch;
+		private boolean switch_ID;
 
-		public boolean getVarSwitch() {
-			return varSwitch;
+		public boolean getSwitch() {
+			return switch_ID;
 		}
 
-		public void setVarSwitch(boolean value) {
-			this.varSwitch = value;
+		public void setSwitch(boolean value) {
+			this.switch_ID = value;
 		}
 
-		private boolean varSynchronized;
+		private boolean synchronized_ID;
 
-		public boolean getVarSynchronized() {
-			return varSynchronized;
+		public boolean getSynchronized() {
+			return synchronized_ID;
 		}
 
-		public void setVarSynchronized(boolean value) {
-			this.varSynchronized = value;
+		public void setSynchronized(boolean value) {
+			this.synchronized_ID = value;
 		}
 
-		private boolean varThis;
+		private boolean this_ID;
 
-		public boolean getVarThis() {
-			return varThis;
+		public boolean getThis() {
+			return this_ID;
 		}
 
-		public void setVarThis(boolean value) {
-			this.varThis = value;
+		public void setThis(boolean value) {
+			this.this_ID = value;
 		}
 
-		private boolean varThrow;
+		private boolean throw_ID;
 
-		public boolean getVarThrow() {
-			return varThrow;
+		public boolean getThrow() {
+			return throw_ID;
 		}
 
-		public void setVarThrow(boolean value) {
-			this.varThrow = value;
+		public void setThrow(boolean value) {
+			this.throw_ID = value;
 		}
 
-		private boolean varThrows;
+		private boolean throws_ID;
 
-		public boolean getVarThrows() {
-			return varThrows;
+		public boolean getThrows() {
+			return throws_ID;
 		}
 
-		public void setVarThrows(boolean value) {
-			this.varThrows = value;
+		public void setThrows(boolean value) {
+			this.throws_ID = value;
 		}
 
-		private boolean varTransient;
+		private boolean transient_ID;
 
-		public boolean getVarTransient() {
-			return varTransient;
+		public boolean getTransient() {
+			return transient_ID;
 		}
 
-		public void setVarTransient(boolean value) {
-			this.varTransient = value;
+		public void setTransient(boolean value) {
+			this.transient_ID = value;
 		}
 
-		private boolean varTry;
+		private boolean try_ID;
 
-		public boolean getVarTry() {
-			return varTry;
+		public boolean getTry() {
+			return try_ID;
 		}
 
-		public void setVarTry(boolean value) {
-			this.varTry = value;
+		public void setTry(boolean value) {
+			this.try_ID = value;
 		}
 
-		private boolean varVoid;
+		private boolean void_ID;
 
-		public boolean getVarVoid() {
-			return varVoid;
+		public boolean getVoid() {
+			return void_ID;
 		}
 
-		public void setVarVoid(boolean value) {
-			this.varVoid = value;
+		public void setVoid(boolean value) {
+			this.void_ID = value;
 		}
 
-		private boolean varVolatile;
+		private boolean volatile_ID;
 
-		public boolean getVarVolatile() {
-			return varVolatile;
+		public boolean getVolatile() {
+			return volatile_ID;
 		}
 
-		public void setVarVolatile(boolean value) {
-			this.varVolatile = value;
+		public void setVolatile(boolean value) {
+			this.volatile_ID = value;
 		}
 
 		public void clearEvents() {
-			eventWhile = false;
+			while_ID = false;
 		}
 
 	}
@@ -489,11 +489,10 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Goto_abstract, Goto_boolean, Goto_void, Goto_void_volatile_transient, Goto_void_volatile_transient_throw_false, $NullState$
+		goto_abstract, goto_boolean, goto_void, goto_void_volatile_transient, goto_void_volatile_transient_throw_false, $NullState$
 	};
 
 	private State[] historyVector = new State[2];
-
 	private final State[] stateVector = new State[1];
 
 	private int nextStateIndex;
@@ -516,6 +515,135 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		sCIDefault.abstract_ID = true;
+
+		sCIDefault.assert_ID = true;
+
+		sCIDefault.boolean_ID = true;
+
+		sCIDefault.break_ID = true;
+
+		sCIDefault.byte_ID = true;
+
+		sCIDefault.case_ID = true;
+
+		sCIDefault.catch_ID = true;
+
+		sCIDefault.char_ID = true;
+
+		sCIDefault.class_ID = true;
+
+		sCIDefault.const_ID = true;
+
+		sCIDefault.continue_ID = true;
+
+		sCIDefault.do_ID = true;
+
+		sCIDefault.double_ID = true;
+
+		sCIDefault.enum_ID = true;
+
+		sCIDefault.extends_ID = true;
+
+		sCIDefault.final_ID = true;
+
+		sCIDefault.finally_ID = true;
+
+		sCIDefault.float_ID = true;
+
+		sCIDefault.for_ID = true;
+
+		sCIDefault.goto_ID = true;
+
+		sCIDefault.if_ID = true;
+
+		sCIDefault.implements_ID = true;
+
+		sCIDefault.import_ID = true;
+
+		sCIDefault.instanceof_ID = true;
+
+		sCIDefault.int_ID = true;
+
+		sCIDefault.long_ID = true;
+
+		sCIDefault.native_ID = true;
+
+		sCIDefault.new_ID = true;
+
+		sCIDefault.null_ID = true;
+
+		sCIDefault.package_ID = true;
+
+		sCIDefault.private_ID = true;
+
+		sCIDefault.protected_ID = true;
+
+		sCIDefault.public_ID = true;
+
+		sCIDefault.return_ID = true;
+
+		sCIDefault.short_ID = true;
+
+		sCIDefault.static_ID = true;
+
+		sCIDefault.strictfp_ID = true;
+
+		sCIDefault.super_ID = true;
+
+		sCIDefault.switch_ID = true;
+
+		sCIDefault.synchronized_ID = true;
+
+		sCIDefault.this_ID = true;
+
+		sCIDefault.throw_ID = true;
+
+		sCIDefault.throws_ID = true;
+
+		sCIDefault.transient_ID = true;
+
+		sCIDefault.try_ID = true;
+
+		sCIDefault.void_ID = true;
+
+		sCIDefault.volatile_ID = true;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.goto_abstract;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case goto_abstract :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case goto_boolean :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case goto_void_volatile_transient_throw_false :
+				historyVector[1] = stateVector[0];
+
+				historyVector[0] = stateVector[0];
+
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -526,38 +654,24 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Goto_abstract :
-				return stateVector[0] == State.Goto_abstract;
-
-			case Goto_boolean :
-				return stateVector[0] == State.Goto_boolean;
-
-			case Goto_void :
-				return stateVector[0].ordinal() >= State.Goto_void.ordinal()
-						&& stateVector[0].ordinal() <= State.Goto_void_volatile_transient_throw_false
+			case goto_abstract :
+				return stateVector[0] == State.goto_abstract;
+			case goto_boolean :
+				return stateVector[0] == State.goto_boolean;
+			case goto_void :
+				return stateVector[0].ordinal() >= State.goto_void.ordinal()
+						&& stateVector[0].ordinal() <= State.goto_void_volatile_transient_throw_false
 								.ordinal();
-
-			case Goto_void_volatile_transient :
-				return stateVector[0].ordinal() >= State.Goto_void_volatile_transient
+			case goto_void_volatile_transient :
+				return stateVector[0].ordinal() >= State.goto_void_volatile_transient
 						.ordinal()
-						&& stateVector[0].ordinal() <= State.Goto_void_volatile_transient_throw_false
+						&& stateVector[0].ordinal() <= State.goto_void_volatile_transient_throw_false
 								.ordinal();
-
-			case Goto_void_volatile_transient_throw_false :
-				return stateVector[0] == State.Goto_void_volatile_transient_throw_false;
-
+			case goto_void_volatile_transient_throw_false :
+				return stateVector[0] == State.goto_void_volatile_transient_throw_false;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -568,496 +682,348 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCIDefault.raiseWhile();
 	}
 
-	public boolean getVarAbstract() {
-		return sCIDefault.getVarAbstract();
+	public boolean getAbstract() {
+		return sCIDefault.getAbstract();
 	}
 
-	public void setVarAbstract(boolean value) {
-		sCIDefault.setVarAbstract(value);
+	public void setAbstract(boolean value) {
+		sCIDefault.setAbstract(value);
 	}
-	public boolean getVarAssert() {
-		return sCIDefault.getVarAssert();
+	public boolean getAssert() {
+		return sCIDefault.getAssert();
 	}
 
-	public void setVarAssert(boolean value) {
-		sCIDefault.setVarAssert(value);
+	public void setAssert(boolean value) {
+		sCIDefault.setAssert(value);
 	}
-	public boolean getVarBoolean() {
-		return sCIDefault.getVarBoolean();
+	public boolean getBoolean() {
+		return sCIDefault.getBoolean();
 	}
 
-	public void setVarBoolean(boolean value) {
-		sCIDefault.setVarBoolean(value);
+	public void setBoolean(boolean value) {
+		sCIDefault.setBoolean(value);
 	}
-	public boolean getVarBreak() {
-		return sCIDefault.getVarBreak();
+	public boolean getBreak() {
+		return sCIDefault.getBreak();
 	}
 
-	public void setVarBreak(boolean value) {
-		sCIDefault.setVarBreak(value);
+	public void setBreak(boolean value) {
+		sCIDefault.setBreak(value);
 	}
-	public boolean getVarByte() {
-		return sCIDefault.getVarByte();
+	public boolean getByte() {
+		return sCIDefault.getByte();
 	}
 
-	public void setVarByte(boolean value) {
-		sCIDefault.setVarByte(value);
+	public void setByte(boolean value) {
+		sCIDefault.setByte(value);
 	}
-	public boolean getVarCase() {
-		return sCIDefault.getVarCase();
+	public boolean getCase() {
+		return sCIDefault.getCase();
 	}
 
-	public void setVarCase(boolean value) {
-		sCIDefault.setVarCase(value);
+	public void setCase(boolean value) {
+		sCIDefault.setCase(value);
 	}
-	public boolean getVarCatch() {
-		return sCIDefault.getVarCatch();
+	public boolean getCatch() {
+		return sCIDefault.getCatch();
 	}
 
-	public void setVarCatch(boolean value) {
-		sCIDefault.setVarCatch(value);
+	public void setCatch(boolean value) {
+		sCIDefault.setCatch(value);
 	}
-	public boolean getVarChar() {
-		return sCIDefault.getVarChar();
+	public boolean getChar() {
+		return sCIDefault.getChar();
 	}
 
-	public void setVarChar(boolean value) {
-		sCIDefault.setVarChar(value);
+	public void setChar(boolean value) {
+		sCIDefault.setChar(value);
 	}
-	public boolean getVarClass() {
-		return sCIDefault.getVarClass();
+	public boolean getClass_ID() {
+		return sCIDefault.getClass_ID();
 	}
 
-	public void setVarClass(boolean value) {
-		sCIDefault.setVarClass(value);
+	public void setClass_ID(boolean value) {
+		sCIDefault.setClass_ID(value);
 	}
-	public boolean getVarConst() {
-		return sCIDefault.getVarConst();
+	public boolean getConst() {
+		return sCIDefault.getConst();
 	}
 
-	public void setVarConst(boolean value) {
-		sCIDefault.setVarConst(value);
+	public void setConst(boolean value) {
+		sCIDefault.setConst(value);
 	}
-	public boolean getVarContinue() {
-		return sCIDefault.getVarContinue();
+	public boolean getContinue() {
+		return sCIDefault.getContinue();
 	}
 
-	public void setVarContinue(boolean value) {
-		sCIDefault.setVarContinue(value);
+	public void setContinue(boolean value) {
+		sCIDefault.setContinue(value);
 	}
-	public boolean getVarDo() {
-		return sCIDefault.getVarDo();
+	public boolean getDo() {
+		return sCIDefault.getDo();
 	}
 
-	public void setVarDo(boolean value) {
-		sCIDefault.setVarDo(value);
+	public void setDo(boolean value) {
+		sCIDefault.setDo(value);
 	}
-	public boolean getVarDouble() {
-		return sCIDefault.getVarDouble();
+	public boolean getDouble() {
+		return sCIDefault.getDouble();
 	}
 
-	public void setVarDouble(boolean value) {
-		sCIDefault.setVarDouble(value);
+	public void setDouble(boolean value) {
+		sCIDefault.setDouble(value);
 	}
-	public boolean getVarEnum() {
-		return sCIDefault.getVarEnum();
+	public boolean getEnum() {
+		return sCIDefault.getEnum();
 	}
 
-	public void setVarEnum(boolean value) {
-		sCIDefault.setVarEnum(value);
+	public void setEnum(boolean value) {
+		sCIDefault.setEnum(value);
 	}
-	public boolean getVarExtends() {
-		return sCIDefault.getVarExtends();
+	public boolean getExtends() {
+		return sCIDefault.getExtends();
 	}
 
-	public void setVarExtends(boolean value) {
-		sCIDefault.setVarExtends(value);
+	public void setExtends(boolean value) {
+		sCIDefault.setExtends(value);
 	}
-	public boolean getVarFinal() {
-		return sCIDefault.getVarFinal();
+	public boolean getFinal() {
+		return sCIDefault.getFinal();
 	}
 
-	public void setVarFinal(boolean value) {
-		sCIDefault.setVarFinal(value);
+	public void setFinal(boolean value) {
+		sCIDefault.setFinal(value);
 	}
-	public boolean getVarFinally() {
-		return sCIDefault.getVarFinally();
+	public boolean getFinally() {
+		return sCIDefault.getFinally();
 	}
 
-	public void setVarFinally(boolean value) {
-		sCIDefault.setVarFinally(value);
+	public void setFinally(boolean value) {
+		sCIDefault.setFinally(value);
 	}
-	public boolean getVarFloat() {
-		return sCIDefault.getVarFloat();
+	public boolean getFloat() {
+		return sCIDefault.getFloat();
 	}
 
-	public void setVarFloat(boolean value) {
-		sCIDefault.setVarFloat(value);
+	public void setFloat(boolean value) {
+		sCIDefault.setFloat(value);
 	}
-	public boolean getVarFor() {
-		return sCIDefault.getVarFor();
+	public boolean getFor() {
+		return sCIDefault.getFor();
 	}
 
-	public void setVarFor(boolean value) {
-		sCIDefault.setVarFor(value);
+	public void setFor(boolean value) {
+		sCIDefault.setFor(value);
 	}
-	public boolean getVarGoto() {
-		return sCIDefault.getVarGoto();
+	public boolean getGoto() {
+		return sCIDefault.getGoto();
 	}
 
-	public void setVarGoto(boolean value) {
-		sCIDefault.setVarGoto(value);
+	public void setGoto(boolean value) {
+		sCIDefault.setGoto(value);
 	}
-	public boolean getVarIf() {
-		return sCIDefault.getVarIf();
+	public boolean getIf() {
+		return sCIDefault.getIf();
 	}
 
-	public void setVarIf(boolean value) {
-		sCIDefault.setVarIf(value);
+	public void setIf(boolean value) {
+		sCIDefault.setIf(value);
 	}
-	public boolean getVarImplements() {
-		return sCIDefault.getVarImplements();
+	public boolean getImplements() {
+		return sCIDefault.getImplements();
 	}
 
-	public void setVarImplements(boolean value) {
-		sCIDefault.setVarImplements(value);
+	public void setImplements(boolean value) {
+		sCIDefault.setImplements(value);
 	}
-	public boolean getVarImport() {
-		return sCIDefault.getVarImport();
+	public boolean getImport() {
+		return sCIDefault.getImport();
 	}
 
-	public void setVarImport(boolean value) {
-		sCIDefault.setVarImport(value);
+	public void setImport(boolean value) {
+		sCIDefault.setImport(value);
 	}
-	public boolean getVarInstanceof() {
-		return sCIDefault.getVarInstanceof();
+	public boolean getInstanceof() {
+		return sCIDefault.getInstanceof();
 	}
 
-	public void setVarInstanceof(boolean value) {
-		sCIDefault.setVarInstanceof(value);
+	public void setInstanceof(boolean value) {
+		sCIDefault.setInstanceof(value);
 	}
-	public boolean getVarInt() {
-		return sCIDefault.getVarInt();
+	public boolean getInt() {
+		return sCIDefault.getInt();
 	}
 
-	public void setVarInt(boolean value) {
-		sCIDefault.setVarInt(value);
+	public void setInt(boolean value) {
+		sCIDefault.setInt(value);
 	}
-	public boolean getVarLong() {
-		return sCIDefault.getVarLong();
+	public boolean getLong() {
+		return sCIDefault.getLong();
 	}
 
-	public void setVarLong(boolean value) {
-		sCIDefault.setVarLong(value);
+	public void setLong(boolean value) {
+		sCIDefault.setLong(value);
 	}
-	public boolean getVarNative() {
-		return sCIDefault.getVarNative();
+	public boolean getNative() {
+		return sCIDefault.getNative();
 	}
 
-	public void setVarNative(boolean value) {
-		sCIDefault.setVarNative(value);
+	public void setNative(boolean value) {
+		sCIDefault.setNative(value);
 	}
-	public boolean getVarNew() {
-		return sCIDefault.getVarNew();
+	public boolean getNew() {
+		return sCIDefault.getNew();
 	}
 
-	public void setVarNew(boolean value) {
-		sCIDefault.setVarNew(value);
+	public void setNew(boolean value) {
+		sCIDefault.setNew(value);
 	}
-	public boolean getVarNull() {
-		return sCIDefault.getVarNull();
+	public boolean getNull() {
+		return sCIDefault.getNull();
 	}
 
-	public void setVarNull(boolean value) {
-		sCIDefault.setVarNull(value);
+	public void setNull(boolean value) {
+		sCIDefault.setNull(value);
 	}
-	public boolean getVarPackage() {
-		return sCIDefault.getVarPackage();
+	public boolean getPackage() {
+		return sCIDefault.getPackage();
 	}
 
-	public void setVarPackage(boolean value) {
-		sCIDefault.setVarPackage(value);
+	public void setPackage(boolean value) {
+		sCIDefault.setPackage(value);
 	}
-	public boolean getVarPrivate() {
-		return sCIDefault.getVarPrivate();
+	public boolean getPrivate() {
+		return sCIDefault.getPrivate();
 	}
 
-	public void setVarPrivate(boolean value) {
-		sCIDefault.setVarPrivate(value);
+	public void setPrivate(boolean value) {
+		sCIDefault.setPrivate(value);
 	}
-	public boolean getVarProtected() {
-		return sCIDefault.getVarProtected();
+	public boolean getProtected() {
+		return sCIDefault.getProtected();
 	}
 
-	public void setVarProtected(boolean value) {
-		sCIDefault.setVarProtected(value);
+	public void setProtected(boolean value) {
+		sCIDefault.setProtected(value);
 	}
-	public boolean getVarPublic() {
-		return sCIDefault.getVarPublic();
+	public boolean getPublic() {
+		return sCIDefault.getPublic();
 	}
 
-	public void setVarPublic(boolean value) {
-		sCIDefault.setVarPublic(value);
+	public void setPublic(boolean value) {
+		sCIDefault.setPublic(value);
 	}
-	public boolean getVarReturn() {
-		return sCIDefault.getVarReturn();
+	public boolean getReturn() {
+		return sCIDefault.getReturn();
 	}
 
-	public void setVarReturn(boolean value) {
-		sCIDefault.setVarReturn(value);
+	public void setReturn(boolean value) {
+		sCIDefault.setReturn(value);
 	}
-	public boolean getVarShort() {
-		return sCIDefault.getVarShort();
+	public boolean getShort() {
+		return sCIDefault.getShort();
 	}
 
-	public void setVarShort(boolean value) {
-		sCIDefault.setVarShort(value);
+	public void setShort(boolean value) {
+		sCIDefault.setShort(value);
 	}
-	public boolean getVarStatic() {
-		return sCIDefault.getVarStatic();
+	public boolean getStatic() {
+		return sCIDefault.getStatic();
 	}
 
-	public void setVarStatic(boolean value) {
-		sCIDefault.setVarStatic(value);
+	public void setStatic(boolean value) {
+		sCIDefault.setStatic(value);
 	}
-	public boolean getVarStrictfp() {
-		return sCIDefault.getVarStrictfp();
+	public boolean getStrictfp() {
+		return sCIDefault.getStrictfp();
 	}
 
-	public void setVarStrictfp(boolean value) {
-		sCIDefault.setVarStrictfp(value);
+	public void setStrictfp(boolean value) {
+		sCIDefault.setStrictfp(value);
 	}
-	public boolean getVarSuper() {
-		return sCIDefault.getVarSuper();
+	public boolean getSuper() {
+		return sCIDefault.getSuper();
 	}
 
-	public void setVarSuper(boolean value) {
-		sCIDefault.setVarSuper(value);
+	public void setSuper(boolean value) {
+		sCIDefault.setSuper(value);
 	}
-	public boolean getVarSwitch() {
-		return sCIDefault.getVarSwitch();
+	public boolean getSwitch() {
+		return sCIDefault.getSwitch();
 	}
 
-	public void setVarSwitch(boolean value) {
-		sCIDefault.setVarSwitch(value);
+	public void setSwitch(boolean value) {
+		sCIDefault.setSwitch(value);
 	}
-	public boolean getVarSynchronized() {
-		return sCIDefault.getVarSynchronized();
+	public boolean getSynchronized() {
+		return sCIDefault.getSynchronized();
 	}
 
-	public void setVarSynchronized(boolean value) {
-		sCIDefault.setVarSynchronized(value);
+	public void setSynchronized(boolean value) {
+		sCIDefault.setSynchronized(value);
 	}
-	public boolean getVarThis() {
-		return sCIDefault.getVarThis();
+	public boolean getThis() {
+		return sCIDefault.getThis();
 	}
 
-	public void setVarThis(boolean value) {
-		sCIDefault.setVarThis(value);
+	public void setThis(boolean value) {
+		sCIDefault.setThis(value);
 	}
-	public boolean getVarThrow() {
-		return sCIDefault.getVarThrow();
+	public boolean getThrow() {
+		return sCIDefault.getThrow();
 	}
 
-	public void setVarThrow(boolean value) {
-		sCIDefault.setVarThrow(value);
+	public void setThrow(boolean value) {
+		sCIDefault.setThrow(value);
 	}
-	public boolean getVarThrows() {
-		return sCIDefault.getVarThrows();
+	public boolean getThrows() {
+		return sCIDefault.getThrows();
 	}
 
-	public void setVarThrows(boolean value) {
-		sCIDefault.setVarThrows(value);
+	public void setThrows(boolean value) {
+		sCIDefault.setThrows(value);
 	}
-	public boolean getVarTransient() {
-		return sCIDefault.getVarTransient();
+	public boolean getTransient() {
+		return sCIDefault.getTransient();
 	}
 
-	public void setVarTransient(boolean value) {
-		sCIDefault.setVarTransient(value);
+	public void setTransient(boolean value) {
+		sCIDefault.setTransient(value);
 	}
-	public boolean getVarTry() {
-		return sCIDefault.getVarTry();
+	public boolean getTry() {
+		return sCIDefault.getTry();
 	}
 
-	public void setVarTry(boolean value) {
-		sCIDefault.setVarTry(value);
+	public void setTry(boolean value) {
+		sCIDefault.setTry(value);
 	}
-	public boolean getVarVoid() {
-		return sCIDefault.getVarVoid();
+	public boolean getVoid() {
+		return sCIDefault.getVoid();
 	}
 
-	public void setVarVoid(boolean value) {
-		sCIDefault.setVarVoid(value);
+	public void setVoid(boolean value) {
+		sCIDefault.setVoid(value);
 	}
-	public boolean getVarVolatile() {
-		return sCIDefault.getVarVolatile();
+	public boolean getVolatile() {
+		return sCIDefault.getVolatile();
 	}
 
-	public void setVarVolatile(boolean value) {
-		sCIDefault.setVarVolatile(value);
+	public void setVolatile(boolean value) {
+		sCIDefault.setVolatile(value);
 	}
 
-	public void enter() {
-		entryActionJavaKeywords();
-		sCIDefault.varAbstract = true;
-
-		sCIDefault.varAssert = true;
-
-		sCIDefault.varBoolean = true;
-
-		sCIDefault.varBreak = true;
-
-		sCIDefault.varByte = true;
-
-		sCIDefault.varCase = true;
-
-		sCIDefault.varCatch = true;
-
-		sCIDefault.varChar = true;
-
-		sCIDefault.varClass = true;
-
-		sCIDefault.varConst = true;
-
-		sCIDefault.varContinue = true;
-
-		sCIDefault.varDo = true;
-
-		sCIDefault.varDouble = true;
-
-		sCIDefault.varEnum = true;
-
-		sCIDefault.varExtends = true;
-
-		sCIDefault.varFinal = true;
-
-		sCIDefault.varFinally = true;
-
-		sCIDefault.varFloat = true;
-
-		sCIDefault.varFor = true;
-
-		sCIDefault.varGoto = true;
-
-		sCIDefault.varIf = true;
-
-		sCIDefault.varImplements = true;
-
-		sCIDefault.varImport = true;
-
-		sCIDefault.varInstanceof = true;
-
-		sCIDefault.varInt = true;
-
-		sCIDefault.varLong = true;
-
-		sCIDefault.varNative = true;
-
-		sCIDefault.varNew = true;
-
-		sCIDefault.varNull = true;
-
-		sCIDefault.varPackage = true;
-
-		sCIDefault.varPrivate = true;
-
-		sCIDefault.varProtected = true;
-
-		sCIDefault.varPublic = true;
-
-		sCIDefault.varReturn = true;
-
-		sCIDefault.varShort = true;
-
-		sCIDefault.varStatic = true;
-
-		sCIDefault.varStrictfp = true;
-
-		sCIDefault.varSuper = true;
-
-		sCIDefault.varSwitch = true;
-
-		sCIDefault.varSynchronized = true;
-
-		sCIDefault.varThis = true;
-
-		sCIDefault.varThrow = true;
-
-		sCIDefault.varThrows = true;
-
-		sCIDefault.varTransient = true;
-
-		sCIDefault.varTry = true;
-
-		sCIDefault.varVoid = true;
-
-		sCIDefault.varVolatile = true;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Goto_abstract;
-
-	}
-
-	public void exit() {
-		//Handle exit of all possible states (of goto) at position 0...
-		switch (stateVector[0]) {
-
-			case Goto_abstract :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Goto_boolean :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Goto_void_volatile_transient_throw_false :
-
-				historyVector[1] = stateVector[0];
-
-				historyVector[0] = stateVector[0];
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionJavaKeywords();
+	/* Entry action for statechart 'JavaKeywords'. */
+	private void entryAction() {
 	}
-
-	private void entryActionJavaKeywords() {
-
-	}
-
-	private void exitActionJavaKeywords() {
-
-	}
-
-	private void deepEnterSequenceGoto_void_volatile_transientThrow() {
-		//Handle deep history entry of throw
-		switch (historyVector[1]) {
-
-			case Goto_void_volatile_transient_throw_false :
-				nextStateIndex = 0;
-				stateVector[0] = State.Goto_void_volatile_transient_throw_false;
-
-				break;
 
-			default :
-				break;
-		}
+	/* Exit action for state 'JavaKeywords'. */
+	private void exitAction() {
 	}
 
-	private void shallowEnterSequenceGoto_voidVolatile() {
-		//Handle shallow history entry of volatile
+	/* shallow enterSequence with history in child volatile */
+	private void shallowEnterSequenceGoto_void_volatile() {
 		switch (historyVector[0]) {
-
-			case Goto_void_volatile_transient_throw_false :
-
+			case goto_void_volatile_transient_throw_false :
 				break;
 
 			default :
@@ -1065,123 +1031,135 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 	}
 
+	/* deep enterSequence with history in child throw */
+	private void deepEnterSequenceGoto_void_volatile_transient_throw() {
+		switch (historyVector[1]) {
+			case goto_void_volatile_transient_throw_false :
+				nextStateIndex = 0;
+				stateVector[0] = State.goto_void_volatile_transient_throw_false;
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* The reactions of state abstract. */
 	private void reactGoto_abstract() {
-		if ((sCIDefault.eventWhile && sCIDefault.varNull)) {
+		if (sCIDefault.while_ID && sCIDefault.null_ID) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.varNative = false;
+			sCIDefault.native_ID = false;
 
-			sCIDefault.varAbstract = false;
+			sCIDefault.abstract_ID = false;
 
-			sCIDefault.varAssert = false;
+			sCIDefault.assert_ID = false;
 
-			sCIDefault.varBoolean = false;
+			sCIDefault.boolean_ID = false;
 
-			sCIDefault.varBreak = false;
+			sCIDefault.break_ID = false;
 
-			sCIDefault.varByte = false;
+			sCIDefault.byte_ID = false;
 
-			sCIDefault.varCase = false;
+			sCIDefault.case_ID = false;
 
-			sCIDefault.varCatch = false;
+			sCIDefault.catch_ID = false;
 
-			sCIDefault.varChar = false;
+			sCIDefault.char_ID = false;
 
-			sCIDefault.varClass = false;
+			sCIDefault.class_ID = false;
 
-			sCIDefault.varConst = false;
+			sCIDefault.const_ID = false;
 
-			sCIDefault.varContinue = false;
+			sCIDefault.continue_ID = false;
 
-			sCIDefault.varDo = false;
+			sCIDefault.do_ID = false;
 
-			sCIDefault.varDouble = false;
+			sCIDefault.double_ID = false;
 
-			sCIDefault.varEnum = false;
+			sCIDefault.enum_ID = false;
 
-			sCIDefault.varExtends = false;
+			sCIDefault.extends_ID = false;
 
-			sCIDefault.varFinal = false;
+			sCIDefault.final_ID = false;
 
-			sCIDefault.varFinally = false;
+			sCIDefault.finally_ID = false;
 
-			sCIDefault.varFloat = false;
+			sCIDefault.float_ID = false;
 
-			sCIDefault.varFor = false;
+			sCIDefault.for_ID = false;
 
-			sCIDefault.varGoto = false;
+			sCIDefault.goto_ID = false;
 
-			sCIDefault.varIf = false;
+			sCIDefault.if_ID = false;
 
-			sCIDefault.varImplements = false;
+			sCIDefault.implements_ID = false;
 
-			sCIDefault.varImport = false;
+			sCIDefault.import_ID = false;
 
-			sCIDefault.varInstanceof = false;
+			sCIDefault.instanceof_ID = false;
 
-			sCIDefault.varInt = false;
+			sCIDefault.int_ID = false;
 
-			sCIDefault.varLong = false;
+			sCIDefault.long_ID = false;
 
-			sCIDefault.varNew = false;
+			sCIDefault.new_ID = false;
 
-			sCIDefault.varNull = false;
+			sCIDefault.null_ID = false;
 
-			sCIDefault.varPackage = false;
+			sCIDefault.package_ID = false;
 
-			sCIDefault.varPrivate = false;
+			sCIDefault.private_ID = false;
 
-			sCIDefault.varProtected = false;
+			sCIDefault.protected_ID = false;
 
-			sCIDefault.varPublic = false;
+			sCIDefault.public_ID = false;
 
-			sCIDefault.varReturn = false;
+			sCIDefault.return_ID = false;
 
-			sCIDefault.varShort = false;
+			sCIDefault.short_ID = false;
 
-			sCIDefault.varStatic = false;
+			sCIDefault.static_ID = false;
 
-			sCIDefault.varStrictfp = false;
+			sCIDefault.strictfp_ID = false;
 
-			sCIDefault.varSuper = false;
+			sCIDefault.super_ID = false;
 
-			sCIDefault.varSwitch = false;
+			sCIDefault.switch_ID = false;
 
-			sCIDefault.varSynchronized = false;
+			sCIDefault.synchronized_ID = false;
 
-			sCIDefault.varThis = false;
+			sCIDefault.this_ID = false;
 
-			sCIDefault.varThrow = false;
+			sCIDefault.throw_ID = false;
 
-			sCIDefault.varThrows = false;
+			sCIDefault.throws_ID = false;
 
-			sCIDefault.varTransient = false;
+			sCIDefault.transient_ID = false;
 
-			sCIDefault.varTry = false;
+			sCIDefault.try_ID = false;
 
-			sCIDefault.varVoid = false;
+			sCIDefault.void_ID = false;
 
-			sCIDefault.varVolatile = false;
+			sCIDefault.volatile_ID = false;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Goto_boolean;
-
+			stateVector[0] = State.goto_boolean;
 		}
-
 	}
+
+	/* The reactions of state boolean. */
 	private void reactGoto_boolean() {
-		if (sCIDefault.eventWhile) {
+		if (sCIDefault.while_ID) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 		}
+	}
 
-	}
-	private void reactGoto_void() {
-	}
-	private void reactGoto_void_volatile_transient() {
-	}
+	/* The reactions of state false. */
 	private void reactGoto_void_volatile_transient_throw_false() {
-
 	}
 
 	public void runCycle() {
@@ -1191,19 +1169,13 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Goto_abstract :
+				case goto_abstract :
 					reactGoto_abstract();
 					break;
-				case Goto_boolean :
+				case goto_boolean :
 					reactGoto_boolean();
 					break;
-				case Goto_void :
-					reactGoto_void();
-					break;
-				case Goto_void_volatile_transient :
-					reactGoto_void_volatile_transient();
-					break;
-				case Goto_void_volatile_transient_throw_false :
+				case goto_void_volatile_transient_throw_false :
 					reactGoto_void_volatile_transient_throw_false();
 					break;
 				default :

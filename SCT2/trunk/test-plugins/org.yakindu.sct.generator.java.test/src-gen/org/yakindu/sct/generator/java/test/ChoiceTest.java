@@ -38,33 +38,33 @@ public class ChoiceTest {
 
 	@Test
 	public void testchoiceTest() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getValue() == 4);
 		statemachine.raisePressKey();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.getValue() == 3);
 		statemachine.raisePressKey();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raisePressKey();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_C));
+		assertTrue(statemachine.isStateActive(State.main_region_C));
 		assertTrue(statemachine.getValue() == 2);
 		statemachine.raisePressKey();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.getValue() == 1);
 		statemachine.raisePressKey();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getValue() == 1);
 		statemachine.raisePressKey();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_C));
+		assertTrue(statemachine.isStateActive(State.main_region_C));
 		assertTrue(statemachine.getValue() == 0);
 		statemachine.raisePressKey();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

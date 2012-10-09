@@ -38,16 +38,16 @@ public class SameNameDifferentRegionTest {
 
 	@Test
 	public void testsameNameDifferenRegionTest() {
-		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
+		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		statemachine.raiseE1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_StateB));
+		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine
-				.isStateActive(State.Main_region_StateB_r1_StateA));
+				.isStateActive(State.main_region_StateB_r1_StateA));
 		statemachine.raiseE1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_StateB));
+		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine
-				.isStateActive(State.Main_region_StateB_r1_StateB));
+				.isStateActive(State.main_region_StateB_r1_StateB));
 	}
 }

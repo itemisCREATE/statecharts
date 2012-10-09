@@ -1,13 +1,10 @@
 package org.yakindu.scr.integerexpressions;
-
 import org.yakindu.scr.IStatemachine;
 
 public interface IIntegerExpressionsStatemachine extends IStatemachine {
 
 	public interface SCIDefault {
-
 		public void raiseE1();
-
 		public int getMyInt1();
 		public void setMyInt1(int value);
 		public int getMyInt2();

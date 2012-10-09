@@ -21,7 +21,7 @@ public class StatechartLocalReactionsStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_S1, Main_region_S2, Region2_a, $NullState$
+		main_region_S1, main_region_S2, region2_a, $NullState$
 	};
 
 	private final State[] stateVector = new State[2];
@@ -43,6 +43,45 @@ public class StatechartLocalReactionsStatemachine
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_S1;
+
+		nextStateIndex = 1;
+		stateVector[1] = State.region2_a;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_S1 :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_S2 :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		switch (stateVector[1]) {
+			case region2_a :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 
 	}
@@ -52,27 +91,15 @@ public class StatechartLocalReactionsStatemachine
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_S1 :
-				return stateVector[0] == State.Main_region_S1;
-
-			case Main_region_S2 :
-				return stateVector[0] == State.Main_region_S2;
-
-			case Region2_a :
-				return stateVector[1] == State.Region2_a;
-
+			case main_region_S1 :
+				return stateVector[0] == State.main_region_S1;
+			case main_region_S2 :
+				return stateVector[0] == State.main_region_S2;
+			case region2_a :
+				return stateVector[1] == State.region2_a;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -87,87 +114,49 @@ public class StatechartLocalReactionsStatemachine
 		sCIDefault.setMyInt(value);
 	}
 
-	public void enter() {
-		entryActionStatechartLocalReactions();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_S1;
-
-		nextStateIndex = 1;
-		stateVector[1] = State.Region2_a;
-
-	}
-
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_S1 :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_S2 :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		//Handle exit of all possible states (of region2) at position 1...
-		switch (stateVector[1]) {
-
-			case Region2_a :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionStatechartLocalReactions();
-	}
-
-	private void entryActionStatechartLocalReactions() {
-
-	}
-
-	private void exitActionStatechartLocalReactions() {
-
-	}
-
-	private boolean conditionStatechartLocalReactionsLr0() {
+	private boolean checkLr0() {
 		return true;
 	}
-	private void actionsStatechartLocalReactionsLr0() {
+
+	private void effectLr0() {
 		sCIDefault.myInt += 1;
-
 	}
 
+	/* Entry action for statechart 'StatechartLocalReactions'. */
+	private void entryAction() {
+	}
+
+	/* Exit action for state 'StatechartLocalReactions'. */
+	private void exitAction() {
+	}
+
+	/* The reactions of state S1. */
 	private void reactMain_region_S1() {
-		actionsStatechartLocalReactionsLr0();
+		effectLr0();
+
 		if (true) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_S2;
-
+			stateVector[0] = State.main_region_S2;
 		}
-
 	}
+
+	/* The reactions of state S2. */
 	private void reactMain_region_S2() {
-		actionsStatechartLocalReactionsLr0();
+		effectLr0();
+
 		if (true) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_S1;
-
+			stateVector[0] = State.main_region_S1;
 		}
-
 	}
+
+	/* The reactions of state a. */
 	private void reactRegion2_a() {
 	}
 
@@ -178,13 +167,13 @@ public class StatechartLocalReactionsStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_S1 :
+				case main_region_S1 :
 					reactMain_region_S1();
 					break;
-				case Main_region_S2 :
+				case main_region_S2 :
 					reactMain_region_S2();
 					break;
-				case Region2_a :
+				case region2_a :
 					reactRegion2_a();
 					break;
 				default :

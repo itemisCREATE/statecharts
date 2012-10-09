@@ -39,7 +39,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, _region1_B, _region1_C, $NullState$
+		main_region_A, _region1_B, _region1_C, $NullState$
 	};
 
 	private final State[] stateVector = new State[2];
@@ -61,6 +61,47 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		sCIDefault.raiseIntegerEvent(2 * 21);
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+
+		nextStateIndex = 1;
+		stateVector[1] = State._region1_B;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		switch (stateVector[1]) {
+			case _region1_B :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case _region1_C :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -71,27 +112,15 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
 			case _region1_B :
 				return stateVector[1] == State._region1_B;
-
 			case _region1_C :
 				return stateVector[1] == State._region1_C;
-
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -110,74 +139,33 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		sCIDefault.setMyVar(value);
 	}
 
-	public void enter() {
-		entryActionValuedEvents();
-		sCIDefault.raiseIntegerEvent(2 * 21);
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
-		nextStateIndex = 1;
-		stateVector[1] = State._region1_B;
-
+	/* Entry action for statechart 'ValuedEvents'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		//Handle exit of all possible states (of region1) at position 1...
-		switch (stateVector[1]) {
-
-			case _region1_B :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case _region1_C :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionValuedEvents();
+	/* Exit action for state 'ValuedEvents'. */
+	private void exitAction() {
 	}
 
-	private void entryActionValuedEvents() {
-
-	}
-
-	private void exitActionValuedEvents() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
-
 	}
-	private void react_region1_B() {
+
+	/* The reactions of state B. */
+	private void reactRegion1_B() {
 		if (sCIDefault.integerEvent) {
+			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
 			sCIDefault.myVar = sCIDefault.integerEventValue;
 
 			nextStateIndex = 1;
 			stateVector[1] = State._region1_C;
-
 		}
 	}
-	private void react_region1_C() {
+
+	/* The reactions of state C. */
+	private void reactRegion1_C() {
 	}
 
 	public void runCycle() {
@@ -187,14 +175,14 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
 				case _region1_B :
-					react_region1_B();
+					reactRegion1_B();
 					break;
 				case _region1_C :
-					react_region1_C();
+					reactRegion1_C();
 					break;
 				default :
 					// $NullState$

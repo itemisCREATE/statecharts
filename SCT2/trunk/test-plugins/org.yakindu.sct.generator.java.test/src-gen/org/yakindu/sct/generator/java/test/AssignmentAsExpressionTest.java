@@ -38,7 +38,7 @@ public class AssignmentAsExpressionTest {
 
 	@Test
 	public void testsimpleAssignment() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getB() == 5);
 		assertTrue(statemachine.getA() == 9);
 	}

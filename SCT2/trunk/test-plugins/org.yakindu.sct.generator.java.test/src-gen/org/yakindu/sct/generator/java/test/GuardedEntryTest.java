@@ -38,7 +38,7 @@ public class GuardedEntryTest {
 
 	@Test
 	public void testEntryNotTakenOnStatechartEnter() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getDone() == false);
 	}
 	@Test
@@ -47,33 +47,33 @@ public class GuardedEntryTest {
 		assertTrue(
 				"sctunit does not allow modifiing variables before entering the state machine!",
 				false);
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getDone() == true);
 	}
 	@Test
 	public void testEntryTakenInTransition() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 		statemachine.setGuard(true);
 		statemachine.setDone(false);
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getDone());
 	}
 	@Test
 	public void testEntryNotTakenInTransition() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 		statemachine.setGuard(false);
 		statemachine.setDone(false);
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(!statemachine.getDone());
 	}
 }

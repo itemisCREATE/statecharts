@@ -26,7 +26,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, Main_region_B, Main_region_B_r1_C1, Main_region_B_r1_C2, Main_region_B_r2_D1, Main_region_B_r2_D2, $NullState$
+		main_region_A, main_region_B, main_region_B_r1_C1, main_region_B_r1_C2, main_region_B_r2_D1, main_region_B_r2_D2, $NullState$
 	};
 
 	private final State[] stateVector = new State[2];
@@ -48,6 +48,52 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_B_r1_C1 :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_B_r1_C2 :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		switch (stateVector[1]) {
+			case main_region_B_r2_D1 :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case main_region_B_r2_D2 :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -58,39 +104,24 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
-			case Main_region_B :
-				return stateVector[0].ordinal() >= State.Main_region_B
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
+			case main_region_B :
+				return stateVector[0].ordinal() >= State.main_region_B
 						.ordinal()
-						&& stateVector[0].ordinal() <= State.Main_region_B_r2_D2
+						&& stateVector[0].ordinal() <= State.main_region_B_r2_D2
 								.ordinal();
-
-			case Main_region_B_r1_C1 :
-				return stateVector[0] == State.Main_region_B_r1_C1;
-
-			case Main_region_B_r1_C2 :
-				return stateVector[0] == State.Main_region_B_r1_C2;
-
-			case Main_region_B_r2_D1 :
-				return stateVector[1] == State.Main_region_B_r2_D1;
-
-			case Main_region_B_r2_D2 :
-				return stateVector[1] == State.Main_region_B_r2_D2;
-
+			case main_region_B_r1_C1 :
+				return stateVector[0] == State.main_region_B_r1_C1;
+			case main_region_B_r1_C2 :
+				return stateVector[0] == State.main_region_B_r1_C2;
+			case main_region_B_r2_D1 :
+				return stateVector[1] == State.main_region_B_r2_D1;
+			case main_region_B_r2_D2 :
+				return stateVector[1] == State.main_region_B_r2_D2;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -100,120 +131,66 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	public void raiseE() {
 		sCIDefault.raiseE();
 	}
-
 	public void raiseF() {
 		sCIDefault.raiseF();
 	}
 
-	public void enter() {
-		entryActionSyncFork();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
+	/* Entry action for statechart 'SyncFork'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_B_r1_C1 :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_B_r1_C2 :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-		//Handle exit of all possible states (of main region) at position 1...
-		switch (stateVector[1]) {
-
-			case Main_region_B_r2_D1 :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case Main_region_B_r2_D2 :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionSyncFork();
+	/* Exit action for state 'SyncFork'. */
+	private void exitAction() {
 	}
 
-	private void entryActionSyncFork() {
-
-	}
-
-	private void exitActionSyncFork() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
 		if (sCIDefault.e) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			react_sync0_();
-
+			reactSyncFork_main_region__sync0();
 		} else {
 			if (sCIDefault.f) {
+				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
 				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_B_r1_C1;
+				stateVector[0] = State.main_region_B_r1_C1;
 
 				nextStateIndex = 1;
-				stateVector[1] = State.Main_region_B_r2_D1;
-
+				stateVector[1] = State.main_region_B_r2_D1;
 			}
 		}
+	}
 
-	}
-	private void reactMain_region_B() {
-	}
+	/* The reactions of state C1. */
 	private void reactMain_region_B_r1_C1() {
 		if (sCIDefault.e) {
-			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
-
-				case Main_region_B_r1_C1 :
+				case main_region_B_r1_C1 :
+					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
-
 					break;
 
-				case Main_region_B_r1_C2 :
+				case main_region_B_r1_C2 :
+					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
-
 					break;
 
 				default :
 					break;
 			}
 
-			//Handle exit of all possible states (of r2) at position 1...
 			switch (stateVector[1]) {
-
-				case Main_region_B_r2_D1 :
+				case main_region_B_r2_D1 :
+					nextStateIndex = 1;
 					stateVector[1] = State.$NullState$;
-
 					break;
 
-				case Main_region_B_r2_D2 :
+				case main_region_B_r2_D2 :
+					nextStateIndex = 1;
 					stateVector[1] = State.$NullState$;
-
 					break;
 
 				default :
@@ -221,50 +198,45 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 			}
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
+			stateVector[0] = State.main_region_A;
 		} else {
 			if (sCIDefault.f) {
+				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
 				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_B_r1_C2;
-
+				stateVector[0] = State.main_region_B_r1_C2;
 			}
-
 		}
-
 	}
+
+	/* The reactions of state C2. */
 	private void reactMain_region_B_r1_C2() {
 		if (sCIDefault.e) {
-			//Handle exit of all possible states (of r1) at position 0...
 			switch (stateVector[0]) {
-
-				case Main_region_B_r1_C1 :
+				case main_region_B_r1_C1 :
+					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
-
 					break;
 
-				case Main_region_B_r1_C2 :
+				case main_region_B_r1_C2 :
+					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
-
 					break;
 
 				default :
 					break;
 			}
 
-			//Handle exit of all possible states (of r2) at position 1...
 			switch (stateVector[1]) {
-
-				case Main_region_B_r2_D1 :
+				case main_region_B_r2_D1 :
+					nextStateIndex = 1;
 					stateVector[1] = State.$NullState$;
-
 					break;
 
-				case Main_region_B_r2_D2 :
+				case main_region_B_r2_D2 :
+					nextStateIndex = 1;
 					stateVector[1] = State.$NullState$;
-
 					break;
 
 				default :
@@ -272,31 +244,33 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 			}
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
+			stateVector[0] = State.main_region_A;
 		} else {
-
 		}
-
 	}
+
+	/* The reactions of state D1. */
 	private void reactMain_region_B_r2_D1() {
 		if (sCIDefault.f) {
+			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
 			nextStateIndex = 1;
-			stateVector[1] = State.Main_region_B_r2_D2;
-
+			stateVector[1] = State.main_region_B_r2_D2;
 		}
 	}
+
+	/* The reactions of state D2. */
 	private void reactMain_region_B_r2_D2() {
 	}
-	private void react_sync0_() {
+
+	/* The reactions of state null. */
+	private void reactSyncFork_main_region__sync0() {
 		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_B_r1_C2;
+		stateVector[0] = State.main_region_B_r1_C2;
 
 		nextStateIndex = 1;
-		stateVector[1] = State.Main_region_B_r2_D2;
-
+		stateVector[1] = State.main_region_B_r2_D2;
 	}
 
 	public void runCycle() {
@@ -306,22 +280,19 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
-				case Main_region_B :
-					reactMain_region_B();
-					break;
-				case Main_region_B_r1_C1 :
+				case main_region_B_r1_C1 :
 					reactMain_region_B_r1_C1();
 					break;
-				case Main_region_B_r1_C2 :
+				case main_region_B_r1_C2 :
 					reactMain_region_B_r1_C2();
 					break;
-				case Main_region_B_r2_D1 :
+				case main_region_B_r2_D1 :
 					reactMain_region_B_r2_D1();
 					break;
-				case Main_region_B_r2_D2 :
+				case main_region_B_r2_D2 :
 					reactMain_region_B_r2_D2();
 					break;
 				default :

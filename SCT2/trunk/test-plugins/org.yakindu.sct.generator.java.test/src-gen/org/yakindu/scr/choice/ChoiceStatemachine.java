@@ -29,7 +29,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, Main_region_B, Main_region_C, $NullState$
+		main_region_A, main_region_B, main_region_C, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -51,6 +51,39 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		sCIDefault.value = 4;
+
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_C :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -61,27 +94,15 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
-			case Main_region_B :
-				return stateVector[0] == State.Main_region_B;
-
-			case Main_region_C :
-				return stateVector[0] == State.Main_region_C;
-
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
+			case main_region_B :
+				return stateVector[0] == State.main_region_B;
+			case main_region_C :
+				return stateVector[0] == State.main_region_C;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -100,98 +121,61 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		sCIDefault.setValue(value);
 	}
 
-	public void enter() {
-		sCIDefault.value = 4;
-
-		entryActionChoice();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
+	/* Entry action for statechart 'Choice'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_B :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_C :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionChoice();
+	/* Exit action for state 'Choice'. */
+	private void exitAction() {
 	}
 
-	private void entryActionChoice() {
-
-	}
-
-	private void exitActionChoice() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
 		if (sCIDefault.pressKey) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			if (((sCIDefault.value % 2) == 0)) {
+			if ((sCIDefault.value % 2) == 0) {
 				sCIDefault.value -= 1;
 
 				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_B;
-
+				stateVector[0] = State.main_region_B;
 			} else {
 				sCIDefault.value -= 1;
 
 				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_C;
-
+				stateVector[0] = State.main_region_C;
 			}
-
 		}
-
 	}
+
+	/* The reactions of state B. */
 	private void reactMain_region_B() {
 		if (sCIDefault.pressKey) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
+			stateVector[0] = State.main_region_A;
 		}
-
 	}
+
+	/* The reactions of state C. */
 	private void reactMain_region_C() {
 		if (sCIDefault.pressKey) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			if ((sCIDefault.value == 2)) {
+			if (sCIDefault.value == 2) {
 				sCIDefault.value -= 1;
 
 				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_B;
-
+				stateVector[0] = State.main_region_B;
 			} else {
 				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_A;
-
+				stateVector[0] = State.main_region_A;
 			}
-
 		}
-
 	}
 
 	public void runCycle() {
@@ -201,13 +185,13 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
-				case Main_region_B :
+				case main_region_B :
 					reactMain_region_B();
 					break;
-				case Main_region_C :
+				case main_region_C :
 					reactMain_region_C();
 					break;
 				default :

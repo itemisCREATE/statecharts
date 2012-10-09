@@ -1,13 +1,10 @@
 package org.yakindu.scr.stringexpressions;
-
 import org.yakindu.scr.IStatemachine;
 
 public interface IStringExpressionsStatemachine extends IStatemachine {
 
 	public interface SCIDefault {
-
 		public void raiseE1();
-
 		public String getMyString();
 		public void setMyString(String value);
 		public String getMyString2();

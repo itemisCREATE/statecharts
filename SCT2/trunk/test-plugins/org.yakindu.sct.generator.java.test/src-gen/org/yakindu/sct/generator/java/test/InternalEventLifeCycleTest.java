@@ -38,21 +38,21 @@ public class InternalEventLifeCycleTest {
 
 	@Test
 	public void testInternalEventLifeCycleTest() {
-		assertTrue(statemachine.isStateActive(State.R1_A));
-		assertTrue(statemachine.isStateActive(State.R2_C));
+		assertTrue(statemachine.isStateActive(State.r1_A));
+		assertTrue(statemachine.isStateActive(State.r2_C));
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.R1_A));
-		assertTrue(statemachine.isStateActive(State.R2_D));
+		assertTrue(statemachine.isStateActive(State.r1_A));
+		assertTrue(statemachine.isStateActive(State.r2_D));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.R1_A));
-		assertTrue(statemachine.isStateActive(State.R2_D));
+		assertTrue(statemachine.isStateActive(State.r1_A));
+		assertTrue(statemachine.isStateActive(State.r2_D));
 		statemachine.raiseF();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.R1_A));
-		assertTrue(statemachine.isStateActive(State.R2_C));
+		assertTrue(statemachine.isStateActive(State.r1_A));
+		assertTrue(statemachine.isStateActive(State.r2_C));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.R1_A));
-		assertTrue(statemachine.isStateActive(State.R2_C));
+		assertTrue(statemachine.isStateActive(State.r1_A));
+		assertTrue(statemachine.isStateActive(State.r2_C));
 	}
 }
