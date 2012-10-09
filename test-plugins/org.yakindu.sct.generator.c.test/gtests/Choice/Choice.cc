@@ -16,7 +16,6 @@ TEST(StatemachineTest, choiceTest) {
 	Choice handle;
 	choice_init(&handle);
 	choice_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
 	EXPECT_TRUE(choiceIface_get_value(&handle)== 4);
 	choiceIface_raise_pressKey(&handle);

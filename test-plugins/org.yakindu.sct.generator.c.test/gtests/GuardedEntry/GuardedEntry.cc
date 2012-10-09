@@ -16,7 +16,6 @@ TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	guardedEntry_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle)== false);
 }
@@ -24,7 +23,6 @@ TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	guardedEntry_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	guardedEntryIface_set_guard(&handle, true);
 	EXPECT_TRUE(false);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
@@ -34,7 +32,6 @@ TEST(StatemachineTest, EntryTakenInTransition) {
 	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	guardedEntry_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
 	guardedEntryIface_raise_e(&handle);
 	guardedEntry_runCycle(&handle);
@@ -50,7 +47,6 @@ TEST(StatemachineTest, EntryNotTakenInTransition) {
 	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	guardedEntry_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
 	guardedEntryIface_raise_e(&handle);
 	guardedEntry_runCycle(&handle);

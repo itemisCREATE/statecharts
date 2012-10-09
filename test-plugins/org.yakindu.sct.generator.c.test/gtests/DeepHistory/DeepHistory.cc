@@ -16,7 +16,6 @@ TEST(StatemachineTest, deepHistoryTest) {
 	DeepHistory handle;
 	deepHistory_init(&handle);
 	deepHistory_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	deepHistoryIface_raise_event1(&handle);
 	deepHistory_runCycle(&handle);
 	deepHistoryIface_raise_event3(&handle);

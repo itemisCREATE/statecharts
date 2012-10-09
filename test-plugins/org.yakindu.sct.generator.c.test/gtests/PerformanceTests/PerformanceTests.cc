@@ -16,7 +16,6 @@ TEST(StatemachineTest, test_100_000) {
 	PerformanceTest handle;
 	performanceTest_init(&handle);
 	performanceTest_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(performanceTest_isActive(&handle, PerformanceTest_mr_A));
 	while (performanceTestIface_get_c(&handle)< 100000) {
 		if (performanceTest_isActive(&handle, PerformanceTest_mr_A)) {
@@ -39,7 +38,6 @@ TEST(StatemachineTest, test_1_000_000) {
 	PerformanceTest handle;
 	performanceTest_init(&handle);
 	performanceTest_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(performanceTest_isActive(&handle, PerformanceTest_mr_A));
 	while (performanceTestIface_get_c(&handle)< 1000000) {
 		if (performanceTest_isActive(&handle, PerformanceTest_mr_A)) {
@@ -62,7 +60,6 @@ TEST(StatemachineTest, test_10_000_000) {
 	PerformanceTest handle;
 	performanceTest_init(&handle);
 	performanceTest_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(performanceTest_isActive(&handle, PerformanceTest_mr_A));
 	while (performanceTestIface_get_c(&handle)< 10000000) {
 		if (performanceTest_isActive(&handle, PerformanceTest_mr_A)) {

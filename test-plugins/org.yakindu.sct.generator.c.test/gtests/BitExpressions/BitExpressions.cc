@@ -16,7 +16,6 @@ TEST(StatemachineTest, BitExpressions) {
 	BitExpressions handle;
 	bitExpressions_init(&handle);
 	bitExpressions_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(bitExpressions_isActive(&handle, BitExpressions_main_region_StateA));
 	EXPECT_TRUE(bitExpressionsIface_get_myBit1(&handle)== 5);
 	EXPECT_TRUE(bitExpressionsIface_get_myBit2(&handle)== 7);

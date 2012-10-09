@@ -16,7 +16,6 @@ TEST(StatemachineTest, simpleHierachyTest) {
 	SimpleHierachy handle;
 	simpleHierachy_init(&handle);
 	simpleHierachy_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(simpleHierachy_isActive(&handle, SimpleHierachy_main_region_A));
 	simpleHierachyIface_raise_event1(&handle);
 	simpleHierachyIface_raise_event1(&handle);

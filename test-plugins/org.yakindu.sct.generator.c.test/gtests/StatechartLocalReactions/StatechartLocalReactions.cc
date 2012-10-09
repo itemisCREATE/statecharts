@@ -16,7 +16,6 @@ TEST(StatemachineTest, statechartLocalReactionsTest) {
 	StatechartLocalReactions handle;
 	statechartLocalReactions_init(&handle);
 	statechartLocalReactions_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_main_region_S1));
 	EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_region2_a));
 	while (statechartLocalReactionsIface_get_myInt(&handle)< 10) {

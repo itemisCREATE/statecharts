@@ -16,7 +16,6 @@ TEST(StatemachineTest, simple) {
 	Parenthesis handle;
 	parenthesis_init(&handle);
 	parenthesis_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(parenthesis_isActive(&handle, Parenthesis_mainRegion_A));
 	EXPECT_TRUE(parenthesisIface_get_erg(&handle)== 8);
 }
