@@ -38,24 +38,24 @@ public class SyncForkTest {
 
 	@Test
 	public void testsyncForkTest() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseF();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
-		assertTrue(statemachine.isStateActive(State.Main_region_B_r1_C1));
-		assertTrue(statemachine.isStateActive(State.Main_region_B_r2_D1));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
+		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D1));
 		statemachine.raiseF();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
-		assertTrue(statemachine.isStateActive(State.Main_region_B_r1_C2));
-		assertTrue(statemachine.isStateActive(State.Main_region_B_r2_D2));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C2));
+		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D2));
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseF();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
-		assertTrue(statemachine.isStateActive(State.Main_region_B_r1_C1));
-		assertTrue(statemachine.isStateActive(State.Main_region_B_r2_D1));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C1));
+		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D1));
 	}
 }

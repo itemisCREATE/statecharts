@@ -91,7 +91,7 @@ public class BooleanExpressionsStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_StateA, Main_region_StateB, $NullState$
+		main_region_StateA, main_region_StateB, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -113,6 +113,36 @@ public class BooleanExpressionsStatemachine
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		sCIDefault.myBool1 = true;
+
+		sCIDefault.myBool2 = false;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_StateB :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -123,24 +153,13 @@ public class BooleanExpressionsStatemachine
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_StateA :
-				return stateVector[0] == State.Main_region_StateA;
-
-			case Main_region_StateB :
-				return stateVector[0] == State.Main_region_StateB;
-
+			case main_region_StateA :
+				return stateVector[0] == State.main_region_StateA;
+			case main_region_StateB :
+				return stateVector[0] == State.main_region_StateB;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -201,68 +220,37 @@ public class BooleanExpressionsStatemachine
 		sCIDefault.setNotequal(value);
 	}
 
-	public void enter() {
-		entryActionBooleanExpressions();
-		sCIDefault.myBool1 = true;
-
-		sCIDefault.myBool2 = false;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_StateA;
-
+	/* Entry action for statechart 'BooleanExpressions'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_StateA :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_StateB :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionBooleanExpressions();
+	/* Exit action for state 'BooleanExpressions'. */
+	private void exitAction() {
 	}
 
-	private void entryActionBooleanExpressions() {
-
-	}
-
-	private void exitActionBooleanExpressions() {
-
-	}
-
+	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
 		if (sCIDefault.e1) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.and = (sCIDefault.myBool1 && sCIDefault.myBool2);
+			sCIDefault.and = sCIDefault.myBool1 && sCIDefault.myBool2;
 
-			sCIDefault.or = (sCIDefault.myBool1 || sCIDefault.myBool2);
+			sCIDefault.or = sCIDefault.myBool1 || sCIDefault.myBool2;
 
 			sCIDefault.not = !sCIDefault.myBool1;
 
-			sCIDefault.equal = (sCIDefault.myBool1 == sCIDefault.myBool2);
+			sCIDefault.equal = sCIDefault.myBool1 == sCIDefault.myBool2;
 
-			sCIDefault.notequal = ((sCIDefault.myBool1 != sCIDefault.myBool2));
+			sCIDefault.notequal = (sCIDefault.myBool1 != sCIDefault.myBool2);
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_StateB;
-
+			stateVector[0] = State.main_region_StateB;
 		}
-
 	}
-	private void reactMain_region_StateB() {
 
+	/* The reactions of state StateB. */
+	private void reactMain_region_StateB() {
 	}
 
 	public void runCycle() {
@@ -272,10 +260,10 @@ public class BooleanExpressionsStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_StateA :
+				case main_region_StateA :
 					reactMain_region_StateA();
 					break;
-				case Main_region_StateB :
+				case main_region_StateB :
 					reactMain_region_StateB();
 					break;
 				default :

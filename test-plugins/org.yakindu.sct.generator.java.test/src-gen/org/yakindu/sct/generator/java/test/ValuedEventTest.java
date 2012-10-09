@@ -39,7 +39,7 @@ public class ValuedEventTest {
 	@Test
 	public void testvaluedEventTest() {
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.isStateActive(State._region1_C));
 		assertTrue(statemachine.getMyVar() == 42);
 	}

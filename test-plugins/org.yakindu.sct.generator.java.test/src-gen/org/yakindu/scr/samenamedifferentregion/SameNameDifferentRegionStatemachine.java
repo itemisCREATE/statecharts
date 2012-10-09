@@ -21,7 +21,7 @@ public class SameNameDifferentRegionStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_StateA, Main_region_StateB, Main_region_StateB_r1_StateA, Main_region_StateB_r1_StateB, $NullState$
+		main_region_StateA, main_region_StateB, main_region_StateB_r1_StateA, main_region_StateB_r1_StateB, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -43,6 +43,37 @@ public class SameNameDifferentRegionStatemachine
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_StateB_r1_StateA :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_StateB_r1_StateB :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -53,33 +84,20 @@ public class SameNameDifferentRegionStatemachine
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_StateA :
-				return stateVector[0] == State.Main_region_StateA;
-
-			case Main_region_StateB :
-				return stateVector[0].ordinal() >= State.Main_region_StateB
+			case main_region_StateA :
+				return stateVector[0] == State.main_region_StateA;
+			case main_region_StateB :
+				return stateVector[0].ordinal() >= State.main_region_StateB
 						.ordinal()
-						&& stateVector[0].ordinal() <= State.Main_region_StateB_r1_StateB
+						&& stateVector[0].ordinal() <= State.main_region_StateB_r1_StateB
 								.ordinal();
-
-			case Main_region_StateB_r1_StateA :
-				return stateVector[0] == State.Main_region_StateB_r1_StateA;
-
-			case Main_region_StateB_r1_StateB :
-				return stateVector[0] == State.Main_region_StateB_r1_StateB;
-
+			case main_region_StateB_r1_StateA :
+				return stateVector[0] == State.main_region_StateB_r1_StateA;
+			case main_region_StateB_r1_StateB :
+				return stateVector[0] == State.main_region_StateB_r1_StateB;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -90,71 +108,38 @@ public class SameNameDifferentRegionStatemachine
 		sCIDefault.raiseE1();
 	}
 
-	public void enter() {
-		entryActionSameNameDifferentRegion();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_StateA;
-
+	/* Entry action for statechart 'SameNameDifferentRegion'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_StateA :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_StateB_r1_StateA :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_StateB_r1_StateB :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionSameNameDifferentRegion();
+	/* Exit action for state 'SameNameDifferentRegion'. */
+	private void exitAction() {
 	}
 
-	private void entryActionSameNameDifferentRegion() {
-
-	}
-
-	private void exitActionSameNameDifferentRegion() {
-
-	}
-
+	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
 		if (sCIDefault.e1) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_StateB_r1_StateA;
-
+			stateVector[0] = State.main_region_StateB_r1_StateA;
 		}
+	}
 
-	}
-	private void reactMain_region_StateB() {
-	}
+	/* The reactions of state StateA. */
 	private void reactMain_region_StateB_r1_StateA() {
 		if (sCIDefault.e1) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_StateB_r1_StateB;
-
+			stateVector[0] = State.main_region_StateB_r1_StateB;
 		}
-
 	}
-	private void reactMain_region_StateB_r1_StateB() {
 
+	/* The reactions of state StateB. */
+	private void reactMain_region_StateB_r1_StateB() {
 	}
 
 	public void runCycle() {
@@ -164,16 +149,13 @@ public class SameNameDifferentRegionStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_StateA :
+				case main_region_StateA :
 					reactMain_region_StateA();
 					break;
-				case Main_region_StateB :
-					reactMain_region_StateB();
-					break;
-				case Main_region_StateB_r1_StateA :
+				case main_region_StateB_r1_StateA :
 					reactMain_region_StateB_r1_StateA();
 					break;
-				case Main_region_StateB_r1_StateB :
+				case main_region_StateB_r1_StateB :
 					reactMain_region_StateB_r1_StateB();
 					break;
 				default :

@@ -27,13 +27,12 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		public void clearOutEvents() {
 			e1 = false;
 		}
-
 	}
 
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_StateA, Main_region_StateB, Second_region_SateA, Second_region_StateB, $NullState$
+		main_region_StateA, main_region_StateB, second_region_SateA, second_region_StateB, $NullState$
 	};
 
 	private final State[] stateVector = new State[2];
@@ -55,6 +54,50 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+
+		nextStateIndex = 1;
+		stateVector[1] = State.second_region_SateA;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_StateB :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		switch (stateVector[1]) {
+			case second_region_SateA :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case second_region_StateB :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -66,30 +109,17 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_StateA :
-				return stateVector[0] == State.Main_region_StateA;
-
-			case Main_region_StateB :
-				return stateVector[0] == State.Main_region_StateB;
-
-			case Second_region_SateA :
-				return stateVector[1] == State.Second_region_SateA;
-
-			case Second_region_StateB :
-				return stateVector[1] == State.Second_region_StateB;
-
+			case main_region_StateA :
+				return stateVector[0] == State.main_region_StateA;
+			case main_region_StateB :
+				return stateVector[0] == State.main_region_StateB;
+			case second_region_SateA :
+				return stateVector[1] == State.second_region_SateA;
+			case second_region_StateB :
+				return stateVector[1] == State.second_region_StateB;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -99,91 +129,47 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	public boolean isRaisedE1() {
 		return sCIDefault.isRaisedE1();
 	}
-
 	public void raiseE2() {
 		sCIDefault.raiseE2();
 	}
 
-	public void enter() {
-		entryActionRaiseEvent();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_StateA;
-
-		nextStateIndex = 1;
-		stateVector[1] = State.Second_region_SateA;
-
+	/* Entry action for statechart 'RaiseEvent'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_StateA :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_StateB :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		//Handle exit of all possible states (of second region) at position 1...
-		switch (stateVector[1]) {
-
-			case Second_region_SateA :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case Second_region_StateB :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionRaiseEvent();
+	/* Exit action for state 'RaiseEvent'. */
+	private void exitAction() {
 	}
 
-	private void entryActionRaiseEvent() {
-
-	}
-
-	private void exitActionRaiseEvent() {
-
-	}
-
+	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
 		if (sCIDefault.e2) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			sCIDefault.raiseE1();
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_StateB;
-
+			stateVector[0] = State.main_region_StateB;
 		}
-
 	}
+
+	/* The reactions of state StateB. */
 	private void reactMain_region_StateB() {
-
 	}
+
+	/* The reactions of state SateA. */
 	private void reactSecond_region_SateA() {
 		if (sCIDefault.e1) {
+			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
 			nextStateIndex = 1;
-			stateVector[1] = State.Second_region_StateB;
-
+			stateVector[1] = State.second_region_StateB;
 		}
 	}
+
+	/* The reactions of state StateB. */
 	private void reactSecond_region_StateB() {
 	}
 
@@ -194,16 +180,16 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_StateA :
+				case main_region_StateA :
 					reactMain_region_StateA();
 					break;
-				case Main_region_StateB :
+				case main_region_StateB :
 					reactMain_region_StateB();
 					break;
-				case Second_region_SateA :
+				case second_region_SateA :
 					reactSecond_region_SateA();
 					break;
-				case Second_region_StateB :
+				case second_region_StateB :
 					reactSecond_region_StateB();
 					break;
 				default :

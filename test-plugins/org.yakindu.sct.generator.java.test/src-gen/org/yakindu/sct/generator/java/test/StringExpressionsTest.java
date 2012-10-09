@@ -38,12 +38,12 @@ public class StringExpressionsTest {
 
 	@Test
 	public void testStringExpressionsTest() {
-		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
+		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyString().equals("hello"));
 		assertTrue(statemachine.getMyString2().equals("world"));
 		statemachine.raiseE1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_StateB));
+		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getEquals() == false);
 		assertTrue(statemachine.getNotEqual() == true);
 	}

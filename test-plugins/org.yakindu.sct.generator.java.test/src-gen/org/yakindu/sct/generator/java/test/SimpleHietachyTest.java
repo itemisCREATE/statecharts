@@ -38,13 +38,13 @@ public class SimpleHietachyTest {
 
 	@Test
 	public void testsimpleHierachyTest() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine
-				.isStateActive(State.Main_region_B_subregion1_B1));
+				.isStateActive(State.main_region_B_subregion1_B1));
 	}
 }

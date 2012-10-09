@@ -38,7 +38,7 @@ public class ParenthesisTest {
 
 	@Test
 	public void testsimple() {
-		assertTrue(statemachine.isStateActive(State.MainRegion_A));
+		assertTrue(statemachine.isStateActive(State.mainRegion_A));
 		assertTrue(statemachine.getErg() == 8);
 	}
 }

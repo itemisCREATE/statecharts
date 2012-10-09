@@ -38,7 +38,7 @@ public class IntegerExpressionsTest {
 
 	@Test
 	public void testintegerExpressions() {
-		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
+		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyInt1() == 10);
 		assertTrue(statemachine.getMyInt2() == 5);
 		statemachine.raiseE1();

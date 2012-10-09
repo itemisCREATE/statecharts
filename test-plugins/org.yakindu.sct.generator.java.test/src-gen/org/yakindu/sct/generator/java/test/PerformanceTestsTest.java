@@ -38,9 +38,9 @@ public class PerformanceTestsTest {
 
 	@Test
 	public void testtest_100_000() {
-		assertTrue(statemachine.isStateActive(State.Mr_A));
+		assertTrue(statemachine.isStateActive(State.mr_A));
 		while (statemachine.getC() < 100000) {
-			if (statemachine.isStateActive(State.Mr_A)) {
+			if (statemachine.isStateActive(State.mr_A)) {
 				statemachine.raiseE1();;
 			} else {
 				if (statemachine.getC() % 2 == 0) {
@@ -55,9 +55,9 @@ public class PerformanceTestsTest {
 	}
 	@Test
 	public void testtest_1_000_000() {
-		assertTrue(statemachine.isStateActive(State.Mr_A));
+		assertTrue(statemachine.isStateActive(State.mr_A));
 		while (statemachine.getC() < 1000000) {
-			if (statemachine.isStateActive(State.Mr_A)) {
+			if (statemachine.isStateActive(State.mr_A)) {
 				statemachine.raiseE1();;
 			} else {
 				if (statemachine.getC() % 2 == 0) {
@@ -72,9 +72,9 @@ public class PerformanceTestsTest {
 	}
 	@Test
 	public void testtest_10_000_000() {
-		assertTrue(statemachine.isStateActive(State.Mr_A));
+		assertTrue(statemachine.isStateActive(State.mr_A));
 		while (statemachine.getC() < 10000000) {
-			if (statemachine.isStateActive(State.Mr_A)) {
+			if (statemachine.isStateActive(State.mr_A)) {
 				statemachine.raiseE1();;
 			} else {
 				if (statemachine.getC() % 2 == 0) {

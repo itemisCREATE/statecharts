@@ -10,60 +10,60 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			auto = true;
 		}
 
-		private boolean eventBreak;
+		private boolean break_ID;
 
 		public void raiseBreak() {
-			eventBreak = true;
+			break_ID = true;
 		}
 
-		private boolean varCase;
+		private boolean case_ID;
 
-		public boolean getVarCase() {
-			return varCase;
+		public boolean getCase() {
+			return case_ID;
 		}
 
-		public void setVarCase(boolean value) {
-			this.varCase = value;
+		public void setCase(boolean value) {
+			this.case_ID = value;
 		}
 
-		private int varDo;
+		private int do_ID;
 
-		public int getVarDo() {
-			return varDo;
+		public int getDo() {
+			return do_ID;
 		}
 
-		public void setVarDo(int value) {
-			this.varDo = value;
+		public void setDo(int value) {
+			this.do_ID = value;
 		}
 
-		private boolean varContinue;
+		private boolean continue_ID;
 
-		public boolean getVarContinue() {
-			return varContinue;
+		public boolean getContinue() {
+			return continue_ID;
 		}
 
-		public void setVarContinue(boolean value) {
-			this.varContinue = value;
+		public void setContinue(boolean value) {
+			this.continue_ID = value;
 		}
 
-		private boolean varDouble;
+		private boolean double_ID;
 
-		public boolean getVarDouble() {
-			return varDouble;
+		public boolean getDouble() {
+			return double_ID;
 		}
 
-		public void setVarDouble(boolean value) {
-			this.varDouble = value;
+		public void setDouble(boolean value) {
+			this.double_ID = value;
 		}
 
-		private boolean varEnum;
+		private boolean enum_ID;
 
-		public boolean getVarEnum() {
-			return varEnum;
+		public boolean getEnum() {
+			return enum_ID;
 		}
 
-		public void setVarEnum(boolean value) {
-			this.varEnum = value;
+		public void setEnum(boolean value) {
+			this.enum_ID = value;
 		}
 
 		private boolean extern;
@@ -76,64 +76,64 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.extern = value;
 		}
 
-		private boolean varFloat;
+		private boolean float_ID;
 
-		public boolean getVarFloat() {
-			return varFloat;
+		public boolean getFloat() {
+			return float_ID;
 		}
 
-		public void setVarFloat(boolean value) {
-			this.varFloat = value;
+		public void setFloat(boolean value) {
+			this.float_ID = value;
 		}
 
-		private boolean varFor;
+		private boolean for_ID;
 
-		public boolean getVarFor() {
-			return varFor;
+		public boolean getFor() {
+			return for_ID;
 		}
 
-		public void setVarFor(boolean value) {
-			this.varFor = value;
+		public void setFor(boolean value) {
+			this.for_ID = value;
 		}
 
-		private boolean varGoto;
+		private boolean goto_ID;
 
-		public boolean getVarGoto() {
-			return varGoto;
+		public boolean getGoto() {
+			return goto_ID;
 		}
 
-		public void setVarGoto(boolean value) {
-			this.varGoto = value;
+		public void setGoto(boolean value) {
+			this.goto_ID = value;
 		}
 
-		private boolean varIf;
+		private boolean if_ID;
 
-		public boolean getVarIf() {
-			return varIf;
+		public boolean getIf() {
+			return if_ID;
 		}
 
-		public void setVarIf(boolean value) {
-			this.varIf = value;
+		public void setIf(boolean value) {
+			this.if_ID = value;
 		}
 
-		private boolean varInt;
+		private boolean int_ID;
 
-		public boolean getVarInt() {
-			return varInt;
+		public boolean getInt() {
+			return int_ID;
 		}
 
-		public void setVarInt(boolean value) {
-			this.varInt = value;
+		public void setInt(boolean value) {
+			this.int_ID = value;
 		}
 
-		private boolean varLong;
+		private boolean long_ID;
 
-		public boolean getVarLong() {
-			return varLong;
+		public boolean getLong() {
+			return long_ID;
 		}
 
-		public void setVarLong(boolean value) {
-			this.varLong = value;
+		public void setLong(boolean value) {
+			this.long_ID = value;
 		}
 
 		private boolean register;
@@ -146,24 +146,24 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.register = value;
 		}
 
-		private boolean varReturn;
+		private boolean return_ID;
 
-		public boolean getVarReturn() {
-			return varReturn;
+		public boolean getReturn() {
+			return return_ID;
 		}
 
-		public void setVarReturn(boolean value) {
-			this.varReturn = value;
+		public void setReturn(boolean value) {
+			this.return_ID = value;
 		}
 
-		private boolean varShort;
+		private boolean short_ID;
 
-		public boolean getVarShort() {
-			return varShort;
+		public boolean getShort() {
+			return short_ID;
 		}
 
-		public void setVarShort(boolean value) {
-			this.varShort = value;
+		public void setShort(boolean value) {
+			this.short_ID = value;
 		}
 
 		private boolean signed;
@@ -186,14 +186,14 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.sizeof = value;
 		}
 
-		private boolean varStatic;
+		private boolean static_ID;
 
-		public boolean getVarStatic() {
-			return varStatic;
+		public boolean getStatic() {
+			return static_ID;
 		}
 
-		public void setVarStatic(boolean value) {
-			this.varStatic = value;
+		public void setStatic(boolean value) {
+			this.static_ID = value;
 		}
 
 		private boolean struct;
@@ -206,14 +206,14 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.struct = value;
 		}
 
-		private boolean varSwitch;
+		private boolean switch_ID;
 
-		public boolean getVarSwitch() {
-			return varSwitch;
+		public boolean getSwitch() {
+			return switch_ID;
 		}
 
-		public void setVarSwitch(boolean value) {
-			this.varSwitch = value;
+		public void setSwitch(boolean value) {
+			this.switch_ID = value;
 		}
 
 		private boolean typedef;
@@ -246,39 +246,39 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.unsigned = value;
 		}
 
-		private boolean varVoid;
+		private boolean void_ID;
 
-		public boolean getVarVoid() {
-			return varVoid;
+		public boolean getVoid() {
+			return void_ID;
 		}
 
-		public void setVarVoid(boolean value) {
-			this.varVoid = value;
+		public void setVoid(boolean value) {
+			this.void_ID = value;
 		}
 
-		private boolean varVolatile;
+		private boolean volatile_ID;
 
-		public boolean getVarVolatile() {
-			return varVolatile;
+		public boolean getVolatile() {
+			return volatile_ID;
 		}
 
-		public void setVarVolatile(boolean value) {
-			this.varVolatile = value;
+		public void setVolatile(boolean value) {
+			this.volatile_ID = value;
 		}
 
-		private boolean varWhile;
+		private boolean while_ID;
 
-		public boolean getVarWhile() {
-			return varWhile;
+		public boolean getWhile() {
+			return while_ID;
 		}
 
-		public void setVarWhile(boolean value) {
-			this.varWhile = value;
+		public void setWhile(boolean value) {
+			this.while_ID = value;
 		}
 
 		public void clearEvents() {
 			auto = false;
-			eventBreak = false;
+			break_ID = false;
 		}
 
 	}
@@ -286,11 +286,10 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Auto_char, Auto_const, Auto_const_switch_case, Auto_const_switch_case_enum_asm, $NullState$
+		auto_char, auto_const, auto_const_switch_case, auto_const_switch_case_enum_asm, $NullState$
 	};
 
 	private State[] historyVector = new State[2];
-
 	private final State[] stateVector = new State[1];
 
 	private int nextStateIndex;
@@ -313,6 +312,88 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		sCIDefault.case_ID = true;
+
+		sCIDefault.do_ID = 0;
+
+		sCIDefault.continue_ID = true;
+
+		sCIDefault.double_ID = true;
+
+		sCIDefault.enum_ID = true;
+
+		sCIDefault.extern = true;
+
+		sCIDefault.float_ID = true;
+
+		sCIDefault.for_ID = true;
+
+		sCIDefault.goto_ID = true;
+
+		sCIDefault.if_ID = true;
+
+		sCIDefault.int_ID = true;
+
+		sCIDefault.long_ID = true;
+
+		sCIDefault.register = true;
+
+		sCIDefault.return_ID = true;
+
+		sCIDefault.short_ID = true;
+
+		sCIDefault.signed = true;
+
+		sCIDefault.sizeof = true;
+
+		sCIDefault.static_ID = true;
+
+		sCIDefault.struct = true;
+
+		sCIDefault.switch_ID = true;
+
+		sCIDefault.typedef = true;
+
+		sCIDefault.union = true;
+
+		sCIDefault.unsigned = true;
+
+		sCIDefault.void_ID = true;
+
+		sCIDefault.volatile_ID = true;
+
+		sCIDefault.while_ID = true;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.auto_char;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case auto_char :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case auto_const_switch_case_enum_asm :
+				historyVector[1] = stateVector[0];
+
+				historyVector[0] = stateVector[0];
+
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -323,35 +404,22 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Auto_char :
-				return stateVector[0] == State.Auto_char;
-
-			case Auto_const :
-				return stateVector[0].ordinal() >= State.Auto_const.ordinal()
-						&& stateVector[0].ordinal() <= State.Auto_const_switch_case_enum_asm
+			case auto_char :
+				return stateVector[0] == State.auto_char;
+			case auto_const :
+				return stateVector[0].ordinal() >= State.auto_const.ordinal()
+						&& stateVector[0].ordinal() <= State.auto_const_switch_case_enum_asm
 								.ordinal();
-
-			case Auto_const_switch_case :
-				return stateVector[0].ordinal() >= State.Auto_const_switch_case
+			case auto_const_switch_case :
+				return stateVector[0].ordinal() >= State.auto_const_switch_case
 						.ordinal()
-						&& stateVector[0].ordinal() <= State.Auto_const_switch_case_enum_asm
+						&& stateVector[0].ordinal() <= State.auto_const_switch_case_enum_asm
 								.ordinal();
-
-			case Auto_const_switch_case_enum_asm :
-				return stateVector[0] == State.Auto_const_switch_case_enum_asm;
-
+			case auto_const_switch_case_enum_asm :
+				return stateVector[0] == State.auto_const_switch_case_enum_asm;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -361,45 +429,44 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void raiseAuto() {
 		sCIDefault.raiseAuto();
 	}
-
 	public void raiseBreak() {
 		sCIDefault.raiseBreak();
 	}
 
-	public boolean getVarCase() {
-		return sCIDefault.getVarCase();
+	public boolean getCase() {
+		return sCIDefault.getCase();
 	}
 
-	public void setVarCase(boolean value) {
-		sCIDefault.setVarCase(value);
+	public void setCase(boolean value) {
+		sCIDefault.setCase(value);
 	}
-	public int getVarDo() {
-		return sCIDefault.getVarDo();
-	}
-
-	public void setVarDo(int value) {
-		sCIDefault.setVarDo(value);
-	}
-	public boolean getVarContinue() {
-		return sCIDefault.getVarContinue();
+	public int getDo() {
+		return sCIDefault.getDo();
 	}
 
-	public void setVarContinue(boolean value) {
-		sCIDefault.setVarContinue(value);
+	public void setDo(int value) {
+		sCIDefault.setDo(value);
 	}
-	public boolean getVarDouble() {
-		return sCIDefault.getVarDouble();
-	}
-
-	public void setVarDouble(boolean value) {
-		sCIDefault.setVarDouble(value);
-	}
-	public boolean getVarEnum() {
-		return sCIDefault.getVarEnum();
+	public boolean getContinue() {
+		return sCIDefault.getContinue();
 	}
 
-	public void setVarEnum(boolean value) {
-		sCIDefault.setVarEnum(value);
+	public void setContinue(boolean value) {
+		sCIDefault.setContinue(value);
+	}
+	public boolean getDouble() {
+		return sCIDefault.getDouble();
+	}
+
+	public void setDouble(boolean value) {
+		sCIDefault.setDouble(value);
+	}
+	public boolean getEnum() {
+		return sCIDefault.getEnum();
+	}
+
+	public void setEnum(boolean value) {
+		sCIDefault.setEnum(value);
 	}
 	public boolean getExtern() {
 		return sCIDefault.getExtern();
@@ -408,47 +475,47 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void setExtern(boolean value) {
 		sCIDefault.setExtern(value);
 	}
-	public boolean getVarFloat() {
-		return sCIDefault.getVarFloat();
+	public boolean getFloat() {
+		return sCIDefault.getFloat();
 	}
 
-	public void setVarFloat(boolean value) {
-		sCIDefault.setVarFloat(value);
+	public void setFloat(boolean value) {
+		sCIDefault.setFloat(value);
 	}
-	public boolean getVarFor() {
-		return sCIDefault.getVarFor();
-	}
-
-	public void setVarFor(boolean value) {
-		sCIDefault.setVarFor(value);
-	}
-	public boolean getVarGoto() {
-		return sCIDefault.getVarGoto();
+	public boolean getFor() {
+		return sCIDefault.getFor();
 	}
 
-	public void setVarGoto(boolean value) {
-		sCIDefault.setVarGoto(value);
+	public void setFor(boolean value) {
+		sCIDefault.setFor(value);
 	}
-	public boolean getVarIf() {
-		return sCIDefault.getVarIf();
-	}
-
-	public void setVarIf(boolean value) {
-		sCIDefault.setVarIf(value);
-	}
-	public boolean getVarInt() {
-		return sCIDefault.getVarInt();
+	public boolean getGoto() {
+		return sCIDefault.getGoto();
 	}
 
-	public void setVarInt(boolean value) {
-		sCIDefault.setVarInt(value);
+	public void setGoto(boolean value) {
+		sCIDefault.setGoto(value);
 	}
-	public boolean getVarLong() {
-		return sCIDefault.getVarLong();
+	public boolean getIf() {
+		return sCIDefault.getIf();
 	}
 
-	public void setVarLong(boolean value) {
-		sCIDefault.setVarLong(value);
+	public void setIf(boolean value) {
+		sCIDefault.setIf(value);
+	}
+	public boolean getInt() {
+		return sCIDefault.getInt();
+	}
+
+	public void setInt(boolean value) {
+		sCIDefault.setInt(value);
+	}
+	public boolean getLong() {
+		return sCIDefault.getLong();
+	}
+
+	public void setLong(boolean value) {
+		sCIDefault.setLong(value);
 	}
 	public boolean getRegister() {
 		return sCIDefault.getRegister();
@@ -457,19 +524,19 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void setRegister(boolean value) {
 		sCIDefault.setRegister(value);
 	}
-	public boolean getVarReturn() {
-		return sCIDefault.getVarReturn();
+	public boolean getReturn() {
+		return sCIDefault.getReturn();
 	}
 
-	public void setVarReturn(boolean value) {
-		sCIDefault.setVarReturn(value);
+	public void setReturn(boolean value) {
+		sCIDefault.setReturn(value);
 	}
-	public boolean getVarShort() {
-		return sCIDefault.getVarShort();
+	public boolean getShort() {
+		return sCIDefault.getShort();
 	}
 
-	public void setVarShort(boolean value) {
-		sCIDefault.setVarShort(value);
+	public void setShort(boolean value) {
+		sCIDefault.setShort(value);
 	}
 	public boolean getSigned() {
 		return sCIDefault.getSigned();
@@ -485,12 +552,12 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void setSizeof(boolean value) {
 		sCIDefault.setSizeof(value);
 	}
-	public boolean getVarStatic() {
-		return sCIDefault.getVarStatic();
+	public boolean getStatic() {
+		return sCIDefault.getStatic();
 	}
 
-	public void setVarStatic(boolean value) {
-		sCIDefault.setVarStatic(value);
+	public void setStatic(boolean value) {
+		sCIDefault.setStatic(value);
 	}
 	public boolean getStruct() {
 		return sCIDefault.getStruct();
@@ -499,12 +566,12 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void setStruct(boolean value) {
 		sCIDefault.setStruct(value);
 	}
-	public boolean getVarSwitch() {
-		return sCIDefault.getVarSwitch();
+	public boolean getSwitch() {
+		return sCIDefault.getSwitch();
 	}
 
-	public void setVarSwitch(boolean value) {
-		sCIDefault.setVarSwitch(value);
+	public void setSwitch(boolean value) {
+		sCIDefault.setSwitch(value);
 	}
 	public boolean getTypedef() {
 		return sCIDefault.getTypedef();
@@ -527,164 +594,149 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void setUnsigned(boolean value) {
 		sCIDefault.setUnsigned(value);
 	}
-	public boolean getVarVoid() {
-		return sCIDefault.getVarVoid();
+	public boolean getVoid() {
+		return sCIDefault.getVoid();
 	}
 
-	public void setVarVoid(boolean value) {
-		sCIDefault.setVarVoid(value);
+	public void setVoid(boolean value) {
+		sCIDefault.setVoid(value);
 	}
-	public boolean getVarVolatile() {
-		return sCIDefault.getVarVolatile();
-	}
-
-	public void setVarVolatile(boolean value) {
-		sCIDefault.setVarVolatile(value);
-	}
-	public boolean getVarWhile() {
-		return sCIDefault.getVarWhile();
+	public boolean getVolatile() {
+		return sCIDefault.getVolatile();
 	}
 
-	public void setVarWhile(boolean value) {
-		sCIDefault.setVarWhile(value);
+	public void setVolatile(boolean value) {
+		sCIDefault.setVolatile(value);
+	}
+	public boolean getWhile() {
+		return sCIDefault.getWhile();
 	}
 
-	public void enter() {
-		entryActionCKeywords();
-		sCIDefault.varCase = true;
-
-		sCIDefault.varDo = 0;
-
-		sCIDefault.varContinue = true;
-
-		sCIDefault.varDouble = true;
-
-		sCIDefault.varEnum = true;
-
-		sCIDefault.extern = true;
-
-		sCIDefault.varFloat = true;
-
-		sCIDefault.varFor = true;
-
-		sCIDefault.varGoto = true;
-
-		sCIDefault.varIf = true;
-
-		sCIDefault.varInt = true;
-
-		sCIDefault.varLong = true;
-
-		sCIDefault.register = true;
-
-		sCIDefault.varReturn = true;
-
-		sCIDefault.varShort = true;
-
-		sCIDefault.signed = true;
-
-		sCIDefault.sizeof = true;
-
-		sCIDefault.varStatic = true;
-
-		sCIDefault.struct = true;
-
-		sCIDefault.varSwitch = true;
-
-		sCIDefault.typedef = true;
-
-		sCIDefault.union = true;
-
-		sCIDefault.unsigned = true;
-
-		sCIDefault.varVoid = true;
-
-		sCIDefault.varVolatile = true;
-
-		sCIDefault.varWhile = true;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Auto_char;
-
+	public void setWhile(boolean value) {
+		sCIDefault.setWhile(value);
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of auto) at position 0...
-		switch (stateVector[0]) {
+	/* Entry action for statechart 'CKeywords'. */
+	private void entryAction() {
+	}
 
-			case Auto_char :
-				stateVector[0] = State.$NullState$;
+	/* Exit action for state 'CKeywords'. */
+	private void exitAction() {
+	}
 
-				break;
+	/* shallow enterSequence with history in child switch */
+	private void shallowEnterSequenceAuto_const_switch() {
+		switch (historyVector[0]) {
+			case auto_const_switch_case_enum_asm :
+				/* Enter the region with deep history */
+				if (historyVector[1] != State.$NullState$) {
+					deepEnterSequenceAuto_const_switch_case_enum();
+				} else {
+					sCIDefault.case_ID = false;
 
-			case Auto_const_switch_case_enum_asm :
+					sCIDefault.do_ID = 0;
 
-				historyVector[1] = stateVector[0];
+					sCIDefault.continue_ID = false;
 
-				historyVector[0] = stateVector[0];
-				stateVector[0] = State.$NullState$;
+					sCIDefault.double_ID = false;
 
+					sCIDefault.enum_ID = false;
+
+					sCIDefault.extern = false;
+
+					sCIDefault.float_ID = false;
+
+					sCIDefault.for_ID = false;
+
+					sCIDefault.goto_ID = false;
+
+					sCIDefault.if_ID = false;
+
+					sCIDefault.int_ID = false;
+
+					sCIDefault.long_ID = false;
+
+					sCIDefault.register = false;
+
+					sCIDefault.return_ID = false;
+
+					sCIDefault.short_ID = false;
+
+					sCIDefault.signed = false;
+
+					sCIDefault.sizeof = false;
+
+					sCIDefault.static_ID = false;
+
+					sCIDefault.struct = false;
+
+					sCIDefault.switch_ID = false;
+
+					sCIDefault.typedef = false;
+
+					sCIDefault.union = false;
+
+					sCIDefault.unsigned = false;
+
+					sCIDefault.void_ID = false;
+
+					sCIDefault.volatile_ID = false;
+
+					sCIDefault.while_ID = false;
+
+					nextStateIndex = 0;
+					stateVector[0] = State.auto_const_switch_case_enum_asm;
+				}
 				break;
 
 			default :
 				break;
 		}
-
-		exitActionCKeywords();
 	}
 
-	private void entryActionCKeywords() {
-
-	}
-
-	private void exitActionCKeywords() {
-
-	}
-
-	private void deepEnterSequenceAuto_const_switch_caseEnum() {
-		//Handle deep history entry of enum
+	/* deep enterSequence with history in child enum */
+	private void deepEnterSequenceAuto_const_switch_case_enum() {
 		switch (historyVector[1]) {
+			case auto_const_switch_case_enum_asm :
+				sCIDefault.case_ID = false;
 
-			case Auto_const_switch_case_enum_asm :
-				sCIDefault.varCase = false;
+				sCIDefault.do_ID = 0;
 
-				sCIDefault.varDo = 0;
+				sCIDefault.continue_ID = false;
 
-				sCIDefault.varContinue = false;
+				sCIDefault.double_ID = false;
 
-				sCIDefault.varDouble = false;
-
-				sCIDefault.varEnum = false;
+				sCIDefault.enum_ID = false;
 
 				sCIDefault.extern = false;
 
-				sCIDefault.varFloat = false;
+				sCIDefault.float_ID = false;
 
-				sCIDefault.varFor = false;
+				sCIDefault.for_ID = false;
 
-				sCIDefault.varGoto = false;
+				sCIDefault.goto_ID = false;
 
-				sCIDefault.varIf = false;
+				sCIDefault.if_ID = false;
 
-				sCIDefault.varInt = false;
+				sCIDefault.int_ID = false;
 
-				sCIDefault.varLong = false;
+				sCIDefault.long_ID = false;
 
 				sCIDefault.register = false;
 
-				sCIDefault.varReturn = false;
+				sCIDefault.return_ID = false;
 
-				sCIDefault.varShort = false;
+				sCIDefault.short_ID = false;
 
 				sCIDefault.signed = false;
 
 				sCIDefault.sizeof = false;
 
-				sCIDefault.varStatic = false;
+				sCIDefault.static_ID = false;
 
 				sCIDefault.struct = false;
 
-				sCIDefault.varSwitch = false;
+				sCIDefault.switch_ID = false;
 
 				sCIDefault.typedef = false;
 
@@ -692,15 +744,14 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 				sCIDefault.unsigned = false;
 
-				sCIDefault.varVoid = false;
+				sCIDefault.void_ID = false;
 
-				sCIDefault.varVolatile = false;
+				sCIDefault.volatile_ID = false;
 
-				sCIDefault.varWhile = false;
+				sCIDefault.while_ID = false;
 
 				nextStateIndex = 0;
-				stateVector[0] = State.Auto_const_switch_case_enum_asm;
-
+				stateVector[0] = State.auto_const_switch_case_enum_asm;
 				break;
 
 			default :
@@ -708,134 +759,61 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 	}
 
-	private void shallowEnterSequenceAuto_constSwitch() {
-		//Handle shallow history entry of switch
-		switch (historyVector[0]) {
-
-			case Auto_const_switch_case_enum_asm :
-
-				//Enter the region with deep history
-				if (historyVector[1] != State.$NullState$) {
-					deepEnterSequenceAuto_const_switch_caseEnum();
-				} else {
-					sCIDefault.varCase = false;
-
-					sCIDefault.varDo = 0;
-
-					sCIDefault.varContinue = false;
-
-					sCIDefault.varDouble = false;
-
-					sCIDefault.varEnum = false;
-
-					sCIDefault.extern = false;
-
-					sCIDefault.varFloat = false;
-
-					sCIDefault.varFor = false;
-
-					sCIDefault.varGoto = false;
-
-					sCIDefault.varIf = false;
-
-					sCIDefault.varInt = false;
-
-					sCIDefault.varLong = false;
-
-					sCIDefault.register = false;
-
-					sCIDefault.varReturn = false;
-
-					sCIDefault.varShort = false;
-
-					sCIDefault.signed = false;
-
-					sCIDefault.sizeof = false;
-
-					sCIDefault.varStatic = false;
-
-					sCIDefault.struct = false;
-
-					sCIDefault.varSwitch = false;
-
-					sCIDefault.typedef = false;
-
-					sCIDefault.union = false;
-
-					sCIDefault.unsigned = false;
-
-					sCIDefault.varVoid = false;
-
-					sCIDefault.varVolatile = false;
-
-					sCIDefault.varWhile = false;
-
-					nextStateIndex = 0;
-					stateVector[0] = State.Auto_const_switch_case_enum_asm;
-
-				}
-
-				break;
-
-			default :
-				break;
-		}
-	}
-
+	/* The reactions of state char. */
 	private void reactAuto_char() {
-		if ((sCIDefault.auto && sCIDefault.varCase)) {
+		if (sCIDefault.auto && sCIDefault.case_ID) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.varDo += 1;
+			sCIDefault.do_ID += 1;
 
-			//Enter the region with shallow history
+			/* Enter the region with shallow history */
 			if (historyVector[0] != State.$NullState$) {
-				shallowEnterSequenceAuto_constSwitch();
+				shallowEnterSequenceAuto_const_switch();
 			} else {
-
-				//Enter the region with deep history
+				/* Enter the region with deep history */
 				if (historyVector[1] != State.$NullState$) {
-					deepEnterSequenceAuto_const_switch_caseEnum();
+					deepEnterSequenceAuto_const_switch_case_enum();
 				} else {
-					sCIDefault.varCase = false;
+					sCIDefault.case_ID = false;
 
-					sCIDefault.varDo = 0;
+					sCIDefault.do_ID = 0;
 
-					sCIDefault.varContinue = false;
+					sCIDefault.continue_ID = false;
 
-					sCIDefault.varDouble = false;
+					sCIDefault.double_ID = false;
 
-					sCIDefault.varEnum = false;
+					sCIDefault.enum_ID = false;
 
 					sCIDefault.extern = false;
 
-					sCIDefault.varFloat = false;
+					sCIDefault.float_ID = false;
 
-					sCIDefault.varFor = false;
+					sCIDefault.for_ID = false;
 
-					sCIDefault.varGoto = false;
+					sCIDefault.goto_ID = false;
 
-					sCIDefault.varIf = false;
+					sCIDefault.if_ID = false;
 
-					sCIDefault.varInt = false;
+					sCIDefault.int_ID = false;
 
-					sCIDefault.varLong = false;
+					sCIDefault.long_ID = false;
 
 					sCIDefault.register = false;
 
-					sCIDefault.varReturn = false;
+					sCIDefault.return_ID = false;
 
-					sCIDefault.varShort = false;
+					sCIDefault.short_ID = false;
 
 					sCIDefault.signed = false;
 
 					sCIDefault.sizeof = false;
 
-					sCIDefault.varStatic = false;
+					sCIDefault.static_ID = false;
 
 					sCIDefault.struct = false;
 
-					sCIDefault.varSwitch = false;
+					sCIDefault.switch_ID = false;
 
 					sCIDefault.typedef = false;
 
@@ -843,28 +821,21 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 					sCIDefault.unsigned = false;
 
-					sCIDefault.varVoid = false;
+					sCIDefault.void_ID = false;
 
-					sCIDefault.varVolatile = false;
+					sCIDefault.volatile_ID = false;
 
-					sCIDefault.varWhile = false;
+					sCIDefault.while_ID = false;
 
 					nextStateIndex = 0;
-					stateVector[0] = State.Auto_const_switch_case_enum_asm;
-
+					stateVector[0] = State.auto_const_switch_case_enum_asm;
 				}
-
 			}
-
 		}
+	}
 
-	}
-	private void reactAuto_const() {
-	}
-	private void reactAuto_const_switch_case() {
-	}
+	/* The reactions of state asm. */
 	private void reactAuto_const_switch_case_enum_asm() {
-
 	}
 
 	public void runCycle() {
@@ -874,16 +845,10 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Auto_char :
+				case auto_char :
 					reactAuto_char();
 					break;
-				case Auto_const :
-					reactAuto_const();
-					break;
-				case Auto_const_switch_case :
-					reactAuto_const_switch_case();
-					break;
-				case Auto_const_switch_case_enum_asm :
+				case auto_const_switch_case_enum_asm :
 					reactAuto_const_switch_case_enum_asm();
 					break;
 				default :

@@ -38,12 +38,12 @@ public class BitExpressionsTest {
 
 	@Test
 	public void testBitExpressions() {
-		assertTrue(statemachine.isStateActive(State.Main_region_StateA));
+		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyBit1() == 5);
 		assertTrue(statemachine.getMyBit2() == 7);
 		statemachine.raiseE1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_StateB));
+		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getLeftBitshift() == 10);
 		assertTrue(statemachine.getRightBitshift() == 2);
 		assertTrue(statemachine.getComplementBitshift() == -6);

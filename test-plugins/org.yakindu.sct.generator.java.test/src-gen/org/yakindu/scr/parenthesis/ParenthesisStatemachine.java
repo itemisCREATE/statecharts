@@ -19,7 +19,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		MainRegion_A, $NullState$
+		mainRegion_A, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -41,6 +41,29 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		sCIDefault.erg = 4 * (3 - 1);
+
+		nextStateIndex = 0;
+		stateVector[0] = State.mainRegion_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case mainRegion_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 
 	}
@@ -50,21 +73,11 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case MainRegion_A :
-				return stateVector[0] == State.MainRegion_A;
-
+			case mainRegion_A :
+				return stateVector[0] == State.mainRegion_A;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -79,41 +92,16 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		sCIDefault.setErg(value);
 	}
 
-	public void enter() {
-		entryActionParenthesis();
-		sCIDefault.erg = 4 * (3 - 1);
-
-		nextStateIndex = 0;
-		stateVector[0] = State.MainRegion_A;
-
+	/* Entry action for statechart 'Parenthesis'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of mainRegion) at position 0...
-		switch (stateVector[0]) {
-
-			case MainRegion_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionParenthesis();
+	/* Exit action for state 'Parenthesis'. */
+	private void exitAction() {
 	}
 
-	private void entryActionParenthesis() {
-
-	}
-
-	private void exitActionParenthesis() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMainRegion_A() {
-
 	}
 
 	public void runCycle() {
@@ -123,7 +111,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case MainRegion_A :
+				case mainRegion_A :
 					reactMainRegion_A();
 					break;
 				default :

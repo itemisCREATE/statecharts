@@ -38,20 +38,20 @@ public class GuardedExitTest {
 
 	@Test
 	public void testExitTaken() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(!statemachine.getGuard());
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(!statemachine.getDone());
 	}
 	@Test
 	public void testExitNotTaken() {
-		assertTrue(statemachine.isStateActive(State.Main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setGuard(true);
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 		assertTrue(statemachine.getDone());
 	}
 }

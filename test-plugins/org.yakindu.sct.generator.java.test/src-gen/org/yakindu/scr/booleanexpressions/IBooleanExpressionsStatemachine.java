@@ -1,13 +1,10 @@
 package org.yakindu.scr.booleanexpressions;
-
 import org.yakindu.scr.IStatemachine;
 
 public interface IBooleanExpressionsStatemachine extends IStatemachine {
 
 	public interface SCIDefault {
-
 		public void raiseE1();
-
 		public boolean getMyBool1();
 		public void setMyBool1(boolean value);
 		public boolean getMyBool2();

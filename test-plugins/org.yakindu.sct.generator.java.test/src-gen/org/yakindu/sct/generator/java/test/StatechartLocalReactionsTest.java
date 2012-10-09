@@ -38,14 +38,14 @@ public class StatechartLocalReactionsTest {
 
 	@Test
 	public void teststatechartLocalReactionsTest() {
-		assertTrue(statemachine.isStateActive(State.Main_region_S1));
-		assertTrue(statemachine.isStateActive(State.Region2_a));
+		assertTrue(statemachine.isStateActive(State.main_region_S1));
+		assertTrue(statemachine.isStateActive(State.region2_a));
 		while (statemachine.getMyInt() < 10) {
-			assertTrue(statemachine.isStateActive(State.Region2_a));
+			assertTrue(statemachine.isStateActive(State.region2_a));
 			if (statemachine.getMyInt() % 2 == 0) {
-				assertTrue(statemachine.isStateActive(State.Main_region_S1));;
+				assertTrue(statemachine.isStateActive(State.main_region_S1));;
 			} else {
-				assertTrue(statemachine.isStateActive(State.Main_region_S2));;
+				assertTrue(statemachine.isStateActive(State.main_region_S2));;
 			}
 			statemachine.runCycle();
 		}

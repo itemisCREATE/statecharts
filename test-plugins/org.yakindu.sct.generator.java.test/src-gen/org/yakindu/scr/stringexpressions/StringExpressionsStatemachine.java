@@ -61,7 +61,7 @@ public class StringExpressionsStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_StateA, Main_region_StateB, $NullState$
+		main_region_StateA, main_region_StateB, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -83,6 +83,36 @@ public class StringExpressionsStatemachine
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		sCIDefault.myString = "hello";
+
+		sCIDefault.myString2 = "world";
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_StateB :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -93,24 +123,13 @@ public class StringExpressionsStatemachine
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_StateA :
-				return stateVector[0] == State.Main_region_StateA;
-
-			case Main_region_StateB :
-				return stateVector[0] == State.Main_region_StateB;
-
+			case main_region_StateA :
+				return stateVector[0] == State.main_region_StateA;
+			case main_region_StateB :
+				return stateVector[0] == State.main_region_StateB;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -150,66 +169,35 @@ public class StringExpressionsStatemachine
 		sCIDefault.setNotEqual(value);
 	}
 
-	public void enter() {
-		entryActionStringExpressions();
-		sCIDefault.myString = "hello";
-
-		sCIDefault.myString2 = "world";
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_StateA;
-
+	/* Entry action for statechart 'StringExpressions'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_StateA :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_StateB :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionStringExpressions();
+	/* Exit action for state 'StringExpressions'. */
+	private void exitAction() {
 	}
 
-	private void entryActionStringExpressions() {
-
-	}
-
-	private void exitActionStringExpressions() {
-
-	}
-
+	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
 		if (sCIDefault.e1) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.equals = ((sCIDefault.myString == null
+			sCIDefault.equals = (sCIDefault.myString == null
 					? sCIDefault.myString2 == null
-					: sCIDefault.myString.equals(sCIDefault.myString2)));
+					: sCIDefault.myString.equals(sCIDefault.myString2));
 
-			sCIDefault.notEqual = ((sCIDefault.myString == null
+			sCIDefault.notEqual = (sCIDefault.myString == null
 					? sCIDefault.myString2 == null
-					: !sCIDefault.myString.equals(sCIDefault.myString2)));
+					: !sCIDefault.myString.equals(sCIDefault.myString2));
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_StateB;
-
+			stateVector[0] = State.main_region_StateB;
 		}
-
 	}
-	private void reactMain_region_StateB() {
 
+	/* The reactions of state StateB. */
+	private void reactMain_region_StateB() {
 	}
 
 	public void runCycle() {
@@ -219,10 +207,10 @@ public class StringExpressionsStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_StateA :
+				case main_region_StateA :
 					reactMain_region_StateA();
 					break;
-				case Main_region_StateB :
+				case main_region_StateB :
 					reactMain_region_StateB();
 					break;
 				default :

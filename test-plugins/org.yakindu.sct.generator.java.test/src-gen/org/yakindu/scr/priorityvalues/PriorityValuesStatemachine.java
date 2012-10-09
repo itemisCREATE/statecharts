@@ -26,7 +26,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		SomeRegion_A, SomeRegion_B, Main_region_A, Main_region_B, Main_region_C, Main_region_D, Main_region_E, $NullState$
+		someRegion_A, someRegion_B, main_region_A, main_region_B, main_region_C, main_region_D, main_region_E, $NullState$
 	};
 
 	private final State[] stateVector = new State[2];
@@ -48,6 +48,65 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.someRegion_A;
+
+		nextStateIndex = 1;
+		stateVector[1] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case someRegion_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case someRegion_B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		switch (stateVector[1]) {
+			case main_region_A :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case main_region_B :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case main_region_C :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case main_region_D :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case main_region_E :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -58,39 +117,23 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case SomeRegion_A :
-				return stateVector[0] == State.SomeRegion_A;
-
-			case SomeRegion_B :
-				return stateVector[0] == State.SomeRegion_B;
-
-			case Main_region_A :
-				return stateVector[1] == State.Main_region_A;
-
-			case Main_region_B :
-				return stateVector[1] == State.Main_region_B;
-
-			case Main_region_C :
-				return stateVector[1] == State.Main_region_C;
-
-			case Main_region_D :
-				return stateVector[1] == State.Main_region_D;
-
-			case Main_region_E :
-				return stateVector[1] == State.Main_region_E;
-
+			case someRegion_A :
+				return stateVector[0] == State.someRegion_A;
+			case someRegion_B :
+				return stateVector[0] == State.someRegion_B;
+			case main_region_A :
+				return stateVector[1] == State.main_region_A;
+			case main_region_B :
+				return stateVector[1] == State.main_region_B;
+			case main_region_C :
+				return stateVector[1] == State.main_region_C;
+			case main_region_D :
+				return stateVector[1] == State.main_region_D;
+			case main_region_E :
+				return stateVector[1] == State.main_region_E;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -100,134 +143,81 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	public void raiseEvent1() {
 		sCIDefault.raiseEvent1();
 	}
-
 	public void raiseEvent2() {
 		sCIDefault.raiseEvent2();
 	}
 
-	public void enter() {
-		entryActionPriorityValues();
-		nextStateIndex = 0;
-		stateVector[0] = State.SomeRegion_A;
-
-		nextStateIndex = 1;
-		stateVector[1] = State.Main_region_A;
-
+	/* Entry action for statechart 'PriorityValues'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of someRegion) at position 0...
-		switch (stateVector[0]) {
-
-			case SomeRegion_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case SomeRegion_B :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		//Handle exit of all possible states (of main region) at position 1...
-		switch (stateVector[1]) {
-
-			case Main_region_A :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case Main_region_B :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case Main_region_C :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case Main_region_D :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case Main_region_E :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionPriorityValues();
+	/* Exit action for state 'PriorityValues'. */
+	private void exitAction() {
 	}
 
-	private void entryActionPriorityValues() {
-
-	}
-
-	private void exitActionPriorityValues() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactSomeRegion_A() {
 		if (sCIDefault.event2) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.SomeRegion_B;
-
+			stateVector[0] = State.someRegion_B;
 		}
-
 	}
+
+	/* The reactions of state B. */
 	private void reactSomeRegion_B() {
-
 	}
+
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
 		if (sCIDefault.event1) {
+			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
 			nextStateIndex = 1;
-			stateVector[1] = State.Main_region_C;
-
+			stateVector[1] = State.main_region_C;
 		} else {
 			if (sCIDefault.event1) {
+				nextStateIndex = 1;
 				stateVector[1] = State.$NullState$;
 
 				nextStateIndex = 1;
-				stateVector[1] = State.Main_region_B;
-
+				stateVector[1] = State.main_region_B;
 			} else {
 				if (sCIDefault.event1) {
+					nextStateIndex = 1;
 					stateVector[1] = State.$NullState$;
 
 					nextStateIndex = 1;
-					stateVector[1] = State.Main_region_D;
-
+					stateVector[1] = State.main_region_D;
 				} else {
-					if ((sCIDefault.event2 && !isStateActive(State.SomeRegion_B))) {
+					if (sCIDefault.event2 && !isStateActive(State.someRegion_B)) {
+						nextStateIndex = 1;
 						stateVector[1] = State.$NullState$;
 
 						nextStateIndex = 1;
-						stateVector[1] = State.Main_region_E;
-
+						stateVector[1] = State.main_region_E;
 					}
 				}
 			}
 		}
 	}
+
+	/* The reactions of state B. */
 	private void reactMain_region_B() {
 	}
+
+	/* The reactions of state C. */
 	private void reactMain_region_C() {
 	}
+
+	/* The reactions of state D. */
 	private void reactMain_region_D() {
 	}
+
+	/* The reactions of state E. */
 	private void reactMain_region_E() {
 	}
 
@@ -238,25 +228,25 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case SomeRegion_A :
+				case someRegion_A :
 					reactSomeRegion_A();
 					break;
-				case SomeRegion_B :
+				case someRegion_B :
 					reactSomeRegion_B();
 					break;
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
-				case Main_region_B :
+				case main_region_B :
 					reactMain_region_B();
 					break;
-				case Main_region_C :
+				case main_region_C :
 					reactMain_region_C();
 					break;
-				case Main_region_D :
+				case main_region_D :
 					reactMain_region_D();
 					break;
-				case Main_region_E :
+				case main_region_E :
 					reactMain_region_E();
 					break;
 				default :

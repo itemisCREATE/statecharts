@@ -19,7 +19,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, Main_region_B, $NullState$
+		main_region_A, main_region_B, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -41,6 +41,32 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -51,24 +77,13 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
-			case Main_region_B :
-				return stateVector[0] == State.Main_region_B;
-
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
+			case main_region_B :
+				return stateVector[0] == State.main_region_B;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -79,54 +94,27 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		sCIDefault.raiseEvent1();
 	}
 
-	public void enter() {
-		entryActionSimpleEvent();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
+	/* Entry action for statechart 'SimpleEvent'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_B :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionSimpleEvent();
+	/* Exit action for state 'SimpleEvent'. */
+	private void exitAction() {
 	}
 
-	private void entryActionSimpleEvent() {
-
-	}
-
-	private void exitActionSimpleEvent() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
 		if (sCIDefault.event1) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_B;
-
+			stateVector[0] = State.main_region_B;
 		}
-
 	}
-	private void reactMain_region_B() {
 
+	/* The reactions of state B. */
+	private void reactMain_region_B() {
 	}
 
 	public void runCycle() {
@@ -136,10 +124,10 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
-				case Main_region_B :
+				case main_region_B :
 					reactMain_region_B();
 					break;
 				default :

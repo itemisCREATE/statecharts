@@ -48,7 +48,7 @@ public class ExitOnSelfTransitionStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, Main_region_B, $NullState$
+		main_region_A, main_region_B, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -70,6 +70,40 @@ public class ExitOnSelfTransitionStatemachine
 		clearOutEvents();
 	}
 
+	public void enter() {
+		sCIDefault.entryCount = 0;
+
+		sCIDefault.exitCount = 0;
+
+		entryAction();
+
+		sCIDefault.entryCount += 1;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+
+				sCIDefault.exitCount += 1;
+				break;
+
+			case main_region_B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -80,24 +114,13 @@ public class ExitOnSelfTransitionStatemachine
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
-			case Main_region_B :
-				return stateVector[0] == State.Main_region_B;
-
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
+			case main_region_B :
+				return stateVector[0] == State.main_region_B;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -107,7 +130,6 @@ public class ExitOnSelfTransitionStatemachine
 	public void raiseE() {
 		sCIDefault.raiseE();
 	}
-
 	public void raiseF() {
 		sCIDefault.raiseF();
 	}
@@ -127,82 +149,45 @@ public class ExitOnSelfTransitionStatemachine
 		sCIDefault.setExitCount(value);
 	}
 
-	public void enter() {
-		sCIDefault.entryCount = 0;
-
-		sCIDefault.exitCount = 0;
-
-		entryActionExitOnSelfTransition();
-		sCIDefault.entryCount += 1;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
+	/* Entry action for statechart 'ExitOnSelfTransition'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-				sCIDefault.exitCount += 1;
-
-				break;
-
-			case Main_region_B :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionExitOnSelfTransition();
+	/* Exit action for state 'ExitOnSelfTransition'. */
+	private void exitAction() {
 	}
 
-	private void entryActionExitOnSelfTransition() {
-
-	}
-
-	private void exitActionExitOnSelfTransition() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
 		if (sCIDefault.e) {
-			stateVector[0] = State.$NullState$;
-			sCIDefault.exitCount += 1;
-
 			sCIDefault.entryCount += 1;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
+			stateVector[0] = State.main_region_A;
 		} else {
 			if (sCIDefault.f) {
+				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
+
 				sCIDefault.exitCount += 1;
 
 				nextStateIndex = 0;
-				stateVector[0] = State.Main_region_B;
-
+				stateVector[0] = State.main_region_B;
 			}
 		}
-
 	}
+
+	/* The reactions of state B. */
 	private void reactMain_region_B() {
 		if (sCIDefault.f) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			sCIDefault.entryCount += 1;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
+			stateVector[0] = State.main_region_A;
 		}
-
 	}
 
 	public void runCycle() {
@@ -212,10 +197,10 @@ public class ExitOnSelfTransitionStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
-				case Main_region_B :
+				case main_region_B :
 					reactMain_region_B();
 					break;
 				default :

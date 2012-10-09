@@ -39,7 +39,7 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, Main_region_B, $NullState$
+		main_region_A, main_region_B, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -61,6 +61,38 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		sCIDefault.guard = false;
+
+		sCIDefault.done = false;
+
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+
+				sCIDefault.done = true;
+				break;
+
+			case main_region_B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -71,24 +103,13 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
-			case Main_region_B :
-				return stateVector[0] == State.Main_region_B;
-
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
+			case main_region_B :
+				return stateVector[0] == State.main_region_B;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -114,67 +135,36 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		sCIDefault.setDone(value);
 	}
 
-	public void enter() {
-		sCIDefault.guard = false;
-
-		sCIDefault.done = false;
-
-		entryActionGuardedExit();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
+	/* Entry action for statechart 'GuardedExit'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-				sCIDefault.done = true;
-
-				break;
-
-			case Main_region_B :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionGuardedExit();
+	/* Exit action for state 'GuardedExit'. */
+	private void exitAction() {
 	}
 
-	private void entryActionGuardedExit() {
-
-	}
-
-	private void exitActionGuardedExit() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
 		if (sCIDefault.e) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
+
 			sCIDefault.done = true;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_B;
-
+			stateVector[0] = State.main_region_B;
 		}
-
 	}
+
+	/* The reactions of state B. */
 	private void reactMain_region_B() {
 		if (sCIDefault.e) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_A;
-
+			stateVector[0] = State.main_region_A;
 		}
-
 	}
 
 	public void runCycle() {
@@ -184,10 +174,10 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
-				case Main_region_B :
+				case main_region_B :
 					reactMain_region_B();
 					break;
 				default :

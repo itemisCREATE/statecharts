@@ -46,18 +46,18 @@ public class DeepHistoryTest {
 		statemachine.runCycle();
 		statemachine.raiseEvent7();
 		statemachine.runCycle();
-		assertTrue(!statemachine.isStateActive(State.MainRegion_State1));
+		assertTrue(!statemachine.isStateActive(State.mainRegion_State1));
 		assertTrue(statemachine
-				.isStateActive(State.MainRegion_State2__region0_State4__region0_State7__region0_State9));
+				.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		statemachine.raiseEvent2();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.MainRegion_State1));
+		assertTrue(statemachine.isStateActive(State.mainRegion_State1));
 		assertTrue(!statemachine
-				.isStateActive(State.MainRegion_State2__region0_State4__region0_State7__region0_State9));
+				.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue(!statemachine.isStateActive(State.MainRegion_State1));
+		assertTrue(!statemachine.isStateActive(State.mainRegion_State1));
 		assertTrue(statemachine
-				.isStateActive(State.MainRegion_State2__region0_State4__region0_State7__region0_State9));
+				.isStateActive(State.mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	}
 }

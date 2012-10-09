@@ -1,13 +1,10 @@
 package org.yakindu.scr.bitexpressions;
-
 import org.yakindu.scr.IStatemachine;
 
 public interface IBitExpressionsStatemachine extends IStatemachine {
 
 	public interface SCIDefault {
-
 		public void raiseE1();
-
 		public int getMyBit1();
 		public void setMyBit1(int value);
 		public int getMyBit2();

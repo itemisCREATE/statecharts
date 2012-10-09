@@ -19,7 +19,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		R1_R1A, R1_R1B, R2_R2A, R2_R2B, $NullState$
+		r1_R1A, r1_R1B, r2_R2A, r2_R2B, $NullState$
 	};
 
 	private final State[] stateVector = new State[2];
@@ -41,6 +41,50 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.r1_R1A;
+
+		nextStateIndex = 1;
+		stateVector[1] = State.r2_R2A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case r1_R1A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case r1_R1B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		switch (stateVector[1]) {
+			case r2_R2A :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case r2_R2B :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -51,30 +95,17 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case R1_R1A :
-				return stateVector[0] == State.R1_R1A;
-
-			case R1_R1B :
-				return stateVector[0] == State.R1_R1B;
-
-			case R2_R2A :
-				return stateVector[1] == State.R2_R2A;
-
-			case R2_R2B :
-				return stateVector[1] == State.R2_R2B;
-
+			case r1_R1A :
+				return stateVector[0] == State.r1_R1A;
+			case r1_R1B :
+				return stateVector[0] == State.r1_R1B;
+			case r2_R2A :
+				return stateVector[1] == State.r2_R2A;
+			case r2_R2B :
+				return stateVector[1] == State.r2_R2B;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -85,84 +116,41 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		sCIDefault.raiseEvent1();
 	}
 
-	public void enter() {
-		entryActionStateIsActive();
-		nextStateIndex = 0;
-		stateVector[0] = State.R1_R1A;
-
-		nextStateIndex = 1;
-		stateVector[1] = State.R2_R2A;
-
+	/* Entry action for statechart 'StateIsActive'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of R1) at position 0...
-		switch (stateVector[0]) {
-
-			case R1_R1A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case R1_R1B :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		//Handle exit of all possible states (of R2) at position 1...
-		switch (stateVector[1]) {
-
-			case R2_R2A :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case R2_R2B :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionStateIsActive();
+	/* Exit action for state 'StateIsActive'. */
+	private void exitAction() {
 	}
 
-	private void entryActionStateIsActive() {
-
-	}
-
-	private void exitActionStateIsActive() {
-
-	}
-
+	/* The reactions of state R1A. */
 	private void reactR1_R1A() {
-		if (isStateActive(State.R2_R2B)) {
+		if (isStateActive(State.r2_R2B)) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.R1_R1B;
-
+			stateVector[0] = State.r1_R1B;
 		}
-
 	}
+
+	/* The reactions of state R1B. */
 	private void reactR1_R1B() {
-
 	}
+
+	/* The reactions of state R2A. */
 	private void reactR2_R2A() {
 		if (sCIDefault.event1) {
+			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
 			nextStateIndex = 1;
-			stateVector[1] = State.R2_R2B;
-
+			stateVector[1] = State.r2_R2B;
 		}
 	}
+
+	/* The reactions of state R2B. */
 	private void reactR2_R2B() {
 	}
 
@@ -173,16 +161,16 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case R1_R1A :
+				case r1_R1A :
 					reactR1_R1A();
 					break;
-				case R1_R1B :
+				case r1_R1B :
 					reactR1_R1B();
 					break;
-				case R2_R2A :
+				case r2_R2A :
 					reactR2_R2A();
 					break;
-				case R2_R2B :
+				case r2_R2B :
 					reactR2_R2B();
 					break;
 				default :

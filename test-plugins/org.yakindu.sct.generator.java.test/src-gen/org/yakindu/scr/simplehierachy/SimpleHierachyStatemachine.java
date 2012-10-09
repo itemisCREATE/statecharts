@@ -19,7 +19,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, Main_region_B, Main_region_B_subregion1_B1, $NullState$
+		main_region_A, main_region_B, main_region_B_subregion1_B1, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -41,6 +41,32 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_B_subregion1_B1 :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
@@ -51,30 +77,18 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
-			case Main_region_B :
-				return stateVector[0].ordinal() >= State.Main_region_B
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
+			case main_region_B :
+				return stateVector[0].ordinal() >= State.main_region_B
 						.ordinal()
-						&& stateVector[0].ordinal() <= State.Main_region_B_subregion1_B1
+						&& stateVector[0].ordinal() <= State.main_region_B_subregion1_B1
 								.ordinal();
-
-			case Main_region_B_subregion1_B1 :
-				return stateVector[0] == State.Main_region_B_subregion1_B1;
-
+			case main_region_B_subregion1_B1 :
+				return stateVector[0] == State.main_region_B_subregion1_B1;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -85,56 +99,27 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		sCIDefault.raiseEvent1();
 	}
 
-	public void enter() {
-		entryActionSimpleHierachy();
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
+	/* Entry action for statechart 'SimpleHierachy'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case Main_region_B_subregion1_B1 :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionSimpleHierachy();
+	/* Exit action for state 'SimpleHierachy'. */
+	private void exitAction() {
 	}
 
-	private void entryActionSimpleHierachy() {
-
-	}
-
-	private void exitActionSimpleHierachy() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
 		if (sCIDefault.event1) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_B_subregion1_B1;
-
+			stateVector[0] = State.main_region_B_subregion1_B1;
 		}
+	}
 
-	}
-	private void reactMain_region_B() {
-	}
+	/* The reactions of state B1. */
 	private void reactMain_region_B_subregion1_B1() {
-
 	}
 
 	public void runCycle() {
@@ -144,13 +129,10 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
-				case Main_region_B :
-					reactMain_region_B();
-					break;
-				case Main_region_B_subregion1_B1 :
+				case main_region_B_subregion1_B1 :
 					reactMain_region_B_subregion1_B1();
 					break;
 				default :

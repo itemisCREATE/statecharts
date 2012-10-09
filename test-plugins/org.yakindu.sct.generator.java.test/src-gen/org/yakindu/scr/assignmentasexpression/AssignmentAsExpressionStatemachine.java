@@ -31,7 +31,7 @@ public class AssignmentAsExpressionStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_A, $NullState$
+		main_region_A, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -53,6 +53,33 @@ public class AssignmentAsExpressionStatemachine
 		clearOutEvents();
 	}
 
+	public void enter() {
+		sCIDefault.a = 0;
+
+		sCIDefault.b = 0;
+
+		entryAction();
+
+		sCIDefault.a = (sCIDefault.b = 5) + 4;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 
 	}
@@ -62,21 +89,11 @@ public class AssignmentAsExpressionStatemachine
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_A :
-				return stateVector[0] == State.Main_region_A;
-
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -98,45 +115,16 @@ public class AssignmentAsExpressionStatemachine
 		sCIDefault.setB(value);
 	}
 
-	public void enter() {
-		sCIDefault.a = 0;
-
-		sCIDefault.b = 0;
-
-		entryActionAssignmentAsExpression();
-		sCIDefault.a = ((sCIDefault.b = 5)) + 4;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_A;
-
+	/* Entry action for statechart 'AssignmentAsExpression'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionAssignmentAsExpression();
+	/* Exit action for state 'AssignmentAsExpression'. */
+	private void exitAction() {
 	}
 
-	private void entryActionAssignmentAsExpression() {
-
-	}
-
-	private void exitActionAssignmentAsExpression() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactMain_region_A() {
-
 	}
 
 	public void runCycle() {
@@ -146,7 +134,7 @@ public class AssignmentAsExpressionStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_A :
+				case main_region_A :
 					reactMain_region_A();
 					break;
 				default :

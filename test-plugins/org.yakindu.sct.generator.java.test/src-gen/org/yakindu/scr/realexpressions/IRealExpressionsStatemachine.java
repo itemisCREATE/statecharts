@@ -1,13 +1,10 @@
 package org.yakindu.scr.realexpressions;
-
 import org.yakindu.scr.IStatemachine;
 
 public interface IRealExpressionsStatemachine extends IStatemachine {
 
 	public interface SCIDefault {
-
 		public void raiseE1();
-
 		public double getMyReal1();
 		public void setMyReal1(double value);
 		public double getMyReal2();

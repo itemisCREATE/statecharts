@@ -32,7 +32,7 @@ public class InternalEventLifeCycleStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		R1_A, R1_B, R2_C, R2_D, $NullState$
+		r1_A, r1_B, r2_C, r2_D, $NullState$
 	};
 
 	private final State[] stateVector = new State[2];
@@ -54,6 +54,50 @@ public class InternalEventLifeCycleStatemachine
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.r1_A;
+
+		nextStateIndex = 1;
+		stateVector[1] = State.r2_C;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case r1_A :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case r1_B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		switch (stateVector[1]) {
+			case r2_C :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			case r2_D :
+				nextStateIndex = 1;
+				stateVector[1] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 		i1 = false;
@@ -66,30 +110,17 @@ public class InternalEventLifeCycleStatemachine
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case R1_A :
-				return stateVector[0] == State.R1_A;
-
-			case R1_B :
-				return stateVector[0] == State.R1_B;
-
-			case R2_C :
-				return stateVector[1] == State.R2_C;
-
-			case R2_D :
-				return stateVector[1] == State.R2_D;
-
+			case r1_A :
+				return stateVector[0] == State.r1_A;
+			case r1_B :
+				return stateVector[0] == State.r1_B;
+			case r2_C :
+				return stateVector[1] == State.r2_C;
+			case r2_D :
+				return stateVector[1] == State.r2_D;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -107,111 +138,65 @@ public class InternalEventLifeCycleStatemachine
 	public void raiseE() {
 		sCIDefault.raiseE();
 	}
-
 	public void raiseF() {
 		sCIDefault.raiseF();
 	}
 
-	public void enter() {
-		entryActionInternalEventLifeCycle();
-		nextStateIndex = 0;
-		stateVector[0] = State.R1_A;
-
-		nextStateIndex = 1;
-		stateVector[1] = State.R2_C;
-
+	/* Entry action for statechart 'InternalEventLifeCycle'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of r1) at position 0...
-		switch (stateVector[0]) {
-
-			case R1_A :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			case R1_B :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		//Handle exit of all possible states (of r2) at position 1...
-		switch (stateVector[1]) {
-
-			case R2_C :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			case R2_D :
-				stateVector[1] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionInternalEventLifeCycle();
+	/* Exit action for state 'InternalEventLifeCycle'. */
+	private void exitAction() {
 	}
 
-	private void entryActionInternalEventLifeCycle() {
-
-	}
-
-	private void exitActionInternalEventLifeCycle() {
-
-	}
-
+	/* The reactions of state A. */
 	private void reactR1_A() {
 		if (i2) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.R1_B;
-
+			stateVector[0] = State.r1_B;
 		} else {
 			if (sCIDefault.e) {
 				raiseI1();
-
 			}
-
 		}
-
 	}
+
+	/* The reactions of state B. */
 	private void reactR1_B() {
 		if (sCIDefault.e) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.R1_A;
-
+			stateVector[0] = State.r1_A;
 		}
-
 	}
+
+	/* The reactions of state C. */
 	private void reactR2_C() {
 		if (i1) {
+			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
 			nextStateIndex = 1;
-			stateVector[1] = State.R2_D;
-
+			stateVector[1] = State.r2_D;
 		}
 	}
+
+	/* The reactions of state D. */
 	private void reactR2_D() {
 		if (sCIDefault.f) {
+			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
 			raiseI2();
 
 			nextStateIndex = 1;
-			stateVector[1] = State.R2_C;
-
+			stateVector[1] = State.r2_C;
 		}
 	}
 
@@ -222,16 +207,16 @@ public class InternalEventLifeCycleStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case R1_A :
+				case r1_A :
 					reactR1_A();
 					break;
-				case R1_B :
+				case r1_B :
 					reactR1_B();
 					break;
-				case R2_C :
+				case r2_C :
 					reactR2_C();
 					break;
-				case R2_D :
+				case r2_D :
 					reactR2_D();
 					break;
 				default :

@@ -29,7 +29,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		Main_region_StateA, Main_region_StateB, $NullState$
+		main_region_StateA, main_region_StateB, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -51,6 +51,36 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		clearOutEvents();
 	}
 
+	public void enter() {
+		entryAction();
+
+		sCIDefault.value = 0;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	public void exit() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+
+				sCIDefault.value = 0;
+				break;
+
+			case main_region_StateB :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			default :
+				break;
+		}
+
+		exitAction();
+	}
+
 	protected void clearEvents() {
 
 	}
@@ -60,24 +90,13 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	public boolean isStateActive(State state) {
 		switch (state) {
-
-			case Main_region_StateA :
-				return stateVector[0] == State.Main_region_StateA;
-
-			case Main_region_StateB :
-				return stateVector[0] == State.Main_region_StateB;
-
+			case main_region_StateA :
+				return stateVector[0] == State.main_region_StateA;
+			case main_region_StateB :
+				return stateVector[0] == State.main_region_StateB;
 			default :
 				return false;
 		}
-		/*
-		for (int i=0;i<stateVector.length;i++){
-			if (stateVector[i]==state) {
-				return true;
-			}
-		}
-		return false;
-		 */
 	}
 
 	public SCIDefault getSCIDefault() {
@@ -99,73 +118,42 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		sCIDefault.setV2(value);
 	}
 
-	public void enter() {
-		entryActionAlwaysOncycle();
-		sCIDefault.value = 0;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.Main_region_StateA;
-
+	/* Entry action for statechart 'AlwaysOncycle'. */
+	private void entryAction() {
 	}
 
-	public void exit() {
-		//Handle exit of all possible states (of main region) at position 0...
-		switch (stateVector[0]) {
-
-			case Main_region_StateA :
-				stateVector[0] = State.$NullState$;
-				sCIDefault.value = 0;
-
-				break;
-
-			case Main_region_StateB :
-				stateVector[0] = State.$NullState$;
-
-				break;
-
-			default :
-				break;
-		}
-
-		exitActionAlwaysOncycle();
+	/* Exit action for state 'AlwaysOncycle'. */
+	private void exitAction() {
 	}
 
-	private void entryActionAlwaysOncycle() {
-
-	}
-
-	private void exitActionAlwaysOncycle() {
-
-	}
-
+	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if ((sCIDefault.value == 5)) {
+		if (sCIDefault.value == 5) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
+
 			sCIDefault.value = 0;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_StateB;
-
+			stateVector[0] = State.main_region_StateB;
 		} else {
 			sCIDefault.value += 1;
-
 		}
-
 	}
+
+	/* The reactions of state StateB. */
 	private void reactMain_region_StateB() {
-		if ((sCIDefault.value == 5)) {
+		if (sCIDefault.value == 5) {
+			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			sCIDefault.value = 0;
 
 			nextStateIndex = 0;
-			stateVector[0] = State.Main_region_StateA;
-
+			stateVector[0] = State.main_region_StateA;
 		} else {
 			sCIDefault.value += 1;
-
 		}
-
 	}
 
 	public void runCycle() {
@@ -175,10 +163,10 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case Main_region_StateA :
+				case main_region_StateA :
 					reactMain_region_StateA();
 					break;
-				case Main_region_StateB :
+				case main_region_StateB :
 					reactMain_region_StateB();
 					break;
 				default :

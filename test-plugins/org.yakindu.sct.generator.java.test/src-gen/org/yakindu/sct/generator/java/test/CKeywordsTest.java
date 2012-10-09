@@ -38,12 +38,12 @@ public class CKeywordsTest {
 
 	@Test
 	public void testCKeywordsTest() {
-		assertTrue(statemachine.isStateActive(State.Auto_char));
+		assertTrue(statemachine.isStateActive(State.auto_char));
 		statemachine.raiseAuto();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.Auto_const));
-		assertTrue(statemachine.isStateActive(State.Auto_const_switch_case));
+		assertTrue(statemachine.isStateActive(State.auto_const));
+		assertTrue(statemachine.isStateActive(State.auto_const_switch_case));
 		assertTrue(statemachine
-				.isStateActive(State.Auto_const_switch_case_enum_asm));
+				.isStateActive(State.auto_const_switch_case_enum_asm));
 	}
 }
