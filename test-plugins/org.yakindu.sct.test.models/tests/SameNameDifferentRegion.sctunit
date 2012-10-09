@@ -1,5 +1,8 @@
 testgroup SameNameDifferentRegion for statechart SameNameDifferentRegion {
 	test sameNameDifferenRegionTest {
+		
+		enter		
+		
 		assert active ( SameNameDifferentRegion.main_region.StateA)
 		raise e1
 		cycle

@@ -1,5 +1,8 @@
 testgroup IntegerExpressions for statechart IntegerExpressions {
 	test integerExpressions {
+		
+		enter
+		
 		assert active (IntegerExpressions.main_region.StateA)
 		assert myInt1 == 10
 		assert myInt2 == 5

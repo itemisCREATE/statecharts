@@ -1,6 +1,7 @@
 testgroup BitExpressions for statechart BitExpressions {
 	
 	test BitExpressions {
+		enter
 		assert active ( BitExpressions.main_region.StateA)
 		assert myBit1 == 5
 		assert myBit2 == 7

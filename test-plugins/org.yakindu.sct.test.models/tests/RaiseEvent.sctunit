@@ -1,5 +1,8 @@
 testgroup RaiseEvent for statechart RaiseEvent {
 	test raiseEvent {
+		
+		enter
+		
 		assert active ( RaiseEvent.second_region.SateA)
 		assert active (RaiseEvent.main_region.StateA)
 		raise e2

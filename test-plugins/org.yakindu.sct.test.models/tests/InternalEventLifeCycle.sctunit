@@ -3,6 +3,8 @@ testgroup InternalEventLifeCycle for statechart InternalEventLifeCycle {
 
 	test InternalEventLifeCycleTest {
 		 
+		enter
+		 
 		assert active(InternalEventLifeCycle.r1.A)
 		assert active(InternalEventLifeCycle.r2.C)
 		

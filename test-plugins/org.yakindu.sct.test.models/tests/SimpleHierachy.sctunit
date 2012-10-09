@@ -1,5 +1,8 @@
 testgroup SimpleHietachy for statechart SimpleHierachy {
 	test simpleHierachyTest {
+		
+		enter
+		
 		assert active (SimpleHierachy.main_region.A)
 		raise Event1
 		raise Event1

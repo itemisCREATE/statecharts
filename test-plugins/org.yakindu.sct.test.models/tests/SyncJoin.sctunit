@@ -3,6 +3,8 @@ testgroup SyncJoin for statechart SyncJoin {
   
 	test syncJoin_C2_Waits {   
 		
+		enter
+		
 		assert active (SyncJoin.main_region.B)
 		assert active (SyncJoin.main_region.B.r1.C1)
 		assert active (SyncJoin.main_region.B.r2.D1)
@@ -55,6 +57,8 @@ testgroup SyncJoin for statechart SyncJoin {
 	}
 	
 	test syncJoin_D2_Waits {   
+		
+		enter
 		
 		assert active (SyncJoin.main_region.B)
 		assert active (SyncJoin.main_region.B.r1.C1)

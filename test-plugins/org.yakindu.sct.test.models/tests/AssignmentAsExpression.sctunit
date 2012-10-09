@@ -3,7 +3,7 @@ testgroup AssignmentAsExpression for statechart AssignmentAsExpression{
 	
 	 
 	  test simpleAssignment{ 
-	  	
+	  	enter
 	  	assert active(AssignmentAsExpression.main_region.A) 
 	  	
 	  	assert b == 5

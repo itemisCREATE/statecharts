@@ -1,5 +1,6 @@
 testgroup CKeywords for statechart CKeywords { 
 	test CKeywordsTest { 
+		enter
 		assert active ( CKeywords.auto.char ) 
 		raise auto 
 		cycle 

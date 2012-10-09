@@ -1,5 +1,6 @@
 testgroup Choice for statechart Choice { 
 	test choiceTest { 
+		enter
 		assert active (Choice.main_region.A ) 
 		assert value == 4 
 		raise pressKey 
@@ -8,7 +9,7 @@ testgroup Choice for statechart Choice {
 		assert value == 3 
 		raise pressKey 
 		cycle 
-		assert active (Choice.main_region.A ) 
+		assert active (Choice.main_region.A )
 		raise pressKey 
 		cycle 
 		assert active (Choice.main_region.C ) 
@@ -19,7 +20,7 @@ testgroup Choice for statechart Choice {
 		assert value == 1 
 		raise pressKey 
 		cycle 
-		assert active (Choice.main_region.A ) 
+		assert active (Choice.main_region.A )
 		assert value == 1 
 		raise pressKey 
 		cycle 

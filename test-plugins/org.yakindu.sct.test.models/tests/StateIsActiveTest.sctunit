@@ -1,5 +1,8 @@
 testgroup StateIsActive for statechart StateIsActive {
 	test stateIsActive{
+		
+		enter
+		
 		assert active (StateIsActive.R1.R1A )
 		assert active (StateIsActive.R2.R2A)
 		raise Event1

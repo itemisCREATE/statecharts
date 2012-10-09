@@ -3,6 +3,8 @@ testgroup GuardedEntry for statechart GuardedEntry{
 	
 	test EntryNotTakenOnStatechartEnter { 
 		
+		enter
+		
 		assert active(GuardedEntry.main_region.A)
 		assert done == false
 		  
@@ -10,6 +12,9 @@ testgroup GuardedEntry for statechart GuardedEntry{
 
 	test EntryTakenOnStatechartEnter 
 	{  
+		
+		enter
+		
 		guard = true
 		
 		// enter 
@@ -19,7 +24,9 @@ testgroup GuardedEntry for statechart GuardedEntry{
 		assert done == true
 	}   
 	 
-	test EntryTakenInTransition { 
+	test EntryTakenInTransition {
+		
+		enter 
 
 		assert active(GuardedEntry.main_region.A)
 		raise e
@@ -35,6 +42,8 @@ testgroup GuardedEntry for statechart GuardedEntry{
 	} 
 		
 	test EntryNotTakenInTransition { 
+
+		enter
 
 		assert active(GuardedEntry.main_region.A)
 		raise e
