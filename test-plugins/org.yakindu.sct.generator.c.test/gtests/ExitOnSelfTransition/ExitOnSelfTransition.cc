@@ -16,15 +16,16 @@ TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	ExitOnSelfTransition handle;
 	exitOnSelfTransition_init(&handle);
 	exitOnSelfTransition_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(exitOnSelfTransition_isActive(&handle, ExitOnSelfTransition_main_region_A));
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&handle) == 1);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&handle) == 0);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&handle)== 1);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&handle)== 0);
 	exitOnSelfTransitionIface_raise_e(&handle);
 	exitOnSelfTransition_runCycle(&handle);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&handle) == 2);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&handle) == 1);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&handle)== 2);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&handle)== 1);
 	exitOnSelfTransitionIface_raise_f(&handle);
 	exitOnSelfTransition_runCycle(&handle);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&handle) == 2);
-	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&handle) == 2);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_entryCount(&handle)== 2);
+	EXPECT_TRUE(exitOnSelfTransitionIface_get_exitCount(&handle)== 2);
 }

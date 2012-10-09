@@ -16,6 +16,7 @@ TEST(StatemachineTest, syncForkTest) {
 	SyncFork handle;
 	syncFork_init(&handle);
 	syncFork_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(syncFork_isActive(&handle, SyncFork_main_region_A));
 	syncForkIface_raise_f(&handle);
 	syncFork_runCycle(&handle);

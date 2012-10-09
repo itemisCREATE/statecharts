@@ -34,6 +34,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.Description;
@@ -173,6 +174,9 @@ public class GTestRunner extends Runner {
 
 	private void runGTests(RunNotifier notifier) throws IOException, InterruptedException {
 		String program = testClass.getAnnotation(GTest.class).program();
+		if (Platform.getOS().equalsIgnoreCase(Platform.OS_WIN32)) {
+			program += ".exe";
+		}
 		IResource programFile = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(program));
 		IContainer programContainer = programFile.getParent();
 		if (!programContainer.isAccessible()) {

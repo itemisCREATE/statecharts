@@ -16,6 +16,7 @@ TEST(StatemachineTest, CKeywordsTest) {
 	CKeywords handle;
 	cKeywords_init(&handle);
 	cKeywords_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_char));
 	cKeywordsIface_raise_auto(&handle);
 	cKeywords_runCycle(&handle);

@@ -16,6 +16,7 @@ TEST(StatemachineTest, InternalEventLifeCycleTest) {
 	InternalEventLifeCycle handle;
 	internalEventLifeCycle_init(&handle);
 	internalEventLifeCycle_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r1_A));
 	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r2_C));
 	internalEventLifeCycleIface_raise_e(&handle);

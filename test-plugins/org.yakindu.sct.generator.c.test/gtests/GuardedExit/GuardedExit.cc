@@ -16,6 +16,7 @@ TEST(StatemachineTest, ExitTaken) {
 	GuardedExit handle;
 	guardedExit_init(&handle);
 	guardedExit_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_A));
 	EXPECT_TRUE(!guardedExitIface_get_guard(&handle));
 	guardedExitIface_raise_e(&handle);
@@ -27,6 +28,7 @@ TEST(StatemachineTest, ExitNotTaken) {
 	GuardedExit handle;
 	guardedExit_init(&handle);
 	guardedExit_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_A));
 	guardedExitIface_set_guard(&handle, true);
 	guardedExitIface_raise_e(&handle);
