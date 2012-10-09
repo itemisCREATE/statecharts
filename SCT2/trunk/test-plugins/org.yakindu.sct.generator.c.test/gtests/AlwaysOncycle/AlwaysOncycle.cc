@@ -16,14 +16,15 @@ TEST(StatemachineTest, alwaysOncycleTest) {
 	AlwaysOncycle handle;
 	alwaysOncycle_init(&handle);
 	alwaysOncycle_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(alwaysOncycle_isActive(&handle, AlwaysOncycle_main_region_StateA));
-	while (alwaysOncycleIface_get_value(&handle) < 5) {
+	while (alwaysOncycleIface_get_value(&handle)< 5) {
 		alwaysOncycle_runCycle(&handle);
 		EXPECT_TRUE(alwaysOncycle_isActive(&handle, AlwaysOncycle_main_region_StateA));
 	}
 	alwaysOncycle_runCycle(&handle);
 	EXPECT_TRUE(alwaysOncycle_isActive(&handle, AlwaysOncycle_main_region_StateB));
-	while (alwaysOncycleIface_get_value(&handle) < 5) {
+	while (alwaysOncycleIface_get_value(&handle)< 5) {
 		alwaysOncycle_runCycle(&handle);
 		EXPECT_TRUE(alwaysOncycle_isActive(&handle, AlwaysOncycle_main_region_StateB));
 	}

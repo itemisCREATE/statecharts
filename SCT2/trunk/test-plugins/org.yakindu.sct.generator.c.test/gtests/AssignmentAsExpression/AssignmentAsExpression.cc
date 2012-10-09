@@ -16,7 +16,8 @@ TEST(StatemachineTest, simpleAssignment) {
 	AssignmentAsExpression handle;
 	assignmentAsExpression_init(&handle);
 	assignmentAsExpression_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(assignmentAsExpression_isActive(&handle, AssignmentAsExpression_main_region_A));
-	EXPECT_TRUE(assignmentAsExpressionIface_get_b(&handle) == 5);
-	EXPECT_TRUE(assignmentAsExpressionIface_get_a(&handle) == 9);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_b(&handle)== 5);
+	EXPECT_TRUE(assignmentAsExpressionIface_get_a(&handle)== 9);
 }

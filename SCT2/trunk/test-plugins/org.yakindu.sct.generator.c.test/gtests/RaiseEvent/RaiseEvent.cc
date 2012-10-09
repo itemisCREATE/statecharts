@@ -16,6 +16,7 @@ TEST(StatemachineTest, raiseEvent) {
 	RaiseEvent handle;
 	raiseEvent_init(&handle);
 	raiseEvent_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(raiseEvent_isActive(&handle, RaiseEvent_second_region_SateA));
 	EXPECT_TRUE(raiseEvent_isActive(&handle, RaiseEvent_main_region_StateA));
 	raiseEventIface_raise_e2(&handle);

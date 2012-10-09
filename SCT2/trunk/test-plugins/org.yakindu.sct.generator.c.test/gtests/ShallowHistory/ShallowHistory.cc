@@ -16,6 +16,7 @@ TEST(StatemachineTest, shallowHistoryTest) {
 	ShallowHistory handle;
 	shallowHistory_init(&handle);
 	shallowHistory_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	shallowHistoryIface_raise_event1(&handle);
 	shallowHistory_runCycle(&handle);
 	shallowHistoryIface_raise_event3(&handle);

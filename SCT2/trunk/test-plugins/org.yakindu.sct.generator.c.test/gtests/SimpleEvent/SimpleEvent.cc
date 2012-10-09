@@ -16,8 +16,9 @@ TEST(StatemachineTest, simpleEventTest) {
 	SimpleEvent handle;
 	simpleEvent_init(&handle);
 	simpleEvent_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_A));
-	EXPECT_TRUE(5 == 5);
+	EXPECT_TRUE(5== 5);
 	simpleEventIface_raise_event1(&handle);
 	simpleEvent_runCycle(&handle);
 	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_B));

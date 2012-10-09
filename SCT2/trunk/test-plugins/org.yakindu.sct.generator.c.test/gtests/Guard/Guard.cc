@@ -16,6 +16,7 @@ TEST(StatemachineTest, guardTest) {
 	Guard handle;
 	guard_init(&handle);
 	guard_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(guard_isActive(&handle, Guard_main_region_A));
 	guardIface_raise_event1(&handle);
 	guard_runCycle(&handle);

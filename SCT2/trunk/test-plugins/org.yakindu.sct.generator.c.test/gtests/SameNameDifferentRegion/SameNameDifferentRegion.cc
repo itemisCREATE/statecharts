@@ -16,6 +16,7 @@ TEST(StatemachineTest, sameNameDifferenRegionTest) {
 	SameNameDifferentRegion handle;
 	sameNameDifferentRegion_init(&handle);
 	sameNameDifferentRegion_enter(&handle);
+	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_main_region_StateA));
 	sameNameDifferentRegionIface_raise_e1(&handle);
 	sameNameDifferentRegion_runCycle(&handle);
