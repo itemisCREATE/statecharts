@@ -197,23 +197,20 @@ h4. GeneralFeatures
 
 The *GeneralFeatures* feature allows to configure additional services to generate with the statemachine. Per default, all parameters are configured to __false__ It is an *optional* feature and consists of the following parameters:
 
-# __EventBasedStatemachine__ (Boolean, optional): Enables/disables the generation of a cycle based statemachine implementation
+==<!-- # __EventBasedStatemachine__ (Boolean, optional): Enables/disables the generation of a cycle based statemachine implementation -->==
 # __InterfaceObserverSupport__ (Boolean, optional): Enables/disables the generation of listener interfaces for the statemachine
 # __RuntimeService__ (Boolean, optional): Enables/disables the generation of a runtime service that triggers the runcycle of a cycle based statemachine
 # __TimerService__ (Boolean, optional): Enables/disables the generation of a timer service implementation using __java.util.Timer__
-# __GenericInterfaceSupport__ (Boolean, optional): Enables/disables the generation of generic interfaces
-# __StatemachineFactorySupport__ (Boolean, optional): Enables/disables  the generation of a factory class
+==<!-- # __GenericInterfaceSupport__ (Boolean, optional): Enables/disables the generation of generic interfaces -->==
+==<!-- # __StatemachineFactorySupport__ (Boolean, optional): Enables/disables  the generation of a factory class -->==
 
 Example configuration:
 
 bc.. 
 feature GeneralFeatures {
-	EventBasedStatemachine = true
 	InterfaceObserverSupport = true
 	RuntimeService = true
 	TimerService = true
-	GenericInterfaceSupport = true
-	StatemachineFactorySupport = true
 }
 
 p. ==<!-- End sgen_feature_generalfeatures -->==			

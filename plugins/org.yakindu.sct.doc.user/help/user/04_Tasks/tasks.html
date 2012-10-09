@@ -286,10 +286,8 @@
 			<i>false</i> It is an 
 			<strong>optional</strong> feature and consists of the following parameters:
 		</p>
+		<p><!-- # __EventBasedStatemachine__ (Boolean, optional): Enables/disables the generation of a cycle based statemachine implementation --></p>
 		<ol>
-			<li>
-				<i>EventBasedStatemachine</i> (Boolean, optional): Enables/disables the generation of a cycle based statemachine implementation
-			</li>
 			<li>
 				<i>InterfaceObserverSupport</i> (Boolean, optional): Enables/disables the generation of listener interfaces for the statemachine
 			</li>
@@ -300,21 +298,15 @@
 				<i>TimerService</i> (Boolean, optional): Enables/disables the generation of a timer service implementation using 
 				<i>java.util.Timer</i>
 			</li>
-			<li>
-				<i>GenericInterfaceSupport</i> (Boolean, optional): Enables/disables the generation of generic interfaces
-			</li>
-			<li>
-				<i>StatemachineFactorySupport</i> (Boolean, optional): Enables/disables  the generation of a factory class
-			</li>
 		</ol>
+		<p><!-- # __GenericInterfaceSupport__ (Boolean, optional): Enables/disables the generation of generic interfaces -->
+			<br/><!-- # __StatemachineFactorySupport__ (Boolean, optional): Enables/disables  the generation of a factory class -->
+		</p>
 		<p>Example configuration:</p>
 		<pre><code>feature GeneralFeatures {
-	EventBasedStatemachine = true
 	InterfaceObserverSupport = true
 	RuntimeService = true
 	TimerService = true
-	GenericInterfaceSupport = true
-	StatemachineFactorySupport = true
 }
 
 </code></pre>
