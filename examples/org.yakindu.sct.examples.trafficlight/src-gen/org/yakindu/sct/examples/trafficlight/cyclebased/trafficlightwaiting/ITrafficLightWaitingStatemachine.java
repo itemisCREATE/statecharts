@@ -1,5 +1,4 @@
 package org.yakindu.sct.examples.trafficlight.cyclebased.trafficlightwaiting;
-
 import org.yakindu.sct.examples.trafficlight.cyclebased.IStatemachine;
 import org.yakindu.sct.examples.trafficlight.cyclebased.ITimedStatemachine;
 
@@ -9,7 +8,6 @@ public interface ITrafficLightWaitingStatemachine
 			IStatemachine {
 
 	public interface SCITrafficLight {
-
 		public boolean getRed();
 		public void setRed(boolean value);
 		public boolean getYellow();
@@ -19,8 +17,9 @@ public interface ITrafficLightWaitingStatemachine
 
 	}
 
-	public interface SCIPedestrian {
+	public SCITrafficLight getSCITrafficLight();
 
+	public interface SCIPedestrian {
 		public boolean getRequest();
 		public void setRequest(boolean value);
 		public boolean getRed();
@@ -30,17 +29,13 @@ public interface ITrafficLightWaitingStatemachine
 
 	}
 
+	public SCIPedestrian getSCIPedestrian();
+
 	public interface SCIDefault {
-
 		public void raisePedestrianRequest();
-
 		public void raiseOnOff();
 
 	}
-
-	public SCITrafficLight getSCITrafficLight();
-
-	public SCIPedestrian getSCIPedestrian();
 
 	public SCIDefault getSCIDefault();
 

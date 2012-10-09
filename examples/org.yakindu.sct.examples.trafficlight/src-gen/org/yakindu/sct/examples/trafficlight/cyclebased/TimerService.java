@@ -15,7 +15,8 @@ public class TimerService implements ITimerService {
 
 	private final Map<TimeEvent, TimerTask> timerTaskMap = new HashMap<TimeEvent, TimerTask>();
 
-	public void setTimer(final TimeEvent event, long time, long cycleStartTime) {
+	public void setTimer(final TimeEvent event, long time,
+			long cycleStartTime) {
 		// Reset existing TimerTask for event. This step isn't necessary if
 		// timer tasks are properly reset by sexec model.
 		if (timerTaskMap.containsKey(event)) {
