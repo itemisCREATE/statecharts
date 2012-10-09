@@ -28,7 +28,6 @@ public class AlwaysOncycleTest {
 	public void setUp() {
 		statemachine = new AlwaysOncycleStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class AlwaysOncycleTest {
 
 	@Test
 	public void testalwaysOncycleTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		while (statemachine.getValue() < 5) {
 			statemachine.runCycle();

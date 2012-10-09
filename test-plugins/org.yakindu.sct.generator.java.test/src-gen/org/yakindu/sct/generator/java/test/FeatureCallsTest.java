@@ -14,19 +14,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.priorityvalues.PriorityValuesStatemachine;
-import org.yakindu.scr.priorityvalues.PriorityValuesStatemachine.State;
+import org.yakindu.scr.featurecalls.FeatureCallsStatemachine;
+import org.yakindu.scr.featurecalls.FeatureCallsStatemachine.State;
 /**
- *  Unit TestCase for PriorityValues
+ *  Unit TestCase for FeatureCalls
  */
 @SuppressWarnings("all")
-public class PriorityValuesTest {
+public class FeatureCallsTest {
 
-	private PriorityValuesStatemachine statemachine;
+	private FeatureCallsStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new PriorityValuesStatemachine();
+		statemachine = new FeatureCallsStatemachine();
 		statemachine.init();
 	}
 
@@ -36,20 +36,10 @@ public class PriorityValuesTest {
 	}
 
 	@Test
-	public void testtransitionPriority() {
+	public void testFeatureCalls() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_C));
-	}
-	@Test
-	public void testregionPriority() {
-		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.someRegion_A));
-		statemachine.raiseEvent2();
-		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.someRegion_B));
-		assertTrue(!statemachine.isStateActive(State.main_region_E));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

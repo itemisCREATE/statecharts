@@ -28,7 +28,6 @@ public class RaiseEventTest {
 	public void setUp() {
 		statemachine = new RaiseEventStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class RaiseEventTest {
 
 	@Test
 	public void testraiseEvent() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.second_region_SateA));
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		statemachine.raiseE2();

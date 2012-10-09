@@ -28,7 +28,6 @@ public class BitExpressionsTest {
 	public void setUp() {
 		statemachine = new BitExpressionsStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class BitExpressionsTest {
 
 	@Test
 	public void testBitExpressions() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyBit1() == 5);
 		assertTrue(statemachine.getMyBit2() == 7);

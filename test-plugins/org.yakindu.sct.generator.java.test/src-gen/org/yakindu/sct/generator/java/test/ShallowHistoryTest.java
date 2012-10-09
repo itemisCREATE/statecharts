@@ -28,7 +28,6 @@ public class ShallowHistoryTest {
 	public void setUp() {
 		statemachine = new ShallowHistoryStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class ShallowHistoryTest {
 
 	@Test
 	public void testshallowHistoryTest() {
+		statemachine.enter();
 		statemachine.raiseEvent1();
 		statemachine.runCycle();
 		statemachine.raiseEvent3();

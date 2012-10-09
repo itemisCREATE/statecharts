@@ -28,7 +28,6 @@ public class GuardedExitTest {
 	public void setUp() {
 		statemachine = new GuardedExitStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class GuardedExitTest {
 
 	@Test
 	public void testExitTaken() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(!statemachine.getGuard());
 		statemachine.raiseE();
@@ -47,6 +47,7 @@ public class GuardedExitTest {
 	}
 	@Test
 	public void testExitNotTaken() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.setGuard(true);
 		statemachine.raiseE();

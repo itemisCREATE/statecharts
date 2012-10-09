@@ -28,7 +28,6 @@ public class ExitOnSelfTransitionTest {
 	public void setUp() {
 		statemachine = new ExitOnSelfTransitionStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class ExitOnSelfTransitionTest {
 
 	@Test
 	public void testExitOnSelfTransitionTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getEntryCount() == 1);
 		assertTrue(statemachine.getExitCount() == 0);

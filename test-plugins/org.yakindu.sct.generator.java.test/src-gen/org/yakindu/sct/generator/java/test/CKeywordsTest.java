@@ -28,7 +28,6 @@ public class CKeywordsTest {
 	public void setUp() {
 		statemachine = new CKeywordsStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class CKeywordsTest {
 
 	@Test
 	public void testCKeywordsTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.auto_char));
 		statemachine.raiseAuto();
 		statemachine.runCycle();

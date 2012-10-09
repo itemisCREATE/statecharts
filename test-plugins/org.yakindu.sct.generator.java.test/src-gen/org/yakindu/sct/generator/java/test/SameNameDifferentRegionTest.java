@@ -28,7 +28,6 @@ public class SameNameDifferentRegionTest {
 	public void setUp() {
 		statemachine = new SameNameDifferentRegionStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class SameNameDifferentRegionTest {
 
 	@Test
 	public void testsameNameDifferenRegionTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		statemachine.raiseE1();
 		statemachine.runCycle();

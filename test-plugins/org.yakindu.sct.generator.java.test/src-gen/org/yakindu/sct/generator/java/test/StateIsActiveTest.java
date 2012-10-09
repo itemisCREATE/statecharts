@@ -28,7 +28,6 @@ public class StateIsActiveTest {
 	public void setUp() {
 		statemachine = new StateIsActiveStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class StateIsActiveTest {
 
 	@Test
 	public void teststateIsActive() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.r1_R1A));
 		assertTrue(statemachine.isStateActive(State.r2_R2A));
 		statemachine.raiseEvent1();

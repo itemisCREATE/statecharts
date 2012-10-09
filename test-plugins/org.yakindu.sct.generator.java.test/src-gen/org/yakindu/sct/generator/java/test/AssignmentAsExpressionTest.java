@@ -28,7 +28,6 @@ public class AssignmentAsExpressionTest {
 	public void setUp() {
 		statemachine = new AssignmentAsExpressionStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class AssignmentAsExpressionTest {
 
 	@Test
 	public void testsimpleAssignment() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.getB() == 5);
 		assertTrue(statemachine.getA() == 9);

@@ -28,7 +28,6 @@ public class SyncForkTest {
 	public void setUp() {
 		statemachine = new SyncForkStatemachine();
 		statemachine.init();
-		statemachine.enter();
 	}
 
 	@After
@@ -38,6 +37,7 @@ public class SyncForkTest {
 
 	@Test
 	public void testsyncForkTest() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.raiseF();
 		statemachine.runCycle();
