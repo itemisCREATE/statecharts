@@ -16,7 +16,6 @@ TEST(StatemachineTest, syncJoin_C2_Waits) {
 	SyncJoin handle;
 	syncJoin_init(&handle);
 	syncJoin_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B));
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B_r1_C1));
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B_r2_D1));
@@ -58,7 +57,6 @@ TEST(StatemachineTest, syncJoin_D2_Waits) {
 	SyncJoin handle;
 	syncJoin_init(&handle);
 	syncJoin_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B));
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B_r1_C1));
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B_r2_D1));

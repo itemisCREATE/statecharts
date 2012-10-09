@@ -16,7 +16,6 @@ TEST(StatemachineTest, stateIsActive) {
 	StateIsActive handle;
 	stateIsActive_init(&handle);
 	stateIsActive_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R1_R1A));
 	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R2_R2A));
 	stateIsActiveIface_raise_event1(&handle);

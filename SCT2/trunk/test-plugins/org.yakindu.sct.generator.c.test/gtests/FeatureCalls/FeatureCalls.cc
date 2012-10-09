@@ -10,15 +10,13 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "SimpleEvent.h"
+#include "FeatureCalls.h"
 
-TEST(StatemachineTest, simpleEventTest) {
-	SimpleEvent handle;
-	simpleEvent_init(&handle);
-	simpleEvent_enter(&handle);
-	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_A));
-	EXPECT_TRUE(5== 5);
-	simpleEventIface_raise_event1(&handle);
-	simpleEvent_runCycle(&handle);
-	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_B));
+TEST(StatemachineTest, FeatureCalls) {
+	FeatureCalls handle;
+	featureCalls_init(&handle);
+	featureCalls_enter(&handle);
+	EXPECT_TRUE(featureCalls_isActive(&handle, FeatureCalls_main_region_A));
+	featureCalls_runCycle(&handle);
+	EXPECT_TRUE(featureCalls_isActive(&handle, FeatureCalls_main_region_A));
 }

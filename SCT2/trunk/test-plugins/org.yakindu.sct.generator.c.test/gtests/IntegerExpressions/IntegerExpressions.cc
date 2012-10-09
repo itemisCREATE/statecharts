@@ -16,7 +16,6 @@ TEST(StatemachineTest, integerExpressions) {
 	IntegerExpressions handle;
 	integerExpressions_init(&handle);
 	integerExpressions_enter(&handle);
-	//statechart.enterFunctionName(&handle);
 	EXPECT_TRUE(integerExpressions_isActive(&handle, IntegerExpressions_main_region_StateA));
 	EXPECT_TRUE(integerExpressionsIface_get_myInt1(&handle)== 10);
 	EXPECT_TRUE(integerExpressionsIface_get_myInt2(&handle)== 5);
