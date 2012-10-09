@@ -40,11 +40,13 @@ public class GuardedEntryTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void EntryNotTakenOnStatechartEnter() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		assertTrue(getBoolean("done") == false);
 	}
 	@Test
 	public void EntryTakenOnStatechartEnter() throws Exception {
+		interpreter.enter();
 		setBoolean("guard", true);
 		assertTrue(
 				"sctunit does not allow modifiing variables before entering the state machine!",
@@ -54,6 +56,7 @@ public class GuardedEntryTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void EntryTakenInTransition() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		raiseEvent("e");
 		interpreter.runCycle();
@@ -67,6 +70,7 @@ public class GuardedEntryTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void EntryNotTakenInTransition() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		raiseEvent("e");
 		interpreter.runCycle();

@@ -40,6 +40,7 @@ public class AssignmentAsExpressionTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void simpleAssignment() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		assertTrue(getInteger("b") == 5);
 		assertTrue(getInteger("a") == 9);

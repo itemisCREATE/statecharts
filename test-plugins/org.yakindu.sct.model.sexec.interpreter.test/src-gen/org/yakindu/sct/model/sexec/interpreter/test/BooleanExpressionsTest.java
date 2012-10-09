@@ -40,6 +40,7 @@ public class BooleanExpressionsTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void booleanExpressions() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("StateA"));
 		assertTrue(getBoolean("myBool1") == true);
 		assertTrue(getBoolean("myBool2") == false);

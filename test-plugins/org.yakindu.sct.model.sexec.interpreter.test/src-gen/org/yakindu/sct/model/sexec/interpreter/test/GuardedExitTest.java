@@ -40,6 +40,7 @@ public class GuardedExitTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void ExitTaken() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		assertTrue(!getBoolean("guard"));
 		raiseEvent("e");
@@ -49,6 +50,7 @@ public class GuardedExitTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void ExitNotTaken() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		setBoolean("guard", true);
 		raiseEvent("e");

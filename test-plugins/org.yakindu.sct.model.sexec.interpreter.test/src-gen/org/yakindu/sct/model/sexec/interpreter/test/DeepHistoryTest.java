@@ -40,6 +40,7 @@ public class DeepHistoryTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void deepHistoryTest() throws Exception {
+		interpreter.enter();
 		raiseEvent("event1");
 		interpreter.runCycle();
 		raiseEvent("event3");

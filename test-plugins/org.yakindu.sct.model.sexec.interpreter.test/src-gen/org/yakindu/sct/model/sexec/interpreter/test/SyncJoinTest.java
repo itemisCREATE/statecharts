@@ -40,6 +40,7 @@ public class SyncJoinTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void syncJoin_C2_Waits() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("B"));
 		assertTrue(isActive("C1"));
 		assertTrue(isActive("D1"));
@@ -79,6 +80,7 @@ public class SyncJoinTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void syncJoin_D2_Waits() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("B"));
 		assertTrue(isActive("C1"));
 		assertTrue(isActive("D1"));

@@ -40,6 +40,7 @@ public class BitExpressionsTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void BitExpressions() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("StateA"));
 		assertTrue(getInteger("myBit1") == 5);
 		assertTrue(getInteger("myBit2") == 7);

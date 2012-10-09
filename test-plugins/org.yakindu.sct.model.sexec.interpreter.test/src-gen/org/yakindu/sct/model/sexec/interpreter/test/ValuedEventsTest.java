@@ -40,6 +40,7 @@ public class ValuedEventsTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void valuedEventTest() throws Exception {
+		interpreter.enter();
 		interpreter.runCycle();
 		assertTrue(isActive("A"));
 		assertTrue(isActive("C"));

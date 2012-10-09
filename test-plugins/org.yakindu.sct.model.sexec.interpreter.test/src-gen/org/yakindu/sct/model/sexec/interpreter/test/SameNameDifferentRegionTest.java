@@ -40,6 +40,7 @@ public class SameNameDifferentRegionTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void sameNameDifferenRegionTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("StateA"));
 		raiseEvent("e1");
 		interpreter.runCycle();

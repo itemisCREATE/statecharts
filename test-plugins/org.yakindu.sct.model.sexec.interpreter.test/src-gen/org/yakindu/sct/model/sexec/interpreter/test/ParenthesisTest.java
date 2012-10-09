@@ -40,6 +40,7 @@ public class ParenthesisTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void simple() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		assertTrue(getInteger("erg") == 8);
 	}

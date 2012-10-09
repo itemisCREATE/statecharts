@@ -40,6 +40,7 @@ public class StatechartLocalReactionsTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void statechartLocalReactionsTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("S1"));
 		assertTrue(isActive("a"));
 		while (getInteger("myInt") < 10) {

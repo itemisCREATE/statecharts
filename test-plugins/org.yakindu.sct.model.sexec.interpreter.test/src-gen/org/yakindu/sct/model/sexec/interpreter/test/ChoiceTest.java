@@ -39,6 +39,7 @@ public class ChoiceTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void choiceTest() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
 		assertTrue(getInteger("value") == 4);
 		raiseEvent("pressKey");
