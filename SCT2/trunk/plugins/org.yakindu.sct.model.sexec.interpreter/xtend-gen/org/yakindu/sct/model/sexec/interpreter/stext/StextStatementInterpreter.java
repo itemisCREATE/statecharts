@@ -40,6 +40,7 @@ import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
@@ -403,6 +404,12 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
     return _xblockexpression;
   }
   
+  protected Object _execute(final ParenthesizedExpression e) {
+    Expression _expression = e.getExpression();
+    Object _execute = this.execute(_expression);
+    return _execute;
+  }
+  
   protected Object _execute(final PrimitiveValueExpression expression) {
     Literal _value = expression.getValue();
     return ((Comparable<Object>)this.valueLiteral(_value));
@@ -463,6 +470,8 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       return _execute((NumericalMultiplyDivideExpression)expression);
     } else if (expression instanceof NumericalUnaryExpression) {
       return _execute((NumericalUnaryExpression)expression);
+    } else if (expression instanceof ParenthesizedExpression) {
+      return _execute((ParenthesizedExpression)expression);
     } else if (expression instanceof PrimitiveValueExpression) {
       return _execute((PrimitiveValueExpression)expression);
     } else if (expression instanceof ShiftExpression) {
