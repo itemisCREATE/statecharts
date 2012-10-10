@@ -1,34 +1,34 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::c::templates::TypeModelExtensions»
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ExpressionÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::TypeModelExtensionsÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
 
-«DEFINE file FOR ExecutionFlow»
-«FOREACH this.scopes.getUsableScopes() AS interface»
-«FILE interface.interfaceClassName()+".h"»
-«this.getLicenseHeader()»
+Â«DEFINE file FOR ExecutionFlowÂ»
+Â«FOREACH this.scopes.getUsableScopes() AS interfaceÂ»
+Â«FILE interface.interfaceClassName()+".h"Â»
+Â«this.getLicenseHeader()Â»
 
-#ifndef «interface.interfaceClassName().toUpperCase()»_H_
-#define «interface.interfaceClassName().toUpperCase()»_H_
+#ifndef Â«interface.interfaceClassName().toUpperCase()Â»_H_
+#define Â«interface.interfaceClassName().toUpperCase()Â»_H_
 
 #include "definition.h"
 #include "Event.h"
 #include "EventSet.h"
 #include "EventPool.h"
 #include "Statemachine_cy.h"
-#include "«EvName()».h"
+#include "Â«EvName()Â».h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -41,62 +41,62 @@ typedef struct {
 	handleEvent handleEventCallback;
 #else
 	EventPool* eventPool;
-«IF InternalScope.isInstance(interface) -»
-«FOREACH interface.declarations.typeSelect(EventDefinition) AS event -»
-    _Event* «event.getEventName()»;
-«ENDFOREACH -»
-«ELSE -»
-«FOREACH interface.getOutEvents() AS event -»
-    _Event* «event.getEventName()»;
-«ENDFOREACH -»
-«ENDIF -»
+Â«IF InternalScope.isInstance(interface) -Â»
+Â«FOREACH interface.declarations.typeSelect(EventDefinition) AS event -Â»
+    _Event* Â«event.getEventName()Â»;
+Â«ENDFOREACH -Â»
+Â«ELSE -Â»
+Â«FOREACH interface.getOutEvents() AS event -Â»
+    _Event* Â«event.getEventName()Â»;
+Â«ENDFOREACH -Â»
+Â«ENDIF -Â»
 #endif // INTERFACE_LISTENER
 
-«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-	«variable.type.asCType()» «variable.getName()»;
-«ENDFOREACH» 
+Â«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -Â»
+	Â«variable.type.asCType()Â» Â«variable.getName()Â»;
+Â«ENDFOREACHÂ» 
 	
-} «interfaceClassName(interface)»;
+} Â«interfaceClassName(interface)Â»;
 
-«IF this.isSingleton()»
-void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(interface)»* _handle);
-«ENDIF»
+Â«IF this.isSingleton()Â»
+void Â«interface.interfaceName()Â»_set_interface_singleton(Â«interfaceClassName(interface)Â»* _handle);
+Â«ENDIFÂ»
 
-«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-extern «asCType(variable.type)» «interface.interfaceName()»_get_«variable.getName()»(«handleInterfaceAddition(interface)»);
-«IF variable.readonly == false -»
-extern void «interface.interfaceName()»_set_«variable.getName()»(«handleInterfaceAdditionComma(interface)»«asCType(variable.type)» value);
-«ENDIF»
-«ENDFOREACH» 
+Â«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -Â»
+extern Â«asCType(variable.type)Â» Â«interface.interfaceName()Â»_get_Â«variable.getName()Â»(Â«handleInterfaceAddition(interface)Â»);
+Â«IF variable.readonly == false -Â»
+extern void Â«interface.interfaceName()Â»_set_Â«variable.getName()Â»(Â«handleInterfaceAdditionComma(interface)Â»Â«asCType(variable.type)Â» value);
+Â«ENDIFÂ»
+Â«ENDFOREACHÂ» 
 
-«FOREACH interface.declarations.typeSelect(OperationDefinition) AS operation -»
-extern «asCType(operation.type)» «operation.getMethodName()»(«handleInterfaceAddition(interface)»«IF !isSingleton()», «ENDIF»«
-	FOREACH operation.parameters AS param ITERATOR iter»«IF iter.counter0>0», «ENDIF»«asCType(param.type)» «param.name»«ENDFOREACH»);
-«ENDFOREACH» 
+Â«FOREACH interface.declarations.typeSelect(OperationDefinition) AS operation -Â»
+extern Â«asCType(operation.type)Â» Â«operation.getMethodName()Â»(Â«handleInterfaceAddition(interface)Â»Â«IF !isSingleton()Â», Â«ENDIFÂ»Â«
+	FOREACH operation.parameters AS param ITERATOR iterÂ»Â«IF iter.counter0>0Â», Â«ENDIFÂ»Â«asCType(param.type)Â» Â«param.nameÂ»Â«ENDFOREACHÂ»);
+Â«ENDFOREACHÂ» 
 
-extern void «interface.interfaceName()»_reset_event(«handleInterfaceAddition(interface)»);
+extern void Â«interface.interfaceName()Â»_reset_event(Â«handleInterfaceAddition(interface)Â»);
 
 #ifdef INTERFACE_LISTENER
 
-extern void «interface.interfaceName()»_init(«handleInterfaceAddition(interface)»Statemachine_cy* statemachine,
+extern void Â«interface.interfaceName()Â»_init(Â«handleInterfaceAddition(interface)Â»Statemachine_cy* statemachine,
 		EventSet* eventSet);
-extern void «interface.interfaceName()»_set_listener(«handleInterfaceAdditionComma(interface)»handleEvent handleEventPtr);
-extern void «interface.interfaceName()»_raiseEvent«handleInterfaceAdditionComma(interface)»_Event* event);
+extern void Â«interface.interfaceName()Â»_set_listener(Â«handleInterfaceAdditionComma(interface)Â»handleEvent handleEventPtr);
+extern void Â«interface.interfaceName()Â»_raiseEventÂ«handleInterfaceAdditionComma(interface)Â»_Event* event);
 
 #else
 
-extern void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»Statemachine_cy* statemachine,
+extern void Â«interface.interfaceName()Â»_init(Â«handleInterfaceAdditionComma(interface)Â»Statemachine_cy* statemachine,
 		EventSet* eventSet, EventPool* eventPool);
 		
-«FOREACH interface.getOutEvents() AS event -»
-extern sc_boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface)»«
-IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()»* value«ENDIF» );
-«ENDFOREACH»
+Â«FOREACH interface.getOutEvents() AS event -Â»
+extern sc_boolean Â«interface.interfaceName()Â»_is_Â«event.nameÂ»_raised(Â«handleInterfaceAddition(interface)Â»Â«
+IF !event.type.isVoid() -Â»Â«IF this.isSingleton() == false -Â», Â«ENDIFÂ»Â«event.type.asCType()Â»* valueÂ«ENDIFÂ» );
+Â«ENDFOREACHÂ»
 
-«FOREACH interface.getInEvents() AS event -»
-extern void «interface.interfaceName()»_raise_«event.name»(«handleInterfaceAddition(interface)»«
-IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()» value «ENDIF»);
-«ENDFOREACH» 
+Â«FOREACH interface.getInEvents() AS event -Â»
+extern void Â«interface.interfaceName()Â»_raise_Â«event.nameÂ»(Â«handleInterfaceAddition(interface)Â»Â«
+IF !event.type.isVoid() -Â»Â«IF this.isSingleton() == false -Â», Â«ENDIFÂ»Â«event.type.asCType()Â» value Â«ENDIFÂ»);
+Â«ENDFOREACHÂ» 
 
 #endif // INTERFACE_LISTENER
 
@@ -107,164 +107,164 @@ IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type
 #endif /* INTERFACEBASE_H_ */
 
 
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«FILE interface.interfaceClassName()+".c"»
-«this.getLicenseHeader()»
-#include "«interface.interfaceClassName()».h"
+Â«FILE interface.interfaceClassName()+".c"Â»
+Â«this.getLicenseHeader()Â»
+#include "Â«interface.interfaceClassName()Â».h"
 #include <stdlib.h>
 #include <string.h>
 
-«IF this.isSingleton()»
-static «interfaceClassName(interface)»* handle;
-void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(interface)»* _handle);
-«ENDIF»
+Â«IF this.isSingleton()Â»
+static Â«interfaceClassName(interface)Â»* handle;
+void Â«interface.interfaceName()Â»_set_interface_singleton(Â«interfaceClassName(interface)Â»* _handle);
+Â«ENDIFÂ»
 
-static sc_boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface)»uint32_t evid);
+static sc_boolean Â«interface.interfaceName()Â»_is_my_event(Â«handleInterfaceAdditionComma(interface)Â»uint32_t evid);
 
 #ifdef INTERFACE_LISTENER
-void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»Statemachine_cy* statemachine,
+void Â«interface.interfaceName()Â»_init(Â«handleInterfaceAdditionComma(interface)Â»Statemachine_cy* statemachine,
 		EventSet* eventSet)
 #else
-void «interface.interfaceName()»_init(«handleInterfaceAdditionComma(interface)»Statemachine_cy* statemachine,
+void Â«interface.interfaceName()Â»_init(Â«handleInterfaceAdditionComma(interface)Â»Statemachine_cy* statemachine,
 		EventSet* eventSet, EventPool* eventPool)
 #endif
 {
 	handle->eventSet = eventSet;
 	/* initial values */
 	
-«LET interface.declarations.typeSelect(VariableDefinition) AS variables-»
-«IF !variables.isEmpty-»
+Â«LET interface.declarations.typeSelect(VariableDefinition) AS variables-Â»
+Â«IF !variables.isEmpty-Â»
 	/* TODO: This should be done by sexec */
 
-«FOREACH variables AS variable -»
-«IF variable.initialValue != null-»
-«REM»change to correctLValue«ENDREM»
-	handle->«variable.getName()» = «variable.initialValue.toCCode()»;
-«ENDIF-»
-«ENDFOREACH-»
-«ENDIF-»
-«ENDLET-»
+Â«FOREACH variables AS variable -Â»
+Â«IF variable.initialValue != null-Â»
+Â«REMÂ»change to correctLValueÂ«ENDREMÂ»
+	handle->Â«variable.getName()Â» = Â«variable.initialValue.toCCode()Â»;
+Â«ENDIF-Â»
+Â«ENDFOREACH-Â»
+Â«ENDIF-Â»
+Â«ENDLET-Â»
 
 	/* */ 
-	«interface.interfaceName()»_reset_event(handle);
+	Â«interface.interfaceName()Â»_reset_event(handle);
 
 	handle->statemachine = statemachine;
 
 #ifndef INTERFACE_LISTENER
 	handle->eventPool = eventPool;
-«FOREACH interface.getOutEvents() AS event -»
-	handle->«event.getEventName()» = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
-«REM»	// ((«event.getEventName()»*)handle->«event.getEventName()»)->value = initial value for events is missing in model; «ENDREM»
-«ENDFOREACH»
+Â«FOREACH interface.getOutEvents() AS event -Â»
+	handle->Â«event.getEventName()Â» = eventPool_createEvent(handle->eventPool, Â«event.getEventEnumName()Â»);
+Â«REMÂ»	// ((Â«event.getEventName()Â»*)handle->Â«event.getEventName()Â»)->value = initial value for events is missing in model; Â«ENDREMÂ»
+Â«ENDFOREACHÂ»
 #endif
 
 }
 
-«IF !interface.declarations.typeSelect(OperationDefinition).isEmpty-»
+Â«IF !interface.declarations.typeSelect(OperationDefinition).isEmpty-Â»
 #ifndef USE_MANUAL_OPERATION_IMPLEMENTATION
-«FOREACH interface.declarations.typeSelect(OperationDefinition) AS operation -»
-«asCType(operation.type)» «operation.getMethodName()»(«handleInterfaceAddition(interface)»«IF !isSingleton()», «ENDIF»«
-	FOREACH operation.parameters AS param ITERATOR iter»«IF iter.counter0>0», «ENDIF»«asCType(param.type)» «param.name»«ENDFOREACH»)
+Â«FOREACH interface.declarations.typeSelect(OperationDefinition) AS operation -Â»
+Â«asCType(operation.type)Â» Â«operation.getMethodName()Â»(Â«handleInterfaceAddition(interface)Â»Â«IF !isSingleton()Â», Â«ENDIFÂ»Â«
+	FOREACH operation.parameters AS param ITERATOR iterÂ»Â«IF iter.counter0>0Â», Â«ENDIFÂ»Â«asCType(param.type)Â» Â«param.nameÂ»Â«ENDFOREACHÂ»)
 {
-	/** Default implementation of operation «operation.getMethodName()» */
-	return«IF !operation.type.isVoid()» «operation.type.defaultType()»«ENDIF-»;
+	/** Default implementation of operation Â«operation.getMethodName()Â» */
+	returnÂ«IF !operation.type.isVoid()Â» Â«operation.type.defaultType()Â»Â«ENDIF-Â»;
 }
-«ENDFOREACH-» 
+Â«ENDFOREACH-Â» 
 #endif //USE_MANUAL_OPERATION_IMPLEMENTATION
-«ENDIF»
+Â«ENDIFÂ»
 
-«IF this.isSingleton()»
-void «interface.interfaceName()»_set_interface_singleton(«interfaceClassName(interface)»* _handle)
+Â«IF this.isSingleton()Â»
+void Â«interface.interfaceName()Â»_set_interface_singleton(Â«interfaceClassName(interface)Â»* _handle)
 { handle = _handle; }
-«ENDIF»
+Â«ENDIFÂ»
 
-«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-«variable.type.asCType()» «interface.interfaceName()»_get_«variable.getName()»(«handleInterfaceAddition(interface)»)
+Â«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -Â»
+Â«variable.type.asCType()Â» Â«interface.interfaceName()Â»_get_Â«variable.getName()Â»(Â«handleInterfaceAddition(interface)Â»)
 {
-	return handle->«variable.getName()»;
+	return handle->Â«variable.getName()Â»;
 }
-«IF variable.readonly == false -»
-void «interface.interfaceName()»_set_«variable.getName()»(«handleInterfaceAdditionComma(interface)»«variable.type.asCType()» value)
+Â«IF variable.readonly == false -Â»
+void Â«interface.interfaceName()Â»_set_Â«variable.getName()Â»(Â«handleInterfaceAdditionComma(interface)Â»Â«variable.type.asCType()Â» value)
 {
-	handle->«variable.getName()» = value;
+	handle->Â«variable.getName()Â» = value;
 }
-«ENDIF»
-«ENDFOREACH»
+Â«ENDIFÂ»
+Â«ENDFOREACHÂ»
 
 
-sc_boolean «interface.interfaceName()»_is_set(«handleInterfaceAdditionComma(interface)»uint32_t evid)
+sc_boolean Â«interface.interfaceName()Â»_is_set(Â«handleInterfaceAdditionComma(interface)Â»uint32_t evid)
 {
-	if («interface.interfaceName()»_is_my_event(«IF this.isSingleton() == false -»handle, «ENDIF»evid))
+	if (Â«interface.interfaceName()Â»_is_my_event(Â«IF this.isSingleton() == false -Â»handle, Â«ENDIFÂ»evid))
 		return eventSet_check(handle->eventSet, evid);
 	return bool_false;
 }
 
-void «interface.interfaceName()»_reset_event(«handleInterfaceAddition(interface)»)
+void Â«interface.interfaceName()Â»_reset_event(Â«handleInterfaceAddition(interface)Â»)
 {
 	// clean all out events
-	«FOREACH interface.getOutEvents() AS outEvent»
-	eventSet_clean_single(handle->eventSet, «outEvent.getEventEnumName()»);
-	«ENDFOREACH»
+	Â«FOREACH interface.getOutEvents() AS outEventÂ»
+	eventSet_clean_single(handle->eventSet, Â«outEvent.getEventEnumName()Â»);
+	Â«ENDFOREACHÂ»
 
 }
 
 #ifdef INTERFACE_LISTENER
 
-void «interface.interfaceName()»_set_listener(«handleInterfaceAdditionComma(interface)»handleEvent handleEventPtr)
+void Â«interface.interfaceName()Â»_set_listener(Â«handleInterfaceAdditionComma(interface)Â»handleEvent handleEventPtr)
 {
 	handle->handleEventCallback = handleEventPtr;
 }
 
-void «interface.interfaceName()»_raiseEvent(«handleInterfaceAdditionComma(interface)»_Event event) {
-	if («interface.interfaceName()»_is_my_event(«IF this.isSingleton() == false -»handle, «ENDIF»event->id))
+void Â«interface.interfaceName()Â»_raiseEvent(Â«handleInterfaceAdditionComma(interface)Â»_Event event) {
+	if (Â«interface.interfaceName()Â»_is_my_event(Â«IF this.isSingleton() == false -Â»handle, Â«ENDIFÂ»event->id))
 		statemachine_cy_setEvent(handle->statemachine, event);
 }
 
 #else
 
-«FOREACH interface.getOutEvents() AS event -»
-extern sc_boolean «interface.interfaceName()»_is_«event.name»_raised(«handleInterfaceAddition(interface)»«
-IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()»* value«ENDIF») 
+Â«FOREACH interface.getOutEvents() AS event -Â»
+extern sc_boolean Â«interface.interfaceName()Â»_is_Â«event.nameÂ»_raised(Â«handleInterfaceAddition(interface)Â»Â«
+IF !event.type.isVoid() -Â»Â«IF this.isSingleton() == false -Â», Â«ENDIFÂ»Â«event.type.asCType()Â»* valueÂ«ENDIFÂ») 
 {
 	sc_boolean ret = bool_false;
-	if (eventSet_check(handle->eventSet,«event.getEventEnumName()»)) {
-«IF !event.type.isVoid() -»	
-		*value = ((«event.getEventName()»*)handle->«event.getEventName()»)->value;
-«ENDIF»
+	if (eventSet_check(handle->eventSet,Â«event.getEventEnumName()Â»)) {
+Â«IF !event.type.isVoid() -Â»	
+		*value = ((Â«event.getEventName()Â»*)handle->Â«event.getEventName()Â»)->value;
+Â«ENDIFÂ»
 		ret = bool_true;
 	}
 	return ret;
 }
 
-«ENDFOREACH»
+Â«ENDFOREACHÂ»
 
-«FOREACH interface.getInEvents() AS event -»
-extern void «interface.interfaceName()»_raise_«event.name»(«handleInterfaceAddition(interface)»«
-IF !event.type.isVoid() -»«IF this.isSingleton() == false -», «ENDIF»«event.type.asCType()» value«
-ENDIF»)
+Â«FOREACH interface.getInEvents() AS event -Â»
+extern void Â«interface.interfaceName()Â»_raise_Â«event.nameÂ»(Â«handleInterfaceAddition(interface)Â»Â«
+IF !event.type.isVoid() -Â»Â«IF this.isSingleton() == false -Â», Â«ENDIFÂ»Â«event.type.asCType()Â» valueÂ«
+ENDIFÂ»)
 {
-	_Event* ev = eventPool_createEvent(handle->eventPool, «event.getEventEnumName()»);
+	_Event* ev = eventPool_createEvent(handle->eventPool, Â«event.getEventEnumName()Â»);
 
-«IF !event.type.isVoid() -»
-	((«event.getEventName()»*)ev)->value = value;
-«ENDIF»
+Â«IF !event.type.isVoid() -Â»
+	((Â«event.getEventName()Â»*)ev)->value = value;
+Â«ENDIFÂ»
 
 	if (ev != NULL)
 		statemachine_cy_setEvent(handle->statemachine, ev);
 }
-«ENDFOREACH» 
+Â«ENDFOREACHÂ» 
 
 #endif // INTERFACE_LISTENER
 
 
-sc_boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma(interface)»uint32_t evid)
+sc_boolean Â«interface.interfaceName()Â»_is_my_event(Â«handleInterfaceAdditionComma(interface)Â»uint32_t evid)
 {
 	sc_boolean ret = bool_false;
 	switch (evid) {
-«FOREACH interface.getInEvents() AS event -»
-	case «event.getEventEnumName()»:
-«ENDFOREACH»
+Â«FOREACH interface.getInEvents() AS event -Â»
+	case Â«event.getEventEnumName()Â»:
+Â«ENDFOREACHÂ»
 		ret = bool_true;
 		break;
 	default:
@@ -273,6 +273,6 @@ sc_boolean «interface.interfaceName()»_is_my_event(«handleInterfaceAdditionComma
 	return ret;
 }
 
-«ENDFILE»
-«ENDFOREACH»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDFOREACHÂ»
+Â«ENDDEFINEÂ»

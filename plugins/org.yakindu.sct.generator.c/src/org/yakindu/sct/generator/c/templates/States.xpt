@@ -1,37 +1,37 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Constants»
-«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::c::templates::TypeModelExtensions»
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
-«EXTENSION org::yakindu::sct::generator::c::templates::NamingOO»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ConstantsÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ExpressionÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::TypeModelExtensionsÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingOOÂ»
 
-«DEFINE file FOR ExecutionFlow»
-«FILE 'States.h'»
-«this.getLicenseHeader()»
+Â«DEFINE file FOR ExecutionFlowÂ»
+Â«FILE 'States.h'Â»
+Â«this.getLicenseHeader()Â»
  
 #ifndef STATES_H_
 #define STATES_H_
 
 typedef enum {
 
-    «FOREACH this.states AS exState-»
-      _«exState.getStateName()», 
-    «ENDFOREACH -»
+    Â«FOREACH this.states AS exState-Â»
+      _Â«exState.getStateName()Â», 
+    Â«ENDFOREACH -Â»
 	last_state
 
 } States;
 
 #endif STATES_H_
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»

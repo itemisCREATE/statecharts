@@ -1,449 +1,449 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart c file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
-«IMPORT ecore»
-«IMPORT genmodel»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
+Â«IMPORT ecoreÂ»
+Â«IMPORT genmodelÂ»
 
-«IMPORT org::yakindu::sct::generator::c::templates»
+Â«IMPORT org::yakindu::sct::generator::c::templatesÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::c::templates::Constants»
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ExpressionÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ConstantsÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
  
-«DEFINE ActionCode FOR Step»
+Â«DEFINE ActionCode FOR StepÂ»
 #warning ActionCode for Step not defined 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR SaveHistory»
-«IF this.comment != null -»
-	/* «this.comment» */
-«ENDIF»
-	«statemachineHandleName()»->base.base.history[«region.historyVector.offset»] = «statemachineHandleName()»->base.base.state[«region.stateVector.offset»];
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR SaveHistoryÂ»
+Â«IF this.comment != null -Â»
+	/* Â«this.commentÂ» */
+Â«ENDIFÂ»
+	Â«statemachineHandleName()Â»->base.base.history[Â«region.historyVector.offsetÂ»] = Â«statemachineHandleName()Â»->base.base.state[Â«region.stateVector.offsetÂ»];
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR HistoryEntry»
-«IF this.comment != null -»
-	/* «this.comment» */
-«ENDIF»
-if («statemachineHandleName()»->base.base.history[«region.historyVector.offset»] != last_state) {
-	«EXPAND ActionCode FOR historyStep-»
+Â«DEFINE ActionCode FOR HistoryEntryÂ»
+Â«IF this.comment != null -Â»
+	/* Â«this.commentÂ» */
+Â«ENDIFÂ»
+if (Â«statemachineHandleName()Â»->base.base.history[Â«region.historyVector.offsetÂ»] != last_state) {
+	Â«EXPAND ActionCode FOR historyStep-Â»
 } else {
-	«EXPAND ActionCode FOR initialStep-»
+	Â«EXPAND ActionCode FOR initialStep-Â»
 }
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR StateSwitch»
-«IF this.comment != null -»
-	/* «this.comment» */
-«ENDIF -»
-«IF this.historyRegion != null»
-	switch(((StatemachineBase*)«statemachineHandleName()»)->history[ «historyRegion.historyVector.offset» ]) {
-«ELSE»
-	switch(((StatemachineBase*)«statemachineHandleName()»)->state[ «this.stateConfigurationIdx» ]) {
-«ENDIF»
-«FOREACH this.cases AS caseid -»
-		case _«caseid.state.getStateName()» : {
-«EXPAND ActionCode FOR caseid.step-»
+Â«DEFINE ActionCode FOR StateSwitchÂ»
+Â«IF this.comment != null -Â»
+	/* Â«this.commentÂ» */
+Â«ENDIF -Â»
+Â«IF this.historyRegion != nullÂ»
+	switch(((StatemachineBase*)Â«statemachineHandleName()Â»)->history[ Â«historyRegion.historyVector.offsetÂ» ]) {
+Â«ELSEÂ»
+	switch(((StatemachineBase*)Â«statemachineHandleName()Â»)->state[ Â«this.stateConfigurationIdxÂ» ]) {
+Â«ENDIFÂ»
+Â«FOREACH this.cases AS caseid -Â»
+		case _Â«caseid.state.getStateName()Â» : {
+Â«EXPAND ActionCode FOR caseid.step-Â»
 			break;
 		}
-«ENDFOREACH»
+Â«ENDFOREACHÂ»
 		default: break;
 	}
-«ENDDEFINE »
+Â«ENDDEFINE Â»
 
-«DEFINE ActionCode FOR ScheduleTimeEvent»
-«IF this.comment != null»
-/* «this.comment» */
-«ENDIF»
-	(*((StatemachineBase*)«statemachineHandleName()»)->timer->setTimer)(«this.timeEvent.getEventEnumName()», «this.timeValue.toCCode()», «IF this.timeEvent.periodic == true -» «getBoolTrue()» «ELSE -» «getBoolFalse()» «ENDIF -»);
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR ScheduleTimeEventÂ»
+Â«IF this.comment != nullÂ»
+/* Â«this.commentÂ» */
+Â«ENDIFÂ»
+	(*((StatemachineBase*)Â«statemachineHandleName()Â»)->timer->setTimer)(Â«this.timeEvent.getEventEnumName()Â», Â«this.timeValue.toCCode()Â», Â«IF this.timeEvent.periodic == true -Â» Â«getBoolTrue()Â» Â«ELSE -Â» Â«getBoolFalse()Â» Â«ENDIF -Â»);
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR UnscheduleTimeEvent»
-«IF this.comment != null»
-/* «this.comment» */
-«ENDIF»
-	(*((StatemachineBase*)«statemachineHandleName()»)->timer->unsetTimer)(«this.timeEvent.getEventEnumName()»);
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR UnscheduleTimeEventÂ»
+Â«IF this.comment != nullÂ»
+/* Â«this.commentÂ» */
+Â«ENDIFÂ»
+	(*((StatemachineBase*)Â«statemachineHandleName()Â»)->timer->unsetTimer)(Â«this.timeEvent.getEventEnumName()Â»);
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR Execution»
-	«this.statement.toCCode()»;
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR ExecutionÂ»
+	Â«this.statement.toCCode()Â»;
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR Call»
-«this.step.functionName()»(«IF isSingleton() == false»«this.statemachineHandleName()»«ENDIF»);
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR CallÂ»
+Â«this.step.functionName()Â»(Â«IF isSingleton() == falseÂ»Â«this.statemachineHandleName()Â»Â«ENDIFÂ»);
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR Sequence -»
-  «EXPAND ActionCode FOREACH this.steps -»
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR Sequence -Â»
+  Â«EXPAND ActionCode FOREACH this.steps -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR Check -»
-  «IF this != null -»
-«this.condition.toCCode() -»
-  «ELSE -»
- «getBoolTrue()» «
- ENDIF -»«
-  ENDDEFINE»
+Â«DEFINE ActionCode FOR Check -Â»
+  Â«IF this != null -Â»
+Â«this.condition.toCCode() -Â»
+  Â«ELSE -Â»
+ Â«getBoolTrue()Â» Â«
+ ENDIF -Â»Â«
+  ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR CheckRef -»
-  «IF this.check != null -»
-  «getComment()-»
-  «this.check.functionName()»(«statemachineHandleName()») «ELSE -»
- «getBoolTrue()» «
-  ENDIF -»«
-ENDDEFINE»
+Â«DEFINE ActionCode FOR CheckRef -Â»
+  Â«IF this.check != null -Â»
+  Â«getComment()-Â»
+  Â«this.check.functionName()Â»(Â«statemachineHandleName()Â») Â«ELSE -Â»
+ Â«getBoolTrue()Â» Â«
+  ENDIF -Â»Â«
+ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR Reaction»
-  «EXPAND ActionCode FOR this.effect» 
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR ReactionÂ»
+  Â«EXPAND ActionCode FOR this.effectÂ» 
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR If»
-if («EXPAND ActionCode FOR this.check») { 
-  «EXPAND ActionCode FOR this.thenStep»
+Â«DEFINE ActionCode FOR IfÂ»
+if (Â«EXPAND ActionCode FOR this.checkÂ») { 
+  Â«EXPAND ActionCode FOR this.thenStepÂ»
 }
-«IF (this.elseStep != null)»
+Â«IF (this.elseStep != null)Â»
 else {
-  «EXPAND ActionCode FOR this.elseStep»
+  Â«EXPAND ActionCode FOR this.elseStepÂ»
 }
-«ENDIF»
-«ENDDEFINE»
+Â«ENDIFÂ»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE ActionCode FOR EnterState»
-((StatemachineBase*)«statemachineHandleName()»)->state[«this.state.stateVector.offset»] = _«this.state.getStateName()»;
-((Statemachine_cy*)«statemachineHandleName()»)->parallelPosition = «this.state.stateVector.offset»;
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR EnterStateÂ»
+((StatemachineBase*)Â«statemachineHandleName()Â»)->state[Â«this.state.stateVector.offsetÂ»] = _Â«this.state.getStateName()Â»;
+((Statemachine_cy*)Â«statemachineHandleName()Â»)->parallelPosition = Â«this.state.stateVector.offsetÂ»;
+Â«ENDDEFINEÂ»
 
-«DEFINE ActionCode FOR ExitState»
-((StatemachineBase*)«statemachineHandleName()»)->state[«this.state.stateVector.offset»] = last_state;
-((Statemachine_cy*)«statemachineHandleName()»)->parallelPosition = «this.state.stateVector.offset»;
-«ENDDEFINE»
+Â«DEFINE ActionCode FOR ExitStateÂ»
+((StatemachineBase*)Â«statemachineHandleName()Â»)->state[Â«this.state.stateVector.offsetÂ»] = last_state;
+((Statemachine_cy*)Â«statemachineHandleName()Â»)->parallelPosition = Â«this.state.stateVector.offsetÂ»;
+Â«ENDDEFINEÂ»
 
-«DEFINE ConditionMethodsProto FOR ExecutionNode -»
-  «FOREACH reactions.select(e|e.check.refs.size > 0) AS r -»
-  «IF r.check != null -»
-static sc_boolean «r.check.checkFunction()»; 
-  «ENDIF -»«ENDFOREACH -»
-«ENDDEFINE»
+Â«DEFINE ConditionMethodsProto FOR ExecutionNode -Â»
+  Â«FOREACH reactions.select(e|e.check.refs.size > 0) AS r -Â»
+  Â«IF r.check != null -Â»
+static sc_boolean Â«r.check.checkFunction()Â»; 
+  Â«ENDIF -Â»Â«ENDFOREACH -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ConditionMethodsImplement FOR ExecutionNode -»
-  «FOREACH reactions.select(e|e.check.refs.size > 0) AS r -»
-  «IF r.check != null -»
-sc_boolean «r.check.checkFunction()» {
-  sc_boolean retValue = «getBoolFalse()»;
-  if («r.check.condition.toCCode()»)
-    retValue = «getBoolTrue()»;
+Â«DEFINE ConditionMethodsImplement FOR ExecutionNode -Â»
+  Â«FOREACH reactions.select(e|e.check.refs.size > 0) AS r -Â»
+  Â«IF r.check != null -Â»
+sc_boolean Â«r.check.checkFunction()Â» {
+  sc_boolean retValue = Â«getBoolFalse()Â»;
+  if (Â«r.check.condition.toCCode()Â»)
+    retValue = Â«getBoolTrue()Â»;
   
   return retValue;
 }
-  «ENDIF -»
-  «ENDFOREACH -»
-«ENDDEFINE»
+  Â«ENDIF -Â»
+  Â«ENDFOREACH -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE StatementMethodsProto FOR ExecutionNode -»
-  «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
-static void «r.effect.functionName()»(«handleAddition()»);
- «ENDFOREACH -»
-«ENDDEFINE»
+Â«DEFINE StatementMethodsProto FOR ExecutionNode -Â»
+  Â«FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -Â»
+static void Â«r.effect.functionName()Â»(Â«handleAddition()Â»);
+ Â«ENDFOREACH -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE StatementMethodsImplement FOR ExecutionNode -»
-  «FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -»
-void «r.effect.functionName()»(«handleAddition()»)
+Â«DEFINE StatementMethodsImplement FOR ExecutionNode -Â»
+  Â«FOREACH reactions.select(e|e.effect.caller.size > 0) AS r -Â»
+void Â«r.effect.functionName()Â»(Â«handleAddition()Â»)
 {   
-  «EXPAND ActionCode FOR r.effect -»
+  Â«EXPAND ActionCode FOR r.effect -Â»
 }
-  «ENDFOREACH -»
-«ENDDEFINE»
+  Â«ENDFOREACH -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ReactCode FOR Sequence» 
-«EXPAND ActionCode FOREACH this.steps»
-«ENDDEFINE»
+Â«DEFINE ReactCode FOR SequenceÂ» 
+Â«EXPAND ActionCode FOREACH this.stepsÂ»
+Â«ENDDEFINEÂ»
 
-«DEFINE ReactMethodsProto FOR ExecutionNode -»
-«IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -»
-static void «this.reactFunction()»;
-«REM»«stName()»_react_«this.simpleName»(«StName()»* handle);«ENDREM»
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE ReactMethodsProto FOR ExecutionNode -Â»
+Â«IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -Â»
+static void Â«this.reactFunction()Â»;
+Â«REMÂ»Â«stName()Â»_react_Â«this.simpleNameÂ»(Â«StName()Â»* handle);Â«ENDREMÂ»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ReactMethodsImplement FOR ExecutionNode -»
-«IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -»
-void «this.reactFunction()-»
-«REM»void «stName()»_react_«this.simpleName»(«StName()»* handle)«ENDREM»
+Â«DEFINE ReactMethodsImplement FOR ExecutionNode -Â»
+Â«IF (ExecutionState.isInstance(this) || this.reactSequence.caller.size > 0) -Â»
+void Â«this.reactFunction()-Â»
+Â«REMÂ»void Â«stName()Â»_react_Â«this.simpleNameÂ»(Â«StName()Â»* handle)Â«ENDREMÂ»
 {
-	«EXPAND ReactCode FOR reactSequence»
+	Â«EXPAND ReactCode FOR reactSequenceÂ»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE EnterMethodProto FOR ExecutionFlow -»
-«IF this.entryAction != null && entryAction.caller.size > 0 -»
-static void «entryAction.statemachineEntryActionFunction() -»;
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE EnterMethodProto FOR ExecutionFlow -Â»
+Â«IF this.entryAction != null && entryAction.caller.size > 0 -Â»
+static void Â«entryAction.statemachineEntryActionFunction() -Â»;
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE EnterMethodImplement FOR ExecutionFlow -»
-«IF this.entryAction != null && entryAction.caller.size > 0»
-void «entryAction.statemachineEntryActionFunction()»
+Â«DEFINE EnterMethodImplement FOR ExecutionFlow -Â»
+Â«IF this.entryAction != null && entryAction.caller.size > 0Â»
+void Â«entryAction.statemachineEntryActionFunction()Â»
 {
-«EXPAND ActionCode FOR this.entryAction -»
+Â«EXPAND ActionCode FOR this.entryAction -Â»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ExitMethodProto FOR ExecutionFlow -»
-«IF this.exitAction != null && exitAction.caller.size > 0 -»
-static void «this.exitAction.statemachineExitActionFunction() -»;
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE ExitMethodProto FOR ExecutionFlow -Â»
+Â«IF this.exitAction != null && exitAction.caller.size > 0 -Â»
+static void Â«this.exitAction.statemachineExitActionFunction() -Â»;
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ExitMethodImplement FOR ExecutionFlow -»
-«IF this.exitAction != null && exitAction.caller.size > 0 -»
-void «this.exitAction.statemachineExitActionFunction()»
+Â«DEFINE ExitMethodImplement FOR ExecutionFlow -Â»
+Â«IF this.exitAction != null && exitAction.caller.size > 0 -Â»
+void Â«this.exitAction.statemachineExitActionFunction()Â»
 {
-«EXPAND ActionCode FOR this.exitAction -»
+Â«EXPAND ActionCode FOR this.exitAction -Â»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
 
 
-«DEFINE EnterMethodProto FOR ExecutionState -»
-«IF this.entryAction != null && entryAction.caller.size > 0 -»
-static void «entryAction.entryActionFunction()»;
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE EnterMethodProto FOR ExecutionState -Â»
+Â«IF this.entryAction != null && entryAction.caller.size > 0 -Â»
+static void Â«entryAction.entryActionFunction()Â»;
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE EnterMethodImplement FOR ExecutionState -»
-«IF this.entryAction != null && entryAction.caller.size > 0»
-void «entryAction.entryActionFunction()»
+Â«DEFINE EnterMethodImplement FOR ExecutionState -Â»
+Â«IF this.entryAction != null && entryAction.caller.size > 0Â»
+void Â«entryAction.entryActionFunction()Â»
 {
-«EXPAND ActionCode FOR this.entryAction»
+Â«EXPAND ActionCode FOR this.entryActionÂ»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ExitMethodProto FOR ExecutionState -»
-«IF this.exitAction != null && exitAction.caller.size > 0 -»
-static void «this.exitAction.exitActionFunction()»;
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE ExitMethodProto FOR ExecutionState -Â»
+Â«IF this.exitAction != null && exitAction.caller.size > 0 -Â»
+static void Â«this.exitAction.exitActionFunction()Â»;
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ExitMethodImplement FOR ExecutionState -»
-«IF this.exitAction != null && exitAction.caller.size > 0 »
-void «this.exitAction.exitActionFunction()»
+Â«DEFINE ExitMethodImplement FOR ExecutionState -Â»
+Â«IF this.exitAction != null && exitAction.caller.size > 0 Â»
+void Â«this.exitAction.exitActionFunction()Â»
 {
-«EXPAND ActionCode FOR this.exitAction»
+Â«EXPAND ActionCode FOR this.exitActionÂ»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
 
 
-«DEFINE EnterSequenceProto FOR ExecutionScope -»
-«IF this.enterSequence != null && enterSequence.caller.size > 0 -»
-static void «this.enterSequence.enterSequenceFunction()»;
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE EnterSequenceProto FOR ExecutionScope -Â»
+Â«IF this.enterSequence != null && enterSequence.caller.size > 0 -Â»
+static void Â«this.enterSequence.enterSequenceFunction()Â»;
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE EnterSequenceImplement FOR ExecutionScope -»
-«IF this.enterSequence != null && enterSequence .caller.size > 0 »
-void «this.enterSequence.enterSequenceFunction()»
+Â«DEFINE EnterSequenceImplement FOR ExecutionScope -Â»
+Â«IF this.enterSequence != null && enterSequence .caller.size > 0 Â»
+void Â«this.enterSequence.enterSequenceFunction()Â»
 {
-«EXPAND ActionCode FOR this.enterSequence»
+Â«EXPAND ActionCode FOR this.enterSequenceÂ»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ExitSequenceProto FOR ExecutionScope -»
-«IF this.exitSequence != null && exitSequence.caller.size > 0 -»
-static void «this.exitSequence.exitSequenceFunction()»;
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE ExitSequenceProto FOR ExecutionScope -Â»
+Â«IF this.exitSequence != null && exitSequence.caller.size > 0 -Â»
+static void Â«this.exitSequence.exitSequenceFunction()Â»;
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ExitSequenceImplement FOR ExecutionScope -»
-«IF this.exitSequence != null && exitSequence.caller.size > 0 -»
-void «this.exitSequence.exitSequenceFunction()»
+Â«DEFINE ExitSequenceImplement FOR ExecutionScope -Â»
+Â«IF this.exitSequence != null && exitSequence.caller.size > 0 -Â»
+void Â«this.exitSequence.exitSequenceFunction()Â»
 {
-«EXPAND ActionCode FOR exitSequence»
+Â«EXPAND ActionCode FOR exitSequenceÂ»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ShallowEnterSequenceProto FOR ExecutionRegion -»
-«IF shallowEnterSequence != null && shallowEnterSequence.caller.size > 0 -»
-static void «shallowEnterSequence.shallowEnterFunction()»;
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE ShallowEnterSequenceProto FOR ExecutionRegion -Â»
+Â«IF shallowEnterSequence != null && shallowEnterSequence.caller.size > 0 -Â»
+static void Â«shallowEnterSequence.shallowEnterFunction()Â»;
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE ShallowEnterSequenceImplement FOR ExecutionRegion -»
-«IF shallowEnterSequence != null && shallowEnterSequence.caller.size > 0 -»
-void «shallowEnterSequence.shallowEnterFunction()»
+Â«DEFINE ShallowEnterSequenceImplement FOR ExecutionRegion -Â»
+Â«IF shallowEnterSequence != null && shallowEnterSequence.caller.size > 0 -Â»
+void Â«shallowEnterSequence.shallowEnterFunction()Â»
 {
-«EXPAND ActionCode FOR shallowEnterSequence»
+Â«EXPAND ActionCode FOR shallowEnterSequenceÂ»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE DeepEnterSequenceProto FOR ExecutionRegion -»
-«IF deepEnterSequence != null && deepEnterSequence.caller.size > 0 -»
-static void «deepEnterSequence.deepEnterFunction()»;
-«ENDIF -»
-«ENDDEFINE»
+Â«DEFINE DeepEnterSequenceProto FOR ExecutionRegion -Â»
+Â«IF deepEnterSequence != null && deepEnterSequence.caller.size > 0 -Â»
+static void Â«deepEnterSequence.deepEnterFunction()Â»;
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
-«DEFINE DeepEnterSequenceImplement FOR ExecutionRegion -»
-«IF deepEnterSequence != null && deepEnterSequence.caller.size > 0 -»
-void «deepEnterSequence.deepEnterFunction()»
+Â«DEFINE DeepEnterSequenceImplement FOR ExecutionRegion -Â»
+Â«IF deepEnterSequence != null && deepEnterSequence.caller.size > 0 -Â»
+void Â«deepEnterSequence.deepEnterFunction()Â»
 {
-«EXPAND ActionCode FOR deepEnterSequence»
+Â«EXPAND ActionCode FOR deepEnterSequenceÂ»
 }
-«ENDIF -»
-«ENDDEFINE»
+Â«ENDIF -Â»
+Â«ENDDEFINEÂ»
 
 
-«DEFINE file FOR ExecutionFlow»
-«FILE StName()+'.c'»
-«this.getLicenseHeader()»
+Â«DEFINE file FOR ExecutionFlowÂ»
+Â«FILE StName()+'.c'Â»
+Â«this.getLicenseHeader()Â»
 
-#define «STNAME()»_FRIENDS
+#define Â«STNAME()Â»_FRIENDS
 
-#include "«StName()».h"
+#include "Â«StName()Â».h"
 #include <stdlib.h>
 #include <string.h>
 
-«IF this.isSingleton() == true»
+Â«IF this.isSingleton() == trueÂ»
 /* singleton handle and singleton handle pointer declaration */
-static «StName()» static_«statemachineHandleName()»;
-static «StName()»* «statemachineHandleName()»;
-«ENDIF»
+static Â«StName()Â» static_Â«statemachineHandleName()Â»;
+static Â«StName()Â»* Â«statemachineHandleName()Â»;
+Â«ENDIFÂ»
 
 // function prototypes
 
-«EXPAND ConditionMethodsProto FOR this -»
-«EXPAND ConditionMethodsProto FOREACH this.states -»
-«EXPAND ConditionMethodsProto FOREACH this.nodes -»
-«EXPAND StatementMethodsProto FOR this -»
-«EXPAND StatementMethodsProto FOREACH this.states -»
-«EXPAND StatementMethodsProto FOREACH this.nodes -»
-«EXPAND EnterMethodProto FOR this -»
-«EXPAND ExitMethodProto FOR this -»
-«EXPAND EnterMethodProto FOREACH this.states -»
-«EXPAND ExitMethodProto FOREACH this.states -»
-«EXPAND EnterSequenceProto FOREACH this.states -»
-«EXPAND ExitSequenceProto FOREACH this.states -»
-«EXPAND EnterSequenceProto FOREACH this.regions -»
-«EXPAND ExitSequenceProto FOREACH this.regions -»
-«EXPAND ShallowEnterSequenceProto FOREACH this.regions -»
-«EXPAND DeepEnterSequenceProto FOREACH this.regions -»
-«EXPAND ReactMethodsProto FOREACH this.states -»
-«EXPAND ReactMethodsProto FOREACH this.nodes -»
+Â«EXPAND ConditionMethodsProto FOR this -Â»
+Â«EXPAND ConditionMethodsProto FOREACH this.states -Â»
+Â«EXPAND ConditionMethodsProto FOREACH this.nodes -Â»
+Â«EXPAND StatementMethodsProto FOR this -Â»
+Â«EXPAND StatementMethodsProto FOREACH this.states -Â»
+Â«EXPAND StatementMethodsProto FOREACH this.nodes -Â»
+Â«EXPAND EnterMethodProto FOR this -Â»
+Â«EXPAND ExitMethodProto FOR this -Â»
+Â«EXPAND EnterMethodProto FOREACH this.states -Â»
+Â«EXPAND ExitMethodProto FOREACH this.states -Â»
+Â«EXPAND EnterSequenceProto FOREACH this.states -Â»
+Â«EXPAND ExitSequenceProto FOREACH this.states -Â»
+Â«EXPAND EnterSequenceProto FOREACH this.regions -Â»
+Â«EXPAND ExitSequenceProto FOREACH this.regions -Â»
+Â«EXPAND ShallowEnterSequenceProto FOREACH this.regions -Â»
+Â«EXPAND DeepEnterSequenceProto FOREACH this.regions -Â»
+Â«EXPAND ReactMethodsProto FOREACH this.states -Â»
+Â«EXPAND ReactMethodsProto FOREACH this.nodes -Â»
 
 
 // function implementations
 
-«EXPAND ConditionMethodsImplement FOR this -»
-«EXPAND ConditionMethodsImplement FOREACH this.states -»
-«EXPAND ConditionMethodsImplement FOREACH this.nodes -»
-«EXPAND StatementMethodsImplement FOR this -»
-«EXPAND StatementMethodsImplement FOREACH this.states -»
-«EXPAND StatementMethodsImplement FOREACH this.nodes -»
-«EXPAND EnterMethodImplement FOR this -»
-«EXPAND ExitMethodImplement FOR this -»
-«EXPAND EnterMethodImplement FOREACH this.states -»
-«EXPAND ExitMethodImplement FOREACH this.states -»
-«EXPAND EnterSequenceImplement FOREACH this.states -»
-«EXPAND ExitSequenceImplement FOREACH this.states -»
-«EXPAND EnterSequenceImplement FOREACH this.regions -»
-«EXPAND ExitSequenceImplement FOREACH this.regions -»
-«EXPAND ShallowEnterSequenceImplement FOREACH this.regions -»
-«EXPAND DeepEnterSequenceImplement FOREACH this.regions -»
-«EXPAND ReactMethodsImplement FOREACH this.states -»
-«EXPAND ReactMethodsImplement FOREACH this.nodes -»
+Â«EXPAND ConditionMethodsImplement FOR this -Â»
+Â«EXPAND ConditionMethodsImplement FOREACH this.states -Â»
+Â«EXPAND ConditionMethodsImplement FOREACH this.nodes -Â»
+Â«EXPAND StatementMethodsImplement FOR this -Â»
+Â«EXPAND StatementMethodsImplement FOREACH this.states -Â»
+Â«EXPAND StatementMethodsImplement FOREACH this.nodes -Â»
+Â«EXPAND EnterMethodImplement FOR this -Â»
+Â«EXPAND ExitMethodImplement FOR this -Â»
+Â«EXPAND EnterMethodImplement FOREACH this.states -Â»
+Â«EXPAND ExitMethodImplement FOREACH this.states -Â»
+Â«EXPAND EnterSequenceImplement FOREACH this.states -Â»
+Â«EXPAND ExitSequenceImplement FOREACH this.states -Â»
+Â«EXPAND EnterSequenceImplement FOREACH this.regions -Â»
+Â«EXPAND ExitSequenceImplement FOREACH this.regions -Â»
+Â«EXPAND ShallowEnterSequenceImplement FOREACH this.regions -Â»
+Â«EXPAND DeepEnterSequenceImplement FOREACH this.regions -Â»
+Â«EXPAND ReactMethodsImplement FOREACH this.states -Â»
+Â«EXPAND ReactMethodsImplement FOREACH this.nodes -Â»
 
-void «stName()»_init(«this.handleAdditionComma()» Timer* timer, EventPool* eventPool)
+void Â«stName()Â»_init(Â«this.handleAdditionComma()Â» Timer* timer, EventPool* eventPool)
 {
 	int i;
 	
-«IF this.isSingleton()»
-	«statemachineHandleName()» = &static_«statemachineHandleName()»;
-«ENDIF»
-	statemachine_cy_init(&«statemachineHandleName()»->base, MAX_PARALLEL_STATES, MAX_HISTORY_STATES,
+Â«IF this.isSingleton()Â»
+	Â«statemachineHandleName()Â» = &static_Â«statemachineHandleName()Â»;
+Â«ENDIFÂ»
+	statemachine_cy_init(&Â«statemachineHandleName()Â»->base, MAX_PARALLEL_STATES, MAX_HISTORY_STATES,
 			event_last, timer, eventPool);
 
 	for (i = 0; i<MAX_PARALLEL_STATES; ++i)
-		«statemachineHandleName()»->base.base.state[i] = last_state;
+		Â«statemachineHandleName()Â»->base.base.state[i] = last_state;
 			
 	for (i = 0; i<MAX_HISTORY_STATES; ++i)
-		«statemachineHandleName()»->base.base.history[i] = last_state;
+		Â«statemachineHandleName()Â»->base.base.history[i] = last_state;
 
-«FOREACH this.scopes.getUsableScopes() AS interface -»
-«IF this.isSingleton() -»
-     «interface.interfaceName()»_set_interface_singleton(&«statemachineHandleName()»->«interface.interfaceObjectName()»);
-     «interface.interfaceName()»_init(&«statemachineHandleName()»->base, &«statemachineHandleName()»->base.eventSet, eventPool);
-«ELSE -»
-	«interface.interfaceName()»_init(&«statemachineHandleName()»->«interface.interfaceObjectName().toFirstLower()», 
-	&«statemachineHandleName()»->base, &«statemachineHandleName()»->base.eventSet, eventPool);
-«ENDIF»
+Â«FOREACH this.scopes.getUsableScopes() AS interface -Â»
+Â«IF this.isSingleton() -Â»
+     Â«interface.interfaceName()Â»_set_interface_singleton(&Â«statemachineHandleName()Â»->Â«interface.interfaceObjectName()Â»);
+     Â«interface.interfaceName()Â»_init(&Â«statemachineHandleName()Â»->base, &Â«statemachineHandleName()Â»->base.eventSet, eventPool);
+Â«ELSE -Â»
+	Â«interface.interfaceName()Â»_init(&Â«statemachineHandleName()Â»->Â«interface.interfaceObjectName().toFirstLower()Â», 
+	&Â«statemachineHandleName()Â»->base, &Â«statemachineHandleName()Â»->base.eventSet, eventPool);
+Â«ENDIFÂ»
 
-«FOREACH interface.getInEvents() AS event -»
-	eventSet_set_type(&«statemachineHandleName()»->base.eventSet, «event.getEventEnumName()», ev_type_input); 
-«ENDFOREACH -»
-«FOREACH interface.getOutEvents() AS event -»
-	eventSet_set_type(&«statemachineHandleName()»->base.eventSet, «event.getEventEnumName()», ev_type_output); 
-«ENDFOREACH -»
-«FOREACH interface.getLocalEvents() AS event -»
-	eventSet_set_type(&«statemachineHandleName()»->base.eventSet, «event.getEventEnumName()», ev_type_local); 
-«ENDFOREACH -»
-«ENDFOREACH»	
+Â«FOREACH interface.getInEvents() AS event -Â»
+	eventSet_set_type(&Â«statemachineHandleName()Â»->base.eventSet, Â«event.getEventEnumName()Â», ev_type_input); 
+Â«ENDFOREACH -Â»
+Â«FOREACH interface.getOutEvents() AS event -Â»
+	eventSet_set_type(&Â«statemachineHandleName()Â»->base.eventSet, Â«event.getEventEnumName()Â», ev_type_output); 
+Â«ENDFOREACH -Â»
+Â«FOREACH interface.getLocalEvents() AS event -Â»
+	eventSet_set_type(&Â«statemachineHandleName()Â»->base.eventSet, Â«event.getEventEnumName()Â», ev_type_local); 
+Â«ENDFOREACH -Â»
+Â«ENDFOREACHÂ»	
 }
 
-«IF this.isSingleton() == true»
-«StName()»* «scName()»_get_handle()
-{ return «statemachineHandleName()»; } 
-«ENDIF»
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
-extern «interface.interfaceClassName()»* «stName()»_get_«interface.interfaceObjectName()»(«handleAddition()»)
-{  return &«statemachineHandleName()»->«interface.interfaceObjectName()»; }
-«ENDFOREACH»
+Â«IF this.isSingleton() == trueÂ»
+Â«StName()Â»* Â«scName()Â»_get_handle()
+{ return Â«statemachineHandleName()Â»; } 
+Â«ENDIFÂ»
+Â«FOREACH this.scopes.typeSelect(InterfaceScope) AS interfaceÂ»
+extern Â«interface.interfaceClassName()Â»* Â«stName()Â»_get_Â«interface.interfaceObjectName()Â»(Â«handleAddition()Â»)
+{  return &Â«statemachineHandleName()Â»->Â«interface.interfaceObjectName()Â»; }
+Â«ENDFOREACHÂ»
 
-void «stName()»_enter(«handleAddition()»)
+void Â«stName()Â»_enter(Â«handleAddition()Â»)
 {
-	«EXPAND ActionCode FOR this.enterSequence»
+	Â«EXPAND ActionCode FOR this.enterSequenceÂ»
 }
 
-void «stName()»_exit(«handleAddition()»)
+void Â«stName()Â»_exit(Â«handleAddition()Â»)
 {
-	«EXPAND ActionCode FOR this.exitSequence»
+	Â«EXPAND ActionCode FOR this.exitSequenceÂ»
 }
 
-void «stName()»_destruct(«handleAddition()»)
+void Â«stName()Â»_destruct(Â«handleAddition()Â»)
 {
-	statemachine_cy_destruct(&«statemachineHandleName()»->base);
+	statemachine_cy_destruct(&Â«statemachineHandleName()Â»->base);
 }
 
-void «stName()»_runCycle(«handleAddition()»)
+void Â«stName()Â»_runCycle(Â«handleAddition()Â»)
 {
-	statemachine_cy_runCycle(&«statemachineHandleName()»->base);
+	statemachine_cy_runCycle(&Â«statemachineHandleName()Â»->base);
 }
 
-void «stName()»_setEvent(«handleAdditionComma()» _Event* ev)
+void Â«stName()Â»_setEvent(Â«handleAdditionComma()Â» _Event* ev)
 {
-	statemachine_cy_setEvent(&«statemachineHandleName()»->base, ev);
+	statemachine_cy_setEvent(&Â«statemachineHandleName()Â»->base, ev);
 }
 
-sc_boolean «stName()»_eventWaiting(«handleAddition()»)
+sc_boolean Â«stName()Â»_eventWaiting(Â«handleAddition()Â»)
 {
-	return statemachine_cy_eventWaiting(&«statemachineHandleName()»->base);
+	return statemachine_cy_eventWaiting(&Â«statemachineHandleName()Â»->base);
 }
 
 void statemachine_cy__runCycle(Statemachine_cy* handle)
@@ -452,17 +452,17 @@ void statemachine_cy__runCycle(Statemachine_cy* handle)
 	     handle->parallelPosition<MAX_PARALLEL_STATES; 
 	     ++handle->parallelPosition) {
 		switch(((StatemachineBase*)handle)->state[handle->parallelPosition]) {
-	«FOREACH this.states AS state»
-	    case _«state.getStateName()»:
-			«state.reactFunctionName()»(«IF isSingleton() == false»(«StName()»*) handle«ENDIF»);
+	Â«FOREACH this.states AS stateÂ»
+	    case _Â«state.getStateName()Â»:
+			Â«state.reactFunctionName()Â»(Â«IF isSingleton() == falseÂ»(Â«StName()Â»*) handleÂ«ENDIFÂ»);
 	        break;
-	«ENDFOREACH»
+	Â«ENDFOREACHÂ»
 		default:
 			/* no state found */
 			break;
 		}
 	}
 }
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

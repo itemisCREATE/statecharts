@@ -21,10 +21,10 @@ class StatemachineRequired {
 	
 	
 	def statemachineClientHContent(ExecutionFlow it) '''
-			#ifndef «module.client.define»_H_
-			#define «module.client.define»_H_
+			#ifndef Â«module.client.defineÂ»_H_
+			#define Â«module.client.defineÂ»_H_
 
-			#include "«typesModule.h»"
+			#include "Â«typesModule.hÂ»"
 
 			#ifdef __cplusplus
 			extern "C" {
@@ -34,20 +34,20 @@ class StatemachineRequired {
 
 			/*! \file This header defines prototypes for all functions that are required by the state machine implementation.
 			
-			«IF timed»
+			Â«IF timedÂ»
 				This is a state machine uses time events which require access to a timing service. Thus the function prototypes:
-					- «type.toFirstLower»_setTimer and
-					- «type.toFirstLower»_unsetTimer
+					- Â«type.toFirstLowerÂ»_setTimer and
+					- Â«type.toFirstLowerÂ»_unsetTimer
 				are defined.
-			«ENDIF»
+			Â«ENDIFÂ»
 			
-			«IF operations.size > 0»
+			Â«IF operations.size > 0Â»
 				This state machine makes use of operations declared in the state machines interface or internal scopes. Thus the function prototypes:
-					«FOR o : operations»
-					- «o.asFunction»
-					«ENDFOR»
+					Â«FOR o : operationsÂ»
+					- Â«o.asFunctionÂ»
+					Â«ENDFORÂ»
 				are defined.
-			«ENDIF»
+			Â«ENDIFÂ»
 					
 			These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
 			There are some constraints that have to be considered for the implementation of these functions:
@@ -56,12 +56,12 @@ class StatemachineRequired {
 			 
 			*/
 
-			«FOR s : it.scopes »
-			«s.scopeFunctionPrototypes»
+			Â«FOR s : it.scopes Â»
+			Â«s.scopeFunctionPrototypesÂ»
 			
-			«ENDFOR»
+			Â«ENDFORÂ»
 			
-			«IF timed»
+			Â«IF timedÂ»
 			//
 			// This is a timed state machine that requires timer services
 			// 
@@ -73,28 +73,28 @@ class StatemachineRequired {
 				\time_ms The time in milli seconds
 				\periodic Indicates the the time event must be raised periodically until the timer is unset 
 			*/
-			extern void «type.toFirstLower»_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
+			extern void Â«type.toFirstLowerÂ»_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 
 			//! This function has to unset timers for the time events that are required by the state machine.
 			/*! 
 				This function will be called for each time event taht is relevant for a state when a state will be left.
 				\param evid An unique identifier of the event.
 			*/
-			extern void «type.toFirstLower»_unsetTimer(const sc_eventid evid);
-			«ENDIF»
+			extern void Â«type.toFirstLowerÂ»_unsetTimer(const sc_eventid evid);
+			Â«ENDIFÂ»
 			
 			#ifdef __cplusplus
 			}
 			#endif 
 			
-			#endif /* «module.client.define»_H_ */
+			#endif /* Â«module.client.defineÂ»_H_ */
 	'''
 	
 	
 	def dispatch scopeFunctionPrototypes(StatechartScope it) '''
-		«FOR d : declarations »
-		«d.functionPrototypes »
-		«ENDFOR»
+		Â«FOR d : declarations Â»
+		Â«d.functionPrototypes Â»
+		Â«ENDFORÂ»
 	'''	
 
 	def dispatch scopeFunctionPrototypes(Object it) ''''''	
@@ -103,7 +103,7 @@ class StatemachineRequired {
 	def dispatch functionPrototypes(Declaration it) ''''''
 
 	def dispatch functionPrototypes(OperationDefinition it) '''
-		extern «type.cPrimitive» «asFunction»(«FOR p : parameters SEPARATOR ', '»const «p.type.cPrimitive» «p.name.asIdentifier»«ENDFOR»);
+		extern Â«type.cPrimitiveÂ» Â«asFunctionÂ»(Â«FOR p : parameters SEPARATOR ', 'Â»const Â«p.type.cPrimitiveÂ» Â«p.name.asIdentifierÂ»Â«ENDFORÂ»);
 	'''
 
 }

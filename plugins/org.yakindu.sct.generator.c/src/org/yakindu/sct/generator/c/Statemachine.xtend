@@ -27,90 +27,90 @@ class Statemachine {
 	
 	
 	def statemachineHContent(ExecutionFlow it) '''
-			#ifndef «module.define»_H_
-			#define «module.define»_H_
+			#ifndef Â«module.defineÂ»_H_
+			#define Â«module.defineÂ»_H_
 
-			#include "«typesModule.h»"
+			#include "Â«typesModule.hÂ»"
 			
 			#ifdef __cplusplus
 			extern "C" { 
 			#endif 
 
-			/*! \file Header of the state machine '«name»'.
+			/*! \file Header of the state machine 'Â«nameÂ»'.
 			*/
 			
-			«statesEnumDecl»
+			Â«statesEnumDeclÂ»
 			
-			«FOR s : it.scopes»«s.scopeTypeDecl»«ENDFOR»
+			Â«FOR s : it.scopesÂ»Â«s.scopeTypeDeclÂ»Â«ENDFORÂ»
 			
-			«statemachineTypeDecl»
+			Â«statemachineTypeDeclÂ»
 
-			/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
-			extern void «type.toFirstLower»_init(«type»* handle);
+			/*! Initializes the Â«typeÂ» state machine data structures. Must be called before first usage.*/
+			extern void Â«type.toFirstLowerÂ»_init(Â«typeÂ»* handle);
 			
 			/*! Activates the state machine */
-			extern void «type.toFirstLower»_enter(«type»* handle);
+			extern void Â«type.toFirstLowerÂ»_enter(Â«typeÂ»* handle);
 			
 			/*! Deactivates the state machine */
-			extern void «type.toFirstLower»_exit(«type»* handle);
+			extern void Â«type.toFirstLowerÂ»_exit(Â«typeÂ»* handle);
 			
 			/*! Performs a 'run to completion' step. */
-			extern void «type.toFirstLower»_runCycle(«type»* handle);
+			extern void Â«type.toFirstLowerÂ»_runCycle(Â«typeÂ»* handle);
 
-			«IF timed»
+			Â«IF timedÂ»
 				/*! Raises a time event. */
-				extern void «nameOfRaiseTimeEventFunction»(«type»* handle, sc_eventid evid);
-			«ENDIF»
+				extern void Â«nameOfRaiseTimeEventFunctionÂ»(Â«typeÂ»* handle, sc_eventid evid);
+			Â«ENDIFÂ»
 			
-			«FOR s : it.scopes.filter( typeof(InterfaceScope) )»
-				«s.scopeFunctionPrototypes»
+			Â«FOR s : it.scopes.filter( typeof(InterfaceScope) )Â»
+				Â«s.scopeFunctionPrototypesÂ»
 				
-			«ENDFOR»
+			Â«ENDFORÂ»
 			
 			/*! Checks if the specified state is active. */
-			extern sc_boolean «nameOfIsActiveFunction»(«scHandleDecl», «statesEnumType» state);
+			extern sc_boolean Â«nameOfIsActiveFunctionÂ»(Â«scHandleDeclÂ», Â«statesEnumTypeÂ» state);
 			
 			#ifdef __cplusplus
 			}
 			#endif 
 			
-			#endif /* «module.define»_H_ */
+			#endif /* Â«module.defineÂ»_H_ */
 	'''
 
 	def statesEnumDecl(ExecutionFlow it) '''
 		//! enumeration of all states 
 		typedef enum {
-			«FOR state : states »
-			«state.name.asEscapedIdentifier» ,
-			«ENDFOR»
-			«last_state»
-		} «statesEnumType»;
+			Â«FOR state : states Â»
+			Â«state.name.asEscapedIdentifierÂ» ,
+			Â«ENDFORÂ»
+			Â«last_stateÂ»
+		} Â«statesEnumTypeÂ»;
 	'''
 
 
 	def dispatch structDeclaration(EventDefinition it) '''
-		sc_boolean «name.asIdentifier»_raised;
-		«IF type != null && type.name != 'void'»«type.cPrimitive»  «name.asIdentifier»_value;«ENDIF»
+		sc_boolean Â«name.asIdentifierÂ»_raised;
+		Â«IF type != null && type.name != 'void'Â»Â«type.cPrimitiveÂ»  Â«name.asIdentifierÂ»_value;Â«ENDIFÂ»
 	'''
 
 	def dispatch structDeclaration(TimeEvent it) '''
-		sc_boolean «name.asIdentifier»_raised;
+		sc_boolean Â«name.asIdentifierÂ»_raised;
 	'''
 
 	def dispatch structDeclaration(VariableDefinition it) '''
-		«IF type.name != 'void'»«type.cPrimitive»  «name.asEscapedIdentifier»;«ENDIF»
+		Â«IF type.name != 'void'Â»Â«type.cPrimitiveÂ»  Â«name.asEscapedIdentifierÂ»;Â«ENDIFÂ»
 	'''
 	
 	def dispatch structDeclaration(Declaration it) ''''''
 	
 	
 	def scopeTypeDecl(Scope it) '''
-		//! Type definition of the data structure for the «it.type» interface scope.
+		//! Type definition of the data structure for the Â«it.typeÂ» interface scope.
 		typedef struct {
-			«FOR d : declarations »
-			«d.structDeclaration »
-			«ENDFOR»
-		} «it.type»;
+			Â«FOR d : declarations Â»
+			Â«d.structDeclaration Â»
+			Â«ENDFORÂ»
+		} Â«it.typeÂ»;
 
 	'''	
 
@@ -118,29 +118,29 @@ class Statemachine {
 
 	def statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-		#define «type.toUpperCase»_MAX_ORTHOGONAL_STATES «stateVector.size»
-		«IF ! historyVector.empty»
+		#define Â«type.toUpperCaseÂ»_MAX_ORTHOGONAL_STATES Â«stateVector.sizeÂ»
+		Â«IF ! historyVector.emptyÂ»
 		//! dimension of the state configuration vector for history states
-		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
+		#define Â«type.toUpperCaseÂ»_MAX_HISTORY_STATES Â«historyVector.sizeÂ»Â«ENDIFÂ»
 		
-		/*! Type definition of the data structure for the «type» state machine.
+		/*! Type definition of the data structure for the Â«typeÂ» state machine.
 		This data structure has to be allocated by the client code. */
 		typedef struct {
-			«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
-			«IF ! historyVector.empty»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
+			Â«statesEnumTypeÂ» stateConfVector[Â«type.toUpperCaseÂ»_MAX_ORTHOGONAL_STATES];
+			Â«IF ! historyVector.emptyÂ»Â«statesEnumTypeÂ» historyVector[Â«type.toUpperCaseÂ»_MAX_HISTORY_STATES];Â«ENDIFÂ»
 			sc_ushort stateConfVectorPosition; 
 			
-			«FOR iScope : scopes »
-			«iScope.type» «iScope.instance»;
-			«ENDFOR»			
-		} «type»;
+			Â«FOR iScope : scopes Â»
+			Â«iScope.typeÂ» Â«iScope.instanceÂ»;
+			Â«ENDFORÂ»			
+		} Â«typeÂ»;
 	'''
 
 
 	def dispatch scopeFunctionPrototypes(StatechartScope it) '''
-		«FOR d : declarations »
-		«d.functionPrototypes »
-		«ENDFOR»
+		Â«FOR d : declarations Â»
+		Â«d.functionPrototypes Â»
+		Â«ENDFORÂ»
 	'''	
 
 	def dispatch scopeFunctionPrototypes(Object it) ''''''	
@@ -149,28 +149,28 @@ class Statemachine {
 	def dispatch functionPrototypes(Declaration it) ''''''
 
 	def dispatch functionPrototypes(EventDefinition it) '''
-		«IF direction == Direction::IN»
-		/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern void «asRaiser»(«it.flow.type»* handle«valueParams»);
+		Â«IF direction == Direction::INÂ»
+		/*! Raises the in event 'Â«nameÂ»' that is defined in the Â«scope.scopeDescriptionÂ». */ 
+		extern void Â«asRaiserÂ»(Â«it.flow.typeÂ»* handleÂ«valueParamsÂ»);
 		
-		«ELSE»
-			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
-			extern sc_boolean «asRaised»(«it.flow.type»* handle);
+		Â«ELSEÂ»
+			/*! Checks if the out event 'Â«nameÂ»' that is defined in the Â«scope.scopeDescriptionÂ» has been raised. */ 
+			extern sc_boolean Â«asRaisedÂ»(Â«it.flow.typeÂ»* handle);
 			
-			«IF hasValue»
-				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
-				extern «type.cPrimitive» «asGetter»(«it.flow.type»* handle);
+			Â«IF hasValueÂ»
+				/*! Gets the value of the out event 'Â«nameÂ»' that is defined in the Â«scope.scopeDescriptionÂ». */ 
+				extern Â«type.cPrimitiveÂ» Â«asGetterÂ»(Â«it.flow.typeÂ»* handle);
 				
-			«ENDIF»
-		«ENDIF»
+			Â«ENDIFÂ»
+		Â«ENDIFÂ»
 	'''
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
-		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «type.cPrimitive» «it.asGetter»(«it.flow.type»* handle);
-		«IF ! readonly »
-			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-			extern void «asSetter»(«it.flow.type»* handle, «type.cPrimitive» value);
-		«ENDIF»
+		/*! Gets the value of the variable 'Â«nameÂ»' that is defined in the Â«scope.scopeDescriptionÂ». */ 
+		extern Â«type.cPrimitiveÂ» Â«it.asGetterÂ»(Â«it.flow.typeÂ»* handle);
+		Â«IF ! readonly Â»
+			/*! Sets the value of the variable 'Â«nameÂ»' that is defined in the Â«scope.scopeDescriptionÂ». */ 
+			extern void Â«asSetterÂ»(Â«it.flow.typeÂ»* handle, Â«type.cPrimitiveÂ» value);
+		Â«ENDIFÂ»
 	'''
 }

@@ -1,21 +1,21 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart c file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE 'DummyTimer.h'»
-«getLicenseHeader()»
+Â«FILE 'DummyTimer.h'Â»
+Â«getLicenseHeader()Â»
 #ifndef DUMMYTIMER_H_
 #define DUMMYTIMER_H_
 
@@ -37,9 +37,9 @@ extern void dummyTimer_init(Timer* handle);
 #endif 
  
 #endif /* DUMMYTIMER_H_ */
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«FILE 'DummyTimer.c'»
+Â«FILE 'DummyTimer.c'Â»
 #include "DummyTimer.h"
 #include <stdio.h>
 
@@ -57,6 +57,6 @@ void dummyTimer_init(Timer* handle)
 {
 	timer_setFPtr(handle, &setTimer, &unsetTimer);
 }
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

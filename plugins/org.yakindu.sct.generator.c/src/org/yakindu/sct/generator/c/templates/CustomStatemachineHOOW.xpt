@@ -1,52 +1,52 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::c::templates::Constants»
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
-«EXTENSION org::yakindu::sct::generator::c::templates::NamingOO»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ExpressionÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ConstantsÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingOOÂ»
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE StName()+'OOW.hpp'»
-«this.getLicenseHeader()»
+Â«FILE StName()+'OOW.hpp'Â»
+Â«this.getLicenseHeader()Â»
 
-#ifndef «STNAME()»OOW_H_
-#define «STNAME()»OOW_H_
+#ifndef Â«STNAME()Â»OOW_H_
+#define Â«STNAME()Â»OOW_H_
 
 #include <vector>
 
-#include "«StName()».h"
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-#include "«interface.interfaceClassNameOOW()».hpp"
-«ENDFOREACH -»
+#include "Â«StName()Â».h"
+Â«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -Â»
+#include "Â«interface.interfaceClassNameOOW()Â».hpp"
+Â«ENDFOREACH -Â»
 
-class «StName()»OOW {
+class Â«StName()Â»OOW {
 
 private:
-    «StName()» «stName()»;
+    Â«StName()Â» Â«stName()Â»;
 	EventPool eventPool;
 
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-	«interface.interfaceClassNameOOW()»* «interface.interfaceObjectNameOOW()»;
-«ENDFOREACH -»
+Â«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -Â»
+	Â«interface.interfaceClassNameOOW()Â»* Â«interface.interfaceObjectNameOOW()Â»;
+Â«ENDFOREACH -Â»
 
 	static const int MAXEVENTSPERTYPE=4;
 
 
 public:
 
-   «StName()»OOW(Timer* timer);
-   virtual ~«StName()»OOW();
+   Â«StName()Â»OOW(Timer* timer);
+   virtual ~Â«StName()Â»OOW();
    void enter();
    void exit();
    void runCycle();
@@ -54,80 +54,80 @@ public:
 
    std::vector<States> getStates(); 
 
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-   «interface.interfaceClassNameOOW()»* get_«interface.interfaceObjectNameOOW()»();
-«ENDFOREACH -»
+Â«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -Â»
+   Â«interface.interfaceClassNameOOW()Â»* get_Â«interface.interfaceObjectNameOOW()Â»();
+Â«ENDFOREACH -Â»
 
 };
 
-inline «StName()»OOW::«StName()»OOW(Timer* timer)
+inline Â«StName()Â»OOW::Â«StName()Â»OOW(Timer* timer)
 {
 	/* Set up Event Pool */
-	«scName()»_eventPool_init_heap(&eventPool, MAXEVENTSPERTYPE);
+	Â«scName()Â»_eventPool_init_heap(&eventPool, MAXEVENTSPERTYPE);
 
 	/* initialize state machine */
-	«stName()»_init(&«stName()», timer, &eventPool);
+	Â«stName()Â»_init(&Â«stName()Â», timer, &eventPool);
 
 	/* call all necessary enter functions */
-	«stName()»_enter(&«stName()»);
+	Â«stName()Â»_enter(&Â«stName()Â»);
 	
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-	«interface.interfaceObjectNameOOW()» = new «interface.interfaceClassNameOOW()»(&«stName()»);
-«ENDFOREACH -»
+Â«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -Â»
+	Â«interface.interfaceObjectNameOOW()Â» = new Â«interface.interfaceClassNameOOW()Â»(&Â«stName()Â»);
+Â«ENDFOREACH -Â»
 }
 
-inline «StName()»OOW::~«StName()»OOW()
+inline Â«StName()Â»OOW::~Â«StName()Â»OOW()
 {
 	/* call all exit actions for this state machine */
-	«stName()»_exit(&«stName()»);
+	Â«stName()Â»_exit(&Â«stName()Â»);
 
 	/* free all internal memory for this state machine */
-	«stName()»_destruct(&«stName()»);
+	Â«stName()Â»_destruct(&Â«stName()Â»);
 
 	/* free all events in the event pool */
 	eventPool_exit(&eventPool);
 
 }
 
-inline void «StName()»OOW::enter()
+inline void Â«StName()Â»OOW::enter()
 {
-	«stName()»_enter(&«stName()»);
+	Â«stName()Â»_enter(&Â«stName()Â»);
 }
 
-inline void «StName()»OOW::exit()
+inline void Â«StName()Â»OOW::exit()
 {
-	«stName()»_exit(&«stName()»);
+	Â«stName()Â»_exit(&Â«stName()Â»);
 }
 
-inline void «StName()»OOW::runCycle()
+inline void Â«StName()Â»OOW::runCycle()
 {
-	«stName()»_runCycle(&«stName()»);
+	Â«stName()Â»_runCycle(&Â«stName()Â»);
 }
 
-inline sc_boolean «StName()»OOW::eventWaiting()
+inline sc_boolean Â«StName()Â»OOW::eventWaiting()
 {
-	return «stName()»_eventWaiting(&«stName()»);
+	return Â«stName()Â»_eventWaiting(&Â«stName()Â»);
 }
 
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -»
-inline «interface.interfaceClassNameOOW()»* «StName()»OOW::get_«interface.interfaceObjectNameOOW()»()
+Â«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface -Â»
+inline Â«interface.interfaceClassNameOOW()Â»* Â«StName()Â»OOW::get_Â«interface.interfaceObjectNameOOW()Â»()
 {
-	return «interface.interfaceObjectNameOOW()»;
+	return Â«interface.interfaceObjectNameOOW()Â»;
 }
-«ENDFOREACH -»
+Â«ENDFOREACH -Â»
 
-inline std::vector<States> «StName()»OOW::getStates()
+inline std::vector<States> Â«StName()Â»OOW::getStates()
 {
 	std::vector<States> states;
 	for(int i(0); i<MAX_PARALLEL_STATES; ++i) {
-	  states.push_back((States)«stName()».base.base.state[i]);
+	  states.push_back((States)Â«stName()Â».base.base.state[i]);
 	}
 	return states;
 }
 
-#endif // «STNAME()»OOW_H_
+#endif // Â«STNAME()Â»OOW_H_
 
 
 
-«ENDFILE»
-«ENDDEFINE»
+Â«ENDFILEÂ»
+Â«ENDDEFINEÂ»

@@ -28,51 +28,51 @@ class StatemachineC {
 	def statemachineCContent(ExecutionFlow it) '''
 		#include <stdlib.h>
 		#include <string.h>
-		#include "«typesModule.h»"
-		#include "«module.h»"
-		#include "«module.client.h»"
+		#include "Â«typesModule.hÂ»"
+		#include "Â«module.hÂ»"
+		#include "Â«module.client.hÂ»"
 
-		/*! \file Implementation of the state machine '«name»'
+		/*! \file Implementation of the state machine 'Â«nameÂ»'
 		*/
 		
-		«functionPrototypes»
+		Â«functionPrototypesÂ»
 		
-		«initFunction»
+		Â«initFunctionÂ»
 		
-		«enterFunction»
+		Â«enterFunctionÂ»
 		
-		«exitFunction»
+		Â«exitFunctionÂ»
 		
-		«clearInEventsFunction»
+		Â«clearInEventsFunctionÂ»
 		
-		«clearOutEventsFunction»
+		Â«clearOutEventsFunctionÂ»
 		
-		«runCycleFunction»
+		Â«runCycleFunctionÂ»
 
-		«raiseTimeEventFunction»
+		Â«raiseTimeEventFunctionÂ»
 
-		«isActiveFunction»
+		Â«isActiveFunctionÂ»
 		
-		«interfaceFunctions»
+		Â«interfaceFunctionsÂ»
 				
-		«functionImplementations»
+		Â«functionImplementationsÂ»
 	'''
 	
 	
 	def initFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_init(«scHandleDecl»)
+		void Â«type.toFirstLowerÂ»_init(Â«scHandleDeclÂ»)
 		{
 			int i;
 
-			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
-				«scHandle»->stateConfVector[i] = «last_state»;
+			for (i = 0; i < Â«type.toUpperCaseÂ»_MAX_ORTHOGONAL_STATES; ++i)
+				Â«scHandleÂ»->stateConfVector[i] = Â«last_stateÂ»;
 			
-			«IF ! historyVector.empty»
-			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
-				«scHandle»->historyVector[i] = «last_state»;
-			«ENDIF»
+			Â«IF ! historyVector.emptyÂ»
+			for (i = 0; i < Â«type.toUpperCaseÂ»_MAX_HISTORY_STATES; ++i)
+				Â«scHandleÂ»->historyVector[i] = Â«last_stateÂ»;
+			Â«ENDIFÂ»
 			
-			«scHandle»->stateConfVectorPosition = 0;
+			Â«scHandleÂ»->stateConfVectorPosition = 0;
 		
 		clearInEvents(handle);
 		clearOutEvents(handle);
@@ -84,96 +84,96 @@ class StatemachineC {
 	'''
 	
 	def enterFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_enter(«scHandleDecl»)
+		void Â«type.toFirstLowerÂ»_enter(Â«scHandleDeclÂ»)
 		{
-			«enterSequence.code»
+			Â«enterSequence.codeÂ»
 		}
 	'''
 	
 	def exitFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_exit(«scHandleDecl»)
+		void Â«type.toFirstLowerÂ»_exit(Â«scHandleDeclÂ»)
 		{
-			«exitSequence.code»
+			Â«exitSequence.codeÂ»
 		}
 	'''
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
-		static void clearInEvents(«scHandleDecl») {
-			«FOR scope : it.scopes»
-				«FOR event : scope.incomingEvents»
-				«event.access» = bool_false;
-				«ENDFOR»
-			«ENDFOR»
-			«IF hasLocalScope»
-				«FOR event : localScope.events»
-				«event.access» = bool_false; 
-				«ENDFOR»
-			«ENDIF»
-			«IF timed»
-				«FOR event : timeEventScope.events»
-				«event.access» = bool_false; 
-				«ENDFOR»
-			«ENDIF»
+		static void clearInEvents(Â«scHandleDeclÂ») {
+			Â«FOR scope : it.scopesÂ»
+				Â«FOR event : scope.incomingEventsÂ»
+				Â«event.accessÂ» = bool_false;
+				Â«ENDFORÂ»
+			Â«ENDFORÂ»
+			Â«IF hasLocalScopeÂ»
+				Â«FOR event : localScope.eventsÂ»
+				Â«event.accessÂ» = bool_false; 
+				Â«ENDFORÂ»
+			Â«ENDIFÂ»
+			Â«IF timedÂ»
+				Â«FOR event : timeEventScope.eventsÂ»
+				Â«event.accessÂ» = bool_false; 
+				Â«ENDFORÂ»
+			Â«ENDIFÂ»
 		}
 	'''
 	
 	def clearOutEventsFunction(ExecutionFlow it) '''
-		static void clearOutEvents(«scHandleDecl») {
-			«FOR scope : it.scopes»
-				«FOR event : scope.outgoingEvents»
-				«event.access» = bool_false;
-				«ENDFOR»
-			«ENDFOR»
+		static void clearOutEvents(Â«scHandleDeclÂ») {
+			Â«FOR scope : it.scopesÂ»
+				Â«FOR event : scope.outgoingEventsÂ»
+				Â«event.accessÂ» = bool_false;
+				Â«ENDFORÂ»
+			Â«ENDFORÂ»
 		}
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_runCycle(«scHandleDecl») {
+		void Â«type.toFirstLowerÂ»_runCycle(Â«scHandleDeclÂ») {
 			
-			clearOutEvents(«scHandle»);
+			clearOutEvents(Â«scHandleÂ»);
 			
-			for («scHandle»->stateConfVectorPosition = 0;
-				«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
-				«scHandle»->stateConfVectorPosition++) {
+			for (Â«scHandleÂ»->stateConfVectorPosition = 0;
+				Â«scHandleÂ»->stateConfVectorPosition < Â«type.toUpperCaseÂ»_MAX_ORTHOGONAL_STATES;
+				Â«scHandleÂ»->stateConfVectorPosition++) {
 					
-				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition]) {
-				«FOR state : states»
-					«IF state.reactSequence!=null»
-					case «state.name.asEscapedIdentifier» : {
-						«state.reactSequence.functionName»(«scHandle»);
+				switch (Â«scHandleÂ»->stateConfVector[handle->stateConfVectorPosition]) {
+				Â«FOR state : statesÂ»
+					Â«IF state.reactSequence!=nullÂ»
+					case Â«state.name.asEscapedIdentifierÂ» : {
+						Â«state.reactSequence.functionNameÂ»(Â«scHandleÂ»);
 						break;
 					}
-					«ENDIF»
-				«ENDFOR»
+					Â«ENDIFÂ»
+				Â«ENDFORÂ»
 				default:
 					break;
 				}
 			}
 			
-			clearInEvents(«scHandle»);
+			clearInEvents(Â«scHandleÂ»);
 		}
 	'''
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
-		«IF timed»
-			void «nameOfRaiseTimeEventFunction»(«type»* handle, sc_eventid evid) {
-				if ( ((intptr_t)evid) >= ((intptr_t)&(«scHandle»->timeEvents))
-					&&  ((intptr_t)evid) < ((intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
+		Â«IF timedÂ»
+			void Â«nameOfRaiseTimeEventFunctionÂ»(Â«typeÂ»* handle, sc_eventid evid) {
+				if ( ((intptr_t)evid) >= ((intptr_t)&(Â«scHandleÂ»->timeEvents))
+					&&  ((intptr_t)evid) < ((intptr_t)&(Â«scHandleÂ»->timeEvents)) + sizeof(Â«timeEventScope.typeÂ»)) {
 					*(sc_boolean*)evid = bool_true;
 				}		
 			}
-		«ENDIF»
+		Â«ENDIFÂ»
 	'''
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «nameOfIsActiveFunction»(«scHandleDecl», «statesEnumType» state) {
+		sc_boolean Â«nameOfIsActiveFunctionÂ»(Â«scHandleDeclÂ», Â«statesEnumTypeÂ» state) {
 			switch (state) {
-				«FOR s : states»
-				case «s.name.asIdentifier» : 
-					return (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»
-					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.name.asIdentifier»
-						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»«ENDIF»);
-				«ENDFOR»
+				Â«FOR s : statesÂ»
+				case Â«s.name.asIdentifierÂ» : 
+					return (sc_boolean) (Â«IF s.leafÂ»Â«scHandleÂ»->stateConfVector[Â«s.stateVector.offsetÂ»] == Â«s.name.asIdentifierÂ»
+					Â«ELSEÂ»Â«scHandleÂ»->stateConfVector[Â«s.stateVector.offsetÂ»] >= Â«s.name.asIdentifierÂ»
+						&& Â«scHandleÂ»->stateConfVector[Â«s.stateVector.offsetÂ»] <= Â«s.subStates.last.name.asIdentifierÂ»Â«ENDIFÂ»);
+				Â«ENDFORÂ»
 				default: return bool_false;
 			}
 		}
@@ -184,39 +184,39 @@ class StatemachineC {
 	 */
 	
 	def interfaceFunctions(ExecutionFlow it) '''
-		«FOR scope : interfaceScopes»
-			«FOR event : scope.incomingEvents»
-				void «event.asRaiser»(«scHandleDecl»«event.valueParams») {
-					«IF event.hasValue»
-					«event.valueAccess» = value;
-					«ENDIF»
-					«event.access» = bool_true;
+		Â«FOR scope : interfaceScopesÂ»
+			Â«FOR event : scope.incomingEventsÂ»
+				void Â«event.asRaiserÂ»(Â«scHandleDeclÂ»Â«event.valueParamsÂ») {
+					Â«IF event.hasValueÂ»
+					Â«event.valueAccessÂ» = value;
+					Â«ENDIFÂ»
+					Â«event.accessÂ» = bool_true;
 				}
-			«ENDFOR»
+			Â«ENDFORÂ»
 			
-			«FOR event : scope.outgoingEvents»
-				sc_boolean «event.asRaised»(«scHandleDecl») {
-					return «event.access»;
+			Â«FOR event : scope.outgoingEventsÂ»
+				sc_boolean Â«event.asRaisedÂ»(Â«scHandleDeclÂ») {
+					return Â«event.accessÂ»;
 				}
-				«IF event.hasValue» 
-					«event.type.cPrimitive» «event.asGetter»(«scHandleDecl») {
+				Â«IF event.hasValueÂ» 
+					Â«event.type.cPrimitiveÂ» Â«event.asGetterÂ»(Â«scHandleDeclÂ») {
 						//TODO: Check if event is not raised
-						return «event.valueAccess»;
+						return Â«event.valueAccessÂ»;
 					}
-				«ENDIF»
-			«ENDFOR»
+				Â«ENDIFÂ»
+			Â«ENDFORÂ»
 			
-			«FOR variable : scope.variableDefinitions»
-				«variable.type.cPrimitive» «variable.asGetter»(«scHandleDecl») {
-					return «variable.access»;
+			Â«FOR variable : scope.variableDefinitionsÂ»
+				Â«variable.type.cPrimitiveÂ» Â«variable.asGetterÂ»(Â«scHandleDeclÂ») {
+					return Â«variable.accessÂ»;
 				}
-				«IF !variable.readonly »
-				void «variable.asSetter»(«scHandleDecl», «variable.type.cPrimitive» value) {
-					«variable.access» = value;
+				Â«IF !variable.readonly Â»
+				void Â«variable.asSetterÂ»(Â«scHandleDeclÂ», Â«variable.type.cPrimitiveÂ» value) {
+					Â«variable.accessÂ» = value;
 				}
-				«ENDIF»
-			«ENDFOR»
-		«ENDFOR»
+				Â«ENDIFÂ»
+			Â«ENDFORÂ»
+		Â«ENDFORÂ»
 	'''
 	
 	/* ===================================================================================
@@ -227,31 +227,31 @@ class StatemachineC {
 	def functionPrototypes(ExecutionFlow it) '''
 		// prototypes of all internal functions
 		
-		«checkFunctions.toPrototypes»
-		«effectFunctions.toPrototypes»
-		«entryActionFunctions.toPrototypes»
-		«exitActionFunctions.toPrototypes»
-		«enterSequenceFunctions.toPrototypes»
-		«exitSequenceFunctions.toPrototypes»
-		«reactFunctions.toPrototypes»
-		static void clearInEvents(«scHandleDecl»);
-		static void clearOutEvents(«scHandleDecl»);
+		Â«checkFunctions.toPrototypesÂ»
+		Â«effectFunctions.toPrototypesÂ»
+		Â«entryActionFunctions.toPrototypesÂ»
+		Â«exitActionFunctions.toPrototypesÂ»
+		Â«enterSequenceFunctions.toPrototypesÂ»
+		Â«exitSequenceFunctions.toPrototypesÂ»
+		Â«reactFunctions.toPrototypesÂ»
+		static void clearInEvents(Â«scHandleDeclÂ»);
+		static void clearOutEvents(Â«scHandleDeclÂ»);
 		
 	'''
 	 
 	 
 	def toPrototypes(List<Step> steps) '''
-		«FOR s : steps»
-			«s.functionPrototype»
-		«ENDFOR»
+		Â«FOR s : stepsÂ»
+			Â«s.functionPrototypeÂ»
+		Â«ENDFORÂ»
 	'''
 	
 	def dispatch functionPrototype(Check it) '''
-		static sc_boolean «asCheckFunction»(«scHandleDecl»);
+		static sc_boolean Â«asCheckFunctionÂ»(Â«scHandleDeclÂ»);
 	'''
 	
 	def dispatch functionPrototype(Step it) '''
-		static void «functionName»(«scHandleDecl»);
+		static void Â«functionNameÂ»(Â«scHandleDeclÂ»);
 	'''	
 	
 	
@@ -264,34 +264,34 @@ class StatemachineC {
 	def functionImplementations(ExecutionFlow it) '''
 		// implementations of all internal functions
 		
-		«checkFunctions.toImplementation»
-		«effectFunctions.toImplementation»
-		«entryActionFunctions.toImplementation»
-		«exitActionFunctions.toImplementation»
-		«enterSequenceFunctions.toImplementation»
-		«exitSequenceFunctions.toImplementation»
-		«reactFunctions.toImplementation»
+		Â«checkFunctions.toImplementationÂ»
+		Â«effectFunctions.toImplementationÂ»
+		Â«entryActionFunctions.toImplementationÂ»
+		Â«exitActionFunctions.toImplementationÂ»
+		Â«enterSequenceFunctions.toImplementationÂ»
+		Â«exitSequenceFunctions.toImplementationÂ»
+		Â«reactFunctions.toImplementationÂ»
 		
 	'''
 	 
 	def toImplementation(List<Step> steps) '''
-		«FOR s : steps»
-			«s.functionImplementation»
-		«ENDFOR»
+		Â«FOR s : stepsÂ»
+			Â«s.functionImplementationÂ»
+		Â«ENDFORÂ»
 	'''
 	
 	def dispatch functionImplementation(Check it) '''
-		«stepComment»
-		static sc_boolean «asCheckFunction»(«scHandleDecl») {
-			return «code»;
+		Â«stepCommentÂ»
+		static sc_boolean Â«asCheckFunctionÂ»(Â«scHandleDeclÂ») {
+			return Â«codeÂ»;
 		}
 		
 	'''
 	
 	def dispatch functionImplementation(Step it) '''
-		«stepComment»
-		static void «functionName»(«scHandleDecl») {
-			«code»
+		Â«stepCommentÂ»
+		static void Â«functionNameÂ»(Â«scHandleDeclÂ») {
+			Â«codeÂ»
 		}
 		
 	'''

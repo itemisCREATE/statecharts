@@ -19,10 +19,10 @@ class Timer {
 	
 	
 	def timerHContent(ExecutionFlow it)  '''
-		#ifndef «timerModule.define»_H_
-		#define «timerModule.define»_H_
+		#ifndef Â«timerModule.defineÂ»_H_
+		#define Â«timerModule.defineÂ»_H_
 		
-		#include "«typesModule.h»"
+		#include "Â«typesModule.hÂ»"
 		
 		#ifdef __cplusplus
 		extern "C" {
@@ -37,22 +37,22 @@ class Timer {
 			setTimerFPtr   setTimer;
 			unsetTimerFPtr unsetTimer;
 		
-		}  «timerType»;
+		}  Â«timerTypeÂ»;
 		
-		extern void sc_timer_setFPtr(«timerType»* handle, setTimerFPtr stfptr, unsetTimerFPtr utfptr);
-		extern void sc_timer_exit(«timerType»* handle);
+		extern void sc_timer_setFPtr(Â«timerTypeÂ»* handle, setTimerFPtr stfptr, unsetTimerFPtr utfptr);
+		extern void sc_timer_exit(Â«timerTypeÂ»* handle);
 		
 		#ifdef __cplusplus
 		}
 		#endif 
 		 
-		#endif /* «timerModule.define»_H_ */
+		#endif /* Â«timerModule.defineÂ»_H_ */
 	'''
 		
 	def timerCContent(ExecutionFlow it) '''
-		#include "«timerModule.h»"
+		#include "Â«timerModule.hÂ»"
 		
-		void sc_timer_setFPtr(«timerType»* handle, setTimerFPtr stfptr, unsetTimerFPtr utfptr)
+		void sc_timer_setFPtr(Â«timerTypeÂ»* handle, setTimerFPtr stfptr, unsetTimerFPtr utfptr)
 		{
 		
 			handle->setTimer = stfptr;
@@ -60,7 +60,7 @@ class Timer {
 		
 		}
 		
-		void sc_timer_exit(«timerType»* handle)
+		void sc_timer_exit(Â«timerTypeÂ»* handle)
 		{
 		}
 	'''

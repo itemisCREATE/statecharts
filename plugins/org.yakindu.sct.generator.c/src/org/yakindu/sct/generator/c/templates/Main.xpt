@@ -1,63 +1,63 @@
-«REM»
+Â«REMÂ»
 
 Contais the root templates that call the different file templates.
 
 @auther axel terfloth
 @author joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
-
-
-«IMPORT org::yakindu::sct::generator::c::templates»
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
 
-«DEFINE main(sgen::GeneratorEntry genEntry) FOR ExecutionFlow»
+Â«IMPORT org::yakindu::sct::generator::c::templatesÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
+
+
+Â«DEFINE main(sgen::GeneratorEntry genEntry) FOR ExecutionFlowÂ»
   
- 	«this.setGenEntry(genEntry)»
+ 	Â«this.setGenEntry(genEntry)Â»
  	
-	«REM» basis files «ENDREM»
-	«EXPAND EventH::file FOR this» 
-	«EXPAND EventC::file FOR this»
+	Â«REMÂ» basis files Â«ENDREMÂ»
+	Â«EXPAND EventH::file FOR thisÂ» 
+	Â«EXPAND EventC::file FOR thisÂ»
 
-	«EXPAND TimerH::file FOR this»
-	«EXPAND TimerC::file FOR this»
+	Â«EXPAND TimerH::file FOR thisÂ»
+	Â«EXPAND TimerC::file FOR thisÂ»
 
-	«EXPAND EventSetH::file FOR this»
-	«EXPAND EventSetC::file FOR this»
+	Â«EXPAND EventSetH::file FOR thisÂ»
+	Â«EXPAND EventSetC::file FOR thisÂ»
 
-	«EXPAND StatemachineBaseH::file FOR this» 
-	«EXPAND StatemachineBaseC::file FOR this»
+	Â«EXPAND StatemachineBaseH::file FOR thisÂ» 
+	Â«EXPAND StatemachineBaseC::file FOR thisÂ»
 
-	«EXPAND Statemachine_cyH::file FOR this»
-	«EXPAND Statemachine_cyC::file FOR this»
+	Â«EXPAND Statemachine_cyH::file FOR thisÂ»
+	Â«EXPAND Statemachine_cyC::file FOR thisÂ»
 
-	«EXPAND Interfaces::file FOR this»
-	«EXPAND InterfaceOOW::file FOR this»
+	Â«EXPAND Interfaces::file FOR thisÂ»
+	Â«EXPAND InterfaceOOW::file FOR thisÂ»
 
-    «REM» code that is created by the model «ENDREM»
-	«EXPAND definitionH::file FOR this»
+    Â«REMÂ» code that is created by the model Â«ENDREMÂ»
+	Â«EXPAND definitionH::file FOR thisÂ»
 
-	«EXPAND EventPoolH::file FOR this»
-	«EXPAND EventPoolC::file FOR this»
+	Â«EXPAND EventPoolH::file FOR thisÂ»
+	Â«EXPAND EventPoolC::file FOR thisÂ»
 
-	«EXPAND CustomStatemachineH::file FOR this»
-	«EXPAND CustomStatemachineC::file FOR this»
-	«EXPAND CustomStatemachineHOOW::file FOR this»
+	Â«EXPAND CustomStatemachineH::file FOR thisÂ»
+	Â«EXPAND CustomStatemachineC::file FOR thisÂ»
+	Â«EXPAND CustomStatemachineHOOW::file FOR thisÂ»
 	
-	«EXPAND CustomEventH::file FOR this»
-	«EXPAND CustomEventC::file FOR this»
+	Â«EXPAND CustomEventH::file FOR thisÂ»
+	Â«EXPAND CustomEventC::file FOR thisÂ»
 
-	«EXPAND CMakeLists::file FOR this»
+	Â«EXPAND CMakeLists::file FOR thisÂ»
 	
-	«EXPAND DummyTimer::file FOR this»
-	«EXPAND States::file FOR this»
+	Â«EXPAND DummyTimer::file FOR thisÂ»
+	Â«EXPAND States::file FOR thisÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»
 
 
 
