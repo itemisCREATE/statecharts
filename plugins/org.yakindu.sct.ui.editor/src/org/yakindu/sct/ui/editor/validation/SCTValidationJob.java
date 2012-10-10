@@ -95,15 +95,14 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	@Override
 	public IStatus run(final IProgressMonitor monitor) {
 		try {
-			final AbstractSCTResource eResource = (AbstractSCTResource) diagram
-					.eResource();
-			final IFile target = WorkspaceSynchronizer.getFile(eResource);
-			relinkModel(monitor, eResource);
+			Resource resource = diagram.eResource();
+			if (resource instanceof AbstractSCTResource) {
+				relinkModel(monitor, (AbstractSCTResource) resource);
+			}
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
-
 			TransactionalValidationRunner runner = new TransactionalValidationRunner(
-					validator, eResource, CheckMode.ALL, new CancelIndicator() {
+					validator, resource, CheckMode.ALL, new CancelIndicator() {
 						public boolean isCanceled() {
 							return monitor.isCanceled();
 
@@ -114,6 +113,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 
 			if (issues == null)
 				return Status.CANCEL_STATUS;
+			final IFile target = WorkspaceSynchronizer.getFile(resource);
 			refreshMarkers(target, issues, monitor);
 
 		} catch (Exception ex) {
