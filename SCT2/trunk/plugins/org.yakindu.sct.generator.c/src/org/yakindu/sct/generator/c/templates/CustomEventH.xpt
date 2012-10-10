@@ -1,26 +1,26 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::c::templates::TypeModelExtensions»
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ExpressionÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::TypeModelExtensionsÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE EvName()+'.h'»
-«getLicenseHeader()»
-#ifndef «EVNAME()»_H_
-#define «EVNAME()»_H_
+Â«FILE EvName()+'.h'Â»
+Â«getLicenseHeader()Â»
+#ifndef Â«EVNAME()Â»_H_
+#define Â«EVNAME()Â»_H_
 
  
 #include "Event.h"
@@ -29,43 +29,43 @@ Templates for the main statechart cpp file.
 extern "C" {
 #endif 
 
-«REM» lost things:
-  ev_«((EventDefinition)ev).name.toLowerCase()»,
-  ev_«((TimeEvent)ev).name.toLowerCase()»,
-«ENDREM»
+Â«REMÂ» lost things:
+  ev_Â«((EventDefinition)ev).name.toLowerCase()Â»,
+  ev_Â«((TimeEvent)ev).name.toLowerCase()Â»,
+Â«ENDREMÂ»
 
 typedef enum {
-«FOREACH this.declaredEvents() AS ev -»
-  «((EventDefinition)ev).getEventEnumName()»,
-«ENDFOREACH -»
-«FOREACH this.declaredTimerEvents() AS ev -»
-  «((TimeEvent)ev).getEventEnumName()»,
-«ENDFOREACH -»
+Â«FOREACH this.declaredEvents() AS ev -Â»
+  Â«((EventDefinition)ev).getEventEnumName()Â»,
+Â«ENDFOREACH -Â»
+Â«FOREACH this.declaredTimerEvents() AS ev -Â»
+  Â«((TimeEvent)ev).getEventEnumName()Â»,
+Â«ENDFOREACH -Â»
   event_last
 } EventID;
  
-«FOREACH this.declaredEvents() AS ev»
+Â«FOREACH this.declaredEvents() AS evÂ»
 typedef struct { 
   _Event baseEvent;
-  «IF !((EventDefinition)ev).type.isVoid() -»
-  «asCType(((EventDefinition)ev).type)» value;    
-  «ENDIF -»
-} «((EventDefinition)ev).getEventName()»;
-«ENDFOREACH -»
-«FOREACH this.declaredTimerEvents() AS ev»
+  Â«IF !((EventDefinition)ev).type.isVoid() -Â»
+  Â«asCType(((EventDefinition)ev).type)Â» value;    
+  Â«ENDIF -Â»
+} Â«((EventDefinition)ev).getEventName()Â»;
+Â«ENDFOREACH -Â»
+Â«FOREACH this.declaredTimerEvents() AS evÂ»
 typedef struct { 
   _Event baseEvent;
-} «((TimeEvent)ev).name»;
-«ENDFOREACH»
+} Â«((TimeEvent)ev).nameÂ»;
+Â«ENDFOREACHÂ»
  
-extern uint32_t «scName()»_getSizeofEvent(uint32_t evid);
+extern uint32_t Â«scName()Â»_getSizeofEvent(uint32_t evid);
 
 #ifdef __cplusplus
 }
 #endif 
  
-#endif /* «name.toUpperCase()»_H_ */
+#endif /* Â«name.toUpperCase()Â»_H_ */
 
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

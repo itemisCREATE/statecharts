@@ -52,108 +52,108 @@ class ActionCode {
 	}
 		
 	def dispatch code (Expression it, Event target) 
-		'''«target.access»'''
+		'''Â«target.accessÂ»'''
 		
 	def dispatch code (Expression it, VariableDefinition target) 
-		'''«target.access»'''
+		'''Â«target.accessÂ»'''
 	
 	def dispatch code (ElementReferenceExpression it, OperationDefinition target) 
-		'''«target.access»(«FOR arg:args SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+		'''Â«target.accessÂ»(Â«FOR arg:args SEPARATOR ', 'Â»Â«arg.codeÂ»Â«ENDFORÂ»)'''
 	
 	def dispatch code (FeatureCall it, OperationDefinition target) 
-		'''«target.access»(«FOR arg:args SEPARATOR ', '»«arg.code»«ENDFOR»)'''
+		'''Â«target.accessÂ»(Â«FOR arg:args SEPARATOR ', 'Â»Â«arg.codeÂ»Â«ENDFORÂ»)'''
 	
 	/*  */
 	
 	def dispatch code (Statement it) 
-		'''#error TODO: generate code for «getClass().name»'''
+		'''#error TODO: generate code for Â«getClass().nameÂ»'''
 
 	
 	/* HANDLING LITERALS */
 	def dispatch code (Literal it)
-		'''#error unknown literal type «getClass().name» '''
+		'''#error unknown literal type Â«getClass().nameÂ» '''
 	
 	def dispatch code (StringLiteral it) 
-		'''"«value»"'''	
+		'''"Â«valueÂ»"'''	
 
 	def dispatch code (BoolLiteral it) 
-		'''«IF value»bool_true«ELSE»bool_false«ENDIF»'''	
+		'''Â«IF valueÂ»bool_trueÂ«ELSEÂ»bool_falseÂ«ENDIFÂ»'''	
 
 	def dispatch code (IntLiteral it) 
-		'''«value.toString»'''	
+		'''Â«value.toStringÂ»'''	
 
 	def dispatch code (RealLiteral it) 
-		'''«value.toString»'''	
+		'''Â«value.toStringÂ»'''	
 		
 	def dispatch code (HexLiteral it) 
-		'''0x«Integer::toHexString(value)»'''	
+		'''0xÂ«Integer::toHexString(value)Â»'''	
 
 	def dispatch code (PrimitiveValueExpression it) 
-		'''«value.code»'''	
+		'''Â«value.codeÂ»'''	
 
 		
 	/* Statements */
 	
 	def dispatch code (AssignmentExpression it)
-		'''«varRef.code» «operator.literal» «expression.code»'''
+		'''Â«varRef.codeÂ» Â«operator.literalÂ» Â«expression.codeÂ»'''
 		
 	def dispatch code (EventRaisingExpression it)
 		'''
-		«IF value != null»
-			«event.definition.event.valueAccess» = «value.code»;
-		«ENDIF»
-		«event.definition.event.access» = bool_true'''	
+		Â«IF value != nullÂ»
+			Â«event.definition.event.valueAccessÂ» = Â«value.codeÂ»;
+		Â«ENDIFÂ»
+		Â«event.definition.event.accessÂ» = bool_true'''	
 
 
 	/* Logical Expressions */
 	
 	def dispatch code (LogicalOrExpression it)
-		'''«rightOperand.code» || «leftOperand.code»'''
+		'''Â«rightOperand.codeÂ» || Â«leftOperand.codeÂ»'''
 		
 	def dispatch code (LogicalAndExpression it)
-		'''«rightOperand.code» && «leftOperand.code»'''
+		'''Â«rightOperand.codeÂ» && Â«leftOperand.codeÂ»'''
 	 	
 	def dispatch code (LogicalNotExpression it)
-		'''! «operand.code»'''
+		'''! Â«operand.codeÂ»'''
 		
 	def dispatch code (LogicalRelationExpression it) '''
-		«IF leftOperand.type.isString»
-			(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
-		«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
+		Â«IF leftOperand.type.isStringÂ»
+			(strcmp(Â«leftOperand.codeÂ», Â«rightOperand.codeÂ») Â«operator.literalÂ» 0)
+		Â«ELSEÂ»Â«leftOperand.codeÂ» Â«operator.literalÂ» Â«rightOperand.codeÂ»Â«ENDIFÂ»'''
 	
 	/* Bitwise Operations */
 	
 	def dispatch code (BitwiseAndExpression it)
-		'''«leftOperand.code» & «rightOperand.code»'''
+		'''Â«leftOperand.codeÂ» & Â«rightOperand.codeÂ»'''
 	
 	def dispatch code (BitwiseOrExpression it)
-		'''«leftOperand.code» | «rightOperand.code»'''
+		'''Â«leftOperand.codeÂ» | Â«rightOperand.codeÂ»'''
 	
 	def dispatch code (BitwiseXorExpression it)
-		'''«leftOperand.code» ^ «rightOperand.code»'''
+		'''Â«leftOperand.codeÂ» ^ Â«rightOperand.codeÂ»'''
 	
 	def dispatch code (ShiftExpression it)
-		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
+		'''Â«leftOperand.codeÂ» Â«operator.literalÂ» Â«rightOperand.codeÂ»'''
 
 	/* Numerical operations */
 	
 	def dispatch code (NumericalAddSubtractExpression it)
-		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
+		'''Â«leftOperand.codeÂ» Â«operator.literalÂ» Â«rightOperand.codeÂ»'''
 	
 	def dispatch code (NumericalMultiplyDivideExpression it)
-		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
+		'''Â«leftOperand.codeÂ» Â«operator.literalÂ» Â«rightOperand.codeÂ»'''
 	
 	def dispatch code (NumericalUnaryExpression it)
-		'''«operator.literal» «operand.code»'''
+		'''Â«operator.literalÂ» Â«operand.codeÂ»'''
 	
 	/* TODO: check if event is active */
 	def dispatch code (EventValueReferenceExpression it)
-		'''«value.definition.event.valueAccess»'''
+		'''Â«value.definition.event.valueAccessÂ»'''
 	
 	def dispatch code (ActiveStateReferenceExpression it)
-		'''«flow.nameOfIsActiveFunction»(«scHandle», «value.fullyQualifiedName»)'''
+		'''Â«flow.nameOfIsActiveFunctionÂ»(Â«scHandleÂ», Â«value.fullyQualifiedNameÂ»)'''
 	
 	def dispatch code (ParenthesizedExpression it)
-		'''(«expression.code»)'''
+		'''(Â«expression.codeÂ»)'''
 	
 }

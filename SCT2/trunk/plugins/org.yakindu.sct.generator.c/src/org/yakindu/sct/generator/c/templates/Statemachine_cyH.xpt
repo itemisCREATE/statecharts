@@ -1,21 +1,21 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart c file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE 'Statemachine_cy.h'»
-«getLicenseHeader()»
+Â«FILE 'Statemachine_cy.h'Â»
+Â«getLicenseHeader()Â»
 #ifndef STATEMACHINE_CY_H_
 #define STATEMACHINE_CY_H_
 
@@ -58,6 +58,6 @@ extern void statemachine_cy__runCycle(Statemachine_cy* handle);
 #endif 
  
 #endif /* STATEMACHINE_CY_H_ */
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

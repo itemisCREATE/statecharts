@@ -1,21 +1,21 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart c file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE 'Statemachine_cy.c'»
-«getLicenseHeader()»
+Â«FILE 'Statemachine_cy.c'Â»
+Â«getLicenseHeader()Â»
 #include <stdlib.h>
 #include <string.h>
 #include "definition.h"
@@ -100,6 +100,6 @@ sc_boolean statemachine_cy_eventWaiting(Statemachine_cy* handle) {
 	return (eventSet_isAny_input(&handle->eventSet) || eventSet_isAny_output(&handle->eventSet)) ;
 }
 
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

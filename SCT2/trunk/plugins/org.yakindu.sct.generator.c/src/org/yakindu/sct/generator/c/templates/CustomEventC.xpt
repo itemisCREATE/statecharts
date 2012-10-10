@@ -1,38 +1,38 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ExpressionÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE EvName()+'.c'»
-«getLicenseHeader()»
-#include "«EvName()».h"
+Â«FILE EvName()+'.c'Â»
+Â«getLicenseHeader()Â»
+#include "Â«EvName()Â».h"
 
 /* This is needed by the EventPool */
-uint32_t «scName()»_getSizeofEvent(uint32_t evid)
+uint32_t Â«scName()Â»_getSizeofEvent(uint32_t evid)
 {
 	switch((EventID) evid) {
 
-«FOREACH this.declaredEvents() AS ev -»
-  case «((EventDefinition)ev).getEventEnumName()»:
-    return sizeof(«((EventDefinition)ev).getEventName()»);
-«ENDFOREACH -»
-«FOREACH this.declaredTimerEvents() AS ev -»
-  case «((TimeEvent)ev).getEventEnumName()»:
-    return sizeof(«((TimeEvent)ev).name»);
-«ENDFOREACH -»
+Â«FOREACH this.declaredEvents() AS ev -Â»
+  case Â«((EventDefinition)ev).getEventEnumName()Â»:
+    return sizeof(Â«((EventDefinition)ev).getEventName()Â»);
+Â«ENDFOREACH -Â»
+Â«FOREACH this.declaredTimerEvents() AS ev -Â»
+  case Â«((TimeEvent)ev).getEventEnumName()Â»:
+    return sizeof(Â«((TimeEvent)ev).nameÂ»);
+Â«ENDFOREACH -Â»
 	default:
 		break;
 	}
@@ -40,6 +40,6 @@ uint32_t «scName()»_getSizeofEvent(uint32_t evid)
 	return(0);
 }
 
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

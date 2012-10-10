@@ -231,7 +231,7 @@ class Naming implements INaming{
 	
 	def dispatch scopeDescription(Scope it) '''scope'''
 	
-	def dispatch scopeDescription(InterfaceScope it) '''«IF name==null || name.empty»default interface scope«ELSE»interface scope '«name»'«ENDIF»'''
+	def dispatch scopeDescription(InterfaceScope it) '''Â«IF name==null || name.emptyÂ»default interface scopeÂ«ELSEÂ»interface scope 'Â«nameÂ»'Â«ENDIFÂ»'''
 	def dispatch scopeDescription(InternalScope it) '''internal scope'''
 	
 	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
@@ -245,22 +245,22 @@ class Naming implements INaming{
 	
 	/** todo externalize */
 	def dispatch access (VariableDefinition it) 
-		'''«scHandle»->«scope.instance».«name.asEscapedIdentifier»'''
+		'''Â«scHandleÂ»->Â«scope.instanceÂ».Â«name.asEscapedIdentifierÂ»'''
 
 	/** todo externalize */
 	def dispatch access (OperationDefinition it) 
-		'''«asFunction»'''
+		'''Â«asFunctionÂ»'''
 		
 	/** todo externalize */
 	def dispatch access (Event it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
+		'''Â«scHandleÂ»->Â«scope.instanceÂ».Â«name.asIdentifier.raisedÂ»'''
 				
 	def dispatch access (EObject it) 
-		'''#error cannot access elements of type «getClass().name» '''
+		'''#error cannot access elements of type Â«getClass().nameÂ» '''
 		
 	
 	def valueAccess(Event it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
+		'''Â«scHandleÂ»->Â«scope.instanceÂ».Â«name.asIdentifier.valueÂ»'''
 		
 	def boolean isCKeyword(String name) {
 		var String lowName = name.toLowerCase();

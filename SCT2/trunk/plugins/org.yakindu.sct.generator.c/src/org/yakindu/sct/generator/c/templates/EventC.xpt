@@ -1,27 +1,27 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart c file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE 'Event.c'»
-«getLicenseHeader()»
+Â«FILE 'Event.c'Â»
+Â«getLicenseHeader()Â»
 #include "Event.h"
 
 void _event_init(_Event* handle, uint32_t id)
 {
 	handle->id = id;
 }
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

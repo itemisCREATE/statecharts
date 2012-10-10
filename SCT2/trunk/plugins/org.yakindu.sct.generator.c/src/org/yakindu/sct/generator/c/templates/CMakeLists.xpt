@@ -1,39 +1,39 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::ExpressionÂ»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE 'CMakeLists.txt'»
-«getLicenseHeaderPlain()»
+Â«FILE 'CMakeLists.txt'Â»
+Â«getLicenseHeaderPlain()Â»
 set( SRC
 	Statemachine_cy.c
 	StatemachineBase.c
 	Event.c
 	EventSet.c
 	EventPool.c
-	«StName()».c
-	«EvName()».c
-«FOREACH this.scopes.getUsableScopes() AS interface -»
-	«interface.interfaceClassName()».c
-«ENDFOREACH»
+	Â«StName()Â».c
+	Â«EvName()Â».c
+Â«FOREACH this.scopes.getUsableScopes() AS interface -Â»
+	Â«interface.interfaceClassName()Â».c
+Â«ENDFOREACHÂ»
 	Timer.c
 	DummyTimer.c
 )
 
-add_library(«StName()» ${SRC})
+add_library(Â«StName()Â» ${SRC})
 
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

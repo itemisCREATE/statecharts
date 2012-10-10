@@ -1,21 +1,21 @@
-«REM»
+Â«REMÂ»
 
 Templates for the main statechart c file.
 
 @auther joern seger
 
-«ENDREM»
+Â«ENDREMÂ»
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+Â«IMPORT sexecÂ»
+Â«IMPORT stextÂ»
+Â«IMPORT sgraphÂ»
 
-«EXTENSION org::yakindu::sct::generator::c::templates::Naming»
+Â«EXTENSION org::yakindu::sct::generator::c::templates::NamingÂ»
 
-«DEFINE file FOR ExecutionFlow»
+Â«DEFINE file FOR ExecutionFlowÂ»
 
-«FILE 'Timer.h'»
-«getLicenseHeader()»
+Â«FILE 'Timer.h'Â»
+Â«getLicenseHeader()Â»
 #ifndef TIMER_H_
 #define TIMER_H_
 
@@ -44,6 +44,6 @@ extern void timer_exit(Timer* handle);
 #endif 
  
 #endif /* TIMER_H_ */
-«ENDFILE»
+Â«ENDFILEÂ»
 
-«ENDDEFINE»
+Â«ENDDEFINEÂ»

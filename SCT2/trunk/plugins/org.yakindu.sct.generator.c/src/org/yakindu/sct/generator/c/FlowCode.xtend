@@ -25,100 +25,100 @@ class FlowCode {
 	
  
 	def stepComment(Step it) '''
-		«IF comment != null && ! comment.empty»
-			/* «comment» */
-		«ENDIF»
+		Â«IF comment != null && ! comment.emptyÂ»
+			/* Â«commentÂ» */
+		Â«ENDIFÂ»
 	'''
 	
 	def dispatch code(Step it) '''
-		#error ActionCode for Step '«getClass().name»' not defined
+		#error ActionCode for Step 'Â«getClass().nameÂ»' not defined
 	'''
 
 	def dispatch code(SaveHistory it) '''
-		«stepComment»
-		«scHandle»->historyVector[«region.historyVector.offset»] = «scHandle»->stateConfVector[«region.stateVector.offset»];
+		Â«stepCommentÂ»
+		Â«scHandleÂ»->historyVector[Â«region.historyVector.offsetÂ»] = Â«scHandleÂ»->stateConfVector[Â«region.stateVector.offsetÂ»];
 	'''
 	
 	def dispatch code(HistoryEntry it) '''
-		«stepComment»
-		if («scHandle»->historyVector[«region.historyVector.offset»] != «last_state») {
-			«historyStep.code»
+		Â«stepCommentÂ»
+		if (Â«scHandleÂ»->historyVector[Â«region.historyVector.offsetÂ»] != Â«last_stateÂ») {
+			Â«historyStep.codeÂ»
 		} else {
-			«initialStep.code»
+			Â«initialStep.codeÂ»
 		}
 	'''
 
 	def dispatch code(StateSwitch it) '''
-		«stepComment»
-		«IF historyRegion != null»
-			switch(«scHandle»->historyVector[ «historyRegion.historyVector.offset» ]) {
-		«ELSE»
-			switch(«scHandle»->stateConfVector[ «stateConfigurationIdx» ]) {
-		«ENDIF»
-			«FOR caseid : cases»
-				case «caseid.state.name.asIdentifier» : {
-					«caseid.step.code»
+		Â«stepCommentÂ»
+		Â«IF historyRegion != nullÂ»
+			switch(Â«scHandleÂ»->historyVector[ Â«historyRegion.historyVector.offsetÂ» ]) {
+		Â«ELSEÂ»
+			switch(Â«scHandleÂ»->stateConfVector[ Â«stateConfigurationIdxÂ» ]) {
+		Â«ENDIFÂ»
+			Â«FOR caseid : casesÂ»
+				case Â«caseid.state.name.asIdentifierÂ» : {
+					Â«caseid.step.codeÂ»
 					break;
 				}
-			«ENDFOR»
+			Â«ENDFORÂ»
 			default: break;
 		}
 	'''
 
 	def dispatch code(ScheduleTimeEvent it) '''
-		«stepComment»
-		«flow.type.toFirstLower»_setTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.name.asIdentifier»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
+		Â«stepCommentÂ»
+		Â«flow.type.toFirstLowerÂ»_setTimer( (sc_eventid) &(Â«scHandleÂ»->timeEvents.Â«timeEvent.name.asIdentifierÂ»_raised) , Â«timeValue.codeÂ», Â«IF timeEvent.periodicÂ»bool_trueÂ«ELSEÂ»bool_falseÂ«ENDIFÂ»);
 	'''
 
 	def dispatch code(UnscheduleTimeEvent it) '''
-		«stepComment»
-		«flow.type.toFirstLower»_unsetTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.name.asIdentifier»_raised) );		
+		Â«stepCommentÂ»
+		Â«flow.type.toFirstLowerÂ»_unsetTimer( (sc_eventid) &(Â«scHandleÂ»->timeEvents.Â«timeEvent.name.asIdentifierÂ»_raised) );		
 	'''
 
 	def dispatch code(Execution it) 
-		'''«statement.code»;'''
+		'''Â«statement.codeÂ»;'''
 	
 	def dispatch code(Call it) 
-		'''«step.functionName»(«scHandle»);'''
+		'''Â«step.functionNameÂ»(Â«scHandleÂ»);'''
 
 	def dispatch code(Sequence it) '''
-«««		«IF comment != null»
-«««			{
-				«stepComment»
-				«FOR s : steps»
-					«s.code»
-				«ENDFOR»
-«««			}
-«««		«ELSE»
-«««			«FOR s : steps»
-«««				«s.code»
-«««			«ENDFOR»
-«««		«ENDIF»
+		Â«IF comment != nullÂ»
+			{
+				Â«stepCommentÂ»
+				Â«FOR s : stepsÂ»
+					Â«s.codeÂ»
+				Â«ENDFORÂ»
+			}
+		Â«ELSEÂ»
+			Â«FOR s : stepsÂ»
+				Â«s.codeÂ»
+			Â«ENDFORÂ»
+		Â«ENDIFÂ»
 	'''	
 
 	def dispatch code(Check it) 
-		'''«IF condition != null»«condition.code»«ELSE»bool_true«ENDIF»'''
+		'''Â«IF condition != nullÂ»Â«condition.codeÂ»Â«ELSEÂ»bool_trueÂ«ENDIFÂ»'''
 	
 	def dispatch code(CheckRef it) 
-		'''«IF check != null»«check.functionName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
+		'''Â«IF check != nullÂ»Â«check.functionNameÂ»(Â«scHandleÂ»)Â«ELSEÂ»bool_trueÂ«ENDIFÂ»'''
 
 	def dispatch code(If it) '''
-		«stepComment»
-		if («check.code») { 
-			«thenStep.code»
-		} «IF (elseStep != null)» else {
-			«elseStep.code»
+		Â«stepCommentÂ»
+		if (Â«check.codeÂ») { 
+			Â«thenStep.codeÂ»
+		} Â«IF (elseStep != null)Â» else {
+			Â«elseStep.codeÂ»
 		}
-		«ENDIF»
+		Â«ENDIFÂ»
 	'''
 	
 	def dispatch code(EnterState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.name.asEscapedIdentifier»;
-		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
+		Â«scHandleÂ»->stateConfVector[Â«state.stateVector.offsetÂ»] = Â«state.name.asEscapedIdentifierÂ»;
+		Â«scHandleÂ»->stateConfVectorPosition = Â«state.stateVector.offsetÂ»;
 	'''
 
 	def dispatch code(ExitState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «last_state»;
-		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
+		Â«scHandleÂ»->stateConfVector[Â«state.stateVector.offsetÂ»] = Â«last_stateÂ»;
+		Â«scHandleÂ»->stateConfVectorPosition = Â«state.stateVector.offsetÂ»;
 	'''
 }

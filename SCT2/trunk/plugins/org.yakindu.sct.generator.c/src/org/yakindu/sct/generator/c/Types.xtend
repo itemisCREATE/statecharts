@@ -15,8 +15,8 @@ class Types {
 	
 	
 	def typesHContent(ExecutionFlow it) '''
-		#ifndef «typesModule.define»_H_
-		#define «typesModule.define»_H_
+		#ifndef Â«typesModule.defineÂ»_H_
+		#define Â«typesModule.defineÂ»_H_
 		
 		#ifdef __cplusplus
 		extern "C" {
@@ -41,6 +41,6 @@ class Types {
 		#define bool_true true
 		#define bool_false false
 
-		#endif /* «typesModule.define»_H_ */
+		#endif /* Â«typesModule.defineÂ»_H_ */
 	'''
 }
