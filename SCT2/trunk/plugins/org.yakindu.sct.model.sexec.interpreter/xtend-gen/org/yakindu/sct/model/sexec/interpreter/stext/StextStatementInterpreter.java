@@ -92,7 +92,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
       boolean _equals = Objects.equal(_operator, AssignmentOperator.ASSIGN);
       if (_equals) {
         String _name = scopeVariable.getName();
-        this.context.setVariableValue(_name, result);
+        this.context.setSlotValue(_name, result);
       } else {
         AssignmentOperator _operator_1 = assignment.getOperator();
         String _name_1 = _operator_1.getName();
@@ -100,7 +100,7 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
         String _name_2 = scopeVariable.getName();
         Object _value = scopeVariable.getValue();
         Object _evaluate = this.evaluate(operator, _value, result);
-        this.context.setVariableValue(_name_2, _evaluate);
+        this.context.setSlotValue(_name_2, _evaluate);
       }
       _xblockexpression = (result);
     }

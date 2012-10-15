@@ -105,7 +105,7 @@ public class Function {
 		return null;
 	}
 
-	private  void addFunctionMethods(Class<?> functionClass,
+	private void addFunctionMethods(Class<?> functionClass,
 			List<Method> methodList) {
 		List<Method> result = new ArrayList<Method>();
 		Method[] methods = functionClass.getDeclaredMethods();
@@ -136,10 +136,12 @@ public class Function {
 
 	}
 
-	public  Function lookup(Class<?> functionClass, String name,
+	public Function lookup(Class<?> functionClass, String name,
 			Object... params) {
 		Class<?>[] paramTypes = new Class<?>[params.length];
 		for (int i = 0; i < params.length; i++) {
+			if (params[i] == null)
+				continue;
 			paramTypes[i] = params[i].getClass();
 		}
 		return lookup(functionClass, name, paramTypes);

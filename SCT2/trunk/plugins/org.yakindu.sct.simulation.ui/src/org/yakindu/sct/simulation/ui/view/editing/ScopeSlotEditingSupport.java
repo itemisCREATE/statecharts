@@ -13,7 +13,6 @@ package org.yakindu.sct.simulation.ui.view.editing;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
 /**
  * 
@@ -42,9 +41,11 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 	@Override
 	public Object getValue(Object element) {
 		if (element instanceof AbstractSlot) {
-			return String.valueOf(((AbstractSlot) element).getValue());
+			Object value = ((AbstractSlot) element).getValue();
+			if (value != null)
+				return String.valueOf(value);
 		}
-		return null;
+		return "";
 	}
 
 	@Override
@@ -52,11 +53,9 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 		value = convertValue(value);
 		if (value == null)
 			return;
-		if (element instanceof ExecutionVariable) {
-			IExecutionContext input = (IExecutionContext) getViewer()
-					.getInput();
-			input.setVariableValue(((ExecutionVariable) element).getName(),
-					value);
+		IExecutionContext input = (IExecutionContext) getViewer().getInput();
+		if (element instanceof AbstractSlot) {
+			input.setSlotValue(((AbstractSlot) element).getName(), value);
 		}
 	}
 }

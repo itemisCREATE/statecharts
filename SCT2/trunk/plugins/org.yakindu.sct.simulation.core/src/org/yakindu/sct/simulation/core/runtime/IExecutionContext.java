@@ -84,9 +84,9 @@ public interface IExecutionContext {
 	public ExecutionVariable getVariable(String varName);
 
 	/**
-	 * Changes the value of a variable
+	 * Changes the value of a variable / event
 	 */
-	public void setVariableValue(String name, Object value)
+	public void setSlotValue(String name, Object value)
 			throws ExecutionException;
 
 	/**

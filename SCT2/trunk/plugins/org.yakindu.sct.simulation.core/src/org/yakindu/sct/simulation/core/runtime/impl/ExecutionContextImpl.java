@@ -84,7 +84,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 			raisedEvents.clear();
 		}
 	}
-
+	
 	public void raiseEvent(String eventName, Object value) {
 		ExecutionEvent event = getDeclaredEvent(eventName);
 		if (event == null)
@@ -166,14 +166,15 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		}
 	}
 
-	public void setVariableValue(String name, Object value)
+	public void setSlotValue(String name, Object value)
 			throws ExecutionException {
-		ExecutionVariable variable = getVariable(name);
-		if (variable == null)
-			throw new ExecutionException("Variable with name " + name
-					+ " is undefined!");
-		variable.setValue(value);
-		notifyVariableValueChanged(variable);
+		AbstractSlot slot = getVariable(name);
+		if(slot == null)
+			slot = getDeclaredEvent(name);
+		if (slot == null)
+			throw new ExecutionException("Unknown slot " + name);
+		slot.setValue(value);
+		notifyValueChanged(slot);
 
 	}
 
