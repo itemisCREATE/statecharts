@@ -48,7 +48,6 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
-import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
@@ -56,7 +55,7 @@ import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
  * @author andreas muelder - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter, IExecutionContextListener {
+public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter {
   @Inject
   private IStatementInterpreter interpreter;
   
@@ -93,7 +92,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     StateVector _stateVector = flow.getStateVector();
     int _size = _stateVector.getSize();
     this.executionContext.initStateConfigurationVector(_size);
-    this.executionContext.addExecutionContextListener(this);
     TraceBeginRunCycle _createTraceBeginRunCycle = SexecFactory.eINSTANCE.createTraceBeginRunCycle();
     this.brc = _createTraceBeginRunCycle;
     TraceEndRunCycle _createTraceEndRunCycle = SexecFactory.eINSTANCE.createTraceEndRunCycle();
@@ -197,19 +195,20 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     Type _type = event.getType();
     boolean _isBoolean = this.ts.isBoolean(_type);
     if (_isBoolean) {
-      ExecutionEvent _executionEvent = new ExecutionEvent(fqName, Boolean.class, null);
+      ExecutionEvent _executionEvent = new ExecutionEvent(fqName, Boolean.class, Boolean.valueOf(false));
       this.executionContext.declareEvent(_executionEvent);
     } else {
       Type _type_1 = event.getType();
       boolean _isInteger = this.ts.isInteger(_type_1);
       if (_isInteger) {
-        ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, Integer.class, null);
+        ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, Integer.class, Integer.valueOf(0));
         this.executionContext.declareEvent(_executionEvent_1);
       } else {
         Type _type_2 = event.getType();
         boolean _isReal = this.ts.isReal(_type_2);
         if (_isReal) {
-          ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, Float.class, null);
+          float _parseFloat = Float.parseFloat("0.0");
+          ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, Float.class, Float.valueOf(_parseFloat));
           this.executionContext.declareEvent(_executionEvent_2);
         } else {
           Type _type_3 = event.getType();
@@ -526,12 +525,6 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
       _xblockexpression = (null);
     }
     return _xblockexpression;
-  }
-  
-  public void eventRaised(final ExecutionEvent event) {
-  }
-  
-  public void variableValueChanged(final ExecutionVariable variable) {
   }
   
   public IExecutionContext getExecutionContext() {
