@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
 import org.eclipse.emf.common.notify.Notification;
@@ -154,7 +155,6 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 	@Override
 	protected void createGraphicalViewer(Composite parent) {
 		super.createGraphicalViewer(parent);
-		// Tag the viewer with the desired help context id
 		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench()
 				.getHelpSystem();
 		helpSystem.setHelp(getGraphicalViewer().getControl(),
@@ -171,7 +171,6 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		super.configureGraphicalViewer();
 		RootEditPart rootEditPart = getDiagramGraphicalViewer()
 				.getRootEditPart();
-		// set clipping strategy for connection layer
 		if (rootEditPart instanceof LayerManager) {
 			ConnectionLayer connectionLayer = (ConnectionLayer) ((LayerManager) rootEditPart)
 					.getLayer(LayerConstants.CONNECTION_LAYER);
@@ -187,7 +186,15 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
 		domainAdapter.dispose();
+		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
+		try {
+			// Touch the file for revalidation, when the user did not save
+			// the changes
+			editorInput.getFile().touch(new NullProgressMonitor());
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 		super.dispose();
 	}
-
+	
 }
