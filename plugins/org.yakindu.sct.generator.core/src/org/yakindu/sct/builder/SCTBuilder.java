@@ -256,6 +256,9 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 				true);
 		ResourceSet set = new ResourceSetImpl();
 		Resource emfResource = set.getResource(uri, true);
+		if (emfResource.getErrors().size() > 0
+				|| emfResource.getContents().size() == 0)
+			return null;
 		return (TYPE) emfResource.getContents().get(0);
 	}
 

@@ -32,11 +32,10 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
  */
 public class GeneratorExecutor {
 
-	// @Inject
-	// private XtextResourceSetProvider provider;
-
 	public void executeGenerator(IFile file) {
 		Resource resource = loadResource(file);
+		if (resource == null || resource.getContents().size() == 0)
+			return;
 		GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
 
 		String generatorId = model.getGeneratorId();
@@ -62,7 +61,7 @@ public class GeneratorExecutor {
 				.buildRule());
 		generatorJob.schedule();
 	}
-	
+
 	public void executeGenerator(GeneratorModel model) {
 
 		String generatorId = model.getGeneratorId();
@@ -72,7 +71,7 @@ public class GeneratorExecutor {
 			return;
 		final ISCTGenerator generator = description.createGenerator();
 		final EList<GeneratorEntry> entries = model.getEntries();
-		
+
 		for (GeneratorEntry generatorEntry : entries) {
 			generator.generate(generatorEntry);
 		}
