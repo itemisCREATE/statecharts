@@ -34,7 +34,8 @@ public class GeneratorExecutor {
 
 	public void executeGenerator(IFile file) {
 		Resource resource = loadResource(file);
-		if (resource == null || resource.getContents().size() == 0)
+		if (resource == null || resource.getContents().size() == 0
+				|| resource.getErrors().size() > 0)
 			return;
 		GeneratorModel model = (GeneratorModel) resource.getContents().get(0);
 
