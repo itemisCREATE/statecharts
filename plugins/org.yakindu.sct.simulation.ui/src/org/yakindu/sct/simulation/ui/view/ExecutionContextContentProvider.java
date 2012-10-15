@@ -25,7 +25,6 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 
@@ -132,12 +131,11 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 
 	public void eventRaised(ExecutionEvent event) {
 	}
-	
+
 	public void timeScaleFactorChanged(double oldFactor, double newFactor) {
 	}
 
-
-	public void variableValueChanged(ExecutionVariable variable) {
+	public void slotValueChanged(AbstractSlot variable) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				if (viewer != null && !viewer.getControl().isDisposed())
@@ -167,13 +165,14 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 	 */
 	public static class Container {
 		String name = "Default";
-		Set<AbstractSlot> slots = new TreeSet<AbstractSlot>(new Comparator<AbstractSlot>() {
+		Set<AbstractSlot> slots = new TreeSet<AbstractSlot>(
+				new Comparator<AbstractSlot>() {
 
-			public int compare(AbstractSlot arg0, AbstractSlot arg1) {
-				return arg0.getName().compareTo(arg1.getName());
-			}
-			
-		});
+					public int compare(AbstractSlot arg0, AbstractSlot arg1) {
+						return arg0.getName().compareTo(arg1.getName());
+					}
+
+				});
 
 		public Container() {
 			super();
@@ -209,5 +208,5 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 		}
 
 	}
-	
+
 }

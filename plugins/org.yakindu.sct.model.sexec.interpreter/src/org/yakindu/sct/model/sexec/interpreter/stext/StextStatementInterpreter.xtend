@@ -72,10 +72,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		var scopeVariable = context.getVariable(assignment.varRef.variable.fullyQualifiedName.toString)
 		var result = assignment.expression.execute
 		if(assignment.operator == AssignmentOperator::ASSIGN){
-			context.setVariableValue(scopeVariable.getName, result)
+			context.setSlotValue(scopeVariable.getName, result)
 		}else{
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
-			context.setVariableValue(scopeVariable.name, evaluate(operator, scopeVariable.getValue,result))
+			context.setSlotValue(scopeVariable.name, evaluate(operator, scopeVariable.getValue,result))
 		}
 		result		
 	}

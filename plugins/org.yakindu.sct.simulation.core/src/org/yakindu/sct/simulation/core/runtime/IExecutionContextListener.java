@@ -10,8 +10,8 @@
  */
 package org.yakindu.sct.simulation.core.runtime;
 
+import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
 /**
  * 
@@ -28,5 +28,5 @@ public interface IExecutionContextListener {
 	/**
 	 * called when a variable value changed
 	 */
-	public void variableValueChanged(ExecutionVariable variable);
+	public void slotValueChanged(AbstractSlot variable);
 }

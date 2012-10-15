@@ -13,6 +13,7 @@ package org.yakindu.sct.model.sexec.interpreter.impl
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.EnterState
@@ -40,21 +41,19 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext
-import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable
-import org.yakindu.base.types.Type
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter,IExecutionContextListener {
+class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecutionFlowInterpreter {
 	
 	@Inject
 	IStatementInterpreter interpreter
@@ -83,7 +82,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 			scope.declareContents
 		} 
 		executionContext.initStateConfigurationVector(flow.stateVector.size)
-		executionContext.addExecutionContextListener(this);
 		
 		brc = SexecFactory::eINSTANCE.createTraceBeginRunCycle
 		erc = SexecFactory::eINSTANCE.createTraceEndRunCycle
@@ -155,13 +153,13 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	def dispatch void addToScope(EventDefinition event){
 		var fqName = provider.qualifiedName(event).toString
 		if(event.type.^boolean){
-				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Boolean),null))
+				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Boolean),false))
 		}
 		else if(event.type.integer){
-			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Integer),null))
+			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Integer),0))
 		}
 		else if(event.type.real){
-			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Float),null))
+			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Float),Float::parseFloat("0.0")))
 		}
 		else if(event.type.^void){
 				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Void)))
@@ -313,14 +311,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		null
 	}
 	
-	override void eventRaised(ExecutionEvent event){
-		
-	}
-
-	override void variableValueChanged(ExecutionVariable variable){
-		
-	}
-
 	override getExecutionContext() {
 		return executionContext;
 	}

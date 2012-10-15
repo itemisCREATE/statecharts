@@ -42,7 +42,7 @@ public abstract class AbstractExecutionFlowTest {
 
 	protected void initInterpreter(ExecutionFlow flow) {
 		interpreter.initialize(flow);
-		//interpreter.enter(); -ToDelete
+		// interpreter.enter(); -ToDelete
 	}
 
 	protected int getInteger(String varName) {
@@ -66,22 +66,22 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected int setInteger(String varName, int v) {
-		context().setVariableValue(varName, (Integer)v);
+		context().setSlotValue(varName, (Integer) v);
 		return v;
 	}
 
 	protected boolean setBoolean(String varName, boolean v) {
-		context().setVariableValue(varName, (Boolean)v);
+		context().setSlotValue(varName, (Boolean) v);
 		return v;
 	}
 
 	protected double setReal(String varName, double v) {
-		context().setVariableValue(varName, (Double) v);
+		context().setSlotValue(varName, (Double) v);
 		return v;
 	}
 
 	protected String setString(String varName, String v) {
-		context().setVariableValue(varName, v);
+		context().setSlotValue(varName, v);
 		return v;
 	}
 

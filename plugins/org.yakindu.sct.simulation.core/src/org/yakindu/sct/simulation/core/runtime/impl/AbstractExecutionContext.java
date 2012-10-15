@@ -52,10 +52,10 @@ public abstract class AbstractExecutionContext implements IExecutionContext {
 		}
 	}
 
-	public void notifyVariableValueChanged(ExecutionVariable variable) {
+	public void notifyValueChanged(AbstractSlot slot) {
 		synchronized (_listeners) {
 			for (IExecutionContextListener listener : _listeners) {
-				listener.variableValueChanged(variable);
+				listener.slotValueChanged(slot);
 			}
 		}
 	}

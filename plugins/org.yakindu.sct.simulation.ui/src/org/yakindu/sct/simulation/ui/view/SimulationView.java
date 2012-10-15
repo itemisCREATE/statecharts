@@ -27,9 +27,13 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.TreeViewerColumn;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -108,6 +112,8 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		viewer.getTree().setFocus();
 	}
 
+	protected Point mouseLocation;
+
 	protected Viewer createViewer(Composite parent) {
 		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
 				| SWT.FULL_SELECTION);
@@ -130,8 +136,18 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 		viewer.setContentProvider(new ExecutionContextContentProvider());
 
+		viewer.getControl().addMouseMoveListener(new MouseMoveListener() {
+			public void mouseMove(MouseEvent e) {
+				mouseLocation = new Point(e.x, e.y);
+			}
+		});
 		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
+
+				ViewerCell cell = viewer.getCell(mouseLocation);
+				if (cell == null || cell.getColumnIndex() != 0)
+					return;
+
 				Object firstElement = ((IStructuredSelection) event
 						.getSelection()).getFirstElement();
 				if (firstElement instanceof ExecutionEvent) {
