@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.generator.genmodel.ui.wizard;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -236,16 +235,7 @@ public class SGenWizardPage2 extends WizardPage {
 		URI uri = URI.createPlatformResourceURI(iResource.getFullPath()
 				.toString(), true);
 		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource resource = Resource.Factory.Registry.INSTANCE.getFactory(uri)
-				.createResource(uri);
-		resourceSet.getResources().add(resource);
-		try {
-			resource.load(Collections.emptyMap());
-		} catch (IOException e) {
-			e.printStackTrace();
-			return null;
-		}
-		return resource;
+		return resourceSet.getResource(uri, true);
 	}
 
 	public String getGeneratorId() {

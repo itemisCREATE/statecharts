@@ -60,11 +60,7 @@ public class SGenUiModule extends
 	}
 
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
-		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {
-			return Access.getJavaProjectsState();
-		} else {
-			return Access.getWorkspaceProjectsState();
-		}
+		return Access.getWorkspaceProjectsState();
 	}
 
 	@Override
