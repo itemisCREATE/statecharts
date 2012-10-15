@@ -313,7 +313,7 @@ class GeneratorProjectTemplate {
 		«ENDIF»
 		«IF data.generatorType == GeneratorType::Xtend»
 			«' '»org.eclipse.xtext.xbase.lib;bundle-version="2.0.1",
-			«' '»org.eclipse.xtext.xtend2.lib;bundle-version="2.0.1",
+			«' '»org.eclipse.xtend2.lib;bundle-version="2.0.1",
 		«ENDIF»
 		«IF data.pluginExport || data.generatorType != GeneratorType::Xpand»
 			«' '»org.yakindu.sct.generator.core;bundle-version="1.0.0",
@@ -378,12 +378,12 @@ class GeneratorProjectTemplate {
 		import org.yakindu.sct.model.sexec.ExecutionState;
 		import org.yakindu.sct.model.sgen.GeneratorEntry;
 		import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator;
+		import org.eclipse.xtext.generator.IFileSystemAccess;
 		
 		public class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator{
 			private static final String LBR = "\n\r";
 
-			@Override
-			public void generate(ExecutionFlow flow, GeneratorEntry entry) {
+			public void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {
 				StringBuilder builder = new StringBuilder();
 				builder.append("The name of the Statemachine is ");
 				builder.append(flow.getName());
@@ -424,10 +424,11 @@ class GeneratorProjectTemplate {
 		import org.yakindu.sct.model.sexec.ExecutionState
 		import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator
 		import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
+		import org.eclipse.xtext.generator.IFileSystemAccess
 		
 		class «data.generatorClass.simpleName» extends AbstractWorkspaceGenerator implements IExecutionFlowGenerator {
 		
-			override generate(ExecutionFlow flow, GeneratorEntry entry) {
+			override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {
 				entry.targetFolder.write(flow.name+'.txt',flow.info)
 				refreshTargetProject(entry)
 			}

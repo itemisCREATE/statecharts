@@ -671,7 +671,7 @@ public class GeneratorProjectTemplate {
         _builder.append("org.eclipse.xtext.xbase.lib;bundle-version=\"2.0.1\",");
         _builder.newLineIfNotEmpty();
         _builder.append(" ", "");
-        _builder.append("org.eclipse.xtext.xtend2.lib;bundle-version=\"2.0.1\",");
+        _builder.append("org.eclipse.xtend2.lib;bundle-version=\"2.0.1\",");
         _builder.newLineIfNotEmpty();
       }
     }
@@ -859,6 +859,8 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append("import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator;");
     _builder.newLine();
+    _builder.append("import org.eclipse.xtext.generator.IFileSystemAccess;");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("public class ");
     String _simpleName = this.simpleName(data.generatorClass);
@@ -870,10 +872,7 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public void generate(ExecutionFlow flow, GeneratorEntry entry) {");
+    _builder.append("public void generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("StringBuilder builder = new StringBuilder();");
@@ -983,6 +982,8 @@ public class GeneratorProjectTemplate {
     _builder.newLine();
     _builder.append("import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator");
     _builder.newLine();
+    _builder.append("import org.eclipse.xtext.generator.IFileSystemAccess");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("class ");
     String _simpleName = this.simpleName(data.generatorClass);
@@ -991,7 +992,7 @@ public class GeneratorProjectTemplate {
     _builder.newLineIfNotEmpty();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("override generate(ExecutionFlow flow, GeneratorEntry entry) {");
+    _builder.append("override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess access) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("entry.targetFolder.write(flow.name+\'.txt\',flow.info)");
