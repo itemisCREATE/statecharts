@@ -49,7 +49,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION = "A choice must have at least one outgoing transition.";
 
 	@Check(CheckType.FAST)
-	public void vertextNotReachable(Vertex vertex) {
+	public void vertexNotReachable(Vertex vertex) {
 		if (vertex instanceof State) {
 			TreeIterator<EObject> eAllContents = vertex.eAllContents();
 			while (eAllContents.hasNext()) {
