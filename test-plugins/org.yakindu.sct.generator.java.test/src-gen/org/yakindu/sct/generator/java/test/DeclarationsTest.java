@@ -14,19 +14,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.assignmentasexpression.AssignmentAsExpressionStatemachine;
-import org.yakindu.scr.assignmentasexpression.AssignmentAsExpressionStatemachine.State;
+import org.yakindu.scr.declarations.DeclarationsStatemachine;
+import org.yakindu.scr.declarations.DeclarationsStatemachine.State;
 /**
- *  Unit TestCase for AssignmentAsExpression
+ *  Unit TestCase for Declarations
  */
 @SuppressWarnings("all")
-public class AssignmentAsExpressionTest {
+public class DeclarationsTest {
 
-	private AssignmentAsExpressionStatemachine statemachine;
+	private DeclarationsStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new AssignmentAsExpressionStatemachine();
+		statemachine = new DeclarationsStatemachine();
 		statemachine.init();
 	}
 
@@ -36,10 +36,7 @@ public class AssignmentAsExpressionTest {
 	}
 
 	@Test
-	public void testsimpleAssignment() {
+	public void testdeclarationsTest() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.getB() == 5);
-		assertTrue(statemachine.getA() == 9);
 	}
 }
