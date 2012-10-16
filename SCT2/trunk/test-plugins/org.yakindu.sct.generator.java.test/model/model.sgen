@@ -350,5 +350,15 @@ GeneratorModel for yakindu::java {
 		}
 	}
 	
-	
+	statechart Declarations {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
 }

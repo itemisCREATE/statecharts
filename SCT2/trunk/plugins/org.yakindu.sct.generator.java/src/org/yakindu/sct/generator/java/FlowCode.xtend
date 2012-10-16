@@ -66,43 +66,36 @@ class FlowCode {
 		'''
 	}
 	
-	def dispatch code(Call it) {
-		'''
+	def dispatch code(Call it) '''
 		«step.functionName()»();
-		'''
-	}
+	'''
 	
 	def dispatch code(Sequence it) {
 		steps.map[code].join('\n')
 	}
 	
-	def dispatch code(Check it) {
-		'''
+	def dispatch code(Check it) '''
 		«IF this != null»
 			«condition.code()»
 		«ELSE»
 			true
  		«ENDIF»
-		'''
-	}
+	'''
 	
-	def dispatch code(CheckRef it) {
-		'''
+	def dispatch code(CheckRef it) '''
 		«IF check != null»
 			«comment»
 			«check.functionName()»()
 		«ELSE»
 			true
 		«ENDIF»
-		'''
-	}
+	'''
 	
 	def dispatch code(Reaction it) {
 		effect.code
 	}
 	
-	def dispatch code(If it) {
-		'''
+	def dispatch code(If it) '''
 		«stepComment»
 		if («check.code») { 
 			«thenStep.code»
@@ -112,42 +105,33 @@ class FlowCode {
 			«elseStep.code»
 		}
 		«ENDIF»
-		'''
-	}
+	'''
 	
-	def dispatch code(EnterState it) {
-		'''
+	def dispatch code(EnterState it) '''
 		«stepComment»
 		nextStateIndex = «state.stateVector.offset»;
 		stateVector[«state.stateVector.offset»] = State.«state.stateName.asEscapedIdentifier»;
-		'''
-	}
+	'''
 	
-	def dispatch code(ExitState it) {
-		'''
+	def dispatch code(ExitState it) '''
 		«stepComment»
 		nextStateIndex = «state.stateVector.offset»;
 		stateVector[«state.stateVector.offset»] = State.«getNullStateName()»;
-		'''
-	}
+	'''
 	
-	def dispatch code(HistoryEntry it) {
-		'''
+	def dispatch code(HistoryEntry it) '''
 		«stepComment»
 		if (historyVector[«region.historyVector.offset»] != State.$NullState$) {
 			«historyStep.code»
 		} else {
 			«initialStep.code»
 		}
-		'''
-	}
+	'''
 	
-	def dispatch code(SaveHistory it) {
-		'''
+	def dispatch code(SaveHistory it) '''
 		«stepComment»
 		historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
-		'''
-	}
+	'''
 	
 	def String getInitialValueAssignment(VariableDefinition it) {
 		if (initialValue != null) {

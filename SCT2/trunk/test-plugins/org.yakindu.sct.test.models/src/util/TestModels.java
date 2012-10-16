@@ -37,6 +37,7 @@ public class TestModels {
 	public static final String BIT_EXPRESSIONS = "BitExpressions.sct";
 	public static final String BOOLEAN_EXPRESSIONS = "BooleanExpressions.sct";
 	public static final String C_KEYWORDS_M = "CKeywords.sct";
+	public static final String DECLARATIONS = "Declarations.sct";
 	public static final String CHOICE = "Choice.sct";
 	public static final String DEEP_HISTORY = "DeepHistory.sct";
 	public static final String FEATURE_CALLS = "FeatureCalls.sct";
@@ -112,6 +113,16 @@ public class TestModels {
 	 */
 	public ExecutionFlow createCKeywordModel() throws IOException {
 		return loadExecutionFlowFromResource(C_KEYWORDS_M);
+	}
+	
+	/**
+	 * <img src="../../images/Declarations.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createDeclarationsModel() throws IOException {
+		return loadExecutionFlowFromResource(DECLARATIONS);
 	}
 
 	/**

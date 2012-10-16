@@ -160,6 +160,11 @@ public class ExitOnSelfTransitionStatemachine
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
 		if (sCIDefault.e) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			sCIDefault.exitCount += 1;
+
 			sCIDefault.entryCount += 1;
 
 			nextStateIndex = 0;
