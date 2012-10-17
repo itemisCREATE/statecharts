@@ -10,13 +10,10 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "FeatureCalls.h"
+#include "Declarations.h"
 
-TEST(StatemachineTest, FeatureCalls) {
-	FeatureCalls handle;
-	featureCalls_init(&handle);
-	featureCalls_enter(&handle);
-	EXPECT_TRUE(featureCalls_isActive(&handle, FeatureCalls_main_region_A));
-	featureCalls_runCycle(&handle);
-	EXPECT_TRUE(featureCalls_isActive(&handle, FeatureCalls_main_region_A));
+TEST(StatemachineTest, declarationsTest) {
+	Declarations handle;
+	declarations_init(&handle);
+	declarations_enter(&handle);
 }
