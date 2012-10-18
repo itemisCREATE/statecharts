@@ -41,14 +41,19 @@ import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
@@ -59,6 +64,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 
+import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -86,6 +92,12 @@ public abstract class AbstractSCTResource extends GMFResource {
 	private LinkingHelper linkingHelper;
 	@Inject
 	private IConcreteSyntaxValidator syntaxValidator;
+	@Inject
+	private IGlobalScopeProvider scopeProvider;
+	@Inject
+	private IQualifiedNameConverter nameConverter;
+	@Inject
+	private IQualifiedNameProvider nameProvider;
 
 	protected boolean isParsing = false;
 
@@ -133,7 +145,15 @@ public abstract class AbstractSCTResource extends GMFResource {
 			Adapter serializeAdapter = EcoreUtil.getExistingAdapter(eObject,
 					SerializeAdapter.class);
 			if (serializeAdapter == null) {
-				//eObject.eAdapters().add(new SerializeAdapter());
+				// eObject.eAdapters().add(new SerializeAdapter());
+			}
+		}
+		if (eObject instanceof State) {
+			linkSubStatechart((State) eObject);
+			Adapter linkSubmachineAdapter = EcoreUtil.getExistingAdapter(
+					eObject, LinkSubmachineAdapter.class);
+			if (linkSubmachineAdapter == null) {
+				eObject.eAdapters().add(new LinkSubmachineAdapter());
 			}
 		}
 	}
@@ -151,6 +171,12 @@ public abstract class AbstractSCTResource extends GMFResource {
 			if (serializeAdapter != null) {
 				eObject.eAdapters().remove(serializeAdapter);
 			}
+			if (eObject instanceof State) {
+				Adapter linkSubmachineAdapter = EcoreUtil.getExistingAdapter(
+						eObject, LinkSubmachineAdapter.class);
+				eObject.eAdapters().remove(linkSubmachineAdapter);
+			}
+
 		}
 		super.detached(eObject);
 	}
@@ -430,6 +456,40 @@ public abstract class AbstractSCTResource extends GMFResource {
 		@Override
 		public boolean isAdapterForType(Object type) {
 			return ParseAdapter.class == type;
+		}
+	}
+
+	private void linkSubStatechart(State currentState) {
+		Statechart substatechart = getStatechart(currentState,
+				currentState.getSubstatechartId());
+		currentState.setSubstatechart(substatechart);
+	}
+
+	private Statechart getStatechart(EObject context, String substatechartId) {
+		if (substatechartId == null || substatechartId.length() == 0) {
+			return null;
+		}
+		IScope scope = scopeProvider.getScope(context.eResource(),
+				SGraphPackage.Literals.STATE__SUBSTATECHART,
+				Predicates.<IEObjectDescription> alwaysTrue());
+		IEObjectDescription statechartDescription = scope
+				.getSingleElement(nameConverter
+						.toQualifiedName(substatechartId));
+		if (statechartDescription != null) {
+			return (Statechart) statechartDescription.getEObjectOrProxy();
+		}
+		return null;
+	}
+
+	protected class LinkSubmachineAdapter extends AdapterImpl {
+		@Override
+		public void notifyChanged(Notification msg) {
+			if (msg.getFeature() == SGraphPackage.eINSTANCE
+					.getState_SubstatechartId()) {
+				linkSubStatechart((State) msg.getNotifier());
+
+			}
+			super.notifyChanged(msg);
 		}
 	}
 

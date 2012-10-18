@@ -26,6 +26,7 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 
@@ -79,6 +80,27 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 				&& vertex instanceof Entry
 				&& ((Entry) vertex).getKind().equals(EntryKind.INITIAL)) {
 			warning(ISSUE_INITIAL_ENTRY_WITH_IN_TRANS, vertex, null, -1);
+		}
+	}
+
+	public static final String SUBMACHINE_ERROR = "Referenced Substatemachine '%s'does not exist!";
+
+	@Check(CheckType.FAST)
+	public void checkUnresolvableSubmachine(
+			org.yakindu.sct.model.sgraph.State state) {
+		if (state.getSubstatechartId() == null)
+			return;
+		Statechart substatechart = state.getSubstatechart();
+		if (substatechart == null) {
+			error(String.format(SUBMACHINE_ERROR, state.getSubstatechartId()),
+					null);
+		} else if (substatechart.eIsProxy()) {
+			substatechart = (Statechart) EcoreUtil
+					.resolve(substatechart, state);
+			if (substatechart.eIsProxy()) {
+				error(String.format(SUBMACHINE_ERROR,
+						state.getSubstatechartId()), null);
+			}
 		}
 	}
 
