@@ -48,6 +48,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS = "Entries must not have more than one outgoing transition";
 	public static final String ISSUE_ENTRY_WITH_TRIGGER = "Outgoing Transitions from Entries can not have a Trigger or Guard.";
 	public static final String ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION = "A choice must have at least one outgoing transition.";
+	public static final String ISSUE_SUBMACHINE_UNRESOLVABLE = "Referenced Substatemachine '%s'does not exist!";
 
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(Vertex vertex) {
@@ -83,8 +84,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	public static final String SUBMACHINE_ERROR = "Referenced Substatemachine '%s'does not exist!";
-
 	@Check(CheckType.FAST)
 	public void checkUnresolvableSubmachine(
 			org.yakindu.sct.model.sgraph.State state) {
@@ -92,13 +91,13 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			return;
 		Statechart substatechart = state.getSubstatechart();
 		if (substatechart == null) {
-			error(String.format(SUBMACHINE_ERROR, state.getSubstatechartId()),
-					null);
+			error(String.format(ISSUE_SUBMACHINE_UNRESOLVABLE,
+					state.getSubstatechartId()), null);
 		} else if (substatechart.eIsProxy()) {
 			substatechart = (Statechart) EcoreUtil
 					.resolve(substatechart, state);
 			if (substatechart.eIsProxy()) {
-				error(String.format(SUBMACHINE_ERROR,
+				error(String.format(ISSUE_SUBMACHINE_UNRESOLVABLE,
 						state.getSubstatechartId()), null);
 			}
 		}
