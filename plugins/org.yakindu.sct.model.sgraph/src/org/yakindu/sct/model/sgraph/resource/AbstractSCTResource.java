@@ -104,6 +104,8 @@ public abstract class AbstractSCTResource extends GMFResource {
 	protected boolean isLinking = false;
 
 	protected boolean isSerializing = false;
+	
+	private boolean serializerEnabled = false;
 
 	protected Multimap<SpecificationElement, Diagnostic> syntaxDiagnostics;
 
@@ -141,11 +143,11 @@ public abstract class AbstractSCTResource extends GMFResource {
 				eObject.eAdapters().add(new ParseAdapter());
 			}
 		}
-		if (NodeModelUtils.getNode(eObject) != null) {
+		if (eObject instanceof SpecificationElement) {
 			Adapter serializeAdapter = EcoreUtil.getExistingAdapter(eObject,
 					SerializeAdapter.class);
 			if (serializeAdapter == null) {
-				// eObject.eAdapters().add(new SerializeAdapter());
+				eObject.eAdapters().add(new SerializeAdapter());
 			}
 		}
 		if (eObject instanceof State) {
@@ -403,28 +405,32 @@ public abstract class AbstractSCTResource extends GMFResource {
 	public Multimap<SpecificationElement, Diagnostic> getLinkingDiagnostics() {
 		return linkingDiagnostics;
 	}
+	
+	public void enableSerializer() {
+		
+	}
 
 	protected final class SerializeAdapter extends EContentAdapter {
 
 		@Override
 		public void notifyChanged(Notification msg) {
-			super.notifyChanged(msg);
-			if (isLoading() || isParsing || isLinking) {
-				return;
-			}
-			if (msg.getEventType() == Notification.REMOVING_ADAPTER
-					|| msg.getEventType() == Notification.RESOLVE
-					|| msg.getEventType() == Notification.REMOVE
-					|| msg.getEventType() == Notification.REMOVE_MANY) {
-				return;
-			}
-			Object notifier = msg.getNotifier();
-			if (notifier instanceof EObject) {
-				EObject eObject = (EObject) notifier;
-				SpecificationElement container = EcoreUtil2.getContainerOfType(
-						eObject, SpecificationElement.class);
-				if (container != null) {
-					serializeSpecificationElement(container);
+			if (isSerializerEnabled()) {
+				super.notifyChanged(msg);
+				if (isLoading() || isParsing || isLinking || isSerializing) {
+					return;
+				}
+				if (msg.getEventType() == Notification.REMOVING_ADAPTER
+						|| msg.getEventType() == Notification.RESOLVE) {
+					return;
+				}
+				Object notifier = msg.getNotifier();
+				if (notifier instanceof EObject) {
+					EObject eObject = (EObject) notifier;
+					SpecificationElement container = EcoreUtil2.getContainerOfType(
+							eObject, SpecificationElement.class);
+					if (container != null) {
+						serializeSpecificationElement(container);
+					}
 				}
 			}
 		}
@@ -479,6 +485,14 @@ public abstract class AbstractSCTResource extends GMFResource {
 			return (Statechart) statechartDescription.getEObjectOrProxy();
 		}
 		return null;
+	}
+
+	public boolean isSerializerEnabled() {
+		return serializerEnabled;
+	}
+
+	public void setSerializerEnabled(boolean serializerEnabled) {
+		this.serializerEnabled = serializerEnabled;
 	}
 
 	protected class LinkSubmachineAdapter extends AdapterImpl {
