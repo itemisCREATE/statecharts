@@ -24,6 +24,7 @@ import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_NODE_NOT_REACHABLE;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_NAME;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SUBMACHINE_UNRESOLVABLE;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -60,6 +61,7 @@ import com.google.inject.Inject;
  * Test of all validation rules that test very basic properties of statecharts.
  * 
  * @author terfloth
+ * @author muelder - additions
  */
 @RunWith(XtextRunner.class)
 @InjectWith(SGraphTestInjectorProvider.class)
@@ -358,11 +360,26 @@ public class SGraphJavaValidationTest {
 		assertError(diagnostics, ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
 	}
 
+	@Test
+	public void checkUnresolvableSubmachine() {
+		prepareStateTest();
+		Entry entry = factory.createEntry();
+		createTransition(entry, state);
+		state.setSubstatechartId("doesnotexist");
+		assertFalse(validator.validate(state, diagnostics,
+				new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics,
+				String.format(ISSUE_SUBMACHINE_UNRESOLVABLE, "doesnotexist"));
+
+	}
+
 	/**
 	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
 	 * method in this class with the same name
 	 */
-	//TODO: Create abstract test class for SGraphJavaValidatorTest and STextJAvaValidatorTest
+	// TODO: Create abstract test class for SGraphJavaValidatorTest and
+	// STextJAvaValidatorTest
 	@Test
 	public void testAllChecksHaveTests() throws Exception {
 		Iterable<Method> methods = Lists.newArrayList(SGraphJavaValidator.class
