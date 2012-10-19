@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'TrafficLightWidget.h'
 **
-** Created: Fri Oct 19 14:59:25 2012
+** Created: Fri Oct 19 15:33:21 2012
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
