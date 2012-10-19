@@ -405,10 +405,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 	public Multimap<SpecificationElement, Diagnostic> getLinkingDiagnostics() {
 		return linkingDiagnostics;
 	}
-	
-	public void enableSerializer() {
-		
-	}
 
 	protected final class SerializeAdapter extends EContentAdapter {
 
