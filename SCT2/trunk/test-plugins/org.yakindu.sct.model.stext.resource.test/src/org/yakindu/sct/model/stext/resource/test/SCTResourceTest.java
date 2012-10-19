@@ -77,8 +77,6 @@ public class SCTResourceTest {
 		res = new StextResource(URI.createURI("test.test"));
 		res.eAdapters().add(
 				new ContextElementAdapter(new IContextElementProvider() {
-
-					@Override
 					public EObject getContextObject() {
 						return res.getContents().get(0);
 					}
