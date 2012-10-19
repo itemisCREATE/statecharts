@@ -11,6 +11,8 @@
 package org.yakindu.sct.generator.genmodel.test.util;
 
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.impl.Linker;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.yakindu.sct.generator.genmodel.SGenRuntimeModule;
 import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
@@ -29,5 +31,10 @@ public class SGenTestRuntimeModule extends SGenRuntimeModule {
 	
 	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
 		return SGenUserHelpDocumentationProvider.class;
+	}
+	
+	@Override
+	public Class<? extends ILinker> bindILinker() {
+		return Linker.class;
 	}
 }
