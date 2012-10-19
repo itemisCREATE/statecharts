@@ -366,7 +366,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 	}
 
 	protected void serializeSpecificationElement(SpecificationElement element) {
-		long t = System.currentTimeMillis();
 		isSerializing = true;
 		if (getSyntaxDiagnostics().get(element).size() > 0
 				|| getLinkingDiagnostics().get(element).size() > 0) {
@@ -386,8 +385,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 			// Leave the old specification
 		} finally {
 			isSerializing = false;
-			System.out.println("Serializing took "
-					+ (System.currentTimeMillis() - t));
 		}
 	}
 
