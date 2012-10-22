@@ -31,6 +31,10 @@ public interface IExecutionFacade {
 	/**
 	 * Called after execution, used for clean up
 	 */
+	public void exit();
+	/**
+	 * Called after execution, used for clean up
+	 */
 	public void tearDown();
 
 	/**

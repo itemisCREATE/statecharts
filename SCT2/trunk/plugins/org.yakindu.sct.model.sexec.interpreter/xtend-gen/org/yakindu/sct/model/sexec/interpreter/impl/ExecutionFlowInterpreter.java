@@ -328,6 +328,14 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     }
   }
   
+  public void exit() {
+    Sequence _exitSequence = this.flow.getExitSequence();
+    EList<Step> _steps = _exitSequence.getSteps();
+    for (final Step step : _steps) {
+      this.execute(step);
+    }
+  }
+  
   protected Object _execute(final Step step) {
     String _plus = ("Missing dispatch function for " + step);
     String _println = InputOutput.<String>println(_plus);
