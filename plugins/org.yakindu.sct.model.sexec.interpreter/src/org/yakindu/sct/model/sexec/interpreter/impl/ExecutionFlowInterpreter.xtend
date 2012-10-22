@@ -207,6 +207,12 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		} 
 	}
 	
+	override exit(){
+		for(step : flow.exitSequence.steps){
+			step.execute
+		} 
+	}
+	
 	def dispatch execute(Step step){
 		println("Missing dispatch function for " + step)
 	}
