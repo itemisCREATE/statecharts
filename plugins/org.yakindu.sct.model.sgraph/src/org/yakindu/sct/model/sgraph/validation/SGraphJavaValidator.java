@@ -29,6 +29,7 @@ import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
 /**
  * 
@@ -89,6 +90,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			org.yakindu.sct.model.sgraph.State state) {
 		if (state.getSubstatechartId() == null)
 			return;
+		AbstractSCTResource eResource = (AbstractSCTResource) state.eResource();
+		eResource.linkSubStatechart(state);
 		Statechart substatechart = state.getSubstatechart();
 		if (substatechart == null) {
 			error(String.format(ISSUE_SUBMACHINE_UNRESOLVABLE,

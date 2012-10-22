@@ -458,7 +458,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 		}
 	}
 
-	private void linkSubStatechart(State currentState) {
+	public void linkSubStatechart(State currentState) {
 		Statechart substatechart = getStatechart(currentState,
 				currentState.getSubstatechartId());
 		currentState.setSubstatechart(substatechart);
