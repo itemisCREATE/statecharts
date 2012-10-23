@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sexec.interpreter;
 
+import java.util.List;
+
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
@@ -30,4 +32,5 @@ public interface IStatementInterpreter {
 	public Object evaluateStatement(Statement statement,
 			IExecutionContext context) throws ExecutionException;
 
+	public void setOperationCallbacks(List<Object> callbacks);
 }

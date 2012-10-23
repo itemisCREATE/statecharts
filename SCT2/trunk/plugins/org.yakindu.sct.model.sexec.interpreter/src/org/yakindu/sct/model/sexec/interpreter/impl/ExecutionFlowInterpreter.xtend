@@ -81,8 +81,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		for(scope : flow.scopes){
 			scope.declareContents
 		} 
-		executionContext.initStateConfigurationVector(flow.stateVector.size)
 		
+		executionContext.initStateConfigurationVector(flow.stateVector.size)
+		interpreter.setOperationCallbacks(super.callbacks)
 		brc = SexecFactory::eINSTANCE.createTraceBeginRunCycle
 		erc = SexecFactory::eINSTANCE.createTraceEndRunCycle
 		

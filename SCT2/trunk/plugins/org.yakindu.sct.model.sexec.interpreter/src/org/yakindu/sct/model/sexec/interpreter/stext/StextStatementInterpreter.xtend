@@ -44,6 +44,7 @@ import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext
 import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 /**
  * 
@@ -123,6 +124,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	} 
 	
 	def dispatch execute(ElementReferenceExpression expression){
+		if(expression.operationCall && super.operationCallback.size() > 0){
+			var parameter = expression.args.map(it| execute)
+			return super.executeOperationCallback(expression.reference as OperationDefinition, parameter.toArray)
+		}
 		var variableRef = context.getVariable(expression.reference.fullyQualifiedName.toString)
 		if(variableRef != null){
 			return variableRef.getValue

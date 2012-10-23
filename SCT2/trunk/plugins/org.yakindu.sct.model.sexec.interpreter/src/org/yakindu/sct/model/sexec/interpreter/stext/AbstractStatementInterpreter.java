@@ -11,9 +11,12 @@
 package org.yakindu.sct.model.sexec.interpreter.stext;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 
 /**
  * 
@@ -24,6 +27,8 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 		implements IStatementInterpreter {
 
 	protected static Map<String, String> assignFunctionMap = new HashMap<String, String>();
+
+	protected List<Object> operationCallback;
 
 	static {
 		assignFunctionMap.put("multAssign", "*");
@@ -46,6 +51,18 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 
 	public Function lookup(String name, Object... params) {
 		return super.lookup(getClass(), name, params);
+	}
+
+	public void setOperationCallbacks(List<Object> callbacks) {
+		this.operationCallback = callbacks;
+	}
+
+	public Object executeOperationCallback(OperationDefinition definition,
+			Object ... parameter) {
+		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(
+				definition.getName(), definition.getParameters().size(),
+				definition.getParameters().size(), operationCallback);
+		return dispatcher.invoke(parameter);
 	}
 
 }

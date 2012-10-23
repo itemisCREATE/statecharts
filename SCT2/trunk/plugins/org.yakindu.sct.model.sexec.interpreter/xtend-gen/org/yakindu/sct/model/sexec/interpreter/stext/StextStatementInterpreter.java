@@ -5,9 +5,12 @@ import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.yakindu.sct.model.sexec.interpreter.stext.AbstractStatementInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.stext.CoreFunction;
 import org.yakindu.sct.model.sgraph.RegularState;
@@ -40,6 +43,7 @@ import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ParenthesizedExpression;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.RealLiteral;
@@ -199,16 +203,38 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
   }
   
   protected Object _execute(final ElementReferenceExpression expression) {
-    EObject _reference = expression.getReference();
-    QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_reference);
+    boolean _and = false;
+    boolean _isOperationCall = expression.isOperationCall();
+    if (!_isOperationCall) {
+      _and = false;
+    } else {
+      int _size = super.operationCallback.size();
+      boolean _greaterThan = (_size > 0);
+      _and = (_isOperationCall && _greaterThan);
+    }
+    if (_and) {
+      EList<Expression> _args = expression.getArgs();
+      final Function1<Expression,Object> _function = new Function1<Expression,Object>() {
+          public Object apply(final Expression it) {
+            Object _execute = StextStatementInterpreter.this.execute(it);
+            return _execute;
+          }
+        };
+      List<Object> parameter = ListExtensions.<Expression, Object>map(_args, _function);
+      EObject _reference = expression.getReference();
+      Object[] _array = parameter.toArray();
+      return super.executeOperationCallback(((OperationDefinition) _reference), _array);
+    }
+    EObject _reference_1 = expression.getReference();
+    QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_reference_1);
     String _string = _fullyQualifiedName.toString();
     ExecutionVariable variableRef = this.context.getVariable(_string);
     boolean _notEquals = (!Objects.equal(variableRef, null));
     if (_notEquals) {
       return variableRef.getValue();
     }
-    EObject _reference_1 = expression.getReference();
-    QualifiedName _fullyQualifiedName_1 = this.provider.getFullyQualifiedName(_reference_1);
+    EObject _reference_2 = expression.getReference();
+    QualifiedName _fullyQualifiedName_1 = this.provider.getFullyQualifiedName(_reference_2);
     String _string_1 = _fullyQualifiedName_1.toString();
     return Boolean.valueOf(this.context.isEventRaised(_string_1));
   }
