@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -52,28 +51,33 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SUBMACHINE_UNRESOLVABLE = "Referenced Substatemachine '%s'does not exist!";
 
 	@Check(CheckType.FAST)
-	public void vertexNotReachable(Vertex vertex) {
-		if (vertex instanceof State) {
-			TreeIterator<EObject> eAllContents = vertex.eAllContents();
-			while (eAllContents.hasNext()) {
-				EObject next = eAllContents.next();
-				if (next instanceof State) {
-					EList<Transition> incomingTransitions = ((org.yakindu.sct.model.sgraph.State) next) // State
-							.getIncomingTransitions();
-					for (Transition transition : incomingTransitions) {
-						if (EcoreUtil
-								.isAncestor(vertex, transition.getSource())) {
-							error(ISSUE_NODE_NOT_REACHABLE, vertex, null, -1);
+	public void vertextNotReachable(Vertex vertex) {
+		if (!(vertex instanceof Entry)) {
+			int incomingTransitions = 0;
+			incomingTransitions += vertex.getIncomingTransitions().size();
+
+			// in context of a state it is sufficient if a sub state is targeted by
+			// an external transition
+			if (vertex instanceof org.yakindu.sct.model.sgraph.State) {
+				TreeIterator<EObject> eAllContents = vertex.eAllContents();
+				while (eAllContents.hasNext()) {
+					EObject next = eAllContents.next();
+					if (next instanceof org.yakindu.sct.model.sgraph.State) {
+						for (Transition transition : ((org.yakindu.sct.model.sgraph.State) next)
+								.getIncomingTransitions()) {
+							if (!EcoreUtil.isAncestor(vertex,
+									transition.getSource())) {
+								incomingTransitions++;
+							}
 						}
 					}
 				}
 			}
 
-		} else if (vertex.getIncomingTransitions().size() == 0
-				&& !(vertex instanceof Entry)) {
-			error(ISSUE_NODE_NOT_REACHABLE, vertex, null, -1);
+			if (incomingTransitions == 0) {
+				error(ISSUE_NODE_NOT_REACHABLE, vertex, null, -1);
+			}
 		}
-
 	}
 
 	@Check(CheckType.FAST)
