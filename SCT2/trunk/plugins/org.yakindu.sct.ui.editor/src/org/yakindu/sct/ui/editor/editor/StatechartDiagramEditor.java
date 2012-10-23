@@ -190,11 +190,13 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		try {
 			// Touch the file for revalidation, when the user did not save
 			// the changes
-			editorInput.getFile().touch(new NullProgressMonitor());
+			if (editorInput.getFile() != null && editorInput.getFile().exists()) {
+				editorInput.getFile().touch(new NullProgressMonitor());
+			}
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
 		super.dispose();
 	}
-	
+
 }
