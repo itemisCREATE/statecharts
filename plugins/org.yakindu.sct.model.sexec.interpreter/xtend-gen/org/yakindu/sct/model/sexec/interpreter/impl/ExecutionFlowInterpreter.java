@@ -92,6 +92,8 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     StateVector _stateVector = flow.getStateVector();
     int _size = _stateVector.getSize();
     this.executionContext.initStateConfigurationVector(_size);
+    List<Object> _callbacks = super.getCallbacks();
+    this.interpreter.setOperationCallbacks(_callbacks);
     TraceBeginRunCycle _createTraceBeginRunCycle = SexecFactory.eINSTANCE.createTraceBeginRunCycle();
     this.brc = _createTraceBeginRunCycle;
     TraceEndRunCycle _createTraceEndRunCycle = SexecFactory.eINSTANCE.createTraceEndRunCycle();
