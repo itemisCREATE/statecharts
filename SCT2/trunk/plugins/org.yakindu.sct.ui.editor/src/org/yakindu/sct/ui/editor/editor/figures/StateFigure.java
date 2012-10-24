@@ -80,10 +80,17 @@ public class StateFigure extends RoundedRectangle {
 	public Figure getFigureCompartmentPane() {
 		return figureCompartmentPane;
 	}
-	
+
+	@Override
+	public Dimension getPreferredSize(int wHint, int hHint) {
+		Dimension result = super.getPreferredSize(wHint, hHint);
+		return new Dimension(result.width + BLUR_SHADOW_WIDTH, result.height
+				+ BLUR_SHADOW_WIDTH);
+	}
+
 	@Override
 	public void setBounds(Rectangle rect) {
-		//reduce the width and height with the blur shadow
+		// reduce the width and height with the blur shadow
 		super.setBounds(new Rectangle(rect.x, rect.y, rect.width
 				- BLUR_SHADOW_WIDTH, rect.height - BLUR_SHADOW_WIDTH));
 	}
