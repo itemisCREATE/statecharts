@@ -8,50 +8,44 @@ package org.yakindu.sct.model.sgen.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.xtext.common.types.provider.TypesEditPlugin;
 import org.yakindu.base.base.provider.BaseEditPlugin;
-import org.yakindu.sct.model.sgraph.provider.SGraphEditPlugin;
 
 /**
- * This is the central singleton for the Sgen edit plugin.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the central singleton for the Sgen edit plugin. <!-- begin-user-doc
+ * --> <!-- end-user-doc -->
+ * 
  * @generated
  */
 public final class SgenEditPlugin extends EMFPlugin {
 	/**
-	 * Keep track of the singleton.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	public static final SgenEditPlugin INSTANCE = new SgenEditPlugin();
 
 	/**
-	 * Keep track of the singleton.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Keep track of the singleton. <!-- begin-user-doc --> <!-- end-user-doc
+	 * -->
+	 * 
 	 * @generated
 	 */
 	private static Implementation plugin;
 
 	/**
-	 * Create the instance.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Create the instance. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public SgenEditPlugin() {
-		super
-		  (new ResourceLocator [] {
-		     BaseEditPlugin.INSTANCE,
-		   });
+		super(new ResourceLocator[] { BaseEditPlugin.INSTANCE, });
 	}
 
 	/**
-	 * Returns the singleton instance of the Eclipse plugin.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @return the singleton instance.
 	 * @generated
 	 */
@@ -61,9 +55,9 @@ public final class SgenEditPlugin extends EMFPlugin {
 	}
 
 	/**
-	 * Returns the singleton instance of the Eclipse plugin.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * Returns the singleton instance of the Eclipse plugin. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
 	 * @return the singleton instance.
 	 * @generated
 	 */
@@ -72,16 +66,15 @@ public final class SgenEditPlugin extends EMFPlugin {
 	}
 
 	/**
-	 * The actual implementation of the Eclipse <b>Plugin</b>.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The actual implementation of the Eclipse <b>Plugin</b>. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static class Implementation extends EclipsePlugin {
 		/**
-		 * Creates an instance.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
+		 * Creates an instance. <!-- begin-user-doc --> <!-- end-user-doc -->
+		 * 
 		 * @generated
 		 */
 		public Implementation() {
