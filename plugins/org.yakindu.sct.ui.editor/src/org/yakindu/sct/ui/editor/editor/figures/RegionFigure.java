@@ -19,6 +19,7 @@ import org.eclipse.draw2d.GridData;
 import org.eclipse.draw2d.GridLayout;
 import org.eclipse.draw2d.PositionConstants;
 import org.eclipse.draw2d.RectangleFigure;
+import org.eclipse.draw2d.StackLayout;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.swt.graphics.Color;
@@ -49,31 +50,16 @@ public class RegionFigure extends RectangleFigure {
 	}
 
 	private void createContents() {
-
-		RectangleFigure labelFigure = new RectangleFigure();
-		labelFigure.setOutline(false);
-		labelFigure.setFill(false);
-		GridLayout layout = new GridLayout();
-		layout.verticalSpacing = 2;
-		layout.numColumns = 1;
-		layout.makeColumnsEqualWidth = true;
-		labelFigure.setLayoutManager(layout);
-
-		/** name Label **/
 		nameLabel = new WrappingLabel();
 		GridData data = GridDataFactory.fillDefaults().grab(true, false)
 				.getData();
 		nameLabel.setTextPlacement(PositionConstants.WEST);
-		// data.heightHint = mapMode.DPtoLP(10);
 		this.add(nameLabel, data);
 
 		/** Compartment container **/
 		compartmentPane = new RectangleFigure();
 		compartmentPane.setOutline(false);
-		GridLayout compartmentLayout = new GridLayout();
-		compartmentLayout.numColumns = 1;
-		compartmentLayout.makeColumnsEqualWidth = true;
-		compartmentPane.setLayoutManager(compartmentLayout);
+		compartmentPane.setLayoutManager(new StackLayout());
 		compartmentPane.setFill(false);
 		this.add(compartmentPane,
 				GridDataFactory.fillDefaults().grab(true, true).getData());
