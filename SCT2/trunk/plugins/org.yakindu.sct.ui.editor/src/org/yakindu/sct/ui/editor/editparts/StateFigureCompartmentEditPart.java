@@ -11,7 +11,6 @@
 package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ResizableCompartmentEditPart;
@@ -82,8 +81,8 @@ public class StateFigureCompartmentEditPart extends
 		figure.getContentPane().setLayoutManager(
 				new StateFigureCompartmentLayout(getAlignment()));
 		figure.setBorder(null);
-		//Should be initialized with null to display nothing. 
-		figure.setToolTip((String)null);
+		// Should be initialized with null to display nothing.
+		figure.setToolTip((String) null);
 		return figure;
 	}
 
@@ -123,12 +122,6 @@ public class StateFigureCompartmentEditPart extends
 		public StateFigureCompartmentLayout(boolean alignment) {
 			super(alignment);
 			setSpacing(-1); // make lines overlap so it looks like a shared line
-		}
-
-		@Override
-		protected Dimension calculatePreferredSize(IFigure container,
-				int wHint, int hHint) {
-			return new Dimension(1, 1);
 		}
 	}
 }
