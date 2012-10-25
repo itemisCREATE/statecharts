@@ -30,7 +30,6 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
@@ -44,6 +43,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.policies.PreferredSizeEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
@@ -133,7 +133,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 					new NonResizableEditPolicyEx());
 		} else {
 			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-					new ResizableEditPolicyEx());
+					new PreferredSizeEditPolicy());
 		}
 	}
 
@@ -311,7 +311,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			} else {
 
 				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-						new ResizableEditPolicyEx());
+						new PreferredSizeEditPolicy());
 			}
 			refreshVisuals();
 		}

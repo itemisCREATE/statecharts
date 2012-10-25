@@ -15,13 +15,11 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ImageFigure;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.ui.render.util.DiagramRenderUtil;
-import org.eclipse.gmf.runtime.diagram.ui.services.decorator.Decoration;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.swt.graphics.Image;
 import org.yakindu.sct.model.sgraph.State;
 
-import de.itemis.gmf.runtime.commons.decorators.BaseDecorator;
 import de.itemis.gmf.runtime.commons.decorators.InteractiveDecorator;
 
 /**
