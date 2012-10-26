@@ -72,7 +72,8 @@ import com.google.inject.name.Named;
  * @auhor muelder
  * 
  */
-@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class })
+@ComposedChecks(validators = { SGraphJavaValidator.class,
+		SCTResourceValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	public static final String CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION = "A choice should have one outgoing default transition";
@@ -347,7 +348,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		boolean found = false;
 		for (Transition transition : choice.getOutgoingTransitions()) {
 			ReactionTrigger casted = (ReactionTrigger) transition.getTrigger();
-			if (casted.getTriggers().size() > 0) {
+			if (casted == null) {
+				found = true;
+			} else if (casted.getTriggers().size() > 0) {
 				for (EventSpec spec : casted.getTriggers()) {
 					if (spec instanceof DefaultEvent) {
 						found = true;
