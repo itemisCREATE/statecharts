@@ -10,10 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.factories;
 
-import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.gmf.runtime.diagram.ui.view.factories.DiagramViewFactory;
 import org.eclipse.gmf.runtime.notation.MeasurementUnit;
-import org.eclipse.gmf.runtime.notation.View;
 
 /**
  * 
@@ -26,10 +24,4 @@ public class StatechartDiagramViewFactory extends DiagramViewFactory {
 	protected MeasurementUnit getMeasurementUnit() {
 		return MeasurementUnit.PIXEL_LITERAL;
 	}
-	@Override
-	protected void decorateView(View view, IAdaptable semanticAdapter,
-			String diagramKind) {
-		super.decorateView(view, semanticAdapter, diagramKind);
-	}
-	
 }
