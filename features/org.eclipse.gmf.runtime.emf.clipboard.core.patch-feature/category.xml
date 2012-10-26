@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.eclipse.gmf.runtime.emf.clipboard.core.patch_1.0.0.qualifier.jar" id="org.eclipse.gmf.runtime.emf.clipboard.core.patch" version="1.0.0.qualifier" patch="true">
+      <category name="Yakindu SCT 2"/>
+   </feature>
+   <category-def name="Yakindu SCT 2" label="Yakindu SCT 2"/>
+</site>
