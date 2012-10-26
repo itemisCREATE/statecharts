@@ -787,54 +787,114 @@
       </extension>
    
    <!-- context menu contribution -->
-     <extension point="org.eclipse.ui.commands">
-	<command description="Change Flow Kind" id="org.yakindu.sct.ui.editor.Entry" name="Change Entry Kind">
+<extension point="org.eclipse.ui.commands">
+ 	<command
+       defaultHandler="org.yakindu.sct.ui.editor.commands.SetInitialEntryKindCommand"
+       id="org.yakindu.sct.ui.editor.commands.SetInitialEntryKindCommand"
+       name="Set Initial Entry Kind">
 	</command>
+ 	<command
+       defaultHandler="org.yakindu.sct.ui.editor.commands.SetDeepHistoryEntryKindCommand"
+       id="org.yakindu.sct.ui.editor.commands.SetDeepHistoryEntryKindCommand"
+       name="Set Deep History Entry Kind">
+ 	</command>
+ 	<command
+       defaultHandler="org.yakindu.sct.ui.editor.commands.SetShallowHistoryEntryKindCommand"
+       id="org.yakindu.sct.ui.editor.commands.SetShallowHistoryEntryKindCommand"
+       name="Set Shallow History Entry Kind">
+ 	</command>
+ 	<command
+       defaultHandler="org.yakindu.sct.ui.editor.commands.ToggleSubRegionLayoutCommand"
+       id="org.yakindu.sct.ui.editor.commands.ToggleSubRegionLayoutCommand"
+       name="Toggle Subregion Layout">
+ 	</command>
 </extension>
-   <extension point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="false"
-            id="org.yakindu.sct.ui.editor.Entry"
-            objectClass="org.yakindu.sct.ui.editor.editparts.EntryEditPart">
-         <menu 
-            id="Entry" label="Change Entry Kind" path="additions"> 
-            <separator name="group1"/>
-         </menu>
-          <action
-               class="org.yakindu.sct.ui.editor.actions.SetDeepHistoryEntryKindCommand"
-               definitionId="org.yakindu.sct.ui.editor.Entry"
-               id="org.yakindu.sct.ui.editor.DeepHistory"
-               label="DeepHistory"
-               menubarPath="Entry/group1">
-         </action>
-           <action
-               class="org.yakindu.sct.ui.editor.actions.SetShallowHistoryEntryKindCommand"
-               definitionId="org.yakindu.sct.ui.editor.Entry"
-               id="org.yakindu.sct.ui.editor.ShallowHistory"
-               label="ShallowHistory"
-               menubarPath="Entry/group1">
-         </action>
-           <action
-               class="org.yakindu.sct.ui.editor.actions.SetInitialEntryKindCommand"
-               definitionId="org.yakindu.sct.ui.editor.Entry"
-               id="org.yakindu.sct.ui.editor.Initial"
-               label="Initial"
-               menubarPath="Entry/group1">
-         </action>
-      </objectContribution>       
-      <objectContribution
-            adaptable="false"
-            id="org.yakindu.sct.ui.editor.regionLayout"
-            objectClass="org.yakindu.sct.ui.editor.editparts.StateEditPart">
-          <action
-               class="org.yakindu.sct.ui.editor.actions.ToggleSubRegionLayoutCommand"
-               definitionId="org.yakindu.sct.ui.editor.regionLayout"
-               id="org.yakindu.sct.ui.editor.regionLayout.toggle"
-               label="Toggle subregion alignment"
-               menubarPath="additions">
-         </action>    
-      </objectContribution>           
-</extension>
+
+<extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          allPopups="false"
+          locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+       <menu
+             id="changeEntryKindMenu"
+             label="Change Entry Kind">
+          <command
+                commandId="org.yakindu.sct.ui.editor.commands.SetInitialEntryKindCommand"
+                label="Initial"
+                style="push">
+             <visibleWhen
+                   checkEnabled="false">
+                <reference
+                      definitionId="oneEntrySelected">
+                </reference>
+             </visibleWhen>
+          </command>
+          <command
+                commandId="org.yakindu.sct.ui.editor.commands.SetDeepHistoryEntryKindCommand"
+                label="Deep History"
+                style="push">
+             <visibleWhen
+                   checkEnabled="false">
+                <reference
+                      definitionId="oneEntrySelected">
+                </reference>
+             </visibleWhen>
+          </command>
+          <command
+                commandId="org.yakindu.sct.ui.editor.commands.SetShallowHistoryEntryKindCommand"
+                label="Shallow History"
+                style="push">
+             <visibleWhen
+                   checkEnabled="false">
+                <reference
+                      definitionId="oneEntrySelected">
+                </reference>
+             </visibleWhen>
+          </command>
+       </menu>
+       <command
+             commandId="org.yakindu.sct.ui.editor.commands.ToggleSubRegionLayoutCommand"
+             label="Toggle Subregion Alignment"
+             style="push">
+          <visibleWhen
+                checkEnabled="false">
+             <with
+                   variable="selection">
+                <iterate
+                      ifEmpty="false"
+                      operator="and">
+                   <instanceof
+                         value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
+                   </instanceof>
+                </iterate>
+             </with>
+          </visibleWhen>
+       </command>
+    </menuContribution>
+ </extension>
+ 
+ <extension
+       point="org.eclipse.core.expressions.definitions">
+    <definition
+          id="oneEntrySelected">
+       <with
+             variable="selection">
+          <and>
+             <count
+                   value="1">
+             </count>
+             <iterate
+                   ifEmpty="false"
+                   operator="and">
+                <instanceof
+                      value="org.yakindu.sct.ui.editor.editparts.EntryEditPart">
+                </instanceof>
+             </iterate>
+          </and>
+       </with>
+    </definition>
+ </extension>
+
 
 <!-- Patched Clipboard support -->
  <extension
@@ -844,8 +904,6 @@
             nsURI="http://www.eclipse.org/gmf/runtime/1.0.2/notation"
             priority="medium">
       </factory>
-   </extension>
+   </extension>   
    
-   
-
 </plugin>
