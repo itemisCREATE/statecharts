@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>org.eclipse.gmf.runtime.emf.clipboard.core</groupId>
 	<artifactId>org.eclipse.gmf.runtime.emf.clipboard.core</artifactId>
-	<version>1.5.0.v20120514-1615</version>
+	<version>1.5.0-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
 	<build>
 		<plugins>

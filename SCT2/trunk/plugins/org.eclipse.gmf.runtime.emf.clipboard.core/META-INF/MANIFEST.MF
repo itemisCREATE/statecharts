@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Plugin.name
 Bundle-SymbolicName: org.eclipse.gmf.runtime.emf.clipboard.core;singleton:=true
-Bundle-Version: 1.5.0.v20120514-1615
+Bundle-Version: 1.5.0.qualifier
 Bundle-Activator: org.eclipse.gmf.runtime.emf.clipboard.core.internal.ClipboardPlugin$Implementation
 Bundle-Vendor: %Plugin.providerName
 Bundle-Localization: plugin
