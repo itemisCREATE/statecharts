@@ -23,7 +23,7 @@
       <patchScope>
         <scope>
           <requires size='1'>
-            <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.gmf.feature.group' range='0.0.0'/>
+            <required namespace='org.eclipse.equinox.p2.iu' name='org.eclipse.gmf.feature.group' range='[1.6.0,1.6.1)'/>
           </requires>
         </scope>
       </patchScope>
