@@ -223,15 +223,23 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch execute(FeatureCall call){
 		if (call.operationCall) context.call(call.feature.name)
 		else {
-			var variableRef = context.getVariable(call.feature.fullyQualifiedName.toString)
+			var fqn = call.feature.fqn
+			var variableRef = context.getVariable(fqn)
 			if(variableRef != null){
 				return variableRef.getValue
 			}
-			return context.isEventRaised(call.feature.fullyQualifiedName.toString)
+			return context.isEventRaised(fqn)
 		}
 		
 		null
 	}
+
+//    def String create qn : obj.fullyQualifiedName.toString fqn(EObject obj) {
+//    }
+
+    def String fqn(EObject obj) {
+    	obj.fullyQualifiedName.toString
+    } 
 
 	def dispatch execute(ParenthesizedExpression e){
 		e.expression.execute()

@@ -208,7 +208,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		} 
 	}
 	
-	override exit(){
+	override exit() {
 		for(step : flow.exitSequence.steps){
 			step.execute
 		} 
@@ -317,6 +317,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		timingService.unscheduleTimeEvent(timeEvent.timeEvent.name)
 		null
 	}
+	
 	
 	override getExecutionContext() {
 		return executionContext;
