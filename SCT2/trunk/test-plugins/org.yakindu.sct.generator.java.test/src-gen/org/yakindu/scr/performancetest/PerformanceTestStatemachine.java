@@ -1,8 +1,17 @@
 package org.yakindu.scr.performancetest;
+import org.yakindu.scr.TimeEvent;
+import org.yakindu.scr.ITimerService;
 
 public class PerformanceTestStatemachine
 		implements
 			IPerformanceTestStatemachine {
+
+	private final TimeEvent performanceTest_time_event_0 = new TimeEvent(true,
+			0);
+	private final TimeEvent performanceTest_time_event_1 = new TimeEvent(true,
+			1);
+
+	private final boolean[] timeEvents = new boolean[2];
 
 	private final class SCIDefaultImpl implements SCIDefault {
 
@@ -73,13 +82,22 @@ public class PerformanceTestStatemachine
 
 	private int nextStateIndex;
 
+	private ITimerService timerService;
+
+	private long cycleStartTime;
+
 	public PerformanceTestStatemachine() {
 
 		sCIDefault = new SCIDefaultImpl();
 
+		performanceTest_time_event_0.setStatemachine(this);
+		performanceTest_time_event_1.setStatemachine(this);
 	}
 
 	public void init() {
+		if (timerService == null) {
+			throw new IllegalStateException("TimerService not set.");
+		}
 		for (int i = 0; i < 2; i++) {
 			stateVector[i] = State.$NullState$;
 		}
@@ -92,11 +110,21 @@ public class PerformanceTestStatemachine
 	}
 
 	public void enter() {
+		if (timerService == null) {
+			throw new IllegalStateException("TimerService not set.");
+		}
+		cycleStartTime = System.currentTimeMillis();
 		sCIDefault.x = 0;
 
 		sCIDefault.a = 0;
 
 		sCIDefault.c = 0;
+
+		getTimerService().setTimer(performanceTest_time_event_0, 2000,
+				cycleStartTime);
+
+		getTimerService().setTimer(performanceTest_time_event_1, 6200,
+				cycleStartTime);
 
 		entryAction();
 
@@ -209,6 +237,9 @@ public class PerformanceTestStatemachine
 	protected void clearEvents() {
 		sCIDefault.clearEvents();
 
+		for (int i = 0; i < timeEvents.length; i++) {
+			timeEvents[i] = false;
+		}
 	}
 
 	protected void clearOutEvents() {
@@ -253,6 +284,18 @@ public class PerformanceTestStatemachine
 		}
 	}
 
+	public void setTimerService(ITimerService timerService) {
+		this.timerService = timerService;
+	}
+
+	public ITimerService getTimerService() {
+		return timerService;
+	}
+
+	public void onTimeEventRaised(TimeEvent timeEvent) {
+		timeEvents[timeEvent.getIndex()] = true;
+	}
+
 	public SCIDefault getSCIDefault() {
 		return sCIDefault;
 	}
@@ -293,16 +336,42 @@ public class PerformanceTestStatemachine
 		return true;
 	}
 
+	private boolean checkLr1() {
+		return timeEvents[performanceTest_time_event_0.getIndex()];
+	}
+
+	private boolean checkLr2() {
+		return timeEvents[performanceTest_time_event_1.getIndex()];
+	}
+
 	private void effectLr0() {
 		sCIDefault.c += 1;
 	}
 
+	private void effectLr1() {
+		sCIDefault.raiseE2();
+
+		sCIDefault.raiseE1();
+	}
+
+	private void effectLr2() {
+		sCIDefault.raiseE3();
+	}
+
 	/* Entry action for statechart 'PerformanceTest'. */
 	private void entryAction() {
+		getTimerService().setTimer(performanceTest_time_event_0, 2000,
+				cycleStartTime);
+
+		getTimerService().setTimer(performanceTest_time_event_1, 6200,
+				cycleStartTime);
 	}
 
 	/* Exit action for state 'PerformanceTest'. */
 	private void exitAction() {
+		getTimerService().resetTimer(performanceTest_time_event_0);
+
+		getTimerService().resetTimer(performanceTest_time_event_1);
 	}
 
 	/* shallow enterSequence with history in child r1 */
@@ -357,6 +426,14 @@ public class PerformanceTestStatemachine
 	private void reactMr_A() {
 		effectLr0();
 
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
+
 		if (sCIDefault.e1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
@@ -377,6 +454,14 @@ public class PerformanceTestStatemachine
 	/* The reactions of state X. */
 	private void reactMr_B_r1_X() {
 		effectLr0();
+
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
 
 		if (sCIDefault.e2) {
 			nextStateIndex = 0;
@@ -432,6 +517,14 @@ public class PerformanceTestStatemachine
 	private void reactMr_B_r1_Y() {
 		effectLr0();
 
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
+
 		if (sCIDefault.e2) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
@@ -485,6 +578,14 @@ public class PerformanceTestStatemachine
 	/* The reactions of state Z. */
 	private void reactMr_B_r1_Z() {
 		effectLr0();
+
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
 
 		if (sCIDefault.e2) {
 			nextStateIndex = 0;
@@ -540,6 +641,14 @@ public class PerformanceTestStatemachine
 	private void reactMr_B_r1_V() {
 		effectLr0();
 
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
+
 		if (sCIDefault.e2) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
@@ -594,6 +703,14 @@ public class PerformanceTestStatemachine
 	private void reactMr_B_r1_W() {
 		effectLr0();
 
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
+
 		if (sCIDefault.e2) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
@@ -647,6 +764,14 @@ public class PerformanceTestStatemachine
 	/* The reactions of state S. */
 	private void reactMr_B_r1_S() {
 		effectLr0();
+
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
 
 		if (sCIDefault.e2) {
 			nextStateIndex = 0;
@@ -785,6 +910,14 @@ public class PerformanceTestStatemachine
 	private void reactMr_B_r1_T() {
 		effectLr0();
 
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
+
 		if (sCIDefault.e2) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
@@ -838,6 +971,14 @@ public class PerformanceTestStatemachine
 	/* The reactions of state U. */
 	private void reactMr_B_r1_U() {
 		effectLr0();
+
+		if (checkLr1()) {
+			effectLr1();
+		}
+
+		if (checkLr2()) {
+			effectLr2();
+		}
 
 		if (sCIDefault.e2) {
 			nextStateIndex = 0;
@@ -1044,6 +1185,8 @@ public class PerformanceTestStatemachine
 	}
 
 	public void runCycle() {
+
+		cycleStartTime = System.currentTimeMillis();
 
 		clearOutEvents();
 

@@ -1,7 +1,11 @@
 package org.yakindu.scr.performancetest;
 import org.yakindu.scr.IStatemachine;
+import org.yakindu.scr.ITimedStatemachine;
 
-public interface IPerformanceTestStatemachine extends IStatemachine {
+public interface IPerformanceTestStatemachine
+		extends
+			ITimedStatemachine,
+			IStatemachine {
 
 	public interface SCIDefault {
 		public void raiseE1();

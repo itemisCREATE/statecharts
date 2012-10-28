@@ -68,7 +68,9 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
 		entryAction();
 
-		sCIDefault.done = true;
+		if (sCIDefault.guard) {
+			sCIDefault.done = true;
+		}
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
@@ -160,7 +162,9 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.done = true;
+			if (sCIDefault.guard) {
+				sCIDefault.done = true;
+			}
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A;

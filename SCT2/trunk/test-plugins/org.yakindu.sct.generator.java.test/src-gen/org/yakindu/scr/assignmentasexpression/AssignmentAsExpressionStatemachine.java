@@ -31,7 +31,7 @@ public class AssignmentAsExpressionStatemachine
 	private SCIDefaultImpl sCIDefault;
 
 	public enum State {
-		main_region_A, $NullState$
+		main_region_A, main_region_B, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -73,6 +73,11 @@ public class AssignmentAsExpressionStatemachine
 				stateVector[0] = State.$NullState$;
 				break;
 
+			case main_region_B :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
 			default :
 				break;
 		}
@@ -91,6 +96,8 @@ public class AssignmentAsExpressionStatemachine
 		switch (state) {
 			case main_region_A :
 				return stateVector[0] == State.main_region_A;
+			case main_region_B :
+				return stateVector[0] == State.main_region_B;
 			default :
 				return false;
 		}
@@ -125,6 +132,15 @@ public class AssignmentAsExpressionStatemachine
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
+	}
+
+	/* The reactions of state B. */
+	private void reactMain_region_B() {
 	}
 
 	public void runCycle() {
@@ -136,6 +152,9 @@ public class AssignmentAsExpressionStatemachine
 			switch (stateVector[nextStateIndex]) {
 				case main_region_A :
 					reactMain_region_A();
+					break;
+				case main_region_B :
+					reactMain_region_B();
 					break;
 				default :
 					// $NullState$

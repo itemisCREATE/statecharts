@@ -15,6 +15,7 @@
 TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	GuardedEntry handle;
 	guardedEntry_init(&handle);
+	EXPECT_TRUE(guardedEntryIface_get_guard(&handle)== false);
 	guardedEntry_enter(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle)== false);
@@ -22,9 +23,8 @@ TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 	GuardedEntry handle;
 	guardedEntry_init(&handle);
-	guardedEntry_enter(&handle);
 	guardedEntryIface_set_guard(&handle, true);
-	EXPECT_TRUE(false);
+	guardedEntry_enter(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle)== true);
 }

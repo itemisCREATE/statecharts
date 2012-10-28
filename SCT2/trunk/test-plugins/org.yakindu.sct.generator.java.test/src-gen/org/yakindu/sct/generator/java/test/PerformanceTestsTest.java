@@ -16,6 +16,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.yakindu.scr.performancetest.PerformanceTestStatemachine;
 import org.yakindu.scr.performancetest.PerformanceTestStatemachine.State;
+import org.yakindu.scr.TimerService;
 /**
  *  Unit TestCase for PerformanceTest
  */
@@ -27,6 +28,7 @@ public class PerformanceTestsTest {
 	@Before
 	public void setUp() {
 		statemachine = new PerformanceTestStatemachine();
+		statemachine.setTimerService(new TimerService());
 		statemachine.init();
 	}
 

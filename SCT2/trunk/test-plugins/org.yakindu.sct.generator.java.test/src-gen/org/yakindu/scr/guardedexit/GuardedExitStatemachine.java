@@ -78,7 +78,9 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
-				sCIDefault.done = true;
+				if (sCIDefault.guard) {
+					sCIDefault.done = true;
+				}
 				break;
 
 			case main_region_B :
@@ -149,7 +151,9 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.done = true;
+			if (sCIDefault.guard) {
+				sCIDefault.done = true;
+			}
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_B;

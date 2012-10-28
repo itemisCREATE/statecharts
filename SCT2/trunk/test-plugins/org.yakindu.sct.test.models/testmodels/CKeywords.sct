@@ -169,7 +169,7 @@
       <children xsi:type="notation:Shape" xmi:id="_Day4_MqFEeGCh8O3kx-14A" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Day4_cqFEeGCh8O3kx-14A"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Day4_sqFEeGCh8O3kx-14A" x="10" y="10" width="200" height="400"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_Day4_sqFEeGCh8O3kx-14A" x="8" y="-15" width="200" height="400"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_DZ6IIcqFEeGCh8O3kx-14A"/>
     <edges xmi:id="_Day48MqFEeGCh8O3kx-14A" type="Transition" element="_DapvDsqFEeGCh8O3kx-14A" source="_Daf-AsqFEeGCh8O3kx-14A" target="_DapvAcqFEeGCh8O3kx-14A">
