@@ -65,6 +65,7 @@ public class SelfTransitionTest extends ModelSequencerTest {
 		EList<Reaction> _t = _s2.getReactions();
 
 		Reaction tr0 = _t.get(0);
-		assertCall(assertedSequence(tr0.getEffect()), 0, _s2.getEnterSequence());
+		assertCall(assertedSequence(tr0.getEffect()), 0, _s2.getExitSequence());
+		assertCall(assertedSequence(tr0.getEffect()), 1, _s2.getEnterSequence());
 	}
 }

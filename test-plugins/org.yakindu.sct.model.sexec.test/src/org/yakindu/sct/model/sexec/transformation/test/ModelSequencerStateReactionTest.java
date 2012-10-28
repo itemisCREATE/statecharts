@@ -2,24 +2,16 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
+import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createEntry;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createRegion;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createState;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createTransition;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEventDefinition;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createLocalReaction;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createOncycleEventSpec;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionTrigger;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createRegularEventSpec;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createTimeEventSpec;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createTimeTriggeredReaction;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createValue;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableAssignment;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
 
 import org.junit.Test;
 import org.yakindu.base.base.NamedElement;
@@ -31,6 +23,8 @@ import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -261,6 +255,152 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 				.getCheck().getCondition();
 		assertBoolLiteral(false, guard.getValue());
 	}
+
+	/**
+	 * If a entry trigger is combined with a guard condition then the entry action is executed conditionally with this trigger.
+	 */
+	@Test
+	public void testEntryActionWithGuard() {
+	
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
+		Region r = _createRegion("main", sc);
+		Entry e = _createEntry(EntryKind.INITIAL, null, r);
+		State s1 = _createState("s1", r);
+		State s2 = _createState("s2", r);
+		_createTransition(e, s1);
+		_createTransition(s1, s2);
+		LocalReaction entryAction = _createEntryAction(s2);
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
+				_createValue(42), (ReactionEffect) entryAction.getEffect());
+		((ReactionTrigger)entryAction.getTrigger()).setGuardExpression(_createValue(true));
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals(s1.getName(), _s1.getSimpleName());
+		assertEquals(s2.getName(), _s2.getSimpleName());
+
+		Sequence _entrySeq = (Sequence) _s2.getEntryAction();
+		
+		assertClass(If.class, _entrySeq.getSteps().get(0));
+		assertClass(PrimitiveValueExpression.class, ((If)_entrySeq.getSteps().get(0)).getCheck().getCondition());
+		assertAssignment( ((Sequence)((If)_entrySeq.getSteps().get(0)).getThenStep()).getSteps().get(0), "v1", AssignmentOperator.ASSIGN, "42");
+		
+	}
+
+
+	/**
+	 * If a entry trigger is combined with a guard condition then the entry action is executed conditionally with this trigger.
+	 */
+	@Test
+	public void testEntryActionWithoutGuard() {
+	
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
+		Region r = _createRegion("main", sc);
+		Entry e = _createEntry(EntryKind.INITIAL, null, r);
+		State s1 = _createState("s1", r);
+		State s2 = _createState("s2", r);
+		_createTransition(e, s1);
+		_createTransition(s1, s2);
+		LocalReaction entryAction = _createEntryAction(s2);
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
+				_createValue(42), (ReactionEffect) entryAction.getEffect());
+//		((ReactionTrigger)entryAction.getTrigger()).setGuardExpression(_createValue(true));
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals(s1.getName(), _s1.getSimpleName());
+		assertEquals(s2.getName(), _s2.getSimpleName());
+
+		Sequence _entrySeq = (Sequence) _s2.getEntryAction();
+		
+		assertClass(Sequence.class, _entrySeq.getSteps().get(0));
+		assertAssignment( ((Sequence)_entrySeq.getSteps().get(0)).getSteps().get(0), "v1", AssignmentOperator.ASSIGN, "42");
+		
+	}
+
+
+	/**
+	 * If a entry trigger is combined with a guard condition then the entry action is executed conditionally with this trigger.
+	 */
+	@Test
+	public void testExitActionWithGuard() {
+	
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
+		Region r = _createRegion("main", sc);
+		Entry e = _createEntry(EntryKind.INITIAL, null, r);
+		State s1 = _createState("s1", r);
+		State s2 = _createState("s2", r);
+		_createTransition(e, s1);
+		_createTransition(s1, s2);
+		LocalReaction exitAction = _createExitAction(s2);
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
+				_createValue(42), (ReactionEffect) exitAction.getEffect());
+		((ReactionTrigger)exitAction.getTrigger()).setGuardExpression(_createValue(true));
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals(s1.getName(), _s1.getSimpleName());
+		assertEquals(s2.getName(), _s2.getSimpleName());
+
+		Sequence _exitSeq = (Sequence) _s2.getExitAction();
+		
+		assertClass(If.class, _exitSeq.getSteps().get(0));
+		assertClass(PrimitiveValueExpression.class, ((If)_exitSeq.getSteps().get(0)).getCheck().getCondition());
+		assertAssignment( ((Sequence)((If)_exitSeq.getSteps().get(0)).getThenStep()).getSteps().get(0), "v1", AssignmentOperator.ASSIGN, "42");
+		
+	}
+
+
+	/**
+	 * If a entry trigger is combined with a guard condition then the entry action is executed conditionally with this trigger.
+	 */
+	@Test
+	public void testExitActionWithoutGuard() {
+	
+		Statechart sc = _createStatechart("test");
+		Scope scope = _createInterfaceScope("interface", sc);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
+		Region r = _createRegion("main", sc);
+		Entry e = _createEntry(EntryKind.INITIAL, null, r);
+		State s1 = _createState("s1", r);
+		State s2 = _createState("s2", r);
+		_createTransition(e, s1);
+		_createTransition(s1, s2);
+		LocalReaction exitAction = _createExitAction(s2);
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
+				_createValue(42), (ReactionEffect) exitAction.getEffect());
+//		((ReactionTrigger)entryAction.getTrigger()).setGuardExpression(_createValue(true));
+		
+		ExecutionFlow flow = sequencer.transform(sc);
+		
+		ExecutionState _s1 = flow.getStates().get(0);
+		ExecutionState _s2 = flow.getStates().get(1);
+		assertEquals(s1.getName(), _s1.getSimpleName());
+		assertEquals(s2.getName(), _s2.getSimpleName());
+
+		Sequence _exitSeq = (Sequence) _s2.getExitAction();
+		
+		assertClass(Sequence.class, _exitSeq.getSteps().get(0));
+		assertAssignment( ((Sequence)_exitSeq.getSteps().get(0)).getSteps().get(0), "v1", AssignmentOperator.ASSIGN, "42");
+		
+	}
+
 
 	/**
 	 * If a time trigger is defined for a transition then an event must be
