@@ -91,12 +91,29 @@ class BehaviorMapping {
 		}	
 		
 		state.entryReactions
-			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
+//			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.map([lr | lr.mapEntryAction ])
 			.forEach(e | if (e != null) { seq.steps.add(e) })
 		
 		if (seq.steps.size > 0) seq else null
 	}	
 
+	def Step mapEntryAction(LocalReaction it) {
+		if (effect != null) { 
+			var effectSeq = (effect as ReactionEffect).mapEffect
+			var guard =  trigger.buildGuard
+			
+			if ( guard != null ) {			
+				var ifStep = sexec.factory.createIf
+				ifStep.check = sexec.factory.createCheck
+				ifStep.check.condition = guard		
+				ifStep.thenStep = effectSeq
+				ifStep as Step	
+			} else effectSeq
+			
+		} else null
+	}
+	
 	def ExecutionFlow mapChoiceTransitions(Statechart statechart, ExecutionFlow r) {
 		statechart.allChoices.forEach( choice | choice.mapChoiceTransition);		
 		return r
@@ -166,11 +183,30 @@ class BehaviorMapping {
 		}	
 		
 		state.exitReactions
-			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
+//			.map([lr | if (lr.effect != null) { (lr.effect as ReactionEffect).mapEffect } else null])
+			.map([lr | lr.mapExitAction()])
 			.forEach(e | if (e != null) { seq.steps.add(e) })
 		
 		if (seq.steps.size > 0) seq else null
 	}
+
+
+	def Step mapExitAction(LocalReaction it) {
+		if (effect != null) { 
+			var effectSeq = (effect as ReactionEffect).mapEffect
+			var guard =  trigger.buildGuard
+			
+			if ( guard != null ) {			
+				var ifStep = sexec.factory.createIf
+				ifStep.check = sexec.factory.createCheck
+				ifStep.check.condition = guard		
+				ifStep.thenStep = effectSeq
+				ifStep as Step	
+			} else effectSeq
+			
+		} else null
+	}
+	
 
 //	def Statement divide(Expression stmnt, long divisor) {
 //		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
@@ -367,7 +403,7 @@ class BehaviorMapping {
 
 		// define exit behavior of transition
 		
-		// first process the exit behavior of orthogonal states that hase to be performed before source exit
+		// first process the exit behavior of orthogonal states that has to be performed before source exit
 		val topExitState = t.exitStates.last
 		if (topExitState != null) {
 			val exitSequence = topExitState.create.exitSequence
@@ -583,13 +619,18 @@ class BehaviorMapping {
 			}]
 		) else null;
 		
-		val guard = if ( t.guardExpression != null ) EcoreUtil::copy(t.guardExpression) else null;
+		val guard = t.buildGuard
 		
 		if ( triggerCheck != null && guard != null ) stext.and(triggerCheck, guard)
 		else if ( triggerCheck != null )  triggerCheck
 		else guard
 	}
 	
+	def dispatch Expression buildGuard( Trigger t) {null}
+	
+	def dispatch Expression buildGuard( ReactionTrigger t) {
+		if ( t.guardExpression != null ) EcoreUtil::copy(t.guardExpression) else null
+	}
 	
 //	def Statement buildValueExpression(TimeEventSpec tes) {
 //		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 

@@ -115,8 +115,8 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 	protected Point mouseLocation;
 
 	protected Viewer createViewer(Composite parent) {
-		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL
-				| SWT.FULL_SELECTION);
+		viewer = new TreeViewer(parent, SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL);
+//				| SWT.FULL_SELECTION);
 		viewer.getTree().setHeaderVisible(true);
 		viewer.getTree().setLinesVisible(true);
 		TreeViewerColumn column = new TreeViewerColumn(viewer, SWT.DEFAULT);

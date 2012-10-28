@@ -32,6 +32,7 @@ import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionScope;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.ExecutionSynchronization;
+import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.ReactionFired;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
@@ -179,24 +180,15 @@ public class BehaviorMapping {
         }
       }
       List<LocalReaction> _entryReactions = this.sc.entryReactions(state);
-      final Function1<LocalReaction,Sequence> _function = new Function1<LocalReaction,Sequence>() {
-          public Sequence apply(final LocalReaction lr) {
-            Sequence _xifexpression = null;
-            Effect _effect = lr.getEffect();
-            boolean _notEquals = (!Objects.equal(_effect, null));
-            if (_notEquals) {
-              Effect _effect_1 = lr.getEffect();
-              Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
-              _xifexpression = _mapEffect;
-            } else {
-              _xifexpression = null;
-            }
-            return _xifexpression;
+      final Function1<LocalReaction,Step> _function = new Function1<LocalReaction,Step>() {
+          public Step apply(final LocalReaction lr) {
+            Step _mapEntryAction = BehaviorMapping.this.mapEntryAction(lr);
+            return _mapEntryAction;
           }
         };
-      List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_entryReactions, _function);
-      final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
-          public void apply(final Sequence e) {
+      List<Step> _map = ListExtensions.<LocalReaction, Step>map(_entryReactions, _function);
+      final Procedure1<Step> _function_1 = new Procedure1<Step>() {
+          public void apply(final Step e) {
             boolean _notEquals = (!Objects.equal(e, null));
             if (_notEquals) {
               EList<Step> _steps = seq.getSteps();
@@ -204,7 +196,7 @@ public class BehaviorMapping {
             }
           }
         };
-      IterableExtensions.<Sequence>forEach(_map, _function_1);
+      IterableExtensions.<Step>forEach(_map, _function_1);
       Sequence _xifexpression = null;
       EList<Step> _steps = seq.getSteps();
       int _size = _steps.size();
@@ -217,6 +209,45 @@ public class BehaviorMapping {
       _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
+  }
+  
+  public Step mapEntryAction(final LocalReaction it) {
+    Step _xifexpression = null;
+    Effect _effect = it.getEffect();
+    boolean _notEquals = (!Objects.equal(_effect, null));
+    if (_notEquals) {
+      Step _xblockexpression = null;
+      {
+        Effect _effect_1 = it.getEffect();
+        Sequence effectSeq = this.mapEffect(((ReactionEffect) _effect_1));
+        Trigger _trigger = it.getTrigger();
+        Expression guard = this.buildGuard(_trigger);
+        Step _xifexpression_1 = null;
+        boolean _notEquals_1 = (!Objects.equal(guard, null));
+        if (_notEquals_1) {
+          Step _xblockexpression_1 = null;
+          {
+            SexecFactory _factory = this.sexec.factory();
+            If ifStep = _factory.createIf();
+            SexecFactory _factory_1 = this.sexec.factory();
+            Check _createCheck = _factory_1.createCheck();
+            ifStep.setCheck(_createCheck);
+            Check _check = ifStep.getCheck();
+            _check.setCondition(guard);
+            ifStep.setThenStep(effectSeq);
+            _xblockexpression_1 = (((Step) ifStep));
+          }
+          _xifexpression_1 = _xblockexpression_1;
+        } else {
+          _xifexpression_1 = effectSeq;
+        }
+        _xblockexpression = (_xifexpression_1);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = null;
+    }
+    return _xifexpression;
   }
   
   public ExecutionFlow mapChoiceTransitions(final Statechart statechart, final ExecutionFlow r) {
@@ -350,24 +381,15 @@ public class BehaviorMapping {
         }
       }
       List<LocalReaction> _exitReactions = this.sc.exitReactions(state);
-      final Function1<LocalReaction,Sequence> _function = new Function1<LocalReaction,Sequence>() {
-          public Sequence apply(final LocalReaction lr) {
-            Sequence _xifexpression = null;
-            Effect _effect = lr.getEffect();
-            boolean _notEquals = (!Objects.equal(_effect, null));
-            if (_notEquals) {
-              Effect _effect_1 = lr.getEffect();
-              Sequence _mapEffect = BehaviorMapping.this.mapEffect(((ReactionEffect) _effect_1));
-              _xifexpression = _mapEffect;
-            } else {
-              _xifexpression = null;
-            }
-            return _xifexpression;
+      final Function1<LocalReaction,Step> _function = new Function1<LocalReaction,Step>() {
+          public Step apply(final LocalReaction lr) {
+            Step _mapExitAction = BehaviorMapping.this.mapExitAction(lr);
+            return _mapExitAction;
           }
         };
-      List<Sequence> _map = ListExtensions.<LocalReaction, Sequence>map(_exitReactions, _function);
-      final Procedure1<Sequence> _function_1 = new Procedure1<Sequence>() {
-          public void apply(final Sequence e) {
+      List<Step> _map = ListExtensions.<LocalReaction, Step>map(_exitReactions, _function);
+      final Procedure1<Step> _function_1 = new Procedure1<Step>() {
+          public void apply(final Step e) {
             boolean _notEquals = (!Objects.equal(e, null));
             if (_notEquals) {
               EList<Step> _steps = seq.getSteps();
@@ -375,7 +397,7 @@ public class BehaviorMapping {
             }
           }
         };
-      IterableExtensions.<Sequence>forEach(_map, _function_1);
+      IterableExtensions.<Step>forEach(_map, _function_1);
       Sequence _xifexpression = null;
       EList<Step> _steps = seq.getSteps();
       int _size = _steps.size();
@@ -388,6 +410,45 @@ public class BehaviorMapping {
       _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
+  }
+  
+  public Step mapExitAction(final LocalReaction it) {
+    Step _xifexpression = null;
+    Effect _effect = it.getEffect();
+    boolean _notEquals = (!Objects.equal(_effect, null));
+    if (_notEquals) {
+      Step _xblockexpression = null;
+      {
+        Effect _effect_1 = it.getEffect();
+        Sequence effectSeq = this.mapEffect(((ReactionEffect) _effect_1));
+        Trigger _trigger = it.getTrigger();
+        Expression guard = this.buildGuard(_trigger);
+        Step _xifexpression_1 = null;
+        boolean _notEquals_1 = (!Objects.equal(guard, null));
+        if (_notEquals_1) {
+          Step _xblockexpression_1 = null;
+          {
+            SexecFactory _factory = this.sexec.factory();
+            If ifStep = _factory.createIf();
+            SexecFactory _factory_1 = this.sexec.factory();
+            Check _createCheck = _factory_1.createCheck();
+            ifStep.setCheck(_createCheck);
+            Check _check = ifStep.getCheck();
+            _check.setCondition(guard);
+            ifStep.setThenStep(effectSeq);
+            _xblockexpression_1 = (((Step) ifStep));
+          }
+          _xifexpression_1 = _xblockexpression_1;
+        } else {
+          _xifexpression_1 = effectSeq;
+        }
+        _xblockexpression = (_xifexpression_1);
+      }
+      _xifexpression = _xblockexpression;
+    } else {
+      _xifexpression = null;
+    }
+    return _xifexpression;
   }
   
   protected Sequence _mapEffect(final Effect effect) {
@@ -1175,42 +1236,50 @@ public class BehaviorMapping {
         _xifexpression = null;
       }
       final Expression triggerCheck = _xifexpression;
+      final Expression guard = this.buildGuard(t);
       Expression _xifexpression_1 = null;
-      Expression _guardExpression = t.getGuardExpression();
-      boolean _notEquals = (!Objects.equal(_guardExpression, null));
-      if (_notEquals) {
-        Expression _guardExpression_1 = t.getGuardExpression();
-        Expression _copy = EcoreUtil.<Expression>copy(_guardExpression_1);
-        _xifexpression_1 = _copy;
-      } else {
-        _xifexpression_1 = null;
-      }
-      final Expression guard = _xifexpression_1;
-      Expression _xifexpression_2 = null;
       boolean _and = false;
-      boolean _notEquals_1 = (!Objects.equal(triggerCheck, null));
-      if (!_notEquals_1) {
+      boolean _notEquals = (!Objects.equal(triggerCheck, null));
+      if (!_notEquals) {
         _and = false;
       } else {
-        boolean _notEquals_2 = (!Objects.equal(guard, null));
-        _and = (_notEquals_1 && _notEquals_2);
+        boolean _notEquals_1 = (!Objects.equal(guard, null));
+        _and = (_notEquals && _notEquals_1);
       }
       if (_and) {
         Expression _and_1 = this.stext.and(triggerCheck, guard);
-        _xifexpression_2 = _and_1;
+        _xifexpression_1 = _and_1;
       } else {
-        Expression _xifexpression_3 = null;
-        boolean _notEquals_3 = (!Objects.equal(triggerCheck, null));
-        if (_notEquals_3) {
-          _xifexpression_3 = triggerCheck;
+        Expression _xifexpression_2 = null;
+        boolean _notEquals_2 = (!Objects.equal(triggerCheck, null));
+        if (_notEquals_2) {
+          _xifexpression_2 = triggerCheck;
         } else {
-          _xifexpression_3 = guard;
+          _xifexpression_2 = guard;
         }
-        _xifexpression_2 = _xifexpression_3;
+        _xifexpression_1 = _xifexpression_2;
       }
-      _xblockexpression = (_xifexpression_2);
+      _xblockexpression = (_xifexpression_1);
     }
     return _xblockexpression;
+  }
+  
+  protected Expression _buildGuard(final Trigger t) {
+    return null;
+  }
+  
+  protected Expression _buildGuard(final ReactionTrigger t) {
+    Expression _xifexpression = null;
+    Expression _guardExpression = t.getGuardExpression();
+    boolean _notEquals = (!Objects.equal(_guardExpression, null));
+    if (_notEquals) {
+      Expression _guardExpression_1 = t.getGuardExpression();
+      Expression _copy = EcoreUtil.<Expression>copy(_guardExpression_1);
+      _xifexpression = _copy;
+    } else {
+      _xifexpression = null;
+    }
+    return _xifexpression;
   }
   
   public Sequence mapEffect(final Effect effect) {
@@ -1289,6 +1358,17 @@ public class BehaviorMapping {
       return _buildCondition((ReactionTrigger)t);
     } else if (t != null) {
       return _buildCondition(t);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(t).toString());
+    }
+  }
+  
+  public Expression buildGuard(final Trigger t) {
+    if (t instanceof ReactionTrigger) {
+      return _buildGuard((ReactionTrigger)t);
+    } else if (t != null) {
+      return _buildGuard(t);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(t).toString());

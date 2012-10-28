@@ -1,9 +1,6 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createRegion;
@@ -489,6 +486,48 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 
 		assertCall(_effect, 0, _s4.getExitSequence());
 
+	}
+
+	
+	/**
+	 * The transition sequence of a self transition must include the exit and entry sequences of the state.
+	 * 
+	 */
+	@Test
+	public void testExitEntryOnSelfTransition() {
+
+		Statechart sc = _createStatechart("sc");
+		{
+
+			InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+			VariableDefinition v1 = _createVariableDefinition("v1",
+					TYPE_INTEGER, s_scope);
+
+			Region r = _createRegion("r", sc);
+			{
+				State s1 = _createState("s1", r);
+				{
+					_createExitAssignment(v1, s1, 1);
+				}
+			}
+		}
+
+		_createTransition(findState(sc, "s1"), findState(sc, "s1"));
+
+		ExecutionFlow flow = sequencer.transform(sc);
+
+		ExecutionState _s1 = flow.getStates().get(0);
+		assertEquals("sc.r.s1", _s1.getName());
+		assertNotNull(_s1.getExitAction());
+
+		Reaction _t = _s1.getReactions().get(0);
+		assertTrue(_t.isTransition());
+
+		Sequence _effect = (Sequence) _t.getEffect();
+		assertEquals(2, _effect.getSteps().size());
+
+		assertCall(_effect, 0, _s1.getExitSequence());
+		assertCall(_effect, 1, _s1.getEnterSequence());
 	}
 
 }

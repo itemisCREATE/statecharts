@@ -56,7 +56,7 @@ public class Assert {
 
 	public static void assertAssignment(Step step, String variableName,
 			AssignmentOperator operator, String value) {
-		assertTrue(step instanceof Execution);
+		assertClass(Execution.class, step);
 		Execution exec = (Execution) step;
 		assertTrue(exec.getStatement() instanceof AssignmentExpression);
 		AssignmentExpression assignment = (AssignmentExpression) exec
