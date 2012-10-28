@@ -77,7 +77,7 @@
       <children xsi:type="notation:Shape" xmi:id="_e3WMQYlsEeGdSfnRraevSA" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_e3WMQolsEeGdSfnRraevSA"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_e3WzUIlsEeGdSfnRraevSA" x="10" y="10" width="200" height="206"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_e3WzUIlsEeGdSfnRraevSA" x="12" y="10" width="200" height="206"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_e2R1QYlsEeGdSfnRraevSA"/>
     <edges xmi:id="_e3TI8IlsEeGdSfnRraevSA" type="Transition" element="_e3QFoYlsEeGdSfnRraevSA" source="_e3J_AIlsEeGdSfnRraevSA" target="_e3NCUIlsEeGdSfnRraevSA">

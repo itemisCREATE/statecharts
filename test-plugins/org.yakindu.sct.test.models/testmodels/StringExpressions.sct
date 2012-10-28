@@ -87,7 +87,7 @@
       <children xsi:type="notation:Shape" xmi:id="_GCmpHcUEEeGBt-G4bU7TpQ" type="StatechartTextExpression" fontName="Verdana" lineColor="4210752">
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GCmpHsUEEeGBt-G4bU7TpQ"/>
       </children>
-      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GCmpH8UEEeGBt-G4bU7TpQ" x="10" y="10" width="200" height="400"/>
+      <layoutConstraint xsi:type="notation:Bounds" xmi:id="_GCmpH8UEEeGBt-G4bU7TpQ" x="8" y="5" width="200" height="400"/>
     </children>
     <styles xsi:type="notation:DiagramStyle" xmi:id="_GAg-QsUEEeGBt-G4bU7TpQ"/>
     <edges xmi:id="_GCmpEcUEEeGBt-G4bU7TpQ" type="Transition" element="_GCmpEMUEEeGBt-G4bU7TpQ" source="_GCmo98UEEeGBt-G4bU7TpQ" target="_GCmpA8UEEeGBt-G4bU7TpQ">

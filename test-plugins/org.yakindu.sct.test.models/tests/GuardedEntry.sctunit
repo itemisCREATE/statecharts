@@ -3,6 +3,8 @@ testgroup GuardedEntry for statechart GuardedEntry{
 	
 	test EntryNotTakenOnStatechartEnter { 
 		
+		assert guard == false
+		
 		enter
 		
 		assert active(GuardedEntry.main_region.A)
@@ -13,12 +15,10 @@ testgroup GuardedEntry for statechart GuardedEntry{
 	test EntryTakenOnStatechartEnter 
 	{  
 		
-		enter
-		
 		guard = true
 		
-		// enter 
-		assert false "sctunit does not allow modifiing variables before entering the state machine!"
+		enter 
+//		assert false "sctunit does not allow modifiing variables before entering the state machine!"
 		
 		assert active(GuardedEntry.main_region.A)
 		assert done == true
