@@ -21,6 +21,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - added caching of function lookups
  * 
  */
 public abstract class AbstractStatementInterpreter extends CoreFunction
@@ -43,6 +44,9 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 		assignFunctionMap.put("orAssign", "|");
 	}
 
+	
+	protected Map<Signature, Function> functionMap = new HashMap<Signature, Function>();
+	
 	public Object evaluate(String name, Object... params) {
 		Function lookup = lookup(name, params);
 		return lookup.execute(params);
@@ -50,7 +54,14 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 	}
 
 	public Function lookup(String name, Object... params) {
-		return super.lookup(getClass(), name, params);
+		
+		Signature sig = new Signature(name, toParamTypes(params));
+		Function f = functionMap.get(sig);
+		if ( f == null ) {
+			f =  super.lookup(getClass(), name, sig.getParamTypes());
+			functionMap.put(sig, f);
+		}
+		return f;
 	}
 
 	public void setOperationCallbacks(List<Object> callbacks) {

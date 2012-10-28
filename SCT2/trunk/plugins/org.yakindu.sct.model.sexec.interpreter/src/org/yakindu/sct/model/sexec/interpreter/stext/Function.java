@@ -138,13 +138,18 @@ public class Function {
 
 	public Function lookup(Class<?> functionClass, String name,
 			Object... params) {
+		Class<?>[] paramTypes = toParamTypes(params);
+		return lookup(functionClass, name, paramTypes);
+	}
+
+	protected Class<?>[] toParamTypes(Object... params) {
 		Class<?>[] paramTypes = new Class<?>[params.length];
 		for (int i = 0; i < params.length; i++) {
 			if (params[i] == null)
 				continue;
 			paramTypes[i] = params[i].getClass();
 		}
-		return lookup(functionClass, name, paramTypes);
+		return paramTypes;
 	}
 
 	protected static Function createFunction(Class<?> functionClass,
