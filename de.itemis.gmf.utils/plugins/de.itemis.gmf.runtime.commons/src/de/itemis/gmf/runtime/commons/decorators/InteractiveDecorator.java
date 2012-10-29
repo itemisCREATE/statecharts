@@ -62,13 +62,15 @@ public abstract class InteractiveDecorator extends BaseDecorator {
 	/**
 	 * TODO: move to UtilityClass
 	 * 
+	 * This method disposes the input image and returns a new Image.
+	 * 
 	 * @param image
 	 * @param width
 	 * @param height
 	 * @return
 	 */
 	protected Image resize(Image image, int width, int height) {
-		Image scaled = new Image(Display.getDefault(), width, height);
+		Image scaled = new Image(image.getDevice(), width, height);
 		GC gc = new GC(scaled);
 		gc.setAntialias(SWT.ON);
 		gc.setInterpolation(SWT.HIGH);
