@@ -51,7 +51,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SUBMACHINE_UNRESOLVABLE = "Referenced Substatemachine '%s'does not exist!";
 
 	@Check(CheckType.FAST)
-	public void vertextNotReachable(Vertex vertex) {
+	public void vertexNotReachable(Vertex vertex) {
 		if (!(vertex instanceof Entry)) {
 			int incomingTransitions = 0;
 			incomingTransitions += vertex.getIncomingTransitions().size();
