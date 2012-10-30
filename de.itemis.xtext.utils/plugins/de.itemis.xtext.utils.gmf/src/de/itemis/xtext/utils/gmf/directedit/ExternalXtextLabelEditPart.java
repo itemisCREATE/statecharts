@@ -72,7 +72,7 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart
 		updateLabelText();
 	}
 
-	private void updateLabelText() {
+	protected void updateLabelText() {
 		getFigure().setText(getEditText());
 	}
 

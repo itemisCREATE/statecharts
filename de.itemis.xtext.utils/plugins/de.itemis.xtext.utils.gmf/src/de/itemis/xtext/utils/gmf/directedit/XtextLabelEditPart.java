@@ -74,7 +74,7 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 		updateLabelText();
 	}
 
-	private void updateLabelText() {
+	protected void updateLabelText() {
 		getFigure().setText(getEditText());
 	}
 
