@@ -35,6 +35,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.Check;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Choice;
@@ -361,6 +362,7 @@ public class SGraphJavaValidationTest {
 	}
 
 	@Test
+	@Ignore("This does not work since the AbstractSCTResource does the linking of submachines. TODO: Create fake resource here...")
 	public void checkUnresolvableSubmachine() {
 		prepareStateTest();
 		Entry entry = factory.createEntry();
