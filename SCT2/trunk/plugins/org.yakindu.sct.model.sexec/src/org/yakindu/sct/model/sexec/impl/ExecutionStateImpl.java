@@ -35,6 +35,7 @@ import org.yakindu.sct.model.sexec.Step;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getSuperScope <em>Super Scope</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getInitSequence <em>Init Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#isLeaf <em>Leaf</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionStateImpl#getExitAction <em>Exit Action</em>}</li>
@@ -93,6 +94,16 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * @ordered
 	 */
 	protected Sequence exitSequence;
+
+	/**
+	 * The cached value of the '{@link #getInitSequence() <em>Init Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence initSequence;
 
 	/**
 	 * The default value of the '{@link #isLeaf() <em>Leaf</em>}' attribute.
@@ -445,6 +456,49 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getInitSequence() {
+		return initSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInitSequence(Sequence newInitSequence, NotificationChain msgs) {
+		Sequence oldInitSequence = initSequence;
+		initSequence = newInitSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__INIT_SEQUENCE, oldInitSequence, newInitSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInitSequence(Sequence newInitSequence) {
+		if (newInitSequence != initSequence) {
+			NotificationChain msgs = null;
+			if (initSequence != null)
+				msgs = ((InternalEObject)initSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__INIT_SEQUENCE, null, msgs);
+			if (newInitSequence != null)
+				msgs = ((InternalEObject)newInitSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_STATE__INIT_SEQUENCE, null, msgs);
+			msgs = basicSetInitSequence(newInitSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_STATE__INIT_SEQUENCE, newInitSequence, newInitSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -498,6 +552,8 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				return basicSetEnterSequence(null, msgs);
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
+			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
+				return basicSetInitSequence(null, msgs);
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
 				return basicSetEntryAction(null, msgs);
 			case SexecPackage.EXECUTION_STATE__EXIT_ACTION:
@@ -525,6 +581,8 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				return getEnterSequence();
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				return getExitSequence();
+			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
+				return getInitSequence();
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				return isLeaf();
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
@@ -559,6 +617,9 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				return;
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
+				setInitSequence((Sequence)newValue);
 				return;
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				setLeaf((Boolean)newValue);
@@ -596,6 +657,9 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
+				setInitSequence((Sequence)null);
+				return;
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				setLeaf(LEAF_EDEFAULT);
 				return;
@@ -627,6 +691,8 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				return enterSequence != null;
 			case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE:
 				return exitSequence != null;
+			case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE:
+				return initSequence != null;
 			case SexecPackage.EXECUTION_STATE__LEAF:
 				return leaf != LEAF_EDEFAULT;
 			case SexecPackage.EXECUTION_STATE__ENTRY_ACTION:
@@ -651,6 +717,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				case SexecPackage.EXECUTION_STATE__SUPER_SCOPE: return SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE;
 				case SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE;
 				case SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE;
+				case SexecPackage.EXECUTION_STATE__INIT_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE;
 				default: return -1;
 			}
 		}
@@ -671,6 +738,7 @@ public class ExecutionStateImpl extends ExecutionNodeImpl implements ExecutionSt
 				case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE: return SexecPackage.EXECUTION_STATE__SUPER_SCOPE;
 				case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE: return SexecPackage.EXECUTION_STATE__ENTER_SEQUENCE;
 				case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE: return SexecPackage.EXECUTION_STATE__EXIT_SEQUENCE;
+				case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE: return SexecPackage.EXECUTION_STATE__INIT_SEQUENCE;
 				default: return -1;
 			}
 		}

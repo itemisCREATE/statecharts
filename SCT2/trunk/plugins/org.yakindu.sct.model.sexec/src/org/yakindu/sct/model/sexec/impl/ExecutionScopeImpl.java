@@ -36,6 +36,7 @@ import org.yakindu.sct.model.sexec.StateVector;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSuperScope <em>Super Scope</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getInitSequence <em>Init Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -111,6 +112,16 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * @ordered
 	 */
 	protected Sequence exitSequence;
+
+	/**
+	 * The cached value of the '{@link #getInitSequence() <em>Init Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence initSequence;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -358,6 +369,49 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getInitSequence() {
+		return initSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInitSequence(Sequence newInitSequence, NotificationChain msgs) {
+		Sequence oldInitSequence = initSequence;
+		initSequence = newInitSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE, oldInitSequence, newInitSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInitSequence(Sequence newInitSequence) {
+		if (newInitSequence != initSequence) {
+			NotificationChain msgs = null;
+			if (initSequence != null)
+				msgs = ((InternalEObject)initSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE, null, msgs);
+			if (newInitSequence != null)
+				msgs = ((InternalEObject)newInitSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE, null, msgs);
+			msgs = basicSetInitSequence(newInitSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE, newInitSequence, newInitSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -390,6 +444,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				return basicSetEnterSequence(null, msgs);
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
+			case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE:
+				return basicSetInitSequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -415,6 +471,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				return getEnterSequence();
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				return getExitSequence();
+			case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE:
+				return getInitSequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -447,6 +505,9 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
 				return;
+			case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE:
+				setInitSequence((Sequence)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -477,6 +538,9 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE:
+				setInitSequence((Sequence)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -501,6 +565,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				return enterSequence != null;
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				return exitSequence != null;
+			case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE:
+				return initSequence != null;
 		}
 		return super.eIsSet(featureID);
 	}

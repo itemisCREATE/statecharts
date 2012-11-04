@@ -167,12 +167,30 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.EXECUTION_EXIT: {
+				ExecutionExit executionExit = (ExecutionExit)theEObject;
+				T result = caseExecutionExit(executionExit);
+				if (result == null) result = caseExecutionNode(executionExit);
+				if (result == null) result = caseMappedElement(executionExit);
+				if (result == null) result = caseNamedElement(executionExit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.EXECUTION_CHOICE: {
 				ExecutionChoice executionChoice = (ExecutionChoice)theEObject;
 				T result = caseExecutionChoice(executionChoice);
 				if (result == null) result = caseExecutionNode(executionChoice);
 				if (result == null) result = caseMappedElement(executionChoice);
 				if (result == null) result = caseNamedElement(executionChoice);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.EXECUTION_SYNCHRONIZATION: {
+				ExecutionSynchronization executionSynchronization = (ExecutionSynchronization)theEObject;
+				T result = caseExecutionSynchronization(executionSynchronization);
+				if (result == null) result = caseExecutionNode(executionSynchronization);
+				if (result == null) result = caseMappedElement(executionSynchronization);
+				if (result == null) result = caseNamedElement(executionSynchronization);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -379,15 +397,6 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SexecPackage.EXECUTION_SYNCHRONIZATION: {
-				ExecutionSynchronization executionSynchronization = (ExecutionSynchronization)theEObject;
-				T result = caseExecutionSynchronization(executionSynchronization);
-				if (result == null) result = caseExecutionNode(executionSynchronization);
-				if (result == null) result = caseMappedElement(executionSynchronization);
-				if (result == null) result = caseNamedElement(executionSynchronization);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -479,6 +488,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExecutionEntry(ExecutionEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Execution Exit</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Execution Exit</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExecutionExit(ExecutionExit object) {
 		return null;
 	}
 

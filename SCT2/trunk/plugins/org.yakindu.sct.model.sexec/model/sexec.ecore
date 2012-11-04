@@ -44,6 +44,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitSequence" eType="#//Sequence"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initSequence" eType="#//Sequence"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionRegion" eSuperTypes="#//ExecutionScope">
     <eStructuralFeatures xsi:type="ecore:EReference" name="deepEnterSequence" eType="#//Sequence"
@@ -56,7 +58,9 @@
         eType="#//ExecutionNode"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionEntry" eSuperTypes="#//ExecutionNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionExit" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionChoice" eSuperTypes="#//ExecutionNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionSynchronization" eSuperTypes="#//ExecutionNode"/>
   <eClassifiers xsi:type="ecore:EClass" name="Reaction" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="check" eType="#//Check"
         containment="true"/>
@@ -160,5 +164,4 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="historyStep" eType="#//Step"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ExecutionSynchronization" eSuperTypes="#//ExecutionNode"/>
 </ecore:EPackage>

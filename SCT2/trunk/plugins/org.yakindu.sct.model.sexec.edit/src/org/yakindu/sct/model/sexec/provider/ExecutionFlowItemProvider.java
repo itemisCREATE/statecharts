@@ -198,6 +198,7 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACTIONS);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATES);
@@ -267,6 +268,7 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
 			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
+			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__STATES:
@@ -309,6 +311,11 @@ public class ExecutionFlowItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_NODE__REACTIONS,
 				 SexecFactory.eINSTANCE.createReaction()));
 
@@ -341,6 +348,11 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__NODES,
 				 SexecFactory.eINSTANCE.createExecutionEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__NODES,
+				 SexecFactory.eINSTANCE.createExecutionExit()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -569,6 +581,7 @@ public class ExecutionFlowItemProvider
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION ||

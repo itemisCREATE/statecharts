@@ -212,6 +212,29 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionExit} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExecutionExitItemProvider executionExitItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sexec.ExecutionExit}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExecutionExitAdapter() {
+		if (executionExitItemProvider == null) {
+			executionExitItemProvider = new ExecutionExitItemProvider(this);
+		}
+
+		return executionExitItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sexec.ExecutionChoice} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -915,7 +938,9 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (executionScopeItemProvider != null) executionScopeItemProvider.dispose();
 		if (executionRegionItemProvider != null) executionRegionItemProvider.dispose();
 		if (executionEntryItemProvider != null) executionEntryItemProvider.dispose();
+		if (executionExitItemProvider != null) executionExitItemProvider.dispose();
 		if (executionChoiceItemProvider != null) executionChoiceItemProvider.dispose();
+		if (executionSynchronizationItemProvider != null) executionSynchronizationItemProvider.dispose();
 		if (reactionItemProvider != null) reactionItemProvider.dispose();
 		if (stateVectorItemProvider != null) stateVectorItemProvider.dispose();
 		if (timeEventItemProvider != null) timeEventItemProvider.dispose();
@@ -939,7 +964,6 @@ public class SexecItemProviderAdapterFactory extends SexecAdapterFactory impleme
 		if (traceEndRunCycleItemProvider != null) traceEndRunCycleItemProvider.dispose();
 		if (saveHistoryItemProvider != null) saveHistoryItemProvider.dispose();
 		if (historyEntryItemProvider != null) historyEntryItemProvider.dispose();
-		if (executionSynchronizationItemProvider != null) executionSynchronizationItemProvider.dispose();
 	}
 
 }

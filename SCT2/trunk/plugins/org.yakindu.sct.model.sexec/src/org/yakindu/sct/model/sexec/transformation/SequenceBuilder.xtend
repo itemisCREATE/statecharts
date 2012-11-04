@@ -25,6 +25,10 @@ import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.IntLiteral
 import org.yakindu.sct.model.stext.stext.TimeUnit
+import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.RealLiteral
+import org.yakindu.sct.model.stext.stext.StringLiteral
 
 
 class SequenceBuilder {
@@ -35,6 +39,9 @@ class SequenceBuilder {
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping mapping
 	@Inject extension TraceExtensions trace
+	
+	@Inject extension ITypeSystemAccess tsa
+	
 	
 	@Inject @Named("ADD_TRACES") 
 	boolean _addTraceSteps 
@@ -362,19 +369,15 @@ class SequenceBuilder {
 	}
 	
 	 
-	
+	/** 
+	 * Defines the execution sequence that will be performed when the statechart will be entered.
+	 */
 	def defineStatechartEnterSequence(ExecutionFlow flow, Statechart sc) {
 
 		val enterSequence = sexec.factory.createSequence
 		enterSequence.name = "enter"
 		enterSequence.comment = "Default enter sequence for statechart " + sc.name
 	    	
-		for (VariableDefinition vd : sc.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))) {
-			if (vd.initialValue != null) {
-		 		enterSequence.steps.add(vd.createInitialization)
-			}
-		}
-		
 		for (tes : sc.timeEventSpecs ) {
 			val timeEvent = tes.createDerivedEvent    
 			val scheduleStep = timeEvent.newScheduleTimeEvent(tes.buildValueExpression)
@@ -394,6 +397,44 @@ class SequenceBuilder {
 		return enterSequence
 	}
 	
+	
+	/**
+	 * Defines the sequence of initialization steps. 
+	 * 
+	 * These steps basically include the initialization of variables.
+	 */
+	def defineStatechartInitSequence(ExecutionFlow flow, Statechart sc) {
+		
+		val initSequence = sexec.factory.createSequence
+		initSequence.name = "init"
+		initSequence.comment = "Default init sequence for statechart " + sc.name
+	    	
+		for (VariableDefinition vd : sc.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))) {
+			if (vd.effectiveInitialValue != null) {
+		 		initSequence.steps.add(vd.createInitialization)
+			}
+		}
+		
+		flow.initSequence = initSequence
+		return initSequence
+	}
+	
+	
+	def effectiveInitialValue(VariableDefinition vd) {
+		if (vd.initialValue != null) {
+			return vd.initialValue
+		} else {
+			switch (vd) {
+				case vd.type.isBoolean: false.buildValue
+				case vd.type.isInteger: 0.buildValue
+				case vd.type.isReal: buildValue(0.0 as float)
+				case vd.type.isString: "".buildValue
+				default : null
+			}
+		}
+	}
+	
+	
 	def createInitialization(VariableDefinition vd) {
 		val execution = sexec.factory.createExecution
 		val assignment = stext.factory.createAssignmentExpression 
@@ -401,7 +442,7 @@ class SequenceBuilder {
 		reference.reference = vd
 		assignment.varRef = reference
 		assignment.operator = AssignmentOperator::ASSIGN
-		assignment.expression = vd.initialValue.copy
+		assignment.expression = vd.effectiveInitialValue.copy
 		execution.statement = assignment
 		return execution
 	}
@@ -452,5 +493,41 @@ class SequenceBuilder {
 		div
 	}
 
+
+	def Expression buildValue(boolean b) {
+		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression
+		val BoolLiteral lit = stext.factory.createBoolLiteral
+		lit.value = b
+		pve.value = lit
+		
+		pve
+	}
+	
+	def Expression buildValue(int i) {
+		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression
+		val IntLiteral lit = stext.factory.createIntLiteral
+		lit.value = i
+		pve.value = lit
+		
+		pve
+	}
+	
+	def Expression buildValue(float r) {
+		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression
+		val RealLiteral lit = stext.factory.createRealLiteral
+		lit.value = r
+		pve.value = lit
+		
+		pve
+	}
+	
+	def Expression buildValue(String i) {
+		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression
+		val StringLiteral lit = stext.factory.createStringLiteral
+		lit.value = i
+		pve.value = lit
+		
+		pve
+	}
 	
 }

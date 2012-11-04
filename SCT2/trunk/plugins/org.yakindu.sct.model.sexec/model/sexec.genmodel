@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.sct.model.sexec/src"
-    modelPluginID="org.yakindu.sct.model.sexec" modelName="Sexec" importerID="org.eclipse.emf.importer.ecore"
-    complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph ../../org.yakindu.base.types/model/base.genmodel#//base">
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.sct.model.sexec/src" modelPluginID="org.yakindu.sct.model.sexec"
+    modelName="Sexec" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph ../../org.yakindu.base.types/model/base.genmodel#//base">
   <foreignModel>sexec.ecore</foreignModel>
   <genPackages prefix="Sexec" basePackage="org.yakindu.sct.model" disposableProviderFactory="true"
       ecorePackage="sexec.ecore#/">
@@ -15,6 +14,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionFlow/nodes"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionFlow/regions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionFlow/historyVector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionFlow/entryAction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionFlow/exitAction"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//ExecutionNode">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionNode/reactions"/>
@@ -32,14 +33,18 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/superScope"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/enterSequence"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/exitSequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/initSequence"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//ExecutionRegion">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionRegion/deepEnterSequence"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionRegion/shallowEnterSequence"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionRegion/historyVector"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionRegion/nodes"/>
     </genClasses>
     <genClasses ecoreClass="sexec.ecore#//ExecutionEntry"/>
+    <genClasses ecoreClass="sexec.ecore#//ExecutionExit"/>
     <genClasses ecoreClass="sexec.ecore#//ExecutionChoice"/>
+    <genClasses ecoreClass="sexec.ecore#//ExecutionSynchronization"/>
     <genClasses ecoreClass="sexec.ecore#//Reaction">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//Reaction/check"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//Reaction/effect"/>

@@ -21,6 +21,8 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.ITypeSystemAccess;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
@@ -59,13 +61,16 @@ import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
+import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
+import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.StringLiteral;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
@@ -89,6 +94,9 @@ public class SequenceBuilder {
   
   @Inject
   private TraceExtensions trace;
+  
+  @Inject
+  private ITypeSystemAccess tsa;
   
   @Inject
   @Named(value = "ADD_TRACES")
@@ -667,6 +675,9 @@ public class SequenceBuilder {
     return exitSequence;
   }
   
+  /**
+   * Defines the execution sequence that will be performed when the statechart will be entered.
+   */
   public Sequence defineStatechartEnterSequence(final ExecutionFlow flow, final Statechart sc) {
     SexecFactory _factory = this.sexec.factory();
     final Sequence enterSequence = _factory.createSequence();
@@ -674,6 +685,54 @@ public class SequenceBuilder {
     String _name = sc.getName();
     String _plus = ("Default enter sequence for statechart " + _name);
     enterSequence.setComment(_plus);
+    List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(sc);
+    for (final TimeEventSpec tes : _timeEventSpecs) {
+      {
+        final TimeEvent timeEvent = this.mapping.createDerivedEvent(tes);
+        Statement _buildValueExpression = this.buildValueExpression(tes);
+        final ScheduleTimeEvent scheduleStep = this.mapping.newScheduleTimeEvent(timeEvent, _buildValueExpression);
+        EList<Step> _steps = enterSequence.getSteps();
+        _steps.add(scheduleStep);
+      }
+    }
+    Step _entryAction = flow.getEntryAction();
+    boolean _notEquals = (!Objects.equal(_entryAction, null));
+    if (_notEquals) {
+      EList<Step> _steps = enterSequence.getSteps();
+      Step _entryAction_1 = flow.getEntryAction();
+      Call _newCall = this.mapping.newCall(_entryAction_1);
+      _steps.add(_newCall);
+    }
+    EList<Region> _regions = sc.getRegions();
+    for (final Region r : _regions) {
+      {
+        final ExecutionRegion execRegion = this.mapping.create(r);
+        Sequence _enterSequence = execRegion.getEnterSequence();
+        boolean _notEquals_1 = (!Objects.equal(_enterSequence, null));
+        if (_notEquals_1) {
+          EList<Step> _steps_1 = enterSequence.getSteps();
+          Sequence _enterSequence_1 = execRegion.getEnterSequence();
+          Call _newCall_1 = this.mapping.newCall(_enterSequence_1);
+          _steps_1.add(_newCall_1);
+        }
+      }
+    }
+    flow.setEnterSequence(enterSequence);
+    return enterSequence;
+  }
+  
+  /**
+   * Defines the sequence of initialization steps.
+   * 
+   * These steps basically include the initialization of variables.
+   */
+  public Sequence defineStatechartInitSequence(final ExecutionFlow flow, final Statechart sc) {
+    SexecFactory _factory = this.sexec.factory();
+    final Sequence initSequence = _factory.createSequence();
+    initSequence.setName("init");
+    String _name = sc.getName();
+    String _plus = ("Default init sequence for statechart " + _name);
+    initSequence.setComment(_plus);
     EList<Scope> _scopes = sc.getScopes();
     final Function1<Scope,EList<Variable>> _function = new Function1<Scope,EList<Variable>>() {
         public EList<Variable> apply(final Scope s) {
@@ -685,48 +744,69 @@ public class SequenceBuilder {
     Iterable<Variable> _flatten = Iterables.<Variable>concat(_map);
     Iterable<VariableDefinition> _filter = Iterables.<VariableDefinition>filter(_flatten, VariableDefinition.class);
     for (final VariableDefinition vd : _filter) {
-      Expression _initialValue = vd.getInitialValue();
-      boolean _notEquals = (!Objects.equal(_initialValue, null));
+      Expression _effectiveInitialValue = this.effectiveInitialValue(vd);
+      boolean _notEquals = (!Objects.equal(_effectiveInitialValue, null));
       if (_notEquals) {
-        EList<Step> _steps = enterSequence.getSteps();
+        EList<Step> _steps = initSequence.getSteps();
         Execution _createInitialization = this.createInitialization(vd);
         _steps.add(_createInitialization);
       }
     }
-    List<TimeEventSpec> _timeEventSpecs = this.sc.timeEventSpecs(sc);
-    for (final TimeEventSpec tes : _timeEventSpecs) {
-      {
-        final TimeEvent timeEvent = this.mapping.createDerivedEvent(tes);
-        Statement _buildValueExpression = this.buildValueExpression(tes);
-        final ScheduleTimeEvent scheduleStep = this.mapping.newScheduleTimeEvent(timeEvent, _buildValueExpression);
-        EList<Step> _steps_1 = enterSequence.getSteps();
-        _steps_1.add(scheduleStep);
-      }
-    }
-    Step _entryAction = flow.getEntryAction();
-    boolean _notEquals_1 = (!Objects.equal(_entryAction, null));
-    if (_notEquals_1) {
-      EList<Step> _steps_1 = enterSequence.getSteps();
-      Step _entryAction_1 = flow.getEntryAction();
-      Call _newCall = this.mapping.newCall(_entryAction_1);
-      _steps_1.add(_newCall);
-    }
-    EList<Region> _regions = sc.getRegions();
-    for (final Region r : _regions) {
-      {
-        final ExecutionRegion execRegion = this.mapping.create(r);
-        Sequence _enterSequence = execRegion.getEnterSequence();
-        boolean _notEquals_2 = (!Objects.equal(_enterSequence, null));
-        if (_notEquals_2) {
-          EList<Step> _steps_2 = enterSequence.getSteps();
-          Sequence _enterSequence_1 = execRegion.getEnterSequence();
-          Call _newCall_1 = this.mapping.newCall(_enterSequence_1);
-          _steps_2.add(_newCall_1);
+    flow.setInitSequence(initSequence);
+    return initSequence;
+  }
+  
+  public Expression effectiveInitialValue(final VariableDefinition vd) {
+    Expression _xifexpression = null;
+    Expression _initialValue = vd.getInitialValue();
+    boolean _notEquals = (!Objects.equal(_initialValue, null));
+    if (_notEquals) {
+      return vd.getInitialValue();
+    } else {
+      Expression _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        Type _type = vd.getType();
+        boolean _isBoolean = this.tsa.isBoolean(_type);
+        if (_isBoolean) {
+          _matched=true;
+          Expression _buildValue = this.buildValue(false);
+          _switchResult = _buildValue;
         }
       }
+      if (!_matched) {
+        Type _type_1 = vd.getType();
+        boolean _isInteger = this.tsa.isInteger(_type_1);
+        if (_isInteger) {
+          _matched=true;
+          Expression _buildValue_1 = this.buildValue(0);
+          _switchResult = _buildValue_1;
+        }
+      }
+      if (!_matched) {
+        Type _type_2 = vd.getType();
+        boolean _isReal = this.tsa.isReal(_type_2);
+        if (_isReal) {
+          _matched=true;
+          Expression _buildValue_2 = this.buildValue(((float) 0.0));
+          _switchResult = _buildValue_2;
+        }
+      }
+      if (!_matched) {
+        Type _type_3 = vd.getType();
+        boolean _isString = this.tsa.isString(_type_3);
+        if (_isString) {
+          _matched=true;
+          Expression _buildValue_3 = this.buildValue("");
+          _switchResult = _buildValue_3;
+        }
+      }
+      if (!_matched) {
+        _switchResult = null;
+      }
+      _xifexpression = _switchResult;
     }
-    flow.setEnterSequence(enterSequence);
-    return enterSequence;
+    return _xifexpression;
   }
   
   public Execution createInitialization(final VariableDefinition vd) {
@@ -739,8 +819,8 @@ public class SequenceBuilder {
     reference.setReference(vd);
     assignment.setVarRef(reference);
     assignment.setOperator(AssignmentOperator.ASSIGN);
-    Expression _initialValue = vd.getInitialValue();
-    Expression _copy = EcoreUtil.<Expression>copy(_initialValue);
+    Expression _effectiveInitialValue = this.effectiveInitialValue(vd);
+    Expression _copy = EcoreUtil.<Expression>copy(_effectiveInitialValue);
     assignment.setExpression(_copy);
     execution.setStatement(assignment);
     return execution;
@@ -826,6 +906,62 @@ public class SequenceBuilder {
       div.setLeftOperand(stmnt);
       div.setRightOperand(pve);
       _xblockexpression = (div);
+    }
+    return _xblockexpression;
+  }
+  
+  public Expression buildValue(final boolean b) {
+    PrimitiveValueExpression _xblockexpression = null;
+    {
+      StextFactory _factory = this.stext.factory();
+      final PrimitiveValueExpression pve = _factory.createPrimitiveValueExpression();
+      StextFactory _factory_1 = this.stext.factory();
+      final BoolLiteral lit = _factory_1.createBoolLiteral();
+      lit.setValue(b);
+      pve.setValue(lit);
+      _xblockexpression = (pve);
+    }
+    return _xblockexpression;
+  }
+  
+  public Expression buildValue(final int i) {
+    PrimitiveValueExpression _xblockexpression = null;
+    {
+      StextFactory _factory = this.stext.factory();
+      final PrimitiveValueExpression pve = _factory.createPrimitiveValueExpression();
+      StextFactory _factory_1 = this.stext.factory();
+      final IntLiteral lit = _factory_1.createIntLiteral();
+      lit.setValue(i);
+      pve.setValue(lit);
+      _xblockexpression = (pve);
+    }
+    return _xblockexpression;
+  }
+  
+  public Expression buildValue(final float r) {
+    PrimitiveValueExpression _xblockexpression = null;
+    {
+      StextFactory _factory = this.stext.factory();
+      final PrimitiveValueExpression pve = _factory.createPrimitiveValueExpression();
+      StextFactory _factory_1 = this.stext.factory();
+      final RealLiteral lit = _factory_1.createRealLiteral();
+      lit.setValue(r);
+      pve.setValue(lit);
+      _xblockexpression = (pve);
+    }
+    return _xblockexpression;
+  }
+  
+  public Expression buildValue(final String i) {
+    PrimitiveValueExpression _xblockexpression = null;
+    {
+      StextFactory _factory = this.stext.factory();
+      final PrimitiveValueExpression pve = _factory.createPrimitiveValueExpression();
+      StextFactory _factory_1 = this.stext.factory();
+      final StringLiteral lit = _factory_1.createStringLiteral();
+      lit.setValue(i);
+      pve.setValue(lit);
+      _xblockexpression = (pve);
     }
     return _xblockexpression;
   }

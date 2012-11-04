@@ -80,6 +80,15 @@ public interface SexecFactory extends EFactory {
 	ExecutionEntry createExecutionEntry();
 
 	/**
+	 * Returns a new object of class '<em>Execution Exit</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Execution Exit</em>'.
+	 * @generated
+	 */
+	ExecutionExit createExecutionExit();
+
+	/**
 	 * Returns a new object of class '<em>Execution Choice</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -114,7 +114,7 @@ class Statemachine {
 		};
 		
 		«FOR variable : flow.internalScopeVariables»
-		private «variable.type.getJavaType()» «variable.name.asEscapedIdentifier»«variable.getInitialValueAssignment()»;
+		private «variable.type.getJavaType()» «variable.name.asEscapedIdentifier»;
 		«ENDFOR»
 		
 		«IF flow.hasHistory»
@@ -168,6 +168,8 @@ class Statemachine {
 			«ENDIF»
 			clearEvents();
 			clearOutEvents();
+			
+			«flow.initSequence.code»
 		}
 	'''
 	
@@ -324,7 +326,7 @@ class Statemachine {
 		
 		«FOR variable : scope.variableDefinitions»
 				
-				private «variable.type.getJavaType()» «variable.name.asEscapedIdentifier»«variable.initialValueAssignment»;
+				private «variable.type.getJavaType()» «variable.name.asEscapedIdentifier»;
 				
 				public «variable.type.getJavaType()» «variable.getter» {
 					return «variable.name.asEscapedIdentifier»;

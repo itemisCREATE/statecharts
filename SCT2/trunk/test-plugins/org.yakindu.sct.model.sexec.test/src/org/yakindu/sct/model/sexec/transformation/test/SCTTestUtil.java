@@ -108,11 +108,30 @@ public class SCTTestUtil {
 		public Statechart sc = _createStatechart("test");
 		public InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
 		public VariableDefinition e1 = _createVariableDefinition("e1",
-				_createType("Boolean"), s_scope, _createValue(true));
+				_createType("boolean"), s_scope, _createValue(true));
 
 		public InitializingTSC() {
 		}
 
+	}
+
+	public static class InitializingWithoutDefaultTSC {
+		public Statechart sc = _createStatechart("test");
+		public InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
+		public VariableDefinition b = _createVariableDefinition("b",
+				_createType("boolean"), s_scope, null);
+		
+		public VariableDefinition i = _createVariableDefinition("i",
+				_createType("integer"), s_scope, null);
+		
+		public VariableDefinition r = _createVariableDefinition("r",
+				_createType("real"), s_scope, null);
+
+		public VariableDefinition s = _createVariableDefinition("s",
+				_createType("string"), s_scope, null);
+
+		public InitializingWithoutDefaultTSC() {
+		}
 	}
 
 	public static class SimpleFlatTSC {
