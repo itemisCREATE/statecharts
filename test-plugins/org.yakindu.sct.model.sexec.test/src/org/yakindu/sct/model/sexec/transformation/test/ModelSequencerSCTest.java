@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.InitializingTSC;
+import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.InitializingWithoutDefaultTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.MinimalTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.OrthogonalFlatTSC;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.SimpleFlatTSC;
@@ -95,7 +96,7 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 	}
 
 	/**
-	 * The enter step must contain variable initialization.
+	 * The enter step must not contain variable initialization.
 	 */
 	@Test
 	public void testSCEnterSequence_Variables() {
@@ -104,11 +105,50 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 
 		assertNotNull(flow.getEnterSequence());
-		assertEquals(2, flow.getEnterSequence().getSteps().size());
+		assertEquals(1, flow.getEnterSequence().getSteps().size());
 
-		assertAssignment(flow.getEnterSequence(), 0, "e1",
+		assertCall(flow.getEnterSequence(), 0, flow.getEntryAction());
+	}
+
+	/**
+	 * The init sequence must contain variable initialization.
+	 */
+	@Test
+	public void testSCInitSequence_Variables() {
+		InitializingTSC tsc = new InitializingTSC();
+
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		assertNotNull(flow.getInitSequence());
+		assertEquals(1, flow.getInitSequence().getSteps().size());
+
+		assertAssignment(flow.getInitSequence(), 0, "e1",
 				AssignmentOperator.ASSIGN, "true");
-		assertCall(flow.getEnterSequence(), 1, flow.getEntryAction());
+	}
+
+	/**
+	 * The init sequence must contain variable initialization for variables without default value.
+	 */
+	@Test
+	public void testSCInitSequence_VariablesWithoutDefaults() {
+		InitializingWithoutDefaultTSC tsc = new InitializingWithoutDefaultTSC();
+
+		ExecutionFlow flow = sequencer.transform(tsc.sc);
+
+		assertNotNull(flow.getInitSequence());
+		assertEquals(4, flow.getInitSequence().getSteps().size());
+
+		assertAssignment(flow.getInitSequence(), 0, "b",
+				AssignmentOperator.ASSIGN, "false");
+		
+		assertAssignment(flow.getInitSequence(), 1, "i",
+				AssignmentOperator.ASSIGN, "0");
+		
+		assertAssignment(flow.getInitSequence(), 2, "r",
+				AssignmentOperator.ASSIGN, "0.0");
+		
+		assertAssignment(flow.getInitSequence(), 3, "s",
+				AssignmentOperator.ASSIGN, "");
 	}
 
 	@Test

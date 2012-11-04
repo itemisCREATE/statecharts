@@ -299,12 +299,12 @@ public class StextTestFactory extends StextFactoryImpl {
 	}
 
 	public static PrimitiveValueExpression _createValue(boolean b) {
-		PrimitiveValueExpression assignment = StextFactory.eINSTANCE
+		PrimitiveValueExpression pve = StextFactory.eINSTANCE
 				.createPrimitiveValueExpression();
 		BoolLiteral boolLit = StextFactory.eINSTANCE.createBoolLiteral();
 		boolLit.setValue(b);
-		assignment.setValue(boolLit);
-		return assignment;
+		pve.setValue(boolLit);
+		return pve;
 	}
 
 }

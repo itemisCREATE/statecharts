@@ -80,6 +80,7 @@ public class ModelSequencer {
     this.seqBuilder.defineShallowEnterSequences(ef, sc);
     this.seqBuilder.defineStatechartEnterSequence(ef, sc);
     this.seqBuilder.defineStatechartExitSequence(ef, sc);
+    this.seqBuilder.defineStatechartInitSequence(ef, sc);
     this.behaviorMapping.mapTransitions(sc, ef);
     this.behaviorMapping.mapEntries(sc, ef);
     this.behaviorMapping.mapLocalReactions(sc, ef);

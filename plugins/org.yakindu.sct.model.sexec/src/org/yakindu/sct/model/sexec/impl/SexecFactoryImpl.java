@@ -97,7 +97,9 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.EXECUTION_SCOPE: return createExecutionScope();
 			case SexecPackage.EXECUTION_REGION: return createExecutionRegion();
 			case SexecPackage.EXECUTION_ENTRY: return createExecutionEntry();
+			case SexecPackage.EXECUTION_EXIT: return createExecutionExit();
 			case SexecPackage.EXECUTION_CHOICE: return createExecutionChoice();
+			case SexecPackage.EXECUTION_SYNCHRONIZATION: return createExecutionSynchronization();
 			case SexecPackage.REACTION: return createReaction();
 			case SexecPackage.STATE_VECTOR: return createStateVector();
 			case SexecPackage.TIME_EVENT: return createTimeEvent();
@@ -121,7 +123,6 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.TRACE_END_RUN_CYCLE: return createTraceEndRunCycle();
 			case SexecPackage.SAVE_HISTORY: return createSaveHistory();
 			case SexecPackage.HISTORY_ENTRY: return createHistoryEntry();
-			case SexecPackage.EXECUTION_SYNCHRONIZATION: return createExecutionSynchronization();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -185,6 +186,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public ExecutionEntry createExecutionEntry() {
 		ExecutionEntryImpl executionEntry = new ExecutionEntryImpl();
 		return executionEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExecutionExit createExecutionExit() {
+		ExecutionExitImpl executionExit = new ExecutionExitImpl();
+		return executionExit;
 	}
 
 	/**

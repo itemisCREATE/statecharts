@@ -135,8 +135,16 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createExecutionEntryAdapter();
 			}
 			@Override
+			public Adapter caseExecutionExit(ExecutionExit object) {
+				return createExecutionExitAdapter();
+			}
+			@Override
 			public Adapter caseExecutionChoice(ExecutionChoice object) {
 				return createExecutionChoiceAdapter();
+			}
+			@Override
+			public Adapter caseExecutionSynchronization(ExecutionSynchronization object) {
+				return createExecutionSynchronizationAdapter();
 			}
 			@Override
 			public Adapter caseReaction(Reaction object) {
@@ -237,10 +245,6 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseHistoryEntry(HistoryEntry object) {
 				return createHistoryEntryAdapter();
-			}
-			@Override
-			public Adapter caseExecutionSynchronization(ExecutionSynchronization object) {
-				return createExecutionSynchronizationAdapter();
 			}
 			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
@@ -359,6 +363,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExecutionEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.ExecutionExit <em>Execution Exit</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.ExecutionExit
+	 * @generated
+	 */
+	public Adapter createExecutionExitAdapter() {
 		return null;
 	}
 

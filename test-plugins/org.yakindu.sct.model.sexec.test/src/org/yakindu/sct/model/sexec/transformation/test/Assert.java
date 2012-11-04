@@ -33,6 +33,8 @@ import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
+import org.yakindu.sct.model.stext.stext.RealLiteral;
+import org.yakindu.sct.model.stext.stext.StringLiteral;
 
 public class Assert {
 
@@ -86,6 +88,14 @@ public class Assert {
 						.isValue());
 			} else if (literal instanceof IntLiteral) {
 				currentValue = Integer.toString(((IntLiteral) literal)
+						.getValue());
+			}
+			else if (literal instanceof RealLiteral) {
+				currentValue = Float.toString(((RealLiteral) literal)
+						.getValue());
+			}
+			else if (literal instanceof StringLiteral) {
+				currentValue = (((StringLiteral) literal)
 						.getValue());
 			}
 		}

@@ -58,6 +58,8 @@ class ModelSequencer {
 		ef.defineShallowEnterSequences(sc)
 		ef.defineStatechartEnterSequence(sc)
 		ef.defineStatechartExitSequence(sc)
+
+		ef.defineStatechartInitSequence(sc)
 		
 		sc.mapTransitions(ef)
 		sc.mapEntries(ef)

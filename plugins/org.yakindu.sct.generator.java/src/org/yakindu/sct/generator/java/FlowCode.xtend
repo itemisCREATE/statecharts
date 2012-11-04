@@ -133,12 +133,12 @@ class FlowCode {
 		historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
 	'''
 	
-	def String getInitialValueAssignment(VariableDefinition it) {
-		if (initialValue != null) {
-			return " = " + initialValue.code
-		}
-		else {
-			return ""
-		}
-	}
+//	def String getInitialValueAssignment(VariableDefinition it) {
+//		if (initialValue != null) {
+//			return " = " + initialValue.code
+//		}
+//		else {
+//			return ""
+//		}
+//	}
 }

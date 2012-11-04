@@ -47,6 +47,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperScope <em>Super Scope</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequence <em>Enter Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitSequence <em>Exit Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getInitSequence <em>Init Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactions <em>Reactions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSimpleName <em>Simple Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactSequence <em>React Sequence</em>}</li>
@@ -141,6 +142,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected Sequence exitSequence;
+
+	/**
+	 * The cached value of the '{@link #getInitSequence() <em>Init Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInitSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence initSequence;
 
 	/**
 	 * The cached value of the '{@link #getReactions() <em>Reactions</em>}' containment reference list.
@@ -538,6 +549,49 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getInitSequence() {
+		return initSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetInitSequence(Sequence newInitSequence, NotificationChain msgs) {
+		Sequence oldInitSequence = initSequence;
+		initSequence = newInitSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE, oldInitSequence, newInitSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setInitSequence(Sequence newInitSequence) {
+		if (newInitSequence != initSequence) {
+			NotificationChain msgs = null;
+			if (initSequence != null)
+				msgs = ((InternalEObject)initSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE, null, msgs);
+			if (newInitSequence != null)
+				msgs = ((InternalEObject)newInitSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE, null, msgs);
+			msgs = basicSetInitSequence(newInitSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE, newInitSequence, newInitSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<ExecutionNode> getNodes() {
 		if (nodes == null) {
 			nodes = new EObjectContainmentEList<ExecutionNode>(ExecutionNode.class, this, SexecPackage.EXECUTION_FLOW__NODES);
@@ -799,6 +853,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return basicSetEnterSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
+				return basicSetInitSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				return ((InternalEList<?>)getReactions()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__REACT_SEQUENCE:
@@ -843,6 +899,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getEnterSequence();
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return getExitSequence();
+			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
+				return getInitSequence();
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				return getReactions();
 			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
@@ -895,6 +953,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
+				return;
+			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
+				setInitSequence((Sequence)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				getReactions().clear();
@@ -960,6 +1021,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
+				setInitSequence((Sequence)null);
+				return;
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				getReactions().clear();
 				return;
@@ -1013,6 +1077,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return enterSequence != null;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return exitSequence != null;
+			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
+				return initSequence != null;
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
 				return reactions != null && !reactions.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__SIMPLE_NAME:
@@ -1061,6 +1127,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE: return SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE;
 				case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE;
 				case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE;
+				case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE;
 				default: return -1;
 			}
 		}
@@ -1101,6 +1168,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE: return SexecPackage.EXECUTION_FLOW__SUPER_SCOPE;
 				case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE: return SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE;
 				case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE: return SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE;
+				case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE: return SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE;
 				default: return -1;
 			}
 		}

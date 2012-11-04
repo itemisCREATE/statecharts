@@ -53,6 +53,7 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgraph.Exit
  
 
 
@@ -276,6 +277,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	def dispatch ExecutionNode mapped(FinalState s) { s.create }
 	def dispatch ExecutionNode mapped(Choice s) { s.create }
 	def dispatch ExecutionNode mapped(Entry s) { s.create }
+//	def dispatch ExecutionNode mapped(Exit s) { s.create }
 	def dispatch ExecutionNode mapped(Synchronization s) { s.create }
 
 

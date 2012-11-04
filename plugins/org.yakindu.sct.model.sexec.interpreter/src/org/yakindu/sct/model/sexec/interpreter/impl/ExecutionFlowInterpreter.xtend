@@ -87,6 +87,8 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		brc = SexecFactory::eINSTANCE.createTraceBeginRunCycle
 		erc = SexecFactory::eINSTANCE.createTraceEndRunCycle
 		
+		flow.initSequence.execute
+		
 	}
 	
 	override tearDown(){

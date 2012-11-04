@@ -210,6 +210,7 @@ public class ExecutionRegionItemProvider
 			childFeature == SexecPackage.Literals.EXECUTION_REGION__HISTORY_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_REGION__DEEP_ENTER_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_REGION__SHALLOW_ENTER_SEQUENCE;
 
