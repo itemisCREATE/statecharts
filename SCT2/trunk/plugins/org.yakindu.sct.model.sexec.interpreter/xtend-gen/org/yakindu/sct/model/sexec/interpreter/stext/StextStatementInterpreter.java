@@ -413,21 +413,23 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
         this.context.call(_name);
       } else {
         EObject _feature_1 = call.getFeature();
-        QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(_feature_1);
-        String _string = _fullyQualifiedName.toString();
-        ExecutionVariable variableRef = this.context.getVariable(_string);
+        String fqn = this.fqn(_feature_1);
+        ExecutionVariable variableRef = this.context.getVariable(fqn);
         boolean _notEquals = (!Objects.equal(variableRef, null));
         if (_notEquals) {
           return variableRef.getValue();
         }
-        EObject _feature_2 = call.getFeature();
-        QualifiedName _fullyQualifiedName_1 = this.provider.getFullyQualifiedName(_feature_2);
-        String _string_1 = _fullyQualifiedName_1.toString();
-        return Boolean.valueOf(this.context.isEventRaised(_string_1));
+        return Boolean.valueOf(this.context.isEventRaised(fqn));
       }
       _xblockexpression = (null);
     }
     return _xblockexpression;
+  }
+  
+  public String fqn(final EObject obj) {
+    QualifiedName _fullyQualifiedName = this.provider.getFullyQualifiedName(obj);
+    String _string = _fullyQualifiedName.toString();
+    return _string;
   }
   
   protected Object _execute(final ParenthesizedExpression e) {
