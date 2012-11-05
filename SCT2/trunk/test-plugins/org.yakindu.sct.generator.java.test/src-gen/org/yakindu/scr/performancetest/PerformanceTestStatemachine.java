@@ -33,7 +33,7 @@ public class PerformanceTestStatemachine
 			e3 = true;
 		}
 
-		private int x = 0;
+		private int x;
 
 		public int getX() {
 			return x;
@@ -43,7 +43,7 @@ public class PerformanceTestStatemachine
 			this.x = value;
 		}
 
-		private int a = 0;
+		private int a;
 
 		public int getA() {
 			return a;
@@ -53,7 +53,7 @@ public class PerformanceTestStatemachine
 			this.a = value;
 		}
 
-		private int c = 0;
+		private int c;
 
 		public int getC() {
 			return c;
@@ -107,6 +107,12 @@ public class PerformanceTestStatemachine
 		}
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.x = 0;
+
+		sCIDefault.a = 0;
+
+		sCIDefault.c = 0;
 	}
 
 	public void enter() {
@@ -114,12 +120,6 @@ public class PerformanceTestStatemachine
 			throw new IllegalStateException("TimerService not set.");
 		}
 		cycleStartTime = System.currentTimeMillis();
-		sCIDefault.x = 0;
-
-		sCIDefault.a = 0;
-
-		sCIDefault.c = 0;
-
 		getTimerService().setTimer(performanceTest_time_event_0, 2000,
 				cycleStartTime);
 

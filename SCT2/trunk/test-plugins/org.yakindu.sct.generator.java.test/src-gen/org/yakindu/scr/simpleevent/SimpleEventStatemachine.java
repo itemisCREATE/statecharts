@@ -39,6 +39,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

@@ -52,6 +52,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

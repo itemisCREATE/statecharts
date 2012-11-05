@@ -162,7 +162,7 @@ public class RealExpressionsStatemachine
 			this.complement = value;
 		}
 
-		private double multiAssign = 2.2;
+		private double multiAssign;
 
 		public double getMultiAssign() {
 			return multiAssign;
@@ -172,7 +172,7 @@ public class RealExpressionsStatemachine
 			this.multiAssign = value;
 		}
 
-		private double divAssign = 22.79;
+		private double divAssign;
 
 		public double getDivAssign() {
 			return divAssign;
@@ -182,7 +182,7 @@ public class RealExpressionsStatemachine
 			this.divAssign = value;
 		}
 
-		private double plusAssign = 2.2;
+		private double plusAssign;
 
 		public double getPlusAssign() {
 			return plusAssign;
@@ -192,7 +192,7 @@ public class RealExpressionsStatemachine
 			this.plusAssign = value;
 		}
 
-		private double minusAssign = 8.6;
+		private double minusAssign;
 
 		public double getMinusAssign() {
 			return minusAssign;
@@ -241,9 +241,37 @@ public class RealExpressionsStatemachine
 
 		clearEvents();
 		clearOutEvents();
-	}
 
-	public void enter() {
+		sCIDefault.myReal1 = 0.0;
+
+		sCIDefault.myReal2 = 0.0;
+
+		sCIDefault.less = false;
+
+		sCIDefault.greater = false;
+
+		sCIDefault.equalOrLess = false;
+
+		sCIDefault.equalOrGreater = false;
+
+		sCIDefault.equal = false;
+
+		sCIDefault.notEqual = false;
+
+		sCIDefault.plus = false;
+
+		sCIDefault.minus = false;
+
+		sCIDefault.multiply = false;
+
+		sCIDefault.division = false;
+
+		sCIDefault.modulo = false;
+
+		sCIDefault.negat = 0.0;
+
+		sCIDefault.complement = false;
+
 		sCIDefault.multiAssign = 2.2;
 
 		sCIDefault.divAssign = 22.79;
@@ -252,6 +280,10 @@ public class RealExpressionsStatemachine
 
 		sCIDefault.minusAssign = 8.6;
 
+		sCIDefault.moduloAssign = false;
+	}
+
+	public void enter() {
 		entryAction();
 
 		sCIDefault.myReal1 = 5.3;

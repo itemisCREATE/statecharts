@@ -18,7 +18,7 @@ public class ExitOnSelfTransitionStatemachine
 			f = true;
 		}
 
-		private int entryCount = 0;
+		private int entryCount;
 
 		public int getEntryCount() {
 			return entryCount;
@@ -28,7 +28,7 @@ public class ExitOnSelfTransitionStatemachine
 			this.entryCount = value;
 		}
 
-		private int exitCount = 0;
+		private int exitCount;
 
 		public int getExitCount() {
 			return exitCount;
@@ -68,13 +68,13 @@ public class ExitOnSelfTransitionStatemachine
 
 		clearEvents();
 		clearOutEvents();
-	}
 
-	public void enter() {
 		sCIDefault.entryCount = 0;
 
 		sCIDefault.exitCount = 0;
+	}
 
+	public void enter() {
 		entryAction();
 
 		sCIDefault.entryCount += 1;

@@ -92,6 +92,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		}
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

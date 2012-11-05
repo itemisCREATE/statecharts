@@ -49,6 +49,8 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIMyInterface.myInt = 0;
 	}
 
 	public void enter() {

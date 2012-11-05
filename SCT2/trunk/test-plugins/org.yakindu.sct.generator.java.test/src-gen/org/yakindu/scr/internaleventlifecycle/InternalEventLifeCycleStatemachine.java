@@ -52,6 +52,7 @@ public class InternalEventLifeCycleStatemachine
 
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

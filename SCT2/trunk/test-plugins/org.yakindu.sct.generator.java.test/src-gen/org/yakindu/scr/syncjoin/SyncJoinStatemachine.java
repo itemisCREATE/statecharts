@@ -60,6 +60,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

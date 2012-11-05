@@ -513,6 +513,100 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.abstract_ID = false;
+
+		sCIDefault.assert_ID = false;
+
+		sCIDefault.boolean_ID = false;
+
+		sCIDefault.break_ID = false;
+
+		sCIDefault.byte_ID = false;
+
+		sCIDefault.case_ID = false;
+
+		sCIDefault.catch_ID = false;
+
+		sCIDefault.char_ID = false;
+
+		sCIDefault.class_ID = false;
+
+		sCIDefault.const_ID = false;
+
+		sCIDefault.continue_ID = false;
+
+		sCIDefault.do_ID = false;
+
+		sCIDefault.double_ID = false;
+
+		sCIDefault.enum_ID = false;
+
+		sCIDefault.extends_ID = false;
+
+		sCIDefault.final_ID = false;
+
+		sCIDefault.finally_ID = false;
+
+		sCIDefault.float_ID = false;
+
+		sCIDefault.for_ID = false;
+
+		sCIDefault.goto_ID = false;
+
+		sCIDefault.if_ID = false;
+
+		sCIDefault.implements_ID = false;
+
+		sCIDefault.import_ID = false;
+
+		sCIDefault.instanceof_ID = false;
+
+		sCIDefault.int_ID = false;
+
+		sCIDefault.long_ID = false;
+
+		sCIDefault.native_ID = false;
+
+		sCIDefault.new_ID = false;
+
+		sCIDefault.null_ID = false;
+
+		sCIDefault.package_ID = false;
+
+		sCIDefault.private_ID = false;
+
+		sCIDefault.protected_ID = false;
+
+		sCIDefault.public_ID = false;
+
+		sCIDefault.return_ID = false;
+
+		sCIDefault.short_ID = false;
+
+		sCIDefault.static_ID = false;
+
+		sCIDefault.strictfp_ID = false;
+
+		sCIDefault.super_ID = false;
+
+		sCIDefault.switch_ID = false;
+
+		sCIDefault.synchronized_ID = false;
+
+		sCIDefault.this_ID = false;
+
+		sCIDefault.throw_ID = false;
+
+		sCIDefault.throws_ID = false;
+
+		sCIDefault.transient_ID = false;
+
+		sCIDefault.try_ID = false;
+
+		sCIDefault.void_ID = false;
+
+		sCIDefault.volatile_ID = false;
 	}
 
 	public void enter() {

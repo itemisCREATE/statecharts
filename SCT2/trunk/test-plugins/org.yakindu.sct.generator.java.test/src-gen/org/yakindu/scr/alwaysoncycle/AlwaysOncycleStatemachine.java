@@ -49,6 +49,10 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.value = 0;
+
+		sCIDefault.v2 = false;
 	}
 
 	public void enter() {

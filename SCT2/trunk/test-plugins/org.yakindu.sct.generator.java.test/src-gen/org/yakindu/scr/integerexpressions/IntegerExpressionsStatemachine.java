@@ -162,7 +162,7 @@ public class IntegerExpressionsStatemachine
 			this.complement = value;
 		}
 
-		private int multiAssign = 2;
+		private int multiAssign;
 
 		public int getMultiAssign() {
 			return multiAssign;
@@ -172,7 +172,7 @@ public class IntegerExpressionsStatemachine
 			this.multiAssign = value;
 		}
 
-		private int divAssign = 20;
+		private int divAssign;
 
 		public int getDivAssign() {
 			return divAssign;
@@ -182,7 +182,7 @@ public class IntegerExpressionsStatemachine
 			this.divAssign = value;
 		}
 
-		private int plusAssign = 2;
+		private int plusAssign;
 
 		public int getPlusAssign() {
 			return plusAssign;
@@ -192,7 +192,7 @@ public class IntegerExpressionsStatemachine
 			this.plusAssign = value;
 		}
 
-		private int minusAssign = 2;
+		private int minusAssign;
 
 		public int getMinusAssign() {
 			return minusAssign;
@@ -202,7 +202,7 @@ public class IntegerExpressionsStatemachine
 			this.minusAssign = value;
 		}
 
-		private int moduloAssign = 20;
+		private int moduloAssign;
 
 		public int getModuloAssign() {
 			return moduloAssign;
@@ -241,9 +241,37 @@ public class IntegerExpressionsStatemachine
 
 		clearEvents();
 		clearOutEvents();
-	}
 
-	public void enter() {
+		sCIDefault.myInt1 = 0;
+
+		sCIDefault.myInt2 = 0;
+
+		sCIDefault.less = false;
+
+		sCIDefault.greater = false;
+
+		sCIDefault.equalOrLess = false;
+
+		sCIDefault.equalOrGreater = false;
+
+		sCIDefault.equal = false;
+
+		sCIDefault.notEqual = false;
+
+		sCIDefault.plus = 0;
+
+		sCIDefault.minus = 0;
+
+		sCIDefault.multiply = 0;
+
+		sCIDefault.division = 0;
+
+		sCIDefault.modulo = 0;
+
+		sCIDefault.negat = 0;
+
+		sCIDefault.complement = false;
+
 		sCIDefault.multiAssign = 2;
 
 		sCIDefault.divAssign = 20;
@@ -253,7 +281,9 @@ public class IntegerExpressionsStatemachine
 		sCIDefault.minusAssign = 2;
 
 		sCIDefault.moduloAssign = 20;
+	}
 
+	public void enter() {
 		entryAction();
 
 		sCIDefault.myInt1 = 10;

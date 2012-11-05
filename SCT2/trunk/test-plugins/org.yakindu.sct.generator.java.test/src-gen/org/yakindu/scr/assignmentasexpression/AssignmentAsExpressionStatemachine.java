@@ -6,7 +6,7 @@ public class AssignmentAsExpressionStatemachine
 
 	private final class SCIDefaultImpl implements SCIDefault {
 
-		private int a = 0;
+		private int a;
 
 		public int getA() {
 			return a;
@@ -16,7 +16,7 @@ public class AssignmentAsExpressionStatemachine
 			this.a = value;
 		}
 
-		private int b = 0;
+		private int b;
 
 		public int getB() {
 			return b;
@@ -51,13 +51,13 @@ public class AssignmentAsExpressionStatemachine
 
 		clearEvents();
 		clearOutEvents();
-	}
 
-	public void enter() {
 		sCIDefault.a = 0;
 
 		sCIDefault.b = 0;
+	}
 
+	public void enter() {
 		entryAction();
 
 		sCIDefault.a = (sCIDefault.b = 5) + 4;

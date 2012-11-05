@@ -22,7 +22,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 			return_ID = true;
 		}
 
-		private int myVar = 0;
+		private int myVar;
 
 		public int getMyVar() {
 			return myVar;
@@ -63,11 +63,11 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.myVar = 0;
 	}
 
 	public void enter() {
-		sCIDefault.myVar = 0;
-
 		entryAction();
 
 		nextStateIndex = 0;

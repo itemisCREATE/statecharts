@@ -10,7 +10,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 			pressKey = true;
 		}
 
-		private int value = 4;
+		private int value;
 
 		public int getValue() {
 			return value;
@@ -49,11 +49,11 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.value = 4;
 	}
 
 	public void enter() {
-		sCIDefault.value = 4;
-
 		entryAction();
 
 		nextStateIndex = 0;

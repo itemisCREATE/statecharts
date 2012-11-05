@@ -39,6 +39,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

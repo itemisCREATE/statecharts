@@ -119,6 +119,22 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.myBit1 = 0;
+
+		sCIDefault.myBit2 = 0;
+
+		sCIDefault.leftBitshift = 0;
+
+		sCIDefault.rightBitshift = 0;
+
+		sCIDefault.complementBitshift = 0;
+
+		sCIDefault.bitwiseAnd = 0;
+
+		sCIDefault.bitwiseOr = 0;
+
+		sCIDefault.bitwiseXor = 0;
 	}
 
 	public void enter() {
