@@ -98,6 +98,8 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     this.brc = _createTraceBeginRunCycle;
     TraceEndRunCycle _createTraceEndRunCycle = SexecFactory.eINSTANCE.createTraceEndRunCycle();
     this.erc = _createTraceEndRunCycle;
+    Sequence _initSequence = flow.getInitSequence();
+    this.execute(_initSequence);
   }
   
   public void tearDown() {
