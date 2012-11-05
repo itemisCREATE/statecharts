@@ -39,6 +39,8 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.erg = 0;
 	}
 
 	public void enter() {

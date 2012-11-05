@@ -111,6 +111,20 @@ public class BooleanExpressionsStatemachine
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.myBool1 = false;
+
+		sCIDefault.myBool2 = false;
+
+		sCIDefault.and = false;
+
+		sCIDefault.or = false;
+
+		sCIDefault.not = false;
+
+		sCIDefault.equal = false;
+
+		sCIDefault.notequal = false;
 	}
 
 	public void enter() {

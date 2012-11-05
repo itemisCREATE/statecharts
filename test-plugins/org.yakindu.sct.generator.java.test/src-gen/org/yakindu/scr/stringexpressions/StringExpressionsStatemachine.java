@@ -81,6 +81,14 @@ public class StringExpressionsStatemachine
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.myString = "";
+
+		sCIDefault.myString2 = "";
+
+		sCIDefault.equals = false;
+
+		sCIDefault.notEqual = false;
 	}
 
 	public void enter() {

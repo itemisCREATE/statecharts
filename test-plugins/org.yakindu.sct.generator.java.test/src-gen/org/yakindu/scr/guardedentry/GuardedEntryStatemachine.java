@@ -10,7 +10,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 			e = true;
 		}
 
-		private boolean guard = false;
+		private boolean guard;
 
 		public boolean getGuard() {
 			return guard;
@@ -20,7 +20,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 			this.guard = value;
 		}
 
-		private boolean done = false;
+		private boolean done;
 
 		public boolean getDone() {
 			return done;
@@ -59,13 +59,13 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
 		clearEvents();
 		clearOutEvents();
-	}
 
-	public void enter() {
 		sCIDefault.guard = false;
 
 		sCIDefault.done = false;
+	}
 
+	public void enter() {
 		entryAction();
 
 		if (sCIDefault.guard) {

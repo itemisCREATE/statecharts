@@ -59,6 +59,8 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.myVar = 0;
 	}
 
 	public void enter() {

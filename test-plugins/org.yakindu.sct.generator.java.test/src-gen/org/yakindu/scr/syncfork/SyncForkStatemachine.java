@@ -46,6 +46,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

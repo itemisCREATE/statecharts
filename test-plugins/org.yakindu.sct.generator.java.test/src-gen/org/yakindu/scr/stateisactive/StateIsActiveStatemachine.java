@@ -39,6 +39,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

@@ -46,6 +46,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

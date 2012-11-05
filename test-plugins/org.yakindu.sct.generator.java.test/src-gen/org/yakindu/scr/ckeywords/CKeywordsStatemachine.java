@@ -310,6 +310,58 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		}
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.case_ID = false;
+
+		sCIDefault.do_ID = 0;
+
+		sCIDefault.continue_ID = false;
+
+		sCIDefault.double_ID = false;
+
+		sCIDefault.enum_ID = false;
+
+		sCIDefault.extern = false;
+
+		sCIDefault.float_ID = false;
+
+		sCIDefault.for_ID = false;
+
+		sCIDefault.goto_ID = false;
+
+		sCIDefault.if_ID = false;
+
+		sCIDefault.int_ID = false;
+
+		sCIDefault.long_ID = false;
+
+		sCIDefault.register = false;
+
+		sCIDefault.return_ID = false;
+
+		sCIDefault.short_ID = false;
+
+		sCIDefault.signed = false;
+
+		sCIDefault.sizeof = false;
+
+		sCIDefault.static_ID = false;
+
+		sCIDefault.struct = false;
+
+		sCIDefault.switch_ID = false;
+
+		sCIDefault.typedef = false;
+
+		sCIDefault.union = false;
+
+		sCIDefault.unsigned = false;
+
+		sCIDefault.void_ID = false;
+
+		sCIDefault.volatile_ID = false;
+
+		sCIDefault.while_ID = false;
 	}
 
 	public void enter() {

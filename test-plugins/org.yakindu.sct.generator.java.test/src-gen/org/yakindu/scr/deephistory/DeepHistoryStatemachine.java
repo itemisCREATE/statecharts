@@ -99,6 +99,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		}
 		clearEvents();
 		clearOutEvents();
+
 	}
 
 	public void enter() {

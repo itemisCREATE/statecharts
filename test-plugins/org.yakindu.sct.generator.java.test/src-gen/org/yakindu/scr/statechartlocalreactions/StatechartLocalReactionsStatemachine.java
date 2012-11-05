@@ -41,6 +41,8 @@ public class StatechartLocalReactionsStatemachine
 
 		clearEvents();
 		clearOutEvents();
+
+		sCIDefault.myInt = 0;
 	}
 
 	public void enter() {

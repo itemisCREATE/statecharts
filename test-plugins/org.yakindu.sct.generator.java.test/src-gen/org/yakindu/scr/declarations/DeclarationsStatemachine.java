@@ -109,7 +109,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return evFValue;
 		}
 
-		private boolean varA = false;
+		private boolean varA;
 
 		public boolean getVarA() {
 			return varA;
@@ -119,7 +119,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varA = value;
 		}
 
-		private int varB = 1;
+		private int varB;
 
 		public int getVarB() {
 			return varB;
@@ -129,7 +129,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varB = value;
 		}
 
-		private double varC = 1.0;
+		private double varC;
 
 		public double getVarC() {
 			return varC;
@@ -139,7 +139,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varC = value;
 		}
 
-		private String varD = "myString";
+		private String varD;
 
 		public String getVarD() {
 			return varD;
@@ -253,7 +253,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			return evFValue;
 		}
 
-		private boolean varA = false;
+		private boolean varA;
 
 		public boolean getVarA() {
 			return varA;
@@ -263,7 +263,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varA = value;
 		}
 
-		private int varB = 1;
+		private int varB;
 
 		public int getVarB() {
 			return varB;
@@ -273,7 +273,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varB = value;
 		}
 
-		private double varC = 1.0;
+		private double varC;
 
 		public double getVarC() {
 			return varC;
@@ -283,7 +283,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varC = value;
 		}
 
-		private String varD = "myString";
+		private String varD;
 
 		public String getVarD() {
 			return varD;
@@ -312,10 +312,10 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		main_region_A, $NullState$
 	};
 
-	private boolean varInA = false;
-	private int varInB = 1;
-	private double varInC = 1.0;
-	private String varInD = "myString";
+	private boolean varInA;
+	private int varInB;
+	private double varInC;
+	private String varInD;
 
 	private final State[] stateVector = new State[1];
 
@@ -335,9 +335,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 		clearEvents();
 		clearOutEvents();
-	}
 
-	public void enter() {
 		sCIDefault.varA = false;
 
 		sCIDefault.varB = 1;
@@ -361,7 +359,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		varInC = 1.0;
 
 		varInD = "myString";
+	}
 
+	public void enter() {
 		entryAction();
 
 		nextStateIndex = 0;
