@@ -30,7 +30,6 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.NUMERICAL_
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REACTION_EFFECT;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REGULAR_EVENT_SPEC;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.SHIFT_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_REACTION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 
 import java.util.HashMap;
@@ -116,7 +115,7 @@ public class ContextPredicateProvider {
 	private static final VariablePredicate VARIABLES = new VariablePredicate();
 	private static final EventPredicate EVENTS = new EventPredicate();
 	private static final VariableOperationPredicate VARIABLES_AND_OPERATIONS = new VariableOperationPredicate();
-	private static final VariableOperationEventPredicate VARIABLES_OPERATIONS_EVENTS = new VariableOperationEventPredicate();
+	public static final VariableOperationEventPredicate VARIABLES_OPERATIONS_EVENTS = new VariableOperationEventPredicate();
 	private static final Predicate<IEObjectDescription> ALL = Predicates
 			.<IEObjectDescription> alwaysTrue();
 
@@ -140,6 +139,7 @@ public class ContextPredicateProvider {
 		filter.put(
 				key(ASSIGNMENT_EXPRESSION, ASSIGNMENT_EXPRESSION__EXPRESSION),
 				ALL);
+		
 		filter.put(key(CONDITIONAL_EXPRESSION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(LOGICAL_OR_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
 		filter.put(key(LOGICAL_AND_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
@@ -147,8 +147,8 @@ public class ContextPredicateProvider {
 		filter.put(key(BITWISE_XOR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES);
-		filter.put(key(LOGICAL_RELATION_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
 		filter.put(key(SHIFT_EXPRESSION), VARIABLES);
+		filter.put(key(LOGICAL_RELATION_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
 		filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION),
 				VARIABLES_AND_OPERATIONS);
 		filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
@@ -161,7 +161,6 @@ public class ContextPredicateProvider {
 		filter.put(key(REGULAR_EVENT_SPEC), EVENTS);
 		filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS);
 		filter.put(key(REACTION_EFFECT), VARIABLES_AND_OPERATIONS);
-		filter.put(key(TRANSITION_REACTION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(TRANSITION_SPECIFICATION), EVENTS);
 		filter.put(key(LOCAL_REACTION), VARIABLES_AND_OPERATIONS);
 	}
