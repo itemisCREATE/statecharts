@@ -346,12 +346,16 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   
   protected Type _inferType(final FeatureCall featureCall) {
     EObject _feature = featureCall.getFeature();
-    if ((_feature instanceof Feature)) {
-      EObject _feature_1 = featureCall.getFeature();
-      return ((Feature) _feature_1)==null?(Type)null:((Feature) _feature_1).getType();
-    } else {
+    if ((_feature instanceof EventDefinition)) {
+      return this.ts.getBoolean();
+    }
+    EObject _feature_1 = featureCall.getFeature();
+    if ((_feature_1 instanceof Feature)) {
       EObject _feature_2 = featureCall.getFeature();
-      boolean _notEquals = (!Objects.equal(_feature_2, null));
+      return ((Feature) _feature_2)==null?(Type)null:((Feature) _feature_2).getType();
+    } else {
+      EObject _feature_3 = featureCall.getFeature();
+      boolean _notEquals = (!Objects.equal(_feature_3, null));
       if (_notEquals) {
         String _plus = ("Type of FeatureCall is unknown: " + featureCall);
         this.error(_plus);
