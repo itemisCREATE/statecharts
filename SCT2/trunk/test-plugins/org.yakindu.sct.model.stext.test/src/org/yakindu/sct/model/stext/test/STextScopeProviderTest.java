@@ -49,7 +49,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 		parseExpression("[e1 && Interface1.e3]",
 				ReactionTrigger.class.getSimpleName(), internalScope,
 				interfaceScope);
-		parseExpression("[Interface.e4 && Interface1.e3]",
+		parseExpression("[Interface1.e4 && Interface1.e3]",
 				ReactionTrigger.class.getSimpleName(), interfaceScope);
 
 	}
