@@ -145,7 +145,6 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		return scope;
 	}
 
-	// OK
 	private Predicate<IEObjectDescription> calcuateFilterPredicate(
 			final EObject context, final EReference reference) {
 		Predicate<IEObjectDescription> predicate = null;
