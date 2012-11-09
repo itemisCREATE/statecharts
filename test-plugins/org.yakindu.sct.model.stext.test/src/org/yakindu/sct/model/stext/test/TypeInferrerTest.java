@@ -467,6 +467,12 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		getType("!myString");
 	}
 
+	@Test
+	public void testLogicalException11() {
+		expectLogicalAndException();
+		getType("5 && event1");
+	}
+
 	// LogicalRelation
 	@Test
 	public void testLogicalRelationSuccess() {
@@ -519,6 +525,13 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		getType("1.0 < false");
 	}
 
+	@Test
+	public void testLogicalRelationSmallerException4() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("Incompatible operands real and boolean for operator '<'");
+		getType("1.0 < event1");
+	}
 
 	@Test
 	public void testLogicalRelationSmallerEqualsException1() {
@@ -543,7 +556,15 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				.expectMessage("Incompatible operands real and boolean for operator '<='");
 		getType("1.0 <= false");
 	}
-	
+
+	@Test
+	public void testLogicalRelationSmallerEqualException4() {
+		exception.expect(TypeCheckException.class);
+		exception
+				.expectMessage("Incompatible operands real and boolean for operator '<='");
+		getType("1.0 <= event1");
+	}
+
 	@Test
 	public void testLogicalRelationGreaterException1() {
 		exception.expect(TypeCheckException.class);
