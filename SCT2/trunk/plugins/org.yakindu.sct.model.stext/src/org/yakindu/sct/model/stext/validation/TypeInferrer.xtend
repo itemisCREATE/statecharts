@@ -10,12 +10,14 @@
  *  
  */
 package org.yakindu.sct.model.stext.validation
- 
+
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.types.Feature
 import org.yakindu.base.types.ITypeSystemAccess
 import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sgraph.Statement
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.AssignmentExpression
 import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
 import org.yakindu.sct.model.stext.stext.BitwiseOrExpression
@@ -28,6 +30,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.HexLiteral
 import org.yakindu.sct.model.stext.stext.IntLiteral
 import org.yakindu.sct.model.stext.stext.LogicalAndExpression
 import org.yakindu.sct.model.stext.stext.LogicalNotExpression
@@ -36,18 +39,15 @@ import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.RelationalOperator
 import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.StringLiteral
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.UnaryOperator
-import org.yakindu.sct.model.stext.stext.HexLiteral
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
+import org.yakindu.sct.model.stext.stext.VariableDefinition
  
 /**
  * 
@@ -207,8 +207,10 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		val falseType = expression.falseCase.getType
 		return trueType.combine(falseType)
 	} 
-	//TODO: Remove dependency to base types
 	def dispatch inferType(FeatureCall featureCall){
+		if(featureCall.feature instanceof EventDefinition){
+			return ts.boolean
+		}
 		if (featureCall.feature instanceof Feature) {
 			return (featureCall.feature as Feature)?.type
 		} else if (featureCall.feature !=null) {
