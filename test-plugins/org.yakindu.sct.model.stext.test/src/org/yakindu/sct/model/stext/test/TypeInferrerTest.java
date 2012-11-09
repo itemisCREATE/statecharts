@@ -325,12 +325,6 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		getType("3.0 /  myString");
 	}
 
-	@Test
-	public void testDivideException9() {
-		expectOperatorDivideException();
-		getType("3.0 /  event1");
-	}
-
 	// mod
 	@Test
 	public void testModSuccess() {
