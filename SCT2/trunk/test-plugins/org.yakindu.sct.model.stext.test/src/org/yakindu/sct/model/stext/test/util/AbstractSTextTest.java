@@ -16,6 +16,7 @@ import java.io.StringReader;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -26,16 +27,19 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.resource.factory.StextResourceFactory;
+import org.yakindu.sct.model.stext.resource.impl.StextResource;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 
+import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
@@ -51,10 +55,11 @@ public abstract class AbstractSTextTest {
 	@Inject
 	private ILinker linker;
 	@Inject
-	private Provider<XtextResource> resourceProvider;
+	private StextResourceFactory factory;
 
-	protected XtextResource getResource() {
-		final XtextResource resource = resourceProvider.get();
+	protected StextResource getResource() {
+		final StextResource resource = (StextResource) factory
+				.createResource(URI.createFileURI(""));
 		resource.eAdapters().add(
 				new ContextElementAdapter(
 						new ContextElementAdapter.IContextElementProvider() {
@@ -75,7 +80,7 @@ public abstract class AbstractSTextTest {
 
 	protected EObject parseExpression(String expression, Scope context,
 			String ruleName) {
-		XtextResource resource = getResource();
+		StextResource resource = getResource();
 		resource.setURI(URI.createURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
@@ -91,6 +96,12 @@ public abstract class AbstractSTextTest {
 			linker.linkModel(context, diagnosticsConsumer);
 		}
 		linker.linkModel(result.getRootASTElement(), diagnosticsConsumer);
+		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
+		Multimap<SpecificationElement, Diagnostic> diagnostics = resource
+				.getLinkingDiagnostics();
+		if (diagnostics.size() > 0) {
+			throw new RuntimeException(diagnostics.toString());
+		}
 		if (result.hasSyntaxErrors()) {
 			StringBuilder errorMessages = new StringBuilder();
 			Iterable<INode> syntaxErrors = result.getSyntaxErrors();
