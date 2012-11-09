@@ -48,6 +48,7 @@ import com.google.common.base.Predicates;
 
 /**
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - extensions to predicates
  * 
  */
 public class ContextPredicateProvider {
@@ -92,6 +93,17 @@ public class ContextPredicateProvider {
 		}
 	}
 
+	static class VariableOperationEventPredicate extends FeaturedTypePredicate {
+		@Override
+		public boolean apply(IEObjectDescription input) {
+			if (super.apply(input))
+				return true;
+			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass()) 
+					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input.getEClass())
+					|| TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()));
+		}
+	}
+
 	static class EmptyPredicate implements Predicate<IEObjectDescription> {
 
 		public boolean apply(IEObjectDescription input) {
@@ -104,6 +116,7 @@ public class ContextPredicateProvider {
 	private static final VariablePredicate VARIABLES = new VariablePredicate();
 	private static final EventPredicate EVENTS = new EventPredicate();
 	private static final VariableOperationPredicate VARIABLES_AND_OPERATIONS = new VariableOperationPredicate();
+	private static final VariableOperationEventPredicate VARIABLES_OPERATIONS_EVENTS = new VariableOperationEventPredicate();
 	private static final Predicate<IEObjectDescription> ALL = Predicates
 			.<IEObjectDescription> alwaysTrue();
 
@@ -130,7 +143,7 @@ public class ContextPredicateProvider {
 		filter.put(key(CONDITIONAL_EXPRESSION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(LOGICAL_OR_EXPRESSION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(LOGICAL_AND_EXPRESSION), VARIABLES_AND_OPERATIONS);
-		filter.put(key(LOGICAL_NOT_EXPRESSION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(LOGICAL_NOT_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
 		filter.put(key(BITWISE_XOR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES);
