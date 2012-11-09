@@ -72,6 +72,8 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isBoolean(getType("true")));
 		assertTrue(ts.isBoolean(getType("false")));
 		assertTrue(ts.isBoolean(getType("myBool")));
+		// event
+		assertTrue(ts.isBoolean(getType("event1")));
 	}
 
 	// Add
@@ -323,6 +325,12 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		getType("3.0 /  myString");
 	}
 
+	@Test
+	public void testDivideException9() {
+		expectOperatorDivideException();
+		getType("3.0 /  event1");
+	}
+
 	// mod
 	@Test
 	public void testModSuccess() {
@@ -384,6 +392,12 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		getType("3.0 % myString");
 	}
 
+	@Test
+	public void testModException9() {
+		expectOperatorModException();
+		getType("3.0 % myString");
+	}
+
 	// Logical And Or Not
 	@Test
 	public void testLogicalSuccess() {
@@ -393,7 +407,10 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isBoolean(getType("true || true &&( false || true)")));
 		assertTrue(ts.isBoolean(getType("!true")));
 		assertTrue(ts.isBoolean(getType("!myBool")));
+		assertTrue(ts.isBoolean(getType("!event1")));
 		assertTrue(ts.isBoolean(getType("!true && !false")));
+		assertTrue(ts.isBoolean(getType("event1 && !event1")));
+		assertTrue(ts.isBoolean(getType("event1 || event1")));
 	}
 
 	@Test
@@ -475,11 +492,13 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isBoolean(getType("'string' == 'string'")));
 		assertTrue(ts.isBoolean(getType("5.0 == 3")));
 		assertTrue(ts.isBoolean(getType("true == myBool")));
+		assertTrue(ts.isBoolean(getType("true == event1")));
 
 		assertTrue(ts.isBoolean(getType("5 != 3")));
 		assertTrue(ts.isBoolean(getType("'string' != 'string'")));
 		assertTrue(ts.isBoolean(getType("5.0 != 3")));
 		assertTrue(ts.isBoolean(getType("true != myBool")));
+		assertTrue(ts.isBoolean(getType("true != event1")));
 	}
 
 	@Test
@@ -506,6 +525,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		getType("1.0 < false");
 	}
 
+
 	@Test
 	public void testLogicalRelationSmallerEqualsException1() {
 		exception.expect(TypeCheckException.class);
@@ -529,7 +549,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				.expectMessage("Incompatible operands real and boolean for operator '<='");
 		getType("1.0 <= false");
 	}
-
+	
 	@Test
 	public void testLogicalRelationGreaterException1() {
 		exception.expect(TypeCheckException.class);
@@ -635,6 +655,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		getType("myBool = true || false");
 		getType("myString = 'string'");
 		getType("myReal = 2.0 - 7");
+		getType("myBool = event1");
 	}
 
 	@Test
@@ -950,15 +971,14 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		analyzer.getType((Statement) statement);
 	}
 
-	
-	@Test public void parenthesizedExpression() {
+	@Test
+	public void parenthesizedExpression() {
 		assertTrue(ts.isBoolean(getType("( true || false )")));
 		assertTrue(ts.isInteger(getType("( 5 )")));
 		assertTrue(ts.isReal(getType("( 7.5 / 1.2 )")));
 		assertTrue(ts.isString(getType("( 'abc' )")));
 	}
-	
-	
+
 	/**
 	 * 
 	 * exception.expect(TypeCheckException.class); exception .expectMessage(
