@@ -78,8 +78,13 @@ public abstract class AbstractSTextTest {
 		return parseExpression(expression, null, ruleName);
 	}
 
-	protected EObject parseExpression(String expression, Scope context,
+	protected EObject parseExpression(String expression, Scope scope,
 			String ruleName) {
+		return parseExpression(expression, ruleName, scope);
+	}
+
+	protected EObject parseExpression(String expression, String ruleName,
+			Scope... context) {
 		StextResource resource = getResource();
 		resource.setURI(URI.createURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
@@ -92,8 +97,13 @@ public abstract class AbstractSTextTest {
 		if (context != null) {
 			Statechart sc = _createStatechart("");
 			resource.getContents().add(sc);
-			sc.getScopes().add(context);
-			linker.linkModel(context, diagnosticsConsumer);
+			for (Scope scope : context) {
+				if (scope != null) {
+					sc.getScopes().add(scope);
+					linker.linkModel(scope, diagnosticsConsumer);
+				}
+
+			}
 		}
 		linker.linkModel(result.getRootASTElement(), diagnosticsConsumer);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
