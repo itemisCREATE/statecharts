@@ -34,7 +34,7 @@ public class STextScopeProviderTest extends AbstractSTextTest {
 	@Before
 	public void setup() {
 		internalScope = createInternalScope(INTERNAL_SCOPE);
-		interfaceScope = createInternalScope(INTERFACE_SCOPE);
+		interfaceScope = createInterfaceScope(INTERFACE_SCOPE);
 
 	}
 
