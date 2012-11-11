@@ -70,6 +70,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch execute(AssignmentExpression assignment){
+//		var scopeVariable = context.getVariable(assignment.varRef.variable.fullyQualifiedName.toString)
 		var scopeVariable = context.getVariable(assignment.varRef.variable.fullyQualifiedName.toString)
 		var result = assignment.expression.execute
 		if(assignment.operator == AssignmentOperator::ASSIGN){

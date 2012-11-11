@@ -47,6 +47,15 @@ import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable
+import org.yakindu.sct.model.stext.stext.Direction
+import java.util.List
+import java.util.ArrayList
+import java.util.Map
+import org.yakindu.sct.model.sgraph.Declaration
+import org.yakindu.sct.simulation.core.runtime.ISlot
+import java.util.HashMap
+import org.yakindu.sct.simulation.core.runtime.IEventSlot
+import org.yakindu.sct.model.sgraph.Event
 
 /**
  * 
@@ -72,6 +81,13 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	String interpreterName
 	
 	ExecutionFlow flow
+	List<EventDefinition> inEvents
+	List<EventDefinition> outEvents
+	List<EventDefinition> localEvents
+	List<TimeEvent> timeEvents
+	
+	Map<Declaration, ISlot> slotMap 
+	
 	int nextSVIdx
 	
 	TraceBeginRunCycle brc  
@@ -79,6 +95,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 
 	override initialize(ExecutionFlow flow) {
 		this.flow = flow;
+		
+		slotMap = new HashMap<Declaration, ISlot>();
+		
 		for(scope : flow.scopes){
 			scope.declareContents
 		} 
@@ -87,6 +106,11 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		interpreter.setOperationCallbacks(super.callbacks)
 		brc = SexecFactory::eINSTANCE.createTraceBeginRunCycle
 		erc = SexecFactory::eINSTANCE.createTraceEndRunCycle
+		
+		inEvents = flow.scopes.map( s | s.declarations.filter( typeof(EventDefinition) ).filter( e | e.direction == Direction::IN) ).flatten.toList
+		outEvents = flow.scopes.map( s | s.declarations.filter( typeof(EventDefinition) ).filter( e | e.direction == Direction::OUT) ).flatten.toList
+		localEvents = flow.scopes.map( s | s.declarations.filter( typeof(EventDefinition) ).filter( e | e.direction == Direction::LOCAL) ).flatten.toList
+		timeEvents = flow.scopes.map( s | s.declarations.filter( typeof(TimeEvent) )).flatten.toList
 		
 		flow.initSequence.execute
 		
@@ -125,61 +149,98 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		
 		brc.execute
 		
+		clearOutEvents()
+		
 		while (nextSVIdx < executionContext.stateConfiguration.size) {
 			var state = executionContext.stateConfiguration.get(nextSVIdx)
 			if (state != null) state.reactSequence.execute			
 			nextSVIdx = nextSVIdx + 1
 		}  
 		
-		executionContext.resetRaisedEvents
+		//executionContext.resetRaisedEvents
 
+		clearEvents()
+		
 		erc.execute		
 	} 
 
 
+	def clearOutEvents() {
+		// val outEvents = flow.scopes.map( s | s.declarations.filter( typeof(EventDefinition) ).filter( e | e.direction == Direction::OUT) ).flatten
+//		outEvents.forEach( e | executionContext.unraiseEvent(provider.qualifiedName(e).toString))
+		outEvents.forEach( e | e.unraise)
+	}
+	
+	
+	def clearEvents() {
+		//val events = flow.scopes.map( s | s.declarations.filter( typeof(EventDefinition) ).filter( e | e.direction != Direction::OUT) ).flatten
+		//val timeEvents = flow.scopes.map( s | s.declarations.filter( typeof(TimeEvent) )).flatten
+//		inEvents.forEach( e | executionContext.unraiseEvent(provider.qualifiedName(e).toString))
+//		localEvents.forEach( e | executionContext.unraiseEvent(provider.qualifiedName(e).toString))
+//		timeEvents.forEach( e | executionContext.unraiseEvent(provider.qualifiedName(e).toString))
+		inEvents.forEach( e | e.unraise)
+		localEvents.forEach( e | e.unraise)
+		timeEvents.forEach( e | e.unraise)
+	}
+	
+	
+	def unraise(Event it) {
+		(slotMap.get(it) as IEventSlot).unraise
+	}
 
 	def dispatch void addToScope(VariableDefinition variable){
 		var fqName = provider.qualifiedName(variable).toString
+		var ExecutionVariable varSlot 
+		
 		if(variable.type.^boolean){
-			executionContext.declareVariable(new ExecutionVariable(fqName ,typeof(Boolean),false))
+			varSlot = new ExecutionVariable(fqName ,typeof(Boolean),false)
 		} 
 		else if (variable.type.integer){
-			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Integer),0))
+			varSlot = new ExecutionVariable(fqName,typeof(Integer),0)
 		}
 		else if(variable.type.real){
-			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(Float),Float::parseFloat("0.0")))
+			varSlot = new ExecutionVariable(fqName,typeof(Float),0.0f)
 		}
 		else if (variable.type.string){
-			executionContext.declareVariable(new ExecutionVariable(fqName,typeof(String),""))
+			varSlot = new ExecutionVariable(fqName,typeof(String),"")
 		}
+		
+		executionContext.declareVariable(varSlot);
+		slotMap.put(variable, varSlot);
 	}  
 	
 	def dispatch void addToScope(EventDefinition event){
 		var fqName = provider.qualifiedName(event).toString
+		var ExecutionEvent eventSlot
+		
 		if(event.type.^boolean){
-				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Boolean),false))
+			eventSlot = new ExecutionEvent(fqName,typeof(Boolean),false)
 		}
 		else if(event.type.integer){
-			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Integer),0))
+			eventSlot = new ExecutionEvent(fqName,typeof(Integer),0)
 		}
 		else if(event.type.real){
-			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Float),Float::parseFloat("0.0")))
+			eventSlot = new ExecutionEvent(fqName,typeof(Float),0.0f)
 		}
 		else if(event.type.^void){
-				executionContext.declareEvent(new ExecutionEvent(fqName,typeof(Void)))
+			eventSlot = new ExecutionEvent(fqName,typeof(Void))
 		}
 		else if (event.type.string){
-			executionContext.declareEvent(new ExecutionEvent(fqName,typeof(String),""))
+			eventSlot = new ExecutionEvent(fqName,typeof(String),"")
 		}
 		 
+		executionContext.declareEvent(eventSlot)
+		slotMap.put(event, eventSlot)
 	}
 	
 	
 	def dispatch void addToScope(OperationDefinition op){
 		var fqName = provider.qualifiedName(op).toString
 		var type = op.type.mappedType
+		val opSlot = new ExecutionVariable(fqName, type, type.defaultValue);
 		
-		executionContext.declareVariable(new ExecutionVariable(fqName, type, type.defaultValue))
+		executionContext.declareVariable(opSlot)
+		slotMap.put(op, opSlot)
 	}
 	
 	def Class<?> mappedType(Type it) {
@@ -202,7 +263,9 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 	
 	def dispatch void addToScope(TimeEvent event){
-		executionContext.declareEvent(new ExecutionEvent(event.name, typeof(Long))) 
+		val eventSlot = new ExecutionEvent(event.name, typeof(Long))
+		executionContext.declareEvent(eventSlot) 
+		slotMap.put(event, eventSlot)
 	}
 
 	override enter() {

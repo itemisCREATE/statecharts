@@ -63,7 +63,7 @@ public class TimerTaskTimingService implements ITimingService {
 		}
 
 		public void run() {
-			context.raiseEvent(eventName, null);
+			context.scheduleEvent(eventName, null);
 		}
 	}
 

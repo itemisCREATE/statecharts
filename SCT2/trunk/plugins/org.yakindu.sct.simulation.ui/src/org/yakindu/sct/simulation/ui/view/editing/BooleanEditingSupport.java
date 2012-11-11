@@ -15,7 +15,7 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
+import org.yakindu.sct.simulation.core.runtime.ISlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
 /**
@@ -43,7 +43,7 @@ public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 
 	public Object getValue(Object element) {
 		if (element instanceof ExecutionVariable) {
-			Boolean value = (Boolean) ((AbstractSlot) element).getValue();
+			Boolean value = (Boolean) ((ISlot) element).getValue();
 			return value ? 0 : 1;
 		}
 		return null;

@@ -22,6 +22,7 @@ import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - extensions and refactorings
  * 
  */
 public interface IExecutionContext {
@@ -41,33 +42,69 @@ public interface IExecutionContext {
 	 */
 	public List<ExecutionEvent> getRaisedEvents();
 
+	/**
+	 * @deprecated Event scheduling is not responsibility of the execution context. It should be done by the execution container.
+	 * @return
+	 */
 	public List<ExecutionEvent> getScheduledEvents();
 
 	/**
 	 * Clears the collection of raised events
+	 * 
+	 * @deprecated this method is not appropriate for event life cycle handling. 
 	 */
 	public void resetRaisedEvents();
 
+
+	/** 
+	 * @deprecated Unsetting events should be performed on the ExectionEvent instances.
+	 * @param eventName
+	 */
 	public void unraiseEvent(String eventName);
 
+
+	/**
+	 * @deprecated Event scheduling is not responsibility of the execution context. It should be done by the execution container.
+	 */
 	public void flush();
 
 	/**
-	 * Raises an event with an value, can be null
+	 * Schedules an event with an value that can be null
 	 * 
+	 * @deprecated Event scheduling is not responsibility of the execution context. It should be done by the execution container.
 	 * @throws ExecutionException
 	 *             if the value is incompatible with the declared event type or
 	 *             the Event can not be found
+	 */
+	public void scheduleEvent(String name, Object value) throws ExecutionException;
+
+	
+	/**
+	 * Immediately raises an event with an optional value.
+	 * 
+	 * @deprecated Should be done on the ExecutionEvent instances
+	 * 
+	 * @param name
+	 * @param value
+	 * @throws ExecutionException
 	 */
 	public void raiseEvent(String name, Object value) throws ExecutionException;
 
 	/**
 	 * Returns true if the given event is currently raised, false otherwise
+	 * 
+	 *  @deprecated Should be done on the ExecutionEvent instances
 	 */
 	public boolean isEventRaised(String eventName);
 
+	/**
+	 * @deprecated Event scheduling is not responsibility of the execution context. It should be done by the execution container.
+	 * @param name
+	 * @return
+	 */
 	public boolean isEventScheduled(String name);
 
+	
 	/**
 	 * Returns a readonly (!) List of all variables
 	 */
@@ -85,6 +122,8 @@ public interface IExecutionContext {
 
 	/**
 	 * Changes the value of a variable / event
+	 * 
+	 * @deprecated will be removed ...
 	 */
 	public void setSlotValue(String name, Object value)
 			throws ExecutionException;
@@ -131,8 +170,13 @@ public interface IExecutionContext {
 
 	public void saveHistoryStateConfiguration(ExecutionRegion region);
 
-	public abstract ExecutionEvent getDeclaredEvent(String eventName);
+	public abstract IEventSlot getDeclaredEvent(String eventName);
 
+	/**
+	 * @deprecated
+	 * 
+	 * @param eventName
+	 */
 	public void unscheduleEvent(String eventName);
 
 }

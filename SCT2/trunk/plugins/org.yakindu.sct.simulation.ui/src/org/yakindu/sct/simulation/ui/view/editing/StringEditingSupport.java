@@ -14,7 +14,7 @@ import org.eclipse.jface.viewers.CellEditor;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
-import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
+import org.yakindu.sct.simulation.core.runtime.ISlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 
 /**
@@ -41,7 +41,7 @@ public class StringEditingSupport extends ScopeSlotEditingSupport {
 
 	public Object getValue(Object element) {
 		if (element instanceof ExecutionVariable) {
-			return (String) ((AbstractSlot) element).getValue();
+			return (String) ((ISlot) element).getValue();
 		}
 		return null;
 	}
