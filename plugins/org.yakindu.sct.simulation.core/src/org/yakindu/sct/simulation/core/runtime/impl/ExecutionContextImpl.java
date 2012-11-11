@@ -25,17 +25,22 @@ import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
+import org.yakindu.sct.simulation.core.runtime.IEventSlot;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.runtime.ISlot;
+import org.yakindu.sct.simulation.core.runtime.ISlotChangedEvent;
+import org.yakindu.sct.simulation.core.runtime.ISlotContext;
 
 import com.google.common.collect.Maps;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - extensions and refactorings
  * 
  */
 public class ExecutionContextImpl extends AbstractExecutionContext implements
-		IExecutionContext {
+		IExecutionContext, ISlotContext {
 
 	private List<ExecutionVariable> variables;
 	private List<ExecutionEvent> declaredEvents;
@@ -67,6 +72,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	public void declareEvent(ExecutionEvent event) {
 		synchronized (declaredEvents) {
+			event.setContext(this);
 			declaredEvents.add(event);
 		}
 	}
@@ -85,7 +91,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		}
 	}
 	
-	public void raiseEvent(String eventName, Object value) {
+	public void scheduleEvent(String eventName, Object value) {
 		ExecutionEvent event = getDeclaredEvent(eventName);
 		if (event == null)
 			throw new ExecutionException("Event with name " + eventName
@@ -99,25 +105,26 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		}
 	}
 
-	protected void raiseEventInternal(String eventName, Object value) {
+	public  void raiseEvent(String eventName, Object value) {
 		synchronized (raisedEvents) {
 			ExecutionEvent event = getDeclaredEvent(eventName);
 			if (event == null)
 				throw new ExecutionException("Event with name " + eventName
 						+ " is undefined!");
-			ExecutionEvent eventCopy = event.getCopy();
-			if (value != null) {
-				eventCopy.setValue(value);
-			}
-			raisedEvents.add(eventCopy);
-			notifyEventRaised(eventCopy);
+			event.raise(value);
+//			ExecutionEvent eventCopy = event.getCopy();
+//			if (value != null) {
+//				eventCopy.setValue(value);
+//			}
+//			raisedEvents.add(eventCopy);
+//			notifyEventRaised(eventCopy);
 		}
 	}
 
 	public void flush() {
 		synchronized (scheduledToRaiseEvents) {
-			for (ExecutionEvent event : scheduledToRaiseEvents) {
-				raiseEventInternal(event.getName(), event.getValue());
+			for (IEventSlot event : scheduledToRaiseEvents) {
+				raiseEvent(event.getName(), event.getValue());
 			}
 			scheduledToRaiseEvents.clear();
 		}
@@ -136,13 +143,14 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	public boolean isEventRaised(String eventName) {
 		synchronized (raisedEvents) {
-			for (ExecutionEvent event : raisedEvents) {
-				if (eventName.equals(event.getName())) {
-					return true;
-				}
-			}
+			return getDeclaredEvent(eventName).isRaised();
+//			for (IEventSlot event : raisedEvents) {
+//				if (eventName.equals(event.getName())) {
+//					return true;
+//				}
+//			}
 		}
-		return false;
+//		return false;
 	}
 
 	public List<ExecutionVariable> getVariables() {
@@ -168,14 +176,12 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	public void setSlotValue(String name, Object value)
 			throws ExecutionException {
-		AbstractSlot slot = getVariable(name);
+		ISlot slot = getVariable(name);
 		if(slot == null)
 			slot = getDeclaredEvent(name);
 		if (slot == null)
 			throw new ExecutionException("Unknown slot " + name);
 		slot.setValue(value);
-		notifyValueChanged(slot);
-
 	}
 
 	public ExecutionState[] getStateConfiguration() {
@@ -239,12 +245,13 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	public void unraiseEvent(String eventName) {
 		synchronized (raisedEvents) {
-			Iterator<ExecutionEvent> iterator = raisedEvents.iterator();
-			while (iterator.hasNext()) {
-				if (iterator.next().getName().equals(eventName)) {
-					iterator.remove();
-				}
-			}
+			getDeclaredEvent(eventName).unraise();
+//			Iterator<ExecutionEvent> iterator = raisedEvents.iterator();
+//			while (iterator.hasNext()) {
+//				if (iterator.next().getName().equals(eventName)) {
+//					iterator.remove();
+//				}
+//			}
 		}
 	}
 
@@ -262,7 +269,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	public boolean isEventScheduled(String name) {
 		synchronized (scheduledToRaiseEvents) {
-			for (ExecutionEvent event : scheduledToRaiseEvents) {
+			for (IEventSlot event : scheduledToRaiseEvents) {
 				if (name.equals(event.getName())) {
 					return true;
 				}
@@ -270,4 +277,18 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 		}
 		return false;
 	}
+
+	
+	public void slotChanged(ISlot slot, ISlotChangedEvent changeEvent) {
+		if (changeEvent instanceof IEventSlot.SlotEventRaised) {
+			raisedEvents.add((ExecutionEvent)slot);
+			notifyEventRaised((ExecutionEvent)slot);			
+		} else if ( changeEvent instanceof IEventSlot.SlotEventUnraised ) {
+			raisedEvents.remove((ExecutionEvent)slot);
+		} else if (changeEvent instanceof ISlot.SlotValueChanged) {
+			notifyValueChanged(slot);
+		}
+	}
+	
+	
 }

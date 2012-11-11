@@ -12,13 +12,17 @@ package org.yakindu.sct.simulation.core.runtime.impl;
 
 import org.eclipse.core.runtime.Assert;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
+import org.yakindu.sct.simulation.core.runtime.ISlot;
+import org.yakindu.sct.simulation.core.runtime.ISlotContext;
 
 /**
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - refactoring
  * 
  */
-public abstract class AbstractSlot {
+public abstract class AbstractSlot implements ISlot {
 
+	protected ISlotContext context;
 	protected String name;
 	protected String scopeSegment;
 	protected String simpleName;
@@ -49,6 +53,7 @@ public abstract class AbstractSlot {
 		return simpleName;
 	}
 
+	
 	public String getName() {
 		return name;
 	}
@@ -61,7 +66,14 @@ public abstract class AbstractSlot {
 		return value;
 	}
 
-	/* package */void setValue(Object value) {
+	public void setValue(Object value) {
+		assertValue(value);
+		this.value = value;
+		
+		notifyValueChanged();
+	}
+
+	protected void assertValue(Object value) {
 		Assert.isNotNull(value, "Value must not be null ");
 		//TODO refactor
 		if (type == Float.class && value != null && !value.getClass().isAssignableFrom(type)) {
@@ -77,7 +89,20 @@ public abstract class AbstractSlot {
 					+ "\' Can not assign value " + value + " of type"
 					+ value.getClass() + " to type " + type);
 		}
-		this.value = value;
+	}
+
+	public void setContext(ISlotContext ctx) {
+		context = ctx;
+	}
+
+	public ISlotContext getContext() {
+		return context;
+	}
+	
+	protected void notifyValueChanged() {
+		if ( context != null ) {
+			context.slotChanged(this, SLOT_VALUE_CHANGED);
+		}
 	}
 
 }

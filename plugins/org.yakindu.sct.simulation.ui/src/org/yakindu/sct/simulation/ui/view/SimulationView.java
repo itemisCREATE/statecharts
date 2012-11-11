@@ -40,6 +40,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.part.ViewPart;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
+import org.yakindu.sct.simulation.core.runtime.IEventSlot;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
@@ -151,7 +152,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 				Object firstElement = ((IStructuredSelection) event
 						.getSelection()).getFirstElement();
 				if (firstElement instanceof ExecutionEvent) {
-					ExecutionEvent casted = (ExecutionEvent) firstElement;
+					IEventSlot casted = (IEventSlot) firstElement;
 					IExecutionContext input = (IExecutionContext) viewer
 							.getInput();
 					if (input.isEventRaised(casted.getName())) {
@@ -159,7 +160,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 					} else if (input.isEventScheduled(casted.getName())) {
 						input.unscheduleEvent(casted.getName());
 					} else {
-						input.raiseEvent(casted.getName(), null);
+						input.scheduleEvent(casted.getName(), null);
 					}
 					viewer.refresh();
 				}

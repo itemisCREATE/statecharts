@@ -13,8 +13,10 @@ package org.yakindu.sct.simulation.core.runtime.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.yakindu.sct.simulation.core.runtime.IEventSlot;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
+import org.yakindu.sct.simulation.core.runtime.ISlot;
 
 /**
  * Abstract implementation of {@link IExecutionContext}. Adds some convenience
@@ -44,7 +46,7 @@ public abstract class AbstractExecutionContext implements IExecutionContext {
 		}
 	}
 
-	public void notifyEventRaised(ExecutionEvent event) {
+	public void notifyEventRaised(IEventSlot event) {
 		synchronized (_listeners) {
 			for (IExecutionContextListener listener : _listeners) {
 				listener.eventRaised(event);
@@ -52,7 +54,7 @@ public abstract class AbstractExecutionContext implements IExecutionContext {
 		}
 	}
 
-	public void notifyValueChanged(AbstractSlot slot) {
+	public void notifyValueChanged(ISlot slot) {
 		synchronized (_listeners) {
 			for (IExecutionContextListener listener : _listeners) {
 				listener.slotValueChanged(slot);
@@ -61,7 +63,7 @@ public abstract class AbstractExecutionContext implements IExecutionContext {
 	}
 	
 
-	public ExecutionEvent getDeclaredEvent(String eventName) {
+	public IEventSlot getDeclaredEvent(String eventName) {
 		return null;
 	}
 

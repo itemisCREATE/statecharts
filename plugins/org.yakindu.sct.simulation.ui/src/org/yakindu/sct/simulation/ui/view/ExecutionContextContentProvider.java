@@ -21,10 +21,11 @@ import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Display;
+import org.yakindu.sct.simulation.core.runtime.IEventSlot;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContextListener;
+import org.yakindu.sct.simulation.core.runtime.ISlot;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 
@@ -129,13 +130,13 @@ public class ExecutionContextContentProvider implements ITreeContentProvider,
 		return false;
 	}
 
-	public void eventRaised(ExecutionEvent event) {
+	public void eventRaised(IEventSlot event) {
 	}
 
 	public void timeScaleFactorChanged(double oldFactor, double newFactor) {
 	}
 
-	public void slotValueChanged(AbstractSlot variable) {
+	public void slotValueChanged(ISlot variable) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				if (viewer != null && !viewer.getControl().isDisposed())

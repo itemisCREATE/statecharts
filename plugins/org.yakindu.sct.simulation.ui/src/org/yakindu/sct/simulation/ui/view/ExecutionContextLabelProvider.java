@@ -15,6 +15,7 @@ import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.custom.StyleRange;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.runtime.ISlot;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
@@ -49,7 +50,7 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 	private void updateValueCell(ViewerCell cell) {
 		Object element = cell.getElement();
 		if (element instanceof AbstractSlot) {
-			Object value = ((AbstractSlot) element).getValue();
+			Object value = ((ISlot) element).getValue();
 			if (value != null)
 				cell.setText(value.toString());
 		}

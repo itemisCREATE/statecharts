@@ -12,6 +12,7 @@ package org.yakindu.sct.simulation.ui.view.editing;
 
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.runtime.ISlot;
 import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 
 /**
@@ -33,7 +34,7 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 	public boolean canEdit(Object element) {
 		if (element instanceof AbstractSlot) {
 			return getSupportedType()
-					.equals(((AbstractSlot) element).getType());
+					.equals(((ISlot) element).getType());
 		}
 		return false;
 	}
@@ -41,7 +42,7 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 	@Override
 	public Object getValue(Object element) {
 		if (element instanceof AbstractSlot) {
-			Object value = ((AbstractSlot) element).getValue();
+			Object value = ((ISlot) element).getValue();
 			if (value != null)
 				return String.valueOf(value);
 		}
@@ -55,7 +56,7 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 			return;
 		IExecutionContext input = (IExecutionContext) getViewer().getInput();
 		if (element instanceof AbstractSlot) {
-			input.setSlotValue(((AbstractSlot) element).getName(), value);
+			input.setSlotValue(((ISlot) element).getName(), value);
 		}
 	}
 }

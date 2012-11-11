@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.runtime.impl;
 
+import org.yakindu.sct.simulation.core.runtime.IEventSlot;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 
 /**
@@ -17,11 +18,14 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
  * {@link IExecutionContext}#setVariableValue
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - refactoring
  * 
  * 
  */
-public class ExecutionEvent extends AbstractSlot {
+public class ExecutionEvent extends AbstractSlot implements IEventSlot {
 
+	protected boolean raised = false;
+	
 	public ExecutionEvent(String name) {
 		this(name, null, null);
 	}
@@ -37,5 +41,42 @@ public class ExecutionEvent extends AbstractSlot {
 	public ExecutionEvent getCopy() {
 		return new ExecutionEvent(getName(), getType(), getValue());
 	}
+
+	public void raise(Object value) {
+		if ( ! raised ) {
+			raised = true;
+			if (value != null) {
+				assertValue(value);
+				this.value = value;
+			}
+			
+			notifyRaised();
+		}
+	}
+
+	public void unraise() {
+		if ( raised ) {
+			raised = false;
+			notifyUnraised();
+		}
+	}
+
+	public boolean isRaised() {
+		return raised;
+	}
+
+	
+	protected void notifyRaised() {
+		if ( context != null ) {
+			context.slotChanged(this, SLOT_EVENT_RAISED);
+		}
+	}
+
+	protected void notifyUnraised() {
+		if ( context != null ) {
+			context.slotChanged(this, SLOT_EVENT_UNRAISED);
+		}
+	}
+
 
 }
