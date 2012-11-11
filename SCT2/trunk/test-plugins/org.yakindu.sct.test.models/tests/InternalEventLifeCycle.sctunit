@@ -1,4 +1,7 @@
 
+/** 
+ * @author axel terfloth
+ */
 testgroup InternalEventLifeCycle for statechart InternalEventLifeCycle {
 
 	test InternalEventLifeCycleTest {
@@ -14,7 +17,9 @@ testgroup InternalEventLifeCycle for statechart InternalEventLifeCycle {
 		cycle		
 		assert active(InternalEventLifeCycle.r1.A)
 		assert active(InternalEventLifeCycle.r2.D)
-		// assert ! i1
+
+		// the internal event must not be visible after the cycle
+		// but we can't access internal elements yet : assert ! i1
 		
 
 		// make sure nothing happens during an empty cycle		
