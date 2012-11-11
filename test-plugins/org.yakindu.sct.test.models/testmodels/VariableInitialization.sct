@@ -5,7 +5,7 @@
       <vertices xsi:type="sgraph:Entry" xmi:id="_Y-HxMRL3EeKu2KdLepPy5Q">
         <outgoingTransitions xmi:id="_Y-KNcxL3EeKu2KdLepPy5Q" target="_Y-I_URL3EeKu2KdLepPy5Q"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_Y-I_URL3EeKu2KdLepPy5Q" incomingTransitions="_Y-KNcxL3EeKu2KdLepPy5Q"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_Y-I_URL3EeKu2KdLepPy5Q" name="A" incomingTransitions="_Y-KNcxL3EeKu2KdLepPy5Q"/>
     </regions>
   </sgraph:Statechart>
   <notation:Diagram xmi:id="_Y9qeMBL3EeKu2KdLepPy5Q" type="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor" element="_Y9opABL3EeKu2KdLepPy5Q" measurementUnit="Pixel">

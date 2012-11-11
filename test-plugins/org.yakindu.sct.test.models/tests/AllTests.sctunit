@@ -7,7 +7,7 @@ testsuite AllTests {
 	GuardedEntry,
 	GuardedExit, 
 	IntegerExpressions,
-	InternalEventLifeCycle,
+	InEventLifeCycle, InternalEventLifeCycle, OutEventLifeCycle,
 	Parenthesis, PriorityValues , RaiseEvent , SameNameDifferentRegion , ShallowHistory ,
 	SimpleHietachy , StateIsActive , StatechartLocalReactions , StringExpressions, SyncFork ,
 	SyncJoin , ValuedEvent , simpleEvent 
