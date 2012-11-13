@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Test
+Bundle-Name: Core Generator Tests
 Bundle-SymbolicName: org.yakindu.sct.generator.core.test
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.yakindu.sct.model.sgraph;bundle-version="1.0.0",
@@ -11,3 +11,4 @@ Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.yakindu.sct.generator.core;bundle-version="1.0.0",
  org.yakindu.sct.model.stext.test;bundle-version="1.0.0",
  org.yakindu.sct.model.sgraph.test;bundle-version="1.0.0"
+Bundle-Vendor: yakindu.org

@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.yakindu.sct.generator.genmodel.ui
-Bundle-Vendor: YAKINDU
-Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: yakindu.org
+Bundle-Version: 2.0.0.qualifier
 Bundle-SymbolicName: org.yakindu.sct.generator.genmodel.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.yakindu.sct.generator.genmodel;visibility:=reexport,

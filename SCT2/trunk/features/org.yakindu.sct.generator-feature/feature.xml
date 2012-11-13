@@ -2,8 +2,8 @@
 <feature
       id="org.yakindu.sct.generator"
       label="Generator All-In-One"
-      version="1.0.0.qualifier"
-      provider-name="YAKINDU">
+      version="2.0.0.qualifier"
+      provider-name="yakindu.org">
 
    <description url="">
       %description
@@ -26,7 +26,7 @@
          version="0.0.0"/>
 
    <requires>
-      <import feature="org.yakindu.sct" version="1.0.0.qualifier"/>
+      <import feature="org.yakindu.sct" version="2.0.0.qualifier"/>
    </requires>
 
 </feature>
