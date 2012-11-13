@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu SCT SGraph Model
 Bundle-SymbolicName: org.yakindu.sct.model.sgraph;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: YAKINDU
+Bundle-Vendor: yakindu.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.model.sgraph,
  org.yakindu.sct.model.sgraph.impl,

@@ -2,8 +2,8 @@
 <feature
       id="org.yakindu.sct"
       label="Yakindu Statechart Tools (SCT) 2"
-      version="1.0.0.qualifier"
-      provider-name="YAKINDU"
+      version="2.0.0.qualifier"
+      provider-name="yakindu.org"
       plugin="org.yakindu.sct.doc.user">
 
    <description url="">
@@ -78,7 +78,7 @@
       <import plugin="com.ibm.icu"/>
       <import plugin="org.eclipse.emf.mwe.utils"/>
       <import plugin="org.eclipse.jface.text"/>
-      <import feature="org.yakindu.base" version="1.0.0.qualifier"/>
+      <import feature="org.yakindu.base" version="2.0.0.qualifier"/>
       <import plugin="com.google.guava"/>
    </requires>
 

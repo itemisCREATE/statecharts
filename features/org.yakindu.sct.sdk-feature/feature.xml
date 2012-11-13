@@ -2,8 +2,8 @@
 <feature
       id="org.yakindu.sct.sdk"
       label="Yakindu Statechart Tools (SCT) 2 SDK"
-      version="1.0.0.qualifier"
-      provider-name="YAKINDU">
+      version="2.0.0.qualifier"
+      provider-name="yakindu.org">
 
    <description url="">
       %description

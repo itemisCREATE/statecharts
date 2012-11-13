@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator.java"
       label="%featureName"
-      version="1.0.0.qualifier"
+      version="2.0.0.qualifier"
       provider-name="YAKINDU">
 
    <description>
@@ -18,7 +18,7 @@
    </license>
 
    <requires>
-      <import feature="org.yakindu.sct" version="1.0.0.qualifier"/>
+      <import feature="org.yakindu.sct" version="2.0.0.qualifier"/>
    </requires>
 
    <plugin

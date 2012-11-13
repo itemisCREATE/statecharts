@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Generator Core Plugin
 Bundle-SymbolicName: org.yakindu.sct.generator.core;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-Activator: org.yakindu.sct.generator.core.GeneratorActivator
-Bundle-Vendor: YAKINDU
+Bundle-Vendor: yakindu.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime;visibility:=reexport,
  org.yakindu.sct.model.sexec;bundle-version="1.0.0";visibility:=reexport,

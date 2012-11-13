@@ -2,8 +2,8 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Stext Edit
 Bundle-SymbolicName: org.yakindu.sct.model.stext.edit;singleton:=true
-Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: YAKINDU
+Bundle-Version: 2.0.0.qualifier
+Bundle-Vendor: yakindu.org
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.yakindu.base.types.edit;bundle-version="1.0.0",
  org.yakindu.sct.model.stext;bundle-version="1.0.0",
