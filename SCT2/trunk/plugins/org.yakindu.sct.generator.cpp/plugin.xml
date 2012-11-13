@@ -2,7 +2,7 @@
 <?eclipse version="3.4"?>
 
 <plugin>
-   <extension
+   <!-- extension
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
             class="org.yakindu.sct.generator.cpp.CppCodeGenerator"
@@ -27,5 +27,5 @@
             fileExtension="sct"
             generatorId="yakindu::cpp">
       </ExtensionGeneratorMapping>
-   </extension>
+   </extension -->
 </plugin>
