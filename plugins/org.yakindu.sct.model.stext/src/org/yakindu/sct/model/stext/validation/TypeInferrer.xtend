@@ -208,7 +208,7 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		return trueType.combine(falseType)
 	} 
 	def dispatch inferType(FeatureCall featureCall){
-		if(featureCall.feature instanceof EventDefinition){
+		if(featureCall.feature instanceof EventDefinition && !(featureCall.eContainer instanceof EventRaisingExpression)){
 			return ts.boolean
 		}
 		if (featureCall.feature instanceof Feature) {
