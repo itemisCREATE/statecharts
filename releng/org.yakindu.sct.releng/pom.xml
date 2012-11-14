@@ -365,8 +365,9 @@
 	</profiles>
 
 	<modules>
-		<module>../org.eclipse.gmf.runtime.emf.clipboard.core</module>
-		<module>../org.eclipse.gmf.runtime.emf.clipboard.core.patch-feature</module>
+		<!-- Removed because tycho can't build, if dependency to patched feature exists -->
+<!-- 		<module>../org.eclipse.gmf.runtime.emf.clipboard.core</module> -->
+<!-- 		<module>../org.eclipse.gmf.runtime.emf.clipboard.core.patch-feature</module> -->
 	
 		<module>../org.yakindu.sct.commons</module>
 		<module>../org.yakindu.sct.doc.user</module>
