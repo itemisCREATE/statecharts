@@ -29,6 +29,10 @@
          id="de.itemis.xtext.utils.jface"
          version="0.0.0"/>
 
+   <includes
+         id="org.eclipse.gmf"
+         version="0.0.0"/>
+
    <plugin
          id="org.yakindu.base.types"
          download-size="0"
