@@ -170,6 +170,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 
 	public void declareVariable(ExecutionVariable variable) {
 		synchronized (variables) {
+			variable.setContext(this);
 			variables.add(variable);
 		}
 	}
