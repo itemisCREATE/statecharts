@@ -65,6 +65,7 @@ public class TreeLayoutUtil {
 		return Collections.emptyList();
 	}
 
+	//TODO: Fix fixed isInversed setting
 	public static ArrayList<IGraphicalEditPart> getOrderedTreeChildren(
 			IGraphicalEditPart parentTreeNodeEditPart) {
 
@@ -74,8 +75,8 @@ public class TreeLayoutUtil {
 		if (diagramEditPart != null) {
 			final ConnectionLayer connectionLayer = (ConnectionLayer) diagramEditPart
 					.getLayer(LayerConstants.CONNECTION_LAYER);
-			for (final Connection connection : getTreeFigureIncomingConnections(
-					connectionLayer, parentTreeNodeEditPart.getFigure())) {
+			for (final Connection connection : getTreeFigureChildrenConnections(
+					connectionLayer, parentTreeNodeEditPart.getFigure(), false)) {
 				final Object object = parentTreeNodeEditPart.getParent()
 						.getViewer().getVisualPartMap()
 						.get(connection.getSourceAnchor().getOwner());
@@ -309,47 +310,53 @@ public class TreeLayoutUtil {
 	// }
 
 	/**
-	 * Returns only elements parent figure is a direct parent. Indirect
-	 * connections are filtered out. Use if children can have many parents.
+	 * Returns only connections where the parent figure is a direct parent.
+	 * Indirect connections are filtered out. Use if children can have many
+	 * parents.
 	 * 
 	 * @param connectionLayer
 	 * @param parentFigure
 	 * @return
 	 */
-	public static List<Connection> getTreeFigureIncomingConnections(
-			ConnectionLayer connectionLayer, IFigure parentFigure) {
+	public static List<Connection> getTreeFigureChildrenConnections(
+			ConnectionLayer connectionLayer, IFigure parentFigure,
+			boolean isInversed) {
 
-		final List<Connection> connectionList = getIncomingConnections(
+		final List<Connection> connectionList = isInversed ? getIncomingConnections(
+				connectionLayer, parentFigure) : getOutgoingConnections(
 				connectionLayer, parentFigure);
+
 		final List<Connection> indirectChildren = new ArrayList<Connection>();
 
 		final int parentFigureTreeLevel = getDeepestTreeLevel(connectionLayer,
-				parentFigure);
+				parentFigure, isInversed);
+
 		for (final Connection connection : connectionList) {
-			final IFigure childFigure = connection.getSourceAnchor().getOwner();
+
+			final IFigure childFigure = isInversed ? connection.getSourceAnchor()
+					.getOwner() : connection.getTargetAnchor().getOwner();
 
 			final int childTreeLevel = getDeepestTreeLevel(connectionLayer,
-					childFigure);
+					childFigure, isInversed);
 
 			if (childTreeLevel == parentFigureTreeLevel + 1) {
-				
-				//get LayoutConstraint of child Figure;
+
+				// get LayoutConstraint of child Figure;
 				Object object = parentFigure.getParent().getLayoutManager()
 						.getConstraint(childFigure);
 				if (object instanceof TreeLayoutConstraint) {
 					TreeLayoutConstraint childConstraint = (TreeLayoutConstraint) object;
-					
+
 					final IFigure constrainedParentFig = childConstraint
 							.getTreeParentFigure();
-					
+
 					if (constrainedParentFig == null) {
 						childConstraint.setTreeParentFigure(parentFigure);
 					} else if (constrainedParentFig != parentFigure) {
-							indirectChildren.add(connection);
+						indirectChildren.add(connection);
 					}
 				}
-			} 
-			else {
+			} else {
 				indirectChildren.add(connection);
 			}
 		}
@@ -358,14 +365,22 @@ public class TreeLayoutUtil {
 	}
 
 	private static int getDeepestTreeLevel(ConnectionLayer connectionLayer,
-			IFigure figure) {
-		final List<Connection> connectionList = getOutgoingConnections(
+			IFigure figure, boolean inversed) {
+
+		final List<Connection> connectionList = inversed ? getOutgoingConnections(
+				connectionLayer, figure) : getIncomingConnections(
 				connectionLayer, figure);
+
 		if (connectionList.size() > 0) {
+
 			final int[] ret = new int[connectionList.size()];
+
 			for (int i = 0; i < connectionList.size(); i++) {
-				ret[i] = 1 + getDeepestTreeLevel(connectionLayer,
-						connectionList.get(i).getTargetAnchor().getOwner());
+
+				IFigure fig = inversed ? connectionList.get(i)
+						.getTargetAnchor().getOwner() : connectionList.get(i)
+						.getSourceAnchor().getOwner();
+				ret[i] = 1 + getDeepestTreeLevel(connectionLayer, fig, inversed);
 			}
 			int maxLevel = ret[0];
 			if (ret.length > 1) {

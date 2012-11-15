@@ -46,7 +46,11 @@ public class TreeLayout extends FreeformLayout {
 
 	private int leafSpacing;
 
+	private boolean isReducingLeafSpacing;
+
 	private boolean isVertical;
+
+	private boolean isInversed;
 
 	private boolean isTopLeftAlignment;
 
@@ -64,9 +68,9 @@ public class TreeLayout extends FreeformLayout {
 		private int weight;
 
 		private int level;
-		
+
 		private int cell;
-		
+
 		private boolean isLayouted;
 
 		public TreeNode(TreeNode parent, IFigure figure) {
@@ -131,6 +135,8 @@ public class TreeLayout extends FreeformLayout {
 		this.connectionLayer = connectionLayer;
 		isVertical = true;
 		isTopLeftAlignment = true;
+		isInversed = false;
+		isReducingLeafSpacing = false;
 		leafSpacing = 5;
 		maxTreeLevel = 0;
 		graphSize = new Dimension();
@@ -142,6 +148,22 @@ public class TreeLayout extends FreeformLayout {
 
 	public void setVertical(boolean isVertical) {
 		this.isVertical = isVertical;
+	}
+
+	public boolean isInversed() {
+		return isInversed;
+	}
+
+	public void setInversed(boolean isInversed) {
+		this.isInversed = isInversed;
+	}
+
+	public boolean isReducingLeafSpacing() {
+		return isReducingLeafSpacing;
+	}
+
+	public void setLeafSpacingReduce(boolean isReducingLeafSpacing) {
+		this.isReducingLeafSpacing = isReducingLeafSpacing;
 	}
 
 	public boolean isTopLeftAlignment() {
@@ -184,7 +206,9 @@ public class TreeLayout extends FreeformLayout {
 					/ rootTreeNode.weight;
 
 			layoutTree(rootTreeNode, start, share);
-			reduceLeafSpacing(rootTreeNode);
+			if (isReducingLeafSpacing) {
+				reduceLeafSpacing(rootTreeNode);
+			}
 		}
 	}
 
@@ -196,14 +220,17 @@ public class TreeLayout extends FreeformLayout {
 			Rectangle bounds = constraint.getCopy();
 
 			if (bounds.width <= 0 || bounds.height <= 0) {
+				final Dimension minimumSize = treeNode.figure.getMinimumSize();
 				final Dimension preferredSize = treeNode.figure
 						.getPreferredSize(bounds.width, bounds.height);
 
 				if (bounds.width <= 0) {
-					bounds.width = preferredSize.width;
+					bounds.width = minimumSize.width > preferredSize.width ? minimumSize.width
+							: preferredSize.width;
 				}
 				if (bounds.height <= 0) {
-					bounds.height = preferredSize.height;
+					bounds.height = minimumSize.height > preferredSize.height ? minimumSize.height
+							: preferredSize.height;
 				}
 			}
 
@@ -212,10 +239,10 @@ public class TreeLayout extends FreeformLayout {
 			final int rankPos = isTopLeftAlignment ? treeNode.level
 					: maxTreeLevel - treeNode.level;
 
-//			final int levelPos = (rankPos * (bounds.width + rankSpacing))
-//					+ (rankSpacing / 2);
-			final int levelPos = getlevelPos(rankPos) + (rankSpacing / 2) ;
-			
+			// final int levelPos = (rankPos * (bounds.width + rankSpacing))
+			// + (rankSpacing / 2);
+			final int levelPos = getlevelPos(rankPos) + (rankSpacing / 2);
+
 			final int cellPos = (int) (start + treeNode.weight * share / 2);
 
 			bounds.x = isVertical ? cellPos - (bounds.width / 2) : levelPos;
@@ -245,7 +272,7 @@ public class TreeLayout extends FreeformLayout {
 	private int getlevelPos(int rankPos) {
 		int pos = 0;
 		for (int i = levelOffset.length - rankPos; i < levelOffset.length; i++) {
-			//Rankspacing is already included.
+			// Rankspacing is already included.
 			pos += levelOffset[i];
 		}
 		return pos;
@@ -293,8 +320,8 @@ public class TreeLayout extends FreeformLayout {
 			for (int rankIndex = treeLevelList.size() - 1; rankIndex > -1; rankIndex--) {
 				rankSize = 0;
 				rowSize = 0;
-				for (int cellIndex = 0; cellIndex < treeLevelList.get(rankIndex)
-						.size(); cellIndex++) {
+				for (int cellIndex = 0; cellIndex < treeLevelList
+						.get(rankIndex).size(); cellIndex++) {
 
 					final TreeNode treeNode = treeLevelList.get(rankIndex).get(
 							cellIndex);
@@ -341,15 +368,16 @@ public class TreeLayout extends FreeformLayout {
 				}
 
 				if (largestRankSize < rankSize) {
-//					System.out.println("Set new Ranksize for Rank " + rankIndex
-//							+ " Size : " + rankSize);
+					// System.out.println("Set new Ranksize for Rank " +
+					// rankIndex
+					// + " Size : " + rankSize);
 					largestRankSize = rankSize;
 				}
 
 				levelOffset[rankIndex] = rowSize;
 				requiredSize += rowSize;
 			}
-			
+
 			// set row and rank size
 			if (isVertical) {
 				graphSize.width = (int) (largestRankSize * 3);
@@ -425,14 +453,15 @@ public class TreeLayout extends FreeformLayout {
 
 				// calculate child GraphNodes in next Rank
 				final List<Connection> connectionList = TreeLayoutUtil
-						.getTreeFigureIncomingConnections(connectionLayer,
-								treeNode.getFigure());
-				
+						.getTreeFigureChildrenConnections(connectionLayer,
+								treeNode.getFigure(), isInversed);
+
 				for (int i = 0; i < connectionList.size(); i++) {
 					final Connection connection = connectionList.get(i);
-					if (connection.getSourceAnchor().getOwner() != null) {
-						final IFigure childFig = connection.getSourceAnchor()
-								.getOwner();
+					IFigure childFig = isInversed ? connection
+							.getSourceAnchor().getOwner() : connection
+							.getTargetAnchor().getOwner();
+					if (childFig != null) {
 						final TreeNode childTreeNode = new TreeNode(treeNode,
 								childFig);
 						treeNode.children.add(childTreeNode);
@@ -489,12 +518,11 @@ public class TreeLayout extends FreeformLayout {
 
 	private void reduceLeafSpacing(TreeNode treeNode) {
 
-		if (areLeafs(treeNode.children)
-				&& treeNode.children.size() > 1) {
+		if (areLeafs(treeNode.children) && treeNode.children.size() > 1) {
 
 			final TreeNode firstNode = treeNode.children.get(0);
-			final TreeNode lastNode = treeNode.children
-					.get(treeNode.children.size() - 1);
+			final TreeNode lastNode = treeNode.children.get(treeNode.children
+					.size() - 1);
 
 			final int delta = lastNode.figure.getBounds().y
 					- firstNode.figure.getBounds().y;
@@ -506,8 +534,7 @@ public class TreeLayout extends FreeformLayout {
 				final int offset = delta - newDelta;
 				final int start = firstNode.figure.getBounds().y + offset / 2;
 				for (final TreeNode childTreeNode : treeNode.children) {
-					final int index = treeNode.children
-							.indexOf(childTreeNode);
+					final int index = treeNode.children.indexOf(childTreeNode);
 					final Rectangle bounds = childTreeNode.getFigure()
 							.getBounds().getCopy();
 					bounds.y = start
