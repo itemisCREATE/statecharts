@@ -65,7 +65,7 @@ public class TreeLayoutUtil {
 		return Collections.emptyList();
 	}
 
-	//TODO: Fix fixed isInversed setting
+	// TODO: Fix fixed isInversed setting
 	public static ArrayList<IGraphicalEditPart> getOrderedTreeChildren(
 			IGraphicalEditPart parentTreeNodeEditPart) {
 
@@ -333,8 +333,9 @@ public class TreeLayoutUtil {
 
 		for (final Connection connection : connectionList) {
 
-			final IFigure childFigure = isInversed ? connection.getSourceAnchor()
-					.getOwner() : connection.getTargetAnchor().getOwner();
+			final IFigure childFigure = isInversed ? connection
+					.getSourceAnchor().getOwner() : connection
+					.getTargetAnchor().getOwner();
 
 			final int childTreeLevel = getDeepestTreeLevel(connectionLayer,
 					childFigure, isInversed);
@@ -433,7 +434,7 @@ public class TreeLayoutUtil {
 		for (final Object object : connectionLayer.getChildren()) {
 			if (object instanceof Connection) {
 				final Connection connection = (Connection) object;
-				if (connection.getSourceAnchor().getOwner() == figure) {
+				if (connection.getSourceAnchor().getOwner().equals(figure)) {
 					outgoingConnectionList.add(connection);
 				}
 			}

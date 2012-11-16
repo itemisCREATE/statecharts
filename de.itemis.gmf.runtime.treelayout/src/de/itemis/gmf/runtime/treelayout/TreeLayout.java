@@ -270,12 +270,11 @@ public class TreeLayout extends FreeformLayout {
 	}
 
 	private int getlevelPos(int rankPos) {
-		int pos = 0;
-		for (int i = levelOffset.length - rankPos; i < levelOffset.length; i++) {
-			// Rankspacing is already included.
-			pos += levelOffset[i];
+		int result = 0;
+		for (int i = 0; i < rankPos; i++) {
+			result += levelOffset[i];
 		}
-		return pos;
+		return result;
 	}
 
 	/**
