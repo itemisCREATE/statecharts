@@ -271,7 +271,12 @@ public class TreeLayout extends FreeformLayout {
 
 	private int getlevelPos(int rankPos) {
 		int result = 0;
-		for (int i = 0; i < rankPos; i++) {
+
+		int startIndex = isTopLeftAlignment ?  0 : levelOffset.length - rankPos;
+
+		int stopIndex = isTopLeftAlignment ? rankPos : levelOffset.length;
+
+		for (int i = startIndex; i < stopIndex; i++) {
 			result += levelOffset[i];
 		}
 		return result;
@@ -379,10 +384,10 @@ public class TreeLayout extends FreeformLayout {
 
 			// set row and rank size
 			if (isVertical) {
-				graphSize.width = (int) (largestRankSize * 3);
+				graphSize.width = (int) largestRankSize;
 				graphSize.height = requiredSize;
 			} else {
-				graphSize.height = (int) (largestRankSize * 3);
+				graphSize.height = (int) largestRankSize;
 				graphSize.width = requiredSize;
 			}
 		}
