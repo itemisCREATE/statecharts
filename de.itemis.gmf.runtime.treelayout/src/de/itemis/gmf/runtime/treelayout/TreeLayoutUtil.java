@@ -434,7 +434,7 @@ public class TreeLayoutUtil {
 		for (final Object object : connectionLayer.getChildren()) {
 			if (object instanceof Connection) {
 				final Connection connection = (Connection) object;
-				if (connection.getSourceAnchor().getOwner().equals(figure)) {
+				if (connection.getSourceAnchor().getOwner() == figure) {
 					outgoingConnectionList.add(connection);
 				}
 			}
