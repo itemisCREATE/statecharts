@@ -667,7 +667,7 @@ public class FlowOptimizer {
       ExecutionRegion _region = cref.getRegion();
       _copy.setRegion(_region);
       Step _initialStep = cref.getInitialStep();
-      Step _stepCopy = this.stepCopy(_initialStep);
+      Step _stepCopy = _initialStep==null?(Step)null:this.stepCopy(_initialStep);
       _copy.setInitialStep(_stepCopy);
       Step _historyStep = cref.getHistoryStep();
       Step _stepCopy_1 = this.stepCopy(_historyStep);
