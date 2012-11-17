@@ -1,5 +1,6 @@
 testgroup AlwaysOncycle for statechart AlwaysOncycle {
 	
+	
 	 test alwaysOncycleTest {
 	 	
 	 	enter
