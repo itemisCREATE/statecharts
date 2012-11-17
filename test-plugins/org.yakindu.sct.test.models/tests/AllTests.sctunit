@@ -6,6 +6,7 @@ testsuite AllTests {
 	Guard, 
 	GuardedEntry,
 	GuardedExit, 
+	HistoryWithoutInitialStep,
 	IntegerExpressions,
 	InEventLifeCycle, InternalEventLifeCycle, OutEventLifeCycle,
 	Parenthesis, PriorityValues , RaiseEvent , SameNameDifferentRegion , ShallowHistory ,

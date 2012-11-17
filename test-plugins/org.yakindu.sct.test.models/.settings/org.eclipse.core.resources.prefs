@@ -6,6 +6,7 @@ encoding//testmodels/Exit.sct=UTF-8
 encoding//testmodels/ExitOnSelfTransition.sct=UTF-8
 encoding//testmodels/GuardedEntry.sct=UTF-8
 encoding//testmodels/GuardedExit.sct=UTF-8
+encoding//testmodels/HistoryWithoutInitialStep.sct=UTF-8
 encoding//testmodels/InEventLifeCycle.sct=UTF-8
 encoding//testmodels/InternalEventLifeCycle.sct=UTF-8
 encoding//testmodels/OutEventLifeCycle.sct=UTF-8

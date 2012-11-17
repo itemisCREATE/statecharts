@@ -1,0 +1,58 @@
+
+testgroup HistoryWithoutInitialStep for statechart HistoryWithoutInitialStep {
+	
+	
+	test enterThroughInitialEntry { 
+		
+		enter
+		assert active(HistoryWithoutInitialStep.main_region.A) 
+		
+		raise e1
+		cycle
+		assert active(HistoryWithoutInitialStep.main_region.B.r1.C)
+		
+		raise e2
+		cycle
+		assert active(HistoryWithoutInitialStep.main_region.B.r1.D)
+	}
+	
+
+	test enterCThroughHistory {
+		enter
+		assert active(HistoryWithoutInitialStep.main_region.A) 
+		
+		raise e1
+		cycle
+		assert active(HistoryWithoutInitialStep.main_region.B.r1.C)
+
+		raise e1
+		cycle
+		assert active(HistoryWithoutInitialStep.main_region.A)
+		
+		raise e2
+		cycle
+		assert active(HistoryWithoutInitialStep.main_region.B.r1.C)
+	}
+		 
+
+	test enterDThroughHistory {
+		enter
+		assert active(HistoryWithoutInitialStep.main_region.A) 
+		
+		raise e1
+		cycle
+		raise e2
+		cycle
+		assert active(HistoryWithoutInitialStep.main_region.B.r1.D)
+
+		raise e1
+		cycle
+		assert active(HistoryWithoutInitialStep.main_region.A)
+		
+		raise e2
+		cycle
+		assert active(HistoryWithoutInitialStep.main_region.B.r1.D)
+	}
+		
+		
+}
