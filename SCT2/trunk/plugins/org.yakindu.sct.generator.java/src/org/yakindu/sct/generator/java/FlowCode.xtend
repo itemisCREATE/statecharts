@@ -123,9 +123,9 @@ class FlowCode {
 		«stepComment»
 		if (historyVector[«region.historyVector.offset»] != State.$NullState$) {
 			«historyStep.code»
-		} else {
+		} «IF initialStep != null»else {
 			«initialStep.code»
-		}
+		} «ENDIF»
 	'''
 	
 	def dispatch code(SaveHistory it) '''

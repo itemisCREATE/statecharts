@@ -43,9 +43,9 @@ class FlowCode {
 		«stepComment»
 		if («scHandle»->historyVector[«region.historyVector.offset»] != «last_state») {
 			«historyStep.code»
-		} else {
+		} «IF initialStep != null»else {
 			«initialStep.code»
-		}
+		} «ENDIF»
 	'''
 
 	def dispatch code(StateSwitch it) '''

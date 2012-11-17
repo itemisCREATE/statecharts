@@ -280,7 +280,7 @@ class FlowOptimizer {
 		_copy.comment = cref.comment
 		_copy.deep =  cref.deep
 		_copy.region =  cref.region
-		_copy.initialStep =  cref.initialStep.stepCopy
+		_copy.initialStep =  cref.initialStep?.stepCopy
 		_copy.historyStep =  cref.historyStep.stepCopy
 
 		_copy
