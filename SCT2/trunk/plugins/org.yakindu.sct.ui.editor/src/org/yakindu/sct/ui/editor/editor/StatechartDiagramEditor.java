@@ -72,13 +72,18 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 						&& notification.getEventType() != Notification.REMOVING_ADAPTER
 						&& notification.getEventType() != Notification.RESOLVE) {
 					EObject eObject = (EObject) notification.getNotifier();
-					for (EClass eClass : eObject.eClass().getEAllSuperTypes()) {
-						if (SGraphPackage.eINSTANCE == eClass.getEPackage()) {
-							validationJob.cancel();
-							validationJob.schedule(DELAY);
-							return;
+					if (eObject.eClass().getEPackage() == SGraphPackage.eINSTANCE) {
+						validationJob.cancel();
+						validationJob.schedule(DELAY);
+					} else
+						for (EClass eClass : eObject.eClass()
+								.getEAllSuperTypes()) {
+							if (SGraphPackage.eINSTANCE == eClass.getEPackage()) {
+								validationJob.cancel();
+								validationJob.schedule(DELAY);
+								return;
+							}
 						}
-					}
 				}
 			}
 		}
