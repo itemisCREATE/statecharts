@@ -411,7 +411,9 @@ public class TreeLayoutUtil {
 		for (final Object object : connectionLayer.getChildren()) {
 			if (object instanceof Connection) {
 				final Connection connection = (Connection) object;
-				if (connection.getTargetAnchor().getOwner() == figure) {
+				if (connection.getTargetAnchor().getOwner() == figure
+						&& !isChildFigure(figure, connection.getSourceAnchor()
+								.getOwner())) {
 					incomingConnectionList.add(connection);
 				}
 			}
@@ -434,11 +436,37 @@ public class TreeLayoutUtil {
 		for (final Object object : connectionLayer.getChildren()) {
 			if (object instanceof Connection) {
 				final Connection connection = (Connection) object;
-				if (connection.getSourceAnchor().getOwner() == figure) {
+				if (connection.getSourceAnchor().getOwner() == figure
+						&& !isChildFigure(figure, connection.getTargetAnchor()
+								.getOwner())) {
 					outgoingConnectionList.add(connection);
 				}
 			}
 		}
 		return outgoingConnectionList;
+	}
+
+	/**
+	 * Iterates over the children and children's children to check if a figure
+	 * is a child or indirect of the given parent.
+	 * 
+	 * @param parent
+	 * @param possibleChild
+	 * @return
+	 */
+	public static boolean isChildFigure(IFigure parent, IFigure possibleChild) {
+		boolean ret = false;
+		for (Object child : parent.getChildren()) {
+			if (child == possibleChild) {
+				return true;
+			}
+			if (child instanceof IFigure) {
+				ret = isChildFigure((IFigure) child, possibleChild);
+				if (ret) {
+					break;
+				}
+			}
+		}
+		return ret;
 	}
 }
