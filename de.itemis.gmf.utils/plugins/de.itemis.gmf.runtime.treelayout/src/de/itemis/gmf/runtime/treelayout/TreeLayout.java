@@ -21,7 +21,6 @@ import org.eclipse.draw2d.Connection;
 import org.eclipse.draw2d.ConnectionLayer;
 import org.eclipse.draw2d.FreeformLayout;
 import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.LayoutManager;
 import org.eclipse.draw2d.RectangleFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
@@ -59,8 +58,6 @@ public class TreeLayout extends FreeformLayout {
 
 	protected class TreeNode {
 
-		private final TreeNode parent;
-
 		private List<TreeNode> children;
 
 		private final IFigure figure;
@@ -69,63 +66,16 @@ public class TreeLayout extends FreeformLayout {
 
 		private int level;
 
-		private int cell;
-
-		private boolean isLayouted;
-
-		public TreeNode(TreeNode parent, IFigure figure) {
+		public TreeNode(IFigure figure) {
 			super();
-			this.parent = parent;
 			this.figure = figure;
 			children = new LinkedList<TreeNode>();
 			weight = 0;
 			level = -1;
-			cell = -1;
-			isLayouted = false;
 		}
 
 		public IFigure getFigure() {
 			return figure;
-		}
-
-		public int getWeight() {
-			return weight;
-		}
-
-		public void setWeight(int weight) {
-			this.weight = weight;
-		}
-
-		public int getLevel() {
-			return level;
-		}
-
-		public void setLevel(int level) {
-			this.level = level;
-		}
-
-		public int getCell() {
-			return cell;
-		}
-
-		public void setCell(int cell) {
-			this.cell = cell;
-		}
-
-		public TreeNode getParent() {
-			return parent;
-		}
-
-		public List<TreeNode> getChildren() {
-			return children;
-		}
-
-		public boolean isLayouted() {
-			return isLayouted;
-		}
-
-		public void setLayouted(boolean isLayouted) {
-			this.isLayouted = isLayouted;
 		}
 	}
 
@@ -184,19 +134,18 @@ public class TreeLayout extends FreeformLayout {
 
 	@Override
 	public void layout(IFigure figure) {
-		
+
 		List<IFigure> figures = new LinkedList<IFigure>();
-		
+
 		for (Object fig : figure.getChildren()) {
 			if (fig instanceof IFigure) {
 				figures.add((IFigure) fig);
 			}
 		}
-		
+
 		parentOffset = getOrigin(figure);
 
 		final TreeNode rootTreeNode = createNodeTree(figure);
-
 		Dimension parentSize = figure.getBounds().getSize().getCopy();
 
 		if (graphSize.width > parentSize.width) {
@@ -209,20 +158,20 @@ public class TreeLayout extends FreeformLayout {
 
 		if (rootTreeNode != null) {
 			final int start = 0;
-			final double share = isVertical ? parentSize.width
-					/ rootTreeNode.weight : parentSize.height
-					/ rootTreeNode.weight;
+			final double share = isVertical ? new Double(parentSize.width)
+					/ new Double(rootTreeNode.weight) : new Double(parentSize.height)
+					/ new Double(rootTreeNode.weight);
 
 			layoutTree(rootTreeNode, start, share, figures);
+
 			if (isReducingLeafSpacing) {
 				reduceLeafSpacing(rootTreeNode);
 			}
 		}
-		
-		//layout figures not contained in trees
-		Point offset = getOrigin(figure);
+
+		// layout figures not contained in trees
 		for (IFigure f : figures) {
-			Rectangle bounds = (Rectangle) super.getConstraint(f);
+			Rectangle bounds = (Rectangle) getConstraint(f);
 			if (bounds == null)
 				continue;
 
@@ -235,32 +184,18 @@ public class TreeLayout extends FreeformLayout {
 				if (bounds.height == -1)
 					bounds.height = preferredSize.height;
 			}
-			bounds = bounds.getTranslated(offset);
+			bounds = bounds.getTranslated(parentOffset);
 			f.setBounds(bounds);
 		}
 	}
 
-	private void layoutTree(TreeNode treeNode, int start, double share, List<IFigure> unlayoutedFigures) {
+	private void layoutTree(TreeNode treeNode, int start, double share,
+			List<IFigure> unlayoutedFigures) {
 
-		final Rectangle constraint = (Rectangle) getConstraint(treeNode.figure);
-
-		if (constraint != null) {
-			Rectangle bounds = constraint.getCopy();
-
-			if (bounds.width <= 0 || bounds.height <= 0) {
-				final Dimension minimumSize = treeNode.figure.getMinimumSize();
-				final Dimension preferredSize = treeNode.figure
-						.getPreferredSize(bounds.width, bounds.height);
-
-				if (bounds.width <= 0) {
-					bounds.width = minimumSize.width > preferredSize.width ? minimumSize.width
-							: preferredSize.width;
-				}
-				if (bounds.height <= 0) {
-					bounds.height = minimumSize.height > preferredSize.height ? minimumSize.height
-							: preferredSize.height;
-				}
-			}
+		// final Rectangle constraint = (Rectangle)
+		// getConstraint(treeNode.figure);
+		Rectangle bounds = getConstrainedBounds(treeNode.figure);
+		if (bounds != null) {
 
 			// Calculation for tree level distance assumes that all figures have
 			// the same width and/or height;
@@ -293,7 +228,6 @@ public class TreeLayout extends FreeformLayout {
 
 			bounds = bounds.getTranslated(parentOffset);
 			treeNode.figure.setBounds(bounds);
-			treeNode.setLayouted(true);
 			unlayoutedFigures.remove(treeNode.figure);
 		}
 	}
@@ -301,7 +235,7 @@ public class TreeLayout extends FreeformLayout {
 	private int getlevelPos(int rankPos) {
 		int result = 0;
 
-		int startIndex = isTopLeftAlignment ?  0 : levelOffset.length - rankPos;
+		int startIndex = isTopLeftAlignment ? 0 : levelOffset.length - rankPos;
 
 		int stopIndex = isTopLeftAlignment ? rankPos : levelOffset.length;
 
@@ -309,24 +243,6 @@ public class TreeLayout extends FreeformLayout {
 			result += levelOffset[i];
 		}
 		return result;
-	}
-
-	/**
-	 * @see LayoutManager#getConstraint(IFigure) Transforms a Rectangle
-	 *      constraint to a TreeLayoutConstraint if necessary
-	 */
-	@Override
-	public TreeLayoutConstraint getConstraint(IFigure figure) {
-		
-		Rectangle constraint = (Rectangle) super.getConstraint(figure);
-
-		if (constraint != null && !(constraint instanceof TreeLayoutConstraint)) {
-
-			setConstraint(figure, new TreeLayoutConstraint(
-					constraint.getCopy(), false, -1));
-		}
-
-		return (TreeLayoutConstraint) super.getConstraint(figure);
 	}
 
 	private TreeNode createNodeTree(IFigure figure) {
@@ -343,7 +259,6 @@ public class TreeLayout extends FreeformLayout {
 
 			// Algorithm to calculate node weight, level and canvas size. Starts
 			// with the leafs and walks up to the root element.
-			int requiredSize = 0;
 			int largestRankSize = 0;
 			int rankSize = 0;
 			int rowSize = 0;
@@ -358,24 +273,32 @@ public class TreeLayout extends FreeformLayout {
 
 					final TreeNode treeNode = treeLevelList.get(rankIndex).get(
 							cellIndex);
-					treeNode.setCell(cellIndex);
+					Rectangle nodeBounds = getConstrainedBounds(treeNode.figure);
 					// set node weight
 					// Case 1: TreeNode is leaf
 					if (treeNode.children.isEmpty()) {
-						treeNode.weight = 1;
+						treeNode.weight = (isVertical ? nodeBounds.width
+								: nodeBounds.height) + leafSpacing;
 					}
 					// Case 2: TreeNode has only one child.
 					else if (treeNode.children.size() == 1) {
 						final TreeNode childGraphNode = treeNode.children
 								.get(0);
-						treeNode.weight = childGraphNode.weight;
+						int boundsSpanWidth = isVertical ? nodeBounds.width
+								: nodeBounds.height;
+						treeNode.weight = childGraphNode.weight > boundsSpanWidth ? childGraphNode.weight
+								: boundsSpanWidth;
 					}
 					// Case 3: TreeNode has many children.
 					else {
-						treeNode.weight = 0;
+						int childrenSpanWidth = 0;
 						for (final TreeNode childGraphNode : treeNode.children) {
-							treeNode.weight += childGraphNode.weight;
+							childrenSpanWidth += childGraphNode.weight;
 						}
+						int boundsSpanWidth = isVertical ? nodeBounds.width
+								: nodeBounds.height;
+						treeNode.weight = childrenSpanWidth > boundsSpanWidth ? childrenSpanWidth
+								: boundsSpanWidth;
 					}
 
 					// calculate rank size
@@ -401,23 +324,19 @@ public class TreeLayout extends FreeformLayout {
 				}
 
 				if (largestRankSize < rankSize) {
-					// System.out.println("Set new Ranksize for Rank " +
-					// rankIndex
-					// + " Size : " + rankSize);
 					largestRankSize = rankSize;
 				}
 
 				levelOffset[rankIndex] = rowSize;
-				requiredSize += rowSize;
 			}
 
 			// set row and rank size
 			if (isVertical) {
 				graphSize.width = (int) largestRankSize;
-				graphSize.height = requiredSize;
+				graphSize.height = rootTreeNode.weight;
 			} else {
 				graphSize.height = (int) largestRankSize;
-				graphSize.width = requiredSize;
+				graphSize.width = rootTreeNode.weight;
 			}
 		}
 
@@ -434,17 +353,18 @@ public class TreeLayout extends FreeformLayout {
 			RectangleFigure rootFigure = new RectangleFigure();
 			rootFigure.setPreferredSize(1, 1);
 			rootFigure.setSize(1, 1);
-			setConstraint(rootFigure, new Rectangle(0, 0, 0, 0));
-			TreeNode rootTreeNode = new TreeNode(null, rootFigure);
+			setConstraint(rootFigure, new TreeLayoutConstraint(new Rectangle(0,
+					0, 0, 0), true, -1));
+			TreeNode rootTreeNode = new TreeNode(rootFigure);
 
 			for (IFigure figure : rootFigures) {
-				rootTreeNode.children.add(new TreeNode(null, figure));
+				rootTreeNode.children.add(new TreeNode(figure));
 			}
 			return rootTreeNode;
 
 		} else if (rootFigures.size() == 1) {
 
-			return new TreeNode(null, rootFigures.get(0));
+			return new TreeNode(rootFigures.get(0));
 
 		}
 		return null;
@@ -495,8 +415,7 @@ public class TreeLayout extends FreeformLayout {
 							.getSourceAnchor().getOwner() : connection
 							.getTargetAnchor().getOwner();
 					if (childFig != null) {
-						final TreeNode childTreeNode = new TreeNode(treeNode,
-								childFig);
+						final TreeNode childTreeNode = new TreeNode(childFig);
 						treeNode.children.add(childTreeNode);
 					}
 				}
@@ -519,7 +438,7 @@ public class TreeLayout extends FreeformLayout {
 
 		for (int index = 0; index < treeNodeList.size(); index++) {
 			final TreeNode treeNode = treeNodeList.get(index);
-			final TreeLayoutConstraint constraint = getConstraint(treeNode.figure);
+			final TreeLayoutConstraint constraint = (TreeLayoutConstraint) getConstraint(treeNode.figure);
 
 			if (constraint.getTreeInnerRankIndex() != -1
 					&& constraint.getTreeInnerRankIndex() < sortedTreeNodeList.length
@@ -532,7 +451,7 @@ public class TreeLayout extends FreeformLayout {
 
 		for (final TreeNode treeNode : notConstrained) {
 			final int nextEmptyIndex = getNextEmptyIndex(sortedTreeNodeList);
-			final TreeLayoutConstraint constraint = getConstraint(treeNode.figure);
+			final TreeLayoutConstraint constraint = (TreeLayoutConstraint) getConstraint(treeNode.figure);
 			constraint.setTreeInnerRankIndex(nextEmptyIndex);
 			sortedTreeNodeList[nextEmptyIndex] = treeNode;
 		}
@@ -591,5 +510,32 @@ public class TreeLayout extends FreeformLayout {
 			}
 		}
 		return true;
+	}
+
+	private Rectangle getConstrainedBounds(IFigure figure) {
+
+		final Rectangle constraint = (Rectangle) getConstraint(figure);
+		
+		if (constraint != null) {
+			
+			Rectangle bounds = constraint.getCopy();
+
+			if (bounds.width <= 0 || bounds.height <= 0) {
+				final Dimension minimumSize = figure.getMinimumSize();
+				final Dimension preferredSize = figure.getPreferredSize(
+						bounds.width, bounds.height);
+
+				if (bounds.width <= 0) {
+					bounds.width = minimumSize.width > preferredSize.width ? minimumSize.width
+							: preferredSize.width;
+				}
+				if (bounds.height <= 0) {
+					bounds.height = minimumSize.height > preferredSize.height ? minimumSize.height
+							: preferredSize.height;
+				}
+			}
+			return bounds;
+		}
+		return null;
 	}
 }

@@ -25,8 +25,6 @@ public class TreeLayoutConstraint extends Rectangle {
 	private static final long serialVersionUID = 1L;
 
 	private boolean isRoot;
-	
-	private boolean ignoreNode;
 
 	private int treeInnerRankIndex;
 
@@ -37,7 +35,6 @@ public class TreeLayoutConstraint extends Rectangle {
 		super(bounds);
 		this.isRoot = isRoot;
 		this.treeInnerRankIndex = innerRankIndex;
-		ignoreNode = false;
 	}
 
 	public TreeLayoutConstraint(TreeLayoutConstraint treeLayoutConstraint) {
@@ -51,14 +48,6 @@ public class TreeLayoutConstraint extends Rectangle {
 
 	public void setRoot(boolean isRoot) {
 		this.isRoot = isRoot;
-	}
-	
-	public boolean isIgnoredNode() {
-		return ignoreNode;
-	}
-
-	public void setIgnoreNode(boolean ignoreNode) {
-		this.ignoreNode = ignoreNode;
 	}
 
 	public int getTreeInnerRankIndex() {

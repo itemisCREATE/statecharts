@@ -436,10 +436,7 @@ public class TreeLayoutUtil {
 	private static boolean isIgnoredFigure(IFigure figure) {
 		IFigure parent = figure.getParent();
 		if (parent != null && parent.getLayoutManager() != null) {
-			Object constraint = parent.getLayoutManager().getConstraint(figure);
-			if (constraint instanceof TreeLayoutConstraint) {
-				return ((TreeLayoutConstraint) constraint).isIgnoredNode();
-			}
+			return !(parent.getLayoutManager().getConstraint(figure) instanceof TreeLayoutConstraint);
 		}
 		return false;
 	}
