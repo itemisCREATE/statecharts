@@ -270,45 +270,6 @@ public class TreeLayoutUtil {
 		xmiIdAnnotation.setEModelElement(child);
 	}
 
-	// private static void setParentAnnotation(IFigure childFigure,
-	// IFigure parentFigure, EditPartViewer viewer) {
-	// final IGraphicalEditPart parentEditPart = (IGraphicalEditPart) viewer
-	// .getVisualPartMap().get(parentFigure);
-	// final IGraphicalEditPart childEditPart = (IGraphicalEditPart) viewer
-	// .getVisualPartMap().get(childFigure);
-	// try {
-	// CommandUtil
-	// .executeUndoableOperation(new SetTreeParentAnnotationCommand(
-	// childEditPart.getNotationView(), parentEditPart
-	// .getNotationView()));
-	// } catch (final ExecutionException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// private static IFigure getAnnotatedParentFigure(IFigure figure,
-	// EditPartViewer viewer) {
-	// final IGraphicalEditPart editPart = (IGraphicalEditPart) viewer
-	// .getVisualPartMap().get(figure);
-	// final View view = editPart.getNotationView();
-	//
-	// final EAnnotation xmiIdAnnotation = view
-	// .getEAnnotation(TREE_LAYOUT_ANNOTATION);
-	//
-	// if (xmiIdAnnotation != null) {
-	// final String parentURI = xmiIdAnnotation.getDetails().get(
-	// TREE_NODE_PARENT_URI);
-	// if (parentURI != null) {
-	// final EObject object = view.eResource().getEObject(parentURI);
-	// final IGraphicalEditPart parentEditPart = (IGraphicalEditPart) viewer
-	// .getEditPartRegistry().get(object);
-	// return parentEditPart != null ? parentEditPart.getFigure()
-	// : null;
-	// }
-	// }
-	// return null;
-	// }
-
 	/**
 	 * Returns only connections where the parent figure is a direct parent.
 	 * Indirect connections are filtered out. Use if children can have many
@@ -411,9 +372,10 @@ public class TreeLayoutUtil {
 		for (final Object object : connectionLayer.getChildren()) {
 			if (object instanceof Connection) {
 				final Connection connection = (Connection) object;
+				final IFigure source = connection.getSourceAnchor().getOwner();
 				if (connection.getTargetAnchor().getOwner() == figure
-						&& !isChildFigure(figure, connection.getSourceAnchor()
-								.getOwner())) {
+						&& !isChildFigure(figure, source)
+						&& !isIgnoredFigure(source)) {
 					incomingConnectionList.add(connection);
 				}
 			}
@@ -436,9 +398,10 @@ public class TreeLayoutUtil {
 		for (final Object object : connectionLayer.getChildren()) {
 			if (object instanceof Connection) {
 				final Connection connection = (Connection) object;
+				final IFigure target = connection.getTargetAnchor().getOwner();
 				if (connection.getSourceAnchor().getOwner() == figure
-						&& !isChildFigure(figure, connection.getTargetAnchor()
-								.getOwner())) {
+						&& !isChildFigure(figure, target)
+						&& !isIgnoredFigure(target)) {
 					outgoingConnectionList.add(connection);
 				}
 			}
@@ -448,7 +411,7 @@ public class TreeLayoutUtil {
 
 	/**
 	 * Iterates over the children and children's children to check if a figure
-	 * is a child or indirect of the given parent.
+	 * is a direct child or indirect child of the given parent.
 	 * 
 	 * @param parent
 	 * @param possibleChild
@@ -468,5 +431,16 @@ public class TreeLayoutUtil {
 			}
 		}
 		return ret;
+	}
+
+	private static boolean isIgnoredFigure(IFigure figure) {
+		IFigure parent = figure.getParent();
+		if (parent != null && parent.getLayoutManager() != null) {
+			Object constraint = parent.getLayoutManager().getConstraint(figure);
+			if (constraint instanceof TreeLayoutConstraint) {
+				return ((TreeLayoutConstraint) constraint).isIgnoredNode();
+			}
+		}
+		return false;
 	}
 }

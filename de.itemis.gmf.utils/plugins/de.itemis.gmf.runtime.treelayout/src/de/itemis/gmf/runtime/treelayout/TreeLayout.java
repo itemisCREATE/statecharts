@@ -184,7 +184,15 @@ public class TreeLayout extends FreeformLayout {
 
 	@Override
 	public void layout(IFigure figure) {
-
+		
+		List<IFigure> figures = new LinkedList<IFigure>();
+		
+		for (Object fig : figure.getChildren()) {
+			if (fig instanceof IFigure) {
+				figures.add((IFigure) fig);
+			}
+		}
+		
 		parentOffset = getOrigin(figure);
 
 		final TreeNode rootTreeNode = createNodeTree(figure);
@@ -205,14 +213,34 @@ public class TreeLayout extends FreeformLayout {
 					/ rootTreeNode.weight : parentSize.height
 					/ rootTreeNode.weight;
 
-			layoutTree(rootTreeNode, start, share);
+			layoutTree(rootTreeNode, start, share, figures);
 			if (isReducingLeafSpacing) {
 				reduceLeafSpacing(rootTreeNode);
 			}
 		}
+		
+		//layout figures not contained in trees
+		Point offset = getOrigin(figure);
+		for (IFigure f : figures) {
+			Rectangle bounds = (Rectangle) super.getConstraint(f);
+			if (bounds == null)
+				continue;
+
+			if (bounds.width == -1 || bounds.height == -1) {
+				Dimension preferredSize = f.getPreferredSize(bounds.width,
+						bounds.height);
+				bounds = bounds.getCopy();
+				if (bounds.width == -1)
+					bounds.width = preferredSize.width;
+				if (bounds.height == -1)
+					bounds.height = preferredSize.height;
+			}
+			bounds = bounds.getTranslated(offset);
+			f.setBounds(bounds);
+		}
 	}
 
-	private void layoutTree(TreeNode treeNode, int start, double share) {
+	private void layoutTree(TreeNode treeNode, int start, double share, List<IFigure> unlayoutedFigures) {
 
 		final Rectangle constraint = (Rectangle) getConstraint(treeNode.figure);
 
@@ -250,7 +278,7 @@ public class TreeLayout extends FreeformLayout {
 			bounds.y = isVertical ? levelPos : cellPos - (bounds.height / 2);
 
 			for (final TreeNode childNode : treeNode.children) {
-				layoutTree(childNode, start, share);
+				layoutTree(childNode, start, share, unlayoutedFigures);
 				start += share * childNode.weight;
 			}
 
@@ -266,6 +294,7 @@ public class TreeLayout extends FreeformLayout {
 			bounds = bounds.getTranslated(parentOffset);
 			treeNode.figure.setBounds(bounds);
 			treeNode.setLayouted(true);
+			unlayoutedFigures.remove(treeNode.figure);
 		}
 	}
 
@@ -288,7 +317,7 @@ public class TreeLayout extends FreeformLayout {
 	 */
 	@Override
 	public TreeLayoutConstraint getConstraint(IFigure figure) {
-
+		
 		Rectangle constraint = (Rectangle) super.getConstraint(figure);
 
 		if (constraint != null && !(constraint instanceof TreeLayoutConstraint)) {
