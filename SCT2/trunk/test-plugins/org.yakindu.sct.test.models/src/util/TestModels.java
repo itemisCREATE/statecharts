@@ -31,7 +31,7 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class TestModels { 
+public class TestModels {
 
 	public static final String ALWAYS_ONCYCLE = "AlwaysOncycle.sct";
 	public static final String BIT_EXPRESSIONS = "BitExpressions.sct";
@@ -60,6 +60,7 @@ public class TestModels {
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/";
 	public static final String TIME_TRIGGER = "TimeTrigger.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
+	public static final String OPERATIONS = "Operations.sct";
 
 	@Inject
 	private ModelSequencer sequencer;
@@ -114,7 +115,7 @@ public class TestModels {
 	public ExecutionFlow createCKeywordModel() throws IOException {
 		return loadExecutionFlowFromResource(C_KEYWORDS_M);
 	}
-	
+
 	/**
 	 * <img src="../../images/Declarations.png" /> <br />
 	 * 
@@ -175,7 +176,6 @@ public class TestModels {
 		return loadExecutionFlowFromResource(JAVA_KEYWORDS_M);
 	}
 
-	
 	/**
 	 * <img src="../../images/Parenthesis.png" /> <br />
 	 * 
@@ -185,8 +185,7 @@ public class TestModels {
 	public ExecutionFlow createParenthesisModel() throws IOException {
 		return loadExecutionFlowFromResource(PARENTHESIS);
 	}
-	
-		
+
 	/**
 	 * <img src="../../images/PriorityValues.png" /> <br />
 	 * 
@@ -223,7 +222,8 @@ public class TestModels {
 	 * @return the {@link ExecutionFlow}
 	 * @throws IOException
 	 */
-	public ExecutionFlow createSameNameDifferentRegionModel() throws IOException {
+	public ExecutionFlow createSameNameDifferentRegionModel()
+			throws IOException {
 		return loadExecutionFlowFromResource(SAME_NAME_DIFFERENT_REGION);
 	}
 
@@ -313,7 +313,7 @@ public class TestModels {
 	 * 
 	 * @return the {@link ExecutionFlow}
 	 * @throws IOException
-	 */ 
+	 */
 	public ExecutionFlow createTimeTriggerModel() throws IOException {
 		return loadExecutionFlowFromResource(TIME_TRIGGER);
 	}
@@ -326,6 +326,16 @@ public class TestModels {
 	 */
 	public ExecutionFlow createValuedEventsModel() throws IOException {
 		return loadExecutionFlowFromResource(VALUED_EVENTS);
+	}
+
+	/**
+	 * <img src="../../images/Operations.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createOperationsModel() throws IOException {
+		return loadExecutionFlowFromResource(OPERATIONS);
 	}
 
 	/**

@@ -20,6 +20,8 @@ import static util.TestModels.FEATURE_CALLS;
 import static util.TestModels.GUARD;
 import static util.TestModels.INTEGER_EXPRESSIONS;
 import static util.TestModels.JAVA_KEYWORDS_M;
+import static util.TestModels.OPERATIONS;
+import static util.TestModels.PARENTHESIS;
 import static util.TestModels.PRIORITY_VALUES;
 import static util.TestModels.RAISE_EVENTS;
 import static util.TestModels.REAL_EXPRESSIONS;
@@ -33,7 +35,6 @@ import static util.TestModels.STRING_EXPRESSIONS;
 import static util.TestModels.SYNC_FORK;
 import static util.TestModels.SYNC_JOIN;
 import static util.TestModels.VALUED_EVENTS;
-import static util.TestModels.PARENTHESIS;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
@@ -237,6 +238,12 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	public void testValuedEventsModel() throws Exception {
 		Statechart statechart = models
 				.loadStatechartFromResource(VALUED_EVENTS);
+		failOnError(generateAndCompile(statechart));
+	}
+	@Test
+	public void tesTOperationsModel() throws Exception{
+		Statechart statechart = models
+				.loadStatechartFromResource(OPERATIONS);
 		failOnError(generateAndCompile(statechart));
 	}
 }
