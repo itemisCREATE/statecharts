@@ -41,8 +41,34 @@ public class AssignmentAsExpressionTest extends AbstractExecutionFlowTest {
 	@Test
 	public void simpleAssignment() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
+		assertTrue(isActive("Add"));
 		assertTrue(getInteger("b") == 5);
 		assertTrue(getInteger("a") == 9);
+		interpreter.runCycle();
+		assertTrue(isActive("Subtract"));
+		assertTrue(getInteger("d") == 6);
+		interpreter.runCycle();
+		assertTrue(isActive("Multiply"));
+		assertTrue(getInteger("e") == 15);
+		interpreter.runCycle();
+		assertTrue(isActive("Divide"));
+		assertTrue(getInteger("g") == 1);
+		interpreter.runCycle();
+		assertTrue(isActive("Modulo"));
+		assertTrue(getInteger("i") == 1);
+		interpreter.runCycle();
+		assertTrue(isActive("Shift"));
+		assertTrue(getInteger("j") == 16);
+		assertTrue(getInteger("k") == 4);
+		interpreter.runCycle();
+		assertTrue(isActive("boolean And"));
+		assertTrue(getInteger("l") == 1);
+		interpreter.runCycle();
+		assertTrue(isActive("boolean Or"));
+		assertTrue(getInteger("p") == 15);
+		interpreter.runCycle();
+		assertTrue(isActive("boolean Xor"));
+		assertTrue(getInteger("u") == 12);
+		interpreter.exit();
 	}
 }
