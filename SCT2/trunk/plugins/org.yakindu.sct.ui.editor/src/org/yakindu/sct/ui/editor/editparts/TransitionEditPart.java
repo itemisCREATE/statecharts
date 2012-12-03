@@ -12,8 +12,12 @@ package org.yakindu.sct.ui.editor.editparts;
 
 import org.eclipse.draw2d.Connection;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.EditPart;
+import org.eclipse.gef.Request;
+import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ConnectionNodeEditPart;
+import org.eclipse.gmf.runtime.gef.ui.internal.tools.SelectConnectionEditPartTracker;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.TransitionFigure;
@@ -23,6 +27,7 @@ import org.yakindu.sct.ui.editor.editor.figures.TransitionFigure;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public class TransitionEditPart extends ConnectionNodeEditPart {
 
 	public TransitionEditPart(View view) {
@@ -54,7 +59,7 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 					((TransitionExpressionEditPart) childEditPart).getFigure());
 		}
 	}
-	
+
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
 		if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes()
@@ -64,5 +69,18 @@ public class TransitionEditPart extends ConnectionNodeEditPart {
 			super.handleNotificationEvent(notification);
 		}
 	}
-	
+
+	@Override
+	public DragTracker getDragTracker(Request req) {
+		return new SelectConnectionEditPartTracker(this) {
+			@Override
+			protected boolean handleDoubleClick(int button) {
+				DirectEditRequest req = new DirectEditRequest();
+				req.setLocation(getCurrentInput().getMouseLocation());
+				TransitionEditPart.this.performDirectEditRequest(req);
+				return true;
+			}
+		};
+	}
+
 }
