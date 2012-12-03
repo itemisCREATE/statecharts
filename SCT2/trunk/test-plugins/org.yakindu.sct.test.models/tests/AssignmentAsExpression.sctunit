@@ -4,13 +4,46 @@ testgroup AssignmentAsExpression for statechart AssignmentAsExpression{
 	 
 	  test simpleAssignment{ 
 	  	enter
-	  	assert active(AssignmentAsExpression.main_region.A) 
-	  	
+	  	assert active(AssignmentAsExpression.main_region.Add)
+	  		  	
 	  	assert b == 5
-	  	assert a == 9
+	  	assert a == 9	  	
+	   	
+	  	cycle
+	  	assert active(AssignmentAsExpression.main_region.Subtract) 
+	  	assert d == 6
 	  	
-	  }
-	  	 
+	  	cycle
+	  	assert active(AssignmentAsExpression.main_region.Multiply) 
+	  	assert e == 15
+	  	
+	  	cycle
+	  	assert active(AssignmentAsExpression.main_region.Divide) 
+	  	assert g == 1	  	
+	  	
+	  	cycle
+	  	assert active(AssignmentAsExpression.main_region.Modulo)
+	  	assert i == 1 
+
+	  	cycle
+	  	assert active(AssignmentAsExpression.main_region.Shift)
+		assert j == 16
+		assert k == 4
+		
+	  	cycle
+	  	assert active(AssignmentAsExpression.main_region.boolean_And)
+		assert l == 1
+
+	  	cycle
+	  	assert active(AssignmentAsExpression.main_region.boolean_Or)
+		assert p == 15
+		
+	  	cycle
+	  	assert active(AssignmentAsExpression.main_region.boolean_Xor)
+		assert u == 12		
+	  	
+	  	exit
+	  } 
 	 
 }
 	
