@@ -26,14 +26,15 @@ import org.eclipse.debug.internal.ui.DebugUIPlugin;
 import org.eclipse.debug.internal.ui.launchConfigurations.PerspectiveManager;
 import org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.progress.UIJob;
 
 /**
  * custom implementation of the {@link PerspectiveManager} for the Yakindu
  * Statechart launch types. </br>
  * 
- * This implementation forces to open the Yakindu Simulation perspective without
- * asking the user. </br>
+ * This implementation forces to open the Yakindu Simulation perspective and the
+ * Debug view.</br>
  * 
  * @author andreas muelder - Initial contribution and API
  * 
@@ -41,6 +42,8 @@ import org.eclipse.ui.progress.UIJob;
 @SuppressWarnings("restriction")
 public class SCTPerspectiveManager extends PerspectiveManager implements
 		ILaunchListener {
+
+	private static final String DEBUG_VIEW_ID = "org.eclipse.debug.ui.DebugView";
 
 	public void launchAdded(ILaunch launch) {
 
@@ -60,6 +63,17 @@ public class SCTPerspectiveManager extends PerspectiveManager implements
 										ID_PERSPECTIVE_SCT_SIMULATION))) {
 							switchToPerspective(window,
 									ID_PERSPECTIVE_SCT_SIMULATION);
+						}
+						// Force the debug view to open
+						if (window != null) {
+							try {
+								window.getWorkbench()
+										.getActiveWorkbenchWindow()
+										.getActivePage()
+										.showView(DEBUG_VIEW_ID);
+							} catch (PartInitException e) {
+								e.printStackTrace();
+							}
 						}
 						return Status.OK_STATUS;
 					}
