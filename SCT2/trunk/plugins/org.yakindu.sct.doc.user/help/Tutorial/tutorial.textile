@@ -5,7 +5,7 @@ h3. Introduction
 
 This tutorial will introduce the open source project Yakindu Statechart Tools (SCT).YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of statecharts. It is an easy to use tool that features sophisticated graphical state chart editing, validation and simulation of statecharts as well as code generation.
 
-In this tutorial you will learn how to create a new statechart model, execute it with the simulation engine and generate a fully working Java statechart implementation from it. Note that this tutorial will not explain statecharts in general, so you should yourself familiarize with the basic concepts of state machines first.[1] Before we get started, make sure you have Yakindu Statechart Tools properly installed. For installation instructions see chapter "Installation":install.html .
+In this tutorial you will learn how to create a new statechart model, execute it with the simulation engine and generate a fully working Java statechart implementation from it. Note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have Yakindu Statechart Tools properly installed. For installation instructions see chapter "Installation":install.html .
 
 h3. CallHandling example explained
 
@@ -17,7 +17,7 @@ The first step is to create a new Project by choosing _File -> New -> Project...
 
 h3. Create a statechart model
 
-Next, create a new statechart model by choosing _File -> New -> Other -> Yakindu -> YAKINDU Statechart Model_. The wizard asks for the parent folder and we choose *CallHandling/model*. Finish the wizard and confirm the perspective switch with *Yes*. The statechart editor opens and show the definition of a very simple statechart.
+Next, create a new statechart model by choosing _File -> New -> Other -> Yakindu -> YAKINDU Statechart Model_. The wizard asks for the parent folder and we choose *CallHandling/model*. Name the File *CallHandling.sct* and finish the wizard. Last, confirm the perspective switch with *Yes*. The statechart editor opens and show the definition of a very simple statechart.
 
 h3. Use the Editor
 
@@ -58,9 +58,9 @@ If your statechart behaves as expected, we can now go one step further and gener
 
 h3. Generate Java code
 
-YAKINDU SCT includes code generators for Java, C and C++ out of the box. Our code generators follow a ‘code-only’ approach and do not rely on any additional runtime library. The generated code provides a well-defined interface and can be integrated easily with any client code. In this tutorial we will generate Java code for our *CallHandling* example.
+YAKINDU SCT includes code generators for Java, C and C++ out of the box. Our code generators follow a "code-only" approach and do not rely on any additional runtime library. The generated code provides a well-defined interface and can be integrated easily with any client code. In this tutorial we will generate Java code for our *CallHandling* example.
 
-For code generation, SCT uses a textual generator model called SGen. This model allows customization of the code generation process. To create a new SGen model select the model folder in the project explorer on the left, and select _New – Yakindu Statechart Generator Model_ from the context menu. On the first wizard page, enter *CallHandling.sgen* as the file name and press next. On the second wizard page, select _Yakindu Java Code Generator_ from the drop down menu on the top. In the statechart tree below, check the *CallHandling.sct* model and press Finish. The SGen Editor opens and show the following simple generator model:
+For code generation, SCT uses a textual generator model called SGen. This model allows customization of the code generation process. To create a new SGen model select the model folder in the project explorer on the left, and select _New – Yakindu Statechart Generator Model_ from the context menu. On the first wizard page, enter *CallHandling.sgen* as the file name and press next. On the second wizard page, select _Yakindu SCT Java Code Generator_ from the drop down menu on the top. In the statechart tree below, check the *CallHandling.sct* model and press Finish. The SGen Editor opens and show the following simple generator model:
 
 bc. 
 GeneratorModel for yakindu::java {
@@ -86,37 +86,42 @@ The generator Model is executed by a builder. Thus, the artifacts are generated 
 As a result, you should see a new folder *src-gen* in your project explorer on the left that contains the generated java artifacts. Add the generated artifacts to the Java Build Path by selecting _Build Path -> Use as source folder_ from the src-gen folders context menu. 
 
 h3. Integration with client code
-TBD
+
+In the last step, we want to integrate the generated statechart implementation with some client code. Create a new class by selecting New -> Class from the context menu of the src folder in the project explorer. Give it a meaningful name, for example CallHandlingClient and hit finish.
+ Next, copy the following code into your created class. 
 
 
-bc.. 
+bc. 
+1  import org.yakindu.scr.TimerService;
+2  import org.yakindu.scr.callhandling.CallHandlingStatemachine;
+3  public class CallHandlingClient {
+4        public static void main(String[] args) throws Exception {
+5               CallHandlingStatemachine sm = new CallHandlingStatemachine();
+6               sm.setTimerService(new TimerService());
+7               // enter the sm and active the Idle state
+8               sm.enter();
+9               // Raise an incoming call
+10              sm.getSCIPhone().raiseIncoming_call();
+11              sm.runCycle();
+12              // Accept the call
+13              sm.getSCIUser().raiseAccept_call();
+14              sm.runCycle();
+15              for (int i = 0; i < 50; i++) {
+16                      Thread.sleep(200);
+17                      sm.runCycle();
+18              }
+19              System.out.println(String.format("The phone call took %d s", +sm
+20                              .getSCIPhone().getDuration()));
+21              sm.getSCIUser().raiseDismiss_call();
+22              sm.runCycle();
+23        }
+24  }
 
-import org.yakindu.scr.TimerService;
-import org.yakindu.scr.callhandling.CallHandlingStatemachine;
 
-public class CallHandlingClient {
+Let’s have a detailed look at the implementation. First, create a new instanceof your Statemachine by calling the default constructor. (line 5). Since we use timed events, the statechart implementation requires an implementation of ITimerService. Because of the TimerService feature that we added to the genmodel, the code generator creates default implementation that uses the java.util.Timer. We create a new instanceof of the default TimerService and set it to the statemachine. (line 6). The call of the enter method in line 8 enteres the statechart and activates the Idle state. For each interface created in the statechart specification block, a getter for this interface is generated. (getSCIPhone() and getSCIUser()). You can access all in events and variables via these interfaces. In line 10, the incoming call event is raised, that activates the Incoming Call state after the next runcycle is executed. (line 11). In line 13, we raise the accept call event via the user interface, that activates the Active Call State after the next runcycle. (line 17). From line 15 to line 18, the runcycle is executed periodically every 200ms. After that, the duration is printed to console. (line 19, 20). Finally, the event dismiss call is executed that activated the Dimiss Call state after the next runcycle. 
 
-	public static void main(String[] args) throws Exception {
-		CallHandlingStatemachine sm = new CallHandlingStatemachine();
-		sm.setTimerService(new TimerService());
-		// enter the sm and active the Idle state
-		sm.enter();
-		// Raise an incoming call
-		sm.getSCIPhone().raiseIncoming_call();
-		sm.runCycle();
-		// Accept the call
-		sm.getSCIUser().raiseAccept_call();
-		sm.runCycle();
-		for (int i = 0; i < 50; i++) {
-			Thread.sleep(200);
-			sm.runCycle();
-		}
-		System.out.println(String.format("The phone call took %d s", +sm
-				.getSCIPhone().getDuration()));
-		sm.getSCIUser().raiseDismiss_call();
-		sm.runCycle();
-	}
-}
+Finally, execute the code via Run As -> Java Application from the context menu. 
+
 
 h2. Weblinks
 
