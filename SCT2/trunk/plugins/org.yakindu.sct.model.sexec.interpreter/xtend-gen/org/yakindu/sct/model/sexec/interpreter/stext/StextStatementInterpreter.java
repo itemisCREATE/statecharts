@@ -106,7 +106,10 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
         Object _evaluate = this.evaluate(operator, _value, result);
         this.context.setSlotValue(_name_2, _evaluate);
       }
-      _xblockexpression = (result);
+      String _name_3 = scopeVariable.getName();
+      ExecutionVariable _variable_1 = this.context.getVariable(_name_3);
+      Object _value_1 = _variable_1.getValue();
+      _xblockexpression = (_value_1);
     }
     return _xblockexpression;
   }
