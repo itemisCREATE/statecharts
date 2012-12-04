@@ -23,7 +23,7 @@ testgroup AssignmentAsExpression for statechart AssignmentAsExpression{
 	  	
 	  	cycle
 	  	assert active(AssignmentAsExpression.main_region.Modulo)
-	  	assert i == 1 
+	  	assert i == 1
 
 	  	cycle
 	  	assert active(AssignmentAsExpression.main_region.Shift)
