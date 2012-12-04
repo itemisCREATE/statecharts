@@ -4,6 +4,7 @@ import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.generator.core.extensions.TypeAnalyzerExtensions
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.Variable
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -37,7 +38,6 @@ import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.ShiftOperator
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.UnaryOperator
-import org.yakindu.sct.model.sgraph.Declaration
 
 class ExpressionCode {
 	
@@ -188,19 +188,22 @@ class ExpressionCode {
 		value.definition.context + value.definition.event.valueIdentifier
 	}
 	
-	def dispatch String code(ElementReferenceExpression it) {
-		'''
+	def dispatch String code(ElementReferenceExpression it) '''
 		«IF operationCall»
 			«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
 		«ELSE»
 			«definition.code»
 		«ENDIF»
-		'''
-	}
+	'''
 	
-	def dispatch String code(FeatureCall it) {
-		definition.context + definition.name.asEscapedIdentifier
-	}
+	
+	def dispatch String code(FeatureCall it) '''
+		«IF feature instanceof OperationDefinition»
+			«feature.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
+		«ELSE»
+			«definition.context + definition.name.asEscapedIdentifier»
+		«ENDIF»
+	'''
 	
 	def dispatch String code(Declaration it) {
 		context + name.asEscapedIdentifier
@@ -221,6 +224,17 @@ class ExpressionCode {
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
-		return ""		
+		return ""
+	}
+	
+	def dispatch String getContext(OperationDefinition it) {
+		if (scope!=null) {
+			return scope.interfaceName.asEscapedIdentifier + "."
+		}
+		return ""
+	}
+	
+	def dispatch String getContext(EObject it) {
+		return "//ERROR: No context for " + it
 	}
 }

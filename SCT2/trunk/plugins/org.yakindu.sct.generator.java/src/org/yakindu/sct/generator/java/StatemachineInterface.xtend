@@ -178,7 +178,7 @@ class StatemachineInterface {
 	
 	def private operationSignature(OperationDefinition it) {
 		'''
-		public «type.getJavaType()» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.identifier»«ENDFOR»);
+		public «type.javaType» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.javaType» «parameter.identifier»«ENDFOR»);
 		'''
 	}
 	
