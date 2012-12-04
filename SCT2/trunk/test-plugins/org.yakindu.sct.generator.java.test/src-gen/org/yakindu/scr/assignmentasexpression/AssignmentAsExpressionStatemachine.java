@@ -597,6 +597,16 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Modulo;
 	}
+	
+	public static void main(String[] args) {
+		int j = 7;
+		j += (j +=5) + 5;
+		System.out.println(j);
+		
+		int i  = 7;
+		i %= (i %= 4) % 4;
+		System.out.println(i);
+	}
 
 	/* The reactions of state Modulo. */
 	private void reactMain_region_Modulo() {
