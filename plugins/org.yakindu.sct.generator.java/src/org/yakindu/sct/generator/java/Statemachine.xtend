@@ -387,15 +387,15 @@ class Statemachine {
 				
 			«ENDIF»
 		«ENDFOR»
-		«FOR variable : flow.internalScopeVariables»
-		private «variable.type.javaType» «variable.getter» {
-			return «variable.name.asEscapedIdentifier»;
-		}
-		
-		private void «variable.setter»(«variable.type.javaType» value) {
-			«variable.name.asEscapedIdentifier» = value;
-		}	
-		«ENDFOR»
+«««		«FOR variable : flow.internalScopeVariables»
+«««		private «variable.type.javaType» «variable.getter» {
+«««			return «variable.name.asEscapedIdentifier»;
+«««		}
+«««		
+«««		private void «variable.setter»(«variable.type.javaType» value) {
+«««			«variable.name.asEscapedIdentifier» = value;
+«««		}	
+«««		«ENDFOR»
 		
 		«FOR internal : flow.internalScopes»
 			«IF internal.hasOperations»

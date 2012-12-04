@@ -467,34 +467,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 					"Illegal event value acces. Event EvInF is not raised!");
 		return evInFValue;
 	}
-	private boolean getVarInA() {
-		return varInA;
-	}
-
-	private void setVarInA(boolean value) {
-		varInA = value;
-	}
-	private int getVarInB() {
-		return varInB;
-	}
-
-	private void setVarInB(int value) {
-		varInB = value;
-	}
-	private double getVarInC() {
-		return varInC;
-	}
-
-	private void setVarInC(double value) {
-		varInC = value;
-	}
-	private String getVarInD() {
-		return varInD;
-	}
-
-	private void setVarInD(String value) {
-		varInD = value;
-	}
 
 	public void raiseEvA() {
 		sCIDefault.raiseEvA();

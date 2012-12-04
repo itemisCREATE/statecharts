@@ -16,7 +16,6 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class FlowCode {
 	
@@ -132,13 +131,4 @@ class FlowCode {
 		«stepComment»
 		historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
 	'''
-	
-//	def String getInitialValueAssignment(VariableDefinition it) {
-//		if (initialValue != null) {
-//			return " = " + initialValue.code
-//		}
-//		else {
-//			return ""
-//		}
-//	}
 }

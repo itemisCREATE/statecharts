@@ -9,13 +9,18 @@ class TypeModel {
 	}
 	
 	def String getJavaType(Type type) {
+		
+		if (type == null) {
+			return "void"
+		}
+		
 		switch (type.name) {
-		case "real" : "double"
-		case "integer" : "int"
-		case "boolean" : "boolean"
-		case "string" : "String"
-		case "void" : "void"
-		default : "//"+this
+			case "real" : "double"
+			case "integer" : "int"
+			case "boolean" : "boolean"
+			case "string" : "String"
+			case "void" : "void"
+			default : "//"+this
 		};
 	}
 		
