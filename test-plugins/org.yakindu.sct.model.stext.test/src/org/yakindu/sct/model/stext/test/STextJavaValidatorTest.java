@@ -77,6 +77,28 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	}
 
 	/**
+	 * @see STextJavaValidator#checkAssignmentExpression(org.yakindu.sct.model.stext.stext.AssignmentExpression)
+	 */
+	@Test
+	public void checkAssignmentExpression() {
+
+		Scope context = (Scope) parseExpression(
+				"interface: var i : integer = 42 var j : integer =23", null,
+				InterfaceScope.class.getSimpleName());
+
+		EObject expression = super.parseExpression("i += (i+=3) +4", context,
+				Expression.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(expression);
+		validationResult
+				.assertErrorContains(STextJavaValidator.ASSIGNMENT_EXPRESSION);
+
+		expression = super.parseExpression("i += (j+=3) +4", context,
+				Expression.class.getSimpleName());
+		validationResult = tester.validate(expression);
+		validationResult.assertOK();
+	}
+
+	/**
 	 * @see STextJavaValidator#checkOperationArguments_FeatureCall(org.yakindu.sct.model.stext.stext.FeatureCall)
 	 */
 	@Test
