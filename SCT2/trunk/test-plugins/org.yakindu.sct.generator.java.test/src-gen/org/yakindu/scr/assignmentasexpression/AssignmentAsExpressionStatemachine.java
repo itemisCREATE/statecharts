@@ -96,6 +96,16 @@ public class AssignmentAsExpressionStatemachine
 			this.i = value;
 		}
 
+		private int i1;
+
+		public int getI1() {
+			return i1;
+		}
+
+		public void setI1(int value) {
+			this.i1 = value;
+		}
+
 		private int j;
 
 		public int getJ() {
@@ -269,6 +279,8 @@ public class AssignmentAsExpressionStatemachine
 		sCIDefault.h = 32;
 
 		sCIDefault.i = 7;
+
+		sCIDefault.i1 = 7;
 
 		sCIDefault.j = 8;
 
@@ -454,6 +466,13 @@ public class AssignmentAsExpressionStatemachine
 	public void setI(int value) {
 		sCIDefault.setI(value);
 	}
+	public int getI1() {
+		return sCIDefault.getI1();
+	}
+
+	public void setI1(int value) {
+		sCIDefault.setI1(value);
+	}
 	public int getJ() {
 		return sCIDefault.getJ();
 	}
@@ -592,20 +611,10 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.i %= (sCIDefault.i %= 4) % 4;
+		sCIDefault.i %= (sCIDefault.i1 %= 4) % 4;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Modulo;
-	}
-	
-	public static void main(String[] args) {
-		int j = 7;
-		j += (j +=5) + 5;
-		System.out.println(j);
-		
-		int i  = 7;
-		i %= (i %= 4) % 4;
-		System.out.println(i);
 	}
 
 	/* The reactions of state Modulo. */

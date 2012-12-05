@@ -22,6 +22,8 @@ public interface IAssignmentAsExpressionStatemachine extends IStatemachine {
 		public void setH(int value);
 		public int getI();
 		public void setI(int value);
+		public int getI1();
+		public void setI1(int value);
 		public int getJ();
 		public void setJ(int value);
 		public int getJ1();
