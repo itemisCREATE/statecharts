@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -62,6 +63,8 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -85,6 +88,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String IN_OUT_DECLARATIONS = "In/Out declarations are not allowed in internal scope.";
 	public static final String LOCAL_DECLARATIONS = "Local declarations are not allowed in interface scope.";
 	public static final String GUARD_EXPRESSION = "The evaluation result of a guard expression must be of type boolean";
+	public static final String ASSIGNMENT_EXPRESSION = "No nested assignment of the same variable allowed (different behavior in various programming languages)";
 
 	@Inject
 	private ITypeInferrer inferrer;
@@ -119,6 +123,41 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				error("Wrong number of arguments, expected " + parameters, null);
 			}
 		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkAssignmentExpression(final AssignmentExpression exp) {
+
+		final String name = getVariableName(exp);
+
+		List<AssignmentExpression> contents = EcoreUtil2.eAllOfType(exp,
+				AssignmentExpression.class);
+		contents.remove(exp);
+
+		Iterable<AssignmentExpression> filter = Iterables.filter(contents,
+				new Predicate<AssignmentExpression>() {
+					public boolean apply(final AssignmentExpression ex) {
+						String variableName = getVariableName(ex);
+						return variableName.equals(name);
+
+					}
+				});
+		if (Iterables.size(filter) > 0) {
+			error(ASSIGNMENT_EXPRESSION, null);
+		}
+	}
+
+	private String getVariableName(AssignmentExpression exp) {
+		Expression varRef = exp.getVarRef();
+		if (varRef instanceof ElementReferenceExpression) {
+			VariableDefinition reference = (VariableDefinition) ((ElementReferenceExpression) varRef)
+					.getReference();
+			return reference.getName();
+		} else if (varRef instanceof FeatureCall) {
+			VariableDefinition reference = (VariableDefinition) ((FeatureCall) varRef).getFeature();
+			return reference.getName();
+		}
+		return null;
 	}
 
 	@Check(CheckType.FAST)
