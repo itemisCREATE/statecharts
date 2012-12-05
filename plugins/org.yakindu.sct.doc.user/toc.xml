@@ -2,13 +2,10 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="YAKINDU Statechart Guide">
+   <link toc="help/Tutorial/tutorial-toc.xml"/>
    <link toc="help/01_Overview/overview-toc.xml"/>
    <link toc="help/user/02_Getting_Started/getting_started-toc.xml"/>
    <link toc="help/user/03_Concepts/concepts-toc.xml"/>
    <link toc="help/user/04_Tasks/tasks-toc.xml"/>
    <link toc="help/user/05_Reference/reference-toc.xml"/>
-   <link toc="help/developer/02_Getting_Started/getting_started-toc.xml"/>
-   <link toc="help/developer/03_Concepts/concepts-toc.xml"/>
-   <link toc="help/developer/04_Tasks/tasks-toc.xml"/>
-   <link toc="help/developer/05_Reference/reference-toc.xml"/>
 </toc>

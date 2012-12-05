@@ -1,0 +1,115 @@
+@CHARSET "ISO-8859-1";
+
+#seperator {
+	height: 60px;
+	overflow: hidden;
+	margin-bottom: 25px;
+	background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(0.25, rgba(255, 255,
+		255, 0.15) ), color-stop(0.25, transparent),
+		color-stop(0.5, transparent),
+		color-stop(0.5, rgba(255, 255, 255, 0.15) ),
+		color-stop(0.75, rgba(255, 255, 255, 0.15) ),
+		color-stop(0.75, transparent), to(transparent) );
+	background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.15)
+		25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent );
+	background-image: -moz-linear-gradient(135deg, rgba(255, 255, 255, 0.15)
+		25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent );
+	background-image: -o-linear-gradient(135deg, rgba(255, 255, 255, 0.15)
+		25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent );
+	background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 25%,
+		transparent 25%, transparent 50%, rgba(255, 255, 255, 0.15) 50%,
+		rgba(255, 255, 255, 0.15) 75%, transparent 75%, transparent );
+	-webkit-background-size: 60px 60px;
+	-moz-background-size: 60px 60px;
+	-o-background-size: 60px 60px;
+	background-size: 60px 60px;
+	z-index: 1000;
+}
+
+.modal {
+	position: fixed;
+	left: 50%; 
+	right : 50%; 
+	width : 1000px;
+	margin: -420px 0 0 -500px;
+}
+
+.modal-body {
+	max-height: 730px;
+}
+
+.twitter-follow-button {
+	padding: 5px;
+}
+
+.
+.green {
+	background-color: rgba(126, 181, 25, 0.45);
+}
+
+.blue {
+	background-color: rgba(7, 46, 99, 0.45);
+}
+
+.orange {
+	background-color: rgba(247, 169, 15, 0.45);
+}
+
+.white {
+	background-color: white;
+}
+
+.shadowed {
+	-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+}
+
+.wrapping {
+	padding: 20px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.small {
+	width: 270px;
+	height: 180px;
+}
+
+#bgimg {
+	background: #bee2fc
+		url(http://www.yakindu.org/wp-content/themes/yakindu/layout/images/Hintergrund-oben.jpg)
+		top center no-repeat;
+}
+
+#screencast {
+	height: 320px;
+	width: 440px;
+	background-image: url("http://www.itemis.com/binary.ashx?id=43434");
+	background-position: center;
+	z-index: 8;
+}
+
+#glass-effect {
+	padding-top: 40px;
+	background-image: url(img/pattern1.jpg) top left;
+	background-color: rgba(238, 238, 238, 0.6);
+}
+
+.screencast_overlay:hover {
+	opacity: 1;
+	filter: alpha(opacity =   100);
+}
+
+.screencast_overlay {
+	height: 100%;
+	width: 100%;
+	opacity: 0.4;
+	filter: alpha(opacity =   40);
+	background: url("../img/player_play.png") center center no-repeat;
+	z-index: 10;
+}

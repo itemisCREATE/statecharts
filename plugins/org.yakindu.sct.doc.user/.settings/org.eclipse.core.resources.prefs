@@ -1,5 +1,9 @@
-#Wed May 02 13:02:41 CEST 2012
 eclipse.preferences.version=1
+encoding//help/01_Overview/overview.html=utf-8
+encoding//help/Tutorial/tutorial-toc.xml=utf-8
+encoding//help/Tutorial/tutorial.html=utf-8
+encoding//help/user/02_Getting_Started/getting_started.html=utf-8
+encoding//help/user/03_Concepts/concepts.html=utf-8
 encoding//help/user/04_Tasks/tasks-toc.xml=utf-8
 encoding//help/user/04_Tasks/tasks.html=utf-8
 encoding//help/user/05_Reference/reference-toc.xml=utf-8
