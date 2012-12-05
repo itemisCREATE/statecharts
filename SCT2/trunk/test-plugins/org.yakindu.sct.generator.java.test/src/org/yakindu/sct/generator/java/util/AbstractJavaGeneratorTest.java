@@ -17,7 +17,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJavaModelMarker;
 import org.yakindu.sct.generator.core.util.GeneratorUtils;
-import org.yakindu.sct.generator.java.JavaSCTGenerator;
+import org.yakindu.sct.generator.java.JavaCodeGenerator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -42,7 +42,7 @@ public abstract class AbstractJavaGeneratorTest {
 	private static final String TARGET_FOLDER = "targetFolder";
 
 	@Inject
-	protected JavaSCTGenerator generator;
+	protected JavaCodeGenerator generator;
 
 	public IMarker[] generateAndCompile(Statechart statechart) throws Exception {
 		GeneratorEntry entry = createGeneratorEntry(statechart.getName(),
