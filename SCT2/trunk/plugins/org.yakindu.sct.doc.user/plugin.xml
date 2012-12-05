@@ -44,6 +44,10 @@
             file="help/developer/05_Reference/reference-toc.xml"
             primary="false">
       </toc>
+          <toc
+                file="help/Tutorial/tutorial-toc.xml"
+                primary="false">
+          </toc>
    </extension>
    <extension
          point="org.eclipse.help.contexts">

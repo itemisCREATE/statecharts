@@ -1,3 +1,6 @@
+<link href="../../css/bootstrap.css" rel="stylesheet" />
+<link href="../../css/custom.css" rel="stylesheet" /> 
+ 
 
 h1. Getting started tutorial 
 
@@ -9,7 +12,9 @@ In this tutorial you will learn how to create a new statechart model, execute it
 
 h3. CallHandling example explained
 
-The example application we will create during this tutorial is a system for handling of incoming phone calls. After start up, the system is in an Idle state and waits for incoming calls. If a call comes in, the user can either accept the call and open a connection or dismiss it. If the connection is opened, the system tracks the duration of the call and waits for the user to hang up. After hang up, the system displays the total time of call and returns to its idle state. 
+The example application we will create during this tutorial is a system for handling of incoming phone calls. After start up, the system is in an Idle state and waits for incoming calls. If a call comes in, the user can either accept the call and open a connection or dismiss it. If the connection is opened, the system tracks the duration of the call and waits for the user to hang up. After hang up, the system displays the total time of call and returns to its idle state. The complete statechart model is shown below:
+
+!images/example.png!
 
 h3. Prepare a project
 
@@ -33,7 +38,7 @@ var duration : integer
 in event incoming_call
 
 Tip:  The statechart Editor offers code completion for all textual parts. To open the content assist press *CTRL + space*. For all keywords, a detailed description with example code shows up in the help hover besides the content assist window.
-!images/ctrl+space.png! 
+!images/ctrlspace.png! 
 
 The example code contains two interfaces and one internal block. The _User_ interface defines the communication of the system with the user. It consists of the two in events _dismiss_call_ and _accept_call_. The _Phone_ interface defines the communication with the underlying hardware. It provides the in event _incoming_call_ as well as a varia ble _duration_ of type _integer_.
 

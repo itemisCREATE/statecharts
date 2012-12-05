@@ -1,3 +1,5 @@
+<link href="../../../css/bootstrap.css" rel="stylesheet" />
+
 h1. Getting started
 
 Here you learn how to install the YAKINDU SCT2 and to make the first steps.
