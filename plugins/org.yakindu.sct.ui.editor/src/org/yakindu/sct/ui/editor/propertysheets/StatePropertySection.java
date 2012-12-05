@@ -12,7 +12,11 @@ package org.yakindu.sct.ui.editor.propertysheets;
 
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
+import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -91,7 +95,7 @@ public class StatePropertySection extends
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL | SWT.WRAP);
-			((StyledText)txtSpecification).setAlwaysShowScrollBars(false);
+			((StyledText) txtSpecification).setAlwaysShowScrollBars(false);
 			enableXtext(txtSpecification, injector);
 			createHelpWidget(parent, txtSpecification,
 					HelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
@@ -149,7 +153,17 @@ public class StatePropertySection extends
 		ISWTObservableValue specificationTextProperty = WidgetProperties.text(
 				SWT.FocusOut).observe(txtSpecification);
 		context.bindValue(specificationTextProperty,
-				specificationProperty.observe(eObject));
+				specificationProperty.observe(eObject), null,
+				new UpdateValueStrategy() {
+					@Override
+					protected IStatus doSet(IObservableValue observableValue,
+							Object value) {
+						if (!getCompletionProposalAdapter()
+								.isProposalPopupOpen())
+							return super.doSet(observableValue, value);
+						return Status.OK_STATUS;
+					}
+				});
 	}
 
 	private void bindNameControl(EMFDataBindingContext context) {

@@ -10,6 +10,10 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
+import org.eclipse.core.databinding.UpdateValueStrategy;
+import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
@@ -49,13 +53,15 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
 					| SWT.V_SCROLL | SWT.WRAP);
-			((StyledText)textControl).setAlwaysShowScrollBars(false);
+			((StyledText) textControl).setAlwaysShowScrollBars(false);
 			enableXtext(textControl, injector);
-			createHelpWidget(parent, textControl,HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
+			createHelpWidget(parent, textControl,
+					HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(textControl);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
+				.applyTo(textControl);
 
 	}
 
@@ -66,7 +72,17 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
 		ISWTObservableValue uiProperty = WidgetProperties.text(SWT.FocusOut)
 				.observe(textControl);
-		context.bindValue(uiProperty, modelProperty.observe(eObject));
+		context.bindValue(uiProperty, modelProperty.observe(eObject), null,
+				new UpdateValueStrategy() {
+					@Override
+					protected IStatus doSet(IObservableValue observableValue,
+							Object value) {
+						if (!getCompletionProposalAdapter()
+								.isProposalPopupOpen())
+							return super.doSet(observableValue, value);
+						return Status.OK_STATUS;
+					}
+				});
 	}
 
 }
