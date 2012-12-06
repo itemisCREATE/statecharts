@@ -78,10 +78,8 @@ public class WorkspaceGeneratorWizardPage1 extends IProjectWizardPage {
 				true, false, 1, 1));
 		generatorCheckboxGroup.setLayout(new GridLayout(2, false));
 
-		Label lblXtend = new Label(generatorCheckboxGroup, SWT.WRAP);
-		lblXtend.setText("Use Xtend");
-
 		cbXtend = new Button(generatorCheckboxGroup, SWT.CHECK);
+		cbXtend.setText("Use Xtend");
 
 		ValidateCallback callback = new ValidateCallback() {
 			public void validate() {
