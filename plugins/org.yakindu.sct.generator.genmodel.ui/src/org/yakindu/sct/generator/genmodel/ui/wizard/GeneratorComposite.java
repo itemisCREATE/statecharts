@@ -59,10 +59,9 @@ public class GeneratorComposite extends Composite {
 		generatorCheckboxGroup.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
 				true, false, 1, 1));
 		generatorCheckboxGroup.setLayout(new GridLayout(2, false));
-
-		Label lblGeneratorCheckBox = new Label(generatorCheckboxGroup, SWT.WRAP);
-		lblGeneratorCheckBox.setText("Configure for Plugin Export");
+		
 		cbGenerator = new Button(generatorCheckboxGroup, SWT.CHECK);
+		cbGenerator.setText("Configure for Plugin Export");
 		cbGenerator.addSelectionListener(new SelectionListenerAdapter() {
 
 			public void widgetSelected(SelectionEvent e) {
@@ -70,6 +69,7 @@ public class GeneratorComposite extends Composite {
 				GeneratorComposite.this.callback.validate();
 			}
 		});
+		
 
 		generatorGroup = new Group(parent, SWT.NONE);
 		generatorGroup.setLayout(new GridLayout(2, false));
@@ -109,11 +109,8 @@ public class GeneratorComposite extends Composite {
 		GridDataFactory.fillDefaults().grab(true, false)
 				.applyTo(getTxtGeneratorDesc());
 
-		Label lblLibraryCheckBox = new Label(generatorGroup, SWT.WRAP);
-		lblLibraryCheckBox.setText("Create Feature Library");
-
 		cbLibrary = new Button(generatorGroup, SWT.CHECK);
-
+		cbLibrary.setText("Create Feature Library");
 	}
 
 	public void disableGeneratorClass() {
