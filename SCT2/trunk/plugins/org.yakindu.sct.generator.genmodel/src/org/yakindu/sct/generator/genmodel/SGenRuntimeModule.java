@@ -11,8 +11,8 @@
 package org.yakindu.sct.generator.genmodel;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
-import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.serializer.tokens.ICrossReferenceSerializer;
+import org.yakindu.sct.generator.genmodel.naming.GenModelQualifiedNameProvider;
 import org.yakindu.sct.generator.genmodel.serializer.SGenCrossReferenceSerializer;
 
 /**
@@ -24,7 +24,7 @@ public class SGenRuntimeModule extends
 		org.yakindu.sct.generator.genmodel.AbstractSGenRuntimeModule {
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return SimpleNameProvider.class;
+		return GenModelQualifiedNameProvider.class;
 	}
 
 	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
