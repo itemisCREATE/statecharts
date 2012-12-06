@@ -12,10 +12,13 @@ package org.yakindu.sct.generator.genmodel.serializer;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.diagnostic.ISerializationDiagnostic.Acceptor;
 import org.eclipse.xtext.serializer.tokens.CrossReferenceSerializer;
 import org.yakindu.sct.model.sgraph.Statechart;
+
+import com.google.inject.Inject;
 
 /**
  * 
@@ -24,13 +27,17 @@ import org.yakindu.sct.model.sgraph.Statechart;
  */
 @SuppressWarnings("restriction")
 public class SGenCrossReferenceSerializer extends CrossReferenceSerializer {
-
+	
+	@Inject 
+	private IQualifiedNameProvider provider;
+	
 	@Override
 	public String serializeCrossRef(EObject semanticObject,
 			CrossReference crossref, EObject target, INode node, Acceptor errors) {
 		// for statechart crossreferences, we do not want to check the scope
 		if (target instanceof Statechart) {
-			return ((Statechart) target).getName();
+			return provider.getFullyQualifiedName(target).toString();
+			
 		}
 		return super.serializeCrossRef(semanticObject, crossref, target, node,
 				errors);
