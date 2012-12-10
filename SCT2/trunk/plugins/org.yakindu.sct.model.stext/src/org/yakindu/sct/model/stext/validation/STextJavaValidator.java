@@ -89,6 +89,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String LOCAL_DECLARATIONS = "Local declarations are not allowed in interface scope.";
 	public static final String GUARD_EXPRESSION = "The evaluation result of a guard expression must be of type boolean";
 	public static final String ASSIGNMENT_EXPRESSION = "No nested assignment of the same variable allowed (different behavior in various programming languages)";
+	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 
 	@Inject
 	private ITypeInferrer inferrer;
@@ -99,6 +100,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
+
+	@Check(CheckType.FAST)
+	public void checkVariableType(final VariableDefinition definition) {
+		if (tsAccess.isVoid(definition.getType())) {
+			error(VARIABLE_VOID_TYPE, null);
+		}
+	}
 
 	@Check(CheckType.FAST)
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
@@ -154,7 +162,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					.getReference();
 			return reference.getName();
 		} else if (varRef instanceof FeatureCall) {
-			VariableDefinition reference = (VariableDefinition) ((FeatureCall) varRef).getFeature();
+			VariableDefinition reference = (VariableDefinition) ((FeatureCall) varRef)
+					.getFeature();
 			return reference.getName();
 		}
 		return null;
