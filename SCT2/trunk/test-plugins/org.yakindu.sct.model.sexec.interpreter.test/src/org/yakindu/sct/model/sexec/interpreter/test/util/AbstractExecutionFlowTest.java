@@ -42,7 +42,6 @@ public abstract class AbstractExecutionFlowTest {
 
 	protected void initInterpreter(ExecutionFlow flow) {
 		interpreter.initialize(flow);
-		// interpreter.enter(); -ToDelete
 	}
 
 	protected int getInteger(String varName) {
