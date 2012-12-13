@@ -78,7 +78,7 @@ public abstract class AbstractXpandBasedCodeGenerator extends
 			generatorFound = true;
 			ExecutionFlow flow = createExecutionFlow(statechart, entry);
 			if (isDumpSexec(entry)) {
-				dumpSexec(entry, flow, output);
+				dumpSexec(entry, flow);
 			}
 			facade.evaluate(templatePath, flow, entry);
 		}

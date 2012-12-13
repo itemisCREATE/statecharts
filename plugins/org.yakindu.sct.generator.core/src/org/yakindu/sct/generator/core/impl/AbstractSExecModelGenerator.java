@@ -106,8 +106,7 @@ public abstract class AbstractSExecModelGenerator extends
 		return flow;
 	}
 
-	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow,
-			Output output) {
+	protected void dumpSexec(GeneratorEntry entry, ExecutionFlow flow) {
 		ResourceSet resourceSet = new ResourceSetImpl();
 		resourceSet
 				.getResourceFactoryRegistry()

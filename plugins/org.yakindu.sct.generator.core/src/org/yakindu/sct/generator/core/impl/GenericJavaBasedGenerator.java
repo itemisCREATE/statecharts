@@ -16,6 +16,7 @@ import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureCo
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.TEMPLATE_FEATURE;
 import static org.yakindu.sct.generator.core.util.GeneratorUtils.getOutletFeatureConfiguration;
+import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.util.Strings;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 import org.yakindu.sct.generator.core.AbstractWorkspaceGenerator;
+import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
@@ -94,7 +96,7 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 	}
 
 	@Override
-	public void runGenerator(Statechart flow, GeneratorEntry entry) {
+	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
 		String templateClass = getTemplateClassName(entry);
 		final ClassLoader classLoader = getClassLoader(entry);
 		IFileSystemAccess fsa = getFileSystemAccess(entry);
@@ -111,23 +113,30 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 			Class<?> iType__ = IExecutionFlowGenerator.class;
 			Class<?> iType = (Class<?>) classLoader
 					.loadClass("org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator");
-
+			
+			ExecutionFlow flow = createExecutionFlow(statechart, entry);
+			
+			if (isDumpSexec(entry)) {
+				dumpSexec(entry, flow);
+			}
+			
 			if (delegate instanceof AbstractWorkspaceGenerator) {
 				((AbstractWorkspaceGenerator) delegate).setBridge(bridge);
 			}
+			
 			if (delegate instanceof IExecutionFlowGenerator) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(createExecutionFlow(flow, entry), entry,
+				flowGenerator.generate(flow, entry,
 						fsa);
 			}
 			if (iType.isInstance(delegate)) {
 				IExecutionFlowGenerator flowGenerator = (IExecutionFlowGenerator) delegate;
-				flowGenerator.generate(createExecutionFlow(flow, entry), entry,
+				flowGenerator.generate(flow, entry,
 						fsa);
 			}
 			if (delegate instanceof ISGraphGenerator) {
 				ISGraphGenerator graphGenerator = (ISGraphGenerator) delegate;
-				graphGenerator.generate(flow, entry);
+				graphGenerator.generate(statechart, entry);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
