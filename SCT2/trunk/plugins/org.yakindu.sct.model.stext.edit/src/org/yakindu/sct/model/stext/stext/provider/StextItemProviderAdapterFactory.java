@@ -624,31 +624,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.OnCycleEvent} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected OnCycleEventItemProvider onCycleEventItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.OnCycleEvent}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createOnCycleEventAdapter()
-  {
-    if (onCycleEventItemProvider == null)
-    {
-      onCycleEventItemProvider = new OnCycleEventItemProvider(this);
-    }
-
-    return onCycleEventItemProvider;
-  }
-
-  /**
    * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.AlwaysEvent} instances.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -671,31 +646,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     }
 
     return alwaysEventItemProvider;
-  }
-
-  /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.DefaultEvent} instances.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected DefaultEventItemProvider defaultEventItemProvider;
-
-  /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.DefaultEvent}.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public Adapter createDefaultEventAdapter()
-  {
-    if (defaultEventItemProvider == null)
-    {
-      defaultEventItemProvider = new DefaultEventItemProvider(this);
-    }
-
-    return defaultEventItemProvider;
   }
 
   /**
@@ -921,6 +871,31 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     }
 
     return reactionTriggerItemProvider;
+  }
+
+  /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.DefaultTrigger} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected DefaultTriggerItemProvider defaultTriggerItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.DefaultTrigger}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createDefaultTriggerAdapter()
+  {
+    if (defaultTriggerItemProvider == null)
+    {
+      defaultTriggerItemProvider = new DefaultTriggerItemProvider(this);
+    }
+
+    return defaultTriggerItemProvider;
   }
 
   /**
@@ -1581,9 +1556,7 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (builtinEventSpecItemProvider != null) builtinEventSpecItemProvider.dispose();
     if (entryEventItemProvider != null) entryEventItemProvider.dispose();
     if (exitEventItemProvider != null) exitEventItemProvider.dispose();
-    if (onCycleEventItemProvider != null) onCycleEventItemProvider.dispose();
     if (alwaysEventItemProvider != null) alwaysEventItemProvider.dispose();
-    if (defaultEventItemProvider != null) defaultEventItemProvider.dispose();
     if (expressionItemProvider != null) expressionItemProvider.dispose();
     if (literalItemProvider != null) literalItemProvider.dispose();
     if (boolLiteralItemProvider != null) boolLiteralItemProvider.dispose();
@@ -1593,6 +1566,7 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
     if (simpleScopeItemProvider != null) simpleScopeItemProvider.dispose();
     if (reactionTriggerItemProvider != null) reactionTriggerItemProvider.dispose();
+    if (defaultTriggerItemProvider != null) defaultTriggerItemProvider.dispose();
     if (reactionEffectItemProvider != null) reactionEffectItemProvider.dispose();
     if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
     if (assignmentExpressionItemProvider != null) assignmentExpressionItemProvider.dispose();

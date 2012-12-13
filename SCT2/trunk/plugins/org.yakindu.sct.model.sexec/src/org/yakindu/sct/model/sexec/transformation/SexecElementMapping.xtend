@@ -37,7 +37,6 @@ import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.DefaultEvent
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventSpec
@@ -45,7 +44,6 @@ import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.stext.stext.OnCycleEvent
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
@@ -53,7 +51,6 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sgraph.Exit
  
 
 
@@ -248,23 +245,15 @@ import org.yakindu.sct.model.sgraph.Exit
 		return r
 	}
 
-	def dispatch Expression raised(OnCycleEvent e) {
-		val r = stext.factory.createPrimitiveValueExpression
-		val BoolLiteral boolLit = stext.factory.createBoolLiteral
-		boolLit.value = true		
-		r.value = boolLit
-		return r
-	}
+//	def dispatch Expression raised(OnCycleEvent e) {
+//		val r = stext.factory.createPrimitiveValueExpression
+//		val BoolLiteral boolLit = stext.factory.createBoolLiteral
+//		boolLit.value = true		
+//		r.value = boolLit
+//		return r
+//	}
 	
 	def dispatch Expression raised(AlwaysEvent e) {
-		val r = stext.factory.createPrimitiveValueExpression
-		val BoolLiteral boolLit = stext.factory.createBoolLiteral
-		boolLit.value = true		
-		r.value = boolLit
-		return r
-	}
-
-	def dispatch Expression raised(DefaultEvent e) {
 		val r = stext.factory.createPrimitiveValueExpression
 		val BoolLiteral boolLit = stext.factory.createBoolLiteral
 		boolLit.value = true		

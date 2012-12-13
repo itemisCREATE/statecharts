@@ -195,17 +195,7 @@ public class ReactionTriggerItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
-         StextFactory.eINSTANCE.createOnCycleEvent()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
          StextFactory.eINSTANCE.createAlwaysEvent()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
-         StextFactory.eINSTANCE.createDefaultEvent()));
 
     newChildDescriptors.add
       (createChildParameter

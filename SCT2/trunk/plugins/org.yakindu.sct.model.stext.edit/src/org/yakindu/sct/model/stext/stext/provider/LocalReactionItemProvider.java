@@ -174,6 +174,11 @@ public class LocalReactionItemProvider
 
     newChildDescriptors.add
       (createChildParameter
+        (SGraphPackage.Literals.REACTION__TRIGGER,
+         StextFactory.eINSTANCE.createDefaultTrigger()));
+
+    newChildDescriptors.add
+      (createChildParameter
         (SGraphPackage.Literals.REACTION__EFFECT,
          StextFactory.eINSTANCE.createReactionEffect()));
   }

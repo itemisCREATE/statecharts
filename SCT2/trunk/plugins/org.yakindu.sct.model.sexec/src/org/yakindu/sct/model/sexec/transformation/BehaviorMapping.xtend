@@ -32,9 +32,10 @@ import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.DefaultTrigger
 import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.LocalReaction
-import org.yakindu.sct.model.stext.stext.OnCycleEvent
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
@@ -352,7 +353,7 @@ class BehaviorMapping {
 					|| ! (lr.trigger as ReactionTrigger).triggers.filter( t | 
 						t instanceof RegularEventSpec 
 						|| t instanceof TimeEventSpec 
-						|| t instanceof OnCycleEvent 
+//						|| t instanceof OnCycleEvent 
 						|| t instanceof AlwaysEvent
 					).empty
 				)
@@ -377,7 +378,7 @@ class BehaviorMapping {
 					|| ! (lr.trigger as ReactionTrigger).triggers.filter( t | 
 						t instanceof RegularEventSpec 
 						|| t instanceof TimeEventSpec 
-						|| t instanceof OnCycleEvent 
+//						|| t instanceof OnCycleEvent 
 						|| t instanceof AlwaysEvent
 					).toList.empty
 				)
@@ -607,6 +608,15 @@ class BehaviorMapping {
 	}
 	
 	def dispatch Statement buildCondition (Trigger t) { null }
+
+
+	def dispatch Statement buildCondition (DefaultTrigger t) { 
+		val r = stext.factory.createPrimitiveValueExpression
+		val BoolLiteral boolLit = stext.factory.createBoolLiteral
+		boolLit.value = true		
+		r.value = boolLit
+		return r
+	 }
 	
 	def dispatch Statement buildCondition (ReactionTrigger t) {
 		val triggerCheck = if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,

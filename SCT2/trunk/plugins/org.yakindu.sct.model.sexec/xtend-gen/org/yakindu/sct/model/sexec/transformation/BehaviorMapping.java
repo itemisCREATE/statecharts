@@ -64,13 +64,16 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
+import org.yakindu.sct.model.stext.stext.BoolLiteral;
+import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.OnCycleEvent;
+import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 
 @SuppressWarnings("all")
@@ -695,16 +698,10 @@ public class BehaviorMapping {
                 public Boolean apply(final EventSpec t) {
                   boolean _or = false;
                   boolean _or_1 = false;
-                  boolean _or_2 = false;
                   if ((t instanceof RegularEventSpec)) {
-                    _or_2 = true;
-                  } else {
-                    _or_2 = ((t instanceof RegularEventSpec) || (t instanceof TimeEventSpec));
-                  }
-                  if (_or_2) {
                     _or_1 = true;
                   } else {
-                    _or_1 = (_or_2 || (t instanceof OnCycleEvent));
+                    _or_1 = ((t instanceof RegularEventSpec) || (t instanceof TimeEventSpec));
                   }
                   if (_or_1) {
                     _or = true;
@@ -762,16 +759,10 @@ public class BehaviorMapping {
                 public Boolean apply(final EventSpec t) {
                   boolean _or = false;
                   boolean _or_1 = false;
-                  boolean _or_2 = false;
                   if ((t instanceof RegularEventSpec)) {
-                    _or_2 = true;
-                  } else {
-                    _or_2 = ((t instanceof RegularEventSpec) || (t instanceof TimeEventSpec));
-                  }
-                  if (_or_2) {
                     _or_1 = true;
                   } else {
-                    _or_1 = (_or_2 || (t instanceof OnCycleEvent));
+                    _or_1 = ((t instanceof RegularEventSpec) || (t instanceof TimeEventSpec));
                   }
                   if (_or_1) {
                     _or = true;
@@ -1195,6 +1186,16 @@ public class BehaviorMapping {
     return null;
   }
   
+  protected Statement _buildCondition(final DefaultTrigger t) {
+    StextFactory _factory = this.stext.factory();
+    final PrimitiveValueExpression r = _factory.createPrimitiveValueExpression();
+    StextFactory _factory_1 = this.stext.factory();
+    final BoolLiteral boolLit = _factory_1.createBoolLiteral();
+    boolLit.setValue(true);
+    r.setValue(boolLit);
+    return r;
+  }
+  
   protected Statement _buildCondition(final ReactionTrigger t) {
     Expression _xblockexpression = null;
     {
@@ -1354,7 +1355,9 @@ public class BehaviorMapping {
   }
   
   public Statement buildCondition(final Trigger t) {
-    if (t instanceof ReactionTrigger) {
+    if (t instanceof DefaultTrigger) {
+      return _buildCondition((DefaultTrigger)t);
+    } else if (t instanceof ReactionTrigger) {
       return _buildCondition((ReactionTrigger)t);
     } else if (t != null) {
       return _buildCondition(t);

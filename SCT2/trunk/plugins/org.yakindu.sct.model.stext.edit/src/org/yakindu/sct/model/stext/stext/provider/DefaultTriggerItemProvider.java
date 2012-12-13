@@ -18,20 +18,16 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-
-import org.yakindu.sct.model.sgraph.provider.ReactionItemProvider;
-
-import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.sgraph.provider.TriggerItemProvider;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionReaction} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.DefaultTrigger} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TransitionReactionItemProvider
-  extends ReactionItemProvider
+public class DefaultTriggerItemProvider
+  extends TriggerItemProvider
   implements
     IEditingDomainItemProvider,
     IStructuredItemContentProvider,
@@ -45,7 +41,7 @@ public class TransitionReactionItemProvider
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionReactionItemProvider(AdapterFactory adapterFactory)
+  public DefaultTriggerItemProvider(AdapterFactory adapterFactory)
   {
     super(adapterFactory);
   }
@@ -68,7 +64,7 @@ public class TransitionReactionItemProvider
   }
 
   /**
-   * This returns TransitionReaction.gif.
+   * This returns DefaultTrigger.gif.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -76,7 +72,7 @@ public class TransitionReactionItemProvider
   @Override
   public Object getImage(Object object)
   {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/TransitionReaction"));
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/DefaultTrigger"));
   }
 
   /**
@@ -88,7 +84,7 @@ public class TransitionReactionItemProvider
   @Override
   public String getText(Object object)
   {
-    return getString("_UI_TransitionReaction_type");
+    return getString("_UI_DefaultTrigger_type");
   }
 
   /**
@@ -116,21 +112,6 @@ public class TransitionReactionItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
     super.collectNewChildDescriptors(newChildDescriptors, object);
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__TRIGGER,
-         StextFactory.eINSTANCE.createReactionTrigger()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__TRIGGER,
-         StextFactory.eINSTANCE.createDefaultTrigger()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__EFFECT,
-         StextFactory.eINSTANCE.createReactionEffect()));
   }
 
   /**

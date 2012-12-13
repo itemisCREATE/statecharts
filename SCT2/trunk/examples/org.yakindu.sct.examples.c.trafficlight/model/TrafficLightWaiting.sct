@@ -37,7 +37,7 @@
           <vertices xsi:type="sgraph:State" xmi:id="_K-JX7RBEEeGQ0KsLDV4EFg" specification="entry / Pedestrian.red = true;&#xD;&#xA;&#x9;Pedestrian.green = false" name="PedestrianRed" incomingTransitions="_iZox8BBEEeGQ0KsLDV4EFg">
             <outgoingTransitions xmi:id="_nVCU8BBEEeGQ0KsLDV4EFg" specification="after 5s" target="_TfjYTRBEEeGQ0KsLDV4EFg"/>
           </vertices>
-          <vertices xsi:type="sgraph:State" xmi:id="_TfjYTRBEEeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = true;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false" name="StreetPrepare" incomingTransitions="_nVCU8BBEEeGQ0KsLDV4EFg">
+          <vertices xsi:type="sgraph:State" xmi:id="_TfjYTRBEEeGQ0KsLDV4EFg" specification="entry / TrafficLight.red = true;&#xD;&#xA;&#x9;TrafficLight.yellow = true;&#xD;&#xA;&#x9;TrafficLight.green = false" name="StreetPrepared" incomingTransitions="_nVCU8BBEEeGQ0KsLDV4EFg">
             <outgoingTransitions xmi:id="_pddaABBEEeGQ0KsLDV4EFg" specification="after 2s" target="_w8meYBA_EeGQ0KsLDV4EFg"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_xz0nABBPEeGQ0KsLDV4EFg">
