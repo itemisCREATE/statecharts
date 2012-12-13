@@ -96,6 +96,15 @@ public abstract class AbstractDefaultFeatureValueProvider implements
 			return false;
 		}
 	}
+	
+	protected boolean projectOpened(String value) {
+		try {
+			return ResourcesPlugin.getWorkspace().getRoot().getProject(value)
+					.isOpen();
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
+	}
 
 	protected boolean folderExists(String projectName, String folderPath) {
 		try {

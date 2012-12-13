@@ -56,6 +56,11 @@ public class CoreLibraryDefaultFeatureValueProvider extends
 				&& !projectExists(parameterValue.getStringValue()))
 			return warning(String.format("The Project %s does not exist",
 					parameterValue.getExpression()));
+		if (OUTLET_FEATURE_TARGET_PROJECT.equals(parameterName)
+				&& projectExists(parameterValue.getStringValue())
+				&& !projectOpened(parameterValue.getStringValue()))
+			return error(String.format("The Project %s is not open.",
+					parameterValue.getExpression()));
 		if (OUTLET_FEATURE_TARGET_FOLDER.equals(parameterName)) {
 			FeatureParameterValue targetProjectParam = parameterValue
 					.getFeatureConfiguration().getParameterValue(
