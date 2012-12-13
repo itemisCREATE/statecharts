@@ -38,6 +38,7 @@ import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.ShiftOperator
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.UnaryOperator
+import org.yakindu.base.types.Operation
 
 class ExpressionCode {
 	
@@ -198,7 +199,7 @@ class ExpressionCode {
 	
 	
 	def dispatch String code(FeatureCall it) '''
-		«IF feature instanceof OperationDefinition»
+		«IF feature instanceof Operation»
 			«feature.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
 		«ELSE»
 			«definition.context + definition.name.asEscapedIdentifier»
