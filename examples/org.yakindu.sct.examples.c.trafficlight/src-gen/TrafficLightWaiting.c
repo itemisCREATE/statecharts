@@ -18,7 +18,7 @@ static void trafficLightWaiting_react_main_region_on_r1_StreetAttention(TrafficL
 static void trafficLightWaiting_react_main_region_on_r1_StreetRed(TrafficLightWaiting* handle);
 static void trafficLightWaiting_react_main_region_on_r1_PedestrianGreen(TrafficLightWaiting* handle);
 static void trafficLightWaiting_react_main_region_on_r1_PedestrianRed(TrafficLightWaiting* handle);
-static void trafficLightWaiting_react_main_region_on_r1_StreetPrepare(TrafficLightWaiting* handle);
+static void trafficLightWaiting_react_main_region_on_r1_StreetPrepared(TrafficLightWaiting* handle);
 static void trafficLightWaiting_react_main_region_off_r1_YellowOn(TrafficLightWaiting* handle);
 static void trafficLightWaiting_react_main_region_off_r1_YellowOff(TrafficLightWaiting* handle);
 static void clearInEvents(TrafficLightWaiting* handle);
@@ -39,7 +39,16 @@ clearInEvents(handle);
 clearOutEvents(handle);
 
 	// TODO: initialize all events ...
-	// TODO: initialize all variables ... (set default values - here or inenter sequence ?!?)
+
+	{
+		/* Default init sequence for statechart TrafficLightWaiting */
+		handle->ifaceTrafficLight.red = bool_false;
+		handle->ifaceTrafficLight.yellow = bool_false;
+		handle->ifaceTrafficLight.green = bool_false;
+		handle->ifacePedestrian.request = bool_false;
+		handle->ifacePedestrian.red = bool_false;
+		handle->ifacePedestrian.green = bool_false;
+	}
 
 }
 
@@ -178,14 +187,14 @@ void trafficLightWaiting_exit(TrafficLightWaiting* handle)
 					}
 					break;
 				}
-				case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+				case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 					{
-						/* Default exit sequence for state StreetPrepare */
+						/* Default exit sequence for state StreetPrepared */
 						handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 						handle->stateConfVectorPosition = 0;
 						{
-							/* Exit action for state 'StreetPrepare'. */
-							trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+							/* Exit action for state 'StreetPrepared'. */
+							trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 						}
 					}
 					break;
@@ -231,7 +240,7 @@ static void clearInEvents(TrafficLightWaiting* handle) {
 	handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetRed_time_event_0_raised = bool_false; 
 	handle->timeEvents.TrafficLightWaiting_main_region_on_r1_PedestrianGreen_time_event_0_raised = bool_false; 
 	handle->timeEvents.TrafficLightWaiting_main_region_on_r1_PedestrianRed_time_event_0_raised = bool_false; 
-	handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised = bool_false; 
+	handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised = bool_false; 
 	handle->timeEvents.TrafficLightWaiting_main_region_off_r1_YellowOn_time_event_0_raised = bool_false; 
 	handle->timeEvents.TrafficLightWaiting_main_region_off_r1_YellowOff_time_event_0_raised = bool_false; 
 }
@@ -276,8 +285,8 @@ void trafficLightWaiting_runCycle(TrafficLightWaiting* handle) {
 			trafficLightWaiting_react_main_region_on_r1_PedestrianRed(handle);
 			break;
 		}
-		case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
-			trafficLightWaiting_react_main_region_on_r1_StreetPrepare(handle);
+		case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
+			trafficLightWaiting_react_main_region_on_r1_StreetPrepared(handle);
 			break;
 		}
 		case TrafficLightWaiting_main_region_off_r1_YellowOn : {
@@ -307,7 +316,7 @@ sc_boolean trafficLightWaiting_isActive(TrafficLightWaiting* handle, TrafficLigh
 	switch (state) {
 		case TrafficLightWaiting_main_region_on : 
 			return (sc_boolean) (handle->stateConfVector[0] >= TrafficLightWaiting_main_region_on
-				&& handle->stateConfVector[0] <= TrafficLightWaiting_main_region_on_r1_StreetPrepare);
+				&& handle->stateConfVector[0] <= TrafficLightWaiting_main_region_on_r1_StreetPrepared);
 		case TrafficLightWaiting_main_region_on_r1_StreetGreen : 
 			return (sc_boolean) (handle->stateConfVector[0] == TrafficLightWaiting_main_region_on_r1_StreetGreen
 			);
@@ -332,8 +341,8 @@ sc_boolean trafficLightWaiting_isActive(TrafficLightWaiting* handle, TrafficLigh
 		case TrafficLightWaiting_main_region_on_r1_PedestrianRed : 
 			return (sc_boolean) (handle->stateConfVector[0] == TrafficLightWaiting_main_region_on_r1_PedestrianRed
 			);
-		case TrafficLightWaiting_main_region_on_r1_StreetPrepare : 
-			return (sc_boolean) (handle->stateConfVector[0] == TrafficLightWaiting_main_region_on_r1_StreetPrepare
+		case TrafficLightWaiting_main_region_on_r1_StreetPrepared : 
+			return (sc_boolean) (handle->stateConfVector[0] == TrafficLightWaiting_main_region_on_r1_StreetPrepared
 			);
 		case TrafficLightWaiting_main_region_off : 
 			return (sc_boolean) (handle->stateConfVector[0] >= TrafficLightWaiting_main_region_off
@@ -514,14 +523,14 @@ static void trafficLightWaiting_react_main_region_on_r1_StreetGreen(TrafficLight
 							}
 							break;
 						}
-						case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+						case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 							{
-								/* Default exit sequence for state StreetPrepare */
+								/* Default exit sequence for state StreetPrepared */
 								handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 								handle->stateConfVectorPosition = 0;
 								{
-									/* Exit action for state 'StreetPrepare'. */
-									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+									/* Exit action for state 'StreetPrepared'. */
+									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 								}
 							}
 							break;
@@ -694,14 +703,14 @@ static void trafficLightWaiting_react_main_region_on_r1_PedWaiting_r1_waitOn(Tra
 							}
 							break;
 						}
-						case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+						case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 							{
-								/* Default exit sequence for state StreetPrepare */
+								/* Default exit sequence for state StreetPrepared */
 								handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 								handle->stateConfVectorPosition = 0;
 								{
-									/* Exit action for state 'StreetPrepare'. */
-									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+									/* Exit action for state 'StreetPrepared'. */
+									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 								}
 							}
 							break;
@@ -919,14 +928,14 @@ static void trafficLightWaiting_react_main_region_on_r1_PedWaiting_r1_waitOff(Tr
 							}
 							break;
 						}
-						case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+						case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 							{
-								/* Default exit sequence for state StreetPrepare */
+								/* Default exit sequence for state StreetPrepared */
 								handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 								handle->stateConfVectorPosition = 0;
 								{
-									/* Exit action for state 'StreetPrepare'. */
-									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+									/* Exit action for state 'StreetPrepared'. */
+									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 								}
 							}
 							break;
@@ -1144,14 +1153,14 @@ static void trafficLightWaiting_react_main_region_on_r1_StreetAttention(TrafficL
 							}
 							break;
 						}
-						case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+						case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 							{
-								/* Default exit sequence for state StreetPrepare */
+								/* Default exit sequence for state StreetPrepared */
 								handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 								handle->stateConfVectorPosition = 0;
 								{
-									/* Exit action for state 'StreetPrepare'. */
-									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+									/* Exit action for state 'StreetPrepared'. */
+									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 								}
 							}
 							break;
@@ -1317,14 +1326,14 @@ static void trafficLightWaiting_react_main_region_on_r1_StreetRed(TrafficLightWa
 							}
 							break;
 						}
-						case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+						case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 							{
-								/* Default exit sequence for state StreetPrepare */
+								/* Default exit sequence for state StreetPrepared */
 								handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 								handle->stateConfVectorPosition = 0;
 								{
-									/* Exit action for state 'StreetPrepare'. */
-									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+									/* Exit action for state 'StreetPrepared'. */
+									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 								}
 							}
 							break;
@@ -1489,14 +1498,14 @@ static void trafficLightWaiting_react_main_region_on_r1_PedestrianGreen(TrafficL
 							}
 							break;
 						}
-						case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+						case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 							{
-								/* Default exit sequence for state StreetPrepare */
+								/* Default exit sequence for state StreetPrepared */
 								handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 								handle->stateConfVectorPosition = 0;
 								{
-									/* Exit action for state 'StreetPrepare'. */
-									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+									/* Exit action for state 'StreetPrepared'. */
+									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 								}
 							}
 							break;
@@ -1661,14 +1670,14 @@ static void trafficLightWaiting_react_main_region_on_r1_PedestrianRed(TrafficLig
 							}
 							break;
 						}
-						case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+						case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 							{
-								/* Default exit sequence for state StreetPrepare */
+								/* Default exit sequence for state StreetPrepared */
 								handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 								handle->stateConfVectorPosition = 0;
 								{
-									/* Exit action for state 'StreetPrepare'. */
-									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+									/* Exit action for state 'StreetPrepared'. */
+									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 								}
 							}
 							break;
@@ -1717,15 +1726,15 @@ static void trafficLightWaiting_react_main_region_on_r1_PedestrianRed(TrafficLig
 					}
 				}
 				{
-					/* Default enter sequence for state StreetPrepare */
+					/* Default enter sequence for state StreetPrepared */
 					{
-						/* Entry action for state 'StreetPrepare'. */
-						trafficLightWaiting_setTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) , 2 * 1000, bool_false);
+						/* Entry action for state 'StreetPrepared'. */
+						trafficLightWaiting_setTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) , 2 * 1000, bool_false);
 						handle->ifaceTrafficLight.red = bool_true;
 						handle->ifaceTrafficLight.yellow = bool_true;
 						handle->ifaceTrafficLight.green = bool_false;
 					}
-					handle->stateConfVector[0] = TrafficLightWaiting_main_region_on_r1_StreetPrepare;
+					handle->stateConfVector[0] = TrafficLightWaiting_main_region_on_r1_StreetPrepared;
 					handle->stateConfVectorPosition = 0;
 				}
 			} 
@@ -1733,10 +1742,10 @@ static void trafficLightWaiting_react_main_region_on_r1_PedestrianRed(TrafficLig
 	}
 }
 
-/* The reactions of state StreetPrepare. */
-static void trafficLightWaiting_react_main_region_on_r1_StreetPrepare(TrafficLightWaiting* handle) {
+/* The reactions of state StreetPrepared. */
+static void trafficLightWaiting_react_main_region_on_r1_StreetPrepared(TrafficLightWaiting* handle) {
 	{
-		/* The reactions of state StreetPrepare. */
+		/* The reactions of state StreetPrepared. */
 		if (handle->iface.onOff_raised) { 
 			{
 				/* Default exit sequence for state on */
@@ -1834,14 +1843,14 @@ static void trafficLightWaiting_react_main_region_on_r1_StreetPrepare(TrafficLig
 							}
 							break;
 						}
-						case TrafficLightWaiting_main_region_on_r1_StreetPrepare : {
+						case TrafficLightWaiting_main_region_on_r1_StreetPrepared : {
 							{
-								/* Default exit sequence for state StreetPrepare */
+								/* Default exit sequence for state StreetPrepared */
 								handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 								handle->stateConfVectorPosition = 0;
 								{
-									/* Exit action for state 'StreetPrepare'. */
-									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+									/* Exit action for state 'StreetPrepared'. */
+									trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 								}
 							}
 							break;
@@ -1879,14 +1888,14 @@ static void trafficLightWaiting_react_main_region_on_r1_StreetPrepare(TrafficLig
 				}
 			}
 		}  else {
-			if (handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) { 
+			if (handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) { 
 				{
-					/* Default exit sequence for state StreetPrepare */
+					/* Default exit sequence for state StreetPrepared */
 					handle->stateConfVector[0] = TrafficLightWaiting_last_state;
 					handle->stateConfVectorPosition = 0;
 					{
-						/* Exit action for state 'StreetPrepare'. */
-						trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepare_time_event_0_raised) );		
+						/* Exit action for state 'StreetPrepared'. */
+						trafficLightWaiting_unsetTimer( (sc_eventid) &(handle->timeEvents.TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised) );		
 					}
 				}
 				{

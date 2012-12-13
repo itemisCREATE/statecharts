@@ -58,7 +58,6 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
-import org.yakindu.sct.model.stext.stext.DefaultEvent;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
@@ -67,7 +66,6 @@ import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
@@ -771,27 +769,7 @@ public class SexecElementMapping {
     return r;
   }
   
-  protected Expression _raised(final OnCycleEvent e) {
-    StextFactory _factory = this.stext.factory();
-    final PrimitiveValueExpression r = _factory.createPrimitiveValueExpression();
-    StextFactory _factory_1 = this.stext.factory();
-    final BoolLiteral boolLit = _factory_1.createBoolLiteral();
-    boolLit.setValue(true);
-    r.setValue(boolLit);
-    return r;
-  }
-  
   protected Expression _raised(final AlwaysEvent e) {
-    StextFactory _factory = this.stext.factory();
-    final PrimitiveValueExpression r = _factory.createPrimitiveValueExpression();
-    StextFactory _factory_1 = this.stext.factory();
-    final BoolLiteral boolLit = _factory_1.createBoolLiteral();
-    boolLit.setValue(true);
-    r.setValue(boolLit);
-    return r;
-  }
-  
-  protected Expression _raised(final DefaultEvent e) {
     StextFactory _factory = this.stext.factory();
     final PrimitiveValueExpression r = _factory.createPrimitiveValueExpression();
     StextFactory _factory_1 = this.stext.factory();
@@ -848,10 +826,6 @@ public class SexecElementMapping {
   public Expression raised(final EventSpec e) {
     if (e instanceof AlwaysEvent) {
       return _raised((AlwaysEvent)e);
-    } else if (e instanceof DefaultEvent) {
-      return _raised((DefaultEvent)e);
-    } else if (e instanceof OnCycleEvent) {
-      return _raised((OnCycleEvent)e);
     } else if (e instanceof RegularEventSpec) {
       return _raised((RegularEventSpec)e);
     } else if (e instanceof TimeEventSpec) {

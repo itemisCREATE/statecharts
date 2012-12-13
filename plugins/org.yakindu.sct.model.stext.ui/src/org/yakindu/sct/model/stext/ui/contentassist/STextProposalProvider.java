@@ -94,8 +94,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 					.getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess()
 					.getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
-					.getGroup().eContents()));
+//			suppressKeywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
+//					.getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess()
 					.getAlternatives().eContents()));
 			suppressKeywords.add(grammarAccess.getDirectionAccess()

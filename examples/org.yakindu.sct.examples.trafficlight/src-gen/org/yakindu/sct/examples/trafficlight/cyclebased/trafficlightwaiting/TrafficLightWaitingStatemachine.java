@@ -172,6 +172,18 @@ public class TrafficLightWaitingStatemachine
 
 		clearEvents();
 		clearOutEvents();
+
+		sCITrafficLight.red = false;
+
+		sCITrafficLight.yellow = false;
+
+		sCITrafficLight.green = false;
+
+		sCIPedestrian.request = false;
+
+		sCIPedestrian.red = false;
+
+		sCIPedestrian.green = false;
 	}
 
 	public void enter() {

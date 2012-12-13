@@ -32,7 +32,6 @@ import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
@@ -111,12 +110,12 @@ public class StextTestFactory extends StextFactoryImpl {
 		return referenceExpression;
 	}
 
-	public static OnCycleEvent _createOncycleEventSpec(ReactionTrigger rt) {
-		OnCycleEvent oce = StextFactory.eINSTANCE.createOnCycleEvent();
-		if (rt != null)
-			rt.getTriggers().add(oce);
-		return oce;
-	}
+//	public static OnCycleEvent _createOncycleEventSpec(ReactionTrigger rt) {
+//		OnCycleEvent oce = StextFactory.eINSTANCE.createOnCycleEvent();
+//		if (rt != null)
+//			rt.getTriggers().add(oce);
+//		return oce;
+//	}
 
 	public static AlwaysEvent _createAlwaysEventSpec(ReactionTrigger rt) {
 		AlwaysEvent always = StextFactory.eINSTANCE.createAlwaysEvent();

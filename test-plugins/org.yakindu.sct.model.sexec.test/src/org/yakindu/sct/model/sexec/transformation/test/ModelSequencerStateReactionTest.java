@@ -2,7 +2,6 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
@@ -11,7 +10,19 @@ import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createRe
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createState;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createTransition;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createAlwaysEventSpec;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEntryAction;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEventDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createExitAction;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createLocalReaction;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionTrigger;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createRegularEventSpec;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createTimeEventSpec;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createTimeTriggeredReaction;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createValue;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableAssignment;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
 
 import org.junit.Test;
 import org.yakindu.base.base.NamedElement;
@@ -98,22 +109,6 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 				((LogicalOrExpression) s).getRightOperand());
 	}
 
-	/**
-	 * The 'onclycle' trigger event will be converted to a simple 'true'
-	 * condition.
-	 */
-	@Test
-	public void testOnCycleTriggerCondition() {
-
-		ReactionTrigger tr1 = _createReactionTrigger(null);
-		_createOncycleEventSpec(tr1);
-
-		Statement s = behaviorMapping.buildCondition(tr1);
-
-		assertNotNull(s);
-		assertTrue(s instanceof PrimitiveValueExpression);
-		assertBoolLiteral(true, ((PrimitiveValueExpression) s).getValue());
-	}
 
 	public static void assertBoolLiteral(boolean value, Literal lit) {
 		assertTrue("Literal is no BoolLiteral", lit instanceof BoolLiteral);
@@ -133,7 +128,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 	public void testAlwaysTriggerCondition() {
 
 		ReactionTrigger tr1 = _createReactionTrigger(null);
-		_createOncycleEventSpec(tr1);
+		_createAlwaysEventSpec(tr1);
 
 		Statement s = behaviorMapping.buildCondition(tr1);
 
@@ -510,37 +505,6 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps()
 				.get(0);
 		assertSame(te, ute.getTimeEvent());
-
-	}
-
-	/**
-	 * Local reactions must be created for behavior with 'oncycle' trigger
-	 */
-	@Test
-	public void testOncycleLocalReaction() {
-
-		Statechart sc = _createStatechart("test");
-		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
-				scope);
-		Region r = _createRegion("main", sc);
-		State s = _createState("s", r);
-
-		LocalReaction timeTriggeredReaction = _createLocalReaction(s,
-				StextFactory.eINSTANCE.createOnCycleEvent());
-		AssignmentExpression assign = _createVariableAssignment(v1,
-				AssignmentOperator.ASSIGN, _createValue(42),
-				(ReactionEffect) timeTriggeredReaction.getEffect());
-
-		ExecutionFlow flow = sequencer.transform(sc);
-
-		ExecutionState _s = flow.getStates().get(0);
-
-		// assert that a local reaction is created
-		Reaction reaction = _s.getReactions().get(0);
-		PrimitiveValueExpression pve = (PrimitiveValueExpression) reaction
-				.getCheck().getCondition();
-		assertBoolLiteral(true, pve.getValue());
 
 	}
 
