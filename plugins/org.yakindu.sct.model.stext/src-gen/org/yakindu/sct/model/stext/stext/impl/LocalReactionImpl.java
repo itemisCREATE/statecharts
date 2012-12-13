@@ -84,6 +84,33 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
    */
   public Trigger getTrigger()
   {
+    if (trigger != null && trigger.eIsProxy())
+    {
+      InternalEObject oldTrigger = (InternalEObject)trigger;
+      trigger = (Trigger)eResolveProxy(oldTrigger);
+      if (trigger != oldTrigger)
+      {
+        InternalEObject newTrigger = (InternalEObject)trigger;
+        NotificationChain msgs = oldTrigger.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.LOCAL_REACTION__TRIGGER, null, null);
+        if (newTrigger.eInternalContainer() == null)
+        {
+          msgs = newTrigger.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.LOCAL_REACTION__TRIGGER, null, msgs);
+        }
+        if (msgs != null) msgs.dispatch();
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.LOCAL_REACTION__TRIGGER, oldTrigger, trigger));
+      }
+    }
+    return trigger;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Trigger basicGetTrigger()
+  {
     return trigger;
   }
 
@@ -131,6 +158,33 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
    * @generated
    */
   public Effect getEffect()
+  {
+    if (effect != null && effect.eIsProxy())
+    {
+      InternalEObject oldEffect = (InternalEObject)effect;
+      effect = (Effect)eResolveProxy(oldEffect);
+      if (effect != oldEffect)
+      {
+        InternalEObject newEffect = (InternalEObject)effect;
+        NotificationChain msgs = oldEffect.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.LOCAL_REACTION__EFFECT, null, null);
+        if (newEffect.eInternalContainer() == null)
+        {
+          msgs = newEffect.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.LOCAL_REACTION__EFFECT, null, msgs);
+        }
+        if (msgs != null) msgs.dispatch();
+        if (eNotificationRequired())
+          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.LOCAL_REACTION__EFFECT, oldEffect, effect));
+      }
+    }
+    return effect;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Effect basicGetEffect()
   {
     return effect;
   }
@@ -202,9 +256,11 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
     switch (featureID)
     {
       case StextPackage.LOCAL_REACTION__TRIGGER:
-        return getTrigger();
+        if (resolve) return getTrigger();
+        return basicGetTrigger();
       case StextPackage.LOCAL_REACTION__EFFECT:
-        return getEffect();
+        if (resolve) return getEffect();
+        return basicGetEffect();
     }
     return super.eGet(featureID, resolve, coreType);
   }

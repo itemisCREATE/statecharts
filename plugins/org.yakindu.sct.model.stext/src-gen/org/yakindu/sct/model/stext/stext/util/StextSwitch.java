@@ -281,30 +281,12 @@ public class StextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case StextPackage.ON_CYCLE_EVENT:
-      {
-        OnCycleEvent onCycleEvent = (OnCycleEvent)theEObject;
-        T result = caseOnCycleEvent(onCycleEvent);
-        if (result == null) result = caseBuiltinEventSpec(onCycleEvent);
-        if (result == null) result = caseEventSpec(onCycleEvent);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case StextPackage.ALWAYS_EVENT:
       {
         AlwaysEvent alwaysEvent = (AlwaysEvent)theEObject;
         T result = caseAlwaysEvent(alwaysEvent);
         if (result == null) result = caseBuiltinEventSpec(alwaysEvent);
         if (result == null) result = caseEventSpec(alwaysEvent);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
-      case StextPackage.DEFAULT_EVENT:
-      {
-        DefaultEvent defaultEvent = (DefaultEvent)theEObject;
-        T result = caseDefaultEvent(defaultEvent);
-        if (result == null) result = caseBuiltinEventSpec(defaultEvent);
-        if (result == null) result = caseEventSpec(defaultEvent);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -376,6 +358,14 @@ public class StextSwitch<T> extends Switch<T>
         ReactionTrigger reactionTrigger = (ReactionTrigger)theEObject;
         T result = caseReactionTrigger(reactionTrigger);
         if (result == null) result = caseTrigger(reactionTrigger);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.DEFAULT_TRIGGER:
+      {
+        DefaultTrigger defaultTrigger = (DefaultTrigger)theEObject;
+        T result = caseDefaultTrigger(defaultTrigger);
+        if (result == null) result = caseTrigger(defaultTrigger);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -924,22 +914,6 @@ public class StextSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>On Cycle Event</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>On Cycle Event</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseOnCycleEvent(OnCycleEvent object)
-  {
-    return null;
-  }
-
-  /**
    * Returns the result of interpreting the object as an instance of '<em>Always Event</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -951,22 +925,6 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseAlwaysEvent(AlwaysEvent object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Default Event</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Default Event</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseDefaultEvent(DefaultEvent object)
   {
     return null;
   }
@@ -1111,6 +1069,22 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseReactionTrigger(ReactionTrigger object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Default Trigger</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Default Trigger</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDefaultTrigger(DefaultTrigger object)
   {
     return null;
   }

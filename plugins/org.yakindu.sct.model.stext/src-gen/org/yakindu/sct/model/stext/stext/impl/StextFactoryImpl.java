@@ -87,9 +87,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.BUILTIN_EVENT_SPEC: return createBuiltinEventSpec();
       case StextPackage.ENTRY_EVENT: return createEntryEvent();
       case StextPackage.EXIT_EVENT: return createExitEvent();
-      case StextPackage.ON_CYCLE_EVENT: return createOnCycleEvent();
       case StextPackage.ALWAYS_EVENT: return createAlwaysEvent();
-      case StextPackage.DEFAULT_EVENT: return createDefaultEvent();
       case StextPackage.EXPRESSION: return createExpression();
       case StextPackage.LITERAL: return createLiteral();
       case StextPackage.BOOL_LITERAL: return createBoolLiteral();
@@ -99,6 +97,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.STRING_LITERAL: return createStringLiteral();
       case StextPackage.SIMPLE_SCOPE: return createSimpleScope();
       case StextPackage.REACTION_TRIGGER: return createReactionTrigger();
+      case StextPackage.DEFAULT_TRIGGER: return createDefaultTrigger();
       case StextPackage.REACTION_EFFECT: return createReactionEffect();
       case StextPackage.EVENT_RAISING_EXPRESSION: return createEventRaisingExpression();
       case StextPackage.ASSIGNMENT_EXPRESSION: return createAssignmentExpression();
@@ -438,32 +437,10 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public OnCycleEvent createOnCycleEvent()
-  {
-    OnCycleEventImpl onCycleEvent = new OnCycleEventImpl();
-    return onCycleEvent;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public AlwaysEvent createAlwaysEvent()
   {
     AlwaysEventImpl alwaysEvent = new AlwaysEventImpl();
     return alwaysEvent;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DefaultEvent createDefaultEvent()
-  {
-    DefaultEventImpl defaultEvent = new DefaultEventImpl();
-    return defaultEvent;
   }
 
   /**
@@ -563,6 +540,17 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     ReactionTriggerImpl reactionTrigger = new ReactionTriggerImpl();
     return reactionTrigger;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DefaultTrigger createDefaultTrigger()
+  {
+    DefaultTriggerImpl defaultTrigger = new DefaultTriggerImpl();
+    return defaultTrigger;
   }
 
   /**

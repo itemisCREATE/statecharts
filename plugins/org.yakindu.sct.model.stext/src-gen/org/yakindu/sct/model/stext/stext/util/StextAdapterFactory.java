@@ -202,19 +202,9 @@ public class StextAdapterFactory extends AdapterFactoryImpl
         return createExitEventAdapter();
       }
       @Override
-      public Adapter caseOnCycleEvent(OnCycleEvent object)
-      {
-        return createOnCycleEventAdapter();
-      }
-      @Override
       public Adapter caseAlwaysEvent(AlwaysEvent object)
       {
         return createAlwaysEventAdapter();
-      }
-      @Override
-      public Adapter caseDefaultEvent(DefaultEvent object)
-      {
-        return createDefaultEventAdapter();
       }
       @Override
       public Adapter caseExpression(Expression object)
@@ -260,6 +250,11 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseReactionTrigger(ReactionTrigger object)
       {
         return createReactionTriggerAdapter();
+      }
+      @Override
+      public Adapter caseDefaultTrigger(DefaultTrigger object)
+      {
+        return createDefaultTriggerAdapter();
       }
       @Override
       public Adapter caseReactionEffect(ReactionEffect object)
@@ -794,21 +789,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.OnCycleEvent <em>On Cycle Event</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.OnCycleEvent
-   * @generated
-   */
-  public Adapter createOnCycleEventAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.AlwaysEvent <em>Always Event</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -819,21 +799,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAlwaysEventAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.DefaultEvent <em>Default Event</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.yakindu.sct.model.stext.stext.DefaultEvent
-   * @generated
-   */
-  public Adapter createDefaultEventAdapter()
   {
     return null;
   }
@@ -969,6 +934,21 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createReactionTriggerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.DefaultTrigger <em>Default Trigger</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.DefaultTrigger
+   * @generated
+   */
+  public Adapter createDefaultTriggerAdapter()
   {
     return null;
   }
