@@ -500,8 +500,10 @@ public class PerformanceTestStatemachine
 											nextStateIndex = 0;
 											stateVector[0] = State.mr_B_r1_T;
 										} else {
-											nextStateIndex = 0;
-											stateVector[0] = State.mr_B_r1_S;
+											if (true) {
+												nextStateIndex = 0;
+												stateVector[0] = State.mr_B_r1_S;
+											}
 										}
 									}
 								}
@@ -562,8 +564,10 @@ public class PerformanceTestStatemachine
 											nextStateIndex = 0;
 											stateVector[0] = State.mr_B_r1_T;
 										} else {
-											nextStateIndex = 0;
-											stateVector[0] = State.mr_B_r1_S;
+											if (true) {
+												nextStateIndex = 0;
+												stateVector[0] = State.mr_B_r1_S;
+											}
 										}
 									}
 								}
@@ -624,8 +628,10 @@ public class PerformanceTestStatemachine
 											nextStateIndex = 0;
 											stateVector[0] = State.mr_B_r1_T;
 										} else {
-											nextStateIndex = 0;
-											stateVector[0] = State.mr_B_r1_S;
+											if (true) {
+												nextStateIndex = 0;
+												stateVector[0] = State.mr_B_r1_S;
+											}
 										}
 									}
 								}
@@ -686,8 +692,10 @@ public class PerformanceTestStatemachine
 											nextStateIndex = 0;
 											stateVector[0] = State.mr_B_r1_T;
 										} else {
-											nextStateIndex = 0;
-											stateVector[0] = State.mr_B_r1_S;
+											if (true) {
+												nextStateIndex = 0;
+												stateVector[0] = State.mr_B_r1_S;
+											}
 										}
 									}
 								}
@@ -748,8 +756,10 @@ public class PerformanceTestStatemachine
 											nextStateIndex = 0;
 											stateVector[0] = State.mr_B_r1_T;
 										} else {
-											nextStateIndex = 0;
-											stateVector[0] = State.mr_B_r1_S;
+											if (true) {
+												nextStateIndex = 0;
+												stateVector[0] = State.mr_B_r1_S;
+											}
 										}
 									}
 								}
@@ -810,8 +820,10 @@ public class PerformanceTestStatemachine
 											nextStateIndex = 0;
 											stateVector[0] = State.mr_B_r1_T;
 										} else {
-											nextStateIndex = 0;
-											stateVector[0] = State.mr_B_r1_S;
+											if (true) {
+												nextStateIndex = 0;
+												stateVector[0] = State.mr_B_r1_S;
+											}
 										}
 									}
 								}
@@ -955,8 +967,10 @@ public class PerformanceTestStatemachine
 											nextStateIndex = 0;
 											stateVector[0] = State.mr_B_r1_T;
 										} else {
-											nextStateIndex = 0;
-											stateVector[0] = State.mr_B_r1_S;
+											if (true) {
+												nextStateIndex = 0;
+												stateVector[0] = State.mr_B_r1_S;
+											}
 										}
 									}
 								}
@@ -1017,8 +1031,10 @@ public class PerformanceTestStatemachine
 											nextStateIndex = 0;
 											stateVector[0] = State.mr_B_r1_T;
 										} else {
-											nextStateIndex = 0;
-											stateVector[0] = State.mr_B_r1_S;
+											if (true) {
+												nextStateIndex = 0;
+												stateVector[0] = State.mr_B_r1_S;
+											}
 										}
 									}
 								}

@@ -10,6 +10,7 @@ testgroup StextKeywords for statechart STextKeywordsInStatesAndRegions{
 		assert active(STextKeywordsInStatesAndRegions.default.var)
 		assert active(STextKeywordsInStatesAndRegions.operation.active)		
 		 
+		cycle
 	} 
 }
 	

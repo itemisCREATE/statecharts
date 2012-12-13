@@ -22,12 +22,14 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import util.TestModels;
 import static junit.framework.Assert.*;
 /**
- *  Unit TestCase for AssignmentAsExpression
+ *  Unit TestCase for STextKeywordsInStatesAndRegions
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class AssignmentAsExpressionTest extends AbstractExecutionFlowTest {
+public class STextKeywordsInStatesAndRegionsTest
+		extends
+			AbstractExecutionFlowTest {
 
 	@Inject
 	private TestModels models;
@@ -35,40 +37,17 @@ public class AssignmentAsExpressionTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("AssignmentAsExpression.sct");
+				.loadExecutionFlowFromResource("STextKeywordsInStatesAndRegions.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void simpleAssignment() throws Exception {
+	public void activeCheckWithSTextNamedStates() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("Add"));
-		assertTrue(getInteger("b") == 5);
-		assertTrue(getInteger("a") == 9);
+		assertTrue(isActive("var"));
+		assertTrue(isActive("interface"));
 		interpreter.runCycle();
-		assertTrue(isActive("Subtract"));
-		assertTrue(getInteger("d") == 6);
+		assertTrue(isActive("var"));
+		assertTrue(isActive("active"));
 		interpreter.runCycle();
-		assertTrue(isActive("Multiply"));
-		assertTrue(getInteger("e") == 15);
-		interpreter.runCycle();
-		assertTrue(isActive("Divide"));
-		assertTrue(getInteger("g") == 1);
-		interpreter.runCycle();
-		assertTrue(isActive("Modulo"));
-		assertTrue(getInteger("i") == 1);
-		interpreter.runCycle();
-		assertTrue(isActive("Shift"));
-		assertTrue(getInteger("j") == 16);
-		assertTrue(getInteger("k") == 4);
-		interpreter.runCycle();
-		assertTrue(isActive("boolean And"));
-		assertTrue(getInteger("l") == 1);
-		interpreter.runCycle();
-		assertTrue(isActive("boolean Or"));
-		assertTrue(getInteger("p") == 15);
-		interpreter.runCycle();
-		assertTrue(isActive("boolean Xor"));
-		assertTrue(getInteger("u") == 12);
-		interpreter.exit();
 	}
 }

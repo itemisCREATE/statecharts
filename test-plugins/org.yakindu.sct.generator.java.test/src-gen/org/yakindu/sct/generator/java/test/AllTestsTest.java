@@ -27,6 +27,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		SimpleHietachyTest.class, StateIsActiveTest.class,
 		StatechartLocalReactionsTest.class, StringExpressionsTest.class,
 		SyncForkTest.class, SyncJoinTest.class, ValuedEventTest.class,
-		SimpleEventTest.class})
+		SimpleEventTest.class, StextKeywordsTest.class})
 public class AllTestsTest {
 }
