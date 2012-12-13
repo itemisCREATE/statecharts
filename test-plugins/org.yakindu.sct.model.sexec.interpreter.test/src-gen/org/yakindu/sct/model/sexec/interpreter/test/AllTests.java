@@ -20,13 +20,14 @@ import org.junit.runners.Suite.SuiteClasses;
 		CKeywordsTest.class, DeclarationsTest.class, ChoiceTest.class,
 		DeepHistoryTest.class, ExitOnSelfTransitionTest.class, GuardTest.class,
 		GuardedEntryTest.class, GuardedExitTest.class,
-		IntegerExpressionsTest.class, InEventLifeCycleTest.class,
-		InternalEventLifeCycleTest.class, OutEventLifeCycleTest.class,
-		ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
+		HistoryWithoutInitialStepTest.class, IntegerExpressionsTest.class,
+		InEventLifeCycleTest.class, InternalEventLifeCycleTest.class,
+		OutEventLifeCycleTest.class, ParenthesisTest.class,
+		PriorityValuesTest.class, RaiseEventTest.class,
 		SameNameDifferentRegionTest.class, ShallowHistoryTest.class,
 		SimpleHierachyTest.class, StateIsActiveTest.class,
 		StatechartLocalReactionsTest.class, StringExpressionsTest.class,
 		SyncForkTest.class, SyncJoinTest.class, ValuedEventsTest.class,
-		SimpleEventTest.class})
+		SimpleEventTest.class, STextKeywordsInStatesAndRegionsTest.class})
 public class AllTests {
 }

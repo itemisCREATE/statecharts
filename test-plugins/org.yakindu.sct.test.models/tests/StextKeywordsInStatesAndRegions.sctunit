@@ -1,0 +1,15 @@
+
+testgroup StextKeywords for statechart STextKeywordsInStatesAndRegions{
+	test activeCheckWithSTextNamedStates { 
+		
+		enter
+		assert active(STextKeywordsInStatesAndRegions.default.var)
+		assert active(STextKeywordsInStatesAndRegions.operation.interface)
+		
+		cycle
+		assert active(STextKeywordsInStatesAndRegions.default.var)
+		assert active(STextKeywordsInStatesAndRegions.operation.active)		
+		 
+	} 
+}
+	
