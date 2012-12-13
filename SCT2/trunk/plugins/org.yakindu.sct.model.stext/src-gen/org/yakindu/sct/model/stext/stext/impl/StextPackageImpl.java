@@ -28,7 +28,7 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
 import org.yakindu.sct.model.stext.stext.DefRoot;
-import org.yakindu.sct.model.stext.stext.DefaultEvent;
+import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -53,7 +53,6 @@ import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression;
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression;
-import org.yakindu.sct.model.stext.stext.OnCycleEvent;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ParenthesizedExpression;
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
@@ -250,21 +249,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass onCycleEventEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass alwaysEventEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass defaultEventEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -328,6 +313,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass reactionTriggerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass defaultTriggerEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -971,29 +963,9 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getOnCycleEvent()
-  {
-    return onCycleEventEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getAlwaysEvent()
   {
     return alwaysEventEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDefaultEvent()
-  {
-    return defaultEventEClass;
   }
 
   /**
@@ -1154,6 +1126,16 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EReference getReactionTrigger_GuardExpression()
   {
     return (EReference)reactionTriggerEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDefaultTrigger()
+  {
+    return defaultTriggerEClass;
   }
 
   /**
@@ -1994,11 +1976,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     exitEventEClass = createEClass(EXIT_EVENT);
 
-    onCycleEventEClass = createEClass(ON_CYCLE_EVENT);
-
     alwaysEventEClass = createEClass(ALWAYS_EVENT);
-
-    defaultEventEClass = createEClass(DEFAULT_EVENT);
 
     expressionEClass = createEClass(EXPRESSION);
 
@@ -2024,6 +2002,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     reactionTriggerEClass = createEClass(REACTION_TRIGGER);
     createEReference(reactionTriggerEClass, REACTION_TRIGGER__TRIGGERS);
     createEReference(reactionTriggerEClass, REACTION_TRIGGER__GUARD_EXPRESSION);
+
+    defaultTriggerEClass = createEClass(DEFAULT_TRIGGER);
 
     reactionEffectEClass = createEClass(REACTION_EFFECT);
     createEReference(reactionEffectEClass, REACTION_EFFECT__ACTIONS);
@@ -2180,9 +2160,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     builtinEventSpecEClass.getESuperTypes().add(this.getEventSpec());
     entryEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     exitEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
-    onCycleEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     alwaysEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
-    defaultEventEClass.getESuperTypes().add(this.getBuiltinEventSpec());
     expressionEClass.getESuperTypes().add(theSGraphPackage.getStatement());
     boolLiteralEClass.getESuperTypes().add(this.getLiteral());
     intLiteralEClass.getESuperTypes().add(this.getLiteral());
@@ -2191,6 +2169,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     stringLiteralEClass.getESuperTypes().add(this.getLiteral());
     simpleScopeEClass.getESuperTypes().add(theSGraphPackage.getScope());
     reactionTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
+    defaultTriggerEClass.getESuperTypes().add(theSGraphPackage.getTrigger());
     reactionEffectEClass.getESuperTypes().add(theSGraphPackage.getEffect());
     eventRaisingExpressionEClass.getESuperTypes().add(this.getExpression());
     assignmentExpressionEClass.getESuperTypes().add(this.getExpression());
@@ -2272,11 +2251,7 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     initEClass(exitEventEClass, ExitEvent.class, "ExitEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-    initEClass(onCycleEventEClass, OnCycleEvent.class, "OnCycleEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
     initEClass(alwaysEventEClass, AlwaysEvent.class, "AlwaysEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(defaultEventEClass, DefaultEvent.class, "DefaultEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -2302,6 +2277,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEClass(reactionTriggerEClass, ReactionTrigger.class, "ReactionTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReactionTrigger_Triggers(), this.getEventSpec(), null, "triggers", null, 0, -1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getReactionTrigger_GuardExpression(), this.getExpression(), null, "guardExpression", null, 0, 1, ReactionTrigger.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(defaultTriggerEClass, DefaultTrigger.class, "DefaultTrigger", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(reactionEffectEClass, ReactionEffect.class, "ReactionEffect", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getReactionEffect_Actions(), this.getExpression(), null, "actions", null, 0, -1, ReactionEffect.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

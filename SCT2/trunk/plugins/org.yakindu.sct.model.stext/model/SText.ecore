@@ -65,9 +65,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="BuiltinEventSpec" eSuperTypes="#//EventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="EntryEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExitEvent" eSuperTypes="#//BuiltinEventSpec"/>
-  <eClassifiers xsi:type="ecore:EClass" name="OnCycleEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="AlwaysEvent" eSuperTypes="#//BuiltinEventSpec"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DefaultEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expression" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Statement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Literal"/>
   <eClassifiers xsi:type="ecore:EClass" name="BoolLiteral" eSuperTypes="#//Literal">
@@ -137,6 +135,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="guardExpression" eType="#//Expression"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefaultTrigger" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Trigger"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReactionEffect" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Effect">
     <eStructuralFeatures xsi:type="ecore:EReference" name="actions" upperBound="-1"
         eType="#//Expression" containment="true"/>

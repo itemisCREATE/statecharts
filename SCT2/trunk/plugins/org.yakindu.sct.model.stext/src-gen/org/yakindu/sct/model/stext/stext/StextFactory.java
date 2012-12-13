@@ -221,15 +221,6 @@ public interface StextFactory extends EFactory
   ExitEvent createExitEvent();
 
   /**
-   * Returns a new object of class '<em>On Cycle Event</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>On Cycle Event</em>'.
-   * @generated
-   */
-  OnCycleEvent createOnCycleEvent();
-
-  /**
    * Returns a new object of class '<em>Always Event</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -237,15 +228,6 @@ public interface StextFactory extends EFactory
    * @generated
    */
   AlwaysEvent createAlwaysEvent();
-
-  /**
-   * Returns a new object of class '<em>Default Event</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Default Event</em>'.
-   * @generated
-   */
-  DefaultEvent createDefaultEvent();
 
   /**
    * Returns a new object of class '<em>Expression</em>'.
@@ -327,6 +309,15 @@ public interface StextFactory extends EFactory
    * @generated
    */
   ReactionTrigger createReactionTrigger();
+
+  /**
+   * Returns a new object of class '<em>Default Trigger</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Default Trigger</em>'.
+   * @generated
+   */
+  DefaultTrigger createDefaultTrigger();
 
   /**
    * Returns a new object of class '<em>Reaction Effect</em>'.

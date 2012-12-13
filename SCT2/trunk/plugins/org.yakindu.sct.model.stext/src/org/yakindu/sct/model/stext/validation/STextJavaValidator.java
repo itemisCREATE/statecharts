@@ -41,11 +41,12 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.AssignmentExpression;
-import org.yakindu.sct.model.stext.stext.DefaultEvent;
+import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
@@ -395,23 +396,28 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public void checkChoiceWithoutDefaultTransition(final Choice choice) {
 		boolean found = false;
 		for (Transition transition : choice.getOutgoingTransitions()) {
-			ReactionTrigger casted = (ReactionTrigger) transition.getTrigger();
-			if (casted == null) {
+			Trigger trigger = transition.getTrigger();
+			if (isDefault(trigger)) {
 				found = true;
-			} else if (casted.getTriggers().size() > 0) {
-				for (EventSpec spec : casted.getTriggers()) {
-					if (spec instanceof DefaultEvent) {
-						found = true;
-					}
-				}
-			} else
-				found = true;
+			}
 		}
 		if (!found)
 			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION,
 					SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 	}
 
+	
+	
+	protected boolean isDefault(Trigger trigger) {
+		
+		return 
+			trigger == null 
+			|| trigger instanceof DefaultTrigger
+			|| ((trigger instanceof ReactionTrigger) 
+					&&  ((ReactionTrigger)trigger).getTriggers().size() == 0 
+					&&  ((ReactionTrigger)trigger).getGuardExpression() == null);
+	}
+	
 	@Override
 	protected String getCurrentLanguage(Map<Object, Object> context,
 			EObject eObject) {

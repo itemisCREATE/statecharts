@@ -66,7 +66,7 @@ NamedInterfaceScope returns base::NamedElement:
 ;
 
 InterfaceScope:
-	{InterfaceScope} 'interface' (name=ID)? ':' (declarations+=(
+	{InterfaceScope} 'interface' (name=XID)? ':' (declarations+=(
 		EventDeclarartion 
 		| VariableDeclaration 
 		| OperationDeclaration 
@@ -92,7 +92,7 @@ Declaration returns sgraph::Declaration:
 EventDeclarartion returns sgraph::Event: EventDefinition;
 EventFeature returns types::Event : EventDefinition;
 EventDefinition:
-	 (direction=Direction)? 'event' name=ID (':' type=[types::Type|FQN])?;// (derivation=EventDerivation)?;
+	 (direction=Direction)? 'event' name=XID (':' type=[types::Type|FQN])?;// (derivation=EventDerivation)?;
 
 //EventDerivation:
 //	 (':' value=Expression)?;
@@ -105,31 +105,55 @@ VariableDeclaration returns sgraph::Variable:VariableDefinition;
 VariableFeature returns types::Property: VariableDefinition ;
 
 VariableDefinition:
-	{VariableDefinition} 'var' ((readonly?='readonly')? & (external?='external')?) name=ID ':' type=[types::Type|FQN] ('='
+	{VariableDefinition} 'var' ((readonly?='readonly')? & (external?='external')?) name=XID ':' type=[types::Type|FQN] ('='
 	initialValue=Expression)?;
 
 /* ---- operation definition ---- */
 OperationDeclaration returns sgraph::Declaration: OperationDefinition;
 OperationFeature returns types::Operation: OperationDefinition;
 OperationDefinition:
-	{OperationDefinition} 'operation' name=ID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':' type=[types::Type|FQN])?;
+	{OperationDefinition} 'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':' type=[types::Type|FQN])?;
 
 Parameter returns types::Parameter:
-	name=ID ':' type=[types::Type|FQN]
+	name=XID ':' type=[types::Type|FQN]
 ;
 
 
 /* ---- entrypoint definition ---- */
 //Entrypoint returns sgraph::Declaration:
-//	{Entrypoint} 'entrypoint' name=ID;
+//	{Entrypoint} 'entrypoint' name=XID;
 
 /* ---- exitpoint definition ---- */
 //Exitpoint returns sgraph::Declaration:
-//	{Exitpoint} 'exitpoint' name=ID;
+//	{Exitpoint} 'exitpoint' name=XID;
 
 /* ---- Datatype rules ---- */
+XID:
+	ID 
+	| 'namespace' 
+	| 'interface'
+	| 'internal'
+	| 'event' 
+	| 'local'
+	| 'in'
+	| 'out'
+	| 'var' 
+	| 'readonly'
+	| 'external'
+	| 'operation' 
+	| 'default' 
+	| 'else'
+	| 'entry'
+	| 'exit'
+	| 'always' 
+	| 'oncycle'
+	| 'raise'
+	| 'valueof' 
+	| 'active' 
+;
+
 FQN:
-	ID ('.' ID)*;
+	XID ('.' XID)*;
 
 	/* ---- reaction rules ----
 Define the structure of reactions that are central for describing the statecharts behavior. 
@@ -141,14 +165,23 @@ LocalReaction:
 	(trigger=ReactionTrigger) =>('/' effect=ReactionEffect); //('#' properties=ReactionProperties)?;
 
 TransitionReaction:
-	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)?; // ('#' properties=ReactionProperties)?;
+	{TransitionReaction} (trigger=StextTrigger)? ('/' effect=ReactionEffect)?; // ('#' properties=ReactionProperties)?;
+
+
+StextTrigger returns sgraph::Trigger : ReactionTrigger | DefaultTrigger;
 
 ReactionTrigger returns sgraph::Trigger:
 	{ReactionTrigger} ((triggers+=EventSpec ("," triggers+=EventSpec)* (=> '[' guardExpression=Expression ']')?)
 	| ('[' guardExpression=Expression ']'));
 
+DefaultTrigger returns sgraph::Trigger:
+	{DefaultTrigger} ('default' | 'else')
+;
+
+
 ReactionEffect returns sgraph::Effect:
 	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (=> ';' actions+=(Expression|EventRaisingExpression) )* ; // (';')?;
+
 
 //ReactionProperties:
 //	{ReactionProperties} (properties+=ReactionProperty)*;
@@ -177,7 +210,7 @@ enum TimeEventType:
 
 	//TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
 BuiltinEventSpec:
-	EntryEvent | ExitEvent | OnCycleEvent | AlwaysEvent | DefaultEvent;
+	EntryEvent | ExitEvent |  AlwaysEvent; // | DefaultEvent | OnCycleEvent ;
 
 EntryEvent:
 	{EntryEvent} 'entry';
@@ -185,15 +218,15 @@ EntryEvent:
 ExitEvent:
 	{ExitEvent} 'exit';
 
-OnCycleEvent:
-	{OnCycleEvent} 'oncycle'; 
+//OnCycleEvent:
+//	{OnCycleEvent} 'oncycle'; 
 	
 AlwaysEvent:
-	{AlwaysEvent} 'always';
+	{AlwaysEvent} ('always' | 'oncycle');
 
-DefaultEvent:
-	{DefaultEvent} ('default' | 'else')
-;
+//DefaultEvent:
+//	{DefaultEvent} ('default' | 'else')
+//;
 
 //****************
 // Expression Grammar
