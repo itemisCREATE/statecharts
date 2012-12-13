@@ -25,6 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		SameNameDifferentRegion.class, ShallowHistory.class,
 		SimpleHietachy.class, StateIsActive.class,
 		StatechartLocalReactions.class, StringExpressions.class,
-		SyncFork.class, SyncJoin.class, ValuedEvent.class, SimpleEvent.class})
+		SyncFork.class, SyncJoin.class, ValuedEvent.class, SimpleEvent.class,
+		StextKeywords.class})
 public class AllTests {
 }

@@ -141,10 +141,12 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B;
 			} else {
-				sCIDefault.value -= 1;
+				if (true) {
+					sCIDefault.value -= 1;
 
-				nextStateIndex = 0;
-				stateVector[0] = State.main_region_C;
+					nextStateIndex = 0;
+					stateVector[0] = State.main_region_C;
+				}
 			}
 		}
 	}
@@ -172,8 +174,10 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B;
 			} else {
-				nextStateIndex = 0;
-				stateVector[0] = State.main_region_A;
+				if (true) {
+					nextStateIndex = 0;
+					stateVector[0] = State.main_region_A;
+				}
 			}
 		}
 	}

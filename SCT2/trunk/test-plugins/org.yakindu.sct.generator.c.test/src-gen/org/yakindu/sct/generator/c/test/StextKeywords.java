@@ -18,9 +18,9 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/AssignmentAsExpression/AssignmentAsExpression.cc", program = "gtests/AssignmentAsExpression/AssignmentAsExpression", model = "testmodels/AssignmentAsExpression.sct")
+@GTest(sourceFile = "gtests/StextKeywords/StextKeywords.cc", program = "gtests/StextKeywords/STextKeywordsInStatesAndRegions", model = "testmodels/STextKeywordsInStatesAndRegions.sct")
 @RunWith(GTestRunner.class)
-public class AssignmentAsExpression {
+public class StextKeywords {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
 
