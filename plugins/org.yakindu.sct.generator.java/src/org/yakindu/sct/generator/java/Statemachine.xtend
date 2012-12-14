@@ -451,7 +451,7 @@ class Statemachine {
 		public void runCycle() {
 			
 			«IF flow.timed»
-			cycleStartTime = System.currentTimeMillis();
+			cycleStartTime = timerService.getSystemTimeMillis();
 			
 			«ENDIF»
 			clearOutEvents();
@@ -481,7 +481,7 @@ class Statemachine {
 			if (timerService == null) {
 				throw new IllegalStateException("TimerService not set.");
 			}
-			cycleStartTime = System.currentTimeMillis();
+			cycleStartTime = timerService.getSystemTimeMillis();
 			«ENDIF»
 			«enterSequence.code»
 		}
