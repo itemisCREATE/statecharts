@@ -4,33 +4,33 @@
    <context id="sc_editor_graphical_viewer">
       <description>With the YAKINDU Statechart editor you create or modify state models.</description>
       <topic href="help/user/03_Concepts/concepts.html#YAKINDUStatechartEditor" label="Yakindu state chart editor"/>
-        <topic href="help/user/05_Reference/reference.html#Statechartelements" label="Reference about the statechart elements"/>
+        <topic href="help/user/04_Reference/reference.html#Statechartelements" label="Reference about the statechart elements"/>
     <topic href="help/user/02_Getting_Started/getting_started.html#Firststeps:myfirststatemachine" label="First steps creating a state machine"/>
   
    </context>
    <context id="sc_properties_entry_entrykind" title="YAKINDU Statechart Element Properties">
       <description>Init, history and shallow history states are pseudo states used to express special aspects.</description>
-      <topic href="help/user/05_Reference/reference.html#Initialstateandfinalstate" label="Init state"/>
-      <topic href="help/user/05_Reference/reference.html#ShallowHistory" label="Shallow History state"/>
-        <topic href="help/user/05_Reference/reference.html#DeepHistory" label="Deep History state"/>
+      <topic href="help/user/04_Reference/reference.html#Initialstateandfinalstate" label="Init state"/>
+      <topic href="help/user/04_Reference/reference.html#ShallowHistory" label="Shallow History state"/>
+        <topic href="help/user/04_Reference/reference.html#DeepHistory" label="Deep History state"/>
    </context>
    <context id="sc_properties_state_expression" title="YAKINDU Statechart Element Properties">
       <description>States are the central elements of a state machine.</description>
-      <topic href="help/user/05_Reference/reference.html#States" label="State"/>
+      <topic href="help/user/04_Reference/reference.html#States" label="State"/>
    </context>
    <context id="sc_properties_statechart_expression" title="YAKINDU Statechart Element Properties">
       <description>Expressions are used to declare events, variables etc. and to define behavior.</description>
-      <topic href="help/user/05_Reference/reference.html#Expressions" label="Expression reference"/>
+      <topic href="help/user/04_Reference/reference.html#Expressions" label="Expression reference"/>
    </context>
    <context id="sc_properties_transition_expression" title="YAKINDU Statechart Element Properties">
       <description>A transition is the transfer of one state to another. Transitions are diagrammed as arrows and can carry events and actions but must not.</description>
-      <topic href="help/user/05_Reference/reference.html#Transitions" label="Transitions reference"/>
+      <topic href="help/user/04_Reference/reference.html#Transitions" label="Transitions reference"/>
  	     
    </context>
    <context id="sgen_feature" title="Genmodel Features">
       <topic href="help/user/04_Tasks/tasks.html" label="Help_Topic"/>
    </context>
    <context id="stext_keyword">
-      <topic href="help/user/05_Reference/reference.html" label="Help_Topic"/>
+      <topic href="help/user/04_Reference/reference.html" label="Help_Topic"/>
    </context>
 </contexts>
