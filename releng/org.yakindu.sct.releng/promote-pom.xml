@@ -27,7 +27,7 @@
 		<distro.work.dir>${distro.dir}/work</distro.work.dir>
 
 		<profile>epp.package.modeling</profile>
-		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.feature.group</features>
+		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.feature.group,org.eclipse.gmf.runtime.emf.clipboard.core.patch.feature.group</features>
 		<update.sites>${p2.target.repository},file:${local.update.site},${updateSiteUrl}</update.sites>
 
 	</properties>
@@ -303,7 +303,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog \
+							<appArgLine>-consoleLog -clean -nosplash -debug \
 								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/macosx-cocoa-x86_64/eclipse/ -profile \
 								${profile} -p2.os macosx -p2.ws cocoa -p2.arch x86_64 \
@@ -318,7 +318,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog \
+							<appArgLine>-consoleLog -clean -nosplash -debug \
 								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile} \
 								-p2.os win32 -p2.ws win32 -p2.arch x86 -repository \
@@ -333,7 +333,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog \
+							<appArgLine>-consoleLog -clean -nosplash -debug \
 								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/win32-win32-x86_64/eclipse/ -profile \
 								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository \
@@ -348,7 +348,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog \
+							<appArgLine>-consoleLog -clean -nosplash -debug \
 								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/linux-gtk-x86/eclipse/ -profile \
 								${profile} -p2.os linux -p2.ws gtk -p2.arch x86 \
@@ -363,7 +363,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog \
+							<appArgLine>-consoleLog -clean -nosplash -debug \
 								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/linux-gtk-x86_64/eclipse/ -profile \
 								${profile} -p2.os linux -p2.ws gtk -p2.arch x86_64 \
