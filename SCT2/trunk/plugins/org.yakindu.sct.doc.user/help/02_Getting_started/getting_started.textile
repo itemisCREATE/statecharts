@@ -2,7 +2,7 @@
 <link href="../../css/custom.css" rel="stylesheet" /> 
  
 
-h1. Getting started tutorial 
+h1. Getting started
 
 h3. Installation
 

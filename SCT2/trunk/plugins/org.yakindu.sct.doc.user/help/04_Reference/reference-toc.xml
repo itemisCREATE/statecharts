@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <toc topic="help/04_Reference/reference.html" label="reference">
-	<topic href="help/04_Reference/reference.html" label="YAKINDU SCT 2 Reference">
-		<topic href="help/04_Reference/reference.html#Statechartelements" label="State chart elements">
+	<topic href="help/04_Reference/reference.html" label="SCT Reference">
+		<topic href="help/04_Reference/reference.html#Statechartelements" label="Statechart elements">
 			<topic href="help/04_Reference/reference.html#Regions" label="Regions"></topic>
 			<topic href="help/04_Reference/reference.html#States" label="States"></topic>
 			<topic href="help/04_Reference/reference.html#Transitions" label="Transitions"></topic>
