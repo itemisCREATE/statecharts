@@ -18,6 +18,11 @@ public interface IStatemachine {
 	public void enter();
 
 	/**
+	* Exits the statemachine. Leaves the statemachine with a defined state.
+	*/
+	public void exit();
+
+	/**
 	* Start a run-to-completion cycle.
 	*/
 	public void runCycle();

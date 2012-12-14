@@ -35,4 +35,12 @@ public interface ITimerService {
 	 * memory resources.
 	 */
 	public void cancel();
+
+	/**
+	 * Returns the system time in milliseconds.
+	 * 
+	 * @return the difference, measured in milliseconds, between the current
+	 *         time and a defined point of time in the past.
+	 */
+	public long getSystemTimeMillis();
 }

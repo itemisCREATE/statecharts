@@ -190,7 +190,7 @@ public class TrafficLightWaitingStatemachine
 		if (timerService == null) {
 			throw new IllegalStateException("TimerService not set.");
 		}
-		cycleStartTime = System.currentTimeMillis();
+		cycleStartTime = timerService.getSystemTimeMillis();
 		entryAction();
 
 		sCITrafficLight.red = false;
@@ -1703,7 +1703,7 @@ public class TrafficLightWaitingStatemachine
 
 	public void runCycle() {
 
-		cycleStartTime = System.currentTimeMillis();
+		cycleStartTime = timerService.getSystemTimeMillis();
 
 		clearOutEvents();
 
