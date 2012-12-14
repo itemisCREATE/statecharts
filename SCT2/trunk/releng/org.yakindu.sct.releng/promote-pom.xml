@@ -10,7 +10,7 @@
 		<relativePath>../org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>org.yakindu.sct.releng.promote</artifactId>
-	<packaging>pom</packaging>
+	<packaging>eclipse-repository</packaging>
 
 	<!-- Search for 'target architecture' to find places where the architecture for distros is set -->
 
