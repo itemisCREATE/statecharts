@@ -6,29 +6,22 @@ h1. Getting started
 
 h3. Installation
 
-The *Yakindu Statechart Tools* are built upon Java and Xtext. So you need to have installed a "Java Runtime Environment":http://www.oracle.com/technetwork/java/index.html and Xtext installed. The easier way to get this is to install the "pre configured Xtext contribution":http://xtext.itemis.com.
+For a new installation
+* choose Eclipse menu Help/Install New Software ...
+* press the ‘add’ button in the top right corner of the installation wizard to add http://updates.yakindu.com/juno/releases as update site
+* select all the listed features
+* and follow the installation wizzard 
+* For updating the installed plugins select Help/Check for Updates...
 
-The *Yakindu Statechart Tools 2* need *Eclipse Indigo 3.7* or higher and *Xtext 2.0.1* exactly (no higher) to work correctly.
-
-h3. Installing the YAKINDU-Plug-Ins
-
-You install the Yakindu Plug-Ins from the update site: http://updates.yakindu.com/indigo/milestones. 
-
-* Click *Help* > *Install new software...* and *Add..* the update site _Yakindu SCT2 milestones_ - http://updates.yakindu.com/indigo/milestones/
-* Check all to install the YAKINDU SCT2
-* Click *Next* to start the installation and click *Next* at the next step
-* Accept the licence agreement and click *Finish*
-* The software will be installed
+After installing the plugins a user guide is included in the Eclipse help. Choose Help/Help Contents from the menue. A browser window will pop up and you will find the user guide as an entry on the left side overview.
 
 When the installation finished the wizard will ask to reopen Eclipse. The restart is important to make the newly installed software work correctly.
-
-!images/updatesite_4.jpg!
 
 h3. Introduction
 
 This tutorial will introduce the open source project Yakindu Statechart Tools (SCT).YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of statecharts. It is an easy to use tool that features sophisticated graphical state chart editing, validation and simulation of statecharts as well as code generation.
 
-In this tutorial you will learn how to create a new statechart model, execute it with the simulation engine and generate a fully working Java statechart implementation from it. Note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have Yakindu Statechart Tools properly installed. For installation instructions see chapter "Installation":install.html .
+In this tutorial you will learn how to create a new statechart model, execute it with the simulation engine and generate a fully working Java statechart implementation from it. Note that this tutorial will not explain statecharts in general, so you should familiarize yourself with the basic concepts of state machines first.[1] Before we get started, make sure you have Yakindu Statechart Tools properly installed. For installation instructions see chapter "Installation":getting_started.html .
 
 h3. CallHandling example explained
 
@@ -60,7 +53,7 @@ in event incoming_call
 Tip:  The statechart Editor offers code completion for all textual parts. To open the content assist press *CTRL + space*. For all keywords, a detailed description with example code shows up in the help hover besides the content assist window.
 !images/ctrlspace.png! 
 
-The example code contains two interfaces and one internal block. The _User_ interface defines the communication of the system with the user. It consists of the two in events _dismiss_call_ and _accept_call_. The _Phone_ interface defines the communication with the underlying hardware. It provides the in event _incoming_call_ as well as a varia ble _duration_ of type _integer_.
+The example code contains two interfaces and one internal block. The _User_ interface defines the communication of the system with the user. It consists of the two in events _dismiss_call_ and _accept_call_. The _Phone_ interface defines the communication with the underlying hardware. It provides the in event _incoming_call_ as well as a variable _duration_ of type _integer_.
 
 Next, give the initially created state the name *Idle* by double clicking on the name label. The error marker will disappear. The validation of statecharts includes syntax and semantic checks of the complete statechart. Examples of validations are the detection of unreachable states, dead ends, and references to unknown events. These validation constraints are live checked during editing. In case a constraint is violated, this is visualized by warning and error markers, which are attached to the faulty model elements. By this the user gets direct and immediate feedback on the validation state of the statecharts
 
