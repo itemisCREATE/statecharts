@@ -28,7 +28,7 @@
 
 		<profile>epp.package.modeling</profile>
 		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.feature.group</features>
-		<update.sites>${p2.target.repository},${local.update.site},${updateSiteUrl}</update.sites>
+		<update.sites>${p2.target.repository},file:${local.update.site},${updateSiteUrl}</update.sites>
 
 	</properties>
 
