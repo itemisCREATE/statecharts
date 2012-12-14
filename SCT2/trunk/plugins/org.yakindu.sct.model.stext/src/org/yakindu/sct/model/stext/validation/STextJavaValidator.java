@@ -159,11 +159,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	private String getVariableName(AssignmentExpression exp) {
 		Expression varRef = exp.getVarRef();
 		if (varRef instanceof ElementReferenceExpression) {
-			VariableDefinition reference = (VariableDefinition) ((ElementReferenceExpression) varRef)
+			Property reference = (Property) ((ElementReferenceExpression) varRef)
 					.getReference();
 			return reference.getName();
 		} else if (varRef instanceof FeatureCall) {
-			VariableDefinition reference = (VariableDefinition) ((FeatureCall) varRef)
+			Property reference = (Property) ((FeatureCall) varRef)
 					.getFeature();
 			return reference.getName();
 		}

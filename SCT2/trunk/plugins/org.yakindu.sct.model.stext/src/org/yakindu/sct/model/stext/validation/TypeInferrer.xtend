@@ -13,8 +13,10 @@ package org.yakindu.sct.model.stext.validation
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Feature
 import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -25,7 +27,6 @@ import org.yakindu.sct.model.stext.stext.BitwiseXorExpression
 import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.ConditionalExpression
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.Expression
@@ -47,7 +48,6 @@ import org.yakindu.sct.model.stext.stext.RelationalOperator
 import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.UnaryOperator
-import org.yakindu.sct.model.stext.stext.VariableDefinition
  
 /**
  * 
@@ -58,8 +58,9 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
  */
 class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferrer, org.yakindu.sct.model.stext.validation.TypeInferrerCache$ICacheableTypeAnalyzer {
 	
-	@Inject extension
-	ITypeSystemAccess ts 
+	@Inject protected extension
+	ITypeSystemAccess ts
+	 
 	@Inject 
 	org.yakindu.sct.model.stext.validation.TypeInferrerCache cache
 	
@@ -208,7 +209,7 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 		return trueType.combine(falseType)
 	} 
 	def dispatch inferType(FeatureCall featureCall){
-		if(featureCall.feature instanceof EventDefinition && !(featureCall.eContainer instanceof EventRaisingExpression)){
+		if(featureCall.feature instanceof Event /*ntDefinition*/ && !(featureCall.eContainer instanceof EventRaisingExpression)){
 			return ts.boolean
 		}
 		if (featureCall.feature instanceof Feature) {
@@ -227,11 +228,11 @@ class TypeInferrer implements org.yakindu.sct.model.stext.validation.ITypeInferr
 	def dispatch inferType(EObject object, ElementReferenceExpression expression) {
 		//	
 	}
-	def dispatch inferType(VariableDefinition definition,ElementReferenceExpression expression) {
+	def dispatch inferType(Property /*VariableDefinition*/ definition,ElementReferenceExpression expression) {
 		return definition.type
 	}
 
-	def dispatch inferType(EventDefinition definition,ElementReferenceExpression expression) {
+	def dispatch inferType(Event /*Definition*/ definition,ElementReferenceExpression expression) {
 		if(expression.eContainer instanceof EventRaisingExpression
 				|| expression.eContainer instanceof EventValueReferenceExpression)
 			return definition.type
