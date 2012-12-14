@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<toc topic="help/developer/02_Getting_Started/getting_started.html" label="getting_started">
-	<topic href="help/developer/02_Getting_Started/getting_started.html" label="Developer Getting started">
-		<topic href="help/developer/02_Getting_Started/getting_started.html#YakinduXpandGeneratorProject" label="Yakindu Xpand Generator Project"></topic>
-		<topic href="help/developer/02_Getting_Started/getting_started.html#YakinduXtend2JavaGeneratorProject" label="Yakindu Xtend2/Java Generator Project"></topic>
-	</topic>
-</toc>
