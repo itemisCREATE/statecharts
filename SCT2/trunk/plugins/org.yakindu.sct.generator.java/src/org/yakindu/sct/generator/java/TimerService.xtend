@@ -79,12 +79,13 @@ class TimerService {
 				timerTaskMap.remove(event);
 			}
 		
-			/**
-			 * Cancels all running TimersTasks
-			 */
 			public void cancel() {
 				timer.cancel();
 				timer.purge();
+			}
+		
+			public long getSystemTimeMillis() {
+				return System.currentTimeMillis();
 			}
 		}
 	'''
