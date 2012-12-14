@@ -1,1 +1,200 @@
-<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><body><p><link href="../../../css/bootstrap.css" rel="stylesheet" /></p><h1 id="Gettingstarted">Getting started</h1><p>Here you learn how to install the YAKINDU SCT2 and to make the first steps.</p><h2 id="Installation">Installation</h2><h3 id="Prerequisites">Prerequisites</h3><p>The <strong>Yakindu Statechart Tools 2</strong> are built upon Java and Xtext. So you need to have installed a <a href="http://www.oracle.com/technetwork/java/index.html">Java Runtime Environment</a> and Xtext installed. The easier way to get this is to install the <a href="http://xtext.itemis.com">pre configured Xtext contribution</a>.</p><p>The <strong>Yakindu Statechart Tools 2</strong> need <strong>Eclipse Indigo 3.7</strong> or higher and <strong>Xtext 2.0.1</strong> exactly (no higher) to work correctly.</p><h3 id="InstallingtheYAKINDUPlugIns">Installing the YAKINDU-Plug-Ins</h3><p>You install the Yakindu Plug-Ins from the update site: http://updates.yakindu.com/indigo/milestones. </p><ul><li>Click <strong>Help</strong> &gt; <strong>Install new software...</strong> and <strong>Add..</strong> the update site <em>Yakindu SCT2 milestones</em> - http://updates.yakindu.com/indigo/milestones/</li><li>Check all to install the YAKINDU SCT2</li><li>Click <strong>Next</strong> to start the installation and click <strong>Next</strong> at the next step</li><li>Accept the licence agreement and click <strong>Finish</strong></li><li>The software will be installed</li></ul><p>When the installation finished the wizard will ask to reopen Eclipse. The restart is important to make the newly installed software work correctly.</p><p><img border="0" src="images/updatesite_4.jpg"/></p><h2 id="Firststepsmyfirststatemachine">First steps: my first state machine</h2><p>In the following you will create your first state machine with the YAKINDU Statechart tools and simulate it. </p><h3 id="CreatingaNewProject">Creating a New Project</h3><p>For modeling purposes the YAKINDU statechart tools offer a workbench perspective. Such a perspective is a bunch of editors and views that are organized in a pre defined order on the screen. Open the Yakindu <strong>SC Modeling</strong> perspective by clicking <strong>Window</strong> &gt; <strong>Open Perspective</strong> &gt; <strong>SC Modeling</strong>. This perspective is optimized for statechart modeling. It consists of </p><ul><li><a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm">Project Explorer</a> on the left</li><li><a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm">Outline</a> View on the right</li><li>YAKINDU Statechart Editor at the top</li><li><a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cprbview.htm">Problems</a> and <a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cpropview.htm">Properties View</a> at the bottom</li></ul><p><img border="0" src="images/sc_modeling_perspective.jpg"/></p><p>In the Eclipse workbench all elements are organized in projects. So first to do is to create a project. Therefore click <strong>File</strong> &gt; <strong>New..." &gt; *Project</strong>. In the wizard click <strong>Next</strong> and insert a project name. Click <strong>Finish</strong>.</p><p>Now you see your project in the project explorer. </p><h3 id="DefiningaStateMachine">Defining a State Machine</h3><p>In the new project now create a new statechart model:</p><ol><li>Click <strong>File</strong> &gt; <strong>New</strong> &gt; <strong>Other...</strong> &gt; <strong>YAKINDU</strong> &gt; <strong>YAKINDU Statechart Model</strong></li><li>Click <strong>Next</strong> and name the sct file</li><li>Click <strong>Finish</strong></li><li>The YAKINDU statechart editor opens on the statechart model. It already has an initial state and an unnamed simple state connected by a transition.</li></ol><p>The newly created model has a problem. The new state has a red dot with a cross. This is an error marker. If you look at the problems view (the <strong>Problems</strong> tab) you see more details to that problem. In that case it says: &#8222;A state must have a name&#8221;. <br/>To solve the problem:</p><ol><li>Click in the name field of the state and type the name &#8218;off&#8217;. </li><li>Click <strong>File</strong> &gt; <strong>Save</strong>. </li></ol><p>The error marker and the entry in the problems view vanish.</p><p><img border="0" src="images/sc_modeling_perspective_errorview.jpg"/></p><p>With the <strong>YAKINDU Statechart editor</strong> you create or modify state models. The editor automatically opens on .sct files. </p><p>The editor consists of three parts: </p><ul><li>the graphic canvas to design the state machine</li><li>the palette on the right that owns the elements to design the state machine </li><li>a textual modeling field on the left</li></ul><p><img border="0" src="images/sc_editor_01.jpg"/></p><p>You can use the textual modeling field for declarating internal behavior of states and events or variables.  The editor also owns comfortable functionality like <em>syntax highlighting</em>, <em>code completion</em>, <em>live validation</em>. The following image shows an example of code completion in the text fields of the editor:</p><p><img border="0" src="images/sc_editor_code_completion.jpg"/> </p><ol><li>Add a second state <ol><li>Click on the symbol <strong>State</strong> in the palette</li><li>Draw a state icon in the main region</li><li>Name the second state 'on'</li></ol></li><li>Draw a transition from &#8218;off&#8217; state to &#8218;on&#8217; state. <ol><li>Click on the symbol <strong>Transition</strong> on the palette. </li><li>Draw a line from &#8218;off&#8217; to &#8218;on&#8217;. </li><li>Add the following statement to the transition: after 2 s.</li></ol></li><li>Draw a transition with an event from &#8218;on&#8217; to &#8218;off&#8217; state. <ol><li>Click on the symbol 'Transition'</li><li>Draw a line from off to on state.</li><li>In the declarations view add the statement internal: event switchOff.</li><li>To the transition add the text switchOff</li></ol></li></ol><h3 id="SimulatingtheStateMachine">Simulating the State Machine</h3><p>YAKINDU SCT 2 comes with a perspective to simulate the models. To simulate a state machine open the Yakindu <strong>SC Simulation</strong> perspective by clicking <strong>Window</strong> &gt; <strong>Open Perspective</strong> &gt; <strong>SC Simulation</strong>. This perspective is optimized for simulation purposes and consists of:</p><ul><li><a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm">Project Explorer</a> on the left</li><li><a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm">Outline</a> view on the right top</li><li>Simulation View on the right bottom</li><li>Debug view at the top</li><li>YAKINDU Statechart Editor</li></ul><p>The simulation view is an interactive view to watch and control the state machine simulation. To get it open the simulation perspective. </p><ol><li>Start the simulation by clicking <strong>Run</strong> &gt; <strong>Run</strong>. </li><li>The simulation starts and state &#8218;off&#8217; is red for 2 seconds. Then state &#8218;on&#8217; gets active (red).</li><li>Raise event &#8218;switchOff&#8217;: Click on &#8218;switchOff&#8217; in the simulation view.</li><li>State &#8218;off&#8217; is active again for 2 seconds.</li><li>Stop the simulation: <strong>Run</strong> &gt; <strong>Terminate</strong>.</li></ol><p><img border="0" src="images/simulation_view_active.jpg"/></p><p>During the simulation in the statechart editor the active state gets a red color. The previous transition is green. The simulation view shows the events that trigger the states. You can change values here to trigger events. Beneath the table there are two clocks. One for the <em>virtual time</em> and one for the <em>real time</em> and a slider to change virtual time.</p></body></html>
+<?xml version='1.0' encoding='utf-8' ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>getting_started</title>
+		<link type="text/css" rel="stylesheet" href="../style.css"/>
+	</head>
+	<body>
+		<p><link href="../../../css/bootstrap.css" rel="stylesheet" /></p>
+		<h1 id="Gettingstarted">Getting started</h1>
+		<p>Here you learn how to install the YAKINDU SCT2 and to make the first steps.</p>
+		<h2 id="Installation">Installation</h2>
+		<h3 id="Prerequisites">Prerequisites</h3>
+		<p>The 
+			<strong>Yakindu Statechart Tools 2</strong> are built upon Java and Xtext. So you need to have installed a 
+			<a href="http://www.oracle.com/technetwork/java/index.html">Java Runtime Environment</a> and Xtext installed. The easier way to get this is to install the 
+			<a href="http://xtext.itemis.com">pre configured Xtext contribution</a>.
+		</p>
+		<p>The 
+			<strong>Yakindu Statechart Tools 2</strong> need 
+			<strong>Eclipse Indigo 3.7</strong> or higher and 
+			<strong>Xtext 2.0.1</strong> exactly (no higher) to work correctly.
+		</p>
+		<h3 id="InstallingtheYAKINDUPlugIns">Installing the YAKINDU-Plug-Ins</h3>
+		<p>You install the Yakindu Plug-Ins from the update site: http://updates.yakindu.com/indigo/milestones. </p>
+		<ul>
+			<li>Click 
+				<strong>Help</strong> &gt; 
+				<strong>Install new software...</strong> and 
+				<strong>Add..</strong> the update site 
+				<em>Yakindu SCT2 milestones</em> - http://updates.yakindu.com/indigo/milestones/
+			</li>
+			<li>Check all to install the YAKINDU SCT2</li>
+			<li>Click 
+				<strong>Next</strong> to start the installation and click 
+				<strong>Next</strong> at the next step
+			</li>
+			<li>Accept the licence agreement and click 
+				<strong>Finish</strong>
+			</li>
+			<li>The software will be installed</li>
+		</ul>
+		<p>When the installation finished the wizard will ask to reopen Eclipse. The restart is important to make the newly installed software work correctly.</p>
+		<p>
+			<img border="0" src="images/updatesite_4.jpg"/>
+		</p>
+		<h2 id="Firststepsmyfirststatemachine">First steps: my first state machine</h2>
+		<p>In the following you will create your first state machine with the YAKINDU Statechart tools and simulate it. </p>
+		<h3 id="CreatingaNewProject">Creating a New Project</h3>
+		<p>For modeling purposes the YAKINDU statechart tools offer a workbench perspective. Such a perspective is a bunch of editors and views that are organized in a pre defined order on the screen. Open the Yakindu 
+			<strong>SC Modeling</strong> perspective by clicking 
+			<strong>Window</strong> &gt; 
+			<strong>Open Perspective</strong> &gt; 
+			<strong>SC Modeling</strong>. This perspective is optimized for statechart modeling. It consists of 
+		</p>
+		<ul>
+			<li>
+				<a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm">Project Explorer</a> on the left
+			</li>
+			<li>
+				<a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm">Outline</a> View on the right
+			</li>
+			<li>YAKINDU Statechart Editor at the top</li>
+			<li>
+				<a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cprbview.htm">Problems</a> and 
+				<a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cpropview.htm">Properties View</a> at the bottom
+			</li>
+		</ul>
+		<p>
+			<img border="0" src="images/sc_modeling_perspective.jpg"/>
+		</p>
+		<p>In the Eclipse workbench all elements are organized in projects. So first to do is to create a project. Therefore click 
+			<strong>File</strong> &gt; 
+			<strong>New..." &gt; *Project</strong>. In the wizard click 
+			<strong>Next</strong> and insert a project name. Click 
+			<strong>Finish</strong>.
+		</p>
+		<p>Now you see your project in the project explorer. </p>
+		<h3 id="DefiningaStateMachine">Defining a State Machine</h3>
+		<p>In the new project now create a new statechart model:</p>
+		<ol>
+			<li>Click 
+				<strong>File</strong> &gt; 
+				<strong>New</strong> &gt; 
+				<strong>Other...</strong> &gt; 
+				<strong>YAKINDU</strong> &gt; 
+				<strong>YAKINDU Statechart Model</strong>
+			</li>
+			<li>Click 
+				<strong>Next</strong> and name the sct file
+			</li>
+			<li>Click 
+				<strong>Finish</strong>
+			</li>
+			<li>The YAKINDU statechart editor opens on the statechart model. It already has an initial state and an unnamed simple state connected by a transition.</li>
+		</ol>
+		<p>The newly created model has a problem. The new state has a red dot with a cross. This is an error marker. If you look at the problems view (the 
+			<strong>Problems</strong> tab) you see more details to that problem. In that case it says: &#8222;A state must have a name&#8221;. 
+			<br/>To solve the problem:
+		</p>
+		<ol>
+			<li>Click in the name field of the state and type the name &#8218;off&#8217;. </li>
+			<li>Click 
+				<strong>File</strong> &gt; 
+				<strong>Save</strong>. 
+			</li>
+		</ol>
+		<p>The error marker and the entry in the problems view vanish.</p>
+		<p>
+			<img border="0" src="images/sc_modeling_perspective_errorview.jpg"/>
+		</p>
+		<p>With the 
+			<strong>YAKINDU Statechart editor</strong> you create or modify state models. The editor automatically opens on .sct files. 
+		</p>
+		<p>The editor consists of three parts: </p>
+		<ul>
+			<li>the graphic canvas to design the state machine</li>
+			<li>the palette on the right that owns the elements to design the state machine </li>
+			<li>a textual modeling field on the left</li>
+		</ul>
+		<p>
+			<img border="0" src="images/sc_editor_01.jpg"/>
+		</p>
+		<p>You can use the textual modeling field for declarating internal behavior of states and events or variables.  The editor also owns comfortable functionality like 
+			<em>syntax highlighting</em>, 
+			<em>code completion</em>, 
+			<em>live validation</em>. The following image shows an example of code completion in the text fields of the editor:
+		</p>
+		<p>
+			<img border="0" src="images/sc_editor_code_completion.jpg"/> 
+		</p>
+		<ol>
+			<li>Add a second state 
+				<ol>
+					<li>Click on the symbol 
+						<strong>State</strong> in the palette
+					</li>
+					<li>Draw a state icon in the main region</li>
+					<li>Name the second state 'on'</li>
+				</ol>
+			</li>
+			<li>Draw a transition from &#8218;off&#8217; state to &#8218;on&#8217; state. 
+				<ol>
+					<li>Click on the symbol 
+						<strong>Transition</strong> on the palette. 
+					</li>
+					<li>Draw a line from &#8218;off&#8217; to &#8218;on&#8217;. </li>
+					<li>Add the following statement to the transition: after 2 s.</li>
+				</ol>
+			</li>
+			<li>Draw a transition with an event from &#8218;on&#8217; to &#8218;off&#8217; state. 
+				<ol>
+					<li>Click on the symbol 'Transition'</li>
+					<li>Draw a line from off to on state.</li>
+					<li>In the declarations view add the statement internal: event switchOff.</li>
+					<li>To the transition add the text switchOff</li>
+				</ol>
+			</li>
+		</ol>
+		<h3 id="SimulatingtheStateMachine">Simulating the State Machine</h3>
+		<p>YAKINDU SCT 2 comes with a perspective to simulate the models. To simulate a state machine open the Yakindu 
+			<strong>SC Simulation</strong> perspective by clicking 
+			<strong>Window</strong> &gt; 
+			<strong>Open Perspective</strong> &gt; 
+			<strong>SC Simulation</strong>. This perspective is optimized for simulation purposes and consists of:
+		</p>
+		<ul>
+			<li>
+				<a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/cnav.htm">Project Explorer</a> on the left
+			</li>
+			<li>
+				<a href="PLUGIN_ROOT/org.eclipse.platform.doc.user/concepts/coutline.htm">Outline</a> view on the right top
+			</li>
+			<li>Simulation View on the right bottom</li>
+			<li>Debug view at the top</li>
+			<li>YAKINDU Statechart Editor</li>
+		</ul>
+		<p>The simulation view is an interactive view to watch and control the state machine simulation. To get it open the simulation perspective. </p>
+		<ol>
+			<li>Start the simulation by clicking 
+				<strong>Run</strong> &gt; 
+				<strong>Run</strong>. 
+			</li>
+			<li>The simulation starts and state &#8218;off&#8217; is red for 2 seconds. Then state &#8218;on&#8217; gets active (red).</li>
+			<li>Raise event &#8218;switchOff&#8217;: Click on &#8218;switchOff&#8217; in the simulation view.</li>
+			<li>State &#8218;off&#8217; is active again for 2 seconds.</li>
+			<li>Stop the simulation: 
+				<strong>Run</strong> &gt; 
+				<strong>Terminate</strong>.
+			</li>
+		</ol>
+		<p>
+			<img border="0" src="images/simulation_view_active.jpg"/>
+		</p>
+		<p>During the simulation in the statechart editor the active state gets a red color. The previous transition is green. The simulation view shows the events that trigger the states. You can change values here to trigger events. Beneath the table there are two clocks. One for the 
+			<em>virtual time</em> and one for the 
+			<em>real time</em> and a slider to change virtual time.
+		</p>
+	</body>
+</html>
