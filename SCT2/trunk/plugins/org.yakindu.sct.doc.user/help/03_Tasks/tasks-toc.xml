@@ -1,33 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <toc topic="help/03_Tasks/tasks.html" label="tasks">
 	<topic href="help/03_Tasks/tasks.html" label="Tasks">
-		<topic href="help/03_Tasks/tasks.html#Modelingastatemachine" label="Modeling a statemachine">
-			<topic href="help/03_Tasks/tasks.html#Relatedtopics" label="Related topics"></topic>
-		</topic>
-		<topic href="help/03_Tasks/tasks.html#Validatingastatemachine" label="Validating a statemachine"></topic>
-		<topic href="help/03_Tasks/tasks.html#Simulatingastatemachine" label="Simulating a statemachine"></topic>
 		<topic href="help/03_Tasks/tasks.html#GeneratingCode" label="Generating Code"></topic>
-		<topic href="help/03_Tasks/tasks.html#CoreFeatures" label="Core Features">
-			<topic href="help/03_Tasks/tasks.html#Outlet" label="Outlet"></topic>
-			<topic href="help/03_Tasks/tasks.html#LicenseHeader" label="LicenseHeader"></topic>
-			<topic href="help/03_Tasks/tasks.html#FunctionInlining" label="FunctionInlining"></topic>
-			<topic href="help/03_Tasks/tasks.html#Debug" label="Debug"></topic>
-		</topic>
-		<topic href="help/03_Tasks/tasks.html#JavaGeneratorFeatures" label="Java Generator Features">
-			<topic href="help/03_Tasks/tasks.html#Naming" label="Naming"></topic>
-			<topic href="help/03_Tasks/tasks.html#GeneralFeatures" label="GeneralFeatures"></topic>
-		</topic>
-		<topic href="help/03_Tasks/tasks.html#CGeneratorFeatures" label="C Generator Features">
-			<topic href="help/03_Tasks/tasks.html#CCodeFeature" label="CCodeFeature"></topic>
-		</topic>
-		<topic href="help/03_Tasks/tasks.html#CreateCustomCodeGenerators" label="Create Custom Code Generators">
-			<topic href="help/03_Tasks/tasks.html#WritingacustomcodegeneratorwithXtend2Java" label="Writing a custom code generator with Xtend2/Java"></topic>
-			<topic href="help/03_Tasks/tasks.html#ExecutingacustomXtend2Javacodegenerator" label="Executing a custom Xtend2/Java code generator">
-				<topic href="help/03_Tasks/tasks.html#Generator" label="Generator"></topic>
-			</topic>
-			<topic href="help/03_Tasks/tasks.html#ExecutingacustomXpandcodegenerator" label="Executing a custom Xpand code generator">
-				<topic href="help/03_Tasks/tasks.html#Template" label="Template"></topic>
-			</topic>
-		</topic>
 	</topic>
 </toc>
