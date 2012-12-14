@@ -13,41 +13,17 @@
             primary="false">
       </toc>
       <toc
-            file="help/user/02_Getting_Started/getting_started-toc.xml"
+            file="help/02_Getting_started/tutorial-toc.xml"
             primary="false">
       </toc>
       <toc
-            file="help/user/03_Concepts/concepts-toc.xml"
+            file="help/03_Tasks/tasks-toc.xml"
             primary="false">
       </toc>
       <toc
-            file="help/user/04_Tasks/tasks-toc.xml"
+            file="help/04_Reference/reference-toc.xml"
             primary="false">
       </toc>
-          <toc
-            file="help/user/05_Reference/reference-toc.xml"
-            primary="false">
-      </toc>
-            <toc
-            file="help/developer/02_Getting_Started/getting_started-toc.xml"
-            primary="false">
-      </toc>
-      <toc
-            file="help/developer/03_Concepts/concepts-toc.xml"
-            primary="false">
-      </toc>
-      <toc
-            file="help/developer/04_Tasks/tasks-toc.xml"
-            primary="false">
-      </toc>
-          <toc
-            file="help/developer/05_Reference/reference-toc.xml"
-            primary="false">
-      </toc>
-          <toc
-                file="help/Tutorial/tutorial-toc.xml"
-                primary="false">
-          </toc>
    </extension>
    <extension
          point="org.eclipse.help.contexts">

@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<toc topic="help/developer/03_Concepts/concepts.html" label="concepts">
-	<topic href="help/developer/03_Concepts/concepts.html" label="Developer Concepts">
-		<topic href="help/developer/03_Concepts/concepts.html#APIspecificationsofthegeneratedcode" label="API specifications of the generated code">
-			<topic href="help/developer/03_Concepts/concepts.html#SpecificationsofJavacode" label="Specifications of Java code"></topic>
-			<topic href="help/developer/03_Concepts/concepts.html#SpecificationsofCcode" label="Specifications of C code"></topic>
-		</topic>
-	</topic>
-</toc>

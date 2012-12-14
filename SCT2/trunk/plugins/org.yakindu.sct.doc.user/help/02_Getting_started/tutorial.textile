@@ -4,6 +4,26 @@
 
 h1. Getting started tutorial 
 
+h3. Installation
+
+The *Yakindu Statechart Tools* are built upon Java and Xtext. So you need to have installed a "Java Runtime Environment":http://www.oracle.com/technetwork/java/index.html and Xtext installed. The easier way to get this is to install the "pre configured Xtext contribution":http://xtext.itemis.com.
+
+The *Yakindu Statechart Tools 2* need *Eclipse Indigo 3.7* or higher and *Xtext 2.0.1* exactly (no higher) to work correctly.
+
+h3. Installing the YAKINDU-Plug-Ins
+
+You install the Yakindu Plug-Ins from the update site: http://updates.yakindu.com/indigo/milestones. 
+
+* Click *Help* > *Install new software...* and *Add..* the update site _Yakindu SCT2 milestones_ - http://updates.yakindu.com/indigo/milestones/
+* Check all to install the YAKINDU SCT2
+* Click *Next* to start the installation and click *Next* at the next step
+* Accept the licence agreement and click *Finish*
+* The software will be installed
+
+When the installation finished the wizard will ask to reopen Eclipse. The restart is important to make the newly installed software work correctly.
+
+!images/updatesite_4.jpg!
+
 h3. Introduction
 
 This tutorial will introduce the open source project Yakindu Statechart Tools (SCT).YAKINDU Statechart Tools provides an integrated modeling environment for the specification and development of reactive, event-driven systems based on the concept of statecharts. It is an easy to use tool that features sophisticated graphical state chart editing, validation and simulation of statecharts as well as code generation.
