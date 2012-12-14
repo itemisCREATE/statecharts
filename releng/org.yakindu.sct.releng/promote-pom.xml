@@ -27,7 +27,7 @@
 		<distro.work.dir>${distro.dir}/work</distro.work.dir>
 
 		<profile>epp.package.modeling</profile>
-		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.feature.group,org.eclipse.gmf.runtime.emf.clipboard.core.patch.feature.group</features>
+		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.sdk.feature.group,org.eclipse.gmf.runtime.emf.clipboard.core.patch.feature.group</features>
 		<update.sites>${p2.target.repository},file:${local.update.site},${updateSiteUrl}</update.sites>
 
 	</properties>
