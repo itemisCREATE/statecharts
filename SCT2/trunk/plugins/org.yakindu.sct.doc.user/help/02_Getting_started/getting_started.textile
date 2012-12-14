@@ -63,7 +63,7 @@ Finally, create the internal behavior for the states *Active Call* and *Dismiss 
 
 If everything went well, there shouldn’t be any error markers and your example should look like the one in the following screenshot:
 
-!images/example_finished.png!
+!images/example_final.png!
 
 If something went wrong, you can still download the example project "here":examples/CallHandling.zip . 
 
