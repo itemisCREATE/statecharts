@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
+   <feature url="features/org.yakindu.sct_2.0.0.qualifier.jar" id="org.yakindu.sct" version="2.0.0.qualifier">
+      <category name="dummy"/>
+   </feature>
    <category-def name="dummy" label="empty category to support eclipse-repository packaging"/>
 </site>
