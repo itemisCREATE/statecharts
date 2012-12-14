@@ -18,6 +18,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -138,15 +139,15 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	@Ignore("Disabled entry / exit points for release")
 	public void testEntryPoint() {
-		//String rule = Entrypoint.class.getSimpleName();
-		//parseExpression("entrypoint MyentryPoint", rule);
+		// String rule = Entrypoint.class.getSimpleName();
+		// parseExpression("entrypoint MyentryPoint", rule);
 	}
 
 	@Test
 	@Ignore("Disabled entry / exit points for release")
 	public void testExitPoint() {
-		//String rule = Exitpoint.class.getSimpleName();
-		//parseExpression("exitpoint MyentryPoint", rule);
+		// String rule = Exitpoint.class.getSimpleName();
+		// parseExpression("exitpoint MyentryPoint", rule);
 	}
 
 	/**
@@ -168,14 +169,24 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("exit", rule);
 		parseExpression("oncycle", rule);
 		parseExpression("always", rule);
-		parseExpression("default", rule);
-		parseExpression("else", rule);
 		parseExpression("event1, after 10s", internalScope(), rule);
 		parseExpression("event1, after 10s, every 10 ms", internalScope(), rule);
 		parseExpression("event1, after 10s [false == true]", internalScope(),
 				rule);
 		parseExpression("event1, after 10s [5  > 10]", internalScope(), rule);
 		parseExpression("ABC.event2", interfaceScope(), rule);
+	}
+
+	/**
+	 * DefaultTrigger returns sgraph::Trigger: {DefaultTrigger} ('default' |
+	 * 'else') ;
+	 */
+	@Test
+	public void testDefaultTrigger() {
+		String rule = DefaultTrigger.class.getSimpleName();
+		// Internal Scope
+		parseExpression("default", rule);
+		parseExpression("else", rule);
 	}
 
 	/**
@@ -205,9 +216,9 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	@Ignore("Disabled entry / exit points for release")
 	public void testReactionProperties() {
-//		String rule = ReactionProperties.class.getSimpleName();
-//		parseExpression("> ABC.EntryPoint", interfaceScope(), rule);
-//		parseExpression("ABC.ExitPoint >", interfaceScope(), rule);
+		// String rule = ReactionProperties.class.getSimpleName();
+		// parseExpression("> ABC.EntryPoint", interfaceScope(), rule);
+		// parseExpression("ABC.ExitPoint >", interfaceScope(), rule);
 	}
 
 	/**
@@ -217,21 +228,20 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	public void tesLocalReaction() {
 		String rule = LocalReaction.class.getSimpleName();
-		parseExpression("entry [ABC.myInt > 10] / raise ABC.event2", interfaceScope(), rule);
+		parseExpression("entry [ABC.myInt > 10] / raise ABC.event2",
+				interfaceScope(), rule);
 	}
-	
+
 	/**
-	 * TransitionReaction:
-	{TransitionReaction} (trigger=ReactionTrigger)? ('/' effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
+	 * TransitionReaction: {TransitionReaction} (trigger=ReactionTrigger)? ('/'
+	 * effect=ReactionEffect)? ('#' properties=ReactionProperties)?;
 	 */
 	@Test
-	public void testTransitionReaction(){
+	public void testTransitionReaction() {
 		String rule = TransitionReaction.class.getSimpleName();
 		parseExpression("after 10 s / raise ABC.event2", interfaceScope(), rule);
 	}
-	
-	
-	
+
 	/**
 	 * {InterfaceScope} 'interface' (name=ID)? ':'
 	 * (declarations+=(EventDeclarartion | VariableDeclaration |
