@@ -24,41 +24,63 @@ import org.eclipse.swt.widgets.Display;
  */
 public abstract class InteractiveDecorator extends BaseDecorator {
 
+	
+	protected MouseListener decorationMouseListener;
+
 	public InteractiveDecorator(IDecoratorTarget decoratorTarget) {
 		super(decoratorTarget);
+		
+		decorationMouseListener = new MouseListener() {
+			public void mousePressed(MouseEvent me) {
+				InteractiveDecorator.this.mousePressed(getDecoration(), getSemanticElement());
+			}
+
+			public void mouseReleased(MouseEvent me) {
+				InteractiveDecorator.this.mouseReleased(getDecoration(), getSemanticElement());
+			}
+
+			public void mouseDoubleClicked(MouseEvent me) {
+				InteractiveDecorator.this.mouseDoubleClicked(getDecoration(), getSemanticElement());
+			}
+		};
 	}
 
 	protected abstract Direction getDecoratorPosition();
 
 	public void refresh() {
-		removeDecoration();
+		disposeDecoration();
 		if (getDecoratorTarget().getAdapter(EditPart.class) instanceof IPrimaryEditPart) {
-			final EObject semanticElement = (EObject) getDecoratorTarget()
-					.getAdapter(EObject.class);
-			if (shouldDecorate(semanticElement)) {
-				final Decoration decoration = (Decoration) getDecoratorTarget()
-						.addShapeDecoration(getDecorationImage(semanticElement),
-								getDecoratorPosition(), -5, false);
-				renderToolTip(decoration, semanticElement);
-				decoration.addMouseListener(new MouseListener() {
-					public void mousePressed(MouseEvent me) {
-						InteractiveDecorator.this.mousePressed(decoration, semanticElement);
-					}
-	
-					public void mouseReleased(MouseEvent me) {
-						InteractiveDecorator.this.mouseReleased(decoration, semanticElement);
-					}
-	
-					
-					public void mouseDoubleClicked(MouseEvent me) {
-						InteractiveDecorator.this.mouseDoubleClicked(decoration, semanticElement);
-					}
-				});
-				setDecoration(decoration);
+			final EObject semanticElement = getSemanticElement();
+			if (shouldDecorate(getSemanticElement())) {
+				setDecoration(createDecoration(semanticElement));
 			}
 		}
 	}
 
+	protected Decoration createDecoration(final EObject semanticElement) {
+		final Decoration decoration = (Decoration) getDecoratorTarget()
+				.addShapeDecoration(getDecorationImage(semanticElement),
+						getDecoratorPosition(), -5, false);
+		renderToolTip(decoration, semanticElement);
+		decoration.addMouseListener(decorationMouseListener);
+		return decoration;
+	}
+
+	
+	public EObject getSemanticElement() {
+		return (EObject) getDecoratorTarget()
+				.getAdapter(EObject.class);
+	}
+
+	
+	
+	protected void disposeDecoration() {
+		if (getDecoration() != null) getDecoration().removeMouseListener(decorationMouseListener);
+		removeDecoration();
+	}
+
+	
+	
 	/**
 	 * TODO: move to UtilityClass
 	 * 
