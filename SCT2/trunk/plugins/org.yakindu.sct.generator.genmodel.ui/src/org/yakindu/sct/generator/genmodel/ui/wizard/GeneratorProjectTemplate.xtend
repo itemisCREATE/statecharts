@@ -313,7 +313,7 @@ class GeneratorProjectTemplate {
 		«ENDIF»
 		«IF data.generatorType == GeneratorType::Xtend»
 			«' '»org.eclipse.xtext.xbase.lib;bundle-version="2.0.1",
-			«' '»org.eclipse.xtend2.lib;bundle-version="2.0.1",
+			«' '»org.eclipse.xtend.lib;bundle-version="2.0.1",
 		«ENDIF»
 		«IF data.pluginExport || data.generatorType != GeneratorType::Xpand»
 			«' '»org.yakindu.sct.generator.core;bundle-version="1.0.0",

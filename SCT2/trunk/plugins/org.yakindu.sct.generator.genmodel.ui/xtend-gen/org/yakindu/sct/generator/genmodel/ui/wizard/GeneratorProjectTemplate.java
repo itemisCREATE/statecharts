@@ -671,7 +671,7 @@ public class GeneratorProjectTemplate {
         _builder.append("org.eclipse.xtext.xbase.lib;bundle-version=\"2.0.1\",");
         _builder.newLineIfNotEmpty();
         _builder.append(" ", "");
-        _builder.append("org.eclipse.xtend2.lib;bundle-version=\"2.0.1\",");
+        _builder.append("org.eclipse.xtend.lib;bundle-version=\"2.0.1\",");
         _builder.newLineIfNotEmpty();
       }
     }
