@@ -4,8 +4,10 @@ import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystemAccess;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
@@ -17,7 +19,6 @@ import org.yakindu.sct.model.stext.stext.BitwiseXorExpression;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.ConditionalExpression;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
-import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
@@ -42,7 +43,6 @@ import org.yakindu.sct.model.stext.stext.ShiftExpression;
 import org.yakindu.sct.model.stext.stext.ShiftOperator;
 import org.yakindu.sct.model.stext.stext.StringLiteral;
 import org.yakindu.sct.model.stext.stext.UnaryOperator;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.validation.ITypeInferrer;
 import org.yakindu.sct.model.stext.validation.TypeCheckException;
 import org.yakindu.sct.model.stext.validation.TypeInferrerCache;
@@ -56,7 +56,7 @@ import org.yakindu.sct.model.stext.validation.TypeInferrerCache.ICacheableTypeAn
 @SuppressWarnings("all")
 public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   @Inject
-  private ITypeSystemAccess ts;
+  protected ITypeSystemAccess ts;
   
   @Inject
   private TypeInferrerCache cache;
@@ -347,12 +347,12 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   protected Type _inferType(final FeatureCall featureCall) {
     boolean _and = false;
     EObject _feature = featureCall.getFeature();
-    if (!(_feature instanceof EventDefinition)) {
+    if (!(_feature instanceof Event)) {
       _and = false;
     } else {
       EObject _eContainer = featureCall.eContainer();
       boolean _not = (!(_eContainer instanceof EventRaisingExpression));
-      _and = ((_feature instanceof EventDefinition) && _not);
+      _and = ((_feature instanceof Event) && _not);
     }
     if (_and) {
       return this.ts.getBoolean();
@@ -383,11 +383,11 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
     return null;
   }
   
-  protected Type _inferType(final VariableDefinition definition, final ElementReferenceExpression expression) {
+  protected Type _inferType(final Property definition, final ElementReferenceExpression expression) {
     return definition.getType();
   }
   
-  protected Type _inferType(final EventDefinition definition, final ElementReferenceExpression expression) {
+  protected Type _inferType(final Event definition, final ElementReferenceExpression expression) {
     boolean _or = false;
     EObject _eContainer = expression.eContainer();
     if ((_eContainer instanceof EventRaisingExpression)) {
@@ -540,12 +540,12 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   }
   
   public Type inferType(final EObject definition, final ElementReferenceExpression expression) {
-    if (definition instanceof EventDefinition) {
-      return _inferType((EventDefinition)definition, expression);
-    } else if (definition instanceof OperationDefinition) {
+    if (definition instanceof OperationDefinition) {
       return _inferType((OperationDefinition)definition, expression);
-    } else if (definition instanceof VariableDefinition) {
-      return _inferType((VariableDefinition)definition, expression);
+    } else if (definition instanceof Event) {
+      return _inferType((Event)definition, expression);
+    } else if (definition instanceof Property) {
+      return _inferType((Property)definition, expression);
     } else if (definition != null) {
       return _inferType(definition, expression);
     } else {
