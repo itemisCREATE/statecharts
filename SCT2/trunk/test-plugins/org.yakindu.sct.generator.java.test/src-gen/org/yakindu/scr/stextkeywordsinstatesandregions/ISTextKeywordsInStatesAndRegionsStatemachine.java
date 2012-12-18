@@ -6,7 +6,8 @@ public interface ISTextKeywordsInStatesAndRegionsStatemachine
 			IStatemachine {
 
 	public interface SCIDefault {
-		public void raiseE();
+		public void raiseE1();
+		public void raiseE2();
 
 	}
 
