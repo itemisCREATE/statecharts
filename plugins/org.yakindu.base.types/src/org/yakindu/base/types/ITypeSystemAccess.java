@@ -35,6 +35,14 @@ public interface ITypeSystemAccess {
 	/** true, if this type represents void */
 	boolean isVoid(Type type);
 
+	/**
+	 * Returns the target language specific type name
+	 * 
+	 * @param type
+	 * @return
+	 */
+	String getTargetLanguageTypeName(Type type);
+
 	boolean isAssignable(Type varType, Type valType);
 
 	Type combine(Type typeOne, Type typeTwo);
