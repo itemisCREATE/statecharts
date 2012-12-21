@@ -19,13 +19,14 @@ import org.yakindu.base.types.Parameter
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.base.types.ITypeSystemAccess
 
 class StatemachineInterface {
 	
 	@Inject extension Naming 
 	@Inject extension GenmodelEntries
 	@Inject extension Navigation
-	@Inject extension TypeModel
+	@Inject extension ITypeSystemAccess
 	@Inject Beautifier beautifier
 	
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
@@ -111,7 +112,7 @@ class StatemachineInterface {
 				«FOR event : scope.eventDefinitions»
 					«IF event.direction ==  Direction::OUT»
 						«IF !event.type.isVoid()»
-							public void on«event.name.toFirstUpper()»Raised(«event.type.getJavaType()» value);
+							public void on«event.name.toFirstUpper()»Raised(«event.type.targetLanguageTypeName» value);
 						«ELSE»
 							public void on«event.name.toFirstUpper()»Raised();
 						«ENDIF»	
@@ -140,14 +141,14 @@ class StatemachineInterface {
 		«FOR event : scope.eventDefinitions»
 			«IF  event.direction ==  Direction::IN»
 				«IF !event.type.void»
-					public void raise«event.name.asName»(«event.type.getJavaType()» value);
+					public void raise«event.name.asName»(«event.type.targetLanguageTypeName» value);
 				«ELSE»
 					public void raise«event.name.asName»();
 				«ENDIF»
 			«ELSEIF event.direction ==  Direction::OUT»
 				public boolean isRaised«event.name.asName»();
 				«IF !event.type.void»
-					public «event.type.getJavaType()» get«event.name.asName»Value();
+					public «event.type.targetLanguageTypeName» get«event.name.asName»Value();
 				«ENDIF»	
 			«ENDIF»
 		«ENDFOR»
@@ -156,9 +157,9 @@ class StatemachineInterface {
 	
 	def private variableAccessors(InterfaceScope scope) '''
 		«FOR variable : scope.variableDefinitions»
-					public «variable.type.getJavaType()» «variable.getter»;
+					public «variable.type.targetLanguageTypeName» «variable.getter»;
 					«IF  !variable.readonly»
-						public void «variable.setter»(«variable.type.getJavaType()» value);	
+						public void «variable.setter»(«variable.type.targetLanguageTypeName» value);	
 					«ENDIF»
 		«ENDFOR»
 	'''
@@ -178,7 +179,7 @@ class StatemachineInterface {
 	
 	def private operationSignature(OperationDefinition it) {
 		'''
-		public «type.javaType» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.javaType» «parameter.identifier»«ENDFOR»);
+		public «type.targetLanguageTypeName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.targetLanguageTypeName» «parameter.identifier»«ENDFOR»);
 		'''
 	}
 	
