@@ -142,8 +142,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 			if (parseAdapter == null) {
 				eObject.eAdapters().add(new ParseAdapter());
 			}
-		}
-		if (eObject instanceof SpecificationElement) {
 			Adapter serializeAdapter = EcoreUtil.getExistingAdapter(eObject,
 					SerializeAdapter.class);
 			if (serializeAdapter == null) {
@@ -312,7 +310,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 		}
 	}
 
-	protected void parseSpecificationElement(SpecificationElement element) {
+	public void parseSpecificationElement(SpecificationElement element) {
 		isParsing = true;
 		if (element instanceof Transition) {
 			parseTransition((Transition) element);
