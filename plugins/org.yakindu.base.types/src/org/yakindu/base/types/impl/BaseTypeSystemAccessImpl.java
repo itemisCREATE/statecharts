@@ -144,4 +144,9 @@ public class BaseTypeSystemAccessImpl implements ITypeSystemAccess {
 		}
 		return types;
 	}
+
+	@Override
+	public String getTargetLanguageTypeName(Type type) {
+		return type.getName();
+	}
 }
