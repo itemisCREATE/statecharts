@@ -48,7 +48,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 /**
  * 
- * @author andreas muelder - Initial contribution and API
+ * @author andreas muelder - Initial contribution and API 
  * @authos axel terfloth - additions
  * 
  */
@@ -222,7 +222,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 	
 	def dispatch execute(FeatureCall call){
-		if (call.operationCall) context.call(call.feature.name)
+		if(call.operationCall && super.operationCallback.size() > 0){
+			var parameter = call.args.map(it| execute)
+			return super.executeOperationCallback(call.feature as OperationDefinition, parameter.toArray)
+		}
 		else {
 			var fqn = call.feature.fqn
 			var variableRef = context.getVariable(fqn)
@@ -231,12 +234,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			}
 			return context.isEventRaised(fqn)
 		}
-		
-		null
 	}
-
-//    def String create qn : obj.fullyQualifiedName.toString fqn(EObject obj) {
-//    }
 
     def String fqn(EObject obj) {
     	obj.fullyQualifiedName.toString

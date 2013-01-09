@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.simulation.ui.launch.tabs;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -178,6 +181,16 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		return SimulationImages.LAUNCHER_ICON.image();
 	}
 
+	protected Set<String> getOperationClasses() {
+		String operationClasses = this.operationClass.getText();
+		String[] split = operationClasses.split(",");
+		Set<String> result = new HashSet<String>(split.length);
+		for (String string : split) {
+			result.add(string.trim());
+		}
+		return result;
+	}
+
 	@Override
 	public boolean isValid(ILaunchConfiguration launchConfig) {
 		setMessage(null);
@@ -196,28 +209,30 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 			setErrorMessage("Cycle Period must be a number!");
 			return false;
 		}
-		String operationClass = this.operationClass.getText();
-		if (operationClass != null && operationClass.trim().length() > 0) {
-			// check if class exists
-			IProject project = ResourcesPlugin.getWorkspace().getRoot()
-					.findMember(model).getProject();
-			ClassLoader classLoader = new WorkspaceClassLoaderFactory()
-					.createClassLoader(project);
-			try {
-				Class<?> loadClass = classLoader.loadClass(operationClass);
-				loadClass.newInstance();
-			} catch (ClassNotFoundException e) {
-				setErrorMessage("Class " + operationClass
-						+ " not found in project " + project.getName() + "!");
-				return false;
-			} catch (InstantiationException e) {
-				setErrorMessage("Could not instantiate class " + operationClass
-						+ "! (No default constructor available?) ");
-				return false;
-			} catch (IllegalAccessException e) {
-				setErrorMessage("Could not access class constructor for class"
-						+ operationClass + "!");
-				return false;
+		Set<String> operationClasses = getOperationClasses();
+		if (operationClasses.size() > 0) {
+			for (String clazz : operationClasses) {
+				// check if class exists
+				IProject project = ResourcesPlugin.getWorkspace().getRoot()
+						.findMember(model).getProject();
+				ClassLoader classLoader = new WorkspaceClassLoaderFactory()
+						.createClassLoader(project, getClass().getClassLoader());
+				try {
+					Class<?> loadClass = classLoader.loadClass(clazz);
+					loadClass.newInstance();
+				} catch (ClassNotFoundException e) {
+					setErrorMessage("Class " + clazz + " not found in project "
+							+ project.getName() + "!");
+					return false;
+				} catch (InstantiationException e) {
+					setErrorMessage("Could not instantiate class " + clazz
+							+ "! (No default constructor available?) ");
+					return false;
+				} catch (IllegalAccessException e) {
+					setErrorMessage("Could not access class constructor for class"
+							+ clazz + "!");
+					return false;
+				}
 			}
 		}
 		// check for default c'tor

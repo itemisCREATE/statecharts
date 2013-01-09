@@ -92,14 +92,19 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	private void initFacadeCallbacks(IProject project) {
 		ClassLoader classLoader = new WorkspaceClassLoaderFactory()
-				.createClassLoader(project);
+				.createClassLoader(project, getClass().getClassLoader());
 		ILaunchConfiguration config = launch.getLaunchConfiguration();
 		try {
-			String clazz = config.getAttribute(OPERATION_CLASS, "");
-			if (clazz != null && clazz.trim().length() > 0) {
-				Class<?> loadClass = classLoader.loadClass(clazz);
-				facade.addCallbackObject(loadClass.newInstance());
-			}
+			String classes = config.getAttribute(OPERATION_CLASS, "");
+			String[] split = classes.split(",");
+			if (split.length > 0)
+				for (String string : split) {
+					string = string.trim();
+					if (string.length() == 0)
+						continue;
+					Class<?> loadClass = classLoader.loadClass(string);
+					facade.addCallbackObject(loadClass.newInstance());
+				}
 		} catch (CoreException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

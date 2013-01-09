@@ -112,12 +112,6 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 				throw new ExecutionException("Event with name " + eventName
 						+ " is undefined!");
 			event.raise(value);
-//			ExecutionEvent eventCopy = event.getCopy();
-//			if (value != null) {
-//				eventCopy.setValue(value);
-//			}
-//			raisedEvents.add(eventCopy);
-//			notifyEventRaised(eventCopy);
 		}
 	}
 
@@ -144,13 +138,7 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 	public boolean isEventRaised(String eventName) {
 		synchronized (raisedEvents) {
 			return getDeclaredEvent(eventName).isRaised();
-//			for (IEventSlot event : raisedEvents) {
-//				if (eventName.equals(event.getName())) {
-//					return true;
-//				}
-//			}
 		}
-//		return false;
 	}
 
 	public List<ExecutionVariable> getVariables() {
@@ -204,10 +192,6 @@ public class ExecutionContextImpl extends AbstractExecutionContext implements
 			activeStateConfig[i] = null;
 		}
 		historyStateConfig = Maps.newHashMap();
-	}
-
-	public void call(String procedureId) {
-		// TODO: Implement me
 	}
 
 	public Set<RegularState> getActiveLeafStates() {
