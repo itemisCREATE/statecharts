@@ -407,26 +407,37 @@ public class StextStatementInterpreter extends AbstractStatementInterpreter {
   }
   
   protected Object _execute(final FeatureCall call) {
-    Object _xblockexpression = null;
-    {
-      boolean _isOperationCall = call.isOperationCall();
-      if (_isOperationCall) {
-        EObject _feature = call.getFeature();
-        String _name = this.name(_feature);
-        this.context.call(_name);
-      } else {
-        EObject _feature_1 = call.getFeature();
-        String fqn = this.fqn(_feature_1);
-        ExecutionVariable variableRef = this.context.getVariable(fqn);
-        boolean _notEquals = (!Objects.equal(variableRef, null));
-        if (_notEquals) {
-          return variableRef.getValue();
-        }
-        return Boolean.valueOf(this.context.isEventRaised(fqn));
-      }
-      _xblockexpression = (null);
+    boolean _and = false;
+    boolean _isOperationCall = call.isOperationCall();
+    if (!_isOperationCall) {
+      _and = false;
+    } else {
+      int _size = super.operationCallback.size();
+      boolean _greaterThan = (_size > 0);
+      _and = (_isOperationCall && _greaterThan);
     }
-    return _xblockexpression;
+    if (_and) {
+      EList<Expression> _args = call.getArgs();
+      final Function1<Expression,Object> _function = new Function1<Expression,Object>() {
+          public Object apply(final Expression it) {
+            Object _execute = StextStatementInterpreter.this.execute(it);
+            return _execute;
+          }
+        };
+      List<Object> parameter = ListExtensions.<Expression, Object>map(_args, _function);
+      EObject _feature = call.getFeature();
+      Object[] _array = parameter.toArray();
+      return super.executeOperationCallback(((OperationDefinition) _feature), _array);
+    } else {
+      EObject _feature_1 = call.getFeature();
+      String fqn = this.fqn(_feature_1);
+      ExecutionVariable variableRef = this.context.getVariable(fqn);
+      boolean _notEquals = (!Objects.equal(variableRef, null));
+      if (_notEquals) {
+        return variableRef.getValue();
+      }
+      return Boolean.valueOf(this.context.isEventRaised(fqn));
+    }
   }
   
   public String fqn(final EObject obj) {

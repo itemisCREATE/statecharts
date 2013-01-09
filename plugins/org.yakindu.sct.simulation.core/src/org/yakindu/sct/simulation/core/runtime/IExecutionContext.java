@@ -146,11 +146,6 @@ public interface IExecutionContext {
 	public void initStateConfigurationVector(int size);
 
 	/**
-	 * Calls a declared operation
-	 */
-	public void call(String procedureId);
-
-	/**
 	 * Registeres a new {@link IExecutionContextListener}
 	 */
 	public void addExecutionContextListener(IExecutionContextListener listener);
