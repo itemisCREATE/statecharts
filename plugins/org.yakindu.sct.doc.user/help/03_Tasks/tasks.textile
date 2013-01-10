@@ -3,6 +3,32 @@
 
 h1. Tasks
 
+h2. Simulating Operations With Custom Java Code
+
+To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing java backend. 
+For that to work, it is required to provide one or more custom java classes having a method with a matching signature. 
+
+
+!images/operationsExample.png!
+
+To simulate the statechart above, a new Java Class must be created matching the method signature defined in the statechart. This class must be placed onto the classpath of the
+statecharts project.  
+ 
+bc. 
+package example;
+public class Calculator {
+   public int add(int param1, int param2) {
+      return param1 + param2;
+   }
+}
+
+This custom class can be passed to the run configuration as *Operation Class*, shown in the figure below. It is possible to pass multiple java classes seperated by a comma.
+If the simulation is executed, the variable result gets the value 2.
+
+!images/runConfiguration.png!
+
+
+
 h2. Generating Code
 
 For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called *SGen*. It can be created either by using the provided wizard *Yakindu Statechart Generator Model* or by creating a new text file with the file extension '.sgen'.
