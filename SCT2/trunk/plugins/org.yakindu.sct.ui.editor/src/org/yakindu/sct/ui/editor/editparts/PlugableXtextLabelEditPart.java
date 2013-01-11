@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.draw2d.Label;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +25,7 @@ import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -97,15 +99,6 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 		return resolveSemanticElement();
 	}
 
-	@Override
-	protected void handleNotificationEvent(Notification notification) {
-		if (notification.getFeature() == getFeature()) {
-			refreshVisuals();
-		} else {
-			super.handleNotificationEvent(notification);
-		}
-	}
-
 	protected EAttribute getFeature() {
 		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
@@ -135,4 +128,27 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 		return null;
 	}
 
+	@Override
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		updateTooltipText();
+
+	}
+
+	protected void updateTooltipText() {
+		Label tooltip = new Label((String) resolveSemanticElement().eGet(
+				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION));
+		getFigure().setToolTip(tooltip);
+	}
+
+	@Override
+	protected void handleNotificationEvent(Notification notification) {
+		if (notification.getFeature() == getFeature()) {
+			refreshVisuals();
+		} else if (notification.getFeature() == BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION) {
+			refreshVisuals();
+		} else {
+		}
+		super.handleNotificationEvent(notification);
+	}
 }

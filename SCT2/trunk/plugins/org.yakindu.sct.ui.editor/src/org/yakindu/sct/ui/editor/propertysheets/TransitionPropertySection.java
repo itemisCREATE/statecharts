@@ -26,7 +26,10 @@ import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
+import org.eclipse.swt.widgets.Text;
+import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
@@ -41,6 +44,7 @@ import com.google.inject.Injector;
 public class TransitionPropertySection extends AbstractEditorPropertySection {
 
 	private Control textControl;
+	private Text txtDoc;
 
 	@Override
 	protected Layout createBodyLayout() {
@@ -63,6 +67,12 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
 				.applyTo(textControl);
 
+		Label lblDocumentation = getToolkit().createLabel(parent,
+				"Documentation: ");
+		txtDoc = getToolkit().createText(parent, "", SWT.MULTI);
+		GridDataFactory.fillDefaults().span(2,1).applyTo(lblDocumentation);
+		GridDataFactory.fillDefaults().grab(true,true).applyTo(txtDoc);
+
 	}
 
 	@Override
@@ -83,6 +93,15 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 						return Status.OK_STATUS;
 					}
 				});
+
+		IEMFValueProperty property = EMFEditProperties.value(
+				TransactionUtil.getEditingDomain(eObject),
+				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
+		ISWTObservableValue observe = WidgetProperties.text(
+				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
+				txtDoc);
+		context.bindValue(observe, property.observe(eObject));
+
 	}
 
 }

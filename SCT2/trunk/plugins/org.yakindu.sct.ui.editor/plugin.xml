@@ -810,6 +810,11 @@
        id="org.yakindu.sct.ui.editor.commands.ToggleSubRegionLayoutCommand"
        name="Toggle Subregion Layout">
  	</command>
+ 	<command
+       defaultHandler="org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand"
+       id="org.yakindu.sct.ui.editor.commands.ToggleShowDocumentation"
+       name="Toggle Documentation">
+ 	</command>
 </extension>
 
 <extension
@@ -868,6 +873,32 @@
                    <instanceof
                          value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
                    </instanceof>
+                </iterate>
+             </with>
+          </visibleWhen>
+       </command>
+       <command
+             commandId="org.yakindu.sct.ui.editor.commands.ToggleShowDocumentation"
+             label="Toggle Documentation"
+             style="push">
+          <visibleWhen
+                checkEnabled="false">
+             <with
+                   variable="selection">
+                <iterate
+                      ifEmpty="false"
+                      operator="and">
+                   <or>
+                      <instanceof
+                            value="org.yakindu.sct.ui.editor.editparts.TransitionEditPart">
+                      </instanceof>
+                      <instanceof
+                            value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
+                      </instanceof>
+                      <instanceof
+                            value="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart">
+                      </instanceof>
+                   </or>
                 </iterate>
              </with>
           </visibleWhen>
