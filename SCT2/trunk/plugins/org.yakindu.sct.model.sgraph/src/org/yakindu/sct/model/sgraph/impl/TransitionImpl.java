@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -32,6 +34,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getEffect <em>Effect</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getSource <em>Source</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getPriority <em>Priority</em>}</li>
@@ -67,6 +70,26 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	 * @ordered
 	 */
 	protected Effect effect;
+
+	/**
+	 * The default value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOCUMENTATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String documentation = DOCUMENTATION_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTarget() <em>Target</em>}' reference.
@@ -247,6 +270,27 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.TRANSITION__EFFECT, newEffect, newEffect));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDocumentation() {
+		return documentation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDocumentation(String newDocumentation) {
+		String oldDocumentation = documentation;
+		documentation = newDocumentation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.TRANSITION__DOCUMENTATION, oldDocumentation, documentation));
 	}
 
 	/**
@@ -449,6 +493,8 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 			case SGraphPackage.TRANSITION__EFFECT:
 				if (resolve) return getEffect();
 				return basicGetEffect();
+			case SGraphPackage.TRANSITION__DOCUMENTATION:
+				return getDocumentation();
 			case SGraphPackage.TRANSITION__TARGET:
 				if (resolve) return getTarget();
 				return basicGetTarget();
@@ -474,6 +520,9 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 				return;
 			case SGraphPackage.TRANSITION__EFFECT:
 				setEffect((Effect)newValue);
+				return;
+			case SGraphPackage.TRANSITION__DOCUMENTATION:
+				setDocumentation((String)newValue);
 				return;
 			case SGraphPackage.TRANSITION__TARGET:
 				setTarget((Vertex)newValue);
@@ -502,6 +551,9 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 			case SGraphPackage.TRANSITION__EFFECT:
 				setEffect((Effect)null);
 				return;
+			case SGraphPackage.TRANSITION__DOCUMENTATION:
+				setDocumentation(DOCUMENTATION_EDEFAULT);
+				return;
 			case SGraphPackage.TRANSITION__TARGET:
 				setTarget((Vertex)null);
 				return;
@@ -527,6 +579,8 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 				return trigger != null;
 			case SGraphPackage.TRANSITION__EFFECT:
 				return effect != null;
+			case SGraphPackage.TRANSITION__DOCUMENTATION:
+				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case SGraphPackage.TRANSITION__TARGET:
 				return target != null;
 			case SGraphPackage.TRANSITION__SOURCE:
@@ -551,6 +605,12 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 				default: return -1;
 			}
 		}
+		if (baseClass == DocumentedElement.class) {
+			switch (derivedFeatureID) {
+				case SGraphPackage.TRANSITION__DOCUMENTATION: return BasePackage.DOCUMENTED_ELEMENT__DOCUMENTATION;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -568,6 +628,12 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 				default: return -1;
 			}
 		}
+		if (baseClass == DocumentedElement.class) {
+			switch (baseFeatureID) {
+				case BasePackage.DOCUMENTED_ELEMENT__DOCUMENTATION: return SGraphPackage.TRANSITION__DOCUMENTATION;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -581,7 +647,9 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (priority: ");
+		result.append(" (documentation: ");
+		result.append(documentation);
+		result.append(", priority: ");
 		result.append(priority);
 		result.append(')');
 		return result.toString();

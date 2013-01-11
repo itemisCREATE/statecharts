@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -55,6 +56,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getIncomingTransitions <em>Incoming Transitions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getOutgoingTransitions <em>Outgoing Transitions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getRegions <em>Regions</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#isOrthogonal <em>Orthogonal</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getSubstatechart <em>Substatechart</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StateImpl#getSubstatechartId <em>Substatechart Id</em>}</li>
@@ -148,6 +150,26 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	 * @ordered
 	 */
 	protected EList<Region> regions;
+
+	/**
+	 * The default value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOCUMENTATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String documentation = DOCUMENTATION_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isOrthogonal() <em>Orthogonal</em>}' attribute.
@@ -404,6 +426,27 @@ public class StateImpl extends SpecificationElementImpl implements State {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDocumentation() {
+		return documentation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDocumentation(String newDocumentation) {
+		String oldDocumentation = documentation;
+		documentation = newDocumentation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATE__DOCUMENTATION, oldDocumentation, documentation));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generated NOT
@@ -607,6 +650,8 @@ public class StateImpl extends SpecificationElementImpl implements State {
 				return getOutgoingTransitions();
 			case SGraphPackage.STATE__REGIONS:
 				return getRegions();
+			case SGraphPackage.STATE__DOCUMENTATION:
+				return getDocumentation();
 			case SGraphPackage.STATE__ORTHOGONAL:
 				return isOrthogonal();
 			case SGraphPackage.STATE__SUBSTATECHART:
@@ -659,6 +704,9 @@ public class StateImpl extends SpecificationElementImpl implements State {
 				getRegions().clear();
 				getRegions().addAll((Collection<? extends Region>)newValue);
 				return;
+			case SGraphPackage.STATE__DOCUMENTATION:
+				setDocumentation((String)newValue);
+				return;
 			case SGraphPackage.STATE__SUBSTATECHART:
 				setSubstatechart((Statechart)newValue);
 				return;
@@ -697,6 +745,9 @@ public class StateImpl extends SpecificationElementImpl implements State {
 			case SGraphPackage.STATE__REGIONS:
 				getRegions().clear();
 				return;
+			case SGraphPackage.STATE__DOCUMENTATION:
+				setDocumentation(DOCUMENTATION_EDEFAULT);
+				return;
 			case SGraphPackage.STATE__SUBSTATECHART:
 				setSubstatechart((Statechart)null);
 				return;
@@ -732,6 +783,8 @@ public class StateImpl extends SpecificationElementImpl implements State {
 				return outgoingTransitions != null && !outgoingTransitions.isEmpty();
 			case SGraphPackage.STATE__REGIONS:
 				return regions != null && !regions.isEmpty();
+			case SGraphPackage.STATE__DOCUMENTATION:
+				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case SGraphPackage.STATE__ORTHOGONAL:
 				return isOrthogonal() != ORTHOGONAL_EDEFAULT;
 			case SGraphPackage.STATE__SUBSTATECHART:
@@ -795,6 +848,12 @@ public class StateImpl extends SpecificationElementImpl implements State {
 				default: return -1;
 			}
 		}
+		if (baseClass == DocumentedElement.class) {
+			switch (derivedFeatureID) {
+				case SGraphPackage.STATE__DOCUMENTATION: return BasePackage.DOCUMENTED_ELEMENT__DOCUMENTATION;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -843,6 +902,12 @@ public class StateImpl extends SpecificationElementImpl implements State {
 				default: return -1;
 			}
 		}
+		if (baseClass == DocumentedElement.class) {
+			switch (baseFeatureID) {
+				case BasePackage.DOCUMENTED_ELEMENT__DOCUMENTATION: return SGraphPackage.STATE__DOCUMENTATION;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -859,6 +924,8 @@ public class StateImpl extends SpecificationElementImpl implements State {
 		result.append(namespace);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", documentation: ");
+		result.append(documentation);
 		result.append(", substatechartId: ");
 		result.append(substatechartId);
 		result.append(')');

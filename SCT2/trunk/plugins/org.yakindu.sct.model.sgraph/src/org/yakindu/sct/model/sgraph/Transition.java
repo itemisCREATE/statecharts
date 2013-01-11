@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sgraph;
 
+import org.yakindu.base.base.DocumentedElement;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +31,7 @@ package org.yakindu.sct.model.sgraph;
  * @model
  * @generated
  */
-public interface Transition extends SpecificationElement, Reaction {
+public interface Transition extends SpecificationElement, Reaction, DocumentedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
