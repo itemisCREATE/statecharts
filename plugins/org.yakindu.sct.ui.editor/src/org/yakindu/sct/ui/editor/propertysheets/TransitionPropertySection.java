@@ -41,18 +41,21 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class TransitionPropertySection extends AbstractEditorPropertySection {
+public class TransitionPropertySection extends
+		AbstractTwoColumnEditorPropertySection {
 
 	private Control textControl;
 	private Text txtDoc;
 
-	@Override
-	protected Layout createBodyLayout() {
+	protected Layout createLeftColumnLayout() {
 		return new GridLayout(2, false);
 	}
 
 	@Override
-	public void createControls(Composite parent) {
+	protected void createLeftColumnControls(Composite parent) {
+		Label lblExpression = getToolkit().createLabel(parent, "Expression: ");
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblExpression);
+
 		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
@@ -66,13 +69,15 @@ public class TransitionPropertySection extends AbstractEditorPropertySection {
 		}
 		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
 				.applyTo(textControl);
+	}
 
+	@Override
+	protected void createRightColumnControls(Composite parent) {
 		Label lblDocumentation = getToolkit().createLabel(parent,
 				"Documentation: ");
 		txtDoc = getToolkit().createText(parent, "", SWT.MULTI);
-		GridDataFactory.fillDefaults().span(2,1).applyTo(lblDocumentation);
-		GridDataFactory.fillDefaults().grab(true,true).applyTo(txtDoc);
-
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(txtDoc);
 	}
 
 	@Override
