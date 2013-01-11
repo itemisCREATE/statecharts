@@ -30,11 +30,11 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * 
  */
 public class CreateTransitionCommand extends EditElementCommand {
-	
+
 	public CreateTransitionCommand(CreateRelationshipRequest request) {
 		super(request.getLabel(), null, request);
 	}
-	
+
 	@Override
 	protected CreateRelationshipRequest getRequest() {
 		return (CreateRelationshipRequest) super.getRequest();
@@ -44,7 +44,7 @@ public class CreateTransitionCommand extends EditElementCommand {
 	public boolean canExecute() {
 		EObject source = getRequest().getSource();
 		EObject target = getRequest().getTarget();
-		
+
 		if (source == null && target == null) {
 			return false;
 		}
@@ -58,16 +58,8 @@ public class CreateTransitionCommand extends EditElementCommand {
 	@Override
 	protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 			IAdaptable info) throws ExecutionException {
-
-		// This class casts should be save because they are validated in
-		// canExecute() method which is called by the framework before
-		// execution.
 		Vertex source = (Vertex) getRequest().getSource();
 		Vertex target = (Vertex) getRequest().getTarget();
-//		if (!canExecute()) {
-//			throw new ExecutionException(
-//					"Invalid arguments in create link command");
-//		}
 		if (source != null && target != null) {
 			Transition transition = SGraphFactory.eINSTANCE.createTransition();
 			source.getOutgoingTransitions().add(transition);

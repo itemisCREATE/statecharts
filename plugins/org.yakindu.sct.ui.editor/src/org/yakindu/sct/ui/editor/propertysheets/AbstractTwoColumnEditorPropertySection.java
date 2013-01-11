@@ -40,7 +40,7 @@ public abstract class AbstractTwoColumnEditorPropertySection extends
 		leftColumn.setLayout(createLeftColumnLayout());
 		Composite rightColumn = getToolkit().createComposite(sashForm);
 		rightColumn.setLayout(createRightColumnLayout());
-		sashForm.setWeights(new int[] { 2, 3 });
+		sashForm.setWeights(new int[] { 1, 1 });
 		createLeftColumnControls(leftColumn);
 		createRightColumnControls(rightColumn);
 	}

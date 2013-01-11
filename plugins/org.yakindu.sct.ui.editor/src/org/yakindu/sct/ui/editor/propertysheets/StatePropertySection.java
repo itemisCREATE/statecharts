@@ -40,6 +40,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -62,6 +63,7 @@ public class StatePropertySection extends
 	private Label lblSubmachine;
 	private Control txtSpecification;
 	private Control txtName;
+	private Text txtDoc;
 
 	private UpdateLabelAdapter updateLabelAdapter = new UpdateLabelAdapter();
 	private OrderElementControl orderElementControl;
@@ -73,24 +75,34 @@ public class StatePropertySection extends
 
 	@Override
 	protected void createLeftColumnControls(Composite leftColumn) {
+		createNameControl(leftColumn);
 		createSpecificationControl(leftColumn);
 	}
 
 	@Override
 	protected void createRightColumnControls(Composite rightColumn) {
-		createNameControl(rightColumn);
-		createSubmachineControl(rightColumn);
+		createDocumentationControl(rightColumn);
 		createTransitionsControl(rightColumn);
+		createSubmachineControl(rightColumn);
 	}
 
-	private void createNameControl(final Composite parent) {
+	protected void createNameControl(final Composite parent) {
 		Label lblName = getToolkit().createLabel(parent, "State Name: ");
 		txtName = getToolkit().createText(parent, "");
-		GridDataFactory.fillDefaults().applyTo(lblName);
-		GridDataFactory.fillDefaults().applyTo(txtName);
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblName);
+		new Label(parent, SWT.NONE);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(txtName);
 	}
 
-	private void createSpecificationControl(final Composite parent) {
+	protected void createDocumentationControl(Composite rightColumn) {
+		Label lblDocumentation = getToolkit().createLabel(rightColumn,
+				"Documentation: ");
+		txtDoc = getToolkit().createText(rightColumn, "", SWT.MULTI);
+		GridDataFactory.fillDefaults().applyTo(lblDocumentation);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(txtDoc);
+	}
+
+	protected void createSpecificationControl(final Composite parent) {
 		Injector injector = getInjector(SemanticTarget.StateSpecification);
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER
@@ -106,7 +118,7 @@ public class StatePropertySection extends
 				.applyTo(txtSpecification);
 	}
 
-	private void createSubmachineControl(final Composite parent) {
+	protected void createSubmachineControl(final Composite parent) {
 		Label label = getToolkit().createLabel(parent, "State Submachine:");
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setBackground(ColorConstants.white);
@@ -125,7 +137,7 @@ public class StatePropertySection extends
 				.applyTo(openDialog);
 	}
 
-	private void createTransitionsControl(Composite parent) {
+	protected void createTransitionsControl(Composite parent) {
 		Label label = getToolkit().createLabel(parent, "Transition Priority:");
 		GridDataFactory.fillDefaults().applyTo(label);
 		orderElementControl = new OrderElementControl(parent,
@@ -142,11 +154,22 @@ public class StatePropertySection extends
 	public void bindModel(EMFDataBindingContext context) {
 		bindNameControl(context);
 		bindSpecificationControl(context);
+		bindDocumentationControl(context);
 		orderElementControl.refreshInput();
 		updateLabel();
 	}
 
-	private void bindSpecificationControl(EMFDataBindingContext context) {
+	private void bindDocumentationControl(EMFDataBindingContext context) {
+		IEMFValueProperty property = EMFEditProperties.value(
+				TransactionUtil.getEditingDomain(eObject),
+				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
+		ISWTObservableValue observe = WidgetProperties.text(
+				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
+				txtDoc);
+		context.bindValue(observe, property.observe(eObject));
+	}
+
+	protected void bindSpecificationControl(EMFDataBindingContext context) {
 		IEMFValueProperty specificationProperty = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
@@ -166,7 +189,7 @@ public class StatePropertySection extends
 				});
 	}
 
-	private void bindNameControl(EMFDataBindingContext context) {
+	protected void bindNameControl(EMFDataBindingContext context) {
 		IEMFValueProperty nameProperty = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.NAMED_ELEMENT__NAME);
@@ -206,7 +229,7 @@ public class StatePropertySection extends
 		return super.getEObject();
 	}
 
-	private final class OpenDialogHandler implements Listener {
+	protected final class OpenDialogHandler implements Listener {
 		private final Composite parent;
 
 		private OpenDialogHandler(Composite parent) {
@@ -238,7 +261,7 @@ public class StatePropertySection extends
 		}
 	}
 
-	private final class UpdateLabelAdapter extends AdapterImpl {
+	protected final class UpdateLabelAdapter extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification msg) {
 			if (msg.getFeature() == SGraphPackage.Literals.STATE__SUBSTATECHART_ID) {

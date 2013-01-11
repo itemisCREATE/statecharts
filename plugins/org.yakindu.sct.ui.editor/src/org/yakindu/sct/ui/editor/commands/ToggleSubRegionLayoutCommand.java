@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.ui.editor.commands;
 
 import java.util.ArrayList;
@@ -24,7 +34,11 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
-
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class ToggleSubRegionLayoutCommand extends AbstractHandler {
 
 	private View view;
