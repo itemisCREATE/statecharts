@@ -88,6 +88,35 @@ public interface BasePackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.base.impl.DocumentedElementImpl <em>Documented Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.base.impl.DocumentedElementImpl
+	 * @see org.yakindu.base.base.impl.BasePackageImpl#getDocumentedElement()
+	 * @generated
+	 */
+	int DOCUMENTED_ELEMENT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENTED_ELEMENT__DOCUMENTATION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Documented Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOCUMENTED_ELEMENT_FEATURE_COUNT = 1;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.base.NamedElement <em>Named Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -107,6 +136,27 @@ public interface BasePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getNamedElement_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.base.DocumentedElement <em>Documented Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Documented Element</em>'.
+	 * @see org.yakindu.base.base.DocumentedElement
+	 * @generated
+	 */
+	EClass getDocumentedElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.base.DocumentedElement#getDocumentation <em>Documentation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Documentation</em>'.
+	 * @see org.yakindu.base.base.DocumentedElement#getDocumentation()
+	 * @see #getDocumentedElement()
+	 * @generated
+	 */
+	EAttribute getDocumentedElement_Documentation();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -147,6 +197,24 @@ public interface BasePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute NAMED_ELEMENT__NAME = eINSTANCE.getNamedElement_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.base.impl.DocumentedElementImpl <em>Documented Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.base.impl.DocumentedElementImpl
+		 * @see org.yakindu.base.base.impl.BasePackageImpl#getDocumentedElement()
+		 * @generated
+		 */
+		EClass DOCUMENTED_ELEMENT = eINSTANCE.getDocumentedElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Documentation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOCUMENTED_ELEMENT__DOCUMENTATION = eINSTANCE.getDocumentedElement_Documentation();
 
 	}
 

@@ -61,6 +61,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
 			case BasePackage.NAMED_ELEMENT: return createNamedElement();
+			case BasePackage.DOCUMENTED_ELEMENT: return createDocumentedElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -74,6 +75,16 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	public NamedElement createNamedElement() {
 		NamedElementImpl namedElement = new NamedElementImpl();
 		return namedElement;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DocumentedElement createDocumentedElement() {
+		DocumentedElementImpl documentedElement = new DocumentedElementImpl();
+		return documentedElement;
 	}
 
 	/**
