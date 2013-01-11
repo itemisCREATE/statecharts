@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sgraph;
 
+import org.yakindu.base.base.DocumentedElement;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +35,7 @@ package org.yakindu.sct.model.sgraph;
  * @model
  * @generated
  */
-public interface State extends SpecificationElement, ReactiveElement, ScopedElement, RegularState, CompositeElement {
+public interface State extends SpecificationElement, ReactiveElement, ScopedElement, RegularState, CompositeElement, DocumentedElement {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

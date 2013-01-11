@@ -947,6 +947,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		regionEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		transitionEClass.getESuperTypes().add(this.getSpecificationElement());
 		transitionEClass.getESuperTypes().add(this.getReaction());
+		transitionEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
 		finalStateEClass.getESuperTypes().add(this.getRegularState());
 		variableEClass.getESuperTypes().add(this.getDeclaration());
 		eventEClass.getESuperTypes().add(this.getDeclaration());
@@ -956,6 +957,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		statechartEClass.getESuperTypes().add(this.getScopedElement());
 		statechartEClass.getESuperTypes().add(this.getCompositeElement());
 		statechartEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		statechartEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
 		entryEClass.getESuperTypes().add(this.getPseudostate());
 		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		exitEClass.getESuperTypes().add(this.getPseudostate());
@@ -965,6 +967,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		stateEClass.getESuperTypes().add(this.getScopedElement());
 		stateEClass.getESuperTypes().add(this.getRegularState());
 		stateEClass.getESuperTypes().add(this.getCompositeElement());
+		stateEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
 		regularStateEClass.getESuperTypes().add(this.getVertex());
 
 		// Initialize classes and features; add operations and parameters

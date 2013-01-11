@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -47,6 +48,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getNamespace <em>Namespace</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDocumentation <em>Documentation</em>}</li>
  * </ul>
  * </p>
  *
@@ -119,6 +121,26 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 	 * @ordered
 	 */
 	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DOCUMENTATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDocumentation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String documentation = DOCUMENTATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -240,6 +262,27 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDocumentation() {
+		return documentation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDocumentation(String newDocumentation) {
+		String oldDocumentation = documentation;
+		documentation = newDocumentation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__DOCUMENTATION, oldDocumentation, documentation));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -286,6 +329,8 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 				return getRegions();
 			case SGraphPackage.STATECHART__NAME:
 				return getName();
+			case SGraphPackage.STATECHART__DOCUMENTATION:
+				return getDocumentation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -313,6 +358,9 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 			case SGraphPackage.STATECHART__NAME:
 				setName((String)newValue);
 				return;
+			case SGraphPackage.STATECHART__DOCUMENTATION:
+				setDocumentation((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -336,6 +384,9 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 				return;
 			case SGraphPackage.STATECHART__NAME:
 				setName(NAME_EDEFAULT);
+				return;
+			case SGraphPackage.STATECHART__DOCUMENTATION:
+				setDocumentation(DOCUMENTATION_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -361,6 +412,8 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 				return regions != null && !regions.isEmpty();
 			case SGraphPackage.STATECHART__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case SGraphPackage.STATECHART__DOCUMENTATION:
+				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -395,6 +448,12 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
 				case SGraphPackage.STATECHART__NAME: return BasePackage.NAMED_ELEMENT__NAME;
+				default: return -1;
+			}
+		}
+		if (baseClass == DocumentedElement.class) {
+			switch (derivedFeatureID) {
+				case SGraphPackage.STATECHART__DOCUMENTATION: return BasePackage.DOCUMENTED_ELEMENT__DOCUMENTATION;
 				default: return -1;
 			}
 		}
@@ -434,6 +493,12 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 				default: return -1;
 			}
 		}
+		if (baseClass == DocumentedElement.class) {
+			switch (baseFeatureID) {
+				case BasePackage.DOCUMENTED_ELEMENT__DOCUMENTATION: return SGraphPackage.STATECHART__DOCUMENTATION;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
 	}
 
@@ -451,6 +516,8 @@ public class StatechartImpl extends SpecificationElementImpl implements Statecha
 		result.append(namespace);
 		result.append(", name: ");
 		result.append(name);
+		result.append(", documentation: ");
+		result.append(documentation);
 		result.append(')');
 		return result.toString();
 	}

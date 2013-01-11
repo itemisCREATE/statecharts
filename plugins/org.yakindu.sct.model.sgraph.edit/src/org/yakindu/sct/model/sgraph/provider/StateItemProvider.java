@@ -77,6 +77,7 @@ public class StateItemProvider
 			addNamespacePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addIncomingTransitionsPropertyDescriptor(object);
+			addDocumentationPropertyDescriptor(object);
 			addOrthogonalPropertyDescriptor(object);
 			addSubstatechartPropertyDescriptor(object);
 			addSubstatechartIdPropertyDescriptor(object);
@@ -172,6 +173,28 @@ public class StateItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Documentation feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDocumentationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DocumentedElement_documentation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DocumentedElement_documentation_feature", "_UI_DocumentedElement_type"),
+				 BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -402,6 +425,7 @@ public class StateItemProvider
 		switch (notification.getFeatureID(State.class)) {
 			case SGraphPackage.STATE__NAMESPACE:
 			case SGraphPackage.STATE__NAME:
+			case SGraphPackage.STATE__DOCUMENTATION:
 			case SGraphPackage.STATE__ORTHOGONAL:
 			case SGraphPackage.STATE__SUBSTATECHART_ID:
 			case SGraphPackage.STATE__SUBCHART:

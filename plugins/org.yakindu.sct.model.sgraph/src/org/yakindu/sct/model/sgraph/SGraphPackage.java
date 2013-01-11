@@ -303,13 +303,22 @@ public interface SGraphPackage extends EPackage {
 	int TRANSITION__EFFECT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__TARGET = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
+	int TRANSITION__TARGET = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' container reference.
@@ -318,7 +327,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__SOURCE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
+	int TRANSITION__SOURCE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
@@ -327,7 +336,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__PRIORITY = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
+	int TRANSITION__PRIORITY = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
@@ -336,7 +345,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
+	int TRANSITION_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.RegularStateImpl <em>Regular State</em>}' class.
@@ -680,13 +689,22 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__NAME = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
+	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
@@ -1148,13 +1166,22 @@ public interface SGraphPackage extends EPackage {
 	int STATE__REGIONS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
+	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATE__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
+
+	/**
 	 * The feature id for the '<em><b>Orthogonal</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__ORTHOGONAL = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
+	int STATE__ORTHOGONAL = SPECIFICATION_ELEMENT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Substatechart</b></em>' reference.
@@ -1163,7 +1190,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBSTATECHART = SPECIFICATION_ELEMENT_FEATURE_COUNT + 10;
+	int STATE__SUBSTATECHART = SPECIFICATION_ELEMENT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Substatechart Id</b></em>' attribute.
@@ -1172,7 +1199,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBSTATECHART_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 11;
+	int STATE__SUBSTATECHART_ID = SPECIFICATION_ELEMENT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Subchart</b></em>' attribute.
@@ -1181,7 +1208,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SUBCHART = SPECIFICATION_ELEMENT_FEATURE_COUNT + 12;
+	int STATE__SUBCHART = SPECIFICATION_ELEMENT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Simple</b></em>' attribute.
@@ -1190,7 +1217,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__SIMPLE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 13;
+	int STATE__SIMPLE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Composite</b></em>' attribute.
@@ -1199,7 +1226,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__COMPOSITE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 14;
+	int STATE__COMPOSITE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>Leaf</b></em>' attribute.
@@ -1208,7 +1235,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE__LEAF = SPECIFICATION_ELEMENT_FEATURE_COUNT + 15;
+	int STATE__LEAF = SPECIFICATION_ELEMENT_FEATURE_COUNT + 16;
 
 	/**
 	 * The number of structural features of the '<em>State</em>' class.
@@ -1217,7 +1244,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int STATE_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 16;
+	int STATE_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.

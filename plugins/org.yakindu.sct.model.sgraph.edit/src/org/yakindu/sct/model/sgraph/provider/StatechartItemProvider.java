@@ -76,6 +76,7 @@ public class StatechartItemProvider
 			addReactionsPropertyDescriptor(object);
 			addNamespacePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
+			addDocumentationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -138,6 +139,28 @@ public class StatechartItemProvider
 				 getString("_UI_NamedElement_name_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_NamedElement_name_feature", "_UI_NamedElement_type"),
 				 BasePackage.Literals.NAMED_ELEMENT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Documentation feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDocumentationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DocumentedElement_documentation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DocumentedElement_documentation_feature", "_UI_DocumentedElement_type"),
+				 BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION,
 				 true,
 				 false,
 				 false,
@@ -217,6 +240,7 @@ public class StatechartItemProvider
 		switch (notification.getFeatureID(Statechart.class)) {
 			case SGraphPackage.STATECHART__NAMESPACE:
 			case SGraphPackage.STATECHART__NAME:
+			case SGraphPackage.STATECHART__DOCUMENTATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
