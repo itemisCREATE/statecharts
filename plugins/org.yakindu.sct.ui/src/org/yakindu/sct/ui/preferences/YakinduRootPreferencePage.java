@@ -31,14 +31,14 @@ public class YakinduRootPreferencePage extends PreferencePage implements
 		IWorkbenchPreferencePage {
 
 	//Visit us ;-)
-	private static final String YAKINDU_ORG = "http://www.yakindu.org/";
+	private static final String YAKINDU_ORG = "http://www.statecharts.org/";
 
 	@Override
 	protected Control createContents(Composite parent) {
 		Label label = new Label(parent, SWT.NONE);
 		label.setText("YAKINDU Statechart Tools general settings.");
 		Link link = new Link(parent, SWT.NONE);
-		link.setText("For more information visit <a>www.yakindu.org</a>");
+		link.setText("For more information visit <a>www.statecharts.org</a>");
 		link.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
