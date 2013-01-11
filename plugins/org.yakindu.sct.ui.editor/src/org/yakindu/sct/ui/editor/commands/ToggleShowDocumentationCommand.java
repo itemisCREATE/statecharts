@@ -16,6 +16,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
@@ -84,6 +85,12 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 		Object firstElement = structuredSelection.getFirstElement();
 		if (firstElement == null)
 			return null;
-		return ((IGraphicalEditPart) firstElement).getNotationView();
+		IGraphicalEditPart editPart = (IGraphicalEditPart) firstElement;
+		if (editPart instanceof IPrimaryEditPart)
+			return editPart.getNotationView();
+		else {
+			return ((IGraphicalEditPart) editPart.getParent())
+					.getNotationView();
+		}
 	}
 }

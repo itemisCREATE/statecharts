@@ -879,7 +879,7 @@
        </command>
        <command
              commandId="org.yakindu.sct.ui.editor.commands.ToggleShowDocumentation"
-             label="Toggle Documentation"
+             label="Show / Hide Documentation"
              style="push">
           <visibleWhen
                 checkEnabled="false">
@@ -892,12 +892,16 @@
                       <instanceof
                             value="org.yakindu.sct.ui.editor.editparts.TransitionEditPart">
                       </instanceof>
+                        <instanceof
+                            value="org.yakindu.sct.ui.editor.editparts.TransitionExpressionEditPart">
+                      </instanceof>
                       <instanceof
                             value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
                       </instanceof>
                       <instanceof
                             value="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart">
                       </instanceof>
+                      
                    </or>
                 </iterate>
              </with>
