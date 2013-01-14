@@ -13,6 +13,7 @@ import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
 
 import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
+import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;

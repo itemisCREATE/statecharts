@@ -1,7 +1,17 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.c;
 
-public interface INaming {
-	public static final String[] C_KEYWORDS = { "alignas", "alignof", "and",
+public interface CKeywords {
+	public static final String[] KEYWORDS = { "alignas", "alignof", "and",
 			"and_eq", "asm", "auto", "bitand", "bitor", "bool", "break",
 			"case", "catch", "char", "char16_t", "char32_t", "class", "compl",
 			"const", "constexpr", "const_cast", "continue", "decltype",
@@ -15,5 +25,5 @@ public interface INaming {
 			"switch", "template", "this", "thread_local", "throw", "true",
 			"try", "typedef", "typeid", "typename", "union", "unsigned",
 			"using", "virtual", "void", "volatile", "wchar_t", "while", "xor",
-			"xor_eq"};
+			"xor_eq" };
 }

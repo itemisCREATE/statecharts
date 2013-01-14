@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
@@ -12,19 +22,17 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.Direction
+import org.yakindu.base.types.ITypeSystemAccess
 
 class Statemachine {
 	
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
-	@Inject extension Base
-	
+	@Inject extension ITypeSystemAccess
 	
 	def generateStatemachineH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
 		 fsa.generateFile(flow.module.h, flow.statemachineHContent )
 	}
-	
-	
 	
 	def statemachineHContent(ExecutionFlow it) '''
 			#ifndef «module.define»_H_
@@ -90,7 +98,7 @@ class Statemachine {
 
 	def dispatch structDeclaration(EventDefinition it) '''
 		sc_boolean «name.asIdentifier»_raised;
-		«IF type != null && type.name != 'void'»«type.cPrimitive»  «name.asIdentifier»_value;«ENDIF»
+		«IF type != null && type.name != 'void'»«type.targetLanguageTypeName»  «name.asIdentifier»_value;«ENDIF»
 	'''
 
 	def dispatch structDeclaration(TimeEvent it) '''
@@ -98,7 +106,7 @@ class Statemachine {
 	'''
 
 	def dispatch structDeclaration(VariableDefinition it) '''
-		«IF type.name != 'void'»«type.cPrimitive»  «name.asEscapedIdentifier»;«ENDIF»
+		«IF type.name != 'void'»«type.targetLanguageTypeName»  «name.asEscapedIdentifier»;«ENDIF»
 	'''
 	
 	def dispatch structDeclaration(Declaration it) ''''''
@@ -119,7 +127,7 @@ class Statemachine {
 	def statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 		#define «type.toUpperCase»_MAX_ORTHOGONAL_STATES «stateVector.size»
-		«IF ! historyVector.empty»
+		«IF hasHistory»
 		//! dimension of the state configuration vector for history states
 		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
 		
@@ -127,7 +135,7 @@ class Statemachine {
 		This data structure has to be allocated by the client code. */
 		typedef struct {
 			«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
-			«IF ! historyVector.empty»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
+			«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
 			sc_ushort stateConfVectorPosition; 
 			
 			«FOR iScope : scopes »
@@ -159,7 +167,7 @@ class Statemachine {
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
-				extern «type.cPrimitive» «asGetter»(«it.flow.type»* handle);
+				extern «type.targetLanguageTypeName» «asGetter»(«it.flow.type»* handle);
 				
 			«ENDIF»
 		«ENDIF»
@@ -167,10 +175,10 @@ class Statemachine {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «type.cPrimitive» «it.asGetter»(«it.flow.type»* handle);
+		extern «type.targetLanguageTypeName» «it.asGetter»(«it.flow.type»* handle);
 		«IF ! readonly »
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-			extern void «asSetter»(«it.flow.type»* handle, «type.cPrimitive» value);
+			extern void «asSetter»(«it.flow.type»* handle, «type.targetLanguageTypeName» value);
 		«ENDIF»
 	'''
 }

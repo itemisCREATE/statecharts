@@ -123,7 +123,7 @@ class StatemachineInterface {
 		'''
 	}
 	
-	def private createOperationCallbackInterface(InterfaceScope scope) {
+	def createOperationCallbackInterface(InterfaceScope scope) {
 		'''
 		«IF scope.hasOperations»
 			
@@ -136,7 +136,7 @@ class StatemachineInterface {
 		'''
 	}
 	
-	def private eventAccessors(InterfaceScope scope) {
+	def eventAccessors(InterfaceScope scope) {
 		'''
 		«FOR event : scope.eventDefinitions»
 			«IF  event.direction ==  Direction::IN»
@@ -155,7 +155,7 @@ class StatemachineInterface {
 		'''
 	}
 	
-	def private variableAccessors(InterfaceScope scope) '''
+	def variableAccessors(InterfaceScope scope) '''
 		«FOR variable : scope.variableDefinitions»
 					public «variable.type.targetLanguageTypeName» «variable.getter»;
 					«IF  !variable.readonly»
@@ -164,7 +164,7 @@ class StatemachineInterface {
 		«ENDFOR»
 	'''
 	
-	def private String getStatemachineInterfaceExtensions(ExecutionFlow flow) {
+	def getStatemachineInterfaceExtensions(ExecutionFlow flow) {
 
 		var String interfaces = "";
 
