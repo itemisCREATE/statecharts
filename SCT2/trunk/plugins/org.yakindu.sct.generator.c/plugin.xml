@@ -4,14 +4,6 @@
 <plugin>
    <extension
          point="org.yakindu.sct.generator.core.generator">
-      <!-- SCTGenerator
-            class="org.yakindu.sct.generator.c.CCodeGeneratorDep"
-            contentType="statechart"
-            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
-            description="YAKINDU C Code Generator (deprecated)"
-            id="yakindu::cdep"
-            name="YAKINDU C Code Generator (deprecated)">
-      </SCTGenerator -->
       <SCTGenerator
             class="org.yakindu.sct.generator.c.CCodeGenerator"
             contentType="statechart"
@@ -23,11 +15,6 @@
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
-      <!-- FeatureLibrary
-            defaultProvider="org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider"
-            generatorId="yakindu::cdep"
-            uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibraryDep.xmi">
-      </FeatureLibrary -->
       <FeatureLibrary
             defaultProvider="org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider"
             generatorId="yakindu::c"
@@ -40,9 +27,5 @@
             fileExtension="sct"
             generatorId="yakindu::c">
       </ExtensionGeneratorMapping>
-      <!-- ExtensionGeneratorMapping
-            fileExtension="sct"
-            generatorId="yakindu::cdep">
-      </ExtensionGeneratorMapping -->
    </extension>
 </plugin>
