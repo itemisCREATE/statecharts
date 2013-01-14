@@ -33,8 +33,6 @@ class IStatemachine {
 
 		/**
 		 * Basic interface for statemachines.
-		 * 
-		 * 
 		 */
 		public interface IStatemachine {
 		

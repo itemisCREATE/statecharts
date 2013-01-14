@@ -1,28 +1,34 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.model.sexec.Check
-import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.base.types.ITypeSystemAccess
 
 class StatemachineC {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension FlowCode
-	@Inject extension Base
+	@Inject extension ITypeSystemAccess
 	
 	
 	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
 		 fsa.generateFile(flow.module.c, flow.statemachineCContent )
-	}
-	
-	def test(ExecutionFlow it) {
-	 	eAllContents.filter( typeof(Execution) ).last
 	}
 	
 	def statemachineCContent(ExecutionFlow it) '''
@@ -67,7 +73,7 @@ class StatemachineC {
 			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
 				«scHandle»->stateConfVector[i] = «last_state»;
 			
-			«IF ! historyVector.empty»
+			«IF hasHistory»
 			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
 				«scHandle»->historyVector[i] = «last_state»;
 			«ENDIF»
@@ -106,7 +112,7 @@ class StatemachineC {
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasLocalScope»
-				«FOR event : localScope.events»
+				«FOR event : internalScope.events»
 				«event.access» = bool_false; 
 				«ENDFOR»
 			«ENDIF»
@@ -200,7 +206,7 @@ class StatemachineC {
 					return «event.access»;
 				}
 				«IF event.hasValue» 
-					«event.type.cPrimitive» «event.asGetter»(«scHandleDecl») {
+					«event.type.targetLanguageTypeName» «event.asGetter»(«scHandleDecl») {
 						//TODO: Check if event is not raised
 						return «event.valueAccess»;
 					}
@@ -208,11 +214,11 @@ class StatemachineC {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				«variable.type.cPrimitive» «variable.asGetter»(«scHandleDecl») {
+				«variable.type.targetLanguageTypeName» «variable.asGetter»(«scHandleDecl») {
 					return «variable.access»;
 				}
 				«IF !variable.readonly »
-				void «variable.asSetter»(«scHandleDecl», «variable.type.cPrimitive» value) {
+				void «variable.asSetter»(«scHandleDecl», «variable.type.targetLanguageTypeName» value) {
 					«variable.access» = value;
 				}
 				«ENDIF»

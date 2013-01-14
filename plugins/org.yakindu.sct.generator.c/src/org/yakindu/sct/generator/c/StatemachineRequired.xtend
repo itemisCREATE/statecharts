@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
@@ -7,18 +17,17 @@ import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.base.types.ITypeSystemAccess
 
 class StatemachineRequired {
 
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
-	@Inject extension Base
+	@Inject extension ITypeSystemAccess
 	
 	def generateStatemachineClientH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
 		 fsa.generateFile(flow.module.client.h, flow.statemachineClientHContent )
 	}
-	
-	
 	
 	def statemachineClientHContent(ExecutionFlow it) '''
 			#ifndef «module.client.define»_H_
@@ -103,7 +112,7 @@ class StatemachineRequired {
 	def dispatch functionPrototypes(Declaration it) ''''''
 
 	def dispatch functionPrototypes(OperationDefinition it) '''
-		extern «type.cPrimitive» «asFunction»(«FOR p : parameters SEPARATOR ', '»const «p.type.cPrimitive» «p.name.asIdentifier»«ENDFOR»);
+		extern «type.targetLanguageTypeName» «asFunction»(«FOR p : parameters SEPARATOR ', '»const «p.type.targetLanguageTypeName» «p.name.asIdentifier»«ENDFOR»);
 	'''
 
 }

@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2012 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
@@ -20,14 +30,15 @@ import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.sgraph.State
 import java.util.regex.Pattern
 import java.util.regex.Matcher
+import org.yakindu.sct.generator.c.CKeywords
+import org.yakindu.base.types.ITypeSystemAccess
 
-class Naming implements INaming{
+class Naming implements CKeywords{
 
 	@Inject
 	extension Navigation
 	
-	@Inject
-	extension Base
+	@Inject extension ITypeSystemAccess
 	
 	@Inject
 	private StextNameProvider provider
@@ -239,7 +250,7 @@ class Naming implements INaming{
 	def scHandle() { 'handle' }
 	
 	def valueParams(EventDefinition it) {
-		if (hasValue) ', ' + type.cPrimitive + ' value' 
+		if (hasValue) ', ' + type.targetLanguageTypeName + ' value' 
 		else ''
 	}
 	
@@ -264,7 +275,7 @@ class Naming implements INaming{
 		
 	def boolean isCKeyword(String name) {
 		var String lowName = name.toLowerCase();
-		for (String keyword : Arrays::asList(C_KEYWORDS)) {
+		for (String keyword : Arrays::asList(KEYWORDS)) {
 			var Pattern pattern = Pattern::compile("^" + keyword + "$");
 			var Matcher matcher = pattern.matcher(lowName);
 			if (matcher.find()) {

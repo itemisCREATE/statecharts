@@ -16,11 +16,10 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Variable
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-
-import static org.yakindu.sct.generator.java.INaming.*
 import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.generator.java.JavaKeywords
 
-class Naming implements INaming {
+class Naming implements JavaKeywords {
 	
 	@Inject extension Navigation
 	
@@ -68,7 +67,7 @@ class Naming implements INaming {
 	
 	def boolean isJavaKeyword(String name) {
 		var String lowName = name.toLowerCase();
-		for (String keyword : Arrays::asList(JAVA_KEYWORDS)) {
+		for (String keyword : Arrays::asList(KEYWORDS)) {
 			var Pattern pattern = Pattern::compile("^" + keyword + "$");
 			var Matcher matcher = pattern.matcher(lowName);
 			if (matcher.find()) {

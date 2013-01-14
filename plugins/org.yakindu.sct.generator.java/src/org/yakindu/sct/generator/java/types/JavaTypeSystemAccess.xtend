@@ -8,11 +8,14 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java
+package org.yakindu.sct.generator.java.types
 
 import org.yakindu.base.types.impl.BaseTypeSystemAccessImpl
 import org.yakindu.base.types.Type
 
+/**
+ * @author andreas muelder
+ */
 class JavaTypeSystemAccess extends BaseTypeSystemAccessImpl {
 	
 	override getTargetLanguageTypeName(Type type) {
