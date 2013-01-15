@@ -31,6 +31,7 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REACTION_E
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REGULAR_EVENT_SPEC;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.SHIFT_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
+import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_REACTION;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -97,9 +98,11 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass()) 
-					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input.getEClass())
-					|| TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()));
+			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input
+					.getEClass())
+					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input
+							.getEClass()) || TypesPackage.Literals.EVENT
+						.isSuperTypeOf(input.getEClass()));
 		}
 	}
 
@@ -139,7 +142,7 @@ public class ContextPredicateProvider {
 		filter.put(
 				key(ASSIGNMENT_EXPRESSION, ASSIGNMENT_EXPRESSION__EXPRESSION),
 				ALL);
-		
+
 		filter.put(key(CONDITIONAL_EXPRESSION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(LOGICAL_OR_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
 		filter.put(key(LOGICAL_AND_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
@@ -148,7 +151,8 @@ public class ContextPredicateProvider {
 		filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES);
 		filter.put(key(SHIFT_EXPRESSION), VARIABLES);
-		filter.put(key(LOGICAL_RELATION_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
+		filter.put(key(LOGICAL_RELATION_EXPRESSION),
+				VARIABLES_OPERATIONS_EVENTS);
 		filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION),
 				VARIABLES_AND_OPERATIONS);
 		filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
@@ -163,6 +167,7 @@ public class ContextPredicateProvider {
 		filter.put(key(REACTION_EFFECT), VARIABLES_AND_OPERATIONS);
 		filter.put(key(TRANSITION_SPECIFICATION), EVENTS);
 		filter.put(key(LOCAL_REACTION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(TRANSITION_REACTION), VARIABLES_AND_OPERATIONS);
 	}
 
 	public Predicate<IEObjectDescription> getPredicate(EClass clazz,
