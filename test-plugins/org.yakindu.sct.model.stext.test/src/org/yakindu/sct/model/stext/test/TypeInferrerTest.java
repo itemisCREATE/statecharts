@@ -934,7 +934,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				EventValueReferenceExpression.class.getSimpleName());
 		assertTrue((ts.isVoid(analyzer.getType((Statement) statement))));
 		// interface events
-		assertTrue(ts.isInteger(getType("valueof(ABC.myInt)")));
+		assertTrue(ts.isInteger(getType("valueof(ABC.myIntEvent)")));
 
 	}
 

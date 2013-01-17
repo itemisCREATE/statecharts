@@ -107,6 +107,7 @@ public abstract class AbstractSTextTest {
 		}
 		linker.linkModel(result.getRootASTElement(), diagnosticsConsumer);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
+		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
 		Multimap<SpecificationElement, Diagnostic> diagnostics = resource
 				.getLinkingDiagnostics();
 		if (diagnostics.size() > 0) {
@@ -170,9 +171,10 @@ public abstract class AbstractSTextTest {
 	 *     myParamOpp(param1 : integer, param2 : boolean ) : string
 	 *     in event event2
 	 *     var myInt : integer
+	 *     in event myIntEvent : integer
 	 * </pre>
 	 */
 	protected Scope interfaceScope() {
-		return createInterfaceScope("interface ABC : operation myParamOpp(param1 : integer, param2 : boolean ) : string operation myOpp2() in event event2 in event event3 var myInt : integer var myBool : boolean");
+		return createInterfaceScope("interface ABC : operation myParamOpp(param1 : integer, param2 : boolean ) : string operation myOpp2() in event event2  in event myIntEvent : integer in event event3 var myInt : integer var myBool : boolean");
 	}
 }
