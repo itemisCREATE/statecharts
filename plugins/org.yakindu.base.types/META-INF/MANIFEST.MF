@@ -18,4 +18,3 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
  com.google.inject;bundle-version="2.0.0"
 Bundle-ActivationPolicy: lazy
-Eclipse-BundleShape: dir
