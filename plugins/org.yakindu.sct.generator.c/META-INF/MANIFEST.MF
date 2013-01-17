@@ -25,4 +25,3 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.generator.c,
  org.yakindu.sct.generator.c.features
 Bundle-Vendor: yakindu.org
-Eclipse-BundleShape: dir
