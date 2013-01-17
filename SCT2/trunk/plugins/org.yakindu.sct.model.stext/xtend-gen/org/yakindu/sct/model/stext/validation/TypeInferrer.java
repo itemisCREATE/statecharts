@@ -346,13 +346,21 @@ public class TypeInferrer implements ITypeInferrer, ICacheableTypeAnalyzer {
   
   protected Type _inferType(final FeatureCall featureCall) {
     boolean _and = false;
+    boolean _and_1 = false;
     EObject _feature = featureCall.getFeature();
     if (!(_feature instanceof Event)) {
-      _and = false;
+      _and_1 = false;
     } else {
       EObject _eContainer = featureCall.eContainer();
       boolean _not = (!(_eContainer instanceof EventRaisingExpression));
-      _and = ((_feature instanceof Event) && _not);
+      _and_1 = ((_feature instanceof Event) && _not);
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      EObject _eContainer_1 = featureCall.eContainer();
+      boolean _not_1 = (!(_eContainer_1 instanceof EventValueReferenceExpression));
+      _and = (_and_1 && _not_1);
     }
     if (_and) {
       return this.ts.getBoolean();
