@@ -405,6 +405,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isBoolean(getType("!true && !false")));
 		assertTrue(ts.isBoolean(getType("event1 && !event1")));
 		assertTrue(ts.isBoolean(getType("event1 || event1")));
+		assertTrue(ts.isBoolean(getType("ABC.event2 || ABC.event2")));
 	}
 
 	@Test
@@ -499,6 +500,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isBoolean(getType("5.0 != 3")));
 		assertTrue(ts.isBoolean(getType("true != myBool")));
 		assertTrue(ts.isBoolean(getType("true != event1")));
+		assertTrue(ts.isBoolean(getType("true != ABC.event2")));
 	}
 
 	@Test
@@ -663,14 +665,15 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 	@Test
 	public void testAssignmentSuccess() {
-		getType("myInt = 5 * 3");
-		getType("myInt = 0x0F * 3");
-		getType("myInt = 0x0F * 0x0F");
-		getType("myInt = myInt * 0x0F");
-		getType("myBool = true || false");
-		getType("myString = 'string'");
-		getType("myReal = 2.0 - 7");
-		getType("myBool = event1");
+		assertTrue(ts.isInteger(getType("myInt = 5 * 3")));
+		assertTrue(ts.isInteger(getType("myInt = 0x0F * 3")));
+		assertTrue(ts.isInteger(getType("myInt = 0x0F * 0x0F")));
+		assertTrue(ts.isInteger(getType("myInt = myInt * 0x0F")));
+		assertTrue(ts.isBoolean(getType("myBool = true || false")));
+		assertTrue(ts.isString(getType("myString = 'string'")));
+		assertTrue(ts.isReal(getType("myReal = 2.0 - 7")));
+		assertTrue(ts.isBoolean(getType("myBool = event1")));
+		assertTrue(ts.isInteger(getType("ABC.myInt = 42")));
 	}
 
 	@Test
@@ -760,6 +763,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isInteger(getType("5 >> 2")));
 		assertTrue(ts.isInteger(getType("myInt << 4")));
 		assertTrue(ts.isInteger(getType("myInt >> 4")));
+		assertTrue(ts.isInteger(getType("4 >> ABC.myInt")));
 	}
 
 	@Test
@@ -872,9 +876,11 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 	@Test
 	public void testComplexExpressionsSuccess() {
-		ts.isBoolean(getType("((((3 * myInt) + 5) % 2) > 97) || false"));
-		ts.isBoolean(getType("!true != myBool && (3 > (myReal * 5 + 3))"));
-		ts.isInteger(getType("3 * 3 + 7 / (3 * myInt % 8)"));
+		assertTrue(ts
+				.isBoolean(getType("((((3 * myInt) + 5) % 2) > 97) || false")));
+		assertTrue(ts
+				.isBoolean(getType("!true != myBool && (3 > (myReal * 5 + 3))")));
+		assertTrue(ts.isInteger(getType("3 * 3 + 7 / (3 * ABC.myInt % 8)")));
 	}
 
 	@Test
@@ -910,30 +916,37 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		// int events
 		EObject statement = super.parseExpression("valueof(intEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		ts.isInteger(analyzer.getType((Statement) statement));
+		assertTrue(ts.isInteger(analyzer.getType((Statement) statement)));
 		// bool events
 		statement = super.parseExpression("valueof(boolEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		ts.isBoolean(analyzer.getType((Statement) statement));
+		assertTrue(ts.isBoolean(analyzer.getType((Statement) statement)));
 		// real events
 		statement = super.parseExpression("valueof(realEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		ts.isReal(analyzer.getType((Statement) statement));
+		assertTrue(ts.isReal(analyzer.getType((Statement) statement)));
 		// string events
 		statement = super.parseExpression("valueof(stringEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		ts.isString(analyzer.getType((Statement) statement));
+		assertTrue(ts.isString(analyzer.getType((Statement) statement)));
 		// void events
 		statement = super.parseExpression("valueof(voidEvent)", context,
 				EventValueReferenceExpression.class.getSimpleName());
-		ts.isVoid(analyzer.getType((Statement) statement));
+		assertTrue((ts.isVoid(analyzer.getType((Statement) statement))));
+		// interface events
+		assertTrue(ts.isInteger(getType("valueof(ABC.myInt)")));
+
 	}
 
 	@Test
 	public void testEventIsRaisedSuccess() {
 		EObject statement = super.parseExpression("myBool = abc",
 				internalScope(), Expression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
+		assertTrue(ts.isBoolean(analyzer.getType((Statement) statement)));
+		
+		statement = super.parseExpression("ABC.myBool = ABC.event2",
+				interfaceScope(), Expression.class.getSimpleName());
+		assertTrue(ts.isBoolean(analyzer.getType((Statement) statement)));
 	}
 
 	@Test
@@ -973,7 +986,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	public void testOperationSuccess() {
 		EObject statement = super.parseExpression("myInt = myOpp1()",
 				internalScope(), Expression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
+		assertTrue(ts.isInteger(analyzer.getType((Statement) statement)));
 	}
 
 	@Test
@@ -992,6 +1005,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(ts.isInteger(getType("( 5 )")));
 		assertTrue(ts.isReal(getType("( 7.5 / 1.2 )")));
 		assertTrue(ts.isString(getType("( 'abc' )")));
+		assertTrue(ts.isInteger(getType("( ABC.myInt )")));
 	}
 
 	/**
@@ -1097,7 +1111,8 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 	protected Type getType(String expression) {
 		EObject statement = super.parseExpression(expression,
-				super.internalScope(), Expression.class.getSimpleName());
+				Expression.class.getSimpleName(), super.internalScope(),
+				super.interfaceScope());
 		assertNotNull(statement);
 		return analyzer.getType((Statement) statement);
 	}
