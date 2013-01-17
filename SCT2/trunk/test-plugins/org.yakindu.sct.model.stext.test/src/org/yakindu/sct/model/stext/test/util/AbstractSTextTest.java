@@ -170,11 +170,9 @@ public abstract class AbstractSTextTest {
 	 *     myParamOpp(param1 : integer, param2 : boolean ) : string
 	 *     in event event2
 	 *     var myInt : integer
-	 *     entrypoint EntryPoint 
-	 *     exitpoint ExitPoint
 	 * </pre>
 	 */
 	protected Scope interfaceScope() {
-		return createInterfaceScope("interface ABC : operation myParamOpp(param1 : integer, param2 : boolean ) : string operation myOpp2() in event event2 in event event3 var myInt : integer entrypoint EntryPoint exitpoint ExitPoint");
+		return createInterfaceScope("interface ABC : operation myParamOpp(param1 : integer, param2 : boolean ) : string operation myOpp2() in event event2 in event event3 var myInt : integer var myBool : boolean");
 	}
 }
