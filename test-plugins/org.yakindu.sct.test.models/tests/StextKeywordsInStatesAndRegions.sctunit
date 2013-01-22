@@ -1,5 +1,4 @@
-
-testgroup StextKeywords for statechart STextKeywordsInStatesAndRegions{
+testgroup STextKeywordsInStatesAndRegions for statechart STextKeywordsInStatesAndRegions{
 	test activeCheckWithSTextNamedStates { 
 		
 		enter

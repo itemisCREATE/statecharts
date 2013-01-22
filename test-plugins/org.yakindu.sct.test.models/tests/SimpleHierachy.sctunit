@@ -1,4 +1,4 @@
-testgroup SimpleHietachy for statechart SimpleHierachy {
+testgroup SimpleHierachy for statechart SimpleHierachy {
 	test simpleHierachyTest {
 		
 		enter
