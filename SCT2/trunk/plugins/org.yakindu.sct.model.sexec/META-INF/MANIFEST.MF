@@ -6,8 +6,8 @@ Bundle-Version: 2.0.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: yakindu.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Export-Package: org.yakindu.sct.model.extensions,
- org.yakindu.sct.model.sexec,
+Export-Package: org.yakindu.sct.model.sexec,
+ org.yakindu.sct.model.sexec.extensions,
  org.yakindu.sct.model.sexec.impl,
  org.yakindu.sct.model.sexec.transformation,
  org.yakindu.sct.model.sexec.util
