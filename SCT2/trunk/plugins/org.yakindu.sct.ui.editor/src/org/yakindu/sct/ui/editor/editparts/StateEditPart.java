@@ -301,21 +301,16 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
-
 		if (notification.getFeature() == NotationPackage.Literals.DRAWER_STYLE__COLLAPSED) {
-
 			if (isCollapsed()) {
 				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
 						new NonResizableEditPolicyEx());
-
 			} else {
-
 				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
 						new PreferredSizeEditPolicy());
 			}
 			refreshVisuals();
 		}
-
 		super.handleNotificationEvent(notification);
 	}
 }

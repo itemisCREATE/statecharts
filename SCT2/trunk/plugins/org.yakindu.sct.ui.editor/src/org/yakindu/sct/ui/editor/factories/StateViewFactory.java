@@ -37,6 +37,8 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
  */
 public class StateViewFactory extends AbstractShapeViewFactory {
 
+	public static final String ALIGNMENT_ORIENTATION = "isHorizontal";
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void decorateView(View containerView, View view,
@@ -65,7 +67,8 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 		// subregions
 		BooleanValueStyle layout = (BooleanValueStyle) NotationFactory.eINSTANCE
 				.createBooleanValueStyle();
-		layout.setBooleanValue(false);
+		layout.setBooleanValue(true);
+		layout.setName(ALIGNMENT_ORIENTATION);
 		view.getStyles().add(layout);
 
 		IPreferenceStore store = (IPreferenceStore) getPreferencesHint()
@@ -82,11 +85,6 @@ public class StateViewFactory extends AbstractShapeViewFactory {
 		RGB lineRGB = PreferenceConverter.getColor(store,
 				StatechartPreferenceConstants.PREF_STATE_LINE);
 		style.setLineColor(FigureUtilities.RGBToInteger(lineRGB));
-	}
-
-	@Override
-	protected void initializeFromPreferences(View view) {
-		super.initializeFromPreferences(view);
 	}
 
 	@Override
