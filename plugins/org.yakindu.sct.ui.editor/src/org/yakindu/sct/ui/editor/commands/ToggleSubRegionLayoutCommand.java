@@ -34,6 +34,8 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
+import org.yakindu.sct.ui.editor.factories.StateViewFactory;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -42,22 +44,23 @@ import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 public class ToggleSubRegionLayoutCommand extends AbstractHandler {
 
 	private View view;
-	
+
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		view = unwrap(HandlerUtil.getCurrentSelection(event));
-		
-		TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(view);
+
+		TransactionalEditingDomain editingDomain = TransactionUtil
+				.getEditingDomain(view);
 		ToggleCommand toggleCommand = new ToggleCommand(editingDomain, view);
-		
+
 		try {
-			OperationHistoryFactory.getOperationHistory().execute(toggleCommand, new NullProgressMonitor(), null);
+			OperationHistoryFactory.getOperationHistory().execute(
+					toggleCommand, new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
-	
 
 	protected View unwrap(ISelection selection) {
 		IStructuredSelection structuredSelection = (IStructuredSelection) selection;
@@ -66,68 +69,68 @@ public class ToggleSubRegionLayoutCommand extends AbstractHandler {
 			return null;
 		return ((StateEditPart) firstElement).getNotationView();
 	}
-	
+
 	/**
 	 * GMF command class...
 	 * 
 	 * @author terfloth
 	 */
 	protected static class ToggleCommand extends AbstractTransactionalCommand {
-		
+
 		protected static final String TOGGLE_REGION_ALIGNMENT = "Toggle Region Alignment";
 
-		protected View view; 
-		
+		protected View view;
+
 		public ToggleCommand(TransactionalEditingDomain editingDomain, View view) {
 			super(editingDomain, TOGGLE_REGION_ALIGNMENT, null);
 			this.view = view;
 		}
 
-	    @SuppressWarnings({ "rawtypes", "unchecked" })
+		@SuppressWarnings({ "rawtypes", "unchecked" })
 		public List getAffectedFiles() {
-	    	
-	        if (view != null) {
-	            List result = new ArrayList();
-	            IFile file = WorkspaceSynchronizer.getFile(view.eResource());
-	            
-	            if (file != null) {
-	                result.add(file);
-	            }
-	            return result;
-	        }
-	        
-	        return super.getAffectedFiles();
-	    }
 
-		/** 
+			if (view != null) {
+				List result = new ArrayList();
+				IFile file = WorkspaceSynchronizer.getFile(view.eResource());
+
+				if (file != null) {
+					result.add(file);
+				}
+				return result;
+			}
+
+			return super.getAffectedFiles();
+		}
+
+		/**
 		 * Executes the command that switches the subregion layout orientation.
 		 */
 		@SuppressWarnings("unchecked")
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
-	            IAdaptable info)
-	        throws ExecutionException {
-	        
-			BooleanValueStyle style = (BooleanValueStyle) view
-					.getStyle(NotationPackage.Literals.BOOLEAN_VALUE_STYLE);
-			
+				IAdaptable info) throws ExecutionException {
+			BooleanValueStyle style = (BooleanValueStyle) view.getNamedStyle(
+					NotationPackage.Literals.BOOLEAN_VALUE_STYLE,
+					StateViewFactory.ALIGNMENT_ORIENTATION);
 			if (style == null) {
 				style = NotationFactory.eINSTANCE.createBooleanValueStyle();
 				style.setBooleanValue(true);
+				style.setName(StateViewFactory.ALIGNMENT_ORIENTATION);
 				view.getStyles().add(style);
 			} else {
-				style.setBooleanValue(! style.isBooleanValue());
+				style.setBooleanValue(!style.isBooleanValue());
 			}
-			
 			return CommandResult.newOKCommandResult(view);
 		}
 
-		/* (non-Javadoc)
+		/*
+		 * (non-Javadoc)
+		 * 
 		 * @see org.eclipse.gmf.runtime.common.core.command.ICommand#getLabel()
 		 */
 		public String getLabel() {
 			return TOGGLE_REGION_ALIGNMENT;
 		}
-		
+
 	}
 
 }
