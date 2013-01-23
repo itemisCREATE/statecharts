@@ -53,6 +53,7 @@ public class TestModels {
 	public static final String SIMPLE_EVENT = "SimpleEvent.sct";
 	public static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
 	public static final String STATE_ACTIVE = "StateIsActive.sct";
+	public static final String STATE_WITH_EMPTY_REGION = "StateWithEmptyRegion.sct";	
 	public static final String STATECHART_LOCAL_REACTIONS = "StatechartLocalReactions.sct";
 	public static final String STRING_EXPRESSIONS = "StringExpressions.sct";
 	public static final String SYNC_FORK = "SyncFork.sct";
@@ -262,7 +263,7 @@ public class TestModels {
 	 * 
 	 * @return the {@link ExecutionFlow}
 	 * @throws IOException
-	 */
+	 */ 
 	public ExecutionFlow createStatechartLocalReactionsModel()
 			throws IOException {
 		return loadExecutionFlowFromResource(STATECHART_LOCAL_REACTIONS);
@@ -276,6 +277,16 @@ public class TestModels {
 	 */
 	public ExecutionFlow createStateIsActiveModel() throws IOException {
 		return loadExecutionFlowFromResource(STATE_ACTIVE);
+	}
+ 
+	/**
+	 * <img src="../../images/StateWithEmptyRegion.png" /> <br />
+	 * 
+	 * @return the {@link ExecutionFlow}
+	 * @throws IOException
+	 */
+	public ExecutionFlow createStateWithEmptyRegionModel() throws IOException {
+		return loadExecutionFlowFromResource(STATE_WITH_EMPTY_REGION);
 	}
 
 	/**
