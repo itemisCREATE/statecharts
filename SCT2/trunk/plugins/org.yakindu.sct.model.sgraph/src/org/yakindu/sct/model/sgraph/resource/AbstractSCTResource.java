@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.gmf.runtime.emf.core.resources.GMFResource;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
@@ -68,6 +69,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * 
@@ -98,13 +100,16 @@ public abstract class AbstractSCTResource extends GMFResource {
 	private IQualifiedNameConverter nameConverter;
 	@Inject
 	private IQualifiedNameProvider nameProvider;
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	private String languageName;
 
 	protected boolean isParsing = false;
 
 	protected boolean isLinking = false;
 
 	protected boolean isSerializing = false;
-	
+
 	private boolean serializerEnabled = false;
 
 	protected Multimap<SpecificationElement, Diagnostic> syntaxDiagnostics;
@@ -401,6 +406,10 @@ public abstract class AbstractSCTResource extends GMFResource {
 		return linkingDiagnostics;
 	}
 
+	public String getLanguageName() {
+		return languageName;
+	}
+
 	protected final class SerializeAdapter extends EContentAdapter {
 
 		@Override
@@ -417,8 +426,9 @@ public abstract class AbstractSCTResource extends GMFResource {
 				Object notifier = msg.getNotifier();
 				if (notifier instanceof EObject) {
 					EObject eObject = (EObject) notifier;
-					SpecificationElement container = EcoreUtil2.getContainerOfType(
-							eObject, SpecificationElement.class);
+					SpecificationElement container = EcoreUtil2
+							.getContainerOfType(eObject,
+									SpecificationElement.class);
 					if (container != null) {
 						serializeSpecificationElement(container);
 					}
