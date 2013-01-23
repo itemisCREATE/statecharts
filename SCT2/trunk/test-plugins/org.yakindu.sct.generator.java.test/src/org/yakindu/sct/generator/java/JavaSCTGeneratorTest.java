@@ -31,6 +31,7 @@ import static util.TestModels.SIMPLE_EVENT;
 import static util.TestModels.SIMPLE_HIERACHY;
 import static util.TestModels.STATECHART_LOCAL_REACTIONS;
 import static util.TestModels.STATE_ACTIVE;
+import static util.TestModels.STATE_WITH_EMPTY_REGION;
 import static util.TestModels.STRING_EXPRESSIONS;
 import static util.TestModels.SYNC_FORK;
 import static util.TestModels.SYNC_JOIN;
@@ -212,6 +213,12 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 		Statechart statechart = models.loadStatechartFromResource(STATE_ACTIVE);
 		failOnError(generateAndCompile(statechart));
 
+	}
+	@Test
+	public void testStateWithEmptyRegionModel() throws Exception {
+		Statechart statechart = models.loadStatechartFromResource(STATE_WITH_EMPTY_REGION);
+		failOnError(generateAndCompile(statechart));
+		
 	}
 
 	@Test
