@@ -302,7 +302,6 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 	
 	def dispatch execute(EnterState enterState){
-		print(executionContext.stateConfiguration.size)
 		executionContext.stateConfiguration.set(enterState.state.stateVector.offset, enterState.state)
 		nextSVIdx = enterState.state.stateVector.offset // mark all state vector elements up to this as processed ...		
 		null
