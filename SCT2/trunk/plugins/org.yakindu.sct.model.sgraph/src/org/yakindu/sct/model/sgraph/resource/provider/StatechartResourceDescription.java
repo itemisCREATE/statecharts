@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -25,6 +26,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -42,7 +45,7 @@ public class StatechartResourceDescription extends AbstractResourceDescription
 	private final URI uri;
 
 	@Inject
-	IQualifiedNameProvider qualifiedNameProvider;
+	private IQualifiedNameProvider qualifiedNameProvider;
 
 	public StatechartResourceDescription(Resource resource) {
 		this.resource = resource;
@@ -51,7 +54,9 @@ public class StatechartResourceDescription extends AbstractResourceDescription
 
 	@Override
 	protected List<IEObjectDescription> computeExportedObjects() {
-		Iterator<EObject> contents = resource.getAllContents();
+		final Statechart statechart = (Statechart) EcoreUtil2.getObjectByType(
+				resource.getContents(), SGraphPackage.Literals.STATECHART);
+		Iterator<EObject> contents = statechart.eAllContents();
 		List<IEObjectDescription> result = Lists.newArrayList();
 		Map<String, String> userData = new HashMap<String, String>();
 		while (contents.hasNext()) {
