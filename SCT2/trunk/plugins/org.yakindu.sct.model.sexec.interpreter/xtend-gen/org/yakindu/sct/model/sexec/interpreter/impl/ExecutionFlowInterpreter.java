@@ -519,11 +519,14 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     Object _xblockexpression = null;
     {
       ExecutionState[] _stateConfiguration = this.executionContext.getStateConfiguration();
+      int _size = ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).size();
+      InputOutput.<Integer>print(Integer.valueOf(_size));
+      ExecutionState[] _stateConfiguration_1 = this.executionContext.getStateConfiguration();
       ExecutionState _state = enterState.getState();
       StateVector _stateVector = _state.getStateVector();
       int _offset = _stateVector.getOffset();
       ExecutionState _state_1 = enterState.getState();
-      ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration)).set(_offset, _state_1);
+      ((List<ExecutionState>)Conversions.doWrapArray(_stateConfiguration_1)).set(_offset, _state_1);
       ExecutionState _state_2 = enterState.getState();
       StateVector _stateVector_1 = _state_2.getStateVector();
       int _offset_1 = _stateVector_1.getOffset();
