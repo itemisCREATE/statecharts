@@ -10,6 +10,7 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
+import java.util.List
 
 
 
@@ -76,7 +77,7 @@ class StateVectorBuilder {
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a state */
 	def dispatch int defineStateVectors(State s, int offset) { 
 		var int maxOrthogonality = 0
-		if ( s.regions.size > 0 ) {
+		if ( s.regions.containsStates) {
 			for ( r : s.regions ) {
 				maxOrthogonality = maxOrthogonality + r.defineStateVectors(offset+maxOrthogonality)
 			}
@@ -88,6 +89,10 @@ class StateVectorBuilder {
 		es.stateVector.size = maxOrthogonality			
 		
 		return maxOrthogonality
+	}
+	
+	def boolean containsStates (List<Region> regions){
+		regions.filter(r | r.vertices.filter(typeof(RegularState)).size > 0).size > 0
 	}
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a state */

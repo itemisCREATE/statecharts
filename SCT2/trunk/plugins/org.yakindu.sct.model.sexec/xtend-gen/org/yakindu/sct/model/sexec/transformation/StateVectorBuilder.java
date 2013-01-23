@@ -1,12 +1,15 @@
 package org.yakindu.sct.model.sexec.transformation;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -155,9 +158,8 @@ public class StateVectorBuilder {
   protected int _defineStateVectors(final State s, final int offset) {
     int maxOrthogonality = 0;
     EList<Region> _regions = s.getRegions();
-    int _size = _regions.size();
-    boolean _greaterThan = (_size > 0);
-    if (_greaterThan) {
+    boolean _containsStates = this.containsStates(_regions);
+    if (_containsStates) {
       EList<Region> _regions_1 = s.getRegions();
       for (final Region r : _regions_1) {
         int _plus = (offset + maxOrthogonality);
@@ -177,6 +179,22 @@ public class StateVectorBuilder {
     StateVector _stateVector_1 = es.getStateVector();
     _stateVector_1.setSize(maxOrthogonality);
     return maxOrthogonality;
+  }
+  
+  public boolean containsStates(final List<Region> regions) {
+    final Function1<Region,Boolean> _function = new Function1<Region,Boolean>() {
+        public Boolean apply(final Region r) {
+          EList<Vertex> _vertices = r.getVertices();
+          Iterable<RegularState> _filter = Iterables.<RegularState>filter(_vertices, RegularState.class);
+          int _size = IterableExtensions.size(_filter);
+          boolean _greaterThan = (_size > 0);
+          return Boolean.valueOf(_greaterThan);
+        }
+      };
+    Iterable<Region> _filter = IterableExtensions.<Region>filter(regions, _function);
+    int _size = IterableExtensions.size(_filter);
+    boolean _greaterThan = (_size > 0);
+    return _greaterThan;
   }
   
   /**
