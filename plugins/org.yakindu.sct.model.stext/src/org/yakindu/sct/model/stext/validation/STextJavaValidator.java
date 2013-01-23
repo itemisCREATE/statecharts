@@ -18,6 +18,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -42,6 +44,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
@@ -163,8 +166,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					.getReference();
 			return reference.getName();
 		} else if (varRef instanceof FeatureCall) {
-			Property reference = (Property) ((FeatureCall) varRef)
-					.getFeature();
+			Property reference = (Property) ((FeatureCall) varRef).getFeature();
 			return reference.getName();
 		}
 		return null;
@@ -406,22 +408,25 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 	}
 
-	
-	
 	protected boolean isDefault(Trigger trigger) {
-		
-		return 
-			trigger == null 
-			|| trigger instanceof DefaultTrigger
-			|| ((trigger instanceof ReactionTrigger) 
-					&&  ((ReactionTrigger)trigger).getTriggers().size() == 0 
-					&&  ((ReactionTrigger)trigger).getGuardExpression() == null);
+
+		return trigger == null
+				|| trigger instanceof DefaultTrigger
+				|| ((trigger instanceof ReactionTrigger)
+						&& ((ReactionTrigger) trigger).getTriggers().size() == 0 && ((ReactionTrigger) trigger)
+						.getGuardExpression() == null);
 	}
-	
+
 	@Override
 	protected String getCurrentLanguage(Map<Object, Object> context,
 			EObject eObject) {
-		return languageName;
+		Resource eResource = eObject.eResource();
+		if (eResource instanceof XtextResource) {
+			return super.getCurrentLanguage(context, eObject);
+		} else if (eResource instanceof AbstractSCTResource) {
+			return ((AbstractSCTResource) eResource).getLanguageName();
+		}
+		return "";
 
 	}
 
