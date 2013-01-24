@@ -25,6 +25,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.factories.StateViewFactory;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCanonicalEditPolicy;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCreationEditPolicy;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy;
 
@@ -98,11 +99,9 @@ public class StateFigureCompartmentEditPart extends
 	}
 
 	protected boolean getAlignment() {
-		BooleanValueStyle style = (BooleanValueStyle) getParent()
-				.getNotationView().getNamedStyle(
-						NotationPackage.Literals.BOOLEAN_VALUE_STYLE,
-						StateViewFactory.ALIGNMENT_ORIENTATION);
-
+		BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(
+				getParent().getNotationView(),
+				StateViewFactory.ALIGNMENT_ORIENTATION);
 		return (style != null) ? style.isBooleanValue() : true;
 	}
 

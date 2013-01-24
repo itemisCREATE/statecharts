@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
@@ -109,10 +110,8 @@ public class StateTextCompartmentExpressionEditPart extends
 	}
 
 	private StringValueStyle getFeatureToShowStyle() {
-		StringValueStyle style = (StringValueStyle) getParentStateView()
-				.getNamedStyle(NotationPackage.Literals.STRING_VALUE_STYLE,
-						ToggleShowDocumentationCommand.FEATURE_TO_SHOW);
-		return style;
+		return GMFNotationUtil.getStringValueStyle(getParentStateView(),
+				ToggleShowDocumentationCommand.FEATURE_TO_SHOW);
 	}
 
 	@Override

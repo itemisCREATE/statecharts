@@ -28,6 +28,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
  * 
@@ -40,8 +41,8 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		View view = unwrap(HandlerUtil.getCurrentSelection(event));
-		StringValueStyle style = (StringValueStyle) view.getNamedStyle(
-				NotationPackage.Literals.STRING_VALUE_STYLE, FEATURE_TO_SHOW);
+		StringValueStyle style = GMFNotationUtil.getStringValueStyle(view,
+				FEATURE_TO_SHOW);
 		if (style == null) {
 			style = createInitialStyle(view);
 		}
