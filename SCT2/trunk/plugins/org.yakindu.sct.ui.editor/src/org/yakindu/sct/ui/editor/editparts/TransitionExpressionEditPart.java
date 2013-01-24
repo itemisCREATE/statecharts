@@ -23,6 +23,7 @@ import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.policies.TransitionExpressionComponentEditPolicy;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
@@ -108,10 +109,8 @@ public class TransitionExpressionEditPart extends
 	}
 
 	private StringValueStyle getFeatureToShowStyle() {
-		StringValueStyle style = (StringValueStyle) getParentView()
-				.getNamedStyle(NotationPackage.Literals.STRING_VALUE_STYLE,
-						ToggleShowDocumentationCommand.FEATURE_TO_SHOW);
-		return style;
+		return GMFNotationUtil.getStringValueStyle(getParentView(),
+				ToggleShowDocumentationCommand.FEATURE_TO_SHOW);
 	}
 
 	@Override

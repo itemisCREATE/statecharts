@@ -28,13 +28,13 @@ import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import org.yakindu.sct.ui.editor.factories.StateViewFactory;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
  * 
@@ -108,9 +108,8 @@ public class ToggleSubRegionLayoutCommand extends AbstractHandler {
 		@SuppressWarnings("unchecked")
 		protected CommandResult doExecuteWithResult(IProgressMonitor monitor,
 				IAdaptable info) throws ExecutionException {
-			BooleanValueStyle style = (BooleanValueStyle) view.getNamedStyle(
-					NotationPackage.Literals.BOOLEAN_VALUE_STYLE,
-					StateViewFactory.ALIGNMENT_ORIENTATION);
+			BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(
+					view, StateViewFactory.ALIGNMENT_ORIENTATION);
 			if (style == null) {
 				style = NotationFactory.eINSTANCE.createBooleanValueStyle();
 				style.setBooleanValue(true);
