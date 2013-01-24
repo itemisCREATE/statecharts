@@ -10,16 +10,22 @@
  */
 package org.yakindu.sct.model.stext;
 
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.base.types.impl.BaseTypeSystemAccessImpl;
 import org.yakindu.sct.model.sgraph.resource.SCTLinker;
+import org.yakindu.sct.model.sgraph.resource.provider.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
 import org.yakindu.sct.model.stext.validation.ITypeInferrer;
 import org.yakindu.sct.model.stext.validation.TypeInferrer;
+
+import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * Use this class to register components to be used at runtime / without the
@@ -56,6 +62,16 @@ public class STextRuntimeModule extends
 
 	public Class<? extends ITypeInferrer> bindITypeInferrer() {
 		return TypeInferrer.class;
+	}
+
+	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
+		return SCTResourceDescriptionStrategy.class;
+	}
+
+	public void configureFileExtensions(Binder binder) {
+		binder.bind(String.class)
+				.annotatedWith(Names.named(Constants.FILE_EXTENSIONS))
+				.toInstance("stext,sct");
 	}
 
 }

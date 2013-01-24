@@ -14,7 +14,7 @@
    <!-- Resource Provider -->
    <extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-           class="org.yakindu.sct.model.stext.resource.factory.ExpressionsExecutableExtensionFactory:org.yakindu.sct.model.stext.resource.provider.StatechartResourceUIProvider"
+           class="org.yakindu.sct.model.stext.resource.factory.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.ui.resource.generic.EmfResourceUIServiceProvider"
             uriExtension="sct">
         </resourceServiceProvider>
     </extension>
