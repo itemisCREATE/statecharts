@@ -391,7 +391,6 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testFloatPlusAssign() {
 		executeWithDefaultScope("myReal = 42.0");
-		System.out.println(getFloatValue());
 		executeWithDefaultScope("myReal+=42.0");
 		assertEquals(84.0f, getFloatValue());
 	}
