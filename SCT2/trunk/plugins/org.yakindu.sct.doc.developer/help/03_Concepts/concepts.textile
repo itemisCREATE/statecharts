@@ -19,6 +19,8 @@ You find the generated code in the 'src-gen' folder of the traffic light example
 
 In the package 'org.yakindu.sct.examples.trafficlight.cyclebased' are the most basic statemachine interfaces and classes located. These are needed by each statemachine and are independend from the concrete statemachine design.
 
+h4. Interface IStatemachine
+
 The interface @IStatemachine@ is implemented by each generated statemachine:
 
 
