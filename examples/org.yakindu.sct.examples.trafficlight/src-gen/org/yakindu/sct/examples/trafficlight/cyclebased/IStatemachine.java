@@ -2,8 +2,6 @@ package org.yakindu.sct.examples.trafficlight.cyclebased;
 
 /**
  * Basic interface for statemachines.
- * 
- * 
  */
 public interface IStatemachine {
 

@@ -99,7 +99,7 @@ public class TrafficLightWaitingStatemachine
 	}
 
 	private SCIPedestrianImpl sCIPedestrian;
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean pedestrianRequest;
 
@@ -120,7 +120,7 @@ public class TrafficLightWaitingStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_on, main_region_on_r1_StreetGreen, main_region_on_r1_PedWaiting, main_region_on_r1_PedWaiting_r1_waitOn, main_region_on_r1_PedWaiting_r1_waitOff, main_region_on_r1_StreetAttention, main_region_on_r1_StreetRed, main_region_on_r1_PedestrianGreen, main_region_on_r1_PedestrianRed, main_region_on_r1_StreetPrepare, main_region_off, main_region_off_r1_YellowOn, main_region_off_r1_YellowOff, $NullState$
@@ -138,7 +138,7 @@ public class TrafficLightWaitingStatemachine
 
 		sCITrafficLight = new SCITrafficLightImpl();
 		sCIPedestrian = new SCIPedestrianImpl();
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 		trafficLightWaiting_main_region_on_r1_PedWaiting_time_event_0
 				.setStatemachine(this);
@@ -317,7 +317,7 @@ public class TrafficLightWaitingStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 		for (int i = 0; i < timeEvents.length; i++) {
 			timeEvents[i] = false;
@@ -387,15 +387,15 @@ public class TrafficLightWaitingStatemachine
 	public SCIPedestrian getSCIPedestrian() {
 		return sCIPedestrian;
 	}
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raisePedestrianRequest() {
-		sCIDefault.raisePedestrianRequest();
+		sCInterface.raisePedestrianRequest();
 	}
 	public void raiseOnOff() {
-		sCIDefault.raiseOnOff();
+		sCInterface.raiseOnOff();
 	}
 
 	/* Entry action for statechart 'TrafficLightWaiting'. */
@@ -408,7 +408,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state StreetGreen. */
 	private void reactMain_region_on_r1_StreetGreen() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_on_r1_StreetGreen :
 					nextStateIndex = 0;
@@ -516,7 +516,7 @@ public class TrafficLightWaitingStatemachine
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_off_r1_YellowOn;
 		} else {
-			if (sCIDefault.pedestrianRequest) {
+			if (sCInterface.pedestrianRequest) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
@@ -540,7 +540,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state waitOn. */
 	private void reactMain_region_on_r1_PedWaiting_r1_waitOn() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_on_r1_StreetGreen :
 					nextStateIndex = 0;
@@ -718,7 +718,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state waitOff. */
 	private void reactMain_region_on_r1_PedWaiting_r1_waitOff() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_on_r1_StreetGreen :
 					nextStateIndex = 0;
@@ -896,7 +896,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state StreetAttention. */
 	private void reactMain_region_on_r1_StreetAttention() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_on_r1_StreetGreen :
 					nextStateIndex = 0;
@@ -1032,7 +1032,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state StreetRed. */
 	private void reactMain_region_on_r1_StreetRed() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_on_r1_StreetGreen :
 					nextStateIndex = 0;
@@ -1166,7 +1166,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state PedestrianGreen. */
 	private void reactMain_region_on_r1_PedestrianGreen() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_on_r1_StreetGreen :
 					nextStateIndex = 0;
@@ -1300,7 +1300,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state PedestrianRed. */
 	private void reactMain_region_on_r1_PedestrianRed() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_on_r1_StreetGreen :
 					nextStateIndex = 0;
@@ -1436,7 +1436,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state StreetPrepare. */
 	private void reactMain_region_on_r1_StreetPrepare() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_on_r1_StreetGreen :
 					nextStateIndex = 0;
@@ -1573,7 +1573,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state YellowOn. */
 	private void reactMain_region_off_r1_YellowOn() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_off_r1_YellowOn :
 					nextStateIndex = 0;
@@ -1638,7 +1638,7 @@ public class TrafficLightWaitingStatemachine
 
 	/* The reactions of state YellowOff. */
 	private void reactMain_region_off_r1_YellowOff() {
-		if (sCIDefault.onOff) {
+		if (sCInterface.onOff) {
 			switch (stateVector[0]) {
 				case main_region_off_r1_YellowOn :
 					nextStateIndex = 0;
