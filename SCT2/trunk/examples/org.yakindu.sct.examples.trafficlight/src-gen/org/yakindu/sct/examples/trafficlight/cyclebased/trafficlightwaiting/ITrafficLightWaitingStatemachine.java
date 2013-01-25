@@ -31,12 +31,12 @@ public interface ITrafficLightWaitingStatemachine
 
 	public SCIPedestrian getSCIPedestrian();
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raisePedestrianRequest();
 		public void raiseOnOff();
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

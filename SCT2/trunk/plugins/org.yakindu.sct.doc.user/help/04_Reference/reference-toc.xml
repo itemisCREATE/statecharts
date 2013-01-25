@@ -84,6 +84,9 @@
 				<topic href="help/04_Reference/reference.html#Timedstatemachines" label="Timed statemachines"></topic>
 				<topic href="help/04_Reference/reference.html#DefaultimplementationofITimerService" label="Default implementation of ITimerService"></topic>
 				<topic href="help/04_Reference/reference.html#Runtimeservice" label="Runtime service"></topic>
+				<topic href="help/04_Reference/reference.html#InterfacesVariableandEventaccess" label="Interfaces, Variable and Event access"></topic>
+				<topic href="help/04_Reference/reference.html#Interfaceobservers" label="Interface observers"></topic>
+				<topic href="help/04_Reference/reference.html#Operationcallbacks" label="Operation callbacks"></topic>
 				<topic href="help/04_Reference/reference.html#Integrationofgeneratedcode" label="Integration of generated code"></topic>
 			</topic>
 			<topic href="help/04_Reference/reference.html#SpecificationsofCcode" label="Specifications of C code"></topic>

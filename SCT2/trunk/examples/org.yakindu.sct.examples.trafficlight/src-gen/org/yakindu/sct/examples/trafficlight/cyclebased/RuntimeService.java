@@ -160,11 +160,11 @@ public class RuntimeService {
 	}
 
 	/**
-	 * Pauses the execution of all statemachine which are registered for the
+	 * Pauses the execution of all statemachines which are registered for the
 	 * given cyclePeriod.
 	 * 
 	 * @param cyclePeriod
-	 * @return {@code true} if poperly paused
+	 * @return {@code true} if properly paused
 	 * 
 	 */
 	public boolean pauseAll(long cyclePeriod) {
@@ -176,11 +176,11 @@ public class RuntimeService {
 	}
 
 	/**
-	 * Resumes the execution of all statemachine which are registered for the
+	 * Resumes the execution of all statemachines which are registered for the
 	 * given cyclePeriod.
 	 * 
 	 * @param cyclePeriod
-	 * @return {@code true} if poperly resumed
+	 * @return {@code true} if properly resumed
 	 * 
 	 */
 	public boolean resumeAll(long cyclePeriod) {

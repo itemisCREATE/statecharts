@@ -1057,9 +1057,192 @@ public class TimerService implements ITimerService {
 	}
 }
 
+
 </code></pre>
 		<h4 id="Runtimeservice">Runtime service</h4>
 		<p>The runtime service class can be used by client implementations to execute a run to completion step of a statemachine periodically.</p>
+		<h4 id="InterfacesVariableandEventaccess">Interfaces, Variable and Event access</h4>
+		<p>In a yakindu statechart variables and events are contained in interfaces. There could be one default interface defined (without a name) and several named interfaces. In the generated code these interfaces are defined as internal java interfaces of an interface that has the same name as the statemachine. Let&#8217;s have a look at following example statechart interface declaration:</p>
+		<pre><code>interface:
+	var a:boolean
+	in event evA:boolean
+	out event evB:integer
+
+</code></pre>
+		<p>The generated interface code looks like following:</p>
+		<pre><code>public interface IDefaultSMStatemachine extends IStatemachine {
+
+	public interface SCInterface {
+		public void raiseEvA(boolean value);
+		public boolean isRaisedEvB();
+		public int getEvBValue();
+		public boolean getA();
+		public void setA(boolean value);
+	}
+
+	public SCInterface getSCInterface();
+}
+
+</code></pre>
+		<p>For the unnamed statechart interface a java interface 
+			<code>SCInterface</code> is generated. For the incoming event &#8218;evA&#8217; a raise method with a boolean parameter is created because the event has a boolean type set. For the outgoing event &#8218;evB&#8217; the methods 
+			<code>isRaisedEvB()</code> and 
+			<code>getEvBValue()</code> are generated. The first one can be used to determine if the event is raised by the statemachine and the second method serves to query the boolean value of the event. For variables getters and setters are generated too. Additionally the parent interface decribes getter methods to acquire each nested interface.
+		</p>
+		<p>The statemachine implements the parent interface by iteself and each nested interface is implemented as internal class. It holds an instance of each nested interface implementation which is accessible through a getter method. Have a look at the code snipped of the &#8218;unnamed&#8217; default interface implementation:</p>
+		<pre><code>public class DefaultSMStatemachine implements IDefaultSMStatemachine {
+
+	private final class SCInterfaceImpl implements SCInterface {
+	
+			private boolean evA;
+	
+			private boolean evAValue;
+	
+			public void raiseEvA(boolean value) {
+				evA = true;
+				evAValue = value;
+			}
+	
+			private boolean getEvAValue() {
+				if (!evA)
+					throw new IllegalStateException(
+							"Illegal event value acces. Event EvA is not raised!");
+				return evAValue;
+			}
+	
+			private boolean evB;
+	
+			private int evBValue;
+	
+			public boolean isRaisedEvB() {
+				return evB;
+			}
+	
+			private void raiseEvB(int value) {
+				evB = true;
+				evBValue = value;
+			}
+	
+			public int getEvBValue() {
+				if (!evB)
+					throw new IllegalStateException(
+							"Illegal event value acces. Event EvB is not raised!");
+				return evBValue;
+			}
+	
+			private boolean a;
+	
+			public boolean getA() {
+				return a;
+			}
+	
+			public void setA(boolean value) {
+				this.a = value;
+			}
+	
+			public void clearEvents() {
+				evA = false;
+			}
+	
+			public void clearOutEvents() {
+				evB = false;
+			}
+		}
+		
+		private SCInterfaceImpl sCInterface;
+		
+		public DefaultSMStatemachine() {
+
+			sCInterface = new SCInterfaceImpl();
+		}
+		
+		public SCInterface getSCInterface() {
+			return sCInterface;
+	}
+}
+
+</code></pre>
+		<p>Now even a few notes on the naming of the generated interfaces and the value access of events. The default (unnamed) interface is named &#8218;SCInterface&#8217;. If an interface has a dedicated name then this name is used with the prefix &#8218;SCI&#8217; (e.g. &#8218;SCIInterfacename&#8217;). Additionally a value of an event can only be accessed if the event is occured during the run to completion step. Otherwise an 
+			<code>IllegalStateException</code> is thrown by the interface.
+		</p>
+		<h4 id="Interfaceobservers">Interface observers</h4>
+		<p>If the general feature &#8218;InterfaceObserverSupport&#8217; is enabled in the sgen model the generated interfaces get support to register observers:</p>
+		<pre><code>public interface IDefaultSMStatemachine extends IStatemachine {
+
+	public interface SCInterface {
+		public void raiseEvA(boolean value);
+		public boolean isRaisedEvB();
+		public int getEvBValue();
+		public boolean getA();
+		public void setA(boolean value);
+		public List&lt;SCInterfaceListener&gt; getListeners();
+	}
+
+	public interface SCInterfaceListener {
+		public void onEvBRaised(int value);
+	}
+
+	public SCInterface getSCInterface();
+}
+
+</code></pre>
+		<p>An additional interface 
+			<code>SCInterfaceListener</code> is generated. This interface has to be implemented by the user and contains callback methods for each outgoing event. So the listener get notified if a outgoing event is raised by the statemachine internally. To add or remove a listener from an interface use the 
+			<code>getListeners()</code> method of the associated interface. This method returns a 
+			<code>java.util.list</code> which is parameterized with the appropriate listener type. The operations within the callback should not take a long process time because the statemachine execution may hang too long which leads to a not expected runtime behavior.
+		</p>
+		<h4 id="Operationcallbacks">Operation callbacks</h4>
+		<p>The yakindu statecharts support the declaration of operations which can be used within a statechart as actions. These operations have to be implemented by the user before a statechart is executable. Here is an example statechart using an operation:</p>
+		<p>
+			<img border="0" src="images/OperationExample.png"/>
+		</p>
+		<p>Now have a look at the generated code:</p>
+		<pre><code>public interface IDefaultSMStatemachine extends IStatemachine {
+
+	public interface SCInterface {
+		public void raiseEvA(boolean value);
+		public boolean isRaisedEvB();
+		public int getEvBValue();
+		public boolean getA();
+		public void setA(boolean value);
+
+		public void setSCInterfaceOperationCallback(
+				SCInterfaceOperationCallback operationCallback);
+	}
+
+	public interface SCInterfaceOperationCallback {
+		public int myOperation(int param1, boolean param2);
+	}
+
+	public SCInterface getSCInterface();
+}
+
+</code></pre>
+		<p>An additional interface 
+			<code>SCInterfaceOperationCallback</code> with the method 
+			<code>myOperation(int param1, boolean param2)</code> is generated. This interface has to be implemented by the user and set with the 
+			<code>setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback)</code> method so that the statechart can use it:
+		</p>
+		<pre><code>public static void main(String[] args) {
+	DefaultSMStatemachine statemachine = new DefaultSMStatemachine();
+	
+	SCInterfaceOperationCallback callback = new SCInterfaceOperationCallback() {
+		
+		@Override
+		public int myOperation(int param1, boolean param2) {
+			// Your operation code should be placed here;
+			return 0;
+		}
+	};
+	
+	statemachine.getSCInterface().setSCInterfaceOperationCallback(callback);
+	
+	statemachine.init();
+	statemachine.enter();
+	statemachine.runCycle();
+}
+
+</code></pre>
 		<h4 id="Integrationofgeneratedcode">Integration of generated code</h4>
 		<p>To get a clue how to integrate the generated java statemachines into your existing projects have a look at the
 			<br/>
