@@ -428,6 +428,7 @@
 		<module>../org.yakindu.sct.generator-feature</module>
 		<module>../org.yakindu.sct.sdk-feature</module>
 		<module>../org.yakindu.sct.repository</module>
+		<module>../org.yakindu.sct.refactoring</module>
 	</modules>
 
 </project>
