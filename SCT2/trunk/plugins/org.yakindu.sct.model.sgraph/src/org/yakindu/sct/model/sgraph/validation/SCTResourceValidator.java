@@ -21,13 +21,22 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
+import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
+import com.google.inject.Inject;
+
 /**
+ * This validator is intended to be used by a compositeValidator (See
+ * {@link org.eclipse.xtext.validation.ComposedChecks}) of another language
+ * specific validator. It does not register itself as an EValidator.
+ * 
+ * It checks for resource errors in {@link AbstractSCTResource}s.
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author benjamin schwertfeger
  * 
  */
 public class SCTResourceValidator extends AbstractDeclarativeValidator {
@@ -61,21 +70,13 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Override
-	protected List<EPackage> getEPackages() {
-		List<EPackage> result = new ArrayList<EPackage>();
-		result.add(EPackage.Registry.INSTANCE
-				.getEPackage("http://www.yakindu.org/sct/sgraph/2.0.0"));
-		return result;
-	}
-
-	@Override
 	public boolean isLanguageSpecific() {
 		return false;
 	}
-
+	
 	@Override
-	protected boolean isResponsible(Map<Object, Object> context, EObject eObject) {
-		return true;
+	@Inject
+	public void register(EValidatorRegistrar registrar) {
+		//Do not register because this validator is only a composite #398987
 	}
-
 }
