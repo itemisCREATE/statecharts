@@ -37,6 +37,7 @@ public class CrossingDemoCycleBased extends CrossingDemoBase {
 
 		statemachine = new TrafficLightWaitingStatemachine();
 		statemachine.setTimerService(new TimerService());
+		statemachine.init();
 		statemachine.enter();
 		
 		RuntimeService.getInstance().registerStatemachine(statemachine, 100);
