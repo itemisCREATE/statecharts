@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
+import java.util.ArrayList;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.ecore.EObject;
@@ -17,10 +19,16 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.AbstractModelerPropertySection;
+import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.dialogs.IDialogLabelKeys;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.MouseAdapter;
@@ -30,18 +38,27 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.widgets.Form;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.resource.XtextResource;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
@@ -58,6 +75,8 @@ import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 public abstract class AbstractEditorPropertySection extends
 		AbstractModelerPropertySection implements IContextElementProvider {
 
+	private final static String CONTEXTMENUID = "de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
+	
 	public abstract void createControls(Composite parent);
 
 	public abstract void bindModel(EMFDataBindingContext context);
@@ -70,6 +89,7 @@ public abstract class AbstractEditorPropertySection extends
 
 	private CompletionProposalAdapter completionProposalAdapter;
 
+	
 	@Override
 	public void refresh() {
 		super.refresh();
@@ -138,18 +158,91 @@ public abstract class AbstractEditorPropertySection extends
 		return resources.get(0); // always take the first resource ...
 	}
 
-	protected void enableXtext(Control styledText, Injector injector) {
-		StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
+	
+	
+	protected void enableXtext(Control control, Injector injector) {
+		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
 				injector);
 		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters()
 				.add(new ContextElementAdapter(this));
-		xtextAdapter.adapt((StyledText) styledText);
+		final StyledText styledText = (StyledText) control;
+		xtextAdapter.adapt(styledText);
+		MenuManager menuManager = createMenuManager(control);
+		Menu contextMenu = menuManager.createContextMenu(control);
+		control.setMenu(contextMenu);
+		
+		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchPartSite site = window.getActivePage().getActiveEditor().getSite();
+		
+		ISelectionProvider provider = new ISelectionProvider() {
+			
+			public void setSelection(ISelection selection) {}
+			
+			public void removeSelectionChangedListener(ISelectionChangedListener listener) {}
+			
+			public void addSelectionChangedListener(ISelectionChangedListener listener) {}
 
+			public ISelection getSelection() {
+				
+				if (styledText.isDisposed()) {
+					return new StructuredSelection();
+				}
+				
+				int offset = styledText.getCaretOffset()-1;
+				XtextResource fakeResource = xtextAdapter.getFakeResourceContext().getFakeResource();
+				if (fakeResource == null) {
+					return new StructuredSelection();
+				}
+				
+				IParseResult parseResult = fakeResource.getParseResult();
+				if (parseResult == null) {
+					return new StructuredSelection();
+				}
+				ICompositeNode rootNode = parseResult.getRootNode();
+				if (rootNode == null) {
+					return new StructuredSelection();
+				}
+				ILeafNode selectedNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
+				final EObject selectedObject = NodeModelUtils.findActualSemanticObjectFor(selectedNode);
+				
+				if (selectedObject == null) {
+					return new StructuredSelection();
+				}
+				return new StructuredSelection(selectedObject);
+			}
+		};
+		
+		site.setSelectionProvider(provider);
+		site.registerContextMenu(CONTEXTMENUID, menuManager, provider);
+		
 		completionProposalAdapter = new CompletionProposalAdapter(
-				styledText, xtextAdapter.getContentAssistant(),
+				control, xtextAdapter.getContentAssistant(),
 				KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
 	}
 	
+	protected MenuManager createMenuManager(Control styledText) {
+		
+		MenuManager manager = new MenuManager(CONTEXTMENUID, CONTEXTMENUID) {
+			// Overridden to filter default actions
+			@Override
+			public IContributionItem[] getItems() {
+				ArrayList<Object> result = Lists.newArrayList();
+				IContributionItem[] itemis = super.getItems();
+				for (IContributionItem iContributionItem : itemis) {
+					String id = iContributionItem.getId();
+					if (id != null && id.startsWith("org.yakindu"))
+						result.add(iContributionItem);
+				}
+				return result.toArray(new IContributionItem[] {});
+			}
+		};
+
+		
+
+		
+		return manager;
+	}
+
 	public CompletionProposalAdapter getCompletionProposalAdapter() {
 		return completionProposalAdapter;
 	}
