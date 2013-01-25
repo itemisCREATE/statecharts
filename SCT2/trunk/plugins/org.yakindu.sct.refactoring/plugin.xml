@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.UnfoldEntryActionsHandler"
+            description="Unfold Entry Actions"
+            id="com.yakindu.sct.refactoring.unfoldEntryActions"
+            name="Unfold Entry Actions">
+      </command>
+      <command
+            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.UnfoldExitActionsHandler"
+            description="Unfold Exit Actions"
+            id="com.yakindu.sct.refactoring.unfoldExitActions"
+            name="Unfold Exit Actions">
+      </command>
+      <command
+            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.GroupStatesIntoCompositeHandler"
+            description="Group states into composite state"
+            id="com.yakindu.sct.refactoring.groupStates"
+            name="Group Into Composite">
+      </command>
+      <command
+            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.FoldIncomingActionsHandler"
+            description="Fold Incoming Actions"
+            id="com.yakindu.sct.refactoring.foldInActions"
+            name="Fold Incoming Actions">
+      </command>
+      <command
+            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.FoldOutgoingActionsHandler"
+            description="Fold Outgoing Actions"
+            id="com.yakindu.sct.refactoring.foldOutActions"
+            name="Fold Outgoing Actions">
+      </command>
+      <command
+            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.RenameElementHandler"
+            description="Rename Element"
+            id="com.yakindu.sct.refactoring.renameElement"
+            name="Rename Element">
+      </command>
+      <command
+            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.ExtractSubdiagramHandler"
+            description="Extract Subdiagram"
+            id="com.yakindu.sct.refactoring.extractSubDiagram"
+            name="Extract Subdiagram">
+      </command>
+       <command
+            defaultHandler="org.yakindu.sct.refactoring.handlers.impl.InlineSubdiagramHandler"
+            description="Inline Subdiagram"
+            id="com.yakindu.sct.refactoring.inlineSubDiagram"
+            name="Inline Subdiagram">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+         <menu
+               id="refactorMenu"
+               label="Refactor">
+            <command
+                  commandId="com.yakindu.sct.refactoring.foldInActions"
+                  label="Fold Incoming Actions"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="oneStateSelected">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="com.yakindu.sct.refactoring.foldOutActions"
+                  label="Fold Outgoing Actions"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="oneStateSelected">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="com.yakindu.sct.refactoring.groupStates"
+                  label="Group States Into Composite"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="multipleStatesSelected">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="com.yakindu.sct.refactoring.unfoldEntryActions"
+                  label="Unfold Entry Actions"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="oneStateSelected">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="com.yakindu.sct.refactoring.unfoldExitActions"
+                  label="Unfold Exit Actions"
+                  style="push">
+               <visibleWhen
+                     checkEnabled="false">
+                  <reference
+                        definitionId="oneStateSelected">
+                  </reference>
+               </visibleWhen>
+            </command>
+             <command
+                  commandId="com.yakindu.sct.refactoring.extractSubDiagram"
+                  label="Extract Subdiagram"
+                  style="push">
+                     style="push">
+               <visibleWhen
+                     checkEnabled="false">
+               </visibleWhen>
+            </command>
+             <command
+                  commandId="com.yakindu.sct.refactoring.inlineSubDiagram"
+                  label="Inline Subdiagram"
+                  style="push">
+                    <visibleWhen
+                     checkEnabled="false">
+               </visibleWhen>
+            </command>
+         </menu>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu">
+         <menu
+               id="org.yakindu.refactoring"
+               label="Refactoring">
+            <command
+                  commandId="com.yakindu.sct.refactoring.renameElement"
+                  label="Rename..."
+                  style="push">
+            </command>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="oneStateSelected">
+         <with
+               variable="selection">
+            <and>
+               <count
+                     value="1">
+               </count>
+               <iterate
+                     ifEmpty="false"
+                     operator="and">
+                  <instanceof
+                        value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
+                  </instanceof>
+               </iterate>
+            </and>
+         </with>
+      </definition>
+      <definition
+            id="multipleStatesSelected">
+         <with
+               variable="selection">
+            <iterate
+                  ifEmpty="false"
+                  operator="and">
+               <instanceof
+                     value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
+               </instanceof>
+            </iterate>
+         </with>
+      </definition>
+   </extension>
+   <extension
+         id="com.yakindu.sct.refactoring.rename.binding"
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="com.yakindu.sct.refactoring.renameElement"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="Alt+Shift+R">
+      </key>
+   </extension>
+   <extension
+         point="org.eclipse.ui.startup">
+      <startup
+            class="org.yakindu.sct.refactoring.Activator">
+      </startup>
+   </extension>
+
+</plugin>
