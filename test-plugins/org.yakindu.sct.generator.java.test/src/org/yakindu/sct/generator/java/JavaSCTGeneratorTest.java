@@ -10,32 +10,32 @@
  */
 package org.yakindu.sct.generator.java;
 
-import static util.TestModels.ALWAYS_ONCYCLE;
-import static util.TestModels.BIT_EXPRESSIONS;
-import static util.TestModels.BOOLEAN_EXPRESSIONS;
-import static util.TestModels.CHOICE;
-import static util.TestModels.C_KEYWORDS_M;
-import static util.TestModels.DEEP_HISTORY;
-import static util.TestModels.FEATURE_CALLS;
-import static util.TestModels.GUARD;
-import static util.TestModels.INTEGER_EXPRESSIONS;
-import static util.TestModels.JAVA_KEYWORDS_M;
-import static util.TestModels.OPERATIONS;
-import static util.TestModels.PARENTHESIS;
-import static util.TestModels.PRIORITY_VALUES;
-import static util.TestModels.RAISE_EVENTS;
-import static util.TestModels.REAL_EXPRESSIONS;
-import static util.TestModels.SAME_NAME_DIFFERENT_REGION;
-import static util.TestModels.SHALLOW_HISTORY;
-import static util.TestModels.SIMPLE_EVENT;
-import static util.TestModels.SIMPLE_HIERACHY;
-import static util.TestModels.STATECHART_LOCAL_REACTIONS;
-import static util.TestModels.STATE_ACTIVE;
-import static util.TestModels.STATE_WITH_EMPTY_REGION;
-import static util.TestModels.STRING_EXPRESSIONS;
-import static util.TestModels.SYNC_FORK;
-import static util.TestModels.SYNC_JOIN;
-import static util.TestModels.VALUED_EVENTS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.ALWAYS_ONCYCLE;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.BIT_EXPRESSIONS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.BOOLEAN_EXPRESSIONS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.CHOICE;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.C_KEYWORDS_M;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.DEEP_HISTORY;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.FEATURE_CALLS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.GUARD;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.INTEGER_EXPRESSIONS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.JAVA_KEYWORDS_M;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.OPERATIONS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.PARENTHESIS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.PRIORITY_VALUES;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.RAISE_EVENTS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.REAL_EXPRESSIONS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.SAME_NAME_DIFFERENT_REGION;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.SHALLOW_HISTORY;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.SIMPLE_EVENT;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.SIMPLE_HIERACHY;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.STATECHART_LOCAL_REACTIONS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.STATE_ACTIVE;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.STATE_WITH_EMPTY_REGION;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.STRING_EXPRESSIONS;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.SYNC_FORK;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.SYNC_JOIN;
+import static org.yakindu.sct.test.models.SCTUnitTestModels.VALUED_EVENTS;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.runtime.CoreException;
@@ -45,10 +45,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.java.util.AbstractJavaGeneratorTest;
-import org.yakindu.sct.generator.java.util.JavaGeneratorInjectionProvider;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.test.models.TestModelInjectorProvider;
+import org.yakindu.sct.test.models.SCTUnitTestModels;
 
-import util.TestModels;
 
 import com.google.inject.Inject;
 
@@ -60,11 +60,11 @@ import com.google.inject.Inject;
  * 
  */
 @RunWith(XtextRunner.class)
-@InjectWith(JavaGeneratorInjectionProvider.class)
+@InjectWith(TestModelInjectorProvider.class)
 public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 
 	@Inject
-	private TestModels models;
+	private SCTUnitTestModels models;
 
 	private void failOnError(IMarker[] diagnostics) throws CoreException {
 		for (IMarker diagnostic : diagnostics) {

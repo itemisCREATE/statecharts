@@ -10,13 +10,16 @@
  */
 package org.yakindu.sct.refactoring.refactor;
 
+import static org.yakindu.sct.test.models.RefactoringTestModels.EXPECTED_STATECHART;
+import static org.yakindu.sct.test.models.RefactoringTestModels.FOLD_INCOMING_ACTIONS;
+import static org.yakindu.sct.test.models.RefactoringTestModels.INITIAL_STATECHART;
+
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.FoldIncomingActionsRefactoring;
-import org.yakindu.sct.refactoring.refactor.util.TestModels;
 
 import com.google.common.collect.Lists;
+
 /**
  * 
  * @author thomas kutz - Initial contribution and API
@@ -28,18 +31,14 @@ public class FoldIncomingActionsRefactoringTest extends
 	@Test
 	public void testFoldIncomingActions() {
 
-		testRefactoringOnState(TestModels.FOLD_INCOMING_ACTIONS
-				+ TestModels.INITIAL_STATECHART,
-				TestModels.FOLD_INCOMING_ACTIONS
-						+ TestModels.EXPECTED_STATECHART, "B");
-
-		// TODO check if executionFlow is modified after refactoring?? May not
-		// be possible for all refactorings
+		testRefactoringOnState(FOLD_INCOMING_ACTIONS + INITIAL_STATECHART,
+				FOLD_INCOMING_ACTIONS + EXPECTED_STATECHART, "B");
 	}
 
 	protected AbstractRefactoring<?> getRefactoring(State state) {
 		FoldIncomingActionsRefactoring foldIncomingActionsRefactoring = new FoldIncomingActionsRefactoring();
-		foldIncomingActionsRefactoring.setContextObjects(Lists.newArrayList(state));
+		foldIncomingActionsRefactoring.setContextObjects(Lists
+				.newArrayList(state));
 		return foldIncomingActionsRefactoring;
 	}
 

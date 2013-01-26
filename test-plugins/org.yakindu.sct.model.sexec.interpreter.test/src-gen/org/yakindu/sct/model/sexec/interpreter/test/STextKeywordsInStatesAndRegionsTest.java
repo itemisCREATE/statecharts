@@ -19,7 +19,8 @@ import com.google.inject.Inject;
 import org.junit.Before;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
-import util.TestModels;
+import org.yakindu.sct.test.models.SCTUnitTestModels;
+
 import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for STextKeywordsInStatesAndRegions
@@ -32,7 +33,7 @@ public class STextKeywordsInStatesAndRegionsTest
 			AbstractExecutionFlowTest {
 
 	@Inject
-	private TestModels models;
+	private SCTUnitTestModels models;
 
 	@Before
 	public void setup() throws Exception {

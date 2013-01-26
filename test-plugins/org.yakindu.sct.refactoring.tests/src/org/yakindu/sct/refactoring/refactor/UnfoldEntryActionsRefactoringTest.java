@@ -10,11 +10,13 @@
  */
 package org.yakindu.sct.refactoring.refactor;
 
+import static org.yakindu.sct.test.models.RefactoringTestModels.EXPECTED_STATECHART;
+import static org.yakindu.sct.test.models.RefactoringTestModels.INITIAL_STATECHART;
+import static org.yakindu.sct.test.models.RefactoringTestModels.UNFOLD_ENTRY_ACTIONS;
+
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldEntryActionsRefactoring;
-import org.yakindu.sct.refactoring.refactor.util.TestModels;
 
 import com.google.common.collect.Lists;
 /**
@@ -28,13 +30,10 @@ public class UnfoldEntryActionsRefactoringTest extends
 	@Test
 	public void testUnfoldEntryActions() {
 
-		testRefactoringOnState(TestModels.UNFOLD_ENTRY_ACTIONS
-				+ TestModels.INITIAL_STATECHART,
-				TestModels.UNFOLD_ENTRY_ACTIONS
-						+ TestModels.EXPECTED_STATECHART, "B");
-
-		// TODO check if executionFlow is modified after refactoring?? May not
-		// be possible for all refactorings
+		testRefactoringOnState(UNFOLD_ENTRY_ACTIONS
+				+ INITIAL_STATECHART,
+				UNFOLD_ENTRY_ACTIONS
+						+ EXPECTED_STATECHART, "B");
 	}
 
 	@Override

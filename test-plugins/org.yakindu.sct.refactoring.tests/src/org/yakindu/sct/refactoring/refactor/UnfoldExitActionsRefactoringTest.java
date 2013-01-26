@@ -10,13 +10,16 @@
  */
 package org.yakindu.sct.refactoring.refactor;
 
+import static org.yakindu.sct.test.models.RefactoringTestModels.EXPECTED_STATECHART;
+import static org.yakindu.sct.test.models.RefactoringTestModels.INITIAL_STATECHART;
+import static org.yakindu.sct.test.models.RefactoringTestModels.UNFOLD_EXIT_ACTIONS;
+
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoring;
-import org.yakindu.sct.refactoring.refactor.util.TestModels;
 
 import com.google.common.collect.Lists;
+
 /**
  * 
  * @author thomas kutz - Initial contribution and API
@@ -27,12 +30,8 @@ public class UnfoldExitActionsRefactoringTest extends StateBasedRefactoringTest 
 	@Test
 	public void testUnfoldExitActions() {
 
-		testRefactoringOnState(TestModels.UNFOLD_EXIT_ACTIONS
-				+ TestModels.INITIAL_STATECHART, TestModels.UNFOLD_EXIT_ACTIONS
-				+ TestModels.EXPECTED_STATECHART, "A");
-
-		// TODO check if executionFlow is modified after refactoring?? May not
-		// be possible for all refactorings
+		testRefactoringOnState(UNFOLD_EXIT_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_EXIT_ACTIONS + EXPECTED_STATECHART, "A");
 	}
 
 	@Override
