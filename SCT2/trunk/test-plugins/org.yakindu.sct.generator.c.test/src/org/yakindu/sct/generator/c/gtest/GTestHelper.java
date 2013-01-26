@@ -40,8 +40,8 @@ import org.osgi.framework.FrameworkUtil;
 import org.yakindu.sct.generator.core.GeneratorExecutor;
 import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.test.models.SCTUnitTestModels;
 
-import util.TestModels;
 
 /**
  * @author Andreas Unger - Initial contribution and API
@@ -150,7 +150,7 @@ public class GTestHelper {
 	}
 
 	protected Bundle getModelBundle() {
-		return FrameworkUtil.getBundle(TestModels.class);
+		return FrameworkUtil.getBundle(SCTUnitTestModels.class);
 	}
 
 	private void copyFilesFromBundleToFolder() {

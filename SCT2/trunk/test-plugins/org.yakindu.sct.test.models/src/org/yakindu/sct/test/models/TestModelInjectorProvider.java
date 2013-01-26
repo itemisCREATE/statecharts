@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.java.util;
+package org.yakindu.sct.test.models;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
@@ -21,7 +21,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class JavaGeneratorInjectionProvider implements IInjectorProvider {
+public class TestModelInjectorProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
 		return Guice.createInjector(new SequencerModule());

@@ -20,8 +20,7 @@ import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
-
-import util.TestModels;
+import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.inject.Inject;
 
@@ -34,7 +33,7 @@ public abstract class AbstractExecutionFlowTest {
 	@Inject
 	protected IExecutionFlowInterpreter interpreter;
 	@Inject
-	protected TestModels models;
+	protected SCTUnitTestModels models;
 
 	protected IExecutionContext context() {
 		return interpreter.getExecutionContext();

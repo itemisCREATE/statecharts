@@ -20,10 +20,9 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
-import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.util.TestHelper;
 import org.yakindu.sct.refactoring.refactor.util.TestInjectorProvider;
-import org.yakindu.sct.refactoring.refactor.util.TestModels;
+import org.yakindu.sct.test.models.RefactoringTestModels;
 
 import com.google.inject.Inject;
 
@@ -38,32 +37,34 @@ public abstract class StateBasedRefactoringTest {
 
 	@Inject
 	protected IParser parser;
-	
+
 	@Inject
-	protected TestModels models;
-	
+	protected RefactoringTestModels models;
+
 	protected TestHelper helper = new TestHelper();
-	
+
 	protected void compareStatecharts(Statechart initial, Statechart expected) {
 		if (!EcoreUtil.equals(initial, expected)) {
 			Assert.fail("Equality check on statecharts failed!");
 		}
 	}
-	
-	protected void testRefactoringOnState(String pathToInitialSct, String pathToExpectedSct, String stateName) {
-		Statechart initial = models.loadStatechartFromResource(pathToInitialSct);
+
+	protected void testRefactoringOnState(String pathToInitialSct,
+			String pathToExpectedSct, String stateName) {
+		Statechart initial = models
+				.loadStatechartFromResource(pathToInitialSct);
 		State stateB = helper.getStateByName(initial, stateName);
-		
+
 		AbstractRefactoring<?> refactoring = getRefactoring(stateB);
-		((AbstractSCTResource)initial.eResource()).setSerializerEnabled(true);
+		((AbstractSCTResource) initial.eResource()).setSerializerEnabled(true);
 		refactoring.internalExecute();
-		((AbstractSCTResource)initial.eResource()).setSerializerEnabled(false);
-		
-		Statechart expected = models.loadStatechartFromResource(pathToExpectedSct);
-		
+		((AbstractSCTResource) initial.eResource()).setSerializerEnabled(false);
+
+		Statechart expected = models
+				.loadStatechartFromResource(pathToExpectedSct);
+
 		compareStatecharts(initial, expected);
 	}
-	
-	
+
 	protected abstract AbstractRefactoring<?> getRefactoring(State state);
 }
