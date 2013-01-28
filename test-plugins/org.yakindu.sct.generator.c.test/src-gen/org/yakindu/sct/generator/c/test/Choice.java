@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2013 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,7 +18,7 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/Choice/Choice.cc", program = "gtests/Choice/Choice", model = "testmodels/Choice.sct")
+@GTest(sourceFile = "gtests/Choice/Choice.cc", program = "gtests/Choice/Choice", model = "testmodels/SCTUnit/Choice.sct")
 @RunWith(GTestRunner.class)
 public class Choice {
 

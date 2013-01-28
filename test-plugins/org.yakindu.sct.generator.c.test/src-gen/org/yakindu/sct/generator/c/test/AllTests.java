@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 committers of YAKINDU and others.
+ * Copyright (c) 2013 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -23,9 +23,9 @@ import org.junit.runners.Suite.SuiteClasses;
 		InternalEventLifeCycle.class, OutEventLifeCycle.class,
 		Parenthesis.class, PriorityValues.class, RaiseEvent.class,
 		SameNameDifferentRegion.class, ShallowHistory.class,
-		SimpleHietachy.class, StateIsActive.class,
+		SimpleHierachy.class, StateIsActive.class,
 		StatechartLocalReactions.class, StringExpressions.class,
 		SyncFork.class, SyncJoin.class, ValuedEvent.class, SimpleEvent.class,
-		StextKeywords.class})
+		STextKeywordsInStatesAndRegions.class})
 public class AllTests {
 }
