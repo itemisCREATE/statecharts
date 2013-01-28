@@ -18,9 +18,9 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/StatechartLocalReactions/StatechartLocalReactions.cc", program = "gtests/StatechartLocalReactions/StatechartLocalReactions", model = "testmodels/SCTUnit/StatechartLocalReactions.sct")
+@GTest(sourceFile = "gtests/StateWithEmptyRegion/StateWithEmptyRegion.cc", program = "gtests/StateWithEmptyRegion/StateWithEmptyRegion", model = "testmodels/SCTUnit/StateWithEmptyRegion.sct")
 @RunWith(GTestRunner.class)
-public class StatechartLocalReactions {
+public class StateWithEmptyRegion {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
 

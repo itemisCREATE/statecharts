@@ -18,9 +18,9 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/StatechartLocalReactions/StatechartLocalReactions.cc", program = "gtests/StatechartLocalReactions/StatechartLocalReactions", model = "testmodels/SCTUnit/StatechartLocalReactions.sct")
+@GTest(sourceFile = "gtests/SimpleHierachy/SimpleHierachy.cc", program = "gtests/SimpleHierachy/SimpleHierachy", model = "testmodels/SCTUnit/SimpleHierachy.sct")
 @RunWith(GTestRunner.class)
-public class StatechartLocalReactions {
+public class SimpleHierachy {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
 
