@@ -11,7 +11,6 @@
 package org.yakindu.sct.refactoring.handlers.impl;
 
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.viewers.ISelection;
 import org.yakindu.sct.refactoring.handlers.AbstractViewRefactoringHandler;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.ExtractSubdiagramRefactoring;
@@ -28,12 +27,4 @@ public class ExtractSubdiagramHandler extends AbstractViewRefactoringHandler {
 	public AbstractRefactoring<View> createRefactoring() {
 		return new ExtractSubdiagramRefactoring();
 	}
-
-	@Override
-	public void setContext(AbstractRefactoring<View> refactoring,
-			ISelection selection) {
-		
-		
-	}
-
 }

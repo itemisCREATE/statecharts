@@ -10,10 +10,12 @@
  */
 package org.yakindu.sct.refactoring.refactor.impl;
 
+import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
@@ -24,6 +26,8 @@ import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 public abstract class SubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	private static final String INLINE_STYLE = "isInline";
+
+	protected PreferencesHint preferencesHint = DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 
 	@SuppressWarnings("unchecked")
 	protected BooleanValueStyle getInlineStyle() {

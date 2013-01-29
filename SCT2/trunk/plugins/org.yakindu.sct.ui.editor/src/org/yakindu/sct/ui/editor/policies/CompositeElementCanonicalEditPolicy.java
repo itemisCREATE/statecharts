@@ -18,8 +18,8 @@ import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Region;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
 
@@ -28,7 +28,7 @@ import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
  * @author andreas muelder
  * 
  */
-public class StatechartCanonicalEditPolicy extends CanonicalEditPolicy {
+public class CompositeElementCanonicalEditPolicy extends CanonicalEditPolicy {
 
 	@Override
 	protected List<Region> getSemanticChildrenList() {
@@ -36,15 +36,15 @@ public class StatechartCanonicalEditPolicy extends CanonicalEditPolicy {
 	}
 
 	@Override
-	public Statechart getSemanticHost() {
-		return (Statechart) super.getSemanticHost();
+	public CompositeElement getSemanticHost() {
+		return (CompositeElement) super.getSemanticHost();
 	}
 
 	@Override
 	public IGraphicalEditPart getHost() {
 		return (IGraphicalEditPart) super.getHost();
 	}
-	
+
 	@Override
 	protected String getFactoryHint(IAdaptable elementAdapter) {
 		EObject modelElement = (EObject) elementAdapter

@@ -10,21 +10,32 @@
  */
 package org.yakindu.sct.ui.editor.submachine;
 
-import org.eclipse.emf.common.util.EList;
+import java.util.Collection;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.Path;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditorInput;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.Decoration;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorProvider;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget.Direction;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.utils.InteractionUtil;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 import de.itemis.gmf.runtime.commons.decorators.AbstractDecoratorProvider;
 
@@ -38,6 +49,9 @@ public class SubmachineDecorationProvider extends AbstractDecoratorProvider
 
 	private static final String DECORATOR_KEY = SubmachineDecorator.class
 			.getSimpleName();
+
+	// TODO: Move to common class
+	private static final String INLINE_STYLE = "isInline";
 
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
 		Object adapter = decoratorTarget.getAdapter(EObject.class);
@@ -54,7 +68,11 @@ public class SubmachineDecorationProvider extends AbstractDecoratorProvider
 
 		@Override
 		protected boolean shouldDecorate(State state) {
-			return state.getSubstatechart() != null;
+			IGraphicalEditPart adapter = (IGraphicalEditPart) getDecoratorTarget()
+					.getAdapter(IGraphicalEditPart.class);
+			BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(
+					adapter.getNotationView(), INLINE_STYLE);
+			return style == null ? false : !style.isBooleanValue();
 		}
 
 		@Override
@@ -64,25 +82,40 @@ public class SubmachineDecorationProvider extends AbstractDecoratorProvider
 
 		@Override
 		protected Diagram getTooltipDiagramToRender(State state) {
-			Statechart substatechart = state.getSubstatechart();
-			if (substatechart == null) {
-				return null;
-			}
-			Resource eResource = substatechart.eResource();
-			if (eResource == null) {
-				return null;
-			}
-			EList<EObject> contents = eResource.getContents();
-			if (contents == null) {
-				return null;
-			}
-			return (Diagram) EcoreUtil2.getObjectByType(contents,
+			return getDiagramForSemanticElement(state);
+		}
+
+		private Diagram getDiagramForSemanticElement(EObject state) {
+			Collection<Diagram> diagrams = EcoreUtil2.getObjectsByType(state
+					.eResource().getContents(),
 					NotationPackage.Literals.DIAGRAM);
+			for (Diagram diagram : diagrams) {
+				if (EcoreUtil.equals(diagram.getElement(), state)) {
+					return diagram;
+				}
+			}
+			return null;
 		}
 
 		@Override
-		protected void mousePressed(Decoration decoration, EObject semanticElement) {
-			InteractionUtil.openElement(((State)semanticElement).getSubstatechart());
+		protected void mousePressed(Decoration decoration,
+				EObject semanticElement) {
+			Diagram diagramToOpen = getDiagramForSemanticElement(semanticElement);
+			URI uri = EcoreUtil.getURI(diagramToOpen);
+			IFile file = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(new Path(uri.toPlatformString(true)));
+			try {
+				IEditorDescriptor desc = PlatformUI.getWorkbench()
+						.getEditorRegistry().getDefaultEditor(file.getName());
+
+				final IWorkbenchPage wbPage = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage();
+				wbPage.openEditor(new DiagramEditorInput(diagramToOpen),
+						desc.getId());
+			} catch (PartInitException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 		@Override
@@ -90,9 +123,8 @@ public class SubmachineDecorationProvider extends AbstractDecoratorProvider
 			return IDecoratorTarget.Direction.SOUTH_EAST;
 		}
 
-		
 		State asState(EObject o) {
-			return (o instanceof State) ? (State)o : null;
+			return (o instanceof State) ? (State) o : null;
 		}
 
 	}

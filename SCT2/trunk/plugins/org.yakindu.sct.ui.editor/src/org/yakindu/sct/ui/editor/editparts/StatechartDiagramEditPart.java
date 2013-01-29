@@ -17,7 +17,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IDiagramPreferenceSupport;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.ui.editor.policies.StatechartCanonicalEditPolicy;
+import org.yakindu.sct.ui.editor.policies.CompositeElementCanonicalEditPolicy;
 
 import de.itemis.gmf.runtime.commons.editparts.FixedXYLayoutEditPolicy;
 
@@ -38,7 +38,7 @@ public class StatechartDiagramEditPart extends DiagramEditPart implements
 	@Override
 	protected void createDefaultEditPolicies() {
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
-				new StatechartCanonicalEditPolicy());
+				new CompositeElementCanonicalEditPolicy());
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
 				new DragDropEditPolicy());

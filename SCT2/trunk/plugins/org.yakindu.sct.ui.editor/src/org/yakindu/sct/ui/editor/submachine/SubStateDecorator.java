@@ -62,18 +62,6 @@ public abstract class SubStateDecorator extends InteractiveDecorator {
 		return null;
 	}
 	
-	
-//	protected abstract void mouseClicked(Decoration decoration, State semanticElement);
-//	
-//
-//	@Override
-//	protected void mousePressed(Decoration decoration, EObject element) {
-//		if (element instanceof State) {
-//			mouseClicked(decoration, (State) element);
-//		}
-//	}
-
-	
 	protected Image renderImage(Diagram diagram) {
 		Assert.isNotNull(diagram);
 		Image renderImage = DiagramRenderUtil.renderToSWTImage(diagram);
