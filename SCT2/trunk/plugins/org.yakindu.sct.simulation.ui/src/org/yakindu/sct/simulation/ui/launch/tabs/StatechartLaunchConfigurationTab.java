@@ -215,23 +215,27 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 				// check if class exists
 				IProject project = ResourcesPlugin.getWorkspace().getRoot()
 						.findMember(model).getProject();
-				ClassLoader classLoader = new WorkspaceClassLoaderFactory()
-						.createClassLoader(project, getClass().getClassLoader());
-				try {
-					Class<?> loadClass = classLoader.loadClass(clazz);
-					loadClass.newInstance();
-				} catch (ClassNotFoundException e) {
-					setErrorMessage("Class " + clazz + " not found in project "
-							+ project.getName() + "!");
-					return false;
-				} catch (InstantiationException e) {
-					setErrorMessage("Could not instantiate class " + clazz
-							+ "! (No default constructor available?) ");
-					return false;
-				} catch (IllegalAccessException e) {
-					setErrorMessage("Could not access class constructor for class"
-							+ clazz + "!");
-					return false;
+				if (project != null) {
+					ClassLoader classLoader = new WorkspaceClassLoaderFactory()
+							.createClassLoader(project, getClass()
+									.getClassLoader());
+					try {
+						Class<?> loadClass = classLoader.loadClass(clazz);
+						loadClass.newInstance();
+					} catch (ClassNotFoundException e) {
+						setErrorMessage("Class " + clazz
+								+ " not found in project " + project.getName()
+								+ "!");
+						return false;
+					} catch (InstantiationException e) {
+						setErrorMessage("Could not instantiate class " + clazz
+								+ "! (No default constructor available?) ");
+						return false;
+					} catch (IllegalAccessException e) {
+						setErrorMessage("Could not access class constructor for class"
+								+ clazz + "!");
+						return false;
+					}
 				}
 			}
 		}
