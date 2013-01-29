@@ -10,8 +10,15 @@
  */
 package org.yakindu.sct.refactoring.refactor.impl;
 
-import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * 
@@ -20,6 +27,7 @@ import org.yakindu.sct.model.sgraph.State;
  */
 public class ExtractSubdiagramRefactoring extends SubdiagramRefactoring {
 
+
 	@Override
 	public boolean isExecutable() {
 		State state = (State) getContextObject().getElement();
@@ -27,10 +35,25 @@ public class ExtractSubdiagramRefactoring extends SubdiagramRefactoring {
 				&& getInlineStyle().isBooleanValue();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void internalExecute() {
-		System.out.println("Extracting");
-		BooleanValueStyle style = super.getInlineStyle();
-		style.setBooleanValue(false);
+		getInlineStyle().setBooleanValue(false);
+
+		View contextView = getContextObject();
+		State contextElement = (State) contextView.getElement();
+
+		Diagram subdiagram = ViewService.createDiagram(contextElement,
+				StatechartDiagramEditor.ID, preferencesHint);
+		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView,
+				SemanticHints.STATE_FIGURE_COMPARTMENT);
+		EList<View> children = figureCompartment.getChildren();
+		for (View view : children) {
+			if (view.getElement() instanceof Region) {
+				subdiagram.insertChild(view);
+			}
+		}
+		getResource().getContents().add(subdiagram);
+
 	}
 }

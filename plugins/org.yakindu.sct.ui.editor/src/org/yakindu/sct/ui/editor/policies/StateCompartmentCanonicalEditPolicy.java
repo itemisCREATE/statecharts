@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.policies;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IAdaptable;
@@ -17,8 +18,11 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.CanonicalEditPolicy;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.ui.editor.editparts.StateEditPart;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
 
 /**
@@ -26,10 +30,19 @@ import org.yakindu.sct.ui.editor.utils.SemanticHintUtil;
  */
 public class StateCompartmentCanonicalEditPolicy extends CanonicalEditPolicy {
 
+	// TODO: Move to common class
+	private static final String INLINE_STYLE = "isInline";
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	protected List getSemanticChildrenList() {
-		return getSemanticHost().getRegions();
+		StateEditPart parent = (StateEditPart) getHost().getParent();
+		BooleanValueStyle isInline = GMFNotationUtil.getBooleanValueStyle(
+				parent.getNotationView(), INLINE_STYLE);
+		if (isInline == null || isInline.isBooleanValue())
+			return getSemanticHost().getRegions();
+		return Collections.EMPTY_LIST;
+
 	}
 
 	@Override

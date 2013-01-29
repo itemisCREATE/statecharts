@@ -30,7 +30,7 @@ import org.eclipse.gef.RootEditPart;
 import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -42,9 +42,11 @@ import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbDiagramEditor;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
+import org.yakindu.sct.ui.editor.providers.DiagramPartitioningDocumentProvider;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
@@ -57,7 +59,7 @@ import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
  * @author andreas muelder - Initial contribution and API
  * @author martin esser
  */
-public class StatechartDiagramEditor extends DiagramDocumentEditor implements
+public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 		IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
@@ -104,6 +106,13 @@ public class StatechartDiagramEditor extends DiagramDocumentEditor implements
 		getEditingDomain().addResourceSetListener(validationListener);
 		checkXtextNature();
 		initValidationJob();
+	}
+
+	private DiagramPartitioningDocumentProvider provider = new DiagramPartitioningDocumentProvider();
+
+	@Override
+	public IDocumentProvider getDocumentProvider() {
+		return provider;
 	}
 
 	private void initValidationJob() {
