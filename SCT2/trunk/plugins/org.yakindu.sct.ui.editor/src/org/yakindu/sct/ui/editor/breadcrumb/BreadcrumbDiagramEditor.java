@@ -99,6 +99,7 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor impl
 		viewer.setContentProvider(new BreadcrumbViewerContentProvider());
 		viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
 		viewer.setInput(getViewerInput());
+        parent.pack(true);
 	}
 
 	@Override
