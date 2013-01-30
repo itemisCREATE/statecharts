@@ -13,14 +13,11 @@ package org.yakindu.sct.ui.editor.breadcrumb;
 import java.util.Collection;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.TreeIterator;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditorInput;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
@@ -68,11 +65,9 @@ public class BreadcrumbViewerUtil {
 	}
 
 	public static void openEditor(Diagram diagramToOpen) {
-		URI uri = EcoreUtil.getURI(diagramToOpen);
-		IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));
+		IFile file = WorkspaceSynchronizer.getFile(diagramToOpen.eResource());
 		try {
 			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
-
 			final IWorkbenchPage wbPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			wbPage.openEditor(new DiagramEditorInput(diagramToOpen), desc.getId());
 		} catch (PartInitException e) {
