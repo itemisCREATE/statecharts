@@ -30,6 +30,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.yakindu.sct.model.sgraph.CompositeElement;
@@ -55,7 +57,8 @@ public class SCTBreadcrumbViewer extends BreadcrumbViewer implements ISelectionC
 
 	@Override
 	protected Control createDropDown(Composite parent, IBreadcrumbDropDownSite site, TreePath path) {
-		return createDropDownControl(parent, site, path);
+		Control result = createDropDownControl(parent, site, path);
+		return result;
 	}
 
 	public Control createDropDownControl(Composite parent, final IBreadcrumbDropDownSite site, final TreePath paramPath) {
@@ -67,11 +70,17 @@ public class SCTBreadcrumbViewer extends BreadcrumbViewer implements ISelectionC
 		return dropDownTreeViewer.createDropDown(parent, site, paramPath);
 	}
 
-	protected TreeViewer createDropDownTreeViewer(Composite composite, TreePath paramPath,
+	protected TreeViewer createDropDownTreeViewer(final Composite composite, TreePath paramPath,
 			final IBreadcrumbDropDownSite site) {
 		TreeViewer viewer = new TreeViewer(composite);
 		viewer.setLabelProvider(new AdapterFactoryLabelProvider(new SGraphItemProviderAdapterFactory()));
 		viewer.setContentProvider(new AdapterFactoryContentProvider(new BreadcrumbItemProviderAdapterFactory()));
+		viewer.getControl().addPaintListener(new PaintListener() {
+			public void paintControl(PaintEvent e) {
+				getDropDownShell().pack(true);
+			}
+		});
+
 		Diagram diagram = (Diagram) paramPath.getParentPath().getLastSegment();
 		if (diagram != null) {
 			EObject element = diagram.getElement();
@@ -79,8 +88,6 @@ public class SCTBreadcrumbViewer extends BreadcrumbViewer implements ISelectionC
 			viewer.addSelectionChangedListener(this);
 			return viewer;
 		}
-		viewer.getControl().pack();
-		composite.layout(true);
 		return null;
 	}
 
