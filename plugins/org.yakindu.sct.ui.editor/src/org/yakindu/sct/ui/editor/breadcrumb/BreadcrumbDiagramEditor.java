@@ -57,12 +57,6 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor impl
 	}
 
 	@Override
-	public IEditorInput getEditorInput() {
-		System.out.println("Get editor input is " + super.getEditorInput());
-		return super.getEditorInput();
-	}
-
-	@Override
 	public void createPartControl(Composite parent) {
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
