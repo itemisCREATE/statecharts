@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+ * Copyright (c) 2013 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,27 +10,24 @@
  */
 package org.yakindu.sct.ui.editor.breadcrumb;
 
+import static org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbViewerUtil.openEditor;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.debug.internal.ui.viewers.breadcrumb.BreadcrumbViewer;
-import org.eclipse.debug.internal.ui.viewers.breadcrumb.IBreadcrumbDropDownSite;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
-import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreePathContentProvider;
 import org.eclipse.jface.viewers.ITreePathLabelProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
@@ -39,17 +36,21 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IFileEditorInput;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
 import org.yakindu.sct.ui.editor.StatechartImages;
 
-@SuppressWarnings("restriction")
-public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
+public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor implements ISelectionChangedListener {
+
+	private static final String SUBDIAGRAM = "Subdiagram - ";
 
 	public BreadcrumbDiagramEditor(boolean hasFlyoutPalette) {
 		super(hasFlyoutPalette);
@@ -57,7 +58,7 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 
 	@Override
 	public void createPartControl(Composite parent) {
-		parent.setLayout(createGridLayout());
+		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
 		super.createPartControl(parent);
 	}
@@ -73,109 +74,31 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 	protected void initializeTitle(IDiagramEditorInput input) {
 		Diagram diagram = input.getDiagram();
 		EObject element = diagram.getElement();
-		AdapterFactoryLabelProvider factory = new AdapterFactoryLabelProvider(
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
 				new SGraphItemProviderAdapterFactory());
-		setTitleImage(factory.getImage(element));
-		setPartName("Subdiagram - " + factory.getText(element));
+		setTitleImage(labelProvider.getImage(element));
+		setPartName(SUBDIAGRAM + labelProvider.getText(element));
 
 	}
 
-	private org.eclipse.swt.layout.GridLayout createGridLayout() {
-		org.eclipse.swt.layout.GridLayout layout = new org.eclipse.swt.layout.GridLayout();
-		layout.makeColumnsEqualWidth = true;
-		layout.horizontalSpacing = 0;
-		layout.verticalSpacing = 0;
-		layout.marginBottom = 0;
-		layout.marginHeight = 0;
-		layout.marginLeft = 0;
-		layout.marginRight = 0;
-		return layout;
-	}
-
-	public IFileEditorInput getEditorInput() {
-		return (IFileEditorInput) super.getEditorInput();
-	}
-
-	private List<Diagram> getViewerInput() {
+	protected List<Diagram> getViewerInput() {
 		List<Diagram> result = new ArrayList<Diagram>();
 		Diagram diagram = getDiagram();
 		result.add(getDiagram());
 		while (diagram.getElement() instanceof State) {
-			diagram = findDiagramForState((State) diagram.getElement());
+			diagram = BreadcrumbViewerUtil.getDiagramContaining((State) diagram.getElement());
 			result.add(diagram);
 		}
 		Collections.reverse(result);
 		return result;
 	}
 
-	private Diagram findDiagramForState(State element) {
-		// TODO: Performance
-		Resource eResource = element.eResource();
-		Collection<Diagram> objects = EcoreUtil.getObjectsByType(
-				eResource.getContents(), NotationPackage.Literals.DIAGRAM);
-		for (Diagram diagram : objects) {
-			TreeIterator<EObject> eAllContents = diagram.eAllContents();
-			while (eAllContents.hasNext()) {
-				EObject next = eAllContents.next();
-				if (next instanceof View) {
-					if (EcoreUtil.equals(((View) next).getElement(), element)) {
-						return ((View) next).getDiagram();
-					}
-				}
-			}
-		}
-		return null;
-	}
-
 	private void createBreadcrumbViewer(Composite parent) {
-		SCTBreadcrumbViewer viewer = new SCTBreadcrumbViewer(parent, SWT.NONE);
-		viewer.setContentProvider(new ITreePathContentProvider() {
-
-			private List<IFile> input;
-
-			@SuppressWarnings("unchecked")
-			public void inputChanged(Viewer viewer, Object oldInput,
-					Object newInput) {
-				if (newInput != null && newInput instanceof List) {
-					input = (List<IFile>) newInput;
-				}
-			}
-
-			public void dispose() {
-				// Nothing to do
-			}
-
-			public boolean hasChildren(TreePath path) {
-				return false;
-			}
-
-			public TreePath[] getParents(Object element) {
-				return null;
-			}
-
-			@SuppressWarnings("rawtypes")
-			public Object[] getElements(Object inputElement) {
-				if (inputElement != null && inputElement instanceof Collection) {
-					return ((Collection) inputElement).toArray();
-				}
-				return null;
-			}
-
-			public Object[] getChildren(TreePath parentPath) {
-				return input
-						.subList(parentPath.getSegmentCount(), input.size())
-						.toArray();
-			}
-		});
-		viewer.setLabelProvider(new MyLabelProvider());
+		SCTBreadcrumbViewer viewer = new SCTBreadcrumbViewer(parent, SWT.READ_ONLY);
+		viewer.addSelectionChangedListener(this);
+		viewer.setContentProvider(new BreadcrumbViewerContentProvider());
+		viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
 		viewer.setInput(getViewerInput());
-		viewer.addSelectionChangedListener(new ISelectionChangedListener() {
-
-			public void selectionChanged(SelectionChangedEvent event) {
-
-			}
-		});
-
 	}
 
 	@Override
@@ -184,8 +107,12 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(parent);
 	}
 
-	public class MyLabelProvider extends BaseLabelProvider implements
-			ITreePathLabelProvider {
+	public void selectionChanged(SelectionChangedEvent event) {
+		Diagram diagramToOpen = (Diagram) ((IStructuredSelection) event.getSelection()).getFirstElement();
+		openEditor(diagramToOpen);
+	}
+
+	public static final class BreadcrumbViewerLabelProvider extends BaseLabelProvider implements ITreePathLabelProvider {
 
 		public void updateLabel(ViewerLabel label, TreePath elementPath) {
 			Diagram lastSegment = (Diagram) elementPath.getLastSegment();
@@ -193,7 +120,6 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 			AdapterFactoryLabelProvider provider = new AdapterFactoryLabelProvider(
 					new SGraphItemProviderAdapterFactory());
 			label.setText(provider.getText(element));
-			// TODO: change Edit provider
 			if (element instanceof Statechart)
 				label.setImage(StatechartImages.LOGO.image());
 			else
@@ -202,18 +128,41 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor {
 		}
 	}
 
-	public class SCTBreadcrumbViewer extends BreadcrumbViewer {
+	@SuppressWarnings("unchecked")
+	public static final class BreadcrumbViewerContentProvider implements ITreePathContentProvider {
 
-		public SCTBreadcrumbViewer(Composite parent, int style) {
-			super(parent, style);
+		private List<IFile> input;
+
+		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			if (newInput != null && newInput instanceof List) {
+				input = (List<IFile>) newInput;
+			}
 		}
 
-		@Override
-		protected Control createDropDown(Composite parent,
-				IBreadcrumbDropDownSite site, TreePath path) {
-			return new Composite(parent, SWT.NONE);
+		@SuppressWarnings("rawtypes")
+		public Object[] getElements(Object inputElement) {
+			if (inputElement != null && inputElement instanceof Collection) {
+				return ((Collection) inputElement).toArray();
+			}
+			return null;
+		}
 
+		public Object[] getChildren(TreePath parentPath) {
+			return input.subList(parentPath.getSegmentCount(), input.size()).toArray();
+		}
+
+		public void dispose() {
+			input = null;
+		}
+
+		public boolean hasChildren(TreePath path) {
+			return false;
+		}
+
+		public TreePath[] getParents(Object element) {
+			return null;
 		}
 
 	}
+
 }
