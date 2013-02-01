@@ -89,7 +89,9 @@
 				<topic href="help/04_Reference/reference.html#Operationcallbacks" label="Operation callbacks"></topic>
 				<topic href="help/04_Reference/reference.html#Integrationofgeneratedcode" label="Integration of generated code"></topic>
 			</topic>
-			<topic href="help/04_Reference/reference.html#SpecificationsofCcode" label="Specifications of C code"></topic>
+			<topic href="help/04_Reference/reference.html#SpecificationsofCcode" label="Specifications of C code">
+				<topic href="help/04_Reference/reference.html#Generatedheaderfiles" label="Generated header files"></topic>
+			</topic>
 		</topic>
 	</topic>
 </toc>
