@@ -907,7 +907,6 @@ public interface ITimerService {
 	 */
 	public long getSystemTimeMillis();
 }
-
 </code></pre>
 		<p>The 
 			<code>ITimerService</code> interface defines four methods. The 
@@ -984,7 +983,6 @@ public class TimeEvent {
 		return index;
 	}
 }
-
 </code></pre>
 		<p>A 
 			<code>TimeEvent</code> holds a reference to the statemachine it belongs to and a flag if it should be raised periodically. These informations are needed by the timer service implementation to raise the time event on the corresponding statemachine. The index field is used by the timed statemachine internally.
@@ -1056,8 +1054,6 @@ public class TimerService implements ITimerService {
 		return System.currentTimeMillis();
 	}
 }
-
-
 </code></pre>
 		<h4 id="Runtimeservice">Runtime service</h4>
 		<p>The runtime service class can be used by client implementations to execute a run to completion step of a statemachine periodically.</p>
@@ -1067,7 +1063,6 @@ public class TimerService implements ITimerService {
 	var a:boolean
 	in event evA:boolean
 	out event evB:integer
-
 </code></pre>
 		<p>The generated interface code looks like following:</p>
 		<pre><code>public interface IDefaultSMStatemachine extends IStatemachine {
@@ -1082,7 +1077,6 @@ public class TimerService implements ITimerService {
 
 	public SCInterface getSCInterface();
 }
-
 </code></pre>
 		<p>For the unnamed statechart interface a java interface 
 			<code>SCInterface</code> is generated. For the incoming event &#8218;evA&#8217; a raise method with a boolean parameter is created because the event has a boolean type set. For the outgoing event &#8218;evB&#8217; the methods 
@@ -1160,7 +1154,6 @@ public class TimerService implements ITimerService {
 			return sCInterface;
 	}
 }
-
 </code></pre>
 		<p>Now even a few notes on the naming of the generated interfaces and the value access of events. The default (unnamed) interface is named &#8218;SCInterface&#8217;. If an interface has a dedicated name then this name is used with the prefix &#8218;SCI&#8217; (e.g. &#8218;SCIInterfacename&#8217;). Additionally a value of an event can only be accessed if the event is occured during the run to completion step. Otherwise an 
 			<code>IllegalStateException</code> is thrown by the interface.
@@ -1184,7 +1177,6 @@ public class TimerService implements ITimerService {
 
 	public SCInterface getSCInterface();
 }
-
 </code></pre>
 		<p>An additional interface 
 			<code>SCInterfaceListener</code> is generated. This interface has to be implemented by the user and contains callback methods for each outgoing event. So the listener get notified if a outgoing event is raised by the statemachine internally. To add or remove a listener from an interface use the 
@@ -1241,7 +1233,6 @@ public class TimerService implements ITimerService {
 	statemachine.enter();
 	statemachine.runCycle();
 }
-
 </code></pre>
 		<h4 id="Integrationofgeneratedcode">Integration of generated code</h4>
 		<p>To get a clue how to integrate the generated java statemachines into your existing projects have a look at the
@@ -1254,7 +1245,6 @@ public class TimerService implements ITimerService {
 
 	new CrossingDemoCycleBased().runTrafficLight();
 }
-
 </code></pre>
 		<p>A new instance of the class is created and the method 
 			<code>runTrafficLight()</code> is directly called. This method consist in the super class:
@@ -1278,7 +1268,6 @@ public class TimerService implements ITimerService {
 
 		tearDownStatemachine();
 }
-
 </code></pre>
 		<p>This method setups the statemachine and creates the UI content. In a while loop the content of the statemachine is read and the ui is repainted. If the ui shell is closed the loop is left and the statemachine is teared down. The really interresting methods are 
 			<code>setUpAndRunStatemachine()</code>, 
@@ -1294,7 +1283,6 @@ public class TimerService implements ITimerService {
 	
 	RuntimeService.getInstance().registerStatemachine(statemachine, 100);
 }
-
 </code></pre>
 		<p>First a new instance of the generated statemachine is created. Because the traffic light statechart uses timing clauses the default implementation of the 
 			<code>TimerService</code> is set. In the next steps the statemachine is initialized and entered. After the enter method ist executed the machine stays in a defined state. Finally the statemachine is passed to the runtime service. This service executes the 
@@ -1314,7 +1302,6 @@ public class TimerService implements ITimerService {
 	pedestrianLightFigure.setGreen(statemachine.getSCIPedestrian()
 			.getGreen());
 }
-
 </code></pre>
 		<p>The generated code contains getters and setters for each variable and event. So it&#8217;s easy to read values from and write values to a statemachine or raise events and ask the statemachine if outgoing events were raised during the last run to completion step. Within 
 			<code>readStatemachineOutput()</code> method these methods are used to read the light values from the statemachine and set them to the ui elements. Within the methods 
@@ -1330,12 +1317,42 @@ protected void tearDownStatemachine() {
 	statemachine.getTimerService().cancel();
 	RuntimeService.getInstance().cancelTimer();
 }
-
 </code></pre>
 		<p>If the UI thread has been terminated by the user, the state machine will be shut down. It is necessary to end the timer service. Finally the runtime service is cancelled.</p>
 		<h3 id="SpecificationsofCcode">Specifications of C code</h3>
 		<p>For C you can checkout the project &#8218;org.yakindu.examples.c.trafficlight&#8217; from the Yakindu google code repository ( 
 			<a href="http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples">Google code link</a> ). The C example contains the statechart, sgen model, graphical widgets and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt. To execute the c example you can run the file org_yakindu_sct_examples_c_trafficlight as &#8218;Local C/C++ application&#8217; from the eclipse &#8218;Run As&#8217; context menu.
 		</p>
+		<h4 id="Generatedheaderfiles">Generated header files</h4>
+		<p>The C code generator generates three header files. The first one is &#8218;sc_types.h&#8217;:</p>
+		<pre><code>#ifndef SC_TYPES_H_
+#define SC_TYPES_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif 
+
+#include &lt;stdint.h&gt;
+#include &lt;stdbool.h&gt;
+ 				
+typedef int_fast16_t  sc_short;
+typedef uint_fast16_t sc_ushort;
+typedef int32_t       sc_integer; 
+typedef uint32_t      sc_uinteger; 
+typedef double        sc_real;
+typedef char*         sc_string;
+
+typedef void*         sc_eventid;
+
+#ifdef __cplusplus
+}
+#endif 
+#define sc_boolean bool
+#define bool_true true
+#define bool_false false
+
+#endif /* SC_TYPES_H_ */
+</code></pre>
+		<p></p>
 	</body>
 </html>

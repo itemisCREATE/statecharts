@@ -700,11 +700,9 @@ You find the generated code in the 'src-gen' folder of the traffic light example
 
 In the package 'org.yakindu.sct.examples.trafficlight.cyclebased' are the most basic statemachine interfaces and classes located. These are needed by each statemachine and are independend from the concrete statemachine design.
 
-
 h4. Interface IStatemachine
 
 The interface @IStatemachine@ is implemented by each generated statemachine:
-
 
 bc.. 
 package org.yakindu.sct.examples.trafficlight.cyclebased;
@@ -834,7 +832,6 @@ public interface ITimerService {
 	 */
 	public long getSystemTimeMillis();
 }
-
 p. The @ITimerService@ interface defines four methods. The @public void setTimer(TimeEvent event, long time, long cycleStartTime)@ method is called by a statemachine to tell the timer service that it has to start a timer for the given time event and raise it after the time given by the same named parameter is expired. It is important that within the 'setTimer' method only a timer thread or a hardware timer interrupt is started and no long time taking operations like Thread.sleep(...) or waiting are done. Otherwise the statemachine execution may hang within the timer service or it shows a not expected runtime behavior.
 
 To raise a @TimeEvent@ after the time is expired the method @onTimeEventRaised(TimeEvent timeEvent)@ has to be called on the statemachine (should be a @ITimedStatemachine@). So the time event is recognized by the statemachine and will be processed by the next run cycle. You can conclude that the runtime environment has to call the statemachines 'runCycle' method as often as needed to process time events raised by the timing service as fast as possible. If you have in example a time event which should be raised by the timer service after 500 ms and the runtime environment only calls the statemachines @runCycle@ method with a time period of 1000 ms the event could not be processed in the correct time.
@@ -904,7 +901,6 @@ public class TimeEvent {
 		return index;
 	}
 }
-
 p. A @TimeEvent@ holds a reference to the statemachine it belongs to and a flag if it should be raised periodically. These informations are needed by the timer service implementation to raise the time event on the corresponding statemachine. The index field is used by the timed statemachine internally.
 
 
@@ -974,12 +970,9 @@ public class TimerService implements ITimerService {
 		return System.currentTimeMillis();
 	}
 }
-
-
 h4. Runtime service
 
 The runtime service class can be used by client implementations to execute a run to completion step of a statemachine periodically.
-
 
 h4. Interfaces, Variable and Event access
 
@@ -990,7 +983,6 @@ interface:
 	var a:boolean
 	in event evA:boolean
 	out event evB:integer
-
 p. The generated interface code looks like following:
 
 bc.. 
@@ -1006,7 +998,6 @@ public interface IDefaultSMStatemachine extends IStatemachine {
 
 	public SCInterface getSCInterface();
 }
-
 p. For the unnamed statechart interface a java interface @SCInterface@ is generated. For the incoming event 'evA' a raise method with a boolean parameter is created because the event has a boolean type set. For the outgoing event 'evB' the methods @isRaisedEvB()@ and @getEvBValue()@ are generated. The first one can be used to determine if the event is raised by the statemachine and the second method serves to query the boolean value of the event. For variables getters and setters are generated too. Additionally the parent interface decribes getter methods to acquire each nested interface.
 
 The statemachine implements the parent interface by iteself and each nested interface is implemented as internal class. It holds an instance of each nested interface implementation which is accessible through a getter method. Have a look at the code snipped of the 'unnamed' default interface implementation:
@@ -1082,9 +1073,7 @@ public class DefaultSMStatemachine implements IDefaultSMStatemachine {
 			return sCInterface;
 	}
 }
-
 p. Now even a few notes on the naming of the generated interfaces and the value access of events. The default (unnamed) interface is named 'SCInterface'. If an interface has a dedicated name then this name is used with the prefix 'SCI' (e.g. 'SCIInterfacename'). Additionally a value of an event can only be accessed if the event is occured during the run to completion step. Otherwise an @IllegalStateException@ is thrown by the interface.
-
 
 h4. Interface observers
 
@@ -1108,9 +1097,7 @@ public interface IDefaultSMStatemachine extends IStatemachine {
 
 	public SCInterface getSCInterface();
 }
-
 p. An additional interface @SCInterfaceListener@ is generated. This interface has to be implemented by the user and contains callback methods for each outgoing event. So the listener get notified if a outgoing event is raised by the statemachine internally. To add or remove a listener from an interface use the @getListeners()@ method of the associated interface. This method returns a @java.util.list@ which is parameterized with the appropriate listener type. The operations within the callback should not take a long process time because the statemachine execution may hang too long which leads to a not expected runtime behavior.
-
 
 h4. Operation callbacks
 
@@ -1162,7 +1149,6 @@ public static void main(String[] args) {
 	statemachine.enter();
 	statemachine.runCycle();
 }
-
 h4. Integration of generated code
 
 To get a clue how to integrate the generated java statemachines into your existing projects have a look at the
@@ -1173,7 +1159,6 @@ public static void main(String[] args) {
 
 	new CrossingDemoCycleBased().runTrafficLight();
 }
-
 p. A new instance of the class is created and the method @runTrafficLight()@ is directly called. This method consist in the super class:
 
 bc.. 
@@ -1196,7 +1181,6 @@ public void runTrafficLight() {
 
 		tearDownStatemachine();
 }
-
 p. This method setups the statemachine and creates the UI content. In a while loop the content of the statemachine is read and the ui is repainted. If the ui shell is closed the loop is left and the statemachine is teared down. The really interresting methods are @setUpAndRunStatemachine()@, @readStatemachinOutput@ and @tearDownStatemachine()@:
 
 bc.. 
@@ -1209,7 +1193,6 @@ protected void setUpAndRunStatemachine() {
 	
 	RuntimeService.getInstance().registerStatemachine(statemachine, 100);
 }
-
 p. First a new instance of the generated statemachine is created. Because the traffic light statechart uses timing clauses the default implementation of the @TimerService@ is set. In the next steps the statemachine is initialized and entered. After the enter method ist executed the machine stays in a defined state. Finally the statemachine is passed to the runtime service. This service executes the @runCycle()@ method of the statemachine every 100 ms. So the statemachine executes a run to completion step every 100 ms.
 
 bc.. 
@@ -1227,7 +1210,6 @@ protected void readStatemachineOutput() {
 	pedestrianLightFigure.setGreen(statemachine.getSCIPedestrian()
 			.getGreen());
 }
-
 p. The generated code contains getters and setters for each variable and event. So it's easy to read values from and write values to a statemachine or raise events and ask the statemachine if outgoing events were raised during the last run to completion step. Within @readStatemachineOutput()@ method these methods are used to read the light values from the statemachine and set them to the ui elements. Within the methods @pedestrianRequestButtonClicked()@ and @onOffButtonClicked()@ some events are raised.
 
 Hint:
@@ -1240,10 +1222,255 @@ protected void tearDownStatemachine() {
 	statemachine.getTimerService().cancel();
 	RuntimeService.getInstance().cancelTimer();
 }
-
 p. If the UI thread has been terminated by the user, the state machine will be shut down. It is necessary to end the timer service. Finally the runtime service is cancelled.
-
 
 h3. Specifications of C code
 
 For C you can checkout the project 'org.yakindu.examples.c.trafficlight' from the Yakindu google code repository ( "Google code link":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples ). The C example contains the statechart, sgen model, graphical widgets and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt. To execute the c example you can run the file org_yakindu_sct_examples_c_trafficlight as 'Local C/C++ application' from the eclipse 'Run As' context menu.
+
+h4. Generated header files
+
+The C code generator generates three header files. The first one is 'sc_types.h':
+
+bc.. 
+#ifndef SC_TYPES_H_
+#define SC_TYPES_H_
+
+#ifdef __cplusplus
+extern "C" {
+#endif 
+
+#include <stdint.h>
+#include <stdbool.h>
+ 				
+typedef int_fast16_t  sc_short;
+typedef uint_fast16_t sc_ushort;
+typedef int32_t       sc_integer; 
+typedef uint32_t      sc_uinteger; 
+typedef double        sc_real;
+typedef char*         sc_string;
+
+typedef void*         sc_eventid;
+
+#ifdef __cplusplus
+}
+#endif 
+#define sc_boolean bool
+#define bool_true true
+#define bool_false false
+
+#endif /* SC_TYPES_H_ */
+p. It contains some basic definitions for C++ compiler compatibility and typedefs to map the Yakindu statechart types to C types. The next header file is named like the statechart. For the traffic light example it is called 'TrafficLightWaiting.h':
+
+bc.. 
+#ifndef TRAFFICLIGHTWAITING_H_
+#define TRAFFICLIGHTWAITING_H_
+
+#include "sc_types.h"
+
+#ifdef __cplusplus
+extern "C" { 
+#endif 
+
+/*! \file Header of the state machine 'TrafficLightWaiting'.
+*/
+
+//! enumeration of all states 
+typedef enum {
+	TrafficLightWaiting_main_region_on ,
+	TrafficLightWaiting_main_region_on_r1_StreetGreen ,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting ,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn ,
+	TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff ,
+	TrafficLightWaiting_main_region_on_r1_StreetAttention ,
+	TrafficLightWaiting_main_region_on_r1_StreetRed ,
+	TrafficLightWaiting_main_region_on_r1_PedestrianGreen ,
+	TrafficLightWaiting_main_region_on_r1_PedestrianRed ,
+	TrafficLightWaiting_main_region_on_r1_StreetPrepared ,
+	TrafficLightWaiting_main_region_off ,
+	TrafficLightWaiting_main_region_off_r1_YellowOn ,
+	TrafficLightWaiting_main_region_off_r1_YellowOff ,
+	TrafficLightWaiting_last_state
+} TrafficLightWaitingStates;
+
+//! Type definition of the data structure for the TrafficLightWaitingIfaceTrafficLight interface scope.
+typedef struct {
+	sc_boolean  red;
+	sc_boolean  yellow;
+	sc_boolean  green;
+} TrafficLightWaitingIfaceTrafficLight;
+
+//! Type definition of the data structure for the TrafficLightWaitingIfacePedestrian interface scope.
+typedef struct {
+	sc_boolean  request;
+	sc_boolean  red;
+	sc_boolean  green;
+} TrafficLightWaitingIfacePedestrian;
+
+//! Type definition of the data structure for the TrafficLightWaitingIface interface scope.
+typedef struct {
+	sc_boolean pedestrianRequest_raised;
+	sc_boolean onOff_raised;
+} TrafficLightWaitingIface;
+
+//! Type definition of the data structure for the TrafficLightWaitingTimeEvents interface scope.
+typedef struct {
+	sc_boolean TrafficLightWaiting_main_region_on_r1_PedWaiting_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOn_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_on_r1_PedWaiting_r1_waitOff_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_on_r1_StreetAttention_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_on_r1_StreetRed_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_on_r1_PedestrianGreen_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_on_r1_PedestrianRed_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_on_r1_StreetPrepared_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_off_r1_YellowOn_time_event_0_raised;
+	sc_boolean TrafficLightWaiting_main_region_off_r1_YellowOff_time_event_0_raised;
+} TrafficLightWaitingTimeEvents;
+
+
+//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
+#define TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES 1
+
+/*! Type definition of the data structure for the TrafficLightWaiting state machine.
+This data structure has to be allocated by the client code. */
+typedef struct {
+	TrafficLightWaitingStates stateConfVector[TRAFFICLIGHTWAITING_MAX_ORTHOGONAL_STATES];
+	sc_ushort stateConfVectorPosition; 
+	
+	TrafficLightWaitingIfaceTrafficLight ifaceTrafficLight;
+	TrafficLightWaitingIfacePedestrian ifacePedestrian;
+	TrafficLightWaitingIface iface;
+	TrafficLightWaitingTimeEvents timeEvents;
+} TrafficLightWaiting;
+
+/*! Initializes the TrafficLightWaiting state machine data structures. Must be called before first usage.*/
+extern void trafficLightWaiting_init(TrafficLightWaiting* handle);
+
+/*! Activates the state machine */
+extern void trafficLightWaiting_enter(TrafficLightWaiting* handle);
+
+/*! Deactivates the state machine */
+extern void trafficLightWaiting_exit(TrafficLightWaiting* handle);
+
+/*! Performs a 'run to completion' step. */
+extern void trafficLightWaiting_runCycle(TrafficLightWaiting* handle);
+
+/*! Raises a time event. */
+extern void trafficLightWaiting_raiseTimeEvent(TrafficLightWaiting* handle, sc_eventid evid);
+
+/*! Gets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */ 
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_red(TrafficLightWaiting* handle);
+/*! Sets the value of the variable 'red' that is defined in the interface scope 'TrafficLight'. */ 
+extern void trafficLightWaitingIfaceTrafficLight_set_red(TrafficLightWaiting* handle, sc_boolean value);
+/*! Gets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */ 
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_yellow(TrafficLightWaiting* handle);
+/*! Sets the value of the variable 'yellow' that is defined in the interface scope 'TrafficLight'. */ 
+extern void trafficLightWaitingIfaceTrafficLight_set_yellow(TrafficLightWaiting* handle, sc_boolean value);
+/*! Gets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */ 
+extern sc_boolean trafficLightWaitingIfaceTrafficLight_get_green(TrafficLightWaiting* handle);
+/*! Sets the value of the variable 'green' that is defined in the interface scope 'TrafficLight'. */ 
+extern void trafficLightWaitingIfaceTrafficLight_set_green(TrafficLightWaiting* handle, sc_boolean value);
+
+/*! Gets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */ 
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_request(TrafficLightWaiting* handle);
+/*! Sets the value of the variable 'request' that is defined in the interface scope 'Pedestrian'. */ 
+extern void trafficLightWaitingIfacePedestrian_set_request(TrafficLightWaiting* handle, sc_boolean value);
+/*! Gets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */ 
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle);
+/*! Sets the value of the variable 'red' that is defined in the interface scope 'Pedestrian'. */ 
+extern void trafficLightWaitingIfacePedestrian_set_red(TrafficLightWaiting* handle, sc_boolean value);
+/*! Gets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */ 
+extern sc_boolean trafficLightWaitingIfacePedestrian_get_green(TrafficLightWaiting* handle);
+/*! Sets the value of the variable 'green' that is defined in the interface scope 'Pedestrian'. */ 
+extern void trafficLightWaitingIfacePedestrian_set_green(TrafficLightWaiting* handle, sc_boolean value);
+
+/*! Raises the in event 'pedestrianRequest' that is defined in the default interface scope. */ 
+extern void trafficLightWaitingIface_raise_pedestrianRequest(TrafficLightWaiting* handle);
+
+/*! Raises the in event 'onOff' that is defined in the default interface scope. */ 
+extern void trafficLightWaitingIface_raise_onOff(TrafficLightWaiting* handle);
+
+
+
+/*! Checks if the specified state is active. */
+extern sc_boolean trafficLightWaiting_isActive(TrafficLightWaiting* handle, TrafficLightWaitingStates state);
+
+#ifdef __cplusplus
+}
+#endif 
+
+#endif /* TRAFFICLIGHTWAITING_H_ */
+
+p. Within this header file an enum that contains the state names is defined as well as the data structures for each interface a statechart has. Aditionally a structure for the time events the statechart uses is defined. The interface and time events data structures are nested in the parent structure @TrafficLightWaiting@. The client has to allocate this structure. In general it is a parameter of the most methods the statechart defines. In the following it is called statechart data structure.
+
+h5. Base statechart methods
+
+The most basic methods the statechart defines are methods to init, enter, exit and to start a run to completion step. In the header file they got the statechart name as prefix and expect the parent data structure as parameter. For example the init method of the traffic light example is called @extern void trafficLightWaiting_init(TrafficLightWaiting* handle)@.
+
+The init method is used to initialize the statechart data structure. Variables are initialized to a default value. If you have initialized variables in the statechart definition these initializations are done in the init method too. The enter method should be called if the statemachine is entered. It sets the statemachine into a defined state. The exit method is used to leave a statemachine statefully. If for example a history state is used in one of the top regions the last active state is stored and the statemachine is leaved via exit and reentered via enter it continues working with this state. The run cycle method is used to trigger a run to completion step in which the statemachine evaluates arising events and computes possible state changes.  A run to completion step consists in a simplified view of the following steps:
+
+* Clear list of outgoing events.
+* Check whether events have occurred which lead to a state change
+* If a state change has to be done:
+** Execute exit actions of leaving state.
+** Save history state if necessary.
+** Set the new State active.
+** Execute entry action of the new state.
+* Clear list of incoming events.
+
+h5. Variable and event access
+
+The getters and setters for each variable and event are contained in the header file too. The method names uses the pattern <statechart name>Iface<Interface name>_<set, get or raise>_<variable / event name>. For example the getter for the variable 'red' of the 'pedestrian' interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
+
+h4. Optional header file for timing service support and operation callbacks
+
+If the statechart uses timing or external operations an additional header file with the name pattern <statechart name>Required.h is generated. Because the traffic light example uses timing it contains such a header file:
+
+bc.. 
+extern "C" {
+#endif 
+
+/*! \file This header defines prototypes for all functions that are required by the state machine implementation.
+
+This is a state machine uses time events which require access to a timing service. Thus the function prototypes:
+	- trafficLightWaiting_setTimer and
+	- trafficLightWaiting_unsetTimer
+are defined.
+
+		
+These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
+There are some constraints that have to be considered for the implementation of these functions:
+	- never call the statechart API functions from within these functions.
+	- make sure that the execution time is as short as possible.
+ 
+*/
+
+//
+// This is a timed state machine that requires timer services
+// 
+
+//! This function has to set up timers for the time events that are required by the state machine.
+/*! 
+	This function will be called for each time event that is relevant for a state when a state will be entered.
+	\param evid An unique identifier of the event.
+	\time_ms The time in milli seconds
+	\periodic Indicates the the time event must be raised periodically until the timer is unset 
+*/
+extern void trafficLightWaiting_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
+
+//! This function has to unset timers for the time events that are required by the state machine.
+/*! 
+	This function will be called for each time event taht is relevant for a state when a state will be left.
+	\param evid An unique identifier of the event.
+*/
+extern void trafficLightWaiting_unsetTimer(const sc_eventid evid);
+
+#ifdef __cplusplus
+}
+#endif 
+
+#endif /* TRAFFICLIGHTWAITINGREQUIRED_H_ */
+
+p. Basically the correct handling of time has to be implemented by the developer because timer functions generally depend on the hardware target used. So for every hardware target a method to set a timer and a method to reset it has to be implemented externally and linked to the generated code. In case of our trafficlight example the method @trafficLightWaiting_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ is called by the statemachine to notify the timer service that it has to start a timer for the given time event identifier and raise it after the time given by the same named parameter is expired. It is important that within the 'setTimer' method only a timer thread or a hardware timer interrupt is started and no long time taking operations like sleeping threads or waiting are done. Otherwise the statemachine execution may hang within the timer service or it shows a not expected runtime behavior. The parameter 'periodic' is set to true if the time event should be raised periodically.
+
+The method @trafficLightWaiting_unsetTimer(const sc_eventid evid)@ is called by the statemachine to notify the timer service to reset the timer for the given event identifier.
