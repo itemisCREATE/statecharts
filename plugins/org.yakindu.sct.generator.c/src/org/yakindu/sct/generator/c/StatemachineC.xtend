@@ -18,6 +18,8 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.GenmodelEntries
 
 class StatemachineC {
 	
@@ -25,13 +27,15 @@ class StatemachineC {
 	@Inject extension Navigation
 	@Inject extension FlowCode
 	@Inject extension ITypeSystemAccess
+	@Inject extension GenmodelEntries
 	
-	
-	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
-		 fsa.generateFile(flow.module.c, flow.statemachineCContent )
+	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+		 fsa.generateFile(flow.module.c, flow.statemachineCContent(entry) )
 	}
 	
-	def statemachineCContent(ExecutionFlow it) '''
+	def statemachineCContent(ExecutionFlow it, GeneratorEntry entry) '''
+		«entry.licenseText»
+		
 		#include <stdlib.h>
 		#include <string.h>
 		#include "«typesModule.h»"

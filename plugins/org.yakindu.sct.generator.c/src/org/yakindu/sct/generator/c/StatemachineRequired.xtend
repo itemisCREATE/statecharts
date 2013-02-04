@@ -18,18 +18,22 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class StatemachineRequired {
 
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
 	@Inject extension ITypeSystemAccess
+	@Inject extension GenmodelEntries
 	
-	def generateStatemachineClientH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
-		 fsa.generateFile(flow.module.client.h, flow.statemachineClientHContent )
+	def generateStatemachineClientH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+		 fsa.generateFile(flow.module.client.h, flow.statemachineClientHContent(entry) )
 	}
 	
-	def statemachineClientHContent(ExecutionFlow it) '''
+	def statemachineClientHContent(ExecutionFlow it, GeneratorEntry entry) '''
+			«entry.licenseText»
+			
 			#ifndef «module.client.define»_H_
 			#define «module.client.define»_H_
 

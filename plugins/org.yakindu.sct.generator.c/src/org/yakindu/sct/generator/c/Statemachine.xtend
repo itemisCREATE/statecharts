@@ -23,18 +23,22 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class Statemachine {
 	
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
 	@Inject extension ITypeSystemAccess
+	@Inject extension GenmodelEntries
 	
-	def generateStatemachineH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
-		 fsa.generateFile(flow.module.h, flow.statemachineHContent )
+	def generateStatemachineH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+		 fsa.generateFile(flow.module.h, flow.statemachineHContent(entry) )
 	}
 	
-	def statemachineHContent(ExecutionFlow it) '''
+	def statemachineHContent(ExecutionFlow it,  GeneratorEntry entry) '''
+			«entry.licenseText»
+			
 			#ifndef «module.define»_H_
 			#define «module.define»_H_
 

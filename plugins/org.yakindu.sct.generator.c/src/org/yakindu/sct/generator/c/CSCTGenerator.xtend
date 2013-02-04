@@ -31,12 +31,12 @@ class CSCTGenerator implements IExecutionFlowGenerator {
 	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
-		flow.generateTypesH(flow.sourceElement as Statechart, fsa)
+		flow.generateTypesH(flow.sourceElement as Statechart, fsa, entry)
 		
-		flow.generateStatemachineH(flow.sourceElement as Statechart, fsa)
-		flow.generateStatemachineClientH(flow.sourceElement as Statechart, fsa)
+		flow.generateStatemachineH(flow.sourceElement as Statechart, fsa, entry)
+		flow.generateStatemachineClientH(flow.sourceElement as Statechart, fsa, entry)
 
-		flow.generateStatemachineC(flow.sourceElement as Statechart, fsa)
+		flow.generateStatemachineC(flow.sourceElement as Statechart, fsa, entry)
 
 	}
 
