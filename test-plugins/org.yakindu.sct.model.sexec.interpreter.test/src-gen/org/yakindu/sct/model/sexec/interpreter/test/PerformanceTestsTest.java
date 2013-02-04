@@ -22,12 +22,12 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import static junit.framework.Assert.*;
 /**
- *  Unit TestCase for SameNameDifferentRegion
+ *  Unit TestCase for PerformanceTest
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class SameNameDifferentRegionTest extends AbstractExecutionFlowTest {
+public class PerformanceTestsTest extends AbstractExecutionFlowTest {
 
 	@Inject
 	private SCTUnitTestModels models;
@@ -35,20 +35,61 @@ public class SameNameDifferentRegionTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("SameNameDifferentRegion.sct");
+				.loadExecutionFlowFromResource("PerformanceTest.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void sameNameDifferenRegionTest() throws Exception {
+	public void test_100_000() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("StateA"));
-		raiseEvent("e1");
-		interpreter.runCycle();
-		assertTrue(isActive("StateB"));
-		assertTrue(isActive("StateA"));
-		raiseEvent("e1");
-		interpreter.runCycle();
-		assertTrue(isActive("StateB"));
-		assertTrue(isActive("StateB"));
+		assertTrue(isActive("A"));
+		while (getInteger("c") < 100000) {
+			if (isActive("A")) {
+				raiseEvent("e1");;
+			} else {
+				if (getInteger("c") % 2 == 0) {
+					raiseEvent("e2");;
+				} else {
+					raiseEvent("e3");;
+				};
+			}
+			interpreter.runCycle();
+		}
+		assertTrue(getInteger("a") > 2);
+	}
+	@Test
+	public void test_1_000_000() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("A"));
+		while (getInteger("c") < 1000000) {
+			if (isActive("A")) {
+				raiseEvent("e1");;
+			} else {
+				if (getInteger("c") % 2 == 0) {
+					raiseEvent("e2");;
+				} else {
+					raiseEvent("e3");;
+				};
+			}
+			interpreter.runCycle();
+		}
+		assertTrue(getInteger("a") > 2);
+	}
+	@Test
+	public void test_10_000_000() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("A"));
+		while (getInteger("c") < 10000000) {
+			if (isActive("A")) {
+				raiseEvent("e1");;
+			} else {
+				if (getInteger("c") % 2 == 0) {
+					raiseEvent("e2");;
+				} else {
+					raiseEvent("e3");;
+				};
+			}
+			interpreter.runCycle();
+		}
+		assertTrue(getInteger("a") > 2);
 	}
 }
