@@ -22,12 +22,12 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import static junit.framework.Assert.*;
 /**
- *  Unit TestCase for SameNameDifferentRegion
+ *  Unit TestCase for StateWithEmptyRegion
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class SameNameDifferentRegionTest extends AbstractExecutionFlowTest {
+public class StateWithEmptyRegionTest extends AbstractExecutionFlowTest {
 
 	@Inject
 	private SCTUnitTestModels models;
@@ -35,20 +35,14 @@ public class SameNameDifferentRegionTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("SameNameDifferentRegion.sct");
+				.loadExecutionFlowFromResource("StateWithEmptyRegion.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void sameNameDifferenRegionTest() throws Exception {
+	public void StateWithEmptyRegionTest() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("StateA"));
-		raiseEvent("e1");
+		assertTrue(isActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("StateB"));
-		assertTrue(isActive("StateA"));
-		raiseEvent("e1");
-		interpreter.runCycle();
-		assertTrue(isActive("StateB"));
-		assertTrue(isActive("StateB"));
+		assertTrue(isActive("B"));
 	}
 }
