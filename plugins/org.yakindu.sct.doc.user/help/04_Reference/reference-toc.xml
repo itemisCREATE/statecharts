@@ -90,7 +90,15 @@
 				<topic href="help/04_Reference/reference.html#Integrationofgeneratedcode" label="Integration of generated code"></topic>
 			</topic>
 			<topic href="help/04_Reference/reference.html#SpecificationsofCcode" label="Specifications of C code">
-				<topic href="help/04_Reference/reference.html#Generatedheaderfiles" label="Generated header files"></topic>
+				<topic href="help/04_Reference/reference.html#Generatedheaderfiles" label="Generated header files">
+					<topic href="help/04_Reference/reference.html#Basestatechartmethods" label="Base statechart methods"></topic>
+					<topic href="help/04_Reference/reference.html#Variableandeventaccess" label="Variable and event access"></topic>
+				</topic>
+				<topic href="help/04_Reference/reference.html#Optionalheaderfile" label="Optional header file">
+					<topic href="help/04_Reference/reference.html#Timingservicesupport" label="Timing service support"></topic>
+					<topic href="help/04_Reference/reference.html#Operationcallbacks2" label="Operation callbacks"></topic>
+				</topic>
+				<topic href="help/04_Reference/reference.html#Integrationofgeneratedcode2" label="Integration of generated code"></topic>
 			</topic>
 		</topic>
 	</topic>
