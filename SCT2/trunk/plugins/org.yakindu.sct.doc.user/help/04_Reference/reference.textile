@@ -1422,9 +1422,13 @@ h5. Variable and event access
 
 The getters and setters for each variable and event are contained in the header file too. The method names uses the pattern <statechart name>Iface<Interface name>_<set, get or raise>_<variable / event name>. For example the getter for the variable 'red' of the 'pedestrian' interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
 
-h4. Optional header file for timing service support and operation callbacks
+h4. Optional header file
 
-If the statechart uses timing or external operations an additional header file with the name pattern <statechart name>Required.h is generated. Because the traffic light example uses timing it contains such a header file:
+If the statechart uses timing or external operations an additional header file with the name pattern <statechart name>Required.h is generated. This header file defines method hooks the client code has to implement externally. 
+
+h5. Timing service support
+
+p. Because the traffic light example uses timing it contains such a header file:
 
 bc.. 
 extern "C" {
@@ -1471,6 +1475,132 @@ extern void trafficLightWaiting_unsetTimer(const sc_eventid evid);
 
 #endif /* TRAFFICLIGHTWAITINGREQUIRED_H_ */
 
-p. Basically the correct handling of time has to be implemented by the developer because timer functions generally depend on the hardware target used. So for every hardware target a method to set a timer and a method to reset it has to be implemented externally and linked to the generated code. In case of our trafficlight example the method @trafficLightWaiting_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ is called by the statemachine to notify the timer service that it has to start a timer for the given time event identifier and raise it after the time given by the same named parameter is expired. It is important that within the 'setTimer' method only a timer thread or a hardware timer interrupt is started and no long time taking operations like sleeping threads or waiting are done. Otherwise the statemachine execution may hang within the timer service or it shows a not expected runtime behavior. The parameter 'periodic' is set to true if the time event should be raised periodically.
+p. Basically the correct handling of time has to be implemented by the developer because timer functions generally depend on the hardware target used. So for every hardware target a method to set a timer and a method to reset it has to be implemented externally and linked to the generated code. In case of our trafficlight example the method @trafficLightWaiting_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic)@ is called by the statemachine to notify the timer service that it has to start a timer for the given time event identifier and raise it after the time given by the same named parameter is expired. It is important that within the 'setTimer' method only a timer thread or a hardware timer interrupt is started and no long time taking operations like sleeping threads or waiting are done. Never call the statechart API functions from within these functions. Otherwise the statemachine execution may hang within the timer service or it shows a not expected runtime behavior. The parameter 'periodic' is set to true if the time event should be raised periodically by the timer service.
 
 The method @trafficLightWaiting_unsetTimer(const sc_eventid evid)@ is called by the statemachine to notify the timer service to reset the timer for the given event identifier.
+
+To notify the statemachine of the occurence of a time event the header of the statemachine defines a 'raiseTimeEvent' method. In case of the traffic light example it's named @trafficLightWaiting_raiseTimeEvent(TrafficLightWaiting* handle, sc_eventid evid)@ (in TrafficLightWaiting.h).
+
+h5. Operation callbacks
+
+The yakindu statecharts support the declaration of operations which can be used within a statechart as actions. These operations have to be implemented by the user before a statechart is executable. Here is an example statechart using an operation:
+
+!images/OperationExample.png!
+
+Now have a look at the generated code:
+
+bc.. 
+#ifndef DEFAULTREQUIRED_H_
+#define DEFAULTREQUIRED_H_
+
+#include "sc_types.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif 
+
+/*! \file This header defines prototypes for all functions that are required by the state machine implementation.
+
+
+This state machine makes use of operations declared in the state machines interface or internal scopes. Thus the function prototypes:
+	- defaultIface_myOperation
+are defined.
+		
+These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
+There are some constraints that have to be considered for the implementation of these functions:
+	- never call the statechart API functions from within these functions.
+	- make sure that the execution time is as short as possible.
+ 
+*/
+
+extern sc_integer defaultIface_myOperation(const sc_integer param1, const sc_boolean param2);
+
+#ifdef __cplusplus
+}
+#endif 
+
+#endif /* DEFAULTREQUIRED_H_ */
+
+p. An additional method @sc_integer defaultIface_myOperation(const sc_integer param1, const sc_boolean param2)@ is generated. This method has to be implemented by the user and linked with the generated code so that the statechart can use it.
+
+h4. Integration of generated code
+
+To get a clue how to integrate the generated c statemachines into your existing projects have a look at the
+@main.cpp@ file. The code starts with the main method:
+
+bc.. 
+#include "org_yakindu_sct_examples_c_trafficlight.h"
+
+#include <QtGui>
+#include <QApplication>
+#include "src-gen/sc_types.h"
+#include "src-gen/TrafficLightWaiting.h"
+#include "statemachine/TrafficLightTimer.h"
+#include "statemachine/TrafficLightRunner.h"
+
+TrafficLightTimer *timer;
+
+int main(int argc, char *argv[]) {
+	TrafficLightWaiting handle;
+	trafficLightWaiting_init(&handle);
+	timer = new TrafficLightTimer(&handle);
+	trafficLightWaiting_enter(&handle);
+	QApplication a(argc, argv);
+	TrafficLightRunner *runner = new TrafficLightRunner(&handle, 100);
+	org_yakindu_sct_examples_c_trafficlight w(0, runner);
+	w.show();
+	int ret = a.exec();
+	return ret;
+}
+
+void trafficLightWaiting_setTimer(const sc_eventid evid,
+		const sc_integer time_ms, const sc_boolean periodic) {
+	timer->setTimer(evid, time_ms, periodic);
+}
+
+void trafficLightWaiting_unsetTimer(const sc_eventid evid) {
+	timer->unsetTimer(evid);
+}
+
+p. First an instance of the main statemchine data structure is created and intialized with the @trafficLightWaiting_init(&handle)@ method. In the next step the Timer is instantiated. The class @TrafficLightTimer@ represents an implementation of a timer service and uses the timer fuctionality of the Qt framework. The @TrafficLightRunner@ solves as a run time service which executes every 100 ms a run to completion step of the statemachine. Within the class @org_yakindu_sct_examples_c_trafficlight@ the runner class and the gui are wired:
+
+bc.. 
+#include "org_yakindu_sct_examples_c_trafficlight.h"
+
+org_yakindu_sct_examples_c_trafficlight::org_yakindu_sct_examples_c_trafficlight(
+		QWidget *parent, TrafficLightRunner *runner) :
+		QMainWindow(parent) {
+
+	ui.setupUi(this);
+	crossing = new CrossingWidget(this);
+
+	trafficLight = new TrafficLightWidget(crossing);
+	trafficLight->setGeometry(275, 75, 30, 90);
+
+	pedestrianLight = new PedestrianLightWidget(crossing);
+	pedestrianLight->setGeometry(50, 10, 70, 20);
+
+	connect(runner, SIGNAL(cycleDone(TrafficLightWaiting*)), this, SLOT(update(TrafficLightWaiting*)));
+
+	pedestrianReq = new QPushButton("pedestrian request", this);
+	pedestrianReq->setGeometry(1, 365, 150, 30);
+	connect(pedestrianReq, SIGNAL(released()), runner, SLOT(raisePedestrianRequest()));
+
+
+	off = new QPushButton("off / on", this);
+	off->setGeometry(249, 365, 150, 30);
+	connect(off, SIGNAL(released()), runner, SLOT(raiseOnOff()));
+}
+
+void org_yakindu_sct_examples_c_trafficlight::update(
+		TrafficLightWaiting *handle) {
+	trafficLight->setSignals(handle->ifaceTrafficLight.red,
+			handle->ifaceTrafficLight.yellow, handle->ifaceTrafficLight.green);
+	pedestrianLight->setSignals(handle->ifacePedestrian.request,
+			handle->ifacePedestrian.red, handle->ifacePedestrian.green);
+	QMainWindow::update();
+}
+
+org_yakindu_sct_examples_c_trafficlight::~org_yakindu_sct_examples_c_trafficlight() {
+
+}
