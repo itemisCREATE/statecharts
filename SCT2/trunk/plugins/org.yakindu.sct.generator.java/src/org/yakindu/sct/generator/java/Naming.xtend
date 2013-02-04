@@ -99,11 +99,11 @@ class Naming implements JavaKeywords {
 	}
 	
 	def String getInterfaceName(InterfaceScope it) {  
-		if (name != null && !name.toLowerCase().matches("default")) {
+		if (name != null) {
 			return "SCI" + name.toFirstUpper()
 		}
 		else {
-			return "SCIDefault";
+			return "SCInterface";
 		}
 	}
 	
