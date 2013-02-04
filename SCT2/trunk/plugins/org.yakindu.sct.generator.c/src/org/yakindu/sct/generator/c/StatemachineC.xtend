@@ -40,8 +40,9 @@ class StatemachineC {
 		#include <string.h>
 		#include "«typesModule.h»"
 		#include "«module.h»"
-		#include "«module.client.h»"
-
+		«IF timed || !it.operations.empty»
+			#include "«module.client.h»"
+		«ENDIF»
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		

@@ -28,13 +28,17 @@ class CSCTGenerator implements IExecutionFlowGenerator {
 	@Inject extension Statemachine
 	@Inject extension StatemachineC
 	@Inject extension StatemachineRequired
+	@Inject extension Navigation
 	
 	override generate(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
 
 		flow.generateTypesH(flow.sourceElement as Statechart, fsa, entry)
 		
 		flow.generateStatemachineH(flow.sourceElement as Statechart, fsa, entry)
-		flow.generateStatemachineClientH(flow.sourceElement as Statechart, fsa, entry)
+		
+		if (flow.timed || !flow.operations.empty) {
+			flow.generateStatemachineClientH(flow.sourceElement as Statechart, fsa, entry)
+		}
 
 		flow.generateStatemachineC(flow.sourceElement as Statechart, fsa, entry)
 
