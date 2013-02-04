@@ -14,17 +14,21 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class Types {
 	
 	@Inject extension Naming
+	@Inject extension GenmodelEntries
 	 
-	def generateTypesH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa) {
-		 fsa.generateFile(flow.typesModule.h, flow.typesHContent)
+	def generateTypesH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+		 fsa.generateFile(flow.typesModule.h, flow.typesHContent(entry))
 	}
 	
 	
-	def typesHContent(ExecutionFlow it) '''
+	def typesHContent(ExecutionFlow it, GeneratorEntry entry) '''
+		«entry.licenseText»
+		
 		#ifndef «typesModule.define»_H_
 		#define «typesModule.define»_H_
 		

@@ -39,6 +39,6 @@ public interface ICoreFeatureConstants {
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION = "inlineEnterRegion";
 	public static final String FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION = "inlineExitRegion";
 
-	public static final String LICENSE_HEADER = "licenseHeader";
+	public static final String LICENSE_HEADER = "LicenseHeader";
 	public static final String LICENSE_TEXT = "licenseText";
 }
