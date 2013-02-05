@@ -25,6 +25,9 @@ import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -33,7 +36,6 @@ import org.eclipse.ui.PlatformUI;
  */
 public class BreadcrumbViewerUtil {
 
-	// TODO: Performance
 	public static Diagram getDiagramContaining(EObject element) {
 		Resource eResource = element.eResource();
 		Collection<Diagram> objects = EcoreUtil.getObjectsByType(eResource.getContents(),
@@ -52,7 +54,6 @@ public class BreadcrumbViewerUtil {
 		return null;
 	}
 
-	// TODO: Performance
 	public static Diagram getSubDiagram(EObject element) {
 		Resource eResource = element.eResource();
 		Collection<Diagram> objects = EcoreUtil.getObjectsByType(eResource.getContents(),
@@ -69,7 +70,11 @@ public class BreadcrumbViewerUtil {
 		try {
 			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
 			final IWorkbenchPage wbPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-			wbPage.openEditor(new DiagramEditorInput(diagramToOpen), desc.getId());
+			if (diagramToOpen.getElement() instanceof Statechart) {
+				wbPage.openEditor(new FileEditorInput(file), desc.getId());
+			} else if (diagramToOpen.getElement() instanceof State) {
+				wbPage.openEditor(new DiagramEditorInput(diagramToOpen), desc.getId());
+			}
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
