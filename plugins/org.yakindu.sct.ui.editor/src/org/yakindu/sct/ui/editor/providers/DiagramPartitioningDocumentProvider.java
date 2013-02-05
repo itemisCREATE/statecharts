@@ -47,4 +47,13 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 		return super.setDocumentContent(document, editorInput);
 	}
 
+	@Override
+	protected void disposeElementInfo(Object element, ElementInfo info) {
+		Object content = info.fDocument.getContent();
+		info.fDocument.setContent(null);
+		// Unset the content first to avoid call to DiagramIOUtil.unload
+		super.disposeElementInfo(element, info);
+		info.fDocument.setContent(content);
+	}
+
 }
