@@ -11,12 +11,12 @@
 package org.yakindu.sct.refactoring.refactor.impl;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbViewerUtil;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
@@ -28,19 +28,22 @@ public class InlineSubdiagramRefactoring extends SubdiagramRefactoring {
 
 	@Override
 	public boolean isExecutable() {
-		return super.isExecutable() && !getInlineStyle().isBooleanValue();
+		return super.isExecutable() && getInlineStyle() != null && !getInlineStyle().isBooleanValue();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void internalExecute() {
-		getInlineStyle().setBooleanValue(true);
-
+		BooleanValueStyle inlineStyle = getInlineStyle();
+		if (inlineStyle == null) {
+			inlineStyle = createInlineStyle();
+			getContextObject().getStyles().add(inlineStyle);
+		}
+		inlineStyle.setBooleanValue(true);
 		View contextView = getContextObject();
 		State contextElement = (State) contextView.getElement();
-		Diagram inlineDiagram = findDiagramForState(contextElement);
-		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView,
-				SemanticHints.STATE_FIGURE_COMPARTMENT);
+		Diagram inlineDiagram = BreadcrumbViewerUtil.getSubDiagram(contextElement);
+		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
 
 		EList<View> children = inlineDiagram.getChildren();
 		for (View view : children) {
@@ -49,15 +52,4 @@ public class InlineSubdiagramRefactoring extends SubdiagramRefactoring {
 		getResource().getContents().remove(inlineDiagram);
 	}
 
-	protected Diagram findDiagramForState(State state) {
-		EList<EObject> contents = getResource().getContents();
-		for (EObject eObject : contents) {
-			if (eObject instanceof Diagram) {
-				if (EcoreUtil.equals(((Diagram) eObject).getElement(), state)) {
-					return (Diagram) eObject;
-				}
-			}
-		}
-		return null;
-	}
 }
