@@ -27,5 +27,4 @@ public class InlineSubdiagramHandler extends AbstractViewRefactoringHandler {
 	public AbstractRefactoring<View> createRefactoring() {
 		return new InlineSubdiagramRefactoring();
 	}
-
 }

@@ -29,18 +29,16 @@ public abstract class SubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	protected PreferencesHint preferencesHint = DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 
-	@SuppressWarnings("unchecked")
 	protected BooleanValueStyle getInlineStyle() {
-		BooleanValueStyle result = GMFNotationUtil.getBooleanValueStyle(
-				getContextObject(), INLINE_STYLE);
-		if (result == null) {
-			result = NotationFactory.eINSTANCE.createBooleanValueStyle();
-			result.setName(INLINE_STYLE);
-			result.setBooleanValue(true);
-			getContextObject().getStyles().add(result);
-		}
+		BooleanValueStyle result = GMFNotationUtil.getBooleanValueStyle(getContextObject(), INLINE_STYLE);
 		return result;
+	}
 
+	protected BooleanValueStyle createInlineStyle() {
+		BooleanValueStyle result = NotationFactory.eINSTANCE.createBooleanValueStyle();
+		result.setName(INLINE_STYLE);
+		result.setBooleanValue(true);
+		return result;
 	}
 
 }
