@@ -65,6 +65,17 @@ public class BreadcrumbViewerUtil {
 		return null;
 	}
 
+	public static void openEditor(IFile file) {
+		try {
+			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
+			final IWorkbenchPage wbPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			wbPage.openEditor(new FileEditorInput(file), desc.getId());
+		} catch (PartInitException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public static void openEditor(Diagram diagramToOpen) {
 		IFile file = WorkspaceSynchronizer.getFile(diagramToOpen.eResource());
 		try {
