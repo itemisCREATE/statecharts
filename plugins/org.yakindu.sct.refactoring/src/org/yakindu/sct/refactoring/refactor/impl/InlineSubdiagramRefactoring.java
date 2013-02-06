@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
@@ -42,14 +43,18 @@ public class InlineSubdiagramRefactoring extends SubdiagramRefactoring {
 		inlineStyle.setBooleanValue(true);
 		View contextView = getContextObject();
 		State contextElement = (State) contextView.getElement();
-		Diagram inlineDiagram = DiagramPartitioningUtil.getSubDiagram(contextElement);
-		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
+		Diagram diagramToInline = DiagramPartitioningUtil.getSubDiagram(contextElement);
+		View containerView = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
 
-		EList<View> children = inlineDiagram.getChildren();
+		EList<View> children = diagramToInline.getChildren();
 		for (View view : children) {
-			figureCompartment.insertChild(view);
+			containerView.insertChild(view);
+			EList<Edge> edges = diagramToInline.getEdges();
+			for (Edge edge : edges) {
+				containerView.getDiagram().insertEdge(edge);
+			}
 		}
-		getResource().getContents().remove(inlineDiagram);
-	}
 
+		getResource().getContents().remove(diagramToInline);
+	}
 }
