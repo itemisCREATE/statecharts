@@ -18,8 +18,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ColorConstants;
-import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.databinding.IEMFValueProperty;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
@@ -65,7 +63,7 @@ public class StatePropertySection extends
 	private Control txtName;
 	private Text txtDoc;
 
-	private UpdateLabelAdapter updateLabelAdapter = new UpdateLabelAdapter();
+	//private UpdateLabelAdapter updateLabelAdapter = new UpdateLabelAdapter();
 	private OrderElementControl orderElementControl;
 
 	@Override
@@ -83,7 +81,7 @@ public class StatePropertySection extends
 	protected void createRightColumnControls(Composite rightColumn) {
 		createDocumentationControl(rightColumn);
 		createTransitionsControl(rightColumn);
-		createSubmachineControl(rightColumn);
+		//createSubmachineControl(rightColumn);
 	}
 
 	protected void createNameControl(final Composite parent) {
@@ -156,10 +154,10 @@ public class StatePropertySection extends
 		bindSpecificationControl(context);
 		bindDocumentationControl(context);
 		orderElementControl.refreshInput();
-		updateLabel();
+		//updateLabel();
 	}
 
-	private void bindDocumentationControl(EMFDataBindingContext context) {
+	protected void bindDocumentationControl(EMFDataBindingContext context) {
 		IEMFValueProperty property = EMFEditProperties.value(
 				TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
@@ -199,7 +197,7 @@ public class StatePropertySection extends
 		context.bindValue(nameTextProperty, nameProperty.observe(eObject));
 	}
 
-	private void updateLabel() {
+	protected void updateLabel() {
 		String substatechartId = getState().getSubstatechartId();
 		if (substatechartId != null) {
 			lblSubmachine.setText(substatechartId);
@@ -208,21 +206,21 @@ public class StatePropertySection extends
 		}
 	}
 
-	@Override
-	protected void setEObject(EObject object) {
-		if (getEObject() != null)
-			getEObject().eAdapters().remove(updateLabelAdapter);
-		super.setEObject(object);
-		getEObject().eAdapters().add(updateLabelAdapter);
-	}
+//	@Override
+//	protected void setEObject(EObject object) {
+//		if (getEObject() != null)
+//			getEObject().eAdapters().remove(updateLabelAdapter);
+//		super.setEObject(object);
+//		getEObject().eAdapters().add(updateLabelAdapter);
+//	}
 
-	@Override
-	public void dispose() {
-		if (getEObject() != null) {
-			getEObject().eAdapters().remove(updateLabelAdapter);
-		}
-		super.dispose();
-	}
+//	@Override
+//	public void dispose() {
+//		if (getEObject() != null) {
+//			getEObject().eAdapters().remove(updateLabelAdapter);
+//		}
+//		super.dispose();
+//	}
 
 	@Override
 	public EObject getEObject() {
@@ -261,12 +259,12 @@ public class StatePropertySection extends
 		}
 	}
 
-	protected final class UpdateLabelAdapter extends AdapterImpl {
-		@Override
-		public void notifyChanged(Notification msg) {
-			if (msg.getFeature() == SGraphPackage.Literals.STATE__SUBSTATECHART_ID) {
-				updateLabel();
-			}
-		}
-	}
+//	protected final class UpdateLabelAdapter extends AdapterImpl {
+//		@Override
+//		public void notifyChanged(Notification msg) {
+//			if (msg.getFeature() == SGraphPackage.Literals.STATE__SUBSTATECHART_ID) {
+//				updateLabel();
+//			}
+//		}
+//	}
 }
