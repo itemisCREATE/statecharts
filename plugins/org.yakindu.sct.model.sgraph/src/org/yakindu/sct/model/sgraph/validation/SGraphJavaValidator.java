@@ -21,10 +21,8 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.FinalState;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
 import com.google.inject.Inject;
 
@@ -93,26 +91,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	@Check(CheckType.FAST)
-	public void checkUnresolvableSubmachine(
-			org.yakindu.sct.model.sgraph.State state) {
-		if (state.getSubstatechartId() == null)
-			return;
-		AbstractSCTResource eResource = (AbstractSCTResource) state.eResource();
-		eResource.linkSubStatechart(state);
-		Statechart substatechart = state.getSubstatechart();
-		if (substatechart == null) {
-			error(String.format(ISSUE_SUBMACHINE_UNRESOLVABLE,
-					state.getSubstatechartId()), null);
-		} else if (substatechart.eIsProxy()) {
-			substatechart = (Statechart) EcoreUtil
-					.resolve(substatechart, state);
-			if (substatechart.eIsProxy()) {
-				error(String.format(ISSUE_SUBMACHINE_UNRESOLVABLE,
-						state.getSubstatechartId()), null);
-			}
-		}
-	}
 
 	@Check(CheckType.FAST)
 	public void outgoingTransitionCount(FinalState finalState) {

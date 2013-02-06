@@ -24,7 +24,6 @@ import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_NODE_NOT_REACHABLE;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_NAME;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SUBMACHINE_UNRESOLVABLE;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -35,7 +34,6 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.Check;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Choice;
@@ -359,21 +357,6 @@ public class SGraphJavaValidationTest {
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
-	}
-
-	@Test
-	@Ignore("This does not work since the AbstractSCTResource does the linking of submachines. TODO: Create fake resource here...")
-	public void checkUnresolvableSubmachine() {
-		prepareStateTest();
-		Entry entry = factory.createEntry();
-		createTransition(entry, state);
-		state.setSubstatechartId("doesnotexist");
-		assertFalse(validator.validate(state, diagnostics,
-				new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
-		assertError(diagnostics,
-				String.format(ISSUE_SUBMACHINE_UNRESOLVABLE, "doesnotexist"));
-
 	}
 
 	/**

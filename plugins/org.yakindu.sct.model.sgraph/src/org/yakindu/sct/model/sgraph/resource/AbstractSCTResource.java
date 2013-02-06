@@ -50,11 +50,9 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
@@ -65,7 +63,6 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 
-import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -153,14 +150,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 				eObject.eAdapters().add(new SerializeAdapter());
 			}
 		}
-		if (eObject instanceof State) {
-			linkSubStatechart((State) eObject);
-			Adapter linkSubmachineAdapter = EcoreUtil.getExistingAdapter(
-					eObject, LinkSubmachineAdapter.class);
-			if (linkSubmachineAdapter == null) {
-				eObject.eAdapters().add(new LinkSubmachineAdapter());
-			}
-		}
 	}
 
 	@Override
@@ -176,12 +165,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 			if (serializeAdapter != null) {
 				eObject.eAdapters().remove(serializeAdapter);
 			}
-			if (eObject instanceof State) {
-				Adapter linkSubmachineAdapter = EcoreUtil.getExistingAdapter(
-						eObject, LinkSubmachineAdapter.class);
-				eObject.eAdapters().remove(linkSubmachineAdapter);
-			}
-
 		}
 		super.detached(eObject);
 	}
@@ -466,46 +449,12 @@ public abstract class AbstractSCTResource extends GMFResource {
 		}
 	}
 
-	public void linkSubStatechart(State currentState) {
-		Statechart substatechart = getStatechart(currentState,
-				currentState.getSubstatechartId());
-		currentState.setSubstatechart(substatechart);
-	}
-
-	private Statechart getStatechart(EObject context, String substatechartId) {
-		if (substatechartId == null || substatechartId.length() == 0) {
-			return null;
-		}
-		IScope scope = scopeProvider.getScope(context.eResource(),
-				SGraphPackage.Literals.STATE__SUBSTATECHART,
-				Predicates.<IEObjectDescription> alwaysTrue());
-		IEObjectDescription statechartDescription = scope
-				.getSingleElement(nameConverter
-						.toQualifiedName(substatechartId));
-		if (statechartDescription != null) {
-			return (Statechart) statechartDescription.getEObjectOrProxy();
-		}
-		return null;
-	}
-
 	public boolean isSerializerEnabled() {
 		return serializerEnabled;
 	}
 
 	public void setSerializerEnabled(boolean serializerEnabled) {
 		this.serializerEnabled = serializerEnabled;
-	}
-
-	protected class LinkSubmachineAdapter extends AdapterImpl {
-		@Override
-		public void notifyChanged(Notification msg) {
-			if (msg.getFeature() == SGraphPackage.eINSTANCE
-					.getState_SubstatechartId()) {
-				linkSubStatechart((State) msg.getNotifier());
-
-			}
-			super.notifyChanged(msg);
-		}
 	}
 
 	// copied from xtext LazyLinkingResource
