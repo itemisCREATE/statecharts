@@ -21,10 +21,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -92,6 +96,32 @@ public class DiagramPartitioningUtil {
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static boolean closeSubdiagramEditors(State state) {
+		Diagram diagram = DiagramPartitioningUtil.getSubDiagram(state);
+		if (diagram == null)
+			return true;
+		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IEditorReference[] refs = activePage.getEditorReferences();
+		for (IEditorReference ref : refs) {
+			try {
+				if (ref.getEditorInput() instanceof IDiagramEditorInput) {
+					IDiagramEditorInput diagramInput = (IDiagramEditorInput) ref.getEditorInput();
+					if (diagramInput.getDiagram().equals(diagram)) {
+						boolean close = MessageDialog.openQuestion(new Shell(), "Close subdiagram editor?",
+								"The subdiagram is still open in another editor. Do you want to close it?");
+						if (close) {
+							activePage.closeEditor(ref.getEditor(false), false);
+						}
+						return close;
+					}
+				}
+			} catch (PartInitException e) {
+				e.printStackTrace();
+			}
+		}
+		return true;
 	}
 
 	public static List<Diagram> getDiagramContainerHierachy(Diagram diagram) {

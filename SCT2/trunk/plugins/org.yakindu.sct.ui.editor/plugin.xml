@@ -41,6 +41,7 @@
          </metamodelType>
          <metamodelType
                eclass="Region"
+                edithelper="org.yakindu.sct.ui.editor.edithelper.RegionEditHelper"
                icon="icons/obj16/Region-16.png"
                id="org.yakindu.sct.ui.editor.Region"
                kind="org.eclipse.gmf.runtime.emf.type.core.IHintedType"
