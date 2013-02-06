@@ -10,11 +10,9 @@
  */
 package org.yakindu.sct.ui.editor.breadcrumb;
 
-import static org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbViewerUtil.openEditor;
+import static org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil.openEditor;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -38,7 +36,6 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
 import org.yakindu.sct.ui.editor.StatechartImages;
@@ -51,6 +48,7 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor implements ISelectionChangedListener {
 
 	private static final String SUBDIAGRAM = "Subdiagram - ";
+	private SCTBreadcrumbViewer viewer;
 
 	public BreadcrumbDiagramEditor(boolean hasFlyoutPalette) {
 		super(hasFlyoutPalette);
@@ -61,6 +59,14 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor impl
 		GridLayoutFactory.fillDefaults().spacing(0, 0).applyTo(parent);
 		createBreadcrumbViewer(parent);
 		super.createPartControl(parent);
+	}
+
+	@Override
+	protected void sanityCheckState(IEditorInput input) {
+		super.sanityCheckState(input);
+		// Refresh viewer input since the context may have changed
+		viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
+
 	}
 
 	@Override
@@ -81,24 +87,12 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor impl
 
 	}
 
-	protected List<Diagram> getViewerInput() {
-		List<Diagram> result = new ArrayList<Diagram>();
-		Diagram diagram = getDiagram();
-		result.add(getDiagram());
-		while (diagram.getElement() instanceof State) {
-			diagram = BreadcrumbViewerUtil.getDiagramContaining((State) diagram.getElement());
-			result.add(diagram);
-		}
-		Collections.reverse(result);
-		return result;
-	}
-
 	private void createBreadcrumbViewer(Composite parent) {
-		SCTBreadcrumbViewer viewer = new SCTBreadcrumbViewer(parent, SWT.READ_ONLY);
+		viewer = new SCTBreadcrumbViewer(parent, SWT.READ_ONLY);
 		viewer.addSelectionChangedListener(this);
 		viewer.setContentProvider(new BreadcrumbViewerContentProvider());
 		viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());
-		viewer.setInput(getViewerInput());
+		viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
 		parent.pack(true);
 	}
 

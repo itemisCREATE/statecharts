@@ -59,8 +59,7 @@ import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
  * @author andreas muelder - Initial contribution and API
  * @author martin esser
  */
-public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
-		IGotoMarker {
+public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
 	private static final int DELAY = 200; // ms
@@ -78,8 +77,7 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 						validationJob.cancel();
 						validationJob.schedule(DELAY);
 					} else
-						for (EClass eClass : eObject.eClass()
-								.getEAllSuperTypes()) {
+						for (EClass eClass : eObject.eClass().getEAllSuperTypes()) {
 							if (SGraphPackage.eINSTANCE == eClass.getEPackage()) {
 								validationJob.cancel();
 								validationJob.schedule(DELAY);
@@ -100,8 +98,7 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	}
 
 	@Override
-	public void init(IEditorSite site, IEditorInput input)
-			throws PartInitException {
+	public void init(IEditorSite site, IEditorInput input) throws PartInitException {
 		super.init(site, input);
 		getEditingDomain().addResourceSetListener(validationListener);
 		checkXtextNature();
@@ -118,9 +115,8 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	private void initValidationJob() {
 		final IFile file = ((IFileEditorInput) getEditorInput()).getFile();
 		validationJob = new SCTValidationJob(getDiagram());
-		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
-				.getRegisteredProvider(SemanticTarget.StatechartSpecification,
-						file.getFileExtension());
+		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getRegisteredProvider(
+				SemanticTarget.StatechartSpecification, file.getFileExtension());
 		Injector injector = registeredProvider.getInjector();
 		injector.injectMembers(validationJob);
 		validationJob.setRule(file);
@@ -129,8 +125,7 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	private void checkXtextNature() {
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
 		IProject project = editorInput.getFile().getProject();
-		if (project != null && !XtextProjectHelper.hasNature(project)
-				&& project.isAccessible() && !project.isHidden()) {
+		if (project != null && !XtextProjectHelper.hasNature(project) && project.isAccessible() && !project.isHidden()) {
 			addNature(project);
 		}
 	}
@@ -169,10 +164,8 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	@Override
 	protected void createGraphicalViewer(Composite parent) {
 		super.createGraphicalViewer(parent);
-		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench()
-				.getHelpSystem();
-		helpSystem.setHelp(getGraphicalViewer().getControl(),
-				HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
+		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
+		helpSystem.setHelp(getGraphicalViewer().getControl(), HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
 	}
 
 	@Override
@@ -183,14 +176,11 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 	@Override
 	protected void configureGraphicalViewer() {
 		super.configureGraphicalViewer();
-		RootEditPart rootEditPart = getDiagramGraphicalViewer()
-				.getRootEditPart();
+		RootEditPart rootEditPart = getDiagramGraphicalViewer().getRootEditPart();
 		if (rootEditPart instanceof LayerManager) {
 			ConnectionLayer connectionLayer = (ConnectionLayer) ((LayerManager) rootEditPart)
 					.getLayer(LayerConstants.CONNECTION_LAYER);
-			connectionLayer
-					.setClippingStrategy(new ViewportAwareConnectionLayerClippingStrategy(
-							connectionLayer));
+			connectionLayer.setClippingStrategy(new ViewportAwareConnectionLayerClippingStrategy(connectionLayer));
 		}
 	}
 
@@ -199,7 +189,9 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements
 		validationJob.cancel();
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
-		domainAdapter.dispose();
+		//TODO: check why this can be null
+		if (domainAdapter != null)
+			domainAdapter.dispose();
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();
 		try {
 			// Touch the file for revalidation, when the user did not save

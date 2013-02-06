@@ -26,7 +26,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbViewerUtil;
+import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 import de.itemis.gmf.runtime.commons.decorators.AbstractDecoratorProvider;
@@ -86,7 +86,7 @@ public class SubmachineDecorationProvider extends AbstractDecoratorProvider impl
 		@Override
 		protected void mousePressed(Decoration decoration, EObject semanticElement) {
 			Diagram diagramToOpen = getDiagramForSemanticElement(semanticElement);
-			BreadcrumbViewerUtil.openEditor(diagramToOpen);
+			DiagramPartitioningUtil.openEditor(diagramToOpen);
 
 		}
 
