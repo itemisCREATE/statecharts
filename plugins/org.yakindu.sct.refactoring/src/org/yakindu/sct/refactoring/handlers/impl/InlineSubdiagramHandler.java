@@ -12,15 +12,7 @@ package org.yakindu.sct.refactoring.handlers.impl;
 
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.yakindu.sct.refactoring.handlers.AbstractViewRefactoringHandler;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
@@ -49,26 +41,6 @@ public class InlineSubdiagramHandler extends AbstractViewRefactoringHandler {
 
 	private boolean allEditorsAreClosed(ExecutionEvent event) {
 		StateEditPart firstElement = (StateEditPart) getFirstElement(HandlerUtil.getCurrentSelection(event));
-		Diagram diagram = DiagramPartitioningUtil.getSubDiagram(firstElement.resolveSemanticElement());
-		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		IEditorReference[] refs = activePage.getEditorReferences();
-		for (IEditorReference ref : refs) {
-			try {
-				if (ref.getEditorInput() instanceof IDiagramEditorInput) {
-					IDiagramEditorInput diagramInput = (IDiagramEditorInput) ref.getEditorInput();
-					if (diagramInput.getDiagram().equals(diagram)) {
-						boolean close = MessageDialog.openQuestion(new Shell(), "Close subdiagram editor?",
-								"The subdiagram is still open in another editor. Do you want to close it?");
-						if (close) {
-							activePage.closeEditor(ref.getEditor(false), false);
-						}
-						return close;
-					}
-				}
-			} catch (PartInitException e) {
-				e.printStackTrace();
-			}
-		}
-		return true;
+		return DiagramPartitioningUtil.closeSubdiagramEditors(firstElement.resolveSemanticElement());
 	}
 }
