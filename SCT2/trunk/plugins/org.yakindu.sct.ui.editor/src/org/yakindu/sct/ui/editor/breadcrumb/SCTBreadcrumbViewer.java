@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.breadcrumb;
 
-import static org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbViewerUtil.openEditor;
+import static org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil.openEditor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -146,7 +146,7 @@ public class SCTBreadcrumbViewer extends BreadcrumbViewer implements ISelectionC
 	public void selectionChanged(SelectionChangedEvent event) {
 		Object selection = ((IStructuredSelection) event.getSelection()).getFirstElement();
 		if (selection instanceof State || selection instanceof Statechart) {
-			Diagram diagram = BreadcrumbViewerUtil.getSubDiagram((EObject) selection);
+			Diagram diagram = DiagramPartitioningUtil.getSubDiagram((EObject) selection);
 			openEditor(diagram);
 		} else if (selection instanceof IFile) {
 			openEditor((IFile) selection);
@@ -230,7 +230,7 @@ public class SCTBreadcrumbViewer extends BreadcrumbViewer implements ISelectionC
 			for (Region region : regions) {
 				EList<Vertex> vertices = region.getVertices();
 				for (Vertex vertex : vertices) {
-					if (vertex instanceof State && BreadcrumbViewerUtil.getSubDiagram(vertex) != null) {
+					if (vertex instanceof State && DiagramPartitioningUtil.getSubDiagram(vertex) != null) {
 						result.add(vertex);
 					}
 				}

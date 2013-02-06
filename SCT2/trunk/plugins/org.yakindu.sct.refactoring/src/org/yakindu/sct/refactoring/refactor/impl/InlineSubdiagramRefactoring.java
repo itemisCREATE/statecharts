@@ -16,7 +16,7 @@ import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbViewerUtil;
+import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
@@ -42,7 +42,7 @@ public class InlineSubdiagramRefactoring extends SubdiagramRefactoring {
 		inlineStyle.setBooleanValue(true);
 		View contextView = getContextObject();
 		State contextElement = (State) contextView.getElement();
-		Diagram inlineDiagram = BreadcrumbViewerUtil.getSubDiagram(contextElement);
+		Diagram inlineDiagram = DiagramPartitioningUtil.getSubDiagram(contextElement);
 		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
 
 		EList<View> children = inlineDiagram.getChildren();

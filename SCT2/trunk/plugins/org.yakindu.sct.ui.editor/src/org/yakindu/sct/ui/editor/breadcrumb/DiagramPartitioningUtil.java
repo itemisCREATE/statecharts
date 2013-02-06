@@ -10,7 +10,10 @@
  */
 package org.yakindu.sct.ui.editor.breadcrumb;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -34,7 +37,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class BreadcrumbViewerUtil {
+public class DiagramPartitioningUtil {
 
 	public static Diagram getDiagramContaining(EObject element) {
 		Resource eResource = element.eResource();
@@ -89,5 +92,27 @@ public class BreadcrumbViewerUtil {
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static List<Diagram> getDiagramContainerHierachy(Diagram diagram) {
+		List<Diagram> result = new ArrayList<Diagram>();
+		result.add(diagram);
+		while (diagram.getElement() instanceof State) {
+			diagram = DiagramPartitioningUtil.getDiagramContaining((State) diagram.getElement());
+			result.add(diagram);
+		}
+		Collections.reverse(result);
+		return result;
+	}
+
+	public static List<Diagram> getSubDiagramHierachy(Diagram diagram) {
+		List<Diagram> result = new ArrayList<Diagram>();
+		result.add(diagram);
+		while (diagram.getElement() instanceof State) {
+			diagram = DiagramPartitioningUtil.getSubDiagram(diagram.getElement());
+			result.add(diagram);
+		}
+		Collections.reverse(result);
+		return result;
 	}
 }
