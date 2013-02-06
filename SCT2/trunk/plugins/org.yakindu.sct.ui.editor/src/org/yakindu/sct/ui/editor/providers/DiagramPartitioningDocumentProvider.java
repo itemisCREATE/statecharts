@@ -11,6 +11,7 @@
 package org.yakindu.sct.ui.editor.providers;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
@@ -33,6 +34,27 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 			return editorInput;
 		}
 		return super.createInputWithEditingDomain(editorInput, domain);
+	}
+
+	@Override
+	protected ElementInfo createElementInfo(Object element) throws CoreException {
+		ElementInfo info = super.createElementInfo(element);
+		// If the editor is a subdiagram, set the dirty flag to true if the
+		// resourceset is dirty
+		if (element instanceof IDiagramEditorInput) {
+			Diagram diagram = ((IDiagramEditorInput) element).getDiagram();
+			info.fCanBeSaved = isDirty(TransactionUtil.getEditingDomain(diagram));
+		}
+		return info;
+	}
+
+	protected boolean isDirty(TransactionalEditingDomain domain) {
+		for (final Resource resource : domain.getResourceSet().getResources()) {
+			if (resource.isLoaded() && !domain.isReadOnly(resource) && resource.isModified()) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override
