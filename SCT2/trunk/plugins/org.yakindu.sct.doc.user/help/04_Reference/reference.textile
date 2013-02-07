@@ -599,27 +599,6 @@ feature GeneralFeatures {
 
 p. ==<!-- End sgen_feature_generalfeatures -->==			
 
-h2. C Generator Features
-
-==<!-- Start sgen_feature_ccodefeature -->==	
-
-h4. CCodeFeature
-
-The *CCodeFeature* feature allows to configure c code specific generator properties. It is an *optional* feature and consists of the following parameters:
-
-# __InterfaceEventListener__ (Boolean, mandatory): generates listener interface for notification of outgoing events.
-# __Singleton__ (Boolean, mandatory): generates a statically allocated singleton variant of the state machine that does not allow multiple instances.
-# __DebugType__ (String, optional): don't use this property - it will be removed
-
-Example configuration:
-
-bc.. 
-feature CCodeFeature {
-	InterfaceEventListerner = true
-	Singleton = true
-}
-
-p. ==<!-- End sgen_feature_ccodefeature -->==			
 
 h2. Create Custom Code Generators
 
