@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.refactoring.refactor.impl;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -46,15 +45,13 @@ public class InlineSubdiagramRefactoring extends SubdiagramRefactoring {
 		Diagram diagramToInline = DiagramPartitioningUtil.getSubDiagram(contextElement);
 		View containerView = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
 
-		EList<View> children = diagramToInline.getChildren();
-		for (View view : children) {
-			containerView.insertChild(view);
-			EList<Edge> edges = diagramToInline.getEdges();
-			for (Edge edge : edges) {
-				containerView.getDiagram().insertEdge(edge);
-			}
+		for (int i = diagramToInline.getChildren().size() - 1; i >= 0; i--) {
+			containerView.insertChild((View) diagramToInline.getChildren().get(i));
 		}
 
+		for (int i = diagramToInline.getEdges().size() - 1; i >= 0; i--) {
+			containerView.getDiagram().insertEdge((Edge) diagramToInline.getEdges().get(i));
+		}
 		getResource().getContents().remove(diagramToInline);
 	}
 }
