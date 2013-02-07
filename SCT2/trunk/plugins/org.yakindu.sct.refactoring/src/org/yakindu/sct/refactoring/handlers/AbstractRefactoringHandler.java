@@ -16,9 +16,9 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
-
 
 /**
  * 
@@ -31,8 +31,7 @@ public abstract class AbstractRefactoringHandler<T extends EObject> extends Abst
 
 	public abstract AbstractRefactoring<T> createRefactoring();
 
-	public abstract void setContext(AbstractRefactoring<T> refactoring,
-			ISelection selection);
+	public abstract void setContext(AbstractRefactoring<T> refactoring, ISelection selection);
 
 	public AbstractRefactoringHandler() {
 		refactoring = createRefactoring();
@@ -48,8 +47,10 @@ public abstract class AbstractRefactoringHandler<T extends EObject> extends Abst
 	 */
 	@Override
 	public boolean isEnabled() {
-		ISelection selection = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getSelection();
+		IWorkbenchWindow activeWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		if (activeWorkbenchWindow == null)
+			return false;
+		ISelection selection = activeWorkbenchWindow.getActivePage().getSelection();
 		if (selection == null)
 			return false;
 		setContext(refactoring, selection);
