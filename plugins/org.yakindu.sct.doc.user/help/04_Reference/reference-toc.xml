@@ -66,9 +66,6 @@
 			<topic href="help/04_Reference/reference.html#Naming" label="Naming"></topic>
 			<topic href="help/04_Reference/reference.html#GeneralFeatures" label="GeneralFeatures"></topic>
 		</topic>
-		<topic href="help/04_Reference/reference.html#CGeneratorFeatures" label="C Generator Features">
-			<topic href="help/04_Reference/reference.html#CCodeFeature" label="CCodeFeature"></topic>
-		</topic>
 		<topic href="help/04_Reference/reference.html#CreateCustomCodeGenerators" label="Create Custom Code Generators">
 			<topic href="help/04_Reference/reference.html#WritingacustomcodegeneratorwithXtend2Java" label="Writing a custom code generator with Xtend2/Java"></topic>
 			<topic href="help/04_Reference/reference.html#ExecutingacustomXtend2Javacodegenerator" label="Executing a custom Xtend2/Java code generator">
