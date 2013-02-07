@@ -10,13 +10,11 @@
  */
 package org.yakindu.sct.refactoring.refactor.impl;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.View;
-import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
@@ -50,12 +48,11 @@ public class ExtractSubdiagramRefactoring extends SubdiagramRefactoring {
 
 		Diagram subdiagram = ViewService.createDiagram(contextElement, StatechartDiagramEditor.ID, preferencesHint);
 		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
-		EList<View> children = figureCompartment.getChildren();
-		for (View view : children) {
-			if (view.getElement() instanceof Region) {
-				subdiagram.insertChild(view);
-			}
+
+		for (int i = figureCompartment.getChildren().size() - 1; i >= 0; i--) {
+			subdiagram.insertChild((View) figureCompartment.getChildren().get(i));
 		}
+
 		getResource().getContents().add(subdiagram);
 
 	}
