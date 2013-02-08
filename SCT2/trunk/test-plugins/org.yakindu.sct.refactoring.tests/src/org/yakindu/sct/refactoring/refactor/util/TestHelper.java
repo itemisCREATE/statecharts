@@ -10,11 +10,11 @@
  */
 package org.yakindu.sct.refactoring.refactor.util;
 
-import org.eclipse.emf.common.util.EList;
-import org.yakindu.sct.model.sgraph.Region;
+import java.util.List;
+
+import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Vertex;
 /**
  * 
  * @author thomas kutz - Initial contribution and API
@@ -23,13 +23,10 @@ import org.yakindu.sct.model.sgraph.Vertex;
 public class TestHelper {
 
 	public State getStateByName(Statechart statechart, String name) {
-		EList<Region> regions = statechart.getRegions();
-		for (Region region : regions) {
-			EList<Vertex> vertices = region.getVertices();
-			for (Vertex vertex : vertices) {
-				if ((vertex instanceof State) && vertex.getName().equals(name)) {
-					return (State) vertex;
-				}
+		List<State> allStates = EcoreUtil2.getAllContentsOfType(statechart, State.class);
+		for (State state : allStates) {
+			if (state.getName().equals(name)) {
+				return state;
 			}
 		}
 		return null;

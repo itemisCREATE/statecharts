@@ -36,6 +36,33 @@ public class UnfoldEntryActionsRefactoringTest extends
 				UNFOLD_ENTRY_ACTIONS
 						+ EXPECTED_STATECHART, "B");
 	}
+	
+	@Test
+	public void testIsExecutable() {
+		testRefactoringIsExecutableOnState(
+				UNFOLD_ENTRY_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_ENTRY_ACTIONS + EXPECTED_STATECHART,
+				"B",
+				true);
+		
+		testRefactoringIsExecutableOnState(
+				UNFOLD_ENTRY_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_ENTRY_ACTIONS + EXPECTED_STATECHART,
+				"InnerState",
+				false);
+		
+		testRefactoringIsExecutableOnState(
+				UNFOLD_ENTRY_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_ENTRY_ACTIONS + EXPECTED_STATECHART,
+				"A2",
+				false);
+		
+		testRefactoringIsExecutableOnState(
+				UNFOLD_ENTRY_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_ENTRY_ACTIONS + EXPECTED_STATECHART,
+				"F",
+				false);
+	}
 
 	@Override
 	protected AbstractRefactoring<?> getRefactoring(State state) {

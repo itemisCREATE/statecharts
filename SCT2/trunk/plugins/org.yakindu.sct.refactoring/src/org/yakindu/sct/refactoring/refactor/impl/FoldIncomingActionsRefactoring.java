@@ -54,17 +54,21 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 	}
 
 	/**
-	 * Checks if one of the incoming transitions enters a parent composite state
-	 * of its target. If so, false is returned if this parent composite state
-	 * has entry actions.
-	 * 
-	 * @return true if all preconditions are fulfilled, false otherwise
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isExecutable() {
-		// TODO check if there is at least one action on each transition
 		return super.isExecutable()
-				&& !helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
+				&& allIncomingTransitionsHaveAtLeastOneAction()
+				&& noIncomingTransitionEntersCompositeWithEntryActions();
+	}
+
+	private boolean noIncomingTransitionEntersCompositeWithEntryActions() {
+		return !helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
+	}
+
+	private boolean allIncomingTransitionsHaveAtLeastOneAction() {
+		return helper.haveAllAtLeastOneAction(getContextObject().getIncomingTransitions());
 	}
 
 

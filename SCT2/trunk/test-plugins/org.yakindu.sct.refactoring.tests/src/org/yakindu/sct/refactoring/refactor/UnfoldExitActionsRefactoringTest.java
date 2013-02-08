@@ -31,10 +31,39 @@ public class UnfoldExitActionsRefactoringTest extends StateBasedRefactoringTest 
 	@Test
 	public void testUnfoldExitActions() {
 
-		testRefactoringOnState(UNFOLD_EXIT_ACTIONS + INITIAL_STATECHART,
-				UNFOLD_EXIT_ACTIONS + EXPECTED_STATECHART, "A");
+		testRefactoringOnState(
+				UNFOLD_EXIT_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_EXIT_ACTIONS + EXPECTED_STATECHART, 
+				"A");
 	}
 
+	@Test
+	public void testIsExecutable() {
+		testRefactoringIsExecutableOnState(
+				UNFOLD_EXIT_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_EXIT_ACTIONS + EXPECTED_STATECHART, 
+				"A",
+				true);
+		testRefactoringIsExecutableOnState(
+				UNFOLD_EXIT_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_EXIT_ACTIONS + EXPECTED_STATECHART, 
+				"InnerState",
+				false);
+		
+		testRefactoringIsExecutableOnState(
+				UNFOLD_EXIT_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_EXIT_ACTIONS + EXPECTED_STATECHART, 
+				"D",
+				false);
+		
+		testRefactoringIsExecutableOnState(
+				UNFOLD_EXIT_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_EXIT_ACTIONS + EXPECTED_STATECHART, 
+				"E",
+				false);
+		
+	}
+	
 	@Override
 	protected AbstractRefactoring<?> getRefactoring(State state) {
 		UnfoldExitActionsRefactoring unfoldExitActionsRefactoring = new UnfoldExitActionsRefactoring();

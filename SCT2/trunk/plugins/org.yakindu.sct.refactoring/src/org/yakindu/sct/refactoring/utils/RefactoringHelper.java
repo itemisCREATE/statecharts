@@ -272,5 +272,25 @@ public class RefactoringHelper {
 		}
 		return true;
 	}
+
+	/**
+	 * Checks if all given transitions have at least one action.
+	 * Returns false for empty lists.
+	 * 
+	 * @param transitions
+	 * @return
+	 */
+	public boolean haveAllAtLeastOneAction(
+			EList<Transition> transitions) {
+		if (transitions.isEmpty())
+			return false;
+		
+		for (Transition transition : transitions) {
+			if (!hasAtLeastOneAction(transition)) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }

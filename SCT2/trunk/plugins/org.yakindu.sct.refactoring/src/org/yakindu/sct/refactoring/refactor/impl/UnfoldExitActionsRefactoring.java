@@ -33,6 +33,7 @@ import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
  * Preconditions:
  * <ul>
  * <li>At least one exit action exists.</li>
+ * <li>At least one outgoing transition exists.</li>
  * <li>No outgoing transition leaves a parent composite state of the context state with exit actions.</li>
  * </ul>
  * 
@@ -47,19 +48,27 @@ public class UnfoldExitActionsRefactoring extends AbstractRefactoring<State> {
 	}
 
 	/**
-	 * Checks if one of the outgoing transitions leaves a parent composite state
-	 * of its source. If so, false is returned if this parent composite state
-	 * has exit actions.
-	 * 
-	 * @return true if all preconditions are fulfilled, false otherwise
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isExecutable() {
 		return super.isExecutable()
-				&& !helper.oneOutgoingTransitionLeavesCompositeWithExitActions(getContextObject());
+				&& hasAtLeastOneExitAction()
+				&& hasAtLeastOneOutgoingTransition()
+				&& noOutgoingTransitionLeavesCompositeWithExitActions();
 	}
 
+	private boolean hasAtLeastOneExitAction() {
+		return helper.hasExitAction(getContextObject());
+	}
 
+	private boolean noOutgoingTransitionLeavesCompositeWithExitActions() {
+		return !helper.oneOutgoingTransitionLeavesCompositeWithExitActions(getContextObject());
+	}
+
+	private boolean hasAtLeastOneOutgoingTransition() {
+		return !getContextObject().getOutgoingTransitions().isEmpty();
+	}
 
 	private void unfoldExitActions() {
 		List<Expression> actionsToUnfold = new ArrayList<Expression>(

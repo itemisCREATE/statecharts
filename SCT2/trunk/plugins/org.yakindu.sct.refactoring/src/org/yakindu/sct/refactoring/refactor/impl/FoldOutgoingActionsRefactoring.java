@@ -54,17 +54,21 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 	}
 
 	/**
-	 * Checks if one of the outgoing transitions leaves a parent composite state
-	 * of its source. If so, false is returned if this parent composite state
-	 * has exit actions.
-	 * 
-	 * @return true if all preconditions are fulfilled, false otherwise
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isExecutable() {
-		// TODO check if there is at least one action on each transition
 		return super.isExecutable()
-				&& !helper.oneOutgoingTransitionLeavesCompositeWithExitActions(getContextObject());
+				&& allOutgoingTransitionsHaveAtLeastOneAction()
+				&& noOutgoingTransitionLeavesCompositeWithExitActions();
+	}
+
+	private boolean noOutgoingTransitionLeavesCompositeWithExitActions() {
+		return !helper.oneOutgoingTransitionLeavesCompositeWithExitActions(getContextObject());
+	}
+
+	private boolean allOutgoingTransitionsHaveAtLeastOneAction() {
+		return helper.haveAllAtLeastOneAction(getContextObject().getOutgoingTransitions());
 	}
 
 	private List<Expression> getFoldableActions(EList<Transition> transitions) {
