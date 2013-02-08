@@ -12,11 +12,8 @@ package org.yakindu.sct.refactoring.refactor.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.State;
@@ -59,34 +56,14 @@ public class UnfoldExitActionsRefactoring extends AbstractRefactoring<State> {
 	@Override
 	public boolean isExecutable() {
 		return super.isExecutable()
-				&& noTransitionLeavesCompositeWithExitActions(getContextObject()
-						.getOutgoingTransitions());
+				&& !helper.oneOutgoingTransitionLeavesCompositeWithExitActions(getContextObject());
 	}
 
-	private boolean noTransitionLeavesCompositeWithExitActions(
-			EList<Transition> transitions) {
 
-		for (Transition transition : transitions) {
-			// all parent states of target need to be contained in the set of
-			// the source's parent states
-			Set<State> sourceParentStates = new HashSet<State>(
-					helper.getParentStates(transition.getSource()));
-			Set<State> targetParentStates = helper.getParentStates(transition
-					.getTarget());
-
-			sourceParentStates.removeAll(targetParentStates);
-
-			for (State crossedCompositeState : sourceParentStates) {
-				if (helper.hasExitAction(crossedCompositeState))
-					return false;
-			}
-		}
-		return true;
-	}
 
 	private void unfoldExitActions() {
 		List<Expression> actionsToUnfold = new ArrayList<Expression>(
-				helper.getAllLocalActionsForEventType(getContextObject(),
+				helper.extractAllLocalActionsForEventType(getContextObject(),
 						ExitEventImpl.class));
 		addActionsToOutgoingTransitions(actionsToUnfold);
 	}
