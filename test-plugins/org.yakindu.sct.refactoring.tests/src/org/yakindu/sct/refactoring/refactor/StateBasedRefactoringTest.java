@@ -10,16 +10,21 @@
  */
 package org.yakindu.sct.refactoring.refactor;
 
+import java.util.List;
+
 import junit.framework.Assert;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.parser.IParser;
 import org.junit.runner.RunWith;
+import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
+import org.yakindu.sct.model.stext.resource.impl.StextResource;
+import org.yakindu.sct.refactoring.refactor.util.SctEqualityHelper;
 import org.yakindu.sct.refactoring.refactor.util.TestHelper;
 import org.yakindu.sct.refactoring.refactor.util.TestInjectorProvider;
 import org.yakindu.sct.test.models.RefactoringTestModels;
@@ -45,7 +50,8 @@ public abstract class StateBasedRefactoringTest {
 	protected TestHelper helper = new TestHelper();
 
 	protected void compareStatecharts(Statechart initial, Statechart expected) {
-		if (!EcoreUtil.equals(initial, expected)) {
+		SctEqualityHelper equalityHelper = new SctEqualityHelper();
+		if (!equalityHelper.equals(initial, expected)) {
 			Assert.fail("Equality check on statecharts failed!");
 		}
 	}
@@ -54,17 +60,44 @@ public abstract class StateBasedRefactoringTest {
 			String pathToExpectedSct, String stateName) {
 		Statechart initial = models
 				.loadStatechartFromResource(pathToInitialSct);
-		State stateB = helper.getStateByName(initial, stateName);
 
-		AbstractRefactoring<?> refactoring = getRefactoring(stateB);
+		State state = helper.getStateByName(initial, stateName);
+
+		AbstractRefactoring<?> refactoring = getRefactoring(state);
 		((AbstractSCTResource) initial.eResource()).setSerializerEnabled(true);
 		refactoring.internalExecute();
 		((AbstractSCTResource) initial.eResource()).setSerializerEnabled(false);
 
 		Statechart expected = models
 				.loadStatechartFromResource(pathToExpectedSct);
-
+		
+		parseAllSpecifications(initial);
+		parseAllSpecifications(expected);
+		
 		compareStatecharts(initial, expected);
+	}
+	
+	protected void testRefactoringIsExecutableOnState(String pathToInitialSct,
+			String pathToExpectedSct, String stateName, boolean expectedResult) {
+		Statechart initial = models
+				.loadStatechartFromResource(pathToInitialSct);
+
+		State state = helper.getStateByName(initial, stateName);
+
+		AbstractRefactoring<?> refactoring = getRefactoring(state);
+		if (expectedResult) {
+			Assert.assertTrue("Refactoring on state '"+stateName+"' was not executable, although it should be.", refactoring.isExecutable());
+		}
+		else {			
+			Assert.assertFalse("Refactoring on state '"+stateName+"' was executable, although it should not be.", refactoring.isExecutable());
+		}
+	}
+
+	private void parseAllSpecifications(Statechart sct) {
+		List<SpecificationElement> allSpecElements = EcoreUtil2.getAllContentsOfType(sct, SpecificationElement.class);
+		for (SpecificationElement specificationElement : allSpecElements) {
+			((StextResource)sct.eResource()).parseSpecificationElement(specificationElement);
+		}
 	}
 
 	protected abstract AbstractRefactoring<?> getRefactoring(State state);

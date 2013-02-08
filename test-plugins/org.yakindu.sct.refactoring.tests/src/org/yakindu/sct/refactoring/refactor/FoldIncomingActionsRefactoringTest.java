@@ -35,6 +35,18 @@ public class FoldIncomingActionsRefactoringTest extends
 		testRefactoringOnState(FOLD_INCOMING_ACTIONS + INITIAL_STATECHART,
 				FOLD_INCOMING_ACTIONS + EXPECTED_STATECHART, "B");
 	}
+	
+	@Test
+	public void testIsExecutable() {
+		testRefactoringIsExecutableOnState(FOLD_INCOMING_ACTIONS + INITIAL_STATECHART,
+				FOLD_INCOMING_ACTIONS + EXPECTED_STATECHART, "B", true);
+		
+		testRefactoringIsExecutableOnState(FOLD_INCOMING_ACTIONS + INITIAL_STATECHART,
+				FOLD_INCOMING_ACTIONS + EXPECTED_STATECHART, "C", false);
+		
+		testRefactoringIsExecutableOnState(FOLD_INCOMING_ACTIONS + INITIAL_STATECHART,
+				FOLD_INCOMING_ACTIONS + EXPECTED_STATECHART, "InnerState", false);
+	}
 
 	protected AbstractRefactoring<?> getRefactoring(State state) {
 		FoldIncomingActionsRefactoring foldIncomingActionsRefactoring = new FoldIncomingActionsRefactoring();

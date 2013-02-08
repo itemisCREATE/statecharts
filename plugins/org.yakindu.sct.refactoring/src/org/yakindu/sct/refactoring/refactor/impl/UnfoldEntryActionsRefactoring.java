@@ -47,16 +47,26 @@ public class UnfoldEntryActionsRefactoring extends AbstractRefactoring<State> {
 	}
 
 	/**
-	 * Checks if one of the incoming transitions enters a parent composite state
-	 * of its target. If so, false is returned if this parent composite state
-	 * has entry actions.
-	 * 
-	 * @return true if all preconditions are fulfilled, false otherwise
+	 * {@inheritDoc}
 	 */
 	@Override
 	public boolean isExecutable() {
 		return super.isExecutable()
-				&& !helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
+				&& hasAtLeastOneEntryAction()
+				&& hasAtLeastOneIncomingTransition()
+				&& noIncomingTransitionEntersCompositeWithEntryActions();
+	}
+
+	private boolean noIncomingTransitionEntersCompositeWithEntryActions() {
+		return !helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
+	}
+
+	private boolean hasAtLeastOneEntryAction() {
+		return helper.hasEntryAction(getContextObject());
+	}
+
+	private boolean hasAtLeastOneIncomingTransition() {
+		return !getContextObject().getIncomingTransitions().isEmpty();
 	}
 
 	private void unfoldEntryActions() {

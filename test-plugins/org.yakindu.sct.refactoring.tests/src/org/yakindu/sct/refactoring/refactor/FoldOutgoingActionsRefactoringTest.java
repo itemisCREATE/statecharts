@@ -34,6 +34,21 @@ public class FoldOutgoingActionsRefactoringTest extends
 		testRefactoringOnState(FOLD_OUTGOING_ACTIONS + INITIAL_STATECHART,
 				FOLD_OUTGOING_ACTIONS + EXPECTED_STATECHART, "A");
 	}
+	
+	@Test
+	public void testIsExecutable() {
+		testRefactoringIsExecutableOnState(FOLD_OUTGOING_ACTIONS + INITIAL_STATECHART,
+				FOLD_OUTGOING_ACTIONS + EXPECTED_STATECHART, "A", true);
+		
+		testRefactoringIsExecutableOnState(FOLD_OUTGOING_ACTIONS + INITIAL_STATECHART,
+				FOLD_OUTGOING_ACTIONS + EXPECTED_STATECHART, "InnerState", false);
+		
+		testRefactoringIsExecutableOnState(FOLD_OUTGOING_ACTIONS + INITIAL_STATECHART,
+				FOLD_OUTGOING_ACTIONS + EXPECTED_STATECHART, "D", false);
+		
+		testRefactoringIsExecutableOnState(FOLD_OUTGOING_ACTIONS + INITIAL_STATECHART,
+				FOLD_OUTGOING_ACTIONS + EXPECTED_STATECHART, "E", false);
+	}
 
 	@Override
 	protected AbstractRefactoring<?> getRefactoring(State state) {

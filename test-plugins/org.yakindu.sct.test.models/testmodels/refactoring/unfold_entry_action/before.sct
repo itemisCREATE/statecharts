@@ -19,6 +19,7 @@
           <vertices xsi:type="sgraph:State" xmi:id="_JRcsMOqjEeG_KKo5r9OX-w" specification="entry /&#xA;  x+=1" name="InnerState" incomingTransitions="_LuJ_MOqjEeG_KKo5r9OX-w"/>
         </regions>
       </vertices>
+      <vertices xsi:type="sgraph:State" xmi:id="_wgLhkHITEeKt7LlJCM3PJg" specification="entry / x=3" name="F"/>
     </regions>
   </sgraph:Statechart>
   <notation:Diagram xmi:id="_AU3ksMdiEeGOoP2Ze98WBQ" type="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor" element="_AU29oMdiEeGOoP2Ze98WBQ" measurementUnit="Pixel">
@@ -70,7 +71,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_BFBPQcdiEeGOoP2Ze98WBQ" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_BFBPQsdiEeGOoP2Ze98WBQ"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_BFCdY8diEeGOoP2Ze98WBQ"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_BFBPQ8diEeGOoP2Ze98WBQ" x="241" y="79" width="93" height="98"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_BFBPQ8diEeGOoP2Ze98WBQ" x="241" y="47" width="114" height="162"/>
         </children>
         <children xmi:id="_bKusgMdlEeGOoP2Ze98WBQ" type="State" element="_bKn-0MdlEeGOoP2Ze98WBQ">
           <children xsi:type="notation:DecorationNode" xmi:id="_bKvTkMdlEeGOoP2Ze98WBQ" type="StateName">
@@ -143,6 +144,34 @@
           <styles xsi:type="notation:LineTypeStyle" xmi:id="_I5HOQhkSEeKY0Z-c58HwiQ"/>
           <element xsi:nil="true"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_I5HOQxkSEeKY0Z-c58HwiQ" x="157" y="307" width="121" height="37"/>
+        </children>
+        <children xmi:id="_wgMvsHITEeKt7LlJCM3PJg" type="State" element="_wgLhkHITEeKt7LlJCM3PJg">
+          <children xsi:type="notation:DecorationNode" xmi:id="_wgNWwHITEeKt7LlJCM3PJg" type="StateName">
+            <styles xsi:type="notation:ShapeStyle" xmi:id="_wgNWwXITEeKt7LlJCM3PJg"/>
+            <layoutConstraint xsi:type="notation:Location" xmi:id="_wgNWwnITEeKt7LlJCM3PJg"/>
+          </children>
+          <children xsi:type="notation:Compartment" xmi:id="_wgN90HITEeKt7LlJCM3PJg" type="StateTextCompartment">
+            <children xsi:type="notation:Shape" xmi:id="_wgN90XITEeKt7LlJCM3PJg" type="StateTextCompartmentExpression" fontName="Verdana" lineColor="4210752">
+              <layoutConstraint xsi:type="notation:Bounds" xmi:id="_wgN90nITEeKt7LlJCM3PJg"/>
+            </children>
+          </children>
+          <children xsi:type="notation:Compartment" xmi:id="_wgN903ITEeKt7LlJCM3PJg" type="StateFigureCompartment"/>
+          <styles xsi:type="notation:ShapeStyle" xmi:id="_wgMvsXITEeKt7LlJCM3PJg" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
+          <styles xsi:type="notation:FontStyle" xmi:id="_wgMvsnITEeKt7LlJCM3PJg"/>
+          <styles xsi:type="notation:BooleanValueStyle" xmi:id="_wgN91HITEeKt7LlJCM3PJg" name="isHorizontal" booleanValue="true"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_wgMvs3ITEeKt7LlJCM3PJg" x="405" y="98"/>
+        </children>
+        <children xsi:type="notation:Shape" xmi:id="_2Y8rwHITEeKt7LlJCM3PJg" type="Note" fontName="Verdana" description="Refactoring disabled" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+          <children xsi:type="notation:BasicDecorationNode" xmi:id="_2Y9S0HITEeKt7LlJCM3PJg" type="DiagramName">
+            <element xsi:nil="true"/>
+          </children>
+          <children xsi:type="notation:BasicDecorationNode" xmi:id="_2Y9S0XITEeKt7LlJCM3PJg" type="Description">
+            <element xsi:nil="true"/>
+          </children>
+          <styles xsi:type="notation:TextStyle" xmi:id="_2Y8rwXITEeKt7LlJCM3PJg"/>
+          <styles xsi:type="notation:LineTypeStyle" xmi:id="_2Y8rwnITEeKt7LlJCM3PJg"/>
+          <element xsi:nil="true"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_2Y8rw3ITEeKt7LlJCM3PJg" x="405" y="55" height="28"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_AU4LxMdiEeGOoP2Ze98WBQ"/>
       </children>
