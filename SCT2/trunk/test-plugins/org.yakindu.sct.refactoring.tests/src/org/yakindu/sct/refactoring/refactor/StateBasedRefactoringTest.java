@@ -27,6 +27,7 @@ import org.yakindu.sct.test.models.RefactoringTestModels;
 import com.google.inject.Inject;
 
 /**
+ * Base test class for state based refactorings.
  * 
  * @author thomas kutz - Initial contribution and API
  * 

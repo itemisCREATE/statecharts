@@ -36,6 +36,7 @@ import org.yakindu.sct.test.models.RefactoringTestModels;
 import com.google.inject.Inject;
 
 /**
+ * Tests for {@link RenameRefactoring}.
  * 
  * @author thomas kutz - Initial contribution and API
  * 
