@@ -11,7 +11,6 @@
 package org.yakindu.sct.refactoring.refactor.impl;
 
 import java.util.Collection;
-
 import java.util.HashSet;
 
 import org.eclipse.emf.common.util.EList;
@@ -27,12 +26,21 @@ import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 
 /**
+ * Renames the context object and all references to it.
+ * <br><br>
+ * Context:
+ * <ul>
+ * <li>A {@link NamedElement}.</li>
+ * </ul>
+ * Preconditions:
+ * <ul>
+ * <li>None.</li>
+ * </ul>
  * 
  * @author thomas kutz - Initial contribution and API
  * 
  */
-// TODO Use generic
-public class RenameRefactoring extends AbstractRefactoring {
+public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 
 	NamedElement element;
 	String oldName;

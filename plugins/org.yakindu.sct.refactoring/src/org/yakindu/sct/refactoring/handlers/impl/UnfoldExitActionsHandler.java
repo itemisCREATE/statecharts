@@ -16,6 +16,7 @@ import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoring;
 
 /**
+ * Handler for {@link UnfoldExitActionsRefactoring}.
  * 
  * @author thomas kutz - Initial contribution and API
  * 

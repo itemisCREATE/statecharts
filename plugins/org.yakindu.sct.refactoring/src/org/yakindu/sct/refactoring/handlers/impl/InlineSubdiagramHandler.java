@@ -21,6 +21,7 @@ import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 
 /**
+ * Handler for {@link InlineSubdiagramRefactoring}.
  * 
  * @author andreas muelder - Initial contribution and API
  * 

@@ -27,6 +27,17 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.impl.ExitEventImpl;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 /**
+ * This refactoring moves exit actions of a state to its outgoing transitions.
+ * <br><br>
+ * Context:
+ * <ul>
+ * <li>Exactly one state</li>
+ * </ul>
+ * Preconditions:
+ * <ul>
+ * <li>At least one exit action exists.</li>
+ * <li>No outgoing transition leaves a parent composite state of the context state with exit actions.</li>
+ * </ul>
  * 
  * @author thomas kutz - Initial contribution and API
  * 

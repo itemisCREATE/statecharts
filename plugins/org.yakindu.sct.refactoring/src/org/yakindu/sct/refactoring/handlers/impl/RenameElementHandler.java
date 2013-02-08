@@ -38,6 +38,7 @@ import org.yakindu.sct.refactoring.refactor.impl.RenameRefactoring;
 
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 /**
+ * Handler for {@link RenameRefactoring}.
  * 
  * @author thomas kutz - Initial contribution and API
  * 
