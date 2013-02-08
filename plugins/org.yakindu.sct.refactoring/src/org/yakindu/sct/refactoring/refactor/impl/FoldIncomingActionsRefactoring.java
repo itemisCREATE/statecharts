@@ -64,7 +64,7 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 	public boolean isExecutable() {
 		// TODO check if there is at least one action on each transition
 		return super.isExecutable()
-				&& helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
+				&& !helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
 	}
 
 

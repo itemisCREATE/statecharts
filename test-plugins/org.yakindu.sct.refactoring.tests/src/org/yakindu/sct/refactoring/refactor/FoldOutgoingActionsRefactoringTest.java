@@ -21,6 +21,7 @@ import org.yakindu.sct.refactoring.refactor.impl.FoldOutgoingActionsRefactoring;
 import com.google.common.collect.Lists;
 
 /**
+ * Tests for {@link FoldOutgoingActionsRefactoring}.
  * 
  * @author thomas kutz - Initial contribution and API
  * 

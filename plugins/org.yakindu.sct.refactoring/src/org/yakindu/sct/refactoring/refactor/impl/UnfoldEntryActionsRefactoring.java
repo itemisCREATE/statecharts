@@ -56,7 +56,7 @@ public class UnfoldEntryActionsRefactoring extends AbstractRefactoring<State> {
 	@Override
 	public boolean isExecutable() {
 		return super.isExecutable()
-				&& helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
+				&& !helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
 	}
 
 	private void unfoldEntryActions() {
