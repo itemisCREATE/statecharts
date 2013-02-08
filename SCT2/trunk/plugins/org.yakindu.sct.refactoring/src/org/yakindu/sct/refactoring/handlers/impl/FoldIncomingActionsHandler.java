@@ -16,6 +16,7 @@ import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.FoldIncomingActionsRefactoring;
 
 /**
+ * Handler for {@link FoldIncomingActionsRefactoring}.
  * 
  * @author thomas kutz - Initial contribution and API
  * 

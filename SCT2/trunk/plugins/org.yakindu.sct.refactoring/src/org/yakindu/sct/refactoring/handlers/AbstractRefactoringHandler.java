@@ -21,6 +21,10 @@ import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 
 /**
+ * Abstract command handler for refactoring commands. Refactoring handlers are responsible for initializing the 
+ * corresponding {@link AbstractRefactoring} by defining the relevant context object from the current selection 
+ * ({@link AbstractRefactoringHandler#setContext(AbstractRefactoring, ISelection)}). The execution of the handler
+ * is typically delegated to the corresponding {@link AbstractRefactoring}.   
  * 
  * @author andreas muelder - Initial contribution and API
  * 

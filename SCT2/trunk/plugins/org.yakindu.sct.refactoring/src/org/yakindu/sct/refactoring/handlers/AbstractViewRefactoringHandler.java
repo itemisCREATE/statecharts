@@ -17,6 +17,8 @@ import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 
 import com.google.common.collect.Lists;
 /**
+ * Base class for all refactoring handlers working on a single {@link View}.
+ * This is typically the case when refactorings need to modify layout settings.
  * 
  * @author thomas kutz - Initial contribution and API
  * 

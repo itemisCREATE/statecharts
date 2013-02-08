@@ -32,13 +32,19 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 
 /**
- * Implementation for 'fold outgoing actions' refactoring. This refactoring
- * moves actions of outgoing transitions to the exit block of a state. Actions
- * can only be moved if they are used at all outgoing transitions in the same
- * order (checked from front to back). If one of the outgoing transitions leaves
- * a composite state which has exit actions, the refactoring is not applied.
- * 
- * @author kutz
+ * This refactoring moves actions of outgoing transitions to the exit block of a state. Actions can only be moved if 
+ * they are used at all outgoing transitions in the same order (checked from front to back). 
+ * <br><br>
+ * Context:
+ * <ul>
+ * <li>Exactly one state.</li>
+ * </ul>
+ * Preconditions:
+ * <ul>
+ * <li>Each outgoing transition has at least one action.</li>
+ * <li>No outgoing transition leaves a composite state which has exit actions.</li>
+ * </ul>
+ * @author thomas kutz - Initial contribution and API
  * 
  */
 public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
@@ -60,6 +66,7 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 	 */
 	@Override
 	public boolean isExecutable() {
+		// TODO check if there is at least one action on each transition
 		return super.isExecutable()
 				&& noTransitionLeavesCompositeWithExitActions(getContextObject()
 						.getOutgoingTransitions());

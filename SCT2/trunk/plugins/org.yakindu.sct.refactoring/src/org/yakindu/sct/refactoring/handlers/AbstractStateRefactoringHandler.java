@@ -18,6 +18,7 @@ import org.yakindu.sct.ui.editor.editparts.StateEditPart;
 import com.google.common.collect.Lists;
 
 /**
+ * Base class for all refactoring handlers working on a single {@link State}.
  * 
  * @author thomas kutz - Initial contribution and API
  * 

@@ -33,10 +33,18 @@ import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
  * Implementation for 'fold incoming actions' refactoring. This refactoring
  * moves actions of incoming transitions to the entry block of a state. Actions
  * can only be moved if they are used at all incoming transitions in the same
- * order (checked from back to front). If one of the incoming transitions enters
- * a composite state which has entry actions, the refactoring is not applied.
- * 
- * @author kutz
+ * order (checked from back to front). 
+ * <br><br>
+ * Context:
+ * <ul>
+ * <li>Exactly one state.</li>
+ * </ul>
+ * Preconditions:
+ * <ul>
+ * <li>Each incoming transition has at least one action.</li>
+ * <li>No incoming transition enters a composite state which has entry actions.</li>
+ * </ul>
+ * @author thomas kutz - Initial contribution and API
  * 
  */
 public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
@@ -56,6 +64,7 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 	 */
 	@Override
 	public boolean isExecutable() {
+		// TODO check if there is at least one action on each transition
 		return super.isExecutable()
 				&& noTransitionEntersCompositeWithEntryActions(getContextObject()
 						.getIncomingTransitions());

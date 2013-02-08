@@ -22,6 +22,7 @@ import org.yakindu.sct.refactoring.refactor.impl.GroupStatesIntoCompositeRefacto
 
 import com.google.common.collect.Lists;
 /**
+ * Handler for {@link GroupStatesIntoCompositeRefactoring}.
  * 
  * @author thomas kutz - Initial contribution and API
  * 

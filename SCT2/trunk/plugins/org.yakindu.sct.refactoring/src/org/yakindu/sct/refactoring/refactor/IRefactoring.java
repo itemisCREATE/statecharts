@@ -11,14 +11,23 @@
 package org.yakindu.sct.refactoring.refactor;
 
 /**
+ * Base interface for all refactorings.
  * 
  * @author thomas kutz - Initial contribution and API
  * 
  */
 public interface IRefactoring<T> {
-
+	
+	/**
+	 * Checks all preconditions that need to be statisfied before the refactoring can be executed.
+	 * 
+	 * @return true if all preconditions are satisfied, otherwise false
+	 */
 	public boolean isExecutable();
 
+	/**
+	 * Executes the refactoring logic.
+	 */
 	public void execute();
 
 }

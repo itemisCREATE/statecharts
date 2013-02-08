@@ -17,6 +17,7 @@ import org.yakindu.sct.refactoring.refactor.impl.ExtractSubdiagramRefactoring;
 
 
 /**
+ * Handler for {@link ExtractSubdiagramRefactoring}.
  * 
  * @author andreas muelder - Initial contribution and API
  * 

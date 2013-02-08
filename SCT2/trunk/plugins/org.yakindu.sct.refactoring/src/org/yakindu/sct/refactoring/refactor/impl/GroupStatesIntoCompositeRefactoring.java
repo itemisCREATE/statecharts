@@ -33,7 +33,17 @@ import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 import com.google.common.collect.Lists;
 /**
- * 
+ * Groups a set of states into one composite state. All transitions to and from this set of state are preserved, i.e.
+ * the new composite state itself will have no incoming or outgoing transitions.
+ * <br><br>
+ * Context:
+ * <ul>
+ * <li>A set of states</li>
+ * </ul>
+ * Preconditions:
+ * <ul>
+ * <li>All states are in the same region.</li>
+ * </ul>
  * @author thomas kutz - Initial contribution and API
  * 
  */
