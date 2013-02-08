@@ -11,9 +11,7 @@
 package org.yakindu.sct.refactoring.refactor.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -66,31 +64,10 @@ public class FoldIncomingActionsRefactoring extends AbstractRefactoring<State> {
 	public boolean isExecutable() {
 		// TODO check if there is at least one action on each transition
 		return super.isExecutable()
-				&& noTransitionEntersCompositeWithEntryActions(getContextObject()
-						.getIncomingTransitions());
-
+				&& helper.oneIncomingTransitionEntersCompositeWithEntryActions(getContextObject());
 	}
 
-	private boolean noTransitionEntersCompositeWithEntryActions(
-			EList<Transition> transitions) {
 
-		for (Transition transition : transitions) {
-			// all parent states of source need to be contained in the set of
-			// the target's parent states
-			Set<State> targetParentStates = new HashSet<State>(
-					helper.getParentStates(transition.getTarget()));
-			Set<State> sourceParentStates = helper.getParentStates(transition
-					.getSource());
-
-			targetParentStates.removeAll(sourceParentStates);
-
-			for (State crossedCompositeState : targetParentStates) {
-				if (helper.hasEntryAction(crossedCompositeState))
-					return false;
-			}
-		}
-		return true;
-	}
 
 	private List<Expression> getFoldableActions() {
 		EList<Transition> transitions = getContextObject()

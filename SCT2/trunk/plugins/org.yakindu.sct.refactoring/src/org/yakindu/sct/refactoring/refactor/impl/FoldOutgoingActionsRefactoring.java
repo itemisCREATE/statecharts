@@ -11,18 +11,14 @@
 package org.yakindu.sct.refactoring.refactor.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -68,41 +64,7 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 	public boolean isExecutable() {
 		// TODO check if there is at least one action on each transition
 		return super.isExecutable()
-				&& noTransitionLeavesCompositeWithExitActions(getContextObject()
-						.getOutgoingTransitions());
-	}
-
-	private boolean noTransitionLeavesCompositeWithExitActions(
-			EList<Transition> transitions) {
-
-		for (Transition transition : transitions) {
-			// all parent states of target need to be contained in the set of
-			// the source's parent states
-			Set<State> sourceParentStates = new HashSet<State>(
-					getParentStates(transition.getSource()));
-			Set<State> targetParentStates = getParentStates(transition
-					.getTarget());
-
-			sourceParentStates.removeAll(targetParentStates);
-
-			for (State crossedCompositeState : sourceParentStates) {
-				if (helper.hasExitAction(crossedCompositeState))
-					return false;
-			}
-		}
-		return true;
-	}
-
-	// TODO are hierarchies of regions possible?
-	private Set<State> getParentStates(Vertex state) {
-		Set<State> parentStates = new HashSet<State>();
-		CompositeElement composite = state.getParentRegion().getComposite();
-		if (composite instanceof State) {
-			State parentState = (State) composite;
-			parentStates.add(parentState);
-			parentStates.addAll(getParentStates(parentState));
-		}
-		return parentStates;
+				&& !helper.oneOutgoingTransitionLeavesCompositeWithExitActions(getContextObject());
 	}
 
 	private List<Expression> getFoldableActions(EList<Transition> transitions) {
