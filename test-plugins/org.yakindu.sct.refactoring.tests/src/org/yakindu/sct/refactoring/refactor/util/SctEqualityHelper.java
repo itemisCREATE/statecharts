@@ -7,6 +7,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil.EqualityHelper;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 
+/**
+ * Modified {@link EqualityHelper} for test cases to ignore whitespaces in string comparisons and
+ * resolve proxy elements when necessary.
+ * 
+ * @author thomas kutz - Initial contribution and API
+ *
+ */
 public class SctEqualityHelper extends EqualityHelper{
 
 	@Override
@@ -62,6 +69,6 @@ public class SctEqualityHelper extends EqualityHelper{
 	}
 
 	private String removeWhitespaces(String input) {
-		return input.replaceAll(" ", "");
+		return input.replaceAll("\\s", "");
 	}
 }
