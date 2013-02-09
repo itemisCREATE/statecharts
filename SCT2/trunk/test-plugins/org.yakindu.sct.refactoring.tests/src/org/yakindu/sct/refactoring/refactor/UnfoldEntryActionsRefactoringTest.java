@@ -31,10 +31,10 @@ public class UnfoldEntryActionsRefactoringTest extends
 	@Test
 	public void testUnfoldEntryActions() {
 
-		testRefactoringOnState(UNFOLD_ENTRY_ACTIONS
-				+ INITIAL_STATECHART,
-				UNFOLD_ENTRY_ACTIONS
-						+ EXPECTED_STATECHART, "B");
+		testRefactoringOnState(
+				UNFOLD_ENTRY_ACTIONS + INITIAL_STATECHART,
+				UNFOLD_ENTRY_ACTIONS + EXPECTED_STATECHART,
+				"B");
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class UnfoldEntryActionsRefactoringTest extends
 	}
 
 	@Override
-	protected AbstractRefactoring<?> getRefactoring(State state) {
+	protected AbstractRefactoring<State> getRefactoring(State state) {
 		UnfoldEntryActionsRefactoring unfoldEntryActionsRefactoring = new UnfoldEntryActionsRefactoring();
 		unfoldEntryActionsRefactoring.setContextObjects(Lists.newArrayList(state));
 		return unfoldEntryActionsRefactoring;

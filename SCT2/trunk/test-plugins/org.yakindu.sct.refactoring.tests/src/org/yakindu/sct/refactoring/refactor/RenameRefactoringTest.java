@@ -14,32 +14,22 @@ import static org.junit.Assert.fail;
 import static org.yakindu.sct.test.models.RefactoringTestModels.INITIAL_STATECHART;
 import static org.yakindu.sct.test.models.RefactoringTestModels.RENAMING;
 
-import java.util.List;
 
-import junit.framework.Assert;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.parser.IParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
-import org.yakindu.sct.model.stext.resource.impl.StextResource;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.refactoring.refactor.impl.RenameRefactoring;
-import org.yakindu.sct.refactoring.refactor.util.SctEqualityHelper;
-import org.yakindu.sct.refactoring.refactor.util.TestHelper;
-import org.yakindu.sct.refactoring.refactor.util.TestInjectorProvider;
-import org.yakindu.sct.test.models.RefactoringTestModels;
+import org.yakindu.sct.test.models.TestModelInjectorProvider;
 
-import com.google.inject.Inject;
 
 /**
  * Tests for {@link RenameRefactoring}.
@@ -48,23 +38,8 @@ import com.google.inject.Inject;
  * 
  */
 @RunWith(XtextRunner.class)
-@InjectWith(TestInjectorProvider.class)
-public class RenameRefactoringTest {
-
-	@Inject
-	protected IParser parser;
-
-	@Inject
-	protected RefactoringTestModels models;
-
-	protected TestHelper helper = new TestHelper();
-
-	protected void compareStatecharts(Statechart initial, Statechart expected) {
-		SctEqualityHelper equalityHelper = new SctEqualityHelper();
-		if (!equalityHelper.equals(initial, expected)) {
-			Assert.fail("Equality check on statecharts failed!");
-		}
-	}
+@InjectWith(TestModelInjectorProvider.class)
+public class RenameRefactoringTest extends RefactoringTest {
 
 	@Test
 	public void testRenameVariable() {
@@ -165,13 +140,6 @@ public class RenameRefactoringTest {
 	@Test
 	public void testNoRenamingIntoExistingName() {
 		fail("Not yet implemented.");
-	}
-	
-	private void parseAllSpecifications(Statechart sct) {
-		List<SpecificationElement> allSpecElements = EcoreUtil2.getAllContentsOfType(sct, SpecificationElement.class);
-		for (SpecificationElement specificationElement : allSpecElements) {
-			((StextResource)sct.eResource()).parseSpecificationElement(specificationElement);
-		}
 	}
 
 }
