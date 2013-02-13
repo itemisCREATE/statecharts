@@ -16,6 +16,8 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.yakindu.base.types.ITypeSystem.InferenceResult;
+import org.yakindu.base.types.ITypeSystem.InferredType;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
@@ -54,6 +56,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
 import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IEventSlot;
@@ -80,7 +83,10 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   private ITimingService timingService;
   
   @Inject
-  private ISTextTypeSystem tsa;
+  private ISTextTypeSystem _iSTextTypeSystem;
+  
+  @Inject
+  private ISTextTypeInferrer _iSTextTypeInferrer;
   
   @Inject
   @Named(value = "InterpreterName")
@@ -295,26 +301,30 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     QualifiedName _qualifiedName = this.provider.qualifiedName(variable);
     String fqName = _qualifiedName.toString();
     ExecutionVariable varSlot = null;
-    Type _type = variable.getType();
-    boolean _isBooleanType = this.tsa.isBooleanType(_type);
+    InferenceResult _inferType = this._iSTextTypeInferrer.inferType(variable);
+    InferredType _type = _inferType.getType();
+    boolean _isBooleanType = this._iSTextTypeSystem.isBooleanType(_type);
     if (_isBooleanType) {
       ExecutionVariable _executionVariable = new ExecutionVariable(fqName, Boolean.class, Boolean.valueOf(false));
       varSlot = _executionVariable;
     } else {
-      Type _type_1 = variable.getType();
-      boolean _isIntegerType = this.tsa.isIntegerType(_type_1);
+      InferenceResult _inferType_1 = this._iSTextTypeInferrer.inferType(variable);
+      InferredType _type_1 = _inferType_1.getType();
+      boolean _isIntegerType = this._iSTextTypeSystem.isIntegerType(_type_1);
       if (_isIntegerType) {
         ExecutionVariable _executionVariable_1 = new ExecutionVariable(fqName, Integer.class, Integer.valueOf(0));
         varSlot = _executionVariable_1;
       } else {
-        Type _type_2 = variable.getType();
-        boolean _isRealType = this.tsa.isRealType(_type_2);
+        InferenceResult _inferType_2 = this._iSTextTypeInferrer.inferType(variable);
+        InferredType _type_2 = _inferType_2.getType();
+        boolean _isRealType = this._iSTextTypeSystem.isRealType(_type_2);
         if (_isRealType) {
           ExecutionVariable _executionVariable_2 = new ExecutionVariable(fqName, Float.class, Float.valueOf(0.0f));
           varSlot = _executionVariable_2;
         } else {
-          Type _type_3 = variable.getType();
-          boolean _isStringType = this.tsa.isStringType(_type_3);
+          InferenceResult _inferType_3 = this._iSTextTypeInferrer.inferType(variable);
+          InferredType _type_3 = _inferType_3.getType();
+          boolean _isStringType = this._iSTextTypeSystem.isStringType(_type_3);
           if (_isStringType) {
             ExecutionVariable _executionVariable_3 = new ExecutionVariable(fqName, String.class, "");
             varSlot = _executionVariable_3;
@@ -330,32 +340,37 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
     QualifiedName _qualifiedName = this.provider.qualifiedName(event);
     String fqName = _qualifiedName.toString();
     ExecutionEvent eventSlot = null;
-    Type _type = event.getType();
-    boolean _isBooleanType = this.tsa.isBooleanType(_type);
+    InferenceResult _inferType = this._iSTextTypeInferrer.inferType(event);
+    InferredType _type = _inferType.getType();
+    boolean _isBooleanType = this._iSTextTypeSystem.isBooleanType(_type);
     if (_isBooleanType) {
       ExecutionEvent _executionEvent = new ExecutionEvent(fqName, Boolean.class, Boolean.valueOf(false));
       eventSlot = _executionEvent;
     } else {
-      Type _type_1 = event.getType();
-      boolean _isIntegerType = this.tsa.isIntegerType(_type_1);
+      InferenceResult _inferType_1 = this._iSTextTypeInferrer.inferType(event);
+      InferredType _type_1 = _inferType_1.getType();
+      boolean _isIntegerType = this._iSTextTypeSystem.isIntegerType(_type_1);
       if (_isIntegerType) {
         ExecutionEvent _executionEvent_1 = new ExecutionEvent(fqName, Integer.class, Integer.valueOf(0));
         eventSlot = _executionEvent_1;
       } else {
-        Type _type_2 = event.getType();
-        boolean _isRealType = this.tsa.isRealType(_type_2);
+        InferenceResult _inferType_2 = this._iSTextTypeInferrer.inferType(event);
+        InferredType _type_2 = _inferType_2.getType();
+        boolean _isRealType = this._iSTextTypeSystem.isRealType(_type_2);
         if (_isRealType) {
           ExecutionEvent _executionEvent_2 = new ExecutionEvent(fqName, Float.class, Float.valueOf(0.0f));
           eventSlot = _executionEvent_2;
         } else {
-          Type _type_3 = event.getType();
-          boolean _isVoidType = this.tsa.isVoidType(_type_3);
+          InferenceResult _inferType_3 = this._iSTextTypeInferrer.inferType(event);
+          InferredType _type_3 = _inferType_3.getType();
+          boolean _isVoidType = this._iSTextTypeSystem.isVoidType(_type_3);
           if (_isVoidType) {
             ExecutionEvent _executionEvent_3 = new ExecutionEvent(fqName, Void.class);
             eventSlot = _executionEvent_3;
           } else {
-            Type _type_4 = event.getType();
-            boolean _isStringType = this.tsa.isStringType(_type_4);
+            InferenceResult _inferType_4 = this._iSTextTypeInferrer.inferType(event);
+            InferredType _type_4 = _inferType_4.getType();
+            boolean _isStringType = this._iSTextTypeSystem.isStringType(_type_4);
             if (_isStringType) {
               ExecutionEvent _executionEvent_4 = new ExecutionEvent(fqName, String.class, "");
               eventSlot = _executionEvent_4;
@@ -382,27 +397,27 @@ public class ExecutionFlowInterpreter extends AbstractExecutionFacade implements
   
   public Class<? extends Object> mappedType(final Type it) {
     Class<? extends Object> _xifexpression = null;
-    boolean _isBooleanType = this.tsa.isBooleanType(it);
+    boolean _isBooleanType = this._iSTextTypeSystem.isBooleanType(it);
     if (_isBooleanType) {
       _xifexpression = Boolean.class;
     } else {
       Class<? extends Object> _xifexpression_1 = null;
-      boolean _isIntegerType = this.tsa.isIntegerType(it);
+      boolean _isIntegerType = this._iSTextTypeSystem.isIntegerType(it);
       if (_isIntegerType) {
         _xifexpression_1 = Integer.class;
       } else {
         Class<? extends Object> _xifexpression_2 = null;
-        boolean _isRealType = this.tsa.isRealType(it);
+        boolean _isRealType = this._iSTextTypeSystem.isRealType(it);
         if (_isRealType) {
           _xifexpression_2 = Float.class;
         } else {
           Class<? extends Object> _xifexpression_3 = null;
-          boolean _isVoidType = this.tsa.isVoidType(it);
+          boolean _isVoidType = this._iSTextTypeSystem.isVoidType(it);
           if (_isVoidType) {
             _xifexpression_3 = Void.class;
           } else {
             Class<String> _xifexpression_4 = null;
-            boolean _isStringType = this.tsa.isStringType(it);
+            boolean _isStringType = this._iSTextTypeSystem.isStringType(it);
             if (_isStringType) {
               _xifexpression_4 = String.class;
             } else {
