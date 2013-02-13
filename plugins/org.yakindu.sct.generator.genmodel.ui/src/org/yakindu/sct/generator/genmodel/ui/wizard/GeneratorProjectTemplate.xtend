@@ -10,6 +10,7 @@
  */ 
 package org.yakindu.sct.generator.genmodel.ui.wizard
 
+import org.eclipse.core.resources.ResourcesPlugin
 import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -19,7 +20,6 @@ import org.eclipse.core.resources.IContainer
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IFolder
 import org.eclipse.core.resources.IResource
-import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.Path
 import org.eclipse.core.runtime.SubProgressMonitor
@@ -28,6 +28,10 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl
 import org.yakindu.sct.model.sgen.ParameterTypes
 import org.yakindu.sct.model.sgen.SGenFactory
+import com.google.inject.Provider
+import org.eclipse.core.resources.IWorkspace
+import com.google.inject.Inject
+import org.eclipse.xtext.parser.IEncodingProvider
 
 /**
  * 
@@ -37,13 +41,16 @@ class GeneratorProjectTemplate {
 	
 	IProgressMonitor monitor
 	
+	@Inject Provider<IWorkspace> workspaceProvider;
+	@Inject IEncodingProvider encodingProvider; 
+	
 	def setMonitor(IProgressMonitor monitor) {
 		this.monitor = monitor
 	}
 
 	def generate(ProjectData data) {
 		monitor.beginTask("Create YAKINDU Xpand Generator Project", 16);
-		val project = ResourcesPlugin::workspace.root.getProject(data.projectName);
+		val project = workspaceProvider.get().root.getProject(data.projectName);
 		project.create(monitor.sub)
 		project.open(monitor.sub)
 		monitor.worked(1)
@@ -52,7 +59,7 @@ class GeneratorProjectTemplate {
 			project.createFolder('xtend-gen')
 		}
 		project.getFile('.settings/org.eclipse.core.resources.prefs')
-			.write(data.projectSettings(ResourcesPlugin::encoding))
+			.write(data.projectSettings(encodingProvider.getEncoding(URI::createPlatformResourceURI(project.location.toString, true))))
 		project.getFile('.settings/org.eclipse.jdt.core.prefs')
 			.write(data.jdtSettings())
 		if (data.generatorType != GeneratorType::Java) {
@@ -182,7 +189,7 @@ class GeneratorProjectTemplate {
 			} else {
 				val submonitor = monitor.sub
 				file.create(stream, true, submonitor)
-				file.setCharset(ResourcesPlugin::encoding, submonitor)
+				file.setCharset(encodingProvider.getEncoding(URI::createPlatformResourceURI(file.location.toString, true)), submonitor)
 			}
 		} catch (Exception e) {
 			e.printStackTrace
