@@ -55,6 +55,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.Direction
+import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 
 /**
  * 
@@ -72,8 +73,8 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	StextNameProvider provider
 	@Inject 
 	ITimingService timingService
-	@Inject extension
-	ISTextTypeSystem tsa
+	@Inject extension ISTextTypeSystem 
+	@Inject extension ISTextTypeInferrer
 	 
 	@Inject
 	@Named("InterpreterName")
@@ -191,16 +192,16 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		var fqName = provider.qualifiedName(variable).toString
 		var ExecutionVariable varSlot 
 		
-		if(variable.type.booleanType){
+		if(variable.inferType.type.booleanType){
 			varSlot = new ExecutionVariable(fqName ,typeof(Boolean),false)
 		} 
-		else if (variable.type.integerType){
+		else if (variable.inferType.type.integerType){
 			varSlot = new ExecutionVariable(fqName,typeof(Integer),0)
 		}
-		else if(variable.type.realType){
+		else if(variable.inferType.type.realType){
 			varSlot = new ExecutionVariable(fqName,typeof(Float),0.0f)
 		}
-		else if (variable.type.stringType){
+		else if (variable.inferType.type.stringType){
 			varSlot = new ExecutionVariable(fqName,typeof(String),"")
 		}
 		
@@ -212,19 +213,19 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		var fqName = provider.qualifiedName(event).toString
 		var ExecutionEvent eventSlot
 		
-		if(event.type.booleanType){
+		if(event.inferType.type.booleanType){
 			eventSlot = new ExecutionEvent(fqName,typeof(Boolean),false)
 		}
-		else if(event.type.integerType){
+		else if(event.inferType.type.integerType){
 			eventSlot = new ExecutionEvent(fqName,typeof(Integer),0)
 		}
-		else if(event.type.realType){
+		else if(event.inferType.type.realType){
 			eventSlot = new ExecutionEvent(fqName,typeof(Float),0.0f)
 		}
-		else if(event.type.voidType){
+		else if(event.inferType.type.voidType){
 			eventSlot = new ExecutionEvent(fqName,typeof(Void))
 		}
-		else if (event.type.stringType){
+		else if (event.inferType.type.stringType){
 			eventSlot = new ExecutionEvent(fqName,typeof(String),"")
 		}
 		 
