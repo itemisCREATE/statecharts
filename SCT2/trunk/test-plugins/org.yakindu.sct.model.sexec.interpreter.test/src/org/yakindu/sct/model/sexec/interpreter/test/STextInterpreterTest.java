@@ -47,205 +47,205 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testIntVariableAssignment() {
-		executeWithDefaultScope("myInt = 42");
+		executeWithDefaultScope("intVar = 42");
 		assertEquals(42, getIntValue());
 	}
 
 	@Test
 	public void testHexVariableAssignment() {
-		executeWithDefaultScope("myInt = 0xFF");
+		executeWithDefaultScope("intVar = 0xFF");
 		assertEquals(0xFF, getIntValue());
 	}
 
 	@Test
 	public void testBoolTrueVariableAssignment() {
-		executeWithDefaultScope("myBool = true");
+		executeWithDefaultScope("boolVar = true");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testBoolFalseVariableAssignment() {
-		executeWithDefaultScope("myBool = false");
-		assertEquals(false, getContext().getVariable("myBool").getValue());
+		executeWithDefaultScope("boolVar = false");
+		assertEquals(false, getContext().getVariable("boolVar").getValue());
 	}
 
 	@Test
 	public void testFloatVariableAssignment() {
-		executeWithDefaultScope("myReal = 42.0");
-		assertEquals(42.0f, getContext().getVariable("myReal").getValue());
+		executeWithDefaultScope("realVar = 42.0");
+		assertEquals(42.0f, getContext().getVariable("realVar").getValue());
 	}
 
 	@Test
 	public void testStringVariableAssignment() {
-		executeWithDefaultScope("myString = 'fortytwo'");
+		executeWithDefaultScope("stringVar = 'fortytwo'");
 		assertEquals("fortytwo", getStringValue());
 	}
 
 	@Test
 	public void testConditionalTrue() {
-		executeWithDefaultScope("myInt = true ? 42 : 1");
+		executeWithDefaultScope("intVar = true ? 42 : 1");
 		assertEquals(42, getIntValue());
 	}
 
 	@Test
 	public void testConditionalFalse() {
-		executeWithDefaultScope("myInt = false ? 42 : 1");
+		executeWithDefaultScope("intVar = false ? 42 : 1");
 		assertEquals(1, getIntValue());
 	}
 
 	@Test
 	public void testNestedExpression() {
-		executeWithDefaultScope("myInt = (1 + 1) * 2");
+		executeWithDefaultScope("intVar = (1 + 1) * 2");
 		assertEquals(4, getIntValue());
 	}
 
 	@Test
 	public void testBooleanOr() {
-		executeWithDefaultScope("myBool = true || false");
+		executeWithDefaultScope("boolVar = true || false");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testBooleanAnd() {
-		executeWithDefaultScope("myBool = true && false");
-		assertEquals(false, getContext().getVariable("myBool").getValue());
+		executeWithDefaultScope("boolVar = true && false");
+		assertEquals(false, getContext().getVariable("boolVar").getValue());
 	}
 
 	@Test
 	public void testBitwiseXor() {
-		executeWithDefaultScope("myInt = 0xF0F0 ^ 0xFF00");
-		assertEquals(0x0FF0, getContext().getVariable("myInt").getValue());
+		executeWithDefaultScope("intVar = 0xF0F0 ^ 0xFF00");
+		assertEquals(0x0FF0, getContext().getVariable("intVar").getValue());
 
 	}
 
 	@Test
 	public void testBitwiseOr() {
-		executeWithDefaultScope("myInt = 0xF0F0 | 0xFFFF");
-		assertEquals(0xFFFF, getContext().getVariable("myInt").getValue());
+		executeWithDefaultScope("intVar = 0xF0F0 | 0xFFFF");
+		assertEquals(0xFFFF, getContext().getVariable("intVar").getValue());
 	}
 
 	@Test
 	public void testBitwiseAnd() {
-		executeWithDefaultScope("myInt = 0xF0F0 & 0xFFFF");
-		assertEquals(0x0F0F0, getContext().getVariable("myInt").getValue());
+		executeWithDefaultScope("intVar = 0xF0F0 & 0xFFFF");
+		assertEquals(0x0F0F0, getContext().getVariable("intVar").getValue());
 	}
 
 	@Test
 	public void testBoolEqual() {
-		executeWithDefaultScope("myBool = false == false");
+		executeWithDefaultScope("boolVar = false == false");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testIntEqual() {
-		executeWithDefaultScope("myBool = 1 == 1");
+		executeWithDefaultScope("boolVar = 1 == 1");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testFloatEqual() {
-		executeWithDefaultScope("myBool = 1.0f == 1.0f");
+		executeWithDefaultScope("boolVar = 1.0f == 1.0f");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testStringEqual() {
-		executeWithDefaultScope("myBool = 'string' == 'string'");
+		executeWithDefaultScope("boolVar = 'string' == 'string'");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testBoolNotEqual() {
-		executeWithDefaultScope("myBool = true != false");
+		executeWithDefaultScope("boolVar = true != false");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testIntNotEqual() {
-		executeWithDefaultScope("myBool = 1 != 2");
+		executeWithDefaultScope("boolVar = 1 != 2");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testFloatNotEqual() {
-		executeWithDefaultScope("myBool = 1.0f != 2.0f");
+		executeWithDefaultScope("boolVar = 1.0f != 2.0f");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testStringNotEqual() {
-		executeWithDefaultScope("myBool = 'string' != 'string2'");
+		executeWithDefaultScope("boolVar = 'string' != 'string2'");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testIntGreaterEqual() {
-		executeWithDefaultScope("myBool = 2 >= 1");
+		executeWithDefaultScope("boolVar = 2 >= 1");
 		assertEquals(true, getBoolValue());
 
 	}
 
 	@Test
 	public void testFloatGreaterEqual() {
-		executeWithDefaultScope("myBool = 2.0f >= 2.0f");
+		executeWithDefaultScope("boolVar = 2.0f >= 2.0f");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testIntSmallerEqual() {
-		executeWithDefaultScope("myBool = 1 <= 2");
+		executeWithDefaultScope("boolVar = 1 <= 2");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testFloatSmallerEqual() {
-		executeWithDefaultScope("myBool = 2.0f <= 2.0f");
+		executeWithDefaultScope("boolVar = 2.0f <= 2.0f");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testIntGreater() {
-		executeWithDefaultScope("myBool = 2 > 1");
+		executeWithDefaultScope("boolVar = 2 > 1");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testFloatGreater() {
-		executeWithDefaultScope("myBool = 2.1f > 2.0f");
+		executeWithDefaultScope("boolVar = 2.1f > 2.0f");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testIntSmaller() {
-		executeWithDefaultScope("myBool = 1 < 2");
+		executeWithDefaultScope("boolVar = 1 < 2");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testFloatSmaller() {
-		executeWithDefaultScope("myBool = 2.0f < 2.1f");
+		executeWithDefaultScope("boolVar = 2.0f < 2.1f");
 		assertEquals(true, getBoolValue());
 	}
 
 	@Test
 	public void testIntPositive() {
-		executeWithDefaultScope("myInt = + 1");
+		executeWithDefaultScope("intVar = + 1");
 		assertEquals(1, getIntValue());
-		executeWithDefaultScope("myInt = +2");
+		executeWithDefaultScope("intVar = +2");
 		assertEquals(2, getIntValue());
 	}
 
 	@Test
 	public void testFloatPositive() {
-		executeWithDefaultScope("myReal = +1.0");
+		executeWithDefaultScope("realVar = +1.0");
 		assertEquals(1.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntNegative() {
-		executeWithDefaultScope("myInt = - 1");
+		executeWithDefaultScope("intVar = - 1");
 		assertEquals(-1, getIntValue());
-		executeWithDefaultScope("myInt = -2");
+		executeWithDefaultScope("intVar = -2");
 		assertEquals(-2, getIntValue());
 
 	}
@@ -263,191 +263,191 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Test
 	public void testFloatNegative() {
-		executeWithDefaultScope("myReal = -1.0f");
+		executeWithDefaultScope("realVar = -1.0f");
 		assertEquals(-1.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntPlus() {
-		executeWithDefaultScope("myInt = 42 + 1");
+		executeWithDefaultScope("intVar = 42 + 1");
 		assertEquals(43, getIntValue());
 	}
 
 	@Test
 	public void testFloatPlus() {
-		executeWithDefaultScope("myReal = 42.0 + 1.0");
+		executeWithDefaultScope("realVar = 42.0 + 1.0");
 		assertEquals(43.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntMinus() {
-		executeWithDefaultScope("myInt = 42 - 1");
+		executeWithDefaultScope("intVar = 42 - 1");
 		assertEquals(41, getIntValue());
 	}
 
 	@Test
 	public void testFloatMinus() {
-		executeWithDefaultScope("myReal = 42.0f - 1.0f");
+		executeWithDefaultScope("realVar = 42.0f - 1.0f");
 		assertEquals(41.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntMultiply() {
-		executeWithDefaultScope("myInt = 42 * 2");
+		executeWithDefaultScope("intVar = 42 * 2");
 		assertEquals(84, getIntValue());
 	}
 
 	@Test
 	public void testFloatMultiply() {
-		executeWithDefaultScope("myReal = 42.0f * 2.0f");
+		executeWithDefaultScope("realVar = 42.0f * 2.0f");
 		assertEquals(84.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntDivide() {
-		executeWithDefaultScope("myInt = 42 / 2");
+		executeWithDefaultScope("intVar = 42 / 2");
 		assertEquals(21, getIntValue());
 	}
 
 	@Test
 	public void testFloatDivide() {
-		executeWithDefaultScope("myReal = 42.0f / 2.0f");
+		executeWithDefaultScope("realVar = 42.0f / 2.0f");
 		assertEquals(21.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntModulo() {
-		executeWithDefaultScope("myInt = 42 % 2");
+		executeWithDefaultScope("intVar = 42 % 2");
 		assertEquals(0, getIntValue());
 	}
 
 	@Test
 	public void testFloatModulo() {
-		executeWithDefaultScope("myReal = 42.0f % 2.0f");
+		executeWithDefaultScope("realVar = 42.0f % 2.0f");
 		assertEquals(0.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntLeft() {
-		executeWithDefaultScope("myInt = 42 << 2");
+		executeWithDefaultScope("intVar = 42 << 2");
 		assertEquals(168, getIntValue());
 	}
 
 	@Test
 	public void testIntRight() {
-		executeWithDefaultScope("myInt = 42 >> 2");
+		executeWithDefaultScope("intVar = 42 >> 2");
 		assertEquals(10, getIntValue());
 	}
 
 	@Test
 	public void testIntAnd() {
-		executeWithDefaultScope("myInt= 9 & 12");
+		executeWithDefaultScope("intVar= 9 & 12");
 		assertEquals(8, getIntValue());
 	}
 
 	@Test
 	public void testIntXor() {
-		executeWithDefaultScope("myInt= 9 ^ 12");
+		executeWithDefaultScope("intVar= 9 ^ 12");
 		assertEquals(5, getIntValue());
 	}
 
 	@Test
 	public void testIntOr() {
-		executeWithDefaultScope("myInt= 9 | 12");
+		executeWithDefaultScope("intVar= 9 | 12");
 		assertEquals(13, getIntValue());
 	}
 
 	@Test
 	public void testIntBitComplement() {
-		executeWithDefaultScope("myInt= ~9");
+		executeWithDefaultScope("intVar= ~9");
 		assertEquals(-10, getIntValue());
 	}
 
 	@Test
 	public void testNot() {
-		executeWithDefaultScope("myBool = ! true");
+		executeWithDefaultScope("boolVar = ! true");
 		assertEquals(false, getBoolValue());
 	}
 
 	@Test
 	public void testPrirority() {
-		executeWithDefaultScope("myInt = 1 + 2 * 3");
+		executeWithDefaultScope("intVar = 1 + 2 * 3");
 		assertEquals(7, getIntValue());
 	}
 
 	@Test
 	public void testNested() {
-		executeWithDefaultScope("myInt = (1 + 2) * 3");
+		executeWithDefaultScope("intVar = (1 + 2) * 3");
 		assertEquals(9, getIntValue());
 	}
 
 	@Test
 	public void testIntPlusAssign() {
-		executeWithDefaultScope("myInt=42");
-		executeWithDefaultScope("myInt+=42");
+		executeWithDefaultScope("intVar=42");
+		executeWithDefaultScope("intVar+=42");
 		assertEquals(84, getIntValue());
 	}
 
 	@Test
 	public void testFloatPlusAssign() {
-		executeWithDefaultScope("myReal = 42.0");
-		executeWithDefaultScope("myReal+=42.0");
+		executeWithDefaultScope("realVar = 42.0");
+		executeWithDefaultScope("realVar+=42.0");
 		assertEquals(84.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntMinusAssign() {
-		executeWithDefaultScope("myInt=42");
-		executeWithDefaultScope("myInt-=10");
+		executeWithDefaultScope("intVar=42");
+		executeWithDefaultScope("intVar-=10");
 		assertEquals(32, getIntValue());
 	}
 
 	@Test
 	public void testFloatMinusAssign() {
-		executeWithDefaultScope("myReal=42.0f");
-		executeWithDefaultScope("myReal-=10.0");
+		executeWithDefaultScope("realVar=42.0f");
+		executeWithDefaultScope("realVar-=10.0");
 		assertEquals(32.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntMultAssign() {
-		executeWithDefaultScope("myInt=42");
-		executeWithDefaultScope("myInt*=1");
+		executeWithDefaultScope("intVar=42");
+		executeWithDefaultScope("intVar*=1");
 		assertEquals(42, getIntValue());
 	}
 
 	@Test
 	public void testFloatMultAssign() {
-		executeWithDefaultScope("myReal=42.0f");
-		executeWithDefaultScope("myReal*=1.0");
+		executeWithDefaultScope("realVar=42.0f");
+		executeWithDefaultScope("realVar*=1.0");
 		assertEquals(42.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntDivAssign() {
-		executeWithDefaultScope("myInt=42");
-		executeWithDefaultScope("myInt/=1");
+		executeWithDefaultScope("intVar=42");
+		executeWithDefaultScope("intVar/=1");
 		assertEquals(42, getIntValue());
 	}
 
 	@Test
 	public void testFloatDivAssign() {
-		executeWithDefaultScope("myReal=42.0f");
-		executeWithDefaultScope("myReal/=1.0f");
+		executeWithDefaultScope("realVar=42.0f");
+		executeWithDefaultScope("realVar/=1.0f");
 		assertEquals(42.0f, getFloatValue());
 	}
 
 	@Test
 	public void testIntModAssign() {
-		executeWithDefaultScope("myInt=42");
-		executeWithDefaultScope("myInt%=1");
+		executeWithDefaultScope("intVar=42");
+		executeWithDefaultScope("intVar%=1");
 		assertEquals(0, getIntValue());
 	}
 
 	@Test
 	public void testFloatModAssign() {
-		executeWithDefaultScope("myReal=42.0f");
-		executeWithDefaultScope("myReal%=1.0f");
+		executeWithDefaultScope("realVar=42.0f");
+		executeWithDefaultScope("realVar%=1.0f");
 		assertEquals(0.0f, getFloatValue());
 	}
 
@@ -469,38 +469,38 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	private void initContext() {
-		// "event abc operation foo() var myInt : integer var MyBool : boolean
-		// var myReal : real
-		ExecutionVariable myInt = new ExecutionVariable("myInt", Integer.class,
+		// "event abc operation foo() var intVar : integer var boolVar : boolean
+		// var realVar : real
+		ExecutionVariable intVar = new ExecutionVariable("intVar", Integer.class,
 				0);
-		context.declareVariable(myInt);
-		ExecutionVariable myBool = new ExecutionVariable("myBool",
+		context.declareVariable(intVar);
+		ExecutionVariable boolVar = new ExecutionVariable("boolVar",
 				Boolean.class, false);
-		context.declareVariable(myBool);
-		ExecutionVariable myReal = new ExecutionVariable("myReal", Float.class,
+		context.declareVariable(boolVar);
+		ExecutionVariable realVar = new ExecutionVariable("realVar", Float.class,
 				0.0f);
-		context.declareVariable(myReal);
-		ExecutionVariable myString = new ExecutionVariable("myString",
+		context.declareVariable(realVar);
+		ExecutionVariable stringVar = new ExecutionVariable("stringVar",
 				String.class, "");
-		context.declareVariable(myString);
+		context.declareVariable(stringVar);
 		ExecutionEvent event = new ExecutionEvent("abc", Integer.class);
 		context.declareEvent(event);
 	}
 
 	protected Object getBoolValue() {
-		return context.getVariable("myBool").getValue();
+		return context.getVariable("boolVar").getValue();
 	}
 
 	protected Object getIntValue() {
-		return context.getVariable("myInt").getValue();
+		return context.getVariable("intVar").getValue();
 	}
 
 	protected Object getFloatValue() {
-		return context.getVariable("myReal").getValue();
+		return context.getVariable("realVar").getValue();
 	}
 
 	protected Object getStringValue() {
-		return context.getVariable("myString").getValue();
+		return context.getVariable("stringVar").getValue();
 	}
 
 	protected Object executeWithDefaultScope(String expression) {
