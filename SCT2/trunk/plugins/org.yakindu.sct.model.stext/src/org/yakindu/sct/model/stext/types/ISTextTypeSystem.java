@@ -123,7 +123,7 @@ public interface ISTextTypeSystem extends ITypeSystem {
 	public boolean isStringType(Type type);
 
 	// TODO: This can be moved to ITypeSystem if we have a common abstraction
-	// over literals within the meta model
+	// over literals within the meta model or if we use EObject instead
 	public InferenceResult inferType(Literal literal);
 
 }
