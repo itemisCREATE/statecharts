@@ -10,7 +10,6 @@
  */ 
 package org.yakindu.sct.generator.genmodel.ui.wizard
 
-import org.eclipse.core.resources.ResourcesPlugin
 import java.io.BufferedInputStream
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
