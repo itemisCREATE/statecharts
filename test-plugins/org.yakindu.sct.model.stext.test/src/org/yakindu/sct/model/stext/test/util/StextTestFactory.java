@@ -84,11 +84,35 @@ public class StextTestFactory extends StextFactoryImpl {
 			scope.getDeclarations().add(v);
 		return v;
 	}
-
-	public static Type _createType(String name) {
-		Type t = TypesFactory.eINSTANCE.createType();
+	
+	public static Type _createIntegerType(String name) {
+		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
 		t.setName(name);
 
+		return t;
+	}
+
+	public static Type _createRealType(String name) {
+		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
+		t.setName(name);
+		return t;
+	}
+	
+	public static Type _createBooleanType(String name) {
+		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
+		t.setName(name);
+		return t;
+	}
+	
+	public static Type _createStringType(String name) {
+		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
+		t.setName(name);
+		return t;
+	}
+	
+	public static Type _createVoidType(String name) {
+		Type t = TypesFactory.eINSTANCE.createPrimitiveType();
+		t.setName(name);
 		return t;
 	}
 

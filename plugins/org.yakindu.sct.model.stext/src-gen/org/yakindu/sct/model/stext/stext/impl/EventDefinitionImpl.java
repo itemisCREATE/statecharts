@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Type;
@@ -140,10 +141,10 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getOwningType()
+  public ComplexType getOwningType()
   {
     if (eContainerFeatureID() != StextPackage.EVENT_DEFINITION__OWNING_TYPE) return null;
-    return (Type)eContainer();
+    return (ComplexType)eContainer();
   }
 
   /**
@@ -151,7 +152,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
    * <!-- end-user-doc -->
    * @generated
    */
-  public NotificationChain basicSetOwningType(Type newOwningType, NotificationChain msgs)
+  public NotificationChain basicSetOwningType(ComplexType newOwningType, NotificationChain msgs)
   {
     msgs = eBasicSetContainer((InternalEObject)newOwningType, StextPackage.EVENT_DEFINITION__OWNING_TYPE, msgs);
     return msgs;
@@ -162,7 +163,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setOwningType(Type newOwningType)
+  public void setOwningType(ComplexType newOwningType)
   {
     if (newOwningType != eInternalContainer() || (eContainerFeatureID() != StextPackage.EVENT_DEFINITION__OWNING_TYPE && newOwningType != null))
     {
@@ -172,7 +173,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
       if (eInternalContainer() != null)
         msgs = eBasicRemoveFromContainer(msgs);
       if (newOwningType != null)
-        msgs = ((InternalEObject)newOwningType).eInverseAdd(this, TypesPackage.TYPE__FEATURES, Type.class, msgs);
+        msgs = ((InternalEObject)newOwningType).eInverseAdd(this, TypesPackage.COMPLEX_TYPE__FEATURES, ComplexType.class, msgs);
       msgs = basicSetOwningType(newOwningType, msgs);
       if (msgs != null) msgs.dispatch();
     }
@@ -216,7 +217,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
       case StextPackage.EVENT_DEFINITION__OWNING_TYPE:
         if (eInternalContainer() != null)
           msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetOwningType((Type)otherEnd, msgs);
+        return basicSetOwningType((ComplexType)otherEnd, msgs);
     }
     return super.eInverseAdd(otherEnd, featureID, msgs);
   }
@@ -248,7 +249,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
     switch (eContainerFeatureID())
     {
       case StextPackage.EVENT_DEFINITION__OWNING_TYPE:
-        return eInternalContainer().eInverseRemove(this, TypesPackage.TYPE__FEATURES, Type.class, msgs);
+        return eInternalContainer().eInverseRemove(this, TypesPackage.COMPLEX_TYPE__FEATURES, ComplexType.class, msgs);
     }
     return super.eBasicRemoveFromContainerFeature(msgs);
   }
@@ -288,7 +289,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
         setType((Type)newValue);
         return;
       case StextPackage.EVENT_DEFINITION__OWNING_TYPE:
-        setOwningType((Type)newValue);
+        setOwningType((ComplexType)newValue);
         return;
       case StextPackage.EVENT_DEFINITION__DIRECTION:
         setDirection((Direction)newValue);
@@ -311,7 +312,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
         setType((Type)null);
         return;
       case StextPackage.EVENT_DEFINITION__OWNING_TYPE:
-        setOwningType((Type)null);
+        setOwningType((ComplexType)null);
         return;
       case StextPackage.EVENT_DEFINITION__DIRECTION:
         setDirection(DIRECTION_EDEFAULT);

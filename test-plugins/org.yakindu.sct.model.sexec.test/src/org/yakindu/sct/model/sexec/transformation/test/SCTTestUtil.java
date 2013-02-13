@@ -28,7 +28,7 @@ import com.google.common.collect.Collections2;
 
 public class SCTTestUtil {
 
-	public static Type TYPE_INTEGER = _createType("integer");
+	public static Type TYPE_INTEGER = _createIntegerType("integer");
 
 	public static List<Step> flattenSequenceStepsAsList(Step step) {
 		return flattenSequenceStepsAsList(step, new LinkedList<Step>());
@@ -108,7 +108,7 @@ public class SCTTestUtil {
 		public Statechart sc = _createStatechart("test");
 		public InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
 		public VariableDefinition e1 = _createVariableDefinition("e1",
-				_createType("boolean"), s_scope, _createValue(true));
+				_createBooleanType("boolean"), s_scope, _createValue(true));
 
 		public InitializingTSC() {
 		}
@@ -119,16 +119,16 @@ public class SCTTestUtil {
 		public Statechart sc = _createStatechart("test");
 		public InterfaceScope s_scope = _createInterfaceScope("Interface", sc);
 		public VariableDefinition b = _createVariableDefinition("b",
-				_createType("boolean"), s_scope, null);
+				_createBooleanType("boolean"), s_scope, null);
 		
 		public VariableDefinition i = _createVariableDefinition("i",
-				_createType("integer"), s_scope, null);
+				_createIntegerType("integer"), s_scope, null);
 		
 		public VariableDefinition r = _createVariableDefinition("r",
-				_createType("real"), s_scope, null);
+				_createRealType("real"), s_scope, null);
 
 		public VariableDefinition s = _createVariableDefinition("s",
-				_createType("string"), s_scope, null);
+				_createStringType("string"), s_scope, null);
 
 		public InitializingWithoutDefaultTSC() {
 		}

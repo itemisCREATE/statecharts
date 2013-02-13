@@ -10,8 +10,11 @@
  */
 package org.yakindu.sct.model.stext.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
@@ -20,676 +23,432 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.yakindu.base.types.ITypeSystemAccess;
-import org.yakindu.base.types.Type;
+import org.yakindu.base.types.ITypeSystem.InferenceResult;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
-import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
-import org.yakindu.sct.model.stext.validation.ITypeInferrer;
-import org.yakindu.sct.model.stext.validation.TypeCheckException;
+import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
 
 import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
  * @author axel terfloth - additional tests
+ * @author Alexander Nyßen - Adopted to changes in type system
  * 
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
 public class TypeInferrerTest extends AbstractSTextTest {
 
-	@Inject
-	private ITypeInferrer analyzer;
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	@Inject
-	private ITypeSystemAccess ts;
+	public ISTextTypeSystem typeSystem;
+	@Inject
+	private ISTextTypeInferrer typeInferrer;
 
 	// Unary
 	@Test
 	public void testUnarySuccess() {
 		// int
-		assertTrue(ts.isInteger(getType("1")));
-		assertTrue(ts.isInteger(getType("0x0F")));
-		assertTrue(ts.isInteger(getType("-1")));
-		assertTrue(ts.isInteger(getType("0")));
-		assertTrue(ts.isInteger(getType("myInt")));
+		assertTrue(isIntegerType(inferType("1")));
+		assertTrue(isIntegerType(inferType("0x0F")));
+		assertTrue(isIntegerType(inferType("-1")));
+		assertTrue(isIntegerType(inferType("0")));
+		assertTrue(isIntegerType(inferType("intVar")));
 		// real
-		assertTrue(ts.isReal(getType("1.0")));
-		assertTrue(ts.isReal(getType("-1.0")));
-		assertTrue(ts.isReal(getType("0.0")));
-		assertTrue(ts.isReal(getType("myReal")));
+		assertTrue(isRealType(inferType("1.0")));
+		assertTrue(isRealType(inferType("-1.0")));
+		assertTrue(isRealType(inferType("0.0")));
+		assertTrue(isRealType(inferType("realVar")));
 		// string
-		assertTrue(ts.isString(getType("'42'")));
-		assertTrue(ts.isString(getType("myString")));
+		assertTrue(isStringType(inferType("'42'")));
+		assertTrue(isStringType(inferType("stringVar")));
 		// boolean
-		assertTrue(ts.isBoolean(getType("true")));
-		assertTrue(ts.isBoolean(getType("false")));
-		assertTrue(ts.isBoolean(getType("myBool")));
-		// event
-		assertTrue(ts.isBoolean(getType("event1")));
+		assertTrue(isBooleanType(inferType("true")));
+		assertTrue(isBooleanType(inferType("false")));
+		assertTrue(isBooleanType(inferType("boolVar")));
+		assertTrue(isBooleanType(inferType("boolEvent")));
 	}
 
 	// Add
 	@Test
 	public void testAddSuccess() {
-		Statement statement = (Statement) super.parseExpression("1+2",
-				super.internalScope(), Expression.class.getSimpleName());
-		analyzer.getType(statement);
-		assertTrue(ts.isInteger(analyzer.getType(statement)));
-
-		assertTrue(ts.isInteger(getType("1 + 2")));
-		assertTrue(ts.isInteger(getType("1 + 0x0F")));
-		assertTrue(ts.isInteger(getType("0x0F + 0x0F")));
-		assertTrue(ts.isInteger(getType("myInt + 0x0F")));
-		assertTrue(ts.isInteger(getType("myInt + 2")));
-		assertTrue(ts.isReal(getType("1.1 + 2")));
-		assertTrue(ts.isReal(getType("2 + 1.0")));
-		assertTrue(ts.isReal(getType("1 + 2 + 3.0")));
+		assertTrue(isIntegerType(inferType("1+2", internalScope())));
+		assertTrue(isIntegerType(inferType("1 + 2")));
+		assertTrue(isIntegerType(inferType("1 + 0x0F")));
+		assertTrue(isIntegerType(inferType("0x0F + 0x0F")));
+		assertTrue(isIntegerType(inferType("intVar + 0x0F")));
+		assertTrue(isIntegerType(inferType("intVar + 2")));
+		assertTrue(isRealType(inferType("1.1 + 2")));
+		assertTrue(isRealType(inferType("2 + 1.0")));
+		assertTrue(isRealType(inferType("1 + 2 + 3.0")));
 	}
 
 	@Test
-	public void testAddException1() {
-		expectOperatorPlusException();
-		getType("true + 5");
-	}
-
-	@Test
-	public void testAddException2() {
-		expectOperatorPlusException();
-		getType("false + 5");
-	}
-
-	@Test
-	public void testAddException3() {
-		expectOperatorPlusException();
-		getType("5 + false");
-	}
-
-	@Test
-	public void testAddException4() {
-		expectOperatorPlusException();
-		getType("true + (3 * 5)");
-	}
-
-	@Test
-	public void testAddException5() {
-		expectOperatorPlusException();
-		getType("(3 * 5) + true");
-	}
-
-	@Test
-	public void testAddException6() {
-		expectOperatorPlusException();
-		getType("3.0 +  true");
-	}
-
-	@Test
-	public void testAddException7() {
-		expectOperatorPlusException();
-		getType("3.0 + 'string'");
-	}
-
-	@Test
-	public void testAddException8() {
-		expectOperatorPlusException();
-		getType("myInt + 'string'");
+	public void testAddFailure() {
+		expectIssue(
+				inferType("true + 5"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("false + 5"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("5 + false"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("true + (3 * 5)"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("(3 * 5) + true"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("3.0 +  true"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on real and boolean.");
+		expectIssue(
+				inferType("3.0 + 'string'"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on real and string.");
+		expectIssue(
+				inferType("intVar + 'string'"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on integer and string.");
 	}
 
 	// substract
 	@Test
 	public void testSubstractSuccess() {
-		assertTrue(ts.isInteger(getType("1 - 2")));
-		assertTrue(ts.isInteger(getType("0x0F - 2")));
-		assertTrue(ts.isInteger(getType("0x0F - 0x0F")));
-		assertTrue(ts.isInteger(getType("0x0F- myInt")));
-		assertTrue(ts.isInteger(getType("myInt - 2")));
-		assertTrue(ts.isReal(getType("1.0 - 2")));
-		assertTrue(ts.isReal(getType("2 - 1.0")));
-		assertTrue(ts.isReal(getType("myReal - 1.0")));
-		assertTrue(ts.isReal(getType("1 - 2 - 3.0")));
+		assertTrue(isIntegerType(inferType("1 - 2")));
+		assertTrue(isIntegerType(inferType("0x0F - 2")));
+		assertTrue(isIntegerType(inferType("0x0F - 0x0F")));
+		assertTrue(isIntegerType(inferType("0x0F- intVar")));
+		assertTrue(isIntegerType(inferType("intVar - 2")));
+		assertTrue(isRealType(inferType("1.0 - 2")));
+		assertTrue(isRealType(inferType("2 - 1.0")));
+		assertTrue(isRealType(inferType("realVar - 1.0")));
+		assertTrue(isRealType(inferType("1 - 2 - 3.0")));
 	}
 
 	@Test
-	public void testSubstractException1() {
-		expectOperatorSubstractException();
-		getType("true - 5");
-	}
-
-	@Test
-	public void testSubstractException2() {
-		expectOperatorSubstractException();
-		getType("false - 5");
-	}
-
-	@Test
-	public void testSubstractException3() {
-		expectOperatorSubstractException();
-		getType("5 - false");
-	}
-
-	@Test
-	public void testSubstractException4() {
-		expectOperatorSubstractException();
-		getType("true - (3 * 5)");
-	}
-
-	@Test
-	public void testSubstractException5() {
-		expectOperatorSubstractException();
-		getType("(3 * 5) - true");
-	}
-
-	@Test
-	public void testSubstractException6() {
-		expectOperatorSubstractException();
-		getType("3.0 -  true");
-	}
-
-	@Test
-	public void testSubstractException7() {
-		expectOperatorSubstractException();
-		getType("3.0 -  'string'");
-	}
-
-	@Test
-	public void testSubstractException8() {
-		expectOperatorSubstractException();
-		getType("myReal -  'string'");
+	public void testSubstractFailure() {
+		expectIssue(
+				inferType("true - 5"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("false - 5"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("5 - false"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("true - (3 * 5)"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("(3 * 5) - true"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("3.0 -  true"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on real and boolean.");
+		expectIssue(
+				inferType("3.0 -  'string'"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on real and string.");
+		expectIssue(
+				inferType("realVar -  'string'"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on real and string.");
 	}
 
 	// multiply
 	@Test
 	public void testMultiplySuccess() {
-		assertTrue(ts.isInteger(getType("1 * 2")));
-		assertTrue(ts.isInteger(getType("1 * 0x0F")));
-		assertTrue(ts.isInteger(getType("0x0F * myInt")));
-		assertTrue(ts.isReal(getType("myInt * myReal")));
-		assertTrue(ts.isReal(getType("1.0 * 2")));
-		assertTrue(ts.isReal(getType("2 * 1.0")));
-		assertTrue(ts.isReal(getType("1 * 2 * 3.0")));
+		assertTrue(isIntegerType(inferType("1 * 2")));
+		assertTrue(isIntegerType(inferType("1 * 0x0F")));
+		assertTrue(isIntegerType(inferType("0x0F * intVar")));
+		assertTrue(isRealType(inferType("intVar * realVar")));
+		assertTrue(isRealType(inferType("1.0 * 2")));
+		assertTrue(isRealType(inferType("2 * 1.0")));
+		assertTrue(isRealType(inferType("1 * 2 * 3.0")));
 	}
 
 	@Test
-	public void testMultiplyException1() {
-		expectOperatorMultiplyException();
-		getType("true * 5");
-	}
-
-	@Test
-	public void testMultiplyException2() {
-		expectOperatorMultiplyException();
-		getType("false * 5");
-	}
-
-	@Test
-	public void testMultiplyException3() {
-		expectOperatorMultiplyException();
-		getType("5 * false");
-	}
-
-	@Test
-	public void testMultiplyException4() {
-		expectOperatorMultiplyException();
-		getType("true * (3 - 5)");
-	}
-
-	@Test
-	public void testMultiplyException5() {
-		expectOperatorMultiplyException();
-		getType("(3 + 5) * true");
-	}
-
-	@Test
-	public void testMultiplyException6() {
-		expectOperatorMultiplyException();
-		getType("3.0 *  true");
-	}
-
-	@Test
-	public void testMultiplyException7() {
-		expectOperatorMultiplyException();
-		getType("3.0 *  'string'");
-	}
-
-	@Test
-	public void testMultiplyException8() {
-		expectOperatorMultiplyException();
-		getType("myReal *  'string'");
+	public void testMultiplyFailure() {
+		expectIssue(
+				inferType("true * 5"),
+				"Arithmetic operator '*' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("5 * false"),
+				"Arithmetic operator '*' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("true * (3 - 5)"),
+				"Arithmetic operator '*' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("(3 + 5) * true"),
+				"Arithmetic operator '*' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("3.0 *  true"),
+				"Arithmetic operator '*' may only be applied on numeric types, not on real and boolean.");
+		expectIssue(
+				inferType("3.0 *  'string'"),
+				"Arithmetic operator '*' may only be applied on numeric types, not on real and string.");
+		expectIssue(
+				inferType("realVar *  'string'"),
+				"Arithmetic operator '*' may only be applied on numeric types, not on real and string.");
 	}
 
 	// divide
 	@Test
 	public void testDivideSuccess() {
-		assertTrue(ts.isInteger(getType("1 / 2")));
-		assertTrue(ts.isInteger(getType("1 / myInt")));
-		assertTrue(ts.isInteger(getType("1 / 0x0F")));
-		assertTrue(ts.isInteger(getType("0x0F / 0x0F")));
-		assertTrue(ts.isInteger(getType("myInt / 0x0F")));
-		assertTrue(ts.isReal(getType("1.0 / 2")));
-		assertTrue(ts.isReal(getType("2 / 1.0")));
-		assertTrue(ts.isReal(getType("1 / 2 / 3.0")));
+		assertTrue(isIntegerType(inferType("1 / 2")));
+		assertTrue(isIntegerType(inferType("1 / intVar")));
+		assertTrue(isIntegerType(inferType("1 / 0x0F")));
+		assertTrue(isIntegerType(inferType("0x0F / 0x0F")));
+		assertTrue(isIntegerType(inferType("intVar / 0x0F")));
+		assertTrue(isRealType(inferType("1.0 / 2")));
+		assertTrue(isRealType(inferType("2 / 1.0")));
+		assertTrue(isRealType(inferType("1 / 2 / 3.0")));
 	}
 
 	@Test
-	public void testDivideException1() {
-		expectOperatorDivideException();
-		getType("true / 5");
-	}
-
-	@Test
-	public void testDivideException2() {
-		expectOperatorDivideException();
-		getType("false / 5");
-	}
-
-	@Test
-	public void testDivideException3() {
-		expectOperatorDivideException();
-		getType("5 / false");
-	}
-
-	@Test
-	public void testDivideException4() {
-		expectOperatorDivideException();
-		getType("true / (3 - 5)");
-	}
-
-	@Test
-	public void testDivideException5() {
-		expectOperatorDivideException();
-		getType("(3 + 5) / true");
-	}
-
-	@Test
-	public void testDivideException6() {
-		expectOperatorDivideException();
-		getType("3.0 /  true");
-	}
-
-	@Test
-	public void testDivideException7() {
-		expectOperatorDivideException();
-		getType("3.0 /  'string'");
-	}
-
-	@Test
-	public void testDivideException8() {
-		expectOperatorDivideException();
-		getType("3.0 /  myString");
+	public void testDivideFailure() {
+		expectIssue(
+				inferType("true / 5"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("false / 5"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("5 / false"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("true / (3 - 5)"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("(3 + 5) / true"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("3.0 /  true"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on real and boolean.");
+		expectIssue(
+				inferType("3.0 /  'string'"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on real and string.");
+		expectIssue(
+				inferType("3.0 /  stringVar"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on real and string.");
 	}
 
 	// mod
 	@Test
 	public void testModSuccess() {
-		assertTrue(ts.isInteger(getType("1 % 2")));
-		assertTrue(ts.isInteger(getType("1 % 0x0F")));
-		assertTrue(ts.isInteger(getType("0x0F % 0x0F")));
-		assertTrue(ts.isInteger(getType("myInt % 0x0F")));
-		assertTrue(ts.isReal(getType("1.0 % 2")));
-		assertTrue(ts.isReal(getType("2 % 1.0")));
-		assertTrue(ts.isReal(getType("2 % myReal")));
-		assertTrue(ts.isReal(getType("1 % 2 % 3.0")));
+		assertTrue(isIntegerType(inferType("1 % 2")));
+		assertTrue(isIntegerType(inferType("1 % 0x0F")));
+		assertTrue(isIntegerType(inferType("0x0F % 0x0F")));
+		assertTrue(isIntegerType(inferType("intVar % 0x0F")));
+		assertTrue(isRealType(inferType("1.0 % 2")));
+		assertTrue(isRealType(inferType("2 % 1.0")));
+		assertTrue(isRealType(inferType("2 % realVar")));
+		assertTrue(isRealType(inferType("1 % 2 % 3.0")));
 	}
 
 	@Test
-	public void testModException1() {
-		expectOperatorModException();
-		getType("true % 5");
-	}
-
-	@Test
-	public void testModException2() {
-		expectOperatorModException();
-		getType("false % 5");
-	}
-
-	@Test
-	public void testModException3() {
-		expectOperatorModException();
-		getType("5 % false");
-	}
-
-	@Test
-	public void testModException4() {
-		expectOperatorModException();
-		getType("true % (3 - 5)");
-	}
-
-	@Test
-	public void testModException5() {
-		expectOperatorModException();
-		getType("(3 + 5) % true");
-	}
-
-	@Test
-	public void testModException6() {
-		expectOperatorModException();
-		getType("3.0 % true");
-	}
-
-	@Test
-	public void testModException7() {
-		expectOperatorModException();
-		getType("3.0 % 'string'");
-	}
-
-	@Test
-	public void testModException8() {
-		expectOperatorModException();
-		getType("3.0 % myString");
-	}
-
-	@Test
-	public void testModException9() {
-		expectOperatorModException();
-		getType("3.0 % myString");
+	public void testModFailure() {
+		expectIssue(
+				inferType("true % 5"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("false % 5"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("5 % false"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("true % (3 - 5)"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("(3 + 5) % true"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on integer and boolean.");
+		expectIssue(
+				inferType("3.0 % true"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on real and boolean.");
+		expectIssue(
+				inferType("3.0 % 'string'"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on real and string.");
+		expectIssue(
+				inferType("3.0 % stringVar"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on real and string.");
+		expectIssue(
+				inferType("3.0 % stringVar"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on real and string.");
 	}
 
 	// Logical And Or Not
 	@Test
 	public void testLogicalSuccess() {
-		assertTrue(ts.isBoolean(getType("true || false")));
-		assertTrue(ts.isBoolean(getType("true || myBool")));
-		assertTrue(ts.isBoolean(getType("true || false && true")));
-		assertTrue(ts.isBoolean(getType("true || true &&( false || true)")));
-		assertTrue(ts.isBoolean(getType("!true")));
-		assertTrue(ts.isBoolean(getType("!myBool")));
-		assertTrue(ts.isBoolean(getType("!event1")));
-		assertTrue(ts.isBoolean(getType("!true && !false")));
-		assertTrue(ts.isBoolean(getType("event1 && !event1")));
-		assertTrue(ts.isBoolean(getType("event1 || event1")));
-		assertTrue(ts.isBoolean(getType("ABC.event2 || ABC.event2")));
+		assertTrue(isBooleanType(inferType("true || false")));
+		assertTrue(isBooleanType(inferType("true || boolVar")));
+		assertTrue(isBooleanType(inferType("true || false && true")));
+		assertTrue(isBooleanType(inferType("true || true &&( false || true)")));
+		assertTrue(isBooleanType(inferType("!true")));
+		assertTrue(isBooleanType(inferType("!boolVar")));
+		assertTrue(isBooleanType(inferType("!boolEvent")));
+		assertTrue(isBooleanType(inferType("!true && !false")));
+		assertTrue(isBooleanType(inferType("boolEvent && !boolEvent")));
+		assertTrue(isBooleanType(inferType("boolEvent || boolEvent")));
 	}
 
 	@Test
-	public void testLogicalException1() {
-		expectLogicalAndException();
-		getType("true && 5");
-	}
-
-	@Test
-	public void testLogicalException2() {
-		expectLogicalOrException();
-		getType("false || 5");
-	}
-
-	@Test
-	public void testLogicalException3() {
-		expectLogicalAndException();
-		getType("5 && false");
-	}
-
-	@Test
-	public void testLogicalException4() {
-		expectLogicalAndException();
-		getType("true && (3 - 5)");
-	}
-
-	@Test
-	public void testLogicalException5() {
-		expectLogicalOrException();
-		getType("(3 + 5) || true");
-	}
-
-	@Test
-	public void testLogicalException6() {
-		expectLogicalAndException();
-		getType("3.0 &&  true");
-	}
-
-	@Test
-	public void testLogicalException7() {
-		expectLogicalNotException();
-		getType("!3");
-	}
-
-	@Test
-	public void testLogicalException8() {
-		expectLogicalNotException();
-		getType("!1.2");
-	}
-
-	@Test
-	public void testLogicalException9() {
-		expectLogicalNotException();
-		getType("!'Test'");
-	}
-
-	@Test
-	public void testLogicalException10() {
-		expectLogicalNotException();
-		getType("!myString");
-	}
-
-	@Test
-	public void testLogicalException11() {
-		expectLogicalAndException();
-		getType("5 && event1");
+	public void testLogicalFailure() {
+		expectIssue(
+				inferType("true && 5"),
+				"Logical operator '&&' may only be applied on boolean types, not on boolean and integer.");
+		expectIssue(
+				inferType("false || 5"),
+				"Logical operator '||' may only be applied on boolean types, not on boolean and integer.");
+		expectIssue(
+				inferType("5 && false"),
+				"Logical operator '&&' may only be applied on boolean types, not on integer and boolean.");
+		expectIssue(
+				inferType("true && (3 - 5)"),
+				"Logical operator '&&' may only be applied on boolean types, not on boolean and integer.");
+		expectIssue(
+				inferType("(3 + 5) || true"),
+				"Logical operator '||' may only be applied on boolean types, not on integer and boolean.");
+		expectIssue(
+				inferType("3.0 &&  true"),
+				"Logical operator '&&' may only be applied on boolean types, not on real and boolean.");
+		expectIssue(inferType("!3"),
+				"Logical operator '!' may only be applied on boolean types, not on integer.");
+		expectIssue(inferType("!1.2"),
+				"Logical operator '!' may only be applied on boolean types, not on real.");
+		expectIssue(inferType("!'Test'"),
+				"Logical operator '!' may only be applied on boolean types, not on string.");
+		expectIssue(inferType("!stringVar"),
+				"Logical operator '!' may only be applied on boolean types, not on string.");
+		expectIssue(
+				inferType("5 && boolEvent"),
+				"Logical operator '&&' may only be applied on boolean types, not on integer and boolean.");
 	}
 
 	// LogicalRelation
 	@Test
 	public void testLogicalRelationSuccess() {
-		assertTrue(ts.isBoolean(getType("5 < 3")));
-		assertTrue(ts.isBoolean(getType("5.0 < 3")));
-		assertTrue(ts.isBoolean(getType("5.0 < myInt")));
+		assertTrue(isBooleanType(inferType("5 < 3")));
+		assertTrue(isBooleanType(inferType("5.0 < 3")));
+		assertTrue(isBooleanType(inferType("5.0 < intVar")));
 
-		assertTrue(ts.isBoolean(getType("5 <= 3")));
-		assertTrue(ts.isBoolean(getType("5.0 <= 3")));
-		assertTrue(ts.isBoolean(getType("5.0 <= myInt")));
+		assertTrue(isBooleanType(inferType("5 <= 3")));
+		assertTrue(isBooleanType(inferType("5.0 <= 3")));
+		assertTrue(isBooleanType(inferType("5.0 <= intVar")));
 
-		assertTrue(ts.isBoolean(getType("5 > 3")));
-		assertTrue(ts.isBoolean(getType("5.0 >= 3")));
-		assertTrue(ts.isBoolean(getType("5.0 >= myInt")));
+		assertTrue(isBooleanType(inferType("5 > 3")));
+		assertTrue(isBooleanType(inferType("5.0 >= 3")));
+		assertTrue(isBooleanType(inferType("5.0 >= intVar")));
 
-		assertTrue(ts.isBoolean(getType("5 == 3")));
-		assertTrue(ts.isBoolean(getType("'string' == 'string'")));
-		assertTrue(ts.isBoolean(getType("5.0 == 3")));
-		assertTrue(ts.isBoolean(getType("true == myBool")));
-		assertTrue(ts.isBoolean(getType("true == event1")));
+		assertTrue(isBooleanType(inferType("5 == 3")));
+		assertTrue(isBooleanType(inferType("'string' == 'string'")));
+		assertTrue(isBooleanType(inferType("5.0 == 3")));
+		assertTrue(isBooleanType(inferType("true == boolVar")));
+		assertTrue(isBooleanType(inferType("true == boolEvent")));
 
-		assertTrue(ts.isBoolean(getType("5 != 3")));
-		assertTrue(ts.isBoolean(getType("'string' != 'string'")));
-		assertTrue(ts.isBoolean(getType("5.0 != 3")));
-		assertTrue(ts.isBoolean(getType("true != myBool")));
-		assertTrue(ts.isBoolean(getType("true != event1")));
-		assertTrue(ts.isBoolean(getType("true != ABC.event2")));
+		assertTrue(isBooleanType(inferType("5 != 3")));
+		assertTrue(isBooleanType(inferType("'string' != 'string'")));
+		assertTrue(isBooleanType(inferType("5.0 != 3")));
+		assertTrue(isBooleanType(inferType("true != boolVar")));
+		assertTrue(isBooleanType(inferType("true != boolEvent")));
 	}
 
 	@Test
-	public void testLogicalRelationSmallerException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '<'");
-		getType("3.0 < true");
-	}
+	public void testLogicalRelationFailure() {
+		expectIssue(
+				inferType("3.0 < true"),
+				"Comparison operator '<' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("'string' < 5"),
+				"Comparison operator '<' may only be applied on compatible types, not on string and integer.");
+		expectIssue(
+				inferType("1.0 < false"),
+				"Comparison operator '<' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("1.0 < boolEvent"),
+				"Comparison operator '<' may only be applied on compatible types, not on real and boolean.");
 
-	@Test
-	public void testLogicalRelationSmallerException2() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands string and integer for operator '<'");
-		getType("'string' < 5");
-	}
+		expectIssue(
+				inferType("3.0 <= true"),
+				"Comparison operator '<=' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("'string' <= 5"),
+				"Comparison operator '<=' may only be applied on compatible types, not on string and integer.");
+		expectIssue(
+				inferType("1.0 <= false"),
+				"Comparison operator '<=' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("1.0 <= boolEvent"),
+				"Comparison operator '<=' may only be applied on compatible types, not on real and boolean.");
 
-	@Test
-	public void testLogicalRelationSmallerException3() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '<'");
-		getType("1.0 < false");
-	}
+		expectIssue(
+				inferType("3.0 > true"),
+				"Comparison operator '>' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("'string' > 5"),
+				"Comparison operator '>' may only be applied on compatible types, not on string and integer.");
+		expectIssue(
+				inferType("1.0 > false"),
+				"Comparison operator '>' may only be applied on compatible types, not on real and boolean.");
 
-	@Test
-	public void testLogicalRelationSmallerException4() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '<'");
-		getType("1.0 < event1");
-	}
+		expectIssue(
+				inferType("3.0 >= true"),
+				"Comparison operator '>=' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("'string' >= 5"),
+				"Comparison operator '>=' may only be applied on compatible types, not on string and integer.");
+		expectIssue(
+				inferType("1.0 >= false"),
+				"Comparison operator '>=' may only be applied on compatible types, not on real and boolean.");
 
-	@Test
-	public void testLogicalRelationSmallerEqualsException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '<='");
-		getType("3.0 <= true");
-	}
+		expectIssue(
+				inferType("3.0 == true"),
+				"Comparison operator '==' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("'string' == 5"),
+				"Comparison operator '==' may only be applied on compatible types, not on string and integer.");
+		expectIssue(
+				inferType("1.0 == false"),
+				"Comparison operator '==' may only be applied on compatible types, not on real and boolean.");
 
-	@Test
-	public void testLogicalRelationSmallerEqualException2() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands string and integer for operator '<='");
-		getType("'string' <= 5");
-	}
-
-	@Test
-	public void testLogicalRelationSmallerEqualException3() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '<='");
-		getType("1.0 <= false");
-	}
-
-	@Test
-	public void testLogicalRelationSmallerEqualException4() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '<='");
-		getType("1.0 <= event1");
-	}
-
-	@Test
-	public void testLogicalRelationGreaterException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '>'");
-		getType("3.0 > true");
-	}
-
-	@Test
-	public void testLogicalRelationGreaterException2() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands string and integer for operator '>'");
-		getType("'string' > 5");
-	}
-
-	@Test
-	public void testLogicalRelationGreaterException3() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '>'");
-		getType("1.0 > false");
-	}
-
-	@Test
-	public void testLogicalRelationGreaterEqualsException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '>='");
-		getType("3.0 >= true");
-	}
-
-	@Test
-	public void testLogicalRelationGreaterEqualException2() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands string and integer for operator '>='");
-		getType("'string' >= 5");
-	}
-
-	@Test
-	public void testLogicalRelationGreaterEqualException3() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '>='");
-		getType("1.0 >= false");
-	}
-
-	@Test
-	public void testLogicalRelationEqualsException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '=='");
-		getType("3.0 == true");
-	}
-
-	@Test
-	public void testLogicalRelationEqualException2() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands string and integer for operator '=='");
-		getType("'string' == 5");
-	}
-
-	@Test
-	public void testLogicalRelationEqualException3() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '=='");
-		getType("1.0 == false");
-	}
-
-	@Test
-	public void testLogicalRelationNotEqualsException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '!='");
-		getType("3.0 != true");
-	}
-
-	@Test
-	public void testLogicalRelationNotEqualException2() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands string and integer for operator '!='");
-		getType("'string' != 5");
-	}
-
-	@Test
-	public void testLogicalRelationNotEqualException3() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Incompatible operands real and boolean for operator '!='");
-		getType("1.0 != false");
+		expectIssue(
+				inferType("3.0 != true"),
+				"Comparison operator '!=' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("'string' != 5"),
+				"Comparison operator '!=' may only be applied on compatible types, not on string and integer.");
+		expectIssue(
+				inferType("1.0 != false"),
+				"Comparison operator '!=' may only be applied on compatible types, not on real and boolean.");
 	}
 
 	@Test
 	public void testAssignmentSuccess() {
-		assertTrue(ts.isInteger(getType("myInt = 5 * 3")));
-		assertTrue(ts.isInteger(getType("myInt = 0x0F * 3")));
-		assertTrue(ts.isInteger(getType("myInt = 0x0F * 0x0F")));
-		assertTrue(ts.isInteger(getType("myInt = myInt * 0x0F")));
-		assertTrue(ts.isBoolean(getType("myBool = true || false")));
-		assertTrue(ts.isString(getType("myString = 'string'")));
-		assertTrue(ts.isReal(getType("myReal = 2.0 - 7")));
-		assertTrue(ts.isBoolean(getType("myBool = event1")));
-		assertTrue(ts.isInteger(getType("ABC.myInt = 42")));
+		assertTrue(isIntegerType(inferType("intVar = 5 * 3")));
+		assertTrue(isIntegerType(inferType("intVar = 0x0F * 3")));
+		assertTrue(isIntegerType(inferType("intVar = intVar * 0x0F")));
+		assertTrue(isBooleanType(inferType("boolVar = true || false")));
+		assertTrue(isBooleanType(inferType("boolVar = boolEvent")));
+		assertTrue(isStringType(inferType("stringVar = 'string'")));
+		assertTrue(isRealType(inferType("realVar = 2.0 - 7")));
+		assertTrue(isIntegerType(inferType("ABC.intVar = 42")));
 	}
 
 	@Test
-	public void testAssignmentException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
-		getType("myInt = true");
-	}
-
-	@Test
-	public void testAssignmentException2() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
-		getType("myInt = myBool");
+	public void testAssignmentFailure() {
+		expectIssue(
+				inferType("intVar = true"),
+				"Assignment operator '=' may only be applied on compatible types, not on integer and boolean.");
+		expectIssue(
+				inferType("intVar = boolVar"),
+				"Assignment operator '=' may only be applied on compatible types, not on integer and boolean.");
 	}
 
 	/**
@@ -698,423 +457,357 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testActiveSuccess() throws Exception {
-		assertTrue(ts.isBoolean(getType("active(chart.r1.A)")));
-		assertTrue(ts.isBoolean(getType("!active(chart.r1.A)")));
-		assertTrue(ts.isBoolean(getType("true || active(chart.r1.A)")));
-		assertTrue(ts.isBoolean(getType("active(chart.r1.A) && false")));
-		assertTrue(ts.isBoolean(getType("myBool = active(chart.r1.A)")));
+		assertTrue(isBooleanType(inferType("active(chart.r1.A)")));
+		assertTrue(isBooleanType(inferType("!active(chart.r1.A)")));
+		assertTrue(isBooleanType(inferType("true || active(chart.r1.A)")));
+		assertTrue(isBooleanType(inferType("active(chart.r1.A) && false")));
+		assertTrue(isBooleanType(inferType("boolVar = active(chart.r1.A)")));
 	}
 
 	@Test
-	public void testActiveException1() throws Exception {
-		expectOperatorPlusException();
-		getType("active(chart.r1.A) + 1");
+	public void testActiveFailure() throws Exception {
+		expectIssue(
+				inferType("active(chart.r1.A) + 1"),
+				"Arithmetic operator '+' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("active(chart.r1.A) - 1"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("active(chart.r1.A) * 1"),
+				"Arithmetic operator '*' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("active(chart.r1.A) / 1"),
+				"Arithmetic operator '/' may only be applied on numeric types, not on boolean and integer.");
+		expectIssue(
+				inferType("active(chart.r1.A) % true"),
+				"Arithmetic operator '%' may only be applied on numeric types, not on boolean and boolean.");
+		expectIssue(
+				inferType("active(chart.r1.A) && intVar"),
+				"Logical operator '&&' may only be applied on boolean types, not on boolean and integer.");
+		expectIssue(
+				inferType("active(chart.r1.A) || stringVar"),
+				"Logical operator '||' may only be applied on boolean types, not on boolean and string.");
+		expectIssue(inferType("active(chart.r1.A) || !stringVar"),
+				"Logical operator '!' may only be applied on boolean types, not on string.");
 	}
 
 	@Test
-	public void testActiveException2() throws Exception {
-		expectOperatorSubstractException();
-		getType("active(chart.r1.A) -1");
+	public void testBitwiseSuccess() {
+		assertTrue(isIntegerType(inferType(" 5 & 3")));
+		assertTrue(isIntegerType(inferType(" 5 | 3")));
+		assertTrue(isIntegerType(inferType(" 5 ^ 3")));
+		assertTrue(isIntegerType(inferType(" ~3")));
+		assertTrue(isIntegerType(inferType("3 << 2")));
+		assertTrue(isIntegerType(inferType("5 >> 2")));
+		assertTrue(isIntegerType(inferType("intVar << 4")));
+		assertTrue(isIntegerType(inferType("intVar >> 4")));
 	}
 
 	@Test
-	public void testActiveException3() throws Exception {
-		expectOperatorMultiplyException();
-		getType("active(chart.r1.A) *1");
-	}
+	public void testBitwiseFailure() throws Exception {
+		expectIssue(
+				inferType("5 & true"),
+				"Bitwise operator '&' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 & 1.0"),
+				"Bitwise operator '&' may only be applied on integer types, not on integer and real.");
+		expectIssue(
+				inferType("5 & 'stringVar'"),
+				"Bitwise operator '&' may only be applied on integer types, not on integer and string.");
 
-	@Test
-	public void testActiveException4() throws Exception {
-		expectOperatorDivideException();
-		getType("active(chart.r1.A) /1");
-	}
+		expectIssue(
+				inferType("5 | true"),
+				"Bitwise operator '|' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 | 1.0"),
+				"Bitwise operator '|' may only be applied on integer types, not on integer and real.");
+		expectIssue(
+				inferType("5 | 'stringVar'"),
+				"Bitwise operator '|' may only be applied on integer types, not on integer and string.");
 
-	@Test
-	public void testActiveException5() throws Exception {
-		expectOperatorModException();
-		getType("active(chart.r1.A) % true");
-	}
+		expectIssue(
+				inferType("5 ^ true"),
+				"Bitwise operator '^' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 ^ 1.0"),
+				"Bitwise operator '^' may only be applied on integer types, not on integer and real.");
+		expectIssue(
+				inferType("5 ^ 'stringVar'"),
+				"Bitwise operator '^' may only be applied on integer types, not on integer and string.");
 
-	@Test
-	public void testActiveException6() throws Exception {
-		expectLogicalAndException();
-		getType("active(chart.r1.A) && myInt");
-	}
+		expectIssue(inferType("~true"),
+				"Bitwise operator '~' may only be applied on integer types, not on boolean.");
+		expectIssue(inferType("~9.0"),
+				"Bitwise operator '~' may only be applied on integer types, not on real.");
+		expectIssue(inferType("~stringVar"),
+				"Bitwise operator '~' may only be applied on integer types, not on string.");
 
-	@Test
-	public void testActiveException7() throws Exception {
-		expectLogicalOrException();
-		getType("active(chart.r1.A) || myString");
-	}
+		expectIssue(
+				inferType("5 << true"),
+				"Bitwise operator '<<' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 << 7.0"),
+				"Bitwise operator '<<' may only be applied on integer types, not on integer and real.");
+		expectIssue(
+				inferType("5 << stringVar"),
+				"Bitwise operator '<<' may only be applied on integer types, not on integer and string.");
 
-	@Test
-	public void testActiveException8() throws Exception {
-		expectLogicalNotException();
-		getType("active(chart.r1.A) && !myString");
-	}
-
-	@Test
-	public void testBitwiseLogicalRelationSuccess() {
-		assertTrue(ts.isInteger(getType(" 5 & 3")));
-		assertTrue(ts.isInteger(getType(" 5 | 3")));
-		assertTrue(ts.isInteger(getType(" 5 ^ 3")));
-		assertTrue(ts.isInteger(getType(" ~3")));
-		assertTrue(ts.isInteger(getType("3 << 2")));
-		assertTrue(ts.isInteger(getType("5 >> 2")));
-		assertTrue(ts.isInteger(getType("myInt << 4")));
-		assertTrue(ts.isInteger(getType("myInt >> 4")));
-		assertTrue(ts.isInteger(getType("4 >> ABC.myInt")));
-	}
-
-	@Test
-	public void testBitwiseAndException1() throws Exception {
-		expectBitwiseAndException();
-		getType(" 5 & true");
-	}
-
-	@Test
-	public void testBitwiseAndException2() throws Exception {
-		expectBitwiseAndException();
-		getType(" 5 & 1.0");
-	}
-
-	@Test
-	public void testBitwiseAndException3() throws Exception {
-		expectBitwiseAndException();
-		getType(" 5 & 'myString'");
-	}
-
-	@Test
-	public void testBitwiseOrException1() throws Exception {
-		expectBitwiseOrException();
-		getType(" 5 | true");
-	}
-
-	@Test
-	public void testBitwiseOrException2() throws Exception {
-		expectBitwiseOrException();
-		getType(" 5 | 1.0");
-	}
-
-	@Test
-	public void testBitwiseOrException3() throws Exception {
-		expectBitwiseOrException();
-		getType(" 5 | myString");
-	}
-
-	@Test
-	public void testBitwiseXorException1() throws Exception {
-		expectBitwiseXorException();
-		getType(" 5 ^ true");
-	}
-
-	@Test
-	public void testBitwiseXorException2() throws Exception {
-		expectBitwiseXorException();
-		getType(" 5 ^ 7.0");
-	}
-
-	@Test
-	public void testBitwiseXorException3() throws Exception {
-		expectBitwiseXorException();
-		getType(" 5 ^ myString");
-	}
-
-	@Test
-	public void testBitwiseComplementException1() throws Exception {
-		expectBitwiseComplementException();
-		getType(" ~true");
-	}
-
-	@Test
-	public void testBitwiseComplementException2() throws Exception {
-		expectBitwiseComplementException();
-		getType(" ~9.0 ");
-	}
-
-	@Test
-	public void testBitwiseComplementException3() throws Exception {
-		expectBitwiseComplementException();
-		getType(" ~myString");
-	}
-
-	@Test
-	public void testBitwiseLeftShiftException1() throws Exception {
-		expectBitwiseLeftShiftException();
-		getType(" 5 << true");
-	}
-
-	@Test
-	public void testBitwiseLeftShiftException2() throws Exception {
-		expectBitwiseLeftShiftException();
-		getType(" 5 << 7.0");
-	}
-
-	@Test
-	public void testBitwiseLeftShiftException3() throws Exception {
-		expectBitwiseLeftShiftException();
-		getType(" 5 << myString");
-	}
-
-	@Test
-	public void testBitwiseRightShiftException1() throws Exception {
-		expectBitwiseRightShiftException();
-		getType(" 5 >> true");
-	}
-
-	@Test
-	public void testBitwiseRightShiftException2() throws Exception {
-		expectBitwiseRightShiftException();
-		getType(" 5 >> 7.0");
-	}
-
-	@Test
-	public void testBitwiseRightShiftException3() throws Exception {
-		expectBitwiseRightShiftException();
-		getType(" 5 >> myString");
+		expectIssue(
+				inferType("5 >> true"),
+				"Bitwise operator '>>' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 >> 7.0"),
+				"Bitwise operator '>>' may only be applied on integer types, not on integer and real.");
+		expectIssue(
+				inferType("5 >> stringVar"),
+				"Bitwise operator '>>' may only be applied on integer types, not on integer and string.");
 	}
 
 	@Test
 	public void testComplexExpressionsSuccess() {
-		assertTrue(ts
-				.isBoolean(getType("((((3 * myInt) + 5) % 2) > 97) || false")));
-		assertTrue(ts
-				.isBoolean(getType("!true != myBool && (3 > (myReal * 5 + 3))")));
-		assertTrue(ts.isInteger(getType("3 * 3 + 7 / (3 * ABC.myInt % 8)")));
+		assertTrue(isBooleanType(inferType("((((3 * intVar) + 5) % 2) > 97) || false")));
+		assertTrue(isBooleanType(inferType("!true != boolVar && (3 > (realVar * 5 + 3))")));
+		assertTrue(isIntegerType(inferType("3 * 3 + 7 / (3 * intVar % 8)")));
 	}
 
 	@Test
 	public void testEventRaisingSuccess() {
+		assertTrue(isIntegerType(inferType("raise intEvent : 42",
+				EventRaisingExpression.class.getSimpleName())));
+		assertTrue(isBooleanType(inferType("raise boolEvent : boolVar",
+				EventRaisingExpression.class.getSimpleName())));
+		assertTrue(isRealType(inferType("raise realEvent : 2.0 - 3.0",
+				EventRaisingExpression.class.getSimpleName())));
+		assertTrue(isStringType(inferType("raise stringEvent : 'string'",
+				EventRaisingExpression.class.getSimpleName())));
+		assertTrue(isVoidType(inferType("raise voidEvent",
+				EventRaisingExpression.class.getSimpleName())));
 
-		Scope context = createValuedEventsScope();
-		// int events
-		EObject statement = super.parseExpression("raise intEvent : 42",
-				context, EventRaisingExpression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
-		// bool events
-		statement = super.parseExpression("raise boolEvent : myBool", context,
-				EventRaisingExpression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
-		// real events
-		statement = super.parseExpression("raise realEvent : 2.0 - 3.0",
-				context, EventRaisingExpression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
-		// string events
-		statement = super.parseExpression("raise stringEvent : 'string'",
-				context, EventRaisingExpression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
-		// no valued Events
-		statement = super.parseExpression("raise event1", internalScope(),
-				EventRaisingExpression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
+		assertTrue(isIntegerType(inferType("raise ABC.intEvent : 42",
+				EventRaisingExpression.class.getSimpleName())));
+	}
 
+	@Test
+	public void testEventRaisingFailure() {
+		expectIssue(
+				inferType("raise intEvent : true",
+						EventRaisingExpression.class.getSimpleName()),
+				"Cannot assign a value of type boolean to an event of type integer.");
+		expectIssue(
+				inferType("raise intEvent : boolVar",
+						EventRaisingExpression.class.getSimpleName()),
+				"Cannot assign a value of type boolean to an event of type integer.");
+		expectIssue(
+				inferType("raise stringEvent",
+						EventRaisingExpression.class.getSimpleName()),
+				"Need to assign a value to an event of type string.");
+		expectIssue(
+				inferType("raise intEvent : true",
+						EventRaisingExpression.class.getSimpleName()),
+				"Cannot assign a value of type boolean to an event of type integer.");
+		expectIssue(
+				inferType("raise ABC.intEvent",
+						EventRaisingExpression.class.getSimpleName()),
+				"Need to assign a value to an event of type integer.");
+	}
+
+	@Test
+	public void testVariableDefinitionSuccess() {
+		assertTrue(isBooleanType(inferType("var boolVar : boolean = !true",
+				VariableDefinition.class.getSimpleName())));
+		assertTrue(isIntegerType(inferType("var intVar : integer = 5",
+				VariableDefinition.class.getSimpleName())));
+		assertTrue(isRealType(inferType("var realVar : real = 0.5",
+				VariableDefinition.class.getSimpleName())));
+		assertTrue(isRealType(inferType("var realVar : real = 5",
+				VariableDefinition.class.getSimpleName()))); // coercion
+		assertTrue(isStringType(inferType("var stringVar : string = 'test'",
+				VariableDefinition.class.getSimpleName())));
+	}
+
+	@Test
+	public void testVariableDefinitionFailure() {
+		expectIssue(
+				inferType("var boolVar : boolean = 5",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type integer to a variable of type boolean.");
+		expectIssue(
+				inferType("var boolVar : boolean = 0.5",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type real to a variable of type boolean.");
+		expectIssue(
+				inferType("var boolVar : boolean = 'text'",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type string to a variable of type boolean.");
+
+		expectIssue(
+				inferType("var intVar : integer = true",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type boolean to a variable of type integer.");
+		expectIssue(
+				inferType("var intVar : integer = 0.5",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type real to a variable of type integer.");
+		expectIssue(
+				inferType("var intVar : integer = 'text'",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type string to a variable of type integer.");
+
+		expectIssue(
+				inferType("var realVar : real = true",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type boolean to a variable of type real.");
+		expectIssue(
+				inferType("var realVar : real = 'text'",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type string to a variable of type real.");
+
+		expectIssue(
+				inferType("var stringVar : string = true",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type boolean to a variable of type string.");
+		expectIssue(
+				inferType("var stringVar : string = 5",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type integer to a variable of type string.");
+		expectIssue(
+				inferType("var stringVar : string = 0.5",
+						VariableDefinition.class.getSimpleName(),
+						interfaceScope()),
+				"Cannot assign a value of type real to a variable of type string.");
 	}
 
 	@Test
 	public void testValueOfSuccess() {
-		Scope context = createValuedEventsScope();
-		// int events
-		EObject statement = super.parseExpression("valueof(intEvent)", context,
-				EventValueReferenceExpression.class.getSimpleName());
-		assertTrue(ts.isInteger(analyzer.getType((Statement) statement)));
-		// bool events
-		statement = super.parseExpression("valueof(boolEvent)", context,
-				EventValueReferenceExpression.class.getSimpleName());
-		assertTrue(ts.isBoolean(analyzer.getType((Statement) statement)));
-		// real events
-		statement = super.parseExpression("valueof(realEvent)", context,
-				EventValueReferenceExpression.class.getSimpleName());
-		assertTrue(ts.isReal(analyzer.getType((Statement) statement)));
-		// string events
-		statement = super.parseExpression("valueof(stringEvent)", context,
-				EventValueReferenceExpression.class.getSimpleName());
-		assertTrue(ts.isString(analyzer.getType((Statement) statement)));
-		// void events
-		statement = super.parseExpression("valueof(voidEvent)", context,
-				EventValueReferenceExpression.class.getSimpleName());
-		assertTrue((ts.isVoid(analyzer.getType((Statement) statement))));
-		// interface events
-		assertTrue(ts.isInteger(getType("valueof(ABC.myIntEvent)")));
+		assertTrue(isIntegerType(inferType("valueof(intEvent)")));
+		assertTrue(isBooleanType(inferType("valueof(boolEvent)")));
+		assertTrue(isRealType(inferType("valueof(realEvent)")));
+		assertTrue(isStringType(inferType("valueof(stringEvent)")));
+		assertTrue(isVoidType(inferType("valueof(voidEvent)")));
 
+		assertTrue(isIntegerType(inferType("valueof(ABC.intEvent)")));
 	}
 
 	@Test
 	public void testEventIsRaisedSuccess() {
-		EObject statement = super.parseExpression("myBool = abc",
-				internalScope(), Expression.class.getSimpleName());
-		assertTrue(ts.isBoolean(analyzer.getType((Statement) statement)));
-		
-		statement = super.parseExpression("ABC.myBool = ABC.event2",
-				interfaceScope(), Expression.class.getSimpleName());
-		assertTrue(ts.isBoolean(analyzer.getType((Statement) statement)));
-	}
-
-	@Test
-	public void testEventRaisingException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
-		EObject statement = super.parseExpression("raise intEvent : true",
-				createValuedEventsScope(),
-				EventRaisingExpression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
-	}
-
-	@Test
-	public void testEventRaisingException2() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Can not assign a value of type boolean to a variable of type integer");
-		EObject statement = super.parseExpression("raise intEvent : myBool",
-				createValuedEventsScope(),
-				EventRaisingExpression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
-	}
-
-	@Test
-	public void testEventRaisingException3() {
-		Scope context = createValuedEventsScope();
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Can not assign a value of type null to a variable of type string");
-		EObject statement = super.parseExpression("raise stringEvent", context,
-				EventRaisingExpression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
+		assertTrue(isBooleanType(inferType("boolVar = intEvent",
+				internalScope())));
+		assertTrue(isBooleanType(inferType("ABC.boolVar = ABC.intEvent",
+				interfaceScope())));
 	}
 
 	@Test
 	public void testOperationSuccess() {
-		EObject statement = super.parseExpression("myInt = myOpp1()",
-				internalScope(), Expression.class.getSimpleName());
-		assertTrue(ts.isInteger(analyzer.getType((Statement) statement)));
+		assertTrue(isIntegerType(inferType("intVar = intOp()")));
 	}
 
 	@Test
-	public void testOperationException1() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("Can not assign a value of type integer to a variable of type boolean");
-		EObject statement = super.parseExpression("myBool = myOpp1()",
-				internalScope(), Expression.class.getSimpleName());
-		analyzer.getType((Statement) statement);
+	public void testOperationFailure() {
+		expectIssue(
+				inferType("boolVar = intOp()"),
+				"Assignment operator '=' may only be applied on compatible types, not on boolean and integer.");
 	}
 
 	@Test
 	public void parenthesizedExpression() {
-		assertTrue(ts.isBoolean(getType("( true || false )")));
-		assertTrue(ts.isInteger(getType("( 5 )")));
-		assertTrue(ts.isReal(getType("( 7.5 / 1.2 )")));
-		assertTrue(ts.isString(getType("( 'abc' )")));
-		assertTrue(ts.isInteger(getType("( ABC.myInt )")));
+		assertTrue(isBooleanType(inferType("( true || false )")));
+		assertTrue(isIntegerType(inferType("( 5 )")));
+		assertTrue(isRealType(inferType("( 7.5 / 1.2 )")));
+		assertTrue(isStringType(inferType("( 'abc' )")));
 	}
 
-	/**
-	 * 
-	 * exception.expect(TypeCheckException.class); exception .expectMessage(
-	 * "Can not assign a value of type integer to a variable of type boolean");
-	 * EObject statement = super.parseExpression("myBool = myOpp1()", null,
-	 * VariableDefinition); analyzer.getType((Statement) statement);
-	 * 
-	 */
-
-	/**
-	 * Convenience from here...
-	 */
-	private void expectOperatorPlusException() {
-		exception.expect(TypeCheckException.class);
-		exception.expectMessage("operator '+' can only be applied to numbers!");
-	}
-
-	private void expectOperatorSubstractException() {
-		exception.expect(TypeCheckException.class);
-		exception.expectMessage("operator '-' can only be applied to numbers!");
-	}
-
-	private void expectOperatorMultiplyException() {
-		exception.expect(TypeCheckException.class);
-		exception.expectMessage("operator '*' can only be applied to numbers!");
-	}
-
-	private void expectOperatorDivideException() {
-		exception.expect(TypeCheckException.class);
-		exception.expectMessage("operator '/' can only be applied to numbers!");
-	}
-
-	private void expectOperatorModException() {
-		exception.expect(TypeCheckException.class);
-		exception.expectMessage("operator '%' can only be applied to numbers!");
-	}
-
-	private void expectLogicalAndException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '&&' can only be applied to boolean values!");
-	}
-
-	private void expectLogicalOrException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '||' can only be applied to boolean values!");
-	}
-
-	private void expectLogicalNotException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '!' can only be applied to boolean values!");
-	}
-
-	private void expectBitwiseAndException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '&' can only be applied to integers!");
-
-	}
-
-	private void expectBitwiseOrException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '|' can only be applied to integers!");
-
-	}
-
-	private void expectBitwiseXorException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '^' can only be applied to integers!");
-
-	}
-
-	private void expectBitwiseComplementException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '~' can only be applied to integers!");
-
-	}
-
-	private void expectBitwiseLeftShiftException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '<<' can only be applied to integers!");
-
-	}
-
-	private void expectBitwiseRightShiftException() {
-		exception.expect(TypeCheckException.class);
-		exception
-				.expectMessage("operator '>>' can only be applied to integers!");
-
-	}
-
-	private Scope createValuedEventsScope() {
-		return createInternalScope("internal: var myBool : boolean event intEvent : integer  event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void");
-	}
-
-	protected Type getType(String expression) {
-		EObject statement = super.parseExpression(expression,
-				Expression.class.getSimpleName(), super.internalScope(),
+	protected InferenceResult inferType(String expression) {
+		return inferType(expression, super.internalScope(),
 				super.interfaceScope());
-		assertNotNull(statement);
-		return analyzer.getType((Statement) statement);
+	}
+
+	protected InferenceResult inferType(String expression, String parserRule) {
+		return inferType(expression, parserRule, super.internalScope(),
+				super.interfaceScope());
+	}
+
+	protected InferenceResult inferType(String expression, Scope... scopes) {
+		return inferType(expression, Expression.class.getSimpleName(), scopes);
+	}
+
+	protected InferenceResult inferType(String expression, String parserRule,
+			Scope... scopes) {
+		EObject parseResult = super.parseExpression(expression, parserRule,
+				scopes);
+		assertNotNull(parseResult);
+		if (parseResult instanceof Expression) {
+			return typeInferrer.inferType((Expression) parseResult);
+		} else if (parseResult instanceof EventDefinition) {
+			return typeInferrer.inferType((EventDefinition) parseResult);
+		} else if (parseResult instanceof VariableDefinition) {
+			return typeInferrer.inferType((VariableDefinition) parseResult);
+		} else {
+			throw new IllegalArgumentException("Unsupported parse result.");
+		}
+	}
+
+	private boolean isVoidType(InferenceResult inferenceResult) {
+		if (inferenceResult.getType() == null) {
+			throw new IllegalArgumentException();
+		}
+		return typeSystem.isVoidType(inferenceResult.getType());
+	}
+
+	private boolean isIntegerType(InferenceResult inferenceResult) {
+		if (inferenceResult.getType() == null) {
+			throw new IllegalArgumentException(inferenceResult.getIssues()
+					.iterator().next().getMessage());
+		}
+		return typeSystem.isIntegerType(inferenceResult.getType());
+	}
+
+	private boolean isRealType(InferenceResult inferenceResult) {
+		if (inferenceResult.getType() == null) {
+			throw new IllegalArgumentException(inferenceResult.getIssues()
+					.iterator().next().getMessage());
+		}
+		return typeSystem.isRealType(inferenceResult.getType());
+	}
+
+	private boolean isBooleanType(InferenceResult inferenceResult) {
+		if (inferenceResult.getType() == null) {
+			throw new IllegalArgumentException(inferenceResult.getIssues()
+					.iterator().next().getMessage());
+		}
+		return typeSystem.isBooleanType(inferenceResult.getType());
+	}
+
+	private boolean isStringType(InferenceResult inferenceResult) {
+		if (inferenceResult.getType() == null) {
+			throw new IllegalArgumentException(inferenceResult.getIssues()
+					.iterator().next().getMessage());
+		}
+		return typeSystem.isStringType(inferenceResult.getType());
+	}
+
+	private void expectIssue(InferenceResult inferenceResult, String message) {
+		if (inferenceResult == null) {
+			throw new IllegalArgumentException();
+		}
+		if (inferenceResult.getIssues().isEmpty()) {
+			TestCase.fail("No issue detected.");
+		}
+		if (inferenceResult.getIssues().size() > 1) {
+			fail("Expected only one issue but detected "
+					+ inferenceResult.getIssues().size());
+		}
+		assertEquals(message, inferenceResult.getIssues().iterator().next()
+				.getMessage());
 	}
 
 }

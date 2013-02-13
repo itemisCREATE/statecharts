@@ -93,7 +93,7 @@ public class ContextPredicateProvider {
 		}
 	}
 
-	static class VariableOperationEventPredicate extends FeaturedTypePredicate {
+	static class VariableOperationEventEnumeratorPredicate extends FeaturedTypePredicate {
 		@Override
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
@@ -102,7 +102,8 @@ public class ContextPredicateProvider {
 					.getEClass())
 					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input
 							.getEClass()) || TypesPackage.Literals.EVENT
-						.isSuperTypeOf(input.getEClass()));
+						.isSuperTypeOf(input.getEClass())
+						|| TypesPackage.Literals.ENUMERATOR.isSuperTypeOf(input.getEClass()));
 		}
 	}
 
@@ -118,7 +119,7 @@ public class ContextPredicateProvider {
 	private static final VariablePredicate VARIABLES = new VariablePredicate();
 	private static final EventPredicate EVENTS = new EventPredicate();
 	private static final VariableOperationPredicate VARIABLES_AND_OPERATIONS = new VariableOperationPredicate();
-	public static final VariableOperationEventPredicate VARIABLES_OPERATIONS_EVENTS = new VariableOperationEventPredicate();
+	public static final VariableOperationEventEnumeratorPredicate VARIABLES_OPERATIONS_EVENTS_ENUMERATORS = new VariableOperationEventEnumeratorPredicate();
 	private static final Predicate<IEObjectDescription> ALL = Predicates
 			.<IEObjectDescription> alwaysTrue();
 
@@ -138,21 +139,21 @@ public class ContextPredicateProvider {
 	}
 
 	protected void initMap() {
-		filter.put(key(ASSIGNMENT_EXPRESSION), VARIABLES);
+		filter.put(key(ASSIGNMENT_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 		filter.put(
 				key(ASSIGNMENT_EXPRESSION, ASSIGNMENT_EXPRESSION__EXPRESSION),
 				ALL);
 
 		filter.put(key(CONDITIONAL_EXPRESSION), VARIABLES_AND_OPERATIONS);
-		filter.put(key(LOGICAL_OR_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
-		filter.put(key(LOGICAL_AND_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
-		filter.put(key(LOGICAL_NOT_EXPRESSION), VARIABLES_OPERATIONS_EVENTS);
+		filter.put(key(LOGICAL_OR_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
+		filter.put(key(LOGICAL_AND_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
+		filter.put(key(LOGICAL_NOT_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 		filter.put(key(BITWISE_XOR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES);
 		filter.put(key(SHIFT_EXPRESSION), VARIABLES);
 		filter.put(key(LOGICAL_RELATION_EXPRESSION),
-				VARIABLES_OPERATIONS_EVENTS);
+				VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 		filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION),
 				VARIABLES_AND_OPERATIONS);
 		filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),

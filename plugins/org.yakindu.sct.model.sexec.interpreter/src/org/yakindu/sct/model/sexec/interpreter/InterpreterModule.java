@@ -10,12 +10,12 @@
  */
 package org.yakindu.sct.model.sexec.interpreter;
 
-import org.yakindu.base.types.ITypeSystemAccess;
-import org.yakindu.base.types.impl.BaseTypeSystemAccessImpl;
+import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.sct.model.sexec.interpreter.impl.ExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.impl.TimerTaskTimingService;
 import org.yakindu.sct.model.sexec.interpreter.stext.StextStatementInterpreter;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
+import org.yakindu.sct.model.stext.types.STextDefaulTypeSystem;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionContextImpl;
 
@@ -44,6 +44,6 @@ public class InterpreterModule implements Module {
 		binder.bind(ITimingService.class).to(TimerTaskTimingService.class);
 		binder.bind(IExecutionFlowInterpreter.class).to(
 				ExecutionFlowInterpreter.class);
-		binder.bind(ITypeSystemAccess.class).to(BaseTypeSystemAccessImpl.class);
+		binder.bind(ITypeSystem.class).to(STextDefaulTypeSystem.class);
 	}
 }

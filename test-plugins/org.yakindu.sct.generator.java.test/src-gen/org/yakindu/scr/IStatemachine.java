@@ -2,8 +2,6 @@ package org.yakindu.scr;
 
 /**
  * Basic interface for statemachines.
- * 
- * 
  */
 public interface IStatemachine {
 
@@ -16,6 +14,11 @@ public interface IStatemachine {
 	* Enters the statemachine. Sets the statemachine in a defined state.
 	*/
 	public void enter();
+
+	/**
+	* Exits the statemachine. Leaves the statemachine with a defined state.
+	*/
+	public void exit();
 
 	/**
 	* Start a run-to-completion cycle.

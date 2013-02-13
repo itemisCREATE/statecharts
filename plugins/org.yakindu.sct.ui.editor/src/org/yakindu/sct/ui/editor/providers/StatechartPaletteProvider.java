@@ -23,11 +23,11 @@ public class StatechartPaletteProvider extends DefaultPaletteProvider {
 	public void contributeToPalette(IEditorPart editor, Object content,
 			PaletteRoot root, @SuppressWarnings("rawtypes") Map predefinedEntries) {
 		if (editor instanceof StatechartDiagramEditor) {
-			StatechartDiagramEditor scEditor = (StatechartDiagramEditor) editor;
-			if (StatechartDiagramEditor.ID.equals(scEditor.getContributorId())) {
+//			StatechartDiagramEditor scEditor = (StatechartDiagramEditor) editor;
+//			if (StatechartDiagramEditor.ID.equals(scEditor.getContributorId())) {
 				super.contributeToPalette(editor, content, root,
 						predefinedEntries);
-			}
+//			}
 		}
 		return;
 	}

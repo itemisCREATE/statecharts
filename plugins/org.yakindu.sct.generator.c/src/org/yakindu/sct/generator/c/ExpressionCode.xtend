@@ -11,7 +11,6 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
-import org.yakindu.base.types.ITypeSystemAccess
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -40,16 +39,17 @@ import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.validation.ITypeInferrer
 import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem
+import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 
 class ExpressionCode {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
-	@Inject extension ITypeInferrer
-	@Inject extension ITypeSystemAccess
+	@Inject extension ISTextTypeSystem
+	@Inject extension ISTextTypeInferrer
 	
 	/* Refering to declared elements */
 	
@@ -127,7 +127,7 @@ class ExpressionCode {
 		'''! «operand.code»'''
 		
 	def dispatch code (LogicalRelationExpression it) '''
-		«IF leftOperand.type.isString»
+		«IF leftOperand.inferType.type.stringType»
 			(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 		«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 	

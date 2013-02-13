@@ -12,6 +12,7 @@
 package org.yakindu.sct.model.stext.scoping;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -30,8 +31,13 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
+import org.yakindu.base.types.DataType;
+import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Feature;
+import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeSystemUtils;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -53,10 +59,17 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
  * 
  * @author andreas muelder
  * @author axel terfloth
+ * @author alexander nyssen Added support for scoping of enumeration literals
  * 
  */
 public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
+	@Inject
+	ITypeSystem typeSystem;
+	
+	@Inject
+	TypeSystemUtils typeSystemUtils;
+	
 	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 
 		private ErrorHandler<T> delegate;
@@ -101,17 +114,19 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			final EObject context, EReference reference) {
 		IScope namdScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
-		Predicate<IEObjectDescription> predicate = calcuateFilterPredicate(
+		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(
 				context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
+		// add enum types
 		return new SimpleScope(Iterables.concat(namdScope.getAllElements(),
-				unnamedScope.getAllElements()));
+				unnamedScope.getAllElements(),
+				Scopes.scopeFor(typeSystemUtils.getEnumerationTypes(typeSystem)).getAllElements()));
 	}
 
 	public IScope scope_FeatureCall_feature(final FeatureCall context,
 			EReference reference) {
 
-		Predicate<IEObjectDescription> predicate = calcuateFilterPredicate(
+		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(
 				context, reference);
 
 		Expression owner = context.getOwner();
@@ -131,8 +146,13 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			scope = new FilteringScope(scope, predicate);
 		}
 
-		if (element instanceof Type) {
+		if (element instanceof DataType) {
 			scope = Scopes.scopeFor(allFeatures((Type) element), scope);
+			scope = new FilteringScope(scope, predicate);
+		}
+		
+		if( element instanceof EnumerationType){
+			scope = Scopes.scopeFor(((EnumerationType) element).getEnumerator(), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
 
@@ -145,7 +165,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		return scope;
 	}
 
-	private Predicate<IEObjectDescription> calcuateFilterPredicate(
+	private Predicate<IEObjectDescription> calculateFilterPredicate(
 			final EObject context, final EReference reference) {
 		Predicate<IEObjectDescription> predicate = null;
 		EObject container = context;
@@ -204,6 +224,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		return Scopes.scopeFor(scopeCandidates);
 	}
+	
 
 	/**
 	 * Returns the {@link Statechart} for a context element
@@ -241,10 +262,12 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			Set<Type> visited) {
 		if (type == null || visited.contains(type))
 			return;
-		for (Type superType : type.getSuperTypes()) {
-			collectFeatures(superType, features, visited);
+		if (type instanceof DataType) {
+			for (Type superType : ((DataType) type).getSuperTypes()) {
+				collectFeatures(superType, features, visited);
+			}
+			features.addAll(((DataType) type).getFeatures());
 		}
-		features.addAll(type.getFeatures());
 		visited.add(type);
 	}
 

@@ -12,9 +12,9 @@ package org.yakindu.sct.generator.c;
 
 import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
 
-import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -46,7 +46,7 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 		Module module = super.createModule(entry);
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
-				binder.bind(ITypeSystemAccess.class)
+				binder.bind(ICodegenTypeSystemAccess.class)
 						.to(CTypeSystemAccess.class);
 			}
 		});

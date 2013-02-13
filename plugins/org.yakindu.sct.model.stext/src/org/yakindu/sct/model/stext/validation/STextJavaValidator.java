@@ -32,11 +32,12 @@ import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.base.types.Event;
-import org.yakindu.base.types.ITypeSystemAccess;
+import org.yakindu.base.types.Feature;
+import org.yakindu.base.types.ITypeSystem.InferenceResult;
+import org.yakindu.base.types.ITypeSystem.InferredType;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
-import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -66,6 +67,9 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem.BinaryOperators;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -96,9 +100,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 
 	@Inject
-	private ITypeInferrer inferrer;
+	private ISTextTypeInferrer typeInferrer;
 	@Inject
-	private ITypeSystemAccess tsAccess;
+	private ISTextTypeSystem typeSystem;
+
 	@Inject
 	private IQualifiedNameProvider nameProvider;
 	@Inject
@@ -107,7 +112,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkVariableType(final VariableDefinition definition) {
-		if (tsAccess.isVoid(definition.getType())) {
+		if (typeSystem.isVoidType(new InferredType(definition.getType()))) {
 			error(VARIABLE_VOID_TYPE, null);
 		}
 	}
@@ -165,7 +170,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			Property reference = (Property) ((ElementReferenceExpression) varRef)
 					.getReference();
 			return reference.getName();
-		} else if (varRef instanceof FeatureCall) {
+		} else if (varRef instanceof FeatureCall
+				&& ((FeatureCall) varRef).getFeature() instanceof Property) {
 			Property reference = (Property) ((FeatureCall) varRef).getFeature();
 			return reference.getName();
 		}
@@ -198,18 +204,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkGuardHasBooleanExpression(ReactionTrigger trigger) {
-		if (trigger.getGuardExpression() == null)
+		if (trigger.getGuardExpression() == null) {
 			return;
-		try {
-			Type type = inferrer.getType(trigger.getGuardExpression());
-			if (!tsAccess.isBoolean(type)) {
-				error(GUARD_EXPRESSION,
-						StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
-			}
-		} catch (TypeCheckException ex) {
-			// This is handled by checkExpression
 		}
-
+		InferenceResult t = typeInferrer
+				.inferType(trigger.getGuardExpression());
+		if (t == null || t.getType() == null
+				|| !typeSystem.isBooleanType(t.getType())) {
+			error(GUARD_EXPRESSION,
+					StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
+		}
 	}
 
 	@Check(CheckType.FAST)
@@ -251,8 +255,44 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 	}
 
+	protected void checkEventRaisingExpression(EventRaisingExpression e) {
+		if (e.getEvent() != null) {
+			InferenceResult eventType = typeInferrer.inferType(e.getEvent());
+			if (e.getValue() != null) {
+				// if there is a value, check the event has void type
+				if (eventType == null || eventType.getType() == null) {
+					throw new IllegalArgumentException(
+							"Could not infer a type for event part of EventRaisingExpression"
+									+ e);
+				}
+				if (!typeSystem.isVoidType(eventType.getType())) {
+					error("Need to assign a value to an event of type "
+							+ eventType, null);
+				}
+			} else {
+				// check an assignment is possible.
+				InferenceResult valueType = typeInferrer
+						.inferType(e.getValue());
+				if (valueType == null || valueType.getType() == null) {
+					throw new IllegalArgumentException(
+							"Could not infer a type for value part of EventRaisingExpression"
+									+ e);
+				}
+				InferenceResult assignmentResult = typeSystem.inferType(
+						eventType.getType(), valueType.getType(),
+						BinaryOperators.ASSIGN);
+				if (assignmentResult == null
+						|| assignmentResult.getType() == null) {
+					// TODO: could user the issues within result
+					error("Can not assign a value of type " + valueType
+							+ " to an event of type " + eventType, null);
+				}
+			}
+		}
+	}
+
 	protected void checkFeatureCallEffect(FeatureCall call) {
-		if (call.getFeature() != null
+		if (call.getFeature() != null && call.getFeature() instanceof Feature
 				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '"
@@ -274,7 +314,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
-
 	}
 
 	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
@@ -356,41 +395,38 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				return;
 			}
 		}
-
 		error(message, source, (EStructuralFeature) null,
 				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
-
 	}
 
-	@Check(CheckType.FAST)
-	public void checkVariableDefinitionInitialValue(
-			VariableDefinition definition) {
-		Type varType = definition.getType();
-		if (definition.getInitialValue() == null)
-			return;
-		try {
-			Type valType = inferrer.getType(definition.getInitialValue());
-			Type combine = tsAccess.combine(valType, varType);
-			if (combine == null || !tsAccess.isAssignable(varType, valType)) {
-				error("Can not assign a value of type '" + valType.getName()
-						+ "' to a variable of type '" + varType + "'",
-						StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
-			}
-		} catch (Exception e) {
-			error(e.getMessage(), null);
-		}
-	}
-
+	// private void reportIssues(Collection<InferenceIssue> issues) {
+	// int severity = IStatus.OK;
+	// String message = "";
+	// for (InferenceIssue issue : issues) {
+	// if (issue.getSeverity() > severity) {
+	// severity = issue.getSeverity();
+	// }
+	// if (message.length() > 0) {
+	// message += "; ";
+	// }
+	// message += issue.getMessage();
+	// }
+	// if (severity == IStatus.ERROR) {
+	// error(message, null);
+	// } else if (severity == IStatus.WARNING) {
+	// warning(message, null);
+	// }
+	// }
 	@Check(CheckType.FAST)
 	public void checkExpression(final Statement statement) {
-		try {
-			inferrer.getType(statement);
-		} catch (TypeCheckException e) {
-			error(e.getMessage(), null);
-		} catch (IllegalArgumentException e) {
-			// This happens, when the expression is not completed for Unhandled
-			// parameter types: [null]
-			// We can safely ignore this exception
+		if (statement instanceof Expression) {
+			InferenceResult inferType = typeInferrer
+					.inferType((Expression) statement);
+			if (!inferType.getIssues().isEmpty()) {
+				// TODO: handle severity and multiple issues here
+				error(inferType.getIssues().iterator().next().getMessage(),
+						null);
+			}
 		}
 	}
 

@@ -233,7 +233,7 @@ AlwaysEvent:
 //****************
 
 EventRaisingExpression returns Expression:
-	{EventRaisingExpression}'raise' event=FeatureCall  (':' value=Expression)?
+	{EventRaisingExpression} 'raise' event=FeatureCall  (':' value=Expression)?
 ;	
 
 StatementExpression returns sgraph::Statement:

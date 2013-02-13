@@ -325,6 +325,11 @@ public class AssignmentAsExpressionStatemachine
 				stateVector[0] = State.$NullState$;
 				break;
 
+			case main_region_Subtract :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
 			case main_region_Multiply :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
