@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -18,7 +19,6 @@ import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.stext.stext.BoolLiteral;
 import org.yakindu.sct.model.stext.stext.HexLiteral;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
-import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.RealLiteral;
 import org.yakindu.sct.model.stext.stext.StringLiteral;
 
@@ -113,7 +113,7 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 		}
 	}
 
-	public InferenceResult inferType(Literal literal) {
+	public InferenceResult inferType(EObject  literal) {
 		if (literal instanceof StringLiteral) {
 			return new InferenceResult(getStringType());
 		} else if (literal instanceof BoolLiteral) {
