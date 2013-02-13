@@ -29,4 +29,5 @@ Export-Package: org.yakindu.sct.builder.nature,
  org.yakindu.sct.generator.core.extensions,
  org.yakindu.sct.generator.core.features,
  org.yakindu.sct.generator.core.impl,
+ org.yakindu.sct.generator.core.types,
  org.yakindu.sct.generator.core.util

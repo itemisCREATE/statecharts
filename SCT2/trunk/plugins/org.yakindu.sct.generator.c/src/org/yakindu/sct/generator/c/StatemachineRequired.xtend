@@ -15,16 +15,16 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
-import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class StatemachineRequired {
 
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
-	@Inject extension ITypeSystemAccess
+	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
 	
 	def generateStatemachineClientH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
@@ -116,7 +116,7 @@ class StatemachineRequired {
 	def dispatch functionPrototypes(Declaration it) ''''''
 
 	def dispatch functionPrototypes(OperationDefinition it) '''
-		extern «type.targetLanguageTypeName» «asFunction»(«FOR p : parameters SEPARATOR ', '»const «p.type.targetLanguageTypeName» «p.name.asIdentifier»«ENDFOR»);
+		extern «type.targetLanguageName» «asFunction»(«FOR p : parameters SEPARATOR ', '»const «p.type.targetLanguageName» «p.name.asIdentifier»«ENDFOR»);
 	'''
 
 }

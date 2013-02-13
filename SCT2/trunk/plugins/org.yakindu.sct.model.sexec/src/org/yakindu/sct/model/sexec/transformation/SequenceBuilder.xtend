@@ -13,23 +13,22 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.stext.stext.AssignmentOperator
-import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgraph.Statement
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.AssignmentOperator
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
-import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.IntLiteral
+import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
 import org.yakindu.sct.model.stext.stext.TimeUnit
-import org.yakindu.base.types.ITypeSystemAccess
 import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.StringLiteral
-
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 
 class SequenceBuilder {
 	
@@ -40,7 +39,7 @@ class SequenceBuilder {
 	@Inject extension SexecElementMapping mapping
 	@Inject extension TraceExtensions trace
 	
-	@Inject extension ITypeSystemAccess tsa
+	@Inject extension ISTextTypeSystem ts
 	
 	
 	@Inject @Named("ADD_TRACES") 
@@ -425,10 +424,10 @@ class SequenceBuilder {
 			return vd.initialValue
 		} else {
 			switch (vd) {
-				case vd.type.isBoolean: false.buildValue
-				case vd.type.isInteger: 0.buildValue
-				case vd.type.isReal: buildValue(0.0 as float)
-				case vd.type.isString: "".buildValue
+				case isBooleanType(vd.type): false.buildValue
+				case isIntegerType(vd.type): 0.buildValue
+				case isRealType(vd.type): buildValue(0.0 as float)
+				case isStringType(vd.type): "".buildValue
 				default : null
 			}
 		}

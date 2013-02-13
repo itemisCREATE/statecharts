@@ -78,6 +78,7 @@ public abstract class AbstractSTextTest {
 		return parseExpression(expression, null, ruleName);
 	}
 
+	// TODO: REMOVE
 	protected EObject parseExpression(String expression, Scope scope,
 			String ruleName) {
 		return parseExpression(expression, ruleName, scope);
@@ -161,7 +162,7 @@ public abstract class AbstractSTextTest {
 	 * </pre>
 	 */
 	protected Scope internalScope() {
-		return createInternalScope("internal: in event abc : integer in event event1 operation foo() operation myOpp1() :integer var myInt : integer var myBool : boolean var myReal : real var myString : string");
+		return createInternalScope("internal: operation voidOp() operation intOp():integer var intVar : integer var boolVar : boolean var realVar : real var stringVar : string event intEvent : integer  event boolEvent : boolean event realEvent : real event stringEvent : string event voidEvent : void");
 	}
 
 	/**
@@ -175,6 +176,6 @@ public abstract class AbstractSTextTest {
 	 * </pre>
 	 */
 	protected Scope interfaceScope() {
-		return createInterfaceScope("interface ABC : operation myParamOpp(param1 : integer, param2 : boolean ) : string operation myOpp2() in event event2  in event myIntEvent : integer in event event3 var myInt : integer var myBool : boolean");
+		return createInterfaceScope("interface ABC : operation paramOp(param1 : integer, param2 : boolean ) : string operation stringOp() in event voidEvent  in event intEvent : integer var intVar : integer var boolVar : boolean");
 	}
 }

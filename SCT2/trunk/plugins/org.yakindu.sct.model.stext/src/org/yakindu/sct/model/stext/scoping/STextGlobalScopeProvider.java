@@ -14,12 +14,13 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
-import org.yakindu.base.types.TypesPackage;
-import org.yakindu.base.types.scope.TypeLibrariesExtensionPointScopeHelper;
+import org.yakindu.base.types.ITypeSystem;
+import org.yakindu.base.types.scope.TypeSystemAwareScope;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -30,18 +31,24 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * @author andreas muelder - Initial contribution and API
+ * @author Alexander Nyßen - Ensured type system information is only inferred via {@link ITypeSystem} facade.
  * 
  */
 public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 
 	@Inject
-	private TypeLibrariesExtensionPointScopeHelper typeScopeHelper;
+	private ITypeSystem typeSystemAccess;
+
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider;
 
 	public IScope getScope(Resource context, EReference reference,
 			Predicate<IEObjectDescription> filter) {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = filterExternalDeclarations(context, parentScope);
-		parentScope = addTypeLibraries(reference, parentScope);
+
+		parentScope = new TypeSystemAwareScope(parentScope, typeSystemAccess,
+				qualifiedNameProvider, reference.getEReferenceType());
 		return parentScope;
 	}
 
@@ -76,21 +83,4 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		}
 		return parentScope;
 	}
-
-	/**
-	 * add types from type libraries, in case the type of the reference refers
-	 * to Type
-	 * 
-	 * @param reference
-	 * @param parentScope
-	 * @return
-	 */
-	protected IScope addTypeLibraries(EReference reference, IScope parentScope) {
-		if (reference.getEReferenceType().isSuperTypeOf(
-				TypesPackage.eINSTANCE.getType())) {
-			return typeScopeHelper.createExtensionScope(parentScope);
-		}
-		return parentScope;
-	}
-
 }

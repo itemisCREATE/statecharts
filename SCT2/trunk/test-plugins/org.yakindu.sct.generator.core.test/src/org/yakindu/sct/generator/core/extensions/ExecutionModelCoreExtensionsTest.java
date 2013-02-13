@@ -47,7 +47,7 @@ public class ExecutionModelCoreExtensionsTest {
 		result = call("hasOutgoingVoidEvents", scope);
 		assertEquals(Boolean.TRUE, result);
 
-		eventDefinition.setType(_createType("string"));
+		eventDefinition.setType(_createStringType("string"));
 		result = call("hasOutgoingVoidEvents", scope);
 		assertEquals(Boolean.FALSE, result);
 	}
@@ -64,7 +64,7 @@ public class ExecutionModelCoreExtensionsTest {
 		result = call("hasOutgoingValuedEvents", scope);
 		assertEquals(Boolean.FALSE, result);
 
-		eventDefinition.setType(_createType("string"));
+		eventDefinition.setType(_createStringType("string"));
 		result = call("hasOutgoingValuedEvents", scope);
 		assertEquals(Boolean.TRUE, result);
 	}

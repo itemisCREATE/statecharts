@@ -75,7 +75,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	public void teardown() {
 		tester = null;
 	}
-	
+
 	/**
 	 * @see STextJavaValidator#checkVariableType(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
@@ -115,11 +115,11 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void checkOperationArguments_FeatureCall() {
-		Scope context = (Scope) parseExpression(
+		Scope scope = (Scope) parseExpression(
 				"interface if : operation myOperation(param1 : integer, param2: boolean)",
 				null, InterfaceScope.class.getSimpleName());
 		EObject model = super.parseExpression("if.myOperation(5,true)",
-				context, Expression.class.getSimpleName());
+				Expression.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
@@ -311,65 +311,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	@Test
 	public void checkExpression() {
 		// Nothing to do, checked by Typeanalyzer tests
-	}
-
-	/**
-	 * @see STextJavaValidator#checkVariableDefinitionInitialValue(org.yakindu.sct.model.stext.stext.VariableDefinition)
-	 */
-	@Test
-	public void checkVariableDefinitionInitialValue() {
-
-		// Success boolean
-		checkExpressionSuccess("interface: var myBool : boolean = !true");
-		// Success integer
-		checkExpressionSuccess("interface: var myInt : integer = 5");
-		// Success real
-		checkExpressionSuccess("interface: var myReal : real = 0.5");
-		// Success string
-		checkExpressionSuccess("interface: var myString : string = \"text\"");
-
-		String errorMsg = "Can not assign a value of type "
-				+ "'%s' to a variable of type '%s'";
-
-		// Fail boolean 1
-		checkErrorMessageForExpression("interface: var myBool : boolean = 5",
-				String.format(errorMsg, "integer", "boolean"));
-		// Fail boolean 2
-		checkErrorMessageForExpression("interface: var myBool : boolean = 0.5",
-				String.format(errorMsg, "real", "boolean"));
-		// Fail boolean 3
-		checkErrorMessageForExpression(
-				"interface: var myBool : boolean = \"text\"",
-				String.format(errorMsg, "string", "boolean"));
-		// Fail integer 1
-		checkErrorMessageForExpression("interface: var myInt : integer = true",
-				String.format(errorMsg, "boolean", "integer"));
-		// Fail integer 2
-		checkErrorMessageForExpression("interface: var myInt : integer = 0.5",
-				String.format(errorMsg, "real", "integer"));
-		// Fail integer 3
-		checkErrorMessageForExpression(
-				"interface: var myInt : integer = \"text\"",
-				String.format(errorMsg, "string", "integer"));
-		// Fail real 1
-		checkErrorMessageForExpression("interface: var myReal : real = true",
-				String.format(errorMsg, "boolean", "real"));
-		// Fail real 2
-		checkErrorMessageForExpression(
-				"interface: var myReal : real = \"text\"",
-				String.format(errorMsg, "string", "real"));
-		// Fail String 1
-		checkErrorMessageForExpression("interface: var myString : string = 5",
-				String.format(errorMsg, "integer", "string"));
-		// Fail String 2
-		checkErrorMessageForExpression(
-				"interface: var myString : string = 0.5",
-				String.format(errorMsg, "real", "string"));
-		// Fail String 3
-		checkErrorMessageForExpression(
-				"interface: var myString : string = true",
-				String.format(errorMsg, "boolean", "string"));
-
 	}
 
 	private void checkErrorMessageForExpression(String expression,

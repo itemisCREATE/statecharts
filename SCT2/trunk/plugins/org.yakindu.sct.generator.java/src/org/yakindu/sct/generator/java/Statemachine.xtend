@@ -13,20 +13,22 @@ import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.Direction
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import java.util.List
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Check
-import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.Direction
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.model.stext.stext.EventDefinition
 
 class Statemachine {
 	
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
 	@Inject extension Navigation
-	@Inject extension ITypeSystemAccess
+	@Inject extension ICodegenTypeSystemAccess
+	@Inject extension ISTextTypeSystem
 	@Inject extension FlowCode
 	@Inject Beautifier beautifier
 	
@@ -88,8 +90,8 @@ class Statemachine {
 		«FOR event : flow.internalScopeEvents»
 		private boolean «event.name.asEscapedIdentifier»;
 		
-		«IF !event.type.isVoid()»
-			private «event.type.targetLanguageTypeName» «event.valueIdentifier»;
+		«IF event.type != null && !event.type.voidType»
+			private «event.type.targetLanguageName» «event.valueIdentifier»;
 		«ENDIF»
 		«ENDFOR»
 		«var timeEvents = flow.timeEvents»
@@ -115,7 +117,7 @@ class Statemachine {
 		};
 		
 		«FOR variable : flow.internalScopeVariables»
-		private «variable.type.targetLanguageTypeName» «variable.name.asEscapedIdentifier»;
+		private «variable.type.targetLanguageName» «variable.name.asEscapedIdentifier»;
 		«ENDFOR»
 		
 		«IF flow.hasHistory»
@@ -267,18 +269,18 @@ class Statemachine {
 			
 			private boolean «event.name.asEscapedIdentifier»;
 			
-			«IF !event.type.isVoid()»
-				private «event.type.targetLanguageTypeName» «event.valueIdentifier»;
+			«IF event.type != null && !event.type.voidType»
+				private «event.type.targetLanguageName» «event.valueIdentifier»;
 			«ENDIF»
 			
 			«IF event.direction == Direction::IN»
-				«IF !event.type.void»
-					public void raise«event.name.asName»(«event.type.targetLanguageTypeName» value) {
+				«IF event.type != null && !event.type.voidType»
+					public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
 						«event.name.asEscapedIdentifier» = true;
 						«event.valueIdentifier» = value;
 					}
 					
-					private «event.type.targetLanguageTypeName» get«event.name.asName»Value() {
+					private «event.type.targetLanguageName» get«event.name.asName»Value() {
 						«event.getIllegalAccessValidation()»
 						return «event.valueIdentifier»;
 					}
@@ -297,8 +299,8 @@ class Statemachine {
 					return «event.name.asEscapedIdentifier»;
 				}
 				
-				«IF !event.type.isVoid()»
-					private void raise«event.name.asName»(«event.type.targetLanguageTypeName» value) {
+				«IF event.type != null && !event.type.voidType»
+					private void raise«event.name.asName»(«event.type.targetLanguageName» value) {
 						«event.name.asEscapedIdentifier» = true;
 						«event.valueIdentifier» = value;
 						«IF entry.createInterfaceObserver»
@@ -308,7 +310,7 @@ class Statemachine {
 						«ENDIF»
 					}
 					
-					public «event.type.targetLanguageTypeName» get«event.name.asName»Value() {
+					public «event.type.targetLanguageName» get«event.name.asName»Value() {
 						«event.getIllegalAccessValidation()»
 						return «event.valueIdentifier»;
 					}
@@ -327,14 +329,14 @@ class Statemachine {
 		
 		«FOR variable : scope.variableDefinitions»
 				
-				private «variable.type.targetLanguageTypeName» «variable.name.asEscapedIdentifier»;
+				private «variable.type.targetLanguageName» «variable.name.asEscapedIdentifier»;
 				
-				public «variable.type.targetLanguageTypeName» «variable.getter» {
+				public «variable.type.targetLanguageName» «variable.getter» {
 					return «variable.name.asEscapedIdentifier»;
 				}
 				
 				«IF  !variable.readonly»
-					public void «variable.setter»(«variable.type.targetLanguageTypeName» value) {
+					public void «variable.setter»(«variable.type.targetLanguageName» value) {
 						this.«variable.name.asEscapedIdentifier» = value;
 					}
 				«ENDIF»
@@ -370,13 +372,13 @@ class Statemachine {
 	
 	def private internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
-			«IF !event.type.void»
-				private void raise«event.name.asEscapedName»(«event.type.targetLanguageTypeName» value) {
+			«IF event.type != null && !event.type.voidType»
+				private void raise«event.name.asEscapedName»(«event.type.targetLanguageName» value) {
 					«event.valueIdentifier» = value;
 					«event.name.asEscapedIdentifier» = true;
 				}
 				
-				private «event.type.targetLanguageTypeName» get«event.name.asEscapedName»Value() {
+				private «event.type.targetLanguageName» get«event.name.asEscapedName»Value() {
 					«event.getIllegalAccessValidation()»
 					return «event.valueIdentifier»;
 				}
@@ -389,11 +391,11 @@ class Statemachine {
 			«ENDIF»
 		«ENDFOR»
 «««		«FOR variable : flow.internalScopeVariables»
-«««		private «variable.type.targetLanguageTypeName» «variable.getter» {
+«««		private «variable.type.targetLanguageName» «variable.getter» {
 «««			return «variable.name.asEscapedIdentifier»;
 «««		}
 «««		
-«««		private void «variable.setter»(«variable.type.targetLanguageTypeName» value) {
+«««		private void «variable.setter»(«variable.type.targetLanguageName» value) {
 «««			«variable.name.asEscapedIdentifier» = value;
 «««		}	
 «««		«ENDFOR»
@@ -413,8 +415,8 @@ class Statemachine {
 			«var InterfaceScope scope = flow.defaultScope»
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					«IF !event.type.void»
-					public void raise«event.name.asName»(«event.type.targetLanguageTypeName» value) {
+					«IF event.type != null && !event.type.voidType»
+					public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
 						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
 					}
 					«ELSE»
@@ -427,8 +429,8 @@ class Statemachine {
 					public boolean isRaised«event.name.asName»() {
 						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 					}
-					«IF !event.type.isVoid()»
-						public «event.type.targetLanguageTypeName» get«event.name.asName»Value() {
+					«IF event.type != null && !event.type.voidType»
+						public «event.type.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
 					«ENDIF»
@@ -436,11 +438,11 @@ class Statemachine {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-			public «variable.type.targetLanguageTypeName» «variable.getter()» {
+			public «variable.type.targetLanguageName» «variable.getter()» {
 				return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
 			}
 			
-			public void «variable.setter»(«variable.type.targetLanguageTypeName» value) {
+			public void «variable.setter»(«variable.type.targetLanguageName» value) {
 				«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
 			}	
 			«ENDFOR»

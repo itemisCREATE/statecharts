@@ -38,7 +38,7 @@ public class TypeAnalyzerExtensionsTest {
 		Object result = call("isVoid", new Object[] { null });
 		assertEquals(Boolean.TRUE, result);
 
-		Type type = _createType(null);
+		Type type = _createVoidType("void");
 		result = call("isVoid", type);
 		assertEquals(Boolean.TRUE, result);
 

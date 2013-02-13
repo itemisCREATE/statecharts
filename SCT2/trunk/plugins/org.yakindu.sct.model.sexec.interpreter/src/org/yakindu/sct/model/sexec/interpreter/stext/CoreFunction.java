@@ -12,6 +12,7 @@ package org.yakindu.sct.model.sexec.interpreter.stext;
 
 public class CoreFunction extends Function {
 
+	// TODO: Unify with type system
 	public static String EQUALS = "==";
 	public static String NOT_EQUALS = "!=";
 	public static String SMALLER = "<";

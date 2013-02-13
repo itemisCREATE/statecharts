@@ -21,7 +21,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.types.ITypeSystemAccess;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
@@ -74,6 +73,7 @@ import org.yakindu.sct.model.stext.stext.StringLiteral;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
 
 @SuppressWarnings("all")
 public class SequenceBuilder {
@@ -96,7 +96,7 @@ public class SequenceBuilder {
   private TraceExtensions trace;
   
   @Inject
-  private ITypeSystemAccess tsa;
+  private ISTextTypeSystem ts;
   
   @Inject
   @Named(value = "ADD_TRACES")
@@ -767,8 +767,8 @@ public class SequenceBuilder {
       boolean _matched = false;
       if (!_matched) {
         Type _type = vd.getType();
-        boolean _isBoolean = this.tsa.isBoolean(_type);
-        if (_isBoolean) {
+        boolean _isBooleanType = this.ts.isBooleanType(_type);
+        if (_isBooleanType) {
           _matched=true;
           Expression _buildValue = this.buildValue(false);
           _switchResult = _buildValue;
@@ -776,8 +776,8 @@ public class SequenceBuilder {
       }
       if (!_matched) {
         Type _type_1 = vd.getType();
-        boolean _isInteger = this.tsa.isInteger(_type_1);
-        if (_isInteger) {
+        boolean _isIntegerType = this.ts.isIntegerType(_type_1);
+        if (_isIntegerType) {
           _matched=true;
           Expression _buildValue_1 = this.buildValue(0);
           _switchResult = _buildValue_1;
@@ -785,8 +785,8 @@ public class SequenceBuilder {
       }
       if (!_matched) {
         Type _type_2 = vd.getType();
-        boolean _isReal = this.tsa.isReal(_type_2);
-        if (_isReal) {
+        boolean _isRealType = this.ts.isRealType(_type_2);
+        if (_isRealType) {
           _matched=true;
           Expression _buildValue_2 = this.buildValue(((float) 0.0));
           _switchResult = _buildValue_2;
@@ -794,8 +794,8 @@ public class SequenceBuilder {
       }
       if (!_matched) {
         Type _type_3 = vd.getType();
-        boolean _isString = this.tsa.isString(_type_3);
-        if (_isString) {
+        boolean _isStringType = this.ts.isStringType(_type_3);
+        if (_isStringType) {
           _matched=true;
           Expression _buildValue_3 = this.buildValue("");
           _switchResult = _buildValue_3;

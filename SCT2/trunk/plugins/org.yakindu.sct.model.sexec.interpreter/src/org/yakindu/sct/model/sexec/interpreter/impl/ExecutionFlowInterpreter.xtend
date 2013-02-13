@@ -12,7 +12,6 @@ package org.yakindu.sct.model.sexec.interpreter.impl
 
 import com.google.inject.Inject
 import com.google.inject.name.Named
-import org.yakindu.base.types.ITypeSystemAccess
 import org.yakindu.base.types.Type
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
@@ -38,24 +37,24 @@ import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter
 import org.yakindu.sct.model.sexec.interpreter.ITimingService
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.naming.StextNameProvider
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable
-import org.yakindu.sct.model.stext.stext.Direction
 import java.util.List
-import java.util.ArrayList
 import java.util.Map
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.simulation.core.runtime.ISlot
 import java.util.HashMap
 import org.yakindu.sct.simulation.core.runtime.IEventSlot
 import org.yakindu.sct.model.sgraph.Event
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.Direction
 
 /**
  * 
@@ -74,7 +73,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	@Inject 
 	ITimingService timingService
 	@Inject extension
-	ITypeSystemAccess ts
+	ISTextTypeSystem tsa
 	 
 	@Inject
 	@Named("InterpreterName")
@@ -192,16 +191,16 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		var fqName = provider.qualifiedName(variable).toString
 		var ExecutionVariable varSlot 
 		
-		if(variable.type.^boolean){
+		if(variable.type.booleanType){
 			varSlot = new ExecutionVariable(fqName ,typeof(Boolean),false)
 		} 
-		else if (variable.type.integer){
+		else if (variable.type.integerType){
 			varSlot = new ExecutionVariable(fqName,typeof(Integer),0)
 		}
-		else if(variable.type.real){
+		else if(variable.type.realType){
 			varSlot = new ExecutionVariable(fqName,typeof(Float),0.0f)
 		}
-		else if (variable.type.string){
+		else if (variable.type.stringType){
 			varSlot = new ExecutionVariable(fqName,typeof(String),"")
 		}
 		
@@ -213,19 +212,19 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 		var fqName = provider.qualifiedName(event).toString
 		var ExecutionEvent eventSlot
 		
-		if(event.type.^boolean){
+		if(event.type.booleanType){
 			eventSlot = new ExecutionEvent(fqName,typeof(Boolean),false)
 		}
-		else if(event.type.integer){
+		else if(event.type.integerType){
 			eventSlot = new ExecutionEvent(fqName,typeof(Integer),0)
 		}
-		else if(event.type.real){
+		else if(event.type.realType){
 			eventSlot = new ExecutionEvent(fqName,typeof(Float),0.0f)
 		}
-		else if(event.type.^void){
+		else if(event.type.voidType){
 			eventSlot = new ExecutionEvent(fqName,typeof(Void))
 		}
-		else if (event.type.string){
+		else if (event.type.stringType){
 			eventSlot = new ExecutionEvent(fqName,typeof(String),"")
 		}
 		 
@@ -244,11 +243,11 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 	
 	def Class<?> mappedType(Type it) {
-		if(it.^boolean)		{ typeof(Boolean) } 
-		else if(it.integer)	{ typeof(Integer) }
-		else if(it.real)	{ typeof(Float) }
-		else if(it.^void)	{ typeof(Void)	}
-		else if(it.string)	{ typeof(String) }
+		if(it.booleanType)		{ typeof(Boolean) } 
+		else if(it.integerType)	{ typeof(Integer) }
+		else if(it.realType)	{ typeof(Float) }
+		else if(it.voidType)	{ typeof(Void)	}
+		else if(it.stringType)	{ typeof(String) }
 		else null 
 	} 
 	

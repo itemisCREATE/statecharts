@@ -20,25 +20,25 @@ import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.sgraph.State
 import java.util.regex.Pattern
 import java.util.regex.Matcher
 import org.yakindu.sct.generator.c.CKeywords
-import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 class Naming implements CKeywords{
 
 	@Inject
 	extension Navigation
 	
-	@Inject extension ITypeSystemAccess
+	@Inject extension ICodegenTypeSystemAccess
 	
 	@Inject
 	private StextNameProvider provider
@@ -250,7 +250,7 @@ class Naming implements CKeywords{
 	def scHandle() { 'handle' }
 	
 	def valueParams(EventDefinition it) {
-		if (hasValue) ', ' + type.targetLanguageTypeName + ' value' 
+		if (hasValue) ', ' + type.targetLanguageName + ' value' 
 		else ''
 	}
 	

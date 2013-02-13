@@ -119,7 +119,7 @@ public class PerformanceTestStatemachine
 		if (timerService == null) {
 			throw new IllegalStateException("TimerService not set.");
 		}
-		cycleStartTime = System.currentTimeMillis();
+		cycleStartTime = timerService.getSystemTimeMillis();
 		getTimerService().setTimer(performanceTest_time_event_0, 2000,
 				cycleStartTime);
 
@@ -1202,7 +1202,7 @@ public class PerformanceTestStatemachine
 
 	public void runCycle() {
 
-		cycleStartTime = System.currentTimeMillis();
+		cycleStartTime = timerService.getSystemTimeMillis();
 
 		clearOutEvents();
 

@@ -14,22 +14,22 @@ import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.Direction
-import org.yakindu.base.types.ITypeSystemAccess
+import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class Statemachine {
 	
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
-	@Inject extension ITypeSystemAccess
+	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
 	
 	def generateStatemachineH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
@@ -102,7 +102,7 @@ class Statemachine {
 
 	def dispatch structDeclaration(EventDefinition it) '''
 		sc_boolean «name.asIdentifier»_raised;
-		«IF type != null && type.name != 'void'»«type.targetLanguageTypeName»  «name.asIdentifier»_value;«ENDIF»
+		«IF type != null && type.name != 'void'»«type.targetLanguageName»  «name.asIdentifier»_value;«ENDIF»
 	'''
 
 	def dispatch structDeclaration(TimeEvent it) '''
@@ -110,7 +110,7 @@ class Statemachine {
 	'''
 
 	def dispatch structDeclaration(VariableDefinition it) '''
-		«IF type.name != 'void'»«type.targetLanguageTypeName»  «name.asEscapedIdentifier»;«ENDIF»
+		«IF type.name != 'void'»«type.targetLanguageName»  «name.asEscapedIdentifier»;«ENDIF»
 	'''
 	
 	def dispatch structDeclaration(Declaration it) ''''''
@@ -171,7 +171,7 @@ class Statemachine {
 			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
-				extern «type.targetLanguageTypeName» «asGetter»(«it.flow.type»* handle);
+				extern «type.targetLanguageName» «asGetter»(«it.flow.type»* handle);
 				
 			«ENDIF»
 		«ENDIF»
@@ -179,10 +179,10 @@ class Statemachine {
 
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-		extern «type.targetLanguageTypeName» «it.asGetter»(«it.flow.type»* handle);
+		extern «type.targetLanguageName» «it.asGetter»(«it.flow.type»* handle);
 		«IF ! readonly »
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
-			extern void «asSetter»(«it.flow.type»* handle, «type.targetLanguageTypeName» value);
+			extern void «asSetter»(«it.flow.type»* handle, «type.targetLanguageName» value);
 		«ENDIF»
 	'''
 }

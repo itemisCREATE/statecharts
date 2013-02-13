@@ -14,19 +14,25 @@ import static org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerato
 
 import org.eclipse.xtend.expression.ExecutionContext;
 import org.eclipse.xtend.expression.IExecutionContextAware;
-import org.yakindu.base.types.ITypeSystemAccess;
+import org.yakindu.base.types.ITypeSystem.InferredType;
 import org.yakindu.base.types.Type;
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sgraph.Statement;
-import org.yakindu.sct.model.stext.validation.ITypeInferrer;
+import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public class TypeAnalyzerExtensions implements IExecutionContextAware {
+
 	@Inject
-	private ITypeInferrer typeInferrer;
+	private ISTextTypeInferrer typeInferrer;
 	@Inject
-	private ITypeSystemAccess access;
+	private ISTextTypeSystem typeSystem;
+	@Inject
+	private ICodegenTypeSystemAccess typeSystemAccess;
 
 	public void setExecutionContext(ExecutionContext ctx) {
 		Injector injector = null;
@@ -42,24 +48,19 @@ public class TypeAnalyzerExtensions implements IExecutionContextAware {
 		}
 	}
 
-	public boolean isBoolean(Type type) {
-		return access.isBoolean(type);
-	}
-
-	public boolean isInteger(Type type) {
-		return access.isInteger(type);
-	}
-
-	public boolean isReal(Type type) {
-		return access.isReal(type);
-	}
-
-	public boolean isString(Type type) {
-		return access.isString(type);
+	public boolean isStringType(Type type) {
+		return typeSystem.isStringType(new InferredType(type));
 	}
 
 	public Type getType(Statement stmt) {
-		return typeInferrer.getType(stmt);
+		if (stmt instanceof Expression) {
+			InferredType type = typeInferrer.inferType((Expression) stmt)
+					.getType();
+			if (type != null) {
+				return typeSystem.getTypes(type).iterator().next();
+			}
+		}
+		return null;
 	}
 
 }
