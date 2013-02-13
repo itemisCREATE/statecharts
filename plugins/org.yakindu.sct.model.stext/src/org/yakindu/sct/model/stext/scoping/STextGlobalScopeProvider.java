@@ -37,7 +37,7 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 
 	@Inject
-	private ITypeSystem typeSystemAccess;
+	private ITypeSystem typeSystem;
 
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
@@ -47,7 +47,7 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = filterExternalDeclarations(context, parentScope);
 
-		parentScope = new TypeSystemAwareScope(parentScope, typeSystemAccess,
+		parentScope = new TypeSystemAwareScope(parentScope, typeSystem,
 				qualifiedNameProvider, reference.getEReferenceType());
 		return parentScope;
 	}
