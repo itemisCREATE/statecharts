@@ -628,7 +628,7 @@ public class STextDefaultTypeInferrer implements ISTextTypeInferrer {
     if (!_matched) {
       if (Objects.equal(operator,AssignmentOperator.AND_ASSIGN)) {
         _matched=true;
-        _switchResult = BinaryOperators.ASSIGN_AND;
+        _switchResult = BinaryOperators.ASSIGN_BITWISE_AND;
       }
     }
     if (!_matched) {
@@ -646,7 +646,7 @@ public class STextDefaultTypeInferrer implements ISTextTypeInferrer {
     if (!_matched) {
       if (Objects.equal(operator,AssignmentOperator.LEFT_SHIFT_ASSIGN)) {
         _matched=true;
-        _switchResult = BinaryOperators.ASSIGN_LEFTSHIFT;
+        _switchResult = BinaryOperators.ASSIGN_LEFT_SHIFT;
       }
     }
     if (!_matched) {
@@ -664,13 +664,13 @@ public class STextDefaultTypeInferrer implements ISTextTypeInferrer {
     if (!_matched) {
       if (Objects.equal(operator,AssignmentOperator.OR_ASSIGN)) {
         _matched=true;
-        _switchResult = BinaryOperators.ASSIGN_OR;
+        _switchResult = BinaryOperators.ASSIGN_BITWISE_OR;
       }
     }
     if (!_matched) {
       if (Objects.equal(operator,AssignmentOperator.RIGHT_SHIFT_ASSIGN)) {
         _matched=true;
-        _switchResult = BinaryOperators.ASSIGN_RIGHTSHIFT;
+        _switchResult = BinaryOperators.ASSIGN_RIGHT_SHIFT;
       }
     }
     if (!_matched) {
@@ -682,7 +682,7 @@ public class STextDefaultTypeInferrer implements ISTextTypeInferrer {
     if (!_matched) {
       if (Objects.equal(operator,AssignmentOperator.XOR_ASSIGN)) {
         _matched=true;
-        _switchResult = BinaryOperators.ASSIGN_XOR;
+        _switchResult = BinaryOperators.ASSIGN_BITWISE_XOR;
       }
     }
     if (!_matched) {

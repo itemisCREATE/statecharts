@@ -340,25 +340,25 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 			case AssignmentOperator::ADD_ASSIGN:
 				BinaryOperators::ASSIGN_ADD
 			case AssignmentOperator::AND_ASSIGN:
-				BinaryOperators::ASSIGN_AND
+				BinaryOperators::ASSIGN_BITWISE_AND
 			case AssignmentOperator::ASSIGN:
 				BinaryOperators::ASSIGN
 			case AssignmentOperator::DIV_ASSIGN:
 				BinaryOperators::ASSIGN_DIV
 			case AssignmentOperator::LEFT_SHIFT_ASSIGN:
-				BinaryOperators::ASSIGN_LEFTSHIFT
+				BinaryOperators::ASSIGN_LEFT_SHIFT
 			case AssignmentOperator::MOD_ASSIGN:
 				BinaryOperators::ASSIGN_MOD
 			case AssignmentOperator::MULT_ASSIGN:
 				BinaryOperators::ASSIGN_MULTIPLY
 			case AssignmentOperator::OR_ASSIGN:
-				BinaryOperators::ASSIGN_OR
+				BinaryOperators::ASSIGN_BITWISE_OR
 			case AssignmentOperator::RIGHT_SHIFT_ASSIGN:
-				BinaryOperators::ASSIGN_RIGHTSHIFT
+				BinaryOperators::ASSIGN_RIGHT_SHIFT
 			case AssignmentOperator::SUB_ASSIGN:
 				BinaryOperators::ASSIGN_SUBTRACT
 			case AssignmentOperator::XOR_ASSIGN:
-				BinaryOperators::ASSIGN_XOR
+				BinaryOperators::ASSIGN_BITWISE_XOR
 			default: 
 				throw new IllegalArgumentException("Unsupported operator" + operator)
 		}

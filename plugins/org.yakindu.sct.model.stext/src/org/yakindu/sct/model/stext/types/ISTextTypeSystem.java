@@ -60,11 +60,11 @@ public interface ISTextTypeSystem extends ITypeSystem {
 				AssignmentOperator.DIV_ASSIGN.getLiteral()), ASSIGN_MOD(
 				AssignmentOperator.MOD_ASSIGN.getLiteral()), ASSIGN_ADD(
 				AssignmentOperator.ADD_ASSIGN.getLiteral()), ASSIGN_SUBTRACT(
-				AssignmentOperator.SUB_ASSIGN.getLiteral()), ASSIGN_LEFTSHIFT(
-				AssignmentOperator.LEFT_SHIFT_ASSIGN.getLiteral()), ASSIGN_RIGHTSHIFT(
-				AssignmentOperator.RIGHT_SHIFT_ASSIGN.getLiteral()), ASSIGN_AND(
-				AssignmentOperator.AND_ASSIGN.getLiteral()), ASSIGN_XOR(
-				AssignmentOperator.XOR_ASSIGN.getLiteral()), ASSIGN_OR(
+				AssignmentOperator.SUB_ASSIGN.getLiteral()), ASSIGN_LEFT_SHIFT(
+				AssignmentOperator.LEFT_SHIFT_ASSIGN.getLiteral()), ASSIGN_RIGHT_SHIFT(
+				AssignmentOperator.RIGHT_SHIFT_ASSIGN.getLiteral()), ASSIGN_BITWISE_AND(
+				AssignmentOperator.AND_ASSIGN.getLiteral()), ASSIGN_BITWISE_XOR(
+				AssignmentOperator.XOR_ASSIGN.getLiteral()), ASSIGN_BITWISE_OR(
 				AssignmentOperator.OR_ASSIGN.getLiteral());
 
 		private String symbol;

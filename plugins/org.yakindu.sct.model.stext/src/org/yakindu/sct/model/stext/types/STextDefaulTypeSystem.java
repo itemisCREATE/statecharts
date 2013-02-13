@@ -233,8 +233,11 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 		case BITWISE_AND:
 		case RIGHT_SHIFT:
 		case LEFT_SHIFT:
-		case ASSIGN_LEFTSHIFT:
-		case ASSIGN_RIGHTSHIFT:
+		case ASSIGN_BITWISE_AND:
+		case ASSIGN_BITWISE_OR:
+		case ASSIGN_BITWISE_XOR:
+		case ASSIGN_LEFT_SHIFT:
+		case ASSIGN_RIGHT_SHIFT:
 			// check only integer types are used
 			if (!isIntegerType(firstOperandType.getType())
 					|| !isIntegerType(secondOperandType.getType())) {
@@ -258,8 +261,11 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 				return union(firstOperandType, secondOperandType);
 			case RIGHT_SHIFT:
 			case LEFT_SHIFT:
-			case ASSIGN_LEFTSHIFT:
-			case ASSIGN_RIGHTSHIFT:
+			case ASSIGN_LEFT_SHIFT:
+			case ASSIGN_RIGHT_SHIFT:
+			case ASSIGN_BITWISE_AND:
+			case ASSIGN_BITWISE_OR:
+			case ASSIGN_BITWISE_XOR:
 				// return type of assignment target
 				return new InferenceResult(firstOperandType);
 			default:
@@ -310,9 +316,6 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 			}
 		case LOGICAL_OR:
 		case LOGICAL_AND:
-		case ASSIGN_AND:
-		case ASSIGN_OR:
-		case ASSIGN_XOR:
 			// only boolean types allowed
 			if (!isBooleanType(firstOperandType.getType())
 					|| !isBooleanType(secondOperandType.getType())) {
@@ -333,11 +336,6 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 			case LOGICAL_OR:
 			case LOGICAL_AND:
 				return union(firstOperandType, secondOperandType);
-			case ASSIGN_AND:
-			case ASSIGN_OR:
-			case ASSIGN_XOR:
-				// use type of assignment target
-				return new InferenceResult(firstOperandType);
 			default:
 				throw new IllegalStateException("Unsupported operator kind.");
 			}
