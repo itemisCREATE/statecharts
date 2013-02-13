@@ -59,6 +59,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.TypedElement
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
 
 /**
  * 
@@ -155,9 +157,19 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 		return new InferenceResult(new InferredType(enumerator.owningEnumeration));
 	}
 	
+	def dispatch InferenceResult doInferType(InterfaceScope s){
+		// TODO: this could be handled via the type system
+		return new InferenceResult(voidType)	
+	}
+	
+	def dispatch InferenceResult doInferType(InternalScope s){
+		// TODO: this could be handled via the type system
+		return new InferenceResult(voidType)	
+	}
+	
 	def dispatch InferenceResult doInferType(EObject e) {
-		// TODO: delegate to type system
-		return new InferenceResult(new InferredType(voidType))
+		// delegate to type system
+		return inferType(e)
 	}
 
 	def dispatch InferenceResult doInferType(Expression e) {

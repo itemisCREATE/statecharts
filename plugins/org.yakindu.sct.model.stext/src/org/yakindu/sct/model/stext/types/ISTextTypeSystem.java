@@ -7,7 +7,6 @@ import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.stext.stext.AdditiveOperator;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
-import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
 import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.ShiftOperator;
@@ -17,7 +16,7 @@ import com.google.inject.ImplementedBy;
 /**
  * Extension of {@link ITypeSystem}, which defines the operators that have to be
  * supported by an {@link ITypeSystem} to be used in combination with SText. The
- * extesion also offers means to infer types for SText literals.
+ * extension also offers means to infer types for SText literals.
  * 
  * @author Alexander Nyßen (alexander.nyssen@itemis.de) - Inital contribution
  *         and API
@@ -121,9 +120,5 @@ public interface ISTextTypeSystem extends ITypeSystem {
 	public boolean isRealType(Type type);
 
 	public boolean isStringType(Type type);
-
-	// TODO: This can be moved to ITypeSystem if we have a common abstraction
-	// over literals within the meta model or if we use EObject instead
-	public InferenceResult inferType(Literal literal);
 
 }
