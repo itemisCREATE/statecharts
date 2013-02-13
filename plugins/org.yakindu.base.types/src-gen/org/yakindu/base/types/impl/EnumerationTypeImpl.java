@@ -1,53 +1,49 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.yakindu.base.types.impl;
 
 import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.base.base.impl.NamedElementImpl;
-import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type</b></em>'.
+ * An implementation of the model object '<em><b>Enumeration Type</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getConstraint <em>Constraint</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.EnumerationTypeImpl#getEnumerator <em>Enumerator</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class TypeImpl extends NamedElementImpl implements Type {
+public class EnumerationTypeImpl extends PrimitiveTypeImpl implements EnumerationType {
 	/**
-	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
+	 * The cached value of the '{@link #getEnumerator() <em>Enumerator</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getConstraint()
+	 * @see #getEnumerator()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeConstraint> constraint;
+	protected EList<Enumerator> enumerator;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypeImpl() {
+	protected EnumerationTypeImpl() {
 		super();
 	}
 
@@ -58,7 +54,7 @@ public abstract class TypeImpl extends NamedElementImpl implements Type {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.TYPE;
+		return TypesPackage.Literals.ENUMERATION_TYPE;
 	}
 
 	/**
@@ -66,11 +62,26 @@ public abstract class TypeImpl extends NamedElementImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeConstraint> getConstraint() {
-		if (constraint == null) {
-			constraint = new EObjectContainmentEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.TYPE__CONSTRAINT);
+	public EList<Enumerator> getEnumerator() {
+		if (enumerator == null) {
+			enumerator = new EObjectContainmentWithInverseEList<Enumerator>(Enumerator.class, this, TypesPackage.ENUMERATION_TYPE__ENUMERATOR, TypesPackage.ENUMERATOR__OWNING_ENUMERATION);
 		}
-		return constraint;
+		return enumerator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.ENUMERATION_TYPE__ENUMERATOR:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getEnumerator()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -81,8 +92,8 @@ public abstract class TypeImpl extends NamedElementImpl implements Type {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
+			case TypesPackage.ENUMERATION_TYPE__ENUMERATOR:
+				return ((InternalEList<?>)getEnumerator()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -95,8 +106,8 @@ public abstract class TypeImpl extends NamedElementImpl implements Type {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				return getConstraint();
+			case TypesPackage.ENUMERATION_TYPE__ENUMERATOR:
+				return getEnumerator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,9 +121,9 @@ public abstract class TypeImpl extends NamedElementImpl implements Type {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				getConstraint().clear();
-				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
+			case TypesPackage.ENUMERATION_TYPE__ENUMERATOR:
+				getEnumerator().clear();
+				getEnumerator().addAll((Collection<? extends Enumerator>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -126,8 +137,8 @@ public abstract class TypeImpl extends NamedElementImpl implements Type {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				getConstraint().clear();
+			case TypesPackage.ENUMERATION_TYPE__ENUMERATOR:
+				getEnumerator().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -141,20 +152,10 @@ public abstract class TypeImpl extends NamedElementImpl implements Type {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE__CONSTRAINT:
-				return constraint != null && !constraint.isEmpty();
+			case TypesPackage.ENUMERATION_TYPE__ENUMERATOR:
+				return enumerator != null && !enumerator.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	@Override
-	public String toString() {
-		return name;
-	}
-
-} //TypeImpl
+} //EnumerationTypeImpl

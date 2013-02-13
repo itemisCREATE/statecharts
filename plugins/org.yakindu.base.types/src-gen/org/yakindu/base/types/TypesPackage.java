@@ -68,7 +68,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getType()
 	 * @generated
 	 */
-	int TYPE = 1;
+	int TYPE = 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}' class.
@@ -78,7 +78,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypedElement()
 	 * @generated
 	 */
-	int TYPED_ELEMENT = 6;
+	int TYPED_ELEMENT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.FeatureImpl <em>Feature</em>}' class.
@@ -88,7 +88,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getFeature()
 	 * @generated
 	 */
-	int FEATURE = 2;
+	int FEATURE = 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.OperationImpl <em>Operation</em>}' class.
@@ -98,7 +98,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getOperation()
 	 * @generated
 	 */
-	int OPERATION = 3;
+	int OPERATION = 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.PropertyImpl <em>Property</em>}' class.
@@ -108,7 +108,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getProperty()
 	 * @generated
 	 */
-	int PROPERTY = 4;
+	int PROPERTY = 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.ParameterImpl <em>Parameter</em>}' class.
@@ -118,44 +118,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getParameter()
 	 * @generated
 	 */
-	int PARAMETER = 5;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.base.types.impl.LibraryImpl <em>Library</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.impl.LibraryImpl
-	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getLibrary()
-	 * @generated
-	 */
-	int LIBRARY = 0;
-
-	/**
-	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__TYPES = 0;
-
-	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY__ID = 1;
-
-	/**
-	 * The number of structural features of the '<em>Library</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LIBRARY_FEATURE_COUNT = 2;
+	int PARAMETER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -167,31 +130,13 @@ public interface TypesPackage extends EPackage {
 	int TYPE__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Features</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__FEATURES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__SUPER_TYPES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Owning Library</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__OWNING_LIBRARY = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int TYPE__CONSTRAINT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
@@ -200,7 +145,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int TYPE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -382,7 +327,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getEvent()
 	 * @generated
 	 */
-	int EVENT = 7;
+	int EVENT = 6;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -422,6 +367,246 @@ public interface TypesPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.EnumerationTypeImpl <em>Enumeration Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.EnumerationTypeImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getEnumerationType()
+	 * @generated
+	 */
+	int ENUMERATION_TYPE = 7;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.PrimitiveTypeImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getPrimitiveType()
+	 * @generated
+	 */
+	int PRIMITIVE_TYPE = 8;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__NAME = TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
+
+	/**
+	 * The feature id for the '<em><b>Base Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__BASE_TYPE = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Primitive Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__NAME = PRIMITIVE_TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__CONSTRAINT = PRIMITIVE_TYPE__CONSTRAINT;
+
+	/**
+	 * The feature id for the '<em><b>Base Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__BASE_TYPE = PRIMITIVE_TYPE__BASE_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Enumerator</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__ENUMERATOR = PRIMITIVE_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Enumeration Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE_FEATURE_COUNT = PRIMITIVE_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.ComplexTypeImpl <em>Complex Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.ComplexTypeImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getComplexType()
+	 * @generated
+	 */
+	int COMPLEX_TYPE = 9;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__NAME = TYPE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
+
+	/**
+	 * The feature id for the '<em><b>Features</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__FEATURES = TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__SUPER_TYPES = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Complex Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.EnumeratorImpl <em>Enumerator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.EnumeratorImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getEnumerator()
+	 * @generated
+	 */
+	int ENUMERATOR = 10;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__NAME = BasePackage.NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Owning Enumeration</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__OWNING_ENUMERATION = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Literal Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR__LITERAL_VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Enumerator</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATOR_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.TypeConstraintImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeConstraint()
+	 * @generated
+	 */
+	int TYPE_CONSTRAINT = 11;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_CONSTRAINT__NAME = BasePackage.NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_CONSTRAINT__VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_CONSTRAINT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Type <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -432,37 +617,15 @@ public interface TypesPackage extends EPackage {
 	EClass getType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Type#getFeatures <em>Features</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Type#getConstraint <em>Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Features</em>'.
-	 * @see org.yakindu.base.types.Type#getFeatures()
+	 * @return the meta object for the containment reference list '<em>Constraint</em>'.
+	 * @see org.yakindu.base.types.Type#getConstraint()
 	 * @see #getType()
 	 * @generated
 	 */
-	EReference getType_Features();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.Type#getSuperTypes <em>Super Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Super Types</em>'.
-	 * @see org.yakindu.base.types.Type#getSuperTypes()
-	 * @see #getType()
-	 * @generated
-	 */
-	EReference getType_SuperTypes();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.yakindu.base.types.Type#getOwningLibrary <em>Owning Library</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Library</em>'.
-	 * @see org.yakindu.base.types.Type#getOwningLibrary()
-	 * @see #getType()
-	 * @generated
-	 */
-	EReference getType_OwningLibrary();
+	EReference getType_Constraint();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Feature <em>Feature</em>}'.
@@ -559,38 +722,6 @@ public interface TypesPackage extends EPackage {
 	EReference getTypedElement_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.types.Library <em>Library</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Library</em>'.
-	 * @see org.yakindu.base.types.Library
-	 * @generated
-	 */
-	EClass getLibrary();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Library#getTypes <em>Types</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Types</em>'.
-	 * @see org.yakindu.base.types.Library#getTypes()
-	 * @see #getLibrary()
-	 * @generated
-	 */
-	EReference getLibrary_Types();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Library#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.yakindu.base.types.Library#getId()
-	 * @see #getLibrary()
-	 * @generated
-	 */
-	EAttribute getLibrary_Id();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Event <em>Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -599,6 +730,133 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEvent();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.EnumerationType <em>Enumeration Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enumeration Type</em>'.
+	 * @see org.yakindu.base.types.EnumerationType
+	 * @generated
+	 */
+	EClass getEnumerationType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.EnumerationType#getEnumerator <em>Enumerator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Enumerator</em>'.
+	 * @see org.yakindu.base.types.EnumerationType#getEnumerator()
+	 * @see #getEnumerationType()
+	 * @generated
+	 */
+	EReference getEnumerationType_Enumerator();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.PrimitiveType <em>Primitive Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Primitive Type</em>'.
+	 * @see org.yakindu.base.types.PrimitiveType
+	 * @generated
+	 */
+	EClass getPrimitiveType();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.base.types.PrimitiveType#getBaseType <em>Base Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Base Type</em>'.
+	 * @see org.yakindu.base.types.PrimitiveType#getBaseType()
+	 * @see #getPrimitiveType()
+	 * @generated
+	 */
+	EReference getPrimitiveType_BaseType();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.ComplexType <em>Complex Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Complex Type</em>'.
+	 * @see org.yakindu.base.types.ComplexType
+	 * @generated
+	 */
+	EClass getComplexType();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.ComplexType#getFeatures <em>Features</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Features</em>'.
+	 * @see org.yakindu.base.types.ComplexType#getFeatures()
+	 * @see #getComplexType()
+	 * @generated
+	 */
+	EReference getComplexType_Features();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.yakindu.base.types.ComplexType#getSuperTypes <em>Super Types</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Super Types</em>'.
+	 * @see org.yakindu.base.types.ComplexType#getSuperTypes()
+	 * @see #getComplexType()
+	 * @generated
+	 */
+	EReference getComplexType_SuperTypes();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.Enumerator <em>Enumerator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Enumerator</em>'.
+	 * @see org.yakindu.base.types.Enumerator
+	 * @generated
+	 */
+	EClass getEnumerator();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.yakindu.base.types.Enumerator#getOwningEnumeration <em>Owning Enumeration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Owning Enumeration</em>'.
+	 * @see org.yakindu.base.types.Enumerator#getOwningEnumeration()
+	 * @see #getEnumerator()
+	 * @generated
+	 */
+	EReference getEnumerator_OwningEnumeration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Enumerator#getLiteralValue <em>Literal Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Literal Value</em>'.
+	 * @see org.yakindu.base.types.Enumerator#getLiteralValue()
+	 * @see #getEnumerator()
+	 * @generated
+	 */
+	EAttribute getEnumerator_LiteralValue();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.TypeConstraint <em>Type Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Constraint</em>'.
+	 * @see org.yakindu.base.types.TypeConstraint
+	 * @generated
+	 */
+	EClass getTypeConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.TypeConstraint#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.yakindu.base.types.TypeConstraint#getValue()
+	 * @see #getTypeConstraint()
+	 * @generated
+	 */
+	EAttribute getTypeConstraint_Value();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -633,28 +891,12 @@ public interface TypesPackage extends EPackage {
 		EClass TYPE = eINSTANCE.getType();
 
 		/**
-		 * The meta object literal for the '<em><b>Features</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Constraint</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE__FEATURES = eINSTANCE.getType_Features();
-
-		/**
-		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE__SUPER_TYPES = eINSTANCE.getType_SuperTypes();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Library</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE__OWNING_LIBRARY = eINSTANCE.getType_OwningLibrary();
+		EReference TYPE__CONSTRAINT = eINSTANCE.getType_Constraint();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.FeatureImpl <em>Feature</em>}' class.
@@ -739,32 +981,6 @@ public interface TypesPackage extends EPackage {
 		EReference TYPED_ELEMENT__TYPE = eINSTANCE.getTypedElement_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.types.impl.LibraryImpl <em>Library</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.impl.LibraryImpl
-		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getLibrary()
-		 * @generated
-		 */
-		EClass LIBRARY = eINSTANCE.getLibrary();
-
-		/**
-		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference LIBRARY__TYPES = eINSTANCE.getLibrary_Types();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute LIBRARY__ID = eINSTANCE.getLibrary_Id();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.EventImpl <em>Event</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -773,6 +989,112 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EVENT = eINSTANCE.getEvent();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.EnumerationTypeImpl <em>Enumeration Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.EnumerationTypeImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getEnumerationType()
+		 * @generated
+		 */
+		EClass ENUMERATION_TYPE = eINSTANCE.getEnumerationType();
+
+		/**
+		 * The meta object literal for the '<em><b>Enumerator</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUMERATION_TYPE__ENUMERATOR = eINSTANCE.getEnumerationType_Enumerator();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.PrimitiveTypeImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getPrimitiveType()
+		 * @generated
+		 */
+		EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
+
+		/**
+		 * The meta object literal for the '<em><b>Base Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PRIMITIVE_TYPE__BASE_TYPE = eINSTANCE.getPrimitiveType_BaseType();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ComplexTypeImpl <em>Complex Type</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.ComplexTypeImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getComplexType()
+		 * @generated
+		 */
+		EClass COMPLEX_TYPE = eINSTANCE.getComplexType();
+
+		/**
+		 * The meta object literal for the '<em><b>Features</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPLEX_TYPE__FEATURES = eINSTANCE.getComplexType_Features();
+
+		/**
+		 * The meta object literal for the '<em><b>Super Types</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPLEX_TYPE__SUPER_TYPES = eINSTANCE.getComplexType_SuperTypes();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.EnumeratorImpl <em>Enumerator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.EnumeratorImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getEnumerator()
+		 * @generated
+		 */
+		EClass ENUMERATOR = eINSTANCE.getEnumerator();
+
+		/**
+		 * The meta object literal for the '<em><b>Owning Enumeration</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ENUMERATOR__OWNING_ENUMERATION = eINSTANCE.getEnumerator_OwningEnumeration();
+
+		/**
+		 * The meta object literal for the '<em><b>Literal Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute ENUMERATOR__LITERAL_VALUE = eINSTANCE.getEnumerator_LiteralValue();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.TypeConstraintImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeConstraint()
+		 * @generated
+		 */
+		EClass TYPE_CONSTRAINT = eINSTANCE.getTypeConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE_CONSTRAINT__VALUE = eINSTANCE.getTypeConstraint_Value();
 
 	}
 

@@ -1,8 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
- * $Id$
  */
 package org.yakindu.base.types.provider;
 
@@ -12,6 +8,7 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -23,6 +20,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+
 import org.yakindu.base.types.util.TypesAdapterFactory;
 
 /**
@@ -71,29 +69,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
 		supportedTypes.add(IItemPropertySource.class);
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Type} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypeItemProvider typeItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.types.Type}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTypeAdapter() {
-		if (typeItemProvider == null) {
-			typeItemProvider = new TypeItemProvider(this);
-		}
-
-		return typeItemProvider;
 	}
 
 	/**
@@ -166,29 +141,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Library} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected LibraryItemProvider libraryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.types.Library}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createLibraryAdapter() {
-		if (libraryItemProvider == null) {
-			libraryItemProvider = new LibraryItemProvider(this);
-		}
-
-		return libraryItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Event} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -209,6 +161,121 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		}
 
 		return eventItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.EnumerationType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnumerationTypeItemProvider enumerationTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.EnumerationType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEnumerationTypeAdapter() {
+		if (enumerationTypeItemProvider == null) {
+			enumerationTypeItemProvider = new EnumerationTypeItemProvider(this);
+		}
+
+		return enumerationTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.PrimitiveType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PrimitiveTypeItemProvider primitiveTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.PrimitiveType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPrimitiveTypeAdapter() {
+		if (primitiveTypeItemProvider == null) {
+			primitiveTypeItemProvider = new PrimitiveTypeItemProvider(this);
+		}
+
+		return primitiveTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.ComplexType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ComplexTypeItemProvider complexTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.ComplexType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createComplexTypeAdapter() {
+		if (complexTypeItemProvider == null) {
+			complexTypeItemProvider = new ComplexTypeItemProvider(this);
+		}
+
+		return complexTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Enumerator} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected EnumeratorItemProvider enumeratorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.Enumerator}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createEnumeratorAdapter() {
+		if (enumeratorItemProvider == null) {
+			enumeratorItemProvider = new EnumeratorItemProvider(this);
+		}
+
+		return enumeratorItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.TypeConstraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeConstraintItemProvider typeConstraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.TypeConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeConstraintAdapter() {
+		if (typeConstraintItemProvider == null) {
+			typeConstraintItemProvider = new TypeConstraintItemProvider(this);
+		}
+
+		return typeConstraintItemProvider;
 	}
 
 	/**
@@ -310,12 +377,15 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
-		if (libraryItemProvider != null) libraryItemProvider.dispose();
-		if (typeItemProvider != null) typeItemProvider.dispose();
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
 		if (eventItemProvider != null) eventItemProvider.dispose();
+		if (enumerationTypeItemProvider != null) enumerationTypeItemProvider.dispose();
+		if (primitiveTypeItemProvider != null) primitiveTypeItemProvider.dispose();
+		if (complexTypeItemProvider != null) complexTypeItemProvider.dispose();
+		if (enumeratorItemProvider != null) enumeratorItemProvider.dispose();
+		if (typeConstraintItemProvider != null) typeConstraintItemProvider.dispose();
 	}
 
 }

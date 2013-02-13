@@ -9,8 +9,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -20,20 +18,18 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.base.provider.NamedElementItemProvider;
-
-import org.yakindu.base.types.Type;
+import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.types.Type} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.EnumerationType} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeItemProvider
-	extends NamedElementItemProvider
+public class EnumerationTypeItemProvider
+	extends PrimitiveTypeItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -46,7 +42,7 @@ public class TypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeItemProvider(AdapterFactory adapterFactory) {
+	public EnumerationTypeItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -77,7 +73,7 @@ public class TypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.TYPE__CONSTRAINT);
+			childrenFeatures.add(TypesPackage.Literals.ENUMERATION_TYPE__ENUMERATOR);
 		}
 		return childrenFeatures;
 	}
@@ -96,14 +92,14 @@ public class TypeItemProvider
 	}
 
 	/**
-	 * This returns Type.gif.
+	 * This returns EnumerationType.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Type"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/EnumerationType"));
 	}
 
 	/**
@@ -114,10 +110,10 @@ public class TypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Type)object).getName();
+		String label = ((EnumerationType)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_Type_type") :
-			getString("_UI_Type_type") + " " + label;
+			getString("_UI_EnumerationType_type") :
+			getString("_UI_EnumerationType_type") + " " + label;
 	}
 
 	/**
@@ -131,8 +127,8 @@ public class TypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(Type.class)) {
-			case TypesPackage.TYPE__CONSTRAINT:
+		switch (notification.getFeatureID(EnumerationType.class)) {
+			case TypesPackage.ENUMERATION_TYPE__ENUMERATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -152,19 +148,8 @@ public class TypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.TYPE__CONSTRAINT,
-				 TypesFactory.eINSTANCE.createTypeConstraint()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return TypesEditPlugin.INSTANCE;
+				(TypesPackage.Literals.ENUMERATION_TYPE__ENUMERATOR,
+				 TypesFactory.eINSTANCE.createEnumerator()));
 	}
 
 }

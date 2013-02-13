@@ -10,11 +10,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.*;
+import org.yakindu.base.types.DataType;
+import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
-import org.yakindu.base.types.Library;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedElement;
@@ -77,12 +81,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TypesPackage.LIBRARY: {
-				Library library = (Library)theEObject;
-				T result = caseLibrary(library);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TypesPackage.TYPE: {
 				Type type = (Type)theEObject;
 				T result = caseType(type);
@@ -136,6 +134,45 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = caseFeature(event);
 				if (result == null) result = caseTypedElement(event);
 				if (result == null) result = caseNamedElement(event);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.ENUMERATION_TYPE: {
+				EnumerationType enumerationType = (EnumerationType)theEObject;
+				T result = caseEnumerationType(enumerationType);
+				if (result == null) result = casePrimitiveType(enumerationType);
+				if (result == null) result = caseType(enumerationType);
+				if (result == null) result = caseNamedElement(enumerationType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.PRIMITIVE_TYPE: {
+				PrimitiveType primitiveType = (PrimitiveType)theEObject;
+				T result = casePrimitiveType(primitiveType);
+				if (result == null) result = caseType(primitiveType);
+				if (result == null) result = caseNamedElement(primitiveType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.COMPLEX_TYPE: {
+				ComplexType complexType = (ComplexType)theEObject;
+				T result = caseComplexType(complexType);
+				if (result == null) result = caseType(complexType);
+				if (result == null) result = caseNamedElement(complexType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.ENUMERATOR: {
+				Enumerator enumerator = (Enumerator)theEObject;
+				T result = caseEnumerator(enumerator);
+				if (result == null) result = caseNamedElement(enumerator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.TYPE_CONSTRAINT: {
+				TypeConstraint typeConstraint = (TypeConstraint)theEObject;
+				T result = caseTypeConstraint(typeConstraint);
+				if (result == null) result = caseNamedElement(typeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -249,21 +286,6 @@ public class TypesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Library</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Library</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseLibrary(Library object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -275,6 +297,81 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEvent(Event object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enumeration Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enumeration Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumerationType(EnumerationType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePrimitiveType(PrimitiveType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Complex Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Complex Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseComplexType(ComplexType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enumerator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enumerator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEnumerator(Enumerator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Constraint</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeConstraint(TypeConstraint object) {
 		return null;
 	}
 

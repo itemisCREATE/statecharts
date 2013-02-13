@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
@@ -148,9 +149,9 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getOwningType() {
+	public ComplexType getOwningType() {
 		if (eContainerFeatureID() != TypesPackage.FEATURE__OWNING_TYPE) return null;
-		return (Type)eContainer();
+		return (ComplexType)eContainer();
 	}
 
 	/**
@@ -158,7 +159,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOwningType(Type newOwningType, NotificationChain msgs) {
+	public NotificationChain basicSetOwningType(ComplexType newOwningType, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newOwningType, TypesPackage.FEATURE__OWNING_TYPE, msgs);
 		return msgs;
 	}
@@ -168,7 +169,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setOwningType(Type newOwningType) {
+	public void setOwningType(ComplexType newOwningType) {
 		if (newOwningType != eInternalContainer() || (eContainerFeatureID() != TypesPackage.FEATURE__OWNING_TYPE && newOwningType != null)) {
 			if (EcoreUtil.isAncestor(this, newOwningType))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -176,7 +177,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newOwningType != null)
-				msgs = ((InternalEObject)newOwningType).eInverseAdd(this, TypesPackage.TYPE__FEATURES, Type.class, msgs);
+				msgs = ((InternalEObject)newOwningType).eInverseAdd(this, TypesPackage.COMPLEX_TYPE__FEATURES, ComplexType.class, msgs);
 			msgs = basicSetOwningType(newOwningType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -195,7 +196,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 			case TypesPackage.FEATURE__OWNING_TYPE:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetOwningType((Type)otherEnd, msgs);
+				return basicSetOwningType((ComplexType)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -223,7 +224,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case TypesPackage.FEATURE__OWNING_TYPE:
-				return eInternalContainer().eInverseRemove(this, TypesPackage.TYPE__FEATURES, Type.class, msgs);
+				return eInternalContainer().eInverseRemove(this, TypesPackage.COMPLEX_TYPE__FEATURES, ComplexType.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -262,7 +263,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 				setName((String)newValue);
 				return;
 			case TypesPackage.FEATURE__OWNING_TYPE:
-				setOwningType((Type)newValue);
+				setOwningType((ComplexType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -283,7 +284,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 				setName(NAME_EDEFAULT);
 				return;
 			case TypesPackage.FEATURE__OWNING_TYPE:
-				setOwningType((Type)null);
+				setOwningType((ComplexType)null);
 				return;
 		}
 		super.eUnset(featureID);

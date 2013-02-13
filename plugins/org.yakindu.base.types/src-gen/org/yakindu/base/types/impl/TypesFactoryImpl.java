@@ -11,13 +11,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.base.types.*;
+import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
-import org.yakindu.base.types.Library;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
-import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -65,25 +67,18 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TypesPackage.LIBRARY: return createLibrary();
-			case TypesPackage.TYPE: return createType();
 			case TypesPackage.OPERATION: return createOperation();
 			case TypesPackage.PROPERTY: return createProperty();
 			case TypesPackage.PARAMETER: return createParameter();
 			case TypesPackage.EVENT: return createEvent();
+			case TypesPackage.ENUMERATION_TYPE: return createEnumerationType();
+			case TypesPackage.PRIMITIVE_TYPE: return createPrimitiveType();
+			case TypesPackage.COMPLEX_TYPE: return createComplexType();
+			case TypesPackage.ENUMERATOR: return createEnumerator();
+			case TypesPackage.TYPE_CONSTRAINT: return createTypeConstraint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type createType() {
-		TypeImpl type = new TypeImpl();
-		return type;
 	}
 
 	/**
@@ -121,9 +116,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Library createLibrary() {
-		LibraryImpl library = new LibraryImpl();
-		return library;
+	public Event createEvent() {
+		EventImpl event = new EventImpl();
+		return event;
 	}
 
 	/**
@@ -131,9 +126,49 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Event createEvent() {
-		EventImpl event = new EventImpl();
-		return event;
+	public EnumerationType createEnumerationType() {
+		EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
+		return enumerationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PrimitiveType createPrimitiveType() {
+		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
+		return primitiveType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ComplexType createComplexType() {
+		ComplexTypeImpl complexType = new ComplexTypeImpl();
+		return complexType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Enumerator createEnumerator() {
+		EnumeratorImpl enumerator = new EnumeratorImpl();
+		return enumerator;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeConstraint createTypeConstraint() {
+		TypeConstraintImpl typeConstraint = new TypeConstraintImpl();
+		return typeConstraint;
 	}
 
 	/**

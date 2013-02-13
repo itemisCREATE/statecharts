@@ -26,15 +26,6 @@ public interface TypesFactory extends EFactory {
 	TypesFactory eINSTANCE = org.yakindu.base.types.impl.TypesFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type</em>'.
-	 * @generated
-	 */
-	Type createType();
-
-	/**
 	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -62,15 +53,6 @@ public interface TypesFactory extends EFactory {
 	Parameter createParameter();
 
 	/**
-	 * Returns a new object of class '<em>Library</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Library</em>'.
-	 * @generated
-	 */
-	Library createLibrary();
-
-	/**
 	 * Returns a new object of class '<em>Event</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -78,6 +60,51 @@ public interface TypesFactory extends EFactory {
 	 * @generated
 	 */
 	Event createEvent();
+
+	/**
+	 * Returns a new object of class '<em>Enumeration Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumeration Type</em>'.
+	 * @generated
+	 */
+	EnumerationType createEnumerationType();
+
+	/**
+	 * Returns a new object of class '<em>Primitive Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Primitive Type</em>'.
+	 * @generated
+	 */
+	PrimitiveType createPrimitiveType();
+
+	/**
+	 * Returns a new object of class '<em>Complex Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Complex Type</em>'.
+	 * @generated
+	 */
+	ComplexType createComplexType();
+
+	/**
+	 * Returns a new object of class '<em>Enumerator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enumerator</em>'.
+	 * @generated
+	 */
+	Enumerator createEnumerator();
+
+	/**
+	 * Returns a new object of class '<em>Type Constraint</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Constraint</em>'.
+	 * @generated
+	 */
+	TypeConstraint createTypeConstraint();
 
 	/**
 	 * Returns the package supported by this factory.
