@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
@@ -247,20 +248,20 @@ public interface ITypeSystem {
 	 */
 	public List<Type> getTypes();
 
-	// /**
-	// * Infer a type for a given literal. The literal may represent a primitive
-	// * value (primitive type literal) or an instance specification (complex
-	// * type literal).
-	// *
-	// * @param literal
-	// * The literal for which to infer a type
-	// * @return An {@link InferenceResult} containing the {@link InferredType}
-	// * for the literal (or <code>null</code> in case no type could be
-	// * inferred) and potential {@link InferenceIssue}s that occurred
-	// * during the type inference. The result may also contain both, an
-	// * inferred type and issues.
-	// */
-	// public InferenceResult inferType(Object literal);
+	/**
+	 * Infer a type for a given literal. The literal may represent a primitive
+	 * value (primitive type literal) or an instance specification (complex type
+	 * literal).
+	 * 
+	 * @param literal
+	 *            The literal for which to infer a type
+	 * @return An {@link InferenceResult} containing the {@link InferredType}
+	 *         for the literal (or <code>null</code> in case no type could be
+	 *         inferred) and potential {@link InferenceIssue}s that occurred
+	 *         during the type inference. The result may also contain both, an
+	 *         inferred type and issues.
+	 */
+	public InferenceResult inferType(EObject literal);
 
 	/**
 	 * Responsible of inferring a type for a given concrete type (provided via
