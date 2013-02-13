@@ -15,6 +15,10 @@ import org.yakindu.sct.model.stext.stext.ShiftOperator;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Extension of {@link ITypeSystem}, which defines the operators that have to be
+ * supported by an {@link ITypeSystem} to be used in combination with SText. The
+ * extesion also offers means to infer types for SText literals.
+ * 
  * @author Alexander Nyßen (alexander.nyssen@itemis.de) - Inital contribution
  *         and API
  * 
@@ -107,7 +111,7 @@ public interface ISTextTypeSystem extends ITypeSystem {
 	public boolean isRealType(InferredType inferredType);
 
 	public boolean isStringType(InferredType inferredType);
-	
+
 	public boolean isVoidType(Type type);
 
 	public boolean isBooleanType(Type type);
@@ -117,8 +121,9 @@ public interface ISTextTypeSystem extends ITypeSystem {
 	public boolean isRealType(Type type);
 
 	public boolean isStringType(Type type);
-	
-	// TODO: This can be moved to ITypeSystem if we have a common abstraction over literals within the meta model
+
+	// TODO: This can be moved to ITypeSystem if we have a common abstraction
+	// over literals within the meta model
 	public InferenceResult inferType(Literal literal);
 
 }
