@@ -24,6 +24,16 @@ import org.yakindu.sct.model.stext.stext.StringLiteral;
 
 import com.google.inject.Singleton;
 
+/**
+ * Default implementation of an {@link ISTextTypeSystem} that is provided with
+ * SText. The type system offers exactly five types, namely the primitives
+ * <code>void</code>, <code>boolean</code>, <code>integer</code>,
+ * <code>real</code>, <code>string</code>.
+ * 
+ * @author Alexander Nyßen (alexander.nyssen@itemis.de) - Initial contributino
+ *         and API
+ * 
+ */
 @Singleton
 public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 		ISTextTypeSystem {
