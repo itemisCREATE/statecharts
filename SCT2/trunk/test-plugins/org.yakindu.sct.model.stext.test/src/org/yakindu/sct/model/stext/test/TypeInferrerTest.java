@@ -56,7 +56,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 	// Unary
 	@Test
-	public void testUnarySuccess() {
+	public void testNumericalUnaryExpressionSuccess() {
 		// int
 		assertTrue(isIntegerType(inferType("1")));
 		assertTrue(isIntegerType(inferType("0x0F")));
@@ -76,11 +76,24 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isBooleanType(inferType("false")));
 		assertTrue(isBooleanType(inferType("boolVar")));
 		assertTrue(isBooleanType(inferType("boolEvent")));
+		// tilde
+		assertTrue(isIntegerType(inferType(" ~3")));		
 	}
 
-	// Add
 	@Test
-	public void testAddSuccess() {
+	public void testNumericalUnaryExpressionFailure(){
+		expectIssue(inferType("~true"),
+				"Bitwise operator '~' may only be applied on integer types, not on boolean.");
+		expectIssue(inferType("~9.0"),
+				"Bitwise operator '~' may only be applied on integer types, not on real.");
+		expectIssue(inferType("~stringVar"),
+				"Bitwise operator '~' may only be applied on integer types, not on string.");
+	}
+	
+	// AddSubtract
+	@Test
+	public void testNumericalAddSubtractExpression() {
+		// add 
 		assertTrue(isIntegerType(inferType("1+2", internalScope())));
 		assertTrue(isIntegerType(inferType("1 + 2")));
 		assertTrue(isIntegerType(inferType("1 + 0x0F")));
@@ -89,11 +102,22 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isIntegerType(inferType("intVar + 2")));
 		assertTrue(isRealType(inferType("1.1 + 2")));
 		assertTrue(isRealType(inferType("2 + 1.0")));
-		assertTrue(isRealType(inferType("1 + 2 + 3.0")));
+		assertTrue(isRealType(inferType("1 + 2 + 3.0")));		
+		// subtract
+		assertTrue(isIntegerType(inferType("1 - 2")));
+		assertTrue(isIntegerType(inferType("0x0F - 2")));
+		assertTrue(isIntegerType(inferType("0x0F - 0x0F")));
+		assertTrue(isIntegerType(inferType("0x0F- intVar")));
+		assertTrue(isIntegerType(inferType("intVar - 2")));
+		assertTrue(isRealType(inferType("1.0 - 2")));
+		assertTrue(isRealType(inferType("2 - 1.0")));
+		assertTrue(isRealType(inferType("realVar - 1.0")));
+		assertTrue(isRealType(inferType("1 - 2 - 3.0")));				
 	}
 
 	@Test
-	public void testAddFailure() {
+	public void testNumericalAddSubtractExpressionFailure() {
+		//add
 		expectIssue(
 				inferType("true + 5"),
 				"Arithmetic operator '+' may only be applied on numeric types, not on boolean and integer.");
@@ -117,25 +141,8 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				"Arithmetic operator '+' may only be applied on numeric types, not on real and string.");
 		expectIssue(
 				inferType("intVar + 'string'"),
-				"Arithmetic operator '+' may only be applied on numeric types, not on integer and string.");
-	}
-
-	// substract
-	@Test
-	public void testSubstractSuccess() {
-		assertTrue(isIntegerType(inferType("1 - 2")));
-		assertTrue(isIntegerType(inferType("0x0F - 2")));
-		assertTrue(isIntegerType(inferType("0x0F - 0x0F")));
-		assertTrue(isIntegerType(inferType("0x0F- intVar")));
-		assertTrue(isIntegerType(inferType("intVar - 2")));
-		assertTrue(isRealType(inferType("1.0 - 2")));
-		assertTrue(isRealType(inferType("2 - 1.0")));
-		assertTrue(isRealType(inferType("realVar - 1.0")));
-		assertTrue(isRealType(inferType("1 - 2 - 3.0")));
-	}
-
-	@Test
-	public void testSubstractFailure() {
+				"Arithmetic operator '+' may only be applied on numeric types, not on integer and string.");		
+		//subtract
 		expectIssue(
 				inferType("true - 5"),
 				"Arithmetic operator '-' may only be applied on numeric types, not on boolean and integer.");
@@ -158,24 +165,52 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				inferType("3.0 -  'string'"),
 				"Arithmetic operator '-' may only be applied on numeric types, not on real and string.");
 		expectIssue(
-				inferType("realVar -  'string'"),
-				"Arithmetic operator '-' may only be applied on numeric types, not on real and string.");
+				inferType("intVar - 'string'"),
+				"Arithmetic operator '-' may only be applied on numeric types, not on integer and string.");
 	}
 
 	// multiply
 	@Test
-	public void testMultiplySuccess() {
+	public void testMultiplyDivideExpressionSuccess() {
+		// multiply
+			// integer
 		assertTrue(isIntegerType(inferType("1 * 2")));
 		assertTrue(isIntegerType(inferType("1 * 0x0F")));
 		assertTrue(isIntegerType(inferType("0x0F * intVar")));
+			// real
 		assertTrue(isRealType(inferType("intVar * realVar")));
 		assertTrue(isRealType(inferType("1.0 * 2")));
 		assertTrue(isRealType(inferType("2 * 1.0")));
 		assertTrue(isRealType(inferType("1 * 2 * 3.0")));
+		
+		// divide
+			// integer
+		assertTrue(isIntegerType(inferType("1 / 2")));
+		assertTrue(isIntegerType(inferType("1 / intVar")));
+		assertTrue(isIntegerType(inferType("1 / 0x0F")));
+		assertTrue(isIntegerType(inferType("0x0F / 0x0F")));
+		assertTrue(isIntegerType(inferType("intVar / 0x0F")));
+			// real
+		assertTrue(isRealType(inferType("1.0 / 2")));
+		assertTrue(isRealType(inferType("2 / 1.0")));
+		assertTrue(isRealType(inferType("1 / 2 / 3.0")));
+		
+		// modulo
+			// integer
+		assertTrue(isIntegerType(inferType("1 % 2")));
+		assertTrue(isIntegerType(inferType("1 % 0x0F")));
+		assertTrue(isIntegerType(inferType("0x0F % 0x0F")));
+		assertTrue(isIntegerType(inferType("intVar % 0x0F")));
+			// real
+		assertTrue(isRealType(inferType("1.0 % 2")));
+		assertTrue(isRealType(inferType("2 % 1.0")));
+		assertTrue(isRealType(inferType("2 % realVar")));
+		assertTrue(isRealType(inferType("1 % 2 % 3.0")));		
 	}
 
 	@Test
-	public void testMultiplyFailure() {
+	public void testMultiplyDivideExpressionFailure() {
+		//multiply
 		expectIssue(
 				inferType("true * 5"),
 				"Arithmetic operator '*' may only be applied on numeric types, not on boolean and integer.");
@@ -197,23 +232,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("realVar *  'string'"),
 				"Arithmetic operator '*' may only be applied on numeric types, not on real and string.");
-	}
-
-	// divide
-	@Test
-	public void testDivideSuccess() {
-		assertTrue(isIntegerType(inferType("1 / 2")));
-		assertTrue(isIntegerType(inferType("1 / intVar")));
-		assertTrue(isIntegerType(inferType("1 / 0x0F")));
-		assertTrue(isIntegerType(inferType("0x0F / 0x0F")));
-		assertTrue(isIntegerType(inferType("intVar / 0x0F")));
-		assertTrue(isRealType(inferType("1.0 / 2")));
-		assertTrue(isRealType(inferType("2 / 1.0")));
-		assertTrue(isRealType(inferType("1 / 2 / 3.0")));
-	}
-
-	@Test
-	public void testDivideFailure() {
+		// divide
 		expectIssue(
 				inferType("true / 5"),
 				"Arithmetic operator '/' may only be applied on numeric types, not on boolean and integer.");
@@ -236,25 +255,9 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				inferType("3.0 /  'string'"),
 				"Arithmetic operator '/' may only be applied on numeric types, not on real and string.");
 		expectIssue(
-				inferType("3.0 /  stringVar"),
+				inferType("realVar /  stringVar"),
 				"Arithmetic operator '/' may only be applied on numeric types, not on real and string.");
-	}
-
-	// mod
-	@Test
-	public void testModSuccess() {
-		assertTrue(isIntegerType(inferType("1 % 2")));
-		assertTrue(isIntegerType(inferType("1 % 0x0F")));
-		assertTrue(isIntegerType(inferType("0x0F % 0x0F")));
-		assertTrue(isIntegerType(inferType("intVar % 0x0F")));
-		assertTrue(isRealType(inferType("1.0 % 2")));
-		assertTrue(isRealType(inferType("2 % 1.0")));
-		assertTrue(isRealType(inferType("2 % realVar")));
-		assertTrue(isRealType(inferType("1 % 2 % 3.0")));
-	}
-
-	@Test
-	public void testModFailure() {
+		// mod
 		expectIssue(
 				inferType("true % 5"),
 				"Arithmetic operator '%' may only be applied on numeric types, not on boolean and integer.");
@@ -280,88 +283,137 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				inferType("3.0 % stringVar"),
 				"Arithmetic operator '%' may only be applied on numeric types, not on real and string.");
 		expectIssue(
-				inferType("3.0 % stringVar"),
+				inferType("realVar % stringVar"),
 				"Arithmetic operator '%' may only be applied on numeric types, not on real and string.");
 	}
-
-	// Logical And Or Not
+	
+	// LogicalAndExpression
 	@Test
-	public void testLogicalSuccess() {
-		assertTrue(isBooleanType(inferType("true || false")));
-		assertTrue(isBooleanType(inferType("true || boolVar")));
-		assertTrue(isBooleanType(inferType("true || false && true")));
-		assertTrue(isBooleanType(inferType("true || true &&( false || true)")));
-		assertTrue(isBooleanType(inferType("!true")));
-		assertTrue(isBooleanType(inferType("!boolVar")));
-		assertTrue(isBooleanType(inferType("!boolEvent")));
-		assertTrue(isBooleanType(inferType("!true && !false")));
-		assertTrue(isBooleanType(inferType("boolEvent && !boolEvent")));
-		assertTrue(isBooleanType(inferType("boolEvent || boolEvent")));
-	}
-
+	public void testLogicalAndExpressionSuccess()	{
+		assertTrue(isBooleanType(inferType("true && false")));
+		assertTrue(isBooleanType(inferType("true && boolVar")));
+		assertTrue(isBooleanType(inferType("boolEvent && valueof(boolEvent)")));
+		assertTrue(isBooleanType(inferType("boolEvent && intEvent"))); // intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+		assertTrue(isBooleanType(inferType("boolEvent && boolEvent")));
+	}	
+	
 	@Test
-	public void testLogicalFailure() {
+	public void testLogicalAndExpressionFailure()
+	{
 		expectIssue(
 				inferType("true && 5"),
 				"Logical operator '&&' may only be applied on boolean types, not on boolean and integer.");
 		expectIssue(
-				inferType("false || 5"),
-				"Logical operator '||' may only be applied on boolean types, not on boolean and integer.");
-		expectIssue(
 				inferType("5 && false"),
 				"Logical operator '&&' may only be applied on boolean types, not on integer and boolean.");
 		expectIssue(
-				inferType("true && (3 - 5)"),
-				"Logical operator '&&' may only be applied on boolean types, not on boolean and integer.");
-		expectIssue(
-				inferType("(3 + 5) || true"),
-				"Logical operator '||' may only be applied on boolean types, not on integer and boolean.");
-		expectIssue(
 				inferType("3.0 &&  true"),
 				"Logical operator '&&' may only be applied on boolean types, not on real and boolean.");
+		expectIssue(
+				inferType("5 && boolEvent"),
+				"Logical operator '&&' may only be applied on boolean types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 && 'string'"),
+				"Logical operator '&&' may only be applied on boolean types, not on integer and string.");
+		expectIssue(inferType("5 && 1.2"),
+				"Logical operator '&&' may only be applied on boolean types, not on integer and real.");		
+	}
+	
+	// LogicalOrExpression
+	@Test
+	public void testLogicalOrExpressionSuccess()	{
+		assertTrue(isBooleanType(inferType("true || false")));
+		assertTrue(isBooleanType(inferType("true || boolVar")));
+		assertTrue(isBooleanType(inferType("boolEvent || valueof(boolEvent)")));
+		assertTrue(isBooleanType(inferType("boolEvent || intEvent")));	// intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+		assertTrue(isBooleanType(inferType("boolEvent || boolEvent")));
+	}
+	
+	@Test
+	public void testLogicalOrExpressionFailure()
+	{
+		expectIssue(
+				inferType("false || 5"),
+				"Logical operator '||' may only be applied on boolean types, not on boolean and integer.");
+		expectIssue(
+				inferType("5 || true"),
+				"Logical operator '||' may only be applied on boolean types, not on integer and boolean.");		
+		expectIssue(
+				inferType("3.0 ||  true"),
+				"Logical operator '||' may only be applied on boolean types, not on real and boolean.");
+		expectIssue(
+				inferType("5 || boolEvent"),
+				"Logical operator '||' may only be applied on boolean types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 || 'string'"),
+				"Logical operator '||' may only be applied on boolean types, not on integer and string.");	
+		expectIssue(inferType("5 || 1.2"),
+				"Logical operator '||' may only be applied on boolean types, not on integer and real.");		
+	}
+		
+	// LogicalNotExpression
+	@Test
+	public void testLogicalNotExpressionSuccess()	{
+		assertTrue(isBooleanType(inferType("!true")));
+		assertTrue(isBooleanType(inferType("!boolVar")));
+		assertTrue(isBooleanType(inferType("!valueof(boolEvent)")));
+		assertTrue(isBooleanType(inferType("!intEvent")));  // intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+		assertTrue(isBooleanType(inferType("!boolEvent")));
+	}
+	
+	@Test
+	public void testLogicalNotExpressionFailure()
+	{
 		expectIssue(inferType("!3"),
 				"Logical operator '!' may only be applied on boolean types, not on integer.");
 		expectIssue(inferType("!1.2"),
 				"Logical operator '!' may only be applied on boolean types, not on real.");
 		expectIssue(inferType("!'Test'"),
 				"Logical operator '!' may only be applied on boolean types, not on string.");
-		expectIssue(inferType("!stringVar"),
-				"Logical operator '!' may only be applied on boolean types, not on string.");
-		expectIssue(
-				inferType("5 && boolEvent"),
-				"Logical operator '&&' may only be applied on boolean types, not on integer and boolean.");
 	}
-
+	
 	// LogicalRelation
 	@Test
-	public void testLogicalRelationSuccess() {
+	public void testLogicalRelationExpressionSuccess() {
+		// smaller
 		assertTrue(isBooleanType(inferType("5 < 3")));
 		assertTrue(isBooleanType(inferType("5.0 < 3")));
-		assertTrue(isBooleanType(inferType("5.0 < intVar")));
-
+		assertTrue(isBooleanType(inferType("5.0 < intVar")));		
+		assertTrue(isBooleanType(inferType("5.0 < valueof(intEvent)")));		
+		// smallerEqual
 		assertTrue(isBooleanType(inferType("5 <= 3")));
 		assertTrue(isBooleanType(inferType("5.0 <= 3")));
 		assertTrue(isBooleanType(inferType("5.0 <= intVar")));
-
+		assertTrue(isBooleanType(inferType("5.0 <= valueof(intEvent)")));	
+		// greater
 		assertTrue(isBooleanType(inferType("5 > 3")));
+		assertTrue(isBooleanType(inferType("5.0 > 3")));
+		assertTrue(isBooleanType(inferType("5.0 > intVar")));
+		assertTrue(isBooleanType(inferType("5.0 > valueof(intEvent)")));			
+		//greaterEqual
+		assertTrue(isBooleanType(inferType("5 >= 3")));
 		assertTrue(isBooleanType(inferType("5.0 >= 3")));
 		assertTrue(isBooleanType(inferType("5.0 >= intVar")));
-
+		assertTrue(isBooleanType(inferType("5.0 >= valueof(intEvent)")));	
+		// equal
 		assertTrue(isBooleanType(inferType("5 == 3")));
 		assertTrue(isBooleanType(inferType("'string' == 'string'")));
 		assertTrue(isBooleanType(inferType("5.0 == 3")));
 		assertTrue(isBooleanType(inferType("true == boolVar")));
 		assertTrue(isBooleanType(inferType("true == boolEvent")));
-
+		assertTrue(isBooleanType(inferType("true == valueof(boolEvent)")));
+		// not equal
 		assertTrue(isBooleanType(inferType("5 != 3")));
 		assertTrue(isBooleanType(inferType("'string' != 'string'")));
 		assertTrue(isBooleanType(inferType("5.0 != 3")));
 		assertTrue(isBooleanType(inferType("true != boolVar")));
 		assertTrue(isBooleanType(inferType("true != boolEvent")));
+		assertTrue(isBooleanType(inferType("true != valueof(boolEvent)")));
 	}
 
 	@Test
-	public void testLogicalRelationFailure() {
+	public void testLogicalRelationExpressionFailure() {
+		// smaller
 		expectIssue(
 				inferType("3.0 < true"),
 				"Comparison operator '<' may only be applied on compatible types, not on real and boolean.");
@@ -374,7 +426,10 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("1.0 < boolEvent"),
 				"Comparison operator '<' may only be applied on compatible types, not on real and boolean.");
-
+		expectIssue(// intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+				inferType("5 < intEvent"),
+				"Comparison operator '<' may only be applied on compatible types, not on integer and boolean.");		
+		// smallerEqual
 		expectIssue(
 				inferType("3.0 <= true"),
 				"Comparison operator '<=' may only be applied on compatible types, not on real and boolean.");
@@ -387,7 +442,10 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("1.0 <= boolEvent"),
 				"Comparison operator '<=' may only be applied on compatible types, not on real and boolean.");
-
+		expectIssue(// intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+				inferType("5 <= intEvent"),
+				"Comparison operator '<=' may only be applied on compatible types, not on integer and boolean.");
+		// greater
 		expectIssue(
 				inferType("3.0 > true"),
 				"Comparison operator '>' may only be applied on compatible types, not on real and boolean.");
@@ -397,7 +455,10 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("1.0 > false"),
 				"Comparison operator '>' may only be applied on compatible types, not on real and boolean.");
-
+		expectIssue(// intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+				inferType("5 <= intEvent"),
+				"Comparison operator '<=' may only be applied on compatible types, not on integer and boolean.");
+		// greaterEqual
 		expectIssue(
 				inferType("3.0 >= true"),
 				"Comparison operator '>=' may only be applied on compatible types, not on real and boolean.");
@@ -407,7 +468,10 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("1.0 >= false"),
 				"Comparison operator '>=' may only be applied on compatible types, not on real and boolean.");
-
+		expectIssue(// intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+				inferType("5 >= intEvent"),
+				"Comparison operator '>=' may only be applied on compatible types, not on integer and boolean.");
+		// equal
 		expectIssue(
 				inferType("3.0 == true"),
 				"Comparison operator '==' may only be applied on compatible types, not on real and boolean.");
@@ -417,7 +481,10 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("1.0 == false"),
 				"Comparison operator '==' may only be applied on compatible types, not on real and boolean.");
-
+		expectIssue(// intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+				inferType("5 == intEvent"),
+				"Comparison operator '==' may only be applied on compatible types, not on integer and boolean.");
+		//not equal
 		expectIssue(
 				inferType("3.0 != true"),
 				"Comparison operator '!=' may only be applied on compatible types, not on real and boolean.");
@@ -427,28 +494,85 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("1.0 != false"),
 				"Comparison operator '!=' may only be applied on compatible types, not on real and boolean.");
+		expectIssue(
+				inferType("intVar != 'string'"),
+				"Comparison operator '!=' may only be applied on compatible types, not on integer and string.");
+		expectIssue(// intEvent is a shortcut for isRaised(intEvent), thus of boolean type
+				inferType("5 != intEvent"),
+				"Comparison operator '!=' may only be applied on compatible types, not on integer and boolean.");		
 	}
-
+	
 	@Test
-	public void testAssignmentSuccess() {
+	public void testAssignmentExpressionSuccess() {
+		// assignment without operator
+			// integer
 		assertTrue(isIntegerType(inferType("intVar = 5 * 3")));
 		assertTrue(isIntegerType(inferType("intVar = 0x0F * 3")));
 		assertTrue(isIntegerType(inferType("intVar = intVar * 0x0F")));
+		assertTrue(isIntegerType(inferType("ABC.intVar = 42")));
+			// boolean
 		assertTrue(isBooleanType(inferType("boolVar = true || false")));
 		assertTrue(isBooleanType(inferType("boolVar = boolEvent")));
+			// string
 		assertTrue(isStringType(inferType("stringVar = 'string'")));
+			// real
 		assertTrue(isRealType(inferType("realVar = 2.0 - 7")));
-		assertTrue(isIntegerType(inferType("ABC.intVar = 42")));
+		
+		// assignment with operator
+		assertTrue(isIntegerType(inferType("intVar += 2")));
+		assertTrue(isIntegerType(inferType("intVar -= 7")));
+		assertTrue(isIntegerType(inferType("intVar *= 25")));
+		assertTrue(isIntegerType(inferType("intVar /= 2")));
+		assertTrue(isIntegerType(inferType("intVar %= 5")));
+		
+		// bitwise
+		assertTrue(isIntegerType(inferType("intVar &= 12")));	
+		assertTrue(isIntegerType(inferType("intVar |= 25")));
+		assertTrue(isIntegerType(inferType("intVar ^=  6")));
+		assertTrue(isIntegerType(inferType("intVar <<= 215")));
+		assertTrue(isIntegerType(inferType("intVar >>= 215")));		
 	}
 
 	@Test
-	public void testAssignmentFailure() {
+	public void testAssignmentExpressionFailure() {
+		// integer and boolean
 		expectIssue(
 				inferType("intVar = true"),
 				"Assignment operator '=' may only be applied on compatible types, not on integer and boolean.");
 		expectIssue(
 				inferType("intVar = boolVar"),
 				"Assignment operator '=' may only be applied on compatible types, not on integer and boolean.");
+		expectIssue(
+				inferType("intVar &= boolVar"),
+				"Bitwise operator '&=' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("intVar |= boolVar"),
+				"Bitwise operator '|=' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("intVar ^= boolVar"),
+				"Bitwise operator '^=' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("intVar >>= boolVar"),
+				"Bitwise operator '>>=' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("intVar <<= boolVar"),
+				"Bitwise operator '<<=' may only be applied on integer types, not on integer and boolean.");		
+		// integer and string
+		expectIssue(
+				inferType("intVar &= 'string'"),
+				"Bitwise operator '&=' may only be applied on integer types, not on integer and string.");
+		expectIssue(
+				inferType("intVar |= 'string'"),
+				"Bitwise operator '|=' may only be applied on integer types, not on integer and string.");
+		expectIssue(
+				inferType("intVar ^= 'string'"),
+				"Bitwise operator '^=' may only be applied on integer types, not on integer and string.");
+		expectIssue(
+				inferType("intVar >>= 'string'"),
+				"Bitwise operator '>>=' may only be applied on integer types, not on integer and string.");
+		expectIssue(
+				inferType("intVar <<= 'string'"),
+				"Bitwise operator '<<=' may only be applied on integer types, not on integer and string.");		
 	}
 
 	/**
@@ -456,7 +580,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	 * to the Scope.
 	 */
 	@Test
-	public void testActiveSuccess() throws Exception {
+	public void testActiveStateReferenceExpressionSuccess() throws Exception {
 		assertTrue(isBooleanType(inferType("active(chart.r1.A)")));
 		assertTrue(isBooleanType(inferType("!active(chart.r1.A)")));
 		assertTrue(isBooleanType(inferType("true || active(chart.r1.A)")));
@@ -465,7 +589,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testActiveFailure() throws Exception {
+	public void testActiveStateReferenceExpressionFailure() throws Exception {
 		expectIssue(
 				inferType("active(chart.r1.A) + 1"),
 				"Arithmetic operator '+' may only be applied on numeric types, not on boolean and integer.");
@@ -491,40 +615,14 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				"Logical operator '!' may only be applied on boolean types, not on string.");
 	}
 
+	// bitwise
 	@Test
-	public void testBitwiseSuccess() {
-		assertTrue(isIntegerType(inferType(" 5 & 3")));
-		assertTrue(isIntegerType(inferType(" 5 | 3")));
+	public void testBitwiseXorExpressionSuccess(){
 		assertTrue(isIntegerType(inferType(" 5 ^ 3")));
-		assertTrue(isIntegerType(inferType(" ~3")));
-		assertTrue(isIntegerType(inferType("3 << 2")));
-		assertTrue(isIntegerType(inferType("5 >> 2")));
-		assertTrue(isIntegerType(inferType("intVar << 4")));
-		assertTrue(isIntegerType(inferType("intVar >> 4")));
 	}
-
+	
 	@Test
-	public void testBitwiseFailure() throws Exception {
-		expectIssue(
-				inferType("5 & true"),
-				"Bitwise operator '&' may only be applied on integer types, not on integer and boolean.");
-		expectIssue(
-				inferType("5 & 1.0"),
-				"Bitwise operator '&' may only be applied on integer types, not on integer and real.");
-		expectIssue(
-				inferType("5 & 'stringVar'"),
-				"Bitwise operator '&' may only be applied on integer types, not on integer and string.");
-
-		expectIssue(
-				inferType("5 | true"),
-				"Bitwise operator '|' may only be applied on integer types, not on integer and boolean.");
-		expectIssue(
-				inferType("5 | 1.0"),
-				"Bitwise operator '|' may only be applied on integer types, not on integer and real.");
-		expectIssue(
-				inferType("5 | 'stringVar'"),
-				"Bitwise operator '|' may only be applied on integer types, not on integer and string.");
-
+	public void testBitwiseXorExpressionFailure(){
 		expectIssue(
 				inferType("5 ^ true"),
 				"Bitwise operator '^' may only be applied on integer types, not on integer and boolean.");
@@ -534,14 +632,54 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("5 ^ 'stringVar'"),
 				"Bitwise operator '^' may only be applied on integer types, not on integer and string.");
-
-		expectIssue(inferType("~true"),
-				"Bitwise operator '~' may only be applied on integer types, not on boolean.");
-		expectIssue(inferType("~9.0"),
-				"Bitwise operator '~' may only be applied on integer types, not on real.");
-		expectIssue(inferType("~stringVar"),
-				"Bitwise operator '~' may only be applied on integer types, not on string.");
-
+	}	
+	
+	@Test
+	public void testBitwiseOrExpressionSuccess(){
+		assertTrue(isIntegerType(inferType(" 5 | 3")));
+	}
+	
+	@Test
+	public void testBitwiseOrExpressionFailure(){
+		expectIssue(
+				inferType("5 | true"),
+				"Bitwise operator '|' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 | 1.0"),
+				"Bitwise operator '|' may only be applied on integer types, not on integer and real.");
+		expectIssue(
+				inferType("5 | 'stringVar'"),
+				"Bitwise operator '|' may only be applied on integer types, not on integer and string.");
+	}
+	
+	@Test
+	public void testBitwiseAndExpressionSuccess(){
+		assertTrue(isIntegerType(inferType(" 5 & 3")));
+	}
+	
+	@Test
+	public void testBitwiseAndExpressionFailure(){
+		expectIssue(
+				inferType("5 & true"),
+				"Bitwise operator '&' may only be applied on integer types, not on integer and boolean.");
+		expectIssue(
+				inferType("5 & 1.0"),
+				"Bitwise operator '&' may only be applied on integer types, not on integer and real.");
+		expectIssue(
+				inferType("5 & 'stringVar'"),
+				"Bitwise operator '&' may only be applied on integer types, not on integer and string.");
+	}	
+	
+	@Test
+	public void testShiftExpressionSuccess(){
+		assertTrue(isIntegerType(inferType("3 << 2")));
+		assertTrue(isIntegerType(inferType("5 >> 2")));
+		assertTrue(isIntegerType(inferType("intVar << 4")));
+		assertTrue(isIntegerType(inferType("intVar >> 4")));		
+	}
+	
+	@Test
+	public void testShiftExpressionFailure(){
 		expectIssue(
 				inferType("5 << true"),
 				"Bitwise operator '<<' may only be applied on integer types, not on integer and boolean.");
@@ -560,18 +698,18 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				"Bitwise operator '>>' may only be applied on integer types, not on integer and real.");
 		expectIssue(
 				inferType("5 >> stringVar"),
-				"Bitwise operator '>>' may only be applied on integer types, not on integer and string.");
+				"Bitwise operator '>>' may only be applied on integer types, not on integer and string.");		
 	}
-
-	@Test
-	public void testComplexExpressionsSuccess() {
+	
+	@Test // No Expression in SText.xtext
+	public void testComplexExpressionsSuccess() { 
 		assertTrue(isBooleanType(inferType("((((3 * intVar) + 5) % 2) > 97) || false")));
 		assertTrue(isBooleanType(inferType("!true != boolVar && (3 > (realVar * 5 + 3))")));
 		assertTrue(isIntegerType(inferType("3 * 3 + 7 / (3 * intVar % 8)")));
 	}
 
 	@Test
-	public void testEventRaisingSuccess() {
+	public void testEventRaisingExpressionSuccess() {
 		assertTrue(isIntegerType(inferType("raise intEvent : 42",
 				EventRaisingExpression.class.getSimpleName())));
 		assertTrue(isBooleanType(inferType("raise boolEvent : boolVar",
@@ -582,13 +720,12 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				EventRaisingExpression.class.getSimpleName())));
 		assertTrue(isVoidType(inferType("raise voidEvent",
 				EventRaisingExpression.class.getSimpleName())));
-
 		assertTrue(isIntegerType(inferType("raise ABC.intEvent : 42",
 				EventRaisingExpression.class.getSimpleName())));
 	}
 
 	@Test
-	public void testEventRaisingFailure() {
+	public void testEventRaisingExpressionFailure() {
 		expectIssue(
 				inferType("raise intEvent : true",
 						EventRaisingExpression.class.getSimpleName()),
@@ -610,8 +747,16 @@ public class TypeInferrerTest extends AbstractSTextTest {
 						EventRaisingExpression.class.getSimpleName()),
 				"Need to assign a value to an event of type integer.");
 	}
-
+	
 	@Test
+	public void testEventIsRaisedSuccess() {
+		assertTrue(isBooleanType(inferType("boolVar = intEvent",
+				internalScope())));
+		assertTrue(isBooleanType(inferType("ABC.boolVar = ABC.intEvent",
+				interfaceScope())));
+	}	
+
+	@Test // VariableDefinition is a statement, not an expression
 	public void testVariableDefinitionSuccess() {
 		assertTrue(isBooleanType(inferType("var boolVar : boolean = !true",
 				VariableDefinition.class.getSimpleName())));
@@ -625,7 +770,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				VariableDefinition.class.getSimpleName())));
 	}
 
-	@Test
+	@Test // VariableDefinition is a statement, not an expression
 	public void testVariableDefinitionFailure() {
 		expectIssue(
 				inferType("var boolVar : boolean = 5",
@@ -687,23 +832,15 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				"Cannot assign a value of type real to a variable of type string.");
 	}
 
-	@Test
+	// PrimitiveValueExpression
+	@Test 
 	public void testValueOfSuccess() {
 		assertTrue(isIntegerType(inferType("valueof(intEvent)")));
 		assertTrue(isBooleanType(inferType("valueof(boolEvent)")));
 		assertTrue(isRealType(inferType("valueof(realEvent)")));
 		assertTrue(isStringType(inferType("valueof(stringEvent)")));
 		assertTrue(isVoidType(inferType("valueof(voidEvent)")));
-
 		assertTrue(isIntegerType(inferType("valueof(ABC.intEvent)")));
-	}
-
-	@Test
-	public void testEventIsRaisedSuccess() {
-		assertTrue(isBooleanType(inferType("boolVar = intEvent",
-				internalScope())));
-		assertTrue(isBooleanType(inferType("ABC.boolVar = ABC.intEvent",
-				interfaceScope())));
 	}
 
 	@Test
@@ -719,7 +856,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void parenthesizedExpression() {
+	public void testParenthesizedExpression() {
 		assertTrue(isBooleanType(inferType("( true || false )")));
 		assertTrue(isIntegerType(inferType("( 5 )")));
 		assertTrue(isRealType(inferType("( 7.5 / 1.2 )")));
