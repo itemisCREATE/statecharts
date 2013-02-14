@@ -61,6 +61,11 @@ import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.TypedElement
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.StringLiteral
+import org.yakindu.sct.model.stext.stext.BoolLiteral
+import org.yakindu.sct.model.stext.stext.RealLiteral
+import org.yakindu.sct.model.stext.stext.HexLiteral
+import org.yakindu.sct.model.stext.stext.IntLiteral
 
 /**
  * 
@@ -165,11 +170,6 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	def dispatch InferenceResult doInferType(InternalScope s){
 		// TODO: this could be handled via the type system
 		return new InferenceResult(voidType)	
-	}
-	
-	def dispatch InferenceResult doInferType(EObject e) {
-		// delegate to type system
-		return inferType(e)
 	}
 
 	def dispatch InferenceResult doInferType(Expression e) {
@@ -330,8 +330,32 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 		return doInferType(expression.expression)
 	}
 	
-	def dispatch InferenceResult doInferType(Literal literal){
-		return ts.inferType(literal)
+	def dispatch InferenceResult doInferType(StringLiteral literal){
+		return inferTypeForLiteral(literal.value);
+	}
+	
+	def dispatch InferenceResult doInferType(BoolLiteral literal){
+		return inferTypeForLiteral(literal.value);
+	}
+	
+	def dispatch InferenceResult doInferType(RealLiteral literal){
+		return inferTypeForLiteral(literal.value);
+	}
+	
+	def dispatch InferenceResult doInferType(HexLiteral literal){
+		return inferTypeForLiteral(literal.value);
+	}
+	
+	def dispatch InferenceResult doInferType(IntLiteral literal){
+		return inferTypeForLiteral(literal.value);
+	}
+	
+	def dispatch InferenceResult doInferType(Literal l) {
+		throw new IllegalArgumentException("Unsupported literal kind " + l)
+	}
+	
+	def dispatch InferenceResult doInferType(EObject e) {
+		throw new IllegalArgumentException("Unsupported reference kind " + e)
 	}
 	
 	def protected dispatch ITypeSystemOperator getTypeSystemOperator(UnaryOperator operator){
