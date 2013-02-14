@@ -16,7 +16,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
@@ -87,7 +86,7 @@ public interface ITypeSystem {
 	 * severity.
 	 */
 	public class InferenceIssue {
-		
+
 		private String message;
 		private int severity;
 
@@ -247,38 +246,6 @@ public interface ITypeSystem {
 	 * @return The list of all types known in the type system
 	 */
 	public List<Type> getTypes();
-
-	/**
-	 * Infer a type for a given literal. The literal may represent a primitive
-	 * value (primitive type literal) or an instance specification (complex type
-	 * literal).
-	 * 
-	 * @param literal
-	 *            The literal for which to infer a type
-	 * @return An {@link InferenceResult} containing the {@link InferredType}
-	 *         for the literal (or <code>null</code> in case no type could be
-	 *         inferred) and potential {@link InferenceIssue}s that occurred
-	 *         during the type inference. The result may also contain both, an
-	 *         inferred type and issues.
-	 */
-	public InferenceResult inferType(EObject literal);
-
-	/**
-	 * Responsible of inferring a type for a given concrete type (provided via
-	 * {@link ITypeSystem#getTypes()}. In most cases the {@link ITypeSystem}
-	 * will simply return an {@link InferenceResult} that wraps the type into an
-	 * {@link InferredType} (with the {@link TypeConstraint}s provided by the
-	 * given {@link Type} and an empty set of {@link InferenceIssue}s.
-	 * 
-	 * @param type
-	 *            The {@link Type} to infer.
-	 * @return An {@link InferenceResult} containing the {@link InferredType}
-	 *         (or <code>null</code> in case no type could be inferred) and
-	 *         potential {@link InferenceIssue}s that occurred during the type
-	 *         inference. The result may also contain both, an inferred type and
-	 *         issues.
-	 */
-	public InferenceResult inferType(Type type);
 
 	/**
 	 * Responsible of inferring the type for a given unary expression (e.g. a
