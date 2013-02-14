@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -16,11 +15,6 @@ import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
-import org.yakindu.sct.model.stext.stext.BoolLiteral;
-import org.yakindu.sct.model.stext.stext.HexLiteral;
-import org.yakindu.sct.model.stext.stext.IntLiteral;
-import org.yakindu.sct.model.stext.stext.RealLiteral;
-import org.yakindu.sct.model.stext.stext.StringLiteral;
 
 import com.google.inject.Singleton;
 
@@ -113,15 +107,14 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 		}
 	}
 
-	public InferenceResult inferType(EObject  literal) {
-		if (literal instanceof StringLiteral) {
+	public InferenceResult inferTypeForLiteral(Object literal) {
+		if (literal instanceof String) {
 			return new InferenceResult(getStringType());
-		} else if (literal instanceof BoolLiteral) {
+		} else if (literal instanceof Boolean) {
 			return new InferenceResult(getBooleanType());
-		} else if (literal instanceof IntLiteral
-				|| literal instanceof HexLiteral) {
+		} else if (literal instanceof Integer) {
 			return new InferenceResult(getIntegerType());
-		} else if (literal instanceof RealLiteral) {
+		} else if (literal instanceof Float) {
 			return new InferenceResult(getRealType());
 		}
 		return new InferenceResult(null, new InferenceIssue(
@@ -635,10 +628,6 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 
 	public boolean isNumericType(InferredType type) {
 		return isNumericType(type.getType());
-	}
-
-	public InferenceResult inferType(Type type) {
-		return new InferenceResult(new InferredType(type));
 	}
 
 	public List<Type> getTypes(InferredType inferredType) {
