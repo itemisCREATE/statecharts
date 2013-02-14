@@ -313,24 +313,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		// Nothing to do, checked by Typeanalyzer tests
 	}
 
-	private void checkErrorMessageForExpression(String expression,
-			String errorMessage) {
-		AssertableDiagnostics result = tester.validate(getModel(expression));
-		result.assertDiagnosticsCount(1);
-		result.assertErrorContains(errorMessage);
-	}
-
-	private void checkExpressionSuccess(String expression) {
-
-		AssertableDiagnostics result = tester.validate(getModel(expression));
-		result.assertDiagnosticsCount(0);
-	}
-
-	private EObject getModel(String expression) {
-		return super.parseExpression(expression, null,
-				StatechartSpecification.class.getSimpleName());
-	}
-
 	/**
 	 * @see STextJavaValidator#checkChoiceWithoutDefaultTransition(org.yakindu.sct.model.sgraph.Choice)
 	 */
