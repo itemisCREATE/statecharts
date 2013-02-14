@@ -2,7 +2,7 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
-import org.yakindu.sct.generator.core.extensions.TypeAnalyzerExtensions
+import org.yakindu.base.types.Operation
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Event
@@ -38,13 +38,15 @@ import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.ShiftOperator
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.UnaryOperator
-import org.yakindu.base.types.Operation
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem
+import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 
 class ExpressionCode {
 	
 	@Inject extension Naming 
 	@Inject extension Navigation
-	@Inject extension TypeAnalyzerExtensions
+	@Inject extension ISTextTypeSystem
+	@Inject extension ISTextTypeInferrer
 	
 	def dispatch String code(EObject it) '''
 		//ERROR: Template in ExpressionCode.xtend for class '«getClass().name»' not define.
@@ -103,7 +105,7 @@ class ExpressionCode {
 	}
 	
 	def dispatch String code(LogicalRelationExpression expression) {
-		if (expression.leftOperand.type.isStringType()) {
+		if (expression.leftOperand.inferType.type.stringType) {
 			expression.logicalString
 		}
 		else
