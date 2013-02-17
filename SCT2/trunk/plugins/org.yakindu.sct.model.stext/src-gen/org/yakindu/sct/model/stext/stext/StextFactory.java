@@ -167,6 +167,24 @@ public interface StextFactory extends EFactory
   TransitionReaction createTransitionReaction();
 
   /**
+   * Returns a new object of class '<em>Entry Point Spec</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Entry Point Spec</em>'.
+   * @generated
+   */
+  EntryPointSpec createEntryPointSpec();
+
+  /**
+   * Returns a new object of class '<em>Exit Point Spec</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Exit Point Spec</em>'.
+   * @generated
+   */
+  ExitPointSpec createExitPointSpec();
+
+  /**
    * Returns a new object of class '<em>Event Spec</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

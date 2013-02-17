@@ -21,6 +21,7 @@ import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 import org.yakindu.sct.model.sgraph.provider.DeclarationItemProvider;
@@ -88,6 +89,7 @@ public class LocalReactionItemProvider
       super.getChildrenFeatures(object);
       childrenFeatures.add(SGraphPackage.Literals.REACTION__TRIGGER);
       childrenFeatures.add(SGraphPackage.Literals.REACTION__EFFECT);
+      childrenFeatures.add(SGraphPackage.Literals.REACTION__PROPERTIES);
     }
     return childrenFeatures;
   }
@@ -149,6 +151,7 @@ public class LocalReactionItemProvider
     {
       case StextPackage.LOCAL_REACTION__TRIGGER:
       case StextPackage.LOCAL_REACTION__EFFECT:
+      case StextPackage.LOCAL_REACTION__PROPERTIES:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
         return;
     }
@@ -181,6 +184,21 @@ public class LocalReactionItemProvider
       (createChildParameter
         (SGraphPackage.Literals.REACTION__EFFECT,
          StextFactory.eINSTANCE.createReactionEffect()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (SGraphPackage.Literals.REACTION__PROPERTIES,
+         StextFactory.eINSTANCE.createEntryPointSpec()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (SGraphPackage.Literals.REACTION__PROPERTIES,
+         StextFactory.eINSTANCE.createExitPointSpec()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (SGraphPackage.Literals.REACTION__PROPERTIES,
+         SGraphFactory.eINSTANCE.createReactionProperty()));
   }
 
   /**

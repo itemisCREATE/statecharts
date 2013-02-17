@@ -47,6 +47,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinition" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration ../../org.yakindu.base.types/model/types.ecore#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryPointSpec" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ReactionProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="entrypoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitPointSpec" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ReactionProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exitpoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="RegularEventSpec" eSuperTypes="#//EventSpec">
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="#//Expression"

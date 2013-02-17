@@ -42,21 +42,23 @@
     <genClasses ecoreClass="sgraph.ecore#//Entry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Entry/kind"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//Trigger"/>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//Effect"/>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//SpecificationElement">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//SpecificationElement/specification"/>
-    </genClasses>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//Declaration"/>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//Reaction">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Reaction/trigger"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Reaction/effect"/>
-    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Exit"/>
     <genClasses image="false" ecoreClass="sgraph.ecore#//ReactiveElement">
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//ReactiveElement/reactions"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//ReactiveElement/localReactions"/>
     </genClasses>
-    <genClasses ecoreClass="sgraph.ecore#//Exit"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Reaction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Reaction/trigger"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Reaction/effect"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Reaction/properties"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Trigger"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Effect"/>
+    <genClasses ecoreClass="sgraph.ecore#//ReactionProperty"/>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//SpecificationElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//SpecificationElement/specification"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="sgraph.ecore#//Declaration"/>
     <genClasses ecoreClass="sgraph.ecore#//Scope">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/declarations"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/events"/>

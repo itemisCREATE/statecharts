@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -146,6 +147,18 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createEntryAdapter();
 			}
 			@Override
+			public Adapter caseExit(Exit object) {
+				return createExitAdapter();
+			}
+			@Override
+			public Adapter caseReactiveElement(ReactiveElement object) {
+				return createReactiveElementAdapter();
+			}
+			@Override
+			public Adapter caseReaction(Reaction object) {
+				return createReactionAdapter();
+			}
+			@Override
 			public Adapter caseTrigger(Trigger object) {
 				return createTriggerAdapter();
 			}
@@ -154,24 +167,16 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createEffectAdapter();
 			}
 			@Override
+			public Adapter caseReactionProperty(ReactionProperty object) {
+				return createReactionPropertyAdapter();
+			}
+			@Override
 			public Adapter caseSpecificationElement(SpecificationElement object) {
 				return createSpecificationElementAdapter();
 			}
 			@Override
 			public Adapter caseDeclaration(Declaration object) {
 				return createDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseReaction(Reaction object) {
-				return createReactionAdapter();
-			}
-			@Override
-			public Adapter caseReactiveElement(ReactiveElement object) {
-				return createReactiveElementAdapter();
-			}
-			@Override
-			public Adapter caseExit(Exit object) {
-				return createExitAdapter();
 			}
 			@Override
 			public Adapter caseScope(Scope object) {
@@ -478,6 +483,20 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createEffectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.ReactionProperty <em>Reaction Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.ReactionProperty
+	 * @generated
+	 */
+	public Adapter createReactionPropertyAdapter() {
 		return null;
 	}
 

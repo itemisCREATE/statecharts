@@ -162,10 +162,10 @@ Reaction returns sgraph::Reaction:
 	LocalReaction | TransitionReaction;
 
 LocalReaction:
-	(trigger=ReactionTrigger) =>('/' effect=ReactionEffect); //('#' properties=ReactionProperties)?;
+	(trigger=ReactionTrigger) =>('/' effect=ReactionEffect);
 
 TransitionReaction:
-	{TransitionReaction} (trigger=StextTrigger)? ('/' effect=ReactionEffect)?; // ('#' properties=ReactionProperties)?;
+	{TransitionReaction} (trigger=StextTrigger)? ('/' effect=ReactionEffect)?  ('#' (properties+=TransitionProperty)*)?;
 
 
 StextTrigger returns sgraph::Trigger : ReactionTrigger | DefaultTrigger;
@@ -180,20 +180,19 @@ DefaultTrigger returns sgraph::Trigger:
 
 
 ReactionEffect returns sgraph::Effect:
-	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (=> ';' actions+=(Expression|EventRaisingExpression) )* ; // (';')?;
+	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (=> ';' actions+=(Expression|EventRaisingExpression) )* ; 
 
 
-//ReactionProperties:
-//	{ReactionProperties} (properties+=ReactionProperty)*;
-//
-//ReactionProperty:
-//	EntryPointSpec | ExitPointSpec;
-//
-//EntryPointSpec:
-//	'>' entrypoint=[Entrypoint|FQN];
-//
-//ExitPointSpec:
-//	exitpoint=[Exitpoint|FQN] '>';
+TransitionProperty returns sgraph::ReactionProperty : 
+	EntryPointSpec | ExitPointSpec
+;
+
+
+EntryPointSpec:
+	'>' entrypoint=ID;
+
+ExitPointSpec:
+	exitpoint=ID '>';
 
 EventSpec:
 	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
@@ -208,9 +207,8 @@ TimeEventSpec:
 enum TimeEventType:
 	after | every;
 
-	//TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
 BuiltinEventSpec:
-	EntryEvent | ExitEvent |  AlwaysEvent; // | DefaultEvent | OnCycleEvent ;
+	EntryEvent | ExitEvent |  AlwaysEvent; 
 
 EntryEvent:
 	{EntryEvent} 'entry';
@@ -218,15 +216,10 @@ EntryEvent:
 ExitEvent:
 	{ExitEvent} 'exit';
 
-//OnCycleEvent:
-//	{OnCycleEvent} 'oncycle'; 
 	
 AlwaysEvent:
 	{AlwaysEvent} ('always' | 'oncycle');
 
-//DefaultEvent:
-//	{DefaultEvent} ('default' | 'else')
-//;
 
 //****************
 // Expression Grammar

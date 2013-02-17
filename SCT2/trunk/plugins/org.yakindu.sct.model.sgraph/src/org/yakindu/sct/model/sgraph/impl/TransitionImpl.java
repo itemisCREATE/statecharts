@@ -10,16 +10,21 @@
  */
 package org.yakindu.sct.model.sgraph.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
@@ -34,6 +39,7 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getEffect <em>Effect</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getTarget <em>Target</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.TransitionImpl#getSource <em>Source</em>}</li>
@@ -70,6 +76,16 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	 * @ordered
 	 */
 	protected Effect effect;
+
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ReactionProperty> properties;
 
 	/**
 	 * The default value of the '{@link #getDocumentation() <em>Documentation</em>}' attribute.
@@ -277,6 +293,18 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ReactionProperty> getProperties() {
+		if (properties == null) {
+			properties = new EObjectContainmentEList.Resolving<ReactionProperty>(ReactionProperty.class, this, SGraphPackage.TRANSITION__PROPERTIES);
+		}
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDocumentation() {
 		return documentation;
 	}
@@ -457,6 +485,8 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 				return basicSetTrigger(null, msgs);
 			case SGraphPackage.TRANSITION__EFFECT:
 				return basicSetEffect(null, msgs);
+			case SGraphPackage.TRANSITION__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 			case SGraphPackage.TRANSITION__TARGET:
 				return basicSetTarget(null, msgs);
 			case SGraphPackage.TRANSITION__SOURCE:
@@ -493,6 +523,8 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 			case SGraphPackage.TRANSITION__EFFECT:
 				if (resolve) return getEffect();
 				return basicGetEffect();
+			case SGraphPackage.TRANSITION__PROPERTIES:
+				return getProperties();
 			case SGraphPackage.TRANSITION__DOCUMENTATION:
 				return getDocumentation();
 			case SGraphPackage.TRANSITION__TARGET:
@@ -512,6 +544,7 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -520,6 +553,10 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 				return;
 			case SGraphPackage.TRANSITION__EFFECT:
 				setEffect((Effect)newValue);
+				return;
+			case SGraphPackage.TRANSITION__PROPERTIES:
+				getProperties().clear();
+				getProperties().addAll((Collection<? extends ReactionProperty>)newValue);
 				return;
 			case SGraphPackage.TRANSITION__DOCUMENTATION:
 				setDocumentation((String)newValue);
@@ -551,6 +588,9 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 			case SGraphPackage.TRANSITION__EFFECT:
 				setEffect((Effect)null);
 				return;
+			case SGraphPackage.TRANSITION__PROPERTIES:
+				getProperties().clear();
+				return;
 			case SGraphPackage.TRANSITION__DOCUMENTATION:
 				setDocumentation(DOCUMENTATION_EDEFAULT);
 				return;
@@ -579,6 +619,8 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 				return trigger != null;
 			case SGraphPackage.TRANSITION__EFFECT:
 				return effect != null;
+			case SGraphPackage.TRANSITION__PROPERTIES:
+				return properties != null && !properties.isEmpty();
 			case SGraphPackage.TRANSITION__DOCUMENTATION:
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case SGraphPackage.TRANSITION__TARGET:
@@ -602,6 +644,7 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 			switch (derivedFeatureID) {
 				case SGraphPackage.TRANSITION__TRIGGER: return SGraphPackage.REACTION__TRIGGER;
 				case SGraphPackage.TRANSITION__EFFECT: return SGraphPackage.REACTION__EFFECT;
+				case SGraphPackage.TRANSITION__PROPERTIES: return SGraphPackage.REACTION__PROPERTIES;
 				default: return -1;
 			}
 		}
@@ -625,6 +668,7 @@ public class TransitionImpl extends SpecificationElementImpl implements Transiti
 			switch (baseFeatureID) {
 				case SGraphPackage.REACTION__TRIGGER: return SGraphPackage.TRANSITION__TRIGGER;
 				case SGraphPackage.REACTION__EFFECT: return SGraphPackage.TRANSITION__EFFECT;
+				case SGraphPackage.REACTION__PROPERTIES: return SGraphPackage.TRANSITION__PROPERTIES;
 				default: return -1;
 			}
 		}

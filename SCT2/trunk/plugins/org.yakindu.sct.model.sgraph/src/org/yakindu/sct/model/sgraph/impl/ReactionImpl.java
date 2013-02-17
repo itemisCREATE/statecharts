@@ -10,14 +10,19 @@
  */
 package org.yakindu.sct.model.sgraph.impl;
 
+import java.util.Collection;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Trigger;
 
@@ -30,6 +35,7 @@ import org.yakindu.sct.model.sgraph.Trigger;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl#getEffect <em>Effect</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -62,6 +68,16 @@ public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 	 * @ordered
 	 */
 	protected Effect effect;
+
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ReactionProperty> properties;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -219,6 +235,18 @@ public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<ReactionProperty> getProperties() {
+		if (properties == null) {
+			properties = new EObjectContainmentEList.Resolving<ReactionProperty>(ReactionProperty.class, this, SGraphPackage.REACTION__PROPERTIES);
+		}
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -226,6 +254,8 @@ public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 				return basicSetTrigger(null, msgs);
 			case SGraphPackage.REACTION__EFFECT:
 				return basicSetEffect(null, msgs);
+			case SGraphPackage.REACTION__PROPERTIES:
+				return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -244,6 +274,8 @@ public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 			case SGraphPackage.REACTION__EFFECT:
 				if (resolve) return getEffect();
 				return basicGetEffect();
+			case SGraphPackage.REACTION__PROPERTIES:
+				return getProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -253,6 +285,7 @@ public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -261,6 +294,10 @@ public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 				return;
 			case SGraphPackage.REACTION__EFFECT:
 				setEffect((Effect)newValue);
+				return;
+			case SGraphPackage.REACTION__PROPERTIES:
+				getProperties().clear();
+				getProperties().addAll((Collection<? extends ReactionProperty>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -280,6 +317,9 @@ public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 			case SGraphPackage.REACTION__EFFECT:
 				setEffect((Effect)null);
 				return;
+			case SGraphPackage.REACTION__PROPERTIES:
+				getProperties().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -296,6 +336,8 @@ public abstract class ReactionImpl extends EObjectImpl implements Reaction {
 				return trigger != null;
 			case SGraphPackage.REACTION__EFFECT:
 				return effect != null;
+			case SGraphPackage.REACTION__PROPERTIES:
+				return properties != null && !properties.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

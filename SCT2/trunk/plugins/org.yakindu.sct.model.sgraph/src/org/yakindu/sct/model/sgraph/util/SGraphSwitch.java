@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -191,6 +192,27 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SGraphPackage.EXIT: {
+				Exit exit = (Exit)theEObject;
+				T result = caseExit(exit);
+				if (result == null) result = casePseudostate(exit);
+				if (result == null) result = caseVertex(exit);
+				if (result == null) result = caseNamedElement(exit);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.REACTIVE_ELEMENT: {
+				ReactiveElement reactiveElement = (ReactiveElement)theEObject;
+				T result = caseReactiveElement(reactiveElement);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.REACTION: {
+				Reaction reaction = (Reaction)theEObject;
+				T result = caseReaction(reaction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SGraphPackage.TRIGGER: {
 				Trigger trigger = (Trigger)theEObject;
 				T result = caseTrigger(trigger);
@@ -200,6 +222,12 @@ public class SGraphSwitch<T> extends Switch<T> {
 			case SGraphPackage.EFFECT: {
 				Effect effect = (Effect)theEObject;
 				T result = caseEffect(effect);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGraphPackage.REACTION_PROPERTY: {
+				ReactionProperty reactionProperty = (ReactionProperty)theEObject;
+				T result = caseReactionProperty(reactionProperty);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -213,27 +241,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 				Declaration declaration = (Declaration)theEObject;
 				T result = caseDeclaration(declaration);
 				if (result == null) result = caseNamedElement(declaration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SGraphPackage.REACTION: {
-				Reaction reaction = (Reaction)theEObject;
-				T result = caseReaction(reaction);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SGraphPackage.REACTIVE_ELEMENT: {
-				ReactiveElement reactiveElement = (ReactiveElement)theEObject;
-				T result = caseReactiveElement(reactiveElement);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SGraphPackage.EXIT: {
-				Exit exit = (Exit)theEObject;
-				T result = caseExit(exit);
-				if (result == null) result = casePseudostate(exit);
-				if (result == null) result = caseVertex(exit);
-				if (result == null) result = caseNamedElement(exit);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -563,6 +570,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseEffect(Effect object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reaction Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reaction Property</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReactionProperty(ReactionProperty object) {
 		return null;
 	}
 

@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -170,6 +171,16 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseTransitionReaction(TransitionReaction object)
       {
         return createTransitionReactionAdapter();
+      }
+      @Override
+      public Adapter caseEntryPointSpec(EntryPointSpec object)
+      {
+        return createEntryPointSpecAdapter();
+      }
+      @Override
+      public Adapter caseExitPointSpec(ExitPointSpec object)
+      {
+        return createExitPointSpecAdapter();
       }
       @Override
       public Adapter caseEventSpec(EventSpec object)
@@ -420,6 +431,11 @@ public class StextAdapterFactory extends AdapterFactoryImpl
       public Adapter caseReaction(Reaction object)
       {
         return createReactionAdapter();
+      }
+      @Override
+      public Adapter caseReactionProperty(ReactionProperty object)
+      {
+        return createReactionPropertyAdapter();
       }
       @Override
       public Adapter caseStatement(Statement object)
@@ -694,6 +710,36 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTransitionReactionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.EntryPointSpec <em>Entry Point Spec</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.EntryPointSpec
+   * @generated
+   */
+  public Adapter createEntryPointSpecAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.stext.stext.ExitPointSpec <em>Exit Point Spec</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.stext.stext.ExitPointSpec
+   * @generated
+   */
+  public Adapter createExitPointSpecAdapter()
   {
     return null;
   }
@@ -1444,6 +1490,21 @@ public class StextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createReactionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.ReactionProperty <em>Reaction Property</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.yakindu.sct.model.sgraph.ReactionProperty
+   * @generated
+   */
+  public Adapter createReactionPropertyAdapter()
   {
     return null;
   }

@@ -933,7 +933,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cEffectAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
 		private final RuleCall cEffectReactionEffectParserRuleCall_1_0_1_0 = (RuleCall)cEffectAssignment_1_0_1.eContents().get(0);
 		
-		////('#' properties=ReactionProperties)?;
 		//LocalReaction:
 		//	trigger=ReactionTrigger => ("/" effect=ReactionEffect);
 		public ParserRule getRule() { return rule; }
@@ -973,13 +972,16 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cSolidusKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Assignment cEffectAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final RuleCall cEffectReactionEffectParserRuleCall_2_1_0 = (RuleCall)cEffectAssignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cNumberSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cPropertiesAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cPropertiesTransitionPropertyParserRuleCall_3_1_0 = (RuleCall)cPropertiesAssignment_3_1.eContents().get(0);
 		
-		//// ('#' properties=ReactionProperties)?;
 		//TransitionReaction:
-		//	{TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)?;
+		//	{TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)? ("#" properties+=TransitionProperty*)?;
 		public ParserRule getRule() { return rule; }
 
-		//{TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)?
+		//{TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)? ("#" properties+=TransitionProperty*)?
 		public Group getGroup() { return cGroup; }
 
 		//{TransitionReaction}
@@ -1002,6 +1004,18 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//ReactionEffect
 		public RuleCall getEffectReactionEffectParserRuleCall_2_1_0() { return cEffectReactionEffectParserRuleCall_2_1_0; }
+
+		//("#" properties+=TransitionProperty*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"#"
+		public Keyword getNumberSignKeyword_3_0() { return cNumberSignKeyword_3_0; }
+
+		//properties+=TransitionProperty*
+		public Assignment getPropertiesAssignment_3_1() { return cPropertiesAssignment_3_1; }
+
+		//TransitionProperty
+		public RuleCall getPropertiesTransitionPropertyParserRuleCall_3_1_0() { return cPropertiesTransitionPropertyParserRuleCall_3_1_0; }
 	}
 
 	public class StextTriggerElements extends AbstractParserRuleElementFinder {
@@ -1158,7 +1172,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cActionsExpressionParserRuleCall_2_1_0_0 = (RuleCall)cActionsAlternatives_2_1_0.eContents().get(0);
 		private final RuleCall cActionsEventRaisingExpressionParserRuleCall_2_1_0_1 = (RuleCall)cActionsAlternatives_2_1_0.eContents().get(1);
 		
-		//// (';')?;
 		//ReactionEffect returns sgraph::Effect:
 		//	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (";" actions+=(Expression | EventRaisingExpression))*;
 		public ParserRule getRule() { return rule; }
@@ -1200,6 +1213,74 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getActionsEventRaisingExpressionParserRuleCall_2_1_0_1() { return cActionsEventRaisingExpressionParserRuleCall_2_1_0_1; }
 	}
 
+	public class TransitionPropertyElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransitionProperty");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cEntryPointSpecParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cExitPointSpecParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//TransitionProperty returns sgraph::ReactionProperty:
+		//	EntryPointSpec | ExitPointSpec;
+		public ParserRule getRule() { return rule; }
+
+		//EntryPointSpec | ExitPointSpec
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//EntryPointSpec
+		public RuleCall getEntryPointSpecParserRuleCall_0() { return cEntryPointSpecParserRuleCall_0; }
+
+		//ExitPointSpec
+		public RuleCall getExitPointSpecParserRuleCall_1() { return cExitPointSpecParserRuleCall_1; }
+	}
+
+	public class EntryPointSpecElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EntryPointSpec");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cGreaterThanSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cEntrypointAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cEntrypointIDTerminalRuleCall_1_0 = (RuleCall)cEntrypointAssignment_1.eContents().get(0);
+		
+		//EntryPointSpec:
+		//	">" entrypoint=ID;
+		public ParserRule getRule() { return rule; }
+
+		//">" entrypoint=ID
+		public Group getGroup() { return cGroup; }
+
+		//">"
+		public Keyword getGreaterThanSignKeyword_0() { return cGreaterThanSignKeyword_0; }
+
+		//entrypoint=ID
+		public Assignment getEntrypointAssignment_1() { return cEntrypointAssignment_1; }
+
+		//ID
+		public RuleCall getEntrypointIDTerminalRuleCall_1_0() { return cEntrypointIDTerminalRuleCall_1_0; }
+	}
+
+	public class ExitPointSpecElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExitPointSpec");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cExitpointAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cExitpointIDTerminalRuleCall_0_0 = (RuleCall)cExitpointAssignment_0.eContents().get(0);
+		private final Keyword cGreaterThanSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//ExitPointSpec:
+		//	exitpoint=ID ">";
+		public ParserRule getRule() { return rule; }
+
+		//exitpoint=ID ">"
+		public Group getGroup() { return cGroup; }
+
+		//exitpoint=ID
+		public Assignment getExitpointAssignment_0() { return cExitpointAssignment_0; }
+
+		//ID
+		public RuleCall getExitpointIDTerminalRuleCall_0_0() { return cExitpointIDTerminalRuleCall_0_0; }
+
+		//">"
+		public Keyword getGreaterThanSignKeyword_1() { return cGreaterThanSignKeyword_1; }
+	}
+
 	public class EventSpecElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "EventSpec");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -1207,17 +1288,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTimeEventSpecParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cBuiltinEventSpecParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		////ReactionProperties:
-		////	{ReactionProperties} (properties+=ReactionProperty)*;
-		////
-		////ReactionProperty:
-		////	EntryPointSpec | ExitPointSpec;
-		////
-		////EntryPointSpec:
-		////	'>' entrypoint=[Entrypoint|FQN];
-		////
-		////ExitPointSpec:
-		////	exitpoint=[Exitpoint|FQN] '>';
 		//EventSpec:
 		//	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 		public ParserRule getRule() { return rule; }
@@ -1295,8 +1365,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExitEventParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cAlwaysEventParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
-		////TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
-		//// | DefaultEvent | OnCycleEvent ;
 		//BuiltinEventSpec:
 		//	EntryEvent | ExitEvent | AlwaysEvent;
 		public ParserRule getRule() { return rule; }
@@ -1362,8 +1430,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cAlwaysKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
 		private final Keyword cOncycleKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
 		
-		////OnCycleEvent:
-		////	{OnCycleEvent} 'oncycle'; 
 		//AlwaysEvent:
 		//	{AlwaysEvent} ("always" | "oncycle");
 		public ParserRule getRule() { return rule; }
@@ -1396,9 +1462,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cValueAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cValueExpressionParserRuleCall_3_1_0 = (RuleCall)cValueAssignment_3_1.eContents().get(0);
 		
-		////DefaultEvent:
-		////	{DefaultEvent} ('default' | 'else')
-		////;
 		//// ****************
 		//// Expression Grammar
 		//// ****************
@@ -2893,6 +2956,9 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private ReactionTriggerElements pReactionTrigger;
 	private DefaultTriggerElements pDefaultTrigger;
 	private ReactionEffectElements pReactionEffect;
+	private TransitionPropertyElements pTransitionProperty;
+	private EntryPointSpecElements pEntryPointSpec;
+	private ExitPointSpecElements pExitPointSpec;
 	private EventSpecElements pEventSpec;
 	private RegularEventSpecElements pRegularEventSpec;
 	private TimeEventSpecElements pTimeEventSpec;
@@ -3306,7 +3372,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getReactionAccess().getRule();
 	}
 
-	////('#' properties=ReactionProperties)?;
 	//LocalReaction:
 	//	trigger=ReactionTrigger => ("/" effect=ReactionEffect);
 	public LocalReactionElements getLocalReactionAccess() {
@@ -3317,9 +3382,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getLocalReactionAccess().getRule();
 	}
 
-	//// ('#' properties=ReactionProperties)?;
 	//TransitionReaction:
-	//	{TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)?;
+	//	{TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)? ("#" properties+=TransitionProperty*)?;
 	public TransitionReactionElements getTransitionReactionAccess() {
 		return (pTransitionReaction != null) ? pTransitionReaction : (pTransitionReaction = new TransitionReactionElements());
 	}
@@ -3359,7 +3423,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getDefaultTriggerAccess().getRule();
 	}
 
-	//// (';')?;
 	//ReactionEffect returns sgraph::Effect:
 	//	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (";" actions+=(Expression | EventRaisingExpression))*;
 	public ReactionEffectElements getReactionEffectAccess() {
@@ -3370,17 +3433,36 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getReactionEffectAccess().getRule();
 	}
 
-	////ReactionProperties:
-	////	{ReactionProperties} (properties+=ReactionProperty)*;
-	////
-	////ReactionProperty:
-	////	EntryPointSpec | ExitPointSpec;
-	////
-	////EntryPointSpec:
-	////	'>' entrypoint=[Entrypoint|FQN];
-	////
-	////ExitPointSpec:
-	////	exitpoint=[Exitpoint|FQN] '>';
+	//TransitionProperty returns sgraph::ReactionProperty:
+	//	EntryPointSpec | ExitPointSpec;
+	public TransitionPropertyElements getTransitionPropertyAccess() {
+		return (pTransitionProperty != null) ? pTransitionProperty : (pTransitionProperty = new TransitionPropertyElements());
+	}
+	
+	public ParserRule getTransitionPropertyRule() {
+		return getTransitionPropertyAccess().getRule();
+	}
+
+	//EntryPointSpec:
+	//	">" entrypoint=ID;
+	public EntryPointSpecElements getEntryPointSpecAccess() {
+		return (pEntryPointSpec != null) ? pEntryPointSpec : (pEntryPointSpec = new EntryPointSpecElements());
+	}
+	
+	public ParserRule getEntryPointSpecRule() {
+		return getEntryPointSpecAccess().getRule();
+	}
+
+	//ExitPointSpec:
+	//	exitpoint=ID ">";
+	public ExitPointSpecElements getExitPointSpecAccess() {
+		return (pExitPointSpec != null) ? pExitPointSpec : (pExitPointSpec = new ExitPointSpecElements());
+	}
+	
+	public ParserRule getExitPointSpecRule() {
+		return getExitPointSpecAccess().getRule();
+	}
+
 	//EventSpec:
 	//	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 	public EventSpecElements getEventSpecAccess() {
@@ -3422,8 +3504,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getTimeEventTypeAccess().getRule();
 	}
 
-	////TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
-	//// | DefaultEvent | OnCycleEvent ;
 	//BuiltinEventSpec:
 	//	EntryEvent | ExitEvent | AlwaysEvent;
 	public BuiltinEventSpecElements getBuiltinEventSpecAccess() {
@@ -3454,8 +3534,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getExitEventAccess().getRule();
 	}
 
-	////OnCycleEvent:
-	////	{OnCycleEvent} 'oncycle'; 
 	//AlwaysEvent:
 	//	{AlwaysEvent} ("always" | "oncycle");
 	public AlwaysEventElements getAlwaysEventAccess() {
@@ -3466,9 +3544,6 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		return getAlwaysEventAccess().getRule();
 	}
 
-	////DefaultEvent:
-	////	{DefaultEvent} ('default' | 'else')
-	////;
 	//// ****************
 	//// Expression Grammar
 	//// ****************

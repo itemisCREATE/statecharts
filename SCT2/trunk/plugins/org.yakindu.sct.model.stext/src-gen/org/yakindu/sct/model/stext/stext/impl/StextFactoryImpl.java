@@ -81,6 +81,8 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
       case StextPackage.OPERATION_DEFINITION: return createOperationDefinition();
       case StextPackage.LOCAL_REACTION: return createLocalReaction();
       case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
+      case StextPackage.ENTRY_POINT_SPEC: return createEntryPointSpec();
+      case StextPackage.EXIT_POINT_SPEC: return createExitPointSpec();
       case StextPackage.EVENT_SPEC: return createEventSpec();
       case StextPackage.REGULAR_EVENT_SPEC: return createRegularEventSpec();
       case StextPackage.TIME_EVENT_SPEC: return createTimeEventSpec();
@@ -364,6 +366,28 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     TransitionReactionImpl transitionReaction = new TransitionReactionImpl();
     return transitionReaction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EntryPointSpec createEntryPointSpec()
+  {
+    EntryPointSpecImpl entryPointSpec = new EntryPointSpecImpl();
+    return entryPointSpec;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ExitPointSpec createExitPointSpec()
+  {
+    ExitPointSpecImpl exitPointSpec = new ExitPointSpecImpl();
+    return exitPointSpec;
   }
 
   /**

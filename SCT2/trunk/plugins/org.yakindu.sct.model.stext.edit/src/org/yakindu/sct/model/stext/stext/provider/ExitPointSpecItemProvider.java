@@ -11,27 +11,29 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.provider.ReactionPropertyItemProvider;
 
-import org.yakindu.sct.model.sgraph.provider.ReactionItemProvider;
-
-import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.ExitPointSpec;
+import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionReaction} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.ExitPointSpec} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TransitionReactionItemProvider
-  extends ReactionItemProvider
+public class ExitPointSpecItemProvider
+  extends ReactionPropertyItemProvider
   implements
     IEditingDomainItemProvider,
     IStructuredItemContentProvider,
@@ -45,7 +47,7 @@ public class TransitionReactionItemProvider
    * <!-- end-user-doc -->
    * @generated
    */
-  public TransitionReactionItemProvider(AdapterFactory adapterFactory)
+  public ExitPointSpecItemProvider(AdapterFactory adapterFactory)
   {
     super(adapterFactory);
   }
@@ -63,12 +65,36 @@ public class TransitionReactionItemProvider
     {
       super.getPropertyDescriptors(object);
 
+      addExitpointPropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
 
   /**
-   * This returns TransitionReaction.gif.
+   * This adds a property descriptor for the Exitpoint feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addExitpointPropertyDescriptor(Object object)
+  {
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_ExitPointSpec_exitpoint_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_ExitPointSpec_exitpoint_feature", "_UI_ExitPointSpec_type"),
+         StextPackage.Literals.EXIT_POINT_SPEC__EXITPOINT,
+         true,
+         false,
+         false,
+         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+         null,
+         null));
+  }
+
+  /**
+   * This returns ExitPointSpec.gif.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -76,7 +102,7 @@ public class TransitionReactionItemProvider
   @Override
   public Object getImage(Object object)
   {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/TransitionReaction"));
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/ExitPointSpec"));
   }
 
   /**
@@ -88,7 +114,10 @@ public class TransitionReactionItemProvider
   @Override
   public String getText(Object object)
   {
-    return getString("_UI_TransitionReaction_type");
+    String label = ((ExitPointSpec)object).getExitpoint();
+    return label == null || label.length() == 0 ?
+      getString("_UI_ExitPointSpec_type") :
+      getString("_UI_ExitPointSpec_type") + " " + label;
   }
 
   /**
@@ -102,6 +131,13 @@ public class TransitionReactionItemProvider
   public void notifyChanged(Notification notification)
   {
     updateChildren(notification);
+
+    switch (notification.getFeatureID(ExitPointSpec.class))
+    {
+      case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
+        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+        return;
+    }
     super.notifyChanged(notification);
   }
 
@@ -116,31 +152,6 @@ public class TransitionReactionItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
     super.collectNewChildDescriptors(newChildDescriptors, object);
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__TRIGGER,
-         StextFactory.eINSTANCE.createReactionTrigger()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__TRIGGER,
-         StextFactory.eINSTANCE.createDefaultTrigger()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__EFFECT,
-         StextFactory.eINSTANCE.createReactionEffect()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__PROPERTIES,
-         StextFactory.eINSTANCE.createEntryPointSpec()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__PROPERTIES,
-         StextFactory.eINSTANCE.createExitPointSpec()));
   }
 
   /**
