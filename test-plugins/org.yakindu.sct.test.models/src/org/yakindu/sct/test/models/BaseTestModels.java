@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
-import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 public abstract class BaseTestModels {
 
 	@Inject
-	private ModelSequencer sequencer;
+	private IModelSequencer sequencer;
 
 	public abstract String getModelDirectory();
 

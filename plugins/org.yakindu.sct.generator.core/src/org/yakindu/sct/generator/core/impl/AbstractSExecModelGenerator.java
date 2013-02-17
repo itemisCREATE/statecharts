@@ -33,7 +33,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.FlowOptimizer;
-import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -72,7 +72,7 @@ public abstract class AbstractSExecModelGenerator extends
 	protected ExecutionFlow createExecutionFlow(Statechart statechart,
 			GeneratorEntry entry) {
 		Injector injector = getInjector(entry);
-		ModelSequencer sequencer = injector.getInstance(ModelSequencer.class);
+		IModelSequencer sequencer = injector.getInstance(IModelSequencer.class);
 		ExecutionFlow flow = sequencer.transform(statechart);
 		Assert.isNotNull(flow, "Error creation ExecutionFlow");
 
