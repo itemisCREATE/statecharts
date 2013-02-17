@@ -100,6 +100,15 @@ public interface SGraphFactory extends EFactory {
 	Exit createExit();
 
 	/**
+	 * Returns a new object of class '<em>Reaction Property</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reaction Property</em>'.
+	 * @generated
+	 */
+	ReactionProperty createReactionProperty();
+
+	/**
 	 * Returns a new object of class '<em>Scope</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

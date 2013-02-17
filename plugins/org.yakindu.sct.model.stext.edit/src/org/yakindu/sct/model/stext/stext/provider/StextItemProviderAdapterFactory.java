@@ -474,6 +474,56 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EntryPointSpec} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected EntryPointSpecItemProvider entryPointSpecItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EntryPointSpec}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createEntryPointSpecAdapter()
+  {
+    if (entryPointSpecItemProvider == null)
+    {
+      entryPointSpecItemProvider = new EntryPointSpecItemProvider(this);
+    }
+
+    return entryPointSpecItemProvider;
+  }
+
+  /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ExitPointSpec} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ExitPointSpecItemProvider exitPointSpecItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ExitPointSpec}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createExitPointSpecAdapter()
+  {
+    if (exitPointSpecItemProvider == null)
+    {
+      exitPointSpecItemProvider = new ExitPointSpecItemProvider(this);
+    }
+
+    return exitPointSpecItemProvider;
+  }
+
+  /**
    * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventSpec} instances.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1550,6 +1600,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (operationDefinitionItemProvider != null) operationDefinitionItemProvider.dispose();
     if (localReactionItemProvider != null) localReactionItemProvider.dispose();
     if (transitionReactionItemProvider != null) transitionReactionItemProvider.dispose();
+    if (entryPointSpecItemProvider != null) entryPointSpecItemProvider.dispose();
+    if (exitPointSpecItemProvider != null) exitPointSpecItemProvider.dispose();
     if (eventSpecItemProvider != null) eventSpecItemProvider.dispose();
     if (regularEventSpecItemProvider != null) regularEventSpecItemProvider.dispose();
     if (timeEventSpecItemProvider != null) timeEventSpecItemProvider.dispose();

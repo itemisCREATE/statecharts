@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.ChoiceKind;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -91,6 +92,7 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.STATECHART: return createStatechart();
 			case SGraphPackage.ENTRY: return createEntry();
 			case SGraphPackage.EXIT: return createExit();
+			case SGraphPackage.REACTION_PROPERTY: return createReactionProperty();
 			case SGraphPackage.SCOPE: return createScope();
 			case SGraphPackage.SYNCHRONIZATION: return createSynchronization();
 			case SGraphPackage.STATE: return createState();
@@ -203,6 +205,16 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public Exit createExit() {
 		ExitImpl exit = new ExitImpl();
 		return exit;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReactionProperty createReactionProperty() {
+		ReactionPropertyImpl reactionProperty = new ReactionPropertyImpl();
+		return reactionProperty;
 	}
 
 	/**

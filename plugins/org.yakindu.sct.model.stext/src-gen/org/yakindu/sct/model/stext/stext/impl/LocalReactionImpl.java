@@ -2,16 +2,24 @@
  */
 package org.yakindu.sct.model.stext.stext.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Trigger;
 
@@ -29,6 +37,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getEffect <em>Effect</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.impl.LocalReactionImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -55,6 +64,16 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
    * @ordered
    */
   protected Effect effect;
+
+  /**
+   * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getProperties()
+   * @generated
+   * @ordered
+   */
+  protected EList<ReactionProperty> properties;
 
   /**
    * <!-- begin-user-doc -->
@@ -232,6 +251,20 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<ReactionProperty> getProperties()
+  {
+    if (properties == null)
+    {
+      properties = new EObjectContainmentEList.Resolving<ReactionProperty>(ReactionProperty.class, this, StextPackage.LOCAL_REACTION__PROPERTIES);
+    }
+    return properties;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -241,6 +274,8 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
         return basicSetTrigger(null, msgs);
       case StextPackage.LOCAL_REACTION__EFFECT:
         return basicSetEffect(null, msgs);
+      case StextPackage.LOCAL_REACTION__PROPERTIES:
+        return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -261,6 +296,8 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
       case StextPackage.LOCAL_REACTION__EFFECT:
         if (resolve) return getEffect();
         return basicGetEffect();
+      case StextPackage.LOCAL_REACTION__PROPERTIES:
+        return getProperties();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -270,6 +307,7 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
    * <!-- end-user-doc -->
    * @generated
    */
+  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
@@ -280,6 +318,10 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
         return;
       case StextPackage.LOCAL_REACTION__EFFECT:
         setEffect((Effect)newValue);
+        return;
+      case StextPackage.LOCAL_REACTION__PROPERTIES:
+        getProperties().clear();
+        getProperties().addAll((Collection<? extends ReactionProperty>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -301,6 +343,9 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
       case StextPackage.LOCAL_REACTION__EFFECT:
         setEffect((Effect)null);
         return;
+      case StextPackage.LOCAL_REACTION__PROPERTIES:
+        getProperties().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -319,6 +364,8 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
         return trigger != null;
       case StextPackage.LOCAL_REACTION__EFFECT:
         return effect != null;
+      case StextPackage.LOCAL_REACTION__PROPERTIES:
+        return properties != null && !properties.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -337,6 +384,7 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
       {
         case StextPackage.LOCAL_REACTION__TRIGGER: return SGraphPackage.REACTION__TRIGGER;
         case StextPackage.LOCAL_REACTION__EFFECT: return SGraphPackage.REACTION__EFFECT;
+        case StextPackage.LOCAL_REACTION__PROPERTIES: return SGraphPackage.REACTION__PROPERTIES;
         default: return -1;
       }
     }
@@ -357,6 +405,7 @@ public class LocalReactionImpl extends DeclarationImpl implements LocalReaction
       {
         case SGraphPackage.REACTION__TRIGGER: return StextPackage.LOCAL_REACTION__TRIGGER;
         case SGraphPackage.REACTION__EFFECT: return StextPackage.LOCAL_REACTION__EFFECT;
+        case SGraphPackage.REACTION__PROPERTIES: return StextPackage.LOCAL_REACTION__PROPERTIES;
         default: return -1;
       }
     }

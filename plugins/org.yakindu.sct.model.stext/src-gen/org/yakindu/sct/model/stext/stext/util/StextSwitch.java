@@ -18,6 +18,7 @@ import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Statement;
@@ -229,6 +230,22 @@ public class StextSwitch<T> extends Switch<T>
         TransitionReaction transitionReaction = (TransitionReaction)theEObject;
         T result = caseTransitionReaction(transitionReaction);
         if (result == null) result = caseReaction(transitionReaction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.ENTRY_POINT_SPEC:
+      {
+        EntryPointSpec entryPointSpec = (EntryPointSpec)theEObject;
+        T result = caseEntryPointSpec(entryPointSpec);
+        if (result == null) result = caseReactionProperty(entryPointSpec);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case StextPackage.EXIT_POINT_SPEC:
+      {
+        ExitPointSpec exitPointSpec = (ExitPointSpec)theEObject;
+        T result = caseExitPointSpec(exitPointSpec);
+        if (result == null) result = caseReactionProperty(exitPointSpec);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -813,6 +830,38 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTransitionReaction(TransitionReaction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Entry Point Spec</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Entry Point Spec</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEntryPointSpec(EntryPointSpec object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Exit Point Spec</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Exit Point Spec</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseExitPointSpec(ExitPointSpec object)
   {
     return null;
   }
@@ -1613,6 +1662,22 @@ public class StextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseReaction(Reaction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Reaction Property</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Reaction Property</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseReactionProperty(ReactionProperty object)
   {
     return null;
   }

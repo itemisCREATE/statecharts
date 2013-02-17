@@ -32,11 +32,13 @@ import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
+import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
+import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.HexLiteral;
@@ -201,6 +203,20 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
    * @generated
    */
   private EClass transitionReactionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass entryPointSpecEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass exitPointSpecEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -856,6 +872,46 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
   public EClass getTransitionReaction()
   {
     return transitionReactionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEntryPointSpec()
+  {
+    return entryPointSpecEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getEntryPointSpec_Entrypoint()
+  {
+    return (EAttribute)entryPointSpecEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getExitPointSpec()
+  {
+    return exitPointSpecEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getExitPointSpec_Exitpoint()
+  {
+    return (EAttribute)exitPointSpecEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1960,6 +2016,12 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
 
     transitionReactionEClass = createEClass(TRANSITION_REACTION);
 
+    entryPointSpecEClass = createEClass(ENTRY_POINT_SPEC);
+    createEAttribute(entryPointSpecEClass, ENTRY_POINT_SPEC__ENTRYPOINT);
+
+    exitPointSpecEClass = createEClass(EXIT_POINT_SPEC);
+    createEAttribute(exitPointSpecEClass, EXIT_POINT_SPEC__EXITPOINT);
+
     eventSpecEClass = createEClass(EVENT_SPEC);
 
     regularEventSpecEClass = createEClass(REGULAR_EVENT_SPEC);
@@ -2155,6 +2217,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
     localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
     transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
+    entryPointSpecEClass.getESuperTypes().add(theSGraphPackage.getReactionProperty());
+    exitPointSpecEClass.getESuperTypes().add(theSGraphPackage.getReactionProperty());
     regularEventSpecEClass.getESuperTypes().add(this.getEventSpec());
     timeEventSpecEClass.getESuperTypes().add(this.getEventSpec());
     builtinEventSpecEClass.getESuperTypes().add(this.getEventSpec());
@@ -2234,6 +2298,12 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage
     initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(transitionReactionEClass, TransitionReaction.class, "TransitionReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(entryPointSpecEClass, EntryPointSpec.class, "EntryPointSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getEntryPointSpec_Entrypoint(), ecorePackage.getEString(), "entrypoint", null, 0, 1, EntryPointSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(exitPointSpecEClass, ExitPointSpec.class, "ExitPointSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getExitPointSpec_Exitpoint(), ecorePackage.getEString(), "exitpoint", null, 0, 1, ExitPointSpec.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(eventSpecEClass, EventSpec.class, "EventSpec", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

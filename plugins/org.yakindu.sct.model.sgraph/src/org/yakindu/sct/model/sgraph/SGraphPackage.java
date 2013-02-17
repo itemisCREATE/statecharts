@@ -245,7 +245,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSpecificationElement()
 	 * @generated
 	 */
-	int SPECIFICATION_ELEMENT = 12;
+	int SPECIFICATION_ELEMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Specification</b></em>' attribute.
@@ -303,13 +303,22 @@ public interface SGraphPackage extends EPackage {
 	int TRANSITION__EFFECT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRANSITION__PROPERTIES = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * The feature id for the '<em><b>Documentation</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 2;
+	int TRANSITION__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' reference.
@@ -318,7 +327,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__TARGET = SPECIFICATION_ELEMENT_FEATURE_COUNT + 3;
+	int TRANSITION__TARGET = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Source</b></em>' container reference.
@@ -327,7 +336,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__SOURCE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 4;
+	int TRANSITION__SOURCE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
@@ -336,7 +345,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION__PRIORITY = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
+	int TRANSITION__PRIORITY = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
@@ -345,7 +354,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
+	int TRANSITION_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.RegularStateImpl <em>Regular State</em>}' class.
@@ -355,7 +364,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getRegularState()
 	 * @generated
 	 */
-	int REGULAR_STATE = 22;
+	int REGULAR_STATE = 23;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -410,7 +419,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 20;
+	int STATE = 21;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.FinalStateImpl <em>Final State</em>}' class.
@@ -475,7 +484,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getDeclaration()
 	 * @generated
 	 */
-	int DECLARATION = 13;
+	int DECLARATION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -778,16 +787,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getTrigger()
 	 * @generated
 	 */
-	int TRIGGER = 10;
-
-	/**
-	 * The number of structural features of the '<em>Trigger</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRIGGER_FEATURE_COUNT = 0;
+	int TRIGGER = 13;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EffectImpl <em>Effect</em>}' class.
@@ -797,16 +797,17 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEffect()
 	 * @generated
 	 */
-	int EFFECT = 11;
+	int EFFECT = 14;
 
 	/**
-	 * The number of structural features of the '<em>Effect</em>' class.
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ReactionPropertyImpl <em>Reaction Property</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.impl.ReactionPropertyImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReactionProperty()
 	 * @generated
-	 * @ordered
 	 */
-	int EFFECT_FEATURE_COUNT = 0;
+	int REACTION_PROPERTY = 15;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl <em>Reaction</em>}' class.
@@ -816,34 +817,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReaction()
 	 * @generated
 	 */
-	int REACTION = 14;
-
-	/**
-	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTION__TRIGGER = 0;
-
-	/**
-	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTION__EFFECT = 1;
-
-	/**
-	 * The number of structural features of the '<em>Reaction</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTION_FEATURE_COUNT = 2;
+	int REACTION = 12;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ReactiveElementImpl <em>Reactive Element</em>}' class.
@@ -853,34 +827,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReactiveElement()
 	 * @generated
 	 */
-	int REACTIVE_ELEMENT = 15;
-
-	/**
-	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTIVE_ELEMENT__REACTIONS = 0;
-
-	/**
-	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTIVE_ELEMENT__LOCAL_REACTIONS = 1;
-
-	/**
-	 * The number of structural features of the '<em>Reactive Element</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REACTIVE_ELEMENT_FEATURE_COUNT = 2;
+	int REACTIVE_ELEMENT = 11;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ExitImpl <em>Exit</em>}' class.
@@ -890,7 +837,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getExit()
 	 * @generated
 	 */
-	int EXIT = 16;
+	int EXIT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -938,6 +885,96 @@ public interface SGraphPackage extends EPackage {
 	int EXIT_FEATURE_COUNT = PSEUDOSTATE_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Reactions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTIVE_ELEMENT__REACTIONS = 0;
+
+	/**
+	 * The feature id for the '<em><b>Local Reactions</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTIVE_ELEMENT__LOCAL_REACTIONS = 1;
+
+	/**
+	 * The number of structural features of the '<em>Reactive Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTIVE_ELEMENT_FEATURE_COUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION__TRIGGER = 0;
+
+	/**
+	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION__EFFECT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION__PROPERTIES = 2;
+
+	/**
+	 * The number of structural features of the '<em>Reaction</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION_FEATURE_COUNT = 3;
+
+	/**
+	 * The number of structural features of the '<em>Trigger</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRIGGER_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Effect</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EFFECT_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of structural features of the '<em>Reaction Property</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REACTION_PROPERTY_FEATURE_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ScopeImpl <em>Scope</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -945,7 +982,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getScope()
 	 * @generated
 	 */
-	int SCOPE = 17;
+	int SCOPE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
@@ -991,7 +1028,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getScopedElement()
 	 * @generated
 	 */
-	int SCOPED_ELEMENT = 18;
+	int SCOPED_ELEMENT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -1028,7 +1065,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSynchronization()
 	 * @generated
 	 */
-	int SYNCHRONIZATION = 19;
+	int SYNCHRONIZATION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1254,7 +1291,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getStatement()
 	 * @generated
 	 */
-	int STATEMENT = 21;
+	int STATEMENT = 22;
 
 	/**
 	 * The number of structural features of the '<em>Statement</em>' class.
@@ -1273,7 +1310,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getCompositeElement()
 	 * @generated
 	 */
-	int COMPOSITE_ELEMENT = 23;
+	int COMPOSITE_ELEMENT = 24;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -1301,7 +1338,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 24;
+	int ENTRY_KIND = 25;
 
 
 	/**
@@ -1312,7 +1349,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 25;
+	int CHOICE_KIND = 26;
 
 
 	/**
@@ -1685,6 +1722,16 @@ public interface SGraphPackage extends EPackage {
 	EClass getEffect();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.ReactionProperty <em>Reaction Property</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reaction Property</em>'.
+	 * @see org.yakindu.sct.model.sgraph.ReactionProperty
+	 * @generated
+	 */
+	EClass getReactionProperty();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.SpecificationElement <em>Specification Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1746,6 +1793,17 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getReaction_Effect();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Reaction#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Properties</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Reaction#getProperties()
+	 * @see #getReaction()
+	 * @generated
+	 */
+	EReference getReaction_Properties();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.ReactiveElement <em>Reactive Element</em>}'.
@@ -2229,6 +2287,16 @@ public interface SGraphPackage extends EPackage {
 		EClass EFFECT = eINSTANCE.getEffect();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ReactionPropertyImpl <em>Reaction Property</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.impl.ReactionPropertyImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReactionProperty()
+		 * @generated
+		 */
+		EClass REACTION_PROPERTY = eINSTANCE.getReactionProperty();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl <em>Specification Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2281,6 +2349,14 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REACTION__EFFECT = eINSTANCE.getReaction_Effect();
+
+		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REACTION__PROPERTIES = eINSTANCE.getReaction_Properties();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ReactiveElementImpl <em>Reactive Element</em>}' class.

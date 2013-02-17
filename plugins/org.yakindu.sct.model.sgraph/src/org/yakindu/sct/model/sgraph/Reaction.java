@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.model.sgraph;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.Reaction#getTrigger <em>Trigger</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.Reaction#getEffect <em>Effect</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.Reaction#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -88,5 +90,21 @@ public interface Reaction extends EObject {
 	 * @generated
 	 */
 	void setEffect(Effect value);
+
+	/**
+	 * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.ReactionProperty}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Properties</em>' containment reference list.
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getReaction_Properties()
+	 * @model containment="true" resolveProxies="true"
+	 * @generated
+	 */
+	EList<ReactionProperty> getProperties();
 
 } // Reaction

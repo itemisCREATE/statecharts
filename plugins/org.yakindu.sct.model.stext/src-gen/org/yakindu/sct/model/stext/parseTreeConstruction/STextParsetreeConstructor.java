@@ -64,42 +64,45 @@ protected class ThisRootNode extends RootToken {
 			case 30: return new ReactionTrigger_Group(this, this, 30, inst);
 			case 31: return new DefaultTrigger_Group(this, this, 31, inst);
 			case 32: return new ReactionEffect_Group(this, this, 32, inst);
-			case 33: return new EventSpec_Alternatives(this, this, 33, inst);
-			case 34: return new RegularEventSpec_EventAssignment(this, this, 34, inst);
-			case 35: return new TimeEventSpec_Group(this, this, 35, inst);
-			case 36: return new BuiltinEventSpec_Alternatives(this, this, 36, inst);
-			case 37: return new EntryEvent_Group(this, this, 37, inst);
-			case 38: return new ExitEvent_Group(this, this, 38, inst);
-			case 39: return new AlwaysEvent_Group(this, this, 39, inst);
-			case 40: return new EventRaisingExpression_Group(this, this, 40, inst);
-			case 41: return new StatementExpression_ExpressionParserRuleCall(this, this, 41, inst);
-			case 42: return new Expression_AssignmentExpressionParserRuleCall(this, this, 42, inst);
-			case 43: return new AssignmentExpression_Group(this, this, 43, inst);
-			case 44: return new ConditionalExpression_Group(this, this, 44, inst);
-			case 45: return new LogicalOrExpression_Group(this, this, 45, inst);
-			case 46: return new LogicalAndExpression_Group(this, this, 46, inst);
-			case 47: return new LogicalNotExpression_Alternatives(this, this, 47, inst);
-			case 48: return new BitwiseXorExpression_Group(this, this, 48, inst);
-			case 49: return new BitwiseOrExpression_Group(this, this, 49, inst);
-			case 50: return new BitwiseAndExpression_Group(this, this, 50, inst);
-			case 51: return new LogicalRelationExpression_Group(this, this, 51, inst);
-			case 52: return new ShiftExpression_Group(this, this, 52, inst);
-			case 53: return new NumericalAddSubtractExpression_Group(this, this, 53, inst);
-			case 54: return new NumericalMultiplyDivideExpression_Group(this, this, 54, inst);
-			case 55: return new NumericalUnaryExpression_Alternatives(this, this, 55, inst);
-			case 56: return new PrimaryExpression_Alternatives(this, this, 56, inst);
-			case 57: return new PrimitiveValueExpression_Group(this, this, 57, inst);
-			case 58: return new FeatureCall_Group(this, this, 58, inst);
-			case 59: return new ElementReferenceExpression_Group(this, this, 59, inst);
-			case 60: return new EventValueReferenceExpression_Group(this, this, 60, inst);
-			case 61: return new ActiveStateReferenceExpression_Group(this, this, 61, inst);
-			case 62: return new ParenthesizedExpression_Group(this, this, 62, inst);
-			case 63: return new Literal_Alternatives(this, this, 63, inst);
-			case 64: return new BoolLiteral_Group(this, this, 64, inst);
-			case 65: return new IntLiteral_Group(this, this, 65, inst);
-			case 66: return new RealLiteral_Group(this, this, 66, inst);
-			case 67: return new HexLiteral_Group(this, this, 67, inst);
-			case 68: return new StringLiteral_Group(this, this, 68, inst);
+			case 33: return new TransitionProperty_Alternatives(this, this, 33, inst);
+			case 34: return new EntryPointSpec_Group(this, this, 34, inst);
+			case 35: return new ExitPointSpec_Group(this, this, 35, inst);
+			case 36: return new EventSpec_Alternatives(this, this, 36, inst);
+			case 37: return new RegularEventSpec_EventAssignment(this, this, 37, inst);
+			case 38: return new TimeEventSpec_Group(this, this, 38, inst);
+			case 39: return new BuiltinEventSpec_Alternatives(this, this, 39, inst);
+			case 40: return new EntryEvent_Group(this, this, 40, inst);
+			case 41: return new ExitEvent_Group(this, this, 41, inst);
+			case 42: return new AlwaysEvent_Group(this, this, 42, inst);
+			case 43: return new EventRaisingExpression_Group(this, this, 43, inst);
+			case 44: return new StatementExpression_ExpressionParserRuleCall(this, this, 44, inst);
+			case 45: return new Expression_AssignmentExpressionParserRuleCall(this, this, 45, inst);
+			case 46: return new AssignmentExpression_Group(this, this, 46, inst);
+			case 47: return new ConditionalExpression_Group(this, this, 47, inst);
+			case 48: return new LogicalOrExpression_Group(this, this, 48, inst);
+			case 49: return new LogicalAndExpression_Group(this, this, 49, inst);
+			case 50: return new LogicalNotExpression_Alternatives(this, this, 50, inst);
+			case 51: return new BitwiseXorExpression_Group(this, this, 51, inst);
+			case 52: return new BitwiseOrExpression_Group(this, this, 52, inst);
+			case 53: return new BitwiseAndExpression_Group(this, this, 53, inst);
+			case 54: return new LogicalRelationExpression_Group(this, this, 54, inst);
+			case 55: return new ShiftExpression_Group(this, this, 55, inst);
+			case 56: return new NumericalAddSubtractExpression_Group(this, this, 56, inst);
+			case 57: return new NumericalMultiplyDivideExpression_Group(this, this, 57, inst);
+			case 58: return new NumericalUnaryExpression_Alternatives(this, this, 58, inst);
+			case 59: return new PrimaryExpression_Alternatives(this, this, 59, inst);
+			case 60: return new PrimitiveValueExpression_Group(this, this, 60, inst);
+			case 61: return new FeatureCall_Group(this, this, 61, inst);
+			case 62: return new ElementReferenceExpression_Group(this, this, 62, inst);
+			case 63: return new EventValueReferenceExpression_Group(this, this, 63, inst);
+			case 64: return new ActiveStateReferenceExpression_Group(this, this, 64, inst);
+			case 65: return new ParenthesizedExpression_Group(this, this, 65, inst);
+			case 66: return new Literal_Alternatives(this, this, 66, inst);
+			case 67: return new BoolLiteral_Group(this, this, 67, inst);
+			case 68: return new IntLiteral_Group(this, this, 68, inst);
+			case 69: return new RealLiteral_Group(this, this, 69, inst);
+			case 70: return new HexLiteral_Group(this, this, 70, inst);
+			case 71: return new StringLiteral_Group(this, this, 71, inst);
 			default: return null;
 		}	
 	}	
@@ -3515,7 +3518,6 @@ protected class Reaction_TransitionReactionParserRuleCall_1 extends RuleCallToke
 
 /************ begin Rule LocalReaction ****************
  *
- * //('#' properties=ReactionProperties)?;
  * LocalReaction:
  * 	trigger=ReactionTrigger => ("/" effect=ReactionEffect);
  *
@@ -3715,13 +3717,12 @@ protected class LocalReaction_EffectAssignment_1_0_1 extends AssignmentToken  {
 
 /************ begin Rule TransitionReaction ****************
  *
- * // ('#' properties=ReactionProperties)?;
  * TransitionReaction:
- * 	{TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)?;
+ * 	{TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)? ("#" properties+=TransitionProperty*)?;
  *
  **/
 
-// {TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)?
+// {TransitionReaction} trigger=StextTrigger? ("/" effect=ReactionEffect)? ("#" properties+=TransitionProperty*)?
 protected class TransitionReaction_Group extends GroupToken {
 	
 	public TransitionReaction_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -3736,9 +3737,10 @@ protected class TransitionReaction_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new TransitionReaction_Group_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new TransitionReaction_TriggerAssignment_1(lastRuleCallOrigin, this, 1, inst);
-			case 2: return new TransitionReaction_TransitionReactionAction_0(lastRuleCallOrigin, this, 2, inst);
+			case 0: return new TransitionReaction_Group_3(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TransitionReaction_Group_2(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new TransitionReaction_TriggerAssignment_1(lastRuleCallOrigin, this, 2, inst);
+			case 3: return new TransitionReaction_TransitionReactionAction_0(lastRuleCallOrigin, this, 3, inst);
 			default: return null;
 		}	
 	}
@@ -3910,6 +3912,100 @@ protected class TransitionReaction_EffectAssignment_2_1 extends AssignmentToken 
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new TransitionReaction_SolidusKeyword_2_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// ("#" properties+=TransitionProperty*)?
+protected class TransitionReaction_Group_3 extends GroupToken {
+	
+	public TransitionReaction_Group_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTransitionReactionAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TransitionReaction_PropertiesAssignment_3_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "#"
+protected class TransitionReaction_NumberSignKeyword_3_0 extends KeywordToken  {
+	
+	public TransitionReaction_NumberSignKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTransitionReactionAccess().getNumberSignKeyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TransitionReaction_Group_2(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TransitionReaction_TriggerAssignment_1(lastRuleCallOrigin, this, 1, inst);
+			case 2: return new TransitionReaction_TransitionReactionAction_0(lastRuleCallOrigin, this, 2, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// properties+=TransitionProperty*
+protected class TransitionReaction_PropertiesAssignment_3_1 extends AssignmentToken  {
+	
+	public TransitionReaction_PropertiesAssignment_3_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransitionReactionAccess().getPropertiesAssignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TransitionProperty_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("properties",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("properties");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTransitionPropertyRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getTransitionReactionAccess().getPropertiesTransitionPropertyParserRuleCall_3_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new TransitionReaction_PropertiesAssignment_3_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new TransitionReaction_NumberSignKeyword_3_0(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -4630,7 +4726,6 @@ protected class DefaultTrigger_DefaultKeyword_1_0 extends KeywordToken  {
 
 /************ begin Rule ReactionEffect ****************
  *
- * // (';')?;
  * ReactionEffect returns sgraph::Effect:
  * 	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (";" actions+=(Expression | EventRaisingExpression))*;
  *
@@ -4854,19 +4949,312 @@ protected class ReactionEffect_ActionsAssignment_2_1 extends AssignmentToken  {
 /************ end Rule ReactionEffect ****************/
 
 
+/************ begin Rule TransitionProperty ****************
+ *
+ * TransitionProperty returns sgraph::ReactionProperty:
+ * 	EntryPointSpec | ExitPointSpec;
+ *
+ **/
+
+// EntryPointSpec | ExitPointSpec
+protected class TransitionProperty_Alternatives extends AlternativesToken {
+
+	public TransitionProperty_Alternatives(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getTransitionPropertyAccess().getAlternatives();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new TransitionProperty_EntryPointSpecParserRuleCall_0(lastRuleCallOrigin, this, 0, inst);
+			case 1: return new TransitionProperty_ExitPointSpecParserRuleCall_1(lastRuleCallOrigin, this, 1, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEntryPointSpecRule().getType().getClassifier() && 
+		   getEObject().eClass() != grammarAccess.getExitPointSpecRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// EntryPointSpec
+protected class TransitionProperty_EntryPointSpecParserRuleCall_0 extends RuleCallToken {
+	
+	public TransitionProperty_EntryPointSpecParserRuleCall_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTransitionPropertyAccess().getEntryPointSpecParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EntryPointSpec_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEntryPointSpecRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(EntryPointSpec_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// ExitPointSpec
+protected class TransitionProperty_ExitPointSpecParserRuleCall_1 extends RuleCallToken {
+	
+	public TransitionProperty_ExitPointSpecParserRuleCall_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTransitionPropertyAccess().getExitPointSpecParserRuleCall_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ExitPointSpec_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getExitPointSpecRule().getType().getClassifier())
+			return null;
+		if(checkForRecursion(ExitPointSpec_Group.class, eObjectConsumer)) return null;
+		return eObjectConsumer;
+	}
+	
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+/************ end Rule TransitionProperty ****************/
+
+
+/************ begin Rule EntryPointSpec ****************
+ *
+ * EntryPointSpec:
+ * 	">" entrypoint=ID;
+ *
+ **/
+
+// ">" entrypoint=ID
+protected class EntryPointSpec_Group extends GroupToken {
+	
+	public EntryPointSpec_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getEntryPointSpecAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EntryPointSpec_EntrypointAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getEntryPointSpecRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// ">"
+protected class EntryPointSpec_GreaterThanSignKeyword_0 extends KeywordToken  {
+	
+	public EntryPointSpec_GreaterThanSignKeyword_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getEntryPointSpecAccess().getGreaterThanSignKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+}
+
+// entrypoint=ID
+protected class EntryPointSpec_EntrypointAssignment_1 extends AssignmentToken  {
+	
+	public EntryPointSpec_EntrypointAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getEntryPointSpecAccess().getEntrypointAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new EntryPointSpec_GreaterThanSignKeyword_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("entrypoint",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("entrypoint");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getEntryPointSpecAccess().getEntrypointIDTerminalRuleCall_1_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getEntryPointSpecAccess().getEntrypointIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule EntryPointSpec ****************/
+
+
+/************ begin Rule ExitPointSpec ****************
+ *
+ * ExitPointSpec:
+ * 	exitpoint=ID ">";
+ *
+ **/
+
+// exitpoint=ID ">"
+protected class ExitPointSpec_Group extends GroupToken {
+	
+	public ExitPointSpec_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getExitPointSpecAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ExitPointSpec_GreaterThanSignKeyword_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getExitPointSpecRule().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// exitpoint=ID
+protected class ExitPointSpec_ExitpointAssignment_0 extends AssignmentToken  {
+	
+	public ExitPointSpec_ExitpointAssignment_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getExitPointSpecAccess().getExitpointAssignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("exitpoint",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("exitpoint");
+		if(valueSerializer.isValid(obj.getEObject(), grammarAccess.getExitPointSpecAccess().getExitpointIDTerminalRuleCall_0_0(), value, null)) {
+			type = AssignmentType.TERMINAL_RULE_CALL;
+			element = grammarAccess.getExitPointSpecAccess().getExitpointIDTerminalRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ">"
+protected class ExitPointSpec_GreaterThanSignKeyword_1 extends KeywordToken  {
+	
+	public ExitPointSpec_GreaterThanSignKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getExitPointSpecAccess().getGreaterThanSignKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new ExitPointSpec_ExitpointAssignment_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+
+/************ end Rule ExitPointSpec ****************/
+
+
 /************ begin Rule EventSpec ****************
  *
- * //ReactionProperties:
- * //	{ReactionProperties} (properties+=ReactionProperty)*;
- * //
- * //ReactionProperty:
- * //	EntryPointSpec | ExitPointSpec;
- * //
- * //EntryPointSpec:
- * //	'>' entrypoint=[Entrypoint|FQN];
- * //
- * //ExitPointSpec:
- * //	exitpoint=[Exitpoint|FQN] '>';
  * EventSpec:
  * 	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
  *
@@ -5234,8 +5622,6 @@ protected class TimeEventSpec_UnitAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule BuiltinEventSpec ****************
  *
- * //TODO: Group OnCycleEvent and AlwaysEvent, maybe replace it by a DoEvent
- * // | DefaultEvent | OnCycleEvent ;
  * BuiltinEventSpec:
  * 	EntryEvent | ExitEvent | AlwaysEvent;
  *
@@ -5564,8 +5950,6 @@ protected class ExitEvent_ExitKeyword_1 extends KeywordToken  {
 
 /************ begin Rule AlwaysEvent ****************
  *
- * //OnCycleEvent:
- * //	{OnCycleEvent} 'oncycle'; 
  * AlwaysEvent:
  * 	{AlwaysEvent} ("always" | "oncycle");
  *
@@ -5677,9 +6061,6 @@ protected class AlwaysEvent_AlwaysKeyword_1_0 extends KeywordToken  {
 
 /************ begin Rule EventRaisingExpression ****************
  *
- * //DefaultEvent:
- * //	{DefaultEvent} ('default' | 'else')
- * //;
  * // ****************
  * // Expression Grammar
  * // ****************

@@ -26,6 +26,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
 
@@ -152,6 +153,7 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SGraphPackage.Literals.REACTION__TRIGGER);
 			childrenFeatures.add(SGraphPackage.Literals.REACTION__EFFECT);
+			childrenFeatures.add(SGraphPackage.Literals.REACTION__PROPERTIES);
 		}
 		return childrenFeatures;
 	}
@@ -215,6 +217,7 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 				return;
 			case SGraphPackage.TRANSITION__TRIGGER:
 			case SGraphPackage.TRANSITION__EFFECT:
+			case SGraphPackage.TRANSITION__PROPERTIES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -232,6 +235,11 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 	protected void collectNewChildDescriptors(
 			Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REACTION__PROPERTIES,
+				 SGraphFactory.eINSTANCE.createReactionProperty()));
 	}
 
 }

@@ -35,30 +35,33 @@
   <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//EntryKind"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Trigger" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Effect" abstract="true"/>
-  <eClassifiers xsi:type="ecore:EClass" name="SpecificationElement" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="specification" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="../../../org.yakindu.base.types/model/base.ecore#//NamedElement"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Reaction" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
-        transient="true" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Effect"
-        transient="true" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="EntryKind">
     <eLiterals name="initial" literal="INITIAL"/>
     <eLiterals name="shallowHistory" value="1" literal="SHALLOW_HISTORY"/>
     <eLiterals name="deepHistory" value="2" literal="DEEP_HISTORY"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Exit" eSuperTypes="#//Pseudostate"/>
   <eClassifiers xsi:type="ecore:EClass" name="ReactiveElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
         eType="#//Reaction" changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="localReactions" upperBound="-1"
         eType="#//Reaction" changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Exit" eSuperTypes="#//Pseudostate"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Reaction" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="trigger" eType="#//Trigger"
+        transient="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Effect"
+        transient="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//ReactionProperty" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trigger" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Effect" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReactionProperty"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SpecificationElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="specification" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="../../../org.yakindu.base.types/model/base.ecore#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Scope">
     <eStructuralFeatures xsi:type="ecore:EReference" name="declarations" upperBound="-1"
         eType="#//Declaration" containment="true"/>

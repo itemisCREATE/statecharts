@@ -246,6 +246,29 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.ReactionProperty} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ReactionPropertyItemProvider reactionPropertyItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgraph.ReactionProperty}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createReactionPropertyAdapter() {
+		if (reactionPropertyItemProvider == null) {
+			reactionPropertyItemProvider = new ReactionPropertyItemProvider(this);
+		}
+
+		return reactionPropertyItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgraph.Scope} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -466,6 +489,7 @@ public class SGraphItemProviderAdapterFactory extends SGraphAdapterFactory imple
 		if (statechartItemProvider != null) statechartItemProvider.dispose();
 		if (entryItemProvider != null) entryItemProvider.dispose();
 		if (exitItemProvider != null) exitItemProvider.dispose();
+		if (reactionPropertyItemProvider != null) reactionPropertyItemProvider.dispose();
 		if (scopeItemProvider != null) scopeItemProvider.dispose();
 		if (synchronizationItemProvider != null) synchronizationItemProvider.dispose();
 		if (stateItemProvider != null) stateItemProvider.dispose();
