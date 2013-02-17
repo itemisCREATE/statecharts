@@ -2,7 +2,7 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import org.junit.Before;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
-import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sexec.transformation.StructureMapping;
 
@@ -18,7 +18,7 @@ import com.google.inject.Injector;
 public class ModelSequencerTest extends Assert {
 
 	@Inject
-	protected ModelSequencer sequencer;
+	protected IModelSequencer sequencer;
 
 	@Inject
 	protected BehaviorMapping behaviorMapping;

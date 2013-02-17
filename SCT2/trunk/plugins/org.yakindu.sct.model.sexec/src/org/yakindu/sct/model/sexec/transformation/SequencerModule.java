@@ -28,6 +28,10 @@ public class SequencerModule extends AbstractGenericModule {
 				.toInstance(Boolean.FALSE);
 	}
 
+	public Class<? extends IModelSequencer> bindIModelSequencer(){
+		return ModelSequencer.class;
+	}
+	
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return SGraphNameProvider.class;
 	}

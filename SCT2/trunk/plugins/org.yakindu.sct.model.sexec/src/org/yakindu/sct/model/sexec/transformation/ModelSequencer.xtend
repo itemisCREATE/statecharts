@@ -18,7 +18,7 @@ import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
-class ModelSequencer {
+class ModelSequencer implements IModelSequencer {
 	 
 	@Inject extension IQualifiedNameProvider qfnProvider
 	@Inject extension SexecElementMapping mapping
@@ -33,7 +33,7 @@ class ModelSequencer {
 	 */ 
 
 
-	def ExecutionFlow transform(Statechart sc) {
+	override ExecutionFlow transform(Statechart sc) {
 		val ef = sc.create
 		
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow

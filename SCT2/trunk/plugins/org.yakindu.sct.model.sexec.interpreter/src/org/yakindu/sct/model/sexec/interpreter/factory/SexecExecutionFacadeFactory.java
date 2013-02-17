@@ -13,7 +13,7 @@ package org.yakindu.sct.model.sexec.interpreter.factory;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.interpreter.InterpreterModule;
-import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeFactory;
@@ -32,9 +32,9 @@ import com.google.inject.util.Modules;
 public class SexecExecutionFacadeFactory implements IExecutionFacadeFactory {
 
 	@Inject
-	private ModelSequencer sequencer;
+	protected IModelSequencer sequencer;
 	@Inject
-	private IExecutionFlowInterpreter interpreter;
+	protected IExecutionFlowInterpreter interpreter;
 
 	public SexecExecutionFacadeFactory() {
 		Guice.createInjector(
