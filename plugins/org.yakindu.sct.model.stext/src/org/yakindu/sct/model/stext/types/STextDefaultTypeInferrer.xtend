@@ -355,7 +355,7 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	}
 	
 	def dispatch InferenceResult doInferType(EObject e) {
-		throw new IllegalArgumentException("Unsupported reference kind " + e)
+		return inferTypeForLiteral(e);
 	}
 	
 	def protected dispatch ITypeSystemOperator getTypeSystemOperator(UnaryOperator operator){
