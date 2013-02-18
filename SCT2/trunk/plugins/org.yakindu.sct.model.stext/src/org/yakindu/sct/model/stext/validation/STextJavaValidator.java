@@ -111,13 +111,18 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkVariableDefinition(final VariableDefinition definition) {
-		InferenceResult inferType = typeInferrer.inferType(definition);
-		if (!inferType.getIssues().isEmpty()) {
-			// TODO: handle severity and multiple issues here
-			error(inferType.getIssues().iterator().next().getMessage(), null);
-		}
-		else if (typeSystem.isVoidType(inferType.getType())) {
-			error(VARIABLE_VOID_TYPE, null);
+		try {
+			InferenceResult inferType = typeInferrer.inferType(definition);
+			if (!inferType.getIssues().isEmpty()) {
+				// TODO: handle severity and multiple issues here
+				error(inferType.getIssues().iterator().next().getMessage(),
+						null);
+			} else if (typeSystem.isVoidType(inferType.getType())) {
+				error(VARIABLE_VOID_TYPE, null);
+			}
+		} catch (IllegalArgumentException e) {
+			// ignore unknown literals here, as this also happens when a
+			// linking problem occurred, which is handled in other locations
 		}
 	}
 
@@ -170,8 +175,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	private String getVariableName(AssignmentExpression exp) {
 		Expression varRef = exp.getVarRef();
-		if (varRef instanceof ElementReferenceExpression && ((ElementReferenceExpression) varRef)
-				.getReference() instanceof Property) {
+		if (varRef instanceof ElementReferenceExpression
+				&& ((ElementReferenceExpression) varRef).getReference() instanceof Property) {
 			Property reference = (Property) ((ElementReferenceExpression) varRef)
 					.getReference();
 			return reference.getName();
@@ -212,12 +217,17 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (trigger.getGuardExpression() == null) {
 			return;
 		}
-		InferenceResult t = typeInferrer
-				.inferType(trigger.getGuardExpression());
-		if (t == null || t.getType() == null
-				|| !typeSystem.isBooleanType(t.getType())) {
-			error(GUARD_EXPRESSION,
-					StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
+		try {
+			InferenceResult t = typeInferrer.inferType(trigger
+					.getGuardExpression());
+			if (t == null || t.getType() == null
+					|| !typeSystem.isBooleanType(t.getType())) {
+				error(GUARD_EXPRESSION,
+						StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
+			}
+		} catch (IllegalArgumentException e) {
+			// ignore unknown literals here, as this also happens when a
+			// linking problem occurred, which is handled in other locations
 		}
 	}
 
@@ -262,36 +272,42 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	protected void checkEventRaisingExpression(EventRaisingExpression e) {
 		if (e.getEvent() != null) {
-			InferenceResult eventType = typeInferrer.inferType(e.getEvent());
-			if (e.getValue() != null) {
-				// if there is a value, check the event has void type
-				if (eventType == null || eventType.getType() == null) {
-					throw new IllegalArgumentException(
-							"Could not infer a type for event part of EventRaisingExpression"
-									+ e);
+			try {
+				InferenceResult eventType = typeInferrer
+						.inferType(e.getEvent());
+				if (e.getValue() != null) {
+					// if there is a value, check the event has void type
+					if (eventType == null || eventType.getType() == null) {
+						throw new IllegalArgumentException(
+								"Could not infer a type for event part of EventRaisingExpression"
+										+ e);
+					}
+					if (!typeSystem.isVoidType(eventType.getType())) {
+						error("Need to assign a value to an event of type "
+								+ eventType, null);
+					}
+				} else {
+					// check an assignment is possible.
+					InferenceResult valueType = typeInferrer.inferType(e
+							.getValue());
+					if (valueType == null || valueType.getType() == null) {
+						throw new IllegalArgumentException(
+								"Could not infer a type for value part of EventRaisingExpression"
+										+ e);
+					}
+					InferenceResult assignmentResult = typeSystem.inferType(
+							eventType.getType(), valueType.getType(),
+							BinaryOperators.ASSIGN);
+					if (assignmentResult == null
+							|| assignmentResult.getType() == null) {
+						// TODO: could user the issues within result
+						error("Can not assign a value of type " + valueType
+								+ " to an event of type " + eventType, null);
+					}
 				}
-				if (!typeSystem.isVoidType(eventType.getType())) {
-					error("Need to assign a value to an event of type "
-							+ eventType, null);
-				}
-			} else {
-				// check an assignment is possible.
-				InferenceResult valueType = typeInferrer
-						.inferType(e.getValue());
-				if (valueType == null || valueType.getType() == null) {
-					throw new IllegalArgumentException(
-							"Could not infer a type for value part of EventRaisingExpression"
-									+ e);
-				}
-				InferenceResult assignmentResult = typeSystem.inferType(
-						eventType.getType(), valueType.getType(),
-						BinaryOperators.ASSIGN);
-				if (assignmentResult == null
-						|| assignmentResult.getType() == null) {
-					// TODO: could user the issues within result
-					error("Can not assign a value of type " + valueType
-							+ " to an event of type " + eventType, null);
-				}
+			} catch (IllegalArgumentException e1) {
+				// ignore unknown literals here, as this also happens when a
+				// linking problem occurred, which is handled in other locations
 			}
 		}
 	}
@@ -425,12 +441,17 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Check(CheckType.FAST)
 	public void checkExpression(final Statement statement) {
 		if (statement instanceof Expression) {
-			InferenceResult inferType = typeInferrer
-					.inferType((Expression) statement);
-			if (!inferType.getIssues().isEmpty()) {
-				// TODO: handle severity and multiple issues here
-				error(inferType.getIssues().iterator().next().getMessage(),
-						null);
+			try {
+				InferenceResult inferType = typeInferrer
+						.inferType((Expression) statement);
+				if (!inferType.getIssues().isEmpty()) {
+					// TODO: handle severity and multiple issues here
+					error(inferType.getIssues().iterator().next().getMessage(),
+							null);
+				}
+			} catch (IllegalArgumentException e) {
+				// ignore unknown literals here, as this also happens when a
+				// linking problem occurred, which is handled in other locations
 			}
 		}
 	}

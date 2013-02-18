@@ -117,8 +117,7 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 		} else if (literal instanceof Float) {
 			return new InferenceResult(getRealType());
 		}
-		return new InferenceResult(null, new InferenceIssue(
-				"Literal of unknown kind " + literal, IStatus.ERROR));
+		throw new IllegalArgumentException("Literal of unknown kind " + literal);
 	}
 
 	public InferenceResult inferType(InferredType operandType,
