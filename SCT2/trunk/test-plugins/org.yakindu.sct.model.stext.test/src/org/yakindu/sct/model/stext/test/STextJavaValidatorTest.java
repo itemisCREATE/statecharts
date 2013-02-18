@@ -109,6 +109,20 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		validationResult = tester.validate(expression);
 		validationResult.assertOK();
 	}
+	
+	@Test
+	public void checkTimeEventSpecValueExpression(){
+		EObject expression = super.parseExpression("after true s",
+				ReactionTrigger.class.getSimpleName());
+		AssertableDiagnostics validationResult = tester.validate(expression);
+		validationResult
+				.assertErrorContains(STextJavaValidator.TIME_EXPRESSION);
+	}
+	
+	@Test
+	public void checkReactionEffectActionExpression(){
+		// covered by inferrer tests
+	}
 
 	/**
 	 * @see STextJavaValidator#checkOperationArguments_FeatureCall(org.yakindu.sct.model.stext.stext.FeatureCall)
@@ -140,7 +154,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	 * @see STextJavaValidator#checkGuardHasBooleanExpression(org.yakindu.sct.model.stext.stext.ReactionTrigger)
 	 */
 	@Test
-	public void checkGuardHasBooleanExpression() {
+	public void checkGuardExpression() {
 		EObject expression = super.parseExpression("[3 * 3]",
 				ReactionTrigger.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(expression);
@@ -303,14 +317,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		result.assertDiagnosticsCount(2);
 		result.assertAll(errorCode(ONLY_ONE_INTERFACE),
 				errorCode(ONLY_ONE_INTERFACE));
-	}
-
-	/**
-	 * @see STextJavaValidator#checkExpression(org.yakindu.sct.model.sgraph.Statement)
-	 */
-	@Test
-	public void checkExpression() {
-		// Nothing to do, checked by Typeanalyzer tests
 	}
 
 	/**
