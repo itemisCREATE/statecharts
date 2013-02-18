@@ -58,17 +58,12 @@ public abstract class AbstractSTextTest {
 	private StextResourceFactory factory;
 
 	protected StextResource getResource() {
-		final StextResource resource = (StextResource) factory
-				.createResource(URI.createFileURI(""));
-		resource.eAdapters().add(
-				new ContextElementAdapter(
-						new ContextElementAdapter.IContextElementProvider() {
-							public EObject getContextObject() {
-								return (EObject) EcoreUtil.getObjectByType(
-										resource.getContents(),
-										SGraphPackage.Literals.STATECHART);
-							}
-						}));
+		final StextResource resource = (StextResource) factory.createResource(URI.createFileURI(""));
+		resource.eAdapters().add(new ContextElementAdapter(new ContextElementAdapter.IContextElementProvider() {
+			public EObject getContextObject() {
+				return (EObject) EcoreUtil.getObjectByType(resource.getContents(), SGraphPackage.Literals.STATECHART);
+			}
+		}));
 		ResourceSet set = new ResourceSetImpl();
 		set.getResources().add(resource);
 		return resource;
@@ -79,19 +74,16 @@ public abstract class AbstractSTextTest {
 	}
 
 	// TODO: REMOVE
-	protected EObject parseExpression(String expression, Scope scope,
-			String ruleName) {
+	protected EObject parseExpression(String expression, Scope scope, String ruleName) {
 		return parseExpression(expression, ruleName, scope);
 	}
 
-	protected EObject parseExpression(String expression, String ruleName,
-			Scope... context) {
+	protected EObject parseExpression(String expression, String ruleName, Scope... context) {
 		StextResource resource = getResource();
 		resource.setURI(URI.createURI("path", true));
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(ruleName);
-		IParseResult result = parser.parse(parserRule, new StringReader(
-				expression));
+		IParseResult result = parser.parse(parserRule, new StringReader(expression));
 		EObject rootASTElement = result.getRootASTElement();
 		resource.getContents().add(rootASTElement);
 		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
@@ -109,8 +101,7 @@ public abstract class AbstractSTextTest {
 		linker.linkModel(result.getRootASTElement(), diagnosticsConsumer);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
 		resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
-		Multimap<SpecificationElement, Diagnostic> diagnostics = resource
-				.getLinkingDiagnostics();
+		Multimap<SpecificationElement, Diagnostic> diagnostics = resource.getLinkingDiagnostics();
 		if (diagnostics.size() > 0) {
 			throw new RuntimeException(diagnostics.toString());
 		}
@@ -121,13 +112,10 @@ public abstract class AbstractSTextTest {
 				errorMessages.append(iNode.getSyntaxErrorMessage());
 				errorMessages.append("\n");
 			}
-			throw new RuntimeException(
-					"Could not parse expression, syntax errors: "
-							+ errorMessages);
+			throw new RuntimeException("Could not parse expression, syntax errors: " + errorMessages);
 		}
 		if (diagnosticsConsumer.hasConsumedDiagnostics(Severity.ERROR)) {
-			throw new RuntimeException("Error during linking: "
-					+ diagnosticsConsumer.getResult(Severity.ERROR));
+			throw new RuntimeException("Error during linking: " + diagnosticsConsumer.getResult(Severity.ERROR));
 		}
 		return rootASTElement;
 	}
@@ -135,30 +123,31 @@ public abstract class AbstractSTextTest {
 	protected Scope createInternalScope(String contextScope) {
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(InternalScope.class.getSimpleName());
-		IParseResult result = parser.parse(parserRule, new StringReader(
-				contextScope));
+		IParseResult result = parser.parse(parserRule, new StringReader(contextScope));
 		return (Scope) result.getRootASTElement();
 	}
 
 	protected Scope createInterfaceScope(String contextScope) {
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(InterfaceScope.class.getSimpleName());
-		IParseResult result = parser.parse(parserRule, new StringReader(
-				contextScope));
+		IParseResult result = parser.parse(parserRule, new StringReader(contextScope));
 		return (Scope) result.getRootASTElement();
 	}
 
 	/**
 	 * <pre>
 	 * internal: 
-	 * 	 in event abc : integer 
-	 *   in event event1
-	 * 	 operation foo() 
-	 *   operation myOpp1() :integer
-	 * 	 var myInt : integer 
-	 * 	 var myBool : boolean 
-	 * 	 var myReal : real 
-	 * 	 var myString : string
+	 * 	operation voidOp() 
+	 * 	operation intOp():integer 
+	 * 	var intVar : integer 
+	 * 	var boolVar : boolean 
+	 * 	var realVar : real 
+	 * 	var stringVar : string 
+	 * 	event intEvent : integer
+	 *  event boolEvent : boolean
+	 *  event realEvent : real 
+	 *  event stringEvent : string 
+	 *  event voidEvent : void"
 	 * </pre>
 	 */
 	protected Scope internalScope() {
@@ -167,12 +156,13 @@ public abstract class AbstractSTextTest {
 
 	/**
 	 * <pre>
-	 * "interface ABC:
-	 *     operation myOpp2() 
-	 *     myParamOpp(param1 : integer, param2 : boolean ) : string
-	 *     in event event2
-	 *     var myInt : integer
-	 *     in event myIntEvent : integer
+	 * interface ABC :
+	 *  operation paramOp(param1 : integer, param2 : boolean ) : string 
+	 *  operation stringOp() 
+	 *  in event voidEvent  
+	 *  in event intEvent : integer 
+	 *  var intVar : integer 
+	 *  var boolVar : boolean
 	 * </pre>
 	 */
 	protected Scope interfaceScope() {
