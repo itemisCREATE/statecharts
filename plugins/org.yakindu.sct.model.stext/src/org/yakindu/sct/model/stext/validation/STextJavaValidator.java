@@ -34,7 +34,6 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystem.InferenceResult;
-import org.yakindu.base.types.ITypeSystem.InferredType;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
@@ -111,8 +110,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	private String languageName;
 
 	@Check(CheckType.FAST)
-	public void checkVariableType(final VariableDefinition definition) {
-		if (typeSystem.isVoidType(new InferredType(definition.getType()))) {
+	public void checkVariableDefinition(final VariableDefinition definition) {
+		InferenceResult inferType = typeInferrer.inferType(definition);
+		if (!inferType.getIssues().isEmpty()) {
+			// TODO: handle severity and multiple issues here
+			error(inferType.getIssues().iterator().next().getMessage(), null);
+		}
+		else if (typeSystem.isVoidType(inferType.getType())) {
 			error(VARIABLE_VOID_TYPE, null);
 		}
 	}
@@ -166,7 +170,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	private String getVariableName(AssignmentExpression exp) {
 		Expression varRef = exp.getVarRef();
-		if (varRef instanceof ElementReferenceExpression) {
+		if (varRef instanceof ElementReferenceExpression && ((ElementReferenceExpression) varRef)
+				.getReference() instanceof Property) {
 			Property reference = (Property) ((ElementReferenceExpression) varRef)
 					.getReference();
 			return reference.getName();

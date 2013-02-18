@@ -77,10 +77,10 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	}
 
 	/**
-	 * @see STextJavaValidator#checkVariableType(org.yakindu.sct.model.stext.stext.VariableDefinition)
+	 * @see STextJavaValidator#checkVariableDefinition(org.yakindu.sct.model.stext.stext.VariableDefinition)
 	 */
 	@Test
-	public void checkVariableType() {
+	public void checkVariableDefinition() {
 		Scope context = (Scope) parseExpression("interface if : var i : void",
 				null, InterfaceScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
