@@ -117,7 +117,7 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
  			if(definition.initialValue != null){
  				val valueType = definition.initialValue.doInferType
  				if(valueType.type == null){
- 					return new InferenceResult(null, new InferenceIssue("Could not infer type of initial value expression: " + definition.initialValue, IStatus::ERROR))
+					return valueType
  				}
  			
  				// reuse the assignment logic of the type system
@@ -261,7 +261,7 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	def dispatch InferenceResult doInferType(EventRaisingExpression eventRaising){
  		val eventType = eventRaising.event.doInferType
  		if(eventType.type == null) {
- 			return new InferenceResult(null, new InferenceIssue("Could not infer type of event expression: " + eventRaising.event, IStatus::ERROR))
+ 			return eventType
  		}
  		else{
  			if(eventRaising.value == null){
@@ -273,7 +273,7 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
  			else{
  				val valueType = eventRaising.value.doInferType
  				if(valueType.type == null){
- 					return new InferenceResult(null, new InferenceIssue("Could not infer type of value expression: " + eventRaising.value, IStatus::ERROR))
+ 					return valueType
  				}
  			
  				// reuse the assignment logic of the type system
