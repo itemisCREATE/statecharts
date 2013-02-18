@@ -33,6 +33,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
+import org.yakindu.base.types.ITypeSystem.InferenceIssue;
 import org.yakindu.base.types.ITypeSystem.InferenceResult;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
@@ -41,7 +42,6 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
-import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
@@ -65,10 +65,10 @@ import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem.BinaryOperators;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -82,8 +82,7 @@ import com.google.inject.name.Named;
  * @auhor muelder
  * 
  */
-@ComposedChecks(validators = { SGraphJavaValidator.class,
-		SCTResourceValidator.class })
+@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	public static final String CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION = "A choice should have one outgoing default transition";
@@ -94,6 +93,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String ONLY_ONE_INTERFACE = "Only one default/unnamed interface is allowed.";
 	public static final String IN_OUT_DECLARATIONS = "In/Out declarations are not allowed in internal scope.";
 	public static final String LOCAL_DECLARATIONS = "Local declarations are not allowed in interface scope.";
+	public static final String TIME_EXPRESSION = "The evaluation result of a time expression must be of type integer";
 	public static final String GUARD_EXPRESSION = "The evaluation result of a guard expression must be of type boolean";
 	public static final String ASSIGNMENT_EXPRESSION = "No nested assignment of the same variable allowed (different behavior in various programming languages)";
 	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
@@ -102,7 +102,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	private ISTextTypeInferrer typeInferrer;
 	@Inject
 	private ISTextTypeSystem typeSystem;
-
+	@Inject
+	private STextGrammarAccess grammarAccess;
 	@Inject
 	private IQualifiedNameProvider nameProvider;
 	@Inject
@@ -112,13 +113,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Check(CheckType.FAST)
 	public void checkVariableDefinition(final VariableDefinition definition) {
 		try {
-			InferenceResult inferType = typeInferrer.inferType(definition);
-			if (!inferType.getIssues().isEmpty()) {
-				// TODO: handle severity and multiple issues here
-				error(inferType.getIssues().iterator().next().getMessage(),
-						null);
-			} else if (typeSystem.isVoidType(inferType.getType())) {
+			InferenceResult result = typeInferrer.inferType(definition);
+			if (result.getType() != null && typeSystem.isVoidType(result.getType())) {
 				error(VARIABLE_VOID_TYPE, null);
+			} else {
+				report(result, null);
 			}
 		} catch (IllegalArgumentException e) {
 			// ignore unknown literals here, as this also happens when a
@@ -139,8 +138,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkOperationArguments_TypedElementReferenceExpression(
-			final ElementReferenceExpression call) {
+	public void checkOperationArguments_TypedElementReferenceExpression(final ElementReferenceExpression call) {
 		if (call.getReference() instanceof Operation) {
 			Operation operation = (Operation) call.getReference();
 			EList<Parameter> parameters = operation.getParameters();
@@ -156,18 +154,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 		final String name = getVariableName(exp);
 
-		List<AssignmentExpression> contents = EcoreUtil2.eAllOfType(exp,
-				AssignmentExpression.class);
+		List<AssignmentExpression> contents = EcoreUtil2.eAllOfType(exp, AssignmentExpression.class);
 		contents.remove(exp);
 
-		Iterable<AssignmentExpression> filter = Iterables.filter(contents,
-				new Predicate<AssignmentExpression>() {
-					public boolean apply(final AssignmentExpression ex) {
-						String variableName = getVariableName(ex);
-						return variableName.equals(name);
+		Iterable<AssignmentExpression> filter = Iterables.filter(contents, new Predicate<AssignmentExpression>() {
+			public boolean apply(final AssignmentExpression ex) {
+				String variableName = getVariableName(ex);
+				return variableName.equals(name);
 
-					}
-				});
+			}
+		});
 		if (Iterables.size(filter) > 0) {
 			error(ASSIGNMENT_EXPRESSION, null);
 		}
@@ -177,11 +173,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		Expression varRef = exp.getVarRef();
 		if (varRef instanceof ElementReferenceExpression
 				&& ((ElementReferenceExpression) varRef).getReference() instanceof Property) {
-			Property reference = (Property) ((ElementReferenceExpression) varRef)
-					.getReference();
+			Property reference = (Property) ((ElementReferenceExpression) varRef).getReference();
 			return reference.getName();
-		} else if (varRef instanceof FeatureCall
-				&& ((FeatureCall) varRef).getFeature() instanceof Property) {
+		} else if (varRef instanceof FeatureCall && ((FeatureCall) varRef).getFeature() instanceof Property) {
 			Property reference = (Property) ((FeatureCall) varRef).getFeature();
 			return reference.getName();
 		}
@@ -194,8 +188,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			return;
 		}
 		if (call.getFeature() instanceof Scope) {
-			error("A variable, event or operation is required",
-					StextPackage.Literals.FEATURE_CALL__FEATURE,
+			error("A variable, event or operation is required", StextPackage.Literals.FEATURE_CALL__FEATURE,
 					INSIGNIFICANT_INDEX, FEATURE_CALL_TO_SCOPE);
 		}
 	}
@@ -207,24 +200,36 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 		if (call.getReference() instanceof Scope) {
 			error("A variable, event or operation is required",
-					StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
-					INSIGNIFICANT_INDEX, FEATURE_CALL_TO_SCOPE);
+					StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+					FEATURE_CALL_TO_SCOPE);
 		}
 	}
 
 	@Check(CheckType.FAST)
-	public void checkGuardHasBooleanExpression(ReactionTrigger trigger) {
+	public void checkGuardExpression(ReactionTrigger trigger) {
 		if (trigger.getGuardExpression() == null) {
 			return;
 		}
 		try {
-			InferenceResult t = typeInferrer.inferType(trigger
-					.getGuardExpression());
-			if (t == null || t.getType() == null
-					|| !typeSystem.isBooleanType(t.getType())) {
-				error(GUARD_EXPRESSION,
-						StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
+			InferenceResult result = typeInferrer.inferType(trigger.getGuardExpression());
+			if (result.getType() == null || !typeSystem.isBooleanType(result.getType())) {
+				error(GUARD_EXPRESSION, StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
 			}
+			report(result, null);
+		} catch (IllegalArgumentException e) {
+			// ignore unknown literals here, as this also happens when a
+			// linking problem occurred, which is handled in other locations
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkTimeEventSpecValueExpression(TimeEventSpec spec) {
+		try {
+			InferenceResult result = typeInferrer.inferType(spec.getValue());
+			if (result.getType() == null || !typeSystem.isIntegerType(result.getType())) {
+				error(TIME_EXPRESSION, null);
+			}
+			report(result, StextPackage.Literals.TIME_EVENT_SPEC__VALUE);
 		} catch (IllegalArgumentException e) {
 			// ignore unknown literals here, as this also happens when a
 			// linking problem occurred, which is handled in other locations
@@ -237,8 +242,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			if (!(reactionTrigger.eContainer() instanceof LocalReaction)
 					&& (eventSpec instanceof EntryEvent || eventSpec instanceof ExitEvent)) {
 				error("entry and exit events are allowed as local reactions only.",
-						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS,
-						INSIGNIFICANT_INDEX, LOCAL_REACTIONS_NOT_ALLOWED);
+						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, INSIGNIFICANT_INDEX,
+						LOCAL_REACTIONS_NOT_ALLOWED);
+			}
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkReactionEffectActionExpression(ReactionEffect effect) {
+		EList<Expression> actions = effect.getActions();
+		for (Expression expression : actions) {
+			try {
+				report(typeInferrer.inferType(expression), null);
+			} catch (IllegalArgumentException e) {
+				// ignore unknown literals here, as this also happens when a
+				// linking problem occurred, which is handled in other locations
 			}
 		}
 	}
@@ -252,62 +270,17 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public void checkReactionEffectActions(ReactionEffect effect) {
 		for (Expression exp : effect.getActions()) {
 
-			if (!(exp instanceof AssignmentExpression)
-					&& !(exp instanceof EventRaisingExpression)) {
+			if (!(exp instanceof AssignmentExpression) && !(exp instanceof EventRaisingExpression)) {
 
 				if (exp instanceof FeatureCall) {
 					checkFeatureCallEffect((FeatureCall) exp);
 				} else if (exp instanceof ElementReferenceExpression) {
 					checkElementReferenceEffect((ElementReferenceExpression) exp);
 				} else {
-					error("Action has no effect.",
-							StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-							effect.getActions().indexOf(exp),
-							FEATURE_CALL_HAS_NO_EFFECT);
+					error("Action has no effect.", StextPackage.Literals.REACTION_EFFECT__ACTIONS, effect.getActions()
+							.indexOf(exp), FEATURE_CALL_HAS_NO_EFFECT);
 				}
 
-			}
-		}
-	}
-
-	protected void checkEventRaisingExpression(EventRaisingExpression e) {
-		if (e.getEvent() != null) {
-			try {
-				InferenceResult eventType = typeInferrer
-						.inferType(e.getEvent());
-				if (e.getValue() != null) {
-					// if there is a value, check the event has void type
-					if (eventType == null || eventType.getType() == null) {
-						throw new IllegalArgumentException(
-								"Could not infer a type for event part of EventRaisingExpression"
-										+ e);
-					}
-					if (!typeSystem.isVoidType(eventType.getType())) {
-						error("Need to assign a value to an event of type "
-								+ eventType, null);
-					}
-				} else {
-					// check an assignment is possible.
-					InferenceResult valueType = typeInferrer.inferType(e
-							.getValue());
-					if (valueType == null || valueType.getType() == null) {
-						throw new IllegalArgumentException(
-								"Could not infer a type for value part of EventRaisingExpression"
-										+ e);
-					}
-					InferenceResult assignmentResult = typeSystem.inferType(
-							eventType.getType(), valueType.getType(),
-							BinaryOperators.ASSIGN);
-					if (assignmentResult == null
-							|| assignmentResult.getType() == null) {
-						// TODO: could user the issues within result
-						error("Can not assign a value of type " + valueType
-								+ " to an event of type " + eventType, null);
-					}
-				}
-			} catch (IllegalArgumentException e1) {
-				// ignore unknown literals here, as this also happens when a
-				// linking problem occurred, which is handled in other locations
 			}
 		}
 	}
@@ -316,23 +289,17 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (call.getFeature() != null && call.getFeature() instanceof Feature
 				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
-				error("Access to property '"
-						+ nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call,
-						StextPackage.Literals.FEATURE_CALL__FEATURE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+				error("Access to property '" + nameProvider.getFullyQualifiedName(call.getFeature())
+						+ "' has no effect.", call, StextPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (call.getFeature() instanceof Event) {
-				error("Access to event '"
-						+ nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call,
-						StextPackage.Literals.FEATURE_CALL__FEATURE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+				error("Access to event '" + nameProvider.getFullyQualifiedName(call.getFeature()) + "' has no effect.",
+						call, StextPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
-				error("Access to feature '"
-						+ nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call,
-						StextPackage.Literals.FEATURE_CALL__FEATURE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+				error("Access to feature '" + nameProvider.getFullyQualifiedName(call.getFeature())
+						+ "' has no effect.", call, StextPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -340,25 +307,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	protected void checkElementReferenceEffect(ElementReferenceExpression refExp) {
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {
-				error("Access to property '"
-						+ nameProvider.getFullyQualifiedName(refExp
-								.getReference()) + "' has no effect.",
-						refExp,
-						StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
+						+ "' has no effect.", refExp, StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (refExp.getReference() instanceof Event) {
-				error("Access to event '"
-						+ nameProvider.getFullyQualifiedName(refExp
-								.getReference()) + "' has no effect.",
-						refExp,
-						StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
+						+ "' has no effect.", refExp, StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
-				error("Access to feature '"
-						+ nameProvider.getFullyQualifiedName(refExp
-								.getReference()) + "' has no effect.",
-						refExp,
-						StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
+						+ "' has no effect.", refExp, StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
 						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
@@ -366,92 +324,27 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkEventDefinition(EventDefinition event) {
-		if (event.eContainer() instanceof InterfaceScope
-				&& event.getDirection() == Direction.LOCAL) {
-			error(LOCAL_DECLARATIONS,
-					StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
+		if (event.eContainer() instanceof InterfaceScope && event.getDirection() == Direction.LOCAL) {
+			error(LOCAL_DECLARATIONS, StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
 		}
-		if (event.eContainer() instanceof InternalScope
-				&& event.getDirection() != Direction.LOCAL) {
-			error(IN_OUT_DECLARATIONS,
-					StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
+		if (event.eContainer() instanceof InternalScope && event.getDirection() != Direction.LOCAL) {
+			error(IN_OUT_DECLARATIONS, StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
 		}
 	}
-
-	@Inject
-	STextGrammarAccess grammarAccess;
 
 	@Check(CheckType.FAST)
 	public void checkInterfaceScope(ScopedElement statechart) {
 		List<InterfaceScope> defaultInterfaces = new LinkedList<InterfaceScope>();
 
 		for (Scope scope : statechart.getScopes()) {
-			if (scope instanceof InterfaceScope
-					&& ((InterfaceScope) scope).getName() == null) {
+			if (scope instanceof InterfaceScope && ((InterfaceScope) scope).getName() == null) {
 				defaultInterfaces.add((InterfaceScope) scope);
 			}
 		}
 		if (defaultInterfaces.size() > 1) {
 			for (InterfaceScope scope : defaultInterfaces) {
-				error(ONLY_ONE_INTERFACE, scope, grammarAccess
-						.getInterfaceScopeAccess().getInterfaceKeyword_1(),
-						ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-						ONLY_ONE_INTERFACE);
-			}
-		}
-	}
-
-	protected void error(String message, EObject source, Keyword keyword,
-			int index, String code) {
-		final String[] issueData = null;
-		ICompositeNode rootNode = NodeModelUtils.findActualNodeFor(source);
-		if (rootNode != null) {
-			INode child = findNode(source, false, rootNode, keyword,
-					new int[] { index });
-			if (child != null) {
-				int offset = child.getTotalOffset();
-				int length = child.getTotalLength();
-				getMessageAcceptor().acceptError(message, source, offset,
-						length, code, issueData);
-				return;
-			}
-		}
-		error(message, source, (EStructuralFeature) null,
-				ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
-	}
-
-	// private void reportIssues(Collection<InferenceIssue> issues) {
-	// int severity = IStatus.OK;
-	// String message = "";
-	// for (InferenceIssue issue : issues) {
-	// if (issue.getSeverity() > severity) {
-	// severity = issue.getSeverity();
-	// }
-	// if (message.length() > 0) {
-	// message += "; ";
-	// }
-	// message += issue.getMessage();
-	// }
-	// if (severity == IStatus.ERROR) {
-	// error(message, null);
-	// } else if (severity == IStatus.WARNING) {
-	// warning(message, null);
-	// }
-	// }
-	@Check(CheckType.FAST)
-	public void checkExpression(final Statement statement) {
-		if (statement instanceof Expression) {
-			try {
-				InferenceResult inferType = typeInferrer
-						.inferType((Expression) statement);
-				if (!inferType.getIssues().isEmpty()) {
-					// TODO: handle severity and multiple issues here
-					error(inferType.getIssues().iterator().next().getMessage(),
-							null);
-				}
-			} catch (IllegalArgumentException e) {
-				// ignore unknown literals here, as this also happens when a
-				// linking problem occurred, which is handled in other locations
+				error(ONLY_ONE_INTERFACE, scope, grammarAccess.getInterfaceScopeAccess().getInterfaceKeyword_1(),
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ONLY_ONE_INTERFACE);
 			}
 		}
 	}
@@ -466,22 +359,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 		if (!found)
-			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION,
-					SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
+			warning(CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS);
 	}
 
 	protected boolean isDefault(Trigger trigger) {
 
 		return trigger == null
 				|| trigger instanceof DefaultTrigger
-				|| ((trigger instanceof ReactionTrigger)
-						&& ((ReactionTrigger) trigger).getTriggers().size() == 0 && ((ReactionTrigger) trigger)
+				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0 && ((ReactionTrigger) trigger)
 						.getGuardExpression() == null);
 	}
 
 	@Override
-	protected String getCurrentLanguage(Map<Object, Object> context,
-			EObject eObject) {
+	protected String getCurrentLanguage(Map<Object, Object> context, EObject eObject) {
 		Resource eResource = eObject.eResource();
 		if (eResource instanceof XtextResource) {
 			return super.getCurrentLanguage(context, eObject);
@@ -489,11 +379,33 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			return ((AbstractSCTResource) eResource).getLanguageName();
 		}
 		return "";
+	}
+
+	protected void error(String message, EObject source, Keyword keyword, int index, String code) {
+		final String[] issueData = null;
+		ICompositeNode rootNode = NodeModelUtils.findActualNodeFor(source);
+		if (rootNode != null) {
+			INode child = findNode(source, false, rootNode, keyword, new int[] { index });
+			if (child != null) {
+				int offset = child.getTotalOffset();
+				int length = child.getTotalLength();
+				getMessageAcceptor().acceptError(message, source, offset, length, code, issueData);
+				return;
+			}
+		}
+		error(message, source, (EStructuralFeature) null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
+	}
+
+	protected void report(InferenceResult result, EStructuralFeature feature) {
+		if (result.getIssues().isEmpty())
+			return;
+		// TODO: Sort issues by severity and evaluate severity
+		InferenceIssue error = Iterables.getLast(result.getIssues());
+		error(error.getMessage(), feature);
 
 	}
 
-	private INode findNode(EObject source, boolean sourceFound, INode root,
-			Keyword keyword, int[] index) {
+	private INode findNode(EObject source, boolean sourceFound, INode root, Keyword keyword, int[] index) {
 		if (sourceFound && root.getSemanticElement() != source) {
 			return null;
 		}
@@ -504,9 +416,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		// .equals or == does not work because sub grammars use their own
 		// Modules with custom
 		// grammarAccess instance and .equals is not overwritten.
-		if (grammarElement instanceof Keyword
-				&& keyword.getValue().equals(
-						((Keyword) grammarElement).getValue())) {
+		if (grammarElement instanceof Keyword && keyword.getValue().equals(((Keyword) grammarElement).getValue())) {
 			if (index[0] != INSIGNIFICANT_INDEX) {
 				index[0]--;
 			}
@@ -517,8 +427,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (root instanceof ICompositeNode) {
 			ICompositeNode node = (ICompositeNode) root;
 			for (INode child : node.getChildren()) {
-				INode result = findNode(source, sourceFound, child, keyword,
-						index);
+				INode result = findNode(source, sourceFound, child, keyword, index);
 				if (result != null) {
 					return result;
 				}
