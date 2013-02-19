@@ -48,7 +48,7 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor implements ISelectionChangedListener {
 
 	private static final String SUBDIAGRAM = "Subdiagram - ";
-	private SCTBreadcrumbViewer viewer;
+	private DiagramPartitioningBreadcrumbViewer viewer;
 
 	public BreadcrumbDiagramEditor(boolean hasFlyoutPalette) {
 		super(hasFlyoutPalette);
@@ -88,7 +88,7 @@ public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor impl
 	}
 
 	private void createBreadcrumbViewer(Composite parent) {
-		viewer = new SCTBreadcrumbViewer(parent, SWT.READ_ONLY);
+		viewer = new DiagramPartitioningBreadcrumbViewer(parent, SWT.READ_ONLY);
 		viewer.addSelectionChangedListener(this);
 		viewer.setContentProvider(new BreadcrumbViewerContentProvider());
 		viewer.setLabelProvider(new BreadcrumbViewerLabelProvider());

@@ -63,9 +63,9 @@ import org.yakindu.sct.ui.editor.StatechartImages;
  * 
  */
 @SuppressWarnings("restriction")
-public class SCTBreadcrumbViewer extends BreadcrumbViewer implements ISelectionChangedListener {
+public class DiagramPartitioningBreadcrumbViewer extends BreadcrumbViewer implements ISelectionChangedListener {
 
-	public SCTBreadcrumbViewer(Composite parent, int style) {
+	public DiagramPartitioningBreadcrumbViewer(Composite parent, int style) {
 		super(parent, style);
 	}
 

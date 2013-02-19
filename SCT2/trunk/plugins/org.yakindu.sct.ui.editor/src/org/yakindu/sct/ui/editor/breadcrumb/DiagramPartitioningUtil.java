@@ -20,7 +20,9 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -28,6 +30,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -42,6 +45,20 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * 
  */
 public class DiagramPartitioningUtil {
+
+	private static final String DOMAIN_ID = "SubDiagramDomain";
+
+	public static synchronized TransactionalEditingDomain getSharedDomain() {
+		TransactionalEditingDomain editingDomain = TransactionalEditingDomain.Registry.INSTANCE
+				.getEditingDomain(DOMAIN_ID);
+		if (editingDomain == null) {
+			editingDomain = DiagramEditingDomainFactory.getInstance().createEditingDomain();
+			editingDomain.setID(DOMAIN_ID);
+			TransactionalEditingDomain.Registry.INSTANCE.add(DOMAIN_ID, editingDomain);
+		}
+		return editingDomain;
+
+	}
 
 	public static Diagram getDiagramContaining(EObject element) {
 		Resource eResource = element.eResource();
@@ -83,19 +100,20 @@ public class DiagramPartitioningUtil {
 
 	}
 
-	public static void openEditor(Diagram diagramToOpen) {
+	public static IEditorPart openEditor(Diagram diagramToOpen) {
 		IFile file = WorkspaceSynchronizer.getFile(diagramToOpen.eResource());
 		try {
 			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
 			final IWorkbenchPage wbPage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			if (diagramToOpen.getElement() instanceof Statechart) {
-				wbPage.openEditor(new FileEditorInput(file), desc.getId());
+				return wbPage.openEditor(new FileEditorInput(file), desc.getId());
 			} else if (diagramToOpen.getElement() instanceof State) {
-				wbPage.openEditor(new DiagramEditorInput(diagramToOpen), desc.getId());
+				return wbPage.openEditor(new DiagramEditorInput(diagramToOpen), desc.getId());
 			}
 		} catch (PartInitException e) {
 			e.printStackTrace();
 		}
+		return null;
 	}
 
 	public static boolean closeSubdiagramEditors(State state) {
