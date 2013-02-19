@@ -43,6 +43,7 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.breadcrumb.BreadcrumbDiagramEditor;
+import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
@@ -145,8 +146,13 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements 
 	}
 
 	@Override
+	public TransactionalEditingDomain getEditingDomain() {
+		return DiagramPartitioningUtil.getSharedDomain();
+	}
+
+	@Override
 	protected TransactionalEditingDomain createEditingDomain() {
-		TransactionalEditingDomain domain = super.createEditingDomain();
+		TransactionalEditingDomain domain = DiagramPartitioningUtil.getSharedDomain();
 		domainAdapter = new DirtyStateListener();
 		domain.addResourceSetListener(domainAdapter);
 		return domain;
@@ -189,7 +195,6 @@ public class StatechartDiagramEditor extends BreadcrumbDiagramEditor implements 
 		validationJob.cancel();
 		getEditingDomain().removeResourceSetListener(validationListener);
 		getEditingDomain().removeResourceSetListener(domainAdapter);
-		//TODO: check why this can be null
 		if (domainAdapter != null)
 			domainAdapter.dispose();
 		IFileEditorInput editorInput = (IFileEditorInput) getEditorInput();

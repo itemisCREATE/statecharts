@@ -13,14 +13,15 @@ package org.yakindu.sct.ui.editor.providers;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocument;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.DiagramDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.document.FileDiagramDocumentProvider;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.document.FileEditorInputProxy;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.ui.IEditorInput;
 import org.yakindu.sct.ui.editor.breadcrumb.DiagramEditorInput;
+import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
 
 /**
  * 
@@ -33,18 +34,20 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 		if (editorInput instanceof DiagramEditorInput) {
 			return editorInput;
 		}
-		return super.createInputWithEditingDomain(editorInput, domain);
+		return super.createInputWithEditingDomain(editorInput, DiagramPartitioningUtil.getSharedDomain());
+	}
+
+	@Override
+	protected IDocument createEmptyDocument() {
+		DiagramDocument diagramDocument = new DiagramDocument();
+		diagramDocument.setEditingDomain(DiagramPartitioningUtil.getSharedDomain());
+		return diagramDocument;
 	}
 
 	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info = super.createElementInfo(element);
-		// If the editor is a subdiagram, set the dirty flag to true if the
-		// resourceset is dirty
-		if (element instanceof IDiagramEditorInput) {
-			Diagram diagram = ((IDiagramEditorInput) element).getDiagram();
-			info.fCanBeSaved = isDirty(TransactionUtil.getEditingDomain(diagram));
-		}
+		info.fCanBeSaved = isDirty(DiagramPartitioningUtil.getSharedDomain());
 		return info;
 	}
 
@@ -59,11 +62,12 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 
 	@Override
 	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput) throws CoreException {
-		if (editorInput instanceof IDiagramEditorInput) {
+		if (editorInput instanceof DiagramEditorInput) {
 			Diagram diagram = ((IDiagramEditorInput) editorInput).getDiagram();
-			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(diagram);
-			((IDiagramDocument) document).setEditingDomain(editingDomain);
 			document.setContent(diagram);
+			return true;
+		} else if (editorInput instanceof FileEditorInputProxy) {
+			setDocumentContentFromStorage(document, ((FileEditorInputProxy) editorInput).getFile());
 			return true;
 		}
 		return super.setDocumentContent(document, editorInput);

@@ -11,11 +11,11 @@
 package org.yakindu.sct.ui.editor.breadcrumb;
 
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.MEditingDomainElement;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.ui.IPersistableElement;
 import org.eclipse.ui.part.FileEditorInput;
 
 /**
@@ -63,7 +63,15 @@ public class DiagramEditorInput extends FileEditorInput implements IDiagramEdito
 	}
 
 	public TransactionalEditingDomain getEditingDomain() {
-		return TransactionUtil.getEditingDomain(diagram);
+		return DiagramPartitioningUtil.getSharedDomain();
+	}
+
+	@Override
+	public IPersistableElement getPersistable() {
+		// TODO: It is currently not possible to restore Editors with open
+		// DiagramEditorInput cause they will not act on the shared editing
+		// domain
+		return null;
 	}
 
 }
