@@ -13,26 +13,23 @@ package org.yakindu.sct.simulation.ui.model.presenter;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
 import org.eclipse.debug.ui.sourcelookup.ISourceDisplay;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
-import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
 
 import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
-import de.itemis.gmf.runtime.commons.util.EditPartUtils;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -40,7 +37,7 @@ import de.itemis.gmf.runtime.commons.util.EditPartUtils;
  */
 public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener {
 
-	private DiagramDocumentEditor prevEditor;
+	private IEditorPart prevEditor;
 	private SCTDebugTarget lastActiveTarget;
 	private Map<IExecutionFacade, IDynamicNotationHandler> _handler;
 
@@ -49,29 +46,24 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener 
 		DebugPlugin.getDefault().addDebugEventListener(this);
 	}
 
-	public void displaySource(Object element, IWorkbenchPage page,
-			boolean forceSourceLookup) {
+	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
 		SCTDebugElement debugElement = (SCTDebugElement) element;
 		if (debugElement.getDebugTarget().isTerminated())
 			return;
-		DiagramDocumentEditor editor = openEditorAndSelectElements(
-				debugElement, page);
-		if (debugElement.getDebugTarget() == lastActiveTarget
-				&& prevEditor == editor) {
+		IEditorPart editor = openEditor(debugElement, page);
+		if (debugElement.getDebugTarget() == lastActiveTarget && prevEditor == editor) {
 			return;
 		}
 		prevEditor = editor;
 		lastActiveTarget = (SCTDebugTarget) debugElement.getDebugTarget();
 
-		IExecutionFacade facade = (IExecutionFacade) debugElement
-				.getAdapter(IExecutionFacade.class);
+		IExecutionFacade facade = (IExecutionFacade) debugElement.getAdapter(IExecutionFacade.class);
 		IDynamicNotationHandler handler = _handler.get(facade);
 		if (handler == null) {
 			handler = createNotationHandler(facade);
 
 		}
-		IHighlightingSupport support = (IHighlightingSupport) editor
-				.getAdapter(IHighlightingSupport.class);
+		IHighlightingSupport support = (IHighlightingSupport) editor.getAdapter(IHighlightingSupport.class);
 		handler.setHighlightingSupport(support);
 		if (support.isLocked())
 			support.releaseEditor();
@@ -79,8 +71,7 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener 
 		handler.restoreNotationState(facade.getExecutionContext());
 	}
 
-	private IDynamicNotationHandler createNotationHandler(
-			IExecutionFacade facade) {
+	private IDynamicNotationHandler createNotationHandler(IExecutionFacade facade) {
 		IDynamicNotationHandler handler = new ExecutionPathDynamicNotationHandler();
 		facade.addTraceListener(handler);
 		_handler.put(facade, handler);
@@ -105,8 +96,7 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener 
 		Object source = debugEvent.getSource();
 		if (source instanceof SCTDebugTarget) {
 			SCTDebugTarget target = (SCTDebugTarget) source;
-			IExecutionFacade facade = (IExecutionFacade) target
-					.getAdapter(IExecutionFacade.class);
+			IExecutionFacade facade = (IExecutionFacade) target.getAdapter(IExecutionFacade.class);
 			if (_handler.containsKey(facade)) {
 				IDynamicNotationHandler handler = _handler.get(facade);
 				if (handler.getHighlightingSupport().isLocked())
@@ -117,28 +107,19 @@ public class SCTSourceDisplay implements ISourceDisplay, IDebugEventSetListener 
 		}
 	}
 
-	private DiagramDocumentEditor openEditorAndSelectElements(
-			SCTDebugElement debugElement, IWorkbenchPage page) {
-		String platformString = debugElement.getResourceString();
-		IResource resource = ResourcesPlugin.getWorkspace().getRoot()
-				.findMember(platformString);
-		DiagramDocumentEditor editor = null;
-		try {
-			editor = (DiagramDocumentEditor) page.openEditor(
-					new FileEditorInput(((IFile) resource)),
-					StatechartDiagramEditor.ID);
-			IGraphicalEditPart editPart = EditPartUtils
-					.findEditPartForSemanticElement(editor
-							.getDiagramGraphicalViewer().getRootEditPart(),
-							(EObject) debugElement.getAdapter(EObject.class));
-			if (editPart != null) {
-				editor.getDiagramGraphicalViewer().select(editPart);
-				editor.getDiagramGraphicalViewer().reveal(editPart);
+	private IEditorPart openEditor(SCTDebugElement debugElement, IWorkbenchPage page) {
+		EObject semanticObject = (EObject) debugElement.getAdapter(EObject.class);
+		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
+		// We have to set the input diagram loaded via shared editing domain
+		Resource sharedDomainResource = DiagramPartitioningUtil.getSharedDomain().getResourceSet()
+				.getResource(semanticObject.eResource().getURI(), true);
+		EList<EObject> contents = sharedDomainResource.getContents();
+		for (EObject eObject : contents) {
+			if (EcoreUtil.equals(eObject, diagram)) {
+				return DiagramPartitioningUtil.openEditor((Diagram) eObject);
 			}
-		} catch (PartInitException e) {
-			e.printStackTrace();
 		}
-		return editor;
+		throw new RuntimeException("No Diagram found for semantic object " + semanticObject);
 	}
 
 }
