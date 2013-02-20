@@ -17,23 +17,32 @@ import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewType;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewRequest.ViewDescriptor;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
+import org.yakindu.sct.ui.editor.editparts.StateEditPart;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StateCompartmentCreationEditPolicy extends
-		CompartmentCreationEditPolicy {
+public class StateCompartmentCreationEditPolicy extends CompartmentCreationEditPolicy {
 
 	@Override
 	protected Command getCreateCommand(CreateViewRequest request) {
-		List<? extends ViewDescriptor> viewDescriptors = request
-				.getViewDescriptors();
+
+		StateEditPart parent = (StateEditPart) getHost().getParent();
+
+		BooleanValueStyle isInline = GMFNotationUtil.getBooleanValueStyle(parent.getNotationView(),
+				DiagramPartitioningUtil.INLINE_STYLE);
+		if (isInline != null && !isInline.isBooleanValue())
+			return UnexecutableCommand.INSTANCE;
+
+		List<? extends ViewDescriptor> viewDescriptors = request.getViewDescriptors();
 		for (ViewDescriptor viewDescriptor : viewDescriptors) {
 			String semanticHint = viewDescriptor.getSemanticHint();
-			if (ViewType.NOTE.equals(semanticHint)
-					|| ViewType.NOTEATTACHMENT.equals(semanticHint)
+			if (ViewType.NOTE.equals(semanticHint) || ViewType.NOTEATTACHMENT.equals(semanticHint)
 					|| ViewType.TEXT.equals(semanticHint)) {
 				return UnexecutableCommand.INSTANCE;
 			}
