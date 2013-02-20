@@ -8,9 +8,9 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.breadcrumb;
+package org.yakindu.sct.ui.editor.partitioning;
 
-import static org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil.openEditor;
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.openEditor;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -146,7 +146,7 @@ public class DiagramPartitioningBreadcrumbViewer extends BreadcrumbViewer implem
 	public void selectionChanged(SelectionChangedEvent event) {
 		Object selection = ((IStructuredSelection) event.getSelection()).getFirstElement();
 		if (selection instanceof State || selection instanceof Statechart) {
-			Diagram diagram = DiagramPartitioningUtil.getSubDiagram((EObject) selection);
+			Diagram diagram = DiagramPartitioningUtil.getSubDiagram((CompositeElement) selection);
 			openEditor(diagram);
 		} else if (selection instanceof IFile) {
 			openEditor((IFile) selection);
@@ -230,7 +230,8 @@ public class DiagramPartitioningBreadcrumbViewer extends BreadcrumbViewer implem
 			for (Region region : regions) {
 				EList<Vertex> vertices = region.getVertices();
 				for (Vertex vertex : vertices) {
-					if (vertex instanceof State && DiagramPartitioningUtil.getSubDiagram(vertex) != null) {
+					if (vertex instanceof State
+							&& DiagramPartitioningUtil.getSubDiagram((CompositeElement) vertex) != null) {
 						result.add(vertex);
 					}
 				}

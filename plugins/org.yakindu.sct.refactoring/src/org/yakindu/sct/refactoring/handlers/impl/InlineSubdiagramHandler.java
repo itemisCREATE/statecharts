@@ -17,8 +17,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.yakindu.sct.refactoring.handlers.AbstractViewRefactoringHandler;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.InlineSubdiagramRefactoring;
-import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 /**
  * Handler for {@link InlineSubdiagramRefactoring}.

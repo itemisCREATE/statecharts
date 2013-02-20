@@ -8,27 +8,57 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.providers;
+package org.yakindu.sct.ui.editor.partitioning;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.DiagramDocument;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.DiagramModificationListener;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDiagramDocumentProvider;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocument;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.document.FileDiagramDocumentProvider;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.document.FileDiagramModificationListener;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.ide.document.FileEditorInputProxy;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.ui.IEditorInput;
-import org.yakindu.sct.ui.editor.breadcrumb.DiagramEditorInput;
-import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
+import org.eclipse.ui.IFileEditorInput;
 
 /**
+ * Implementation of the {@link IDiagramDocumentProvider} interface that extends
+ * a {@link FileDiagramDocumentProvider}.
+ * 
+ * In addition to the {@link FileDiagramDocumentProvider}, this implementation
+ * acts on a shared editing domain and can handle custom
+ * {@link DiagramEditorInput}. It also unloads non used resources with help of
+ * the {@link ResourceUnloadingTool}
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProvider {
+
+	/**
+	 * Extension of {@link DiagramFileInfo} that stores the given
+	 * {@link IEditorInput} which is required for the
+	 * {@link ResourceUnloadingTool}
+	 */
+	protected class InputDiagramFileInfo extends DiagramFileInfo {
+
+		private final IEditorInput editorInput;
+
+		public InputDiagramFileInfo(IDocument document, FileSynchronizer fileSynchronizer,
+				DiagramModificationListener listener, IEditorInput editorInput) {
+			super(document, fileSynchronizer, listener);
+			this.editorInput = editorInput;
+		}
+
+		public IEditorInput getEditorInput() {
+			return editorInput;
+		}
+	}
 
 	public IEditorInput createInputWithEditingDomain(IEditorInput editorInput, TransactionalEditingDomain domain) {
 		if (editorInput instanceof DiagramEditorInput) {
@@ -37,6 +67,9 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 		return super.createInputWithEditingDomain(editorInput, DiagramPartitioningUtil.getSharedDomain());
 	}
 
+	/**
+	 * Sets the {@link EditingDomain} to the shared instance
+	 */
 	@Override
 	protected IDocument createEmptyDocument() {
 		DiagramDocument diagramDocument = new DiagramDocument();
@@ -47,6 +80,8 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info = super.createElementInfo(element);
+		// the canBeSaved flag is calculated based on the dirty state of the
+		// editingdomains resourceset
 		info.fCanBeSaved = isDirty(DiagramPartitioningUtil.getSharedDomain());
 		return info;
 	}
@@ -60,9 +95,21 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 		return false;
 	}
 
+	protected FileInfo createFileInfo(IDocument document, FileSynchronizer synchronizer, IFileEditorInput input) {
+		assert document instanceof DiagramDocument;
+
+		DiagramModificationListener diagramListener = null;
+		if (((DiagramDocument) document).getDiagram() != null) {
+			diagramListener = new FileDiagramModificationListener(this, (DiagramDocument) document, input);
+		}
+		InputDiagramFileInfo info = new InputDiagramFileInfo(document, synchronizer, diagramListener, input);
+		diagramListener.startListening();
+		return info;
+	}
+
 	@Override
 	protected boolean setDocumentContent(IDocument document, IEditorInput editorInput) throws CoreException {
-		if (editorInput instanceof DiagramEditorInput) {
+		if (editorInput instanceof IDiagramEditorInput) {
 			Diagram diagram = ((IDiagramEditorInput) editorInput).getDiagram();
 			document.setContent(diagram);
 			return true;
@@ -80,6 +127,10 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 		// Unset the content first to avoid call to DiagramIOUtil.unload
 		super.disposeElementInfo(element, info);
 		info.fDocument.setContent(content);
+		if (info instanceof InputDiagramFileInfo) {
+			// Unload non needed resources
+			ResourceUnloadingTool.unloadEditorInput(DiagramPartitioningUtil.getSharedDomain().getResourceSet(),
+					((InputDiagramFileInfo) info).getEditorInput());
+		}
 	}
-
 }

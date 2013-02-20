@@ -16,7 +16,7 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**

@@ -20,7 +20,7 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.DestroyElementCommand;
 import org.eclipse.gmf.runtime.emf.type.core.edithelper.AbstractEditHelper;
 import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyElementRequest;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 /**
  * 

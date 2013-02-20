@@ -8,8 +8,9 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.breadcrumb;
+package org.yakindu.sct.ui.editor.partitioning;
 
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
@@ -72,6 +73,14 @@ public class DiagramEditorInput extends FileEditorInput implements IDiagramEdito
 		// DiagramEditorInput cause they will not act on the shared editing
 		// domain
 		return null;
+	}
+
+	@Override
+	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
+		if (adapter == IStorage.class) {
+			return WorkspaceSynchronizer.getFile(diagram.eResource());
+		}
+		return super.getAdapter(adapter);
 	}
 
 }

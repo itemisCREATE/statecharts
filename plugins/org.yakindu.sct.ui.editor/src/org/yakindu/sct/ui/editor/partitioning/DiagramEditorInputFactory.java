@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.breadcrumb;
+package org.yakindu.sct.ui.editor.partitioning;
 
 import java.io.IOException;
 import java.util.Collections;

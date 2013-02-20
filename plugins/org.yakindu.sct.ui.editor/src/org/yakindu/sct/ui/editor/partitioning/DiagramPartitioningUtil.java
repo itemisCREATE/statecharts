@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.breadcrumb;
+package org.yakindu.sct.ui.editor.partitioning;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +16,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,6 +27,7 @@ import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
@@ -36,8 +38,10 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 
 /**
  * 
@@ -46,8 +50,20 @@ import org.yakindu.sct.model.sgraph.Statechart;
  */
 public class DiagramPartitioningUtil {
 
-	private static final String DOMAIN_ID = "SubDiagramDomain";
+	/** GMFs notation {@link Style} id **/
+	public static final String INLINE_STYLE = "isInline";
 
+	private static final String DOMAIN_ID = "StatechartDomain";
+
+	private DiagramPartitioningUtil() {
+	}
+
+	/**
+	 * Returns the Shared Editing Domain that is used for all Editors acting on
+	 * the same {@link IResource}
+	 * 
+	 * @return the {@link TransactionalEditingDomain}
+	 */
 	public static synchronized TransactionalEditingDomain getSharedDomain() {
 		TransactionalEditingDomain editingDomain = TransactionalEditingDomain.Registry.INSTANCE
 				.getEditingDomain(DOMAIN_ID);
@@ -57,9 +73,11 @@ public class DiagramPartitioningUtil {
 			TransactionalEditingDomain.Registry.INSTANCE.add(DOMAIN_ID, editingDomain);
 		}
 		return editingDomain;
-
 	}
 
+	/**
+	 * Returns the {@link Diagram} that contains a given semantic element.
+	 */
 	public static Diagram getDiagramContaining(EObject element) {
 		Resource eResource = element.eResource();
 		Collection<Diagram> objects = EcoreUtil.getObjectsByType(eResource.getContents(),
@@ -78,7 +96,11 @@ public class DiagramPartitioningUtil {
 		return null;
 	}
 
-	public static Diagram getSubDiagram(EObject element) {
+	/**
+	 * Returns the Subdiagram for a given {@link State} or {@link Statechart}
+	 * 
+	 */
+	public static Diagram getSubDiagram(CompositeElement element) {
 		Resource eResource = element.eResource();
 		Collection<Diagram> objects = EcoreUtil.getObjectsByType(eResource.getContents(),
 				NotationPackage.Literals.DIAGRAM);
@@ -89,6 +111,10 @@ public class DiagramPartitioningUtil {
 		return null;
 	}
 
+	/**
+	 * Opens the {@link StatechartDiagramEditor} for a fiven {@link IFile}
+	 * 
+	 */
 	public static void openEditor(IFile file) {
 		try {
 			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
@@ -100,6 +126,9 @@ public class DiagramPartitioningUtil {
 
 	}
 
+	/**
+	 * Opens a subdiagram for a given {@link Diagram}
+	 */
 	public static IEditorPart openEditor(Diagram diagramToOpen) {
 		IFile file = WorkspaceSynchronizer.getFile(diagramToOpen.eResource());
 		try {
@@ -116,6 +145,12 @@ public class DiagramPartitioningUtil {
 		return null;
 	}
 
+	/**
+	 * Forces the user to close all opened editors for subdiagrams that are
+	 * inlined.
+	 * 
+	 * @return true if all editors were closed, false otherwise
+	 */
 	public static boolean closeSubdiagramEditors(State state) {
 		Diagram diagram = DiagramPartitioningUtil.getSubDiagram(state);
 		if (diagram == null)
@@ -157,7 +192,7 @@ public class DiagramPartitioningUtil {
 		List<Diagram> result = new ArrayList<Diagram>();
 		result.add(diagram);
 		while (diagram.getElement() instanceof State) {
-			diagram = DiagramPartitioningUtil.getSubDiagram(diagram.getElement());
+			diagram = DiagramPartitioningUtil.getSubDiagram((CompositeElement) diagram.getElement());
 			result.add(diagram);
 		}
 		Collections.reverse(result);
