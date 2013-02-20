@@ -25,6 +25,8 @@ import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
  */
 public abstract class BaseDecorator extends AbstractDecorator {
 
+	private IGraphicalEditPart gep;
+
 	private EObject semanticElement;
 
 	public BaseDecorator(IDecoratorTarget decoratorTarget) {
@@ -41,12 +43,13 @@ public abstract class BaseDecorator extends AbstractDecorator {
 			refresh();
 		}
 	};
-	private IGraphicalEditPart gep;
 
 	public void activate() {
-
 		DiagramEventBroker.getInstance(gep.getEditingDomain())
 				.addNotificationListener(semanticElement, notificationListener);
+		DiagramEventBroker.getInstance(gep.getEditingDomain())
+				.addNotificationListener(gep.getNotationView(),
+						notificationListener);
 	}
 
 	public void deactivate() {
@@ -57,6 +60,9 @@ public abstract class BaseDecorator extends AbstractDecorator {
 
 		DiagramEventBroker.getInstance(gep.getEditingDomain())
 				.removeNotificationListener(semanticElement,
+						notificationListener);
+		DiagramEventBroker.getInstance(gep.getEditingDomain())
+				.removeNotificationListener(gep.getNotationView(),
 						notificationListener);
 	}
 

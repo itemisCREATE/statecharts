@@ -13,34 +13,41 @@ import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget.Di
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
 
 /**
  * 
  * @author terfloth - Initial contribution
  * 
- * TODO: extract margin property
- *
+ *         TODO: extract margin property
+ * 
  */
 public abstract class InteractiveDecorator extends BaseDecorator {
 
-	
 	protected MouseListener decorationMouseListener;
+
+	protected abstract IFigure getToolTipFigure(EObject element);
+
+	protected abstract Image getDecorationImage(EObject element);
+
+	protected abstract boolean shouldDecorate(EObject element);
 
 	public InteractiveDecorator(IDecoratorTarget decoratorTarget) {
 		super(decoratorTarget);
-		
+
 		decorationMouseListener = new MouseListener() {
 			public void mousePressed(MouseEvent me) {
-				InteractiveDecorator.this.mousePressed(getDecoration(), getSemanticElement());
+				InteractiveDecorator.this.mousePressed(getDecoration(),
+						getSemanticElement());
 			}
 
 			public void mouseReleased(MouseEvent me) {
-				InteractiveDecorator.this.mouseReleased(getDecoration(), getSemanticElement());
+				InteractiveDecorator.this.mouseReleased(getDecoration(),
+						getSemanticElement());
 			}
 
 			public void mouseDoubleClicked(MouseEvent me) {
-				InteractiveDecorator.this.mouseDoubleClicked(getDecoration(), getSemanticElement());
+				InteractiveDecorator.this.mouseDoubleClicked(getDecoration(),
+						getSemanticElement());
 			}
 		};
 	}
@@ -66,21 +73,16 @@ public abstract class InteractiveDecorator extends BaseDecorator {
 		return decoration;
 	}
 
-	
 	public EObject getSemanticElement() {
-		return (EObject) getDecoratorTarget()
-				.getAdapter(EObject.class);
+		return (EObject) getDecoratorTarget().getAdapter(EObject.class);
 	}
 
-	
-	
 	protected void disposeDecoration() {
-		if (getDecoration() != null) getDecoration().removeMouseListener(decorationMouseListener);
+		if (getDecoration() != null)
+			getDecoration().removeMouseListener(decorationMouseListener);
 		removeDecoration();
 	}
 
-	
-	
 	/**
 	 * TODO: move to UtilityClass
 	 * 
@@ -103,42 +105,37 @@ public abstract class InteractiveDecorator extends BaseDecorator {
 		return scaled;
 	}
 
-	protected void renderToolTip(final Decoration decoration, final EObject semanticElement) {
+	protected void renderToolTip(final Decoration decoration,
+			final EObject semanticElement) {
 		decoration.addMouseMotionListener(new MouseMotionListener() {
 			public void mouseDragged(MouseEvent me) {
 			}
-	
+
 			public void mouseEntered(MouseEvent me) {
 				IFigure toolTip = getToolTipFigure(semanticElement);
-				if (toolTip != null) decoration.setToolTip(toolTip);
-	
+				if (toolTip != null)
+					decoration.setToolTip(toolTip);
+
 			}
-	
+
 			public void mouseExited(MouseEvent me) {
 			}
-	
+
 			public void mouseHover(MouseEvent me) {
 			}
-	
+
 			public void mouseMoved(MouseEvent me) {
 			}
 		});
 	}
 
-	protected abstract IFigure getToolTipFigure(EObject element);
-
-	protected abstract Image getDecorationImage(EObject element);
-
-	protected abstract boolean shouldDecorate(EObject element);
-
 	protected void mousePressed(Decoration decoration, EObject element) {
 	}
-	
+
 	protected void mouseReleased(Decoration decoration, EObject element) {
 	}
-	
+
 	protected void mouseDoubleClicked(Decoration decoration, EObject element) {
 	}
-	
-	
+
 }
