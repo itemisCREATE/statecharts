@@ -246,6 +246,21 @@ public interface ITypeSystem {
 	 * @return The list of all types known in the type system
 	 */
 	public List<Type> getTypes();
+	
+	/**
+	 * Infer a type for a given literal. The literal may represent a primitive
+	 * value (primitive type literal) or an instance specification (complex type
+	 * literal).
+	 * 
+	 * @param literal
+	 *            The literal for which to infer a type
+	 * @return An {@link InferenceResult} containing the {@link InferredType}
+	 *         for the literal (or <code>null</code> in case no type could be
+	 *         inferred) and potential {@link InferenceIssue}s that occurred
+	 *         during the type inference. The result may also contain both, an
+	 *         inferred type and issues.
+	 */
+	public InferenceResult inferTypeForLiteral(Object literal);
 
 	/**
 	 * Responsible of inferring the type for a given unary expression (e.g. a
@@ -329,5 +344,11 @@ public interface ITypeSystem {
 	 *         compatible to the given inferred type.
 	 */
 	public List<Type> getTypes(InferredType inferredType);
+
+	// TODO: uncomment these and remove need for specific ISTextTypeSystem interface
+	// public InferredType getNumericalBaseType();
+	// public InferredType getBooleanBaseType();
+	// public InferredType getCharacterBaseType();
+	// public InferredType getVoidBaseType();
 
 }
