@@ -27,7 +27,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
-import org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
 
