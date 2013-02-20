@@ -8,17 +8,20 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.ui.editor.breadcrumb;
+package org.yakindu.sct.ui.editor.partitioning;
 
-import static org.yakindu.sct.ui.editor.breadcrumb.DiagramPartitioningUtil.openEditor;
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.openEditor;
 
 import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
+import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.layout.GridDataFactory;
@@ -41,17 +44,34 @@ import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
 import org.yakindu.sct.ui.editor.StatechartImages;
 
 /**
+ * Editor that uses a {@link DiagramPartitioningDocumentProvider} and adds a
+ * {@link DiagramPartitioningBreadcrumbViewer} to the top.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class BreadcrumbDiagramEditor extends DiagramDocumentEditor implements ISelectionChangedListener {
+public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor implements ISelectionChangedListener,
+		IEditingDomainProvider {
 
 	private static final String SUBDIAGRAM = "Subdiagram - ";
+
 	private DiagramPartitioningBreadcrumbViewer viewer;
 
-	public BreadcrumbDiagramEditor(boolean hasFlyoutPalette) {
+	private DiagramPartitioningDocumentProvider documentProvider;
+
+	public DiagramPartitioningEditor(boolean hasFlyoutPalette) {
 		super(hasFlyoutPalette);
+		documentProvider = new DiagramPartitioningDocumentProvider();
+	}
+
+	@Override
+	public TransactionalEditingDomain getEditingDomain() {
+		return DiagramPartitioningUtil.getSharedDomain();
+	}
+
+	@Override
+	public IDocumentProvider getDocumentProvider() {
+		return documentProvider;
 	}
 
 	@Override

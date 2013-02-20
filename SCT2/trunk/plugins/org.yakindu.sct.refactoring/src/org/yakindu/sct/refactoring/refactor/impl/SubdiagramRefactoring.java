@@ -17,6 +17,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.*;
 
 /**
  * 
@@ -24,8 +25,6 @@ import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
  * 
  */
 public abstract class SubdiagramRefactoring extends AbstractRefactoring<View> {
-
-	private static final String INLINE_STYLE = "isInline";
 
 	protected PreferencesHint preferencesHint = DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 
