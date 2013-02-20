@@ -47,7 +47,7 @@ public class StringEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	@Override
-	protected Object convertValue(Object value) {
+	protected Object convertValue(Object element, Object value) {
 		return value;
 	}
 

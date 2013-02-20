@@ -48,6 +48,7 @@ import org.yakindu.sct.simulation.ui.view.actions.CollapseAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.ExpandAllAction;
 import org.yakindu.sct.simulation.ui.view.actions.HideTimeEventsAction;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
+import org.yakindu.sct.simulation.ui.view.editing.EnumerationEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.MultiEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
@@ -133,7 +134,7 @@ public class SimulationView extends ViewPart implements IDebugContextListener,
 		valueColumn.setEditingSupport(new MultiEditingSupport(viewer,
 				new BooleanEditingSupport(viewer), new IntegerEditingSupport(
 						viewer), new RealEditingSupport(viewer),
-				new StringEditingSupport(viewer)));
+				new StringEditingSupport(viewer), new EnumerationEditingSupport(viewer)));
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
 		viewer.setContentProvider(new ExecutionContextContentProvider());
 

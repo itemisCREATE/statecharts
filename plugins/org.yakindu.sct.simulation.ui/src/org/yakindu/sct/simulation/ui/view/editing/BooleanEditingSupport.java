@@ -50,7 +50,7 @@ public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	@Override
-	protected Object convertValue(Object value) {
+	protected Object convertValue(Object element, Object value) {
 		if (value != null && value instanceof Integer) {
 			return ((Integer) value).intValue() == 0 ? true : false;
 		}
