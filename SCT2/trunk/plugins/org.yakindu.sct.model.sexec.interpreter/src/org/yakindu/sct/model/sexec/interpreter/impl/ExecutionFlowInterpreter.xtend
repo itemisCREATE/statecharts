@@ -12,7 +12,12 @@ package org.yakindu.sct.model.sexec.interpreter.impl
 
 import com.google.inject.Inject
 import com.google.inject.name.Named
-import org.yakindu.base.types.Type
+import java.util.HashMap
+import java.util.List
+import java.util.Map
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.types.EnumerationType
+import org.yakindu.base.types.ITypeSystem$InferredType
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.EnterState
@@ -35,27 +40,23 @@ import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter
 import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter
 import org.yakindu.sct.model.sexec.interpreter.ITimingService
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.stext.naming.StextNameProvider
-import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade
-import org.yakindu.sct.simulation.core.runtime.IExecutionContext
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable
-import java.util.List
-import java.util.Map
 import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.simulation.core.runtime.ISlot
-import java.util.HashMap
-import org.yakindu.sct.simulation.core.runtime.IEventSlot
 import org.yakindu.sct.model.sgraph.Event
+import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.Direction
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem
+import org.yakindu.sct.simulation.core.runtime.AbstractExecutionFacade
+import org.yakindu.sct.simulation.core.runtime.IEventSlot
+import org.yakindu.sct.simulation.core.runtime.IExecutionContext
+import org.yakindu.sct.simulation.core.runtime.ISlot
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent
+import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable
 
 /**
  * 
@@ -70,7 +71,7 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	@Inject
 	IExecutionContext executionContext
 	@Inject
-	StextNameProvider provider
+	IQualifiedNameProvider provider
 	@Inject 
 	ITimingService timingService
 	@Inject extension ISTextTypeSystem 
@@ -189,45 +190,20 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 
 	def dispatch void addToScope(VariableDefinition variable){
-		var fqName = provider.qualifiedName(variable).toString
-		var ExecutionVariable varSlot 
+		var fqName = provider.getFullyQualifiedName(variable).toString
 		
-		if(variable.inferType.type.booleanType){
-			varSlot = new ExecutionVariable(fqName ,typeof(Boolean),false)
-		} 
-		else if (variable.inferType.type.integerType){
-			varSlot = new ExecutionVariable(fqName,typeof(Integer),0)
-		}
-		else if(variable.inferType.type.realType){
-			varSlot = new ExecutionVariable(fqName,typeof(Float),0.0f)
-		}
-		else if (variable.inferType.type.stringType){
-			varSlot = new ExecutionVariable(fqName,typeof(String),"")
-		}
+		var type = variable.inferType.type
+		var ExecutionVariable varSlot = new ExecutionVariable(fqName,type, type.defaultValue)
 		
 		executionContext.declareVariable(varSlot);
 		slotMap.put(variable, varSlot);
 	}  
 	
 	def dispatch void addToScope(EventDefinition event){
-		var fqName = provider.qualifiedName(event).toString
-		var ExecutionEvent eventSlot
+		var fqName = provider.getFullyQualifiedName(event).toString
 		
-		if(event.inferType.type.booleanType){
-			eventSlot = new ExecutionEvent(fqName,typeof(Boolean),false)
-		}
-		else if(event.inferType.type.integerType){
-			eventSlot = new ExecutionEvent(fqName,typeof(Integer),0)
-		}
-		else if(event.inferType.type.realType){
-			eventSlot = new ExecutionEvent(fqName,typeof(Float),0.0f)
-		}
-		else if(event.inferType.type.voidType){
-			eventSlot = new ExecutionEvent(fqName,typeof(Void))
-		}
-		else if (event.inferType.type.stringType){
-			eventSlot = new ExecutionEvent(fqName,typeof(String),"")
-		}
+		val type = event.inferType.type
+		var ExecutionEvent eventSlot = new ExecutionEvent(fqName,type,type.defaultValue)
 		 
 		executionContext.declareEvent(eventSlot)
 		slotMap.put(event, eventSlot)
@@ -235,35 +211,28 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	
 	
 	def dispatch void addToScope(OperationDefinition op){
-		var fqName = provider.qualifiedName(op).toString
-		var type = op.type.mappedType
+		var fqName = provider.getFullyQualifiedName(op).toString
+		val type = new InferredType(op.type)
 		val opSlot = new ExecutionVariable(fqName, type, type.defaultValue);
 		
 		executionContext.declareVariable(opSlot)
 		slotMap.put(op, opSlot)
 	}
 	
-	def Class<?> mappedType(Type it) {
-		if(it.booleanType)		{ typeof(Boolean) } 
-		else if(it.integerType)	{ typeof(Integer) }
-		else if(it.realType)	{ typeof(Float) }
-		else if(it.voidType)	{ typeof(Void)	}
-		else if(it.stringType)	{ typeof(String) }
-		else null 
-	} 
-	
-	def Object defaultValue(Class<?> type) {
+	def Object defaultValue(InferredType type) {
 		switch (type) {
-			case typeof(Boolean) : true
-			case typeof(Integer) : 0
-			case typeof(Float) : 0.0
-			case typeof(Void) : null
-			case typeof(String) : ""
+			case isBooleanType(type) : true
+			case isIntegerType(type) : 0
+			case isRealType(type) : 0.0
+			case isVoidType(type) : null
+			case isStringType(type) : ""
+			case type instanceof EnumerationType: (type as EnumerationType).enumerator.head
+			default: null
 		}
 	}
 	
 	def dispatch void addToScope(TimeEvent event){
-		val eventSlot = new ExecutionEvent(event.name, typeof(Long))
+		val eventSlot = new ExecutionEvent(event.name, new InferredType(integerType))
 		executionContext.declareEvent(eventSlot) 
 		slotMap.put(event, eventSlot)
 	}

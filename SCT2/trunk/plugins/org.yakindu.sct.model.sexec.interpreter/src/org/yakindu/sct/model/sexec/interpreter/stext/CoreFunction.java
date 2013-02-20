@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.model.sexec.interpreter.stext;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+
 public class CoreFunction extends Function {
 
 	// TODO: Unify with type system
@@ -36,7 +39,7 @@ public class CoreFunction extends Function {
 	public static String POSITIVE = "+";
 	public static String NEGATIVE = "-";
 	public static String NOT = "!";
-	
+
 	@FunctionMethod("+")
 	public Integer plus(Integer i1, Integer i2) {
 		return i1 + i2;
@@ -208,6 +211,11 @@ public class CoreFunction extends Function {
 	}
 
 	@FunctionMethod("==")
+	public Boolean equals(EObject e1, EObject e2) {
+		return EcoreUtil.equals(e1, e2);
+	}
+
+	@FunctionMethod("==")
 	public Boolean equals(Float i1, Float i2) {
 		return i1.floatValue() == i2.floatValue();
 	}
@@ -215,6 +223,11 @@ public class CoreFunction extends Function {
 	@FunctionMethod("==")
 	public Boolean equals(String string1, String string2) {
 		return string1.equals(string2);
+	}
+
+	@FunctionMethod("!=")
+	public Boolean notEquals(EObject e1, EObject e2) {
+		return !EcoreUtil.equals(e1, e2);
 	}
 
 	@FunctionMethod("!=")

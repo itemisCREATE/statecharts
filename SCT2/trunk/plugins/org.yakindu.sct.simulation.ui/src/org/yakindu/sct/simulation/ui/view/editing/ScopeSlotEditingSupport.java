@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.ui.view.editing;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ColumnViewer;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.ISlot;
@@ -24,7 +25,7 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 
 	protected abstract Class<?> getSupportedType();
 
-	protected abstract Object convertValue(Object value);
+	protected abstract Object convertValue(Object element, Object value);
 
 	public ScopeSlotEditingSupport(ColumnViewer viewer) {
 		super(viewer);
@@ -33,8 +34,15 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 	@Override
 	public boolean canEdit(Object element) {
 		if (element instanceof AbstractSlot) {
-			return getSupportedType()
-					.equals(((ISlot) element).getType());
+			Object value = ((AbstractSlot) element).getValue();
+			// TODO: check compatibility via (type system ) type not via class
+			// of value
+			if (value instanceof EObject) {
+				return getSupportedType().isAssignableFrom(
+						((EObject) value).eClass().getInstanceClass());
+			} else {
+				return getSupportedType().isAssignableFrom(value.getClass());
+			}
 		}
 		return false;
 	}
@@ -49,9 +57,10 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 		return "";
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void setValue(Object element, Object value) {
-		value = convertValue(value);
+		value = convertValue(element, value);
 		if (value == null)
 			return;
 		IExecutionContext input = (IExecutionContext) getViewer().getInput();

@@ -14,9 +14,9 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.custom.StyleRange;
+import org.yakindu.base.types.Enumerator;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.ISlot;
-import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
 import org.yakindu.sct.simulation.ui.SimulationImages;
@@ -49,12 +49,16 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	private void updateValueCell(ViewerCell cell) {
 		Object element = cell.getElement();
-		if (element instanceof AbstractSlot) {
+		if (element instanceof ISlot) {
 			Object value = ((ISlot) element).getValue();
-			if (value != null)
-				cell.setText(value.toString());
+			if (value != null) {
+				if (value instanceof Enumerator) {
+					cell.setText(((Enumerator) value).getName());
+				} else {
+					cell.setText(value.toString());
+				}
+			}
 		}
-
 	}
 
 	private void updateNameCell(ViewerCell cell) {

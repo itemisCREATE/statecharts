@@ -52,7 +52,7 @@ public class IntegerEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	@Override
-	protected Object convertValue(Object value) {
+	protected Object convertValue(Object element, Object value) {
 		if (value != null && value instanceof String
 				&& ((String) value).trim().length() > 0) {
 			return Integer.parseInt((String) value);

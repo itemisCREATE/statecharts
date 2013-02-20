@@ -11,6 +11,10 @@
 package org.yakindu.sct.simulation.core.runtime.impl;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
+import org.yakindu.base.types.ITypeSystem.InferredType;
 import org.yakindu.sct.simulation.core.runtime.ExecutionException;
 import org.yakindu.sct.simulation.core.runtime.ISlot;
 import org.yakindu.sct.simulation.core.runtime.ISlotContext;
@@ -26,10 +30,10 @@ public abstract class AbstractSlot implements ISlot {
 	protected String name;
 	protected String scopeSegment;
 	protected String simpleName;
-	protected Class<?> type;
+	protected InferredType type;
 	protected Object value;
 
-	public AbstractSlot(String name, Class<?> type, Object value) {
+	public AbstractSlot(String name, InferredType type, Object value) {
 		super();
 		Assert.isNotNull(name);
 		this.name = name;
@@ -53,12 +57,11 @@ public abstract class AbstractSlot implements ISlot {
 		return simpleName;
 	}
 
-	
 	public String getName() {
 		return name;
 	}
 
-	public Class<?> getType() {
+	public InferredType getType() {
 		return type;
 	}
 
@@ -69,26 +72,44 @@ public abstract class AbstractSlot implements ISlot {
 	public void setValue(Object value) {
 		assertValue(value);
 		this.value = value;
-		
+
 		notifyValueChanged();
 	}
 
 	protected void assertValue(Object value) {
 		Assert.isNotNull(value, "Value must not be null ");
-		//TODO refactor
-		if (type == Float.class && value != null && !value.getClass().isAssignableFrom(type)) {
-			try {
-				value = Float.parseFloat(value.toString());
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
+		if(getType().getType() instanceof EnumerationType){
+			Assert.isTrue(value instanceof Enumerator);
+			boolean validLiteral = false;
+			for(Enumerator e : ((EnumerationType)getType().getType()).getEnumerator()){
+				if(EcoreUtil.equals(e, (Enumerator)value)){
+					validLiteral = true;
+					break;
+				}
+			}
+			if(!validLiteral){
+				throw new ExecutionException("Enumerator " + ((Enumerator)value).getName() + " is not assignable to enumeration type "+  getType().getType().getName());
 			}
 		}
+		// TODO check primitive value types -> need type system to decide
 		
-		if (!value.getClass().isAssignableFrom(type)) {
-			throw new ExecutionException("Error assigning value to \' " + name
-					+ "\' Can not assign value " + value + " of type"
-					+ value.getClass() + " to type " + type);
-		}
+		// TODO refactor (use type system)
+		// Class<? extends Object> clazz = value instanceof EObject ?
+		// ((EObject)value).eClass().getInstanceClass() : value.getClass();
+		// if (type == Float.class && value != null &&
+		// !clazz.isAssignableFrom(type)) {
+		// try {
+		// value = Float.parseFloat(value.toString());
+		// } catch (NumberFormatException e) {
+		// e.printStackTrace();
+		// }
+		// }
+		//
+		// if (!clazz.isAssignableFrom(type)) {
+		// throw new ExecutionException("Error assigning value to \' " + name
+		// + "\' Can not assign value " + value + " of type"
+		// + clazz + " to type " + type);
+		// }
 	}
 
 	public void setContext(ISlotContext ctx) {
@@ -98,9 +119,9 @@ public abstract class AbstractSlot implements ISlot {
 	public ISlotContext getContext() {
 		return context;
 	}
-	
+
 	protected void notifyValueChanged() {
-		if ( context != null ) {
+		if (context != null) {
 			context.slotChanged(this, SLOT_VALUE_CHANGED);
 		}
 	}

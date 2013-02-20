@@ -18,12 +18,14 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.base.types.ITypeSystem.InferredType;
 import org.yakindu.sct.model.sexec.interpreter.stext.StextStatementInterpreter;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionContextImpl;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
@@ -44,6 +46,8 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	private ExecutionContextImpl context;
 	@Inject
 	private StextStatementInterpreter interpreter;
+	@Inject
+	private ISTextTypeSystem typeSystem;
 
 	@Test
 	public void testIntVariableAssignment() {
@@ -471,19 +475,19 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	private void initContext() {
 		// "event abc operation foo() var intVar : integer var boolVar : boolean
 		// var realVar : real
-		ExecutionVariable intVar = new ExecutionVariable("intVar", Integer.class,
+		ExecutionVariable intVar = new ExecutionVariable("intVar", new InferredType(typeSystem.getIntegerType()),
 				0);
 		context.declareVariable(intVar);
 		ExecutionVariable boolVar = new ExecutionVariable("boolVar",
-				Boolean.class, false);
+				new InferredType(typeSystem.getBooleanType()), false);
 		context.declareVariable(boolVar);
-		ExecutionVariable realVar = new ExecutionVariable("realVar", Float.class,
+		ExecutionVariable realVar = new ExecutionVariable("realVar", new InferredType(typeSystem.getRealType()),
 				0.0f);
 		context.declareVariable(realVar);
 		ExecutionVariable stringVar = new ExecutionVariable("stringVar",
-				String.class, "");
+				new InferredType(typeSystem.getStringType()), "");
 		context.declareVariable(stringVar);
-		ExecutionEvent event = new ExecutionEvent("abc", Integer.class);
+		ExecutionEvent event = new ExecutionEvent("abc", new InferredType(typeSystem.getIntegerType()));
 		context.declareEvent(event);
 	}
 

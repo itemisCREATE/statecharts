@@ -14,19 +14,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine;
-import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine.State;
+import org.yakindu.scr.simplehierachy.SimpleHierachyStatemachine;
+import org.yakindu.scr.simplehierachy.SimpleHierachyStatemachine.State;
 /**
- *  Unit TestCase for ExitOnSelfTransition
+ *  Unit TestCase for SimpleHierachy
  */
 @SuppressWarnings("all")
-public class ExitOnSelfTransitionTest {
+public class SimpleHierachyTest {
 
-	private ExitOnSelfTransitionStatemachine statemachine;
+	private SimpleHierachyStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new ExitOnSelfTransitionStatemachine();
+		statemachine = new SimpleHierachyStatemachine();
 		statemachine.init();
 	}
 
@@ -36,18 +36,15 @@ public class ExitOnSelfTransitionTest {
 	}
 
 	@Test
-	public void testExitOnSelfTransitionTest() {
+	public void testsimpleHierachyTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.getEntryCount() == 1);
-		assertTrue(statemachine.getExitCount() == 0);
-		statemachine.raiseE();
+		statemachine.raiseEvent1();
+		statemachine.raiseEvent1();
+		statemachine.raiseEvent1();
 		statemachine.runCycle();
-		assertTrue(statemachine.getEntryCount() == 2);
-		assertTrue(statemachine.getExitCount() == 1);
-		statemachine.raiseF();
-		statemachine.runCycle();
-		assertTrue(statemachine.getEntryCount() == 2);
-		assertTrue(statemachine.getExitCount() == 2);
+		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine
+				.isStateActive(State.main_region_B_subregion1_B1));
 	}
 }

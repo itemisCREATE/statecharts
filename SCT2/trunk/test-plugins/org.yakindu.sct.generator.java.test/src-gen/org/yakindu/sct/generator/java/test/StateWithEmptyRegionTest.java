@@ -14,19 +14,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine;
-import org.yakindu.scr.exitonselftransition.ExitOnSelfTransitionStatemachine.State;
+import org.yakindu.scr.statewithemptyregion.StateWithEmptyRegionStatemachine;
+import org.yakindu.scr.statewithemptyregion.StateWithEmptyRegionStatemachine.State;
 /**
- *  Unit TestCase for ExitOnSelfTransition
+ *  Unit TestCase for StateWithEmptyRegion
  */
 @SuppressWarnings("all")
-public class ExitOnSelfTransitionTest {
+public class StateWithEmptyRegionTest {
 
-	private ExitOnSelfTransitionStatemachine statemachine;
+	private StateWithEmptyRegionStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new ExitOnSelfTransitionStatemachine();
+		statemachine = new StateWithEmptyRegionStatemachine();
 		statemachine.init();
 	}
 
@@ -36,18 +36,10 @@ public class ExitOnSelfTransitionTest {
 	}
 
 	@Test
-	public void testExitOnSelfTransitionTest() {
+	public void testStateWithEmptyRegionTest() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.getEntryCount() == 1);
-		assertTrue(statemachine.getExitCount() == 0);
-		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.getEntryCount() == 2);
-		assertTrue(statemachine.getExitCount() == 1);
-		statemachine.raiseF();
-		statemachine.runCycle();
-		assertTrue(statemachine.getEntryCount() == 2);
-		assertTrue(statemachine.getExitCount() == 2);
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
 }

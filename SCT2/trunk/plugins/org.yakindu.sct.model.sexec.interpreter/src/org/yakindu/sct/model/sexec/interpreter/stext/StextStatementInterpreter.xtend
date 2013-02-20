@@ -12,9 +12,9 @@ package org.yakindu.sct.model.sexec.interpreter.stext
 
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.sct.model.sgraph.Statement
-import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.AssignmentExpression
 import org.yakindu.sct.model.stext.stext.AssignmentOperator
@@ -37,14 +37,15 @@ import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext
-import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
-import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.types.Enumerator
 
 /**
  * 
@@ -55,7 +56,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 class StextStatementInterpreter extends AbstractStatementInterpreter {
 	
 	@Inject
-	extension StextNameProvider provider 
+	extension IQualifiedNameProvider provider 
 	
 	protected IExecutionContext context
 	
@@ -225,6 +226,9 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if(call.operationCall && super.operationCallback.size() > 0){
 			var parameter = call.args.map(it| execute)
 			return super.executeOperationCallback(call.feature as OperationDefinition, parameter.toArray)
+		}
+		else if (call.getFeature() instanceof Enumerator) {
+			return call.getFeature();
 		}
 		else {
 			var fqn = call.feature.fqn

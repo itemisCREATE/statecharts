@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.runtime.impl;
 
+import org.yakindu.base.types.ITypeSystem.InferredType;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 
 
@@ -24,7 +25,7 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
  */
 public class ExecutionVariable extends AbstractSlot {
 
-	public ExecutionVariable(String name, Class<?> type, Object value) {
+	public ExecutionVariable(String name, InferredType type, Object value) {
 		super(name, type, value);
 	}
 

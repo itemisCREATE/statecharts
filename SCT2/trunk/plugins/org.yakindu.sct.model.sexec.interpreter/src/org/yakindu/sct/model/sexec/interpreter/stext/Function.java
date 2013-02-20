@@ -24,6 +24,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
+
+import com.google.inject.Inject;
+
 /**
  * 
  * @author axel terfloth
@@ -32,6 +37,8 @@ import java.util.List;
  */
 public class Function {
 
+	@Inject ISTextTypeSystem typeSystem;
+	
 	/**
 	 * Indicates that a method is a function.
 	 * 
@@ -147,7 +154,13 @@ public class Function {
 		for (int i = 0; i < params.length; i++) {
 			if (params[i] == null)
 				continue;
-			paramTypes[i] = params[i].getClass();
+			if(params[i] instanceof EObject){
+				paramTypes[i] = EObject.class; // enumerators and complex types
+			}
+			else {
+				paramTypes[i] = params[i].getClass(); // primitive values (boxed java types)
+			}
+			
 		}
 		return paramTypes;
 	}
