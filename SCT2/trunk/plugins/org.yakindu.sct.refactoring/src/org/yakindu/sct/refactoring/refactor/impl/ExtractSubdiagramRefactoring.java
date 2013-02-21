@@ -22,6 +22,7 @@ import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -64,6 +65,10 @@ public class ExtractSubdiagramRefactoring extends SubdiagramRefactoring {
 					Edge edge = targetEdges.get(i);
 					if (!EcoreUtil.isAncestor(subdiagram, edge.getSource()))
 						createEntryPoint(edge, subdiagram);
+				}
+				EList<Edge> sourceEdges = ((View) next).getSourceEdges();
+				for (int i = sourceEdges.size() - 1; i >= 0; i--) {
+					Edge edge = sourceEdges.get(i);
 					if (!EcoreUtil.isAncestor(subdiagram, edge.getTarget())) {
 						createExitPoint(edge, subdiagram);
 					}
@@ -88,13 +93,7 @@ public class ExtractSubdiagramRefactoring extends SubdiagramRefactoring {
 		edge.setTarget(getContextObject());
 	}
 
-	protected void createExitPoint(Edge edge, Diagram subdiagram) {
-		System.out.println("Create an exit point for edge " + edge + " with source " + edge.getSource().getElement()
-				+ " and target " + edge.getTarget().getElement());
-		// TODO Implement me ;-)
-	}
-
-	private void createSemanticEntryPoint(Transition transition) {
+	protected void createSemanticEntryPoint(Transition transition) {
 		Region entryPointTarget = transition.getTarget().getParentRegion();
 		Entry entryPoint = SGraphFactory.eINSTANCE.createEntry();
 		// TODO: Make unique
@@ -103,6 +102,33 @@ public class ExtractSubdiagramRefactoring extends SubdiagramRefactoring {
 		Transition entryPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		entryPointTransition.setSource(entryPoint);
 		entryPointTransition.setTarget(transition.getTarget());
+	}
+
+	protected void createExitPoint(Edge edge, Diagram subdiagram) {
+		System.out.println("Create an exit point for edge " + edge + " with source " + edge.getSource().getElement()
+				+ " and target " + edge.getTarget().getElement());
+		// Semantic refactoring
+		Transition transition = (Transition) edge.getElement();
+		createSemanticExitPoint(transition);
+		transition.setTarget((State) subdiagram.getElement());
+		EList<ReactionProperty> properties = transition.getProperties();
+		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
+		// TODO: Make unique
+		entryPointSpec.setEntrypoint("exit1");
+		properties.add(entryPointSpec);
+		// Notation refactoring
+		edge.setSource(getContextObject());
+	}
+
+	protected void createSemanticExitPoint(Transition transition) {
+		Region exitPointTarget = transition.getSource().getParentRegion();
+		Exit exitPoint = SGraphFactory.eINSTANCE.createExit();
+		// TODO: Make unique
+		exitPoint.setName("exit1");
+		exitPointTarget.getVertices().add(exitPoint);
+		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
+		exitPointTransition.setTarget(exitPoint);
+		exitPointTransition.setSource(transition.getSource());
 	}
 
 	/**
