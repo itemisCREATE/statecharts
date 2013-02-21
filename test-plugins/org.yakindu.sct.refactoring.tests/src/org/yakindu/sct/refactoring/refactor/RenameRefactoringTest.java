@@ -19,6 +19,7 @@ import static org.yakindu.sct.test.models.RefactoringTestModels.RENAMING;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Event;
@@ -137,6 +138,7 @@ public class RenameRefactoringTest extends RefactoringTest {
 		compareStatecharts(initial, expected);
 	}
 
+	@Ignore
 	@Test
 	public void testNoRenamingIntoExistingName() {
 		fail("Not yet implemented.");
