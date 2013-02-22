@@ -97,6 +97,29 @@ public class BaseItemProviderAdapterFactory extends BaseAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.base.DocumentedElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DocumentedElementItemProvider documentedElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.base.DocumentedElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDocumentedElementAdapter() {
+		if (documentedElementItemProvider == null) {
+			documentedElementItemProvider = new DocumentedElementItemProvider(this);
+		}
+
+		return documentedElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -196,6 +219,7 @@ public class BaseItemProviderAdapterFactory extends BaseAdapterFactory implement
 	 */
 	public void dispose() {
 		if (namedElementItemProvider != null) namedElementItemProvider.dispose();
+		if (documentedElementItemProvider != null) documentedElementItemProvider.dispose();
 	}
 
 }
