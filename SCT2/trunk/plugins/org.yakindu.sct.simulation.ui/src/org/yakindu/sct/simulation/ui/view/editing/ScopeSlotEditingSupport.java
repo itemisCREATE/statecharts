@@ -37,7 +37,9 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 			Object value = ((AbstractSlot) element).getValue();
 			// TODO: check compatibility via (type system ) type not via class
 			// of value
-			if (value instanceof EObject) {
+			if ( value == null ) {
+				return false;
+			} else if (value instanceof EObject) {
 				return getSupportedType().isAssignableFrom(
 						((EObject) value).eClass().getInstanceClass());
 			} else {
