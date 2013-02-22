@@ -11,9 +11,6 @@
  */
 package de.itemis.xtext.utils.jface.viewers;
 
-import java.util.ArrayList;
-
-import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.text.ITextListener;
@@ -37,7 +34,6 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
 import de.itemis.utils.jface.viewers.StyledTextCellEditor;
@@ -78,8 +74,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		this.injector = injector;
 	}
 
-	public XtextStyledTextCellEditor(int style, Injector injector,
-			IContextElementProvider provider) {
+	public XtextStyledTextCellEditor(int style, Injector injector, IContextElementProvider provider) {
 		setStyle(style);
 		this.provider = provider;
 		this.injector = injector;
@@ -100,8 +95,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		});
 
 		// adapt to xtext
-		xtextAdapter = new StyledTextXtextAdapter(
-				injector,
+		xtextAdapter = new StyledTextXtextAdapter(injector,
 				contextFakeResourceProvider == null ? IXtextFakeContextResourcesProvider.NULL_CONTEXT_PROVIDER
 						: contextFakeResourceProvider);
 		xtextAdapter.adapt(styledText);
@@ -111,21 +105,18 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		}
 
 		// configure content assist
-		final IContentAssistant contentAssistant = xtextAdapter
-				.getContentAssistant();
+		final IContentAssistant contentAssistant = xtextAdapter.getContentAssistant();
 
-		completionProposalAdapter = new CompletionProposalAdapter(styledText,
-				contentAssistant, KeyStroke.getInstance(SWT.CTRL, SWT.SPACE),
-				null);
+		completionProposalAdapter = new CompletionProposalAdapter(styledText, contentAssistant, KeyStroke.getInstance(
+				SWT.CTRL, SWT.SPACE), null);
 
 		// This listener notifies the modification, when text is selected via
 		// proposal. A ModifyEvent is not thrown by the StyledText in this case.
-		xtextAdapter.getXtextSourceviewer().addTextListener(
-				new ITextListener() {
-					public void textChanged(TextEvent event) {
-						editOccured(null);
-					}
-				});
+		xtextAdapter.getXtextSourceviewer().addTextListener(new ITextListener() {
+			public void textChanged(TextEvent event) {
+				editOccured(null);
+			}
+		});
 
 		if ((styledText.getStyle() & SWT.SINGLE) != 0) {
 			// The regular key down event is too late (after popup is closed
@@ -134,8 +125,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 			// event early enough!
 			styledText.addListener(3005, new Listener() {
 				public void handleEvent(Event event) {
-					if (event.character == SWT.CR
-							&& !completionProposalAdapter.isProposalPopupOpen()) {
+					if (event.character == SWT.CR && !completionProposalAdapter.isProposalPopupOpen()) {
 						focusLost();
 					}
 				}
@@ -149,39 +139,24 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 				}
 			}
 		});
-		
+
 		initContextMenu(styledText);
-		
+
 		return styledText;
 	}
-	
+
 	protected void initContextMenu(Control control) {
 		MenuManager menuManager = createMenuManager();
 		Menu contextMenu = menuManager.createContextMenu(control);
 		control.setMenu(contextMenu);
-		
+
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPartSite site = window.getActivePage().getActiveEditor().getSite();
 		site.registerContextMenu(CONTEXTMENUID, menuManager, site.getSelectionProvider());
 	}
-	
+
 	protected MenuManager createMenuManager() {
-		
-		MenuManager manager = new MenuManager(CONTEXTMENUID, CONTEXTMENUID) {
-			// Overridden to filter default actions
-			@Override
-			public IContributionItem[] getItems() {
-				ArrayList<Object> result = Lists.newArrayList();
-				IContributionItem[] itemis = super.getItems();
-				for (IContributionItem iContributionItem : itemis) {
-					String id = iContributionItem.getId();
-					if (id != null && id.startsWith("org.yakindu"))
-						result.add(iContributionItem);
-				}
-				return result.toArray(new IContributionItem[] {});
-			}
-		};
-		return manager;
+		return new MenuManager(CONTEXTMENUID, CONTEXTMENUID);
 	}
 
 	protected void keyReleaseOccured(KeyEvent keyEvent) {
