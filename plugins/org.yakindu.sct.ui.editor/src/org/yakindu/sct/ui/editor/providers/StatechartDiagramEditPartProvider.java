@@ -90,7 +90,7 @@ public class StatechartDiagramEditPartProvider extends AbstractEditPartProvider
 
 	}
 
-	private Class<? extends IGraphicalEditPart> getClass(String semanticHint) {
+	protected Class<? extends IGraphicalEditPart> getClass(String semanticHint) {
 		return editParts.get(semanticHint);
 	}
 
