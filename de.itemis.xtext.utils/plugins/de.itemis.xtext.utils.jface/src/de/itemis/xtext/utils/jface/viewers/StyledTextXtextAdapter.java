@@ -3,6 +3,7 @@ package de.itemis.xtext.utils.jface.viewers;
 import java.util.List;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.resource.ImageDescriptor;
@@ -11,13 +12,21 @@ import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
 import org.eclipse.jface.text.source.ISharedTextColors;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.ISelectionProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
 import org.eclipse.ui.swt.IFocusService;
@@ -26,6 +35,9 @@ import org.eclipse.ui.texteditor.AnnotationPreference;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.MarkerAnnotationPreferences;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -158,8 +170,17 @@ public class StyledTextXtextAdapter {
 
 		// add JDT Style code completion hint decoration
 		createContentAssistDecoration(styledText);
+		
+		initSelectionProvider();
 	}
 
+	protected void initSelectionProvider() {
+		XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
+		ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(xtextStyledTextSelectionProvider);
+		styledText.addFocusListener(listener);
+		styledText.addDisposeListener(listener);
+	}
+	
 	private void createContentAssistDecoration(StyledText styledText) {
 		decoration = new ControlDecoration(styledText, SWT.TOP | SWT.LEFT);
 		decoration.setShowHover(true);
@@ -310,5 +331,59 @@ public class StyledTextXtextAdapter {
 
 	public XtextFakeResourceContext getFakeResourceContext() {
 		return fakeResourceContext;
+	}
+	
+	private class XtextStyledTextSelectionProvider implements ISelectionProvider{
+		
+		public void setSelection(ISelection selection) {}
+		
+		public void removeSelectionChangedListener(ISelectionChangedListener listener) {}
+		
+		public void addSelectionChangedListener(ISelectionChangedListener listener) {}
+
+		public ISelection getSelection() {
+			
+			int offset = styledText.getCaretOffset()-1;
+			XtextResource fakeResource = StyledTextXtextAdapter.this.getFakeResourceContext().getFakeResource();
+			IParseResult parseResult = fakeResource.getParseResult();
+			ICompositeNode rootNode = parseResult.getRootNode();
+			ILeafNode selectedNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
+			final EObject selectedObject = NodeModelUtils.findActualSemanticObjectFor(selectedNode);
+			
+			if (selectedObject == null) {
+				return new StructuredSelection();
+			}
+			return new StructuredSelection(selectedObject);
+		}
+		
+	}
+	
+	private class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
+		
+		private ISelectionProvider selectionProviderOnFocusGain;
+		private ISelectionProvider selectionProviderOnFocusLost;
+		private IWorkbenchPartSite site;
+
+		public ChangeSelectionProviderOnFocusGain(ISelectionProvider selectionProviderOnFocusGain) {
+			this.selectionProviderOnFocusGain = selectionProviderOnFocusGain;
+			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			site = window.getActivePage().getActiveEditor().getSite();
+		}
+		
+		public void focusLost(FocusEvent e) {
+			if (selectionProviderOnFocusLost != null) {
+				site.setSelectionProvider(selectionProviderOnFocusLost);
+			}
+		}
+		
+		public void focusGained(FocusEvent e) {
+			selectionProviderOnFocusLost = site.getSelectionProvider();
+			site.setSelectionProvider(selectionProviderOnFocusGain);
+		}
+
+		public void widgetDisposed(DisposeEvent e) {
+			((StyledText)e.getSource()).removeFocusListener(this);
+			((StyledText)e.getSource()).removeDisposeListener(this);
+		}
 	}
 }
