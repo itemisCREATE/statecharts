@@ -102,8 +102,7 @@ public class StyledTextXtextAdapter {
 
 	private ControlDecoration decoration;
 
-	public StyledTextXtextAdapter(Injector injector,
-			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
+	public StyledTextXtextAdapter(Injector injector, IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
 		this.contextFakeResourceProvider = contextFakeResourceProvider;
 		injector.injectMembers(this);
 
@@ -133,14 +132,11 @@ public class StyledTextXtextAdapter {
 		validationJob = createValidationJob();
 		document.setValidationJob(validationJob);
 
-		styledText.setData(StyledTextXtextAdapter.class.getCanonicalName(),
-				this);
+		styledText.setData(StyledTextXtextAdapter.class.getCanonicalName(), this);
 
-		final IContentAssistant contentAssistant = sourceviewer
-				.getContentAssistant();
-		final CompletionProposalAdapter completionProposalAdapter = new CompletionProposalAdapter(
-				styledText, contentAssistant, KeyStroke.getInstance(SWT.CTRL,
-						SWT.SPACE), null);
+		final IContentAssistant contentAssistant = sourceviewer.getContentAssistant();
+		final CompletionProposalAdapter completionProposalAdapter = new CompletionProposalAdapter(styledText,
+				contentAssistant, KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
 
 		if ((styledText.getStyle() & SWT.SINGLE) != 0) {
 			// The regular key down event is too late (after popup is closed).
@@ -148,13 +144,11 @@ public class StyledTextXtextAdapter {
 			// event early enough!
 			styledText.addListener(3005, new Listener() {
 				public void handleEvent(Event event) {
-					if (event.character == SWT.CR
-							&& !completionProposalAdapter.isProposalPopupOpen()) {
+					if (event.character == SWT.CR && !completionProposalAdapter.isProposalPopupOpen()) {
 						Event selectionEvent = new Event();
 						selectionEvent.type = SWT.DefaultSelection;
 						selectionEvent.widget = event.widget;
-						for (Listener l : event.widget
-								.getListeners(SWT.DefaultSelection)) {
+						for (Listener l : event.widget.getListeners(SWT.DefaultSelection)) {
 							l.handleEvent(selectionEvent);
 						}
 					}
@@ -164,34 +158,32 @@ public class StyledTextXtextAdapter {
 
 		// Register focus tracker for evaluating the active focus control in
 		// core expression
-		IFocusService service = (IFocusService) PlatformUI.getWorkbench()
-				.getService(IFocusService.class);
+		IFocusService service = (IFocusService) PlatformUI.getWorkbench().getService(IFocusService.class);
 		service.addFocusTracker(styledText, StyledText.class.getCanonicalName());
 
 		// add JDT Style code completion hint decoration
 		createContentAssistDecoration(styledText);
-		
+
 		initSelectionProvider();
 	}
 
 	protected void initSelectionProvider() {
 		XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
-		ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(xtextStyledTextSelectionProvider);
+		ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(
+				xtextStyledTextSelectionProvider);
 		styledText.addFocusListener(listener);
 		styledText.addDisposeListener(listener);
 	}
-	
+
 	private void createContentAssistDecoration(StyledText styledText) {
 		decoration = new ControlDecoration(styledText, SWT.TOP | SWT.LEFT);
 		decoration.setShowHover(true);
 		decoration.setShowOnlyOnFocus(true);
 
-		final Image image = ImageDescriptor.createFromFile(
-				XtextStyledTextCellEditor.class,
+		final Image image = ImageDescriptor.createFromFile(XtextStyledTextCellEditor.class,
 				"images/content_assist_cue.gif").createImage();
 		decoration.setImage(image);
-		decoration
-				.setDescriptionText("Content Assist Available (CTRL + Space)");
+		decoration.setDescriptionText("Content Assist Available (CTRL + Space)");
 		decoration.setMarginWidth(2);
 		styledText.addDisposeListener(new DisposeListener() {
 			public void widgetDisposed(DisposeEvent e) {
@@ -206,10 +198,8 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected ValidationJob createValidationJob() {
-		return new ValidationJob(validator, document,
-				new AnnotationIssueProcessor(document, sourceviewer
-						.getAnnotationModel(), resolutionProvider),
-				CheckMode.ALL);
+		return new ValidationJob(validator, document, new AnnotationIssueProcessor(document,
+				sourceviewer.getAnnotationModel(), resolutionProvider), CheckMode.ALL);
 	}
 
 	protected void createFakeResourceContext(Injector injector) {
@@ -217,13 +207,11 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected void createXtextSourceViewer() {
-		sourceviewer = new XtextSourceViewerEx(styledText,
-				preferenceStoreAccess.getPreferenceStore());
+		sourceviewer = new XtextSourceViewerEx(styledText, preferenceStoreAccess.getPreferenceStore());
 		sourceviewer.configure(configuration);
 		sourceviewer.setDocument(document, new AnnotationModel());
-		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(
-				sourceviewer, null, new DefaultMarkerAnnotationAccess(),
-				getSharedColors());
+		SourceViewerDecorationSupport support = new SourceViewerDecorationSupport(sourceviewer, null,
+				new DefaultMarkerAnnotationAccess(), getSharedColors());
 		configureSourceViewerDecorationSupport(support);
 	}
 
@@ -237,19 +225,16 @@ public class StyledTextXtextAdapter {
 	 * {@link AbstractDecoratedTextEditor}.
 	 * 
 	 */
-	protected void configureSourceViewerDecorationSupport(
-			SourceViewerDecorationSupport support) {
+	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
 		MarkerAnnotationPreferences annotationPreferences = new MarkerAnnotationPreferences();
 		@SuppressWarnings("unchecked")
-		List<AnnotationPreference> prefs = annotationPreferences
-				.getAnnotationPreferences();
+		List<AnnotationPreference> prefs = annotationPreferences.getAnnotationPreferences();
 		for (AnnotationPreference annotationPreference : prefs) {
 			support.setAnnotationPreference(annotationPreference);
 		}
 
 		support.setCharacterPairMatcher(characterPairMatcher);
-		support.setMatchingCharacterPainterPreferenceKeys(
-				BracketMatchingPreferencesInitializer.IS_ACTIVE_KEY,
+		support.setMatchingCharacterPainterPreferenceKeys(BracketMatchingPreferencesInitializer.IS_ACTIVE_KEY,
 				BracketMatchingPreferencesInitializer.COLOR_KEY);
 
 		support.install(preferenceStoreAccess.getPreferenceStore());
@@ -302,14 +287,12 @@ public class StyledTextXtextAdapter {
 	}
 
 	public IParseResult getXtextParseResult() {
-		return document
-				.readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
+		return document.readOnly(new IUnitOfWork<IParseResult, XtextResource>() {
 
-					public IParseResult exec(XtextResource state)
-							throws Exception {
-						return state.getParseResult();
-					}
-				});
+			public IParseResult exec(XtextResource state) throws Exception {
+				return state.getParseResult();
+			}
+		});
 	}
 
 	public IContentAssistant getContentAssistant() {
@@ -321,8 +304,7 @@ public class StyledTextXtextAdapter {
 	}
 
 	public void updateFakeResourceContext() {
-		fakeResourceContext
-				.updateFakeResourceContext(contextFakeResourceProvider);
+		fakeResourceContext.updateFakeResourceContext(contextFakeResourceProvider);
 	}
 
 	protected IXtextFakeContextResourcesProvider getFakeResourceContextProvider() {
@@ -332,34 +314,39 @@ public class StyledTextXtextAdapter {
 	public XtextFakeResourceContext getFakeResourceContext() {
 		return fakeResourceContext;
 	}
-	
-	private class XtextStyledTextSelectionProvider implements ISelectionProvider{
-		
-		public void setSelection(ISelection selection) {}
-		
-		public void removeSelectionChangedListener(ISelectionChangedListener listener) {}
-		
-		public void addSelectionChangedListener(ISelectionChangedListener listener) {}
+
+	private class XtextStyledTextSelectionProvider implements ISelectionProvider {
+
+		public void setSelection(ISelection selection) {
+		}
+
+		public void removeSelectionChangedListener(ISelectionChangedListener listener) {
+		}
+
+		public void addSelectionChangedListener(ISelectionChangedListener listener) {
+		}
 
 		public ISelection getSelection() {
-			
-			int offset = styledText.getCaretOffset()-1;
+
+			int offset = styledText.getCaretOffset() - 1;
 			XtextResource fakeResource = StyledTextXtextAdapter.this.getFakeResourceContext().getFakeResource();
 			IParseResult parseResult = fakeResource.getParseResult();
+			if (parseResult == null)
+				return new StructuredSelection();
 			ICompositeNode rootNode = parseResult.getRootNode();
 			ILeafNode selectedNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
 			final EObject selectedObject = NodeModelUtils.findActualSemanticObjectFor(selectedNode);
-			
+
 			if (selectedObject == null) {
 				return new StructuredSelection();
 			}
 			return new StructuredSelection(selectedObject);
 		}
-		
+
 	}
-	
+
 	private class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
-		
+
 		private ISelectionProvider selectionProviderOnFocusGain;
 		private ISelectionProvider selectionProviderOnFocusLost;
 		private IWorkbenchPartSite site;
@@ -369,21 +356,21 @@ public class StyledTextXtextAdapter {
 			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			site = window.getActivePage().getActiveEditor().getSite();
 		}
-		
+
 		public void focusLost(FocusEvent e) {
 			if (selectionProviderOnFocusLost != null) {
 				site.setSelectionProvider(selectionProviderOnFocusLost);
 			}
 		}
-		
+
 		public void focusGained(FocusEvent e) {
 			selectionProviderOnFocusLost = site.getSelectionProvider();
 			site.setSelectionProvider(selectionProviderOnFocusGain);
 		}
 
 		public void widgetDisposed(DisposeEvent e) {
-			((StyledText)e.getSource()).removeFocusListener(this);
-			((StyledText)e.getSource()).removeDisposeListener(this);
+			((StyledText) e.getSource()).removeFocusListener(this);
+			((StyledText) e.getSource()).removeDisposeListener(this);
 		}
 	}
 }

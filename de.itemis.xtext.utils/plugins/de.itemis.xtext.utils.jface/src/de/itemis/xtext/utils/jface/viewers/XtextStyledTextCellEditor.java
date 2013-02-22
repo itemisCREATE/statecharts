@@ -149,14 +149,13 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 		MenuManager menuManager = createMenuManager();
 		Menu contextMenu = menuManager.createContextMenu(control);
 		control.setMenu(contextMenu);
-
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPartSite site = window.getActivePage().getActiveEditor().getSite();
 		site.registerContextMenu(CONTEXTMENUID, menuManager, site.getSelectionProvider());
 	}
 
 	protected MenuManager createMenuManager() {
-		return new MenuManager(CONTEXTMENUID, CONTEXTMENUID);
+		return new FilteringMenuManager();
 	}
 
 	protected void keyReleaseOccured(KeyEvent keyEvent) {
