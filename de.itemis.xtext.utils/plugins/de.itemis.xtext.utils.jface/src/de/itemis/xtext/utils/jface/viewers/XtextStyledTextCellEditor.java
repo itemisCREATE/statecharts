@@ -11,6 +11,10 @@
  */
 package de.itemis.xtext.utils.jface.viewers;
 
+import java.util.ArrayList;
+
+import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.text.ITextListener;
 import org.eclipse.jface.text.TextEvent;
@@ -27,8 +31,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
 import de.itemis.utils.jface.viewers.StyledTextCellEditor;
@@ -56,6 +65,7 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	private StyledTextXtextAdapter xtextAdapter;
 	private IXtextFakeContextResourcesProvider contextFakeResourceProvider;
 	private IContextElementProvider provider;
+	private final static String CONTEXTMENUID = "de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
 
 	public XtextStyledTextCellEditor(int style, Injector injector,
 			IXtextFakeContextResourcesProvider contextFakeResourceProvider) {
@@ -139,8 +149,39 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 				}
 			}
 		});
-
+		
+		initContextMenu(styledText);
+		
 		return styledText;
+	}
+	
+	protected void initContextMenu(Control control) {
+		MenuManager menuManager = createMenuManager();
+		Menu contextMenu = menuManager.createContextMenu(control);
+		control.setMenu(contextMenu);
+		
+		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchPartSite site = window.getActivePage().getActiveEditor().getSite();
+		site.registerContextMenu(CONTEXTMENUID, menuManager, site.getSelectionProvider());
+	}
+	
+	protected MenuManager createMenuManager() {
+		
+		MenuManager manager = new MenuManager(CONTEXTMENUID, CONTEXTMENUID) {
+			// Overridden to filter default actions
+			@Override
+			public IContributionItem[] getItems() {
+				ArrayList<Object> result = Lists.newArrayList();
+				IContributionItem[] itemis = super.getItems();
+				for (IContributionItem iContributionItem : itemis) {
+					String id = iContributionItem.getId();
+					if (id != null && id.startsWith("org.yakindu"))
+						result.add(iContributionItem);
+				}
+				return result.toArray(new IContributionItem[] {});
+			}
+		};
+		return manager;
 	}
 
 	protected void keyReleaseOccured(KeyEvent keyEvent) {
