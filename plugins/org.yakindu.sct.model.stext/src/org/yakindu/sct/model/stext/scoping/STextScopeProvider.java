@@ -12,7 +12,6 @@
 package org.yakindu.sct.model.stext.scoping;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,9 +30,8 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
-import org.yakindu.base.types.DataType;
+import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
-import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.base.types.Type;
@@ -146,7 +144,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			scope = new FilteringScope(scope, predicate);
 		}
 
-		if (element instanceof DataType) {
+		if (element instanceof ComplexType) {
 			scope = Scopes.scopeFor(allFeatures((Type) element), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
@@ -262,11 +260,11 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			Set<Type> visited) {
 		if (type == null || visited.contains(type))
 			return;
-		if (type instanceof DataType) {
-			for (Type superType : ((DataType) type).getSuperTypes()) {
+		if (type instanceof ComplexType) {
+			for (Type superType : ((ComplexType) type).getSuperTypes()) {
 				collectFeatures(superType, features, visited);
 			}
-			features.addAll(((DataType) type).getFeatures());
+			features.addAll(((ComplexType) type).getFeatures());
 		}
 		visited.add(type);
 	}
