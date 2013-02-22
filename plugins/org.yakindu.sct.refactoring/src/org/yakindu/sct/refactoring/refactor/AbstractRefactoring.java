@@ -37,7 +37,8 @@ import org.yakindu.sct.refactoring.utils.RefactoringHelper;
  * @author thomas kutz - Initial contribution and API
  * 
  */
-public abstract class AbstractRefactoring<T extends EObject> implements IRefactoring<T> {
+public abstract class AbstractRefactoring<T extends Object> implements
+		IRefactoring<T> {
 
 	private List<T> contextObjects;
 
@@ -71,7 +72,11 @@ public abstract class AbstractRefactoring<T extends EObject> implements IRefacto
 	 * @return resource
 	 */
 	protected Resource getResource() {
-		return getContextObjects().iterator().next().eResource();
+		T firstContextObject = getContextObject();
+		if (firstContextObject instanceof EObject) {
+			return ((EObject) firstContextObject).eResource();
+		}
+		return null;
 	}
 
 	/**
@@ -84,11 +89,12 @@ public abstract class AbstractRefactoring<T extends EObject> implements IRefacto
 			return;
 		}
 
-		AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(getEditingDomain(),
-				getCommandLabel(), getAffectedFiles()) {
+		AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(
+				getEditingDomain(), getCommandLabel(), getAffectedFiles()) {
 
 			@Override
-			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
+			protected CommandResult doExecuteWithResult(
+					IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
 					internalExecute();
@@ -144,7 +150,8 @@ public abstract class AbstractRefactoring<T extends EObject> implements IRefacto
 	 *            the resource used for enabling/disabling its serializer
 	 */
 	protected void executeCommand(IUndoableOperation command, Resource resource) {
-		IOperationHistory history = OperationHistoryFactory.getOperationHistory();
+		IOperationHistory history = OperationHistoryFactory
+				.getOperationHistory();
 
 		if (resource instanceof StextResource) {
 			// enable serializer

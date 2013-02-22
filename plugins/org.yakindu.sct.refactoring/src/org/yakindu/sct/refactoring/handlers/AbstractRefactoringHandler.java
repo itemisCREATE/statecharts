@@ -13,7 +13,6 @@ package org.yakindu.sct.refactoring.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -29,7 +28,7 @@ import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractRefactoringHandler<T extends EObject> extends AbstractHandler {
+public abstract class AbstractRefactoringHandler<T extends Object> extends AbstractHandler {
 
 	private AbstractRefactoring<T> refactoring;
 
