@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
-import java.util.ArrayList;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.ecore.EObject;
@@ -19,7 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.AbstractModelerPropertySection;
-import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.dialogs.IDialogLabelKeys;
@@ -49,12 +46,12 @@ import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
+import de.itemis.xtext.utils.jface.viewers.FilteringMenuManager;
 import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
 import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
@@ -63,8 +60,8 @@ import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class AbstractEditorPropertySection extends
-		AbstractModelerPropertySection implements IContextElementProvider {
+public abstract class AbstractEditorPropertySection extends AbstractModelerPropertySection implements
+		IContextElementProvider {
 
 	public abstract void createControls(Composite parent);
 
@@ -77,8 +74,8 @@ public abstract class AbstractEditorPropertySection extends
 	private Form form;
 
 	private CompletionProposalAdapter completionProposalAdapter;
-	
-	private final static String CONTEXTMENUID = "de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
+
+	public final static String CONTEXTMENUID = "de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapterContextMenu";
 
 	@Override
 	public void refresh() {
@@ -99,8 +96,7 @@ public abstract class AbstractEditorPropertySection extends
 	}
 
 	@Override
-	public final void createControls(Composite parent,
-			TabbedPropertySheetPage aTabbedPropertySheetPage) {
+	public final void createControls(Composite parent, TabbedPropertySheetPage aTabbedPropertySheetPage) {
 		toolkit = new FormToolkit(parent.getDisplay());
 		toolkit.setBorderStyle(SWT.BORDER);
 		super.createControls(parent, aTabbedPropertySheetPage);
@@ -133,9 +129,7 @@ public abstract class AbstractEditorPropertySection extends
 		if (editor instanceof IEditingDomainProvider) {
 			domain = ((IEditingDomainProvider) editor).getEditingDomain();
 		} else if (editor.getAdapter(IEditingDomainProvider.class) != null) {
-			domain = ((IEditingDomainProvider) editor
-					.getAdapter(IEditingDomainProvider.class))
-					.getEditingDomain();
+			domain = ((IEditingDomainProvider) editor.getAdapter(IEditingDomainProvider.class)).getEditingDomain();
 		} else if (editor.getAdapter(EditingDomain.class) != null) {
 			domain = (EditingDomain) editor.getAdapter(EditingDomain.class);
 		}
@@ -149,46 +143,23 @@ public abstract class AbstractEditorPropertySection extends
 	}
 
 	protected void enableXtext(Control styledText, Injector injector) {
-		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(
-				injector);
-		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters()
-				.add(new ContextElementAdapter(this));
+		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(injector);
+		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
 		xtextAdapter.adapt((StyledText) styledText);
 
 		initContextMenu(styledText);
-		
-		completionProposalAdapter = new CompletionProposalAdapter(
-				styledText, xtextAdapter.getContentAssistant(),
+
+		completionProposalAdapter = new CompletionProposalAdapter(styledText, xtextAdapter.getContentAssistant(),
 				KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
 	}
-	
+
 	protected void initContextMenu(Control control) {
-		MenuManager menuManager = createMenuManager();
+		MenuManager menuManager = new FilteringMenuManager();
 		Menu contextMenu = menuManager.createContextMenu(control);
 		control.setMenu(contextMenu);
-		
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPartSite site = window.getActivePage().getActiveEditor().getSite();
 		site.registerContextMenu(CONTEXTMENUID, menuManager, site.getSelectionProvider());
-	}
-	
-	protected MenuManager createMenuManager() {
-		
-		MenuManager manager = new MenuManager(CONTEXTMENUID, CONTEXTMENUID) {
-			// Overridden to filter default actions
-			@Override
-			public IContributionItem[] getItems() {
-				ArrayList<Object> result = Lists.newArrayList();
-				IContributionItem[] itemis = super.getItems();
-				for (IContributionItem iContributionItem : itemis) {
-					String id = iContributionItem.getId();
-					if (id != null && id.startsWith("org.yakindu"))
-						result.add(iContributionItem);
-				}
-				return result.toArray(new IContributionItem[] {});
-			}
-		};
-		return manager;
 	}
 
 	public CompletionProposalAdapter getCompletionProposalAdapter() {
@@ -196,9 +167,8 @@ public abstract class AbstractEditorPropertySection extends
 	}
 
 	protected Injector getInjector(SemanticTarget semanticTarget) {
-		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
-				.getRegisteredProvider(semanticTarget,
-						getActiveEditorResource().getURI().fileExtension());
+		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getRegisteredProvider(
+				semanticTarget, getActiveEditorResource().getURI().fileExtension());
 		return registeredProvider.getInjector();
 	}
 
@@ -206,17 +176,12 @@ public abstract class AbstractEditorPropertySection extends
 		return getEObject();
 	}
 
-	protected void createHelpWidget(final Composite parent,
-			final Control control, String helpId) {
-		final ImageHyperlink helpWidget = toolkit.createImageHyperlink(parent,
-				SWT.CENTER);
-		Image defaultImage = PlatformUI.getWorkbench().getSharedImages()
-				.getImage(ISharedImages.IMG_LCL_LINKTO_HELP);
+	protected void createHelpWidget(final Composite parent, final Control control, String helpId) {
+		final ImageHyperlink helpWidget = toolkit.createImageHyperlink(parent, SWT.CENTER);
+		Image defaultImage = PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_LCL_LINKTO_HELP);
 		helpWidget.setImage(defaultImage);
-		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP)
-				.applyTo(helpWidget);
-		helpWidget.setToolTipText(JFaceResources
-				.getString(IDialogLabelKeys.HELP_LABEL_KEY));
+		GridDataFactory.fillDefaults().align(SWT.FILL, SWT.TOP).applyTo(helpWidget);
+		helpWidget.setToolTipText(JFaceResources.getString(IDialogLabelKeys.HELP_LABEL_KEY));
 		helpWidget.addMouseListener(new MouseAdapter() {
 			public void mouseDown(MouseEvent e) {
 				control.setFocus();
@@ -229,8 +194,7 @@ public abstract class AbstractEditorPropertySection extends
 	}
 
 	protected void setHelpContext(Control control, String helpId) {
-		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench()
-				.getHelpSystem();
+		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
 		helpSystem.setHelp(control, helpId);
 	}
 
