@@ -29,16 +29,15 @@ import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCo
 import org.yakindu.sct.model.stext.resource.impl.StextResource;
 import org.yakindu.sct.refactoring.utils.RefactoringHelper;
 
-/** 
- * Base abstract class for all refactorings providing some default implementations. 
- * Concrete subclasses are responsible for implementing the refactoring logic which is applied on the refactoring's 
- * context objects.
+/**
+ * Base abstract class for all refactorings providing some default
+ * implementations. Concrete subclasses are responsible for implementing the
+ * refactoring logic which is applied on the refactoring's context objects.
  * 
  * @author thomas kutz - Initial contribution and API
  * 
  */
-public abstract class AbstractRefactoring<T extends EObject> implements
-		IRefactoring<T> {
+public abstract class AbstractRefactoring<T extends EObject> implements IRefactoring<T> {
 
 	private List<T> contextObjects;
 
@@ -53,9 +52,10 @@ public abstract class AbstractRefactoring<T extends EObject> implements
 	protected T getContextObject() {
 		return getContextObjects().iterator().next();
 	}
-	
+
 	/**
-	 * Helper providing several convenience methods to access and modify model element.
+	 * Helper providing several convenience methods to access and modify model
+	 * element.
 	 */
 	protected RefactoringHelper helper = new RefactoringHelper();
 
@@ -65,8 +65,8 @@ public abstract class AbstractRefactoring<T extends EObject> implements
 	}
 
 	/**
-	 * Returns the resource which is affected by this refactoring.
-	 * Default implementation returns the resource of the first context object.
+	 * Returns the resource which is affected by this refactoring. Default
+	 * implementation returns the resource of the first context object.
 	 * 
 	 * @return resource
 	 */
@@ -75,7 +75,8 @@ public abstract class AbstractRefactoring<T extends EObject> implements
 	}
 
 	/**
-	 * Wraps an {@link AbstractTransactionalCommand} around the refactoring logic.
+	 * Wraps an {@link AbstractTransactionalCommand} around the refactoring
+	 * logic.
 	 */
 	@Override
 	public void execute() {
@@ -83,14 +84,17 @@ public abstract class AbstractRefactoring<T extends EObject> implements
 			return;
 		}
 
-		AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(
-				getEditingDomain(), getCommandLabel(), getAffectedFiles()) {
+		AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(getEditingDomain(),
+				getCommandLabel(), getAffectedFiles()) {
 
 			@Override
-			protected CommandResult doExecuteWithResult(
-					IProgressMonitor monitor, IAdaptable info)
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
-				internalExecute();
+				try {
+					internalExecute();
+				} catch (Exception ex) {
+					return CommandResult.newErrorCommandResult(ex);
+				}
 				return CommandResult.newOKCommandResult();
 			}
 
@@ -104,7 +108,8 @@ public abstract class AbstractRefactoring<T extends EObject> implements
 	protected abstract void internalExecute();
 
 	/**
-	 * Getter for the editing domain of the resource used in this refactoring. 
+	 * Getter for the editing domain of the resource used in this refactoring.
+	 * 
 	 * @return editing domain
 	 */
 	protected TransactionalEditingDomain getEditingDomain() {
@@ -113,6 +118,7 @@ public abstract class AbstractRefactoring<T extends EObject> implements
 
 	/**
 	 * Returns a list of files affected by this refactoring.
+	 * 
 	 * @return list of affected files
 	 */
 	protected List<?> getAffectedFiles() {
@@ -121,6 +127,7 @@ public abstract class AbstractRefactoring<T extends EObject> implements
 
 	/**
 	 * Returns the label of this refactoring's command.
+	 * 
 	 * @return command label
 	 */
 	protected String getCommandLabel() {
@@ -128,14 +135,16 @@ public abstract class AbstractRefactoring<T extends EObject> implements
 	}
 
 	/**
-	 * Executes the specified command and handles enabling and disabling of the resource's serializer.
+	 * Executes the specified command and handles enabling and disabling of the
+	 * resource's serializer.
 	 * 
-	 * @param command the command to execute
-	 * @param resource the resource used for enabling/disabling its serializer
+	 * @param command
+	 *            the command to execute
+	 * @param resource
+	 *            the resource used for enabling/disabling its serializer
 	 */
 	protected void executeCommand(IUndoableOperation command, Resource resource) {
-		IOperationHistory history = OperationHistoryFactory
-				.getOperationHistory();
+		IOperationHistory history = OperationHistoryFactory.getOperationHistory();
 
 		if (resource instanceof StextResource) {
 			// enable serializer
