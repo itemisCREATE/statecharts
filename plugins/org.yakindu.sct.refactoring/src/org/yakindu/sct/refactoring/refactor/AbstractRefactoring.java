@@ -19,7 +19,9 @@ import org.eclipse.core.commands.operations.IUndoableOperation;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
@@ -37,8 +39,7 @@ import org.yakindu.sct.refactoring.utils.RefactoringHelper;
  * @author thomas kutz - Initial contribution and API
  * 
  */
-public abstract class AbstractRefactoring<T extends Object> implements
-		IRefactoring<T> {
+public abstract class AbstractRefactoring<T extends Object> implements IRefactoring<T> {
 
 	private List<T> contextObjects;
 
@@ -89,12 +90,11 @@ public abstract class AbstractRefactoring<T extends Object> implements
 			return;
 		}
 
-		AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(
-				getEditingDomain(), getCommandLabel(), getAffectedFiles()) {
+		AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(getEditingDomain(),
+				getCommandLabel(), getAffectedFiles()) {
 
 			@Override
-			protected CommandResult doExecuteWithResult(
-					IProgressMonitor monitor, IAdaptable info)
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
 					internalExecute();
@@ -104,8 +104,19 @@ public abstract class AbstractRefactoring<T extends Object> implements
 				return CommandResult.newOKCommandResult();
 			}
 
+			@Override
+			protected IStatus doUndo(IProgressMonitor monitor, IAdaptable info) throws ExecutionException {
+				if (internalDoUndo())
+					return super.doUndo(monitor, info);
+				return Status.CANCEL_STATUS;
+			}
+
 		};
 		executeCommand(refactoringCommand, getResource());
+	}
+
+	protected boolean internalDoUndo() {
+		return true;
 	}
 
 	/**
@@ -150,8 +161,7 @@ public abstract class AbstractRefactoring<T extends Object> implements
 	 *            the resource used for enabling/disabling its serializer
 	 */
 	protected void executeCommand(IUndoableOperation command, Resource resource) {
-		IOperationHistory history = OperationHistoryFactory
-				.getOperationHistory();
+		IOperationHistory history = OperationHistoryFactory.getOperationHistory();
 
 		if (resource instanceof StextResource) {
 			// enable serializer

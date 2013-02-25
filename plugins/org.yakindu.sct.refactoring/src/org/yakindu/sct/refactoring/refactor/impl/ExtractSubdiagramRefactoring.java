@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.refactoring.refactor.impl;
 
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.createInlineStyle;
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.getInlineStyle;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -34,8 +37,8 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
-import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.*;
 
 /**
  * 
@@ -45,6 +48,7 @@ import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.*;
 public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	protected PreferencesHint preferencesHint = DiagramActivator.DIAGRAM_PREFERENCES_HINT;
+	private Diagram subdiagram;
 
 	@Override
 	public boolean isExecutable() {
@@ -56,8 +60,13 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	@Override
 	protected void internalExecute() {
 		setNotationStyle();
-		Diagram subdiagram = createSubdiagram();
+		subdiagram = createSubdiagram();
 		createEntryExitPoints(subdiagram);
+	}
+
+	@Override
+	protected boolean internalDoUndo() {
+		return DiagramPartitioningUtil.closeSubdiagramEditors((State) subdiagram.getElement());
 	}
 
 	@SuppressWarnings("unchecked")
