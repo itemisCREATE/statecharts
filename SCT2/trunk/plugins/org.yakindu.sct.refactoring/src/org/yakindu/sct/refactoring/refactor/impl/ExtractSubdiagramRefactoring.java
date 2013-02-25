@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
@@ -30,20 +31,25 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.*;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class ExtractSubdiagramRefactoring extends SubdiagramRefactoring {
+public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
+
+	protected PreferencesHint preferencesHint = DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 
 	@Override
 	public boolean isExecutable() {
 		State state = (State) getContextObject().getElement();
-		BooleanValueStyle inlineStyle = getInlineStyle();
+		BooleanValueStyle inlineStyle = getInlineStyle(getContextObject());
 		return super.isExecutable() && state.isComposite() && (inlineStyle == null || inlineStyle.isBooleanValue());
 	}
 
@@ -136,7 +142,7 @@ public class ExtractSubdiagramRefactoring extends SubdiagramRefactoring {
 	 */
 	@SuppressWarnings("unchecked")
 	protected void setNotationStyle() {
-		BooleanValueStyle inlineStyle = getInlineStyle();
+		BooleanValueStyle inlineStyle = getInlineStyle(getContextObject());
 		if (inlineStyle == null) {
 			inlineStyle = createInlineStyle();
 			getContextObject().getStyles().add(inlineStyle);

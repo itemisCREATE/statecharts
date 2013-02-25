@@ -25,7 +25,9 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.diagram.core.DiagramEditingDomainFactory;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.NotationFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
@@ -42,6 +44,7 @@ import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
+import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
  * 
@@ -56,6 +59,25 @@ public class DiagramPartitioningUtil {
 	private static final String DOMAIN_ID = "StatechartDomain";
 
 	private DiagramPartitioningUtil() {
+	}
+
+	/**
+	 * returns the style for diagram inlining
+	 * 
+	 */
+	public static BooleanValueStyle getInlineStyle(View view) {
+		BooleanValueStyle result = GMFNotationUtil.getBooleanValueStyle(view, INLINE_STYLE);
+		return result;
+	}
+
+	/**
+	 * creates a new style for diagam inlining
+	 */
+	public static BooleanValueStyle createInlineStyle() {
+		BooleanValueStyle result = NotationFactory.eINSTANCE.createBooleanValueStyle();
+		result.setName(INLINE_STYLE);
+		result.setBooleanValue(true);
+		return result;
 	}
 
 	/**
