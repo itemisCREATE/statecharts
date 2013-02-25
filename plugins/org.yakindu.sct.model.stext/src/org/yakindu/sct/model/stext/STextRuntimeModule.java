@@ -20,7 +20,7 @@ import org.yakindu.sct.model.sgraph.resource.provider.SCTResourceDescriptionStra
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
-import org.yakindu.sct.model.stext.types.STextDefaulTypeSystem;
+import org.yakindu.sct.model.stext.types.STextDefaultTypeSystem;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -55,7 +55,7 @@ public class STextRuntimeModule extends
 	}
 
 	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return STextDefaulTypeSystem.class;
+		return STextDefaultTypeSystem.class;
 	}
 
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {

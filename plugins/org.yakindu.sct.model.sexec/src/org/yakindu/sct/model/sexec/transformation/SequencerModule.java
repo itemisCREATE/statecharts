@@ -6,7 +6,7 @@ import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
-import org.yakindu.sct.model.stext.types.STextDefaulTypeSystem;
+import org.yakindu.sct.model.stext.types.STextDefaultTypeSystem;
 import org.yakindu.sct.model.stext.types.STextDefaultTypeInferrer;
 
 import com.google.inject.Binder;
@@ -37,11 +37,11 @@ public class SequencerModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return STextDefaulTypeSystem.class;
+		return STextDefaultTypeSystem.class;
 	}
 
 	public Class<? extends ISTextTypeSystem> bindISTextTypeSystem() {
-		return STextDefaulTypeSystem.class;
+		return STextDefaultTypeSystem.class;
 	}
 
 	public Class<? extends ISTextTypeInferrer> bindISTextTypeInferrer() {
