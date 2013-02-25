@@ -183,16 +183,6 @@
       </definition>
    </extension>
    <extension
-         id="com.yakindu.sct.refactoring.rename.binding"
-         point="org.eclipse.ui.bindings">
-      <key
-            commandId="com.yakindu.sct.refactoring.renameElement"
-            contextId="org.eclipse.ui.contexts.window"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="Alt+Shift+R">
-      </key>
-   </extension>
-   <extension
          point="org.eclipse.ui.startup">
       <startup
             class="org.yakindu.sct.refactoring.Activator">
