@@ -21,6 +21,7 @@ import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
@@ -43,6 +44,7 @@ import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.util.Arrays;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -115,20 +117,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	protected void configureGraphicalViewer() {
 		super.configureGraphicalViewer();
 		GraphicalViewer graphicalViewer = getGraphicalViewer();
-		ContextMenuProvider provider = new DiagramContextMenuProvider(this, graphicalViewer) {
-		
-			String[] exclude = new String[] { "addNoteLinkAction", "properties",
-					"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
-					"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu",
-					"addGroup", "navigateGroup" };
-
-			protected boolean allowItem(IContributionItem itemToAdd) {
-				if (Arrays.contains(exclude, itemToAdd.getId())) {
-					itemToAdd.setVisible(false);
-				}
-				return super.allowItem(itemToAdd);
-			}
-		};
+		ContextMenuProvider provider = new FilteringDiagramContextMenuProvider(this, graphicalViewer);
 		graphicalViewer.setContextMenu(provider);
 		getSite().registerContextMenu(ActionIds.DIAGRAM_EDITOR_CONTEXT_MENU, provider, viewer);
 	}
@@ -166,6 +155,26 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 			else
 				label.setImage(provider.getImage(element));
 
+		}
+	}
+
+	private static final class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
+		// Default context menu items that should be suppressed
+		String[] exclude = new String[] { "addNoteLinkAction", "properties",
+				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
+				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
+				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu",
+				"viewGroup", "viewMenu" };
+
+		private FilteringDiagramContextMenuProvider(IWorkbenchPart part, EditPartViewer viewer) {
+			super(part, viewer);
+		}
+
+		protected boolean allowItem(IContributionItem itemToAdd) {
+			if (Arrays.contains(exclude, itemToAdd.getId())) {
+				itemToAdd.setVisible(false);
+			}
+			return super.allowItem(itemToAdd);
 		}
 	}
 
