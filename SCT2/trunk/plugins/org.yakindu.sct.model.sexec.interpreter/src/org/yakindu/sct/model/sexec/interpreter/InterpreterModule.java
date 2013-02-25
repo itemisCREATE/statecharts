@@ -20,7 +20,7 @@ import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
-import org.yakindu.sct.model.stext.types.STextDefaulTypeSystem;
+import org.yakindu.sct.model.stext.types.STextDefaultTypeSystem;
 import org.yakindu.sct.model.stext.types.STextDefaultTypeInferrer;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionContextImpl;
@@ -69,11 +69,11 @@ public class InterpreterModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return STextDefaulTypeSystem.class;
+		return STextDefaultTypeSystem.class;
 	}
 
 	public Class<? extends ISTextTypeSystem> bindISTextTypeSystem() {
-		return STextDefaulTypeSystem.class;
+		return STextDefaultTypeSystem.class;
 	}
 	
 	public Class<? extends ISTextTypeInferrer> bindISTextTypeInferrer(){

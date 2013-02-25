@@ -22,7 +22,7 @@ import com.google.inject.ImplementedBy;
  *         and API
  * 
  */
-@ImplementedBy(STextDefaulTypeSystem.class)
+@ImplementedBy(STextDefaultTypeSystem.class)
 public interface ISTextTypeSystem extends ITypeSystem {
 
 	public enum UnaryOperators implements ITypeSystemOperator {

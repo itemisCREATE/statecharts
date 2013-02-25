@@ -29,7 +29,7 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
-public class STextDefaulTypeSystem extends AbstractTypeSystem implements
+public class STextDefaultTypeSystem extends AbstractTypeSystem implements
 		ISTextTypeSystem {
 
 	/**
@@ -53,7 +53,7 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 	}
 
 	public Type getBooleanType() {
-		synchronized (STextDefaulTypeSystem.class) {
+		synchronized (STextDefaultTypeSystem.class) {
 			if (booleanType == null) {
 				booleanType = TypesFactory.eINSTANCE.createPrimitiveType();
 				booleanType.setName("boolean");
@@ -64,7 +64,7 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 	}
 
 	public Type getIntegerType() {
-		synchronized (STextDefaulTypeSystem.class) {
+		synchronized (STextDefaultTypeSystem.class) {
 			if (integerType == null) {
 				integerType = TypesFactory.eINSTANCE.createPrimitiveType();
 				integerType.setName("integer");
@@ -75,7 +75,7 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 	}
 
 	public Type getRealType() {
-		synchronized (STextDefaulTypeSystem.class) {
+		synchronized (STextDefaultTypeSystem.class) {
 			if (realType == null) {
 				realType = TypesFactory.eINSTANCE.createPrimitiveType();
 				realType.setName("real");
@@ -86,7 +86,7 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 	}
 
 	public Type getStringType() {
-		synchronized (STextDefaulTypeSystem.class) {
+		synchronized (STextDefaultTypeSystem.class) {
 			if (stringType == null) {
 				stringType = TypesFactory.eINSTANCE.createPrimitiveType();
 				stringType.setName("string");
@@ -97,7 +97,7 @@ public class STextDefaulTypeSystem extends AbstractTypeSystem implements
 	}
 
 	public Type getVoidType() {
-		synchronized (STextDefaulTypeSystem.class) {
+		synchronized (STextDefaultTypeSystem.class) {
 			if (voidType == null) {
 				voidType = TypesFactory.eINSTANCE.createPrimitiveType();
 				voidType.setName("void");
