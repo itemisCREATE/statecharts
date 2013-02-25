@@ -125,7 +125,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 				if (Arrays.contains(exclude, itemToAdd.getId())) {
 					itemToAdd.setVisible(false);
 				}
-				System.out.println(itemToAdd.getId());
 				return super.allowItem(itemToAdd);
 			}
 		};
