@@ -20,10 +20,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
+import org.eclipse.gef.ContextMenuProvider;
+import org.eclipse.gef.GraphicalViewer;
+import org.eclipse.gmf.runtime.diagram.ui.actions.ActionIds;
 import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditorInput;
+import org.eclipse.gmf.runtime.diagram.ui.providers.DiagramContextMenuProvider;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentProvider;
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.BaseLabelProvider;
@@ -38,6 +43,7 @@ import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.xtext.util.Arrays;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.provider.SGraphItemProviderAdapterFactory;
@@ -105,6 +111,26 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 		setTitleImage(labelProvider.getImage(element));
 		setPartName(SUBDIAGRAM + labelProvider.getText(element));
 
+	}
+
+	@Override
+	protected void configureGraphicalViewer() {
+		super.configureGraphicalViewer();
+		GraphicalViewer graphicalViewer = getGraphicalViewer();
+		ContextMenuProvider provider = new DiagramContextMenuProvider(this, graphicalViewer) {
+			protected boolean allowItem(IContributionItem itemToAdd) {
+				String[] exclude = new String[] { "addNoteLinkAction", "properties",
+						"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
+						"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu","addGroup","navigateGroup" };
+				if (Arrays.contains(exclude, itemToAdd.getId())) {
+					itemToAdd.setVisible(false);
+				}
+				System.out.println(itemToAdd.getId());
+				return super.allowItem(itemToAdd);
+			}
+		};
+		graphicalViewer.setContextMenu(provider);
+		getSite().registerContextMenu(ActionIds.DIAGRAM_EDITOR_CONTEXT_MENU, provider, viewer);
 	}
 
 	private void createBreadcrumbViewer(Composite parent) {

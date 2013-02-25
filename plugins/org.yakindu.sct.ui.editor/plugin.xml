@@ -816,6 +816,11 @@
        id="org.yakindu.sct.ui.editor.commands.ToggleShowDocumentation"
        name="Toggle Documentation">
  	</command>
+ 	<command
+       defaultHandler="org.yakindu.sct.ui.editor.commands.CreateSubdiagramCommand"
+       id="org.yakindu.sct.ui.editor.commands.CreateSubdiagram"
+       name="Create Subdiagram">
+ 	</command>
 </extension>
 
 <extension
@@ -903,6 +908,26 @@
                             value="org.yakindu.sct.ui.editor.editparts.StatechartTextEditPart">
                       </instanceof>
                       
+                   </or>
+                </iterate>
+             </with>
+          </visibleWhen>
+       </command>
+        <command
+             commandId="org.yakindu.sct.ui.editor.commands.CreateSubdiagram"
+             label="Create Subdiagram"
+             style="push">
+          <visibleWhen
+                checkEnabled="false">
+             <with
+                   variable="selection">
+                <iterate
+                      ifEmpty="false"
+                      operator="and">
+                   <or>
+                      <instanceof
+                            value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
+                      </instanceof>
                    </or>
                 </iterate>
              </with>

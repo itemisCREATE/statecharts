@@ -16,25 +16,28 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.*;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class InlineSubdiagramRefactoring extends SubdiagramRefactoring {
+public class InlineSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	@Override
 	public boolean isExecutable() {
-		return super.isExecutable() && getInlineStyle() != null && !getInlineStyle().isBooleanValue();
+		BooleanValueStyle inlineStyle = getInlineStyle(getContextObject());
+		return super.isExecutable() && inlineStyle != null && !inlineStyle.isBooleanValue();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void internalExecute() {
-		BooleanValueStyle inlineStyle = getInlineStyle();
+		BooleanValueStyle inlineStyle = getInlineStyle(getContextObject());
 		if (inlineStyle == null) {
 			inlineStyle = createInlineStyle();
 			getContextObject().getStyles().add(inlineStyle);
