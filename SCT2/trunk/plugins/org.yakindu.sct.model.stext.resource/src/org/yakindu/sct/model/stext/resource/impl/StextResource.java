@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IParseResult;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Reaction;
+import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -46,7 +47,7 @@ public class StextResource extends AbstractSCTResource {
 	}
 
 	protected void serializeState(State state) {
-		if(state.getScopes().size() != 1)
+		if (state.getScopes().size() != 1)
 			return;
 		Scope scope = state.getScopes().get(0);
 		EList<Declaration> declarations = scope.getDeclarations();
@@ -64,6 +65,12 @@ public class StextResource extends AbstractSCTResource {
 			builder.append(" / ");
 			builder.append(serialize(reaction.getEffect()));
 		}
+		if (reaction.getProperties().size() > 0) {
+			builder.append(" # ");
+			for (ReactionProperty property : reaction.getProperties()) {
+				builder.append(serialize(property));
+			}
+		}
 		return builder.toString();
 	}
 
@@ -72,11 +79,9 @@ public class StextResource extends AbstractSCTResource {
 	}
 
 	protected void parseStatechart(Statechart statechart) {
-		IParseResult parseResult = parse(statechart,
-				StatechartSpecification.class.getSimpleName());
+		IParseResult parseResult = parse(statechart, StatechartSpecification.class.getSimpleName());
 
-		StatechartSpecification rootASTElement = (StatechartSpecification) parseResult
-				.getRootASTElement();
+		StatechartSpecification rootASTElement = (StatechartSpecification) parseResult.getRootASTElement();
 
 		EList<Scope> definitionScopes = rootASTElement.getScopes();
 		statechart.getScopes().clear();
@@ -87,10 +92,8 @@ public class StextResource extends AbstractSCTResource {
 	}
 
 	protected void parseState(State state) {
-		IParseResult parseResult = parse(state,
-				StateSpecification.class.getSimpleName());
-		StateSpecification rootASTElement = (StateSpecification) parseResult
-				.getRootASTElement();
+		IParseResult parseResult = parse(state, StateSpecification.class.getSimpleName());
+		StateSpecification rootASTElement = (StateSpecification) parseResult.getRootASTElement();
 		state.getScopes().clear();
 		if (rootASTElement.getScope() != null) {
 			state.getScopes().add(rootASTElement.getScope());
@@ -98,14 +101,13 @@ public class StextResource extends AbstractSCTResource {
 	}
 
 	protected void parseTransition(Transition transition) {
-		IParseResult parseResult = parse(transition,
-				TransitionSpecification.class.getSimpleName());
-		TransitionSpecification rootASTElement = (TransitionSpecification) parseResult
-				.getRootASTElement();
+		IParseResult parseResult = parse(transition, TransitionSpecification.class.getSimpleName());
+		TransitionSpecification rootASTElement = (TransitionSpecification) parseResult.getRootASTElement();
 		if (rootASTElement.getReaction() != null) {
 			TransitionReaction reaction = rootASTElement.getReaction();
 			transition.setEffect(reaction.getEffect());
 			transition.setTrigger(reaction.getTrigger());
+			transition.getProperties().addAll(reaction.getProperties());
 		}
 	}
 
