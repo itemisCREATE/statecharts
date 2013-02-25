@@ -16,7 +16,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.xtext.util.Arrays;
 
 /**
- * exclusionSet from DiagramContextMenuProvider
+ * Copied from DiagramContextMenuProvider
  * 
  * @author muelder
  * 
@@ -29,6 +29,13 @@ public class FilteringMenuManager extends MenuManager {
 			"org.eclipse.debug.ui.contextualLaunch.run.submenu", "org.eclipse.debug.ui.contextualLaunch.debug.submenu",
 			"org.eclipse.debug.ui.contextualLaunch.profile.submenu",
 			"org.eclipse.mylyn.resources.ui.ui.interest.remove.element" };
+
+	public FilteringMenuManager() {
+	}
+
+	public FilteringMenuManager(String text, String id) {
+		super(text, null, id);
+	}
 
 	protected boolean allowItem(IContributionItem itemToAdd) {
 		if (itemToAdd.getId() != null && Arrays.contains(exclusionSet, itemToAdd.getId()))
