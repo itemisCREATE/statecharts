@@ -53,7 +53,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="effect" eType="#//Effect"
         transient="true" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
-        eType="#//ReactionProperty" containment="true"/>
+        eType="#//ReactionProperty" transient="true" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Trigger" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="Effect" abstract="true"/>

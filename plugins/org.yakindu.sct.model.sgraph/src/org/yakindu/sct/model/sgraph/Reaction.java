@@ -102,7 +102,7 @@ public interface Reaction extends EObject {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Properties</em>' containment reference list.
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getReaction_Properties()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true" resolveProxies="true" transient="true"
 	 * @generated
 	 */
 	EList<ReactionProperty> getProperties();
