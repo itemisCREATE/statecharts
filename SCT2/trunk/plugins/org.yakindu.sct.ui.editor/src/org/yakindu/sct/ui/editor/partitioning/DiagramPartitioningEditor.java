@@ -59,8 +59,6 @@ import org.yakindu.sct.ui.editor.StatechartImages;
 public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor implements ISelectionChangedListener,
 		IEditingDomainProvider {
 
-	private static final String SUBDIAGRAM = "Subdiagram - ";
-
 	private DiagramPartitioningBreadcrumbViewer viewer;
 
 	private DiagramPartitioningDocumentProvider documentProvider;
@@ -109,7 +107,7 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
 				new SGraphItemProviderAdapterFactory());
 		setTitleImage(labelProvider.getImage(element));
-		setPartName(SUBDIAGRAM + labelProvider.getText(element));
+		setPartName(labelProvider.getText(element));
 
 	}
 
