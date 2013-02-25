@@ -118,10 +118,13 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 		super.configureGraphicalViewer();
 		GraphicalViewer graphicalViewer = getGraphicalViewer();
 		ContextMenuProvider provider = new DiagramContextMenuProvider(this, graphicalViewer) {
+		
+			String[] exclude = new String[] { "addNoteLinkAction", "properties",
+					"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
+					"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu",
+					"addGroup", "navigateGroup" };
+
 			protected boolean allowItem(IContributionItem itemToAdd) {
-				String[] exclude = new String[] { "addNoteLinkAction", "properties",
-						"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
-						"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu","addGroup","navigateGroup" };
 				if (Arrays.contains(exclude, itemToAdd.getId())) {
 					itemToAdd.setVisible(false);
 				}
