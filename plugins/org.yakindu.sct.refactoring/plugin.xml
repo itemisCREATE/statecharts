@@ -122,14 +122,20 @@
                      style="push">
                <visibleWhen
                      checkEnabled="false">
+                  <reference
+                        definitionId="oneStateSelected">
+                  </reference>
                </visibleWhen>
             </command>
              <command
                   commandId="com.yakindu.sct.refactoring.inlineSubDiagram"
                   label="Inline Subdiagram"
                   style="push">
-                    <visibleWhen
+                   <visibleWhen
                      checkEnabled="false">
+                  <reference
+                        definitionId="oneStateSelected">
+                  </reference>
                </visibleWhen>
             </command>
          </menu>
