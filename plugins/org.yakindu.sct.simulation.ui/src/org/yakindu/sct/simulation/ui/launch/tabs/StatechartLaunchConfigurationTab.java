@@ -183,10 +183,12 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	protected Set<String> getOperationClasses() {
 		String operationClasses = this.operationClass.getText();
-		String[] split = operationClasses.split(",");
-		Set<String> result = new HashSet<String>(split.length);
-		for (String string : split) {
-			result.add(string.trim());
+		Set<String> result = new HashSet<String>();
+		if ( operationClasses.trim().length() > 0 ) {
+			String[] split = operationClasses.split(",");
+			for (String string : split) {
+				result.add(string.trim());
+			}
 		}
 		return result;
 	}

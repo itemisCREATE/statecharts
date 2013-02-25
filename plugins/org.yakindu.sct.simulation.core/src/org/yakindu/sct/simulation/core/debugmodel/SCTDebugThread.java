@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.simulation.core.debugmodel;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.debug.core.DebugException;
@@ -31,7 +33,8 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 
 	private final Region region;
 	private final IExecutionFacade facade;
-	private SCTStackFrame stackFrame;
+	private List<SCTStackFrame> stateStack;
+	private Vertex lastActiveState;
 
 	public SCTDebugThread(SCTDebugTarget target, IExecutionFacade facade,
 			String resourceString, Region region) {
@@ -54,15 +57,20 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 				break;
 			}
 		}
-		if (activeState != null) {
-			if (stackFrame == null || stackFrame.getState() != activeState) {
-				stackFrame = new SCTStackFrame(this, activeState,
-						getResourceString());
-			}
-		} else {
-			stackFrame = null;
-		}
-		return new IStackFrame[] { stackFrame };
+	
+		if (activeState != null && lastActiveState != activeState) {
+			lastActiveState = activeState;
+			EObject container = activeState;
+			stateStack = new ArrayList<SCTStackFrame>();
+			while ( container != null ) {
+				if (container instanceof RegularState) {
+					stateStack.add(new SCTStackFrame(this, (RegularState)container,
+						getResourceString()));
+				}
+				container = container.eContainer();
+			}			
+		} 
+		return stateStack.toArray(new IStackFrame[]{});
 	}
 
 	public boolean hasStackFrames() throws DebugException {
