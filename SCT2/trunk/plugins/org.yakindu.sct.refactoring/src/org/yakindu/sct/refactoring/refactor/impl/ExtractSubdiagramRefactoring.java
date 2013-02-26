@@ -94,32 +94,39 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	}
 
 	protected void createEntryPoint(Edge edge, Diagram subdiagram) {
-		// Semantic refactoring
 		Transition transition = (Transition) edge.getElement();
-		String prefix = "entry_" + transition.getSource().getName();
-		createSemanticEntryPoint(transition, prefix);
+		String name = getEntryPointName(transition);
+		createSemanticEntryPoint(transition, name);
 		transition.setTarget((State) subdiagram.getElement());
 		EList<ReactionProperty> properties = transition.getProperties();
 		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
-		entryPointSpec.setEntrypoint(getUniquePointName(prefix, transition));
+		entryPointSpec.setEntrypoint(name);
 		properties.add(entryPointSpec);
-		// Notation refactoring
 		edge.setTarget(getContextObject());
 	}
 
-	protected String getUniquePointName(String prefix, Transition transition) {
-		Vertex source = transition.getSource();
-		StringBuilder builder = new StringBuilder();
-		builder.append(prefix);
-		int index = source.getOutgoingTransitions().indexOf(transition);
-		builder.append(index);
-		return builder.toString();
+	protected String getEntryPointName(Transition transition) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("entry_");
+		stringBuilder.append(transition.getSource().getName());
+		int index = transition.getSource().getOutgoingTransitions().indexOf(transition);
+		stringBuilder.append(index);
+		return stringBuilder.toString();
 	}
 
-	protected void createSemanticEntryPoint(Transition transition, String prefix) {
+	protected String getExitPointName(Transition transition) {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("exit_");
+		stringBuilder.append(transition.getSource().getName());
+		int index = transition.getSource().getOutgoingTransitions().indexOf(transition);
+		stringBuilder.append(index);
+		return stringBuilder.toString();
+	}
+
+	protected void createSemanticEntryPoint(Transition transition, String name) {
 		Region entryPointTarget = transition.getTarget().getParentRegion();
 		Entry entryPoint = SGraphFactory.eINSTANCE.createEntry();
-		entryPoint.setName(getUniquePointName(prefix, transition));
+		entryPoint.setName(name);
 		entryPointTarget.getVertices().add(entryPoint);
 		Transition entryPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		entryPointTransition.setSource(entryPoint);
@@ -127,23 +134,21 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	}
 
 	protected void createExitPoint(Edge edge, Diagram subdiagram) {
-		// Semantic refactoring
 		Transition transition = (Transition) edge.getElement();
-		String prefix = "exit_" + transition.getSource().getName();
-		createSemanticExitPoint(transition, prefix);
+		String name = getExitPointName(transition);
+		createSemanticExitPoint(transition, name);
 		transition.setSource((State) subdiagram.getElement());
 		EList<ReactionProperty> properties = transition.getProperties();
 		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
-		entryPointSpec.setEntrypoint(getUniquePointName(prefix, transition));
+		entryPointSpec.setEntrypoint(name);
 		properties.add(entryPointSpec);
-		// Notation refactoring
 		edge.setSource(getContextObject());
 	}
 
-	protected void createSemanticExitPoint(Transition transition, String prefix) {
+	protected void createSemanticExitPoint(Transition transition, String name) {
 		Region exitPointTarget = transition.getSource().getParentRegion();
 		Exit exitPoint = SGraphFactory.eINSTANCE.createExit();
-		exitPoint.setName(getUniquePointName(prefix, transition));
+		exitPoint.setName(name);
 		exitPointTarget.getVertices().add(exitPoint);
 		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		exitPointTransition.setTarget(exitPoint);
