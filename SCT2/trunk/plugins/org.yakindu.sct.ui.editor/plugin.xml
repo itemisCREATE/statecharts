@@ -390,7 +390,7 @@
                    path="/tools/"
                    small_icon="icons/obj16/Final-State-16.png">
              </entry>
-             <!-- entry
+             <entry
                    description="Creates an exit point"
                    id="org.yakindu.sct.ui.editor.Exit"
                    kind="tool"
@@ -398,7 +398,7 @@
                    large_icon="icons/obj32/Exit-Point-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/Exit-Point-16.png">
-             </entry -->
+             </entry>
              <entry
                    description="Creates a choice"
                    id="org.yakindu.sct.ui.editor.Choice"
