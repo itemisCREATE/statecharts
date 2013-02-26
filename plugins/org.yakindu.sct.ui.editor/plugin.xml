@@ -331,7 +331,7 @@
                            </content>
                      </expand>
             </entry>
-              <entry
+            <!--  <entry
                   description="Creates a sub submachine state"
                   id="org.yakindu.sct.ui.editor.SubmachineState"
                   kind="tool"
@@ -345,6 +345,7 @@
                            </content>
                      </expand>
             </entry>
+            -->
              <entry
                    description="Creates a region"
                    id="org.yakindu.sct.ui.editor.Region"
