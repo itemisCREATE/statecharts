@@ -12,16 +12,11 @@ package org.yakindu.sct.ui.editor.policies;
 
 import java.util.List;
 
-import org.eclipse.draw2d.Figure;
-import org.eclipse.draw2d.IFigure;
-import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
-import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableShapeEditPolicy;
 
 /**
  * Forbids overlapping of elements. Considers minimum size of host figure if
@@ -30,7 +25,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableShapeEditPolicy;
  * @author m.muehlbrandt
  * 
  */
-public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
+public class NoOverlapResizableEditPolicy extends PreferredSizeCompartmentEditPolicy {
 
 	@Override
 	protected Command getMoveCommand(ChangeBoundsRequest request) {
@@ -44,10 +39,6 @@ public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 	protected Command getResizeCommand(ChangeBoundsRequest request) {
 		if (!isRequestValid(request)) {
 			return UnexecutableCommand.INSTANCE;
-		}
-
-		if (request instanceof ChangeBoundsRequest) {
-			adjustRequest((ChangeBoundsRequest) request);
 		}
 		return super.getResizeCommand(request);
 	}
@@ -69,29 +60,5 @@ public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 		}
 		return true;
 	}
-
-	/**
-	 * Do not allow resizing smaller than the Preferred Size of the
-	 * {@link Figure}.
-	 */
-	protected void adjustRequest(ChangeBoundsRequest request) {
-		final IFigure figure = getHostFigure();
-		final Dimension minimumSize = figure.getPreferredSize();
-		final Rectangle bounds = figure.getBounds().getCopy();
-		final Rectangle newBounds = request.getTransformedRectangle(bounds);
-		final Dimension newSizeDelta = request.getSizeDelta().getCopy();
-		if (newBounds.width < minimumSize.width) {
-			newSizeDelta.width = request.getSizeDelta().width + (minimumSize.width - newBounds.width);
-		}
-		if (newBounds.height < minimumSize.height) {
-			newSizeDelta.height = request.getSizeDelta().height + (minimumSize.height - newBounds.height);
-		}
-		request.setSizeDelta(newSizeDelta);
-	}
-
-	@Override
-	public void showSourceFeedback(Request request) {
-		adjustRequest((ChangeBoundsRequest) request);
-		super.showSourceFeedback(request);
-	}
+	
 }

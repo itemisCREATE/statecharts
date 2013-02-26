@@ -133,4 +133,5 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 					((InputDiagramFileInfo) info).getEditorInput());
 		}
 	}
+
 }

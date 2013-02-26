@@ -17,6 +17,7 @@ import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -101,6 +102,7 @@ public class DiagramPartitioningUtil {
 	 * Returns the {@link Diagram} that contains a given semantic element.
 	 */
 	public static Diagram getDiagramContaining(EObject element) {
+		Assert.isNotNull(element);
 		Resource eResource = element.eResource();
 		Collection<Diagram> objects = EcoreUtil.getObjectsByType(eResource.getContents(),
 				NotationPackage.Literals.DIAGRAM);
@@ -123,6 +125,7 @@ public class DiagramPartitioningUtil {
 	 * 
 	 */
 	public static Diagram getSubDiagram(CompositeElement element) {
+		Assert.isNotNull(element);
 		Resource eResource = element.eResource();
 		Collection<Diagram> objects = EcoreUtil.getObjectsByType(eResource.getContents(),
 				NotationPackage.Literals.DIAGRAM);
@@ -200,6 +203,7 @@ public class DiagramPartitioningUtil {
 	}
 
 	public static List<Diagram> getDiagramContainerHierachy(Diagram diagram) {
+		Assert.isNotNull(diagram);
 		List<Diagram> result = new ArrayList<Diagram>();
 		result.add(diagram);
 		while (diagram.getElement() instanceof State) {
@@ -211,6 +215,7 @@ public class DiagramPartitioningUtil {
 	}
 
 	public static List<Diagram> getSubDiagramHierachy(Diagram diagram) {
+		Assert.isNotNull(diagram);
 		List<Diagram> result = new ArrayList<Diagram>();
 		result.add(diagram);
 		while (diagram.getElement() instanceof State) {

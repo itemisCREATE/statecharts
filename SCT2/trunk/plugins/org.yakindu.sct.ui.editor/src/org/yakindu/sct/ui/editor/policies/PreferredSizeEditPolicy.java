@@ -12,9 +12,12 @@ package org.yakindu.sct.ui.editor.policies;
 
 import java.util.List;
 
+import org.eclipse.draw2d.Figure;
+import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.Label;
 import org.eclipse.draw2d.RelativeLocator;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
@@ -26,13 +29,13 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 
 /**
- * Adds a square selection handle that set the bounds to the preffered size
+ * Adds a square selection handle that set the bounds to the preferred size
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
 @SuppressWarnings("all")
-public class PreferredSizeEditPolicy extends ResizableEditPolicyEx {
+public class PreferredSizeEditPolicy extends PreferredSizeCompartmentEditPolicy {
 
 	public class PreferredSizeDragTracker extends SimpleDragTracker {
 		@Override
@@ -52,12 +55,10 @@ public class PreferredSizeEditPolicy extends ResizableEditPolicyEx {
 
 		@Override
 		protected boolean handleButtonDown(int button) {
-			Dimension prefSize = getHostFigure().getLayoutManager()
-					.getPreferredSize(getHostFigure(), -1, -1);
+			Dimension prefSize = getHostFigure().getLayoutManager().getPreferredSize(getHostFigure(), -1, -1);
 			Dimension currentSize = getHostFigure().getSize();
 			getSourceRequest().setSizeDelta(
-					new Dimension(prefSize.width - currentSize.width,
-							prefSize.height - currentSize.height));
+					new Dimension(prefSize.width - currentSize.width, prefSize.height - currentSize.height));
 			getSourceRequest().setEditParts(getOperationSet());
 			setCurrentCommand(getCommand());
 			executeCurrentCommand();

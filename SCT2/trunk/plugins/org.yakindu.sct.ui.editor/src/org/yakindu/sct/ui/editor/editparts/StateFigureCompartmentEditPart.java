@@ -34,8 +34,7 @@ import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StateFigureCompartmentEditPart extends
-		ResizableCompartmentEditPart {
+public class StateFigureCompartmentEditPart extends ResizableCompartmentEditPart {
 
 	private static final String PARENT_VIEW = "parent_view";
 
@@ -59,16 +58,18 @@ public class StateFigureCompartmentEditPart extends
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.CREATION_ROLE,
-				new StateCompartmentCreationEditPolicy());
-		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE,
-				new StateCompartmentCanonicalEditPolicy());
-		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE,
-				new DragDropEditPolicy());
-		installEditPolicy(EditPolicy.LAYOUT_ROLE,
-				new CompartmentLayoutEditPolicy(
-						SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS));
+		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new StateCompartmentCreationEditPolicy());
+		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new StateCompartmentCanonicalEditPolicy());
+		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new CompartmentLayoutEditPolicy(
+				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS));
+	}
 
+	@Override
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		((ResizableCompartmentFigure) getFigure()).getScrollPane().setScrollBarVisibility(
+				org.eclipse.draw2d.ScrollPane.NEVER);
 	}
 
 	@Override
@@ -78,10 +79,8 @@ public class StateFigureCompartmentEditPart extends
 
 	@Override
 	protected IFigure createFigure() {
-		ResizableCompartmentFigure figure = (ResizableCompartmentFigure) super
-				.createFigure();
-		figure.getContentPane().setLayoutManager(
-				new StateFigureCompartmentLayout(getAlignment()));
+		ResizableCompartmentFigure figure = (ResizableCompartmentFigure) super.createFigure();
+		figure.getContentPane().setLayoutManager(new StateFigureCompartmentLayout(getAlignment()));
 		figure.setBorder(null);
 		// Should be initialized with null to display nothing.
 		figure.setToolTip((String) null);
@@ -99,8 +98,7 @@ public class StateFigureCompartmentEditPart extends
 	}
 
 	protected boolean getAlignment() {
-		BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(
-				getParent().getNotationView(),
+		BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(getParent().getNotationView(),
 				StateViewFactory.ALIGNMENT_ORIENTATION);
 		return (style != null) ? style.isBooleanValue() : true;
 	}
@@ -114,12 +112,10 @@ public class StateFigureCompartmentEditPart extends
 	}
 
 	private void updateLayout() {
-		getFigure().getContentPane().setLayoutManager(
-				new StateFigureCompartmentLayout(getAlignment()));
+		getFigure().getContentPane().setLayoutManager(new StateFigureCompartmentLayout(getAlignment()));
 	}
 
-	private static final class StateFigureCompartmentLayout extends
-			ConstrainedToolbarLayout {
+	private static final class StateFigureCompartmentLayout extends ConstrainedToolbarLayout {
 		public StateFigureCompartmentLayout(boolean isHorizontal) {
 			super(isHorizontal);
 			setSpacing(-1); // make lines overlap so it looks like a shared line
