@@ -13,6 +13,7 @@ package org.yakindu.sct.ui.editor.editparts;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ResizableCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
@@ -22,6 +23,7 @@ import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.factories.StateViewFactory;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCanonicalEditPolicy;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCreationEditPolicy;
@@ -120,5 +122,10 @@ public class StateFigureCompartmentEditPart extends ResizableCompartmentEditPart
 			super(isHorizontal);
 			setSpacing(-1); // make lines overlap so it looks like a shared line
 		}
+	}
+
+	@Override
+	public PreferencesHint getDiagramPreferencesHint() {
+		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 	}
 }
