@@ -55,8 +55,7 @@ import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
  * @author markus muehlbrandt
  * 
  */
-public class StateEditPart extends ShapeNodeEditPart implements
-		IPrimaryEditPart {
+public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart {
 
 	private EditPart figureCompartmentEditPart;
 
@@ -73,8 +72,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		if (request instanceof CreateViewAndElementRequest) {
 			return figureCompartmentEditPart;
 		}
-		if (request instanceof GroupRequest
-				&& request.getType() == RequestConstants.REQ_DROP) {
+		if (request instanceof GroupRequest && request.getType() == RequestConstants.REQ_DROP) {
 			GroupRequest req = (GroupRequest) request;
 			if (areInsertableChildren(req.getEditParts())) {
 				return figureCompartmentEditPart;
@@ -99,13 +97,9 @@ public class StateEditPart extends ShapeNodeEditPart implements
 			@Override
 			// StateFigure is drawed smaller (Blurshadow size)
 			public Rectangle getHandleBounds() {
-				Insets insets = new Insets(0, 0, StateFigure.BLUR_SHADOW_WIDTH,
-						StateFigure.BLUR_SHADOW_WIDTH);
-
-				return new Rectangle(getBounds().x + insets.left, getBounds().y
-						+ insets.top, getBounds().width
-						- (insets.right + insets.left), getBounds().height
-						- (insets.bottom + insets.top));
+				Insets insets = new Insets(0, 0, StateFigure.BLUR_SHADOW_WIDTH, StateFigure.BLUR_SHADOW_WIDTH);
+				return new Rectangle(getBounds().x + insets.left, getBounds().y + insets.top, getBounds().width
+						- (insets.right + insets.left), getBounds().height - (insets.bottom + insets.top));
 			}
 
 		};
@@ -129,11 +123,9 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		removeEditPolicy(EditPolicyRoles.CREATION_ROLE);
 
 		if (isCollapsed()) {
-			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-					new NonResizableEditPolicyEx());
+			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
 		} else {
-			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-					new PreferredSizeEditPolicy());
+			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeEditPolicy());
 		}
 	}
 
@@ -145,25 +137,19 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 	private void refreshCompartmentStates() {
 		if (getTextCompartment().isCollapsed()) {
-			getPrimaryShape().setConstraint(
-					getPrimaryShape().getTextCompartmentPane(),
-					getCollapsedData());
+			getPrimaryShape().setConstraint(getPrimaryShape().getTextCompartmentPane(), getCollapsedData());
 		} else {
 			GridData expandedData = getExpandedData();
 			if (!getFigureCompartment().isCollapsed())
 				expandedData.grabExcessVerticalSpace = false;
-			getPrimaryShape().setConstraint(
-					getPrimaryShape().getTextCompartmentPane(), expandedData);
+			getPrimaryShape().setConstraint(getPrimaryShape().getTextCompartmentPane(), expandedData);
 		}
 		if (getFigureCompartment().isCollapsed()) {
-			getPrimaryShape().setConstraint(
-					getPrimaryShape().getFigureCompartmentPane(),
-					getCollapsedData());
+			getPrimaryShape().setConstraint(getPrimaryShape().getFigureCompartmentPane(), getCollapsedData());
 		} else {
 			GridData expandedData = getExpandedData();
 
-			getPrimaryShape().setConstraint(
-					getPrimaryShape().getFigureCompartmentPane(), expandedData);
+			getPrimaryShape().setConstraint(getPrimaryShape().getFigureCompartmentPane(), expandedData);
 		}
 	}
 
@@ -179,24 +165,19 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	protected void refreshBounds() {
 
 		// TODO: Calculate the 'default' size
-		int width = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
-				.getSize_Width())).intValue();
-		int height = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
-				.getSize_Height())).intValue();
+		int width = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getSize_Width())).intValue();
+		int height = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getSize_Height())).intValue();
 
 		Dimension size = new Dimension(width, height);
-		int x = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
-				.getLocation_X())).intValue();
-		int y = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE
-				.getLocation_Y())).intValue();
+		int x = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getLocation_X())).intValue();
+		int y = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getLocation_Y())).intValue();
 		Point loc = new Point(x, y);
 
 		if (isCollapsed()) {
-			((GraphicalEditPart) getParent()).setLayoutConstraint(this,
-					getFigure(), new Rectangle(loc, new Dimension(58, 66)));
+			((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), new Rectangle(loc, new Dimension(
+					58, 66)));
 		} else {
-			((GraphicalEditPart) getParent()).setLayoutConstraint(this,
-					getFigure(), new Rectangle(loc, size));
+			((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), new Rectangle(loc, size));
 		}
 	}
 
@@ -209,8 +190,7 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	}
 
 	public boolean isCollapsed() {
-		return getFigureCompartment().isCollapsed()
-				&& getTextCompartment().isCollapsed();
+		return getFigureCompartment().isCollapsed() && getTextCompartment().isCollapsed();
 	}
 
 	@Override
@@ -227,16 +207,13 @@ public class StateEditPart extends ShapeNodeEditPart implements
 		if (childEditPart instanceof StateFigureCompartmentEditPart) {
 			figureCompartmentEditPart = childEditPart;
 			IFigure pane = getPrimaryShape().getFigureCompartmentPane();
-			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
-					.getFigure();
+			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart).getFigure();
 			pane.add(compartmentFigure);
 		} else if (childEditPart instanceof StateNameEditPart) {
-			((StateNameEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getNameFigure());
+			((StateNameEditPart) childEditPart).setLabel(getPrimaryShape().getNameFigure());
 		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getTextCompartmentPane();
-			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
-					.getFigure();
+			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart).getFigure();
 			pane.add(compartmentFigure);
 		} else {
 			super.addChildVisual(childEditPart, index);
@@ -247,13 +224,11 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (childEditPart instanceof StateFigureCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getFigureCompartmentPane();
-			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart)
-					.getFigure();
+			IFigure compartmentFigure = ((StateFigureCompartmentEditPart) childEditPart).getFigure();
 			pane.remove(compartmentFigure);
 		} else if (childEditPart instanceof StateTextCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getTextCompartmentPane();
-			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart)
-					.getFigure();
+			IFigure compartmentFigure = ((StateTextCompartmentEditPart) childEditPart).getFigure();
 			pane.remove(compartmentFigure);
 		} else {
 			super.removeChildVisual(childEditPart);
@@ -263,10 +238,8 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
-		addListenerFilter("TextCompartmentView", this, (Node) getNotationView()
-				.getChildren().get(1));
-		addListenerFilter("FigureCompartmentView", this,
-				(Node) getNotationView().getChildren().get(2));
+		addListenerFilter("TextCompartmentView", this, (Node) getNotationView().getChildren().get(1));
+		addListenerFilter("FigureCompartmentView", this, (Node) getNotationView().getChildren().get(2));
 	}
 
 	@Override
@@ -282,14 +255,9 @@ public class StateEditPart extends ShapeNodeEditPart implements
 	@Override
 	public Object getPreferredValue(EStructuralFeature feature) {
 		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
-			return FigureUtilities
-					.RGBToInteger(StatechartColorConstants.STATE_LINE_COLOR
-							.getRGB());
-		} else if (feature == NotationPackage.eINSTANCE
-				.getFillStyle_FillColor()) {
-			return FigureUtilities
-					.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR
-							.getRGB());
+			return FigureUtilities.RGBToInteger(StatechartColorConstants.STATE_LINE_COLOR.getRGB());
+		} else if (feature == NotationPackage.eINSTANCE.getFillStyle_FillColor()) {
+			return FigureUtilities.RGBToInteger(StatechartColorConstants.STATE_BG_COLOR.getRGB());
 		}
 		return super.getPreferredValue(feature);
 	}
@@ -307,11 +275,9 @@ public class StateEditPart extends ShapeNodeEditPart implements
 
 		if (notification.getFeature() == NotationPackage.Literals.DRAWER_STYLE__COLLAPSED) {
 			if (isCollapsed()) {
-				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-						new NonResizableEditPolicyEx());
+				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
 			} else {
-				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-						new PreferredSizeEditPolicy());
+				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeEditPolicy());
 			}
 			refreshVisuals();
 		}

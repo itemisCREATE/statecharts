@@ -16,6 +16,7 @@ import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
@@ -54,22 +55,14 @@ public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 	@SuppressWarnings("unchecked")
 	protected boolean isRequestValid(ChangeBoundsRequest request) {
 		// Overlapping of nodes is not allowed
-		final IGraphicalEditPart parent = (IGraphicalEditPart) getHost()
-				.getParent();
-		final Rectangle newBounds = request
-				.getTransformedRectangle(getHostFigure()
-						.getBounds());
-		final List<IGraphicalEditPart> children = parent
-				.getChildren();
+		final IGraphicalEditPart parent = (IGraphicalEditPart) getHost().getParent();
+		final Rectangle newBounds = request.getTransformedRectangle(getHostFigure().getBounds());
+		final List<IGraphicalEditPart> children = parent.getChildren();
 		for (final IGraphicalEditPart child : children) {
-			if (child != getHost()
-					&& child.getFigure().getBounds()
-							.intersects(newBounds)) {
-				Rectangle intersection = child.getFigure()
-						.getBounds().getIntersection(newBounds);
+			if (child != getHost() && child.getFigure().getBounds().intersects(newBounds)) {
+				Rectangle intersection = child.getFigure().getBounds().getIntersection(newBounds);
 				// allow snapping to OtherEditParts
-				if (intersection.width() > 1
-						&& intersection.height() > 1) {
+				if (intersection.width() > 1 && intersection.height() > 1) {
 					return false;
 				}
 			}
@@ -78,22 +71,27 @@ public class NoOverlapResizableEditPolicy extends ResizableShapeEditPolicy {
 	}
 
 	/**
-	 * Do not allow resizing smaller than the MinimumSize of the {@link Figure}.
+	 * Do not allow resizing smaller than the Preferred Size of the
+	 * {@link Figure}.
 	 */
 	protected void adjustRequest(ChangeBoundsRequest request) {
 		final IFigure figure = getHostFigure();
-		final Dimension minimumSize = figure.getMinimumSize();
+		final Dimension minimumSize = figure.getPreferredSize();
 		final Rectangle bounds = figure.getBounds().getCopy();
 		final Rectangle newBounds = request.getTransformedRectangle(bounds);
 		final Dimension newSizeDelta = request.getSizeDelta().getCopy();
 		if (newBounds.width < minimumSize.width) {
-			newSizeDelta.width = request.getSizeDelta().width
-					+ (minimumSize.width - newBounds.width);
+			newSizeDelta.width = request.getSizeDelta().width + (minimumSize.width - newBounds.width);
 		}
 		if (newBounds.height < minimumSize.height) {
-			newSizeDelta.height = request.getSizeDelta().height
-					+ (minimumSize.height - newBounds.height);
+			newSizeDelta.height = request.getSizeDelta().height + (minimumSize.height - newBounds.height);
 		}
 		request.setSizeDelta(newSizeDelta);
+	}
+
+	@Override
+	public void showSourceFeedback(Request request) {
+		adjustRequest((ChangeBoundsRequest) request);
+		super.showSourceFeedback(request);
 	}
 }

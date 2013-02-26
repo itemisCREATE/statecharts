@@ -17,12 +17,14 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.CompartmentCreationEditPolicy;
 import org.yakindu.sct.ui.editor.policies.RegionCompartmentCanonicalEditPolicy;
 import org.yakindu.sct.ui.editor.policies.RegionCompartmentXYLayoutEditPolicy;
+import org.yakindu.sct.ui.editor.policies.ResizeContainerEditPolicy;
 
 /**
  * @author muelder
@@ -43,6 +45,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new RegionCompartmentCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new RegionCompartmentXYLayoutEditPolicy());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizeContainerEditPolicy());
 	}
 
 	@Override
@@ -72,6 +75,13 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 	@Override
 	public boolean isSelectable() {
 		return false;
+	}
+
+	@Override
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		((ResizableCompartmentFigure) getFigure()).getScrollPane().setScrollBarVisibility(
+				org.eclipse.draw2d.ScrollPane.NEVER);
 	}
 
 	@Override
