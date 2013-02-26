@@ -93,8 +93,6 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	}
 
 	protected void createEntryPoint(Edge edge, Diagram subdiagram) {
-		System.out.println("Create an entry point for edge " + edge + " with source " + edge.getSource().getElement()
-				+ " and target " + edge.getTarget().getElement());
 		// Semantic refactoring
 		Transition transition = (Transition) edge.getElement();
 		createSemanticEntryPoint(transition);
@@ -120,12 +118,10 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	}
 
 	protected void createExitPoint(Edge edge, Diagram subdiagram) {
-		System.out.println("Create an exit point for edge " + edge + " with source " + edge.getSource().getElement()
-				+ " and target " + edge.getTarget().getElement());
 		// Semantic refactoring
 		Transition transition = (Transition) edge.getElement();
 		createSemanticExitPoint(transition);
-		transition.setTarget((State) subdiagram.getElement());
+		transition.setSource((State) subdiagram.getElement());
 		EList<ReactionProperty> properties = transition.getProperties();
 		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
 		// TODO: Make unique
