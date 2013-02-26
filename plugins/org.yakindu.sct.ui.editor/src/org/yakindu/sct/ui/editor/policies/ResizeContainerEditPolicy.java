@@ -48,39 +48,36 @@ public class ResizeContainerEditPolicy extends AbstractEditPolicy {
 
 	private Map<IFigure, Rectangle> boundsCache = new HashMap<IFigure, Rectangle>();
 
-	
-	@Override
 	@SuppressWarnings("unchecked")
+	@Override
 	public Command getCommand(Request request) {
-		System.out.println(request);
 		if (!(request instanceof ChangeBoundsRequest)) {
 			return null;
 		}
+		ChangeBoundsRequest cbr = (ChangeBoundsRequest) request;
+
 		CompoundCommand result = new CompoundCommand();
 		List<IGraphicalEditPart> container = collectContainerHierachy();
 
 		// Update Bounds of the container hierachy
-		for (IGraphicalEditPart currentEditPart : container) {
-			IFigure figure = currentEditPart.getFigure();
-			SetBoundsCommand boundsCommand = new SetBoundsCommand(getHost()
-					.getEditingDomain(),
-					DiagramUIMessages.SetLocationCommand_Label_Resize,
-					new EObjectAdapter(currentEditPart.getNotationView()),
-					figure.getBounds());
+		for (IGraphicalEditPart currentContainer : container) {
+			IFigure figure = currentContainer.getFigure();
+			SetBoundsCommand boundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
+					DiagramUIMessages.SetLocationCommand_Label_Resize, new EObjectAdapter(
+							currentContainer.getNotationView()), figure.getBounds());
 			result.add(new ICommandProxy(boundsCommand));
 
 			// Update child bounds of elements that stand in the way...
-			List<IGraphicalEditPart> children = currentEditPart.getParent()
-					.getChildren();
+			List<IGraphicalEditPart> children = currentContainer.getParent().getChildren();
 			for (IGraphicalEditPart childPart : children) {
-				IFigure childFigure = childPart.getFigure();
-				if (childPart == currentEditPart)
+				if (cbr.getEditParts().contains(childPart))
 					continue;
-				SetBoundsCommand childBoundsCommand = new SetBoundsCommand(
-						getHost().getEditingDomain(),
-						DiagramUIMessages.SetLocationCommand_Label_Resize,
-						new EObjectAdapter(childPart.getNotationView()),
-						childFigure.getBounds());
+				IFigure childFigure = childPart.getFigure();
+				if (childPart == currentContainer)
+					continue;
+				SetBoundsCommand childBoundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
+						DiagramUIMessages.SetLocationCommand_Label_Resize, new EObjectAdapter(
+								childPart.getNotationView()), childFigure.getBounds());
 				result.add(new ICommandProxy(childBoundsCommand));
 			}
 		}
@@ -113,10 +110,8 @@ public class ResizeContainerEditPolicy extends AbstractEditPolicy {
 			IFigure containerFigure = containerEditPart.getFigure();
 			Rectangle feedbackBounds = getOriginalBounds(containerFigure);
 			containerFigure.getParent().translateToAbsolute(feedbackBounds);
-			feedbackBounds = calculateFeedbackBounds(request, feedbackBounds,
-					level, containerFigure);
-			showChildrenFeedback(containerEditPart, containerFigure,
-					feedbackBounds);
+			feedbackBounds = calculateFeedbackBounds(request, feedbackBounds, level, containerFigure);
+			showChildrenFeedback(containerEditPart, containerFigure, feedbackBounds, request);
 			containerFigure.getParent().translateToRelative(feedbackBounds);
 			setBounds(containerFigure, feedbackBounds);
 		}
@@ -141,37 +136,33 @@ public class ResizeContainerEditPolicy extends AbstractEditPolicy {
 	 * @param containerFigure
 	 * @param containerFeedbackBounds
 	 */
-	protected void showChildrenFeedback(
-			final IGraphicalEditPart containerEditPart,
-			final IFigure containerFigure,
-			final Rectangle containerFeedbackBounds) {
+	protected void showChildrenFeedback(final IGraphicalEditPart containerEditPart, final IFigure containerFigure,
+			final Rectangle containerFeedbackBounds, ChangeBoundsRequest request) {
 		Rectangle originalBounds = getOriginalBounds(containerFigure);
 
-		Point moveDelta = new Point(containerFeedbackBounds.width
-				- originalBounds.width, containerFeedbackBounds.height
-				- originalBounds.height);
+		Point moveDelta = new Point(containerFeedbackBounds.width - originalBounds.width,
+				containerFeedbackBounds.height - originalBounds.height);
 
-		List<IGraphicalEditPart> children = containerEditPart.getParent()
-				.getChildren();
+		List<IGraphicalEditPart> children = containerEditPart.getParent().getChildren();
 
 		for (IGraphicalEditPart childPart : children) {
+			if (request.getEditParts().contains(childPart)) {
+				continue;
+			}
 			if (childPart == containerEditPart)
 				continue;
 			showChildFeedback(childPart, moveDelta, containerFeedbackBounds);
 		}
 	}
 
-	protected void showChildFeedback(IGraphicalEditPart childPart,
-			Point moveDelta, Rectangle containerFeedbackBounds) {
+	protected void showChildFeedback(IGraphicalEditPart childPart, Point moveDelta, Rectangle containerFeedbackBounds) {
 
 		IFigure childFigure = childPart.getFigure();
 		Rectangle originalChildBounds = getOriginalBounds(childFigure);
 		childFigure.getParent().translateToAbsolute(originalChildBounds);
 
-		boolean horizontalAffected = isHorizontalAffected(
-				containerFeedbackBounds, moveDelta, originalChildBounds);
-		boolean verticalAffected = isVerticalAffected(containerFeedbackBounds,
-				moveDelta, originalChildBounds);
+		boolean horizontalAffected = isHorizontalAffected(containerFeedbackBounds, moveDelta, originalChildBounds);
+		boolean verticalAffected = isVerticalAffected(containerFeedbackBounds, moveDelta, originalChildBounds);
 		if (!(horizontalAffected || verticalAffected)) {
 			return;
 		}
@@ -210,28 +201,21 @@ public class ResizeContainerEditPolicy extends AbstractEditPolicy {
 		return containerEditPart;
 	}
 
-	private boolean isVerticalAffected(Rectangle newBounds, Point moveDelta,
-			Rectangle bounds) {
-		boolean verticalAffected = (bounds.x > newBounds.x || bounds.x
-				+ bounds.width > newBounds.x)
-				&& bounds.x < newBounds.x + newBounds.width
-				|| bounds.x + bounds.width < newBounds.x + newBounds.width;
+	private boolean isVerticalAffected(Rectangle newBounds, Point moveDelta, Rectangle bounds) {
+		boolean verticalAffected = (bounds.x > newBounds.x || bounds.x + bounds.width > newBounds.x)
+				&& bounds.x < newBounds.x + newBounds.width || bounds.x + bounds.width < newBounds.x + newBounds.width;
 		if (verticalAffected) {
-			verticalAffected = bounds.y + moveDelta.y > newBounds.y
-					+ newBounds.height;
+			verticalAffected = bounds.y + moveDelta.y > newBounds.y + newBounds.height;
 		}
 		return verticalAffected;
 	}
 
-	private boolean isHorizontalAffected(Rectangle newBounds, Point moveDelta,
-			Rectangle bounds) {
-		boolean horizontalAffected = (bounds.y > newBounds.y || bounds.y
-				+ bounds.height > newBounds.y)
+	private boolean isHorizontalAffected(Rectangle newBounds, Point moveDelta, Rectangle bounds) {
+		boolean horizontalAffected = (bounds.y > newBounds.y || bounds.y + bounds.height > newBounds.y)
 				&& bounds.y < newBounds.y + newBounds.height
 				|| bounds.y + bounds.height < newBounds.y + newBounds.height;
 		if (horizontalAffected) {
-			horizontalAffected = bounds.x + moveDelta.x > newBounds.x
-					+ newBounds.width;
+			horizontalAffected = bounds.x + moveDelta.x > newBounds.x + newBounds.width;
 		}
 		return horizontalAffected;
 	}
@@ -243,13 +227,12 @@ public class ResizeContainerEditPolicy extends AbstractEditPolicy {
 	}
 
 	@SuppressWarnings({ "unchecked", "deprecation" })
-	private Rectangle calculateFeedbackBounds(ChangeBoundsRequest request,
-			Rectangle feedbackBounds, int level, IFigure containerFigure) {
+	private Rectangle calculateFeedbackBounds(ChangeBoundsRequest request, Rectangle feedbackBounds, int level,
+			IFigure containerFigure) {
 		Rectangle result = feedbackBounds.getCopy();
 		List<IGraphicalEditPart> editParts = request.getEditParts();
 		for (IGraphicalEditPart editPart : editParts) {
-			PrecisionRectangle transformedRect = new PrecisionRectangle(
-					editPart.getFigure().getBounds());
+			PrecisionRectangle transformedRect = new PrecisionRectangle(editPart.getFigure().getBounds());
 			editPart.getFigure().translateToAbsolute(transformedRect);
 			transformedRect.translate(request.getMoveDelta());
 			transformedRect.resize(request.getSizeDelta());
