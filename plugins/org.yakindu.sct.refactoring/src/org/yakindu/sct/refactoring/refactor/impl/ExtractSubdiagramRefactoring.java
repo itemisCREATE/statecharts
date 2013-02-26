@@ -32,6 +32,7 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
@@ -95,22 +96,30 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	protected void createEntryPoint(Edge edge, Diagram subdiagram) {
 		// Semantic refactoring
 		Transition transition = (Transition) edge.getElement();
-		createSemanticEntryPoint(transition);
+		String prefix = "entry_" + transition.getSource().getName();
+		createSemanticEntryPoint(transition, prefix);
 		transition.setTarget((State) subdiagram.getElement());
 		EList<ReactionProperty> properties = transition.getProperties();
 		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
-		// TODO: Make unique
-		entryPointSpec.setEntrypoint("entry1");
+		entryPointSpec.setEntrypoint(getUniquePointName(prefix, transition));
 		properties.add(entryPointSpec);
 		// Notation refactoring
 		edge.setTarget(getContextObject());
 	}
 
-	protected void createSemanticEntryPoint(Transition transition) {
+	protected String getUniquePointName(String prefix, Transition transition) {
+		Vertex source = transition.getSource();
+		StringBuilder builder = new StringBuilder();
+		builder.append(prefix);
+		int index = source.getOutgoingTransitions().indexOf(transition);
+		builder.append(index);
+		return builder.toString();
+	}
+
+	protected void createSemanticEntryPoint(Transition transition, String prefix) {
 		Region entryPointTarget = transition.getTarget().getParentRegion();
 		Entry entryPoint = SGraphFactory.eINSTANCE.createEntry();
-		// TODO: Make unique
-		entryPoint.setName("entry1");
+		entryPoint.setName(getUniquePointName(prefix, transition));
 		entryPointTarget.getVertices().add(entryPoint);
 		Transition entryPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		entryPointTransition.setSource(entryPoint);
@@ -120,22 +129,21 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	protected void createExitPoint(Edge edge, Diagram subdiagram) {
 		// Semantic refactoring
 		Transition transition = (Transition) edge.getElement();
-		createSemanticExitPoint(transition);
+		String prefix = "exit_" + transition.getSource().getName();
+		createSemanticExitPoint(transition, prefix);
 		transition.setSource((State) subdiagram.getElement());
 		EList<ReactionProperty> properties = transition.getProperties();
 		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
-		// TODO: Make unique
-		entryPointSpec.setEntrypoint("exit1");
+		entryPointSpec.setEntrypoint(getUniquePointName(prefix, transition));
 		properties.add(entryPointSpec);
 		// Notation refactoring
 		edge.setSource(getContextObject());
 	}
 
-	protected void createSemanticExitPoint(Transition transition) {
+	protected void createSemanticExitPoint(Transition transition, String prefix) {
 		Region exitPointTarget = transition.getSource().getParentRegion();
 		Exit exitPoint = SGraphFactory.eINSTANCE.createExit();
-		// TODO: Make unique
-		exitPoint.setName("exit1");
+		exitPoint.setName(getUniquePointName(prefix, transition));
 		exitPointTarget.getVertices().add(exitPoint);
 		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		exitPointTransition.setTarget(exitPoint);
