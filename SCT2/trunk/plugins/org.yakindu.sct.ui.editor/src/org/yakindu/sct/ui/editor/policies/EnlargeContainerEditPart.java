@@ -109,12 +109,10 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 			IGraphicalEditPart containerEditPart = container.get(level - 1);
 			IFigure containerFigure = containerEditPart.getFigure();
 			Rectangle feedbackBounds = getOriginalBounds(containerFigure);
-			System.out.println("Original bounds " + feedbackBounds);
 			containerFigure.getParent().translateToAbsolute(feedbackBounds);
 			feedbackBounds = calculateFeedbackBounds(request, feedbackBounds, level, containerFigure);
 			showChildrenFeedback(containerEditPart, containerFigure, feedbackBounds, request);
 			containerFigure.getParent().translateToRelative(feedbackBounds);
-			System.out.println("Feedback " + feedbackBounds);
 			setBounds(containerFigure, feedbackBounds);
 		}
 	}
