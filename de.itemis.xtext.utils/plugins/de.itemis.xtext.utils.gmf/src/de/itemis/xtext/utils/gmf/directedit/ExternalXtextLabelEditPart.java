@@ -36,10 +36,7 @@ import org.eclipse.swt.graphics.Color;
  * @author muelder
  * 
  */
-public abstract class ExternalXtextLabelEditPart extends LabelEditPart
-		implements IXtextAwareEditPart {
-
-	private DirectEditManager manager;
+public abstract class ExternalXtextLabelEditPart extends LabelEditPart implements IXtextAwareEditPart {
 
 	protected abstract DirectEditManager createDirectEditManager();
 
@@ -85,8 +82,7 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart
 	protected void handleNotificationEvent(final Notification notification) {
 		if (notification.getNotifier() instanceof ShapeStyle) {
 			refreshVisuals();
-		} else if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes()
-				.contains(notification.getFeature())) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes().contains(notification.getFeature())) {
 			refreshFont();
 		} else {
 			super.handleNotificationEvent(notification);
@@ -112,26 +108,20 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart
 
 	@Override
 	protected void performDirectEditRequest(final Request request) {
-		if (manager == null) {
-			manager = createDirectEditManager();
-		}
+		final DirectEditManager manager = createDirectEditManager();
 		final Request theRequest = request;
 		try {
 			getEditingDomain().runExclusive(new Runnable() {
 
 				public void run() {
 					if (isActive()) {
-						if (theRequest.getExtendedData().get(
-								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
-							final Character initialChar = (Character) theRequest
-									.getExtendedData()
-									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
+						if (theRequest.getExtendedData().get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
+							final Character initialChar = (Character) theRequest.getExtendedData().get(
+									REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 							if (manager instanceof XtextDirectEditManager) {
-								((XtextDirectEditManager) manager)
-										.show(initialChar);
+								((XtextDirectEditManager) manager).show(initialChar);
 							} else if (manager instanceof TextDirectEditManager) {
-								((TextDirectEditManager) manager)
-										.show(initialChar);
+								((TextDirectEditManager) manager).show(initialChar);
 							}
 						} else {
 							manager.show();

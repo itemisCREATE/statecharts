@@ -38,10 +38,7 @@ import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDo
  * @author muelder
  * 
  */
-public abstract class XtextLabelEditPart extends CompartmentEditPart implements
-		IXtextAwareEditPart {
-
-	private DirectEditManager manager;
+public abstract class XtextLabelEditPart extends CompartmentEditPart implements IXtextAwareEditPart {
 
 	protected abstract DirectEditManager createDirectEditManager();
 
@@ -87,52 +84,44 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements
 	protected void handleNotificationEvent(final Notification notification) {
 		if (notification.getNotifier() instanceof ShapeStyle) {
 			refreshVisuals();
-		} else if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes()
-				.contains(notification.getFeature())) {
+		} else if (NotationPackage.eINSTANCE.getFontStyle().getEAllAttributes().contains(notification.getFeature())) {
 			refreshFont();
 		} else {
 			super.handleNotificationEvent(notification);
 		}
 	}
+
 	/**
 	 * Performs direct edit on double click
 	 */
 	@Override
 	public DragTracker getDragTracker(final Request request) {
-		if (request instanceof SelectionRequest
-				&& ((SelectionRequest) request).getLastButtonPressed() == 3)
+		if (request instanceof SelectionRequest && ((SelectionRequest) request).getLastButtonPressed() == 3)
 			return null;
 		IDoubleClickCallback callback = new IDoubleClickCallback() {
 			public void handleDoubleClick(int btn) {
 				performDirectEditRequest(request);
 			}
 		};
-		return new DoubleClickDirectEditDragTracker(this,
-				getTopGraphicEditPart(), callback);
+		return new DoubleClickDirectEditDragTracker(this, getTopGraphicEditPart(), callback);
 	}
 
 	@Override
 	public void performDirectEditRequest(final Request request) {
-		if (manager == null) {
-			manager = createDirectEditManager();
-		}
+		final DirectEditManager manager = createDirectEditManager();
 		final Request theRequest = request;
 		try {
 			getEditingDomain().runExclusive(new Runnable() {
 
 				public void run() {
 					if (isActive()) {
-						if (theRequest.getExtendedData().get(
-								REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
-							final Character initialChar = (Character) theRequest
-									.getExtendedData()
-									.get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
+						if (theRequest.getExtendedData().get(REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR) instanceof Character) {
+							final Character initialChar = (Character) theRequest.getExtendedData().get(
+									REQ_DIRECTEDIT_EXTENDEDDATA_INITIAL_CHAR);
 							if (manager instanceof XtextDirectEditManager) {
-								((XtextDirectEditManager) manager)
-										.show(initialChar);
+								((XtextDirectEditManager) manager).show(initialChar);
 							} else if (manager instanceof TextDirectEditManager) {
-								((TextDirectEditManager) manager)
-										.show(initialChar);
+								((TextDirectEditManager) manager).show(initialChar);
 							}
 						} else {
 							manager.show();
