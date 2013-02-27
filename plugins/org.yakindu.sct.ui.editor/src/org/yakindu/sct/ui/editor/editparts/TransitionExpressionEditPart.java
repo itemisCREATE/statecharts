@@ -10,14 +10,15 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import org.eclipse.draw2d.Label;
-import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.gef.tools.DirectEditManager;
+import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.StringValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
@@ -33,39 +34,25 @@ import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class TransitionExpressionEditPart extends
-		PlugableExternalXtextLabelEditPart implements IXtextAwareEditPart {
+public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEditPart implements IXtextAwareEditPart {
 
 	public TransitionExpressionEditPart(View view) {
 		super(view, SemanticTarget.TransitionSpecification);
 	}
 
 	@Override
-	protected void addNotationalListeners() {
-		super.addNotationalListeners();
-		View parentStateView = getParentView();
-		if (parentStateView != null) {
-			addListenerFilter("parentView", this, parentStateView);
-		}
-	}
-
-	@Override
-	protected void removeNotationalListeners() {
-		View parentStateView = getParentView();
-		if (parentStateView != null) {
-			removeListenerFilter("parentView");
-		}
-		super.removeNotationalListeners();
+	protected DirectEditManager createDirectEditManager() {
+		if (getAttribute() == BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION)
+			return new TextDirectEditManager(this);
+		return super.createDirectEditManager();
 	}
 
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicy.COMPONENT_ROLE,
-				new TransitionExpressionComponentEditPolicy());
-		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE,
-				new ContextSensitiveHelpPolicy(
-						HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION));
+		installEditPolicy(EditPolicy.COMPONENT_ROLE, new TransitionExpressionComponentEditPolicy());
+		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new ContextSensitiveHelpPolicy(
+				HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION));
 	}
 
 	@Override
@@ -78,46 +65,16 @@ public class TransitionExpressionEditPart extends
 		return (Transition) super.resolveSemanticElement();
 	}
 
-	private View getParentView() {
-		return ((TransitionEditPart) getParent()).getNotationView();
-	}
-
-	@Override
-	protected void updateTooltipText() {
-		StringValueStyle style = getFeatureToShowStyle();
-		if (style != null
-				&& style.getStringValue().equals(
-						BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION
-								.getName())) {
-			Label tooltip = new Label((String) resolveSemanticElement()
-					.getSpecification());
-			getFigure().setToolTip(tooltip);
-		} else
-			super.updateTooltipText();
-	}
-
-	@Override
-	protected void updateLabelText() {
-		StringValueStyle style = getFeatureToShowStyle();
-		if (style != null
-				&& style.getStringValue().equals(
-						BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION
-								.getName())) {
-			getFigure().setText(resolveSemanticElement().getDocumentation());
-		} else
-			super.updateLabelText();
-	}
-
-	private StringValueStyle getFeatureToShowStyle() {
-		return GMFNotationUtil.getStringValueStyle(getParentView(),
+	public EAttribute getAttribute() {
+		StringValueStyle featureStyle = GMFNotationUtil.getStringValueStyle(getPrimaryView(),
 				ToggleShowDocumentationCommand.FEATURE_TO_SHOW);
-	}
-
-	@Override
-	protected void handleNotificationEvent(Notification notification) {
-		if (notification.getFeature() == NotationPackage.Literals.STRING_VALUE_STYLE__STRING_VALUE) {
-			refreshVisuals();
+		if (featureStyle == null) {
+			return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 		}
-		super.handleNotificationEvent(notification);
+		String feature = featureStyle.getStringValue();
+		if (feature.equals(BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION.getName())) {
+			return BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION;
+		}
+		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 	}
 }

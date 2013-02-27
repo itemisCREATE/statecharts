@@ -10,33 +10,29 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import org.eclipse.draw2d.Label;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.editpolicies.DirectEditPolicy;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.common.ui.services.parser.ParserOptions;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ITextAwareEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.LabelDirectEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
-import org.yakindu.base.base.BasePackage;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
-import org.yakindu.sct.ui.editor.policies.ExpressionDirectEditPolicy;
+import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
 
 import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
+import de.itemis.xtext.utils.gmf.directedit.IEAttributeProvider;
 import de.itemis.xtext.utils.gmf.directedit.XtextDirectEditManager;
 import de.itemis.xtext.utils.gmf.directedit.XtextLabelEditPart;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
@@ -46,8 +42,10 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElement
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
-		implements ITextAwareEditPart, IContextElementProvider {
+public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart implements ITextAwareEditPart,
+		IContextElementProvider, IEAttributeProvider {
+
+	private static final String PRIMARY_VIEW_LISTENER = "primaryViewListener";
 
 	private Injector injector;
 
@@ -58,33 +56,34 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 		init(target);
 	}
 
+	@Override
+	protected void addNotationalListeners() {
+		super.addNotationalListeners();
+		addListenerFilter(PRIMARY_VIEW_LISTENER, this, getPrimaryView());
+	}
+
+	@Override
+	protected void removeNotationalListeners() {
+		removeListenerFilter(PRIMARY_VIEW_LISTENER);
+		super.removeNotationalListeners();
+	}
+
 	private void init(SemanticTarget target) {
-		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
-				.getRegisteredProvider(target, resolveSemanticElement()
-						.eResource().getURI().fileExtension());
+		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getRegisteredProvider(
+				target, resolveSemanticElement().eResource().getURI().fileExtension());
 		injector = registeredProvider.getInjector();
 	}
 
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, createDirectEditPolicy());
-	}
-
-	protected DirectEditPolicy createDirectEditPolicy() {
-		if (injector != null) {
-			ExpressionDirectEditPolicy expressionDirectEditPolicy = new ExpressionDirectEditPolicy();
-			injector.injectMembers(expressionDirectEditPolicy);
-			return expressionDirectEditPolicy;
-		} else
-			return new LabelDirectEditPolicy();
+		installEditPolicy(EditPolicy.DIRECT_EDIT_ROLE, new EAttributeDirectEditPolicy(this));
 	}
 
 	@Override
 	protected DirectEditManager createDirectEditManager() {
 		if (injector != null) {
-			return new XtextDirectEditManager(this, injector,
-					getEditorStyles(), this);
+			return new XtextDirectEditManager(this, injector, getEditorStyles(), this);
 		} else {
 			return new TextDirectEditManager(this);
 		}
@@ -99,16 +98,12 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 		return resolveSemanticElement();
 	}
 
-	protected EAttribute getFeature() {
-		return SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
-	}
-
 	public Injector getInjector() {
 		return injector;
 	}
 
 	public String getEditText() {
-		String exp = resolveSemanticElement().getSpecification();
+		String exp = (String) resolveSemanticElement().eGet(getAttribute());
 		return exp != null ? exp : "";
 	}
 
@@ -121,7 +116,7 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	}
 
 	public IParser getParser() {
-		return new AttributeParser(getFeature(), DiagramActivator.PLUGIN_ID);
+		return new AttributeParser(this, DiagramActivator.PLUGIN_ID);
 	}
 
 	public IContentAssistProcessor getCompletionProcessor() {
@@ -129,26 +124,24 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart
 	}
 
 	@Override
-	protected void refreshVisuals() {
-		super.refreshVisuals();
-		updateTooltipText();
-
-	}
-
-	protected void updateTooltipText() {
-		Label tooltip = new Label((String) resolveSemanticElement().eGet(
-				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION));
-		getFigure().setToolTip(tooltip);
-	}
-
-	@Override
 	protected void handleNotificationEvent(Notification notification) {
-		if (notification.getFeature() == getFeature()) {
+		if (notification.getFeature() == getAttribute()
+				|| notification.getFeature() == NotationPackage.Literals.STRING_VALUE_STYLE__STRING_VALUE) {
 			refreshVisuals();
-		} else if (notification.getFeature() == BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION) {
-			refreshVisuals();
-		} else {
 		}
 		super.handleNotificationEvent(notification);
 	}
+
+	@Override
+	protected void refreshVisuals() {
+		updateLabelText();
+		super.refreshVisuals();
+	}
+
+	@Override
+	protected void updateLabelText() {
+		String label = (String) resolveSemanticElement().eGet(getAttribute());
+		getFigure().setText(label);
+	}
+
 }
