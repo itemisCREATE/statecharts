@@ -17,8 +17,8 @@ import org.eclipse.gmf.runtime.diagram.ui.commands.ICommandProxy;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
 
+import de.itemis.xtext.utils.gmf.directedit.IEAttributeProvider;
 import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 
 /**
@@ -26,14 +26,19 @@ import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
  * @author muelder
  * 
  */
-public class ExpressionDirectEditPolicy extends DirectEditPolicy {
+public class EAttributeDirectEditPolicy extends DirectEditPolicy {
+
+	private IEAttributeProvider provider;
+
+	public EAttributeDirectEditPolicy(IEAttributeProvider provider) {
+		this.provider = provider;
+	}
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
-		SetRequest setRequest = new SetRequest(getHost()
-				.resolveSemanticElement(),
-				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION,
-				request.getCellEditor().getValue());
+		System.out.println("Writing into " + provider.getAttribute());
+		SetRequest setRequest = new SetRequest(getHost().resolveSemanticElement(), provider.getAttribute(), request
+				.getCellEditor().getValue());
 		SetValueCommand setCommand = new SetValueCommand(setRequest);
 		return new ICommandProxy(setCommand);
 	}
