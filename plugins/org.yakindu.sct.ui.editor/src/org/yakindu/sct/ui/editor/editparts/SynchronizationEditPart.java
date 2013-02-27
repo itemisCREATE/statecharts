@@ -17,6 +17,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.SynchronizationFigure;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
 
 import de.itemis.gmf.runtime.commons.editpolicies.BarResizeEditPolicy;
 
@@ -35,10 +36,15 @@ public class SynchronizationEditPart extends ShapeNodeEditPart {
 	}
 
 	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
+	}
+
+	@Override
 	protected NodeFigure createNodeFigure() {
-		final DefaultSizeNodeFigure nodeFigure = new DefaultSizeNodeFigure(
-				getMapMode().DPtoLP(DEFAULT_WIDTH), getMapMode().DPtoLP(
-						DEFAULT_HEIGHT));
+		final DefaultSizeNodeFigure nodeFigure = new DefaultSizeNodeFigure(getMapMode().DPtoLP(DEFAULT_WIDTH),
+				getMapMode().DPtoLP(DEFAULT_HEIGHT));
 		nodeFigure.setLayoutManager(new StackLayout());
 		nodeFigure.add(new SynchronizationFigure(getMapMode()));
 		return nodeFigure;
