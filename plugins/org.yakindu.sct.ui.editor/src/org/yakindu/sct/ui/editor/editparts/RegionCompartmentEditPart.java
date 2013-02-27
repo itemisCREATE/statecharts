@@ -31,8 +31,6 @@ import org.yakindu.sct.ui.editor.policies.RegionCompartmentXYLayoutEditPolicy;
  */
 public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 
-	private boolean isSupportingViewActions = true;
-
 	public RegionCompartmentEditPart(View view) {
 		super(view);
 	}
@@ -49,14 +47,6 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 	@Override
 	public PreferencesHint getDiagramPreferencesHint() {
 		return DiagramActivator.DIAGRAM_PREFERENCES_HINT;
-	}
-
-	public boolean isSupportingViewActions() {
-		return this.isSupportingViewActions;
-	}
-
-	public void setIsSupportingViewActions(boolean supportsViewActions) {
-		this.isSupportingViewActions = supportsViewActions;
 	}
 
 	@Override
@@ -80,11 +70,5 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		super.refreshVisuals();
 		((ResizableCompartmentFigure) getFigure()).getScrollPane().setScrollBarVisibility(
 				org.eclipse.draw2d.ScrollPane.NEVER);
-	}
-
-	@Override
-	protected void refreshConnections() {
-		// Do nothing to prevent super.refreshConnections() from clearing away
-		// connections which are now clipped by ViewportAwareClippingStrategy.
 	}
 }
