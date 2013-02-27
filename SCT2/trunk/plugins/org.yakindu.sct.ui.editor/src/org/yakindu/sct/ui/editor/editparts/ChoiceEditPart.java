@@ -15,6 +15,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.ChoiceFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
 
 import de.itemis.gmf.runtime.commons.editparts.FixedSizeShapeNodeEditPart;
 
@@ -29,11 +30,15 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 		super(view);
 	}
 
+	@Override
+	protected void createDefaultEditPolicies() {
+		super.createDefaultEditPolicies();
+		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
+	}
 
 	@Override
 	public Dimension getDefaultSize() {
-		return MapModeUtils.getMappedDimensions(getMapMode(),
-				MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
+		return MapModeUtils.getMappedDimensions(getMapMode(), MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 	}
 
 	@Override

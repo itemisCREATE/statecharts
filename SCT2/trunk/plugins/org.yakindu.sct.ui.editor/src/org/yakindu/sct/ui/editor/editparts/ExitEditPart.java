@@ -19,6 +19,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.ExitFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
 
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
 import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
@@ -37,16 +38,15 @@ public class ExitEditPart extends BorderedShapeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE,
-				new OneWayConnectionHandlesEditPolicy(HandleDirection.INCOMING));
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new NonResizableEditPolicyEx());
+		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE, new OneWayConnectionHandlesEditPolicy(
+				HandleDirection.INCOMING));
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
+		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
 	}
 
 	@Override
 	protected NodeFigure createMainFigure() {
-		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(
-				MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
+		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 		figure.setLayoutManager(new StackLayout());
 		figure.add(new ExitFigure(getMapMode()));
 		return figure;

@@ -27,6 +27,7 @@ import org.yakindu.sct.ui.editor.editor.figures.InitialStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.ShallowHistoryFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
@@ -46,14 +47,12 @@ public class EntryEditPart extends BorderedShapeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE,
-				new OneWayConnectionHandlesEditPolicy(HandleDirection.OUTGOING));
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new NonResizableEditPolicyEx());
-		installEditPolicy(
-				EditPolicy.SELECTION_FEEDBACK_ROLE,
-				new ContextSensitiveHelpPolicy(
-						HelpContextIds.SC_PROPERTIES_ENTRY_ENTRYKIND));
+		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE, new OneWayConnectionHandlesEditPolicy(
+				HandleDirection.OUTGOING));
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
+		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new ContextSensitiveHelpPolicy(
+				HelpContextIds.SC_PROPERTIES_ENTRY_ENTRYKIND));
+		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
 	}
 
 	@Override
@@ -76,8 +75,7 @@ public class EntryEditPart extends BorderedShapeEditPart {
 	@Override
 	protected void handleNotificationEvent(Notification notification) {
 		// We have to update the primary shape when the entry kind changes
-		if (SGraphPackage.eINSTANCE.getEntry_Kind().equals(
-				notification.getFeature())) {
+		if (SGraphPackage.eINSTANCE.getEntry_Kind().equals(notification.getFeature())) {
 			// TODO: We have to remove the old figure, this does not work
 			// currently because the connections get broken then.
 			getMainFigure().add(getPrimaryShape());
@@ -92,8 +90,7 @@ public class EntryEditPart extends BorderedShapeEditPart {
 
 	@Override
 	protected NodeFigure createMainFigure() {
-		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(
-				MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
+		final NodeFigure figure = new EllipseAnchorDefaultSizeNodeFigure(MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 		figure.setLayoutManager(new StackLayout());
 		figure.add(getPrimaryShape());
 		return figure;

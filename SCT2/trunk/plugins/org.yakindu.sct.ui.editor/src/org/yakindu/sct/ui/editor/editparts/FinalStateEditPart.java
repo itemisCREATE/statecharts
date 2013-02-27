@@ -17,6 +17,7 @@ import org.eclipse.gmf.runtime.diagram.ui.handles.ConnectionHandle.HandleDirecti
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.FinalStateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
 
 import de.itemis.gmf.runtime.commons.editparts.EllipseFixedSizeShapeNodeEditPart;
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
@@ -35,14 +36,14 @@ public class FinalStateEditPart extends EllipseFixedSizeShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE,
-				new OneWayConnectionHandlesEditPolicy(HandleDirection.INCOMING));
+		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE, new OneWayConnectionHandlesEditPolicy(
+				HandleDirection.INCOMING));
+		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
 	}
 
 	@Override
 	public Dimension getDefaultSize() {
-		return MapModeUtils.getMappedDimensions(getMapMode(),
-				MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
+		return MapModeUtils.getMappedDimensions(getMapMode(), MapModeUtils.DEFAULT_SMALL_NODE_DIMENSION);
 	}
 
 	@Override
