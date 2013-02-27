@@ -16,8 +16,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.draw2d.ConnectionLayer;
-import org.eclipse.draw2d.ViewportAwareConnectionLayerClippingStrategy;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -25,9 +23,6 @@ import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
-import org.eclipse.gef.LayerConstants;
-import org.eclipse.gef.RootEditPart;
-import org.eclipse.gef.editparts.LayerManager;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.swt.widgets.Composite;
@@ -163,17 +158,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 	@Override
 	public String getContributorId() {
 		return ID;
-	}
-
-	@Override
-	protected void configureGraphicalViewer() {
-		super.configureGraphicalViewer();
-		RootEditPart rootEditPart = getDiagramGraphicalViewer().getRootEditPart();
-		if (rootEditPart instanceof LayerManager) {
-			ConnectionLayer connectionLayer = (ConnectionLayer) ((LayerManager) rootEditPart)
-					.getLayer(LayerConstants.CONNECTION_LAYER);
-			connectionLayer.setClippingStrategy(new ViewportAwareConnectionLayerClippingStrategy(connectionLayer));
-		}
 	}
 
 	@Override
