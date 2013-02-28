@@ -15,6 +15,8 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 
+import de.itemis.xtext.utils.gmf.directedit.IEAttributeProvider;
+
 /**
  * Direct editing parser that allows editing of an EAttribute.
  * 
@@ -23,30 +25,37 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
  */
 public class AttributeParser implements IParser {
 
-	private final EAttribute attribute;
 	private final String pluginId;
+	private IEAttributeProvider provider;
 
-	public AttributeParser(EAttribute attribute, String pluginId ) {
-		this.attribute = attribute;
+	public AttributeParser(IEAttributeProvider provider, String pluginId) {
+		this.provider = provider;
 		this.pluginId = pluginId;
 	}
 
-	
+	public AttributeParser(final EAttribute attribute, String pluginId) {
+		this.provider = new IEAttributeProvider() {
+			public EAttribute getAttribute() {
+				return attribute;
+			}
+		};
+		this.pluginId = pluginId;
+	}
+
 	public String getEditString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
+		EAttribute attribute = provider.getAttribute();
 		if (element.eGet(attribute) != null) {
 			return String.valueOf(element.eGet(attribute));
 		} else {
-			return "<"+attribute.getName()+">";
+			return "<" + attribute.getName() + ">";
 		}
 	}
 
-	
 	public IParserEditStatus isValidEditString(IAdaptable element, String editString) {
 		return new ParserEditStatus(pluginId, IParserEditStatus.OK, "");
 	}
 
-	
 	public ICommand getParseCommand(IAdaptable adapter, String newString, int flags) {
 		if (newString == null) {
 			return UnexecutableCommand.INSTANCE;
@@ -56,27 +65,23 @@ public class AttributeParser implements IParser {
 		if (editingDomain == null) {
 			return UnexecutableCommand.INSTANCE;
 		}
-		SetRequest request = new SetRequest(element, attribute, newString);
+		SetRequest request = new SetRequest(element, provider.getAttribute(), newString);
 		return new SetValueCommand(request);
 	}
 
-	
 	public String getPrintString(IAdaptable adapter, int flags) {
 		EObject element = (EObject) adapter.getAdapter(EObject.class);
-		return String.valueOf(element.eGet(attribute));
+		return String.valueOf(element.eGet(provider.getAttribute()));
 	}
 
-	
 	public boolean isAffectingEvent(Object event, int flags) {
 		if (event instanceof Notification) {
-			return (((Notification) event).getFeature() == attribute);
+			return (((Notification) event).getFeature() == provider.getAttribute());
 		}
 		return false;
 	}
 
-	
 	public IContentAssistProcessor getCompletionProcessor(IAdaptable element) {
 		return null;
 	}
-
 }
