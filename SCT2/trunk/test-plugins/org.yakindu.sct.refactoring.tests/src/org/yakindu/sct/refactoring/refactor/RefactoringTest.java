@@ -10,7 +10,7 @@ import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.resource.impl.StextResource;
 import org.yakindu.sct.refactoring.refactor.util.SctEqualityHelper;
-import org.yakindu.sct.test.models.RefactoringTestModels;
+import org.yakindu.sct.refactoring.test.models.RefactoringTestModels;
 
 import com.google.inject.Inject;
 
