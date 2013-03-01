@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.draw2d.IFigure;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
@@ -226,7 +227,7 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 		figure.getParent().setConstraint(figure, bounds);
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked" })
 	private Rectangle calculateFeedbackBounds(ChangeBoundsRequest request, Rectangle feedbackBounds, int level,
 			IFigure containerFigure) {
 		Rectangle result = feedbackBounds.getCopy();
@@ -238,7 +239,8 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 			transformedRect.resize(request.getSizeDelta());
 			transformedRect.expand(SPACEING * level, SPACEING * level);
 			result.union(transformedRect);
-			result.union(containerFigure.getPreferredSize());
+			Dimension max = Dimension.max(result.getSize(), containerFigure.getPreferredSize());
+			result.setSize(max);
 			if (result.x < feedbackBounds.x || result.y < feedbackBounds.y) {
 				return feedbackBounds;
 			}
