@@ -42,6 +42,7 @@ public class StextResource extends AbstractSCTResource {
 		StringBuilder builder = new StringBuilder();
 		for (Scope scope : statechart.getScopes()) {
 			builder.append(serialize(scope));
+			builder.append("\n");
 		}
 		statechart.setSpecification(builder.toString());
 	}
