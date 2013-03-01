@@ -21,6 +21,7 @@ import org.eclipse.draw2d.geometry.PrecisionRectangle;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.CompoundCommand;
 import org.eclipse.gef.editpolicies.AbstractEditPolicy;
@@ -51,11 +52,11 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Command getCommand(Request request) {
-		if (!(request instanceof ChangeBoundsRequest)) {
+		if (!RequestConstants.REQ_MOVE.equals(request.getType())) {
 			return null;
 		}
-		ChangeBoundsRequest cbr = (ChangeBoundsRequest) request;
 
+		ChangeBoundsRequest cbr = (ChangeBoundsRequest) request;
 		CompoundCommand result = new CompoundCommand();
 		List<IGraphicalEditPart> container = collectContainerHierachy();
 
@@ -91,7 +92,7 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 
 	@Override
 	public void showSourceFeedback(Request request) {
-		if (!(request instanceof ChangeBoundsRequest))
+		if (!RequestConstants.REQ_MOVE.equals(request.getType()))
 			return;
 		showContainerFeedback((ChangeBoundsRequest) request);
 		super.showSourceFeedback(request);
@@ -223,10 +224,9 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 	protected void setBounds(IFigure figure, Rectangle bounds) {
 		figure.setBounds(bounds);
 		figure.getParent().setConstraint(figure, bounds);
-
 	}
 
-	@SuppressWarnings({ "unchecked"})
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	private Rectangle calculateFeedbackBounds(ChangeBoundsRequest request, Rectangle feedbackBounds, int level,
 			IFigure containerFigure) {
 		Rectangle result = feedbackBounds.getCopy();
@@ -238,8 +238,7 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 			transformedRect.resize(request.getSizeDelta());
 			transformedRect.expand(SPACEING * level, SPACEING * level);
 			result.union(transformedRect);
-			// does not work for negative resizes upper left now, if fixed,
-			// remove
+			result.union(containerFigure.getPreferredSize());
 			if (result.x < feedbackBounds.x || result.y < feedbackBounds.y) {
 				return feedbackBounds;
 			}
