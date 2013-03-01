@@ -226,7 +226,7 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked"})
 	private Rectangle calculateFeedbackBounds(ChangeBoundsRequest request, Rectangle feedbackBounds, int level,
 			IFigure containerFigure) {
 		Rectangle result = feedbackBounds.getCopy();
@@ -238,7 +238,6 @@ public class EnlargeContainerEditPart extends AbstractEditPolicy {
 			transformedRect.resize(request.getSizeDelta());
 			transformedRect.expand(SPACEING * level, SPACEING * level);
 			result.union(transformedRect);
-			result.union(containerFigure.getPreferredSize());
 			// does not work for negative resizes upper left now, if fixed,
 			// remove
 			if (result.x < feedbackBounds.x || result.y < feedbackBounds.y) {
