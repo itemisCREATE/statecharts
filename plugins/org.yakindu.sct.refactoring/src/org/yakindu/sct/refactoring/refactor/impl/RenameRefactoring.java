@@ -12,6 +12,7 @@ package org.yakindu.sct.refactoring.refactor.impl;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -24,6 +25,8 @@ import org.yakindu.sct.model.stext.resource.impl.StextResource;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
+
+import com.google.common.collect.Sets;
 
 /**
  * Renames the context object and all references to it.
@@ -48,12 +51,6 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 
 	public RenameRefactoring(NamedElement element, String name) {
 		this.element = element;
-
-		if (element.eResource() == null) {
-			// something went wrong
-			System.err.println("Resource of element to rename is NULL!!");
-		}
-
 		this.newName = name;
 	}
 
@@ -69,19 +66,26 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 		element.setName(newName);
 
 		StextResource res = (StextResource) getResource();
-
+		Set<SpecificationElement> specificationsToParse = Sets.newHashSet();
+		
 		for (EObject referer : elementReferers) {
 			if (referer instanceof FeatureCall) {
 				FeatureCall featureCall = (FeatureCall) referer;
 				featureCall.setFeature(element);
-				res.parseSpecificationElement(EcoreUtil2.getContainerOfType(
-						referer, SpecificationElement.class));
+				SpecificationElement spec = EcoreUtil2.getContainerOfType(
+						referer, SpecificationElement.class);
+				specificationsToParse.add(spec);
 			} else if (referer instanceof ElementReferenceExpression) {
-				((ElementReferenceExpression) referer).setReference(element);
-				res.parseSpecificationElement(EcoreUtil2.getContainerOfType(
-						referer, SpecificationElement.class));
-
+				ElementReferenceExpression expr = (ElementReferenceExpression) referer;
+				expr.setReference(element);
+				SpecificationElement spec = EcoreUtil2.getContainerOfType(
+						referer, SpecificationElement.class);
+				specificationsToParse.add(spec);
 			}
+		}
+		// TODO parsing is an workaround here for linking problem
+		for (SpecificationElement spec : specificationsToParse) {
+			res.parseSpecificationElement(spec);
 		}
 	}
 
