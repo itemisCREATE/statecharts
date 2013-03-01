@@ -10,9 +10,9 @@
  */
 package org.yakindu.sct.refactoring.refactor;
 
-import static org.yakindu.sct.test.models.RefactoringTestModels.EXPECTED_STATECHART;
-import static org.yakindu.sct.test.models.RefactoringTestModels.FOLD_OUTGOING_ACTIONS;
-import static org.yakindu.sct.test.models.RefactoringTestModels.INITIAL_STATECHART;
+import static org.yakindu.sct.refactoring.test.models.RefactoringTestModels.EXPECTED_STATECHART;
+import static org.yakindu.sct.refactoring.test.models.RefactoringTestModels.FOLD_OUTGOING_ACTIONS;
+import static org.yakindu.sct.refactoring.test.models.RefactoringTestModels.INITIAL_STATECHART;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.State;

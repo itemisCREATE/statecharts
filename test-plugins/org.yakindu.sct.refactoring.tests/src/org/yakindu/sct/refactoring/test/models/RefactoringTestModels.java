@@ -8,7 +8,9 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.test.models;
+package org.yakindu.sct.refactoring.test.models;
+
+import org.yakindu.sct.test.models.BaseTestModels;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -16,7 +18,7 @@ package org.yakindu.sct.test.models;
  */
 public class RefactoringTestModels extends BaseTestModels {
 
-	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/refactoring/";
+	private static final String TESTMODEL_DIR = "org.yakindu.sct.refactoring.tests/testmodels/refactoring/";
 
 	public static final String INITIAL_STATECHART = "before.sct";
 	public static final String EXPECTED_STATECHART = "after.sct";

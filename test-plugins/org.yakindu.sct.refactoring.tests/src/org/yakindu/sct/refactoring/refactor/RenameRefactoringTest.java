@@ -11,8 +11,8 @@
 package org.yakindu.sct.refactoring.refactor;
 
 import static org.junit.Assert.fail;
-import static org.yakindu.sct.test.models.RefactoringTestModels.INITIAL_STATECHART;
-import static org.yakindu.sct.test.models.RefactoringTestModels.RENAMING;
+import static org.yakindu.sct.refactoring.test.models.RefactoringTestModels.INITIAL_STATECHART;
+import static org.yakindu.sct.refactoring.test.models.RefactoringTestModels.RENAMING;
 
 
 
