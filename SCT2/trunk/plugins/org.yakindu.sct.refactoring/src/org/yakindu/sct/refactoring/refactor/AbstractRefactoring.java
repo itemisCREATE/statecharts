@@ -51,7 +51,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 		return contextObjects;
 	}
 
-	protected T getContextObject() {
+	public T getContextObject() {
 		return getContextObjects().iterator().next();
 	}
 
