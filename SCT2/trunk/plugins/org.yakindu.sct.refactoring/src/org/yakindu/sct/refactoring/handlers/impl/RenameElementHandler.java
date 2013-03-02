@@ -10,12 +10,15 @@
  */
 package org.yakindu.sct.refactoring.handlers.impl;
 
+import java.util.List;
+
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -23,6 +26,7 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -50,7 +54,7 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 		NamedElement element = refactoring.getContextObject();
 		if (element != null) {
 			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-			InputDialog dialog = new InputDialog(window.getShell(), "Rename..", "Please enter new name:", element.getName(), null);
+			InputDialog dialog = new InputDialog(window.getShell(), "Rename..", "Please enter new name:", element.getName(), new NameUniquenessValidator(element));
 			if (dialog.open() == Window.OK) {
 				String newName = dialog.getValue();
 				if (newName != null) {					
@@ -149,6 +153,27 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 			ISelection selection) {
 		NamedElement element = unwrap(selection);
 		refactoring.setContextObjects(Lists.newArrayList(element));
+	}
+	
+	private class NameUniquenessValidator implements IInputValidator {
+
+		protected List<String> existingNames;
+		
+		public NameUniquenessValidator(NamedElement element) {
+			existingNames = Lists.newArrayList();
+			Scope scope = EcoreUtil2.getContainerOfType(element, Scope.class);
+			List<? extends NamedElement> allOfSameType = EcoreUtil2.getAllContentsOfType(scope, NamedElement.class);
+			allOfSameType.remove(element);
+			for (NamedElement namedElement : allOfSameType) {
+				existingNames.add(namedElement.getName());
+			}
+		}
+
+		@Override
+		public String isValid(String newText) {
+			return existingNames.contains(newText)? "Name already exists!": null;
+		}
+		
 	}
 
 }
