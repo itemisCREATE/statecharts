@@ -14,6 +14,7 @@ import java.util.List;
 
 import org.eclipse.draw2d.geometry.Insets;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
@@ -28,6 +29,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editparts.StateEditPart;
@@ -72,7 +74,7 @@ public class GroupStatesIntoCompositeRefactoring extends
 		State compositeState = createCompositeState();
 		
 		Region innerRegion = SGraphFactory.eINSTANCE.createRegion();
-		innerRegion.setName("r1"); // TODO check for uniqueness
+		innerRegion.setName("inner region"); // TODO check for uniqueness?
 		compositeState.getRegions().add(innerRegion);
 		
 		for (State state : getSelectedStates()) {
@@ -165,7 +167,20 @@ public class GroupStatesIntoCompositeRefactoring extends
 			nameBuilder.append("_");
 			nameBuilder.append(state.getName());
 		}
+		makeNameUnique(nameBuilder);	
 		return nameBuilder.toString();
+	}
+
+	protected void makeNameUnique(StringBuilder nameBuilder) {
+		int index = 2;
+		List<String> existingStateNames = Lists.newArrayList();
+		EList<Vertex> vertices = ((Region) parentRegion.getElement()).getVertices();
+		for (Vertex vertex : vertices) {
+			existingStateNames.add(vertex.getName());
+		}
+		while (existingStateNames.contains(nameBuilder.toString())) {
+			nameBuilder.append(index++);
+		}
 	}
 
 	protected boolean allStatesHaveSameParentRegion() {
