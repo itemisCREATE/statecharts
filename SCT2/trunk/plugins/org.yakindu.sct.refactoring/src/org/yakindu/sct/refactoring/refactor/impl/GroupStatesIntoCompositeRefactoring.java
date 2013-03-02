@@ -54,14 +54,19 @@ import com.google.common.collect.Lists;
 public class GroupStatesIntoCompositeRefactoring extends
 		AbstractRefactoring<GraphicalEditPart> {
 
-	private View parentRegion;
+	private View parentRegionView;
 	private PreferencesHint preferencesHint = DiagramActivator.DIAGRAM_PREFERENCES_HINT;
 
 	private final int PADDING = 55;
+	private State compositeState;
+	private Region innerRegion;
+	
+	protected List<State> contextStates;
 
 	@Override
 	protected void internalExecute() {
-		groupSelectedStatesIntoNewCompositeState();
+		doSemanticalRefactoring();
+		doGraphicalRefactoring();
 	}
 
 	@Override
@@ -69,18 +74,19 @@ public class GroupStatesIntoCompositeRefactoring extends
 		return super.isExecutable() && allStatesHaveSameParentRegion();
 	}
 
-	protected void groupSelectedStatesIntoNewCompositeState() {
-
-		State compositeState = createCompositeState();
+	protected void doSemanticalRefactoring() {
+		compositeState = createCompositeState();
 		
-		Region innerRegion = SGraphFactory.eINSTANCE.createRegion();
+		innerRegion = SGraphFactory.eINSTANCE.createRegion();
 		innerRegion.setName("inner region"); // TODO check for uniqueness?
 		compositeState.getRegions().add(innerRegion);
 		
-		for (State state : getSelectedStates()) {
+		for (State state : contextStates) {
 			innerRegion.getVertices().add(state);
 		}
-		
+	}
+
+	protected void doGraphicalRefactoring() {
 		Node compositeStateView = createNodeForCompositeState(compositeState);
 		Node innerRegionNode = ViewService.createNode(
 				getStateFigureCompartmentView(compositeStateView), innerRegion,
@@ -93,25 +99,30 @@ public class GroupStatesIntoCompositeRefactoring extends
 	protected State createCompositeState() {
 		State compositeState = SGraphFactory.eINSTANCE.createState();
 		compositeState.setName(getNameForCompositeState());
-		((Region)parentRegion.getElement()).getVertices().add(compositeState);
+		getParentRegion().getVertices().add(compositeState);
 		return compositeState;
 	}
 
 	protected Node createNodeForCompositeState(State compositeState) {
-		Node compositeStateNode = ViewService.createNode(parentRegion,
+		Node compositeStateNode = ViewService.createNode(parentRegionView,
 				compositeState, SemanticHints.STATE, preferencesHint);
 		setCompositeStateLayoutConstraint(compositeStateNode);
 		return compositeStateNode;
 	}
 
-	protected List<State> getSelectedStates() {
+	protected void setContextStates() {
+		contextStates = Lists.newArrayList();
 		List<GraphicalEditPart> contextObjects = getContextObjects();
-		List<State> result = Lists.newArrayList();
 		for (GraphicalEditPart editPart : contextObjects) {
 			EObject element = editPart.resolveSemanticElement();
-			result.add((State) element);
+			contextStates.add((State) element);
 		}
-		return result;
+	}
+	
+	@Override
+	public void setContextObjects(List<GraphicalEditPart> contextObject) {
+		super.setContextObjects(contextObject);
+		setContextStates();
 	}
 	
 	protected void moveSelectedStateNodesTo(View containerView, Bounds compositeBounds) {
@@ -163,7 +174,7 @@ public class GroupStatesIntoCompositeRefactoring extends
 
 	protected String getNameForCompositeState() {
 		StringBuilder nameBuilder = new StringBuilder("Composite");
-		for (State state : getSelectedStates()) {
+		for (State state : contextStates) {
 			nameBuilder.append("_");
 			nameBuilder.append(state.getName());
 		}
@@ -174,7 +185,7 @@ public class GroupStatesIntoCompositeRefactoring extends
 	protected void makeNameUnique(StringBuilder nameBuilder) {
 		int index = 2;
 		List<String> existingStateNames = Lists.newArrayList();
-		EList<Vertex> vertices = ((Region) parentRegion.getElement()).getVertices();
+		EList<Vertex> vertices = getParentRegion().getVertices();
 		for (Vertex vertex : vertices) {
 			existingStateNames.add(vertex.getName());
 		}
@@ -183,14 +194,18 @@ public class GroupStatesIntoCompositeRefactoring extends
 		}
 	}
 
+	protected Region getParentRegion() {
+		return contextStates.get(0).getParentRegion();
+	}
+
 	protected boolean allStatesHaveSameParentRegion() {
-		parentRegion = null;
+		parentRegionView = null;
 		for (IGraphicalEditPart editPart : getContextObjects()) {
-			if (parentRegion == null) {
-				parentRegion = (Node) ((Node)editPart.getNotationView()).eContainer();
+			if (parentRegionView == null) {
+				parentRegionView = (Node) ((Node)editPart.getNotationView()).eContainer();
 			} else {
 				Node nextParentRegion = (Node) ((Node)editPart.getNotationView()).eContainer();
-				if (!nextParentRegion.equals(parentRegion)) {
+				if (!nextParentRegion.equals(parentRegionView)) {
 					return false;
 				}
 			}

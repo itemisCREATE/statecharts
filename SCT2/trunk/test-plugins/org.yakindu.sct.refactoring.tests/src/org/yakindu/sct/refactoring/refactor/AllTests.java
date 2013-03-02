@@ -15,6 +15,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 import org.yakindu.sct.refactoring.refactor.impl.FoldIncomingActionsRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.FoldOutgoingActionsRefactoringTest;
+import org.yakindu.sct.refactoring.refactor.impl.GroupStatesIntoCompositeRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.RenameRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldEntryActionsRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoringTest;
@@ -28,7 +29,8 @@ import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoringTes
 @SuiteClasses({ FoldIncomingActionsRefactoringTest.class,
 		FoldOutgoingActionsRefactoringTest.class, RenameRefactoringTest.class,
 		UnfoldEntryActionsRefactoringTest.class,
-		UnfoldExitActionsRefactoringTest.class })
+		UnfoldExitActionsRefactoringTest.class,
+		GroupStatesIntoCompositeRefactoringTest.class})
 public class AllTests {
 
 }
