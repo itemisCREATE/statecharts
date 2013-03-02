@@ -41,15 +41,14 @@ public abstract class StateBasedRefactoringTest extends RefactoringTest {
 		State state = getStateByName(initial, stateName);
 
 		AbstractRefactoring<?> refactoring = getRefactoring(state);
-		((AbstractSCTResource) initial.eResource()).setSerializerEnabled(true);
+		AbstractSCTResource initialRes = (AbstractSCTResource) initial.eResource();
+		initialRes.setSerializerEnabled(true);
 		refactoring.internalExecute();
-		((AbstractSCTResource) initial.eResource()).setSerializerEnabled(false);
+		initialRes.setSerializerEnabled(false);
+		initialRes.linkSpecificationElements();
 
 		Statechart expected = models
 				.loadStatechartFromResource(pathToExpectedSct);
-		
-		parseAllSpecifications(initial);
-		parseAllSpecifications(expected);
 		
 		compareStatecharts(initial, expected);
 	}

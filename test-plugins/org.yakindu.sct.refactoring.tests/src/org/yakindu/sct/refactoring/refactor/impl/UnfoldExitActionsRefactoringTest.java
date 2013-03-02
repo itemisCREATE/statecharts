@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.refactoring.refactor;
+package org.yakindu.sct.refactoring.refactor.impl;
 
 import static org.yakindu.sct.refactoring.test.models.RefactoringTestModels.EXPECTED_STATECHART;
 import static org.yakindu.sct.refactoring.test.models.RefactoringTestModels.INITIAL_STATECHART;
@@ -16,6 +16,8 @@ import static org.yakindu.sct.refactoring.test.models.RefactoringTestModels.UNFO
 
 import org.junit.Test;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
+import org.yakindu.sct.refactoring.refactor.StateBasedRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoring;
 
 import com.google.common.collect.Lists;
