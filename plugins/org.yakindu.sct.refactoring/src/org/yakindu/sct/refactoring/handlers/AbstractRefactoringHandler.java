@@ -30,7 +30,7 @@ import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
  */
 public abstract class AbstractRefactoringHandler<T extends Object> extends AbstractHandler {
 
-	private AbstractRefactoring<T> refactoring;
+	protected AbstractRefactoring<T> refactoring;
 
 	public abstract AbstractRefactoring<T> createRefactoring();
 

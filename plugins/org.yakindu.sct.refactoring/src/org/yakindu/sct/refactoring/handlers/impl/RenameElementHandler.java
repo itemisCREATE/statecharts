@@ -10,10 +10,8 @@
  */
 package org.yakindu.sct.refactoring.handlers.impl;
 
-import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.commands.IHandler;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -32,9 +30,11 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
-import org.yakindu.sct.refactoring.refactor.IRefactoring;
+import org.yakindu.sct.refactoring.handlers.AbstractRefactoringHandler;
+import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.refactoring.refactor.impl.RenameRefactoring;
 
+import com.google.common.collect.Lists;
 
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 /**
@@ -43,21 +43,18 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
  * @author thomas kutz - Initial contribution and API
  * 
  */
-public class RenameElementHandler extends AbstractHandler implements IHandler {
+public class RenameElementHandler extends AbstractRefactoringHandler<NamedElement> {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-		IWorkbenchPartSite site = window.getActivePage().getActiveEditor().getSite();
-		ISelection currentSelection = site.getSelectionProvider().getSelection();
-		NamedElement element = unwrap(currentSelection);
+		NamedElement element = refactoring.getContextObject();
 		if (element != null) {
-			
+			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 			InputDialog dialog = new InputDialog(window.getShell(), "Rename..", "Please enter new name:", element.getName(), null);
 			if (dialog.open() == Window.OK) {
 				String newName = dialog.getValue();
 				if (newName != null) {					
-					IRefactoring<?> refactoring = new RenameRefactoring(element, newName);
+					((RenameRefactoring)refactoring).setNewName(newName);
 					refactoring.execute();
 				}
 			}
@@ -84,7 +81,10 @@ public class RenameElementHandler extends AbstractHandler implements IHandler {
 		else if (selectedElement instanceof ElementReferenceExpression) {
 			return findElementForFakeInStatechart((NamedElement)((ElementReferenceExpression)selectedElement).getReference());
 		}
-		return findElementForFakeInStatechart((NamedElement)selectedElement);
+		if (selectedElement instanceof NamedElement)
+			return findElementForFakeInStatechart((NamedElement)selectedElement);
+		
+		return null;
 	}
 
 	
@@ -118,7 +118,6 @@ public class RenameElementHandler extends AbstractHandler implements IHandler {
 		return fakeElement;
 	}
 	
-	// TODO some logic copied from RenameRefactoring, so maybe refactoring is required
 	protected Statechart getStatechartFromFakeResource(LazyLinkingResource resource) {
 		for (Adapter adapter : resource.eAdapters()) {
 			if (adapter instanceof ContextElementAdapter) {
@@ -129,6 +128,27 @@ public class RenameElementHandler extends AbstractHandler implements IHandler {
 			}
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean isEnabled() {
+		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchPartSite site = window.getActivePage().getActiveEditor().getSite();
+		ISelection currentSelection = site.getSelectionProvider().getSelection();
+		setContext(refactoring, currentSelection);
+		return refactoring.isExecutable();
+	}
+
+	@Override
+	public AbstractRefactoring<NamedElement> createRefactoring() {
+		return new RenameRefactoring();
+	}
+
+	@Override
+	public void setContext(AbstractRefactoring<NamedElement> refactoring,
+			ISelection selection) {
+		NamedElement element = unwrap(selection);
+		refactoring.setContextObjects(Lists.newArrayList(element));
 	}
 
 }

@@ -12,6 +12,7 @@ package org.yakindu.sct.refactoring.refactor.impl;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -45,23 +46,28 @@ import com.google.common.collect.Sets;
  */
 public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 
-	NamedElement element;
-	String oldName;
 	String newName;
-
-	public RenameRefactoring(NamedElement element, String name) {
-		this.element = element;
-		this.newName = name;
+	
+	public void setNewName(String newName) {
+		this.newName = newName;
 	}
-
+	
+	@Override
+	public void setContextObjects(List<NamedElement> contextObject) {
+		this.newName = null;
+		super.setContextObjects(contextObject);
+	}
+	
 	@Override
 	public boolean isExecutable() {
-		return true;
+		return (getContextObject() != null);
 	}
 
 	@Override
 	protected void internalExecute() {
 
+		NamedElement element = getContextObject();
+		
 		Collection<EObject> elementReferers = findReferers(element);
 		element.setName(newName);
 
@@ -119,7 +125,7 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 
 	@Override
 	protected Resource getResource() {
-		return element.eResource();
+		return getContextObject().eResource();
 	}
 
 }
