@@ -13,6 +13,11 @@ package org.yakindu.sct.refactoring.refactor;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.yakindu.sct.refactoring.refactor.impl.FoldIncomingActionsRefactoringTest;
+import org.yakindu.sct.refactoring.refactor.impl.FoldOutgoingActionsRefactoringTest;
+import org.yakindu.sct.refactoring.refactor.impl.RenameRefactoringTest;
+import org.yakindu.sct.refactoring.refactor.impl.UnfoldEntryActionsRefactoringTest;
+import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoringTest;
 
 /**
  * 
