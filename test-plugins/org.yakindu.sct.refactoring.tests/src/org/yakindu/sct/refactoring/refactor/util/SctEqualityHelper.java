@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.util.FeatureMapUtil;
  * @author thomas kutz - Initial contribution and API
  *
  */
+@SuppressWarnings("serial")
 public class SctEqualityHelper extends EqualityHelper{
 
 	@Override
