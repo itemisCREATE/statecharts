@@ -12,6 +12,7 @@ package org.yakindu.sct.ui.editor.partitioning;
 
 import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.openEditor;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,6 +31,7 @@ import org.eclipse.gmf.runtime.diagram.ui.resources.editor.document.IDocumentPro
 import org.eclipse.gmf.runtime.diagram.ui.resources.editor.parts.DiagramDocumentEditor;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.jface.action.IContributionItem;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.layout.GridLayoutFactory;
 import org.eclipse.jface.viewers.BaseLabelProvider;
@@ -44,7 +46,12 @@ import org.eclipse.jface.viewers.ViewerLabel;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.util.Arrays;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -111,7 +118,6 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 				new SGraphItemProviderAdapterFactory());
 		setTitleImage(labelProvider.getImage(element));
 		setPartName(labelProvider.getText(element));
-
 	}
 
 	@Override
@@ -141,6 +147,48 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	public void selectionChanged(SelectionChangedEvent event) {
 		Diagram diagramToOpen = (Diagram) ((IStructuredSelection) event.getSelection()).getFirstElement();
 		openEditor(diagramToOpen);
+	}
+
+	@Override
+	public void dispose() {
+		closeSubdiagramEditors();
+		super.dispose();
+	}
+
+	protected void closeSubdiagramEditors() {
+		if (getDiagram().getElement() instanceof Statechart) {
+			List<IEditorReference> references = new ArrayList<IEditorReference>();
+			IWorkbenchWindow workbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+			if (workbenchWindow == null)
+				return;
+			IWorkbenchPage activePage = workbenchWindow.getActivePage();
+			if (activePage == null)
+				return;
+			IEditorReference[] refs = activePage.getEditorReferences();
+			for (IEditorReference ref : refs) {
+				try {
+					if (ref.getEditorInput() instanceof IDiagramEditorInput) {
+						IDiagramEditorInput diagramInput = (IDiagramEditorInput) ref.getEditorInput();
+						if (diagramInput.getDiagram().eResource() == getDiagram().eResource()) {
+							references.add(ref);
+						}
+					}
+				} catch (PartInitException e) {
+					e.printStackTrace();
+				}
+			}
+			if (references.size() > 0) {
+				boolean close = MessageDialog.openQuestion(activePage.getActivePart().getSite().getShell(),
+						"Close subdiagram editors?",
+						"There are still subdiagram editors open. Do you want to close them?");
+				if (close) {
+					for (IEditorReference ref : refs) {
+						activePage.closeEditor(ref.getEditor(false), false);
+					}
+				}
+			}
+
+		}
 	}
 
 	public static final class BreadcrumbViewerLabelProvider extends BaseLabelProvider implements ITreePathLabelProvider {
