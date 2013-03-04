@@ -187,7 +187,8 @@ public class DiagramPartitioningUtil {
 				if (ref.getEditorInput() instanceof IDiagramEditorInput) {
 					IDiagramEditorInput diagramInput = (IDiagramEditorInput) ref.getEditorInput();
 					if (diagramInput.getDiagram().equals(diagram)) {
-						boolean close = MessageDialog.openQuestion(new Shell(), "Close subdiagram editor?",
+						boolean close = MessageDialog.openQuestion(activePage.getActivePart().getSite().getShell(),
+								"Close subdiagram editor?",
 								"The subdiagram is still open in another editor. Do you want to close it?");
 						if (close) {
 							activePage.closeEditor(ref.getEditor(false), false);
