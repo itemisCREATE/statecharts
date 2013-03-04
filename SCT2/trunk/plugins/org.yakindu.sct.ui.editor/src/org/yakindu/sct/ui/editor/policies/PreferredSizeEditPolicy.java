@@ -22,6 +22,7 @@ import org.eclipse.gef.DragTracker;
 import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
+import org.eclipse.gef.handles.HandleBounds;
 import org.eclipse.gef.handles.SquareHandle;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gef.tools.SimpleDragTracker;
@@ -75,7 +76,14 @@ public class PreferredSizeEditPolicy extends PreferredSizeCompartmentEditPolicy 
 	public class PreferredSizeSquareHandle extends SquareHandle {
 
 		public PreferredSizeSquareHandle(GraphicalEditPart editpart) {
-			super(editpart, new RelativeLocator(getHostFigure(), 0.25, 0));
+			super(editpart, new RelativeLocator(getHostFigure(), 0.75, 1) {
+				protected Rectangle getReferenceBox() {
+					IFigure f = getReferenceFigure();
+					if (f instanceof HandleBounds)
+						return ((HandleBounds) f).getHandleBounds();
+					return super.getReferenceBox();
+				}
+			});
 		}
 
 		@Override
@@ -85,7 +93,7 @@ public class PreferredSizeEditPolicy extends PreferredSizeCompartmentEditPolicy 
 
 		@Override
 		protected void init() {
-			setPreferredSize(10, 10);
+			setPreferredSize(9, 9);
 		}
 
 		@Override
