@@ -10,6 +10,10 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import static org.yakindu.base.base.BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION;
+import static org.yakindu.sct.model.sgraph.SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
+
+import org.eclipse.draw2d.Label;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.tools.DirectEditManager;
@@ -63,6 +67,20 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 	@Override
 	public Transition resolveSemanticElement() {
 		return (Transition) super.resolveSemanticElement();
+	}
+
+	@Override
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		updateTooltip();
+	}
+
+	protected void updateTooltip() {
+		String documentation = (String) resolveSemanticElement().eGet(DOCUMENTED_ELEMENT__DOCUMENTATION);
+		if (getAttribute() == DOCUMENTED_ELEMENT__DOCUMENTATION)
+			documentation = (String) resolveSemanticElement().eGet(SPECIFICATION_ELEMENT__SPECIFICATION);
+		if (documentation != null && !documentation.isEmpty())
+			getFigure().setToolTip(new Label(documentation));
 	}
 
 	public EAttribute getAttribute() {

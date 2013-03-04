@@ -14,6 +14,7 @@ import static org.yakindu.base.base.BasePackage.Literals.DOCUMENTED_ELEMENT__DOC
 import static org.yakindu.sct.model.sgraph.SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION;
 import static org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand.FEATURE_TO_SHOW;
 
+import org.eclipse.draw2d.Label;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
@@ -32,12 +33,26 @@ public abstract class SpecificationElementEditPart extends PlugableXtextLabelEdi
 	public SpecificationElementEditPart(View view, SemanticTarget target) {
 		super(view, target);
 	}
-	
+
 	@Override
 	protected DirectEditManager createDirectEditManager() {
 		if (getAttribute() == DOCUMENTED_ELEMENT__DOCUMENTATION)
 			return new TextDirectEditManager(this);
 		return super.createDirectEditManager();
+	}
+
+	@Override
+	protected void refreshVisuals() {
+		super.refreshVisuals();
+		updateTooltip();
+	}
+
+	protected void updateTooltip() {
+		String documentation = (String) resolveSemanticElement().eGet(DOCUMENTED_ELEMENT__DOCUMENTATION);
+		if (getAttribute() == DOCUMENTED_ELEMENT__DOCUMENTATION)
+			documentation = (String) resolveSemanticElement().eGet(SPECIFICATION_ELEMENT__SPECIFICATION);
+		if (documentation != null && !documentation.isEmpty())
+			getFigure().setToolTip(new Label(documentation));
 	}
 
 	public EAttribute getAttribute() {
