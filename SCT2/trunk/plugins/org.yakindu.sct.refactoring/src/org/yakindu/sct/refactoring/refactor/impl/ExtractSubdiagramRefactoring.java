@@ -32,7 +32,6 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
@@ -176,10 +175,10 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		State contextElement = (State) contextView.getElement();
 		Diagram subdiagram = ViewService.createDiagram(contextElement, StatechartDiagramEditor.ID, preferencesHint);
 		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
+		getResource().getContents().add(subdiagram);
 		for (int i = figureCompartment.getChildren().size() - 1; i >= 0; i--) {
 			subdiagram.insertChild((View) figureCompartment.getChildren().get(i));
 		}
-		getResource().getContents().add(subdiagram);
 		return subdiagram;
 	}
 }
