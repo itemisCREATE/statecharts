@@ -14,6 +14,7 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.gef.Request;
+import org.eclipse.gef.RequestConstants;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.requests.ChangeBoundsRequest;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
@@ -29,7 +30,7 @@ public class PreferredSizeCompartmentEditPolicy extends ResizableEditPolicyEx {
 
 	@Override
 	public void showSourceFeedback(Request request) {
-		if (request instanceof ChangeBoundsRequest) {
+		if (request.getType().equals(RequestConstants.REQ_RESIZE)) {
 			adjustRequest((ChangeBoundsRequest) request);
 		}
 		super.showSourceFeedback(request);
@@ -37,7 +38,7 @@ public class PreferredSizeCompartmentEditPolicy extends ResizableEditPolicyEx {
 
 	@Override
 	protected Command getResizeCommand(ChangeBoundsRequest request) {
-		if (request instanceof ChangeBoundsRequest) {
+		if (request.getType().equals(RequestConstants.REQ_RESIZE)) {
 			adjustRequest((ChangeBoundsRequest) request);
 		}
 		return super.getResizeCommand(request);
