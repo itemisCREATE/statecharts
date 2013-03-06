@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.ui.editor.policies;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -36,8 +37,7 @@ import com.google.common.collect.Lists;
  * 
  */
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class RegionCompartmentCanonicalEditPolicy extends
-		CanonicalConnectionEditPolicy {
+public class RegionCompartmentCanonicalEditPolicy extends CanonicalConnectionEditPolicy {
 
 	@Override
 	protected List getSemanticChildrenList() {
@@ -54,8 +54,7 @@ public class RegionCompartmentCanonicalEditPolicy extends
 		return transitions;
 	}
 
-	protected boolean shouldIncludeConnection(Edge connection,
-			Collection<View> children) {
+	protected boolean shouldIncludeConnection(Edge connection, Collection<View> children) {
 		// Connections should only be included, when the source vertex is
 		// contained in the region this edit policy belongs to
 		EObject element = (EObject) connection.getElement();
@@ -67,7 +66,6 @@ public class RegionCompartmentCanonicalEditPolicy extends
 		}
 		return super.shouldIncludeConnection(connection, children);
 	}
-
 
 	@Override
 	protected EObject getSourceElement(EObject relationship) {
@@ -95,16 +93,14 @@ public class RegionCompartmentCanonicalEditPolicy extends
 
 	@Override
 	protected String getFactoryHint(IAdaptable elementAdapter) {
-		EObject modelElement = (EObject) elementAdapter
-				.getAdapter(EObject.class);
+		EObject modelElement = (EObject) elementAdapter.getAdapter(EObject.class);
 		String factoryHint = SemanticHintUtil.getSemanticHint(modelElement);
 		return factoryHint;
 	}
 
 	protected boolean shouldDeleteView(View view) {
-		//#Bug 349119 
-		if (ViewType.NOTE.equals(view.getType())
-				|| ViewType.NOTEATTACHMENT.equals(view.getType())
+		// #Bug 349119
+		if (ViewType.NOTE.equals(view.getType()) || ViewType.NOTEATTACHMENT.equals(view.getType())
 				|| ViewType.TEXT.equals(view.getType())) {
 			return false;
 		}
@@ -114,5 +110,19 @@ public class RegionCompartmentCanonicalEditPolicy extends
 	@Override
 	protected String getDefaultFactoryHint() {
 		return SemanticHints.TRANSITION;
+	}
+
+	/**
+	 * This method is overridden to prevent the execution of
+	 * DeferredLayoutCommand
+	 */
+	@Override
+	protected void refreshSemantic() {
+		List<IAdaptable> createdViews = super.refreshSemanticChildren();
+		List<IAdaptable> createdConnectionViews = refreshSemanticConnections();
+		List<IAdaptable> allViews = new ArrayList<IAdaptable>(createdConnectionViews.size() + createdViews.size());
+		allViews.addAll(createdViews);
+		allViews.addAll(createdConnectionViews);
+		makeViewsImmutable(allViews);
 	}
 }
