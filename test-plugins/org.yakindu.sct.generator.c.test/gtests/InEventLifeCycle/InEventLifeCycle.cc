@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2012 committers of YAKINDU and others.
+* Copyright (c) 2013 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -17,7 +17,7 @@ TEST(StatemachineTest, eventLifeCycle) {
 	inEventLifeCycle_init(&handle);
 	inEventLifeCycle_enter(&handle);
 	inEventLifeCycleIface_raise_e(&handle);
-	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle)== 0);
+	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle) == 0);
 	inEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle)== 1);
+	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle) == 1);
 }

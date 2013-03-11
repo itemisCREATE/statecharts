@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2012 committers of YAKINDU and others.
+* Copyright (c) 2013 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -17,5 +17,5 @@ TEST(StatemachineTest, simple) {
 	parenthesis_init(&handle);
 	parenthesis_enter(&handle);
 	EXPECT_TRUE(parenthesis_isActive(&handle, Parenthesis_mainRegion_A));
-	EXPECT_TRUE(parenthesisIface_get_erg(&handle)== 8);
+	EXPECT_TRUE(parenthesisIface_get_erg(&handle) == 8);
 }
