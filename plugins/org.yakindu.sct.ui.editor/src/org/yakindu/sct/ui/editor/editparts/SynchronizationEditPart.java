@@ -17,7 +17,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.SynchronizationFigure;
-import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 
 import de.itemis.gmf.runtime.commons.editpolicies.BarResizeEditPolicy;
 
@@ -38,7 +38,7 @@ public class SynchronizationEditPart extends ShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
+		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 	}
 
 	@Override
