@@ -44,7 +44,7 @@ import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
 import org.yakindu.sct.ui.editor.policies.PreferredSizeEditPolicy;
-import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
@@ -129,7 +129,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeEditPolicy());
 		}
 
-		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
+		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 	}
 
 	@Override

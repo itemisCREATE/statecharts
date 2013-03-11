@@ -19,7 +19,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.ExitFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 
 import de.itemis.gmf.runtime.commons.editpolicies.OneWayConnectionHandlesEditPolicy;
 import de.itemis.gmf.runtime.commons.figures.EllipseAnchorDefaultSizeNodeFigure;
@@ -41,7 +41,7 @@ public class ExitEditPart extends BorderedShapeEditPart {
 		installEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE, new OneWayConnectionHandlesEditPolicy(
 				HandleDirection.INCOMING));
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
-		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
+		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 	}
 
 	@Override

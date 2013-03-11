@@ -15,7 +15,7 @@ import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.ChoiceFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPart;
+import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 
 import de.itemis.gmf.runtime.commons.editparts.FixedSizeShapeNodeEditPart;
 
@@ -33,7 +33,7 @@ public class ChoiceEditPart extends FixedSizeShapeNodeEditPart {
 	@Override
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
-		installEditPolicy(EnlargeContainerEditPart.ROLE, new EnlargeContainerEditPart());
+		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 	}
 
 	@Override
