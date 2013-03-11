@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2012 committers of YAKINDU and others.
+* Copyright (c) 2013 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -17,11 +17,11 @@ TEST(StatemachineTest, ExitTaken) {
 	guardedExit_init(&handle);
 	guardedExit_enter(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_A));
-	EXPECT_TRUE(!guardedExitIface_get_guard(&handle));
+	EXPECT_TRUE(!guardedExitIface_get_guard(&handle) );
 	guardedExitIface_raise_e(&handle);
 	guardedExit_runCycle(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_B));
-	EXPECT_TRUE(!guardedExitIface_get_done(&handle));
+	EXPECT_TRUE(!guardedExitIface_get_done(&handle) );
 }
 TEST(StatemachineTest, ExitNotTaken) {
 	GuardedExit handle;
@@ -32,5 +32,5 @@ TEST(StatemachineTest, ExitNotTaken) {
 	guardedExitIface_raise_e(&handle);
 	guardedExit_runCycle(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_B));
-	EXPECT_TRUE(guardedExitIface_get_done(&handle));
+	EXPECT_TRUE(guardedExitIface_get_done(&handle) );
 }
