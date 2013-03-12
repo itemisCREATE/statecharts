@@ -13,6 +13,9 @@ package org.yakindu.sct.refactoring.refactor.impl;
 import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.createInlineStyle;
 import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.getInlineStyle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -72,23 +75,28 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	@SuppressWarnings("unchecked")
 	protected void createEntryExitPoints(Diagram subdiagram) {
 		TreeIterator<EObject> eAllContents = subdiagram.eAllContents();
+		List<Edge> entryPointsToCreate = new ArrayList<Edge>();
+		List<Edge> exitPointstoCreate = new ArrayList<Edge>();
 		while (eAllContents.hasNext()) {
 			EObject next = eAllContents.next();
 			if (next instanceof View) {
 				EList<Edge> targetEdges = ((View) next).getTargetEdges();
-				for (int i = targetEdges.size() - 1; i >= 0; i--) {
-					Edge edge = targetEdges.get(i);
+				for (Edge edge : targetEdges) {
 					if (!EcoreUtil.isAncestor(subdiagram, edge.getSource()))
-						createEntryPoint(edge, subdiagram);
+						entryPointsToCreate.add(edge);
 				}
 				EList<Edge> sourceEdges = ((View) next).getSourceEdges();
-				for (int i = sourceEdges.size() - 1; i >= 0; i--) {
-					Edge edge = sourceEdges.get(i);
-					if (!EcoreUtil.isAncestor(subdiagram, edge.getTarget())) {
-						createExitPoint(edge, subdiagram);
-					}
+				for (Edge edge : sourceEdges) {
+					if (!EcoreUtil.isAncestor(subdiagram, edge.getTarget()))
+						exitPointstoCreate.add(edge);
 				}
 			}
+		}
+		for (Edge edge : entryPointsToCreate) {
+			createEntryPoint(edge, subdiagram);
+		}
+		for (Edge edge : exitPointstoCreate) {
+			createExitPoint(edge, subdiagram);
 		}
 	}
 
@@ -176,8 +184,8 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		Diagram subdiagram = ViewService.createDiagram(contextElement, StatechartDiagramEditor.ID, preferencesHint);
 		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
 		getResource().getContents().add(subdiagram);
-		for (int i = figureCompartment.getChildren().size() - 1; i >= 0; i--) {
-			subdiagram.insertChild((View) figureCompartment.getChildren().get(i));
+		while (figureCompartment.getChildren().size() > 0) {
+			subdiagram.insertChild((View) figureCompartment.getChildren().get(0));
 		}
 		return subdiagram;
 	}
