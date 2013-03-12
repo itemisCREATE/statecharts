@@ -91,19 +91,19 @@ public class ModelSequencerHistoryTest extends ModelSequencerTest {
 		HistoryEntry historyStep = (HistoryEntry) reactSequence_history
 				.getSteps().get(0);
 		assertFalse(historyStep.isDeep());
-		assertCall(historyStep.getInitialStep(), _s3.getEnterSequence());
+		assertCall(historyStep.getInitialStep(), _s3.getEnterSequences().get(0));
 		Reaction reaction_history = _t1.get(0);
 		assertCall(assertedSequence(reaction_history.getEffect()), 1,
 				reactSequence_history);
 
 		Sequence reactSequence_initial = flow.getNodes().get(2)
 				.getReactSequence();
-		assertCall(reactSequence_initial, 0, _s4.getEnterSequence());
+		assertCall(reactSequence_initial, 0, _s4.getEnterSequences().get(0));
 		Reaction reaction = _t1.get(1);
 		assertCall(assertedSequence(reaction.getEffect()), 1,
-				_s2.getEnterSequence());
+				_s2.getEnterSequences().get(0));
 
-		assertCall(_s3.getSuperScope().getEnterSequence(), 0,
+		assertCall(_s3.getSuperScope().getEnterSequences().get(0), 0,
 				r2_history_entry.getReactSequence());
 
 		Step saveStep = _s3.getSuperScope().getExitSequence().getSteps().get(0);
@@ -176,7 +176,7 @@ public class ModelSequencerHistoryTest extends ModelSequencerTest {
 				new StepSaveHistory((ExecutionRegion) _s4.getSuperScope()),//
 				new StepSaveHistory((ExecutionRegion) _s5.getSuperScope()),//
 				new StepLeaf(_s5.getExitSequence().getSteps().get(0)),//
-				new StepLeaf(_s1.getEnterSequence().getSteps().get(0))//
+				new StepLeaf(_s1.getEnterSequences().get(0).getSteps().get(0))//
 				));
 	}
 

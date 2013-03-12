@@ -51,10 +51,10 @@ class FlowOptimizer {
 		
 		if (_inlineEntryActions)  flow.states.forEach( state | state.entryAction.inline )
 		if (_inlineExitActions)   flow.states.forEach( state | state.exitAction.inline )
-		if (_inlineEnterSequences) flow.states.forEach( state | state.enterSequence.inline )
+		if (_inlineEnterSequences) flow.states.forEach( state | state.enterSequences.forEach( s | s.inline ))
 		if (_inlineExitSequences)  flow.states.forEach( state | state.exitSequence.inline )
 		if (_inlineExitRegion) flow.eAllContents.filter(typeof(ExecutionRegion)).forEach( region | region.exitSequence.inline )
-		if (_inlineEnterRegion) flow.eAllContents.filter(typeof(ExecutionRegion)).forEach( region | region.enterSequence.inline )
+		if (_inlineEnterRegion) flow.eAllContents.filter(typeof(ExecutionRegion)).forEach( region | region.enterSequences.forEach( s | s.inline ))
 
 				
 		if (_inlineChoices) {

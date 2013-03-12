@@ -52,7 +52,7 @@ class ModelSequencer implements IModelSequencer {
 		sc.mapExitActions(ef)
 		
 		 
-		ef.defineStateEnterSequences(sc)
+		ef.defineEnterSequences(sc)
 		ef.defineStateExitSequences(sc)
 		ef.defineDeepEnterSequences(sc)
 		ef.defineShallowEnterSequences(sc)

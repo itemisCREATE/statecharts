@@ -99,7 +99,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Sequence _effect = (Sequence) _t.getEffect();
 		assertEquals(4, _effect.getSteps().size());
 
-		assertCall(_effect, 3, _s4.getEnterSequence());
+		assertCall(_effect, 3, _s4.getEnterSequences().get(0));
 		assertCall(_effect, 2, _s3.getEntryAction());
 		assertCall(_effect, 1, _s1.getEntryAction());
 
@@ -178,7 +178,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Sequence _effect = (Sequence) _t.getEffect();
 		assertEquals(3, _effect.getSteps().size());
 
-		assertCall(_effect, 2, _s4.getEnterSequence());
+		assertCall(_effect, 2, _s4.getEnterSequences().get(0));
 		assertCall(_effect, 1, _s1.getEntryAction());
 	}
 
@@ -253,7 +253,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		Sequence _effect = (Sequence) _t.getEffect();
 		assertEquals(2, _effect.getSteps().size());
 
-		assertCall(_effect, 1, _s4.getEnterSequence());
+		assertCall(_effect, 1, _s4.getEnterSequences().get(0));
 	}
 
 	/**
@@ -328,7 +328,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		assertEquals(2, _effect.getSteps().size());
 
 		assertCall(_effect, 0, _s1.getExitSequence());
-		assertCall(_effect, 1, _s6.getEnterSequence());
+		assertCall(_effect, 1, _s6.getEnterSequences().get(0));
 
 		assertCall(_s1.getExitSequence(), 0, _s1.getSubScopes().get(0)
 				.getExitSequence());
@@ -527,7 +527,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 		assertEquals(2, _effect.getSteps().size());
 
 		assertCall(_effect, 0, _s1.getExitSequence());
-		assertCall(_effect, 1, _s1.getEnterSequence());
+		assertCall(_effect, 1, _s1.getEnterSequences().get(0));
 	}
 
 }

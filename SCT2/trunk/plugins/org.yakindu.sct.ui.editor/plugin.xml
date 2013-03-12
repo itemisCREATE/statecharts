@@ -356,10 +356,10 @@
                    small_icon="icons/obj16/Region-16.png">
              </entry>
              <entry
-                   description="Creates an initial state"
+                   description="Creates an initial entry node"
                    id="org.yakindu.sct.ui.editor.Entry"
                    kind="tool"
-                   label="Initial State"
+                   label="Initial entry node"
                    large_icon="icons/obj32/Initial-State-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/Initial-State-16.png">
@@ -392,10 +392,10 @@
                    small_icon="icons/obj16/Final-State-16.png">
              </entry>
              <entry
-                   description="Creates an exit point"
+                   description="Creates an exit node"
                    id="org.yakindu.sct.ui.editor.Exit"
                    kind="tool"
-                   label="Exit Point"
+                   label="Exit Node"
                    large_icon="icons/obj32/Exit-Point-32.png"
                    path="/tools/"
                    small_icon="icons/obj16/Exit-Point-16.png">

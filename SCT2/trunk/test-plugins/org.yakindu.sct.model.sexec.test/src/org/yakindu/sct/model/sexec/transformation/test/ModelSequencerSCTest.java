@@ -54,16 +54,16 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 
-		assertNotNull(flow.getEnterSequence());
-		assertEquals(2, flow.getEnterSequence().getSteps().size());
+		assertNotNull(flow.getEnterSequences().get(0));
+		assertEquals(2, flow.getEnterSequences().get(0).getSteps().size());
 
-		assertCall(flow.getEnterSequence(), 1, flow.getStates().get(0)
-				.getSuperScope().getEnterSequence());
+		assertCall(flow.getEnterSequences().get(0), 1, flow.getStates().get(0)
+				.getSuperScope().getEnterSequences().get(0));
 
-		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequence(),
+		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequences().get(0),
 				0, flow.getNodes().get(0).getReactSequence());
 		assertCall(flow.getNodes().get(0).getReactSequence(), 0, flow
-				.getStates().get(0).getEnterSequence());
+				.getStates().get(0).getEnterSequences().get(0));
 	}
 
 	/**
@@ -75,23 +75,23 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 
-		assertNotNull(flow.getEnterSequence());
-		assertEquals(3, flow.getEnterSequence().getSteps().size());
+		assertNotNull(flow.getEnterSequences().get(0));
+		assertEquals(3, flow.getEnterSequences().get(0).getSteps().size());
 
-		assertCall(flow.getEnterSequence(), 0, flow.getEntryAction());
-		assertCall(flow.getEnterSequence(), 1, flow.getStates().get(0)
-				.getSuperScope().getEnterSequence());
-		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequence(),
+		assertCall(flow.getEnterSequences().get(0), 0, flow.getEntryAction());
+		assertCall(flow.getEnterSequences().get(0), 1, flow.getStates().get(0)
+				.getSuperScope().getEnterSequences().get(0));
+		assertCall(flow.getStates().get(0).getSuperScope().getEnterSequences().get(0),
 				0, flow.getNodes().get(0).getReactSequence());
 		assertCall(flow.getNodes().get(0).getReactSequence(), 0, flow
-				.getStates().get(0).getEnterSequence());
+				.getStates().get(0).getEnterSequences().get(0));
 
-		assertCall(flow.getEnterSequence(), 2, flow.getStates().get(2)
-				.getSuperScope().getEnterSequence());
-		assertCall(flow.getStates().get(2).getSuperScope().getEnterSequence(),
+		assertCall(flow.getEnterSequences().get(0), 2, flow.getStates().get(2)
+				.getSuperScope().getEnterSequences().get(0));
+		assertCall(flow.getStates().get(2).getSuperScope().getEnterSequences().get(0),
 				0, flow.getNodes().get(1).getReactSequence());
 		assertCall(flow.getNodes().get(1).getReactSequence(), 0, flow
-				.getStates().get(2).getEnterSequence());
+				.getStates().get(2).getEnterSequences().get(0));
 
 	}
 
@@ -104,10 +104,10 @@ public class ModelSequencerSCTest extends ModelSequencerTest {
 
 		ExecutionFlow flow = sequencer.transform(tsc.sc);
 
-		assertNotNull(flow.getEnterSequence());
-		assertEquals(1, flow.getEnterSequence().getSteps().size());
+		assertNotNull(flow.getEnterSequences().get(0));
+		assertEquals(1, flow.getEnterSequences().get(0).getSteps().size());
 
-		assertCall(flow.getEnterSequence(), 0, flow.getEntryAction());
+		assertCall(flow.getEnterSequences().get(0), 0, flow.getEntryAction());
 	}
 
 	/**

@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.c.GenmodelEntries
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class StatemachineC {
 	
@@ -28,6 +29,7 @@ class StatemachineC {
 	@Inject extension FlowCode
 	@Inject extension GenmodelEntries
 	@Inject extension ICodegenTypeSystemAccess
+	@Inject extension SExecExtensions
 	
 	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		 fsa.generateFile(flow.module.c, flow.statemachineCContent(entry) )
@@ -98,7 +100,7 @@ class StatemachineC {
 	def enterFunction(ExecutionFlow it) '''
 		void «type.toFirstLower»_enter(«scHandleDecl»)
 		{
-			«enterSequence.code»
+			«enterSequences.defaultSequence.code»
 		}
 	'''
 	

@@ -196,7 +196,7 @@ public class ExecutionFlowItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR);
-			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_NODE__REACTIONS);
@@ -266,7 +266,7 @@ public class ExecutionFlowItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SexecPackage.EXECUTION_FLOW__STATE_VECTOR:
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
 			case SexecPackage.EXECUTION_FLOW__REACTIONS:
@@ -301,7 +301,7 @@ public class ExecutionFlowItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE,
+				(SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES,
 				 SexecFactory.eINSTANCE.createSequence()));
 
 		newChildDescriptors.add
@@ -579,7 +579,7 @@ public class ExecutionFlowItemProvider
 		boolean qualify =
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR ||
-			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||

@@ -172,15 +172,15 @@ public class HistoryTest extends ModelSequencerTest {
 
 		assertedOrder(reactSequence, Sets.newHashSet(_s3), Lists.newArrayList(//
 				new StepHistory(historyEntry, false), //
-				new StepLeaf(_s3.getEnterSequence()) //
+				new StepLeaf(_s3.getEnterSequences().get(0)) //
 				));
 		assertedOrder(reactSequence, Sets.newHashSet(_s3), Lists.newArrayList(//
 				new StepHistory(historyEntry, true), //
-				new StepLeaf(_s3.getEnterSequence()) //
+				new StepLeaf(_s3.getEnterSequences().get(0)) //
 				));
 		assertedOrder(reactSequence, Sets.newHashSet(_s5), Lists.newArrayList(//
 				new StepHistory(historyEntry, true), //
-				new StepLeaf(_s4.getEnterSequence()) //
+				new StepLeaf(_s4.getEnterSequences().get(0)) //
 				));
 	}
 
@@ -251,16 +251,16 @@ public class HistoryTest extends ModelSequencerTest {
 
 		assertedOrder(reactSequence, Sets.newHashSet(_s3), Lists.newArrayList(//
 				new StepHistory(historyEntry, false), //
-				new StepLeaf(_s3.getEnterSequence()) //
+				new StepLeaf(_s3.getEnterSequences().get(0)) //
 				));
 		assertedOrder(reactSequence, Sets.newHashSet(_s3), Lists.newArrayList(//
 				new StepHistory(historyEntry, true), //
-				new StepLeaf(_s3.getEnterSequence()) //
+				new StepLeaf(_s3.getEnterSequences().get(0)) //
 				));
 		assertedOrder(reactSequence, Sets.newHashSet(_s5), Lists.newArrayList(//
 				new StepHistory(historyEntry, true), //
 				new StepLeaf(_s4.getEntryAction()),//
-				new StepLeaf(_s5.getEnterSequence()) //
+				new StepLeaf(_s5.getEnterSequences().get(0)) //
 				));
 		// assertCall(assertedSequence(tr0.getEffect()), 0,
 		// _s2.getEnterSequence());
@@ -328,14 +328,14 @@ public class HistoryTest extends ModelSequencerTest {
 				historyEntryStep instanceof HistoryEntry);
 
 		HistoryEntry historyEntry = (HistoryEntry) historyEntryStep;
-		assertCall(historyEntry.getInitialStep(), _s3.getEnterSequence());
+		assertCall(historyEntry.getInitialStep(), _s3.getEnterSequences().get(0));
 		ExecutionRegion _r2 = (ExecutionRegion) _s3.getSuperScope();
 		assertCall(historyEntry.getHistoryStep(), _r2.getDeepEnterSequence());
 
 		Step _s3EnterStep = assertedStateCase(
 				_r2.getDeepEnterSequence().getSteps().get(0), _s3).getStep();
 		Step _s3EnterCall = assertedSequence(_s3EnterStep).getSteps().get(0);
-		assertCall(_s3EnterCall, _s3.getEnterSequence());
+		assertCall(_s3EnterCall, _s3.getEnterSequences().get(0));
 	}
 
 	@Test
@@ -378,10 +378,10 @@ public class HistoryTest extends ModelSequencerTest {
 		ExecutionFlow flow = sequencer.transform(sc);
 		ExecutionState _s1 = flow.getStates().get(0);
 		assertEquals("sc.r.s1", _s1.getName());
-		Sequence enterSequence = flow.getEnterSequence();
+		Sequence enterSequence = flow.getEnterSequences().get(0);
 		ExecutionRegion _r = (ExecutionRegion) _s1.getSuperScope();
 
 		assertCall(enterSequence, 0, flow.getEntryAction());
-		assertCall(enterSequence, 1, _r.getEnterSequence());
+		assertCall(enterSequence, 1, _r.getEnterSequences().get(0));
 	}
 }
