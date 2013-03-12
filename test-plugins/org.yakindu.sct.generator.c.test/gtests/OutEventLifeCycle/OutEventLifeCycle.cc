@@ -18,7 +18,7 @@ TEST(StatemachineTest, availableAfterCycle) {
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
 	outEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(outEventLifeCycleIface_israised_f(&handle) );
+	EXPECT_TRUE(outEventLifeCycleIface_israised_f(&handle));
 }
 TEST(StatemachineTest, availableWithinCycle) {
 	OutEventLifeCycle handle;
@@ -26,7 +26,7 @@ TEST(StatemachineTest, availableWithinCycle) {
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
 	outEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(outEventLifeCycleIface_get_f_available_in_cycle(&handle) );
+	EXPECT_TRUE(outEventLifeCycleIface_get_f_available_in_cycle(&handle));
 }
 TEST(StatemachineTest, unvailableWithin2ndCycle) {
 	OutEventLifeCycle handle;
@@ -35,7 +35,7 @@ TEST(StatemachineTest, unvailableWithin2ndCycle) {
 	outEventLifeCycleIface_raise_e(&handle);
 	outEventLifeCycle_runCycle(&handle);
 	outEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(!outEventLifeCycleIface_get_f_available_in_next_cycle(&handle) );
+	EXPECT_TRUE(!outEventLifeCycleIface_get_f_available_in_next_cycle(&handle));
 }
 TEST(StatemachineTest, unvailableAfter2ndCycle) {
 	OutEventLifeCycle handle;
@@ -44,5 +44,5 @@ TEST(StatemachineTest, unvailableAfter2ndCycle) {
 	outEventLifeCycleIface_raise_e(&handle);
 	outEventLifeCycle_runCycle(&handle);
 	outEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(!outEventLifeCycleIface_israised_f(&handle) );
+	EXPECT_TRUE(!outEventLifeCycleIface_israised_f(&handle));
 }

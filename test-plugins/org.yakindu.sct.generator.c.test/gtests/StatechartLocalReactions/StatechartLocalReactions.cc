@@ -18,9 +18,9 @@ TEST(StatemachineTest, statechartLocalReactionsTest) {
 	statechartLocalReactions_enter(&handle);
 	EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_main_region_S1));
 	EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_region2_a));
-	while (statechartLocalReactionsIface_get_myInt(&handle) < 10) {
+	while (statechartLocalReactionsIface_get_myInt(&handle)< 10) {
 		EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_region2_a));
-		if (statechartLocalReactionsIface_get_myInt(&handle) %2== 0) {
+		if (statechartLocalReactionsIface_get_myInt(&handle)%2== 0) {
 					EXPECT_TRUE(statechartLocalReactions_isActive(&handle, StatechartLocalReactions_main_region_S1));;
 				  }
 				else {
