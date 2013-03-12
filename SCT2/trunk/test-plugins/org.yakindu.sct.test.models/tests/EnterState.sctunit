@@ -1,0 +1,40 @@
+
+testgroup EnterState for statechart EnterState {
+	
+		
+	/* An entry without a specified entry point must enter the region through the default entry.
+	 */
+	test defaultEntry { 
+		enter
+		assert active(EnterState.r.A)
+		
+		raise e
+		cycle
+		assert active(EnterState.r.B.r.E) 
+	} 
+
+	/* An entry with a specified entry point must take the entry node with the specified name.
+	 */
+	test namedEntryThroughNamedTransition { 
+		enter
+		assert active(EnterState.r.A)
+		
+		raise f
+		cycle
+		assert active(EnterState.r.B.r.F) 
+	} 
+
+	/* An entry with a specified entry point that does not match any entry node by name must be taken through the default entry node.
+	 */
+	test namedEntryThroughDefaultTransition { 
+		enter
+		assert active(EnterState.r.A)
+		
+		raise g
+		cycle
+		assert active(EnterState.r.B.r.E) 
+	} 
+	
+	 
+}
+	
