@@ -1,6 +1,7 @@
-testsuite AllTests { 
+testsuite AllTests {  
 	AlwaysOncycle , AssignmentAsExpression, BitExpressions , BooleanExpressions , CKeywords,
 	Declarations, Choice , DeepHistory,
+	EnterState,
 	ExitOnSelfTransition,
 	//FeatureCalls,
 	Guard,

@@ -1,0 +1,35 @@
+
+testgroup ExitState for statechart ExitState{
+	
+	/* An exit through an unnamed exit point must be taken by the transition without exit point spec (it must also be unguarded). */
+	test defaultExit { 
+		enter
+		assert active(ExitState.r.A)
+		
+		raise e
+		cycle
+		assert active(ExitState.r.E) 
+	} 
+
+	/* An exit through an named exit point must be taken by the transition with the matching exit point spec if it exists. */
+	test namedExitThroughNamedTransition { 
+		enter
+		assert active(ExitState.r.A)
+		
+		raise f
+		cycle
+		assert active(ExitState.r.F) 
+	} 
+
+	/* An exit through an named exit point must be taken by the default transition if no transition for this exit point exists.  */
+	test namedExitThroughDefaultTransition { 
+		enter
+		assert active(ExitState.r.A)
+		
+		raise g
+		cycle
+		assert active(ExitState.r.E) 
+	} 
+
+}
+	
