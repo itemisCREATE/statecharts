@@ -10,6 +10,8 @@ import java.util.List
 import org.eclipse.emf.ecore.EObject
 import java.util.ArrayList
 import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.stext.stext.EntryPointSpec
 
 
 class SgraphExtensions {
@@ -50,6 +52,16 @@ class SgraphExtensions {
 
 	def entry(Region r) {
 		r.vertices.findFirst(v | v instanceof Entry && (v.name == null || "".equals(v.name) || v.name == 'default') ) as Entry
+	}
+	
+	
+	/**
+	 * Returns the name of the specified entry point or 'default' if it does not exist
+	 */
+	def String entryPointName(Transition t) {
+		val eps = t.properties.filter(typeof(EntryPointSpec)).head
+		
+		if (eps == null) 'default' else eps.entrypoint	
 	}
 	
 	/**

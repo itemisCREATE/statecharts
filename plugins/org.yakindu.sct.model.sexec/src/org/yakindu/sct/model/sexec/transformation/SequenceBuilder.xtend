@@ -14,8 +14,6 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.sgraph.Statement
-
-import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.AssignmentOperator
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
@@ -29,6 +27,8 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem
+
+import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
 
 class SequenceBuilder {
 	
@@ -45,6 +45,7 @@ class SequenceBuilder {
 	@Inject @Named("ADD_TRACES") 
 	boolean _addTraceSteps 
 	
+	static String DEFAULT_SEQUENCE_NAME = "default" 
 	
 	def void defineDeepEnterSequences(ExecutionFlow flow, Statechart sc) {
 		for ( r : sc.regions) {
@@ -86,10 +87,10 @@ class SequenceBuilder {
 			for (childLeaf : child.collectLeafStates(newArrayList).filter(c|c.create.stateVector.offset == sSwitch.stateConfigurationIdx)) {
 				val execChild = child.create
 				val seq = sexec.factory.createSequence
-				seq.name = "enterSequence"
+				seq.name = DEFAULT_SEQUENCE_NAME
 				seq.comment = "enterSequence with history in child " + child.name+" for leaf "+childLeaf.name
 				if ( execChild.leaf ) {
-					seq.steps += execChild.enterSequence.newCall
+					seq.steps += execChild.enterSequences.defaultSequence.newCall
 				} else {
 					if (execChild.entryAction != null ) seq.steps += execChild.entryAction.newCall
 					if ( trace.addTraceSteps ) seq.steps += execChild.newTraceStateEntered
@@ -131,7 +132,7 @@ class SequenceBuilder {
 			val execChild = child.create
 			//TODO consider direct children
 			for (childLeaf : child.collectLeafStates(newArrayList).filter(c|c.create.stateVector.offset == sSwitch.stateConfigurationIdx)) {
-				sSwitch.cases += childLeaf.create.newCase(execChild.enterSequence.newCall)
+				sSwitch.cases += childLeaf.create.newCase(execChild.enterSequences.defaultSequence.newCall)
 			}
 		}
 		
@@ -141,78 +142,95 @@ class SequenceBuilder {
 	/**
 	 * Defines the enter sequences of all states
 	 */
-	def void defineStateEnterSequences(ExecutionFlow flow, Statechart sc) {
+	def void defineEnterSequences(ExecutionFlow flow, Statechart sc) {
 		
 		// iterate over all regions
-		for ( r : sc.regions) defineStateEnterSequence(r)
+		for ( r : sc.regions) defineScopeEnterSequences(r)
 	}
 	
 
-	def dispatch void defineStateEnterSequence(Region r) {
-		val execState = r.create
-		val seq = sexec.factory.createSequence
-		seq.name = "enterSequence"
-		seq.comment = "Default enter sequence for region " + r.name
-
+	def dispatch void defineScopeEnterSequences(Region r) {
+		val execRegion = r.create
+		
 		// process all vertices of a region
-		for ( s : r.vertices) defineStateEnterSequence(s)
-
-		val entryNode = r.entry?.create
-		if (entryNode != null && entryNode.reactSequence != null) {
-			seq.steps.add(entryNode.reactSequence.newCall);
+		for ( s : r.vertices) defineScopeEnterSequences(s)
+		
+		// create an enter sequence for each contained entry
+		for ( e : r.collectEntries ) {
+			val seq = sexec.factory.createSequence
+			seq.name =	if (e.name == null || e.name.trim == "") 
+							DEFAULT_SEQUENCE_NAME
+						else 
+							e.name
+			seq.comment = "'" + seq.name + "' enter sequence for region " + r.name
+	
+			val entryNode = e.create
+			if (entryNode != null && entryNode.reactSequence != null) {
+				seq.steps.add(entryNode.reactSequence.newCall);
+			}
+			
+			execRegion.enterSequences += seq
 		}
-// Was before
-//		val entryState = r.entry?.target?.create
-//		if (entryState != null && entryState.enterSequence != null) 
-//				seq.steps.add(entryState.enterSequence.newCall);
-		execState.enterSequence = seq
 	}
 
-	def dispatch void defineStateEnterSequence(Vertex v) {}	
+	def dispatch void defineScopeEnterSequences(Vertex v) {}	
 	
 	
-	def dispatch void defineStateEnterSequence(FinalState state) {
+	def dispatch void defineScopeEnterSequences(FinalState state) {
 		val execState = state.create
 		val seq = sexec.factory.createSequence
-		seq.name = "enterSequence"
+		seq.name = DEFAULT_SEQUENCE_NAME
 		seq.comment = "Default enter sequence for state " + state.name
 		if (execState.entryAction != null) seq.steps.add(execState.entryAction.newCall)
 		
 		if ( _addTraceSteps ) seq.steps += execState.newTraceStateEntered
 		
 		seq.steps += execState.newEnterStateStep
-		execState.enterSequence = seq
+		execState.enterSequences += seq
 	}	
 	
 	
 	
-	def dispatch void defineStateEnterSequence(State state) {
+	def dispatch void defineScopeEnterSequences(State state) {
 		
 		val execState = state.create
-		val seq = sexec.factory.createSequence
-		seq.name = "enterSequence"
-		seq.comment = "Default enter sequence for state " + state.name
-		if (execState.entryAction != null) seq.steps.add(execState.entryAction.newCall)
 		
-		if ( _addTraceSteps ) seq.steps += execState.newTraceStateEntered
+		// first creates enter sequences for all contained regions
+		state.regions.forEach( r | r.defineScopeEnterSequences )
 		
-		if ( execState.leaf ) {
+		// get all entry point names used by incoming transitions
+		val entryPointNames = state.incomingTransitions.map( t | t.entryPointName ).toSet.toList.sortInplace
+		
+		// create an entry sequence for each entry point
+		for ( epName : entryPointNames ) {
+			val seq = sexec.factory.createSequence
+			seq.name = epName
+			seq.comment = "'" + epName + "' enter sequence for state " + state.name
+			if (execState.entryAction != null) seq.steps.add(execState.entryAction.newCall)
 			
-			seq.steps += execState.newEnterStateStep
+			if ( _addTraceSteps ) seq.steps += execState.newTraceStateEntered
+			
+			if ( execState.leaf ) {
+				
+				seq.steps += execState.newEnterStateStep
+						
+			} else {
+		
+				for ( r : state.regions ) {	
+					val execRegion = r.create
+					var regionEnterSeq = execRegion.enterSequences.byName(epName)
 					
-		} else {
+					if (regionEnterSeq == null) { regionEnterSeq = execRegion.enterSequences.defaultSequence }
+					
+					if (regionEnterSeq != null) {
+						seq.steps += regionEnterSeq.newCall
+					}
+				} 
+			}
 	
-			for ( r : state.regions ) {
-				defineStateEnterSequence(r)
-
-				val execRegion = r.create
-				if (execRegion.enterSequence != null) {
-					seq.steps.add(execRegion.enterSequence.newCall)
-				}
-			} 
+			execState.enterSequences += seq
 		}
-
-		execState.enterSequence = seq
+		
 	}
 
 	/**
@@ -374,7 +392,7 @@ class SequenceBuilder {
 	def defineStatechartEnterSequence(ExecutionFlow flow, Statechart sc) {
 
 		val enterSequence = sexec.factory.createSequence
-		enterSequence.name = "enter"
+		enterSequence.name = DEFAULT_SEQUENCE_NAME
 		enterSequence.comment = "Default enter sequence for statechart " + sc.name
 	    	
 		for (tes : sc.timeEventSpecs ) {
@@ -387,12 +405,12 @@ class SequenceBuilder {
 		
 		for ( r : sc.regions) {
 			val execRegion = r.create
-			if (execRegion.enterSequence != null) {
-				enterSequence.steps.add(execRegion.enterSequence.newCall)
+			if (execRegion.enterSequences.defaultSequence != null) {
+				enterSequence.steps.add(execRegion.enterSequences.defaultSequence.newCall)
 			}
 		} 
 		
-		flow.enterSequence = enterSequence
+		flow.enterSequences += enterSequence
 		return enterSequence
 	}
 	

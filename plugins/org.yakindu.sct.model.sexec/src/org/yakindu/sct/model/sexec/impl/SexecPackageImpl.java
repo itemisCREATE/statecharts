@@ -534,7 +534,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionScope_EnterSequence() {
+	public EReference getExecutionScope_EnterSequences() {
 		return (EReference)executionScopeEClass.getEStructuralFeatures().get(3);
 	}
 
@@ -1275,7 +1275,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(executionScopeEClass, EXECUTION_SCOPE__STATE_VECTOR);
 		createEReference(executionScopeEClass, EXECUTION_SCOPE__SUB_SCOPES);
 		createEReference(executionScopeEClass, EXECUTION_SCOPE__SUPER_SCOPE);
-		createEReference(executionScopeEClass, EXECUTION_SCOPE__ENTER_SEQUENCE);
+		createEReference(executionScopeEClass, EXECUTION_SCOPE__ENTER_SEQUENCES);
 		createEReference(executionScopeEClass, EXECUTION_SCOPE__EXIT_SEQUENCE);
 		createEReference(executionScopeEClass, EXECUTION_SCOPE__INIT_SEQUENCE);
 
@@ -1478,7 +1478,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getExecutionScope_StateVector(), this.getStateVector(), null, "stateVector", null, 0, 1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionScope_SubScopes(), this.getExecutionScope(), this.getExecutionScope_SuperScope(), "subScopes", null, 0, -1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionScope_SuperScope(), this.getExecutionScope(), this.getExecutionScope_SubScopes(), "superScope", null, 0, 1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExecutionScope_EnterSequence(), this.getSequence(), null, "enterSequence", null, 0, 1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionScope_EnterSequences(), this.getSequence(), null, "enterSequences", null, 0, -1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionScope_ExitSequence(), this.getSequence(), null, "exitSequence", null, 0, 1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionScope_InitSequence(), this.getSequence(), null, "initSequence", null, 0, 1, ExecutionScope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -77,14 +77,14 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		ExecutionState _s1 = flow.getStates().get(0);
 		assertEquals("sc.r.s1", _s1.getName());
 
-		Sequence s1EnterSeq = _s1.getEnterSequence();
+		Sequence s1EnterSeq = _s1.getEnterSequences().get(0);
 		assertNotNull(s1EnterSeq);
 		assertEquals(2, s1EnterSeq.getSteps().size());
 
 		assertCall(s1EnterSeq, 0, flow.getStates().get(1).getSuperScope()
-				.getEnterSequence());
+				.getEnterSequences().get(0));
 		assertCall(s1EnterSeq, 1, flow.getStates().get(2).getSuperScope()
-				.getEnterSequence());
+				.getEnterSequences().get(0));
 
 	}
 
@@ -157,12 +157,12 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 				.getSteps().size());
 
 		assertCall(_effect, 0, _s5.getExitSequence());
-		assertCall(_effect, 1, _s2.getSuperScope().getEnterSequence());
-		assertCall(_s2.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_effect, 1, _s2.getSuperScope().getEnterSequences().get(0));
+		assertCall(_s2.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(1).getReactSequence());
-		assertCall(_effect, 2, _s3.getEnterSequence());
-		assertCall(_effect, 3, _s4.getSuperScope().getEnterSequence());
-		assertCall(_s4.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_effect, 2, _s3.getEnterSequences().get(0));
+		assertCall(_effect, 3, _s4.getSuperScope().getEnterSequences().get(0));
+		assertCall(_s4.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(3).getReactSequence());
 	}
 
@@ -266,19 +266,19 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 				.getSteps().size());
 
 		assertCall(_effect, 0, _s5.getExitSequence());
-		assertCall(_effect, 1, _s2.getSuperScope().getEnterSequence());
-		assertCall(_s2.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_effect, 1, _s2.getSuperScope().getEnterSequences().get(0));
+		assertCall(_s2.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(1).getReactSequence());
 		assertCall(_effect, 2, _s3.getEntryAction());
-		assertCall(_effect, 3, _s3a.getSuperScope().getEnterSequence());
-		assertCall(_s3a.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_effect, 3, _s3a.getSuperScope().getEnterSequences().get(0));
+		assertCall(_s3a.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(3).getReactSequence());
-		assertCall(_effect, 4, _s3b.getEnterSequence());
-		assertCall(_effect, 5, _s3c.getSuperScope().getEnterSequence());
-		assertCall(_s3c.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_effect, 4, _s3b.getEnterSequences().get(0));
+		assertCall(_effect, 5, _s3c.getSuperScope().getEnterSequences().get(0));
+		assertCall(_s3c.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(5).getReactSequence());
-		assertCall(_effect, 6, _s4.getSuperScope().getEnterSequence());
-		assertCall(_s4.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_effect, 6, _s4.getSuperScope().getEnterSequences().get(0));
+		assertCall(_s4.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(6).getReactSequence());
 	}
 
@@ -384,7 +384,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		assertEquals(2, _effect.getSteps().size());
 
 		assertCall(_effect, 0, _s3b.getExitSequence());
-		assertCall(_effect, 1, _s3b2.getEnterSequence());
+		assertCall(_effect, 1, _s3b2.getEnterSequences().get(0));
 	}
 
 	/**
@@ -495,20 +495,20 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
 		assertCall(_effect, 0, _s3z.getExitSequence());
 		assertCall(_effect, 1, _s3.getEntryAction());
-		assertCall(_effect, 2, _s3a.getSuperScope().getEnterSequence());
-		assertCall(_s3a.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_effect, 2, _s3a.getSuperScope().getEnterSequences().get(0));
+		assertCall(_s3a.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(3).getReactSequence());
 		assertCall(flow.getNodes().get(3).getReactSequence(), 0,
-				_s3a.getEnterSequence());
-		assertCall(_effect, 3, _s3b2.getEnterSequence());
-		assertCall(_effect, 4, _s3c.getSuperScope().getEnterSequence());
-		assertCall(_s3c.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+				_s3a.getEnterSequences().get(0));
+		assertCall(_effect, 3, _s3b2.getEnterSequences().get(0));
+		assertCall(_effect, 4, _s3c.getSuperScope().getEnterSequences().get(0));
+		assertCall(_s3c.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(5).getReactSequence());
 		assertCall(flow.getNodes().get(5).getReactSequence(), 0,
-				_s3c.getEnterSequence());
-		assertTrue(_s3c.getEnterSequence().getSteps().get(0).getClass()
+				_s3c.getEnterSequences().get(0));
+		assertTrue(_s3c.getEnterSequences().get(0).getSteps().get(0).getClass()
 				.getSimpleName(),
-				_s3c.getEnterSequence().getSteps().get(0) instanceof EnterState);
+				_s3c.getEnterSequences().get(0).getSteps().get(0) instanceof EnterState);
 	}
 
 	/*
@@ -600,7 +600,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 						new StepLeaf(_s3.getExitSequence()),
 						new StepLeaf(_s4b.getExitSequence())));
 
-		assertCall(_effect, 1, _s5.getEnterSequence());
+		assertCall(_effect, 1, _s5.getEnterSequences().get(0));
 	}
 
 	/**
@@ -733,7 +733,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		// _s4).getStep()),
 		// 0, _s4.getExitSequence());
 
-		assertCall(_effect, 1, _s5.getEnterSequence());
+		assertCall(_effect, 1, _s5.getEnterSequences().get(0));
 	}
 
 	/**
@@ -846,9 +846,9 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 				Lists.newArrayList(new StepLeaf(_s3a.getExitSequence()),
 						new StepLeaf(_s3b2.getExitSequence()), new StepLeaf(
 								_s3c.getExitSequence()),
-						new StepLeaf(_s3z.getEnterSequence())));
+						new StepLeaf(_s3z.getEnterSequences().get(0))));
 
-		assertCall(_effect, 1, _s3z.getEnterSequence());
+		assertCall(_effect, 1, _s3z.getEnterSequences().get(0));
 
 	}
 
@@ -1247,9 +1247,9 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 						new StepLeaf(_s2a2a.getExitAction()), //
 						new StepLeaf(_s2a.getExitAction()), //
 						new StepLeaf(_s.getExitAction()), //
-						new StepLeaf(_b.getEnterSequence())));
+						new StepLeaf(_b.getEnterSequences().get(0))));
 
-		assertCall(_exit, 1, _b.getEnterSequence());
+		assertCall(_exit, 1, _b.getEnterSequences().get(0));
 
 	}
 
@@ -1320,9 +1320,9 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 						new StepLeaf(_s2a2a.getExitAction()), //
 						new StepLeaf(_s2a.getExitAction()), //
 						new StepLeaf(_s.getExitAction()), //
-						new StepLeaf(_b.getEnterSequence())));
+						new StepLeaf(_b.getEnterSequences().get(0))));
 
-		assertCall(_exit, 1, _b.getEnterSequence());
+		assertCall(_exit, 1, _b.getEnterSequences().get(0));
 
 	}
 
@@ -1393,9 +1393,9 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 						new StepLeaf(_s2a2a.getExitAction()), //
 						new StepLeaf(_s2a.getExitAction()), //
 						new StepLeaf(_s.getExitAction()), //
-						new StepLeaf(_b.getEnterSequence())));
+						new StepLeaf(_b.getEnterSequences().get(0))));
 
-		assertCall(_exit, 1, _b.getEnterSequence());
+		assertCall(_exit, 1, _b.getEnterSequences().get(0));
 
 	}
 

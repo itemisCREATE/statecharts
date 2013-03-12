@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.BasePackage;
@@ -34,7 +35,7 @@ import org.yakindu.sct.model.sexec.StateVector;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSubScopes <em>Sub Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getSuperScope <em>Super Scope</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getEnterSequence <em>Enter Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getEnterSequences <em>Enter Sequences</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getExitSequence <em>Exit Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionScopeImpl#getInitSequence <em>Init Sequence</em>}</li>
  * </ul>
@@ -94,14 +95,14 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	protected ExecutionScope superScope;
 
 	/**
-	 * The cached value of the '{@link #getEnterSequence() <em>Enter Sequence</em>}' containment reference.
+	 * The cached value of the '{@link #getEnterSequences() <em>Enter Sequences</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEnterSequence()
+	 * @see #getEnterSequences()
 	 * @generated
 	 * @ordered
 	 */
-	protected Sequence enterSequence;
+	protected EList<Sequence> enterSequences;
 
 	/**
 	 * The cached value of the '{@link #getExitSequence() <em>Exit Sequence</em>}' containment reference.
@@ -283,42 +284,11 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Sequence getEnterSequence() {
-		return enterSequence;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetEnterSequence(Sequence newEnterSequence, NotificationChain msgs) {
-		Sequence oldEnterSequence = enterSequence;
-		enterSequence = newEnterSequence;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE, oldEnterSequence, newEnterSequence);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	public EList<Sequence> getEnterSequences() {
+		if (enterSequences == null) {
+			enterSequences = new EObjectContainmentEList<Sequence>(Sequence.class, this, SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEnterSequence(Sequence newEnterSequence) {
-		if (newEnterSequence != enterSequence) {
-			NotificationChain msgs = null;
-			if (enterSequence != null)
-				msgs = ((InternalEObject)enterSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE, null, msgs);
-			if (newEnterSequence != null)
-				msgs = ((InternalEObject)newEnterSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE, null, msgs);
-			msgs = basicSetEnterSequence(newEnterSequence, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE, newEnterSequence, newEnterSequence));
+		return enterSequences;
 	}
 
 	/**
@@ -440,8 +410,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				return ((InternalEList<?>)getSubScopes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				return basicSetSuperScope(null, msgs);
-			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
-				return basicSetEnterSequence(null, msgs);
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES:
+				return ((InternalEList<?>)getEnterSequences()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
 			case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE:
@@ -467,8 +437,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				if (resolve) return getSuperScope();
 				return basicGetSuperScope();
-			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
-				return getEnterSequence();
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES:
+				return getEnterSequences();
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				return getExitSequence();
 			case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE:
@@ -499,8 +469,9 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				setSuperScope((ExecutionScope)newValue);
 				return;
-			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
-				setEnterSequence((Sequence)newValue);
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES:
+				getEnterSequences().clear();
+				getEnterSequences().addAll((Collection<? extends Sequence>)newValue);
 				return;
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
@@ -532,8 +503,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				setSuperScope((ExecutionScope)null);
 				return;
-			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
-				setEnterSequence((Sequence)null);
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES:
+				getEnterSequences().clear();
 				return;
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
@@ -561,8 +532,8 @@ public class ExecutionScopeImpl extends MappedElementImpl implements ExecutionSc
 				return subScopes != null && !subScopes.isEmpty();
 			case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE:
 				return superScope != null;
-			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE:
-				return enterSequence != null;
+			case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES:
+				return enterSequences != null && !enterSequences.isEmpty();
 			case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE:
 				return exitSequence != null;
 			case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE:

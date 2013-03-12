@@ -105,7 +105,7 @@ public class LocalReactionTest extends ModelSequencerTest {
 
 		assertCall(_effect, 0, _s1.getExitSequence());
 		assertCall(_effect, 1, _s2.getEntryAction());
-		assertCall(_effect, 2, _s6.getEnterSequence());
+		assertCall(_effect, 2, _s6.getEnterSequences().get(0));
 		assertEquals(3, _effect.getSteps().size());
 
 		List<Step> steps = flattenSequenceStepsAsList(_s3.getReactSequence());

@@ -9,9 +9,13 @@ import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.SexecFactory
 import org.yakindu.sct.model.sexec.StateVector
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.Sequence
 
 
 class SexecExtensions {
+	
+	
+	static String DEFAULT_SEQUENCE_NAME = "default" 
 	
 	def factory() { SexecFactory::eINSTANCE }
 	
@@ -104,4 +108,25 @@ class SexecExtensions {
 		}
 		return leafs
 	}
+	
+	
+	
+		
+	/**
+	 * Returns a step that mathes the given name.
+	 */
+	def Sequence byName(List<Sequence>steps, String name) {
+		steps.filter(s | name.trim == s.name.trim ).head
+	}
+
+	/**
+	 * Returns the default step that is the step without name or the name 'default'.
+	 */
+	def Sequence defaultSequence(List<Sequence>steps) {
+		steps.findFirst(s | s.name == null || s.name.trim == "" ||  s.name.trim == DEFAULT_SEQUENCE_NAME )
+	}
+	
+	
+	
+	 
 }

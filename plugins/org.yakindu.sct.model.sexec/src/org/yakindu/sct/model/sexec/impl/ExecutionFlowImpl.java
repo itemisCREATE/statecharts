@@ -45,7 +45,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStateVector <em>State Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSubScopes <em>Sub Scopes</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getSuperScope <em>Super Scope</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequence <em>Enter Sequence</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEnterSequences <em>Enter Sequences</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitSequence <em>Exit Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getInitSequence <em>Init Sequence</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getReactions <em>Reactions</em>}</li>
@@ -124,14 +124,14 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	protected ExecutionScope superScope;
 
 	/**
-	 * The cached value of the '{@link #getEnterSequence() <em>Enter Sequence</em>}' containment reference.
+	 * The cached value of the '{@link #getEnterSequences() <em>Enter Sequences</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getEnterSequence()
+	 * @see #getEnterSequences()
 	 * @generated
 	 * @ordered
 	 */
-	protected Sequence enterSequence;
+	protected EList<Sequence> enterSequences;
 
 	/**
 	 * The cached value of the '{@link #getExitSequence() <em>Exit Sequence</em>}' containment reference.
@@ -348,49 +348,6 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Sequence getEnterSequence() {
-		return enterSequence;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetEnterSequence(Sequence newEnterSequence, NotificationChain msgs) {
-		Sequence oldEnterSequence = enterSequence;
-		enterSequence = newEnterSequence;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE, oldEnterSequence, newEnterSequence);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setEnterSequence(Sequence newEnterSequence) {
-		if (newEnterSequence != enterSequence) {
-			NotificationChain msgs = null;
-			if (enterSequence != null)
-				msgs = ((InternalEObject)enterSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE, null, msgs);
-			if (newEnterSequence != null)
-				msgs = ((InternalEObject)newEnterSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE, null, msgs);
-			msgs = basicSetEnterSequence(newEnterSequence, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE, newEnterSequence, newEnterSequence));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public StateVector getStateVector() {
 		return stateVector;
 	}
@@ -499,6 +456,18 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__SUPER_SCOPE, newSuperScope, newSuperScope));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Sequence> getEnterSequences() {
+		if (enterSequences == null) {
+			enterSequences = new EObjectContainmentEList<Sequence>(Sequence.class, this, SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES);
+		}
+		return enterSequences;
 	}
 
 	/**
@@ -849,8 +818,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return ((InternalEList<?>)getSubScopes()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				return basicSetSuperScope(null, msgs);
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
-				return basicSetEnterSequence(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
+				return ((InternalEList<?>)getEnterSequences()).basicRemove(otherEnd, msgs);
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return basicSetExitSequence(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
@@ -895,8 +864,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				if (resolve) return getSuperScope();
 				return basicGetSuperScope();
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
-				return getEnterSequence();
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
+				return getEnterSequences();
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return getExitSequence();
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
@@ -948,8 +917,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				setSuperScope((ExecutionScope)newValue);
 				return;
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
-				setEnterSequence((Sequence)newValue);
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
+				getEnterSequences().clear();
+				getEnterSequences().addAll((Collection<? extends Sequence>)newValue);
 				return;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)newValue);
@@ -1015,8 +985,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				setSuperScope((ExecutionScope)null);
 				return;
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
-				setEnterSequence((Sequence)null);
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
+				getEnterSequences().clear();
 				return;
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				setExitSequence((Sequence)null);
@@ -1073,8 +1043,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return subScopes != null && !subScopes.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE:
 				return superScope != null;
-			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE:
-				return enterSequence != null;
+			case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES:
+				return enterSequences != null && !enterSequences.isEmpty();
 			case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE:
 				return exitSequence != null;
 			case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE:
@@ -1125,7 +1095,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_FLOW__STATE_VECTOR: return SexecPackage.EXECUTION_SCOPE__STATE_VECTOR;
 				case SexecPackage.EXECUTION_FLOW__SUB_SCOPES: return SexecPackage.EXECUTION_SCOPE__SUB_SCOPES;
 				case SexecPackage.EXECUTION_FLOW__SUPER_SCOPE: return SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE;
-				case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE;
+				case SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES: return SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES;
 				case SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE;
 				case SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE: return SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE;
 				default: return -1;
@@ -1166,7 +1136,7 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				case SexecPackage.EXECUTION_SCOPE__STATE_VECTOR: return SexecPackage.EXECUTION_FLOW__STATE_VECTOR;
 				case SexecPackage.EXECUTION_SCOPE__SUB_SCOPES: return SexecPackage.EXECUTION_FLOW__SUB_SCOPES;
 				case SexecPackage.EXECUTION_SCOPE__SUPER_SCOPE: return SexecPackage.EXECUTION_FLOW__SUPER_SCOPE;
-				case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCE: return SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCE;
+				case SexecPackage.EXECUTION_SCOPE__ENTER_SEQUENCES: return SexecPackage.EXECUTION_FLOW__ENTER_SEQUENCES;
 				case SexecPackage.EXECUTION_SCOPE__EXIT_SEQUENCE: return SexecPackage.EXECUTION_FLOW__EXIT_SEQUENCE;
 				case SexecPackage.EXECUTION_SCOPE__INIT_SEQUENCE: return SexecPackage.EXECUTION_FLOW__INIT_SEQUENCE;
 				default: return -1;

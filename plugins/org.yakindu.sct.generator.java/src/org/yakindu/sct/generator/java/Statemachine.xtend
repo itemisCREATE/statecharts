@@ -21,6 +21,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class Statemachine {
 	
@@ -30,6 +31,9 @@ class Statemachine {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension ISTextTypeSystem
 	@Inject extension FlowCode
+	@Inject extension SExecExtensions
+	
+	
 	@Inject Beautifier beautifier
 	
 	def generateStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
@@ -486,7 +490,7 @@ class Statemachine {
 			}
 			cycleStartTime = timerService.getSystemTimeMillis();
 			«ENDIF»
-			«enterSequence.code»
+			«enterSequences.defaultSequence.code»
 		}
 	'''
 	

@@ -40,8 +40,8 @@
         eType="#//ExecutionScope" eOpposite="#//ExecutionScope/superScope"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superScope" eType="#//ExecutionScope"
         eOpposite="#//ExecutionScope/subScopes"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="enterSequence" eType="#//Sequence"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enterSequences" upperBound="-1"
+        eType="#//Sequence" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitSequence" eType="#//Sequence"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initSequence" eType="#//Sequence"

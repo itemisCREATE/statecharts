@@ -179,9 +179,9 @@ class ReactionBuilder {
 		if ( trace.addTraceSteps ) seq.steps.add(0,execEntry.newTraceNodeExecuted)
 		
 		if (e.kind == EntryKind::INITIAL) {
-			if (target != null && target.enterSequence != null) {
+			if (target != null && target.enterSequences.defaultSequence != null) {
 				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
-				seq.steps += target.enterSequence.newCall
+				seq.steps += target.enterSequences.defaultSequence.newCall
 			}
 		} else if (e.kind == EntryKind::SHALLOW_HISTORY) {
 			val entryStep = sexec.factory.createHistoryEntry
@@ -191,9 +191,9 @@ class ReactionBuilder {
 			entryStep.region = (e.eContainer as Region).create
 			
 			//Initial step, if no history is known
-			if (target != null && target.enterSequence != null) {
+			if (target != null && target.enterSequences.defaultSequence != null) {
 				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
-				entryStep.initialStep = target.enterSequence.newCall
+				entryStep.initialStep = target.enterSequences.defaultSequence.newCall
 			}
 			entryStep.historyStep = (e.eContainer as Region).create.shallowEnterSequence.newCall
 			
@@ -206,9 +206,9 @@ class ReactionBuilder {
 			entryStep.deep = true
 			
 			//Initial step, if no history is known
-			if (target != null && target.enterSequence != null) {
+			if (target != null && target.enterSequences.defaultSequence != null) {
 				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
-				entryStep.initialStep = target.enterSequence.newCall
+				entryStep.initialStep = target.enterSequences.defaultSequence.newCall
 			}
 			entryStep.historyStep =  (e.eContainer as Region).create.deepEnterSequence.newCall
 

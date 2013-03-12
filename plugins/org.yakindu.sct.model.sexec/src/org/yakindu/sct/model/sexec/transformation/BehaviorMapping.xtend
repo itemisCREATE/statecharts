@@ -480,12 +480,12 @@ class BehaviorMapping {
 		val entryScope = entryScopes.head
 		
 		// determine all target vertices
-		val targets = transitions.map( t | t.target.mapped)
+		val List<TargetEntrySpec> targets = transitions.map( t | new TargetEntrySpec(t.target.mapped, t.entryPointName) )
 		
 		// recursively extend the sequence by entering the scope for the specified targets		
 		if (entryScope != null) entryScope.addEnterStepsForTargetsToSequence( targets, sequence)	
 		else {
-			for ( t : targets ) t.addEnterStepsForTargetsToSequence(targets, sequence)
+			for ( t : targets ) t.target.addEnterStepsForTargetsToSequence(targets, sequence)
  		}	
 	
 		return sequence
@@ -493,10 +493,26 @@ class BehaviorMapping {
 	
 	
 
-	def dispatch void addEnterStepsForTargetsToSequence(ExecutionState it, List<ExecutionNode> targets, Sequence seq) {
+	def Sequence enterSequence(TargetEntrySpec it) {
+		if(target instanceof ExecutionScope) {
+			return (target as ExecutionScope).enterSequence(entryPointName)
+		}
+		return null
+	}
+	
+	def Sequence enterSequence(ExecutionScope it, String name) {
+		var Sequence seq = enterSequences.byName(name)
+		if (seq == null) seq = enterSequences.defaultSequence
 
-		if ( targets.contains(it) ) {
-			seq.steps.add( it.enterSequence.newCall )		
+		return seq
+	}
+	
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionState it, List<TargetEntrySpec> targets, Sequence seq) {
+		
+		val target = targets.findFirst( t | t.target == it)
+		
+		if ( target != null ) {
+			if (target.enterSequence != null) seq.steps += target.enterSequence.newCall		
 		}
 		else {
 			if ( it.entryAction != null ) seq.steps.add(it.entryAction.newCall)
@@ -510,23 +526,26 @@ class BehaviorMapping {
 	}
 
 
-	def dispatch void addEnterStepsForTargetsToSequence(ExecutionRegion it, List<ExecutionNode> targets, Sequence seq) {
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionRegion it, List<TargetEntrySpec> targets, Sequence seq) {
 		
 		// if a target is a direct node
-		val target =  targets.filter( t | it.nodes.contains( t )).head 
+		val target =  targets.filter( t | it.nodes.contains( t.target )).head 
+
 		if (target != null) {
-			target.addEnterStepsForTargetsToSequence(targets, seq)
+			target.target.addEnterStepsForTargetsToSequence(targets, seq)
 			return
 		}
 		
 		// if the execution region contains targets 
-		if ( allNodes.exists( n | targets.contains(n) ) ) {
+		val List<ExecutionNode> targetNodes = targets.map(t | t.target)
+		if ( allNodes.exists( n | targetNodes.contains(n) ) ) {
 			for ( s : subScopes ) {
-				if ( s.allNodes.exists( n | targets.contains(n)))
+				if ( s.allNodes.exists( n | targetNodes.contains(n)))
 					s.addEnterStepsForTargetsToSequence(targets, seq)
 			}
 		} else {
-			seq.steps.add(it.enterSequence.newCall)
+			//in the case only sibling regions contain targets the region must be entered using the defaut enter sequence
+			seq.steps.add(it.enterSequences.defaultSequence.newCall)
 		}
 	}
 	
@@ -554,20 +573,20 @@ class BehaviorMapping {
 	}
 		
 	
-	def dispatch void addEnterStepsForTargetsToSequence(ExecutionChoice it, List<ExecutionNode> targets, Sequence seq) {
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionChoice it, List<TargetEntrySpec> targets, Sequence seq) {
 		seq.steps.add( reactSequence.newCall )	
 	}
 	
-	def dispatch void addEnterStepsForTargetsToSequence(ExecutionEntry it, List<ExecutionNode> targets, Sequence seq) {
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionEntry it, List<TargetEntrySpec> targets, Sequence seq) {
 		seq.steps.add( reactSequence.newCall )	
 	}
 	
-	def dispatch void addEnterStepsForTargetsToSequence(ExecutionSynchronization it, List<ExecutionNode> targets, Sequence seq) {
+	def dispatch void addEnterStepsForTargetsToSequence(ExecutionSynchronization it, List<TargetEntrySpec> targets, Sequence seq) {
 		seq.steps.add( reactSequence.newCall )	
 	}
 	
 	
-	
+		
 	
 	def List<ExecutionScope> entryScopes(Transition t) {
 		val l = t.target.containers

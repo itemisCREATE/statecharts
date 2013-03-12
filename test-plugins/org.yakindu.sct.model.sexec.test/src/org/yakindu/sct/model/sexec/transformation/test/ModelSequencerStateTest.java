@@ -188,10 +188,10 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertSame(fs, _fs.getSourceElement());
 
 		assertNull(_fs.getEntryAction());
-		assertNotNull(_fs.getEnterSequence());
+		assertNotNull(_fs.getEnterSequences().get(0));
 
-		assertEquals(1, _fs.getEnterSequence().getSteps().size());
-		assertClass(EnterState.class, _fs.getEnterSequence().getSteps().get(0));
+		assertEquals(1, _fs.getEnterSequences().get(0).getSteps().size());
+		assertClass(EnterState.class, _fs.getEnterSequences().get(0).getSteps().get(0));
 	}
 
 	/**
@@ -216,12 +216,12 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertEquals(s1.getName(), _s1.getSimpleName());
 
 		assertNotNull(_s1.getEntryAction());
-		assertNotNull(_s1.getEnterSequence());
-		assertEquals(2, _s1.getEnterSequence().getSteps().size());
+		assertNotNull(_s1.getEnterSequences().get(0));
+		assertEquals(2, _s1.getEnterSequences().get(0).getSteps().size());
 
-		assertCall(_s1.getEnterSequence(), 0, _s1.getEntryAction());
+		assertCall(_s1.getEnterSequences().get(0), 0, _s1.getEntryAction());
 
-		assertClass(EnterState.class, _s1.getEnterSequence().getSteps().get(1));
+		assertClass(EnterState.class, _s1.getEnterSequences().get(0).getSteps().get(1));
 	}
 
 	/**
@@ -270,23 +270,23 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertEquals("s3", _s3.getSimpleName());
 
 		assertNotNull(_s1.getEntryAction());
-		assertNotNull(_s1.getEnterSequence());
-		assertEquals(3, _s1.getEnterSequence().getSteps().size());
+		assertNotNull(_s1.getEnterSequences().get(0));
+		assertEquals(3, _s1.getEnterSequences().get(0).getSteps().size());
 
-		assertCall(_s1.getEnterSequence(), 0, _s1.getEntryAction());
-		assertCall(_s1.getEnterSequence(), 1, _s2.getSuperScope()
-				.getEnterSequence());
-		assertCall(_s2.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_s1.getEnterSequences().get(0), 0, _s1.getEntryAction());
+		assertCall(_s1.getEnterSequences().get(0), 1, _s2.getSuperScope()
+				.getEnterSequences().get(0));
+		assertCall(_s2.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(0).getReactSequence());
 		assertCall(flow.getNodes().get(0).getReactSequence(), 0,
-				_s2.getEnterSequence());
+				_s2.getEnterSequences().get(0));
 
-		assertCall(_s1.getEnterSequence(), 2, _s3.getSuperScope()
-				.getEnterSequence());
-		assertCall(_s3.getSuperScope().getEnterSequence(), 0, flow.getNodes()
+		assertCall(_s1.getEnterSequences().get(0), 2, _s3.getSuperScope()
+				.getEnterSequences().get(0));
+		assertCall(_s3.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
 				.get(1).getReactSequence());
 		assertCall(flow.getNodes().get(1).getReactSequence(), 0,
-				_s3.getEnterSequence());
+				_s3.getEnterSequences().get(0));
 	}
 
 	/**
@@ -539,7 +539,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		Sequence seq = (Sequence) reaction.getEffect();
 
 		assertCall(seq, 0, s1.getExitSequence());
-		assertCall(seq, 1, s2.getEnterSequence());
+		assertCall(seq, 1, s2.getEnterSequences().get(0));
 	}
 
 	/**
@@ -581,7 +581,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertNotSame(_assign.getVarRef(), assign.getVarRef());
 		assertNotSame(_assign.getVarRef(), v1);
 
-		assertCall(seq, 2, s2.getEnterSequence());
+		assertCall(seq, 2, s2.getEnterSequences().get(0));
 	}
 
 	/**
@@ -650,8 +650,8 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertEquals(2, seq.getSteps().size());
 
 		assertCall(seq, 0, _s1.getExitSequence());
-		assertCall(seq, 1, _s2.getEnterSequence());
-		assertCall(_s2.getEnterSequence(), 0, _s2.getEntryAction());
+		assertCall(seq, 1, _s2.getEnterSequences().get(0));
+		assertCall(_s2.getEnterSequences().get(0), 0, _s2.getEntryAction());
 	}
 
 	@Test
@@ -1234,7 +1234,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertCall(_if.getThenStep(), _s1.getReactions().get(0).getEffect());
 
 		Sequence _seq = (Sequence) _s1.getReactions().get(0).getEffect();
-		assertCall(_seq, 1, _fs.getEnterSequence());
+		assertCall(_seq, 1, _fs.getEnterSequences().get(0));
 
 	}
 

@@ -57,6 +57,7 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionContext
 import org.yakindu.sct.simulation.core.runtime.ISlot
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent
 import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable
+import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 
 /**
  * 
@@ -76,6 +77,8 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	ITimingService timingService
 	@Inject extension ISTextTypeSystem 
 	@Inject extension ISTextTypeInferrer
+	
+	@Inject extension SexecExtensions
 	 
 	@Inject
 	@Named("InterpreterName")
@@ -238,9 +241,11 @@ class ExecutionFlowInterpreter extends AbstractExecutionFacade implements IExecu
 	}
 
 	override enter() {
-		for(step : flow.enterSequence.steps){
-			step.execute
-		} 
+		if (flow.enterSequences.defaultSequence != null) {
+			for(step : flow.enterSequences.defaultSequence.steps){
+				step.execute
+			} 		
+		}
 	}
 	
 	override exit() {

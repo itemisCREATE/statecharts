@@ -1065,19 +1065,6 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ylXqMEjuEeGFD_vuePSd-Q" id="(0.5,0.5)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ylXqMUjuEeGFD_vuePSd-Q" id="(0.5,0.5)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_s3VJUEjuEeGFD_vuePSd-Q" type="3002" source="_s3HG4EjuEeGFD_vuePSd-Q" target="_wsQqIhqkEeGIWuhy_7gRFw">
-    <children xmi:type="notation:Node" xmi:id="_s3VJVEjuEeGFD_vuePSd-Q" type="4011">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_s3VJVUjuEeGFD_vuePSd-Q" x="-108" y="27"/>
-    </children>
-    <children xmi:type="notation:Node" xmi:id="_s3VwYEjuEeGFD_vuePSd-Q" type="4012">
-      <layoutConstraint xmi:type="notation:Location" xmi:id="_s3VwYUjuEeGFD_vuePSd-Q" x="18" y="11"/>
-    </children>
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_s3VJUUjuEeGFD_vuePSd-Q" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_s3VJUkjuEeGFD_vuePSd-Q" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
-    <element xmi:type="ecore:EReference" href="sexec.ecore#//ExecutionScope/enterSequence"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s3VJU0juEeGFD_vuePSd-Q" points="[1, 1, -514, -356]$[486, 337, -29, -20]"/>
-    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Ff5voEjxEeGFD_vuePSd-Q" id="(0.2887323943661972,0.047619047619047616)"/>
-  </edges>
   <edges xmi:type="notation:Edge" xmi:id="_s3WXcEjuEeGFD_vuePSd-Q" type="3002" source="_s3HG4EjuEeGFD_vuePSd-Q" target="_wsQqIhqkEeGIWuhy_7gRFw">
     <children xmi:type="notation:Node" xmi:id="_s3WXdEjuEeGFD_vuePSd-Q" type="4011">
       <layoutConstraint xmi:type="notation:Location" xmi:id="_s3WXdUjuEeGFD_vuePSd-Q" x="-76" y="-16"/>
@@ -1088,7 +1075,7 @@
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_s3WXcUjuEeGFD_vuePSd-Q" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_s3WXckjuEeGFD_vuePSd-Q" fontColor="4210752" fontName="Lucida Grande" fontHeight="10"/>
     <element xmi:type="ecore:EReference" href="sexec.ecore#//ExecutionScope/exitSequence"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s3WXc0juEeGFD_vuePSd-Q" points="[11, 20, -142, -296]$[82, 146, -71, -170]$[151, 312, -2, -4]"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_s3WXc0juEeGFD_vuePSd-Q" points="[10, 20, -143, -296]$[82, 156, -71, -160]$[151, 312, -2, -4]"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GR3_IEjxEeGFD_vuePSd-Q" id="(0.3380281690140845,0.11904761904761904)"/>
   </edges>
   <edges xmi:type="notation:Edge" xmi:id="_s3YMoEjuEeGFD_vuePSd-Q" type="3003" source="_wsJVZhqkEeGIWuhy_7gRFw" target="_s3HG4EjuEeGFD_vuePSd-Q">

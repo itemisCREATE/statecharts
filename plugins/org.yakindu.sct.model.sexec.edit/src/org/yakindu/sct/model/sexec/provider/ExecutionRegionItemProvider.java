@@ -208,7 +208,7 @@ public class ExecutionRegionItemProvider
 		boolean qualify =
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__STATE_VECTOR ||
 			childFeature == SexecPackage.Literals.EXECUTION_REGION__HISTORY_VECTOR ||
-			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCE ||
+			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__ENTER_SEQUENCES ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__EXIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_SCOPE__INIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_REGION__DEEP_ENTER_SEQUENCE ||

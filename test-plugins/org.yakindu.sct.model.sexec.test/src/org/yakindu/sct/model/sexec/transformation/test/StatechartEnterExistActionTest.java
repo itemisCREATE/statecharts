@@ -66,9 +66,9 @@ public class StatechartEnterExistActionTest extends ModelSequencerTest {
 
 		assertEquals(0, flow.getReactions().size());
 
-		assertedOrder(flow.getEnterSequence(), null, Lists.newArrayList(
+		assertedOrder(flow.getEnterSequences().get(0), null, Lists.newArrayList(
 				new StepLeaf(flow.getEntryAction()),
-				new StepLeaf(region.getEnterSequence())));
+				new StepLeaf(region.getEnterSequences().get(0))));
 
 		assertedOrder(flow.getExitSequence(), null, Lists.newArrayList(
 				new StepLeaf(region.getExitSequence()),

@@ -163,13 +163,13 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_FLOW__SUPER_SCOPE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
+	 * The feature id for the '<em><b>Enter Sequences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_FLOW__ENTER_SEQUENCE = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
+	int EXECUTION_FLOW__ENTER_SEQUENCES = SGraphPackage.SCOPED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -526,13 +526,13 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_STATE__SUPER_SCOPE = EXECUTION_NODE_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
+	 * The feature id for the '<em><b>Enter Sequences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_STATE__ENTER_SEQUENCE = EXECUTION_NODE_FEATURE_COUNT + 3;
+	int EXECUTION_STATE__ENTER_SEQUENCES = EXECUTION_NODE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -644,13 +644,13 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_SCOPE__SUPER_SCOPE = MAPPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
+	 * The feature id for the '<em><b>Enter Sequences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SCOPE__ENTER_SEQUENCE = MAPPED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_SCOPE__ENTER_SEQUENCES = MAPPED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -735,13 +735,13 @@ public interface SexecPackage extends EPackage {
 	int EXECUTION_REGION__SUPER_SCOPE = EXECUTION_SCOPE__SUPER_SCOPE;
 
 	/**
-	 * The feature id for the '<em><b>Enter Sequence</b></em>' containment reference.
+	 * The feature id for the '<em><b>Enter Sequences</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_REGION__ENTER_SEQUENCE = EXECUTION_SCOPE__ENTER_SEQUENCE;
+	int EXECUTION_REGION__ENTER_SEQUENCES = EXECUTION_SCOPE__ENTER_SEQUENCES;
 
 	/**
 	 * The feature id for the '<em><b>Exit Sequence</b></em>' containment reference.
@@ -2560,15 +2560,15 @@ public interface SexecPackage extends EPackage {
 	EReference getExecutionScope_SuperScope();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionScope#getEnterSequence <em>Enter Sequence</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sexec.ExecutionScope#getEnterSequences <em>Enter Sequences</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Enter Sequence</em>'.
-	 * @see org.yakindu.sct.model.sexec.ExecutionScope#getEnterSequence()
+	 * @return the meta object for the containment reference list '<em>Enter Sequences</em>'.
+	 * @see org.yakindu.sct.model.sexec.ExecutionScope#getEnterSequences()
 	 * @see #getExecutionScope()
 	 * @generated
 	 */
-	EReference getExecutionScope_EnterSequence();
+	EReference getExecutionScope_EnterSequences();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.sexec.ExecutionScope#getExitSequence <em>Exit Sequence</em>}'.
@@ -3550,12 +3550,12 @@ public interface SexecPackage extends EPackage {
 		EReference EXECUTION_SCOPE__SUPER_SCOPE = eINSTANCE.getExecutionScope_SuperScope();
 
 		/**
-		 * The meta object literal for the '<em><b>Enter Sequence</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Enter Sequences</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXECUTION_SCOPE__ENTER_SEQUENCE = eINSTANCE.getExecutionScope_EnterSequence();
+		EReference EXECUTION_SCOPE__ENTER_SEQUENCES = eINSTANCE.getExecutionScope_EnterSequences();
 
 		/**
 		 * The meta object literal for the '<em><b>Exit Sequence</b></em>' containment reference feature.

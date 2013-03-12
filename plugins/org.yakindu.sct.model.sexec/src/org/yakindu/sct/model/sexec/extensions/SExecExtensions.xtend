@@ -33,6 +33,7 @@ import org.yakindu.sct.model.sexec.Reaction
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.sexec.Sequence
 
 class SExecExtensions {
 	
@@ -149,17 +150,27 @@ class SExecExtensions {
 		states.forEach( s | if (s.exitAction.called) funcs += s.exitAction )
 		return funcs
 	}
+
+	/**
+	 * Checks if a step is called or not.
+	 */
 	def isCalled(Step it) { it != null && caller.size > 0 }
 	
 	
+	/**
+	 * Returns a list of all steps that are called. 
+	 */
+	def List<Sequence> called(List<Sequence> it) {
+		filter( s | s.called ).toList
+	}
 	
 	 
 	def List<Step> enterSequenceFunctions(ExecutionFlow it) {
 		val funcs = new ArrayList<Step>()
-		if (enterSequence.called) funcs.add(enterSequence) 
-		states.forEach( s | if (s.enterSequence.called) funcs += s.enterSequence )
+		funcs.addAll(enterSequences.called) 
+		states.forEach( s | funcs += s.enterSequences.called )
 		regions.forEach( s | {
-			if (s.enterSequence.called) funcs += s.enterSequence
+			funcs += s.enterSequences.called
 			if (s.deepEnterSequence.called) funcs += s.deepEnterSequence
 			if (s.shallowEnterSequence.called) funcs += s.shallowEnterSequence
 		})
@@ -200,7 +211,7 @@ class SExecExtensions {
 	def dispatch isEffect(EObject it, Step s) { false }
 	
 	def isEnterSequence(Step it) { eContainer.isEnterSequence(it) }
-	def dispatch isEnterSequence(ExecutionScope it, Step s) { enterSequence == s }
+	def dispatch isEnterSequence(ExecutionScope it, Step s) { enterSequences.contains(s) }
 	def dispatch isEnterSequence(EObject it, Step s) { false }
 	
 	def isDeepEnterSequence(Step it) { eContainer.isDeepEnterSequence(it) }
@@ -220,5 +231,21 @@ class SExecExtensions {
 	def dispatch isReactSequence(EObject it, Step s) { false }
 	
 	def isCheckFunction(Step it) { it instanceof Check }
+	
+	
+	
+	/**
+	 * Returns a step that mathes the given name.
+	 */
+	def Sequence byName(List<Sequence>steps, String name) {
+		steps.filter(s | name.trim == s.name.trim ).head
+	}
+
+	/**
+	 * Returns the default step that is the step without name or the name 'default'.
+	 */
+	def Sequence defaultSequence(List<Sequence>steps) {
+		steps.filter(s | s.name == null || s.name.trim == "" ||  s.name.trim == "default" ).head
+	}
 	
 }
