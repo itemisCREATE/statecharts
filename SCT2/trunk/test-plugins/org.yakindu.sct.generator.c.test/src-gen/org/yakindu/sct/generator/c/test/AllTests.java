@@ -16,7 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({AlwaysOncycle.class, AssignmentAsExpression.class,
 		BitExpressions.class, BooleanExpressions.class, CKeywords.class,
-		Declarations.class, Choice.class, DeepHistory.class,
+		Declarations.class, Choice.class, DeepHistory.class, EnterState.class,
 		ExitOnSelfTransition.class, Guard.class, GuardedEntry.class,
 		GuardedExit.class, HistoryWithoutInitialStep.class,
 		IntegerExpressions.class, InEventLifeCycle.class,
