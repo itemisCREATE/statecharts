@@ -29,5 +29,4 @@ TEST(StatemachineTest, alwaysOncycleTest) {
 	}
 	alwaysOncycle_runCycle(&handle);
 	EXPECT_TRUE(alwaysOncycle_isActive(&handle, AlwaysOncycle_main_region_StateA));
-	alwaysOncycle_runCycle(&handle);
 }
