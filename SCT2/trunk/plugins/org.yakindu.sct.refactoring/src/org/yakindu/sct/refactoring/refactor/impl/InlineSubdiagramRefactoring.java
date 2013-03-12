@@ -48,12 +48,12 @@ public class InlineSubdiagramRefactoring extends AbstractRefactoring<View> {
 		Diagram diagramToInline = DiagramPartitioningUtil.getSubDiagram(contextElement);
 		View containerView = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
 
-		for (int i = diagramToInline.getChildren().size() - 1; i >= 0; i--) {
-			containerView.insertChild((View) diagramToInline.getChildren().get(i));
+		while (diagramToInline.getChildren().size() > 0) {
+			containerView.insertChild((View) diagramToInline.getChildren().get(0));
 		}
+		while (diagramToInline.getEdges().size() > 0) {
+			containerView.getDiagram().insertEdge((Edge) diagramToInline.getEdges().get(0));
 
-		for (int i = diagramToInline.getEdges().size() - 1; i >= 0; i--) {
-			containerView.getDiagram().insertEdge((Edge) diagramToInline.getEdges().get(i));
 		}
 		getResource().getContents().remove(diagramToInline);
 	}
