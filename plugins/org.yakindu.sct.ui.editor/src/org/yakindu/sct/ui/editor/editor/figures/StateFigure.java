@@ -44,6 +44,8 @@ public class StateFigure extends RoundedRectangle {
 
 	public StateFigure(IMapMode mapMode) {
 		GridLayout layout = new GridLayout(1, false);
+		layout.verticalSpacing = 0;
+		layout.horizontalSpacing = 0;
 		this.setLayoutManager(layout);
 		this.setCornerDimensions(new Dimension(mapMode.DPtoLP(15), mapMode
 				.DPtoLP(15)));
