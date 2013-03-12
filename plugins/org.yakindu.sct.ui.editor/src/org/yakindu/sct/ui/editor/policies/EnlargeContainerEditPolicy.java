@@ -53,7 +53,8 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Command getCommand(Request request) {
-		if (!RequestConstants.REQ_MOVE.equals(request.getType())) {
+		if (!RequestConstants.REQ_RESIZE.equals(request.getType())
+				&& !RequestConstants.REQ_MOVE.equals(request.getType())) {
 			return null;
 		}
 
@@ -93,7 +94,8 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 
 	@Override
 	public void showSourceFeedback(Request request) {
-		if (!RequestConstants.REQ_MOVE.equals(request.getType()))
+		if (!RequestConstants.REQ_RESIZE.equals(request.getType())
+				&& !RequestConstants.REQ_MOVE.equals(request.getType()))
 			return;
 		showContainerFeedback((ChangeBoundsRequest) request);
 		super.showSourceFeedback(request);
