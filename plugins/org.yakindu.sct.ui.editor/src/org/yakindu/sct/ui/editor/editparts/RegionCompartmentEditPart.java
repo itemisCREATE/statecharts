@@ -17,6 +17,7 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeCompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.diagram.ui.figures.ShapeCompartmentFigure;
 import org.eclipse.gmf.runtime.notation.View;
@@ -42,6 +43,8 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new RegionCompartmentCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new RegionCompartmentXYLayoutEditPolicy());
+		// Removes the collapse expand handler
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableEditPolicyEx());
 	}
 
 	@Override
@@ -55,7 +58,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		figure.getContentPane().setLayoutManager(getLayoutManager());
 		figure.getContentPane().addLayoutListener(LayoutAnimator.getDefault());
 		figure.setBorder(null);
-		//
+		figure.setFitContents(true);
 		figure.setToolTip((String) null);
 		return figure;
 	}
