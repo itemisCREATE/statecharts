@@ -24,8 +24,10 @@ import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
 import org.eclipse.gmf.runtime.diagram.core.services.ViewService;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
+import org.eclipse.gmf.runtime.notation.Bounds;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
+import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.Style;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -65,6 +67,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		setNotationStyle();
 		subdiagram = createSubdiagram();
 		createEntryExitPoints(subdiagram);
+		setPreferredSize();
 	}
 
 	@Override
@@ -188,5 +191,12 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 			subdiagram.insertChild((View) figureCompartment.getChildren().get(0));
 		}
 		return subdiagram;
+	}
+
+	protected void setPreferredSize() {
+		Node node = (Node) getContextObject();
+		Bounds bounds = (Bounds) node.getLayoutConstraint();
+		bounds.setWidth(-1);
+		bounds.setHeight(-1);
 	}
 }
