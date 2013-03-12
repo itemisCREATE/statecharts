@@ -41,7 +41,7 @@ public class PreferredSizeEditPolicy extends PreferredSizeCompartmentEditPolicy 
 	public class PreferredSizeDragTracker extends SimpleDragTracker {
 		@Override
 		protected Request createSourceRequest() {
-			return new ChangeBoundsRequest(REQ_RESIZE);
+			return new SetPreferredSizeRequest(getHost());
 		}
 
 		@Override
@@ -56,11 +56,6 @@ public class PreferredSizeEditPolicy extends PreferredSizeCompartmentEditPolicy 
 
 		@Override
 		protected boolean handleButtonDown(int button) {
-			Dimension prefSize = getHostFigure().getLayoutManager().getPreferredSize(getHostFigure(), -1, -1);
-			Dimension currentSize = getHostFigure().getSize();
-			getSourceRequest().setSizeDelta(
-					new Dimension(prefSize.width - currentSize.width, prefSize.height - currentSize.height));
-			getSourceRequest().setEditParts(getOperationSet());
 			setCurrentCommand(getCommand());
 			executeCurrentCommand();
 			getHost().refresh();

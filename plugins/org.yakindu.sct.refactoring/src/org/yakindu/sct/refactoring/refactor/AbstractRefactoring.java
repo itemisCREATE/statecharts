@@ -160,7 +160,7 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	 * @param resource
 	 *            the resource used for enabling/disabling its serializer
 	 */
-	protected void executeCommand(IUndoableOperation command, Resource resource) {
+	public static void executeCommand(IUndoableOperation command, Resource resource) {
 		IOperationHistory history = OperationHistoryFactory.getOperationHistory();
 
 		if (resource instanceof StextResource) {
