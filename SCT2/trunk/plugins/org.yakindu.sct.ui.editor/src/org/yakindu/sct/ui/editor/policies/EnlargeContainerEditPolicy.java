@@ -123,7 +123,7 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 			containerFigure.getParent().translateToAbsolute(feedbackBounds);
 			feedbackBounds = calculateFeedbackBounds(request, feedbackBounds, level, containerFigure);
 			showChildrenFeedback(containerEditPart, containerFigure, feedbackBounds, request);
-			containerFigure.getParent().translateToRelative(feedbackBounds);
+			containerFigure.translateToRelative(feedbackBounds);
 			setBounds(containerFigure, feedbackBounds);
 		}
 	}
@@ -248,7 +248,9 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 			transformedRect.resize(request.getSizeDelta());
 			transformedRect.expand(SPACEING * level, SPACEING * level);
 			result.union(transformedRect);
-			Dimension max = Dimension.max(result.getSize(), containerFigure.getPreferredSize());
+			Dimension preferredSize = containerFigure.getPreferredSize().getCopy();
+			editPart.getFigure().translateToAbsolute(preferredSize);
+			Dimension max = Dimension.max(result.getSize(), preferredSize);
 			result.setSize(max);
 			if (result.x < feedbackBounds.x || result.y < feedbackBounds.y) {
 				return feedbackBounds;
