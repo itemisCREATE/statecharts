@@ -36,7 +36,7 @@ import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ResizableEditPolicyEx;
  * 
  */
 @SuppressWarnings("all")
-public class PreferredSizeEditPolicy extends PreferredSizeCompartmentEditPolicy {
+public class PreferredSizeHandlerEditPolicy extends PreferredSizeCompartmentEditPolicy {
 
 	public class PreferredSizeDragTracker extends SimpleDragTracker {
 		@Override

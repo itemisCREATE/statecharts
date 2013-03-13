@@ -28,7 +28,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.RegionFigure;
-import org.yakindu.sct.ui.editor.policies.PreferredSizeCompartmentEditPolicy;
+import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
@@ -61,12 +61,11 @@ public class RegionEditPart extends ShapeNodeEditPart {
 				return UnexecutableCommand.INSTANCE;
 			}
 		});
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeCompartmentEditPolicy());
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy());
 	}
 
 	@Override
 	public EditPart getTargetEditPart(Request request) {
-
 		if (RequestConstants.REQ_PASTE.equals(request.getType().toString())) {
 			for (Object object : getChildren()) {
 				if (object instanceof RegionCompartmentEditPart) {
