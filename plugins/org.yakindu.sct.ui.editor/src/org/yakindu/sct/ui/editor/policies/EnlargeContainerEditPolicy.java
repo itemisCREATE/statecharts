@@ -53,13 +53,13 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Command getCommand(Request request) {
+		
+		System.out.println(request.getType());
+		
 		if (!RequestConstants.REQ_RESIZE.equals(request.getType())
 				&& !RequestConstants.REQ_MOVE.equals(request.getType())) {
 			return null;
 		}
-		// First call the feedback to ensure that the correct figure values are
-		// calculeted when using the PreferredSizeEditPolicy
-		showContainerFeedback((ChangeBoundsRequest) request);
 
 		ChangeBoundsRequest cbr = (ChangeBoundsRequest) request;
 		CompoundCommand result = new CompoundCommand();
