@@ -78,7 +78,7 @@
       <import plugin="com.ibm.icu"/>
       <import plugin="org.eclipse.emf.mwe.utils"/>
       <import plugin="org.eclipse.jface.text"/>
-      <import feature="org.yakindu.base" version="2.0.0.qualifier"/>
+      <import feature="org.yakindu.base" version="2.1.0.qualifier"/>
       <import plugin="com.google.guava"/>
       <import feature="org.eclipse.gmf"/>
    </requires>
