@@ -46,7 +46,7 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 	public static final Object ROLE = "ResizeContainer";
 
 	// Space between the border of the container and the moved figure
-	public static final int SPACEING = 40;
+	public static final int SPACEING = 25;
 
 	private Map<IFigure, Rectangle> boundsCache = new HashMap<IFigure, Rectangle>();
 
