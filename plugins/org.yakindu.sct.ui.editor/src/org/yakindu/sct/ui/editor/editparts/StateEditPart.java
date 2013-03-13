@@ -43,7 +43,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.policies.PreferredSizeEditPolicy;
+import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
@@ -126,7 +126,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		if (isCollapsed()) {
 			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
 		} else {
-			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeEditPolicy());
+			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy());
 		}
 
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
@@ -280,7 +280,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 			if (isCollapsed()) {
 				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
 			} else {
-				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeEditPolicy());
+				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy());
 			}
 			refreshVisuals();
 		}
