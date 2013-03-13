@@ -2,7 +2,7 @@
 <feature
       id="org.eclipse.gmf.runtime.emf.clipboard.core.patch"
       label="Copy Paste Patch"
-      version="2.0.0.qualifier"
+      version="2.1.0.qualifier"
       provider-name="Yakindu">
 
    <description url="http://www.example.com/description">
