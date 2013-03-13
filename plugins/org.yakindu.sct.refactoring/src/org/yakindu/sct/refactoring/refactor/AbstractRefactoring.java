@@ -61,7 +61,6 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	 */
 	protected RefactoringHelper helper = new RefactoringHelper();
 
-	@Override
 	public boolean isExecutable() {
 		return getContextObjects() != null && getContextObjects().size() > 0;
 	}
@@ -84,7 +83,6 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	 * Wraps an {@link AbstractTransactionalCommand} around the refactoring
 	 * logic.
 	 */
-	@Override
 	public void execute() {
 		if (!isExecutable()) {
 			return;

@@ -169,7 +169,6 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 			}
 		}
 
-		@Override
 		public String isValid(String newText) {
 			return existingNames.contains(newText)? "Name already exists!": null;
 		}
