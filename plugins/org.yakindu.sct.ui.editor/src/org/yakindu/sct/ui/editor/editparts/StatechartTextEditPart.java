@@ -24,7 +24,7 @@ import org.eclipse.gmf.runtime.emf.type.core.requests.DestroyRequest;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.StatechartTextFigure;
-import org.yakindu.sct.ui.editor.policies.NoOverlapResizableEditPolicy;
+import org.yakindu.sct.ui.editor.policies.PreferredSizeCompartmentEditPolicy;
 
 /**
  * 
@@ -67,7 +67,7 @@ public class StatechartTextEditPart extends ShapeNodeEditPart implements
 				new RootComponentEditPolicy());
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new NoOverlapResizableEditPolicy());
+				new PreferredSizeCompartmentEditPolicy());
 	}
 
 	@Override

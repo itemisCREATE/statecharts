@@ -10,20 +10,15 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
-import java.util.List;
-
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
-import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.commands.Command;
 import org.eclipse.gef.commands.UnexecutableCommand;
-import org.eclipse.gef.requests.ChangeBoundsRequest;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.ConstrainedToolbarLayoutEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
@@ -33,7 +28,7 @@ import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.editor.figures.RegionFigure;
-import org.yakindu.sct.ui.editor.policies.NoOverlapResizableEditPolicy;
+import org.yakindu.sct.ui.editor.policies.PreferredSizeCompartmentEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
 
 /**
@@ -60,44 +55,13 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		removeEditPolicy(EditPolicyRoles.CONNECTION_HANDLES_ROLE);
-		installEditPolicy(EditPolicy.LAYOUT_ROLE,
-				new ConstrainedToolbarLayoutEditPolicy() {
-					@Override
-					protected Command getAutoSizeCommand(Request request) {
-						return UnexecutableCommand.INSTANCE;
-					}
-				});
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE,
-				new NoOverlapResizableEditPolicy() {
-
-					@SuppressWarnings("unchecked")
-					protected boolean isRequestValid(ChangeBoundsRequest request) {
-						// Overlapping of nodes is not allowed
-						final IGraphicalEditPart parent = (IGraphicalEditPart) getHost()
-								.getParent();
-						final Rectangle newBounds = request
-								.getTransformedRectangle(getHostFigure()
-										.getBounds());
-						final List<IGraphicalEditPart> children = parent
-								.getChildren();
-						for (final IGraphicalEditPart child : children) {
-
-							if (!(child instanceof RegionEditPart)
-									&& child.getFigure().getBounds()
-											.intersects(newBounds)) {
-								Rectangle intersection = child.getFigure()
-										.getBounds().getIntersection(newBounds);
-								// allow snapping to StatechartTextEditPart
-								if (intersection.width() > 1
-										&& intersection.height() > 1) {
-									return false;
-								}
-							}
-						}
-						return true;
-					}
-
-				});
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new ConstrainedToolbarLayoutEditPolicy() {
+			@Override
+			protected Command getAutoSizeCommand(Request request) {
+				return UnexecutableCommand.INSTANCE;
+			}
+		});
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeCompartmentEditPolicy());
 	}
 
 	@Override
@@ -127,12 +91,10 @@ public class RegionEditPart extends ShapeNodeEditPart {
 		if (childEditPart instanceof RegionCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getCompartmentPane();
 			pane.setLayoutManager(new StackLayout());
-			IFigure figure2 = ((RegionCompartmentEditPart) childEditPart)
-					.getFigure();
+			IFigure figure2 = ((RegionCompartmentEditPart) childEditPart).getFigure();
 			pane.add(figure2);
 		} else if (childEditPart instanceof RegionNameEditPart) {
-			((RegionNameEditPart) childEditPart).setLabel(getPrimaryShape()
-					.getNameLabel());
+			((RegionNameEditPart) childEditPart).setLabel(getPrimaryShape().getNameLabel());
 		} else
 			super.addChildVisual(childEditPart, index);
 	}
@@ -141,8 +103,7 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	protected void removeChildVisual(EditPart childEditPart) {
 		if (childEditPart instanceof RegionCompartmentEditPart) {
 			IFigure pane = getPrimaryShape().getCompartmentPane();
-			IFigure figure = ((RegionCompartmentEditPart) childEditPart)
-					.getFigure();
+			IFigure figure = ((RegionCompartmentEditPart) childEditPart).getFigure();
 			pane.remove(figure);
 		} else
 			super.removeChildVisual(childEditPart);
@@ -154,14 +115,9 @@ public class RegionEditPart extends ShapeNodeEditPart {
 	@Override
 	public Object getPreferredValue(EStructuralFeature feature) {
 		if (feature == NotationPackage.eINSTANCE.getLineStyle_LineColor()) {
-			return FigureUtilities
-					.RGBToInteger(StatechartColorConstants.REGION_LINE_COLOR
-							.getRGB());
-		} else if (feature == NotationPackage.eINSTANCE
-				.getFillStyle_FillColor()) {
-			return FigureUtilities
-					.RGBToInteger(StatechartColorConstants.REGION_BG_COLOR
-							.getRGB());
+			return FigureUtilities.RGBToInteger(StatechartColorConstants.REGION_LINE_COLOR.getRGB());
+		} else if (feature == NotationPackage.eINSTANCE.getFillStyle_FillColor()) {
+			return FigureUtilities.RGBToInteger(StatechartColorConstants.REGION_BG_COLOR.getRGB());
 		}
 		return super.getPreferredValue(feature);
 	}
