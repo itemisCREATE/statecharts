@@ -17,7 +17,7 @@
 		<distro.work.dir>${project.build.directory}/distro/work</distro.work.dir>
 		<distro.dir>${project.build.directory}/distro</distro.dir>
 		
-		<profile>epp.package.modeling</profile>
+		<profile>epp.package.java</profile>
 		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.feature.group</features>
 		<!-- TODO ,org.eclipse.gmf.runtime.emf.clipboard.core.patch.feature.group -->
 		<update.sites>${project.baseUri}/target/repository,${p2.target.repository},${p2.base.repository}</update.sites>
@@ -120,7 +120,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-modeling-juno-SR1-win32.zip"
+							              input="eclipse-java-juno-SR2-win32.zip"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -135,7 +135,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-modeling-juno-SR1-win32-x86_64.zip"
+							              input="eclipse-java-juno-SR2-win32-x86_64.zip"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -150,7 +150,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-modeling-juno-SR1-linux-gtk-x86_64.tar.gz"
+							              input="eclipse-java-juno-SR2-linux-gtk-x86_64.tar.gz"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -165,7 +165,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-modeling-juno-SR1-linux-gtk.tar.gz"
+							              input="eclipse-java-juno-SR2-linux-gtk.tar.gz"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -180,7 +180,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-modeling-juno-SR1-macosx-cocoa-x86_64.tar.gz"
+							              input="eclipse-java-juno-SR2-macosx-cocoa-x86_64.tar.gz"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -372,6 +372,10 @@
 						<dependencies>
 							<dependency>
 								<artifactId>org.eclipse.equinox.p2.transport.ecf</artifactId>
+								<type>eclipse-plugin</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.eclipse.core.net</artifactId>
 								<type>eclipse-plugin</type>
 							</dependency>
 							<dependency>

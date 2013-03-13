@@ -18,6 +18,10 @@
       %license
    </license>
 
+   <url>
+      <discovery label="Yakindu SCT Repository" url="http://updates.yakindu.com/juno/releases"/>
+   </url>
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.emf.ecore"/>
