@@ -59,6 +59,10 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 			return null;
 		}
 
+		if(request instanceof SetPreferredSizeRequest){
+			showSourceFeedback(request);
+		}
+		
 		ChangeBoundsRequest cbr = (ChangeBoundsRequest) request;
 		CompoundCommand result = new CompoundCommand();
 		List<IGraphicalEditPart> container = collectContainerHierachy();
