@@ -2,18 +2,18 @@
 <feature
       id="de.itemis.gmf.runtime.commons"
       label="GMF Runtime Commons"
-      version="2.0.0.qualifier"
+      version="2.1.0.qualifier"
       provider-name="itemis AG">
 
    <description>
-       %description
+      %description
    </description>
 
    <copyright url="%copyrightURL">
-        %copyright
+      %copyright
    </copyright>
 
-    <license url="%licenseURL">
+   <license url="%licenseURL">
       %license
    </license>
 
