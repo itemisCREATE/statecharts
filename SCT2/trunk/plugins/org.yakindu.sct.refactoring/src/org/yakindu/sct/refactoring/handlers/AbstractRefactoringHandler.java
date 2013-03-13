@@ -60,7 +60,6 @@ public abstract class AbstractRefactoringHandler<T extends Object> extends Abstr
 		return refactoring.isExecutable();
 	}
 
-	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		refactoring.execute();
 		return null;

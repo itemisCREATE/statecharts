@@ -54,7 +54,6 @@ public class Activator extends AbstractUIPlugin implements IStartup {
 		return plugin;
 	}
 
-	@Override
 	public void earlyStartup() {
 		// This plugin is registered for early startup to load all
 		// Handlerclasses to calculate the enabled state
