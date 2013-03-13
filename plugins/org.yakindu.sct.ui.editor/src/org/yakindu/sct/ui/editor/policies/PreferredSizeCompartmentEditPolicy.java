@@ -46,16 +46,18 @@ public class PreferredSizeCompartmentEditPolicy extends ResizableEditPolicyEx {
 
 	protected void adjustRequest(ChangeBoundsRequest request) {
 		final IFigure figure = getHostFigure();
-		final Dimension prefSize = figure.getPreferredSize();
-		final Rectangle newBounds = request.getTransformedRectangle(figure.getBounds().getCopy());
-		final Dimension newSizeDelta = request.getSizeDelta().getCopy();
-		if (newBounds.width < prefSize.width) {
-			newSizeDelta.width = request.getSizeDelta().width + (prefSize.width - newBounds.width);
+		final Dimension prefSize = figure.getPreferredSize().getCopy();
+		figure.translateToAbsolute(prefSize);
+		Rectangle bounds = figure.getBounds().getCopy();
+		figure.translateToAbsolute(bounds);
+		bounds = request.getTransformedRectangle(bounds);
+		if (bounds.width < prefSize.width) {
+			request.getSizeDelta().width = request.getSizeDelta().width + (prefSize.width - bounds.width);
 		}
-		if (newBounds.height < prefSize.height) {
-			newSizeDelta.height = request.getSizeDelta().height + (prefSize.height - newBounds.height);
+		if (bounds.height < prefSize.height) {
+			request.getSizeDelta().height = request.getSizeDelta().height + (prefSize.height - bounds.height);
 		}
-		request.setSizeDelta(newSizeDelta);
+		request.setSizeDelta(request.getSizeDelta());
 	}
 
 }
