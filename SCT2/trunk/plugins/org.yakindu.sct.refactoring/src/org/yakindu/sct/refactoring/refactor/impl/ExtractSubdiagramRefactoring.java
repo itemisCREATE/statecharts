@@ -38,6 +38,7 @@ import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
+import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -119,6 +120,12 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		transition.setTarget((State) subdiagram.getElement());
 		EList<ReactionProperty> properties = transition.getProperties();
 		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
+		// A transition can only have one entry point so alter the existing
+		for (ReactionProperty reactionProperty : properties) {
+			if (reactionProperty instanceof EntryPointSpec) {
+				entryPointSpec = (EntryPointSpec) reactionProperty;
+			}
+		}
 		entryPointSpec.setEntrypoint(name);
 		properties.add(entryPointSpec);
 		edge.setTarget(getContextObject());
@@ -158,9 +165,15 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		createSemanticExitPoint(transition, name);
 		transition.setSource((State) subdiagram.getElement());
 		EList<ReactionProperty> properties = transition.getProperties();
-		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
-		entryPointSpec.setEntrypoint(name);
-		properties.add(entryPointSpec);
+		ExitPointSpec exitPointSpec = StextFactory.eINSTANCE.createExitPointSpec();
+		// A transition can only have one entry point so alter the existing
+		for (ReactionProperty reactionProperty : properties) {
+			if (reactionProperty instanceof ExitPointSpec) {
+				exitPointSpec = (ExitPointSpec) reactionProperty;
+			}
+		}
+		exitPointSpec.setExitpoint(name);
+		properties.add(exitPointSpec);
 		edge.setSource(getContextObject());
 	}
 
