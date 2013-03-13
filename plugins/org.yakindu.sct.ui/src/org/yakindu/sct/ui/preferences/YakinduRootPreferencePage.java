@@ -40,7 +40,6 @@ public class YakinduRootPreferencePage extends PreferencePage implements
 		Link link = new Link(parent, SWT.NONE);
 		link.setText("For more information visit <a>www.statecharts.org</a>");
 		link.addListener(SWT.Selection, new Listener() {
-			@Override
 			public void handleEvent(Event event) {
 				org.eclipse.swt.program.Program
 						.launch(YAKINDU_ORG);
@@ -60,7 +59,6 @@ public class YakinduRootPreferencePage extends PreferencePage implements
 		createContents(content);
 	}
 
-	@Override
 	public void init(IWorkbench workbench) {
 		// Nothing to do
 	}
