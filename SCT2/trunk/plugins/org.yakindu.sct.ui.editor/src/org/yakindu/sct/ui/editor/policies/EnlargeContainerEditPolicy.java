@@ -50,25 +50,25 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 
 	private Map<IFigure, Rectangle> boundsCache = new HashMap<IFigure, Rectangle>();
 
+	private List<IGraphicalEditPart> containerHierachy;
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public Command getCommand(Request request) {
-		
 		if (!RequestConstants.REQ_RESIZE.equals(request.getType())
 				&& !RequestConstants.REQ_MOVE.equals(request.getType())) {
 			return null;
 		}
 
-		if(request instanceof SetPreferredSizeRequest){
+		if (request instanceof SetPreferredSizeRequest) {
 			showSourceFeedback(request);
 		}
-		
+
 		ChangeBoundsRequest cbr = (ChangeBoundsRequest) request;
 		CompoundCommand result = new CompoundCommand();
-		List<IGraphicalEditPart> container = collectContainerHierachy();
 
 		// Update Bounds of the container hierachy
-		for (IGraphicalEditPart currentContainer : container) {
+		for (IGraphicalEditPart currentContainer : containerHierachy) {
 			IFigure figure = currentContainer.getFigure();
 			SetBoundsCommand boundsCommand = new SetBoundsCommand(getHost().getEditingDomain(),
 					DiagramUIMessages.SetLocationCommand_Label_Resize, new EObjectAdapter(
@@ -99,23 +99,25 @@ public class EnlargeContainerEditPolicy extends AbstractEditPolicy {
 
 	@Override
 	public void showSourceFeedback(Request request) {
+		if (containerHierachy == null) {
+			containerHierachy = collectContainerHierachy();
+		}
 		if (!RequestConstants.REQ_RESIZE.equals(request.getType())
 				&& !RequestConstants.REQ_MOVE.equals(request.getType()))
 			return;
 		showContainerFeedback((ChangeBoundsRequest) request);
-		super.showSourceFeedback(request);
 	}
 
 	@Override
 	public void eraseSourceFeedback(Request request) {
 		boundsCache.clear();
+		containerHierachy = null;
 		super.eraseSourceFeedback(request);
 	}
 
 	protected void showContainerFeedback(ChangeBoundsRequest request) {
-		List<IGraphicalEditPart> container = collectContainerHierachy();
-		for (int level = 1; level <= container.size(); level++) {
-			IGraphicalEditPart containerEditPart = container.get(level - 1);
+		for (int level = 1; level <= containerHierachy.size(); level++) {
+			IGraphicalEditPart containerEditPart = containerHierachy.get(level - 1);
 			IFigure containerFigure = containerEditPart.getFigure();
 			Rectangle feedbackBounds = getOriginalBounds(containerFigure);
 			containerFigure.getParent().translateToAbsolute(feedbackBounds);
