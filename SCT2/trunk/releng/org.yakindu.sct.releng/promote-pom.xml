@@ -12,7 +12,8 @@
 	<artifactId>org.yakindu.sct.releng.promote</artifactId>
 	<packaging>eclipse-repository</packaging>
 
-	<!-- Search for 'target architecture' to find places where the architecture for distros is set -->
+	<!-- Search for 'target architecture' to find places where the architecture 
+		for distros is set -->
 
 	<properties>
 		<!-- scp settings for publishing udpdate site -->
@@ -26,8 +27,8 @@
 		<distro.dir>${project.build.directory}/distro</distro.dir>
 		<distro.work.dir>${distro.dir}/work</distro.work.dir>
 
-		<profile>epp.package.modeling</profile>
-		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.sdk.feature.group,org.eclipse.gmf.runtime.emf.clipboard.core.patch.feature.group</features>
+		<profile>epp.package.java</profile>
+		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.sdk.feature.group</features>
 		<update.sites>${p2.target.repository},file:${local.update.site},${updateSiteUrl}</update.sites>
 
 	</properties>
@@ -83,7 +84,8 @@
 									value="${project.build.directory}/distro/download" />
 
 								<!-- 'target architecture' for distros -->
-								<for list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
+								<for
+									list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
 									param="environment" delimiter=";" parallel="false">
 									<sequential>
 										<propertyregex property="distro.os" input="@{environment}"
@@ -109,7 +111,7 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-modeling-juno-SR1-win32.zip" override="true"
+													input="eclipse-java-juno-SR2-win32.zip" override="true"
 													regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
@@ -121,8 +123,8 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-modeling-juno-SR1-win32-x86_64.zip"
-													override="true" regexp="(.*)" select="\1" casesensitive="false" />
+													input="eclipse-java-juno-SR2-win32-x86_64.zip" override="true"
+													regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
 										<if>
@@ -133,7 +135,7 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-modeling-juno-SR1-linux-gtk-x86_64.tar.gz"
+													input="eclipse-java-juno-SR2-linux-gtk-x86_64.tar.gz"
 													override="true" regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
@@ -145,8 +147,8 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-modeling-juno-SR1-linux-gtk.tar.gz"
-													override="true" regexp="(.*)" select="\1" casesensitive="false" />
+													input="eclipse-java-juno-SR2-linux-gtk.tar.gz" override="true"
+													regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
 										<if>
@@ -157,7 +159,7 @@
 											</and>
 											<then>
 												<propertyregex property="distro.src.filename"
-													input="eclipse-modeling-juno-SR1-macosx-cocoa-x86_64.tar.gz"
+													input="eclipse-java-juno-SR2-macosx-cocoa-x86_64.tar.gz"
 													override="true" regexp="(.*)" select="\1" casesensitive="false" />
 											</then>
 										</if>
@@ -230,7 +232,8 @@
 								<taskdef resource="net/sf/antcontrib/antlib.xml"
 									classpathref="maven.plugin.classpath" />
 								<!-- 'target architecture' for distros -->
-								<for list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
+								<for
+									list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
 									param="environment" delimiter=";" parallel="false">
 									<sequential>
 										<propertyregex property="distro.os" input="@{environment}"
@@ -304,7 +307,8 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
+								-application
+								org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/macosx-cocoa-x86_64/eclipse/ -profile \
 								${profile} -p2.os macosx -p2.ws cocoa -p2.arch x86_64 \
 								-repository ${update.sites} -installIUs ${features}
@@ -319,8 +323,10 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
-								${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile} \
+								-application
+								org.eclipse.equinox.p2.director -destination \
+								${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile}
+								\
 								-p2.os win32 -p2.ws win32 -p2.arch x86 -repository \
 								${update.sites} -installIUs ${features}
 							</appArgLine>
@@ -334,9 +340,11 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
+								-application
+								org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/win32-win32-x86_64/eclipse/ -profile \
-								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository \
+								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository
+								\
 								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
@@ -349,10 +357,13 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
+								-application
+								org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/linux-gtk-x86/eclipse/ -profile \
-								${profile} -p2.os linux -p2.ws gtk -p2.arch x86 \
-								-repository ${update.sites} -installIUs ${features}
+								${profile}
+								-p2.os linux -p2.ws gtk -p2.arch x86 \
+								-repository
+								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -364,10 +375,12 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
+								-application
+								org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/linux-gtk-x86_64/eclipse/ -profile \
 								${profile} -p2.os linux -p2.ws gtk -p2.arch x86_64 \
-								-repository ${update.sites} -installIUs ${features}
+								-repository
+								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -389,6 +402,10 @@
 							</dependency>
 							<dependency>
 								<artifactId>org.eclipse.equinox.p2.repository</artifactId>
+								<type>eclipse-plugin</type>
+							</dependency>
+							<dependency>
+								<artifactId>org.eclipse.core.net</artifactId>
 								<type>eclipse-plugin</type>
 							</dependency>
 							<dependency>
