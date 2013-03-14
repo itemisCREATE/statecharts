@@ -14,6 +14,7 @@ import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.cre
 import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.getInlineStyle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -37,6 +38,7 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -134,7 +136,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	protected String getEntryPointName(Transition transition) {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("entry_");
-		stringBuilder.append(transition.getSource().getName());
+		stringBuilder.append(transition.getTarget().getName());
 		int index = transition.getSource().getOutgoingTransitions().indexOf(transition);
 		stringBuilder.append(index);
 		return stringBuilder.toString();
@@ -151,7 +153,19 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	protected void createSemanticEntryPoint(Transition transition, String name) {
 		Region entryPointTarget = transition.getTarget().getParentRegion();
-		Entry entryPoint = SGraphFactory.eINSTANCE.createEntry();
+		Entry entryPoint = null;
+		Iterator<Vertex> iterator = entryPointTarget.getVertices().iterator();
+		while (iterator.hasNext()) {
+			Vertex next = iterator.next();
+			if (next instanceof Entry) {
+				Entry current = (Entry) next;
+				if (name.equals(current.getName())) {
+					// Do nothing, there already exists an entry point
+					return;
+				}
+			}
+		}
+		entryPoint = SGraphFactory.eINSTANCE.createEntry();
 		entryPoint.setName(name);
 		entryPointTarget.getVertices().add(entryPoint);
 		Transition entryPointTransition = SGraphFactory.eINSTANCE.createTransition();
