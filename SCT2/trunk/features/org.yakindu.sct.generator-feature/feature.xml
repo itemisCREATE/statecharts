@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.sct.generator"
-      label="Generator All-In-One"
+      label="%label"
       version="2.1.0.qualifier"
-      provider-name="yakindu.org">
+      provider-name="%provider">
 
    <description url="">
       %description
