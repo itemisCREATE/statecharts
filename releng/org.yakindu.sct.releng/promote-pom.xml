@@ -20,7 +20,7 @@
 		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
 		<updateSiteUrl>http://updates.yakindu.com/${promotionTarget}</updateSiteUrl>
 		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
-		<tycho.extras.version>0.14.0</tycho.extras.version>
+		<tycho.extras.version>0.16.0</tycho.extras.version>
 
 		<eclipse.mirror.url>http://mirror.netcologne.de/eclipse</eclipse.mirror.url>
 		<distro.dir>${project.build.directory}/distro</distro.dir>
