@@ -29,7 +29,7 @@
       <import plugin="org.eclipse.emf.edit"/>
       <import plugin="org.eclipse.ui"/>
       <import plugin="de.itemis.xtext.utils.gmf"/>
-      <import plugin="org.eclipse.gmf.runtime.emf.core" version="1.6.2" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.gmf.runtime.emf.core" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.ui"/>
       <import plugin="org.apache.log4j"/>
       <import plugin="org.antlr.runtime"/>
