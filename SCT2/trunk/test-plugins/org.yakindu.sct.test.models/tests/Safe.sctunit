@@ -1,0 +1,16 @@
+
+testgroup SafeTest for statechart Safe{
+	test SafeOpenSuccess { 
+		enter
+		
+		cycle
+		raise User.numberPressed : 3
+		cycle
+		raise User.numberPressed : 7
+		cycle
+		raise User.numberPressed : 5
+		cycle
+		assert Safe.open
+	} 
+}  
+	 

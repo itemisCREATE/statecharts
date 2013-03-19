@@ -53,9 +53,9 @@ public abstract class AbstractExecutionFlowTest {
 		return (Boolean) variable.getValue();
 	}
 
-	protected double getReal(String varName) {
+	protected Float getReal(String varName) {
 		ExecutionVariable variable = context().getVariable(varName);
-		return (Double) variable.getValue();
+		return (Float) variable.getValue();
 	}
 
 	protected String getString(String varName) {
@@ -108,7 +108,7 @@ public abstract class AbstractExecutionFlowTest {
 	protected void raiseEvent(String eventName, Object value) {
 		context().raiseEvent(eventName, value);
 	}
-	
+
 	protected boolean isRaised(String eventName) {
 		return context().isEventRaised(eventName);
 	}
