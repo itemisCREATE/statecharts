@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
-<!--
- <copyright>
- </copyright>
-
- $Id$
--->
-
 <plugin>
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
@@ -20,20 +12,4 @@
             uri="http://www.yakindu.org/base/base/2.0.0">
       </package>
    </extension>
-   <extension
-         point="org.eclipse.emf.ecore.uri_mapping">
-      <mapping
-            source="platform:/resource/org.yakindu.base.types/model/base.ecore"
-            target="platform:/plugin/org.yakindu.base.types/model/base.ecore">
-      </mapping>
-      <mapping
-            source="../org.yakindu.base.types/model/base.ecore"
-            target="platform:/plugin/org.yakindu.base.types/model/base.ecore">
-      </mapping>
-      <mapping
-            source="platform:/resource/org.yakindu.base.types/model/types.ecore"
-            target="platform:/plugin/org.yakindu.base.types/model/types.ecore">
-      </mapping>
-   </extension>
-
 </plugin>
