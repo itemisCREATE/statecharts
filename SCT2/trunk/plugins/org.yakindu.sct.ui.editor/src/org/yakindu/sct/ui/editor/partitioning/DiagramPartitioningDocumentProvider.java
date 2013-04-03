@@ -103,7 +103,8 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 			diagramListener = new FileDiagramModificationListener(this, (DiagramDocument) document, input);
 		}
 		InputDiagramFileInfo info = new InputDiagramFileInfo(document, synchronizer, diagramListener, input);
-		diagramListener.startListening();
+		if (diagramListener != null)
+			diagramListener.startListening();
 		return info;
 	}
 
@@ -127,7 +128,7 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 		// Unset the content first to avoid call to DiagramIOUtil.unload
 		super.disposeElementInfo(element, info);
 		info.fDocument.setContent(content);
-		if (info instanceof InputDiagramFileInfo) {
+		if (content instanceof Diagram && info instanceof InputDiagramFileInfo) {
 			// Unload non needed resources
 			ResourceUnloadingTool.unloadEditorInput(DiagramPartitioningUtil.getSharedDomain().getResourceSet(),
 					((InputDiagramFileInfo) info).getEditorInput());
