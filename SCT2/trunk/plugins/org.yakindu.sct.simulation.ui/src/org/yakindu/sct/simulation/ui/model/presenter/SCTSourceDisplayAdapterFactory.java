@@ -20,15 +20,14 @@ import org.eclipse.core.runtime.IAdapterFactory;
  */
 public class SCTSourceDisplayAdapterFactory implements IAdapterFactory {
 
-	private static SCTSourceDisplay display = new SCTSourceDisplay();
+	private static SCTSourceDisplayDispatcher display = new SCTSourceDisplayDispatcher();
 
-	public Object getAdapter(Object adaptableObject,
-			@SuppressWarnings("rawtypes") Class adapterType) {
+	public Object getAdapter(Object adaptableObject, @SuppressWarnings("rawtypes") Class adapterType) {
 		return display;
 	}
 
 	public Class<?>[] getAdapterList() {
-		return new Class[] { SCTSourceDisplay.class };
+		return new Class[] { SCTSourceDisplayDispatcher.class };
 	}
 
 }
