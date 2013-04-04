@@ -67,11 +67,14 @@ In the context of state machines orthogonal states are states that are independe
 
 !images/orthogonalState_example.jpg!
 
-h4. Submachine states
+h4. Subdiagrams 
 
-Submachine states may contain complete state machines. Here the user can chose another state machine to be included or create a new sub statemachine. During simulation only the top level statemachine is interpreted. It is not possible to jump to the sub level state machines and back.
-
-!images/substatemachine_example.jpg!
+When using Composite States, the statechart model often becomes too big to get a complete overview of the whole diagram. Although it is possible to collapse and expand a state's figure compartment, these actions spoil the diagram layout each time they are executed. Therefore, we introduced so-called Subdiagrams.
+!images/extract_subdiagram.png!
+If the 'Extract Subdiagram' refactoring is executed on a Composite State, all containing Regions are extracted into a separate diagram. A small decorator in the lower right corner of the State indicates the existence of such a subdiagram. If you hover with the mouse cursor over the decorator, you get a small preview image of the subdiagrams content. The refactoring also creates required Entry and Exit Points for you.
+!images/extract_subdiagram2.png!
+With a click on the decorator, the subdiagram opens in a separate editor tab. The breadcrumb on the top allows easy navigation throughout the different hierachy levels.
+!images/extract_subdiagram3.png!
 
 h3. Shallow History
 
