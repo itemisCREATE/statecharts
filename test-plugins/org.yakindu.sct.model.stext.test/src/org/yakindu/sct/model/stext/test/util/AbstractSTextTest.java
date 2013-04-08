@@ -88,7 +88,7 @@ public abstract class AbstractSTextTest {
 		resource.getContents().add(rootASTElement);
 		ListBasedDiagnosticConsumer diagnosticsConsumer = new ListBasedDiagnosticConsumer();
 		if (context != null) {
-			Statechart sc = _createStatechart("");
+			Statechart sc = _createStatechart("sc");
 			resource.getContents().add(sc);
 			for (Scope scope : context) {
 				if (scope != null) {
