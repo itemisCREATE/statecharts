@@ -65,7 +65,47 @@
 				<configuration>
 					<filesets>
 						<fileset>
+							<directory>src-gen</directory>
+							<includes>
+								<include>**</include>
+							</includes>
+							<excludes>
+								<exclude>.gitignore</exclude>
+								<exclude>.svn/</exclude>
+							</excludes>
+						</fileset>
+						<fileset>
 							<directory>xtend-gen</directory>
+							<includes>
+								<include>**</include>
+							</includes>
+							<excludes>
+								<exclude>.gitignore</exclude>
+								<exclude>.svn/</exclude>
+							</excludes>
+						</fileset>
+						<fileset>
+							<directory>../${project.artifactId}.ui/src-gen</directory>
+							<includes>
+								<include>**</include>
+							</includes>
+							<excludes>
+								<exclude>.gitignore</exclude>
+								<exclude>.svn/</exclude>
+							</excludes>
+						</fileset>
+						<fileset>
+							<directory>../${project.artifactId}.tests/src-gen</directory>
+							<includes>
+								<include>**</include>
+							</includes>
+							<excludes>
+								<exclude>.gitignore</exclude>
+								<exclude>.svn/</exclude>
+							</excludes>
+						</fileset>
+						<fileset>
+							<directory>../${project.artifactId}.tests/xtend-gen</directory>
 							<includes>
 								<include>**</include>
 							</includes>
@@ -76,6 +116,33 @@
 						</fileset>
 					</filesets>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.fornax.toolsupport</groupId>
+				<artifactId>fornax-oaw-m2-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>xtext</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>run-workflow</goal>
+						</goals>
+						<configuration>
+							<workflowEngine>mwe2</workflowEngine>
+							<workflowDescriptor>src/org/yakindu/sct/model/stext/GenerateExpressions.mwe2</workflowDescriptor>
+							<timestampFileName>xtext-generator.timestamp</timestampFileName>
+							<jvmSettings>
+								<fork>true</fork>
+								<jvmArgs>
+									<jvmArg>-Xms100m</jvmArg>
+									<jvmArg>-Xmx700m</jvmArg>
+									<jvmArg>-XX:MaxPermSize=128m</jvmArg>
+									<jvmArg>-Dlog4j.configuration=file:${basedir}/log4j.properties</jvmArg>
+								</jvmArgs>
+							</jvmSettings>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.xtend</groupId>
