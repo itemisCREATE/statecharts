@@ -36,5 +36,6 @@ Export-Package: org.yakindu.sct.generator.genmodel.ui,
  org.yakindu.sct.generator.genmodel.ui.contentassist.antlr,
  org.yakindu.sct.generator.genmodel.ui.help,
  org.yakindu.sct.generator.genmodel.ui.internal,
- org.yakindu.sct.generator.genmodel.ui.contentassist
+ org.yakindu.sct.generator.genmodel.ui.contentassist,
+ org.yakindu.sct.generator.genmodel.ui.quickfix
 Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator
