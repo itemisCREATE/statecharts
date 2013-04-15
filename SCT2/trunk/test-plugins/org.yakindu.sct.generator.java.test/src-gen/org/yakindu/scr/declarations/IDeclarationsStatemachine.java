@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IDeclarationsStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseEvA();
 		public boolean isRaisedEvB();
 		public void raiseEvC(boolean value);
@@ -23,7 +23,7 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 	public interface SCIIfA {
 		public void raiseEvA();

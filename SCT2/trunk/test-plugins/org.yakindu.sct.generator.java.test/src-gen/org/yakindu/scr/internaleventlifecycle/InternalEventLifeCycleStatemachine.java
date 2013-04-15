@@ -8,7 +8,7 @@ public class InternalEventLifeCycleStatemachine
 
 	private boolean i2;
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -29,7 +29,7 @@ public class InternalEventLifeCycleStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		r1_A, r1_B, r2_C, r2_D, $NullState$
@@ -41,7 +41,7 @@ public class InternalEventLifeCycleStatemachine
 
 	public InternalEventLifeCycleStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -100,7 +100,7 @@ public class InternalEventLifeCycleStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 		i1 = false;
 		i2 = false;
 
@@ -124,8 +124,8 @@ public class InternalEventLifeCycleStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	private void raiseI1() {
@@ -137,10 +137,10 @@ public class InternalEventLifeCycleStatemachine
 	}
 
 	public void raiseE() {
-		sCIDefault.raiseE();
+		sCInterface.raiseE();
 	}
 	public void raiseF() {
-		sCIDefault.raiseF();
+		sCInterface.raiseF();
 	}
 
 	/* Entry action for statechart 'InternalEventLifeCycle'. */
@@ -160,7 +160,7 @@ public class InternalEventLifeCycleStatemachine
 			nextStateIndex = 0;
 			stateVector[0] = State.r1_B;
 		} else {
-			if (sCIDefault.e) {
+			if (sCInterface.e) {
 				raiseI1();
 			}
 		}
@@ -168,7 +168,7 @@ public class InternalEventLifeCycleStatemachine
 
 	/* The reactions of state B. */
 	private void reactR1_B() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -190,7 +190,7 @@ public class InternalEventLifeCycleStatemachine
 
 	/* The reactions of state D. */
 	private void reactR2_D() {
-		if (sCIDefault.f) {
+		if (sCInterface.f) {
 			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 

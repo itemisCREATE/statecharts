@@ -4,7 +4,7 @@ public class StatechartLocalReactionsStatemachine
 		implements
 			IStatechartLocalReactionsStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private int myInt;
 
@@ -18,7 +18,7 @@ public class StatechartLocalReactionsStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_S1, main_region_S2, region2_a, $NullState$
@@ -30,7 +30,7 @@ public class StatechartLocalReactionsStatemachine
 
 	public StatechartLocalReactionsStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -42,7 +42,7 @@ public class StatechartLocalReactionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.myInt = 0;
+		sCInterface.myInt = 0;
 	}
 
 	public void enter() {
@@ -104,16 +104,16 @@ public class StatechartLocalReactionsStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public int getMyInt() {
-		return sCIDefault.getMyInt();
+		return sCInterface.getMyInt();
 	}
 
 	public void setMyInt(int value) {
-		sCIDefault.setMyInt(value);
+		sCInterface.setMyInt(value);
 	}
 
 	private boolean checkLr0() {
@@ -121,7 +121,7 @@ public class StatechartLocalReactionsStatemachine
 	}
 
 	private void effectLr0() {
-		sCIDefault.myInt += 1;
+		sCInterface.myInt += 1;
 	}
 
 	/* Entry action for statechart 'StatechartLocalReactions'. */
@@ -136,26 +136,22 @@ public class StatechartLocalReactionsStatemachine
 	private void reactMain_region_S1() {
 		effectLr0();
 
-		if (true) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
 
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_S2;
-		}
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_S2;
 	}
 
 	/* The reactions of state S2. */
 	private void reactMain_region_S2() {
 		effectLr0();
 
-		if (true) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
 
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_S1;
-		}
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_S1;
 	}
 
 	/* The reactions of state a. */

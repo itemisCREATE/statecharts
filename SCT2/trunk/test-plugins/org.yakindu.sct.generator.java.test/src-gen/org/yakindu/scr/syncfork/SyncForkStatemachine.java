@@ -2,7 +2,7 @@ package org.yakindu.scr.syncfork;
 
 public class SyncForkStatemachine implements ISyncForkStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -23,7 +23,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_B_r1_C1, main_region_B_r1_C2, main_region_B_r2_D1, main_region_B_r2_D2, $NullState$
@@ -35,7 +35,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 	public SyncForkStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -96,7 +96,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -125,15 +125,15 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE() {
-		sCIDefault.raiseE();
+		sCInterface.raiseE();
 	}
 	public void raiseF() {
-		sCIDefault.raiseF();
+		sCInterface.raiseF();
 	}
 
 	/* Entry action for statechart 'SyncFork'. */
@@ -146,13 +146,13 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			reactSyncFork_main_region__sync0();
 		} else {
-			if (sCIDefault.f) {
+			if (sCInterface.f) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
@@ -167,7 +167,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 	/* The reactions of state C1. */
 	private void reactMain_region_B_r1_C1() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			switch (stateVector[0]) {
 				case main_region_B_r1_C1 :
 					nextStateIndex = 0;
@@ -201,7 +201,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A;
 		} else {
-			if (sCIDefault.f) {
+			if (sCInterface.f) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
@@ -213,7 +213,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 	/* The reactions of state C2. */
 	private void reactMain_region_B_r1_C2() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			switch (stateVector[0]) {
 				case main_region_B_r1_C1 :
 					nextStateIndex = 0;
@@ -252,7 +252,7 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 
 	/* The reactions of state D1. */
 	private void reactMain_region_B_r2_D1() {
-		if (sCIDefault.f) {
+		if (sCInterface.f) {
 			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 

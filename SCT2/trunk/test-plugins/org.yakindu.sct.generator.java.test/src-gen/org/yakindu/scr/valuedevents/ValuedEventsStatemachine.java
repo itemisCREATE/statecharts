@@ -2,7 +2,7 @@ package org.yakindu.scr.valuedevents;
 
 public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean integerEvent;
 
@@ -36,7 +36,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, _region1_B, _region1_C, $NullState$
@@ -48,7 +48,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	public ValuedEventsStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -60,13 +60,13 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.myVar = 0;
+		sCInterface.myVar = 0;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.raiseIntegerEvent(2 * 21);
+		sCInterface.raiseIntegerEvent(2 * 21);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
@@ -105,7 +105,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -125,20 +125,20 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseIntegerEvent(int value) {
-		sCIDefault.raiseIntegerEvent(value);
+		sCInterface.raiseIntegerEvent(value);
 	}
 
 	public int getMyVar() {
-		return sCIDefault.getMyVar();
+		return sCInterface.getMyVar();
 	}
 
 	public void setMyVar(int value) {
-		sCIDefault.setMyVar(value);
+		sCInterface.setMyVar(value);
 	}
 
 	/* Entry action for statechart 'ValuedEvents'. */
@@ -155,11 +155,11 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	/* The reactions of state B. */
 	private void reactRegion1_B() {
-		if (sCIDefault.integerEvent) {
+		if (sCInterface.integerEvent) {
 			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
-			sCIDefault.myVar = sCIDefault.integerEventValue;
+			sCInterface.myVar = sCInterface.integerEventValue;
 
 			nextStateIndex = 1;
 			stateVector[1] = State._region1_C;

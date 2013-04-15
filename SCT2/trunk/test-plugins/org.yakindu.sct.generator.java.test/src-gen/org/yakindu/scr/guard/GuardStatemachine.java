@@ -2,7 +2,7 @@ package org.yakindu.scr.guard;
 
 public class GuardStatemachine implements IGuardStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -40,7 +40,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -52,7 +52,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	public GuardStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -64,7 +64,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.myVar = 0;
+		sCInterface.myVar = 0;
 	}
 
 	public void enter() {
@@ -94,7 +94,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -112,26 +112,26 @@ public class GuardStatemachine implements IGuardStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseEvent1() {
-		sCIDefault.raiseEvent1();
+		sCInterface.raiseEvent1();
 	}
 	public void raiseEvent2() {
-		sCIDefault.raiseEvent2();
+		sCInterface.raiseEvent2();
 	}
 	public void raiseReturn() {
-		sCIDefault.raiseReturn();
+		sCInterface.raiseReturn();
 	}
 
 	public int getMyVar() {
-		return sCIDefault.getMyVar();
+		return sCInterface.getMyVar();
 	}
 
 	public void setMyVar(int value) {
-		sCIDefault.setMyVar(value);
+		sCInterface.setMyVar(value);
 	}
 
 	/* Entry action for statechart 'Guard'. */
@@ -144,20 +144,20 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.event1 && sCIDefault.myVar == 10) {
+		if (sCInterface.event1 && sCInterface.myVar == 10) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.myVar = 10;
+			sCInterface.myVar = 10;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_B;
 		} else {
-			if (sCIDefault.event2) {
+			if (sCInterface.event2) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
-				sCIDefault.myVar = 10;
+				sCInterface.myVar = 10;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B;
@@ -167,7 +167,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (sCIDefault.return_ID) {
+		if (sCInterface.return_ID) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 

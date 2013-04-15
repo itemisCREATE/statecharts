@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IExitOnSelfTransitionStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE();
 		public void raiseF();
 		public int getEntryCount();
@@ -13,6 +13,6 @@ public interface IExitOnSelfTransitionStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

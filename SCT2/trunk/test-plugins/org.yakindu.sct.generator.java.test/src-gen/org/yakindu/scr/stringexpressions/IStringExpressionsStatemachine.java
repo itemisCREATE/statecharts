@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IStringExpressionsStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE1();
 		public String getMyString();
 		public void setMyString(String value);
@@ -16,6 +16,6 @@ public interface IStringExpressionsStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

@@ -2,7 +2,7 @@ package org.yakindu.scr.priorityvalues;
 
 public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -23,7 +23,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		someRegion_A, someRegion_B, main_region_A, main_region_B, main_region_C, main_region_D, main_region_E, $NullState$
@@ -35,7 +35,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 	public PriorityValuesStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -109,7 +109,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -137,15 +137,15 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseEvent1() {
-		sCIDefault.raiseEvent1();
+		sCInterface.raiseEvent1();
 	}
 	public void raiseEvent2() {
-		sCIDefault.raiseEvent2();
+		sCInterface.raiseEvent2();
 	}
 
 	/* Entry action for statechart 'PriorityValues'. */
@@ -158,7 +158,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 	/* The reactions of state A. */
 	private void reactSomeRegion_A() {
-		if (sCIDefault.event2) {
+		if (sCInterface.event2) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -173,28 +173,29 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.event1) {
+		if (sCInterface.event1) {
 			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
 			nextStateIndex = 1;
 			stateVector[1] = State.main_region_C;
 		} else {
-			if (sCIDefault.event1) {
+			if (sCInterface.event1) {
 				nextStateIndex = 1;
 				stateVector[1] = State.$NullState$;
 
 				nextStateIndex = 1;
 				stateVector[1] = State.main_region_B;
 			} else {
-				if (sCIDefault.event1) {
+				if (sCInterface.event1) {
 					nextStateIndex = 1;
 					stateVector[1] = State.$NullState$;
 
 					nextStateIndex = 1;
 					stateVector[1] = State.main_region_D;
 				} else {
-					if (sCIDefault.event2 && !isStateActive(State.someRegion_B)) {
+					if (sCInterface.event2
+							&& !isStateActive(State.someRegion_B)) {
 						nextStateIndex = 1;
 						stateVector[1] = State.$NullState$;
 

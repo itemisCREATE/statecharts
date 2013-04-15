@@ -4,7 +4,7 @@ public class AssignmentAsExpressionStatemachine
 		implements
 			IAssignmentAsExpressionStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private int a;
 
@@ -238,7 +238,7 @@ public class AssignmentAsExpressionStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_Add, main_region_Subtract, main_region_Multiply, main_region_Divide, main_region_Modulo, main_region_Shift, main_region_boolean_And, main_region_boolean_Or, main_region_boolean_Xor, $NullState$
@@ -250,7 +250,7 @@ public class AssignmentAsExpressionStatemachine
 
 	public AssignmentAsExpressionStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -262,57 +262,57 @@ public class AssignmentAsExpressionStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.a = 0;
+		sCInterface.a = 0;
 
-		sCIDefault.b = 0;
+		sCInterface.b = 0;
 
-		sCIDefault.c = 0;
+		sCInterface.c = 0;
 
-		sCIDefault.d = 0;
+		sCInterface.d = 0;
 
-		sCIDefault.e = 1;
+		sCInterface.e = 1;
 
-		sCIDefault.f = 1;
+		sCInterface.f = 1;
 
-		sCIDefault.g = 4;
+		sCInterface.g = 4;
 
-		sCIDefault.h = 32;
+		sCInterface.h = 32;
 
-		sCIDefault.i = 7;
+		sCInterface.i = 7;
 
-		sCIDefault.i1 = 7;
+		sCInterface.i1 = 7;
 
-		sCIDefault.j = 8;
+		sCInterface.j = 8;
 
-		sCIDefault.j1 = 2;
+		sCInterface.j1 = 2;
 
-		sCIDefault.k = 8;
+		sCInterface.k = 8;
 
-		sCIDefault.k1 = 4;
+		sCInterface.k1 = 4;
 
-		sCIDefault.l = 3;
+		sCInterface.l = 3;
 
-		sCIDefault.m = 7;
+		sCInterface.m = 7;
 
-		sCIDefault.n = 5;
+		sCInterface.n = 5;
 
-		sCIDefault.p = 0;
+		sCInterface.p = 0;
 
-		sCIDefault.r = 7;
+		sCInterface.r = 7;
 
-		sCIDefault.t = 10;
+		sCInterface.t = 10;
 
-		sCIDefault.u = 6;
+		sCInterface.u = 6;
 
-		sCIDefault.v = 13;
+		sCInterface.v = 13;
 
-		sCIDefault.w = 7;
+		sCInterface.w = 7;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.a = (sCIDefault.b = 5) + 4;
+		sCInterface.a = (sCInterface.b = 5) + 4;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Add;
@@ -404,170 +404,170 @@ public class AssignmentAsExpressionStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public int getA() {
-		return sCIDefault.getA();
+		return sCInterface.getA();
 	}
 
 	public void setA(int value) {
-		sCIDefault.setA(value);
+		sCInterface.setA(value);
 	}
 	public int getB() {
-		return sCIDefault.getB();
+		return sCInterface.getB();
 	}
 
 	public void setB(int value) {
-		sCIDefault.setB(value);
+		sCInterface.setB(value);
 	}
 	public int getC() {
-		return sCIDefault.getC();
+		return sCInterface.getC();
 	}
 
 	public void setC(int value) {
-		sCIDefault.setC(value);
+		sCInterface.setC(value);
 	}
 	public int getD() {
-		return sCIDefault.getD();
+		return sCInterface.getD();
 	}
 
 	public void setD(int value) {
-		sCIDefault.setD(value);
+		sCInterface.setD(value);
 	}
 	public int getE() {
-		return sCIDefault.getE();
+		return sCInterface.getE();
 	}
 
 	public void setE(int value) {
-		sCIDefault.setE(value);
+		sCInterface.setE(value);
 	}
 	public int getF() {
-		return sCIDefault.getF();
+		return sCInterface.getF();
 	}
 
 	public void setF(int value) {
-		sCIDefault.setF(value);
+		sCInterface.setF(value);
 	}
 	public int getG() {
-		return sCIDefault.getG();
+		return sCInterface.getG();
 	}
 
 	public void setG(int value) {
-		sCIDefault.setG(value);
+		sCInterface.setG(value);
 	}
 	public int getH() {
-		return sCIDefault.getH();
+		return sCInterface.getH();
 	}
 
 	public void setH(int value) {
-		sCIDefault.setH(value);
+		sCInterface.setH(value);
 	}
 	public int getI() {
-		return sCIDefault.getI();
+		return sCInterface.getI();
 	}
 
 	public void setI(int value) {
-		sCIDefault.setI(value);
+		sCInterface.setI(value);
 	}
 	public int getI1() {
-		return sCIDefault.getI1();
+		return sCInterface.getI1();
 	}
 
 	public void setI1(int value) {
-		sCIDefault.setI1(value);
+		sCInterface.setI1(value);
 	}
 	public int getJ() {
-		return sCIDefault.getJ();
+		return sCInterface.getJ();
 	}
 
 	public void setJ(int value) {
-		sCIDefault.setJ(value);
+		sCInterface.setJ(value);
 	}
 	public int getJ1() {
-		return sCIDefault.getJ1();
+		return sCInterface.getJ1();
 	}
 
 	public void setJ1(int value) {
-		sCIDefault.setJ1(value);
+		sCInterface.setJ1(value);
 	}
 	public int getK() {
-		return sCIDefault.getK();
+		return sCInterface.getK();
 	}
 
 	public void setK(int value) {
-		sCIDefault.setK(value);
+		sCInterface.setK(value);
 	}
 	public int getK1() {
-		return sCIDefault.getK1();
+		return sCInterface.getK1();
 	}
 
 	public void setK1(int value) {
-		sCIDefault.setK1(value);
+		sCInterface.setK1(value);
 	}
 	public int getL() {
-		return sCIDefault.getL();
+		return sCInterface.getL();
 	}
 
 	public void setL(int value) {
-		sCIDefault.setL(value);
+		sCInterface.setL(value);
 	}
 	public int getM() {
-		return sCIDefault.getM();
+		return sCInterface.getM();
 	}
 
 	public void setM(int value) {
-		sCIDefault.setM(value);
+		sCInterface.setM(value);
 	}
 	public int getN() {
-		return sCIDefault.getN();
+		return sCInterface.getN();
 	}
 
 	public void setN(int value) {
-		sCIDefault.setN(value);
+		sCInterface.setN(value);
 	}
 	public int getP() {
-		return sCIDefault.getP();
+		return sCInterface.getP();
 	}
 
 	public void setP(int value) {
-		sCIDefault.setP(value);
+		sCInterface.setP(value);
 	}
 	public int getR() {
-		return sCIDefault.getR();
+		return sCInterface.getR();
 	}
 
 	public void setR(int value) {
-		sCIDefault.setR(value);
+		sCInterface.setR(value);
 	}
 	public int getT() {
-		return sCIDefault.getT();
+		return sCInterface.getT();
 	}
 
 	public void setT(int value) {
-		sCIDefault.setT(value);
+		sCInterface.setT(value);
 	}
 	public int getU() {
-		return sCIDefault.getU();
+		return sCInterface.getU();
 	}
 
 	public void setU(int value) {
-		sCIDefault.setU(value);
+		sCInterface.setU(value);
 	}
 	public int getV() {
-		return sCIDefault.getV();
+		return sCInterface.getV();
 	}
 
 	public void setV(int value) {
-		sCIDefault.setV(value);
+		sCInterface.setV(value);
 	}
 	public int getW() {
-		return sCIDefault.getW();
+		return sCInterface.getW();
 	}
 
 	public void setW(int value) {
-		sCIDefault.setW(value);
+		sCInterface.setW(value);
 	}
 
 	/* Entry action for statechart 'AssignmentAsExpression'. */
@@ -583,7 +583,7 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.d -= (sCIDefault.c -= 5) - 1;
+		sCInterface.d -= (sCInterface.c -= 5) - 1;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Subtract;
@@ -594,7 +594,7 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.e *= (sCIDefault.f *= 5) * 3;
+		sCInterface.e *= (sCInterface.f *= 5) * 3;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Multiply;
@@ -605,7 +605,7 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.g /= (sCIDefault.h /= 2) / 4;
+		sCInterface.g /= (sCInterface.h /= 2) / 4;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Divide;
@@ -616,7 +616,7 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.i %= (sCIDefault.i1 %= 4) % 4;
+		sCInterface.i %= (sCInterface.i1 %= 4) % 4;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Modulo;
@@ -627,9 +627,9 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.j <<= (sCIDefault.j1 >>= 1);
+		sCInterface.j <<= (sCInterface.j1 >>= 1);
 
-		sCIDefault.k >>= (sCIDefault.k1 >>= 2);
+		sCInterface.k >>= (sCInterface.k1 >>= 2);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Shift;
@@ -640,7 +640,7 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.l &= (sCIDefault.n &= sCIDefault.m);
+		sCInterface.l &= (sCInterface.n &= sCInterface.m);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_boolean_And;
@@ -651,7 +651,7 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.p |= (sCIDefault.r |= sCIDefault.t);
+		sCInterface.p |= (sCInterface.r |= sCInterface.t);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_boolean_Or;
@@ -662,7 +662,7 @@ public class AssignmentAsExpressionStatemachine
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		sCIDefault.u ^= (sCIDefault.v ^= sCIDefault.w);
+		sCInterface.u ^= (sCInterface.v ^= sCInterface.w);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_boolean_Xor;

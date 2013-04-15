@@ -12,7 +12,7 @@
         <outgoingTransitions xmi:id="_Dd71GPimEeCPG5ImOgba0Q" specification="event2" target="_Dd71EfimEeCPG5ImOgba0Q"/>
         <regions xmi:id="_Dd71HPimEeCPG5ImOgba0Q">
           <vertices xsi:type="sgraph:State" xmi:id="_Dd71H_imEeCPG5ImOgba0Q" name="a" incomingTransitions="_QlbEMPiwEeCmAZxZWLaQmA">
-            <outgoingTransitions xmi:id="_Dd71IPimEeCPG5ImOgba0Q" specification="" target="_Dd71JPimEeCPG5ImOgba0Q"/>
+            <outgoingTransitions xmi:id="_Dd71IPimEeCPG5ImOgba0Q" specification="event3" target="_Dd71JPimEeCPG5ImOgba0Q"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_Dd71JPimEeCPG5ImOgba0Q" name="State4" incomingTransitions="_Dd71IPimEeCPG5ImOgba0Q">
             <outgoingTransitions xmi:id="_Dd71JfimEeCPG5ImOgba0Q" specification="event4" target="_Dd8cPPimEeCPG5ImOgba0Q"/>
@@ -361,7 +361,7 @@
     <edges xmi:id="_DsXSoPimEeCPG5ImOgba0Q" type="Transition" element="_Dd71IPimEeCPG5ImOgba0Q" source="_Dd5Y8vimEeCPG5ImOgba0Q" target="_Dd5Y_vimEeCPG5ImOgba0Q">
       <children xsi:type="notation:DecorationNode" xmi:id="_DsX5sPimEeCPG5ImOgba0Q" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_DsX5sfimEeCPG5ImOgba0Q"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_DsX5svimEeCPG5ImOgba0Q" y="40"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_DsX5svimEeCPG5ImOgba0Q" x="-7" y="16"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_DsXSofimEeCPG5ImOgba0Q" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_DsXSo_imEeCPG5ImOgba0Q" fontName="Verdana"/>

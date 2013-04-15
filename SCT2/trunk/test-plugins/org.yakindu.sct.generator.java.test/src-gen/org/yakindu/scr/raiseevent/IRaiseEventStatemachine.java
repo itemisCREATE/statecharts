@@ -3,12 +3,12 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IRaiseEventStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public boolean isRaisedE1();
 		public void raiseE2();
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

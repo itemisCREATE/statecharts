@@ -4,7 +4,7 @@ public class HistoryWithoutInitialStepStatemachine
 		implements
 			IHistoryWithoutInitialStepStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -25,7 +25,7 @@ public class HistoryWithoutInitialStepStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_B_r1_C, main_region_B_r1_D, $NullState$
@@ -38,7 +38,7 @@ public class HistoryWithoutInitialStepStatemachine
 
 	public HistoryWithoutInitialStepStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -91,7 +91,7 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -116,15 +116,15 @@ public class HistoryWithoutInitialStepStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE1() {
-		sCIDefault.raiseE1();
+		sCInterface.raiseE1();
 	}
 	public void raiseE2() {
-		sCIDefault.raiseE2();
+		sCInterface.raiseE2();
 	}
 
 	/* Entry action for statechart 'HistoryWithoutInitialStep'. */
@@ -155,14 +155,14 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_B_r1_C;
 		} else {
-			if (sCIDefault.e2) {
+			if (sCInterface.e2) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
@@ -176,7 +176,7 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state C. */
 	private void reactMain_region_B_r1_C() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			historyVector[0] = stateVector[0];
 
 			switch (stateVector[0]) {
@@ -197,7 +197,7 @@ public class HistoryWithoutInitialStepStatemachine
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A;
 		} else {
-			if (sCIDefault.e2) {
+			if (sCInterface.e2) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
@@ -209,7 +209,7 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state D. */
 	private void reactMain_region_B_r1_D() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			historyVector[0] = stateVector[0];
 
 			switch (stateVector[0]) {
@@ -230,7 +230,7 @@ public class HistoryWithoutInitialStepStatemachine
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A;
 		} else {
-			if (sCIDefault.e2) {
+			if (sCInterface.e2) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 

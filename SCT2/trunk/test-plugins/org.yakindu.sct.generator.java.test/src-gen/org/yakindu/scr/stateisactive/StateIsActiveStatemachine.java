@@ -2,7 +2,7 @@ package org.yakindu.scr.stateisactive;
 
 public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -16,7 +16,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		r1_R1A, r1_R1B, r2_R2A, r2_R2B, $NullState$
@@ -28,7 +28,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
 	public StateIsActiveStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -87,7 +87,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -109,12 +109,12 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseEvent1() {
-		sCIDefault.raiseEvent1();
+		sCInterface.raiseEvent1();
 	}
 
 	/* Entry action for statechart 'StateIsActive'. */
@@ -142,7 +142,7 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
 	/* The reactions of state R2A. */
 	private void reactR2_R2A() {
-		if (sCIDefault.event1) {
+		if (sCInterface.event1) {
 			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 

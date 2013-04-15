@@ -7,7 +7,7 @@ public interface IPerformanceTestStatemachine
 			ITimedStatemachine,
 			IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE1();
 		public void raiseE2();
 		public void raiseE3();
@@ -20,6 +20,6 @@ public interface IPerformanceTestStatemachine
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

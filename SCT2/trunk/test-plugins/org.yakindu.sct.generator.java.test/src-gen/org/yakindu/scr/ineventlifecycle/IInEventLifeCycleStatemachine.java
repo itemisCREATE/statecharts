@@ -3,13 +3,13 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IInEventLifeCycleStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE();
 		public int getI();
 		public void setI(int value);
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

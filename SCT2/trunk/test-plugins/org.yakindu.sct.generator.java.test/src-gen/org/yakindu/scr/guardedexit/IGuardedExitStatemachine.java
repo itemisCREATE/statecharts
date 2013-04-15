@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IGuardedExitStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE();
 		public boolean getGuard();
 		public void setGuard(boolean value);
@@ -12,6 +12,6 @@ public interface IGuardedExitStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

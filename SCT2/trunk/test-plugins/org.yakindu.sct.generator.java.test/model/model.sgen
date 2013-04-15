@@ -75,6 +75,11 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 			RuntimeService = true
 		}
+		
+		feature FunctionInlining {
+			inlineReactions = false
+		}
+		
 	}
 	statechart EnterState {
 		feature Outlet {

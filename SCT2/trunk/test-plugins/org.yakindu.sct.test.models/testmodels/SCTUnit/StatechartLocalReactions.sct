@@ -6,10 +6,10 @@
         <outgoingTransitions xmi:id="_RGfMkYn9EeGKqoh-gt8EXQ" target="_RGZtAYn9EeGKqoh-gt8EXQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_RGZtAYn9EeGKqoh-gt8EXQ" name="S1" incomingTransitions="_RGfMkYn9EeGKqoh-gt8EXQ _UvZM8In9EeGKqoh-gt8EXQ">
-        <outgoingTransitions xmi:id="_TsF84In9EeGKqoh-gt8EXQ" specification="" target="_TB-B0In9EeGKqoh-gt8EXQ"/>
+        <outgoingTransitions xmi:id="_TsF84In9EeGKqoh-gt8EXQ" specification="[true]" target="_TB-B0In9EeGKqoh-gt8EXQ"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_TB-B0In9EeGKqoh-gt8EXQ" name="S2" incomingTransitions="_TsF84In9EeGKqoh-gt8EXQ">
-        <outgoingTransitions xmi:id="_UvZM8In9EeGKqoh-gt8EXQ" specification="" target="_RGZtAYn9EeGKqoh-gt8EXQ"/>
+        <outgoingTransitions xmi:id="_UvZM8In9EeGKqoh-gt8EXQ" specification="[true]" target="_RGZtAYn9EeGKqoh-gt8EXQ"/>
       </vertices>
     </regions>
     <regions xmi:id="_RZW2oI1dEeGmRdyimotffQ" name="region2">

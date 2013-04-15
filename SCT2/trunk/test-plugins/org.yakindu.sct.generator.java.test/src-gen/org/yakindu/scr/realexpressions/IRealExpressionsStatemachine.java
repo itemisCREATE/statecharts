@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IRealExpressionsStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE1();
 		public double getMyReal1();
 		public void setMyReal1(double value);
@@ -48,6 +48,6 @@ public interface IRealExpressionsStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

@@ -2,7 +2,7 @@ package org.yakindu.scr.simplehierachy;
 
 public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -16,7 +16,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_B_subregion1_B1, $NullState$
@@ -28,7 +28,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
 	public SimpleHierachyStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -69,7 +69,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -92,12 +92,12 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseEvent1() {
-		sCIDefault.raiseEvent1();
+		sCInterface.raiseEvent1();
 	}
 
 	/* Entry action for statechart 'SimpleHierachy'. */
@@ -110,7 +110,7 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.event1) {
+		if (sCInterface.event1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 

@@ -4,7 +4,7 @@ public class RealExpressionsStatemachine
 		implements
 			IRealExpressionsStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -218,7 +218,7 @@ public class RealExpressionsStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -230,7 +230,7 @@ public class RealExpressionsStatemachine
 
 	public RealExpressionsStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -242,53 +242,53 @@ public class RealExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.myReal1 = 0.0;
+		sCInterface.myReal1 = 0.0;
 
-		sCIDefault.myReal2 = 0.0;
+		sCInterface.myReal2 = 0.0;
 
-		sCIDefault.less = false;
+		sCInterface.less = false;
 
-		sCIDefault.greater = false;
+		sCInterface.greater = false;
 
-		sCIDefault.equalOrLess = false;
+		sCInterface.equalOrLess = false;
 
-		sCIDefault.equalOrGreater = false;
+		sCInterface.equalOrGreater = false;
 
-		sCIDefault.equal = false;
+		sCInterface.equal = false;
 
-		sCIDefault.notEqual = false;
+		sCInterface.notEqual = false;
 
-		sCIDefault.plus = false;
+		sCInterface.plus = false;
 
-		sCIDefault.minus = false;
+		sCInterface.minus = false;
 
-		sCIDefault.multiply = false;
+		sCInterface.multiply = false;
 
-		sCIDefault.division = false;
+		sCInterface.division = false;
 
-		sCIDefault.modulo = false;
+		sCInterface.modulo = false;
 
-		sCIDefault.negat = 0.0;
+		sCInterface.negat = 0.0;
 
-		sCIDefault.complement = false;
+		sCInterface.complement = false;
 
-		sCIDefault.multiAssign = 2.2;
+		sCInterface.multiAssign = 2.2;
 
-		sCIDefault.divAssign = 22.79;
+		sCInterface.divAssign = 22.79;
 
-		sCIDefault.plusAssign = 2.2;
+		sCInterface.plusAssign = 2.2;
 
-		sCIDefault.minusAssign = 8.6;
+		sCInterface.minusAssign = 8.6;
 
-		sCIDefault.moduloAssign = false;
+		sCInterface.moduloAssign = false;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.myReal1 = 5.3;
+		sCInterface.myReal1 = 5.3;
 
-		sCIDefault.myReal2 = 10.6;
+		sCInterface.myReal2 = 10.6;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
@@ -314,7 +314,7 @@ public class RealExpressionsStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -332,153 +332,153 @@ public class RealExpressionsStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE1() {
-		sCIDefault.raiseE1();
+		sCInterface.raiseE1();
 	}
 
 	public double getMyReal1() {
-		return sCIDefault.getMyReal1();
+		return sCInterface.getMyReal1();
 	}
 
 	public void setMyReal1(double value) {
-		sCIDefault.setMyReal1(value);
+		sCInterface.setMyReal1(value);
 	}
 	public double getMyReal2() {
-		return sCIDefault.getMyReal2();
+		return sCInterface.getMyReal2();
 	}
 
 	public void setMyReal2(double value) {
-		sCIDefault.setMyReal2(value);
+		sCInterface.setMyReal2(value);
 	}
 	public boolean getLess() {
-		return sCIDefault.getLess();
+		return sCInterface.getLess();
 	}
 
 	public void setLess(boolean value) {
-		sCIDefault.setLess(value);
+		sCInterface.setLess(value);
 	}
 	public boolean getGreater() {
-		return sCIDefault.getGreater();
+		return sCInterface.getGreater();
 	}
 
 	public void setGreater(boolean value) {
-		sCIDefault.setGreater(value);
+		sCInterface.setGreater(value);
 	}
 	public boolean getEqualOrLess() {
-		return sCIDefault.getEqualOrLess();
+		return sCInterface.getEqualOrLess();
 	}
 
 	public void setEqualOrLess(boolean value) {
-		sCIDefault.setEqualOrLess(value);
+		sCInterface.setEqualOrLess(value);
 	}
 	public boolean getEqualOrGreater() {
-		return sCIDefault.getEqualOrGreater();
+		return sCInterface.getEqualOrGreater();
 	}
 
 	public void setEqualOrGreater(boolean value) {
-		sCIDefault.setEqualOrGreater(value);
+		sCInterface.setEqualOrGreater(value);
 	}
 	public boolean getEqual() {
-		return sCIDefault.getEqual();
+		return sCInterface.getEqual();
 	}
 
 	public void setEqual(boolean value) {
-		sCIDefault.setEqual(value);
+		sCInterface.setEqual(value);
 	}
 	public boolean getNotEqual() {
-		return sCIDefault.getNotEqual();
+		return sCInterface.getNotEqual();
 	}
 
 	public void setNotEqual(boolean value) {
-		sCIDefault.setNotEqual(value);
+		sCInterface.setNotEqual(value);
 	}
 	public boolean getPlus() {
-		return sCIDefault.getPlus();
+		return sCInterface.getPlus();
 	}
 
 	public void setPlus(boolean value) {
-		sCIDefault.setPlus(value);
+		sCInterface.setPlus(value);
 	}
 	public boolean getMinus() {
-		return sCIDefault.getMinus();
+		return sCInterface.getMinus();
 	}
 
 	public void setMinus(boolean value) {
-		sCIDefault.setMinus(value);
+		sCInterface.setMinus(value);
 	}
 	public boolean getMultiply() {
-		return sCIDefault.getMultiply();
+		return sCInterface.getMultiply();
 	}
 
 	public void setMultiply(boolean value) {
-		sCIDefault.setMultiply(value);
+		sCInterface.setMultiply(value);
 	}
 	public boolean getDivision() {
-		return sCIDefault.getDivision();
+		return sCInterface.getDivision();
 	}
 
 	public void setDivision(boolean value) {
-		sCIDefault.setDivision(value);
+		sCInterface.setDivision(value);
 	}
 	public boolean getModulo() {
-		return sCIDefault.getModulo();
+		return sCInterface.getModulo();
 	}
 
 	public void setModulo(boolean value) {
-		sCIDefault.setModulo(value);
+		sCInterface.setModulo(value);
 	}
 	public double getNegat() {
-		return sCIDefault.getNegat();
+		return sCInterface.getNegat();
 	}
 
 	public void setNegat(double value) {
-		sCIDefault.setNegat(value);
+		sCInterface.setNegat(value);
 	}
 	public boolean getComplement() {
-		return sCIDefault.getComplement();
+		return sCInterface.getComplement();
 	}
 
 	public void setComplement(boolean value) {
-		sCIDefault.setComplement(value);
+		sCInterface.setComplement(value);
 	}
 	public double getMultiAssign() {
-		return sCIDefault.getMultiAssign();
+		return sCInterface.getMultiAssign();
 	}
 
 	public void setMultiAssign(double value) {
-		sCIDefault.setMultiAssign(value);
+		sCInterface.setMultiAssign(value);
 	}
 	public double getDivAssign() {
-		return sCIDefault.getDivAssign();
+		return sCInterface.getDivAssign();
 	}
 
 	public void setDivAssign(double value) {
-		sCIDefault.setDivAssign(value);
+		sCInterface.setDivAssign(value);
 	}
 	public double getPlusAssign() {
-		return sCIDefault.getPlusAssign();
+		return sCInterface.getPlusAssign();
 	}
 
 	public void setPlusAssign(double value) {
-		sCIDefault.setPlusAssign(value);
+		sCInterface.setPlusAssign(value);
 	}
 	public double getMinusAssign() {
-		return sCIDefault.getMinusAssign();
+		return sCInterface.getMinusAssign();
 	}
 
 	public void setMinusAssign(double value) {
-		sCIDefault.setMinusAssign(value);
+		sCInterface.setMinusAssign(value);
 	}
 	public boolean getModuloAssign() {
-		return sCIDefault.getModuloAssign();
+		return sCInterface.getModuloAssign();
 	}
 
 	public void setModuloAssign(boolean value) {
-		sCIDefault.setModuloAssign(value);
+		sCInterface.setModuloAssign(value);
 	}
 
 	/* Entry action for statechart 'RealExpressions'. */
@@ -491,43 +491,43 @@ public class RealExpressionsStatemachine
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.less = sCIDefault.myReal1 < sCIDefault.myReal2;
+			sCInterface.less = sCInterface.myReal1 < sCInterface.myReal2;
 
-			sCIDefault.greater = sCIDefault.myReal1 > sCIDefault.myReal2;
+			sCInterface.greater = sCInterface.myReal1 > sCInterface.myReal2;
 
-			sCIDefault.equalOrLess = sCIDefault.myReal1 <= sCIDefault.myReal2;
+			sCInterface.equalOrLess = sCInterface.myReal1 <= sCInterface.myReal2;
 
-			sCIDefault.equalOrGreater = sCIDefault.myReal1 >= sCIDefault.myReal2;
+			sCInterface.equalOrGreater = sCInterface.myReal1 >= sCInterface.myReal2;
 
-			sCIDefault.equal = sCIDefault.myReal1 == sCIDefault.myReal2;
+			sCInterface.equal = sCInterface.myReal1 == sCInterface.myReal2;
 
-			sCIDefault.notEqual = sCIDefault.myReal1 != sCIDefault.myReal2;
+			sCInterface.notEqual = sCInterface.myReal1 != sCInterface.myReal2;
 
-			sCIDefault.plus = (15.89 <= (sCIDefault.myReal1 + sCIDefault.myReal2) && (sCIDefault.myReal1 + sCIDefault.myReal2) <= 16.91);
+			sCInterface.plus = (15.89 <= (sCInterface.myReal1 + sCInterface.myReal2) && (sCInterface.myReal1 + sCInterface.myReal2) <= 16.91);
 
-			sCIDefault.minus = (5.29 <= (sCIDefault.myReal2 - sCIDefault.myReal1) && (sCIDefault.myReal1 - sCIDefault.myReal2) <= 5.31);
+			sCInterface.minus = (5.29 <= (sCInterface.myReal2 - sCInterface.myReal1) && (sCInterface.myReal1 - sCInterface.myReal2) <= 5.31);
 
-			sCIDefault.multiply = (56.17 <= (sCIDefault.myReal1 * sCIDefault.myReal2) && (sCIDefault.myReal1 * sCIDefault.myReal2) <= 56.19);
+			sCInterface.multiply = (56.17 <= (sCInterface.myReal1 * sCInterface.myReal2) && (sCInterface.myReal1 * sCInterface.myReal2) <= 56.19);
 
-			sCIDefault.division = (1.9 <= (sCIDefault.myReal2 / sCIDefault.myReal1) && (sCIDefault.myReal1 / sCIDefault.myReal2) <= 2.1);
+			sCInterface.division = (1.9 <= (sCInterface.myReal2 / sCInterface.myReal1) && (sCInterface.myReal1 / sCInterface.myReal2) <= 2.1);
 
-			sCIDefault.modulo = (-0.1 <= (sCIDefault.myReal2 % sCIDefault.myReal1) && (sCIDefault.myReal1 % sCIDefault.myReal2) <= 0.1);
+			sCInterface.modulo = (-0.1 <= (sCInterface.myReal2 % sCInterface.myReal1) && (sCInterface.myReal1 % sCInterface.myReal2) <= 0.1);
 
-			sCIDefault.negat = -sCIDefault.myReal1;
+			sCInterface.negat = -sCInterface.myReal1;
 
-			sCIDefault.multiAssign *= sCIDefault.myReal1;
+			sCInterface.multiAssign *= sCInterface.myReal1;
 
-			sCIDefault.divAssign /= sCIDefault.myReal1;
+			sCInterface.divAssign /= sCInterface.myReal1;
 
-			sCIDefault.plusAssign += sCIDefault.myReal1;
+			sCInterface.plusAssign += sCInterface.myReal1;
 
-			sCIDefault.minusAssign -= sCIDefault.myReal1;
+			sCInterface.minusAssign -= sCInterface.myReal1;
 
-			sCIDefault.moduloAssign = (-0.1 <= (sCIDefault.myReal1 %= sCIDefault.myReal1));
+			sCInterface.moduloAssign = (-0.1 <= (sCInterface.myReal1 %= sCInterface.myReal1));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_StateB;

@@ -4,7 +4,7 @@ public class InEventLifeCycleStatemachine
 		implements
 			IInEventLifeCycleStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -28,7 +28,7 @@ public class InEventLifeCycleStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, $NullState$
@@ -40,7 +40,7 @@ public class InEventLifeCycleStatemachine
 
 	public InEventLifeCycleStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -52,7 +52,7 @@ public class InEventLifeCycleStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.i = 0;
+		sCInterface.i = 0;
 	}
 
 	public void enter() {
@@ -77,7 +77,7 @@ public class InEventLifeCycleStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -93,20 +93,20 @@ public class InEventLifeCycleStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE() {
-		sCIDefault.raiseE();
+		sCInterface.raiseE();
 	}
 
 	public int getI() {
-		return sCIDefault.getI();
+		return sCInterface.getI();
 	}
 
 	public void setI(int value) {
-		sCIDefault.setI(value);
+		sCInterface.setI(value);
 	}
 
 	/* Entry action for statechart 'InEventLifeCycle'. */
@@ -119,8 +119,8 @@ public class InEventLifeCycleStatemachine
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.e) {
-			sCIDefault.i += 1;
+		if (sCInterface.e) {
+			sCInterface.i += 1;
 		}
 	}
 
