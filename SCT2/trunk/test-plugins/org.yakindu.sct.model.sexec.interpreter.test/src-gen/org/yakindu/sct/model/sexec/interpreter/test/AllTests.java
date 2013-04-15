@@ -27,8 +27,9 @@ import org.junit.runners.Suite.SuiteClasses;
 		PriorityValuesTest.class, RaiseEventTest.class,
 		SameNameDifferentRegionTest.class, ShallowHistoryTest.class,
 		SimpleHierachyTest.class, StateIsActiveTest.class,
-		StatechartLocalReactionsTest.class, StringExpressionsTest.class,
-		SyncForkTest.class, SyncJoinTest.class, ValuedEventTest.class,
-		SimpleEventTest.class, STextKeywordsInStatesAndRegionsTest.class})
+		StatechartLocalReactionsTest.class, StateWithEmptyRegionTest.class,
+		StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
+		ValuedEventTest.class, SimpleEventTest.class,
+		STextKeywordsInStatesAndRegionsTest.class})
 public class AllTests {
 }

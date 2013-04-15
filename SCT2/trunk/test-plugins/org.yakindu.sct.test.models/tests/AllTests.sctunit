@@ -12,8 +12,12 @@ testsuite AllTests {
 	IntegerExpressions,
 	InEventLifeCycle, InternalEventLifeCycle, OutEventLifeCycle,
 	Parenthesis, PriorityValues , RaiseEvent , SameNameDifferentRegion , ShallowHistory ,
-	SimpleHierachy , StateIsActive , StatechartLocalReactions , StringExpressions, SyncFork ,
-	SyncJoin , ValuedEvent , simpleEvent,
-	
+	SimpleHierachy , StateIsActive , StatechartLocalReactions , 
+	StateWithEmptyRegion,
+	StringExpressions, 
+	SyncFork,
+	SyncJoin, 
+	ValuedEvent, 
+	simpleEvent,
 	STextKeywordsInStatesAndRegions 
 } 
