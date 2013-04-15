@@ -1,6 +1,8 @@
-package org.yakindu.scr.safe;
+package org.yakindu.scr.namedinterfaceaccess;
 
-public class SafeStatemachine implements ISafeStatemachine {
+public class NamedInterfaceAccessStatemachine
+		implements
+			INamedInterfaceAccessStatemachine {
 
 	private final class SCISafeImpl implements SCISafe {
 
@@ -79,7 +81,7 @@ public class SafeStatemachine implements ISafeStatemachine {
 
 	private int nextStateIndex;
 
-	public SafeStatemachine() {
+	public NamedInterfaceAccessStatemachine() {
 
 		sCISafe = new SCISafeImpl();
 		sCIUser = new SCIUserImpl();
@@ -193,11 +195,11 @@ public class SafeStatemachine implements ISafeStatemachine {
 		return sCIUser;
 	}
 
-	/* Entry action for statechart 'Safe'. */
+	/* Entry action for statechart 'NamedInterfaceAccess'. */
 	private void entryAction() {
 	}
 
-	/* Exit action for state 'Safe'. */
+	/* Exit action for state 'NamedInterfaceAccess'. */
 	private void exitAction() {
 	}
 
