@@ -22,6 +22,7 @@ import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createExit
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createLocalReaction;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionEffect;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionTrigger;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createRegularEventSpec;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createValue;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableAssignment;
@@ -209,7 +210,11 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		LocalReaction entryAction = _createEntryAction(s1);
 		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
 				_createValue(42), (ReactionEffect) entryAction.getEffect());
-
+		
+		Entry e = _createEntry(EntryKind.INITIAL, null, r);
+		Transition t = _createTransition(e, s1);
+		
+		
 		ExecutionFlow flow = sequencer.transform(sc);
 
 		ExecutionState _s1 = flow.getStates().get(0);
@@ -255,8 +260,14 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 						_createTransition(e, s3);
 					}
 				}
+				
+				Entry e = _createEntry(EntryKind.INITIAL, null, r);
+				_createTransition(e, s1);
+
 			}
 		}
+		
+
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
@@ -268,6 +279,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		ExecutionState _s3 = flow.getStates().get(2);
 		assertEquals("s3", _s3.getSimpleName());
+
 
 		assertNotNull(_s1.getEntryAction());
 		assertNotNull(_s1.getEnterSequences().get(0));
@@ -1041,10 +1053,12 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 			Transition t_s4_s5 = _createTransition(findState(sc, "s4"),
 					findState(sc, "s5"));
+			_createReactionTrigger(t_s4_s5);
 			_createRegularEventSpec(e1, (ReactionTrigger) t_s4_s5.getTrigger());
 
 			Transition t_s3_s6 = _createTransition(findState(sc, "s3"),
 					findState(sc, "s6"));
+			_createReactionTrigger(t_s3_s6);
 			_createRegularEventSpec(e1, (ReactionTrigger) t_s3_s6.getTrigger());
 
 		}
@@ -1131,6 +1145,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 								Transition t_s4_fs = _createTransition(
 										findState(sc, "s4"), fs);
+								_createReactionTrigger(t_s4_fs);
 								_createRegularEventSpec(e1,
 										(ReactionTrigger) t_s4_fs.getTrigger());
 
@@ -1149,6 +1164,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 			Transition t_s3_s6 = _createTransition(findState(sc, "s3"),
 					findState(sc, "s6"));
+			_createReactionTrigger(t_s3_s6);
 			_createRegularEventSpec(e1, (ReactionTrigger) t_s3_s6.getTrigger());
 
 		}
@@ -1211,6 +1227,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 				FinalState fs = _createFinalState(r);
 
 				Transition t_s1_fs = _createTransition(s1, fs);
+				_createReactionTrigger(t_s1_fs);
 				_createRegularEventSpec(e1,
 						(ReactionTrigger) t_s1_fs.getTrigger());
 

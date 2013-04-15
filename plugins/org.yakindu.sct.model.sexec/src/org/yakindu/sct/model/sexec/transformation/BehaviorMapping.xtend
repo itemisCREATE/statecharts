@@ -282,6 +282,20 @@ class BehaviorMapping {
 		return r
 	}
 	
+	def dispatch Reaction mapTransition(Transition t, Choice source, Vertex target) {
+		val r = t.create 
+		if (t.trigger != null) {
+			r.check = mapToCheck(t.trigger) 
+		} else {
+			r.check = sexecFactory.createCheck
+			r.check.condition = true.expression
+		}
+		r.effect = mapToEffect(newArrayList(t), r)
+		
+		return r
+	}
+	
+
 	
 	/** Ignore transitions from pseudostates to synchronization nodes.
 	 * 
@@ -304,7 +318,6 @@ class BehaviorMapping {
 		
 		// build the condition
 		var Statement condition = r.check.condition
-//		if (t.trigger != null) condition = t.trigger.buildCondition
 		
 		val joinTransitions = target.incomingTransitions
 			.filter( jt | jt.source instanceof State)
@@ -336,14 +349,12 @@ class BehaviorMapping {
 	}
 	
 	
-	def dispatch Check mapToCheck(Trigger tr) { null }
-	  
-	def dispatch Check mapToCheck(ReactionTrigger tr) {
+	def Check mapToCheck(Trigger tr) { 
 		val check = tr.createCheck
 		check.condition = tr.buildCondition;
 		return check
-	}
-	
+	 }
+	  	
 	def ExecutionFlow mapLocalReactions(Statechart statechart, ExecutionFlow r){
 		r.reactions.addAll(statechart.localReactions
 				.filter( typeof( LocalReaction ))
@@ -353,7 +364,6 @@ class BehaviorMapping {
 					|| ! (lr.trigger as ReactionTrigger).triggers.filter( t | 
 						t instanceof RegularEventSpec 
 						|| t instanceof TimeEventSpec 
-//						|| t instanceof OnCycleEvent 
 						|| t instanceof AlwaysEvent
 					).empty
 				)
@@ -378,7 +388,6 @@ class BehaviorMapping {
 					|| ! (lr.trigger as ReactionTrigger).triggers.filter( t | 
 						t instanceof RegularEventSpec 
 						|| t instanceof TimeEventSpec 
-//						|| t instanceof OnCycleEvent 
 						|| t instanceof AlwaysEvent
 					).toList.empty
 				)
@@ -630,9 +639,13 @@ class BehaviorMapping {
 
 
 	def dispatch Statement buildCondition (DefaultTrigger t) { 
+		true.expression
+	 }
+
+	def Statement expression (boolean b) { 
 		val r = stext.factory.createPrimitiveValueExpression
 		val BoolLiteral boolLit = stext.factory.createBoolLiteral
-		boolLit.value = true		
+		boolLit.value = b		
 		r.value = boolLit
 		return r
 	 }

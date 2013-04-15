@@ -45,12 +45,13 @@ import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgraph.Exit
+import org.yakindu.sct.model.sgraph.Trigger
  
 
 
@@ -151,6 +152,25 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	}
 	
 	
+	def ExecutionEntry create r : sexecFactory.createExecutionEntry create(Exit exit){
+		if (exit != null) {
+			val region = exit.eContainer as Region
+			val regionName = region.name.toFirstUpper
+			val stateName = if(region.eContainer instanceof State) {(region.eContainer as State).name.toFirstUpper}
+			val exitName = {if (!exit.name?.empty) exit.name else "default"}
+			r.simpleName = {if (regionName!= null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+exitName
+			r.name = exit.fullyQualifiedName.toString.replaceAll(" ", "")	
+			r.sourceElement = exit	
+			val seq = sexec.factory.createSequence
+			seq.name = "react"
+			seq.comment = "Default react sequence for exit " + exitName
+
+			r.reactSequence = seq
+			exit.outgoingTransitions.forEach(t | r.reactions+=t.create)
+		}
+	}
+	
+	
 	def ExecutionSynchronization create r : sexecFactory.createExecutionSynchronization create(Synchronization sync){
 		if (sync != null) {
 			val n = sync.parentRegion.vertices.filter( typeof ( Synchronization) ).toList.indexOf(sync)
@@ -177,9 +197,16 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	}
 	
 	
-	def Check create r : sexecFactory.createCheck createCheck(ReactionTrigger tr){
+	def Check create r : sexecFactory.createCheck createCheck(Trigger tr){
 		r.name = tr.reaction.id
 	}
+
+//	def dispatch Check create r : sexecFactory.createCheck createCheck(DefaultTrigger tr){
+//		r.name = tr.reaction.id
+//	}
+//
+//	def dispatch Check createCheck(Trigger tr){
+//	}
 	
 	def Reaction create r : sexecFactory.createReaction create(Transition tr){
 		r.name = tr.id
@@ -266,7 +293,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	def dispatch ExecutionNode mapped(FinalState s) { s.create }
 	def dispatch ExecutionNode mapped(Choice s) { s.create }
 	def dispatch ExecutionNode mapped(Entry s) { s.create }
-//	def dispatch ExecutionNode mapped(Exit s) { s.create }
+	def dispatch ExecutionNode mapped(Exit s) { s.create }
 	def dispatch ExecutionNode mapped(Synchronization s) { s.create }
 
 

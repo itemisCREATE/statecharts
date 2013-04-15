@@ -22,6 +22,7 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.sgraph.Synchronization
+import org.yakindu.sct.model.sgraph.Exit
 
  
  
@@ -68,22 +69,6 @@ class StatechartExtensions {
 	
 	
 	/** 
-	 * Provides a list of all TimeEventSpecs that are defined in the context of 'statechart'.
-	 */
-	def List<TimeEventSpec> timeEventSpecs(Statechart state) { 
-		// TODO: also query local reactions
-		var tesList = new ArrayList<TimeEventSpec>()
-
-		state.localReactions.fold(tesList, 
-			[s, r | {
-				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
-				s
-			}]
-		)
-				
-		return tesList
-	}
-	/** 
 	 * Provides a list of all TimeEventSpecs that are defined in the context of 'state'.
 	 */
 	def dispatch List<TimeEventSpec> timeEventSpecs(State state) { 
@@ -124,6 +109,23 @@ class StatechartExtensions {
 		return tesList
 	}
 
+//	/** 
+//	 * Provides a list of all TimeEventSpecs that are defined in the context of 'statechart'.
+//	 */
+//	def List<TimeEventSpec> timeEventSpecs(Statechart state) { 
+//		// TODO: also query local reactions
+//		var tesList = new ArrayList<TimeEventSpec>()
+//
+//		state.localReactions.fold(tesList, 
+//			[s, r | {
+//				EcoreUtil2::eAllContentsAsList(r).filter(typeof (TimeEventSpec)).forEach(tes | s.add(tes))
+//				s
+//			}]
+//		)
+//				
+//		return tesList
+//	}
+
 	def dispatch ReactiveElement reactiveElement(Reaction r) {
 		r.scope.reactiveElement		
 	}
@@ -134,13 +136,15 @@ class StatechartExtensions {
 	}
 	
 	
+	def dispatch ReactiveElement reactiveElement(Scope s) {
+		if (s.eContainer instanceof ReactiveElement) s.eContainer as ReactiveElement
+	}	
+
+
 	def Scope scope(Reaction r) {
 		if (r.eContainer instanceof Scope) r.eContainer as Scope
 	} 
 
-	def ReactiveElement reactiveElement(Scope s) {
-		if (s.eContainer instanceof ReactiveElement) s.eContainer as ReactiveElement
-	}	
 	
 	def List<RegularState> allRegularStates(Statechart sc) {
 		var content = EcoreUtil2::eAllContentsAsList(sc)
@@ -167,6 +171,10 @@ class StatechartExtensions {
 
 	def Iterable<Entry> allEntries(Statechart sc) {
 		return sc.eAllContents.filter( typeof(Entry)).toIterable
+	}
+	
+	def Iterable<Exit> allExits(Statechart sc) {
+		return sc.eAllContents.filter( typeof(Exit)).toIterable
 	}
 	
 	def Iterable<Synchronization> allSynchronizations(Statechart sc) {

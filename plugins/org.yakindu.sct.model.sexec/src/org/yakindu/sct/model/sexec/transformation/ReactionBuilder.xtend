@@ -20,6 +20,10 @@ import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sgraph.Synchronization
+import org.yakindu.sct.model.sexec.Reaction
+import org.yakindu.sct.model.sgraph.Exit
+import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.stext.stext.DefaultTrigger
 
 
 class ReactionBuilder {
@@ -63,6 +67,7 @@ class ReactionBuilder {
 		
 		sc.allChoices().forEach( choice | choice.defineReaction() )
 		sc.allSynchronizations().forEach( sync | sync.defineReaction() )
+		sc.allExits().forEach( sync | sync.defineReaction() )
 	}
 	
 
@@ -71,8 +76,11 @@ class ReactionBuilder {
 		val execChoice = choice.create
 		
 		// move the default transition to the end of the reaction list
-		val _default_ = execChoice.reactions.filter([ r | r.check.alwaysTrue ]).toList.head
-		if ( _default_ != null ) execChoice.reactions.move(execChoice.reactions.size -1, _default_)
+		val defaultTransition = choice.outgoingTransitions.filter( t | t.trigger == null || t.trigger instanceof DefaultTrigger ).head
+		if ( defaultTransition != null ) {
+			val defaultReaction = defaultTransition.create		
+			execChoice.reactions.move(execChoice.reactions.size -1, defaultReaction)
+		}
 		// TODO: raise an error if no default exists 
 		
 		val stateReaction = execChoice.createReactionSequence(null)
@@ -86,9 +94,7 @@ class ReactionBuilder {
 		return execChoice.reactSequence
 	}	
 	
-	/**
-	 * TODO : support fork...
-	 */
+
 	def Sequence defineReaction(Synchronization sync) {
 	
 		val execSync = sync.create
@@ -107,6 +113,29 @@ class ReactionBuilder {
 	}	
 	
 
+	def Sequence defineReaction(Exit it) {
+	
+		val execExit = it.create
+		val realName = if (name.empty) 'default' else name 
+				
+		execExit.reactSequence.name = 'react'
+		execExit.reactSequence.comment = 'The reactions of exit ' + realName + '.'
+		
+		// find the transition that relates to the matching exit point
+		val outTransitions = (it.parentRegion.composite as Vertex).outgoingTransitions
+		var exitTrans = outTransitions.filter( t | t.trigger == null && t.exitPointName.equals(realName)).head
+		if (exitTrans == null) exitTrans = outTransitions.filter( t | t.trigger == null && t.exitPointName.equals('default')).head
+		
+		if (exitTrans != null) {
+			val exitReaction = exitTrans.create
+			execExit.reactSequence.steps.add(exitReaction.effect.newCall)
+		}
+		
+		if ( trace.addTraceSteps ) execExit.reactSequence.steps.add(0,it.create.newTraceNodeExecuted)
+		
+		return execExit.reactSequence
+	}	
+
 	def alwaysTrue(Check check) {
 		if (check != null && check.condition instanceof PrimitiveValueExpression) {
 			val pve = (check.condition as PrimitiveValueExpression)
@@ -115,6 +144,12 @@ class ReactionBuilder {
 		
 		return false
 	}
+	
+	
+	def unchecked(Reaction it) {
+		return (check == null || check.condition == null )
+	}
+
 
 	def Sequence defineCycle(RegularState state) {
 	
@@ -137,7 +172,7 @@ class ReactionBuilder {
 		val cycle = sexec.factory.createSequence
 		cycle.name = "react"
 		
-		val localReactions = state.reactions.filter(r | ! r.transition).toList
+		val localReactions = state.reactions.filter(r | ! r.transition ).toList
 		var localSteps = sexec.factory.createSequence
 		localSteps.steps.addAll(localReactions.map(lr | {
 				var ifStep = sexec.factory.createIf
@@ -149,7 +184,7 @@ class ReactionBuilder {
 		if (localSteps.steps.empty) localSteps = null
 				
 				
-		val transitionReactions = state.reactions.filter(r | r.transition).toList
+		val transitionReactions = state.reactions.filter(r | r.transition && ! r.unchecked ).toList
 		val transitionStep = transitionReactions.reverseView.fold(localSteps as Step, [s, reaction | {
 				var ifStep = sexec.factory.createIf
 				ifStep.check = reaction.check.newRef		

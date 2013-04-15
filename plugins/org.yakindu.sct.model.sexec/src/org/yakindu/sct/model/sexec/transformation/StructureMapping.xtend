@@ -38,7 +38,7 @@ class StructureMapping {
 	 * This includes creating the scopes and adding all relevant declarations. Empty scopes wont be mapped.
 	 */
 	def ExecutionFlow mapScopes(Statechart sc, ExecutionFlow flow) {
-		flow.scopes.addAll(sc.scopes.map(scope | scope.map))
+		flow.scopes.addAll(sc.scopes.map(scope | scope.mapScope))
 		flow
 	}
 	
@@ -46,7 +46,7 @@ class StructureMapping {
 	/**
 	 *  
 	 */
-	def Scope map(Scope scope) {
+	def Scope mapScope(Scope scope) {
 		val _scope = scope.createScope
 		_scope.declarations.addAll(scope.declarations.map(decl | decl.map).filter(e | e != null))
 		return _scope
@@ -130,6 +130,7 @@ class StructureMapping {
 	def ExecutionFlow mapPseudoStates(Statechart statechart, ExecutionFlow r){
 		r.nodes.addAll( statechart.allChoices.map( choice | choice.create ) );
 		r.nodes.addAll( statechart.allEntries.map( entry | entry.create ) );
+		r.nodes.addAll( statechart.allExits.map( exit | exit.create ) );
 		r.nodes.addAll( statechart.allSynchronizations.map( sync | sync.create ) );
 		return r
 	}

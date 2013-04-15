@@ -9,15 +9,7 @@ import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createRe
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createState;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
 import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createTransition;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEventDefinition;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInternalScope;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createOperation;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createOperationCall;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionEffect;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionTrigger;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createRegularEventSpec;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
 
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.Call;
@@ -50,7 +42,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 	public void testScopeName() {
 		InterfaceScope scope = _createInterfaceScope("abc", null);
 		assertEquals(scope.getName(),
-				((InterfaceScope) structureMapping.map(scope)).getName());
+				((InterfaceScope) structureMapping.mapScope(scope)).getName());
 	}
 
 	/**
@@ -59,7 +51,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 	@Test
 	public void testMapEmptyInternalScope() {
 		InternalScope scope = _createInternalScope(null);
-		Scope _scope = structureMapping.map(scope);
+		Scope _scope = structureMapping.mapScope(scope);
 
 		assertTrue(_scope instanceof InternalScope);
 	}
@@ -73,7 +65,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
 				scope);
 
-		Scope _scope = structureMapping.map(scope);
+		Scope _scope = structureMapping.mapScope(scope);
 
 		assertTrue(_scope instanceof InterfaceScope);
 		assertEquals(3, _scope.getDeclarations().size());
@@ -137,6 +129,8 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		State s1 = _createState("S1", r);
 		State s2 = _createState("S2", r);
 		Transition t = _createTransition(s1, s2);
+		ReactionTrigger tr = _createReactionTrigger(t);
+		tr.setGuardExpression(_createValue(true));
 		ReactionEffect tr1 = _createReactionEffect(t);
 		FeatureCall _operationCall = _createOperationCall(_operation);
 		tr1.getActions().add(_operationCall);
