@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IOutEventLifeCycleStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE();
 		public boolean isRaisedF();
 		public boolean getF_available_in_cycle();
@@ -13,6 +13,6 @@ public interface IOutEventLifeCycleStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

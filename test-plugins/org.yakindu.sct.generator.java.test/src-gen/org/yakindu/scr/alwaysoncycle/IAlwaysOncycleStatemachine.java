@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IAlwaysOncycleStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public int getValue();
 		public void setValue(int value);
 		public boolean getV2();
@@ -11,6 +11,6 @@ public interface IAlwaysOncycleStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

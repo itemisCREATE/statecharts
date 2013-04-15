@@ -2,7 +2,7 @@ package org.yakindu.scr.javakeywords;
 
 public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean while_ID;
 
@@ -486,7 +486,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		goto_abstract, goto_boolean, goto_void, goto_void_volatile_transient, goto_void_volatile_transient_throw_false, $NullState$
@@ -499,7 +499,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	public JavaKeywordsStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -514,197 +514,197 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.abstract_ID = false;
+		sCInterface.abstract_ID = false;
 
-		sCIDefault.assert_ID = false;
+		sCInterface.assert_ID = false;
 
-		sCIDefault.boolean_ID = false;
+		sCInterface.boolean_ID = false;
 
-		sCIDefault.break_ID = false;
+		sCInterface.break_ID = false;
 
-		sCIDefault.byte_ID = false;
+		sCInterface.byte_ID = false;
 
-		sCIDefault.case_ID = false;
+		sCInterface.case_ID = false;
 
-		sCIDefault.catch_ID = false;
+		sCInterface.catch_ID = false;
 
-		sCIDefault.char_ID = false;
+		sCInterface.char_ID = false;
 
-		sCIDefault.class_ID = false;
+		sCInterface.class_ID = false;
 
-		sCIDefault.const_ID = false;
+		sCInterface.const_ID = false;
 
-		sCIDefault.continue_ID = false;
+		sCInterface.continue_ID = false;
 
-		sCIDefault.do_ID = false;
+		sCInterface.do_ID = false;
 
-		sCIDefault.double_ID = false;
+		sCInterface.double_ID = false;
 
-		sCIDefault.enum_ID = false;
+		sCInterface.enum_ID = false;
 
-		sCIDefault.extends_ID = false;
+		sCInterface.extends_ID = false;
 
-		sCIDefault.final_ID = false;
+		sCInterface.final_ID = false;
 
-		sCIDefault.finally_ID = false;
+		sCInterface.finally_ID = false;
 
-		sCIDefault.float_ID = false;
+		sCInterface.float_ID = false;
 
-		sCIDefault.for_ID = false;
+		sCInterface.for_ID = false;
 
-		sCIDefault.goto_ID = false;
+		sCInterface.goto_ID = false;
 
-		sCIDefault.if_ID = false;
+		sCInterface.if_ID = false;
 
-		sCIDefault.implements_ID = false;
+		sCInterface.implements_ID = false;
 
-		sCIDefault.import_ID = false;
+		sCInterface.import_ID = false;
 
-		sCIDefault.instanceof_ID = false;
+		sCInterface.instanceof_ID = false;
 
-		sCIDefault.int_ID = false;
+		sCInterface.int_ID = false;
 
-		sCIDefault.long_ID = false;
+		sCInterface.long_ID = false;
 
-		sCIDefault.native_ID = false;
+		sCInterface.native_ID = false;
 
-		sCIDefault.new_ID = false;
+		sCInterface.new_ID = false;
 
-		sCIDefault.null_ID = false;
+		sCInterface.null_ID = false;
 
-		sCIDefault.package_ID = false;
+		sCInterface.package_ID = false;
 
-		sCIDefault.private_ID = false;
+		sCInterface.private_ID = false;
 
-		sCIDefault.protected_ID = false;
+		sCInterface.protected_ID = false;
 
-		sCIDefault.public_ID = false;
+		sCInterface.public_ID = false;
 
-		sCIDefault.return_ID = false;
+		sCInterface.return_ID = false;
 
-		sCIDefault.short_ID = false;
+		sCInterface.short_ID = false;
 
-		sCIDefault.static_ID = false;
+		sCInterface.static_ID = false;
 
-		sCIDefault.strictfp_ID = false;
+		sCInterface.strictfp_ID = false;
 
-		sCIDefault.super_ID = false;
+		sCInterface.super_ID = false;
 
-		sCIDefault.switch_ID = false;
+		sCInterface.switch_ID = false;
 
-		sCIDefault.synchronized_ID = false;
+		sCInterface.synchronized_ID = false;
 
-		sCIDefault.this_ID = false;
+		sCInterface.this_ID = false;
 
-		sCIDefault.throw_ID = false;
+		sCInterface.throw_ID = false;
 
-		sCIDefault.throws_ID = false;
+		sCInterface.throws_ID = false;
 
-		sCIDefault.transient_ID = false;
+		sCInterface.transient_ID = false;
 
-		sCIDefault.try_ID = false;
+		sCInterface.try_ID = false;
 
-		sCIDefault.void_ID = false;
+		sCInterface.void_ID = false;
 
-		sCIDefault.volatile_ID = false;
+		sCInterface.volatile_ID = false;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.abstract_ID = true;
+		sCInterface.abstract_ID = true;
 
-		sCIDefault.assert_ID = true;
+		sCInterface.assert_ID = true;
 
-		sCIDefault.boolean_ID = true;
+		sCInterface.boolean_ID = true;
 
-		sCIDefault.break_ID = true;
+		sCInterface.break_ID = true;
 
-		sCIDefault.byte_ID = true;
+		sCInterface.byte_ID = true;
 
-		sCIDefault.case_ID = true;
+		sCInterface.case_ID = true;
 
-		sCIDefault.catch_ID = true;
+		sCInterface.catch_ID = true;
 
-		sCIDefault.char_ID = true;
+		sCInterface.char_ID = true;
 
-		sCIDefault.class_ID = true;
+		sCInterface.class_ID = true;
 
-		sCIDefault.const_ID = true;
+		sCInterface.const_ID = true;
 
-		sCIDefault.continue_ID = true;
+		sCInterface.continue_ID = true;
 
-		sCIDefault.do_ID = true;
+		sCInterface.do_ID = true;
 
-		sCIDefault.double_ID = true;
+		sCInterface.double_ID = true;
 
-		sCIDefault.enum_ID = true;
+		sCInterface.enum_ID = true;
 
-		sCIDefault.extends_ID = true;
+		sCInterface.extends_ID = true;
 
-		sCIDefault.final_ID = true;
+		sCInterface.final_ID = true;
 
-		sCIDefault.finally_ID = true;
+		sCInterface.finally_ID = true;
 
-		sCIDefault.float_ID = true;
+		sCInterface.float_ID = true;
 
-		sCIDefault.for_ID = true;
+		sCInterface.for_ID = true;
 
-		sCIDefault.goto_ID = true;
+		sCInterface.goto_ID = true;
 
-		sCIDefault.if_ID = true;
+		sCInterface.if_ID = true;
 
-		sCIDefault.implements_ID = true;
+		sCInterface.implements_ID = true;
 
-		sCIDefault.import_ID = true;
+		sCInterface.import_ID = true;
 
-		sCIDefault.instanceof_ID = true;
+		sCInterface.instanceof_ID = true;
 
-		sCIDefault.int_ID = true;
+		sCInterface.int_ID = true;
 
-		sCIDefault.long_ID = true;
+		sCInterface.long_ID = true;
 
-		sCIDefault.native_ID = true;
+		sCInterface.native_ID = true;
 
-		sCIDefault.new_ID = true;
+		sCInterface.new_ID = true;
 
-		sCIDefault.null_ID = true;
+		sCInterface.null_ID = true;
 
-		sCIDefault.package_ID = true;
+		sCInterface.package_ID = true;
 
-		sCIDefault.private_ID = true;
+		sCInterface.private_ID = true;
 
-		sCIDefault.protected_ID = true;
+		sCInterface.protected_ID = true;
 
-		sCIDefault.public_ID = true;
+		sCInterface.public_ID = true;
 
-		sCIDefault.return_ID = true;
+		sCInterface.return_ID = true;
 
-		sCIDefault.short_ID = true;
+		sCInterface.short_ID = true;
 
-		sCIDefault.static_ID = true;
+		sCInterface.static_ID = true;
 
-		sCIDefault.strictfp_ID = true;
+		sCInterface.strictfp_ID = true;
 
-		sCIDefault.super_ID = true;
+		sCInterface.super_ID = true;
 
-		sCIDefault.switch_ID = true;
+		sCInterface.switch_ID = true;
 
-		sCIDefault.synchronized_ID = true;
+		sCInterface.synchronized_ID = true;
 
-		sCIDefault.this_ID = true;
+		sCInterface.this_ID = true;
 
-		sCIDefault.throw_ID = true;
+		sCInterface.throw_ID = true;
 
-		sCIDefault.throws_ID = true;
+		sCInterface.throws_ID = true;
 
-		sCIDefault.transient_ID = true;
+		sCInterface.transient_ID = true;
 
-		sCIDefault.try_ID = true;
+		sCInterface.try_ID = true;
 
-		sCIDefault.void_ID = true;
+		sCInterface.void_ID = true;
 
-		sCIDefault.volatile_ID = true;
+		sCInterface.volatile_ID = true;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.goto_abstract;
@@ -739,7 +739,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -768,342 +768,342 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseWhile() {
-		sCIDefault.raiseWhile();
+		sCInterface.raiseWhile();
 	}
 
 	public boolean getAbstract() {
-		return sCIDefault.getAbstract();
+		return sCInterface.getAbstract();
 	}
 
 	public void setAbstract(boolean value) {
-		sCIDefault.setAbstract(value);
+		sCInterface.setAbstract(value);
 	}
 	public boolean getAssert() {
-		return sCIDefault.getAssert();
+		return sCInterface.getAssert();
 	}
 
 	public void setAssert(boolean value) {
-		sCIDefault.setAssert(value);
+		sCInterface.setAssert(value);
 	}
 	public boolean getBoolean() {
-		return sCIDefault.getBoolean();
+		return sCInterface.getBoolean();
 	}
 
 	public void setBoolean(boolean value) {
-		sCIDefault.setBoolean(value);
+		sCInterface.setBoolean(value);
 	}
 	public boolean getBreak() {
-		return sCIDefault.getBreak();
+		return sCInterface.getBreak();
 	}
 
 	public void setBreak(boolean value) {
-		sCIDefault.setBreak(value);
+		sCInterface.setBreak(value);
 	}
 	public boolean getByte() {
-		return sCIDefault.getByte();
+		return sCInterface.getByte();
 	}
 
 	public void setByte(boolean value) {
-		sCIDefault.setByte(value);
+		sCInterface.setByte(value);
 	}
 	public boolean getCase() {
-		return sCIDefault.getCase();
+		return sCInterface.getCase();
 	}
 
 	public void setCase(boolean value) {
-		sCIDefault.setCase(value);
+		sCInterface.setCase(value);
 	}
 	public boolean getCatch() {
-		return sCIDefault.getCatch();
+		return sCInterface.getCatch();
 	}
 
 	public void setCatch(boolean value) {
-		sCIDefault.setCatch(value);
+		sCInterface.setCatch(value);
 	}
 	public boolean getChar() {
-		return sCIDefault.getChar();
+		return sCInterface.getChar();
 	}
 
 	public void setChar(boolean value) {
-		sCIDefault.setChar(value);
+		sCInterface.setChar(value);
 	}
 	public boolean getClass_ID() {
-		return sCIDefault.getClass_ID();
+		return sCInterface.getClass_ID();
 	}
 
 	public void setClass_ID(boolean value) {
-		sCIDefault.setClass_ID(value);
+		sCInterface.setClass_ID(value);
 	}
 	public boolean getConst() {
-		return sCIDefault.getConst();
+		return sCInterface.getConst();
 	}
 
 	public void setConst(boolean value) {
-		sCIDefault.setConst(value);
+		sCInterface.setConst(value);
 	}
 	public boolean getContinue() {
-		return sCIDefault.getContinue();
+		return sCInterface.getContinue();
 	}
 
 	public void setContinue(boolean value) {
-		sCIDefault.setContinue(value);
+		sCInterface.setContinue(value);
 	}
 	public boolean getDo() {
-		return sCIDefault.getDo();
+		return sCInterface.getDo();
 	}
 
 	public void setDo(boolean value) {
-		sCIDefault.setDo(value);
+		sCInterface.setDo(value);
 	}
 	public boolean getDouble() {
-		return sCIDefault.getDouble();
+		return sCInterface.getDouble();
 	}
 
 	public void setDouble(boolean value) {
-		sCIDefault.setDouble(value);
+		sCInterface.setDouble(value);
 	}
 	public boolean getEnum() {
-		return sCIDefault.getEnum();
+		return sCInterface.getEnum();
 	}
 
 	public void setEnum(boolean value) {
-		sCIDefault.setEnum(value);
+		sCInterface.setEnum(value);
 	}
 	public boolean getExtends() {
-		return sCIDefault.getExtends();
+		return sCInterface.getExtends();
 	}
 
 	public void setExtends(boolean value) {
-		sCIDefault.setExtends(value);
+		sCInterface.setExtends(value);
 	}
 	public boolean getFinal() {
-		return sCIDefault.getFinal();
+		return sCInterface.getFinal();
 	}
 
 	public void setFinal(boolean value) {
-		sCIDefault.setFinal(value);
+		sCInterface.setFinal(value);
 	}
 	public boolean getFinally() {
-		return sCIDefault.getFinally();
+		return sCInterface.getFinally();
 	}
 
 	public void setFinally(boolean value) {
-		sCIDefault.setFinally(value);
+		sCInterface.setFinally(value);
 	}
 	public boolean getFloat() {
-		return sCIDefault.getFloat();
+		return sCInterface.getFloat();
 	}
 
 	public void setFloat(boolean value) {
-		sCIDefault.setFloat(value);
+		sCInterface.setFloat(value);
 	}
 	public boolean getFor() {
-		return sCIDefault.getFor();
+		return sCInterface.getFor();
 	}
 
 	public void setFor(boolean value) {
-		sCIDefault.setFor(value);
+		sCInterface.setFor(value);
 	}
 	public boolean getGoto() {
-		return sCIDefault.getGoto();
+		return sCInterface.getGoto();
 	}
 
 	public void setGoto(boolean value) {
-		sCIDefault.setGoto(value);
+		sCInterface.setGoto(value);
 	}
 	public boolean getIf() {
-		return sCIDefault.getIf();
+		return sCInterface.getIf();
 	}
 
 	public void setIf(boolean value) {
-		sCIDefault.setIf(value);
+		sCInterface.setIf(value);
 	}
 	public boolean getImplements() {
-		return sCIDefault.getImplements();
+		return sCInterface.getImplements();
 	}
 
 	public void setImplements(boolean value) {
-		sCIDefault.setImplements(value);
+		sCInterface.setImplements(value);
 	}
 	public boolean getImport() {
-		return sCIDefault.getImport();
+		return sCInterface.getImport();
 	}
 
 	public void setImport(boolean value) {
-		sCIDefault.setImport(value);
+		sCInterface.setImport(value);
 	}
 	public boolean getInstanceof() {
-		return sCIDefault.getInstanceof();
+		return sCInterface.getInstanceof();
 	}
 
 	public void setInstanceof(boolean value) {
-		sCIDefault.setInstanceof(value);
+		sCInterface.setInstanceof(value);
 	}
 	public boolean getInt() {
-		return sCIDefault.getInt();
+		return sCInterface.getInt();
 	}
 
 	public void setInt(boolean value) {
-		sCIDefault.setInt(value);
+		sCInterface.setInt(value);
 	}
 	public boolean getLong() {
-		return sCIDefault.getLong();
+		return sCInterface.getLong();
 	}
 
 	public void setLong(boolean value) {
-		sCIDefault.setLong(value);
+		sCInterface.setLong(value);
 	}
 	public boolean getNative() {
-		return sCIDefault.getNative();
+		return sCInterface.getNative();
 	}
 
 	public void setNative(boolean value) {
-		sCIDefault.setNative(value);
+		sCInterface.setNative(value);
 	}
 	public boolean getNew() {
-		return sCIDefault.getNew();
+		return sCInterface.getNew();
 	}
 
 	public void setNew(boolean value) {
-		sCIDefault.setNew(value);
+		sCInterface.setNew(value);
 	}
 	public boolean getNull() {
-		return sCIDefault.getNull();
+		return sCInterface.getNull();
 	}
 
 	public void setNull(boolean value) {
-		sCIDefault.setNull(value);
+		sCInterface.setNull(value);
 	}
 	public boolean getPackage() {
-		return sCIDefault.getPackage();
+		return sCInterface.getPackage();
 	}
 
 	public void setPackage(boolean value) {
-		sCIDefault.setPackage(value);
+		sCInterface.setPackage(value);
 	}
 	public boolean getPrivate() {
-		return sCIDefault.getPrivate();
+		return sCInterface.getPrivate();
 	}
 
 	public void setPrivate(boolean value) {
-		sCIDefault.setPrivate(value);
+		sCInterface.setPrivate(value);
 	}
 	public boolean getProtected() {
-		return sCIDefault.getProtected();
+		return sCInterface.getProtected();
 	}
 
 	public void setProtected(boolean value) {
-		sCIDefault.setProtected(value);
+		sCInterface.setProtected(value);
 	}
 	public boolean getPublic() {
-		return sCIDefault.getPublic();
+		return sCInterface.getPublic();
 	}
 
 	public void setPublic(boolean value) {
-		sCIDefault.setPublic(value);
+		sCInterface.setPublic(value);
 	}
 	public boolean getReturn() {
-		return sCIDefault.getReturn();
+		return sCInterface.getReturn();
 	}
 
 	public void setReturn(boolean value) {
-		sCIDefault.setReturn(value);
+		sCInterface.setReturn(value);
 	}
 	public boolean getShort() {
-		return sCIDefault.getShort();
+		return sCInterface.getShort();
 	}
 
 	public void setShort(boolean value) {
-		sCIDefault.setShort(value);
+		sCInterface.setShort(value);
 	}
 	public boolean getStatic() {
-		return sCIDefault.getStatic();
+		return sCInterface.getStatic();
 	}
 
 	public void setStatic(boolean value) {
-		sCIDefault.setStatic(value);
+		sCInterface.setStatic(value);
 	}
 	public boolean getStrictfp() {
-		return sCIDefault.getStrictfp();
+		return sCInterface.getStrictfp();
 	}
 
 	public void setStrictfp(boolean value) {
-		sCIDefault.setStrictfp(value);
+		sCInterface.setStrictfp(value);
 	}
 	public boolean getSuper() {
-		return sCIDefault.getSuper();
+		return sCInterface.getSuper();
 	}
 
 	public void setSuper(boolean value) {
-		sCIDefault.setSuper(value);
+		sCInterface.setSuper(value);
 	}
 	public boolean getSwitch() {
-		return sCIDefault.getSwitch();
+		return sCInterface.getSwitch();
 	}
 
 	public void setSwitch(boolean value) {
-		sCIDefault.setSwitch(value);
+		sCInterface.setSwitch(value);
 	}
 	public boolean getSynchronized() {
-		return sCIDefault.getSynchronized();
+		return sCInterface.getSynchronized();
 	}
 
 	public void setSynchronized(boolean value) {
-		sCIDefault.setSynchronized(value);
+		sCInterface.setSynchronized(value);
 	}
 	public boolean getThis() {
-		return sCIDefault.getThis();
+		return sCInterface.getThis();
 	}
 
 	public void setThis(boolean value) {
-		sCIDefault.setThis(value);
+		sCInterface.setThis(value);
 	}
 	public boolean getThrow() {
-		return sCIDefault.getThrow();
+		return sCInterface.getThrow();
 	}
 
 	public void setThrow(boolean value) {
-		sCIDefault.setThrow(value);
+		sCInterface.setThrow(value);
 	}
 	public boolean getThrows() {
-		return sCIDefault.getThrows();
+		return sCInterface.getThrows();
 	}
 
 	public void setThrows(boolean value) {
-		sCIDefault.setThrows(value);
+		sCInterface.setThrows(value);
 	}
 	public boolean getTransient() {
-		return sCIDefault.getTransient();
+		return sCInterface.getTransient();
 	}
 
 	public void setTransient(boolean value) {
-		sCIDefault.setTransient(value);
+		sCInterface.setTransient(value);
 	}
 	public boolean getTry() {
-		return sCIDefault.getTry();
+		return sCInterface.getTry();
 	}
 
 	public void setTry(boolean value) {
-		sCIDefault.setTry(value);
+		sCInterface.setTry(value);
 	}
 	public boolean getVoid() {
-		return sCIDefault.getVoid();
+		return sCInterface.getVoid();
 	}
 
 	public void setVoid(boolean value) {
-		sCIDefault.setVoid(value);
+		sCInterface.setVoid(value);
 	}
 	public boolean getVolatile() {
-		return sCIDefault.getVolatile();
+		return sCInterface.getVolatile();
 	}
 
 	public void setVolatile(boolean value) {
-		sCIDefault.setVolatile(value);
+		sCInterface.setVolatile(value);
 	}
 
 	/* Entry action for statechart 'JavaKeywords'. */
@@ -1140,103 +1140,103 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	/* The reactions of state abstract. */
 	private void reactGoto_abstract() {
-		if (sCIDefault.while_ID && sCIDefault.null_ID) {
+		if (sCInterface.while_ID && sCInterface.null_ID) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.native_ID = false;
+			sCInterface.native_ID = false;
 
-			sCIDefault.abstract_ID = false;
+			sCInterface.abstract_ID = false;
 
-			sCIDefault.assert_ID = false;
+			sCInterface.assert_ID = false;
 
-			sCIDefault.boolean_ID = false;
+			sCInterface.boolean_ID = false;
 
-			sCIDefault.break_ID = false;
+			sCInterface.break_ID = false;
 
-			sCIDefault.byte_ID = false;
+			sCInterface.byte_ID = false;
 
-			sCIDefault.case_ID = false;
+			sCInterface.case_ID = false;
 
-			sCIDefault.catch_ID = false;
+			sCInterface.catch_ID = false;
 
-			sCIDefault.char_ID = false;
+			sCInterface.char_ID = false;
 
-			sCIDefault.class_ID = false;
+			sCInterface.class_ID = false;
 
-			sCIDefault.const_ID = false;
+			sCInterface.const_ID = false;
 
-			sCIDefault.continue_ID = false;
+			sCInterface.continue_ID = false;
 
-			sCIDefault.do_ID = false;
+			sCInterface.do_ID = false;
 
-			sCIDefault.double_ID = false;
+			sCInterface.double_ID = false;
 
-			sCIDefault.enum_ID = false;
+			sCInterface.enum_ID = false;
 
-			sCIDefault.extends_ID = false;
+			sCInterface.extends_ID = false;
 
-			sCIDefault.final_ID = false;
+			sCInterface.final_ID = false;
 
-			sCIDefault.finally_ID = false;
+			sCInterface.finally_ID = false;
 
-			sCIDefault.float_ID = false;
+			sCInterface.float_ID = false;
 
-			sCIDefault.for_ID = false;
+			sCInterface.for_ID = false;
 
-			sCIDefault.goto_ID = false;
+			sCInterface.goto_ID = false;
 
-			sCIDefault.if_ID = false;
+			sCInterface.if_ID = false;
 
-			sCIDefault.implements_ID = false;
+			sCInterface.implements_ID = false;
 
-			sCIDefault.import_ID = false;
+			sCInterface.import_ID = false;
 
-			sCIDefault.instanceof_ID = false;
+			sCInterface.instanceof_ID = false;
 
-			sCIDefault.int_ID = false;
+			sCInterface.int_ID = false;
 
-			sCIDefault.long_ID = false;
+			sCInterface.long_ID = false;
 
-			sCIDefault.new_ID = false;
+			sCInterface.new_ID = false;
 
-			sCIDefault.null_ID = false;
+			sCInterface.null_ID = false;
 
-			sCIDefault.package_ID = false;
+			sCInterface.package_ID = false;
 
-			sCIDefault.private_ID = false;
+			sCInterface.private_ID = false;
 
-			sCIDefault.protected_ID = false;
+			sCInterface.protected_ID = false;
 
-			sCIDefault.public_ID = false;
+			sCInterface.public_ID = false;
 
-			sCIDefault.return_ID = false;
+			sCInterface.return_ID = false;
 
-			sCIDefault.short_ID = false;
+			sCInterface.short_ID = false;
 
-			sCIDefault.static_ID = false;
+			sCInterface.static_ID = false;
 
-			sCIDefault.strictfp_ID = false;
+			sCInterface.strictfp_ID = false;
 
-			sCIDefault.super_ID = false;
+			sCInterface.super_ID = false;
 
-			sCIDefault.switch_ID = false;
+			sCInterface.switch_ID = false;
 
-			sCIDefault.synchronized_ID = false;
+			sCInterface.synchronized_ID = false;
 
-			sCIDefault.this_ID = false;
+			sCInterface.this_ID = false;
 
-			sCIDefault.throw_ID = false;
+			sCInterface.throw_ID = false;
 
-			sCIDefault.throws_ID = false;
+			sCInterface.throws_ID = false;
 
-			sCIDefault.transient_ID = false;
+			sCInterface.transient_ID = false;
 
-			sCIDefault.try_ID = false;
+			sCInterface.try_ID = false;
 
-			sCIDefault.void_ID = false;
+			sCInterface.void_ID = false;
 
-			sCIDefault.volatile_ID = false;
+			sCInterface.volatile_ID = false;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.goto_boolean;
@@ -1245,7 +1245,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	/* The reactions of state boolean. */
 	private void reactGoto_boolean() {
-		if (sCIDefault.while_ID) {
+		if (sCInterface.while_ID) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 

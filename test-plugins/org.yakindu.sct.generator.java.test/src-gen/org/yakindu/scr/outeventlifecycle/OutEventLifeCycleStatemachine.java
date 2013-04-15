@@ -4,7 +4,7 @@ public class OutEventLifeCycleStatemachine
 		implements
 			IOutEventLifeCycleStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -51,7 +51,7 @@ public class OutEventLifeCycleStatemachine
 		}
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		r1_A, r1_B, r2_B, $NullState$
@@ -63,7 +63,7 @@ public class OutEventLifeCycleStatemachine
 
 	public OutEventLifeCycleStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -75,9 +75,9 @@ public class OutEventLifeCycleStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.f_available_in_cycle = false;
+		sCInterface.f_available_in_cycle = false;
 
-		sCIDefault.f_available_in_next_cycle = false;
+		sCInterface.f_available_in_next_cycle = false;
 	}
 
 	public void enter() {
@@ -120,12 +120,12 @@ public class OutEventLifeCycleStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
 	protected void clearOutEvents() {
-		sCIDefault.clearOutEvents();
+		sCInterface.clearOutEvents();
 	}
 
 	public boolean isStateActive(State state) {
@@ -141,30 +141,30 @@ public class OutEventLifeCycleStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE() {
-		sCIDefault.raiseE();
+		sCInterface.raiseE();
 	}
 	public boolean isRaisedF() {
-		return sCIDefault.isRaisedF();
+		return sCInterface.isRaisedF();
 	}
 
 	public boolean getF_available_in_cycle() {
-		return sCIDefault.getF_available_in_cycle();
+		return sCInterface.getF_available_in_cycle();
 	}
 
 	public void setF_available_in_cycle(boolean value) {
-		sCIDefault.setF_available_in_cycle(value);
+		sCInterface.setF_available_in_cycle(value);
 	}
 	public boolean getF_available_in_next_cycle() {
-		return sCIDefault.getF_available_in_next_cycle();
+		return sCInterface.getF_available_in_next_cycle();
 	}
 
 	public void setF_available_in_next_cycle(boolean value) {
-		sCIDefault.setF_available_in_next_cycle(value);
+		sCInterface.setF_available_in_next_cycle(value);
 	}
 
 	/* Entry action for statechart 'OutEventLifeCycle'. */
@@ -177,11 +177,11 @@ public class OutEventLifeCycleStatemachine
 
 	/* The reactions of state A. */
 	private void reactR1_A() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.raiseF();
+			sCInterface.raiseF();
 
 			nextStateIndex = 0;
 			stateVector[0] = State.r1_B;
@@ -190,15 +190,15 @@ public class OutEventLifeCycleStatemachine
 
 	/* The reactions of state B. */
 	private void reactR1_B() {
-		if (sCIDefault.f) {
-			sCIDefault.f_available_in_next_cycle = true;
+		if (sCInterface.f) {
+			sCInterface.f_available_in_next_cycle = true;
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactR2_B() {
-		if (sCIDefault.f) {
-			sCIDefault.f_available_in_cycle = true;
+		if (sCInterface.f) {
+			sCInterface.f_available_in_cycle = true;
 		}
 	}
 

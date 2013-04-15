@@ -2,7 +2,7 @@ package org.yakindu.scr.simpleevent;
 
 public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -16,7 +16,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -28,7 +28,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
 	public SimpleEventStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -69,7 +69,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -87,12 +87,12 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseEvent1() {
-		sCIDefault.raiseEvent1();
+		sCInterface.raiseEvent1();
 	}
 
 	/* Entry action for statechart 'SimpleEvent'. */
@@ -105,7 +105,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.event1) {
+		if (sCInterface.event1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 

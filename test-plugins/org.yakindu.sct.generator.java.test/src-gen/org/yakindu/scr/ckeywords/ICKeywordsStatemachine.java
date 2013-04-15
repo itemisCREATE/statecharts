@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface ICKeywordsStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseAuto();
 		public void raiseBreak();
 		public boolean getCase();
@@ -61,6 +61,6 @@ public interface ICKeywordsStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

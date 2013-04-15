@@ -2,7 +2,7 @@ package org.yakindu.scr.alwaysoncycle;
 
 public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private int value;
 
@@ -26,7 +26,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -38,7 +38,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	public AlwaysOncycleStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -50,15 +50,15 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.value = 0;
+		sCInterface.value = 0;
 
-		sCIDefault.v2 = false;
+		sCInterface.v2 = false;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.value = 0;
+		sCInterface.value = 0;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
@@ -70,7 +70,7 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
-				sCIDefault.value = 0;
+				sCInterface.value = 0;
 				break;
 
 			case main_region_StateB :
@@ -103,23 +103,23 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public int getValue() {
-		return sCIDefault.getValue();
+		return sCInterface.getValue();
 	}
 
 	public void setValue(int value) {
-		sCIDefault.setValue(value);
+		sCInterface.setValue(value);
 	}
 	public boolean getV2() {
-		return sCIDefault.getV2();
+		return sCInterface.getV2();
 	}
 
 	public void setV2(boolean value) {
-		sCIDefault.setV2(value);
+		sCInterface.setV2(value);
 	}
 
 	/* Entry action for statechart 'AlwaysOncycle'. */
@@ -132,31 +132,31 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCIDefault.value == 5) {
+		if (sCInterface.value == 5) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.value = 0;
+			sCInterface.value = 0;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_StateB;
 		} else {
-			sCIDefault.value += 1;
+			sCInterface.value += 1;
 		}
 	}
 
 	/* The reactions of state StateB. */
 	private void reactMain_region_StateB() {
-		if (sCIDefault.value == 5) {
+		if (sCInterface.value == 5) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.value = 0;
+			sCInterface.value = 0;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_StateA;
 		} else {
-			sCIDefault.value += 1;
+			sCInterface.value += 1;
 		}
 	}
 

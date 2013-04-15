@@ -39,3 +39,11 @@ TEST(StatemachineTest, namedExitThroughDefaultTransition) {
 	exitState_runCycle(&handle);
 	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_E));
 }
+TEST(StatemachineTest, remainInA) {
+	ExitState handle;
+	exitState_init(&handle);
+	exitState_enter(&handle);
+	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_A));
+	exitState_runCycle(&handle);
+	EXPECT_TRUE(exitState_isActive(&handle, ExitState_r_A));
+}

@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IJavaKeywordsStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseWhile();
 		public boolean getAbstract();
 		public void setAbstract(boolean value);
@@ -102,6 +102,6 @@ public interface IJavaKeywordsStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

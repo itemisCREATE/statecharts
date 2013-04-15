@@ -3,11 +3,11 @@ import org.yakindu.scr.IStatemachine;
 
 public interface ISameNameDifferentRegionStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE1();
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

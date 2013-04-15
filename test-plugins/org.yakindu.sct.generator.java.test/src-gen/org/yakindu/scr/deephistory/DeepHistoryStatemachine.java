@@ -2,7 +2,7 @@ package org.yakindu.scr.deephistory;
 
 public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
 
@@ -72,7 +72,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		mainRegion_State1, mainRegion_State2, mainRegion_State2__region0_a, mainRegion_State2__region0_State4, mainRegion_State2__region0_State4__region0_State6, mainRegion_State2__region0_State4__region0_State7, mainRegion_State2__region0_State4__region0_State7__region0_State8, mainRegion_State2__region0_State4__region0_State7__region0_State9, mainRegion_State2__region0_State5, $NullState$
@@ -85,7 +85,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	public DeepHistoryStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -169,7 +169,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -210,36 +210,36 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseEvent1() {
-		sCIDefault.raiseEvent1();
+		sCInterface.raiseEvent1();
 	}
 	public void raiseEvent2() {
-		sCIDefault.raiseEvent2();
+		sCInterface.raiseEvent2();
 	}
 	public void raiseEvent3() {
-		sCIDefault.raiseEvent3();
+		sCInterface.raiseEvent3();
 	}
 	public void raiseEvent4() {
-		sCIDefault.raiseEvent4();
+		sCInterface.raiseEvent4();
 	}
 	public void raiseEvent5() {
-		sCIDefault.raiseEvent5();
+		sCInterface.raiseEvent5();
 	}
 	public void raiseEvent6() {
-		sCIDefault.raiseEvent6();
+		sCInterface.raiseEvent6();
 	}
 	public void raiseEvent7() {
-		sCIDefault.raiseEvent7();
+		sCInterface.raiseEvent7();
 	}
 	public void raiseEvent8() {
-		sCIDefault.raiseEvent8();
+		sCInterface.raiseEvent8();
 	}
 	public void raiseEvent9() {
-		sCIDefault.raiseEvent9();
+		sCInterface.raiseEvent9();
 	}
 
 	/* Entry action for statechart 'DeepHistory'. */
@@ -321,7 +321,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State1. */
 	private void reactMainRegion_State1() {
-		if (sCIDefault.event1) {
+		if (sCInterface.event1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -337,7 +337,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state a. */
 	private void reactMainRegion_State2_region0_a() {
-		if (sCIDefault.event2) {
+		if (sCInterface.event2) {
 			historyVector[0] = stateVector[0];
 
 			switch (stateVector[0]) {
@@ -383,7 +383,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			nextStateIndex = 0;
 			stateVector[0] = State.mainRegion_State1;
 		} else {
-			if (true) {
+			if (sCInterface.event3) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
@@ -395,7 +395,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State6. */
 	private void reactMainRegion_State2_region0_State4_region0_State6() {
-		if (sCIDefault.event2) {
+		if (sCInterface.event2) {
 			historyVector[0] = stateVector[0];
 
 			switch (stateVector[0]) {
@@ -441,7 +441,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			nextStateIndex = 0;
 			stateVector[0] = State.mainRegion_State1;
 		} else {
-			if (sCIDefault.event4) {
+			if (sCInterface.event4) {
 				historyVector[1] = stateVector[0];
 
 				switch (stateVector[0]) {
@@ -471,7 +471,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State5;
 			} else {
-				if (sCIDefault.event5) {
+				if (sCInterface.event5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 
@@ -484,7 +484,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State8. */
 	private void reactMainRegion_State2_region0_State4_region0_State7_region0_State8() {
-		if (sCIDefault.event2) {
+		if (sCInterface.event2) {
 			historyVector[0] = stateVector[0];
 
 			switch (stateVector[0]) {
@@ -530,7 +530,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			nextStateIndex = 0;
 			stateVector[0] = State.mainRegion_State1;
 		} else {
-			if (sCIDefault.event4) {
+			if (sCInterface.event4) {
 				historyVector[1] = stateVector[0];
 
 				switch (stateVector[0]) {
@@ -560,7 +560,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State5;
 			} else {
-				if (sCIDefault.event6) {
+				if (sCInterface.event6) {
 					historyVector[2] = stateVector[0];
 
 					switch (stateVector[0]) {
@@ -581,7 +581,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					nextStateIndex = 0;
 					stateVector[0] = State.mainRegion_State2__region0_State4__region0_State6;
 				} else {
-					if (sCIDefault.event7) {
+					if (sCInterface.event7) {
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 
@@ -595,7 +595,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State9. */
 	private void reactMainRegion_State2_region0_State4_region0_State7_region0_State9() {
-		if (sCIDefault.event2) {
+		if (sCInterface.event2) {
 			historyVector[0] = stateVector[0];
 
 			switch (stateVector[0]) {
@@ -641,7 +641,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 			nextStateIndex = 0;
 			stateVector[0] = State.mainRegion_State1;
 		} else {
-			if (sCIDefault.event4) {
+			if (sCInterface.event4) {
 				historyVector[1] = stateVector[0];
 
 				switch (stateVector[0]) {
@@ -671,7 +671,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State5;
 			} else {
-				if (sCIDefault.event6) {
+				if (sCInterface.event6) {
 					historyVector[2] = stateVector[0];
 
 					switch (stateVector[0]) {
@@ -692,7 +692,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					nextStateIndex = 0;
 					stateVector[0] = State.mainRegion_State2__region0_State4__region0_State6;
 				} else {
-					if (sCIDefault.event8) {
+					if (sCInterface.event8) {
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 
@@ -706,7 +706,7 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 
 	/* The reactions of state State5. */
 	private void reactMainRegion_State2_region0_State5() {
-		if (sCIDefault.event2) {
+		if (sCInterface.event2) {
 			historyVector[0] = stateVector[0];
 
 			switch (stateVector[0]) {

@@ -14,18 +14,18 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	private SCIInterface1Impl sCIInterface1;
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
-		private SCIDefaultOperationCallback operationCallback;
+		private SCInterfaceOperationCallback operationCallback;
 
-		public void setSCIDefaultOperationCallback(
-				SCIDefaultOperationCallback operationCallback) {
+		public void setSCInterfaceOperationCallback(
+				SCInterfaceOperationCallback operationCallback) {
 			this.operationCallback = operationCallback;
 		}
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_C, $NullState$
@@ -42,7 +42,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public OperationsStatemachine() {
 
 		sCIInterface1 = new SCIInterface1Impl();
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -115,8 +115,8 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public SCIInterface1 getSCIInterface1() {
 		return sCIInterface1;
 	}
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void setInternalOperationCallback(
@@ -134,32 +134,10 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (true) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCIInterface1.operationCallback.interfaceOperation1();
-
-			sCIInterface1.operationCallback.interfaceOperation2(4);
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_B;
-		}
 	}
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (true) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCIDefault.operationCallback.unnamedInterfaceOperation1();
-
-			sCIDefault.operationCallback.unnamedInterfaceOperation2(4);
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_C;
-		}
 	}
 
 	/* The reactions of state C. */

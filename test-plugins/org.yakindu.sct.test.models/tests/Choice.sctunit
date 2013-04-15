@@ -1,33 +1,91 @@
 testgroup Choice for statechart Choice { 
-	test choiceTest { 
+
+	test elseChoiceUsingNonDefaultTransition {
 		enter
-		assert active (Choice.main_region.A ) 
-		assert value == 4 
-		raise pressKey 
-		cycle 
-		assert active (Choice.main_region.B ) 
-		assert value == 3 
-		raise pressKey 
-		cycle 
-		assert active (Choice.main_region.A )
-		raise pressKey 
-		cycle 
-		assert active (Choice.main_region.C ) 
-		assert value == 2 
-		raise pressKey 
-		cycle 
-		assert active (Choice.main_region.B ) 
-		assert value == 1 
-		raise pressKey 
-		cycle 
-		assert active (Choice.main_region.A )
-		assert value == 1 
-		raise pressKey 
-		cycle 
-		assert active (Choice.main_region.C ) 
-		assert value == 0 
-		raise pressKey 
-		cycle 
-		assert active (Choice.main_region.A ) 
-	} 
+		
+		assert active (Choice.main_region.A)
+		c = true
+		raise e
+		
+		cycle		
+		assert active (Choice.main_region.C)
+	}
+	
+	test elseChoiceUsingDefaultTransition {
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = false
+		raise e
+		
+		cycle		
+		assert active (Choice.main_region.B)
+	}
+	
+	test defaultChoiceUsingNonDefaultTransition {
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = true
+		raise g
+		
+		cycle		
+		assert active (Choice.main_region.C)
+	}
+	
+	test defaultChoiceUsingDefaultTransition {
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = false
+		raise g
+		
+		cycle		
+		assert active (Choice.main_region.B)
+	}
+	
+	test uncheckedChoiceUsingNonDefaultTransition {
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = true
+		raise f
+		
+		cycle		
+		assert active (Choice.main_region.C)
+	}
+	
+	/*
+	 * An outgiong transition with an empty trigger 
+	 * will be handled like a default transition. 
+	 */
+	test uncheckedChoiceUsingDefaultTransition {
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = false
+		raise f
+		
+		cycle		
+		assert active (Choice.main_region.B)
+	}
+	
+	/* A transition with a 'true' guard is always true and must
+	 * be used according to its predefined priority. 
+	 * 
+	 * This test case makes sure that default transition reordering
+	 * does not impact these transitions.
+	 */
+	test alwaysTrueTransitionInChoice {
+		enter
+		
+		assert active (Choice.main_region.A)
+		c = true
+		raise h
+		
+		cycle		
+		assert active (Choice.main_region.B)
+	}
+		
+	
 }

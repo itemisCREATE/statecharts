@@ -2,7 +2,7 @@ package org.yakindu.scr.raiseevent;
 
 public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -29,7 +29,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		}
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, second_region_SateA, second_region_StateB, $NullState$
@@ -41,7 +41,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 	public RaiseEventStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -100,12 +100,12 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
 	protected void clearOutEvents() {
-		sCIDefault.clearOutEvents();
+		sCInterface.clearOutEvents();
 	}
 
 	public boolean isStateActive(State state) {
@@ -123,15 +123,15 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public boolean isRaisedE1() {
-		return sCIDefault.isRaisedE1();
+		return sCInterface.isRaisedE1();
 	}
 	public void raiseE2() {
-		sCIDefault.raiseE2();
+		sCInterface.raiseE2();
 	}
 
 	/* Entry action for statechart 'RaiseEvent'. */
@@ -144,11 +144,11 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCIDefault.e2) {
+		if (sCInterface.e2) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.raiseE1();
+			sCInterface.raiseE1();
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_StateB;
@@ -161,7 +161,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 	/* The reactions of state SateA. */
 	private void reactSecond_region_SateA() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 

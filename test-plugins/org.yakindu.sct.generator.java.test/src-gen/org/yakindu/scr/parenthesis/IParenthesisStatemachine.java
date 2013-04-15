@@ -3,12 +3,12 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IParenthesisStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public int getErg();
 		public void setErg(int value);
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

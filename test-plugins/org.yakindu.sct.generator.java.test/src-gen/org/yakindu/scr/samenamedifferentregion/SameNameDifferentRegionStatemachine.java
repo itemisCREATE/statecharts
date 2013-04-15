@@ -4,7 +4,7 @@ public class SameNameDifferentRegionStatemachine
 		implements
 			ISameNameDifferentRegionStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -18,7 +18,7 @@ public class SameNameDifferentRegionStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, main_region_StateB_r1_StateA, main_region_StateB_r1_StateB, $NullState$
@@ -30,7 +30,7 @@ public class SameNameDifferentRegionStatemachine
 
 	public SameNameDifferentRegionStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -76,7 +76,7 @@ public class SameNameDifferentRegionStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -101,12 +101,12 @@ public class SameNameDifferentRegionStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE1() {
-		sCIDefault.raiseE1();
+		sCInterface.raiseE1();
 	}
 
 	/* Entry action for statechart 'SameNameDifferentRegion'. */
@@ -119,7 +119,7 @@ public class SameNameDifferentRegionStatemachine
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -130,7 +130,7 @@ public class SameNameDifferentRegionStatemachine
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateB_r1_StateA() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 

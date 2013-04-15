@@ -4,7 +4,7 @@ public class ExitOnSelfTransitionStatemachine
 		implements
 			IExitOnSelfTransitionStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -45,7 +45,7 @@ public class ExitOnSelfTransitionStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -57,7 +57,7 @@ public class ExitOnSelfTransitionStatemachine
 
 	public ExitOnSelfTransitionStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -69,15 +69,15 @@ public class ExitOnSelfTransitionStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.entryCount = 0;
+		sCInterface.entryCount = 0;
 
-		sCIDefault.exitCount = 0;
+		sCInterface.exitCount = 0;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.entryCount += 1;
+		sCInterface.entryCount += 1;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
@@ -89,7 +89,7 @@ public class ExitOnSelfTransitionStatemachine
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
-				sCIDefault.exitCount += 1;
+				sCInterface.exitCount += 1;
 				break;
 
 			case main_region_B :
@@ -105,7 +105,7 @@ public class ExitOnSelfTransitionStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -123,30 +123,30 @@ public class ExitOnSelfTransitionStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE() {
-		sCIDefault.raiseE();
+		sCInterface.raiseE();
 	}
 	public void raiseF() {
-		sCIDefault.raiseF();
+		sCInterface.raiseF();
 	}
 
 	public int getEntryCount() {
-		return sCIDefault.getEntryCount();
+		return sCInterface.getEntryCount();
 	}
 
 	public void setEntryCount(int value) {
-		sCIDefault.setEntryCount(value);
+		sCInterface.setEntryCount(value);
 	}
 	public int getExitCount() {
-		return sCIDefault.getExitCount();
+		return sCInterface.getExitCount();
 	}
 
 	public void setExitCount(int value) {
-		sCIDefault.setExitCount(value);
+		sCInterface.setExitCount(value);
 	}
 
 	/* Entry action for statechart 'ExitOnSelfTransition'. */
@@ -159,22 +159,22 @@ public class ExitOnSelfTransitionStatemachine
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.exitCount += 1;
+			sCInterface.exitCount += 1;
 
-			sCIDefault.entryCount += 1;
+			sCInterface.entryCount += 1;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A;
 		} else {
-			if (sCIDefault.f) {
+			if (sCInterface.f) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
-				sCIDefault.exitCount += 1;
+				sCInterface.exitCount += 1;
 
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B;
@@ -184,11 +184,11 @@ public class ExitOnSelfTransitionStatemachine
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (sCIDefault.f) {
+		if (sCInterface.f) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.entryCount += 1;
+			sCInterface.entryCount += 1;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A;

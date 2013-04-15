@@ -23,17 +23,17 @@ public interface IOperationsStatemachine extends IStatemachine {
 
 	public SCIInterface1 getSCIInterface1();
 
-	public interface SCIDefault {
+	public interface SCInterface {
 
-		public void setSCIDefaultOperationCallback(
-				SCIDefaultOperationCallback operationCallback);
+		public void setSCInterfaceOperationCallback(
+				SCInterfaceOperationCallback operationCallback);
 	}
 
-	public interface SCIDefaultOperationCallback {
+	public interface SCInterfaceOperationCallback {
 		public void unnamedInterfaceOperation1();
 		public boolean unnamedInterfaceOperation2(int param1);
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

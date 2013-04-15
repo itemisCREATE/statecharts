@@ -2,31 +2,52 @@ package org.yakindu.scr.choice;
 
 public class ChoiceStatemachine implements IChoiceStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
-		private boolean pressKey;
+		private boolean e;
 
-		public void raisePressKey() {
-			pressKey = true;
+		public void raiseE() {
+			e = true;
 		}
 
-		private int value;
+		private boolean f;
 
-		public int getValue() {
-			return value;
+		public void raiseF() {
+			f = true;
 		}
 
-		public void setValue(int value) {
-			this.value = value;
+		private boolean g;
+
+		public void raiseG() {
+			g = true;
+		}
+
+		private boolean h;
+
+		public void raiseH() {
+			h = true;
+		}
+
+		private boolean c;
+
+		public boolean getC() {
+			return c;
+		}
+
+		public void setC(boolean value) {
+			this.c = value;
 		}
 
 		public void clearEvents() {
-			pressKey = false;
+			e = false;
+			f = false;
+			g = false;
+			h = false;
 		}
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_C, $NullState$
@@ -38,7 +59,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	public ChoiceStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -50,7 +71,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.value = 4;
+		sCInterface.c = false;
 	}
 
 	public void enter() {
@@ -85,7 +106,7 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -105,20 +126,29 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
-	public void raisePressKey() {
-		sCIDefault.raisePressKey();
+	public void raiseE() {
+		sCInterface.raiseE();
+	}
+	public void raiseF() {
+		sCInterface.raiseF();
+	}
+	public void raiseG() {
+		sCInterface.raiseG();
+	}
+	public void raiseH() {
+		sCInterface.raiseH();
 	}
 
-	public int getValue() {
-		return sCIDefault.getValue();
+	public boolean getC() {
+		return sCInterface.getC();
 	}
 
-	public void setValue(int value) {
-		sCIDefault.setValue(value);
+	public void setC(boolean value) {
+		sCInterface.setC(value);
 	}
 
 	/* Entry action for statechart 'Choice'. */
@@ -131,21 +161,49 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.pressKey) {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			if ((sCIDefault.value % 2) == 0) {
-				sCIDefault.value -= 1;
-
+			if (sCInterface.c) {
+				nextStateIndex = 0;
+				stateVector[0] = State.main_region_C;
+			} else {
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B;
-			} else {
-				if (true) {
-					sCIDefault.value -= 1;
+			}
+		} else {
+			if (sCInterface.f) {
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
 
+				if (sCInterface.c) {
 					nextStateIndex = 0;
 					stateVector[0] = State.main_region_C;
+				} else {
+					nextStateIndex = 0;
+					stateVector[0] = State.main_region_B;
+				}
+			} else {
+				if (sCInterface.g) {
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+
+					if (sCInterface.c) {
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_C;
+					} else {
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_B;
+					}
+				} else {
+					if (sCInterface.h) {
+						nextStateIndex = 0;
+						stateVector[0] = State.$NullState$;
+
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_B;
+					}
 				}
 			}
 		}
@@ -153,33 +211,20 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (sCIDefault.pressKey) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
 
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_A;
-		}
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
 	}
 
 	/* The reactions of state C. */
 	private void reactMain_region_C() {
-		if (sCIDefault.pressKey) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
 
-			if (sCIDefault.value == 2) {
-				sCIDefault.value -= 1;
-
-				nextStateIndex = 0;
-				stateVector[0] = State.main_region_B;
-			} else {
-				if (true) {
-					nextStateIndex = 0;
-					stateVector[0] = State.main_region_A;
-				}
-			}
-		}
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
 	}
 
 	public void runCycle() {

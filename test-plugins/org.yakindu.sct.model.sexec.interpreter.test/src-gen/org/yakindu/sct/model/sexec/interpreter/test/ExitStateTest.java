@@ -62,4 +62,11 @@ public class ExitStateTest extends AbstractExecutionFlowTest {
 		interpreter.runCycle();
 		assertTrue(isActive("E"));
 	}
+	@Test
+	public void remainInA() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("A"));
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
+	}
 }

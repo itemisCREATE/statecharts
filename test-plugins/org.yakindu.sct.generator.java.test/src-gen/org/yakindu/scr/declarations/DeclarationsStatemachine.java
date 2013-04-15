@@ -19,7 +19,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 	private String evInFValue;
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean evA;
 
@@ -162,7 +162,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 	private final class SCIIfAImpl implements SCIIfA {
 
 		private boolean evA;
@@ -323,7 +323,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 	public DeclarationsStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 		sCIIfA = new SCIIfAImpl();
 
 	}
@@ -336,13 +336,13 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.varA = false;
+		sCInterface.varA = false;
 
-		sCIDefault.varB = 1;
+		sCInterface.varB = 1;
 
-		sCIDefault.varC = 1.0;
+		sCInterface.varC = 1.0;
 
-		sCIDefault.varD = "myString";
+		sCInterface.varD = "myString";
 
 		sCIIfA.varA = false;
 
@@ -383,7 +383,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 		sCIIfA.clearEvents();
 		evInA = false;
 		evInB = false;
@@ -395,7 +395,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	}
 
 	protected void clearOutEvents() {
-		sCIDefault.clearOutEvents();
+		sCInterface.clearOutEvents();
 		sCIIfA.clearOutEvents();
 	}
 
@@ -408,8 +408,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 	public SCIIfA getSCIIfA() {
 		return sCIIfA;
@@ -469,57 +469,57 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	}
 
 	public void raiseEvA() {
-		sCIDefault.raiseEvA();
+		sCInterface.raiseEvA();
 	}
 	public boolean isRaisedEvB() {
-		return sCIDefault.isRaisedEvB();
+		return sCInterface.isRaisedEvB();
 	}
 	public void raiseEvC(boolean value) {
-		sCIDefault.raiseEvC(value);
+		sCInterface.raiseEvC(value);
 	}
 	public boolean isRaisedEvD() {
-		return sCIDefault.isRaisedEvD();
+		return sCInterface.isRaisedEvD();
 	}
 	public int getEvDValue() {
-		return sCIDefault.getEvDValue();
+		return sCInterface.getEvDValue();
 	}
 	public void raiseEvE(double value) {
-		sCIDefault.raiseEvE(value);
+		sCInterface.raiseEvE(value);
 	}
 	public boolean isRaisedEvF() {
-		return sCIDefault.isRaisedEvF();
+		return sCInterface.isRaisedEvF();
 	}
 	public String getEvFValue() {
-		return sCIDefault.getEvFValue();
+		return sCInterface.getEvFValue();
 	}
 
 	public boolean getVarA() {
-		return sCIDefault.getVarA();
+		return sCInterface.getVarA();
 	}
 
 	public void setVarA(boolean value) {
-		sCIDefault.setVarA(value);
+		sCInterface.setVarA(value);
 	}
 	public int getVarB() {
-		return sCIDefault.getVarB();
+		return sCInterface.getVarB();
 	}
 
 	public void setVarB(int value) {
-		sCIDefault.setVarB(value);
+		sCInterface.setVarB(value);
 	}
 	public double getVarC() {
-		return sCIDefault.getVarC();
+		return sCInterface.getVarC();
 	}
 
 	public void setVarC(double value) {
-		sCIDefault.setVarC(value);
+		sCInterface.setVarC(value);
 	}
 	public String getVarD() {
-		return sCIDefault.getVarD();
+		return sCInterface.getVarD();
 	}
 
 	public void setVarD(String value) {
-		sCIDefault.setVarD(value);
+		sCInterface.setVarD(value);
 	}
 
 	/* Entry action for statechart 'Declarations'. */

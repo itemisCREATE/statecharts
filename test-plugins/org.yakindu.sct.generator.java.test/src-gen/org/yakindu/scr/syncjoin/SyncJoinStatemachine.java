@@ -2,7 +2,7 @@ package org.yakindu.scr.syncjoin;
 
 public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -37,7 +37,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, main_region_B_r1_C1, main_region_B_r1_C2, main_region_B_r2_D1, main_region_B_r2_D2, $NullState$
@@ -49,7 +49,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	public SyncJoinStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -113,7 +113,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -142,21 +142,21 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE() {
-		sCIDefault.raiseE();
+		sCInterface.raiseE();
 	}
 	public void raiseF() {
-		sCIDefault.raiseF();
+		sCInterface.raiseF();
 	}
 	public void raiseJc() {
-		sCIDefault.raiseJc();
+		sCInterface.raiseJc();
 	}
 	public void raiseJd() {
-		sCIDefault.raiseJd();
+		sCInterface.raiseJd();
 	}
 
 	/* Entry action for statechart 'SyncJoin'. */
@@ -169,7 +169,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.e || sCIDefault.f) {
+		if (sCInterface.e || sCInterface.f) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -183,7 +183,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	/* The reactions of state C1. */
 	private void reactMain_region_B_r1_C1() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -194,8 +194,8 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	/* The reactions of state C2. */
 	private void reactMain_region_B_r1_C2() {
-		if (sCIDefault.jc && isStateActive(State.main_region_B_r2_D2)
-				&& sCIDefault.jd) {
+		if (sCInterface.jc && isStateActive(State.main_region_B_r2_D2)
+				&& sCInterface.jd) {
 			switch (stateVector[0]) {
 				case main_region_B_r1_C1 :
 					nextStateIndex = 0;
@@ -234,7 +234,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	/* The reactions of state D1. */
 	private void reactMain_region_B_r2_D1() {
-		if (sCIDefault.f) {
+		if (sCInterface.f) {
 			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
@@ -245,8 +245,8 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 	/* The reactions of state D2. */
 	private void reactMain_region_B_r2_D2() {
-		if (sCIDefault.jd && isStateActive(State.main_region_B_r1_C2)
-				&& sCIDefault.jc) {
+		if (sCInterface.jd && isStateActive(State.main_region_B_r1_C2)
+				&& sCInterface.jc) {
 			switch (stateVector[0]) {
 				case main_region_B_r1_C1 :
 					nextStateIndex = 0;

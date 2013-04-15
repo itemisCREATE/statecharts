@@ -17,11 +17,11 @@ TEST(StatemachineTest, ExitTaken) {
 	guardedExit_init(&handle);
 	guardedExit_enter(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_A));
-	EXPECT_TRUE(!guardedExitIface_get_guard(&handle));
+	EXPECT_TRUE(!guardedExitIface_get_guard(&handle) );
 	guardedExitIface_raise_e(&handle);
 	guardedExit_runCycle(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_B));
-	EXPECT_TRUE(!guardedExitIface_get_done(&handle));
+	EXPECT_TRUE(!guardedExitIface_get_done(&handle) );
 }
 TEST(StatemachineTest, ExitNotTaken) {
 	GuardedExit handle;
@@ -32,5 +32,5 @@ TEST(StatemachineTest, ExitNotTaken) {
 	guardedExitIface_raise_e(&handle);
 	guardedExit_runCycle(&handle);
 	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_B));
-	EXPECT_TRUE(guardedExitIface_get_done(&handle));
+	EXPECT_TRUE(guardedExitIface_get_done(&handle) );
 }

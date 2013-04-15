@@ -3,13 +3,16 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IChoiceStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
-		public void raisePressKey();
-		public int getValue();
-		public void setValue(int value);
+	public interface SCInterface {
+		public void raiseE();
+		public void raiseF();
+		public void raiseG();
+		public void raiseH();
+		public boolean getC();
+		public void setC(boolean value);
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

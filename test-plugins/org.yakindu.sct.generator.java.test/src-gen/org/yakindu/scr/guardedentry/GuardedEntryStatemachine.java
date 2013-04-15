@@ -2,7 +2,7 @@ package org.yakindu.scr.guardedentry;
 
 public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
 
@@ -36,7 +36,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -48,7 +48,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
 	public GuardedEntryStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -60,16 +60,16 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.guard = false;
+		sCInterface.guard = false;
 
-		sCIDefault.done = false;
+		sCInterface.done = false;
 	}
 
 	public void enter() {
 		entryAction();
 
-		if (sCIDefault.guard) {
-			sCIDefault.done = true;
+		if (sCInterface.guard) {
+			sCInterface.done = true;
 		}
 
 		nextStateIndex = 0;
@@ -96,7 +96,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -114,27 +114,27 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE() {
-		sCIDefault.raiseE();
+		sCInterface.raiseE();
 	}
 
 	public boolean getGuard() {
-		return sCIDefault.getGuard();
+		return sCInterface.getGuard();
 	}
 
 	public void setGuard(boolean value) {
-		sCIDefault.setGuard(value);
+		sCInterface.setGuard(value);
 	}
 	public boolean getDone() {
-		return sCIDefault.getDone();
+		return sCInterface.getDone();
 	}
 
 	public void setDone(boolean value) {
-		sCIDefault.setDone(value);
+		sCInterface.setDone(value);
 	}
 
 	/* Entry action for statechart 'GuardedEntry'. */
@@ -147,7 +147,7 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -158,12 +158,12 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (sCIDefault.e) {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			if (sCIDefault.guard) {
-				sCIDefault.done = true;
+			if (sCInterface.guard) {
+				sCInterface.done = true;
 			}
 
 			nextStateIndex = 0;

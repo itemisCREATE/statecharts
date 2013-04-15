@@ -36,35 +36,66 @@ public class ChoiceTest {
 	}
 
 	@Test
-	public void testchoiceTest() {
+	public void testelseChoiceUsingNonDefaultTransition() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.getValue() == 4);
-		statemachine.raisePressKey();
-		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_B));
-		assertTrue(statemachine.getValue() == 3);
-		statemachine.raisePressKey();
-		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raisePressKey();
+		statemachine.setC(true);
+		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		assertTrue(statemachine.getValue() == 2);
-		statemachine.raisePressKey();
+	}
+	@Test
+	public void testelseChoiceUsingDefaultTransition() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.setC(false);
+		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B));
-		assertTrue(statemachine.getValue() == 1);
-		statemachine.raisePressKey();
-		statemachine.runCycle();
+	}
+	@Test
+	public void testdefaultChoiceUsingNonDefaultTransition() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.getValue() == 1);
-		statemachine.raisePressKey();
+		statemachine.setC(true);
+		statemachine.raiseG();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
-		assertTrue(statemachine.getValue() == 0);
-		statemachine.raisePressKey();
-		statemachine.runCycle();
+	}
+	@Test
+	public void testdefaultChoiceUsingDefaultTransition() {
+		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.setC(false);
+		statemachine.raiseG();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.main_region_B));
+	}
+	@Test
+	public void testuncheckedChoiceUsingNonDefaultTransition() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.setC(true);
+		statemachine.raiseF();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.main_region_C));
+	}
+	@Test
+	public void testuncheckedChoiceUsingDefaultTransition() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.setC(false);
+		statemachine.raiseF();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.main_region_B));
+	}
+	@Test
+	public void testalwaysTrueTransitionInChoice() {
+		statemachine.enter();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		statemachine.setC(true);
+		statemachine.raiseH();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
 }

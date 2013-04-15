@@ -2,7 +2,7 @@ package org.yakindu.scr.bitexpressions;
 
 public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -96,7 +96,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -108,7 +108,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
 	public BitExpressionsStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -120,29 +120,29 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.myBit1 = 0;
+		sCInterface.myBit1 = 0;
 
-		sCIDefault.myBit2 = 0;
+		sCInterface.myBit2 = 0;
 
-		sCIDefault.leftBitshift = 0;
+		sCInterface.leftBitshift = 0;
 
-		sCIDefault.rightBitshift = 0;
+		sCInterface.rightBitshift = 0;
 
-		sCIDefault.complementBitshift = 0;
+		sCInterface.complementBitshift = 0;
 
-		sCIDefault.bitwiseAnd = 0;
+		sCInterface.bitwiseAnd = 0;
 
-		sCIDefault.bitwiseOr = 0;
+		sCInterface.bitwiseOr = 0;
 
-		sCIDefault.bitwiseXor = 0;
+		sCInterface.bitwiseXor = 0;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.myBit1 = 5;
+		sCInterface.myBit1 = 5;
 
-		sCIDefault.myBit2 = 7;
+		sCInterface.myBit2 = 7;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
@@ -168,7 +168,7 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -186,69 +186,69 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE1() {
-		sCIDefault.raiseE1();
+		sCInterface.raiseE1();
 	}
 
 	public int getMyBit1() {
-		return sCIDefault.getMyBit1();
+		return sCInterface.getMyBit1();
 	}
 
 	public void setMyBit1(int value) {
-		sCIDefault.setMyBit1(value);
+		sCInterface.setMyBit1(value);
 	}
 	public int getMyBit2() {
-		return sCIDefault.getMyBit2();
+		return sCInterface.getMyBit2();
 	}
 
 	public void setMyBit2(int value) {
-		sCIDefault.setMyBit2(value);
+		sCInterface.setMyBit2(value);
 	}
 	public int getLeftBitshift() {
-		return sCIDefault.getLeftBitshift();
+		return sCInterface.getLeftBitshift();
 	}
 
 	public void setLeftBitshift(int value) {
-		sCIDefault.setLeftBitshift(value);
+		sCInterface.setLeftBitshift(value);
 	}
 	public int getRightBitshift() {
-		return sCIDefault.getRightBitshift();
+		return sCInterface.getRightBitshift();
 	}
 
 	public void setRightBitshift(int value) {
-		sCIDefault.setRightBitshift(value);
+		sCInterface.setRightBitshift(value);
 	}
 	public int getComplementBitshift() {
-		return sCIDefault.getComplementBitshift();
+		return sCInterface.getComplementBitshift();
 	}
 
 	public void setComplementBitshift(int value) {
-		sCIDefault.setComplementBitshift(value);
+		sCInterface.setComplementBitshift(value);
 	}
 	public int getBitwiseAnd() {
-		return sCIDefault.getBitwiseAnd();
+		return sCInterface.getBitwiseAnd();
 	}
 
 	public void setBitwiseAnd(int value) {
-		sCIDefault.setBitwiseAnd(value);
+		sCInterface.setBitwiseAnd(value);
 	}
 	public int getBitwiseOr() {
-		return sCIDefault.getBitwiseOr();
+		return sCInterface.getBitwiseOr();
 	}
 
 	public void setBitwiseOr(int value) {
-		sCIDefault.setBitwiseOr(value);
+		sCInterface.setBitwiseOr(value);
 	}
 	public int getBitwiseXor() {
-		return sCIDefault.getBitwiseXor();
+		return sCInterface.getBitwiseXor();
 	}
 
 	public void setBitwiseXor(int value) {
-		sCIDefault.setBitwiseXor(value);
+		sCInterface.setBitwiseXor(value);
 	}
 
 	/* Entry action for statechart 'BitExpressions'. */
@@ -261,21 +261,21 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.leftBitshift = sCIDefault.myBit1 << 1;
+			sCInterface.leftBitshift = sCInterface.myBit1 << 1;
 
-			sCIDefault.rightBitshift = sCIDefault.myBit1 >> 1;
+			sCInterface.rightBitshift = sCInterface.myBit1 >> 1;
 
-			sCIDefault.complementBitshift = ~sCIDefault.myBit1;
+			sCInterface.complementBitshift = ~sCInterface.myBit1;
 
-			sCIDefault.bitwiseAnd = sCIDefault.myBit1 & sCIDefault.myBit2;
+			sCInterface.bitwiseAnd = sCInterface.myBit1 & sCInterface.myBit2;
 
-			sCIDefault.bitwiseOr = sCIDefault.myBit1 | sCIDefault.myBit2;
+			sCInterface.bitwiseOr = sCInterface.myBit1 | sCInterface.myBit2;
 
-			sCIDefault.bitwiseXor = sCIDefault.myBit1 ^ sCIDefault.myBit2;
+			sCInterface.bitwiseXor = sCInterface.myBit1 ^ sCInterface.myBit2;
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_StateB;

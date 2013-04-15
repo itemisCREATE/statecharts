@@ -5,12 +5,12 @@ public interface ISTextKeywordsInStatesAndRegionsStatemachine
 		extends
 			IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE1();
 		public void raiseE2();
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

@@ -2,7 +2,7 @@ package org.yakindu.scr.parenthesis;
 
 public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private int erg;
 
@@ -16,7 +16,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		mainRegion_A, $NullState$
@@ -28,7 +28,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 	public ParenthesisStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -40,13 +40,13 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.erg = 0;
+		sCInterface.erg = 0;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.erg = 4 * (3 - 1);
+		sCInterface.erg = 4 * (3 - 1);
 
 		nextStateIndex = 0;
 		stateVector[0] = State.mainRegion_A;
@@ -82,16 +82,16 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public int getErg() {
-		return sCIDefault.getErg();
+		return sCInterface.getErg();
 	}
 
 	public void setErg(int value) {
-		sCIDefault.setErg(value);
+		sCInterface.setErg(value);
 	}
 
 	/* Entry action for statechart 'Parenthesis'. */

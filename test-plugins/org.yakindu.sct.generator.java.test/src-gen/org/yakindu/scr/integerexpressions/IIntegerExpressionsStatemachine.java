@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IIntegerExpressionsStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE1();
 		public int getMyInt1();
 		public void setMyInt1(int value);
@@ -48,6 +48,6 @@ public interface IIntegerExpressionsStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

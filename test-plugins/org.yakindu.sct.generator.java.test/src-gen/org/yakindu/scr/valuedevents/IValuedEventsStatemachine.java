@@ -3,13 +3,13 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IValuedEventsStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseIntegerEvent(int value);
 		public int getMyVar();
 		public void setMyVar(int value);
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

@@ -3,7 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface ISyncJoinStatemachine extends IStatemachine {
 
-	public interface SCIDefault {
+	public interface SCInterface {
 		public void raiseE();
 		public void raiseF();
 		public void raiseJc();
@@ -11,6 +11,6 @@ public interface ISyncJoinStatemachine extends IStatemachine {
 
 	}
 
-	public SCIDefault getSCIDefault();
+	public SCInterface getSCInterface();
 
 }

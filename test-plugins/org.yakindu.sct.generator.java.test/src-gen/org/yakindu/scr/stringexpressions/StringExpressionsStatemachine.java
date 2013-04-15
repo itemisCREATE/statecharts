@@ -4,7 +4,7 @@ public class StringExpressionsStatemachine
 		implements
 			IStringExpressionsStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -58,7 +58,7 @@ public class StringExpressionsStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -70,7 +70,7 @@ public class StringExpressionsStatemachine
 
 	public StringExpressionsStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -82,21 +82,21 @@ public class StringExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.myString = "";
+		sCInterface.myString = "";
 
-		sCIDefault.myString2 = "";
+		sCInterface.myString2 = "";
 
-		sCIDefault.equals = false;
+		sCInterface.equals = false;
 
-		sCIDefault.notEqual = false;
+		sCInterface.notEqual = false;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.myString = "hello";
+		sCInterface.myString = "hello";
 
-		sCIDefault.myString2 = "world";
+		sCInterface.myString2 = "world";
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
@@ -122,7 +122,7 @@ public class StringExpressionsStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -140,41 +140,41 @@ public class StringExpressionsStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE1() {
-		sCIDefault.raiseE1();
+		sCInterface.raiseE1();
 	}
 
 	public String getMyString() {
-		return sCIDefault.getMyString();
+		return sCInterface.getMyString();
 	}
 
 	public void setMyString(String value) {
-		sCIDefault.setMyString(value);
+		sCInterface.setMyString(value);
 	}
 	public String getMyString2() {
-		return sCIDefault.getMyString2();
+		return sCInterface.getMyString2();
 	}
 
 	public void setMyString2(String value) {
-		sCIDefault.setMyString2(value);
+		sCInterface.setMyString2(value);
 	}
 	public boolean getEquals() {
-		return sCIDefault.getEquals();
+		return sCInterface.getEquals();
 	}
 
 	public void setEquals(boolean value) {
-		sCIDefault.setEquals(value);
+		sCInterface.setEquals(value);
 	}
 	public boolean getNotEqual() {
-		return sCIDefault.getNotEqual();
+		return sCInterface.getNotEqual();
 	}
 
 	public void setNotEqual(boolean value) {
-		sCIDefault.setNotEqual(value);
+		sCInterface.setNotEqual(value);
 	}
 
 	/* Entry action for statechart 'StringExpressions'. */
@@ -187,17 +187,17 @@ public class StringExpressionsStatemachine
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.equals = (sCIDefault.myString == null
-					? sCIDefault.myString2 == null
-					: sCIDefault.myString.equals(sCIDefault.myString2));
+			sCInterface.equals = (sCInterface.myString == null
+					? sCInterface.myString2 == null
+					: sCInterface.myString.equals(sCInterface.myString2));
 
-			sCIDefault.notEqual = (sCIDefault.myString == null
-					? sCIDefault.myString2 == null
-					: !sCIDefault.myString.equals(sCIDefault.myString2));
+			sCInterface.notEqual = (sCInterface.myString == null
+					? sCInterface.myString2 == null
+					: !sCInterface.myString.equals(sCInterface.myString2));
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_StateB;

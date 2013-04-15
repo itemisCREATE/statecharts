@@ -38,35 +38,66 @@ public class ChoiceTest extends AbstractExecutionFlowTest {
 		initInterpreter(flow);
 	}
 	@Test
-	public void choiceTest() throws Exception {
+	public void elseChoiceUsingNonDefaultTransition() throws Exception {
 		interpreter.enter();
 		assertTrue(isActive("A"));
-		assertTrue(getInteger("value") == 4);
-		raiseEvent("pressKey");
-		interpreter.runCycle();
-		assertTrue(isActive("B"));
-		assertTrue(getInteger("value") == 3);
-		raiseEvent("pressKey");
-		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		raiseEvent("pressKey");
+		setBoolean("c", true);
+		raiseEvent("e");
 		interpreter.runCycle();
 		assertTrue(isActive("C"));
-		assertTrue(getInteger("value") == 2);
-		raiseEvent("pressKey");
+	}
+	@Test
+	public void elseChoiceUsingDefaultTransition() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("A"));
+		setBoolean("c", false);
+		raiseEvent("e");
 		interpreter.runCycle();
 		assertTrue(isActive("B"));
-		assertTrue(getInteger("value") == 1);
-		raiseEvent("pressKey");
-		interpreter.runCycle();
+	}
+	@Test
+	public void defaultChoiceUsingNonDefaultTransition() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
-		assertTrue(getInteger("value") == 1);
-		raiseEvent("pressKey");
+		setBoolean("c", true);
+		raiseEvent("g");
 		interpreter.runCycle();
 		assertTrue(isActive("C"));
-		assertTrue(getInteger("value") == 0);
-		raiseEvent("pressKey");
-		interpreter.runCycle();
+	}
+	@Test
+	public void defaultChoiceUsingDefaultTransition() throws Exception {
+		interpreter.enter();
 		assertTrue(isActive("A"));
+		setBoolean("c", false);
+		raiseEvent("g");
+		interpreter.runCycle();
+		assertTrue(isActive("B"));
+	}
+	@Test
+	public void uncheckedChoiceUsingNonDefaultTransition() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("A"));
+		setBoolean("c", true);
+		raiseEvent("f");
+		interpreter.runCycle();
+		assertTrue(isActive("C"));
+	}
+	@Test
+	public void uncheckedChoiceUsingDefaultTransition() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("A"));
+		setBoolean("c", false);
+		raiseEvent("f");
+		interpreter.runCycle();
+		assertTrue(isActive("B"));
+	}
+	@Test
+	public void alwaysTrueTransitionInChoice() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("A"));
+		setBoolean("c", true);
+		raiseEvent("h");
+		interpreter.runCycle();
+		assertTrue(isActive("B"));
 	}
 }

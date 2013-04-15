@@ -31,5 +31,15 @@ testgroup ExitState for statechart ExitState{
 		assert active(ExitState.r.E) 
 	} 
 
+
+	/* If no event is raised then the statechart must remain in state A.  */
+	test remainInA { 
+		enter
+		assert active(ExitState.r.A)
+		
+		cycle
+		assert active(ExitState.r.A) 
+	} 
+
 }
 	
