@@ -12,6 +12,7 @@ import java.util.ArrayList
 import org.yakindu.sct.model.sgraph.EntryKind
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
+import org.yakindu.sct.model.stext.stext.ExitPointSpec
 
 
 class SgraphExtensions {
@@ -63,6 +64,17 @@ class SgraphExtensions {
 		
 		if (eps == null) 'default' else eps.entrypoint	
 	}
+
+	/**
+	 * Returns the name of the specified entry point or 'default' if it does not exist
+	 */
+	def String exitPointName(Transition t) {
+		val eps = t.properties.filter(typeof(ExitPointSpec)).head
+		
+		if (eps == null) 'default' else eps.exitpoint	
+	}
+	
+
 	
 	/**
 	 * Retrieves the target from an entry.

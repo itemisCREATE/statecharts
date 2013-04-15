@@ -52,12 +52,12 @@ class StateVectorBuilder {
 	}
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of the statechart */
-	def int defineStateVectors(Statechart sc, int offset) {
+	def dispatch int defineStateVectors(Statechart sc, int offset) {
 		sc.regions.fold(0, [o, r | r.maxOrthogonality + o])
 	}
 
 	/** calculates the maximum orthogonality (maximum number of possible active leaf states) of a region */
-	def int defineStateVectors(Region r, int offset) {
+	def dispatch int defineStateVectors(Region r, int offset) {
 		val maxOrthogonality = r.vertices.fold(0, [s, v | {
 			val mo = v.defineStateVectors(offset)
 			if (mo > s) mo else s }])
