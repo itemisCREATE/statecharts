@@ -1,5 +1,5 @@
 
-testgroup SafeTest for statechart Safe{
+testgroup NamedInterfaceAccess for statechart NamedInterfaceAccess{
 	test SafeOpenSuccess { 
 		enter
 		
