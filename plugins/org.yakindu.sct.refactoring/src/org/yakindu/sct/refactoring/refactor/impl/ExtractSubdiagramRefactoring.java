@@ -176,9 +176,18 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	protected void createExitPoint(Edge edge, Diagram subdiagram) {
 		Transition transition = (Transition) edge.getElement();
 		String name = getExitPointName(transition);
-		createSemanticExitPoint(transition, name);
-		transition.setSource((State) subdiagram.getElement());
-		EList<ReactionProperty> properties = transition.getProperties();
+		Region exitPointTarget = transition.getSource().getParentRegion();
+		Exit exitPoint = SGraphFactory.eINSTANCE.createExit();
+		exitPoint.setName(name);
+		exitPointTarget.getVertices().add(exitPoint);
+		Vertex oldTarget = transition.getTarget();
+		transition.setTarget(exitPoint);
+		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
+		exitPointTransition.setSource((State) subdiagram.getElement());
+		exitPointTransition.setTarget(oldTarget);
+		ViewService.createEdge(getContextObject(), edge.getTarget(), exitPointTransition, SemanticHints.TRANSITION,
+				preferencesHint);
+		EList<ReactionProperty> properties = exitPointTransition.getProperties();
 		ExitPointSpec exitPointSpec = StextFactory.eINSTANCE.createExitPointSpec();
 		// A transition can only have one entry point so alter the existing
 		for (ReactionProperty reactionProperty : properties) {
@@ -188,17 +197,6 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		}
 		exitPointSpec.setExitpoint(name);
 		properties.add(exitPointSpec);
-		edge.setSource(getContextObject());
-	}
-
-	protected void createSemanticExitPoint(Transition transition, String name) {
-		Region exitPointTarget = transition.getSource().getParentRegion();
-		Exit exitPoint = SGraphFactory.eINSTANCE.createExit();
-		exitPoint.setName(name);
-		exitPointTarget.getVertices().add(exitPoint);
-		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
-		exitPointTransition.setTarget(exitPoint);
-		exitPointTransition.setSource(transition.getSource());
 	}
 
 	/**
