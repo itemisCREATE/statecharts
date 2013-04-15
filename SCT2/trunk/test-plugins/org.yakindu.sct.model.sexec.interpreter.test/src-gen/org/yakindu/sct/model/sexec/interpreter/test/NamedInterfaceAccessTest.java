@@ -22,19 +22,20 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 import static junit.framework.Assert.*;
 /**
- *  Unit TestCase for Safe
+ *  Unit TestCase for NamedInterfaceAccess
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class SafeTestTest extends AbstractExecutionFlowTest {
+public class NamedInterfaceAccessTest extends AbstractExecutionFlowTest {
 
 	@Inject
 	private SCTUnitTestModels models;
 
 	@Before
 	public void setup() throws Exception {
-		ExecutionFlow flow = models.loadExecutionFlowFromResource("Safe.sct");
+		ExecutionFlow flow = models
+				.loadExecutionFlowFromResource("NamedInterfaceAccess.sct");
 		initInterpreter(flow);
 	}
 	@Test
