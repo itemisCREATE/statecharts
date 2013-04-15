@@ -22,9 +22,12 @@ import org.yakindu.sct.model.sexec.Sequence;
 import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.transformation.test.Assert.StepLeaf;
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
@@ -56,7 +59,10 @@ public class StatechartEnterExistActionTest extends ModelSequencerTest {
 
 			Region r = _createRegion("r", sc);
 			{
-				_createState("s1", r);
+				Entry e = _createEntry(EntryKind.INITIAL, null, r);
+				State s1 = _createState("s1", r);
+				
+				Transition t = _createTransition(e, s1); 
 			}
 		}
 

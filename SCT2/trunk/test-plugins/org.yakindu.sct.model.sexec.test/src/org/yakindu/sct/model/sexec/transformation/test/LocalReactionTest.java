@@ -1,8 +1,6 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.flattenSequenceStepsAsList;
@@ -23,9 +21,11 @@ import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
+import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class LocalReactionTest extends ModelSequencerTest {
@@ -72,7 +72,9 @@ public class LocalReactionTest extends ModelSequencerTest {
 			}
 		}
 
-		_createTransition(findState(sc, "s3"), findState(sc, "s6"));
+		Transition t = _createTransition(findState(sc, "s3"), findState(sc, "s6"));
+		ReactionTrigger tr = _createReactionTrigger(t);
+		tr.setGuardExpression(_createValue(true));
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
@@ -118,7 +120,7 @@ public class LocalReactionTest extends ModelSequencerTest {
 				assertClass(CheckRef.class, _if.getCheck()).getCheck());
 
 		_if = assertClass(If.class, steps.get(2));
-		assertNull(assertClass(CheckRef.class, _if.getCheck()).getCheck());
+		assertNotNull(assertClass(CheckRef.class, _if.getCheck()).getCheck());
 		assertCall(_if.getThenStep(), _effect);
 	}
 
