@@ -1,7 +1,7 @@
-package org.yakindu.scr.safe;
+package org.yakindu.scr.namedinterfaceaccess;
 import org.yakindu.scr.IStatemachine;
 
-public interface ISafeStatemachine extends IStatemachine {
+public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 
 	public interface SCISafe {
 		public boolean isRaisedOpen();

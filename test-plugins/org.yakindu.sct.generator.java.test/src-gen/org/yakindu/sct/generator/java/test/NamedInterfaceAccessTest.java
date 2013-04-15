@@ -14,19 +14,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.safe.SafeStatemachine;
-import org.yakindu.scr.safe.SafeStatemachine.State;
+import org.yakindu.scr.namedinterfaceaccess.NamedInterfaceAccessStatemachine;
+import org.yakindu.scr.namedinterfaceaccess.NamedInterfaceAccessStatemachine.State;
 /**
- *  Unit TestCase for Safe
+ *  Unit TestCase for NamedInterfaceAccess
  */
 @SuppressWarnings("all")
-public class SafeTestTest {
+public class NamedInterfaceAccessTest {
 
-	private SafeStatemachine statemachine;
+	private NamedInterfaceAccessStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new SafeStatemachine();
+		statemachine = new NamedInterfaceAccessStatemachine();
 		statemachine.init();
 	}
 
