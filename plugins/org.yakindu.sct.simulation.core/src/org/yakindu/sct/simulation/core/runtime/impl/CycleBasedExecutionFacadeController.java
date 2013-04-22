@@ -13,6 +13,7 @@ package org.yakindu.sct.simulation.core.runtime.impl;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeController;
 
@@ -32,9 +33,9 @@ public class CycleBasedExecutionFacadeController extends
 
 	private long cyclePeriod;
 
-	public CycleBasedExecutionFacadeController(IExecutionFacade facade,
+	public CycleBasedExecutionFacadeController(SCTDebugTarget target,
 			long cyclePeriod) {
-		super(facade);
+		super(target);
 		this.cyclePeriod = cyclePeriod;
 		timer = new Timer();
 	}
@@ -43,8 +44,8 @@ public class CycleBasedExecutionFacadeController extends
 		if (!terminated && !suspended) {
 			TimerTask virtualTimerTask = new TimerTask() {
 				public void run() {
-					facade.runCycle();
-					scheduleCycle();
+						runCycle();
+						scheduleCycle();
 				}
 			};
 			timer.schedule(virtualTimerTask, cyclePeriod);
@@ -55,7 +56,7 @@ public class CycleBasedExecutionFacadeController extends
 		super.start();
 		scheduleCycle();
 	}
-	
+
 	public void resume() {
 		super.resume();
 		scheduleCycle();

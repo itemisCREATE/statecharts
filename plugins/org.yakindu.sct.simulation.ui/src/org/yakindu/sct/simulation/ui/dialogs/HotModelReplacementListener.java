@@ -43,7 +43,7 @@ public class HotModelReplacementListener implements
 					if (display.isDisposed()) {
 						return;
 					}
-					HotModelReplaceErrorDialog dialog = new HotModelReplaceErrorDialog(
+					SimulationLaunchErrorDialog dialog = new SimulationLaunchErrorDialog(
 							DebugUIPlugin.getShell(), title, MESSAGE, status,
 							targets);
 					dialog.setBlockOnOpen(false);
