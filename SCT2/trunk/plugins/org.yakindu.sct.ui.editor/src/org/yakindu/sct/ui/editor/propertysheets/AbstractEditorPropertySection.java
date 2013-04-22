@@ -10,12 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.AbstractModelerPropertySection;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.bindings.keys.KeyStroke;
@@ -32,7 +28,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -51,9 +49,9 @@ import com.google.inject.Injector;
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import de.itemis.xtext.utils.jface.viewers.FilteringMenuManager;
 import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * 
@@ -117,31 +115,6 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 		return toolkit;
 	}
 
-	/**
-	 * returns the resource that is active in the current editor, this is used
-	 * for the {@link XtextPropertyDescriptor}s context resource to enable
-	 * scoping to elements outside the text block
-	 */
-	protected Resource getActiveEditorResource() {
-		IEditorPart editor = ActiveEditorTracker.getLastActiveEditor();
-
-		EditingDomain domain = null;
-		if (editor instanceof IEditingDomainProvider) {
-			domain = ((IEditingDomainProvider) editor).getEditingDomain();
-		} else if (editor.getAdapter(IEditingDomainProvider.class) != null) {
-			domain = ((IEditingDomainProvider) editor.getAdapter(IEditingDomainProvider.class)).getEditingDomain();
-		} else if (editor.getAdapter(EditingDomain.class) != null) {
-			domain = (EditingDomain) editor.getAdapter(EditingDomain.class);
-		}
-		if (domain == null) {
-			return null;
-		}
-
-		EList<Resource> resources = domain.getResourceSet().getResources();
-
-		return resources.get(0); // always take the first resource ...
-	}
-
 	protected void enableXtext(Control styledText, Injector injector) {
 		final StyledTextXtextAdapter xtextAdapter = new StyledTextXtextAdapter(injector);
 		xtextAdapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
@@ -167,9 +140,15 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 	}
 
 	protected Injector getInjector(SemanticTarget semanticTarget) {
-		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getRegisteredProvider(
-				semanticTarget, getActiveEditorResource().getURI().fileExtension());
-		return registeredProvider.getInjector();
+		IEditorPart editor = ActiveEditorTracker.getLastActiveEditor();
+		IEditorInput editorInput = editor.getEditorInput();
+		if (editorInput instanceof IFileEditorInput) {
+			String extension = ((IFileEditorInput) editorInput).getFile().getFileExtension();
+			IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
+					.getRegisteredProvider(semanticTarget, extension);
+			return registeredProvider.getInjector();
+		}
+		return null;
 	}
 
 	public EObject getContextObject() {
