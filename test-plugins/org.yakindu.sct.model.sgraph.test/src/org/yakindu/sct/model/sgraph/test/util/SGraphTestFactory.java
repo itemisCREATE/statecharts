@@ -11,8 +11,8 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.impl.SGraphFactoryImpl;
 
-public class SgraphTestFactory extends SGraphFactoryImpl {
-	public static SgraphTestFactory eInstance = new SgraphTestFactory();
+public class SGraphTestFactory extends SGraphFactoryImpl {
+	public static SGraphTestFactory eInstance = new SGraphTestFactory();
 
 	public static Statechart _createStatechart(String name) {
 		Statechart sc = SGraphFactory.eINSTANCE.createStatechart();

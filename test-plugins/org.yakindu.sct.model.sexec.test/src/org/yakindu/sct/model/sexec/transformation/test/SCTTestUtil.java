@@ -1,6 +1,6 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory.*;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory.*;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
 
 import java.util.Collection;

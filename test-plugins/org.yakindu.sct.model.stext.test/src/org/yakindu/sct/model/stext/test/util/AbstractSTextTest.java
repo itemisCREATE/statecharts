@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.stext.test.util;
 
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
 
 import java.io.StringReader;
 

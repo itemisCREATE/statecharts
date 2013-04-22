@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.flattenSequenceStepsAsList;
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory.*;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory.*;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
 
 import java.util.List;

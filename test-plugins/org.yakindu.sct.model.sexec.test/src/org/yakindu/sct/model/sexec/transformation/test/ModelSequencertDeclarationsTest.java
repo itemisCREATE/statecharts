@@ -5,10 +5,10 @@ import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createRegion;
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createState;
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createStatechart;
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory._createTransition;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
 
 import org.junit.Test;
