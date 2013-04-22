@@ -2,7 +2,7 @@ package org.yakindu.sct.model.sexec.transformation.test;
 
 import static org.junit.Assert.fail;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
-import static org.yakindu.sct.model.sgraph.test.util.SgraphTestFactory.*;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory.*;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
 
 import org.eclipse.emf.common.util.TreeIterator;

@@ -24,12 +24,19 @@ import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_NODE_NOT_REACHABLE;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_NAME;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.Check;
@@ -45,8 +52,10 @@ import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.sgraph.test.util.SGraphTestModelUtil;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
@@ -357,6 +366,74 @@ public class SGraphJavaValidationTest {
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
+	}
+
+	@Test
+	public void orthogonalStates() {
+		statechart = SGraphTestModelUtil.loadStatechart("NotOrthogonalRegion01.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Synchronization) {
+				assertFalse(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics,
+				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL);
+		assertError(diagnostics,
+				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
+
+		diagnostics = new BasicDiagnostic();
+		statechart = SGraphTestModelUtil.loadStatechart("NotOrthogonalRegion02.sct");
+		iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Synchronization) {
+				assertFalse(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics,
+				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+		assertError(diagnostics,
+				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+
+		diagnostics = new BasicDiagnostic();
+		statechart = SGraphTestModelUtil.loadStatechart("NotOrthogonalRegion03.sct");
+		iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Synchronization) {
+				assertFalse(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics,
+				ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+		assertError(diagnostics,
+				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
+	}
+
+	@Test
+	public void orthogonalStatesValid() {
+		statechart = SGraphTestModelUtil.loadStatechart("OrthogonalRegion01.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Synchronization) {
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 0);
 	}
 
 	/**
