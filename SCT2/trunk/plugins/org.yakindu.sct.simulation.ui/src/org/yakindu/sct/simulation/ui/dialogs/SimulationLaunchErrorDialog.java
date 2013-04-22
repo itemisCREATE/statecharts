@@ -28,13 +28,13 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class HotModelReplaceErrorDialog extends ErrorDialog {
+public class SimulationLaunchErrorDialog extends ErrorDialog {
 
 	protected List<SCTDebugTarget> targets;
 
 	private static final int RELAUNCH_ID = 42;
 
-	public HotModelReplaceErrorDialog(Shell parentShell, String dialogTitle,
+	public SimulationLaunchErrorDialog(Shell parentShell, String dialogTitle,
 			String message, IStatus status, List<SCTDebugTarget> target) {
 		super(parentShell, dialogTitle, message, status, IStatus.WARNING
 				| IStatus.ERROR | IStatus.INFO);
@@ -45,6 +45,11 @@ public class HotModelReplaceErrorDialog extends ErrorDialog {
 		super.createButtonsForButtonBar(parent);
 		getButton(IDialogConstants.OK_ID).setText("Terminate");
 		createButton(parent, RELAUNCH_ID, "Relaunch", false);
+	}
+
+	@Override
+	protected void createDetailsButton(Composite parent) {
+		// No Detail section required
 	}
 
 	protected Button createButton(Composite parent, int id, String label,

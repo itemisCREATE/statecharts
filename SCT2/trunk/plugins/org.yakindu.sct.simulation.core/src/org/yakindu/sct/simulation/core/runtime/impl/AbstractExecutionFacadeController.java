@@ -11,6 +11,13 @@
 
 package org.yakindu.sct.simulation.core.runtime.impl;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.debug.core.IStatusHandler;
+import org.eclipse.emf.common.util.WrappedException;
+import org.yakindu.sct.simulation.core.Activator;
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeController;
 
@@ -23,13 +30,36 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeController;
 public abstract class AbstractExecutionFacadeController implements
 		IExecutionFacadeController {
 
+	public static final int ERROR_DURING_SIMULATION = 765;
+
 	protected final IExecutionFacade facade;
 
 	protected boolean terminated = false;
 	protected boolean suspended = false;
 
-	public AbstractExecutionFacadeController(IExecutionFacade facade) {
-		this.facade = facade;
+	private SCTDebugTarget target;
+
+	public AbstractExecutionFacadeController(SCTDebugTarget target) {
+		this.target = target;
+		this.facade = (IExecutionFacade) target
+				.getAdapter(IExecutionFacade.class);
+	}
+
+	protected void runCycle() {
+		try {
+			facade.runCycle();
+		} catch (WrappedException ex) {
+			Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID,
+					ERROR_DURING_SIMULATION, ex.getCause().getMessage(),
+					ex.getCause());
+			IStatusHandler statusHandler = DebugPlugin.getDefault()
+					.getStatusHandler(errorStatus);
+			try {
+				statusHandler.handleStatus(errorStatus, target);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void start() {
@@ -48,9 +78,9 @@ public abstract class AbstractExecutionFacadeController implements
 		terminated = true;
 		facade.tearDown();
 	}
-	
+
 	public void step() {
-		facade.runCycle();		
+		facade.runCycle();
 	}
 
 }

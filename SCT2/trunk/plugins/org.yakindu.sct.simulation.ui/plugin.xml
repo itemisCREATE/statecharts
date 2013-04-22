@@ -72,6 +72,15 @@
           plugin="org.yakindu.sct.simulation.core">
     </statusHandler>
  </extension>
+  <extension
+       point="org.eclipse.debug.core.statusHandlers">
+    <statusHandler
+          class="org.yakindu.sct.simulation.ui.handler.TerminateLaunchStatusHandler"
+          code="765"
+          id="org.yakindu.sct.simulation.ui.statushandler"
+          plugin="org.yakindu.sct.simulation.core">
+    </statusHandler>
+ </extension>
  
  <!-- Source Display Adapter factory -->
  <extension

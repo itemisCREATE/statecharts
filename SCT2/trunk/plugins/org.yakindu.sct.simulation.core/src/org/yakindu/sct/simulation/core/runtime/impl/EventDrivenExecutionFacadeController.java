@@ -11,8 +11,8 @@
 
 package org.yakindu.sct.simulation.core.runtime.impl;
 
+import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
-import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacadeController;
 
 /**
@@ -26,8 +26,8 @@ public class EventDrivenExecutionFacadeController extends
 
 	private Thread cycleRunner;
 
-	public EventDrivenExecutionFacadeController(IExecutionFacade facade) {
-		super(facade);
+	public EventDrivenExecutionFacadeController(SCTDebugTarget target) {
+		super(target);
 	}
 
 	public void start() {
@@ -56,7 +56,7 @@ public class EventDrivenExecutionFacadeController extends
 				IExecutionContext context = facade.getExecutionContext();
 				if (context.getRaisedEvents().size() > 0
 						|| context.getScheduledEvents().size() > 0) {
-					facade.runCycle();
+					runCycle();
 				}
 			}
 		}

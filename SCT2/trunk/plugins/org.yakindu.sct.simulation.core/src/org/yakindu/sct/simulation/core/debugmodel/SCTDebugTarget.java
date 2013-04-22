@@ -122,10 +122,10 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		if (isCycleBased) {
 			long cyclePeriod = launch.getLaunchConfiguration().getAttribute(
 					CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD);
-			controller = new CycleBasedExecutionFacadeController(facade,
+			controller = new CycleBasedExecutionFacadeController(this,
 					cyclePeriod);
 		} else {
-			controller = new EventDrivenExecutionFacadeController(facade);
+			controller = new EventDrivenExecutionFacadeController(this);
 		}
 		controller.start();
 	}
