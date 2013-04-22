@@ -25,9 +25,10 @@ import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_NAME;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TRANSITION_COUNT;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -35,7 +36,6 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -369,8 +369,27 @@ public class SGraphJavaValidationTest {
 	}
 
 	@Test
+	public void invalidSynchronizationUsage() {
+		statechart = SGraphTestModelUtil
+				.loadStatechart("InvalidSynchronizationUsage.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Synchronization) {
+				assertFalse(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics,
+				ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
+	}
+
+	@Test
 	public void orthogonalStates() {
-		statechart = SGraphTestModelUtil.loadStatechart("NotOrthogonalRegion01.sct");
+		statechart = SGraphTestModelUtil
+				.loadStatechart("NotOrthogonalRegion01.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -387,7 +406,8 @@ public class SGraphJavaValidationTest {
 				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
 
 		diagnostics = new BasicDiagnostic();
-		statechart = SGraphTestModelUtil.loadStatechart("NotOrthogonalRegion02.sct");
+		statechart = SGraphTestModelUtil
+				.loadStatechart("NotOrthogonalRegion02.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -404,7 +424,8 @@ public class SGraphJavaValidationTest {
 				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
 
 		diagnostics = new BasicDiagnostic();
-		statechart = SGraphTestModelUtil.loadStatechart("NotOrthogonalRegion03.sct");
+		statechart = SGraphTestModelUtil
+				.loadStatechart("NotOrthogonalRegion03.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -423,7 +444,8 @@ public class SGraphJavaValidationTest {
 
 	@Test
 	public void orthogonalStatesValid() {
-		statechart = SGraphTestModelUtil.loadStatechart("OrthogonalRegion01.sct");
+		statechart = SGraphTestModelUtil
+				.loadStatechart("OrthogonalRegion01.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
