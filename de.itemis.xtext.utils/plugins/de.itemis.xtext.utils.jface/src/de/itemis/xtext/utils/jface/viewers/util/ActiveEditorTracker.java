@@ -5,8 +5,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.eclipse.core.resources.IProject;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
@@ -102,25 +100,6 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 			return null;
 		}
 		return INSTANCE.getEditorById(editorId);
-	}
-
-	/**
-	 * @throws {@link java.lang.IllegalStateException} if the last active editor
-	 *         contains a resource set with more than one resource
-	 * 
-	 * @return The EMF resource of the last active editor (if it is still open).
-	 * @deprecated should use {@link #getLastActiveEditorResourceSet()} because
-	 *             the editor could contain many resources in the resourceSet
-	 */
-	public static Resource getLastActiveEditorResource() {
-		ResourceSet resourceSet = getLastActiveEditorResourceSet();
-
-		final EList<Resource> resources = resourceSet.getResources();
-		if (resources.size() != 1) {
-			throw new IllegalStateException(
-					"Different resources in resource set, don't know which to use...");
-		}
-		return resources.get(0);
 	}
 
 	/**
