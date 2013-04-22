@@ -44,8 +44,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatePropertySection extends
-		AbstractTwoColumnEditorPropertySection implements ISourceObjectCallback {
+public class StatePropertySection extends AbstractTwoColumnEditorPropertySection implements ISourceObjectCallback {
 
 	private Control txtSpecification;
 	private Control txtName;
@@ -79,8 +78,7 @@ public class StatePropertySection extends
 	}
 
 	protected void createDocumentationControl(Composite rightColumn) {
-		Label lblDocumentation = getToolkit().createLabel(rightColumn,
-				"Documentation: ");
+		Label lblDocumentation = getToolkit().createLabel(rightColumn, "Documentation: ");
 		txtDoc = getToolkit().createText(rightColumn, "", SWT.MULTI);
 		GridDataFactory.fillDefaults().applyTo(lblDocumentation);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(txtDoc);
@@ -89,26 +87,21 @@ public class StatePropertySection extends
 	protected void createSpecificationControl(final Composite parent) {
 		Injector injector = getInjector(SemanticTarget.StateSpecification);
 		if (injector != null) {
-			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER
-					| SWT.V_SCROLL | SWT.WRAP);
+			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) txtSpecification).setAlwaysShowScrollBars(false);
 			enableXtext(txtSpecification, injector);
-			createHelpWidget(parent, txtSpecification,
-					HelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
+			createHelpWidget(parent, txtSpecification, HelpContextIds.SC_PROPERTIES_STATE_EXPRESSION);
 		} else {
 			txtSpecification = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
-				.applyTo(txtSpecification);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(txtSpecification);
 	}
 
 	protected void createTransitionsControl(Composite parent) {
 		Label label = getToolkit().createLabel(parent, "Transition Priority:");
 		GridDataFactory.fillDefaults().applyTo(label);
-		orderElementControl = new OrderElementControl(parent,
-				SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS, this);
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(orderElementControl);
+		orderElementControl = new OrderElementControl(parent, SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS, this);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(orderElementControl);
 	}
 
 	protected State getState() {
@@ -124,29 +117,23 @@ public class StatePropertySection extends
 	}
 
 	protected void bindDocumentationControl(EMFDataBindingContext context) {
-		IEMFValueProperty property = EMFEditProperties.value(
-				TransactionUtil.getEditingDomain(eObject),
+		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
-		ISWTObservableValue observe = WidgetProperties.text(
-				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
+		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
 				txtDoc);
 		context.bindValue(observe, property.observe(eObject));
 	}
 
 	protected void bindSpecificationControl(EMFDataBindingContext context) {
-		IEMFValueProperty specificationProperty = EMFEditProperties.value(
-				TransactionUtil.getEditingDomain(eObject),
+		IEMFValueProperty specificationProperty = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
-		ISWTObservableValue specificationTextProperty = WidgetProperties.text(
-				SWT.FocusOut).observe(txtSpecification);
-		context.bindValue(specificationTextProperty,
-				specificationProperty.observe(eObject), null,
+		ISWTObservableValue specificationTextProperty = WidgetProperties.text(SWT.FocusOut).observe(txtSpecification);
+		context.bindValue(specificationTextProperty, specificationProperty.observe(eObject), null,
 				new UpdateValueStrategy() {
 					@Override
-					protected IStatus doSet(IObservableValue observableValue,
-							Object value) {
-						if (!getCompletionProposalAdapter()
-								.isProposalPopupOpen())
+					protected IStatus doSet(IObservableValue observableValue, Object value) {
+						if (getCompletionProposalAdapter() != null
+								&& !getCompletionProposalAdapter().isProposalPopupOpen())
 							return super.doSet(observableValue, value);
 						return Status.OK_STATUS;
 					}
@@ -154,12 +141,10 @@ public class StatePropertySection extends
 	}
 
 	protected void bindNameControl(EMFDataBindingContext context) {
-		IEMFValueProperty nameProperty = EMFEditProperties.value(
-				TransactionUtil.getEditingDomain(eObject),
+		IEMFValueProperty nameProperty = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.NAMED_ELEMENT__NAME);
-		ISWTObservableValue nameTextProperty = WidgetProperties.text(
-				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
-				txtName);
+		ISWTObservableValue nameTextProperty = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection })
+				.observe(txtName);
 		context.bindValue(nameTextProperty, nameProperty.observe(eObject));
 	}
 

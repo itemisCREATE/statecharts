@@ -41,8 +41,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class TransitionPropertySection extends
-		AbstractTwoColumnEditorPropertySection {
+public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySection {
 
 	private Control textControl;
 	private Text txtDoc;
@@ -58,23 +57,19 @@ public class TransitionPropertySection extends
 
 		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
 		if (injector != null) {
-			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
-					| SWT.V_SCROLL | SWT.WRAP);
+			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) textControl).setAlwaysShowScrollBars(false);
 			enableXtext(textControl, injector);
-			createHelpWidget(parent, textControl,
-					HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
+			createHelpWidget(parent, textControl, HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
-				.applyTo(textControl);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(textControl);
 	}
 
 	@Override
 	protected void createRightColumnControls(Composite parent) {
-		Label lblDocumentation = getToolkit().createLabel(parent,
-				"Documentation: ");
+		Label lblDocumentation = getToolkit().createLabel(parent, "Documentation: ");
 		txtDoc = getToolkit().createText(parent, "", SWT.MULTI);
 		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblDocumentation);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(txtDoc);
@@ -82,31 +77,23 @@ public class TransitionPropertySection extends
 
 	@Override
 	public void bindModel(EMFDataBindingContext context) {
-		IEMFValueProperty modelProperty = EMFEditProperties.value(
-				TransactionUtil.getEditingDomain(eObject),
+		IEMFValueProperty modelProperty = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
-		ISWTObservableValue uiProperty = WidgetProperties.text(SWT.FocusOut)
-				.observe(textControl);
-		context.bindValue(uiProperty, modelProperty.observe(eObject), null,
-				new UpdateValueStrategy() {
-					@Override
-					protected IStatus doSet(IObservableValue observableValue,
-							Object value) {
-						if (!getCompletionProposalAdapter()
-								.isProposalPopupOpen())
-							return super.doSet(observableValue, value);
-						return Status.OK_STATUS;
-					}
-				});
+		ISWTObservableValue uiProperty = WidgetProperties.text(SWT.FocusOut).observe(textControl);
+		context.bindValue(uiProperty, modelProperty.observe(eObject), null, new UpdateValueStrategy() {
+			@Override
+			protected IStatus doSet(IObservableValue observableValue, Object value) {
+				if (getCompletionProposalAdapter() != null && !getCompletionProposalAdapter().isProposalPopupOpen())
+					return super.doSet(observableValue, value);
+				return Status.OK_STATUS;
+			}
+		});
 
-		IEMFValueProperty property = EMFEditProperties.value(
-				TransactionUtil.getEditingDomain(eObject),
+		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
-		ISWTObservableValue observe = WidgetProperties.text(
-				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
+		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
 				txtDoc);
 		context.bindValue(observe, property.observe(eObject));
 
 	}
-
 }

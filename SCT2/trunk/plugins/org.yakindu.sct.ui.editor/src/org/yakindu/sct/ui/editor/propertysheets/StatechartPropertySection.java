@@ -43,8 +43,7 @@ import com.google.inject.Injector;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatechartPropertySection extends
-		AbstractTwoColumnEditorPropertySection implements ISourceObjectCallback {
+public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySection implements ISourceObjectCallback {
 
 	private Control textControl;
 	private Text txtName;
@@ -72,7 +71,7 @@ public class StatechartPropertySection extends
 	protected void createNameControl(Composite parent) {
 		Label lblName = getToolkit().createLabel(parent, "Statechart Name: ");
 		txtName = getToolkit().createText(parent, "");
-		GridDataFactory.fillDefaults().span(2,1).applyTo(lblName);
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblName);
 		new Label(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(txtName);
 	}
@@ -80,15 +79,13 @@ public class StatechartPropertySection extends
 	protected void createRegionsControl(Composite rightColumn) {
 		Label label = getToolkit().createLabel(rightColumn, "Region Priority:");
 		GridDataFactory.fillDefaults().applyTo(label);
-		orderElementControl = new OrderElementControl(rightColumn,
-				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS, this);
-		GridDataFactory.fillDefaults().span(2, 0).grab(true, false)
-				.applyTo(orderElementControl);
+		orderElementControl = new OrderElementControl(rightColumn, SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
+				this);
+		GridDataFactory.fillDefaults().span(2, 0).grab(true, false).applyTo(orderElementControl);
 	}
 
 	protected void createDocumentationControl(Composite rightColumn) {
-		Label lblDocumentation = getToolkit().createLabel(rightColumn,
-				"Documentation: ");
+		Label lblDocumentation = getToolkit().createLabel(rightColumn, "Documentation: ");
 		documentation = getToolkit().createText(rightColumn, "", SWT.MULTI);
 		GridDataFactory.fillDefaults().applyTo(lblDocumentation);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(documentation);
@@ -96,20 +93,17 @@ public class StatechartPropertySection extends
 	}
 
 	protected void createSpecificationControl(final Composite parent) {
-		
+
 		Injector injector = getInjector(SemanticTarget.StatechartSpecification);
 		if (injector != null) {
-			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER
-					| SWT.V_SCROLL | SWT.WRAP);
+			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) textControl).setAlwaysShowScrollBars(false);
 			enableXtext(textControl, injector);
-			createHelpWidget(parent, textControl,
-					HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
+			createHelpWidget(parent, textControl, HelpContextIds.SC_PROPERTIES_STATECHART_EXPRESSION);
 		} else {
 			textControl = getToolkit().createText(parent, "", SWT.MULTI);
 		}
-		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize())
-				.applyTo(textControl);
+		GridDataFactory.fillDefaults().grab(true, true).hint(parent.getSize()).applyTo(textControl);
 	}
 
 	@Override
@@ -121,41 +115,32 @@ public class StatechartPropertySection extends
 	}
 
 	private void bindDocumentationControl(EMFDataBindingContext context) {
-		IEMFValueProperty property = EMFEditProperties.value(
-				TransactionUtil.getEditingDomain(eObject),
+		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION);
-		ISWTObservableValue observe = WidgetProperties.text(
-				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
+		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
 				documentation);
 		context.bindValue(observe, property.observe(eObject));
 	}
 
 	protected void bindSpecificationControl(EMFDataBindingContext context) {
-		IEMFValueProperty modelProperty = EMFEditProperties.value(
-				TransactionUtil.getEditingDomain(eObject),
+		IEMFValueProperty modelProperty = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION);
-		ISWTObservableValue uiProperty = WidgetProperties.text(SWT.FocusOut)
-				.observe(textControl);
-		context.bindValue(uiProperty, modelProperty.observe(eObject), null,
-				new UpdateValueStrategy() {
-					@Override
-					protected IStatus doSet(IObservableValue observableValue,
-							Object value) {
-						if (!getCompletionProposalAdapter()
-								.isProposalPopupOpen())
-							return super.doSet(observableValue, value);
-						return Status.OK_STATUS;
-					}
-				});
+		ISWTObservableValue uiProperty = WidgetProperties.text(SWT.FocusOut).observe(textControl);
+		context.bindValue(uiProperty, modelProperty.observe(eObject), null, new UpdateValueStrategy() {
+			@Override
+			protected IStatus doSet(IObservableValue observableValue, Object value) {
+				if (getCompletionProposalAdapter() != null && !getCompletionProposalAdapter().isProposalPopupOpen())
+					return super.doSet(observableValue, value);
+				return Status.OK_STATUS;
+			}
+		});
 
 	}
 
 	protected void bindNameControl(EMFDataBindingContext context) {
-		IEMFValueProperty property = EMFEditProperties.value(
-				TransactionUtil.getEditingDomain(eObject),
+		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
 				BasePackage.Literals.NAMED_ELEMENT__NAME);
-		ISWTObservableValue observe = WidgetProperties.text(
-				new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
+		ISWTObservableValue observe = WidgetProperties.text(new int[] { SWT.FocusOut, SWT.DefaultSelection }).observe(
 				txtName);
 		context.bindValue(observe, property.observe(eObject));
 	}
