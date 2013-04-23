@@ -369,20 +369,20 @@ public class SGraphJavaValidationTest {
 	}
 
 	@Test
-	public void invalidSynchronizationUsage() {
+	public void synchronizationTransitionCount() {
 		statechart = SGraphTestModelUtil
 				.loadStatechart("InvalidSynchronizationUsage.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Synchronization) {
-				assertFalse(validator.validate(element, diagnostics,
+				assertTrue(validator.validate(element, diagnostics,
 						new HashMap<Object, Object>()));
 			}
 		}
 
 		assertIssueCount(diagnostics, 2);
-		assertError(diagnostics,
+		assertWarning(diagnostics,
 				ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
 	}
 
