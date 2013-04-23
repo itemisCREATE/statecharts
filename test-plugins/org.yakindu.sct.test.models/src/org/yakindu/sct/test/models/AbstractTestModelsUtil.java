@@ -15,6 +15,7 @@ import java.io.IOException;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -29,7 +30,7 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public abstract class BaseTestModels {
+public abstract class AbstractTestModelsUtil {
 
 	@Inject
 	private IModelSequencer sequencer;
@@ -39,12 +40,7 @@ public abstract class BaseTestModels {
 	public Statechart loadStatechartFromResource(String fileName) {
 		URI uri = URI.createPlatformPluginURI(getModelDirectory() + fileName,
 				true);
-		ResourceSetImpl impl = new ResourceSetImpl();
-		Resource resource = impl.getResource(uri, true);
-		Assert.isTrue(resource instanceof AbstractSCTResource);
-		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
-				resource.getContents(), SGraphPackage.Literals.STATECHART);
-		return statechart;
+		return loadStatechart(uri);
 	}
 
 	/**
@@ -60,5 +56,21 @@ public abstract class BaseTestModels {
 		Statechart statechart = loadStatechartFromResource(fileName);
 		final ExecutionFlow flow = sequencer.transform(statechart);
 		return flow;
+	}
+
+	/**
+	 * Helper method - loads a testmodel from the given {@link URI}
+	 * 
+	 * @param uri 
+	 * 			the {@link URI} of the model file
+	 * @return the {@link Statechart}
+	 */
+	public static final Statechart loadStatechart(URI uri) {
+		ResourceSet resSet = new ResourceSetImpl();
+		Resource resource = resSet.getResource(uri, true);
+		Assert.isTrue(resource instanceof AbstractSCTResource);
+		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
+				resource.getContents(), SGraphPackage.Literals.STATECHART);
+		return statechart;
 	}
 }
