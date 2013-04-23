@@ -150,9 +150,9 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 	
 	@Check(CheckType.FAST)
-	public void invalidSynchronizationUsage(Synchronization sync) {
+	public void synchronizationTransitionCount(Synchronization sync) {
 		if (sync.getIncomingTransitions().size() < 2 && sync.getOutgoingTransitions().size() < 2) {
-			error(ISSUE_SYNCHRONIZATION_TRANSITION_COUNT, sync, null, -1);
+			warning(ISSUE_SYNCHRONIZATION_TRANSITION_COUNT, sync, null, -1);
 		}
 	}
 
