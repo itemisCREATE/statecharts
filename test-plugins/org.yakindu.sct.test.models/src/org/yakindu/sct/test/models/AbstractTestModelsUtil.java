@@ -32,6 +32,8 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractTestModelsUtil {
 
+	private static final String VALIDATION_TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/validation/";
+
 	@Inject
 	private IModelSequencer sequencer;
 
@@ -61,8 +63,8 @@ public abstract class AbstractTestModelsUtil {
 	/**
 	 * Helper method - loads a testmodel from the given {@link URI}
 	 * 
-	 * @param uri 
-	 * 			the {@link URI} of the model file
+	 * @param uri
+	 *            the {@link URI} of the model file
 	 * @return the {@link Statechart}
 	 */
 	public static final Statechart loadStatechart(URI uri) {
@@ -72,5 +74,18 @@ public abstract class AbstractTestModelsUtil {
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
 		return statechart;
+	}
+	
+	/**
+	 * Helper method - loads a testmodel from the given filename.
+	 * 
+	 * @param filename
+	 *            the filename of the model file
+	 * @return the {@link Statechart}
+	 */
+	public static final Statechart loadStatechart(String filename) {
+		return AbstractTestModelsUtil.loadStatechart(URI
+				.createPlatformPluginURI(VALIDATION_TESTMODEL_DIR + filename,
+						true));
 	}
 }
