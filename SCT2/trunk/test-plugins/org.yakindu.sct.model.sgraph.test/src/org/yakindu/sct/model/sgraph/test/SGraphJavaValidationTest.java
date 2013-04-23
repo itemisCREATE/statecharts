@@ -55,10 +55,10 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.model.sgraph.test.util.SGraphTestModelUtil;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
+import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -370,7 +370,7 @@ public class SGraphJavaValidationTest {
 
 	@Test
 	public void synchronizationTransitionCount() {
-		statechart = SGraphTestModelUtil
+		statechart = AbstractTestModelsUtil
 				.loadStatechart("InvalidSynchronizationUsage.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
@@ -382,13 +382,12 @@ public class SGraphJavaValidationTest {
 		}
 
 		assertIssueCount(diagnostics, 2);
-		assertWarning(diagnostics,
-				ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
+		assertWarning(diagnostics, ISSUE_SYNCHRONIZATION_TRANSITION_COUNT);
 	}
 
 	@Test
 	public void orthogonalStates() {
-		statechart = SGraphTestModelUtil
+		statechart = AbstractTestModelsUtil
 				.loadStatechart("NotOrthogonalRegion01.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
@@ -406,7 +405,7 @@ public class SGraphJavaValidationTest {
 				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL);
 
 		diagnostics = new BasicDiagnostic();
-		statechart = SGraphTestModelUtil
+		statechart = AbstractTestModelsUtil
 				.loadStatechart("NotOrthogonalRegion02.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
@@ -424,7 +423,7 @@ public class SGraphJavaValidationTest {
 				ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE);
 
 		diagnostics = new BasicDiagnostic();
-		statechart = SGraphTestModelUtil
+		statechart = AbstractTestModelsUtil
 				.loadStatechart("NotOrthogonalRegion03.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
@@ -444,7 +443,7 @@ public class SGraphJavaValidationTest {
 
 	@Test
 	public void orthogonalStatesValid() {
-		statechart = SGraphTestModelUtil
+		statechart = AbstractTestModelsUtil
 				.loadStatechart("OrthogonalRegion01.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
