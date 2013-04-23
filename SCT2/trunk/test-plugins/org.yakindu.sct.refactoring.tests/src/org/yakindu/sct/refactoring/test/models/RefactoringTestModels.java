@@ -10,13 +10,13 @@
  */
 package org.yakindu.sct.refactoring.test.models;
 
-import org.yakindu.sct.test.models.BaseTestModels;
+import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class RefactoringTestModels extends BaseTestModels {
+public class RefactoringTestModels extends AbstractTestModelsUtil {
 
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.refactoring.tests/testmodels/refactoring/";
 
