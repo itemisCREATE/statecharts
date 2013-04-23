@@ -70,7 +70,7 @@ public class SCTDiagnosticConverterImpl extends DiagnosticConverterImpl {
 			while (eAllContents.hasNext()) {
 				EObject next = eAllContents.next();
 				if (next instanceof View) {
-					if (EcoreUtil.equals(((View) next).getElement(), semanticElement)) {
+					if (((View) next).getElement() == semanticElement) {
 						return ((View) next);
 					}
 				}
