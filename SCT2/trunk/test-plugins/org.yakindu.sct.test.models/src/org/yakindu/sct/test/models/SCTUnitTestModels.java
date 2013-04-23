@@ -16,7 +16,7 @@ package org.yakindu.sct.test.models;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTUnitTestModels extends BaseTestModels {
+public class SCTUnitTestModels extends AbstractTestModelsUtil {
 
 	private static final String TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/SCTUnit/";
 
