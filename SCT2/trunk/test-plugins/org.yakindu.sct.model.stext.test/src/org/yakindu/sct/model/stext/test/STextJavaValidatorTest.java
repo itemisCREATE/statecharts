@@ -12,16 +12,26 @@
 package org.yakindu.sct.model.stext.test;
 
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_HAS_NO_EFFECT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_TO_SCOPE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_DECLARATIONS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DECLARATIONS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_REACTIONS_NOT_ALLOWED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_ENTRY_SPEC_NOT_COMPOSITE;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_ENTRY_POINT;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.REGION_UNBOUND_ENTRY_POINT;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Iterator;
 
+import org.eclipse.emf.common.util.BasicDiagnostic;
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -33,7 +43,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Scope;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.sgraph.Synchronization;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -44,6 +57,7 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
+import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -52,7 +66,8 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * @author andreas muelder - Initial contribution and API
+ * @author andreas muelder - Initial contribution and APIimport
+ *         org.yakindu.sct.model.sgraph.test.util.SGraphTestModelUtil;
  * 
  */
 @RunWith(XtextRunner.class)
@@ -63,7 +78,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	private STextJavaValidator validator;
 	@Inject
 	private Injector injector;
-
 	private ValidatorTester<STextJavaValidator> tester;
 
 	@Before
@@ -109,18 +123,18 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		validationResult = tester.validate(expression);
 		validationResult.assertOK();
 	}
-	
+
 	@Test
-	public void checkTimeEventSpecValueExpression(){
+	public void checkTimeEventSpecValueExpression() {
 		EObject expression = super.parseExpression("after true s",
 				ReactionTrigger.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(expression);
 		validationResult
 				.assertErrorContains(STextJavaValidator.TIME_EXPRESSION);
 	}
-	
+
 	@Test
-	public void checkReactionEffectActionExpression(){
+	public void checkReactionEffectActionExpression() {
 		// covered by inferrer tests
 	}
 
@@ -365,4 +379,74 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		}
 	}
 
+	@Test
+	public void checkEntrySpecOnAtomicState() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("UnboundEntryPoints01.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, TRANSITION_ENTRY_SPEC_NOT_COMPOSITE);
+	}
+
+	@Test
+	public void checkUnboundEntryPoints() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("UnboundEntryPoints02.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+			if (element instanceof State) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 4);
+		assertError(diagnostics, TRANSITION_UNBOUND_ENTRY_POINT);
+		assertError(diagnostics, REGION_UNBOUND_ENTRY_POINT);
+	}
+
+	protected void assertError(BasicDiagnostic diag, String message) {
+		Diagnostic d = issueByName(diag, message);
+		assertNotNull("Issue '" + message + "' does not exist.",
+				issueByName(diag, message));
+		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR,
+				d.getSeverity());
+	}
+
+	protected void assertWarning(BasicDiagnostic diag, String message) {
+		Diagnostic d = issueByName(diag, message);
+		assertNotNull("Issue '" + message + "' does not exist.",
+				issueByName(diag, message));
+		assertEquals("Issue '" + message + "' is no warning.",
+				Diagnostic.WARNING, d.getSeverity());
+	}
+
+	protected void assertIssueCount(BasicDiagnostic diag, int count) {
+		int c = diag.getChildren().size();
+		assertEquals("expected " + count + " issue(s) but were " + c + " ["
+				+ diag.toString() + "]", count, c);
+	}
+
+	protected Diagnostic issueByName(BasicDiagnostic diag, String message) {
+		for (Diagnostic issue : diag.getChildren()) {
+			if (message.equals(issue.getMessage()))
+				return issue;
+		}
+		return null;
+	}
 }
