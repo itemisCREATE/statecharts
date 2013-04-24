@@ -13,7 +13,6 @@ package org.yakindu.sct.model.stext.test;
 
 import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCode;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_HAS_NO_EFFECT;
@@ -22,9 +21,9 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_D
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DECLARATIONS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_REACTIONS_NOT_ALLOWED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.REGION_UNBOUND_DEFAULT_ENTRY_POINT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_ENTRY_SPEC_NOT_COMPOSITE;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_ENTRY_POINT;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.REGION_UNBOUND_ENTRY_POINT;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -45,7 +44,6 @@ import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -380,10 +378,10 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void checkEntrySpecOnAtomicState() {
+	public void checkTransitionSpecOnAtomicState() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnboundEntryPoints01.sct");
+				.loadStatechart("TransitionEntrySpecOnAtomicState.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -401,7 +399,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	public void checkUnboundEntryPoints() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnboundEntryPoints02.sct");
+				.loadStatechart("UnboundEntryPoints01.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -416,10 +414,32 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		}
 
 		assertIssueCount(diagnostics, 4);
-		assertError(diagnostics, TRANSITION_UNBOUND_ENTRY_POINT);
-		assertError(diagnostics, REGION_UNBOUND_ENTRY_POINT);
+		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT);
+		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
 	}
+	
+	@Test
+	public void checkUnboundEntryPointsSecond() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("UnboundEntryPoints02.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+			if (element instanceof State) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
 
+		assertIssueCount(diagnostics, 5);
+	}
+	
 	protected void assertError(BasicDiagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
 		assertNotNull("Issue '" + message + "' does not exist.",

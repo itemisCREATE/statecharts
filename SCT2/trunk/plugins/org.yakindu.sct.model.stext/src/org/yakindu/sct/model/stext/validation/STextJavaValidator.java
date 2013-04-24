@@ -12,6 +12,7 @@
 package org.yakindu.sct.model.stext.validation;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -105,8 +106,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String ASSIGNMENT_EXPRESSION = "No nested assignment of the same variable allowed (different behavior in various programming languages)";
 	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 	public static final String TRANSITION_ENTRY_SPEC_NOT_COMPOSITE = "Target state isn't composite";
-	public static final String TRANSITION_UNBOUND_ENTRY_POINT = "Target state has regions without 'default' entries.";
-	public static final String REGION_UNBOUND_ENTRY_POINT = "Region must have a 'default' entry.";
+	public static final String TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT = "Target state has regions without 'default' entries.";
+	public static final String TRANSITION_UNBOUND_NAMED_ENTRY_POINT = "Target state has regions without named entries: ";
+	public static final String REGION_UNBOUND_DEFAULT_ENTRY_POINT = "Region must have a 'default' entry.";
+	public static final String REGION_UNBOUND_NAMED_ENTRY_POINT = "Region should have a named entry to support transitions entry specification: ";
 
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
@@ -121,7 +124,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	private String languageName;
 
 	@Check(CheckType.FAST)
-	public void checkEntrySpecOnAtomicState(final Transition transition) {
+	public void checkTransitionSpecOnAtomicState(final Transition transition) {
 		for (ReactionProperty property : transition.getProperties()) {
 			if (property instanceof EntryPointSpec) {
 				if (transition.getTarget() instanceof org.yakindu.sct.model.sgraph.State) {
@@ -135,58 +138,105 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkUnboundEntryPoints(
 			final org.yakindu.sct.model.sgraph.State state) {
+		if (state.isComposite()) {
+			final List<Transition>[] transitions = getEntrySpecSortedTransitions(state
+					.getIncomingTransitions());
+			Map<Region, List<Entry>> regions = null;
 
-		final List<Transition> transitions = getTransitionsWithoutEntrySpec(state
-				.getIncomingTransitions());
-
-		if (!transitions.isEmpty()) {
-			final List<Region> regions = getRegionsWithoutDefaultEntry(state
-					.getRegions());
-			if (!regions.isEmpty()) {
-				for (Transition transition : transitions) {
-					error(TRANSITION_UNBOUND_ENTRY_POINT, transition, null, -1);
+			// first list contains Transitions without entry spec
+			if (!transitions[0].isEmpty()) {
+				regions = getRegionsWithoutDefaultEntry(state.getRegions());
+				if (!regions.isEmpty()) {
+					for (Transition transition : transitions[0]) {
+						error(TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT,
+								transition, null, -1);
+					}
+					for (Region region : regions.keySet()) {
+						error(REGION_UNBOUND_DEFAULT_ENTRY_POINT, region, null,
+								-1);
+					}
 				}
-				for (Region region : regions) {
-					error(REGION_UNBOUND_ENTRY_POINT, region, null, -1);
+			}
+
+			// second list contains Transitions with entry spec
+			if (!transitions[1].isEmpty()) {
+				if (regions == null) {
+					regions = getRegionsWithoutDefaultEntry(state.getRegions());
+				}
+				for (Transition transition : transitions[1]) {
+					boolean hasTargetEntry = true;
+					for (ReactionProperty property : transition.getProperties()) {
+						if (property instanceof EntryPointSpec) {
+							EntryPointSpec spec = (EntryPointSpec) property;
+							String specName = "'" + spec.getEntrypoint() + "'";
+							for (Region region : regions.keySet()) {
+								boolean hasEntry = false;
+								for (Entry entry : regions.get(region)) {
+									if (entry.getName().equals(
+											spec.getEntrypoint())) {
+										hasEntry = true;
+										break;
+									}
+								}
+								if (!hasEntry) {
+									error(REGION_UNBOUND_NAMED_ENTRY_POINT
+											+ specName, region, null, -1);
+									hasTargetEntry = false;
+								}
+							}
+							if (!hasTargetEntry) {
+								error(TRANSITION_UNBOUND_NAMED_ENTRY_POINT
+										+ specName, transition, null, -1);
+							}
+						}
+					}
 				}
 			}
 		}
 	}
 
-	private List<Transition> getTransitionsWithoutEntrySpec(
+	private List<Transition>[] getEntrySpecSortedTransitions(
 			List<Transition> elements) {
-		final List<Transition> transitions = new ArrayList<Transition>();
+		@SuppressWarnings("unchecked")
+		final List<Transition>[] transitions = new ArrayList[2];
+		// first list contains Transitions without entry spec
+		transitions[0] = new ArrayList<Transition>();
+		// second list contains Transitions with entry spec
+		transitions[1] = new ArrayList<Transition>();
 		for (Transition transition : elements) {
 			boolean hasEntrySpec = false;
 			for (ReactionProperty property : transition.getProperties()) {
 				if (property instanceof EntryPointSpec) {
+					transitions[1].add(transition);
 					hasEntrySpec = true;
 					break;
 				}
 			}
 			if (!hasEntrySpec) {
-				transitions.add(transition);
+				transitions[0].add(transition);
 			}
 		}
 		return transitions;
 	}
 
-	private List<Region> getRegionsWithoutDefaultEntry(List<Region> elements) {
-		List<Region> regions = new ArrayList<Region>();
+	private Map<Region, List<Entry>> getRegionsWithoutDefaultEntry(
+			List<Region> elements) {
+		Map<Region, List<Entry>> regions = new HashMap<Region, List<Entry>>();
 		for (Region region : elements) {
 			boolean hasDefaultEntry = false;
-			for (Entry entry : getEntries(region.eContents())) {
+			final List<Entry> entries = getEntries(region.eContents());
+			for (Entry entry : entries) {
 				if (isDefault(entry)) {
 					hasDefaultEntry = true;
 					break;
 				}
 			}
 			if (!hasDefaultEntry) {
-				regions.add(region);
+				regions.put(region, entries);
 			}
 		}
 		return regions;
