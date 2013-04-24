@@ -371,7 +371,7 @@ public class SGraphJavaValidationTest {
 	@Test
 	public void synchronizationTransitionCount() {
 		statechart = AbstractTestModelsUtil
-				.loadStatechart("InvalidSynchronizationUsage.sct");
+				.loadStatechart("SynchronizationTransitionCount.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
