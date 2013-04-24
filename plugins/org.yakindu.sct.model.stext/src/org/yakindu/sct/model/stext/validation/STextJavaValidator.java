@@ -11,8 +11,6 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +31,6 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystem.InferenceIssue;
@@ -43,6 +40,7 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
@@ -64,6 +62,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
+import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -106,10 +105,15 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String ASSIGNMENT_EXPRESSION = "No nested assignment of the same variable allowed (different behavior in various programming languages)";
 	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 	public static final String TRANSITION_ENTRY_SPEC_NOT_COMPOSITE = "Target state isn't composite";
+	public static final String TRANSITION_EXIT_SPEC_NOT_COMPOSITE = "Source state isn't composite";
 	public static final String TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT = "Target state has regions without 'default' entries.";
+	public static final String TRANSITION_UNBOUND_DEFAULT_EXIT_POINT = "Source state has regions without 'default' exits.";
 	public static final String TRANSITION_UNBOUND_NAMED_ENTRY_POINT = "Target state has regions without named entries: ";
+	public static final String TRANSITION_UNBOUND_NAMED_EXIT_POINT = "Source state has regions without named exits: ";
 	public static final String REGION_UNBOUND_DEFAULT_ENTRY_POINT = "Region must have a 'default' entry.";
+	public static final String REGION_UNBOUND_DEFAULT_EXIT_POINT = "Region must have a 'default' exit.";
 	public static final String REGION_UNBOUND_NAMED_ENTRY_POINT = "Region should have a named entry to support transitions entry specification: ";
+	public static final String REGION_UNBOUND_NAMED_EXIT_POINT = "Region should have a named exit to support transitions exit specification: ";
 
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
@@ -136,6 +140,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					}
 				}
 			}
+			else if (property instanceof ExitPointSpec) {
+				if (transition.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
+					org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) transition
+							.getSource();
+					if (!state.isComposite()) {
+						warning(TRANSITION_EXIT_SPEC_NOT_COMPOSITE,
+								transition, null, -1);
+					}
+				}
+			}
 		}
 	}
 
@@ -143,13 +157,15 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public void checkUnboundEntryPoints(
 			final org.yakindu.sct.model.sgraph.State state) {
 		if (state.isComposite()) {
-			final List<Transition>[] transitions = getEntrySpecSortedTransitions(state
-					.getIncomingTransitions());
+			final List<Transition>[] transitions = STextValidationModelUtils
+					.getEntrySpecSortedTransitions(state
+							.getIncomingTransitions());
 			Map<Region, List<Entry>> regions = null;
 
 			// first list contains Transitions without entry spec
 			if (!transitions[0].isEmpty()) {
-				regions = getRegionsWithoutDefaultEntry(state.getRegions());
+				regions = STextValidationModelUtils
+						.getRegionsWithoutDefaultEntry(state.getRegions());
 				if (!regions.isEmpty()) {
 					for (Transition transition : transitions[0]) {
 						error(TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT,
@@ -165,7 +181,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			// second list contains Transitions with entry spec
 			if (!transitions[1].isEmpty()) {
 				if (regions == null) {
-					regions = getRegionsWithoutDefaultEntry(state.getRegions());
+					regions = STextValidationModelUtils
+							.getRegionsWithoutDefaultEntry(state.getRegions());
 				}
 				for (Transition transition : transitions[1]) {
 					boolean hasTargetEntry = true;
@@ -198,64 +215,68 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 	}
+	
+	@Check(CheckType.FAST)
+	public void checkUnboundExitPoints(
+			final org.yakindu.sct.model.sgraph.State state) {
+		if (state.isComposite()) {
+			final List<Transition>[] transitions = STextValidationModelUtils
+					.getExitSpecSortedTransitions(state
+							.getOutgoingTransitions());
+			Map<Region, List<Exit>> regions = null;
 
-	private List<Transition>[] getEntrySpecSortedTransitions(
-			List<Transition> elements) {
-		@SuppressWarnings("unchecked")
-		final List<Transition>[] transitions = new ArrayList[2];
-		// first list contains Transitions without entry spec
-		transitions[0] = new ArrayList<Transition>();
-		// second list contains Transitions with entry spec
-		transitions[1] = new ArrayList<Transition>();
-		for (Transition transition : elements) {
-			boolean hasEntrySpec = false;
-			for (ReactionProperty property : transition.getProperties()) {
-				if (property instanceof EntryPointSpec) {
-					transitions[1].add(transition);
-					hasEntrySpec = true;
-					break;
+			// first list contains Transitions without exit spec
+			if (!transitions[0].isEmpty()) {
+				regions = STextValidationModelUtils
+						.getRegionsWithoutDefaultExit(state.getRegions());
+				if (!regions.isEmpty()) {
+					for (Transition transition : transitions[0]) {
+						error(TRANSITION_UNBOUND_DEFAULT_EXIT_POINT,
+								transition, null, -1);
+					}
+					for (Region region : regions.keySet()) {
+						error(REGION_UNBOUND_DEFAULT_EXIT_POINT, region, null,
+								-1);
+					}
 				}
 			}
-			if (!hasEntrySpec) {
-				transitions[0].add(transition);
-			}
-		}
-		return transitions;
-	}
 
-	private Map<Region, List<Entry>> getRegionsWithoutDefaultEntry(
-			List<Region> elements) {
-		Map<Region, List<Entry>> regions = new HashMap<Region, List<Entry>>();
-		for (Region region : elements) {
-			boolean hasDefaultEntry = false;
-			final List<Entry> entries = getEntries(region.eContents());
-			for (Entry entry : entries) {
-				if (isDefault(entry)) {
-					hasDefaultEntry = true;
-					break;
+			// second list contains Transitions with exit spec
+			if (!transitions[1].isEmpty()) {
+				if (regions == null) {
+					regions = STextValidationModelUtils
+							.getRegionsWithoutDefaultExit(state.getRegions());
+				}
+				for (Transition transition : transitions[1]) {
+					boolean hasSourceExit = true;
+					for (ReactionProperty property : transition.getProperties()) {
+						if (property instanceof ExitPointSpec) {
+							ExitPointSpec spec = (ExitPointSpec) property;
+							String specName = "'" + spec.getExitpoint() + "'";
+							for (Region region : regions.keySet()) {
+								boolean hasExit = false;
+								for (Exit exit : regions.get(region)) {
+									if (exit.getName().equals(
+											spec.getExitpoint())) {
+										hasExit = true;
+										break;
+									}
+								}
+								if (!hasExit) {
+									error(REGION_UNBOUND_NAMED_EXIT_POINT
+											+ specName, region, null, -1);
+									hasSourceExit = false;
+								}
+							}
+							if (!hasSourceExit) {
+								error(TRANSITION_UNBOUND_NAMED_EXIT_POINT
+										+ specName, transition, null, -1);
+							}
+						}
+					}
 				}
 			}
-			if (!hasDefaultEntry) {
-				regions.put(region, entries);
-			}
 		}
-		return regions;
-	}
-
-	private boolean isDefault(final NamedElement element) {
-		return element.getName() == null
-				|| (element.getName() != null && (element.getName().isEmpty() || element
-						.getName().equalsIgnoreCase("default")));
-	}
-
-	private List<Entry> getEntries(List<EObject> elements) {
-		List<Entry> entries = new ArrayList<Entry>();
-		for (EObject element : elements) {
-			if (element instanceof Entry) {
-				entries.add((Entry) element);
-			}
-		}
-		return entries;
 	}
 
 	@Check(CheckType.FAST)
