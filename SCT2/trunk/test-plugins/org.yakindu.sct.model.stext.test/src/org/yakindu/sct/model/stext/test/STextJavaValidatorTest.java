@@ -22,8 +22,11 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DE
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_REACTIONS_NOT_ALLOWED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.REGION_UNBOUND_DEFAULT_ENTRY_POINT;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.REGION_UNBOUND_DEFAULT_EXIT_POINT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_ENTRY_SPEC_NOT_COMPOSITE;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_EXIT_SPEC_NOT_COMPOSITE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_EXIT_POINT;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -396,6 +399,24 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	}
 
 	@Test
+	public void checkTransitionExitSpecOnAtomicState() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("TransitionExitSpecOnAtomicState.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, TRANSITION_EXIT_SPEC_NOT_COMPOSITE);
+	}
+
+	@Test
 	public void checkUnboundEntryPoints() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
@@ -417,14 +438,14 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT);
 		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
 	}
-	
+
 	@Test
-	public void checkUnboundEntryPointsSecond() {
+	public void checkUnboundEntryPointsPartTwo() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
 				.loadStatechart("UnboundEntryPoints02.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
-		
+
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
@@ -439,7 +460,52 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 
 		assertIssueCount(diagnostics, 5);
 	}
-	
+
+	@Test
+	public void checkUnboundExitPoints() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("UnboundExitPoints01.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+			if (element instanceof State) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 3);
+		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_EXIT_POINT);
+		assertError(diagnostics, REGION_UNBOUND_DEFAULT_EXIT_POINT);
+	}
+
+	@Test
+	public void checkUnboundExitPointsPartTwo() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("UnboundExitPoints02.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+			if (element instanceof State) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 4);
+	}
+
 	protected void assertError(BasicDiagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
 		assertNotNull("Issue '" + message + "' does not exist.",
