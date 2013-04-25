@@ -31,7 +31,17 @@ public final class STextValidationModelUtils {
 	private STextValidationModelUtils() {
 	}
 
-	// STEXT
+	/**
+	 * Sorts the given elements in transition without and with
+	 * {@link EntryPointSpec}s
+	 * 
+	 * @param elements
+	 *            list of transitions to sort
+	 * @return an array with the sorted elements. The first index contains a
+	 *         list with the transitions without {@link EntryPointSpec}s. The
+	 *         second index contains a list with the transitions with
+	 *         {@link EntryPointSpec}s.
+	 */
 	public static List<Transition>[] getEntrySpecSortedTransitions(
 			List<Transition> elements) {
 		@SuppressWarnings("unchecked")
@@ -56,7 +66,17 @@ public final class STextValidationModelUtils {
 		return transitions;
 	}
 
-	// STEXT
+	/**
+	 * Sorts the given elements in transition without and with
+	 * {@link ExitPointSpec}s
+	 * 
+	 * @param elements
+	 *            - list of transitions to sort
+	 * @return an array with the sorted elements. The first index contains a
+	 *         list with the transitions without {@link ExitPointSpec}s. The
+	 *         second index contains a list with the transitions with
+	 *         {@link ExitPointSpec}s.
+	 */
 	public static List<Transition>[] getExitSpecSortedTransitions(
 			List<Transition> elements) {
 		@SuppressWarnings("unchecked")
@@ -81,7 +101,16 @@ public final class STextValidationModelUtils {
 		return transitions;
 	}
 
-	// SGRAPH
+	/**
+	 * If a {@link Region} contains no 'default' named {@link entry} it is added
+	 * as key to a map with a list of all entries of the region.
+	 * 
+	 * @param elements
+	 *            - a list with {@link Region} elements.
+	 * @return a map with a region (key) which contains no default {@link entry}
+	 *         and a list of all {@link entry} elements of the {@link Region}
+	 *         (value).
+	 */
 	public static Map<Region, List<Entry>> getRegionsWithoutDefaultEntry(
 			List<Region> elements) {
 		Map<Region, List<Entry>> regions = new HashMap<Region, List<Entry>>();
@@ -101,7 +130,16 @@ public final class STextValidationModelUtils {
 		return regions;
 	}
 
-	// SGRAPH
+	/**
+	 * If a {@link Region} contains no 'default' named {@link exit} it is added
+	 * as key to a map with a list of all exits of the region.
+	 * 
+	 * @param elements
+	 *            - a list with {@link Region} elements.
+	 * @return a map with a region (key) which contains no default {@link exit}
+	 *         and a list of all {@link exit} elements of the {@link Region}
+	 *         (value).
+	 */
 	public static Map<Region, List<Exit>> getRegionsWithoutDefaultExit(
 			List<Region> elements) {
 		Map<Region, List<Exit>> regions = new HashMap<Region, List<Exit>>();
@@ -121,24 +159,19 @@ public final class STextValidationModelUtils {
 		return regions;
 	}
 
-	// BASE
+	/**
+	 * Checks if the name of the given element matches the requirements to be a
+	 * 'default' element.
+	 * 
+	 * @param element
+	 *            - the {@link NamedElement}
+	 * @return {@code true} if the name is null, empty or equals 'default'
+	 *         (ignoring case).
+	 */
 	public static boolean isDefault(final NamedElement element) {
 		return element.getName() == null
 				|| (element.getName() != null && (element.getName().isEmpty() || element
 						.getName().equalsIgnoreCase("default")));
-	}
-
-	// stext
-	public static boolean isDefault(final ReactionProperty property) {
-		String target = null;
-		if (property instanceof EntryPointSpec) {
-			target = ((EntryPointSpec) property).getEntrypoint();
-		} else if (property instanceof ExitPointSpec) {
-			target = ((ExitPointSpec) property).getExitpoint();
-		}
-		return target == null
-				|| (target != null && (target.isEmpty() || target
-						.equalsIgnoreCase("default")));
 	}
 
 	// SGRAPH
