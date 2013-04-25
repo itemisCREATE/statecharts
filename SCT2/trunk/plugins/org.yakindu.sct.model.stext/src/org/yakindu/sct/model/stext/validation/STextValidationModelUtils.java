@@ -38,7 +38,7 @@ public final class STextValidationModelUtils {
 	 * @param elements
 	 *            list of transitions to sort
 	 * @return an array with the sorted elements. The first index contains a
-	 *         list with the transitions without {@link EntryPointSpec}s. The
+	 *         list of the transitions without {@link EntryPointSpec}s. The
 	 *         second index contains a list with the transitions with
 	 *         {@link EntryPointSpec}s.
 	 */
@@ -73,7 +73,7 @@ public final class STextValidationModelUtils {
 	 * @param elements
 	 *            - list of transitions to sort
 	 * @return an array with the sorted elements. The first index contains a
-	 *         list with the transitions without {@link ExitPointSpec}s. The
+	 *         list of the transitions without {@link ExitPointSpec}s. The
 	 *         second index contains a list with the transitions with
 	 *         {@link ExitPointSpec}s.
 	 */
