@@ -27,6 +27,8 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITI
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_EXIT_SPEC_NOT_COMPOSITE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_EXIT_POINT;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ENTRY_UNUSED;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.EXIT_UNUSED;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -44,6 +46,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.sct.model.sgraph.Entry;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -504,6 +508,42 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		}
 
 		assertIssueCount(diagnostics, 4);
+	}
+	
+	@Test
+	public void checkUnusedEntry() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("UnusedEntryPoint.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Entry) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, ENTRY_UNUSED);
+	}
+	
+	@Test
+	public void checkUnusedExit() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("UnusedExitPoint.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Exit) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, EXIT_UNUSED);
 	}
 
 	protected void assertError(BasicDiagnostic diag, String message) {

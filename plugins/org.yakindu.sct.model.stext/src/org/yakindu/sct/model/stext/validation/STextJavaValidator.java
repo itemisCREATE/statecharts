@@ -11,6 +11,7 @@
  */
 package org.yakindu.sct.model.stext.validation;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +115,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String REGION_UNBOUND_DEFAULT_EXIT_POINT = "Region must have a 'default' exit.";
 	public static final String REGION_UNBOUND_NAMED_ENTRY_POINT = "Region should have a named entry to support transitions entry specification: ";
 	public static final String REGION_UNBOUND_NAMED_EXIT_POINT = "Region should have a named exit to support transitions exit specification: ";
+	public static final String ENTRY_UNUSED = "The named entry is not used by incoming transitions.";
+	public static final String EXIT_UNUSED = "The named exit is not used by outgoing transitions.";
 
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
@@ -128,6 +131,78 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	private String languageName;
 
 	@Check(CheckType.FAST)
+	public void checkUnusedEntry(final Entry entry) {
+		if (entry.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State) {
+			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) entry
+					.getParentRegion().getComposite();
+
+			if (!STextValidationModelUtils.isDefault(entry)) {
+
+				boolean hasIncomingTransition = false;
+				Iterator<Transition> transitionIt = state
+						.getIncomingTransitions().iterator();
+
+				while (transitionIt.hasNext() && !hasIncomingTransition) {
+
+					Iterator<ReactionProperty> propertyIt = transitionIt.next()
+							.getProperties().iterator();
+
+					while (propertyIt.hasNext() && !hasIncomingTransition) {
+
+						ReactionProperty property = propertyIt.next();
+
+						if (property instanceof EntryPointSpec) {
+
+							hasIncomingTransition = entry.getName()
+									.equals(((EntryPointSpec) property)
+											.getEntrypoint());
+						}
+					}
+				}
+				if (!hasIncomingTransition) {
+					warning(ENTRY_UNUSED, entry, null, -1);
+				}
+			}
+		}
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkUnusedExit(final Exit exit) {
+		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State) {
+			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) exit
+					.getParentRegion().getComposite();
+
+			if (!STextValidationModelUtils.isDefault(exit)) {
+
+				boolean hasOutgoingTransition = false;
+				Iterator<Transition> transitionIt = state
+						.getOutgoingTransitions().iterator();
+
+				while (transitionIt.hasNext() && !hasOutgoingTransition) {
+
+					Iterator<ReactionProperty> propertyIt = transitionIt.next()
+							.getProperties().iterator();
+
+					while (propertyIt.hasNext() && !hasOutgoingTransition) {
+
+						ReactionProperty property = propertyIt.next();
+
+						if (property instanceof ExitPointSpec) {
+
+							hasOutgoingTransition = exit.getName()
+									.equals(((ExitPointSpec) property)
+											.getExitpoint());
+						}
+					}
+				}
+				if (!hasOutgoingTransition) {
+					warning(EXIT_UNUSED, exit, null, -1);
+				}
+			}
+		}
+	}
+
+	@Check(CheckType.FAST)
 	public void checkTransitionSpecOnAtomicState(final Transition transition) {
 		for (ReactionProperty property : transition.getProperties()) {
 			if (property instanceof EntryPointSpec) {
@@ -139,14 +214,13 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 								transition, null, -1);
 					}
 				}
-			}
-			else if (property instanceof ExitPointSpec) {
+			} else if (property instanceof ExitPointSpec) {
 				if (transition.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
 					org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) transition
 							.getSource();
 					if (!state.isComposite()) {
-						warning(TRANSITION_EXIT_SPEC_NOT_COMPOSITE,
-								transition, null, -1);
+						warning(TRANSITION_EXIT_SPEC_NOT_COMPOSITE, transition,
+								null, -1);
 					}
 				}
 			}
@@ -215,7 +289,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkUnboundExitPoints(
 			final org.yakindu.sct.model.sgraph.State state) {

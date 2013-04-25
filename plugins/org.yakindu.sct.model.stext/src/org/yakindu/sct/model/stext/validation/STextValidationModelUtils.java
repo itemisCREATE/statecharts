@@ -122,10 +122,23 @@ public final class STextValidationModelUtils {
 	}
 
 	// BASE
-	private static boolean isDefault(final NamedElement element) {
+	public static boolean isDefault(final NamedElement element) {
 		return element.getName() == null
 				|| (element.getName() != null && (element.getName().isEmpty() || element
 						.getName().equalsIgnoreCase("default")));
+	}
+
+	// stext
+	public static boolean isDefault(final ReactionProperty property) {
+		String target = null;
+		if (property instanceof EntryPointSpec) {
+			target = ((EntryPointSpec) property).getEntrypoint();
+		} else if (property instanceof ExitPointSpec) {
+			target = ((ExitPointSpec) property).getExitpoint();
+		}
+		return target == null
+				|| (target != null && (target.isEmpty() || target
+						.equalsIgnoreCase("default")));
 	}
 
 	// SGRAPH
