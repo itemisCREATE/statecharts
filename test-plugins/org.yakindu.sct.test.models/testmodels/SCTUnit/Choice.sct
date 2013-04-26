@@ -22,8 +22,8 @@
         <outgoingTransitions xmi:id="_JClVQKJ4EeK62NKshpou-A" specification="default" target="_LdKpsKlkEeGmpNX2cnyk2Q"/>
       </vertices>
       <vertices xsi:type="sgraph:Choice" xmi:id="_zaksAKlmEeGmpNX2cnyk2Q" incomingTransitions="_lmJvUKllEeGmpNX2cnyk2Q">
-        <outgoingTransitions xmi:id="_OWpsYKlxEeGcJsk19eqYVQ" specification="default" target="_W-U_wKlkEeGmpNX2cnyk2Q"/>
         <outgoingTransitions xmi:id="_gnWqUKl2EeGcJsk19eqYVQ" specification="[c]" target="_OoKJkKllEeGmpNX2cnyk2Q"/>
+        <outgoingTransitions xmi:id="_OWpsYKlxEeGcJsk19eqYVQ" specification="default" target="_W-U_wKlkEeGmpNX2cnyk2Q"/>
       </vertices>
       <vertices xsi:type="sgraph:Choice" xmi:id="_r9eW0JNOEeKBtrru-JWnVQ" incomingTransitions="_bU4WAKl0EeGcJsk19eqYVQ">
         <outgoingTransitions xmi:id="_takm8JNOEeKBtrru-JWnVQ" specification="//nothing" target="_W-U_wKlkEeGmpNX2cnyk2Q"/>
@@ -121,7 +121,7 @@
           <styles xsi:type="notation:TextStyle" xmi:id="_nT2RgZQYEeKBtrru-JWnVQ"/>
           <styles xsi:type="notation:LineTypeStyle" xmi:id="_nT2RgpQYEeKBtrru-JWnVQ"/>
           <element xsi:nil="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_nT2Rg5QYEeKBtrru-JWnVQ" x="388" y="19" width="75"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_nT2Rg5QYEeKBtrru-JWnVQ" x="400" y="-5" width="75"/>
         </children>
         <children xsi:type="notation:Shape" xmi:id="_b6N3sKJ6EeK62NKshpou-A" type="Choice" element="_b6MpkKJ6EeK62NKshpou-A" fontName="Verdana" lineColor="4210752">
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_b6N3saJ6EeK62NKshpou-A" x="276" y="104"/>
