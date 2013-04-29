@@ -297,6 +297,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isBooleanType(inferType("boolEvent && boolEvent")));
 	}	
 	
+	
 	@Test
 	public void testLogicalAndExpressionFailure()
 	{
@@ -409,6 +410,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isBooleanType(inferType("true != boolVar")));
 		assertTrue(isBooleanType(inferType("true != boolEvent")));
 		assertTrue(isBooleanType(inferType("true != valueof(boolEvent)")));
+
 	}
 
 	@Test

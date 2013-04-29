@@ -39,6 +39,7 @@ import org.yakindu.base.types.ITypeSystem.InferenceResult;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
@@ -627,6 +628,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 	}
+
 
 	@Check
 	public void checkChoiceWithoutDefaultTransition(final Choice choice) {
