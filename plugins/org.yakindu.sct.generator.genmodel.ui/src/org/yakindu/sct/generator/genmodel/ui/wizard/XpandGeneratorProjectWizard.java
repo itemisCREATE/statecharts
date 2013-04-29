@@ -20,6 +20,8 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
 
+import com.google.inject.Inject;
+
 /**
  * 
  * @author holger willebrandt - Initial contribution and API
@@ -28,6 +30,9 @@ public class XpandGeneratorProjectWizard extends Wizard implements
 		IWorkbenchWizard {
 
 	private IProjectWizardPage projectPage;
+	
+	@Inject
+	private GeneratorProjectTemplate template;
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		setWindowTitle("New YAKINDU Xpand Generator Project");
@@ -54,10 +59,10 @@ public class XpandGeneratorProjectWizard extends Wizard implements
 		final ProjectData projectData = projectPage.getProjectData();
 
 		final IRunnableWithProgress op = new IRunnableWithProgress() {
+			
 			public void run(final IProgressMonitor monitor)
 					throws InvocationTargetException {
 				try {
-					GeneratorProjectTemplate template = new GeneratorProjectTemplate();
 					template.setMonitor(monitor);
 					template.generate(projectData);
 				} catch (Exception e) {
