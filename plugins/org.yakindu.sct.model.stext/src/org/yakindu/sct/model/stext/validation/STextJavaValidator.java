@@ -39,7 +39,6 @@ import org.yakindu.base.types.ITypeSystem.InferenceResult;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
-import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
@@ -109,15 +108,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String TRANSITION_ENTRY_SPEC_NOT_COMPOSITE = "Target state isn't composite";
 	public static final String TRANSITION_EXIT_SPEC_NOT_COMPOSITE = "Source state isn't composite";
 	public static final String TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT = "Target state has regions without 'default' entries.";
-	public static final String TRANSITION_UNBOUND_DEFAULT_EXIT_POINT = "Source state has regions without 'default' exits.";
 	public static final String TRANSITION_UNBOUND_NAMED_ENTRY_POINT = "Target state has regions without named entries: ";
-	public static final String TRANSITION_UNBOUND_NAMED_EXIT_POINT = "Source state has regions without named exits: ";
+	public static final String TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT = "Source State needs at least one region with the named exit point";
 	public static final String REGION_UNBOUND_DEFAULT_ENTRY_POINT = "Region must have a 'default' entry.";
-	public static final String REGION_UNBOUND_DEFAULT_EXIT_POINT = "Region must have a 'default' exit.";
 	public static final String REGION_UNBOUND_NAMED_ENTRY_POINT = "Region should have a named entry to support transitions entry specification: ";
-	public static final String REGION_UNBOUND_NAMED_EXIT_POINT = "Region should have a named exit to support transitions exit specification: ";
 	public static final String ENTRY_UNUSED = "The named entry is not used by incoming transitions.";
 	public static final String EXIT_UNUSED = "The named exit is not used by outgoing transitions.";
+	public static final String EXIT_DEFAULT_UNUSED = "The parent composite state has no 'default' exit transition.";
+	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
 
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
@@ -166,7 +164,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void checkUnusedExit(final Exit exit) {
 		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State) {
@@ -181,30 +179,33 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 				while (transitionIt.hasNext() && !hasOutgoingTransition) {
 
-					Iterator<ReactionProperty> propertyIt = transitionIt.next()
-							.getProperties().iterator();
+					Transition transition = transitionIt.next();
 
-					while (propertyIt.hasNext() && !hasOutgoingTransition) {
-
-						ReactionProperty property = propertyIt.next();
-
-						if (property instanceof ExitPointSpec) {
-
-							hasOutgoingTransition = exit.getName()
-									.equals(((ExitPointSpec) property)
-											.getExitpoint());
-						}
-					}
+					hasOutgoingTransition = STextValidationModelUtils
+							.isDefaultExitTransition(transition) ? true
+							: STextValidationModelUtils.isNamedExitTransition(
+									transition, exit.getName());
 				}
 				if (!hasOutgoingTransition) {
-					warning(EXIT_UNUSED, exit, null, -1);
+					error(EXIT_UNUSED, exit, null, -1);
+				}
+			} else {
+				boolean hasOutgoingTransition = false;
+				Iterator<Transition> transitionIt = state
+						.getOutgoingTransitions().iterator();
+				while (transitionIt.hasNext() && !hasOutgoingTransition) {
+					hasOutgoingTransition = STextValidationModelUtils
+							.isDefaultExitTransition(transitionIt.next());
+				}
+				if (!hasOutgoingTransition) {
+					error(EXIT_DEFAULT_UNUSED, exit, null, -1);
 				}
 			}
 		}
 	}
 
 	@Check(CheckType.FAST)
-	public void checkTransitionSpecOnAtomicState(final Transition transition) {
+	public void checkTransitionPropertySpec(final Transition transition) {
 		for (ReactionProperty property : transition.getProperties()) {
 			if (property instanceof EntryPointSpec) {
 				if (transition.getTarget() instanceof org.yakindu.sct.model.sgraph.State) {
@@ -216,12 +217,39 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					}
 				}
 			} else if (property instanceof ExitPointSpec) {
+				final ExitPointSpec exitPointSpec = (ExitPointSpec) property;
 				if (transition.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
 					org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) transition
 							.getSource();
 					if (!state.isComposite()) {
 						warning(TRANSITION_EXIT_SPEC_NOT_COMPOSITE, transition,
 								null, -1);
+					}
+					else {
+						//Validate an exit point is continued on one transition only.
+						for (Transition t : state.getOutgoingTransitions()) {
+							if (transition != t
+									&& STextValidationModelUtils.isNamedExitTransition(
+											t, exitPointSpec.getExitpoint())) {
+								warning(TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS, transition,
+										null, -1);
+							}
+						}
+						
+						//Validate the state has minimally one named exit region
+						Map<Region, List<Exit>> regions = STextValidationModelUtils.getRegionsWithoutDefaultExit(state.getRegions());
+						boolean hasExit = false;
+						Iterator<Region> regionIter = regions.keySet().iterator();
+						while (regionIter.hasNext() && !hasExit) {
+							Iterator<Exit> exitIter = regions.get(regionIter.next()).iterator();
+							while (exitIter.hasNext() && !hasExit) {
+								Exit exit = exitIter.next();
+								hasExit = exitPointSpec.getExitpoint().equals(exit.getName());
+							}
+						}
+						if (!hasExit) {
+							error(TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT, transition, null, -1);
+						}
 					}
 				}
 			}
@@ -282,69 +310,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 							}
 							if (!hasTargetEntry) {
 								error(TRANSITION_UNBOUND_NAMED_ENTRY_POINT
-										+ specName, transition, null, -1);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkUnboundExitPoints(
-			final org.yakindu.sct.model.sgraph.State state) {
-		if (state.isComposite()) {
-			final List<Transition>[] transitions = STextValidationModelUtils
-					.getExitSpecSortedTransitions(state
-							.getOutgoingTransitions());
-			Map<Region, List<Exit>> regions = null;
-
-			// first list contains Transitions without exit spec
-			if (!transitions[0].isEmpty()) {
-				regions = STextValidationModelUtils
-						.getRegionsWithoutDefaultExit(state.getRegions());
-				if (!regions.isEmpty()) {
-					for (Transition transition : transitions[0]) {
-						error(TRANSITION_UNBOUND_DEFAULT_EXIT_POINT,
-								transition, null, -1);
-					}
-					for (Region region : regions.keySet()) {
-						error(REGION_UNBOUND_DEFAULT_EXIT_POINT, region, null,
-								-1);
-					}
-				}
-			}
-
-			// second list contains Transitions with exit spec
-			if (!transitions[1].isEmpty()) {
-				if (regions == null) {
-					regions = STextValidationModelUtils
-							.getRegionsWithoutDefaultExit(state.getRegions());
-				}
-				for (Transition transition : transitions[1]) {
-					boolean hasSourceExit = true;
-					for (ReactionProperty property : transition.getProperties()) {
-						if (property instanceof ExitPointSpec) {
-							ExitPointSpec spec = (ExitPointSpec) property;
-							String specName = "'" + spec.getExitpoint() + "'";
-							for (Region region : regions.keySet()) {
-								boolean hasExit = false;
-								for (Exit exit : regions.get(region)) {
-									if (exit.getName().equals(
-											spec.getExitpoint())) {
-										hasExit = true;
-										break;
-									}
-								}
-								if (!hasExit) {
-									error(REGION_UNBOUND_NAMED_EXIT_POINT
-											+ specName, region, null, -1);
-									hasSourceExit = false;
-								}
-							}
-							if (!hasSourceExit) {
-								error(TRANSITION_UNBOUND_NAMED_EXIT_POINT
 										+ specName, transition, null, -1);
 							}
 						}
@@ -628,7 +593,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 	}
-
 
 	@Check
 	public void checkChoiceWithoutDefaultTransition(final Choice choice) {
