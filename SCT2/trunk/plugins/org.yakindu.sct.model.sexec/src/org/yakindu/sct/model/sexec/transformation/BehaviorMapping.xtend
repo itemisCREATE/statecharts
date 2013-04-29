@@ -40,6 +40,7 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import java.util.ArrayList
 
  
 
@@ -443,7 +444,7 @@ class BehaviorMapping {
 
 		// define exit behavior of transition
 		
-		// first process the exit behavior of orthogonal states that hase to be performed before source exit
+		// first process the exit behavior of orthogonal states that has to be performed before source exit
 		val exitStates = transitions.get(0).exitStates.toList
 		for ( t : transitions ) {
 			exitStates.retainAll(t.exitStates.toList)
@@ -489,7 +490,20 @@ class BehaviorMapping {
 		val entryScope = entryScopes.head
 		
 		// determine all target vertices
-		val List<TargetEntrySpec> targets = transitions.map( t | new TargetEntrySpec(t.target.mapped, t.entryPointName) )
+		val List<TargetEntrySpec> targets = transitions
+												.map( t | new TargetEntrySpec(t.target.mapped, t.entryPointName) )
+												.fold(new ArrayList<TargetEntrySpec>, [ s, e | { 
+														if (!s.exists(tes | e.target == tes.target)) {s.add(e)} 
+														s
+													}])
+													
+		// determine all target vertices and create a list that does not contain duplicates
+//		val targets = transitions
+//						.map( t | t.target.mapped)
+//						.fold(new ArrayList<ExecutionNode>, [ s, e | { 
+//							if (!s.contains(e)) {s.add(e)} 
+//							s
+//						}])
 		
 		// recursively extend the sequence by entering the scope for the specified targets		
 		if (entryScope != null) entryScope.addEnterStepsForTargetsToSequence( targets, sequence)	

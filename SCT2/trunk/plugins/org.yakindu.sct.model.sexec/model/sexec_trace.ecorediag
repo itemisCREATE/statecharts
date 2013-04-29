@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_C_ZL8GoeEeKAhpbGq_WxgA" type="EcoreTools" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_DBIRUGoeEeKAhpbGq_WxgA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_DBL7sGoeEeKAhpbGq_WxgA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_DBMiwGoeEeKAhpbGq_WxgA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_DBMiwWoeEeKAhpbGq_WxgA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_DBMiwmoeEeKAhpbGq_WxgA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_DBMiw2oeEeKAhpbGq_WxgA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_DBMixGoeEeKAhpbGq_WxgA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_DBMixWoeEeKAhpbGq_WxgA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_DBMixmoeEeKAhpbGq_WxgA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_DBMix2oeEeKAhpbGq_WxgA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_DBIRUWoeEeKAhpbGq_WxgA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="sexec_trace.ecore#//Trace"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DBIRUmoeEeKAhpbGq_WxgA" x="200" y="192"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_DBSpYGoeEeKAhpbGq_WxgA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_DBTQcGoeEeKAhpbGq_WxgA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_DBTQcWoeEeKAhpbGq_WxgA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_DBTQcmoeEeKAhpbGq_WxgA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_DBTQc2oeEeKAhpbGq_WxgA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_DBTQdGoeEeKAhpbGq_WxgA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_DBTQdWoeEeKAhpbGq_WxgA" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_DBTQdmoeEeKAhpbGq_WxgA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_DBTQd2oeEeKAhpbGq_WxgA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_DBTQeGoeEeKAhpbGq_WxgA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_DBSpYWoeEeKAhpbGq_WxgA" fontColor="4210752" fontName="Lucida Grande" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="sexec_trace.ecore#//TReactionTriggerWillEvaluate"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_DBSpYmoeEeKAhpbGq_WxgA" x="344" y="192"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_C_ZL8WoeEeKAhpbGq_WxgA"/>
+  <element xmi:type="ecore:EPackage" href="sexec_trace.ecore#/"/>
+</notation:Diagram>

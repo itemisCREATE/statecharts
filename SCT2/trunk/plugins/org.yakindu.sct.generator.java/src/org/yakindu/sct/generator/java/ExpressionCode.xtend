@@ -88,7 +88,11 @@ class ExpressionCode {
 	}
 	
 	def dispatch String code(StringLiteral expression) {
-		"\"" + expression.value.toString() + "\""
+		"\"" + expression.value.toString().escaped + "\""
+	}
+	
+	def String escaped(String it) {
+		return it.replace("\"", "\\\"");
 	}
 	
 	/* Logical Expressions */
