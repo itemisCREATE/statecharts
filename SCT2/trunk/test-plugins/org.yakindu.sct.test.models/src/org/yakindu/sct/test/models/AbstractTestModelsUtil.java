@@ -70,7 +70,6 @@ public abstract class AbstractTestModelsUtil {
 	public static final Statechart loadStatechart(URI uri) {
 		ResourceSet resSet = new ResourceSetImpl();
 		Resource resource = resSet.getResource(uri, true);
-		//Assert.isTrue(resource instanceof AbstractSCTResource);
 		Statechart statechart = (Statechart) EcoreUtil.getObjectByType(
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
 		return statechart;

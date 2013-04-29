@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_x651cKsyEeKkYoDxSIY5_A" name="UnboundEntryPoints">
+  <sgraph:Statechart xmi:id="_x651cKsyEeKkYoDxSIY5_A" name="TransitionEntrySpecNotComposite">
     <regions xmi:id="_x67DkqsyEeKkYoDxSIY5_A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_x6_VA6syEeKkYoDxSIY5_A">
         <outgoingTransitions xmi:id="_x7C_YasyEeKkYoDxSIY5_A" target="_N-dcMKv2EeKJqNG1GG2jEA"/>
       </vertices>
       <vertices xsi:type="sgraph:State" xmi:id="_ttT-MKszEeKkYoDxSIY5_A" specification="" name="B" incomingTransitions="_QhMesKv2EeKJqNG1GG2jEA"/>
       <vertices xsi:type="sgraph:State" xmi:id="_N-dcMKv2EeKJqNG1GG2jEA" name="C" incomingTransitions="_x7C_YasyEeKkYoDxSIY5_A">
-        <outgoingTransitions xmi:id="_QhMesKv2EeKJqNG1GG2jEA" specification="# enter >" target="_ttT-MKszEeKkYoDxSIY5_A"/>
+        <outgoingTransitions xmi:id="_QhMesKv2EeKJqNG1GG2jEA" specification="# > enter" target="_ttT-MKszEeKkYoDxSIY5_A"/>
       </vertices>
     </regions>
   </sgraph:Statechart>

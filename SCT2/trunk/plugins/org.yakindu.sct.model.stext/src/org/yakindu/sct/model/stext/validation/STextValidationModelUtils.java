@@ -13,6 +13,7 @@ package org.yakindu.sct.model.stext.validation;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -146,12 +147,17 @@ public final class STextValidationModelUtils {
 		for (Region region : elements) {
 			boolean hasDefaultExit = false;
 			final List<Exit> exits = getExits(region.eContents());
-			for (Exit exit : exits) {
-				if (isDefault(exit)) {
-					hasDefaultExit = true;
-					break;
+			if (!exits.isEmpty()) {
+				for (Exit exit : exits) {
+					if (isDefault(exit)) {
+						hasDefaultExit = true;
+						break;
+					}
 				}
+			} else {
+				hasDefaultExit = true;
 			}
+
 			if (!hasDefaultExit) {
 				regions.put(region, exits);
 			}
@@ -174,7 +180,76 @@ public final class STextValidationModelUtils {
 						.getName().equalsIgnoreCase("default")));
 	}
 
-	// SGRAPH
+	/**
+	 * Validates if the a {@link Transition} has an {@link ExitPointSpec} with
+	 * the given name.
+	 * 
+	 * @param transition
+	 *            - the transition to check
+	 * @param name
+	 *            - the name to check
+	 * @return {@code true} if the transition contains an ExitPointSpec with the
+	 *         name. Otherwise {@code false}.
+	 */
+	public static boolean isNamedExitTransition(Transition transition,
+			String name) {
+
+		boolean isNamedExitTransition = false;
+
+		Iterator<ReactionProperty> propertyIt = transition.getProperties()
+				.iterator();
+
+		while (propertyIt.hasNext() && !isNamedExitTransition) {
+
+			ReactionProperty property = propertyIt.next();
+
+			if (property instanceof ExitPointSpec) {
+
+				isNamedExitTransition = name.equals(((ExitPointSpec) property)
+						.getExitpoint());
+			}
+		}
+
+		return isNamedExitTransition;
+	}
+
+	public static boolean isDefaultExitTransition(Transition transition) {
+		boolean isDefault = false;
+		List<ExitPointSpec> exits = getExitPointSpecs(transition
+				.getProperties());
+		if (!exits.isEmpty()) {
+			for (ExitPointSpec exit : exits) {
+				if (exit.getExitpoint().equalsIgnoreCase("default")) {
+					isDefault = true;
+				}
+			}
+		} else {
+			isDefault = true;
+		}
+
+		return isDefault;
+	}
+
+	/**
+	 * Filters the given list of {@link ReactionProperty} to return only a list
+	 * of {@link ExitPointSpec}.
+	 * 
+	 * @param elements
+	 * 			- list of ReactionProperties
+	 * @return
+	 * 		A list of ExitPointSpecs.
+	 */
+	public static List<ExitPointSpec> getExitPointSpecs(
+			List<ReactionProperty> elements) {
+		List<ExitPointSpec> exits = new ArrayList<ExitPointSpec>();
+		for (ReactionProperty element : elements) {
+			if (element instanceof ExitPointSpec) {
+				exits.add((ExitPointSpec) element);
+			}
+		}
+		return exits;
+	}
+
 	private static List<Entry> getEntries(List<EObject> elements) {
 		List<Entry> entries = new ArrayList<Entry>();
 		for (EObject element : elements) {
@@ -185,7 +260,6 @@ public final class STextValidationModelUtils {
 		return entries;
 	}
 
-	// SGRAPH
 	private static List<Exit> getExits(List<EObject> elements) {
 		List<Exit> exits = new ArrayList<Exit>();
 		for (EObject element : elements) {

@@ -15,6 +15,9 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCod
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ENTRY_UNUSED;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.EXIT_DEFAULT_UNUSED;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.EXIT_UNUSED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_HAS_NO_EFFECT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_TO_SCOPE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_DECLARATIONS;
@@ -22,13 +25,11 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DE
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_REACTIONS_NOT_ALLOWED;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.REGION_UNBOUND_DEFAULT_ENTRY_POINT;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.REGION_UNBOUND_DEFAULT_EXIT_POINT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_ENTRY_SPEC_NOT_COMPOSITE;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_EXIT_SPEC_NOT_COMPOSITE;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_EXIT_POINT;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ENTRY_UNUSED;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.EXIT_UNUSED;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -385,132 +386,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void checkTransitionSpecOnAtomicState() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("TransitionEntrySpecOnAtomicState.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				assertTrue(validator.validate(element, diagnostics,
-						new HashMap<Object, Object>()));
-			}
-		}
-
-		assertIssueCount(diagnostics, 1);
-		assertWarning(diagnostics, TRANSITION_ENTRY_SPEC_NOT_COMPOSITE);
-	}
-
-	@Test
-	public void checkTransitionExitSpecOnAtomicState() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("TransitionExitSpecOnAtomicState.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				assertTrue(validator.validate(element, diagnostics,
-						new HashMap<Object, Object>()));
-			}
-		}
-
-		assertIssueCount(diagnostics, 1);
-		assertWarning(diagnostics, TRANSITION_EXIT_SPEC_NOT_COMPOSITE);
-	}
-
-	@Test
-	public void checkUnboundEntryPoints() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnboundEntryPoints01.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-			if (element instanceof State) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-		}
-
-		assertIssueCount(diagnostics, 4);
-		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT);
-		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
-	}
-
-	@Test
-	public void checkUnboundEntryPointsPartTwo() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnboundEntryPoints02.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-			if (element instanceof State) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-		}
-
-		assertIssueCount(diagnostics, 5);
-	}
-
-	@Test
-	public void checkUnboundExitPoints() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnboundExitPoints01.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-			if (element instanceof State) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-		}
-
-		assertIssueCount(diagnostics, 3);
-		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_EXIT_POINT);
-		assertError(diagnostics, REGION_UNBOUND_DEFAULT_EXIT_POINT);
-	}
-
-	@Test
-	public void checkUnboundExitPointsPartTwo() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnboundExitPoints02.sct");
-		Iterator<EObject> iter = statechart.eAllContents();
-
-		while (iter.hasNext()) {
-			EObject element = iter.next();
-			if (element instanceof Transition) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-			if (element instanceof State) {
-				validator.validate(element, diagnostics,
-						new HashMap<Object, Object>());
-			}
-		}
-
-		assertIssueCount(diagnostics, 4);
-	}
-	
-	@Test
 	public void checkUnusedEntry() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
@@ -527,7 +402,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		assertIssueCount(diagnostics, 1);
 		assertWarning(diagnostics, ENTRY_UNUSED);
 	}
-	
+
 	@Test
 	public void checkUnusedExit() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
@@ -543,7 +418,129 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		}
 
 		assertIssueCount(diagnostics, 1);
-		assertWarning(diagnostics, EXIT_UNUSED);
+		assertError(diagnostics, EXIT_UNUSED);
+
+		diagnostics = new BasicDiagnostic();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart("UnusedDefaultExitPoint.sct");
+		iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Exit) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, EXIT_DEFAULT_UNUSED);
+	}
+
+	@Test
+	public void checkTransitionPropertySpec() {
+		// Test source state isn't composite
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("TransitionEntrySpecNotComposite.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+		// Test target state isn't composite
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, TRANSITION_ENTRY_SPEC_NOT_COMPOSITE);
+
+		diagnostics = new BasicDiagnostic();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart("TransitionExitSpecNotComposite.sct");
+		iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, TRANSITION_EXIT_SPEC_NOT_COMPOSITE);
+
+		// Test exit spec is used on multiple transition siblings.
+		diagnostics = new BasicDiagnostic();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart("TransitionExitSpecOnMultipleSiblings.sct");
+		iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
+			}
+		}
+
+		assertIssueCount(diagnostics, 4);
+		assertWarning(diagnostics, TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS);
+
+		// Test transition unbound named exit point spec.
+		diagnostics = new BasicDiagnostic();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart("TransitionNotExistingNamedExitPoint.sct");
+		iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT);
+	}
+
+	@Test
+	public void checkUnboundEntryPoints() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart("UnboundDefaultEntryPoints.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+			if (element instanceof State) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 4);
+		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT);
+		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
+
+		diagnostics = new BasicDiagnostic();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart("UnboundEntryPoints02.sct");
+		iter = statechart.eAllContents();
+
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+			if (element instanceof State) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+		assertIssueCount(diagnostics, 4);
 	}
 
 	protected void assertError(BasicDiagnostic diag, String message) {
