@@ -106,4 +106,16 @@ public class SyncJoinTest extends AbstractExecutionFlowTest {
 		assertTrue(isActive("C2"));
 		assertTrue(isActive("D2"));
 	}
+	@Test
+	public void doubleEntryActionBug() throws Exception {
+		interpreter.enter();
+		raiseEvent("e");
+		raiseEvent("f");
+		interpreter.runCycle();
+		raiseEvent("jc");
+		raiseEvent("jd");
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
+		assertTrue(getInteger("x") == 1);
+	}
 }

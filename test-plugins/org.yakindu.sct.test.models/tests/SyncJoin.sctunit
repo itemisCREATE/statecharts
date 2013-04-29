@@ -93,5 +93,23 @@ testgroup SyncJoin for statechart SyncJoin {
 				
 	}
 	
+	/* Entry actions of a join target should only be called once. 
+	 * 
+	 * There was a bug that lead to a multiple entry action call depending on the number of joined transitions.
+	 */
+	test doubleEntryActionBug {
+		enter
+		
+		raise e
+		raise f
+		cycle
+		
+		raise jc
+		raise jd
+		cycle
+		
+		assert active (SyncJoin.main_region.A)
+		assert x == 1
+	}
 	
 }
