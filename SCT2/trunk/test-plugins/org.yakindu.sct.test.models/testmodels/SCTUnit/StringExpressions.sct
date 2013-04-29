@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_GAg-QMUEEeGBt-G4bU7TpQ" specification="interface:&#xD;&#xA;var myString :string&#xD;&#xA;var myString2 : string&#xD;&#xA;&#xD;&#xA;var equals : boolean&#xD;&#xA;var notEqual : boolean&#xD;&#xA;&#xD;&#xA;in event e1 &#xD;&#xA;&#xD;&#xA;" name="StringExpressions">
+  <sgraph:Statechart xmi:id="_GAg-QMUEEeGBt-G4bU7TpQ" specification="interface:&#xD;&#xA;var myString :string&#xD;&#xA;var myString2 : string&#xD;&#xA;&#xD;&#xA;var quotedString : string = '&quot;x&quot;'&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;var equals : boolean&#xD;&#xA;var notEqual : boolean&#xD;&#xA;&#xD;&#xA;in event e1 &#xD;&#xA;&#xD;&#xA;" name="StringExpressions">
     <regions xmi:id="_GAg-Q8UEEeGBt-G4bU7TpQ" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_GCmo9sUEEeGBt-G4bU7TpQ">
         <outgoingTransitions xmi:id="_GCmpEMUEEeGBt-G4bU7TpQ" target="_GCmpAcUEEeGBt-G4bU7TpQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_GCmpAcUEEeGBt-G4bU7TpQ" specification="entry / myString =&quot;hello&quot;;&#xD;&#xA;myString2 = &quot;world&quot;&#xD;&#xA; " name="StateA" incomingTransitions="_GCmpEMUEEeGBt-G4bU7TpQ">
+      <vertices xsi:type="sgraph:State" xmi:id="_GCmpAcUEEeGBt-G4bU7TpQ" specification="entry / myString =&quot;hello&quot;;&#xD;&#xA;myString2 = &quot;world&quot;;&#xD;&#xA;quotedString = &quot;'y'&quot;&#xD;&#xA; " name="StateA" incomingTransitions="_GCmpEMUEEeGBt-G4bU7TpQ">
         <outgoingTransitions xmi:id="_ecu0gMUPEeGfjbriQ9CjYQ" specification="e1" target="_eaWO4MUPEeGfjbriQ9CjYQ"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_eaWO4MUPEeGfjbriQ9CjYQ" specification="entry / equals = (myString == myString2);&#xD;&#xA;notEqual = (myString != myString2 )&#xD;&#xA;" name="StateB" incomingTransitions="_ecu0gMUPEeGfjbriQ9CjYQ"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_eaWO4MUPEeGfjbriQ9CjYQ" specification="entry / equals = (myString == myString2);&#xD;&#xA;notEqual = (myString != myString2 );&#xD;&#xA;quotedString = &quot;\&quot;z\&quot;&quot;&#xD;&#xA;" name="StateB" incomingTransitions="_ecu0gMUPEeGfjbriQ9CjYQ"/>
     </regions>
   </sgraph:Statechart>
   <notation:Diagram xmi:id="_GAg-QcUEEeGBt-G4bU7TpQ" type="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor" element="_GAg-QMUEEeGBt-G4bU7TpQ" measurementUnit="Pixel">
