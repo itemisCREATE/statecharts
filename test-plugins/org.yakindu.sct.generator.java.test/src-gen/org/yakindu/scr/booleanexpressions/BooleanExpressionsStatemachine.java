@@ -4,7 +4,7 @@ public class BooleanExpressionsStatemachine
 		implements
 			IBooleanExpressionsStatemachine {
 
-	private final class SCIDefaultImpl implements SCIDefault {
+	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
 
@@ -88,7 +88,7 @@ public class BooleanExpressionsStatemachine
 
 	}
 
-	private SCIDefaultImpl sCIDefault;
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_StateA, main_region_StateB, $NullState$
@@ -100,7 +100,7 @@ public class BooleanExpressionsStatemachine
 
 	public BooleanExpressionsStatemachine() {
 
-		sCIDefault = new SCIDefaultImpl();
+		sCInterface = new SCInterfaceImpl();
 
 	}
 
@@ -112,27 +112,27 @@ public class BooleanExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCIDefault.myBool1 = false;
+		sCInterface.myBool1 = false;
 
-		sCIDefault.myBool2 = false;
+		sCInterface.myBool2 = false;
 
-		sCIDefault.and = false;
+		sCInterface.and = false;
 
-		sCIDefault.or = false;
+		sCInterface.or = false;
 
-		sCIDefault.not = false;
+		sCInterface.not = false;
 
-		sCIDefault.equal = false;
+		sCInterface.equal = false;
 
-		sCIDefault.notequal = false;
+		sCInterface.notequal = false;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCIDefault.myBool1 = true;
+		sCInterface.myBool1 = true;
 
-		sCIDefault.myBool2 = false;
+		sCInterface.myBool2 = false;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
@@ -158,7 +158,7 @@ public class BooleanExpressionsStatemachine
 	}
 
 	protected void clearEvents() {
-		sCIDefault.clearEvents();
+		sCInterface.clearEvents();
 
 	}
 
@@ -176,62 +176,62 @@ public class BooleanExpressionsStatemachine
 		}
 	}
 
-	public SCIDefault getSCIDefault() {
-		return sCIDefault;
+	public SCInterface getSCInterface() {
+		return sCInterface;
 	}
 
 	public void raiseE1() {
-		sCIDefault.raiseE1();
+		sCInterface.raiseE1();
 	}
 
 	public boolean getMyBool1() {
-		return sCIDefault.getMyBool1();
+		return sCInterface.getMyBool1();
 	}
 
 	public void setMyBool1(boolean value) {
-		sCIDefault.setMyBool1(value);
+		sCInterface.setMyBool1(value);
 	}
 	public boolean getMyBool2() {
-		return sCIDefault.getMyBool2();
+		return sCInterface.getMyBool2();
 	}
 
 	public void setMyBool2(boolean value) {
-		sCIDefault.setMyBool2(value);
+		sCInterface.setMyBool2(value);
 	}
 	public boolean getAnd() {
-		return sCIDefault.getAnd();
+		return sCInterface.getAnd();
 	}
 
 	public void setAnd(boolean value) {
-		sCIDefault.setAnd(value);
+		sCInterface.setAnd(value);
 	}
 	public boolean getOr() {
-		return sCIDefault.getOr();
+		return sCInterface.getOr();
 	}
 
 	public void setOr(boolean value) {
-		sCIDefault.setOr(value);
+		sCInterface.setOr(value);
 	}
 	public boolean getNot() {
-		return sCIDefault.getNot();
+		return sCInterface.getNot();
 	}
 
 	public void setNot(boolean value) {
-		sCIDefault.setNot(value);
+		sCInterface.setNot(value);
 	}
 	public boolean getEqual() {
-		return sCIDefault.getEqual();
+		return sCInterface.getEqual();
 	}
 
 	public void setEqual(boolean value) {
-		sCIDefault.setEqual(value);
+		sCInterface.setEqual(value);
 	}
 	public boolean getNotequal() {
-		return sCIDefault.getNotequal();
+		return sCInterface.getNotequal();
 	}
 
 	public void setNotequal(boolean value) {
-		sCIDefault.setNotequal(value);
+		sCInterface.setNotequal(value);
 	}
 
 	/* Entry action for statechart 'BooleanExpressions'. */
@@ -244,19 +244,19 @@ public class BooleanExpressionsStatemachine
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCIDefault.e1) {
+		if (sCInterface.e1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCIDefault.and = sCIDefault.myBool1 && sCIDefault.myBool2;
+			sCInterface.and = sCInterface.myBool1 && sCInterface.myBool2;
 
-			sCIDefault.or = sCIDefault.myBool1 || sCIDefault.myBool2;
+			sCInterface.or = sCInterface.myBool1 || sCInterface.myBool2;
 
-			sCIDefault.not = !sCIDefault.myBool1;
+			sCInterface.not = !sCInterface.myBool1;
 
-			sCIDefault.equal = sCIDefault.myBool1 == sCIDefault.myBool2;
+			sCInterface.equal = sCInterface.myBool1 == sCInterface.myBool2;
 
-			sCIDefault.notequal = (sCIDefault.myBool1 != sCIDefault.myBool2);
+			sCInterface.notequal = (sCInterface.myBool1 != sCInterface.myBool2);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_StateB;

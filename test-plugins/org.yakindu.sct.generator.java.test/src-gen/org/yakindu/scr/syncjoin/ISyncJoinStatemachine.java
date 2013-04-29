@@ -8,6 +8,8 @@ public interface ISyncJoinStatemachine extends IStatemachine {
 		public void raiseF();
 		public void raiseJc();
 		public void raiseJd();
+		public int getX();
+		public void setX(int value);
 
 	}
 

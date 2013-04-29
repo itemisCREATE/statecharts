@@ -888,8 +888,6 @@ public class PerformanceTestStatemachine
 				}
 
 				reactPerformanceTest_mr__sync0();
-
-				reactPerformanceTest_mr__sync0();
 			}
 		}
 	}
@@ -1153,8 +1151,6 @@ public class PerformanceTestStatemachine
 				default :
 					break;
 			}
-
-			reactPerformanceTest_mr__sync0();
 
 			reactPerformanceTest_mr__sync0();
 		}

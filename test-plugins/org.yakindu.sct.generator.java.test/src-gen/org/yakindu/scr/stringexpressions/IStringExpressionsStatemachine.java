@@ -9,6 +9,8 @@ public interface IStringExpressionsStatemachine extends IStatemachine {
 		public void setMyString(String value);
 		public String getMyString2();
 		public void setMyString2(String value);
+		public String getQuotedString();
+		public void setQuotedString(String value);
 		public boolean getEquals();
 		public void setEquals(boolean value);
 		public boolean getNotEqual();

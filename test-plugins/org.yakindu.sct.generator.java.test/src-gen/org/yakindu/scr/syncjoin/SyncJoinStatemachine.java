@@ -28,6 +28,16 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			jd = true;
 		}
 
+		private int x;
+
+		public int getX() {
+			return x;
+		}
+
+		public void setX(int value) {
+			this.x = value;
+		}
+
 		public void clearEvents() {
 			e = false;
 			f = false;
@@ -61,6 +71,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		clearEvents();
 		clearOutEvents();
 
+		sCInterface.x = 0;
 	}
 
 	public void enter() {
@@ -159,6 +170,14 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		sCInterface.raiseJd();
 	}
 
+	public int getX() {
+		return sCInterface.getX();
+	}
+
+	public void setX(int value) {
+		sCInterface.setX(value);
+	}
+
 	/* Entry action for statechart 'SyncJoin'. */
 	private void entryAction() {
 	}
@@ -227,8 +246,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			}
 
 			reactSyncJoin_main_region__sync0();
-
-			reactSyncJoin_main_region__sync0();
 		}
 	}
 
@@ -278,13 +295,13 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			}
 
 			reactSyncJoin_main_region__sync0();
-
-			reactSyncJoin_main_region__sync0();
 		}
 	}
 
 	/* The reactions of state null. */
 	private void reactSyncJoin_main_region__sync0() {
+		sCInterface.x += 1;
+
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
