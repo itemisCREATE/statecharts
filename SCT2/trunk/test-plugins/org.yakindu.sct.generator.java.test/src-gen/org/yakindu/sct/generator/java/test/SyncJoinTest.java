@@ -103,4 +103,16 @@ public class SyncJoinTest {
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C2));
 		assertTrue(statemachine.isStateActive(State.main_region_B_r2_D2));
 	}
+	@Test
+	public void testdoubleEntryActionBug() {
+		statemachine.enter();
+		statemachine.raiseE();
+		statemachine.raiseF();
+		statemachine.runCycle();
+		statemachine.raiseJc();
+		statemachine.raiseJd();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.getX() == 1);
+	}
 }

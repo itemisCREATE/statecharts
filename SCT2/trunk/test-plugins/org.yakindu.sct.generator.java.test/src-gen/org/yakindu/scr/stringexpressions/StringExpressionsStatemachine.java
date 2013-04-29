@@ -32,6 +32,16 @@ public class StringExpressionsStatemachine
 			this.myString2 = value;
 		}
 
+		private String quotedString;
+
+		public String getQuotedString() {
+			return quotedString;
+		}
+
+		public void setQuotedString(String value) {
+			this.quotedString = value;
+		}
+
 		private boolean equals;
 
 		public boolean getEquals() {
@@ -86,6 +96,8 @@ public class StringExpressionsStatemachine
 
 		sCInterface.myString2 = "";
 
+		sCInterface.quotedString = "\"x\"";
+
 		sCInterface.equals = false;
 
 		sCInterface.notEqual = false;
@@ -97,6 +109,8 @@ public class StringExpressionsStatemachine
 		sCInterface.myString = "hello";
 
 		sCInterface.myString2 = "world";
+
+		sCInterface.quotedString = "'y'";
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
@@ -162,6 +176,13 @@ public class StringExpressionsStatemachine
 	public void setMyString2(String value) {
 		sCInterface.setMyString2(value);
 	}
+	public String getQuotedString() {
+		return sCInterface.getQuotedString();
+	}
+
+	public void setQuotedString(String value) {
+		sCInterface.setQuotedString(value);
+	}
 	public boolean getEquals() {
 		return sCInterface.getEquals();
 	}
@@ -198,6 +219,8 @@ public class StringExpressionsStatemachine
 			sCInterface.notEqual = (sCInterface.myString == null
 					? sCInterface.myString2 == null
 					: !sCInterface.myString.equals(sCInterface.myString2));
+
+			sCInterface.quotedString = "\"z\"";
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_StateB;

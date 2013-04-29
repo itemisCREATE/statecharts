@@ -37,14 +37,17 @@ public class StringExpressionsTest {
 
 	@Test
 	public void testStringExpressionsTest() {
+		assertTrue(statemachine.getQuotedString().equals("\"x\""));
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_StateA));
 		assertTrue(statemachine.getMyString().equals("hello"));
 		assertTrue(statemachine.getMyString2().equals("world"));
+		assertTrue(statemachine.getQuotedString().equals("'y'"));
 		statemachine.raiseE1();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_StateB));
 		assertTrue(statemachine.getEquals() == false);
 		assertTrue(statemachine.getNotEqual() == true);
+		assertTrue(statemachine.getQuotedString().equals("\"z\""));
 	}
 }

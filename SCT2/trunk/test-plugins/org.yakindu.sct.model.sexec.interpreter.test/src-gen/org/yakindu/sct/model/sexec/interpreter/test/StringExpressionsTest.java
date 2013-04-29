@@ -40,14 +40,17 @@ public class StringExpressionsTest extends AbstractExecutionFlowTest {
 	}
 	@Test
 	public void StringExpressionsTest() throws Exception {
+		assertTrue(getString("quotedString").equals("\"x\""));
 		interpreter.enter();
 		assertTrue(isActive("StateA"));
 		assertTrue(getString("myString").equals("hello"));
 		assertTrue(getString("myString2").equals("world"));
+		assertTrue(getString("quotedString").equals("'y'"));
 		raiseEvent("e1");
 		interpreter.runCycle();
 		assertTrue(isActive("StateB"));
 		assertTrue(getBoolean("equals") == false);
 		assertTrue(getBoolean("notEqual") == true);
+		assertTrue(getString("quotedString").equals("\"z\""));
 	}
 }
