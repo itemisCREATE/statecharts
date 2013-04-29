@@ -1,15 +1,20 @@
 testgroup StringExpressions for statechart StringExpressions	{
 	test StringExpressionsTest {
 		
+		assert quotedString == '"x"'
 		enter
 		
 		assert active (StringExpressions.main_region.StateA)
 		assert myString == "hello"
 		assert myString2 == "world"
+		assert quotedString == "'y'"
+		
 		raise e1
 		cycle
 		assert active (StringExpressions.main_region.StateB)
 		assert equals == false
 		assert notEqual == true
+		assert quotedString == "\"z\"" 
+		
 	}
 }
