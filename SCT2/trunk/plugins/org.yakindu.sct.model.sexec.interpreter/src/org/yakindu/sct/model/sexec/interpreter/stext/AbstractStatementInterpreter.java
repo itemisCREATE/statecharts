@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.yakindu.sct.model.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
@@ -44,9 +45,8 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 		assignFunctionMap.put("orAssign", "|");
 	}
 
-	
 	protected Map<Signature, Function> functionMap = new HashMap<Signature, Function>();
-	
+
 	public Object evaluate(String name, Object... params) {
 		Function lookup = lookup(name, params);
 		return lookup.execute(params);
@@ -54,11 +54,11 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 	}
 
 	public Function lookup(String name, Object... params) {
-		
+
 		Signature sig = new Signature(name, toParamTypes(params));
 		Function f = functionMap.get(sig);
-		if ( f == null ) {
-			f =  super.lookup(getClass(), name, sig.getParamTypes());
+		if (f == null) {
+			f = super.lookup(getClass(), name, sig.getParamTypes());
 			functionMap.put(sig, f);
 		}
 		return f;
@@ -69,11 +69,19 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 	}
 
 	public Object executeOperationCallback(OperationDefinition definition,
-			Object ... parameter) {
+			Object... parameter) {
 		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(
 				definition.getName(), definition.getParameters().size(),
 				definition.getParameters().size(), operationCallback);
-		return dispatcher.invoke(parameter);
+		try {
+			return dispatcher.invoke(parameter);
+		} catch (WrappedException e) {
+			throw e;
+		} catch (Exception ex) {
+			throw new WrappedException("Error during invocation of operation '"
+					+ definition.getName() + "' with params "
+					+ definition.getParameters() + " '", ex);
+		}
 	}
 
 }
