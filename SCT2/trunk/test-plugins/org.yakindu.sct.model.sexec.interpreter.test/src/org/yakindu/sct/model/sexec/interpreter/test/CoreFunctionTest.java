@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.sexec.interpreter.test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EcoreFactoryImpl;
@@ -701,9 +701,9 @@ public class CoreFunctionTest {
 
 	@Test
 	public void testEqualsFloatDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1.3F, 1.3);
-		assertEquals("testEqualsFloatDouble faild", expected, actual);
+		assertTrue( cFunction.equals(1.0F, 1.0));
+		assertTrue( cFunction.equals(1.5F, 1.5));
+		assertFalse( cFunction.equals(1.3F, 1.3));
 	}
 
 	@Test
@@ -1121,15 +1121,11 @@ public class CoreFunctionTest {
 
 	@Test
 	public void testSmallerEqualFloatDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1.1F, 1.1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1.1F, 1.2);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(1.2F, 1.1);
-		assertEquals(expected, actual);
+		assertTrue( cFunction.smallerEqual(1.0F, 1.0));		
+		assertTrue( cFunction.smallerEqual(1.5F, 1.5));		
+		assertTrue( cFunction.smallerEqual(1.1F, 1.2));
+		assertFalse( cFunction.smallerEqual(1.2F, 1.2));
+		assertFalse( cFunction.smallerEqual(1.2F, 1.1));
 	}
 
 	@Test
@@ -1290,15 +1286,9 @@ public class CoreFunctionTest {
 
 	@Test
 	public void testGreaterFloatDouble() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1.0F, 1.0);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1.1F, 1.0);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(1.0F, 0.9);
-		assertEquals(expected, actual);
+		assertFalse(cFunction.greater(1.0F, 1.0));
+		assertTrue( cFunction.greater(1.1F, 1.0));
+		assertFalse(cFunction.greater(1.0F, 1.1));
 	}
 
 	@Test
