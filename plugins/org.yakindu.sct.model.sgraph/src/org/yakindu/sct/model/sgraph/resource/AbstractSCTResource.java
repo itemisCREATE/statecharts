@@ -192,7 +192,9 @@ public abstract class AbstractSCTResource extends GMFResource {
 			return super.getURIFragment(eObject);
 		}
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(eObject);
-		if (node != null && eObject.eContainingFeature() != null) {
+		if (node != null
+				&& NodeModelUtils.getNode(eObject.eContainer()) != null
+				&& eObject.eContainingFeature() != null) {
 			return getXtextFragment(eObject, node);
 		}
 		return super.getURIFragment(eObject);
