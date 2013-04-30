@@ -79,7 +79,7 @@
 								<taskdef resource="net/sf/antcontrib/antlib.xml"
 									classpathref="maven.plugin.classpath" />
 								<property name="download.distro.src"
-									value="${eclipse.mirror.url}/technology/epp/downloads/release/juno/SR1" />
+									value="${eclipse.mirror.url}/technology/epp/downloads/release/juno/SR2" />
 								<property name="download.distro.dir"
 									value="${project.build.directory}/distro/download" />
 
@@ -246,7 +246,7 @@
 											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\3"
 											casesensitive="false" />
 										<echo>mkdir ${distro.dir} for
-											yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.zip</echo>
+											yakindu-sct-juno-SR2-${distro.os}-${distro.ws}-${distro.arch}.zip</echo>
 										<mkdir dir="${distro.dir}" />
 
 										<if>
@@ -257,14 +257,14 @@
 												<exec dir="${distro.work.dir}/@{environment}"
 													executable="zip">
 													<arg
-														line="-q -r ${distro.dir}/yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.zip eclipse" />
+														line="-q -r ${distro.dir}/yakindu-sct-juno-SR2-${distro.os}-${distro.ws}-${distro.arch}.zip eclipse" />
 												</exec>
 											</then>
 											<else>
 												<exec dir="${distro.work.dir}/@{environment}"
 													executable="tar">
 													<arg
-														line="-czf ${distro.dir}/yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.tar.gz eclipse" />
+														line="-czf ${distro.dir}/yakindu-sct-juno-SR2-${distro.os}-${distro.ws}-${distro.arch}.tar.gz eclipse" />
 												</exec>
 											</else>
 										</if>
