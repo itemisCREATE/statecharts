@@ -84,8 +84,7 @@
 									value="${project.build.directory}/distro/download" />
 
 								<!-- 'target architecture' for distros -->
-								<for
-									list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
+								<for list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
 									param="environment" delimiter=";" parallel="false">
 									<sequential>
 										<propertyregex property="distro.os" input="@{environment}"
@@ -232,8 +231,7 @@
 								<taskdef resource="net/sf/antcontrib/antlib.xml"
 									classpathref="maven.plugin.classpath" />
 								<!-- 'target architecture' for distros -->
-								<for
-									list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
+								<for list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
 									param="environment" delimiter=";" parallel="false">
 									<sequential>
 										<propertyregex property="distro.os" input="@{environment}"
@@ -307,8 +305,7 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application
-								org.eclipse.equinox.p2.director -destination \
+								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/macosx-cocoa-x86_64/eclipse/ -profile \
 								${profile} -p2.os macosx -p2.ws cocoa -p2.arch x86_64 \
 								-repository ${update.sites} -installIUs ${features}
@@ -323,10 +320,8 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application
-								org.eclipse.equinox.p2.director -destination \
-								${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile}
-								\
+								-application org.eclipse.equinox.p2.director -destination \
+								${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile} \
 								-p2.os win32 -p2.ws win32 -p2.arch x86 -repository \
 								${update.sites} -installIUs ${features}
 							</appArgLine>
@@ -340,11 +335,9 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application
-								org.eclipse.equinox.p2.director -destination \
+								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/win32-win32-x86_64/eclipse/ -profile \
-								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository
-								\
+								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository \
 								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
@@ -357,13 +350,10 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application
-								org.eclipse.equinox.p2.director -destination \
+								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/linux-gtk-x86/eclipse/ -profile \
-								${profile}
-								-p2.os linux -p2.ws gtk -p2.arch x86 \
-								-repository
-								${update.sites} -installIUs ${features}
+								${profile} -p2.os linux -p2.ws gtk -p2.arch x86 \
+								-repository ${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -375,12 +365,10 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application
-								org.eclipse.equinox.p2.director -destination \
+								-application org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/linux-gtk-x86_64/eclipse/ -profile \
 								${profile} -p2.os linux -p2.ws gtk -p2.arch x86_64 \
-								-repository
-								${update.sites} -installIUs ${features}
+								-repository ${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
