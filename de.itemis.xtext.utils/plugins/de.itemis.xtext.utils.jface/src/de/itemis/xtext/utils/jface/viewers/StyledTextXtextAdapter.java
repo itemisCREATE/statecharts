@@ -327,7 +327,8 @@ public class StyledTextXtextAdapter {
 		}
 
 		public ISelection getSelection() {
-
+			if (styledText.isDisposed())
+				return StructuredSelection.EMPTY;
 			int offset = styledText.getCaretOffset() - 1;
 			XtextResource fakeResource = StyledTextXtextAdapter.this.getFakeResourceContext().getFakeResource();
 			IParseResult parseResult = fakeResource.getParseResult();
