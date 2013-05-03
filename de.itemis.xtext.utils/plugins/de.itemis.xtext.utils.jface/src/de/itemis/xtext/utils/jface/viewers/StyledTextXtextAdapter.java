@@ -333,17 +333,15 @@ public class StyledTextXtextAdapter {
 			XtextResource fakeResource = StyledTextXtextAdapter.this.getFakeResourceContext().getFakeResource();
 			IParseResult parseResult = fakeResource.getParseResult();
 			if (parseResult == null)
-				return new StructuredSelection();
+				return StructuredSelection.EMPTY;
 			ICompositeNode rootNode = parseResult.getRootNode();
 			ILeafNode selectedNode = NodeModelUtils.findLeafNodeAtOffset(rootNode, offset);
 			final EObject selectedObject = NodeModelUtils.findActualSemanticObjectFor(selectedNode);
-
 			if (selectedObject == null) {
-				return new StructuredSelection();
+				return StructuredSelection.EMPTY;
 			}
 			return new StructuredSelection(selectedObject);
 		}
-
 	}
 
 	private class ChangeSelectionProviderOnFocusGain implements FocusListener, DisposeListener {
