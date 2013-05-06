@@ -20,8 +20,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
 import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
@@ -78,10 +80,11 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
 		Resource sharedDomainResource = DiagramPartitioningUtil.getSharedDomain().getResourceSet()
 				.getResource(semanticObject.eResource().getURI(), true);
-		EList<EObject> contents = sharedDomainResource.getContents();
-		for (EObject eObject : contents) {
-			if (EcoreUtil.equals(eObject, diagram)) {
-				return DiagramPartitioningUtil.openEditor((Diagram) eObject);
+		Collection<Diagram> contents = EcoreUtil.getObjectsByType(sharedDomainResource.getContents(),
+				NotationPackage.Literals.DIAGRAM);
+		for (Diagram diag : contents) {
+			if (EcoreUtil.equals(diag.getElement(), diagram.getElement())) {
+				return DiagramPartitioningUtil.openEditor((Diagram) diag);
 			}
 		}
 		throw new RuntimeException("No Diagram found for semantic object " + semanticObject);
