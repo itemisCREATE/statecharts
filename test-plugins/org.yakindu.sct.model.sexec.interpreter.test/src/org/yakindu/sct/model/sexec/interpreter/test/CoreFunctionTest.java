@@ -12,6 +12,10 @@ package org.yakindu.sct.model.sexec.interpreter.test;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EcoreFactoryImpl;
 import org.junit.After;
@@ -23,7 +27,7 @@ import org.yakindu.sct.model.sexec.interpreter.stext.CoreFunction;
 /**
  * 
  * @author florian antony
- *
+ * 
  */
 public class CoreFunctionTest {
 
@@ -622,903 +626,574 @@ public class CoreFunctionTest {
 
 	@Test
 	public void testEqualsBooleanBoolean() {
-		boolean expected = false;
-		boolean actual = cFunction.equals(true, false);
-		assertEquals("testEqualsBooleanBoolean faild", expected, actual);
+		assertFalse(cFunction.equals(true, false));
+		assertTrue(cFunction.equals(true, true));
 	}
 
 	@Test
 	public void testEqualsEObjectEObject() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(obj1, obj2);
-		assertEquals("testEqualsEObjectEObject faild", expected, actual);
+		assertTrue(cFunction.equals(obj1, obj2));
 	}
 
 	@Test
 	public void testEqualsStringString() {
-		boolean expected = true;
 		String test = "test";
-		boolean actual = cFunction.equals(test, "test");
-		assertEquals("testEqualsStringString faild", expected, actual);
+		assertTrue(cFunction.equals(test, "test"));
+		assertFalse(cFunction.equals(test, "test2"));
 	}
 
 	@Test
 	public void testEqualsIntegerInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1, 1);
-		assertEquals("testEqualsIntegerInteger faild", expected, actual);
+		assertTrue(cFunction.equals(1, 1));
+		assertFalse(cFunction.equals(1, 2));
 	}
 
 	@Test
 	public void testEqualsFloatFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1.5F, 1.5F);
-		assertEquals("testEqualsloatFloat faild", expected, actual);
+		assertTrue(cFunction.equals(1.3F, 1.3F));
+		assertFalse(cFunction.equals(1.31F, 1.3F));
 	}
 
 	@Test
 	public void testEqualsDoubleDouble() {
-
-		boolean expected = true;
-		boolean actual = cFunction.equals(1.5, 1.5);
-		assertEquals("testEqualsDoubleDouble faild", expected, actual);
+		assertTrue(cFunction.equals(1.5, 1.5));
+		assertFalse(cFunction.equals(1.3, 1.31));
 	}
 
 	@Test
 	public void testEqualsLongLong() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(10L, 10L);
-		assertEquals("testEqualsLongLong faild", expected, actual);
+		assertTrue(cFunction.equals(10L, 10L));
+		assertFalse(cFunction.equals(11L, 10L));
 	}
 
 	@Test
 	public void testEqualsIntegerFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1, 1.0F);
-		assertEquals("testEqualsIntegerFloat faild", expected, actual);
+		assertTrue(cFunction.equals(1, 1.0F));
+		assertFalse(cFunction.equals(1, 1.1F));
 	}
 
 	@Test
 	public void testEqualsIntegerDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1, 1.0);
-		assertEquals("testEqualsIntegerDouble faild", expected, actual);
+		assertTrue(cFunction.equals(1, 1.0));
+		assertFalse(cFunction.equals(1, 1.1));
 	}
 
 	@Test
 	public void testEqualsIntegerLong() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1, 1L);
-		assertEquals("testEqualsIntegerLong faild", expected, actual);
+		assertTrue(cFunction.equals(1, 1L));
+		assertFalse(cFunction.equals(1, 2L));
 	}
 
 	@Test
 	public void testEqualsFloatInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1.0F, 1);
-		assertEquals("testEqualsFloatInteger faild", expected, actual);
+		assertTrue(cFunction.equals(1.0F, 1));
+		assertFalse(cFunction.equals(1.1F, 1));
 	}
 
 	@Test
 	public void testEqualsFloatDouble() {
-		assertTrue( cFunction.equals(1.0F, 1.0));
-		assertTrue( cFunction.equals(1.5F, 1.5));
-		assertFalse( cFunction.equals(1.3F, 1.3));
+		assertTrue(cFunction.equals(1.0F, 1.0));
+		assertTrue(cFunction.equals(1.5F, 1.5));
+		//Since Java and C are not able to compare 
+		//float and double values with absolute precision -> 1.3F != 1.3  
+		assertFalse(cFunction.equals(1.3F, 1.3));
 	}
 
 	@Test
 	public void testEqualsDoubleInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1.0, 1);
-		assertEquals("testEqualsDoubleInteger faild", expected, actual);
+		assertTrue(cFunction.equals(1.0, 1));
+		assertFalse(cFunction.equals(1.1, 1));
 	}
 
 	@Test
 	public void testEqualsDoubleFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1.5, 1.5F);
-		assertEquals("testEqualsDoubleFloat faild", expected, actual);
+		//Since Java and C are not able to compare 
+		//float and double values with absolute precision -> 1.3 != 1.3F  
+		assertFalse(cFunction.equals(1.3, 1.3F));
+
+		assertTrue(cFunction.equals(1.5, 1.5F));
 	}
 
 	@Test
 	public void testEqualsDoubleLong() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1.0, 1L);
-		assertEquals("testEqualsDoubleLong faild", expected, actual);
+		assertTrue(cFunction.equals(1.0, 1L));
+		assertFalse(cFunction.equals(1.1, 1L));
 	}
 
 	@Test
 	public void testEqualsLongInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.equals(1L, 1);
-		assertEquals("testEqualsLongInteger faild", expected, actual);
+		assertTrue(cFunction.equals(1L, 1));
+		assertFalse(cFunction.equals(1L, 2));
 	}
 
 	@Test
 	public void testNotEqualsEObjectEObject() {
-		boolean expected = false;
-		boolean actual = cFunction.notEquals(obj1, EcoreFactoryImpl.eINSTANCE.createEObject());
-		assertEquals(expected, actual);
+		assertFalse(cFunction.notEquals(obj1, obj1));
+
 	}
 
 	@Test
 	public void testNotEqualsBooleanBoolean() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(true, false);
-		assertEquals("testNotEqualsBooleanBoolean faild", expected, actual);
+		assertTrue(cFunction.notEquals(true, false));
+		assertFalse(cFunction.notEquals(true, true));
 	}
 
 	@Test
 	public void testNotEqualsStringString() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals("Hans", "Wurst");
-		assertEquals("testNotEqualsStringString faild", expected, actual);
+		assertTrue(cFunction.notEquals("Hans", "Wurst"));
+		assertFalse(cFunction.notEquals("Hans", "Hans"));
 	}
 
 	@Test
 	public void testNotEqualsIntegerInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1, 2);
-		assertEquals("testNotEqualsIntegerInteger faild", expected, actual);
+		assertTrue(cFunction.notEquals(1, 2));
+		assertFalse(cFunction.notEquals(1, 1));
 	}
 
 	@Test
 	public void testNotEqualsFloatFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1.2F, 1.3F);
-		assertEquals("testNotEqualsFloatFloat faild", expected, actual);
+		assertTrue(cFunction.notEquals(1.2F, 1.3F));
+		assertFalse(cFunction.notEquals(1.1F, 1.1F));
 	}
 
 	@Test
 	public void testNotEqualsDoubleDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1.2, 1.3);
-		assertEquals("testNotEqualsDoubleDouble faild", expected, actual);
+		assertTrue(cFunction.notEquals(1.2, 1.3));
+		assertFalse(cFunction.notEquals(1.2, 1.2));
 	}
 
 	@Test
 	public void testNotEqualsLongLong() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1L, 2L);
-		assertEquals("testNotEqualsLongLong faild", expected, actual);
+		assertTrue(cFunction.notEquals(1L, 2L));
+		assertFalse(cFunction.notEquals(1L, 1L));
 	}
 
 	@Test
 	public void testNotEqualsIntegerFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1, 1.1F);
-		assertEquals("testNotEqualsIntegerFloat faild", expected, actual);
+		assertTrue(cFunction.notEquals(1, 1.1F));
+		assertFalse(cFunction.notEquals(1, 1.0F));
 	}
 
 	@Test
 	public void testNotEqualsIntegerDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1, 1.1);
-		assertEquals("testNotEqualsIntegerDouble faild", expected, actual);
+		assertTrue(cFunction.notEquals(1, 1.1));
+		assertFalse(cFunction.notEquals(1, 1.0));
 	}
 
 	@Test
 	public void testNotEqualsIntegerLong() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1, 2L);
-		assertEquals("testNotEqualsIntegerLong faild", expected, actual);
+		assertTrue(cFunction.notEquals(1, 2L));
+		assertFalse(cFunction.notEquals(1, 1L));
 	}
 
 	@Test
 	public void testNotEqualsFloatInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1.1F, 1);
-		assertEquals("testNotEqualsFloatInteger faild", expected, actual);
+		assertTrue(cFunction.notEquals(1.1F, 1));
+		assertFalse(cFunction.notEquals(1.0F, 1));
 	}
 
 	@Test
 	public void testNotEqualsFloatDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1.01F, 1.02);
-		assertEquals("testNotEqualsFloatDouble faild", expected, actual);
+		assertTrue(cFunction.notEquals(1.01F, 1.02));
+		assertFalse(cFunction.notEquals(1.5F, 1.5));
 	}
 
 	@Test
 	public void testNotEqualsDoubleInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1.01, 1);
-		assertEquals("testNotEqualsDoubleinteger faild", expected, actual);
+		assertTrue(cFunction.notEquals(1.01, 1));
+		assertFalse(cFunction.notEquals(1.0, 1));
 	}
 
 	@Test
 	public void testNotEqualsDoubleFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1.01, 1.02F);
-		assertEquals("testNotEqualsDoubleFloat faild", expected, actual);
+		assertTrue(cFunction.notEquals(1.01, 1.02F));
+		assertFalse(cFunction.notEquals(1.5, 1.5F));
 	}
 
 	@Test
 	public void testNotEqualsDoubleLong() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1.01, 1L);
-		assertEquals("testNotEqualsDoubleLong faild", expected, actual);
+		assertTrue(cFunction.notEquals(1.01, 1L));
+		assertFalse(cFunction.notEquals(1.0, 1L));
 	}
 
 	@Test
 	public void testNotEqualsLongInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.notEquals(1L, 2);
-		assertEquals("testNotEqualsLongInteger faild", expected, actual);
+		assertTrue(cFunction.notEquals(1L, 2));
+		assertFalse(cFunction.notEquals(1L, 1));
 	}
 
 	@Test
 	public void testGreaterEqualIntegerInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1, 2);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1, 1));
+		assertTrue(cFunction.greaterEqual(2, 1));
+		assertFalse(cFunction.greaterEqual(1, 2));
 	}
 
 	@Test
 	public void testGreaterEqualFloatFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1.0F, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(1.1F, 1F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1F, 1.1F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1.0F, 1.0F));
+		assertTrue(cFunction.greaterEqual(1.1F, 1F));
+		assertFalse(cFunction.greaterEqual(1F, 1.1F));
 	}
 
 	@Test
 	public void testGreaterEqualDoubleDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1.0, 1.0);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(1.1, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1, 1.1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1.0, 1.0));
+		assertTrue(cFunction.greaterEqual(1.1, 1));
+		assertFalse(cFunction.greaterEqual(1, 1.1));
 	}
 
 	@Test
 	public void testGreaterEqualLongLong() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1L, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2L, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1L, 2L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1L, 1L));
+		assertTrue(cFunction.greaterEqual(2L, 1L));
+		assertFalse(cFunction.greaterEqual(1L, 2L));
 	}
 
 	@Test
 	public void testGreaterEqualIntegerFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2, 1.0F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1, 1.1F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1, 1.0F));
+		assertTrue(cFunction.greaterEqual(2, 1.0F));
+		assertFalse(cFunction.greaterEqual(1, 1.1F));
 	}
 
 	@Test
 	public void testGreaterEqualIntegerDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1, 1.0);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2, 1.0);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1, 1.1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1, 1.0));
+		assertTrue(cFunction.greaterEqual(2, 1.0));
+		assertFalse(cFunction.greaterEqual(1, 1.1));
 	}
 
 	@Test
 	public void testGreaterEqualIntegerLong() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1, 2L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1, 1L));
+		assertTrue(cFunction.greaterEqual(2, 1L));
+		assertFalse(cFunction.greaterEqual(1, 2L));
 	}
 
 	@Test
 	public void testGreaterEqualFloatInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1.0F, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2.0F, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1.0F, 2);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1.0F, 1));
+		assertTrue(cFunction.greaterEqual(2.0F, 1));
+		assertFalse(cFunction.greaterEqual(1.0F, 2));
 	}
 
 	@Test
 	public void testGreaterEqualFloatDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1.0, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2.0, 1.0F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1.0, 1.1F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1.0, 1.0F));
+		assertTrue(cFunction.greaterEqual(2.0, 1.0F));
+		assertFalse(cFunction.greaterEqual(1.0, 1.1F));
 	}
 
 	@Test
 	public void testGreaterEqualDoubleInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1.0, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(1.1, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1, 1.2);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1.0, 1));
+		assertTrue(cFunction.greaterEqual(1.1, 1));
+		assertFalse(cFunction.greaterEqual(1, 1.2));
 	}
 
 	@Test
 	public void testGreaterEqualDoubleFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1.0, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2.0, 1.0F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1.0, 1.1F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1.0, 1.0F));
+		assertTrue(cFunction.greaterEqual(1.1, 1.0F));
+		assertFalse(cFunction.greaterEqual(1.0, 1.1F));
 	}
 
 	@Test
 	public void testGreaterEqualDoubleLong() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1.0, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(1.1, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(0.9, 1L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1.0, 1L));
+		assertTrue(cFunction.greaterEqual(1.1, 1L));
+		assertFalse(cFunction.greaterEqual(1.9, 2L));
 	}
 
 	@Test
 	public void testGreaterEqualLongInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.greaterEqual(1L, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greaterEqual(2L, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greaterEqual(1L, 2);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greaterEqual(1L, 1));
+		assertTrue(cFunction.greaterEqual(1L, 0));
+		assertFalse(cFunction.greaterEqual(1L, 2));
 	}
 
 	@Test
 	public void testSmallerEqualIntegerInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1, 2);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(2, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1, 1));
+		assertTrue(cFunction.smallerEqual(1, 2));
+		assertFalse(cFunction.smallerEqual(2, 1));
 	}
 
 	@Test
 	public void testSmallerEqualFloatFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1.0F, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1.0F, 1.1F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(1.1F, 1.0F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1.0F, 1.0F));
+		assertTrue(cFunction.smallerEqual(1.0F, 1.1F));
+		assertFalse(cFunction.smallerEqual(1.1F, 1.0F));
 	}
 
 	@Test
 	public void testSmallerEqualDoubleDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1.1, 1.1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1.1, 1.2);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(1.2, 1.1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1.0, 1.0));
+		assertTrue(cFunction.smallerEqual(1.0, 1.1));
+		assertFalse(cFunction.smallerEqual(1.1, 1.0));
 	}
 
 	@Test
 	public void testSmallerEqualLongLong() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1L, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1L, 2L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(2L, 1L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1L, 1L));
+		assertTrue(cFunction.smallerEqual(1L, 2L));
+		assertFalse(cFunction.smallerEqual(2l, 1L));
 	}
 
 	@Test
 	public void testSmallerEqualIntegerFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1, 1.2F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(1, 0.9F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1, 1.1F));
+		assertTrue(cFunction.smallerEqual(1, 1.1F));
+		assertFalse(cFunction.smallerEqual(1, 0.9F));
 	}
 
 	@Test
 	public void testSmallerEqualIntegerDouble() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1, 1.1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1, 1.2);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(2, 1.9);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1, 1.1));
+		assertTrue(cFunction.smallerEqual(1, 1.1));
+		assertFalse(cFunction.smallerEqual(2, 1.9));
 	}
 
 	@Test
 	public void testSmallerEqualIntegerLong() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1, 2L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(2, 1L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1, 1L));
+		assertTrue(cFunction.smallerEqual(1, 2L));
+		assertFalse(cFunction.smallerEqual(2, 1L));
 	}
 
 	@Test
 	public void testSmallerEqualFloatInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1.0F, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1.0F, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(1.2F, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1.0F, 1));
+		assertTrue(cFunction.smallerEqual(1.9F, 2));
+		assertFalse(cFunction.smallerEqual(1.9F, 1));
 	}
 
 	@Test
 	public void testSmallerEqualFloatDouble() {
-		assertTrue( cFunction.smallerEqual(1.0F, 1.0));		
-		assertTrue( cFunction.smallerEqual(1.5F, 1.5));		
-		assertTrue( cFunction.smallerEqual(1.1F, 1.2));
-		assertFalse( cFunction.smallerEqual(1.2F, 1.2));
-		assertFalse( cFunction.smallerEqual(1.2F, 1.1));
+		assertTrue(cFunction.smallerEqual(1.0F, 1.0));
+		assertTrue(cFunction.smallerEqual(1.5F, 1.5));
+		assertTrue(cFunction.smallerEqual(1.1F, 1.2));
+		//Since Java and C are not able to compare 
+		//float and double values with absolute precision -> 1.2 ! <= 1.2F
+		assertFalse(cFunction.smallerEqual(1.2F, 1.2));
+		assertFalse(cFunction.smallerEqual(1.2F, 1.1));
 	}
 
 	@Test
 	public void testSmallerEqualDoubleInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1.0, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(0.9, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(1.1, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1.0, 1));
+		assertTrue(cFunction.smallerEqual(1.9, 2));
+		assertFalse(cFunction.smallerEqual(1.9, 1));
 	}
 
 	@Test
 	public void testSmallerEqualDoubleFloat() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1.1, 1.1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1.1, 1.2);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(1.2, 1.1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1.0, 1.0F));
+		assertTrue(cFunction.smallerEqual(1.9, 2.0F));
+		assertFalse(cFunction.smallerEqual(1.9, 1.0F));
 	}
 
 	@Test
 	public void testSmallerEqualDoubleLong() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1.0, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(0.9, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(1.1, 1L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1.0, 1L));
+		assertTrue(cFunction.smallerEqual(1.9, 2L));
+		assertFalse(cFunction.smallerEqual(1.9, 1L));
 	}
 
 	@Test
 	public void testSmallerEqualLongInteger() {
-		boolean expected = true;
-		boolean actual = cFunction.smallerEqual(1L, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smallerEqual(1L, 2);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smallerEqual(2L, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smallerEqual(1L, 1));
+		assertTrue(cFunction.smallerEqual(1L, 2));
+		assertFalse(cFunction.smallerEqual(2L, 1));
 	}
 
 	@Test
 	public void testGreaterIntegerInteger() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(2, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(1, 2);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(2, 1));
+		assertFalse(cFunction.greater(1, 1));
+		assertFalse(cFunction.greater(1, 2));
 	}
 
 	@Test
 	public void testGreaterFloatFloat() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1.0F, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1.1F, 1.0F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(1.0F, 1.1F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(1.1F, 1.0F));
+		assertFalse(cFunction.greater(1.0F, 1.0F));
+		assertFalse(cFunction.greater(1.0F, 1.1F));
 	}
 
 	@Test
 	public void testGreaterDoubleDouble() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1.0, 1.0);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1.1, 1.0);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(1.0, 1.1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(1.1, 1.0));
+		assertFalse(cFunction.greater(1.0, 1.0));
+		assertFalse(cFunction.greater(1.0, 1.1));
 	}
 
 	@Test
 	public void testGreaterLongLong() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1L, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(2L, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(1L, 2L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(2L, 1L));
+		assertFalse(cFunction.greater(1L, 1L));
+		assertFalse(cFunction.greater(1L, 2L));
 	}
 
 	@Test
 	public void testGreaterIntegerFloat() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1, 0.9F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(1, 1.1F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(2, 1.9F));
+		assertFalse(cFunction.greater(1, 1.0F));
+		assertFalse(cFunction.greater(1, 1.1F));
 	}
 
 	@Test
 	public void testGreaterIntegerDouble() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1, 1.0);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1, 0.9);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(1, 1.1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(1, 0.9));
+		assertFalse(cFunction.greater(1, 1.0));
+		assertFalse(cFunction.greater(1, 1.1));
 	}
 
 	@Test
 	public void testGreaterIntegerLong() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(2, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(1L, 2L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(2, 1L));
+		assertFalse(cFunction.greater(1, 1L));
+		assertFalse(cFunction.greater(1, 2L));
 	}
 
 	@Test
 	public void testGreaterFloatInteger() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1.0F, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1.1F, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(0.9F, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(1.1F, 1));
+		assertFalse(cFunction.greater(1.0F, 1));
+		assertFalse(cFunction.greater(1.9F, 2));
 	}
 
 	@Test
 	public void testGreaterFloatDouble() {
+		assertTrue(cFunction.greater(1.1F, 1.0));
 		assertFalse(cFunction.greater(1.0F, 1.0));
-		assertTrue( cFunction.greater(1.1F, 1.0));
 		assertFalse(cFunction.greater(1.0F, 1.1));
 	}
 
 	@Test
 	public void testGreaterDoubleInteger() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1.0, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1.1, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(0.9, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(1.1, 1));
+		assertFalse(cFunction.greater(1.0F, 1));
+		assertFalse(cFunction.greater(0.9F, 1));
 	}
 
 	@Test
 	public void testGreaterDoubleFloat() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1.0, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1.1, 1.0F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(0.9, 1.0F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(1.1, 1.0F));
+		assertFalse(cFunction.greater(1.0, 1.0F));
+		assertFalse(cFunction.greater(1.0, 1.1F));
 	}
 
 	@Test
 	public void testGreaterDoubleLong() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1.0, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(1.1, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(0.9, 1L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(1.1, 1L));
+		assertFalse(cFunction.greater(1.0, 1L));
+		assertFalse(cFunction.greater(0.9, 1L));
 	}
 
 	@Test
 	public void testGreaterLongInteger() {
-		boolean expected = false;
-		boolean actual = cFunction.greater(1L, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.greater(2L, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.greater(0L, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.greater(1L, 0));
+		assertFalse(cFunction.greater(1L, 1));
+		assertFalse(cFunction.greater(1L, 2));
 	}
 
 	@Test
 	public void testSmallerIntegerInteger() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(1, 2);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1, 0);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1, 2));
+		assertFalse(cFunction.smaller(1, 1));
+		assertFalse(cFunction.smaller(2, 1));
 	}
 
 	@Test
 	public void testSmallerFloatFloat() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1.0F, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(1.0F, 1.1F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1.0F, 0.9F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1.9F, 2.0F));
+		assertFalse(cFunction.smaller(1.0F, 1.0F));
+		assertFalse(cFunction.smaller(2.0F, 1.9F));
 	}
 
 	@Test
 	public void testSmallerDoubleDouble() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1.0, 1.0);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(1.0, 1.1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1.0, 0.9);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1.9, 2.0));
+		assertFalse(cFunction.smaller(1.0, 1.0));
+		assertFalse(cFunction.smaller(2.0, 1.9));
 	}
 
 	@Test
 	public void testSmallerLongLong() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1L, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(0L, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1L, 0L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1L, 2L));
+		assertFalse(cFunction.smaller(1L, 1L));
+		assertFalse(cFunction.smaller(2L, 1L));
 	}
 
 	@Test
 	public void testSmallerIntegerFloat() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(1, 1.1F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1, 0.9F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1, 1.1F));
+		assertFalse(cFunction.smaller(1, 1.0F));
+		assertFalse(cFunction.smaller(2, 1.9F));
 	}
 
 	@Test
 	public void testSmallerIntegerDouble() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1, 1.0);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(1, 1.1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1, 0.9);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1, 1.1));
+		assertFalse(cFunction.smaller(1, 1.0));
+		assertFalse(cFunction.smaller(1, 0.9));
 	}
 
 	@Test
 	public void testSmallerIntegerLong() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(1, 2L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1, 0L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1, 2L));
+		assertFalse(cFunction.smaller(1, 1L));
+		assertFalse(cFunction.smaller(2, 1L));
 	}
 
 	@Test
 	public void testSmallerFloatInteger() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1.0F, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(0.9F, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1.1F, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1.9F, 2));
+		assertFalse(cFunction.smaller(1.0F, 1));
+		assertFalse(cFunction.smaller(1.1F, 1));
 	}
 
 	@Test
 	public void testSmallerFloatDouble() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1.0F, 1.0);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(0.9F, 1.0);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1.1F, 1.0);
-		assertEquals(expected, actual);
+		assertFalse(cFunction.smaller(1.0F, 1.0));
+		assertTrue(cFunction.smaller(0.9F, 1.0));
+		assertFalse(cFunction.smaller(1.1F, 1.0));
 	}
 
 	@Test
 	public void testSmallerDoubleInteger() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1.0, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(0.9, 1);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1.1, 1);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1.9, 2));
+		assertFalse(cFunction.smaller(1.0, 1));
+		assertFalse(cFunction.smaller(2.0, 1));
 	}
 
 	@Test
 	public void testSmallerDoubleFloat() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1.0, 1.0F);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(0.9, 1.0F);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1.1, 1.0F);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1.9, 2.0F));
+		assertFalse(cFunction.smaller(1.0, 1.0F));
+		assertFalse(cFunction.smaller(2.0, 1.9F));
 	}
 
 	@Test
 	public void testSmallerDoubleLong() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1.0, 1L);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(0.9, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1.1, 1L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1.9, 2L));
+		assertFalse(cFunction.smaller(1.0, 1L));
+		assertFalse(cFunction.smaller(1.1, 1L));
 	}
 
 	@Test
 	public void testSmallerLongInteger() {
-		boolean expected = false;
-		boolean actual = cFunction.smaller(1L, 1);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.smaller(0L, 1L);
-		assertEquals(expected, actual);
-		expected = false;
-		actual = cFunction.smaller(1L, 0L);
-		assertEquals(expected, actual);
+		assertTrue(cFunction.smaller(1L, 2));
+		assertFalse(cFunction.smaller(1L, 1));
+		assertFalse(cFunction.smaller(2L, 1));
 	}
 
 	@Test
 	public void testNot() {
-		boolean expected = false;
-		boolean actual = cFunction.not(true);
-		assertEquals(expected, actual);
-		expected = true;
-		actual = cFunction.not(false);
+		assertTrue(cFunction.not(false));
+		assertFalse(cFunction.not(true));
 	}
 
 	@Test
