@@ -64,81 +64,64 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		return super.getScope(context, reference);
 	}
 
-	protected IScope scope_GeneratorEntry_elementRef(final EObject context,
-			final EReference reference) {
-		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil2
-				.getRootContainer(context);
+	protected IScope scope_GeneratorEntry_elementRef(final EObject context, final EReference reference) {
+		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil2.getRootContainer(context);
 		String id = generatorModel.getGeneratorId();
-		final GeneratorDescriptor desc = GeneratorExtensions
-				.getGeneratorDescriptorForId(id);
+		final GeneratorDescriptor desc = GeneratorExtensions.getGeneratorDescriptorForId(id);
 		if (desc == null)
 			return IScope.NULLSCOPE;
-		final Class<?> elementRefType = desc.getElementRefType();
-		return new FilteringScope(getDelegate().getScope(context, reference),
-				new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						return elementRefType.isAssignableFrom(input
-								.getEClass().getInstanceClass());
-					}
-				});
+		final String elementRefType = desc.getElementRefType();
+		return new FilteringScope(getDelegate().getScope(context, reference), new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return elementRefType.equals(input.getEClass().getInstanceClassName());
+			}
+		});
 	}
 
 	protected IScope scope_Parameter(final EObject context, EReference reference) {
 		IScope libraryScope = getLibraryScope(context.eResource());
-		return new FilteringScope(libraryScope,
-				new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						if (!input.getEClass().equals(
-								SGenPackage.Literals.FEATURE_PARAMETER)) {
-							return false;
-						}
-						// Only allow references to FeatureParameters defined by
-						// enclosing Feature
-						FeatureConfiguration configuration = EcoreUtil2
-								.getContainerOfType(context,
-										FeatureConfiguration.class);
-						if (configuration == null
-								|| configuration.getType() == null)
-							return false;
-						String featureName = configuration.getType().getName();
-						if (featureName == null) {
-							return false;
-						}
-						return featureName.equals(input
-								.getUserData(FeatureResourceDescription.FEATURE_CONTAINER));
+		return new FilteringScope(libraryScope, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				if (!input.getEClass().equals(SGenPackage.Literals.FEATURE_PARAMETER)) {
+					return false;
+				}
+				// Only allow references to FeatureParameters defined by
+				// enclosing Feature
+				FeatureConfiguration configuration = EcoreUtil2.getContainerOfType(context, FeatureConfiguration.class);
+				if (configuration == null || configuration.getType() == null)
+					return false;
+				String featureName = configuration.getType().getName();
+				if (featureName == null) {
+					return false;
+				}
+				return featureName.equals(input.getUserData(FeatureResourceDescription.FEATURE_CONTAINER));
 
-					}
-				});
+			}
+		});
 	}
 
 	protected IScope scope_Type(EObject context, EReference reference) {
 		IScope libraryScope = getLibraryScope(context.eResource());
-		return new FilteringScope(libraryScope,
-				new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						return input.getEClass().equals(
-								SGenPackage.Literals.FEATURE_TYPE);
-					}
-				});
+		return new FilteringScope(libraryScope, new Predicate<IEObjectDescription>() {
+			public boolean apply(IEObjectDescription input) {
+				return input.getEClass().equals(SGenPackage.Literals.FEATURE_TYPE);
+			}
+		});
 	}
 
 	protected SimpleScope getLibraryScope(Resource resource) {
-		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil
-				.getObjectByType(resource.getContents(),
-						SGenPackage.Literals.GENERATOR_MODEL);
+		GeneratorModel generatorModel = (GeneratorModel) EcoreUtil.getObjectByType(resource.getContents(),
+				SGenPackage.Literals.GENERATOR_MODEL);
 		Assert.isNotNull(generatorModel);
 		String generatorId = generatorModel.getGeneratorId();
 
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
-		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
-				.getLibraryDescriptor(generatorId);
+		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions.getLibraryDescriptor(generatorId);
 		for (LibraryDescriptor desc : libraryDescriptor) {
 			Resource library = resourceSet.getResource(desc.getURI(), true);
-			FeatureResourceDescription description = new FeatureResourceDescription(
-					library);
+			FeatureResourceDescription description = new FeatureResourceDescription(library);
 			injector.injectMembers(description);
-			allElements = Iterables.concat(allElements,
-					description.getExportedObjects());
+			allElements = Iterables.concat(allElements, description.getExportedObjects());
 		}
 		return new SimpleScope(allElements);
 	}
