@@ -18,6 +18,6 @@ testsuite AllTests {
 	SyncFork,
 	SyncJoin, 
 	ValuedEvent, 
-	simpleEvent,
+	SimpleEvent,
 	STextKeywordsInStatesAndRegions 
 } 
