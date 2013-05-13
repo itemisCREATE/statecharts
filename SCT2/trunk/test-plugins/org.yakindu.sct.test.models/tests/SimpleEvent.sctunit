@@ -1,4 +1,4 @@
-testgroup simpleEvent for statechart SimpleEvent {
+testgroup SimpleEvent for statechart SimpleEvent {
 	test simpleEventTest {
 		
 		enter
