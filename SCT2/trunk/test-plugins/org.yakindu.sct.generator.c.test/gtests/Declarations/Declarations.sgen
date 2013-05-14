@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::c {
+	statechart Declarations {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "Declarations"
+		}
+	}
+}
