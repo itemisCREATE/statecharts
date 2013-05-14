@@ -314,7 +314,9 @@ bc. after 20 s
 
 Structure: 
 
-@after@ _@time@_ (_@unit@_)? 
+@after@ _@time@_ _@unit@_ 
+
+The time value may be a constant or an expression that returns an integer value.
 
 The time unit can be:
 
@@ -322,7 +324,6 @@ The time unit can be:
 * ==<!-- Start stext_keyword_ms -->== ms - milliseconds ==<!-- End stext_keyword_ms -->==
 * ==<!-- Start stext_keyword_us -->== us - microseconds ==<!-- End stext_keyword_us -->==
 * ==<!-- Start stext_keyword_ns -->== ns - nanoseconds ==<!-- End stext_keyword_ns -->==
-* empty - implies seconds
 
 p. ==<!-- End stext_keyword_after -->==
 ==<!-- Start stext_keyword_every -->==
@@ -337,7 +338,9 @@ bc. every 200 ms
 
 Structure: 
 
-@every@ _@time@_ (_@unit@_)? 
+@every@ _@time@_ _@unit@_
+
+The time value may be a constant or an expression that returns an integer value.
 
 The time unit can be:
 
@@ -345,7 +348,6 @@ The time unit can be:
 * ms - milliseconds
 * us - microseconds
 * ns - nanoseconds
-* empty - implies seconds
 
 ==<!-- End stext_keyword_every -->==
 ==<!-- Start stext_keyword_always -->==

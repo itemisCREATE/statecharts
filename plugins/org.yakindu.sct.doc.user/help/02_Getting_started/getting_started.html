@@ -14,7 +14,7 @@
 		<p>For a new installation</p>
 		<ul>
 			<li>choose Eclipse menu Help/Install New Software ...</li>
-			<li>press the â€˜addâ€™ button in the top right corner of the installation wizard to add http://updates.yakindu.com/juno/releases as update site</li>
+			<li>press the &#8218;add&#8217; button in the top right corner of the installation wizard to add http://updates.yakindu.com/juno/releases as update site</li>
 			<li>select all the listed features</li>
 			<li>and follow the installation wizzard </li>
 			<li>For updating the installed plugins select Help/Check for Updates...</li>
@@ -87,7 +87,7 @@ in event incoming_call
 			<strong>Active Call</strong> and 
 			<strong>Dismiss Call</strong>. This can either be done by opening the direct editing text box via double click or using the property view on the bottom, that supports code completion, syntax highlighting and validation, too.
 		</p>
-		<p>If everything went well, there shouldnâ€™t be any error markers and your example should look like the one in the following screenshot:</p>
+		<p>If everything went well, there shouldn‚Äôt be any error markers and your example should look like the one in the following screenshot:</p>
 		<p>
 			<img border="0" src="images/example_final.png"/>
 		</p>
@@ -122,7 +122,7 @@ in event incoming_call
 			<strong>CallHandling</strong> example.
 		</p>
 		<p>For code generation, SCT uses a textual generator model called SGen. This model allows customization of the code generation process. To create a new SGen model select the model folder in the project explorer on the left, and select 
-			<em>New â€“ Yakindu Statechart Generator Model</em> from the context menu. On the first wizard page, enter 
+			<em>New ‚Äì Yakindu Statechart Generator Model</em> from the context menu. On the first wizard page, enter 
 			<strong>CallHandling.sgen</strong> as the file name and press next. On the second wizard page, select 
 			<em>Yakindu SCT Java Code Generator</em> from the drop down menu on the top. In the statechart tree below, check the 
 			<strong>CallHandling.sct</strong> model and press Finish. The SGen Editor opens and show the following simple generator model:
@@ -150,7 +150,7 @@ in event incoming_call
 </code></pre>
 		<p>The generator Model is executed by a builder. Thus, the artifacts are generated automatically if 
 			<em>Project &gt; Build Automatically</em> is checked. If you want to execute your generator model manually, select 
-			<em>Generate Statechart Artifacts</em> from the Package Explorerâ€™s context menu.
+			<em>Generate Statechart Artifacts</em> from the Package Explorer‚Äôs context menu.
 		</p>
 		<p>As a result, you should see a new folder 
 			<strong>src-gen</strong> in your project explorer on the left that contains the generated java artifacts. Add the generated artifacts to the Java Build Path by selecting 
@@ -185,7 +185,7 @@ in event incoming_call
 23        }
 24  }
 </code></pre>
-		<p>Letâ€™s have a detailed look at the implementation. First, create a new instanceof your Statemachine by calling the default constructor. (line 5). Since we use timed events, the statechart implementation requires an implementation of ITimerService. Because of the TimerService feature that we added to the genmodel, the code generator creates default implementation that uses the java.util.Timer. We create a new instanceof of the default TimerService and set it to the statemachine. (line 6). The call of the enter method in line 8 enteres the statechart and activates the Idle state. For each interface created in the statechart specification block, a getter for this interface is generated. (getSCIPhone() and getSCIUser()). You can access all in events and variables via these interfaces. In line 10, the incoming call event is raised, that activates the Incoming Call state after the next runcycle is executed. (line 11). In line 13, we raise the accept call event via the user interface, that activates the Active Call State after the next runcycle. (line 17). From line 15 to line 18, the runcycle is executed periodically every 200ms. After that, the duration is printed to console. (line 19, 20). Finally, the event dismiss call is executed that activated the Dimiss Call state after the next runcycle. </p>
+		<p>Let‚Äôs have a detailed look at the implementation. First, create a new instanceof your Statemachine by calling the default constructor. (line 5). Since we use timed events, the statechart implementation requires an implementation of ITimerService. Because of the TimerService feature that we added to the genmodel, the code generator creates default implementation that uses the java.util.Timer. We create a new instanceof of the default TimerService and set it to the statemachine. (line 6). The call of the enter method in line 8 enteres the statechart and activates the Idle state. For each interface created in the statechart specification block, a getter for this interface is generated. (getSCIPhone() and getSCIUser()). You can access all in events and variables via these interfaces. In line 10, the incoming call event is raised, that activates the Incoming Call state after the next runcycle is executed. (line 11). In line 13, we raise the accept call event via the user interface, that activates the Active Call State after the next runcycle. (line 17). From line 15 to line 18, the runcycle is executed periodically every 200ms. After that, the duration is printed to console. (line 19, 20). Finally, the event dismiss call is executed that activated the Dimiss Call state after the next runcycle. </p>
 		<p>Finally, execute the code via Run As -&gt; Java Application from the context menu. </p>
 		<h2 id="Weblinks">Weblinks</h2>
 		<p id="___fn1" class="footnote">
