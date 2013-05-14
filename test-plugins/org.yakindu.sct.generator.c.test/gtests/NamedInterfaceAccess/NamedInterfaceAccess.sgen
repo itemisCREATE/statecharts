@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::c {
+	statechart NamedInterfaceAccess {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "NamedInterfaceAccess"
+		}
+	}
+}
