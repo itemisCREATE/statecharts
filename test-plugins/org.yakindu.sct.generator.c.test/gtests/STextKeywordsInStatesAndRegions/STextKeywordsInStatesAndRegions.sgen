@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart STextKeywordsInStatesAndRegions {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "STextKeywordsInStatesAndRegions"
-		}
-	}
-}

@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart InEventLifeCycle {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "InEventLifeCycle"
-		}
-	}
-}

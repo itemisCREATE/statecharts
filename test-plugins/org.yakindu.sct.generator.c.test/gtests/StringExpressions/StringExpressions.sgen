@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart StringExpressions {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "StringExpressions"
-		}
-	}
-}

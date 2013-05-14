@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart SimpleHierachy {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "SimpleHierachy"
-		}
-	}
-}
