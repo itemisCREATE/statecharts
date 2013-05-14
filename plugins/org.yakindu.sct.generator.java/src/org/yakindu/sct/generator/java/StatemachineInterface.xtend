@@ -113,7 +113,7 @@ class StatemachineInterface {
 			public interface «scope.getInterfaceListenerName()» {
 				«FOR event : scope.eventDefinitions»
 					«IF event.direction ==  Direction::OUT»
-						«IF !event.type.voidType»
+						«IF event.type != null && !event.type.voidType»
 							public void on«event.name.toFirstUpper()»Raised(«event.type.targetLanguageName» value);
 						«ELSE»
 							public void on«event.name.toFirstUpper()»Raised();
