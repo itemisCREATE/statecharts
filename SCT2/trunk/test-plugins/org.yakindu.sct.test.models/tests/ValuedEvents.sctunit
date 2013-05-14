@@ -1,5 +1,5 @@
-testgroup ValuedEvent for statechart ValuedEvents {
-	test valuedEventTest {
+testgroup ValuedEvents for statechart ValuedEvents {
+	test valuedEventsTest {
 		
 		enter
 		
