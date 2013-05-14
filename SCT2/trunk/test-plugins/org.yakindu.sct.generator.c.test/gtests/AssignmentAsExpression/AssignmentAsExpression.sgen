@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart AssignmentAsExpression {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "AssignmentAsExpression"
-		}
-	}
-}

@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart HistoryWithoutInitialStep {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "HistoryWithoutInitialStep"
-		}
-	}
-}

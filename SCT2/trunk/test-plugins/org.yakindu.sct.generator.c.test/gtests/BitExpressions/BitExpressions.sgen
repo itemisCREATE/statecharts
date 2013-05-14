@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart BitExpressions {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "BitExpressions"
-		}
-	}
-}

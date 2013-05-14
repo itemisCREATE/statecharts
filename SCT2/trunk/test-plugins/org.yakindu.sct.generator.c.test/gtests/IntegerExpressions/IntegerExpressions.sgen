@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::c {
-	statechart IntegerExpressions {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "IntegerExpressions"
-		}
-	}
-}
