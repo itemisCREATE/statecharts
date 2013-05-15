@@ -9,12 +9,13 @@
  *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.generator.c.test;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({AlwaysOncycle.class, AssignmentAsExpression.class,
+@SuiteClasses({ AlwaysOncycle.class, AssignmentAsExpression.class,
 		BitExpressions.class, BooleanExpressions.class, CKeywords.class,
 		Declarations.class, Choice.class, DeepHistory.class, EnterState.class,
 		ExitState.class, ExitOnSelfTransition.class, Guard.class,
@@ -26,7 +27,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		SimpleHierachy.class, StateIsActive.class,
 		StatechartLocalReactions.class, StateWithEmptyRegion.class,
 		StringExpressions.class, SyncFork.class, SyncJoin.class,
-		ValuedEvents.class, SimpleEvent.class,
-		STextKeywordsInStatesAndRegions.class})
+		SimpleEvent.class, STextKeywordsInStatesAndRegions.class })
 public class AllTests {
 }
