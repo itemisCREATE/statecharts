@@ -17,7 +17,6 @@ testsuite AllTests {
 	StringExpressions, 
 	SyncFork,
 	SyncJoin, 
-	ValuedEvents, 
 	SimpleEvent,
 	STextKeywordsInStatesAndRegions 
 } 
