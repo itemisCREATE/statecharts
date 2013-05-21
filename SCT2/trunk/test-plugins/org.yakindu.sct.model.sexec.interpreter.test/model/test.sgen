@@ -8,7 +8,6 @@ GeneratorModel for sctunit::interpreter {
 //		}			
 //	}
 	
-	
 	test AlwaysOncycle{
 		
 		feature Outlet{ 
@@ -297,6 +296,15 @@ GeneratorModel for sctunit::interpreter {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test TransitionWithoutCondition{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 
 	test ValuedEvents{
 		

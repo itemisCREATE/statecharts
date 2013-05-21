@@ -27,6 +27,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		SimpleHierachy.class, StateIsActive.class,
 		StatechartLocalReactions.class, StateWithEmptyRegion.class,
 		StringExpressions.class, SyncFork.class, SyncJoin.class,
-		SimpleEvent.class, STextKeywordsInStatesAndRegions.class })
+		SimpleEvent.class, STextKeywordsInStatesAndRegions.class,
+		TransitionWithoutCondition.class, ValuedEvents.class})
 public class AllTests {
 }
