@@ -15,5 +15,6 @@ encoding//testmodels/SCTUnit/OutEventLifeCycle.sct=UTF-8
 encoding//testmodels/SCTUnit/PerformanceTest.sct=UTF-8
 encoding//testmodels/SCTUnit/STextKeywordsInStatesAndRegions.sct=UTF-8
 encoding//testmodels/SCTUnit/SyncJoin.sct=UTF-8
+encoding//testmodels/SCTUnit/TransitionWithoutCondition.sct=UTF-8
 encoding//testmodels/SCTUnit/VariableInitialization.sct=UTF-8
 encoding/<project>=UTF-8
