@@ -297,6 +297,14 @@ GeneratorModel for sctunit::c {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test TransitionWithoutCondition{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
 
 	test ValuedEvents{
 		
@@ -305,5 +313,6 @@ GeneratorModel for sctunit::c {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
 		
 }
