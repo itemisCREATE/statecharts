@@ -17,13 +17,16 @@ import static junit.framework.Assert.assertTrue;
 
 import java.io.File;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceImpl;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -52,6 +55,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.TimeEventType;
 import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
+import org.yakindu.sct.test.models.SCTUnitTestModels;
 
 import com.google.inject.Injector;
 
@@ -71,16 +75,14 @@ public class SCTResourceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		Injector injector = STextActivator.getInstance().getInjector(
-				STextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT);
+		Injector injector = STextActivator.getInstance().getInjector(STextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT);
 		ResourceSet resourceSet = new ResourceSetImpl();
 		res = new StextResource(URI.createURI("test.test"));
-		res.eAdapters().add(
-				new ContextElementAdapter(new IContextElementProvider() {
-					public EObject getContextObject() {
-						return res.getContents().get(0);
-					}
-				}));
+		res.eAdapters().add(new ContextElementAdapter(new IContextElementProvider() {
+			public EObject getContextObject() {
+				return res.getContents().get(0);
+			}
+		}));
 		resourceSet.getResources().add(res);
 		injector.injectMembers(res);
 	}
@@ -91,6 +93,29 @@ public class SCTResourceTest {
 	}
 
 	@Test
+	public void testFragments() throws Exception {
+		SCTUnitTestModels models = new SCTUnitTestModels();
+		List<Statechart> originalStatecharts = models.loadAllStatecharts();
+		List<Statechart> targetStatecharts = models.loadAllStatecharts();
+		for (int i = 0; i < originalStatecharts.size(); i++) {
+			Statechart statechart = originalStatecharts.get(i);
+			Statechart targetStatechart = targetStatecharts.get(i);
+			Resource targetResource = targetStatechart.eResource();
+			assertTrue(statechart != targetStatechart);
+			assertTrue(EcoreUtil.equals(statechart, targetStatechart));
+			TreeIterator<EObject> allContents = EcoreUtil.getAllContents(statechart.eResource(), true);
+			while (allContents.hasNext()) {
+				EObject next = allContents.next();
+				String fragment = EcoreUtil.getURI(next).fragment();
+				EObject targetObject = targetResource.getEObject(fragment);
+				assertNotNull("Could not resolve fragment " + fragment + " for EObject " + next + "in statechart "
+						+ statechart.getName(), targetObject);
+				assertTrue(EcoreUtil.equals(next, targetObject));
+			}
+		}
+	}
+
+	@Test
 	public void testStatechartParsing() {
 		Statechart statechart = createStatechart("internal: event Event1");
 		assertEquals(0, statechart.getScopes().size());
@@ -98,12 +123,10 @@ public class SCTResourceTest {
 		assertEquals(1, statechart.getScopes().size());
 		Scope scope = statechart.getScopes().get(0);
 		assertTrue(scope instanceof InternalScope);
-		EList<Declaration> declarations = ((InternalScope) scope)
-				.getDeclarations();
+		EList<Declaration> declarations = ((InternalScope) scope).getDeclarations();
 		Declaration declaration = declarations.get(0);
 		assertTrue(declaration instanceof EventDefinition);
-		assertEquals("" + res.getSyntaxDiagnostics(), 0, res
-				.getSyntaxDiagnostics().size());
+		assertEquals("" + res.getSyntaxDiagnostics(), 0, res.getSyntaxDiagnostics().size());
 	}
 
 	@Test
@@ -122,8 +145,7 @@ public class SCTResourceTest {
 		assertEquals(0, state.getReactions().size());
 		res.getContents().add(state);
 		assertEquals(1, state.getReactions().size());
-		assertEquals("" + res.getSyntaxDiagnostics(), 0, res
-				.getSyntaxDiagnostics().size());
+		assertEquals("" + res.getSyntaxDiagnostics(), 0, res.getSyntaxDiagnostics().size());
 	}
 
 	public void testInvalidExpressionParsing() {
@@ -142,8 +164,7 @@ public class SCTResourceTest {
 		Event event = internalScope.getEvents().get(0);
 		event.setName("Event2");
 		assertEquals("internal: event Event2\n", statechart.getSpecification());
-		assertEquals("" + res.getSyntaxDiagnostics(), 0, res
-				.getSyntaxDiagnostics().size());
+		assertEquals("" + res.getSyntaxDiagnostics(), 0, res.getSyntaxDiagnostics().size());
 	}
 
 	@Test
@@ -155,15 +176,13 @@ public class SCTResourceTest {
 		TimeEventSpec timeTrigger = stextFac.createTimeEventSpec();
 		timeTrigger.setType(TimeEventType.EVERY);
 		timeTrigger.setUnit(TimeUnit.SECOND);
-		PrimitiveValueExpression exp = stextFac
-				.createPrimitiveValueExpression();
+		PrimitiveValueExpression exp = stextFac.createPrimitiveValueExpression();
 		IntLiteral literal = stextFac.createIntLiteral();
 		literal.setValue(42);
 		exp.setValue(literal);
 		timeTrigger.setValue(exp);
 		trigger.getTriggers().add(timeTrigger);
-		assertEquals("after 10\n s , every 42 s [true] / 3 * 3",
-				transition.getSpecification());
+		assertEquals("after 10\n s , every 42 s [true] / 3 * 3", transition.getSpecification());
 		assertEquals("" + res.getErrors(), 0, res.getErrors().size());
 	}
 
@@ -172,8 +191,7 @@ public class SCTResourceTest {
 		res.setSerializerEnabled(true);
 		State state = createState("entry / 3 * 3");
 		res.getContents().add(state);
-		LocalReaction reaction = (LocalReaction) state.getLocalReactions().get(
-				0);
+		LocalReaction reaction = (LocalReaction) state.getLocalReactions().get(0);
 		ReactionTrigger trigger = (ReactionTrigger) reaction.getTrigger();
 		ExitEvent exitEvent = stextFac.createExitEvent();
 		trigger.getTriggers().add(exitEvent);
@@ -188,13 +206,10 @@ public class SCTResourceTest {
 		Transition transition = createTransition("Event1 [true] / 3 * 3");
 		res.getContents().add(transition);
 		res.resolveLazyCrossReferences(CancelIndicator.NullImpl);
-		assertEquals("" + res.getLinkingDiagnostics(), 0, res
-				.getLinkingDiagnostics().size());
+		assertEquals("" + res.getLinkingDiagnostics(), 0, res.getLinkingDiagnostics().size());
 		ReactionTrigger trigger = (ReactionTrigger) transition.getTrigger();
-		RegularEventSpec eventSpec = (RegularEventSpec) trigger.getTriggers()
-				.get(0);
-		ElementReferenceExpression expression = (ElementReferenceExpression) eventSpec
-				.getEvent();
+		RegularEventSpec eventSpec = (RegularEventSpec) trigger.getTriggers().get(0);
+		ElementReferenceExpression expression = (ElementReferenceExpression) eventSpec.getEvent();
 		EventDefinition reference = (EventDefinition) expression.getReference();
 		assertNotNull(reference);
 		assertEquals("Event1", reference.getName());
@@ -241,10 +256,8 @@ public class SCTResourceTest {
 
 		assertEquals("" + res.getErrors(), 0, res.getErrors().size());
 		ReactionTrigger trigger = (ReactionTrigger) transition.getTrigger();
-		RegularEventSpec eventSpec = (RegularEventSpec) trigger.getTriggers()
-				.get(0);
-		ElementReferenceExpression expression = (ElementReferenceExpression) eventSpec
-				.getEvent();
+		RegularEventSpec eventSpec = (RegularEventSpec) trigger.getTriggers().get(0);
+		ElementReferenceExpression expression = (ElementReferenceExpression) eventSpec.getEvent();
 		EventDefinition reference = (EventDefinition) expression.getReference();
 		assertNotNull(reference);
 		assertEquals("Event1", reference.getName());

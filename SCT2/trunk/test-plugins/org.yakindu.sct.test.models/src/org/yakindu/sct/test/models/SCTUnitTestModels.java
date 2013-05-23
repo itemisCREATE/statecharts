@@ -10,6 +10,11 @@
  */
 package org.yakindu.sct.test.models;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -52,6 +57,18 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	@Override
 	public String getModelDirectory() {
 		return TESTMODEL_DIR;
+	}
+
+	public List<Statechart> loadAllStatecharts() throws Exception {
+		List<Statechart> result = new ArrayList<Statechart>();
+		Field[] fields = getClass().getFields();
+		for (Field field : fields) {
+			String value = (String) field.get(this);
+			if (value.endsWith(".sct")) {
+				result.add(loadStatechartFromResource(value));
+			}
+		}
+		return result;
 	}
 
 }
