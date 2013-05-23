@@ -12,7 +12,6 @@
 package org.yakindu.sct.model.sgraph.resource;
 
 import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -145,13 +144,11 @@ public abstract class AbstractSCTResource extends GMFResource {
 		if (eObject instanceof SpecificationElement) {
 			parseSpecificationElement((SpecificationElement) eObject);
 			linkSpecificationElement((SpecificationElement) eObject);
-			Adapter parseAdapter = EcoreUtil.getExistingAdapter(eObject,
-					ParseAdapter.class);
+			Adapter parseAdapter = EcoreUtil.getExistingAdapter(eObject, ParseAdapter.class);
 			if (parseAdapter == null) {
 				eObject.eAdapters().add(new ParseAdapter());
 			}
-			Adapter serializeAdapter = EcoreUtil.getExistingAdapter(eObject,
-					SerializeAdapter.class);
+			Adapter serializeAdapter = EcoreUtil.getExistingAdapter(eObject, SerializeAdapter.class);
 			if (serializeAdapter == null) {
 				eObject.eAdapters().add(new SerializeAdapter());
 			}
@@ -161,13 +158,11 @@ public abstract class AbstractSCTResource extends GMFResource {
 	@Override
 	public void detached(EObject eObject) {
 		if (eObject instanceof SpecificationElement) {
-			Adapter parseAdapter = EcoreUtil.getExistingAdapter(eObject,
-					ParseAdapter.class);
+			Adapter parseAdapter = EcoreUtil.getExistingAdapter(eObject, ParseAdapter.class);
 			if (parseAdapter != null) {
 				eObject.eAdapters().remove(parseAdapter);
 			}
-			Adapter serializeAdapter = EcoreUtil.getExistingAdapter(eObject,
-					SerializeAdapter.class);
+			Adapter serializeAdapter = EcoreUtil.getExistingAdapter(eObject, SerializeAdapter.class);
 			if (serializeAdapter != null) {
 				eObject.eAdapters().remove(serializeAdapter);
 			}
@@ -178,15 +173,12 @@ public abstract class AbstractSCTResource extends GMFResource {
 	@Override
 	public synchronized EObject getEObject(String uriFragment) {
 		if (encoder.isCrossLinkFragment(this, uriFragment)) {
-			Triple<EObject, EReference, INode> triple = encoder.decode(this,
-					uriFragment);
+			Triple<EObject, EReference, INode> triple = encoder.decode(this, uriFragment);
 			List<EObject> linkedObjects = null;
 			if (triple.getSecond().isContainment()) {
-				linkedObjects = resolveLocalXtextFragment(triple.getFirst(),
-						triple.getSecond(), triple.getThird());
+				linkedObjects = resolveLocalXtextFragment(triple.getFirst(), triple.getSecond(), triple.getThird());
 			} else {
-				linkedObjects = linkingService.getLinkedObjects(
-						triple.getFirst(), triple.getSecond(),
+				linkedObjects = linkingService.getLinkedObjects(triple.getFirst(), triple.getSecond(),
 						triple.getThird());
 			}
 			if (!linkedObjects.isEmpty()) {
@@ -195,52 +187,17 @@ public abstract class AbstractSCTResource extends GMFResource {
 				createDiagnostic(triple);
 			}
 		}
-		EObject sctObject = getSCTEObject(uriFragment);
-		if (sctObject != null) {
-			return sctObject;
+		if (uriFragment != null && uriFragment.startsWith(SCT_PREFIX)) {
+			return super.getEObject(uriFragment.substring(SCT_PREFIX.length()));
 		}
 		return super.getEObject(uriFragment);
 	}
 
-	protected EObject getSCTEObject(String uriFragment) {
-		if (uriFragment != null && uriFragment.startsWith(SCT_PREFIX)) {
-			return getEmfEObject(uriFragment.substring(SCT_PREFIX.length()));
-		}
-		return null;
-	}
-
-	protected EObject getEmfEObject(String uriFragment) {
-		int length = uriFragment.length();
-		if (length > 0) {
-			if (uriFragment.charAt(0) == '/') {
-				ArrayList<String> uriFragmentPath = new ArrayList<String>(4);
-				int start = 1;
-				for (int i = 1; i < length; ++i) {
-					if (uriFragment.charAt(i) == '/') {
-						uriFragmentPath.add(start == i ? "" : uriFragment
-								.substring(start, i));
-						start = i + 1;
-					}
-				}
-				uriFragmentPath.add(uriFragment.substring(start));
-				return getEObject(uriFragmentPath);
-			} else if (uriFragment.charAt(length - 1) == '?') {
-				int index = uriFragment.lastIndexOf('?', length - 2);
-				if (index > 0) {
-					uriFragment = uriFragment.substring(0, index);
-				}
-			}
-		}
-		return null;
-	}
-
-	private List<EObject> resolveLocalXtextFragment(EObject container,
-			EReference reference, INode node) {
+	private List<EObject> resolveLocalXtextFragment(EObject container, EReference reference, INode node) {
 		Object value = container.eGet(reference);
 		if (reference.isMany()) {
 			List<?> list = (List<?>) value;
-			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(
-					container, reference);
+			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(container, reference);
 			int index = nodesForFeature.indexOf(node);
 			if (list.size() > index) {
 				return Collections.singletonList((EObject) list.get(index));
@@ -257,99 +214,39 @@ public abstract class AbstractSCTResource extends GMFResource {
 			return super.getURIFragment(eObject);
 		}
 		ICompositeNode node = NodeModelUtils.findActualNodeFor(eObject);
-		if (node != null
-				&& NodeModelUtils.getNode(eObject.eContainer()) != null
-				&& eObject.eContainingFeature() != null) {
-			return getXtextFragment(eObject, node);
-		}
 		if (node != null) {
-			String sctFragment = getSCTFragment(eObject);
-			if (sctFragment != null) {
-				return sctFragment;
+			String fragment = super.getURIFragment(eObject);
+			if (!Strings.isNullOrEmpty(fragment)) {
+				return SCT_PREFIX + fragment;
 			}
 		}
 		return super.getURIFragment(eObject);
 	}
 
-	protected String getSCTFragment(EObject eObject) {
-		String fragment = getEmfFragment(eObject);
-		if (!Strings.isNullOrEmpty(fragment)) {
-			return SCT_PREFIX + fragment;
-		}
-		return null;
-	}
-
-	/**
-	 * Fragment calculation from ResourceImpl
-	 * 
-	 * @param eObject
-	 * @return
-	 */
-	protected String getEmfFragment(EObject eObject) {
-		InternalEObject internalEObject = (InternalEObject) eObject;
-		if (internalEObject.eDirectResource() == this
-				|| unloadingContents != null
-				&& unloadingContents.contains(internalEObject)) {
-			return "/" + getURIFragmentRootSegment(eObject);
-		} else {
-			List<String> uriFragmentPath = new ArrayList<String>();
-			boolean isContained = false;
-			for (InternalEObject container = internalEObject
-					.eInternalContainer(); container != null; container = internalEObject
-					.eInternalContainer()) {
-				uriFragmentPath.add(container.eURIFragmentSegment(
-						internalEObject.eContainingFeature(), internalEObject));
-				internalEObject = container;
-				if (container.eDirectResource() == this
-						|| unloadingContents != null
-						&& unloadingContents.contains(container)) {
-					isContained = true;
-					break;
-				}
-			}
-
-			if (!isContained) {
-				return "/-1";
-			}
-
-			StringBuffer result = new StringBuffer("/");
-			result.append(getURIFragmentRootSegment(internalEObject));
-
-			for (int i = uriFragmentPath.size() - 1; i >= 0; --i) {
-				result.append('/');
-				result.append(uriFragmentPath.get(i));
-			}
-			return result.toString();
-		}
-	}
-
-	private String getXtextFragment(EObject eObject, ICompositeNode node) {
-		return encoder.encode(eObject.eContainer(),
-				(EReference) eObject.eContainingFeature(), node);
+	@Override
+	public String getID(EObject eObject) {
+		if (NodeModelUtils.getNode(eObject) != null)
+			return null;
+		return super.getID(eObject);
 	}
 
 	protected void createDiagnostic(Triple<EObject, EReference, INode> triple) {
-		SpecificationElement specificationElement = EcoreUtil2
-				.getContainerOfType(triple.getFirst(),
-						SpecificationElement.class);
+		SpecificationElement specificationElement = EcoreUtil2.getContainerOfType(triple.getFirst(),
+				SpecificationElement.class);
 		DiagnosticMessage message = createDiagnosticMessage(triple);
-		Diagnostic diagnostic = new XtextLinkingDiagnostic(triple.getThird(),
-				message.getMessage(), message.getIssueCode(),
-				message.getIssueData());
+		Diagnostic diagnostic = new XtextLinkingDiagnostic(triple.getThird(), message.getMessage(),
+				message.getIssueCode(), message.getIssueData());
 		linkingDiagnostics.put(specificationElement, diagnostic);
 
 	}
 
-	protected DiagnosticMessage createDiagnosticMessage(
-			Triple<EObject, EReference, INode> triple) {
+	protected DiagnosticMessage createDiagnosticMessage(Triple<EObject, EReference, INode> triple) {
 		ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticMessageContext(triple);
-		DiagnosticMessage message = diagnosticMessageProvider
-				.getUnresolvedProxyMessage(context);
+		DiagnosticMessage message = diagnosticMessageProvider.getUnresolvedProxyMessage(context);
 		return message;
 	}
 
-	protected ILinkingDiagnosticContext createDiagnosticMessageContext(
-			Triple<EObject, EReference, INode> triple) {
+	protected ILinkingDiagnosticContext createDiagnosticMessageContext(Triple<EObject, EReference, INode> triple) {
 		return new DiagnosticMessageContext(triple, linkingHelper);
 	}
 
@@ -358,8 +255,8 @@ public abstract class AbstractSCTResource extends GMFResource {
 		TreeIterator<Object> iterator = EcoreUtil.getAllContents(this, true);
 		while (iterator.hasNext()) {
 			InternalEObject source = (InternalEObject) iterator.next();
-			EStructuralFeature[] eStructuralFeatures = ((EClassImpl.FeatureSubsetSupplier) source
-					.eClass().getEAllStructuralFeatures()).crossReferences();
+			EStructuralFeature[] eStructuralFeatures = ((EClassImpl.FeatureSubsetSupplier) source.eClass()
+					.getEAllStructuralFeatures()).crossReferences();
 			if (eStructuralFeatures != null) {
 				for (EStructuralFeature crossRef : eStructuralFeatures) {
 					if (monitor.isCanceled()) {
@@ -372,22 +269,20 @@ public abstract class AbstractSCTResource extends GMFResource {
 	}
 
 	// copied from xtext LazyLinkingResource
-	protected void resolveLazyCrossReference(InternalEObject source,
-			EStructuralFeature crossRef, CancelIndicator monitor) {
+	protected void resolveLazyCrossReference(InternalEObject source, EStructuralFeature crossRef,
+			CancelIndicator monitor) {
 		if (crossRef.isDerived())
 			return;
 		if (crossRef.isMany()) {
 			@SuppressWarnings("unchecked")
-			InternalEList<EObject> list = (InternalEList<EObject>) source
-					.eGet(crossRef);
+			InternalEList<EObject> list = (InternalEList<EObject>) source.eGet(crossRef);
 			for (int i = 0; i < list.size(); i++) {
 				EObject proxy = list.basicGet(i);
 				if (proxy.eIsProxy()) {
 					URI proxyURI = ((InternalEObject) proxy).eProxyURI();
 					if (getURI().equals(proxyURI.trimFragment())) {
 						final String fragment = proxyURI.fragment();
-						if (encoder.isCrossLinkFragment(this, fragment)
-								&& !monitor.isCanceled()) {
+						if (encoder.isCrossLinkFragment(this, fragment) && !monitor.isCanceled()) {
 							EObject target = getEObject(fragment);
 							if (target != null) {
 								try {
@@ -407,8 +302,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 				URI proxyURI = ((InternalEObject) proxy).eProxyURI();
 				if (getURI().equals(proxyURI.trimFragment())) {
 					final String fragment = proxyURI.fragment();
-					if (encoder.isCrossLinkFragment(this, fragment)
-							&& !monitor.isCanceled()) {
+					if (encoder.isCrossLinkFragment(this, fragment) && !monitor.isCanceled()) {
 						EObject target = getEObject(fragment);
 						if (target != null) {
 							try {
@@ -441,18 +335,15 @@ public abstract class AbstractSCTResource extends GMFResource {
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName(rule);
 		String specification = element.getSpecification();
-		IParseResult result = parser.parse(parserRule, new StringReader(
-				specification != null ? specification : ""));
+		IParseResult result = parser.parse(parserRule, new StringReader(specification != null ? specification : ""));
 		createDiagnostics(result, element);
 		return result;
 	}
 
-	protected void createDiagnostics(IParseResult parseResult,
-			SpecificationElement semanticTarget) {
+	protected void createDiagnostics(IParseResult parseResult, SpecificationElement semanticTarget) {
 		syntaxDiagnostics.get(semanticTarget).clear();
 		for (INode error : parseResult.getSyntaxErrors()) {
-			syntaxDiagnostics.put(semanticTarget, new XtextSyntaxDiagnostic(
-					error));
+			syntaxDiagnostics.put(semanticTarget, new XtextSyntaxDiagnostic(error));
 		}
 	}
 
@@ -471,17 +362,14 @@ public abstract class AbstractSCTResource extends GMFResource {
 		final ListBasedDiagnosticConsumer consumer = new ListBasedDiagnosticConsumer();
 		linker.linkModel(element, consumer);
 		linkingDiagnostics.get(element).clear();
-		linkingDiagnostics
-				.putAll(element, (consumer.getResult(Severity.ERROR)));
-		linkingDiagnostics.putAll(element,
-				(consumer.getResult(Severity.WARNING)));
+		linkingDiagnostics.putAll(element, (consumer.getResult(Severity.ERROR)));
+		linkingDiagnostics.putAll(element, (consumer.getResult(Severity.WARNING)));
 		isLinking = false;
 	}
 
 	protected void serializeSpecificationElement(SpecificationElement element) {
 		isSerializing = true;
-		if (getSyntaxDiagnostics().get(element).size() > 0
-				|| getLinkingDiagnostics().get(element).size() > 0) {
+		if (getSyntaxDiagnostics().get(element).size() > 0 || getLinkingDiagnostics().get(element).size() > 0) {
 			return;
 		}
 		try {
@@ -529,16 +417,13 @@ public abstract class AbstractSCTResource extends GMFResource {
 				if (isLoading() || isParsing || isLinking || isSerializing) {
 					return;
 				}
-				if (msg.getEventType() == Notification.REMOVING_ADAPTER
-						|| msg.getEventType() == Notification.RESOLVE) {
+				if (msg.getEventType() == Notification.REMOVING_ADAPTER || msg.getEventType() == Notification.RESOLVE) {
 					return;
 				}
 				Object notifier = msg.getNotifier();
 				if (notifier instanceof EObject) {
 					EObject eObject = (EObject) notifier;
-					SpecificationElement container = EcoreUtil2
-							.getContainerOfType(eObject,
-									SpecificationElement.class);
+					SpecificationElement container = EcoreUtil2.getContainerOfType(eObject, SpecificationElement.class);
 					if (container != null) {
 						serializeSpecificationElement(container);
 					}
@@ -563,8 +448,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 				String newValString = msg.getNewStringValue();
 				String oldVString = msg.getOldStringValue();
 				if (newValString != null && !newValString.equals(oldVString)) {
-					parseSpecificationElement((SpecificationElement) msg
-							.getNotifier());
+					parseSpecificationElement((SpecificationElement) msg.getNotifier());
 					linkSpecificationElements();
 				}
 			}
@@ -591,8 +475,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 		private final Triple<EObject, EReference, INode> triple;
 		private final LinkingHelper linkingHelper;
 
-		protected DiagnosticMessageContext(
-				Triple<EObject, EReference, INode> triple, LinkingHelper helper) {
+		protected DiagnosticMessageContext(Triple<EObject, EReference, INode> triple, LinkingHelper helper) {
 			this.triple = triple;
 			this.linkingHelper = helper;
 		}
@@ -606,8 +489,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 		}
 
 		public String getLinkText() {
-			return linkingHelper.getCrossRefNodeAsString(triple.getThird(),
-					true);
+			return linkingHelper.getCrossRefNodeAsString(triple.getThird(), true);
 		}
 
 	}
