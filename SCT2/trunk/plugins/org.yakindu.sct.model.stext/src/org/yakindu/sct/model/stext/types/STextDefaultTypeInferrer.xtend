@@ -155,7 +155,10 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	}
 	
 	def dispatch InferenceResult doInferType(TypedElement typedElement) {
-		return new InferenceResult(new InferredType(typedElement.type))
+		if(typedElement.type == null)
+			return new InferenceResult(null,new InferenceIssue("Could not infer type of typedelement: " + typedElement, IStatus::ERROR))
+		else
+			return new InferenceResult(new InferredType(typedElement.type))
 	}
 	
 	def dispatch InferenceResult doInferType(Enumerator enumerator) {
