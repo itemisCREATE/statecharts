@@ -12,7 +12,6 @@ package org.yakindu.sct.test.models;
 
 import java.io.IOException;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -22,7 +21,6 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 
 import com.google.inject.Inject;
 
@@ -32,7 +30,7 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractTestModelsUtil {
 
-	private static final String VALIDATION_TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/validation/";
+	public static final String VALIDATION_TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/validation/";
 
 	@Inject
 	private IModelSequencer sequencer;
@@ -74,7 +72,7 @@ public abstract class AbstractTestModelsUtil {
 				resource.getContents(), SGraphPackage.Literals.STATECHART);
 		return statechart;
 	}
-	
+
 	/**
 	 * Helper method - loads a testmodel from the given filename.
 	 * 
@@ -84,7 +82,6 @@ public abstract class AbstractTestModelsUtil {
 	 */
 	public static final Statechart loadStatechart(String filename) {
 		return AbstractTestModelsUtil.loadStatechart(URI
-				.createPlatformPluginURI(VALIDATION_TESTMODEL_DIR + filename,
-						true));
+				.createPlatformPluginURI(filename, true));
 	}
 }

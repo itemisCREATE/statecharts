@@ -31,6 +31,8 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITI
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT;
 
+import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -389,7 +391,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	public void checkUnusedEntry() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnusedEntryPoint.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedEntryPoint.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -407,7 +409,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	public void checkUnusedExit() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnusedExitPoint.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -422,7 +424,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 
 		diagnostics = new BasicDiagnostic();
 		statechart = AbstractTestModelsUtil
-				.loadStatechart("UnusedDefaultExitPoint.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedDefaultExitPoint.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -441,7 +443,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		// Test source state isn't composite
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("TransitionEntrySpecNotComposite.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionEntrySpecNotComposite.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -456,7 +458,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 
 		diagnostics = new BasicDiagnostic();
 		statechart = AbstractTestModelsUtil
-				.loadStatechart("TransitionExitSpecNotComposite.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionExitSpecNotComposite.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -472,7 +474,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		// Test exit spec is used on multiple transition siblings.
 		diagnostics = new BasicDiagnostic();
 		statechart = AbstractTestModelsUtil
-				.loadStatechart("TransitionExitSpecOnMultipleSiblings.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionExitSpecOnMultipleSiblings.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -488,7 +490,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		// Test transition unbound named exit point spec.
 		diagnostics = new BasicDiagnostic();
 		statechart = AbstractTestModelsUtil
-				.loadStatechart("TransitionNotExistingNamedExitPoint.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionNotExistingNamedExitPoint.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -506,7 +508,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	public void checkUnboundEntryPoints() {
 		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart("UnboundDefaultEntryPoints.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnboundDefaultEntryPoints.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
@@ -526,7 +528,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 
 		diagnostics = new BasicDiagnostic();
 		statechart = AbstractTestModelsUtil
-				.loadStatechart("UnboundEntryPoints02.sct");
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnboundEntryPoints02.sct");
 		iter = statechart.eAllContents();
 
 		while (iter.hasNext()) {
