@@ -12,6 +12,7 @@
 package org.yakindu.sct.model.sgraph.resource;
 
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +66,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -76,6 +78,8 @@ import com.google.inject.name.Named;
  * 
  */
 public abstract class AbstractSCTResource extends GMFResource {
+
+	public static final String SCT_PREFIX = "SCT_";
 
 	@Inject
 	private IParser parser;
@@ -191,11 +195,47 @@ public abstract class AbstractSCTResource extends GMFResource {
 				createDiagnostic(triple);
 			}
 		}
+		EObject sctObject = getSCTEObject(uriFragment);
+		if (sctObject != null) {
+			return sctObject;
+		}
 		return super.getEObject(uriFragment);
 	}
 
-	private List<EObject> resolveLocalXtextFragment(EObject container, EReference reference,
-			INode node) {
+	protected EObject getSCTEObject(String uriFragment) {
+		if (uriFragment != null && uriFragment.startsWith(SCT_PREFIX)) {
+			return getEmfEObject(uriFragment.substring(SCT_PREFIX.length()));
+		}
+		return null;
+	}
+
+	protected EObject getEmfEObject(String uriFragment) {
+		int length = uriFragment.length();
+		if (length > 0) {
+			if (uriFragment.charAt(0) == '/') {
+				ArrayList<String> uriFragmentPath = new ArrayList<String>(4);
+				int start = 1;
+				for (int i = 1; i < length; ++i) {
+					if (uriFragment.charAt(i) == '/') {
+						uriFragmentPath.add(start == i ? "" : uriFragment
+								.substring(start, i));
+						start = i + 1;
+					}
+				}
+				uriFragmentPath.add(uriFragment.substring(start));
+				return getEObject(uriFragmentPath);
+			} else if (uriFragment.charAt(length - 1) == '?') {
+				int index = uriFragment.lastIndexOf('?', length - 2);
+				if (index > 0) {
+					uriFragment = uriFragment.substring(0, index);
+				}
+			}
+		}
+		return null;
+	}
+
+	private List<EObject> resolveLocalXtextFragment(EObject container,
+			EReference reference, INode node) {
 		Object value = container.eGet(reference);
 		if (reference.isMany()) {
 			List<?> list = (List<?>) value;
@@ -222,7 +262,65 @@ public abstract class AbstractSCTResource extends GMFResource {
 				&& eObject.eContainingFeature() != null) {
 			return getXtextFragment(eObject, node);
 		}
+		if (node != null) {
+			String sctFragment = getSCTFragment(eObject);
+			if (sctFragment != null) {
+				return sctFragment;
+			}
+		}
 		return super.getURIFragment(eObject);
+	}
+
+	protected String getSCTFragment(EObject eObject) {
+		String fragment = getEmfFragment(eObject);
+		if (!Strings.isNullOrEmpty(fragment)) {
+			return SCT_PREFIX + fragment;
+		}
+		return null;
+	}
+
+	/**
+	 * Fragment calculation from ResourceImpl
+	 * 
+	 * @param eObject
+	 * @return
+	 */
+	protected String getEmfFragment(EObject eObject) {
+		InternalEObject internalEObject = (InternalEObject) eObject;
+		if (internalEObject.eDirectResource() == this
+				|| unloadingContents != null
+				&& unloadingContents.contains(internalEObject)) {
+			return "/" + getURIFragmentRootSegment(eObject);
+		} else {
+			List<String> uriFragmentPath = new ArrayList<String>();
+			boolean isContained = false;
+			for (InternalEObject container = internalEObject
+					.eInternalContainer(); container != null; container = internalEObject
+					.eInternalContainer()) {
+				uriFragmentPath.add(container.eURIFragmentSegment(
+						internalEObject.eContainingFeature(), internalEObject));
+				internalEObject = container;
+				if (container.eDirectResource() == this
+						|| unloadingContents != null
+						&& unloadingContents.contains(container)) {
+					isContained = true;
+					break;
+				}
+			}
+
+			if (!isContained) {
+				return "/-1";
+			}
+
+			StringBuffer result = new StringBuffer("/");
+			result.append(getURIFragmentRootSegment(internalEObject));
+
+			for (int i = uriFragmentPath.size() - 1; i >= 0; --i) {
+				result.append('/');
+				result.append(uriFragmentPath.get(i));
+			}
+			return result.toString();
+		}
 	}
 
 	private String getXtextFragment(EObject eObject, ICompositeNode node) {
