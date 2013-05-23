@@ -12,7 +12,6 @@
 package org.yakindu.sct.model.sgraph.resource;
 
 import java.io.StringReader;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -175,12 +174,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 		if (encoder.isCrossLinkFragment(this, uriFragment)) {
 			Triple<EObject, EReference, INode> triple = encoder.decode(this, uriFragment);
 			List<EObject> linkedObjects = null;
-			if (triple.getSecond().isContainment()) {
-				linkedObjects = resolveLocalXtextFragment(triple.getFirst(), triple.getSecond(), triple.getThird());
-			} else {
-				linkedObjects = linkingService.getLinkedObjects(triple.getFirst(), triple.getSecond(),
-						triple.getThird());
-			}
+			linkedObjects = linkingService.getLinkedObjects(triple.getFirst(), triple.getSecond(), triple.getThird());
 			if (!linkedObjects.isEmpty()) {
 				return linkedObjects.get(0);
 			} else {
@@ -191,21 +185,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 			return super.getEObject(uriFragment.substring(SCT_PREFIX.length()));
 		}
 		return super.getEObject(uriFragment);
-	}
-
-	private List<EObject> resolveLocalXtextFragment(EObject container, EReference reference, INode node) {
-		Object value = container.eGet(reference);
-		if (reference.isMany()) {
-			List<?> list = (List<?>) value;
-			List<INode> nodesForFeature = NodeModelUtils.findNodesForFeature(container, reference);
-			int index = nodesForFeature.indexOf(node);
-			if (list.size() > index) {
-				return Collections.singletonList((EObject) list.get(index));
-			}
-		} else if (value instanceof EObject) {
-			return Collections.singletonList((EObject) value);
-		}
-		return Collections.emptyList();
 	}
 
 	@Override
