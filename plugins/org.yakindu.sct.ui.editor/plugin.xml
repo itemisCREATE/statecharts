@@ -886,7 +886,7 @@
        </command>
        <command
              commandId="org.yakindu.sct.ui.editor.commands.ToggleShowDocumentation"
-             label="Show / Hide Documentation"
+             label="Toggle Documentation"
              style="push">
           <visibleWhen
                 checkEnabled="false">

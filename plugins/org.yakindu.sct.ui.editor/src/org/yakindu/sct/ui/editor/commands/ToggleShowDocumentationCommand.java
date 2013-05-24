@@ -10,13 +10,18 @@
  */
 package org.yakindu.sct.ui.editor.commands;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.commands.operations.OperationHistoryFactory;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.gmf.runtime.common.core.command.CompositeCommand;
+import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
 import org.eclipse.gmf.runtime.notation.NotationFactory;
@@ -40,58 +45,49 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 	public static final String FEATURE_TO_SHOW = "featureToShow";
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		View view = unwrap(HandlerUtil.getCurrentSelection(event));
-		StringValueStyle style = GMFNotationUtil.getStringValueStyle(view,
-				FEATURE_TO_SHOW);
-		if (style == null) {
-			style = createInitialStyle(view);
+		List<View> views = unwrap(HandlerUtil.getCurrentSelection(event));
+		CompositeCommand command = new CompositeCommand("toggle documentation");
+		for (View view : views) {
+			StringValueStyle style = GMFNotationUtil.getStringValueStyle(view, FEATURE_TO_SHOW);
+			if (style == null) {
+				style = createInitialStyle(view);
+			}
+			String featureName = style.getStringValue().equals(
+					SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName()) ? BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION
+					.getName() : SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName();
+			command.add(new SetValueCommand(new SetRequest(style,
+					NotationPackage.Literals.STRING_VALUE_STYLE__STRING_VALUE, featureName)));
 		}
-		String featureName = style.getStringValue().equals(
-				SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION
-						.getName()) ? BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION
-				.getName()
-				: SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION
-						.getName();
-		SetValueCommand cmd = new SetValueCommand(new SetRequest(style,
-				NotationPackage.Literals.STRING_VALUE_STYLE__STRING_VALUE,
-				featureName));
-		executeCommand(cmd);
+		executeCommand(command);
 		return null;
 
 	}
 
 	protected StringValueStyle createInitialStyle(View view) {
-		StringValueStyle style = NotationFactory.eINSTANCE
-				.createStringValueStyle();
+		StringValueStyle style = NotationFactory.eINSTANCE.createStringValueStyle();
 		style.setName(FEATURE_TO_SHOW);
-		style.setStringValue(SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION
-				.getName());
-		SetValueCommand cmd = new SetValueCommand(new SetRequest(view,
-				NotationPackage.Literals.VIEW__STYLES, style));
+		style.setStringValue(SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName());
+		SetValueCommand cmd = new SetValueCommand(new SetRequest(view, NotationPackage.Literals.VIEW__STYLES, style));
 		executeCommand(cmd);
 		return style;
 	}
 
-	protected void executeCommand(SetValueCommand setcommand) {
+	protected void executeCommand(ICommand cmd) {
 		try {
-			OperationHistoryFactory.getOperationHistory().execute(setcommand,
-					new NullProgressMonitor(), null);
+			OperationHistoryFactory.getOperationHistory().execute(cmd, new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {
 			e.printStackTrace();
 		}
 	}
 
-	protected View unwrap(ISelection selection) {
+	protected List<View> unwrap(ISelection selection) {
+		List<View> result = new ArrayList<View>();
 		IStructuredSelection structuredSelection = (IStructuredSelection) selection;
-		Object firstElement = structuredSelection.getFirstElement();
-		if (firstElement == null)
-			return null;
-		IGraphicalEditPart editPart = (IGraphicalEditPart) firstElement;
-		if (editPart instanceof IPrimaryEditPart)
-			return editPart.getNotationView();
-		else {
-			return ((IGraphicalEditPart) editPart.getParent())
-					.getNotationView();
+		for (@SuppressWarnings("unchecked")
+		Iterator<IGraphicalEditPart> iter = structuredSelection.iterator(); iter.hasNext();) {
+			IGraphicalEditPart next = iter.next();
+			result.add(next.getNotationView());
 		}
+		return result;
 	}
 }
