@@ -23,5 +23,6 @@ Require-Bundle: org.yakindu.sct.model.sexec,
  org.eclipse.xtext.builder;bundle-version="2.3.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.generator.c,
- org.yakindu.sct.generator.c.features
+ org.yakindu.sct.generator.c.features,
+ org.yakindu.sct.generator.c.types
 Bundle-Vendor: yakindu.org
