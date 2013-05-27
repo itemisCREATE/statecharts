@@ -55,7 +55,6 @@ p. The [GeneratorId] is the unique id of the Generator. Currently, the following
 
 # yakindu::java - Generator ID for the Java Code Generator 
 # yakindu::c - Generator ID for the C Code Generator
-# yakindu::cpp - Generator ID for the C++ Code Generator
 # yakindu::xpand - Generator ID for custom Xpand based Code Generators
 # yakindu::generic - Generator ID for custom Java based Code Generators  
 
