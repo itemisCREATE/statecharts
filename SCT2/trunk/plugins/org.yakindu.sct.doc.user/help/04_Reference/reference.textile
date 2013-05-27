@@ -115,9 +115,12 @@ var intVar : integer
 var realVar : real
 var boolVar : boolean
 var stringVar : string
-var voidVar : void
+
 event addInt : integer
+event addReal : real
 event checkValidity : boolean
+event stringEvent : string
+event voidEvent : void
  
 
 h3. Expressions
@@ -224,10 +227,8 @@ Declarations in the interface scope are externally visible. They can be shared w
 bc.. 
 interface NamedInterface:
 in event event1
-out event event3
-var variable1 : real
-entrypoint entry1
-exitpoint exit1
+out event event3 : integer
+var variable1 : integer
 
 p. ==<!-- End stext_keyword_interface -->==
 ==<!-- Start stext_keyword_internal -->==
@@ -240,17 +241,16 @@ bc..
 internal:
 var localVariable1: integer
 event localEvent: integer
-local event localEvent2: NamedInterface.event1 || localEvent
-local event localEvent3: localEvent || localEvent2 : 25
-operation localOperation (integer, integer): integer
-localEvent3 / raise NamedInterface.event3 :
-localOperation(valueOf(localEvent),NamedInterface.variable1);
+local event localEvent2
+operation localOperation (int1 : integer, int2 : integer): integer
+localEvent2 / raise NamedInterface.event3 : 
+localOperation(valueof(localEvent) , NamedInterface.variable1)
 
 p. ==<!-- End stext_keyword_internal -->==
 
 h3. Declarations
 
-Within scopes there can be declarations of Events, Variables, Operations, LocalReactions, EntryPoints and ExitPoints.
+Within scopes there can be declarations of Events, Variables, Operations, LocalReactions.
 
 ==<!-- Start stext_keyword_event -->==
 
@@ -267,13 +267,11 @@ p. Within local scope events can carry variables:
 bc.. 
 internal:
 event localEvent1 : integer
-p. Local events can be derived from interface events or other local events and can have a value assignment:
+p. Local events can have a value assignment:
 
 bc.. 
 internal:
-event localEvent1: integer
-local event localEvent2 = NamedInterface.event1 || localEvent1
-local event localEvent3 = localEvent2 || 25
+event localEvent1: integer = 25
 
 p. ==<!-- End stext_keyword_event -->==
 
@@ -395,11 +393,10 @@ The _oncycle_ trigger is always true and enables a reaction to be executed in ev
 
 h3. Operations
 
-Operations can have none, one or multiple parameters. The parameters are only declarated by their type. An operation can have one return type similar to Java.
+Operations can have none, one or multiple parameters. The parameters are declarated with a name and a type. An operation can have one return type similar to Java.
 
 bc.. 
-operation localOperation (integer, integer):integer
-localEvent3/ raise NamedInterface3.event1
+operation localOperation (xValue : integer, yValue : integer):integer
 p. 
 ==<!-- End stext_keyword_operation -->==
 
@@ -447,32 +444,12 @@ p. Within a local reaction an interface event can be raised:
 
 bc.. 
 internal:
-localEvent1 / raise NamedInterface.event3 : localOperation (valueOf(localEvent), NamedInterface.variable1);
+localEvent1 / raise NamedInterface.event3 : localOperation (valueof(localEvent), NamedInterface.variable1);
 p. Local reactions can have priority values. These are defined by a following # and the integer number of priority:
 
 bc.. 
 localEvent2 / NamedInterface.variable2 += 3; #1
 localEvent3 / NamedInterface.variable4 += 2.0; #2
-
-p. ==<!-- Start stext_keyword_entrypoint -->==
-
-h3. EntryPoints
-
-Every state chart has an entry point. An entry point can be declared like the following:
-
-bc.. 
-entrypoint entry1
-
-p. ==<!-- End stext_keyword_entrypoint -->==
-==<!-- Start stext_keyword_exitpoint -->==
-
-h3. ExitPoints
-
-Every state chart has an exit point. This exit point can be declared like the following.
-
-bc.. 
-exitpoint exit1
-p. ==<!-- End stext_keyword_exitpoint -->==
 
 h2. SGen Generator Features
 
