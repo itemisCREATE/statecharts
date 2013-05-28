@@ -6,7 +6,7 @@ testgroup AlwaysOncycle for statechart AlwaysOncycle {
 	 	enter
 	 	
 		assert active (AlwaysOncycle.main_region.StateA)
-		while [value < 6] {
+		while [value < 5] {
 			cycle
 			assert active (AlwaysOncycle.main_region.StateA)
 		}
