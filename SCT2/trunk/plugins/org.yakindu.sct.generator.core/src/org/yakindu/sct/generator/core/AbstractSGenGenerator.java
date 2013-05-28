@@ -24,7 +24,7 @@ public abstract class AbstractSGenGenerator implements ISCTGenerator {
 	public void generate(GeneratorEntry entry) {
 		// Does actually nothing
 		// generateInternal(entry);
-	}
+	} 
 
 
 
