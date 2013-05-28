@@ -42,7 +42,7 @@ public class GeneratorUtils {
 	 * Create an empty project if this project does not exist.
 	 * 
 	 * @param project
-	 * @return true, iff the project was created. false if it already exists.
+	 * @return true, if the project was created. false if it already exists.
 	 */
 	public static boolean createEmptyProject(IProject project) {
 		if (!project.exists()) {
