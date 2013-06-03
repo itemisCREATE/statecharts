@@ -49,6 +49,9 @@
 
    <element name="SCTGenerator">
       <complexType>
+         <sequence minOccurs="0" maxOccurs="unbounded">
+            <element ref="FeatureLibrary"/>
+         </sequence>
          <attribute name="class" type="string" use="required">
             <annotation>
                <documentation>
@@ -104,6 +107,21 @@
                </documentation>
                <appinfo>
                   <meta.attribute kind="java" basedOn=":org.eclipse.emf.ecore.EObject"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="FeatureLibrary">
+      <complexType>
+         <attribute name="library_id" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="identifier" basedOn="org.yakindu.sct.generator.core.featuretypes/FeatureLibrary/@library_id"/>
                </appinfo>
             </annotation>
          </attribute>

@@ -49,14 +49,14 @@
 
    <element name="FeatureLibrary">
       <complexType>
-         <attribute name="uri" type="string" use="required">
+         <attribute name="library_id" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="generatorId" type="string" use="required">
+         <attribute name="uri" type="string" use="required">
             <annotation>
                <documentation>
                   
