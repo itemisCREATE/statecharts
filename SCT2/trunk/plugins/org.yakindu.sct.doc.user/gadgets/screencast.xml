@@ -5,7 +5,7 @@
 	</ModulePrefs>
 	<Content type="html">
 		<![CDATA[ 
-			<iframe	src="http://player.vimeo.com/video/53438504?autoplay=1&title=0" width="800" height="600" frameborder="0"> </iframe>		
+			<iframe	src="http://player.vimeo.com/video/53438504?autoplay=0&title=0" width="800" height="600" frameborder="0"> </iframe>		
 		]]>
 	</Content>
 </Module>
