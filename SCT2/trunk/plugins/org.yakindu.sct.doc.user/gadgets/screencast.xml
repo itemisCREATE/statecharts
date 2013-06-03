@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="getting started">
+		<Require feature="dynamic-height" />
+	</ModulePrefs>
+	<Content type="html"
+		<![CDATA[ 
+			<iframe	src="http://player.vimeo.com/video/53438504?autoplay=1&title=0" width="800" height="600" frameborder="0"> </iframe>		
+		]]
+</Module>
