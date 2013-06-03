@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs title="getting started">
+		<Require feature="dynamic-height" />
+	</ModulePrefs>
+	<Content type="html">
+		<![CDATA[ 
+			<script type="text/javascript">
+				google.load("feeds", "1");
+	
+				function OnLoad() {
+					var feedControl = new google.feeds.FeedControl();
+					feedControl.addFeed("http://blog.yakindu.org/feed/", "");
+					feedControl.draw(document.getElementById("feed"));
+				}
+				google.setOnLoadCallback(OnLoad);
+			</script>
+			<div id="feed" class="span12" onload=""></div>
+		]]>
+	</Content>
+</Module>
