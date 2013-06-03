@@ -1,5 +1,5 @@
 <link href="../../css/bootstrap.css" rel="stylesheet" />
-<link href="../../css/custom.css" rel="stylesheet" /> 
+<link href="../../css/custom.css" rel="stylesheet" />
 
 h1. Tasks
 
@@ -12,8 +12,9 @@ For that to work, it is required to provide one or more custom java classes havi
 !images/operationsExample.png!
 
 To simulate the statechart above, a new Java Class must be created matching the method signature defined in the statechart. This class must be placed onto the classpath of the
-statecharts project.  
+statecharts project. 
  
+ <pre>
 bc. 
 package example;
 public class Calculator {
@@ -21,6 +22,7 @@ public class Calculator {
       return param1 + param2;
    }
 }
+ </pre>
 
 This custom class can be passed to the run configuration as *Operation Class*, shown in the figure below. It is possible to pass multiple java classes seperated by a comma.
 If the simulation is executed, the variable result gets the value 2.
@@ -42,7 +44,8 @@ To create a generator model with the wizard,
 !images/genmodelwizardchooselanguage.jpg!
 
 The result is an .sgen file of the following format: 
-
+ 
+ <pre>
 bc.. 
 GeneratorModel for [GeneratorId] {
 	statechart [StatechartReference] {
@@ -51,6 +54,8 @@ GeneratorModel for [GeneratorId] {
 		}
 	}
 }
+ <pre>
+ 
 p. The [GeneratorId] is the unique id of the Generator. Currently, the following Generators are supported out of the box:
 
 # yakindu::java - Generator ID for the Java Code Generator 

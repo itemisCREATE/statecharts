@@ -1,6 +1,6 @@
 <link href="../../css/bootstrap.css" rel="stylesheet" />
 
-h1. SCT Reference
+h1(#YAKINDUSCT2Reference). SCT Reference
 
 h2. Statechart elements
 
@@ -19,17 +19,17 @@ The model interpreter and different flavors of generated code follow these same 
 
 Please refer to the description of the "UML Statecharts":http://en.wikipedia.org/wiki/UML_state_machine for more details.
 
-h3. Regions
+h3(#Regions). Regions
 
 As already mentioned the YAKINDU state charts are self contained. They are organized in regions. Due to this it is possible to organize multiple state machines in different regions and to run them concurrently.  
 
 !images/parallelRegions.jpg!
 
-h3. States
+h3(#States). States
 
 States are the central elements of a state machine. A state has to be placed inside a region and needs a unique name inside this region. During simulation each state can be active or passive. An active state has actions that are accomplished. Either an action is carried out on entering a state, during active state or on exit.   
 
-h3. Transitions
+h3(#Transitions). Transitions
 
 A transition is the transfer of one state to another. Transitions are diagrammed as arrows and can carry events and actions but must not. 
 
@@ -37,7 +37,7 @@ The syntax of events and actions is defined by a textual description language (#
 
 If a state has more than one outgoing transition without event that transition is carried out first that was modeled first.
 
-h3. Initial state and final state
+h3(#Initialstateandfinalstate). Initial state and final state
 
 Initial and final states are pseudo states, because the state chart does not rest on them. Pseudo states express characteristics that are impossible to express by simple states. 
 
@@ -45,29 +45,29 @@ The initial state is always the first state that is active during interpretation
 
 Inside a region only one initial state is allowed, but every region can have an initial state.
 
-h3. Choice
+h3(#Choice). Choice
 
 Choice is also a pseudo state. It can be used to model a conditional path. Choice nodes divide a transition into multiple parts. 
 
 Usually the first transition points towards the choice node. One of the choice outgoing transitions can carry a condition. 
 
-h3. Junction
+h3(#Junction). Junction
 
 A junction is a pseudo state do combine transitions. This is very comfortable if a state machine has many similar transitions. Junctions add clear arrangement to the state machine.
 
-h3. Composite State
+h3(#CompositeState). Composite State
 
 A composite state is a state that is composed of other state machines. These are also organized in regions. Besides the simple composite state YAKINDU knows two kinds of composite states: orthogonal state and submachine states.
 
 Composite states contain other state machine branches.
 
-h4. Orthogonal states
+h4(#Orthogonalstates). Orthogonal states
 
 In the context of state machines orthogonal states are states that are independent from each other. The most famous example is the keyboard example:
 
 !images/orthogonalState_example.jpg!
 
-h4. Subdiagrams 
+h4(#Submachinestates). Subdiagrams 
 
 When using Composite States, the statechart model often becomes too big to get a complete overview of the whole diagram. Although it is possible to collapse and expand a state's figure compartment, these actions spoil the diagram layout each time they are executed. Therefore, we introduced so-called Subdiagrams.
 !images/extract_subdiagram.png!
@@ -76,7 +76,7 @@ If the 'Extract Subdiagram' refactoring is executed on a Composite State, all co
 With a click on the decorator, the subdiagram opens in a separate editor tab. The breadcrumb on the top allows easy navigation throughout the different hierachy levels.
 !images/extract_subdiagram3.png!
 
-h3. Shallow History
+h3(#ShallowHistory). Shallow History
 
 The shallow history state is a pseudo state that is placed inside regions of composite states. It is used to 'remember' the last active state inside a composite state. So it is possible to jump to this state instead of starting at the inner entry state again. The following example of a questionaire answering will explain this:
 
@@ -90,15 +90,15 @@ The interesting parts in this state chart are the events _checkProgress_ and _go
 
 On triggering the _goon_ event the last active state is activated again.
 
-h3. Deep History
+h3(#DeepHistory). Deep History
 
 Deep history is similar to shallow history but more complex. With a deep history the latest state of multiple nested states is remembered.
 
-h2. Statechart description language
+h2(#Statechartdescriptionlanguage). Statechart description language
 
 The textual description language is used to declare and describe behaviors in the state machine. It is case sensitive.
 
-h3. Typesystem
+h3(#Typesystem). Typesystem
 
 The language has an integrated small typesystem with the following simple types:
 
@@ -110,7 +110,7 @@ The language has an integrated small typesystem with the following simple types:
 
 So events and variables can be declared with types:
 
-bc.. 
+bc(prettyprint).. 
 var intVar : integer
 var realVar : real
 var boolVar : boolean
@@ -123,41 +123,41 @@ event stringEvent : string
 event voidEvent : void
  
 
-h3. Expressions
+h3(#Expressions). Expressions
 
 Expressions can be defined similar to other programming languages. The language offers operators to define logical expressions, bitwise arithmetic, and arithmetic expressions and bit shifting.
 
 Logical expressions are similar to other programming languages. The return type is *boolean*. In the following there are some examples of these:
 
-h4. Logical AND
+h4(#LogicalAND). Logical AND
 
-bc.. 
+bc(prettyprint).. 
 var1 && var2
-h4. Logical OR
+h4(#LogicalOR). Logical OR
 
-bc.. 
+bc(prettyprint).. 
 var1 ||  var2 
-h4. Logical NOT
+h4(#LogicalNOT). Logical NOT
 
-bc.. 
+bc(prettyprint).. 
 !var1 
-h4. Conditional expression
+h4(#Conditionalexpression). Conditional expression
 
-bc.. 
+bc(prettyprint).. 
 var1 ? var2 : 23 
-h4. Bitwise XOR
+h4(#BitwiseXOR). Bitwise XOR
 
-bc.. 
+bc(prettyprint).. 
 var1 ^ var2
-h4. Bitwise OR
+h4(#BitwiseOR). Bitwise OR
 
-bc.. 
+bc(prettyprint).. 
 var1 | var2
-h4. Bitwise AND
+h4(#BitwiseAND). Bitwise AND
 
-bc.. 
+bc(prettyprint).. 
 var1 & var2
-h4. Logical Relations and Shift Operators
+h4(#LogicalRelationsandShiftOperators). Logical Relations and Shift Operators
 
 |less than | < |
 |equal or less than | <= |
@@ -169,7 +169,7 @@ h4. Logical Relations and Shift Operators
 |shift right | >> |
 
 
-h4. Binary arithmetic operators
+h4(#Binaryarithmeticoperators). Binary arithmetic operators
 
 |plus | + |
 |minus | - |
@@ -177,14 +177,14 @@ h4. Binary arithmetic operators
 |divide | / |
 |modulo | % |
 
-h4. Unary arithmetic operators
+h4(#Unaryarithmeticoperators). Unary arithmetic operators
 
 |positive | + |
 |negative | - |
 |complement	| ~ |
 
 
-h3. Statements
+h3(#Statements). Statements
 
 A statements can be either an assignment, raising an event or call an operation. The language has the following assignment operators:
 
@@ -205,26 +205,26 @@ An event is raised by the keyword _raise_ followed by the event name and if it i
 An operation is called similar to other programming languages with the operation name and passing concrete parameters. The parameters can be expressions.
 
 
-h3. Scopes
+h3(#Scopes). Scopes
 
 ==<!-- Start stext_keyword_namespace -->==
 
-h4. Namespace
+h4(#Namespace). Namespace
 
 The language allows to define unique namespaces, which can be used to qualify references to the statechart.
 
-bc.. 
+bc(prettyprint).. 
 namespace trafficlights
 
 p. ==<!-- End stext_keyword_namespace -->==
 ==<!-- Start stext_keyword_interface -->==
 
-h4. interface scope
+h4(#interfacescope). interface scope
 
 Declarations in the interface scope are externally visible. They can be shared within the environment.
 
 
-bc.. 
+bc(prettyprint).. 
 interface NamedInterface:
 in event event1
 out event event3 : integer
@@ -233,11 +233,11 @@ var variable1 : integer
 p. ==<!-- End stext_keyword_interface -->==
 ==<!-- Start stext_keyword_internal -->==
 
-h4. internal scope
+h4('internalscope). internal scope
 
 Declarations made in an internal scope are only visible for contained states.
 
-bc.. 
+bc(prettyprint).. 
 internal:
 var localVariable1: integer
 event localEvent: integer
@@ -248,28 +248,28 @@ localOperation(valueof(localEvent) , NamedInterface.variable1)
 
 p. ==<!-- End stext_keyword_internal -->==
 
-h3. Declarations
+h3(#Declarations). Declarations
 
 Within scopes there can be declarations of Events, Variables, Operations, LocalReactions.
 
 ==<!-- Start stext_keyword_event -->==
 
-h3. Events
+h3(#Events). Events
 
 Within interface scope events have an direction. They can either be ingoing or outgoing:
 
-bc.. 
+bc(prettyprint).. 
 interface NamedInterface:
 in event event1
 out event event2
 p. Within local scope events can carry variables:
 
-bc.. 
+bc(prettyprint).. 
 internal:
 event localEvent1 : integer
 p. Local events can have a value assignment:
 
-bc.. 
+bc(prettyprint).. 
 internal:
 event localEvent1: integer = 25
 
@@ -277,24 +277,24 @@ p. ==<!-- End stext_keyword_event -->==
 
 ==<!-- Start stext_keyword_var -->==
 
-h3. Variables
+h3(#Variables). Variables
 
 Variables can have different visibilities. They can be visible for the environment:
 
-bc.. 
+bc(prettyprint).. 
 var variable1: real
 p. Variables can be *readonly* (constants):
 
-bc.. 
+bc(prettyprint).. 
 var readonly pi: real = 3.1415
 p. Variables can be referenced by the environment.
 
-bc.. 
+bc(prettyprint).. 
 var external variable3: integer = 34
 
 p. ==<!-- End stext_keyword_var -->==
 
-h3. Reaction Triggers
+h3(#ReactionTriggers). Reaction Triggers
 
 Actions are key constructs in state machines to model behavior. The YAKINDU SCT 2 knows the following kinds of actions.
 
@@ -302,13 +302,13 @@ Actions are key constructs in state machines to model behavior. The YAKINDU SCT 
 
 ==<!-- Start stext_keyword_after -->==
 
-h4. after
+h4(#after). after
 
 The _after_ trigger specifies one-shot time events. 
 
 After the specified time the reaction is triggered. An _after_ trigger can be used in transitions of states as well in local reactions of states and statecharts. The specified time starts when the state or statechart is entered. 
 
-bc. after 20 s
+bc(prettyprint). after 20 s
 
 Structure: 
 
@@ -326,13 +326,13 @@ The time unit can be:
 p. ==<!-- End stext_keyword_after -->==
 ==<!-- Start stext_keyword_every -->==
 
-h4. every
+h4(#every). every
 
 The _every_ trigger specifies periodic time events. 
 
 The reaction is triggered periodically after the specified time. An _every_ trigger can be used in transitions of states as well in local reactions of states and statecharts. The specified time starts when the state or statechart is entered and repeats periodically. 
 
-bc. every 200 ms
+bc(prettyprint). every 200 ms
 
 Structure: 
 
@@ -350,7 +350,7 @@ The time unit can be:
 ==<!-- End stext_keyword_every -->==
 ==<!-- Start stext_keyword_always -->==
 
-h4. always
+h4(#always). always
 
 This trigger is always true and enables a reaction to be executed in every run to completion step (RTS). It is equivalent to _oncycle_.
 
@@ -360,7 +360,7 @@ This trigger is always true and enables a reaction to be executed in every run t
 ==<!-- Start stext_keyword_else -->==
 
 
-h4. default, else
+h4(#defaultelse). default, else
 
 The _default_ trigger is equivalent to the _else_ trigger. It is intended for use for the outgoing transitions of _choice_ pseudo states, to make sure that always an outgoing transition can be taken. It can only be be used in transitions and implies the lowest evaluation priority for that transition. 
 
@@ -370,45 +370,45 @@ The _default_ trigger is equivalent to the _else_ trigger. It is intended for us
 
 ==<!-- Start stext_keyword_entry -->==
 
-h4. entry
+h4(#entry). entry
 
 An _entry_ trigger marks actions that are carried out on entering a state or state machine.
 
 ==<!-- End stext_keyword_entry -->==
 ==<!-- Start stext_keyword_exit -->==
 
-h4. exit
+h4(#exit). exit
 
 An _exit_ trigger marks actions that are carried out on exiting a state or state machine.
 
 ==<!-- End stext_keyword_exit -->==
 ==<!-- Start stext_keyword_oncycle -->==
 
-h4. oncycle
+h4(#oncycle). oncycle
 
 The _oncycle_ trigger is always true and enables a reaction to be executed in every run to completion step (RTS). It is equivalent to _always_.
 
 ==<!-- End stext_keyword_oncycle -->==
 ==<!-- Start stext_keyword_operation -->==
 
-h3. Operations
+h3(#Operations). Operations
 
-Operations can have none, one or multiple parameters. The parameters are declarated with a name and a type. An operation can have one return type similar to Java.
+Operations can have none, one or multiple parameters. The parameters are declarated by a name and a type. An operation can have one return type similar to Java.
 
-bc.. 
+bc(prettyprint).. 
 operation localOperation (xValue : integer, yValue : integer):integer
 p. 
 ==<!-- End stext_keyword_operation -->==
 
-h3. Build-In Functions
+h3(#BuildInFunctions). Build-In Functions
  
 ==<!-- Start stext_keyword_valueof -->==
 	
-h4. valueof(event)
+h4(#valueofevent). valueof(event)
 
 Returns the value of an valued event that it passed to the function as parameter.
 
-bc.. 
+bc(prettyprint).. 
 myVar = valueof(myEvent)
 p. 
 
@@ -416,21 +416,21 @@ p.
 
 ==<!-- Start stext_keyword_active -->==
 
-h4. active(state)
+h4(#activestate). active(state)
 
 Returns "true" if a state is active or "false" otherwise.
 
-bc.. 
+bc(prettyprint).. 
 myBool = active(StateA)
 p. 
 
 ==<!-- End stext_keyword_active -->==
 
-h3. LocalReactions
+h3(#LocalReactions). LocalReactions
 
 Local reactions describe the internal behavior of a state. So they have internal scope. A local reaction is  declared as follows:
 
-bc.. 
+bc(prettyprint).. 
 LocalReaction: ReactionTrigger '/' ReactionEffect ('#' ReactionProperties)?
 
 ReactionTrigger: (Event ("," Event	)* 	(=> '[' Expression ']')?) | '[' Expression ']'					
@@ -442,12 +442,12 @@ Statement: Assignment | EventRaising | OperationCall
 ReactionProperties: (EntryPoint | ExitPoint)*
 p. Within a local reaction an interface event can be raised:
 
-bc.. 
+bc(prettyprint).. 
 internal:
 localEvent1 / raise NamedInterface.event3 : localOperation (valueof(localEvent), NamedInterface.variable1);
 p. Local reactions can have priority values. These are defined by a following # and the integer number of priority:
 
-bc.. 
+bc(prettyprint#GeneratorFeatures).. 
 localEvent2 / NamedInterface.variable2 += 3; #1
 localEvent3 / NamedInterface.variable4 += 2.0; #2
 
@@ -465,7 +465,7 @@ The following section describes the *Core Features* which are available for all 
 
 ==<!-- Start sgen_feature_outlet -->==
 
-h4. Outlet
+h4(#Outlet). Outlet
 
 The *Outlet* feature specifies the target project and folder for the generated artifacts. It is a *required* feature and consists of the following parameters:
 # __targetProject__  (String, required): The project to store the generated artifacts  
@@ -473,7 +473,7 @@ The *Outlet* feature specifies the target project and folder for the generated a
 
 Example configuration:
 
-bc.. 
+bc(prettyprint).. 
 feature Outlet {
 	targetProject = "ExampleProject"
 	targetFolder = "src-gen"
@@ -481,7 +481,7 @@ feature Outlet {
 p. ==<!-- End sgen_feature_outlet -->==
 ==<!-- Start sgen_feature_licenseheader -->==
 
-h4. LicenseHeader
+h4(#LicenseHeader). LicenseHeader
 
 The *LicenseHeader* feature specifies the license text that should be added as a header to the generated artifacts. It is an *optional* feature and consists of the following parameters:
 
@@ -489,14 +489,14 @@ The *LicenseHeader* feature specifies the license text that should be added as a
 
 Example configuration:
 
-bc.. 
+bc(prettyprint).. 
 feature LicenseHeader {
 	licenseText = "Copyright (c) 2012 committers of YAKINDU and others."
 }
 p. ==<!-- End sgen_feature_licenseheader -->==
 ==<!-- Start sgen_feature_functioninlining -->==
 
-h4. FunctionInlining
+h4(#FunctionInlining). FunctionInlining
 
 The *FunctionInlining* feature allows the inlining of expressions instead of generating separate functions or methods. This might reduce the readability of the generated code, but increases performance because less operation calls are necessary. 
 It is an *optinal* feature and consists of the following parameters:
@@ -513,7 +513,7 @@ It is an *optinal* feature and consists of the following parameters:
 
 Example configuration:
 
-bc.. 
+bc(prettyprint).. 
 feature FunctionInlining {
 	inlineChoices = false
 	inlineEnterRegion = true
@@ -522,7 +522,7 @@ feature FunctionInlining {
 p. ==<!-- End sgen_feature_functioninlining -->==
 ==<!-- Start sgen_feature_debug -->==
 
-h4. Debug
+h4(#Debug). Debug
 
 The *Debug* feature dumps the Execution Model to the target folder as xmi model. It is an *optional* feature and consists of the following parameters:
 
@@ -530,14 +530,14 @@ The *Debug* feature dumps the Execution Model to the target folder as xmi model.
 
 Example configuration:
 
-bc.. 
+bc(prettyprint).. 
 feature Debug {
 	dumpSexec = true
 }
 
 p. ==<!-- End sgen_feature_debug -->==
 
-h2. Java Generator Features
+h2(#JavaGeneratorFeatures). Java Generator Features
 
 ==<!-- Start sgen_feature_naming -->==
 
@@ -551,7 +551,7 @@ It is an *optional* feature and consists of the following parameters:
 
 Example configuration:
 
-bc.. 
+bc(prettyprint).. 
 feature Naming {
 	basePackage = "org.yakindu.sct"
 	implementationSuffix = "Impl"
@@ -559,7 +559,7 @@ feature Naming {
 p. ==<!-- End sgen_feature_naming -->==	
 ==<!-- Start sgen_feature_generalfeatures -->==	
 
-h4. GeneralFeatures
+h4(#GeneralFeatures). GeneralFeatures
 
 The *GeneralFeatures* feature allows to configure additional services to generate with the statemachine. Per default, all parameters are configured to __false__ It is an *optional* feature and consists of the following parameters:
 
@@ -572,7 +572,7 @@ The *GeneralFeatures* feature allows to configure additional services to generat
 
 Example configuration:
 
-bc.. 
+bc(prettyprint).. 
 feature GeneralFeatures {
 	InterfaceObserverSupport = true
 	RuntimeService = true
@@ -582,11 +582,11 @@ feature GeneralFeatures {
 p. ==<!-- End sgen_feature_generalfeatures -->==			
 
 
-h2. Create Custom Code Generators
+h2(#CreateCustomCodeGenerators). Create Custom Code Generators
 
 YAKINDU Statechart Tools provides a rich feature set to supports custom code generators out of the box. These code generators can be either written in Java, "Xtend":http://www.eclipse.org/xtend/ or in "Xpand":http://www.eclipse.org/modeling/m2t/?project=xpand
  
-h3. Writing a custom code generator with Xtend2/Java
+h3(#WritingacustomcodegeneratorwithXtend2Java). Writing a custom code generator with Xtend2/Java
 
 First, you have to create a new Xtend2 generator project. Click *File* > *New* > *Other...* > *YAKINDU* > *YAKINDU Xtend2/Java Generator Project* to create a new Xtend2 Generator Project. 
 
@@ -598,14 +598,14 @@ The check box *Configure for Plugin Export* adds all required extension point re
 
 After click on *Finish* a new project is created in your workspace. All required plugin dependencies and extension points are registered and you can start to write your code generator based on the ExecutionFlow meta model [Link].
 
-h3. Executing a custom Xtend2/Java code generator
+h3(#ExecutingacustomXtend2Javacodegenerator). Executing a custom Xtend2/Java code generator
 
 YAKINDU Statechart Tools provide a convenient way to execute your generator while you are developing it.
 Therefore, you have to create a new *Generator Model* with the generator id *yakindu::generic*, either by using the *New Statechart Generator Model* wizard or by simple creating a new text file with the file extension *.sgen*. the following feature allows to configure your code generator.
 
 ==<!-- Start sgen_feature_generator -->==
 
-h4. Generator
+h4(#Generator). Generator
 
 The *Generator* feature allows the configuration of a custom code generator located in the workspace and written in Java or another JVM language. It is a *required* feature and consists of the following parameters:
 
@@ -615,7 +615,7 @@ The *Generator* feature allows the configuration of a custom code generator loca
 
 Example configuration:
 
-bc.. 
+bc(prettyprint).. 
 feature Generator {
 	generatorProject = "org.yakindu.sct.mygenerator"
 	generatorClass = "org.yakindu.sct.MyGenerator"
@@ -623,13 +623,13 @@ feature Generator {
 		
 p. ==<!-- End sgen_feature_generator -->==
 
-h3. Executing a custom Xpand code generator
+h3(#ExecutingacustomXpandcodegenerator). Executing a custom Xpand code generator
 
 to execute an xpand based custom code generator, you have to create a new *Generator Model* with the generator id *yakindu::xpand*, either by using the *New Statechart Generator Model* wizard or by simple creating a new text file with the file extension *.sgen*. the following feature allows to configure your code generator.
 
 ==<!-- Start sgen_feature_template -->==
 
-h4. Template
+h4(#Template). Template
 
 The *Generator* feature allows the configuration of a custom code generator located in the workspace and written in Java or another JVM language. It is a *required* feature and consists of the following parameters:
 
@@ -638,7 +638,7 @@ The *Generator* feature allows the configuration of a custom code generator loca
 
 Example configuration:
 
-bc.. 
+bc(prettyprint).. 
 feature Template {
 	templateProject = "ExampleProject"
 	templatePath = "org::yakindu::sct::generator::xpand::Main::main"
@@ -646,11 +646,11 @@ feature Template {
 p. ==<!-- End sgen_feature_template -->==
 
 
-h2. API specifications of the generated code
+h2(#APISecification). API specifications of the generated code
 
 In the following comments the TrafficLight example statemachine is used to describe the API specifications of the code generated by the Yakindu C and Java code generators. The following image shows the statechart. It is a model of a simple pedestrian crossing with a traffic light for pedestrians and a traffic light for the cars.
 
-!images/TrafficLight.png!
+!(img-rounded shadowed#SpecJava)images/TrafficLight.png!
 
 
 h3. Specifications of Java code
@@ -665,7 +665,7 @@ h4. Interface IStatemachine
 
 The interface @IStatemachine@ is implemented by each generated statemachine:
 
-bc.. 
+bc(prettyprint).. 
 package org.yakindu.sct.examples.trafficlight.cyclebased;
 
 /**
@@ -711,7 +711,7 @@ h4. Timed statemachines
 
 In the traffic light example timing is used (after clauses). To support this the interfaces 'ITimedStatemachine', 'ITimerService' and the class 'TimeEvent' are generated.
 
-bc.. 
+bc(prettyprint).. 
 package org.yakindu.sct.examples.trafficlight.cyclebased;
 
 /**
@@ -746,7 +746,7 @@ p. @ITimedStatemachine@ extends the generated statemachine to set an @ITimerServ
 
 Basically the correct handling of time has to be implemented by the developer because timer functions generally depend on the hardware target used. So for every hardware target a timer service class which implements the @ITimerService@ interface has to be developed. Let's have a look at the @ITimerService@ interface:
 
-bc.. 
+bc(prettyprint).. 
 package org.yakindu.sct.examples.trafficlight.cyclebased;
 
 /**
@@ -803,7 +803,7 @@ The method @resetTimer(TimeEvent event)@ is called by the statemachine to unset 
 
 The last class used by timed statemachine is @TimeEvent@:
 
-bc.. 
+bc(prettyprint).. 
 package org.yakindu.sct.examples.trafficlight.cyclebased;
 
 /**
@@ -869,7 +869,7 @@ h4. Default implementation of ITimerService
 
 The java code generator generates a default implementation of @ITimerService@ interface if the TimerService feature is set to 'true' in the sgen model. This implementation is based on @java.util.Timer@ and @java.util.TimerTask@ and should be compatible with the normal Oracle VM or Open JDK VM:
 
-bc.. 
+bc(prettyprint).. 
 
 package org.yakindu.sct.examples.trafficlight.cyclebased;
 
@@ -931,22 +931,22 @@ public class TimerService implements ITimerService {
 		return System.currentTimeMillis();
 	}
 }
-h4. Runtime service
+h4(#RuntimeService). Runtime service
 
 The runtime service class can be used by client implementations to execute a run to completion step of a statemachine periodically.
 
-h4. Interfaces, Variable and Event access
+h4(#InterVar). Interfaces, Variable and Event access
 
 In a yakindu statechart variables and events are contained in interfaces. There could be one default interface defined (without a name) and several named interfaces. In the generated code these interfaces are defined as internal java interfaces of an interface that has the same name as the statemachine. Let's have a look at following example statechart interface declaration:
 
-bc.. 
+bc(prettyprint).. 
 interface:
 	var a:boolean
 	in event evA:boolean
 	out event evB:integer
 p. The generated interface code looks like following:
 
-bc.. 
+bc(prettyprint).. 
 public interface IDefaultSMStatemachine extends IStatemachine {
 
 	public interface SCInterface {
@@ -963,7 +963,7 @@ p. For the unnamed statechart interface a java interface @SCInterface@ is genera
 
 The statemachine implements the parent interface by iteself and each nested interface is implemented as internal class. It holds an instance of each nested interface implementation which is accessible through a getter method. Have a look at the code snipped of the 'unnamed' default interface implementation:
 
-bc.. 
+bc(prettyprint).. 
 public class DefaultSMStatemachine implements IDefaultSMStatemachine {
 
 	private final class SCInterfaceImpl implements SCInterface {
@@ -1036,11 +1036,11 @@ public class DefaultSMStatemachine implements IDefaultSMStatemachine {
 }
 p. Now even a few notes on the naming of the generated interfaces and the value access of events. The default (unnamed) interface is named 'SCInterface'. If an interface has a dedicated name then this name is used with the prefix 'SCI' (e.g. 'SCIInterfacename'). Additionally a value of an event can only be accessed if the event is occured during the run to completion step. Otherwise an @IllegalStateException@ is thrown by the interface.
 
-h4. Interface observers
+h4(#InterfaceObservers). Interface observers
 
 If the general feature 'InterfaceObserverSupport' is enabled in the sgen model the generated interfaces get support to register observers:
 
-bc.. 
+bc(prettyprint).. 
 public interface IDefaultSMStatemachine extends IStatemachine {
 
 	public interface SCInterface {
@@ -1060,7 +1060,7 @@ public interface IDefaultSMStatemachine extends IStatemachine {
 }
 p. An additional interface @SCInterfaceListener@ is generated. This interface has to be implemented by the user and contains callback methods for each outgoing event. So the listener get notified if a outgoing event is raised by the statemachine internally. To add or remove a listener from an interface use the @getListeners()@ method of the associated interface. This method returns a @java.util.list@ which is parameterized with the appropriate listener type. The operations within the callback should not take a long process time because the statemachine execution may hang too long which leads to a not expected runtime behavior.
 
-h4. Operation callbacks
+h4(#OperationCallback). Operation callbacks
 
 The yakindu statecharts support the declaration of operations which can be used within a statechart as actions. These operations have to be implemented by the user before a statechart is executable. Here is an example statechart using an operation:
 
@@ -1068,7 +1068,7 @@ The yakindu statecharts support the declaration of operations which can be used 
 
 Now have a look at the generated code:
 
-bc.. 
+bc(prettyprint).. 
 public interface IDefaultSMStatemachine extends IStatemachine {
 
 	public interface SCInterface {
@@ -1091,7 +1091,7 @@ public interface IDefaultSMStatemachine extends IStatemachine {
 
 p. An additional interface @SCInterfaceOperationCallback@ with the method @myOperation(int param1, boolean param2)@ is generated. This interface has to be implemented by the user and set with the @setSCInterfaceOperationCallback(SCInterfaceOperationCallback operationCallback)@ method so that the statechart can use it:
 
-bc.. 
+bc(prettyprint).. 
 public static void main(String[] args) {
 	DefaultSMStatemachine statemachine = new DefaultSMStatemachine();
 	
@@ -1110,19 +1110,19 @@ public static void main(String[] args) {
 	statemachine.enter();
 	statemachine.runCycle();
 }
-h4. Integration of generated code
+h4(#IntegrationGeneratedCode). Integration of generated code
 
 To get a clue how to integrate the generated java statemachines into your existing projects have a look at the
 @CrossingDemoCycleBased@ class and it's abstract super class @CrossingDemoBase@. The code starts with the main method in @CrossingDemoCycleBased@ class:
 
-bc.. 
+bc(prettyprint).. 
 public static void main(String[] args) {
 
 	new CrossingDemoCycleBased().runTrafficLight();
 }
 p. A new instance of the class is created and the method @runTrafficLight()@ is directly called. This method consist in the super class:
 
-bc.. 
+bc(prettyprint).. 
 public void runTrafficLight() {
 
 		setUpAndRunStatemachine();
@@ -1144,7 +1144,7 @@ public void runTrafficLight() {
 }
 p. This method setups the statemachine and creates the UI content. In a while loop the content of the statemachine is read and the ui is repainted. If the ui shell is closed the loop is left and the statemachine is teared down. The really interresting methods are @setUpAndRunStatemachine()@, @readStatemachinOutput@ and @tearDownStatemachine()@:
 
-bc.. 
+bc(prettyprint).. 
 protected void setUpAndRunStatemachine() {
 
 	statemachine = new TrafficLightWaitingStatemachine();
@@ -1156,7 +1156,7 @@ protected void setUpAndRunStatemachine() {
 }
 p. First a new instance of the generated statemachine is created. Because the traffic light statechart uses timing clauses the default implementation of the @TimerService@ is set. In the next steps the statemachine is initialized and entered. After the enter method ist executed the machine stays in a defined state. Finally the statemachine is passed to the runtime service. This service executes the @runCycle()@ method of the statemachine every 100 ms. So the statemachine executes a run to completion step every 100 ms.
 
-bc.. 
+bc(prettyprint).. 
 protected void readStatemachineOutput() {
 	trafficLightFigure.setRed(statemachine.getSCITrafficLight()
 			.getRed());
@@ -1176,7 +1176,7 @@ p. The generated code contains getters and setters for each variable and event. 
 Hint:
 If outgoing events are raised within the statemachine they remain active until the next run to completion step is started.
 
-bc.. 
+bc(prettyprint).. 
 @Override
 protected void tearDownStatemachine() {
 	// End TimerHandler and RuntimeService.
@@ -1185,15 +1185,15 @@ protected void tearDownStatemachine() {
 }
 p. If the UI thread has been terminated by the user, the state machine will be shut down. It is necessary to end the timer service. Finally the runtime service is cancelled.
 
-h3. Specifications of C code
+h3(#SpecC). Specifications of C code
 
 For C you can checkout the project 'org.yakindu.examples.c.trafficlight' from the Yakindu google code repository ( "Google code link":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples ). The C example contains the statechart, sgen model, graphical widgets and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt. To execute the c example you can run the file org_yakindu_sct_examples_c_trafficlight as 'Local C/C++ application' from the eclipse 'Run As' context menu.
 
-h4. Generated header files
+h4(#generatedHeader). Generated header files
 
 The C code generator generates three header files. The first one is 'sc_types.h':
 
-bc.. 
+bc(prettyprint).. 
 #ifndef SC_TYPES_H_
 #define SC_TYPES_H_
 
@@ -1223,7 +1223,7 @@ typedef void*         sc_eventid;
 #endif /* SC_TYPES_H_ */
 p. It contains some basic definitions for C++ compiler compatibility and typedefs to map the Yakindu statechart types to C types. The next header file is named like the statechart. For the traffic light example it is called 'TrafficLightWaiting.h':
 
-bc.. 
+bc(prettyprint).. 
 #ifndef TRAFFICLIGHTWAITING_H_
 #define TRAFFICLIGHTWAITING_H_
 
@@ -1383,7 +1383,7 @@ h5. Variable and event access
 
 The getters and setters for each variable and event are contained in the header file too. The method names uses the pattern <statechart name>Iface<Interface name>_<set, get or raise>_<variable / event name>. For example the getter for the variable 'red' of the 'pedestrian' interface is named @trafficLightWaitingIfacePedestrian_get_red(TrafficLightWaiting* handle)@.
 
-h4. Optional header file
+h4(#optionalHeader). Optional header file
 
 If the statechart uses timing or external operations an additional header file with the name pattern <statechart name>Required.h is generated. This header file defines method hooks the client code has to implement externally. 
 
@@ -1391,7 +1391,7 @@ h5. Timing service support
 
 p. Because the traffic light example uses timing it contains such a header file:
 
-bc.. 
+bc(prettyprint).. 
 extern "C" {
 #endif 
 
@@ -1450,7 +1450,7 @@ The yakindu statecharts support the declaration of operations which can be used 
 
 Now have a look at the generated code:
 
-bc.. 
+bc(prettyprint).. 
 #ifndef DEFAULTREQUIRED_H_
 #define DEFAULTREQUIRED_H_
 
@@ -1489,7 +1489,7 @@ h4. Integration of generated code
 To get a clue how to integrate the generated c statemachines into your existing projects have a look at the
 @main.cpp@ file. The code starts with the main method:
 
-bc.. 
+bc(prettyprint).. 
 #include "org_yakindu_sct_examples_c_trafficlight.h"
 
 #include <QtGui>
@@ -1525,7 +1525,7 @@ void trafficLightWaiting_unsetTimer(const sc_eventid evid) {
 
 p. First an instance of the main statemchine data structure is created and intialized with the @trafficLightWaiting_init(&handle)@ method. In the next step the Timer is instantiated. The class @TrafficLightTimer@ represents an implementation of a timer service and uses the timer fuctionality of the Qt framework. The @TrafficLightRunner@ solves as a run time service which executes every 100 ms a run to completion step of the statemachine. Within the class @org_yakindu_sct_examples_c_trafficlight@ the runner class and the gui are wired:
 
-bc.. 
+bc(prettyprint).. 
 #include "org_yakindu_sct_examples_c_trafficlight.h"
 
 org_yakindu_sct_examples_c_trafficlight::org_yakindu_sct_examples_c_trafficlight(
