@@ -11,13 +11,19 @@
             description="YAKINDU SCT C Code Generator"
             id="yakindu::c"
             name="YAKINDU SCT C Code Generator">
+         <FeatureLibrary
+               library_id="org.yakindu.generator.core.features">
+         </FeatureLibrary>
+         <FeatureLibrary
+               library_id="org.yakindu.sct.generator.feature.c">
+         </FeatureLibrary>
       </SCTGenerator>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             defaultProvider="org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider"
-            generatorId="yakindu::c"
+            library_id="org.yakindu.sct.generator.feature.c"
             uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>

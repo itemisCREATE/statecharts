@@ -10,13 +10,19 @@
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             name="YAKINDU SCT Java Code Generator">
+          <FeatureLibrary
+                library_id="org.yakindu.generator.core.features">
+          </FeatureLibrary>
+          <FeatureLibrary
+                library_id="org.yakindu.sct.generator.feature.java">
+          </FeatureLibrary>
       </SCTGenerator>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
             defaultProvider="org.yakindu.sct.generator.java.features.JavaFeatureValueProvider"
-            generatorId="yakindu::java"
+            library_id="org.yakindu.sct.generator.feature.java"
             uri="platform:/plugin/org.yakindu.sct.generator.java/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
    </extension>

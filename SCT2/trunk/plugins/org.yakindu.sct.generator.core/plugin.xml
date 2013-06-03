@@ -7,19 +7,22 @@
  <extension
          point="org.yakindu.sct.generator.core.featuretypes">
       <FeatureLibrary
+            library_id="org.yakindu.generator.core.features"
             defaultProvider="org.yakindu.sct.generator.core.features.impl.CoreLibraryDefaultFeatureValueProvider"
             generatorId="ALL"
             uri="platform:/plugin/org.yakindu.sct.generator.core/library/CoreFeatureTypeLibrary.xmi">
       </FeatureLibrary>
       <FeatureLibrary
+            library_id="org.yakindu.generator.core.features.xpand"
             defaultProvider="org.yakindu.sct.generator.core.features.impl.XpandLibraryDefaultFeatureValueProvider"
             generatorId="yakindu::xpand"
             uri="platform:/plugin/org.yakindu.sct.generator.core/library/XpandFeatureTypeLibrary.xmi">
       </FeatureLibrary>
-      <FeatureLibrary 
-   			defaultProvider="org.yakindu.sct.generator.core.features.impl.GenericJavaLibraryDefaultValueProvider"
-      		generatorId="yakindu::generic" 
-          	uri="platform:/plugin/org.yakindu.sct.generator.core/library/GenericJavaFeatureTypeLibrary.xmi">
+      <FeatureLibrary
+            library_id="org.yakindu.generator.core.features.generic"
+            defaultProvider="org.yakindu.sct.generator.core.features.impl.GenericJavaLibraryDefaultValueProvider"
+            generatorId="yakindu::generic"
+            uri="platform:/plugin/org.yakindu.sct.generator.core/library/GenericJavaFeatureTypeLibrary.xmi">
    	  </FeatureLibrary>
    </extension>
  <extension

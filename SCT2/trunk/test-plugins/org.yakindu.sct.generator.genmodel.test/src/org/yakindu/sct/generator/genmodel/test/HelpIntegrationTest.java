@@ -23,7 +23,9 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
+import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDescriptor;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.genmodel.resource.FeatureResourceDescription;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
@@ -107,8 +109,13 @@ public class HelpIntegrationTest {
 	}
 
 	private List<String> getFeaturesWithoutDocumentation(String generatorId) {
+		
+		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
+				.getGeneratorDescriptorForId(generatorId);
+		
 		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
-				.getLibraryDescriptor(generatorId);
+				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+		
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
 		for (LibraryDescriptor desc : libraryDescriptor) {
 			Resource library = resourceSet.getResource(desc.getURI(), true);

@@ -13,6 +13,8 @@ package org.yakindu.sct.generator.core.extensions;
 import static com.google.common.collect.Iterables.transform;
 import static com.google.common.collect.Lists.newArrayList;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.eclipse.core.runtime.CoreException;
@@ -33,6 +35,8 @@ public class GeneratorExtensions {
 	private static final String EXTENSION_POINT_ID = "org.yakindu.sct.generator.core.generator";
 	private static final String ATTRIBUTE_CLASS = "class";
 	private static final String ATTRIBUTE_ID = "id";
+	private static final String LIBRARY_CONFIG_ELEMENT = "FeatureLibrary";
+	private static final String ATTRIBUTE_LIBRARY_ID = "library_id";
 	private static final String ATTRIBUTE_NAME = "name";
 	private static final String ATTRIBUTE_CONTENT_TYPE = "contentType";
 	private static final String ATTRIBUTE_ELEMENT_REF_TYPE = "elementRefType";
@@ -50,11 +54,24 @@ public class GeneratorExtensions {
 
 		public ISCTGenerator createGenerator() {
 			try {
-				return (ISCTGenerator) configElement.createExecutableExtension(ATTRIBUTE_CLASS);
+				return (ISCTGenerator) configElement
+						.createExecutableExtension(ATTRIBUTE_CLASS);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}
 			return null;
+		}
+
+		public List<String> getLibraryIDs() {
+			List<String> libs = new ArrayList<String>();
+			for (IConfigurationElement child : configElement
+					.getChildren(LIBRARY_CONFIG_ELEMENT)) {
+				String lib_id = child.getAttribute(ATTRIBUTE_LIBRARY_ID);
+				if (lib_id != null && !lib_id.isEmpty()) {
+					libs.add(lib_id);
+				}
+			}
+			return libs;
 		}
 
 		public String getId() {
@@ -117,10 +134,13 @@ public class GeneratorExtensions {
 	}
 
 	public static Iterable<GeneratorDescriptor> getGeneratorDescriptors() {
-		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(
-				EXTENSION_POINT_ID);
+		IConfigurationElement[] configurationElements = Platform
+				.getExtensionRegistry().getConfigurationElementsFor(
+						EXTENSION_POINT_ID);
 		if (generatorDescriptors == null) {
-			generatorDescriptors = transform(newArrayList(configurationElements), new CreateGeneratorDescriptor());
+			generatorDescriptors = transform(
+					newArrayList(configurationElements),
+					new CreateGeneratorDescriptor());
 		}
 		return generatorDescriptors;
 	}
@@ -129,13 +149,16 @@ public class GeneratorExtensions {
 	 * returns the Generator Descriptor for the given generator id, or null, if
 	 * the id is unknown
 	 */
-	public static GeneratorDescriptor getGeneratorDescriptorForId(final String generatorId) {
+	public static GeneratorDescriptor getGeneratorDescriptorForId(
+			final String generatorId) {
 		try {
-			return Iterables.find(getGeneratorDescriptors(), new Predicate<GeneratorDescriptor>() {
-				public boolean apply(GeneratorDescriptor input) {
-					return input != null && input.getId() != null && input.getId().equals(generatorId);
-				}
-			});
+			return Iterables.find(getGeneratorDescriptors(),
+					new Predicate<GeneratorDescriptor>() {
+						public boolean apply(GeneratorDescriptor input) {
+							return input != null && input.getId() != null
+									&& input.getId().equals(generatorId);
+						}
+					});
 		} catch (NoSuchElementException ex) {
 			return null;
 		}
