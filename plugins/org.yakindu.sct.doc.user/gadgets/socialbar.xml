@@ -4,6 +4,7 @@
 		<Require feature="dynamic-height" />
 	</ModulePrefs>
 	<Content type="html">
+		<![CDATA[ 
 		<div class="span12 pagination-centered">
 			<h3>
 				Do
@@ -57,5 +58,6 @@
 				</script>
 			</h3>
 		</div>
+		 ]]>
 	</Content>
 </Module>
