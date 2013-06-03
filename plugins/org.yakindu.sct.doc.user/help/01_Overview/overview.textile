@@ -2,7 +2,7 @@
 
 h1. Overview
 
-h2. What are the YAKINDU Statechart Tools 2
+h2(#WhataretheYAKINDUStatechartTools2). What are the YAKINDU Statechart Tools 2
 
 The statechart tools are one central part of YAKINDU: the modular toolkit for model driven development of embedded systems. It is based on the open source development platform Eclipse. The YAKINDU Statechart tools provide the following tools to deal with state machine diagramms:
 
@@ -17,13 +17,13 @@ The following graph shows these features and their relation to each other:
 !images/YAKINDU_features.png! 
 
 
-h2. Who is behind YAKINDU Statechart Tools 2?
+h2(#WhoisbehindYAKINDUStatechartTools2). Who is behind YAKINDU Statechart Tools 2?
 
 The main part of YAKINDU SCT 2 is an open source project ("www.yakindu.org":http://www.yakindu.org ). Most of the developers work for itemis, a well known consulting company specialized on model based development.  
 
 You may ask: Where does the money for Open-Source development come from? Well, we provide professional services around Yakindu. Be it training or on-site consulting, be it development of prototypes or implementation of full-blown IDEs for programming languages. We do not only know the framework very well but we are also experts in programming and domain-specific language design. If you need an advice get in contact with us ("www.yakindu.de":http://www.yakindu.de ). 
 
 
-h2. Who uses the YAKINDU Statechart Tools 2?
+h2(#WhousestheYAKINDUStatechartTools2). Who uses the YAKINDU Statechart Tools 2?
 
-Initially the YAKINDU SCT 2 were designed for the embedded systems industry: automotive, system controls, vending machines etc. But it brings benefit to everyone who needs to design, simulate and develop behavior. People can use the YAKINDU SCT 2 to generate Java, C, or C++.
+p(#Statechartelements).Initially the YAKINDU SCT 2 were designed for the embedded systems industry: automotive, system controls, vending machines etc. But it brings benefit to everyone who needs to design, simulate and develop behavior. People can use the YAKINDU SCT 2 to generate Java, C, or C++.
