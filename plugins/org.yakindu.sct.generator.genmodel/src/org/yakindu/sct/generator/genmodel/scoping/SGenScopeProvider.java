@@ -128,23 +128,25 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 						SGenPackage.Literals.GENERATOR_MODEL);
 		Assert.isNotNull(generatorModel);
 		String generatorId = generatorModel.getGeneratorId();
-		
+
 		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
 				.getGeneratorDescriptorForId(generatorId);
 
-		Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
-				.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
-		
 		Iterable<IEObjectDescription> allElements = Lists.newArrayList();
-		for (LibraryDescriptor desc : libraryDescriptor) {
-			Resource library = resourceSet.getResource(desc.getURI(), true);
-			FeatureResourceDescription description = new FeatureResourceDescription(
-					library);
-			injector.injectMembers(description);
-			allElements = Iterables.concat(allElements,
-					description.getExportedObjects());
-		}
 
+		if (generatorDescriptor != null) {
+			Iterable<LibraryDescriptor> libraryDescriptor = LibraryExtensions
+					.getLibraryDescriptors(generatorDescriptor.getLibraryIDs());
+
+			for (LibraryDescriptor desc : libraryDescriptor) {
+				Resource library = resourceSet.getResource(desc.getURI(), true);
+				FeatureResourceDescription description = new FeatureResourceDescription(
+						library);
+				injector.injectMembers(description);
+				allElements = Iterables.concat(allElements,
+						description.getExportedObjects());
+			}
+		}
 		return new SimpleScope(allElements);
 	}
 }
