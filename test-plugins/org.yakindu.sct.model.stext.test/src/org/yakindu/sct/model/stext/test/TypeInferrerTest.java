@@ -865,6 +865,16 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isStringType(inferType("( 'abc' )")));
 	}
 
+	
+	@Test
+	public void testTernaryExpression() {
+		assertTrue(isIntegerType(inferType("(1<2) ? 4 : 5")));
+		assertTrue(isBooleanType(inferType("(true) ? false : true")));
+		
+		expectIssue(inferType("(true) ? 4 : false"), "Cannot compute a type union for the given types: integer, boolean");
+	}
+
+	
 	protected InferenceResult inferType(String expression) {
 		return inferType(expression, super.internalScope(),
 				super.interfaceScope());
