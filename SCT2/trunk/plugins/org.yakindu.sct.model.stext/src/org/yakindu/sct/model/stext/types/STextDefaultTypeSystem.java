@@ -504,8 +504,8 @@ public class STextDefaultTypeSystem extends AbstractTypeSystem implements
 						IStatus.ERROR));
 			}
 			// compute a union of the second and third operand types
-			InferenceResult unionResult = union(firstOperandType,
-					secondOperandType);
+			InferenceResult unionResult = union(secondOperandType,
+					thirdOperandType);
 			unionResult.getIssues().addAll(issues);
 			return unionResult;
 		default:
