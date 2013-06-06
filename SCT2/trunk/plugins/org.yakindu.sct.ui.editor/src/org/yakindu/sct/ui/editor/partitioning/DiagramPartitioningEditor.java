@@ -94,13 +94,13 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 		super.createPartControl(parent);
 	}
 
+	@SuppressWarnings("restriction")
 	@Override
 	protected void sanityCheckState(IEditorInput input) {
 		super.sanityCheckState(input);
 		// Refresh viewer input since the context may have changed
-		if (getDiagram() != null)
+		if ((getDiagram() != null && viewer != null && !viewer.getControl().isDisposed()))
 			viewer.setInput(DiagramPartitioningUtil.getDiagramContainerHierachy(getDiagram()));
-
 	}
 
 	@Override
