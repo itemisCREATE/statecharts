@@ -14,12 +14,31 @@ import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureCo
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.GENERATOR_PROJECT;
 import static org.yakindu.sct.generator.core.features.impl.IGenericJavaFeatureConstants.LIBRARY_NAME;
 
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.sct.generator.core.features.AbstractDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.stext.stext.FeatureCall;
+
+
+import org.yakindu.sct.generator.core.util.GeneratorUtils;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+
 
 /**
  * 
@@ -52,6 +71,15 @@ public class GenericJavaLibraryDefaultValueProvider extends
 		if (GENERATOR_PROJECT.equals(parameterName) && !projectExists(value)) {
 			return error(String.format("The Project %s does not exist", value));
 		}
+		IJavaProject ijp = JavaCore.create(this.getProject(parameterValue));
+		try {
+			if(ijp.findType(value) == null && GENERATOR_CLASS.equals(parameterName)){
+				return error("Generator class does not exist.");
+			}
+		} catch (JavaModelException e) {
+			// Stacktrace
+			e.printStackTrace();
+		}			
 		if (GENERATOR_CLASS.equals(parameterName)
 				&& !value.matches(GENERATOR_CLASS_REGEX)) {
 			return error("Generator class must be a full qualified class name");

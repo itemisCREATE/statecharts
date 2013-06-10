@@ -34,6 +34,12 @@
           elementRefType="org.yakindu.sct.model.sgraph.Statechart"
           id="yakindu::xpand"
           name="Custom Xpand-based Generator">
+       <FeatureLibrary
+             library_id="org.yakindu.generator.core.features">
+       </FeatureLibrary>
+       <FeatureLibrary
+             library_id="org.yakindu.generator.core.features.xpand">
+       </FeatureLibrary>
     </SCTGenerator>
  </extension>
  <extension
@@ -45,6 +51,12 @@
          elementRefType="org.yakindu.sct.model.sgraph.Statechart"
          id="yakindu::generic"
          name="Custom Xtend2/Java-based Generator">
+      <FeatureLibrary
+            library_id="org.yakindu.generator.core.features">
+      </FeatureLibrary>
+      <FeatureLibrary
+            library_id="org.yakindu.generator.core.features.generic">
+      </FeatureLibrary>
     </SCTGenerator>
  </extension>
   <extension
