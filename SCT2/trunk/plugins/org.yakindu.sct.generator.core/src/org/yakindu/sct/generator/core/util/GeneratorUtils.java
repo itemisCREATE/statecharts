@@ -1,7 +1,7 @@
 package org.yakindu.sct.generator.core.util;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.DEBUG_FEATURE;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.DEBUG_FEATURE_DUMP_SEXEC;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE;
 import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.OUTLET_FEATURE_TARGET_PROJECT;
 

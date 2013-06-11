@@ -14,6 +14,9 @@
                 library_id="org.yakindu.generator.core.features">
           </FeatureLibrary>
           <FeatureLibrary
+                library_id="org.yakindu.generator.core.features.sctbase">
+          </FeatureLibrary>
+          <FeatureLibrary
                 library_id="org.yakindu.sct.generator.feature.java">
           </FeatureLibrary>
       </SCTGenerator>
