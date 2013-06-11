@@ -10,16 +10,16 @@
  */
 package org.yakindu.sct.generator.core.impl;
 
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_CHOICES;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRIES;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
-import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_CHOICES;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_REGION;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTER_SEQUENCES;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRIES;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_ENTRY_ACTIONS;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_ACTIONS;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_REGION;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_EXIT_SEQUENCES;
+import static org.yakindu.sct.generator.core.features.ISCTBaseFeatureConstants.FUNCTION_INLINING_FEATURE_INLINE_REACTIONS;
 import static org.yakindu.sct.generator.core.util.GeneratorUtils.getBoolValue;
 
 import java.io.IOException;
