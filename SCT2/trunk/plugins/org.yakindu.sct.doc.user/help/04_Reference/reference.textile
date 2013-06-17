@@ -1,5 +1,3 @@
-<link href="../../css/bootstrap.css" rel="stylesheet" />
-
 h1(#YAKINDUSCT2Reference). SCT Reference
 
 h2. Statechart elements
