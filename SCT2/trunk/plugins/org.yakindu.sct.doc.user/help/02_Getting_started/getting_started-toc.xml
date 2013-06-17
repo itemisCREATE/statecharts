@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='utf-8' ?>
 <toc topic="help/02_Getting_Started/getting_started.html" label="getting_started">
 	<topic href="help/02_Getting_Started/getting_started.html" label="Getting started">
-		<topic href="help/02_getting_started/getting_started.html#Installation" label="Installation"></topic>
-		<topic href="help/02_getting_started/getting_started.html#Introduction" label="Introduction"></topic>
-		<topic href="help/02_getting_started/getting_started.html#CallHandlingexampleexplained" label="CallHandling example explained"></topic>
-		<topic href="help/02_getting_started/getting_started.html#Prepareaproject" label="Prepare a project"></topic>
-		<topic href="help/02_getting_started/getting_started.html#Createastatechartmodel" label="Create a statechart model"></topic>
-		<topic href="help/02_getting_started/getting_started.html#UsetheEditor" label="Use the Editor"></topic>
-		<topic href="help/02_getting_started/getting_started.html#Simulatingthemodel" label="Simulating the model"></topic>
-		<topic href="help/02_getting_started/getting_started.html#GenerateJavacode" label="Generate Java code"></topic>
-		<topic href="help/02_getting_started/getting_started.html#Integrationwithclientcode" label="Integration with client code"></topic>
-		<topic href="help/02_getting_started/getting_started.html#Overview" label="Weblinks"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#Installation" label="Installation"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#Introduction" label="Introduction"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#CallHandlingexampleexplained" label="CallHandling example explained"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#Prepareaproject" label="Prepare a project"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#Createastatechartmodel" label="Create a statechart model"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#UsetheEditor" label="Use the Editor"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#Simulatingthemodel" label="Simulating the model"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#GenerateJavacode" label="Generate Java code"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#Integrationwithclientcode" label="Integration with client code"></topic>
+		<topic href="help/02_Getting_started/getting_started.html#Overview" label="Weblinks"></topic>
 	</topic>
 </toc>
