@@ -25,7 +25,7 @@
 -->
 	<target name="generate.help" description="Runs the Eclipse help generator on the listed wiki source files">
 		<generate.section.help src.dir="${help.dir}/01_Overview" src.file="overview.textile" prefix="${help.prefix}/01_Overview" />
-		<generate.section.help src.dir="${help.dir}/02_Getting_started" src.file="getting_started.textile" prefix="${help.prefix}/02_Getting_Started" />
+		<generate.section.help src.dir="${help.dir}/02_Getting_started" src.file="getting_started.textile" prefix="${help.prefix}/02_Getting_started" />
 		<generate.section.help src.dir="${help.dir}/03_Tasks" src.file="tasks.textile" prefix="${help.prefix}/03_Tasks" />
 		<generate.section.help src.dir="${help.dir}/04_Reference" src.file="reference.textile" prefix="${help.prefix}/04_Reference" />
 	</target>
