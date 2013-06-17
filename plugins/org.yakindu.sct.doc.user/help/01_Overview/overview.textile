@@ -1,5 +1,3 @@
-<link href="../css/bootstrap.css" rel="stylesheet" />
-
 h1. Overview
 
 h2(#WhataretheYAKINDUStatechartTools2). What are the YAKINDU Statechart Tools 2
@@ -26,4 +24,4 @@ You may ask: Where does the money for Open-Source development come from? Well, w
 
 h2(#WhousestheYAKINDUStatechartTools2). Who uses the YAKINDU Statechart Tools 2?
 
-p(#Statechartelements).Initially the YAKINDU SCT 2 were designed for the embedded systems industry: automotive, system controls, vending machines etc. But it brings benefit to everyone who needs to design, simulate and develop behavior. People can use the YAKINDU SCT 2 to generate Java, C, or C++.
+p(#Statechartelements).Initially the YAKINDU SCT 2 were designed for the embedded systems industry: automotive, system controls, vending machines etc. ut it brings benefit to everyone who needs to design, simulate and develop behavior. People can use the YAKINDU SCT 2 to generate Java, C, or C++.

@@ -6,9 +6,6 @@
 		<link type="text/css" rel="stylesheet" href="../style.css"/>
 	</head>
 	<body>
-		<p><link href="../../css/bootstrap.css" rel="stylesheet" />
-			<br/><link href="../../css/custom.css" rel="stylesheet" /> 
-		</p>
 		<h1 id="Tasks">Tasks</h1>
 		<h2 id="SimulatingOperationsWithCustomJavaCode">Simulating Operations With Custom Java Code</h2>
 		<p>To simulate a model with operations it is possible to use custom Java code that mocks the desired behavior or even to simulate against an existing java backend. 
@@ -18,9 +15,9 @@
 			<img border="0" src="images/operationsExample.png"/>
 		</p>
 		<p>To simulate the statechart above, a new Java Class must be created matching the method signature defined in the statechart. This class must be placed onto the classpath of the
-			<br/>statecharts project.  
+			<br/>statecharts project. 
 		</p>
-		<pre><code>package example;
+		<pre class="prettyprint"><code>package example;
 public class Calculator {
    public int add(int param1, int param2) {
       return param1 + param2;
@@ -61,19 +58,19 @@ public class Calculator {
 			<img border="0" src="images/genmodelwizardchooselanguage.jpg"/>
 		</p>
 		<p>The result is an .sgen file of the following format: </p>
-		<pre><code>GeneratorModel for [GeneratorId] {
+		<pre class="prettyprint"><code>GeneratorModel for [GeneratorId] {
 	statechart [StatechartReference] {
 		feature [Feature] {
 			[ParameterName] = [ParameterValue]
 		}
 	}
 }
+ 
 </code></pre>
 		<p>The [GeneratorId] is the unique id of the Generator. Currently, the following Generators are supported out of the box:</p>
 		<ol>
 			<li>yakindu::java &#8211; Generator ID for the Java Code Generator </li>
 			<li>yakindu::c &#8211; Generator ID for the C Code Generator</li>
-			<li>yakindu::cpp &#8211; Generator ID for the C++ Code Generator</li>
 			<li>yakindu::xpand &#8211; Generator ID for custom Xpand based Code Generators</li>
 			<li>yakindu::generic &#8211; Generator ID for custom Java based Code Generators  </li>
 		</ol>

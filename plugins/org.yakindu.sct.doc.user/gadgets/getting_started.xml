@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<Module>
-	<ModulePrefs title="getting started">
-		<Require feature="dynamic-height" />
-	</ModulePrefs>
-	<Content type="html"
-		
-		href="http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/plugins/org.yakindu.sct.doc.user/help/02_Getting_started/getting_started.html" />
-</Module>

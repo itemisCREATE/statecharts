@@ -10,7 +10,7 @@
 			<topic href="help/04_Reference/reference.html#Junction" label="Junction"></topic>
 			<topic href="help/04_Reference/reference.html#CompositeState" label="Composite State">
 				<topic href="help/04_Reference/reference.html#Orthogonalstates" label="Orthogonal states"></topic>
-				<topic href="help/04_Reference/reference.html#Subdiagrams" label="Subdiagrams "></topic>
+				<topic href="help/04_Reference/reference.html#Submachinestates" label="Subdiagrams "></topic>
 			</topic>
 			<topic href="help/04_Reference/reference.html#ShallowHistory" label="Shallow History"></topic>
 			<topic href="help/04_Reference/reference.html#DeepHistory" label="Deep History"></topic>
@@ -53,8 +53,6 @@
 				<topic href="help/04_Reference/reference.html#activestate" label="active(state)"></topic>
 			</topic>
 			<topic href="help/04_Reference/reference.html#LocalReactions" label="LocalReactions"></topic>
-			<topic href="help/04_Reference/reference.html#EntryPoints" label="EntryPoints"></topic>
-			<topic href="help/04_Reference/reference.html#ExitPoints" label="ExitPoints"></topic>
 		</topic>
 		<topic href="help/04_Reference/reference.html#SGenGeneratorFeatures" label="SGen Generator Features">
 			<topic href="help/04_Reference/reference.html#Outlet" label="Outlet"></topic>
@@ -75,27 +73,27 @@
 				<topic href="help/04_Reference/reference.html#Template" label="Template"></topic>
 			</topic>
 		</topic>
-		<topic href="help/04_Reference/reference.html#APIspecificationsofthegeneratedcode" label="API specifications of the generated code">
+		<topic href="help/04_Reference/reference.html#APISecification" label="API specifications of the generated code">
 			<topic href="help/04_Reference/reference.html#SpecificationsofJavacode" label="Specifications of Java code">
 				<topic href="help/04_Reference/reference.html#InterfaceIStatemachine" label="Interface IStatemachine"></topic>
 				<topic href="help/04_Reference/reference.html#Timedstatemachines" label="Timed statemachines"></topic>
 				<topic href="help/04_Reference/reference.html#DefaultimplementationofITimerService" label="Default implementation of ITimerService"></topic>
-				<topic href="help/04_Reference/reference.html#Runtimeservice" label="Runtime service"></topic>
-				<topic href="help/04_Reference/reference.html#InterfacesVariableandEventaccess" label="Interfaces, Variable and Event access"></topic>
-				<topic href="help/04_Reference/reference.html#Interfaceobservers" label="Interface observers"></topic>
-				<topic href="help/04_Reference/reference.html#Operationcallbacks" label="Operation callbacks"></topic>
-				<topic href="help/04_Reference/reference.html#Integrationofgeneratedcode" label="Integration of generated code"></topic>
+				<topic href="help/04_Reference/reference.html#RuntimeService" label="Runtime service"></topic>
+				<topic href="help/04_Reference/reference.html#InterVar" label="Interfaces, Variable and Event access"></topic>
+				<topic href="help/04_Reference/reference.html#InterfaceObservers" label="Interface observers"></topic>
+				<topic href="help/04_Reference/reference.html#OperationCallback" label="Operation callbacks"></topic>
+				<topic href="help/04_Reference/reference.html#IntegrationGeneratedCode" label="Integration of generated code"></topic>
 			</topic>
-			<topic href="help/04_Reference/reference.html#SpecificationsofCcode" label="Specifications of C code">
-				<topic href="help/04_Reference/reference.html#Generatedheaderfiles" label="Generated header files">
+			<topic href="help/04_Reference/reference.html#SpecC" label="Specifications of C code">
+				<topic href="help/04_Reference/reference.html#generatedHeader" label="Generated header files">
 					<topic href="help/04_Reference/reference.html#Basestatechartmethods" label="Base statechart methods"></topic>
 					<topic href="help/04_Reference/reference.html#Variableandeventaccess" label="Variable and event access"></topic>
 				</topic>
-				<topic href="help/04_Reference/reference.html#Optionalheaderfile" label="Optional header file">
+				<topic href="help/04_Reference/reference.html#optionalHeader" label="Optional header file">
 					<topic href="help/04_Reference/reference.html#Timingservicesupport" label="Timing service support"></topic>
-					<topic href="help/04_Reference/reference.html#Operationcallbacks2" label="Operation callbacks"></topic>
+					<topic href="help/04_Reference/reference.html#Operationcallbacks" label="Operation callbacks"></topic>
 				</topic>
-				<topic href="help/04_Reference/reference.html#Integrationofgeneratedcode2" label="Integration of generated code"></topic>
+				<topic href="help/04_Reference/reference.html#Integrationofgeneratedcode" label="Integration of generated code"></topic>
 			</topic>
 		</topic>
 	</topic>
