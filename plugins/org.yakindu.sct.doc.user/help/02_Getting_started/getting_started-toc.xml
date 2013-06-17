@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8' ?>
-<toc topic="help/02_Getting_Started/getting_started.html" label="getting_started">
-	<topic href="help/02_Getting_Started/getting_started.html" label="Getting started">
+<toc topic="help/02_Getting_started/getting_started.html" label="getting_started">
+	<topic href="help/02_Getting_started/getting_started.html" label="Getting started">
 		<topic href="help/02_Getting_started/getting_started.html#Installation" label="Installation"></topic>
 		<topic href="help/02_Getting_started/getting_started.html#Introduction" label="Introduction"></topic>
 		<topic href="help/02_Getting_started/getting_started.html#CallHandlingexampleexplained" label="CallHandling example explained"></topic>
