@@ -524,7 +524,7 @@ h4(#Debug). Debug
 
 The *Debug* feature dumps the Execution Model to the target folder as xmi model. It is an *optional* feature and consists of the following parameters:
 
-# __dumpSexec__  (Boolean, required): The license text to add as a header  
+# __dumpSexec__  (Boolean, required): Dumps the execution model as xmi model
 
 Example configuration:
 
