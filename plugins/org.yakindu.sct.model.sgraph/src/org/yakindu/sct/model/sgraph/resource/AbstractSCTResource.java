@@ -347,11 +347,11 @@ public abstract class AbstractSCTResource extends GMFResource {
 	}
 
 	protected void serializeSpecificationElement(SpecificationElement element) {
-		isSerializing = true;
 		if (getSyntaxDiagnostics().get(element).size() > 0 || getLinkingDiagnostics().get(element).size() > 0) {
 			return;
 		}
 		try {
+			isSerializing = true;
 			if (element instanceof Transition) {
 				serializeTransition((Transition) element);
 			} else if (element instanceof State) {
