@@ -22,7 +22,7 @@ import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.LabelEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.tools.DragEditPartsTrackerEx;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
-import org.eclipse.gmf.runtime.draw2d.ui.figures.LabelEx;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.ShapeStyle;
 import org.eclipse.gmf.runtime.notation.View;
@@ -46,15 +46,15 @@ public abstract class ExternalXtextLabelEditPart extends LabelEditPart implement
 
 	@Override
 	protected IFigure createFigure() {
-		final LabelEx label = new LabelEx();
-		label.setLabelAlignment(PositionConstants.LEFT);
-		label.setTextAlignment(PositionConstants.TOP);
+		final WrappingLabel label = new WrappingLabel();
+		label.setTextWrap(true);
+		label.setAlignment(PositionConstants.LEFT | PositionConstants.TOP);
 		return label;
 	}
 
 	@Override
-	public LabelEx getFigure() {
-		return (LabelEx) super.getFigure();
+	public WrappingLabel getFigure() {
+		return (WrappingLabel) super.getFigure();
 	}
 
 	public void setLabelText(final String text) {

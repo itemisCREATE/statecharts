@@ -140,20 +140,18 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	 *            figure of the <code>source</code> edit part must be of type
 	 *            <code>WrapLabel</code>.
 	 */
-	public XtextDirectEditManager(IXtextAwareEditPart source,
-			Injector injector, int style) {
+	public XtextDirectEditManager(IXtextAwareEditPart source, Injector injector, int style) {
 		this(source, null, getTextCellEditorLocator(source), injector, style);
 	}
 
-	public XtextDirectEditManager(IXtextAwareEditPart source,
-			Injector injector, int style,
+	public XtextDirectEditManager(IXtextAwareEditPart source, Injector injector, int style,
 			IXtextFakeContextResourcesProvider provider) {
 		this(source, null, getTextCellEditorLocator(source), injector, style);
 		this.fakeProvider = provider;
 	}
 
-	public XtextDirectEditManager(IXtextAwareEditPart source,
-			Injector injector, int style, IContextElementProvider provider) {
+	public XtextDirectEditManager(IXtextAwareEditPart source, Injector injector, int style,
+			IContextElementProvider provider) {
 		this(source, null, getTextCellEditorLocator(source), injector, style);
 		this.contextProvider = provider;
 	}
@@ -163,9 +161,8 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	 * @param editorType
 	 * @param locator
 	 */
-	public XtextDirectEditManager(GraphicalEditPart source,
-			Class<?> editorType, CellEditorLocator locator, Injector injector,
-			int style) {
+	public XtextDirectEditManager(GraphicalEditPart source, Class<?> editorType, CellEditorLocator locator,
+			Injector injector, int style) {
 		super(source, editorType, locator);
 		this.editorType = editorType;
 		this.injector = injector;
@@ -179,11 +176,9 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	 * @return the <code>CellEditorLocator</code> that is appropriate for the
 	 *         source <code>EditPart</code>
 	 */
-	public static CellEditorLocator getTextCellEditorLocator(
-			final IXtextAwareEditPart source) {
+	public static CellEditorLocator getTextCellEditorLocator(final IXtextAwareEditPart source) {
 
-		final ILabelDelegate label = (ILabelDelegate) source
-				.getAdapter(ILabelDelegate.class);
+		final ILabelDelegate label = (ILabelDelegate) source.getAdapter(ILabelDelegate.class);
 		if (label != null) {
 			return new CellEditorLocator() {
 
@@ -195,8 +190,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 						// if there is no text, let's assume a default size
 						// of one character because it looks silly when the cell
 						// editor is tiny.
-						rect.setSize(TextUtilities.INSTANCE.getTextExtents(
-								"a", text.getFont())); //$NON-NLS-1$
+						rect.setSize(TextUtilities.INSTANCE.getTextExtents("a", text.getFont())); //$NON-NLS-1$
 
 						if (label.isTextWrapOn()) {
 							// adjust the location of the cell editor based on
@@ -227,33 +221,26 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 							// see the text shifting down even in a label on a
 							// GEF
 							// logic diagram when zoomed into 400%.
-							int charHeight = FigureUtilities.getFontMetrics(
-									text.getFont()).getHeight();
+							int charHeight = FigureUtilities.getFontMetrics(text.getFont()).getHeight();
 							rect.resize(0, charHeight / 2);
 						} else {
 
-							rect.setSize(new Dimension(text.computeSize(
-									SWT.DEFAULT, SWT.DEFAULT)));
+							rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT, SWT.DEFAULT)));
 
 							// If SWT.WRAP is not passed in as a style of the
 							// TextCellEditor, then for some reason the first
 							// character disappears upon entering the second
 							// character. This should be investigated and an
 							// SWT bug logged.
-							int avr = FigureUtilities.getFontMetrics(
-									text.getFont()).getAverageCharWidth();
-							rect.setSize(new Dimension(text.computeSize(
-									SWT.DEFAULT, SWT.DEFAULT)).expand(avr * 2,
-									0));
+							int avr = FigureUtilities.getFontMetrics(text.getFont()).getAverageCharWidth();
+							rect.setSize(new Dimension(text.computeSize(SWT.DEFAULT, SWT.DEFAULT)).expand(avr * 2, 0));
 						}
 					}
 
-					org.eclipse.swt.graphics.Rectangle newRect = text
-							.computeTrim(rect.x, rect.y, rect.width,
-									rect.height);
+					org.eclipse.swt.graphics.Rectangle newRect = text.computeTrim(rect.x, rect.y, rect.width,
+							rect.height);
 					if (!newRect.equals(text.getBounds())) {
-						text.setBounds(newRect.x, newRect.y, newRect.width,
-								newRect.height);
+						text.setBounds(newRect.x, newRect.y, newRect.width, newRect.height);
 					}
 				}
 			};
@@ -266,8 +253,12 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 				Rectangle rect = source.getFigure().getBounds().getCopy();
 				// Added min width because it looks silly if the label has a
 				// width of 0
-				if (rect.width == 0)
-					rect.width = LABEL_MIN_WIDTH;
+				rect.width = Math.max(rect.width, LABEL_MIN_WIDTH);
+				if (!text.isDisposed() && text.getFont() != null && !text.getFont().isDisposed()) {
+					Dimension fontMetrics = TextUtilities.INSTANCE.getTextExtents("a", text.getFont()).getCopy();
+					source.getFigure().translateToRelative(fontMetrics);
+					rect.height = Math.max(rect.height, fontMetrics.height);
+				}
 				source.getFigure().translateToAbsolute(rect);
 				if (!rect.equals(new Rectangle(text.getBounds()))) {
 					text.setBounds(rect.x, rect.y, rect.width, rect.height);
@@ -286,13 +277,11 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	 */
 	protected CellEditor createCellEditorOn(Composite composite) {
 
-		
 		Composite parent = new Composite(composite, SWT.None);
 		FillLayout fillLayout = new FillLayout();
 		fillLayout.marginWidth = 10;
 		parent.setLayout(fillLayout);
-		
-		
+
 		// if the client has overridden this class and provided their own editor
 		// type, then we should use that
 		if (editorType != null) {
@@ -300,12 +289,10 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 		}
 		XtextStyledTextCellEditorEx editor;
 		if (fakeProvider != null) {
-			editor = new XtextStyledTextCellEditorEx(style, injector,
-					fakeProvider);
+			editor = new XtextStyledTextCellEditorEx(style, injector, fakeProvider);
 			editor.create(composite);
 		} else if (contextProvider != null) {
-			editor = new XtextStyledTextCellEditorEx(style, injector,
-					contextProvider);
+			editor = new XtextStyledTextCellEditorEx(style, injector, contextProvider);
 			editor.create(composite);
 		} else {
 			editor = new XtextStyledTextCellEditorEx(style, injector);
@@ -330,8 +317,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	protected Font getScaledFont(IFigure label) {
 		Font scaledFont = label.getFont();
 		FontData data = scaledFont.getFontData()[0];
-		Dimension fontSize = new Dimension(0, MapModeUtil.getMapMode(label)
-				.DPtoLP(data.getHeight()));
+		Dimension fontSize = new Dimension(0, MapModeUtil.getMapMode(label).DPtoLP(data.getHeight()));
 		label.translateToAbsolute(fontSize);
 
 		if (Math.abs(data.getHeight() - fontSize.height) < 2)
@@ -342,12 +328,9 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 			cachedFontDescriptors.add(fontDescriptor);
 			return getResourceManager().createFont(fontDescriptor);
 		} catch (DeviceResourceException e) {
-			Trace.catching(DiagramUIPlugin.getInstance(),
-					DiagramUIDebugOptions.EXCEPTIONS_CATCHING, getClass(),
+			Trace.catching(DiagramUIPlugin.getInstance(), DiagramUIDebugOptions.EXCEPTIONS_CATCHING, getClass(),
 					"getScaledFont", e); //$NON-NLS-1$
-			Log.error(DiagramUIPlugin.getInstance(),
-					DiagramUIStatusCodes.IGNORED_EXCEPTION_WARNING,
-					"getScaledFont", e); //$NON-NLS-1$
+			Log.error(DiagramUIPlugin.getInstance(), DiagramUIStatusCodes.IGNORED_EXCEPTION_WARNING, "getScaledFont", e); //$NON-NLS-1$
 		}
 		return JFaceResources.getDefaultFont();
 	}
@@ -368,9 +351,8 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 		// Hook the cell editor's copy/paste actions to the actionBars so that
 		// they can
 		// be invoked via keyboard shortcuts.
-		actionBars = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActiveEditor().getEditorSite()
-				.getActionBars();
+		actionBars = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+				.getEditorSite().getActionBars();
 		saveCurrentActions(actionBars);
 		actionHandler = new CellEditorActionHandler(actionBars);
 		actionHandler.addCellEditor(getCellEditor());
@@ -382,9 +364,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	 */
 	protected void commit() {
 		Shell activeShell = Display.getCurrent().getActiveShell();
-		if (activeShell != null
-				&& getCellEditor().getControl().getShell()
-						.equals(activeShell.getParent())) {
+		if (activeShell != null && getCellEditor().getControl().getShell().equals(activeShell.getParent())) {
 			Control[] children = activeShell.getChildren();
 			if (children.length == 1 && children[0] instanceof Table) {
 				/*
@@ -392,8 +372,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 				 * stay in focus
 				 */
 				getCellEditor().getControl().setVisible(true);
-				((XtextStyledTextCellEditorEx) getCellEditor())
-						.setDeactivationLock(true);
+				((XtextStyledTextCellEditorEx) getCellEditor()).setDeactivationLock(true);
 				return;
 			}
 		}
@@ -434,8 +413,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 			}
 		});
 
-		for (Iterator<FontDescriptor> iter = cachedFontDescriptors.iterator(); iter
-				.hasNext();) {
+		for (Iterator<FontDescriptor> iter = cachedFontDescriptors.iterator(); iter.hasNext();) {
 			getResourceManager().destroyFont((FontDescriptor) iter.next());
 		}
 		cachedFontDescriptors.clear();
@@ -479,8 +457,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 
 		// See RATLC00522324
 		if (cellEditor instanceof TextCellEditorEx) {
-			((TextCellEditorEx) cellEditor)
-					.setValueAndProcessEditOccured(toEdit);
+			((TextCellEditorEx) cellEditor).setValueAndProcessEditOccured(toEdit);
 		} else {
 			cellEditor.setValue(toEdit);
 		}
@@ -517,8 +494,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	 *         error), new Font otherwise.
 	 */
 	private Font getZoomLevelFont(Font actualFont, Display display) {
-		Object zoom = getEditPart().getViewer().getProperty(
-				ZoomManager.class.toString());
+		Object zoom = getEditPart().getViewer().getProperty(ZoomManager.class.toString());
 
 		if (zoom != null) {
 			double zoomLevel = ((ZoomManager) zoom).getZoom();
@@ -532,9 +508,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 			for (int i = 0; i < fd.length; i++) {
 				tempFD = actualFont.getFontData()[i];
 
-				fd[i] = new FontData(tempFD.getName(),
-						(int) (zoomLevel * tempFD.getHeight()),
-						tempFD.getStyle());
+				fd[i] = new FontData(tempFD.getName(), (int) (zoomLevel * tempFD.getHeight()), tempFD.getStyle());
 			}
 
 			try {
@@ -542,11 +516,9 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 				cachedFontDescriptors.add(fontDescriptor);
 				return getResourceManager().createFont(fontDescriptor);
 			} catch (DeviceResourceException e) {
-				Trace.catching(DiagramUIPlugin.getInstance(),
-						DiagramUIDebugOptions.EXCEPTIONS_CATCHING, getClass(),
+				Trace.catching(DiagramUIPlugin.getInstance(), DiagramUIDebugOptions.EXCEPTIONS_CATCHING, getClass(),
 						"getZoomLevelFonts", e); //$NON-NLS-1$
-				Log.error(DiagramUIPlugin.getInstance(),
-						DiagramUIStatusCodes.IGNORED_EXCEPTION_WARNING,
+				Log.error(DiagramUIPlugin.getInstance(), DiagramUIStatusCodes.IGNORED_EXCEPTION_WARNING,
 						"getZoomLevelFonts", e); //$NON-NLS-1$
 
 				return actualFont;
@@ -561,8 +533,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 		IFigure fig = getEditPart().getFigure();
 
 		Control control = getCellEditor().getControl();
-		this.zoomLevelFont = getZoomLevelFont(fig.getFont(),
-				control.getDisplay());
+		this.zoomLevelFont = getZoomLevelFont(fig.getFont(), control.getDisplay());
 
 		control.setFont(this.zoomLevelFont);
 
@@ -591,8 +562,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 		// make sure the diagram doesn't receive the click event..
 		getCellEditor().getControl().setCapture(true);
 
-		if (getCellEditor() != null
-				&& getCellEditor().getControl().getBounds().contains(location))
+		if (getCellEditor() != null && getCellEditor().getControl().getBounds().contains(location))
 			sendMouseClick(location);
 	}
 
@@ -628,8 +598,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 		// enough when in autosize mode because it doesn't listen to textflow
 		// size changes. The superclass should be modified to not assume we want
 		// to listen to the editpart's figure.
-		ILabelDelegate label = (ILabelDelegate) getEditPart().getAdapter(
-				ILabelDelegate.class);
+		ILabelDelegate label = (ILabelDelegate) getEditPart().getAdapter(ILabelDelegate.class);
 		if (label != null && getEditPart().getFigure() instanceof WrappingLabel) {
 
 			textFigureListener = new AncestorListener.Stub() {
@@ -638,8 +607,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 					getLocator().relocate(getCellEditor());
 				}
 			};
-			((IFigure) ((WrappingLabel) getEditPart().getFigure())
-					.getTextFigure().getChildren().get(0))
+			((IFigure) ((WrappingLabel) getEditPart().getFigure()).getTextFigure().getChildren().get(0))
 					.addAncestorListener(textFigureListener);
 		}
 	}
@@ -654,11 +622,9 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 			listenersAttached = false;
 			super.unhookListeners();
 
-			ILabelDelegate label = (ILabelDelegate) getEditPart().getAdapter(
-					ILabelDelegate.class);
+			ILabelDelegate label = (ILabelDelegate) getEditPart().getAdapter(ILabelDelegate.class);
 			if (label != null && textFigureListener != null) {
-				((IFigure) ((WrappingLabel) getEditPart().getFigure())
-						.getTextFigure().getChildren().get(0))
+				((IFigure) ((WrappingLabel) getEditPart().getFigure()).getTextFigure().getChildren().get(0))
 						.removeAncestorListener(textFigureListener);
 				textFigureListener = null;
 			}
@@ -674,8 +640,6 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 			listenersAttached = true;
 		}
 	}
-	
-	
 
 	public void showFeedback() {
 		try {
@@ -691,8 +655,7 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	 */
 	protected IFigure getCellEditorFrame() {
 		IFigure cellEditorFrame = super.getCellEditorFrame();
-		cellEditorFrame.setBorder(new CompoundBorder(new MarginBorder(
-				new Insets(0, 10, 0, 0)), BORDER_FRAME));
+		cellEditorFrame.setBorder(new CompoundBorder(new MarginBorder(new Insets(0, 10, 0, 0)), BORDER_FRAME));
 		return cellEditorFrame;
 	}
 
@@ -709,17 +672,14 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	 * @return
 	 */
 	protected ResourceManager getResourceManager() {
-		return ((DiagramGraphicalViewer) getEditPart().getViewer())
-				.getResourceManager();
+		return ((DiagramGraphicalViewer) getEditPart().getViewer()).getResourceManager();
 	}
 
 	private void saveCurrentActions(IActionBars _actionBars) {
 		copy = _actionBars.getGlobalActionHandler(ActionFactory.COPY.getId());
 		paste = _actionBars.getGlobalActionHandler(ActionFactory.PASTE.getId());
-		delete = _actionBars.getGlobalActionHandler(ActionFactory.DELETE
-				.getId());
-		selectAll = _actionBars.getGlobalActionHandler(ActionFactory.SELECT_ALL
-				.getId());
+		delete = _actionBars.getGlobalActionHandler(ActionFactory.DELETE.getId());
+		selectAll = _actionBars.getGlobalActionHandler(ActionFactory.SELECT_ALL.getId());
 		cut = _actionBars.getGlobalActionHandler(ActionFactory.CUT.getId());
 		find = _actionBars.getGlobalActionHandler(ActionFactory.FIND.getId());
 		undo = _actionBars.getGlobalActionHandler(ActionFactory.UNDO.getId());
@@ -729,10 +689,8 @@ public class XtextDirectEditManager extends DirectEditManagerEx {
 	private void restoreSavedActions(IActionBars _actionBars) {
 		_actionBars.setGlobalActionHandler(ActionFactory.COPY.getId(), copy);
 		_actionBars.setGlobalActionHandler(ActionFactory.PASTE.getId(), paste);
-		_actionBars
-				.setGlobalActionHandler(ActionFactory.DELETE.getId(), delete);
-		_actionBars.setGlobalActionHandler(ActionFactory.SELECT_ALL.getId(),
-				selectAll);
+		_actionBars.setGlobalActionHandler(ActionFactory.DELETE.getId(), delete);
+		_actionBars.setGlobalActionHandler(ActionFactory.SELECT_ALL.getId(), selectAll);
 		_actionBars.setGlobalActionHandler(ActionFactory.CUT.getId(), cut);
 		_actionBars.setGlobalActionHandler(ActionFactory.FIND.getId(), find);
 		_actionBars.setGlobalActionHandler(ActionFactory.UNDO.getId(), undo);
