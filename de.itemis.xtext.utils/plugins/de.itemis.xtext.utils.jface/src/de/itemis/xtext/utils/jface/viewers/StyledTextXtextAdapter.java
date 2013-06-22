@@ -26,7 +26,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.IWorkbenchPartSite;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
 import org.eclipse.ui.swt.IFocusService;
@@ -168,11 +167,20 @@ public class StyledTextXtextAdapter {
 	}
 
 	protected void initSelectionProvider() {
-		XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
-		ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(
-				xtextStyledTextSelectionProvider);
-		styledText.addFocusListener(listener);
-		styledText.addDisposeListener(listener);
+		// Overrides the editors selection provider to provide the text
+		// selection if opened within an editor context
+		try {
+			IWorkbenchPartSite site = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+					.getActiveEditor().getSite();
+			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
+			ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(site,
+					xtextStyledTextSelectionProvider);
+			styledText.addFocusListener(listener);
+			styledText.addDisposeListener(listener);
+		} catch (NullPointerException ex) {
+			//Do nothing, not opened within editor context
+		}
+
 	}
 
 	private void createContentAssistDecoration(StyledText styledText) {
@@ -350,10 +358,10 @@ public class StyledTextXtextAdapter {
 		private ISelectionProvider selectionProviderOnFocusLost;
 		private IWorkbenchPartSite site;
 
-		public ChangeSelectionProviderOnFocusGain(ISelectionProvider selectionProviderOnFocusGain) {
+		public ChangeSelectionProviderOnFocusGain(IWorkbenchPartSite site,
+				ISelectionProvider selectionProviderOnFocusGain) {
 			this.selectionProviderOnFocusGain = selectionProviderOnFocusGain;
-			IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
-			site = window.getActivePage().getActiveEditor().getSite();
+			this.site = site;
 		}
 
 		public void focusLost(FocusEvent e) {
