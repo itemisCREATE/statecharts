@@ -54,52 +54,39 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	 * shouldn't be displayed by the proposal view.
 	 */
 	@Override
-	public void completeKeyword(Keyword keyword,
-			ContentAssistContext contentAssistContext,
+	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
 			ICompletionProposalAcceptor acceptor) {
 		List<Keyword> suppressKeywords = new ArrayList<Keyword>();
 		// context Transition
 		if (contentAssistContext.getRootModel() instanceof TransitionSpecification) {
-			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess()
-					.getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess()
-					.getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
 		}
 		// context States
 		else if (contentAssistContext.getRootModel() instanceof SimpleScope) {
-			suppressKeywords.addAll(getKeywords(grammarAccess
-					.getVariableDefinitionAccess().getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess
-					.getEventDefinitionAccess().getGroup().eContents()));
-//			suppressKeywords.addAll(getKeywords(grammarAccess.getExitpointAccess()
-//					.getGroup().eContents()));
-//			suppressKeywords.addAll(getKeywords(grammarAccess.getEntrypointAccess()
-//					.getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess()
-					.getAlternatives().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess
-					.getOperationDefinitionAccess().getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getVariableDefinitionAccess().getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getEventDefinitionAccess().getGroup().eContents()));
+			// suppressKeywords.addAll(getKeywords(grammarAccess.getExitpointAccess()
+			// .getGroup().eContents()));
+			// suppressKeywords.addAll(getKeywords(grammarAccess.getEntrypointAccess()
+			// .getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess().getAlternatives().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getOperationDefinitionAccess().getGroup().eContents()));
 		}
 		// context Statechart
 		else if (contentAssistContext.getRootModel() instanceof StatechartSpecification) {
-			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess()
-					.getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess()
-					.getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
 		}
 
 		EObject currentModel = contentAssistContext.getCurrentModel();
 		if (currentModel instanceof InterfaceScope) {
-			suppressKeywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess()
-					.getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess()
-					.getGroup().eContents()));
-//			suppressKeywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
-//					.getGroup().eContents()));
-			suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess()
-					.getAlternatives().eContents()));
-			suppressKeywords.add(grammarAccess.getDirectionAccess()
-					.getLOCALLocalKeyword_0_0());
+			suppressKeywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess().getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess().getGroup().eContents()));
+			// suppressKeywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
+			// .getGroup().eContents()));
+			suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess().getAlternatives().eContents()));
+			suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
 		}
 
 		if (currentModel instanceof FeatureCall) {
@@ -112,21 +99,17 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		if (currentModel instanceof ElementReferenceExpression) {
 			ElementReferenceExpression referenceExpression = (ElementReferenceExpression) currentModel;
 			if (!(referenceExpression.getReference() instanceof Operation)) {
-				suppressKeywords.add(grammarAccess
-						.getElementReferenceExpressionAccess()
+				suppressKeywords.add(grammarAccess.getElementReferenceExpressionAccess()
 						.getOperationCallLeftParenthesisKeyword_2_0_0());
 			}
 		}
 		if (currentModel instanceof InternalScope) {
-			suppressKeywords.add(grammarAccess.getDirectionAccess()
-					.getINInKeyword_1_0());
-			suppressKeywords.add(grammarAccess.getDirectionAccess()
-					.getOUTOutKeyword_2_0());
+			suppressKeywords.add(grammarAccess.getDirectionAccess().getINInKeyword_1_0());
+			suppressKeywords.add(grammarAccess.getDirectionAccess().getOUTOutKeyword_2_0());
 		}
 
 		if (!suppressKeywords.contains(keyword)) {
-			super.completeKeyword(keyword, contentAssistContext,
-					new AcceptorDelegate(acceptor));
+			super.completeKeyword(keyword, contentAssistContext, new AcceptorDelegate(acceptor));
 
 		}
 	}
@@ -144,28 +127,25 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	@Override
-	public void complete_BOOL(EObject model, RuleCall ruleCall,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(
-				model, "boolean", acceptor);
+	public void complete_BOOL(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "boolean", acceptor);
 
 		for (String s : new String[] { "true", "false", "yes", "no" }) {
-			ICompletionProposal proposal = createCompletionProposal(s, s
-					+ " - " + ruleCall.getRule().getName(), null, context);
+			ICompletionProposal proposal = createCompletionProposal(s, s + " - " + ruleCall.getRule().getName(), null,
+					context);
 
 			priorityOptimizer.accept(proposal);
 		}
 	}
 
-	protected ICompletionProposalAcceptor getCustomAcceptor(EObject model,
-			String typeName, ICompletionProposalAcceptor acceptor) {
+	protected ICompletionProposalAcceptor getCustomAcceptor(EObject model, String typeName,
+			ICompletionProposalAcceptor acceptor) {
 		ICompletionProposalAcceptor priorityOptimizer = acceptor;
 		if (model instanceof VariableDefinition) {
 			VariableDefinition vd = (VariableDefinition) model;
-			if (vd.getType() != null
-					&& typeName.equalsIgnoreCase(vd.getType().getName())) {
-				priorityOptimizer = new ICompletionProposalAcceptor.Delegate(
-						acceptor) {
+			if (vd.getType() != null && typeName.equalsIgnoreCase(vd.getType().getName())) {
+				priorityOptimizer = new ICompletionProposalAcceptor.Delegate(acceptor) {
 					@Override
 					public void accept(ICompletionProposal proposal) {
 						alterPriority(proposal, 1);
@@ -178,35 +158,35 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	@Override
-	public void complete_STRING(EObject model, RuleCall ruleCall,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+	public void complete_STRING(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
 
-		super.complete_STRING(model, ruleCall, context,
-				getCustomAcceptor(model, "string", acceptor));
+		super.complete_STRING(model, ruleCall, context, getCustomAcceptor(model, "string", acceptor));
 	}
 
 	@Override
-	public void complete_INT(EObject model, RuleCall ruleCall,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		super.complete_INT(model, ruleCall, context,
-				getCustomAcceptor(model, "integer", acceptor));
+	public void complete_INT(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		super.complete_INT(model, ruleCall, context, getCustomAcceptor(model, "integer", acceptor));
+	}
+
+	public void complete_XID(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		complete_ID(model, ruleCall, context, acceptor);
 	}
 
 	@Override
-	public void complete_HEX(EObject model, RuleCall ruleCall,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(
-				model, "integer", acceptor);
+	public void complete_HEX(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "integer", acceptor);
 
 		String proposalText = "0x1";
-		ICompletionProposal proposal = createCompletionProposal(proposalText,
-				proposalText + " - " + ruleCall.getRule().getName(), null,
-				context);
+		ICompletionProposal proposal = createCompletionProposal(proposalText, proposalText + " - "
+				+ ruleCall.getRule().getName(), null, context);
 
 		if (proposal instanceof ConfigurableCompletionProposal) {
 			ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
-			configurable
-					.setSelectionStart(configurable.getReplacementOffset() + 2);
+			configurable.setSelectionStart(configurable.getReplacementOffset() + 2);
 			configurable.setSelectionLength(proposalText.length() - 2);
 			configurable.setAutoInsertable(false);
 			configurable.setSimpleLinkedMode(context.getViewer(), '\t', ' ');
@@ -216,21 +196,18 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	@Override
-	public void complete_FLOAT(EObject model, RuleCall ruleCall,
-			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(
-				model, "real", acceptor);
+	public void complete_FLOAT(EObject model, RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "real", acceptor);
 
 		String proposalText = "0.1";
-		ICompletionProposal proposal = createCompletionProposal(proposalText,
-				proposalText + " - " + ruleCall.getRule().getName(), null,
-				context);
+		ICompletionProposal proposal = createCompletionProposal(proposalText, proposalText + " - "
+				+ ruleCall.getRule().getName(), null, context);
 		priorityOptimizer.accept(proposal);
 	}
 
 	private void alterPriority(ICompletionProposal proposal, int delta) {
-		if (proposal == null
-				|| !(proposal instanceof ConfigurableCompletionProposal))
+		if (proposal == null || !(proposal instanceof ConfigurableCompletionProposal))
 			return;
 		ConfigurableCompletionProposal castedProposal = (ConfigurableCompletionProposal) proposal;
 		castedProposal.setPriority(castedProposal.getPriority() + delta);
@@ -253,10 +230,8 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			if (proposal instanceof ConfigurableCompletionProposal) {
 				Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
 				keyword.setValue(proposal.getDisplayString());
-				((ConfigurableCompletionProposal) proposal)
-						.setAdditionalProposalInfo(keyword);
-				((ConfigurableCompletionProposal) proposal)
-						.setHover(STextProposalProvider.this.getHover());
+				((ConfigurableCompletionProposal) proposal).setAdditionalProposalInfo(keyword);
+				((ConfigurableCompletionProposal) proposal).setHover(STextProposalProvider.this.getHover());
 			}
 			delegate.accept(proposal);
 		}
