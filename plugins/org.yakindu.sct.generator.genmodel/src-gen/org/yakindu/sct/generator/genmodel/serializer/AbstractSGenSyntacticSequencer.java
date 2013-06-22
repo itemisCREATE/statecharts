@@ -11,8 +11,8 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 import org.yakindu.sct.generator.genmodel.services.SGenGrammarAccess;
 
-@SuppressWarnings("restriction")
-public class AbstractSGenSyntacticSequencer extends AbstractSyntacticSequencer {
+@SuppressWarnings("all")
+public abstract class AbstractSGenSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected SGenGrammarAccess grammarAccess;
 	
