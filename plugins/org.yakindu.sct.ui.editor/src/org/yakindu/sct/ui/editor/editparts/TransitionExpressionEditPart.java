@@ -25,6 +25,7 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
+import org.yakindu.sct.ui.editor.editparts.SpecificationElementEditPart.MultilineTextCellEditor;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.policies.TransitionExpressionComponentEditPolicy;
@@ -47,7 +48,8 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 	@Override
 	protected DirectEditManager createDirectEditManager() {
 		if (getAttribute() == BasePackage.Literals.DOCUMENTED_ELEMENT__DOCUMENTATION)
-			return new TextDirectEditManager(this);
+			return new TextDirectEditManager(this, MultilineTextCellEditor.class,
+					TextDirectEditManager.getTextCellEditorLocator(this));
 		return super.createDirectEditManager();
 	}
 
