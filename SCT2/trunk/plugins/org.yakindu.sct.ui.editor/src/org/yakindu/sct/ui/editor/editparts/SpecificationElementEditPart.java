@@ -18,8 +18,12 @@ import org.eclipse.draw2d.Label;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.tools.DirectEditManager;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
+import org.eclipse.gmf.runtime.gef.ui.internal.parts.TextCellEditorEx;
+import org.eclipse.gmf.runtime.gef.ui.internal.parts.WrapTextCellEditor;
 import org.eclipse.gmf.runtime.notation.StringValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.widgets.Composite;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
@@ -28,7 +32,30 @@ import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@SuppressWarnings("restriction")
 public abstract class SpecificationElementEditPart extends PlugableXtextLabelEditPart {
+
+	/**
+	 * Initially copied from {@link WrapTextCellEditor}, removed
+	 * keyReleaseOccured
+	 * 
+	 */
+	public static final class MultilineTextCellEditor extends TextCellEditorEx {
+
+		private static final int defaultStyle = SWT.WRAP | SWT.MULTI;
+
+		public MultilineTextCellEditor() {
+			setStyle(defaultStyle);
+		}
+
+		public MultilineTextCellEditor(Composite parent) {
+			this(parent, defaultStyle);
+		}
+
+		public MultilineTextCellEditor(Composite parent, int style) {
+			super(parent, style);
+		}
+	}
 
 	public SpecificationElementEditPart(View view, SemanticTarget target) {
 		super(view, target);
@@ -37,7 +64,8 @@ public abstract class SpecificationElementEditPart extends PlugableXtextLabelEdi
 	@Override
 	protected DirectEditManager createDirectEditManager() {
 		if (getAttribute() == DOCUMENTED_ELEMENT__DOCUMENTATION)
-			return new TextDirectEditManager(this);
+			return new TextDirectEditManager(this, MultilineTextCellEditor.class,
+					TextDirectEditManager.getTextCellEditorLocator(this));
 		return super.createDirectEditManager();
 	}
 
