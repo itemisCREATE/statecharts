@@ -1,6 +1,7 @@
 package org.yakindu.sct.refactoring.utils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -39,8 +40,8 @@ public class RefactoringHelper {
 	 * @param transitions
 	 * @return list of list of actions for the specified transitions
 	 */
-	public List<EList<Expression>> getAllActions(EList<Transition> transitions) {
-		List<EList<Expression>> allActions = new ArrayList<EList<Expression>>();
+	public List<List<Expression>> getAllActions(List<Transition> transitions) {
+		List<List<Expression>> allActions = new ArrayList<List<Expression>>();
 		for (Transition transition : transitions) {
 			Effect effect = transition.getEffect();
 			if (effect instanceof ReactionEffect) {
@@ -48,7 +49,7 @@ public class RefactoringHelper {
 				allActions.add(reactionEffect.getActions());
 			}
 			else {
-				allActions.add(new BasicEList<Expression>());
+				allActions.add(Collections.<Expression>emptyList());
 			}
 		}
 		return allActions;

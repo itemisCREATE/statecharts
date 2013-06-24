@@ -145,7 +145,7 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 		Effect effect = transition.getEffect();
 		if (effect instanceof ReactionEffect) {
 			ReactionEffect reactionEffect = (ReactionEffect) effect;
-			EList<Expression> actions = reactionEffect.getActions();
+			List<Expression> actions = reactionEffect.getActions();
 			for (int i = 0; i < number; i++) {
 				firstActions.add(actions.get(i));
 			}
@@ -154,7 +154,7 @@ public class FoldOutgoingActionsRefactoring extends AbstractRefactoring<State> {
 	}
 
 	private Expression getFirstFoldableAction(
-			List<EList<Expression>> allActions, int index) {
+			List<List<Expression>> allActions, int index) {
 		Expression actionToCheck = null;
 		for (List<Expression> actionList : allActions) {
 			if (index >= actionList.size()) {
