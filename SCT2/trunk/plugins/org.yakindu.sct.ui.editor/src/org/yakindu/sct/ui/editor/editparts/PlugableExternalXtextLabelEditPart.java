@@ -31,7 +31,7 @@ import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
 
 import com.google.inject.Injector;
 
-import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
+import de.itemis.gmf.runtime.commons.parsers.StringAttributeParser;
 import de.itemis.xtext.utils.gmf.directedit.ExternalXtextLabelEditPart;
 import de.itemis.xtext.utils.gmf.directedit.IEAttributeProvider;
 import de.itemis.xtext.utils.gmf.directedit.XtextDirectEditManager;
@@ -116,7 +116,7 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 	}
 
 	public IParser getParser() {
-		return new AttributeParser(this, DiagramActivator.PLUGIN_ID);
+		return new StringAttributeParser(this, DiagramActivator.PLUGIN_ID);
 	}
 
 	public IContentAssistProcessor getCompletionProcessor() {
