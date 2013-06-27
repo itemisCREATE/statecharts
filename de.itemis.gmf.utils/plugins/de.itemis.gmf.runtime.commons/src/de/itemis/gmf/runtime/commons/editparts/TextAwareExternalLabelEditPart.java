@@ -34,7 +34,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.graphics.Color;
 
-import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
+import de.itemis.gmf.runtime.commons.parsers.StringAttributeParser;
 
 /**
  * This is a common abstract base class for all {@link LabelEditPart} which are
@@ -136,7 +136,7 @@ public abstract class TextAwareExternalLabelEditPart extends LabelEditPart
 	}
 
 	public IParser getParser() {
-		return new AttributeParser(feature, pluginId);
+		return new StringAttributeParser(feature, pluginId);
 	}
 
 	public IContentAssistProcessor getCompletionProcessor() {

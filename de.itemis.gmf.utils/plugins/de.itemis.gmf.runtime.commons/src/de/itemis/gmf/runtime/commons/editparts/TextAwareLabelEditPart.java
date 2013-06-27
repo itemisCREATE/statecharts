@@ -36,7 +36,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.graphics.Color;
 
-import de.itemis.gmf.runtime.commons.parsers.AttributeParser;
+import de.itemis.gmf.runtime.commons.parsers.StringAttributeParser;
 import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker;
 import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDoubleClickCallback;
 
@@ -139,7 +139,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 	}
 
 	public IParser getParser() {
-		return new AttributeParser(feature, pluginId);
+		return new StringAttributeParser(feature, pluginId);
 	}
 
 	public IContentAssistProcessor getCompletionProcessor() {
