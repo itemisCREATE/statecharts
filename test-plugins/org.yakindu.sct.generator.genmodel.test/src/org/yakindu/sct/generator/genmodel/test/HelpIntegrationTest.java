@@ -21,6 +21,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
@@ -79,6 +80,7 @@ public class HelpIntegrationTest {
 	}
 
 	@Test
+	@Ignore
 	public void checkCppGeneratorFeatureDocumentation() {
 		List<String> missingDocumentation = getFeaturesWithoutDocumentation(YAKINDU_CPP);
 		if (missingDocumentation.size() > 0) {
