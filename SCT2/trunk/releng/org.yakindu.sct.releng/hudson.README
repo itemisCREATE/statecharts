@@ -79,6 +79,13 @@ Build:
 		cp -R build/org.yakindu.sct.repository/target/repository/* update-site/
 		
 		
+		if [ -d "full-update-site" ]; then
+   			rm -fr full-update-site
+		fi
+		mkdir full-update-site
+		cp -R build/org.yakindu.sct.repository.full/target/repository/* full-update-site/
+		
+		
 Post-Build-Actions:
 + Publish JUnit Test Results
 	Testreports in XML format
