@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.yakindu.sct_2.1.0.qualifier.jar" id="org.yakindu.sct" version="2.1.0.qualifier">
+      <category name="Yakindu SCT 2"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.source_2.1.0.qualifier.jar" id="org.yakindu.sct.source" version="2.1.0.qualifier">
+      <category name="Yakindu SCT 2 (Sources)"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.generator.c_2.1.0.qualifier.jar" id="org.yakindu.sct.generator.c" version="2.1.0.qualifier">
+      <category name="Yakindu SCT 2"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.generator.c.source_2.1.0.qualifier.jar" id="org.yakindu.sct.generator.c.source" version="2.1.0.qualifier">
+      <category name="Yakindu SCT 2 (Sources)"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.generator.java_2.1.0.qualifier.jar" id="org.yakindu.sct.generator.java" version="2.1.0.qualifier">
+      <category name="Yakindu SCT 2"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.generator.java.source_2.1.0.qualifier.jar" id="org.yakindu.sct.generator.java.source" version="2.1.0.qualifier">
+      <category name="Yakindu SCT 2 (Sources)"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.sdk_2.1.0.qualifier.jar" id="org.yakindu.sct.sdk" version="2.1.0.qualifier">
+      <category name="Yakindu SCT 2"/>
+   </feature>
+   <feature url="features/org.yakindu.sct.test_2.1.0.qualifier.jar" id="org.yakindu.sct.test" version="2.1.0.qualifier">
+      <category name="Yakindu SCT 2 Test"/>
+   </feature>
+   <category-def name="Yakindu SCT 2" label="Yakindu SCT 2">
+      <description>
+         Yakindu Statechart Tools (SCT) Version 2
+      </description>
+   </category-def>
+   <category-def name="Yakindu SCT 2 (Sources)" label="Yakindu SCT 2 (Sources)">
+      <description>
+         Source features of Yakindu Statechart Tools (SCT) Version 2
+      </description>
+   </category-def>
+   <category-def name="Yakindu SCT 2 Test" label="Yakindu SCT 2 Test">
+      <description>
+         Tests of YAKINDU
+      </description>
+   </category-def>
+</site>
