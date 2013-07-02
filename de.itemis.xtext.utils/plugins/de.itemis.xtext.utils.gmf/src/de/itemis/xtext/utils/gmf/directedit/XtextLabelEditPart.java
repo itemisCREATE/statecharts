@@ -29,6 +29,7 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Color;
 
 import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDoubleClickCallback;
+import de.itemis.xtext.utils.gmf.figures.HighlightingWrappingLabel;
 
 /**
  * Abstract base implementation for all Labels that that use Xtext for direct
@@ -48,7 +49,7 @@ public abstract class XtextLabelEditPart extends CompartmentEditPart implements 
 
 	@Override
 	protected IFigure createFigure() {
-		final WrappingLabel label = new WrappingLabel();
+		final WrappingLabel label = new HighlightingWrappingLabel();
 		label.setTextWrap(true);
 		label.setAlignment(PositionConstants.LEFT | PositionConstants.TOP);
 		return label;

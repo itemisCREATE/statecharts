@@ -39,6 +39,7 @@ import org.eclipse.swt.graphics.Color;
 import de.itemis.gmf.runtime.commons.parsers.StringAttributeParser;
 import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker;
 import de.itemis.xtext.utils.gmf.directedit.DoubleClickDirectEditDragTracker.IDoubleClickCallback;
+import de.itemis.xtext.utils.gmf.figures.HighlightingWrappingLabel;
 
 /**
  * This is a common abstract base class for all Label which are
@@ -127,7 +128,7 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 
 	@Override
 	protected IFigure createFigure() {
-		return new WrappingLabel();
+		return new HighlightingWrappingLabel();
 	}
 
 	public ICellEditorValidator getEditTextValidator() {

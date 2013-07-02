@@ -35,6 +35,7 @@ import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.eclipse.swt.graphics.Color;
 
 import de.itemis.gmf.runtime.commons.parsers.StringAttributeParser;
+import de.itemis.xtext.utils.gmf.figures.HighlightingWrappingLabel;
 
 /**
  * This is a common abstract base class for all {@link LabelEditPart} which are
@@ -124,7 +125,7 @@ public abstract class TextAwareExternalLabelEditPart extends LabelEditPart
 
 	@Override
 	protected IFigure createFigure() {
-		return new WrappingLabel();
+		return new HighlightingWrappingLabel();
 	}
 
 	public ICellEditorValidator getEditTextValidator() {
