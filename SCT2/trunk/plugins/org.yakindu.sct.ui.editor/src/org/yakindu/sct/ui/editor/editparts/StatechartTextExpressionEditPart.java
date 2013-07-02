@@ -16,6 +16,7 @@ import static org.eclipse.gef.EditPolicy.SELECTION_FEEDBACK_ROLE;
 import static org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles.CONNECTION_HANDLES_ROLE;
 
 import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
+import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
@@ -31,6 +32,12 @@ public class StatechartTextExpressionEditPart extends SpecificationElementEditPa
 
 	public StatechartTextExpressionEditPart(View view) {
 		super(view, SemanticTarget.StatechartSpecification);
+	}
+	
+	@Override
+	public WrappingLabel getFigure() {
+		// TODO Auto-generated method stub
+		return super.getFigure();
 	}
 
 	@Override

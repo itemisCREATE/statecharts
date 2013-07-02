@@ -25,6 +25,8 @@ import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.eclipse.swt.graphics.Color;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 
+import de.itemis.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+
 /**
  * 
  * @author muelder
@@ -50,9 +52,8 @@ public class RegionFigure extends RectangleFigure {
 	}
 
 	private void createContents() {
-		nameLabel = new WrappingLabel();
-		GridData data = GridDataFactory.fillDefaults().grab(true, false)
-				.getData();
+		nameLabel = new HighlightingWrappingLabel();
+		GridData data = GridDataFactory.fillDefaults().grab(true, false).getData();
 		nameLabel.setTextPlacement(PositionConstants.WEST);
 		this.add(nameLabel, data);
 
@@ -61,8 +62,7 @@ public class RegionFigure extends RectangleFigure {
 		compartmentPane.setOutline(false);
 		compartmentPane.setLayoutManager(new StackLayout());
 		compartmentPane.setFill(false);
-		this.add(compartmentPane,
-				GridDataFactory.fillDefaults().grab(true, true).getData());
+		this.add(compartmentPane, GridDataFactory.fillDefaults().grab(true, true).getData());
 	}
 
 	public WrappingLabel getNameLabel() {
@@ -82,8 +82,7 @@ public class RegionFigure extends RectangleFigure {
 	@Override
 	protected void fillShape(Graphics graphics) {
 		Color c = mixColor(getBackgroundColor(), ColorConstants.white, 220);
-		fillVerticalGradientRectangle(graphics, getBounds(),
-				getBackgroundColor(), c);
+		fillVerticalGradientRectangle(graphics, getBounds(), getBackgroundColor(), c);
 		c.dispose();
 	}
 
