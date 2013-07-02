@@ -8,6 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
+
 package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
@@ -40,6 +41,6 @@ public class TransitionWithoutConditionTest {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_B));
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

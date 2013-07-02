@@ -57,11 +57,11 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					<!-- 
+					 
 					<includes>
 						<include>**/All*Tests.class</include>
 					</includes>
-					 -->
+					
 					<excludes>
 						<exclude>**/util/TestModels.class</exclude>
 						<!-- It's toooo slow in the interpreter -->
