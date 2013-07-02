@@ -43,6 +43,6 @@ public class TransitionWithoutConditionTest extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isActive("A"));
 	}
 }

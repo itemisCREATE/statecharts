@@ -13,13 +13,11 @@ package org.yakindu.sct.generator.c.test;
 import java.util.Collection;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@Ignore
 @GTest(sourceFile = "gtests/TransitionWithoutCondition/TransitionWithoutCondition.cc", program = "gtests/TransitionWithoutCondition/TransitionWithoutCondition", model = "testmodels/SCTUnit/TransitionWithoutCondition.sct")
 @RunWith(GTestRunner.class)
 public class TransitionWithoutCondition {

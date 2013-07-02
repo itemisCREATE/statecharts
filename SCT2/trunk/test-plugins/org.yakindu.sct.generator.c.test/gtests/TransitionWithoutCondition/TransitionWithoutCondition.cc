@@ -18,5 +18,5 @@ TEST(StatemachineTest, TransitionWithoutConditionTest) {
 	transitionWithoutCondition_enter(&handle);
 	EXPECT_TRUE(transitionWithoutCondition_isActive(&handle, TransitionWithoutCondition_main_region_A));
 	transitionWithoutCondition_runCycle(&handle);
-	EXPECT_TRUE(transitionWithoutCondition_isActive(&handle, TransitionWithoutCondition_main_region_B));
+	EXPECT_TRUE(transitionWithoutCondition_isActive(&handle, TransitionWithoutCondition_main_region_A));
 }
