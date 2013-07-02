@@ -23,6 +23,7 @@ import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.factories.StateViewFactory;
 import org.yakindu.sct.ui.editor.policies.StateCompartmentCanonicalEditPolicy;
@@ -73,6 +74,11 @@ public class StateFigureCompartmentEditPart extends ResizableCompartmentEditPart
 		((ResizableCompartmentFigure) getFigure()).getScrollPane().setScrollBarVisibility(
 				org.eclipse.draw2d.ScrollPane.NEVER);
 	}
+	
+	@Override
+	public State resolveSemanticElement() {
+		return (State) super.resolveSemanticElement();
+	}
 
 	@Override
 	public boolean isSelectable() {
@@ -86,6 +92,8 @@ public class StateFigureCompartmentEditPart extends ResizableCompartmentEditPart
 		figure.setBorder(null);
 		// Should be initialized with null to display nothing.
 		figure.setToolTip((String) null);
+		figure.getScrollPane().setScrollBarVisibility(
+				org.eclipse.draw2d.ScrollPane.NEVER);
 		return figure;
 	}
 

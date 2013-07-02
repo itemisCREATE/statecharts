@@ -19,6 +19,8 @@ import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.draw2d.ui.mapmode.IMapMode;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 
+import de.itemis.xtext.utils.gmf.figures.HighlightingWrappingLabel;
+
 /**
  * Figure for text compartment statechart declarations
  * 
@@ -45,8 +47,7 @@ public class StatechartTextFigure extends RectangleFigure {
 	}
 
 	private void createContents() {
-		// Name Label
-		name = new WrappingLabel();
+		name = new HighlightingWrappingLabel();
 		name.setLayoutManager(new StackLayout());
 		GridData data = GridDataFactory.fillDefaults()
 				.align(GridData.CENTER, GridData.CENTER).grab(true, false)
