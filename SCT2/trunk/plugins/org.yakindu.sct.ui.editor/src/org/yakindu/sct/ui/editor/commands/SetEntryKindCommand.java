@@ -73,7 +73,7 @@ public abstract class SetEntryKindCommand extends AbstractHandler {
 	public boolean isEnabled() {
 		ISelection selection = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getSelection();
 		entry = unwrap(selection);
-		return !entry.getKind().equals(getEntryKind());
+		return entry != null && !entry.getKind().equals(getEntryKind());
 	}
 
 }
