@@ -29,6 +29,7 @@ import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE;
 import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TRANSITION_COUNT;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_TRANSITION_WITHOUT_GUARD;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.lang.reflect.Method;
@@ -71,6 +72,7 @@ import com.google.inject.Inject;
  * 
  * @author terfloth
  * @author muelder - additions
+ * @author antony -additions
  */
 @RunWith(XtextRunner.class)
 @InjectWith(SGraphTestInjectorProvider.class)
@@ -501,6 +503,35 @@ public class SGraphJavaValidationTest {
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION);
+	}
+
+	/**
+	 * Show warning when transition has no guard
+	 */
+	@Test
+	public void transitionsWithNoGuard(){
+		statechart = factory.createStatechart();
+		Region region = factory.createRegion();
+		Entry e = factory.createEntry();
+		State a = factory.createState();
+		State b = factory.createState();
+		a.setName("A");
+		b.setName("B");
+		Transition eToA = createTransition(e, a);
+		Transition aToB = createTransition(a, b);
+		statechart.getRegions().add(region);
+		region.getVertices().add(e);
+		region.getVertices().add(a);
+		region.getVertices().add(b);
+		
+		// transitions from entry point -> valid model with no warnings 
+		assertTrue(validator.validate(eToA, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
+		
+		//other transitions with no trigger -> valid model with warning
+		assertTrue(validator.validate(aToB, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		assertWarning(diagnostics, ISSUE_TRANSITION_WITHOUT_GUARD); 
 	}
 
 	@Test

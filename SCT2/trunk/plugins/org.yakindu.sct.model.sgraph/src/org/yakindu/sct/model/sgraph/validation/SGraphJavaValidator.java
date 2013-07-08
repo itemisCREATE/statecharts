@@ -35,7 +35,6 @@ import org.yakindu.sct.model.sgraph.Vertex;
 
 import com.google.inject.Inject;
 
-
 /**
  * This validator is intended to be used by a compositeValidator (See
  * {@link org.eclipse.xtext.validation.ComposedChecks}) of another language
@@ -48,6 +47,7 @@ import com.google.inject.Inject;
  * @author muelder
  * @author bohl - migrated to xtext infrastruture
  * @author schwertfeger
+ * @author antony
  */
 public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
@@ -66,59 +66,59 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL = "The source states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The source states of a synchronization have to be contained in the same parent state within different regions!";
 	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions";
-	
+	public static final String ISSUE_TRANSITION_WITHOUT_GUARD = "Missing trigger. Transisition is never taken. Use 'oncycle' or 'always' instead";
+
 	public SGraphJavaValidator() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
 		if (!(vertex instanceof Entry)) {
-			
+
 			final Set<Object> stateScopeSet = new HashSet<Object>();
-			for ( EObject obj : EcoreUtil2.eAllContents(vertex) ) {
+			for (EObject obj : EcoreUtil2.eAllContents(vertex)) {
 				stateScopeSet.add(obj);
 			}
 			stateScopeSet.add(vertex);
-			
+
 			final List<Object> externalPredecessors = new ArrayList<Object>();
 
-			DFS dfs = new DFS() {	
+			DFS dfs = new DFS() {
 
 				@Override
 				public Iterator<Object> getElementLinks(Object element) {
 					List<Object> elements = new ArrayList<Object>();
-					
-					if (element instanceof org.yakindu.sct.model.sgraph.State ) {
-						if ( ! stateScopeSet.contains(element) ) {
+
+					if (element instanceof org.yakindu.sct.model.sgraph.State) {
+						if (!stateScopeSet.contains(element)) {
 							externalPredecessors.add(element);
 						} else {
-							elements.addAll(((org.yakindu.sct.model.sgraph.State)element).getRegions() );
-							elements.addAll(((org.yakindu.sct.model.sgraph.State)element).getIncomingTransitions() );							
+							elements.addAll(((org.yakindu.sct.model.sgraph.State) element).getRegions());
+							elements.addAll(((org.yakindu.sct.model.sgraph.State) element).getIncomingTransitions());
 						}
-						
+
 					} else if (element instanceof Region) {
-						elements.addAll( ((Region) element).getVertices() );
+						elements.addAll(((Region) element).getVertices());
 					} else if (element instanceof Entry) {
-						if ( ! stateScopeSet.contains(element) ) {
+						if (!stateScopeSet.contains(element)) {
 							externalPredecessors.add(element);
 						} else {
-							elements.addAll(((Entry)element).getIncomingTransitions() );									
+							elements.addAll(((Entry) element).getIncomingTransitions());
 						}
 
 					} else if (element instanceof Vertex) {
-						elements.addAll( ((Vertex) element).getIncomingTransitions() );
+						elements.addAll(((Vertex) element).getIncomingTransitions());
 
 					} else if (element instanceof Transition) {
-						elements.add( ((Transition) element).getSource() );
-						
+						elements.add(((Transition) element).getSource());
+
 					}
-				
+
 					return elements.iterator();
 				}
 			};
-			
+
 			dfs.perform(vertex);
 
 			if (externalPredecessors.size() == 0) {
@@ -126,16 +126,14 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			}
 		}
 	}
-	
-	
+
 	/**
-	 * Calculates all predecessor states 
+	 * Calculates all predecessor states
 	 */
 
 	@Check(CheckType.FAST)
 	public void incomingTransitionCount(Vertex vertex) {
-		if (vertex.getIncomingTransitions().size() > 0
-				&& vertex instanceof Entry
+		if (vertex.getIncomingTransitions().size() > 0 && vertex instanceof Entry
 				&& ((Entry) vertex).getKind().equals(EntryKind.INITIAL)) {
 			warning(ISSUE_INITIAL_ENTRY_WITH_IN_TRANS, vertex, null, -1);
 		}
@@ -150,8 +148,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void nameIsNotEmpty(org.yakindu.sct.model.sgraph.State state) {
-		if ((state.getName() == null || state.getName().trim().length() == 0)
-				&& !(state instanceof FinalState)) {
+		if ((state.getName() == null || state.getName().trim().length() == 0) && !(state instanceof FinalState)) {
 			error(ISSUE_STATE_WITHOUT_NAME, state, null, -1);
 		}
 	}
@@ -175,15 +172,14 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void outgoingTransitionCount(Entry entry) {
-		if (entry.getOutgoingTransitions().size() == 0
-				&& ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
+		if (entry.getOutgoingTransitions().size() == 0 && ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
 			warning(ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS, entry, null, -1);
 		}
 		if (entry.getOutgoingTransitions().size() > 1) {
 			error(ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS, entry, null, -1);
 		}
 	}
-	
+
 	@Check(CheckType.FAST)
 	public void synchronizationTransitionCount(Synchronization sync) {
 		if (sync.getIncomingTransitions().size() < 2 && sync.getOutgoingTransitions().size() < 2) {
@@ -191,69 +187,66 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-
 	@Check(CheckType.FAST)
 	public void orthogonalStates(Synchronization fork) {
-		//check target states
+		// check target states
 		orthogonalStates(fork, true);
-		//check source states
+		// check source states
 		orthogonalStates(fork, false);
 	}
-	
+
+	@Check(CheckType.FAST)
+	public void transitionsWithNoGuard(Transition trans) {
+		if (trans.getSource() instanceof Entry) {
+			return;
+		} else if(trans.getTrigger() == null){
+			warning(ISSUE_TRANSITION_WITHOUT_GUARD, trans, null, -1);
+		}
+	}
+
 	private void orthogonalStates(Synchronization fork, boolean searchTarget) {
-		List<Transition> transitions = searchTarget ? fork
-				.getOutgoingTransitions() : fork.getIncomingTransitions();
+		List<Transition> transitions = searchTarget ? fork.getOutgoingTransitions() : fork.getIncomingTransitions();
 		if (transitions.size() > 1) {
 			final Transition firstTransition = transitions.get(0);
-			final Vertex vertex = searchTarget ? firstTransition.getTarget()
-					: firstTransition.getSource();
+			final Vertex vertex = searchTarget ? firstTransition.getTarget() : firstTransition.getSource();
 
-			CompositeElement root = findCommonRootCompositeElement(vertex
-					.getParentRegion().getComposite(), fork, searchTarget);
+			CompositeElement root = findCommonRootCompositeElement(vertex.getParentRegion().getComposite(), fork,
+					searchTarget);
 
 			if (root != null) {
 				for (Transition t : transitions) {
-					Region parentRegion = searchTarget ? t.getTarget()
-							.getParentRegion() : t.getSource()
+					Region parentRegion = searchTarget ? t.getTarget().getParentRegion() : t.getSource()
 							.getParentRegion();
 					for (Transition transition : transitions) {
 						if (transition != t
-								&& EcoreUtil.isAncestor(parentRegion,
-										searchTarget ? transition.getTarget()
-												: transition.getSource())) {
+								&& EcoreUtil.isAncestor(parentRegion, searchTarget ? transition.getTarget()
+										: transition.getSource())) {
 							error(searchTarget ? ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL
-									: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL,
-									fork, null, -1);
+									: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL, fork, null, -1);
 							break;
 						}
 					}
 				}
 			} else {
 				error(searchTarget ? ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE
-						: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE,
-						fork, null, -1);
+						: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE, fork, null, -1);
 			}
 
 		}
 	}
 
-	private CompositeElement findCommonRootCompositeElement(
-			CompositeElement root, Synchronization fork, boolean searchTarget) {
+	private CompositeElement findCommonRootCompositeElement(CompositeElement root, Synchronization fork,
+			boolean searchTarget) {
 
 		CompositeElement ret = root;
 
 		if (ret != fork.getParentRegion().getComposite()) {
-			for (Transition transition : searchTarget ? fork
-					.getOutgoingTransitions() : fork.getIncomingTransitions()) {
+			for (Transition transition : searchTarget ? fork.getOutgoingTransitions() : fork.getIncomingTransitions()) {
 				if (ret != null
-						&& !EcoreUtil.isAncestor(ret,
-								searchTarget ? transition.getTarget()
-										: transition.getSource())) {
+						&& !EcoreUtil.isAncestor(ret, searchTarget ? transition.getTarget() : transition.getSource())) {
 					if (ret.eContainer() instanceof Region) {
-						final CompositeElement newRoot = ((Region) root
-								.eContainer()).getComposite();
-						ret = findCommonRootCompositeElement(newRoot, fork,
-								searchTarget);
+						final CompositeElement newRoot = ((Region) root.eContainer()).getComposite();
+						ret = findCommonRootCompositeElement(newRoot, fork, searchTarget);
 					}
 				}
 			}
