@@ -30,7 +30,6 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITI
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT;
-
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.lang.reflect.Method;
@@ -55,6 +54,7 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -62,6 +62,7 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
+import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
@@ -453,16 +454,22 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 			}
 		}
 		// Test target state isn't composite
-		assertIssueCount(diagnostics, 1);
+		assertIssueCount(diagnostics, 2);
 		assertWarning(diagnostics, TRANSITION_ENTRY_SPEC_NOT_COMPOSITE);
 
 		diagnostics = new BasicDiagnostic();
 		statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "TransitionExitSpecNotComposite.sct");
 		iter = statechart.eAllContents();
+
+		// create and add triggers to all transitions to prevent to trigger additional warnings 
+		//(see Check in SGrapJavaValidator transitionsWithNoGuard)  
+		Trigger trigger = StextFactoryImpl.init().createDefaultTrigger();		
+		
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
+				((Transition) element).setTrigger(trigger);
 				assertTrue(validator.validate(element, diagnostics,
 						new HashMap<Object, Object>()));
 			}
@@ -479,6 +486,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
+				((Transition) element).setTrigger(trigger);
 				assertTrue(validator.validate(element, diagnostics,
 						new HashMap<Object, Object>()));
 			}
@@ -495,6 +503,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
+				((Transition) element).setTrigger(trigger);
 				validator.validate(element, diagnostics,
 						new HashMap<Object, Object>());
 			}
@@ -510,9 +519,15 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		Statechart statechart = AbstractTestModelsUtil
 				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnboundDefaultEntryPoints.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
+		
+		// create and add triggers to all transitions to prevent to trigger additional warnings 
+		//(see Check in SGrapJavaValidator transitionsWithNoGuard)  
+		Trigger trigger = StextFactoryImpl.init().createDefaultTrigger();
+		
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
+				((Transition) element).setTrigger(trigger);
 				validator.validate(element, diagnostics,
 						new HashMap<Object, Object>());
 			}
@@ -534,6 +549,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
+				((Transition) element).setTrigger(trigger);
 				validator.validate(element, diagnostics,
 						new HashMap<Object, Object>());
 			}
