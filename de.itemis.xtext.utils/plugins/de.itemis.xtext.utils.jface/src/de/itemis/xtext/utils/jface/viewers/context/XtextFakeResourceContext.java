@@ -1,6 +1,8 @@
 package de.itemis.xtext.utils.jface.viewers.context;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IProject;
@@ -10,6 +12,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
+import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -70,6 +73,11 @@ public class XtextFakeResourceContext {
 		String activeProjectName = activeProject != null ? activeProject
 				.getName() : "fakeResource";
 		fakeResource.setURI(createFakeResourceUri(activeProjectName));
+		try {
+			fakeResource.load(new StringInputStream(""), Collections.EMPTY_MAP);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public XtextResource getFakeResource() {
