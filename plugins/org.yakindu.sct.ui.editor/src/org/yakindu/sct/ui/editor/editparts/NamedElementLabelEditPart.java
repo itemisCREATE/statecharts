@@ -10,11 +10,14 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.gmf.runtime.common.ui.services.parser.IParser;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 
 import de.itemis.gmf.runtime.commons.editparts.TextAwareLabelEditPart;
+import de.itemis.gmf.runtime.commons.parsers.StringAttributeParser;
 
 /**
  * 
@@ -26,5 +29,14 @@ public class NamedElementLabelEditPart extends TextAwareLabelEditPart {
 	public NamedElementLabelEditPart(View view) {
 		super(view, BasePackage.Literals.NAMED_ELEMENT__NAME,
 				DiagramActivator.PLUGIN_ID);
+	}
+
+	public IParser getParser() {
+		return new StringAttributeParser(feature, pluginId) {
+			@Override
+			protected String createEmptyStringLabel(EAttribute attribute) {
+				return "";
+			}
+		};
 	}
 }
