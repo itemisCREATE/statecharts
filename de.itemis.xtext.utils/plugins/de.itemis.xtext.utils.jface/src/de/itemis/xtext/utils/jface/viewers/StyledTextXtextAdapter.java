@@ -251,7 +251,6 @@ public class StyledTextXtextAdapter {
 
 	protected void initXtextDocument(XtextFakeResourceContext context) {
 		document.setInput(context.getFakeResource());
-
 		IDocumentPartitioner partitioner = documentPartitioner.get();
 		partitioner.connect(document);
 		document.setDocumentPartitioner(partitioner);

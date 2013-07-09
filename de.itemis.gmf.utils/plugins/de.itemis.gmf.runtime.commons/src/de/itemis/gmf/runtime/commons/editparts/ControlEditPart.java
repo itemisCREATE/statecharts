@@ -66,7 +66,6 @@ public abstract class ControlEditPart extends ShapeEditPart {
 			rect = rect.getCopy();
 			translateToAbsolute(rect);
 			control.setBounds(rect.x, rect.y, rect.width, rect.height);
-			System.out.println("Set Bounds " + rect);
 			super.setBounds(rect);
 		}
 	}

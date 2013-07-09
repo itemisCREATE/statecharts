@@ -57,9 +57,9 @@ public abstract class TextAwareLabelEditPart extends CompartmentEditPart
 
 	private final DirectEditManager manager;
 
-	private final EAttribute feature;
+	protected final EAttribute feature;
 
-	private final String pluginId;
+	protected final String pluginId;
 
 	public TextAwareLabelEditPart(View view, EAttribute feature, String pluginId) {
 		super(view);

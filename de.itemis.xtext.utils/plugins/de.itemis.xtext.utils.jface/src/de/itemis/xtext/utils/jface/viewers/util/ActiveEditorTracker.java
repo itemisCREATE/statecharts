@@ -157,7 +157,6 @@ public class ActiveEditorTracker implements IPageListener, IPartListener,
 
 	public void pageOpened(IWorkbenchPage page) {
 		// do nothing
-		System.out.println("PAGE OPENED: " + page);
 	}
 
 	public void partActivated(IWorkbenchPart part) {
