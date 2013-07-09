@@ -36,7 +36,6 @@ public class EAttributeDirectEditPolicy extends DirectEditPolicy {
 
 	@Override
 	protected Command getDirectEditCommand(DirectEditRequest request) {
-		System.out.println("Writing into " + provider.getAttribute());
 		SetRequest setRequest = new SetRequest(getHost().resolveSemanticElement(), provider.getAttribute(), request
 				.getCellEditor().getValue());
 		SetValueCommand setCommand = new SetValueCommand(setRequest);
