@@ -6,11 +6,11 @@
       provider-name="yakindu.org"
       plugin="org.yakindu.sct.doc.user">
 
-   <description url="">
+   <description url="http://www.statecharts.org">
       %description
    </description>
 
-   <copyright url="http://www.example.com/copyright">
+   <copyright url="%licenseURL">
       %copyright
    </copyright>
 

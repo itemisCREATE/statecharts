@@ -12,4 +12,16 @@
 	<artifactId>org.yakindu.sct.sdk</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<groupId>org.yakindu.sct.features</groupId>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

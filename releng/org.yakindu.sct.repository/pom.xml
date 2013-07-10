@@ -37,7 +37,7 @@
 								<taskdef resource="net/sf/antcontrib/antlib.xml"
 									classpathref="maven.plugin.classpath" />
 								<property name="download.distro.src"
-									value="${eclipse.mirror.url}/technology/epp/downloads/release/juno/SR2" />
+									value="${eclipse.mirror.url}/technology/epp/downloads/release/kepler/R" />
 								<property name="download.distro.dir"
 									value="${project.build.directory}/../distro/download" />
 
@@ -78,7 +78,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-juno-SR2-win32.zip"
+							              input="eclipse-java-kepler-R-win32.zip"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -93,7 +93,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-juno-SR2-win32-x86_64.zip"
+							              input="eclipse-java-kepler-R-win32-x86_64.zip"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -108,7 +108,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-juno-SR2-linux-gtk-x86_64.tar.gz"
+							              input="eclipse-java-kepler-R-linux-gtk-x86_64.tar.gz"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -123,7 +123,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-juno-SR2-linux-gtk.tar.gz"
+							              input="eclipse-java-kepler-R-linux-gtk.tar.gz"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"
@@ -138,7 +138,7 @@
 									</and>
 									<then>
 										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-juno-SR2-macosx-cocoa-x86_64.tar.gz"
+							              input="eclipse-java-kepler-R-macosx-cocoa-x86_64.tar.gz"
 							              override="true"
 							              regexp="(.*)"
 							              select="\1"

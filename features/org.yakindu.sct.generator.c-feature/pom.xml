@@ -13,17 +13,4 @@
 	<packaging>eclipse-feature</packaging>
 	<groupId>org.yakindu.sct.features</groupId>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-source-feature-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
-
 </project>

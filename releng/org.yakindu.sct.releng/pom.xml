@@ -10,8 +10,8 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.16.0</tycho-version>
-		<tycho-extras-version>0.16.0</tycho-extras-version>
+		<tycho-version>0.18.0</tycho-version>
+		<tycho-extras-version>0.18.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
 		<p2.target.repository>file:../org.yakindu.base.target/target/repository</p2.target.repository>
 		<p2.base.repository>file:../org.yakindu.base.repository/target/repository</p2.base.repository>
@@ -120,13 +120,90 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<!-- Configure sources (Source feature has to be added to category manually) -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attach-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- pack plugins with pack200, which are smaller class files (Part I) -->
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-pack200a-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<executions>
+					<execution>
+						<id>pack200-normalize</id>
+						<goals>
+							<goal>normalize</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- TODO sign here -->
+			<!-- pack plugins with pack200, which are smaller class files (Part II) 
+				and add them to p2-metadata -->
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-pack200b-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<executions>
+					<execution>
+						<id>pack200-pack</id>
+						<goals>
+							<goal>pack</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Then, alter p2-metadata to make the .pack.gz and the source bundles
+			visible from other modules -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>p2-metadata</id>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<defaultP2Metadata>false</defaultP2Metadata>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
 				<!-- Avoid the generation of maven archive information in the META-INF 
 					folder -->
 				<plugin>
-					<groupId>${tycho-groupid}</groupId>
+					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-packaging-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
@@ -137,7 +214,7 @@
 				</plugin>
 				<!-- TYCHO -->
 				<plugin>
-					<groupId>${tycho-groupid}</groupId>
+					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-compiler-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
@@ -198,20 +275,6 @@
 					</executions>
 				</plugin>
 				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-p2-plugin</artifactId>
-					<version>${tycho-version}</version>
-					<executions>
-						<execution>
-							<id>attached-p2-metadata</id>
-							<phase>package</phase>
-							<goals>
-								<goal>p2-metadata</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
 					<version>2.3.1</version>
@@ -221,7 +284,7 @@
 					</configuration>
 				</plugin>
 				<plugin>
-					<groupId>${tycho-groupid}</groupId>
+					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-p2-repository-plugin</artifactId>
 					<version>${tycho-version}</version>
 				</plugin>
@@ -251,6 +314,41 @@
 					<groupId>org.eclipse.dash.maven</groupId>
 					<artifactId>eclipse-signing-maven-plugin</artifactId>
 					<version>1.0.2</version>
+				</plugin>
+				<plugin>
+					<!-- Base configuration of target environments -->
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>target-platform-configuration</artifactId>
+					<version>${tycho-version}</version>
+					<configuration>
+						<environments>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>macosx</os>
+								<ws>cocoa</ws>
+								<arch>x86_64</arch>
+							</environment>
+						</environments>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -292,11 +390,6 @@
 			</activation>
 			<repositories>
 				<repository>
-					<id>yakindu-target</id>
-					<layout>p2</layout>
-					<url>${p2.target.repository}</url>
-				</repository>
-				<repository>
 					<id>yakindu-base</id>
 					<layout>p2</layout>
 					<url>${p2.base.repository}</url>
@@ -308,53 +401,15 @@
 						<groupId>org.eclipse.tycho</groupId>
 						<artifactId>target-platform-configuration</artifactId>
 						<version>${tycho-version}</version>
-						<configuration>
-							<environments>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>macosx</os>
-									<ws>cocoa</ws>
-									<arch>x86_64</arch>
-								</environment>
-							</environments>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>
+			<modules>
+				<module>../org.yakindu.base.target</module>
+			</modules>
 		</profile>
 		<profile>
 			<id>Indigo.target</id>
-			<repositories>
-				<repository>
-					<id>indigo</id>
-					<layout>p2</layout>
-					<url>http://download.eclipse.org/releases/indigo</url>
-				</repository>
-				<repository>
-					<id>eclipse37</id>
-					<layout>p2</layout>
-					<url>http://download.eclipse.org/eclipse/updates/3.7</url>
-				</repository>
-			</repositories>
 			<build>
 				<plugins>
 					<plugin>
@@ -365,55 +420,66 @@
 							<!-- add target file content to target platform -->
 							<target>
 								<artifact>
-									<groupId>org.yakindu.sct</groupId>
-									<artifactId>org.yakindu.sct.statechart.target</artifactId>
+									<groupId>org.yakindu.base</groupId>
+									<artifactId>org.yakindu.base.target</artifactId>
 									<version>2.1.0-SNAPSHOT</version>
-									<classifier>INDIGO</classifier>
+									<classifier>Juno</classifier>
 								</artifact>
 							</target>
-							<environments>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>macosx</os>
-									<ws>cocoa</ws>
-									<arch>x86_64</arch>
-								</environment>
-							</environments>
 						</configuration>
 					</plugin>
 				</plugins>
 			</build>
-			<modules>
-				<module>../org.yakindu.sct.statechart.target</module>
-			</modules>
+		</profile>
+		<profile>
+			<id>Kepler.target</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<!-- add target file content to target platform -->
+							<target>
+								<artifact>
+									<groupId>org.yakindu.base</groupId>
+									<artifactId>org.yakindu.base.target</artifactId>
+									<version>2.1.0-SNAPSHOT</version>
+									<classifier>Kepler</classifier>
+								</artifact>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>CI</id>
+			<!-- Test failures are collected by jenkins and evaluated for instable 
+				builds -->
+			<properties>
+				<testFailureIgnore>true</testFailureIgnore>
+			</properties>
+		</profile>
+		<profile>
+			<id>macosx</id>
+			<properties>
+				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread</test.vmargs>
+			</properties>
+		</profile>
+		<profile>
+			<id>other-os</id>
+			<properties>
+				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m</test.vmargs>
+			</properties>
 		</profile>
 	</profiles>
 
 	<modules>
-		<!-- Removed because tycho can't build, if dependency to patched feature 
-			exists -->
-		<!-- <module>../org.eclipse.gmf.runtime.emf.clipboard.core</module> -->
-		<!-- <module>../org.eclipse.gmf.runtime.emf.clipboard.core.patch-feature</module> -->
-
 		<module>../org.yakindu.sct.commons</module>
 		<module>../org.yakindu.sct.doc.user</module>
 		<module>../org.yakindu.sct.examples.trafficlight</module>
