@@ -5,7 +5,7 @@
       version="2.1.0.qualifier"
       provider-name="yakindu.org">
 
-   <description url="">
+   <description >
       %description
    </description>
 
