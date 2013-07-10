@@ -6,20 +6,12 @@
 	<groupId>org.yakindu.base</groupId>
 	<artifactId>org.yakindu.base.target</artifactId>
 	<version>2.1.0-SNAPSHOT</version>
-	<packaging>eclipse-repository</packaging>
+	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-version>0.16.0</tycho-version>
+		<tycho-version>0.18.0</tycho-version>
 		<build-helper-version>1.3</build-helper-version>
 	</properties>
-
-	<repositories>
-		<repository>
-			<id>juno</id>
-			<layout>p2</layout>
-			<url>http://download.eclipse.org/releases/juno</url>
-		</repository>
-	</repositories>
 
 	<build>
 		<plugins>
@@ -30,98 +22,37 @@
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
-		</plugins>
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-p2-repository-plugin</artifactId>
-					<configuration>
-						<includeAllDependencies>true</includeAllDependencies>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
-	</build>
-
-	<profiles>
-		<profile>
-			<id>Indigo.target</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>build-helper-maven-plugin</artifactId>
-						<version>${build-helper-version}</version>
-						<executions>
-							<!-- make target file available for incremental builds -->
-							<execution>
-								<id>attach-artifacts</id>
-								<phase>package</phase>
-								<goals>
-									<goal>attach-artifact</goal>
-								</goals>
-								<configuration>
-									<artifacts>
-										<artifact>
-											<!-- note: the file name must be ${classifier}.target -->
-											<file>Juno.target</file>
-											<type>target</type>
-											<classifier>Juno</classifier>
-										</artifact>
-									</artifacts>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${build-helper-version}</version>
+				<executions>
+					<!-- make target file available for incremental builds -->
+					<execution>
+						<id>attach-artifacts</id>
+						<phase>package</phase>
+						<goals>
+							<goal>attach-artifact</goal>
+						</goals>
 						<configuration>
-							<!-- add target file content to target platform -->
-							<target>
+							<artifacts>
 								<artifact>
-									<groupId>org.yakindu.base</groupId>
-									<artifactId>org.yakindu.base.target</artifactId>
-									<version>2.1.0-SNAPSHOT</version>
+									<!-- note: the file name must be ${classifier}.target -->
+									<file>Juno.target</file>
+									<type>target</type>
 									<classifier>Juno</classifier>
 								</artifact>
-							</target>
-							<environments>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>macosx</os>
-									<ws>cocoa</ws>
-									<arch>x86_64</arch>
-								</environment>
-							</environments>
+								<artifact>
+									<!-- note: the file name must be ${classifier}.target -->
+									<file>Kepler.target</file>
+									<type>target</type>
+									<classifier>Kepler</classifier>
+								</artifact>
+							</artifacts>
 						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

@@ -5,17 +5,21 @@
       version="2.1.0.qualifier"
       provider-name="yakindu.org">
 
-   <description url="">
+   <description url="http://www.statecharts.org">
       %description
    </description>
 
-   <copyright url="http://www.example.com/copyright">
+   <copyright url="%licenseURL">
       %copyright
    </copyright>
 
    <license url="%licenseURL">
       %license
    </license>
+
+   <url>
+      <discovery label="Yakindu SCT Repository" url="http://updates.yakindu.com/juno/releases"/>
+   </url>
 
    <includes
          id="de.itemis.gmf.runtime.commons"

@@ -10,18 +10,10 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.16.0</tycho-version>
+		<tycho-version>0.18.0</tycho-version>
 		<antrun-version>1.6</antrun-version>
-		<p2.target.repository>file:../org.yakindu.base.target/target/repository</p2.target.repository>
-		<tycho-extras-version>0.16.0</tycho-extras-version>
+		<tycho-extras-version>0.18.0</tycho-extras-version>
 	</properties>
-	<repositories>
-		<repository>
-			<id>target</id>
-			<layout>p2</layout>
-			<url>${p2.target.repository}</url>
-		</repository>
-	</repositories>
 	<build>
 		<plugins>
 			<plugin>
@@ -31,6 +23,7 @@
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
+			<!-- Convert mappings in about.mappings -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
@@ -73,7 +66,7 @@
 					</execution>
 					<execution>
 						<id>replace-back-build-token</id>
-						<phase>install</phase>
+						<phase>verify</phase>
 						<configuration>
 							<target>
 								<taskdef resource="net/sf/antcontrib/antcontrib.properties"
@@ -115,13 +108,90 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			<!-- Configure sources (Source feature has to be added to category manually) -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-source-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attach-source</id>
+						<goals>
+							<goal>plugin-source</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-source-feature-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<executions>
+					<execution>
+						<id>source-feature</id>
+						<phase>package</phase>
+						<goals>
+							<goal>source-feature</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- pack plugins with pack200, which are smaller class files (Part I) -->
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-pack200a-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<executions>
+					<execution>
+						<id>pack200-normalize</id>
+						<goals>
+							<goal>normalize</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- TODO sign here -->
+			<!-- pack plugins with pack200, which are smaller class files (Part II) 
+				and add them to p2-metadata -->
+			<plugin>
+				<groupId>org.eclipse.tycho.extras</groupId>
+				<artifactId>tycho-pack200b-plugin</artifactId>
+				<version>${tycho-extras-version}</version>
+				<executions>
+					<execution>
+						<id>pack200-pack</id>
+						<goals>
+							<goal>pack</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Then, alter p2-metadata to make the .pack.gz and the source bundles
+			visible from other modules -->
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>p2-metadata</id>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<defaultP2Metadata>false</defaultP2Metadata>
+				</configuration>
+			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
 				<!-- Avoid the generation of maven archive information in the META-INF 
 					folder -->
 				<plugin>
-					<groupId>${tycho-groupid}</groupId>
+					<groupId>org.eclipse.tycho</groupId>
 					<artifactId>tycho-packaging-plugin</artifactId>
 					<version>${tycho-version}</version>
 					<configuration>
@@ -144,16 +214,11 @@
 						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
 					</configuration>
 				</plugin>
-				<!-- Avoid the generation of maven archive information in the META-INF 
-					folder -->
 				<plugin>
-					<groupId>${tycho-groupid}</groupId>
-					<artifactId>tycho-packaging-plugin</artifactId>
-					<version>${tycho-version}</version>
+					<groupId>org.eclipse.tycho</groupId>
+					<artifactId>tycho-p2-repository-plugin</artifactId>
 					<configuration>
-						<archive>
-							<addMavenDescriptor>false</addMavenDescriptor>
-						</archive>
+						<includeAllDependencies>true</includeAllDependencies>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -170,19 +235,42 @@
 						</execution>
 					</executions>
 				</plugin>
+				<!-- Base configuration of target environments -->
 				<plugin>
 					<groupId>org.eclipse.tycho</groupId>
-					<artifactId>tycho-p2-plugin</artifactId>
+					<artifactId>target-platform-configuration</artifactId>
 					<version>${tycho-version}</version>
-					<executions>
-						<execution>
-							<id>attached-p2-metadata</id>
-							<phase>package</phase>
-							<goals>
-								<goal>p2-metadata</goal>
-							</goals>
-						</execution>
-					</executions>
+					<configuration>
+						<!-- Necessary for pack200 files -->
+						<includePackedArtifacts>true</includePackedArtifacts>
+						<environments>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>linux</os>
+								<ws>gtk</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86</arch>
+							</environment>
+							<environment>
+								<os>win32</os>
+								<ws>win32</ws>
+								<arch>x86_64</arch>
+							</environment>
+							<environment>
+								<os>macosx</os>
+								<ws>cocoa</ws>
+								<arch>x86_64</arch>
+							</environment>
+						</environments>
+					</configuration>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -202,6 +290,31 @@
 	<profiles>
 		<profile>
 			<id>Indigo.target</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.eclipse.tycho</groupId>
+						<artifactId>target-platform-configuration</artifactId>
+						<version>${tycho-version}</version>
+						<configuration>
+							<!-- Necessary for pack200 files -->
+							<includePackedArtifacts>true</includePackedArtifacts>
+							<!-- add target file content to target platform -->
+							<target>
+								<artifact>
+									<groupId>org.yakindu.base</groupId>
+									<artifactId>org.yakindu.base.target</artifactId>
+									<version>2.1.0-SNAPSHOT</version>
+									<classifier>Juno</classifier>
+								</artifact>
+							</target>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>Kepler.target</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -212,34 +325,17 @@
 						<artifactId>target-platform-configuration</artifactId>
 						<version>${tycho-version}</version>
 						<configuration>
+							<!-- Necessary for pack200 files -->
+							<includePackedArtifacts>true</includePackedArtifacts>
 							<!-- add target file content to target platform -->
-							<environments>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>linux</os>
-									<ws>gtk</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86</arch>
-								</environment>
-								<environment>
-									<os>win32</os>
-									<ws>win32</ws>
-									<arch>x86_64</arch>
-								</environment>
-								<environment>
-									<os>macosx</os>
-									<ws>cocoa</ws>
-									<arch>x86_64</arch>
-								</environment>
-							</environments>
+							<target>
+								<artifact>
+									<groupId>org.yakindu.base</groupId>
+									<artifactId>org.yakindu.base.target</artifactId>
+									<version>2.1.0-SNAPSHOT</version>
+									<classifier>Juno</classifier>
+								</artifact>
+							</target>
 						</configuration>
 					</plugin>
 				</plugins>
@@ -248,6 +344,8 @@
 	</profiles>
 
 	<modules>
+		<module>../org.yakindu.base.target</module>
+
 		<module>../org.yakindu.base.types</module>
 		<module>../org.yakindu.base.types.edit</module>
 		<module>../org.yakindu.base.types.scope</module>
