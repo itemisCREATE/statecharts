@@ -43,7 +43,7 @@ class SExecExtensions {
 	}
 	
 	def getTimeEvents(ExecutionFlow it) {
-		scopes.fold(new LinkedList<TimeEvent>, [l, s | l += s.declarations.filter(typeof(TimeEvent)) return l])
+		scopes.fold(new LinkedList<TimeEvent>, [l, s | l += s.declarations.filter(typeof(TimeEvent)) l])
 	}
 	
 	def hasHistory(ExecutionFlow it) {
