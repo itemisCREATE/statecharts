@@ -21,8 +21,6 @@
 				<configuration>
 					<excludes>
 						<plugin id="org.yakindu.sct.doc.user"/>
-						<feature id="org.eclipse.gmf.runtime.emf.clipboard.core.patch"/>
-						<feature id="org.eclipse.gmf"/>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -32,5 +30,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

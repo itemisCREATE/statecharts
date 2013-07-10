@@ -13,44 +13,13 @@
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-test-plugin</packaging>
 	
-	<profiles>
-		<profile>
-			<id>CI</id>
-			<!-- Test failures are collected by jenkins and evaluated for instable builds -->
-			<properties>
-				<testFailureIgnore>true</testFailureIgnore>
-			</properties>
-		</profile>
-		<profile>
-			<id>macosx</id>
-			<activation>
-				<os>
-					<family>mac</family>
-				</os>
-			</activation>
-			<properties>
-				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread</test.vmargs>
-			</properties>
-		</profile>
-		<profile>
-			<id>other-os</id>
-			<activation>
-				<os>
-					<family>!mac</family>
-				</os>
-			</activation>
-			<properties>
-				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m</test.vmargs>
-			</properties>
-		</profile>
-	</profiles>
+
 	
 	<properties>
 		<testFailureIgnore>false</testFailureIgnore>
 	</properties>
 	
 	<build>
-		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
@@ -62,19 +31,6 @@
 					<testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
 					<argLine>${test.vmargs}</argLine>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-source-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<id>plugin-source</id>
-						<goals>
-							<goal>plugin-source</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>
