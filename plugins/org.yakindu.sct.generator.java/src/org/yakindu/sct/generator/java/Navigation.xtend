@@ -12,7 +12,7 @@ package org.yakindu.sct.generator.java
 import java.util.ArrayList
 import java.util.List
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Variable
@@ -21,7 +21,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class Navigation extends SExecExtensions {
 	
@@ -37,12 +36,6 @@ class Navigation extends SExecExtensions {
 	def boolean hasOutgoingEvents(ExecutionFlow it) {
 		return !outgoingEvents.empty
 	}
-	
-	def getTimeEvents(ExecutionFlow flow) {
-		val timeEvents = new ArrayList<TimeEvent>
-		flow.scopes.forEach[timeEvents.addAll(declarations.filter(typeof(TimeEvent)))]
-		return timeEvents
-	} 
 	
 	def getInternalScopeEvents(ExecutionFlow flow) {
 		val events = new ArrayList<EventDefinition>

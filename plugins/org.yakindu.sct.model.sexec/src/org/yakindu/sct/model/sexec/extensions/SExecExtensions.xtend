@@ -34,11 +34,16 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.sexec.Sequence
+import java.util.LinkedList
 
 class SExecExtensions {
 	
 	def isTimed (ExecutionFlow it) {
 		scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].size > 0
+	}
+	
+	def getTimeEvents(ExecutionFlow it) {
+		scopes.fold(new LinkedList<TimeEvent>, [l, s | l += s.declarations.filter(typeof(TimeEvent)) return l])
 	}
 	
 	def hasHistory(ExecutionFlow it) {
@@ -49,10 +54,8 @@ class SExecExtensions {
 		!outgoingEvents.empty
 	}
 	
-	def List<EventDefinition> getOutgoingEvents(Scope it) {
-		val events = new ArrayList<EventDefinition>()
-		declarations.filter(typeof(EventDefinition)).forEach(ev | if (ev.direction == Direction::OUT) events += ev)
-		events
+	def getOutgoingEvents(Scope it) {
+		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::OUT].fold(new LinkedList<EventDefinition>, [l, ev | l += ev l])
 	}
 	
 	def hasIncomingEvents(Scope it) {
@@ -60,9 +63,7 @@ class SExecExtensions {
 	}
 		
 	def List<EventDefinition> getIncomingEvents(Scope it) {
-		val events = new ArrayList<EventDefinition>()
-		declarations.filter(typeof(EventDefinition)).forEach(ev | if (ev.direction == Direction::IN) events += ev)
-		events
+		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::IN].fold(new LinkedList<EventDefinition>, [l, ev | l += ev l])
 	}
 	
 	def getInterfaceScopes(ExecutionFlow it) {
