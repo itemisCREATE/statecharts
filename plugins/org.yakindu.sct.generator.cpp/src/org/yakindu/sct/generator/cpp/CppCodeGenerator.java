@@ -10,26 +10,45 @@
  */
 package org.yakindu.sct.generator.cpp;
 
-import org.eclipse.core.resources.IProject;
-import org.yakindu.sct.generator.core.impl.AbstractXpandBasedCodeGenerator;
+import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
+
+import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
+import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
+import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
+import org.yakindu.sct.model.sgraph.Statechart;
+
+import com.google.inject.Binder;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * 
- * @author andreas muelder - Initial contribution and API
+ * @author Markus Mühlbrandt - Initial contribution and API
  * 
  */
-public class CppCodeGenerator extends AbstractXpandBasedCodeGenerator {
+public class CppCodeGenerator extends GenericJavaBasedGenerator {
 
 	@Override
-	public String getTemplatePath() {
-		return "org::yakindu::sct::generator::cpp::templates::Main::main";
+	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
+		CppGenerator delegate = getInjector(entry).getInstance(
+				CppGenerator.class);
+		ExecutionFlow flow = createExecutionFlow(statechart, entry);
+		if (isDumpSexec(entry)) {
+			dumpSexec(entry, flow);
+		}
+		delegate.generate(flow, entry, getFileSystemAccess(entry));
 	}
 
 	@Override
-	protected void createProject(IProject project, GeneratorEntry entry) {
-		super.createProject(project, entry);
-		// TODO: Set up right project description with C++ related stuff here...
+	protected Module createModule(GeneratorEntry entry) {
+		Module module = super.createModule(entry);
+		return Modules.override(module).with(new Module() {
+			public void configure(Binder binder) {
+				binder.bind(ICodegenTypeSystemAccess.class).to(
+						CTypeSystemAccess.class);
+			}
+		});
 	}
-
 }
