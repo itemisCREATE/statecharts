@@ -2,6 +2,30 @@
 <?eclipse version="3.4"?>
 
 <plugin>
+   <extension
+         point="org.yakindu.sct.generator.core.generator">
+      <SCTGenerator
+            class="org.yakindu.sct.generator.cpp.CppCodeGenerator"
+            contentType="statechart"
+            description="YAKINDU SCT C++ Code Generator"
+            elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            id="yakindu::cpp"
+            name="YAKINDU SCT C++ Code Generator">
+         <FeatureLibrary
+               library_id="org.yakindu.generator.core.features">
+         </FeatureLibrary>
+         <FeatureLibrary
+               library_id="org.yakindu.generator.core.features.sctbase">
+         </FeatureLibrary>
+      </SCTGenerator>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::cpp">
+      </ExtensionGeneratorMapping>
+   </extension>
    <!-- extension
          point="org.yakindu.sct.generator.core.generator">
       <SCTGenerator
