@@ -29,11 +29,6 @@
             library_id="org.yakindu.sct.generator.feature.c"
             uri="platform:/plugin/org.yakindu.sct.generator.c/library/FeatureTypeLibrary.xmi">
       </FeatureLibrary>
-      <FeatureLibrary
-            defaultProvider="org.yakindu.sct.generator.c.AbstractDefaultFeatureValueProvider:1"
-            library_id="org.yakindu.sct.generator.c.FeatureLibrary1"
-            uri="org.yakindu.sct.generator.c.FeatureLibrary1">
-      </FeatureLibrary>
    </extension>
    <extension
          point="org.yakindu.sct.generator.core.extensions">
