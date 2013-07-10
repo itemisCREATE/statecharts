@@ -57,6 +57,8 @@ class StatemachineHeader extends Statemachine {
 			
 			public:
 			
+				«statesEnumDecl»
+				
 				«FOR s : it.scopes»«s.createScope(entry)»«ENDFOR»
 				
 				«FOR s : it.scopes.filter( typeof(InternalScope) )»
@@ -64,13 +66,12 @@ class StatemachineHeader extends Statemachine {
 				«ENDFOR»
 				
 				/*! Checks if the specified state is active. */
-				virtual sc_boolean «nameOfIsActiveFunction»(«statesEnumType» state) = 0;
+				sc_boolean «nameOfIsActiveFunction»(«statesEnumType» state);
 			
 			private:
-				«statesEnumDecl»
-				
+			
 				«statemachineTypeDecl»
-		}
+		};
 		
 		#endif /* «module.define»_H_ */
 	'''
@@ -170,9 +171,10 @@ class StatemachineHeader extends Statemachine {
 		//! dimension of the state configuration vector for history states
 		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
 		
+		«IF timed»sc_boolean timeEvents[«timeEvents.size»];«ENDIF»
 		«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
 		«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
-		sc_ushort stateConfVectorPosition; 
+		sc_ushort stateConfVectorPosition;
 	'''
 
 	override dispatch functionPrototypes(EventDefinition it) '''

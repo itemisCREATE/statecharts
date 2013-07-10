@@ -54,6 +54,8 @@ public class Types {
     _builder.newLine();
     _builder.append("typedef string\t\t\tsc_string;");
     _builder.newLine();
+    _builder.append("typedef bool\t\t\tsc_boolean;");
+    _builder.newLine();
     _builder.newLine();
     _builder.append("typedef void*\t\t\tsc_eventid;");
     _builder.newLine();

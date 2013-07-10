@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
+import java.util.LinkedList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.generator.IFileSystemAccess;
@@ -16,6 +17,7 @@ import org.yakindu.sct.generator.cpp.Naming;
 import org.yakindu.sct.generator.cpp.Navigation;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.StateVector;
+import org.yakindu.sct.model.sexec.TimeEvent;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -115,6 +117,12 @@ public class StatemachineHeader extends Statemachine {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t\t");
+    CharSequence _statesEnumDecl = this.statesEnumDecl(it);
+    _builder.append(_statesEnumDecl, "		");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.newLine();
+    _builder.append("\t\t");
     {
       EList<Scope> _scopes = it.getScopes();
       for(final Scope s : _scopes) {
@@ -141,30 +149,26 @@ public class StatemachineHeader extends Statemachine {
     _builder.append("/*! Checks if the specified state is active. */");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("virtual sc_boolean ");
+    _builder.append("sc_boolean ");
     String _nameOfIsActiveFunction = this.cNaming.nameOfIsActiveFunction(it);
     _builder.append(_nameOfIsActiveFunction, "		");
     _builder.append("(");
     String _statesEnumType = this.cNaming.statesEnumType(it);
     _builder.append(_statesEnumType, "		");
-    _builder.append(" state) = 0;");
+    _builder.append(" state);");
     _builder.newLineIfNotEmpty();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("private:");
     _builder.newLine();
-    _builder.append("\t\t");
-    CharSequence _statesEnumDecl = this.statesEnumDecl(it);
-    _builder.append(_statesEnumDecl, "		");
-    _builder.newLineIfNotEmpty();
-    _builder.append("\t\t");
+    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t\t");
     CharSequence _statemachineTypeDecl = this.statemachineTypeDecl(it);
     _builder.append(_statemachineTypeDecl, "		");
     _builder.newLineIfNotEmpty();
-    _builder.append("}");
+    _builder.append("};");
     _builder.newLine();
     _builder.newLine();
     _builder.append("#endif /* ");
@@ -421,6 +425,17 @@ public class StatemachineHeader extends Statemachine {
     }
     _builder.newLineIfNotEmpty();
     _builder.newLine();
+    {
+      boolean _isTimed = this._navigation.isTimed(it);
+      if (_isTimed) {
+        _builder.append("sc_boolean timeEvents[");
+        LinkedList<TimeEvent> _timeEvents = this._navigation.getTimeEvents(it);
+        int _size_2 = _timeEvents.size();
+        _builder.append(_size_2, "");
+        _builder.append("];");
+      }
+    }
+    _builder.newLineIfNotEmpty();
     String _statesEnumType = this.cNaming.statesEnumType(it);
     _builder.append(_statesEnumType, "");
     _builder.append(" stateConfVector[");
@@ -442,7 +457,7 @@ public class StatemachineHeader extends Statemachine {
       }
     }
     _builder.newLineIfNotEmpty();
-    _builder.append("sc_ushort stateConfVectorPosition; ");
+    _builder.append("sc_ushort stateConfVectorPosition;");
     _builder.newLine();
     return _builder;
   }

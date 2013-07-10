@@ -38,6 +38,7 @@ class Types {
 		typedef int				sc_integer;  
 		typedef double			sc_real;
 		typedef string			sc_string;
+		typedef bool			sc_boolean;
 		
 		typedef void*			sc_eventid;
 		
