@@ -3,25 +3,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.yakindu.sct</groupId>
-		<artifactId>org.yakindu.sct.releng</artifactId>
-		<version>2.1.1-SNAPSHOT</version>
-		<relativePath>../org.yakindu.sct.releng/pom.xml</relativePath>
-	</parent>
+	
+	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng.promote</artifactId>
-	<packaging>eclipse-repository</packaging>
+	<version>2.1.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
 
 	<!-- Search for 'target architecture' to find places where the architecture 
 		for distros is set -->
 
 	<properties>
+		<tycho.extras.version>0.18.0</tycho.extras.version>
+
 		<!-- scp settings for publishing udpdate site -->
-		<promotionTarget>indigo/integration</promotionTarget>
+		<promotionTarget>kepler/integration</promotionTarget>
 		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
 		<updateSiteUrl>http://updates.yakindu.org/${promotionTarget}</updateSiteUrl>
 		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
-		<tycho.extras.version>0.16.0</tycho.extras.version>
 
 		<eclipse.mirror.url>http://mirror.netcologne.de/eclipse</eclipse.mirror.url>
 		<distro.dir>${project.build.directory}/distro</distro.dir>
@@ -30,7 +28,6 @@
 		<profile>epp.package.java</profile>
 		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.sdk.feature.group</features>
 		<update.sites>${p2.target.repository},file:${local.update.site},${updateSiteUrl}</update.sites>
-
 	</properties>
 
 	<build>
@@ -294,7 +291,7 @@
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-eclipserun-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
+				<version>${tycho.extras.version}</version>
 				<executions>
 					<!-- Add execution per 'target architecture' -->
 					<execution>
@@ -380,7 +377,7 @@
 				<plugin>
 					<groupId>org.eclipse.tycho.extras</groupId>
 					<artifactId>tycho-eclipserun-plugin</artifactId>
-					<version>${tycho-extras-version}</version>
+					<version>${tycho.extras.version}</version>
 					<configuration>
 						<argLine>-Declipse.p2.mirrors=false</argLine>
 						<repositories>
