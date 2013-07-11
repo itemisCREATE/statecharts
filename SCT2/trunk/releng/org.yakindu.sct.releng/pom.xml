@@ -526,7 +526,7 @@
 
 		<module>../org.yakindu.sct.generator.c</module>
 		<module>../org.yakindu.sct.generator.c.test</module>
-		<module>../org.yakindu.sct.generator.cpp</module>
+		<!--<module>../org.yakindu.sct.generator.cpp</module>-->
 		<module>../org.yakindu.sct.generator.c-feature</module>
 
 		<module>../org.yakindu.sct.generator.java</module>
