@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Interpreter Test Plugin
 Bundle-SymbolicName: org.yakindu.sct.model.sexec.interpreter.test
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.1.1.qualifier
 Bundle-Vendor: yakindu.org
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext;bundle-version="2.0.0",

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.yakindu.base_2.1.0.qualifier.jar" id="org.yakindu.base" version="2.1.0.qualifier">
+   <feature url="features/org.yakindu.base_0.0.0.jar" id="org.yakindu.base" version="0.0.0">
       <category name="dummy"/>
    </feature>
    <category-def name="dummy" label="empty category to support eclipse-repository packaging"/>
