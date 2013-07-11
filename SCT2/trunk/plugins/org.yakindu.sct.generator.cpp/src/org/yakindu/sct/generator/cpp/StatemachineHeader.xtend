@@ -41,8 +41,8 @@ class StatemachineHeader extends Statemachine {
 	override statemachineHContent(ExecutionFlow it,  GeneratorEntry entry) '''
 		«entry.licenseText»
 		
-		#ifndef «module.define»_H_
-		#define «module.define»_H_
+		#ifndef «module().define»_H_
+		#define «module().define»_H_
 
 		#include "«typesModule.hpp»"
 		#include "«iStatemachine.hpp»"
@@ -53,7 +53,7 @@ class StatemachineHeader extends Statemachine {
 		/*! \file Header of the state machine '«name»'.
 		*/
 		
-		class «module» : «interfaceExtensions» {
+		class «module()» : «interfaceExtensions» {
 			
 			public:
 			
@@ -73,7 +73,7 @@ class StatemachineHeader extends Statemachine {
 				«statemachineTypeDecl»
 		};
 		
-		#endif /* «module.define»_H_ */
+		#endif /* «module().define»_H_ */
 	'''
 	
 	def getInterfaceExtensions(ExecutionFlow flow) {
