@@ -13,7 +13,6 @@
 		<tycho-version>0.18.0</tycho-version>
 		<tycho-extras-version>0.18.0</tycho-extras-version>
 		<antrun-version>1.6</antrun-version>
-		<p2.target.repository>file:../org.yakindu.base.target/target/repository</p2.target.repository>
 		<p2.base.repository>file:../org.yakindu.base.repository/target/repository</p2.base.repository>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -178,8 +177,8 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- Then, alter p2-metadata to make the .pack.gz and the source bundles
-			visible from other modules -->
+			<!-- Then, alter p2-metadata to make the .pack.gz and the source bundles 
+				visible from other modules -->
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-p2-plugin</artifactId>
@@ -196,6 +195,11 @@
 				<configuration>
 					<defaultP2Metadata>false</defaultP2Metadata>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho-version}</version>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -372,41 +376,28 @@
 		</pluginRepository>
 	</pluginRepositories>
 
+	<repositories>
+		<repository>
+			<id>yakindu-base</id>
+			<layout>p2</layout>
+			<url>${p2.base.repository}</url>
+		</repository>
+	</repositories>
+
 	<profiles>
 		<profile>
 			<id>builds-target</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<!-- ActiveByDefault does not work because of macosx-profile with is 
+					triggered by property -->
+				<!-- <activeByDefault>true</activeByDefault> -->
+				<property>
+					<name>!noBuildsTarget</name>
+				</property>
 			</activation>
 			<properties>
-				<p2.target.repository>https://builds.itemis.de/jenkins/job/YAKINDU_Base_target/lastSuccessfulBuild/artifact/update-site</p2.target.repository>
 				<p2.base.repository>https://projects.itemis.de/data/yakindu/base/juno/snapshot/</p2.base.repository>
 			</properties>
-		</profile>
-		<profile>
-			<id>local-target</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<repositories>
-				<repository>
-					<id>yakindu-base</id>
-					<layout>p2</layout>
-					<url>${p2.base.repository}</url>
-				</repository>
-			</repositories>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-					</plugin>
-				</plugins>
-			</build>
-			<modules>
-				<module>../org.yakindu.base.target</module>
-			</modules>
 		</profile>
 		<profile>
 			<id>Indigo.target</id>
@@ -434,7 +425,12 @@
 		<profile>
 			<id>Kepler.target</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<!-- ActiveByDefault does not work because of macosx-profile with is 
+					triggered by property -->
+				<!-- <activeByDefault>true</activeByDefault> -->
+				<property>
+					<name>!noKeplerTarget</name>
+				</property>
 			</activation>
 			<build>
 				<plugins>
@@ -467,19 +463,32 @@
 		</profile>
 		<profile>
 			<id>macosx</id>
+			<activation>
+				<os>
+					<family>mac</family>
+				</os>
+			</activation>
 			<properties>
-				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread</test.vmargs>
+				<ui.test.vmargs>-Xmx512m -XX:MaxPermSize=256m -XstartOnFirstThread</ui.test.vmargs>
 			</properties>
 		</profile>
 		<profile>
 			<id>other-os</id>
+			<activation>
+				<os>
+					<family>!mac</family>
+				</os>
+			</activation>
 			<properties>
-				<test.vmargs>-Xmx512m -XX:MaxPermSize=256m</test.vmargs>
+				<ui.test.vmargs>-Xmx512m -XX:MaxPermSize=256m</ui.test.vmargs>
 			</properties>
 		</profile>
 	</profiles>
 
 	<modules>
+		<!-- Only for access without m2-repo -->
+		<module>../org.yakindu.base.target</module>
+
 		<module>../org.yakindu.sct.commons</module>
 		<module>../org.yakindu.sct.doc.user</module>
 		<module>../org.yakindu.sct.examples.trafficlight</module>
