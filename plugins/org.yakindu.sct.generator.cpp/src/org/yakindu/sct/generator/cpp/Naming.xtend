@@ -21,7 +21,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	def cpp(String it) { it + ".cpp" }
 	
 	def abstractModule(ExecutionFlow it) {
-		'I'+module	
+		'I'+module()
 	}
 	
 	def iStatemachine() {
