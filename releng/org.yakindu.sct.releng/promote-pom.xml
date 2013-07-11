@@ -14,6 +14,7 @@
 
 	<properties>
 		<tycho.extras.version>0.18.0</tycho.extras.version>
+		<tycho-version>0.18.0</tycho-version>
 
 		<!-- scp settings for publishing udpdate site -->
 		<promotionTarget>kepler/integration</promotionTarget>
@@ -32,6 +33,13 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<!-- enable tycho build extension -->
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<extensions>true</extensions>
+			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
 				<artifactId>tycho-p2-extras-plugin</artifactId>
