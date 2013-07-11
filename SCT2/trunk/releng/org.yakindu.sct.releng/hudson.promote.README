@@ -9,6 +9,10 @@ Parameterized-build:
 + Selection
 	Name: promotionTarget
 	Selections:
+		kepler/nightly
+		kepler/integration
+		kepler/milestones
+		kepler/releases
 		juno/integration
 		juno/milestones
 		juno/releases
@@ -23,6 +27,19 @@ Parameterized-build:
 	Description:
 		If set to false no existing repository is mirrored before and the existing one is replaced, if there is one.
 		This should only be set to false, if the promotion is to a new repository location.
+
++ Text
+	Name: base_target_job
+	Default: http://download.eclipse.org/releases/kepler
+	Description:
+		Location of repository used for additional features
+
++ Run Parameter
+	Name: base_repository_job
+	Project: YAKINDU_Base_CI
+	Description:
+		Location of base repository used for install base feature
+
 
 Source-Code-Management:
 + SVN
