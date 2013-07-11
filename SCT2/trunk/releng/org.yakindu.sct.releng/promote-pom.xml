@@ -383,6 +383,13 @@
 					<version>${tycho-extras-version}</version>
 					<configuration>
 						<argLine>-Declipse.p2.mirrors=false</argLine>
+						<repositories>
+							<repository>
+								<id>kepler</id>
+								<layout>p2</layout>
+								<url>http://download.eclipse.org/releases/kepler</url>
+							</repository>
+						</repositories>
 						<dependencies>
 							<dependency>
 								<artifactId>org.eclipse.equinox.p2.transport.ecf</artifactId>

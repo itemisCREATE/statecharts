@@ -16,7 +16,7 @@
 		<eclipse.mirror.url>http://mirror.netcologne.de/eclipse</eclipse.mirror.url>
 		<distro.work.dir>${project.build.directory}/distro/work</distro.work.dir>
 		<distro.dir>${project.build.directory}/distro</distro.dir>
-		
+
 		<profile>epp.package.java</profile>
 		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.feature.group</features>
 		<!-- TODO ,org.eclipse.gmf.runtime.emf.clipboard.core.patch.feature.group -->
@@ -24,8 +24,8 @@
 	</properties>
 
 	<build>
-	    <plugins>
-	        <plugin>
+		<plugins>
+			<plugin>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.1</version>
 				<executions>
@@ -41,161 +41,136 @@
 								<property name="download.distro.dir"
 									value="${project.build.directory}/../distro/download" />
 
-	<for list="win32-win32-x86;win32-win32-x86_64;macosx-cocoa-x86_64"
-			param="environment"
-			delimiter=";"
-			parallel="false">
-		<sequential>
-			<propertyregex property="distro.os"
-              input="@{environment}"
-              override="true"
-              regexp="([^,]*)-([^\,]*)-([^\,]*)"
-              select="\1"
-              casesensitive="false" />
-			<propertyregex property="distro.ws"
-              input="@{environment}"
-              override="true"
-              regexp="([^,]*)-([^\,]*)-([^\,]*)"
-              select="\2"
-              casesensitive="false" />
-			<propertyregex property="distro.arch"
-              input="@{environment}"
-              override="true"
-              regexp="([^,]*)-([^\,]*)-([^\,]*)"
-              select="\3"
-              casesensitive="false" />
-              <echo>distro.os ${distro.os} </echo>
-              <echo>distro.ws ${distro.ws} </echo>
-              <echo>distro.arch ${distro.arch} </echo>
-								<!-- naming is platform specific, so we have to make a distinction 
-									here (as we only have two platforms, we do not have to make any other distinctions 
-									so far) -->
-								<if>
-									<and>
-										<equals arg1="${distro.os}" arg2="win32" />
-										<equals arg1="${distro.ws}" arg2="win32" />
-										<equals arg1="${distro.arch}" arg2="x86" />
-									</and>
-									<then>
-										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-kepler-R-win32.zip"
-							              override="true"
-							              regexp="(.*)"
-							              select="\1"
-							              casesensitive="false" />
-									</then>
-								</if>
-								<if>
-									<and>
-										<equals arg1="${distro.os}" arg2="win32" />
-										<equals arg1="${distro.ws}" arg2="win32" />
-										<equals arg1="${distro.arch}" arg2="x86_64" />
-									</and>
-									<then>
-										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-kepler-R-win32-x86_64.zip"
-							              override="true"
-							              regexp="(.*)"
-							              select="\1"
-							              casesensitive="false" />
-									</then>
-								</if>
-								<if>
-									<and>
-										<equals arg1="${distro.os}" arg2="linux" />
-										<equals arg1="${distro.ws}" arg2="gtk" />
-										<equals arg1="${distro.arch}" arg2="x86_64" />
-									</and>
-									<then>
-										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-kepler-R-linux-gtk-x86_64.tar.gz"
-							              override="true"
-							              regexp="(.*)"
-							              select="\1"
-							              casesensitive="false" />
-									</then>
-								</if>
-								<if>
-									<and>
-										<equals arg1="${distro.os}" arg2="linux" />
-										<equals arg1="${distro.ws}" arg2="gtk" />
-										<equals arg1="${distro.arch}" arg2="x86" />
-									</and>
-									<then>
-										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-kepler-R-linux-gtk.tar.gz"
-							              override="true"
-							              regexp="(.*)"
-							              select="\1"
-							              casesensitive="false" />
-									</then>
-								</if>
-								<if>
-									<and>
-										<equals arg1="${distro.os}" arg2="macosx" />
-										<equals arg1="${distro.ws}" arg2="cocoa" />
-										<equals arg1="${distro.arch}" arg2="x86_64" />
-									</and>
-									<then>
-										<propertyregex property="distro.src.filename"
-							              input="eclipse-java-kepler-R-macosx-cocoa-x86_64.tar.gz"
-							              override="true"
-							              regexp="(.*)"
-							              select="\1"
-							              casesensitive="false" />
-									</then>
-								</if>
+								<for list="win32-win32-x86;win32-win32-x86_64;macosx-cocoa-x86_64"
+									param="environment" delimiter=";" parallel="false">
+									<sequential>
+										<propertyregex property="distro.os" input="@{environment}"
+											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\1"
+											casesensitive="false" />
+										<propertyregex property="distro.ws" input="@{environment}"
+											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\2"
+											casesensitive="false" />
+										<propertyregex property="distro.arch" input="@{environment}"
+											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\3"
+											casesensitive="false" />
+										<echo>distro.os ${distro.os} </echo>
+										<echo>distro.ws ${distro.ws} </echo>
+										<echo>distro.arch ${distro.arch} </echo>
+										<!-- naming is platform specific, so we have to make a distinction 
+											here (as we only have two platforms, we do not have to make any other distinctions 
+											so far) -->
+										<if>
+											<and>
+												<equals arg1="${distro.os}" arg2="win32" />
+												<equals arg1="${distro.ws}" arg2="win32" />
+												<equals arg1="${distro.arch}" arg2="x86" />
+											</and>
+											<then>
+												<propertyregex property="distro.src.filename"
+													input="eclipse-java-kepler-R-win32.zip" override="true"
+													regexp="(.*)" select="\1" casesensitive="false" />
+											</then>
+										</if>
+										<if>
+											<and>
+												<equals arg1="${distro.os}" arg2="win32" />
+												<equals arg1="${distro.ws}" arg2="win32" />
+												<equals arg1="${distro.arch}" arg2="x86_64" />
+											</and>
+											<then>
+												<propertyregex property="distro.src.filename"
+													input="eclipse-java-kepler-R-win32-x86_64.zip" override="true"
+													regexp="(.*)" select="\1" casesensitive="false" />
+											</then>
+										</if>
+										<if>
+											<and>
+												<equals arg1="${distro.os}" arg2="linux" />
+												<equals arg1="${distro.ws}" arg2="gtk" />
+												<equals arg1="${distro.arch}" arg2="x86_64" />
+											</and>
+											<then>
+												<propertyregex property="distro.src.filename"
+													input="eclipse-java-kepler-R-linux-gtk-x86_64.tar.gz"
+													override="true" regexp="(.*)" select="\1" casesensitive="false" />
+											</then>
+										</if>
+										<if>
+											<and>
+												<equals arg1="${distro.os}" arg2="linux" />
+												<equals arg1="${distro.ws}" arg2="gtk" />
+												<equals arg1="${distro.arch}" arg2="x86" />
+											</and>
+											<then>
+												<propertyregex property="distro.src.filename"
+													input="eclipse-java-kepler-R-linux-gtk.tar.gz" override="true"
+													regexp="(.*)" select="\1" casesensitive="false" />
+											</then>
+										</if>
+										<if>
+											<and>
+												<equals arg1="${distro.os}" arg2="macosx" />
+												<equals arg1="${distro.ws}" arg2="cocoa" />
+												<equals arg1="${distro.arch}" arg2="x86_64" />
+											</and>
+											<then>
+												<propertyregex property="distro.src.filename"
+													input="eclipse-java-kepler-R-macosx-cocoa-x86_64.tar.gz"
+													override="true" regexp="(.*)" select="\1" casesensitive="false" />
+											</then>
+										</if>
 
-								<if>
-									<not>
-										<available file="${download.distro.dir}"
-											type="dir" />
-									</not>
-									<then>
-										<echo>mkdir ${download.distro.dir}</echo>
-										<mkdir dir="${download.distro.dir}" />
-									</then>
-								</if>
-								<if>
-									<not>
-										<available file="${download.distro.dir}/${distro.src.filename}" />
-									</not>
-									<then>
-										<trycatch>
-											<try>
-												<get src="${download.distro.src}/${distro.src.filename}"
-													dest="${download.distro.dir}/${distro.src.filename}" />
-											</try>
-											<catch>
-												<echo>delete ${download.distro.dir}</echo>
-												<delete file="${download.distro.dir}/${distro.src.filename}" />
-											</catch>
-										</trycatch>
-									</then>
-								</if>
-								<if>
-									<available file="${distro.work.dir}/@{environment}" type="dir" />
-									<then>
-										<delete dir="${distro.work.dir}/@{environment}" />
-									</then>
-								</if>
-								<mkdir dir="${distro.work.dir}/@{environment}"/>
-								<if>
-									<or>
-										<equals arg1="${distro.os}" arg2="win32" />
-									</or>
-									<then>
-										<unzip src="${download.distro.dir}/${distro.src.filename}"
-											dest="${distro.work.dir}/@{environment}/" />
-									</then>
-									<else>
-										<exec dir="${distro.work.dir}/@{environment}" executable="tar">
-											<arg line="-xzf ${download.distro.dir}/${distro.src.filename}" />
-										</exec>
-									</else>
-								</if>
-		</sequential>
-	</for>
+										<if>
+											<not>
+												<available file="${download.distro.dir}" type="dir" />
+											</not>
+											<then>
+												<echo>mkdir ${download.distro.dir}</echo>
+												<mkdir dir="${download.distro.dir}" />
+											</then>
+										</if>
+										<if>
+											<not>
+												<available file="${download.distro.dir}/${distro.src.filename}" />
+											</not>
+											<then>
+												<trycatch>
+													<try>
+														<get src="${download.distro.src}/${distro.src.filename}"
+															dest="${download.distro.dir}/${distro.src.filename}" />
+													</try>
+													<catch>
+														<echo>delete ${download.distro.dir}</echo>
+														<delete file="${download.distro.dir}/${distro.src.filename}" />
+													</catch>
+												</trycatch>
+											</then>
+										</if>
+										<if>
+											<available file="${distro.work.dir}/@{environment}"
+												type="dir" />
+											<then>
+												<delete dir="${distro.work.dir}/@{environment}" />
+											</then>
+										</if>
+										<mkdir dir="${distro.work.dir}/@{environment}" />
+										<if>
+											<or>
+												<equals arg1="${distro.os}" arg2="win32" />
+											</or>
+											<then>
+												<unzip src="${download.distro.dir}/${distro.src.filename}"
+													dest="${distro.work.dir}/@{environment}/" />
+											</then>
+											<else>
+												<exec dir="${distro.work.dir}/@{environment}"
+													executable="tar">
+													<arg line="-xzf ${download.distro.dir}/${distro.src.filename}" />
+												</exec>
+											</else>
+										</if>
+									</sequential>
+								</for>
 							</tasks>
 						</configuration>
 						<goals>
@@ -212,49 +187,43 @@
 							<tasks>
 								<taskdef resource="net/sf/antcontrib/antlib.xml"
 									classpathref="maven.plugin.classpath" />
-	<for list="win32-win32-x86;win32-win32-x86_64;macosx-cocoa-x86_64"
-			param="environment"
-			delimiter=";"
-			parallel="false">
-		<sequential>
-			<propertyregex property="distro.os"
-              input="@{environment}"
-              override="true"
-              regexp="([^,]*)-([^\,]*)-([^\,]*)"
-              select="\1"
-              casesensitive="false" />
-			<propertyregex property="distro.ws"
-              input="@{environment}"
-              override="true"
-              regexp="([^,]*)-([^\,]*)-([^\,]*)"
-              select="\2"
-              casesensitive="false" />
-			<propertyregex property="distro.arch"
-              input="@{environment}"
-              override="true"
-              regexp="([^,]*)-([^\,]*)-([^\,]*)"
-              select="\3"
-              casesensitive="false" />
-            <echo>mkdir ${distro.dir} for yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.zip</echo>
-			<mkdir dir="${distro.dir}" />
-			
-			<if>
-				<or>
-					<equals arg1="${distro.os}" arg2="win32" />
-				</or>
-				<then>
-					<exec dir="${distro.work.dir}/@{environment}" executable="zip">
-						<arg line="-q -r ${distro.dir}/yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.zip eclipse" />
-					</exec>
-				</then>
-				<else>
-					<exec dir="${distro.work.dir}/@{environment}" executable="tar">
-						<arg line="-czf ${distro.dir}/yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.tar.gz eclipse" />
-					</exec>
-				</else>
-			</if>
-		</sequential>
-	</for>
+								<for list="win32-win32-x86;win32-win32-x86_64;macosx-cocoa-x86_64"
+									param="environment" delimiter=";" parallel="false">
+									<sequential>
+										<propertyregex property="distro.os" input="@{environment}"
+											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\1"
+											casesensitive="false" />
+										<propertyregex property="distro.ws" input="@{environment}"
+											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\2"
+											casesensitive="false" />
+										<propertyregex property="distro.arch" input="@{environment}"
+											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\3"
+											casesensitive="false" />
+										<echo>mkdir ${distro.dir} for
+											yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.zip</echo>
+										<mkdir dir="${distro.dir}" />
+
+										<if>
+											<or>
+												<equals arg1="${distro.os}" arg2="win32" />
+											</or>
+											<then>
+												<exec dir="${distro.work.dir}/@{environment}"
+													executable="zip">
+													<arg
+														line="-q -r ${distro.dir}/yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.zip eclipse" />
+												</exec>
+											</then>
+											<else>
+												<exec dir="${distro.work.dir}/@{environment}"
+													executable="tar">
+													<arg
+														line="-czf ${distro.dir}/yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.tar.gz eclipse" />
+												</exec>
+											</else>
+										</if>
+									</sequential>
+								</for>
 							</tasks>
 						</configuration>
 					</execution>
@@ -290,7 +259,11 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog -application org.eclipse.equinox.p2.director -destination ${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile} -p2.os win32 -p2.ws win32 -p2.arch x86 -repository ${update.sites} -installIUs ${features}
+							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog
+								-application org.eclipse.equinox.p2.director -destination
+								${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile}
+								-p2.os win32 -p2.ws win32 -p2.arch x86 -repository
+								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -301,7 +274,11 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog -application org.eclipse.equinox.p2.director -destination ${distro.work.dir}/win32-win32-x86_64/eclipse/ -profile ${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository ${update.sites} -installIUs ${features}
+							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog
+								-application org.eclipse.equinox.p2.director -destination
+								${distro.work.dir}/win32-win32-x86_64/eclipse/ -profile
+								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository
+								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -312,20 +289,31 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog -application org.eclipse.equinox.p2.director -destination ${distro.work.dir}/macosx-cocoa-x86_64/eclipse/ -profile ${profile} -p2.os macosx -p2.ws cocoa -p2.arch x86_64 -repository ${update.sites} -installIUs ${features}
+							<appArgLine>-consoleLog -clean -nosplash -debug -consoleLog
+								-application org.eclipse.equinox.p2.director -destination
+								${distro.work.dir}/macosx-cocoa-x86_64/eclipse/ -profile
+								${profile} -p2.os macosx -p2.ws cocoa -p2.arch x86_64
+								-repository ${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
-	    </plugins>
-	    <pluginManagement>
-		    <plugins>
-	    		<plugin>
+		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
 					<groupId>org.eclipse.tycho.extras</groupId>
 					<artifactId>tycho-eclipserun-plugin</artifactId>
 					<version>${tycho-extras-version}</version>
-						<configuration>
+					<configuration>
+						<repositories>
+							<repository>
+								<id>kepler</id>
+								<layout>p2</layout>
+								<url>http://download.eclipse.org/releases/kepler</url>
+							</repository>
+						</repositories>
 						<argLine>-Declipse.p2.mirrors=false</argLine>
 						<dependencies>
 							<dependency>
@@ -365,8 +353,8 @@
 					</configuration>
 				</plugin>
 			</plugins>
-	    </pluginManagement>
+		</pluginManagement>
 	</build>
-	
-	
+
+
 </project>
