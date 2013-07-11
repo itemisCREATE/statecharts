@@ -17,7 +17,7 @@
 		<!-- scp settings for publishing udpdate site -->
 		<promotionTarget>indigo/integration</promotionTarget>
 		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
-		<updateSiteUrl>http://updates.yakindu.com/${promotionTarget}</updateSiteUrl>
+		<updateSiteUrl>http://updates.yakindu.org/${promotionTarget}</updateSiteUrl>
 		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
 	</properties>
 
