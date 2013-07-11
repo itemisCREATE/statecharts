@@ -4,7 +4,7 @@
     editorDirectory="/org.yakindu.sct.model.stext.editor/src" modelPluginID="org.yakindu.sct.model.stext"
     forceOverwrite="true" modelName="SText" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.yakindu.sct.model.stext.edit"
-    editorPluginID="org.yakindu.sct.model.stext.editor" runtimeVersion="2.8" usedGenPackages="platform:/resource/org.yakindu.base.types/model/base.genmodel#//base platform:/resource/org.yakindu.base.types/model/types.genmodel#//types platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
+    editorPluginID="org.yakindu.sct.model.stext.editor" runtimeVersion="2.9" usedGenPackages="platform:/resource/org.yakindu.base.types/model/base.genmodel#//base platform:/resource/org.yakindu.base.types/model/types.genmodel#//types platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
   <genPackages prefix="Stext" basePackage="org.yakindu.sct.model.stext" disposableProviderFactory="true"
       ecorePackage="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#/">
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Direction">

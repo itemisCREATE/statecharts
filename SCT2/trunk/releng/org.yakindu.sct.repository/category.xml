@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.yakindu.sct_2.1.0.qualifier.jar" id="org.yakindu.sct" version="2.1.0.qualifier">
+   <feature url="features/org.yakindu.sct_0.0.0.jar" id="org.yakindu.sct" version="0.0.0">
       <category name="Yakindu SCT 2"/>
    </feature>
-   <feature url="features/org.yakindu.sct.source_2.1.0.qualifier.jar" id="org.yakindu.sct.source" version="2.1.0.qualifier">
+   <feature url="features/org.yakindu.sct.source_0.0.0.jar" id="org.yakindu.sct.source" version="0.0.0">
       <category name="Yakindu SCT 2 (Sources)"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator.c_2.1.0.qualifier.jar" id="org.yakindu.sct.generator.c" version="2.1.0.qualifier">
+   <feature url="features/org.yakindu.sct.generator.c_0.0.0.jar" id="org.yakindu.sct.generator.c" version="0.0.0">
       <category name="Yakindu SCT 2"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator.c.source_2.1.0.qualifier.jar" id="org.yakindu.sct.generator.c.source" version="2.1.0.qualifier">
+   <feature url="features/org.yakindu.sct.generator.c.source_0.0.0.jar" id="org.yakindu.sct.generator.c.source" version="0.0.0">
       <category name="Yakindu SCT 2 (Sources)"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator.java_2.1.0.qualifier.jar" id="org.yakindu.sct.generator.java" version="2.1.0.qualifier">
+   <feature url="features/org.yakindu.sct.generator.java_0.0.0.jar" id="org.yakindu.sct.generator.java" version="0.0.0">
       <category name="Yakindu SCT 2"/>
    </feature>
-   <feature url="features/org.yakindu.sct.generator.java.source_2.1.0.qualifier.jar" id="org.yakindu.sct.generator.java.source" version="2.1.0.qualifier">
+   <feature url="features/org.yakindu.sct.generator.java.source_0.0.0.jar" id="org.yakindu.sct.generator.java.source" version="0.0.0">
       <category name="Yakindu SCT 2 (Sources)"/>
    </feature>
-   <feature url="features/org.yakindu.sct.sdk_2.1.0.qualifier.jar" id="org.yakindu.sct.sdk" version="2.1.0.qualifier">
+   <feature url="features/org.yakindu.sct.sdk_0.0.0.jar" id="org.yakindu.sct.sdk" version="0.0.0">
       <category name="Yakindu SCT 2"/>
    </feature>
    <category-def name="Yakindu SCT 2" label="Yakindu SCT 2">

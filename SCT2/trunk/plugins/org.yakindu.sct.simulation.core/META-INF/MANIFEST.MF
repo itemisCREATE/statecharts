@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu SCT Simulation Core
 Bundle-SymbolicName: org.yakindu.sct.simulation.core;singleton:=true
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.1.1.qualifier
 Bundle-Activator: org.yakindu.sct.simulation.core.Activator
 Bundle-Vendor: yakindu.org
 Require-Bundle: org.eclipse.core.runtime,

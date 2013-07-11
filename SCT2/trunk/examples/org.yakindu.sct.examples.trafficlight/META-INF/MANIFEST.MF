@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Trafficlight
 Bundle-SymbolicName: org.yakindu.sct.examples.trafficlight
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.1.1.qualifier
 Export-Package: org.yakindu.sct.examples.java.trafficlight
 Require-Bundle: org.eclipse.draw2d;bundle-version="3.7.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

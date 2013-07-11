@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: yakindu.org
 Bundle-SymbolicName: org.yakindu.sct.generator.genmodel.test
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.1.1.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.junit;bundle-version="4.8.2",
@@ -14,4 +14,13 @@ Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.0.1",
  de.itemis.xtext.utils.jface;bundle-version="1.0.0",
  org.eclipse.ui;bundle-version="3.7.0",
  org.eclipse.xtext.ui;bundle-version="2.0.1",
- org.eclipse.xtext.ui.shared;bundle-version="2.0.1"
+ org.eclipse.xtext.ui.shared;bundle-version="2.0.1",
+ org.eclipse.core.runtime,
+ org.eclipse.ui.workbench;resolution:=optional
+Export-Package: org.yakindu.sct.generator.genmodel
+Import-Package: org.junit.runner;version="4.5.0",
+ org.junit.runner.manipulation;version="4.5.0",
+ org.junit.runner.notification;version="4.5.0",
+ org.junit.runners;version="4.5.0",
+ org.junit.runners.model;version="4.5.0",
+ org.hamcrest.core

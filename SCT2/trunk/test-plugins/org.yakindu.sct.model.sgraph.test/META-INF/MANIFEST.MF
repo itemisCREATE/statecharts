@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: YSCT model tests
 Bundle-SymbolicName: org.yakindu.sct.model.sgraph.test
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.1.1.qualifier
 Bundle-Activator: org.yakindu.sct.model.sgraph.test.Activator
 Require-Bundle: org.yakindu.sct.model.sgraph;bundle-version="1.0.0",
  org.junit;bundle-version="3.8.2",
