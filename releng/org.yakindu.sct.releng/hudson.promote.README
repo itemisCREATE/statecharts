@@ -29,10 +29,10 @@ Parameterized-build:
 		This should only be set to false, if the promotion is to a new repository location.
 
 + Text
-	Name: base_target_job
+	Name: additionalFeatureRepositories
 	Default: http://download.eclipse.org/releases/kepler
 	Description:
-		Location of repository used for additional features
+		Lcoation of repository used for additional dependencies, like xtext, for packaged product. At least one URL has to be set. More than one can be delimitted by a comma.
 
 + Run Parameter
 	Name: base_repository_job
@@ -56,7 +56,8 @@ Build:
 	Properties
 		promotionSource=${env.promotionSource}
 		promotionTarget=${env.promotionTarget}
-		appendToExistingRepository=${env.appendToExistingRepository}
+		AppendToExistingRepository=${env.appendToExistingRepository}
+		p2.target.repository=${env.additionalFeatureRepositories}
 	Profiles
 	JVM Options
 	Private Maven-Repository: Checked

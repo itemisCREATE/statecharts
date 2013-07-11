@@ -19,7 +19,9 @@
 		<!-- scp settings for publishing udpdate site -->
 		<promotionTarget>kepler/integration</promotionTarget>
 		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
-		<updateSiteUrl>http://updates.yakindu.org/${promotionTarget}</updateSiteUrl>
+		<p2.target.repository>http://download.eclipse.org/releases/kepler</p2.target.repository>
+		<promotionSourceRepo>${promotionSource}/artifact/update-site</promotionSourceRepo>
+		<updateSiteUrl>http://updates.yakindu.org/sct/${promotionTarget}</updateSiteUrl>
 		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
 
 		<eclipse.mirror.url>http://mirror.netcologne.de/eclipse</eclipse.mirror.url>
@@ -56,7 +58,7 @@
 							<source>
 								<!-- source repositori(es) to mirror from -->
 								<repository>
-									<url>${promotionSource}artifact/update-site/</url>
+									<url>${promotionSourceRepo}</url>
 									<layout>p2</layout>
 									<!-- sypported layouts are "p2-metadata", "p2-artifacts", and "p2" 
 										(for joint repositories) -->
