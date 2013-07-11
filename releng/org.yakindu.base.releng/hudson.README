@@ -1,12 +1,6 @@
 To execute this build as a Hudson build job, you have to configure the following:
 JobName: YAKINDU_Base_CI
 
-Parameterized-build:
-+ Run Parameter
-	Name: base_target_job
-	Project: YAKINDU_Base_target
-	Description: Select the build to be promoted.
-
 Source-Code-Management:
 + SVN
 	URL: http://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng
@@ -34,27 +28,23 @@ Build environment:
 + Send files or execute commands over SSH after the build runs
 	Server: Yakindu Projects.itemis.de
 	Command:
-		if [ -e base/juno/snapshot ]; then 
-		 if [ -e base/juno/snapshot_backup ]; then
-		  rm -r base/juno/snapshot_backup;
+		if [ -e base/kepler/snapshot ]; then 
+		 if [ -e base/kepler/snapshot_backup ]; then
+		  rm -r base/kepler/snapshot_backup;
 		 fi
-		 mv base/juno/snapshot base/juno/snapshot_backup;
+		 mv base/kepler/snapshot base/kepler/snapshot_backup;
 		fi
 + Send files or execute commands over SSH after the build runs
 	Server: Yakindu Projects.itemis.de
 	Source files: update-site/**
 	Remove prefix: update-site
-	Remote directory: base/juno/snapshot
+	Remote directory: base/kepler/snapshot
 	Command:
-		if [ -e base/juno/snapshot -a -e base/juno/snapshot_backup ]; then
-		 rm -r base/juno/snapshot_backup;
+		if [ -e base/kepler/snapshot -a -e base/kepler/snapshot_backup ]; then
+		 rm -r base/kepler/snapshot_backup;
 		fi
 
 Build:
-+ Execute Shell
-	Command
-		echo base_target_job: ${base_target_job}
-
 + Execute Shell
     Command 
     	if [ -d "build" ]; then
@@ -76,7 +66,6 @@ Build:
 	POM File
 		../build/org.yakindu.base.releng/pom.xml
 	Properties
-		p2.target.repository=${env.base_target_job}artifact/update-site
 	Profiles
 	JVM Options
 

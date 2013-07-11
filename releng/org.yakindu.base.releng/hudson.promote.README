@@ -9,6 +9,9 @@ Parameterized-build:
 + Selection
 	Name: promotionTarget
 	Selections:
+		kepler/integration
+		kepler/milestones
+		kepler/releases
 		juno/integration
 		juno/milestones
 		juno/releases
