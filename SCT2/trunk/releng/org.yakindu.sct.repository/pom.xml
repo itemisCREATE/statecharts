@@ -200,7 +200,7 @@
 											override="true" regexp="([^,]*)-([^\,]*)-([^\,]*)" select="\3"
 											casesensitive="false" />
 										<echo>mkdir ${distro.dir} for
-											yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.zip</echo>
+											yakindu-sct-kepler-R-${distro.os}-${distro.ws}-${distro.arch}.zip</echo>
 										<mkdir dir="${distro.dir}" />
 
 										<if>
@@ -211,14 +211,14 @@
 												<exec dir="${distro.work.dir}/@{environment}"
 													executable="zip">
 													<arg
-														line="-q -r ${distro.dir}/yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.zip eclipse" />
+														line="-q -r ${distro.dir}/yakindu-sct-kepler-R-${distro.os}-${distro.ws}-${distro.arch}.zip eclipse" />
 												</exec>
 											</then>
 											<else>
 												<exec dir="${distro.work.dir}/@{environment}"
 													executable="tar">
 													<arg
-														line="-czf ${distro.dir}/yakindu-sct-juno-SR1-${distro.os}-${distro.ws}-${distro.arch}.tar.gz eclipse" />
+														line="-czf ${distro.dir}/yakindu-sct-kepler-R-${distro.os}-${distro.ws}-${distro.arch}.tar.gz eclipse" />
 												</exec>
 											</else>
 										</if>

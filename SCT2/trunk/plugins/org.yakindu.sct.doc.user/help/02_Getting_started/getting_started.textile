@@ -4,7 +4,7 @@ h3. Installation
 
 For a new installation
 * choose Eclipse menu Help/Install New Software ...
-* press the 'add' button in the top right corner of the installation wizard to add http://updates.yakindu.com/juno/releases as update site
+* press the 'add' button in the top right corner of the installation wizard to add http://updates.yakindu.org/kepler/releases as update site
 * select all the listed features
 * and follow the installation wizzard 
 * For updating the installed plugins select Help/Check for Updates...

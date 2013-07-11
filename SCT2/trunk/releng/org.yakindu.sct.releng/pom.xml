@@ -396,7 +396,7 @@
 				</property>
 			</activation>
 			<properties>
-				<p2.base.repository>https://projects.itemis.de/data/yakindu/base/juno/snapshot/</p2.base.repository>
+				<p2.base.repository>https://projects.itemis.de/data/yakindu/base/kepler/snapshot/</p2.base.repository>
 			</properties>
 		</profile>
 		<profile>
