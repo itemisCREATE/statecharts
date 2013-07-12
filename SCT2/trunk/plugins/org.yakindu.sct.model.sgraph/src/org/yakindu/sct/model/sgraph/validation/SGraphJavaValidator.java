@@ -27,6 +27,7 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Synchronization;
@@ -199,7 +200,20 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public void transitionsWithNoGuard(Transition trans) {
 		if (trans.getSource() instanceof Entry) {
 			return;
-		} else if(trans.getTrigger() == null){
+		}
+		if (trans.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
+			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) trans.getSource();
+			if (state.isComposite()) {
+				for (Region r : state.getRegions()) {
+					for (Vertex v : r.getVertices()) {
+						if (v instanceof Exit) {
+							return;
+						}
+					}
+				}
+			}
+		}
+		if (trans.getTrigger() == null) {
 			warning(ISSUE_TRANSITION_WITHOUT_GUARD, trans, null, -1);
 		}
 	}
