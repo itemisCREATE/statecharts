@@ -40,16 +40,16 @@ class FlowCode {
 		«ENDIF»
 	'''
 	
-	def dispatch code(Step it) '''
+	def dispatch CharSequence code(Step it) '''
 		#error ActionCode for Step '«getClass().name»' not defined
 	'''
 
-	def dispatch code(SaveHistory it) '''
+	def dispatch CharSequence code(SaveHistory it) '''
 		«stepComment»
 		«scHandle»->historyVector[«region.historyVector.offset»] = «scHandle»->stateConfVector[«region.stateVector.offset»];
 	'''
 	
-	def dispatch code(HistoryEntry it) '''
+	def dispatch CharSequence code(HistoryEntry it) '''
 		«stepComment»
 		if («scHandle»->historyVector[«region.historyVector.offset»] != «last_state») {
 			«historyStep.code»
@@ -58,7 +58,7 @@ class FlowCode {
 		} «ENDIF»
 	'''
 
-	def dispatch code(StateSwitch it) '''
+	def dispatch CharSequence code(StateSwitch it) '''
 		«stepComment»
 		«IF historyRegion != null»
 			switch(«scHandle»->historyVector[ «historyRegion.historyVector.offset» ]) {
@@ -75,23 +75,23 @@ class FlowCode {
 		}
 	'''
 
-	def dispatch code(ScheduleTimeEvent it) '''
+	def dispatch CharSequence code(ScheduleTimeEvent it) '''
 		«stepComment»
 		«flow.type.toFirstLower»_setTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.name.asIdentifier»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
 	'''
 
-	def dispatch code(UnscheduleTimeEvent it) '''
+	def dispatch CharSequence code(UnscheduleTimeEvent it) '''
 		«stepComment»
 		«flow.type.toFirstLower»_unsetTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.name.asIdentifier»_raised) );		
 	'''
 
-	def dispatch code(Execution it) 
+	def dispatch CharSequence code(Execution it) 
 		'''«statement.code»;'''
 	
-	def dispatch code(Call it) 
+	def dispatch CharSequence code(Call it) 
 		'''«step.functionName»(«scHandle»);'''
 
-	def dispatch code(Sequence it) '''
+	def dispatch CharSequence code(Sequence it) '''
 		«IF comment != null»
 			{
 				«stepComment»
@@ -106,13 +106,13 @@ class FlowCode {
 		«ENDIF»
 	'''	
 
-	def dispatch code(Check it) 
+	def dispatch CharSequence code(Check it) 
 		'''«IF condition != null»«condition.code»«ELSE»bool_true«ENDIF»'''
 	
-	def dispatch code(CheckRef it) 
+	def dispatch CharSequence code(CheckRef it) 
 		'''«IF check != null»«check.functionName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
 
-	def dispatch code(If it) '''
+	def dispatch CharSequence code(If it) '''
 		«stepComment»
 		if («check.code») { 
 			«thenStep.code»
@@ -122,12 +122,12 @@ class FlowCode {
 		«ENDIF»
 	'''
 	
-	def dispatch code(EnterState it) '''
+	def dispatch CharSequence code(EnterState it) '''
 		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.name.asEscapedIdentifier»;
 		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 
-	def dispatch code(ExitState it) '''
+	def dispatch CharSequence code(ExitState it) '''
 		«scHandle»->stateConfVector[«state.stateVector.offset»] = «last_state»;
 		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''

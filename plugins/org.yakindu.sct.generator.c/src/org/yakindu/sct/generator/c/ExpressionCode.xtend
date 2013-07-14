@@ -35,14 +35,14 @@ import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.RealLiteral
+import org.yakindu.sct.model.stext.stext.ShiftExpression
 import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.ShiftExpression
-import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 
 class ExpressionCode {
 	
@@ -53,38 +53,37 @@ class ExpressionCode {
 	
 	/* Refering to declared elements */
 	
-	def dispatch code (ElementReferenceExpression it) {
-		code(it.definition)
+	def dispatch CharSequence code (ElementReferenceExpression it) {
+		it.code(it.definition)
 	}
 		
-	def dispatch code (FeatureCall it) {
-		code(it.definition)
+	def dispatch CharSequence code (FeatureCall it) {
+		it.code(it.definition)
 	}
 		
-	def dispatch code (Expression it, Event target) 
+	def dispatch CharSequence code (Expression it, Event target) 
 		'''«target.access»'''
 		
-	def dispatch code (Expression it, VariableDefinition target) 
+	def dispatch CharSequence code (Expression it, VariableDefinition target) 
 		'''«target.access»'''
 	
-	def dispatch code (ElementReferenceExpression it, OperationDefinition target) 
+	def dispatch CharSequence code (ElementReferenceExpression it, OperationDefinition target) 
 		'''«target.access»(«FOR arg:args SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	
-	def dispatch code (FeatureCall it, OperationDefinition target) 
+	def dispatch CharSequence code (FeatureCall it, OperationDefinition target) 
 		'''«target.access»(«FOR arg:args SEPARATOR ', '»«arg.code»«ENDFOR»)'''
 	
-	/*  */
 	
-	def dispatch code (Statement it) 
+	def dispatch CharSequence code (Statement it) 
 		'''#error TODO: generate code for «getClass().name»'''
 
 	
 	/* HANDLING LITERALS */
-	def dispatch code (Literal it)
+	def dispatch CharSequence code (Literal it)
 		'''#error unknown literal type «getClass().name» '''
 	
 	
-	def dispatch code (StringLiteral it) 
+	def dispatch CharSequence code (StringLiteral it) 
 		'''"«value.escaped»"'''	
 		
 	def String escaped(String it) {
@@ -92,28 +91,28 @@ class ExpressionCode {
 	}
 	
 
-	def dispatch code (BoolLiteral it) 
+	def dispatch CharSequence code (BoolLiteral it) 
 		'''«IF value»bool_true«ELSE»bool_false«ENDIF»'''	
 
-	def dispatch code (IntLiteral it) 
+	def dispatch CharSequence code (IntLiteral it) 
 		'''«value.toString»'''	
 
-	def dispatch code (RealLiteral it) 
+	def dispatch CharSequence code (RealLiteral it) 
 		'''«value.toString»'''	
 		
-	def dispatch code (HexLiteral it) 
+	def dispatch CharSequence code (HexLiteral it) 
 		'''0x«Integer::toHexString(value)»'''	
 
-	def dispatch code (PrimitiveValueExpression it) 
+	def dispatch CharSequence code (PrimitiveValueExpression it) 
 		'''«value.code»'''	
 
 		
 	/* Statements */
 	
-	def dispatch code (AssignmentExpression it)
+	def dispatch CharSequence code (AssignmentExpression it)
 		'''«varRef.code» «operator.literal» «expression.code»'''
 		
-	def dispatch code (EventRaisingExpression it)
+	def dispatch CharSequence code (EventRaisingExpression it)
 		'''
 		«IF value != null»
 			«event.definition.event.valueAccess» = «value.code»;
@@ -123,53 +122,53 @@ class ExpressionCode {
 
 	/* Logical Expressions */
 	
-	def dispatch code (LogicalOrExpression it)
+	def dispatch CharSequence code (LogicalOrExpression it)
 		'''«rightOperand.code» || «leftOperand.code»'''
 		
-	def dispatch code (LogicalAndExpression it)
+	def dispatch CharSequence code (LogicalAndExpression it)
 		'''«rightOperand.code» && «leftOperand.code»'''
 	 	
-	def dispatch code (LogicalNotExpression it)
+	def dispatch CharSequence code (LogicalNotExpression it)
 		'''! «operand.code»'''
 		
-	def dispatch code (LogicalRelationExpression it) '''
+	def dispatch CharSequence code (LogicalRelationExpression it) '''
 		«IF leftOperand.inferType.type.stringType»
 			(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 		«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 	
 	/* Bitwise Operations */
 	
-	def dispatch code (BitwiseAndExpression it)
+	def dispatch CharSequence code (BitwiseAndExpression it)
 		'''«leftOperand.code» & «rightOperand.code»'''
 	
-	def dispatch code (BitwiseOrExpression it)
+	def dispatch CharSequence code (BitwiseOrExpression it)
 		'''«leftOperand.code» | «rightOperand.code»'''
 	
-	def dispatch code (BitwiseXorExpression it)
+	def dispatch CharSequence code (BitwiseXorExpression it)
 		'''«leftOperand.code» ^ «rightOperand.code»'''
 	
-	def dispatch code (ShiftExpression it)
+	def dispatch CharSequence code (ShiftExpression it)
 		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
 
 	/* Numerical operations */
 	
-	def dispatch code (NumericalAddSubtractExpression it)
+	def dispatch CharSequence code (NumericalAddSubtractExpression it)
 		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
 	
-	def dispatch code (NumericalMultiplyDivideExpression it)
+	def dispatch CharSequence code (NumericalMultiplyDivideExpression it)
 		'''«leftOperand.code» «operator.literal» «rightOperand.code»'''
 	
-	def dispatch code (NumericalUnaryExpression it)
+	def dispatch CharSequence code (NumericalUnaryExpression it)
 		'''«operator.literal» «operand.code»'''
 	
 	/* TODO: check if event is active */
-	def dispatch code (EventValueReferenceExpression it)
+	def dispatch CharSequence code (EventValueReferenceExpression it)
 		'''«value.definition.event.valueAccess»'''
 	
-	def dispatch code (ActiveStateReferenceExpression it)
+	def dispatch CharSequence code (ActiveStateReferenceExpression it)
 		'''«flow.nameOfIsActiveFunction»(«scHandle», «value.fullyQualifiedName»)'''
 	
-	def dispatch code (ParenthesizedExpression it)
+	def dispatch CharSequence code (ParenthesizedExpression it)
 		'''(«expression.code»)'''
 	
 }
