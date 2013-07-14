@@ -13,14 +13,12 @@ package org.yakindu.sct.generator.c
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.generator.c.GenmodelEntries
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sgraph.Statechart
 
 class StatemachineC {
 	
@@ -29,10 +27,11 @@ class StatemachineC {
 	@Inject extension FlowCode
 	@Inject extension GenmodelEntries
 	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension SExecExtensions
 	
 	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		 fsa.generateFile(flow.module.c, flow.statemachineCContent(entry) )
+		var content = flow.statemachineCContent(entry)
+		var target = flow.module.c
+		 fsa.generateFile(target , content)
 	}
 	
 	def statemachineCContent(ExecutionFlow it, GeneratorEntry entry) '''
