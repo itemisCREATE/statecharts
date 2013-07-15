@@ -9,6 +9,8 @@
  */
 package org.yakindu.sct.generator.cpp
 
+import java.util.List
+import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
@@ -21,11 +23,19 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	def cpp(String it) { it + ".cpp" }
 	
 	def abstractModule(ExecutionFlow it) {
-		'I'+module()
+		'I'+module()	
 	}
 	
 	def iStatemachine() {
 		'IStatemachine'
+	}
+	
+	def orthogonalStatesConst() {
+		'maxOrthogonalStates'
+	}
+	
+	def historyStatesConst() {
+		'maxHistoryStates'
 	}
 	
 	def iTimedStatemachine() {
@@ -79,5 +89,9 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	
 	override asSetter(VariableDefinition it) {
 		'set_' + name.asIdentifier.toFirstLower	
+	}
+	
+	override functionName(EObject it, List<String> segments) {
+		segments.fold("", [s, seg | s + if (seg.empty) "" else "_" + seg]).asIdentifier
 	}
 }
