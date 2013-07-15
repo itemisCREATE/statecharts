@@ -25,9 +25,9 @@ import org.yakindu.sct.model.sgraph.Statechart
 class CppGenerator implements IExecutionFlowGenerator {
 	 
 	@Inject extension Types
-	@Inject extension ITimedStatemachine
-	@Inject extension ITimerService
-	@Inject extension IStatemachine
+	@Inject extension TimedStatemachineInterface
+	@Inject extension TimerServiceInterface
+	@Inject extension StatemachineInterface
 	@Inject extension StatemachineHeader
 	@Inject extension StatemachineImplementation
 

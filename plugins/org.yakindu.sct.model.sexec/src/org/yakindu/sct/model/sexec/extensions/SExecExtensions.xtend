@@ -66,6 +66,10 @@ class SExecExtensions {
 		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::IN].fold(new LinkedList<EventDefinition>, [l, ev | l += ev l])
 	}
 	
+	def List<EventDefinition> getLocalEvents(Scope it) {
+		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::LOCAL].fold(new LinkedList<EventDefinition>, [l, ev | l += ev l])
+	}
+	
 	def getInterfaceScopes(ExecutionFlow it) {
 		scopes.filter(typeof(InterfaceScope))
 	}

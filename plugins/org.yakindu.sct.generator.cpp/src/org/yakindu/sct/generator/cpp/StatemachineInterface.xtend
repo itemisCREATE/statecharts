@@ -15,7 +15,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.GenmodelEntries
 
-class IStatemachine {
+class StatemachineInterface {
 	
 	@Inject
 	extension Naming
@@ -24,21 +24,22 @@ class IStatemachine {
 	extension GenmodelEntries
 	
 	def generateIStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(iStatemachine.hpp, flow.content(entry) )
+		fsa.generateFile(statemachineInterface.hpp, flow.content(entry) )
 	}
 	
 	def private content(ExecutionFlow it, GeneratorEntry entry) {
 		'''
 		«entry.licenseText»
 		
-		#ifndef «iStatemachine.define»_H_
-		#define «iStatemachine.define»_H_
+		#ifndef «statemachineInterface.define»_H_
+		#define «statemachineInterface.define»_H_
 		
 		/*
 		 * Basic interface for statemachines.
 		 */
-		class IStatemachine {
+		class «statemachineInterface» {
 			public:
+				virtual ~«statemachineInterface»() = 0;
 				/*
 				* Initializes the statemachine. Use to init internal variables etc.
 				*/
@@ -60,7 +61,7 @@ class IStatemachine {
 				virtual void runCycle() = 0;
 		};
 		
-		#endif /* «iStatemachine.define»_H_ */
+		#endif /* «statemachineInterface.define»_H_ */
 		'''
 	}
 }

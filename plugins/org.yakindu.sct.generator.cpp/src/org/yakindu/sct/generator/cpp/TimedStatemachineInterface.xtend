@@ -15,7 +15,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.GenmodelEntries
 
-class ITimedStatemachine {
+class TimedStatemachineInterface {
 	
 	@Inject
 	extension Naming
@@ -24,43 +24,46 @@ class ITimedStatemachine {
 	extension GenmodelEntries
 	
 	def generateITimedStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(iTimedStatemachine.hpp, flow.content(entry) )
+		fsa.generateFile(timedStatemachineInterface.hpp, flow.content(entry) )
 	}
 	
 	def private content(ExecutionFlow it, GeneratorEntry entry) {
 		'''
 		«entry.licenseText»
 		
-		#ifndef «iTimedStatemachine.define»_H_
-		#define «iTimedStatemachine.define»_H_
+		#ifndef «timedStatemachineInterface.define»_H_
+		#define «timedStatemachineInterface.define»_H_
 		
 		#include "«typesModule.hpp»"
-		#include "«iTimerService.hpp»"
+		#include "«timerServiceInterface.hpp»"
 		
 		/*
 		* Interface for state machines which use timed event triggers.
 		*/
-		class ITimedStatemachine {
+		class «timedStatemachineInterface» {
 			public:
+			
+				virtual ~«timedStatemachineInterface»() = 0;
+				
 				/*
 				* Set the ITimerService for the state machine. It must be set
 				* externally on a timed state machine before a run cycle can be correct
 				* executed.
 				*/
-				virtual void setTimerService(ITimerService* timerService) = 0;
+				virtual void setTimerService(«timerServiceInterface»* timerService) = 0;
 				
 				/*
 				* Returns the currently used timer service.
 				*/
-				virtual ITimerService* getTimerService() = 0;
+				virtual «timerServiceInterface»* getTimerService() = 0;
 				
 				/*
 				* Callback method if a time event occurred.
 				*/
-				virtual void raiseTimeEvent(sc_eventid event) = 0;
+				virtual void «nameOfRaiseTimeEventFunction»(sc_eventid event) = 0;
 		};
 		
-		#endif /* «iTimedStatemachine.define»_H_ */
+		#endif /* «timedStatemachineInterface.define»_H_ */
 		'''
 	}
 }

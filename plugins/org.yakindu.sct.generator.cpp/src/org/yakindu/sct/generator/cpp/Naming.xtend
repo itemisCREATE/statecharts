@@ -16,18 +16,24 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.sgraph.Event
+import com.google.inject.Inject
+import org.yakindu.sct.model.sexec.TimeEvent
 
 class Naming extends org.yakindu.sct.generator.c.Naming {
+	
+	@Inject extension Navigation;
 	
 	def hpp(String it) { it + ".hpp" }
 	def cpp(String it) { it + ".cpp" }
 	
 	def abstractModule(ExecutionFlow it) {
-		'I'+module()	
+		module() + 'Interface'	
 	}
 	
-	def iStatemachine() {
-		'IStatemachine'
+	def statemachineInterface() {
+		'StatemachineInterface'
 	}
 	
 	def orthogonalStatesConst() {
@@ -38,25 +44,37 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'maxHistoryStates'
 	}
 	
-	def iTimedStatemachine() {
-		'ITimedStatemachine'
+	def timedStatemachineInterface() {
+		'TimedStatemachineInterface'
 	}
 	
-	def iTimerService() {
-		'ITimerService'
+	def timerServiceInterface() {
+		'TimerServiceInterface'
 	}
 	
-	def timeEvent() {
-		'TimeEvent'
+	def timerServiceInstance() {
+		'timerService'
 	}
 	
-	def String getInterfaceName(InterfaceScope it) {  
+	def timeEventsInstance() {
+		'timeEvents'
+	}
+	
+	override dispatch instance(InternalScope it) {
+		'iface' + interfaceName.asIdentifier.toFirstUpper	
+	}
+	
+	def dispatch String getInterfaceName(InterfaceScope it) {  
 		if (name != null) {
 			return "SCI" + name.toFirstUpper()
 		}
 		else {
 			return "SCInterface";
 		}
+	}
+	
+	def dispatch String getInterfaceName(InternalScope it) {  
+		"InternalSCIScope"
 	}
 	
 	def String getInterfaceOperationCallbackName(InterfaceScope it) {
@@ -95,7 +113,26 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		segments.fold("", [s, seg | s + if (seg.empty) "" else "_" + seg]).asIdentifier
 	}
 	
+	override nameOfRaiseTimeEventFunction(ExecutionFlow it) {
+		"raiseTimeEvent"
+	}
+	
 	override nameOfIsActiveFunction(ExecutionFlow it) {
 		"isActive"
 	}
+	
+	override dispatch access (VariableDefinition it) 
+		'''«scope.instance»->«name.asEscapedIdentifier»'''
+
+	override dispatch access (OperationDefinition it) 
+		'''«asFunction»'''
+		
+	override dispatch access (Event it) 
+		'''«scope.instance»->«name.asIdentifier.raised»'''
+	
+	def dispatch access(TimeEvent it)
+		'''«timeEventsInstance»[«indexOf»]'''
+	
+	override valueAccess(Event it) 
+		'''«scope.instance»->«name.asIdentifier.value»'''
 }
