@@ -64,9 +64,7 @@ class StatemachineHeader extends Statemachine {
 				
 				«FOR s : it.scopes»«s.createScope(entry)»«ENDFOR»
 				
-				«FOR s : it.scopes.filter( typeof(InternalScope) )»
-					«s.scopeFunctionPrototypes»
-				«ENDFOR»
+				«publicFunctionPrototypes»
 				
 				/*! Checks if the specified state is active. */
 				sc_boolean «nameOfIsActiveFunction»(«statesEnumType» state);
@@ -108,12 +106,11 @@ class StatemachineHeader extends Statemachine {
 		«scope.createOperationCallbackInterface»
 		
 		«scope.interfaceName»* get«scope.interfaceName»();
-		
 	'''
 	
 	def private createInterface(InterfaceScope scope, GeneratorEntry entry)
 	'''
-		//! Inner class for statechart «scope.interfaceName» interface scope.
+		//! Inner class for «scope.interfaceName» interface scope.
 		class «scope.interfaceName» {
 			
 			public:
@@ -137,7 +134,7 @@ class StatemachineHeader extends Statemachine {
 				«ENDFOR»
 			}
 			
-			virtual void set«internalOperationCallbackName»(«internalOperationCallbackName»* operationCallback) = 0;
+			void set«internalOperationCallbackName»(«internalOperationCallbackName»* operationCallback);
 		«ENDIF»
 		'''
 	}
@@ -171,10 +168,10 @@ class StatemachineHeader extends Statemachine {
 
 	override statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-		const sc_integer «orthogonalStatesConst» = «stateVector.size»
+		const sc_integer «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
 		//! dimension of the state configuration vector for history states
-		const sc_integer «historyStatesConst» = «historyVector.size»«ENDIF»
+		const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»sc_boolean timeEvents[«timeEvents.size»];«ENDIF»
 		«statesEnumType» stateConfVector[«orthogonalStatesConst»];
@@ -182,6 +179,32 @@ class StatemachineHeader extends Statemachine {
 		sc_ushort stateConfVectorPosition;
 	'''
 
+	def publicFunctionPrototypes(ExecutionFlow it) '''
+		«IStatemachineFunctions»
+		
+		«IF timed»
+			«ITimedStatemachineFunctions»
+		«ENDIF»
+	'''
+	
+	def IStatemachineFunctions() '''
+		void init();
+		
+		void enter();
+		
+		void exit();
+		
+		void runCycle();
+	'''
+	
+	def ITimedStatemachineFunctions() '''
+		void setTimerService(ITimerService* timerService);
+		
+		ITimerService* getTimerService();
+		
+		void raiseTimeEvent(sc_eventid event);
+	'''
+	
 	override dispatch functionPrototypes(EventDefinition it) '''
 		«IF direction == Direction::IN»
 		/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 

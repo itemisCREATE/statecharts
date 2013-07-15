@@ -66,22 +66,22 @@ class StatemachineImplementation {
 	
 	
 	def initFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_init(«scHandleDecl»)
+		void init()
 		{
 			int i;
 
-			for (i = 0; i < «type.toUpperCase»_MAX_ORTHOGONAL_STATES; ++i)
-				«scHandle»->stateConfVector[i] = «last_state»;
+			for (i = 0; i < «orthogonalStatesConst»; ++i)
+				stateConfVector[i] = «last_state»;
 			
 			«IF hasHistory»
-			for (i = 0; i < «type.toUpperCase»_MAX_HISTORY_STATES; ++i)
-				«scHandle»->historyVector[i] = «last_state»;
+			for (i = 0; i < «historyStatesConst»; ++i)
+				historyVector[i] = «last_state»;
 			«ENDIF»
 			
-			«scHandle»->stateConfVectorPosition = 0;
+			stateConfVectorPosition = 0;
 		
-		clearInEvents(handle);
-		clearOutEvents(handle);
+			clearInEvents();
+			clearOutEvents();
 		
 			// TODO: initialize all events ...
 
