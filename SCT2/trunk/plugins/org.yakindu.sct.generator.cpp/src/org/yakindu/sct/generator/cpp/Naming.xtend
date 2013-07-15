@@ -94,4 +94,8 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	override functionName(EObject it, List<String> segments) {
 		segments.fold("", [s, seg | s + if (seg.empty) "" else "_" + seg]).asIdentifier
 	}
+	
+	override nameOfIsActiveFunction(ExecutionFlow it) {
+		"isActive"
+	}
 }
