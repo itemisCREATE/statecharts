@@ -26,6 +26,9 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import java.util.List
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.Check
 
 class StatemachineHeader extends Statemachine {
 	
@@ -35,7 +38,7 @@ class StatemachineHeader extends Statemachine {
 	@Inject extension GenmodelEntries
 	
 	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		 fsa.generateFile(flow.module.hpp, flow.statemachineHContent(entry) )
+		 fsa.generateFile(flow.module().hpp, flow.statemachineHContent(entry) )
 	}
 	
 	override statemachineHContent(ExecutionFlow it,  GeneratorEntry entry) '''
@@ -71,6 +74,8 @@ class StatemachineHeader extends Statemachine {
 			private:
 			
 				«statemachineTypeDecl»
+				
+				«functionPrototypes»
 		};
 		
 		#endif /* «module().define»_H_ */
@@ -166,14 +171,14 @@ class StatemachineHeader extends Statemachine {
 
 	override statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-		#define «type.toUpperCase»_MAX_ORTHOGONAL_STATES «stateVector.size»
+		const sc_integer «orthogonalStatesConst» = «stateVector.size»
 		«IF hasHistory»
 		//! dimension of the state configuration vector for history states
-		#define «type.toUpperCase»_MAX_HISTORY_STATES «historyVector.size»«ENDIF»
+		const sc_integer «historyStatesConst» = «historyVector.size»«ENDIF»
 		
 		«IF timed»sc_boolean timeEvents[«timeEvents.size»];«ENDIF»
-		«statesEnumType» stateConfVector[«type.toUpperCase»_MAX_ORTHOGONAL_STATES];
-		«IF hasHistory»«statesEnumType» historyVector[«type.toUpperCase»_MAX_HISTORY_STATES];«ENDIF»
+		«statesEnumType» stateConfVector[«orthogonalStatesConst»];
+		«IF hasHistory»«statesEnumType» historyVector[«historyStatesConst»];«ENDIF»
 		sc_ushort stateConfVectorPosition;
 	'''
 
@@ -202,4 +207,39 @@ class StatemachineHeader extends Statemachine {
 			void «asSetter»(«type.targetLanguageName» value);
 		«ENDIF»
 	'''
+	
+	/* ===================================================================================
+	 * Handling decralartion of function prototypes
+	 */
+	 
+	/** */
+	def dispatch functionPrototypes(ExecutionFlow it) '''
+		// prototypes of all internal functions
+		
+		«checkFunctions.toPrototypes»
+		«effectFunctions.toPrototypes»
+		«entryActionFunctions.toPrototypes»
+		«exitActionFunctions.toPrototypes»
+		«enterSequenceFunctions.toPrototypes»
+		«exitSequenceFunctions.toPrototypes»
+		«reactFunctions.toPrototypes»
+		void clearInEvents();
+		void clearOutEvents();
+		
+	'''
+	
+	
+	def toPrototypes(List<Step> steps) '''
+		«FOR s : steps»
+			«s.functionPrototype»
+		«ENDFOR»
+	'''
+	
+	def dispatch functionPrototype(Check it) '''
+		sc_boolean «asCheckFunction»();
+	'''
+	
+	def dispatch functionPrototype(Step it) '''
+		void «functionName»();
+	'''	
 }
