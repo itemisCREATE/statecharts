@@ -42,13 +42,15 @@ Workflow {
 			fileExtensions = file.extensions
 
 			// Java API to access grammar elements (required by several other fragments)
-			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = grammarAccess.GrammarAccessFragment {
+				xmlVersion = "1.0"
+			}
 
 			// generates Java API for the generated EPackages 
 			fragment = ecore.EcoreGeneratorFragment {
 				generateEdit = true
 				genModel = "model/SText.genmodel"
-				emfRuntimeVersion = "2.8"
+//				emfRuntimeVersion = "2.8"
 				xmiModelDirectory = "${runtimeProject}/model"
 			}
 
