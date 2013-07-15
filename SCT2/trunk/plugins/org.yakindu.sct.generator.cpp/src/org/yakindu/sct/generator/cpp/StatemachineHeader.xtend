@@ -29,6 +29,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import java.util.List
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.stext.stext.StatechartScope
 
 class StatemachineHeader extends Statemachine {
 	
@@ -48,9 +49,9 @@ class StatemachineHeader extends Statemachine {
 		#define «module().define»_H_
 
 		#include "«typesModule.hpp»"
-		#include "«iStatemachine.hpp»"
+		#include "«statemachineInterface.hpp»"
 		«IF timed»
-			#include "«iTimedStatemachine.hpp»"
+			#include "«timedStatemachineInterface.hpp»"
 		«ENDIF»
 
 		/*! \file Header of the state machine '«name»'.
@@ -62,7 +63,7 @@ class StatemachineHeader extends Statemachine {
 			
 				«statesEnumDecl»
 				
-				«FOR s : it.scopes»«s.createScope(entry)»«ENDFOR»
+				«FOR s : it.scopes»«s.createScope()»«ENDFOR»
 				
 				«publicFunctionPrototypes»
 				
@@ -70,6 +71,8 @@ class StatemachineHeader extends Statemachine {
 				sc_boolean «nameOfIsActiveFunction»(«statesEnumType» state);
 			
 			private:
+			
+				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
 			
 				«statemachineTypeDecl»
 				
@@ -84,31 +87,31 @@ class StatemachineHeader extends Statemachine {
 		var String interfaces = "";
 
 		if (flow.timed) {
-			interfaces = interfaces + "public " +iTimedStatemachine+", "
+			interfaces = interfaces + "public " +timedStatemachineInterface+", "
 		}
 
-		interfaces = interfaces + "public " + iStatemachine
+		interfaces = interfaces + "public " + statemachineInterface
 		
 		return interfaces;
 	}
 	
-	def private createScope(Scope scope, GeneratorEntry entry) {
+	def private createScope(Scope scope) {
 		switch scope {
-			InterfaceScope: scope.createScope(entry)
-			InternalScope: scope.createScope
+			InterfaceScope: scope.createScope()
+			InternalScope: scope.createPublicScope
 		}
 	}
 	
-	def private createScope(InterfaceScope scope, GeneratorEntry entry)
+	def private createScope(InterfaceScope scope)
 	'''
-		«scope.createInterface(entry)»
+		«scope.createInterface()»
 «««		«scope.createListenerInterface(entry)»
 		«scope.createOperationCallbackInterface»
 		
 		«scope.interfaceName»* get«scope.interfaceName»();
 	'''
 	
-	def private createInterface(InterfaceScope scope, GeneratorEntry entry)
+	def private createInterface(StatechartScope scope)
 	'''
 		//! Inner class for «scope.interfaceName» interface scope.
 		class «scope.interfaceName» {
@@ -125,7 +128,7 @@ class StatemachineHeader extends Statemachine {
 		};
 	'''
 	
-	def private createScope(InternalScope scope) {
+	def private createPublicScope(InternalScope scope) {
 		'''
 		«IF scope.hasOperations()»
 			class «internalOperationCallbackName» {
@@ -168,17 +171,26 @@ class StatemachineHeader extends Statemachine {
 
 	override statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
-		const sc_integer «orthogonalStatesConst» = «stateVector.size»;
+		static const sc_integer «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
 		//! dimension of the state configuration vector for history states
-		const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
+		static const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
-		«IF timed»sc_boolean timeEvents[«timeEvents.size»];«ENDIF»
+		«IF timed»
+			«timerServiceInterface»* «timerServiceInstance»;
+			sc_boolean «timeEventsInstance»[«timeEvents.size»];
+		«ENDIF»
+		
 		«statesEnumType» stateConfVector[«orthogonalStatesConst»];
+		
 		«IF hasHistory»«statesEnumType» historyVector[«historyStatesConst»];«ENDIF»
 		sc_ushort stateConfVectorPosition;
+		
+		«FOR s : scopes.filter(typeof(StatechartScope))»
+			const «s.interfaceName»* «s.instance»;
+		«ENDFOR»
 	'''
-
+	
 	def publicFunctionPrototypes(ExecutionFlow it) '''
 		«IStatemachineFunctions»
 		
@@ -197,16 +209,27 @@ class StatemachineHeader extends Statemachine {
 		void runCycle();
 	'''
 	
-	def ITimedStatemachineFunctions() '''
-		void setTimerService(ITimerService* timerService);
+	def ITimedStatemachineFunctions(ExecutionFlow it) '''
+		void setTimerService(«timerServiceInterface»* timerService);
 		
-		ITimerService* getTimerService();
+		«timerServiceInterface»* getTimerService();
 		
-		void raiseTimeEvent(sc_eventid event);
+		void «nameOfRaiseTimeEventFunction»(sc_eventid event);
 	'''
 	
 	override dispatch functionPrototypes(EventDefinition it) '''
-		«IF direction == Direction::IN»
+		«IF direction == Direction::LOCAL»
+			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
+			void «asRaiser»(«valueParams»);
+			
+			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
+			sc_boolean «asRaised»();
+			«IF hasValue»
+				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
+				«type.targetLanguageName» «asGetter»();
+				
+			«ENDIF»
+		«ELSEIF direction == Direction::IN»
 		/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
 		void «asRaiser»(«valueParams»);
 		

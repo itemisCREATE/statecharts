@@ -20,8 +20,6 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.c.GenmodelEntries
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.generator.c.FlowCode
 
 class StatemachineImplementation {
 	
@@ -30,7 +28,6 @@ class StatemachineImplementation {
 	@Inject extension FlowCode
 	@Inject extension GenmodelEntries
 	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension SExecExtensions
 	
 	def generateStatemachineImplemenation(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		 fsa.generateFile(flow.module.cpp, flow.statemachineContent(entry) )
@@ -66,7 +63,7 @@ class StatemachineImplementation {
 	
 	
 	def initFunction(ExecutionFlow it) '''
-		void init()
+		void «module»::init()
 		{
 			int i;
 
@@ -76,8 +73,8 @@ class StatemachineImplementation {
 			«IF hasHistory»
 			for (i = 0; i < «historyStatesConst»; ++i)
 				historyVector[i] = «last_state»;
-			«ENDIF»
 			
+			«ENDIF»
 			stateConfVectorPosition = 0;
 		
 			clearInEvents();
@@ -91,63 +88,63 @@ class StatemachineImplementation {
 	'''
 	
 	def enterFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_enter(«scHandleDecl»)
+		void «module»::enter()
 		{
 			«enterSequences.defaultSequence.code»
 		}
 	'''
 	
 	def exitFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_exit(«scHandleDecl»)
+		void «module»::exit()
 		{
 			«exitSequence.code»
 		}
 	'''
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
-		static void clearInEvents(«scHandleDecl») {
+		void «module»::clearInEvents() {
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
-				«event.access» = bool_false;
+				«event.access» = false;
 				«ENDFOR»
 			«ENDFOR»
 			«IF hasLocalScope»
 				«FOR event : internalScope.events»
-				«event.access» = bool_false; 
+				«event.access» = false; 
 				«ENDFOR»
 			«ENDIF»
 			«IF timed»
 				«FOR event : timeEventScope.events»
-				«event.access» = bool_false; 
+				«event.access» = false; 
 				«ENDFOR»
 			«ENDIF»
 		}
 	'''
 	
 	def clearOutEventsFunction(ExecutionFlow it) '''
-		static void clearOutEvents(«scHandleDecl») {
+		void «module»::clearOutEvents() {
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
-				«event.access» = bool_false;
+				«event.access» = false;
 				«ENDFOR»
 			«ENDFOR»
 		}
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_runCycle(«scHandleDecl») {
+		void «module»::runCycle() {
 			
-			clearOutEvents(«scHandle»);
+			clearOutEvents();
 			
-			for («scHandle»->stateConfVectorPosition = 0;
-				«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
-				«scHandle»->stateConfVectorPosition++) {
+			for (stateConfVectorPosition = 0;
+				stateConfVectorPosition < «orthogonalStatesConst»;
+				stateConfVectorPosition++) {
 					
-				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition]) {
+				switch (stateConfVector[stateConfVectorPosition]) {
 				«FOR state : states»
 					«IF state.reactSequence!=null»
 					case «state.name.asEscapedIdentifier» : {
-						«state.reactSequence.functionName»(«scHandle»);
+						«state.reactSequence.functionName»();
 						break;
 					}
 					«ENDIF»
@@ -157,31 +154,31 @@ class StatemachineImplementation {
 				}
 			}
 			
-			clearInEvents(«scHandle»);
+			clearInEvents();
 		}
 	'''
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
-			void «nameOfRaiseTimeEventFunction»(«type»* handle, sc_eventid evid) {
-				if ( ((intptr_t)evid) >= ((intptr_t)&(«scHandle»->timeEvents))
-					&&  ((intptr_t)evid) < ((intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
-					*(sc_boolean*)evid = bool_true;
+			void «module»::«nameOfRaiseTimeEventFunction»(sc_eventid evid) {
+				if ( ((intptr_t)evid) >= ((intptr_t)&(timeEvents))
+					&&  ((intptr_t)evid) < ((intptr_t)&(timeEvents)) + sizeof(timeEvents)) {
+					*(sc_boolean*)evid = true;
 				}		
 			}
 		«ENDIF»
 	'''
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «nameOfIsActiveFunction»(«scHandleDecl», «statesEnumType» state) {
+		sc_boolean «module»::«nameOfIsActiveFunction»(«statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
 				case «s.name.asIdentifier» : 
-					return (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»
-					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.name.asIdentifier»
-						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»«ENDIF»);
+					return (sc_boolean) («IF s.leaf»stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»
+					«ELSE»stateConfVector[«s.stateVector.offset»] >= «s.name.asIdentifier»
+						&& stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»«ENDIF»);
 				«ENDFOR»
-				default: return bool_false;
+				default: return false;
 			}
 		}
 	'''
@@ -191,22 +188,41 @@ class StatemachineImplementation {
 	 */
 	
 	def interfaceFunctions(ExecutionFlow it) '''
-		«FOR scope : interfaceScopes»
+		«FOR scope : statechartScopes»
 			«FOR event : scope.incomingEvents»
-				void «event.asRaiser»(«scHandleDecl»«event.valueParams») {
+				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams») {
 					«IF event.hasValue»
 					«event.valueAccess» = value;
 					«ENDIF»
-					«event.access» = bool_true;
+					«event.access» = true;
 				}
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
-				sc_boolean «event.asRaised»(«scHandleDecl») {
+				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
 					return «event.access»;
 				}
 				«IF event.hasValue» 
-					«event.type.targetLanguageName» «event.asGetter»(«scHandleDecl») {
+					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
+						//TODO: Check if event is not raised
+						return «event.valueAccess»;
+					}
+				«ENDIF»
+			«ENDFOR»
+			
+			«FOR event : scope.localEvents»
+				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams») {
+					«IF event.hasValue»
+					«event.valueAccess» = value;
+					«ENDIF»
+					«event.access» = true;
+				}
+				
+				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
+					return «event.access»;
+				}
+				«IF event.hasValue» 
+					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
 						//TODO: Check if event is not raised
 						return «event.valueAccess»;
 					}
@@ -214,11 +230,11 @@ class StatemachineImplementation {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-				«variable.type.targetLanguageName» «variable.asGetter»(«scHandleDecl») {
+				«variable.type.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() {
 					return «variable.access»;
 				}
 				«IF !variable.readonly »
-				void «variable.asSetter»(«scHandleDecl», «variable.type.targetLanguageName» value) {
+				void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
 					«variable.access» = value;
 				}
 				«ENDIF»
@@ -252,7 +268,7 @@ class StatemachineImplementation {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		sc_boolean «execution_flow.module»::«asCheckFunction»(«scHandleDecl») {
+		sc_boolean «execution_flow.module»::«asCheckFunction»() {
 			return «code»;
 		}
 		
@@ -260,11 +276,9 @@ class StatemachineImplementation {
 	
 	def dispatch functionImplementation(Step it) '''
 		«stepComment»
-		void «execution_flow.module»::«functionName»(«scHandleDecl») {
+		void «execution_flow.module»::«functionName»() {
 			«code»
 		}
 		
 	'''
-	
-	
 }

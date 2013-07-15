@@ -32,6 +32,7 @@ class Types {
 		#ifndef «typesModule.define»_H_
 		#define «typesModule.define»_H_
 		
+		#include <cstdint>
 		#include <string>
 		
 		typedef unsigned char	sc_ushort;
