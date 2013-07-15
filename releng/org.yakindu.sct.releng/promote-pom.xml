@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
 	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>org.yakindu.sct</groupId>
 	<artifactId>org.yakindu.sct.releng.promote</artifactId>
 	<version>2.1.1-SNAPSHOT</version>
@@ -79,6 +79,32 @@
 				<version>1.1</version>
 				<executions>
 					<execution>
+						<!-- http://wiki.eclipse.org/Tycho/Additional_Tools#tycho-eclipserun-plugin_behind_a_proxy -->
+						<id>configure-proxies-for-eclipserun</id>
+						<phase>generate-resources</phase>
+						<configuration>
+							<target>
+								<touch
+									file="${project.build.directory}/work/configuration/.settings/org.eclipse.core.net.prefs"
+									mkdirs="true" />
+
+								<propertyfile
+									file="${project.build.directory}/work/configuration/.settings/org.eclipse.core.net.prefs">
+									<entry key="eclipse.preferences.version" value="1" />
+									<entry key="nonProxiedHosts" value="${http.nonProxyHosts}" />
+									<entry key="org.eclipse.core.net.hasMigrated" value="true" />
+									<entry key="proxyData/HTTP/hasAuth" value="false" />
+									<entry key="proxyData/HTTP/host" value="${http.proxyHost}" />
+									<entry key="proxyData/HTTP/port" value="${http.proxyPort}" />
+									<entry key="systemProxiesEnabled" value="false" />
+								</propertyfile>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
 						<id>download.distro</id>
 						<phase>prepare-package</phase>
 						<configuration>
@@ -91,7 +117,8 @@
 									value="${project.build.directory}/distro/download" />
 
 								<!-- 'target architecture' for distros -->
-								<for list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
+								<for
+									list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
 									param="environment" delimiter=";" parallel="false">
 									<sequential>
 										<propertyregex property="distro.os" input="@{environment}"
@@ -238,7 +265,8 @@
 								<taskdef resource="net/sf/antcontrib/antlib.xml"
 									classpathref="maven.plugin.classpath" />
 								<!-- 'target architecture' for distros -->
-								<for list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
+								<for
+									list="macosx-cocoa-x86_64;win32-win32-x86;win32-win32-x86_64;linux-gtk-x86;linux-gtk-x86_64"
 									param="environment" delimiter=";" parallel="false">
 									<sequential>
 										<propertyregex property="distro.os" input="@{environment}"
@@ -312,7 +340,8 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
+								-application
+								org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/macosx-cocoa-x86_64/eclipse/ -profile \
 								${profile} -p2.os macosx -p2.ws cocoa -p2.arch x86_64 \
 								-repository ${update.sites} -installIUs ${features}
@@ -327,8 +356,10 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
-								${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile} \
+								-application
+								org.eclipse.equinox.p2.director -destination \
+								${distro.work.dir}/win32-win32-x86/eclipse/ -profile ${profile}
+								\
 								-p2.os win32 -p2.ws win32 -p2.arch x86 -repository \
 								${update.sites} -installIUs ${features}
 							</appArgLine>
@@ -342,9 +373,11 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
+								-application
+								org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/win32-win32-x86_64/eclipse/ -profile \
-								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository \
+								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository
+								\
 								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
@@ -357,10 +390,13 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
+								-application
+								org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/linux-gtk-x86/eclipse/ -profile \
-								${profile} -p2.os linux -p2.ws gtk -p2.arch x86 \
-								-repository ${update.sites} -installIUs ${features}
+								${profile}
+								-p2.os linux -p2.ws gtk -p2.arch x86 \
+								-repository
+								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -372,10 +408,12 @@
 						</goals>
 						<configuration>
 							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application org.eclipse.equinox.p2.director -destination \
+								-application
+								org.eclipse.equinox.p2.director -destination \
 								${distro.work.dir}/linux-gtk-x86_64/eclipse/ -profile \
 								${profile} -p2.os linux -p2.ws gtk -p2.arch x86_64 \
-								-repository ${update.sites} -installIUs ${features}
+								-repository
+								${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
