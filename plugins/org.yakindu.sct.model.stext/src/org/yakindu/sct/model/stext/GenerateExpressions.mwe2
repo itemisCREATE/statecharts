@@ -50,7 +50,7 @@ Workflow {
 			fragment = ecore.EcoreGeneratorFragment {
 				generateEdit = true
 				genModel = "model/SText.genmodel"
-//				emfRuntimeVersion = "2.8"
+				emfRuntimeVersion = "2.8"
 				xmiModelDirectory = "${runtimeProject}/model"
 			}
 
