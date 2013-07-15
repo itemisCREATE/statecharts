@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.generator.c.StatemachineC
 import org.yakindu.sct.generator.core.impl.IExecutionFlowGenerator
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -30,7 +29,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	@Inject extension ITimerService
 	@Inject extension IStatemachine
 	@Inject extension StatemachineHeader
-	@Inject extension StatemachineC
+	@Inject extension StatemachineImplementation
 
 	@Inject extension Navigation
 	
@@ -46,6 +45,6 @@ class CppGenerator implements IExecutionFlowGenerator {
 		}
 		
 		flow.generateStatemachineHeader(flow.sourceElement as Statechart, fsa, entry)
-		//flow.generateStatemachineC(flow.sourceElement as Statechart, fsa, entry)
+		flow.generateStatemachineImplemenation(flow.sourceElement as Statechart, fsa, entry)
 	}
 }
