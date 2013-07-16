@@ -34,8 +34,7 @@ import org.yakindu.sct.model.stext.stext.IntLiteral
 import org.yakindu.sct.model.stext.stext.RealLiteral
 import org.yakindu.sct.model.stext.stext.HexLiteral
 
-class ExpressionCode //extends org.yakindu.sct.generator.c.ExpressionCode 
-{
+class ExpressionCode {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
