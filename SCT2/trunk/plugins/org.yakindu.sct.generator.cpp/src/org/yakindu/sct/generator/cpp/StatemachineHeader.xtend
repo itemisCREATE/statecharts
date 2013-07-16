@@ -39,7 +39,7 @@ class StatemachineHeader extends Statemachine {
 	@Inject extension GenmodelEntries
 	
 	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		 fsa.generateFile(flow.module().hpp, flow.statemachineHContent(entry) )
+		 fsa.generateFile(flow.module().h, flow.statemachineHContent(entry) )
 	}
 	
 	override statemachineHContent(ExecutionFlow it,  GeneratorEntry entry) '''
@@ -48,10 +48,10 @@ class StatemachineHeader extends Statemachine {
 		#ifndef «module().define»_H_
 		#define «module().define»_H_
 
-		#include "«typesModule.hpp»"
-		#include "«statemachineInterface.hpp»"
+		#include "«typesModule.h»"
+		#include "«statemachineInterface.h»"
 		«IF timed»
-			#include "«timedStatemachineInterface.hpp»"
+			#include "«timedStatemachineInterface.h»"
 		«ENDIF»
 
 		/*! \file Header of the state machine '«name»'.
@@ -62,6 +62,8 @@ class StatemachineHeader extends Statemachine {
 			public:
 				
 				«flow.module()»();
+				
+				~«flow.module()»();
 				
 				«statesEnumDecl»
 				
@@ -180,7 +182,7 @@ class StatemachineHeader extends Statemachine {
 		static const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
-			«timerServiceInterface»* «timerServiceInstance»;
+			«timerInterface»* «timerServiceInstance»;
 			sc_boolean «timeEventsInstance»[«timeEvents.size»];
 		«ENDIF»
 		
@@ -213,9 +215,9 @@ class StatemachineHeader extends Statemachine {
 	'''
 	
 	def ITimedStatemachineFunctions(ExecutionFlow it) '''
-		void setTimerService(«timerServiceInterface»* timerService);
+		void setTimerService(«timerInterface»* timerService);
 		
-		«timerServiceInterface»* getTimerService();
+		«timerInterface»* getTimerService();
 		
 		void «nameOfRaiseTimeEventFunction»(sc_eventid event);
 	'''

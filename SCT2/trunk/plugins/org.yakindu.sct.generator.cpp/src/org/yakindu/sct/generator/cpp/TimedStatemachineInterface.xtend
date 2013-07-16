@@ -24,7 +24,7 @@ class TimedStatemachineInterface {
 	extension GenmodelEntries
 	
 	def generateITimedStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(timedStatemachineInterface.hpp, flow.content(entry) )
+		fsa.generateFile(timedStatemachineInterface.h, flow.content(entry) )
 	}
 	
 	def private content(ExecutionFlow it, GeneratorEntry entry) {
@@ -34,8 +34,8 @@ class TimedStatemachineInterface {
 		#ifndef «timedStatemachineInterface.define»_H_
 		#define «timedStatemachineInterface.define»_H_
 		
-		#include "«typesModule.hpp»"
-		#include "«timerServiceInterface.hpp»"
+		#include "«typesModule.h»"
+		#include "«timerInterface.h»"
 		
 		/*
 		* Interface for state machines which use timed event triggers.
@@ -50,12 +50,12 @@ class TimedStatemachineInterface {
 				* externally on a timed state machine before a run cycle can be correct
 				* executed.
 				*/
-				virtual void setTimerService(«timerServiceInterface»* timerService) = 0;
+				virtual void setTimerService(«timerInterface»* timerService) = 0;
 				
 				/*
 				* Returns the currently used timer service.
 				*/
-				virtual «timerServiceInterface»* getTimerService() = 0;
+				virtual «timerInterface»* getTimerService() = 0;
 				
 				/*
 				* Callback method if a time event occurred.

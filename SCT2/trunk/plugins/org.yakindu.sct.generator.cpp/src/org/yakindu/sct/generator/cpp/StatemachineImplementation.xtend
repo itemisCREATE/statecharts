@@ -36,11 +36,13 @@ class StatemachineImplementation {
 	def statemachineContent(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»
 		
-		#include "«module.hpp»"
+		#include "«module.h»"
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
 		«constructorDecl»
+		
+		«destructorDecl»
 		
 		«initFunction»
 		
@@ -80,6 +82,11 @@ class StatemachineImplementation {
 			«IF timed»
 			timerService = NULL;
 			«ENDIF»
+		}
+	'''
+	
+	def destructorDecl(ExecutionFlow it) '''
+		«module»::~«module»() {
 		}
 	'''
 	
@@ -182,11 +189,11 @@ class StatemachineImplementation {
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
 			
-			void «module»::setTimerService(«timerServiceInterface»* timerService){
+			void «module»::setTimerService(«timerInterface»* timerService){
 				this->timerService = timerService;
 			}
 			
-			«timerServiceInterface»* «module»::getTimerService(){
+			«timerInterface»* «module»::getTimerService(){
 				return timerService;
 			}
 			

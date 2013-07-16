@@ -26,7 +26,7 @@ class CppGenerator implements IExecutionFlowGenerator {
 	 
 	@Inject extension Types
 	@Inject extension TimedStatemachineInterface
-	@Inject extension TimerServiceInterface
+	@Inject extension TimerInterface
 	@Inject extension StatemachineInterface
 	@Inject extension StatemachineHeader
 	@Inject extension StatemachineImplementation
