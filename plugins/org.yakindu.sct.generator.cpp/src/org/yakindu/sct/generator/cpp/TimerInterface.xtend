@@ -34,7 +34,10 @@ class TimerInterface {
 		#ifndef «timerInterface.define»_H_
 		#define «timerInterface.define»_H_
 		
-		#include "«timedStatemachineInterface.h»"
+		#include "sc_types.h"
+		
+		//forward declaration of TimedStatemachineInterface to avoid cyclic dependency
+		class TimedStatemachineInterface;
 		
 		/*
 		 * Basic interface for statemachines.
@@ -60,6 +63,8 @@ class TimerInterface {
 				 */
 				virtual void cancel() = 0;
 		};
+		
+		inline TimerInterface::~TimerInterface() {}
 		
 		#endif /* «timerInterface.define»_H_ */
 		'''

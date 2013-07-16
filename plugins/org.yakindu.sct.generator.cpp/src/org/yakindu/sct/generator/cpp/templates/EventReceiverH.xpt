@@ -1,19 +1,19 @@
-«REM»
+ï¿½REMï¿½
 
 Templates for the main statechart cpp file.
 
 @auther axel terfloth
 
-«ENDREM»
+ï¿½ENDREMï¿½
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+ï¿½IMPORT sexecï¿½
+ï¿½IMPORT stextï¿½
+ï¿½IMPORT sgraphï¿½
 
 
-«DEFINE file FOR ExecutionFlow»
+ï¿½DEFINE file FOR ExecutionFlowï¿½
 
-«FILE 'EventReceiver.h'»
+ï¿½FILE 'EventReceiver.h'ï¿½
 #ifndef EVENTRECEIVER_H_
 #define EVENTRECEIVER_H_
 
@@ -29,6 +29,6 @@ public:
 };
 
 #endif /* EVENTRECEIVER_H_ */
-«ENDFILE»
+ï¿½ENDFILEï¿½
 
-«ENDDEFINE»
+ï¿½ENDDEFINEï¿½

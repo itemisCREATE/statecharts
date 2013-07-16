@@ -1,75 +1,75 @@
-«REM»
+ï¿½REMï¿½
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+ï¿½ENDREMï¿½
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+ï¿½IMPORT sexecï¿½
+ï¿½IMPORT stextï¿½
+ï¿½IMPORT sgraphï¿½
 
-«EXTENSION org::yakindu::sct::generator::cpp::templates::Expression»
-«EXTENSION org::yakindu::sct::generator::cpp::templates::TypeModelExtensions»
-«EXTENSION org::yakindu::sct::generator::cpp::templates::Naming»
+ï¿½EXTENSION org::yakindu::sct::generator::cpp::templates::Expressionï¿½
+ï¿½EXTENSION org::yakindu::sct::generator::cpp::templates::TypeModelExtensionsï¿½
+ï¿½EXTENSION org::yakindu::sct::generator::cpp::templates::Namingï¿½
 
 
-«DEFINE file FOR ExecutionFlow»
-«FOREACH this.scopes.typeSelect(InterfaceScope) AS interface»
-«FILE StName()+interface.interfaceClassName()+".h"»
+ï¿½DEFINE file FOR ExecutionFlowï¿½
+ï¿½FOREACH this.scopes.typeSelect(InterfaceScope) AS interfaceï¿½
+ï¿½FILE StName()+interface.interfaceClassName()+".h"ï¿½
 
-#ifndef «interface.interfaceClassName().toUpperCase()»_H_
-#define «interface.interfaceClassName().toUpperCase()»_H_
+#ifndef ï¿½interface.interfaceClassName().toUpperCase()ï¿½_H_
+#define ï¿½interface.interfaceClassName().toUpperCase()ï¿½_H_
 
 #include "definition.h"
 #include "Event.h"
 #include "EventSet.h"
 #include "EventPool.h"
 #include "Statemachine.h"
-#include "«EvName()».h"
+#include "ï¿½EvName()ï¿½.h"
 #include <vector>
 
-namespace «StName()» {
+namespace ï¿½StName()ï¿½ {
 
 class AbstractInterface {
 
 };
 
-class «interfaceClassName(interface)» : public AbstractInterface {
+class ï¿½interfaceClassName(interface)ï¿½ : public AbstractInterface {
 
 protected:
 	Statemachine& statemachine;
     std::vector<_Event*> outEventList;
 
-«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-	«variable.type» «variable.name»;
-«ENDFOREACH» 
+ï¿½FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -ï¿½
+	ï¿½variable.typeï¿½ ï¿½variable.nameï¿½;
+ï¿½ENDFOREACHï¿½ 
 	
 	bool isMyEvent(Event& event);
 	
 public:
 
-	«interfaceClassName(interface)»(Statemachine& statemachine);
+	ï¿½interfaceClassName(interface)ï¿½(Statemachine& statemachine);
 	
-«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-	«variable.type»& get_«variable.name»() const;
-	«IF variable.readonly == false -»
-	void set_«variable.name»(«variable.type»& value);
-	«ENDIF»
-«ENDFOREACH» 
+ï¿½FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -ï¿½
+	ï¿½variable.typeï¿½& get_ï¿½variable.nameï¿½() const;
+	ï¿½IF variable.readonly == false -ï¿½
+	void set_ï¿½variable.nameï¿½(ï¿½variable.typeï¿½& value);
+	ï¿½ENDIFï¿½
+ï¿½ENDFOREACHï¿½ 
 	
 	void resetEvent();
 	
-	«FOREACH interface.getOutEvents() AS event -»
-	boolean is_«event.name»_raised(«
-	IF !event.type.isVoid() -» «event.type.eventTypeToString()»* value«ENDIF» );
-	«ENDFOREACH»
+	ï¿½FOREACH interface.getOutEvents() AS event -ï¿½
+	boolean is_ï¿½event.nameï¿½_raised(ï¿½
+	IF !event.type.isVoid() -ï¿½ ï¿½event.type.eventTypeToString()ï¿½* valueï¿½ENDIFï¿½ );
+	ï¿½ENDFOREACHï¿½
 
-	«FOREACH interface.getInEvents() AS event -»
-	void raise_«event.name»(«
-	IF !event.type.isVoid() -» «event.type.eventTypeToString()» value «ENDIF»);
-	«ENDFOREACH» 
+	ï¿½FOREACH interface.getInEvents() AS event -ï¿½
+	void raise_ï¿½event.nameï¿½(ï¿½
+	IF !event.type.isVoid() -ï¿½ ï¿½event.type.eventTypeToString()ï¿½ value ï¿½ENDIFï¿½);
+	ï¿½ENDFOREACHï¿½ 
 	
 
 };
@@ -79,69 +79,69 @@ public:
 #endif /* INTERFACEBASE_H_ */
 
 
-«ENDFILE»
+ï¿½ENDFILEï¿½
 
-«FILE StName()+interface.interfaceClassName()+".cpp"»
-#include "«StName()»«interface.interfaceClassName()».h"
+ï¿½FILE StName()+interface.interfaceClassName()+".cpp"ï¿½
+#include "ï¿½StName()ï¿½ï¿½interface.interfaceClassName()ï¿½.h"
 
-using namespace «StName()»;
+using namespace ï¿½StName()ï¿½;
 
-bool «interfaceClassName(interface)»::isMyEvent(Event& event)
+bool ï¿½interfaceClassName(interface)ï¿½::isMyEvent(Event& event)
 {
 
 }
 
 
-«interfaceClassName(interface)»::«interfaceClassName(interface)»(Statemachine& _statemachine)
+ï¿½interfaceClassName(interface)ï¿½::ï¿½interfaceClassName(interface)ï¿½(Statemachine& _statemachine)
   : statemachine(_statemachine) 
 {}
 	
-«FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -»
-«variable.type»& «interfaceClassName(interface)»::get_«variable.name»() const
-{ return «variable.name»; }
+ï¿½FOREACH interface.declarations.typeSelect(VariableDefinition) AS variable -ï¿½
+ï¿½variable.typeï¿½& ï¿½interfaceClassName(interface)ï¿½::get_ï¿½variable.nameï¿½() const
+{ return ï¿½variable.nameï¿½; }
 
-«IF variable.readonly == false -»
-void «interfaceClassName(interface)»::set_«variable.name»(«variable.type»& value)
-{ «variable.name» = value; }
-«ENDIF-»
-«ENDFOREACH» 
+ï¿½IF variable.readonly == false -ï¿½
+void ï¿½interfaceClassName(interface)ï¿½::set_ï¿½variable.nameï¿½(ï¿½variable.typeï¿½& value)
+{ ï¿½variable.nameï¿½ = value; }
+ï¿½ENDIF-ï¿½
+ï¿½ENDFOREACHï¿½ 
 	
-void «interfaceClassName(interface)»::resetEvent()
+void ï¿½interfaceClassName(interface)ï¿½::resetEvent()
 {  outEventList.clear(); }
 	
-«FOREACH interface.getOutEvents() AS event -»
-boolean «interfaceClassName(interface)»::is_«event.name»_raised(«
-	IF !event.type.isVoid() -» «event.type.eventTypeToString()»* value«ENDIF» )
+ï¿½FOREACH interface.getOutEvents() AS event -ï¿½
+boolean ï¿½interfaceClassName(interface)ï¿½::is_ï¿½event.nameï¿½_raised(ï¿½
+	IF !event.type.isVoid() -ï¿½ ï¿½event.type.eventTypeToString()ï¿½* valueï¿½ENDIFï¿½ )
 {
 	std::vector<Event>::const_iterator cit(outEventList.begin());
 	for(; cit != outEventList.end(); ++cit)
-	  if (cit->getID() == (uint32_t)«event.getEventEnumName()») {
-	  	«IF !event.type.isVoid() -»
-	  	*value = static_cast<«event.name»*>(cit)->value;
-	  	«ENDIF»
+	  if (cit->getID() == (uint32_t)ï¿½event.getEventEnumName()ï¿½) {
+	  	ï¿½IF !event.type.isVoid() -ï¿½
+	  	*value = static_cast<ï¿½event.nameï¿½*>(cit)->value;
+	  	ï¿½ENDIFï¿½
 	  	return true;
 	  } 
 	return false;
 }
-«ENDFOREACH»
+ï¿½ENDFOREACHï¿½
 
 
-«FOREACH interface.getInEvents() AS event -»
-void «interfaceClassName(interface)»::raise_«event.name»(«
-	IF !event.type.isVoid() -» «event.type.eventTypeToString()» value «ENDIF»)
+ï¿½FOREACH interface.getInEvents() AS event -ï¿½
+void ï¿½interfaceClassName(interface)ï¿½::raise_ï¿½event.nameï¿½(ï¿½
+	IF !event.type.isVoid() -ï¿½ ï¿½event.type.eventTypeToString()ï¿½ value ï¿½ENDIFï¿½)
 {
-	Event ev = new «event.name»;
+	Event ev = new ï¿½event.nameï¿½;
 	statemachine.setEvent(ev);
 }
-«ENDFOREACH» 
+ï¿½ENDFOREACHï¿½ 
 	
-bool «interface.interfaceName()»::is_my_event(uint32_t evid)
+bool ï¿½interface.interfaceName()ï¿½::is_my_event(uint32_t evid)
 {
 	bool ret = false;
 	switch (evid) {
-«FOREACH interface.getInEvents() AS event -»
-	case «event.getEventEnumName()»:
-«ENDFOREACH»
+ï¿½FOREACH interface.getInEvents() AS event -ï¿½
+	case ï¿½event.getEventEnumName()ï¿½:
+ï¿½ENDFOREACHï¿½
 		ret = true;
 		break;
 	default:
@@ -151,6 +151,6 @@ bool «interface.interfaceName()»::is_my_event(uint32_t evid)
 }
 
 
-«ENDFILE»
-«ENDFOREACH»
-«ENDDEFINE»
+ï¿½ENDFILEï¿½
+ï¿½ENDFOREACHï¿½
+ï¿½ENDDEFINEï¿½

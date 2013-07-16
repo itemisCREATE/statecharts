@@ -56,7 +56,7 @@ class StatemachineImplementation {
 		
 		«clearOutEventsFunction»
 
-		«raiseTimeEventFunction»
+		«timedStatemachineFunctions»
 
 		«isActiveFunction»
 		
@@ -80,7 +80,7 @@ class StatemachineImplementation {
 			stateConfVectorPosition = 0;
 			
 			«IF timed»
-			timerService = NULL;
+				«timerInstance» = NULL;
 			«ENDIF»
 		}
 	'''
@@ -186,15 +186,15 @@ class StatemachineImplementation {
 		}
 	'''
 	
-	def raiseTimeEventFunction(ExecutionFlow it) '''
+	def timedStatemachineFunctions(ExecutionFlow it) '''
 		«IF timed»
 			
-			void «module»::setTimerService(«timerInterface»* timerService){
-				this->timerService = timerService;
+			void «module»::setTimer(«timerInterface»* timer){
+				this->«timerInstance» = timer;
 			}
 			
-			«timerInterface»* «module»::getTimerService(){
-				return timerService;
+			«timerInterface»* «module»::getTimer(){
+				return «timerInstance»;
 			}
 			
 			void «module»::«nameOfRaiseTimeEventFunction»(sc_eventid evid) {

@@ -1,19 +1,19 @@
-«REM»
+ï¿½REMï¿½
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+ï¿½ENDREMï¿½
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+ï¿½IMPORT sexecï¿½
+ï¿½IMPORT stextï¿½
+ï¿½IMPORT sgraphï¿½
 
 
-«DEFINE file FOR ExecutionFlow»
+ï¿½DEFINE file FOR ExecutionFlowï¿½
 
-«FILE 'DummyTimer.cpp'»
+ï¿½FILE 'DummyTimer.cpp'ï¿½
 #include "DummyTimer.h"
 
 DummyTimer::DummyTimer() 
@@ -28,6 +28,6 @@ void DummyTimer::setTimer(const uint32_t evid, const uint32_t time_ms, bool peri
 void DummyTimer::unsetTimer(const uint32_t evid)
 {}
 
-«ENDFILE»
+ï¿½ENDFILEï¿½
 
-«ENDDEFINE»
+ï¿½ENDDEFINEï¿½

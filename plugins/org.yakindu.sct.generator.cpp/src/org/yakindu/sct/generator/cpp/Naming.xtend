@@ -51,8 +51,8 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'TimerInterface'
 	}
 	
-	def timerServiceInstance() {
-		'timerService'
+	def timerInstance() {
+		'timer'
 	}
 	
 	def timeEventsInstance() {
