@@ -32,13 +32,12 @@ class Types {
 		#ifndef «typesModule.define»_H_
 		#define «typesModule.define»_H_
 		
-		#include <cstdint>
 		#include <string>
 		
 		typedef unsigned char	sc_ushort;
 		typedef int				sc_integer;  
 		typedef double			sc_real;
-		typedef string			sc_string;
+		typedef std::string		sc_string;
 		typedef bool			sc_boolean;
 		
 		typedef void*			sc_eventid;
