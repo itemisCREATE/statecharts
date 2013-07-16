@@ -19,7 +19,7 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.generator.c.GenmodelEntries
+import org.yakindu.sct.generator.c.GenmodelEntriesimport org.yakindu.sct.model.stext.stext.StatechartScope
 
 class StatemachineImplementation {
 	
@@ -40,17 +40,19 @@ class StatemachineImplementation {
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
+		«constructorDecl»
+		
 		«initFunction»
 		
 		«enterFunction»
 		
 		«exitFunction»
 		
+		«runCycleFunction»
+		
 		«clearInEventsFunction»
 		
 		«clearOutEventsFunction»
-		
-		«runCycleFunction»
 
 		«raiseTimeEventFunction»
 
@@ -61,6 +63,25 @@ class StatemachineImplementation {
 		«functionImplementations»
 	'''
 	
+	def constructorDecl(ExecutionFlow it) '''
+		«module»::«module»() {
+			
+			«FOR s : scopes.filter(typeof(StatechartScope))»
+			«s.instance» = new «s.interfaceName»();
+		«ENDFOR»
+		«IF hasHistory»
+			
+			for (i = 0; i < «historyStatesConst»; ++i)
+				historyVector[i] = «last_state»;
+			«ENDIF»
+			
+			stateConfVectorPosition = 0;
+			
+			«IF timed»
+			timerService = NULL;
+			«ENDIF»
+		}
+	'''
 	
 	def initFunction(ExecutionFlow it) '''
 		void «module»::init()
@@ -160,11 +181,19 @@ class StatemachineImplementation {
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
+			
+			void «module»::setTimerService(«timerServiceInterface»* timerService){
+				this->timerService = timerService;
+			}
+			
+			«timerServiceInterface»* «module»::getTimerService(){
+				return timerService;
+			}
+			
 			void «module»::«nameOfRaiseTimeEventFunction»(sc_eventid evid) {
-				if ( ((intptr_t)evid) >= ((intptr_t)&(timeEvents))
-					&&  ((intptr_t)evid) < ((intptr_t)&(timeEvents)) + sizeof(timeEvents)) {
+				if ((evid >= &timeEvents) && (evid < &timeEvents + sizeof(timeEvents))) {
 					*(sc_boolean*)evid = true;
-				}		
+				}
 			}
 		«ENDIF»
 	'''
@@ -192,20 +221,20 @@ class StatemachineImplementation {
 			«FOR event : scope.incomingEvents»
 				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams») {
 					«IF event.hasValue»
-					«event.valueAccess» = value;
+					«event.localValueAccess» = value;
 					«ENDIF»
-					«event.access» = true;
+					«event.localAccess» = true;
 				}
 			«ENDFOR»
 			
 			«FOR event : scope.outgoingEvents»
 				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
-					return «event.access»;
+					return «event.localAccess»;
 				}
 				«IF event.hasValue» 
 					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
 						//TODO: Check if event is not raised
-						return «event.valueAccess»;
+						return «event.localValueAccess»;
 					}
 				«ENDIF»
 			«ENDFOR»
@@ -213,29 +242,29 @@ class StatemachineImplementation {
 			«FOR event : scope.localEvents»
 				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams») {
 					«IF event.hasValue»
-					«event.valueAccess» = value;
+					«event.localValueAccess» = value;
 					«ENDIF»
-					«event.access» = true;
+					«event.localAccess» = true;
 				}
 				
 				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
-					return «event.access»;
+					return «event.localAccess»;
 				}
 				«IF event.hasValue» 
 					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
 						//TODO: Check if event is not raised
-						return «event.valueAccess»;
+						return «event.localValueAccess»;
 					}
 				«ENDIF»
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
 				«variable.type.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() {
-					return «variable.access»;
+					return «variable.localAccess»;
 				}
 				«IF !variable.readonly »
 				void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
-					«variable.access» = value;
+					«variable.localAccess» = value;
 				}
 				«ENDIF»
 			«ENDFOR»

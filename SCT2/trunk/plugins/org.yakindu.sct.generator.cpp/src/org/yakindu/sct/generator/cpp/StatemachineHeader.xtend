@@ -60,7 +60,9 @@ class StatemachineHeader extends Statemachine {
 		class «module()» : «interfaceExtensions» {
 			
 			public:
-			
+				
+				«flow.module()»();
+				
 				«statesEnumDecl»
 				
 				«FOR s : it.scopes»«s.createScope()»«ENDFOR»
@@ -82,7 +84,7 @@ class StatemachineHeader extends Statemachine {
 		#endif /* «module().define»_H_ */
 	'''
 	
-	def getInterfaceExtensions(ExecutionFlow flow) {
+	def private getInterfaceExtensions(ExecutionFlow flow) {
 
 		var String interfaces = "";
 
@@ -122,6 +124,7 @@ class StatemachineHeader extends Statemachine {
 				«ENDFOR»
 				
 			private:
+				friend class «scope.execution_flow.module()»;
 				«FOR d : scope.declarations»
 				 «d.structDeclaration»
 				«ENDFOR»
@@ -187,7 +190,7 @@ class StatemachineHeader extends Statemachine {
 		sc_ushort stateConfVectorPosition;
 		
 		«FOR s : scopes.filter(typeof(StatechartScope))»
-			const «s.interfaceName»* «s.instance»;
+			«s.interfaceName»* «s.instance»;
 		«ENDFOR»
 	'''
 	
