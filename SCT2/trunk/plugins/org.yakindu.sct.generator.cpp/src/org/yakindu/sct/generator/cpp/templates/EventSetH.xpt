@@ -1,19 +1,19 @@
-«REM»
+ï¿½REMï¿½
 
 Templates for the main statechart cpp file.
 
 @auther joern seger
 
-«ENDREM»
+ï¿½ENDREMï¿½
 
-«IMPORT sexec»
-«IMPORT stext»
-«IMPORT sgraph»
+ï¿½IMPORT sexecï¿½
+ï¿½IMPORT stextï¿½
+ï¿½IMPORT sgraphï¿½
 
 
-«DEFINE file FOR ExecutionFlow»
+ï¿½DEFINE file FOR ExecutionFlowï¿½
 
-«FILE 'EventSet.h'»
+ï¿½FILE 'EventSet.h'ï¿½
 #ifndef EVENTSET_H_
 #define EVENTSET_H_
 
@@ -36,6 +36,6 @@ public:
 };
 
 #endif /* EVENTSET_H_ */
-«ENDFILE»
+ï¿½ENDFILEï¿½
 
-«ENDDEFINE»
+ï¿½ENDDEFINEï¿½

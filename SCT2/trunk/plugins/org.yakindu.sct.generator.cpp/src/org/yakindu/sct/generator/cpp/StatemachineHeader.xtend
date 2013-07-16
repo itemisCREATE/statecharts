@@ -182,7 +182,7 @@ class StatemachineHeader extends Statemachine {
 		static const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
-			«timerInterface»* «timerServiceInstance»;
+			«timerInterface»* «timerInstance»;
 			sc_boolean «timeEventsInstance»[«timeEvents.size»];
 		«ENDIF»
 		
@@ -196,15 +196,15 @@ class StatemachineHeader extends Statemachine {
 		«ENDFOR»
 	'''
 	
-	def publicFunctionPrototypes(ExecutionFlow it) '''
+	def private publicFunctionPrototypes(ExecutionFlow it) '''
 		«IStatemachineFunctions»
 		
 		«IF timed»
-			«ITimedStatemachineFunctions»
+			«timedStatemachineFunctions»
 		«ENDIF»
 	'''
 	
-	def IStatemachineFunctions() '''
+	def private IStatemachineFunctions() '''
 		void init();
 		
 		void enter();
@@ -214,10 +214,10 @@ class StatemachineHeader extends Statemachine {
 		void runCycle();
 	'''
 	
-	def ITimedStatemachineFunctions(ExecutionFlow it) '''
-		void setTimerService(«timerInterface»* timerService);
+	def timedStatemachineFunctions(ExecutionFlow it) '''
+		void setTimer(«timerInterface»* timer);
 		
-		«timerInterface»* getTimerService();
+		«timerInterface»* getTimer();
 		
 		void «nameOfRaiseTimeEventFunction»(sc_eventid event);
 	'''

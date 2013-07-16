@@ -63,6 +63,8 @@ class StatemachineInterface {
 				virtual void runCycle() = 0;
 		};
 		
+		inline StatemachineInterface::~StatemachineInterface() {}
+		
 		#endif /* «statemachineInterface.define»_H_ */
 		'''
 	}

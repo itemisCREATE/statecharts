@@ -50,18 +50,20 @@ class TimedStatemachineInterface {
 				* externally on a timed state machine before a run cycle can be correct
 				* executed.
 				*/
-				virtual void setTimerService(«timerInterface»* timerService) = 0;
+				virtual void setTimer(«timerInterface»* timer) = 0;
 				
 				/*
 				* Returns the currently used timer service.
 				*/
-				virtual «timerInterface»* getTimerService() = 0;
+				virtual «timerInterface»* getTimer() = 0;
 				
 				/*
 				* Callback method if a time event occurred.
 				*/
 				virtual void «nameOfRaiseTimeEventFunction»(sc_eventid event) = 0;
 		};
+		
+		inline TimedStatemachineInterface::~TimedStatemachineInterface() {}
 		
 		#endif /* «timedStatemachineInterface.define»_H_ */
 		'''
