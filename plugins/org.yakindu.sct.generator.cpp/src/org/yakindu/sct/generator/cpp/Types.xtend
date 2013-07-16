@@ -23,7 +23,7 @@ class Types {
 	@Inject extension GenmodelEntries
 	 
 	def generateTypesHpp(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		 fsa.generateFile(flow.typesModule.hpp, flow.typesHContent(entry))
+		 fsa.generateFile(flow.typesModule.h, flow.typesHContent(entry))
 	}
 	
 	def typesHContent(ExecutionFlow it, GeneratorEntry entry) '''

@@ -25,7 +25,6 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	
 	@Inject extension Navigation;
 	
-	def hpp(String it) { it + ".hpp" }
 	def cpp(String it) { it + ".cpp" }
 	
 	def abstractModule(ExecutionFlow it) {
@@ -48,8 +47,8 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'TimedStatemachineInterface'
 	}
 	
-	def timerServiceInterface() {
-		'TimerServiceInterface'
+	def timerInterface() {
+		'TimerInterface'
 	}
 	
 	def timerServiceInstance() {

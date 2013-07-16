@@ -15,7 +15,7 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 import org.yakindu.sct.generator.c.GenmodelEntries
 
-class TimerServiceInterface {
+class TimerInterface {
 	
 	@Inject
 	extension Naming
@@ -24,25 +24,25 @@ class TimerServiceInterface {
 	extension GenmodelEntries
 	
 	def generateITimerService(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(timerServiceInterface.hpp, flow.content(entry) )
+		fsa.generateFile(timerInterface.h, flow.content(entry) )
 	}
 	
 	def private content(ExecutionFlow it, GeneratorEntry entry) {
 		'''
 		«entry.licenseText»
 		
-		#ifndef «timerServiceInterface.define»_H_
-		#define «timerServiceInterface.define»_H_
+		#ifndef «timerInterface.define»_H_
+		#define «timerInterface.define»_H_
 		
-		#include "«timedStatemachineInterface.hpp»"
+		#include "«timedStatemachineInterface.h»"
 		
 		/*
 		 * Basic interface for statemachines.
 		 */
-		class «timerServiceInterface» {
+		class «timerInterface» {
 			public:
-			
-				virtual ~«timerServiceInterface»() = 0;
+				
+				virtual ~«timerInterface»() = 0;
 			
 				/*
 				 * Starts the timing for a time event.
@@ -61,7 +61,7 @@ class TimerServiceInterface {
 				virtual void cancel() = 0;
 		};
 		
-		#endif /* «timerServiceInterface.define»_H_ */
+		#endif /* «timerInterface.define»_H_ */
 		'''
 	}
 }

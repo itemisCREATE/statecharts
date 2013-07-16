@@ -24,7 +24,7 @@ class StatemachineInterface {
 	extension GenmodelEntries
 	
 	def generateIStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(statemachineInterface.hpp, flow.content(entry) )
+		fsa.generateFile(statemachineInterface.h, flow.content(entry) )
 	}
 	
 	def private content(ExecutionFlow it, GeneratorEntry entry) {
@@ -39,7 +39,9 @@ class StatemachineInterface {
 		 */
 		class «statemachineInterface» {
 			public:
+			
 				virtual ~«statemachineInterface»() = 0;
+				
 				/*
 				* Initializes the statemachine. Use to init internal variables etc.
 				*/
