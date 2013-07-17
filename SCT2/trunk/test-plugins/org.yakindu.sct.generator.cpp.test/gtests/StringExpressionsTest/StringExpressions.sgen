@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart StringExpressions {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "StringExpressionsTest"
+		}
+	}
+}

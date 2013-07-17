@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart StatechartLocalReactions {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "StatechartLocalReactionsTest"
+		}
+	}
+}

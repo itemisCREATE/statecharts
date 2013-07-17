@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart AlwaysOncycle {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "AlwaysOncycleTest"
+		}
+	}
+}

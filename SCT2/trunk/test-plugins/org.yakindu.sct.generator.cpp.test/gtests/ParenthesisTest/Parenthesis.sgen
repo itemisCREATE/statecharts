@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart Parenthesis {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ParenthesisTest"
+		}
+	}
+}
