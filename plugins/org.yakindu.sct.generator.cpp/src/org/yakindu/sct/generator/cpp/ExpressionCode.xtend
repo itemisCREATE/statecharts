@@ -107,7 +107,7 @@ class ExpressionCode {
 		«IF value != null»
 			«event.definition.event.valueAccess» = «value.code»;
 		«ENDIF»
-		«event.definition.event.access» = bool_true'''	
+		«event.definition.event.access» = true'''	
 
 
 	/* Logical Expressions */
