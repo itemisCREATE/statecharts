@@ -16,3 +16,5 @@ Require-Bundle: org.junit;bundle-version="4.8.2",
  org.yakindu.sct.model.sgen;bundle-version="1.0.0",
  org.yakindu.sct.test.models;bundle-version="1.0.0",
  org.yakindu.sct.generator.genmodel.ui;bundle-version="1.0.0"
+Export-Package: org.yakindu.sct.generator.c.gtest,
+ org.yakindu.sct.generator.c.test
