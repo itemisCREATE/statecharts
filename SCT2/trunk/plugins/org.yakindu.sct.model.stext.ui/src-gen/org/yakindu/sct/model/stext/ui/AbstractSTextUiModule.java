@@ -123,11 +123,6 @@ public abstract class AbstractSTextUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.ui.refactoring.ui.DefaultRenameSupport.Factory.class;
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.refactoring.RefactorElementNameFragment
-	public Class<? extends org.eclipse.xtext.ui.refactoring.ui.IRenameElementHandler> bindIRenameElementHandler() {
-		return org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parser.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory> bindContentAssistContext$Factory() {
 		return org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.class;

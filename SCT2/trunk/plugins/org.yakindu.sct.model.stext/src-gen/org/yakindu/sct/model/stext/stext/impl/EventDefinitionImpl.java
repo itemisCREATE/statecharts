@@ -144,7 +144,7 @@ public class EventDefinitionImpl extends EventImpl implements EventDefinition
   public ComplexType getOwningType()
   {
     if (eContainerFeatureID() != StextPackage.EVENT_DEFINITION__OWNING_TYPE) return null;
-    return (ComplexType)eContainer();
+    return (ComplexType)eInternalContainer();
   }
 
   /**

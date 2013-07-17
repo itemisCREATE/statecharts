@@ -31,7 +31,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory
   {
     try
     {
-      StextFactory theStextFactory = (StextFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.yakindu.org/sct/statechart/SText"); 
+      StextFactory theStextFactory = (StextFactory)EPackage.Registry.INSTANCE.getEFactory(StextPackage.eNS_URI);
       if (theStextFactory != null)
       {
         return theStextFactory;

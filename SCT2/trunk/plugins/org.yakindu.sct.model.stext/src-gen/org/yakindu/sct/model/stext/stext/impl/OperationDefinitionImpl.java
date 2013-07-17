@@ -140,7 +140,7 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
   public ComplexType getOwningType()
   {
     if (eContainerFeatureID() != StextPackage.OPERATION_DEFINITION__OWNING_TYPE) return null;
-    return (ComplexType)eContainer();
+    return (ComplexType)eInternalContainer();
   }
 
   /**
