@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart ValuedEvents {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ValuedEventsTest"
+		}
+	}
+}

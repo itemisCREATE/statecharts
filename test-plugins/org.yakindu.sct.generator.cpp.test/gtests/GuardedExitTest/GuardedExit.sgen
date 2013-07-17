@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart GuardedExit {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "GuardedExitTest"
+		}
+	}
+}

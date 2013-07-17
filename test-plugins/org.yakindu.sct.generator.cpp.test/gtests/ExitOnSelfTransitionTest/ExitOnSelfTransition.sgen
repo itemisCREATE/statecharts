@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart ExitOnSelfTransition {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ExitOnSelfTransitionTest"
+		}
+	}
+}

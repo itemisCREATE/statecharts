@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart PriorityValues {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "PriorityValuesTest"
+		}
+	}
+}

@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart CKeywords {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "CKeywordsTest"
+		}
+	}
+}
