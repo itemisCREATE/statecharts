@@ -20,6 +20,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.c.GenmodelEntriesimport org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 class StatemachineImplementation {
 	
@@ -225,6 +226,12 @@ class StatemachineImplementation {
 	
 	def interfaceFunctions(ExecutionFlow it) '''
 		«FOR scope : statechartScopes»
+			«IF scope instanceof InterfaceScope»
+			«module»::«scope.interfaceName»* «module»::get«scope.interfaceName»() {
+				return «scope.instance»;
+			}
+			
+			«ENDIF»
 			«FOR event : scope.incomingEvents»
 				void «module»::«scope.interfaceName»::«event.asRaiser»(«event.valueParams») {
 					«IF event.hasValue»
@@ -232,17 +239,19 @@ class StatemachineImplementation {
 					«ENDIF»
 					«event.localAccess» = true;
 				}
+				
 			«ENDFOR»
-			
 			«FOR event : scope.outgoingEvents»
 				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
 					return «event.localAccess»;
 				}
+				
 				«IF event.hasValue» 
 					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
 						//TODO: Check if event is not raised
 						return «event.localValueAccess»;
 					}
+					
 				«ENDIF»
 			«ENDFOR»
 			
@@ -257,22 +266,25 @@ class StatemachineImplementation {
 				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
 					return «event.localAccess»;
 				}
+				
 				«IF event.hasValue» 
 					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
 						//TODO: Check if event is not raised
 						return «event.localValueAccess»;
 					}
+					
 				«ENDIF»
 			«ENDFOR»
-			
 			«FOR variable : scope.variableDefinitions»
 				«variable.type.targetLanguageName» «module»::«scope.interfaceName»::«variable.asGetter»() {
 					return «variable.localAccess»;
 				}
+				
 				«IF !variable.readonly »
 				void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
 					«variable.localAccess» = value;
 				}
+				
 				«ENDIF»
 			«ENDFOR»
 		«ENDFOR»
