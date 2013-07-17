@@ -59,8 +59,8 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final int T__51=51;
     public static final int T__15=15;
     public static final int T__52=52;
-    public static final int T__18=18;
     public static final int T__53=53;
+    public static final int T__18=18;
     public static final int T__54=54;
     public static final int T__17=17;
     public static final int T__14=14;
@@ -33198,8 +33198,8 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         "\1\uffff\1\1\1\0\55\uffff}>";
     static final String[] DFA70_transitionS = {
             "\1\3\11\uffff\10\3\1\1\1\2\12\3",
-            "\1\4\11\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1\16"+
-            "\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\42\uffff"+
+            "\1\4\11\uffff\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1\15\1"+
+            "\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\42\uffff"+
             "\1\3",
             "\1\32\11\uffff\1\33\1\34\1\35\1\36\1\37\1\40\1\41\1\42\1\43"+
             "\1\44\1\45\1\46\1\47\1\50\1\51\1\52\1\53\1\54\1\55\1\56\42\uffff"+

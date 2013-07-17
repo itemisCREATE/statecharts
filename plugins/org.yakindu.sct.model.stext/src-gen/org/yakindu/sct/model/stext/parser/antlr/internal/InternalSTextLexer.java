@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class InternalSTextLexer extends Lexer {
     public static final int T__68=68;
     public static final int T__69=69;
-    public static final int RULE_ID=4;
     public static final int T__66=66;
+    public static final int RULE_ID=4;
     public static final int T__67=67;
     public static final int T__29=29;
     public static final int T__64=64;
@@ -46,8 +46,8 @@ public class InternalSTextLexer extends Lexer {
     public static final int T__51=51;
     public static final int T__15=15;
     public static final int T__52=52;
-    public static final int T__18=18;
     public static final int T__53=53;
+    public static final int T__18=18;
     public static final int T__54=54;
     public static final int T__17=17;
     public static final int T__14=14;
@@ -2868,10 +2868,10 @@ public class InternalSTextLexer extends Lexer {
 
     protected DFA16 dfa16 = new DFA16(this);
     static final String DFA16_eotS =
-        "\1\uffff\1\56\2\63\1\uffff\3\63\1\76\1\63\3\uffff\3\63\1\uffff\1"+
-        "\116\4\uffff\1\125\1\uffff\1\131\1\134\1\136\1\140\1\142\1\144\1"+
-        "\146\1\150\1\153\1\uffff\1\155\5\63\2\164\1\uffff\2\56\3\uffff\1"+
-        "\63\1\174\1\175\1\uffff\1\177\1\uffff\7\63\2\uffff\3\63\3\uffff"+
+        "\1\uffff\1\56\2\63\1\uffff\3\63\1\76\1\63\3\uffff\3\63\1\uffff"+
+        "\1\116\4\uffff\1\125\1\uffff\1\131\1\134\1\136\1\140\1\142\1\144"+
+        "\1\146\1\150\1\153\1\uffff\1\155\5\63\2\164\1\uffff\2\56\3\uffff"+
+        "\1\63\1\174\1\175\1\uffff\1\177\1\uffff\7\63\2\uffff\3\63\3\uffff"+
         "\5\63\11\uffff\1\u0092\25\uffff\1\u0094\4\uffff\1\u0095\1\u0096"+
         "\3\63\3\uffff\1\164\4\uffff\1\63\2\uffff\1\63\1\uffff\5\63\1\u00a3"+
         "\4\63\1\u00a8\6\63\6\uffff\2\63\1\175\1\uffff\5\63\1\u00b7\1\u00b8"+

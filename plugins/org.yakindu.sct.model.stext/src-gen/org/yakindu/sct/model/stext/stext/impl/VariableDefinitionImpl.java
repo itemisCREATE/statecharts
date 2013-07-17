@@ -176,7 +176,7 @@ public class VariableDefinitionImpl extends VariableImpl implements VariableDefi
   public ComplexType getOwningType()
   {
     if (eContainerFeatureID() != StextPackage.VARIABLE_DEFINITION__OWNING_TYPE) return null;
-    return (ComplexType)eContainer();
+    return (ComplexType)eInternalContainer();
   }
 
   /**
