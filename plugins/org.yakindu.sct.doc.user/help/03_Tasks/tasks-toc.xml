@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<toc topic="help/03_Tasks/tasks.html" label="tasks">
-	<topic href="help/03_Tasks/tasks.html" label="Tasks">
-		<topic href="help/03_Tasks/tasks.html#SimulatingOperationsWithCustomJavaCode" label="Simulating Operations With Custom Java Code"></topic>
-		<topic href="help/03_Tasks/tasks.html#GeneratingCode" label="Generating Code"></topic>
-	</topic>
-</toc>

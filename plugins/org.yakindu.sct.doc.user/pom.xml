@@ -12,4 +12,40 @@
 	<artifactId>org.yakindu.sct.doc.user</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>generate-help</id>
+						<phase> generate-sources </phase>
+						<configuration>
+							<target>
+								<ant dir="${project.basedir}" antfile="build.xml">
+								</ant>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>clean-help</id>
+						<phase> clean </phase>
+						<configuration>
+							<target>
+								<ant dir="${project.basedir}" antfile="build.xml" target="clean">
+								</ant>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 </project>

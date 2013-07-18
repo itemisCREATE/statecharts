@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='utf-8' ?>
-<toc topic="help/01_Overview/overview.html" label="overview">
-	<topic href="help/01_Overview/overview.html" label="Overview">
-		<topic href="help/01_Overview/overview.html#WhataretheYAKINDUStatechartTools2" label="What are the YAKINDU Statechart Tools 2"></topic>
-		<topic href="help/01_Overview/overview.html#WhoisbehindYAKINDUStatechartTools2" label="Who is behind YAKINDU Statechart Tools 2?"></topic>
-		<topic href="help/01_Overview/overview.html#WhousestheYAKINDUStatechartTools2" label="Who uses the YAKINDU Statechart Tools 2?"></topic>
-	</topic>
-</toc>
