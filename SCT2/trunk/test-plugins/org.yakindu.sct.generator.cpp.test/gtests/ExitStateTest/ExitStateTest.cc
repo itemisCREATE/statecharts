@@ -10,44 +10,44 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "ExitState.hpp"
+#include "ExitState.h"
 
 TEST(StatemachineTest, defaultExit) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState_r_E));
+	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_E));
 	delete statechart;
 }
 TEST(StatemachineTest, namedExitThroughNamedTransition) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState_r_F));
+	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_F));
 	delete statechart;
 }
 TEST(StatemachineTest, namedExitThroughDefaultTransition) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
 	statechart->raise_g();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState_r_E));
+	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_E));
 	delete statechart;
 }
 TEST(StatemachineTest, remainInA) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
 	delete statechart;
 }

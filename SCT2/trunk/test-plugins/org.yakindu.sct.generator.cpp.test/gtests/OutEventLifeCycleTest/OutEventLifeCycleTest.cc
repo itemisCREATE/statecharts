@@ -10,7 +10,7 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "OutEventLifeCycle.hpp"
+#include "OutEventLifeCycle.h"
 
 TEST(StatemachineTest, availableAfterCycle) {
 	OutEventLifeCycle* statechart = new OutEventLifeCycle();
@@ -18,7 +18,7 @@ TEST(StatemachineTest, availableAfterCycle) {
 	statechart->enter();
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCInterface().);
+	EXPECT_TRUE(statechart->getSCInterface()->);
 	delete statechart;
 }
 TEST(StatemachineTest, availableWithinCycle) {
@@ -27,7 +27,7 @@ TEST(StatemachineTest, availableWithinCycle) {
 	statechart->enter();
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCInterface().get_f_available_in_cycle());
+	EXPECT_TRUE(statechart->getSCInterface()->get_f_available_in_cycle());
 	delete statechart;
 }
 TEST(StatemachineTest, unvailableWithin2ndCycle) {
@@ -37,7 +37,7 @@ TEST(StatemachineTest, unvailableWithin2ndCycle) {
 	statechart->raise_e();
 	statechart->runCycle();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!getSCInterface().get_f_available_in_next_cycle());
+	EXPECT_TRUE(statechart->!getSCInterface()->get_f_available_in_next_cycle());
 	delete statechart;
 }
 TEST(StatemachineTest, unvailableAfter2ndCycle) {
@@ -47,6 +47,6 @@ TEST(StatemachineTest, unvailableAfter2ndCycle) {
 	statechart->raise_e();
 	statechart->runCycle();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!getSCInterface().);
+	EXPECT_TRUE(statechart->!getSCInterface()->);
 	delete statechart;
 }

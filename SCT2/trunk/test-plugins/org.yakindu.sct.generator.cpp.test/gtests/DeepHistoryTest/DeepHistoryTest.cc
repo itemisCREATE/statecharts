@@ -10,7 +10,7 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "DeepHistory.hpp"
+#include "DeepHistory.h"
 
 TEST(StatemachineTest, deepHistoryTest) {
 	DeepHistory* statechart = new DeepHistory();
@@ -24,15 +24,15 @@ TEST(StatemachineTest, deepHistoryTest) {
 	statechart->runCycle();
 	statechart->raise_event7();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!isActive(DeepHistory_mainRegion_State1));
-	EXPECT_TRUE(statechart->isActive(DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->!isActive(DeepHistory::DeepHistory_mainRegion_State1));
+	EXPECT_TRUE(statechart->isActive(DeepHistory::DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	statechart->raise_event2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(DeepHistory_mainRegion_State1));
-	EXPECT_TRUE(statechart->!isActive(DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->isActive(DeepHistory::DeepHistory_mainRegion_State1));
+	EXPECT_TRUE(statechart->!isActive(DeepHistory::DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!isActive(DeepHistory_mainRegion_State1));
-	EXPECT_TRUE(statechart->isActive(DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->!isActive(DeepHistory::DeepHistory_mainRegion_State1));
+	EXPECT_TRUE(statechart->isActive(DeepHistory::DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	delete statechart;
 }

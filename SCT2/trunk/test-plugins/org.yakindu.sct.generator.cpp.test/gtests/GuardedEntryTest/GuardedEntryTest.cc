@@ -10,15 +10,15 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "GuardedEntry.hpp"
+#include "GuardedEntry.h"
 
 TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	GuardedEntry* statechart = new GuardedEntry();
 	statechart->init();
-	EXPECT_TRUE(statechart->getSCInterface().get_guard()== false);
+	EXPECT_TRUE(statechart->getSCInterface()->get_guard()== false);
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry_main_region_A));
-	EXPECT_TRUE(statechart->getSCInterface().get_done()== false);
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_A));
+	EXPECT_TRUE(statechart->getSCInterface()->get_done()== false);
 	delete statechart;
 }
 TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
@@ -26,39 +26,39 @@ TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 	statechart->init();
 	statechart->getSCInterface().set_guard(true);
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry_main_region_A));
-	EXPECT_TRUE(statechart->getSCInterface().get_done()== true);
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_A));
+	EXPECT_TRUE(statechart->getSCInterface()->get_done()== true);
 	delete statechart;
 }
 TEST(StatemachineTest, EntryTakenInTransition) {
 	GuardedEntry* statechart = new GuardedEntry();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry_main_region_A));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry_main_region_B));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_B));
 	statechart->getSCInterface().set_guard(true);
 	statechart->getSCInterface().set_done(false);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry_main_region_A));
-	EXPECT_TRUE(statechart->getSCInterface().get_done());
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_A));
+	EXPECT_TRUE(statechart->getSCInterface()->get_done());
 	delete statechart;
 }
 TEST(StatemachineTest, EntryNotTakenInTransition) {
 	GuardedEntry* statechart = new GuardedEntry();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry_main_region_A));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry_main_region_B));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_B));
 	statechart->getSCInterface().set_guard(false);
 	statechart->getSCInterface().set_done(false);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry_main_region_A));
-	EXPECT_TRUE(statechart->!getSCInterface().get_done());
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_A));
+	EXPECT_TRUE(statechart->!getSCInterface()->get_done());
 	delete statechart;
 }

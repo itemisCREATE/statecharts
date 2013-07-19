@@ -249,14 +249,6 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
-	test StateWithEmptyRegion{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.cpp.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
-	
 	test STextKeywordsInStatesAndRegions{
 		
 		feature Outlet{ 

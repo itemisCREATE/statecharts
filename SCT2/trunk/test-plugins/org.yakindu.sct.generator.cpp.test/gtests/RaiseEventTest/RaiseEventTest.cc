@@ -10,18 +10,18 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "RaiseEvent.hpp"
+#include "RaiseEvent.h"
 
 TEST(StatemachineTest, raiseEvent) {
 	RaiseEvent* statechart = new RaiseEvent();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(RaiseEvent_second_region_SateA));
-	EXPECT_TRUE(statechart->isActive(RaiseEvent_main_region_StateA));
+	EXPECT_TRUE(statechart->isActive(RaiseEvent::RaiseEvent_second_region_SateA));
+	EXPECT_TRUE(statechart->isActive(RaiseEvent::RaiseEvent_main_region_StateA));
 	statechart->raise_e2();
 	statechart->runCycle();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(RaiseEvent_second_region_StateB));
-	EXPECT_TRUE(statechart->isActive(RaiseEvent_main_region_StateB));
+	EXPECT_TRUE(statechart->isActive(RaiseEvent::RaiseEvent_second_region_StateB));
+	EXPECT_TRUE(statechart->isActive(RaiseEvent::RaiseEvent_main_region_StateB));
 	delete statechart;
 }

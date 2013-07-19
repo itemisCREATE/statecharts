@@ -10,18 +10,18 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "SimpleHierachy.hpp"
+#include "SimpleHierachy.h"
 
 TEST(StatemachineTest, simpleHierachyTest) {
 	SimpleHierachy* statechart = new SimpleHierachy();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SimpleHierachy_main_region_A));
+	EXPECT_TRUE(statechart->isActive(SimpleHierachy::SimpleHierachy_main_region_A));
 	statechart->raise_event1();
 	statechart->raise_event1();
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SimpleHierachy_main_region_B));
-	EXPECT_TRUE(statechart->isActive(SimpleHierachy_main_region_B_subregion1_B1));
+	EXPECT_TRUE(statechart->isActive(SimpleHierachy::SimpleHierachy_main_region_B));
+	EXPECT_TRUE(statechart->isActive(SimpleHierachy::SimpleHierachy_main_region_B_subregion1_B1));
 	delete statechart;
 }

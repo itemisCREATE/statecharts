@@ -10,7 +10,7 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "NamedInterfaceAccess.hpp"
+#include "NamedInterfaceAccess.h"
 
 TEST(StatemachineTest, SafeOpenSuccess) {
 	NamedInterfaceAccess* statechart = new NamedInterfaceAccess();

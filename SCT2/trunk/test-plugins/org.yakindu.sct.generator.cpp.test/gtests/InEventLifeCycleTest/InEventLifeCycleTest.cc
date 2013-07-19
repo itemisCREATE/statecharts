@@ -10,15 +10,15 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "InEventLifeCycle.hpp"
+#include "InEventLifeCycle.h"
 
 TEST(StatemachineTest, eventLifeCycle) {
 	InEventLifeCycle* statechart = new InEventLifeCycle();
 	statechart->init();
 	statechart->enter();
 	statechart->raise_e();
-	EXPECT_TRUE(statechart->getSCInterface().get_i()== 0);
+	EXPECT_TRUE(statechart->getSCInterface()->get_i()== 0);
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCInterface().get_i()== 1);
+	EXPECT_TRUE(statechart->getSCInterface()->get_i()== 1);
 	delete statechart;
 }

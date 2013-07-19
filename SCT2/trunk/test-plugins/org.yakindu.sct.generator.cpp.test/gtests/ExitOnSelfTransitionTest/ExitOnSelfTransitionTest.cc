@@ -10,22 +10,22 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "ExitOnSelfTransition.hpp"
+#include "ExitOnSelfTransition.h"
 
 TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	ExitOnSelfTransition* statechart = new ExitOnSelfTransition();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitOnSelfTransition_main_region_A));
-	EXPECT_TRUE(statechart->getSCInterface().get_entryCount()== 1);
-	EXPECT_TRUE(statechart->getSCInterface().get_exitCount()== 0);
+	EXPECT_TRUE(statechart->isActive(ExitOnSelfTransition::ExitOnSelfTransition_main_region_A));
+	EXPECT_TRUE(statechart->getSCInterface()->get_entryCount()== 1);
+	EXPECT_TRUE(statechart->getSCInterface()->get_exitCount()== 0);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCInterface().get_entryCount()== 2);
-	EXPECT_TRUE(statechart->getSCInterface().get_exitCount()== 1);
+	EXPECT_TRUE(statechart->getSCInterface()->get_entryCount()== 2);
+	EXPECT_TRUE(statechart->getSCInterface()->get_exitCount()== 1);
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCInterface().get_entryCount()== 2);
-	EXPECT_TRUE(statechart->getSCInterface().get_exitCount()== 2);
+	EXPECT_TRUE(statechart->getSCInterface()->get_entryCount()== 2);
+	EXPECT_TRUE(statechart->getSCInterface()->get_exitCount()== 2);
 	delete statechart;
 }

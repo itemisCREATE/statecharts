@@ -10,24 +10,24 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "AlwaysOncycle.hpp"
+#include "AlwaysOncycle.h"
 
 TEST(StatemachineTest, alwaysOncycleTest) {
 	AlwaysOncycle* statechart = new AlwaysOncycle();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(AlwaysOncycle_main_region_StateA));
-	while (statechart->getSCInterface().get_value()< 5) {
+	EXPECT_TRUE(statechart->isActive(AlwaysOncycle::AlwaysOncycle_main_region_StateA));
+	while (statechart->getSCInterface()->get_value()< 5) {
 		statechart->runCycle();
-		EXPECT_TRUE(statechart->isActive(AlwaysOncycle_main_region_StateA));
+		EXPECT_TRUE(statechart->isActive(AlwaysOncycle::AlwaysOncycle_main_region_StateA));
 	}
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(AlwaysOncycle_main_region_StateB));
-	while (statechart->getSCInterface().get_value()< 5) {
+	EXPECT_TRUE(statechart->isActive(AlwaysOncycle::AlwaysOncycle_main_region_StateB));
+	while (statechart->getSCInterface()->get_value()< 5) {
 		statechart->runCycle();
-		EXPECT_TRUE(statechart->isActive(AlwaysOncycle_main_region_StateB));
+		EXPECT_TRUE(statechart->isActive(AlwaysOncycle::AlwaysOncycle_main_region_StateB));
 	}
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(AlwaysOncycle_main_region_StateA));
+	EXPECT_TRUE(statechart->isActive(AlwaysOncycle::AlwaysOncycle_main_region_StateA));
 	delete statechart;
 }

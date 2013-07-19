@@ -10,22 +10,22 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "BooleanExpressions.hpp"
+#include "BooleanExpressions.h"
 
 TEST(StatemachineTest, booleanExpressions) {
 	BooleanExpressions* statechart = new BooleanExpressions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(BooleanExpressions_main_region_StateA));
-	EXPECT_TRUE(statechart->getSCInterface().get_myBool1()== true);
-	EXPECT_TRUE(statechart->getSCInterface().get_myBool2()== false);
+	EXPECT_TRUE(statechart->isActive(BooleanExpressions::BooleanExpressions_main_region_StateA));
+	EXPECT_TRUE(statechart->getSCInterface()->get_myBool1()== true);
+	EXPECT_TRUE(statechart->getSCInterface()->get_myBool2()== false);
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(BooleanExpressions_main_region_StateB));
-	EXPECT_TRUE(statechart->getSCInterface().get_and()== false);
-	EXPECT_TRUE(statechart->getSCInterface().get_or()== true);
-	EXPECT_TRUE(statechart->getSCInterface().get_not()== false);
-	EXPECT_TRUE(statechart->getSCInterface().get_equal()== false);
-	EXPECT_TRUE(statechart->getSCInterface().get_notequal()== true);
+	EXPECT_TRUE(statechart->isActive(BooleanExpressions::BooleanExpressions_main_region_StateB));
+	EXPECT_TRUE(statechart->getSCInterface()->get_and()== false);
+	EXPECT_TRUE(statechart->getSCInterface()->get_or()== true);
+	EXPECT_TRUE(statechart->getSCInterface()->get_not()== false);
+	EXPECT_TRUE(statechart->getSCInterface()->get_equal()== false);
+	EXPECT_TRUE(statechart->getSCInterface()->get_notequal()== true);
 	delete statechart;
 }

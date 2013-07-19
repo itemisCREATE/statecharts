@@ -10,82 +10,82 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "Choice.hpp"
+#include "Choice.h"
 
 TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	Choice* statechart = new Choice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_A));
 	statechart->getSCInterface().set_c(true);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_C));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_C));
 	delete statechart;
 }
 TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	Choice* statechart = new Choice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_A));
 	statechart->getSCInterface().set_c(false);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_B));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_B));
 	delete statechart;
 }
 TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	Choice* statechart = new Choice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_A));
 	statechart->getSCInterface().set_c(true);
 	statechart->raise_g();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_C));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_C));
 	delete statechart;
 }
 TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	Choice* statechart = new Choice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_A));
 	statechart->getSCInterface().set_c(false);
 	statechart->raise_g();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_B));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_B));
 	delete statechart;
 }
 TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	Choice* statechart = new Choice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_A));
 	statechart->getSCInterface().set_c(true);
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_C));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_C));
 	delete statechart;
 }
 TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	Choice* statechart = new Choice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_A));
 	statechart->getSCInterface().set_c(false);
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_B));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_B));
 	delete statechart;
 }
 TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	Choice* statechart = new Choice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_A));
 	statechart->getSCInterface().set_c(true);
 	statechart->raise_h();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Choice_main_region_B));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_B));
 	delete statechart;
 }

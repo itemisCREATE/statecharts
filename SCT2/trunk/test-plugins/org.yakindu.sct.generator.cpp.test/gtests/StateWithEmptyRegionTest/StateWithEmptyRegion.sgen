@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::cpp {
-	statechart StateWithEmptyRegion {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "StateWithEmptyRegionTest"
-		}
-	}
-}

@@ -10,14 +10,14 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "FeatureCalls.hpp"
+#include "FeatureCalls.h"
 
 TEST(StatemachineTest, FeatureCalls) {
 	FeatureCalls* statechart = new FeatureCalls();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(FeatureCalls_main_region_A));
+	EXPECT_TRUE(statechart->isActive(FeatureCalls::FeatureCalls_main_region_A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(FeatureCalls_main_region_A));
+	EXPECT_TRUE(statechart->isActive(FeatureCalls::FeatureCalls_main_region_A));
 	delete statechart;
 }

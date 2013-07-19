@@ -10,27 +10,27 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "InternalEventLifeCycle.hpp"
+#include "InternalEventLifeCycle.h"
 
 TEST(StatemachineTest, InternalEventLifeCycleTest) {
 	InternalEventLifeCycle* statechart = new InternalEventLifeCycle();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r2_C));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r1_A));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r2_C));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r2_D));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r1_A));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r2_D));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r2_D));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r1_A));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r2_D));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r2_C));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r1_A));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r2_C));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle_r2_C));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r1_A));
+	EXPECT_TRUE(statechart->isActive(InternalEventLifeCycle::InternalEventLifeCycle_r2_C));
 	delete statechart;
 }

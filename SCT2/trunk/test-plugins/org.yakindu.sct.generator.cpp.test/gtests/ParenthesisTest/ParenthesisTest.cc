@@ -10,13 +10,13 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "Parenthesis.hpp"
+#include "Parenthesis.h"
 
 TEST(StatemachineTest, simple) {
 	Parenthesis* statechart = new Parenthesis();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Parenthesis_mainRegion_A));
-	EXPECT_TRUE(statechart->getSCInterface().get_erg()== 8);
+	EXPECT_TRUE(statechart->isActive(Parenthesis::Parenthesis_mainRegion_A));
+	EXPECT_TRUE(statechart->getSCInterface()->get_erg()== 8);
 	delete statechart;
 }
