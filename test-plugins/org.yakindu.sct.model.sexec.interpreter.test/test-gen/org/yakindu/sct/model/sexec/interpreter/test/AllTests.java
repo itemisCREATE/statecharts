@@ -15,19 +15,15 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
-		BitExpressionsTest.class, BooleanExpressionsTest.class, CKeywordsTest.class,
-		DeclarationsTest.class, ChoiceTest.class, DeepHistoryTest.class, EnterStateTest.class,
-		ExitStateTest.class, ExitOnSelfTransitionTest.class, GuardTest.class,
-		GuardedEntryTest.class, GuardedExitTest.class, HistoryWithoutInitialStepTest.class,
-		IntegerExpressionsTest.class, InEventLifeCycleTest.class,
-		InternalEventLifeCycleTest.class, OutEventLifeCycleTest.class,
-		ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
-		SameNameDifferentRegionTest.class, ShallowHistoryTest.class,
-		SimpleHierachyTest.class, StateIsActiveTest.class,
-		StatechartLocalReactionsTest.class, StateWithEmptyRegionTest.class,
-		StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
-		SimpleEventTest.class, STextKeywordsInStatesAndRegionsTest.class,
-		TransitionWithoutConditionTest.class, ValuedEventsTest.class})
+@SuiteClasses({ AlwaysOncycleTest.class, AssignmentAsExpressionTest.class, BitExpressionsTest.class,
+		BooleanExpressionsTest.class, CKeywordsTest.class, DeclarationsTest.class, ChoiceTest.class,
+		DeepHistoryTest.class, EnterStateTest.class, ExitStateTest.class, ExitOnSelfTransitionTest.class,
+		GuardTest.class, GuardedEntryTest.class, GuardedExitTest.class, HistoryWithoutInitialStepTest.class,
+		IntegerExpressionsTest.class, InEventLifeCycleTest.class, InternalEventLifeCycleTest.class,
+		OutEventLifeCycleTest.class, ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
+		SameNameDifferentRegionTest.class, ShallowHistoryTest.class, SimpleHierachyTest.class, StateIsActiveTest.class,
+		StatechartLocalReactionsTest.class, StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
+		SimpleEventTest.class, STextKeywordsInStatesAndRegionsTest.class, TransitionWithoutConditionTest.class,
+		ValuedEventsTest.class })
 public class AllTests {
 }

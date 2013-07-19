@@ -257,14 +257,6 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
-	test StateWithEmptyRegion{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
-	
 	test STextKeywordsInStatesAndRegions{
 		
 		feature Outlet{ 

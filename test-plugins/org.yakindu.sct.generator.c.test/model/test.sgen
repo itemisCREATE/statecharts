@@ -258,14 +258,6 @@ GeneratorModel for sctunit::c {
 		}			
 	}
 	
-	test StateWithEmptyRegion{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
-	
 	test STextKeywordsInStatesAndRegions{
 		
 		feature Outlet{ 

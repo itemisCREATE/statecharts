@@ -15,19 +15,13 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AlwaysOncycle.class, AssignmentAsExpression.class,
-		BitExpressions.class, BooleanExpressions.class, CKeywords.class,
-		Declarations.class, Choice.class, DeepHistory.class, EnterState.class,
-		ExitState.class, ExitOnSelfTransition.class, Guard.class,
-		GuardedEntry.class, GuardedExit.class, HistoryWithoutInitialStep.class,
-		IntegerExpressions.class, InEventLifeCycle.class,
-		InternalEventLifeCycle.class, OutEventLifeCycle.class,
-		Parenthesis.class, PriorityValues.class, RaiseEvent.class,
-		SameNameDifferentRegion.class, ShallowHistory.class,
-		SimpleHierachy.class, StateIsActive.class,
-		StatechartLocalReactions.class, StateWithEmptyRegion.class,
-		StringExpressions.class, SyncFork.class, SyncJoin.class,
-		SimpleEvent.class, STextKeywordsInStatesAndRegions.class,
-		TransitionWithoutCondition.class, ValuedEvents.class})
+@SuiteClasses({ AlwaysOncycle.class, AssignmentAsExpression.class, BitExpressions.class, BooleanExpressions.class,
+		CKeywords.class, Declarations.class, Choice.class, DeepHistory.class, EnterState.class, ExitState.class,
+		ExitOnSelfTransition.class, Guard.class, GuardedEntry.class, GuardedExit.class,
+		HistoryWithoutInitialStep.class, IntegerExpressions.class, InEventLifeCycle.class,
+		InternalEventLifeCycle.class, OutEventLifeCycle.class, Parenthesis.class, PriorityValues.class,
+		RaiseEvent.class, SameNameDifferentRegion.class, ShallowHistory.class, SimpleHierachy.class,
+		StateIsActive.class, StatechartLocalReactions.class, StringExpressions.class, SyncFork.class, SyncJoin.class,
+		SimpleEvent.class, STextKeywordsInStatesAndRegions.class, TransitionWithoutCondition.class, ValuedEvents.class })
 public class AllTests {
 }
