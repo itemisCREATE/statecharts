@@ -13,9 +13,7 @@ package org.yakindu.sct.model.sgraph.validation;
 import java.util.Collection;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
