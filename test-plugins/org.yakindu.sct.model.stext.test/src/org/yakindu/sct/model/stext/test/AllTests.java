@@ -23,7 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		TypeInferrerTest.class, 
 		STextJavaValidatorTest.class, 
 		StextParserRuleTest.class,
-		TestModelsContainErrors.class 
+		TestModelsContainErrorsTest.class 
 		})
 public class AllTests {
 
