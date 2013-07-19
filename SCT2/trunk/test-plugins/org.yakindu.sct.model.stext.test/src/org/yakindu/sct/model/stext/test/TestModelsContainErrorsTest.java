@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.stext.test;
 
-import java.util.List;
+import static org.junit.Assert.assertTrue;
 
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
 import org.eclipse.xtext.junit4.validation.ValidatorTester;
@@ -25,11 +25,9 @@ import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
-import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import static org.junit.Assert.*;
 
 /**
  * @author andreas muelder - Initial contribution and API
@@ -64,13 +62,7 @@ public class TestModelsContainErrorsTest {
 
 	@Parameters
 	public static Iterable<Object[]> testData() throws Exception {
-		SCTUnitTestModels models = new SCTUnitTestModels();
-		List<Statechart> all = models.loadAllStatecharts();
-		return Iterables.transform(all, new Function<Statechart, Object[]>() {
-			public Object[] apply(Statechart input) {
-				return new Object[] { input };
-			}
-		});
+		return SCTUnitTestModels.parameterizedTestData();
 	}
 
 	@Test
