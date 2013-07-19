@@ -31,8 +31,8 @@
         </regions>
       </vertices>
       <vertices xsi:type="sgraph:Synchronization" xmi:id="_DBjOsKioEeG5WeGhg2moBQ" incomingTransitions="_Eg6IoKioEeG5WeGhg2moBQ">
-        <outgoingTransitions xmi:id="_QeB7wKjFEeG5WeGhg2moBQ" specification="" target="_G_gIoKjBEeG5WeGhg2moBQ"/>
-        <outgoingTransitions xmi:id="_SiJIkKjFEeG5WeGhg2moBQ" specification="" target="_LrdhcKjBEeG5WeGhg2moBQ"/>
+        <outgoingTransitions xmi:id="_QeB7wKjFEeG5WeGhg2moBQ" specification="always" target="_G_gIoKjBEeG5WeGhg2moBQ"/>
+        <outgoingTransitions xmi:id="_SiJIkKjFEeG5WeGhg2moBQ" specification="always" target="_LrdhcKjBEeG5WeGhg2moBQ"/>
       </vertices>
     </regions>
   </sgraph:Statechart>
@@ -297,7 +297,7 @@
     <edges xmi:id="_QeE_EKjFEeG5WeGhg2moBQ" type="Transition" element="_QeB7wKjFEeG5WeGhg2moBQ" source="_DBsYoKioEeG5WeGhg2moBQ" target="_G_ndYKjBEeG5WeGhg2moBQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_QeFmIajFEeG5WeGhg2moBQ" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_QeFmIqjFEeG5WeGhg2moBQ"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_QeFmI6jFEeG5WeGhg2moBQ" y="10"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_QeFmI6jFEeG5WeGhg2moBQ" x="-6" y="-12"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_QeE_EajFEeG5WeGhg2moBQ" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_QeFmIKjFEeG5WeGhg2moBQ" fontName="Verdana"/>
@@ -307,7 +307,7 @@
     <edges xmi:id="_SiML4KjFEeG5WeGhg2moBQ" type="Transition" element="_SiJIkKjFEeG5WeGhg2moBQ" source="_DBsYoKioEeG5WeGhg2moBQ" target="_Lrk2MKjBEeG5WeGhg2moBQ">
       <children xsi:type="notation:DecorationNode" xmi:id="_SiML5KjFEeG5WeGhg2moBQ" type="TransitionExpression">
         <styles xsi:type="notation:ShapeStyle" xmi:id="_SiML5ajFEeG5WeGhg2moBQ"/>
-        <layoutConstraint xsi:type="notation:Location" xmi:id="_SiML5qjFEeG5WeGhg2moBQ" y="10"/>
+        <layoutConstraint xsi:type="notation:Location" xmi:id="_SiML5qjFEeG5WeGhg2moBQ" x="-65" y="20"/>
       </children>
       <styles xsi:type="notation:ConnectorStyle" xmi:id="_SiML4ajFEeG5WeGhg2moBQ" lineColor="4210752"/>
       <styles xsi:type="notation:FontStyle" xmi:id="_SiML46jFEeG5WeGhg2moBQ" fontName="Verdana"/>
