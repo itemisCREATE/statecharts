@@ -16,6 +16,9 @@ import java.util.List;
 
 import org.yakindu.sct.model.sgraph.Statechart;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -45,7 +48,6 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String SIMPLE_EVENT = "SimpleEvent.sct";
 	public static final String SIMPLE_HIERACHY = "SimpleHierachy.sct";
 	public static final String STATE_ACTIVE = "StateIsActive.sct";
-	public static final String STATE_WITH_EMPTY_REGION = "StateWithEmptyRegion.sct";
 	public static final String STATECHART_LOCAL_REACTIONS = "StatechartLocalReactions.sct";
 	public static final String STRING_EXPRESSIONS = "StringExpressions.sct";
 	public static final String SYNC_JOIN = "SyncJoin.sct";
@@ -69,6 +71,15 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 			}
 		}
 		return result;
+	}
+	public static Iterable<Object[]> parameterizedTestData() throws Exception {
+		SCTUnitTestModels models = new SCTUnitTestModels();
+		List<Statechart> all = models.loadAllStatecharts();
+		return Iterables.transform(all, new Function<Statechart, Object[]>() {
+			public Object[] apply(Statechart input) {
+				return new Object[] { input };
+			}
+		});
 	}
 
 }
