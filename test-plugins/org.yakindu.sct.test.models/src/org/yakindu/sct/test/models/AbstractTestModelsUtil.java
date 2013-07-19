@@ -32,7 +32,7 @@ public abstract class AbstractTestModelsUtil {
 
 	public static final String VALIDATION_TESTMODEL_DIR = "org.yakindu.sct.test.models/testmodels/validation/";
 
-	@Inject
+	@Inject(optional = true)
 	private IModelSequencer sequencer;
 
 	public abstract String getModelDirectory();
