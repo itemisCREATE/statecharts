@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.generator.genmodel.test;
 
-import static junit.framework.Assert.fail;
+import static org.junit.Assert.fail;
 
 import java.util.List;
 

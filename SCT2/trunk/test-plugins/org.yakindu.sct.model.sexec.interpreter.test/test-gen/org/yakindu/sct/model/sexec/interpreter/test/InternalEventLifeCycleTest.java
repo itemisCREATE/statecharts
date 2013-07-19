@@ -20,7 +20,7 @@ import org.junit.Before;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
-import static junit.framework.Assert.*;
+import static org.junit.Assert.*;
 /**
  *  Unit TestCase for InternalEventLifeCycle
  */

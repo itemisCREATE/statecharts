@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.model.sexec.interpreter.test;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
