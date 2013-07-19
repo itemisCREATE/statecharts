@@ -10,30 +10,30 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "SyncFork.hpp"
+#include "SyncFork.h"
 
 TEST(StatemachineTest, syncForkTest) {
 	SyncFork* statechart = new SyncFork();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_A));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_A));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B));
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B_r1_C1));
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B_r2_D1));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B_r1_C1));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B_r2_D1));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B));
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B_r2_D2));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_A));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_A));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B));
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B_r1_C1));
-	EXPECT_TRUE(statechart->isActive(SyncFork_main_region_B_r2_D1));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B_r1_C1));
+	EXPECT_TRUE(statechart->isActive(SyncFork::SyncFork_main_region_B_r2_D1));
 	delete statechart;
 }

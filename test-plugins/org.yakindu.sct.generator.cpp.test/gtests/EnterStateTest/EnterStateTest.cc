@@ -10,35 +10,35 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "EnterState.hpp"
+#include "EnterState.h"
 
 TEST(StatemachineTest, defaultEntry) {
 	EnterState* statechart = new EnterState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(EnterState_r_A));
+	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(EnterState_r_B_r_E));
+	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_B_r_E));
 	delete statechart;
 }
 TEST(StatemachineTest, namedEntryThroughNamedTransition) {
 	EnterState* statechart = new EnterState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(EnterState_r_A));
+	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_A));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(EnterState_r_B_r_F));
+	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_B_r_F));
 	delete statechart;
 }
 TEST(StatemachineTest, namedEntryThroughDefaultTransition) {
 	EnterState* statechart = new EnterState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(EnterState_r_A));
+	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_A));
 	statechart->raise_g();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(EnterState_r_B_r_E));
+	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_B_r_E));
 	delete statechart;
 }

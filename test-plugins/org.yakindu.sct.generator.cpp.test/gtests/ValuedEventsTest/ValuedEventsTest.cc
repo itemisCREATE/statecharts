@@ -10,15 +10,15 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "ValuedEvents.hpp"
+#include "ValuedEvents.h"
 
 TEST(StatemachineTest, valuedEventsTest) {
 	ValuedEvents* statechart = new ValuedEvents();
 	statechart->init();
 	statechart->enter();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ValuedEvents_main_region_A));
-	EXPECT_TRUE(statechart->isActive(ValuedEvents__region1_C));
-	EXPECT_TRUE(statechart->getSCInterface().get_myVar()== 42);
+	EXPECT_TRUE(statechart->isActive(ValuedEvents::ValuedEvents_main_region_A));
+	EXPECT_TRUE(statechart->isActive(ValuedEvents::ValuedEvents__region1_C));
+	EXPECT_TRUE(statechart->getSCInterface()->get_myVar()== 42);
 	delete statechart;
 }

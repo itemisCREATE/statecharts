@@ -10,27 +10,27 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "Guard.hpp"
+#include "Guard.h"
 
 TEST(StatemachineTest, guardTest) {
 	Guard* statechart = new Guard();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Guard_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Guard::Guard_main_region_A));
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Guard::Guard_main_region_A));
 	statechart->raise_event2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard_main_region_B));
+	EXPECT_TRUE(statechart->isActive(Guard::Guard_main_region_B));
 	statechart->raise_return();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Guard::Guard_main_region_A));
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard_main_region_B));
+	EXPECT_TRUE(statechart->isActive(Guard::Guard_main_region_B));
 	statechart->raise_return();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard_main_region_A));
+	EXPECT_TRUE(statechart->isActive(Guard::Guard_main_region_A));
 	delete statechart;
 }

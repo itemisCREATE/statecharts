@@ -10,22 +10,22 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "StringExpressions.hpp"
+#include "StringExpressions.h"
 
 TEST(StatemachineTest, StringExpressionsTest) {
 	StringExpressions* statechart = new StringExpressions();
 	statechart->init();
-	EXPECT_TRUE(statechart->strcmp(getSCInterface().get_quotedString(), "\"x\"") == 0);
+	EXPECT_TRUE(statechart->strcmp(getSCInterface()->get_quotedString(), "\"x\"") == 0);
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(StringExpressions_main_region_StateA));
-	EXPECT_TRUE(statechart->strcmp(getSCInterface().get_myString(), "hello") == 0);
-	EXPECT_TRUE(statechart->strcmp(getSCInterface().get_myString2(), "world") == 0);
-	EXPECT_TRUE(statechart->strcmp(getSCInterface().get_quotedString(), "'y'") == 0);
+	EXPECT_TRUE(statechart->isActive(StringExpressions::StringExpressions_main_region_StateA));
+	EXPECT_TRUE(statechart->strcmp(getSCInterface()->get_myString(), "hello") == 0);
+	EXPECT_TRUE(statechart->strcmp(getSCInterface()->get_myString2(), "world") == 0);
+	EXPECT_TRUE(statechart->strcmp(getSCInterface()->get_quotedString(), "'y'") == 0);
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(StringExpressions_main_region_StateB));
-	EXPECT_TRUE(statechart->getSCInterface().get_equals()== false);
-	EXPECT_TRUE(statechart->getSCInterface().get_notEqual()== true);
-	EXPECT_TRUE(statechart->strcmp(getSCInterface().get_quotedString(), "\"z\"") == 0);
+	EXPECT_TRUE(statechart->isActive(StringExpressions::StringExpressions_main_region_StateB));
+	EXPECT_TRUE(statechart->getSCInterface()->get_equals()== false);
+	EXPECT_TRUE(statechart->getSCInterface()->get_notEqual()== true);
+	EXPECT_TRUE(statechart->strcmp(getSCInterface()->get_quotedString(), "\"z\"") == 0);
 	delete statechart;
 }

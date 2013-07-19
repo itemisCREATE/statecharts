@@ -10,52 +10,52 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "HistoryWithoutInitialStep.hpp"
+#include "HistoryWithoutInitialStep.h"
 
 TEST(StatemachineTest, enterThroughInitialEntry) {
 	HistoryWithoutInitialStep* statechart = new HistoryWithoutInitialStep();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_A));
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_B_r1_C));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_B_r1_C));
 	statechart->raise_e2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_B_r1_D));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_B_r1_D));
 	delete statechart;
 }
 TEST(StatemachineTest, enterCThroughHistory) {
 	HistoryWithoutInitialStep* statechart = new HistoryWithoutInitialStep();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_A));
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_B_r1_C));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_B_r1_C));
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_A));
 	statechart->raise_e2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_B_r1_C));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_B_r1_C));
 	delete statechart;
 }
 TEST(StatemachineTest, enterDThroughHistory) {
 	HistoryWithoutInitialStep* statechart = new HistoryWithoutInitialStep();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_A));
 	statechart->raise_e1();
 	statechart->runCycle();
 	statechart->raise_e2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_B_r1_D));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_B_r1_D));
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_A));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_A));
 	statechart->raise_e2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep_main_region_B_r1_D));
+	EXPECT_TRUE(statechart->isActive(HistoryWithoutInitialStep::HistoryWithoutInitialStep_main_region_B_r1_D));
 	delete statechart;
 }

@@ -10,21 +10,21 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "StatechartLocalReactions.hpp"
+#include "StatechartLocalReactions.h"
 
 TEST(StatemachineTest, statechartLocalReactionsTest) {
 	StatechartLocalReactions* statechart = new StatechartLocalReactions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions_main_region_S1));
-	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions_region2_a));
-	while (statechart->getSCInterface().get_myInt()< 10) {
-		EXPECT_TRUE(statechart->isActive(StatechartLocalReactions_region2_a));
-		if (getSCInterface().get_myInt()%2== 0) {
-					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions_main_region_S1));
+	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::StatechartLocalReactions_main_region_S1));
+	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::StatechartLocalReactions_region2_a));
+	while (statechart->getSCInterface()->get_myInt()< 10) {
+		EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::StatechartLocalReactions_region2_a));
+		if (getSCInterface()->get_myInt()%2== 0) {
+					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::StatechartLocalReactions_main_region_S1));
 				  }
 				else {
-					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions_main_region_S2));;
+					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::StatechartLocalReactions_main_region_S2));;
 				}
 		statechart->runCycle();
 	}

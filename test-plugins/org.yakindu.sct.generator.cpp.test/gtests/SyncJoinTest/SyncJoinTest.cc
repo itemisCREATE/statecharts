@@ -10,78 +10,78 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "SyncJoin.hpp"
+#include "SyncJoin.h"
 
 TEST(StatemachineTest, syncJoin_C2_Waits) {
 	SyncJoin* statechart = new SyncJoin();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C1));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D1));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D1));
 	statechart->raise_jc();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D1));
 	statechart->raise_jd();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D1));
 	statechart->raise_jc();
 	statechart->raise_jd();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D1));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D2));
 	statechart->raise_jc();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D2));
 	statechart->raise_jd();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D2));
 	statechart->raise_jc();
 	statechart->raise_jd();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_A));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_A));
 	delete statechart;
 }
 TEST(StatemachineTest, syncJoin_D2_Waits) {
 	SyncJoin* statechart = new SyncJoin();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C1));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D1));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C1));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D2));
 	statechart->raise_jc();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C1));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D2));
 	statechart->raise_jd();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C1));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D2));
 	statechart->raise_jc();
 	statechart->raise_jd();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C1));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C1));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D2));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r1_C2));
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_B_r2_D2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r1_C2));
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_B_r2_D2));
 	delete statechart;
 }
 TEST(StatemachineTest, doubleEntryActionBug) {
@@ -94,7 +94,7 @@ TEST(StatemachineTest, doubleEntryActionBug) {
 	statechart->raise_jc();
 	statechart->raise_jd();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SyncJoin_main_region_A));
-	EXPECT_TRUE(statechart->getSCInterface().get_x()== 1);
+	EXPECT_TRUE(statechart->isActive(SyncJoin::SyncJoin_main_region_A));
+	EXPECT_TRUE(statechart->getSCInterface()->get_x()== 1);
 	delete statechart;
 }

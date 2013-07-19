@@ -10,16 +10,16 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "SimpleEvent.hpp"
+#include "SimpleEvent.h"
 
 TEST(StatemachineTest, simpleEventTest) {
 	SimpleEvent* statechart = new SimpleEvent();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SimpleEvent_main_region_A));
+	EXPECT_TRUE(statechart->isActive(SimpleEvent::SimpleEvent_main_region_A));
 	EXPECT_TRUE(statechart->5== 5);
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SimpleEvent_main_region_B));
+	EXPECT_TRUE(statechart->isActive(SimpleEvent::SimpleEvent_main_region_B));
 	delete statechart;
 }

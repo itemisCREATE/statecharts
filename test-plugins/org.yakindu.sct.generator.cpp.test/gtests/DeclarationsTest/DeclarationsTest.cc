@@ -10,7 +10,7 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "Declarations.hpp"
+#include "Declarations.h"
 
 TEST(StatemachineTest, declarationsTest) {
 	Declarations* statechart = new Declarations();

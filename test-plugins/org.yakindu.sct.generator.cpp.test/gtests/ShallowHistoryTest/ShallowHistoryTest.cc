@@ -10,7 +10,7 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "ShallowHistory.hpp"
+#include "ShallowHistory.h"
 
 TEST(StatemachineTest, shallowHistoryTest) {
 	ShallowHistory* statechart = new ShallowHistory();
@@ -24,27 +24,27 @@ TEST(StatemachineTest, shallowHistoryTest) {
 	statechart->runCycle();
 	statechart->raise_event7();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!isActive(ShallowHistory_mainRegion_State1));
-	EXPECT_TRUE(statechart->isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->!isActive(ShallowHistory::ShallowHistory_mainRegion_State1));
+	EXPECT_TRUE(statechart->isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	statechart->raise_event6();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
-	EXPECT_TRUE(statechart->isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State6));
+	EXPECT_TRUE(statechart->!isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State6));
 	statechart->raise_event5();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State8));
-	EXPECT_TRUE(statechart->isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->!isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State8));
+	EXPECT_TRUE(statechart->isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	statechart->raise_event2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
-	EXPECT_TRUE(statechart->isActive(ShallowHistory_mainRegion_State1));
+	EXPECT_TRUE(statechart->!isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->isActive(ShallowHistory::ShallowHistory_mainRegion_State1));
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State6));
-	EXPECT_TRUE(statechart->!isActive(ShallowHistory_mainRegion_State1));
+	EXPECT_TRUE(statechart->isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State6));
+	EXPECT_TRUE(statechart->!isActive(ShallowHistory::ShallowHistory_mainRegion_State1));
 	statechart->raise_event5();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State6));
-	EXPECT_TRUE(statechart->isActive(ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
+	EXPECT_TRUE(statechart->!isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State6));
+	EXPECT_TRUE(statechart->isActive(ShallowHistory::ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 	delete statechart;
 }

@@ -10,14 +10,14 @@
 */
 #include <string>
 #include "gtest/gtest.h"
-#include "TransitionWithoutCondition.hpp"
+#include "TransitionWithoutCondition.h"
 
 TEST(StatemachineTest, TransitionWithoutConditionTest) {
 	TransitionWithoutCondition* statechart = new TransitionWithoutCondition();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(TransitionWithoutCondition_main_region_A));
+	EXPECT_TRUE(statechart->isActive(TransitionWithoutCondition::TransitionWithoutCondition_main_region_A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(TransitionWithoutCondition_main_region_A));
+	EXPECT_TRUE(statechart->isActive(TransitionWithoutCondition::TransitionWithoutCondition_main_region_A));
 	delete statechart;
 }
