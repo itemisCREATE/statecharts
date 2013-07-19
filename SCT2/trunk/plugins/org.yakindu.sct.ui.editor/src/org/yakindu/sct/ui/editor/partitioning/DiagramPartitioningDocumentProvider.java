@@ -80,19 +80,14 @@ public class DiagramPartitioningDocumentProvider extends FileDiagramDocumentProv
 	@Override
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info = super.createElementInfo(element);
-		// the canBeSaved flag is calculated based on the dirty state of the
-		// editingdomains resourceset
-		info.fCanBeSaved = isDirty(DiagramPartitioningUtil.getSharedDomain());
-		return info;
-	}
-
-	protected boolean isDirty(TransactionalEditingDomain domain) {
-		for (final Resource resource : domain.getResourceSet().getResources()) {
-			if (resource.isLoaded() && !domain.isReadOnly(resource) && resource.isModified()) {
-				return true;
+		if (element instanceof IDiagramEditorInput) {
+			Resource eResource = ((IDiagramEditorInput) element).getDiagram().eResource();
+			TransactionalEditingDomain sharedDomain = DiagramPartitioningUtil.getSharedDomain();
+			if (eResource.isLoaded() && !sharedDomain.isReadOnly(eResource) && eResource.isModified()) {
+				info.fCanBeSaved = true;
 			}
 		}
-		return false;
+		return info;
 	}
 
 	protected FileInfo createFileInfo(IDocument document, FileSynchronizer synchronizer, IFileEditorInput input) {
