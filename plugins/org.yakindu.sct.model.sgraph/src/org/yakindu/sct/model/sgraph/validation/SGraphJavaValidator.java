@@ -67,7 +67,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL = "The source states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The source states of a synchronization have to be contained in the same parent state within different regions!";
 	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions";
-	public static final String ISSUE_TRANSITION_WITHOUT_GUARD = "Missing trigger. Transisition is never taken. Use 'oncycle' or 'always' instead";
+	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transisition is never taken. Use 'oncycle' or 'always' instead";
 
 	public SGraphJavaValidator() {
 		// TODO Auto-generated constructor stub
@@ -197,8 +197,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void transitionsWithNoGuard(Transition trans) {
-		if (trans.getSource() instanceof Entry) {
+	public void transitionsWithNoTrigger(Transition trans) {
+		if (trans.getSource() instanceof Entry || trans.getSource() instanceof Choice) {
 			return;
 		}
 		if (trans.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
@@ -214,7 +214,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			}
 		}
 		if (trans.getTrigger() == null) {
-			warning(ISSUE_TRANSITION_WITHOUT_GUARD, trans, null, -1);
+			warning(ISSUE_TRANSITION_WITHOUT_TRIGGER, trans, null, -1);
 		}
 	}
 
