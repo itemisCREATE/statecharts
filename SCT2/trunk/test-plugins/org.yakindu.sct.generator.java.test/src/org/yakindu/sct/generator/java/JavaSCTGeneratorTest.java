@@ -49,7 +49,7 @@ public class JavaSCTGeneratorTest extends AbstractJavaGeneratorTest {
 	}
 
 	@Test
-	public void testAlwaysOnCycleModel() throws Exception {
+	public void testCompileStatechart() throws Exception {
 		IMarker[] marker = generateAndCompile(statechart);
 		for (IMarker diagnostic : marker) {
 			int severity = (Integer) diagnostic.getAttribute("severity");
