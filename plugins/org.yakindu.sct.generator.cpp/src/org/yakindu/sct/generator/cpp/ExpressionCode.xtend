@@ -123,7 +123,7 @@ class ExpressionCode {
 		
 	def dispatch CharSequence code (LogicalRelationExpression it) '''
 		«IF leftOperand.inferType.type.stringType»
-			(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
+			(«leftOperand.code».compare(«rightOperand.code») «operator.literal» 0)
 		«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 	
 	/* Bitwise Operations */
