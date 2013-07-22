@@ -20,10 +20,12 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.sgraph.Event
 import com.google.inject.Inject
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 class Naming extends org.yakindu.sct.generator.c.Naming {
 	
 	@Inject extension Navigation;
+	@Inject extension ICodegenTypeSystemAccess;
 	
 	def cpp(String it) { it + ".cpp" }
 	
@@ -144,4 +146,10 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	
 	def localValueAccess(Event it) 
 		'''«name.asIdentifier.value»'''
+		
+	override valueParams(EventDefinition it) {
+		if (hasValue) 
+			type.targetLanguageName + ' value' 
+		else ''
+	}
 }
