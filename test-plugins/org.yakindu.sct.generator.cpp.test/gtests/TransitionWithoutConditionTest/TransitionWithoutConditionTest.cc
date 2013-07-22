@@ -18,6 +18,6 @@ TEST(StatemachineTest, TransitionWithoutConditionTest) {
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(TransitionWithoutCondition::TransitionWithoutCondition_main_region_A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(TransitionWithoutCondition::TransitionWithoutCondition_main_region_A));
+	EXPECT_TRUE(statechart->isActive(TransitionWithoutCondition::TransitionWithoutCondition_main_region_B));
 	delete statechart;
 }
