@@ -30,6 +30,6 @@ TEST(StatemachineTest, regionPriority) {
 	statechart->raise_event2();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(PriorityValues::PriorityValues_someRegion_B));
-	EXPECT_TRUE(statechart->!isActive(PriorityValues::PriorityValues_main_region_E));
+	EXPECT_TRUE(!statechart->isActive(PriorityValues::PriorityValues_main_region_E));
 	delete statechart;
 }

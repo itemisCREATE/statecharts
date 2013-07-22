@@ -59,6 +59,6 @@ TEST(StatemachineTest, EntryNotTakenInTransition) {
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(GuardedEntry::GuardedEntry_main_region_A));
-	EXPECT_TRUE(statechart->!getSCInterface()->get_done());
+	EXPECT_TRUE(!statechart->getSCInterface()->get_done());
 	delete statechart;
 }

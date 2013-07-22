@@ -17,11 +17,11 @@ TEST(StatemachineTest, ExitTaken) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(GuardedExit::GuardedExit_main_region_A));
-	EXPECT_TRUE(statechart->!getSCInterface()->get_guard());
+	EXPECT_TRUE(!statechart->getSCInterface()->get_guard());
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(GuardedExit::GuardedExit_main_region_B));
-	EXPECT_TRUE(statechart->!getSCInterface()->get_done());
+	EXPECT_TRUE(!statechart->getSCInterface()->get_done());
 	delete statechart;
 }
 TEST(StatemachineTest, ExitNotTaken) {

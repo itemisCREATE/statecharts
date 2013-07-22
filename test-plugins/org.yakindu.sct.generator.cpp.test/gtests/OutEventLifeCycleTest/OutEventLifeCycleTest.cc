@@ -37,7 +37,7 @@ TEST(StatemachineTest, unvailableWithin2ndCycle) {
 	statechart->raise_e();
 	statechart->runCycle();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!getSCInterface()->get_f_available_in_next_cycle());
+	EXPECT_TRUE(!statechart->getSCInterface()->get_f_available_in_next_cycle());
 	delete statechart;
 }
 TEST(StatemachineTest, unvailableAfter2ndCycle) {
@@ -47,6 +47,6 @@ TEST(StatemachineTest, unvailableAfter2ndCycle) {
 	statechart->raise_e();
 	statechart->runCycle();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->!getSCInterface()->);
+	EXPECT_TRUE(!statechart->getSCInterface()->);
 	delete statechart;
 }
