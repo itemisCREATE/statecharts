@@ -29,7 +29,7 @@ TEST(StatemachineTest, ExitNotTaken) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(GuardedExit::GuardedExit_main_region_A));
-	statechart->getSCInterface().set_guard(true);
+	statechart->getSCInterface()->set_guard(true);
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(GuardedExit::GuardedExit_main_region_B));
