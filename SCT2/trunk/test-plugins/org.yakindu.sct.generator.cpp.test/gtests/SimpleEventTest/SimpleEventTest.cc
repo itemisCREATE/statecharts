@@ -17,7 +17,7 @@ TEST(StatemachineTest, simpleEventTest) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(SimpleEvent::SimpleEvent_main_region_A));
-	EXPECT_TRUE(statechart->5== 5);
+	EXPECT_TRUE(5== 5);
 	statechart->raise_event1();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(SimpleEvent::SimpleEvent_main_region_B));

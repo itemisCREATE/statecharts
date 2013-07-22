@@ -20,7 +20,7 @@ TEST(StatemachineTest, statechartLocalReactionsTest) {
 	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::StatechartLocalReactions_region2_a));
 	while (statechart->getSCInterface()->get_myInt()< 10) {
 		EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::StatechartLocalReactions_region2_a));
-		if (getSCInterface()->get_myInt()%2== 0) {
+		if (statechart->getSCInterface()->get_myInt()%2== 0) {
 					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::StatechartLocalReactions_main_region_S1));
 				  }
 				else {
