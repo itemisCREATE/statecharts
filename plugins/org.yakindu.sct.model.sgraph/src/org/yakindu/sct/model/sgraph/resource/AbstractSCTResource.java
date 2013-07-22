@@ -43,8 +43,6 @@ import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -53,7 +51,6 @@ import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.serializer.ISerializer;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
@@ -93,14 +90,6 @@ public abstract class AbstractSCTResource extends GMFResource {
 	private ILinkingDiagnosticMessageProvider diagnosticMessageProvider;
 	@Inject
 	private LinkingHelper linkingHelper;
-	@Inject
-	private IConcreteSyntaxValidator syntaxValidator;
-	@Inject
-	private IGlobalScopeProvider scopeProvider;
-	@Inject
-	private IQualifiedNameConverter nameConverter;
-	@Inject
-	private IQualifiedNameProvider nameProvider;
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
