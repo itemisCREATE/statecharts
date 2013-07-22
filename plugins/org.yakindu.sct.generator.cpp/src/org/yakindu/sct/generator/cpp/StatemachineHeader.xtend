@@ -113,6 +113,12 @@ class StatemachineHeader extends Statemachine {
 		«scope.createOperationCallbackInterface»
 		
 		«scope.interfaceName»* get«scope.interfaceName»();
+		
+		«IF scope.defaultInterface»
+			«FOR d : scope.declarations»
+			«d.functionPrototypes»
+			«ENDFOR»
+		«ENDIF»
 	'''
 	
 	def private createInterface(StatechartScope scope)
@@ -229,6 +235,7 @@ class StatemachineHeader extends Statemachine {
 			
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
 			sc_boolean «asRaised»();
+			
 			«IF hasValue»
 				/*! Gets the value of the out event '«name»' that is defined in the «scope.scopeDescription». */ 
 				«type.targetLanguageName» «asGetter»();
@@ -253,9 +260,11 @@ class StatemachineHeader extends Statemachine {
 	override dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 		«type.targetLanguageName» «it.asGetter»();
+
 		«IF ! readonly »
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			void «asSetter»(«type.targetLanguageName» value);
+			
 		«ENDIF»
 	'''
 	

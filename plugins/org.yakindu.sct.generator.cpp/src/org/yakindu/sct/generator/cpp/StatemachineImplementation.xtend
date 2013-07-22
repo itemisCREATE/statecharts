@@ -74,8 +74,8 @@ class StatemachineImplementation {
 		«ENDFOR»
 		«IF hasHistory»
 			
-			for (i = 0; i < «historyStatesConst»; ++i)
-				historyVector[i] = «last_state»;
+				for (int i = 0; i < «historyStatesConst»; ++i)
+					historyVector[i] = «last_state»;
 			«ENDIF»
 			
 			stateConfVectorPosition = 0;
@@ -94,13 +94,11 @@ class StatemachineImplementation {
 	def initFunction(ExecutionFlow it) '''
 		void «module»::init()
 		{
-			int i;
-
-			for (i = 0; i < «orthogonalStatesConst»; ++i)
+			for (int i = 0; i < «orthogonalStatesConst»; ++i)
 				stateConfVector[i] = «last_state»;
 			
 			«IF hasHistory»
-			for (i = 0; i < «historyStatesConst»; ++i)
+			for (int i = 0; i < «historyStatesConst»; ++i)
 				historyVector[i] = «last_state»;
 			
 			«ENDIF»
@@ -240,18 +238,35 @@ class StatemachineImplementation {
 					«event.localAccess» = true;
 				}
 				
+				«IF scope.defaultInterface»
+					void «module»::«event.asRaiser»(«event.valueParams») {
+						«scope.instance»->«event.asRaiser»(«IF event.hasValue»value«ENDIF»);
+					}
+					
+				«ENDIF»
 			«ENDFOR»
 			«FOR event : scope.outgoingEvents»
 				sc_boolean «module»::«scope.interfaceName»::«event.asRaised»() {
 					return «event.localAccess»;
 				}
 				
+				«IF scope.defaultInterface»
+					sc_boolean «module»::«event.asRaised»() {
+						return «scope.instance»->«event.asRaised»();
+					}
+					
+				«ENDIF»
 				«IF event.hasValue» 
 					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
-						//TODO: Check if event is not raised
 						return «event.localValueAccess»;
 					}
 					
+					«IF scope.defaultInterface»
+						«event.type.targetLanguageName» «module»::«event.asGetter»() {
+							return «scope.instance»->«event.asGetter»();
+						}
+						
+					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
 			
@@ -269,7 +284,6 @@ class StatemachineImplementation {
 				
 				«IF event.hasValue» 
 					«event.type.targetLanguageName» «module»::«scope.interfaceName»::«event.asGetter»() {
-						//TODO: Check if event is not raised
 						return «event.localValueAccess»;
 					}
 					
@@ -280,11 +294,23 @@ class StatemachineImplementation {
 					return «variable.localAccess»;
 				}
 				
+				«IF scope.defaultInterface»
+					«variable.type.targetLanguageName» «module»::«variable.asGetter»() {
+						return «variable.access»;
+					}
+					
+				«ENDIF»
 				«IF !variable.readonly »
-				void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
-					«variable.localAccess» = value;
-				}
-				
+					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
+						«variable.localAccess» = value;
+					}
+					
+					«IF scope.defaultInterface»
+						void «module»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
+						«variable.access» = value;
+						}
+						
+					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
 		«ENDFOR»
