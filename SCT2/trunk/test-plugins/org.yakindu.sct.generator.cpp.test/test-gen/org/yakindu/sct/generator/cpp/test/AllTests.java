@@ -34,6 +34,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		InEventLifeCycleTest.class,
 		InternalEventLifeCycleTest.class, 
 		OutEventLifeCycleTest.class,
+		NamedInterfaceAccessTest.class,
 		ParenthesisTest.class, 
 		PriorityValuesTest.class, 
 		RaiseEventTest.class,
