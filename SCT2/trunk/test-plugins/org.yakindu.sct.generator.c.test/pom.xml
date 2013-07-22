@@ -28,7 +28,7 @@
 						<include>**/All*Tests.class</include>
 					</includes> 
 					<useUIHarness>false</useUIHarness>
-					<useUIThread>false</useUIThread>
+					<useUIThread>true</useUIThread>
 					<testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
 					<argLine>${test.vmargs}</argLine>
 				</configuration>
