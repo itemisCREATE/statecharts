@@ -1,7 +1,7 @@
 package org.yakindu.sct.generator.core.impl;
 
+import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -14,12 +14,12 @@ public class SimpleResourceFileSystemAccess extends EclipseResourceFileSystemAcc
 
 		OutputConfiguration outputConfig = getOutputConfig(outputName);
 		
-		IFolder folder = getFolder(outputConfig);
+		IContainer container = getContainer(outputConfig);
 		
-		if (!folder.exists()) {
+		if ( !container.exists()) {
 			if (outputConfig.isCreateOutputDirectory()) {
 				try {
-					createFolder(folder);
+					createContainer(container);
 				} catch (CoreException e) {
 					throw new RuntimeException(e);
 				}
