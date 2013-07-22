@@ -20,7 +20,7 @@ import org.junit.Before;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
-import static org.junit.Assert.*;
+import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for TransitionWithoutCondition
  */
@@ -28,10 +28,8 @@ import static org.junit.Assert.*;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class TransitionWithoutConditionTest extends AbstractExecutionFlowTest {
-
 	@Inject
 	private SCTUnitTestModels models;
-
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
@@ -43,6 +41,6 @@ public class TransitionWithoutConditionTest extends AbstractExecutionFlowTest {
 		interpreter.enter();
 		assertTrue(isActive("A"));
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
+		assertTrue(isActive("B"));
 	}
 }
