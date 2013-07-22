@@ -17,12 +17,12 @@ TEST(StatemachineTest, SafeOpenSuccess) {
 	statechart->init();
 	statechart->enter();
 	statechart->runCycle();
-	statechart->getSCIUser().raise_numberPressed( 3);
+	statechart->getSCIUser()->raise_numberPressed(3);
 	statechart->runCycle();
-	statechart->getSCIUser().raise_numberPressed( 7);
+	statechart->getSCIUser()->raise_numberPressed(7);
 	statechart->runCycle();
-	statechart->getSCIUser().raise_numberPressed( 5);
+	statechart->getSCIUser()->raise_numberPressed(5);
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCTSafe().isRaised_open());
+	EXPECT_TRUE(statechart->getSCTSafe()->isRaised_open());
 	delete statechart;
 }
