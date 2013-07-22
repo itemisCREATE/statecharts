@@ -15,17 +15,17 @@
 TEST(StatemachineTest, StringExpressionsTest) {
 	StringExpressions* statechart = new StringExpressions();
 	statechart->init();
-	EXPECT_TRUE(strcmp(statechart->getSCInterface()->get_quotedString(), "\"x\"") == 0);
+	EXPECT_TRUE(statechart->getSCInterface()->get_quotedString().compare("\"x\"") == 0);
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(StringExpressions::StringExpressions_main_region_StateA));
-	EXPECT_TRUE(strcmp(statechart->getSCInterface()->get_myString(), "hello") == 0);
-	EXPECT_TRUE(strcmp(statechart->getSCInterface()->get_myString2(), "world") == 0);
-	EXPECT_TRUE(strcmp(statechart->getSCInterface()->get_quotedString(), "'y'") == 0);
+	EXPECT_TRUE(statechart->getSCInterface()->get_myString().compare("hello") == 0);
+	EXPECT_TRUE(statechart->getSCInterface()->get_myString2().compare("world") == 0);
+	EXPECT_TRUE(statechart->getSCInterface()->get_quotedString().compare("'y'") == 0);
 	statechart->raise_e1();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(StringExpressions::StringExpressions_main_region_StateB));
 	EXPECT_TRUE(statechart->getSCInterface()->get_equals()== false);
 	EXPECT_TRUE(statechart->getSCInterface()->get_notEqual()== true);
-	EXPECT_TRUE(strcmp(statechart->getSCInterface()->get_quotedString(), "\"z\"") == 0);
+	EXPECT_TRUE(statechart->getSCInterface()->get_quotedString().compare("\"z\"") == 0);
 	delete statechart;
 }

@@ -23,6 +23,6 @@ TEST(StatemachineTest, SafeOpenSuccess) {
 	statechart->runCycle();
 	statechart->getSCIUser()->raise_numberPressed(5);
 	statechart->runCycle();
-	EXPECT_TRUE(getSCTSafe()->isRaised_open());
+	EXPECT_TRUE(statechart->getSCISafe()->isRaised_open());
 	delete statechart;
 }
