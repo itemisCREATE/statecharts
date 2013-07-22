@@ -20,7 +20,7 @@ import org.junit.Before;
 import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
-import static org.junit.Assert.*;
+import static junit.framework.Assert.*;
 /**
  *  Unit TestCase for Declarations
  */
@@ -28,10 +28,8 @@ import static org.junit.Assert.*;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class DeclarationsTest extends AbstractExecutionFlowTest {
-
 	@Inject
 	private SCTUnitTestModels models;
-
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
