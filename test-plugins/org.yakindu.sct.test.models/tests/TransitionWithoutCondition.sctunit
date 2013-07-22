@@ -8,7 +8,7 @@ testgroup TransitionWithoutCondition for statechart TransitionWithoutCondition{
 	
 		cycle
 			
-		assert active(TransitionWithoutCondition.main_region.A)
+		assert active(TransitionWithoutCondition.main_region.B)
 	
 		 
 	} 
