@@ -102,7 +102,7 @@ class Statemachine {
 
 	def dispatch structDeclaration(EventDefinition it) '''
 		sc_boolean «name.asIdentifier»_raised;
-		«IF type != null && type.name != 'void'»«type.targetLanguageName»  «name.asIdentifier»_value;«ENDIF»
+		«IF type != null && type.name != 'void'»«type.targetLanguageName» «name.asIdentifier»_value;«ENDIF»
 	'''
 
 	def dispatch structDeclaration(TimeEvent it) '''
@@ -110,7 +110,7 @@ class Statemachine {
 	'''
 
 	def dispatch structDeclaration(VariableDefinition it) '''
-		«IF type.name != 'void'»«type.targetLanguageName»  «name.asEscapedIdentifier»;«ENDIF»
+		«IF type.name != 'void'»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 	
 	def dispatch structDeclaration(Declaration it) ''''''
