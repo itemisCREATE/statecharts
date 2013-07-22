@@ -34,9 +34,16 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.sexec.Sequence
-import java.util.LinkedList
+import java.util.LinkedListimport org.yakindu.sct.model.stext.stext.StatechartScope
 
 class SExecExtensions {
+	
+	def isDefaultInterface(StatechartScope scope) {
+		switch scope {
+			InterfaceScope: scope.name == null || scope.name.empty
+			default: false
+		}
+	}
 	
 	def isTimed (ExecutionFlow it) {
 		scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].size > 0
