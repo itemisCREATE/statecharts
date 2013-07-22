@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		InternalEventLifeCycle.class, OutEventLifeCycle.class, Parenthesis.class, PriorityValues.class,
 		RaiseEvent.class, SameNameDifferentRegion.class, ShallowHistory.class, SimpleHierachy.class,
 		StateIsActive.class, StatechartLocalReactions.class, StringExpressions.class, SyncFork.class, SyncJoin.class,
-		SimpleEvent.class, STextKeywordsInStatesAndRegions.class, TransitionWithoutCondition.class, ValuedEvents.class })
+		SimpleEvent.class, STextKeywordsInStatesAndRegions.class, TransitionWithoutCondition.class, ValuedEvents.class,
+		NamedInterfaceAccess.class})
 public class AllTests {
 }
