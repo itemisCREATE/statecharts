@@ -24,6 +24,7 @@ public interface IOperationsStatemachine extends IStatemachine {
 	public SCIInterface1 getSCIInterface1();
 
 	public interface SCInterface {
+		public void raiseEv();
 
 		public void setSCInterfaceOperationCallback(
 				SCInterfaceOperationCallback operationCallback);

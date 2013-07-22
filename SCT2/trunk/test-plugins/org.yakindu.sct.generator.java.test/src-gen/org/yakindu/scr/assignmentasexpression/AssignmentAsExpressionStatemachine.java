@@ -241,7 +241,7 @@ public class AssignmentAsExpressionStatemachine
 	private SCInterfaceImpl sCInterface;
 
 	public enum State {
-		main_region_Add, main_region_Subtract, main_region_Multiply, main_region_Divide, main_region_Modulo, main_region_Shift, main_region_boolean_And, main_region_boolean_Or, main_region_boolean_Xor, $NullState$
+		main_region_Add, main_region_Multiply, main_region_Divide, main_region_Modulo, main_region_Shift, main_region_boolean_And, main_region_boolean_Or, main_region_boolean_Xor, main_region_Subtract, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -325,11 +325,6 @@ public class AssignmentAsExpressionStatemachine
 				stateVector[0] = State.$NullState$;
 				break;
 
-			case main_region_Subtract :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
 			case main_region_Multiply :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
@@ -361,6 +356,11 @@ public class AssignmentAsExpressionStatemachine
 				break;
 
 			case main_region_boolean_Xor :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_Subtract :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
@@ -383,8 +383,6 @@ public class AssignmentAsExpressionStatemachine
 		switch (state) {
 			case main_region_Add :
 				return stateVector[0] == State.main_region_Add;
-			case main_region_Subtract :
-				return stateVector[0] == State.main_region_Subtract;
 			case main_region_Multiply :
 				return stateVector[0] == State.main_region_Multiply;
 			case main_region_Divide :
@@ -399,6 +397,8 @@ public class AssignmentAsExpressionStatemachine
 				return stateVector[0] == State.main_region_boolean_Or;
 			case main_region_boolean_Xor :
 				return stateVector[0] == State.main_region_boolean_Xor;
+			case main_region_Subtract :
+				return stateVector[0] == State.main_region_Subtract;
 			default :
 				return false;
 		}
@@ -589,17 +589,6 @@ public class AssignmentAsExpressionStatemachine
 		stateVector[0] = State.main_region_Subtract;
 	}
 
-	/* The reactions of state Subtract. */
-	private void reactMain_region_Subtract() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		sCInterface.e *= (sCInterface.f *= 5) * 3;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Multiply;
-	}
-
 	/* The reactions of state Multiply. */
 	private void reactMain_region_Multiply() {
 		nextStateIndex = 0;
@@ -672,6 +661,17 @@ public class AssignmentAsExpressionStatemachine
 	private void reactMain_region_boolean_Xor() {
 	}
 
+	/* The reactions of state Subtract. */
+	private void reactMain_region_Subtract() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		sCInterface.e *= (sCInterface.f *= 5) * 3;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_Multiply;
+	}
+
 	public void runCycle() {
 
 		clearOutEvents();
@@ -681,9 +681,6 @@ public class AssignmentAsExpressionStatemachine
 			switch (stateVector[nextStateIndex]) {
 				case main_region_Add :
 					reactMain_region_Add();
-					break;
-				case main_region_Subtract :
-					reactMain_region_Subtract();
 					break;
 				case main_region_Multiply :
 					reactMain_region_Multiply();
@@ -705,6 +702,9 @@ public class AssignmentAsExpressionStatemachine
 					break;
 				case main_region_boolean_Xor :
 					reactMain_region_boolean_Xor();
+					break;
+				case main_region_Subtract :
+					reactMain_region_Subtract();
 					break;
 				default :
 					// $NullState$

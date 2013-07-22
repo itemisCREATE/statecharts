@@ -258,14 +258,6 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
-	test StateWithEmptyRegion{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
-	
 	test STextKeywordsInStatesAndRegions{
 		
 		feature Outlet{ 

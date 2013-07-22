@@ -5,6 +5,7 @@ public interface IJavaKeywordsStatemachine extends IStatemachine {
 
 	public interface SCInterface {
 		public void raiseWhile();
+		public void raiseEv();
 		public boolean getAbstract();
 		public void setAbstract(boolean value);
 		public boolean getAssert();

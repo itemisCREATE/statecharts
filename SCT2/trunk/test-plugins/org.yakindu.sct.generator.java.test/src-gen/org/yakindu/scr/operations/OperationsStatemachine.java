@@ -23,6 +23,16 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			this.operationCallback = operationCallback;
 		}
 
+		private boolean ev;
+
+		public void raiseEv() {
+			ev = true;
+		}
+
+		public void clearEvents() {
+			ev = false;
+		}
+
 	}
 
 	private SCInterfaceImpl sCInterface;
@@ -93,6 +103,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	protected void clearEvents() {
+		sCInterface.clearEvents();
 
 	}
 
@@ -124,6 +135,10 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		this.operationCallback = operationCallback;
 	}
 
+	public void raiseEv() {
+		sCInterface.raiseEv();
+	}
+
 	/* Entry action for statechart 'Operations'. */
 	private void entryAction() {
 	}
@@ -134,10 +149,32 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
+		if (sCInterface.ev) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			sCIInterface1.operationCallback.interfaceOperation1();
+
+			sCIInterface1.operationCallback.interfaceOperation2(4);
+
+			nextStateIndex = 0;
+			stateVector[0] = State.main_region_B;
+		}
 	}
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
+		if (sCInterface.ev) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			sCInterface.operationCallback.unnamedInterfaceOperation1();
+
+			sCInterface.operationCallback.unnamedInterfaceOperation2(4);
+
+			nextStateIndex = 0;
+			stateVector[0] = State.main_region_C;
+		}
 	}
 
 	/* The reactions of state C. */

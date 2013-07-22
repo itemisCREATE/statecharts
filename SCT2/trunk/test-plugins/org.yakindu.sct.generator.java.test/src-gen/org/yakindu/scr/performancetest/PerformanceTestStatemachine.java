@@ -809,7 +809,7 @@ public class PerformanceTestStatemachine
 				}
 			}
 		} else {
-			if (isStateActive(State.mr_B_r2_W) && sCInterface.e3) {
+			if (true && isStateActive(State.mr_B_r2_W) && sCInterface.e3) {
 				historyVector[0] = stateVector[0];
 
 				switch (stateVector[0]) {
@@ -1074,7 +1074,7 @@ public class PerformanceTestStatemachine
 
 	/* The reactions of state W. */
 	private void reactMr_B_r2_W() {
-		if (sCInterface.e3 && isStateActive(State.mr_B_r1_S)) {
+		if (sCInterface.e3 && isStateActive(State.mr_B_r1_S) && true) {
 			historyVector[0] = stateVector[0];
 
 			switch (stateVector[0]) {

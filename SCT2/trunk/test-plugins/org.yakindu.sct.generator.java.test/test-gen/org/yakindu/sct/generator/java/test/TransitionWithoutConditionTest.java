@@ -41,6 +41,6 @@ public class TransitionWithoutConditionTest {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.isStateActive(State.main_region_B));
 	}
 }
