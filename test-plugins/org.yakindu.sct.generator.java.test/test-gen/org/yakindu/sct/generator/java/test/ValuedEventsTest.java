@@ -8,6 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
+
 package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;

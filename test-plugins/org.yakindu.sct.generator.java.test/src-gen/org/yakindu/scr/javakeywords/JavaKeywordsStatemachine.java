@@ -10,6 +10,12 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			while_ID = true;
 		}
 
+		private boolean ev;
+
+		public void raiseEv() {
+			ev = true;
+		}
+
 		private boolean abstract_ID;
 
 		public boolean getAbstract() {
@@ -482,6 +488,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 		public void clearEvents() {
 			while_ID = false;
+			ev = false;
 		}
 
 	}
@@ -489,7 +496,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private SCInterfaceImpl sCInterface;
 
 	public enum State {
-		goto_abstract, goto_boolean, goto_void, goto_void_volatile_transient, goto_void_volatile_transient_throw_false, $NullState$
+		goto_abstract, goto_boolean, goto_void, goto_void_volatile_transient, goto_void_volatile_transient_throw_false, goto_void_volatile_state, $NullState$
 	};
 
 	private State[] historyVector = new State[2];
@@ -731,6 +738,13 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				stateVector[0] = State.$NullState$;
 				break;
 
+			case goto_void_volatile_state :
+				historyVector[0] = stateVector[0];
+
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
 			default :
 				break;
 		}
@@ -754,7 +768,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				return stateVector[0] == State.goto_boolean;
 			case goto_void :
 				return stateVector[0].ordinal() >= State.goto_void.ordinal()
-						&& stateVector[0].ordinal() <= State.goto_void_volatile_transient_throw_false
+						&& stateVector[0].ordinal() <= State.goto_void_volatile_state
 								.ordinal();
 			case goto_void_volatile_transient :
 				return stateVector[0].ordinal() >= State.goto_void_volatile_transient
@@ -763,6 +777,8 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 								.ordinal();
 			case goto_void_volatile_transient_throw_false :
 				return stateVector[0] == State.goto_void_volatile_transient_throw_false;
+			case goto_void_volatile_state :
+				return stateVector[0] == State.goto_void_volatile_state;
 			default :
 				return false;
 		}
@@ -774,6 +790,9 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	public void raiseWhile() {
 		sCInterface.raiseWhile();
+	}
+	public void raiseEv() {
+		sCInterface.raiseEv();
 	}
 
 	public boolean getAbstract() {
@@ -1118,6 +1137,13 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	private void shallowEnterSequenceGoto_void_volatile() {
 		switch (historyVector[0]) {
 			case goto_void_volatile_transient_throw_false :
+				nextStateIndex = 0;
+				stateVector[0] = State.goto_void_volatile_transient_throw_false;
+				break;
+
+			case goto_void_volatile_state :
+				nextStateIndex = 0;
+				stateVector[0] = State.goto_void_volatile_state;
 				break;
 
 			default :
@@ -1249,11 +1275,42 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
+			nextStateIndex = 0;
+			stateVector[0] = State.goto_void_volatile_transient_throw_false;
+		} else {
+			if (sCInterface.ev) {
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+
+				/* Enter the region with shallow history */
+				if (historyVector[0] != State.$NullState$) {
+					shallowEnterSequenceGoto_void_volatile();
+				} else {
+					nextStateIndex = 0;
+					stateVector[0] = State.goto_void_volatile_state;
+				}
+			}
 		}
 	}
 
 	/* The reactions of state false. */
 	private void reactGoto_void_volatile_transient_throw_false() {
+	}
+
+	/* The reactions of state state. */
+	private void reactGoto_void_volatile_state() {
+		if (sCInterface.ev) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			/* Enter the region with deep history */
+			if (historyVector[1] != State.$NullState$) {
+				deepEnterSequenceGoto_void_volatile_transient_throw();
+			} else {
+				nextStateIndex = 0;
+				stateVector[0] = State.goto_void_volatile_transient_throw_false;
+			}
+		}
 	}
 
 	public void runCycle() {
@@ -1271,6 +1328,9 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 					break;
 				case goto_void_volatile_transient_throw_false :
 					reactGoto_void_volatile_transient_throw_false();
+					break;
+				case goto_void_volatile_state :
+					reactGoto_void_volatile_state();
 					break;
 				default :
 					// $NullState$

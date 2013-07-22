@@ -80,6 +80,11 @@ public class TransitionWithoutConditionStatemachine
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
 	}
 
 	/* The reactions of state B. */
