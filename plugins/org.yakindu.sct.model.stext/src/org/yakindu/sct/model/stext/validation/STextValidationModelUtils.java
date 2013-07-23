@@ -250,7 +250,7 @@ public final class STextValidationModelUtils {
 		return exits;
 	}
 
-	private static List<Entry> getEntries(List<EObject> elements) {
+	public static List<Entry> getEntries(List<EObject> elements) {
 		List<Entry> entries = new ArrayList<Entry>();
 		for (EObject element : elements) {
 			if (element instanceof Entry) {
@@ -260,7 +260,7 @@ public final class STextValidationModelUtils {
 		return entries;
 	}
 
-	private static List<Exit> getExits(List<EObject> elements) {
+	public static List<Exit> getExits(List<EObject> elements) {
 		List<Exit> exits = new ArrayList<Exit>();
 		for (EObject element : elements) {
 			if (element instanceof Exit) {

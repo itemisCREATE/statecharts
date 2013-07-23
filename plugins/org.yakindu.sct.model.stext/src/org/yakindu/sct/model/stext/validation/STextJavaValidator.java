@@ -131,7 +131,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkUnusedEntry(final Entry entry) {
-		if (entry.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State) {
+		if (entry.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State
+				&& entry.getIncomingTransitions().isEmpty()) {
 			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) entry
 					.getParentRegion().getComposite();
 
@@ -167,7 +168,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkUnusedExit(final Exit exit) {
-		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State) {
+		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State
+				&& exit.getOutgoingTransitions().isEmpty()) {
 			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) exit
 					.getParentRegion().getComposite();
 
@@ -224,31 +226,42 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					if (!state.isComposite()) {
 						warning(TRANSITION_EXIT_SPEC_NOT_COMPOSITE, transition,
 								null, -1);
-					}
-					else {
-						//Validate an exit point is continued on one transition only.
+					} else {
+						// Validate an exit point is continued on one transition
+						// only.
 						for (Transition t : state.getOutgoingTransitions()) {
 							if (transition != t
-									&& STextValidationModelUtils.isNamedExitTransition(
-											t, exitPointSpec.getExitpoint())) {
-								warning(TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS, transition,
-										null, -1);
+									&& STextValidationModelUtils
+											.isNamedExitTransition(t,
+													exitPointSpec
+															.getExitpoint())) {
+								warning(TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS,
+										transition, null, -1);
 							}
 						}
-						
-						//Validate the state has minimally one named exit region
-						Map<Region, List<Exit>> regions = STextValidationModelUtils.getRegionsWithoutDefaultExit(state.getRegions());
-						boolean hasExit = false;
-						Iterator<Region> regionIter = regions.keySet().iterator();
-						while (regionIter.hasNext() && !hasExit) {
-							Iterator<Exit> exitIter = regions.get(regionIter.next()).iterator();
-							while (exitIter.hasNext() && !hasExit) {
-								Exit exit = exitIter.next();
-								hasExit = exitPointSpec.getExitpoint().equals(exit.getName());
+
+						// Validate the state has minimally one named exit
+						// region
+						Map<Region, List<Exit>> regions = STextValidationModelUtils
+								.getRegionsWithoutDefaultExit(state
+										.getRegions());
+						if (!regions.isEmpty()) {
+							boolean hasExit = false;
+							Iterator<Region> regionIter = regions.keySet()
+									.iterator();
+							while (regionIter.hasNext() && !hasExit) {
+								Iterator<Exit> exitIter = regions.get(
+										regionIter.next()).iterator();
+								while (exitIter.hasNext() && !hasExit) {
+									Exit exit = exitIter.next();
+									hasExit = exitPointSpec.getExitpoint()
+											.equals(exit.getName());
+								}
 							}
-						}
-						if (!hasExit) {
-							error(TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT, transition, null, -1);
+							if (!hasExit) {
+								error(TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT,
+										transition, null, -1);
+							}
 						}
 					}
 				}
