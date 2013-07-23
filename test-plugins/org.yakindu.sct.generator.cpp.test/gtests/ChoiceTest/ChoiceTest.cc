@@ -86,6 +86,6 @@ TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	statechart->getSCInterface()->set_c(true);
 	statechart->raise_h();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_B));
+	EXPECT_TRUE(statechart->isActive(Choice::Choice_main_region_C));
 	delete statechart;
 }

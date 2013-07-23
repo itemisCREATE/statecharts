@@ -80,5 +80,5 @@ TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	choiceIface_set_c(&handle, true);
 	choiceIface_raise_h(&handle);
 	choice_runCycle(&handle);
-	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_B));
+	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
 }
