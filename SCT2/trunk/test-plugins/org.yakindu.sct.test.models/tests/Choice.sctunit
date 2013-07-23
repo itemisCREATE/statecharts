@@ -84,7 +84,7 @@ testgroup Choice for statechart Choice {
 		raise h
 		
 		cycle		
-		assert active (Choice.main_region.B)
+		assert active (Choice.main_region.C)
 	}
 		
 	

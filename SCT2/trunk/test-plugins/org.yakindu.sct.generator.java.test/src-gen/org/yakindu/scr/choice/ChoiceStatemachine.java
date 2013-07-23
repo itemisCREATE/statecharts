@@ -201,8 +201,13 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 
-						nextStateIndex = 0;
-						stateVector[0] = State.main_region_B;
+						if (sCInterface.c) {
+							nextStateIndex = 0;
+							stateVector[0] = State.main_region_C;
+						} else {
+							nextStateIndex = 0;
+							stateVector[0] = State.main_region_B;
+						}
 					}
 				}
 			}

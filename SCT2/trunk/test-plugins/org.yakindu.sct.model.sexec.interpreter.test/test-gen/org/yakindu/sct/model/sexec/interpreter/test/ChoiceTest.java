@@ -96,6 +96,6 @@ public class ChoiceTest extends AbstractExecutionFlowTest {
 		setBoolean("c", true);
 		raiseEvent("h");
 		interpreter.runCycle();
-		assertTrue(isActive("B"));
+		assertTrue(isActive("C"));
 	}
 }
