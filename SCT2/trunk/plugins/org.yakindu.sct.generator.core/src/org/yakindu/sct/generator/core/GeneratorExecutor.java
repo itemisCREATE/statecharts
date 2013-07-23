@@ -69,7 +69,7 @@ public class GeneratorExecutor {
 		GeneratorDescriptor description = GeneratorExtensions
 				.getGeneratorDescriptorForId(generatorId);
 		if (description == null)
-			return;
+			throw new RuntimeException("No generator registered for ID: " + generatorId);
 		final ISCTGenerator generator = description.createGenerator();
 		final EList<GeneratorEntry> entries = model.getEntries();
 
