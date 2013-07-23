@@ -7,4 +7,5 @@ Bundle-Vendor: YAKINDU
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.yakindu.sct.test.models;bundle-version="2.1.1",
  org.yakindu.sct.generator.c.test;bundle-version="2.1.1",
- org.junit;bundle-version="4.11.0"
+ org.junit;bundle-version="4.11.0",
+ org.yakindu.sct.generator.cpp;bundle-version="2.1.1"
