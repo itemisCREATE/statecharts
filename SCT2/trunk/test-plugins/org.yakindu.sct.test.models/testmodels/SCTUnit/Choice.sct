@@ -30,7 +30,7 @@
         <outgoingTransitions xmi:id="_vcYGoJNOEeKBtrru-JWnVQ" specification="[c]" target="_OoKJkKllEeGmpNX2cnyk2Q"/>
       </vertices>
       <vertices xsi:type="sgraph:Choice" xmi:id="_b6MpkKJ6EeK62NKshpou-A" incomingTransitions="_dX4vkKJ6EeK62NKshpou-A">
-        <outgoingTransitions xmi:id="_j8lysKJ6EeK62NKshpou-A" specification="default" target="_W-U_wKlkEeGmpNX2cnyk2Q"/>
+        <outgoingTransitions xmi:id="_j8lysKJ6EeK62NKshpou-A" specification="[true]" target="_W-U_wKlkEeGmpNX2cnyk2Q"/>
         <outgoingTransitions xmi:id="_0ovm8KJ6EeK62NKshpou-A" specification="[c]" target="_OoKJkKllEeGmpNX2cnyk2Q"/>
       </vertices>
     </regions>
