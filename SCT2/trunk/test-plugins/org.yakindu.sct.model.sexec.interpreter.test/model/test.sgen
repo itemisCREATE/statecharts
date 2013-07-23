@@ -184,14 +184,6 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 		
-	test PerformanceTests{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
-	
 	test PriorityValues{
 		
 		feature Outlet{ 
