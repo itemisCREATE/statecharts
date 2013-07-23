@@ -242,27 +242,26 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 						// Validate the state has minimally one named exit
 						// region
-						Map<Region, List<Exit>> regions = STextValidationModelUtils
-								.getRegionsWithoutDefaultExit(state
-										.getRegions());
-						if (!regions.isEmpty()) {
-							boolean hasExit = false;
-							Iterator<Region> regionIter = regions.keySet()
+
+						boolean hasExit = false;
+						Iterator<Region> regionIter = state.getRegions()
+								.iterator();
+						while (regionIter.hasNext() && !hasExit) {
+
+							Iterator<Exit> exitIter = STextValidationModelUtils
+									.getExits(regionIter.next().eContents())
 									.iterator();
-							while (regionIter.hasNext() && !hasExit) {
-								Iterator<Exit> exitIter = regions.get(
-										regionIter.next()).iterator();
-								while (exitIter.hasNext() && !hasExit) {
-									Exit exit = exitIter.next();
-									hasExit = exitPointSpec.getExitpoint()
-											.equals(exit.getName());
-								}
-							}
-							if (!hasExit) {
-								error(TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT,
-										transition, null, -1);
+							while (exitIter.hasNext() && !hasExit) {
+								Exit exit = exitIter.next();
+								hasExit = exitPointSpec.getExitpoint().equals(
+										exit.getName());
 							}
 						}
+						if (!hasExit) {
+							error(TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT,
+									transition, null, -1);
+						}
+
 					}
 				}
 			}
