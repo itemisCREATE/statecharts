@@ -66,9 +66,17 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
+                  <and>
                   <reference
                         definitionId="oneStateSelected">
                   </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+                  </and>
                </visibleWhen>
             </command>
             <command
@@ -77,9 +85,17 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
+                  <and>
                   <reference
                         definitionId="oneStateSelected">
                   </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+                  </and>
                </visibleWhen>
             </command>
             <command
@@ -88,9 +104,17 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
+                  <and>
                   <reference
                         definitionId="multipleStatesSelected">
                   </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+                  </and>
                </visibleWhen>
             </command>
             <command
@@ -99,9 +123,17 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
+                  <and>
                   <reference
                         definitionId="oneStateSelected">
                   </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+                  </and>
                </visibleWhen>
             </command>
             <command
@@ -110,9 +142,17 @@
                   style="push">
                <visibleWhen
                      checkEnabled="false">
+                  <and>
                   <reference
                         definitionId="oneStateSelected">
                   </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+                  </and>
                </visibleWhen>
             </command>
              <command
@@ -122,9 +162,17 @@
                      style="push">
                <visibleWhen
                      checkEnabled="false">
+                  <and>
                   <reference
                         definitionId="oneStateSelected">
                   </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+                  </and>
                </visibleWhen>
             </command>
              <command
@@ -133,9 +181,17 @@
                   style="push">
                    <visibleWhen
                      checkEnabled="false">
+                  <and>
                   <reference
                         definitionId="oneStateSelected">
                   </reference>
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor">
+                     </equals>
+                  </with>
+                  </and>
                </visibleWhen>
             </command>
          </menu>
