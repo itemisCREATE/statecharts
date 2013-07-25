@@ -38,7 +38,7 @@ public class ContentProposalViewerKeyHandler extends DirectEditKeyHandler {
 
 	private ContentProposalAdapter adapter;
 
-	protected static final KeyStroke keyStroke = KeyStroke.getInstance(SWT.MOD1, SWT.SPACE);
+	protected static final KeyStroke keyStroke = KeyStroke.getInstance(SWT.CTRL, SWT.SPACE);
 
 	public ContentProposalViewerKeyHandler(GraphicalViewer viewer) {
 		super(viewer);
