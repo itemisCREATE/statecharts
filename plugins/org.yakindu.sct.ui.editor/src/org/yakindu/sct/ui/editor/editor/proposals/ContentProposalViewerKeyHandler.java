@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.eclipse.gef.GraphicalViewer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
+import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DirectEditKeyHandler;
 import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.fieldassist.ContentProposalAdapter;
 import org.eclipse.swt.SWT;
@@ -32,7 +32,7 @@ import de.itemis.xtext.utils.gmf.proposals.SemanticContentProposalLabelProvider;
  * 
  */
 @SuppressWarnings("restriction")
-public class ContentProposalViewerKeyHandler extends DiagramGraphicalViewerKeyHandler {
+public class ContentProposalViewerKeyHandler extends DirectEditKeyHandler {
 
 	private AbstractSemanticContentProposalProvider proposalProvider;
 
