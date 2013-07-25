@@ -36,6 +36,7 @@ import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.DiagramActivator;
+import org.yakindu.sct.ui.editor.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
@@ -153,6 +154,17 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super.createGraphicalViewer(parent);
 		IWorkbenchHelpSystem helpSystem = PlatformUI.getWorkbench().getHelpSystem();
 		helpSystem.setHelp(getGraphicalViewer().getControl(), HelpContextIds.SC_EDITOR_GRAPHICAL_VIEWER);
+
+	}
+
+	@Override
+	protected void configureGraphicalViewer() {
+		super.configureGraphicalViewer();
+		createContentProposalViewerKeyHandler();
+	}
+
+	protected void createContentProposalViewerKeyHandler() {
+		getGraphicalViewer().setKeyHandler(new ContentProposalViewerKeyHandler(getGraphicalViewer()));
 	}
 
 	@Override

@@ -4,6 +4,7 @@
 	<!-- Extension Points -->
 	
    <extension-point id="expressions" name="org.yakindu.sct.ui.editor.expressions" schema="schema/expressions.exsd"/>
+   <extension-point id="org.yakindu.sct.ui.editor.proposals" name="proposals" schema="schema/org.yakindu.sct.ui.editor.proposals.exsd"/>
   
     <!-- Editor -->
   
@@ -968,6 +969,25 @@
             nsURI="http://www.eclipse.org/gmf/runtime/1.0.2/notation"
             priority="medium">
       </factory>
-   </extension>   
+   </extension>
+ <extension
+       point="org.yakindu.sct.ui.editor.proposals">
+       <ContentProposal
+             id="org.yakindu.sct.ui.editor.proposal.subregion"
+             label="Add Composite Behavior"
+             modification="org.yakindu.sct.ui.editor.editor.proposals.AddCompositeModification">
+       </ContentProposal>
+        <ContentProposal
+             id="org.yakindu.sct.ui.editor.proposal.subregion"
+             label="Add Orthogonal Behavior"
+             modification="org.yakindu.sct.ui.editor.editor.proposals.AddOrthogonalModification">
+       </ContentProposal>
+       <ContentProposal
+             description="Adds an outgoing state "
+             id="org.yakindu.sct.ui.editor.proposal.outgoingstate"
+             label="Add outgoing state"
+             modification="org.yakindu.sct.ui.editor.editor.proposals.AddOutgoingStateModification">
+       </ContentProposal>
+ </extension>   
    
 </plugin>

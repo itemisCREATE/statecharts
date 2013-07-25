@@ -22,9 +22,10 @@ import org.osgi.framework.BundleContext;
 public class DiagramActivator extends AbstractUIPlugin {
 
 	public static final String PLUGIN_ID = "org.yakindu.sct.ui.editor";
+	// Our own content assist decorator (which adds the key binding)
+	public static String DEC_CONTENTASSIST = "org.eclipse.ui.examples.fieldassist.contentAssistDecoration";
 
-	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(
-			PLUGIN_ID);
+	public static final PreferencesHint DIAGRAM_PREFERENCES_HINT = new PreferencesHint(PLUGIN_ID);
 
 	private static DiagramActivator plugin;
 
@@ -35,8 +36,7 @@ public class DiagramActivator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		PreferencesHint.registerPreferenceStore(DIAGRAM_PREFERENCES_HINT,
-				getPreferenceStore());
+		PreferencesHint.registerPreferenceStore(DIAGRAM_PREFERENCES_HINT, getPreferenceStore());
 	}
 
 	@Override
