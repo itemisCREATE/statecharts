@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Transition;
 
 import de.itemis.xtext.utils.gmf.proposals.AbstractSemanticModification;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -24,8 +25,8 @@ import de.itemis.xtext.utils.gmf.proposals.AbstractSemanticModification;
  */
 public class AddOutgoingStateModification extends AbstractSemanticModification {
 
-	public boolean IsModificationFor(EObject object) {
-		return object instanceof State;
+	public boolean IsModificationFor(View object) {
+		return object.getElement() instanceof State;
 	}
 
 	@Override
