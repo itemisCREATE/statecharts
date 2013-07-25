@@ -978,7 +978,7 @@
              modification="org.yakindu.sct.ui.editor.editor.proposals.AddCompositeModification">
        </ContentProposal>
         <ContentProposal
-             id="org.yakindu.sct.ui.editor.proposal.subregion"
+             id="org.yakindu.sct.ui.editor.proposal.orthogonal"
              label="Add Orthogonal Behavior"
              modification="org.yakindu.sct.ui.editor.editor.proposals.AddOrthogonalModification">
        </ContentProposal>
