@@ -970,6 +970,7 @@
             priority="medium">
       </factory>
    </extension>
+  <!-- Added default templates -->
  <extension
        point="org.yakindu.sct.ui.editor.proposals">
        <ContentProposal
