@@ -22,9 +22,11 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -255,7 +257,15 @@ public class SCTBuilder extends IncrementalProjectBuilder {
 		URI uri = URI.createPlatformResourceURI(res.getFullPath().toString(),
 				true);
 		ResourceSet set = new ResourceSetImpl();
-		Resource emfResource = set.getResource(uri, true);
+		Resource emfResource = null;
+		try {
+			emfResource = set.getResource(uri, true);
+		} catch (WrappedException e) {
+			Platform.getLog(GeneratorActivator.getDefault().getBundle())
+				.log(new Status(IStatus.WARNING, GeneratorActivator.PLUGIN_ID, 
+						"Resource "+uri+" can not be loaded by builder",e));
+			return null;
+		}
 		if (emfResource.getErrors().size() > 0
 				|| emfResource.getContents().size() == 0)
 			return null;
