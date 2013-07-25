@@ -19,6 +19,7 @@ import org.eclipse.jface.fieldassist.IContentProposalProvider;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
@@ -60,8 +61,7 @@ public abstract class AbstractSemanticContentProposalProvider implements IConten
 		Iterable<ISemanticContentProposal> validProposals = Iterables.filter(acceptor.getAllProposals(),
 				new Predicate<ISemanticContentProposal>() {
 					public boolean apply(ISemanticContentProposal input) {
-						return input.getSemanticModification().IsModificationFor(
-								(selectedEditPart.resolveSemanticElement()));
+						return input.getSemanticModification().IsModificationFor((selectedEditPart.getNotationView()));
 					}
 				});
 		return Iterables.toArray(validProposals, ISemanticContentProposal.class);

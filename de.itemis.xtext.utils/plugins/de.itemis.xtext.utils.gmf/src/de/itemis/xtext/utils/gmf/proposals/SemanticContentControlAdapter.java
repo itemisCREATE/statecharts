@@ -43,7 +43,7 @@ public class SemanticContentControlAdapter implements IControlContentAdapter {
 		ISemanticContentProposal proposal = provider.getProposal(id);
 		// TODO:Multi selection
 		IGraphicalEditPart editPart = (IGraphicalEditPart) viewer.getSelectedEditParts().get(0);
-		proposal.getSemanticModification().modify(editPart.resolveSemanticElement(), editPart.getNotationView());
+		proposal.getSemanticModification().modify(editPart.getNotationView());
 	}
 
 	public String getControlContents(Control control) {

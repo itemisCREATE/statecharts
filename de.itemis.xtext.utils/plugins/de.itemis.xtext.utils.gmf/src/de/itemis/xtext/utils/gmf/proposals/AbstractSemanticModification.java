@@ -41,7 +41,8 @@ public abstract class AbstractSemanticModification implements ISemanticModificat
 
 	protected abstract void internalExecute(final EObject semanticObject, final View view);
 
-	public final void modify(final EObject semanticObject, final View view) {
+	public final void modify(final View view) {
+		final EObject semanticObject = view.getElement();
 		AbstractTransactionalCommand refactoringCommand = new AbstractTransactionalCommand(
 				TransactionUtil.getEditingDomain(semanticObject), getClass().getName(), Collections.EMPTY_LIST) {
 			@Override

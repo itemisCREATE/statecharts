@@ -10,7 +10,6 @@
  */
 package de.itemis.xtext.utils.gmf.proposals;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.gmf.runtime.notation.View;
 
 /**
@@ -20,7 +19,7 @@ import org.eclipse.gmf.runtime.notation.View;
  */
 public interface ISemanticModification {
 
-	public boolean IsModificationFor(EObject object);
+	public boolean IsModificationFor(View view);
 
-	public void modify(EObject semanticObject, View view);
+	public void modify(View view);
 }
