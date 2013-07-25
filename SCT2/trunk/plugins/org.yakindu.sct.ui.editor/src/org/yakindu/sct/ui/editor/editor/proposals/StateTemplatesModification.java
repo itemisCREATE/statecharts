@@ -43,8 +43,8 @@ public abstract class StateTemplatesModification extends AbstractSemanticModific
 
 	public abstract String getTemplatePath();
 
-	public boolean IsModificationFor(EObject object) {
-		return object instanceof State;
+	public boolean IsModificationFor(View view) {
+		return view.getElement() instanceof State;
 	}
 
 	@SuppressWarnings("unchecked")

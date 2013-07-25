@@ -250,5 +250,18 @@
             class="org.yakindu.sct.refactoring.Activator">
       </startup>
    </extension>
+   <extension
+         point="org.yakindu.sct.ui.editor.proposals">
+      <ContentProposal
+            id="org.yakindu.sct.refactoring..proposal.extractdiagram"
+            label="Refactoring - Extract Subdiagram"
+            modification="org.yakindu.sct.refactoring.proposals.ExtractSubdiagramModification">
+      </ContentProposal>
+      <ContentProposal
+            id="org.yakindu.sct.refactoring..proposal.inlinediagram"
+            label="Refactoring - Inline Subdiagram"
+            modification="org.yakindu.sct.refactoring.proposals.InlineSubdiagramModification">
+      </ContentProposal>
+   </extension>
 
 </plugin>
