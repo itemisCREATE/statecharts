@@ -975,13 +975,8 @@
        point="org.yakindu.sct.ui.editor.proposals">
        <ContentProposal
              id="org.yakindu.sct.ui.editor.proposal.subregion"
-             label="Add Composite Behavior"
+             label="Add Subregion"
              modification="org.yakindu.sct.ui.editor.editor.proposals.AddCompositeModification">
-       </ContentProposal>
-        <ContentProposal
-             id="org.yakindu.sct.ui.editor.proposal.orthogonal"
-             label="Add Orthogonal Behavior"
-             modification="org.yakindu.sct.ui.editor.editor.proposals.AddOrthogonalModification">
        </ContentProposal>
        <ContentProposal
              description="Adds an outgoing state "

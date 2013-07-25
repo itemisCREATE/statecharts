@@ -37,36 +37,35 @@ public abstract class SubStateDecorator extends InteractiveDecorator {
 
 	@Override
 	public boolean shouldDecorate(EObject element) {
-		return (element instanceof State) ? shouldDecorate((State)element) : false;
+		return (element instanceof State) ? shouldDecorate((State) element) : false;
 	}
 
 	protected abstract Image getDecorationImage(State state);
-	
+
 	@Override
 	public Image getDecorationImage(EObject element) {
-		return (element instanceof State) ? getDecorationImage((State)element) : null;
+		return (element instanceof State) ? getDecorationImage((State) element) : null;
 	}
 
 	protected abstract Diagram getTooltipDiagramToRender(State state);
 
-	
 	@Override
 	protected IFigure getToolTipFigure(EObject element) {
 		if (element instanceof State) {
-			Diagram diagram = getTooltipDiagramToRender((State)element);
+			Diagram diagram = getTooltipDiagramToRender((State) element);
 			if (diagram != null) {
 				Image renderImage = renderImage(diagram);
-				return  new ImageFigure(renderImage);
+				return new ImageFigure(renderImage);
+
 			}
 		}
 		return null;
 	}
-	
+
 	protected Image renderImage(Diagram diagram) {
 		Assert.isNotNull(diagram);
 		Image renderImage = DiagramRenderUtil.renderToSWTImage(diagram);
-		Image resize = resize(renderImage,
-				(int) (0.7071 * renderImage.getBounds().width),
+		Image resize = resize(renderImage, (int) (0.7071 * renderImage.getBounds().width),
 				(int) (0.7071 * renderImage.getBounds().height));
 		return resize;
 	}
