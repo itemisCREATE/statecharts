@@ -25,6 +25,7 @@ import org.eclipse.emf.transaction.ResourceSetListenerImpl;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.gmf.runtime.common.ui.services.marker.MarkerNavigationService;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
+import org.eclipse.gmf.runtime.diagram.ui.internal.parts.DiagramGraphicalViewerKeyHandler;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -54,6 +55,7 @@ import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
  * @author andreas muelder - Initial contribution and API
  * @author martin esser
  */
+@SuppressWarnings("restriction")
 public class StatechartDiagramEditor extends DiagramPartitioningEditor implements IGotoMarker {
 
 	public static final String ID = "org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor";
@@ -163,8 +165,12 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		createContentProposalViewerKeyHandler();
 	}
 
+	@SuppressWarnings("restriction")
 	protected void createContentProposalViewerKeyHandler() {
-		getGraphicalViewer().setKeyHandler(new ContentProposalViewerKeyHandler(getGraphicalViewer()));
+		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
+				getGraphicalViewer());
+		contentProposalHandler.setParent(new DiagramGraphicalViewerKeyHandler(getGraphicalViewer()));
+		getGraphicalViewer().setKeyHandler(contentProposalHandler);
 	}
 
 	@Override
