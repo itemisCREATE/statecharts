@@ -165,7 +165,6 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		createContentProposalViewerKeyHandler();
 	}
 
-	@SuppressWarnings("restriction")
 	protected void createContentProposalViewerKeyHandler() {
 		ContentProposalViewerKeyHandler contentProposalHandler = new ContentProposalViewerKeyHandler(
 				getGraphicalViewer());
