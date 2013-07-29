@@ -78,7 +78,7 @@ public class GTestHelper {
 			do {
 				wait = false;
 
-				// waiting fro the processes termination
+				// waiting for the processes termination
 				try {
 					process.waitFor();
 				} catch ( InterruptedException e ) { /* we ignore if waiting was interrupted ... */ }
@@ -87,7 +87,7 @@ public class GTestHelper {
 				try {
 					exitCode = process.exitValue();
 				} catch ( IllegalThreadStateException e ) {
-					wait = true; // if we get an exception then the process has not finisched ...
+					wait = true; // if we get an exception then the process has not finished ...
 				}
 			} while (wait);
 
@@ -118,7 +118,7 @@ public class GTestHelper {
 
 		IPath targetPath = getTargetPath();
 
-		// copy model to junit workspace
+		// copy model to JUnit workspace
 		copyFileFromBundleToFolder(getModelBundle(), getModelPath(), targetPath);
 
 		String sgenFileName = getTestProgram() + ".sgen";
