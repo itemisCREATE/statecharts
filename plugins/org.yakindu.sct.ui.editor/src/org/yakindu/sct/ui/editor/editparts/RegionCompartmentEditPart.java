@@ -24,7 +24,8 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.CompartmentCreationEditPolicy;
 import org.yakindu.sct.ui.editor.policies.RegionCompartmentCanonicalEditPolicy;
-import org.yakindu.sct.ui.editor.policies.RegionCompartmentXYLayoutEditPolicy;
+
+import de.itemis.gmf.runtime.commons.editparts.FixedXYLayoutEditPolicy;
 
 /**
  * @author muelder
@@ -42,7 +43,7 @@ public class RegionCompartmentEditPart extends ShapeCompartmentEditPart {
 		installEditPolicy(EditPolicyRoles.CREATION_ROLE, new CompartmentCreationEditPolicy());
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new RegionCompartmentCanonicalEditPolicy());
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
-		installEditPolicy(EditPolicy.LAYOUT_ROLE, new RegionCompartmentXYLayoutEditPolicy());
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new FixedXYLayoutEditPolicy());
 		// Removes the collapse expand handler
 		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new ResizableEditPolicyEx());
 	}

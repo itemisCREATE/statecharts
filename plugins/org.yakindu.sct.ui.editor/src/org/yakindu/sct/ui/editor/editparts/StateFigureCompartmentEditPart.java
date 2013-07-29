@@ -10,14 +10,14 @@
  */
 package org.yakindu.sct.ui.editor.editparts;
 
+import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.diagram.core.preferences.PreferencesHint;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.ResizableCompartmentEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.editparts.CompartmentEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
-import org.eclipse.gmf.runtime.diagram.ui.figures.ResizableCompartmentFigure;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.ConstrainedToolbarLayout;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
@@ -37,25 +37,10 @@ import de.itemis.gmf.runtime.commons.editpolicies.CompartmentLayoutEditPolicy;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StateFigureCompartmentEditPart extends ResizableCompartmentEditPart {
-
-	private static final String PARENT_VIEW = "parent_view";
+public class StateFigureCompartmentEditPart extends CompartmentEditPart {
 
 	public StateFigureCompartmentEditPart(View view) {
 		super(view);
-	}
-
-	// Listeners for the parent view to get notified when layout is changed
-	@Override
-	protected void addNotationalListeners() {
-		addListenerFilter(PARENT_VIEW, this, getParent().getNotationView());
-		super.addNotationalListeners();
-	}
-
-	@Override
-	protected void removeNotationalListeners() {
-		removeListenerFilter(PARENT_VIEW);
-		super.removeNotationalListeners();
 	}
 
 	@Override
@@ -66,18 +51,7 @@ public class StateFigureCompartmentEditPart extends ResizableCompartmentEditPart
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
 		installEditPolicy(EditPolicy.LAYOUT_ROLE, new CompartmentLayoutEditPolicy(
 				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS));
-	}
-
-	@Override
-	protected void refreshVisuals() {
-		super.refreshVisuals();
-		((ResizableCompartmentFigure) getFigure()).getScrollPane().setScrollBarVisibility(
-				org.eclipse.draw2d.ScrollPane.NEVER);
-	}
-	
-	@Override
-	public State resolveSemanticElement() {
-		return (State) super.resolveSemanticElement();
+		removeEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE);
 	}
 
 	@Override
@@ -86,20 +60,15 @@ public class StateFigureCompartmentEditPart extends ResizableCompartmentEditPart
 	}
 
 	@Override
-	protected IFigure createFigure() {
-		ResizableCompartmentFigure figure = (ResizableCompartmentFigure) super.createFigure();
-		figure.getContentPane().setLayoutManager(new StateFigureCompartmentLayout(getAlignment()));
-		figure.setBorder(null);
-		// Should be initialized with null to display nothing.
-		figure.setToolTip((String) null);
-		figure.getScrollPane().setScrollBarVisibility(
-				org.eclipse.draw2d.ScrollPane.NEVER);
-		return figure;
+	public State resolveSemanticElement() {
+		return (State) super.resolveSemanticElement();
 	}
 
 	@Override
-	public ResizableCompartmentFigure getFigure() {
-		return (ResizableCompartmentFigure) super.getFigure();
+	protected IFigure createFigure() {
+		figure = new Figure();
+		figure.setLayoutManager(new StateFigureCompartmentLayout(getAlignment()));
+		return figure;
 	}
 
 	@Override
@@ -122,7 +91,7 @@ public class StateFigureCompartmentEditPart extends ResizableCompartmentEditPart
 	}
 
 	private void updateLayout() {
-		getFigure().getContentPane().setLayoutManager(new StateFigureCompartmentLayout(getAlignment()));
+		getFigure().setLayoutManager(new StateFigureCompartmentLayout(getAlignment()));
 	}
 
 	private static final class StateFigureCompartmentLayout extends ConstrainedToolbarLayout {
