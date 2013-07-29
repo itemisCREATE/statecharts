@@ -17,35 +17,36 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.StackLayout;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Insets;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.gef.EditPart;
 import org.eclipse.gef.EditPolicy;
-import org.eclipse.gef.GraphicalEditPart;
 import org.eclipse.gef.Request;
 import org.eclipse.gef.requests.GroupRequest;
+import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.ShapeNodeEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
-import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableEditPolicyEx;
 import org.eclipse.gmf.runtime.diagram.ui.requests.CreateViewAndElementRequest;
 import org.eclipse.gmf.runtime.diagram.ui.requests.RequestConstants;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.FigureUtilities;
 import org.eclipse.gmf.runtime.gef.ui.figures.DefaultSizeNodeFigure;
 import org.eclipse.gmf.runtime.gef.ui.figures.NodeFigure;
+import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Compartment;
-import org.eclipse.gmf.runtime.notation.Node;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.editor.figures.StateFigure;
 import org.yakindu.sct.ui.editor.editor.figures.utils.GridDataFactory;
 import org.yakindu.sct.ui.editor.editor.figures.utils.MapModeUtils;
-import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
+import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.policies.EnlargeContainerEditPolicy;
+import org.yakindu.sct.ui.editor.policies.PreferredSizeHandlerEditPolicy;
 import org.yakindu.sct.ui.editor.preferences.StatechartColorConstants;
+import org.yakindu.sct.ui.editor.providers.SemanticHints;
 
 /**
  * The EditPart for the State.
@@ -110,7 +111,7 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		return figure;
 	}
 
-	private Dimension getDefaultSize() {
+	protected Dimension getDefaultSize() {
 		return MapModeUtils.getDefaultSizeDimension(getMapMode());
 	}
 
@@ -122,38 +123,36 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	protected void createDefaultEditPolicies() {
 		super.createDefaultEditPolicies();
 		removeEditPolicy(EditPolicyRoles.CREATION_ROLE);
-
-		if (isCollapsed()) {
-			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
-		} else {
-			installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy());
-		}
-
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy());
 		installEditPolicy(EnlargeContainerEditPolicy.ROLE, new EnlargeContainerEditPolicy());
 	}
 
 	@Override
 	protected void refreshVisuals() {
-		refreshCompartmentStates();
+		refreshCompartmentLayout();
 		super.refreshVisuals();
 	}
 
-	private void refreshCompartmentStates() {
+	private void refreshCompartmentLayout() {
 		if (getTextCompartment().isCollapsed()) {
 			getPrimaryShape().setConstraint(getPrimaryShape().getTextCompartmentPane(), getCollapsedData());
 		} else {
 			GridData expandedData = getExpandedData();
-			if (!getFigureCompartment().isCollapsed())
+			if (figureCompartmentVisible())
 				expandedData.grabExcessVerticalSpace = false;
 			getPrimaryShape().setConstraint(getPrimaryShape().getTextCompartmentPane(), expandedData);
 		}
-		if (getFigureCompartment().isCollapsed()) {
+		if (!figureCompartmentVisible()) {
 			getPrimaryShape().setConstraint(getPrimaryShape().getFigureCompartmentPane(), getCollapsedData());
 		} else {
-			GridData expandedData = getExpandedData();
-
-			getPrimaryShape().setConstraint(getPrimaryShape().getFigureCompartmentPane(), expandedData);
+			getPrimaryShape().setConstraint(getPrimaryShape().getFigureCompartmentPane(), getExpandedData());
 		}
+	}
+
+	private boolean figureCompartmentVisible() {
+		BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineStyle(getNotationView());
+		return resolveSemanticElement().getRegions().size() > 0
+				&& (inlineStyle == null || inlineStyle.isBooleanValue());
 	}
 
 	private GridData getExpandedData() {
@@ -164,36 +163,8 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		return GridDataFactory.fillDefaults().grab(false, false).getData();
 	}
 
-	@Override
-	protected void refreshBounds() {
-
-		// TODO: Calculate the 'default' size
-		int width = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getSize_Width())).intValue();
-		int height = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getSize_Height())).intValue();
-
-		Dimension size = new Dimension(width, height);
-		int x = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getLocation_X())).intValue();
-		int y = ((Integer) getStructuralFeatureValue(NotationPackage.eINSTANCE.getLocation_Y())).intValue();
-		Point loc = new Point(x, y);
-
-		if (isCollapsed()) {
-			((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), new Rectangle(loc, new Dimension(
-					58, 66)));
-		} else {
-			((GraphicalEditPart) getParent()).setLayoutConstraint(this, getFigure(), new Rectangle(loc, size));
-		}
-	}
-
-	private Compartment getFigureCompartment() {
-		return (Compartment) getNotationView().getChildren().get(2);
-	}
-
 	private Compartment getTextCompartment() {
-		return (Compartment) getNotationView().getChildren().get(1);
-	}
-
-	public boolean isCollapsed() {
-		return getFigureCompartment().isCollapsed() && getTextCompartment().isCollapsed();
+		return (Compartment) ViewUtil.getChildBySemanticHint(getNotationView(), SemanticHints.STATE_TEXT_COMPARTMENT);
 	}
 
 	@Override
@@ -241,15 +212,14 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 	@Override
 	protected void addNotationalListeners() {
 		super.addNotationalListeners();
-		addListenerFilter("TextCompartmentView", this, (Node) getNotationView().getChildren().get(1));
-		addListenerFilter("FigureCompartmentView", this, (Node) getNotationView().getChildren().get(2));
+		addListenerFilter("TextCompartmentView", this,
+				ViewUtil.getChildBySemanticHint(getNotationView(), SemanticHints.STATE_TEXT_COMPARTMENT));
 	}
 
 	@Override
 	protected void removeNotationalListeners() {
 		super.removeNotationalListeners();
 		removeListenerFilter("TextCompartmentView");
-		removeListenerFilter("FigureCompartmentView");
 	}
 
 	/**
@@ -275,13 +245,10 @@ public class StateEditPart extends ShapeNodeEditPart implements IPrimaryEditPart
 		if (notification.getFeature() == NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE) {
 			refresh();
 		}
-
 		if (notification.getFeature() == NotationPackage.Literals.DRAWER_STYLE__COLLAPSED) {
-			if (isCollapsed()) {
-				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableEditPolicyEx());
-			} else {
-				installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new PreferredSizeHandlerEditPolicy());
-			}
+			refreshVisuals();
+		}
+		if (notification.getFeature() == SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS) {
 			refreshVisuals();
 		}
 		super.handleNotificationEvent(notification);

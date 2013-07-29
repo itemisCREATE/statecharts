@@ -31,9 +31,7 @@ public class StateCompartmentCreationEditPolicy extends CompartmentCreationEditP
 
 	@Override
 	protected Command getCreateCommand(CreateViewRequest request) {
-
 		StateEditPart parent = (StateEditPart) getHost().getParent();
-
 		BooleanValueStyle isInline = GMFNotationUtil.getBooleanValueStyle(parent.getNotationView(),
 				DiagramPartitioningUtil.INLINE_STYLE);
 		if (isInline != null && !isInline.isBooleanValue())
