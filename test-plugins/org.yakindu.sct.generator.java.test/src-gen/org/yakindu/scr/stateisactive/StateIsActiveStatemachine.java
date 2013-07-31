@@ -29,7 +29,6 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	public StateIsActiveStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

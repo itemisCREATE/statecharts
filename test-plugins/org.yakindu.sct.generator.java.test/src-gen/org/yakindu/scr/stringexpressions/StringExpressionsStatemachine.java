@@ -81,7 +81,6 @@ public class StringExpressionsStatemachine
 	public StringExpressionsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

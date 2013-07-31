@@ -10,31 +10,31 @@
  */
 package org.yakindu.sct.model.sexec.extensions
 
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import java.util.List
 import java.util.ArrayList
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.stext.stext.Direction
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
-import org.yakindu.sct.model.stext.stext.FeatureCall
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.sgraph.Event
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sexec.ExecutionRegion
-import org.yakindu.sct.model.sexec.ExecutionScope
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.Reaction
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.Check
-import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.ExecutionRegion
+import org.yakindu.sct.model.sexec.ExecutionScope
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
-import java.util.LinkedListimport org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sgraph.Declaration
+import org.yakindu.sct.model.sgraph.Event
+import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.stext.stext.Direction
+import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.Expression
+import org.yakindu.sct.model.stext.stext.FeatureCall
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class SExecExtensions {
 	
@@ -45,12 +45,25 @@ class SExecExtensions {
 		}
 	}
 	
+	def ExecutionFlow flow(EObject element){
+		var ExecutionFlow ret = null;
+		if (element != null) {
+			if (element instanceof ExecutionFlow) {
+				return element as ExecutionFlow
+			}
+			else {
+				ret = flow(element.eContainer)
+			}
+		}
+		return ret;
+	}
+	
 	def isTimed (ExecutionFlow it) {
 		scopes.filter[declarations.filter( typeof(TimeEvent) ).size > 0].size > 0
 	}
 	
 	def getTimeEvents(ExecutionFlow it) {
-		scopes.fold(new LinkedList<TimeEvent>, [l, s | l += s.declarations.filter(typeof(TimeEvent)) l])
+		scopes.fold(new ArrayList<TimeEvent>, [l, s | l += s.declarations.filter(typeof(TimeEvent)) l])
 	}
 	
 	def hasHistory(ExecutionFlow it) {
@@ -62,7 +75,7 @@ class SExecExtensions {
 	}
 	
 	def getOutgoingEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::OUT].fold(new LinkedList<EventDefinition>, [l, ev | l += ev l])
+		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::OUT].fold(new ArrayList<EventDefinition>, [l, ev | l += ev l])
 	}
 	
 	def hasIncomingEvents(Scope it) {
@@ -70,11 +83,11 @@ class SExecExtensions {
 	}
 		
 	def List<EventDefinition> getIncomingEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::IN].fold(new LinkedList<EventDefinition>, [l, ev | l += ev l])
+		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::IN].fold(new ArrayList<EventDefinition>, [l, ev | l += ev l])
 	}
 	
 	def List<EventDefinition> getLocalEvents(Scope it) {
-		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::LOCAL].fold(new LinkedList<EventDefinition>, [l, ev | l += ev l])
+		declarations.filter(typeof(EventDefinition)).filter[direction == Direction::LOCAL].fold(new ArrayList<EventDefinition>, [l, ev | l += ev l])
 	}
 	
 	def getInterfaceScopes(ExecutionFlow it) {

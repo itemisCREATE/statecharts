@@ -36,7 +36,6 @@ public class SyncForkStatemachine implements ISyncForkStatemachine {
 	public SyncForkStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

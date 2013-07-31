@@ -29,7 +29,6 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	public ParenthesisStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

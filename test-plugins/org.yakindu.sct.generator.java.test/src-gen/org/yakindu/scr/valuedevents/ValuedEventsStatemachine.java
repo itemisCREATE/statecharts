@@ -49,7 +49,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	public ValuedEventsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

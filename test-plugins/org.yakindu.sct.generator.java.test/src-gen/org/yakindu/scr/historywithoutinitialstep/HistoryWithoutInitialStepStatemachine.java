@@ -39,7 +39,6 @@ public class HistoryWithoutInitialStepStatemachine
 	public HistoryWithoutInitialStepStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

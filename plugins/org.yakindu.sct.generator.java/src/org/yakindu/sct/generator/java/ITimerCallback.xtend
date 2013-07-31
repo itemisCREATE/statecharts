@@ -14,7 +14,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.eclipse.xtext.generator.IFileSystemAccess
 import com.google.inject.Inject
 
-class ITimedStatemachine {
+class ITimerCallback {
 	
 	@Inject
 	extension Naming 
@@ -22,8 +22,8 @@ class ITimedStatemachine {
 	@Inject
 	extension GenmodelEntries
 	
-	def generateITimedStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(entry.basePackagePath + '/' + iTimedStatemachineClass.java, content(entry))
+	def generateITimerCallback(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
+		fsa.generateFile(entry.basePackagePath + '/' + iTimerCallback.java, content(entry))
 	}
 	
 	def private content(GeneratorEntry entry) {
@@ -34,30 +34,15 @@ class ITimedStatemachine {
 		/**
 		* Interface for state machines which use timed event triggers.
 		*/
-		public interface ITimedStatemachine {
-		
+		public interface ITimerCallback {
+			
 			/**
-			* Set the {@link ITimerService} for the state machine. It must be set
-			* externally on a timed state machine before a run cycle can be correct
-			* executed.
+			* Callback method if a time event occurred.
 			* 
-			* @param timerService
+			* @param eventID
+			* 			:The id of the occurred event.
 			*/
-			public void setTimerService(ITimerService timerService);
-		
-			/**
-			* Returns the currently used timer service.
-			* 
-			* @return {@link ITimerService}
-			*/
-			public ITimerService getTimerService();
-		
-			/**
-			* Callback method if a {@link TimeEvent} occurred.
-			* 
-			* @param timeEvent
-			*/
-			public void onTimeEventRaised(TimeEvent timeEvent);
+			public void timeElapsed(int eventID);
 		}
 		'''
 	}

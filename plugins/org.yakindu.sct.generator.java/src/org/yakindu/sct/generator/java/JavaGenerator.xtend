@@ -24,9 +24,8 @@ class JavaGenerator implements IExecutionFlowGenerator {
 
 	@Inject extension Navigation
 	@Inject extension IStatemachine
-	@Inject extension ITimedStatemachine
-	@Inject extension ITimerService
-	@Inject extension TimeEventTemplate
+	@Inject extension ITimerCallback
+	@Inject extension ITimer
 	@Inject extension TimerService
 	@Inject extension GenmodelEntries
 	@Inject extension RuntimeService
@@ -38,9 +37,8 @@ class JavaGenerator implements IExecutionFlowGenerator {
 		flow.generateIStatemachine(entry, fsa)
 		
 		if (flow.timed) {
-			flow.generateITimedStatemachine(entry, fsa)
-			flow.generateITimerService(entry, fsa)
-			flow.generateTimeEvent(entry, fsa)
+			flow.generateITimerCallback(entry, fsa)
+			flow.generateITimer(entry, fsa)
 			if (entry.createTimerService) {
 				flow.generateTimerService(entry, fsa);
 			}

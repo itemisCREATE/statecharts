@@ -31,7 +31,6 @@ public class StatechartLocalReactionsStatemachine
 	public StatechartLocalReactionsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

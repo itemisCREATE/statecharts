@@ -64,7 +64,6 @@ public class OutEventLifeCycleStatemachine
 	public OutEventLifeCycleStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

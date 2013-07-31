@@ -26,6 +26,8 @@ import org.yakindu.sct.examples.trafficlight.cyclebased.trafficlightwaiting.Traf
 public class CrossingDemoCycleBased extends CrossingDemoBase {
 
 	private TrafficLightWaitingStatemachine statemachine;
+	
+	private TimerService timer;
 
 	public static void main(String[] args) {
 
@@ -36,7 +38,8 @@ public class CrossingDemoCycleBased extends CrossingDemoBase {
 	protected void setUpAndRunStatemachine() {
 
 		statemachine = new TrafficLightWaitingStatemachine();
-		statemachine.setTimerService(new TimerService());
+		timer = new TimerService();
+		statemachine.setTimer(timer);
 		statemachine.init();
 		statemachine.enter();
 		
@@ -46,7 +49,7 @@ public class CrossingDemoCycleBased extends CrossingDemoBase {
 	@Override
 	protected void tearDownStatemachine() {
 		// End TimerHandler and RuntimeService.
-		statemachine.getTimerService().cancel();
+		timer.cancel();
 		RuntimeService.getInstance().cancelTimer();
 	}
 

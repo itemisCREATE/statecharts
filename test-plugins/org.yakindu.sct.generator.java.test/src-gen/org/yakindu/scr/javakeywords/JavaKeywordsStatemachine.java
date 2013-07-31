@@ -507,7 +507,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	public JavaKeywordsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

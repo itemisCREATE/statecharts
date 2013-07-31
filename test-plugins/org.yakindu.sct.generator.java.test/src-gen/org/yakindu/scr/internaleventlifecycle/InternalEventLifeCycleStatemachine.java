@@ -42,7 +42,6 @@ public class InternalEventLifeCycleStatemachine
 	public InternalEventLifeCycleStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

@@ -325,7 +325,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 		sCInterface = new SCInterfaceImpl();
 		sCIIfA = new SCIIfAImpl();
-
 	}
 
 	public void init() {

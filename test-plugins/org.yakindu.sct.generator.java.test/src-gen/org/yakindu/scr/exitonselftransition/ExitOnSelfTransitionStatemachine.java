@@ -58,7 +58,6 @@ public class ExitOnSelfTransitionStatemachine
 	public ExitOnSelfTransitionStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

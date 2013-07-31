@@ -40,6 +40,7 @@ import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.UnaryOperator
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
+import java.util.List
 
 class ExpressionCode {
 	
@@ -47,6 +48,15 @@ class ExpressionCode {
 	@Inject extension Navigation
 	@Inject extension ISTextTypeSystem
 	@Inject extension ISTextTypeInferrer
+	
+	private var List<TimeEvent> timeEvents;
+	
+	def private getTimeEvents(TimeEvent it) {
+		if (timeEvents == null) {
+			timeEvents = flow.timeEvents
+		}
+		return timeEvents
+	}
 	
 	def dispatch String code(EObject it) '''
 		//ERROR: Template in ExpressionCode.xtend for class '«getClass().name»' not define.
@@ -217,7 +227,7 @@ class ExpressionCode {
 	}
 	
 	def dispatch String code(TimeEvent it) {
-		"timeEvents[" + name.asEscapedIdentifier + ".getIndex()]"
+		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
 	}
 	
 	def dispatch String getContext(Variable it) {

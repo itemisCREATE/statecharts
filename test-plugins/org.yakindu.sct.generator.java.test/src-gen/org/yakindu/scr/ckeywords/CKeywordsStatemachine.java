@@ -297,7 +297,6 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public CKeywordsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

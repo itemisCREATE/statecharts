@@ -31,7 +31,6 @@ public class SameNameDifferentRegionStatemachine
 	public SameNameDifferentRegionStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

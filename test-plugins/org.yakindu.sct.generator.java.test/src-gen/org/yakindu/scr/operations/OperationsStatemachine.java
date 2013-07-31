@@ -53,7 +53,6 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 
 		sCIInterface1 = new SCIInterface1Impl();
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

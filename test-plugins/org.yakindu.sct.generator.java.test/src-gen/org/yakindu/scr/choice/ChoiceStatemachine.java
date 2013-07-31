@@ -60,7 +60,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	public ChoiceStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

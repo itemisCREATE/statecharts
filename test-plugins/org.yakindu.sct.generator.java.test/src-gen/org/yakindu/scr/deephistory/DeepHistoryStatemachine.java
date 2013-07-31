@@ -86,7 +86,6 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 	public DeepHistoryStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

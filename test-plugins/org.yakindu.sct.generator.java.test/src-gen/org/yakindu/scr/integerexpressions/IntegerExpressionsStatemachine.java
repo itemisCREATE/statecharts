@@ -231,7 +231,6 @@ public class IntegerExpressionsStatemachine
 	public IntegerExpressionsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {
