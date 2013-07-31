@@ -29,7 +29,6 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	public SimpleEventStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

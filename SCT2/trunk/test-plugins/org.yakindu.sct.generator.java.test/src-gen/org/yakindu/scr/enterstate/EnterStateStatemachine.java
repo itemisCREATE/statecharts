@@ -43,7 +43,6 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	public EnterStateStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

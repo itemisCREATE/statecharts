@@ -49,7 +49,6 @@ public class GuardedExitStatemachine implements IGuardedExitStatemachine {
 	public GuardedExitStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

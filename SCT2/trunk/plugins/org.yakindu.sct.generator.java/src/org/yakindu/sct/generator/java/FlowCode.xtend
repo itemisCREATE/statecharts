@@ -16,11 +16,17 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import java.util.List
+import org.yakindu.sct.model.sexec.TimeEvent
 
 class FlowCode {
 	
 	@Inject extension Naming
 	@Inject extension ExpressionCode
+	@Inject extension SExecExtensions
+	
+	private var List<TimeEvent> timeEvents;
 	
 	def stepComment(Step it) '''
 		«IF comment != null && ! comment.empty»
@@ -51,12 +57,13 @@ class FlowCode {
 	
 	def dispatch code(ScheduleTimeEvent it) '''
 		«stepComment»
-		getTimerService().setTimer(«timeEvent.name.asEscapedIdentifier», «timeValue.code», cycleStartTime);
+		
+		timer.setTimer(this, «getTimeEvents.indexOf(timeEvent)», «timeValue.code», «IF timeEvent.periodic»true«ELSE»false«ENDIF»);
 	'''
 	
 	def dispatch code(UnscheduleTimeEvent it) '''
 		«stepComment»
-		getTimerService().resetTimer(«timeEvent.name.asEscapedIdentifier»);
+		timer.unsetTimer(this, «getTimeEvents.indexOf(timeEvent)»);
 	'''
 	
 	def dispatch code(Execution it) {
@@ -131,4 +138,11 @@ class FlowCode {
 		«stepComment»
 		historyVector[«region.historyVector.offset»] = stateVector[«region.stateVector.offset»];
 	'''
+	
+	def private getTimeEvents(Step it) {
+		if (timeEvents==null) {
+			timeEvents = flow.timeEvents
+		}
+		return timeEvents
+	}
 }

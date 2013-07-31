@@ -101,7 +101,6 @@ public class BooleanExpressionsStatemachine
 	public BooleanExpressionsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

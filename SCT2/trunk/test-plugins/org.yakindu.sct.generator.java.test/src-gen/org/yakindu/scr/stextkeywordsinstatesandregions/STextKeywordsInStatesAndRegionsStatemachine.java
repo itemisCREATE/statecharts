@@ -38,7 +38,6 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	public STextKeywordsInStatesAndRegionsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

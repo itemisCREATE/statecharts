@@ -79,7 +79,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	public ShallowHistoryStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

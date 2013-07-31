@@ -85,7 +85,6 @@ public class NamedInterfaceAccessStatemachine
 
 		sCISafe = new SCISafeImpl();
 		sCIUser = new SCIUserImpl();
-
 	}
 
 	public void init() {

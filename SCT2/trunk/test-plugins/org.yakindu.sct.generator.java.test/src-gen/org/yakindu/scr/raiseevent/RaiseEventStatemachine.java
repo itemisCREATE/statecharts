@@ -42,7 +42,6 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	public RaiseEventStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

@@ -251,7 +251,6 @@ public class AssignmentAsExpressionStatemachine
 	public AssignmentAsExpressionStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

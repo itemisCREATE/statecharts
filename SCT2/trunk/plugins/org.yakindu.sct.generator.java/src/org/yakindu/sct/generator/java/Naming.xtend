@@ -25,16 +25,16 @@ class Naming implements JavaKeywords {
 	
 	@Inject StextNameProvider provider;
 	
-	def iStatemachineClass() {
+	def iStatemachine() {
 		"IStatemachine"
 	}
 	
-	def iTimedStatemachineClass() {
-		"ITimedStatemachine"
+	def iTimerCallback() {
+		"ITimerCallback"
 	}
 	
-	def iTimerServiceClass() {
-		"I" + timerServiceClass
+	def iTimer() {
+		"ITimer"
 	}
 	
 	def timerServiceClass() {

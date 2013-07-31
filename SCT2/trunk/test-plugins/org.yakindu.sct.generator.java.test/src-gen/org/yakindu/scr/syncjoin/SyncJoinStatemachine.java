@@ -60,7 +60,6 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	public SyncJoinStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

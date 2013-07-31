@@ -53,7 +53,6 @@ public class GuardStatemachine implements IGuardStatemachine {
 	public GuardStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

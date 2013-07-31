@@ -29,7 +29,6 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	public SimpleHierachyStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

@@ -43,7 +43,6 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	public ExitStateStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

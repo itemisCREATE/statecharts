@@ -39,7 +39,6 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	public FeatureCallsStatemachine() {
 
 		sCIMyInterface = new SCIMyInterfaceImpl();
-
 	}
 
 	public void init() {

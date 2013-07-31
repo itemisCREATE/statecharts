@@ -109,7 +109,6 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 	public BitExpressionsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

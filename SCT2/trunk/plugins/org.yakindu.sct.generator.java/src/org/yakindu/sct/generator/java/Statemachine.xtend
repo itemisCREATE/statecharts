@@ -10,18 +10,17 @@
 package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
-import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgen.GeneratorEntry
 import java.util.List
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.Check
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.stext.Direction
+import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.model.sexec.Check
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 
 class Statemachine {
 	
@@ -31,7 +30,6 @@ class Statemachine {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension ISTextTypeSystem
 	@Inject extension FlowCode
-	@Inject extension SExecExtensions
 	
 	
 	@Inject Beautifier beautifier
@@ -85,8 +83,7 @@ class Statemachine {
 		import java.util.List;
 		«ENDIF»
 		«IF flow.timed»
-			import «entry.getBasePackageName()».TimeEvent;
-			import «entry.getBasePackageName()».ITimerService;
+			import «entry.getBasePackageName()».ITimer;
 		«ENDIF»
 	'''
 	
@@ -98,13 +95,8 @@ class Statemachine {
 			private «event.type.targetLanguageName» «event.valueIdentifier»;
 		«ENDIF»
 		«ENDFOR»
-		«var timeEvents = flow.timeEvents»
-		«FOR timeEvent: timeEvents»
-			private final TimeEvent «timeEvent.name.asEscapedIdentifier» = new TimeEvent(«timeEvent.periodic», «timeEvents.indexOf(timeEvent)»); 
-		«ENDFOR»
-	
 		«IF flow.timed»
-			private final boolean[] timeEvents = new boolean[«timeEvents.size»];
+			private final boolean[] timeEvents = new boolean[«flow.timeEvents.size»];
 		«ENDIF»
 	
 		«FOR scope : flow.interfaceScopes»
@@ -132,9 +124,7 @@ class Statemachine {
 		private int nextStateIndex;
 		
 		«IF flow.timed»
-		private ITimerService timerService;
-		
-		private long cycleStartTime;
+		private ITimer timer;
 		«ENDIF»
 		
 		«FOR internal : flow.internalScopes»
@@ -150,18 +140,14 @@ class Statemachine {
 			«FOR scope : flow.interfaceScopes»
 			«scope.interfaceName.asEscapedIdentifier» = new «scope.getInterfaceImplName()»();
 			«ENDFOR»
-			
-			«FOR timeEvent : flow.timeEvents»
-				«timeEvent.name.asEscapedIdentifier».setStatemachine(this);
-			«ENDFOR»
-			}
+		}
 	'''
 	
 	def private initFunction(ExecutionFlow flow) '''
 		public void init() {
 			«IF flow.timed»
-			if (timerService == null) {
-				throw new IllegalStateException("TimerService not set.");
+			if (timer == null) {
+				throw new IllegalStateException("timer not set.");
 			}
 			«ENDIF»
 			for (int i = 0; i < «flow.stateVector.size»; i++) {
@@ -227,16 +213,28 @@ class Statemachine {
 	
 	def private timingFunctions(ExecutionFlow flow) '''
 		«IF flow.timed»
-			public void setTimerService(ITimerService timerService) {
-				this.timerService = timerService;
+			/**
+			* Set the {@link ITimer} for the state machine. It must be set
+			* externally on a timed state machine before a run cycle can be correct
+			* executed.
+			* 
+			* @param timer
+			*/
+			public void setTimer(ITimer timer) {
+				this.timer = timer;
 			}
 			
-			public ITimerService getTimerService() {
-				return timerService;
+			/**
+			* Returns the currently used timer.
+			* 
+			* @return {@link ITimer}
+			*/
+			public ITimer getTimer() {
+				return timer;
 			}
 			
-			public void onTimeEventRaised(TimeEvent timeEvent) {
-				timeEvents[timeEvent.getIndex()] = true;
+			public void timeElapsed(int eventID) {
+				timeEvents[eventID] = true;
 			}
 		«ENDIF»
 	'''
@@ -457,10 +455,6 @@ class Statemachine {
 	def private runCycleFunction(ExecutionFlow flow) '''
 		public void runCycle() {
 			
-			«IF flow.timed»
-			cycleStartTime = timerService.getSystemTimeMillis();
-			
-			«ENDIF»
 			clearOutEvents();
 			
 			for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
@@ -485,10 +479,9 @@ class Statemachine {
 	def private enterFunction(ExecutionFlow it) '''
 		public void enter() {
 			«IF timed»
-			if (timerService == null) {
-				throw new IllegalStateException("TimerService not set.");
+			if (timer == null) {
+				throw new IllegalStateException("timer not set.");
 			}
-			cycleStartTime = timerService.getSystemTimeMillis();
 			«ENDIF»
 			«enterSequences.defaultSequence.code»
 		}

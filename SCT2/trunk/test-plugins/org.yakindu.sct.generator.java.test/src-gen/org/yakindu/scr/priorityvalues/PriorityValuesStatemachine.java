@@ -36,7 +36,6 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	public PriorityValuesStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

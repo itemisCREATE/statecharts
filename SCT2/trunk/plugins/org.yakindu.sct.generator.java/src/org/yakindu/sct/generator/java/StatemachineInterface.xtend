@@ -44,9 +44,9 @@ class StatemachineInterface {
 		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
 		import java.util.List;
 		«ENDIF»
-		import «entry.basePackageName».IStatemachine;
+		import «entry.basePackageName».«iStatemachine»;
 		«IF flow.timed»
-		import «entry.basePackageName».ITimedStatemachine;
+		import «entry.basePackageName».«iTimerCallback»;
 		«ENDIF»
 		
 		public interface «flow.statemachineInterfaceName» extends «flow.statemachineInterfaceExtensions» {
@@ -142,7 +142,7 @@ class StatemachineInterface {
 		'''
 		«FOR event : scope.eventDefinitions»
 			«IF  event.direction ==  Direction::IN»
-				««« IMPORTANT: An event not specifying a type is regarded to have a void type		
+				««« IMPORTANT: An event not specifying a type is regarded to have a void type
 				«IF event.type != null && !event.type.voidType»
 					public void raise«event.name.asName»(«event.type.targetLanguageName» value);
 				«ELSE»
@@ -173,10 +173,10 @@ class StatemachineInterface {
 		var String interfaces = "";
 
 		if (flow.timed) {
-			interfaces = interfaces + "ITimedStatemachine,"
+			interfaces = interfaces + iTimerCallback + ","
 		}
 
-		interfaces = interfaces + "IStatemachine"
+		interfaces = interfaces + iStatemachine
 		
 		return interfaces;
 	}

@@ -39,7 +39,6 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	public AlwaysOncycleStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

@@ -23,7 +23,7 @@ class IStatemachine {
 	extension GenmodelEntries
 	
 	def generateIStatemachine(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
-		fsa.generateFile(entry.basePackagePath + '/' + iStatemachineClass.java, content(entry))
+		fsa.generateFile(entry.basePackagePath + '/' + iStatemachine.java, content(entry))
 	}
 	
 	def private content(GeneratorEntry entry) {

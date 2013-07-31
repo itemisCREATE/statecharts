@@ -49,7 +49,6 @@ public class GuardedEntryStatemachine implements IGuardedEntryStatemachine {
 	public GuardedEntryStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {

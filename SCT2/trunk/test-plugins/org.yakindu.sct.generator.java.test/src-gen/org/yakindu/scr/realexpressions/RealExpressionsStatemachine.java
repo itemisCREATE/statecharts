@@ -231,7 +231,6 @@ public class RealExpressionsStatemachine
 	public RealExpressionsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
-
 	}
 
 	public void init() {
