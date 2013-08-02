@@ -27,6 +27,12 @@ class TraceExtensions {
 		rf.reaction = r
 		rf
 	}
+
+	def newTraceReactionWillFire(Reaction r) {
+		val rf = sexec.factory.createTraceReactionWillFire
+		rf.reaction = r
+		rf
+	}
 	
 	def newTraceNodeExecuted(ExecutionNode node) {
 		val t = sexec.factory.createTraceNodeExecuted

@@ -206,12 +206,27 @@ public class SequenceItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SEQUENCE__STEPS,
 				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SEQUENCE__STEPS,
+				 SexecFactory.eINSTANCE.createTraceReactionWillFire()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -232,16 +247,6 @@ public class SequenceItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.SEQUENCE__STEPS,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createSaveHistory()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.SEQUENCE__STEPS,
-				 SexecFactory.eINSTANCE.createHistoryEntry()));
 	}
 
 }

@@ -12,7 +12,8 @@ package org.yakindu.sct.simulation.ui.model.presenter;
 
 import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.*;
 
-
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
@@ -24,11 +25,14 @@ import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
 import org.yakindu.sct.model.sexec.TraceEndRunCycle;
 import org.yakindu.sct.model.sexec.TraceNodeExecuted;
+import org.yakindu.sct.model.sexec.TraceReactionWillFire;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
 import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
+
+
 
 import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
 
@@ -93,23 +97,37 @@ public class DefaultDynamicNotationHandler extends
 				trace.getNode().getSourceElement(),
 				HighlightingParameters.DEFAULT);
 	}
+	
+	
+	public void visualizeStep(final TraceReactionWillFire trace) {
+	}
 
+	
 	/** 
 	 * this dispatch method invokes the appropriate handler methods for the different trace step types. 
 	 */
 	public void visualizeStep(final Trace trace) {
 		if (trace instanceof TraceBeginRunCycle)
 			visualizeStep((TraceBeginRunCycle) trace);
-		if (trace instanceof TraceStateEntered)
+		else if (trace instanceof TraceStateEntered)
 			visualizeStep((TraceStateEntered) trace);
-		if (trace instanceof TraceStateExited)
+		else if (trace instanceof TraceStateExited)
 			visualizeStep((TraceStateExited) trace);
-		if (trace instanceof ReactionFired)
+		else if (trace instanceof ReactionFired)
 			visualizeStep((ReactionFired) trace);
-		if (trace instanceof TraceNodeExecuted)
+		else if (trace instanceof TraceNodeExecuted)
 			visualizeStep((TraceNodeExecuted) trace);
-		if (trace instanceof TraceEndRunCycle)
+		else if (trace instanceof TraceEndRunCycle)
 			visualizeStep((TraceEndRunCycle) trace);
+		else if (trace instanceof TraceReactionWillFire)
+			visualizeStep((TraceReactionWillFire) trace);
+		else {
+			SimulationActivator
+			.getDefault()
+			.getLog()
+			.log(new Status(IStatus.WARNING, SimulationActivator.PLUGIN_ID,
+					"ignored unknown trace step of type: " + trace.getClass().getName()));
+		}
 	}
 
 	

@@ -211,6 +211,14 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createStateCaseAdapter();
 			}
 			@Override
+			public Adapter caseSaveHistory(SaveHistory object) {
+				return createSaveHistoryAdapter();
+			}
+			@Override
+			public Adapter caseHistoryEntry(HistoryEntry object) {
+				return createHistoryEntryAdapter();
+			}
+			@Override
 			public Adapter caseTrace(Trace object) {
 				return createTraceAdapter();
 			}
@@ -221,6 +229,10 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseReactionFired(ReactionFired object) {
 				return createReactionFiredAdapter();
+			}
+			@Override
+			public Adapter caseTraceReactionWillFire(TraceReactionWillFire object) {
+				return createTraceReactionWillFireAdapter();
 			}
 			@Override
 			public Adapter caseTraceStateEntered(TraceStateEntered object) {
@@ -237,14 +249,6 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTraceEndRunCycle(TraceEndRunCycle object) {
 				return createTraceEndRunCycleAdapter();
-			}
-			@Override
-			public Adapter caseSaveHistory(SaveHistory object) {
-				return createSaveHistoryAdapter();
-			}
-			@Override
-			public Adapter caseHistoryEntry(HistoryEntry object) {
-				return createHistoryEntryAdapter();
 			}
 			@Override
 			public Adapter caseScopedElement(ScopedElement object) {
@@ -643,6 +647,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createReactionFiredAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sexec.TraceReactionWillFire <em>Trace Reaction Will Fire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sexec.TraceReactionWillFire
+	 * @generated
+	 */
+	public Adapter createTraceReactionWillFireAdapter() {
 		return null;
 	}
 

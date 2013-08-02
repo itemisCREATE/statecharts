@@ -425,7 +425,10 @@ class BehaviorMapping {
 
 		// map transition actions
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
-		if (trace.addTraceSteps) { sequence.steps += r.newTraceReactionFired() }
+		if (trace.addTraceSteps) { 
+			sequence.steps.add(0, t.create.newTraceReactionWillFire)
+			sequence.steps += r.newTraceReactionFired
+		}
 		
 
 		// define entry behavior of the transition
@@ -461,7 +464,10 @@ class BehaviorMapping {
 		// map transition actions
 		for ( t : transitions ) {
 			if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
-			if (trace.addTraceSteps) { sequence.steps += t.create.newTraceReactionFired() }
+			if (trace.addTraceSteps) { 
+				sequence.steps.add(0, t.create.newTraceReactionWillFire)
+				sequence.steps += t.create.newTraceReactionFired
+			}
 		}
 	
 	

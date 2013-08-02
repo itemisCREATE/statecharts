@@ -319,6 +319,22 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SexecPackage.SAVE_HISTORY: {
+				SaveHistory saveHistory = (SaveHistory)theEObject;
+				T result = caseSaveHistory(saveHistory);
+				if (result == null) result = caseStep(saveHistory);
+				if (result == null) result = caseNamedElement(saveHistory);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.HISTORY_ENTRY: {
+				HistoryEntry historyEntry = (HistoryEntry)theEObject;
+				T result = caseHistoryEntry(historyEntry);
+				if (result == null) result = caseStep(historyEntry);
+				if (result == null) result = caseNamedElement(historyEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case SexecPackage.TRACE: {
 				Trace trace = (Trace)theEObject;
 				T result = caseTrace(trace);
@@ -342,6 +358,15 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTrace(reactionFired);
 				if (result == null) result = caseStep(reactionFired);
 				if (result == null) result = caseNamedElement(reactionFired);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SexecPackage.TRACE_REACTION_WILL_FIRE: {
+				TraceReactionWillFire traceReactionWillFire = (TraceReactionWillFire)theEObject;
+				T result = caseTraceReactionWillFire(traceReactionWillFire);
+				if (result == null) result = caseTrace(traceReactionWillFire);
+				if (result == null) result = caseStep(traceReactionWillFire);
+				if (result == null) result = caseNamedElement(traceReactionWillFire);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -378,22 +403,6 @@ public class SexecSwitch<T> extends Switch<T> {
 				if (result == null) result = caseTrace(traceEndRunCycle);
 				if (result == null) result = caseStep(traceEndRunCycle);
 				if (result == null) result = caseNamedElement(traceEndRunCycle);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SexecPackage.SAVE_HISTORY: {
-				SaveHistory saveHistory = (SaveHistory)theEObject;
-				T result = caseSaveHistory(saveHistory);
-				if (result == null) result = caseStep(saveHistory);
-				if (result == null) result = caseNamedElement(saveHistory);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SexecPackage.HISTORY_ENTRY: {
-				HistoryEntry historyEntry = (HistoryEntry)theEObject;
-				T result = caseHistoryEntry(historyEntry);
-				if (result == null) result = caseStep(historyEntry);
-				if (result == null) result = caseNamedElement(historyEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -788,6 +797,21 @@ public class SexecSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseReactionFired(ReactionFired object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Trace Reaction Will Fire</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Trace Reaction Will Fire</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTraceReactionWillFire(TraceReactionWillFire object) {
 		return null;
 	}
 
