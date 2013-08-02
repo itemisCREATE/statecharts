@@ -1066,7 +1066,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTrace()
 	 * @generated
 	 */
-	int TRACE = 26;
+	int TRACE = 28;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceNodeExecutedImpl <em>Trace Node Executed</em>}' class.
@@ -1076,7 +1076,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceNodeExecuted()
 	 * @generated
 	 */
-	int TRACE_NODE_EXECUTED = 27;
+	int TRACE_NODE_EXECUTED = 29;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ReactionFiredImpl <em>Reaction Fired</em>}' class.
@@ -1086,7 +1086,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getReactionFired()
 	 * @generated
 	 */
-	int REACTION_FIRED = 28;
+	int REACTION_FIRED = 30;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateEnteredImpl <em>Trace State Entered</em>}' class.
@@ -1096,7 +1096,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateEntered()
 	 * @generated
 	 */
-	int TRACE_STATE_ENTERED = 29;
+	int TRACE_STATE_ENTERED = 32;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateExitedImpl <em>Trace State Exited</em>}' class.
@@ -1106,7 +1106,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceStateExited()
 	 * @generated
 	 */
-	int TRACE_STATE_EXITED = 30;
+	int TRACE_STATE_EXITED = 33;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceBeginRunCycleImpl <em>Trace Begin Run Cycle</em>}' class.
@@ -1116,7 +1116,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceBeginRunCycle()
 	 * @generated
 	 */
-	int TRACE_BEGIN_RUN_CYCLE = 31;
+	int TRACE_BEGIN_RUN_CYCLE = 34;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceEndRunCycleImpl <em>Trace End Run Cycle</em>}' class.
@@ -1126,7 +1126,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceEndRunCycle()
 	 * @generated
 	 */
-	int TRACE_END_RUN_CYCLE = 32;
+	int TRACE_END_RUN_CYCLE = 35;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.SaveHistoryImpl <em>Save History</em>}' class.
@@ -1136,7 +1136,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getSaveHistory()
 	 * @generated
 	 */
-	int SAVE_HISTORY = 33;
+	int SAVE_HISTORY = 26;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.HistoryEntryImpl <em>History Entry</em>}' class.
@@ -1146,7 +1146,7 @@ public interface SexecPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getHistoryEntry()
 	 * @generated
 	 */
-	int HISTORY_ENTRY = 34;
+	int HISTORY_ENTRY = 27;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.ExecutionSynchronizationImpl <em>Execution Synchronization</em>}' class.
@@ -1951,6 +1951,142 @@ public interface SexecPackage extends EPackage {
 	int STATE_CASE_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sexec.impl.TraceReactionWillFireImpl <em>Trace Reaction Will Fire</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sexec.impl.TraceReactionWillFireImpl
+	 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceReactionWillFire()
+	 * @generated
+	 */
+	int TRACE_REACTION_WILL_FIRE = 31;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__NAME = STEP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__CALLER = STEP__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__REGION = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Deep</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY__DEEP = STEP_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Save History</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SAVE_HISTORY_FEATURE_COUNT = STEP_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__NAME = STEP__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__COMMENT = STEP__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__CALLER = STEP__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Initial Step</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__INITIAL_STEP = STEP_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Deep</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__DEEP = STEP_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Region</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__REGION = STEP_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>History Step</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY__HISTORY_STEP = STEP_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>History Entry</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int HISTORY_ENTRY_FEATURE_COUNT = STEP_FEATURE_COUNT + 4;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2075,6 +2211,51 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int REACTION_FIRED_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REACTION_WILL_FIRE__NAME = TRACE__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REACTION_WILL_FIRE__COMMENT = TRACE__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Caller</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REACTION_WILL_FIRE__CALLER = TRACE__CALLER;
+
+	/**
+	 * The feature id for the '<em><b>Reaction</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REACTION_WILL_FIRE__REACTION = TRACE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Trace Reaction Will Fire</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TRACE_REACTION_WILL_FIRE_FEATURE_COUNT = TRACE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2237,132 +2418,6 @@ public interface SexecPackage extends EPackage {
 	 * @ordered
 	 */
 	int TRACE_END_RUN_CYCLE_FEATURE_COUNT = TRACE_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAVE_HISTORY__NAME = STEP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAVE_HISTORY__COMMENT = STEP__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Caller</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAVE_HISTORY__CALLER = STEP__CALLER;
-
-	/**
-	 * The feature id for the '<em><b>Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAVE_HISTORY__REGION = STEP_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Deep</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAVE_HISTORY__DEEP = STEP_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Save History</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SAVE_HISTORY_FEATURE_COUNT = STEP_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HISTORY_ENTRY__NAME = STEP__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HISTORY_ENTRY__COMMENT = STEP__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Caller</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HISTORY_ENTRY__CALLER = STEP__CALLER;
-
-	/**
-	 * The feature id for the '<em><b>Initial Step</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HISTORY_ENTRY__INITIAL_STEP = STEP_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Deep</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HISTORY_ENTRY__DEEP = STEP_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Region</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HISTORY_ENTRY__REGION = STEP_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>History Step</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HISTORY_ENTRY__HISTORY_STEP = STEP_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>History Entry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int HISTORY_ENTRY_FEATURE_COUNT = STEP_FEATURE_COUNT + 4;
 
 
 	/**
@@ -3142,6 +3197,27 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getReactionFired_Reaction();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceReactionWillFire <em>Trace Reaction Will Fire</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Trace Reaction Will Fire</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceReactionWillFire
+	 * @generated
+	 */
+	EClass getTraceReactionWillFire();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sexec.TraceReactionWillFire#getReaction <em>Reaction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reaction</em>'.
+	 * @see org.yakindu.sct.model.sexec.TraceReactionWillFire#getReaction()
+	 * @see #getTraceReactionWillFire()
+	 * @generated
+	 */
+	EReference getTraceReactionWillFire_Reaction();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sexec.TraceStateEntered <em>Trace State Entered</em>}'.
@@ -4030,6 +4106,24 @@ public interface SexecPackage extends EPackage {
 		 * @generated
 		 */
 		EReference REACTION_FIRED__REACTION = eINSTANCE.getReactionFired_Reaction();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceReactionWillFireImpl <em>Trace Reaction Will Fire</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sexec.impl.TraceReactionWillFireImpl
+		 * @see org.yakindu.sct.model.sexec.impl.SexecPackageImpl#getTraceReactionWillFire()
+		 * @generated
+		 */
+		EClass TRACE_REACTION_WILL_FIRE = eINSTANCE.getTraceReactionWillFire();
+
+		/**
+		 * The meta object literal for the '<em><b>Reaction</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TRACE_REACTION_WILL_FIRE__REACTION = eINSTANCE.getTraceReactionWillFire_Reaction();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sexec.impl.TraceStateEnteredImpl <em>Trace State Entered</em>}' class.

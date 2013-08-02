@@ -233,6 +233,15 @@ public interface SexecFactory extends EFactory {
 	ReactionFired createReactionFired();
 
 	/**
+	 * Returns a new object of class '<em>Trace Reaction Will Fire</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Trace Reaction Will Fire</em>'.
+	 * @generated
+	 */
+	TraceReactionWillFire createTraceReactionWillFire();
+
+	/**
 	 * Returns a new object of class '<em>Trace State Entered</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

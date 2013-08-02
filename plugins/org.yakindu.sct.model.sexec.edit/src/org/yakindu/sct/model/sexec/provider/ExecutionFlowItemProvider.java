@@ -432,12 +432,27 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
+				 SexecFactory.eINSTANCE.createTraceReactionWillFire()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -458,16 +473,6 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
-				 SexecFactory.eINSTANCE.createSaveHistory()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION,
-				 SexecFactory.eINSTANCE.createHistoryEntry()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -527,12 +532,27 @@ public class ExecutionFlowItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
+				 SexecFactory.eINSTANCE.createTraceReactionWillFire()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -553,16 +573,6 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
-				 SexecFactory.eINSTANCE.createSaveHistory()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
-				 SexecFactory.eINSTANCE.createHistoryEntry()));
 	}
 
 	/**

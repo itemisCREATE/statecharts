@@ -271,12 +271,27 @@ public class ReactionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.REACTION__EFFECT,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.REACTION__EFFECT,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.REACTION__EFFECT,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.REACTION__EFFECT,
 				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.REACTION__EFFECT,
+				 SexecFactory.eINSTANCE.createTraceReactionWillFire()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -297,16 +312,6 @@ public class ReactionItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.REACTION__EFFECT,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
-				 SexecFactory.eINSTANCE.createSaveHistory()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.REACTION__EFFECT,
-				 SexecFactory.eINSTANCE.createHistoryEntry()));
 	}
 
 	/**

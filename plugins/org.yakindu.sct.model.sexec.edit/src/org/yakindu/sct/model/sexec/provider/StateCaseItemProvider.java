@@ -233,12 +233,27 @@ public class StateCaseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.STATE_CASE__STEP,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATE_CASE__STEP,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.STATE_CASE__STEP,
+				 SexecFactory.eINSTANCE.createTraceReactionWillFire()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -259,16 +274,6 @@ public class StateCaseItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.STATE_CASE__STEP,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.STATE_CASE__STEP,
-				 SexecFactory.eINSTANCE.createSaveHistory()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.STATE_CASE__STEP,
-				 SexecFactory.eINSTANCE.createHistoryEntry()));
 	}
 
 	/**

@@ -61,7 +61,7 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	 */
 	public static SexecFactory init() {
 		try {
-			SexecFactory theSexecFactory = (SexecFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.yakindu.org/sct/sexec/1.0.0"); 
+			SexecFactory theSexecFactory = (SexecFactory)EPackage.Registry.INSTANCE.getEFactory(SexecPackage.eNS_URI);
 			if (theSexecFactory != null) {
 				return theSexecFactory;
 			}
@@ -115,14 +115,15 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 			case SexecPackage.UNSCHEDULE_TIME_EVENT: return createUnscheduleTimeEvent();
 			case SexecPackage.STATE_SWITCH: return createStateSwitch();
 			case SexecPackage.STATE_CASE: return createStateCase();
+			case SexecPackage.SAVE_HISTORY: return createSaveHistory();
+			case SexecPackage.HISTORY_ENTRY: return createHistoryEntry();
 			case SexecPackage.TRACE_NODE_EXECUTED: return createTraceNodeExecuted();
 			case SexecPackage.REACTION_FIRED: return createReactionFired();
+			case SexecPackage.TRACE_REACTION_WILL_FIRE: return createTraceReactionWillFire();
 			case SexecPackage.TRACE_STATE_ENTERED: return createTraceStateEntered();
 			case SexecPackage.TRACE_STATE_EXITED: return createTraceStateExited();
 			case SexecPackage.TRACE_BEGIN_RUN_CYCLE: return createTraceBeginRunCycle();
 			case SexecPackage.TRACE_END_RUN_CYCLE: return createTraceEndRunCycle();
-			case SexecPackage.SAVE_HISTORY: return createSaveHistory();
-			case SexecPackage.HISTORY_ENTRY: return createHistoryEntry();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -356,6 +357,16 @@ public class SexecFactoryImpl extends EFactoryImpl implements SexecFactory {
 	public ReactionFired createReactionFired() {
 		ReactionFiredImpl reactionFired = new ReactionFiredImpl();
 		return reactionFired;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TraceReactionWillFire createTraceReactionWillFire() {
+		TraceReactionWillFireImpl traceReactionWillFire = new TraceReactionWillFireImpl();
+		return traceReactionWillFire;
 	}
 
 	/**

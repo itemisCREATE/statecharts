@@ -137,21 +137,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="step" eType="#//Step" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Trace" abstract="true" eSuperTypes="#//Step"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TraceNodeExecuted" eSuperTypes="#//Trace">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ExecutionNode"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ReactionFired" eSuperTypes="#//Trace">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="reaction" eType="#//Reaction"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TraceStateEntered" eSuperTypes="#//Trace">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TraceStateExited" eSuperTypes="#//Trace">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TraceBeginRunCycle" eSuperTypes="#//Trace"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TraceEndRunCycle" eSuperTypes="#//Trace"/>
   <eClassifiers xsi:type="ecore:EClass" name="SaveHistory" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="region" eType="#//ExecutionRegion"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="deep" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -164,4 +149,22 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="historyStep" eType="#//Step"
         containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Trace" abstract="true" eSuperTypes="#//Step"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceNodeExecuted" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" eType="#//ExecutionNode"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReactionFired" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reaction" eType="#//Reaction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceReactionWillFire" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reaction" eType="#//Reaction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceStateEntered" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceStateExited" eSuperTypes="#//Trace">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="state" eType="#//ExecutionState"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceBeginRunCycle" eSuperTypes="#//Trace"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TraceEndRunCycle" eSuperTypes="#//Trace"/>
 </ecore:EPackage>

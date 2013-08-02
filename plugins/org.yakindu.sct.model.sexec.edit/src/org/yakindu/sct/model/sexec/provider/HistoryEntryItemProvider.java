@@ -262,12 +262,27 @@ public class HistoryEntryItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
 				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
+				 SexecFactory.eINSTANCE.createTraceReactionWillFire()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -288,16 +303,6 @@ public class HistoryEntryItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
-				 SexecFactory.eINSTANCE.createSaveHistory()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.HISTORY_ENTRY__INITIAL_STEP,
-				 SexecFactory.eINSTANCE.createHistoryEntry()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -357,12 +362,27 @@ public class HistoryEntryItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
+				 SexecFactory.eINSTANCE.createSaveHistory()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
+				 SexecFactory.eINSTANCE.createHistoryEntry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
 				 SexecFactory.eINSTANCE.createTraceNodeExecuted()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
 				 SexecFactory.eINSTANCE.createReactionFired()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
+				 SexecFactory.eINSTANCE.createTraceReactionWillFire()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -383,16 +403,6 @@ public class HistoryEntryItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
-				 SexecFactory.eINSTANCE.createSaveHistory()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.HISTORY_ENTRY__HISTORY_STEP,
-				 SexecFactory.eINSTANCE.createHistoryEntry()));
 	}
 
 	/**

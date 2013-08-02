@@ -13,5 +13,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sexec;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
- org.yakindu.sct.model.sgraph.edit;visibility:=reexport
+ org.yakindu.sct.model.sgraph.edit;visibility:=reexport,
+ org.yakindu.base.types;visibility:=reexport,
+ org.yakindu.base.types.edit;visibility:=reexport
 Bundle-ActivationPolicy: lazy

@@ -46,6 +46,7 @@ import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
 import org.yakindu.sct.model.sexec.TraceEndRunCycle;
 import org.yakindu.sct.model.sexec.TraceNodeExecuted;
+import org.yakindu.sct.model.sexec.TraceReactionWillFire;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
 import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
@@ -232,6 +233,13 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * @generated
 	 */
 	private EClass reactionFiredEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass traceReactionWillFireEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1029,6 +1037,24 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTraceReactionWillFire() {
+		return traceReactionWillFireEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTraceReactionWillFire_Reaction() {
+		return (EReference)traceReactionWillFireEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTraceStateEntered() {
 		return traceStateEnteredEClass;
 	}
@@ -1352,6 +1378,16 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		createEReference(stateCaseEClass, STATE_CASE__STATE);
 		createEReference(stateCaseEClass, STATE_CASE__STEP);
 
+		saveHistoryEClass = createEClass(SAVE_HISTORY);
+		createEReference(saveHistoryEClass, SAVE_HISTORY__REGION);
+		createEAttribute(saveHistoryEClass, SAVE_HISTORY__DEEP);
+
+		historyEntryEClass = createEClass(HISTORY_ENTRY);
+		createEReference(historyEntryEClass, HISTORY_ENTRY__INITIAL_STEP);
+		createEAttribute(historyEntryEClass, HISTORY_ENTRY__DEEP);
+		createEReference(historyEntryEClass, HISTORY_ENTRY__REGION);
+		createEReference(historyEntryEClass, HISTORY_ENTRY__HISTORY_STEP);
+
 		traceEClass = createEClass(TRACE);
 
 		traceNodeExecutedEClass = createEClass(TRACE_NODE_EXECUTED);
@@ -1359,6 +1395,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		reactionFiredEClass = createEClass(REACTION_FIRED);
 		createEReference(reactionFiredEClass, REACTION_FIRED__REACTION);
+
+		traceReactionWillFireEClass = createEClass(TRACE_REACTION_WILL_FIRE);
+		createEReference(traceReactionWillFireEClass, TRACE_REACTION_WILL_FIRE__REACTION);
 
 		traceStateEnteredEClass = createEClass(TRACE_STATE_ENTERED);
 		createEReference(traceStateEnteredEClass, TRACE_STATE_ENTERED__STATE);
@@ -1369,16 +1408,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		traceBeginRunCycleEClass = createEClass(TRACE_BEGIN_RUN_CYCLE);
 
 		traceEndRunCycleEClass = createEClass(TRACE_END_RUN_CYCLE);
-
-		saveHistoryEClass = createEClass(SAVE_HISTORY);
-		createEReference(saveHistoryEClass, SAVE_HISTORY__REGION);
-		createEAttribute(saveHistoryEClass, SAVE_HISTORY__DEEP);
-
-		historyEntryEClass = createEClass(HISTORY_ENTRY);
-		createEReference(historyEntryEClass, HISTORY_ENTRY__INITIAL_STEP);
-		createEAttribute(historyEntryEClass, HISTORY_ENTRY__DEEP);
-		createEReference(historyEntryEClass, HISTORY_ENTRY__REGION);
-		createEReference(historyEntryEClass, HISTORY_ENTRY__HISTORY_STEP);
 	}
 
 	/**
@@ -1442,15 +1471,16 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		scheduleTimeEventEClass.getESuperTypes().add(this.getStep());
 		unscheduleTimeEventEClass.getESuperTypes().add(this.getStep());
 		stateSwitchEClass.getESuperTypes().add(this.getStep());
+		saveHistoryEClass.getESuperTypes().add(this.getStep());
+		historyEntryEClass.getESuperTypes().add(this.getStep());
 		traceEClass.getESuperTypes().add(this.getStep());
 		traceNodeExecutedEClass.getESuperTypes().add(this.getTrace());
 		reactionFiredEClass.getESuperTypes().add(this.getTrace());
+		traceReactionWillFireEClass.getESuperTypes().add(this.getTrace());
 		traceStateEnteredEClass.getESuperTypes().add(this.getTrace());
 		traceStateExitedEClass.getESuperTypes().add(this.getTrace());
 		traceBeginRunCycleEClass.getESuperTypes().add(this.getTrace());
 		traceEndRunCycleEClass.getESuperTypes().add(this.getTrace());
-		saveHistoryEClass.getESuperTypes().add(this.getStep());
-		historyEntryEClass.getESuperTypes().add(this.getStep());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(mappedElementEClass, MappedElement.class, "MappedElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1555,6 +1585,16 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEReference(getStateCase_State(), this.getExecutionState(), null, "state", null, 0, 1, StateCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStateCase_Step(), this.getStep(), null, "step", null, 0, 1, StateCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(saveHistoryEClass, SaveHistory.class, "SaveHistory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSaveHistory_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, SaveHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getSaveHistory_Deep(), ecorePackage.getEBoolean(), "deep", null, 0, 1, SaveHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(historyEntryEClass, HistoryEntry.class, "HistoryEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getHistoryEntry_InitialStep(), this.getStep(), null, "initialStep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getHistoryEntry_Deep(), ecorePackage.getEBoolean(), "deep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getHistoryEntry_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getHistoryEntry_HistoryStep(), this.getStep(), null, "historyStep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(traceEClass, Trace.class, "Trace", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(traceNodeExecutedEClass, TraceNodeExecuted.class, "TraceNodeExecuted", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1562,6 +1602,9 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 
 		initEClass(reactionFiredEClass, ReactionFired.class, "ReactionFired", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getReactionFired_Reaction(), this.getReaction(), null, "reaction", null, 0, 1, ReactionFired.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(traceReactionWillFireEClass, TraceReactionWillFire.class, "TraceReactionWillFire", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTraceReactionWillFire_Reaction(), this.getReaction(), null, "reaction", null, 0, 1, TraceReactionWillFire.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(traceStateEnteredEClass, TraceStateEntered.class, "TraceStateEntered", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTraceStateEntered_State(), this.getExecutionState(), null, "state", null, 0, 1, TraceStateEntered.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1572,16 +1615,6 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		initEClass(traceBeginRunCycleEClass, TraceBeginRunCycle.class, "TraceBeginRunCycle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(traceEndRunCycleEClass, TraceEndRunCycle.class, "TraceEndRunCycle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(saveHistoryEClass, SaveHistory.class, "SaveHistory", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSaveHistory_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, SaveHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getSaveHistory_Deep(), ecorePackage.getEBoolean(), "deep", null, 0, 1, SaveHistory.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(historyEntryEClass, HistoryEntry.class, "HistoryEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getHistoryEntry_InitialStep(), this.getStep(), null, "initialStep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getHistoryEntry_Deep(), ecorePackage.getEBoolean(), "deep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryEntry_Region(), this.getExecutionRegion(), null, "region", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getHistoryEntry_HistoryStep(), this.getStep(), null, "historyStep", null, 0, 1, HistoryEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);
