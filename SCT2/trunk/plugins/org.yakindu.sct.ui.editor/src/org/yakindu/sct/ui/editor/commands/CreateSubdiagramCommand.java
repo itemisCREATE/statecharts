@@ -81,8 +81,11 @@ public class CreateSubdiagramCommand extends AbstractHandler {
 		if (selection == null)
 			return false;
 		Node unwrap = unwrap(selection);
+		if (unwrap == null) {
+			return false;
+		}
 		State state = (State) unwrap.getElement();
-		if (state.isComposite())
+		if (state==null || state.isComposite())
 			return false;
 		BooleanValueStyle inlineStyle = DiagramPartitioningUtil.getInlineStyle(unwrap);
 		if (inlineStyle != null && !inlineStyle.isBooleanValue())
