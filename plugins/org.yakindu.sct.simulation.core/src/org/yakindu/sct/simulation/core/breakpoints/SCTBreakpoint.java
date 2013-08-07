@@ -37,6 +37,7 @@ public class SCTBreakpoint extends Breakpoint {
 	public static final String EOBJECT_URI = " org.yakindu.sct.simulation.core.breakpoint.eobjectrui";
 	private static final String ELEMENT_ID = "elementId";
 	private static final String EXPRESSION = " org.yakindu.sct.simulation.core.breakpoints.expression";
+	private static final String CONDITIONAL = " org.yakindu.sct.simulation.core.breakpoints.conditional";
 
 	private transient EObject semanticObject;
 
@@ -105,11 +106,22 @@ public class SCTBreakpoint extends Breakpoint {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+	}
 
+	public void setConditional(boolean conditional) {
+		try {
+			setAttribute(CONDITIONAL, conditional);
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getExpression() {
 		return getMarker().getAttribute(EXPRESSION, "");
+	}
+
+	public boolean isConditional() {
+		return getMarker().getAttribute(CONDITIONAL, false);
 	}
 
 }

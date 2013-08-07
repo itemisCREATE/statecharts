@@ -27,6 +27,7 @@
     <persistent value="true"/>
       <attribute name="message"/>
       <attribute name="elementId"/>
+      <attribute name="conditional"/>
       <attribute name="expression"/>
  </extension>
 </plugin>
