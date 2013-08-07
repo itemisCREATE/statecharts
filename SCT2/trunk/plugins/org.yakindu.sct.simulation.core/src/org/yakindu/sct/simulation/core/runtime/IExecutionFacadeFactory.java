@@ -11,7 +11,6 @@
 package org.yakindu.sct.simulation.core.runtime;
 
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Statement;
 
 /**
  * 
@@ -24,7 +23,4 @@ public interface IExecutionFacadeFactory {
 	
 	public boolean isApplicable(Statechart statechart);
 	
-	//TODO:
-	public boolean evaluate(Statement expression, IExecutionContext context);
-
 }
