@@ -19,16 +19,16 @@ import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
-import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.simulation.core.breakpoints.SCTBreakpoint;
-import org.yakindu.sct.ui.integration.stext.ExpressionExpressionProvider;
+import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
+import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
@@ -47,24 +47,20 @@ public class SCTBreakpointDetailPane implements IDetailPane, IContextElementProv
 	private SCTBreakpoint sctBreakpoint;
 
 	public void init(IWorkbenchPartSite partSite) {
-		
+
 	}
 
 	public Control createControl(Composite parent) {
 		parent.setBackground(ColorConstants.white);
 		final StyledText txt = new StyledText(parent, SWT.BORDER | SWT.MULTI);
-		txt.addFocusListener(new FocusListener() {
-
+		txt.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				sctBreakpoint.setExpression((Statement) adapter.getFakeResourceContext().getFakeResource()
-						.getParseResult().getRootASTElement());
-			}
-
-			public void focusGained(FocusEvent e) {
-
+				sctBreakpoint.setExpression(txt.getText());
 			}
 		});
-		ExpressionExpressionProvider provider = new ExpressionExpressionProvider();
+		// TODO:
+		IExpressionLanguageProvider provider = ExpressionLanguageProviderExtensions.getLanguageProvider(
+				"breakpointCondition", "sct");
 		adapter = new StyledTextXtextAdapter(provider.getInjector());
 		adapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
 		adapter.adapt(txt);

@@ -1,6 +1,6 @@
 package org.yakindu.sct.ui.integration.stext;
 
-import org.yakindu.sct.model.stext.stext.TransitionSpecification;
+import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.ui.editor.extensions.AbstractExpressionsProvider;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 import org.yakindu.sct.ui.integration.stext.modules.EntryRuleRuntimeModule;
@@ -13,15 +13,15 @@ import com.google.inject.Module;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class TransitionExpressionProvider extends AbstractExpressionsProvider implements IExpressionLanguageProvider {
+public class ExpressionExpressionProvider extends AbstractExpressionsProvider implements IExpressionLanguageProvider {
 
 	@Override
 	protected Module getRuntimeModule() {
-		return new EntryRuleRuntimeModule(TransitionSpecification.class);
+		return new EntryRuleRuntimeModule(Expression.class);
 	}
 
 	@Override
 	protected Module getUIModule() {
-		return new EntryRuleUIModule(ExtensionsActivator.getDefault(), TransitionSpecification.class);
+		return new EntryRuleUIModule(ExtensionsActivator.getDefault(), Expression.class);
 	}
 }

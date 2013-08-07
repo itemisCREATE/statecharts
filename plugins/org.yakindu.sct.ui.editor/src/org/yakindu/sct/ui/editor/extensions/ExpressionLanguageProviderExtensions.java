@@ -31,9 +31,10 @@ public class ExpressionLanguageProviderExtensions {
 	private static final String ATTR_RESOURCE_EXTENSION = "resourceExtension";
 
 	private static final String ATTR_SEMANTIC_TARGET = "semanticTarget";
-	
+
 	private static final Map<String, IExpressionLanguageProvider> providerMap = new HashMap<String, IExpressionLanguageProvider>();
 
+	@Deprecated
 	public enum SemanticTarget {
 		StatechartSpecification, StateSpecification, TransitionSpecification
 	}
@@ -42,29 +43,19 @@ public class ExpressionLanguageProviderExtensions {
 		// Not intended to be instantiated
 	}
 
-	/**
-	 * Returns all registered {@link IExpressionLanguageProvider}s
-	 * 
-	 */
-	public static IExpressionLanguageProvider getRegisteredProvider(
-			SemanticTarget target, String resourceExtension) {
-		IConfigurationElement[] configurationElements = Platform
-				.getExtensionRegistry().getConfigurationElementsFor(
-						EXPRESSIONS_EXTENSION);
+	public static IExpressionLanguageProvider getLanguageProvider(String target, String resourceExtension) {
+		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(
+				EXPRESSIONS_EXTENSION);
 		for (IConfigurationElement configurationElement : configurationElements) {
 			try {
-				String semanticTarget = configurationElement
-						.getAttribute(ATTR_SEMANTIC_TARGET);
-				String registeredExtension = configurationElement
-						.getAttribute(ATTR_RESOURCE_EXTENSION);
-				if (SemanticTarget.valueOf(semanticTarget) == target
-						&& resourceExtension.equals(registeredExtension)) {
-					
-					String key = target.name()+configurationElement.getNamespaceIdentifier();
-					if (providerMap.get(key)!=null) {
+				String semanticTarget = configurationElement.getAttribute(ATTR_SEMANTIC_TARGET);
+				String registeredExtension = configurationElement.getAttribute(ATTR_RESOURCE_EXTENSION);
+				if (target.equals(semanticTarget) && resourceExtension.equals(registeredExtension)) {
+
+					String key = target + configurationElement.getNamespaceIdentifier();
+					if (providerMap.get(key) != null) {
 						return providerMap.get(key);
-					}
-					else {
+					} else {
 						IExpressionLanguageProvider provider = (IExpressionLanguageProvider) configurationElement
 								.createExecutableExtension(ATTR_CLASS);
 						providerMap.put(key, provider);
@@ -76,5 +67,13 @@ public class ExpressionLanguageProviderExtensions {
 			}
 		}
 		return new IExpressionLanguageProvider.NullLanguageProvider();
+	}
+
+	@Deprecated
+	/**
+	 * Deprecated, use getLanguageProvider instead.
+	 */
+	public static IExpressionLanguageProvider getRegisteredProvider(SemanticTarget target, String resourceExtension) {
+		return getLanguageProvider(target.name(), resourceExtension);
 	}
 }

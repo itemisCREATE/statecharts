@@ -181,7 +181,7 @@
          <context decoratorTargets="PRIMARY_VIEW"/>
       </decoratorProvider>
    </extension>
-  <!-- Breakpoint Detail Pane factory 
+  <!-- Breakpoint Detail Pane factory -->
   <extension point="org.eclipse.debug.ui.detailPaneFactories">
        <detailFactories
              class="org.yakindu.sct.simulation.ui.breakpoints.SCTDetailPaneFactory"
@@ -201,7 +201,4 @@
        </enablement>
        </detailFactories>
 </extension>
--->
-   
-  
 </plugin>
