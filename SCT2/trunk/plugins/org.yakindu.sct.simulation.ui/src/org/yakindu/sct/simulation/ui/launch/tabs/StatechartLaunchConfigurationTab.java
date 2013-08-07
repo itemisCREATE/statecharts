@@ -10,12 +10,15 @@
  */
 package org.yakindu.sct.simulation.ui.launch.tabs;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunchConfiguration;
@@ -43,8 +46,7 @@ import org.yakindu.sct.simulation.ui.SimulationImages;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
-		IStatechartLaunchParameters {
+public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements IStatechartLaunchParameters {
 
 	private Text modelfile;
 	private Text cyclePeriod;
@@ -74,8 +76,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		propertyGroup.setLayout(new GridLayout(1, false));
 		operationClass = new Text(propertyGroup, SWT.BORDER);
 		operationClass.addListener(SWT.Modify, new UpdateListener());
-		GridDataFactory.fillDefaults().grab(true, false)
-				.applyTo(operationClass);
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(operationClass);
 	}
 
 	private void createExecutionTypeControls(Composite parent) {
@@ -122,9 +123,17 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		browse.setText("Search");
 		browse.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				ResourceListSelectionDialog dialog = new ResourceListSelectionDialog(
-						getShell(), ResourcesPlugin.getWorkspace().getRoot(),
-						IResource.FILE);
+				ResourceListSelectionDialog dialog = new ResourceListSelectionDialog(getShell(),
+						getStatechartResources()) {
+					@Override
+					protected String adjustPattern() {
+						String pattern = super.adjustPattern();
+						if (pattern.equals("")) {
+							return "*";
+						}
+						return pattern;
+					}
+				};
 				dialog.setTitle("Select Statechart model");
 				dialog.setMessage("Please select the YAKINDU statechart model file you want to execute.");
 				if (dialog.open() == 0) {
@@ -132,6 +141,23 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 					IFile file = (IFile) files[0];
 					modelfile.setText((file.getFullPath().toString()));
 				}
+			}
+
+			private IResource[] getStatechartResources() {
+				final List<IResource> resources = new ArrayList<IResource>();
+				try {
+					ResourcesPlugin.getWorkspace().getRoot().accept(new IResourceVisitor() {
+						public boolean visit(IResource resource) throws CoreException {
+							if ("sct".equalsIgnoreCase(resource.getFileExtension())) {
+								resources.add(resource);
+							}
+							return true;
+						}
+					});
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+				return resources.toArray(new IResource[0]);
 			}
 		});
 		GridDataFactory.fillDefaults().applyTo(browse);
@@ -142,16 +168,11 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 
 	public void initializeFrom(ILaunchConfiguration configuration) {
 		try {
-			modelfile.setText(configuration.getAttribute(FILE_NAME,
-					DEFAULT_FILE_NAME));
-			operationClass.setText(configuration.getAttribute(OPERATION_CLASS,
-					DEFAULT_OPERATION_CLASS));
-			cyclePeriod.setText(String.valueOf(configuration.getAttribute(
-					CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD)));
-			btnCycle.setSelection(configuration.getAttribute(IS_CYCLE_BASED,
-					DEFAULT_IS_CYCLE_BASED));
-			btnEvent.setSelection(configuration.getAttribute(IS_EVENT_DRIVEN,
-					DEFAULT_IS_EVENT_DRIVEN));
+			modelfile.setText(configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME));
+			operationClass.setText(configuration.getAttribute(OPERATION_CLASS, DEFAULT_OPERATION_CLASS));
+			cyclePeriod.setText(String.valueOf(configuration.getAttribute(CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD)));
+			btnCycle.setSelection(configuration.getAttribute(IS_CYCLE_BASED, DEFAULT_IS_CYCLE_BASED));
+			btnEvent.setSelection(configuration.getAttribute(IS_EVENT_DRIVEN, DEFAULT_IS_EVENT_DRIVEN));
 			cyclePeriod.setEnabled(btnCycle.getSelection());
 		} catch (CoreException e) {
 			e.printStackTrace();
@@ -184,7 +205,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 	protected Set<String> getOperationClasses() {
 		String operationClasses = this.operationClass.getText();
 		Set<String> result = new HashSet<String>();
-		if ( operationClasses.trim().length() > 0 ) {
+		if (operationClasses.trim().length() > 0) {
 			String[] split = operationClasses.split(",");
 			for (String string : split) {
 				result.add(string.trim());
@@ -215,27 +236,22 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 		if (operationClasses.size() > 0) {
 			for (String clazz : operationClasses) {
 				// check if class exists
-				IProject project = ResourcesPlugin.getWorkspace().getRoot()
-						.findMember(model).getProject();
+				IProject project = ResourcesPlugin.getWorkspace().getRoot().findMember(model).getProject();
 				if (project != null) {
-					ClassLoader classLoader = new WorkspaceClassLoaderFactory()
-							.createClassLoader(project, getClass()
-									.getClassLoader());
+					ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(project, getClass()
+							.getClassLoader());
 					try {
 						Class<?> loadClass = classLoader.loadClass(clazz);
 						loadClass.newInstance();
 					} catch (ClassNotFoundException e) {
-						setErrorMessage("Class " + clazz
-								+ " not found in project " + project.getName()
-								+ "!");
+						setErrorMessage("Class " + clazz + " not found in project " + project.getName() + "!");
 						return false;
 					} catch (InstantiationException e) {
 						setErrorMessage("Could not instantiate class " + clazz
 								+ "! (No default constructor available?) ");
 						return false;
 					} catch (IllegalAccessException e) {
-						setErrorMessage("Could not access class constructor for class"
-								+ clazz + "!");
+						setErrorMessage("Could not access class constructor for class" + clazz + "!");
 						return false;
 					}
 				}
@@ -263,8 +279,7 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements
 	private class UpdateListener implements Listener {
 
 		public void handleEvent(Event event) {
-			StatechartLaunchConfigurationTab.this
-					.updateLaunchConfigurationDialog();
+			StatechartLaunchConfigurationTab.this.updateLaunchConfigurationDialog();
 		}
 
 	}
