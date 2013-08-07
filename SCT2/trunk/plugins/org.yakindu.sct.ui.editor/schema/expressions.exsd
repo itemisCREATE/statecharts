@@ -66,22 +66,12 @@
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="semanticTarget" use="required">
+         <attribute name="semanticTarget" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
             </annotation>
-            <simpleType>
-               <restriction base="string">
-                  <enumeration value="StatechartSpecification">
-                  </enumeration>
-                  <enumeration value="StateSpecification">
-                  </enumeration>
-                  <enumeration value="TransitionSpecification">
-                  </enumeration>
-               </restriction>
-            </simpleType>
          </attribute>
       </complexType>
    </element>

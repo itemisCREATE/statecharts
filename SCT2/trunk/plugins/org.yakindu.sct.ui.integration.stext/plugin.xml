@@ -18,5 +18,10 @@
             resourceExtension="sct"
             semanticTarget="TransitionSpecification">
       </ExpressionLanguageProvider>
+      <ExpressionLanguageProvider
+            class="org.yakindu.sct.ui.integration.stext.ExpressionExpressionProvider"
+            resourceExtension="sct"
+            semanticTarget="breakpointCondition">
+      </ExpressionLanguageProvider>
    </extension>
 </plugin>

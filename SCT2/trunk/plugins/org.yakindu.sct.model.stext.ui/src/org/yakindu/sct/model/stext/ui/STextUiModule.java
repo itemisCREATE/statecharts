@@ -7,6 +7,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistC
 import org.eclipse.xtext.ui.editor.hover.DispatchingEObjectTextHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
+import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
@@ -117,5 +118,9 @@ public class STextUiModule extends
 		} else {
 			return ResourceForIEditorInputFactory.class;
 		}
+	}
+	
+	public Class<? extends org.eclipse.jface.text.ITextHover> bindITextHover() {
+		return ProblemAnnotationHover.class;
 	}
 }

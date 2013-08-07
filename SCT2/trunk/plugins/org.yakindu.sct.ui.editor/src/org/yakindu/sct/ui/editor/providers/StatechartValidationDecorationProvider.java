@@ -10,41 +10,18 @@
  */
 package org.yakindu.sct.ui.editor.providers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.draw2d.FlowLayout;
 import org.eclipse.draw2d.Label;
-import org.eclipse.emf.transaction.util.TransactionUtil;
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.gef.EditDomain;
-import org.eclipse.gef.EditPart;
-import org.eclipse.gef.editparts.AbstractConnectionEditPart;
-import org.eclipse.gmf.runtime.common.core.service.AbstractProvider;
-import org.eclipse.gmf.runtime.common.core.service.IOperation;
-import org.eclipse.gmf.runtime.common.ui.resources.FileChangeManager;
-import org.eclipse.gmf.runtime.common.ui.resources.IFileObserver;
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
-import org.eclipse.gmf.runtime.diagram.ui.editparts.GraphicalEditPart;
-import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
-import org.eclipse.gmf.runtime.diagram.ui.services.decorator.AbstractDecorator;
-import org.eclipse.gmf.runtime.diagram.ui.services.decorator.CreateDecoratorsOperation;
-import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecorator;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorProvider;
 import org.eclipse.gmf.runtime.diagram.ui.services.decorator.IDecoratorTarget;
-import org.eclipse.gmf.runtime.draw2d.ui.mapmode.MapModeUtil;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.Edge;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 import org.yakindu.sct.model.sgraph.FinalState;
@@ -52,147 +29,53 @@ import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.validation.IMarkerType;
 
-import com.google.common.collect.Lists;
+import de.itemis.gmf.runtime.commons.decorators.AbstractMarkerBasedDecorationProvider;
 
-/**
- * 
- * This class is copied from GMF Generator code...
- * 
- * TODO: Move common code to gmf.runtime.commons
- */
-@SuppressWarnings("all")
-public class StatechartValidationDecorationProvider extends AbstractProvider
-		implements IDecoratorProvider, IMarkerType {
+public class StatechartValidationDecorationProvider extends AbstractMarkerBasedDecorationProvider implements
+		IDecoratorProvider, IMarkerType {
 
-	private static final String KEY = "validationStatus";
+	private static final String KEY = "org.yakindu.sct.ui.editor.validation";
 
-	private static MarkerObserver fileObserver;
-
-	private static Map<String, List<IDecorator>> allDecorators = new HashMap<String, List<IDecorator>>();
-
-	public void createDecorators(IDecoratorTarget decoratorTarget) {
-		EditPart editPart = (EditPart) decoratorTarget
-				.getAdapter(EditPart.class);
-		if (editPart instanceof GraphicalEditPart
-				|| editPart instanceof AbstractConnectionEditPart) {
-			Object model = editPart.getModel();
-			if ((model instanceof View)) {
-				View view = (View) model;
-			}
-			EditDomain ed = editPart.getViewer().getEditDomain();
-			if (!(ed instanceof DiagramEditDomain)) {
-				return;
-			}
-			if (((DiagramEditDomain) ed).getEditorPart() instanceof StatechartDiagramEditor) {
-				decoratorTarget.installDecorator(KEY, new StatusDecorator(
-						decoratorTarget));
-			}
-		}
+	@Override
+	protected boolean shouldInstall(IEditorPart part) {
+		return part instanceof StatechartDiagramEditor;
 	}
 
-	public boolean provides(IOperation operation) {
-		if (!(operation instanceof CreateDecoratorsOperation)) {
-			return false;
-		}
-		IDecoratorTarget decoratorTarget = ((CreateDecoratorsOperation) operation)
-				.getDecoratorTarget();
-		View view = (View) decoratorTarget.getAdapter(View.class);
-		return view != null;
+	@Override
+	protected String getDecoratorKey() {
+		return KEY;
 	}
 
-	public static void refreshDecorators(View view) {
-		refreshDecorators(ViewUtil.getIdStr(view), view.getDiagram());
+	@Override
+	protected StatusDecorator createStatusDecorator(IDecoratorTarget decoratorTarget) {
+		return new ValidationDecorator(decoratorTarget);
 	}
 
-	private static void refreshDecorators(String viewId, Diagram diagram) {
-		final List decorators = viewId != null ? (List) allDecorators
-				.get(viewId) : null;
-		if (decorators == null || decorators.isEmpty() || diagram == null) {
-			return;
-		}
-		final Diagram fdiagram = diagram;
-		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
+	public static class ValidationDecorator extends StatusDecorator {
 
-			public void run() {
-				for (Iterator it = decorators.iterator(); it.hasNext();) {
-					IDecorator decorator = (IDecorator) it.next();
-					decorator.refresh();
-				}
-			}
-		});
-	}
-
-	public static class StatusDecorator extends AbstractDecorator {
-
-		private String viewId;
-
-		public StatusDecorator(IDecoratorTarget decoratorTarget) {
+		public ValidationDecorator(IDecoratorTarget decoratorTarget) {
 			super(decoratorTarget);
-			try {
-				final View view = (View) getDecoratorTarget().getAdapter(
-						View.class);
-				TransactionUtil.getEditingDomain(view).runExclusive(
-						new Runnable() {
-
-							public void run() {
-								StatusDecorator.this.viewId = view != null ? ViewUtil
-										.getIdStr(view) : null;
-							}
-						});
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 
-		public void refresh() {
-			removeDecoration();
-			View view = (View) getDecoratorTarget().getAdapter(View.class);
-			if (view == null || view.eResource() == null) {
-				return;
-			}
-			EditPart editPart = (EditPart) getDecoratorTarget().getAdapter(
-					EditPart.class);
-			if (editPart == null || editPart.getViewer() == null) {
-				return;
-			}
-
-			// query for all the validation markers of the current resource
+		@Override
+		protected void createDecorators(View view, List<IMarker> markers) {
 			String elementId = ViewUtil.getIdStr(view);
 			if (elementId == null) {
 				return;
 			}
 			int severity = IMarker.SEVERITY_INFO;
 			IMarker foundMarker = null;
-			IResource resource = WorkspaceSynchronizer
-					.getFile(view.eResource());
-			if (resource == null || !resource.exists()) {
-				return;
-			}
-			List<IMarker> markers = Lists.newArrayList();
-			try {
-				markers.addAll(Arrays.asList(resource.findMarkers(
-						SCT_MARKER_TYPE, true, IResource.DEPTH_INFINITE)));
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
-			if (markers == null || markers.size() == 0) {
-				return;
-			}
 			Label toolTip = null;
 			for (int i = 0; i < markers.size(); i++) {
 				IMarker marker = markers.get(i);
-				String attribute = marker
-						.getAttribute(
-								org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-								""); //$NON-NLS-1$
+				String attribute = marker.getAttribute(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
+						"");
 				if (attribute.equals(elementId)) {
-					int nextSeverity = marker.getAttribute(IMarker.SEVERITY,
-							IMarker.SEVERITY_INFO);
+					int nextSeverity = marker.getAttribute(IMarker.SEVERITY, IMarker.SEVERITY_INFO);
 					Image nextImage = getImage(nextSeverity);
 					if (foundMarker == null) {
 						foundMarker = marker;
-						toolTip = new Label(marker.getAttribute(
-								IMarker.MESSAGE, ""), //$NON-NLS-1$
+						toolTip = new Label(marker.getAttribute(IMarker.MESSAGE, ""), //$NON-NLS-1$
 								nextImage);
 					} else {
 						if (toolTip.getChildren().isEmpty()) {
@@ -203,38 +86,30 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 							comositeLabel.add(toolTip);
 							toolTip = comositeLabel;
 						}
-						toolTip.add(new Label(marker.getAttribute(
-								IMarker.MESSAGE, ""), //$NON-NLS-1$
+						toolTip.add(new Label(marker.getAttribute(IMarker.MESSAGE, ""), //$NON-NLS-1$
 								nextImage));
 					}
-					severity = (nextSeverity > severity) ? nextSeverity
-							: severity;
+					severity = (nextSeverity > severity) ? nextSeverity : severity;
 				}
 			}
 			if (foundMarker == null) {
 				return;
 			}
 
-			// add decoration
-			if (editPart instanceof org.eclipse.gef.GraphicalEditPart) {
-				if (view instanceof Edge) {
-					setDecoration(getDecoratorTarget().addConnectionDecoration(
-							getImage(severity), 50, true));
-				} else {
-					int margin = view.getElement() instanceof Pseudostate
-							|| view.getElement() instanceof FinalState ? 0 : -1;
-					if (editPart instanceof org.eclipse.gef.GraphicalEditPart) {
-						margin = MapModeUtil.getMapMode(
-								((org.eclipse.gef.GraphicalEditPart) editPart)
-										.getFigure()).DPtoLP(margin);
-					}
-					setDecoration(getDecoratorTarget()
-							.addShapeDecoration(getImage(severity),
-									IDecoratorTarget.Direction.NORTH_EAST,
-									margin, true));
-				}
+			if (view instanceof Edge) {
+				setDecoration(getDecoratorTarget().addConnectionDecoration(getImage(severity), 50, true));
+			} else {
+				int margin = view.getElement() instanceof Pseudostate || view.getElement() instanceof FinalState ? 0
+						: -1;
+				setDecoration(getDecoratorTarget().addShapeDecoration(getImage(severity),
+						IDecoratorTarget.Direction.NORTH_EAST, margin, true));
 				getDecoration().setToolTip(toolTip);
 			}
+		}
+
+		@Override
+		protected String getMarkerType() {
+			return SCT_MARKER_TYPE;
 		}
 
 		private Image getImage(int severity) {
@@ -249,122 +124,7 @@ public class StatechartValidationDecorationProvider extends AbstractProvider
 			default:
 				imageName = ISharedImages.IMG_OBJS_INFO_TSK;
 			}
-			return PlatformUI.getWorkbench().getSharedImages()
-					.getImage(imageName);
-		}
-
-		public void activate() {
-			if (viewId == null) {
-				return;
-			}
-
-			// add self to global decorators registry
-			List list = (List) allDecorators.get(viewId);
-			if (list == null) {
-				list = new ArrayList(2);
-				list.add(this);
-				allDecorators.put(viewId, list);
-			} else if (!list.contains(this)) {
-				list.add(this);
-			}
-
-			// start listening to changes in resources
-			View view = (View) getDecoratorTarget().getAdapter(View.class);
-			if (view == null) {
-				return;
-			}
-			Diagram diagramView = view.getDiagram();
-			if (diagramView == null) {
-				return;
-			}
-			if (fileObserver == null) {
-				FileChangeManager.getInstance().addFileObserver(
-						fileObserver = new MarkerObserver(diagramView));
-			}
-		}
-
-		public void deactivate() {
-			if (viewId == null) {
-				return;
-			}
-
-			// remove self from global decorators registry
-			List list = (List) allDecorators.get(viewId);
-			if (list != null) {
-				list.remove(this);
-				if (list.isEmpty()) {
-					allDecorators.remove(viewId);
-				}
-			}
-
-			// stop listening to changes in resources if there are no more
-			// decorators
-			if (fileObserver != null && allDecorators.isEmpty()) {
-				FileChangeManager.getInstance()
-						.removeFileObserver(fileObserver);
-				fileObserver = null;
-			}
-			super.deactivate();
-		}
-	}
-
-	static class MarkerObserver implements IFileObserver {
-
-		private final Diagram diagram;
-
-		private MarkerObserver(Diagram diagram) {
-			this.diagram = diagram;
-		}
-
-		public void handleFileRenamed(IFile oldFile, IFile file) {
-		}
-
-		public void handleFileMoved(IFile oldFile, IFile file) {
-		}
-
-		public void handleFileDeleted(IFile file) {
-		}
-
-		public void handleFileChanged(IFile file) {
-		}
-
-		public void handleMarkerAdded(IMarker marker) {
-			if (marker
-					.getAttribute(
-							org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-							null) != null) {
-				handleMarkerChanged(marker);
-			}
-		}
-
-		public void handleMarkerDeleted(IMarker marker, Map attributes) {
-			if (attributes == null)
-				return;
-			String viewId = (String) attributes
-					.get(org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID);
-			if (viewId == null)
-				return;
-			refreshDecorators(viewId, diagram);
-		}
-
-		public void handleMarkerChanged(IMarker marker) {
-			if (!SCT_MARKER_TYPE.equals(getType(marker))) {
-				return;
-			}
-			String viewId = marker
-					.getAttribute(
-							org.eclipse.gmf.runtime.common.ui.resources.IMarker.ELEMENT_ID,
-							""); //$NON-NLS-1$
-			refreshDecorators(viewId, diagram);
-		}
-
-		private String getType(IMarker marker) {
-			try {
-				return marker.getType();
-			} catch (CoreException e) {
-				e.printStackTrace();
-				return null;
-			}
+			return PlatformUI.getWorkbench().getSharedImages().getImage(imageName);
 		}
 	}
 }
