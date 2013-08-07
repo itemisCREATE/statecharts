@@ -17,6 +17,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.core,
+ org.yakindu.sct.simulation.core.breakpoints,
  org.yakindu.sct.simulation.core.debugmodel,
  org.yakindu.sct.simulation.core.extensions,
  org.yakindu.sct.simulation.core.hmr,
@@ -24,3 +25,7 @@ Export-Package: org.yakindu.sct.simulation.core,
  org.yakindu.sct.simulation.core.runtime,
  org.yakindu.sct.simulation.core.runtime.impl,
  org.yakindu.sct.simulation.core.util
+Import-Package: com.google.inject;version="1.3.0",
+ org.eclipse.debug.internal.ui.viewers.model.provisional,
+ org.eclipse.emf.edit.ui.provider,
+ org.yakindu.sct.model.sgraph.provider

@@ -12,21 +12,25 @@ import org.eclipse.swt.graphics.Image;
 public enum SimulationImages {
 
 	EVENT("icons/Event.gif"),
-	
+
 	TIMEEVENT("icons/TimeEvent.gif"),
-	
+
 	EVENT_ENABLED("icons/Event_enabled.gif"),
-	
+
 	EVENT_DISABLED("icons/Event_disabled.gif"),
 
 	VARIABLE("icons/Variable.gif"),
-	
+
 	SCOPE("icons/Scope.gif"),
-	
+
 	COLLAPSE_ALL("icons/collapseall.gif"),
-	
+
 	EXPAND_ALL("icons/expandall.gif"),
+
+	BREAKPOINT_ENABLED("icons/brkp_obj.gif"),
 	
+	BREAKPOINT_DISABLED("icons/brkpd_obj.gif"),
+
 	LAUNCHER_ICON("icons/Statechart-Launcher-16.png");
 
 	private final String path;
@@ -42,8 +46,7 @@ public enum SimulationImages {
 	 * @return an {@link Image}
 	 */
 	public Image image() {
-		final ImageRegistry imageRegistry = SimulationActivator.getDefault()
-				.getImageRegistry();
+		final ImageRegistry imageRegistry = SimulationActivator.getDefault().getImageRegistry();
 		Image image = imageRegistry.get(path);
 		if (image == null) {
 			addImageDescriptor();
@@ -59,8 +62,7 @@ public enum SimulationImages {
 	 * @return an {@link ImageDescriptor}
 	 */
 	public ImageDescriptor imageDescriptor() {
-		final ImageRegistry imageRegistry = SimulationActivator.getDefault()
-				.getImageRegistry();
+		final ImageRegistry imageRegistry = SimulationActivator.getDefault().getImageRegistry();
 		ImageDescriptor imageDescriptor = imageRegistry.getDescriptor(path);
 		if (imageDescriptor == null) {
 			addImageDescriptor();
@@ -72,8 +74,7 @@ public enum SimulationImages {
 
 	private void addImageDescriptor() {
 		final SimulationActivator plugin = SimulationActivator.getDefault();
-		final ImageDescriptor id = ImageDescriptor.createFromURL(plugin
-				.getBundle().getEntry(path));
+		final ImageDescriptor id = ImageDescriptor.createFromURL(plugin.getBundle().getEntry(path));
 		plugin.getImageRegistry().put(path, id);
 	}
 

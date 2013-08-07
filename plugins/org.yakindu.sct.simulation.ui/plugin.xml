@@ -122,4 +122,86 @@
           class="org.yakindu.sct.simulation.ui.preferences.PreferenceInitializer">
     </initializer>
  </extension>
+ 
+ 
+ 
+ <!-- Toggle breakpoint action -->
+<extension point="org.eclipse.ui.commands">
+ 	<command
+       defaultHandler="org.yakindu.sct.simulation.ui.breakpoints.ToggleBreakpointCommand"
+       id="org.yakindu.sct.simulation.ui.breakpoints.ToggleBreakpointCommand"
+       name="Toggle breakpoint">
+	</command>
+</extension>
+
+<extension
+       point="org.eclipse.ui.menus">
+    <menuContribution
+          allPopups="false"
+          locationURI="popup:org.eclipse.gmf.runtime.diagram.ui.DiagramEditorContextMenu">
+          <command
+                commandId="org.yakindu.sct.simulation.ui.breakpoints.ToggleBreakpointCommand"
+                label="Toggle Breakpoint"
+                style="push">
+             <visibleWhen
+                checkEnabled="false">
+             <with
+                   variable="selection">
+                <iterate
+                      ifEmpty="false"
+                      operator="and">
+                      <or>
+                   <instanceof
+                         value="org.yakindu.sct.ui.editor.editparts.TransitionEditPart">
+                   </instanceof>
+                  <!--
+                    <instanceof
+                         value="org.yakindu.sct.ui.editor.editparts.StateEditPart">
+                   </instanceof>
+                   -->
+                   </or>
+                </iterate>
+             </with>
+          </visibleWhen>
+          </command>
+    </menuContribution>
+ </extension>
+ <!-- Debug Model Presentation -->
+	<extension point = "org.eclipse.debug.ui.debugModelPresentations"> 
+       <debugModelPresentation 
+           class = "org.yakindu.sct.simulation.ui.breakpoints.SCTDebugModelPresentation"
+           id = "org.yakindu.sct.debug.core.breakpoints">
+       </debugModelPresentation> 
+   </extension>  
+  <!-- Breakpoint Decoration Provider -->
+   <extension id="breakpointDecoratorProvider" name="BreakpointDecorations" point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders">
+      <decoratorProvider class="org.yakindu.sct.simulation.ui.breakpoints.BreakpointDecorationProvider">
+         <Priority name="Medium"/>
+         <object class="org.eclipse.gmf.runtime.diagram.ui.editparts.IPrimaryEditPart(org.eclipse.gmf.runtime.diagram.ui)" id="PRIMARY_VIEW"/>
+         <context decoratorTargets="PRIMARY_VIEW"/>
+      </decoratorProvider>
+   </extension>
+  <!-- Breakpoint Detail Pane factory 
+  <extension point="org.eclipse.debug.ui.detailPaneFactories">
+       <detailFactories
+             class="org.yakindu.sct.simulation.ui.breakpoints.SCTDetailPaneFactory"
+             id="sctDetailPane">
+             <enablement>
+       		   <with
+                variable="selection">
+             <count
+                   value="1">
+             </count>
+             <iterate>
+                <instanceof
+                      value="org.yakindu.sct.simulation.core.breakpoints.SCTBreakpoint">
+                </instanceof>
+             </iterate>
+          </with>
+       </enablement>
+       </detailFactories>
+</extension>
+-->
+   
+  
 </plugin>

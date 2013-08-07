@@ -29,14 +29,18 @@ import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
+import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Trace;
+import org.yakindu.sct.model.sexec.TraceReactionWillFire;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
 import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.simulation.core.breakpoints.SCTBreakpoint;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions;
 import org.yakindu.sct.simulation.core.extensions.ExecutionFactoryExtensions.ExecutionFactoryDescriptor;
 import org.yakindu.sct.simulation.core.launch.IStatechartLaunchParameters;
@@ -52,8 +56,8 @@ import org.yakindu.sct.simulation.core.runtime.impl.EventDrivenExecutionFacadeCo
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
-		IStatechartLaunchParameters, IExecutionTraceListener {
+public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, IStatechartLaunchParameters,
+		IExecutionTraceListener {
 
 	private ILaunch launch;
 
@@ -69,30 +73,28 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	private IExecutionFacadeController controller;
 
-	public SCTDebugTarget(ILaunch launch, Statechart statechart)
-			throws CoreException {
+	private IExecutionFacadeFactory factory;
+
+	public SCTDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
 		super(null, statechart.eResource().getURI().toPlatformString(true));
 		this.launch = launch;
 		this.statechart = statechart;
 		threads = new ArrayList<SCTDebugThread>();
-		DebugPlugin.getDefault().getBreakpointManager()
-				.addBreakpointListener(this);
+		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
 		createExecutionModel(statechart);
 	}
 
-	private void createExecutionModel(Statechart statechart)
-			throws CoreException {
-		IExecutionFacadeFactory factory = getExecutionFacadeFactory(statechart);
+	protected void createExecutionModel(Statechart statechart) throws CoreException {
+		factory = getExecutionFacadeFactory(statechart);
 		facade = factory.createExecutionFacade(statechart);
 		facade.addTraceListener(this);
-		initFacadeCallbacks(WorkspaceSynchronizer.getFile(
-				statechart.eResource()).getProject());
+		initFacadeCallbacks(WorkspaceSynchronizer.getFile(statechart.eResource()).getProject());
 		initFacadeController();
 	}
 
-	private void initFacadeCallbacks(IProject project) {
-		ClassLoader classLoader = new WorkspaceClassLoaderFactory()
-				.createClassLoader(project, getClass().getClassLoader());
+	protected void initFacadeCallbacks(IProject project) {
+		ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(project, getClass()
+				.getClassLoader());
 		ILaunchConfiguration config = launch.getLaunchConfiguration();
 		try {
 			String classes = config.getAttribute(OPERATION_CLASS, "");
@@ -105,25 +107,16 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 					Class<?> loadClass = classLoader.loadClass(string);
 					facade.addCallbackObject(loadClass.newInstance());
 				}
-		} catch (CoreException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void initFacadeController() throws CoreException {
-		boolean isCycleBased = launch.getLaunchConfiguration().getAttribute(
-				IS_CYCLE_BASED, DEFAULT_IS_CYCLE_BASED);
+	protected void initFacadeController() throws CoreException {
+		boolean isCycleBased = launch.getLaunchConfiguration().getAttribute(IS_CYCLE_BASED, DEFAULT_IS_CYCLE_BASED);
 		if (isCycleBased) {
-			long cyclePeriod = launch.getLaunchConfiguration().getAttribute(
-					CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD);
-			controller = new CycleBasedExecutionFacadeController(this,
-					cyclePeriod);
+			long cyclePeriod = launch.getLaunchConfiguration().getAttribute(CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD);
+			controller = new CycleBasedExecutionFacadeController(this, cyclePeriod);
 		} else {
 			controller = new EventDrivenExecutionFacadeController(this);
 		}
@@ -153,8 +146,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 
 	public IThread[] getThreads() throws DebugException {
 		// Collect all active regions
-		Set<RegularState> activeLeafStates = facade.getExecutionContext()
-				.getActiveLeafStates();
+		Set<RegularState> activeLeafStates = facade.getExecutionContext().getActiveLeafStates();
 		List<Region> activeRegions = new ArrayList<Region>();
 		for (RegularState vertex : activeLeafStates) {
 			activeRegions.add(vertex.getParentRegion());
@@ -176,8 +168,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 				}
 			}
 			if (!found) {
-				threads.add(new SCTDebugThread(this, facade,
-						getResourceString(), region));
+				threads.add(new SCTDebugThread(this, facade, getResourceString(), region));
 			}
 		}
 		return threads.toArray(new IThread[] {});
@@ -192,7 +183,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	}
 
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-		return false;
+		return true;
 	}
 
 	public boolean canTerminate() {
@@ -261,8 +252,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 		return false;
 	}
 
-	public IMemoryBlock getMemoryBlock(long startAddress, long length)
-			throws DebugException {
+	public IMemoryBlock getMemoryBlock(long startAddress, long length) throws DebugException {
 		return null;
 	}
 
@@ -292,13 +282,38 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget,
 	}
 
 	public void traceStepExecuted(Trace trace) {
-		if (trace instanceof TraceStateEntered
-				|| trace instanceof TraceStateExited)
+		if (trace instanceof TraceStateEntered || trace instanceof TraceStateExited)
 			fireChangeEvent(DebugEvent.CONTENT);
+		if (trace instanceof TraceReactionWillFire) {
+			if (launch.getLaunchMode().equals("debug"))
+				evaluateBreakpoints(trace);
+		}
+	}
+
+	private void evaluateBreakpoints(Trace trace) {
+		try {
+			Reaction reaction = ((TraceReactionWillFire) trace).getReaction();
+			EObject sourceElement = reaction.getSourceElement();
+			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
+					.getBreakpoints(SCTBreakpoint.BREAKPOINT_ID);
+			for (IBreakpoint iBreakpoint : breakpoints) {
+				if (!iBreakpoint.isEnabled())
+					continue;
+				if (iBreakpoint instanceof SCTBreakpoint) {
+					SCTBreakpoint sctBreakpoint = (SCTBreakpoint) iBreakpoint;
+					if (EcoreUtil.equals(sctBreakpoint.getSemanticObject(), sourceElement)) {
+						// TODO: Evaluate Breakpoint Condition
+						suspend();
+						fireEvent(new DebugEvent(this, DebugEvent.BREAKPOINT));
+					}
+				}
+			}
+		} catch (CoreException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	public Statechart getStatechart() {
 		return statechart;
 	}
-
 }

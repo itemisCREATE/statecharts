@@ -25,10 +25,14 @@ Require-Bundle: org.eclipse.ui,
  com.google.inject,
  org.eclipse.xtext.xbase.lib,
  org.apache.commons.lang;bundle-version="2.4.0",
- org.yakindu.sct.commons;bundle-version="1.0.0"
+ org.yakindu.sct.commons;bundle-version="1.0.0",
+ org.yakindu.sct.ui.integration.stext;bundle-version="2.1.1",
+ org.eclipse.xtext;bundle-version="2.4.2"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Import-Package: org.eclipse.ui.dialogs
+Import-Package: org.eclipse.emf.edit.ui.provider,
+ org.eclipse.ui.dialogs,
+ org.yakindu.sct.model.sgraph.provider
 Export-Package: org.yakindu.sct.simulation.ui,
  org.yakindu.sct.simulation.ui.launch,
  org.yakindu.sct.simulation.ui.launch.tabs
