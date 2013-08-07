@@ -21,8 +21,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -41,10 +46,13 @@ import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
  */
 public class SCTBreakpointDetailPane implements IDetailPane, IContextElementProvider {
 
+	private static final String BREAKPOINT_CONDITION = "breakpointCondition";
 	public static final String SCT_BREAKPOINT_PANE = "sctBreakpointPane";
 	private StyledTextXtextAdapter adapter;
 	private Statechart statechart;
-	private SCTBreakpoint sctBreakpoint;
+	private SCTBreakpoint breakpoint;
+	private StyledText text;
+	private Button conditional;
 
 	public void init(IWorkbenchPartSite partSite) {
 
@@ -52,38 +60,75 @@ public class SCTBreakpointDetailPane implements IDetailPane, IContextElementProv
 
 	public Control createControl(Composite parent) {
 		parent.setBackground(ColorConstants.white);
-		final StyledText txt = new StyledText(parent, SWT.BORDER | SWT.MULTI);
-		txt.addFocusListener(new FocusAdapter() {
+		Composite composite = new Composite(parent, SWT.NONE);
+		composite.setLayout(new GridLayout());
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(composite);
+		createCheckBox(composite);
+		createTextArea(composite);
+		return composite;
+	}
+
+	protected void createCheckBox(Composite parent) {
+		conditional = new Button(parent, SWT.CHECK);
+		conditional.setText("Conditional (Suspend when expression is 'true')");
+		conditional.setSelection(false);
+		conditional.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				text.setEnabled(!text.getEnabled());
+				updateTextBackground();
+				breakpoint.setConditional(text.isEnabled());
+			}
+
+		});
+		GridDataFactory.fillDefaults().grab(true, false).applyTo(conditional);
+	}
+
+	protected void updateTextBackground() {
+		if (text.isEnabled())
+			text.setBackground(ColorConstants.white);
+		else
+			text.setBackground(Display.getDefault().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
+	}
+
+	protected void createTextArea(Composite parent) {
+		text = new StyledText(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
+		text.addFocusListener(new FocusAdapter() {
 			public void focusLost(FocusEvent e) {
-				sctBreakpoint.setExpression(txt.getText());
+				breakpoint.setExpression(text.getText());
 			}
 		});
-		// TODO:
 		IExpressionLanguageProvider provider = ExpressionLanguageProviderExtensions.getLanguageProvider(
-				"breakpointCondition", "sct");
+				BREAKPOINT_CONDITION, "sct");
 		adapter = new StyledTextXtextAdapter(provider.getInjector());
 		adapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
-		adapter.adapt(txt);
-		GridDataFactory.fillDefaults().grab(true, true).applyTo(txt);
-		return txt;
+		adapter.adapt(text);
+		GridDataFactory.fillDefaults().grab(true, true).applyTo(text);
 	}
 
 	public void dispose() {
-
+		adapter.dispose();
+		conditional.dispose();
+		text.dispose();
 	}
 
 	public void display(IStructuredSelection selection) {
-		sctBreakpoint = (SCTBreakpoint) selection.getFirstElement();
-		if (sctBreakpoint == null)
+		breakpoint = (SCTBreakpoint) selection.getFirstElement();
+		if (breakpoint == null)
 			return;
-		EObject semanticObject = sctBreakpoint.getSemanticObject();
+		// Set context object for scoping
+		EObject semanticObject = breakpoint.getSemanticObject();
 		Resource resource = semanticObject.eResource();
 		statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(), SGraphPackage.Literals.STATECHART);
-
+		// Init control state
+		conditional.setSelection(breakpoint.isConditional());
+		text.setEnabled(breakpoint.isConditional());
+		text.setText(breakpoint.getExpression());
+		updateTextBackground();
 	}
 
 	public boolean setFocus() {
-		return false;
+		text.setFocus();
+		return true;
 	}
 
 	public String getID() {
@@ -95,11 +140,10 @@ public class SCTBreakpointDetailPane implements IDetailPane, IContextElementProv
 	}
 
 	public String getDescription() {
-		return null;
+		return getName();
 	}
 
 	public EObject getContextObject() {
 		return statechart;
 	}
-
 }

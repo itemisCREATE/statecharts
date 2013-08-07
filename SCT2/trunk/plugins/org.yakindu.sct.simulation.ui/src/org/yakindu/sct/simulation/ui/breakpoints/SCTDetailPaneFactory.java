@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2013 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.simulation.ui.breakpoints;
 
 import static org.yakindu.sct.simulation.ui.breakpoints.SCTBreakpointDetailPane.SCT_BREAKPOINT_PANE;
@@ -11,6 +21,11 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.yakindu.sct.simulation.core.breakpoints.SCTBreakpoint;
 
+/**
+ * 
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public class SCTDetailPaneFactory implements IDetailPaneFactory {
 
 	public Set<String> getDetailPaneTypes(IStructuredSelection selection) {
@@ -22,7 +37,7 @@ public class SCTDetailPaneFactory implements IDetailPaneFactory {
 	}
 
 	public String getDefaultDetailPane(IStructuredSelection selection) {
-		return null;
+		return SCT_BREAKPOINT_PANE;
 	}
 
 	public IDetailPane createDetailPane(String paneID) {
@@ -37,7 +52,7 @@ public class SCTDetailPaneFactory implements IDetailPaneFactory {
 	}
 
 	public String getDetailPaneDescription(String paneID) {
-		return null;
+		return "SCT Breakpoints";
 	}
 
 	public Object unwrap(ISelection selection) {
