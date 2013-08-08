@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Ui
 Bundle-SymbolicName: org.yakindu.sct.ui.navigator;singleton:=true
-Bundle-Version: 2.1.1.qualifier
+Bundle-Version: 2.1.2.qualifier
 Bundle-Activator: org.yakindu.sct.ui.UIActivator
 Bundle-Vendor: yakindu.org
 Require-Bundle: org.eclipse.ui.navigator;bundle-version="3.5.100",
