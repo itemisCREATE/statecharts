@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.base"
       label="%featureName"
-      version="2.1.1.qualifier"
+      version="2.1.2.qualifier"
       provider-name="yakindu.org">
 
    <description url="http://www.statecharts.org">

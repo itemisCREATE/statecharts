@@ -2,7 +2,7 @@
 <feature
       id="de.itemis.xtext.utils.jface"
       label="%featureName"
-      version="2.1.1.qualifier"
+      version="2.1.2.qualifier"
       provider-name="itemis AG">
 
    <description url="http://www.example.com/description">
