@@ -2,13 +2,13 @@ package org.yakindu.sct.ui.integration.stext.modules;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.IParser;
-import org.yakindu.sct.model.stext.STextRuntimeModule;
+import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.sct.ui.integration.stext.parsers.EntryRuleAntlrSTextParser;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
-public class EntryRuleRuntimeModule extends STextRuntimeModule {
+public class EntryRuleRuntimeModule extends AbstractGenericModule {
 
 	private Class<? extends EObject> parserRule;
 
@@ -23,7 +23,6 @@ public class EntryRuleRuntimeModule extends STextRuntimeModule {
 				.toInstance(parserRule.getSimpleName());
 	}
 
-	@Override
 	public Class<? extends IParser> bindIParser() {
 		return EntryRuleAntlrSTextParser.class;
 	}

@@ -1,27 +1,17 @@
 package org.yakindu.sct.ui.integration.stext;
 
-import org.yakindu.sct.model.stext.stext.StatechartSpecification;
-import org.yakindu.sct.ui.editor.extensions.AbstractExpressionsProvider;
-import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
-import org.yakindu.sct.ui.integration.stext.modules.EntryRuleRuntimeModule;
-import org.yakindu.sct.ui.integration.stext.modules.EntryRuleUIModule;
-
-import com.google.inject.Module;
+import org.eclipse.emf.ecore.EObject;
+import org.yakindu.sct.model.stext.stext.StateSpecification;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class StatechartExpressionProvider extends AbstractExpressionsProvider implements IExpressionLanguageProvider {
+public class StatechartExpressionProvider extends AbstractSTextExpressionProvider {
 
 	@Override
-	protected Module getRuntimeModule() {
-		return new EntryRuleRuntimeModule(StatechartSpecification.class);
-	}
-
-	@Override
-	protected Module getUIModule() {
-		return new EntryRuleUIModule(ExtensionsActivator.getDefault(), StatechartSpecification.class);
+	protected Class<? extends EObject> getRule() {
+		return StateSpecification.class;
 	}
 }
