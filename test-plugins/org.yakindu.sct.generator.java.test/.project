@@ -31,4 +31,15 @@
 		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
 		<nature>org.eclipse.pde.PluginNature</nature>
 	</natures>
+	<filteredResources>
+		<filter>
+			<id>1375978357015</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-target</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>

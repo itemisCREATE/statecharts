@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.test"
       label="Yakindu Statechart Tools (SCT) 2 Test"
-      version="2.1.1.qualifier"
+      version="2.1.2.qualifier"
       provider-name="yakindu.org">
 
    <description >

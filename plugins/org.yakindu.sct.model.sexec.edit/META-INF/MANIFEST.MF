@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu SCT SExec Edit Support
 Bundle-SymbolicName: org.yakindu.sct.model.sexec.edit;singleton:=true
-Bundle-Version: 2.1.1.qualifier
+Bundle-Version: 2.1.2.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.sct.model.sexec.provider.SexecEditPlugin$Implementation
 Bundle-Vendor: yakindu.org

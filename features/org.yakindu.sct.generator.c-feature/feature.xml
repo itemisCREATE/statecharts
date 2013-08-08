@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator.c"
       label="%featureName"
-      version="2.1.1.qualifier"
+      version="2.1.2.qualifier"
       provider-name="yakindu.org">
 
    <description url="http://www.statecharts.org">
@@ -18,7 +18,7 @@
    </license>
 
    <requires>
-      <import feature="org.yakindu.sct" version="2.1.1.qualifier"/>
+      <import feature="org.yakindu.sct" version="2.1.2.qualifier"/>
    </requires>
 
    <plugin
