@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Compare
+Bundle-SymbolicName: org.yakindu.sct.compare;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.yakindu.sct.compare.CompareActivator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.emf.compare;bundle-version="3.0.0",
+ org.eclipse.emf.compare.diagram.ide.ui;bundle-version="3.0.0",
+ org.eclipse.emf.compare.ide.ui;bundle-version="3.0.0",
+ org.eclipse.compare;bundle-version="3.5.400"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy

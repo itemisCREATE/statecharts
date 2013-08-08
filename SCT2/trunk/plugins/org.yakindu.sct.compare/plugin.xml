@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.compare.contentMergeViewers">
+      <viewer
+            class="org.yakindu.sct.compare.viewer.DiagramContentMergeViewerCreator"
+            extensions="diagramcompare_match, diagramcompare_diff, sct"
+            id="org.yakindu.sct.compare.viewer"
+            label="Statechart Content Merge Viewer">
+      </viewer>
+      <contentTypeBinding
+            contentMergeViewerId="org.yakindu.sct.compare.viewer"
+            contentTypeId="org.eclipse.emf.compare.content.type">
+      </contentTypeBinding>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <file-association
+            content-type="org.eclipse.emf.compare.content.type"
+            file-extensions="sct"/>
+   </extension>
+</plugin>
