@@ -544,6 +544,8 @@
 
 		<module>../org.yakindu.sct.repository</module>
 		<module>../org.yakindu.sct.repository.full</module>
+		
+		<module>../org.yakindu.sct.compare</module>
 	</modules>
 
 </project>
