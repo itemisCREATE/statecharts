@@ -340,7 +340,7 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 		}
 	}
 
-	static Diagram getContainingDiagram(View view) {
+	public static Diagram getContainingDiagram(View view) {
 		EObject current = view;
 		while (current != null) {
 			if (current instanceof Diagram) {
@@ -360,7 +360,7 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 	 * @param container
 	 * @return the semantic target.
 	 */
-	static EObject getSemanticPasteTarget(View view, View container) {
+	public static EObject getSemanticPasteTarget(View view, View container) {
 		EObject copiedSemanticObject = view.getElement();
 		EObject semanticTarget = container.getElement();
 		if (copiedSemanticObject instanceof Transition) {
@@ -379,7 +379,7 @@ public class NotationClipboardOperationHelper extends AbstractClipboardSupport {
 		return null;
 	}
 
-	static EObject getSemanticPasteTarget(View view) {
+	public static EObject getSemanticPasteTarget(View view) {
 		return getSemanticPasteTarget(view, (View) view.eContainer());
 	}
 	// PATCH END
