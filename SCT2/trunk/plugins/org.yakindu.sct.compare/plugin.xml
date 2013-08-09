@@ -20,4 +20,11 @@
             content-type="org.eclipse.emf.compare.content.type"
             file-extensions="sct"/>
    </extension>
+   <extension
+         point="org.eclipse.emf.compare.rcp.matchEngine">
+      <engineFactory
+            class="org.yakindu.sct.compare.match.MatchEngine.SCTMatchEngineFactory"
+            ranking="11">
+      </engineFactory>
+   </extension>
 </plugin>
