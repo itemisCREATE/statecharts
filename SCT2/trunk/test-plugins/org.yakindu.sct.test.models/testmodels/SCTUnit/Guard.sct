@@ -63,7 +63,7 @@
           <styles xsi:type="notation:ShapeStyle" xmi:id="_V-m4sXNtEeGtAMDjlTj9eQ" fontName="Verdana" fillColor="15981773" lineColor="12632256"/>
           <styles xsi:type="notation:FontStyle" xmi:id="_V-m4snNtEeGtAMDjlTj9eQ"/>
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_V-p8AXNtEeGtAMDjlTj9eQ"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_V-m4s3NtEeGtAMDjlTj9eQ" x="234" y="78" width="151"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="_V-m4s3NtEeGtAMDjlTj9eQ" x="245" y="80" width="151"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_RHXc8XNtEeGtAMDjlTj9eQ"/>
       </children>
