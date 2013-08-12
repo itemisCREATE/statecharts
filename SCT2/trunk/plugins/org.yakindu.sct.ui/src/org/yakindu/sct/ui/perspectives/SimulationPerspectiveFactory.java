@@ -43,6 +43,7 @@ public class SimulationPerspectiveFactory implements IPerspectiveFactory {
 		IFolderLayout bottomRight = layout.createFolder("bottomRight",
 				IPageLayout.BOTTOM, 0.33f, "topRight");
 		bottomRight.addView("org.yakindu.sct.simulation.ui.declarationview");
+		bottomRight.addView("org.eclipse.debug.ui.BreakpointView");
 
 		IFolderLayout top = layout.createFolder("top", IPageLayout.TOP, 0.22f,
 				editorArea);
