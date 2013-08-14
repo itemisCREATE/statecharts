@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.transaction.RunnableWithResult;
+import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
@@ -61,16 +62,14 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	 * @author andreas muelder - Initial contribution and API
 	 * 
 	 */
-	public static class TransactionalValidationRunner extends
-			RunnableWithResult.Impl<List<Issue>> {
+	public static class TransactionalValidationRunner extends RunnableWithResult.Impl<List<Issue>> {
 
 		private IResourceValidator validator;
 		private Resource resource;
 		private CheckMode checkMode;
 		private CancelIndicator indicator;
 
-		public TransactionalValidationRunner(IResourceValidator validator,
-				Resource resource, CheckMode checkMode,
+		public TransactionalValidationRunner(IResourceValidator validator, Resource resource, CheckMode checkMode,
 				CancelIndicator indicator) {
 			this.validator = validator;
 			this.resource = resource;
@@ -80,8 +79,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 		}
 
 		public void run() {
-			List<Issue> result = validator.validate(resource, checkMode,
-					indicator);
+			List<Issue> result = validator.validate(resource, checkMode, indicator);
 			setResult(result);
 			setStatus(Status.OK_STATUS);
 		}
@@ -96,21 +94,25 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	public IStatus run(final IProgressMonitor monitor) {
 		try {
 			Resource resource = diagram.eResource();
+			if (resource == null)
+				return Status.CANCEL_STATUS;
 			if (resource instanceof AbstractSCTResource) {
 				relinkModel(monitor, (AbstractSCTResource) resource);
 			}
 			if (monitor.isCanceled())
 				return Status.CANCEL_STATUS;
-			TransactionalValidationRunner runner = new TransactionalValidationRunner(
-					validator, resource, CheckMode.ALL, new CancelIndicator() {
+			TransactionalValidationRunner runner = new TransactionalValidationRunner(validator, resource,
+					CheckMode.ALL, new CancelIndicator() {
 						public boolean isCanceled() {
 							return monitor.isCanceled();
 
 						}
 					});
-			TransactionUtil.getEditingDomain(diagram).runExclusive(runner);
+			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(diagram);
+			if (editingDomain == null)
+				return Status.CANCEL_STATUS;
+			editingDomain.runExclusive(runner);
 			final List<Issue> issues = runner.getResult();
-
 			if (issues == null)
 				return Status.CANCEL_STATUS;
 			final IFile target = WorkspaceSynchronizer.getFile(resource);
@@ -118,8 +120,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			return new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID,
-					ex.getMessage());
+			return new Status(IStatus.ERROR, DiagramActivator.PLUGIN_ID, ex.getMessage());
 		}
 		return Status.OK_STATUS;
 	}
@@ -128,13 +129,11 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	 * Updates the markers. Execute the marker update in the UI thread, the
 	 * problem markers // will flicker otherwise
 	 */
-	private void refreshMarkers(final IFile target, final List<Issue> issues,
-			final IProgressMonitor monitor) {
+	private void refreshMarkers(final IFile target, final List<Issue> issues, final IProgressMonitor monitor) {
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			public void run() {
 				try {
-					target.deleteMarkers(SCT_MARKER_TYPE, true,
-							IResource.DEPTH_ZERO);
+					target.deleteMarkers(SCT_MARKER_TYPE, true, IResource.DEPTH_ZERO);
 					for (Issue issue : issues) {
 						if (monitor.isCanceled())
 							return;
@@ -150,13 +149,12 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	/**
 	 * relinks the model before validation is executed
 	 */
-	protected void relinkModel(final IProgressMonitor monitor,
-			final AbstractSCTResource eResource) throws ExecutionException {
+	protected void relinkModel(final IProgressMonitor monitor, final AbstractSCTResource eResource)
+			throws ExecutionException {
 		AbstractTransactionalCommand cmd = new AbstractTransactionalCommand(
 				TransactionUtil.getEditingDomain(eResource), "", null) {
 			@Override
-			protected CommandResult doExecuteWithResult(
-					IProgressMonitor monitor, IAdaptable info)
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				eResource.linkSpecificationElements();
 				return CommandResult.newOKCommandResult();
