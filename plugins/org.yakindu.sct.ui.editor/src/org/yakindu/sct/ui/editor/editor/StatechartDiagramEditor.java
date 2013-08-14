@@ -198,4 +198,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		super.dispose();
 	}
 
+	public SCTValidationJob getValidationJob() {
+		return validationJob;
+	}
+
 }
