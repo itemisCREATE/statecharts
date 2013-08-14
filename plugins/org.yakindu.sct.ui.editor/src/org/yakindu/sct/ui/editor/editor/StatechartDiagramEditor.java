@@ -104,7 +104,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 
 	private void initValidationJob() {
 		final IFile file = ((IFileEditorInput) getEditorInput()).getFile();
-		validationJob = new SCTValidationJob(getDiagram());
+		validationJob = new SCTValidationJob();
+		validationJob.setResource(getDiagram().eResource());
 		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getRegisteredProvider(
 				SemanticTarget.StatechartSpecification, file.getFileExtension());
 		Injector injector = registeredProvider.getInjector();
