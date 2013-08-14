@@ -29,7 +29,6 @@ import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.validation.MarkerCreator;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -53,7 +52,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 	@Inject
 	private MarkerCreator creator;
 
-	private Diagram diagram;
+	private Resource resource;
 
 	/**
 	 * Wrappes the {@link IResourceValidator} validate within a
@@ -85,16 +84,14 @@ public class SCTValidationJob extends Job implements IMarkerType {
 		}
 	}
 
-	public SCTValidationJob(final Diagram diagram) {
+	public SCTValidationJob() {
 		super("validation");
-		this.diagram = diagram;
 	}
 
 	@Override
 	public IStatus run(final IProgressMonitor monitor) {
 		try {
-			Resource resource = diagram.eResource();
-			if (resource == null)
+			if (!resource.isLoaded())
 				return Status.CANCEL_STATUS;
 			if (resource instanceof AbstractSCTResource) {
 				relinkModel(monitor, (AbstractSCTResource) resource);
@@ -108,7 +105,7 @@ public class SCTValidationJob extends Job implements IMarkerType {
 
 						}
 					});
-			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(diagram);
+			TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(resource);
 			if (editingDomain == null)
 				return Status.CANCEL_STATUS;
 			editingDomain.runExclusive(runner);
@@ -162,6 +159,14 @@ public class SCTValidationJob extends Job implements IMarkerType {
 			}
 		};
 		cmd.execute(monitor, null);
+	}
+
+	public Resource getResource() {
+		return resource;
+	}
+
+	public void setResource(Resource resource) {
+		this.resource = resource;
 	}
 
 }
