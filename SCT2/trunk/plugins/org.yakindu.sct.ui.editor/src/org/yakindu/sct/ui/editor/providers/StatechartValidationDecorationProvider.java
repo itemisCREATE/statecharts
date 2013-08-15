@@ -98,6 +98,7 @@ public class StatechartValidationDecorationProvider extends AbstractMarkerBasedD
 
 			if (view instanceof Edge) {
 				setDecoration(getDecoratorTarget().addConnectionDecoration(getImage(severity), 50, true));
+				getDecoration().setToolTip(toolTip);
 			} else {
 				int margin = view.getElement() instanceof Pseudostate || view.getElement() instanceof FinalState ? 0
 						: -1;
