@@ -69,9 +69,17 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 		createTransitionsControl(rightColumn);
 	}
 
+	protected Control doCreateNameControl(Composite parent) {
+		return getToolkit().createText(parent, "");
+	}
+
+	protected Control getNameControl() {
+		return this.txtName;
+	}
+
 	protected void createNameControl(final Composite parent) {
 		Label lblName = getToolkit().createLabel(parent, "State Name: ");
-		txtName = getToolkit().createText(parent, "");
+		txtName = doCreateNameControl(parent);
 		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblName);
 		new Label(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, false).applyTo(txtName);
@@ -132,8 +140,7 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 				new UpdateValueStrategy() {
 					@Override
 					protected IStatus doSet(IObservableValue observableValue, Object value) {
-						if (getCompletionProposalAdapter() != null
-								&& !getCompletionProposalAdapter().isProposalPopupOpen())
+						if (getCompletionProposalAdapter() != null && !getCompletionProposalAdapter().isProposalPopupOpen())
 							return super.doSet(observableValue, value);
 						return Status.OK_STATUS;
 					}
