@@ -46,6 +46,7 @@ Export-Package: org.yakindu.sct.model.stext.ui;
    org.antlr.runtime,
    org.eclipse.xtext.ui.editor.contentassist.antlr.internal,
    org.yakindu.sct.model.stext.services",
+ org.yakindu.sct.model.stext.ui.help,
  org.yakindu.sct.model.stext.ui.hyperlink,
  org.yakindu.sct.model.stext.ui.internal;uses:="org.eclipse.ui.plugin,org.osgi.framework,com.google.inject",
  org.yakindu.sct.model.stext.ui.labeling;uses:="org.eclipse.emf.edit.ui.provider,org.eclipse.xtext.ui.label",
