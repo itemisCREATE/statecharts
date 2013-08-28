@@ -15,6 +15,7 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.bindings.keys.KeyStroke;
 import org.eclipse.jface.layout.GridDataFactory;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
@@ -35,6 +36,7 @@ import org.yakindu.sct.simulation.core.breakpoints.SCTBreakpoint;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
+import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
@@ -92,16 +94,20 @@ public class SCTBreakpointDetailPane implements IDetailPane, IContextElementProv
 
 	protected void createTextArea(Composite parent) {
 		text = new StyledText(parent, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.H_SCROLL);
-		text.addFocusListener(new FocusAdapter() {
-			public void focusLost(FocusEvent e) {
-				breakpoint.setExpression(text.getText());
-			}
-		});
 		IExpressionLanguageProvider provider = ExpressionLanguageProviderExtensions.getLanguageProvider(
 				BREAKPOINT_CONDITION, "sct");
 		adapter = new StyledTextXtextAdapter(provider.getInjector());
 		adapter.getFakeResourceContext().getFakeResource().eAdapters().add(new ContextElementAdapter(this));
 		adapter.adapt(text);
+		final CompletionProposalAdapter completionAdapter = new CompletionProposalAdapter(text,
+				adapter.getContentAssistant(), KeyStroke.getInstance(SWT.CTRL, SWT.SPACE), null);
+		text.addFocusListener(new FocusAdapter() {
+			public void focusLost(FocusEvent e) {
+				if (!completionAdapter.isProposalPopupOpen()) {
+					breakpoint.setExpression(text.getText());
+				}
+			}
+		});
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(text);
 	}
 
