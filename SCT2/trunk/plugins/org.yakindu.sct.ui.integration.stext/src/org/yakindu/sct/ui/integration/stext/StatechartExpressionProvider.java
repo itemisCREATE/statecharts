@@ -1,7 +1,7 @@
 package org.yakindu.sct.ui.integration.stext;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.stext.stext.StateSpecification;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 
 /**
  * 
@@ -12,6 +12,6 @@ public class StatechartExpressionProvider extends AbstractSTextExpressionProvide
 
 	@Override
 	protected Class<? extends EObject> getRule() {
-		return StateSpecification.class;
+		return StatechartSpecification.class;
 	}
 }
