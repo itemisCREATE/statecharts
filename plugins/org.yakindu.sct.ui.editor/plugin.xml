@@ -572,7 +572,7 @@
             category="org.yakindu.sct.ui.preferences.root"
             class="org.yakindu.sct.ui.editor.preferences.StatechartAppearancePreferencePage"
             id="com.yakindu.sct.ui.appearance"
-            name="Statechart Coloring">
+            name="Diagram Appearance">
         </page>
     </extension>
    <extension
