@@ -80,7 +80,7 @@ public class BreakpointDecorationProvider extends AbstractMarkerBasedDecorationP
 						setDecoration(getDecoratorTarget().addConnectionDecoration(getImage(marker), 75, true));
 					} else {
 						setDecoration(getDecoratorTarget().addShapeDecoration(getImage(marker),
-								IDecoratorTarget.Direction.NORTH_WEST, 0, true));
+								IDecoratorTarget.Direction.NORTH_WEST, -1, true));
 					}
 					Label toolTip = new Label(marker.getAttribute(IMarker.MESSAGE, ""), getImage(marker));
 					getDecoration().setToolTip(toolTip);

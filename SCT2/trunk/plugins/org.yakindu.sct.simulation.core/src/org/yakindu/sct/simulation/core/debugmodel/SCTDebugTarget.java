@@ -32,7 +32,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
-import org.yakindu.sct.model.sexec.Reaction;
 import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.model.sexec.TraceReactionWillFire;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
@@ -286,14 +285,16 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 			fireChangeEvent(DebugEvent.CONTENT);
 		if (trace instanceof TraceReactionWillFire) {
 			if (launch.getLaunchMode().equals("debug"))
-				evaluateBreakpoints(trace);
+				evaluateBreakpoints(((TraceReactionWillFire) trace).getReaction().getSourceElement());
+		}
+		if (trace instanceof TraceStateEntered) {
+			if (launch.getLaunchMode().equals("debug"))
+				evaluateBreakpoints(((TraceStateEntered) trace).getState().getSourceElement());
 		}
 	}
 
-	private void evaluateBreakpoints(Trace trace) {
+	private void evaluateBreakpoints(EObject sourceElement) {
 		try {
-			Reaction reaction = ((TraceReactionWillFire) trace).getReaction();
-			EObject sourceElement = reaction.getSourceElement();
 			IBreakpoint[] breakpoints = DebugPlugin.getDefault().getBreakpointManager()
 					.getBreakpoints(SCTBreakpoint.BREAKPOINT_ID);
 			for (IBreakpoint iBreakpoint : breakpoints) {
