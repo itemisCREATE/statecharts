@@ -54,6 +54,8 @@ public class StextResource extends AbstractSCTResource {
 		EList<Declaration> declarations = scope.getDeclarations();
 		StringBuilder builder = new StringBuilder();
 		for (Declaration declaration : declarations) {
+			if (builder.length() > 0)
+				builder.append("\n");
 			builder.append(serializeReaction((Reaction) declaration));
 		}
 		state.setSpecification(builder.toString());
