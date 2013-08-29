@@ -16,11 +16,10 @@ import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IDiagramPreferenceSupport;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.DragDropEditPolicy;
 import org.eclipse.gmf.runtime.diagram.ui.editpolicies.EditPolicyRoles;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.XYLayoutEditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.CompositeElementCanonicalEditPolicy;
-
-import de.itemis.gmf.runtime.commons.editparts.FixedXYLayoutEditPolicy;
 
 /**
  * 
@@ -40,8 +39,7 @@ public class StatechartDiagramEditPart extends DiagramEditPart implements IDiagr
 		installEditPolicy(EditPolicyRoles.CANONICAL_ROLE, new CompositeElementCanonicalEditPolicy());
 		super.createDefaultEditPolicies();
 		installEditPolicy(EditPolicyRoles.DRAG_DROP_ROLE, new DragDropEditPolicy());
-		// TODO: This is a workaround for GMF bug #349042
-		installEditPolicy(EditPolicy.LAYOUT_ROLE, new FixedXYLayoutEditPolicy());
+		installEditPolicy(EditPolicy.LAYOUT_ROLE, new XYLayoutEditPolicy());
 		removeEditPolicy(EditPolicyRoles.POPUPBAR_ROLE);
 	}
 
