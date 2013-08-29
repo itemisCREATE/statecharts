@@ -542,23 +542,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 	}
 
-	@Check(CheckType.FAST)
-	public void checkInterfaceScope(Expression expression) {
-		// Only executed in the context ob conditional expressions: TODO: Move
-		// to separate validator
-		if (expression.eContainer() == null) {
-			try {
-				InferenceResult result = typeInferrer.inferType(expression);
-				if (result.getType() == null || !typeSystem.isBooleanType(result.getType())) {
-					error(CONDITIONAL_EXPRESSION, null);
-				}
-				report(result, null);
-			} catch (IllegalArgumentException e) {
-				// ignore unknown literals here, as this also happens when a
-				// linking problem occurred, which is handled in other locations
-			}
-		}
-	}
 
 	@Check
 	public void checkChoiceWithoutDefaultTransition(final Choice choice) {
