@@ -12,11 +12,10 @@ package org.yakindu.sct.refactoring.refactor;
 
 import java.util.List;
 
-import junit.framework.Assert;
-
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Assert;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -33,10 +32,8 @@ import org.yakindu.sct.test.models.TestModelInjectorProvider;
 @InjectWith(TestModelInjectorProvider.class)
 public abstract class StateBasedRefactoringTest extends RefactoringTest {
 
-	protected void testRefactoringOnState(String pathToInitialSct,
-			String pathToExpectedSct, String stateName) {
-		Statechart initial = models
-				.loadStatechartFromResource(pathToInitialSct);
+	protected void testRefactoringOnState(String pathToInitialSct, String pathToExpectedSct, String stateName) {
+		Statechart initial = models.loadStatechartFromResource(pathToInitialSct);
 
 		State state = getStateByName(initial, stateName);
 
@@ -47,30 +44,29 @@ public abstract class StateBasedRefactoringTest extends RefactoringTest {
 		initialRes.setSerializerEnabled(false);
 		initialRes.linkSpecificationElements();
 
-		Statechart expected = models
-				.loadStatechartFromResource(pathToExpectedSct);
-		
+		Statechart expected = models.loadStatechartFromResource(pathToExpectedSct);
+
 		compareStatecharts(initial, expected);
 	}
-	
-	protected void testRefactoringIsExecutableOnState(String pathToInitialSct,
-			String pathToExpectedSct, String stateName, boolean expectedResult) {
-		Statechart initial = models
-				.loadStatechartFromResource(pathToInitialSct);
+
+	protected void testRefactoringIsExecutableOnState(String pathToInitialSct, String pathToExpectedSct,
+			String stateName, boolean expectedResult) {
+		Statechart initial = models.loadStatechartFromResource(pathToInitialSct);
 
 		State state = getStateByName(initial, stateName);
 
 		AbstractRefactoring<?> refactoring = getRefactoring(state);
 		if (expectedResult) {
-			Assert.assertTrue("Refactoring on state '"+stateName+"' was not executable, although it should be.", refactoring.isExecutable());
-		}
-		else {			
-			Assert.assertFalse("Refactoring on state '"+stateName+"' was executable, although it should not be.", refactoring.isExecutable());
+			Assert.assertTrue("Refactoring on state '" + stateName + "' was not executable, although it should be.",
+					refactoring.isExecutable());
+		} else {
+			Assert.assertFalse("Refactoring on state '" + stateName + "' was executable, although it should not be.",
+					refactoring.isExecutable());
 		}
 	}
 
 	protected abstract AbstractRefactoring<?> getRefactoring(State state);
-	
+
 	protected State getStateByName(Statechart statechart, String name) {
 		List<State> allStates = EcoreUtil2.getAllContentsOfType(statechart, State.class);
 		for (State state : allStates) {

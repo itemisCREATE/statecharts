@@ -32,7 +32,6 @@ import org.yakindu.sct.test.models.TestModelInjectorProvider;
 
 import com.google.common.collect.Lists;
 
-
 /**
  * Tests for {@link RenameRefactoring}.
  * 
@@ -46,8 +45,7 @@ public class RenameRefactoringTest extends RefactoringTest {
 	@Test
 	public void testRenameVariable() {
 
-		Statechart initial = models.loadStatechartFromResource(RENAMING
-				+ INITIAL_STATECHART);
+		Statechart initial = models.loadStatechartFromResource(RENAMING + INITIAL_STATECHART);
 		// get element to rename
 		Variable someVariable = null;
 		EList<Scope> scopes = initial.getScopes();
@@ -57,19 +55,16 @@ public class RenameRefactoringTest extends RefactoringTest {
 				someVariable = iScope.getVariables().get(0);
 			}
 		}
-		Statechart expected = models.loadStatechartFromResource(RENAMING
-				+ "AfterRenamingVariable.sct");
+		Statechart expected = models.loadStatechartFromResource(RENAMING + "AfterRenamingVariable.sct");
 
 		testRenaming(initial, expected, someVariable, "someNewVariableName");
 	}
 
 	@Test
 	public void testRenameEvent() {
-		Statechart initial = models.loadStatechartFromResource(RENAMING
-				+ INITIAL_STATECHART);
+		Statechart initial = models.loadStatechartFromResource(RENAMING + INITIAL_STATECHART);
 
-		Statechart expected = models.loadStatechartFromResource(RENAMING
-				+ "AfterRenamingEvent.sct");
+		Statechart expected = models.loadStatechartFromResource(RENAMING + "AfterRenamingEvent.sct");
 
 		// get element to rename
 		Event someEvent1 = null;
@@ -84,17 +79,15 @@ public class RenameRefactoringTest extends RefactoringTest {
 				}
 			}
 		}
-		
+
 		testRenaming(initial, expected, someEvent1, "someNewEventName");
 	}
 
 	@Test
 	public void testRenameInterface() {
-		Statechart initial = models.loadStatechartFromResource(RENAMING
-				+ INITIAL_STATECHART);
+		Statechart initial = models.loadStatechartFromResource(RENAMING + INITIAL_STATECHART);
 
-		Statechart expected = models.loadStatechartFromResource(RENAMING
-				+ "AfterRenamingInterface.sct");
+		Statechart expected = models.loadStatechartFromResource(RENAMING + "AfterRenamingInterface.sct");
 
 		// get element to rename
 		InterfaceScope someInterface = null;
@@ -104,7 +97,7 @@ public class RenameRefactoringTest extends RefactoringTest {
 				someInterface = (InterfaceScope) scope;
 			}
 		}
-		
+
 		testRenaming(initial, expected, someInterface, "someNewInterfaceName");
 	}
 
@@ -113,10 +106,27 @@ public class RenameRefactoringTest extends RefactoringTest {
 	public void testNoRenamingIntoExistingName() {
 		fail("Not yet implemented.");
 	}
-	
+	@Test
+	public void testRenameMultiStatement() {
+		Statechart initial = models.loadStatechartFromResource(RENAMING + "beforeMultiStatement.sct");
+		Statechart expected = models.loadStatechartFromResource(RENAMING + "AfterMultiStatement.sct");
+
+		// get element to rename
+		InterfaceScope someInterface = null;
+		EList<Scope> scopes = initial.getScopes();
+		for (Scope scope : scopes) {
+			if (scope instanceof InterfaceScope) {
+				someInterface = (InterfaceScope) scope;
+			}
+		}
+
+		testRenaming(initial, expected, someInterface.getVariables().get(0), "y");
+
+	}
+
 	private void testRenaming(Statechart initial, Statechart expected, NamedElement elementToRename, String newName) {
 		RenameRefactoring refactoring = new RenameRefactoring();
-		
+
 		refactoring.setContextObjects(Lists.newArrayList(elementToRename));
 		refactoring.setNewName(newName);
 
@@ -126,7 +136,7 @@ public class RenameRefactoringTest extends RefactoringTest {
 		initialRes.setSerializerEnabled(false);
 
 		initialRes.linkSpecificationElements();
-		
+
 		compareStatecharts(initial, expected);
 	}
 
