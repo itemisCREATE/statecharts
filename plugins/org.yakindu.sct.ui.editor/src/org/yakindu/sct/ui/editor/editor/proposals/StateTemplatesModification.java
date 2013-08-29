@@ -65,6 +65,7 @@ public abstract class StateTemplatesModification extends AbstractSemanticModific
 		while (regions.size() > 0) {
 			Node child = regions.get(0);
 			regions.remove(child);
+			setPreferredSize(child);
 			figureCompartment.insertChild(child);
 			state.getRegions().add((Region) child.getElement());
 		}
