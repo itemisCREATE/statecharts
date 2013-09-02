@@ -10,8 +10,6 @@
  */
 package org.yakindu.sct.generator.genmodel.scoping;
 
-import java.util.List;
-
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
