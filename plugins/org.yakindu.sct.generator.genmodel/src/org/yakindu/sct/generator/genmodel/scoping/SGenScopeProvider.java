@@ -10,7 +10,11 @@
  */
 package org.yakindu.sct.generator.genmodel.scoping;
 
+import java.util.List;
+
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -77,6 +81,14 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 		return new FilteringScope(getDelegate().getScope(context, reference),
 				new Predicate<IEObjectDescription>() {
 					public boolean apply(IEObjectDescription input) {
+
+						EList<EClass> allSuperTypes = input.getEClass()
+								.getESuperTypes();
+						for (EClass eClass : allSuperTypes) {
+							if (elementRefType.equals(eClass.getInstanceClass()
+									.toString().substring(10)))
+								return true;
+						}
 						return elementRefType.equals(input.getEClass()
 								.getInstanceClassName());
 					}
