@@ -85,8 +85,7 @@ public class SGenScopeProvider extends AbstractDeclarativeScopeProvider {
 						EList<EClass> allSuperTypes = input.getEClass()
 								.getESuperTypes();
 						for (EClass eClass : allSuperTypes) {
-							if (elementRefType.equals(eClass.getInstanceClass()
-									.toString().substring(10)))
+							if (elementRefType.equals(eClass.getInstanceClassName()))
 								return true;
 						}
 						return elementRefType.equals(input.getEClass()
