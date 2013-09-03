@@ -1,13 +1,12 @@
 GeneratorModel for sctunit::java {
 
-//	test AllTests{
-//		
-//		feature Outlet{ 
-//			targetProject = "org.yakindu.sct.generator.java.test" 
-//			targetFolder = "test-gen"			
-//		}			
-//	}
-	
+	test AllTests{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
 	
 	test AlwaysOncycle{
 		

@@ -1,14 +1,13 @@
 GeneratorModel for sctunit::c {
 
-//	test AllTests{
-//		
-//		feature Outlet{ 
-//			targetProject = "org.yakindu.sct.generator.c.test" 
-//			targetFolder = "test-gen"			
-//		}			
-//	}
-	
-	
+	test AllTests{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
 	test AlwaysOncycle{
 		
 		feature Outlet{ 
