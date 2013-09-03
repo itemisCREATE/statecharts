@@ -9,20 +9,23 @@
  *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.generator.c.test;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AlwaysOncycle.class, AssignmentAsExpression.class, BitExpressions.class, BooleanExpressions.class,
-		CKeywords.class, Declarations.class, Choice.class, DeepHistory.class, EnterState.class, ExitState.class,
-		ExitOnSelfTransition.class, Guard.class, GuardedEntry.class, GuardedExit.class,
-		HistoryWithoutInitialStep.class, IntegerExpressions.class, InEventLifeCycle.class,
-		InternalEventLifeCycle.class, OutEventLifeCycle.class, Parenthesis.class, PriorityValues.class,
-		RaiseEvent.class, SameNameDifferentRegion.class, ShallowHistory.class, SimpleHierachy.class,
-		StateIsActive.class, StatechartLocalReactions.class, StringExpressions.class, SyncFork.class, SyncJoin.class,
-		SimpleEvent.class, STextKeywordsInStatesAndRegions.class, TransitionWithoutCondition.class, ValuedEvents.class,
-		NamedInterfaceAccess.class})
+@SuiteClasses({AlwaysOncycle.class, AssignmentAsExpression.class,
+		BitExpressions.class, BooleanExpressions.class, Choice.class,
+		CKeywords.class, Declarations.class, DeepHistory.class,
+		EnterState.class, ExitOnSelfTransition.class, ExitState.class,
+		Guard.class, GuardedEntry.class, GuardedExit.class,
+		HistoryWithoutInitialStep.class, InEventLifeCycle.class,
+		IntegerExpressions.class, InternalEventLifeCycle.class,
+		NamedInterfaceAccess.class, OutEventLifeCycle.class, Parenthesis.class,
+		PriorityValues.class, RaiseEvent.class, SameNameDifferentRegion.class,
+		ShallowHistory.class, SimpleHierachy.class, StateIsActive.class,
+		StatechartLocalReactions.class, StringExpressions.class,
+		SyncFork.class, SyncJoin.class, SimpleEvent.class,
+		STextKeywordsInStatesAndRegions.class})
 public class AllTests {
 }

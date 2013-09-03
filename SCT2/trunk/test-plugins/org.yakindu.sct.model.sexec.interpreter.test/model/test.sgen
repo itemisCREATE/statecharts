@@ -1,14 +1,14 @@
 GeneratorModel for sctunit::interpreter {
 
-//	test AllTests{
-//		
-//		feature Outlet{ 
-//			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
-//			targetFolder = "test-gen"			
-//		}			
-//	}
+	test AllTests {
 	
-	test AlwaysOncycle{
+		feature Outlet {
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test"
+			targetFolder = "test-gen"
+		}
+	}	
+	
+	test AlwaysOncycle{ 
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
