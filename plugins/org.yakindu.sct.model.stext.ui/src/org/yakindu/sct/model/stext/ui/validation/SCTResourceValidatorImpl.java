@@ -23,11 +23,10 @@ import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 public class SCTResourceValidatorImpl extends ResourceValidatorImpl {
 
 	@Override
-	protected void resolveProxies(final Resource resource,
-			final CancelIndicator monitor) {
+	protected void resolveProxies(final Resource resource, final CancelIndicator monitor) {
 		if (resource instanceof AbstractSCTResource) {
-			((AbstractSCTResource) resource)
-					.resolveLazyCrossReferences(monitor);
-		}
+			((AbstractSCTResource) resource).resolveLazyCrossReferences(monitor);
+		} else
+			super.resolveProxies(resource, monitor);
 	}
 }
