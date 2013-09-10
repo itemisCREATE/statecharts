@@ -14,6 +14,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.ui.sourcelookup.ISourceDisplay;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -22,8 +23,7 @@ import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
-import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
-import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
@@ -39,20 +39,19 @@ import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
 public class SCTSourceDisplay implements ISourceDisplay {
 
 	private Map<IEditorPart, IDynamicNotationHandler> handler = null;
-	private IExecutionFacade facade = null;
+	private ISimulationEngine container = null;
 
-	public SCTSourceDisplay(IExecutionFacade facade) {
-		this.facade = facade;
+	public SCTSourceDisplay(ISimulationEngine container) {
+		this.container = container;
 		handler = new HashMap<IEditorPart, IDynamicNotationHandler>();
 	}
 
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
-		SCTDebugElement debugElement = (SCTDebugElement) element;
+		DebugElement debugElement = (DebugElement) element;
 		IEditorPart editor = openEditor(debugElement, page);
 		IDynamicNotationHandler notationHandler = handler.get(editor);
 		if (notationHandler == null) {
-			notationHandler = new ExecutionPathDynamicNotationHandler();
-			facade.addTraceListener(notationHandler);
+			notationHandler = new DefaultDynamicNotationHandler();
 			IHighlightingSupport support = (IHighlightingSupport) editor.getAdapter(IHighlightingSupport.class);
 			notationHandler.setHighlightingSupport(support);
 			handler.put(editor, notationHandler);
@@ -61,7 +60,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 			notationHandler.getHighlightingSupport().releaseEditor();
 		}
 		notationHandler.getHighlightingSupport().lockEditor();
-		notationHandler.restoreNotationState(facade.getExecutionContext());
+		notationHandler.updateExecutionContext(container.getExecutionContext());
 	}
 
 	public void terminate() {
@@ -69,11 +68,10 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		for (IDynamicNotationHandler notationHandler : values) {
 			if (notationHandler.getHighlightingSupport().isLocked())
 				notationHandler.getHighlightingSupport().releaseEditor();
-			facade.removeTraceListener(notationHandler);
 		}
 	}
 
-	private IEditorPart openEditor(SCTDebugElement debugElement, IWorkbenchPage page) {
+	private IEditorPart openEditor(DebugElement debugElement, IWorkbenchPage page) {
 		EObject semanticObject = (EObject) debugElement.getAdapter(EObject.class);
 		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
 		Resource sharedDomainResource = DiagramPartitioningUtil.getSharedDomain().getResourceSet()

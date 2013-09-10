@@ -12,9 +12,7 @@ package org.yakindu.sct.simulation.ui.view.editing;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ColumnViewer;
-import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
-import org.yakindu.sct.simulation.core.runtime.ISlot;
-import org.yakindu.sct.simulation.core.runtime.impl.AbstractSlot;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 
 /**
  * 
@@ -33,15 +31,12 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 
 	@Override
 	public boolean canEdit(Object element) {
-		if (element instanceof AbstractSlot) {
-			Object value = ((AbstractSlot) element).getValue();
-			// TODO: check compatibility via (type system ) type not via class
-			// of value
-			if ( value == null ) {
+		if (element instanceof ExecutionSlot) {
+			Object value = ((ExecutionSlot) element).getValue();
+			if (value == null) {
 				return false;
 			} else if (value instanceof EObject) {
-				return getSupportedType().isAssignableFrom(
-						((EObject) value).eClass().getInstanceClass());
+				return getSupportedType().isAssignableFrom(((EObject) value).eClass().getInstanceClass());
 			} else {
 				return getSupportedType().isAssignableFrom(value.getClass());
 			}
@@ -51,23 +46,21 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 
 	@Override
 	public Object getValue(Object element) {
-		if (element instanceof AbstractSlot) {
-			Object value = ((ISlot) element).getValue();
+		if (element instanceof ExecutionSlot) {
+			Object value = ((ExecutionSlot) element).getValue();
 			if (value != null)
 				return String.valueOf(value);
 		}
 		return "";
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void setValue(Object element, Object value) {
 		value = convertValue(element, value);
 		if (value == null)
 			return;
-		IExecutionContext input = (IExecutionContext) getViewer().getInput();
-		if (element instanceof AbstractSlot) {
-			input.setSlotValue(((ISlot) element).getName(), value);
+		if (element instanceof ExecutionSlot) {
+			((ExecutionSlot) element).setValue(value);
 		}
 	}
 }

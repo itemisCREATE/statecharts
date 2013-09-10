@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.simulation.ui.perspective;
 
-import static org.yakindu.sct.simulation.core.launch.IStatechartLaunchConfigurationType.CONFIG_TYPE;
 import static org.yakindu.sct.ui.perspectives.IYakinduSctPerspectives.ID_PERSPECTIVE_SCT_SIMULATION;
 
 import org.eclipse.core.runtime.CoreException;
@@ -28,6 +27,7 @@ import org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.progress.UIJob;
+import org.yakindu.sct.simulation.core.launch.ISCTLaunchConfigurationType;
 
 /**
  * custom implementation of the {@link PerspectiveManager} for the Yakindu
@@ -40,36 +40,26 @@ import org.eclipse.ui.progress.UIJob;
  * 
  */
 @SuppressWarnings("restriction")
-public class SCTPerspectiveManager extends PerspectiveManager implements
-		ILaunchListener {
+public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener {
 
 	private static final String DEBUG_VIEW_ID = "org.eclipse.debug.ui.DebugView";
 
 	public void launchAdded(ILaunch launch) {
 
-		ILaunchConfigurationType statechartLaunchType = DebugPlugin
-				.getDefault().getLaunchManager()
-				.getLaunchConfigurationType(CONFIG_TYPE);
+		ILaunchConfigurationType statechartLaunchType = DebugPlugin.getDefault().getLaunchManager()
+				.getLaunchConfigurationType(ISCTLaunchConfigurationType.CONFIG_TYPE);
 		try {
-			if (statechartLaunchType.equals(launch.getLaunchConfiguration()
-					.getType())) {
-				Job switchJob = new UIJob(DebugUIPlugin.getStandardDisplay(),
-						"Perspective Switch Job") { //$NON-NLS-1$
+			if (statechartLaunchType.equals(launch.getLaunchConfiguration().getType())) {
+				Job switchJob = new UIJob(DebugUIPlugin.getStandardDisplay(), "Perspective Switch Job") { //$NON-NLS-1$
 					public IStatus runInUIThread(IProgressMonitor monitor) {
-						IWorkbenchWindow window = DebugUIPlugin
-								.getActiveWorkbenchWindow();
-						if (window != null
-								&& !(isCurrentPerspective(window,
-										ID_PERSPECTIVE_SCT_SIMULATION))) {
-							switchToPerspective(window,
-									ID_PERSPECTIVE_SCT_SIMULATION);
+						IWorkbenchWindow window = DebugUIPlugin.getActiveWorkbenchWindow();
+						if (window != null && !(isCurrentPerspective(window, ID_PERSPECTIVE_SCT_SIMULATION))) {
+							switchToPerspective(window, ID_PERSPECTIVE_SCT_SIMULATION);
 						}
 						// Force the debug view to open
 						if (window != null) {
 							try {
-								window.getWorkbench()
-										.getActiveWorkbenchWindow()
-										.getActivePage()
+								window.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 										.showView(DEBUG_VIEW_ID);
 							} catch (PartInitException e) {
 								e.printStackTrace();
@@ -80,8 +70,7 @@ public class SCTPerspectiveManager extends PerspectiveManager implements
 				};
 				switchJob.setSystem(true);
 				switchJob.setPriority(Job.INTERACTIVE);
-				switchJob.setRule(AsynchronousSchedulingRuleFactory
-						.getDefault().newSerialPerObjectRule(this));
+				switchJob.setRule(AsynchronousSchedulingRuleFactory.getDefault().newSerialPerObjectRule(this));
 				switchJob.schedule();
 			}
 		} catch (CoreException ex) {

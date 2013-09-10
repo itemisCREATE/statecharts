@@ -2,8 +2,6 @@ package org.yakindu.sct.simulation.ui.model.presenter;
 
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.swt.widgets.Display;
-import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 import org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants;
 
@@ -15,8 +13,6 @@ import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
  */
 public abstract class AbstractDynamicNotationHandler implements
 		IDynamicNotationHandler, IPropertyChangeListener {
-
-	protected abstract void visualizeStep(Trace trace);
 
 	protected abstract void updatePreferences();
 
@@ -33,14 +29,6 @@ public abstract class AbstractDynamicNotationHandler implements
 
 	public void setHighlightingSupport(IHighlightingSupport support) {
 		this.support = support;
-	}
-
-	public final void traceStepExecuted(final Trace trace) {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				visualizeStep(trace);
-			}
-		});
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {

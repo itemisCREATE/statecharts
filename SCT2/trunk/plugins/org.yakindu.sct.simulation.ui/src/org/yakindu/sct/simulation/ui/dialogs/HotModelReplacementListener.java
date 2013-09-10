@@ -14,9 +14,9 @@ import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.internal.ui.DebugUIPlugin;
 import org.eclipse.swt.widgets.Display;
-import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.core.hmr.IHotModelReplacementListener;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 
@@ -34,7 +34,7 @@ public class HotModelReplacementListener implements
 			SimulationActivator.PLUGIN_ID, IStatus.WARNING,
 			"Resource changed during simulation", null);
 
-	public void hotCodeReplaceFailed(final List<SCTDebugTarget> targets) {
+	public void hotCodeReplaceFailed(final List<IDebugTarget> targets) {
 		final Display display = Display.getDefault();
 		try {
 			final String title = "Model changed during simulation";

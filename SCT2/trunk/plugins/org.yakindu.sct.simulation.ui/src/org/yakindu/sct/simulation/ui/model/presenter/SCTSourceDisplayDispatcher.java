@@ -16,17 +16,16 @@ import java.util.Map;
 import org.eclipse.debug.core.DebugEvent;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IDebugEventSetListener;
+import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.ui.sourcelookup.ISourceDisplay;
 import org.eclipse.ui.IWorkbenchPage;
-import org.yakindu.sct.simulation.core.debugmodel.SCTDebugElement;
-import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
-import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 
 /**
- * Creates a {@link SCTSourceDisplay} for each {@link SCTDebugTarget} and
+ * Creates a {@link SCTSourceDisplay} for each {@link IDebugTarget} and
  * registeres itself as a {@link IDebugEventSetListener}. Terminate events are
- * deleged to the coresponding {@link SCTDebugTarget}
+ * deleged to the coresponding {@link IDebugTarget}
  * 
  * @author andreas muelder - Initial contribution and API
  * 
@@ -41,12 +40,13 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 	}
 
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
-		SCTDebugElement debugElement = (SCTDebugElement) element;
+		DebugElement debugElement = (DebugElement) element;
 		if (debugElement.getDebugTarget().isTerminated())
 			return;
 		SCTSourceDisplay sourceDisplay = target2Display.get(debugElement.getDebugTarget());
 		if (sourceDisplay == null) {
-			sourceDisplay = new SCTSourceDisplay((IExecutionFacade) debugElement.getAdapter(IExecutionFacade.class));
+			sourceDisplay = new SCTSourceDisplay(
+					(ISimulationEngine) debugElement.getAdapter(ISimulationEngine.class));
 			target2Display.put(debugElement.getDebugTarget(), sourceDisplay);
 		}
 		sourceDisplay.displaySource(debugElement, page, forceSourceLookup);
@@ -68,8 +68,8 @@ public class SCTSourceDisplayDispatcher implements ISourceDisplay, IDebugEventSe
 
 	protected void handleDebugTargetTerminated(DebugEvent debugEvent) {
 		Object source = debugEvent.getSource();
-		if (source instanceof SCTDebugTarget) {
-			SCTDebugTarget target = (SCTDebugTarget) source;
+		if (source instanceof IDebugTarget) {
+			IDebugTarget target = (IDebugTarget) source;
 			SCTSourceDisplay sourceDisplay = target2Display.get(target);
 			if (sourceDisplay != null) {
 				sourceDisplay.terminate();

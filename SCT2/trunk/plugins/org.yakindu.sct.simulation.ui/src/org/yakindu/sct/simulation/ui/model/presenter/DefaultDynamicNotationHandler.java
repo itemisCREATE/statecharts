@@ -10,29 +10,33 @@
  */
 package org.yakindu.sct.simulation.ui.model.presenter;
 
-import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.*;
+import static org.eclipse.emf.common.notify.Notification.ADD;
+import static org.eclipse.emf.common.notify.Notification.ADD_MANY;
+import static org.eclipse.emf.common.notify.Notification.REMOVE;
+import static org.eclipse.emf.common.notify.Notification.REMOVE_MANY;
+import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.STATE_BACKGROUND_HIGHLIGHTING_COLOR;
+import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.STATE_FOREGROUND_HIGHLIGHTING_COLOR;
+import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR;
+import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.VERTEX_BACKGROUND_TRANSIENT_COLOR;
+import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.VERTEX_FOREGROUND_TRANSIENT_COLOR;
+import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.*;
 
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
+import java.util.List;
+
 import org.eclipse.draw2d.ColorConstants;
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-import org.yakindu.sct.model.sexec.ReactionFired;
-import org.yakindu.sct.model.sexec.Trace;
-import org.yakindu.sct.model.sexec.TraceBeginRunCycle;
-import org.yakindu.sct.model.sexec.TraceEndRunCycle;
-import org.yakindu.sct.model.sexec.TraceNodeExecuted;
-import org.yakindu.sct.model.sexec.TraceReactionWillFire;
-import org.yakindu.sct.model.sexec.TraceStateEntered;
-import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
+import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
-
-
 
 import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
 
@@ -41,121 +45,100 @@ import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
  * @author axel terfloth - Additions
  * 
  */
-public class DefaultDynamicNotationHandler extends
-		AbstractDynamicNotationHandler {
+public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandler {
 
-	protected static HighlightingParameters TRANSITION_PARAMS = new HighlightingParameters(
-			0, ColorConstants.darkGreen, ColorConstants.gray, false);
+	protected static HighlightingParameters TRANSITION_PARAMS = new HighlightingParameters(0, ColorConstants.darkGreen,
+			ColorConstants.gray, false);
+
+	protected static HighlightingParameters SUSPENDED_PARAMS = new HighlightingParameters(0, ColorConstants.green,
+			HighlightingParameters.DEFAULT.backgroundFadingColor, false);
+
+	ExecutionContextVisualizer visualizer = new ExecutionContextVisualizer();
 
 	protected static HighlightingParameters STATE_HIGHLIGHT_PARAMS = HighlightingParameters.DEFAULT;
 
-	protected static HighlightingParameters VERTEX_TRANSIENT_PARAMS = new HighlightingParameters(
-			0, ColorConstants.darkGreen, ColorConstants.green, false);;
+	protected static HighlightingParameters VERTEX_TRANSIENT_PARAMS = new HighlightingParameters(0,
+			ColorConstants.darkGreen, ColorConstants.green, false);
 
+	protected ExecutionContext context;
 
 	public DefaultDynamicNotationHandler() {
 		updatePreferences();
 	}
 
-	public void restoreNotationState(IExecutionContext context) {
+	public void updateExecutionContext(ExecutionContext context) {
+		if (this.context != null)
+			this.context.eAdapters().remove(visualizer);
+		this.context = context;
+		restoreNotationState(this.context);
+		this.context.eAdapters().add(visualizer);
+	}
+
+	protected void restoreNotationState(ExecutionContext context) {
 		for (Vertex vertex : context.getAllActiveStates()) {
-			getHighlightingSupport().fadeIn(vertex,
-					HighlightingParameters.DEFAULT);
+			getHighlightingSupport().fadeIn(vertex, HighlightingParameters.DEFAULT);
 		}
-
-	}
-
-
-	public void visualizeStep(final TraceBeginRunCycle trace) {
-	}
-
-	
-	public void visualizeStep(final TraceEndRunCycle trace) {
-	}
-
-	
-	public void visualizeStep(final TraceStateEntered trace) {
-		getHighlightingSupport().fadeIn(
-				((TraceStateEntered) trace).getState().getSourceElement(),
-				HighlightingParameters.DEFAULT);
-	}
-
-	public void visualizeStep(final TraceStateExited trace) {
-		getHighlightingSupport().fadeOut(
-				((TraceStateExited) trace).getState().getSourceElement(),
-				HighlightingParameters.DEFAULT);
-	}
-
-	public void visualizeStep(final ReactionFired trace) {
-		getHighlightingSupport().flash(
-				trace.getReaction().getSourceElement(),
-				HighlightingParameters.DEFAULT);
-	}
-
-	public void visualizeStep(final TraceNodeExecuted trace) {
-		getHighlightingSupport().flash(
-				trace.getNode().getSourceElement(),
-				HighlightingParameters.DEFAULT);
-	}
-	
-	
-	public void visualizeStep(final TraceReactionWillFire trace) {
-	}
-
-	
-	/** 
-	 * this dispatch method invokes the appropriate handler methods for the different trace step types. 
-	 */
-	public void visualizeStep(final Trace trace) {
-		if (trace instanceof TraceBeginRunCycle)
-			visualizeStep((TraceBeginRunCycle) trace);
-		else if (trace instanceof TraceStateEntered)
-			visualizeStep((TraceStateEntered) trace);
-		else if (trace instanceof TraceStateExited)
-			visualizeStep((TraceStateExited) trace);
-		else if (trace instanceof ReactionFired)
-			visualizeStep((ReactionFired) trace);
-		else if (trace instanceof TraceNodeExecuted)
-			visualizeStep((TraceNodeExecuted) trace);
-		else if (trace instanceof TraceEndRunCycle)
-			visualizeStep((TraceEndRunCycle) trace);
-		else if (trace instanceof TraceReactionWillFire)
-			visualizeStep((TraceReactionWillFire) trace);
-		else {
-			SimulationActivator
-			.getDefault()
-			.getLog()
-			.log(new Status(IStatus.WARNING, SimulationActivator.PLUGIN_ID,
-					"ignored unknown trace step of type: " + trace.getClass().getName()));
+		List<EObject> executedElements = context.getExecutedElements();
+		for (EObject eObject : executedElements) {
+			getHighlightingSupport().flash(eObject, HighlightingParameters.DEFAULT);
 		}
 	}
 
-	
+	protected class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
+
+		@Override
+		protected boolean shouldAdapt(EStructuralFeature feature) {
+			return feature == EXECUTION_CONTEXT__ACTIVE_STATES || feature == EXECUTION_CONTEXT__EXECUTED_ELEMENTS
+					|| feature == EXECUTION_CONTEXT__SUSPENDED_ELEMENTS;
+		}
+
+		@Override
+		public void notifyChanged(final Notification notification) {
+			super.notifyChanged(notification);
+			Display.getDefault().syncExec(new Runnable() {
+				public void run() {
+					int eventType = notification.getEventType();
+					if (notification.getFeature() == EXECUTION_CONTEXT__ACTIVE_STATES) {
+						if (eventType == ADD || eventType == ADD_MANY) {
+							getHighlightingSupport().fadeIn((EObject) notification.getNewValue(),
+									HighlightingParameters.DEFAULT);
+						} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
+							getHighlightingSupport().fadeOut((EObject) notification.getOldValue(),
+									HighlightingParameters.DEFAULT);
+						}
+					} else if (notification.getFeature() == EXECUTION_CONTEXT__EXECUTED_ELEMENTS) {
+						if (eventType == ADD || eventType == ADD_MANY) {
+							getHighlightingSupport().fadeIn((EObject) notification.getNewValue(), TRANSITION_PARAMS);
+						} else if (eventType == REMOVE) {
+							getHighlightingSupport().fadeOut((EObject) notification.getOldValue(),
+									HighlightingParameters.DEFAULT);
+						}
+					} else if (notification.getFeature() == EXECUTION_CONTEXT__SUSPENDED_ELEMENTS) {
+						if (eventType == ADD || eventType == ADD_MANY) {
+							getHighlightingSupport().fadeIn((EObject) notification.getNewValue(), SUSPENDED_PARAMS);
+						} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
+							getHighlightingSupport().fadeOut((EObject) notification.getOldValue(), SUSPENDED_PARAMS);
+						}
+					}
+				}
+			});
+		}
+	}
+
 	protected void updatePreferences() {
-		IPreferenceStore store = SimulationActivator.getDefault()
-				.getPreferenceStore();
+		IPreferenceStore store = SimulationActivator.getDefault().getPreferenceStore();
 		// read out the new colors
-		RGB foregroundColor = PreferenceConverter.getColor(store,
-				STATE_FOREGROUND_HIGHLIGHTING_COLOR);
-		RGB backgroundColor = PreferenceConverter.getColor(store,
-				STATE_BACKGROUND_HIGHLIGHTING_COLOR);
-		RGB vertexForegroundColor = PreferenceConverter.getColor(store,
-				VERTEX_FOREGROUND_TRANSIENT_COLOR);
-		RGB vertexBackgroundColor = PreferenceConverter.getColor(store,
-				VERTEX_BACKGROUND_TRANSIENT_COLOR);
-		RGB transitionColor = PreferenceConverter.getColor(store,
-				TRANSITION_HIGHLIGHTING_COLOR);	
-		
+		RGB foregroundColor = PreferenceConverter.getColor(store, STATE_FOREGROUND_HIGHLIGHTING_COLOR);
+		RGB backgroundColor = PreferenceConverter.getColor(store, STATE_BACKGROUND_HIGHLIGHTING_COLOR);
+		RGB vertexForegroundColor = PreferenceConverter.getColor(store, VERTEX_FOREGROUND_TRANSIENT_COLOR);
+		RGB vertexBackgroundColor = PreferenceConverter.getColor(store, VERTEX_BACKGROUND_TRANSIENT_COLOR);
+		RGB transitionColor = PreferenceConverter.getColor(store, TRANSITION_HIGHLIGHTING_COLOR);
+
 		// Set the new colors
-		STATE_HIGHLIGHT_PARAMS.foregroundFadingColor = new Color(Display.getDefault(),
-				foregroundColor);
-		STATE_HIGHLIGHT_PARAMS.backgroundFadingColor = new Color(Display.getDefault(),
-				backgroundColor);
-		VERTEX_TRANSIENT_PARAMS.foregroundFadingColor = new Color(Display.getDefault(),
-				vertexForegroundColor);
-		VERTEX_TRANSIENT_PARAMS.backgroundFadingColor = new Color(Display.getDefault(),
-				vertexBackgroundColor);
-		TRANSITION_PARAMS.foregroundFadingColor = new Color(
-				Display.getDefault(), transitionColor);
+		STATE_HIGHLIGHT_PARAMS.foregroundFadingColor = new Color(Display.getDefault(), foregroundColor);
+		STATE_HIGHLIGHT_PARAMS.backgroundFadingColor = new Color(Display.getDefault(), backgroundColor);
+		VERTEX_TRANSIENT_PARAMS.foregroundFadingColor = new Color(Display.getDefault(), vertexForegroundColor);
+		VERTEX_TRANSIENT_PARAMS.backgroundFadingColor = new Color(Display.getDefault(), vertexBackgroundColor);
+		TRANSITION_PARAMS.foregroundFadingColor = new Color(Display.getDefault(), transitionColor);
 	}
 }
