@@ -11,6 +11,7 @@ import java.util.*;
  *
  * @author Axel Terfloth
  */
+@SuppressWarnings("all")
 abstract public class DFS {
 
 	/** Indicates whether the algorithm has been performed or not.*/
