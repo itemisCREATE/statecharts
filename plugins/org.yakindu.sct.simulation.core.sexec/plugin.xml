@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<!-- run configuration -->
+	<extension point="org.eclipse.debug.core.launchConfigurationTypes">
+    	<launchConfigurationType
+          delegate="org.yakindu.sct.simulation.core.sexec.launch.SexecLaunchConfigurationDelegate"
+          id="org.yakindu.sct.simulation.core.launch.statechart"
+          modes="run"
+          name="YAKINDU Statechart">
+    	</launchConfigurationType>
+	</extension>
+</plugin>
