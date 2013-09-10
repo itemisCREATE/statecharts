@@ -24,4 +24,5 @@ public class STextRuntimeTestModule extends STextRuntimeModule {
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return STextTestScopeProvider.class;
 	}
+	
 }

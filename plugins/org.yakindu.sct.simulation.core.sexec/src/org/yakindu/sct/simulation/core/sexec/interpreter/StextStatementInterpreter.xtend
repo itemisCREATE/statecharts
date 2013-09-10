@@ -75,12 +75,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		var scopeVariable = context.getVariable(assignment.varRef.variable.getFullyQualifiedName.toString)
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
-			context.getVariable(scopeVariable.getName).value = result
+			scopeVariable.value = result
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
-			context.getVariable(scopeVariable.name).value = evaluate(operator, scopeVariable.getValue, result)
+			scopeVariable.value = evaluate(operator, scopeVariable.getValue, result)
 		}
-		context.getVariable(scopeVariable.name).value
+		scopeVariable.value
 	}
 
 	def dispatch EObject variable(ElementReferenceExpression e) {
@@ -138,7 +138,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
 		for (event : context.raisedEvents) {
-			if (event.getName.equals(expression.value.qname)) {
+			if (event.fqName.equals(expression.value.qname)) {
 				return event.getValue;
 			};
 		}
@@ -158,7 +158,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(ActiveStateReferenceExpression expression) {
-		return context.allActiveStates.contains(expression.value)
+		var state = expression.value
+		return context.allActiveStates.contains(state)
 	}
 
 	def dispatch Object execute(LogicalAndExpression expression) {

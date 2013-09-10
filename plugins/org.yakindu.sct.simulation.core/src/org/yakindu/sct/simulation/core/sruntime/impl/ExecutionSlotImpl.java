@@ -32,7 +32,7 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getQualifiedName <em>Qualified Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getFqName <em>Fq Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,14 +80,24 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	protected Object value = VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getQualifiedName() <em>Qualified Name</em>}' attribute.
+	 * The default value of the '{@link #getFqName() <em>Fq Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getQualifiedName()
+	 * @see #getFqName()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String QUALIFIED_NAME_EDEFAULT = null;
+	protected static final String FQ_NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getFqName() <em>Fq Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFqName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String fqName = FQ_NAME_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -155,10 +165,20 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getQualifiedName() {
-		// TODO: implement this method to return the 'Qualified Name' attribute
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+	public String getFqName() {
+		return fqName;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setFqName(String newFqName) {
+		String oldFqName = fqName;
+		fqName = newFqName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_SLOT__FQ_NAME, oldFqName, fqName));
 	}
 
 	/**
@@ -173,8 +193,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return getType();
 			case SRuntimePackage.EXECUTION_SLOT__VALUE:
 				return getValue();
-			case SRuntimePackage.EXECUTION_SLOT__QUALIFIED_NAME:
-				return getQualifiedName();
+			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
+				return getFqName();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -192,6 +212,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return;
 			case SRuntimePackage.EXECUTION_SLOT__VALUE:
 				setValue(newValue);
+				return;
+			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
+				setFqName((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -211,6 +234,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 			case SRuntimePackage.EXECUTION_SLOT__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
+			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
+				setFqName(FQ_NAME_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -227,8 +253,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case SRuntimePackage.EXECUTION_SLOT__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case SRuntimePackage.EXECUTION_SLOT__QUALIFIED_NAME:
-				return QUALIFIED_NAME_EDEFAULT == null ? getQualifiedName() != null : !QUALIFIED_NAME_EDEFAULT.equals(getQualifiedName());
+			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
+				return FQ_NAME_EDEFAULT == null ? fqName != null : !FQ_NAME_EDEFAULT.equals(fqName);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -247,6 +273,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 		result.append(type);
 		result.append(", value: ");
 		result.append(value);
+		result.append(", fqName: ");
+		result.append(fqName);
 		result.append(')');
 		return result.toString();
 	}

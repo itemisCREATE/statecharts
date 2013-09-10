@@ -84,18 +84,18 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 
 	override runCycle() {
 		//Raise all schedules events
-		executionContext.events.filter[scheduled].forEach[raised = true scheduled = false]
+		executionContext.allEvents.filter[scheduled].forEach[raised = true scheduled = false]
 		activeStateIndex = 0
 		executionContext.executedElements.clear
 		//Clear all out events
-		executionContext.events.filter[direction == EventDirection.OUT].forEach[raised = false]
+		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[raised = false]
 		while (activeStateIndex < activeStateConfiguration.size) {
 			var state = activeStateConfiguration.get(activeStateIndex)
 			state?.reactSequence?.scheduleAndRun
 			activeStateIndex = activeStateIndex + 1
 		}
 		//clear all local and in events
-		executionContext.events.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
+		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
 			raised = false]
 	}
 
