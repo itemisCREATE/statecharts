@@ -356,7 +356,6 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 			if (fqName.equals(var.getFqName()))
 				return var;
 		}
-		System.out.println("No variable found: " + fqName + " " + getAllVariables());
 		return null;
 	}
 
@@ -371,7 +370,6 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 			if (fqName.equals(event.getFqName()))
 				return event;
 		}
-		System.out.println("No event found: " + fqName + " " + getAllEvents());
 		return null;
 	}
 
