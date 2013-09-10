@@ -10,11 +10,9 @@
  */
 package org.yakindu.sct.model.sexec.interpreter.test;
 
-import static org.junit.Assert.*;
-
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collections;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.EcoreFactoryImpl;
@@ -22,7 +20,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.yakindu.sct.model.sexec.interpreter.stext.CoreFunction;
+import org.yakindu.sct.simulation.core.sexec.interpreter.CoreFunction;
 
 /**
  * 

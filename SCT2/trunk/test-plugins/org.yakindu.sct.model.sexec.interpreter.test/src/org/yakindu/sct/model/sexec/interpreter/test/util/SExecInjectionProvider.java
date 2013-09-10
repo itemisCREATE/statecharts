@@ -11,8 +11,8 @@
 package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
-import org.yakindu.sct.model.sexec.interpreter.InterpreterModule;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
+import org.yakindu.sct.simulation.core.sexec.SimulationModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -26,8 +26,7 @@ import com.google.inject.util.Modules;
 public class SExecInjectionProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
-		return Guice.createInjector(Modules.override(new SequencerModule())
-				.with(new InterpreterModule()));
+		return Guice.createInjector(Modules.override(new SequencerModule()).with(new SimulationModule()));
 	}
 
 }
