@@ -27,10 +27,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getActiveStates <em>Active States</em>}</li>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getEvents <em>Events</em>}</li>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getVariables <em>Variables</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getExecutedElements <em>Executed Elements</em>}</li>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getSlots <em>Slots</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getSuspendedElements <em>Suspended Elements</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#isSnapshot <em>Snapshot</em>}</li>
  * </ul>
@@ -40,7 +37,7 @@ import org.yakindu.sct.model.sgraph.RegularState;
  * @model
  * @generated
  */
-public interface ExecutionContext extends NamedElement {
+public interface ExecutionContext extends NamedElement, CompositeSlot {
 	/**
 	 * Returns the value of the '<em><b>Active States</b></em>' reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.RegularState}.
@@ -58,38 +55,6 @@ public interface ExecutionContext extends NamedElement {
 	List<RegularState> getActiveStates();
 
 	/**
-	 * Returns the value of the '<em><b>Events</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.sct.simulation.core.sruntime.ExecutionEvent}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Events</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Events</em>' reference list.
-	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionContext_Events()
-	 * @model transient="true" volatile="true" derived="true"
-	 * @generated
-	 */
-	List<ExecutionEvent> getEvents();
-
-	/**
-	 * Returns the value of the '<em><b>Variables</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.sct.simulation.core.sruntime.ExecutionVariable}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Variables</em>' reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Variables</em>' reference list.
-	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionContext_Variables()
-	 * @model transient="true" volatile="true" derived="true"
-	 * @generated
-	 */
-	List<ExecutionVariable> getVariables();
-
-	/**
 	 * Returns the value of the '<em><b>Executed Elements</b></em>' reference list.
 	 * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
 	 * <!-- begin-user-doc -->
@@ -104,22 +69,6 @@ public interface ExecutionContext extends NamedElement {
 	 * @generated
 	 */
 	List<EObject> getExecutedElements();
-
-	/**
-	 * Returns the value of the '<em><b>Slots</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Slots</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Slots</em>' containment reference list.
-	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionContext_Slots()
-	 * @model containment="true"
-	 * @generated
-	 */
-	List<ExecutionSlot> getSlots();
 
 	/**
 	 * Returns the value of the '<em><b>Suspended Elements</b></em>' reference list.
@@ -202,5 +151,21 @@ public interface ExecutionContext extends NamedElement {
 	 * @generated
 	 */
 	List<RegularState> getAllActiveStates();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	List<ExecutionEvent> getAllEvents();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	List<ExecutionVariable> getAllVariables();
 
 } // ExecutionContext

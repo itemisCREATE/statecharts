@@ -87,40 +87,31 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_CONTEXT__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Active States</b></em>' reference list.
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__ACTIVE_STATES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int EXECUTION_CONTEXT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Events</b></em>' reference list.
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__EVENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int EXECUTION_CONTEXT__VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Variables</b></em>' reference list.
+	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__VARIABLES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Executed Elements</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_CONTEXT__EXECUTED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_CONTEXT__FQ_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
@@ -129,7 +120,25 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SLOTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_CONTEXT__SLOTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Active States</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__ACTIVE_STATES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Executed Elements</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__EXECUTED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Suspended Elements</b></em>' reference list.
@@ -138,7 +147,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SUSPENDED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int EXECUTION_CONTEXT__SUSPENDED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Snapshot</b></em>' attribute.
@@ -147,7 +156,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SNAPSHOT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int EXECUTION_CONTEXT__SNAPSHOT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>Execution Context</em>' class.
@@ -156,7 +165,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int EXECUTION_CONTEXT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl <em>Execution Slot</em>}' class.
@@ -196,13 +205,13 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_SLOT__VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SLOT__QUALIFIED_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_SLOT__FQ_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Execution Slot</em>' class.
@@ -251,13 +260,13 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_EVENT__VALUE = EXECUTION_SLOT__VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_EVENT__QUALIFIED_NAME = EXECUTION_SLOT__QUALIFIED_NAME;
+	int EXECUTION_EVENT__FQ_NAME = EXECUTION_SLOT__FQ_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Raised</b></em>' attribute.
@@ -333,13 +342,13 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_VARIABLE__VALUE = EXECUTION_SLOT__VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_VARIABLE__QUALIFIED_NAME = EXECUTION_SLOT__QUALIFIED_NAME;
+	int EXECUTION_VARIABLE__FQ_NAME = EXECUTION_SLOT__FQ_NAME;
 
 	/**
 	 * The number of structural features of the '<em>Execution Variable</em>' class.
@@ -388,13 +397,13 @@ public interface SRuntimePackage extends EPackage {
 	int COMPOSITE_SLOT__VALUE = EXECUTION_SLOT__VALUE;
 
 	/**
-	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
+	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPOSITE_SLOT__QUALIFIED_NAME = EXECUTION_SLOT__QUALIFIED_NAME;
+	int COMPOSITE_SLOT__FQ_NAME = EXECUTION_SLOT__FQ_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
@@ -468,28 +477,6 @@ public interface SRuntimePackage extends EPackage {
 	EReference getExecutionContext_ActiveStates();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getEvents <em>Events</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Events</em>'.
-	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getEvents()
-	 * @see #getExecutionContext()
-	 * @generated
-	 */
-	EReference getExecutionContext_Events();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getVariables <em>Variables</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Variables</em>'.
-	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getVariables()
-	 * @see #getExecutionContext()
-	 * @generated
-	 */
-	EReference getExecutionContext_Variables();
-
-	/**
 	 * Returns the meta object for the reference list '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getExecutedElements <em>Executed Elements</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -499,17 +486,6 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExecutionContext_ExecutedElements();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getSlots <em>Slots</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Slots</em>'.
-	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getSlots()
-	 * @see #getExecutionContext()
-	 * @generated
-	 */
-	EReference getExecutionContext_Slots();
 
 	/**
 	 * Returns the meta object for the reference list '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionContext#getSuspendedElements <em>Suspended Elements</em>}'.
@@ -609,15 +585,15 @@ public interface SRuntimePackage extends EPackage {
 	EAttribute getExecutionSlot_Value();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getQualifiedName <em>Qualified Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getFqName <em>Fq Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
-	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getQualifiedName()
+	 * @return the meta object for the attribute '<em>Fq Name</em>'.
+	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getFqName()
 	 * @see #getExecutionSlot()
 	 * @generated
 	 */
-	EAttribute getExecutionSlot_QualifiedName();
+	EAttribute getExecutionSlot_FqName();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionVariable <em>Execution Variable</em>}'.
@@ -723,36 +699,12 @@ public interface SRuntimePackage extends EPackage {
 		EReference EXECUTION_CONTEXT__ACTIVE_STATES = eINSTANCE.getExecutionContext_ActiveStates();
 
 		/**
-		 * The meta object literal for the '<em><b>Events</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_CONTEXT__EVENTS = eINSTANCE.getExecutionContext_Events();
-
-		/**
-		 * The meta object literal for the '<em><b>Variables</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_CONTEXT__VARIABLES = eINSTANCE.getExecutionContext_Variables();
-
-		/**
 		 * The meta object literal for the '<em><b>Executed Elements</b></em>' reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference EXECUTION_CONTEXT__EXECUTED_ELEMENTS = eINSTANCE.getExecutionContext_ExecutedElements();
-
-		/**
-		 * The meta object literal for the '<em><b>Slots</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXECUTION_CONTEXT__SLOTS = eINSTANCE.getExecutionContext_Slots();
 
 		/**
 		 * The meta object literal for the '<em><b>Suspended Elements</b></em>' reference list feature.
@@ -831,12 +783,12 @@ public interface SRuntimePackage extends EPackage {
 		EAttribute EXECUTION_SLOT__VALUE = eINSTANCE.getExecutionSlot_Value();
 
 		/**
-		 * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Fq Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXECUTION_SLOT__QUALIFIED_NAME = eINSTANCE.getExecutionSlot_QualifiedName();
+		EAttribute EXECUTION_SLOT__FQ_NAME = eINSTANCE.getExecutionSlot_FqName();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl <em>Execution Variable</em>}' class.

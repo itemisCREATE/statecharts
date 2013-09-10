@@ -87,10 +87,6 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 		return SimulationActivator.getDefault().getPreferenceStore();
 	}
 
-	private boolean hideTimeEvents() {
-		return getStore().getBoolean(HideTimeEventsAction.HIDE_KEY);
-	}
-
 	public void propertyChange(PropertyChangeEvent event) {
 		if (event.getProperty() == HideTimeEventsAction.HIDE_KEY) {
 			if (viewer != null && !viewer.getControl().isDisposed())

@@ -15,12 +15,12 @@
       <genEnumLiterals ecoreEnumLiteral="sruntime.ecore#//EventDirection/OUT"/>
     </genEnums>
     <genDataTypes ecoreDataType="sruntime.ecore#//InferredType"/>
+    <genDataTypes ecoreDataType="sruntime.ecore#//JavaObject"/>
     <genClasses ecoreClass="sruntime.ecore#//ExecutionContext">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sruntime.ecore#//ExecutionContext/activeStates"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sruntime.ecore#//ExecutionContext/events"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sruntime.ecore#//ExecutionContext/variables"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sruntime.ecore#//ExecutionContext/executedElements"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sruntime.ecore#//ExecutionContext/slots"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sruntime.ecore#//ExecutionContext/suspendedElements"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionContext/snapshot"/>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getRaisedEvents"/>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getScheduledEvents"/>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getVariable">
@@ -30,6 +30,8 @@
         <genParameters ecoreParameter="sruntime.ecore#//ExecutionContext/getEvent/qualifiedName"/>
       </genOperations>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllActiveStates"/>
+      <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllEvents"/>
+      <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllVariables"/>
     </genClasses>
     <genClasses ecoreClass="sruntime.ecore#//ExecutionEvent">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionEvent/raised"/>
@@ -39,7 +41,7 @@
     <genClasses image="false" ecoreClass="sruntime.ecore#//ExecutionSlot">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionSlot/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionSlot/value"/>
-      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionSlot/qualifiedName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionSlot/fqName"/>
     </genClasses>
     <genClasses ecoreClass="sruntime.ecore#//ExecutionVariable"/>
     <genClasses ecoreClass="sruntime.ecore#//CompositeSlot">

@@ -111,8 +111,9 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected void raiseEvent(String eventName, Object value) {
-		context().getEvent(eventName).setRaised(true);
 		context().getEvent(eventName).setValue(value);
+		context().getEvent(eventName).setRaised(true);
+		
 	}
 
 	protected boolean isRaised(String eventName) {

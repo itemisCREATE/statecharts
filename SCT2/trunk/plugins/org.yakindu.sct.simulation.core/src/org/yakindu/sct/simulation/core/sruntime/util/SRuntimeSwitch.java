@@ -79,6 +79,8 @@ public class SRuntimeSwitch<T> extends Switch<T> {
 			case SRuntimePackage.EXECUTION_CONTEXT: {
 				ExecutionContext executionContext = (ExecutionContext)theEObject;
 				T result = caseExecutionContext(executionContext);
+				if (result == null) result = caseCompositeSlot(executionContext);
+				if (result == null) result = caseExecutionSlot(executionContext);
 				if (result == null) result = caseNamedElement(executionContext);
 				if (result == null) result = defaultCase(theEObject);
 				return result;

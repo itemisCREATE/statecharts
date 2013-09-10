@@ -24,7 +24,7 @@ import org.yakindu.base.types.ITypeSystem.InferredType;
  * <ul>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getValue <em>Value</em>}</li>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getQualifiedName <em>Qualified Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getFqName <em>Fq Name</em>}</li>
  * </ul>
  * </p>
  *
@@ -86,18 +86,29 @@ public interface ExecutionSlot extends NamedElement {
 	void setValue(Object value);
 
 	/**
-	 * Returns the value of the '<em><b>Qualified Name</b></em>' attribute.
+	 * Returns the value of the '<em><b>Fq Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Qualified Name</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Fq Name</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Qualified Name</em>' attribute.
-	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionSlot_QualifiedName()
-	 * @model transient="true" changeable="false" volatile="true" derived="true"
+	 * @return the value of the '<em>Fq Name</em>' attribute.
+	 * @see #setFqName(String)
+	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionSlot_FqName()
+	 * @model
 	 * @generated
 	 */
-	String getQualifiedName();
+	String getFqName();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getFqName <em>Fq Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Fq Name</em>' attribute.
+	 * @see #getFqName()
+	 * @generated
+	 */
+	void setFqName(String value);
 
 } // ExecutionSlot

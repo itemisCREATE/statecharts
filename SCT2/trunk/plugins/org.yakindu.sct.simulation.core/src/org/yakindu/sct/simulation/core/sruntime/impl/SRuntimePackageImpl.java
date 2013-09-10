@@ -180,7 +180,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionContext_Events() {
+	public EReference getExecutionContext_ExecutedElements() {
 		return (EReference)executionContextEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -189,7 +189,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionContext_Variables() {
+	public EReference getExecutionContext_SuspendedElements() {
 		return (EReference)executionContextEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -198,35 +198,8 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getExecutionContext_ExecutedElements() {
-		return (EReference)executionContextEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExecutionContext_Slots() {
-		return (EReference)executionContextEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getExecutionContext_SuspendedElements() {
-		return (EReference)executionContextEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getExecutionContext_Snapshot() {
-		return (EAttribute)executionContextEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)executionContextEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -297,7 +270,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExecutionSlot_QualifiedName() {
+	public EAttribute getExecutionSlot_FqName() {
 		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -385,10 +358,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		// Create classes and their features
 		executionContextEClass = createEClass(EXECUTION_CONTEXT);
 		createEReference(executionContextEClass, EXECUTION_CONTEXT__ACTIVE_STATES);
-		createEReference(executionContextEClass, EXECUTION_CONTEXT__EVENTS);
-		createEReference(executionContextEClass, EXECUTION_CONTEXT__VARIABLES);
 		createEReference(executionContextEClass, EXECUTION_CONTEXT__EXECUTED_ELEMENTS);
-		createEReference(executionContextEClass, EXECUTION_CONTEXT__SLOTS);
 		createEReference(executionContextEClass, EXECUTION_CONTEXT__SUSPENDED_ELEMENTS);
 		createEAttribute(executionContextEClass, EXECUTION_CONTEXT__SNAPSHOT);
 
@@ -400,7 +370,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		executionSlotEClass = createEClass(EXECUTION_SLOT);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__TYPE);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__VALUE);
-		createEAttribute(executionSlotEClass, EXECUTION_SLOT__QUALIFIED_NAME);
+		createEAttribute(executionSlotEClass, EXECUTION_SLOT__FQ_NAME);
 
 		executionVariableEClass = createEClass(EXECUTION_VARIABLE);
 
@@ -448,6 +418,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		// Add supertypes to classes
 		executionContextEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		executionContextEClass.getESuperTypes().add(this.getCompositeSlot());
 		executionEventEClass.getESuperTypes().add(this.getExecutionSlot());
 		executionSlotEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		executionVariableEClass.getESuperTypes().add(this.getExecutionSlot());
@@ -456,10 +427,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		// Initialize classes and features; add operations and parameters
 		initEClass(executionContextEClass, ExecutionContext.class, "ExecutionContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutionContext_ActiveStates(), theSGraphPackage.getRegularState(), null, "activeStates", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExecutionContext_Events(), this.getExecutionEvent(), null, "events", null, 0, -1, ExecutionContext.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getExecutionContext_Variables(), this.getExecutionVariable(), null, "variables", null, 0, -1, ExecutionContext.class, IS_TRANSIENT, IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionContext_ExecutedElements(), ecorePackage.getEObject(), null, "executedElements", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExecutionContext_Slots(), this.getExecutionSlot(), null, "slots", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExecutionContext_SuspendedElements(), ecorePackage.getEObject(), null, "suspendedElements", null, 0, -1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionContext_Snapshot(), ecorePackage.getEBoolean(), "snapshot", null, 0, 1, ExecutionContext.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -475,6 +443,10 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		addEOperation(executionContextEClass, theSGraphPackage.getRegularState(), "getAllActiveStates", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(executionContextEClass, this.getExecutionEvent(), "getAllEvents", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		addEOperation(executionContextEClass, this.getExecutionVariable(), "getAllVariables", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(executionEventEClass, ExecutionEvent.class, "ExecutionEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionEvent_Raised(), ecorePackage.getEBoolean(), "raised", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionEvent_Scheduled(), ecorePackage.getEBoolean(), "scheduled", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -483,7 +455,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		initEClass(executionSlotEClass, ExecutionSlot.class, "ExecutionSlot", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionSlot_Type(), this.getInferredType(), "type", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionSlot_Value(), this.getJavaObject(), "value", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getExecutionSlot_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 0, 1, ExecutionSlot.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExecutionSlot_FqName(), ecorePackage.getEString(), "fqName", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionVariableEClass, ExecutionVariable.class, "ExecutionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

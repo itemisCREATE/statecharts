@@ -478,32 +478,37 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		// var realVar : real
 		ExecutionVariable intVar = new ExecutionVariableImpl();
 		intVar.setName("intVar");
+		intVar.setFqName("intVar");
 		intVar.setType(new InferredType(typeSystem.getIntegerType()));
 		intVar.setValue(0);
-		context.getVariables().add(intVar);
+		context.getSlots().add(intVar);
 		
 		ExecutionVariable boolVar = new ExecutionVariableImpl();
-		intVar.setName("boolVar");
-		intVar.setType(new InferredType(typeSystem.getBooleanType()));
-		intVar.setValue(false);
-		context.getVariables().add(boolVar);
+		boolVar.setName("boolVar");
+		boolVar.setFqName("boolVar");
+		boolVar.setType(new InferredType(typeSystem.getBooleanType()));
+		boolVar.setValue(false);
+		context.getSlots().add(boolVar);
 		
 		ExecutionVariable realVar = new ExecutionVariableImpl();
-		intVar.setName("realVar");
-		intVar.setType(new InferredType(typeSystem.getRealType()));
-		intVar.setValue(0.0f);
-		context.getVariables().add(realVar);
+		realVar.setName("realVar");
+		realVar.setFqName("realVar");
+		realVar.setType(new InferredType(typeSystem.getRealType()));
+		realVar.setValue(0.0f);
+		context.getSlots().add(realVar);
 		
 		ExecutionVariable stringVar = new ExecutionVariableImpl();
-		intVar.setName("stringVar");
-		intVar.setType(new InferredType(typeSystem.getStringType()));
-		intVar.setValue("");
-		context.getVariables().add(stringVar);
+		stringVar.setName("stringVar");
+		stringVar.setFqName("stringVar");
+		stringVar.setType(new InferredType(typeSystem.getStringType()));
+		stringVar.setValue("");
+		context.getSlots().add(stringVar);
 		
 		ExecutionEvent event = new ExecutionEventImpl();
-		intVar.setName("abc");
-		intVar.setType(new InferredType(typeSystem.getIntegerType()));
-		context.getEvents().add(event);
+		event.setName("abc");
+		event.setFqName("abc");
+		event.setType(new InferredType(typeSystem.getIntegerType()));
+		context.getSlots().add(event);
 	}
 
 	protected Object getBoolValue() {

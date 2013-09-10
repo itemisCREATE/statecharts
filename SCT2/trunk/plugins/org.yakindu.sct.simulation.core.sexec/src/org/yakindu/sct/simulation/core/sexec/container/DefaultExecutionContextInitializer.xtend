@@ -24,6 +24,10 @@ import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
+import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
+import org.yakindu.sct.model.stext.stext.InternalScope
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.sgraph.Scope
 
 /**
  * 
@@ -37,31 +41,49 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	@Inject extension ISTextTypeInferrer
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
-		flow.scopes.forEach[declarations.forEach[context.slots += it.transform]]
+		flow.scopes.forEach[context.slots += transform]
+		print("")
 	}
-
+	
+	def dispatch create new CompositeSlotImpl() transform(InternalScope scope){
+		it.name = "internal"
+		scope.declarations.forEach[decl | it.slots += decl.transform]
+	}
+	
+	def dispatch create new CompositeSlotImpl() transform(Scope scope){
+		it.name = "time events"
+		scope.declarations.forEach[decl | it.slots += decl.transform]
+	}
+	
+	def dispatch create new CompositeSlotImpl() transform(InterfaceScope scope){
+		if(scope.name != null) it.name = scope.name else it.name = "default" 
+		scope.declarations.forEach[decl | it.slots += decl.transform]
+	}
+	
 	def dispatch create new ExecutionVariableImpl() transform(VariableDefinition variable) {
-		var qualifiedName = variable.fullyQualifiedName
-		qualifiedName.segments
-		it.name = variable.fullyQualifiedName.toString
+		it.name = variable.fullyQualifiedName.lastSegment
+		it.fqName = variable.fullyQualifiedName.toString
 		it.type = variable.inferType.type
 		it.value = it.type.defaultValue
 	}
 
 	def dispatch create new ExecutionEventImpl() transform(EventDefinition event) {
-		it.name = event.fullyQualifiedName.toString
+		it.name = event.fullyQualifiedName.lastSegment
+		it.fqName = event.fullyQualifiedName.toString
 		it.type = event.inferType.type
 		it.value = it.type.defaultValue
 		it.direction = EventDirection.get(event.direction.value)
 	}
 
 	def dispatch create new ExecutionVariableImpl() transform(OperationDefinition op) {
-		it.name = op.fullyQualifiedName.toString
+		it.name = op.fullyQualifiedName.lastSegment
+		it.fqName = op.fullyQualifiedName.toString
 		it.type = new InferredType(op.type)
 		it.value = it.type.defaultValue
 	}
 
 	def dispatch create new ExecutionEventImpl() transform(TimeEvent event) {
+		it.name = event.fullyQualifiedName.lastSegment
 		it.name = event.fullyQualifiedName.toString
 		it.type = new InferredType(integerType)
 		it.value = defaultValue(it.type)
