@@ -5,7 +5,7 @@
       version="2.1.2.qualifier"
       provider-name="yakindu.org">
 
-   <description >
+   <description>
       %description
    </description>
 
@@ -46,13 +46,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.model.sexec.interpreter.test"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.sct.model.sexec.test"
          download-size="0"
          install-size="0"
@@ -76,6 +69,13 @@
 
    <plugin
          id="org.yakindu.sct.test.models"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.simulation.core.sexec.test"
          download-size="0"
          install-size="0"
          version="0.0.0"

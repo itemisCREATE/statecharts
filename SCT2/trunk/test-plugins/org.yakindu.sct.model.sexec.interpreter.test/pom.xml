@@ -9,7 +9,7 @@
 		<version>2.1.2-SNAPSHOT</version>
 		<relativePath>../org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
-	<artifactId>org.yakindu.sct.model.sexec.interpreter.test</artifactId>
+	<artifactId>org.yakindu.sct.simulation.core.sexec.test</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-test-plugin</packaging>
 	
