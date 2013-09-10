@@ -15,12 +15,11 @@ import org.eclipse.jface.viewers.StyledCellLabelProvider;
 import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.custom.StyleRange;
 import org.yakindu.base.types.Enumerator;
-import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
-import org.yakindu.sct.simulation.core.runtime.ISlot;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 import org.yakindu.sct.simulation.ui.SimulationImages;
-import org.yakindu.sct.simulation.ui.view.ExecutionContextContentProvider.Container;
 
 /**
  * 
@@ -49,8 +48,8 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 
 	private void updateValueCell(ViewerCell cell) {
 		Object element = cell.getElement();
-		if (element instanceof ISlot) {
-			Object value = ((ISlot) element).getValue();
+		if (element instanceof ExecutionSlot) {
+			Object value = ((ExecutionSlot) element).getValue();
 			if (value != null) {
 				if (value instanceof Enumerator) {
 					cell.setText(((Enumerator) value).getName());
@@ -71,15 +70,12 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			style1.length = event.getName().length();
 			style1.underline = true;
 			style1.foreground = ColorConstants.lightBlue;
-			cell.setText(event.getSimpleName());
+			cell.setText(event.getName());
 			cell.setStyleRanges(new StyleRange[] { style1 });
 			if (event.getName().contains("time_event")) {
 				cell.setImage(SimulationImages.TIMEEVENT.image());
 			} else {
-				IExecutionContext context = (IExecutionContext) getViewer()
-						.getInput();
-				if (context.isEventRaised(event.getName())
-						|| context.isEventScheduled(event.getName())) {
+				if (event.isScheduled()) {
 					cell.setImage(SimulationImages.EVENT_ENABLED.image());
 				} else {
 					cell.setImage(SimulationImages.EVENT_DISABLED.image());
@@ -87,10 +83,10 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 			}
 		} else if (element instanceof ExecutionVariable) {
 			ExecutionVariable variable = (ExecutionVariable) element;
-			cell.setText(variable.getSimpleName());
+			cell.setText(variable.getName());
 			cell.setImage(SimulationImages.VARIABLE.image());
-		} else if (element instanceof Container) {
-			cell.setText(((Container) element).name);
+		} else if (element instanceof CompositeSlot) {
+			cell.setText(((CompositeSlot) element).getName());
 			cell.setImage(SimulationImages.SCOPE.image());
 		}
 	}
