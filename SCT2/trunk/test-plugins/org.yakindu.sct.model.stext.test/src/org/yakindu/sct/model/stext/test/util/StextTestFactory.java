@@ -28,6 +28,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
+import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -210,6 +211,12 @@ public class StextTestFactory extends StextFactoryImpl {
 		return _createLocalReaction(parent,
 				StextFactory.eINSTANCE.createExitEvent());
 	}
+	
+	public static Guard createGuardExpression(Expression expression) {
+		Guard guard = StextFactory.eINSTANCE.createGuard();
+		guard.setExpression(expression);
+		return guard;
+	}
 
 	public static LocalReaction _createTimeTriggeredReaction(State parent,
 			TimeEventType type, Expression value, TimeUnit unit) {
@@ -322,8 +329,7 @@ public class StextTestFactory extends StextFactoryImpl {
 	}
 
 	public static PrimitiveValueExpression _createValue(boolean b) {
-		PrimitiveValueExpression pve = StextFactory.eINSTANCE
-				.createPrimitiveValueExpression();
+		PrimitiveValueExpression pve = StextFactory.eINSTANCE.createPrimitiveValueExpression();
 		BoolLiteral boolLit = StextFactory.eINSTANCE.createBoolLiteral();
 		boolLit.setValue(b);
 		pve.setValue(boolLit);
