@@ -22,29 +22,29 @@ package org.yakindu.sct.model.stext.stext;
 public interface TransitionRoot extends DefRoot
 {
   /**
-	 * Returns the value of the '<em><b>Def</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Def</b></em>' containment reference.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Def</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Def</em>' containment reference.
-	 * @see #setDef(TransitionSpecification)
-	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getTransitionRoot_Def()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Def</em>' containment reference.
+   * @see #setDef(TransitionSpecification)
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getTransitionRoot_Def()
+   * @model containment="true"
+   * @generated
+   */
   TransitionSpecification getDef();
 
   /**
-	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TransitionRoot#getDef <em>Def</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.TransitionRoot#getDef <em>Def</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Def</em>' containment reference.
-	 * @see #getDef()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Def</em>' containment reference.
+   * @see #getDef()
+   * @generated
+   */
   void setDef(TransitionSpecification value);
 
 } // TransitionRoot

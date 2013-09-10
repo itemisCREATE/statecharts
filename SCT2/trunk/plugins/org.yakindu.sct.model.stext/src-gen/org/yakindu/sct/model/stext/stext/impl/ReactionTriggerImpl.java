@@ -20,7 +20,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.sct.model.sgraph.impl.TriggerImpl;
 
 import org.yakindu.sct.model.stext.stext.EventSpec;
-import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -42,195 +41,202 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class ReactionTriggerImpl extends TriggerImpl implements ReactionTrigger
 {
   /**
-	 * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getTriggers() <em>Triggers</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getTriggers()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getTriggers()
+   * @generated
+   * @ordered
+   */
   protected EList<EventSpec> triggers;
 
   /**
-	 * The cached value of the '{@link #getGuard() <em>Guard</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getGuard() <em>Guard</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getGuard()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getGuard()
+   * @generated
+   * @ordered
+   */
   protected Guard guard;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected ReactionTriggerImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.REACTION_TRIGGER;
-	}
+    return StextPackage.Literals.REACTION_TRIGGER;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<EventSpec> getTriggers()
   {
-		if (triggers == null) {
-			triggers = new EObjectContainmentEList<EventSpec>(EventSpec.class, this, StextPackage.REACTION_TRIGGER__TRIGGERS);
-		}
-		return triggers;
-	}
+    if (triggers == null)
+    {
+      triggers = new EObjectContainmentEList<EventSpec>(EventSpec.class, this, StextPackage.REACTION_TRIGGER__TRIGGERS);
+    }
+    return triggers;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public Guard getGuard()
   {
-		return guard;
-	}
+    return guard;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetGuard(Guard newGuard, NotificationChain msgs)
   {
-		Guard oldGuard = guard;
-		guard = newGuard;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.REACTION_TRIGGER__GUARD, oldGuard, newGuard);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    Guard oldGuard = guard;
+    guard = newGuard;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.REACTION_TRIGGER__GUARD, oldGuard, newGuard);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setGuard(Guard newGuard)
   {
-		if (newGuard != guard) {
-			NotificationChain msgs = null;
-			if (guard != null)
-				msgs = ((InternalEObject)guard).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.REACTION_TRIGGER__GUARD, null, msgs);
-			if (newGuard != null)
-				msgs = ((InternalEObject)newGuard).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.REACTION_TRIGGER__GUARD, null, msgs);
-			msgs = basicSetGuard(newGuard, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.REACTION_TRIGGER__GUARD, newGuard, newGuard));
-	}
-
+    if (newGuard != guard)
+    {
+      NotificationChain msgs = null;
+      if (guard != null)
+        msgs = ((InternalEObject)guard).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.REACTION_TRIGGER__GUARD, null, msgs);
+      if (newGuard != null)
+        msgs = ((InternalEObject)newGuard).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.REACTION_TRIGGER__GUARD, null, msgs);
+      msgs = basicSetGuard(newGuard, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.REACTION_TRIGGER__GUARD, newGuard, newGuard));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case StextPackage.REACTION_TRIGGER__TRIGGERS:
-				return ((InternalEList<?>)getTriggers()).basicRemove(otherEnd, msgs);
-			case StextPackage.REACTION_TRIGGER__GUARD:
-				return basicSetGuard(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case StextPackage.REACTION_TRIGGER__TRIGGERS:
+        return ((InternalEList<?>)getTriggers()).basicRemove(otherEnd, msgs);
+      case StextPackage.REACTION_TRIGGER__GUARD:
+        return basicSetGuard(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case StextPackage.REACTION_TRIGGER__TRIGGERS:
-				return getTriggers();
-			case StextPackage.REACTION_TRIGGER__GUARD:
-				return getGuard();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case StextPackage.REACTION_TRIGGER__TRIGGERS:
+        return getTriggers();
+      case StextPackage.REACTION_TRIGGER__GUARD:
+        return getGuard();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case StextPackage.REACTION_TRIGGER__TRIGGERS:
-				getTriggers().clear();
-				getTriggers().addAll((Collection<? extends EventSpec>)newValue);
-				return;
-			case StextPackage.REACTION_TRIGGER__GUARD:
-				setGuard((Guard)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case StextPackage.REACTION_TRIGGER__TRIGGERS:
+        getTriggers().clear();
+        getTriggers().addAll((Collection<? extends EventSpec>)newValue);
+        return;
+      case StextPackage.REACTION_TRIGGER__GUARD:
+        setGuard((Guard)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.REACTION_TRIGGER__TRIGGERS:
-				getTriggers().clear();
-				return;
-			case StextPackage.REACTION_TRIGGER__GUARD:
-				setGuard((Guard)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.REACTION_TRIGGER__TRIGGERS:
+        getTriggers().clear();
+        return;
+      case StextPackage.REACTION_TRIGGER__GUARD:
+        setGuard((Guard)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.REACTION_TRIGGER__TRIGGERS:
-				return triggers != null && !triggers.isEmpty();
-			case StextPackage.REACTION_TRIGGER__GUARD:
-				return guard != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.REACTION_TRIGGER__TRIGGERS:
+        return triggers != null && !triggers.isEmpty();
+      case StextPackage.REACTION_TRIGGER__GUARD:
+        return guard != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //ReactionTriggerImpl

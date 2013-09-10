@@ -21,24 +21,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class DefRootImpl extends MinimalEObjectImpl.Container implements DefRoot
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected DefRootImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.DEF_ROOT;
-	}
+    return StextPackage.Literals.DEF_ROOT;
+  }
 
 } //DefRootImpl

@@ -19,24 +19,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class BuiltinEventSpecImpl extends EventSpecImpl implements BuiltinEventSpec
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected BuiltinEventSpecImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.BUILTIN_EVENT_SPEC;
-	}
+    return StextPackage.Literals.BUILTIN_EVENT_SPEC;
+  }
 
 } //BuiltinEventSpecImpl

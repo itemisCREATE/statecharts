@@ -19,24 +19,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class EntryEventImpl extends BuiltinEventSpecImpl implements EntryEvent
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected EntryEventImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.ENTRY_EVENT;
-	}
+    return StextPackage.Literals.ENTRY_EVENT;
+  }
 
 } //EntryEventImpl

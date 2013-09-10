@@ -185,7 +185,7 @@ public class STextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_1_0_0(), "rule__ReactionTrigger__TriggersAssignment_1_0_0");
 					put(grammarAccess.getReactionTriggerAccess().getTriggersAssignment_1_0_1_1(), "rule__ReactionTrigger__TriggersAssignment_1_0_1_1");
 					put(grammarAccess.getReactionTriggerAccess().getGuardAssignment_1_0_2_1(), "rule__ReactionTrigger__GuardAssignment_1_0_2_1");
-					put(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_1_1(), "rule__ReactionTrigger__GuardExpressionAssignment_1_1_1");
+					put(grammarAccess.getReactionTriggerAccess().getGuardAssignment_1_1_1(), "rule__ReactionTrigger__GuardAssignment_1_1_1");
 					put(grammarAccess.getGuardAccess().getExpressionAssignment_1(), "rule__Guard__ExpressionAssignment_1");
 					put(grammarAccess.getReactionEffectAccess().getActionsAssignment_1(), "rule__ReactionEffect__ActionsAssignment_1");
 					put(grammarAccess.getReactionEffectAccess().getActionsAssignment_2_1(), "rule__ReactionEffect__ActionsAssignment_2_1");

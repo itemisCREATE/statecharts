@@ -17041,26 +17041,26 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ReactionTrigger__Group_1_1__1__Impl"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5637:1: rule__ReactionTrigger__Group_1_1__1__Impl : ( ( rule__ReactionTrigger__GuardExpressionAssignment_1_1_1 ) ) ;
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5637:1: rule__ReactionTrigger__Group_1_1__1__Impl : ( ( rule__ReactionTrigger__GuardAssignment_1_1_1 ) ) ;
     public final void rule__ReactionTrigger__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5641:1: ( ( ( rule__ReactionTrigger__GuardExpressionAssignment_1_1_1 ) ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5642:1: ( ( rule__ReactionTrigger__GuardExpressionAssignment_1_1_1 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5641:1: ( ( ( rule__ReactionTrigger__GuardAssignment_1_1_1 ) ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5642:1: ( ( rule__ReactionTrigger__GuardAssignment_1_1_1 ) )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5642:1: ( ( rule__ReactionTrigger__GuardExpressionAssignment_1_1_1 ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5643:1: ( rule__ReactionTrigger__GuardExpressionAssignment_1_1_1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5642:1: ( ( rule__ReactionTrigger__GuardAssignment_1_1_1 ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5643:1: ( rule__ReactionTrigger__GuardAssignment_1_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_1_1()); 
+               before(grammarAccess.getReactionTriggerAccess().getGuardAssignment_1_1_1()); 
             }
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5644:1: ( rule__ReactionTrigger__GuardExpressionAssignment_1_1_1 )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5644:2: rule__ReactionTrigger__GuardExpressionAssignment_1_1_1
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5644:1: ( rule__ReactionTrigger__GuardAssignment_1_1_1 )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:5644:2: rule__ReactionTrigger__GuardAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__ReactionTrigger__GuardExpressionAssignment_1_1_1_in_rule__ReactionTrigger__Group_1_1__1__Impl11796);
-            rule__ReactionTrigger__GuardExpressionAssignment_1_1_1();
+            pushFollow(FOLLOW_rule__ReactionTrigger__GuardAssignment_1_1_1_in_rule__ReactionTrigger__Group_1_1__1__Impl11796);
+            rule__ReactionTrigger__GuardAssignment_1_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -17068,7 +17068,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_1_1()); 
+               after(grammarAccess.getReactionTriggerAccess().getGuardAssignment_1_1_1()); 
             }
 
             }
@@ -30901,29 +30901,29 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__ReactionTrigger__GuardAssignment_1_0_2_1"
 
 
-    // $ANTLR start "rule__ReactionTrigger__GuardExpressionAssignment_1_1_1"
-    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10735:1: rule__ReactionTrigger__GuardExpressionAssignment_1_1_1 : ( ruleExpression ) ;
-    public final void rule__ReactionTrigger__GuardExpressionAssignment_1_1_1() throws RecognitionException {
+    // $ANTLR start "rule__ReactionTrigger__GuardAssignment_1_1_1"
+    // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10735:1: rule__ReactionTrigger__GuardAssignment_1_1_1 : ( ruleGuard ) ;
+    public final void rule__ReactionTrigger__GuardAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10739:1: ( ( ruleExpression ) )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10740:1: ( ruleExpression )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10739:1: ( ( ruleGuard ) )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10740:1: ( ruleGuard )
             {
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10740:1: ( ruleExpression )
-            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10741:1: ruleExpression
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10740:1: ( ruleGuard )
+            // ../org.yakindu.sct.model.stext.ui/src-gen/org/yakindu/sct/model/stext/ui/contentassist/antlr/internal/InternalSText.g:10741:1: ruleGuard
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getReactionTriggerAccess().getGuardExpressionExpressionParserRuleCall_1_1_1_0()); 
+               before(grammarAccess.getReactionTriggerAccess().getGuardGuardParserRuleCall_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleExpression_in_rule__ReactionTrigger__GuardExpressionAssignment_1_1_121920);
-            ruleExpression();
+            pushFollow(FOLLOW_ruleGuard_in_rule__ReactionTrigger__GuardAssignment_1_1_121920);
+            ruleGuard();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getReactionTriggerAccess().getGuardExpressionExpressionParserRuleCall_1_1_1_0()); 
+               after(grammarAccess.getReactionTriggerAccess().getGuardGuardParserRuleCall_1_1_1_0()); 
             }
 
             }
@@ -30943,7 +30943,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__ReactionTrigger__GuardExpressionAssignment_1_1_1"
+    // $ANTLR end "rule__ReactionTrigger__GuardAssignment_1_1_1"
 
 
     // $ANTLR start "rule__Guard__ExpressionAssignment_1"
@@ -34222,7 +34222,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_74_in_rule__ReactionTrigger__Group_1_1__0__Impl11735 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReactionTrigger__Group_1_1__1__Impl_in_rule__ReactionTrigger__Group_1_1__111766 = new BitSet(new long[]{0x0000000000000000L,0x0000000000000800L});
     public static final BitSet FOLLOW_rule__ReactionTrigger__Group_1_1__2_in_rule__ReactionTrigger__Group_1_1__111769 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReactionTrigger__GuardExpressionAssignment_1_1_1_in_rule__ReactionTrigger__Group_1_1__1__Impl11796 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ReactionTrigger__GuardAssignment_1_1_1_in_rule__ReactionTrigger__Group_1_1__1__Impl11796 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReactionTrigger__Group_1_1__2__Impl_in_rule__ReactionTrigger__Group_1_1__211826 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_75_in_rule__ReactionTrigger__Group_1_1__2__Impl11854 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__DefaultTrigger__Group__0__Impl_in_rule__DefaultTrigger__Group__011891 = new BitSet(new long[]{0x0000000C7E000010L,0x0000000000000400L});
@@ -34600,7 +34600,7 @@ public class InternalSTextParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleEventSpec_in_rule__ReactionTrigger__TriggersAssignment_1_0_021827 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleEventSpec_in_rule__ReactionTrigger__TriggersAssignment_1_0_1_121858 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleGuard_in_rule__ReactionTrigger__GuardAssignment_1_0_2_121889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpression_in_rule__ReactionTrigger__GuardExpressionAssignment_1_1_121920 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleGuard_in_rule__ReactionTrigger__GuardAssignment_1_1_121920 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleExpression_in_rule__Guard__ExpressionAssignment_121951 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReactionEffect__ActionsAlternatives_1_0_in_rule__ReactionEffect__ActionsAssignment_121982 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__ReactionEffect__ActionsAlternatives_2_1_0_in_rule__ReactionEffect__ActionsAssignment_2_122015 = new BitSet(new long[]{0x0000000000000002L});

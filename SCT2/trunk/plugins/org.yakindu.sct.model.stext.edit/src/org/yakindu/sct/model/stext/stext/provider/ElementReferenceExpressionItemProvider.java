@@ -41,276 +41,279 @@ public class ElementReferenceExpressionItemProvider
     IItemPropertySource
 {
   /**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
+   * This constructs an instance from a factory and a notifier.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public ElementReferenceExpressionItemProvider(AdapterFactory adapterFactory)
   {
-		super(adapterFactory);
-	}
+    super(adapterFactory);
+  }
 
   /**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
+   * This returns the property descriptors for the adapted class.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
   {
-		if (itemPropertyDescriptors == null) {
-			super.getPropertyDescriptors(object);
+    if (itemPropertyDescriptors == null)
+    {
+      super.getPropertyDescriptors(object);
 
-			addReferencePropertyDescriptor(object);
-			addOperationCallPropertyDescriptor(object);
-		}
-		return itemPropertyDescriptors;
-	}
+      addReferencePropertyDescriptor(object);
+      addOperationCallPropertyDescriptor(object);
+    }
+    return itemPropertyDescriptors;
+  }
 
   /**
-	 * This adds a property descriptor for the Reference feature.
-	 * <!-- begin-user-doc -->
+   * This adds a property descriptor for the Reference feature.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected void addReferencePropertyDescriptor(Object object)
   {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ElementReferenceExpression_reference_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ElementReferenceExpression_reference_feature", "_UI_ElementReferenceExpression_type"),
-				 StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
-	}
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_ElementReferenceExpression_reference_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_ElementReferenceExpression_reference_feature", "_UI_ElementReferenceExpression_type"),
+         StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
+         true,
+         false,
+         true,
+         null,
+         null,
+         null));
+  }
 
   /**
-	 * This adds a property descriptor for the Operation Call feature.
-	 * <!-- begin-user-doc -->
+   * This adds a property descriptor for the Operation Call feature.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected void addOperationCallPropertyDescriptor(Object object)
   {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_ElementReferenceExpression_operationCall_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_ElementReferenceExpression_operationCall_feature", "_UI_ElementReferenceExpression_type"),
-				 StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_ElementReferenceExpression_operationCall_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_ElementReferenceExpression_operationCall_feature", "_UI_ElementReferenceExpression_type"),
+         StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL,
+         true,
+         false,
+         false,
+         ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+         null,
+         null));
+  }
 
   /**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
+   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
   {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS);
-		}
-		return childrenFeatures;
-	}
+    if (childrenFeatures == null)
+    {
+      super.getChildrenFeatures(object);
+      childrenFeatures.add(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS);
+    }
+    return childrenFeatures;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EStructuralFeature getChildFeature(Object object, Object child)
   {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
+    // Check the type of the specified child object and return the proper feature to use for
+    // adding (see {@link AddCommand}) it as a child.
 
-		return super.getChildFeature(object, child);
-	}
+    return super.getChildFeature(object, child);
+  }
 
   /**
-	 * This returns ElementReferenceExpression.gif.
-	 * <!-- begin-user-doc -->
+   * This returns ElementReferenceExpression.gif.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object getImage(Object object)
   {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ElementReferenceExpression"));
-	}
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/ElementReferenceExpression"));
+  }
 
   /**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
+   * This returns the label text for the adapted class.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String getText(Object object)
   {
-		ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)object;
-		return getString("_UI_ElementReferenceExpression_type") + " " + elementReferenceExpression.isOperationCall();
-	}
+    ElementReferenceExpression elementReferenceExpression = (ElementReferenceExpression)object;
+    return getString("_UI_ElementReferenceExpression_type") + " " + elementReferenceExpression.isOperationCall();
+  }
 
   /**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
+   * This handles model notifications by calling {@link #updateChildren} to update any cached
+   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void notifyChanged(Notification notification)
   {
-		updateChildren(notification);
+    updateChildren(notification);
 
-		switch (notification.getFeatureID(ElementReferenceExpression.class)) {
-			case StextPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
-		super.notifyChanged(notification);
-	}
+    switch (notification.getFeatureID(ElementReferenceExpression.class))
+    {
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__OPERATION_CALL:
+        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+        return;
+      case StextPackage.ELEMENT_REFERENCE_EXPRESSION__ARGS:
+        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+        return;
+    }
+    super.notifyChanged(notification);
+  }
 
   /**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
+   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+   * that can be created under this object.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
-		super.collectNewChildDescriptors(newChildDescriptors, object);
+    super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createEventRaisingExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createEventRaisingExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createAssignmentExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createAssignmentExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createConditionalExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createConditionalExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createLogicalOrExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createLogicalOrExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createLogicalAndExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createLogicalAndExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createLogicalNotExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createLogicalNotExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createBitwiseXorExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createBitwiseXorExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createBitwiseOrExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createBitwiseOrExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createBitwiseAndExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createBitwiseAndExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createLogicalRelationExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createLogicalRelationExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createShiftExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createShiftExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createNumericalUnaryExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createPrimitiveValueExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createFeatureCall()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createFeatureCall()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createElementReferenceExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
-				 StextFactory.eINSTANCE.createParenthesizedExpression()));
-	}
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__ARGS,
+         StextFactory.eINSTANCE.createParenthesizedExpression()));
+  }
 
 }

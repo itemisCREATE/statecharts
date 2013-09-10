@@ -21,24 +21,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class StatechartSpecificationImpl extends ScopedElementImpl implements StatechartSpecification
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected StatechartSpecificationImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.STATECHART_SPECIFICATION;
-	}
+    return StextPackage.Literals.STATECHART_SPECIFICATION;
+  }
 
 } //StatechartSpecificationImpl

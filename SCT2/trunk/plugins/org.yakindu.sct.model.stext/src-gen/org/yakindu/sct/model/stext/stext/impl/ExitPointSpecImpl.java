@@ -29,146 +29,150 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class ExitPointSpecImpl extends ReactionPropertyImpl implements ExitPointSpec
 {
   /**
-	 * The default value of the '{@link #getExitpoint() <em>Exitpoint</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getExitpoint() <em>Exitpoint</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getExitpoint()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getExitpoint()
+   * @generated
+   * @ordered
+   */
   protected static final String EXITPOINT_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getExitpoint() <em>Exitpoint</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getExitpoint() <em>Exitpoint</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getExitpoint()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getExitpoint()
+   * @generated
+   * @ordered
+   */
   protected String exitpoint = EXITPOINT_EDEFAULT;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected ExitPointSpecImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.EXIT_POINT_SPEC;
-	}
+    return StextPackage.Literals.EXIT_POINT_SPEC;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public String getExitpoint()
   {
-		return exitpoint;
-	}
+    return exitpoint;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setExitpoint(String newExitpoint)
   {
-		String oldExitpoint = exitpoint;
-		exitpoint = newExitpoint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.EXIT_POINT_SPEC__EXITPOINT, oldExitpoint, exitpoint));
-	}
+    String oldExitpoint = exitpoint;
+    exitpoint = newExitpoint;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.EXIT_POINT_SPEC__EXITPOINT, oldExitpoint, exitpoint));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
-				return getExitpoint();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
+        return getExitpoint();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
-				setExitpoint((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
+        setExitpoint((String)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
-				setExitpoint(EXITPOINT_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
+        setExitpoint(EXITPOINT_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
-				return EXITPOINT_EDEFAULT == null ? exitpoint != null : !EXITPOINT_EDEFAULT.equals(exitpoint);
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.EXIT_POINT_SPEC__EXITPOINT:
+        return EXITPOINT_EDEFAULT == null ? exitpoint != null : !EXITPOINT_EDEFAULT.equals(exitpoint);
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (exitpoint: ");
-		result.append(exitpoint);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (exitpoint: ");
+    result.append(exitpoint);
+    result.append(')');
+    return result.toString();
+  }
 
 } //ExitPointSpecImpl

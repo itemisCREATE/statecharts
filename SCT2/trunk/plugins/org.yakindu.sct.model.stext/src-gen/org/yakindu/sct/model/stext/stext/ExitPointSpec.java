@@ -23,29 +23,29 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 public interface ExitPointSpec extends ReactionProperty
 {
   /**
-	 * Returns the value of the '<em><b>Exitpoint</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Exitpoint</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Exitpoint</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Exitpoint</em>' attribute.
-	 * @see #setExitpoint(String)
-	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getExitPointSpec_Exitpoint()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Exitpoint</em>' attribute.
+   * @see #setExitpoint(String)
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getExitPointSpec_Exitpoint()
+   * @model
+   * @generated
+   */
   String getExitpoint();
 
   /**
-	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ExitPointSpec#getExitpoint <em>Exitpoint</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ExitPointSpec#getExitpoint <em>Exitpoint</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Exitpoint</em>' attribute.
-	 * @see #getExitpoint()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Exitpoint</em>' attribute.
+   * @see #getExitpoint()
+   * @generated
+   */
   void setExitpoint(String value);
 
 } // ExitPointSpec

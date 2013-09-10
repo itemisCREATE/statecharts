@@ -29,146 +29,150 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class EntryPointSpecImpl extends ReactionPropertyImpl implements EntryPointSpec
 {
   /**
-	 * The default value of the '{@link #getEntrypoint() <em>Entrypoint</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The default value of the '{@link #getEntrypoint() <em>Entrypoint</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getEntrypoint()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getEntrypoint()
+   * @generated
+   * @ordered
+   */
   protected static final String ENTRYPOINT_EDEFAULT = null;
 
   /**
-	 * The cached value of the '{@link #getEntrypoint() <em>Entrypoint</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getEntrypoint() <em>Entrypoint</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getEntrypoint()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getEntrypoint()
+   * @generated
+   * @ordered
+   */
   protected String entrypoint = ENTRYPOINT_EDEFAULT;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected EntryPointSpecImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.ENTRY_POINT_SPEC;
-	}
+    return StextPackage.Literals.ENTRY_POINT_SPEC;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public String getEntrypoint()
   {
-		return entrypoint;
-	}
+    return entrypoint;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setEntrypoint(String newEntrypoint)
   {
-		String oldEntrypoint = entrypoint;
-		entrypoint = newEntrypoint;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT, oldEntrypoint, entrypoint));
-	}
+    String oldEntrypoint = entrypoint;
+    entrypoint = newEntrypoint;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT, oldEntrypoint, entrypoint));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT:
-				return getEntrypoint();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT:
+        return getEntrypoint();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT:
-				setEntrypoint((String)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT:
+        setEntrypoint((String)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT:
-				setEntrypoint(ENTRYPOINT_EDEFAULT);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT:
+        setEntrypoint(ENTRYPOINT_EDEFAULT);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT:
-				return ENTRYPOINT_EDEFAULT == null ? entrypoint != null : !ENTRYPOINT_EDEFAULT.equals(entrypoint);
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ENTRY_POINT_SPEC__ENTRYPOINT:
+        return ENTRYPOINT_EDEFAULT == null ? entrypoint != null : !ENTRYPOINT_EDEFAULT.equals(entrypoint);
+    }
+    return super.eIsSet(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public String toString()
   {
-		if (eIsProxy()) return super.toString();
+    if (eIsProxy()) return super.toString();
 
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (entrypoint: ");
-		result.append(entrypoint);
-		result.append(')');
-		return result.toString();
-	}
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (entrypoint: ");
+    result.append(entrypoint);
+    result.append(')');
+    return result.toString();
+  }
 
 } //EntryPointSpecImpl

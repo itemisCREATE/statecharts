@@ -1744,17 +1744,17 @@ ruleReactionTrigger returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getReactionTriggerAccess().getGuardExpressionExpressionParserRuleCall_1_1_1_0()); 
+	        newCompositeNode(grammarAccess.getReactionTriggerAccess().getGuardGuardParserRuleCall_1_1_1_0()); 
 	    }
-		lv_guardExpression_8_0=ruleExpression		{
+		lv_guard_8_0=ruleGuard		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getReactionTriggerRule());
 	        }
        		set(
        			$current, 
-       			"guardExpression",
-        		lv_guardExpression_8_0, 
-        		"Expression");
+       			"guard",
+        		lv_guard_8_0, 
+        		"Guard");
 	        afterParserOrEnumRuleCall();
 	    }
 
