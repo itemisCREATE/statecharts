@@ -26,13 +26,17 @@ import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IThread;
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
+import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
 
 /**
  * 
@@ -54,6 +58,8 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	private IExecutionControl executionControl;
 
+	private UpdateTreeAdapter updater = new UpdateTreeAdapter();
+
 	public SCTDebugTarget(ILaunch launch, Statechart statechart, ISimulationEngine container) throws CoreException {
 		super(null, statechart.eResource().getURI().toPlatformString(true));
 		Assert.isNotNull(statechart);
@@ -67,6 +73,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 		threads = new ArrayList<SCTDebugThread>();
 		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
 		executionControl = container.getExecutionControl();
+		container.getExecutionContext().eAdapters().add(updater);
 		executionControl.start();
 	}
 
@@ -219,5 +226,21 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	public boolean isStepping() {
 		return stepping;
+	}
+	//Fires fireChangeEvents to refresh the DebugUI TreeViewer with the active states
+	protected class UpdateTreeAdapter extends CrossDocumentContentAdapter {
+
+		@Override
+		protected boolean shouldAdapt(EStructuralFeature feature) {
+			return feature == SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES;
+		}
+
+		@Override
+		public void notifyChanged(Notification notification) {
+			if (notification.getFeature() == SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES){
+				fireChangeEvent(DebugEvent.CONTENT);
+			}
+			super.notifyChanged(notification);
+		}
 	}
 }
