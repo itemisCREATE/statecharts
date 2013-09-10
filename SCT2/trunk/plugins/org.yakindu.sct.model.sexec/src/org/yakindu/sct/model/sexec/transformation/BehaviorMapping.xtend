@@ -414,6 +414,10 @@ class BehaviorMapping {
 
 		// define exit behavior of transition
 		
+		if (trace.addTraceSteps) {
+			sequence.steps.add(t.create.newTraceReactionWillFire)	
+		}
+		
 		// first process the exit behavior of orthogonal states that has to be performed before source exit
 		val topExitState = t.exitStates.last
 		if (topExitState != null) {
@@ -426,7 +430,6 @@ class BehaviorMapping {
 		// map transition actions
 		if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
 		if (trace.addTraceSteps) { 
-			sequence.steps.add(0, t.create.newTraceReactionWillFire)
 			sequence.steps += r.newTraceReactionFired
 		}
 		
@@ -454,6 +457,12 @@ class BehaviorMapping {
 		}
 		val topExitState = exitStates.last
 		
+		if (trace.addTraceSteps) {
+			for (t : transitions) {
+				sequence.steps.add(t.create.newTraceReactionWillFire)	
+			}
+		}
+		
 		if (topExitState != null) {
 			val exitSequence = topExitState.create.exitSequence
 			if (exitSequence != null) {
@@ -465,7 +474,7 @@ class BehaviorMapping {
 		for ( t : transitions ) {
 			if (t.effect != null) sequence.steps.add(t.effect.mapEffect)	
 			if (trace.addTraceSteps) { 
-				sequence.steps.add(0, t.create.newTraceReactionWillFire)
+//				sequence.steps.add(0, t.create.newTraceReactionWillFire)
 				sequence.steps += t.create.newTraceReactionFired
 			}
 		}
@@ -473,6 +482,7 @@ class BehaviorMapping {
 	
 		// define entry behavior of the transition	
 		sequence.steps.addAll( mapToStateConfigurationEnterSequence( transitions ).steps )
+
 		
 		return sequence
 	}
@@ -691,7 +701,7 @@ class BehaviorMapping {
 	def dispatch Expression buildGuard( Trigger t) {null}
 	
 	def dispatch Expression buildGuard( ReactionTrigger t) {
-		if ( t.guardExpression != null ) EcoreUtil::copy(t.guardExpression) else null
+		if ( t.guard != null ) EcoreUtil::copy(t.guard.expression) else null
 	}
 	
 //	def Statement buildValueExpression(TimeEventSpec tes) {
