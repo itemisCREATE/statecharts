@@ -1,7 +1,7 @@
 package org.yakindu.sct.ui.integration.stext;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.stext.stext.Expression;
+import org.yakindu.sct.model.stext.stext.Guard;
 
 /**
  * 
@@ -12,6 +12,7 @@ public class ExpressionExpressionProvider extends AbstractSTextExpressionProvide
 
 	@Override
 	protected Class<? extends EObject> getRule() {
-		return Expression.class;
+		return Guard.class;
 	}
+
 }
