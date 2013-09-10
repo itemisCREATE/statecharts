@@ -36,126 +36,132 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class RootImpl extends MinimalEObjectImpl.Container implements Root
 {
   /**
-	 * The cached value of the '{@link #getRoots() <em>Roots</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getRoots() <em>Roots</em>}' containment reference list.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getRoots()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getRoots()
+   * @generated
+   * @ordered
+   */
   protected EList<DefRoot> roots;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected RootImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.ROOT;
-	}
+    return StextPackage.Literals.ROOT;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public EList<DefRoot> getRoots()
   {
-		if (roots == null) {
-			roots = new EObjectContainmentEList<DefRoot>(DefRoot.class, this, StextPackage.ROOT__ROOTS);
-		}
-		return roots;
-	}
+    if (roots == null)
+    {
+      roots = new EObjectContainmentEList<DefRoot>(DefRoot.class, this, StextPackage.ROOT__ROOTS);
+    }
+    return roots;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case StextPackage.ROOT__ROOTS:
-				return ((InternalEList<?>)getRoots()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ROOT__ROOTS:
+        return ((InternalEList<?>)getRoots()).basicRemove(otherEnd, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case StextPackage.ROOT__ROOTS:
-				return getRoots();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ROOT__ROOTS:
+        return getRoots();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case StextPackage.ROOT__ROOTS:
-				getRoots().clear();
-				getRoots().addAll((Collection<? extends DefRoot>)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ROOT__ROOTS:
+        getRoots().clear();
+        getRoots().addAll((Collection<? extends DefRoot>)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.ROOT__ROOTS:
-				getRoots().clear();
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ROOT__ROOTS:
+        getRoots().clear();
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.ROOT__ROOTS:
-				return roots != null && !roots.isEmpty();
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.ROOT__ROOTS:
+        return roots != null && !roots.isEmpty();
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //RootImpl

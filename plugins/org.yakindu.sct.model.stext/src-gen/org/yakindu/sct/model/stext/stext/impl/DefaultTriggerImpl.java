@@ -21,24 +21,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class DefaultTriggerImpl extends TriggerImpl implements DefaultTrigger
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected DefaultTriggerImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.DEFAULT_TRIGGER;
-	}
+    return StextPackage.Literals.DEFAULT_TRIGGER;
+  }
 
 } //DefaultTriggerImpl

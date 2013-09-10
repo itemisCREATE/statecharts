@@ -118,10 +118,6 @@ Parameter returns types::Parameter:
 	name=XID ':' type=[types::Type|FQN]
 ;
 
-OperationBody:
-	{OperationBody} expression=Expression;
-
-
 /* ---- entrypoint definition ---- */
 //Entrypoint returns sgraph::Declaration:
 //	{Entrypoint} 'entrypoint' name=XID;

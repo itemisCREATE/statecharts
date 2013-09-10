@@ -19,24 +19,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class InternalScopeImpl extends StatechartScopeImpl implements InternalScope
 {
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected InternalScopeImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.INTERNAL_SCOPE;
-	}
+    return StextPackage.Literals.INTERNAL_SCOPE;
+  }
 
 } //InternalScopeImpl

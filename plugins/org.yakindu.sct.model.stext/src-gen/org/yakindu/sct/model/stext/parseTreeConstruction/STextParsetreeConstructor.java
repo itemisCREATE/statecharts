@@ -4184,15 +4184,11 @@ protected class StextTrigger_DefaultTriggerParserRuleCall_1 extends RuleCallToke
  *
  * ReactionTrigger returns sgraph::Trigger:
  * 
- * 	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "["
- * 
- * 	guardExpression=Expression "]");
+ * 	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "[" guard=Guard "]");
  *
  **/
 
-// {ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "["
-// 
-// guardExpression=Expression "]")
+// {ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "[" guard=Guard "]")
 protected class ReactionTrigger_Group extends GroupToken {
 	
 	public ReactionTrigger_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4247,7 +4243,7 @@ protected class ReactionTrigger_ReactionTriggerAction_0 extends ActionToken  {
 	}
 }
 
-// triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "[" guardExpression=Expression "]"
+// triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "[" guard=Guard "]"
 protected class ReactionTrigger_Alternatives_1 extends AlternativesToken {
 
 	public ReactionTrigger_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4547,7 +4543,7 @@ protected class ReactionTrigger_RightSquareBracketKeyword_1_0_2_2 extends Keywor
 
 
 
-// "[" guardExpression=Expression "]"
+// "[" guard=Guard "]"
 protected class ReactionTrigger_Group_1_1 extends GroupToken {
 	
 	public ReactionTrigger_Group_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4591,35 +4587,35 @@ protected class ReactionTrigger_LeftSquareBracketKeyword_1_1_0 extends KeywordTo
 
 }
 
-// guardExpression=Expression
-protected class ReactionTrigger_GuardExpressionAssignment_1_1_1 extends AssignmentToken  {
+// guard=Guard
+protected class ReactionTrigger_GuardAssignment_1_1_1 extends AssignmentToken  {
 	
-	public ReactionTrigger_GuardExpressionAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ReactionTrigger_GuardAssignment_1_1_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_1_1();
+		return grammarAccess.getReactionTriggerAccess().getGuardAssignment_1_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Expression_AssignmentExpressionParserRuleCall(this, this, 0, inst);
+			case 0: return new Guard_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("guardExpression",true)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("guardExpression");
+		if((value = eObjectConsumer.getConsumable("guard",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("guard");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getGuardRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getReactionTriggerAccess().getGuardExpressionExpressionParserRuleCall_1_1_1_0(); 
+				element = grammarAccess.getReactionTriggerAccess().getGuardGuardParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4652,7 +4648,7 @@ protected class ReactionTrigger_RightSquareBracketKeyword_1_1_2 extends KeywordT
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ReactionTrigger_GuardExpressionAssignment_1_1_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new ReactionTrigger_GuardAssignment_1_1_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}

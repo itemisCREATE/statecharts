@@ -25,19 +25,19 @@ import org.yakindu.sct.model.sgraph.Effect;
 public interface ReactionEffect extends Effect
 {
   /**
-	 * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.stext.stext.Expression}.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Actions</b></em>' containment reference list.
+   * The list contents are of type {@link org.yakindu.sct.model.stext.stext.Expression}.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Actions</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Actions</em>' containment reference list.
-	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getReactionEffect_Actions()
-	 * @model containment="true"
-	 * @generated
-	 */
+   * @return the value of the '<em>Actions</em>' containment reference list.
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getReactionEffect_Actions()
+   * @model containment="true"
+   * @generated
+   */
   EList<Expression> getActions();
 
 } // ReactionEffect

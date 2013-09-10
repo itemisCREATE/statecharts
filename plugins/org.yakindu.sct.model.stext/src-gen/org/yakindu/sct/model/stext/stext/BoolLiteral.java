@@ -22,29 +22,29 @@ package org.yakindu.sct.model.stext.stext;
 public interface BoolLiteral extends Literal
 {
   /**
-	 * Returns the value of the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
+   * Returns the value of the '<em><b>Value</b></em>' attribute.
+   * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Value</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(boolean)
-	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getBoolLiteral_Value()
-	 * @model
-	 * @generated
-	 */
+   * @return the value of the '<em>Value</em>' attribute.
+   * @see #setValue(boolean)
+   * @see org.yakindu.sct.model.stext.stext.StextPackage#getBoolLiteral_Value()
+   * @model
+   * @generated
+   */
   boolean isValue();
 
   /**
-	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.BoolLiteral#isValue <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
+   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.BoolLiteral#isValue <em>Value</em>}' attribute.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Value</em>' attribute.
-	 * @see #isValue()
-	 * @generated
-	 */
+   * @param value the new value of the '<em>Value</em>' attribute.
+   * @see #isValue()
+   * @generated
+   */
   void setValue(boolean value);
 
 } // BoolLiteral

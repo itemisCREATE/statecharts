@@ -31,157 +31,164 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 public class TransitionSpecificationImpl extends MinimalEObjectImpl.Container implements TransitionSpecification
 {
   /**
-	 * The cached value of the '{@link #getReaction() <em>Reaction</em>}' containment reference.
-	 * <!-- begin-user-doc -->
+   * The cached value of the '{@link #getReaction() <em>Reaction</em>}' containment reference.
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @see #getReaction()
-	 * @generated
-	 * @ordered
-	 */
+   * @see #getReaction()
+   * @generated
+   * @ordered
+   */
   protected TransitionReaction reaction;
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   protected TransitionSpecificationImpl()
   {
-		super();
-	}
+    super();
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   protected EClass eStaticClass()
   {
-		return StextPackage.Literals.TRANSITION_SPECIFICATION;
-	}
+    return StextPackage.Literals.TRANSITION_SPECIFICATION;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public TransitionReaction getReaction()
   {
-		return reaction;
-	}
+    return reaction;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public NotificationChain basicSetReaction(TransitionReaction newReaction, NotificationChain msgs)
   {
-		TransitionReaction oldReaction = reaction;
-		reaction = newReaction;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.TRANSITION_SPECIFICATION__REACTION, oldReaction, newReaction);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+    TransitionReaction oldReaction = reaction;
+    reaction = newReaction;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, StextPackage.TRANSITION_SPECIFICATION__REACTION, oldReaction, newReaction);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   public void setReaction(TransitionReaction newReaction)
   {
-		if (newReaction != reaction) {
-			NotificationChain msgs = null;
-			if (reaction != null)
-				msgs = ((InternalEObject)reaction).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.TRANSITION_SPECIFICATION__REACTION, null, msgs);
-			if (newReaction != null)
-				msgs = ((InternalEObject)newReaction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.TRANSITION_SPECIFICATION__REACTION, null, msgs);
-			msgs = basicSetReaction(newReaction, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TRANSITION_SPECIFICATION__REACTION, newReaction, newReaction));
-	}
+    if (newReaction != reaction)
+    {
+      NotificationChain msgs = null;
+      if (reaction != null)
+        msgs = ((InternalEObject)reaction).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - StextPackage.TRANSITION_SPECIFICATION__REACTION, null, msgs);
+      if (newReaction != null)
+        msgs = ((InternalEObject)newReaction).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - StextPackage.TRANSITION_SPECIFICATION__REACTION, null, msgs);
+      msgs = basicSetReaction(newReaction, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.TRANSITION_SPECIFICATION__REACTION, newReaction, newReaction));
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-		switch (featureID) {
-			case StextPackage.TRANSITION_SPECIFICATION__REACTION:
-				return basicSetReaction(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+    switch (featureID)
+    {
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        return basicSetReaction(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-		switch (featureID) {
-			case StextPackage.TRANSITION_SPECIFICATION__REACTION:
-				return getReaction();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+    switch (featureID)
+    {
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        return getReaction();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eSet(int featureID, Object newValue)
   {
-		switch (featureID) {
-			case StextPackage.TRANSITION_SPECIFICATION__REACTION:
-				setReaction((TransitionReaction)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+    switch (featureID)
+    {
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        setReaction((TransitionReaction)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public void eUnset(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.TRANSITION_SPECIFICATION__REACTION:
-				setReaction((TransitionReaction)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        setReaction((TransitionReaction)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
   /**
-	 * <!-- begin-user-doc -->
+   * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-	 * @generated
-	 */
+   * @generated
+   */
   @Override
   public boolean eIsSet(int featureID)
   {
-		switch (featureID) {
-			case StextPackage.TRANSITION_SPECIFICATION__REACTION:
-				return reaction != null;
-		}
-		return super.eIsSet(featureID);
-	}
+    switch (featureID)
+    {
+      case StextPackage.TRANSITION_SPECIFICATION__REACTION:
+        return reaction != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //TransitionSpecificationImpl
