@@ -12,8 +12,8 @@ package org.yakindu.sct.simulation.core.debugmodel;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
+import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 
 /**
  * 
@@ -32,14 +32,14 @@ import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 public class SCTDebugThread extends SCTDebugElement implements IThread {
 
 	private final Region region;
-	private final IExecutionFacade facade;
 	private List<SCTStackFrame> stateStack;
 	private Vertex lastActiveState;
+	private ISimulationEngine container;
 
-	public SCTDebugThread(SCTDebugTarget target, IExecutionFacade facade,
-			String resourceString, Region region) {
+	public SCTDebugThread(SCTDebugTarget target, ISimulationEngine container, String resourceString, Region region) {
 		super(target, resourceString);
-		this.facade = facade;
+		Assert.isNotNull(region);
+		this.container = container;
 		this.region = region;
 	}
 
@@ -48,8 +48,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public IStackFrame[] getStackFrames() throws DebugException {
-		Set<RegularState> activeLeafStates = facade.getExecutionContext()
-				.getActiveLeafStates();
+		List<RegularState> activeLeafStates = container.getExecutionContext().getActiveStates();
 		Vertex activeState = null;
 		for (Vertex vertex : activeLeafStates) {
 			if (vertex.getParentRegion() == region) {
@@ -57,20 +56,19 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 				break;
 			}
 		}
-	
+
 		if (activeState != null && lastActiveState != activeState) {
 			lastActiveState = activeState;
 			EObject container = activeState;
 			stateStack = new ArrayList<SCTStackFrame>();
-			while ( container != null ) {
+			while (container != null) {
 				if (container instanceof RegularState) {
-					stateStack.add(new SCTStackFrame(this, (RegularState)container,
-						getResourceString()));
+					stateStack.add(new SCTStackFrame(this, (RegularState) container, getResourceString()));
 				}
 				container = container.eContainer();
-			}			
-		} 
-		return stateStack.toArray(new IStackFrame[]{});
+			}
+		}
+		return stateStack.toArray(new IStackFrame[] {});
 	}
 
 	public boolean hasStackFrames() throws DebugException {
@@ -82,7 +80,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public IBreakpoint[] getBreakpoints() {
-		return null;
+		return new IBreakpoint[0];
 	}
 
 	public boolean canResume() {
@@ -148,11 +146,10 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-		if (adapter == IExecutionFacade.class)
-			return getDebugTarget().getAdapter(IExecutionFacade.class);
-		if (adapter == EObject.class) {
+		if(adapter == ISimulationEngine.class)
+			return container;
+		if (adapter == EObject.class)
 			return region;
-		}
 		return super.getAdapter(adapter);
 	}
 
