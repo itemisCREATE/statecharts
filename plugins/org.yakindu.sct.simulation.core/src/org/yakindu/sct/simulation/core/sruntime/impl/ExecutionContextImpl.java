@@ -393,7 +393,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	public List<ExecutionEvent> getAllEvents() {
 		List<ExecutionEvent> result = new BasicEList<ExecutionEvent>();
-		addEvents(result, slots);
+		addEvents(result, getSlots());
 		return result;
 	}
 
@@ -414,7 +414,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	public List<ExecutionVariable> getAllVariables() {
 		List<ExecutionVariable> result = new BasicEList<ExecutionVariable>();
-		addVariables(result, slots);
+		addVariables(result, getSlots());
 		return result;
 	}
 
