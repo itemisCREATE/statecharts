@@ -12,7 +12,6 @@ package org.yakindu.sct.simulation.core.sexec.container
 
 import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.base.types.EnumerationType
 import org.yakindu.base.types.ITypeSystem.InferredType
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
@@ -67,17 +66,4 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.type = new InferredType(integerType)
 		it.value = defaultValue(it.type)
 	}
-
-	def Object defaultValue(InferredType type) {
-		switch (type) {
-			case isBooleanType(type): true
-			case isIntegerType(type): 0
-			case isRealType(type): 0.0
-			case isVoidType(type): null
-			case isStringType(type): ""
-			case type instanceof EnumerationType: (type as EnumerationType).enumerator.head
-			default: null
-		}
-	}
-
 }
