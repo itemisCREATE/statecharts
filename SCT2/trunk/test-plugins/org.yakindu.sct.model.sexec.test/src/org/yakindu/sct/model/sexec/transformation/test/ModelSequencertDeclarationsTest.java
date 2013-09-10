@@ -41,8 +41,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 	@Test
 	public void testScopeName() {
 		InterfaceScope scope = _createInterfaceScope("abc", null);
-		assertEquals(scope.getName(),
-				((InterfaceScope) structureMapping.mapScope(scope)).getName());
+		assertEquals(scope.getName(), ((InterfaceScope) structureMapping.mapScope(scope)).getName());
 	}
 
 	/**
@@ -62,8 +61,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		InterfaceScope scope = _createInterfaceScope(null, null);
 		EventDefinition e1 = _createEventDefinition("e1", scope);
 		EventDefinition e2 = _createEventDefinition("e2", scope);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
-				scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
 
 		Scope _scope = structureMapping.mapScope(scope);
 
@@ -99,20 +97,16 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
-		EventDefinition _e1 = (EventDefinition) flow.getScopes().get(0)
-				.getDeclarations().get(0);
+		EventDefinition _e1 = (EventDefinition) flow.getScopes().get(0).getDeclarations().get(0);
 		assertNotSame(e1, _e1);
 		assertEquals(e1.getName(), _e1.getName());
 
 		assertEquals(2, flow.getStates().size());
 		assertEquals(s1.getName(), flow.getStates().get(0).getSimpleName());
-		Step step = flow.getStates().get(0).getReactSequence().getSteps()
-				.get(0);
-		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0))
-				.getSteps().get(0);
+		Step step = flow.getStates().get(0).getReactSequence().getSteps().get(0);
+		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0)).getSteps().get(0);
 
-		ElementReferenceExpression _ere = (ElementReferenceExpression) _if
-				.getCheck().getCondition();
+		ElementReferenceExpression _ere = (ElementReferenceExpression) _if.getCheck().getCondition();
 		assertSame(_e1, _ere.getReference());
 	}
 
@@ -130,26 +124,21 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		State s2 = _createState("S2", r);
 		Transition t = _createTransition(s1, s2);
 		ReactionTrigger tr = _createReactionTrigger(t);
-		tr.setGuardExpression(_createValue(true));
+		tr.setGuard(createGuardExpression(_createValue(true)));
 		ReactionEffect tr1 = _createReactionEffect(t);
 		FeatureCall _operationCall = _createOperationCall(_operation);
 		tr1.getActions().add(_operationCall);
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
-		OperationDefinition _o1 = (OperationDefinition) flow.getScopes().get(0)
-				.getDeclarations().get(0);
+		OperationDefinition _o1 = (OperationDefinition) flow.getScopes().get(0).getDeclarations().get(0);
 		assertNotSame(_operation, _o1);
 		assertEquals(_operation.getName(), _o1.getName());
 
-		Step step = flow.getStates().get(0).getReactSequence().getSteps()
-				.get(0);
-		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0))
-				.getSteps().get(0);
-		Step thenSequence = assertedSequence(
-				((Call) _if.getThenStep()).getStep()).getSteps().get(1);
-		Execution call = (Execution) assertedSequence(thenSequence).getSteps()
-				.get(0);
+		Step step = flow.getStates().get(0).getReactSequence().getSteps().get(0);
+		If _if = (If) assertedSequence(assertedSequence(step).getSteps().get(0)).getSteps().get(0);
+		Step thenSequence = assertedSequence(((Call) _if.getThenStep()).getStep()).getSteps().get(1);
+		Execution call = (Execution) assertedSequence(thenSequence).getSteps().get(0);
 		assertNotSame(_operationCall, call.getStatement());
 		assertSame(_o1, ((FeatureCall) call.getStatement()).getFeature());
 	}

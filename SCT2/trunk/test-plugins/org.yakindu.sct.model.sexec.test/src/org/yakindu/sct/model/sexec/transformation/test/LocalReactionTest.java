@@ -74,7 +74,7 @@ public class LocalReactionTest extends ModelSequencerTest {
 
 		Transition t = _createTransition(findState(sc, "s3"), findState(sc, "s6"));
 		ReactionTrigger tr = _createReactionTrigger(t);
-		tr.setGuardExpression(_createValue(true));
+		tr.setGuard(createGuardExpression(_createValue(true)));
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
