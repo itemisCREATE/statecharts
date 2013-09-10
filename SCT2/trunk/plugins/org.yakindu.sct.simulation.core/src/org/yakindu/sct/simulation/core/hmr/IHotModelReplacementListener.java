@@ -12,7 +12,7 @@ package org.yakindu.sct.simulation.core.hmr;
 
 import java.util.List;
 
-import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
+import org.eclipse.debug.core.model.IDebugTarget;
 
 /**
  * 
@@ -21,6 +21,6 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
  */
 public interface IHotModelReplacementListener {
 
-	public void hotCodeReplaceFailed(List<SCTDebugTarget> affectedTargets);
+	public void hotCodeReplaceFailed(List<IDebugTarget> affectedTargets);
 
 }

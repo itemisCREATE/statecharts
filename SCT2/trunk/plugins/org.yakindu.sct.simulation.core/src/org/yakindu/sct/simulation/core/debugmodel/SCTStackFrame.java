@@ -18,7 +18,6 @@ import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.sct.model.sgraph.Vertex;
-import org.yakindu.sct.simulation.core.runtime.IExecutionFacade;
 
 /**
  * 
@@ -31,8 +30,7 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 	// the active state that is entered
 	private final Vertex state;
 
-	public SCTStackFrame(SCTDebugThread thread, Vertex state,
-			String resourceString) {
+	public SCTStackFrame(SCTDebugThread thread, Vertex state, String resourceString) {
 		super(thread.getDebugTarget(), resourceString);
 		this.thread = thread;
 		this.state = state;
@@ -156,9 +154,7 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-		if (adapter == IExecutionFacade.class)
-			return getDebugTarget().getAdapter(IExecutionFacade.class);
-		if(adapter == EObject.class)
+		if (adapter == EObject.class)
 			return state;
 		return super.getAdapter(adapter);
 	}
@@ -167,6 +163,4 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return state;
 	}
 
-	
-	
 }

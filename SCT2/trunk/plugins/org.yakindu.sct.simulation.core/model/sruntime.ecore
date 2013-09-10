@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sruntime" nsURI="http://www.yakindu.org/sct/sruntime/2.0.0"
+    nsPrefix="sruntime">
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionContext" eSuperTypes="../../org.yakindu.base.types/model/base.ecore#//NamedElement">
+    <eOperations name="getRaisedEvents" upperBound="-1" eType="#//ExecutionEvent"/>
+    <eOperations name="getScheduledEvents" upperBound="-1" eType="#//ExecutionEvent"/>
+    <eOperations name="getVariable" eType="#//ExecutionVariable">
+      <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getEvent" eType="#//ExecutionEvent">
+      <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getAllActiveStates" upperBound="-1" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//RegularState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activeStates" upperBound="-1"
+        eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//RegularState"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//ExecutionEvent" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variables" upperBound="-1"
+        eType="#//ExecutionVariable" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executedElements" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="slots" upperBound="-1"
+        eType="#//ExecutionSlot" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="suspendedElements" upperBound="-1"
+        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="snapshot" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionEvent" eSuperTypes="#//ExecutionSlot">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="raised" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//EventDirection"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionSlot" abstract="true" eSuperTypes="../../org.yakindu.base.types/model/base.ecore#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//InferredType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//JavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="InferredType" instanceClassName="org.yakindu.base.types.ITypeSystem.InferredType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutionVariable" eSuperTypes="#//ExecutionSlot"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CompositeSlot" eSuperTypes="#//ExecutionSlot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="slots" upperBound="-1"
+        eType="#//ExecutionSlot" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EventDirection">
+    <eLiterals name="LOCAL"/>
+    <eLiterals name="IN" value="1"/>
+    <eLiterals name="OUT" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="JavaObject" instanceClassName="java.lang.Object"/>
+</ecore:EPackage>
