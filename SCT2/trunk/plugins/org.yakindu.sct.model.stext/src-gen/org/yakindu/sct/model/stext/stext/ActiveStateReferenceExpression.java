@@ -23,29 +23,29 @@ import org.yakindu.sct.model.sgraph.State;
 public interface ActiveStateReferenceExpression extends Expression
 {
   /**
-   * Returns the value of the '<em><b>Value</b></em>' reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Value</b></em>' reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Value</em>' reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Value</em>' reference.
-   * @see #setValue(State)
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getActiveStateReferenceExpression_Value()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Value</em>' reference.
+	 * @see #setValue(State)
+	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getActiveStateReferenceExpression_Value()
+	 * @model
+	 * @generated
+	 */
   State getValue();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression#getValue <em>Value</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression#getValue <em>Value</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Value</em>' reference.
-   * @see #getValue()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Value</em>' reference.
+	 * @see #getValue()
+	 * @generated
+	 */
   void setValue(State value);
 
 } // ActiveStateReferenceExpression

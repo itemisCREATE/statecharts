@@ -19,24 +19,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class ExitEventImpl extends BuiltinEventSpecImpl implements ExitEvent
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ExitEventImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.EXIT_EVENT;
-  }
+		return StextPackage.Literals.EXIT_EVENT;
+	}
 
 } //ExitEventImpl

@@ -15,7 +15,7 @@ import org.yakindu.sct.model.sgraph.Trigger;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.stext.stext.ReactionTrigger#getTriggers <em>Triggers</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.ReactionTrigger#getGuardExpression <em>Guard Expression</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.stext.stext.ReactionTrigger#getGuard <em>Guard</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,45 +26,46 @@ import org.yakindu.sct.model.sgraph.Trigger;
 public interface ReactionTrigger extends Trigger
 {
   /**
-   * Returns the value of the '<em><b>Triggers</b></em>' containment reference list.
-   * The list contents are of type {@link org.yakindu.sct.model.stext.stext.EventSpec}.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Triggers</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.sct.model.stext.stext.EventSpec}.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Triggers</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Triggers</em>' containment reference list.
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getReactionTrigger_Triggers()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Triggers</em>' containment reference list.
+	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getReactionTrigger_Triggers()
+	 * @model containment="true"
+	 * @generated
+	 */
   EList<EventSpec> getTriggers();
 
   /**
-   * Returns the value of the '<em><b>Guard Expression</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Guard</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Guard Expression</em>' containment reference isn't clear,
+   * If the meaning of the '<em>Guard</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Guard Expression</em>' containment reference.
-   * @see #setGuardExpression(Expression)
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getReactionTrigger_GuardExpression()
-   * @model containment="true"
-   * @generated
-   */
-  Expression getGuardExpression();
+	 * @return the value of the '<em>Guard</em>' containment reference.
+	 * @see #setGuard(Guard)
+	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getReactionTrigger_Guard()
+	 * @model containment="true"
+	 * @generated
+	 */
+  Guard getGuard();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ReactionTrigger#getGuardExpression <em>Guard Expression</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.ReactionTrigger#getGuard <em>Guard</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Guard Expression</em>' containment reference.
-   * @see #getGuardExpression()
-   * @generated
-   */
-  void setGuardExpression(Expression value);
+	 * @param value the new value of the '<em>Guard</em>' containment reference.
+	 * @see #getGuard()
+	 * @generated
+	 */
+  void setGuard(Guard value);
+
 
 } // ReactionTrigger

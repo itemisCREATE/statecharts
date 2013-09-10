@@ -1109,8 +1109,8 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTriggersEventSpecParserRuleCall_1_0_1_1_0 = (RuleCall)cTriggersAssignment_1_0_1_1.eContents().get(0);
 		private final Group cGroup_1_0_2 = (Group)cGroup_1_0.eContents().get(2);
 		private final Keyword cLeftSquareBracketKeyword_1_0_2_0 = (Keyword)cGroup_1_0_2.eContents().get(0);
-		private final Assignment cGuardExpressionAssignment_1_0_2_1 = (Assignment)cGroup_1_0_2.eContents().get(1);
-		private final RuleCall cGuardExpressionExpressionParserRuleCall_1_0_2_1_0 = (RuleCall)cGuardExpressionAssignment_1_0_2_1.eContents().get(0);
+		private final Assignment cGuardAssignment_1_0_2_1 = (Assignment)cGroup_1_0_2.eContents().get(1);
+		private final RuleCall cGuardGuardParserRuleCall_1_0_2_1_0 = (RuleCall)cGuardAssignment_1_0_2_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_1_0_2_2 = (Keyword)cGroup_1_0_2.eContents().get(2);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
 		private final Keyword cLeftSquareBracketKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
@@ -1120,12 +1120,12 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//ReactionTrigger returns sgraph::Trigger:
 		//
-		//	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "["
+		//	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "["
 		//
 		//	guardExpression=Expression "]");
 		public ParserRule getRule() { return rule; }
 
-		//{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "["
+		//{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "["
 		//
 		//guardExpression=Expression "]")
 		public Group getGroup() { return cGroup; }
@@ -1133,12 +1133,10 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//{ReactionTrigger}
 		public Action getReactionTriggerAction_0() { return cReactionTriggerAction_0; }
 
-		//triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "[" guardExpression=Expression
-		//
-		//"]"
+		//triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "[" guardExpression=Expression "]"
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")?
+		//triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")?
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//triggers+=EventSpec
@@ -1159,17 +1157,17 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 		//EventSpec
 		public RuleCall getTriggersEventSpecParserRuleCall_1_0_1_1_0() { return cTriggersEventSpecParserRuleCall_1_0_1_1_0; }
 
-		//(=> "[" guardExpression=Expression "]")?
+		//(=> "[" guard=Guard "]")?
 		public Group getGroup_1_0_2() { return cGroup_1_0_2; }
 
 		//=> "["
 		public Keyword getLeftSquareBracketKeyword_1_0_2_0() { return cLeftSquareBracketKeyword_1_0_2_0; }
 
-		//guardExpression=Expression
-		public Assignment getGuardExpressionAssignment_1_0_2_1() { return cGuardExpressionAssignment_1_0_2_1; }
+		//guard=Guard
+		public Assignment getGuardAssignment_1_0_2_1() { return cGuardAssignment_1_0_2_1; }
 
-		//Expression
-		public RuleCall getGuardExpressionExpressionParserRuleCall_1_0_2_1_0() { return cGuardExpressionExpressionParserRuleCall_1_0_2_1_0; }
+		//Guard
+		public RuleCall getGuardGuardParserRuleCall_1_0_2_1_0() { return cGuardGuardParserRuleCall_1_0_2_1_0; }
 
 		//"]"
 		public Keyword getRightSquareBracketKeyword_1_0_2_2() { return cRightSquareBracketKeyword_1_0_2_2; }
@@ -1217,6 +1215,31 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"else"
 		public Keyword getElseKeyword_1_1() { return cElseKeyword_1_1; }
+	}
+
+	public class GuardElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Guard");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cGuardAction_0 = (Action)cGroup.eContents().get(0);
+		private final Assignment cExpressionAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cExpressionExpressionParserRuleCall_1_0 = (RuleCall)cExpressionAssignment_1.eContents().get(0);
+		
+		//Guard:
+		//
+		//	{Guard} expression=Expression;
+		public ParserRule getRule() { return rule; }
+
+		//{Guard} expression=Expression
+		public Group getGroup() { return cGroup; }
+
+		//{Guard}
+		public Action getGuardAction_0() { return cGuardAction_0; }
+
+		//expression=Expression
+		public Assignment getExpressionAssignment_1() { return cExpressionAssignment_1; }
+
+		//Expression
+		public RuleCall getExpressionExpressionParserRuleCall_1_0() { return cExpressionExpressionParserRuleCall_1_0; }
 	}
 
 	public class ReactionEffectElements extends AbstractParserRuleElementFinder {
@@ -3091,6 +3114,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	private StextTriggerElements pStextTrigger;
 	private ReactionTriggerElements pReactionTrigger;
 	private DefaultTriggerElements pDefaultTrigger;
+	private GuardElements pGuard;
 	private ReactionEffectElements pReactionEffect;
 	private TransitionPropertyElements pTransitionProperty;
 	private EntryPointSpecElements pEntryPointSpec;
@@ -3593,7 +3617,7 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 
 	//ReactionTrigger returns sgraph::Trigger:
 	//
-	//	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "["
+	//	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "["
 	//
 	//	guardExpression=Expression "]");
 	public ReactionTriggerElements getReactionTriggerAccess() {
@@ -3613,6 +3637,17 @@ public class STextGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getDefaultTriggerRule() {
 		return getDefaultTriggerAccess().getRule();
+	}
+
+	//Guard:
+	//
+	//	{Guard} expression=Expression;
+	public GuardElements getGuardAccess() {
+		return (pGuard != null) ? pGuard : (pGuard = new GuardElements());
+	}
+	
+	public ParserRule getGuardRule() {
+		return getGuardAccess().getRule();
 	}
 
 	//ReactionEffect returns sgraph::Effect:

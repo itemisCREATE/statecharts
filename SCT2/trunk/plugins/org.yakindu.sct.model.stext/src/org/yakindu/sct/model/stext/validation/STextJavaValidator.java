@@ -66,6 +66,7 @@ import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.FeatureCall;
+import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -115,7 +116,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String EXIT_UNUSED = "The named exit is not used by outgoing transitions.";
 	public static final String EXIT_DEFAULT_UNUSED = "The parent composite state has no 'default' exit transition.";
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
-	public static final String CONDITIONAL_EXPRESSION = "The evaluation result of a conditional expression must be of type boolean";
 
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
@@ -399,14 +399,11 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void checkGuardExpression(ReactionTrigger trigger) {
-		if (trigger.getGuardExpression() == null) {
-			return;
-		}
+	public void checkGuard(Guard guard) {
 		try {
-			InferenceResult result = typeInferrer.inferType(trigger.getGuardExpression());
+			InferenceResult result = typeInferrer.inferType(guard.getExpression());
 			if (result.getType() == null || !typeSystem.isBooleanType(result.getType())) {
-				error(GUARD_EXPRESSION, StextPackage.Literals.REACTION_TRIGGER__GUARD_EXPRESSION);
+				error(GUARD_EXPRESSION, StextPackage.Literals.GUARD__EXPRESSION);
 			}
 			report(result, null);
 		} catch (IllegalArgumentException e) {
@@ -542,7 +539,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		}
 	}
 
-
 	@Check
 	public void checkChoiceWithoutDefaultTransition(final Choice choice) {
 		boolean found = false;
@@ -561,7 +557,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		return trigger == null
 				|| trigger instanceof DefaultTrigger
 				|| ((trigger instanceof ReactionTrigger) && ((ReactionTrigger) trigger).getTriggers().size() == 0 && ((ReactionTrigger) trigger)
-						.getGuardExpression() == null);
+						.getGuard() == null);
 	}
 
 	@Override

@@ -118,6 +118,9 @@ Parameter returns types::Parameter:
 	name=XID ':' type=[types::Type|FQN]
 ;
 
+OperationBody:
+	{OperationBody} expression=Expression;
+
 
 /* ---- entrypoint definition ---- */
 //Entrypoint returns sgraph::Declaration:
@@ -171,13 +174,16 @@ TransitionReaction:
 StextTrigger returns sgraph::Trigger : ReactionTrigger | DefaultTrigger;
 
 ReactionTrigger returns sgraph::Trigger:
-	{ReactionTrigger} ((triggers+=EventSpec ("," triggers+=EventSpec)* (=> '[' guardExpression=Expression ']')?)
-	| ('[' guardExpression=Expression ']'));
+	{ReactionTrigger} ((triggers+=EventSpec ("," triggers+=EventSpec)* (=> '[' guard=Guard']')?)
+	| ('[' guard=Guard ']'));
 
 DefaultTrigger returns sgraph::Trigger:
 	{DefaultTrigger} ('default' | 'else')
 ;
 
+Guard:
+	{Guard}expression=Expression
+;
 
 ReactionEffect returns sgraph::Effect:
 	{ReactionEffect} actions+=(Expression | EventRaisingExpression) (=> ';' actions+=(Expression|EventRaisingExpression) )* ; 

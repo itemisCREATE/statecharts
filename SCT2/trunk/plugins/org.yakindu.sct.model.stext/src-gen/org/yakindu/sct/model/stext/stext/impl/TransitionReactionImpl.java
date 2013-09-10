@@ -21,24 +21,24 @@ import org.yakindu.sct.model.stext.stext.TransitionReaction;
 public class TransitionReactionImpl extends ReactionImpl implements TransitionReaction
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TransitionReactionImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.TRANSITION_REACTION;
-  }
+		return StextPackage.Literals.TRANSITION_REACTION;
+	}
 
 } //TransitionReactionImpl

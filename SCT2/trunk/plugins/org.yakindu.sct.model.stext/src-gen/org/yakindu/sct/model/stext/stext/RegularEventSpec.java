@@ -22,29 +22,29 @@ package org.yakindu.sct.model.stext.stext;
 public interface RegularEventSpec extends EventSpec
 {
   /**
-   * Returns the value of the '<em><b>Event</b></em>' containment reference.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Event</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Event</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Event</em>' containment reference.
-   * @see #setEvent(Expression)
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getRegularEventSpec_Event()
-   * @model containment="true"
-   * @generated
-   */
+	 * @return the value of the '<em>Event</em>' containment reference.
+	 * @see #setEvent(Expression)
+	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getRegularEventSpec_Event()
+	 * @model containment="true"
+	 * @generated
+	 */
   Expression getEvent();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.RegularEventSpec#getEvent <em>Event</em>}' containment reference.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.RegularEventSpec#getEvent <em>Event</em>}' containment reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Event</em>' containment reference.
-   * @see #getEvent()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Event</em>' containment reference.
+	 * @see #getEvent()
+	 * @generated
+	 */
   void setEvent(Expression value);
 
 } // RegularEventSpec
