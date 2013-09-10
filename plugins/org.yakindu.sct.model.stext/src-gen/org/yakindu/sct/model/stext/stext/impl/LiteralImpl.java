@@ -21,24 +21,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class LiteralImpl extends MinimalEObjectImpl.Container implements Literal
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LiteralImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.LITERAL;
-  }
+		return StextPackage.Literals.LITERAL;
+	}
 
 } //LiteralImpl

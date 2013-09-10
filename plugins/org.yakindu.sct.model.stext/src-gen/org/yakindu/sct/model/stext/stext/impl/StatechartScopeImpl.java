@@ -21,24 +21,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class StatechartScopeImpl extends ScopeImpl implements StatechartScope
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StatechartScopeImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.STATECHART_SCOPE;
-  }
+		return StextPackage.Literals.STATECHART_SCOPE;
+	}
 
 } //StatechartScopeImpl

@@ -62,46 +62,47 @@ protected class ThisRootNode extends RootToken {
 			case 29: return new StextTrigger_Alternatives(this, this, 29, inst);
 			case 30: return new ReactionTrigger_Group(this, this, 30, inst);
 			case 31: return new DefaultTrigger_Group(this, this, 31, inst);
-			case 32: return new ReactionEffect_Group(this, this, 32, inst);
-			case 33: return new TransitionProperty_Alternatives(this, this, 33, inst);
-			case 34: return new EntryPointSpec_Group(this, this, 34, inst);
-			case 35: return new ExitPointSpec_Group(this, this, 35, inst);
-			case 36: return new EventSpec_Alternatives(this, this, 36, inst);
-			case 37: return new RegularEventSpec_EventAssignment(this, this, 37, inst);
-			case 38: return new TimeEventSpec_Group(this, this, 38, inst);
-			case 39: return new BuiltinEventSpec_Alternatives(this, this, 39, inst);
-			case 40: return new EntryEvent_Group(this, this, 40, inst);
-			case 41: return new ExitEvent_Group(this, this, 41, inst);
-			case 42: return new AlwaysEvent_Group(this, this, 42, inst);
-			case 43: return new EventRaisingExpression_Group(this, this, 43, inst);
-			case 44: return new StatementExpression_ExpressionParserRuleCall(this, this, 44, inst);
-			case 45: return new Expression_AssignmentExpressionParserRuleCall(this, this, 45, inst);
-			case 46: return new AssignmentExpression_Group(this, this, 46, inst);
-			case 47: return new ConditionalExpression_Group(this, this, 47, inst);
-			case 48: return new LogicalOrExpression_Group(this, this, 48, inst);
-			case 49: return new LogicalAndExpression_Group(this, this, 49, inst);
-			case 50: return new LogicalNotExpression_Alternatives(this, this, 50, inst);
-			case 51: return new BitwiseXorExpression_Group(this, this, 51, inst);
-			case 52: return new BitwiseOrExpression_Group(this, this, 52, inst);
-			case 53: return new BitwiseAndExpression_Group(this, this, 53, inst);
-			case 54: return new LogicalRelationExpression_Group(this, this, 54, inst);
-			case 55: return new ShiftExpression_Group(this, this, 55, inst);
-			case 56: return new NumericalAddSubtractExpression_Group(this, this, 56, inst);
-			case 57: return new NumericalMultiplyDivideExpression_Group(this, this, 57, inst);
-			case 58: return new NumericalUnaryExpression_Alternatives(this, this, 58, inst);
-			case 59: return new PrimaryExpression_Alternatives(this, this, 59, inst);
-			case 60: return new PrimitiveValueExpression_Group(this, this, 60, inst);
-			case 61: return new FeatureCall_Group(this, this, 61, inst);
-			case 62: return new ElementReferenceExpression_Group(this, this, 62, inst);
-			case 63: return new EventValueReferenceExpression_Group(this, this, 63, inst);
-			case 64: return new ActiveStateReferenceExpression_Group(this, this, 64, inst);
-			case 65: return new ParenthesizedExpression_Group(this, this, 65, inst);
-			case 66: return new Literal_Alternatives(this, this, 66, inst);
-			case 67: return new BoolLiteral_Group(this, this, 67, inst);
-			case 68: return new IntLiteral_Group(this, this, 68, inst);
-			case 69: return new RealLiteral_Group(this, this, 69, inst);
-			case 70: return new HexLiteral_Group(this, this, 70, inst);
-			case 71: return new StringLiteral_Group(this, this, 71, inst);
+			case 32: return new Guard_Group(this, this, 32, inst);
+			case 33: return new ReactionEffect_Group(this, this, 33, inst);
+			case 34: return new TransitionProperty_Alternatives(this, this, 34, inst);
+			case 35: return new EntryPointSpec_Group(this, this, 35, inst);
+			case 36: return new ExitPointSpec_Group(this, this, 36, inst);
+			case 37: return new EventSpec_Alternatives(this, this, 37, inst);
+			case 38: return new RegularEventSpec_EventAssignment(this, this, 38, inst);
+			case 39: return new TimeEventSpec_Group(this, this, 39, inst);
+			case 40: return new BuiltinEventSpec_Alternatives(this, this, 40, inst);
+			case 41: return new EntryEvent_Group(this, this, 41, inst);
+			case 42: return new ExitEvent_Group(this, this, 42, inst);
+			case 43: return new AlwaysEvent_Group(this, this, 43, inst);
+			case 44: return new EventRaisingExpression_Group(this, this, 44, inst);
+			case 45: return new StatementExpression_ExpressionParserRuleCall(this, this, 45, inst);
+			case 46: return new Expression_AssignmentExpressionParserRuleCall(this, this, 46, inst);
+			case 47: return new AssignmentExpression_Group(this, this, 47, inst);
+			case 48: return new ConditionalExpression_Group(this, this, 48, inst);
+			case 49: return new LogicalOrExpression_Group(this, this, 49, inst);
+			case 50: return new LogicalAndExpression_Group(this, this, 50, inst);
+			case 51: return new LogicalNotExpression_Alternatives(this, this, 51, inst);
+			case 52: return new BitwiseXorExpression_Group(this, this, 52, inst);
+			case 53: return new BitwiseOrExpression_Group(this, this, 53, inst);
+			case 54: return new BitwiseAndExpression_Group(this, this, 54, inst);
+			case 55: return new LogicalRelationExpression_Group(this, this, 55, inst);
+			case 56: return new ShiftExpression_Group(this, this, 56, inst);
+			case 57: return new NumericalAddSubtractExpression_Group(this, this, 57, inst);
+			case 58: return new NumericalMultiplyDivideExpression_Group(this, this, 58, inst);
+			case 59: return new NumericalUnaryExpression_Alternatives(this, this, 59, inst);
+			case 60: return new PrimaryExpression_Alternatives(this, this, 60, inst);
+			case 61: return new PrimitiveValueExpression_Group(this, this, 61, inst);
+			case 62: return new FeatureCall_Group(this, this, 62, inst);
+			case 63: return new ElementReferenceExpression_Group(this, this, 63, inst);
+			case 64: return new EventValueReferenceExpression_Group(this, this, 64, inst);
+			case 65: return new ActiveStateReferenceExpression_Group(this, this, 65, inst);
+			case 66: return new ParenthesizedExpression_Group(this, this, 66, inst);
+			case 67: return new Literal_Alternatives(this, this, 67, inst);
+			case 68: return new BoolLiteral_Group(this, this, 68, inst);
+			case 69: return new IntLiteral_Group(this, this, 69, inst);
+			case 70: return new RealLiteral_Group(this, this, 70, inst);
+			case 71: return new HexLiteral_Group(this, this, 71, inst);
+			case 72: return new StringLiteral_Group(this, this, 72, inst);
 			default: return null;
 		}	
 	}	
@@ -4183,13 +4184,13 @@ protected class StextTrigger_DefaultTriggerParserRuleCall_1 extends RuleCallToke
  *
  * ReactionTrigger returns sgraph::Trigger:
  * 
- * 	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "["
+ * 	{ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "["
  * 
  * 	guardExpression=Expression "]");
  *
  **/
 
-// {ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "["
+// {ReactionTrigger} (triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "["
 // 
 // guardExpression=Expression "]")
 protected class ReactionTrigger_Group extends GroupToken {
@@ -4246,9 +4247,7 @@ protected class ReactionTrigger_ReactionTriggerAction_0 extends ActionToken  {
 	}
 }
 
-// triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")? | "[" guardExpression=Expression
-// 
-// "]"
+// triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")? | "[" guardExpression=Expression "]"
 protected class ReactionTrigger_Alternatives_1 extends AlternativesToken {
 
 	public ReactionTrigger_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4271,7 +4270,7 @@ protected class ReactionTrigger_Alternatives_1 extends AlternativesToken {
 
 }
 
-// triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guardExpression=Expression "]")?
+// triggers+=EventSpec ("," triggers+=EventSpec)* ("[" guard=Guard "]")?
 protected class ReactionTrigger_Group_1_0 extends GroupToken {
 	
 	public ReactionTrigger_Group_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4433,7 +4432,7 @@ protected class ReactionTrigger_TriggersAssignment_1_0_1_1 extends AssignmentTok
 }
 
 
-// (=> "[" guardExpression=Expression "]")?
+// (=> "[" guard=Guard "]")?
 protected class ReactionTrigger_Group_1_0_2 extends GroupToken {
 	
 	public ReactionTrigger_Group_1_0_2(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -4478,35 +4477,35 @@ protected class ReactionTrigger_LeftSquareBracketKeyword_1_0_2_0 extends Keyword
 
 }
 
-// guardExpression=Expression
-protected class ReactionTrigger_GuardExpressionAssignment_1_0_2_1 extends AssignmentToken  {
+// guard=Guard
+protected class ReactionTrigger_GuardAssignment_1_0_2_1 extends AssignmentToken  {
 	
-	public ReactionTrigger_GuardExpressionAssignment_1_0_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	public ReactionTrigger_GuardAssignment_1_0_2_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getReactionTriggerAccess().getGuardExpressionAssignment_1_0_2_1();
+		return grammarAccess.getReactionTriggerAccess().getGuardAssignment_1_0_2_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Expression_AssignmentExpressionParserRuleCall(this, this, 0, inst);
+			case 0: return new Guard_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}
 
     @Override	
 	public IEObjectConsumer tryConsume() {
-		if((value = eObjectConsumer.getConsumable("guardExpression",false)) == null) return null;
-		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("guardExpression");
+		if((value = eObjectConsumer.getConsumable("guard",false)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("guard");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IEObjectConsumer param = createEObjectConsumer((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getGuardRule().getType().getClassifier())) {
 				type = AssignmentType.PARSER_RULE_CALL;
-				element = grammarAccess.getReactionTriggerAccess().getGuardExpressionExpressionParserRuleCall_1_0_2_1_0(); 
+				element = grammarAccess.getReactionTriggerAccess().getGuardGuardParserRuleCall_1_0_2_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4539,7 +4538,7 @@ protected class ReactionTrigger_RightSquareBracketKeyword_1_0_2_2 extends Keywor
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new ReactionTrigger_GuardExpressionAssignment_1_0_2_1(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new ReactionTrigger_GuardAssignment_1_0_2_1(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -4776,6 +4775,119 @@ protected class DefaultTrigger_DefaultKeyword_1_0 extends KeywordToken  {
 
 
 /************ end Rule DefaultTrigger ****************/
+
+
+/************ begin Rule Guard ****************
+ *
+ * Guard:
+ * 
+ * 	{Guard} expression=Expression;
+ *
+ **/
+
+// {Guard} expression=Expression
+protected class Guard_Group extends GroupToken {
+	
+	public Guard_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getGuardAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Guard_ExpressionAssignment_1(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(getEObject().eClass() != grammarAccess.getGuardAccess().getGuardAction_0().getType().getClassifier())
+			return null;
+		return eObjectConsumer;
+	}
+
+}
+
+// {Guard}
+protected class Guard_GuardAction_0 extends ActionToken  {
+
+	public Guard_GuardAction_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getGuardAccess().getGuardAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			default: return lastRuleCallOrigin.createFollowerAfterReturn(this, index, index, inst);
+		}	
+	}
+
+    @Override
+	public IEObjectConsumer tryConsume() {
+		if(!eObjectConsumer.isConsumed()) return null;
+		return eObjectConsumer;
+	}
+}
+
+// expression=Expression
+protected class Guard_ExpressionAssignment_1 extends AssignmentToken  {
+	
+	public Guard_ExpressionAssignment_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGuardAccess().getExpressionAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Expression_AssignmentExpressionParserRuleCall(this, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+    @Override	
+	public IEObjectConsumer tryConsume() {
+		if((value = eObjectConsumer.getConsumable("expression",true)) == null) return null;
+		IEObjectConsumer obj = eObjectConsumer.cloneAndConsume("expression");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IEObjectConsumer param = createEObjectConsumer((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getExpressionRule().getType().getClassifier())) {
+				type = AssignmentType.PARSER_RULE_CALL;
+				element = grammarAccess.getGuardAccess().getExpressionExpressionParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createFollowerAfterReturn(AbstractToken next,	int actIndex, int index, IEObjectConsumer inst) {
+		if(value == inst.getEObject() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Guard_GuardAction_0(lastRuleCallOrigin, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule Guard ****************/
 
 
 /************ begin Rule ReactionEffect ****************

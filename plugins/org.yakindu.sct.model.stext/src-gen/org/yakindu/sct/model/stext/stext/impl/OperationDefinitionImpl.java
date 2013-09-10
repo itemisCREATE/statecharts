@@ -49,360 +49,337 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class OperationDefinitionImpl extends DeclarationImpl implements OperationDefinition
 {
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
-   * @generated
-   * @ordered
-   */
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
   protected Type type;
 
   /**
-   * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
-   * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getParameters()
-   * @generated
-   * @ordered
-   */
+	 * @see #getParameters()
+	 * @generated
+	 * @ordered
+	 */
   protected EList<Parameter> parameters;
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected OperationDefinitionImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.OPERATION_DEFINITION;
-  }
+		return StextPackage.Literals.OPERATION_DEFINITION;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Type getType()
   {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (Type)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.OPERATION_DEFINITION__TYPE, oldType, type));
-      }
-    }
-    return type;
-  }
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (Type)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, StextPackage.OPERATION_DEFINITION__TYPE, oldType, type));
+			}
+		}
+		return type;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public Type basicGetType()
   {
-    return type;
-  }
+		return type;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setType(Type newType)
   {
-    Type oldType = type;
-    type = newType;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.OPERATION_DEFINITION__TYPE, oldType, type));
-  }
+		Type oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.OPERATION_DEFINITION__TYPE, oldType, type));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ComplexType getOwningType()
   {
-    if (eContainerFeatureID() != StextPackage.OPERATION_DEFINITION__OWNING_TYPE) return null;
-    return (ComplexType)eInternalContainer();
-  }
+		if (eContainerFeatureID() != StextPackage.OPERATION_DEFINITION__OWNING_TYPE) return null;
+		return (ComplexType)eInternalContainer();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public NotificationChain basicSetOwningType(ComplexType newOwningType, NotificationChain msgs)
   {
-    msgs = eBasicSetContainer((InternalEObject)newOwningType, StextPackage.OPERATION_DEFINITION__OWNING_TYPE, msgs);
-    return msgs;
-  }
+		msgs = eBasicSetContainer((InternalEObject)newOwningType, StextPackage.OPERATION_DEFINITION__OWNING_TYPE, msgs);
+		return msgs;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setOwningType(ComplexType newOwningType)
   {
-    if (newOwningType != eInternalContainer() || (eContainerFeatureID() != StextPackage.OPERATION_DEFINITION__OWNING_TYPE && newOwningType != null))
-    {
-      if (EcoreUtil.isAncestor(this, newOwningType))
-        throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
-      NotificationChain msgs = null;
-      if (eInternalContainer() != null)
-        msgs = eBasicRemoveFromContainer(msgs);
-      if (newOwningType != null)
-        msgs = ((InternalEObject)newOwningType).eInverseAdd(this, TypesPackage.COMPLEX_TYPE__FEATURES, ComplexType.class, msgs);
-      msgs = basicSetOwningType(newOwningType, msgs);
-      if (msgs != null) msgs.dispatch();
-    }
-    else if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.OPERATION_DEFINITION__OWNING_TYPE, newOwningType, newOwningType));
-  }
+		if (newOwningType != eInternalContainer() || (eContainerFeatureID() != StextPackage.OPERATION_DEFINITION__OWNING_TYPE && newOwningType != null)) {
+			if (EcoreUtil.isAncestor(this, newOwningType))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newOwningType != null)
+				msgs = ((InternalEObject)newOwningType).eInverseAdd(this, TypesPackage.COMPLEX_TYPE__FEATURES, ComplexType.class, msgs);
+			msgs = basicSetOwningType(newOwningType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.OPERATION_DEFINITION__OWNING_TYPE, newOwningType, newOwningType));
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public EList<Parameter> getParameters()
   {
-    if (parameters == null)
-    {
-      parameters = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class, this, StextPackage.OPERATION_DEFINITION__PARAMETERS, TypesPackage.PARAMETER__OWNING_OPERATION);
-    }
-    return parameters;
-  }
+		if (parameters == null) {
+			parameters = new EObjectContainmentWithInverseEList<Parameter>(Parameter.class, this, StextPackage.OPERATION_DEFINITION__PARAMETERS, TypesPackage.PARAMETER__OWNING_OPERATION);
+		}
+		return parameters;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
-        if (eInternalContainer() != null)
-          msgs = eBasicRemoveFromContainer(msgs);
-        return basicSetOwningType((ComplexType)otherEnd, msgs);
-      case StextPackage.OPERATION_DEFINITION__PARAMETERS:
-        return ((InternalEList<InternalEObject>)(InternalEList<?>)getParameters()).basicAdd(otherEnd, msgs);
-    }
-    return super.eInverseAdd(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetOwningType((ComplexType)otherEnd, msgs);
+			case StextPackage.OPERATION_DEFINITION__PARAMETERS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getParameters()).basicAdd(otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    switch (featureID)
-    {
-      case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
-        return basicSetOwningType(null, msgs);
-      case StextPackage.OPERATION_DEFINITION__PARAMETERS:
-        return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
-  }
+		switch (featureID) {
+			case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
+				return basicSetOwningType(null, msgs);
+			case StextPackage.OPERATION_DEFINITION__PARAMETERS:
+				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
   {
-    switch (eContainerFeatureID())
-    {
-      case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
-        return eInternalContainer().eInverseRemove(this, TypesPackage.COMPLEX_TYPE__FEATURES, ComplexType.class, msgs);
-    }
-    return super.eBasicRemoveFromContainerFeature(msgs);
-  }
+		switch (eContainerFeatureID()) {
+			case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
+				return eInternalContainer().eInverseRemove(this, TypesPackage.COMPLEX_TYPE__FEATURES, ComplexType.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
-    switch (featureID)
-    {
-      case StextPackage.OPERATION_DEFINITION__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
-      case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
-        return getOwningType();
-      case StextPackage.OPERATION_DEFINITION__PARAMETERS:
-        return getParameters();
-    }
-    return super.eGet(featureID, resolve, coreType);
-  }
+		switch (featureID) {
+			case StextPackage.OPERATION_DEFINITION__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
+			case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
+				return getOwningType();
+			case StextPackage.OPERATION_DEFINITION__PARAMETERS:
+				return getParameters();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
-    switch (featureID)
-    {
-      case StextPackage.OPERATION_DEFINITION__TYPE:
-        setType((Type)newValue);
-        return;
-      case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
-        setOwningType((ComplexType)newValue);
-        return;
-      case StextPackage.OPERATION_DEFINITION__PARAMETERS:
-        getParameters().clear();
-        getParameters().addAll((Collection<? extends Parameter>)newValue);
-        return;
-    }
-    super.eSet(featureID, newValue);
-  }
+		switch (featureID) {
+			case StextPackage.OPERATION_DEFINITION__TYPE:
+				setType((Type)newValue);
+				return;
+			case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
+				setOwningType((ComplexType)newValue);
+				return;
+			case StextPackage.OPERATION_DEFINITION__PARAMETERS:
+				getParameters().clear();
+				getParameters().addAll((Collection<? extends Parameter>)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void eUnset(int featureID)
   {
-    switch (featureID)
-    {
-      case StextPackage.OPERATION_DEFINITION__TYPE:
-        setType((Type)null);
-        return;
-      case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
-        setOwningType((ComplexType)null);
-        return;
-      case StextPackage.OPERATION_DEFINITION__PARAMETERS:
-        getParameters().clear();
-        return;
-    }
-    super.eUnset(featureID);
-  }
+		switch (featureID) {
+			case StextPackage.OPERATION_DEFINITION__TYPE:
+				setType((Type)null);
+				return;
+			case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
+				setOwningType((ComplexType)null);
+				return;
+			case StextPackage.OPERATION_DEFINITION__PARAMETERS:
+				getParameters().clear();
+				return;
+		}
+		super.eUnset(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean eIsSet(int featureID)
   {
-    switch (featureID)
-    {
-      case StextPackage.OPERATION_DEFINITION__TYPE:
-        return type != null;
-      case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
-        return getOwningType() != null;
-      case StextPackage.OPERATION_DEFINITION__PARAMETERS:
-        return parameters != null && !parameters.isEmpty();
-    }
-    return super.eIsSet(featureID);
-  }
+		switch (featureID) {
+			case StextPackage.OPERATION_DEFINITION__TYPE:
+				return type != null;
+			case StextPackage.OPERATION_DEFINITION__OWNING_TYPE:
+				return getOwningType() != null;
+			case StextPackage.OPERATION_DEFINITION__PARAMETERS:
+				return parameters != null && !parameters.isEmpty();
+		}
+		return super.eIsSet(featureID);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
   {
-    if (baseClass == TypedElement.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case StextPackage.OPERATION_DEFINITION__TYPE: return TypesPackage.TYPED_ELEMENT__TYPE;
-        default: return -1;
-      }
-    }
-    if (baseClass == Feature.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case StextPackage.OPERATION_DEFINITION__OWNING_TYPE: return TypesPackage.FEATURE__OWNING_TYPE;
-        default: return -1;
-      }
-    }
-    if (baseClass == Operation.class)
-    {
-      switch (derivedFeatureID)
-      {
-        case StextPackage.OPERATION_DEFINITION__PARAMETERS: return TypesPackage.OPERATION__PARAMETERS;
-        default: return -1;
-      }
-    }
-    return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
-  }
+		if (baseClass == TypedElement.class) {
+			switch (derivedFeatureID) {
+				case StextPackage.OPERATION_DEFINITION__TYPE: return TypesPackage.TYPED_ELEMENT__TYPE;
+				default: return -1;
+			}
+		}
+		if (baseClass == Feature.class) {
+			switch (derivedFeatureID) {
+				case StextPackage.OPERATION_DEFINITION__OWNING_TYPE: return TypesPackage.FEATURE__OWNING_TYPE;
+				default: return -1;
+			}
+		}
+		if (baseClass == Operation.class) {
+			switch (derivedFeatureID) {
+				case StextPackage.OPERATION_DEFINITION__PARAMETERS: return TypesPackage.OPERATION__PARAMETERS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
   {
-    if (baseClass == TypedElement.class)
-    {
-      switch (baseFeatureID)
-      {
-        case TypesPackage.TYPED_ELEMENT__TYPE: return StextPackage.OPERATION_DEFINITION__TYPE;
-        default: return -1;
-      }
-    }
-    if (baseClass == Feature.class)
-    {
-      switch (baseFeatureID)
-      {
-        case TypesPackage.FEATURE__OWNING_TYPE: return StextPackage.OPERATION_DEFINITION__OWNING_TYPE;
-        default: return -1;
-      }
-    }
-    if (baseClass == Operation.class)
-    {
-      switch (baseFeatureID)
-      {
-        case TypesPackage.OPERATION__PARAMETERS: return StextPackage.OPERATION_DEFINITION__PARAMETERS;
-        default: return -1;
-      }
-    }
-    return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-  }
+		if (baseClass == TypedElement.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.TYPED_ELEMENT__TYPE: return StextPackage.OPERATION_DEFINITION__TYPE;
+				default: return -1;
+			}
+		}
+		if (baseClass == Feature.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.FEATURE__OWNING_TYPE: return StextPackage.OPERATION_DEFINITION__OWNING_TYPE;
+				default: return -1;
+			}
+		}
+		if (baseClass == Operation.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.OPERATION__PARAMETERS: return StextPackage.OPERATION_DEFINITION__PARAMETERS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
 
 } //OperationDefinitionImpl

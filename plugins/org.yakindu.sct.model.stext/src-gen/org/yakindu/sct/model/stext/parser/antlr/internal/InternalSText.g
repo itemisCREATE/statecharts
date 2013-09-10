@@ -1717,17 +1717,17 @@ ruleReactionTrigger returns [EObject current=null]
 )(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getReactionTriggerAccess().getGuardExpressionExpressionParserRuleCall_1_0_2_1_0()); 
+	        newCompositeNode(grammarAccess.getReactionTriggerAccess().getGuardGuardParserRuleCall_1_0_2_1_0()); 
 	    }
-		lv_guardExpression_5_0=ruleExpression		{
+		lv_guard_5_0=ruleGuard		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getReactionTriggerRule());
 	        }
        		set(
        			$current, 
-       			"guardExpression",
-        		lv_guardExpression_5_0, 
-        		"Expression");
+       			"guard",
+        		lv_guard_5_0, 
+        		"Guard");
 	        afterParserOrEnumRuleCall();
 	    }
 
@@ -1799,6 +1799,51 @@ ruleDefaultTrigger returns [EObject current=null]
     {
     	newLeafNode(otherlv_2, grammarAccess.getDefaultTriggerAccess().getElseKeyword_1_1());
     }
+))
+;
+
+
+
+
+
+// Entry rule entryRuleGuard
+entryRuleGuard returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getGuardRule()); }
+	 iv_ruleGuard=ruleGuard 
+	 { $current=$iv_ruleGuard.current; } 
+	 EOF 
+;
+
+// Rule Guard
+ruleGuard returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getGuardAccess().getGuardAction_0(),
+            $current);
+    }
+)(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getGuardAccess().getExpressionExpressionParserRuleCall_1_0()); 
+	    }
+		lv_expression_1_0=ruleExpression		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getGuardRule());
+	        }
+       		set(
+       			$current, 
+       			"expression",
+        		lv_expression_1_0, 
+        		"Expression");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 

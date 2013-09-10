@@ -19,24 +19,24 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 public class AlwaysEventImpl extends BuiltinEventSpecImpl implements AlwaysEvent
 {
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected AlwaysEventImpl()
   {
-    super();
-  }
+		super();
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EClass eStaticClass()
   {
-    return StextPackage.Literals.ALWAYS_EVENT;
-  }
+		return StextPackage.Literals.ALWAYS_EVENT;
+	}
 
 } //AlwaysEventImpl

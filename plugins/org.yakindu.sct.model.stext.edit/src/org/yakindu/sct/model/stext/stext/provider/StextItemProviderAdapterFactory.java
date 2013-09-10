@@ -35,1611 +35,1577 @@ import org.yakindu.sct.model.stext.stext.util.StextAdapterFactory;
 public class StextItemProviderAdapterFactory extends StextAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable
 {
   /**
-   * This keeps track of the root adapter factory that delegates to this adapter factory.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the root adapter factory that delegates to this adapter factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ComposedAdapterFactory parentAdapterFactory;
 
   /**
-   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-   * <!-- begin-user-doc -->
+	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
   /**
-   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-   * <!-- begin-user-doc -->
+	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
   /**
-   * This constructs an instance.
-   * <!-- begin-user-doc -->
+	 * This constructs an instance.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public StextItemProviderAdapterFactory()
   {
-    supportedTypes.add(IEditingDomainItemProvider.class);
-    supportedTypes.add(IStructuredItemContentProvider.class);
-    supportedTypes.add(ITreeItemContentProvider.class);
-    supportedTypes.add(IItemLabelProvider.class);
-    supportedTypes.add(IItemPropertySource.class);
-  }
+		supportedTypes.add(IEditingDomainItemProvider.class);
+		supportedTypes.add(IStructuredItemContentProvider.class);
+		supportedTypes.add(ITreeItemContentProvider.class);
+		supportedTypes.add(IItemLabelProvider.class);
+		supportedTypes.add(IItemPropertySource.class);
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Root} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Root} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected RootItemProvider rootItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Root}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Root}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createRootAdapter()
   {
-    if (rootItemProvider == null)
-    {
-      rootItemProvider = new RootItemProvider(this);
-    }
+		if (rootItemProvider == null) {
+			rootItemProvider = new RootItemProvider(this);
+		}
 
-    return rootItemProvider;
-  }
+		return rootItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.DefRoot} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.DefRoot} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected DefRootItemProvider defRootItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.DefRoot}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.DefRoot}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createDefRootAdapter()
   {
-    if (defRootItemProvider == null)
-    {
-      defRootItemProvider = new DefRootItemProvider(this);
-    }
+		if (defRootItemProvider == null) {
+			defRootItemProvider = new DefRootItemProvider(this);
+		}
 
-    return defRootItemProvider;
-  }
+		return defRootItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StatechartRoot} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StatechartRoot} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StatechartRootItemProvider statechartRootItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartRoot}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartRoot}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createStatechartRootAdapter()
   {
-    if (statechartRootItemProvider == null)
-    {
-      statechartRootItemProvider = new StatechartRootItemProvider(this);
-    }
+		if (statechartRootItemProvider == null) {
+			statechartRootItemProvider = new StatechartRootItemProvider(this);
+		}
 
-    return statechartRootItemProvider;
-  }
+		return statechartRootItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StateRoot} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StateRoot} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StateRootItemProvider stateRootItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StateRoot}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StateRoot}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createStateRootAdapter()
   {
-    if (stateRootItemProvider == null)
-    {
-      stateRootItemProvider = new StateRootItemProvider(this);
-    }
+		if (stateRootItemProvider == null) {
+			stateRootItemProvider = new StateRootItemProvider(this);
+		}
 
-    return stateRootItemProvider;
-  }
+		return stateRootItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TransitionRoot} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TransitionRoot} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TransitionRootItemProvider transitionRootItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionRoot}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionRoot}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createTransitionRootAdapter()
   {
-    if (transitionRootItemProvider == null)
-    {
-      transitionRootItemProvider = new TransitionRootItemProvider(this);
-    }
+		if (transitionRootItemProvider == null) {
+			transitionRootItemProvider = new TransitionRootItemProvider(this);
+		}
 
-    return transitionRootItemProvider;
-  }
+		return transitionRootItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StatechartSpecification} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StatechartSpecification} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StatechartSpecificationItemProvider statechartSpecificationItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartSpecification}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartSpecification}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createStatechartSpecificationAdapter()
   {
-    if (statechartSpecificationItemProvider == null)
-    {
-      statechartSpecificationItemProvider = new StatechartSpecificationItemProvider(this);
-    }
+		if (statechartSpecificationItemProvider == null) {
+			statechartSpecificationItemProvider = new StatechartSpecificationItemProvider(this);
+		}
 
-    return statechartSpecificationItemProvider;
-  }
+		return statechartSpecificationItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StateSpecification} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StateSpecification} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StateSpecificationItemProvider stateSpecificationItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StateSpecification}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StateSpecification}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createStateSpecificationAdapter()
   {
-    if (stateSpecificationItemProvider == null)
-    {
-      stateSpecificationItemProvider = new StateSpecificationItemProvider(this);
-    }
+		if (stateSpecificationItemProvider == null) {
+			stateSpecificationItemProvider = new StateSpecificationItemProvider(this);
+		}
 
-    return stateSpecificationItemProvider;
-  }
+		return stateSpecificationItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TransitionSpecification} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TransitionSpecification} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TransitionSpecificationItemProvider transitionSpecificationItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionSpecification}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionSpecification}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createTransitionSpecificationAdapter()
   {
-    if (transitionSpecificationItemProvider == null)
-    {
-      transitionSpecificationItemProvider = new TransitionSpecificationItemProvider(this);
-    }
+		if (transitionSpecificationItemProvider == null) {
+			transitionSpecificationItemProvider = new TransitionSpecificationItemProvider(this);
+		}
 
-    return transitionSpecificationItemProvider;
-  }
+		return transitionSpecificationItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StatechartScope} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StatechartScope} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StatechartScopeItemProvider statechartScopeItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartScope}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartScope}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createStatechartScopeAdapter()
   {
-    if (statechartScopeItemProvider == null)
-    {
-      statechartScopeItemProvider = new StatechartScopeItemProvider(this);
-    }
+		if (statechartScopeItemProvider == null) {
+			statechartScopeItemProvider = new StatechartScopeItemProvider(this);
+		}
 
-    return statechartScopeItemProvider;
-  }
+		return statechartScopeItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InterfaceScope} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InterfaceScope} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected InterfaceScopeItemProvider interfaceScopeItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.InterfaceScope}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.InterfaceScope}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createInterfaceScopeAdapter()
   {
-    if (interfaceScopeItemProvider == null)
-    {
-      interfaceScopeItemProvider = new InterfaceScopeItemProvider(this);
-    }
+		if (interfaceScopeItemProvider == null) {
+			interfaceScopeItemProvider = new InterfaceScopeItemProvider(this);
+		}
 
-    return interfaceScopeItemProvider;
-  }
+		return interfaceScopeItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InternalScope} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InternalScope} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected InternalScopeItemProvider internalScopeItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.InternalScope}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.InternalScope}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createInternalScopeAdapter()
   {
-    if (internalScopeItemProvider == null)
-    {
-      internalScopeItemProvider = new InternalScopeItemProvider(this);
-    }
+		if (internalScopeItemProvider == null) {
+			internalScopeItemProvider = new InternalScopeItemProvider(this);
+		}
 
-    return internalScopeItemProvider;
-  }
+		return internalScopeItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventDefinition} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventDefinition} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected EventDefinitionItemProvider eventDefinitionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventDefinition}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventDefinition}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createEventDefinitionAdapter()
   {
-    if (eventDefinitionItemProvider == null)
-    {
-      eventDefinitionItemProvider = new EventDefinitionItemProvider(this);
-    }
+		if (eventDefinitionItemProvider == null) {
+			eventDefinitionItemProvider = new EventDefinitionItemProvider(this);
+		}
 
-    return eventDefinitionItemProvider;
-  }
+		return eventDefinitionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.VariableDefinition} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.VariableDefinition} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected VariableDefinitionItemProvider variableDefinitionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.VariableDefinition}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.VariableDefinition}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createVariableDefinitionAdapter()
   {
-    if (variableDefinitionItemProvider == null)
-    {
-      variableDefinitionItemProvider = new VariableDefinitionItemProvider(this);
-    }
+		if (variableDefinitionItemProvider == null) {
+			variableDefinitionItemProvider = new VariableDefinitionItemProvider(this);
+		}
 
-    return variableDefinitionItemProvider;
-  }
+		return variableDefinitionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.OperationDefinition} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.OperationDefinition} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected OperationDefinitionItemProvider operationDefinitionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.OperationDefinition}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.OperationDefinition}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createOperationDefinitionAdapter()
   {
-    if (operationDefinitionItemProvider == null)
-    {
-      operationDefinitionItemProvider = new OperationDefinitionItemProvider(this);
-    }
+		if (operationDefinitionItemProvider == null) {
+			operationDefinitionItemProvider = new OperationDefinitionItemProvider(this);
+		}
 
-    return operationDefinitionItemProvider;
-  }
+		return operationDefinitionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LocalReaction} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LocalReaction} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LocalReactionItemProvider localReactionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LocalReaction}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LocalReaction}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createLocalReactionAdapter()
   {
-    if (localReactionItemProvider == null)
-    {
-      localReactionItemProvider = new LocalReactionItemProvider(this);
-    }
+		if (localReactionItemProvider == null) {
+			localReactionItemProvider = new LocalReactionItemProvider(this);
+		}
 
-    return localReactionItemProvider;
-  }
+		return localReactionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TransitionReaction} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TransitionReaction} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TransitionReactionItemProvider transitionReactionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionReaction}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionReaction}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createTransitionReactionAdapter()
   {
-    if (transitionReactionItemProvider == null)
-    {
-      transitionReactionItemProvider = new TransitionReactionItemProvider(this);
-    }
+		if (transitionReactionItemProvider == null) {
+			transitionReactionItemProvider = new TransitionReactionItemProvider(this);
+		}
 
-    return transitionReactionItemProvider;
-  }
+		return transitionReactionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EntryPointSpec} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Guard} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
+  protected GuardItemProvider guardItemProvider;
+
+  /**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Guard}.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
+  @Override
+  public Adapter createGuardAdapter()
+  {
+		if (guardItemProvider == null) {
+			guardItemProvider = new GuardItemProvider(this);
+		}
+
+		return guardItemProvider;
+	}
+
+  /**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EntryPointSpec} instances.
+	 * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+	 * @generated
+	 */
   protected EntryPointSpecItemProvider entryPointSpecItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EntryPointSpec}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EntryPointSpec}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createEntryPointSpecAdapter()
   {
-    if (entryPointSpecItemProvider == null)
-    {
-      entryPointSpecItemProvider = new EntryPointSpecItemProvider(this);
-    }
+		if (entryPointSpecItemProvider == null) {
+			entryPointSpecItemProvider = new EntryPointSpecItemProvider(this);
+		}
 
-    return entryPointSpecItemProvider;
-  }
+		return entryPointSpecItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ExitPointSpec} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ExitPointSpec} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ExitPointSpecItemProvider exitPointSpecItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ExitPointSpec}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ExitPointSpec}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createExitPointSpecAdapter()
   {
-    if (exitPointSpecItemProvider == null)
-    {
-      exitPointSpecItemProvider = new ExitPointSpecItemProvider(this);
-    }
+		if (exitPointSpecItemProvider == null) {
+			exitPointSpecItemProvider = new ExitPointSpecItemProvider(this);
+		}
 
-    return exitPointSpecItemProvider;
-  }
+		return exitPointSpecItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventSpec} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventSpec} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected EventSpecItemProvider eventSpecItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventSpec}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventSpec}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createEventSpecAdapter()
   {
-    if (eventSpecItemProvider == null)
-    {
-      eventSpecItemProvider = new EventSpecItemProvider(this);
-    }
+		if (eventSpecItemProvider == null) {
+			eventSpecItemProvider = new EventSpecItemProvider(this);
+		}
 
-    return eventSpecItemProvider;
-  }
+		return eventSpecItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.RegularEventSpec} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.RegularEventSpec} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected RegularEventSpecItemProvider regularEventSpecItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.RegularEventSpec}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.RegularEventSpec}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createRegularEventSpecAdapter()
   {
-    if (regularEventSpecItemProvider == null)
-    {
-      regularEventSpecItemProvider = new RegularEventSpecItemProvider(this);
-    }
+		if (regularEventSpecItemProvider == null) {
+			regularEventSpecItemProvider = new RegularEventSpecItemProvider(this);
+		}
 
-    return regularEventSpecItemProvider;
-  }
+		return regularEventSpecItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TimeEventSpec} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TimeEventSpec} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected TimeEventSpecItemProvider timeEventSpecItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TimeEventSpec}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TimeEventSpec}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createTimeEventSpecAdapter()
   {
-    if (timeEventSpecItemProvider == null)
-    {
-      timeEventSpecItemProvider = new TimeEventSpecItemProvider(this);
-    }
+		if (timeEventSpecItemProvider == null) {
+			timeEventSpecItemProvider = new TimeEventSpecItemProvider(this);
+		}
 
-    return timeEventSpecItemProvider;
-  }
+		return timeEventSpecItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BuiltinEventSpec} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BuiltinEventSpec} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected BuiltinEventSpecItemProvider builtinEventSpecItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BuiltinEventSpec}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BuiltinEventSpec}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createBuiltinEventSpecAdapter()
   {
-    if (builtinEventSpecItemProvider == null)
-    {
-      builtinEventSpecItemProvider = new BuiltinEventSpecItemProvider(this);
-    }
+		if (builtinEventSpecItemProvider == null) {
+			builtinEventSpecItemProvider = new BuiltinEventSpecItemProvider(this);
+		}
 
-    return builtinEventSpecItemProvider;
-  }
+		return builtinEventSpecItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EntryEvent} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EntryEvent} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected EntryEventItemProvider entryEventItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EntryEvent}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EntryEvent}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createEntryEventAdapter()
   {
-    if (entryEventItemProvider == null)
-    {
-      entryEventItemProvider = new EntryEventItemProvider(this);
-    }
+		if (entryEventItemProvider == null) {
+			entryEventItemProvider = new EntryEventItemProvider(this);
+		}
 
-    return entryEventItemProvider;
-  }
+		return entryEventItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ExitEvent} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ExitEvent} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ExitEventItemProvider exitEventItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ExitEvent}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ExitEvent}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createExitEventAdapter()
   {
-    if (exitEventItemProvider == null)
-    {
-      exitEventItemProvider = new ExitEventItemProvider(this);
-    }
+		if (exitEventItemProvider == null) {
+			exitEventItemProvider = new ExitEventItemProvider(this);
+		}
 
-    return exitEventItemProvider;
-  }
+		return exitEventItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.AlwaysEvent} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.AlwaysEvent} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected AlwaysEventItemProvider alwaysEventItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.AlwaysEvent}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.AlwaysEvent}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createAlwaysEventAdapter()
   {
-    if (alwaysEventItemProvider == null)
-    {
-      alwaysEventItemProvider = new AlwaysEventItemProvider(this);
-    }
+		if (alwaysEventItemProvider == null) {
+			alwaysEventItemProvider = new AlwaysEventItemProvider(this);
+		}
 
-    return alwaysEventItemProvider;
-  }
+		return alwaysEventItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Expression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Expression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ExpressionItemProvider expressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Expression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Expression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createExpressionAdapter()
   {
-    if (expressionItemProvider == null)
-    {
-      expressionItemProvider = new ExpressionItemProvider(this);
-    }
+		if (expressionItemProvider == null) {
+			expressionItemProvider = new ExpressionItemProvider(this);
+		}
 
-    return expressionItemProvider;
-  }
+		return expressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Literal} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Literal} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LiteralItemProvider literalItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Literal}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Literal}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createLiteralAdapter()
   {
-    if (literalItemProvider == null)
-    {
-      literalItemProvider = new LiteralItemProvider(this);
-    }
+		if (literalItemProvider == null) {
+			literalItemProvider = new LiteralItemProvider(this);
+		}
 
-    return literalItemProvider;
-  }
+		return literalItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BoolLiteral} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BoolLiteral} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected BoolLiteralItemProvider boolLiteralItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BoolLiteral}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BoolLiteral}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createBoolLiteralAdapter()
   {
-    if (boolLiteralItemProvider == null)
-    {
-      boolLiteralItemProvider = new BoolLiteralItemProvider(this);
-    }
+		if (boolLiteralItemProvider == null) {
+			boolLiteralItemProvider = new BoolLiteralItemProvider(this);
+		}
 
-    return boolLiteralItemProvider;
-  }
+		return boolLiteralItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.IntLiteral} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.IntLiteral} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected IntLiteralItemProvider intLiteralItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.IntLiteral}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.IntLiteral}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createIntLiteralAdapter()
   {
-    if (intLiteralItemProvider == null)
-    {
-      intLiteralItemProvider = new IntLiteralItemProvider(this);
-    }
+		if (intLiteralItemProvider == null) {
+			intLiteralItemProvider = new IntLiteralItemProvider(this);
+		}
 
-    return intLiteralItemProvider;
-  }
+		return intLiteralItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.RealLiteral} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.RealLiteral} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected RealLiteralItemProvider realLiteralItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.RealLiteral}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.RealLiteral}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createRealLiteralAdapter()
   {
-    if (realLiteralItemProvider == null)
-    {
-      realLiteralItemProvider = new RealLiteralItemProvider(this);
-    }
+		if (realLiteralItemProvider == null) {
+			realLiteralItemProvider = new RealLiteralItemProvider(this);
+		}
 
-    return realLiteralItemProvider;
-  }
+		return realLiteralItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.HexLiteral} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.HexLiteral} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected HexLiteralItemProvider hexLiteralItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.HexLiteral}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.HexLiteral}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createHexLiteralAdapter()
   {
-    if (hexLiteralItemProvider == null)
-    {
-      hexLiteralItemProvider = new HexLiteralItemProvider(this);
-    }
+		if (hexLiteralItemProvider == null) {
+			hexLiteralItemProvider = new HexLiteralItemProvider(this);
+		}
 
-    return hexLiteralItemProvider;
-  }
+		return hexLiteralItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StringLiteral} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StringLiteral} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected StringLiteralItemProvider stringLiteralItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StringLiteral}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StringLiteral}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createStringLiteralAdapter()
   {
-    if (stringLiteralItemProvider == null)
-    {
-      stringLiteralItemProvider = new StringLiteralItemProvider(this);
-    }
+		if (stringLiteralItemProvider == null) {
+			stringLiteralItemProvider = new StringLiteralItemProvider(this);
+		}
 
-    return stringLiteralItemProvider;
-  }
+		return stringLiteralItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.SimpleScope} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.SimpleScope} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected SimpleScopeItemProvider simpleScopeItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.SimpleScope}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.SimpleScope}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createSimpleScopeAdapter()
   {
-    if (simpleScopeItemProvider == null)
-    {
-      simpleScopeItemProvider = new SimpleScopeItemProvider(this);
-    }
+		if (simpleScopeItemProvider == null) {
+			simpleScopeItemProvider = new SimpleScopeItemProvider(this);
+		}
 
-    return simpleScopeItemProvider;
-  }
+		return simpleScopeItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ReactionTrigger} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ReactionTrigger} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ReactionTriggerItemProvider reactionTriggerItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ReactionTrigger}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ReactionTrigger}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createReactionTriggerAdapter()
   {
-    if (reactionTriggerItemProvider == null)
-    {
-      reactionTriggerItemProvider = new ReactionTriggerItemProvider(this);
-    }
+		if (reactionTriggerItemProvider == null) {
+			reactionTriggerItemProvider = new ReactionTriggerItemProvider(this);
+		}
 
-    return reactionTriggerItemProvider;
-  }
+		return reactionTriggerItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.DefaultTrigger} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.DefaultTrigger} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected DefaultTriggerItemProvider defaultTriggerItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.DefaultTrigger}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.DefaultTrigger}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createDefaultTriggerAdapter()
   {
-    if (defaultTriggerItemProvider == null)
-    {
-      defaultTriggerItemProvider = new DefaultTriggerItemProvider(this);
-    }
+		if (defaultTriggerItemProvider == null) {
+			defaultTriggerItemProvider = new DefaultTriggerItemProvider(this);
+		}
 
-    return defaultTriggerItemProvider;
-  }
+		return defaultTriggerItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ReactionEffect} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ReactionEffect} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ReactionEffectItemProvider reactionEffectItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ReactionEffect}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ReactionEffect}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createReactionEffectAdapter()
   {
-    if (reactionEffectItemProvider == null)
-    {
-      reactionEffectItemProvider = new ReactionEffectItemProvider(this);
-    }
+		if (reactionEffectItemProvider == null) {
+			reactionEffectItemProvider = new ReactionEffectItemProvider(this);
+		}
 
-    return reactionEffectItemProvider;
-  }
+		return reactionEffectItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventRaisingExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventRaisingExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected EventRaisingExpressionItemProvider eventRaisingExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventRaisingExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventRaisingExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createEventRaisingExpressionAdapter()
   {
-    if (eventRaisingExpressionItemProvider == null)
-    {
-      eventRaisingExpressionItemProvider = new EventRaisingExpressionItemProvider(this);
-    }
+		if (eventRaisingExpressionItemProvider == null) {
+			eventRaisingExpressionItemProvider = new EventRaisingExpressionItemProvider(this);
+		}
 
-    return eventRaisingExpressionItemProvider;
-  }
+		return eventRaisingExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.AssignmentExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.AssignmentExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected AssignmentExpressionItemProvider assignmentExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.AssignmentExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.AssignmentExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createAssignmentExpressionAdapter()
   {
-    if (assignmentExpressionItemProvider == null)
-    {
-      assignmentExpressionItemProvider = new AssignmentExpressionItemProvider(this);
-    }
+		if (assignmentExpressionItemProvider == null) {
+			assignmentExpressionItemProvider = new AssignmentExpressionItemProvider(this);
+		}
 
-    return assignmentExpressionItemProvider;
-  }
+		return assignmentExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ConditionalExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ConditionalExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ConditionalExpressionItemProvider conditionalExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ConditionalExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ConditionalExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createConditionalExpressionAdapter()
   {
-    if (conditionalExpressionItemProvider == null)
-    {
-      conditionalExpressionItemProvider = new ConditionalExpressionItemProvider(this);
-    }
+		if (conditionalExpressionItemProvider == null) {
+			conditionalExpressionItemProvider = new ConditionalExpressionItemProvider(this);
+		}
 
-    return conditionalExpressionItemProvider;
-  }
+		return conditionalExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LogicalOrExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LogicalOrExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LogicalOrExpressionItemProvider logicalOrExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LogicalOrExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LogicalOrExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createLogicalOrExpressionAdapter()
   {
-    if (logicalOrExpressionItemProvider == null)
-    {
-      logicalOrExpressionItemProvider = new LogicalOrExpressionItemProvider(this);
-    }
+		if (logicalOrExpressionItemProvider == null) {
+			logicalOrExpressionItemProvider = new LogicalOrExpressionItemProvider(this);
+		}
 
-    return logicalOrExpressionItemProvider;
-  }
+		return logicalOrExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LogicalAndExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LogicalAndExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LogicalAndExpressionItemProvider logicalAndExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LogicalAndExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LogicalAndExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createLogicalAndExpressionAdapter()
   {
-    if (logicalAndExpressionItemProvider == null)
-    {
-      logicalAndExpressionItemProvider = new LogicalAndExpressionItemProvider(this);
-    }
+		if (logicalAndExpressionItemProvider == null) {
+			logicalAndExpressionItemProvider = new LogicalAndExpressionItemProvider(this);
+		}
 
-    return logicalAndExpressionItemProvider;
-  }
+		return logicalAndExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LogicalNotExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LogicalNotExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LogicalNotExpressionItemProvider logicalNotExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LogicalNotExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LogicalNotExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createLogicalNotExpressionAdapter()
   {
-    if (logicalNotExpressionItemProvider == null)
-    {
-      logicalNotExpressionItemProvider = new LogicalNotExpressionItemProvider(this);
-    }
+		if (logicalNotExpressionItemProvider == null) {
+			logicalNotExpressionItemProvider = new LogicalNotExpressionItemProvider(this);
+		}
 
-    return logicalNotExpressionItemProvider;
-  }
+		return logicalNotExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BitwiseXorExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BitwiseXorExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected BitwiseXorExpressionItemProvider bitwiseXorExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BitwiseXorExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BitwiseXorExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createBitwiseXorExpressionAdapter()
   {
-    if (bitwiseXorExpressionItemProvider == null)
-    {
-      bitwiseXorExpressionItemProvider = new BitwiseXorExpressionItemProvider(this);
-    }
+		if (bitwiseXorExpressionItemProvider == null) {
+			bitwiseXorExpressionItemProvider = new BitwiseXorExpressionItemProvider(this);
+		}
 
-    return bitwiseXorExpressionItemProvider;
-  }
+		return bitwiseXorExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BitwiseOrExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BitwiseOrExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected BitwiseOrExpressionItemProvider bitwiseOrExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BitwiseOrExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BitwiseOrExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createBitwiseOrExpressionAdapter()
   {
-    if (bitwiseOrExpressionItemProvider == null)
-    {
-      bitwiseOrExpressionItemProvider = new BitwiseOrExpressionItemProvider(this);
-    }
+		if (bitwiseOrExpressionItemProvider == null) {
+			bitwiseOrExpressionItemProvider = new BitwiseOrExpressionItemProvider(this);
+		}
 
-    return bitwiseOrExpressionItemProvider;
-  }
+		return bitwiseOrExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BitwiseAndExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.BitwiseAndExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected BitwiseAndExpressionItemProvider bitwiseAndExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BitwiseAndExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.BitwiseAndExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createBitwiseAndExpressionAdapter()
   {
-    if (bitwiseAndExpressionItemProvider == null)
-    {
-      bitwiseAndExpressionItemProvider = new BitwiseAndExpressionItemProvider(this);
-    }
+		if (bitwiseAndExpressionItemProvider == null) {
+			bitwiseAndExpressionItemProvider = new BitwiseAndExpressionItemProvider(this);
+		}
 
-    return bitwiseAndExpressionItemProvider;
-  }
+		return bitwiseAndExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LogicalRelationExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.LogicalRelationExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected LogicalRelationExpressionItemProvider logicalRelationExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LogicalRelationExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.LogicalRelationExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createLogicalRelationExpressionAdapter()
   {
-    if (logicalRelationExpressionItemProvider == null)
-    {
-      logicalRelationExpressionItemProvider = new LogicalRelationExpressionItemProvider(this);
-    }
+		if (logicalRelationExpressionItemProvider == null) {
+			logicalRelationExpressionItemProvider = new LogicalRelationExpressionItemProvider(this);
+		}
 
-    return logicalRelationExpressionItemProvider;
-  }
+		return logicalRelationExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ShiftExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ShiftExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ShiftExpressionItemProvider shiftExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ShiftExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ShiftExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createShiftExpressionAdapter()
   {
-    if (shiftExpressionItemProvider == null)
-    {
-      shiftExpressionItemProvider = new ShiftExpressionItemProvider(this);
-    }
+		if (shiftExpressionItemProvider == null) {
+			shiftExpressionItemProvider = new ShiftExpressionItemProvider(this);
+		}
 
-    return shiftExpressionItemProvider;
-  }
+		return shiftExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected NumericalAddSubtractExpressionItemProvider numericalAddSubtractExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createNumericalAddSubtractExpressionAdapter()
   {
-    if (numericalAddSubtractExpressionItemProvider == null)
-    {
-      numericalAddSubtractExpressionItemProvider = new NumericalAddSubtractExpressionItemProvider(this);
-    }
+		if (numericalAddSubtractExpressionItemProvider == null) {
+			numericalAddSubtractExpressionItemProvider = new NumericalAddSubtractExpressionItemProvider(this);
+		}
 
-    return numericalAddSubtractExpressionItemProvider;
-  }
+		return numericalAddSubtractExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected NumericalMultiplyDivideExpressionItemProvider numericalMultiplyDivideExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createNumericalMultiplyDivideExpressionAdapter()
   {
-    if (numericalMultiplyDivideExpressionItemProvider == null)
-    {
-      numericalMultiplyDivideExpressionItemProvider = new NumericalMultiplyDivideExpressionItemProvider(this);
-    }
+		if (numericalMultiplyDivideExpressionItemProvider == null) {
+			numericalMultiplyDivideExpressionItemProvider = new NumericalMultiplyDivideExpressionItemProvider(this);
+		}
 
-    return numericalMultiplyDivideExpressionItemProvider;
-  }
+		return numericalMultiplyDivideExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.NumericalUnaryExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.NumericalUnaryExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected NumericalUnaryExpressionItemProvider numericalUnaryExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.NumericalUnaryExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.NumericalUnaryExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createNumericalUnaryExpressionAdapter()
   {
-    if (numericalUnaryExpressionItemProvider == null)
-    {
-      numericalUnaryExpressionItemProvider = new NumericalUnaryExpressionItemProvider(this);
-    }
+		if (numericalUnaryExpressionItemProvider == null) {
+			numericalUnaryExpressionItemProvider = new NumericalUnaryExpressionItemProvider(this);
+		}
 
-    return numericalUnaryExpressionItemProvider;
-  }
+		return numericalUnaryExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.PrimitiveValueExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.PrimitiveValueExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected PrimitiveValueExpressionItemProvider primitiveValueExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.PrimitiveValueExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.PrimitiveValueExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createPrimitiveValueExpressionAdapter()
   {
-    if (primitiveValueExpressionItemProvider == null)
-    {
-      primitiveValueExpressionItemProvider = new PrimitiveValueExpressionItemProvider(this);
-    }
+		if (primitiveValueExpressionItemProvider == null) {
+			primitiveValueExpressionItemProvider = new PrimitiveValueExpressionItemProvider(this);
+		}
 
-    return primitiveValueExpressionItemProvider;
-  }
+		return primitiveValueExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.FeatureCall} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.FeatureCall} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected FeatureCallItemProvider featureCallItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.FeatureCall}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.FeatureCall}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createFeatureCallAdapter()
   {
-    if (featureCallItemProvider == null)
-    {
-      featureCallItemProvider = new FeatureCallItemProvider(this);
-    }
+		if (featureCallItemProvider == null) {
+			featureCallItemProvider = new FeatureCallItemProvider(this);
+		}
 
-    return featureCallItemProvider;
-  }
+		return featureCallItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ElementReferenceExpressionItemProvider elementReferenceExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ElementReferenceExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createElementReferenceExpressionAdapter()
   {
-    if (elementReferenceExpressionItemProvider == null)
-    {
-      elementReferenceExpressionItemProvider = new ElementReferenceExpressionItemProvider(this);
-    }
+		if (elementReferenceExpressionItemProvider == null) {
+			elementReferenceExpressionItemProvider = new ElementReferenceExpressionItemProvider(this);
+		}
 
-    return elementReferenceExpressionItemProvider;
-  }
+		return elementReferenceExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected EventValueReferenceExpressionItemProvider eventValueReferenceExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventValueReferenceExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createEventValueReferenceExpressionAdapter()
   {
-    if (eventValueReferenceExpressionItemProvider == null)
-    {
-      eventValueReferenceExpressionItemProvider = new EventValueReferenceExpressionItemProvider(this);
-    }
+		if (eventValueReferenceExpressionItemProvider == null) {
+			eventValueReferenceExpressionItemProvider = new EventValueReferenceExpressionItemProvider(this);
+		}
 
-    return eventValueReferenceExpressionItemProvider;
-  }
+		return eventValueReferenceExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ActiveStateReferenceExpressionItemProvider activeStateReferenceExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createActiveStateReferenceExpressionAdapter()
   {
-    if (activeStateReferenceExpressionItemProvider == null)
-    {
-      activeStateReferenceExpressionItemProvider = new ActiveStateReferenceExpressionItemProvider(this);
-    }
+		if (activeStateReferenceExpressionItemProvider == null) {
+			activeStateReferenceExpressionItemProvider = new ActiveStateReferenceExpressionItemProvider(this);
+		}
 
-    return activeStateReferenceExpressionItemProvider;
-  }
+		return activeStateReferenceExpressionItemProvider;
+	}
 
   /**
-   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ParenthesizedExpression} instances.
-   * <!-- begin-user-doc -->
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ParenthesizedExpression} instances.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected ParenthesizedExpressionItemProvider parenthesizedExpressionItemProvider;
 
   /**
-   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ParenthesizedExpression}.
-   * <!-- begin-user-doc -->
+	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ParenthesizedExpression}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter createParenthesizedExpressionAdapter()
   {
-    if (parenthesizedExpressionItemProvider == null)
-    {
-      parenthesizedExpressionItemProvider = new ParenthesizedExpressionItemProvider(this);
-    }
+		if (parenthesizedExpressionItemProvider == null) {
+			parenthesizedExpressionItemProvider = new ParenthesizedExpressionItemProvider(this);
+		}
 
-    return parenthesizedExpressionItemProvider;
-  }
+		return parenthesizedExpressionItemProvider;
+	}
 
   /**
-   * This returns the root adapter factory that contains this factory.
-   * <!-- begin-user-doc -->
+	 * This returns the root adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public ComposeableAdapterFactory getRootAdapterFactory()
   {
-    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-  }
+		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+	}
 
   /**
-   * This sets the composed adapter factory that contains this factory.
-   * <!-- begin-user-doc -->
+	 * This sets the composed adapter factory that contains this factory.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory)
   {
-    this.parentAdapterFactory = parentAdapterFactory;
-  }
+		this.parentAdapterFactory = parentAdapterFactory;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public boolean isFactoryForType(Object type)
   {
-    return supportedTypes.contains(type) || super.isFactoryForType(type);
-  }
+		return supportedTypes.contains(type) || super.isFactoryForType(type);
+	}
 
   /**
-   * This implementation substitutes the factory itself as the key for the adapter.
-   * <!-- begin-user-doc -->
+	 * This implementation substitutes the factory itself as the key for the adapter.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Adapter adapt(Notifier notifier, Object type)
   {
-    return super.adapt(notifier, this);
-  }
+		return super.adapt(notifier, this);
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object adapt(Object object, Object type)
   {
-    if (isFactoryForType(type))
-    {
-      Object adapter = super.adapt(object, type);
-      if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
-      {
-        return adapter;
-      }
-    }
+		if (isFactoryForType(type)) {
+			Object adapter = super.adapt(object, type);
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
+				return adapter;
+			}
+		}
 
-    return null;
-  }
+		return null;
+	}
 
   /**
-   * This adds a listener.
-   * <!-- begin-user-doc -->
+	 * This adds a listener.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void addListener(INotifyChangedListener notifyChangedListener)
   {
-    changeNotifier.addListener(notifyChangedListener);
-  }
+		changeNotifier.addListener(notifyChangedListener);
+	}
 
   /**
-   * This removes a listener.
-   * <!-- begin-user-doc -->
+	 * This removes a listener.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void removeListener(INotifyChangedListener notifyChangedListener)
   {
-    changeNotifier.removeListener(notifyChangedListener);
-  }
+		changeNotifier.removeListener(notifyChangedListener);
+	}
 
   /**
-   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-   * <!-- begin-user-doc -->
+	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void fireNotifyChanged(Notification notification)
   {
-    changeNotifier.fireNotifyChanged(notification);
+		changeNotifier.fireNotifyChanged(notification);
 
-    if (parentAdapterFactory != null)
-    {
-      parentAdapterFactory.fireNotifyChanged(notification);
-    }
-  }
+		if (parentAdapterFactory != null) {
+			parentAdapterFactory.fireNotifyChanged(notification);
+		}
+	}
 
   /**
-   * This disposes all of the item providers created by this factory. 
-   * <!-- begin-user-doc -->
+	 * This disposes all of the item providers created by this factory. 
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public void dispose()
   {
-    if (rootItemProvider != null) rootItemProvider.dispose();
-    if (defRootItemProvider != null) defRootItemProvider.dispose();
-    if (statechartRootItemProvider != null) statechartRootItemProvider.dispose();
-    if (stateRootItemProvider != null) stateRootItemProvider.dispose();
-    if (transitionRootItemProvider != null) transitionRootItemProvider.dispose();
-    if (statechartSpecificationItemProvider != null) statechartSpecificationItemProvider.dispose();
-    if (stateSpecificationItemProvider != null) stateSpecificationItemProvider.dispose();
-    if (transitionSpecificationItemProvider != null) transitionSpecificationItemProvider.dispose();
-    if (statechartScopeItemProvider != null) statechartScopeItemProvider.dispose();
-    if (interfaceScopeItemProvider != null) interfaceScopeItemProvider.dispose();
-    if (internalScopeItemProvider != null) internalScopeItemProvider.dispose();
-    if (eventDefinitionItemProvider != null) eventDefinitionItemProvider.dispose();
-    if (variableDefinitionItemProvider != null) variableDefinitionItemProvider.dispose();
-    if (operationDefinitionItemProvider != null) operationDefinitionItemProvider.dispose();
-    if (localReactionItemProvider != null) localReactionItemProvider.dispose();
-    if (transitionReactionItemProvider != null) transitionReactionItemProvider.dispose();
-    if (entryPointSpecItemProvider != null) entryPointSpecItemProvider.dispose();
-    if (exitPointSpecItemProvider != null) exitPointSpecItemProvider.dispose();
-    if (eventSpecItemProvider != null) eventSpecItemProvider.dispose();
-    if (regularEventSpecItemProvider != null) regularEventSpecItemProvider.dispose();
-    if (timeEventSpecItemProvider != null) timeEventSpecItemProvider.dispose();
-    if (builtinEventSpecItemProvider != null) builtinEventSpecItemProvider.dispose();
-    if (entryEventItemProvider != null) entryEventItemProvider.dispose();
-    if (exitEventItemProvider != null) exitEventItemProvider.dispose();
-    if (alwaysEventItemProvider != null) alwaysEventItemProvider.dispose();
-    if (expressionItemProvider != null) expressionItemProvider.dispose();
-    if (literalItemProvider != null) literalItemProvider.dispose();
-    if (boolLiteralItemProvider != null) boolLiteralItemProvider.dispose();
-    if (intLiteralItemProvider != null) intLiteralItemProvider.dispose();
-    if (realLiteralItemProvider != null) realLiteralItemProvider.dispose();
-    if (hexLiteralItemProvider != null) hexLiteralItemProvider.dispose();
-    if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
-    if (simpleScopeItemProvider != null) simpleScopeItemProvider.dispose();
-    if (reactionTriggerItemProvider != null) reactionTriggerItemProvider.dispose();
-    if (defaultTriggerItemProvider != null) defaultTriggerItemProvider.dispose();
-    if (reactionEffectItemProvider != null) reactionEffectItemProvider.dispose();
-    if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
-    if (assignmentExpressionItemProvider != null) assignmentExpressionItemProvider.dispose();
-    if (conditionalExpressionItemProvider != null) conditionalExpressionItemProvider.dispose();
-    if (logicalOrExpressionItemProvider != null) logicalOrExpressionItemProvider.dispose();
-    if (logicalAndExpressionItemProvider != null) logicalAndExpressionItemProvider.dispose();
-    if (logicalNotExpressionItemProvider != null) logicalNotExpressionItemProvider.dispose();
-    if (bitwiseXorExpressionItemProvider != null) bitwiseXorExpressionItemProvider.dispose();
-    if (bitwiseOrExpressionItemProvider != null) bitwiseOrExpressionItemProvider.dispose();
-    if (bitwiseAndExpressionItemProvider != null) bitwiseAndExpressionItemProvider.dispose();
-    if (logicalRelationExpressionItemProvider != null) logicalRelationExpressionItemProvider.dispose();
-    if (shiftExpressionItemProvider != null) shiftExpressionItemProvider.dispose();
-    if (numericalAddSubtractExpressionItemProvider != null) numericalAddSubtractExpressionItemProvider.dispose();
-    if (numericalMultiplyDivideExpressionItemProvider != null) numericalMultiplyDivideExpressionItemProvider.dispose();
-    if (numericalUnaryExpressionItemProvider != null) numericalUnaryExpressionItemProvider.dispose();
-    if (primitiveValueExpressionItemProvider != null) primitiveValueExpressionItemProvider.dispose();
-    if (featureCallItemProvider != null) featureCallItemProvider.dispose();
-    if (elementReferenceExpressionItemProvider != null) elementReferenceExpressionItemProvider.dispose();
-    if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
-    if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
-    if (parenthesizedExpressionItemProvider != null) parenthesizedExpressionItemProvider.dispose();
-  }
+		if (rootItemProvider != null) rootItemProvider.dispose();
+		if (defRootItemProvider != null) defRootItemProvider.dispose();
+		if (statechartRootItemProvider != null) statechartRootItemProvider.dispose();
+		if (stateRootItemProvider != null) stateRootItemProvider.dispose();
+		if (transitionRootItemProvider != null) transitionRootItemProvider.dispose();
+		if (statechartSpecificationItemProvider != null) statechartSpecificationItemProvider.dispose();
+		if (stateSpecificationItemProvider != null) stateSpecificationItemProvider.dispose();
+		if (transitionSpecificationItemProvider != null) transitionSpecificationItemProvider.dispose();
+		if (statechartScopeItemProvider != null) statechartScopeItemProvider.dispose();
+		if (interfaceScopeItemProvider != null) interfaceScopeItemProvider.dispose();
+		if (internalScopeItemProvider != null) internalScopeItemProvider.dispose();
+		if (eventDefinitionItemProvider != null) eventDefinitionItemProvider.dispose();
+		if (variableDefinitionItemProvider != null) variableDefinitionItemProvider.dispose();
+		if (operationDefinitionItemProvider != null) operationDefinitionItemProvider.dispose();
+		if (localReactionItemProvider != null) localReactionItemProvider.dispose();
+		if (transitionReactionItemProvider != null) transitionReactionItemProvider.dispose();
+		if (guardItemProvider != null) guardItemProvider.dispose();
+		if (entryPointSpecItemProvider != null) entryPointSpecItemProvider.dispose();
+		if (exitPointSpecItemProvider != null) exitPointSpecItemProvider.dispose();
+		if (eventSpecItemProvider != null) eventSpecItemProvider.dispose();
+		if (regularEventSpecItemProvider != null) regularEventSpecItemProvider.dispose();
+		if (timeEventSpecItemProvider != null) timeEventSpecItemProvider.dispose();
+		if (builtinEventSpecItemProvider != null) builtinEventSpecItemProvider.dispose();
+		if (entryEventItemProvider != null) entryEventItemProvider.dispose();
+		if (exitEventItemProvider != null) exitEventItemProvider.dispose();
+		if (alwaysEventItemProvider != null) alwaysEventItemProvider.dispose();
+		if (expressionItemProvider != null) expressionItemProvider.dispose();
+		if (literalItemProvider != null) literalItemProvider.dispose();
+		if (boolLiteralItemProvider != null) boolLiteralItemProvider.dispose();
+		if (intLiteralItemProvider != null) intLiteralItemProvider.dispose();
+		if (realLiteralItemProvider != null) realLiteralItemProvider.dispose();
+		if (hexLiteralItemProvider != null) hexLiteralItemProvider.dispose();
+		if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
+		if (simpleScopeItemProvider != null) simpleScopeItemProvider.dispose();
+		if (reactionTriggerItemProvider != null) reactionTriggerItemProvider.dispose();
+		if (defaultTriggerItemProvider != null) defaultTriggerItemProvider.dispose();
+		if (reactionEffectItemProvider != null) reactionEffectItemProvider.dispose();
+		if (eventRaisingExpressionItemProvider != null) eventRaisingExpressionItemProvider.dispose();
+		if (assignmentExpressionItemProvider != null) assignmentExpressionItemProvider.dispose();
+		if (conditionalExpressionItemProvider != null) conditionalExpressionItemProvider.dispose();
+		if (logicalOrExpressionItemProvider != null) logicalOrExpressionItemProvider.dispose();
+		if (logicalAndExpressionItemProvider != null) logicalAndExpressionItemProvider.dispose();
+		if (logicalNotExpressionItemProvider != null) logicalNotExpressionItemProvider.dispose();
+		if (bitwiseXorExpressionItemProvider != null) bitwiseXorExpressionItemProvider.dispose();
+		if (bitwiseOrExpressionItemProvider != null) bitwiseOrExpressionItemProvider.dispose();
+		if (bitwiseAndExpressionItemProvider != null) bitwiseAndExpressionItemProvider.dispose();
+		if (logicalRelationExpressionItemProvider != null) logicalRelationExpressionItemProvider.dispose();
+		if (shiftExpressionItemProvider != null) shiftExpressionItemProvider.dispose();
+		if (numericalAddSubtractExpressionItemProvider != null) numericalAddSubtractExpressionItemProvider.dispose();
+		if (numericalMultiplyDivideExpressionItemProvider != null) numericalMultiplyDivideExpressionItemProvider.dispose();
+		if (numericalUnaryExpressionItemProvider != null) numericalUnaryExpressionItemProvider.dispose();
+		if (primitiveValueExpressionItemProvider != null) primitiveValueExpressionItemProvider.dispose();
+		if (featureCallItemProvider != null) featureCallItemProvider.dispose();
+		if (elementReferenceExpressionItemProvider != null) elementReferenceExpressionItemProvider.dispose();
+		if (eventValueReferenceExpressionItemProvider != null) eventValueReferenceExpressionItemProvider.dispose();
+		if (activeStateReferenceExpressionItemProvider != null) activeStateReferenceExpressionItemProvider.dispose();
+		if (parenthesizedExpressionItemProvider != null) parenthesizedExpressionItemProvider.dispose();
+	}
 
 }

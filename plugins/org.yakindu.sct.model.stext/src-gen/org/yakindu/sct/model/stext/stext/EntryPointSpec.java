@@ -23,29 +23,29 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 public interface EntryPointSpec extends ReactionProperty
 {
   /**
-   * Returns the value of the '<em><b>Entrypoint</b></em>' attribute.
-   * <!-- begin-user-doc -->
+	 * Returns the value of the '<em><b>Entrypoint</b></em>' attribute.
+	 * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>Entrypoint</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Entrypoint</em>' attribute.
-   * @see #setEntrypoint(String)
-   * @see org.yakindu.sct.model.stext.stext.StextPackage#getEntryPointSpec_Entrypoint()
-   * @model
-   * @generated
-   */
+	 * @return the value of the '<em>Entrypoint</em>' attribute.
+	 * @see #setEntrypoint(String)
+	 * @see org.yakindu.sct.model.stext.stext.StextPackage#getEntryPointSpec_Entrypoint()
+	 * @model
+	 * @generated
+	 */
   String getEntrypoint();
 
   /**
-   * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EntryPointSpec#getEntrypoint <em>Entrypoint</em>}' attribute.
-   * <!-- begin-user-doc -->
+	 * Sets the value of the '{@link org.yakindu.sct.model.stext.stext.EntryPointSpec#getEntrypoint <em>Entrypoint</em>}' attribute.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Entrypoint</em>' attribute.
-   * @see #getEntrypoint()
-   * @generated
-   */
+	 * @param value the new value of the '<em>Entrypoint</em>' attribute.
+	 * @see #getEntrypoint()
+	 * @generated
+	 */
   void setEntrypoint(String value);
 
 } // EntryPointSpec

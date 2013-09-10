@@ -41,411 +41,407 @@ public class FeatureCallItemProvider
     IItemPropertySource
 {
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public FeatureCallItemProvider(AdapterFactory adapterFactory)
   {
-    super(adapterFactory);
-  }
+		super(adapterFactory);
+	}
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
   {
-    if (itemPropertyDescriptors == null)
-    {
-      super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-      addFeaturePropertyDescriptor(object);
-      addOperationCallPropertyDescriptor(object);
-    }
-    return itemPropertyDescriptors;
-  }
+			addFeaturePropertyDescriptor(object);
+			addOperationCallPropertyDescriptor(object);
+		}
+		return itemPropertyDescriptors;
+	}
 
   /**
-   * This adds a property descriptor for the Feature feature.
-   * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Feature feature.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected void addFeaturePropertyDescriptor(Object object)
   {
-    itemPropertyDescriptors.add
-      (createItemPropertyDescriptor
-        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-         getResourceLocator(),
-         getString("_UI_FeatureCall_feature_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_FeatureCall_feature_feature", "_UI_FeatureCall_type"),
-         StextPackage.Literals.FEATURE_CALL__FEATURE,
-         true,
-         false,
-         true,
-         null,
-         null,
-         null));
-  }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FeatureCall_feature_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FeatureCall_feature_feature", "_UI_FeatureCall_type"),
+				 StextPackage.Literals.FEATURE_CALL__FEATURE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
+	}
 
   /**
-   * This adds a property descriptor for the Operation Call feature.
-   * <!-- begin-user-doc -->
+	 * This adds a property descriptor for the Operation Call feature.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   protected void addOperationCallPropertyDescriptor(Object object)
   {
-    itemPropertyDescriptors.add
-      (createItemPropertyDescriptor
-        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-         getResourceLocator(),
-         getString("_UI_FeatureCall_operationCall_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_FeatureCall_operationCall_feature", "_UI_FeatureCall_type"),
-         StextPackage.Literals.FEATURE_CALL__OPERATION_CALL,
-         true,
-         false,
-         false,
-         ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-         null,
-         null));
-  }
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_FeatureCall_operationCall_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_FeatureCall_operationCall_feature", "_UI_FeatureCall_type"),
+				 StextPackage.Literals.FEATURE_CALL__OPERATION_CALL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
 
   /**
-   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-   * <!-- begin-user-doc -->
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
   {
-    if (childrenFeatures == null)
-    {
-      super.getChildrenFeatures(object);
-      childrenFeatures.add(StextPackage.Literals.FEATURE_CALL__OWNER);
-      childrenFeatures.add(StextPackage.Literals.FEATURE_CALL__ARGS);
-    }
-    return childrenFeatures;
-  }
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(StextPackage.Literals.FEATURE_CALL__OWNER);
+			childrenFeatures.add(StextPackage.Literals.FEATURE_CALL__ARGS);
+		}
+		return childrenFeatures;
+	}
 
   /**
-   * <!-- begin-user-doc -->
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected EStructuralFeature getChildFeature(Object object, Object child)
   {
-    // Check the type of the specified child object and return the proper feature to use for
-    // adding (see {@link AddCommand}) it as a child.
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
 
-    return super.getChildFeature(object, child);
-  }
+		return super.getChildFeature(object, child);
+	}
 
   /**
-   * This returns FeatureCall.gif.
-   * <!-- begin-user-doc -->
+	 * This returns FeatureCall.gif.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object getImage(Object object)
   {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/FeatureCall"));
-  }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/FeatureCall"));
+	}
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String getText(Object object)
   {
-    FeatureCall featureCall = (FeatureCall)object;
-    return getString("_UI_FeatureCall_type") + " " + featureCall.isOperationCall();
-  }
+		FeatureCall featureCall = (FeatureCall)object;
+		return getString("_UI_FeatureCall_type") + " " + featureCall.isOperationCall();
+	}
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void notifyChanged(Notification notification)
   {
-    updateChildren(notification);
+		updateChildren(notification);
 
-    switch (notification.getFeatureID(FeatureCall.class))
-    {
-      case StextPackage.FEATURE_CALL__OPERATION_CALL:
-        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-        return;
-      case StextPackage.FEATURE_CALL__OWNER:
-      case StextPackage.FEATURE_CALL__ARGS:
-        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-        return;
-    }
-    super.notifyChanged(notification);
-  }
+		switch (notification.getFeatureID(FeatureCall.class)) {
+			case StextPackage.FEATURE_CALL__OPERATION_CALL:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case StextPackage.FEATURE_CALL__OWNER:
+			case StextPackage.FEATURE_CALL__ARGS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
+		super.notifyChanged(notification);
+	}
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
-    super.collectNewChildDescriptors(newChildDescriptors, object);
+		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createEventRaisingExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createEventRaisingExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createAssignmentExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createAssignmentExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createConditionalExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createConditionalExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createLogicalOrExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createLogicalOrExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createLogicalAndExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createLogicalAndExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createLogicalNotExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createLogicalNotExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createBitwiseXorExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createBitwiseXorExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createBitwiseOrExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createBitwiseOrExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createBitwiseAndExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createBitwiseAndExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createLogicalRelationExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createLogicalRelationExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createShiftExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createShiftExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createNumericalUnaryExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createPrimitiveValueExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createFeatureCall()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createFeatureCall()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createElementReferenceExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__OWNER,
-         StextFactory.eINSTANCE.createParenthesizedExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__OWNER,
+				 StextFactory.eINSTANCE.createParenthesizedExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createEventRaisingExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createEventRaisingExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createAssignmentExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createAssignmentExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createConditionalExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createConditionalExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createLogicalOrExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createLogicalOrExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createLogicalAndExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createLogicalAndExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createLogicalNotExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createLogicalNotExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createBitwiseXorExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createBitwiseXorExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createBitwiseOrExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createBitwiseOrExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createBitwiseAndExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createBitwiseAndExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createLogicalRelationExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createLogicalRelationExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createShiftExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createShiftExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createNumericalUnaryExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createPrimitiveValueExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createFeatureCall()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createFeatureCall()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createElementReferenceExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createEventValueReferenceExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createEventValueReferenceExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createActiveStateReferenceExpression()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.FEATURE_CALL__ARGS,
-         StextFactory.eINSTANCE.createParenthesizedExpression()));
-  }
+		newChildDescriptors.add
+			(createChildParameter
+				(StextPackage.Literals.FEATURE_CALL__ARGS,
+				 StextFactory.eINSTANCE.createParenthesizedExpression()));
+	}
 
   /**
-   * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-   * <!-- begin-user-doc -->
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection)
   {
-    Object childFeature = feature;
-    Object childObject = child;
+		Object childFeature = feature;
+		Object childObject = child;
 
-    boolean qualify =
-      childFeature == StextPackage.Literals.FEATURE_CALL__OWNER ||
-      childFeature == StextPackage.Literals.FEATURE_CALL__ARGS;
+		boolean qualify =
+			childFeature == StextPackage.Literals.FEATURE_CALL__OWNER ||
+			childFeature == StextPackage.Literals.FEATURE_CALL__ARGS;
 
-    if (qualify)
-    {
-      return getString
-        ("_UI_CreateChild_text2",
-         new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-    }
-    return super.getCreateChildText(owner, feature, child, selection);
-  }
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
+	}
 
 }
