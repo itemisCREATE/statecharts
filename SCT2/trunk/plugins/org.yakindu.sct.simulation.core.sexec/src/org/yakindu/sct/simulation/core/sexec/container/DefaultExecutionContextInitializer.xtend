@@ -84,7 +84,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 
 	def dispatch create new ExecutionEventImpl() transform(TimeEvent event) {
 		it.name = event.fullyQualifiedName.lastSegment
-		it.name = event.fullyQualifiedName.toString
+		it.fqName = event.fullyQualifiedName.toString
 		it.type = new InferredType(integerType)
 		it.value = defaultValue(it.type)
 	}
