@@ -9,18 +9,19 @@
  *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.model.sexec.interpreter.test;
+import static junit.framework.Assert.assertTrue;
+
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.interpreter.test.util.AbstractExecutionFlowTest;
 import org.yakindu.sct.model.sexec.interpreter.test.util.SExecInjectionProvider;
-import com.google.inject.Inject;
-import org.junit.Before;
-import org.yakindu.sct.model.sexec.interpreter.IExecutionFlowInterpreter;
-import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
-import static junit.framework.Assert.*;
+
+import com.google.inject.Inject;
 /**
  *  Unit TestCase for Choice
  */
