@@ -1,0 +1,301 @@
+GeneratorModel for sctunit::interpreter {
+
+	test AllTests {
+	
+		feature Outlet {
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test"
+			targetFolder = "test-gen"
+		}
+	}	
+	
+	test AlwaysOncycle{ 
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test AssignmentAsExpression{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test BitExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test BooleanExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test Choice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test CKeywords{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test Declarations{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test DeepHistory{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test EnterState{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test ExitOnSelfTransition{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test ExitState{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test FeatureCalls{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test Guard{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test GuardedEntry{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test GuardedExit{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test HistoryWithoutInitialStep{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test InEventLifeCycle{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test IntegerExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
+	
+	test InternalEventLifeCycle{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
+	test NamedInterfaceAccess{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
+	test OutEventLifeCycle{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
+	
+	test Parenthesis{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
+	test PriorityValues{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
+	
+	test RaiseEvent{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
+	test SameNameDifferentRegion{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
+	
+	
+	test ShallowHistory{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test SimpleEvent{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test SimpleHierachy{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test StatechartLocalReactions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test StateIsActive{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test STextKeywordsInStatesAndRegions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test StringExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test SyncFork{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test SyncJoin{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test TransitionWithoutCondition{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+
+	test ValuedEvents{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
+}
