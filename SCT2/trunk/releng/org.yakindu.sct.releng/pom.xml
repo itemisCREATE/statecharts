@@ -498,10 +498,7 @@
 		<module>../org.yakindu.sct.generator.genmodel.ui</module>
 		<module>../org.yakindu.sct.model.sexec</module>
 		<module>../org.yakindu.sct.model.sexec.edit</module>
-		<module>../org.yakindu.sct.model.sexec.interpreter.test</module>
 		<module>../org.yakindu.sct.model.sexec.test</module>
-		<module>../org.yakindu.sct.simulation.core.sexec</module>
-		<module>../org.yakindu.sct.simulation.ui.sexec</module>
 		<module>../org.yakindu.sct.model.sgen</module>
 		<module>../org.yakindu.sct.model.sgen.edit</module>
 		<module>../org.yakindu.sct.model.sgraph</module>
@@ -516,6 +513,9 @@
 		<module>../org.yakindu.sct.model.stext.ui</module>
 		<module>../org.yakindu.sct.simulation.core</module>
 		<module>../org.yakindu.sct.simulation.ui</module>
+		<module>../org.yakindu.sct.simulation.core.sexec</module>
+		<module>../org.yakindu.sct.simulation.ui.sexec</module>
+		<module>../org.yakindu.sct.simulation.core.sexec.test</module>
 		<module>../org.yakindu.sct.ui</module>
 		<module>../org.yakindu.sct.ui.editor</module>
 		<module>../org.yakindu.sct.ui.examples</module>
