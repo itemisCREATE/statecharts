@@ -19,17 +19,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.types.ITypeSystem.InferredType;
-import org.yakindu.sct.model.sexec.interpreter.stext.StextStatementInterpreter;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
-import org.yakindu.sct.simulation.core.runtime.IExecutionContext;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionContextImpl;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionEvent;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl;
+import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl;
 
 import com.google.inject.Inject;
 
@@ -43,9 +44,9 @@ import com.google.inject.Inject;
 public class STextInterpreterTest extends AbstractSTextTest {
 
 	@Inject
-	private ExecutionContextImpl context;
+	private ExecutionContext context;
 	@Inject
-	private StextStatementInterpreter interpreter;
+	private IStatementInterpreter interpreter;
 	@Inject
 	private ISTextTypeSystem typeSystem;
 
@@ -475,20 +476,34 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	private void initContext() {
 		// "event abc operation foo() var intVar : integer var boolVar : boolean
 		// var realVar : real
-		ExecutionVariable intVar = new ExecutionVariable("intVar", new InferredType(typeSystem.getIntegerType()),
-				0);
-		context.declareVariable(intVar);
-		ExecutionVariable boolVar = new ExecutionVariable("boolVar",
-				new InferredType(typeSystem.getBooleanType()), false);
-		context.declareVariable(boolVar);
-		ExecutionVariable realVar = new ExecutionVariable("realVar", new InferredType(typeSystem.getRealType()),
-				0.0f);
-		context.declareVariable(realVar);
-		ExecutionVariable stringVar = new ExecutionVariable("stringVar",
-				new InferredType(typeSystem.getStringType()), "");
-		context.declareVariable(stringVar);
-		ExecutionEvent event = new ExecutionEvent("abc", new InferredType(typeSystem.getIntegerType()));
-		context.declareEvent(event);
+		ExecutionVariable intVar = new ExecutionVariableImpl();
+		intVar.setName("intVar");
+		intVar.setType(new InferredType(typeSystem.getIntegerType()));
+		intVar.setValue(0);
+		context.getVariables().add(intVar);
+		
+		ExecutionVariable boolVar = new ExecutionVariableImpl();
+		intVar.setName("boolVar");
+		intVar.setType(new InferredType(typeSystem.getBooleanType()));
+		intVar.setValue(false);
+		context.getVariables().add(boolVar);
+		
+		ExecutionVariable realVar = new ExecutionVariableImpl();
+		intVar.setName("realVar");
+		intVar.setType(new InferredType(typeSystem.getRealType()));
+		intVar.setValue(0.0f);
+		context.getVariables().add(realVar);
+		
+		ExecutionVariable stringVar = new ExecutionVariableImpl();
+		intVar.setName("stringVar");
+		intVar.setType(new InferredType(typeSystem.getStringType()));
+		intVar.setValue("");
+		context.getVariables().add(stringVar);
+		
+		ExecutionEvent event = new ExecutionEventImpl();
+		intVar.setName("abc");
+		intVar.setType(new InferredType(typeSystem.getIntegerType()));
+		context.getEvents().add(event);
 	}
 
 	protected Object getBoolValue() {
@@ -528,7 +543,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		return interpreter.evaluateStatement(statement, context);
 	}
 
-	public IExecutionContext getContext() {
+	public ExecutionContext getContext() {
 		return context;
 	}
 
