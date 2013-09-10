@@ -36,12 +36,14 @@ import com.google.inject.Inject;
  */
 public class JavaOperationMockup implements IOperationMockup {
 
-	@Inject
+	@Inject(optional = true)
 	private ILaunch launch;
-	
+
 	private List<Object> callbacks;
 
 	private void initOperationCallbacks() {
+		if (launch == null)
+			return;
 		callbacks = Lists.newArrayList();
 		IFile file = WorkspaceSynchronizer.getFile(((EObject) launch.getAdapter(EObject.class)).eResource());
 		ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(file.getProject(), getClass()
