@@ -4,23 +4,19 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  * Contributors:
- *     committers of YAKINDU - initial API and implementation
+ * 	committers of YAKINDU - initial API and implementation
+ * 
  */
-package org.yakindu.sct.simulation.core.runtime;
-
-import org.yakindu.sct.model.sgraph.Statechart;
+package org.yakindu.sct.simulation.core.launch;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public interface IExecutionFacadeFactory {
+public interface ISCTLaunchConfigurationType {
 
-	public IExecutionFacade createExecutionFacade(Statechart statechart);
-	
-	public boolean isApplicable(Statechart statechart);
-	
+	String CONFIG_TYPE = "org.yakindu.sct.simulation.core.launch.statechart";
+
 }
