@@ -120,5 +120,9 @@ public interface ISTextTypeSystem extends ITypeSystem {
 	public boolean isRealType(Type type);
 
 	public boolean isStringType(Type type);
+	
+	public Object defaultValue(InferredType type);
+	
+	public Object defaultValue(Type type);
 
 }
