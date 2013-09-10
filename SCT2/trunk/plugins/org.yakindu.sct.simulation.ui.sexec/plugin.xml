@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+<!-- Launch configuration images -->
+   <extension point="org.eclipse.debug.ui.launchConfigurationTypeImages">
+    	<launchConfigurationTypeImage
+        	icon="icons/Statechart-Launcher-16.png"
+        	configTypeID="org.yakindu.sct.simulation.core.launch.statechart"
+        	id="org.yakindu.sct.core.simulation.launch.statechartTypeImage">
+	    </launchConfigurationTypeImage>
+	</extension>
+	
+	<!-- launch tab group -->
+	<extension point="org.eclipse.debug.ui.launchConfigurationTabGroups">
+  	  <launchConfigurationTabGroup
+    	 type="org.yakindu.sct.simulation.core.launch.statechart"
+  	     class="org.yakindu.sct.simulation.ui.sexec.launch.tabs.StatechartLaunchConfigurationTabGroup"
+  	     id="org.yakindu.sct.simulation.ui.launch.tabs.statechart.tabs">
+  	      <launchMode 
+                  mode="debug"
+                  perspective="org.yakindu.sct.ui.SimulationPerspective">
+            </launchMode>
+              <launchMode 
+                  mode="run"
+                  perspective="org.yakindu.sct.ui.SimulationPerspective">
+            </launchMode>
+   	 </launchConfigurationTabGroup>
+	</extension>
+	
+	<!-- launch shortcuts -->
+	<extension point="org.eclipse.debug.ui.launchShortcuts">
+	    <shortcut
+	        id="org.yakindu.sct.core.simulation.launch.shortcut"
+	        class="org.yakindu.sct.simulation.ui.sexec.launch.StatechartLaunchShortcut"
+	        label="YAKINDU Statechart"
+	        icon="icons/Statechart-Launcher-16.png"
+	        modes="run">
+	         <contextualLaunch>
+				<enablement>
+					<with variable="selection">
+					<count value="1"/>
+						<iterate>
+							<test property="org.eclipse.debug.ui.matchesPattern" value="*.sct"/>
+						</iterate>
+					</with>
+				</enablement>
+		  	 </contextualLaunch>
+	    </shortcut>
+	</extension>
+</plugin>

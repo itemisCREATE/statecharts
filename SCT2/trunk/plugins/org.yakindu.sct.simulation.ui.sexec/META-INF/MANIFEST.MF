@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Sexec
+Bundle-SymbolicName: org.yakindu.sct.simulation.ui.sexec;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.yakindu.sct.simulation.ui.sexec.SExecUiActivator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.debug.core;bundle-version="3.8.0",
+ org.eclipse.debug.ui;bundle-version="3.9.0",
+ org.yakindu.sct.simulation.ui;bundle-version="2.1.2",
+ org.yakindu.sct.simulation.core.sexec;bundle-version="1.0.0",
+ org.eclipse.ui;bundle-version="3.105.0",
+ org.yakindu.sct.commons;bundle-version="2.1.2",
+ org.eclipse.ui.ide;bundle-version="3.9.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.yakindu.sct.simulation.ui.sexec.launch
