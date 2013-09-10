@@ -195,7 +195,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	def dispatch Object execute(HistoryEntry entry) {
-		if (historyStateConfiguration.get(entry.region) != null) {
+		if (historyStateConfiguration.get(entry.region.historyVector.offset) != null) {
 			entry.historyStep?.execute
 		} else {
 			entry.initialStep?.execute
@@ -206,7 +206,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	def dispatch Object execute(StateSwitch stateSwitch) {
 		val historyRegion = stateSwitch.historyRegion
 		if (historyRegion != null) {
-			val historyState = historyStateConfiguration.get(historyRegion)
+			val historyState = historyStateConfiguration.get(historyRegion.historyVector.offset)
 			stateSwitch.cases.filter[it.state == historyState].forEach[step.schedule]
 		} else {
 			stateSwitch.cases.filter[activeStateConfiguration.contains(state)].forEach[step.schedule]
