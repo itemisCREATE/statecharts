@@ -15,13 +15,13 @@ import java.util.List;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.DebugException;
 import org.eclipse.debug.core.ILaunchConfiguration;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.ui.DebugUITools;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
-import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 
 /**
  * 
@@ -30,14 +30,13 @@ import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
  */
 public class SimulationLaunchErrorDialog extends ErrorDialog {
 
-	protected List<SCTDebugTarget> targets;
+	protected List<IDebugTarget> targets;
 
 	private static final int RELAUNCH_ID = 42;
 
-	public SimulationLaunchErrorDialog(Shell parentShell, String dialogTitle,
-			String message, IStatus status, List<SCTDebugTarget> target) {
-		super(parentShell, dialogTitle, message, status, IStatus.WARNING
-				| IStatus.ERROR | IStatus.INFO);
+	public SimulationLaunchErrorDialog(Shell parentShell, String dialogTitle, String message, IStatus status,
+			List<IDebugTarget> target) {
+		super(parentShell, dialogTitle, message, status, IStatus.WARNING | IStatus.ERROR | IStatus.INFO);
 		this.targets = target;
 	}
 
@@ -52,8 +51,7 @@ public class SimulationLaunchErrorDialog extends ErrorDialog {
 		// No Detail section required
 	}
 
-	protected Button createButton(Composite parent, int id, String label,
-			boolean defaultButton) {
+	protected Button createButton(Composite parent, int id, String label, boolean defaultButton) {
 		Button button = super.createButton(parent, id, label, defaultButton);
 		return button;
 	}
@@ -61,16 +59,14 @@ public class SimulationLaunchErrorDialog extends ErrorDialog {
 	protected void buttonPressed(final int id) {
 		try {
 			if (id == IDialogConstants.OK_ID) {
-				for (SCTDebugTarget target : targets) {
+				for (IDebugTarget target : targets) {
 					target.getLaunch().terminate();
 				}
 			} else if (id == RELAUNCH_ID) {
-				for (SCTDebugTarget target : targets) {
+				for (IDebugTarget target : targets) {
 					target.getLaunch().terminate();
-					ILaunchConfiguration launchConfiguration = target
-							.getLaunch().getLaunchConfiguration();
-					DebugUITools.launch(launchConfiguration, target.getLaunch()
-							.getLaunchMode());
+					ILaunchConfiguration launchConfiguration = target.getLaunch().getLaunchConfiguration();
+					DebugUITools.launch(launchConfiguration, target.getLaunch().getLaunchMode());
 				}
 			}
 		} catch (DebugException e) {

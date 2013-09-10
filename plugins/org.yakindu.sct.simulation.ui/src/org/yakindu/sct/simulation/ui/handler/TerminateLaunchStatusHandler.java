@@ -15,10 +15,10 @@ import java.util.Collections;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.debug.core.IStatusHandler;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.internal.ui.DebugUIPlugin;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.yakindu.sct.simulation.core.debugmodel.SCTDebugTarget;
 import org.yakindu.sct.simulation.ui.dialogs.SimulationLaunchErrorDialog;
 
 /**
@@ -35,9 +35,9 @@ public class TerminateLaunchStatusHandler implements IStatusHandler {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				Shell shell = DebugUIPlugin.getShell();
-				SimulationLaunchErrorDialog dialog = new SimulationLaunchErrorDialog(
-						shell, "Exception occured during simulation", cause.toString(), status,
-						Collections.singletonList((SCTDebugTarget) source));
+				SimulationLaunchErrorDialog dialog = new SimulationLaunchErrorDialog(shell,
+						"Exception occured during simulation", cause.toString(), status, Collections
+								.singletonList((IDebugTarget) source));
 				dialog.setBlockOnOpen(false);
 				dialog.open();
 			}

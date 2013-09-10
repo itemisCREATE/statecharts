@@ -20,7 +20,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
-import org.yakindu.sct.simulation.core.runtime.ISlot;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 
 /**
  * {@link CellEditor} support for Boolean values
@@ -36,8 +36,8 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 
 	@Override
 	public CellEditor getCellEditor(Object element) {
-		if (element instanceof ISlot) {
-			EnumerationType e = getEnumerationType((ISlot) element);
+		if (element instanceof ExecutionSlot) {
+			EnumerationType e = getEnumerationType((ExecutionSlot) element);
 			List<String> enumeratorNames = new ArrayList<String>();
 			for (Enumerator enumerator : e.getEnumerator()) {
 				enumeratorNames.add(enumerator.getName());
@@ -48,15 +48,15 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 		return null;
 	}
 
-	public EnumerationType getEnumerationType(ISlot element) {
+	public EnumerationType getEnumerationType(ExecutionSlot element) {
 		EnumerationType e = (EnumerationType) element.getType().getType();
 		return e;
 	}
 
 	public Object getValue(Object element) {
-		if (element instanceof ISlot) {
-			EnumerationType e = getEnumerationType((ISlot) element);
-			return e.getEnumerator().indexOf(((ISlot) element).getValue());
+		if (element instanceof ExecutionSlot) {
+			EnumerationType e = getEnumerationType((ExecutionSlot) element);
+			return e.getEnumerator().indexOf(((ExecutionSlot) element).getValue());
 		}
 		return null;
 	}
@@ -68,10 +68,10 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 
 	@Override
 	protected Object convertValue(Object element, Object value) {
-		if (element instanceof ISlot) {
+		if (element instanceof ExecutionSlot) {
 			if (value != null && value instanceof Integer) {
 				int index = ((Integer) value).intValue();
-				EnumerationType e = getEnumerationType((ISlot) element);
+				EnumerationType e = getEnumerationType((ExecutionSlot) element);
 				if (index < 0) {
 					return e.getEnumerator().iterator().next();
 				}

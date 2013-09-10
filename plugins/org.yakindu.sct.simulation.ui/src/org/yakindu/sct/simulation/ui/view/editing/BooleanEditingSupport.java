@@ -15,8 +15,8 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.ComboBoxCellEditor;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.yakindu.sct.simulation.core.runtime.ISlot;
-import org.yakindu.sct.simulation.core.runtime.impl.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 
 /**
  * {@link CellEditor} support for Boolean values
@@ -32,8 +32,8 @@ public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 
 	@Override
 	public CellEditor getCellEditor(Object element) {
-		return new ComboBoxCellEditor((Composite) getViewer().getControl(),
-				new String[] { "true", "false" }, SWT.READ_ONLY);
+		return new ComboBoxCellEditor((Composite) getViewer().getControl(), new String[] { "true", "false" },
+				SWT.READ_ONLY);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class BooleanEditingSupport extends ScopeSlotEditingSupport {
 
 	public Object getValue(Object element) {
 		if (element instanceof ExecutionVariable) {
-			Boolean value = (Boolean) ((ISlot) element).getValue();
+			Boolean value = (Boolean) ((ExecutionSlot) element).getValue();
 			return value ? 0 : 1;
 		}
 		return null;
