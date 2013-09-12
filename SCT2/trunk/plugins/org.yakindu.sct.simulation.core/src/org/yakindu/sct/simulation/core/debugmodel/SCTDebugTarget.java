@@ -74,6 +74,9 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
 		executionControl = container.getExecutionControl();
 		container.getExecutionContext().eAdapters().add(updater);
+	}
+
+	public void start() {
 		executionControl.start();
 	}
 
@@ -227,7 +230,9 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	public boolean isStepping() {
 		return stepping;
 	}
-	//Fires fireChangeEvents to refresh the DebugUI TreeViewer with the active states
+
+	// Fires fireChangeEvents to refresh the DebugUI TreeViewer with the active
+	// states
 	protected class UpdateTreeAdapter extends CrossDocumentContentAdapter {
 
 		@Override
@@ -237,7 +242,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 		@Override
 		public void notifyChanged(Notification notification) {
-			if (notification.getFeature() == SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES){
+			if (notification.getFeature() == SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES) {
 				fireChangeEvent(DebugEvent.CONTENT);
 			}
 			super.notifyChanged(notification);

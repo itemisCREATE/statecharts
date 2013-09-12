@@ -18,7 +18,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfiguration;
-import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
 import org.eclipse.debug.core.model.LaunchConfigurationDelegate;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -44,8 +43,9 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
 		Statechart statechart = ResourceUtil.loadStatechart(filename);
 		Assert.isNotNull(statechart);
-		IDebugTarget target = new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
+		SCTDebugTarget target = new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
 		launch.addDebugTarget(target);
+		target.start();
 
 	}
 
