@@ -14,12 +14,14 @@ import static org.eclipse.emf.common.notify.Notification.ADD;
 import static org.eclipse.emf.common.notify.Notification.ADD_MANY;
 import static org.eclipse.emf.common.notify.Notification.REMOVE;
 import static org.eclipse.emf.common.notify.Notification.REMOVE_MANY;
+import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__ACTIVE_STATES;
+import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__EXECUTED_ELEMENTS;
+import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.EXECUTION_CONTEXT__SUSPENDED_ELEMENTS;
 import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.STATE_BACKGROUND_HIGHLIGHTING_COLOR;
 import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.STATE_FOREGROUND_HIGHLIGHTING_COLOR;
 import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.TRANSITION_HIGHLIGHTING_COLOR;
 import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.VERTEX_BACKGROUND_TRANSIENT_COLOR;
 import static org.yakindu.sct.simulation.ui.preferences.SimulationPreferenceConstants.VERTEX_FOREGROUND_TRANSIENT_COLOR;
-import static org.yakindu.sct.simulation.core.sruntime.SRuntimePackage.Literals.*;
 
 import java.util.List;
 
@@ -34,7 +36,6 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 
@@ -82,6 +83,12 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 		for (EObject eObject : executedElements) {
 			getHighlightingSupport().flash(eObject, HighlightingParameters.DEFAULT);
 		}
+
+		List<EObject> suspendedElements = context.getSuspendedElements();
+		for (EObject eObject : suspendedElements) {
+			getHighlightingSupport().fadeIn(eObject, SUSPENDED_PARAMS);
+		}
+
 	}
 
 	protected class ExecutionContextVisualizer extends CrossDocumentContentAdapter {
