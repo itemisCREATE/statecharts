@@ -16,10 +16,6 @@
     	 type="org.yakindu.sct.simulation.core.launch.statechart"
   	     class="org.yakindu.sct.simulation.ui.sexec.launch.tabs.StatechartLaunchConfigurationTabGroup"
   	     id="org.yakindu.sct.simulation.ui.launch.tabs.statechart.tabs">
-  	      <launchMode 
-                  mode="debug"
-                  perspective="org.yakindu.sct.ui.SimulationPerspective">
-            </launchMode>
               <launchMode 
                   mode="run"
                   perspective="org.yakindu.sct.ui.SimulationPerspective">
