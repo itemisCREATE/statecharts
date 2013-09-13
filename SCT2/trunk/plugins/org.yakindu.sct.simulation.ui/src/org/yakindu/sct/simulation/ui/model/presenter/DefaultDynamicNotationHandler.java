@@ -123,7 +123,7 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 					} else if (notification.getFeature() == EXECUTION_CONTEXT__SUSPENDED_ELEMENTS) {
 						if (eventType == ADD || eventType == ADD_MANY) {
 							getHighlightingSupport().fadeIn((EObject) notification.getNewValue(), SUSPENDED_PARAMS);
-						} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
+						} else if (eventType == REMOVE) {
 							getHighlightingSupport().fadeOut((EObject) notification.getOldValue(), SUSPENDED_PARAMS);
 						}
 					}
