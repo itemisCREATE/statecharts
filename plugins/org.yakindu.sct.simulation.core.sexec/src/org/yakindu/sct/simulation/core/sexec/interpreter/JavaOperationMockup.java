@@ -45,7 +45,7 @@ public class JavaOperationMockup implements IOperationMockup {
 		if (launch == null)
 			return;
 		callbacks = Lists.newArrayList();
-		IFile file = WorkspaceSynchronizer.getFile(((EObject) launch.getAdapter(EObject.class)).eResource());
+		IFile file = WorkspaceSynchronizer.getFile(((EObject) launch.getDebugTarget().getAdapter(EObject.class)).eResource());
 		ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(file.getProject(), getClass()
 				.getClassLoader());
 		ILaunchConfiguration config = launch.getLaunchConfiguration();
