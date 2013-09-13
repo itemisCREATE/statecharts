@@ -18,6 +18,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
  * @author andreas muelder - Initial contribution and API
  * 
  */
+
 public interface IExecutionFlowInterpreter {
 
 	public void initialize(final ExecutionFlow flow, final ExecutionContext context);
@@ -26,12 +27,12 @@ public interface IExecutionFlowInterpreter {
 
 	public void enter();
 
- 	public void runCycle();
+	public void runCycle();
 
- 	public void suspend();
- 	
- 	public void resume();
+	public void suspend();
 
- 	public void exit();
- 	
+	public void resume();
+
+	public void exit();
+
 }

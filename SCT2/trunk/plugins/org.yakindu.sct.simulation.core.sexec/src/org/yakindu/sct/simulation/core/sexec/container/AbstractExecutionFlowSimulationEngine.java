@@ -75,7 +75,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 
 	public void start() {
 		ExecutionFlow flow = sequencer.transform(statechart);
-		if (!context.isSnapshot()){
+		if (!context.isSnapshot()) {
 			contextInitializer.initialize(context, flow);
 		}
 		interpreter.initialize(flow, context);
@@ -84,7 +84,6 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 
 	public void suspend() {
 		suspended = true;
-		interpreter.suspend();
 	}
 
 	public void resume() {
@@ -99,7 +98,9 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	}
 
 	public void stepForward() {
+		interpreter.resume();
 		interpreter.runCycle();
+		interpreter.suspend();
 	}
 
 	public void stepBackward() {

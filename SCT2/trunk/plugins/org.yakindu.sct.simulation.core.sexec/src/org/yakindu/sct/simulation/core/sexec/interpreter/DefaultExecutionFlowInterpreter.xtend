@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
+import com.google.inject.Singleton
 import java.util.List
 import java.util.Map
 import org.eclipse.emf.ecore.util.EcoreUtil
@@ -40,6 +41,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
  * @author andreas muelder - Initial contribution and API
  * 
  */
+ @Singleton
 class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 
 	@Inject
