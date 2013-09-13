@@ -42,7 +42,6 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
-		print("")
 	}
 	
 	def dispatch create new CompositeSlotImpl() transform(InternalScope scope){
