@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>org.yakindu.sct.model.sexec.interpreter.test</name>
+	<name>org.yakindu.sct.simulation.core.sexec.test</name>
 	<comment></comment>
 	<projects>
 	</projects>
