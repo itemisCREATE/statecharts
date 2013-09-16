@@ -17,6 +17,7 @@ import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.util.SGraphSwitch;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
@@ -55,7 +56,6 @@ public final class SemanticHintUtil implements SemanticHints {
 				return REGION;
 			}
 
-
 			@Override
 			public String caseEntry(Entry object) {
 				return ENTRY;
@@ -73,6 +73,10 @@ public final class SemanticHintUtil implements SemanticHints {
 			@Override
 			public String caseChoice(Choice object) {
 				return CHOICE;
+			};
+
+			public String caseSynchronization(Synchronization object) {
+				return SYNCHRONIZATION;
 			};
 
 			public String defaultCase(EObject object) {
