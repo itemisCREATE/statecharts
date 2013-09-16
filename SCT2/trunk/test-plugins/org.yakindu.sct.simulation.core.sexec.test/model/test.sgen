@@ -3,7 +3,7 @@ GeneratorModel for sctunit::interpreter {
 	test AllTests {
 	
 		feature Outlet {
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test"
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test"
 			targetFolder = "test-gen"
 		}
 	}	
@@ -11,7 +11,7 @@ GeneratorModel for sctunit::interpreter {
 	test AlwaysOncycle{ 
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -19,7 +19,7 @@ GeneratorModel for sctunit::interpreter {
 	test AssignmentAsExpression{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -27,7 +27,7 @@ GeneratorModel for sctunit::interpreter {
 	test BitExpressions{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -35,7 +35,7 @@ GeneratorModel for sctunit::interpreter {
 	test BooleanExpressions{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -43,7 +43,7 @@ GeneratorModel for sctunit::interpreter {
 	test Choice{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -51,7 +51,7 @@ GeneratorModel for sctunit::interpreter {
 	test CKeywords{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -59,7 +59,7 @@ GeneratorModel for sctunit::interpreter {
 	test Declarations{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -67,7 +67,7 @@ GeneratorModel for sctunit::interpreter {
 	test DeepHistory{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -75,7 +75,7 @@ GeneratorModel for sctunit::interpreter {
 	test EnterState{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -83,7 +83,7 @@ GeneratorModel for sctunit::interpreter {
 	test ExitOnSelfTransition{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -91,7 +91,7 @@ GeneratorModel for sctunit::interpreter {
 	test ExitState{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -99,7 +99,7 @@ GeneratorModel for sctunit::interpreter {
 	test FeatureCalls{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -107,7 +107,7 @@ GeneratorModel for sctunit::interpreter {
 	test Guard{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -115,7 +115,7 @@ GeneratorModel for sctunit::interpreter {
 	test GuardedEntry{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -123,7 +123,7 @@ GeneratorModel for sctunit::interpreter {
 	test GuardedExit{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -131,7 +131,7 @@ GeneratorModel for sctunit::interpreter {
 	test HistoryWithoutInitialStep{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -139,7 +139,7 @@ GeneratorModel for sctunit::interpreter {
 	test InEventLifeCycle{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -147,7 +147,7 @@ GeneratorModel for sctunit::interpreter {
 	test IntegerExpressions{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}	
@@ -155,7 +155,7 @@ GeneratorModel for sctunit::interpreter {
 	test InternalEventLifeCycle{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -163,7 +163,7 @@ GeneratorModel for sctunit::interpreter {
 	test NamedInterfaceAccess{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -171,7 +171,7 @@ GeneratorModel for sctunit::interpreter {
 	test OutEventLifeCycle{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}	
@@ -179,7 +179,7 @@ GeneratorModel for sctunit::interpreter {
 	test Parenthesis{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -187,7 +187,7 @@ GeneratorModel for sctunit::interpreter {
 	test PriorityValues{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}	
@@ -195,7 +195,7 @@ GeneratorModel for sctunit::interpreter {
 	test RaiseEvent{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -203,7 +203,7 @@ GeneratorModel for sctunit::interpreter {
 	test SameNameDifferentRegion{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}	
@@ -212,7 +212,7 @@ GeneratorModel for sctunit::interpreter {
 	test ShallowHistory{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -220,7 +220,7 @@ GeneratorModel for sctunit::interpreter {
 	test SimpleEvent{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -228,7 +228,7 @@ GeneratorModel for sctunit::interpreter {
 	test SimpleHierachy{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -236,7 +236,7 @@ GeneratorModel for sctunit::interpreter {
 	test StatechartLocalReactions{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -244,7 +244,7 @@ GeneratorModel for sctunit::interpreter {
 	test StateIsActive{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -252,7 +252,7 @@ GeneratorModel for sctunit::interpreter {
 	test STextKeywordsInStatesAndRegions{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -260,7 +260,7 @@ GeneratorModel for sctunit::interpreter {
 	test StringExpressions{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -268,7 +268,7 @@ GeneratorModel for sctunit::interpreter {
 	test SyncFork{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -276,7 +276,7 @@ GeneratorModel for sctunit::interpreter {
 	test SyncJoin{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -284,7 +284,7 @@ GeneratorModel for sctunit::interpreter {
 	test TransitionWithoutCondition{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
@@ -293,7 +293,7 @@ GeneratorModel for sctunit::interpreter {
 	test ValuedEvents{
 		
 		feature Outlet{ 
-			targetProject = "org.yakindu.sct.model.sexec.interpreter.test" 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
 			targetFolder = "test-gen"			
 		}			
 	}
