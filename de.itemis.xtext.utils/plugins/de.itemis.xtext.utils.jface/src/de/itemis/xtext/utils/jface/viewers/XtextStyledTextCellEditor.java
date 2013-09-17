@@ -243,5 +243,9 @@ public class XtextStyledTextCellEditor extends StyledTextCellEditor {
 	public void setVisibleRegion(int start, int length) {
 		xtextAdapter.setVisibleRegion(start, length);
 	}
+	
+	public StyledTextXtextAdapter getXtextAdapter() {
+		return xtextAdapter;
+	}
 
 }
