@@ -1,4 +1,5 @@
 GeneratorModel for yakindu::java {
+	
 	statechart AlwaysOncycle {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -470,5 +471,17 @@ GeneratorModel for yakindu::java {
 		}
 	}
 	
+	statechart LogicalAnd {
+			feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		} 
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+		
+	}
 
 }
