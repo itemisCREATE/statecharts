@@ -11,6 +11,7 @@ encoding//testmodels/SCTUnit/GuardedExit.sct=UTF-8
 encoding//testmodels/SCTUnit/HistoryWithoutInitialStep.sct=UTF-8
 encoding//testmodels/SCTUnit/InEventLifeCycle.sct=UTF-8
 encoding//testmodels/SCTUnit/InternalEventLifeCycle.sct=UTF-8
+encoding//testmodels/SCTUnit/LogicalAnd.sct=UTF-8
 encoding//testmodels/SCTUnit/OutEventLifeCycle.sct=UTF-8
 encoding//testmodels/SCTUnit/PerformanceTest.sct=UTF-8
 encoding//testmodels/SCTUnit/STextKeywordsInStatesAndRegions.sct=UTF-8
