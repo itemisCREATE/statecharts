@@ -152,6 +152,14 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 		
+	test LogicalAndTests{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
 	test NamedInterfaceAccess{
 		
 		feature Outlet{ 

@@ -125,7 +125,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 
 	private boolean checkR_A_r_BTr0() {
-		return sCInterface.e;
+		return sCInterface.g;
 	}
 
 	private boolean checkR_A_r_BTr1() {
@@ -133,7 +133,7 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 
 	private boolean checkR_A_r_BTr2() {
-		return sCInterface.g;
+		return sCInterface.e;
 	}
 
 	private void effectR_ATr0() {
