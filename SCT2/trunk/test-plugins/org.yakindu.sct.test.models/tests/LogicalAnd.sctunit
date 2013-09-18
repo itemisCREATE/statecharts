@@ -1,0 +1,12 @@
+
+testgroup LogicalAndTests for statechart LogicalAnd {
+	
+	test operandEvaluationOrder {
+		
+		enter
+		cycle
+		
+		assert x == 4 && b "logical and expression was executed in wrong order..."	
+	}
+
+}

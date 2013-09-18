@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_PSA8cDA8EeKkkaVMi1n7-A" specification="&#xA;interface:&#xA;&#xA;&#x9;in event e1&#xA;&#x9;in event e2&#xA;&#x9;" name="HistoryWithoutInitialStep">
+  <sgraph:Statechart xmi:id="_PSA8cDA8EeKkkaVMi1n7-A" specification="&#xA;interface:&#xA;&#xA;&#x9;in event e1&#xA;&#x9;in event e2&#xA;" name="HistoryWithoutInitialStep">
     <regions xmi:id="_PSCKkjA8EeKkkaVMi1n7-A" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_PSIRMjA8EeKkkaVMi1n7-A">
         <outgoingTransitions xmi:id="_PSKtcTA8EeKkkaVMi1n7-A" target="_PSJfUDA8EeKkkaVMi1n7-A"/>

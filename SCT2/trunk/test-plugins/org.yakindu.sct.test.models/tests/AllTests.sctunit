@@ -8,6 +8,7 @@ testsuite AllTests {
 	Guard, GuardedEntry, GuardedExit, 
 	HistoryWithoutInitialStep,
 	InEventLifeCycle, IntegerExpressions, InternalEventLifeCycle,
+	LogicalAndTests,
 	NamedInterfaceAccess,
 	OutEventLifeCycle,
 	Parenthesis, PriorityValues,
