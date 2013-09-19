@@ -113,10 +113,10 @@ class ExpressionCode {
 	/* Logical Expressions */
 	
 	def dispatch CharSequence code (LogicalOrExpression it)
-		'''«rightOperand.code» || «leftOperand.code»'''
+		'''«leftOperand.code» || «rightOperand.code»'''
 		
 	def dispatch CharSequence code (LogicalAndExpression it)
-		'''«rightOperand.code» && «leftOperand.code»'''
+		'''«leftOperand.code» && «rightOperand.code»'''
 	 	
 	def dispatch CharSequence code (LogicalNotExpression it)
 		'''! «operand.code»'''
