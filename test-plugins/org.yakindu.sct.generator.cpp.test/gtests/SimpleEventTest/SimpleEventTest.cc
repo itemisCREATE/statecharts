@@ -16,10 +16,10 @@ TEST(StatemachineTest, simpleEventTest) {
 	SimpleEvent* statechart = new SimpleEvent();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SimpleEvent::SimpleEvent_main_region_A));
+	EXPECT_TRUE(statechart->isActive(SimpleEvent::SimpleEvent_main_region_A)) << "Expected A to be active" ;
 	EXPECT_TRUE(5== 5);
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SimpleEvent::SimpleEvent_main_region_B));
+	EXPECT_TRUE(statechart->isActive(SimpleEvent::SimpleEvent_main_region_B)) << "Expected B to be active" ;
 	delete statechart;
 }

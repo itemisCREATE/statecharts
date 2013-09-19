@@ -45,7 +45,7 @@
           <styles xsi:type="notation:BooleanValueStyle" xmi:id="_W31X4SA6EeO5Bsh-9TRWYA" name="isHorizontal" booleanValue="true"/>
           <layoutConstraint xsi:type="notation:Bounds" xmi:id="_W31X4iA6EeO5Bsh-9TRWYA" x="61" y="109"/>
         </children>
-        <children xsi:type="notation:Shape" xmi:id="__SWe4CA6EeO5Bsh-9TRWYA" type="Note" fontName="Verdana" description="makes sure that the and expression if evaluated in the right order (was an error in c &amp; c++ generator)" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+        <children xsi:type="notation:Shape" xmi:id="__SWe4CA6EeO5Bsh-9TRWYA" type="Note" fontName="Verdana" description="makes sure that the or expression is evaluated in the right order. The test is based on the side effects of the assignemnt and the right order of execution. (was an error in c &amp; c++ generator)" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
           <children xsi:type="notation:BasicDecorationNode" xmi:id="__SXtACA6EeO5Bsh-9TRWYA" type="DiagramName">
             <element xsi:nil="true"/>
           </children>
@@ -55,7 +55,7 @@
           <styles xsi:type="notation:TextStyle" xmi:id="__SWe4SA6EeO5Bsh-9TRWYA"/>
           <styles xsi:type="notation:LineTypeStyle" xmi:id="__SWe4iA6EeO5Bsh-9TRWYA"/>
           <element xsi:nil="true"/>
-          <layoutConstraint xsi:type="notation:Bounds" xmi:id="__SWe4yA6EeO5Bsh-9TRWYA" x="9" y="245" width="346" height="35"/>
+          <layoutConstraint xsi:type="notation:Bounds" xmi:id="__SWe4yA6EeO5Bsh-9TRWYA" x="9" y="245" width="346" height="77"/>
         </children>
         <layoutConstraint xsi:type="notation:Bounds" xmi:id="_W3y7pCA6EeO5Bsh-9TRWYA"/>
       </children>

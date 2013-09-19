@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart LogicalOr {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "LogicalOrTestsTest"
+		}
+	}
+}

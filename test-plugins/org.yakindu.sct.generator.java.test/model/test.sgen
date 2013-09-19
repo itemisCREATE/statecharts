@@ -168,6 +168,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 		
+	test LogicalOrTests{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
 	test NamedInterfaceAccess{
 		
 		feature Outlet{ 
@@ -296,6 +304,15 @@ GeneratorModel for sctunit::java {
 			targetFolder = "test-gen"			
 		}			
 	}
+
+	test TimeTrigger{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
 
 	test TransitionWithoutCondition{
 		

@@ -160,6 +160,22 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 		
+	test LogicalAndTests {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
+	test LogicalOrTests {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
 	test NamedInterfaceAccess{
 		
 		feature Outlet{ 
@@ -274,6 +290,14 @@ GeneratorModel for sctunit::interpreter {
 	}
 	
 	test SyncJoin{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test TimeTrigger{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
