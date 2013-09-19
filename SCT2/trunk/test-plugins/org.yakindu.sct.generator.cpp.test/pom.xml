@@ -25,7 +25,7 @@
 				<version>${tycho-version}</version>
 				<configuration>
 					<includes>
-						<include>**/All*Tests.class</include>
+						<include>**/AllTestsTest.class</include>
 					</includes> 
 					<useUIHarness>false</useUIHarness>
 					<useUIThread>false</useUIThread>
