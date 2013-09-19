@@ -21,11 +21,13 @@ import org.junit.runners.Suite.SuiteClasses;
 		Guard.class, GuardedEntry.class, GuardedExit.class,
 		HistoryWithoutInitialStep.class, InEventLifeCycle.class,
 		IntegerExpressions.class, InternalEventLifeCycle.class,
+		LogicalAndTests.class, LogicalOrTests.class,
 		NamedInterfaceAccess.class, OutEventLifeCycle.class, Parenthesis.class,
 		PriorityValues.class, RaiseEvent.class, SameNameDifferentRegion.class,
-		ShallowHistory.class, SimpleHierachy.class, StateIsActive.class,
-		StatechartLocalReactions.class, StringExpressions.class,
-		SyncFork.class, SyncJoin.class, SimpleEvent.class,
-		STextKeywordsInStatesAndRegions.class})
+		ShallowHistory.class, SimpleEvent.class,
+		StatechartLocalReactions.class, SimpleHierachy.class,
+		StateIsActive.class, STextKeywordsInStatesAndRegions.class,
+		StringExpressions.class, SyncFork.class, SyncJoin.class,
+		TransitionWithoutCondition.class, ValuedEvents.class})
 public class AllTests {
 }

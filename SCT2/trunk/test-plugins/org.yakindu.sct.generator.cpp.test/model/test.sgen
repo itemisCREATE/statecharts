@@ -1,5 +1,13 @@
 GeneratorModel for sctunit::cpp {
 
+	test AllTests{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test AlwaysOncycle{
 		
 		feature Outlet{ 
@@ -160,6 +168,14 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 		
+	test LogicalOrTests{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
 	test NamedInterfaceAccess{
 		
 		feature Outlet{ 
@@ -281,6 +297,14 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
+	test TimeTrigger{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
+
 	test TransitionWithoutCondition{
 		
 		feature Outlet{ 

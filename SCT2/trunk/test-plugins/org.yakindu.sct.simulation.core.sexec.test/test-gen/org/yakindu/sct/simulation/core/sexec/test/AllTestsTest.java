@@ -23,12 +23,14 @@ import org.junit.runners.Suite.SuiteClasses;
 		GuardedEntryTest.class, GuardedExitTest.class,
 		HistoryWithoutInitialStepTest.class, InEventLifeCycleTest.class,
 		IntegerExpressionsTest.class, InternalEventLifeCycleTest.class,
+		LogicalAndTestsTest.class, LogicalOrTestsTest.class,
 		NamedInterfaceAccessTest.class, OutEventLifeCycleTest.class,
 		ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
 		SameNameDifferentRegionTest.class, ShallowHistoryTest.class,
+		SimpleEventTest.class, StatechartLocalReactionsTest.class,
 		SimpleHierachyTest.class, StateIsActiveTest.class,
-		StatechartLocalReactionsTest.class, StringExpressionsTest.class,
-		SyncForkTest.class, SyncJoinTest.class, SimpleEventTest.class,
-		STextKeywordsInStatesAndRegionsTest.class})
+		STextKeywordsInStatesAndRegionsTest.class, StringExpressionsTest.class,
+		SyncForkTest.class, SyncJoinTest.class,
+		TransitionWithoutConditionTest.class, ValuedEventsTest.class})
 public class AllTestsTest {
 }

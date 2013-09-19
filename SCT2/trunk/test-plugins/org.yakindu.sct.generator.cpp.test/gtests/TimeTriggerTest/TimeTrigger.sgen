@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart TimeTrigger {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "TimeTriggerTest"
+		}
+	}
+}

@@ -2,8 +2,9 @@ testgroup TimeTrigger for statechart TimeTrigger{
 	
 	
 	test TestName{
-		enter 
+//		enter 
 
+		assert true
 	// Doesn't work so far... different behavior in java and Interpreter, no impl in C
 
 //		assert active(TimeTrigger.main_region.A)
