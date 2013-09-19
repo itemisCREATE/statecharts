@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+
+<target name="Kepler" sequenceNumber="23">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.ide" version="4.3.0.I20130605-2000"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.3"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.compare.feature.group" version="2.1.0.201306101322"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.9.0.v20130610-0406"/>
+<unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="2.1.0.201306101322"/>
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.7.0.201306101425"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.4.2.v201306120542"/>
+<unit id="org.eclipse.gmf.feature.group" version="1.7.0.201306111432"/>
+<repository location="http://download.eclipse.org/releases/kepler"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.polarion.eclipse.team.svn.connector.svnkit17.feature.group" version="3.0.1.I20130507-1700"/>
+<repository location="http://community.polarion.com/projects/subversive/download/eclipse/3.0/kepler-site/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.team.svn.feature.group" version="1.1.0.I20130527-1700"/>
+<unit id="org.eclipse.pde.feature.group" version="3.9.0.v20130605-2000"/>
+<repository location="http://download.eclipse.org/releases/kepler"/>
+</location>
+</locations>
+</target>
