@@ -19,8 +19,8 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 
 import com.google.common.collect.Lists;
@@ -66,7 +66,7 @@ public class JavaOperationMockup implements IOperationMockup {
 	}
 
 	@Override
-	public boolean canExecute(OperationDefinition definition, Object... parameter) {
+	public boolean canExecute(Operation definition, Object... parameter) {
 		if (callbacks == null)
 			initOperationCallbacks();
 		// TODO: Check if there is a operation in the callbacks for the given
@@ -74,7 +74,7 @@ public class JavaOperationMockup implements IOperationMockup {
 		return callbacks.size() > 0;
 	}
 
-	public Object execute(OperationDefinition definition, Object... parameter) {
+	public Object execute(Operation definition, Object... parameter) {
 		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(definition.getName(), definition
 				.getParameters().size(), definition.getParameters().size(), callbacks);
 		try {

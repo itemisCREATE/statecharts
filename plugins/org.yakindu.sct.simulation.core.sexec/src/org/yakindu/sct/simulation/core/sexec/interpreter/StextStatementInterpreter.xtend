@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.base.types.Enumerator
+import org.yakindu.base.types.Operation
 import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.AssignmentExpression
@@ -38,7 +39,6 @@ import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
 import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
 import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
 import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
 import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.RealLiteral
@@ -123,8 +123,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(ElementReferenceExpression expression) {
 		var parameter = expression.args.map(it|execute)
 		if (expression.operationCall) {
-			if (operationDelegate.canExecute(expression.reference as OperationDefinition, parameter.toArray)) {
-				return operationDelegate.execute((expression.reference as OperationDefinition),
+			if (operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
+				return operationDelegate.execute((expression.reference as Operation),
 					parameter.toArray)
 			}
 		}
@@ -228,7 +228,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(FeatureCall call) {
 		if (call.operationCall) {
 			var parameter = call.args.map(it|execute)
-			var operation = call.feature as OperationDefinition
+			var operation = call.feature as Operation
 			if (operationDelegate.canExecute(operation, parameter)) {
 				return operationDelegate.execute(operation, parameter)
 			}
