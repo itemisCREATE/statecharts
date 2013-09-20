@@ -11,7 +11,6 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
 import org.yakindu.base.types.Operation;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 
 /**
  * Called during simulation when an {@link Operation} is executed. Allows to
@@ -27,13 +26,13 @@ public interface IOperationMockup {
 	 * @return true if the implementation provides a mockup for the given
 	 *         definition, false otherwise
 	 */
-	public boolean canExecute(OperationDefinition definition, Object... parameter);
+	public boolean canExecute(Operation definition, Object... parameter);
 
 	/**
 	 * Called when the operation is executed
 	 * 
 	 * @return the operations return value, maybe null
 	 */
-	public Object execute(OperationDefinition definition, Object... parameter);
+	public Object execute(Operation definition, Object... parameter);
 
 }
