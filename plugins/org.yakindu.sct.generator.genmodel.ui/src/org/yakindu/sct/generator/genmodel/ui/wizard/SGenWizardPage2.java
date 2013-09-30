@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CheckStateChangedEvent;
@@ -79,7 +80,7 @@ public class SGenWizardPage2 extends WizardPage {
 				CoreGenerator.C);
 		natureDefaultGenerators.put("org.eclipse.cdt.core.ccnature",
 				CoreGenerator.Cpp);
-		natureDefaultGenerators.put("org.eclipse.jdt.core.javanature",
+		natureDefaultGenerators.put(JavaCore.NATURE_ID,
 				CoreGenerator.Java);
 	}
 	private ComboViewer generatorCombo;
