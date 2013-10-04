@@ -39,6 +39,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - minimized changes on execution context 
  * 
  */
  @Singleton
@@ -88,9 +89,9 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 		//Raise all schedules events
 		executionContext.allEvents.filter[scheduled].forEach[raised = true scheduled = false]
 		activeStateIndex = 0
-		executionContext.executedElements.clear
+		if (executionContext.executedElements.size > 0) executionContext.executedElements.clear
 		//Clear all out events
-		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[raised = false]
+		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[if(raised) raised=false]
 		while (activeStateIndex < activeStateConfiguration.size) {
 			var state = activeStateConfiguration.get(activeStateIndex)
 			state?.reactSequence?.scheduleAndRun
@@ -98,7 +99,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 		}
 		//clear all local and in events
 		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
-			raised = false]
+			if(raised) raised=false]
 	}
 
 	override resume() {
