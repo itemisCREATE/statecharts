@@ -41,6 +41,7 @@ import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter
 /**
  * 
  * @author andreas muelder - Initial contribution and API
+ * @author axel terfloth - extensions
  * 
  */
 public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
@@ -54,26 +55,26 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	private final Statechart statechart;
 	private List<SCTDebugThread> threads;
 
-	private ISimulationEngine container;
+	private ISimulationEngine engine;
 
 	private IExecutionControl executionControl;
 
 	private UpdateTreeAdapter updater = new UpdateTreeAdapter();
 
-	public SCTDebugTarget(ILaunch launch, Statechart statechart, ISimulationEngine container) throws CoreException {
+	public SCTDebugTarget(ILaunch launch, Statechart statechart, ISimulationEngine engine) throws CoreException {
 		super(null, statechart.eResource().getURI().toPlatformString(true));
 		Assert.isNotNull(statechart);
 		this.launch = launch;
 		this.statechart = statechart;
-		this.container = container;
+		this.engine = engine;
 		init();
 	}
 
 	private void init() {
 		threads = new ArrayList<SCTDebugThread>();
 		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
-		executionControl = container.getExecutionControl();
-		container.getExecutionContext().eAdapters().add(updater);
+		executionControl = engine.getExecutionControl();
+		engine.getExecutionContext().eAdapters().add(updater);
 	}
 
 	public void start() {
@@ -86,12 +87,12 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	public void stepOver() {
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.STEP_OVER));
-		container.getExecutionControl().stepForward();
+		engine.getExecutionControl().stepForward();
 	}
 
 	public IThread[] getThreads() throws DebugException {
 		// Collect all active regions
-		List<RegularState> activeLeafStates = container.getExecutionContext().getActiveStates();
+		List<RegularState> activeLeafStates = engine.getExecutionContext().getActiveStates();
 		List<Region> activeRegions = new ArrayList<Region>();
 		for (RegularState vertex : activeLeafStates) {
 			activeRegions.add(vertex.getParentRegion());
@@ -113,7 +114,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 				}
 			}
 			if (!found) {
-				threads.add(new SCTDebugThread(this, container, getResourceString(), region));
+				threads.add(new SCTDebugThread(this, engine, getResourceString(), region));
 			}
 		}
 		return threads.toArray(new IThread[] {});
@@ -210,12 +211,12 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == ISimulationEngine.class)
-			return container;
+			return engine;
 		if (adapter == IExecutionControl.class) {
-			return container.getExecutionControl();
+			return engine.getExecutionControl();
 		}
 		if (adapter == ExecutionContext.class) {
-			return container.getExecutionContext();
+			return engine.getExecutionContext();
 		}
 		if (adapter == EObject.class) {
 			return statechart;
@@ -231,6 +232,12 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 		return stepping;
 	}
 
+	
+	public ISimulationEngine getSimulationEngine() {
+		return engine;
+	}
+	
+	
 	// Fires fireChangeEvents to refresh the DebugUI TreeViewer with the active
 	// states
 	protected class UpdateTreeAdapter extends CrossDocumentContentAdapter {
