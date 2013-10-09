@@ -86,7 +86,7 @@ class StatemachineHeader extends Statemachine {
 		#endif /* «module().define»_H_ */
 	'''
 	
-	def private getInterfaceExtensions(ExecutionFlow flow) {
+	def protected getInterfaceExtensions(ExecutionFlow flow) {
 
 		var String interfaces = "";
 
@@ -99,14 +99,14 @@ class StatemachineHeader extends Statemachine {
 		return interfaces;
 	}
 	
-	def private createScope(Scope scope) {
+	def protected createScope(Scope scope) {
 		switch scope {
 			InterfaceScope: scope.createScope()
 			InternalScope: scope.createPublicScope
 		}
 	}
 	
-	def private createScope(InterfaceScope scope)
+	def protected createScope(InterfaceScope scope)
 	'''
 		«scope.createInterface()»
 «««		«scope.createListenerInterface(entry)»
@@ -121,7 +121,7 @@ class StatemachineHeader extends Statemachine {
 		«ENDIF»
 	'''
 	
-	def private createInterface(StatechartScope scope)
+	def protected createInterface(StatechartScope scope)
 	'''
 		//! Inner class for «scope.interfaceName» interface scope.
 		class «scope.interfaceName» {
@@ -139,7 +139,7 @@ class StatemachineHeader extends Statemachine {
 		};
 	'''
 	
-	def private createPublicScope(InternalScope scope) {
+	def protected createPublicScope(InternalScope scope) {
 		'''
 		«IF scope.hasOperations()»
 			class «internalOperationCallbackName» {
@@ -166,12 +166,12 @@ class StatemachineHeader extends Statemachine {
 		'''
 	}
 	
-	def private signature(OperationDefinition it)
+	def protected signature(OperationDefinition it)
 	'''
 		«type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.targetLanguageName» «parameter.identifier»«ENDFOR»)
 	'''
 	
-	def private identifier(Parameter parameter) {
+	def protected identifier(Parameter parameter) {
 		if (parameter.name.isCKeyword()) {
 			return parameter.name + "Arg"
 		}
@@ -202,7 +202,7 @@ class StatemachineHeader extends Statemachine {
 		«ENDFOR»
 	'''
 	
-	def private publicFunctionPrototypes(ExecutionFlow it) '''
+	def protected publicFunctionPrototypes(ExecutionFlow it) '''
 		«IStatemachineFunctions»
 		
 		«IF timed»
@@ -210,7 +210,7 @@ class StatemachineHeader extends Statemachine {
 		«ENDIF»
 	'''
 	
-	def private IStatemachineFunctions() '''
+	def protected IStatemachineFunctions() '''
 		void init();
 		
 		void enter();
