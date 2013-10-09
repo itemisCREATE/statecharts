@@ -27,7 +27,7 @@ class TimerInterface {
 		fsa.generateFile(timerInterface.h, flow.content(entry) )
 	}
 	
-	def private content(ExecutionFlow it, GeneratorEntry entry) {
+	def protected content(ExecutionFlow it, GeneratorEntry entry) {
 		'''
 		«entry.licenseText»
 		
