@@ -375,8 +375,12 @@ public class StyledTextXtextAdapter {
 		}
 
 		public void widgetDisposed(DisposeEvent e) {
-			((StyledText) e.getSource()).removeFocusListener(this);
-			((StyledText) e.getSource()).removeDisposeListener(this);
-		}
+            if (selectionProviderOnFocusLost != null) {
+                site.setSelectionProvider(selectionProviderOnFocusLost);
+            }
+            ((StyledText) e.getSource()).removeFocusListener(this);
+            ((StyledText) e.getSource()).removeDisposeListener(this);
+        }
+
 	}
 }
