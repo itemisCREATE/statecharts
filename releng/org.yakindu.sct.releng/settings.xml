@@ -1,32 +1,38 @@
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
                       http://maven.apache.org/xsd/settings-1.0.0.xsd">
-  <localRepository/>
-  <interactiveMode/>
-  <usePluginRegistry/>
-  <offline/>
-  <pluginGroups/>
-  <servers/>
-  <mirrors>
-    <mirror>
-      <id>Reserve</id>
-      <name>itemis</name>
-      <url>http://reserve.itemis.de/eclipse/releases/indigo</url>
-      <mirrorOf>indigo</mirrorOf>
-      <layout>p2</layout>
-      <mirrorOfLayouts>p2</mirrorOfLayouts>
-    </mirror>
-    <mirror>
-      <id>Reserve3</id>
-      <name>eclipse37</name>
-      <url>http://reserve.itemis.de/eclipse/eclipse/updates/3.7</url>
-      <mirrorOf>eclipse37</mirrorOf>
-      <layout>p2</layout>
-      <mirrorOfLayouts>p2</mirrorOfLayouts>
-    </mirror>
-  </mirrors>
-  <proxies/>
-  <profiles/>
-  <activeProfiles/>
+	<localRepository />
+	<interactiveMode />
+	<usePluginRegistry />
+	<offline />
+	<pluginGroups />
+	<servers>
+		<server>
+			<id>nexus-projects.itemis.de</id>
+			<username>${P2_SERVER_USER}</username>
+			<password>${P2_SERVER_PASSWORD}</password>
+		</server>
+	</servers>
+	<mirrors>
+		<mirror>
+			<id>Reserve</id>
+			<name>itemis</name>
+			<url>http://reserve.itemis.de/eclipse/releases/indigo</url>
+			<mirrorOf>indigo</mirrorOf>
+			<layout>p2</layout>
+			<mirrorOfLayouts>p2</mirrorOfLayouts>
+		</mirror>
+		<mirror>
+			<id>Reserve3</id>
+			<name>eclipse37</name>
+			<url>http://reserve.itemis.de/eclipse/eclipse/updates/3.7</url>
+			<mirrorOf>eclipse37</mirrorOf>
+			<layout>p2</layout>
+			<mirrorOfLayouts>p2</mirrorOfLayouts>
+		</mirror>
+	</mirrors>
+	<proxies />
+	<profiles />
+	<activeProfiles />
 </settings>
