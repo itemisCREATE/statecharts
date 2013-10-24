@@ -341,6 +341,58 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>enableSigning</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>de.itemis.signing</groupId>
+						<artifactId>itemis-jarsigner</artifactId>
+						<version>0.0.3</version>
+						<configuration>
+							<sshKey>${ssh.key}</sshKey>
+						</configuration>
+						<executions>
+							<execution>
+								<id>sign</id>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+								<phase>package</phase>
+							</execution>
+						</executions>
+					</plugin>
+					<!-- pack plugins with pack200, which are smaller class files (Part 
+						II) and add them to p2-metadata -->
+					<!-- Configured again to place behind jarsigner in same phase -->
+					<plugin>
+						<groupId>org.eclipse.tycho.extras</groupId>
+						<artifactId>tycho-pack200b-plugin</artifactId>
+						<version>${tycho-extras-version}</version>
+						<executions>
+							<execution>
+								<id>pack200-pack</id>
+								<goals>
+									<goal>pack</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+			<pluginRepositories>
+				<pluginRepository>
+					<id>nexus-projects.itemis.de</id>
+					<url>https://projects.itemis.de/nexus/content/groups/maven-plugins/</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+				</pluginRepository>
+			</pluginRepositories>
+		</profile>
 	</profiles>
 
 	<modules>
