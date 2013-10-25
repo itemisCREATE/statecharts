@@ -75,8 +75,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
- * @author andreas muelder - Initial contribution and APIimport
- *         org.yakindu.sct.model.sgraph.test.util.SGraphTestModelUtil;
+ * @author andreas muelder - Initial contribution and API
  * 
  */
 @RunWith(XtextRunner.class)
@@ -138,6 +137,49 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	@Test
 	public void checkReactionEffectActionExpression() {
 		// covered by inferrer tests
+	}
+
+	@Test
+	public void checkLeftHandAssignment() {
+		
+		Scope scope = (Scope) parseExpression(
+				"interface if : operation myOperation() : boolean event Event1 : boolean var myVar : boolean", null,
+				InterfaceScope.class.getSimpleName());
+
+		EObject model = super.parseExpression("3 = 3", Expression.class.getSimpleName(), scope);
+		AssertableDiagnostics validationResult = tester.validate(model);
+		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+
+		// Check for referenced elements in interface
+		model = super.parseExpression("if.myOperation() = true", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+
+		model = super.parseExpression("if.Event1 = true", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+
+		model = super.parseExpression("if.myVar = true", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+
+		// check for internal referenced elements
+		scope = (Scope) parseExpression(
+				"internal : operation myOperation() : integer event Event1 : integer var myVar : integer", null,
+				InternalScope.class.getSimpleName());
+
+		model = super.parseExpression("myOperation() = 5", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+
+		model = super.parseExpression("Event1 = 3", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+
+		model = super.parseExpression("myVar = 5", Expression.class.getSimpleName(), scope);
+		validationResult = tester.validate(model);
+		validationResult.assertOK();
+
 	}
 
 	/**
