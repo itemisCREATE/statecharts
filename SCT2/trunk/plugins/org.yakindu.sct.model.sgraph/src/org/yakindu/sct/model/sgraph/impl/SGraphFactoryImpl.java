@@ -56,7 +56,7 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	 */
 	public static SGraphFactory init() {
 		try {
-			SGraphFactory theSGraphFactory = (SGraphFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.yakindu.org/sct/sgraph/2.0.0"); 
+			SGraphFactory theSGraphFactory = (SGraphFactory)EPackage.Registry.INSTANCE.getEFactory(SGraphPackage.eNS_URI);
 			if (theSGraphFactory != null) {
 				return theSGraphFactory;
 			}
