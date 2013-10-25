@@ -77,7 +77,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	def dispatch create new ExecutionVariableImpl() transform(OperationDefinition op) {
 		it.name = op.fullyQualifiedName.lastSegment
 		it.fqName = op.fullyQualifiedName.toString
-		it.type = new InferredType(op.type)
+		it.type = new InferredType(if(op.type != null) op.type else voidType)
 		it.value = it.type.defaultValue
 	}
 
