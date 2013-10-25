@@ -41,13 +41,14 @@ public class SimulationActivator extends AbstractUIPlugin {
 		super.start(context);
 		plugin = this;
 		SCTHotModelReplacementManager.INSTANCE.addReplacementListener(hotModelReplacementListener);
+		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(manager);
 	}
 
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
 		super.stop(context);
 		SCTHotModelReplacementManager.INSTANCE.removeReplacementListener(hotModelReplacementListener);
-		DebugPlugin.getDefault().getLaunchManager().addLaunchListener(manager);
+		DebugPlugin.getDefault().getLaunchManager().removeLaunchListener(manager);
 	}
 
 	public static SimulationActivator getDefault() {
