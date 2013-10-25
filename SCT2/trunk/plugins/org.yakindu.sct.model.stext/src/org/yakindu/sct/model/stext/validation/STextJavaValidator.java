@@ -49,6 +49,7 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
@@ -116,6 +117,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String EXIT_UNUSED = "The named exit is not used by outgoing transitions.";
 	public static final String EXIT_DEFAULT_UNUSED = "The parent composite state has no 'default' exit transition.";
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
+	public static final String LEFT_HAND_ASSIGNMENT = "The left-hand side of an assignment must be a variable";
 
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
@@ -135,22 +137,14 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				&& entry.getIncomingTransitions().isEmpty()) {
 			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) entry.getParentRegion()
 					.getComposite();
-
 			if (!STextValidationModelUtils.isDefault(entry)) {
-
 				boolean hasIncomingTransition = false;
 				Iterator<Transition> transitionIt = state.getIncomingTransitions().iterator();
-
 				while (transitionIt.hasNext() && !hasIncomingTransition) {
-
 					Iterator<ReactionProperty> propertyIt = transitionIt.next().getProperties().iterator();
-
 					while (propertyIt.hasNext() && !hasIncomingTransition) {
-
 						ReactionProperty property = propertyIt.next();
-
 						if (property instanceof EntryPointSpec) {
-
 							hasIncomingTransition = entry.getName().equals(((EntryPointSpec) property).getEntrypoint());
 						}
 					}
@@ -163,6 +157,25 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	}
 
 	@Check(CheckType.FAST)
+	public void checkLeftHandAssignment(final AssignmentExpression expression) {
+		Expression varRef = expression.getVarRef();
+		if (varRef instanceof FeatureCall) {
+			EObject referencedObject = ((FeatureCall) varRef).getFeature();
+			if (!(referencedObject instanceof Variable)) {
+				error(LEFT_HAND_ASSIGNMENT, StextPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
+			}
+		} else if (varRef instanceof ElementReferenceExpression) {
+			EObject referencedObject = ((ElementReferenceExpression) varRef).getReference();
+			if (!(referencedObject instanceof Variable)) {
+				error(LEFT_HAND_ASSIGNMENT, StextPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
+			}
+
+		} else {
+			error(LEFT_HAND_ASSIGNMENT, StextPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
+		}
+	}
+
+	@Check(CheckType.FAST)
 	public void checkUnusedExit(final Exit exit) {
 		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State
 				&& exit.getOutgoingTransitions().isEmpty()) {
@@ -170,14 +183,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 					.getComposite();
 
 			if (!STextValidationModelUtils.isDefault(exit)) {
-
 				boolean hasOutgoingTransition = false;
 				Iterator<Transition> transitionIt = state.getOutgoingTransitions().iterator();
-
 				while (transitionIt.hasNext() && !hasOutgoingTransition) {
-
 					Transition transition = transitionIt.next();
-
 					hasOutgoingTransition = STextValidationModelUtils.isDefaultExitTransition(transition) ? true
 							: STextValidationModelUtils.isNamedExitTransition(transition, exit.getName());
 				}
