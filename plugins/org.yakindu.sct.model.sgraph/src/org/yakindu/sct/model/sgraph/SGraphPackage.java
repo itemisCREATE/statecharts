@@ -211,22 +211,13 @@ public interface SGraphPackage extends EPackage {
 	int REGION__VERTICES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Priority</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REGION__PRIORITY = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Composite</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REGION__COMPOSITE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int REGION__COMPOSITE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Region</em>' class.
@@ -235,7 +226,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REGION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int REGION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.SpecificationElementImpl <em>Specification Element</em>}' class.
@@ -339,22 +330,13 @@ public interface SGraphPackage extends EPackage {
 	int TRANSITION__SOURCE = SPECIFICATION_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
-	 * The feature id for the '<em><b>Priority</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TRANSITION__PRIORITY = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
-
-	/**
 	 * The number of structural features of the '<em>Transition</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TRANSITION_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
+	int TRANSITION_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.RegularStateImpl <em>Regular State</em>}' class.
@@ -1427,17 +1409,6 @@ public interface SGraphPackage extends EPackage {
 	EReference getRegion_Vertices();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.Region#getPriority <em>Priority</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Priority</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Region#getPriority()
-	 * @see #getRegion()
-	 * @generated
-	 */
-	EAttribute getRegion_Priority();
-
-	/**
 	 * Returns the meta object for the container reference '{@link org.yakindu.sct.model.sgraph.Region#getComposite <em>Composite</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1479,17 +1450,6 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getTransition_Source();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.Transition#getPriority <em>Priority</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Priority</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Transition#getPriority()
-	 * @see #getTransition()
-	 * @generated
-	 */
-	EAttribute getTransition_Priority();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.FinalState <em>Final State</em>}'.
@@ -2037,14 +1997,6 @@ public interface SGraphPackage extends EPackage {
 		EReference REGION__VERTICES = eINSTANCE.getRegion_Vertices();
 
 		/**
-		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute REGION__PRIORITY = eINSTANCE.getRegion_Priority();
-
-		/**
 		 * The meta object literal for the '<em><b>Composite</b></em>' container reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2077,14 +2029,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TRANSITION__SOURCE = eINSTANCE.getTransition_Source();
-
-		/**
-		 * The meta object literal for the '<em><b>Priority</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TRANSITION__PRIORITY = eINSTANCE.getTransition_Priority();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.FinalStateImpl <em>Final State</em>}' class.

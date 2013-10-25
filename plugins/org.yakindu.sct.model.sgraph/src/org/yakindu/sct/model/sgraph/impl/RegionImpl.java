@@ -35,7 +35,6 @@ import org.yakindu.sct.model.sgraph.Vertex;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.RegionImpl#getVertices <em>Vertices</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.RegionImpl#getPriority <em>Priority</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.RegionImpl#getComposite <em>Composite</em>}</li>
  * </ul>
  * </p>
@@ -59,26 +58,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 	 * @ordered
 	 */
 	protected EList<Vertex> vertices;
-
-	/**
-	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPriority()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int PRIORITY_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getPriority() <em>Priority</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPriority()
-	 * @generated
-	 * @ordered
-	 */
-	protected int priority = PRIORITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -109,27 +88,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 			vertices = new EObjectContainmentWithInverseEList.Resolving<Vertex>(Vertex.class, this, SGraphPackage.REGION__VERTICES, SGraphPackage.VERTEX__PARENT_REGION);
 		}
 		return vertices;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public int getPriority() {
-		return priority;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setPriority(int newPriority) {
-		int oldPriority = priority;
-		priority = newPriority;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.REGION__PRIORITY, oldPriority, priority));
 	}
 
 	/**
@@ -242,8 +200,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 		switch (featureID) {
 			case SGraphPackage.REGION__VERTICES:
 				return getVertices();
-			case SGraphPackage.REGION__PRIORITY:
-				return getPriority();
 			case SGraphPackage.REGION__COMPOSITE:
 				if (resolve) return getComposite();
 				return basicGetComposite();
@@ -264,9 +220,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 				getVertices().clear();
 				getVertices().addAll((Collection<? extends Vertex>)newValue);
 				return;
-			case SGraphPackage.REGION__PRIORITY:
-				setPriority((Integer)newValue);
-				return;
 			case SGraphPackage.REGION__COMPOSITE:
 				setComposite((CompositeElement)newValue);
 				return;
@@ -285,9 +238,6 @@ public class RegionImpl extends NamedElementImpl implements Region {
 			case SGraphPackage.REGION__VERTICES:
 				getVertices().clear();
 				return;
-			case SGraphPackage.REGION__PRIORITY:
-				setPriority(PRIORITY_EDEFAULT);
-				return;
 			case SGraphPackage.REGION__COMPOSITE:
 				setComposite((CompositeElement)null);
 				return;
@@ -305,28 +255,10 @@ public class RegionImpl extends NamedElementImpl implements Region {
 		switch (featureID) {
 			case SGraphPackage.REGION__VERTICES:
 				return vertices != null && !vertices.isEmpty();
-			case SGraphPackage.REGION__PRIORITY:
-				return priority != PRIORITY_EDEFAULT;
 			case SGraphPackage.REGION__COMPOSITE:
 				return basicGetComposite() != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (priority: ");
-		result.append(priority);
-		result.append(')');
-		return result.toString();
 	}
 
 } //RegionImpl
