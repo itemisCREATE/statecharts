@@ -68,7 +68,6 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 
 			addDocumentationPropertyDescriptor(object);
 			addTargetPropertyDescriptor(object);
-			addPriorityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,28 +112,6 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 				 false,
 				 true,
 				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Priority feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addPriorityPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Transition_priority_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Transition_priority_feature", "_UI_Transition_type"),
-				 SGraphPackage.Literals.TRANSITION__PRIORITY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -212,7 +189,6 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 
 		switch (notification.getFeatureID(Transition.class)) {
 			case SGraphPackage.TRANSITION__DOCUMENTATION:
-			case SGraphPackage.TRANSITION__PRIORITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SGraphPackage.TRANSITION__TRIGGER:
