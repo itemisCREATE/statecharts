@@ -524,7 +524,8 @@ public class STextDefaultTypeSystem extends AbstractTypeSystem implements ISText
 		if (type instanceof EnumerationType) {
 			return ((EnumerationType) type).getEnumerator().get(0);
 		}
-		throw new RuntimeException("No default value for type " + type);
+		return null;
+		
 	}
 
 	public Object defaultValue(InferredType type) {
