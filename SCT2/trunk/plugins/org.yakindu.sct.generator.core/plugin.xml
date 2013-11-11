@@ -44,6 +44,14 @@
        </FeatureLibrary>
     </SCTGenerator>
  </extension>
+    <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::xpand">
+      </ExtensionGeneratorMapping>
+   </extension>
+ 
  <extension
        point="org.yakindu.sct.generator.core.generator">
    <SCTGenerator
@@ -61,6 +69,14 @@
       </FeatureLibrary>
     </SCTGenerator>
  </extension>
+    <extension
+         point="org.yakindu.sct.generator.core.extensions">
+      <ExtensionGeneratorMapping
+            fileExtension="sct"
+            generatorId="yakindu::generic">
+      </ExtensionGeneratorMapping>
+   </extension>
+ 
   <extension
          id="org.yakindu.sct.builder.SCTBuilder"
          name="YAKINDU SCT Builder"
