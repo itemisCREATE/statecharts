@@ -6,9 +6,10 @@
        <SCTGenerator
             class="org.yakindu.sct.generator.java.JavaCodeGenerator"
             description="YAKINDU SCT Java Code Generator"
-            id="yakindu::java"
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            icon="icons/sct.png"
+            id="yakindu::java"
             name="YAKINDU SCT Java Code Generator">
           <FeatureLibrary
                 library_id="org.yakindu.generator.core.features">
