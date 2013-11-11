@@ -22,8 +22,8 @@ import org.yakindu.sct.generator.core.extensions.GeneratorExtensions.GeneratorDe
  */
 public enum CoreGenerator {
 
-	Java("yakindu::java"), C("yakindu::c"), Cpp("yakindu::cpp"), GenericJava(
-			"yakindu::generic"), Xpand("yakindu::xpand");
+	Java("yakindu::java"), C("yakindu::c"), Cpp("yakindu::cpp"), GenericJava("yakindu::generic"), Xpand(
+			"yakindu::xpand");
 
 	private String id;
 
@@ -51,8 +51,7 @@ public enum CoreGenerator {
 		if (Xpand.id.equals(id)) {
 			return Xpand;
 		}
-		throw new IllegalArgumentException(String.format(
-				"No such generator id '%s'", id));
+		throw new IllegalArgumentException(String.format("No such generator id '%s'", id));
 	}
 
 	/**
@@ -76,7 +75,6 @@ public enum CoreGenerator {
 			}
 			int result = Integer.valueOf(a).compareTo(b);
 			if (result == 0) {
-				//FIXME NullPointerCheck: sth could be null
 				result = o1.getName().compareTo(o2.getName());
 			}
 			return result;
