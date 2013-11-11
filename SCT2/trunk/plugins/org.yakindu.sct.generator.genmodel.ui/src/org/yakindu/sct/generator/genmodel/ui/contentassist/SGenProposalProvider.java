@@ -15,6 +15,7 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.sct.generator.core.extensions.GeneratorExtensions;
@@ -55,6 +56,13 @@ public class SGenProposalProvider extends AbstractSGenProposalProvider {
 					desc.getId(),
 					new StyledString((desc.getName() != null) ? desc.getName()
 							: "null"), desc.getImage(), context);
+
+			if (proposal instanceof ConfigurableCompletionProposal) {
+				ConfigurableCompletionProposal configurable = (ConfigurableCompletionProposal) proposal;
+				configurable.setAdditionalProposalInfo(desc.getDescription());
+			}
+
+
 			acceptor.accept(proposal);
 		}
 	}
