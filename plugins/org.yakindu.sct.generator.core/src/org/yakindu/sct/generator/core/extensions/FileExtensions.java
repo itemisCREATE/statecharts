@@ -17,6 +17,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 
 /**
  * 
@@ -49,20 +51,35 @@ public class FileExtensions {
 	}
 
 	public static Iterable<FileExtensionDescriptor> getFileExtensions() {
-		IConfigurationElement[] configurationElements = Platform
-				.getExtensionRegistry().getConfigurationElementsFor(
-						EXTENSION_POINT_ID);
+		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSION_POINT_ID);
 		if (generatorDescriptors == null) {
-			generatorDescriptors = transform(
-					newArrayList(configurationElements),
-					new CreateFileExtensions());
+			generatorDescriptors = transform(newArrayList(configurationElements), new CreateFileExtensions());
 		}
 		return generatorDescriptors;
 	}
 
+	public static String getFileExtension(final String generatorId) {
+		FileExtensionDescriptor descriptor = Iterables.find(getFileExtensions(), new Predicate<FileExtensionDescriptor>() {
+			public boolean apply(FileExtensionDescriptor input) {
+				return generatorId.equals(input.getGeneratorId());
+			}
+		});
+		return descriptor.getExtension();
+	}
 
-	private static final class CreateFileExtensions implements
-			Function<IConfigurationElement, FileExtensionDescriptor> {
+	public static String getGeneratorForFileExtension(String extension) {
+
+		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(EXTENSION_POINT_ID);
+
+		for (IConfigurationElement x : configurationElements) {
+			if (x.getAttribute(FILE_EXTENSION).equals(extension)) {
+				return x.getAttribute(GENERATOR_ID);
+			}
+		}
+		return null;
+	}
+
+	private static final class CreateFileExtensions implements Function<IConfigurationElement, FileExtensionDescriptor> {
 
 		public FileExtensionDescriptor apply(IConfigurationElement from) {
 			return new FileExtensionDescriptor(from);
