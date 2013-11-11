@@ -9,6 +9,7 @@
             contentType="statechart"
             description="YAKINDU SCT C++ Code Generator"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
+            icon="icons/sct.png"
             id="yakindu::cpp"
             name="YAKINDU SCT C++ Code Generator">
          <FeatureLibrary

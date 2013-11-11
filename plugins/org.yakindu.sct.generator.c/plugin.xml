@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
-
 <plugin>
    <extension
          point="org.yakindu.sct.generator.core.generator">
@@ -9,6 +8,7 @@
             contentType="statechart"
             elementRefType="org.yakindu.sct.model.sgraph.Statechart"
             description="YAKINDU SCT C Code Generator"
+            icon="icons/sct.png"
             id="yakindu::c"
             name="YAKINDU SCT C Code Generator">
          <FeatureLibrary
