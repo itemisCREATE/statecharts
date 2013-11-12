@@ -38,6 +38,7 @@ import java.util.Iterator;
 
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -48,13 +49,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
+import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.resource.impl.StextResource;
 import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -141,7 +147,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 
 	@Test
 	public void checkLeftHandAssignment() {
-		
+
 		Scope scope = (Scope) parseExpression(
 				"interface if : operation myOperation() : boolean event Event1 : boolean var myVar : boolean", null,
 				InterfaceScope.class.getSimpleName());
@@ -551,6 +557,106 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 			}
 		}
 		assertIssueCount(diagnostics, 4);
+	}
+
+	/**
+	 * Show warning when transition has no guard
+	 */
+	@Test
+	public void transitionsWithNoTrigger() {
+
+		StextResource resource = new StextResource(URI.createURI(""));
+		injector.injectMembers(resource);
+		SGraphFactory factory = SGraphFactory.eINSTANCE;
+		Statechart statechart = factory.createStatechart();
+		resource.getContents().add(statechart);
+		Region region = factory.createRegion();
+
+		// create vertices for main region
+		Entry entry = factory.createEntry();
+		State a = factory.createState();
+		a.setName("A");
+		State b = factory.createState();
+		b.setName("B");
+		State c = factory.createState();
+		c.setName("C");
+		State d = factory.createState();
+		c.setName("D");
+		Choice e = factory.createChoice();
+		State f = factory.createState();
+		f.setName("F");
+		Transition entryToA = createTransition(entry, a);
+		Transition aToB = createTransition(a, b);
+		Transition bToC = createTransition(b, c);
+		Transition cToD = createTransition(c, d);
+		Transition eToF = createTransition(e, f);
+
+		// create vertices for compositState
+		State bb = factory.createState();
+		bb.setName("BB");
+		Entry entryB = factory.createEntry();
+		Exit exitB = factory.createExit();
+
+		Region b_region = factory.createRegion();
+		b_region.getVertices().add(entryB);
+		b_region.getVertices().add(bb);
+		b_region.getVertices().add(exitB);
+		b.getRegions().add(b_region);
+		Transition entryBToBB = createTransition(entryB, bb);
+		Transition bbToExitB = createTransition(bb, exitB);
+
+		region.getVertices().add(entry);
+		region.getVertices().add(a);
+		region.getVertices().add(b);
+		region.getVertices().add(c);
+		region.getVertices().add(d);
+		statechart.getRegions().add(region);
+
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		// transitions from entry point to State A -> valid model with no
+		// warnings
+		assertTrue(validator.validate(eToF, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
+
+		// transitions from entry point to State A -> valid model with no
+		// warnings
+		assertTrue(validator.validate(entryToA, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
+
+		// transition from StateA to StateB -> valid model with warnings expect
+		// 1 warning in total
+		assertTrue(validator.validate(aToB, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+
+		// transition from EntryB to StateBB -> valid model with no warnings
+		// expect 1 warning in total
+		assertTrue(validator.validate(entryBToBB, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+
+		// transition from BB to ExitB -> valid model with warnings expect 2
+		// warning in total
+		assertTrue(validator.validate(bbToExitB, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 2);
+
+		// transition from B to C -> valid model with no warning warnings expect
+		// 2 warning in total
+		assertTrue(validator.validate(bToC, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 2);
+
+		// transition from C to D -> valid model with warning warning expect 3
+		// warning in total
+		assertTrue(validator.validate(cToD, diagnostics, new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 3);
+
+	}
+
+	protected Transition createTransition(Vertex source, Vertex target) {
+		Transition trans = SGraphFactory.eINSTANCE.createTransition();
+		trans.setSource(source);
+		trans.setTarget(target);
+		source.getOutgoingTransitions().add(trans);
+		target.getIncomingTransitions().add(trans);
+		return trans;
 	}
 
 	protected void assertError(BasicDiagnostic diag, String message) {
