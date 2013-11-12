@@ -50,6 +50,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Variable;
+import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
@@ -118,6 +119,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String EXIT_DEFAULT_UNUSED = "The parent composite state has no 'default' exit transition.";
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
 	public static final String LEFT_HAND_ASSIGNMENT = "The left-hand side of an assignment must be a variable";
+	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transisition is never taken. Use 'oncycle' or 'always' instead";
 
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
@@ -130,6 +132,29 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
+
+	@Check(CheckType.FAST)
+	public void transitionsWithNoTrigger(Transition trans) {
+		if (trans.getSource() instanceof Entry || trans.getSource() instanceof Choice) {
+			return;
+		}
+		if (trans.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
+			org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) trans.getSource();
+			if (state.isComposite()) {
+				for (Region r : state.getRegions()) {
+					for (Vertex v : r.getVertices()) {
+						if (v instanceof Exit) {
+							return;
+						}
+					}
+				}
+			}
+		}
+		if (trans.getTrigger() == null) {
+			warning(ISSUE_TRANSITION_WITHOUT_TRIGGER, trans, null, -1);
+		}
+	}
+	
 
 	@Check(CheckType.FAST)
 	public void checkUnusedEntry(final Entry entry) {
