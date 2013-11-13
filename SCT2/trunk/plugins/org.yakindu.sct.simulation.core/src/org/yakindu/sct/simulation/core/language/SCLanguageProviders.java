@@ -30,12 +30,12 @@ import com.google.inject.util.Modules;
 public class SCLanguageProviders {
 
 	protected SCLanguages languages = new SCLanguages();
-	protected Map<ISCLanguage, ISCLanguageProvider> providerMap = new HashMap<ISCLanguage, ISCLanguageProvider>();
+	protected Map<String, ISCLanguageProvider> providerMap = new HashMap<String, ISCLanguageProvider>();
 	
 	public void addLanguageProvider(ISCLanguageProvider provider) {
 		if (! languages.contains(provider.getLanguage()) ) {
 			languages.addLanguage(provider.getLanguage());
-			providerMap.put(provider.getLanguage(), provider);
+			providerMap.put(provider.getLanguage().getId(), provider);
 		}
 	}
 	
@@ -59,7 +59,7 @@ public class SCLanguageProviders {
 	
 	
 	public Module getSimulationModuleForLanguage(ISCLanguage language) {
-		ISCLanguageProvider provider = providerMap.get(language);
+		ISCLanguageProvider provider = providerMap.get(language.getId());
 		Module module = provider.getSimulationModule();
 		
 		ISCLanguage baseLanguage = languages.getBaseLanguage(language);
