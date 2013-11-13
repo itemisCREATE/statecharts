@@ -48,6 +48,10 @@ import org.yakindu.sct.simulation.ui.SimulationImages;
  */
 public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements ISCTLaunchParameters {
 
+
+	public static final String LAUNCH_TAB_ID = "org.yakindu.sct.simulation.sexec.launchTab";
+	
+	
 	private Text modelfile;
 	private Text cyclePeriod;
 	private Text operationClass;
@@ -269,6 +273,17 @@ public class StatechartLaunchConfigurationTab extends JavaLaunchTab implements I
 		}
 		return true;
 	}
+	
+	
+	
+
+	@Override
+	public String getId() {
+		return LAUNCH_TAB_ID;
+	}
+
+
+
 
 	private class EnableStateListener implements Listener {
 		public void handleEvent(Event event) {
