@@ -7,7 +7,14 @@
           delegate="org.yakindu.sct.simulation.core.sexec.launch.SexecLaunchConfigurationDelegate"
           id="org.yakindu.sct.simulation.core.launch.statechart"
           modes="run"
-          name="YAKINDU Statechart">
+          name="Statechart Simulation">
     	</launchConfigurationType>
 	</extension>
+ 
+ <extension
+       point="org.yakindu.sct.simulation.core.languageprovider">
+    <SCLanguageProvider
+          class="org.yakindu.sct.simulation.core.sexec.SCTLanguageProvider">
+    </SCLanguageProvider>
+ </extension>
 </plugin>

@@ -23,12 +23,13 @@
    	 </launchConfigurationTabGroup>
 	</extension>
 	
+	
 	<!-- launch shortcuts -->
 	<extension point="org.eclipse.debug.ui.launchShortcuts">
 	    <shortcut
 	        id="org.yakindu.sct.core.simulation.launch.shortcut"
 	        class="org.yakindu.sct.simulation.ui.sexec.launch.StatechartLaunchShortcut"
-	        label="YAKINDU Statechart"
+	        label="Statechart Simulation"
 	        icon="icons/Statechart-Launcher-16.png"
 	        modes="run">
 	         <contextualLaunch>
