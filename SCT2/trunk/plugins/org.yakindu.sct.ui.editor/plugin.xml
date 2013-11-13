@@ -660,6 +660,30 @@
                      actionId="cut">
                </GlobalActionId>
             </ElementType>
+             <ElementType
+                  class="org.eclipse.gmf.runtime.diagram.ui.editparts.NoteEditPart">
+               <GlobalActionId
+                     actionId="delete">
+               </GlobalActionId>
+               <GlobalActionId
+                     actionId="copy">
+               </GlobalActionId>
+               <GlobalActionId
+                     actionId="cut">
+               </GlobalActionId>
+            </ElementType>
+             <ElementType
+                  class="org.eclipse.gmf.runtime.diagram.ui.internal.editparts.TextEditPart">
+               <GlobalActionId
+                     actionId="delete">
+               </GlobalActionId>
+               <GlobalActionId
+                     actionId="copy">
+               </GlobalActionId>
+               <GlobalActionId
+                     actionId="cut">
+               </GlobalActionId>
+            </ElementType>
             <ElementType
                   class="org.yakindu.sct.ui.editor.editparts.ExitEditPart">
                <GlobalActionId
