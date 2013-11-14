@@ -33,7 +33,7 @@ public class SimpleSCLanguage implements ISCLanguage {
 		return id;
 	}
 
-	public String gertName() {
+	public String getName() {
 		return name;
 	}
 
