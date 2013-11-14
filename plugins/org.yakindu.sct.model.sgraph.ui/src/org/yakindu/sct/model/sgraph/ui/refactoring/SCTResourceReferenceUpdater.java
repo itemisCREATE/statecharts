@@ -98,9 +98,9 @@ public class SCTResourceReferenceUpdater extends AbstractReferenceUpdater {
 			int indexInList, StatusWrapper statusWrapper) {
 		@SuppressWarnings("unchecked")
 		// Unchecked is ok, because we checked the instance before
-		List<Object> object = (List<Object>) eReference.eGet(eReference);
+		List<Object> object = (List<Object>) container.eGet(eReference);
 		Object value = object.remove(indexInList);
-		object.set(indexInList, value);
+		object.add(indexInList, value);
 	}
 
 	protected void updateReferenceSingle(EObject container, EReference reference,
