@@ -27,7 +27,7 @@ public interface ISCLanguage {
 	/**
 	 * A language also has a simple name.
 	 */
-	String gertName();
+	String getName();
 	
 	/** 
 	 * A statechart language can inherit from another language.
