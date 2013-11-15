@@ -5,7 +5,7 @@
 	</ModulePrefs>
 	<Content type="html">
 		<![CDATA[ 
-			<iframe src="http://www.youtube.com/embed/uO6MASCBPrg" allowfullscreen frameborder="0" width="853" height="480"  autoplay="1"> </iframe>		
+			<iframe src="http://www.youtube.com/embed/uO6MASCBPrg&autoplay=1" allowfullscreen frameborder="0" width="853" height="480"  autoplay="1"> </iframe>		
 		]]>
 	</Content>
 </Module>
