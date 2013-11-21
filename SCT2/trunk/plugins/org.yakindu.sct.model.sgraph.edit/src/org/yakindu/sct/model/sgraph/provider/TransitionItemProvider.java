@@ -29,6 +29,7 @@ import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
+import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.Transition} object.
@@ -171,9 +172,21 @@ public class TransitionItemProvider extends SpecificationElementItemProvider
 		String specification = transition.getSpecification() != null ? " ("
 				+ transition.getSpecification() + ")" : "";
 		
-		return transition.getSource().getName() + " -> "
-				+ transition.getTarget().getName()
+		return getVertexName(transition.getSource()) + " -> "
+				+ getVertexName(transition.getTarget())
 				+ specification;
+	}
+	
+	protected String getVertexName(Vertex vertex) {
+		if (vertex != null) {
+			if (vertex.getName() == null || vertex.getName().isEmpty()) {
+				String name = vertex.getClass().getSimpleName();
+				//cut "Impl" suffix from class name
+				return name.substring(0, name.length()-4);
+			}
+			return vertex.getName(); 
+		}
+		return ("N/A");
 	}
 
 	/**
