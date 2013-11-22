@@ -82,6 +82,15 @@ GeneratorModel for yakindu::java {
 		}
 		
 	}
+	
+	statechart EntryChoice {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+	}
+	
 	statechart EnterState {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"

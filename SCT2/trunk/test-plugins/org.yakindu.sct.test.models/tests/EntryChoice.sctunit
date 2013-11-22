@@ -1,0 +1,9 @@
+testgroup EntryChoice for statechart EntryChoice {
+	test EntryChoiceTest {
+		enter
+		cycle
+		cycle
+		assert active ( EntryChoice.main_region.A )
+	}
+}
+	
