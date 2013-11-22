@@ -80,6 +80,14 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
+	test EntryChoice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test ExitOnSelfTransition{
 		
 		feature Outlet{ 
