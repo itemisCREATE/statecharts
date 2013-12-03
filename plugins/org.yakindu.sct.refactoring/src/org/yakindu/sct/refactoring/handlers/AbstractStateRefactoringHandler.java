@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.refactoring.handlers;
 
+import java.util.Collections;
+
 import org.eclipse.jface.viewers.ISelection;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
@@ -30,7 +32,11 @@ public abstract class AbstractStateRefactoringHandler extends
 	public void setContext(AbstractRefactoring<State> refactoring,
 			ISelection selection) {
 		StateEditPart element = (StateEditPart) getFirstElement(selection);
-		State state = element.resolveSemanticElement();
-		refactoring.setContextObjects(Lists.newArrayList(state));
+		if (element == null) {
+			refactoring.setContextObjects(Collections.<State>emptyList());
+		} else {
+			State state = element.resolveSemanticElement();
+			refactoring.setContextObjects(Lists.newArrayList(state));
+		}
 	}
 }

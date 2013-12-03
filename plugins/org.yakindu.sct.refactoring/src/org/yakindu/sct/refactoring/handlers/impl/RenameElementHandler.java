@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.dialogs.IInputValidator;
 import org.eclipse.jface.dialogs.InputDialog;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.ui.IWorkbenchPartSite;
@@ -137,8 +138,18 @@ public class RenameElementHandler extends AbstractRefactoringHandler<NamedElemen
 	@Override
 	public boolean isEnabled() {
 		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
+		if (window == null) {
+			return false;
+		}
 		IWorkbenchPartSite site = window.getActivePage().getActiveEditor().getSite();
-		ISelection currentSelection = site.getSelectionProvider().getSelection();
+		if (site == null) {
+			return false;
+		}
+		ISelectionProvider selectionProvider = site.getSelectionProvider();
+		if (selectionProvider == null) {
+			return false;
+		}
+		ISelection currentSelection = selectionProvider.getSelection();
 		setContext(refactoring, currentSelection);
 		return refactoring.isExecutable();
 	}

@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.refactoring.handlers;
 
+import java.util.Collections;
+
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.ISelection;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
@@ -30,8 +32,12 @@ public abstract class AbstractViewRefactoringHandler extends
 	public void setContext(AbstractRefactoring<View> refactoring,
 			ISelection selection) {
 		StateEditPart firstElement = (StateEditPart) getFirstElement(selection);
-		refactoring.setContextObjects(Lists.newArrayList(firstElement
-				.getNotationView()));
+		if (firstElement == null) {
+			refactoring.setContextObjects(Collections.<View>emptyList());
+		} else {
+			refactoring.setContextObjects(Lists.newArrayList(firstElement
+					.getNotationView()));
+		}
 	}
 
 }
