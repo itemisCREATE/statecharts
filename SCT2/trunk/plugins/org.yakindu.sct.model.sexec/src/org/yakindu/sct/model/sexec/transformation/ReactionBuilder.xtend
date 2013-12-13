@@ -32,6 +32,7 @@ class ReactionBuilder {
 	@Inject extension SgraphExtensions sgraph
 	@Inject extension StatechartExtensions sct
 	@Inject extension TraceExtensions trace
+	@Inject extension BehaviorMapping behaviorMapping
 	
 	def defineStatechartReaction(ExecutionFlow flow, Statechart sc) {
 		val sequence = sexec.factory.createSequence
@@ -210,14 +211,16 @@ class ReactionBuilder {
 		//Reuse already created react sequence from defineStateEnterSequence(Entry) 
 		val seq = execEntry.reactSequence
 		val target = e.target.create
+		val targetEnterSequence = if (target != null && e.outgoingTransitions.size > 0) { e.outgoingTransitions.mapToStateConfigurationEnterSequence } else null
+			
 		
 		if ( trace.addTraceSteps ) seq.steps.add(0,execEntry.newTraceNodeExecuted)
 		
 		if (e.kind == EntryKind::INITIAL) {
-			if (target != null && target.enterSequences.defaultSequence != null) {
-				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
-				seq.steps += target.enterSequences.defaultSequence.newCall
+			if (targetEnterSequence != null) {
+				seq.steps += targetEnterSequence
 			}
+			
 		} else if (e.kind == EntryKind::SHALLOW_HISTORY) {
 			val entryStep = sexec.factory.createHistoryEntry
 			entryStep.name = "HistoryEntry"
@@ -226,10 +229,10 @@ class ReactionBuilder {
 			entryStep.region = (e.eContainer as Region).create
 			
 			//Initial step, if no history is known
-			if (target != null && target.enterSequences.defaultSequence != null) {
-				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
-				entryStep.initialStep = target.enterSequences.defaultSequence.newCall
+			if (targetEnterSequence != null) {
+				entryStep.initialStep = targetEnterSequence
 			}
+			
 			entryStep.historyStep = (e.eContainer as Region).create.shallowEnterSequence.newCall
 			
 			seq.steps += entryStep
@@ -241,10 +244,10 @@ class ReactionBuilder {
 			entryStep.deep = true
 			
 			//Initial step, if no history is known
-			if (target != null && target.enterSequences.defaultSequence != null) {
-				if (trace.addTraceSteps) seq.steps += e.outgoingTransitions.get(0).create.newTraceReactionFired
-				entryStep.initialStep = target.enterSequences.defaultSequence.newCall
+			if (targetEnterSequence != null) {
+				entryStep.initialStep = targetEnterSequence
 			}
+			
 			entryStep.historyStep =  (e.eContainer as Region).create.deepEnterSequence.newCall
 
 			seq.steps += entryStep

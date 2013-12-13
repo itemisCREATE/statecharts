@@ -60,6 +60,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS = "Entries must not have more than one outgoing transition";
 	public static final String ISSUE_ENTRY_WITH_TRIGGER = "Outgoing Transitions from Entries can not have a Trigger or Guard.";
 	public static final String ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION = "A choice must have at least one outgoing transition.";
+	public static final String ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY = "The region can't be entered using the shallow history. Add an entry node.";
 	public static final String ISSUE_SUBMACHINE_UNRESOLVABLE = "Referenced Substatemachine '%s'does not exist!";
 	public static final String ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL = "The target states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The target states of a synchronization have to be contained in the same parent state within different regions!";
@@ -183,6 +184,29 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
+	
+	@Check(CheckType.FAST)
+	public void regionCantBeEnteredUsingShallowHistory(org.yakindu.sct.model.sgraph.State s) {
+		
+		for (Vertex v : s.getParentRegion().getVertices()) {
+			if (v instanceof Entry && ((Entry)v).getKind() == EntryKind.SHALLOW_HISTORY) {
+				for (Region r : s.getRegions() ) {
+					boolean entryExists = false;
+					for (Vertex childVertex : r.getVertices() ) {
+						if ( childVertex instanceof Entry ) {
+							entryExists = true;
+						}
+					}
+					if (!entryExists ) {
+						error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY, r, null, -1);
+					}
+				}
+				break;
+			}
+		}
+	}
+
+	
 	@Check(CheckType.FAST)
 	public void orthogonalStates(Synchronization fork) {
 		// check target states
@@ -191,7 +215,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		orthogonalStates(fork, false);
 	}
 
-
+	
+	
 	private void orthogonalStates(Synchronization fork, boolean searchTarget) {
 		List<Transition> transitions = searchTarget ? fork.getOutgoingTransitions() : fork.getIncomingTransitions();
 		if (transitions.size() > 1) {

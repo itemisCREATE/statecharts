@@ -199,7 +199,15 @@ class SequenceBuilder {
 		state.regions.forEach( r | r.defineScopeEnterSequences )
 		
 		// get all entry point names used by incoming transitions
-		val entryPointNames = state.incomingTransitions.map( t | t.entryPointName ).toSet.toList.sortInplace
+		val entryPointNames = state.incomingTransitions.map( t | t.entryPointName ).toSet.toList
+		
+		// also include implicit entries by histories
+		if (state.parentRegion.requireHistory) {
+			if (!entryPointNames.contains('default')) entryPointNames.add('default')
+		}   
+		
+		// sort entry points by name ...
+		entryPointNames.sortInplace
 		
 		// create an entry sequence for each entry point
 		for ( epName : entryPointNames ) {
