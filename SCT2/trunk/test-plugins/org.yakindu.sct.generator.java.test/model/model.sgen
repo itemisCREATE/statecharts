@@ -55,6 +55,17 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+	statechart DeepEntry {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
 	statechart ExitOnSelfTransition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"

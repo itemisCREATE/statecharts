@@ -16,9 +16,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({AlwaysOncycle.class, AssignmentAsExpression.class,
 		BitExpressions.class, BooleanExpressions.class, Choice.class,
-		CKeywords.class, Declarations.class, DeepHistory.class,
-		EnterState.class, ExitOnSelfTransition.class, ExitState.class,
-		Guard.class, GuardedEntry.class, GuardedExit.class,
+		CKeywords.class, Declarations.class, DeepEntry.class,
+		DeepHistory.class, EnterState.class, ExitOnSelfTransition.class,
+		ExitState.class, Guard.class, GuardedEntry.class, GuardedExit.class,
 		HistoryWithoutInitialStep.class, InEventLifeCycle.class,
 		IntegerExpressions.class, InternalEventLifeCycle.class,
 		LogicalAndTests.class, LogicalOrTests.class,
@@ -28,6 +28,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		StatechartLocalReactions.class, SimpleHierachy.class,
 		StateIsActive.class, STextKeywordsInStatesAndRegions.class,
 		StringExpressions.class, SyncFork.class, SyncJoin.class,
-		TransitionWithoutCondition.class, ValuedEvents.class})
+		TransitionWithoutCondition.class, ValuedEvents.class, EntryChoice.class})
 public class AllTests {
 }

@@ -64,6 +64,14 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
+	test DeepEntry {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
 	test DeepHistory{
 		
 		feature Outlet{ 

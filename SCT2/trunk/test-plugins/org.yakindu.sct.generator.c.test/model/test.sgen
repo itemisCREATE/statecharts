@@ -72,6 +72,14 @@ GeneratorModel for sctunit::c {
 		}			
 	}
 	
+	test DeepEntry{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test EnterState{
 		
 		feature Outlet{ 

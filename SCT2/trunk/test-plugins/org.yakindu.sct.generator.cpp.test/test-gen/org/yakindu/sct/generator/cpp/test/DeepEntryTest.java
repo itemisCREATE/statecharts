@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.generator.c.test;
+package org.yakindu.sct.generator.cpp.test;
 
 import java.util.Collection;
 
@@ -18,16 +18,16 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/EntryChoice/EntryChoice.cc", program = "gtests/EntryChoice/EntryChoice", model = "testmodels/SCTUnit/EntryChoice.sct")
+@GTest(sourceFile = "gtests/DeepEntryTest/DeepEntryTest.cc", program = "gtests/DeepEntryTest/DeepEntry", model = "testmodels/SCTUnit/DeepEntry.sct")
 @RunWith(GTestRunner.class)
-public class EntryChoice {
+public class DeepEntryTest {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
 
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
 			super.getSourceFiles(files);
-			files.add(getFileName(getTestProgram()) + ".c");
+			files.add(getFileName(getTestProgram()) + ".cpp");
 		}
 	};
 
