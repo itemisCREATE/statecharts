@@ -6,6 +6,7 @@ testsuite AllTests {
 	Choice, 
 	CKeywords,
 	Declarations, 
+	DeepEntry,
 	DeepHistory,
 	EnterState, 
 	ExitOnSelfTransition, 

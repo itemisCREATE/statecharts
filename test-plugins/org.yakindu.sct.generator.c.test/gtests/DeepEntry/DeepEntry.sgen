@@ -1,8 +1,8 @@
 GeneratorModel for yakindu::c {
-	statechart EntryChoice {
+	statechart DeepEntry {
 		feature Outlet {
 			targetProject = "gtests"
-			targetFolder = "EntryChoice"
+			targetFolder = "DeepEntry"
 		}
 	}
 }

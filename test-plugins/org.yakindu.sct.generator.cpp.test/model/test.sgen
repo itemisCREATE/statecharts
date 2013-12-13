@@ -64,7 +64,15 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
-	test DeepHistory{
+	test DeepEntry {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test DeepHistory {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 

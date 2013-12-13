@@ -1,0 +1,28 @@
+
+
+testgroup DeepEntry for statechart DeepEntry {
+	
+	test enterToSubstate {
+		
+		assert x == 0
+		assert y == 0
+		assert z == 0
+		enter
+		assert x == 1
+		assert y == 1
+		assert z == 2
+		
+		raise e
+		cycle
+		assert active ( DeepEntry.r2.B.r.BB )
+
+		raise f
+		cycle
+		assert active ( DeepEntry.r2.C )
+		
+		raise f
+		cycle
+		assert active ( DeepEntry.r2.B.r.BB )
+		assert y == 1
+	}
+}
