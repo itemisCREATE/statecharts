@@ -10,25 +10,8 @@
  */
 package org.yakindu.sct.model.sgraph.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_ENTRY_WITH_TRIGGER;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_FINAL_STATE_OUTGOING_TRANSITION;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_INITIAL_ENTRY_WITH_IN_TRANS;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_NODE_NOT_REACHABLE;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_NAME;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_STATE_WITHOUT_OUTGOING_TRANSITION;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE;
-import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.ISSUE_SYNCHRONIZATION_TRANSITION_COUNT;
+import static org.junit.Assert.*;
+import static org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator.*;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.lang.reflect.Method;
@@ -561,6 +544,24 @@ public class SGraphJavaValidationTest {
 
 		assertIssueCount(diagnostics, 0);
 	}
+
+	
+	@Test
+	public void regionCantBeEnteredUsingShallowHistory() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "RegionCantBeEnteredUsingShallowHistory.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof State) {
+				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY);
+	}
+
 
 	/**
 	 * checks that each @Check method of {@link STextJavaValidator} has a @Test
