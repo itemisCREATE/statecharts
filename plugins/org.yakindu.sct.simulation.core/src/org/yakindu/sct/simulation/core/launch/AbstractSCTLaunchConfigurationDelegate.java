@@ -41,12 +41,16 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 	public void launch(ILaunchConfiguration configuration, String mode, ILaunch launch, IProgressMonitor monitor)
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
-		Statechart statechart = ResourceUtil.loadStatechart(filename);
+		Statechart statechart = loadStatechart(filename);
 		Assert.isNotNull(statechart);
 		SCTDebugTarget target = new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
 		launch.addDebugTarget(target);
 		target.start();
 
+	}
+
+	protected Statechart loadStatechart(String filename) {
+		return ResourceUtil.loadStatechart(filename);
 	}
 
 	@Override
