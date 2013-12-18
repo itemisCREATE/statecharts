@@ -39,12 +39,13 @@ class Types {
 		#include <stdint.h>
 		#include <stdbool.h>
 		
-		typedef int_fast16_t  sc_short;
-		typedef uint_fast16_t sc_ushort;
-		typedef int32_t       sc_integer; 
-		typedef uint32_t      sc_uinteger; 
-		typedef double        sc_real;
-		typedef char*         sc_string;
+		typedef bool			sc_boolean
+		typedef int_fast16_t	sc_short;
+		typedef uint_fast16_t	sc_ushort;
+		typedef int32_t			sc_integer; 
+		typedef uint32_t		sc_uinteger; 
+		typedef double			sc_real;
+		typedef char*			sc_string;
 		
 		typedef void*         sc_eventid;
 		
@@ -52,7 +53,6 @@ class Types {
 		}
 		#endif
 		
-		#define sc_boolean bool
 		#define bool_true true
 		#define bool_false false
 
