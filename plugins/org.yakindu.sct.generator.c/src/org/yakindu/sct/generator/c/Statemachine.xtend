@@ -124,9 +124,7 @@ class Statemachine {
 			«ENDFOR»
 		} «it.type»;
 
-	'''	
-
-//	def dispatch scopeTypeDecl(Scope it) ''''''	
+	'''
 
 	def statemachineTypeDecl(ExecutionFlow it) '''
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
