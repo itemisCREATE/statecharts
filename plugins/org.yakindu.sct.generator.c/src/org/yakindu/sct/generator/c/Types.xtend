@@ -47,7 +47,7 @@ class Types {
 		typedef double			sc_real;
 		typedef char*			sc_string;
 		
-		typedef void*         sc_eventid;
+		typedef void*			sc_eventid;
 		
 		#ifdef __cplusplus
 		}

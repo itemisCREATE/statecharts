@@ -60,13 +60,13 @@ class StatemachineC {
 		«clearOutEventsFunction»
 		
 		«runCycleFunction»
-
+		
 		«raiseTimeEventFunction»
-
+		
 		«isActiveFunction»
 		
 		«interfaceFunctions»
-				
+		
 		«functionImplementations»
 	'''
 	
@@ -86,13 +86,11 @@ class StatemachineC {
 			
 			«scHandle»->stateConfVectorPosition = 0;
 		
-		clearInEvents(handle);
-		clearOutEvents(handle);
+			clearInEvents(handle);
+			clearOutEvents(handle);
 		
-			// TODO: initialize all events ...
-
 			«initSequence.code»
-
+		
 		}
 	'''
 	
@@ -213,7 +211,6 @@ class StatemachineC {
 				}
 				«IF event.hasValue» 
 					«event.type.targetLanguageName» «event.asGetter»(«scHandleDecl») {
-						//TODO: Check if event is not raised
 						return «event.valueAccess»;
 					}
 				«ENDIF»
