@@ -15,6 +15,7 @@
 		<antrun-version>1.6</antrun-version>
 		<p2.base.repository>file:../org.yakindu.base.repository/target/repository</p2.base.repository>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<testFailureIgnore>true</testFailureIgnore>
 	</properties>
 	<build>
 		<!--resources> <resource> <directory> [your folder here] </directory> </resource> 
