@@ -39,7 +39,7 @@ class Types {
 		#include <stdint.h>
 		#include <stdbool.h>
 		
-		typedef bool			sc_boolean
+		typedef bool			sc_boolean;
 		typedef int_fast16_t	sc_short;
 		typedef uint_fast16_t	sc_ushort;
 		typedef int32_t			sc_integer; 
