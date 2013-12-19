@@ -11,6 +11,7 @@
 package org.yakindu.sct.simulation.ui;
 
 import org.eclipse.debug.core.DebugPlugin;
+import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 import org.yakindu.sct.simulation.core.hmr.SCTHotModelReplacementManager;
@@ -22,7 +23,7 @@ import org.yakindu.sct.simulation.ui.perspective.SCTPerspectiveManager;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SimulationActivator extends AbstractUIPlugin {
+public class SimulationActivator extends AbstractUIPlugin implements IStartup{
 
 	public static final String PLUGIN_ID = "org.yakindu.sct.statechart.simulation.ui"; //$NON-NLS-1$
 
@@ -53,6 +54,10 @@ public class SimulationActivator extends AbstractUIPlugin {
 
 	public static SimulationActivator getDefault() {
 		return plugin;
+	}
+
+	public void earlyStartup() {
+		//Nothing to do -> Only implemented to load the adapter extension point
 	}
 
 }
