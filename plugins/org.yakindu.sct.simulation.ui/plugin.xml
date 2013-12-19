@@ -84,4 +84,8 @@
           class="org.yakindu.sct.simulation.ui.preferences.PreferenceInitializer">
     </initializer>
  </extension>
+ <extension
+       point="org.eclipse.ui.startup">
+    <startup></startup>
+ </extension>
 </plugin>
