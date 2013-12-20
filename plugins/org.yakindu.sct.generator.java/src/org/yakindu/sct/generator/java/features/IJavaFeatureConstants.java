@@ -39,6 +39,8 @@ public interface IJavaFeatureConstants {
 	
 	public static final String STATEMACHINE_FACTORY_SUPPORT = "StatemachineFactorySupport";
 	
+	public static final String USE_JAVA_INT_FOR_INTEGER = "UseJavaIntForInteger";
+	
 	public static final String[] JAVA_KEYWORDS = { "abstract", "assert",
 		"boolean", "break", "byte", "case", "catch", "char", "class",
 		"const", "continue", "default", "do", "double", "else", "enum",

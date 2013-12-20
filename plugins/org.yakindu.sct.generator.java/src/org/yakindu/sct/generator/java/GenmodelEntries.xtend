@@ -56,6 +56,10 @@ class GenmodelEntries {
 		generalFeatures?.getParameterValue(IJavaFeatureConstants::INTERFACE_OBSERVER_SUPPORT)
 	}
 	
+	def private FeatureParameterValue getUseJavaIntForInteger(GeneratorEntry it) {
+		generalFeatures?.getParameterValue(IJavaFeatureConstants::USE_JAVA_INT_FOR_INTEGER)
+	}
+	
 	def getLicenseText(GeneratorEntry it) {
 		if (licenseTextParameter != null) {
 			return "/**"+licenseTextParameter.stringValue+"*/"
@@ -110,5 +114,12 @@ class GenmodelEntries {
 			return interfaceObserverSupportParameter.booleanValue
 		}
 		return false
-	} 
+	}
+	
+	def useJavaInt(GeneratorEntry it) {
+		if (useJavaIntForInteger != null) {
+			return useJavaIntForInteger.booleanValue
+		}
+		return false
+	}
 }

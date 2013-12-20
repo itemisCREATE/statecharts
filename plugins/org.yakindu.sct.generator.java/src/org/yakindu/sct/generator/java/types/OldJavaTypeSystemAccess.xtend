@@ -19,7 +19,7 @@ import org.yakindu.sct.model.stext.types.ISTextTypeSystem
  * @author andreas muelder
  * @author Alexander Nyßen - Adopted to type system changes
  */
-class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
+class OldJavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 	
 	@Inject
 	private extension ISTextTypeSystem ts
@@ -28,11 +28,10 @@ class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
 		switch (type) {
 			case type == null || isVoidType(type): "void"
 			case isRealType(type) : "double"
-			case isIntegerType(type) : "long"
+			case isIntegerType(type) : "int"
 			case isBooleanType(type) : "boolean"
 			case isStringType(type) : "String"
 			default : "//"+this
 		};
 	}
-	
 }
