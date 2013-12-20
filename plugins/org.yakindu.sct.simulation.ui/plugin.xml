@@ -88,4 +88,10 @@
        point="org.eclipse.ui.startup">
     <startup></startup>
  </extension>
+    <!-- Decoration Providers -->
+   <extension point="org.eclipse.gmf.runtime.diagram.ui.decoratorProviders"> 
+		<decoratorProvider class="org.yakindu.sct.simulation.ui.view.decorator.HighlightingSubmachineDecorationProvider"> 
+			<Priority name="Medium" />
+ 		</decoratorProvider> 
+ </extension> 
 </plugin>

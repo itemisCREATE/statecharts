@@ -46,7 +46,6 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 		SCTDebugTarget target = new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
 		launch.addDebugTarget(target);
 		target.start();
-
 	}
 
 	protected Statechart loadStatechart(String filename) {

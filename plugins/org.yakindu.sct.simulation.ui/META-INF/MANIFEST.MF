@@ -29,9 +29,11 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.emf.edit.ui.provider,
+ org.eclipse.gmf.runtime.diagram.ui.render.util,
  org.eclipse.ui.dialogs,
  org.yakindu.sct.model.sgraph.provider
 Export-Package: org.yakindu.sct.simulation.ui,
  org.yakindu.sct.simulation.ui.preferences,
- org.yakindu.sct.simulation.ui.view
+ org.yakindu.sct.simulation.ui.view,
+ org.yakindu.sct.simulation.ui.view.decorator
 
