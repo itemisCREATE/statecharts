@@ -203,7 +203,7 @@ class GeneratorProjectTemplate {
 		monitor.worked(1)
 	}
 
-	 def createFolderHierarchy(IFolder folder, IProgressMonitor submonitor) {
+	 def void createFolderHierarchy(IFolder folder, IProgressMonitor submonitor) {
 		if (!folder.exists) {
 			if (!folder.parent.exists
 					&& folder.parent.type == IResource::FOLDER) {
@@ -343,14 +343,20 @@ class GeneratorProjectTemplate {
 		            name="«data.generatorName.escapeForXml»"
 		            contentType="statechart"
 		            elementRefType="org.yakindu.sct.model.sgraph.Statechart">
+		            «IF data.typeLibrary»
+		            <FeatureLibrary
+		            	library_id="«data.projectName».FeatureTypeLibrary">
+		            </FeatureLibrary>
+		            «ENDIF»
 		      </SCTGenerator>
 		   </extension>
 		«IF data.typeLibrary»
 		   <extension
 		         point="org.yakindu.sct.generator.core.featuretypes">
-		      <FeatureLibrary generatorId="«data.generatorId»" 
-		      defaultProvider="«data.providerClass»"
-		            uri="platform:/plugin/«data.projectName»/library/FeatureTypeLibrary.xmi">
+		      <FeatureLibrary
+		      	library_id="«data.projectName».FeatureTypeLibrary"
+		      	defaultProvider="«data.providerClass»"
+		      	uri="platform:/plugin/«data.projectName»/library/FeatureTypeLibrary.xmi">
 		      </FeatureLibrary>
 		   </extension>
 		«ENDIF»   
