@@ -28,5 +28,9 @@
         name="TimerService"
         optional="true"
         parameterType="BOOLEAN"/>
+    <parameters
+        name="UseJavaIntForInteger"
+        optional="true"
+        parameterType="BOOLEAN"/>
   </types>
 </sgen:FeatureTypeLibrary>
