@@ -25,7 +25,9 @@ import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.ui.IEditorDescriptor;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -80,7 +82,24 @@ public class SCTSourceDisplay implements ISourceDisplay {
 
 	private IEditorPart openEditor(DebugElement debugElement, IWorkbenchPage page) {
 		EObject semanticObject = (EObject) debugElement.getAdapter(EObject.class);
+		IFile file = (IFile) debugElement.getAdapter(IFile.class);
+		if (file == null)
+			file = WorkspaceSynchronizer.getFile(semanticObject.eResource());
 
+		// check if an editor for the resource is already open, the return the
+		// opened editor.
+		// This is important for simulating subdiagrams
+		IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+				.getActiveEditor();
+		if (activeEditor != null) {
+			IEditorInput editorInput = activeEditor.getEditorInput();
+			if (editorInput instanceof IFileEditorInput) {
+				if (((IFileEditorInput) editorInput).getFile().equals(file))
+					return activeEditor;
+			}
+		}
+		// check if a Diagram is available and open the editor for the
+		// coressponding diagram
 		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
 		if (diagram != null) {
 			if (URIConverter.INSTANCE.exists(semanticObject.eResource().getURI(), null)) {
@@ -98,9 +117,6 @@ public class SCTSourceDisplay implements ISourceDisplay {
 			// No diagram for the semantic element -> open the default editor
 			// for the file
 		} else {
-			IFile file = (IFile) debugElement.getAdapter(IFile.class);
-			if (file == null)
-				file = WorkspaceSynchronizer.getFile(semanticObject.eResource());
 			IEditorDescriptor desc = PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(file.getName());
 			try {
 				return page.openEditor(new FileEditorInput(file), desc.getId());
@@ -108,6 +124,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 				e.printStackTrace();
 			}
 		}
+		// No editor found
 		throw new RuntimeException("No editor found for semantic element " + semanticObject);
 	}
 

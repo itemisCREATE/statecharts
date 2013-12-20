@@ -38,7 +38,7 @@ import de.itemis.gmf.runtime.commons.decorators.AbstractDecoratorProvider;
  */
 public class SubmachineDecorationProvider extends AbstractDecoratorProvider implements IDecoratorProvider {
 
-	private static final String DECORATOR_KEY = SubmachineDecorator.class.getSimpleName();
+	protected static final String DECORATOR_KEY = SubmachineDecorator.class.getSimpleName();
 
 	public void createDecorators(IDecoratorTarget decoratorTarget) {
 		Object adapter = decoratorTarget.getAdapter(EObject.class);
@@ -55,7 +55,8 @@ public class SubmachineDecorationProvider extends AbstractDecoratorProvider impl
 		@Override
 		protected boolean shouldDecorate(State state) {
 			IGraphicalEditPart adapter = (IGraphicalEditPart) getDecoratorTarget().getAdapter(IGraphicalEditPart.class);
-			BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(adapter.getNotationView(), DiagramPartitioningUtil.INLINE_STYLE);
+			BooleanValueStyle style = GMFNotationUtil.getBooleanValueStyle(adapter.getNotationView(),
+					DiagramPartitioningUtil.INLINE_STYLE);
 			return style == null ? false : !style.isBooleanValue();
 		}
 
