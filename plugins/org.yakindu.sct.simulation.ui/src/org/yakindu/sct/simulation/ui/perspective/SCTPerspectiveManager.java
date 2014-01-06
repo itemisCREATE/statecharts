@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.ILaunchConfigurationType;
 import org.eclipse.debug.core.ILaunchListener;
@@ -27,7 +26,6 @@ import org.eclipse.debug.internal.ui.viewers.AsynchronousSchedulingRuleFactory;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.progress.UIJob;
-import org.yakindu.sct.simulation.core.launch.ISCTLaunchConfigurationType;
 
 /**
  * custom implementation of the {@link PerspectiveManager} for the Yakindu
@@ -43,13 +41,13 @@ import org.yakindu.sct.simulation.core.launch.ISCTLaunchConfigurationType;
 public class SCTPerspectiveManager extends PerspectiveManager implements ILaunchListener {
 
 	private static final String DEBUG_VIEW_ID = "org.eclipse.debug.ui.DebugView";
+	private static final String LAUNCH_TYPE = "yakindu";
 
 	public void launchAdded(ILaunch launch) {
-
-		ILaunchConfigurationType statechartLaunchType = DebugPlugin.getDefault().getLaunchManager()
-				.getLaunchConfigurationType(ISCTLaunchConfigurationType.CONFIG_TYPE);
 		try {
-			if (statechartLaunchType.equals(launch.getLaunchConfiguration().getType())) {
+			ILaunchConfigurationType type = launch.getLaunchConfiguration().getType();
+			// Open the simulation perspective for all yakindu simulation types
+			if (type.getIdentifier().contains(LAUNCH_TYPE)) {
 				Job switchJob = new UIJob(DebugUIPlugin.getStandardDisplay(), "Perspective Switch Job") { //$NON-NLS-1$
 					public IStatus runInUIThread(IProgressMonitor monitor) {
 						IWorkbenchWindow window = DebugUIPlugin.getActiveWorkbenchWindow();
