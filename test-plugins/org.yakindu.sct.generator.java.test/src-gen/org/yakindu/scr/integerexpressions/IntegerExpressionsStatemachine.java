@@ -12,23 +12,23 @@ public class IntegerExpressionsStatemachine
 			e1 = true;
 		}
 
-		private int myInt1;
+		private long myInt1;
 
-		public int getMyInt1() {
+		public long getMyInt1() {
 			return myInt1;
 		}
 
-		public void setMyInt1(int value) {
+		public void setMyInt1(long value) {
 			this.myInt1 = value;
 		}
 
-		private int myInt2;
+		private long myInt2;
 
-		public int getMyInt2() {
+		public long getMyInt2() {
 			return myInt2;
 		}
 
-		public void setMyInt2(int value) {
+		public void setMyInt2(long value) {
 			this.myInt2 = value;
 		}
 
@@ -92,63 +92,63 @@ public class IntegerExpressionsStatemachine
 			this.notEqual = value;
 		}
 
-		private int plus;
+		private long plus;
 
-		public int getPlus() {
+		public long getPlus() {
 			return plus;
 		}
 
-		public void setPlus(int value) {
+		public void setPlus(long value) {
 			this.plus = value;
 		}
 
-		private int minus;
+		private long minus;
 
-		public int getMinus() {
+		public long getMinus() {
 			return minus;
 		}
 
-		public void setMinus(int value) {
+		public void setMinus(long value) {
 			this.minus = value;
 		}
 
-		private int multiply;
+		private long multiply;
 
-		public int getMultiply() {
+		public long getMultiply() {
 			return multiply;
 		}
 
-		public void setMultiply(int value) {
+		public void setMultiply(long value) {
 			this.multiply = value;
 		}
 
-		private int division;
+		private long division;
 
-		public int getDivision() {
+		public long getDivision() {
 			return division;
 		}
 
-		public void setDivision(int value) {
+		public void setDivision(long value) {
 			this.division = value;
 		}
 
-		private int modulo;
+		private long modulo;
 
-		public int getModulo() {
+		public long getModulo() {
 			return modulo;
 		}
 
-		public void setModulo(int value) {
+		public void setModulo(long value) {
 			this.modulo = value;
 		}
 
-		private int negat;
+		private long negat;
 
-		public int getNegat() {
+		public long getNegat() {
 			return negat;
 		}
 
-		public void setNegat(int value) {
+		public void setNegat(long value) {
 			this.negat = value;
 		}
 
@@ -162,53 +162,53 @@ public class IntegerExpressionsStatemachine
 			this.complement = value;
 		}
 
-		private int multiAssign;
+		private long multiAssign;
 
-		public int getMultiAssign() {
+		public long getMultiAssign() {
 			return multiAssign;
 		}
 
-		public void setMultiAssign(int value) {
+		public void setMultiAssign(long value) {
 			this.multiAssign = value;
 		}
 
-		private int divAssign;
+		private long divAssign;
 
-		public int getDivAssign() {
+		public long getDivAssign() {
 			return divAssign;
 		}
 
-		public void setDivAssign(int value) {
+		public void setDivAssign(long value) {
 			this.divAssign = value;
 		}
 
-		private int plusAssign;
+		private long plusAssign;
 
-		public int getPlusAssign() {
+		public long getPlusAssign() {
 			return plusAssign;
 		}
 
-		public void setPlusAssign(int value) {
+		public void setPlusAssign(long value) {
 			this.plusAssign = value;
 		}
 
-		private int minusAssign;
+		private long minusAssign;
 
-		public int getMinusAssign() {
+		public long getMinusAssign() {
 			return minusAssign;
 		}
 
-		public void setMinusAssign(int value) {
+		public void setMinusAssign(long value) {
 			this.minusAssign = value;
 		}
 
-		private int moduloAssign;
+		private long moduloAssign;
 
-		public int getModuloAssign() {
+		public long getModuloAssign() {
 			return moduloAssign;
 		}
 
-		public void setModuloAssign(int value) {
+		public void setModuloAssign(long value) {
 			this.moduloAssign = value;
 		}
 
@@ -312,14 +312,23 @@ public class IntegerExpressionsStatemachine
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
@@ -339,18 +348,18 @@ public class IntegerExpressionsStatemachine
 		sCInterface.raiseE1();
 	}
 
-	public int getMyInt1() {
+	public long getMyInt1() {
 		return sCInterface.getMyInt1();
 	}
 
-	public void setMyInt1(int value) {
+	public void setMyInt1(long value) {
 		sCInterface.setMyInt1(value);
 	}
-	public int getMyInt2() {
+	public long getMyInt2() {
 		return sCInterface.getMyInt2();
 	}
 
-	public void setMyInt2(int value) {
+	public void setMyInt2(long value) {
 		sCInterface.setMyInt2(value);
 	}
 	public boolean getLess() {
@@ -395,46 +404,46 @@ public class IntegerExpressionsStatemachine
 	public void setNotEqual(boolean value) {
 		sCInterface.setNotEqual(value);
 	}
-	public int getPlus() {
+	public long getPlus() {
 		return sCInterface.getPlus();
 	}
 
-	public void setPlus(int value) {
+	public void setPlus(long value) {
 		sCInterface.setPlus(value);
 	}
-	public int getMinus() {
+	public long getMinus() {
 		return sCInterface.getMinus();
 	}
 
-	public void setMinus(int value) {
+	public void setMinus(long value) {
 		sCInterface.setMinus(value);
 	}
-	public int getMultiply() {
+	public long getMultiply() {
 		return sCInterface.getMultiply();
 	}
 
-	public void setMultiply(int value) {
+	public void setMultiply(long value) {
 		sCInterface.setMultiply(value);
 	}
-	public int getDivision() {
+	public long getDivision() {
 		return sCInterface.getDivision();
 	}
 
-	public void setDivision(int value) {
+	public void setDivision(long value) {
 		sCInterface.setDivision(value);
 	}
-	public int getModulo() {
+	public long getModulo() {
 		return sCInterface.getModulo();
 	}
 
-	public void setModulo(int value) {
+	public void setModulo(long value) {
 		sCInterface.setModulo(value);
 	}
-	public int getNegat() {
+	public long getNegat() {
 		return sCInterface.getNegat();
 	}
 
-	public void setNegat(int value) {
+	public void setNegat(long value) {
 		sCInterface.setNegat(value);
 	}
 	public boolean getComplement() {
@@ -444,39 +453,39 @@ public class IntegerExpressionsStatemachine
 	public void setComplement(boolean value) {
 		sCInterface.setComplement(value);
 	}
-	public int getMultiAssign() {
+	public long getMultiAssign() {
 		return sCInterface.getMultiAssign();
 	}
 
-	public void setMultiAssign(int value) {
+	public void setMultiAssign(long value) {
 		sCInterface.setMultiAssign(value);
 	}
-	public int getDivAssign() {
+	public long getDivAssign() {
 		return sCInterface.getDivAssign();
 	}
 
-	public void setDivAssign(int value) {
+	public void setDivAssign(long value) {
 		sCInterface.setDivAssign(value);
 	}
-	public int getPlusAssign() {
+	public long getPlusAssign() {
 		return sCInterface.getPlusAssign();
 	}
 
-	public void setPlusAssign(int value) {
+	public void setPlusAssign(long value) {
 		sCInterface.setPlusAssign(value);
 	}
-	public int getMinusAssign() {
+	public long getMinusAssign() {
 		return sCInterface.getMinusAssign();
 	}
 
-	public void setMinusAssign(int value) {
+	public void setMinusAssign(long value) {
 		sCInterface.setMinusAssign(value);
 	}
-	public int getModuloAssign() {
+	public long getModuloAssign() {
 		return sCInterface.getModuloAssign();
 	}
 
-	public void setModuloAssign(int value) {
+	public void setModuloAssign(long value) {
 		sCInterface.setModuloAssign(value);
 	}
 

@@ -11,7 +11,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	private boolean evInCValue;
 	private boolean evInD;
 
-	private int evInDValue;
+	private long evInDValue;
 	private boolean evInE;
 
 	private double evInEValue;
@@ -55,18 +55,18 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 		private boolean evD;
 
-		private int evDValue;
+		private long evDValue;
 
 		public boolean isRaisedEvD() {
 			return evD;
 		}
 
-		private void raiseEvD(int value) {
+		private void raiseEvD(long value) {
 			evD = true;
 			evDValue = value;
 		}
 
-		public int getEvDValue() {
+		public long getEvDValue() {
 			if (!evD)
 				throw new IllegalStateException(
 						"Illegal event value acces. Event EvD is not raised!");
@@ -119,13 +119,13 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varA = value;
 		}
 
-		private int varB;
+		private long varB;
 
-		public int getVarB() {
+		public long getVarB() {
 			return varB;
 		}
 
-		public void setVarB(int value) {
+		public void setVarB(long value) {
 			this.varB = value;
 		}
 
@@ -199,18 +199,18 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 		private boolean evD;
 
-		private int evDValue;
+		private long evDValue;
 
 		public boolean isRaisedEvD() {
 			return evD;
 		}
 
-		private void raiseEvD(int value) {
+		private void raiseEvD(long value) {
 			evD = true;
 			evDValue = value;
 		}
 
-		public int getEvDValue() {
+		public long getEvDValue() {
 			if (!evD)
 				throw new IllegalStateException(
 						"Illegal event value acces. Event EvD is not raised!");
@@ -263,13 +263,13 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varA = value;
 		}
 
-		private int varB;
+		private long varB;
 
-		public int getVarB() {
+		public long getVarB() {
 			return varB;
 		}
 
-		public void setVarB(int value) {
+		public void setVarB(long value) {
 			this.varB = value;
 		}
 
@@ -313,7 +313,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	};
 
 	private boolean varInA;
-	private int varInB;
+	private long varInB;
 	private double varInC;
 	private String varInD;
 
@@ -381,6 +381,9 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 		sCIIfA.clearEvents();
@@ -393,11 +396,17 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 		sCInterface.clearOutEvents();
 		sCIIfA.clearOutEvents();
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -433,12 +442,12 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 					"Illegal event value acces. Event EvInC is not raised!");
 		return evInCValue;
 	}
-	private void raiseEvInD(int value) {
+	private void raiseEvInD(long value) {
 		evInDValue = value;
 		evInD = true;
 	}
 
-	private int getEvInDValue() {
+	private long getEvInDValue() {
 		if (!evInD)
 			throw new IllegalStateException(
 					"Illegal event value acces. Event EvInD is not raised!");
@@ -479,7 +488,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	public boolean isRaisedEvD() {
 		return sCInterface.isRaisedEvD();
 	}
-	public int getEvDValue() {
+	public long getEvDValue() {
 		return sCInterface.getEvDValue();
 	}
 	public void raiseEvE(double value) {
@@ -499,11 +508,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	public void setVarA(boolean value) {
 		sCInterface.setVarA(value);
 	}
-	public int getVarB() {
+	public long getVarB() {
 		return sCInterface.getVarB();
 	}
 
-	public void setVarB(int value) {
+	public void setVarB(long value) {
 		sCInterface.setVarB(value);
 	}
 	public double getVarC() {

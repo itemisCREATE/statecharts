@@ -8,8 +8,8 @@ public interface ICKeywordsStatemachine extends IStatemachine {
 		public void raiseBreak();
 		public boolean getCase();
 		public void setCase(boolean value);
-		public int getDo();
-		public void setDo(int value);
+		public long getDo();
+		public void setDo(long value);
 		public boolean getContinue();
 		public void setContinue(boolean value);
 		public boolean getDouble();

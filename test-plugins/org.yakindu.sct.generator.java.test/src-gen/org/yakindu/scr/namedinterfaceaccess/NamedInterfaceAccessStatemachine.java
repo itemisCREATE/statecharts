@@ -40,14 +40,14 @@ public class NamedInterfaceAccessStatemachine
 
 		private boolean numberPressed;
 
-		private int numberPressedValue;
+		private long numberPressedValue;
 
-		public void raiseNumberPressed(int value) {
+		public void raiseNumberPressed(long value) {
 			numberPressed = true;
 			numberPressedValue = value;
 		}
 
-		private int getNumberPressedValue() {
+		private long getNumberPressedValue() {
 			if (!numberPressed)
 				throw new IllegalStateException(
 						"Illegal event value acces. Event NumberPressed is not raised!");
@@ -73,9 +73,9 @@ public class NamedInterfaceAccessStatemachine
 		region_1_Idle, region_1_Number1Pressed, region_1_Number2Pressed, region_1_Number3Pressed, _region1_Closed, _region1_Open, $NullState$
 	};
 
-	private int number1;
-	private int number2;
-	private int number3;
+	private long number1;
+	private long number2;
+	private long number3;
 
 	private final State[] stateVector = new State[2];
 
@@ -158,16 +158,25 @@ public class NamedInterfaceAccessStatemachine
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCISafe.clearEvents();
 		sCIUser.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 		sCISafe.clearOutEvents();
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case region_1_Idle :

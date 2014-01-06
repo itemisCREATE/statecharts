@@ -4,13 +4,13 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
 	private final class SCInterfaceImpl implements SCInterface {
 
-		private int value;
+		private long value;
 
-		public int getValue() {
+		public long getValue() {
 			return value;
 		}
 
-		public void setValue(int value) {
+		public void setValue(long value) {
 			this.value = value;
 		}
 
@@ -84,13 +84,22 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
@@ -106,11 +115,11 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		return sCInterface;
 	}
 
-	public int getValue() {
+	public long getValue() {
 		return sCInterface.getValue();
 	}
 
-	public void setValue(int value) {
+	public void setValue(long value) {
 		sCInterface.setValue(value);
 	}
 	public boolean getV2() {

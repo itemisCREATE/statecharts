@@ -18,23 +18,23 @@ public class ExitOnSelfTransitionStatemachine
 			f = true;
 		}
 
-		private int entryCount;
+		private long entryCount;
 
-		public int getEntryCount() {
+		public long getEntryCount() {
 			return entryCount;
 		}
 
-		public void setEntryCount(int value) {
+		public void setEntryCount(long value) {
 			this.entryCount = value;
 		}
 
-		private int exitCount;
+		private long exitCount;
 
-		public int getExitCount() {
+		public long getExitCount() {
 			return exitCount;
 		}
 
-		public void setExitCount(int value) {
+		public void setExitCount(long value) {
 			this.exitCount = value;
 		}
 
@@ -103,14 +103,23 @@ public class ExitOnSelfTransitionStatemachine
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -133,18 +142,18 @@ public class ExitOnSelfTransitionStatemachine
 		sCInterface.raiseF();
 	}
 
-	public int getEntryCount() {
+	public long getEntryCount() {
 		return sCInterface.getEntryCount();
 	}
 
-	public void setEntryCount(int value) {
+	public void setEntryCount(long value) {
 		sCInterface.setEntryCount(value);
 	}
-	public int getExitCount() {
+	public long getExitCount() {
 		return sCInterface.getExitCount();
 	}
 
-	public void setExitCount(int value) {
+	public void setExitCount(long value) {
 		sCInterface.setExitCount(value);
 	}
 

@@ -67,6 +67,9 @@ public class TimedTransitionsStatemachine
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 
 		for (int i = 0; i < timeEvents.length; i++) {
@@ -74,9 +77,15 @@ public class TimedTransitionsStatemachine
 		}
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_Start :

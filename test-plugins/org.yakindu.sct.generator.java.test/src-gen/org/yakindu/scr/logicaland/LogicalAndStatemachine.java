@@ -4,13 +4,13 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 
 	private final class SCInterfaceImpl implements SCInterface {
 
-		private int x;
+		private long x;
 
-		public int getX() {
+		public long getX() {
 			return x;
 		}
 
-		public void setX(int value) {
+		public void setX(long value) {
 			this.x = value;
 		}
 
@@ -75,13 +75,22 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -95,11 +104,11 @@ public class LogicalAndStatemachine implements ILogicalAndStatemachine {
 		return sCInterface;
 	}
 
-	public int getX() {
+	public long getX() {
 		return sCInterface.getX();
 	}
 
-	public void setX(int value) {
+	public void setX(long value) {
 		sCInterface.setX(value);
 	}
 	public boolean getB() {

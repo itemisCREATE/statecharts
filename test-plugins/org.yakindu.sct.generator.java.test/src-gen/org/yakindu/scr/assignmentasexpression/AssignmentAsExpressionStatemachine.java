@@ -6,233 +6,233 @@ public class AssignmentAsExpressionStatemachine
 
 	private final class SCInterfaceImpl implements SCInterface {
 
-		private int a;
+		private long a;
 
-		public int getA() {
+		public long getA() {
 			return a;
 		}
 
-		public void setA(int value) {
+		public void setA(long value) {
 			this.a = value;
 		}
 
-		private int b;
+		private long b;
 
-		public int getB() {
+		public long getB() {
 			return b;
 		}
 
-		public void setB(int value) {
+		public void setB(long value) {
 			this.b = value;
 		}
 
-		private int c;
+		private long c;
 
-		public int getC() {
+		public long getC() {
 			return c;
 		}
 
-		public void setC(int value) {
+		public void setC(long value) {
 			this.c = value;
 		}
 
-		private int d;
+		private long d;
 
-		public int getD() {
+		public long getD() {
 			return d;
 		}
 
-		public void setD(int value) {
+		public void setD(long value) {
 			this.d = value;
 		}
 
-		private int e;
+		private long e;
 
-		public int getE() {
+		public long getE() {
 			return e;
 		}
 
-		public void setE(int value) {
+		public void setE(long value) {
 			this.e = value;
 		}
 
-		private int f;
+		private long f;
 
-		public int getF() {
+		public long getF() {
 			return f;
 		}
 
-		public void setF(int value) {
+		public void setF(long value) {
 			this.f = value;
 		}
 
-		private int g;
+		private long g;
 
-		public int getG() {
+		public long getG() {
 			return g;
 		}
 
-		public void setG(int value) {
+		public void setG(long value) {
 			this.g = value;
 		}
 
-		private int h;
+		private long h;
 
-		public int getH() {
+		public long getH() {
 			return h;
 		}
 
-		public void setH(int value) {
+		public void setH(long value) {
 			this.h = value;
 		}
 
-		private int i;
+		private long i;
 
-		public int getI() {
+		public long getI() {
 			return i;
 		}
 
-		public void setI(int value) {
+		public void setI(long value) {
 			this.i = value;
 		}
 
-		private int i1;
+		private long i1;
 
-		public int getI1() {
+		public long getI1() {
 			return i1;
 		}
 
-		public void setI1(int value) {
+		public void setI1(long value) {
 			this.i1 = value;
 		}
 
-		private int j;
+		private long j;
 
-		public int getJ() {
+		public long getJ() {
 			return j;
 		}
 
-		public void setJ(int value) {
+		public void setJ(long value) {
 			this.j = value;
 		}
 
-		private int j1;
+		private long j1;
 
-		public int getJ1() {
+		public long getJ1() {
 			return j1;
 		}
 
-		public void setJ1(int value) {
+		public void setJ1(long value) {
 			this.j1 = value;
 		}
 
-		private int k;
+		private long k;
 
-		public int getK() {
+		public long getK() {
 			return k;
 		}
 
-		public void setK(int value) {
+		public void setK(long value) {
 			this.k = value;
 		}
 
-		private int k1;
+		private long k1;
 
-		public int getK1() {
+		public long getK1() {
 			return k1;
 		}
 
-		public void setK1(int value) {
+		public void setK1(long value) {
 			this.k1 = value;
 		}
 
-		private int l;
+		private long l;
 
-		public int getL() {
+		public long getL() {
 			return l;
 		}
 
-		public void setL(int value) {
+		public void setL(long value) {
 			this.l = value;
 		}
 
-		private int m;
+		private long m;
 
-		public int getM() {
+		public long getM() {
 			return m;
 		}
 
-		public void setM(int value) {
+		public void setM(long value) {
 			this.m = value;
 		}
 
-		private int n;
+		private long n;
 
-		public int getN() {
+		public long getN() {
 			return n;
 		}
 
-		public void setN(int value) {
+		public void setN(long value) {
 			this.n = value;
 		}
 
-		private int p;
+		private long p;
 
-		public int getP() {
+		public long getP() {
 			return p;
 		}
 
-		public void setP(int value) {
+		public void setP(long value) {
 			this.p = value;
 		}
 
-		private int r;
+		private long r;
 
-		public int getR() {
+		public long getR() {
 			return r;
 		}
 
-		public void setR(int value) {
+		public void setR(long value) {
 			this.r = value;
 		}
 
-		private int t;
+		private long t;
 
-		public int getT() {
+		public long getT() {
 			return t;
 		}
 
-		public void setT(int value) {
+		public void setT(long value) {
 			this.t = value;
 		}
 
-		private int u;
+		private long u;
 
-		public int getU() {
+		public long getU() {
 			return u;
 		}
 
-		public void setU(int value) {
+		public void setU(long value) {
 			this.u = value;
 		}
 
-		private int v;
+		private long v;
 
-		public int getV() {
+		public long getV() {
 			return v;
 		}
 
-		public void setV(int value) {
+		public void setV(long value) {
 			this.v = value;
 		}
 
-		private int w;
+		private long w;
 
-		public int getW() {
+		public long getW() {
 			return w;
 		}
 
-		public void setW(int value) {
+		public void setW(long value) {
 			this.w = value;
 		}
 
@@ -371,13 +371,22 @@ public class AssignmentAsExpressionStatemachine
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_Add :
@@ -407,165 +416,165 @@ public class AssignmentAsExpressionStatemachine
 		return sCInterface;
 	}
 
-	public int getA() {
+	public long getA() {
 		return sCInterface.getA();
 	}
 
-	public void setA(int value) {
+	public void setA(long value) {
 		sCInterface.setA(value);
 	}
-	public int getB() {
+	public long getB() {
 		return sCInterface.getB();
 	}
 
-	public void setB(int value) {
+	public void setB(long value) {
 		sCInterface.setB(value);
 	}
-	public int getC() {
+	public long getC() {
 		return sCInterface.getC();
 	}
 
-	public void setC(int value) {
+	public void setC(long value) {
 		sCInterface.setC(value);
 	}
-	public int getD() {
+	public long getD() {
 		return sCInterface.getD();
 	}
 
-	public void setD(int value) {
+	public void setD(long value) {
 		sCInterface.setD(value);
 	}
-	public int getE() {
+	public long getE() {
 		return sCInterface.getE();
 	}
 
-	public void setE(int value) {
+	public void setE(long value) {
 		sCInterface.setE(value);
 	}
-	public int getF() {
+	public long getF() {
 		return sCInterface.getF();
 	}
 
-	public void setF(int value) {
+	public void setF(long value) {
 		sCInterface.setF(value);
 	}
-	public int getG() {
+	public long getG() {
 		return sCInterface.getG();
 	}
 
-	public void setG(int value) {
+	public void setG(long value) {
 		sCInterface.setG(value);
 	}
-	public int getH() {
+	public long getH() {
 		return sCInterface.getH();
 	}
 
-	public void setH(int value) {
+	public void setH(long value) {
 		sCInterface.setH(value);
 	}
-	public int getI() {
+	public long getI() {
 		return sCInterface.getI();
 	}
 
-	public void setI(int value) {
+	public void setI(long value) {
 		sCInterface.setI(value);
 	}
-	public int getI1() {
+	public long getI1() {
 		return sCInterface.getI1();
 	}
 
-	public void setI1(int value) {
+	public void setI1(long value) {
 		sCInterface.setI1(value);
 	}
-	public int getJ() {
+	public long getJ() {
 		return sCInterface.getJ();
 	}
 
-	public void setJ(int value) {
+	public void setJ(long value) {
 		sCInterface.setJ(value);
 	}
-	public int getJ1() {
+	public long getJ1() {
 		return sCInterface.getJ1();
 	}
 
-	public void setJ1(int value) {
+	public void setJ1(long value) {
 		sCInterface.setJ1(value);
 	}
-	public int getK() {
+	public long getK() {
 		return sCInterface.getK();
 	}
 
-	public void setK(int value) {
+	public void setK(long value) {
 		sCInterface.setK(value);
 	}
-	public int getK1() {
+	public long getK1() {
 		return sCInterface.getK1();
 	}
 
-	public void setK1(int value) {
+	public void setK1(long value) {
 		sCInterface.setK1(value);
 	}
-	public int getL() {
+	public long getL() {
 		return sCInterface.getL();
 	}
 
-	public void setL(int value) {
+	public void setL(long value) {
 		sCInterface.setL(value);
 	}
-	public int getM() {
+	public long getM() {
 		return sCInterface.getM();
 	}
 
-	public void setM(int value) {
+	public void setM(long value) {
 		sCInterface.setM(value);
 	}
-	public int getN() {
+	public long getN() {
 		return sCInterface.getN();
 	}
 
-	public void setN(int value) {
+	public void setN(long value) {
 		sCInterface.setN(value);
 	}
-	public int getP() {
+	public long getP() {
 		return sCInterface.getP();
 	}
 
-	public void setP(int value) {
+	public void setP(long value) {
 		sCInterface.setP(value);
 	}
-	public int getR() {
+	public long getR() {
 		return sCInterface.getR();
 	}
 
-	public void setR(int value) {
+	public void setR(long value) {
 		sCInterface.setR(value);
 	}
-	public int getT() {
+	public long getT() {
 		return sCInterface.getT();
 	}
 
-	public void setT(int value) {
+	public void setT(long value) {
 		sCInterface.setT(value);
 	}
-	public int getU() {
+	public long getU() {
 		return sCInterface.getU();
 	}
 
-	public void setU(int value) {
+	public void setU(long value) {
 		sCInterface.setU(value);
 	}
-	public int getV() {
+	public long getV() {
 		return sCInterface.getV();
 	}
 
-	public void setV(int value) {
+	public void setV(long value) {
 		sCInterface.setV(value);
 	}
-	public int getW() {
+	public long getW() {
 		return sCInterface.getW();
 	}
 
-	public void setW(int value) {
+	public void setW(long value) {
 		sCInterface.setW(value);
 	}
 
