@@ -7,7 +7,7 @@ GeneratorModel for sctunit::java {
 			targetFolder = "test-gen"			
 		}			
 	}
-	
+
 	test AlwaysOncycle{
 		
 		feature Outlet{ 
@@ -79,6 +79,7 @@ GeneratorModel for sctunit::java {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
 	
 	test EnterState{
 		
@@ -321,7 +322,7 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 
-	test TimeTrigger{
+	test TimedTransitions{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 

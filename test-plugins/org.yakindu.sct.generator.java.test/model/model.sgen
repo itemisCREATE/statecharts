@@ -55,7 +55,7 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
-	statechart DeepEntry {
+	statechart DeepEntry{
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
@@ -66,6 +66,20 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+	
+	statechart EntryChoice {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	
+	
 	statechart ExitOnSelfTransition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -93,15 +107,6 @@ GeneratorModel for yakindu::java {
 		}
 		
 	}
-	
-	statechart EntryChoice {
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "src-gen"
-		}
-
-	}
-	
 	statechart EnterState {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -158,6 +163,32 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+		
+	statechart LogicalAnd {
+			feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		} 
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+		
+	}
+
+	statechart LogicalOr {
+			feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		} 
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+		
+	}	
 	
 	statechart Parenthesis {
 		feature Outlet {
@@ -479,6 +510,18 @@ GeneratorModel for yakindu::java {
 		}
 	}
 	
+	statechart TimedTransitions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		} 
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	
 	statechart TransitionWithoutCondition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -489,44 +532,6 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 			RuntimeService = true
 		}
-	}
-	
-	statechart TimeTrigger {
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "src-gen"
-		} 
-
-		feature GeneralFeatures {
-			TimerService = true
-			RuntimeService = true
-		}
-	}
-	
-	statechart LogicalAnd {
-			feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "src-gen"
-		} 
-
-		feature GeneralFeatures {
-			TimerService = true
-			RuntimeService = true
-		}
-		
-	}
-
-	statechart LogicalOr {
-			feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "src-gen"
-		} 
-
-		feature GeneralFeatures {
-			TimerService = true
-			RuntimeService = true
-		}
-		
 	}
 
 }
