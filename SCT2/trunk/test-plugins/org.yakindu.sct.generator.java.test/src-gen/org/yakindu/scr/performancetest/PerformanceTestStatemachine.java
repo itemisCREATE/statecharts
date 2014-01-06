@@ -27,33 +27,33 @@ public class PerformanceTestStatemachine
 			e3 = true;
 		}
 
-		private int x;
+		private long x;
 
-		public int getX() {
+		public long getX() {
 			return x;
 		}
 
-		public void setX(int value) {
+		public void setX(long value) {
 			this.x = value;
 		}
 
-		private int a;
+		private long a;
 
-		public int getA() {
+		public long getA() {
 			return a;
 		}
 
-		public void setA(int value) {
+		public void setA(long value) {
 			this.a = value;
 		}
 
-		private int c;
+		private long c;
 
-		public int getC() {
+		public long getC() {
 			return c;
 		}
 
-		public void setC(int value) {
+		public void setC(long value) {
 			this.c = value;
 		}
 
@@ -221,6 +221,9 @@ public class PerformanceTestStatemachine
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
@@ -229,9 +232,15 @@ public class PerformanceTestStatemachine
 		}
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case mr_A :
@@ -309,25 +318,25 @@ public class PerformanceTestStatemachine
 		sCInterface.raiseE3();
 	}
 
-	public int getX() {
+	public long getX() {
 		return sCInterface.getX();
 	}
 
-	public void setX(int value) {
+	public void setX(long value) {
 		sCInterface.setX(value);
 	}
-	public int getA() {
+	public long getA() {
 		return sCInterface.getA();
 	}
 
-	public void setA(int value) {
+	public void setA(long value) {
 		sCInterface.setA(value);
 	}
-	public int getC() {
+	public long getC() {
 		return sCInterface.getC();
 	}
 
-	public void setC(int value) {
+	public void setC(long value) {
 		sCInterface.setC(value);
 	}
 

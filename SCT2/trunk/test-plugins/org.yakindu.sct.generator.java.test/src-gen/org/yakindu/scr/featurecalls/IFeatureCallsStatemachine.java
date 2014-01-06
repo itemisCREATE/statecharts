@@ -5,8 +5,8 @@ public interface IFeatureCallsStatemachine extends IStatemachine {
 
 	public interface SCIMyInterface {
 		public void raiseEvent1();
-		public int getMyInt();
-		public void setMyInt(int value);
+		public long getMyInt();
+		public void setMyInt(long value);
 
 	}
 

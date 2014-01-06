@@ -5,8 +5,8 @@ public interface IInEventLifeCycleStatemachine extends IStatemachine {
 
 	public interface SCInterface {
 		public void raiseE();
-		public int getI();
-		public void setI(int value);
+		public long getI();
+		public void setI(long value);
 
 	}
 

@@ -6,27 +6,27 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 		private boolean integerEvent;
 
-		private int integerEventValue;
+		private long integerEventValue;
 
-		public void raiseIntegerEvent(int value) {
+		public void raiseIntegerEvent(long value) {
 			integerEvent = true;
 			integerEventValue = value;
 		}
 
-		private int getIntegerEventValue() {
+		private long getIntegerEventValue() {
 			if (!integerEvent)
 				throw new IllegalStateException(
 						"Illegal event value acces. Event IntegerEvent is not raised!");
 			return integerEventValue;
 		}
 
-		private int myVar;
+		private long myVar;
 
-		public int getMyVar() {
+		public long getMyVar() {
 			return myVar;
 		}
 
-		public void setMyVar(int value) {
+		public void setMyVar(long value) {
 			this.myVar = value;
 		}
 
@@ -103,14 +103,23 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -128,15 +137,15 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		return sCInterface;
 	}
 
-	public void raiseIntegerEvent(int value) {
+	public void raiseIntegerEvent(long value) {
 		sCInterface.raiseIntegerEvent(value);
 	}
 
-	public int getMyVar() {
+	public long getMyVar() {
 		return sCInterface.getMyVar();
 	}
 
-	public void setMyVar(int value) {
+	public void setMyVar(long value) {
 		sCInterface.setMyVar(value);
 	}
 

@@ -4,13 +4,13 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 	private final class SCInterfaceImpl implements SCInterface {
 
-		private int erg;
+		private long erg;
 
-		public int getErg() {
+		public long getErg() {
 			return erg;
 		}
 
-		public void setErg(int value) {
+		public void setErg(long value) {
 			this.erg = value;
 		}
 
@@ -65,13 +65,22 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case mainRegion_A :
@@ -85,11 +94,11 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 		return sCInterface;
 	}
 
-	public int getErg() {
+	public long getErg() {
 		return sCInterface.getErg();
 	}
 
-	public void setErg(int value) {
+	public void setErg(long value) {
 		sCInterface.setErg(value);
 	}
 

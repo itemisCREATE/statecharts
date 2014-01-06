@@ -12,13 +12,13 @@ public class InEventLifeCycleStatemachine
 			e = true;
 		}
 
-		private int i;
+		private long i;
 
-		public int getI() {
+		public long getI() {
 			return i;
 		}
 
-		public void setI(int value) {
+		public void setI(long value) {
 			this.i = value;
 		}
 
@@ -75,14 +75,23 @@ public class InEventLifeCycleStatemachine
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -100,11 +109,11 @@ public class InEventLifeCycleStatemachine
 		sCInterface.raiseE();
 	}
 
-	public int getI() {
+	public long getI() {
 		return sCInterface.getI();
 	}
 
-	public void setI(int value) {
+	public void setI(long value) {
 		sCInterface.setI(value);
 	}
 

@@ -10,83 +10,83 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 			e1 = true;
 		}
 
-		private int myBit1;
+		private long myBit1;
 
-		public int getMyBit1() {
+		public long getMyBit1() {
 			return myBit1;
 		}
 
-		public void setMyBit1(int value) {
+		public void setMyBit1(long value) {
 			this.myBit1 = value;
 		}
 
-		private int myBit2;
+		private long myBit2;
 
-		public int getMyBit2() {
+		public long getMyBit2() {
 			return myBit2;
 		}
 
-		public void setMyBit2(int value) {
+		public void setMyBit2(long value) {
 			this.myBit2 = value;
 		}
 
-		private int leftBitshift;
+		private long leftBitshift;
 
-		public int getLeftBitshift() {
+		public long getLeftBitshift() {
 			return leftBitshift;
 		}
 
-		public void setLeftBitshift(int value) {
+		public void setLeftBitshift(long value) {
 			this.leftBitshift = value;
 		}
 
-		private int rightBitshift;
+		private long rightBitshift;
 
-		public int getRightBitshift() {
+		public long getRightBitshift() {
 			return rightBitshift;
 		}
 
-		public void setRightBitshift(int value) {
+		public void setRightBitshift(long value) {
 			this.rightBitshift = value;
 		}
 
-		private int complementBitshift;
+		private long complementBitshift;
 
-		public int getComplementBitshift() {
+		public long getComplementBitshift() {
 			return complementBitshift;
 		}
 
-		public void setComplementBitshift(int value) {
+		public void setComplementBitshift(long value) {
 			this.complementBitshift = value;
 		}
 
-		private int bitwiseAnd;
+		private long bitwiseAnd;
 
-		public int getBitwiseAnd() {
+		public long getBitwiseAnd() {
 			return bitwiseAnd;
 		}
 
-		public void setBitwiseAnd(int value) {
+		public void setBitwiseAnd(long value) {
 			this.bitwiseAnd = value;
 		}
 
-		private int bitwiseOr;
+		private long bitwiseOr;
 
-		public int getBitwiseOr() {
+		public long getBitwiseOr() {
 			return bitwiseOr;
 		}
 
-		public void setBitwiseOr(int value) {
+		public void setBitwiseOr(long value) {
 			this.bitwiseOr = value;
 		}
 
-		private int bitwiseXor;
+		private long bitwiseXor;
 
-		public int getBitwiseXor() {
+		public long getBitwiseXor() {
 			return bitwiseXor;
 		}
 
-		public void setBitwiseXor(int value) {
+		public void setBitwiseXor(long value) {
 			this.bitwiseXor = value;
 		}
 
@@ -166,14 +166,23 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_StateA :
@@ -193,60 +202,60 @@ public class BitExpressionsStatemachine implements IBitExpressionsStatemachine {
 		sCInterface.raiseE1();
 	}
 
-	public int getMyBit1() {
+	public long getMyBit1() {
 		return sCInterface.getMyBit1();
 	}
 
-	public void setMyBit1(int value) {
+	public void setMyBit1(long value) {
 		sCInterface.setMyBit1(value);
 	}
-	public int getMyBit2() {
+	public long getMyBit2() {
 		return sCInterface.getMyBit2();
 	}
 
-	public void setMyBit2(int value) {
+	public void setMyBit2(long value) {
 		sCInterface.setMyBit2(value);
 	}
-	public int getLeftBitshift() {
+	public long getLeftBitshift() {
 		return sCInterface.getLeftBitshift();
 	}
 
-	public void setLeftBitshift(int value) {
+	public void setLeftBitshift(long value) {
 		sCInterface.setLeftBitshift(value);
 	}
-	public int getRightBitshift() {
+	public long getRightBitshift() {
 		return sCInterface.getRightBitshift();
 	}
 
-	public void setRightBitshift(int value) {
+	public void setRightBitshift(long value) {
 		sCInterface.setRightBitshift(value);
 	}
-	public int getComplementBitshift() {
+	public long getComplementBitshift() {
 		return sCInterface.getComplementBitshift();
 	}
 
-	public void setComplementBitshift(int value) {
+	public void setComplementBitshift(long value) {
 		sCInterface.setComplementBitshift(value);
 	}
-	public int getBitwiseAnd() {
+	public long getBitwiseAnd() {
 		return sCInterface.getBitwiseAnd();
 	}
 
-	public void setBitwiseAnd(int value) {
+	public void setBitwiseAnd(long value) {
 		sCInterface.setBitwiseAnd(value);
 	}
-	public int getBitwiseOr() {
+	public long getBitwiseOr() {
 		return sCInterface.getBitwiseOr();
 	}
 
-	public void setBitwiseOr(int value) {
+	public void setBitwiseOr(long value) {
 		sCInterface.setBitwiseOr(value);
 	}
-	public int getBitwiseXor() {
+	public long getBitwiseXor() {
 		return sCInterface.getBitwiseXor();
 	}
 
-	public void setBitwiseXor(int value) {
+	public void setBitwiseXor(long value) {
 		sCInterface.setBitwiseXor(value);
 	}
 

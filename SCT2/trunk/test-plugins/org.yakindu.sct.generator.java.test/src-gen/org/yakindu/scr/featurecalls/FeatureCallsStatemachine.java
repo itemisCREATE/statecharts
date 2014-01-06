@@ -10,13 +10,13 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 			event1 = true;
 		}
 
-		private int myInt;
+		private long myInt;
 
-		public int getMyInt() {
+		public long getMyInt() {
 			return myInt;
 		}
 
-		public void setMyInt(int value) {
+		public void setMyInt(long value) {
 			this.myInt = value;
 		}
 
@@ -78,14 +78,23 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCIMyInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :

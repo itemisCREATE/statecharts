@@ -28,13 +28,13 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 			jd = true;
 		}
 
-		private int x;
+		private long x;
 
-		public int getX() {
+		public long getX() {
 			return x;
 		}
 
-		public void setX(int value) {
+		public void setX(long value) {
 			this.x = value;
 		}
 
@@ -122,14 +122,23 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :
@@ -169,11 +178,11 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		sCInterface.raiseJd();
 	}
 
-	public int getX() {
+	public long getX() {
 		return sCInterface.getX();
 	}
 
-	public void setX(int value) {
+	public void setX(long value) {
 		sCInterface.setX(value);
 	}
 

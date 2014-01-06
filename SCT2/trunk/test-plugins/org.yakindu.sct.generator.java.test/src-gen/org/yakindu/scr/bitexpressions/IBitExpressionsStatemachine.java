@@ -5,22 +5,22 @@ public interface IBitExpressionsStatemachine extends IStatemachine {
 
 	public interface SCInterface {
 		public void raiseE1();
-		public int getMyBit1();
-		public void setMyBit1(int value);
-		public int getMyBit2();
-		public void setMyBit2(int value);
-		public int getLeftBitshift();
-		public void setLeftBitshift(int value);
-		public int getRightBitshift();
-		public void setRightBitshift(int value);
-		public int getComplementBitshift();
-		public void setComplementBitshift(int value);
-		public int getBitwiseAnd();
-		public void setBitwiseAnd(int value);
-		public int getBitwiseOr();
-		public void setBitwiseOr(int value);
-		public int getBitwiseXor();
-		public void setBitwiseXor(int value);
+		public long getMyBit1();
+		public void setMyBit1(long value);
+		public long getMyBit2();
+		public void setMyBit2(long value);
+		public long getLeftBitshift();
+		public void setLeftBitshift(long value);
+		public long getRightBitshift();
+		public void setRightBitshift(long value);
+		public long getComplementBitshift();
+		public void setComplementBitshift(long value);
+		public long getBitwiseAnd();
+		public void setBitwiseAnd(long value);
+		public long getBitwiseOr();
+		public void setBitwiseOr(long value);
+		public long getBitwiseXor();
+		public void setBitwiseXor(long value);
 
 	}
 

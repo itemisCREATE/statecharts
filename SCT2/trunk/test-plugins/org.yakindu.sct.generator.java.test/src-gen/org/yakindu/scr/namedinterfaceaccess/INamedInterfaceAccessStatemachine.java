@@ -12,7 +12,7 @@ public interface INamedInterfaceAccessStatemachine extends IStatemachine {
 	public SCISafe getSCISafe();
 
 	public interface SCIUser {
-		public void raiseNumberPressed(int value);
+		public void raiseNumberPressed(long value);
 		public void raiseReset();
 
 	}

@@ -16,33 +16,33 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			f = true;
 		}
 
-		private int x;
+		private long x;
 
-		public int getX() {
+		public long getX() {
 			return x;
 		}
 
-		public void setX(int value) {
+		public void setX(long value) {
 			this.x = value;
 		}
 
-		private int y;
+		private long y;
 
-		public int getY() {
+		public long getY() {
 			return y;
 		}
 
-		public void setY(int value) {
+		public void setY(long value) {
 			this.y = value;
 		}
 
-		private int z;
+		private long z;
 
-		public int getZ() {
+		public long getZ() {
 			return z;
 		}
 
-		public void setZ(int value) {
+		public void setZ(long value) {
 			this.z = value;
 		}
 
@@ -172,14 +172,23 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case r_A :
@@ -227,25 +236,25 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		sCInterface.raiseF();
 	}
 
-	public int getX() {
+	public long getX() {
 		return sCInterface.getX();
 	}
 
-	public void setX(int value) {
+	public void setX(long value) {
 		sCInterface.setX(value);
 	}
-	public int getY() {
+	public long getY() {
 		return sCInterface.getY();
 	}
 
-	public void setY(int value) {
+	public void setY(long value) {
 		sCInterface.setY(value);
 	}
-	public int getZ() {
+	public long getZ() {
 		return sCInterface.getZ();
 	}
 
-	public void setZ(int value) {
+	public void setZ(long value) {
 		sCInterface.setZ(value);
 	}
 
@@ -262,6 +271,9 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		switch (historyVector[0]) {
 			case r2_B_r_BA_r_BAA :
 				sCInterface.y += 1;
+
+				nextStateIndex = 1;
+				stateVector[1] = State.r2_B_r_BA_r_BAA;
 				break;
 
 			case r2_B_r_BB :

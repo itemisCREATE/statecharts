@@ -6,12 +6,12 @@ public interface IDeepEntryStatemachine extends IStatemachine {
 	public interface SCInterface {
 		public void raiseE();
 		public void raiseF();
-		public int getX();
-		public void setX(int value);
-		public int getY();
-		public void setY(int value);
-		public int getZ();
-		public void setZ(int value);
+		public long getX();
+		public void setX(long value);
+		public long getY();
+		public void setY(long value);
+		public long getZ();
+		public void setZ(long value);
 
 	}
 

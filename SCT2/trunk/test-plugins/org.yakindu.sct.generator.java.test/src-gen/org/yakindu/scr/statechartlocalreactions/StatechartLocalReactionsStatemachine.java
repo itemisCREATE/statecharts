@@ -6,13 +6,13 @@ public class StatechartLocalReactionsStatemachine
 
 	private final class SCInterfaceImpl implements SCInterface {
 
-		private int myInt;
+		private long myInt;
 
-		public int getMyInt() {
+		public long getMyInt() {
 			return myInt;
 		}
 
-		public void setMyInt(int value) {
+		public void setMyInt(long value) {
 			this.myInt = value;
 		}
 
@@ -83,13 +83,22 @@ public class StatechartLocalReactionsStatemachine
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_S1 :
@@ -107,11 +116,11 @@ public class StatechartLocalReactionsStatemachine
 		return sCInterface;
 	}
 
-	public int getMyInt() {
+	public long getMyInt() {
 		return sCInterface.getMyInt();
 	}
 
-	public void setMyInt(int value) {
+	public void setMyInt(long value) {
 		sCInterface.setMyInt(value);
 	}
 

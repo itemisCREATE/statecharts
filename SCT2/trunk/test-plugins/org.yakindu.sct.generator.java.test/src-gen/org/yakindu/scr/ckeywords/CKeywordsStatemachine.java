@@ -26,13 +26,13 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 			this.case_ID = value;
 		}
 
-		private int do_ID;
+		private long do_ID;
 
-		public int getDo() {
+		public long getDo() {
 			return do_ID;
 		}
 
-		public void setDo(int value) {
+		public void setDo(long value) {
 			this.do_ID = value;
 		}
 
@@ -445,14 +445,23 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 		sCInterface.clearEvents();
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case auto_char :
@@ -491,11 +500,11 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void setCase(boolean value) {
 		sCInterface.setCase(value);
 	}
-	public int getDo() {
+	public long getDo() {
 		return sCInterface.getDo();
 	}
 
-	public void setDo(int value) {
+	public void setDo(long value) {
 		sCInterface.setDo(value);
 	}
 	public boolean getContinue() {

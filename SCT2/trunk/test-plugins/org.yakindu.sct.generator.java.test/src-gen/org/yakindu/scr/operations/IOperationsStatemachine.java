@@ -5,7 +5,7 @@ public interface IOperationsStatemachine extends IStatemachine {
 
 	public interface InternalOperationCallback {
 		public void internalOperation1();
-		public boolean internalOperation2(int param1);
+		public boolean internalOperation2(long param1);
 	}
 
 	public void setInternalOperationCallback(
@@ -18,7 +18,7 @@ public interface IOperationsStatemachine extends IStatemachine {
 
 	public interface SCIInterface1OperationCallback {
 		public void interfaceOperation1();
-		public boolean interfaceOperation2(int param1);
+		public boolean interfaceOperation2(long param1);
 	}
 
 	public SCIInterface1 getSCIInterface1();
@@ -32,7 +32,7 @@ public interface IOperationsStatemachine extends IStatemachine {
 
 	public interface SCInterfaceOperationCallback {
 		public void unnamedInterfaceOperation1();
-		public boolean unnamedInterfaceOperation2(int param1);
+		public boolean unnamedInterfaceOperation2(long param1);
 	}
 
 	public SCInterface getSCInterface();

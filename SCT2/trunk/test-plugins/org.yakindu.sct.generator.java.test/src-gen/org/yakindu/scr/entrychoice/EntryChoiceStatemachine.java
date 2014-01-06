@@ -27,6 +27,8 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	public void enter() {
 		entryAction();
 
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
 	}
 
 	public void exit() {
@@ -43,13 +45,22 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		exitAction();
 	}
 
+	/**
+	 * This method resets the incoming events (time events included).
+	 */
 	protected void clearEvents() {
 
 	}
 
+	/**
+	 * This method resets the outgoing events.
+	 */
 	protected void clearOutEvents() {
 	}
 
+	/**
+	 * Returns true if the given state is currently active otherwise false.
+	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
 			case main_region_A :

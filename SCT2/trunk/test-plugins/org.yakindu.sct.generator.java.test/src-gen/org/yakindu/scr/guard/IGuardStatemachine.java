@@ -7,8 +7,8 @@ public interface IGuardStatemachine extends IStatemachine {
 		public void raiseEvent1();
 		public void raiseEvent2();
 		public void raiseReturn();
-		public int getMyVar();
-		public void setMyVar(int value);
+		public long getMyVar();
+		public void setMyVar(long value);
 
 	}
 

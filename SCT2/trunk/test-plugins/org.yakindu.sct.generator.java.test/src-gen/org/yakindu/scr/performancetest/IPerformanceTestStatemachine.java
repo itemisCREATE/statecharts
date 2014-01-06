@@ -11,12 +11,12 @@ public interface IPerformanceTestStatemachine
 		public void raiseE1();
 		public void raiseE2();
 		public void raiseE3();
-		public int getX();
-		public void setX(int value);
-		public int getA();
-		public void setA(int value);
-		public int getC();
-		public void setC(int value);
+		public long getX();
+		public void setX(long value);
+		public long getA();
+		public void setA(long value);
+		public long getC();
+		public void setC(long value);
 
 	}
 
