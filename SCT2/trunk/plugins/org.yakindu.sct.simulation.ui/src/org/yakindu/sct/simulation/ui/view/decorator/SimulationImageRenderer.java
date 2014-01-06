@@ -67,7 +67,7 @@ public class SimulationImageRenderer {
 
 	public Image renderImage(IFile file, ExecutionContext context) {
 		Diagram diagram = getDiagramCopy(file);
-		return renderImage(diagram);
+		return renderImage(diagram, context);
 	}
 
 	public Image renderImage(Diagram diagram, ExecutionContext context) {
