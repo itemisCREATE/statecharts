@@ -167,6 +167,9 @@ class Statemachine {
 	'''
 	
 	def private clearInEventsFunction(ExecutionFlow flow) '''
+		/**
+		* This method resets the incoming events (time events included).
+		*/
 		protected void clearEvents() {
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasEvents»
@@ -188,6 +191,9 @@ class Statemachine {
 	'''
 	
 	def private clearOutEventsFunction(ExecutionFlow flow) '''
+		/**
+		* This method resets the outgoing events.
+		*/
 		protected void clearOutEvents() {
 			«FOR scope : flow.interfaceScopes»
 				«IF scope.hasOutgoingEvents»
@@ -198,6 +204,9 @@ class Statemachine {
 	'''
 	
 	def private isActiveFunction(ExecutionFlow flow) '''
+		/**
+		* Returns true if the given state is currently active otherwise false.
+		*/
 		public boolean isStateActive(State state){
 			switch (state) {
 				«FOR s : flow.states»
