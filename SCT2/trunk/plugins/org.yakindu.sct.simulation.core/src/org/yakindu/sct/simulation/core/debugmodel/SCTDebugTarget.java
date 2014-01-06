@@ -129,7 +129,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	}
 
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
-		return true;
+		return breakpoint.getModelIdentifier().startsWith("com.yakindu.sct.simulation");
 	}
 
 	public boolean canTerminate() {
@@ -232,12 +232,10 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 		return stepping;
 	}
 
-	
 	public ISimulationEngine getSimulationEngine() {
 		return engine;
 	}
-	
-	
+
 	// Fires fireChangeEvents to refresh the DebugUI TreeViewer with the active
 	// states
 	protected class UpdateTreeAdapter extends CrossDocumentContentAdapter {
