@@ -21,22 +21,26 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- *  Unit TestCase for TimeTrigger
+ *  Unit TestCase for TimedTransitions
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class TimeTriggerTest extends AbstractExecutionFlowTest {
+public class TimedTransitionsTest extends AbstractExecutionFlowTest {
 	@Inject
 	private SCTUnitTestModels models;
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("TimeTrigger.sct");
+				.loadExecutionFlowFromResource("TimedTransitions.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void TestName() throws Exception {
-		assertTrue(true);
+	public void Timer01() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("Start"));
+		Thread.sleep(2030);
+		interpreter.runCycle();
+		assertTrue(isActive("End"));
 	}
 }
