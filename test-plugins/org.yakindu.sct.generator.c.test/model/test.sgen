@@ -64,14 +64,6 @@ GeneratorModel for sctunit::c {
 		}			
 	}
 	
-	test DeepHistory{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.c.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
-	
 	test DeepEntry{
 		
 		feature Outlet{ 
@@ -80,6 +72,15 @@ GeneratorModel for sctunit::c {
 		}			
 	}
 	
+	
+	test DeepHistory{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
 	test EnterState{
 		
 		feature Outlet{ 
@@ -313,7 +314,7 @@ GeneratorModel for sctunit::c {
 		}			
 	}
 	
-	test TimeTrigger {
+	test TimedTransitions {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.c.test" 
@@ -335,7 +336,6 @@ GeneratorModel for sctunit::c {
 			targetProject = "org.yakindu.sct.generator.c.test" 
 			targetFolder = "test-gen"			
 		}			
-	}
-	
+	}	
 		
 }
