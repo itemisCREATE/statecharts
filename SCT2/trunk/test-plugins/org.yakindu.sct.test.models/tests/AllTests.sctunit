@@ -8,7 +8,8 @@ testsuite AllTests {
 	Declarations, 
 	DeepEntry,
 	DeepHistory,
-	EnterState, 
+	EnterState,
+	EntryChoice, 
 	ExitOnSelfTransition, 
 	ExitState,
 //	FeatureCalls,
@@ -37,7 +38,7 @@ testsuite AllTests {
 	StringExpressions, 
 	SyncFork,
 	SyncJoin, 
-//	TimeTrigger,
+//	TimedTransitions,
 	TransitionWithoutCondition,
 	ValuedEvents,
 	EntryChoice
