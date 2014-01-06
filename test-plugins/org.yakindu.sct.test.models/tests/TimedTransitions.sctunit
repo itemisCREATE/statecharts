@@ -1,0 +1,13 @@
+testgroup TimedTransitions for statechart TimedTransitions{
+		
+	test Timer01{
+		enter 
+		assert active (TimedTransitions.main_region.Start)
+		
+		wait 2030ms
+		cycle
+		
+		assert active (TimedTransitions.main_region.End)				
+	}		
+	
+}
