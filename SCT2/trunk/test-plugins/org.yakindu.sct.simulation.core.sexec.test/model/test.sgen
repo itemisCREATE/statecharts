@@ -80,6 +80,16 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
+	test DynamicChoice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	
+	
 	test EnterState{
 		
 		feature Outlet{ 
@@ -280,6 +290,16 @@ GeneratorModel for sctunit::interpreter {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test StaticChoice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	
 	
 	test STextKeywordsInStatesAndRegions{
 		
