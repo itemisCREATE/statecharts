@@ -80,6 +80,14 @@ GeneratorModel for sctunit::c {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test DynamicChoice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
 		
 	test EnterState{
 		
@@ -275,6 +283,14 @@ GeneratorModel for sctunit::c {
 	}
 	
 	test StateIsActive{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+			
+	test StaticChoice{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.c.test" 
