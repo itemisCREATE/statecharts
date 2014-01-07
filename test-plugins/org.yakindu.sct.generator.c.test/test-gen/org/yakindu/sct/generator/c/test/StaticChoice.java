@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2014 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,9 +18,9 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/TimeTrigger/TimeTrigger.cc", program = "gtests/TimeTrigger/TimeTrigger", model = "testmodels/SCTUnit/TimeTrigger.sct")
+@GTest(sourceFile = "gtests/StaticChoice/StaticChoice.cc", program = "gtests/StaticChoice/StaticChoice", model = "testmodels/SCTUnit/StaticChoice.sct")
 @RunWith(GTestRunner.class)
-public class TimeTrigger {
+public class StaticChoice {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
 
