@@ -1,0 +1,11 @@
+
+testgroup StaticChoice for statechart StaticChoice{
+	
+	test StaticChoiceTest { 
+		enter
+		assert active(StaticChoice.main_region.Start)
+		cycle
+		//assert active(StaticChoice.main_region.B) // doesn't work atm		 
+	} 
+}
+	

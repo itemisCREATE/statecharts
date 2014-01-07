@@ -1,0 +1,11 @@
+
+testgroup DynamicChoice for statechart DynamicChoice{
+	
+	test DynamicChoiceTest { 
+		enter		
+		assert active(DynamicChoice.main_region.Start)
+		cycle
+		assert active(DynamicChoice.main_region.A)	 
+	} 
+}
+	
