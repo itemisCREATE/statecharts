@@ -22,6 +22,31 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+	
+	statechart BooleanExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	
+	statechart BitExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+		
 	statechart Choice {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -66,7 +91,19 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
-	
+		
+	statechart DynamicChoice{
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+		
 	statechart EntryChoice {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -78,8 +115,7 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
-	
-	
+		
 	statechart ExitOnSelfTransition {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -269,6 +305,19 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	}
+	
+	statechart StaticChoice {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	
 	statechart SyncFork {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
@@ -292,28 +341,6 @@ GeneratorModel for yakindu::java {
 		}
 	}
 	statechart ValuedEvents {
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "src-gen"
-		}
-
-		feature GeneralFeatures {
-			TimerService = true
-			RuntimeService = true
-		}
-	}
-	statechart BooleanExpressions {
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "src-gen"
-		}
-
-		feature GeneralFeatures {
-			TimerService = true
-			RuntimeService = true
-		}
-	}
-	statechart BitExpressions {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
 			targetFolder = "src-gen"
