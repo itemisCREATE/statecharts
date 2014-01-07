@@ -19,6 +19,7 @@ import org.eclipse.gmf.runtime.emf.core.GMFEditingDomainFactory;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.navigator.ICommonContentExtensionSite;
 import org.eclipse.ui.navigator.ICommonContentProvider;
@@ -45,6 +46,8 @@ public class StatechartNavigatorContentProvider implements
 	private Runnable myViewerRefreshRunnable;
 	
 	private ECrossReferenceAdapter myCrossReferenceAdapter;
+	
+	private ViewerFilter viewerFilter;
 
 	public StatechartNavigatorContentProvider() {
 		myAdapterFctoryContentProvier = new AdapterFactoryContentProvider(
@@ -222,6 +225,25 @@ public class StatechartNavigatorContentProvider implements
 	}
 
 	public boolean hasChildren(Object element) {
-		return element instanceof IFile || getChildren(element).length > 0;
+		return element instanceof IFile || hasVisibleChildren(element);
+	}
+	
+	protected boolean hasVisibleChildren(Object parent) {
+		Object[] children = getChildren(parent);
+		if (children.length > 0) {
+			for (Object obj : children) {
+				if (getViewerFilter().select(null, parent, obj)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	protected ViewerFilter getViewerFilter() {
+		if (viewerFilter == null) {
+			viewerFilter = new StatechartObjectViewerFilter();
+		}
+		return viewerFilter;
 	}
 }
