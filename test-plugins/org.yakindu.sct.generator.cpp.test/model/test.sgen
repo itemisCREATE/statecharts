@@ -7,7 +7,7 @@ GeneratorModel for sctunit::cpp {
 			targetFolder = "test-gen"			
 		}			
 	}
-	
+		
 	test AlwaysOncycle{
 		
 		feature Outlet{ 
@@ -64,7 +64,7 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
-	test DeepEntry {
+	test DeepEntry{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
@@ -72,7 +72,8 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
-	test DeepHistory {
+	
+	test DeepHistory{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
@@ -80,6 +81,22 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
+	test DynamicChoice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test EntryChoice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+		
 	test EnterState{
 		
 		feature Outlet{ 
@@ -167,7 +184,7 @@ GeneratorModel for sctunit::cpp {
 			targetFolder = "test-gen"			
 		}			
 	}
-		
+		 
 	test LogicalAndTests{
 		
 		feature Outlet{ 
@@ -175,7 +192,7 @@ GeneratorModel for sctunit::cpp {
 			targetFolder = "test-gen"			
 		}			
 	}
-		
+	
 	test LogicalOrTests{
 		
 		feature Outlet{ 
@@ -183,7 +200,7 @@ GeneratorModel for sctunit::cpp {
 			targetFolder = "test-gen"			
 		}			
 	}
-		
+	
 	test NamedInterfaceAccess{
 		
 		feature Outlet{ 
@@ -271,7 +288,16 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
+	}	
+	
+	test StaticChoice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
 	}
+	
 	
 	test STextKeywordsInStatesAndRegions{
 		
@@ -305,7 +331,7 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
-	test TimeTrigger{
+	test TimedTransitions {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
@@ -327,7 +353,6 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
-	}
-	
+	}	
 		
 }
