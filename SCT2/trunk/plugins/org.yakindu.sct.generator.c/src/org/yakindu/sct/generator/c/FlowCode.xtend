@@ -92,18 +92,10 @@ class FlowCode {
 		'''«step.functionName»(«scHandle»);'''
 
 	def dispatch CharSequence code(Sequence it) '''
-		«IF comment != null»
-			{
-				«stepComment»
-				«FOR s : steps»
-					«s.code»
-				«ENDFOR»
-			}
-		«ELSE»
-			«FOR s : steps»
-				«s.code»
-			«ENDFOR»
-		«ENDIF»
+		«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
+		«FOR s : steps»
+			«s.code»
+		«ENDFOR»
 	'''	
 
 	def dispatch CharSequence code(Check it) 
