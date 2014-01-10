@@ -12,4 +12,21 @@
 	<artifactId>org.yakindu.base.expressions.ui</artifactId>
 	<groupId>org.yakindu.base.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.xtend</groupId>
+				<artifactId>xtend-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	
+	
 </project>
