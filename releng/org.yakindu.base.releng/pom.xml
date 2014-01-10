@@ -23,6 +23,11 @@
 				<version>${tycho-version}</version>
 				<extensions>true</extensions>
 			</plugin>
+			<plugin>
+				<groupId>org.fornax.toolsupport</groupId>
+				<artifactId>fornax-oaw-m2-plugin</artifactId>
+				<version>3.3.0</version>
+			</plugin>
 			<!-- Convert mappings in about.mappings -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
