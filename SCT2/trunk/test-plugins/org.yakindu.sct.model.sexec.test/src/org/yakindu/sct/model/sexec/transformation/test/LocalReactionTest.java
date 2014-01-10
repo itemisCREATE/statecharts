@@ -1,15 +1,29 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.TYPE_INTEGER;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.findState;
 import static org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.flattenSequenceStepsAsList;
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory.*;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createAlwaysEventSpec;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEntryAssignment;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createLocalReaction;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionTrigger;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createValue;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableAssignment;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.createGuardExpression;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.getOrCreateInternalScope;
 
 import java.util.List;
 
 import org.junit.Test;
+import org.yakindu.base.expressions.expressions.AssignmentOperator;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
@@ -22,7 +36,6 @@ import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;

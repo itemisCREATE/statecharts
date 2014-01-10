@@ -10,6 +10,9 @@
  */
 package org.yakindu.sct.refactoring.refactor.impl;
 
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.createInlineStyle;
+import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.getInlineStyle;
+
 import org.eclipse.gmf.runtime.diagram.core.util.ViewUtil;
 import org.eclipse.gmf.runtime.notation.BooleanValueStyle;
 import org.eclipse.gmf.runtime.notation.Diagram;
@@ -19,7 +22,6 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.providers.SemanticHints;
-import static org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil.*;
 
 /**
  * 

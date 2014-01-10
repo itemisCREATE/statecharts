@@ -23,6 +23,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+
 import org.yakindu.base.types.TypesPackage;
 
 import org.yakindu.sct.model.sgraph.provider.VariableItemProvider;
@@ -246,92 +248,7 @@ public class VariableDefinitionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
          StextFactory.eINSTANCE.createEventRaisingExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createAssignmentExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createConditionalExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createLogicalOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createLogicalAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createLogicalNotExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createBitwiseXorExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createBitwiseOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createBitwiseAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createLogicalRelationExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createShiftExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createFeatureCall()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -346,7 +263,92 @@ public class VariableDefinitionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         StextFactory.eINSTANCE.createParenthesizedExpression()));
+         ExpressionsFactory.eINSTANCE.createExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

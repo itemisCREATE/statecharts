@@ -11,9 +11,9 @@
  */
 package org.yakindu.sct.model.stext.types;
 
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.ITypeSystem.InferenceResult;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.inject.ImplementedBy;

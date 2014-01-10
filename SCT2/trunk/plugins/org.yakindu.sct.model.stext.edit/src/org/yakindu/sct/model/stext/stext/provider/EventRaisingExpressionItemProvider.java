@@ -9,6 +9,8 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -18,6 +20,10 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+
+import org.yakindu.base.expressions.expressions.provider.ExpressionItemProvider;
 
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -161,92 +167,7 @@ public class EventRaisingExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
          StextFactory.eINSTANCE.createEventRaisingExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createAssignmentExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createConditionalExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createLogicalOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createLogicalAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createLogicalNotExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createBitwiseXorExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createBitwiseOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createBitwiseAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createLogicalRelationExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createShiftExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createFeatureCall()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -261,97 +182,97 @@ public class EventRaisingExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
-         StextFactory.eINSTANCE.createParenthesizedExpression()));
+         ExpressionsFactory.eINSTANCE.createExpression()));
 
     newChildDescriptors.add
       (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createExpression()));
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__EVENT,
+         ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
 
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
          StextFactory.eINSTANCE.createEventRaisingExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createAssignmentExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createConditionalExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createLogicalOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createLogicalAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createLogicalNotExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createBitwiseXorExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createBitwiseOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createBitwiseAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createLogicalRelationExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createShiftExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createFeatureCall()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -366,7 +287,92 @@ public class EventRaisingExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
-         StextFactory.eINSTANCE.createParenthesizedExpression()));
+         ExpressionsFactory.eINSTANCE.createExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**
@@ -392,6 +398,18 @@ public class EventRaisingExpressionItemProvider
          new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
     }
     return super.getCreateChildText(owner, feature, child, selection);
+  }
+
+  /**
+   * Return the resource locator for this item provider's resources.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public ResourceLocator getResourceLocator()
+  {
+    return STextEditPlugin.INSTANCE;
   }
 
 }

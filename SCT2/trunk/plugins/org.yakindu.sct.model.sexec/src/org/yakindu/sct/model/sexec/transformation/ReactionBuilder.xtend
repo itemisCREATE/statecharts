@@ -3,28 +3,27 @@ package org.yakindu.sct.model.sexec.transformation
 import com.google.common.collect.Iterables
 import com.google.inject.Inject
 import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.Exit
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sgraph.Synchronization
-import org.yakindu.sct.model.sexec.Reaction
-import org.yakindu.sct.model.sgraph.Exit
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
-
 
 class ReactionBuilder {
 	@Inject extension SexecElementMapping mapping

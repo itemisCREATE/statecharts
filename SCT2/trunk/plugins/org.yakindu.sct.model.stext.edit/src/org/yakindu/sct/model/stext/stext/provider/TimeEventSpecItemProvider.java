@@ -21,6 +21,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
@@ -218,92 +220,7 @@ public class TimeEventSpecItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
          StextFactory.eINSTANCE.createEventRaisingExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createAssignmentExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createConditionalExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createLogicalOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createLogicalAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createLogicalNotExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createBitwiseXorExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createBitwiseOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createBitwiseAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createLogicalRelationExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createShiftExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createFeatureCall()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -318,7 +235,92 @@ public class TimeEventSpecItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         StextFactory.eINSTANCE.createParenthesizedExpression()));
+         ExpressionsFactory.eINSTANCE.createExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
 }

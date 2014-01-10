@@ -22,10 +22,23 @@ import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createTime
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createTimeTriggeredReaction;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createValue;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableAssignment;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.createGuardExpression;
 
 import org.junit.Test;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.expressions.expressions.AssignmentExpression;
+import org.yakindu.base.expressions.expressions.AssignmentOperator;
+import org.yakindu.base.expressions.expressions.BoolLiteral;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.Literal;
+import org.yakindu.base.expressions.expressions.LogicalAndExpression;
+import org.yakindu.base.expressions.expressions.LogicalOrExpression;
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression;
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.If;
@@ -41,21 +54,9 @@ import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Statement;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.stext.stext.AssignmentExpression;
-import org.yakindu.sct.model.stext.stext.AssignmentOperator;
-import org.yakindu.sct.model.stext.stext.BoolLiteral;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.IntLiteral;
-import org.yakindu.sct.model.stext.stext.Literal;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression;
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression;
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -77,7 +78,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		ReactionTrigger tr1 = _createReactionTrigger(null);
 		_createRegularEventSpec(e1, tr1);
 
-		Statement s = behaviorMapping.buildCondition(tr1);
+		Expression s = behaviorMapping.buildCondition(tr1);
 
 		assertClass(ElementReferenceExpression.class, s);
 	}
@@ -100,7 +101,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		_createRegularEventSpec(e1, tr1);
 		_createRegularEventSpec(e2, tr1);
 
-		Statement s = behaviorMapping.buildCondition(tr1);
+		Expression s = behaviorMapping.buildCondition(tr1);
 
 		assertTrue(s instanceof LogicalOrExpression);
 		assertClass(ElementReferenceExpression.class, ((LogicalOrExpression) s).getLeftOperand());
@@ -127,7 +128,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		ReactionTrigger tr1 = _createReactionTrigger(null);
 		_createAlwaysEventSpec(tr1);
 
-		Statement s = behaviorMapping.buildCondition(tr1);
+		Expression s = behaviorMapping.buildCondition(tr1);
 
 		assertNotNull(s);
 		assertTrue(s instanceof PrimitiveValueExpression);

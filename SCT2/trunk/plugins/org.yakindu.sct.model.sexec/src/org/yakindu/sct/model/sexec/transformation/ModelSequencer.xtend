@@ -7,14 +7,14 @@ import org.apache.commons.logging.LogFactory
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Feature
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 

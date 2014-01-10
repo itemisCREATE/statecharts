@@ -26,11 +26,20 @@ import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReac
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createRegularEventSpec;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createValue;
 import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableAssignment;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.createGuardExpression;
 
 import java.util.List;
 
 import org.junit.Test;
+import org.yakindu.base.expressions.expressions.AssignmentExpression;
+import org.yakindu.base.expressions.expressions.AssignmentOperator;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.expressions.expressions.LogicalAndExpression;
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.base.expressions.expressions.RelationalOperator;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.EnterState;
 import org.yakindu.sct.model.sexec.Execution;
@@ -53,19 +62,12 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.stext.stext.AssignmentExpression;
-import org.yakindu.sct.model.stext.stext.AssignmentOperator;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression;
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression;
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.RelationalOperator;
 import org.yakindu.sct.model.stext.stext.StextFactory;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencerStateTest extends ModelSequencerTest {
@@ -688,9 +690,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		// the secont local reaction conforms to "e1 [x==42] / x=0;"
 		LocalReaction lr2 = _createLocalReaction(tsc.s1, null);
 		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr2.getTrigger());
-		LogicalRelationExpression lr2_equals = StextFactory.eINSTANCE.createLogicalRelationExpression();
+		LogicalRelationExpression lr2_equals = ExpressionsFactory.eINSTANCE.createLogicalRelationExpression();
 		lr2_equals.setOperator(RelationalOperator.EQUALS);
-		ElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
+		ElementReferenceExpression lr2_varRef = ExpressionsFactory.eINSTANCE.createElementReferenceExpression();
 		lr2_varRef.setReference(v1);
 		PrimitiveValueExpression lr2_value = _createValue(42);
 		lr2_equals.setLeftOperand(lr2_varRef);
@@ -702,9 +704,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		// the third local reaction conforms to: "[x==0] / x=1;"
 		LocalReaction lr3 = _createLocalReaction(tsc.s1, null);
-		LogicalRelationExpression lr3_equals = StextFactory.eINSTANCE.createLogicalRelationExpression();
+		LogicalRelationExpression lr3_equals = ExpressionsFactory.eINSTANCE.createLogicalRelationExpression();
 		lr3_equals.setOperator(RelationalOperator.EQUALS);
-		ElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
+		ElementReferenceExpression lr3_varRef = ExpressionsFactory.eINSTANCE.createElementReferenceExpression();
 		lr3_varRef.setReference(v1);
 		PrimitiveValueExpression lr3_value = _createValue(0);
 		lr3_equals.setLeftOperand(lr3_varRef);
@@ -778,9 +780,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		// the secont local reaction conforms to "e1 [x==42] / x=0;"
 		LocalReaction lr2 = _createLocalReaction(tsc.s1, null);
 		_createRegularEventSpec(tsc.e1, (ReactionTrigger) lr2.getTrigger());
-		LogicalRelationExpression lr2_equals = StextFactory.eINSTANCE.createLogicalRelationExpression();
+		LogicalRelationExpression lr2_equals = ExpressionsFactory.eINSTANCE.createLogicalRelationExpression();
 		lr2_equals.setOperator(RelationalOperator.EQUALS);
-		ElementReferenceExpression lr2_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
+		ElementReferenceExpression lr2_varRef = ExpressionsFactory.eINSTANCE.createElementReferenceExpression();
 		lr2_varRef.setReference(v1);
 		PrimitiveValueExpression lr2_value = _createValue(42);
 		lr2_equals.setLeftOperand(lr2_varRef);
@@ -792,9 +794,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		// the third local reaction conforms to: "[x==0] / x=1;"
 		LocalReaction lr3 = _createLocalReaction(tsc.s1, null);
-		LogicalRelationExpression lr3_equals = StextFactory.eINSTANCE.createLogicalRelationExpression();
+		LogicalRelationExpression lr3_equals = ExpressionsFactory.eINSTANCE.createLogicalRelationExpression();
 		lr3_equals.setOperator(RelationalOperator.EQUALS);
-		ElementReferenceExpression lr3_varRef = StextFactory.eINSTANCE.createElementReferenceExpression();
+		ElementReferenceExpression lr3_varRef = ExpressionsFactory.eINSTANCE.createElementReferenceExpression();
 		lr3_varRef.setReference(v1);
 		PrimitiveValueExpression lr3_value = _createValue(0);
 		lr3_equals.setLeftOperand(lr3_varRef);

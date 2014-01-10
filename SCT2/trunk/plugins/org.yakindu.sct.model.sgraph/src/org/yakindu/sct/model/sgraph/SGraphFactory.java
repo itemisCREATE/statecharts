@@ -136,15 +136,6 @@ public interface SGraphFactory extends EFactory {
 	State createState();
 
 	/**
-	 * Returns a new object of class '<em>Statement</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Statement</em>'.
-	 * @generated
-	 */
-	Statement createStatement();
-
-	/**
 	 * Returns a new object of class '<em>Regular State</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

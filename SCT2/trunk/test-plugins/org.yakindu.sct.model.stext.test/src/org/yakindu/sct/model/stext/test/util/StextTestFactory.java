@@ -11,7 +11,17 @@
  */
 package org.yakindu.sct.model.stext.test.util;
 
+
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.expressions.expressions.AssignmentExpression;
+import org.yakindu.base.expressions.expressions.AssignmentOperator;
+import org.yakindu.base.expressions.expressions.BoolLiteral;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.sct.model.sgraph.Reaction;
@@ -20,21 +30,13 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
-import org.yakindu.sct.model.stext.stext.AssignmentExpression;
-import org.yakindu.sct.model.stext.stext.AssignmentOperator;
-import org.yakindu.sct.model.stext.stext.BoolLiteral;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventSpec;
-import org.yakindu.sct.model.stext.stext.Expression;
-import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.Guard;
-import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
@@ -129,7 +131,7 @@ public class StextTestFactory extends StextFactoryImpl {
 
 	public static ElementReferenceExpression _createElementReferenceExpression(
 			NamedElement target) {
-		ElementReferenceExpression referenceExpression = StextFactory.eINSTANCE
+		ElementReferenceExpression referenceExpression = ExpressionsFactory.eINSTANCE
 				.createElementReferenceExpression();
 		referenceExpression.setReference(target);
 		return referenceExpression;
@@ -301,7 +303,7 @@ public class StextTestFactory extends StextFactoryImpl {
 	public static AssignmentExpression _createVariableAssignment(
 			VariableDefinition v, AssignmentOperator op, Expression expression,
 			ReactionEffect e) {
-		AssignmentExpression assignment = StextFactory.eINSTANCE
+		AssignmentExpression assignment = ExpressionsFactory.eINSTANCE
 				.createAssignmentExpression();
 		assignment.setVarRef(_createElementReferenceExpression(v));
 		assignment.setOperator(op);
@@ -313,24 +315,24 @@ public class StextTestFactory extends StextFactoryImpl {
 
 	public static FeatureCall _createOperationCall(OperationDefinition o) {
 		// TODO add owner as TypedElementExpression
-		FeatureCall oc = StextFactory.eINSTANCE.createFeatureCall();
+		FeatureCall oc = ExpressionsFactory.eINSTANCE.createFeatureCall();
 		oc.setFeature(o);
 		oc.setOperationCall(true);
 		return oc;
 	}
 
 	public static PrimitiveValueExpression _createValue(int i) {
-		PrimitiveValueExpression assignment = StextFactory.eINSTANCE
+		PrimitiveValueExpression assignment = ExpressionsFactory.eINSTANCE
 				.createPrimitiveValueExpression();
-		IntLiteral intLit = StextFactory.eINSTANCE.createIntLiteral();
+		IntLiteral intLit = ExpressionsFactory.eINSTANCE.createIntLiteral();
 		intLit.setValue(i);
 		assignment.setValue(intLit);
 		return assignment;
 	}
 
 	public static PrimitiveValueExpression _createValue(boolean b) {
-		PrimitiveValueExpression pve = StextFactory.eINSTANCE.createPrimitiveValueExpression();
-		BoolLiteral boolLit = StextFactory.eINSTANCE.createBoolLiteral();
+		PrimitiveValueExpression pve = ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression();
+		BoolLiteral boolLit = ExpressionsFactory.eINSTANCE.createBoolLiteral();
 		boolLit.setValue(b);
 		pve.setValue(boolLit);
 		return pve;

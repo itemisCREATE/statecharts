@@ -21,10 +21,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.stext.resource.impl.StextResource;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
-import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 
 import com.google.common.collect.Sets;

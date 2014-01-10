@@ -88,7 +88,7 @@
         eType="#//Step" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Check" eSuperTypes="#//Step">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Statement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" eType="ecore:EClass ../../org.yakindu.base.expressions/model/generated/Expressions.ecore#//Expression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="refs" upperBound="-1" eType="#//CheckRef"
         eOpposite="#//CheckRef/check"/>
@@ -106,7 +106,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Execution" eSuperTypes="#//Step">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="statement" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Statement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statement" eType="ecore:EClass ../../org.yakindu.base.expressions/model/generated/Expressions.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnterState" eSuperTypes="#//Step">
@@ -120,7 +120,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScheduleTimeEvent" eSuperTypes="#//Step">
     <eStructuralFeatures xsi:type="ecore:EReference" name="timeEvent" eType="#//TimeEvent"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="timeValue" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Statement"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="timeValue" eType="ecore:EClass ../../org.yakindu.base.expressions/model/generated/Expressions.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnscheduleTimeEvent" eSuperTypes="#//Step">

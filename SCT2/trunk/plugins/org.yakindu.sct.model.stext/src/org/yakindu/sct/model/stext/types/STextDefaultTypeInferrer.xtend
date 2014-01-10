@@ -11,61 +11,58 @@
  */
 package org.yakindu.sct.model.stext.types
 
+import com.google.common.collect.Iterables
 import com.google.inject.Inject
+import com.google.inject.Singleton
+import org.eclipse.core.runtime.IStatus
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.internal.xtend.expression.ast.Literal
+import org.yakindu.base.expressions.expressions.AdditiveOperator
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.base.expressions.expressions.BitwiseAndExpression
+import org.yakindu.base.expressions.expressions.BitwiseOrExpression
+import org.yakindu.base.expressions.expressions.BitwiseXorExpression
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.HexLiteral
+import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.LogicalAndExpression
+import org.yakindu.base.expressions.expressions.LogicalNotExpression
+import org.yakindu.base.expressions.expressions.LogicalOrExpression
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
+import org.yakindu.base.expressions.expressions.ParenthesizedExpression
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.expressions.RealLiteral
+import org.yakindu.base.expressions.expressions.RelationalOperator
+import org.yakindu.base.expressions.expressions.ShiftExpression
+import org.yakindu.base.expressions.expressions.ShiftOperator
+import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.expressions.expressions.UnaryOperator
+import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Feature
-import org.yakindu.base.types.ITypeSystem$InferenceResult
-import org.yakindu.base.types.ITypeSystem$InferredType
-import org.yakindu.base.types.ITypeSystem$ITypeSystemOperator
+import org.yakindu.base.types.ITypeSystem.ITypeSystemOperator
+import org.yakindu.base.types.ITypeSystem.InferenceIssue
+import org.yakindu.base.types.ITypeSystem.InferenceResult
+import org.yakindu.base.types.ITypeSystem.InferredType
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.TypedElement
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
-import org.yakindu.sct.model.stext.stext.AssignmentExpression
-import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
-import org.yakindu.sct.model.stext.stext.BitwiseOrExpression
-import org.yakindu.sct.model.stext.stext.BitwiseXorExpression
-import org.yakindu.sct.model.stext.stext.ConditionalExpression
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.FeatureCall
-import org.yakindu.sct.model.stext.stext.Literal
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
-import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
-import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.ShiftExpression
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem$UnaryOperators
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem$BinaryOperators
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem$TernaryOperators
-import org.yakindu.sct.model.stext.stext.AssignmentOperator
-import org.yakindu.sct.model.stext.stext.ShiftOperator
-import org.yakindu.sct.model.stext.stext.AdditiveOperator
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
-import org.yakindu.sct.model.stext.stext.RelationalOperator
-import com.google.inject.Singleton
-import org.yakindu.sct.model.stext.stext.UnaryOperator
-import com.google.common.collect.Iterables
-import org.yakindu.base.types.ITypeSystem$InferenceIssue
-import org.eclipse.core.runtime.IStatus
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.base.types.Type
-import org.yakindu.base.types.Enumerator
-import org.yakindu.base.types.TypedElement
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.StringLiteral
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.RealLiteral
-import org.yakindu.sct.model.stext.stext.HexLiteral
-import org.yakindu.sct.model.stext.stext.IntLiteral
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 /**
  * 
@@ -121,7 +118,7 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
  				}
  			
  				// reuse the assignment logic of the type system
- 				val result = inferResult(varType, valueType, BinaryOperators::ASSIGN)
+ 				val result = inferResult(varType, valueType, ISTextTypeSystem.BinaryOperators::ASSIGN)
  				if(result.type == null){
  					return new InferenceResult(null, new InferenceIssue("Cannot assign a value of type " + valueType.type.type.name + " to a variable of type " + varType.type.type.name + ".", IStatus::ERROR))
  				}	
@@ -213,26 +210,26 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	}
 	
 	def dispatch InferenceResult doInferType(LogicalAndExpression expression){
-		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, BinaryOperators::LOGICAL_AND)
+		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, ISTextTypeSystem.BinaryOperators::LOGICAL_AND)
 	}
 	def dispatch InferenceResult doInferType(LogicalOrExpression expression){
-		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, BinaryOperators::LOGICAL_OR)
+		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, ISTextTypeSystem.BinaryOperators::LOGICAL_OR)
 	}
 	
 	def dispatch InferenceResult doInferType(LogicalNotExpression expression){
-		return inferResult(expression.operand.doInferType, UnaryOperators::LOGICAL_NOT)
+		return inferResult(expression.operand.doInferType, ISTextTypeSystem.UnaryOperators::LOGICAL_NOT)
 	}
 	
 	def dispatch InferenceResult doInferType(BitwiseAndExpression expression){
-		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, BinaryOperators::BITWISE_AND)
+		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, ISTextTypeSystem.BinaryOperators::BITWISE_AND)
 	}
 	
 	def dispatch InferenceResult doInferType(BitwiseOrExpression expression){
-		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, BinaryOperators::BITWISE_OR)
+		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, ISTextTypeSystem.BinaryOperators::BITWISE_OR)
 	}
 	
 	def dispatch InferenceResult doInferType(BitwiseXorExpression expression){
-		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, BinaryOperators::BITWISE_XOR)
+		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType, ISTextTypeSystem.BinaryOperators::BITWISE_XOR)
 	}
 	
 	def dispatch InferenceResult doInferType(LogicalRelationExpression expression){ 
@@ -258,7 +255,7 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	}
 	
 	def dispatch InferenceResult doInferType(ConditionalExpression expression){
-		return inferResult(expression.condition.doInferType, expression.trueCase.doInferType, expression.falseCase.doInferType, TernaryOperators::CONDITIONAL);
+		return inferResult(expression.condition.doInferType, expression.trueCase.doInferType, expression.falseCase.doInferType, ISTextTypeSystem.TernaryOperators::CONDITIONAL);
 	} 
 	
 	def dispatch InferenceResult doInferType(EventRaisingExpression eventRaising){
@@ -280,7 +277,7 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
  				}
  			
  				// reuse the assignment logic of the type system
- 				val result = inferResult(eventType, valueType, BinaryOperators::ASSIGN)
+ 				val result = inferResult(eventType, valueType, ISTextTypeSystem.BinaryOperators::ASSIGN)
  				if(result.type == null){
  					return new InferenceResult(null, new InferenceIssue("Cannot assign a value of type " + valueType.type.type.name + " to an event of type " + eventType.type.type.name + ".", IStatus::ERROR))
  				}
@@ -364,11 +361,11 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	def protected dispatch ITypeSystemOperator getTypeSystemOperator(UnaryOperator operator){
 		switch(operator){
 			case UnaryOperator::COMPLEMENT:
-				UnaryOperators::COMPLEMENT
+				ISTextTypeSystem.UnaryOperators::COMPLEMENT
 			case UnaryOperator::NEGATIVE:
-				UnaryOperators::NEGATIVE
+				ISTextTypeSystem.UnaryOperators::NEGATIVE
 			case UnaryOperator::POSITIVE:
-				UnaryOperators::POSITIVE
+				ISTextTypeSystem.UnaryOperators::POSITIVE
 			default:
 				throw new IllegalArgumentException("Unsupported operator" + operator)
 		}
@@ -377,27 +374,27 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	def protected dispatch ITypeSystemOperator getTypeSystemOperator(AssignmentOperator operator) {
 		switch(operator){
 			case AssignmentOperator::ADD_ASSIGN:
-				BinaryOperators::ASSIGN_ADD
+				ISTextTypeSystem.BinaryOperators::ASSIGN_ADD
 			case AssignmentOperator::AND_ASSIGN:
-				BinaryOperators::ASSIGN_BITWISE_AND
+				ISTextTypeSystem.BinaryOperators::ASSIGN_BITWISE_AND
 			case AssignmentOperator::ASSIGN:
-				BinaryOperators::ASSIGN
+				ISTextTypeSystem.BinaryOperators::ASSIGN
 			case AssignmentOperator::DIV_ASSIGN:
-				BinaryOperators::ASSIGN_DIV
+				ISTextTypeSystem.BinaryOperators::ASSIGN_DIV
 			case AssignmentOperator::LEFT_SHIFT_ASSIGN:
-				BinaryOperators::ASSIGN_LEFT_SHIFT
+				ISTextTypeSystem.BinaryOperators::ASSIGN_LEFT_SHIFT
 			case AssignmentOperator::MOD_ASSIGN:
-				BinaryOperators::ASSIGN_MOD
+				ISTextTypeSystem.BinaryOperators::ASSIGN_MOD
 			case AssignmentOperator::MULT_ASSIGN:
-				BinaryOperators::ASSIGN_MULTIPLY
+				ISTextTypeSystem.BinaryOperators::ASSIGN_MULTIPLY
 			case AssignmentOperator::OR_ASSIGN:
-				BinaryOperators::ASSIGN_BITWISE_OR
+				ISTextTypeSystem.BinaryOperators::ASSIGN_BITWISE_OR
 			case AssignmentOperator::RIGHT_SHIFT_ASSIGN:
-				BinaryOperators::ASSIGN_RIGHT_SHIFT
+				ISTextTypeSystem.BinaryOperators::ASSIGN_RIGHT_SHIFT
 			case AssignmentOperator::SUB_ASSIGN:
-				BinaryOperators::ASSIGN_SUBTRACT
+				ISTextTypeSystem.BinaryOperators::ASSIGN_SUBTRACT
 			case AssignmentOperator::XOR_ASSIGN:
-				BinaryOperators::ASSIGN_BITWISE_XOR
+				ISTextTypeSystem.BinaryOperators::ASSIGN_BITWISE_XOR
 			default: 
 				throw new IllegalArgumentException("Unsupported operator" + operator)
 		}
@@ -406,9 +403,9 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	def dispatch ITypeSystemOperator getTypeSystemOperator(ShiftOperator operator) {
 		switch(operator){
 			case ShiftOperator::LEFT:
-				BinaryOperators::LEFT_SHIFT
+				ISTextTypeSystem.BinaryOperators::LEFT_SHIFT
 			case ShiftOperator::RIGHT:
-				BinaryOperators::RIGHT_SHIFT
+				ISTextTypeSystem.BinaryOperators::RIGHT_SHIFT
 			default: 
 				throw new IllegalArgumentException("Unsupported operator" + operator)
 		}
@@ -417,9 +414,9 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	def protected dispatch ITypeSystemOperator getTypeSystemOperator(AdditiveOperator operator) {
 		switch(operator){
 			case AdditiveOperator::PLUS:
-				BinaryOperators::ADD
+				ISTextTypeSystem.BinaryOperators::ADD
 			case AdditiveOperator::MINUS:
-				BinaryOperators::SUBTRACT
+				ISTextTypeSystem.BinaryOperators::SUBTRACT
 			default: 
 				throw new IllegalArgumentException("Unsupported operator" + operator)
 		}
@@ -428,11 +425,11 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	def protected dispatch ITypeSystemOperator getTypeSystemOperator(MultiplicativeOperator operator) {
 		switch(operator){
 			case MultiplicativeOperator::DIV:
-				BinaryOperators::DIV
+				ISTextTypeSystem.BinaryOperators::DIV
 			case MultiplicativeOperator::MOD:
-				BinaryOperators::MOD
+				ISTextTypeSystem.BinaryOperators::MOD
 			case MultiplicativeOperator::MUL:
-				BinaryOperators::MULTIPLY
+				ISTextTypeSystem.BinaryOperators::MULTIPLY
 			default: 
 				throw new IllegalArgumentException("Unsupported operator" + operator)
 		}
@@ -441,17 +438,17 @@ class STextDefaultTypeInferrer implements ISTextTypeInferrer {
 	def protected dispatch ITypeSystemOperator getTypeSystemOperator(RelationalOperator operator) {
 		switch(operator){
 			case RelationalOperator::EQUALS:
-				BinaryOperators::EQUAL
+				ISTextTypeSystem.BinaryOperators::EQUAL
 			case RelationalOperator::NOT_EQUALS:
-				BinaryOperators::NOT_EQUAL
+				ISTextTypeSystem.BinaryOperators::NOT_EQUAL
 			case RelationalOperator::GREATER:
-				BinaryOperators::GREATER
+				ISTextTypeSystem.BinaryOperators::GREATER
 			case RelationalOperator::GREATER_EQUAL:
-				BinaryOperators::GREATER_EQUAL
+				ISTextTypeSystem.BinaryOperators::GREATER_EQUAL
 			case RelationalOperator::SMALLER:
-				BinaryOperators::SMALLER
+				ISTextTypeSystem.BinaryOperators::SMALLER
 			case RelationalOperator::SMALLER_EQUAL:
-				BinaryOperators::SMALLER_EQUAL
+				ISTextTypeSystem.BinaryOperators::SMALLER_EQUAL
 			default: 
 				throw new IllegalArgumentException("Unsupported operator" + operator)
 		}

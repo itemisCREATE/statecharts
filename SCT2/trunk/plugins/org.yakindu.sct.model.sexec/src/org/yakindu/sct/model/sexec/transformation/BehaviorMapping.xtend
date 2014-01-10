@@ -1,10 +1,13 @@
 package org.yakindu.sct.model.sexec.transformation
 
 import com.google.inject.Inject
+import java.util.ArrayList
 import java.util.HashSet
 import java.util.List
 import java.util.Set
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.ExecutionChoice
@@ -26,23 +29,18 @@ import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
-import org.yakindu.sct.model.stext.stext.BoolLiteral
 import org.yakindu.sct.model.stext.stext.DefaultTrigger
-import org.yakindu.sct.model.stext.stext.Expression
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.ReactionEffect
 import org.yakindu.sct.model.stext.stext.ReactionTrigger
 import org.yakindu.sct.model.stext.stext.RegularEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import java.util.ArrayList
-
- 
+import org.yakindu.base.expressions.expressions.ExpressionsFactory
 
 class BehaviorMapping {
 
@@ -250,7 +248,7 @@ class BehaviorMapping {
 		}	
 	}
 	
-	def Execution mapToExecution(Statement stmnt) {
+	def Execution mapToExecution(Expression stmnt) {
 		val exec = sexec.factory.createExecution
 		exec.statement = EcoreUtil::copy(stmnt)
 		exec
@@ -318,7 +316,7 @@ class BehaviorMapping {
 		} 
 		
 		// build the condition
-		var Statement condition = r.check.condition
+		var Expression condition = r.check.condition
 		
 		val joinTransitions = target.incomingTransitions
 			.filter( jt | jt.source instanceof State)
@@ -343,7 +341,7 @@ class BehaviorMapping {
 		r
 	}
 	
-	def Statement conjunct(Statement c1, Statement c2) {
+	def Expression conjunct(Expression c1, Expression c2) {
 		if (c1 != null && c2 != null ) stext.and(c1 as Expression, c2 as Expression)
 		else if (c1 != null) c1
 		else c2
@@ -665,22 +663,22 @@ class BehaviorMapping {
 		null
 	}
 	
-	def dispatch Statement buildCondition (Trigger t) { null }
+	def dispatch Expression buildCondition (Trigger t) { null }
 
 
-	def dispatch Statement buildCondition (DefaultTrigger t) { 
+	def dispatch Expression buildCondition (DefaultTrigger t) { 
 		true.expression
 	 }
 
-	def Statement expression (boolean b) { 
-		val r = stext.factory.createPrimitiveValueExpression
-		val BoolLiteral boolLit = stext.factory.createBoolLiteral
+	def Expression expression (boolean b) { 
+		val r = ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression
+		val BoolLiteral boolLit = ExpressionsFactory.eINSTANCE.createBoolLiteral
 		boolLit.value = b		
 		r.value = boolLit
 		return r
 	 }
 	
-	def dispatch Statement buildCondition (ReactionTrigger t) {
+	def dispatch Expression buildCondition (ReactionTrigger t) {
 		val triggerCheck = if (! t.triggers.empty) t.triggers.reverseView.fold(null as Expression,
 			[s,e | {
 				val Expression raised = e.raised()

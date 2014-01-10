@@ -20,7 +20,8 @@ Require-Bundle: org.yakindu.sct.model.stext;visibility:=reexport,
  de.itemis.xtext.utils.jface;bundle-version="1.0.0",
  org.eclipse.gmf.runtime.notation;bundle-version="1.5.0",
  org.yakindu.sct.model.sgraph.ui;bundle-version="1.0.0",
- org.eclipse.gmf.runtime.emf.core;bundle-version="1.4.1"
+ org.eclipse.gmf.runtime.emf.core;bundle-version="1.4.1",
+ org.yakindu.base.expressions.ui;bundle-version="1.0.0";visibility:=reexport
 Import-Package: org.apache.log4j,
  org.apache.commons.logging
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

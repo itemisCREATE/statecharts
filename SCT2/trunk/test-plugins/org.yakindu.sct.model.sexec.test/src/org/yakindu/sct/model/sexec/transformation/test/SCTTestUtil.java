@@ -1,7 +1,20 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
-import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory.*;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createEntry;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRegion;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
+import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createBooleanType;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEventDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createIntegerType;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionTrigger;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createRealType;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createRegularEventSpec;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createStringType;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createValue;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
 
 import java.util.Collection;
 import java.util.LinkedList;

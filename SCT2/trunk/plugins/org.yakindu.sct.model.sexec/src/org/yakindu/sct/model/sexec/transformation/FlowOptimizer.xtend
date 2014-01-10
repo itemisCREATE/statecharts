@@ -4,6 +4,8 @@ import java.util.ArrayList
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -20,11 +22,8 @@ import org.yakindu.sct.model.sexec.StateCase
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.SGraphFactory
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
 import org.yakindu.sct.model.stext.stext.StextFactory
 
- 
 class FlowOptimizer {
 	
 	boolean _inlineReactions        def inlineReactions(boolean b)      {_inlineReactions = b}

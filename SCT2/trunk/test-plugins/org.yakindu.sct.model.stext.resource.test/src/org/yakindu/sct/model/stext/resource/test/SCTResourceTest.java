@@ -33,6 +33,10 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -41,13 +45,10 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.resource.impl.StextResource;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
-import org.yakindu.sct.model.stext.stext.IntLiteral;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.RegularEventSpec;
 import org.yakindu.sct.model.stext.stext.StextFactory;
@@ -70,6 +71,7 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElement
 public class SCTResourceTest {
 
 	private StextFactory stextFac = StextFactory.eINSTANCE;
+	private ExpressionsFactory expFac = ExpressionsFactory.eINSTANCE;
 
 	private StextResource res;
 
@@ -176,8 +178,8 @@ public class SCTResourceTest {
 		TimeEventSpec timeTrigger = stextFac.createTimeEventSpec();
 		timeTrigger.setType(TimeEventType.EVERY);
 		timeTrigger.setUnit(TimeUnit.SECOND);
-		PrimitiveValueExpression exp = stextFac.createPrimitiveValueExpression();
-		IntLiteral literal = stextFac.createIntLiteral();
+		PrimitiveValueExpression exp = expFac.createPrimitiveValueExpression();
+		IntLiteral literal = expFac.createIntLiteral();
 		literal.setValue(42);
 		exp.setValue(literal);
 		timeTrigger.setValue(exp);

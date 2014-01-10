@@ -10,7 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
-import org.yakindu.sct.model.sgraph.Statement;
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
 /**
@@ -20,6 +20,6 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
  */
 public interface IStatementInterpreter {
 	
-	public Object evaluateStatement(Statement statement, ExecutionContext context);
+	public Object evaluateStatement(Expression statement, ExecutionContext context);
 
 }

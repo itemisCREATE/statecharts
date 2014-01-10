@@ -2,7 +2,7 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.sct.model.sexec/src" modelPluginID="org.yakindu.sct.model.sexec"
     modelName="Sexec" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
-    copyrightFields="false" usedGenPackages="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph ../../org.yakindu.base.types/model/base.genmodel#//base">
+    copyrightFields="false" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.expressions/model/generated/Expressions.genmodel#//expressions ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
   <foreignModel>sexec.ecore</foreignModel>
   <genPackages prefix="Sexec" basePackage="org.yakindu.sct.model" disposableProviderFactory="true"
       ecorePackage="sexec.ecore#/">
@@ -31,7 +31,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/stateVector"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/subScopes"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/superScope"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/enterSequence"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/enterSequences"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/exitSequence"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//ExecutionScope/initSequence"/>
     </genClasses>
@@ -104,21 +104,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//StateCase/state"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//StateCase/step"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="sexec.ecore#//Trace"/>
-    <genClasses ecoreClass="sexec.ecore#//TraceNodeExecuted">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceNodeExecuted/node"/>
-    </genClasses>
-    <genClasses ecoreClass="sexec.ecore#//ReactionFired">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//ReactionFired/reaction"/>
-    </genClasses>
-    <genClasses ecoreClass="sexec.ecore#//TraceStateEntered">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceStateEntered/state"/>
-    </genClasses>
-    <genClasses ecoreClass="sexec.ecore#//TraceStateExited">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceStateExited/state"/>
-    </genClasses>
-    <genClasses ecoreClass="sexec.ecore#//TraceBeginRunCycle"/>
-    <genClasses ecoreClass="sexec.ecore#//TraceEndRunCycle"/>
     <genClasses ecoreClass="sexec.ecore#//SaveHistory">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//SaveHistory/region"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sexec.ecore#//SaveHistory/deep"/>
@@ -129,5 +114,23 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//HistoryEntry/region"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sexec.ecore#//HistoryEntry/historyStep"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="sexec.ecore#//Trace"/>
+    <genClasses ecoreClass="sexec.ecore#//TraceNodeExecuted">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceNodeExecuted/node"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//ReactionFired">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//ReactionFired/reaction"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//TraceReactionWillFire">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceReactionWillFire/reaction"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//TraceStateEntered">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceStateEntered/state"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//TraceStateExited">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sexec.ecore#//TraceStateExited/state"/>
+    </genClasses>
+    <genClasses ecoreClass="sexec.ecore#//TraceBeginRunCycle"/>
+    <genClasses ecoreClass="sexec.ecore#//TraceEndRunCycle"/>
   </genPackages>
 </genmodel:GenModel>
