@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.base.expressions/src-gen" editDirectory="/org.yakindu.base.expressions.edit/src"
+    editorDirectory="/org.yakindu.base.expressions.editor/src" modelPluginID="org.yakindu.base.expressions"
+    forceOverwrite="true" modelName="Expressions" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.yakindu.base.expressions.edit"
+    editorPluginID="org.yakindu.base.expressions.editor" runtimeVersion="2.9">
+  <genPackages prefix="Expressions" basePackage="org.yakindu.base.expressions" disposableProviderFactory="true"
+      fileExtensions="exp" ecorePackage="Expressions.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//AssignmentOperator">
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/assign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/multAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/divAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/modAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/addAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/subAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/leftShiftAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/rightShiftAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/andAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/xorAssign"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AssignmentOperator/orAssign"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//ShiftOperator">
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//ShiftOperator/left"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//ShiftOperator/right"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//AdditiveOperator">
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AdditiveOperator/plus"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//AdditiveOperator/minus"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//MultiplicativeOperator">
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//MultiplicativeOperator/mul"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//MultiplicativeOperator/div"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//MultiplicativeOperator/mod"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//UnaryOperator">
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//UnaryOperator/positive"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//UnaryOperator/negative"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//UnaryOperator/complement"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Expressions.ecore#//RelationalOperator">
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//RelationalOperator/smaller"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//RelationalOperator/smallerEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//RelationalOperator/greater"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//RelationalOperator/greaterEqual"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//RelationalOperator/equals"/>
+      <genEnumLiterals ecoreEnumLiteral="Expressions.ecore#//RelationalOperator/notEquals"/>
+    </genEnums>
+    <genClasses ecoreClass="Expressions.ecore#//Expression"/>
+    <genClasses ecoreClass="Expressions.ecore#//Literal"/>
+    <genClasses ecoreClass="Expressions.ecore#//BoolLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//BoolLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//IntLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//IntLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//RealLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//RealLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//HexLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//HexLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//AssignmentExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//AssignmentExpression/varRef"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//AssignmentExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//AssignmentExpression/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ConditionalExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ConditionalExpression/condition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ConditionalExpression/trueCase"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ConditionalExpression/falseCase"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//LogicalOrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalOrExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalOrExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//LogicalAndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalAndExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalAndExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//LogicalNotExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalNotExpression/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//BitwiseXorExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//BitwiseXorExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//BitwiseXorExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//BitwiseOrExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//BitwiseOrExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//BitwiseOrExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//BitwiseAndExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//BitwiseAndExpression/leftOperand"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//BitwiseAndExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//LogicalRelationExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalRelationExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//LogicalRelationExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//LogicalRelationExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ShiftExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ShiftExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//ShiftExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ShiftExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//NumericalAddSubtractExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//NumericalAddSubtractExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//NumericalAddSubtractExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//NumericalAddSubtractExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//NumericalMultiplyDivideExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//NumericalMultiplyDivideExpression/leftOperand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//NumericalMultiplyDivideExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//NumericalMultiplyDivideExpression/rightOperand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//NumericalUnaryExpression">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//NumericalUnaryExpression/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//NumericalUnaryExpression/operand"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//PrimitiveValueExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//PrimitiveValueExpression/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//FeatureCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//FeatureCall/owner"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//FeatureCall/feature"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//FeatureCall/operationCall"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//FeatureCall/args"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ElementReferenceExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementReferenceExpression/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Expressions.ecore#//ElementReferenceExpression/operationCall"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ElementReferenceExpression/args"/>
+    </genClasses>
+    <genClasses ecoreClass="Expressions.ecore#//ParenthesizedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Expressions.ecore#//ParenthesizedExpression/expression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

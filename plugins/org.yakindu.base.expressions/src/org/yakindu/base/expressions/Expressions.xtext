@@ -1,0 +1,149 @@
+/**
+ * Copyright (c) 2010 - 2013 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
+grammar org.yakindu.base.expressions.Expressions with org.eclipse.xtext.common.Terminals
+
+generate expressions "http://www.yakindu.org/base/expressions/Expressions"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Expression:
+	AssignmentExpression;
+
+AssignmentExpression returns Expression:
+	ConditionalExpression ({AssignmentExpression.varRef=current} operator=AssignmentOperator
+	expression=ConditionalExpression)*;
+
+ConditionalExpression returns Expression:
+	LogicalOrExpression ({ConditionalExpression.condition=current} '?' trueCase=LogicalOrExpression ':'
+	falseCase=LogicalOrExpression)?;
+
+LogicalOrExpression returns Expression:
+	LogicalAndExpression ({LogicalOrExpression.leftOperand=current} '||'
+	rightOperand=LogicalAndExpression)*;
+
+LogicalAndExpression returns Expression:
+	LogicalNotExpression ({LogicalAndExpression.leftOperand=current}
+	'&&' rightOperand=LogicalNotExpression)*;
+
+LogicalNotExpression returns Expression:
+	BitwiseXorExpression | {LogicalNotExpression} '!'
+	operand=BitwiseXorExpression;
+
+BitwiseXorExpression returns Expression:
+	BitwiseOrExpression ({BitwiseXorExpression.leftOperand=current} '^' rightOperand=BitwiseOrExpression)*;
+
+BitwiseOrExpression returns Expression:
+	BitwiseAndExpression ({BitwiseOrExpression.leftOperand=current} '|' rightOperand=BitwiseAndExpression)*;
+
+BitwiseAndExpression returns Expression:
+	LogicalRelationExpression ({BitwiseAndExpression.leftOperand=current} '&' rightOperand=LogicalRelationExpression)*;
+
+LogicalRelationExpression returns Expression:
+	ShiftExpression
+	({LogicalRelationExpression.leftOperand=current} operator=RelationalOperator
+	rightOperand=ShiftExpression)*;
+
+ShiftExpression returns Expression:
+	NumericalAddSubtractExpression ({ShiftExpression.leftOperand=current} operator=ShiftOperator
+	rightOperand=NumericalAddSubtractExpression)*;
+
+NumericalAddSubtractExpression returns Expression:
+	NumericalMultiplyDivideExpression
+	({NumericalAddSubtractExpression.leftOperand=current}
+	operator=AdditiveOperator
+	rightOperand=NumericalMultiplyDivideExpression)*;
+
+NumericalMultiplyDivideExpression returns Expression:
+	NumericalUnaryExpression
+	({NumericalMultiplyDivideExpression.leftOperand=current}
+	operator=MultiplicativeOperator
+	rightOperand=NumericalUnaryExpression)*;
+
+NumericalUnaryExpression returns Expression:
+	PrimaryExpression | {NumericalUnaryExpression}
+	operator=UnaryOperator operand=PrimaryExpression;
+
+PrimaryExpression returns Expression:
+	PrimitiveValueExpression
+	| FeatureCall
+	| ParenthesizedExpression;
+
+PrimitiveValueExpression returns Expression:
+	{PrimitiveValueExpression} value=Literal;
+
+FeatureCall returns Expression:
+	ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[ecore::EObject]
+	(=> operationCall?='('
+	(args+=Expression (',' args+=Expression)*)?
+	')')?)*;
+
+ElementReferenceExpression returns Expression:
+	{ElementReferenceExpression} reference=[ecore::EObject|ID]
+	(=> operationCall?='('
+	(args+=Expression (',' args+=Expression)*)?
+	')')?;
+
+ParenthesizedExpression returns Expression:
+	{ParenthesizedExpression} '(' expression=Expression ')';
+
+Literal:
+	 IntLiteral | HexLiteral | RealLiteral | StringLiteral;
+
+BoolLiteral:
+	{BoolLiteral} value=BOOL;
+
+IntLiteral:
+	{IntLiteral} value=INT;
+
+RealLiteral:
+	{RealLiteral} value=FLOAT;
+
+HexLiteral:
+	{HexLiteral} value=HEX;
+
+StringLiteral:
+	{StringLiteral} value=STRING;
+
+enum AssignmentOperator:
+	assign='='
+	| multAssign='*='
+	| divAssign='/='
+	| modAssign='%='
+	| addAssign='+='
+	| subAssign='-='
+	| leftShiftAssign='<<='
+	| rightShiftAssign='>>='
+	| andAssign='&='
+	| xorAssign='^='
+	| orAssign='|=';
+
+enum ShiftOperator:
+	left='<<'
+	| right='>>';
+
+enum AdditiveOperator:
+	plus='+' | minus='-';
+
+enum MultiplicativeOperator:
+	mul='*' | div='/' | mod='%';
+
+enum UnaryOperator:
+	positive='+' | negative='-' | complement='~';
+
+enum RelationalOperator:
+	smaller='<' | smallerEqual='<=' | greater='>' | greaterEqual='>=' |
+	equals='==' | notEquals='!=';
+
+terminal BOOL returns ecore::EBoolean:
+	'true' | 'false' | 'yes' | 'no';
+terminal HEX returns ecore::EInt:
+	('0') ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+terminal FLOAT returns ecore::EFloat:
+	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F' | 'd' | 'D')?;
