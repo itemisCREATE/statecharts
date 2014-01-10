@@ -9,7 +9,7 @@
 		<version>2.1.2-SNAPSHOT</version>
 		<relativePath>../org.yakindu.base.releng/pom.xml</relativePath>
 	</parent>
-	<artifactId>org.yakindu.base.expressions</artifactId>
+	<artifactId>org.yakindu.base.expressions.ui</artifactId>
 	<groupId>org.yakindu.base.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
 </project>
