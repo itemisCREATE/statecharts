@@ -18,6 +18,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Constants;
@@ -155,7 +156,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			warning(ISSUE_TRANSITION_WITHOUT_TRIGGER, trans, null, -1);
 		}
 	}
-	
 
 	@Check(CheckType.FAST)
 	public void checkUnusedEntry(final Entry entry) {
@@ -515,16 +515,16 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (call.getFeature() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(call.getFeature()) + "' has no effect.",
 						call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
 						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(call.getFeature())
-						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE, INSIGNIFICANT_INDEX,
-						FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", call, ExpressionsPackage.Literals.FEATURE_CALL__FEATURE,
+						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -533,16 +533,19 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		if (!(refExp.getReference() instanceof Operation)) {
 			if (refExp.getReference() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp, ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else if (refExp.getReference() instanceof Event) {
 				error("Access to event '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp, ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			} else {
 				error("Access to feature '" + nameProvider.getFullyQualifiedName(refExp.getReference())
-						+ "' has no effect.", refExp, ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE,
-						INSIGNIFICANT_INDEX, FEATURE_CALL_HAS_NO_EFFECT);
+						+ "' has no effect.", refExp,
+						ExpressionsPackage.Literals.ELEMENT_REFERENCE_EXPRESSION__REFERENCE, INSIGNIFICANT_INDEX,
+						FEATURE_CALL_HAS_NO_EFFECT);
 			}
 		}
 	}
@@ -659,5 +662,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 		return null;
+	}
+
+	@Override
+	protected List<EPackage> getEPackages() {
+		List<EPackage> result = super.getEPackages();
+		result.add(ExpressionsPackage.eINSTANCE);
+		return result;
 	}
 }
