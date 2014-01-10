@@ -10,7 +10,7 @@
 <unit id="org.eclipse.emf.sdk.feature.group" version="2.9.0.v20130610-0406"/>
 <unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="2.1.0.201306101322"/>
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.7.0.201306101425"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.4.2.v201306120542"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.4.3.v201309030823"/>
 <unit id="org.eclipse.gmf.feature.group" version="1.7.0.201306111432"/>
 <repository location="http://download.eclipse.org/releases/kepler"/>
 </location>
