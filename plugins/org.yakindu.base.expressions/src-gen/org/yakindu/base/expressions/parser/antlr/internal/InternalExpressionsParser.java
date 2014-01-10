@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_INT", "RULE_FLOAT", "RULE_HEX", "RULE_STRING", "RULE_BOOL", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'?'", "':'", "'||'", "'&&'", "'!'", "'^'", "'|'", "'&'", "'.'", "'('", "','", "')'", "'='", "'*='", "'/='", "'%='", "'+='", "'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'<<'", "'>>'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_BOOL", "RULE_INT", "RULE_FLOAT", "RULE_HEX", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'?'", "':'", "'||'", "'&&'", "'!'", "'^'", "'|'", "'&'", "'.'", "'('", "','", "')'", "'='", "'*='", "'/='", "'%='", "'+='", "'-='", "'<<='", "'>>='", "'&='", "'^='", "'|='", "'<<'", "'>>'", "'+'", "'-'", "'*'", "'/'", "'%'", "'~'", "'<'", "'<='", "'>'", "'>='", "'=='", "'!='"
     };
     public static final int RULE_ID=4;
     public static final int T__29=29;
@@ -37,16 +37,16 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final int RULE_ANY_OTHER=13;
     public static final int T__21=21;
     public static final int T__20=20;
-    public static final int RULE_BOOL=9;
+    public static final int RULE_BOOL=5;
     public static final int EOF=-1;
     public static final int T__19=19;
-    public static final int RULE_HEX=7;
+    public static final int RULE_HEX=8;
     public static final int T__16=16;
     public static final int T__15=15;
     public static final int T__18=18;
     public static final int T__17=17;
     public static final int T__14=14;
-    public static final int RULE_INT=5;
+    public static final int RULE_INT=6;
     public static final int T__50=50;
     public static final int T__42=42;
     public static final int T__43=43;
@@ -58,12 +58,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final int T__45=45;
     public static final int T__48=48;
     public static final int T__49=49;
-    public static final int RULE_FLOAT=6;
+    public static final int RULE_FLOAT=7;
     public static final int RULE_SL_COMMENT=11;
     public static final int RULE_ML_COMMENT=10;
     public static final int T__30=30;
     public static final int T__31=31;
-    public static final int RULE_STRING=8;
+    public static final int RULE_STRING=9;
     public static final int T__32=32;
     public static final int T__33=33;
     public static final int T__34=34;
@@ -2785,6 +2785,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:973:1: (this_PrimitiveValueExpression_0= rulePrimitiveValueExpression | this_FeatureCall_1= ruleFeatureCall | this_ParenthesizedExpression_2= ruleParenthesizedExpression )
             int alt14=3;
             switch ( input.LA(1) ) {
+            case RULE_BOOL:
             case RULE_INT:
             case RULE_FLOAT:
             case RULE_HEX:
@@ -3836,46 +3837,53 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1340:1: ruleLiteral returns [EObject current=null] : (this_IntLiteral_0= ruleIntLiteral | this_HexLiteral_1= ruleHexLiteral | this_RealLiteral_2= ruleRealLiteral | this_StringLiteral_3= ruleStringLiteral ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1340:1: ruleLiteral returns [EObject current=null] : (this_BoolLiteral_0= ruleBoolLiteral | this_IntLiteral_1= ruleIntLiteral | this_HexLiteral_2= ruleHexLiteral | this_RealLiteral_3= ruleRealLiteral | this_StringLiteral_4= ruleStringLiteral ) ;
     public final EObject ruleLiteral() throws RecognitionException {
         EObject current = null;
 
-        EObject this_IntLiteral_0 = null;
+        EObject this_BoolLiteral_0 = null;
 
-        EObject this_HexLiteral_1 = null;
+        EObject this_IntLiteral_1 = null;
 
-        EObject this_RealLiteral_2 = null;
+        EObject this_HexLiteral_2 = null;
 
-        EObject this_StringLiteral_3 = null;
+        EObject this_RealLiteral_3 = null;
+
+        EObject this_StringLiteral_4 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1343:28: ( (this_IntLiteral_0= ruleIntLiteral | this_HexLiteral_1= ruleHexLiteral | this_RealLiteral_2= ruleRealLiteral | this_StringLiteral_3= ruleStringLiteral ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1344:1: (this_IntLiteral_0= ruleIntLiteral | this_HexLiteral_1= ruleHexLiteral | this_RealLiteral_2= ruleRealLiteral | this_StringLiteral_3= ruleStringLiteral )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1343:28: ( (this_BoolLiteral_0= ruleBoolLiteral | this_IntLiteral_1= ruleIntLiteral | this_HexLiteral_2= ruleHexLiteral | this_RealLiteral_3= ruleRealLiteral | this_StringLiteral_4= ruleStringLiteral ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1344:1: (this_BoolLiteral_0= ruleBoolLiteral | this_IntLiteral_1= ruleIntLiteral | this_HexLiteral_2= ruleHexLiteral | this_RealLiteral_3= ruleRealLiteral | this_StringLiteral_4= ruleStringLiteral )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1344:1: (this_IntLiteral_0= ruleIntLiteral | this_HexLiteral_1= ruleHexLiteral | this_RealLiteral_2= ruleRealLiteral | this_StringLiteral_3= ruleStringLiteral )
-            int alt22=4;
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1344:1: (this_BoolLiteral_0= ruleBoolLiteral | this_IntLiteral_1= ruleIntLiteral | this_HexLiteral_2= ruleHexLiteral | this_RealLiteral_3= ruleRealLiteral | this_StringLiteral_4= ruleStringLiteral )
+            int alt22=5;
             switch ( input.LA(1) ) {
-            case RULE_INT:
+            case RULE_BOOL:
                 {
                 alt22=1;
                 }
                 break;
-            case RULE_HEX:
+            case RULE_INT:
                 {
                 alt22=2;
                 }
                 break;
-            case RULE_FLOAT:
+            case RULE_HEX:
                 {
                 alt22=3;
                 }
                 break;
-            case RULE_STRING:
+            case RULE_FLOAT:
                 {
                 alt22=4;
+                }
+                break;
+            case RULE_STRING:
+                {
+                alt22=5;
                 }
                 break;
             default:
@@ -3888,21 +3896,21 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             switch (alt22) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1345:5: this_IntLiteral_0= ruleIntLiteral
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1345:5: this_BoolLiteral_0= ruleBoolLiteral
                     {
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getLiteralAccess().getIntLiteralParserRuleCall_0()); 
+                              newCompositeNode(grammarAccess.getLiteralAccess().getBoolLiteralParserRuleCall_0()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleIntLiteral_in_ruleLiteral2950);
-                    this_IntLiteral_0=ruleIntLiteral();
+                    pushFollow(FOLLOW_ruleBoolLiteral_in_ruleLiteral2950);
+                    this_BoolLiteral_0=ruleBoolLiteral();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_IntLiteral_0; 
+                              current = this_BoolLiteral_0; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -3910,21 +3918,21 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1355:5: this_HexLiteral_1= ruleHexLiteral
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1355:5: this_IntLiteral_1= ruleIntLiteral
                     {
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getLiteralAccess().getHexLiteralParserRuleCall_1()); 
+                              newCompositeNode(grammarAccess.getLiteralAccess().getIntLiteralParserRuleCall_1()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleHexLiteral_in_ruleLiteral2977);
-                    this_HexLiteral_1=ruleHexLiteral();
+                    pushFollow(FOLLOW_ruleIntLiteral_in_ruleLiteral2977);
+                    this_IntLiteral_1=ruleIntLiteral();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_HexLiteral_1; 
+                              current = this_IntLiteral_1; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -3932,21 +3940,21 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1365:5: this_RealLiteral_2= ruleRealLiteral
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1365:5: this_HexLiteral_2= ruleHexLiteral
                     {
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getLiteralAccess().getRealLiteralParserRuleCall_2()); 
+                              newCompositeNode(grammarAccess.getLiteralAccess().getHexLiteralParserRuleCall_2()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleRealLiteral_in_ruleLiteral3004);
-                    this_RealLiteral_2=ruleRealLiteral();
+                    pushFollow(FOLLOW_ruleHexLiteral_in_ruleLiteral3004);
+                    this_HexLiteral_2=ruleHexLiteral();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_RealLiteral_2; 
+                              current = this_HexLiteral_2; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -3954,21 +3962,43 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1375:5: this_StringLiteral_3= ruleStringLiteral
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1375:5: this_RealLiteral_3= ruleRealLiteral
                     {
                     if ( state.backtracking==0 ) {
                        
-                              newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_3()); 
+                              newCompositeNode(grammarAccess.getLiteralAccess().getRealLiteralParserRuleCall_3()); 
                           
                     }
-                    pushFollow(FOLLOW_ruleStringLiteral_in_ruleLiteral3031);
-                    this_StringLiteral_3=ruleStringLiteral();
+                    pushFollow(FOLLOW_ruleRealLiteral_in_ruleLiteral3031);
+                    this_RealLiteral_3=ruleRealLiteral();
 
                     state._fsp--;
                     if (state.failed) return current;
                     if ( state.backtracking==0 ) {
                        
-                              current = this_StringLiteral_3; 
+                              current = this_RealLiteral_3; 
+                              afterParserOrEnumRuleCall();
+                          
+                    }
+
+                    }
+                    break;
+                case 5 :
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1385:5: this_StringLiteral_4= ruleStringLiteral
+                    {
+                    if ( state.backtracking==0 ) {
+                       
+                              newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_4()); 
+                          
+                    }
+                    pushFollow(FOLLOW_ruleStringLiteral_in_ruleLiteral3058);
+                    this_StringLiteral_4=ruleStringLiteral();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+                       
+                              current = this_StringLiteral_4; 
                               afterParserOrEnumRuleCall();
                           
                     }
@@ -3997,8 +4027,129 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleLiteral"
 
 
+    // $ANTLR start "entryRuleBoolLiteral"
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1401:1: entryRuleBoolLiteral returns [EObject current=null] : iv_ruleBoolLiteral= ruleBoolLiteral EOF ;
+    public final EObject entryRuleBoolLiteral() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleBoolLiteral = null;
+
+
+        try {
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1402:2: (iv_ruleBoolLiteral= ruleBoolLiteral EOF )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1403:2: iv_ruleBoolLiteral= ruleBoolLiteral EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getBoolLiteralRule()); 
+            }
+            pushFollow(FOLLOW_ruleBoolLiteral_in_entryRuleBoolLiteral3093);
+            iv_ruleBoolLiteral=ruleBoolLiteral();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleBoolLiteral; 
+            }
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBoolLiteral3103); if (state.failed) return current;
+
+            }
+
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleBoolLiteral"
+
+
+    // $ANTLR start "ruleBoolLiteral"
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1410:1: ruleBoolLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_BOOL ) ) ) ;
+    public final EObject ruleBoolLiteral() throws RecognitionException {
+        EObject current = null;
+
+        Token lv_value_1_0=null;
+
+         enterRule(); 
+            
+        try {
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1413:28: ( ( () ( (lv_value_1_0= RULE_BOOL ) ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1414:1: ( () ( (lv_value_1_0= RULE_BOOL ) ) )
+            {
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1414:1: ( () ( (lv_value_1_0= RULE_BOOL ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1414:2: () ( (lv_value_1_0= RULE_BOOL ) )
+            {
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1414:2: ()
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1415:5: 
+            {
+            if ( state.backtracking==0 ) {
+
+                      current = forceCreateModelElement(
+                          grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0(),
+                          current);
+                  
+            }
+
+            }
+
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1420:2: ( (lv_value_1_0= RULE_BOOL ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1421:1: (lv_value_1_0= RULE_BOOL )
+            {
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1421:1: (lv_value_1_0= RULE_BOOL )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1422:3: lv_value_1_0= RULE_BOOL
+            {
+            lv_value_1_0=(Token)match(input,RULE_BOOL,FOLLOW_RULE_BOOL_in_ruleBoolLiteral3154); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(lv_value_1_0, grammarAccess.getBoolLiteralAccess().getValueBOOLTerminalRuleCall_1_0()); 
+              		
+            }
+            if ( state.backtracking==0 ) {
+
+              	        if (current==null) {
+              	            current = createModelElement(grammarAccess.getBoolLiteralRule());
+              	        }
+                     		setWithLastConsumed(
+                     			current, 
+                     			"value",
+                      		lv_value_1_0, 
+                      		"BOOL");
+              	    
+            }
+
+            }
+
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+               leaveRule(); 
+            }
+        }
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
+                appendSkippedTokens();
+            } 
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleBoolLiteral"
+
+
     // $ANTLR start "entryRuleIntLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1393:1: entryRuleIntLiteral returns [EObject current=null] : iv_ruleIntLiteral= ruleIntLiteral EOF ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1446:1: entryRuleIntLiteral returns [EObject current=null] : iv_ruleIntLiteral= ruleIntLiteral EOF ;
     public final EObject entryRuleIntLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -4006,13 +4157,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1394:2: (iv_ruleIntLiteral= ruleIntLiteral EOF )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1395:2: iv_ruleIntLiteral= ruleIntLiteral EOF
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1447:2: (iv_ruleIntLiteral= ruleIntLiteral EOF )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1448:2: iv_ruleIntLiteral= ruleIntLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIntLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral3068);
+            pushFollow(FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral3195);
             iv_ruleIntLiteral=ruleIntLiteral();
 
             state._fsp--;
@@ -4020,7 +4171,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleIntLiteral; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleIntLiteral3078); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleIntLiteral3205); if (state.failed) return current;
 
             }
 
@@ -4038,7 +4189,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIntLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1402:1: ruleIntLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_INT ) ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1455:1: ruleIntLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_INT ) ) ) ;
     public final EObject ruleIntLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -4047,14 +4198,14 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1405:28: ( ( () ( (lv_value_1_0= RULE_INT ) ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1406:1: ( () ( (lv_value_1_0= RULE_INT ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1458:28: ( ( () ( (lv_value_1_0= RULE_INT ) ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1459:1: ( () ( (lv_value_1_0= RULE_INT ) ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1406:1: ( () ( (lv_value_1_0= RULE_INT ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1406:2: () ( (lv_value_1_0= RULE_INT ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1459:1: ( () ( (lv_value_1_0= RULE_INT ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1459:2: () ( (lv_value_1_0= RULE_INT ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1406:2: ()
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1407:5: 
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1459:2: ()
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1460:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -4066,13 +4217,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1412:2: ( (lv_value_1_0= RULE_INT ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1413:1: (lv_value_1_0= RULE_INT )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1465:2: ( (lv_value_1_0= RULE_INT ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1466:1: (lv_value_1_0= RULE_INT )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1413:1: (lv_value_1_0= RULE_INT )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1414:3: lv_value_1_0= RULE_INT
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1466:1: (lv_value_1_0= RULE_INT )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1467:3: lv_value_1_0= RULE_INT
             {
-            lv_value_1_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleIntLiteral3129); if (state.failed) return current;
+            lv_value_1_0=(Token)match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleIntLiteral3256); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(lv_value_1_0, grammarAccess.getIntLiteralAccess().getValueINTTerminalRuleCall_1_0()); 
@@ -4119,7 +4270,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRealLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1438:1: entryRuleRealLiteral returns [EObject current=null] : iv_ruleRealLiteral= ruleRealLiteral EOF ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1491:1: entryRuleRealLiteral returns [EObject current=null] : iv_ruleRealLiteral= ruleRealLiteral EOF ;
     public final EObject entryRuleRealLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -4127,13 +4278,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1439:2: (iv_ruleRealLiteral= ruleRealLiteral EOF )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1440:2: iv_ruleRealLiteral= ruleRealLiteral EOF
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1492:2: (iv_ruleRealLiteral= ruleRealLiteral EOF )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1493:2: iv_ruleRealLiteral= ruleRealLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getRealLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral3170);
+            pushFollow(FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral3297);
             iv_ruleRealLiteral=ruleRealLiteral();
 
             state._fsp--;
@@ -4141,7 +4292,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleRealLiteral; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRealLiteral3180); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRealLiteral3307); if (state.failed) return current;
 
             }
 
@@ -4159,7 +4310,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRealLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1447:1: ruleRealLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_FLOAT ) ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1500:1: ruleRealLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_FLOAT ) ) ) ;
     public final EObject ruleRealLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -4168,14 +4319,14 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1450:28: ( ( () ( (lv_value_1_0= RULE_FLOAT ) ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1451:1: ( () ( (lv_value_1_0= RULE_FLOAT ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1503:28: ( ( () ( (lv_value_1_0= RULE_FLOAT ) ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1504:1: ( () ( (lv_value_1_0= RULE_FLOAT ) ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1451:1: ( () ( (lv_value_1_0= RULE_FLOAT ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1451:2: () ( (lv_value_1_0= RULE_FLOAT ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1504:1: ( () ( (lv_value_1_0= RULE_FLOAT ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1504:2: () ( (lv_value_1_0= RULE_FLOAT ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1451:2: ()
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1452:5: 
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1504:2: ()
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1505:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -4187,13 +4338,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1457:2: ( (lv_value_1_0= RULE_FLOAT ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1458:1: (lv_value_1_0= RULE_FLOAT )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1510:2: ( (lv_value_1_0= RULE_FLOAT ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1511:1: (lv_value_1_0= RULE_FLOAT )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1458:1: (lv_value_1_0= RULE_FLOAT )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1459:3: lv_value_1_0= RULE_FLOAT
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1511:1: (lv_value_1_0= RULE_FLOAT )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1512:3: lv_value_1_0= RULE_FLOAT
             {
-            lv_value_1_0=(Token)match(input,RULE_FLOAT,FOLLOW_RULE_FLOAT_in_ruleRealLiteral3231); if (state.failed) return current;
+            lv_value_1_0=(Token)match(input,RULE_FLOAT,FOLLOW_RULE_FLOAT_in_ruleRealLiteral3358); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(lv_value_1_0, grammarAccess.getRealLiteralAccess().getValueFLOATTerminalRuleCall_1_0()); 
@@ -4240,7 +4391,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleHexLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1483:1: entryRuleHexLiteral returns [EObject current=null] : iv_ruleHexLiteral= ruleHexLiteral EOF ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1536:1: entryRuleHexLiteral returns [EObject current=null] : iv_ruleHexLiteral= ruleHexLiteral EOF ;
     public final EObject entryRuleHexLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -4248,13 +4399,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1484:2: (iv_ruleHexLiteral= ruleHexLiteral EOF )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1485:2: iv_ruleHexLiteral= ruleHexLiteral EOF
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1537:2: (iv_ruleHexLiteral= ruleHexLiteral EOF )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1538:2: iv_ruleHexLiteral= ruleHexLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getHexLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleHexLiteral_in_entryRuleHexLiteral3272);
+            pushFollow(FOLLOW_ruleHexLiteral_in_entryRuleHexLiteral3399);
             iv_ruleHexLiteral=ruleHexLiteral();
 
             state._fsp--;
@@ -4262,7 +4413,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleHexLiteral; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleHexLiteral3282); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleHexLiteral3409); if (state.failed) return current;
 
             }
 
@@ -4280,7 +4431,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleHexLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1492:1: ruleHexLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_HEX ) ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1545:1: ruleHexLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_HEX ) ) ) ;
     public final EObject ruleHexLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -4289,14 +4440,14 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1495:28: ( ( () ( (lv_value_1_0= RULE_HEX ) ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1496:1: ( () ( (lv_value_1_0= RULE_HEX ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1548:28: ( ( () ( (lv_value_1_0= RULE_HEX ) ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1549:1: ( () ( (lv_value_1_0= RULE_HEX ) ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1496:1: ( () ( (lv_value_1_0= RULE_HEX ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1496:2: () ( (lv_value_1_0= RULE_HEX ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1549:1: ( () ( (lv_value_1_0= RULE_HEX ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1549:2: () ( (lv_value_1_0= RULE_HEX ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1496:2: ()
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1497:5: 
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1549:2: ()
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1550:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -4308,13 +4459,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1502:2: ( (lv_value_1_0= RULE_HEX ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1503:1: (lv_value_1_0= RULE_HEX )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1555:2: ( (lv_value_1_0= RULE_HEX ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1556:1: (lv_value_1_0= RULE_HEX )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1503:1: (lv_value_1_0= RULE_HEX )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1504:3: lv_value_1_0= RULE_HEX
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1556:1: (lv_value_1_0= RULE_HEX )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1557:3: lv_value_1_0= RULE_HEX
             {
-            lv_value_1_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleHexLiteral3333); if (state.failed) return current;
+            lv_value_1_0=(Token)match(input,RULE_HEX,FOLLOW_RULE_HEX_in_ruleHexLiteral3460); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(lv_value_1_0, grammarAccess.getHexLiteralAccess().getValueHEXTerminalRuleCall_1_0()); 
@@ -4361,7 +4512,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleStringLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1528:1: entryRuleStringLiteral returns [EObject current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1581:1: entryRuleStringLiteral returns [EObject current=null] : iv_ruleStringLiteral= ruleStringLiteral EOF ;
     public final EObject entryRuleStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -4369,13 +4520,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1529:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1530:2: iv_ruleStringLiteral= ruleStringLiteral EOF
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1582:2: (iv_ruleStringLiteral= ruleStringLiteral EOF )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1583:2: iv_ruleStringLiteral= ruleStringLiteral EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getStringLiteralRule()); 
             }
-            pushFollow(FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral3374);
+            pushFollow(FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral3501);
             iv_ruleStringLiteral=ruleStringLiteral();
 
             state._fsp--;
@@ -4383,7 +4534,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
                current =iv_ruleStringLiteral; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStringLiteral3384); if (state.failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleStringLiteral3511); if (state.failed) return current;
 
             }
 
@@ -4401,7 +4552,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleStringLiteral"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1537:1: ruleStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1590:1: ruleStringLiteral returns [EObject current=null] : ( () ( (lv_value_1_0= RULE_STRING ) ) ) ;
     public final EObject ruleStringLiteral() throws RecognitionException {
         EObject current = null;
 
@@ -4410,14 +4561,14 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1540:28: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1541:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1593:28: ( ( () ( (lv_value_1_0= RULE_STRING ) ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1594:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1541:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1541:2: () ( (lv_value_1_0= RULE_STRING ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1594:1: ( () ( (lv_value_1_0= RULE_STRING ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1594:2: () ( (lv_value_1_0= RULE_STRING ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1541:2: ()
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1542:5: 
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1594:2: ()
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1595:5: 
             {
             if ( state.backtracking==0 ) {
 
@@ -4429,13 +4580,13 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1547:2: ( (lv_value_1_0= RULE_STRING ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1548:1: (lv_value_1_0= RULE_STRING )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1600:2: ( (lv_value_1_0= RULE_STRING ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1601:1: (lv_value_1_0= RULE_STRING )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1548:1: (lv_value_1_0= RULE_STRING )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1549:3: lv_value_1_0= RULE_STRING
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1601:1: (lv_value_1_0= RULE_STRING )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1602:3: lv_value_1_0= RULE_STRING
             {
-            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleStringLiteral3435); if (state.failed) return current;
+            lv_value_1_0=(Token)match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleStringLiteral3562); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(lv_value_1_0, grammarAccess.getStringLiteralAccess().getValueSTRINGTerminalRuleCall_1_0()); 
@@ -4482,7 +4633,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAssignmentOperator"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1573:1: ruleAssignmentOperator returns [Enumerator current=null] : ( (enumLiteral_0= '=' ) | (enumLiteral_1= '*=' ) | (enumLiteral_2= '/=' ) | (enumLiteral_3= '%=' ) | (enumLiteral_4= '+=' ) | (enumLiteral_5= '-=' ) | (enumLiteral_6= '<<=' ) | (enumLiteral_7= '>>=' ) | (enumLiteral_8= '&=' ) | (enumLiteral_9= '^=' ) | (enumLiteral_10= '|=' ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1626:1: ruleAssignmentOperator returns [Enumerator current=null] : ( (enumLiteral_0= '=' ) | (enumLiteral_1= '*=' ) | (enumLiteral_2= '/=' ) | (enumLiteral_3= '%=' ) | (enumLiteral_4= '+=' ) | (enumLiteral_5= '-=' ) | (enumLiteral_6= '<<=' ) | (enumLiteral_7= '>>=' ) | (enumLiteral_8= '&=' ) | (enumLiteral_9= '^=' ) | (enumLiteral_10= '|=' ) ) ;
     public final Enumerator ruleAssignmentOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -4500,10 +4651,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1575:28: ( ( (enumLiteral_0= '=' ) | (enumLiteral_1= '*=' ) | (enumLiteral_2= '/=' ) | (enumLiteral_3= '%=' ) | (enumLiteral_4= '+=' ) | (enumLiteral_5= '-=' ) | (enumLiteral_6= '<<=' ) | (enumLiteral_7= '>>=' ) | (enumLiteral_8= '&=' ) | (enumLiteral_9= '^=' ) | (enumLiteral_10= '|=' ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1576:1: ( (enumLiteral_0= '=' ) | (enumLiteral_1= '*=' ) | (enumLiteral_2= '/=' ) | (enumLiteral_3= '%=' ) | (enumLiteral_4= '+=' ) | (enumLiteral_5= '-=' ) | (enumLiteral_6= '<<=' ) | (enumLiteral_7= '>>=' ) | (enumLiteral_8= '&=' ) | (enumLiteral_9= '^=' ) | (enumLiteral_10= '|=' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1628:28: ( ( (enumLiteral_0= '=' ) | (enumLiteral_1= '*=' ) | (enumLiteral_2= '/=' ) | (enumLiteral_3= '%=' ) | (enumLiteral_4= '+=' ) | (enumLiteral_5= '-=' ) | (enumLiteral_6= '<<=' ) | (enumLiteral_7= '>>=' ) | (enumLiteral_8= '&=' ) | (enumLiteral_9= '^=' ) | (enumLiteral_10= '|=' ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1629:1: ( (enumLiteral_0= '=' ) | (enumLiteral_1= '*=' ) | (enumLiteral_2= '/=' ) | (enumLiteral_3= '%=' ) | (enumLiteral_4= '+=' ) | (enumLiteral_5= '-=' ) | (enumLiteral_6= '<<=' ) | (enumLiteral_7= '>>=' ) | (enumLiteral_8= '&=' ) | (enumLiteral_9= '^=' ) | (enumLiteral_10= '|=' ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1576:1: ( (enumLiteral_0= '=' ) | (enumLiteral_1= '*=' ) | (enumLiteral_2= '/=' ) | (enumLiteral_3= '%=' ) | (enumLiteral_4= '+=' ) | (enumLiteral_5= '-=' ) | (enumLiteral_6= '<<=' ) | (enumLiteral_7= '>>=' ) | (enumLiteral_8= '&=' ) | (enumLiteral_9= '^=' ) | (enumLiteral_10= '|=' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1629:1: ( (enumLiteral_0= '=' ) | (enumLiteral_1= '*=' ) | (enumLiteral_2= '/=' ) | (enumLiteral_3= '%=' ) | (enumLiteral_4= '+=' ) | (enumLiteral_5= '-=' ) | (enumLiteral_6= '<<=' ) | (enumLiteral_7= '>>=' ) | (enumLiteral_8= '&=' ) | (enumLiteral_9= '^=' ) | (enumLiteral_10= '|=' ) )
             int alt23=11;
             switch ( input.LA(1) ) {
             case 26:
@@ -4571,12 +4722,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             switch (alt23) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1576:2: (enumLiteral_0= '=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1629:2: (enumLiteral_0= '=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1576:2: (enumLiteral_0= '=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1576:4: enumLiteral_0= '='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1629:2: (enumLiteral_0= '=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1629:4: enumLiteral_0= '='
                     {
-                    enumLiteral_0=(Token)match(input,26,FOLLOW_26_in_ruleAssignmentOperator3490); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,26,FOLLOW_26_in_ruleAssignmentOperator3617); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getAssignEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -4590,12 +4741,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1582:6: (enumLiteral_1= '*=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1635:6: (enumLiteral_1= '*=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1582:6: (enumLiteral_1= '*=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1582:8: enumLiteral_1= '*='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1635:6: (enumLiteral_1= '*=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1635:8: enumLiteral_1= '*='
                     {
-                    enumLiteral_1=(Token)match(input,27,FOLLOW_27_in_ruleAssignmentOperator3507); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,27,FOLLOW_27_in_ruleAssignmentOperator3634); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getMultAssignEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -4609,12 +4760,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1588:6: (enumLiteral_2= '/=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1641:6: (enumLiteral_2= '/=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1588:6: (enumLiteral_2= '/=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1588:8: enumLiteral_2= '/='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1641:6: (enumLiteral_2= '/=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1641:8: enumLiteral_2= '/='
                     {
-                    enumLiteral_2=(Token)match(input,28,FOLLOW_28_in_ruleAssignmentOperator3524); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,28,FOLLOW_28_in_ruleAssignmentOperator3651); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getDivAssignEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -4628,12 +4779,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1594:6: (enumLiteral_3= '%=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1647:6: (enumLiteral_3= '%=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1594:6: (enumLiteral_3= '%=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1594:8: enumLiteral_3= '%='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1647:6: (enumLiteral_3= '%=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1647:8: enumLiteral_3= '%='
                     {
-                    enumLiteral_3=(Token)match(input,29,FOLLOW_29_in_ruleAssignmentOperator3541); if (state.failed) return current;
+                    enumLiteral_3=(Token)match(input,29,FOLLOW_29_in_ruleAssignmentOperator3668); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getModAssignEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
@@ -4647,12 +4798,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1600:6: (enumLiteral_4= '+=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1653:6: (enumLiteral_4= '+=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1600:6: (enumLiteral_4= '+=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1600:8: enumLiteral_4= '+='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1653:6: (enumLiteral_4= '+=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1653:8: enumLiteral_4= '+='
                     {
-                    enumLiteral_4=(Token)match(input,30,FOLLOW_30_in_ruleAssignmentOperator3558); if (state.failed) return current;
+                    enumLiteral_4=(Token)match(input,30,FOLLOW_30_in_ruleAssignmentOperator3685); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getAddAssignEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
@@ -4666,12 +4817,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1606:6: (enumLiteral_5= '-=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1659:6: (enumLiteral_5= '-=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1606:6: (enumLiteral_5= '-=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1606:8: enumLiteral_5= '-='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1659:6: (enumLiteral_5= '-=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1659:8: enumLiteral_5= '-='
                     {
-                    enumLiteral_5=(Token)match(input,31,FOLLOW_31_in_ruleAssignmentOperator3575); if (state.failed) return current;
+                    enumLiteral_5=(Token)match(input,31,FOLLOW_31_in_ruleAssignmentOperator3702); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getSubAssignEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
@@ -4685,12 +4836,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1612:6: (enumLiteral_6= '<<=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1665:6: (enumLiteral_6= '<<=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1612:6: (enumLiteral_6= '<<=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1612:8: enumLiteral_6= '<<='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1665:6: (enumLiteral_6= '<<=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1665:8: enumLiteral_6= '<<='
                     {
-                    enumLiteral_6=(Token)match(input,32,FOLLOW_32_in_ruleAssignmentOperator3592); if (state.failed) return current;
+                    enumLiteral_6=(Token)match(input,32,FOLLOW_32_in_ruleAssignmentOperator3719); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getLeftShiftAssignEnumLiteralDeclaration_6().getEnumLiteral().getInstance();
@@ -4704,12 +4855,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1618:6: (enumLiteral_7= '>>=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1671:6: (enumLiteral_7= '>>=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1618:6: (enumLiteral_7= '>>=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1618:8: enumLiteral_7= '>>='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1671:6: (enumLiteral_7= '>>=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1671:8: enumLiteral_7= '>>='
                     {
-                    enumLiteral_7=(Token)match(input,33,FOLLOW_33_in_ruleAssignmentOperator3609); if (state.failed) return current;
+                    enumLiteral_7=(Token)match(input,33,FOLLOW_33_in_ruleAssignmentOperator3736); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getRightShiftAssignEnumLiteralDeclaration_7().getEnumLiteral().getInstance();
@@ -4723,12 +4874,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 9 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1624:6: (enumLiteral_8= '&=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1677:6: (enumLiteral_8= '&=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1624:6: (enumLiteral_8= '&=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1624:8: enumLiteral_8= '&='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1677:6: (enumLiteral_8= '&=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1677:8: enumLiteral_8= '&='
                     {
-                    enumLiteral_8=(Token)match(input,34,FOLLOW_34_in_ruleAssignmentOperator3626); if (state.failed) return current;
+                    enumLiteral_8=(Token)match(input,34,FOLLOW_34_in_ruleAssignmentOperator3753); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getAndAssignEnumLiteralDeclaration_8().getEnumLiteral().getInstance();
@@ -4742,12 +4893,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 10 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1630:6: (enumLiteral_9= '^=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1683:6: (enumLiteral_9= '^=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1630:6: (enumLiteral_9= '^=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1630:8: enumLiteral_9= '^='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1683:6: (enumLiteral_9= '^=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1683:8: enumLiteral_9= '^='
                     {
-                    enumLiteral_9=(Token)match(input,35,FOLLOW_35_in_ruleAssignmentOperator3643); if (state.failed) return current;
+                    enumLiteral_9=(Token)match(input,35,FOLLOW_35_in_ruleAssignmentOperator3770); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getXorAssignEnumLiteralDeclaration_9().getEnumLiteral().getInstance();
@@ -4761,12 +4912,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 11 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1636:6: (enumLiteral_10= '|=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1689:6: (enumLiteral_10= '|=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1636:6: (enumLiteral_10= '|=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1636:8: enumLiteral_10= '|='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1689:6: (enumLiteral_10= '|=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1689:8: enumLiteral_10= '|='
                     {
-                    enumLiteral_10=(Token)match(input,36,FOLLOW_36_in_ruleAssignmentOperator3660); if (state.failed) return current;
+                    enumLiteral_10=(Token)match(input,36,FOLLOW_36_in_ruleAssignmentOperator3787); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAssignmentOperatorAccess().getOrAssignEnumLiteralDeclaration_10().getEnumLiteral().getInstance();
@@ -4802,7 +4953,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleShiftOperator"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1646:1: ruleShiftOperator returns [Enumerator current=null] : ( (enumLiteral_0= '<<' ) | (enumLiteral_1= '>>' ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1699:1: ruleShiftOperator returns [Enumerator current=null] : ( (enumLiteral_0= '<<' ) | (enumLiteral_1= '>>' ) ) ;
     public final Enumerator ruleShiftOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -4811,10 +4962,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1648:28: ( ( (enumLiteral_0= '<<' ) | (enumLiteral_1= '>>' ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1649:1: ( (enumLiteral_0= '<<' ) | (enumLiteral_1= '>>' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1701:28: ( ( (enumLiteral_0= '<<' ) | (enumLiteral_1= '>>' ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1702:1: ( (enumLiteral_0= '<<' ) | (enumLiteral_1= '>>' ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1649:1: ( (enumLiteral_0= '<<' ) | (enumLiteral_1= '>>' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1702:1: ( (enumLiteral_0= '<<' ) | (enumLiteral_1= '>>' ) )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -4833,12 +4984,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             }
             switch (alt24) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1649:2: (enumLiteral_0= '<<' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1702:2: (enumLiteral_0= '<<' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1649:2: (enumLiteral_0= '<<' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1649:4: enumLiteral_0= '<<'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1702:2: (enumLiteral_0= '<<' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1702:4: enumLiteral_0= '<<'
                     {
-                    enumLiteral_0=(Token)match(input,37,FOLLOW_37_in_ruleShiftOperator3705); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,37,FOLLOW_37_in_ruleShiftOperator3832); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getShiftOperatorAccess().getLeftEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -4852,12 +5003,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1655:6: (enumLiteral_1= '>>' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1708:6: (enumLiteral_1= '>>' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1655:6: (enumLiteral_1= '>>' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1655:8: enumLiteral_1= '>>'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1708:6: (enumLiteral_1= '>>' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1708:8: enumLiteral_1= '>>'
                     {
-                    enumLiteral_1=(Token)match(input,38,FOLLOW_38_in_ruleShiftOperator3722); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,38,FOLLOW_38_in_ruleShiftOperator3849); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getShiftOperatorAccess().getRightEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -4893,7 +5044,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAdditiveOperator"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1665:1: ruleAdditiveOperator returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1718:1: ruleAdditiveOperator returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) ;
     public final Enumerator ruleAdditiveOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -4902,10 +5053,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1667:28: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1668:1: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1720:28: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1721:1: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1668:1: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1721:1: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) )
             int alt25=2;
             int LA25_0 = input.LA(1);
 
@@ -4924,12 +5075,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
             }
             switch (alt25) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1668:2: (enumLiteral_0= '+' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1721:2: (enumLiteral_0= '+' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1668:2: (enumLiteral_0= '+' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1668:4: enumLiteral_0= '+'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1721:2: (enumLiteral_0= '+' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1721:4: enumLiteral_0= '+'
                     {
-                    enumLiteral_0=(Token)match(input,39,FOLLOW_39_in_ruleAdditiveOperator3767); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,39,FOLLOW_39_in_ruleAdditiveOperator3894); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAdditiveOperatorAccess().getPlusEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -4943,12 +5094,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1674:6: (enumLiteral_1= '-' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1727:6: (enumLiteral_1= '-' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1674:6: (enumLiteral_1= '-' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1674:8: enumLiteral_1= '-'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1727:6: (enumLiteral_1= '-' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1727:8: enumLiteral_1= '-'
                     {
-                    enumLiteral_1=(Token)match(input,40,FOLLOW_40_in_ruleAdditiveOperator3784); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,40,FOLLOW_40_in_ruleAdditiveOperator3911); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getAdditiveOperatorAccess().getMinusEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -4984,7 +5135,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMultiplicativeOperator"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1684:1: ruleMultiplicativeOperator returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1737:1: ruleMultiplicativeOperator returns [Enumerator current=null] : ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) ;
     public final Enumerator ruleMultiplicativeOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -4994,10 +5145,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1686:28: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1687:1: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1739:28: ( ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1740:1: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1687:1: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1740:1: ( (enumLiteral_0= '*' ) | (enumLiteral_1= '/' ) | (enumLiteral_2= '%' ) )
             int alt26=3;
             switch ( input.LA(1) ) {
             case 41:
@@ -5025,12 +5176,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             switch (alt26) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1687:2: (enumLiteral_0= '*' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1740:2: (enumLiteral_0= '*' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1687:2: (enumLiteral_0= '*' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1687:4: enumLiteral_0= '*'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1740:2: (enumLiteral_0= '*' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1740:4: enumLiteral_0= '*'
                     {
-                    enumLiteral_0=(Token)match(input,41,FOLLOW_41_in_ruleMultiplicativeOperator3829); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,41,FOLLOW_41_in_ruleMultiplicativeOperator3956); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getMultiplicativeOperatorAccess().getMulEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -5044,12 +5195,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1693:6: (enumLiteral_1= '/' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1746:6: (enumLiteral_1= '/' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1693:6: (enumLiteral_1= '/' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1693:8: enumLiteral_1= '/'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1746:6: (enumLiteral_1= '/' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1746:8: enumLiteral_1= '/'
                     {
-                    enumLiteral_1=(Token)match(input,42,FOLLOW_42_in_ruleMultiplicativeOperator3846); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,42,FOLLOW_42_in_ruleMultiplicativeOperator3973); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getMultiplicativeOperatorAccess().getDivEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -5063,12 +5214,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1699:6: (enumLiteral_2= '%' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1752:6: (enumLiteral_2= '%' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1699:6: (enumLiteral_2= '%' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1699:8: enumLiteral_2= '%'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1752:6: (enumLiteral_2= '%' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1752:8: enumLiteral_2= '%'
                     {
-                    enumLiteral_2=(Token)match(input,43,FOLLOW_43_in_ruleMultiplicativeOperator3863); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,43,FOLLOW_43_in_ruleMultiplicativeOperator3990); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getMultiplicativeOperatorAccess().getModEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -5104,7 +5255,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleUnaryOperator"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1709:1: ruleUnaryOperator returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '~' ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1762:1: ruleUnaryOperator returns [Enumerator current=null] : ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '~' ) ) ;
     public final Enumerator ruleUnaryOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -5114,10 +5265,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1711:28: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '~' ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1712:1: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '~' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1764:28: ( ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '~' ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1765:1: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '~' ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1712:1: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '~' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1765:1: ( (enumLiteral_0= '+' ) | (enumLiteral_1= '-' ) | (enumLiteral_2= '~' ) )
             int alt27=3;
             switch ( input.LA(1) ) {
             case 39:
@@ -5145,12 +5296,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             switch (alt27) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1712:2: (enumLiteral_0= '+' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1765:2: (enumLiteral_0= '+' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1712:2: (enumLiteral_0= '+' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1712:4: enumLiteral_0= '+'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1765:2: (enumLiteral_0= '+' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1765:4: enumLiteral_0= '+'
                     {
-                    enumLiteral_0=(Token)match(input,39,FOLLOW_39_in_ruleUnaryOperator3908); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,39,FOLLOW_39_in_ruleUnaryOperator4035); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getUnaryOperatorAccess().getPositiveEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -5164,12 +5315,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1718:6: (enumLiteral_1= '-' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1771:6: (enumLiteral_1= '-' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1718:6: (enumLiteral_1= '-' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1718:8: enumLiteral_1= '-'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1771:6: (enumLiteral_1= '-' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1771:8: enumLiteral_1= '-'
                     {
-                    enumLiteral_1=(Token)match(input,40,FOLLOW_40_in_ruleUnaryOperator3925); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,40,FOLLOW_40_in_ruleUnaryOperator4052); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getUnaryOperatorAccess().getNegativeEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -5183,12 +5334,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1724:6: (enumLiteral_2= '~' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1777:6: (enumLiteral_2= '~' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1724:6: (enumLiteral_2= '~' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1724:8: enumLiteral_2= '~'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1777:6: (enumLiteral_2= '~' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1777:8: enumLiteral_2= '~'
                     {
-                    enumLiteral_2=(Token)match(input,44,FOLLOW_44_in_ruleUnaryOperator3942); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,44,FOLLOW_44_in_ruleUnaryOperator4069); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getUnaryOperatorAccess().getComplementEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -5224,7 +5375,7 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRelationalOperator"
-    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1734:1: ruleRelationalOperator returns [Enumerator current=null] : ( (enumLiteral_0= '<' ) | (enumLiteral_1= '<=' ) | (enumLiteral_2= '>' ) | (enumLiteral_3= '>=' ) | (enumLiteral_4= '==' ) | (enumLiteral_5= '!=' ) ) ;
+    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1787:1: ruleRelationalOperator returns [Enumerator current=null] : ( (enumLiteral_0= '<' ) | (enumLiteral_1= '<=' ) | (enumLiteral_2= '>' ) | (enumLiteral_3= '>=' ) | (enumLiteral_4= '==' ) | (enumLiteral_5= '!=' ) ) ;
     public final Enumerator ruleRelationalOperator() throws RecognitionException {
         Enumerator current = null;
 
@@ -5237,10 +5388,10 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
          enterRule(); 
         try {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1736:28: ( ( (enumLiteral_0= '<' ) | (enumLiteral_1= '<=' ) | (enumLiteral_2= '>' ) | (enumLiteral_3= '>=' ) | (enumLiteral_4= '==' ) | (enumLiteral_5= '!=' ) ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1737:1: ( (enumLiteral_0= '<' ) | (enumLiteral_1= '<=' ) | (enumLiteral_2= '>' ) | (enumLiteral_3= '>=' ) | (enumLiteral_4= '==' ) | (enumLiteral_5= '!=' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1789:28: ( ( (enumLiteral_0= '<' ) | (enumLiteral_1= '<=' ) | (enumLiteral_2= '>' ) | (enumLiteral_3= '>=' ) | (enumLiteral_4= '==' ) | (enumLiteral_5= '!=' ) ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:1: ( (enumLiteral_0= '<' ) | (enumLiteral_1= '<=' ) | (enumLiteral_2= '>' ) | (enumLiteral_3= '>=' ) | (enumLiteral_4= '==' ) | (enumLiteral_5= '!=' ) )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1737:1: ( (enumLiteral_0= '<' ) | (enumLiteral_1= '<=' ) | (enumLiteral_2= '>' ) | (enumLiteral_3= '>=' ) | (enumLiteral_4= '==' ) | (enumLiteral_5= '!=' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:1: ( (enumLiteral_0= '<' ) | (enumLiteral_1= '<=' ) | (enumLiteral_2= '>' ) | (enumLiteral_3= '>=' ) | (enumLiteral_4= '==' ) | (enumLiteral_5= '!=' ) )
             int alt28=6;
             switch ( input.LA(1) ) {
             case 45:
@@ -5283,12 +5434,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
 
             switch (alt28) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1737:2: (enumLiteral_0= '<' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:2: (enumLiteral_0= '<' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1737:2: (enumLiteral_0= '<' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1737:4: enumLiteral_0= '<'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:2: (enumLiteral_0= '<' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:4: enumLiteral_0= '<'
                     {
-                    enumLiteral_0=(Token)match(input,45,FOLLOW_45_in_ruleRelationalOperator3987); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,45,FOLLOW_45_in_ruleRelationalOperator4114); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getRelationalOperatorAccess().getSmallerEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -5302,12 +5453,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1743:6: (enumLiteral_1= '<=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1796:6: (enumLiteral_1= '<=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1743:6: (enumLiteral_1= '<=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1743:8: enumLiteral_1= '<='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1796:6: (enumLiteral_1= '<=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1796:8: enumLiteral_1= '<='
                     {
-                    enumLiteral_1=(Token)match(input,46,FOLLOW_46_in_ruleRelationalOperator4004); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,46,FOLLOW_46_in_ruleRelationalOperator4131); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getRelationalOperatorAccess().getSmallerEqualEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -5321,12 +5472,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1749:6: (enumLiteral_2= '>' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1802:6: (enumLiteral_2= '>' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1749:6: (enumLiteral_2= '>' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1749:8: enumLiteral_2= '>'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1802:6: (enumLiteral_2= '>' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1802:8: enumLiteral_2= '>'
                     {
-                    enumLiteral_2=(Token)match(input,47,FOLLOW_47_in_ruleRelationalOperator4021); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,47,FOLLOW_47_in_ruleRelationalOperator4148); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getRelationalOperatorAccess().getGreaterEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -5340,12 +5491,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1755:6: (enumLiteral_3= '>=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1808:6: (enumLiteral_3= '>=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1755:6: (enumLiteral_3= '>=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1755:8: enumLiteral_3= '>='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1808:6: (enumLiteral_3= '>=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1808:8: enumLiteral_3= '>='
                     {
-                    enumLiteral_3=(Token)match(input,48,FOLLOW_48_in_ruleRelationalOperator4038); if (state.failed) return current;
+                    enumLiteral_3=(Token)match(input,48,FOLLOW_48_in_ruleRelationalOperator4165); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getRelationalOperatorAccess().getGreaterEqualEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
@@ -5359,12 +5510,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1761:6: (enumLiteral_4= '==' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1814:6: (enumLiteral_4= '==' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1761:6: (enumLiteral_4= '==' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1761:8: enumLiteral_4= '=='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1814:6: (enumLiteral_4= '==' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1814:8: enumLiteral_4= '=='
                     {
-                    enumLiteral_4=(Token)match(input,49,FOLLOW_49_in_ruleRelationalOperator4055); if (state.failed) return current;
+                    enumLiteral_4=(Token)match(input,49,FOLLOW_49_in_ruleRelationalOperator4182); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getRelationalOperatorAccess().getEqualsEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
@@ -5378,12 +5529,12 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1767:6: (enumLiteral_5= '!=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1820:6: (enumLiteral_5= '!=' )
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1767:6: (enumLiteral_5= '!=' )
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1767:8: enumLiteral_5= '!='
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1820:6: (enumLiteral_5= '!=' )
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1820:8: enumLiteral_5= '!='
                     {
-                    enumLiteral_5=(Token)match(input,50,FOLLOW_50_in_ruleRelationalOperator4072); if (state.failed) return current;
+                    enumLiteral_5=(Token)match(input,50,FOLLOW_50_in_ruleRelationalOperator4199); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                               current = grammarAccess.getRelationalOperatorAccess().getNotEqualsEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
@@ -5491,69 +5642,69 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleAssignmentExpression_in_entryRuleAssignmentExpression165 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleAssignmentExpression175 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleConditionalExpression_in_ruleAssignmentExpression222 = new BitSet(new long[]{0x0000001FFC000002L});
-    public static final BitSet FOLLOW_ruleAssignmentOperator_in_ruleAssignmentExpression252 = new BitSet(new long[]{0x00001180008401F0L});
+    public static final BitSet FOLLOW_ruleAssignmentOperator_in_ruleAssignmentExpression252 = new BitSet(new long[]{0x00001180008403F0L});
     public static final BitSet FOLLOW_ruleConditionalExpression_in_ruleAssignmentExpression273 = new BitSet(new long[]{0x0000001FFC000002L});
     public static final BitSet FOLLOW_ruleConditionalExpression_in_entryRuleConditionalExpression311 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleConditionalExpression321 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLogicalOrExpression_in_ruleConditionalExpression368 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_14_in_ruleConditionalExpression389 = new BitSet(new long[]{0x00001180008401F0L});
+    public static final BitSet FOLLOW_14_in_ruleConditionalExpression389 = new BitSet(new long[]{0x00001180008403F0L});
     public static final BitSet FOLLOW_ruleLogicalOrExpression_in_ruleConditionalExpression410 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleConditionalExpression422 = new BitSet(new long[]{0x00001180008401F0L});
+    public static final BitSet FOLLOW_15_in_ruleConditionalExpression422 = new BitSet(new long[]{0x00001180008403F0L});
     public static final BitSet FOLLOW_ruleLogicalOrExpression_in_ruleConditionalExpression443 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLogicalOrExpression_in_entryRuleLogicalOrExpression481 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLogicalOrExpression491 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression538 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleLogicalOrExpression559 = new BitSet(new long[]{0x00001180008401F0L});
+    public static final BitSet FOLLOW_16_in_ruleLogicalOrExpression559 = new BitSet(new long[]{0x00001180008403F0L});
     public static final BitSet FOLLOW_ruleLogicalAndExpression_in_ruleLogicalOrExpression580 = new BitSet(new long[]{0x0000000000010002L});
     public static final BitSet FOLLOW_ruleLogicalAndExpression_in_entryRuleLogicalAndExpression618 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLogicalAndExpression628 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression675 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_17_in_ruleLogicalAndExpression696 = new BitSet(new long[]{0x00001180008401F0L});
+    public static final BitSet FOLLOW_17_in_ruleLogicalAndExpression696 = new BitSet(new long[]{0x00001180008403F0L});
     public static final BitSet FOLLOW_ruleLogicalNotExpression_in_ruleLogicalAndExpression717 = new BitSet(new long[]{0x0000000000020002L});
     public static final BitSet FOLLOW_ruleLogicalNotExpression_in_entryRuleLogicalNotExpression755 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLogicalNotExpression765 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBitwiseXorExpression_in_ruleLogicalNotExpression812 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleLogicalNotExpression839 = new BitSet(new long[]{0x00001180008001F0L});
+    public static final BitSet FOLLOW_18_in_ruleLogicalNotExpression839 = new BitSet(new long[]{0x00001180008003F0L});
     public static final BitSet FOLLOW_ruleBitwiseXorExpression_in_ruleLogicalNotExpression860 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBitwiseXorExpression_in_entryRuleBitwiseXorExpression897 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleBitwiseXorExpression907 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBitwiseOrExpression_in_ruleBitwiseXorExpression954 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_ruleBitwiseXorExpression975 = new BitSet(new long[]{0x00001180008001F0L});
+    public static final BitSet FOLLOW_19_in_ruleBitwiseXorExpression975 = new BitSet(new long[]{0x00001180008003F0L});
     public static final BitSet FOLLOW_ruleBitwiseOrExpression_in_ruleBitwiseXorExpression996 = new BitSet(new long[]{0x0000000000080002L});
     public static final BitSet FOLLOW_ruleBitwiseOrExpression_in_entryRuleBitwiseOrExpression1034 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleBitwiseOrExpression1044 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleBitwiseAndExpression_in_ruleBitwiseOrExpression1091 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_20_in_ruleBitwiseOrExpression1112 = new BitSet(new long[]{0x00001180008001F0L});
+    public static final BitSet FOLLOW_20_in_ruleBitwiseOrExpression1112 = new BitSet(new long[]{0x00001180008003F0L});
     public static final BitSet FOLLOW_ruleBitwiseAndExpression_in_ruleBitwiseOrExpression1133 = new BitSet(new long[]{0x0000000000100002L});
     public static final BitSet FOLLOW_ruleBitwiseAndExpression_in_entryRuleBitwiseAndExpression1171 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleBitwiseAndExpression1181 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_ruleBitwiseAndExpression1228 = new BitSet(new long[]{0x0000000000200002L});
-    public static final BitSet FOLLOW_21_in_ruleBitwiseAndExpression1249 = new BitSet(new long[]{0x00001180008001F0L});
+    public static final BitSet FOLLOW_21_in_ruleBitwiseAndExpression1249 = new BitSet(new long[]{0x00001180008003F0L});
     public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_ruleBitwiseAndExpression1270 = new BitSet(new long[]{0x0000000000200002L});
     public static final BitSet FOLLOW_ruleLogicalRelationExpression_in_entryRuleLogicalRelationExpression1308 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLogicalRelationExpression1318 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleShiftExpression_in_ruleLogicalRelationExpression1365 = new BitSet(new long[]{0x0007E00000000002L});
-    public static final BitSet FOLLOW_ruleRelationalOperator_in_ruleLogicalRelationExpression1395 = new BitSet(new long[]{0x00001180008001F0L});
+    public static final BitSet FOLLOW_ruleRelationalOperator_in_ruleLogicalRelationExpression1395 = new BitSet(new long[]{0x00001180008003F0L});
     public static final BitSet FOLLOW_ruleShiftExpression_in_ruleLogicalRelationExpression1416 = new BitSet(new long[]{0x0007E00000000002L});
     public static final BitSet FOLLOW_ruleShiftExpression_in_entryRuleShiftExpression1454 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleShiftExpression1464 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_ruleShiftExpression1511 = new BitSet(new long[]{0x0000006000000002L});
-    public static final BitSet FOLLOW_ruleShiftOperator_in_ruleShiftExpression1541 = new BitSet(new long[]{0x00001180008001F0L});
+    public static final BitSet FOLLOW_ruleShiftOperator_in_ruleShiftExpression1541 = new BitSet(new long[]{0x00001180008003F0L});
     public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_ruleShiftExpression1562 = new BitSet(new long[]{0x0000006000000002L});
     public static final BitSet FOLLOW_ruleNumericalAddSubtractExpression_in_entryRuleNumericalAddSubtractExpression1600 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleNumericalAddSubtractExpression1610 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression1657 = new BitSet(new long[]{0x0000018000000002L});
-    public static final BitSet FOLLOW_ruleAdditiveOperator_in_ruleNumericalAddSubtractExpression1687 = new BitSet(new long[]{0x00001180008001F0L});
+    public static final BitSet FOLLOW_ruleAdditiveOperator_in_ruleNumericalAddSubtractExpression1687 = new BitSet(new long[]{0x00001180008003F0L});
     public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_ruleNumericalAddSubtractExpression1708 = new BitSet(new long[]{0x0000018000000002L});
     public static final BitSet FOLLOW_ruleNumericalMultiplyDivideExpression_in_entryRuleNumericalMultiplyDivideExpression1746 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleNumericalMultiplyDivideExpression1756 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression1803 = new BitSet(new long[]{0x00000E0000000002L});
-    public static final BitSet FOLLOW_ruleMultiplicativeOperator_in_ruleNumericalMultiplyDivideExpression1833 = new BitSet(new long[]{0x00001180008001F0L});
+    public static final BitSet FOLLOW_ruleMultiplicativeOperator_in_ruleNumericalMultiplyDivideExpression1833 = new BitSet(new long[]{0x00001180008003F0L});
     public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_ruleNumericalMultiplyDivideExpression1854 = new BitSet(new long[]{0x00000E0000000002L});
     public static final BitSet FOLLOW_ruleNumericalUnaryExpression_in_entryRuleNumericalUnaryExpression1892 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleNumericalUnaryExpression1902 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression1949 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnaryOperator_in_ruleNumericalUnaryExpression1985 = new BitSet(new long[]{0x00000000008001F0L});
+    public static final BitSet FOLLOW_ruleUnaryOperator_in_ruleNumericalUnaryExpression1985 = new BitSet(new long[]{0x00000000008003F0L});
     public static final BitSet FOLLOW_rulePrimaryExpression_in_ruleNumericalUnaryExpression2006 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePrimaryExpression_in_entryRulePrimaryExpression2043 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulePrimaryExpression2053 = new BitSet(new long[]{0x0000000000000002L});
@@ -5568,69 +5719,73 @@ public class InternalExpressionsParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleElementReferenceExpression_in_ruleFeatureCall2347 = new BitSet(new long[]{0x0000000000400002L});
     public static final BitSet FOLLOW_22_in_ruleFeatureCall2368 = new BitSet(new long[]{0x0000000000000010L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureCall2388 = new BitSet(new long[]{0x0000000000C00002L});
-    public static final BitSet FOLLOW_23_in_ruleFeatureCall2422 = new BitSet(new long[]{0x00001180028401F0L});
+    public static final BitSet FOLLOW_23_in_ruleFeatureCall2422 = new BitSet(new long[]{0x00001180028403F0L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleFeatureCall2457 = new BitSet(new long[]{0x0000000003000000L});
-    public static final BitSet FOLLOW_24_in_ruleFeatureCall2470 = new BitSet(new long[]{0x00001180008401F0L});
+    public static final BitSet FOLLOW_24_in_ruleFeatureCall2470 = new BitSet(new long[]{0x00001180008403F0L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleFeatureCall2491 = new BitSet(new long[]{0x0000000003000000L});
     public static final BitSet FOLLOW_25_in_ruleFeatureCall2507 = new BitSet(new long[]{0x0000000000400002L});
     public static final BitSet FOLLOW_ruleElementReferenceExpression_in_entryRuleElementReferenceExpression2547 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleElementReferenceExpression2557 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleElementReferenceExpression2611 = new BitSet(new long[]{0x0000000000800002L});
-    public static final BitSet FOLLOW_23_in_ruleElementReferenceExpression2645 = new BitSet(new long[]{0x00001180028401F0L});
+    public static final BitSet FOLLOW_23_in_ruleElementReferenceExpression2645 = new BitSet(new long[]{0x00001180028403F0L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleElementReferenceExpression2680 = new BitSet(new long[]{0x0000000003000000L});
-    public static final BitSet FOLLOW_24_in_ruleElementReferenceExpression2693 = new BitSet(new long[]{0x00001180008401F0L});
+    public static final BitSet FOLLOW_24_in_ruleElementReferenceExpression2693 = new BitSet(new long[]{0x00001180008403F0L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleElementReferenceExpression2714 = new BitSet(new long[]{0x0000000003000000L});
     public static final BitSet FOLLOW_25_in_ruleElementReferenceExpression2730 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleParenthesizedExpression_in_entryRuleParenthesizedExpression2768 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedExpression2778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleParenthesizedExpression2824 = new BitSet(new long[]{0x00001180008401F0L});
+    public static final BitSet FOLLOW_23_in_ruleParenthesizedExpression2824 = new BitSet(new long[]{0x00001180008403F0L});
     public static final BitSet FOLLOW_ruleExpression_in_ruleParenthesizedExpression2845 = new BitSet(new long[]{0x0000000002000000L});
     public static final BitSet FOLLOW_25_in_ruleParenthesizedExpression2857 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleLiteral_in_entryRuleLiteral2893 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleLiteral2903 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntLiteral_in_ruleLiteral2950 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleHexLiteral_in_ruleLiteral2977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealLiteral_in_ruleLiteral3004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringLiteral_in_ruleLiteral3031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral3068 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleIntLiteral3078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleIntLiteral3129 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral3170 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral3180 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_FLOAT_in_ruleRealLiteral3231 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleHexLiteral_in_entryRuleHexLiteral3272 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleHexLiteral3282 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_HEX_in_ruleHexLiteral3333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral3374 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral3384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleStringLiteral3435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleAssignmentOperator3490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_ruleAssignmentOperator3507 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleAssignmentOperator3524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_ruleAssignmentOperator3541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_ruleAssignmentOperator3558 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_ruleAssignmentOperator3575 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_ruleAssignmentOperator3592 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_ruleAssignmentOperator3609 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleAssignmentOperator3626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_ruleAssignmentOperator3643 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_ruleAssignmentOperator3660 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_ruleShiftOperator3705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_ruleShiftOperator3722 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_ruleAdditiveOperator3767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_ruleAdditiveOperator3784 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_ruleMultiplicativeOperator3829 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_ruleMultiplicativeOperator3846 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_ruleMultiplicativeOperator3863 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_ruleUnaryOperator3908 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_ruleUnaryOperator3925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_ruleUnaryOperator3942 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_ruleRelationalOperator3987 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_ruleRelationalOperator4004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_ruleRelationalOperator4021 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_ruleRelationalOperator4038 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_ruleRelationalOperator4055 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_ruleRelationalOperator4072 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBoolLiteral_in_ruleLiteral2950 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntLiteral_in_ruleLiteral2977 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleHexLiteral_in_ruleLiteral3004 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealLiteral_in_ruleLiteral3031 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringLiteral_in_ruleLiteral3058 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBoolLiteral_in_entryRuleBoolLiteral3093 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBoolLiteral3103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BOOL_in_ruleBoolLiteral3154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleIntLiteral_in_entryRuleIntLiteral3195 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleIntLiteral3205 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleIntLiteral3256 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRealLiteral_in_entryRuleRealLiteral3297 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRealLiteral3307 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_FLOAT_in_ruleRealLiteral3358 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleHexLiteral_in_entryRuleHexLiteral3399 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleHexLiteral3409 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_HEX_in_ruleHexLiteral3460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleStringLiteral_in_entryRuleStringLiteral3501 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleStringLiteral3511 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleStringLiteral3562 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleAssignmentOperator3617 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_ruleAssignmentOperator3634 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleAssignmentOperator3651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_ruleAssignmentOperator3668 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_ruleAssignmentOperator3685 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_ruleAssignmentOperator3702 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_ruleAssignmentOperator3719 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_ruleAssignmentOperator3736 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleAssignmentOperator3753 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_ruleAssignmentOperator3770 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_ruleAssignmentOperator3787 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_ruleShiftOperator3832 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_38_in_ruleShiftOperator3849 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_ruleAdditiveOperator3894 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_ruleAdditiveOperator3911 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_ruleMultiplicativeOperator3956 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_ruleMultiplicativeOperator3973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_ruleMultiplicativeOperator3990 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_ruleUnaryOperator4035 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_ruleUnaryOperator4052 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_ruleUnaryOperator4069 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_ruleRelationalOperator4114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_ruleRelationalOperator4131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_ruleRelationalOperator4148 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_ruleRelationalOperator4165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_ruleRelationalOperator4182 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_ruleRelationalOperator4199 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_23_in_synpred1_InternalExpressions2404 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_23_in_synpred2_InternalExpressions2627 = new BitSet(new long[]{0x0000000000000002L});
 

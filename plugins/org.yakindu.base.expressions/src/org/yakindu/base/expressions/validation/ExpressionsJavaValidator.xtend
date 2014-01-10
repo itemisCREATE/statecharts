@@ -9,7 +9,7 @@ package org.yakindu.base.expressions.validation
  *
  * see http://www.eclipse.org/Xtext/documentation.html#validation
  */
-class ExpressionsValidator extends AbstractExpressionsValidator {
+class ExpressionsJavaValidator extends AbstractExpressionsValidator {
 
 //  public static val INVALID_NAME = 'invalidName'
 //

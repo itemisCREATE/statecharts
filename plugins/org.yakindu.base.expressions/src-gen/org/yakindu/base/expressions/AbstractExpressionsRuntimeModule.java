@@ -90,8 +90,8 @@ public abstract class AbstractExpressionsRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.ValidatorFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.yakindu.base.expressions.validation.ExpressionsValidator> bindExpressionsValidator() {
-		return org.yakindu.base.expressions.validation.ExpressionsValidator.class;
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.yakindu.base.expressions.validation.ExpressionsJavaValidator> bindExpressionsValidator() {
+		return org.yakindu.base.expressions.validation.ExpressionsJavaValidator.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.scoping.AbstractScopingFragment

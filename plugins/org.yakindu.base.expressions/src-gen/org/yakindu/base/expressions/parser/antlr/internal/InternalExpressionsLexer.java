@@ -24,16 +24,16 @@ public class InternalExpressionsLexer extends Lexer {
     public static final int T__21=21;
     public static final int RULE_ANY_OTHER=13;
     public static final int T__20=20;
-    public static final int RULE_BOOL=9;
+    public static final int RULE_BOOL=5;
     public static final int EOF=-1;
     public static final int T__19=19;
-    public static final int RULE_HEX=7;
+    public static final int RULE_HEX=8;
     public static final int T__16=16;
     public static final int T__15=15;
     public static final int T__18=18;
     public static final int T__17=17;
     public static final int T__14=14;
-    public static final int RULE_INT=5;
+    public static final int RULE_INT=6;
     public static final int T__50=50;
     public static final int T__42=42;
     public static final int T__43=43;
@@ -45,12 +45,12 @@ public class InternalExpressionsLexer extends Lexer {
     public static final int T__45=45;
     public static final int T__48=48;
     public static final int T__49=49;
-    public static final int RULE_FLOAT=6;
+    public static final int RULE_FLOAT=7;
     public static final int RULE_SL_COMMENT=11;
     public static final int RULE_ML_COMMENT=10;
     public static final int T__30=30;
     public static final int T__31=31;
-    public static final int RULE_STRING=8;
+    public static final int RULE_STRING=9;
     public static final int T__32=32;
     public static final int T__33=33;
     public static final int T__34=34;
@@ -837,10 +837,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_BOOL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1776:11: ( ( 'true' | 'false' | 'yes' | 'no' ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1776:13: ( 'true' | 'false' | 'yes' | 'no' )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1829:11: ( ( 'true' | 'false' | 'yes' | 'no' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1829:13: ( 'true' | 'false' | 'yes' | 'no' )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1776:13: ( 'true' | 'false' | 'yes' | 'no' )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1829:13: ( 'true' | 'false' | 'yes' | 'no' )
             int alt1=4;
             switch ( input.LA(1) ) {
             case 't':
@@ -872,7 +872,7 @@ public class InternalExpressionsLexer extends Lexer {
 
             switch (alt1) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1776:14: 'true'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1829:14: 'true'
                     {
                     match("true"); 
 
@@ -880,7 +880,7 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1776:21: 'false'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1829:21: 'false'
                     {
                     match("false"); 
 
@@ -888,7 +888,7 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     break;
                 case 3 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1776:29: 'yes'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1829:29: 'yes'
                     {
                     match("yes"); 
 
@@ -896,7 +896,7 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     break;
                 case 4 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1776:35: 'no'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1829:35: 'no'
                     {
                     match("no"); 
 
@@ -922,8 +922,8 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_HEX;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1778:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1778:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1831:10: ( '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+ )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1831:12: '0' ( 'x' | 'X' ) ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             {
             match('0'); 
             if ( input.LA(1)=='X'||input.LA(1)=='x' ) {
@@ -935,7 +935,7 @@ public class InternalExpressionsLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1778:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1831:26: ( '0' .. '9' | 'a' .. 'f' | 'A' .. 'F' )+
             int cnt2=0;
             loop2:
             do {
@@ -989,13 +989,13 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_FLOAT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1780:12: ( RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? ( 'f' | 'F' | 'd' | 'D' )? )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1780:14: RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? ( 'f' | 'F' | 'd' | 'D' )?
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1833:12: ( RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? ( 'f' | 'F' | 'd' | 'D' )? )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1833:14: RULE_INT '.' RULE_INT ( 'e' ( '-' | '+' ) RULE_INT )? ( 'f' | 'F' | 'd' | 'D' )?
             {
             mRULE_INT(); 
             match('.'); 
             mRULE_INT(); 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1780:36: ( 'e' ( '-' | '+' ) RULE_INT )?
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1833:36: ( 'e' ( '-' | '+' ) RULE_INT )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1004,7 +1004,7 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1780:37: 'e' ( '-' | '+' ) RULE_INT
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1833:37: 'e' ( '-' | '+' ) RULE_INT
                     {
                     match('e'); 
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
@@ -1023,7 +1023,7 @@ public class InternalExpressionsLexer extends Lexer {
 
             }
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1780:62: ( 'f' | 'F' | 'd' | 'D' )?
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1833:62: ( 'f' | 'F' | 'd' | 'D' )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -1065,10 +1065,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1782:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1782:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1835:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1835:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1782:11: ( '^' )?
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1835:11: ( '^' )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1077,7 +1077,7 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1782:11: '^'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1835:11: '^'
                     {
                     match('^'); 
 
@@ -1095,7 +1095,7 @@ public class InternalExpressionsLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1782:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1835:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop6:
             do {
                 int alt6=2;
@@ -1144,10 +1144,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1784:10: ( ( '0' .. '9' )+ )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1784:12: ( '0' .. '9' )+
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1837:10: ( ( '0' .. '9' )+ )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1837:12: ( '0' .. '9' )+
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1784:12: ( '0' .. '9' )+
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1837:12: ( '0' .. '9' )+
             int cnt7=0;
             loop7:
             do {
@@ -1161,7 +1161,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1784:13: '0' .. '9'
+            	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1837:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1193,10 +1193,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1214,10 +1214,10 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop8:
                     do {
                         int alt8=3;
@@ -1233,7 +1233,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                         switch (alt8) {
                     	case 1 :
-                    	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1249,7 +1249,7 @@ public class InternalExpressionsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1274,10 +1274,10 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop9:
                     do {
                         int alt9=3;
@@ -1293,7 +1293,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1309,7 +1309,7 @@ public class InternalExpressionsLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1786:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1839:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1352,12 +1352,12 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1788:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1788:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1841:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1841:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1788:24: ( options {greedy=false; } : . )*
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1841:24: ( options {greedy=false; } : . )*
             loop11:
             do {
                 int alt11=2;
@@ -1382,7 +1382,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1788:52: .
+            	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1841:52: .
             	    {
             	    matchAny(); 
 
@@ -1412,12 +1412,12 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1843:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1843:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1843:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop12:
             do {
                 int alt12=2;
@@ -1430,7 +1430,7 @@ public class InternalExpressionsLexer extends Lexer {
 
                 switch (alt12) {
             	case 1 :
-            	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1843:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1450,7 +1450,7 @@ public class InternalExpressionsLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:40: ( ( '\\r' )? '\\n' )?
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1843:40: ( ( '\\r' )? '\\n' )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -1459,9 +1459,9 @@ public class InternalExpressionsLexer extends Lexer {
             }
             switch (alt14) {
                 case 1 :
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:41: ( '\\r' )? '\\n'
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1843:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:41: ( '\\r' )?
+                    // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1843:41: ( '\\r' )?
                     int alt13=2;
                     int LA13_0 = input.LA(1);
 
@@ -1470,7 +1470,7 @@ public class InternalExpressionsLexer extends Lexer {
                     }
                     switch (alt13) {
                         case 1 :
-                            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1790:41: '\\r'
+                            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1843:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1502,10 +1502,10 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1792:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1792:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1845:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1845:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1792:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1845:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt15=0;
             loop15:
             do {
@@ -1559,8 +1559,8 @@ public class InternalExpressionsLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1794:16: ( . )
-            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1794:18: .
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1847:16: ( . )
+            // ../org.yakindu.base.expressions/src-gen/org/yakindu/base/expressions/parser/antlr/internal/InternalExpressions.g:1847:18: .
             {
             matchAny(); 
 

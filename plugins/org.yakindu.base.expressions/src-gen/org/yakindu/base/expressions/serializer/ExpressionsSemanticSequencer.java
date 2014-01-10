@@ -112,7 +112,8 @@ public class ExpressionsSemanticSequencer extends AbstractDelegatingSemanticSequ
 				}
 				else break;
 			case ExpressionsPackage.BOOL_LITERAL:
-				if(context == grammarAccess.getBoolLiteralRule()) {
+				if(context == grammarAccess.getBoolLiteralRule() ||
+				   context == grammarAccess.getLiteralRule()) {
 					sequence_BoolLiteral(context, (BoolLiteral) semanticObject); 
 					return; 
 				}

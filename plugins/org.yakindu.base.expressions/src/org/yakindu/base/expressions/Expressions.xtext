@@ -94,7 +94,7 @@ ParenthesizedExpression returns Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
 
 Literal:
-	 IntLiteral | HexLiteral | RealLiteral | StringLiteral;
+	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral;
 
 BoolLiteral:
 	{BoolLiteral} value=BOOL;
@@ -143,7 +143,9 @@ enum RelationalOperator:
 
 terminal BOOL returns ecore::EBoolean:
 	'true' | 'false' | 'yes' | 'no';
+
 terminal HEX returns ecore::EInt:
 	('0') ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
+
 terminal FLOAT returns ecore::EFloat:
 	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F' | 'd' | 'D')?;

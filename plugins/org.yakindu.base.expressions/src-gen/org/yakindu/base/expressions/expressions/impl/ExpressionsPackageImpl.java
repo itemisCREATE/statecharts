@@ -1235,6 +1235,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    boolLiteralEClass.getESuperTypes().add(this.getLiteral());
     intLiteralEClass.getESuperTypes().add(this.getLiteral());
     realLiteralEClass.getESuperTypes().add(this.getLiteral());
     hexLiteralEClass.getESuperTypes().add(this.getLiteral());

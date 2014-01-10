@@ -792,29 +792,33 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	public class LiteralElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Literal");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cIntLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cHexLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cRealLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cStringLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cBoolLiteralParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cIntLiteralParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cHexLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cRealLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cStringLiteralParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Literal:
-		//	IntLiteral | HexLiteral | RealLiteral | StringLiteral;
+		//	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral;
 		public ParserRule getRule() { return rule; }
 
-		//IntLiteral | HexLiteral | RealLiteral | StringLiteral
+		//BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral
 		public Alternatives getAlternatives() { return cAlternatives; }
 
+		//BoolLiteral
+		public RuleCall getBoolLiteralParserRuleCall_0() { return cBoolLiteralParserRuleCall_0; }
+
 		//IntLiteral
-		public RuleCall getIntLiteralParserRuleCall_0() { return cIntLiteralParserRuleCall_0; }
+		public RuleCall getIntLiteralParserRuleCall_1() { return cIntLiteralParserRuleCall_1; }
 
 		//HexLiteral
-		public RuleCall getHexLiteralParserRuleCall_1() { return cHexLiteralParserRuleCall_1; }
+		public RuleCall getHexLiteralParserRuleCall_2() { return cHexLiteralParserRuleCall_2; }
 
 		//RealLiteral
-		public RuleCall getRealLiteralParserRuleCall_2() { return cRealLiteralParserRuleCall_2; }
+		public RuleCall getRealLiteralParserRuleCall_3() { return cRealLiteralParserRuleCall_3; }
 
 		//StringLiteral
-		public RuleCall getStringLiteralParserRuleCall_3() { return cStringLiteralParserRuleCall_3; }
+		public RuleCall getStringLiteralParserRuleCall_4() { return cStringLiteralParserRuleCall_4; }
 	}
 
 	public class BoolLiteralElements extends AbstractParserRuleElementFinder {
@@ -1500,7 +1504,7 @@ public class ExpressionsGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Literal:
-	//	IntLiteral | HexLiteral | RealLiteral | StringLiteral;
+	//	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral;
 	public LiteralElements getLiteralAccess() {
 		return (pLiteral != null) ? pLiteral : (pLiteral = new LiteralElements());
 	}

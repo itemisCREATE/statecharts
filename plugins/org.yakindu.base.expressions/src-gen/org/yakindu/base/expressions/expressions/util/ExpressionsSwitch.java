@@ -90,6 +90,7 @@ public class ExpressionsSwitch<T> extends Switch<T>
       {
         BoolLiteral boolLiteral = (BoolLiteral)theEObject;
         T result = caseBoolLiteral(boolLiteral);
+        if (result == null) result = caseLiteral(boolLiteral);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }

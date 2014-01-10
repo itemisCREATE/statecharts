@@ -112,7 +112,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BOOL_LITERAL__VALUE = 0;
+  int BOOL_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Bool Literal</em>' class.
@@ -121,7 +121,7 @@ public interface ExpressionsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int BOOL_LITERAL_FEATURE_COUNT = 1;
+  int BOOL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.IntLiteralImpl <em>Int Literal</em>}' class.

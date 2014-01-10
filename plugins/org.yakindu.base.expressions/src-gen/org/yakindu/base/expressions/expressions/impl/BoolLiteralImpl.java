@@ -7,7 +7,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
@@ -25,7 +24,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
  *
  * @generated
  */
-public class BoolLiteralImpl extends MinimalEObjectImpl.Container implements BoolLiteral
+public class BoolLiteralImpl extends LiteralImpl implements BoolLiteral
 {
   /**
    * The default value of the '{@link #isValue() <em>Value</em>}' attribute.

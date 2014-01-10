@@ -1343,47 +1343,100 @@ ruleLiteral returns [EObject current=null]
     @after { leaveRule(); }:
 (
     { 
-        newCompositeNode(grammarAccess.getLiteralAccess().getIntLiteralParserRuleCall_0()); 
+        newCompositeNode(grammarAccess.getLiteralAccess().getBoolLiteralParserRuleCall_0()); 
     }
-    this_IntLiteral_0=ruleIntLiteral
+    this_BoolLiteral_0=ruleBoolLiteral
     { 
-        $current = $this_IntLiteral_0.current; 
+        $current = $this_BoolLiteral_0.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getLiteralAccess().getHexLiteralParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getLiteralAccess().getIntLiteralParserRuleCall_1()); 
     }
-    this_HexLiteral_1=ruleHexLiteral
+    this_IntLiteral_1=ruleIntLiteral
     { 
-        $current = $this_HexLiteral_1.current; 
+        $current = $this_IntLiteral_1.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getLiteralAccess().getRealLiteralParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getLiteralAccess().getHexLiteralParserRuleCall_2()); 
     }
-    this_RealLiteral_2=ruleRealLiteral
+    this_HexLiteral_2=ruleHexLiteral
     { 
-        $current = $this_RealLiteral_2.current; 
+        $current = $this_HexLiteral_2.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_3()); 
+        newCompositeNode(grammarAccess.getLiteralAccess().getRealLiteralParserRuleCall_3()); 
     }
-    this_StringLiteral_3=ruleStringLiteral
+    this_RealLiteral_3=ruleRealLiteral
     { 
-        $current = $this_StringLiteral_3.current; 
+        $current = $this_RealLiteral_3.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getLiteralAccess().getStringLiteralParserRuleCall_4()); 
+    }
+    this_StringLiteral_4=ruleStringLiteral
+    { 
+        $current = $this_StringLiteral_4.current; 
         afterParserOrEnumRuleCall();
     }
 )
 ;
 
 
+
+
+
+// Entry rule entryRuleBoolLiteral
+entryRuleBoolLiteral returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getBoolLiteralRule()); }
+	 iv_ruleBoolLiteral=ruleBoolLiteral 
+	 { $current=$iv_ruleBoolLiteral.current; } 
+	 EOF 
+;
+
+// Rule BoolLiteral
+ruleBoolLiteral returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getBoolLiteralAccess().getBoolLiteralAction_0(),
+            $current);
+    }
+)(
+(
+		lv_value_1_0=RULE_BOOL
+		{
+			newLeafNode(lv_value_1_0, grammarAccess.getBoolLiteralAccess().getValueBOOLTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getBoolLiteralRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"value",
+        		lv_value_1_0, 
+        		"BOOL");
+	    }
+
+)
+))
+;
 
 
 
