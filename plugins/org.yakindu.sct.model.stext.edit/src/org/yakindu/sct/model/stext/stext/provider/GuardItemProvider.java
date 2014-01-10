@@ -22,6 +22,8 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -162,92 +164,7 @@ public class GuardItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
          StextFactory.eINSTANCE.createEventRaisingExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createAssignmentExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createConditionalExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createLogicalOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createLogicalAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createLogicalNotExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createBitwiseXorExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createBitwiseOrExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createBitwiseAndExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createLogicalRelationExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createShiftExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createNumericalAddSubtractExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createNumericalUnaryExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createPrimitiveValueExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createFeatureCall()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createElementReferenceExpression()));
 
     newChildDescriptors.add
       (createChildParameter
@@ -262,7 +179,92 @@ public class GuardItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.GUARD__EXPRESSION,
-         StextFactory.eINSTANCE.createParenthesizedExpression()));
+         ExpressionsFactory.eINSTANCE.createExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
   }
 
   /**

@@ -9,6 +9,7 @@ package org.yakindu.sct.model.sexec.provider;
 import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.yakindu.base.base.provider.BaseEditPlugin;
+import org.yakindu.base.expressions.expressions.provider.ExpressionsEditPlugin;
 import org.yakindu.sct.model.sgraph.provider.SGraphEditPlugin;
 
 /**
@@ -43,8 +44,9 @@ public final class SexecEditPlugin extends EMFPlugin {
 	public SexecEditPlugin() {
 		super
 		  (new ResourceLocator [] {
-		     SGraphEditPlugin.INSTANCE,
 		     BaseEditPlugin.INSTANCE,
+		     ExpressionsEditPlugin.INSTANCE,
+		     SGraphEditPlugin.INSTANCE,
 		   });
 	}
 

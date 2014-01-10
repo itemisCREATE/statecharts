@@ -3,13 +3,13 @@
  */
 package org.yakindu.sct.model.stext.types;
 
+import org.yakindu.base.expressions.expressions.AdditiveOperator;
+import org.yakindu.base.expressions.expressions.AssignmentOperator;
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
+import org.yakindu.base.expressions.expressions.RelationalOperator;
+import org.yakindu.base.expressions.expressions.ShiftOperator;
 import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.base.types.Type;
-import org.yakindu.sct.model.stext.stext.AdditiveOperator;
-import org.yakindu.sct.model.stext.stext.AssignmentOperator;
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator;
-import org.yakindu.sct.model.stext.stext.RelationalOperator;
-import org.yakindu.sct.model.stext.stext.ShiftOperator;
 
 import com.google.inject.ImplementedBy;
 

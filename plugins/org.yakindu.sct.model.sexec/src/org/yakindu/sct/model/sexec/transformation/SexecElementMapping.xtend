@@ -6,6 +6,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.Strings
 import org.yakindu.base.base.NamedElement
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -26,22 +29,19 @@ import org.yakindu.sct.model.sgraph.Choice
 import org.yakindu.sct.model.sgraph.CompositeElement
 import org.yakindu.sct.model.sgraph.Entry
 import org.yakindu.sct.model.sgraph.EntryKind
+import org.yakindu.sct.model.sgraph.Exit
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.sgraph.Synchronization
 import org.yakindu.sct.model.sgraph.Transition
+import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventSpec
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.FeatureCall
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.OperationDefinition
@@ -50,10 +50,8 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sgraph.Exit
-import org.yakindu.sct.model.sgraph.Trigger
- 
-
+import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.expressions.expressions.ExpressionsFactory
 
 @Singleton class SexecElementMapping {
 	
@@ -231,7 +229,7 @@ import org.yakindu.sct.model.sgraph.Trigger
 		r
 	} 
 	
-	def ScheduleTimeEvent newScheduleTimeEvent(TimeEvent te, Statement timeValue) {
+	def ScheduleTimeEvent newScheduleTimeEvent(TimeEvent te, Expression timeValue) {
 		val r = sexecFactory.createScheduleTimeEvent
 		r.timeEvent = te
 		r.timeValue = timeValue
@@ -253,8 +251,9 @@ import org.yakindu.sct.model.sgraph.Trigger
 	def dispatch Expression raised(EventSpec e) {
 	}
 
+	var factory = ExpressionsFactory.eINSTANCE
 	def dispatch Expression raised(RegularEventSpec e) {
-		val r = stext.factory.createElementReferenceExpression
+		val r = factory.createElementReferenceExpression
 		r.reference = e.resolveRegularEventSpec(e.eContainer)
 		return r
 	} 	 
@@ -267,7 +266,7 @@ import org.yakindu.sct.model.sgraph.Trigger
 	
 	
 	def dispatch Expression raised(TimeEventSpec e) {
-		val r = stext.factory.createElementReferenceExpression
+		val r = factory.createElementReferenceExpression
 		r.reference = e.createDerivedEvent
 		return r
 	}
@@ -281,8 +280,8 @@ import org.yakindu.sct.model.sgraph.Trigger
 //	}
 	
 	def dispatch Expression raised(AlwaysEvent e) {
-		val r = stext.factory.createPrimitiveValueExpression
-		val BoolLiteral boolLit = stext.factory.createBoolLiteral
+		val r = factory.createPrimitiveValueExpression
+		val BoolLiteral boolLit = factory.createBoolLiteral
 		boolLit.value = true		
 		r.value = boolLit
 		return r

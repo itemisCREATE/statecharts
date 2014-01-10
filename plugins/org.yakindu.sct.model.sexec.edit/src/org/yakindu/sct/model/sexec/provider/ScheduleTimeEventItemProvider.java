@@ -21,6 +21,7 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.sct.model.sexec.ScheduleTimeEvent;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -175,7 +176,92 @@ public class ScheduleTimeEventItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
-				 SGraphFactory.eINSTANCE.createStatement()));
+				 ExpressionsFactory.eINSTANCE.createExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createConditionalExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createLogicalOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createLogicalAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createLogicalNotExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createBitwiseXorExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createBitwiseOrExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createBitwiseAndExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createLogicalRelationExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createShiftExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createNumericalAddSubtractExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createNumericalMultiplyDivideExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createNumericalUnaryExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createPrimitiveValueExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createFeatureCall()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createElementReferenceExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.SCHEDULE_TIME_EVENT__TIME_VALUE,
+				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
 	}
 
 }

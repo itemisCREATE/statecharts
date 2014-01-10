@@ -11,41 +11,40 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.BitwiseAndExpression
+import org.yakindu.base.expressions.expressions.BitwiseOrExpression
+import org.yakindu.base.expressions.expressions.BitwiseXorExpression
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.HexLiteral
+import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.Literal
+import org.yakindu.base.expressions.expressions.LogicalAndExpression
+import org.yakindu.base.expressions.expressions.LogicalNotExpression
+import org.yakindu.base.expressions.expressions.LogicalOrExpression
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
+import org.yakindu.base.expressions.expressions.ParenthesizedExpression
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.expressions.RealLiteral
+import org.yakindu.base.expressions.expressions.ShiftExpression
+import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.sct.model.sgraph.Event
-import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
-import org.yakindu.sct.model.stext.stext.AssignmentExpression
-import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
-import org.yakindu.sct.model.stext.stext.BitwiseOrExpression
-import org.yakindu.sct.model.stext.stext.BitwiseXorExpression
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.FeatureCall
-import org.yakindu.sct.model.stext.stext.HexLiteral
-import org.yakindu.sct.model.stext.stext.IntLiteral
-import org.yakindu.sct.model.stext.stext.Literal
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
-import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
-import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.RealLiteral
-import org.yakindu.sct.model.stext.stext.ShiftExpression
-import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 
 class ExpressionCode {
-	
+	 
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension ISTextTypeSystem
@@ -72,11 +71,6 @@ class ExpressionCode {
 	
 	def dispatch CharSequence code (FeatureCall it, OperationDefinition target) 
 		'''«target.access»(«FOR arg:args SEPARATOR ', '»«arg.code»«ENDFOR»)'''
-	
-	
-	def dispatch CharSequence code (Statement it) 
-		'''#error TODO: generate code for «getClass().name»'''
-
 	
 	/* HANDLING LITERALS */
 	def dispatch CharSequence code (Literal it)

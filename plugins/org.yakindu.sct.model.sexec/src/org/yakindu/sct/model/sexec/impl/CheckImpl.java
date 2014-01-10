@@ -16,10 +16,10 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectWithInverseResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.SexecPackage;
-import org.yakindu.sct.model.sgraph.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -44,7 +44,7 @@ public class CheckImpl extends StepImpl implements Check {
 	 * @generated
 	 * @ordered
 	 */
-	protected Statement condition;
+	protected Expression condition;
 
 	/**
 	 * The cached value of the '{@link #getRefs() <em>Refs</em>}' reference list.
@@ -80,7 +80,7 @@ public class CheckImpl extends StepImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Statement getCondition() {
+	public Expression getCondition() {
 		return condition;
 	}
 
@@ -89,8 +89,8 @@ public class CheckImpl extends StepImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetCondition(Statement newCondition, NotificationChain msgs) {
-		Statement oldCondition = condition;
+	public NotificationChain basicSetCondition(Expression newCondition, NotificationChain msgs) {
+		Expression oldCondition = condition;
 		condition = newCondition;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.CHECK__CONDITION, oldCondition, newCondition);
@@ -104,7 +104,7 @@ public class CheckImpl extends StepImpl implements Check {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setCondition(Statement newCondition) {
+	public void setCondition(Expression newCondition) {
 		if (newCondition != condition) {
 			NotificationChain msgs = null;
 			if (condition != null)
@@ -187,7 +187,7 @@ public class CheckImpl extends StepImpl implements Check {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case SexecPackage.CHECK__CONDITION:
-				setCondition((Statement)newValue);
+				setCondition((Expression)newValue);
 				return;
 			case SexecPackage.CHECK__REFS:
 				getRefs().clear();
@@ -206,7 +206,7 @@ public class CheckImpl extends StepImpl implements Check {
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case SexecPackage.CHECK__CONDITION:
-				setCondition((Statement)null);
+				setCondition((Expression)null);
 				return;
 			case SexecPackage.CHECK__REFS:
 				getRefs().clear();

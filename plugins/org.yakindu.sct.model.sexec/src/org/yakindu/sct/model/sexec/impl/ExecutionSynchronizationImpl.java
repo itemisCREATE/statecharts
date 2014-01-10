@@ -3,7 +3,6 @@
 package org.yakindu.sct.model.sexec.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.sct.model.sexec.ExecutionSynchronization;
 import org.yakindu.sct.model.sexec.SexecPackage;
 

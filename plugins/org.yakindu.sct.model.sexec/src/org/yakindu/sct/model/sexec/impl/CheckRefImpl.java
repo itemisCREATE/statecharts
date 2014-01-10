@@ -11,10 +11,10 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
 import org.yakindu.sct.model.sexec.SexecPackage;
-import org.yakindu.sct.model.sgraph.Statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -210,12 +210,12 @@ public class CheckRefImpl extends CheckImpl implements CheckRef {
 
 	
 	@Override
-	public Statement getCondition() {
+	public Expression getCondition() {
 		return (check != null) ? check.getCondition() : null;
 	}
 
 	@Override
-	public void setCondition(Statement newCondition) {
+	public void setCondition(Expression newCondition) {
 		if (check != null) check.setCondition(newCondition);
 	}
 

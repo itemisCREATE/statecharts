@@ -27,8 +27,6 @@ import static org.junit.Assert.assertTrue;
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
 public class AlwaysOncycleTest extends AbstractExecutionFlowTest {
-	@Inject
-	private SCTUnitTestModels models;
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models

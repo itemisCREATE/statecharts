@@ -6,8 +6,8 @@ import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
-import org.yakindu.sct.model.stext.types.STextDefaultTypeSystem;
 import org.yakindu.sct.model.stext.types.STextDefaultTypeInferrer;
+import org.yakindu.sct.model.stext.types.STextDefaultTypeSystem;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;

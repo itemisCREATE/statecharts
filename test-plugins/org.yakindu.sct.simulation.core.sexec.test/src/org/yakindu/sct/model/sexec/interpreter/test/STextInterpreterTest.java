@@ -18,10 +18,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.ITypeSystem.InferredType;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.sgraph.Statement;
-import org.yakindu.sct.model.stext.stext.Expression;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
@@ -543,7 +542,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	protected Object executeExpression(String scope, String expression) {
 		Scope defaultScope = createInternalScope(scope);
-		Statement statement = (Statement) parseExpression(expression,
+		Expression statement = (Expression) parseExpression(expression,
 				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}

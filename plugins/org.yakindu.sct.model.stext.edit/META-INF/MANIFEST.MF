@@ -8,4 +8,5 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.yakindu.base.types.edit;bundle-version="1.0.0",
  org.yakindu.sct.model.stext;bundle-version="1.0.0",
  org.yakindu.sct.model.sgraph.edit;bundle-version="1.0.0",
- org.eclipse.core.runtime;bundle-version="3.7.0"
+ org.eclipse.core.runtime;bundle-version="3.7.0",
+ org.yakindu.base.expressions.edit;bundle-version="1.0.0"

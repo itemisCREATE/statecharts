@@ -12,6 +12,7 @@ Export-Package: org.yakindu.sct.model.sgraph.provider
 Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph;visibility:=reexport,
  org.eclipse.emf.edit;visibility:=reexport,
+ org.yakindu.base.types;visibility:=reexport,
  org.eclipse.emf.ecore.edit;bundle-version="2.7.0",
- org.yakindu.base.types.edit;bundle-version="1.0.0";visibility:=reexport
+ org.yakindu.base.types.edit;visibility:=reexport;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy

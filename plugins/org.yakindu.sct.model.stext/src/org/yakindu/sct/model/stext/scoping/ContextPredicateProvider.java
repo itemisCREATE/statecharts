@@ -10,28 +10,28 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.ASSIGNMENT_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.BITWISE_AND_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.BITWISE_OR_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.BITWISE_XOR_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.CONDITIONAL_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.BITWISE_AND_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.BITWISE_OR_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.BITWISE_XOR_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.CONDITIONAL_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_NOT_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_OR_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.LOGICAL_RELATION_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_ADD_SUBTRACT_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION;
+import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.SHIFT_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOCAL_REACTION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOGICAL_AND_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOGICAL_NOT_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOGICAL_OR_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.LOGICAL_RELATION_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.NUMERICAL_ADD_SUBTRACT_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.NUMERICAL_UNARY_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REACTION_EFFECT;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REGULAR_EVENT_SPEC;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.SHIFT_EXPRESSION;
-import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_REACTION;
+import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 
 import java.util.HashMap;
 import java.util.Map;

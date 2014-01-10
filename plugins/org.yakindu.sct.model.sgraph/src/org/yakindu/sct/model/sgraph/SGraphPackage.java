@@ -346,7 +346,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getRegularState()
 	 * @generated
 	 */
-	int REGULAR_STATE = 23;
+	int REGULAR_STATE = 22;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1266,25 +1266,6 @@ public interface SGraphPackage extends EPackage {
 	int STATE_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 17;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgraph.impl.StatementImpl
-	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getStatement()
-	 * @generated
-	 */
-	int STATEMENT = 22;
-
-	/**
-	 * The number of structural features of the '<em>Statement</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int STATEMENT_FEATURE_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.CompositeElementImpl <em>Composite Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1292,7 +1273,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getCompositeElement()
 	 * @generated
 	 */
-	int COMPOSITE_ELEMENT = 24;
+	int COMPOSITE_ELEMENT = 23;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -1320,7 +1301,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 25;
+	int ENTRY_KIND = 24;
 
 
 	/**
@@ -1331,7 +1312,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 26;
+	int CHOICE_KIND = 25;
 
 
 	/**
@@ -1547,16 +1528,6 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getState_Leaf();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Statement <em>Statement</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Statement</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Statement
-	 * @generated
-	 */
-	EClass getStatement();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.RegularState <em>Regular State</em>}'.
@@ -2105,16 +2076,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STATE__LEAF = eINSTANCE.getState_Leaf();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.StatementImpl <em>Statement</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgraph.impl.StatementImpl
-		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getStatement()
-		 * @generated
-		 */
-		EClass STATEMENT = eINSTANCE.getStatement();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.RegularStateImpl <em>Regular State</em>}' class.

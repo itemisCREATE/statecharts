@@ -43,7 +43,6 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 		
 		SCLanguageProviders providers = SCLanguageProviderExtensions.getLanguageProviders();
 		Module simulationModule = providers.getSimulationModuleFor(statechart); 
-		
 		Module module = Modules.override(simulationModule).with(new Module() {
 			@Override
 			public void configure(Binder binder) {

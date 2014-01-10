@@ -9,9 +9,21 @@ import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createRe
 import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createState;
 import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createStatechart;
 import static org.yakindu.sct.model.sgraph.test.util.SGraphTestFactory._createTransition;
-import static org.yakindu.sct.model.stext.test.util.StextTestFactory.*;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createEventDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInterfaceScope;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createInternalScope;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createOperation;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createOperationCall;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionEffect;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createReactionTrigger;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createRegularEventSpec;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createValue;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory._createVariableDefinition;
+import static org.yakindu.sct.model.stext.test.util.StextTestFactory.createGuardExpression;
 
 import org.junit.Test;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
@@ -24,13 +36,11 @@ import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
-import org.yakindu.sct.model.stext.stext.FeatureCall;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencertDeclarationsTest extends ModelSequencerTest {

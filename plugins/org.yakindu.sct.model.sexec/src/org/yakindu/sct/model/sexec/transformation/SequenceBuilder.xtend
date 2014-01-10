@@ -3,6 +3,14 @@ package org.yakindu.sct.model.sexec.transformation
 import com.google.inject.Inject
 import com.google.inject.name.Named
 import java.util.ArrayList
+import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.expressions.RealLiteral
+import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -13,22 +21,14 @@ import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sgraph.Statement
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.AssignmentOperator
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.stext.stext.Expression
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.IntLiteral
-import org.yakindu.sct.model.stext.stext.MultiplicativeOperator
 import org.yakindu.sct.model.stext.stext.TimeUnit
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.RealLiteral
-import org.yakindu.sct.model.stext.stext.StringLiteral
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.base.expressions.expressions.Expression
 
 class SequenceBuilder {
 	
@@ -460,10 +460,11 @@ class SequenceBuilder {
 	}
 	
 	
+	var factory = ExpressionsFactory.eINSTANCE
 	def createInitialization(VariableDefinition vd) {
 		val execution = sexec.factory.createExecution
-		val assignment = stext.factory.createAssignmentExpression 
-		val reference = stext.factory.createElementReferenceExpression
+		val assignment = factory.createAssignmentExpression 
+		val reference = factory.createElementReferenceExpression
 		reference.reference = vd
 		assignment.varRef = reference
 		assignment.operator = AssignmentOperator::ASSIGN
@@ -474,7 +475,7 @@ class SequenceBuilder {
 		
 	
 	
-	def Statement buildValueExpression(TimeEventSpec tes) {
+	def Expression buildValueExpression(TimeEventSpec tes) {
 //		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
 //		val IntLiteral intLit = stext.factory.createIntLiteral
 //		intLit.value = tes.value
@@ -490,10 +491,10 @@ class SequenceBuilder {
 		} 
 	}
 	
-	def Statement divide(Expression stmnt, long divisor) {
-		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-		val IntLiteral intLit = stext.factory.createIntLiteral
+	def Expression divide(Expression stmnt, long divisor) {
+		val NumericalMultiplyDivideExpression div = factory.createNumericalMultiplyDivideExpression
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression 
+		val IntLiteral intLit = factory.createIntLiteral
 		intLit.value = divisor.intValue
 		pve.value = intLit
 		
@@ -504,10 +505,10 @@ class SequenceBuilder {
 		div
 	}
 	 
-	def Statement multiply(Expression stmnt, long factor) {
-		val NumericalMultiplyDivideExpression div = stext.factory.createNumericalMultiplyDivideExpression
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-		val IntLiteral intLit = stext.factory.createIntLiteral
+	def Expression multiply(Expression stmnt, long factor) {
+		val NumericalMultiplyDivideExpression div = factory.createNumericalMultiplyDivideExpression
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression 
+		val IntLiteral intLit = factory.createIntLiteral
 		intLit.value = factor.intValue
 		pve.value = intLit
 		
@@ -520,8 +521,8 @@ class SequenceBuilder {
 
 
 	def Expression buildValue(boolean b) {
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression
-		val BoolLiteral lit = stext.factory.createBoolLiteral
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
+		val BoolLiteral lit = factory.createBoolLiteral
 		lit.value = b
 		pve.value = lit
 		
@@ -529,8 +530,8 @@ class SequenceBuilder {
 	}
 	
 	def Expression buildValue(int i) {
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression
-		val IntLiteral lit = stext.factory.createIntLiteral
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
+		val IntLiteral lit = factory.createIntLiteral
 		lit.value = i
 		pve.value = lit
 		
@@ -538,8 +539,8 @@ class SequenceBuilder {
 	}
 	
 	def Expression buildValue(float r) {
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression
-		val RealLiteral lit = stext.factory.createRealLiteral
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
+		val RealLiteral lit = factory.createRealLiteral
 		lit.value = r
 		pve.value = lit
 		
@@ -547,8 +548,8 @@ class SequenceBuilder {
 	}
 	
 	def Expression buildValue(String i) {
-		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression
-		val StringLiteral lit = stext.factory.createStringLiteral
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
+		val StringLiteral lit = factory.createStringLiteral
 		lit.value = i
 		pve.value = lit
 		

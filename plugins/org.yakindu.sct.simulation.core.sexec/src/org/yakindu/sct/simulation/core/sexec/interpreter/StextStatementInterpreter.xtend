@@ -14,36 +14,36 @@ import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
+import org.yakindu.base.expressions.expressions.AssignmentExpression
+import org.yakindu.base.expressions.expressions.AssignmentOperator
+import org.yakindu.base.expressions.expressions.BitwiseAndExpression
+import org.yakindu.base.expressions.expressions.BitwiseOrExpression
+import org.yakindu.base.expressions.expressions.BitwiseXorExpression
+import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.HexLiteral
+import org.yakindu.base.expressions.expressions.IntLiteral
+import org.yakindu.base.expressions.expressions.LogicalAndExpression
+import org.yakindu.base.expressions.expressions.LogicalNotExpression
+import org.yakindu.base.expressions.expressions.LogicalOrExpression
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
+import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
+import org.yakindu.base.expressions.expressions.ParenthesizedExpression
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
+import org.yakindu.base.expressions.expressions.RealLiteral
+import org.yakindu.base.expressions.expressions.ShiftExpression
+import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
-import org.yakindu.sct.model.sgraph.Statement
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
-import org.yakindu.sct.model.stext.stext.AssignmentExpression
-import org.yakindu.sct.model.stext.stext.AssignmentOperator
-import org.yakindu.sct.model.stext.stext.BitwiseAndExpression
-import org.yakindu.sct.model.stext.stext.BitwiseOrExpression
-import org.yakindu.sct.model.stext.stext.BitwiseXorExpression
-import org.yakindu.sct.model.stext.stext.BoolLiteral
-import org.yakindu.sct.model.stext.stext.ConditionalExpression
-import org.yakindu.sct.model.stext.stext.ElementReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.model.stext.stext.FeatureCall
-import org.yakindu.sct.model.stext.stext.HexLiteral
-import org.yakindu.sct.model.stext.stext.IntLiteral
-import org.yakindu.sct.model.stext.stext.LogicalAndExpression
-import org.yakindu.sct.model.stext.stext.LogicalNotExpression
-import org.yakindu.sct.model.stext.stext.LogicalOrExpression
-import org.yakindu.sct.model.stext.stext.LogicalRelationExpression
-import org.yakindu.sct.model.stext.stext.NumericalAddSubtractExpression
-import org.yakindu.sct.model.stext.stext.NumericalMultiplyDivideExpression
-import org.yakindu.sct.model.stext.stext.NumericalUnaryExpression
-import org.yakindu.sct.model.stext.stext.ParenthesizedExpression
-import org.yakindu.sct.model.stext.stext.PrimitiveValueExpression
-import org.yakindu.sct.model.stext.stext.RealLiteral
-import org.yakindu.sct.model.stext.stext.ShiftExpression
-import org.yakindu.sct.model.stext.stext.StringLiteral
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 
@@ -62,12 +62,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	protected ExecutionContext context
 
-	override Object evaluateStatement(Statement statement, ExecutionContext context) {
+	override Object evaluateStatement(Expression statement, ExecutionContext context) {
 		this.context = context
 		statement.execute()
 	}
 
-	def dispatch Object execute(Statement statement) {
+	def dispatch Object execute(Expression statement) {
 		null
 	}
 
@@ -214,13 +214,13 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		executeUnaryCoreFunction(expression.operand, expression.operator.getName())
 	}
 
-	def executeBinaryCoreFunction(Statement leftStatement, Statement rightStatement, String operator) {
+	def executeBinaryCoreFunction(Expression leftStatement, Expression rightStatement, String operator) {
 		var leftResult = leftStatement.execute()
 		var rightResult = rightStatement.execute()
 		return evaluate(operator, leftResult, rightResult)
 	}
 
-	def executeUnaryCoreFunction(Statement statement, String operator) {
+	def executeUnaryCoreFunction(Expression statement, String operator) {
 		var result = statement.execute()
 		return evaluate(operator, result);
 	}

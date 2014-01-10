@@ -11,9 +11,7 @@
 package org.yakindu.sct.model.sgraph.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.EObjectImpl;
-
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 

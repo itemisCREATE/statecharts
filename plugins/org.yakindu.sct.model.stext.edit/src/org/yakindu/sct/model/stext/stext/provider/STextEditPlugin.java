@@ -8,6 +8,8 @@ import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.yakindu.base.base.provider.BaseEditPlugin;
 
+import org.yakindu.base.expressions.expressions.provider.ExpressionsEditPlugin;
+
 import org.yakindu.base.types.provider.TypesEditPlugin;
 
 import org.yakindu.sct.model.sgraph.provider.SGraphEditPlugin;
@@ -47,6 +49,7 @@ public final class STextEditPlugin extends EMFPlugin
     super
       (new ResourceLocator [] 
        {
+         ExpressionsEditPlugin.INSTANCE,
          BaseEditPlugin.INSTANCE,
          TypesEditPlugin.INSTANCE,
          SGraphEditPlugin.INSTANCE,
