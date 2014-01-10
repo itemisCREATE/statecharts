@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.yakindu.base.expressions
-Bundle-Vendor: Yakindu.org
-Bundle-Version:2.1.2.qualifier
+Bundle-Vendor: My Company
+Bundle-Version: 2.1.2.qualifier
 Bundle-SymbolicName: org.yakindu.base.expressions; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
