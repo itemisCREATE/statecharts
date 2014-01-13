@@ -52,7 +52,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String STRING_EXPRESSIONS = "StringExpressions.sct";
 	public static final String SYNC_JOIN = "SyncJoin.sct";
 	public static final String SYNC_FORK = "SyncFork.sct";
-	public static final String TIME_TRIGGER = "TimeTrigger.sct";
+	public static final String TIMED_TRANSITIONS = "TimedTransitions.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
 	public static final String OPERATIONS = "Operations.sct";
 
