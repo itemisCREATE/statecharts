@@ -15,7 +15,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
+@SuiteClasses({AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
 		BitExpressionsTest.class, BooleanExpressionsTest.class,
 		ChoiceTest.class, CKeywordsTest.class, DeclarationsTest.class,
 		DeepEntryTest.class, DeepHistoryTest.class, DynamicChoiceTest.class,
@@ -34,6 +34,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		StaticChoiceTest.class, STextKeywordsInStatesAndRegionsTest.class,
 		StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
 		TransitionWithoutConditionTest.class, ValuedEventsTest.class,
-		EntryChoiceTest.class })
+		EntryChoiceTest.class})
 public class AllTestsTest {
 }
