@@ -15,7 +15,7 @@ Workflow {
 		platformUri = "${runtimeProject}/.."
 		registerGenModelFile = "platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel"
 		registerGenModelFile = "platform:/resource/org.yakindu.base.types/model/types.genmodel"
-		registerGenModelFile = "platform:/resource/org.yakindu.base.expressions/model/generated/Expressions.genmodel"
+		registerGenModelFile = "platform:/resource/org.yakindu.base.expressions/model/Expressions.genmodel"
 		registerGeneratedEPackage = "org.yakindu.sct.model.sgraph.SGraphPackage"
 		registerGeneratedEPackage = "org.yakindu.base.types.TypesPackage"
 		registerGeneratedEPackage = "org.yakindu.base.expressions.expressions.ExpressionsPackage"
