@@ -333,7 +333,7 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
-	test TimeTrigger{
+	test TimedTransitions{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
