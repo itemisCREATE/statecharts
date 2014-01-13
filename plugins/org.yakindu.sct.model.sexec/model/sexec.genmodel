@@ -2,7 +2,7 @@
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.sct.model.sexec/src" modelPluginID="org.yakindu.sct.model.sexec"
     modelName="Sexec" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
-    copyrightFields="false" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.expressions/model/generated/Expressions.genmodel#//expressions ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
+    copyrightFields="false" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.expressions/model/Expressions.genmodel#//expressions ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
   <foreignModel>sexec.ecore</foreignModel>
   <genPackages prefix="Sexec" basePackage="org.yakindu.sct.model" disposableProviderFactory="true"
       ecorePackage="sexec.ecore#/">

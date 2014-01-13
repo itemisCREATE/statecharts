@@ -39,7 +39,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 /**
  * 
  * @author andreas muelder - Initial contribution and API
- * @author axel terfloth - minimized changes on execution context 
+ * @author axel terfloth - minimized changes on execution context
  * 
  */
  @Singleton
