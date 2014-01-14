@@ -15,8 +15,6 @@ Workflow {
     bean = StandaloneSetup {
     	scanClassPath = true
     	platformUri = "${runtimeProject}/.."
-    	// The following two lines can be removed, if Xbase is not used.
-    	registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"
 		registerGenModelFile = "platform:/resource/org.yakindu.base.expressions/model/Expressions.genmodel"
 		registerGeneratedEPackage = "org.yakindu.base.expressions.expressions.ExpressionsPackage"
     }
