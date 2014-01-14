@@ -16,7 +16,7 @@ Workflow {
     	scanClassPath = true
     	platformUri = "${runtimeProject}/.."
 		registerGenModelFile = "platform:/resource/org.yakindu.base.expressions/model/Expressions.genmodel"
-		registerGeneratedEPackage = "org.yakindu.base.expressions.expressions.ExpressionsPackage"
+		registerEcoreFile ="platform:/resource/org.yakindu.base.expressions/model/Expressions.ecore"
     }
     
     component = DirectoryCleaner {

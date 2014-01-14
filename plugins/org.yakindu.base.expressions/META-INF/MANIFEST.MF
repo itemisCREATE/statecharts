@@ -21,16 +21,16 @@ Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.base.expressions,
- org.yakindu.base.expressions.services,
  org.yakindu.base.expressions.expressions,
  org.yakindu.base.expressions.expressions.impl,
  org.yakindu.base.expressions.expressions.util,
- org.yakindu.base.expressions.serializer,
+ org.yakindu.base.expressions.formatting,
+ org.yakindu.base.expressions.generator,
  org.yakindu.base.expressions.parser.antlr,
  org.yakindu.base.expressions.parser.antlr.internal,
- org.yakindu.base.expressions.validation,
  org.yakindu.base.expressions.scoping,
- org.yakindu.base.expressions.generator,
- org.yakindu.base.expressions.formatting
+ org.yakindu.base.expressions.serializer,
+ org.yakindu.base.expressions.services,
+ org.yakindu.base.expressions.validation
 Bundle-ClassPath: .
 
