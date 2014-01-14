@@ -32,4 +32,5 @@ Export-Package: org.yakindu.base.expressions,
  org.yakindu.base.expressions.scoping,
  org.yakindu.base.expressions.generator,
  org.yakindu.base.expressions.formatting
+Bundle-ClassPath: .
 
