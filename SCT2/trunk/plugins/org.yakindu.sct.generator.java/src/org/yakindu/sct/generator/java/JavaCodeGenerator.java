@@ -11,7 +11,6 @@ package org.yakindu.sct.generator.java;
 
 import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
 
-import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.JavaTypeSystemAccess;
 import org.yakindu.sct.generator.java.types.OldJavaTypeSystemAccess;
@@ -23,10 +22,10 @@ import com.google.inject.Binder;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
-public class JavaCodeGenerator extends GenericJavaBasedGenerator {
+public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 	
 	@Override
-	public void runGenerator(Statechart statechart, GeneratorEntry entry) {
+	public void generate(Statechart statechart, GeneratorEntry entry) {
 		JavaGenerator delegate = getInjector(entry).getInstance(
 				JavaGenerator.class);
 		
@@ -55,4 +54,5 @@ public class JavaCodeGenerator extends GenericJavaBasedGenerator {
 			}
 		});
 	}
+
 }
