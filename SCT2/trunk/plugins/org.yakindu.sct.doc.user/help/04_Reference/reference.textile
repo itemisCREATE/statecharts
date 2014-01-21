@@ -537,11 +537,11 @@ p. ==<!-- End sgen_feature_debug -->==
 
 h2(#JavaGeneratorFeatures). Java Generator Features
 
-==<!-- Start sgen_feature_naming -->==
+==<!-- Start sgen_feature_javatargetfeatures -->==
 
-h4. Naming
+h4. JavaTargetFeatures
 
-The *Naming* feature allows the configuration of package names as well as class name prefix / suffix.
+The *JavaTargetFeatures* feature allows the configuration of package names as well as class name prefix / suffix.
 It is an *optional* feature and consists of the following parameters:
 
 # __basePackage__  (Boolean, required): The package to create for the generated java classes
@@ -550,11 +550,11 @@ It is an *optional* feature and consists of the following parameters:
 Example configuration:
 
 bc(prettyprint).. 
-feature Naming {
+feature JavaTargetFeatures {
 	basePackage = "org.yakindu.sct"
 	implementationSuffix = "Impl"
 }
-p. ==<!-- End sgen_feature_naming -->==	
+p. ==<!-- End sgen_feature_javatargetfeatures  -->==	
 ==<!-- Start sgen_feature_generalfeatures -->==	
 
 h4(#GeneralFeatures). GeneralFeatures
