@@ -24,8 +24,8 @@ class GenmodelEntries {
 		getFeatureConfiguration(ICoreFeatureConstants::LICENSE_HEADER)
 	}
 	
-	def private getNamingFeature(GeneratorEntry it) {
-		getFeatureConfiguration(IJavaFeatureConstants::NAMING_FEATURE)
+	def private getJavaTargetFeature(GeneratorEntry it) {
+		getFeatureConfiguration(IJavaFeatureConstants::JAVA_TARGET_FEATURE)
 	}
 	
 	def private getGeneralFeatures(GeneratorEntry it) {
@@ -33,11 +33,11 @@ class GenmodelEntries {
 	}
 	
 	def private FeatureParameterValue getBasePackageParameter(GeneratorEntry it) {
-		namingFeature?.getParameterValue(IJavaFeatureConstants::BASE_PACKAGE)
+		javaTargetFeature?.getParameterValue(IJavaFeatureConstants::BASE_PACKAGE)
 	}
 	
 	def private FeatureParameterValue getImplementationSuffixParameter(GeneratorEntry it) {
-		namingFeature?.getParameterValue(IJavaFeatureConstants::IMPLEMENTATION_SUFFIX)
+		javaTargetFeature?.getParameterValue(IJavaFeatureConstants::IMPLEMENTATION_SUFFIX)
 	}
 	
 	def private FeatureParameterValue getLicenseTextParameter(GeneratorEntry it) {

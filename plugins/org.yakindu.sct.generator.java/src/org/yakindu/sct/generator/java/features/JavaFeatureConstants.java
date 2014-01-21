@@ -18,8 +18,8 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICE
  */
 public final class JavaFeatureConstants implements IJavaFeatureConstants {
 	
-	public static final String getNamingFeature() {
-		return NAMING_FEATURE;
+	public static final String getJavaTargetFeature() {
+		return JAVA_TARGET_FEATURE;
 	}
 	
 	public static final String getBasePackage() {
@@ -29,7 +29,7 @@ public final class JavaFeatureConstants implements IJavaFeatureConstants {
 	public static final String getImplementationSuffix() {
 		return IMPLEMENTATION_SUFFIX;
 	}
-	
+		
 	public static final String getLicenseHeader() {
 		return LICENSE_HEADER;
 	}
