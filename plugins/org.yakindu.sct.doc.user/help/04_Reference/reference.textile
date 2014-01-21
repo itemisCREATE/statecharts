@@ -554,7 +554,7 @@ feature JavaTargetFeatures {
 	basePackage = "org.yakindu.sct"
 	implementationSuffix = "Impl"
 }
-p. ==<!-- End sgen_feature_javatargetfeatures  -->==	
+p. ==<!-- End sgen_feature_javatargetfeatures -->==	
 ==<!-- Start sgen_feature_generalfeatures -->==	
 
 h4(#GeneralFeatures). GeneralFeatures
