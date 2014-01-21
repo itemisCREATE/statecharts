@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "SimpleEvent.h"
 
+
+SimpleEvent handle;
+
 TEST(StatemachineTest, simpleEventTest) {
-	SimpleEvent handle;
 	simpleEvent_init(&handle);
 	simpleEvent_enter(&handle);
 	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_A)) << "Expected A to be active" ;
@@ -22,3 +24,5 @@ TEST(StatemachineTest, simpleEventTest) {
 	simpleEvent_runCycle(&handle);
 	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_B)) << "Expected B to be active" ;
 }
+
+		

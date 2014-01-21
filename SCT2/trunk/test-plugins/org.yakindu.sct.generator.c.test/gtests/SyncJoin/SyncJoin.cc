@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "SyncJoin.h"
 
+
+SyncJoin handle;
+
 TEST(StatemachineTest, syncJoin_C2_Waits) {
-	SyncJoin handle;
 	syncJoin_init(&handle);
 	syncJoin_enter(&handle);
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B));
@@ -54,7 +56,6 @@ TEST(StatemachineTest, syncJoin_C2_Waits) {
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_A));
 }
 TEST(StatemachineTest, syncJoin_D2_Waits) {
-	SyncJoin handle;
 	syncJoin_init(&handle);
 	syncJoin_enter(&handle);
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B));
@@ -83,7 +84,6 @@ TEST(StatemachineTest, syncJoin_D2_Waits) {
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_B_r2_D2));
 }
 TEST(StatemachineTest, doubleEntryActionBug) {
-	SyncJoin handle;
 	syncJoin_init(&handle);
 	syncJoin_enter(&handle);
 	syncJoinIface_raise_e(&handle);
@@ -95,3 +95,5 @@ TEST(StatemachineTest, doubleEntryActionBug) {
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_A));
 	EXPECT_TRUE(syncJoinIface_get_x(&handle) == 1);
 }
+
+		

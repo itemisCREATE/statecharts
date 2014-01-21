@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "PriorityValues.h"
 
+
+PriorityValues handle;
+
 TEST(StatemachineTest, transitionPriority) {
-	PriorityValues handle;
 	priorityValues_init(&handle);
 	priorityValues_enter(&handle);
 	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_main_region_A));
@@ -22,7 +24,6 @@ TEST(StatemachineTest, transitionPriority) {
 	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_main_region_C));
 }
 TEST(StatemachineTest, regionPriority) {
-	PriorityValues handle;
 	priorityValues_init(&handle);
 	priorityValues_enter(&handle);
 	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_someRegion_A));
@@ -31,3 +32,5 @@ TEST(StatemachineTest, regionPriority) {
 	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_someRegion_B));
 	EXPECT_TRUE(!priorityValues_isActive(&handle, PriorityValues_main_region_E));
 }
+
+		

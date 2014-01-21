@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "DeepHistory.h"
 
+
+DeepHistory handle;
+
 TEST(StatemachineTest, deepHistoryTest) {
-	DeepHistory handle;
 	deepHistory_init(&handle);
 	deepHistory_enter(&handle);
 	deepHistoryIface_raise_event1(&handle);
@@ -35,3 +37,5 @@ TEST(StatemachineTest, deepHistoryTest) {
 	EXPECT_TRUE(!deepHistory_isActive(&handle, DeepHistory_mainRegion_State1));
 	EXPECT_TRUE(deepHistory_isActive(&handle, DeepHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 }
+
+		

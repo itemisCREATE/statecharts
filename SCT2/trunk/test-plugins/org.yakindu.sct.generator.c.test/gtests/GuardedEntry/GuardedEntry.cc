@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "GuardedEntry.h"
 
+
+GuardedEntry handle;
+
 TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
-	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	EXPECT_TRUE(guardedEntryIface_get_guard(&handle) == false);
 	guardedEntry_enter(&handle);
@@ -21,7 +23,6 @@ TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle) == false);
 }
 TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
-	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	guardedEntryIface_set_guard(&handle, true);
 	guardedEntry_enter(&handle);
@@ -29,7 +30,6 @@ TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle) == true);
 }
 TEST(StatemachineTest, EntryTakenInTransition) {
-	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	guardedEntry_enter(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
@@ -44,7 +44,6 @@ TEST(StatemachineTest, EntryTakenInTransition) {
 	EXPECT_TRUE(guardedEntryIface_get_done(&handle) );
 }
 TEST(StatemachineTest, EntryNotTakenInTransition) {
-	GuardedEntry handle;
 	guardedEntry_init(&handle);
 	guardedEntry_enter(&handle);
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
@@ -58,3 +57,5 @@ TEST(StatemachineTest, EntryNotTakenInTransition) {
 	EXPECT_TRUE(guardedEntry_isActive(&handle, GuardedEntry_main_region_A));
 	EXPECT_TRUE(!guardedEntryIface_get_done(&handle) );
 }
+
+		

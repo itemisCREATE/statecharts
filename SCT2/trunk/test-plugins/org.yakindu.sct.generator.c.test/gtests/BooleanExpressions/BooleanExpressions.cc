@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "BooleanExpressions.h"
 
+
+BooleanExpressions handle;
+
 TEST(StatemachineTest, booleanExpressions) {
-	BooleanExpressions handle;
 	booleanExpressions_init(&handle);
 	booleanExpressions_enter(&handle);
 	EXPECT_TRUE(booleanExpressions_isActive(&handle, BooleanExpressions_main_region_StateA));
@@ -28,3 +30,5 @@ TEST(StatemachineTest, booleanExpressions) {
 	EXPECT_TRUE(booleanExpressionsIface_get_equal(&handle) == false);
 	EXPECT_TRUE(booleanExpressionsIface_get_notequal(&handle) == true);
 }
+
+		
