@@ -371,7 +371,7 @@
            class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.action.GenerateModelAction"
            enablesFor="1"
            id="org.yakindu.sct.generator.ui.generateaction"
-           label="Generate Statechart Artifacts"
+           label="Generate Code Artifacts"
            menubarPath="additions">
 	    </action>
 	 </objectContribution>
