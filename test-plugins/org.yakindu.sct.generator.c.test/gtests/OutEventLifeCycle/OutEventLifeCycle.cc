@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "OutEventLifeCycle.h"
 
+
+OutEventLifeCycle handle;
+
 TEST(StatemachineTest, availableAfterCycle) {
-	OutEventLifeCycle handle;
 	outEventLifeCycle_init(&handle);
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
@@ -21,7 +23,6 @@ TEST(StatemachineTest, availableAfterCycle) {
 	EXPECT_TRUE(outEventLifeCycleIface_israised_f(&handle) );
 }
 TEST(StatemachineTest, availableWithinCycle) {
-	OutEventLifeCycle handle;
 	outEventLifeCycle_init(&handle);
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
@@ -29,7 +30,6 @@ TEST(StatemachineTest, availableWithinCycle) {
 	EXPECT_TRUE(outEventLifeCycleIface_get_f_available_in_cycle(&handle) );
 }
 TEST(StatemachineTest, unvailableWithin2ndCycle) {
-	OutEventLifeCycle handle;
 	outEventLifeCycle_init(&handle);
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
@@ -38,7 +38,6 @@ TEST(StatemachineTest, unvailableWithin2ndCycle) {
 	EXPECT_TRUE(!outEventLifeCycleIface_get_f_available_in_next_cycle(&handle) );
 }
 TEST(StatemachineTest, unvailableAfter2ndCycle) {
-	OutEventLifeCycle handle;
 	outEventLifeCycle_init(&handle);
 	outEventLifeCycle_enter(&handle);
 	outEventLifeCycleIface_raise_e(&handle);
@@ -46,3 +45,5 @@ TEST(StatemachineTest, unvailableAfter2ndCycle) {
 	outEventLifeCycle_runCycle(&handle);
 	EXPECT_TRUE(!outEventLifeCycleIface_israised_f(&handle) );
 }
+
+		

@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "SyncFork.h"
 
+
+SyncFork handle;
+
 TEST(StatemachineTest, syncForkTest) {
-	SyncFork handle;
 	syncFork_init(&handle);
 	syncFork_enter(&handle);
 	EXPECT_TRUE(syncFork_isActive(&handle, SyncFork_main_region_A));
@@ -36,3 +38,5 @@ TEST(StatemachineTest, syncForkTest) {
 	EXPECT_TRUE(syncFork_isActive(&handle, SyncFork_main_region_B_r1_C1));
 	EXPECT_TRUE(syncFork_isActive(&handle, SyncFork_main_region_B_r2_D1));
 }
+
+		

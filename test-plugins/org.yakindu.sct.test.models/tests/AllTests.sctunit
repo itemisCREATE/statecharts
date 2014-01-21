@@ -42,6 +42,5 @@ testsuite AllTests {
 	SyncJoin, 
 //	TimedTransitions,
 	TransitionWithoutCondition,
-	ValuedEvents,
-	EntryChoice
+	ValuedEvents
 } 

@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "ShallowHistory.h"
 
+
+ShallowHistory handle;
+
 TEST(StatemachineTest, shallowHistoryTest) {
-	ShallowHistory handle;
 	shallowHistory_init(&handle);
 	shallowHistory_enter(&handle);
 	shallowHistoryIface_raise_event1(&handle);
@@ -47,3 +49,5 @@ TEST(StatemachineTest, shallowHistoryTest) {
 	EXPECT_TRUE(!shallowHistory_isActive(&handle, ShallowHistory_mainRegion_State2__region0_State4__region0_State6));
 	EXPECT_TRUE(shallowHistory_isActive(&handle, ShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0_State9));
 }
+
+		

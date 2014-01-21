@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -12,8 +12,10 @@
 #include "gtest/gtest.h"
 #include "Choice.h"
 
+
+Choice handle;
+
 TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
-	Choice handle;
 	choice_init(&handle);
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
@@ -23,7 +25,6 @@ TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
 }
 TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
-	Choice handle;
 	choice_init(&handle);
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
@@ -33,7 +34,6 @@ TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_B));
 }
 TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
-	Choice handle;
 	choice_init(&handle);
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
@@ -43,7 +43,6 @@ TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
 }
 TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
-	Choice handle;
 	choice_init(&handle);
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
@@ -53,7 +52,6 @@ TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_B));
 }
 TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
-	Choice handle;
 	choice_init(&handle);
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
@@ -63,7 +61,6 @@ TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
 }
 TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
-	Choice handle;
 	choice_init(&handle);
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
@@ -73,7 +70,6 @@ TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_B));
 }
 TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
-	Choice handle;
 	choice_init(&handle);
 	choice_enter(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_A));
@@ -82,3 +78,5 @@ TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	choice_runCycle(&handle);
 	EXPECT_TRUE(choice_isActive(&handle, Choice_main_region_C));
 }
+
+		
