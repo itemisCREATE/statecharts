@@ -3,6 +3,8 @@ package org.yakindu.sct.model.sexec.transformation;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.ITypeSystem;
+import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
+import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
@@ -17,6 +19,7 @@ import com.google.inject.name.Names;
  * @author andreas muelder - Initial contribution and API
  * @author Alexander Nyßen (alexander.nyssen@itemis.de) - Refactored to
  *         AbstractGenericModule to allow subclasses to overwrite bindings
+ * @author Markus Mühlbrandt - Added binding to DefaultNamingService
  */
 public class SequencerModule extends AbstractGenericModule {
 
@@ -46,6 +49,10 @@ public class SequencerModule extends AbstractGenericModule {
 
 	public Class<? extends ISTextTypeInferrer> bindISTextTypeInferrer() {
 		return STextDefaultTypeInferrer.class;
+	}
+	
+	public Class<? extends INamingService> bindINamingService() {
+		return DefaultNamingService.class;
 	}
 
 }

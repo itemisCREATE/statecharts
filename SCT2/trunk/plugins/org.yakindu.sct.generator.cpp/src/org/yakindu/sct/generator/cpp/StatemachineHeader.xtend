@@ -30,6 +30,7 @@ import java.util.List
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class StatemachineHeader extends Statemachine {
 	
@@ -37,6 +38,7 @@ class StatemachineHeader extends Statemachine {
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
+	@Inject extension INamingService
 	
 	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		 fsa.generateFile(flow.module().h, flow.statemachineHContent(entry) )
@@ -172,7 +174,7 @@ class StatemachineHeader extends Statemachine {
 	'''
 	
 	def protected identifier(Parameter parameter) {
-		if (parameter.name.isCKeyword()) {
+		if (parameter.name.isKeyword) {
 			return parameter.name + "Arg"
 		}
 		else {
@@ -296,10 +298,10 @@ class StatemachineHeader extends Statemachine {
 	'''
 	
 	def dispatch functionPrototype(Check it) '''
-		sc_boolean «asCheckFunction»();
+		sc_boolean «shortName»();
 	'''
 	
 	def dispatch functionPrototype(Step it) '''
-		void «functionName»();
+		void «shortName»();
 	'''	
 }

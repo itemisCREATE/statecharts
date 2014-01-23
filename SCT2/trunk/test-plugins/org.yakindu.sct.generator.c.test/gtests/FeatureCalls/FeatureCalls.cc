@@ -18,9 +18,9 @@ FeatureCalls handle;
 TEST(StatemachineTest, FeatureCalls) {
 	featureCalls_init(&handle);
 	featureCalls_enter(&handle);
-	EXPECT_TRUE(featureCalls_isActive(&handle, FeatureCalls_main_region_A));
+	EXPECT_TRUE(featureCalls_isActive(&handle, FeatureCalls_A));
 	featureCalls_runCycle(&handle);
-	EXPECT_TRUE(featureCalls_isActive(&handle, FeatureCalls_main_region_A));
+	EXPECT_TRUE(featureCalls_isActive(&handle, FeatureCalls_A));
 }
 
 		

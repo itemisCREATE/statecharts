@@ -19,6 +19,7 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class StatemachineRequired {
 
@@ -26,6 +27,7 @@ class StatemachineRequired {
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
+	@Inject extension INamingService
 	
 	def generateStatemachineClientH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		 fsa.generateFile(flow.module.client.h, flow.statemachineClientHContent(entry) )

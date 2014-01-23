@@ -18,9 +18,9 @@ DynamicChoice handle;
 TEST(StatemachineTest, DynamicChoiceTest) {
 	dynamicChoice_init(&handle);
 	dynamicChoice_enter(&handle);
-	EXPECT_TRUE(dynamicChoice_isActive(&handle, DynamicChoice_main_region_Start));
+	EXPECT_TRUE(dynamicChoice_isActive(&handle, DynamicChoice_Start));
 	dynamicChoice_runCycle(&handle);
-	EXPECT_TRUE(dynamicChoice_isActive(&handle, DynamicChoice_main_region_A));
+	EXPECT_TRUE(dynamicChoice_isActive(&handle, DynamicChoice_A));
 }
 
 		

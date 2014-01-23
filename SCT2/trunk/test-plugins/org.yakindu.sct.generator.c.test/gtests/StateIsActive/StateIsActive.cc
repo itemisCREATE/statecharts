@@ -18,13 +18,13 @@ StateIsActive handle;
 TEST(StatemachineTest, stateIsActive) {
 	stateIsActive_init(&handle);
 	stateIsActive_enter(&handle);
-	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R1_R1A));
-	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R2_R2A));
+	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R1A));
+	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R2A));
 	stateIsActiveIface_raise_event1(&handle);
 	stateIsActive_runCycle(&handle);
 	stateIsActive_runCycle(&handle);
-	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R1_R1B));
-	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R2_R2B));
+	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R1B));
+	EXPECT_TRUE(stateIsActive_isActive(&handle, StateIsActive_R2B));
 }
 
 		

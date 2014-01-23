@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -16,14 +16,14 @@ TEST(StatemachineTest, sameNameDifferenRegionTest) {
 	SameNameDifferentRegion* statechart = new SameNameDifferentRegion();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::SameNameDifferentRegion_main_region_StateA));
+	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::StateA));
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::SameNameDifferentRegion_main_region_StateB));
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::SameNameDifferentRegion_main_region_StateB_r1_StateA));
+	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::StateB));
+	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::r1_StateA));
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::SameNameDifferentRegion_main_region_StateB));
-	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::SameNameDifferentRegion_main_region_StateB_r1_StateB));
+	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::StateB));
+	EXPECT_TRUE(statechart->isActive(SameNameDifferentRegion::r1_StateB));
 	delete statechart;
 }

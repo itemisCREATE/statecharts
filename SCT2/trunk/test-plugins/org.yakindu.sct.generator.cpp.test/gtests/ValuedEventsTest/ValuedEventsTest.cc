@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -17,8 +17,8 @@ TEST(StatemachineTest, valuedEventsTest) {
 	statechart->init();
 	statechart->enter();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ValuedEvents::ValuedEvents_main_region_A));
-	EXPECT_TRUE(statechart->isActive(ValuedEvents::ValuedEvents__region1_C));
+	EXPECT_TRUE(statechart->isActive(ValuedEvents::A));
+	EXPECT_TRUE(statechart->isActive(ValuedEvents::C));
 	EXPECT_TRUE(statechart->getSCInterface()->get_myVar()== 42);
 	delete statechart;
 }

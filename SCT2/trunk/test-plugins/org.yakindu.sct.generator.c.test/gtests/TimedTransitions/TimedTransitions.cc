@@ -19,10 +19,10 @@ TimedTransitions handle;
 TEST(StatemachineTest, Timer01) {
 	timedTransitions_init(&handle);
 	timedTransitions_enter(&handle);
-	EXPECT_TRUE(timedTransitions_isActive(&handle, TimedTransitions_main_region_Start));
+	EXPECT_TRUE(timedTransitions_isActive(&handle, TimedTransitions_Start));
 	// here should be waited 2030 Seconds
 	timedTransitions_runCycle(&handle);
-	EXPECT_TRUE(timedTransitions_isActive(&handle, TimedTransitions_main_region_End));
+	EXPECT_TRUE(timedTransitions_isActive(&handle, TimedTransitions_End));
 }
 
 		

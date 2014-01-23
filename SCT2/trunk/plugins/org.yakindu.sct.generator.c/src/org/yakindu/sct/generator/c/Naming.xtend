@@ -11,37 +11,30 @@
 package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
-import java.util.Arrays
-import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.ExecutionScope
-import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgraph.Event
-import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
-import java.util.regex.Pattern
-import java.util.regex.Matcher
-import org.yakindu.sct.generator.c.CKeywords
+import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
-class Naming implements CKeywords{
-
-	@Inject
-	extension Navigation
+class Naming {
+	
+	@Inject extension Navigation
 	
 	@Inject extension ICodegenTypeSystemAccess
 	
-	@Inject
-	private StextNameProvider provider
+	@Inject private StextNameProvider provider
+	
+	@Inject extension INamingService
 	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
@@ -160,89 +153,25 @@ class Naming implements CKeywords{
 	def asSetter(VariableDefinition it) {
 		scope.functionPrefix + '_set_' + name.asIdentifier.toFirstLower	
 	}
-
+	
 	def asFunction(OperationDefinition it) {
 		scope.functionPrefix + '_' + name.asIdentifier.toFirstLower	
 	}
-		
 	
-	def functionName(Step it) {
-		switch (it) {
-			case isCheckFunction : asCheckFunction
-			case isEntryAction: asEntryActionFunction
-			case isExitAction : asExitActionFunction
-			case isEffect : asEffectFunction
-			case isEnterSequence : asEnterSequenceFunction
-			case isDeepEnterSequence : asDeepEnterSequenceFunction
-			case isShallowEnterSequence : asShallowEnterSequenceFunction
-			case isExitSequence : asExitSequenceFunction
-			case isReactSequence : asReactFunction
-			default : ""
-		} 
-	}
+	def raised(CharSequence it) { it + '_raised' }
 	
-	
-	def asCheckFunction(Step it) { functionName(newArrayList('check', elementName, reaction.name)) }
-	 
-	def asEffectFunction(Step it) { functionName(newArrayList('effect', elementName, reaction.name)) }
-	 
-	def asEntryActionFunction(Step it) { functionName('entryaction') }
-	
-	def asExitActionFunction(Step it) { functionName('exitaction') }
-	 
-	def asEnterSequenceFunction(Step it) { functionName('entersequence') }
-		 
-	def asDeepEnterSequenceFunction(Step it) { functionName('deepentersequence') }
-	 
-	def asShallowEnterSequenceFunction(Step it) { functionName('shallowentersequence') }
-	 
-	def asExitSequenceFunction(Step it) { functionName('exitsequence') }
-	 
-	def asReactFunction(Step it) { functionName('react') }
-	
-	
-	def functionName(Step it, String fName) { functionName(newArrayList(fName, elementName)) }
-	
-	def functionName(EObject it, List<String> segments) {
-		flow.functionPrefix + segments.fold("", [s, seg | s + if (seg.empty) "" else "_" + seg]).asIdentifier
-	}
-
-	def dispatch String elementName(EObject it) { eContainer.elementName }
-	
-	def dispatch String elementName(ExecutionScope it) { (if (superScope != null && ! superScope.elementName.empty) superScope.elementName + "_" else "") + name }	
-	
-	def dispatch String elementName(ExecutionState it) { (if (superScope != null && ! superScope.elementName.empty) superScope.elementName + "_" else "") + simpleName }	
-	
-	def dispatch String elementName(ExecutionNode it) { name }	
-	
-	def dispatch String elementName(ExecutionFlow it) { "" }
-	
-	def raised(CharSequence it) { it + '_raised' }	
-	def value(CharSequence it)  { it + '_value' }	
-	
-	
+	def value(CharSequence it)  { it + '_value' }
 	
 	def h(String it) { it + ".h" }
+	
 	def c(String it) { it + ".c" }
 	
 	def define(String it) { it.replaceAll('\\.', '_').toUpperCase }
-	
-	
-	def asIdentifier(String it) {
-		replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', '_')
-	}
-	
-	def asEscapedIdentifier(String it) {
-		var s = it
-		if (s.isCKeyword) {
-			s = s + '_ID'
-		}
-		return s.asIdentifier
-	} 
-	
+		
 	def dispatch scopeDescription(Scope it) '''scope'''
 	
 	def dispatch scopeDescription(InterfaceScope it) '''«IF name==null || name.empty»default interface scope«ELSE»interface scope '«name»'«ENDIF»'''
+	
 	def dispatch scopeDescription(InternalScope it) '''internal scope'''
 	
 	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
@@ -254,34 +183,18 @@ class Naming implements CKeywords{
 		else ''
 	}
 	
-	/** todo externalize */
 	def dispatch access (VariableDefinition it) 
 		'''«scHandle»->«scope.instance».«name.asEscapedIdentifier»'''
 
-	/** todo externalize */
 	def dispatch access (OperationDefinition it) 
 		'''«asFunction»'''
-		
-	/** todo externalize */
+	
 	def dispatch access (Event it) 
 		'''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
 				
 	def dispatch access (EObject it) 
-		'''#error cannot access elements of type «getClass().name» '''
-		
+		'''#error cannot access elements of type «getClass().name»'''
 	
 	def valueAccess(Event it) 
 		'''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
-		
-	def boolean isCKeyword(String name) {
-		var String lowName = name.toLowerCase();
-		for (String keyword : Arrays::asList(KEYWORDS)) {
-			var Pattern pattern = Pattern::compile("^" + keyword + "$");
-			var Matcher matcher = pattern.matcher(lowName);
-			if (matcher.find()) {
-				return true;
-			}
-		}
-		return false;
-	}
 }

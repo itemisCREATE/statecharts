@@ -18,22 +18,22 @@ InternalEventLifeCycle handle;
 TEST(StatemachineTest, InternalEventLifeCycleTest) {
 	internalEventLifeCycle_init(&handle);
 	internalEventLifeCycle_enter(&handle);
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r2_C));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_A));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_C));
 	internalEventLifeCycleIface_raise_e(&handle);
 	internalEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r2_D));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_A));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_D));
 	internalEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r2_D));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_A));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_D));
 	internalEventLifeCycleIface_raise_f(&handle);
 	internalEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r2_C));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_A));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_C));
 	internalEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r1_A));
-	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_r2_C));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_A));
+	EXPECT_TRUE(internalEventLifeCycle_isActive(&handle, InternalEventLifeCycle_C));
 }
 
 		

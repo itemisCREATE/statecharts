@@ -13,12 +13,14 @@ import org.yakindu.sct.model.sexec.EnterState
 import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.Execution
 import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension ExpressionCode
+	@Inject extension INamingService
 	
 	override dispatch CharSequence code(SaveHistory it) '''
 		«stepComment»
@@ -42,7 +44,7 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 			switch(stateConfVector[ «stateConfigurationIdx» ]) {
 		«ENDIF»
 			«FOR caseid : cases»
-				case «caseid.state.name.asIdentifier» : {
+				case «caseid.state.shortName» : {
 					«caseid.step.code»
 					break;
 				}
@@ -65,31 +67,23 @@ class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 		'''«statement.code»;'''
 	
 	override dispatch CharSequence code(Call it) 
-		'''«step.functionName»();'''
+		'''«step.shortName»();'''
 	
 	override dispatch CharSequence code(Sequence it) '''
-		«IF comment != null»
-			{
-				«stepComment»
-				«FOR s : steps»
-					«s.code»
-				«ENDFOR»
-			}
-		«ELSE»
-			«FOR s : steps»
-				«s.code»
-			«ENDFOR»
-		«ENDIF»
+		«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
+		«FOR s : steps»
+			«s.code»
+		«ENDFOR»
 	'''	
 	
 	override dispatch CharSequence code(Check it) 
 		'''«IF condition != null»«condition.code»«ELSE»true«ENDIF»'''
 	
 	override dispatch CharSequence code(CheckRef it) 
-		'''«IF check != null»«check.functionName»()«ELSE»true«ENDIF»'''
+		'''«IF check != null»«check.shortName»()«ELSE»true«ENDIF»'''
 	
 	override dispatch CharSequence code(EnterState it) '''
-		stateConfVector[«state.stateVector.offset»] = «state.name.asEscapedIdentifier»;
+		stateConfVector[«state.stateVector.offset»] = «state.shortName»;
 		stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 

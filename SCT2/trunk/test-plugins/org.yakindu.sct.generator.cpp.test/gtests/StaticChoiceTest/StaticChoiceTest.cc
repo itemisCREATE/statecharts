@@ -11,17 +11,12 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "StaticChoice.h"
-			
 
-StaticChoice* statechart;
-
-	
 TEST(StatemachineTest, StaticChoiceTest) {
-	statechart = new StaticChoice();				
+	StaticChoice* statechart = new StaticChoice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(StaticChoice::StaticChoice_main_region_Start));
+	EXPECT_TRUE(statechart->isActive(StaticChoice::Start));
 	statechart->runCycle();
 	delete statechart;
 }
-

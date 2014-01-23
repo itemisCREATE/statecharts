@@ -10,6 +10,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.model.sexec,
  org.yakindu.sct.model.sexec.extensions,
  org.yakindu.sct.model.sexec.impl,
+ org.yakindu.sct.model.sexec.naming,
  org.yakindu.sct.model.sexec.transformation,
  org.yakindu.sct.model.sexec.util
 Require-Bundle: org.eclipse.core.runtime,

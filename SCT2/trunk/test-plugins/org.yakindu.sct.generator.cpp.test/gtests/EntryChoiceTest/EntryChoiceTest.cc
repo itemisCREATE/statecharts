@@ -11,18 +11,13 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "EntryChoice.h"
-			
 
-EntryChoice* statechart;
-
-	
 TEST(StatemachineTest, EntryChoiceTest) {
-	statechart = new EntryChoice();				
+	EntryChoice* statechart = new EntryChoice();
 	statechart->init();
 	statechart->enter();
 	statechart->runCycle();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(EntryChoice::EntryChoice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(EntryChoice::A));
 	delete statechart;
 }
-

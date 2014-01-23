@@ -42,6 +42,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 import org.yakindu.sct.model.stext.types.ISTextTypeSystem
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class ExpressionCode {
 	 
@@ -49,6 +50,7 @@ class ExpressionCode {
 	@Inject extension Navigation
 	@Inject extension ISTextTypeSystem
 	@Inject extension ISTextTypeInferrer
+	@Inject extension INamingService
 	
 	/* Refering to declared elements */
 	
@@ -160,7 +162,7 @@ class ExpressionCode {
 		'''«value.definition.event.valueAccess»'''
 	
 	def dispatch CharSequence code (ActiveStateReferenceExpression it)
-		'''«flow.nameOfIsActiveFunction»(«scHandle», «value.fullyQualifiedName»)'''
+		'''«flow.nameOfIsActiveFunction»(«scHandle», «value.shortName»)'''
 	
 	def dispatch CharSequence code (ParenthesizedExpression it)
 		'''(«expression.code»)'''

@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.c
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants
 import org.yakindu.sct.model.sgen.FeatureParameterValue
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.c.features.CFeatureConstants
 
 class GenmodelEntries {
 	
@@ -28,5 +29,44 @@ class GenmodelEntries {
 			return "/*"+licenseTextParameter.stringValue+"*/"
 		}
 		return null
+	}
+	
+	def private getIdentifierSettingsFeature(GeneratorEntry it) {
+		getFeatureConfiguration(CFeatureConstants::FEATURE_IDENTIFIER_SETTINGS)
+	}
+	
+	def private FeatureParameterValue getMaxIdentifierLengthParameter(GeneratorEntry it) {
+		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_MAX_IDENTIFIER_LENGTH)
+	}
+	
+	def getIdentifierLength(GeneratorEntry it) {
+		if (maxIdentifierLengthParameter != null) {
+			return Integer.valueOf(maxIdentifierLengthParameter.stringValue)
+		}
+		return null
+	}
+	
+	def private FeatureParameterValue getSeparatorParameter(GeneratorEntry it) {
+		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_SEPARATOR)
+	}
+	
+	def getSeparator(GeneratorEntry it) {
+		return separatorParameter?.stringValue
+	}
+	
+	def private FeatureParameterValue getFunctionPrefixParameter(GeneratorEntry it) {
+		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_FUNCTION_PREFIX)
+	}
+	
+	def getFunctionPrefix(GeneratorEntry it) {
+		return functionPrefixParameter?.stringValue
+	}
+	
+	def private FeatureParameterValue getModuleNameParameter(GeneratorEntry it) {
+		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_MODULE_NAME)
+	}
+	
+	def getModuleName(GeneratorEntry it) {
+		return moduleNameParameter?.stringValue
 	}
 }

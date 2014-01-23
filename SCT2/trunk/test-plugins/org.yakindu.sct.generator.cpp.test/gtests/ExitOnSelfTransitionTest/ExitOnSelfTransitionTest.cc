@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -16,7 +16,7 @@ TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	ExitOnSelfTransition* statechart = new ExitOnSelfTransition();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitOnSelfTransition::ExitOnSelfTransition_main_region_A));
+	EXPECT_TRUE(statechart->isActive(ExitOnSelfTransition::A));
 	EXPECT_TRUE(statechart->getSCInterface()->get_entryCount()== 1);
 	EXPECT_TRUE(statechart->getSCInterface()->get_exitCount()== 0);
 	statechart->raise_e();
