@@ -19,6 +19,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class StatemachineC {
 	
@@ -27,11 +28,13 @@ class StatemachineC {
 	@Inject extension FlowCode
 	@Inject extension GenmodelEntries
 	@Inject extension ICodegenTypeSystemAccess
+	@Inject extension INamingService
 	
 	def generateStatemachineC(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+		flow.initializeNamingService
 		var content = flow.statemachineCContent(entry)
 		var target = flow.module.c
-		 fsa.generateFile(target , content)
+		fsa.generateFile(target , content)
 	}
 	
 	def statemachineCContent(ExecutionFlow it, GeneratorEntry entry) '''
@@ -150,8 +153,8 @@ class StatemachineC {
 				switch («scHandle»->stateConfVector[handle->stateConfVectorPosition]) {
 				«FOR state : states»
 					«IF state.reactSequence!=null»
-					case «state.name.asEscapedIdentifier» : {
-						«state.reactSequence.functionName»(«scHandle»);
+					case «state.shortName» : {
+						«state.reactSequence.shortName»(«scHandle»);
 						break;
 					}
 					«ENDIF»
@@ -180,10 +183,10 @@ class StatemachineC {
 		sc_boolean «nameOfIsActiveFunction»(«scHandleDecl», «statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
-				case «s.name.asIdentifier» : 
-					return (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»
-					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.name.asIdentifier»
-						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»«ENDIF»);
+				case «s.shortName» : 
+					return (sc_boolean) («IF s.leaf»«scHandle»->stateConfVector[«s.stateVector.offset»] == «s.shortName»
+					«ELSE»«scHandle»->stateConfVector[«s.stateVector.offset»] >= «s.shortName»
+						&& «scHandle»->stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.shortName»«ENDIF»);
 				«ENDFOR»
 				default: return bool_false;
 			}
@@ -257,11 +260,11 @@ class StatemachineC {
 	'''
 	
 	def dispatch functionPrototype(Check it) '''
-		static sc_boolean «asCheckFunction»(«scHandleDecl»);
+		static sc_boolean «shortName»(«scHandleDecl»);
 	'''
 	
 	def dispatch functionPrototype(Step it) '''
-		static void «functionName»(«scHandleDecl»);
+		static void «shortName»(«scHandleDecl»);
 	'''	
 	
 	
@@ -292,7 +295,7 @@ class StatemachineC {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		static sc_boolean «asCheckFunction»(«scHandleDecl») {
+		static sc_boolean «shortName»(«scHandleDecl») {
 			return «code»;
 		}
 		
@@ -300,7 +303,7 @@ class StatemachineC {
 	
 	def dispatch functionImplementation(Step it) '''
 		«stepComment»
-		static void «functionName»(«scHandleDecl») {
+		static void «shortName»(«scHandleDecl») {
 			«code»
 		}
 		

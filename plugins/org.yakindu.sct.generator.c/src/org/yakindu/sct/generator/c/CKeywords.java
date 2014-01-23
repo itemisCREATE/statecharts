@@ -10,8 +10,15 @@
  */
 package org.yakindu.sct.generator.c;
 
-public interface CKeywords {
-	public static final String[] KEYWORDS = { "alignas", "alignof", "and",
+/**
+ * Helper class which contains an array with c language keywords
+ * 
+ * @author Markus Mühlbrandt
+ * 
+ */
+public final class CKeywords {
+
+	public static final String[] C_KEYWORDS = { "alignas", "alignof", "and",
 			"and_eq", "asm", "auto", "bitand", "bitor", "bool", "break",
 			"case", "catch", "char", "char16_t", "char32_t", "class", "compl",
 			"const", "constexpr", "const_cast", "continue", "decltype",

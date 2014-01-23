@@ -11,18 +11,13 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "DynamicChoice.h"
-			
 
-DynamicChoice* statechart;
-
-	
 TEST(StatemachineTest, DynamicChoiceTest) {
-	statechart = new DynamicChoice();				
+	DynamicChoice* statechart = new DynamicChoice();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(DynamicChoice::DynamicChoice_main_region_Start));
+	EXPECT_TRUE(statechart->isActive(DynamicChoice::Start));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(DynamicChoice::DynamicChoice_main_region_A));
+	EXPECT_TRUE(statechart->isActive(DynamicChoice::A));
 	delete statechart;
 }
-

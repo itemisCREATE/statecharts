@@ -25,17 +25,17 @@ import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class FlowCode {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension ExpressionCode
-	
-	
+	@Inject extension INamingService
  
 	def stepComment(Step it) '''
-		«IF comment != null && ! comment.empty»
+		«IF !comment.nullOrEmpty»
 			/* «comment» */
 		«ENDIF»
 	'''
@@ -66,7 +66,7 @@ class FlowCode {
 			switch(«scHandle»->stateConfVector[ «stateConfigurationIdx» ]) {
 		«ENDIF»
 			«FOR caseid : cases»
-				case «caseid.state.name.asIdentifier» : {
+				case «caseid.state.shortName» : {
 					«caseid.step.code»
 					break;
 				}
@@ -77,19 +77,19 @@ class FlowCode {
 
 	def dispatch CharSequence code(ScheduleTimeEvent it) '''
 		«stepComment»
-		«flow.type.toFirstLower»_setTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.name.asIdentifier»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
+		«flow.type.toFirstLower»_setTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
 	'''
 
 	def dispatch CharSequence code(UnscheduleTimeEvent it) '''
 		«stepComment»
-		«flow.type.toFirstLower»_unsetTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.name.asIdentifier»_raised) );		
+		«flow.type.toFirstLower»_unsetTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) );		
 	'''
 
 	def dispatch CharSequence code(Execution it) 
 		'''«statement.code»;'''
 	
 	def dispatch CharSequence code(Call it) 
-		'''«step.functionName»(«scHandle»);'''
+		'''«step.shortName»(«scHandle»);'''
 
 	def dispatch CharSequence code(Sequence it) '''
 		«IF !steps.nullOrEmpty»«stepComment»«ENDIF»
@@ -102,7 +102,7 @@ class FlowCode {
 		'''«IF condition != null»«condition.code»«ELSE»bool_true«ENDIF»'''
 	
 	def dispatch CharSequence code(CheckRef it) 
-		'''«IF check != null»«check.functionName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
+		'''«IF check != null»«check.shortName»(«scHandle»)«ELSE»bool_true«ENDIF»'''
 
 	def dispatch CharSequence code(If it) '''
 		«stepComment»
@@ -115,7 +115,7 @@ class FlowCode {
 	'''
 	
 	def dispatch CharSequence code(EnterState it) '''
-		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.name.asEscapedIdentifier»;
+		«scHandle»->stateConfVector[«state.stateVector.offset»] = «state.shortName»;
 		«scHandle»->stateConfVectorPosition = «state.stateVector.offset»;
 	'''
 

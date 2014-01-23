@@ -17,4 +17,5 @@ package org.yakindu.sct.generator.cpp.features;
  */
 public interface CPPFeatureConstants {
 	public static final String LIBRARY_NAME = "CPP Generator";
+	
 }

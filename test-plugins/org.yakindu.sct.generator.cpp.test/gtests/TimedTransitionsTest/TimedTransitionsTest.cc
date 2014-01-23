@@ -11,22 +11,14 @@
 #include <string>
 #include "gtest/gtest.h"
 #include "TimedTransitions.h"
-			
 
-TimedTransitions* statechart;
-
-	
 TEST(StatemachineTest, Timer01) {
-	statechart = new TimedTransitions();				
-	
-	//  YAKHMI-701 doesnt work for Cpp atm
-	
-	// statechart->init();
-	// statechart->enter();
-	// EXPECT_TRUE(statechart->isActive(TimedTransitions::TimedTransitions_main_region_Start));
-	//not implemented: WaitStatement
-	// statechart->runCycle();
-	// EXPECT_TRUE(statechart->isActive(TimedTransitions::TimedTransitions_main_region_End));
+	TimedTransitions* statechart = new TimedTransitions();
+	statechart->init();
+	statechart->enter();
+	EXPECT_TRUE(statechart->isActive(TimedTransitions::Start));
+	/*not implemented: WaitStatement*/
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->isActive(TimedTransitions::End));
 	delete statechart;
 }
-

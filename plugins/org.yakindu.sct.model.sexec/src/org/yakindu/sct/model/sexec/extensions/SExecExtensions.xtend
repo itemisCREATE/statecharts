@@ -273,4 +273,68 @@ class SExecExtensions {
 		steps.filter(s | s.name == null || s.name.trim == "" ||  s.name.trim == "default" ).head
 	}
 	
+	/**
+	 * Tries to find the next super ExecutionScope from the eContainer hierarchy.
+	 * 
+	 * @return
+	 * 		The super ExecutionScope or null
+	 */
+	def ExecutionScope parentExecutionScope(EObject it) {
+		if (it != null) {
+			if (it instanceof ExecutionScope) {
+				return it as ExecutionScope
+			} else {
+				return parentExecutionScope(it.eContainer)
+			}
+		}
+		return null
+	}
+	
+	/**
+	 * Calculates the depth of a step within the ExecutionScope hierarchy. If the
+	 * Step is directly below the ExecutionFlow it has a depth of 0.
+	 * 
+	 * @return
+	 * 		The depth of the element
+	 */
+	def int getScopeDepth(Step it) {
+		return parentExecutionScope.scopeDepth
+	}
+	
+	/**
+	 * Calculates the depth of a ExecutionScope.
+	 * The ExecutionFlow has as root element a depth of 0.
+	 * 
+	 * * @return
+	 * 		The depth of the element
+	 */
+	def int getScopeDepth(ExecutionScope it) {
+		var scopeDepth = 0
+
+		if (it instanceof ExecutionFlow) {
+			return 0
+		} else {
+			scopeDepth = superScope.getScopeDepth + 1
+		}
+		return scopeDepth
+	}
+	
+	/**
+	 * returns all functions of an ExecutionFlow.
+	 */
+	def List<Step> getAllFunctions(ExecutionFlow it) {
+		var functions = new ArrayList<Step>
+		functions.addAll(checkFunctions)
+		functions.addAll(effectFunctions)
+		functions.addAll(entryActionFunctions)
+		functions.addAll(exitActionFunctions)
+		functions.addAll(enterSequenceFunctions)
+		functions.addAll(exitSequenceFunctions)
+		functions.addAll(reactFunctions)
+		return functions
+	}
+	
+	def getTimeEvent(ExecutionFlow flow, String timeEventName) {
+		flow.timeEvents.findFirst[name.compareTo(timeEventName) == 0]
+	}
 }

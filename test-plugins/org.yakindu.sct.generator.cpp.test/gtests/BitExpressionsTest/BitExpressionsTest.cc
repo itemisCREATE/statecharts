@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -16,12 +16,12 @@ TEST(StatemachineTest, BitExpressions) {
 	BitExpressions* statechart = new BitExpressions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(BitExpressions::BitExpressions_main_region_StateA));
+	EXPECT_TRUE(statechart->isActive(BitExpressions::StateA));
 	EXPECT_TRUE(statechart->getSCInterface()->get_myBit1()== 5);
 	EXPECT_TRUE(statechart->getSCInterface()->get_myBit2()== 7);
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(BitExpressions::BitExpressions_main_region_StateB));
+	EXPECT_TRUE(statechart->isActive(BitExpressions::StateB));
 	EXPECT_TRUE(statechart->getSCInterface()->get_leftBitshift()== 10);
 	EXPECT_TRUE(statechart->getSCInterface()->get_rightBitshift()== 2);
 	EXPECT_TRUE(statechart->getSCInterface()->get_complementBitshift()== - 6 );

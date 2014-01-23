@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -16,29 +16,29 @@ TEST(StatemachineTest, defaultEntry) {
 	EnterState* statechart = new EnterState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_A));
+	EXPECT_TRUE(statechart->isActive(EnterState::A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_B_r_E));
+	EXPECT_TRUE(statechart->isActive(EnterState::E));
 	delete statechart;
 }
 TEST(StatemachineTest, namedEntryThroughNamedTransition) {
 	EnterState* statechart = new EnterState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_A));
+	EXPECT_TRUE(statechart->isActive(EnterState::A));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_B_r_F));
+	EXPECT_TRUE(statechart->isActive(EnterState::F));
 	delete statechart;
 }
 TEST(StatemachineTest, namedEntryThroughDefaultTransition) {
 	EnterState* statechart = new EnterState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_A));
+	EXPECT_TRUE(statechart->isActive(EnterState::A));
 	statechart->raise_g();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(EnterState::EnterState_r_B_r_E));
+	EXPECT_TRUE(statechart->isActive(EnterState::E));
 	delete statechart;
 }

@@ -26,13 +26,13 @@ TEST(StatemachineTest, enterToSubstate) {
 	EXPECT_TRUE(deepEntryIface_get_z(&handle) == 2);
 	deepEntryIface_raise_e(&handle);
 	deepEntry_runCycle(&handle);
-	EXPECT_TRUE(deepEntry_isActive(&handle, DeepEntry_r2_B_r_BB));
+	EXPECT_TRUE(deepEntry_isActive(&handle, DeepEntry_BB));
 	deepEntryIface_raise_f(&handle);
 	deepEntry_runCycle(&handle);
-	EXPECT_TRUE(deepEntry_isActive(&handle, DeepEntry_r2_C));
+	EXPECT_TRUE(deepEntry_isActive(&handle, DeepEntry_C));
 	deepEntryIface_raise_f(&handle);
 	deepEntry_runCycle(&handle);
-	EXPECT_TRUE(deepEntry_isActive(&handle, DeepEntry_r2_B_r_BB));
+	EXPECT_TRUE(deepEntry_isActive(&handle, DeepEntry_BB));
 	EXPECT_TRUE(deepEntryIface_get_y(&handle) == 1);
 }
 

@@ -16,6 +16,7 @@ import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
+import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -42,12 +43,14 @@ public class CppCodeGenerator extends GenericJavaBasedGenerator {
 	}
 
 	@Override
-	protected Module createModule(GeneratorEntry entry) {
+	protected Module createModule(final GeneratorEntry entry) {
 		Module module = super.createModule(entry);
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
 				binder.bind(ICodegenTypeSystemAccess.class).to(
 						CTypeSystemAccess.class);
+				binder.bind(INamingService.class).to(CppNamingService.class);
+				binder.bind(GeneratorEntry.class).toInstance(entry);
 			}
 		});
 	}

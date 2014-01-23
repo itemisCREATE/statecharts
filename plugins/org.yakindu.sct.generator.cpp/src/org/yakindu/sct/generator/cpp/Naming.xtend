@@ -9,23 +9,23 @@
  */
 package org.yakindu.sct.generator.cpp
 
-import java.util.List
-import org.eclipse.emf.ecore.EObject
+import com.google.inject.Inject
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.sgraph.Event
-import com.google.inject.Inject
-import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class Naming extends org.yakindu.sct.generator.c.Naming {
 	
-	@Inject extension Navigation;
-	@Inject extension ICodegenTypeSystemAccess;
+	@Inject extension Navigation
+	@Inject extension ICodegenTypeSystemAccess
+	@Inject extension INamingService
 	
 	def cpp(String it) { it + ".cpp" }
 	
@@ -91,11 +91,11 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	}
 	
 	override asRaiser(EventDefinition it) {
-		'raise_' + name.asIdentifier.toFirstLower	
+		'raise_' + name.asIdentifier.toFirstLower
 	}
 	
 	override asRaised(EventDefinition it) {
-		'isRaised_' + name.asIdentifier.toFirstLower	
+		'isRaised_' + name.asIdentifier.toFirstLower
 	}
 	
 	override asGetter(EventDefinition it) {
@@ -110,10 +110,6 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'set_' + name.asIdentifier.toFirstLower	
 	}
 	
-	override functionName(EObject it, List<String> segments) {
-		segments.fold("", [s, seg | s + if (seg.empty) "" else "_" + seg]).asIdentifier
-	}
-	
 	override nameOfRaiseTimeEventFunction(ExecutionFlow it) {
 		"raiseTimeEvent"
 	}
@@ -122,7 +118,6 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		"isActive"
 	}
 	
-
 	override dispatch access (OperationDefinition it) 
 		'''«asFunction»'''
 		

@@ -12,18 +12,19 @@ package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.Direction
-import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Statemachine {
 	
@@ -31,8 +32,10 @@ class Statemachine {
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
+	@Inject extension INamingService
 	
 	def generateStatemachineH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
+		 flow.initializeNamingService
 		 fsa.generateFile(flow.module.h, flow.statemachineHContent(entry) )
 	}
 	
@@ -93,7 +96,7 @@ class Statemachine {
 		//! enumeration of all states 
 		typedef enum {
 			«FOR state : states »
-			«state.name.asEscapedIdentifier» ,
+			«state.shortName»,
 			«ENDFOR»
 			«last_state»
 		} «statesEnumType»;

@@ -13,8 +13,19 @@ package org.yakindu.sct.generator.c.features;
 /**
  * 
  * @author holger willebrandt - Initial contribution and API
+ * @author Markus Mühlbrandt - Additional feature identifiers
  * 
  */
 public interface CFeatureConstants {
 	public static final String LIBRARY_NAME = "C Generator";
+	
+	public static final String FEATURE_IDENTIFIER_SETTINGS = "IdentifierSettings";
+	
+	public static final String PARAMETER_MODULE_NAME = "moduleName";
+	
+	public static final String PARAMETER_FUNCTION_PREFIX = "functionPrefix";
+	
+	public static final String PARAMETER_MAX_IDENTIFIER_LENGTH = "maxIdentifierLength";
+	
+	public static final String PARAMETER_SEPARATOR = "separator";
 }

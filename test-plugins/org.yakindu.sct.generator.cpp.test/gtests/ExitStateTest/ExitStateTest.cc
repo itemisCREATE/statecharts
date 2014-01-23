@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2013 committers of YAKINDU and others.
+* Copyright (c) 2014 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -16,38 +16,38 @@ TEST(StatemachineTest, defaultExit) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_E));
+	EXPECT_TRUE(statechart->isActive(ExitState::E));
 	delete statechart;
 }
 TEST(StatemachineTest, namedExitThroughNamedTransition) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::A));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_F));
+	EXPECT_TRUE(statechart->isActive(ExitState::F));
 	delete statechart;
 }
 TEST(StatemachineTest, namedExitThroughDefaultTransition) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::A));
 	statechart->raise_g();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_E));
+	EXPECT_TRUE(statechart->isActive(ExitState::E));
 	delete statechart;
 }
 TEST(StatemachineTest, remainInA) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState::ExitState_r_A));
+	EXPECT_TRUE(statechart->isActive(ExitState::A));
 	delete statechart;
 }

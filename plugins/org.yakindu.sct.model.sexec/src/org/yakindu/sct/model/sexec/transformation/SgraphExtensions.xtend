@@ -13,7 +13,7 @@ import org.yakindu.sct.model.sgraph.EntryKind
 import org.yakindu.sct.model.sgraph.Transition
 import org.yakindu.sct.model.stext.stext.EntryPointSpec
 import org.yakindu.sct.model.stext.stext.ExitPointSpec
-
+import org.yakindu.sct.model.sgraph.Statechart
 
 class SgraphExtensions {
 	
@@ -126,4 +126,23 @@ class SgraphExtensions {
 		r.requireDeepHistory || r.requireShallowHistory
 	}
 	
+	/**
+	 * Tries to find the parent {@link Statechart} Object of the element.
+	 * 
+	 * @param element
+	 * @return
+	 * 		The parent statechart or null.
+	 */
+	def Statechart getStatechart(EObject element){
+		var Statechart ret = null
+		if (element != null) {
+			if (element instanceof Statechart) {
+				return element as Statechart
+			}
+			else {
+				ret = getStatechart(element.eContainer)
+			}
+		}
+		return ret
+	}
 }

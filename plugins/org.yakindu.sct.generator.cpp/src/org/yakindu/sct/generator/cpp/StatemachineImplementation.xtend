@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.c.GenmodelEntriesimport org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.sexec.naming.INamingService
 
 class StatemachineImplementation {
 	
@@ -29,6 +30,7 @@ class StatemachineImplementation {
 	@Inject extension FlowCode
 	@Inject extension GenmodelEntries
 	@Inject extension ICodegenTypeSystemAccess
+	@Inject extension INamingService
 	
 	def generateStatemachineImplemenation(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		 fsa.generateFile(flow.module.cpp, flow.statemachineContent(entry) )
@@ -62,7 +64,7 @@ class StatemachineImplementation {
 		«isActiveFunction»
 		
 		«interfaceFunctions»
-				
+		
 		«functionImplementations»
 	'''
 	
@@ -170,8 +172,8 @@ class StatemachineImplementation {
 				switch (stateConfVector[stateConfVectorPosition]) {
 				«FOR state : states»
 					«IF state.reactSequence!=null»
-					case «state.name.asEscapedIdentifier» : {
-						«state.reactSequence.functionName»();
+					case «state.shortName.asEscapedIdentifier» : {
+						«state.reactSequence.shortName»();
 						break;
 					}
 					«ENDIF»
@@ -208,10 +210,10 @@ class StatemachineImplementation {
 		sc_boolean «module»::«nameOfIsActiveFunction»(«statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
-				case «s.name.asIdentifier» : 
-					return (sc_boolean) («IF s.leaf»stateConfVector[«s.stateVector.offset»] == «s.name.asIdentifier»
-					«ELSE»stateConfVector[«s.stateVector.offset»] >= «s.name.asIdentifier»
-						&& stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.name.asIdentifier»«ENDIF»);
+				case «s.shortName.asEscapedIdentifier» : 
+					return (sc_boolean) («IF s.leaf»stateConfVector[«s.stateVector.offset»] == «s.shortName.asEscapedIdentifier»
+					«ELSE»stateConfVector[«s.stateVector.offset»] >= «s.shortName.asEscapedIdentifier»
+						&& stateConfVector[«s.stateVector.offset»] <= «s.subStates.last.shortName.asEscapedIdentifier»«ENDIF»);
 				«ENDFOR»
 				default: return false;
 			}
@@ -342,7 +344,7 @@ class StatemachineImplementation {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		sc_boolean «execution_flow.module»::«asCheckFunction»() {
+		sc_boolean «execution_flow.module»::«shortName»() {
 			return «code»;
 		}
 		
@@ -350,7 +352,7 @@ class StatemachineImplementation {
 	
 	def dispatch functionImplementation(Step it) '''
 		«stepComment»
-		void «execution_flow.module»::«functionName»() {
+		void «execution_flow.module»::«shortName»() {
 			«code»
 		}
 		
