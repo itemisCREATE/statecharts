@@ -23,7 +23,7 @@ public interface CFeatureConstants {
 	
 	public static final String PARAMETER_MODULE_NAME = "moduleName";
 	
-	public static final String PARAMETER_FUNCTION_PREFIX = "functionPrefix";
+	public static final String PARAMETER_STATEMACHINE_PREFIX = "statemachinePrefix";
 	
 	public static final String PARAMETER_MAX_IDENTIFIER_LENGTH = "maxIdentifierLength";
 	

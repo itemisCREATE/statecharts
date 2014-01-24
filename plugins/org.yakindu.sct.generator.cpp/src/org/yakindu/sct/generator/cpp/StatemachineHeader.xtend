@@ -74,7 +74,7 @@ class StatemachineHeader extends Statemachine {
 				«publicFunctionPrototypes»
 				
 				/*! Checks if the specified state is active. */
-				sc_boolean «nameOfIsActiveFunction»(«statesEnumType» state);
+				sc_boolean «activeFctID»(«statesEnumType» state);
 			
 			private:
 			
@@ -227,7 +227,7 @@ class StatemachineHeader extends Statemachine {
 		
 		«timerInterface»* getTimer();
 		
-		void «nameOfRaiseTimeEventFunction»(sc_eventid event);
+		void «raiseTimeEventFctID»(sc_eventid event);
 	'''
 	
 	override dispatch functionPrototypes(EventDefinition it) '''

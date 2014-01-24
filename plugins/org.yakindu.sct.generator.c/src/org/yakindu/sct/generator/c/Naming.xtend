@@ -25,6 +25,7 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.sgen.GeneratorEntry
 
 class Naming {
 	
@@ -36,13 +37,24 @@ class Naming {
 	
 	@Inject extension INamingService
 	
+	@Inject GeneratorEntry entry
+	
+	@Inject extension GenmodelEntries
+	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
 	}
 	
 	def module(ExecutionFlow it) {
-		name.asIdentifier.toFirstUpper	
+		if (entry.moduleName.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper	
+		}
+		return entry.moduleName.toFirstUpper
 	}
+	
+//	def module(InterfaceScope it) {
+//		flow.type + (if (name.nullOrEmpty) 'Default' else name).asIdentifier.toFirstUpper	
+//	}
 	
 	def client(String it) {
 		it + "Required"	
@@ -56,40 +68,39 @@ class Naming {
 		'sc_types'	
 	}
 	
-	def dispatch type(ExecutionFlow it) {
-		name.asIdentifier.toFirstUpper	
-	}
-	
 	def timerType(ExecutionFlow it) {
 		'SCTimer'
 	}
 	
 	def statesEnumType(ExecutionFlow it) {
-		module + 'States'	
-	}
-	
-	def module(InterfaceScope it) {
-		flow.module + (if (name == null || name.empty) 'Default' else name).asIdentifier.toFirstUpper	
+		flow.type + 'States'	
 	}
 	
 	def dispatch type(InterfaceScope it) {
-		flow.module + 'Iface' + (if (name == null || name.empty) '' else name).asIdentifier.toFirstUpper	
+		flow.type + 'Iface' + (if (name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper	
+	}
+	
+	def dispatch type(InternalScope it) {
+		flow.type + 'Internal'	
+	}
+	
+	def dispatch type(Scope it) {
+		flow.type + 'TimeEvents'	
+	}
+	
+	def dispatch type(ExecutionFlow it) {
+		if (entry.statemachinePrefix.nullOrEmpty) {
+			return name.asIdentifier.toFirstUpper	
+		}
+		return entry.statemachinePrefix.toFirstUpper
 	}
 	
 	def dispatch instance(InterfaceScope it) {
-		'iface' + (if (name == null || name.empty) '' else name).asIdentifier.toFirstUpper	
+		'iface' + (if (name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper	
 	}
 	
 	def dispatch instance(Scope it) {
 		'timeEvents'
-	}
-	
-	def dispatch type(InternalScope it) {
-		flow.module + 'Internal'	
-	}
-	
-	def dispatch type(Scope it) {
-		flow.module + 'TimeEvents'	
 	}
 	
 	def dispatch instance(InternalScope it) {
@@ -97,16 +108,46 @@ class Naming {
 	}
 	
 	def functionPrefix(Scope it) {
-		type.toFirstLower	
+		if (!entry.statemachinePrefix.nullOrEmpty) {
+			return entry.statemachinePrefix
+		}
+		return type.toFirstLower	
+	}
+	
+	def functionPrefix(ExecutionFlow it) {
+		if (!entry.statemachinePrefix.nullOrEmpty) {
+			return entry.statemachinePrefix + separator
+		}
+		type.toFirstLower + separator
+	}
+	
+	def separator() {
+		var sep = entry.separator
+		if (sep.nullOrEmpty) {
+			sep = "_"
+		}
+		return sep
+	}
+	
+	def clearInEventsFctID(ExecutionFlow it) {
+		functionPrefix + "clearInEvents"
+	}
+	
+	def clearOutEventsFctID(ExecutionFlow it) {
+		functionPrefix + "clearOutEvents"
 	}
 	
 	def dispatch last_state(ExecutionFlow it) {
-		module + "_last_state"
+		type + lastStateID
 	}
 	
 	def dispatch last_state(Step it) {
-		execution_flow.module + "_last_state"
+		execution_flow.module + lastStateID
 	}
+	
+	def lastStateID() {
+		separator + "last" + separator + "state"
+	} 
 	
 	def ExecutionFlow execution_flow(EObject element) {
 		var ret = element;
@@ -121,46 +162,42 @@ class Naming {
 		}
 		return null;
 	}
-	
-	def functionPrefix(ExecutionFlow it) {
-		type.toFirstLower	
+
+	def raiseTimeEventFctID(ExecutionFlow it) {
+		functionPrefix + "raiseTimeEvent"
 	}
 
-	def nameOfRaiseTimeEventFunction(ExecutionFlow it) {
-		type.toFirstLower + "_raiseTimeEvent"
-	}
-
-	def nameOfIsActiveFunction(ExecutionFlow it) {
-		type.toFirstLower + "_isActive"
+	def isActiveFctID(ExecutionFlow it) {
+		functionPrefix + "isActive"
 	}
 
 	def asRaiser(EventDefinition it) {
-		scope.functionPrefix + '_raise_' + name.asIdentifier.toFirstLower	
+		scope.functionPrefix + separator + 'raise' + separator + name.asIdentifier.toFirstLower	
 	}
 	
 	def asRaised(EventDefinition it) {
-		scope.functionPrefix + '_israised_' + name.asIdentifier.toFirstLower	
+		scope.functionPrefix + separator + 'israised' + separator + name.asIdentifier.toFirstLower	
 	}
 	
 	def asGetter(EventDefinition it) {
-		scope.functionPrefix + '_get_' + name.asIdentifier.toFirstLower	+ '_value'
+		scope.functionPrefix + separator + 'get' + separator + name.asIdentifier.toFirstLower + separator + 'value'
 	}
 	
 	def asGetter(VariableDefinition it) {
-		scope.functionPrefix + '_get_' + name.asIdentifier.toFirstLower	
+		scope.functionPrefix + separator + 'get' + separator + name.asIdentifier.toFirstLower	
 	}
 	
 	def asSetter(VariableDefinition it) {
-		scope.functionPrefix + '_set_' + name.asIdentifier.toFirstLower	
+		scope.functionPrefix + separator + 'set' + separator + name.asIdentifier.toFirstLower	
 	}
 	
 	def asFunction(OperationDefinition it) {
-		scope.functionPrefix + '_' + name.asIdentifier.toFirstLower	
+		scope.functionPrefix + separator + name.asIdentifier.toFirstLower	
 	}
 	
-	def raised(CharSequence it) { it + '_raised' }
+	def raised(CharSequence it) { it + separator + 'raised' }
 	
-	def value(CharSequence it)  { it + '_value' }
+	def value(CharSequence it)  { it + separator + 'value' }
 	
 	def h(String it) { it + ".h" }
 	

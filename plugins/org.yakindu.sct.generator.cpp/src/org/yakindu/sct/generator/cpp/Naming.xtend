@@ -110,11 +110,11 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'set_' + name.asIdentifier.toFirstLower	
 	}
 	
-	override nameOfRaiseTimeEventFunction(ExecutionFlow it) {
+	override raiseTimeEventFctID(ExecutionFlow it) {
 		"raiseTimeEvent"
 	}
 	
-	override nameOfIsActiveFunction(ExecutionFlow it) {
+	override isActiveFctID(ExecutionFlow it) {
 		"isActive"
 	}
 	

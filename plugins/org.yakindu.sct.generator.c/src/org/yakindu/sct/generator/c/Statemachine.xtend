@@ -61,20 +61,20 @@ class Statemachine {
 			«statemachineTypeDecl»
 
 			/*! Initializes the «type» state machine data structures. Must be called before first usage.*/
-			extern void «type.toFirstLower»_init(«type»* handle);
+			extern void «functionPrefix»init(«type»* handle);
 			
 			/*! Activates the state machine */
-			extern void «type.toFirstLower»_enter(«type»* handle);
+			extern void «functionPrefix»enter(«type»* handle);
 			
 			/*! Deactivates the state machine */
-			extern void «type.toFirstLower»_exit(«type»* handle);
+			extern void «functionPrefix»exit(«type»* handle);
 			
 			/*! Performs a 'run to completion' step. */
-			extern void «type.toFirstLower»_runCycle(«type»* handle);
+			extern void «functionPrefix»runCycle(«type»* handle);
 
 			«IF timed»
 				/*! Raises a time event. */
-				extern void «nameOfRaiseTimeEventFunction»(«type»* handle, sc_eventid evid);
+				extern void «raiseTimeEventFctID»(«type»* handle, sc_eventid evid);
 			«ENDIF»
 			
 			«FOR s : it.scopes.filter( typeof(InterfaceScope) )»
@@ -83,7 +83,7 @@ class Statemachine {
 			«ENDFOR»
 			
 			/*! Checks if the specified state is active. */
-			extern sc_boolean «nameOfIsActiveFunction»(«scHandleDecl», «statesEnumType» state);
+			extern sc_boolean «activeFctID»(«scHandleDecl», «statesEnumType» state);
 			
 			#ifdef __cplusplus
 			}

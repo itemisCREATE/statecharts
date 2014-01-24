@@ -198,7 +198,7 @@ class StatemachineImplementation {
 				return «timerInstance»;
 			}
 			
-			void «module»::«nameOfRaiseTimeEventFunction»(sc_eventid evid) {
+			void «module»::«raiseTimeEventFctID»(sc_eventid evid) {
 				if ((evid >= &timeEvents) && (evid < &timeEvents + sizeof(timeEvents))) {
 					*(sc_boolean*)evid = true;
 				}
@@ -207,7 +207,7 @@ class StatemachineImplementation {
 	'''
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «module»::«nameOfIsActiveFunction»(«statesEnumType» state) {
+		sc_boolean «module»::«activeFctID»(«statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
 				case «s.shortName.asEscapedIdentifier» : 

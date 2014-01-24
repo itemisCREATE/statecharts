@@ -60,7 +60,7 @@ class TimedStatemachineInterface {
 				/*
 				* Callback method if a time event occurred.
 				*/
-				virtual void «nameOfRaiseTimeEventFunction»(sc_eventid event) = 0;
+				virtual void «raiseTimeEventFctID»(sc_eventid event) = 0;
 		};
 		
 		inline TimedStatemachineInterface::~TimedStatemachineInterface() {}

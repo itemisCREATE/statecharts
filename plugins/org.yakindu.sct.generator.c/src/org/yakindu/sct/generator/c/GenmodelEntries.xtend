@@ -54,12 +54,12 @@ class GenmodelEntries {
 		return separatorParameter?.stringValue
 	}
 	
-	def private FeatureParameterValue getFunctionPrefixParameter(GeneratorEntry it) {
-		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_FUNCTION_PREFIX)
+	def private FeatureParameterValue getStatemachinePrefixParameter(GeneratorEntry it) {
+		identifierSettingsFeature?.getParameterValue(CFeatureConstants::PARAMETER_STATEMACHINE_PREFIX)
 	}
 	
-	def getFunctionPrefix(GeneratorEntry it) {
-		return functionPrefixParameter?.stringValue
+	def getStatemachinePrefix(GeneratorEntry it) {
+		return statemachinePrefixParameter?.stringValue
 	}
 	
 	def private FeatureParameterValue getModuleNameParameter(GeneratorEntry it) {
