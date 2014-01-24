@@ -580,6 +580,30 @@ feature GeneralFeatures {
 p. ==<!-- End sgen_feature_generalfeatures -->==			
 
 
+h2(#CGeneratorFeatures). C/C++ Generator Features
+
+==<!-- Start sgen_feature_identifiersettings -->==
+
+h4. IdentifierSettings
+
+The *IdentifierSettings* feature allows the configuration of module names and identifier character length:
+
+# __moduleName__  (String, optional): The name for the header and implementation. The statechart name is used in default.
+# __functionPrefix__  (Boolean, optional): A prefix which is added before function and state names.
+# __maxIdentifierLength (Integer, optional): The maximum character length of an identifier. In default 31 chars are used which matches ANSI C99 standard.
+# __separator__ (String, optional): To specify a separator to replace whitescpaces and illegal characters.
+
+Example configuration:
+
+bc(prettyprint).. 
+feature IdentifierSettings {
+	moduleName =  "MyStatechart" 
+	functionPrefix =  "myStatechart" 
+	maxIdentifierLength = 31
+	separator =  "_" 
+}
+p. ==<!-- End sgen_feature_identifiersettings -->==		
+
 h2(#CreateCustomCodeGenerators). Create Custom Code Generators
 
 YAKINDU Statechart Tools provides a rich feature set to supports custom code generators out of the box. These code generators can be either written in Java, "Xtend":http://www.eclipse.org/xtend/ or in "Xpand":http://www.eclipse.org/modeling/m2t/?project=xpand

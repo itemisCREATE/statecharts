@@ -18,6 +18,9 @@
          <FeatureLibrary
                library_id="org.yakindu.generator.core.features.sctbase">
          </FeatureLibrary>
+         <FeatureLibrary
+               library_id="org.yakindu.sct.generator.feature.cpp">
+         </FeatureLibrary>
       </SCTGenerator>
    </extension>
    <extension
@@ -26,6 +29,14 @@
             fileExtension="sct"
             generatorId="yakindu::cpp">
       </ExtensionGeneratorMapping>
+   </extension>
+   <extension
+         point="org.yakindu.sct.generator.core.featuretypes">
+      <FeatureLibrary
+            defaultProvider="org.yakindu.sct.generator.cpp.features.CPPDefaultFeatureValueProvider"
+            library_id="org.yakindu.sct.generator.feature.cpp"
+            uri="platform:/plugin/org.yakindu.sct.generator.cpp/library/FeatureTypeLibrary.xmi">
+      </FeatureLibrary>
    </extension>
    <!-- extension
          point="org.yakindu.sct.generator.core.generator">
