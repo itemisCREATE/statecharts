@@ -26,8 +26,8 @@ class CppNamingService extends CNamingService {
 
 	override protected prefix(Step it, char separator) {
 		var prefix = ""
-		if (entry.functionPrefix != null) {
-			prefix = entry.functionPrefix + separator
+		if (entry.statemachinePrefix != null) {
+			prefix = entry.statemachinePrefix + separator
 		}
 		switch (it) {
 			case isCheckFunction: prefix + "check"
@@ -44,8 +44,8 @@ class CppNamingService extends CNamingService {
 	}
 
 	override protected prefix(ExecutionState it, char separator) {
-		if (entry.functionPrefix != null) {
-			entry.functionPrefix
+		if (entry.statemachinePrefix != null) {
+			entry.statemachinePrefix
 		} else {
 			""
 		}
@@ -56,8 +56,8 @@ class CppNamingService extends CNamingService {
 	}
 
 	override protected prefix(TimeEventSpec it, State state, char separator) {
-		if (entry.functionPrefix != null) {
-			entry.functionPrefix
+		if (entry.statemachinePrefix != null) {
+			entry.statemachinePrefix
 		} else {
 			""
 		}

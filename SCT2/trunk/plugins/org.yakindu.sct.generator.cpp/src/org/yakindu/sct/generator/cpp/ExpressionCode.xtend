@@ -157,7 +157,7 @@ class ExpressionCode {
 		'''«value.definition.event.valueAccess»'''
 	
 	def dispatch CharSequence code (ActiveStateReferenceExpression it)
-		'''«flow.nameOfIsActiveFunction»(«value.shortName»)'''
+		'''«flow.activeFctID»(«value.shortName»)'''
 	
 	def dispatch CharSequence code (ParenthesizedExpression it)
 		'''(«expression.code»)'''

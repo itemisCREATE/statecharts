@@ -75,7 +75,7 @@ class StatemachineC {
 	
 	
 	def initFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_init(«scHandleDecl»)
+		void «functionPrefix»init(«scHandleDecl»)
 		{
 			int i;
 
@@ -89,8 +89,8 @@ class StatemachineC {
 			
 			«scHandle»->stateConfVectorPosition = 0;
 		
-			clearInEvents(handle);
-			clearOutEvents(handle);
+			«clearInEventsFctID»(handle);
+			«clearOutEventsFctID»(handle);
 		
 			«initSequence.code»
 		
@@ -98,7 +98,7 @@ class StatemachineC {
 	'''
 	
 	def enterFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_enter(«scHandleDecl»)
+		void «functionPrefix»enter(«scHandleDecl»)
 		{
 			«enterSequences.defaultSequence.code»
 		}
@@ -112,7 +112,7 @@ class StatemachineC {
 	'''
 	
 	def clearInEventsFunction(ExecutionFlow it) '''
-		static void clearInEvents(«scHandleDecl») {
+		static void «clearInEventsFctID»(«scHandleDecl») {
 			«FOR scope : it.scopes»
 				«FOR event : scope.incomingEvents»
 				«event.access» = bool_false;
@@ -132,7 +132,7 @@ class StatemachineC {
 	'''
 	
 	def clearOutEventsFunction(ExecutionFlow it) '''
-		static void clearOutEvents(«scHandleDecl») {
+		static void «clearOutEventsFctID»(«scHandleDecl») {
 			«FOR scope : it.scopes»
 				«FOR event : scope.outgoingEvents»
 				«event.access» = bool_false;
@@ -142,9 +142,9 @@ class StatemachineC {
 	'''
 	
 	def runCycleFunction(ExecutionFlow it) '''
-		void «type.toFirstLower»_runCycle(«scHandleDecl») {
+		void «functionPrefix»runCycle(«scHandleDecl») {
 			
-			clearOutEvents(«scHandle»);
+			«clearOutEventsFctID»(«scHandle»);
 			
 			for («scHandle»->stateConfVectorPosition = 0;
 				«scHandle»->stateConfVectorPosition < «type.toUpperCase»_MAX_ORTHOGONAL_STATES;
@@ -164,13 +164,13 @@ class StatemachineC {
 				}
 			}
 			
-			clearInEvents(«scHandle»);
+			«clearInEventsFctID»(«scHandle»);
 		}
 	'''
 	
 	def raiseTimeEventFunction(ExecutionFlow it) '''
 		«IF timed»
-			void «nameOfRaiseTimeEventFunction»(«type»* handle, sc_eventid evid) {
+			void «raiseTimeEventFctID»(«type»* handle, sc_eventid evid) {
 				if ( ((intptr_t)evid) >= ((intptr_t)&(«scHandle»->timeEvents))
 					&&  ((intptr_t)evid) < ((intptr_t)&(«scHandle»->timeEvents)) + sizeof(«timeEventScope.type»)) {
 					*(sc_boolean*)evid = bool_true;
@@ -180,7 +180,7 @@ class StatemachineC {
 	'''
 	
 	def isActiveFunction(ExecutionFlow it) '''
-		sc_boolean «nameOfIsActiveFunction»(«scHandleDecl», «statesEnumType» state) {
+		sc_boolean «activeFctID»(«scHandleDecl», «statesEnumType» state) {
 			switch (state) {
 				«FOR s : states»
 				case «s.shortName» : 
@@ -247,8 +247,8 @@ class StatemachineC {
 		«enterSequenceFunctions.toPrototypes»
 		«exitSequenceFunctions.toPrototypes»
 		«reactFunctions.toPrototypes»
-		static void clearInEvents(«scHandleDecl»);
-		static void clearOutEvents(«scHandleDecl»);
+		static void «clearInEventsFctID»(«scHandleDecl»);
+		static void «clearOutEventsFctID»(«scHandleDecl»);
 		
 	'''
 	 

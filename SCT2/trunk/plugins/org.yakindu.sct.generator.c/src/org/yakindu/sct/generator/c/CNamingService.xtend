@@ -44,8 +44,8 @@ class CNamingService extends DefaultNamingService {
 	
 	override protected prefix(Step it, char separator) {
 		var prefix = flow.name.toFirstLower
-		if (entry.functionPrefix != null) {
-			prefix = entry.functionPrefix
+		if (entry.statemachinePrefix != null) {
+			prefix = entry.statemachinePrefix
 		}
 		switch (it) {
 			case isCheckFunction: prefix + separator + "check"
@@ -62,18 +62,18 @@ class CNamingService extends DefaultNamingService {
 	}
 	
 	override protected prefix(ExecutionState it, char separator) {
-		if (entry.functionPrefix != null) {
-			entry.functionPrefix
+		if (entry.statemachinePrefix.nullOrEmpty) {
+			super.prefix(it, separator).toFirstUpper			
 		} else {
-			super.prefix(it, separator).toFirstUpper
+			entry.statemachinePrefix
 		}
 	}
 	
 	override protected prefix(TimeEventSpec it, State state, char separator) {
-		if (entry.functionPrefix != null) {
-			entry.functionPrefix
-		} else {
+		if (entry.statemachinePrefix.nullOrEmpty) {
 			super.prefix(it, state, separator).toFirstLower
+		} else {
+			entry.statemachinePrefix
 		}
 	}
 	

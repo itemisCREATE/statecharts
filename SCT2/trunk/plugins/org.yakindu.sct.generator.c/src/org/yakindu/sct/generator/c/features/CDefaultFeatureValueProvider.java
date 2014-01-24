@@ -48,7 +48,7 @@ public class CDefaultFeatureValueProvider extends
 				.equals(CFeatureConstants.PARAMETER_MODULE_NAME)) {
 			parameterValue.setValue(asIdentifier(statechart.getName(), "_"));
 		} else if (parameterValue.getParameter().getName()
-				.equals(CFeatureConstants.PARAMETER_FUNCTION_PREFIX)) {
+				.equals(CFeatureConstants.PARAMETER_STATEMACHINE_PREFIX)) {
 			parameterValue.setValue(StringExtensions.toFirstLower(asIdentifier(
 					statechart.getName(), "_")));
 		} else if (parameterValue.getParameter().getName()
@@ -69,7 +69,7 @@ public class CDefaultFeatureValueProvider extends
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid module name");
 			}
-		} else if (CFeatureConstants.PARAMETER_FUNCTION_PREFIX.equals(parameterName)) {
+		} else if (CFeatureConstants.PARAMETER_STATEMACHINE_PREFIX.equals(parameterName)) {
 			if (!parameter.getStringValue().matches(VALID_IDENTIFIER_REGEX)) {
 				return error("Invalid function prefix name");
 			}
