@@ -25,6 +25,10 @@
          id="org.yakindu.sct.generator.java"
          version="0.0.0"/>
 
+   <includes
+         id="org.yakindu.sct.generator.cpp"
+         version="0.0.0"/>
+
    <requires>
       <import feature="org.yakindu.sct" version="2.1.2.qualifier"/>
    </requires>
