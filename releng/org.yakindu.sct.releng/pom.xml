@@ -584,6 +584,7 @@
 
 		<module>../org.yakindu.sct.generator.cpp</module>
 		<module>../org.yakindu.sct.generator.cpp.test</module>
+		<module>../org.yakindu.sct.generator.cpp-feature</module>
 
 		<module>../org.yakindu.sct.generator.java</module>
 		<module>../org.yakindu.sct.generator.java.test</module>
