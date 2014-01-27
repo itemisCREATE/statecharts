@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.yakindu.sct.generator.cpp"
+      label="%featureName"
+      version="2.1.2.qualifier"
+      provider-name="yakindu.org">
+
+   <description url="http://www.statecharts.org">
+      %description
+   </description>
+
+   <copyright url="%licenseURL">
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <requires>
+      <import feature="org.yakindu.sct" version="2.1.2.qualifier"/>
+   </requires>
+
+   <plugin
+         id="org.yakindu.sct.generator.cpp"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+</feature>
