@@ -18,10 +18,12 @@ import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 
@@ -29,22 +31,21 @@ import org.yakindu.base.types.TypesPackage;
  * <!-- begin-user-doc --> The <b>Adapter Factory</b> for the model. It provides
  * an adapter <code>createXXX</code> method for each class of the model. <!--
  * end-user-doc -->
- * 
  * @see org.yakindu.base.types.TypesPackage
  * @generated
  */
 public class TypesAdapterFactory extends AdapterFactoryImpl {
 	/**
-	 * The cached model package. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached model package.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected static TypesPackage modelPackage;
 
 	/**
-	 * Creates an instance of the adapter factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the adapter factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TypesAdapterFactory() {
@@ -58,7 +59,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * <!-- begin-user-doc --> This implementation returns <code>true</code> if
 	 * the object is either the model's package or is an instance object of the
 	 * model. <!-- end-user-doc -->
-	 * 
 	 * @return whether this factory is applicable for the type of the object.
 	 * @generated
 	 */
@@ -68,7 +68,7 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			return true;
 		}
 		if (object instanceof EObject) {
-			return ((EObject) object).eClass().getEPackage() == modelPackage;
+			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
 	}
@@ -80,98 +80,109 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected TypesSwitch<Adapter> modelSwitch = new TypesSwitch<Adapter>() {
-		@Override
-		public Adapter caseType(Type object) {
-			return createTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseFeature(Feature object) {
-			return createFeatureAdapter();
-		}
-
-		@Override
-		public Adapter caseOperation(Operation object) {
-			return createOperationAdapter();
-		}
-
-		@Override
-		public Adapter caseProperty(Property object) {
-			return createPropertyAdapter();
-		}
-
-		@Override
-		public Adapter caseParameter(Parameter object) {
-			return createParameterAdapter();
-		}
-
-		@Override
-		public Adapter caseTypedElement(TypedElement object) {
-			return createTypedElementAdapter();
-		}
-
-		@Override
-		public Adapter caseEvent(Event object) {
-			return createEventAdapter();
-		}
-
-		@Override
-		public Adapter caseEnumerationType(EnumerationType object) {
-			return createEnumerationTypeAdapter();
-		}
-
-		@Override
-		public Adapter casePrimitiveType(PrimitiveType object) {
-			return createPrimitiveTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseComplexType(ComplexType object) {
-			return createComplexTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseEnumerator(Enumerator object) {
-			return createEnumeratorAdapter();
-		}
-
-		@Override
-		public Adapter caseTypeConstraint(TypeConstraint object) {
-			return createTypeConstraintAdapter();
-		}
-
-		@Override
-		public Adapter caseNamedElement(NamedElement object) {
-			return createNamedElementAdapter();
-		}
-
-		@Override
-		public Adapter defaultCase(EObject object) {
-			return createEObjectAdapter();
-		}
-	};
+			@Override
+			public Adapter casePackage(org.yakindu.base.types.Package object) {
+				return createPackageAdapter();
+			}
+			@Override
+			public Adapter caseType(Type object) {
+				return createTypeAdapter();
+			}
+			@Override
+			public Adapter caseFeature(Feature object) {
+				return createFeatureAdapter();
+			}
+			@Override
+			public Adapter caseOperation(Operation object) {
+				return createOperationAdapter();
+			}
+			@Override
+			public Adapter caseProperty(Property object) {
+				return createPropertyAdapter();
+			}
+			@Override
+			public Adapter caseParameter(Parameter object) {
+				return createParameterAdapter();
+			}
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseEvent(Event object) {
+				return createEventAdapter();
+			}
+			@Override
+			public Adapter caseEnumerationType(EnumerationType object) {
+				return createEnumerationTypeAdapter();
+			}
+			@Override
+			public Adapter casePrimitiveType(PrimitiveType object) {
+				return createPrimitiveTypeAdapter();
+			}
+			@Override
+			public Adapter caseComplexType(ComplexType object) {
+				return createComplexTypeAdapter();
+			}
+			@Override
+			public Adapter caseEnumerator(Enumerator object) {
+				return createEnumeratorAdapter();
+			}
+			@Override
+			public Adapter caseTypeConstraint(TypeConstraint object) {
+				return createTypeConstraintAdapter();
+			}
+			@Override
+			public Adapter caseTypeParameter(TypeParameter object) {
+				return createTypeParameterAdapter();
+			}
+			@Override
+			public Adapter caseParameterizedType(ParameterizedType object) {
+				return createParameterizedTypeAdapter();
+			}
+			@Override
+			public Adapter caseNamedElement(NamedElement object) {
+				return createNamedElementAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
+				return createEObjectAdapter();
+			}
+		};
 
 	/**
-	 * Creates an adapter for the <code>target</code>. <!-- begin-user-doc -->
+	 * Creates an adapter for the <code>target</code>.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
-	 * @param target
-	 *            the object to adapt.
+	 * @param target the object to adapt.
 	 * @return the adapter for the <code>target</code>.
 	 * @generated
 	 */
 	@Override
 	public Adapter createAdapter(Notifier target) {
-		return modelSwitch.doSwitch((EObject) target);
+		return modelSwitch.doSwitch((EObject)target);
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.yakindu.base.types.Type <em>Type</em>}'. <!-- begin-user-doc
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.Package
+	 * @generated
+	 */
+	public Adapter createPackageAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Type <em>Type</em>}'.
+	 * <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the
 	 * cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.yakindu.base.types.Type
 	 * @generated
@@ -271,12 +282,11 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.yakindu.base.types.Event <em>Event</em>}'. <!-- begin-user-doc
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Event <em>Event</em>}'.
+	 * <!-- begin-user-doc
 	 * --> This default implementation returns null so that we can easily ignore
 	 * cases; it's useful to ignore a case when inheritance will catch all the
 	 * cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.yakindu.base.types.Event
 	 * @generated
@@ -286,12 +296,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.yakindu.base.types.EnumerationType <em>Enumeration Type</em>}
-	 * '. <!-- begin-user-doc --> This default implementation returns null so
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.EnumerationType <em>Enumeration Type</em>}'.
+	 * <!-- begin-user-doc --> This default implementation returns null so
 	 * that we can easily ignore cases; it's useful to ignore a case when
 	 * inheritance will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.yakindu.base.types.EnumerationType
 	 * @generated
@@ -301,12 +309,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.yakindu.base.types.PrimitiveType <em>Primitive Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.PrimitiveType <em>Primitive Type</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.yakindu.base.types.PrimitiveType
 	 * @generated
@@ -346,12 +352,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '
-	 * {@link org.yakindu.base.types.TypeConstraint <em>Type Constraint</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypeConstraint <em>Type Constraint</em>}'.
 	 * <!-- begin-user-doc --> This default implementation returns null so that
 	 * we can easily ignore cases; it's useful to ignore a case when inheritance
 	 * will catch all the cases anyway. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @see org.yakindu.base.types.TypeConstraint
 	 * @generated
@@ -361,9 +365,37 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for the default case. <!-- begin-user-doc --> This
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypeParameter <em>Type Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.TypeParameter
+	 * @generated
+	 */
+	public Adapter createTypeParameterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.ParameterizedType <em>Parameterized Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.ParameterizedType
+	 * @generated
+	 */
+	public Adapter createParameterizedTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for the default case.
+	 * <!-- begin-user-doc --> This
 	 * default implementation returns null. <!-- end-user-doc -->
-	 * 
 	 * @return the new adapter.
 	 * @generated
 	 */

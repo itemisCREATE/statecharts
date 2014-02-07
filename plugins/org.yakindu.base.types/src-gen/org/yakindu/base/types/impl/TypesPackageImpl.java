@@ -19,10 +19,12 @@ import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
@@ -33,6 +35,13 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass packageEClass = null;
+
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
@@ -107,6 +116,20 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	private EClass typeConstraintEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeParameterEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterizedTypeEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
 	 * package package URI value.
@@ -168,6 +191,24 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Update the registry and return the package
 		EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, theTypesPackage);
 		return theTypesPackage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPackage() {
+		return packageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getPackage_Types() {
+		return (EReference)packageEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -256,6 +297,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EReference getTypedElement_Type() {
 		return (EReference)typedElementEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypedElement_TypeArguments() {
+		return (EReference)typedElementEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -366,6 +416,42 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeParameter() {
+		return typeParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeParameter_Bound() {
+		return (EReference)typeParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getParameterizedType() {
+		return parameterizedTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterizedType_Parameter() {
+		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -391,6 +477,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		isCreated = true;
 
 		// Create classes and their features
+		packageEClass = createEClass(PACKAGE);
+		createEReference(packageEClass, PACKAGE__TYPES);
+
 		typeEClass = createEClass(TYPE);
 		createEReference(typeEClass, TYPE__CONSTRAINT);
 
@@ -407,6 +496,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		typedElementEClass = createEClass(TYPED_ELEMENT);
 		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE);
+		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE_ARGUMENTS);
 
 		eventEClass = createEClass(EVENT);
 
@@ -426,6 +516,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		typeConstraintEClass = createEClass(TYPE_CONSTRAINT);
 		createEAttribute(typeConstraintEClass, TYPE_CONSTRAINT__VALUE);
+
+		typeParameterEClass = createEClass(TYPE_PARAMETER);
+		createEReference(typeParameterEClass, TYPE_PARAMETER__BOUND);
+
+		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
+		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__PARAMETER);
 	}
 
 	/**
@@ -458,6 +554,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
+		packageEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		typeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		featureEClass.getESuperTypes().add(this.getTypedElement());
 		featureEClass.getESuperTypes().add(theBasePackage.getNamedElement());
@@ -468,11 +565,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		eventEClass.getESuperTypes().add(this.getFeature());
 		enumerationTypeEClass.getESuperTypes().add(this.getPrimitiveType());
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
-		complexTypeEClass.getESuperTypes().add(this.getType());
+		complexTypeEClass.getESuperTypes().add(this.getParameterizedType());
 		enumeratorEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		typeConstraintEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		typeParameterEClass.getESuperTypes().add(this.getType());
+		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 
 		// Initialize classes and features; add operations and parameters
+		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getPackage_Types(), this.getType(), null, "types", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getType_Constraint(), this.getTypeConstraint(), null, "constraint", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -489,6 +591,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(typedElementEClass, TypedElement.class, "TypedElement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypedElement_Type(), this.getType(), null, "type", null, 0, 1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypedElement_TypeArguments(), this.getType(), null, "typeArguments", null, 0, -1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -508,6 +611,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(typeConstraintEClass, TypeConstraint.class, "TypeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeConstraint_Value(), ecorePackage.getEJavaObject(), "value", null, 0, 1, TypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeParameterEClass, TypeParameter.class, "TypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeParameter_Bound(), this.getType(), null, "bound", null, 0, 1, TypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(parameterizedTypeEClass, ParameterizedType.class, "ParameterizedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterizedType_Parameter(), this.getTypeParameter(), null, "parameter", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

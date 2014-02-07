@@ -6,12 +6,16 @@
  */
 package org.yakindu.base.types.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
@@ -28,6 +32,7 @@ import org.yakindu.base.types.TypesPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.FeatureImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.FeatureImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.FeatureImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.FeatureImpl#getOwningType <em>Owning Type</em>}</li>
  * </ul>
@@ -45,6 +50,16 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 * @ordered
 	 */
 	protected Type type;
+
+	/**
+	 * The cached value of the '{@link #getTypeArguments() <em>Type Arguments</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> typeArguments;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -128,6 +143,18 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Type> getTypeArguments() {
+		if (typeArguments == null) {
+			typeArguments = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.FEATURE__TYPE_ARGUMENTS);
+		}
+		return typeArguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getName() {
 		return name;
 	}
@@ -151,7 +178,7 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 */
 	public ComplexType getOwningType() {
 		if (eContainerFeatureID() != TypesPackage.FEATURE__OWNING_TYPE) return null;
-		return (ComplexType)eContainer();
+		return (ComplexType)eInternalContainer();
 	}
 
 	/**
@@ -240,6 +267,8 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 			case TypesPackage.FEATURE__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case TypesPackage.FEATURE__TYPE_ARGUMENTS:
+				return getTypeArguments();
 			case TypesPackage.FEATURE__NAME:
 				return getName();
 			case TypesPackage.FEATURE__OWNING_TYPE:
@@ -253,11 +282,16 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypesPackage.FEATURE__TYPE:
 				setType((Type)newValue);
+				return;
+			case TypesPackage.FEATURE__TYPE_ARGUMENTS:
+				getTypeArguments().clear();
+				getTypeArguments().addAll((Collection<? extends Type>)newValue);
 				return;
 			case TypesPackage.FEATURE__NAME:
 				setName((String)newValue);
@@ -280,6 +314,9 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 			case TypesPackage.FEATURE__TYPE:
 				setType((Type)null);
 				return;
+			case TypesPackage.FEATURE__TYPE_ARGUMENTS:
+				getTypeArguments().clear();
+				return;
 			case TypesPackage.FEATURE__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -300,6 +337,8 @@ public abstract class FeatureImpl extends EObjectImpl implements Feature {
 		switch (featureID) {
 			case TypesPackage.FEATURE__TYPE:
 				return type != null;
+			case TypesPackage.FEATURE__TYPE_ARGUMENTS:
+				return typeArguments != null && !typeArguments.isEmpty();
 			case TypesPackage.FEATURE__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TypesPackage.FEATURE__OWNING_TYPE:

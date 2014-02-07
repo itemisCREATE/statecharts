@@ -5,16 +5,12 @@ package org.yakindu.base.types.impl;
 import java.util.Collection;
 
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.TypesPackage;
@@ -33,7 +29,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class ComplexTypeImpl extends TypeImpl implements ComplexType {
+public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexType {
 	/**
 	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

@@ -4,51 +4,42 @@ package org.yakindu.base.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.base.base.impl.NamedElementImpl;
-import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Type Constraint</b></em>'.
+ * An implementation of the model object '<em><b>Type Parameter</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.base.types.impl.TypeConstraintImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeParameterImpl#getBound <em>Bound</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TypeConstraintImpl extends NamedElementImpl implements TypeConstraint {
+public class TypeParameterImpl extends TypeImpl implements TypeParameter {
 	/**
-	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
+	 * The cached value of the '{@link #getBound() <em>Bound</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValue()
+	 * @see #getBound()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final Object VALUE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getValue()
-	 * @generated
-	 * @ordered
-	 */
-	protected Object value = VALUE_EDEFAULT;
+	protected Type bound;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypeConstraintImpl() {
+	protected TypeParameterImpl() {
 		super();
 	}
 
@@ -59,7 +50,7 @@ public class TypeConstraintImpl extends NamedElementImpl implements TypeConstrai
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.TYPE_CONSTRAINT;
+		return TypesPackage.Literals.TYPE_PARAMETER;
 	}
 
 	/**
@@ -67,8 +58,16 @@ public class TypeConstraintImpl extends NamedElementImpl implements TypeConstrai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Object getValue() {
-		return value;
+	public Type getBound() {
+		if (bound != null && bound.eIsProxy()) {
+			InternalEObject oldBound = (InternalEObject)bound;
+			bound = (Type)eResolveProxy(oldBound);
+			if (bound != oldBound) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.TYPE_PARAMETER__BOUND, oldBound, bound));
+			}
+		}
+		return bound;
 	}
 
 	/**
@@ -76,11 +75,20 @@ public class TypeConstraintImpl extends NamedElementImpl implements TypeConstrai
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setValue(Object newValue) {
-		Object oldValue = value;
-		value = newValue;
+	public Type basicGetBound() {
+		return bound;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBound(Type newBound) {
+		Type oldBound = bound;
+		bound = newBound;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_CONSTRAINT__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_PARAMETER__BOUND, oldBound, bound));
 	}
 
 	/**
@@ -91,8 +99,9 @@ public class TypeConstraintImpl extends NamedElementImpl implements TypeConstrai
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__VALUE:
-				return getValue();
+			case TypesPackage.TYPE_PARAMETER__BOUND:
+				if (resolve) return getBound();
+				return basicGetBound();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -105,8 +114,8 @@ public class TypeConstraintImpl extends NamedElementImpl implements TypeConstrai
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__VALUE:
-				setValue(newValue);
+			case TypesPackage.TYPE_PARAMETER__BOUND:
+				setBound((Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -120,8 +129,8 @@ public class TypeConstraintImpl extends NamedElementImpl implements TypeConstrai
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__VALUE:
-				setValue(VALUE_EDEFAULT);
+			case TypesPackage.TYPE_PARAMETER__BOUND:
+				setBound((Type)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -135,26 +144,10 @@ public class TypeConstraintImpl extends NamedElementImpl implements TypeConstrai
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__VALUE:
-				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
+			case TypesPackage.TYPE_PARAMETER__BOUND:
+				return bound != null;
 		}
 		return super.eIsSet(featureID);
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (value: ");
-		result.append(value);
-		result.append(')');
-		return result.toString();
-	}
-
-} //TypeConstraintImpl
+} //TypeParameterImpl

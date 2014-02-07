@@ -26,6 +26,15 @@ public interface TypesFactory extends EFactory {
 	TypesFactory eINSTANCE = org.yakindu.base.types.impl.TypesFactoryImpl.init();
 
 	/**
+	 * Returns a new object of class '<em>Package</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Package</em>'.
+	 * @generated
+	 */
+	Package createPackage();
+
+	/**
 	 * Returns a new object of class '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -105,6 +114,24 @@ public interface TypesFactory extends EFactory {
 	 * @generated
 	 */
 	TypeConstraint createTypeConstraint();
+
+	/**
+	 * Returns a new object of class '<em>Type Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Parameter</em>'.
+	 * @generated
+	 */
+	TypeParameter createTypeParameter();
+
+	/**
+	 * Returns a new object of class '<em>Parameterized Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameterized Type</em>'.
+	 * @generated
+	 */
+	ParameterizedType createParameterizedType();
 
 	/**
 	 * Returns the package supported by this factory.

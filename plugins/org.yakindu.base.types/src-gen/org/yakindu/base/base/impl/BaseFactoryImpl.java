@@ -9,12 +9,12 @@ package org.yakindu.base.base.impl;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.yakindu.base.base.*;
+import org.yakindu.base.base.BaseFactory;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.DocumentedElement;
+import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->

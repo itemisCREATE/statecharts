@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface ComplexType extends Type {
+public interface ComplexType extends ParameterizedType {
 	/**
 	 * Returns the value of the '<em><b>Features</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.base.types.Feature}.

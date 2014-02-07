@@ -17,9 +17,11 @@ import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypeConstraint;
+import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -38,7 +40,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 */
 	public static TypesFactory init() {
 		try {
-			TypesFactory theTypesFactory = (TypesFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.yakindu.org/base/types/2.0.0"); 
+			TypesFactory theTypesFactory = (TypesFactory)EPackage.Registry.INSTANCE.getEFactory(TypesPackage.eNS_URI);
 			if (theTypesFactory != null) {
 				return theTypesFactory;
 			}
@@ -67,6 +69,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case TypesPackage.PACKAGE: return createPackage();
 			case TypesPackage.OPERATION: return createOperation();
 			case TypesPackage.PROPERTY: return createProperty();
 			case TypesPackage.PARAMETER: return createParameter();
@@ -76,9 +79,21 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.COMPLEX_TYPE: return createComplexType();
 			case TypesPackage.ENUMERATOR: return createEnumerator();
 			case TypesPackage.TYPE_CONSTRAINT: return createTypeConstraint();
+			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
+			case TypesPackage.PARAMETERIZED_TYPE: return createParameterizedType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public org.yakindu.base.types.Package createPackage() {
+		PackageImpl package_ = new PackageImpl();
+		return package_;
 	}
 
 	/**
@@ -169,6 +184,26 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public TypeConstraint createTypeConstraint() {
 		TypeConstraintImpl typeConstraint = new TypeConstraintImpl();
 		return typeConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeParameter createTypeParameter() {
+		TypeParameterImpl typeParameter = new TypeParameterImpl();
+		return typeParameter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterizedType createParameterizedType() {
+		ParameterizedTypeImpl parameterizedType = new ParameterizedTypeImpl();
+		return parameterizedType;
 	}
 
 	/**

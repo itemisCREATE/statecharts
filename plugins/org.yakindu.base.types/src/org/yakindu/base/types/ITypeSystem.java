@@ -39,7 +39,7 @@ public interface ITypeSystem {
 	 * {@link TypeConstraint}s) are violated.
 	 * 
 	 */
-	public class InferenceResult {
+	public static class InferenceResult {
 		private InferredType inferredType;
 		private Collection<InferenceIssue> inferenceIssues;
 

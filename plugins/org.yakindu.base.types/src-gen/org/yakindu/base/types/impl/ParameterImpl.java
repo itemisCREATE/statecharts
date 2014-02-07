@@ -6,12 +6,16 @@
  */
 package org.yakindu.base.types.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.NamedElement;
@@ -28,6 +32,7 @@ import org.yakindu.base.types.TypesPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getTypeArguments <em>Type Arguments</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.ParameterImpl#getOwningOperation <em>Owning Operation</em>}</li>
  * </ul>
@@ -45,6 +50,16 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * @ordered
 	 */
 	protected Type type;
+
+	/**
+	 * The cached value of the '{@link #getTypeArguments() <em>Type Arguments</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTypeArguments()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Type> typeArguments;
 
 	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
@@ -128,6 +143,18 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Type> getTypeArguments() {
+		if (typeArguments == null) {
+			typeArguments = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.PARAMETER__TYPE_ARGUMENTS);
+		}
+		return typeArguments;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getName() {
 		return name;
 	}
@@ -151,7 +178,7 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 */
 	public Operation getOwningOperation() {
 		if (eContainerFeatureID() != TypesPackage.PARAMETER__OWNING_OPERATION) return null;
-		return (Operation)eContainer();
+		return (Operation)eInternalContainer();
 	}
 
 	/**
@@ -240,6 +267,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__TYPE:
 				if (resolve) return getType();
 				return basicGetType();
+			case TypesPackage.PARAMETER__TYPE_ARGUMENTS:
+				return getTypeArguments();
 			case TypesPackage.PARAMETER__NAME:
 				return getName();
 			case TypesPackage.PARAMETER__OWNING_OPERATION:
@@ -253,11 +282,16 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypesPackage.PARAMETER__TYPE:
 				setType((Type)newValue);
+				return;
+			case TypesPackage.PARAMETER__TYPE_ARGUMENTS:
+				getTypeArguments().clear();
+				getTypeArguments().addAll((Collection<? extends Type>)newValue);
 				return;
 			case TypesPackage.PARAMETER__NAME:
 				setName((String)newValue);
@@ -280,6 +314,9 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 			case TypesPackage.PARAMETER__TYPE:
 				setType((Type)null);
 				return;
+			case TypesPackage.PARAMETER__TYPE_ARGUMENTS:
+				getTypeArguments().clear();
+				return;
 			case TypesPackage.PARAMETER__NAME:
 				setName(NAME_EDEFAULT);
 				return;
@@ -300,6 +337,8 @@ public class ParameterImpl extends EObjectImpl implements Parameter {
 		switch (featureID) {
 			case TypesPackage.PARAMETER__TYPE:
 				return type != null;
+			case TypesPackage.PARAMETER__TYPE_ARGUMENTS:
+				return typeArguments != null && !typeArguments.isEmpty();
 			case TypesPackage.PARAMETER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TypesPackage.PARAMETER__OWNING_OPERATION:

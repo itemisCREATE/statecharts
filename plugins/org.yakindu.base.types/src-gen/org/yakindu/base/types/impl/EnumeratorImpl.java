@@ -72,7 +72,7 @@ public class EnumeratorImpl extends NamedElementImpl implements Enumerator {
 	 */
 	public EnumerationType getOwningEnumeration() {
 		if (eContainerFeatureID() != TypesPackage.ENUMERATOR__OWNING_ENUMERATION) return null;
-		return (EnumerationType)eContainer();
+		return (EnumerationType)eInternalContainer();
 	}
 
 	/**

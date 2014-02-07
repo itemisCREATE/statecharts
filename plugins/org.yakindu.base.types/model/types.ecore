@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="types" nsURI="http://www.yakindu.org/base/types/2.0.0" nsPrefix="types">
+  <eClassifiers xsi:type="ecore:EClass" name="Package" eSuperTypes="base.ecore#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="types" upperBound="-1"
+        eType="#//Type" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" upperBound="-1"
         eType="#//TypeConstraint" containment="true"/>
@@ -20,6 +24,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" interface="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
+        eType="#//Type"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Feature"/>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationType" eSuperTypes="#//PrimitiveType">
@@ -29,7 +35,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="PrimitiveType" eSuperTypes="#//Type">
     <eStructuralFeatures xsi:type="ecore:EReference" name="baseType" eType="#//PrimitiveType"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//Type">
+  <eClassifiers xsi:type="ecore:EClass" name="ComplexType" eSuperTypes="#//ParameterizedType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="features" upperBound="-1"
         eType="#//Feature" containment="true" eOpposite="#//Feature/owningType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="superTypes" upperBound="-1"
@@ -42,5 +48,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeConstraint" eSuperTypes="base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeParameter" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bound" eType="#//Type"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterizedType" eSuperTypes="#//Type">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" upperBound="-1"
+        eType="#//TypeParameter" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

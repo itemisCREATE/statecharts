@@ -15,6 +15,7 @@ Export-Package: org.yakindu.base.base,
  org.yakindu.base.types.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
+ org.yakindu.base.types;visibility:=reexport,
  org.eclipse.emf.ecore.xmi;bundle-version="2.7.0",
  com.google.inject;bundle-version="2.0.0",
  org.eclipse.xtend.lib,
