@@ -15,7 +15,6 @@ import org.eclipse.jface.viewers.ColumnViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.swt.widgets.Composite;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 
 /**
  * {@link CellEditor} support for String values
@@ -40,7 +39,7 @@ public class StringEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	public Object getValue(Object element) {
-		if (element instanceof ExecutionVariable) {
+		if (element instanceof ExecutionSlot) {
 			return (String) ((ExecutionSlot) element).getValue();
 		}
 		return null;
