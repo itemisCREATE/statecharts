@@ -1,6 +1,11 @@
 package org.yakindu.sct.model.sgraph.validation;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /** This class implements a generic depth first search algorithm,
  * which can be applied to any structure which can be interpreted as a

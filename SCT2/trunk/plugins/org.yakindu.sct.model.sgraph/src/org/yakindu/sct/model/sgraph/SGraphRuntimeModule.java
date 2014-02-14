@@ -7,9 +7,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.eclipse.xtext.service.SingletonBinding;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
-import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;

@@ -689,13 +689,22 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__DOCUMENTATION = SPECIFICATION_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART__IMPORTS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
+	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
@@ -1294,6 +1303,34 @@ public interface SGraphPackage extends EPackage {
 	int COMPOSITE_ELEMENT_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ImportImpl <em>Import</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.impl.ImportImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getImport()
+	 * @generated
+	 */
+	int IMPORT = 24;
+
+	/**
+	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT__IMPORTED_NAMESPACE = 0;
+
+	/**
+	 * The number of structural features of the '<em>Import</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_FEATURE_COUNT = 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1301,7 +1338,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 24;
+	int ENTRY_KIND = 25;
 
 
 	/**
@@ -1312,7 +1349,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 25;
+	int CHOICE_KIND = 26;
 
 
 	/**
@@ -1561,6 +1598,27 @@ public interface SGraphPackage extends EPackage {
 	EReference getCompositeElement_Regions();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Import <em>Import</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Import</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Import
+	 * @generated
+	 */
+	EClass getImport();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.Import#getImportedNamespace <em>Imported Namespace</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Import#getImportedNamespace()
+	 * @see #getImport()
+	 * @generated
+	 */
+	EAttribute getImport_ImportedNamespace();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1610,6 +1668,17 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getStatechart();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.sct.model.sgraph.Statechart#getImports <em>Imports</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Imports</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Statechart#getImports()
+	 * @see #getStatechart()
+	 * @generated
+	 */
+	EReference getStatechart_Imports();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Entry <em>Entry</em>}'.
@@ -2106,6 +2175,24 @@ public interface SGraphPackage extends EPackage {
 		EReference COMPOSITE_ELEMENT__REGIONS = eINSTANCE.getCompositeElement_Regions();
 
 		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ImportImpl <em>Import</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.impl.ImportImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getImport()
+		 * @generated
+		 */
+		EClass IMPORT = eINSTANCE.getImport();
+
+		/**
+		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.VariableImpl <em>Variable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2152,6 +2239,14 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EClass STATECHART = eINSTANCE.getStatechart();
+
+		/**
+		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATECHART__IMPORTS = eINSTANCE.getStatechart_Imports();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
