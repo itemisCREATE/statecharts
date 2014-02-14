@@ -11,28 +11,28 @@
 package org.yakindu.sct.generator.java.types
 
 import com.google.inject.Inject
+import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.Type
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 
 /**
  * @author andreas muelder
  * @author Alexander Nyßen - Adopted to type system changes
  */
 class JavaTypeSystemAccess implements ICodegenTypeSystemAccess {
-	
+
 	@Inject
-	private extension ISTextTypeSystem ts
-	
+	private extension ITypeSystem ts
+
 	override String getTargetLanguageName(Type type) {
 		switch (type) {
 			case type == null || isVoidType(type): "void"
-			case isRealType(type) : "double"
-			case isIntegerType(type) : "long"
-			case isBooleanType(type) : "boolean"
-			case isStringType(type) : "String"
-			default : "//"+this
+			case isRealType(type): "double"
+			case isIntegerType(type): "long"
+			case isBooleanType(type): "boolean"
+			case isStringType(type): "String"
+			default: "//" + this
 		};
 	}
-	
+
 }

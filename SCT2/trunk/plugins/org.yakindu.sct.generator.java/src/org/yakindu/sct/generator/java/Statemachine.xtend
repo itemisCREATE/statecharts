@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.java
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.base.types.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -20,7 +21,6 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 
 class Statemachine {
 	
@@ -28,7 +28,7 @@ class Statemachine {
 	@Inject extension GenmodelEntries
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension ISTextTypeSystem
+	@Inject extension ITypeSystem
 	@Inject extension FlowCode
 	
 	
