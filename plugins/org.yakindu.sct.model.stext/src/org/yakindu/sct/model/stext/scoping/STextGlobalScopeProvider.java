@@ -45,7 +45,7 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	public IScope getScope(Resource context, EReference reference,
 			Predicate<IEObjectDescription> filter) {
 		IScope parentScope = super.getScope(context, reference, filter);
-		parentScope = filterExternalDeclarations(context, parentScope);
+//		parentScope = filterExternalDeclarations(context, parentScope);
 
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem,
 				qualifiedNameProvider, reference.getEReferenceType());

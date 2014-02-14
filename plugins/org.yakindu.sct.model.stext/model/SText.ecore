@@ -18,7 +18,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="#//TransitionSpecification"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StatechartSpecification" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StatechartSpecification" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Import"
+        containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StateSpecification">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Scope"
         containment="true"/>

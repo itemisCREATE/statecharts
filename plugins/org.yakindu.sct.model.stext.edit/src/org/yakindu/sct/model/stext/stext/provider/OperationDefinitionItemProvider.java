@@ -70,6 +70,7 @@ public class OperationDefinitionItemProvider
       super.getPropertyDescriptors(object);
 
       addTypePropertyDescriptor(object);
+      addTypeArgumentsPropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
@@ -89,6 +90,29 @@ public class OperationDefinitionItemProvider
          getString("_UI_TypedElement_type_feature"),
          getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_type_feature", "_UI_TypedElement_type"),
          TypesPackage.Literals.TYPED_ELEMENT__TYPE,
+         true,
+         false,
+         true,
+         null,
+         null,
+         null));
+  }
+
+  /**
+   * This adds a property descriptor for the Type Arguments feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addTypeArgumentsPropertyDescriptor(Object object)
+  {
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_TypedElement_typeArguments_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_TypedElement_typeArguments_feature", "_UI_TypedElement_type"),
+         TypesPackage.Literals.TYPED_ELEMENT__TYPE_ARGUMENTS,
          true,
          false,
          true,
