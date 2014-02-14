@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
+import org.yakindu.sct.model.sgraph.Import;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
@@ -96,6 +97,7 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.SYNCHRONIZATION: return createSynchronization();
 			case SGraphPackage.STATE: return createState();
 			case SGraphPackage.REGULAR_STATE: return createRegularState();
+			case SGraphPackage.IMPORT: return createImport();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -253,6 +255,16 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public RegularState createRegularState() {
 		RegularStateImpl regularState = new RegularStateImpl();
 		return regularState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Import createImport() {
+		ImportImpl import_ = new ImportImpl();
+		return import_;
 	}
 
 	/**

@@ -27,6 +27,7 @@ import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.sct.model.sgraph.Import;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactiveElement;
 import org.yakindu.sct.model.sgraph.Region;
@@ -48,6 +49,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getRegions <em>Regions</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDocumentation <em>Documentation</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getImports <em>Imports</em>}</li>
  * </ul>
  * </p>
  *
@@ -134,6 +136,16 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @ordered
 	 */
 	protected String documentation = DOCUMENTATION_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getImports() <em>Imports</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getImports()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Import> imports;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -264,6 +276,18 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<Import> getImports() {
+		if (imports == null) {
+			imports = new EObjectContainmentEList.Resolving<Import>(Import.class, this, SGraphPackage.STATECHART__IMPORTS);
+		}
+		return imports;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -290,6 +314,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return ((InternalEList<?>)getScopes()).basicRemove(otherEnd, msgs);
 			case SGraphPackage.STATECHART__REGIONS:
 				return ((InternalEList<?>)getRegions()).basicRemove(otherEnd, msgs);
+			case SGraphPackage.STATECHART__IMPORTS:
+				return ((InternalEList<?>)getImports()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -315,6 +341,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return getName();
 			case SGraphPackage.STATECHART__DOCUMENTATION:
 				return getDocumentation();
+			case SGraphPackage.STATECHART__IMPORTS:
+				return getImports();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -344,6 +372,10 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__DOCUMENTATION:
 				setDocumentation((String)newValue);
 				return;
+			case SGraphPackage.STATECHART__IMPORTS:
+				getImports().clear();
+				getImports().addAll((Collection<? extends Import>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -370,6 +402,9 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__DOCUMENTATION:
 				setDocumentation(DOCUMENTATION_EDEFAULT);
 				return;
+			case SGraphPackage.STATECHART__IMPORTS:
+				getImports().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -395,6 +430,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case SGraphPackage.STATECHART__DOCUMENTATION:
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
+			case SGraphPackage.STATECHART__IMPORTS:
+				return imports != null && !imports.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

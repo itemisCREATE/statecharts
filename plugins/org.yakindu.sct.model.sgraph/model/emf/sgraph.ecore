@@ -29,7 +29,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ChoiceKind"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//SpecificationElement #//ReactiveElement #//ScopedElement #//CompositeElement ../../../org.yakindu.base.types/model/base.ecore#//NamedElement ../../../org.yakindu.base.types/model/base.ecore#//DocumentedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart" eSuperTypes="#//SpecificationElement #//ReactiveElement #//ScopedElement #//CompositeElement ../../../org.yakindu.base.types/model/base.ecore#//NamedElement ../../../org.yakindu.base.types/model/base.ecore#//DocumentedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//Import" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//EntryKind"/>
   </eClassifiers>
@@ -98,5 +101,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="CompositeElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="regions" upperBound="-1"
         eType="#//Region" containment="true" eOpposite="#//Region/composite"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>
