@@ -31,7 +31,8 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * @author Alexander Nyßen - Ensured type system information is only inferred via {@link ITypeSystem} facade.
+ * @author Alexander Nyßen - Ensured type system information is only inferred
+ *         via {@link ITypeSystem} facade.
  * 
  */
 public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
@@ -42,13 +43,11 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
 
-	public IScope getScope(Resource context, EReference reference,
-			Predicate<IEObjectDescription> filter) {
+	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		IScope parentScope = super.getScope(context, reference, filter);
-//		parentScope = filterExternalDeclarations(context, parentScope);
-
-		parentScope = new TypeSystemAwareScope(parentScope, typeSystem,
-				qualifiedNameProvider, reference.getEReferenceType());
+		parentScope = filterExternalDeclarations(context, parentScope);
+		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
+				reference.getEReferenceType());
 		return parentScope;
 	}
 
@@ -60,26 +59,21 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	 * @param parentScope
 	 * @return
 	 */
-	protected IScope filterExternalDeclarations(Resource context,
-			IScope parentScope) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil
-				.getExistingAdapter(context, ContextElementAdapter.class);
+	protected IScope filterExternalDeclarations(Resource context, IScope parentScope) {
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
+				ContextElementAdapter.class);
 		if (provider != null) {
-			parentScope = new FilteringScope(parentScope,
-					new Predicate<IEObjectDescription>() {
-						public boolean apply(IEObjectDescription input) {
-							if (input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
-									|| SGraphPackage.Literals.REGULAR_STATE
-											.isSuperTypeOf(input.getEClass())
-									|| input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION) {
-								URI sourceURI = input.getEObjectURI()
-										.trimFragment();
-								return sourceURI.equals(provider.getElement()
-										.eResource().getURI());
-							}
-							return true;
-						}
-					});
+			parentScope = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
+				public boolean apply(IEObjectDescription input) {
+					if (input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
+							|| SGraphPackage.Literals.REGULAR_STATE.isSuperTypeOf(input.getEClass())
+							|| input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION) {
+						URI sourceURI = input.getEObjectURI().trimFragment();
+						return sourceURI.equals(provider.getElement().eResource().getURI());
+					}
+					return true;
+				}
+			});
 		}
 		return parentScope;
 	}
