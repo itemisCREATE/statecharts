@@ -35,6 +35,9 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.base.types.ITypeSystem.BinaryOperators
+import org.yakindu.base.types.TypeParameter
+import org.yakindu.base.types.TypedElement
+import java.lang.reflect.ParameterizedType
 
 /**
  * 
@@ -196,15 +199,23 @@ class STextDefaultTypeInferrer extends DefaultExpressionsTypeInferrer implements
 		}
 		if (featureCall.feature instanceof Feature) {
 			val type = (featureCall.feature as Feature).type
-			if(type != null){
+			if (type != null) {
+				if (type instanceof TypeParameter) {
+					var current = featureCall
+					while(!(current.owner instanceof ElementReferenceExpression)) current = current.owner as FeatureCall
+					var typedElement = ((featureCall.owner as ElementReferenceExpression).reference as TypedElement)
+					var index = (typedElement.type as org.yakindu.base.types.ParameterizedType).parameter.indexOf(type)
+					var innerType = typedElement.typeArguments.get(index)
+					return new InferenceResult(new InferredType(innerType))
+				}
 				return new InferenceResult(new InferredType(type))
 			}
 			return new InferenceResult(getVoidType)
 		}
 		return featureCall.feature.doInferType
 	}
-	
-	def dispatch InferenceResult doInferType(EventValueReferenceExpression expression){
+
+	def dispatch InferenceResult doInferType(EventValueReferenceExpression expression) {
 		return doInferType(expression.value)
 	}
 
