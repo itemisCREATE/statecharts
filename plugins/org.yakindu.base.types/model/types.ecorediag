@@ -326,12 +326,6 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SU1vwFi2EeKoV55-G8M1SQ" id="(0.5,0.0)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_SU1vwVi2EeKoV55-G8M1SQ" id="(0.6666666666666666,1.0)"/>
   </edges>
-  <edges xmi:type="notation:Edge" xmi:id="_S4bTEFi4EeKoV55-G8M1SQ" type="3003" source="_pppTAFi2EeKoV55-G8M1SQ" target="_SS6dIli2EeKoV55-G8M1SQ">
-    <styles xmi:type="notation:ConnectorStyle" xmi:id="_S4bTEVi4EeKoV55-G8M1SQ" routing="Rectilinear" lineColor="4210752"/>
-    <styles xmi:type="notation:FontStyle" xmi:id="_S4bTEli4EeKoV55-G8M1SQ" fontName="Lucida Grande"/>
-    <element xsi:nil="true"/>
-    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_S4bTE1i4EeKoV55-G8M1SQ" points="[-33, -20, 71, 136]$[-33, -78, 71, 78]$[-102, -78, 2, 78]$[-102, -136, 2, 20]"/>
-  </edges>
   <edges xmi:type="notation:Edge" xmi:id="_Tigx4Fi4EeKoV55-G8M1SQ" type="3003" source="_WQwLsFi2EeKoV55-G8M1SQ" target="_SS6dIli2EeKoV55-G8M1SQ">
     <styles xmi:type="notation:ConnectorStyle" xmi:id="_Tigx4Vi4EeKoV55-G8M1SQ" routing="Rectilinear" lineColor="4210752"/>
     <styles xmi:type="notation:FontStyle" xmi:id="_Tigx4li4EeKoV55-G8M1SQ" fontName="Lucida Grande"/>

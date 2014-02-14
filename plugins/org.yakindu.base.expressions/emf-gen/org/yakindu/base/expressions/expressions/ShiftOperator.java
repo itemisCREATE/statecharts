@@ -26,7 +26,8 @@ public enum ShiftOperator implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	LEFT(0, "left", "<<"),
+	LEFT(0, "left", ""
+			+ ""),
 
 	/**
 	 * The '<em><b>Right</b></em>' literal object.

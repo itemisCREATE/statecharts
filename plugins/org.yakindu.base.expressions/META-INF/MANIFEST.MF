@@ -16,8 +16,10 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.xtext.common.types
+ org.eclipse.xtext.common.types,
+ org.yakindu.base.types;bundle-version="2.1.2"
 Import-Package: org.apache.log4j,
+ org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.base.expressions,
@@ -26,6 +28,7 @@ Export-Package: org.yakindu.base.expressions,
  org.yakindu.base.expressions.expressions.util,
  org.yakindu.base.expressions.formatting,
  org.yakindu.base.expressions.generator,
+ org.yakindu.base.expressions.inferrer,
  org.yakindu.base.expressions.parser.antlr,
  org.yakindu.base.expressions.parser.antlr.internal,
  org.yakindu.base.expressions.scoping,

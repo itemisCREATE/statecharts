@@ -11,12 +11,7 @@
  */
 package org.yakindu.base.types;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 /**
  * Generic type system representation, which is responsible of listing the
@@ -27,226 +22,98 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
  */
 public interface ITypeSystem {
 
-	/**
-	 * Representation of a (type) inference result, which is consists of an
-	 * {@link InferredType} and a list of {@link InferenceIssue}.
-	 * <p>
-	 * Note that the {@link InferredType} may be null. In such a case the list
-	 * of issues should document, why a type could not be inferred. The list of
-	 * issues may also be non-empty, even if a type could be inferred. As an
-	 * example consider the case where a base type could be inferred (e.g.
-	 * integer), while issues indicate that value range constraints (modeled via
-	 * {@link TypeConstraint}s) are violated.
-	 * 
-	 */
-	public static class InferenceResult {
-		private InferredType inferredType;
-		private Collection<InferenceIssue> inferenceIssues;
+	public enum UnaryOperators implements ITypeSystemOperator {
+		LOGICAL_NOT("!"), POSITIVE("+"), NEGATIVE("-"), COMPLEMENT("~");
 
-		/**
-		 * Constructs an {@link InferenceResult} from a concrete {@link Type}.
-		 * The {@link InferenceResult} returned as result will contain an
-		 * {@link InferredType} that contains the given {@link Type} and no
-		 * {@link TypeConstraint}s and an empty list of {@link InferenceIssue}s.
-		 * 
-		 * @param type
-		 *            The {@link Type} to construct the {@link InferenceResult}
-		 *            for.
-		 */
-		public InferenceResult(Type type) {
-			this(new InferredType(type));
+		private String symbol;
+
+		UnaryOperators(String symbol) {
+			this.symbol = symbol;
 		}
 
-		public InferenceResult(InferredType inferredType) {
-			this(inferredType, Collections.<InferenceIssue> emptyList());
+		public String getSymbol() {
+			return symbol;
+		}
+	};
+
+	public enum BinaryOperators implements ITypeSystemOperator {
+		LOGICAL_OR("||"), LOGICAL_AND("&&"), BITWISE_OR("|"), BITWISE_AND("&"), BITWISE_XOR("^"), SMALLER("<"), SMALLER_EQUAL(
+				"<="), GREATER(">"), GREATER_EQUAL(">="), EQUAL("=="), NOT_EQUAL("!="), MULTIPLY("*"), DIV("/"), MOD(
+				"%"), ADD("+"), SUBTRACT("-"), LEFT_SHIFT("<<"), RIGHT_SHIFT(">>"), ASSIGN("="), ASSIGN_MULTIPLY("*="), ASSIGN_DIV(
+				"/="), ASSIGN_MOD("%="), ASSIGN_ADD("+="), ASSIGN_SUBTRACT("-="), ASSIGN_LEFT_SHIFT("<<="), ASSIGN_RIGHT_SHIFT(
+				">>="), ASSIGN_BITWISE_AND("&="), ASSIGN_BITWISE_XOR("^="), ASSIGN_BITWISE_OR("|=");
+
+		private String symbol;
+
+		BinaryOperators(String symbol) {
+			this.symbol = symbol;
 		}
 
-		public InferenceResult(InferredType inferredType,
-				InferenceIssue inferenceIssue) {
-			this(inferredType, Collections.singletonList(inferenceIssue));
+		public String getSymbol() {
+			return symbol;
+		}
+	};
+
+	public enum TernaryOperators implements ITypeSystemOperator {
+		CONDITIONAL("?");
+
+		private String symbol;
+
+		TernaryOperators(String symbol) {
+			this.symbol = symbol;
 		}
 
-		public InferenceResult(InferredType inferredType,
-				Collection<InferenceIssue> inferenceIssues) {
-			this.inferredType = inferredType;
-			this.inferenceIssues = inferenceIssues;
+		public String getSymbol() {
+			return symbol;
 		}
-
-		public InferredType getType() {
-			return inferredType;
-		}
-
-		public Collection<InferenceIssue> getIssues() {
-			return inferenceIssues;
-		}
-	}
-
-	/**
-	 * Representation of an inference problem, consisting of a message and a
-	 * severity.
-	 */
-	public class InferenceIssue {
-
-		private String message;
-		private int severity;
-
-		/**
-		 * Constructs a new {@link InferenceIssue} with the given message and
-		 * severity.
-		 * 
-		 * @param message
-		 *            The message depicting the cause of the inference issue.
-		 *            May not be <code>null</null>.
-		 * @param severity
-		 *            The severity of this {@link InferenceIssue}. May be one of
-		 *            {@link IStatus#OK}, {@link IStatus#WARNING}, or
-		 *            {@link IStatus#ERROR}.
-		 */
-		public InferenceIssue(String message, int severity) {
-			if (message == null) {
-				throw new NullPointerException("Message may not be null.");
-			}
-			if (severity != IStatus.OK && severity != IStatus.WARNING
-					&& severity != IStatus.ERROR) {
-				throw new IllegalArgumentException(
-						"Unsupported severity. Has to be one of IStatus#OK, IStatus#WARNING, or IStatus#ERROR");
-			}
-			this.severity = severity;
-			this.message = message;
-		}
-
-		/**
-		 * Returns the message that indicates the cause of this
-		 * {@link InferenceIssue}.
-		 * 
-		 * @return A {@link String} depicting the message. Will never return
-		 *         <code>null</code>
-		 */
-		public String getMessage() {
-			return message;
-		}
-
-		/**
-		 * Returns the severity of this {@link InferenceIssue}. Will be one of
-		 * the {@link IStatus#OK}, {@link IStatus#WARNING}, or
-		 * {@link IStatus#ERROR}.
-		 * 
-		 * @return {@link IStatus#OK}, {@link IStatus#WARNING}, or
-		 *         {@link IStatus#ERROR}
-		 */
-		public int getSeverity() {
-			return severity;
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			return obj instanceof InferenceIssue
-					&& ((InferenceIssue) obj).message.equals(message)
-					&& severity == ((InferenceIssue) obj).severity;
-		}
-
-		@Override
-		public int hashCode() {
-			return message.hashCode() + severity;
-		};
-	}
-
-	/**
-	 * Representation of an inferred type, which is formed by a {@link Type} and
-	 * a set of {@link TypeConstraint}s.
-	 * <p>
-	 * Note that the {@link Type} included in an {@link InferredType} does not
-	 * necessarily have to be a concrete type that is provided via
-	 * {@link ITypeSystem#getTypes()}, and should thus never be used by clients
-	 * directly. In fact, the it may be an (abstract) type that is used by an
-	 * {@link ITypeSystem} for purposes of type inference only. As an example
-	 * consider a type system that offers a set of different integer types,
-	 * which have different value ranges (modeled by {@link TypeConstraint}s)
-	 * but no common base type. In such a case, the {@link ITypeSystem} may
-	 * synthesize an abstract integer base type and use it during type inference
-	 * (together with {@link TypeConstraint}s that narrow the range of supported
-	 * values). In the end, {@link ITypeSystem#getTypes(InferredType))} may then
-	 * use the synthesized integer base type (and the computed constraints) to
-	 * decide which of its concrete integer types may be used and return them to
-	 * the client.
-	 * 
-	 */
-	public class InferredType {
-
-		private Type type;
-		private Collection<? extends TypeConstraint> constraints;
-
-		public InferredType(Type type) {
-			this(type, Collections.<TypeConstraint> emptyList());
-		}
-
-		public InferredType(Type type, Collection<TypeConstraint> constraints) {
-			if (type == null) {
-				throw new NullPointerException("Type may not be null.");
-			}
-			if (constraints == null) {
-				throw new NullPointerException(
-						"Constraints may be empty but not null.");
-			}
-			this.type = type;
-			this.constraints = constraints;
-		}
-
-		public Type getType() {
-			return type;
-		}
-
-		public Collection<? extends TypeConstraint> getConstraints() {
-			return constraints;
-		}
-
-		@Override
-		public String toString() {
-			return type.getName(); // TODO handle constraints...
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			if (!(obj instanceof InferredType)) {
-				return false;
-			}
-			// check types
-			InferredType other = (InferredType) obj;
-			if (!EcoreUtil.equals(type, other.type)) {
-				return false;
-			}
-			// check constraints
-			for (TypeConstraint t1 : constraints) {
-				boolean foundEqual = false;
-				for (TypeConstraint t2 : other.constraints) {
-					if (EcoreUtil.equals(t1, t2)) {
-						foundEqual = true;
-					}
-				}
-				if (!foundEqual) {
-					return false;
-				}
-			}
-			return true;
-		}
-
-		@Override
-		public int hashCode() {
-			return type.hashCode();
-		}
-	}
+	};
 
 	public interface ITypeSystemOperator {
 		public String getSymbol();
 	}
 
+	public Type getVoidType();
+
+	public Type getBooleanType();
+
+	public Type getIntegerType();
+
+	public Type getRealType();
+
+	public Type getStringType();
+
+	public boolean isVoidType(InferredType inferredType);
+
+	public boolean isBooleanType(InferredType inferredType);
+
+	public boolean isIntegerType(InferredType inferredType);
+
+	public boolean isRealType(InferredType inferredType);
+
+	public boolean isStringType(InferredType inferredType);
+
+	public boolean isVoidType(Type type);
+
+	public boolean isBooleanType(Type type);
+
+	public boolean isIntegerType(Type type);
+
+	public boolean isRealType(Type type);
+
+	public boolean isStringType(Type type);
+	
+	public Object defaultValue(InferredType type);
+	
+	public Object defaultValue(Type type);
+
+	
 	/**
 	 * Returns a list of all types known in this type system.
 	 * 
 	 * @return The list of all types known in the type system
 	 */
 	public List<Type> getTypes();
-	
+
 	/**
 	 * Infer a type for a given literal. The literal may represent a primitive
 	 * value (primitive type literal) or an instance specification (complex type
@@ -276,8 +143,7 @@ public interface ITypeSystem {
 	 *         during the type inference. The result may also contain both, an
 	 *         inferred type and issues.
 	 */
-	public InferenceResult inferType(InferredType operandType,
-			ITypeSystemOperator unaryOperator);
+	public InferenceResult inferType(InferredType operandType, ITypeSystemOperator unaryOperator);
 
 	/**
 	 * Responsible of inferring the type for a given binary expression (e.g. an
@@ -297,8 +163,8 @@ public interface ITypeSystem {
 	 *         during the type inference. The result may also contain both, an
 	 *         inferred type and issues.
 	 */
-	public InferenceResult inferType(InferredType firstOperandType,
-			InferredType secondOperandType, ITypeSystemOperator binaryOperator);
+	public InferenceResult inferType(InferredType firstOperandType, InferredType secondOperandType,
+			ITypeSystemOperator binaryOperator);
 
 	/**
 	 * Responsible of inferring the type for a given ternary expression (e.g. a
@@ -329,9 +195,8 @@ public interface ITypeSystem {
 	 *         false cases provide valid type information that can be used to
 	 *         calculate the type of the expression.
 	 */
-	public InferenceResult inferType(InferredType firstOperandType,
-			InferredType secondOperandType, InferredType thirdOperandType,
-			ITypeSystemOperator ternaryOperator);
+	public InferenceResult inferType(InferredType firstOperandType, InferredType secondOperandType,
+			InferredType thirdOperandType, ITypeSystemOperator ternaryOperator);
 
 	/**
 	 * Returns the list of all concrete types, provided by the type system, that
@@ -344,11 +209,5 @@ public interface ITypeSystem {
 	 *         compatible to the given inferred type.
 	 */
 	public List<Type> getTypes(InferredType inferredType);
-
-	// TODO: uncomment these and remove need for specific ISTextTypeSystem interface
-	// public InferredType getNumericalBaseType();
-	// public InferredType getBooleanBaseType();
-	// public InferredType getCharacterBaseType();
-	// public InferredType getVoidBaseType();
 
 }
