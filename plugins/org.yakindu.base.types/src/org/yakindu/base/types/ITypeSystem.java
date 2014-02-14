@@ -13,6 +13,8 @@ package org.yakindu.base.types;
 
 import java.util.List;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * Generic type system representation, which is responsible of listing the
  * available types ({@link #getTypes()}) and inferring types for certain
@@ -20,6 +22,7 @@ import java.util.List;
  * 
  * @author Alexander Nyßen - Initial contribution and API
  */
+@ImplementedBy(DefaultTypeSystem.class)
 public interface ITypeSystem {
 
 	public enum UnaryOperators implements ITypeSystemOperator {
@@ -101,12 +104,11 @@ public interface ITypeSystem {
 	public boolean isRealType(Type type);
 
 	public boolean isStringType(Type type);
-	
+
 	public Object defaultValue(InferredType type);
-	
+
 	public Object defaultValue(Type type);
 
-	
 	/**
 	 * Returns a list of all types known in this type system.
 	 * 
