@@ -11,8 +11,7 @@
 package org.yakindu.sct.simulation.core.sruntime;
 
 import org.yakindu.base.base.NamedElement;
-
-import org.yakindu.base.types.ITypeSystem.InferredType;
+import org.yakindu.base.types.InferredType;
 
 /**
  * <!-- begin-user-doc -->

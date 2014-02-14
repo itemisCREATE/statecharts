@@ -1,6 +1,5 @@
 package org.yakindu.sct.model.stext.ui;
 
-import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory.StatefulFactory;
@@ -24,7 +23,6 @@ import org.yakindu.sct.model.sgraph.ui.validation.SCTMarkerTypeProvider;
 import org.yakindu.sct.model.stext.ui.contentassist.STextStatefulFactory;
 import org.yakindu.sct.model.stext.ui.help.CustomCSSHelpHoverProvider;
 import org.yakindu.sct.model.stext.ui.help.STextUserHelpDocumentationProvider;
-import org.yakindu.sct.model.stext.ui.hyperlink.NullHyperlinkDetector;
 import org.yakindu.sct.model.stext.ui.validation.SCTDiagnosticConverterImpl;
 import org.yakindu.sct.model.stext.ui.validation.SCTResourceValidatorImpl;
 
@@ -89,10 +87,10 @@ public class STextUiModule extends
 				.toInstance("/StextHoverStyleSheet.css");
 	}
 
-	@Override
-	public Class<? extends IHyperlinkDetector> bindIHyperlinkDetector() {
-		return NullHyperlinkDetector.class;
-	}
+//	@Override
+//	public Class<? extends IHyperlinkDetector> bindIHyperlinkDetector() {
+//		return NullHyperlinkDetector.class;
+//	}
 
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		if (Access.getJdtHelper().get().isJavaCoreAvailable()) {

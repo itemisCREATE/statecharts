@@ -25,7 +25,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
+import org.yakindu.base.types.ITypeSystem;
 
 import com.google.inject.Inject;
 
@@ -37,8 +37,9 @@ import com.google.inject.Inject;
  */
 public class Function {
 
-	@Inject ISTextTypeSystem typeSystem;
-	
+	@Inject
+	ITypeSystem typeSystem;
+
 	/**
 	 * Indicates that a method is a function.
 	 * 
@@ -72,12 +73,10 @@ public class Function {
 				final Class<?> class2 = parameterTypes2[i];
 				if (class1.equals(class2))
 					continue;
-				if (class1.isAssignableFrom(class2)
-						|| Void.class.equals(class2)) {
+				if (class1.isAssignableFrom(class2) || Void.class.equals(class2)) {
 					return 1;
 				}
-				if (class2.isAssignableFrom(class1)
-						|| Void.class.equals(class1)) {
+				if (class2.isAssignableFrom(class1) || Void.class.equals(class1)) {
 					return -1;
 				}
 			}
@@ -95,8 +94,7 @@ public class Function {
 	 * @param paramTypes
 	 * @return
 	 */
-	public Function lookup(Class<?> functionClass, String name,
-			Class<?>... paramTypes) {
+	public Function lookup(Class<?> functionClass, String name, Class<?>... paramTypes) {
 
 		List<Method> functionMethods = new ArrayList<Method>();
 		addFunctionMethods(functionClass, functionMethods);
@@ -112,8 +110,7 @@ public class Function {
 		return null;
 	}
 
-	private void addFunctionMethods(Class<?> functionClass,
-			List<Method> methodList) {
+	private void addFunctionMethods(Class<?> functionClass, List<Method> methodList) {
 		List<Method> result = new ArrayList<Method>();
 		Method[] methods = functionClass.getDeclaredMethods();
 		for (int i = 0; i < methods.length; i++) {
@@ -129,8 +126,7 @@ public class Function {
 		}
 	}
 
-	private static boolean isCallable(Class<?>[] paramTypes,
-			Class<?>[] parameterTypes) {
+	private static boolean isCallable(Class<?>[] paramTypes, Class<?>[] parameterTypes) {
 		if (paramTypes.length != parameterTypes.length)
 			return false;
 		for (int i = 0; i < paramTypes.length; i++) {
@@ -143,8 +139,7 @@ public class Function {
 
 	}
 
-	public Function lookup(Class<?> functionClass, String name,
-			Object... params) {
+	public Function lookup(Class<?> functionClass, String name, Object... params) {
 		Class<?>[] paramTypes = toParamTypes(params);
 		return lookup(functionClass, name, paramTypes);
 	}
@@ -154,19 +149,18 @@ public class Function {
 		for (int i = 0; i < params.length; i++) {
 			if (params[i] == null)
 				continue;
-			if(params[i] instanceof EObject){
+			if (params[i] instanceof EObject) {
 				paramTypes[i] = EObject.class; // enumerators and complex types
+			} else {
+				paramTypes[i] = params[i].getClass(); // primitive values (boxed
+														// java types)
 			}
-			else {
-				paramTypes[i] = params[i].getClass(); // primitive values (boxed java types)
-			}
-			
+
 		}
 		return paramTypes;
 	}
 
-	protected static Function createFunction(Class<?> functionClass,
-			Method functionMethod) {
+	protected static Function createFunction(Class<?> functionClass, Method functionMethod) {
 
 		if (functionClass == null || functionMethod == null)
 			return null;
@@ -174,14 +168,10 @@ public class Function {
 		try {
 			Constructor<?> constr;
 			try {
-				constr = (Constructor<?>) functionClass
-						.getConstructor(new Class<?>[0]);
+				constr = (Constructor<?>) functionClass.getConstructor(new Class<?>[0]);
 			} catch (NoSuchMethodException e) {
-				throw new RuntimeException(
-						"Missing default constructor in class "
-								+ functionClass.getName()
-								+ " while loading function "
-								+ functionMethod.getName() + " !");
+				throw new RuntimeException("Missing default constructor in class " + functionClass.getName()
+						+ " while loading function " + functionMethod.getName() + " !");
 			}
 
 			Function func = (Function) constr.newInstance(new Object[0]);
@@ -191,8 +181,7 @@ public class Function {
 		} catch (RuntimeException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new RuntimeException("Error loading function "
-					+ functionMethod.getName() + " from function class "
+			throw new RuntimeException("Error loading function " + functionMethod.getName() + " from function class "
 					+ functionClass.getName() + " !", e);
 		}
 	}

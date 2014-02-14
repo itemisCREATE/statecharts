@@ -16,10 +16,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.base.types.ITypeSystem.InferredType;
+import org.yakindu.base.types.InferredType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.TypesFactory;
-import org.yakindu.sct.simulation.core.sruntime.*;
+import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
+import org.yakindu.sct.simulation.core.sruntime.EventDirection;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
+import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
