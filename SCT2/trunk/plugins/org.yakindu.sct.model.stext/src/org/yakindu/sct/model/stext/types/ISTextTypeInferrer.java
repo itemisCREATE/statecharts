@@ -11,8 +11,8 @@
  */
 package org.yakindu.sct.model.stext.types;
 
-import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.types.ITypeSystem.InferenceResult;
+import org.yakindu.base.expressions.inferrer.IExpressionsTypeInferrer;
+import org.yakindu.base.types.InferenceResult;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -25,13 +25,7 @@ import com.google.inject.ImplementedBy;
  * 
  */
 @ImplementedBy(STextDefaultTypeInferrer.class)
-public interface ISTextTypeInferrer {
-	
-	/**
-	 * Infers the type for a given {@link Expression}
-	 * 
-	 */
-	InferenceResult inferType(Expression e);
+public interface ISTextTypeInferrer extends IExpressionsTypeInferrer {
 	
 	InferenceResult inferType(VariableDefinition d);
 	

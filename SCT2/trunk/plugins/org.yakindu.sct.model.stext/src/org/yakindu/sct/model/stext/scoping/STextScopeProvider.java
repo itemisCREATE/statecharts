@@ -64,16 +64,15 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject
 	ITypeSystem typeSystem;
-	
+
 	@Inject
 	TypeSystemUtils typeSystemUtils;
-	
+
 	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 
 		private ErrorHandler<T> delegate;
 
-		public static final Log LOG = LogFactory
-				.getLog(STextScopeProvider.class);
+		public static final Log LOG = LogFactory.getLog(STextScopeProvider.class);
 
 		public ErrorHandlerDelegate(ErrorHandler<T> delegate) {
 			this.delegate = delegate;
@@ -93,6 +92,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
+		String methodName = "scope_" + reference.getEContainingClass().getName() + "_" + reference.getName();
+		System.out.println(methodName);
 		try {
 			ErrorHandler<IScope> originalHandler = getErrorHandler();
 			setErrorHandler(new ErrorHandlerDelegate<IScope>(originalHandler));
@@ -108,24 +109,19 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	@Inject
 	private ContextPredicateProvider predicateProvider;
 
-	public IScope scope_ElementReferenceExpression_reference(
-			final EObject context, EReference reference) {
+	public IScope scope_ElementReferenceExpression_reference(final EObject context, EReference reference) {
 		IScope namdScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
-		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(
-				context, reference);
-		unnamedScope = new FilteringScope(unnamedScope, predicate);
+//		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
+//		unnamedScope = new FilteringScope(unnamedScope, predicate);
 		// add enum types
-		return new SimpleScope(Iterables.concat(namdScope.getAllElements(),
-				unnamedScope.getAllElements(),
-				Scopes.scopeFor(typeSystemUtils.getEnumerationTypes(typeSystem)).getAllElements()));
+		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements(), Scopes
+				.scopeFor(typeSystemUtils.getEnumerationTypes(typeSystem)).getAllElements()));
 	}
 
-	public IScope scope_FeatureCall_feature(final FeatureCall context,
-			EReference reference) {
+	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
 
-		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(
-				context, reference);
+		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 
 		Expression owner = context.getOwner();
 		EObject element = null;
@@ -148,23 +144,21 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			scope = Scopes.scopeFor(allFeatures((Type) element), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
-		
-		if( element instanceof EnumerationType){
+
+		if (element instanceof EnumerationType) {
 			scope = Scopes.scopeFor(((EnumerationType) element).getEnumerator(), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
 
 		if (element instanceof Feature) {
-			scope = Scopes.scopeFor(allFeatures(((Feature) element).getType()),
-					scope);
+			scope = Scopes.scopeFor(allFeatures(((Feature) element).getType()), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
 
 		return scope;
 	}
 
-	private Predicate<IEObjectDescription> calculateFilterPredicate(
-			final EObject context, final EReference reference) {
+	private Predicate<IEObjectDescription> calculateFilterPredicate(final EObject context, final EReference reference) {
 		Predicate<IEObjectDescription> predicate = null;
 		EObject container = context;
 		EReference ref = reference;
@@ -182,8 +176,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	/**
 	 * Returns the toplevel scope
 	 */
-	protected IScope getNamedTopLevelScope(final EObject context,
-			EReference reference) {
+	protected IScope getNamedTopLevelScope(final EObject context, EReference reference) {
 		List<EObject> scopeCandidates = Lists.newArrayList();
 		Statechart statechart = getStatechart(context);
 		if (statechart == null)
@@ -203,8 +196,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	/**
 	 * Returns a scope with all toplevel declarations of unnamed scope
 	 */
-	protected IScope getUnnamedTopLevelScope(final EObject context,
-			EReference reference) {
+	protected IScope getUnnamedTopLevelScope(final EObject context, EReference reference) {
 		List<EObject> scopeCandidates = Lists.newArrayList();
 		Statechart statechart = getStatechart(context);
 		if (statechart == null)
@@ -222,25 +214,23 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		return Scopes.scopeFor(scopeCandidates);
 	}
-	
 
 	/**
 	 * Returns the {@link Statechart} for a context element
 	 */
 
 	protected Statechart getStatechart(EObject context) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil
-				.getExistingAdapter(context.eResource(),
-						ContextElementAdapter.class);
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(
+				context.eResource(), ContextElementAdapter.class);
 
 		if (provider == null) {
 			return EcoreUtil2.getContainerOfType(context, Statechart.class);
 		} else {
-			return (Statechart) EcoreUtil.getObjectByType(provider.getElement()
-					.eResource().getContents(),
+			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
 					SGraphPackage.Literals.STATECHART);
 		}
 	}
+	
 
 	/**
 	 * Returns all features including super features for the given type
@@ -256,8 +246,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	 * super types.
 	 * 
 	 */
-	protected void collectFeatures(Type type, List<Feature> features,
-			Set<Type> visited) {
+	protected void collectFeatures(Type type, List<Feature> features, Set<Type> visited) {
 		if (type == null || visited.contains(type))
 			return;
 		if (type instanceof ComplexType) {
@@ -268,5 +257,13 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		visited.add(type);
 	}
+
+	// TODO
+	protected IScope scope_TypedElement_type(EObject context, EReference ref) {
+		IScope scope = getDelegate().getScope(context, ref);
+		
+		return scope;
+	}
+	//
 
 }

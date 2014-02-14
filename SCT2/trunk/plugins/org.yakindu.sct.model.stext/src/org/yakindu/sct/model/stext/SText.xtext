@@ -30,7 +30,9 @@ ScopedElement returns sgraph::ScopedElement:
 	StatechartSpecification;
 
 StatechartSpecification:
-	{StatechartSpecification} ('namespace' namespace=FQN)? (scopes+=StatechartScope)*;
+	{StatechartSpecification} ('namespace' namespace=FQN)? 
+	(imports+=Import)*
+	(scopes+=StatechartScope)*;
 
 StateSpecification:
 	scope=StateScope;
@@ -60,11 +62,24 @@ InterfaceScope:
 InternalScope:
 	{InternalScope} 'internal' ':' (declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration |
 	LocalReaction))*; /* ---- declarations ----
-a definition is a top level element of a definition scope. */ Declaration
-returns sgraph::Declaration:
+a definition is a top level element of a definition scope. */ 
+
+Import returns sgraph::Import:
+	'import' importedNamespace=QIDWithWildcards';'
+;
+
+QIDWithWildcards:
+	QID ('.*')?;
+	
+QID:
+	ID ('.' ID)*;
+
+
+Declaration returns sgraph::Declaration:
 	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction //		| Entrypoint 
  //		| Exitpoint
 ;
+
 /* ---- event definition ---- */ EventDeclarartion returns sgraph::Event:
 	EventDefinition;
 

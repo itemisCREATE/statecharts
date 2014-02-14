@@ -40,8 +40,9 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
-import org.yakindu.base.types.ITypeSystem.InferenceIssue;
-import org.yakindu.base.types.ITypeSystem.InferenceResult;
+import org.yakindu.base.types.ITypeSystem;
+import org.yakindu.base.types.InferenceIssue;
+import org.yakindu.base.types.InferenceResult;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
@@ -80,7 +81,6 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -126,7 +126,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
 	@Inject
-	private ISTextTypeSystem typeSystem;
+	private ITypeSystem typeSystem;
 	@Inject
 	private STextGrammarAccess grammarAccess;
 	@Inject
@@ -627,10 +627,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	protected void report(InferenceResult result, EStructuralFeature feature) {
 		if (result.getIssues().isEmpty())
 			return;
-		// TODO: Sort issues by severity and evaluate severity
 		InferenceIssue error = Iterables.getLast(result.getIssues());
 		error(error.getMessage(), feature);
-
 	}
 
 	private INode findNode(EObject source, boolean sourceFound, INode root, Keyword keyword, int[] index) {

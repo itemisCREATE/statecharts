@@ -14,13 +14,13 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
+import org.yakindu.base.types.DefaultTypeSystem;
 import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.sct.model.sgraph.resource.SCTLinker;
 import org.yakindu.sct.model.sgraph.resource.provider.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
-import org.yakindu.sct.model.stext.types.STextDefaultTypeSystem;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -55,7 +55,7 @@ public class STextRuntimeModule extends
 	}
 
 	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return STextDefaultTypeSystem.class;
+		return DefaultTypeSystem.class;
 	}
 
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
