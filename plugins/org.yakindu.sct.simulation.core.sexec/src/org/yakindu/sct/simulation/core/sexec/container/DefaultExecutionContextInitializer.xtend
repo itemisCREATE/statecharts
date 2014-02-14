@@ -12,22 +12,22 @@ package org.yakindu.sct.simulation.core.sexec.container
 
 import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.base.types.ITypeSystem.InferredType
+import org.yakindu.base.types.ITypeSystem
+import org.yakindu.base.types.InferredType
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem
 import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
-import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
-import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.stext.InterfaceScope
-import org.yakindu.sct.model.sgraph.Scope
 
 /**
  * 
@@ -37,28 +37,28 @@ import org.yakindu.sct.model.sgraph.Scope
 class DefaultExecutionContextInitializer implements IExecutionContextInitializer {
 
 	@Inject extension IQualifiedNameProvider
-	@Inject extension ISTextTypeSystem
+	@Inject extension ITypeSystem
 	@Inject extension ISTextTypeInferrer
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
 	}
-	
-	def dispatch create new CompositeSlotImpl() transform(InternalScope scope){
+
+	def dispatch create new CompositeSlotImpl() transform(InternalScope scope) {
 		it.name = "internal"
-		scope.declarations.forEach[decl | it.slots += decl.transform]
+		scope.declarations.forEach[decl|it.slots += decl.transform]
 	}
-	
-	def dispatch create new CompositeSlotImpl() transform(Scope scope){
+
+	def dispatch create new CompositeSlotImpl() transform(Scope scope) {
 		it.name = "time events"
-		scope.declarations.forEach[decl | it.slots += decl.transform]
+		scope.declarations.forEach[decl|it.slots += decl.transform]
 	}
-	
-	def dispatch create new CompositeSlotImpl() transform(InterfaceScope scope){
-		if(scope.name != null) it.name = scope.name else it.name = "default" 
-		scope.declarations.forEach[decl | it.slots += decl.transform]
+
+	def dispatch create new CompositeSlotImpl() transform(InterfaceScope scope) {
+		if(scope.name != null) it.name = scope.name else it.name = "default"
+		scope.declarations.forEach[decl|it.slots += decl.transform]
 	}
-	
+
 	def dispatch create new ExecutionVariableImpl() transform(VariableDefinition variable) {
 		it.name = variable.fullyQualifiedName.lastSegment
 		it.fqName = variable.fullyQualifiedName.toString

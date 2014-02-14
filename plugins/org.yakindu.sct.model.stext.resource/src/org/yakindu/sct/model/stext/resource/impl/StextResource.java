@@ -85,7 +85,8 @@ public class StextResource extends AbstractSCTResource {
 		IParseResult parseResult = parse(statechart, StatechartSpecification.class.getSimpleName());
 
 		StatechartSpecification rootASTElement = (StatechartSpecification) parseResult.getRootASTElement();
-
+		statechart.getImports().addAll(rootASTElement.getImports());
+		
 		EList<Scope> definitionScopes = rootASTElement.getScopes();
 		statechart.getScopes().clear();
 		statechart.setNamespace(rootASTElement.getNamespace());

@@ -12,15 +12,14 @@ package org.yakindu.sct.simulation.core.sexec;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
+import org.yakindu.base.types.DefaultTypeSystem;
 import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
-import org.yakindu.sct.model.stext.types.ISTextTypeSystem;
 import org.yakindu.sct.model.stext.types.STextDefaultTypeInferrer;
-import org.yakindu.sct.model.stext.types.STextDefaultTypeSystem;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.container.DefaultExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFactory;
@@ -97,11 +96,11 @@ public class SimulationModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return STextDefaultTypeSystem.class;
+		return DefaultTypeSystem.class;
 	}
 
-	public Class<? extends ISTextTypeSystem> bindISTextTypeSystem() {
-		return STextDefaultTypeSystem.class;
+	public Class<? extends ITypeSystem> bindISTextTypeSystem() {
+		return DefaultTypeSystem.class;
 	}
 
 	public Class<? extends ISTextTypeInferrer> bindISTextTypeInferrer() {

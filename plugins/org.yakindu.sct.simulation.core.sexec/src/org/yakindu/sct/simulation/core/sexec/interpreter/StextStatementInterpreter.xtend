@@ -228,9 +228,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(FeatureCall call) {
 		if (call.operationCall) {
 			var parameter = call.args.map(it|execute)
-			var operation = call.feature as Operation
-			if (operationDelegate.canExecute(operation, parameter)) {
-				return operationDelegate.execute(operation, parameter)
+			if (operationDelegate.canExecute(call, parameter)) {
+				return operationDelegate.execute(call, parameter)
 			}
 		} else if (call.getFeature() instanceof Enumerator) {
 			return call.getFeature();

@@ -19,7 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.base.types.ITypeSystem.InferredType;
+import org.yakindu.base.types.InferredType;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.EventDirection;

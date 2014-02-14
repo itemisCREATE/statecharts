@@ -11,11 +11,8 @@
 package org.yakindu.sct.simulation.core.sruntime.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.sct.simulation.core.sruntime.EventDirection;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;

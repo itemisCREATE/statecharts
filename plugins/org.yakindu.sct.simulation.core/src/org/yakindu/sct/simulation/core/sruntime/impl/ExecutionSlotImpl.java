@@ -11,15 +11,10 @@
 package org.yakindu.sct.simulation.core.sruntime.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.base.base.impl.NamedElementImpl;
-
-import org.yakindu.base.types.ITypeSystem.InferredType;
-
+import org.yakindu.base.types.InferredType;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 

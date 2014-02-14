@@ -27,7 +27,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.impl.NamedElementImpl;
-import org.yakindu.base.types.ITypeSystem.InferredType;
+import org.yakindu.base.types.InferredType;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;

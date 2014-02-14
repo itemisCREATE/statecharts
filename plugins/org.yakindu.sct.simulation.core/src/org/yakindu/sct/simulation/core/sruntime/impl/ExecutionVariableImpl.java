@@ -11,7 +11,6 @@
 package org.yakindu.sct.simulation.core.sruntime.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 

@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -18,10 +19,16 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -45,7 +52,8 @@ public class JavaOperationMockup implements IOperationMockup {
 		if (launch == null)
 			return;
 		callbacks = Lists.newArrayList();
-		IFile file = WorkspaceSynchronizer.getFile(((EObject) launch.getDebugTarget().getAdapter(EObject.class)).eResource());
+		IFile file = WorkspaceSynchronizer.getFile(((EObject) launch.getDebugTarget().getAdapter(EObject.class))
+				.eResource());
 		ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(file.getProject(), getClass()
 				.getClassLoader());
 		ILaunchConfiguration config = launch.getLaunchConfiguration();
@@ -66,7 +74,7 @@ public class JavaOperationMockup implements IOperationMockup {
 	}
 
 	@Override
-	public boolean canExecute(Operation definition, Object... parameter) {
+	public boolean canExecute(Operation definition, Object[] parameter) {
 		if (callbacks == null)
 			initOperationCallbacks();
 		// TODO: Check if there is a operation in the callbacks for the given
@@ -74,7 +82,7 @@ public class JavaOperationMockup implements IOperationMockup {
 		return callbacks.size() > 0;
 	}
 
-	public Object execute(Operation definition, Object... parameter) {
+	public Object execute(Operation definition, Object[] parameter) {
 		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(definition.getName(), definition
 				.getParameters().size(), definition.getParameters().size(), callbacks);
 		try {
@@ -85,6 +93,48 @@ public class JavaOperationMockup implements IOperationMockup {
 			throw new WrappedException("Error during invocation of operation '" + definition.getName()
 					+ "' with params " + definition.getParameters() + " '", ex);
 		}
+	}
+
+	@Inject
+	private IQualifiedNameProvider fqnProvider;
+
+	@Override
+	public boolean canExecute(FeatureCall call, Object[] parameter) {
+		VariableDefinition definition = unwrap(call);
+		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
+		ExecutionVariable variable = context.getVariable(fqnProvider.getFullyQualifiedName(definition).toString());
+		if (variable != null)
+			return true;
+		return false;
+
+	}
+
+	@Override
+	public Object execute(FeatureCall call, Object[] parameter) {
+		VariableDefinition definition = unwrap(call);
+		Operation operation = (Operation) call.getFeature();
+		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
+		ExecutionVariable variable = context.getVariable(fqnProvider.getFullyQualifiedName(definition).toString());
+		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(operation.getName(), operation
+				.getParameters().size(), operation.getParameters().size(), Collections.singletonList(variable
+				.getValue()));
+		try {
+			return dispatcher.invoke(parameter);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
+	}
+
+	protected VariableDefinition unwrap(FeatureCall call) {
+		if (call.getOwner() instanceof ElementReferenceExpression) {
+			ElementReferenceExpression refExp = (ElementReferenceExpression) call.getOwner();
+			EObject reference = refExp.getReference();
+			if (reference instanceof VariableDefinition) {
+				return (VariableDefinition) reference;
+			}
+		}
+		return null;
 	}
 
 }
