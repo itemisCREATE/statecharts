@@ -92,8 +92,6 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		String methodName = "scope_" + reference.getEContainingClass().getName() + "_" + reference.getName();
-		System.out.println(methodName);
 		try {
 			ErrorHandler<IScope> originalHandler = getErrorHandler();
 			setErrorHandler(new ErrorHandlerDelegate<IScope>(originalHandler));
@@ -112,8 +110,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_ElementReferenceExpression_reference(final EObject context, EReference reference) {
 		IScope namdScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
-//		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
-//		unnamedScope = new FilteringScope(unnamedScope, predicate);
+		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
+		unnamedScope = new FilteringScope(unnamedScope, predicate);
 		// add enum types
 		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements(), Scopes
 				.scopeFor(typeSystemUtils.getEnumerationTypes(typeSystem)).getAllElements()));
@@ -230,7 +228,6 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 					SGraphPackage.Literals.STATECHART);
 		}
 	}
-	
 
 	/**
 	 * Returns all features including super features for the given type
@@ -257,13 +254,4 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 		visited.add(type);
 	}
-
-	// TODO
-	protected IScope scope_TypedElement_type(EObject context, EReference ref) {
-		IScope scope = getDelegate().getScope(context, ref);
-		
-		return scope;
-	}
-	//
-
 }
