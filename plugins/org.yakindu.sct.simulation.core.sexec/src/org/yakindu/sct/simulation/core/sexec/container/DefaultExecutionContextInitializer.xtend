@@ -11,9 +11,12 @@
 package org.yakindu.sct.simulation.core.sexec.container
 
 import com.google.inject.Inject
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.InferredType
+import org.yakindu.sct.commons.WorkspaceClassLoaderFactory
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Scope
@@ -63,14 +66,14 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.name = variable.fullyQualifiedName.lastSegment
 		it.fqName = variable.fullyQualifiedName.toString
 		it.type = variable.inferType.type
-		it.value = it.type.defaultValue
+		it.value = it.type.initialValue
 	}
 
 	def dispatch create new ExecutionEventImpl() transform(EventDefinition event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
 		it.type = event.inferType.type
-		it.value = it.type.defaultValue
+		it.value = it.type.initialValue
 		it.direction = EventDirection.get(event.direction.value)
 	}
 
@@ -78,13 +81,26 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.name = op.fullyQualifiedName.lastSegment
 		it.fqName = op.fullyQualifiedName.toString
 		it.type = new InferredType(if(op.type != null) op.type else voidType)
-		it.value = it.type.defaultValue
+		it.value = it.type.initialValue
 	}
 
 	def dispatch create new ExecutionEventImpl() transform(TimeEvent event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
 		it.type = new InferredType(integerType)
-		it.value = defaultValue(it.type)
+		it.value = initialValue(it.type)
+	}
+
+	def Object initialValue(InferredType inferredType) {
+		var type = inferredType.type
+		if (type instanceof ComplexType) {
+			var factory = new WorkspaceClassLoaderFactory();
+			var classLoader = factory.createClassLoader(WorkspaceSynchronizer.getFile(type.eResource()).getProject(),
+				null);
+			var clazz = classLoader.loadClass(type.fullyQualifiedName.toString());
+			return clazz.newInstance();
+		} else {
+			return type.defaultValue
+		}
 	}
 }

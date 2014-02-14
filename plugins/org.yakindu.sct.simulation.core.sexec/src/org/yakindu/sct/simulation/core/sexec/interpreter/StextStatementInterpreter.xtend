@@ -124,8 +124,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		var parameter = expression.args.map(it|execute)
 		if (expression.operationCall) {
 			if (operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
-				return operationDelegate.execute((expression.reference as Operation),
-					parameter.toArray)
+				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
 
@@ -239,7 +238,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			if (variableRef != null) {
 				return variableRef.getValue
 			}
-			return context.getEvent(fqn).raised
+			var event = context.getEvent(fqn)
+			if (event != null)
+				return event.raised
+			println("No feature found for " + fqn + " -> returning null")
+			return null;
+
 		}
 	}
 
