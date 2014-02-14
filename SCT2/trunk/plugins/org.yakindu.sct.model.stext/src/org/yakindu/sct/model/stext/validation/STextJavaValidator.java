@@ -38,6 +38,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystem;
@@ -94,7 +95,7 @@ import com.google.inject.name.Named;
  * @auhor muelder
  * 
  */
-@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class })
+@ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class })
 public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	public static final String CHOICE_ONE_OUTGOING_DEFAULT_TRANSITION = "A choice should have one outgoing default transition";

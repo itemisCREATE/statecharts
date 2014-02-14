@@ -30,7 +30,7 @@ ScopedElement returns sgraph::ScopedElement:
 	StatechartSpecification;
 
 StatechartSpecification:
-	{StatechartSpecification} ('namespace' namespace=FQN)? 
+	{StatechartSpecification} ('namespace' namespace=FQN)?
 	(imports+=Import)*
 	(scopes+=StatechartScope)*;
 
@@ -39,15 +39,14 @@ StateSpecification:
 
 TransitionSpecification:
 	reaction=TransitionReaction;
-/* ---- scope rules ----
-Defines different kinds of scopes that contain element definitions. Scopes are used for element definitions in statechart, regions, and state 
-*/
+
 Scope returns sgraph::Scope:
-	(StateScope | StatechartScope); // a SimpleScope is used for states and regions
- StateScope returns sgraph::Scope:
-	{SimpleScope} (declarations+=(LocalReaction /* | Entrypoint | Exitpoint */))*;
-// defines the poosible scopes for statecharts
- StatechartScope:
+	(StateScope | StatechartScope);
+
+StateScope returns sgraph::Scope:
+	{SimpleScope} (declarations+=(LocalReaction))*;
+
+StatechartScope:
 	InterfaceScope | InternalScope;
 
 NamedInterfaceScope returns base::NamedElement:
@@ -55,45 +54,37 @@ NamedInterfaceScope returns base::NamedElement:
 
 InterfaceScope:
 	{InterfaceScope} 'interface' (name=XID)? ':' (declarations+=(EventDeclarartion | VariableDeclaration |
-	OperationDeclaration //		| Entrypoint 
- //		| Exitpoint
-))*;
+	OperationDeclaration))*;
 
 InternalScope:
 	{InternalScope} 'internal' ':' (declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration |
-	LocalReaction))*; /* ---- declarations ----
-a definition is a top level element of a definition scope. */ 
+	LocalReaction))*;
 
 Import returns sgraph::Import:
-	'import' importedNamespace=QIDWithWildcards';'
-;
+	'import' importedNamespace=QIDWithWildcards ';';
 
 QIDWithWildcards:
 	QID ('.*')?;
-	
+
 QID:
 	ID ('.' ID)*;
 
-
 Declaration returns sgraph::Declaration:
-	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction //		| Entrypoint 
- //		| Exitpoint
-;
+	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction;
 
-/* ---- event definition ---- */ EventDeclarartion returns sgraph::Event:
+EventDeclarartion returns sgraph::Event:
 	EventDefinition;
 
 EventFeature returns types::Event:
 	EventDefinition;
 
 EventDefinition:
-	(direction=Direction)? 'event' name=XID (':' type=[types::Type|FQN])?; // (derivation=EventDerivation)?;
+	(direction=Direction)? 'event' name=XID (':' type=[types::Type|FQN])?;
 
-//EventDerivation:
- //	 (':' value=Expression)?;
- enum Direction:
-	LOCAL='local' | IN='in' | OUT='out'; /* ---- variable definition ---- */ VariableDeclaration returns
-sgraph::Variable:
+enum Direction:
+	LOCAL='local' | IN='in' | OUT='out';
+
+VariableDeclaration returns sgraph::Variable:
 	VariableDefinition;
 
 VariableFeature returns types::Property:
@@ -101,6 +92,7 @@ VariableFeature returns types::Property:
 
 VariableDefinition:
 	{VariableDefinition} 'var' ((readonly?='readonly')? & (external?='external')?) name=XID ':' type=[types::Type|FQN]
+	(('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])* '>'))?
 	('=' initialValue=Expression)?; /* ---- operation definition ---- */ OperationDeclaration returns
 sgraph::Declaration:
 	OperationDefinition;
@@ -110,24 +102,12 @@ OperationFeature returns types::Operation:
 
 OperationDefinition:
 	{OperationDefinition} 'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
-	type=[types::Type|FQN])?;
+	type=[types::Type|FQN] (('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])* '>'))?)?;
 
 Parameter returns types::Parameter:
-	name=XID ':' type=[types::Type|FQN]; /* ---- entrypoint definition ---- */ //Entrypoint returns sgraph::Declaration:
+	name=XID ':' type=[types::Type|FQN] (('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])*
+	'>'))?;
 
-//	{Entrypoint} 'entrypoint' name=XID;
- /* ---- exitpoint definition ---- */ //Exitpoint returns sgraph::Declaration:
-
-//	{Exitpoint} 'exitpoint' name=XID;
- /* ---- Datatype rules ---- */ XID:
-	ID | 'namespace' | 'interface' | 'internal' | 'event' | 'local' | 'in' | 'out' | 'var' | 'readonly' | 'external' |
-	'operation' | 'default' | 'else' | 'entry' | 'exit' | 'always' | 'oncycle' | 'raise' | 'valueof' | 'active';
-
-FQN:
-	XID ('.' XID)*;
-/* ---- reaction rules ----
-Define the structure of reactions that are central for describing the statecharts behavior. 
-*/
 Reaction returns sgraph::Reaction:
 	LocalReaction | TransitionReaction;
 
@@ -167,8 +147,9 @@ EventSpec:
 	RegularEventSpec | TimeEventSpec | BuiltinEventSpec;
 
 RegularEventSpec:
-	event=FeatureCall; // TODO: redefine after trigger - we need to use it with clocks
- TimeEventSpec:
+	event=FeatureCall;
+
+TimeEventSpec:
 	type=TimeEventType value=ConditionalExpression unit=TimeUnit;
 
 enum TimeEventType:
@@ -184,9 +165,7 @@ ExitEvent:
 	{ExitEvent} 'exit';
 
 AlwaysEvent:
-	{AlwaysEvent} ('always' | 'oncycle'); //****************
- // Statechart specific expressions
- //****************
+	{AlwaysEvent} ('always' | 'oncycle');
 
 EventRaisingExpression returns exp::Expression:
 	{EventRaisingExpression} 'raise' event=FeatureCall (':' value=Expression)?;
@@ -203,3 +182,10 @@ PrimaryExpression returns exp::Expression:
 
 enum TimeUnit:
 	second='s' | millisecond='ms' | microsecond='us' | nanosecond='ns';
+
+XID:
+	ID | 'namespace' | 'interface' | 'internal' | 'event' | 'local' | 'in' | 'out' | 'var' | 'readonly' | 'external' |
+	'operation' | 'default' | 'else' | 'entry' | 'exit' | 'always' | 'oncycle' | 'raise' | 'valueof' | 'active';
+
+FQN:
+	XID ('.' XID)*;
