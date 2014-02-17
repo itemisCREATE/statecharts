@@ -13,5 +13,4 @@ class GenericsPrettyPrinter {
 	def concatTypeArguments(List<Type> parameter) {
 		return '''<«FOR param : parameter SEPARATOR ', '»«param.name»«ENDFOR»>'''.toString
 	}
-
 }
