@@ -385,7 +385,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 	 */
 	@Test
 	public void testAllChecksHaveTests() throws Exception {
-		Iterable<Method> methods = Lists.newArrayList(STextJavaValidator.class.getMethods());
+		Iterable<Method> methods = Lists.newArrayList(STextJavaValidator.class.getDeclaredMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
 			public boolean apply(Method input) {
 				return input.getAnnotation(Check.class) != null;
