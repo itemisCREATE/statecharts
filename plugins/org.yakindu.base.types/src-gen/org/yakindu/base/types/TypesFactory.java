@@ -134,6 +134,15 @@ public interface TypesFactory extends EFactory {
 	ParameterizedType createParameterizedType();
 
 	/**
+	 * Returns a new object of class '<em>Package Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Package Member</em>'.
+	 * @generated
+	 */
+	PackageMember createPackageMember();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

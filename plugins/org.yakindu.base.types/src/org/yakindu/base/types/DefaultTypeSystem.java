@@ -188,8 +188,11 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 					+ binaryOperator.getSymbol() + ", because types were not inferred for all of its operands.",
 					IStatus.ERROR));
 		}
+		//TODO:
+		if(firstOperandType.getType() instanceof TypeParameter || secondOperandType.getType() instanceof TypeParameter)
+			return null;
 
-		// infer type base on operator (fist pass: check types are valid, second
+			// infer type base on operator (fist pass: check types are valid, second
 		// pass: compute result type)
 		BinaryOperators o = (BinaryOperators) binaryOperator;
 		switch (o) {
@@ -534,9 +537,12 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		if (isVoidType(type))
 			return null;
 		if (isStringType(type))
-			return "";
+			return "\"\"";
 		if (type instanceof EnumerationType) {
 			return ((EnumerationType) type).getEnumerator().get(0);
+		}
+		if(type instanceof ComplexType){
+			return "{}";
 		}
 		return null;
 

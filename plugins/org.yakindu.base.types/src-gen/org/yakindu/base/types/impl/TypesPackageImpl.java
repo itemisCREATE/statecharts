@@ -18,6 +18,7 @@ import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
@@ -130,6 +131,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	private EClass parameterizedTypeEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass packageMemberEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
 	 * package package URI value.
@@ -207,7 +215,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getPackage_Types() {
+	public EReference getPackage_Member() {
 		return (EReference)packageEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -452,6 +460,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getPackageMember() {
+		return packageMemberEClass;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -478,7 +495,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		// Create classes and their features
 		packageEClass = createEClass(PACKAGE);
-		createEReference(packageEClass, PACKAGE__TYPES);
+		createEReference(packageEClass, PACKAGE__MEMBER);
 
 		typeEClass = createEClass(TYPE);
 		createEReference(typeEClass, TYPE__CONSTRAINT);
@@ -522,6 +539,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__PARAMETER);
+
+		packageMemberEClass = createEClass(PACKAGE_MEMBER);
 	}
 
 	/**
@@ -555,7 +574,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		// Add supertypes to classes
 		packageEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		typeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		typeEClass.getESuperTypes().add(this.getPackageMember());
 		featureEClass.getESuperTypes().add(this.getTypedElement());
 		featureEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		operationEClass.getESuperTypes().add(this.getFeature());
@@ -570,10 +589,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		typeConstraintEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		typeParameterEClass.getESuperTypes().add(this.getType());
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
+		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getPackage_Types(), this.getType(), null, "types", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getPackage_Member(), this.getPackageMember(), null, "member", null, 0, -1, org.yakindu.base.types.Package.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getType_Constraint(), this.getTypeConstraint(), null, "constraint", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -605,6 +625,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getComplexType_Features(), this.getFeature(), this.getFeature_OwningType(), "features", null, 0, -1, ComplexType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getComplexType_SuperTypes(), this.getComplexType(), null, "superTypes", null, 0, -1, ComplexType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		addEOperation(complexTypeEClass, this.getFeature(), "getAllFeatures", 0, -1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(enumeratorEClass, Enumerator.class, "Enumerator", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumerator_OwningEnumeration(), this.getEnumerationType(), this.getEnumerationType_Enumerator(), "owningEnumeration", null, 0, 1, Enumerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getEnumerator_LiteralValue(), ecorePackage.getEJavaObject(), "literalValue", null, 0, 1, Enumerator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -617,6 +639,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(parameterizedTypeEClass, ParameterizedType.class, "ParameterizedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterizedType_Parameter(), this.getTypeParameter(), null, "parameter", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(packageMemberEClass, PackageMember.class, "PackageMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

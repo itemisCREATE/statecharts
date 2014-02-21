@@ -16,6 +16,7 @@ import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
@@ -81,6 +82,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.TYPE_CONSTRAINT: return createTypeConstraint();
 			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
 			case TypesPackage.PARAMETERIZED_TYPE: return createParameterizedType();
+			case TypesPackage.PACKAGE_MEMBER: return createPackageMember();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -204,6 +206,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public ParameterizedType createParameterizedType() {
 		ParameterizedTypeImpl parameterizedType = new ParameterizedTypeImpl();
 		return parameterizedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public PackageMember createPackageMember() {
+		PackageMemberImpl packageMember = new PackageMemberImpl();
+		return packageMember;
 	}
 
 	/**

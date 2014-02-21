@@ -16,6 +16,7 @@ import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
@@ -89,6 +90,7 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.TYPE: {
 				Type type = (Type)theEObject;
 				T result = caseType(type);
+				if (result == null) result = casePackageMember(type);
 				if (result == null) result = caseNamedElement(type);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -147,6 +149,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseEnumerationType(enumerationType);
 				if (result == null) result = casePrimitiveType(enumerationType);
 				if (result == null) result = caseType(enumerationType);
+				if (result == null) result = casePackageMember(enumerationType);
 				if (result == null) result = caseNamedElement(enumerationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -155,6 +158,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				PrimitiveType primitiveType = (PrimitiveType)theEObject;
 				T result = casePrimitiveType(primitiveType);
 				if (result == null) result = caseType(primitiveType);
+				if (result == null) result = casePackageMember(primitiveType);
 				if (result == null) result = caseNamedElement(primitiveType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -164,6 +168,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				T result = caseComplexType(complexType);
 				if (result == null) result = caseParameterizedType(complexType);
 				if (result == null) result = caseType(complexType);
+				if (result == null) result = casePackageMember(complexType);
 				if (result == null) result = caseNamedElement(complexType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -186,6 +191,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				TypeParameter typeParameter = (TypeParameter)theEObject;
 				T result = caseTypeParameter(typeParameter);
 				if (result == null) result = caseType(typeParameter);
+				if (result == null) result = casePackageMember(typeParameter);
 				if (result == null) result = caseNamedElement(typeParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -194,7 +200,15 @@ public class TypesSwitch<T> extends Switch<T> {
 				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
 				T result = caseParameterizedType(parameterizedType);
 				if (result == null) result = caseType(parameterizedType);
+				if (result == null) result = casePackageMember(parameterizedType);
 				if (result == null) result = caseNamedElement(parameterizedType);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.PACKAGE_MEMBER: {
+				PackageMember packageMember = (PackageMember)theEObject;
+				T result = casePackageMember(packageMember);
+				if (result == null) result = caseNamedElement(packageMember);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -429,6 +443,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseParameterizedType(ParameterizedType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageMember(PackageMember object) {
 		return null;
 	}
 

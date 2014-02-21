@@ -13,7 +13,7 @@ import org.yakindu.base.base.NamedElement;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.base.types.Package#getTypes <em>Types</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Package#getMember <em>Member</em>}</li>
  * </ul>
  * </p>
  *
@@ -23,19 +23,19 @@ import org.yakindu.base.base.NamedElement;
  */
 public interface Package extends NamedElement {
 	/**
-	 * Returns the value of the '<em><b>Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Type}.
+	 * Returns the value of the '<em><b>Member</b></em>' containment reference list.
+	 * The list contents are of type {@link org.yakindu.base.types.PackageMember}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Types</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Member</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Types</em>' containment reference list.
-	 * @see org.yakindu.base.types.TypesPackage#getPackage_Types()
+	 * @return the value of the '<em>Member</em>' containment reference list.
+	 * @see org.yakindu.base.types.TypesPackage#getPackage_Member()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Type> getTypes();
+	EList<PackageMember> getMember();
 
 } // Package

@@ -56,4 +56,12 @@ public interface ComplexType extends ParameterizedType {
 	 */
 	EList<ComplexType> getSuperTypes();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	EList<Feature> getAllFeatures();
+
 } // ComplexType

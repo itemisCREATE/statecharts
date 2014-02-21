@@ -7,7 +7,6 @@
 package org.yakindu.base.types;
 
 import org.eclipse.emf.common.util.EList;
-import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +24,7 @@ import org.yakindu.base.base.NamedElement;
  * @model abstract="true"
  * @generated
  */
-public interface Type extends NamedElement {
+public interface Type extends PackageMember {
 
 	/**
 	 * Returns the value of the '<em><b>Constraint</b></em>' containment reference list.

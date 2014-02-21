@@ -17,6 +17,7 @@ import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
@@ -139,6 +140,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseParameterizedType(ParameterizedType object) {
 				return createParameterizedTypeAdapter();
+			}
+			@Override
+			public Adapter casePackageMember(PackageMember object) {
+				return createPackageMemberAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -389,6 +394,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createParameterizedTypeAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.PackageMember <em>Package Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.PackageMember
+	 * @generated
+	 */
+	public Adapter createPackageMemberAdapter() {
 		return null;
 	}
 

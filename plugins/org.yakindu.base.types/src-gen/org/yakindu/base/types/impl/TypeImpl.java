@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.base.base.impl.NamedElementImpl;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypesPackage;
@@ -32,7 +31,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public abstract class TypeImpl extends NamedElementImpl implements Type {
+public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	/**
 	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

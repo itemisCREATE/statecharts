@@ -80,13 +80,13 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Types</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Member</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE__TYPES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int PACKAGE__MEMBER = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Package</em>' class.
@@ -96,6 +96,34 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int PACKAGE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.PackageMemberImpl <em>Package Member</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.PackageMemberImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getPackageMember()
+	 * @generated
+	 */
+	int PACKAGE_MEMBER = 15;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_MEMBER__NAME = BasePackage.NAMED_ELEMENT__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Package Member</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE_MEMBER_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypeImpl <em>Type</em>}' class.
@@ -164,7 +192,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__NAME = BasePackage.NAMED_ELEMENT__NAME;
+	int TYPE__NAME = PACKAGE_MEMBER__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Constraint</b></em>' containment reference list.
@@ -173,7 +201,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__CONSTRAINT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int TYPE__CONSTRAINT = PACKAGE_MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
@@ -182,7 +210,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -809,15 +837,15 @@ public interface TypesPackage extends EPackage {
 	EClass getPackage();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Package#getTypes <em>Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.yakindu.base.types.Package#getMember <em>Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Types</em>'.
-	 * @see org.yakindu.base.types.Package#getTypes()
+	 * @return the meta object for the containment reference list '<em>Member</em>'.
+	 * @see org.yakindu.base.types.Package#getMember()
 	 * @see #getPackage()
 	 * @generated
 	 */
-	EReference getPackage_Types();
+	EReference getPackage_Member();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Type <em>Type</em>}'.
@@ -1125,6 +1153,16 @@ public interface TypesPackage extends EPackage {
 	EReference getParameterizedType_Parameter();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.PackageMember <em>Package Member</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Package Member</em>'.
+	 * @see org.yakindu.base.types.PackageMember
+	 * @generated
+	 */
+	EClass getPackageMember();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1157,12 +1195,12 @@ public interface TypesPackage extends EPackage {
 		EClass PACKAGE = eINSTANCE.getPackage();
 
 		/**
-		 * The meta object literal for the '<em><b>Types</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Member</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PACKAGE__TYPES = eINSTANCE.getPackage_Types();
+		EReference PACKAGE__MEMBER = eINSTANCE.getPackage_Member();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypeImpl <em>Type</em>}' class.
@@ -1423,6 +1461,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PARAMETERIZED_TYPE__PARAMETER = eINSTANCE.getParameterizedType_Parameter();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.PackageMemberImpl <em>Package Member</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.PackageMemberImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getPackageMember()
+		 * @generated
+		 */
+		EClass PACKAGE_MEMBER = eINSTANCE.getPackageMember();
 
 	}
 
