@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.expressions.inferrer.DefaultExpressionsTypeInferrer;
+import org.yakindu.base.expressions.inferrer.IExpressionsTypeInferrer;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.InferenceIssue;
 import org.yakindu.base.types.InferenceResult;
@@ -55,7 +55,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	private GenericsPrettyPrinter printer;
 	
 	@Inject
-	private DefaultExpressionsTypeInferrer typeInferrer;
+	private IExpressionsTypeInferrer typeInferrer;
 
 	@Check
 	public void checkIsRaw(TypedElement typedElement) {
