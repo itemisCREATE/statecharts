@@ -42,7 +42,6 @@ import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystem;
-import org.yakindu.base.types.InferenceIssue;
 import org.yakindu.base.types.InferenceResult;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
@@ -623,13 +622,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 			}
 		}
 		error(message, source, (EStructuralFeature) null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code);
-	}
-
-	protected void report(InferenceResult result, EStructuralFeature feature) {
-		if (result.getIssues().isEmpty())
-			return;
-		InferenceIssue error = Iterables.getLast(result.getIssues());
-		error(error.getMessage(), feature);
 	}
 
 	private INode findNode(EObject source, boolean sourceFound, INode root, Keyword keyword, int[] index) {
