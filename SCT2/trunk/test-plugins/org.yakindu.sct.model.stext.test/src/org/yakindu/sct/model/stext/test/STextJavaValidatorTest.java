@@ -62,6 +62,7 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.resource.impl.StextResource;
+import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
@@ -648,6 +649,15 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		assertTrue(validator.validate(cToD, diagnostics, new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 3);
 
+	}
+	
+	@Test
+	public void checkImportExists() {
+		ImportScope importScope = (ImportScope) parseExpression("import: not.existing.*", null,
+				ImportScope.class.getSimpleName());
+
+		AssertableDiagnostics validationResult = tester.validate(importScope.getImports().get(0));
+		validationResult.assertError(STextJavaValidator.IMPORT_NOT_RESOLVED);
 	}
 
 	protected Transition createTransition(Vertex source, Vertex target) {

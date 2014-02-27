@@ -18,11 +18,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="def" eType="#//TransitionSpecification"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StatechartSpecification" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Import"
-        containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatechartSpecification" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ScopedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="StateSpecification">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scope" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Scope"
         containment="true"/>
@@ -34,6 +30,13 @@
   <eClassifiers xsi:type="ecore:EClass" name="StatechartScope" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Scope"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceScope" eSuperTypes="#//StatechartScope ../../org.yakindu.base.types/model/base.ecore#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="InternalScope" eSuperTypes="#//StatechartScope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportScope" eSuperTypes="#//StatechartScope">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
+        eType="#//Import" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Import">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Event ../../org.yakindu.base.types/model/types.ecore#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>
   </eClassifiers>

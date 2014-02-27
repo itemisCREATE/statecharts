@@ -349,6 +349,56 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
   }
 
   /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.ImportScope} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ImportScopeItemProvider importScopeItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.ImportScope}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createImportScopeAdapter()
+  {
+    if (importScopeItemProvider == null)
+    {
+      importScopeItemProvider = new ImportScopeItemProvider(this);
+    }
+
+    return importScopeItemProvider;
+  }
+
+  /**
+   * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.Import} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ImportItemProvider importItemProvider;
+
+  /**
+   * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.Import}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createImportAdapter()
+  {
+    if (importItemProvider == null)
+    {
+      importItemProvider = new ImportItemProvider(this);
+    }
+
+    return importItemProvider;
+  }
+
+  /**
    * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventDefinition} instances.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1020,6 +1070,8 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
     if (statechartScopeItemProvider != null) statechartScopeItemProvider.dispose();
     if (interfaceScopeItemProvider != null) interfaceScopeItemProvider.dispose();
     if (internalScopeItemProvider != null) internalScopeItemProvider.dispose();
+    if (importScopeItemProvider != null) importScopeItemProvider.dispose();
+    if (importItemProvider != null) importItemProvider.dispose();
     if (eventDefinitionItemProvider != null) eventDefinitionItemProvider.dispose();
     if (variableDefinitionItemProvider != null) variableDefinitionItemProvider.dispose();
     if (operationDefinitionItemProvider != null) operationDefinitionItemProvider.dispose();

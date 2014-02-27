@@ -9,7 +9,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -17,22 +17,20 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-
-import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
-
-import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartSpecification} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.ImportScope} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StatechartSpecificationItemProvider
-  extends ScopedElementItemProvider
+public class ImportScopeItemProvider
+  extends StatechartScopeItemProvider
   implements
     IEditingDomainItemProvider,
     IStructuredItemContentProvider,
@@ -46,7 +44,7 @@ public class StatechartSpecificationItemProvider
    * <!-- end-user-doc -->
    * @generated
    */
-  public StatechartSpecificationItemProvider(AdapterFactory adapterFactory)
+  public ImportScopeItemProvider(AdapterFactory adapterFactory)
   {
     super(adapterFactory);
   }
@@ -69,7 +67,40 @@ public class StatechartSpecificationItemProvider
   }
 
   /**
-   * This returns StatechartSpecification.gif.
+   * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+   * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+   * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
+  {
+    if (childrenFeatures == null)
+    {
+      super.getChildrenFeatures(object);
+      childrenFeatures.add(StextPackage.Literals.IMPORT_SCOPE__IMPORTS);
+    }
+    return childrenFeatures;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EStructuralFeature getChildFeature(Object object, Object child)
+  {
+    // Check the type of the specified child object and return the proper feature to use for
+    // adding (see {@link AddCommand}) it as a child.
+
+    return super.getChildFeature(object, child);
+  }
+
+  /**
+   * This returns ImportScope.gif.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -77,7 +108,7 @@ public class StatechartSpecificationItemProvider
   @Override
   public Object getImage(Object object)
   {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/StatechartSpecification"));
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/ImportScope"));
   }
 
   /**
@@ -89,10 +120,7 @@ public class StatechartSpecificationItemProvider
   @Override
   public String getText(Object object)
   {
-    String label = ((StatechartSpecification)object).getNamespace();
-    return label == null || label.length() == 0 ?
-      getString("_UI_StatechartSpecification_type") :
-      getString("_UI_StatechartSpecification_type") + " " + label;
+    return getString("_UI_ImportScope_type");
   }
 
   /**
@@ -106,6 +134,13 @@ public class StatechartSpecificationItemProvider
   public void notifyChanged(Notification notification)
   {
     updateChildren(notification);
+
+    switch (notification.getFeatureID(ImportScope.class))
+    {
+      case StextPackage.IMPORT_SCOPE__IMPORTS:
+        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+        return;
+    }
     super.notifyChanged(notification);
   }
 
@@ -123,40 +158,8 @@ public class StatechartSpecificationItemProvider
 
     newChildDescriptors.add
       (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createStatechartScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createInterfaceScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createInternalScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createImportScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createSimpleScope()));
-  }
-
-  /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public ResourceLocator getResourceLocator()
-  {
-    return STextEditPlugin.INSTANCE;
+        (StextPackage.Literals.IMPORT_SCOPE__IMPORTS,
+         StextFactory.eINSTANCE.createImport()));
   }
 
 }
