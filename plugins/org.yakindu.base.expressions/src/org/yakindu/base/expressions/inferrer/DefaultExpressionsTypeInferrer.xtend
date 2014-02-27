@@ -97,8 +97,8 @@ class DefaultExpressionsTypeInferrer implements IExpressionsTypeInferrer {
 		ITypeSystemOperator binaryOperator) {
 		if (firstOperand.getType() != null && secondOperand.getType() != null) {
 			val result = ts.inferType(firstOperand.type, secondOperand.type, binaryOperator);
-			result.issues.addAll(firstOperand.issues);
-			result.issues.addAll(secondOperand.issues);
+			result?.issues.addAll(firstOperand.issues);
+			result?.issues.addAll(secondOperand.issues);
 			return result;
 		}
 		return new InferenceResult(null, Iterables::concat(firstOperand.issues, secondOperand.issues).toList);
