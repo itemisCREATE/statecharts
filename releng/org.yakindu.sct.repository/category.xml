@@ -15,6 +15,9 @@
    <feature url="features/org.yakindu.sct.generator.java_0.0.0.jar" id="org.yakindu.sct.generator.java" version="0.0.0">
       <category name="Yakindu SCT 2"/>
    </feature>
+     <feature url="features/org.yakindu.sct.generator.cpp_0.0.0.jar" id="org.yakindu.sct.generator.cpp" version="0.0.0">
+      <category name="Yakindu SCT 2"/>
+   </feature>
    <feature url="features/org.yakindu.sct.generator.java.source_0.0.0.jar" id="org.yakindu.sct.generator.java.source" version="0.0.0">
       <category name="Yakindu SCT 2 (Sources)"/>
    </feature>
