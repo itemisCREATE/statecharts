@@ -17,10 +17,12 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
@@ -28,7 +30,12 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IContainer;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -46,6 +53,7 @@ import org.yakindu.base.types.InferenceResult;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
@@ -72,6 +80,7 @@ import org.yakindu.sct.model.stext.stext.EventSpec;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.ExitPointSpec;
 import org.yakindu.sct.model.stext.stext.Guard;
+import org.yakindu.sct.model.stext.stext.Import;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
@@ -86,6 +95,8 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
+
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * s Several validations for nonsensical expressions.
@@ -122,6 +133,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	public static final String TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS = "ExitPointSpec can't be used on transition siblings.";
 	public static final String LEFT_HAND_ASSIGNMENT = "The left-hand side of an assignment must be a variable";
 	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transisition is never taken. Use 'oncycle' or 'always' instead";
+	public static final String IMPORT_NOT_RESOLVED = "Import cannot be resolved";
 
 	@Inject
 	private ISTextTypeInferrer typeInferrer;
@@ -134,6 +146,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
 	private String languageName;
+	@Inject
+	private IContainer.Manager containerManager;
+	@Inject
+	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 
 	@Check(CheckType.FAST)
 	public void transitionsWithNoTrigger(Transition trans) {
@@ -660,5 +676,50 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		List<EPackage> result = super.getEPackages();
 		result.add(ExpressionsPackage.eINSTANCE);
 		return result;
+	}
+	
+	@Check(CheckType.FAST)
+	public void checkImportExists(Import importDef) {
+		String importedNamespace = importDef.getImportedNamespace();
+		if (!checkImportedNamespaceExists(importDef.getImportedNamespace(), getResource(importDef))) {
+			error("The import " + importedNamespace + " cannot be resolved", importDef,
+					StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE, IMPORT_NOT_RESOLVED);
+		}
+	}
+	
+	protected boolean checkImportedNamespaceExists(String importedNamespace, Resource res) {
+		if (importedNamespace.endsWith(".*")) {
+			importedNamespace = importedNamespace.substring(0, importedNamespace.length() - 2); // remove
+																								// wildcard
+		}
+		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(res);
+		URI uri = res.getURI();
+		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(uri);
+		if (resourceDescription == null) {
+			return false; // no resource description could be found, so package cannot be resolved anyway
+		}
+		for (IContainer container : containerManager.getVisibleContainers(resourceDescription, resourceDescriptions)) {
+			final Iterable<IResourceDescription> currentDescriptions = container.getResourceDescriptions();
+			for (IResourceDescription resDesc : currentDescriptions) {
+				Iterable<IEObjectDescription> visisblePackages = resDesc
+						.getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
+				for (IEObjectDescription pkgDesc : visisblePackages) {
+					if (pkgDesc.getName().toString().equals(importedNamespace)) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
+	}
+	
+	private Resource getResource(EObject context) {
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(
+				context.eResource(), ContextElementAdapter.class);
+		if (provider == null) {
+			return context.eResource();
+		} else {
+			return provider.getElement().eResource();
+		}
 	}
 }

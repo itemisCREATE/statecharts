@@ -31,7 +31,6 @@ ScopedElement returns sgraph::ScopedElement:
 
 StatechartSpecification:
 	{StatechartSpecification} ('namespace' namespace=FQN)?
-	(imports+=Import)*
 	(scopes+=StatechartScope)*;
 
 StateSpecification:
@@ -47,7 +46,7 @@ StateScope returns sgraph::Scope:
 	{SimpleScope} (declarations+=(LocalReaction))*;
 
 StatechartScope:
-	InterfaceScope | InternalScope;
+	InterfaceScope | InternalScope | ImportScope;
 
 NamedInterfaceScope returns base::NamedElement:
 	InterfaceScope;
@@ -59,9 +58,12 @@ InterfaceScope:
 InternalScope:
 	{InternalScope} 'internal' ':' (declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration |
 	LocalReaction))*;
+	
+ImportScope:
+	 {ImportScope} 'import' ':' (imports+=Import)*;
 
-Import returns sgraph::Import:
-	'import' importedNamespace=QIDWithWildcards ';';
+Import:
+	importedNamespace=QIDWithWildcards;
 
 QIDWithWildcards:
 	QID ('.*')?;

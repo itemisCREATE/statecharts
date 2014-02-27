@@ -11,28 +11,28 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-
-import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
-
-import org.yakindu.sct.model.stext.stext.StatechartSpecification;
-import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.Import;
+import org.yakindu.sct.model.stext.stext.StextPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartSpecification} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.Import} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class StatechartSpecificationItemProvider
-  extends ScopedElementItemProvider
+public class ImportItemProvider
+  extends ItemProviderAdapter
   implements
     IEditingDomainItemProvider,
     IStructuredItemContentProvider,
@@ -46,7 +46,7 @@ public class StatechartSpecificationItemProvider
    * <!-- end-user-doc -->
    * @generated
    */
-  public StatechartSpecificationItemProvider(AdapterFactory adapterFactory)
+  public ImportItemProvider(AdapterFactory adapterFactory)
   {
     super(adapterFactory);
   }
@@ -64,12 +64,36 @@ public class StatechartSpecificationItemProvider
     {
       super.getPropertyDescriptors(object);
 
+      addImportedNamespacePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
   }
 
   /**
-   * This returns StatechartSpecification.gif.
+   * This adds a property descriptor for the Imported Namespace feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addImportedNamespacePropertyDescriptor(Object object)
+  {
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_Import_importedNamespace_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_Import_importedNamespace_feature", "_UI_Import_type"),
+         StextPackage.Literals.IMPORT__IMPORTED_NAMESPACE,
+         true,
+         false,
+         false,
+         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+         null,
+         null));
+  }
+
+  /**
+   * This returns Import.gif.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -77,7 +101,7 @@ public class StatechartSpecificationItemProvider
   @Override
   public Object getImage(Object object)
   {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/StatechartSpecification"));
+    return overlayImage(object, getResourceLocator().getImage("full/obj16/Import"));
   }
 
   /**
@@ -89,10 +113,10 @@ public class StatechartSpecificationItemProvider
   @Override
   public String getText(Object object)
   {
-    String label = ((StatechartSpecification)object).getNamespace();
+    String label = ((Import)object).getImportedNamespace();
     return label == null || label.length() == 0 ?
-      getString("_UI_StatechartSpecification_type") :
-      getString("_UI_StatechartSpecification_type") + " " + label;
+      getString("_UI_Import_type") :
+      getString("_UI_Import_type") + " " + label;
   }
 
   /**
@@ -106,6 +130,13 @@ public class StatechartSpecificationItemProvider
   public void notifyChanged(Notification notification)
   {
     updateChildren(notification);
+
+    switch (notification.getFeatureID(Import.class))
+    {
+      case StextPackage.IMPORT__IMPORTED_NAMESPACE:
+        fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+        return;
+    }
     super.notifyChanged(notification);
   }
 
@@ -120,31 +151,6 @@ public class StatechartSpecificationItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
     super.collectNewChildDescriptors(newChildDescriptors, object);
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createStatechartScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createInterfaceScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createInternalScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createImportScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createSimpleScope()));
   }
 
   /**
