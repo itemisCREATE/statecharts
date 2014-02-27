@@ -701,9 +701,9 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 		for (IContainer container : containerManager.getVisibleContainers(resourceDescription, resourceDescriptions)) {
 			final Iterable<IResourceDescription> currentDescriptions = container.getResourceDescriptions();
 			for (IResourceDescription resDesc : currentDescriptions) {
-				Iterable<IEObjectDescription> visisblePackages = resDesc
+				Iterable<IEObjectDescription> visiblePackages = resDesc
 						.getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
-				for (IEObjectDescription pkgDesc : visisblePackages) {
+				for (IEObjectDescription pkgDesc : visiblePackages) {
 					if (pkgDesc.getName().toString().equals(importedNamespace)) {
 						return true;
 					}
