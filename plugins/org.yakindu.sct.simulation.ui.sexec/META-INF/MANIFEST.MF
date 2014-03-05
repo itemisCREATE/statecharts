@@ -16,3 +16,4 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.ui.sexec.launch,
  org.yakindu.sct.simulation.ui.sexec.launch.tabs
+Bundle-Vendor: statecharts.org

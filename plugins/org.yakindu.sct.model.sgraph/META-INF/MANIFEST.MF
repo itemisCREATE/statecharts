@@ -4,7 +4,7 @@ Bundle-Name: Yakindu Statechart Tools (SCT) SGraph Model
 Bundle-SymbolicName: org.yakindu.sct.model.sgraph;singleton:=true
 Bundle-Version: 2.2.0.qualifier
 Bundle-ClassPath: .
-Bundle-Vendor: yakindu.org
+Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.model.sgraph,

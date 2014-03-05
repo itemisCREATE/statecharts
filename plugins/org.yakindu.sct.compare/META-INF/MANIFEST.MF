@@ -18,3 +18,4 @@ Require-Bundle: org.eclipse.ui,
  org.yakindu.sct.model.sgraph;bundle-version="2.1.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
+Bundle-Vendor: statecharts.org
