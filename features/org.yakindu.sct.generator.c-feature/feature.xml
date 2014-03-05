@@ -19,7 +19,7 @@
    </license>
 
    <requires>
-      <import feature="org.yakindu.sct" version="2.1.2.qualifier"/>
+      <import feature="org.yakindu.sct" version="2.2.0.qualifier"/>
    </requires>
 
    <plugin
