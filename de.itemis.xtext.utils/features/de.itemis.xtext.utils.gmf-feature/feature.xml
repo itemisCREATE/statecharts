@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="de.itemis.xtext.utils.gmf"
-      label="Xtext GMF Integration (XGI)"
-      version="2.1.2.qualifier"
+      label="Xtext GMF Integration (XGI) Feature"
+      version="2.2.0.qualifier"
       provider-name="itemis AG">
 
    <description>
