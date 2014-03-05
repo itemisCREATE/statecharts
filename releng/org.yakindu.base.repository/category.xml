@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
-   <feature url="features/org.yakindu.base_2.1.2.qualifier.jar" id="org.yakindu.base" version="2.1.2.qualifier">
+   <feature url="features/org.yakindu.base_2.2.0.qualifier.jar" id="org.yakindu.base" version="2.2.0.qualifier">
       <category name="Xtext Integration Utilities"/>
    </feature>
-   <feature url="features/org.yakindu.base.source_2.1.2.qualifier.jar" id="org.yakindu.base.source" version="2.1.2.qualifier">
+   <feature url="features/org.yakindu.base.source_2.2.0.qualifier.jar" id="org.yakindu.base.source" version="2.2.0.qualifier">
       <category name="Xtext Integration Utilities (Sources)"/>
    </feature>
-   <feature url="features/de.itemis.xtext.utils.jface_2.1.2.qualifier.jar" id="de.itemis.xtext.utils.jface" version="2.1.2.qualifier">
+   <feature url="features/de.itemis.xtext.utils.jface_2.2.0.qualifier.jar" id="de.itemis.xtext.utils.jface" version="2.2.0.qualifier">
       <category name="Xtext Integration Utilities"/>
    </feature>
-   <feature url="features/de.itemis.xtext.utils.jface.source_2.1.2.qualifier.jar" id="de.itemis.xtext.utils.jface.source" version="2.1.2.qualifier">
+   <feature url="features/de.itemis.xtext.utils.jface.source_2.2.0.qualifier.jar" id="de.itemis.xtext.utils.jface.source" version="2.2.0.qualifier">
       <category name="Xtext Integration Utilities (Sources)"/>
    </feature>
-   <feature url="features/de.itemis.xtext.utils.gmf_2.1.2.qualifier.jar" id="de.itemis.xtext.utils.gmf" version="2.1.2.qualifier">
+   <feature url="features/de.itemis.xtext.utils.gmf_2.2.0.qualifier.jar" id="de.itemis.xtext.utils.gmf" version="2.2.0.qualifier">
       <category name="Xtext Integration Utilities"/>
    </feature>
-   <feature url="features/de.itemis.xtext.utils.gmf.source_2.1.2.qualifier.jar" id="de.itemis.xtext.utils.gmf.source" version="2.1.2.qualifier">
+   <feature url="features/de.itemis.xtext.utils.gmf.source_2.2.0.qualifier.jar" id="de.itemis.xtext.utils.gmf.source" version="2.2.0.qualifier">
       <category name="Xtext Integration Utilities (Sources)"/>
    </feature>
    <category-def name="Xtext Integration Utilities" label="Xtext Integration Utilities">
