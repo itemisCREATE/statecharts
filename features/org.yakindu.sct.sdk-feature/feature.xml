@@ -3,7 +3,8 @@
       id="org.yakindu.sct.sdk"
       label="Yakindu Statechart Tools (SCT) 2 SDK"
       version="2.1.2.qualifier"
-      provider-name="yakindu.org">
+      provider-name="yakindu.org"
+      plugin="org.yakindu.sct.doc.user">
 
    <description>
       %description
@@ -24,7 +25,7 @@
    <includes
          id="org.yakindu.sct.generator"
          version="0.0.0"/>
-         
+
    <includes
          id="org.yakindu.sct.source"
          version="0.0.0"/>
@@ -32,4 +33,5 @@
    <includes
          id="org.yakindu.sct.generator.source"
          version="0.0.0"/>
+
 </feature>
