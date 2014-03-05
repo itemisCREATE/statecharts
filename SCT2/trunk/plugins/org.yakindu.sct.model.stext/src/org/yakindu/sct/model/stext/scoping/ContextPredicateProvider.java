@@ -32,16 +32,30 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REACTION_E
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REGULAR_EVENT_SPEC;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_REACTION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
+import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.VARIABLE_DEFINITION;
+import static org.yakindu.base.types.TypesPackage.Literals.TYPED_ELEMENT__TYPE;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
+import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -53,12 +67,17 @@ import com.google.common.base.Predicates;
  */
 public class ContextPredicateProvider {
 
-	static class FeaturedTypePredicate implements
-			Predicate<IEObjectDescription> {
+	static class TypePredicate implements Predicate<IEObjectDescription> {
+		public boolean apply(IEObjectDescription input) {
+			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass()) && 
+					!TypesPackage.Literals.TYPE_PARAMETER.isSuperTypeOf(input.getEClass());
+		}
+	}
+	
+	static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
 			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass())
-					&& TypesPackage.Literals.FEATURE.isSuperTypeOf(input
-							.getEClass());
+					&& TypesPackage.Literals.FEATURE.isSuperTypeOf(input.getEClass());
 		}
 	}
 
@@ -67,8 +86,36 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass());
+			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()) || isVariableWithTypeContainingEvent(input);
 		}
+	}
+	
+	private static boolean isVariableWithTypeContainingEvent(IEObjectDescription input) {
+		if (StextPackage.Literals.VARIABLE_DEFINITION.isSuperTypeOf(input.getEClass())) {
+			EObject eObjectOrProxy = input.getEObjectOrProxy();
+			VariableDefinition varDef = (VariableDefinition) eObjectOrProxy;
+			if (eObjectOrProxy.eIsProxy()) {
+				URI uri = input.getEObjectURI().trimFragment();
+				ResourceSet rs = new ResourceSetImpl();
+				Resource res = rs.createResource(uri);
+				try {
+					res.load(null);
+					EObject resolved = EcoreUtil.resolve(eObjectOrProxy, res);
+					varDef = (VariableDefinition) resolved;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (varDef.getType() instanceof ComplexType) {
+				ComplexType complexType = (ComplexType) varDef.getType();
+				for (Feature feature : complexType.getAllFeatures()) {
+					if (feature instanceof Event) {
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 
 	static class VariablePredicate extends FeaturedTypePredicate {
@@ -119,9 +166,9 @@ public class ContextPredicateProvider {
 	private static final VariablePredicate VARIABLES = new VariablePredicate();
 	private static final EventPredicate EVENTS = new EventPredicate();
 	private static final VariableOperationPredicate VARIABLES_AND_OPERATIONS = new VariableOperationPredicate();
-	public static final VariableOperationEventEnumeratorPredicate VARIABLES_OPERATIONS_EVENTS_ENUMERATORS = new VariableOperationEventEnumeratorPredicate();
-	private static final Predicate<IEObjectDescription> ALL = Predicates
-			.<IEObjectDescription> alwaysTrue();
+	private static final VariableOperationEventEnumeratorPredicate VARIABLES_OPERATIONS_EVENTS_ENUMERATORS = new VariableOperationEventEnumeratorPredicate();
+	private static final TypePredicate TYPES = new TypePredicate();
+	private static final Predicate<IEObjectDescription> ALL = Predicates.<IEObjectDescription> alwaysTrue();
 
 	private final Map<Pair<EClass, EReference>, Predicate<IEObjectDescription>> filter;
 
@@ -140,10 +187,7 @@ public class ContextPredicateProvider {
 
 	protected void initMap() {
 		filter.put(key(ASSIGNMENT_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
-		filter.put(
-				key(ASSIGNMENT_EXPRESSION, ASSIGNMENT_EXPRESSION__EXPRESSION),
-				ALL);
-
+		filter.put(key(ASSIGNMENT_EXPRESSION, ASSIGNMENT_EXPRESSION__EXPRESSION), ALL);
 		filter.put(key(CONDITIONAL_EXPRESSION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(LOGICAL_OR_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 		filter.put(key(LOGICAL_AND_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
@@ -152,16 +196,12 @@ public class ContextPredicateProvider {
 		filter.put(key(BITWISE_OR_EXPRESSION), VARIABLES);
 		filter.put(key(BITWISE_AND_EXPRESSION), VARIABLES);
 		filter.put(key(SHIFT_EXPRESSION), VARIABLES);
-		filter.put(key(LOGICAL_RELATION_EXPRESSION),
-				VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
-		filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION),
-				VARIABLES_AND_OPERATIONS);
-		filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION),
-				VARIABLES_AND_OPERATIONS);
+		filter.put(key(LOGICAL_RELATION_EXPRESSION), VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
+		filter.put(key(NUMERICAL_ADD_SUBTRACT_EXPRESSION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(NUMERICAL_UNARY_EXPRESSION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(EVENT_RAISING_EXPRESSION), EVENTS);
-		filter.put(
-				key(EVENT_RAISING_EXPRESSION, EVENT_RAISING_EXPRESSION__VALUE),
+		filter.put(key(EVENT_RAISING_EXPRESSION, EVENT_RAISING_EXPRESSION__VALUE),
 				VARIABLES_OPERATIONS_EVENTS_ENUMERATORS);
 		filter.put(key(REGULAR_EVENT_SPEC), EVENTS);
 		filter.put(key(EVENT_VALUE_REFERENCE_EXPRESSION), EVENTS);
@@ -169,6 +209,7 @@ public class ContextPredicateProvider {
 		filter.put(key(TRANSITION_SPECIFICATION), EVENTS);
 		filter.put(key(LOCAL_REACTION), VARIABLES_AND_OPERATIONS);
 		filter.put(key(TRANSITION_REACTION), VARIABLES_AND_OPERATIONS);
+		filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE), TYPES);
 	}
 
 	public Predicate<IEObjectDescription> getPredicate(EClass clazz,
