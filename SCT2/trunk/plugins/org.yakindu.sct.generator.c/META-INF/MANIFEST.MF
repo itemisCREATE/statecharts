@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu SCT C Generator
+Bundle-Name: Yakindu Statechart Tools (SCT) C Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.c;singleton:=true
-Bundle-Version: 2.1.2.qualifier
+Bundle-Version: 2.2.0.qualifier
 Require-Bundle: org.yakindu.sct.model.sexec,
  org.eclipse.jdt.core,
  org.apache.commons.logging,
@@ -25,4 +25,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.generator.c,
  org.yakindu.sct.generator.c.features,
  org.yakindu.sct.generator.c.types
-Bundle-Vendor: yakindu.org
+Bundle-Vendor: statecharts.org

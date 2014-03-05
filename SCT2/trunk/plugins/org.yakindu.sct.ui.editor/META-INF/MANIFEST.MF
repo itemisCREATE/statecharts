@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu SCT Editor
+Bundle-Name: Yakindu Statechart Tools (SCT) Editor
 Bundle-SymbolicName: org.yakindu.sct.ui.editor;singleton:=true
-Bundle-Version: 2.1.2.qualifier
+Bundle-Version: 2.2.0.qualifier
 Bundle-Activator: org.yakindu.sct.ui.editor.DiagramActivator
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.resources,
@@ -69,5 +69,5 @@ Export-Package: org.yakindu.sct.ui.editor,
  org.yakindu.sct.ui.editor.utils,
  org.yakindu.sct.ui.editor.validation,
  org.yakindu.sct.ui.editor.wizards
-Bundle-Vendor: yakindu.org
+Bundle-Vendor: statecharts.org
 

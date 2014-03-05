@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Generator C Test
+Bundle-Name: Yakindu Statechart Tools (SCT) C Generator Test
 Bundle-SymbolicName: org.yakindu.sct.generator.c.test
-Bundle-Version: 2.1.2.qualifier
-Bundle-Vendor: yakindu.org
+Bundle-Version: 2.2.0.qualifier
+Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Eclipse-BundleShape: dir
 Require-Bundle: org.junit;bundle-version="4.8.2",

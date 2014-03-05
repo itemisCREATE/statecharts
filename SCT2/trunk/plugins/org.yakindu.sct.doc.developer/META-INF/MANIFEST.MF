@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Developer Guide
+Bundle-Name: Yakindu Statechart Tools (SCT) Developer Guide
 Bundle-SymbolicName: org.yakindu.sct.doc.developer
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: yakindu.org
+Bundle-Vendor: statecharts.org

@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Stext Edit
+Bundle-Name: Yakindu Statechart Tools (SCT) SText Edit
 Bundle-SymbolicName: org.yakindu.sct.model.stext.edit;singleton:=true
-Bundle-Version: 2.1.2.qualifier
-Bundle-Vendor: yakindu.org
+Bundle-Version: 2.2.0.qualifier
+Bundle-Vendor: statecharts.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.yakindu.base.types.edit;bundle-version="1.0.0",
  org.yakindu.sct.model.stext;bundle-version="1.0.0",
