@@ -224,28 +224,28 @@
     </extension>
 
 
-	<!-- marker definitions for org.yakindu.base.expressions.Expressions -->
-	<extension
-	        id="expressions.check.fast"
-	        name="Expressions Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.fast"/>
-	    <persistent value="true"/>
-	</extension>
-	<extension
-	        id="expressions.check.normal"
-	        name="Expressions Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.normal"/>
-	    <persistent value="true"/>
-	</extension>
-	<extension
-	        id="expressions.check.expensive"
-	        name="Expressions Problem"
-	        point="org.eclipse.core.resources.markers">
-	    <super type="org.eclipse.xtext.ui.check.expensive"/>
-	    <persistent value="true"/>
-	</extension>
+    <!-- marker definitions for org.yakindu.base.expressions.Expressions -->
+    <extension
+            id="expressions.check.fast"
+            name="Expressions Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.fast"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="expressions.check.normal"
+            name="Expressions Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.normal"/>
+        <persistent value="true"/>
+    </extension>
+    <extension
+            id="expressions.check.expensive"
+            name="Expressions Problem"
+            point="org.eclipse.core.resources.markers">
+        <super type="org.eclipse.xtext.ui.check.expensive"/>
+        <persistent value="true"/>
+    </extension>
 
    <extension
          point="org.eclipse.xtext.builder.participant">

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext JFace Integration (XJI)
 Bundle-SymbolicName: de.itemis.xtext.utils.jface;singleton:=true
-Bundle-Version: 2.1.2.qualifier
+Bundle-Version: 2.2.0.qualifier
 Bundle-Vendor: itemis AG
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.6.0,4.0.0)",

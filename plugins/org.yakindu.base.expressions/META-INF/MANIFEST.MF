@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.yakindu.base.expressions
-Bundle-Vendor: yakindu.org
-Bundle-Version: 2.1.2.qualifier
+Bundle-Name: Yakindu Statechart Tools (SCT) Expressions
+Bundle-Vendor: statecharts.org
+Bundle-Version: 2.2.0.qualifier
 Bundle-SymbolicName: org.yakindu.base.expressions; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,

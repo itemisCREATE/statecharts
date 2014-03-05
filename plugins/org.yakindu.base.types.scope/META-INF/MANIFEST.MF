@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.yakindu.base.types.scope
+Bundle-Name: Yakindu Statechart Tools (SCT) Types Scope
 Bundle-SymbolicName: org.yakindu.base.types.scope;singleton:=true
-Bundle-Version: 2.1.2.qualifier
-Bundle-Vendor: yakindu.org
+Bundle-Version: 2.2.0.qualifier
+Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext;bundle-version="2.0.0",
  org.yakindu.base.types;bundle-version="1.0.0"
