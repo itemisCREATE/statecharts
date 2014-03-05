@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu Statechart Tools (SCT) Base Edit
+Bundle-Name: Yakindu Base Edit
 Bundle-SymbolicName: org.yakindu.base.expressions.edit;singleton:=true
 Bundle-Version: 2.2.0.qualifier
 Bundle-ClassPath: .

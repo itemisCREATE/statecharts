@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu Statechart Tools (SCT) Types Edit
+Bundle-Name: Yakindu Base Types Edit
 Bundle-SymbolicName: org.yakindu.base.types.edit;singleton:=true
 Bundle-Version: 2.2.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: org.yakindu.base.types.provider.TypesEditPlugin$Implementation
-Bundle-Vendor: %providerName
+Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.yakindu.base.base.provider,
