@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Ui
+Bundle-Name: Yakindu Statechart Tools (SCT) Navigator UI
 Bundle-SymbolicName: org.yakindu.sct.ui.navigator;singleton:=true
-Bundle-Version: 2.1.2.qualifier
+Bundle-Version: 2.2.0.qualifier
 Bundle-Activator: org.yakindu.sct.ui.UIActivator
-Bundle-Vendor: yakindu.org
+Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui.navigator;bundle-version="3.5.100",
  org.eclipse.emf.edit.ui;bundle-version="2.7.0",
  de.itemis.xtext.utils.jface;bundle-version="1.0.0",

@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu SCT Help
+Bundle-Name: Yakindu Statechart Tools (SCT) User Help
 Bundle-SymbolicName: org.yakindu.sct.doc.user;singleton:=true
-Bundle-Version: 2.1.2.qualifier
-Bundle-Vendor: yakindu.org
+Bundle-Version: 2.2.0.qualifier
+Bundle-Vendor: statecharts.org

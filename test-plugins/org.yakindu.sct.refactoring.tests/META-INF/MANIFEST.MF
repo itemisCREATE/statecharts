@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Tests for SCT Refactorings
+Bundle-Name: Yakindu Statechart Tools (SCT) Refactoring Tests
 Bundle-SymbolicName: org.yakindu.sct.refactoring.tests;singleton:=true
-Bundle-Version: 2.1.2.qualifier
-Bundle-Vendor: YAKINDU
+Bundle-Version: 2.2.0.qualifier
+Bundle-Vendor: statecharts.org
 Fragment-Host: org.yakindu.sct.refactoring
 Require-Bundle: org.eclipse.core.runtime,
  org.junit,

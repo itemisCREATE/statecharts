@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.sct"
-      label="Yakindu Statechart Tools (SCT) 2"
-      version="2.1.2.qualifier"
-      provider-name="yakindu.org"
+      label="Yakindu Statechart Tools (SCT) Feature"
+      version="2.2.0.qualifier"
+      provider-name="statecharts.org"
       plugin="org.yakindu.sct.doc.user">
 
    <description url="http://www.statecharts.org">

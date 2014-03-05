@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.yakindu.sct.generator.java"
-      label="%featureName"
-      version="2.1.2.qualifier"
-      provider-name="YAKINDU">
+      label="Yakindu Statechart Tools (SCT) Java Generator Feature"
+      version="2.2.0.qualifier"
+      provider-name="statecharts.org"
+      plugin="org.yakindu.sct.doc.user">
 
    <description>
       %description

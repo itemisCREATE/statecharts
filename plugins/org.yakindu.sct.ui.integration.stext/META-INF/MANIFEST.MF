@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Yakindu SCT SText Integration
+Bundle-Name: Yakindu Statechart Tools (SCT) SText Integration
 Bundle-SymbolicName: org.yakindu.sct.ui.integration.stext;singleton:=true
-Bundle-Version: 2.1.2.qualifier
+Bundle-Version: 2.2.0.qualifier
 Bundle-Activator: org.yakindu.sct.ui.integration.stext.ExtensionsActivator
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
@@ -18,4 +18,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.ui.integration.stext,
  org.yakindu.sct.ui.integration.stext.modules,
  org.yakindu.sct.ui.integration.stext.parsers
-Bundle-Vendor: yakindu.org
+Bundle-Vendor: statecharts.org

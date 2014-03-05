@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: yakindu.org
+Bundle-Name: Yakindu Statechart Tools (SCT) Generator Model Tests
 Bundle-SymbolicName: org.yakindu.sct.generator.genmodel.test
-Bundle-Version: 2.1.2.qualifier
+Bundle-Version: 2.2.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.junit;bundle-version="4.8.2",

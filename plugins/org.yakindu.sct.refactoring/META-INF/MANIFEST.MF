@@ -1,10 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Refactoring
+Bundle-Name: Yakindu Statechart Tools (SCT) Refactorings
 Bundle-SymbolicName: org.yakindu.sct.refactoring;singleton:=true
-Bundle-Version: 2.1.2.qualifier
+Bundle-Version: 2.2.0.qualifier
 Bundle-Activator: org.yakindu.sct.refactoring.Activator
-Bundle-Vendor: yakindu.org
+Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.yakindu.sct.model.sgraph;bundle-version="1.0.0",
