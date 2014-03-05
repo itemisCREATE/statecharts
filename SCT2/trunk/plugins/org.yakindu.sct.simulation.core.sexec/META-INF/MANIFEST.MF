@@ -23,4 +23,5 @@ Export-Package: org.yakindu.sct.simulation.core.sexec,
  org.yakindu.sct.simulation.core.sexec.container,
  org.yakindu.sct.simulation.core.sexec.interpreter,
  org.yakindu.sct.simulation.core.sexec.launch
+Bundle-Vendor: statecharts.org
 
