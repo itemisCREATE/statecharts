@@ -384,7 +384,7 @@
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.SGenNewFileWizard"
             icon="icons/GenModel-16.png"
             id="org.yakindu.sct.generator.genmodel.ui.SGenNewFileWizard"
-            name="YAKINDU Statechart Generator Model"
+            name="Code Generator Model"
             project="false">
       </wizard>
       <wizard
@@ -392,7 +392,7 @@
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.XpandGeneratorProjectWizard"
             icon="icons/GenModel-16.png"
             id="org.yakindu.sct.generator.genmodel.ui.XtendGeneratorProjectWizard"
-            name="YAKINDU Xpand Generator Project"
+            name="Xpand Generator Project"
             project="true">
       </wizard>
       <wizard
@@ -400,7 +400,7 @@
             class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.wizard.WorkspaceGeneratorProjectWizard"
             icon="icons/GenModel-16.png"
             id="org.yakindu.sct.generator.genmodel.ui.WorkspaceGeneratorProjectWizard"
-            name="YAKINDU Xtend2/Java Generator Project"
+            name="Xtend2/Java Generator Project"
             project="true">
       </wizard>
    </extension>
