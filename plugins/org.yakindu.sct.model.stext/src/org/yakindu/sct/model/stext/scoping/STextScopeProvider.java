@@ -11,10 +11,7 @@
  */
 package org.yakindu.sct.model.stext.scoping;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -23,13 +20,17 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
+import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
+import org.eclipse.xtext.util.Strings;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
@@ -37,12 +38,12 @@ import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.ITypeSystem;
-import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeSystemUtils;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.stext.scoping.ContextPredicateProvider.EmptyPredicate;
+import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 
@@ -107,14 +108,31 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	@Inject
 	private ContextPredicateProvider predicateProvider;
 
+	/**
+	 * Scoping for types and taking imported namespaces into account e.g. in variable declarations. 
+	 */
+	public IScope scope_TypedElement_type(final EObject context, EReference reference) {
+		Statechart statechart = getStatechart(context);
+		EList<Scope> scopes = statechart.getScopes();
+		IScope scope = retrieveImportScope(context, reference, scopes);
+		
+		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
+		return new FilteringScope(scope, predicate);
+	}
+	
 	public IScope scope_ElementReferenceExpression_reference(final EObject context, EReference reference) {
 		IScope namdScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
+		
+		// XXX: filter on EVENT is too restrictive because also variable definitions should be usable
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
+		
 		// add enum types
-		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements(), Scopes
+		IScope scope = new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements(), Scopes
 				.scopeFor(typeSystemUtils.getEnumerationTypes(typeSystem)).getAllElements()));
+		
+		return scope;
 	}
 
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
@@ -139,7 +157,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		if (element instanceof ComplexType) {
-			scope = Scopes.scopeFor(allFeatures((Type) element), scope);
+			scope = Scopes.scopeFor(((ComplexType)element).getAllFeatures(), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
 
@@ -148,8 +166,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			scope = new FilteringScope(scope, predicate);
 		}
 
-		if (element instanceof Feature) {
-			scope = Scopes.scopeFor(allFeatures(((Feature) element).getType()), scope);
+		if (element instanceof Feature && ((Feature)element).getType() instanceof ComplexType) {
+			scope = Scopes.scopeFor(((ComplexType)((Feature)element).getType()).getAllFeatures(), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
 
@@ -191,6 +209,27 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		return Scopes.scopeFor(scopeCandidates);
 	}
 
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+
+	protected ImportNormalizer createImportedNamespaceResolver(final String namespace, boolean ignoreCase) {
+		if (Strings.isEmpty(namespace))
+			return null;
+		QualifiedName importedNamespace = qualifiedNameConverter.toQualifiedName(namespace);
+		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
+			return null;
+		}
+		boolean hasWildCard = ignoreCase ? importedNamespace.getLastSegment().equalsIgnoreCase("*") : importedNamespace
+				.getLastSegment().equals("*");
+		if (hasWildCard) {
+			if (importedNamespace.getSegmentCount() <= 1)
+				return null;
+			return new ImportNormalizer(importedNamespace.skipLast(1), true, ignoreCase);
+		} else {
+			return new ImportNormalizer(importedNamespace, false, ignoreCase);
+		}
+	}
+
 	/**
 	 * Returns a scope with all toplevel declarations of unnamed scope
 	 */
@@ -210,13 +249,32 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 				scopeCandidates.addAll(scope.getDeclarations());
 			}
 		}
-		return Scopes.scopeFor(scopeCandidates);
+		
+		// Add import scope
+		IScope scope = retrieveImportScope(context, reference, scopes);
+		return Scopes.scopeFor(scopeCandidates, scope);
+	}
+
+	private IScope retrieveImportScope(final EObject context, EReference reference, EList<Scope> scopes) {
+		IScope scope = getDelegate().getScope(context, reference);
+		Iterable<ImportScope> filter = Iterables.filter(scopes, ImportScope.class);
+		if (Iterables.size(filter) > 0) {
+			List<ImportNormalizer> normalizers = Lists.newArrayList();
+			for (ImportScope importScope : filter) {
+				EList<org.yakindu.sct.model.stext.stext.Import> imports = importScope.getImports();
+				for (org.yakindu.sct.model.stext.stext.Import import1 : imports) {
+					normalizers.add(createImportedNamespaceResolver(import1.getImportedNamespace(), false));
+				}
+			}
+			scope = new org.eclipse.xtext.scoping.impl.ImportScope(normalizers, scope, null,
+					reference.getEReferenceType(), false);
+		}
+		return scope;
 	}
 
 	/**
 	 * Returns the {@link Statechart} for a context element
 	 */
-
 	protected Statechart getStatechart(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(
 				context.eResource(), ContextElementAdapter.class);
@@ -228,30 +286,5 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 					SGraphPackage.Literals.STATECHART);
 		}
 	}
-
-	/**
-	 * Returns all features including super features for the given type
-	 */
-	protected List<Feature> allFeatures(Type type) {
-		List<Feature> features = new ArrayList<Feature>();
-		collectFeatures(type, features, new HashSet<Type>());
-		return features;
-	}
-
-	/**
-	 * Performs a simple search to collect all features of the type and all
-	 * super types.
-	 * 
-	 */
-	protected void collectFeatures(Type type, List<Feature> features, Set<Type> visited) {
-		if (type == null || visited.contains(type))
-			return;
-		if (type instanceof ComplexType) {
-			for (Type superType : ((ComplexType) type).getSuperTypes()) {
-				collectFeatures(superType, features, visited);
-			}
-			features.addAll(((ComplexType) type).getFeatures());
-		}
-		visited.add(type);
-	}
 }
+
