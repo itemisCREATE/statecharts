@@ -491,7 +491,7 @@
 					<plugin>
 						<groupId>de.itemis.signing</groupId>
 						<artifactId>itemis-jarsigner</artifactId>
-						<version>0.0.3</version>
+						<version>0.0.4</version>
 						<configuration>
 							<sshKey>${ssh.key}</sshKey>
 						</configuration>
