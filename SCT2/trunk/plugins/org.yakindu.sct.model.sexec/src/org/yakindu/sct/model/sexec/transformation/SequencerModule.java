@@ -1,6 +1,8 @@
 package org.yakindu.sct.model.sexec.transformation;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
@@ -47,6 +49,10 @@ public class SequencerModule extends AbstractGenericModule {
 	
 	public Class<? extends INamingService> bindINamingService() {
 		return DefaultNamingService.class;
+	}
+	
+	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {
+		return ResourceSetBasedResourceDescriptions.class;
 	}
 
 }
