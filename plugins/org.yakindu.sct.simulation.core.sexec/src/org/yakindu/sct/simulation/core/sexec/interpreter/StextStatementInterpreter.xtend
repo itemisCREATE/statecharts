@@ -40,6 +40,7 @@ import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
@@ -72,6 +73,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(AssignmentExpression assignment) {
+		assignToScopeVariable(assignment)
+	}
+	
+	def Object assignToScopeVariable(AssignmentExpression assignment) {
 		var scopeVariable = context.getVariable(assignment.varRef.variable.getFullyQualifiedName.toString)
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
@@ -88,7 +93,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch EObject variable(FeatureCall e) {
-		if(e.feature instanceof VariableDefinition) e.feature else null
+		if(e.feature instanceof VariableDefinition || e.feature instanceof Property) e.feature else null
 	}
 
 	def dispatch EObject variable(AssignmentExpression e) {
