@@ -11,16 +11,14 @@
 package org.yakindu.sct.simulation.core.sexec.container
 
 import com.google.inject.Inject
-import org.eclipse.emf.workspace.util.WorkspaceSynchronizer
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.base.types.ComplexType
 import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.InferredType
-import org.yakindu.sct.commons.WorkspaceClassLoaderFactory
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
@@ -45,6 +43,11 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
+	}
+	
+	def dispatch create composite : new CompositeSlotImpl() transform(ImportScope scope) {
+		composite.name = "imports"
+		scope.declarations.forEach[decl|composite.slots += decl.transform]
 	}
 
 	def dispatch create new CompositeSlotImpl() transform(InternalScope scope) {
@@ -92,15 +95,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	}
 
 	def Object initialValue(InferredType inferredType) {
-		var type = inferredType.type
-		if (type instanceof ComplexType) {
-			var factory = new WorkspaceClassLoaderFactory();
-			var classLoader = factory.createClassLoader(WorkspaceSynchronizer.getFile(type.eResource()).getProject(),
-				null);
-			var clazz = classLoader.loadClass(type.fullyQualifiedName.toString());
-			return clazz.newInstance();
-		} else {
-			return type.defaultValue
-		}
+		return inferredType.type.defaultValue
 	}
+	
 }
