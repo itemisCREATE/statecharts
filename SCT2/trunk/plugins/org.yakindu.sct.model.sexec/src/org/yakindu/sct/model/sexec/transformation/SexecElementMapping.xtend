@@ -52,6 +52,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
+import org.yakindu.sct.model.stext.stext.ImportScope
 
 @Singleton class SexecElementMapping {
 	
@@ -72,9 +73,9 @@ import org.yakindu.base.expressions.expressions.ExpressionsFactory
 		r.name = scope.name
 	}
 	
+	def dispatch Scope create r : stextFactory.createImportScope  createScope(ImportScope scope) {}
+	
 	def dispatch Scope create r : stextFactory.createInternalScope  createScope(Scope scope) {}
-	
-	
 	
 	def Scope create r : sgraph.factory.createScope timeEventScope(ExecutionFlow flow) {
 		flow.scopes.add(r);
