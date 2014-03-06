@@ -443,8 +443,8 @@ class SequenceBuilder {
 		val initSequence = sexec.factory.createSequence
 		initSequence.name = "init"
 		initSequence.comment = "Default init sequence for statechart " + sc.name
-
-		for (VariableDefinition vd : sc.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))) {
+	
+		for (VariableDefinition vd : flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))) {
 			if (vd.effectiveInitialValue != null) {
 				initSequence.steps.add(vd.createInitialization)
 			}

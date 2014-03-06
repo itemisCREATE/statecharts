@@ -20,13 +20,16 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgraph.Vertex
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-
+import org.yakindu.sct.model.stext.stext.ImportScope
+import org.yakindu.sct.model.stext.stext.Import
+import org.yakindu.sct.model.stext.util.ImportResolver
 
 class StructureMapping {
 	 
 	@Inject extension SexecElementMapping mapping
 	@Inject extension StatechartExtensions sct
 	@Inject extension IQualifiedNameProvider
+	@Inject ImportResolver resolver
 	
 	
 	//==========================================================================
@@ -44,11 +47,22 @@ class StructureMapping {
 	
 	
 	/**
-	 *  
+	 *  Interface and internal scopes have declarations
 	 */
-	def Scope mapScope(Scope scope) {
+	def dispatch Scope mapScope(Scope scope) {
 		val _scope = scope.createScope
-		_scope.declarations.addAll(scope.declarations.map(decl | decl.map).filter(e | e != null))
+		_scope.declarations.addAll(scope.declarations.map(decl | decl.map).filterNull)
+		return _scope
+	}
+	
+	/**
+	 * Import scope has imports which needs to be resolved to get all imported variable definitions
+	 */
+	def dispatch Scope mapScope(ImportScope scope) {
+		val _scope = scope.createScope
+		for (Import imp : scope.imports) {
+			_scope.declarations.addAll(resolver.getImportedElementsOfType(imp, VariableDefinition).map(decl | decl.map).filterNull)
+		}
 		return _scope
 	}
 	
