@@ -13,7 +13,6 @@ package org.yakindu.sct.simulation.core.sexec.interpreter
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression
@@ -40,14 +39,11 @@ import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
-import org.yakindu.base.types.Property
-import org.yakindu.base.types.Event
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContextimport org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 
 /**
  * 
@@ -61,6 +57,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	extension IQualifiedNameProvider provider
 	@Inject
 	IOperationMockup operationDelegate
+	@Inject
+	extension ExecutionContextHelper helper
 
 	protected ExecutionContext context
 
@@ -78,7 +76,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def Object executeAssignment(AssignmentExpression assignment) {
-		var scopeVariable = assignment.varRef.variable
+		var scopeVariable = context.resolveVariable(assignment.varRef)
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
 			scopeVariable.value = result
@@ -89,39 +87,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		scopeVariable.value
 	}
 
-	def dispatch ExecutionVariable variable(ElementReferenceExpression e) {
-		if (e.reference instanceof VariableDefinition) {
-			return context.getVariable(e.reference.getFullyQualifiedName.toString)
-		} 
-		else null
-	}
-
-	def dispatch ExecutionVariable variable(FeatureCall e) {
-		if (e.feature instanceof VariableDefinition) {
-			return context.getVariable(e.feature.getFullyQualifiedName.toString)
-		}
-		else if (e.feature instanceof Property) {
-			// get var def where to set this property (TODO: nested properties?)
-			var current = e
-			while (!(current.owner instanceof ElementReferenceExpression))
-				current = current.owner as FeatureCall
-				
-			val varDef = (current.owner as ElementReferenceExpression).reference as VariableDefinition
-			return context.getVariable(varDef.getFullyQualifiedName.append(e.feature.name).toString)
-		}
-		else null
-	}
-
-	def dispatch ExecutionVariable variable(AssignmentExpression e) {
-		return e.varRef.variable as ExecutionVariable
-	}
-
 	def dispatch event(ElementReferenceExpression e) {
 		if(e.reference instanceof EventDefinition ) e.reference else null
 	}
 
 	def dispatch event(FeatureCall e) {
-		if(e.feature instanceof EventDefinition || e.feature instanceof Event) e.feature else null
+		if(e.feature instanceof EventDefinition) e.feature else null
 	}
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
@@ -148,12 +119,17 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
-
-		var variableRef = context.getVariable(expression.reference.getFullyQualifiedName.toString)
+		val fqn = expression.reference.getFullyQualifiedName.toString
+		var variableRef = context.getVariable(fqn)
 		if (variableRef != null) {
 			return variableRef.getValue
 		}
-		return context.getEvent(expression.reference.getFullyQualifiedName.toString).raised
+		val eventRef = context.getEvent(fqn)
+		if (eventRef != null) {
+			return eventRef.raised
+		}
+		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
+		return fqn
 	}
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
@@ -163,10 +139,6 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			};
 		}
 		null;
-	}
-
-	def name(EObject e) {
-		return SimpleAttributeResolver::NAME_RESOLVER.apply(e)
 	}
 
 	def dispatch qname(FeatureCall e) {
@@ -254,7 +226,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		} else if (call.getFeature() instanceof Enumerator) {
 			return call.getFeature();
 		} else {
-			var variableRef = call.variable
+			var variableRef = context.resolveVariable(call)
 			if (variableRef != null) {
 				return variableRef.getValue
 			}

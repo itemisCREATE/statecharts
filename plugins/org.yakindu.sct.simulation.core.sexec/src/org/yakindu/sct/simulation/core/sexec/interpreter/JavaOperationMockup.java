@@ -19,13 +19,10 @@ import org.eclipse.debug.core.ILaunchConfiguration;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
@@ -45,6 +42,9 @@ public class JavaOperationMockup implements IOperationMockup {
 
 	@Inject(optional = true)
 	private ILaunch launch;
+	
+	@Inject
+	private ExecutionContextHelper helper;
 
 	private List<Object> callbacks;
 
@@ -95,14 +95,10 @@ public class JavaOperationMockup implements IOperationMockup {
 		}
 	}
 
-	@Inject
-	private IQualifiedNameProvider fqnProvider;
-
 	@Override
 	public boolean canExecute(FeatureCall call, Object[] parameter) {
-		VariableDefinition definition = unwrap(call);
 		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionVariable variable = context.getVariable(fqnProvider.getFullyQualifiedName(definition).toString());
+		ExecutionVariable variable = helper.resolveVariable(context, call);
 		if (variable != null)
 			return true;
 		return false;
@@ -111,10 +107,9 @@ public class JavaOperationMockup implements IOperationMockup {
 
 	@Override
 	public Object execute(FeatureCall call, Object[] parameter) {
-		VariableDefinition definition = unwrap(call);
 		Operation operation = (Operation) call.getFeature();
 		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionVariable variable = context.getVariable(fqnProvider.getFullyQualifiedName(definition).toString());
+		ExecutionVariable variable = helper.resolveVariable(context, call); 
 		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(operation.getName(), operation
 				.getParameters().size(), operation.getParameters().size(), Collections.singletonList(variable
 				.getValue()));
@@ -124,17 +119,6 @@ public class JavaOperationMockup implements IOperationMockup {
 			ex.printStackTrace();
 			return null;
 		}
-	}
-
-	protected VariableDefinition unwrap(FeatureCall call) {
-		if (call.getOwner() instanceof ElementReferenceExpression) {
-			ElementReferenceExpression refExp = (ElementReferenceExpression) call.getOwner();
-			EObject reference = refExp.getReference();
-			if (reference instanceof VariableDefinition) {
-				return (VariableDefinition) reference;
-			}
-		}
-		return null;
 	}
 
 }
