@@ -202,14 +202,9 @@ class STextDefaultTypeInferrer extends DefaultExpressionsTypeInferrer implements
 			val type = (featureCall.feature as Feature).type
 			if (type != null) {
 				if (type instanceof TypeParameter) {
-					var current = featureCall
-					while (!(current.owner instanceof ElementReferenceExpression))
-						current = current.owner as FeatureCall
-					var typedElement = ((current.owner as ElementReferenceExpression).reference as TypedElement)
-					var index = (typedElement.type as ParameterizedType).parameter.indexOf(type)
-					if (!(index == -1)) {
-						var innerType = typedElement.typeArguments.get(index)
-						return new InferenceResult(new InferredType(innerType))
+					val instanceType = getInstanceTypeForTypeParameter(type as TypeParameter, featureCall)
+					if (instanceType != null) {
+						return new InferenceResult(new InferredType(instanceType))
 					}
 				}
 				return new InferenceResult(new InferredType(type))
@@ -217,6 +212,41 @@ class STextDefaultTypeInferrer extends DefaultExpressionsTypeInferrer implements
 			return new InferenceResult(getVoidType)
 		}
 		return featureCall.feature.doInferType
+	}
+	
+	// TODO: needs to be tested more properly
+	def private Type getInstanceTypeForTypeParameter(TypeParameter type, FeatureCall featureCall) {
+		if (featureCall.owner instanceof FeatureCall) {
+			val current = featureCall.owner as FeatureCall
+			val element = current.feature
+			if (element instanceof TypedElement) {
+				val innerType = getInstanceTypeForTypeParameter(type, element as TypedElement)
+				if (innerType instanceof TypeParameter) {
+					// recursive invocation on outer feature call
+					return getInstanceTypeForTypeParameter(innerType as TypeParameter, current)
+				}
+				else {
+					return innerType
+				}
+			}
+		}
+		else if (featureCall.owner instanceof ElementReferenceExpression) {
+			val element = (featureCall.owner as ElementReferenceExpression).reference
+			if (element instanceof TypedElement) {
+				return getInstanceTypeForTypeParameter(type, element as TypedElement)
+			}
+		}
+	}
+	
+	def private getInstanceTypeForTypeParameter(TypeParameter type, TypedElement instance) {
+		val t = instance.getType
+		if (t instanceof ParameterizedType) {
+			var index = (t as ParameterizedType).parameter.indexOf(type)
+			if (!(index == -1)) {
+				return instance.typeArguments.get(index)
+			}
+		}
+		return null
 	}
 
 	def dispatch InferenceResult doInferType(EventValueReferenceExpression expression) {
