@@ -41,12 +41,13 @@ import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.base.types.Event
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContextimport org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 
 /**
  * 
@@ -73,11 +74,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(AssignmentExpression assignment) {
-		assignToScopeVariable(assignment)
+		executeAssignment(assignment)
 	}
-	
-	def Object assignToScopeVariable(AssignmentExpression assignment) {
-		var scopeVariable = context.getVariable(assignment.varRef.variable.getFullyQualifiedName.toString)
+
+	def Object executeAssignment(AssignmentExpression assignment) {
+		var scopeVariable = assignment.varRef.variable
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
 			scopeVariable.value = result
@@ -88,24 +89,39 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		scopeVariable.value
 	}
 
-	def dispatch EObject variable(ElementReferenceExpression e) {
-		if(e.reference instanceof VariableDefinition) e.reference else null
+	def dispatch ExecutionVariable variable(ElementReferenceExpression e) {
+		if (e.reference instanceof VariableDefinition) {
+			return context.getVariable(e.reference.getFullyQualifiedName.toString)
+		} 
+		else null
 	}
 
-	def dispatch EObject variable(FeatureCall e) {
-		if(e.feature instanceof VariableDefinition || e.feature instanceof Property) e.feature else null
+	def dispatch ExecutionVariable variable(FeatureCall e) {
+		if (e.feature instanceof VariableDefinition) {
+			return context.getVariable(e.feature.getFullyQualifiedName.toString)
+		}
+		else if (e.feature instanceof Property) {
+			// get var def where to set this property (TODO: nested properties?)
+			var current = e
+			while (!(current.owner instanceof ElementReferenceExpression))
+				current = current.owner as FeatureCall
+				
+			val varDef = (current.owner as ElementReferenceExpression).reference as VariableDefinition
+			return context.getVariable(varDef.getFullyQualifiedName.append(e.feature.name).toString)
+		}
+		else null
 	}
 
-	def dispatch EObject variable(AssignmentExpression e) {
-		return e.varRef.variable as EObject
+	def dispatch ExecutionVariable variable(AssignmentExpression e) {
+		return e.varRef.variable as ExecutionVariable
 	}
 
 	def dispatch event(ElementReferenceExpression e) {
-		if(e.reference instanceof EventDefinition) e.reference else null
+		if(e.reference instanceof EventDefinition ) e.reference else null
 	}
 
 	def dispatch event(FeatureCall e) {
-		if(e.feature instanceof EventDefinition) e.feature else null
+		if(e.feature instanceof EventDefinition || e.feature instanceof Event) e.feature else null
 	}
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
@@ -238,11 +254,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		} else if (call.getFeature() instanceof Enumerator) {
 			return call.getFeature();
 		} else {
-			var fqn = call.feature.fqn
-			var variableRef = context.getVariable(fqn)
+			var variableRef = call.variable
 			if (variableRef != null) {
 				return variableRef.getValue
 			}
+			var fqn = call.feature.fqn
 			var event = context.getEvent(fqn)
 			if (event != null)
 				return event.raised
