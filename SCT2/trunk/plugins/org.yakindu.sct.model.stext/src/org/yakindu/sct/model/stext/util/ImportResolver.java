@@ -87,7 +87,6 @@ public class ImportResolver {
 	private ResourceSet buildResourceSet(EObject ctx) {
 		final ResourceSet rset = new ResourceSetImpl();
 		Resource contextRes = ctx.eResource();
-		rset.getResources().add(contextRes);
 		IProject project = WorkspaceSynchronizer.getFile(contextRes).getProject();
 		try {
 			project.accept(new IResourceVisitor() {
@@ -103,6 +102,7 @@ public class ImportResolver {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
+		rset.getResources().add(contextRes);
 
 		return rset;
 	}
