@@ -140,7 +140,9 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 				new UpdateValueStrategy() {
 					@Override
 					protected IStatus doSet(IObservableValue observableValue, Object value) {
-						if (getCompletionProposalAdapter() != null && !getCompletionProposalAdapter().isProposalPopupOpen())
+						if (getCompletionProposalAdapter() == null) {
+							return super.doSet(observableValue, value);
+						} else if (!getCompletionProposalAdapter().isProposalPopupOpen())
 							return super.doSet(observableValue, value);
 						return Status.OK_STATUS;
 					}
