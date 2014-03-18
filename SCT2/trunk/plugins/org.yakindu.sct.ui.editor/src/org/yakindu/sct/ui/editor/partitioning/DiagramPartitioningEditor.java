@@ -123,6 +123,10 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 	@Override
 	protected void configureGraphicalViewer() {
 		super.configureGraphicalViewer();
+		configureContextMenu();
+	}
+
+	protected void configureContextMenu() {
 		GraphicalViewer graphicalViewer = getGraphicalViewer();
 		ContextMenuProvider provider = new FilteringDiagramContextMenuProvider(this, graphicalViewer);
 		graphicalViewer.setContextMenu(provider);
@@ -207,15 +211,15 @@ public abstract class DiagramPartitioningEditor extends DiagramDocumentEditor im
 		}
 	}
 
-	private static final class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
+	public static class FilteringDiagramContextMenuProvider extends DiagramContextMenuProvider {
 		// Default context menu items that should be suppressed
-		String[] exclude = new String[] { "addNoteLinkAction", "properties",
+		protected String[] exclude = new String[] { "addNoteLinkAction", "properties",
 				"org.eclipse.mylyn.context.ui.commands.attachment.retrieveContext",
 				"org.eclipse.mylyn.resources.ui.ui.interest.remove.element", "formatMenu", "filtersMenu", "addGroup",
 				"navigateGroup", "toolbarArrangeAllAction", "selectMenu", "diagramAddMenu", "navigateMenu",
 				"viewGroup", "viewMenu" };
 
-		private FilteringDiagramContextMenuProvider(IWorkbenchPart part, EditPartViewer viewer) {
+		protected FilteringDiagramContextMenuProvider(IWorkbenchPart part, EditPartViewer viewer) {
 			super(part, viewer);
 		}
 
