@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -299,6 +300,14 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SGraphPackage.IMPORT_DECLARATION: {
+				ImportDeclaration importDeclaration = (ImportDeclaration)theEObject;
+				T result = caseImportDeclaration(importDeclaration);
+				if (result == null) result = caseDeclaration(importDeclaration);
+				if (result == null) result = caseNamedElement(importDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -465,6 +474,21 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseImport(Import object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Import Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Import Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseImportDeclaration(ImportDeclaration object) {
 		return null;
 	}
 

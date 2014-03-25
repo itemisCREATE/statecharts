@@ -1331,6 +1331,43 @@ public interface SGraphPackage extends EPackage {
 	int IMPORT_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ImportDeclarationImpl <em>Import Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgraph.impl.ImportDeclarationImpl
+	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getImportDeclaration()
+	 * @generated
+	 */
+	int IMPORT_DECLARATION = 25;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__NAME = DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Declaration</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__DECLARATION = DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Import Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1338,7 +1375,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 25;
+	int ENTRY_KIND = 26;
 
 
 	/**
@@ -1349,7 +1386,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 26;
+	int CHOICE_KIND = 27;
 
 
 	/**
@@ -1617,6 +1654,27 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getImport_ImportedNamespace();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.ImportDeclaration <em>Import Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Import Declaration</em>'.
+	 * @see org.yakindu.sct.model.sgraph.ImportDeclaration
+	 * @generated
+	 */
+	EClass getImportDeclaration();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.model.sgraph.ImportDeclaration#getDeclaration <em>Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Declaration</em>'.
+	 * @see org.yakindu.sct.model.sgraph.ImportDeclaration#getDeclaration()
+	 * @see #getImportDeclaration()
+	 * @generated
+	 */
+	EReference getImportDeclaration_Declaration();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
@@ -2191,6 +2249,24 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ImportDeclarationImpl <em>Import Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgraph.impl.ImportDeclarationImpl
+		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getImportDeclaration()
+		 * @generated
+		 */
+		EClass IMPORT_DECLARATION = eINSTANCE.getImportDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Declaration</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IMPORT_DECLARATION__DECLARATION = eINSTANCE.getImportDeclaration_Declaration();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.VariableImpl <em>Variable</em>}' class.

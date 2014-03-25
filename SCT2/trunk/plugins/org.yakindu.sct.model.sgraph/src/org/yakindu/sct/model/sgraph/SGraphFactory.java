@@ -154,6 +154,15 @@ public interface SGraphFactory extends EFactory {
 	Import createImport();
 
 	/**
+	 * Returns a new object of class '<em>Import Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Import Declaration</em>'.
+	 * @generated
+	 */
+	ImportDeclaration createImportDeclaration();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

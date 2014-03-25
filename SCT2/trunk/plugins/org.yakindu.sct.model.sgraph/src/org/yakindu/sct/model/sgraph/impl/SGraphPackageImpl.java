@@ -28,6 +28,7 @@ import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Import;
+import org.yakindu.sct.model.sgraph.ImportDeclaration;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
@@ -123,6 +124,13 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	private EClass importEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass importDeclarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -544,6 +552,24 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getImportDeclaration() {
+		return importDeclarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getImportDeclaration_Declaration() {
+		return (EReference)importDeclarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getVariable() {
 		return variableEClass;
 	}
@@ -935,6 +961,9 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		importEClass = createEClass(IMPORT);
 		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
+		importDeclarationEClass = createEClass(IMPORT_DECLARATION);
+		createEReference(importDeclarationEClass, IMPORT_DECLARATION__DECLARATION);
+
 		// Create enums
 		entryKindEEnum = createEEnum(ENTRY_KIND);
 		choiceKindEEnum = createEEnum(CHOICE_KIND);
@@ -998,6 +1027,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		stateEClass.getESuperTypes().add(this.getCompositeElement());
 		stateEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
 		regularStateEClass.getESuperTypes().add(this.getVertex());
+		importDeclarationEClass.getESuperTypes().add(this.getDeclaration());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1079,6 +1109,9 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		initEClass(importEClass, Import.class, "Import", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(importDeclarationEClass, ImportDeclaration.class, "ImportDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getImportDeclaration_Declaration(), this.getDeclaration(), null, "declaration", null, 0, 1, ImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(entryKindEEnum, EntryKind.class, "EntryKind");

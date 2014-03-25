@@ -16,6 +16,7 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.sct.model.sgraph.*;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -207,6 +208,10 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createImportAdapter();
 			}
 			@Override
+			public Adapter caseImportDeclaration(ImportDeclaration object) {
+				return createImportDeclarationAdapter();
+			}
+			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
@@ -385,6 +390,20 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createImportAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.ImportDeclaration <em>Import Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgraph.ImportDeclaration
+	 * @generated
+	 */
+	public Adapter createImportDeclarationAdapter() {
 		return null;
 	}
 
