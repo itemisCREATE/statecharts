@@ -29,6 +29,7 @@ import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.sct.model.sgraph.ImportDeclaration
 
 class SequenceBuilder {
 
@@ -444,7 +445,10 @@ class SequenceBuilder {
 		initSequence.name = "init"
 		initSequence.comment = "Default init sequence for statechart " + sc.name
 	
-		for (VariableDefinition vd : flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))) {
+		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))
+		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(d|d.declaration).filter(typeof(VariableDefinition))
+	
+		for (VariableDefinition vd : statechartVariables+importedVariables) {
 			if (vd.effectiveInitialValue != null) {
 				initSequence.steps.add(vd.createInitialization)
 			}

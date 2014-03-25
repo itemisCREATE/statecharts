@@ -10,6 +10,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Feature
+import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Declaration
@@ -17,6 +18,8 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.sct.model.stext.stext.ImportScope
+import org.yakindu.sct.model.sgraph.ImportDeclaration
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -85,21 +88,30 @@ class ModelSequencer implements IModelSequencer {
 	
 	def retargetDeclRefs(ExecutionFlow flow) {
 		val allContent = EcoreUtil2::eAllContentsAsList(flow)
-		val declared = allContent.filter(e | e instanceof EventDefinition || e instanceof VariableDefinition || e instanceof OperationDefinition).toSet
+		val declared = flow.scopes.map[
+			if (it instanceof ImportScope) {
+				declarations.filter(ImportDeclaration).map[declaration].toList
+			} else { 
+				declarations
+			}
+		].flatten.toSet
 		
 		allContent.filter(typeof(ElementReferenceExpression)).forEach( ere | ere.retarget(declared) )
 		allContent.filter(typeof(FeatureCall)).forEach( call|call.retarget(declared))
 	}
 	
 	
-	def retarget(ElementReferenceExpression ere, Collection<EObject> declared) {
+	def retarget(ElementReferenceExpression ere, Collection<Declaration> declared) {
 		if (ere.reference != null && ! declared.contains(ere.reference) ) {
-			val r = ere.reference.replaced 
-			if (r != null) ere.reference = r
+			// elements within externally declared packages should not be replaced but referenced
+			if (EcoreUtil2.getContainerOfType(ere.reference, Package) == null) {
+				val r = ere.reference.replaced 
+				if (r != null) ere.reference = r
+			}
 		}
 	}
 
-	def retarget(FeatureCall call, Collection<EObject> declared) {
+	def retarget(FeatureCall call, Collection<Declaration> declared) {
 		if (call.feature != null && ! declared.contains(call.feature) ) {
 			val r = call.feature.replaced 
 			if ( r != null ) call.feature = r as Feature	
@@ -127,11 +139,11 @@ class ModelSequencer implements IModelSequencer {
 	}
 	
 	def dispatch replaced(EventDefinition ed) {
-		ed.create	
+		ed.create
 	}
 
 	def dispatch replaced(TimeEvent ed) {
-		ed	
+		ed
 	}
 	
 		 	
