@@ -3,12 +3,16 @@ package org.yakindu.sct.model.sexec.transformation
 import com.google.inject.Inject
 import com.google.inject.Singleton
 import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.Strings
 import org.yakindu.base.base.NamedElement
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.Expression
+import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
@@ -42,6 +46,7 @@ import org.yakindu.sct.model.sgraph.Trigger
 import org.yakindu.sct.model.stext.stext.AlwaysEvent
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventSpec
+import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.LocalReaction
 import org.yakindu.sct.model.stext.stext.OperationDefinition
@@ -50,9 +55,6 @@ import org.yakindu.sct.model.stext.stext.StextFactory
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 import org.yakindu.sct.model.stext.stext.TimeEventType
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.expressions.expressions.Expression
-import org.yakindu.base.expressions.expressions.ExpressionsFactory
-import org.yakindu.sct.model.stext.stext.ImportScope
 
 @Singleton class SexecElementMapping {
 	
@@ -254,8 +256,15 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 
 	var factory = ExpressionsFactory.eINSTANCE
 	def dispatch Expression raised(RegularEventSpec e) {
+		
+		val event = e.resolveRegularEventSpec(e.eContainer)
+		// for externally defined events, return the original feature call
+		if (EcoreUtil2.getContainerOfType(event, Package) != null && e.event instanceof FeatureCall) {
+			return EcoreUtil.copy(e.event) as FeatureCall
+		}
+		
 		val r = factory.createElementReferenceExpression
-		r.reference = e.resolveRegularEventSpec(e.eContainer)
+		r.reference = event
 		return r
 	} 	 
 	
@@ -263,7 +272,7 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 	def dispatch NamedElement resolveRegularEventSpec(RegularEventSpec re, Object context) { if ( re.event != null ) re.event.resolveRegularEventSpec(re) }
 	def dispatch NamedElement resolveRegularEventSpec(FeatureCall fc, Object context) { if (fc.feature != null) fc.feature.resolveRegularEventSpec(fc) }
 	def dispatch NamedElement resolveRegularEventSpec(ElementReferenceExpression ter, Object context) { if (ter.reference != null) ter.reference.resolveRegularEventSpec(ter) }
-	def dispatch NamedElement resolveRegularEventSpec(EventDefinition ed, Object context) { ed.create }
+	def dispatch NamedElement resolveRegularEventSpec(EventDefinition ed, Object context) { ed }
 	
 	
 	def dispatch Expression raised(TimeEventSpec e) {

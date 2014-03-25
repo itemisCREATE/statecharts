@@ -23,6 +23,7 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.Import
 import org.yakindu.sct.model.stext.util.ImportResolver
+import org.yakindu.sct.model.sgraph.SGraphFactory
 
 class StructureMapping {
 	 
@@ -61,7 +62,13 @@ class StructureMapping {
 	def dispatch Scope mapScope(ImportScope scope) {
 		val _scope = scope.createScope
 		for (Import imp : scope.imports) {
-			_scope.declarations.addAll(resolver.getImportedElementsOfType(imp, VariableDefinition).map(decl | decl.map).filterNull)
+			val decls = resolver.getImportedElementsOfType(imp, VariableDefinition)
+			for (Declaration decl : decls) {
+				val importDecl = SGraphFactory.eINSTANCE.createImportDeclaration
+				importDecl.name = decl.name
+				importDecl.declaration = decl
+				_scope.declarations.add(importDecl)
+			}
 		}
 		return _scope
 	}
