@@ -99,7 +99,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 			}
 		}
 		// check if a Diagram is available and open the editor for the
-		// coressponding diagram
+		// corresponding diagram
 		Diagram diagram = DiagramPartitioningUtil.getDiagramContaining(semanticObject);
 		if (diagram != null) {
 			if (URIConverter.INSTANCE.exists(semanticObject.eResource().getURI(), null)) {
@@ -109,6 +109,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 				Collection<Diagram> contents = EcoreUtil.getObjectsByType(sharedDomainResource.getContents(),
 						NotationPackage.Literals.DIAGRAM);
 				for (Diagram diag : contents) {
+					// TODO consider using resource uri as equality constraint
 					if (EcoreUtil.equals(diag.getElement(), diagram.getElement())) {
 						return DiagramPartitioningUtil.openEditor((Diagram) diag);
 					}
