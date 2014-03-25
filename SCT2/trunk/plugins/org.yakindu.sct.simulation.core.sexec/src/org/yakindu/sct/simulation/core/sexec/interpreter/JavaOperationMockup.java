@@ -25,7 +25,7 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -98,7 +98,7 @@ public class JavaOperationMockup implements IOperationMockup {
 	@Override
 	public boolean canExecute(FeatureCall call, Object[] parameter) {
 		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionVariable variable = helper.resolveVariable(context, call);
+		ExecutionSlot variable = helper.resolveVariable(context, call);
 		if (variable != null)
 			return true;
 		return false;
@@ -109,7 +109,7 @@ public class JavaOperationMockup implements IOperationMockup {
 	public Object execute(FeatureCall call, Object[] parameter) {
 		Operation operation = (Operation) call.getFeature();
 		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionVariable variable = helper.resolveVariable(context, call); 
+		ExecutionSlot variable = helper.resolveVariable(context, call); 
 		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(operation.getName(), operation
 				.getParameters().size(), operation.getParameters().size(), Collections.singletonList(variable
 				.getValue()));
