@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.InferredType
+import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Scope
@@ -29,6 +30,12 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
+import org.yakindu.sct.model.sgraph.Declaration
+import java.util.List
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
+import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
+import org.eclipse.xtext.EcoreUtil2
+import org.yakindu.sct.model.sgraph.ImportDeclaration
 
 /**
  * 
@@ -47,7 +54,35 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	
 	def dispatch create composite : new CompositeSlotImpl() transform(ImportScope scope) {
 		composite.name = "imports"
-		scope.declarations.forEach[decl|composite.slots += decl.transform]
+		// retrieve namespaces from variable names and create corresponding composite slots
+		for (Declaration decl : scope.declarations.filter(ImportDeclaration).map[declaration]) {
+			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
+			if (pkg != null) {
+				val namespace = pkg.name
+				val declName = decl.name
+				val slot = composite.slots.getSlotFor(namespace)
+				val declarationSlot = decl.transform
+				declarationSlot.setFqName(namespace + "." + declName)
+				declarationSlot.setName(declName)
+				slot.slots += declarationSlot
+			}
+			else {
+				composite.slots += decl.transform
+			}
+		}
+	}
+	
+	def getSlotFor(List<ExecutionSlot> slots, String name) {
+		val existingSlot = slots.findFirst[it.name == name]
+		if (existingSlot != null && existingSlot instanceof CompositeSlot) {
+			existingSlot as CompositeSlot
+		}
+		else {
+			val newSlot = new CompositeSlotImpl()
+			newSlot.name = name
+			slots += newSlot
+			newSlot
+		}
 	}
 
 	def dispatch create new CompositeSlotImpl() transform(InternalScope scope) {

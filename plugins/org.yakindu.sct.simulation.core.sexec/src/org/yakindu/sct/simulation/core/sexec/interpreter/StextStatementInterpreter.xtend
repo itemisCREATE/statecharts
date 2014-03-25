@@ -230,11 +230,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			if (variableRef != null) {
 				return variableRef.getValue
 			}
-			var fqn = call.feature.fqn
-			var event = context.getEvent(fqn)
+			var event = context.resolveEvent(call)
 			if (event != null)
 				return event.raised
-			println("No feature found for " + fqn + " -> returning null")
+			println("No feature found for " + call.feature.fqn + " -> returning null")
 			return null;
 
 		}
