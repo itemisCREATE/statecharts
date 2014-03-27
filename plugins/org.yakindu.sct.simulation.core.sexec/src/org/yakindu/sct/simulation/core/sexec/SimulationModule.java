@@ -11,6 +11,8 @@
 package org.yakindu.sct.simulation.core.sexec;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.DefaultTypeSystem;
 import org.yakindu.base.types.ITypeSystem;
@@ -105,6 +107,10 @@ public class SimulationModule extends AbstractGenericModule {
 
 	public Class<? extends ISTextTypeInferrer> bindISTextTypeInferrer() {
 		return STextDefaultTypeInferrer.class;
+	}
+	
+	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {
+		return ResourceSetBasedResourceDescriptions.class;
 	}
 
 }
