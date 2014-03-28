@@ -72,20 +72,6 @@ class ExecutionContextHelper {
 		else null
 	}
 	
-	def private ExecutionSlot getSlot(CompositeSlot root, String name) {
-		for (ExecutionSlot slot : root.slots) {
-			if (slot.fqName == name) {
-				return slot
-			}
-			if (slot instanceof CompositeSlot) {
-				val foundSlot = (slot as CompositeSlot).getSlot(name)
-				if (foundSlot != null)
-					return foundSlot
-			}
-		}
-		return null
-	}
-
 	def dispatch ExecutionSlot resolveVariable(ExecutionContext context, AssignmentExpression e) {
 		return context.resolveVariable(e.varRef)
 	}
