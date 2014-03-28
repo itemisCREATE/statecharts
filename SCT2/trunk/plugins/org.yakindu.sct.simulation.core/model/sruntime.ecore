@@ -48,4 +48,7 @@
     <eLiterals name="OUT" value="2"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="JavaObject" instanceClassName="java.lang.Object"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceSlot" eSuperTypes="#//CompositeSlot">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//CompositeSlot"/>
+  </eClassifiers>
 </ecore:EPackage>

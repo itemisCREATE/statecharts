@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.yakindu.base.types.InferredType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.TypesFactory;
+import org.yakindu.sct.simulation.core.sruntime.*;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.EventDirection;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
@@ -73,6 +74,7 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 			case SRuntimePackage.EXECUTION_EVENT: return createExecutionEvent();
 			case SRuntimePackage.EXECUTION_VARIABLE: return createExecutionVariable();
 			case SRuntimePackage.COMPOSITE_SLOT: return createCompositeSlot();
+			case SRuntimePackage.REFERENCE_SLOT: return createReferenceSlot();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -148,6 +150,16 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 	public CompositeSlot createCompositeSlot() {
 		CompositeSlotImpl compositeSlot = new CompositeSlotImpl();
 		return compositeSlot;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ReferenceSlot createReferenceSlot() {
+		ReferenceSlotImpl referenceSlot = new ReferenceSlotImpl();
+		return referenceSlot;
 	}
 
 	/**

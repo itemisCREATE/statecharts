@@ -116,6 +116,15 @@ public class SRuntimeSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case SRuntimePackage.REFERENCE_SLOT: {
+				ReferenceSlot referenceSlot = (ReferenceSlot)theEObject;
+				T result = caseReferenceSlot(referenceSlot);
+				if (result == null) result = caseCompositeSlot(referenceSlot);
+				if (result == null) result = caseExecutionSlot(referenceSlot);
+				if (result == null) result = caseNamedElement(referenceSlot);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -192,6 +201,21 @@ public class SRuntimeSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseCompositeSlot(CompositeSlot object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Reference Slot</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Reference Slot</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReferenceSlot(ReferenceSlot object) {
 		return null;
 	}
 
