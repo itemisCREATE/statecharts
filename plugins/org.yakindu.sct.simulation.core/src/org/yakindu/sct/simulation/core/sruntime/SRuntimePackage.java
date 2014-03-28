@@ -437,7 +437,7 @@ public interface SRuntimePackage extends EPackage {
 	 * The meta object id for the '<em>Inferred Type</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.ITypeSystem.InferredType
+	 * @see org.yakindu.base.types.InferredType
 	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getInferredType()
 	 * @generated
 	 */
@@ -637,12 +637,12 @@ public interface SRuntimePackage extends EPackage {
 	EEnum getEventDirection();
 
 	/**
-	 * Returns the meta object for data type '{@link org.yakindu.base.types.ITypeSystem.InferredType <em>Inferred Type</em>}'.
+	 * Returns the meta object for data type '{@link org.yakindu.base.types.InferredType <em>Inferred Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for data type '<em>Inferred Type</em>'.
-	 * @see org.yakindu.base.types.ITypeSystem.InferredType
-	 * @model instanceClass="org.yakindu.base.types.ITypeSystem.InferredType"
+	 * @see org.yakindu.base.types.InferredType
+	 * @model instanceClass="org.yakindu.base.types.InferredType"
 	 * @generated
 	 */
 	EDataType getInferredType();
@@ -832,7 +832,7 @@ public interface SRuntimePackage extends EPackage {
 		 * The meta object literal for the '<em>Inferred Type</em>' data type.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.ITypeSystem.InferredType
+		 * @see org.yakindu.base.types.InferredType
 		 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getInferredType()
 		 * @generated
 		 */

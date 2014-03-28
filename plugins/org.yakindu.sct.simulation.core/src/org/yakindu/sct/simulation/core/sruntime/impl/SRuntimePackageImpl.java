@@ -447,6 +447,11 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		addEOperation(executionContextEClass, this.getExecutionVariable(), "getAllVariables", 0, -1, IS_UNIQUE, IS_ORDERED);
 
+		addEOperation(executionContextEClass, this.getExecutionSlot(), "getAllSlots", 0, -1, IS_UNIQUE, IS_ORDERED);
+
+		op = addEOperation(executionContextEClass, this.getExecutionSlot(), "getSlot", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "qualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(executionEventEClass, ExecutionEvent.class, "ExecutionEvent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getExecutionEvent_Raised(), ecorePackage.getEBoolean(), "raised", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionEvent_Scheduled(), ecorePackage.getEBoolean(), "scheduled", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
