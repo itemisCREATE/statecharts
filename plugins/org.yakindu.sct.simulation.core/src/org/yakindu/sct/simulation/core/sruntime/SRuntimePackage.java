@@ -424,6 +424,79 @@ public interface SRuntimePackage extends EPackage {
 	int COMPOSITE_SLOT_FEATURE_COUNT = EXECUTION_SLOT_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ReferenceSlotImpl <em>Reference Slot</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.simulation.core.sruntime.impl.ReferenceSlotImpl
+	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getReferenceSlot()
+	 * @generated
+	 */
+	int REFERENCE_SLOT = 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__NAME = COMPOSITE_SLOT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__TYPE = COMPOSITE_SLOT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__VALUE = COMPOSITE_SLOT__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__FQ_NAME = COMPOSITE_SLOT__FQ_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__SLOTS = COMPOSITE_SLOT__SLOTS;
+
+	/**
+	 * The feature id for the '<em><b>Reference</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__REFERENCE = COMPOSITE_SLOT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Reference Slot</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT_FEATURE_COUNT = COMPOSITE_SLOT_FEATURE_COUNT + 1;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.simulation.core.sruntime.EventDirection <em>Event Direction</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -431,7 +504,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getEventDirection()
 	 * @generated
 	 */
-	int EVENT_DIRECTION = 5;
+	int EVENT_DIRECTION = 6;
 
 	/**
 	 * The meta object id for the '<em>Inferred Type</em>' data type.
@@ -441,7 +514,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getInferredType()
 	 * @generated
 	 */
-	int INFERRED_TYPE = 6;
+	int INFERRED_TYPE = 7;
 
 
 	/**
@@ -452,7 +525,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getJavaObject()
 	 * @generated
 	 */
-	int JAVA_OBJECT = 7;
+	int JAVA_OBJECT = 8;
 
 
 	/**
@@ -625,6 +698,27 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getCompositeSlot_Slots();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.simulation.core.sruntime.ReferenceSlot <em>Reference Slot</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Reference Slot</em>'.
+	 * @see org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
+	 * @generated
+	 */
+	EClass getReferenceSlot();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.simulation.core.sruntime.ReferenceSlot#getReference <em>Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Reference</em>'.
+	 * @see org.yakindu.sct.simulation.core.sruntime.ReferenceSlot#getReference()
+	 * @see #getReferenceSlot()
+	 * @generated
+	 */
+	EReference getReferenceSlot_Reference();
 
 	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.simulation.core.sruntime.EventDirection <em>Event Direction</em>}'.
@@ -817,6 +911,24 @@ public interface SRuntimePackage extends EPackage {
 		 * @generated
 		 */
 		EReference COMPOSITE_SLOT__SLOTS = eINSTANCE.getCompositeSlot_Slots();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ReferenceSlotImpl <em>Reference Slot</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.simulation.core.sruntime.impl.ReferenceSlotImpl
+		 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getReferenceSlot()
+		 * @generated
+		 */
+		EClass REFERENCE_SLOT = eINSTANCE.getReferenceSlot();
+
+		/**
+		 * The meta object literal for the '<em><b>Reference</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference REFERENCE_SLOT__REFERENCE = eINSTANCE.getReferenceSlot_Reference();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.simulation.core.sruntime.EventDirection <em>Event Direction</em>}' enum.

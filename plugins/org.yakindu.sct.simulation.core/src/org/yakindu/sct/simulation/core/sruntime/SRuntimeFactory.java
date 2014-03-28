@@ -66,6 +66,15 @@ public interface SRuntimeFactory extends EFactory {
 	CompositeSlot createCompositeSlot();
 
 	/**
+	 * Returns a new object of class '<em>Reference Slot</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Reference Slot</em>'.
+	 * @generated
+	 */
+	ReferenceSlot createReferenceSlot();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

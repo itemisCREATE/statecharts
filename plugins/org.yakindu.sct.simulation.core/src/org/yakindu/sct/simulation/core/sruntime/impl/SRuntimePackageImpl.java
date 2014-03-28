@@ -27,6 +27,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
@@ -71,6 +72,13 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * @generated
 	 */
 	private EClass compositeSlotEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass referenceSlotEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -306,6 +314,24 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getReferenceSlot() {
+		return referenceSlotEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getReferenceSlot_Reference() {
+		return (EReference)referenceSlotEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getEventDirection() {
 		return eventDirectionEEnum;
 	}
@@ -377,6 +403,9 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		compositeSlotEClass = createEClass(COMPOSITE_SLOT);
 		createEReference(compositeSlotEClass, COMPOSITE_SLOT__SLOTS);
 
+		referenceSlotEClass = createEClass(REFERENCE_SLOT);
+		createEReference(referenceSlotEClass, REFERENCE_SLOT__REFERENCE);
+
 		// Create enums
 		eventDirectionEEnum = createEEnum(EVENT_DIRECTION);
 
@@ -423,6 +452,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		executionSlotEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		executionVariableEClass.getESuperTypes().add(this.getExecutionSlot());
 		compositeSlotEClass.getESuperTypes().add(this.getExecutionSlot());
+		referenceSlotEClass.getESuperTypes().add(this.getCompositeSlot());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(executionContextEClass, ExecutionContext.class, "ExecutionContext", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -466,6 +496,9 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		initEClass(compositeSlotEClass, CompositeSlot.class, "CompositeSlot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getCompositeSlot_Slots(), this.getExecutionSlot(), null, "slots", null, 0, -1, CompositeSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(referenceSlotEClass, ReferenceSlot.class, "ReferenceSlot", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReferenceSlot_Reference(), this.getCompositeSlot(), null, "reference", null, 0, 1, ReferenceSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(eventDirectionEEnum, EventDirection.class, "EventDirection");

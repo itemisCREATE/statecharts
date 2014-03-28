@@ -98,6 +98,10 @@ public class SRuntimeAdapterFactory extends AdapterFactoryImpl {
 				return createCompositeSlotAdapter();
 			}
 			@Override
+			public Adapter caseReferenceSlot(ReferenceSlot object) {
+				return createReferenceSlotAdapter();
+			}
+			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
@@ -188,6 +192,20 @@ public class SRuntimeAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createCompositeSlotAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.simulation.core.sruntime.ReferenceSlot <em>Reference Slot</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.simulation.core.sruntime.ReferenceSlot
+	 * @generated
+	 */
+	public Adapter createReferenceSlotAdapter() {
 		return null;
 	}
 
