@@ -56,7 +56,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	@Inject
 	extension IQualifiedNameProvider provider
 	@Inject
-	IOperationMockup operationDelegate
+	protected IOperationMockup operationDelegate
 	@Inject
 	extension ExecutionContextHelper helper
 
@@ -129,7 +129,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			return eventRef.raised
 		}
 		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
-		return fqn
+		return context.getSlot(fqn)
 	}
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
@@ -218,6 +218,10 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(FeatureCall call) {
+		executeFeatureCall(call)
+	}
+	
+	def executeFeatureCall(FeatureCall call) {
 		if (call.operationCall) {
 			var parameter = call.args.map(it|execute)
 			if (operationDelegate.canExecute(call, parameter)) {
@@ -235,8 +239,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return event.raised
 			println("No feature found for " + call.feature.fqn + " -> returning null")
 			return null;
-
 		}
+		
 	}
 
 	def String fqn(EObject obj) {

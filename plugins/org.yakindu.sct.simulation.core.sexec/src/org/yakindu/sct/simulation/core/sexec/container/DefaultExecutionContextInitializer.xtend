@@ -52,7 +52,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		flow.scopes.forEach[context.slots += transform]
 	}
 	
-	def dispatch create composite : new CompositeSlotImpl() transform(ImportScope scope) {
+	def dispatch ExecutionSlot create composite : new CompositeSlotImpl() transform(ImportScope scope) {
 		composite.name = "imports"
 		// retrieve namespaces from variable names and create corresponding composite slots
 		for (Declaration decl : scope.declarations.filter(ImportDeclaration).map[declaration]) {
@@ -85,29 +85,29 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		}
 	}
 
-	def dispatch create new CompositeSlotImpl() transform(InternalScope scope) {
+	def dispatch ExecutionSlot create new CompositeSlotImpl() transform(InternalScope scope) {
 		it.name = "internal"
 		scope.declarations.forEach[decl|it.slots += decl.transform]
 	}
 
-	def dispatch create new CompositeSlotImpl() transform(Scope scope) {
+	def dispatch ExecutionSlot create new CompositeSlotImpl() transform(Scope scope) {
 		it.name = "time events"
 		scope.declarations.forEach[decl|it.slots += decl.transform]
 	}
 
-	def dispatch create new CompositeSlotImpl() transform(InterfaceScope scope) {
+	def dispatch ExecutionSlot create new CompositeSlotImpl() transform(InterfaceScope scope) {
 		if(scope.name != null) it.name = scope.name else it.name = "default"
 		scope.declarations.forEach[decl|it.slots += decl.transform]
 	}
 
-	def dispatch create new ExecutionVariableImpl() transform(VariableDefinition variable) {
+	def dispatch ExecutionSlot create new ExecutionVariableImpl() transform(VariableDefinition variable) {
 		it.name = variable.fullyQualifiedName.lastSegment
 		it.fqName = variable.fullyQualifiedName.toString
 		it.type = variable.inferType.type
 		it.value = it.type.initialValue
 	}
 
-	def dispatch create new ExecutionEventImpl() transform(EventDefinition event) {
+	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(EventDefinition event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
 		it.type = event.inferType.type
@@ -115,14 +115,14 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.direction = EventDirection.get(event.direction.value)
 	}
 
-	def dispatch create new ExecutionVariableImpl() transform(OperationDefinition op) {
+	def dispatch ExecutionSlot create new ExecutionVariableImpl() transform(OperationDefinition op) {
 		it.name = op.fullyQualifiedName.lastSegment
 		it.fqName = op.fullyQualifiedName.toString
 		it.type = new InferredType(if(op.type != null) op.type else voidType)
 		it.value = it.type.initialValue
 	}
 
-	def dispatch create new ExecutionEventImpl() transform(TimeEvent event) {
+	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(TimeEvent event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
 		it.type = new InferredType(integerType)
