@@ -12,6 +12,9 @@ package org.yakindu.sct.simulation.ui.view.actions;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
+import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot;
 import org.yakindu.sct.simulation.ui.SimulationImages;
 
 /**
@@ -32,7 +35,18 @@ public class ExpandAllAction extends Action {
 
 	public void run() {
 		if (fViewer != null) {
-			fViewer.expandAll();
+			// do not expand ReferenceSlot which may cause circular expansions resulting in stack overflows
+			if (fViewer.getInput() instanceof ExecutionContext) {
+				ExecutionContext executionContext = (ExecutionContext) fViewer.getInput();
+				for (ExecutionSlot slot : executionContext.getAllSlots()) {
+					if (!(slot instanceof ReferenceSlot)) {
+						fViewer.expandToLevel(slot, 1);
+					}
+				}
+			}
+			else {
+				fViewer.expandAll();
+			}
 		}
 	}
 }
