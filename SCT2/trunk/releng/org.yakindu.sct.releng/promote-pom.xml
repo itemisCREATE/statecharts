@@ -331,7 +331,7 @@
 				<artifactId>tycho-eclipserun-plugin</artifactId>
 				<version>${tycho.extras.version}</version>
 				<executions>
-					<!-- Add execution per 'target architecture' -->
+					<!-- Add execution per 'target architecture' 
 					<execution>
 						<id>install-features-into-distro-macosx-cocoa-x86_64</id>
 						<phase>package</phase>
@@ -347,7 +347,7 @@
 								-repository ${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
-					</execution>
+					</execution>-->
 					<execution>
 						<id>install-features-into-distro-win32-win-32-x86</id>
 						<phase>package</phase>
