@@ -168,4 +168,20 @@ public interface ExecutionContext extends NamedElement, CompositeSlot {
 	 */
 	List<ExecutionVariable> getAllVariables();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	List<ExecutionSlot> getAllSlots();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	ExecutionSlot getSlot(String qualifiedName);
+
 } // ExecutionContext

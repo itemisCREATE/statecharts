@@ -13,7 +13,7 @@ package org.yakindu.sct.simulation.core.sruntime.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
+import java.util.Set;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -36,10 +36,10 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
-
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -200,7 +200,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setType(InferredType newType) {
@@ -344,7 +345,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		Iterables.addAll(result, raisedEvents);
 		return result;
 	}
-
+	
+	
 	/**
 	 * Returns the variable by its qualified name
 	 * 
@@ -372,6 +374,21 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		}
 		return null;
 	}
+	
+	/**
+	 * Returns the execution slot by its qualified name
+	 * @param name
+	 * @return
+	 */
+	public ExecutionSlot getSlot(final String fqName) {
+		Assert.isNotNull(fqName);
+		for (ExecutionSlot slot : getAllSlots()) {
+			if (fqName.equals(slot.getFqName())) {
+				return slot;
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -393,16 +410,18 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	public List<ExecutionEvent> getAllEvents() {
 		List<ExecutionEvent> result = new BasicEList<ExecutionEvent>();
-		addEvents(result, getSlots());
+		addEvents(result, getSlots(), Sets.<ExecutionSlot>newHashSet());
 		return result;
 	}
 
-	protected void addEvents(List<ExecutionEvent> event, List<ExecutionSlot> slots) {
+	protected void addEvents(List<ExecutionEvent> event, List<ExecutionSlot> slots, Set<ExecutionSlot> visitedSlots) {
 		for (ExecutionSlot slot : slots) {
-			if (slot instanceof ExecutionEvent) {
-				event.add((ExecutionEvent) slot);
-			} else if (slot instanceof CompositeSlot) {
-				addEvents(event, ((CompositeSlot) slot).getSlots());
+			if (visitedSlots.add(slot)) {
+				if (slot instanceof ExecutionEvent) {
+					event.add((ExecutionEvent) slot);
+				} else if (slot instanceof CompositeSlot) {
+					addEvents(event, ((CompositeSlot) slot).getSlots(), visitedSlots);
+				}
 			}
 		}
 	}
@@ -414,16 +433,39 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 */
 	public List<ExecutionVariable> getAllVariables() {
 		List<ExecutionVariable> result = new BasicEList<ExecutionVariable>();
-		addVariables(result, getSlots());
+		addVariables(result, getSlots(), Sets.<ExecutionSlot>newHashSet());
 		return result;
 	}
 
-	protected void addVariables(List<ExecutionVariable> variables, List<ExecutionSlot> slots) {
+	protected void addVariables(List<ExecutionVariable> variables, List<ExecutionSlot> slots, Set<ExecutionSlot> visitedSlots) {
 		for (ExecutionSlot slot : slots) {
-			if (slot instanceof ExecutionVariable) {
-				variables.add((ExecutionVariable) slot);
-			} else if (slot instanceof CompositeSlot) {
-				addVariables(variables, ((CompositeSlot) slot).getSlots());
+			if (visitedSlots.add(slot)) {
+				if (slot instanceof ExecutionVariable) {
+					variables.add((ExecutionVariable) slot);
+				} else if (slot instanceof CompositeSlot) {
+					addVariables(variables, ((CompositeSlot) slot).getSlots(), visitedSlots);
+				}
+			}
+		}
+	}
+	
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public List<ExecutionSlot> getAllSlots() {
+		List<ExecutionSlot> result = new BasicEList<ExecutionSlot>();
+		addSlots(result, getSlots(), Sets.<ExecutionSlot>newHashSet());
+		return result;
+	}
+
+	protected void addSlots(List<ExecutionSlot> result, List<ExecutionSlot> slots, Set<ExecutionSlot> visitedSlots) {
+		for (ExecutionSlot slot : slots) {
+			if (visitedSlots.add(slot)) {
+				result.add(slot);
+				if (slot instanceof CompositeSlot) {
+					addSlots(result, ((CompositeSlot) slot).getSlots(), visitedSlots);
+				}
 			}
 		}
 	}

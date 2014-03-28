@@ -14,6 +14,10 @@
     <eOperations name="getAllActiveStates" upperBound="-1" eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//RegularState"/>
     <eOperations name="getAllEvents" upperBound="-1" eType="#//ExecutionEvent"/>
     <eOperations name="getAllVariables" upperBound="-1" eType="#//ExecutionVariable"/>
+    <eOperations name="getAllSlots" upperBound="-1" eType="#//ExecutionSlot"/>
+    <eOperations name="getSlot" eType="#//ExecutionSlot">
+      <eParameters name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activeStates" upperBound="-1"
         eType="ecore:EClass ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//RegularState"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="executedElements" upperBound="-1"
@@ -32,7 +36,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//JavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="InferredType" instanceClassName="org.yakindu.base.types.ITypeSystem.InferredType"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="InferredType" instanceClassName="org.yakindu.base.types.InferredType"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionVariable" eSuperTypes="#//ExecutionSlot"/>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeSlot" eSuperTypes="#//ExecutionSlot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="slots" upperBound="-1"
