@@ -99,8 +99,7 @@ public class SimulationView extends AbstractDebugTargetView {
 	protected void activeTargetChanged(final IDebugTarget debugTarget) {
 		ISimulationEngine engine = (ISimulationEngine) debugTarget.getAdapter(ISimulationEngine.class);
 		viewer.setInput(engine.getExecutionContext());
-		viewer.expandAll();
-
+		(new ExpandAllAction(viewer)).run();
 	}
 
 	protected void hookActions() {
