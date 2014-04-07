@@ -49,9 +49,9 @@ import com.google.inject.Injector;
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
-import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 import de.itemis.xtext.utils.jface.viewers.FilteringMenuManager;
 import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * 
@@ -80,7 +80,7 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 		super.refresh();
 		if (bindingContext != null)
 			bindingContext.dispose();
-		bindingContext = new EMFDataBindingContext();
+		bindingContext = new ValidatingEMFDatabindingContext(this, form.getShell());
 		bindModel(bindingContext);
 	}
 
