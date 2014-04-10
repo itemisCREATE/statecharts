@@ -44,7 +44,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	@Inject
 	private IModelSequencer sequencer;
 	@Inject
-	private IExecutionFlowInterpreter interpreter;
+	protected IExecutionFlowInterpreter interpreter;
 	@Inject
 	private IExecutionContextInitializer contextInitializer;
 
