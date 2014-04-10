@@ -11,6 +11,7 @@
 
 package org.yakindu.sct.simulation.core.sexec.container;
 
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 
 /**
@@ -22,6 +23,10 @@ import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulationEngine {
 
 	private Thread cycleRunner;
+
+	public EventDrivenSimulationEngine(Statechart statechart) {
+		super(statechart);
+	}
 
 	public void start() {
 		super.start();
@@ -39,7 +44,7 @@ public class EventDrivenSimulationEngine extends AbstractExecutionFlowSimulation
 		super.terminate();
 	}
 
-	protected  final class CycleRunner implements Runnable {
+	private final class CycleRunner implements Runnable {
 		public void run() {
 			while (!terminated && !suspended) {
 				if (context.getRaisedEvents().size() > 0 || context.getScheduledEvents().size() > 0) {

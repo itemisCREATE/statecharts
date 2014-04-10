@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
@@ -42,14 +43,14 @@ public class DefaultSimulationEngineFactory implements ISimulationEngineFactory 
 	@Inject
 	private Injector injector;
 
-	public ISimulationEngine createExecutionContainer(ILaunch launch) throws CoreException {
+	public ISimulationEngine createExecutionContainer(Statechart statechart, ILaunch launch) throws CoreException {
 		ISimulationEngine controller = null;
 		boolean isCycleBased = launch.getLaunchConfiguration().getAttribute(IS_CYCLE_BASED, DEFAULT_IS_CYCLE_BASED);
 		if (isCycleBased) {
 			long cyclePeriod = launch.getLaunchConfiguration().getAttribute(CYCLE_PERIOD, DEFAULT_CYCLE_PERIOD);
-			controller = new CycleBasedSimulationEngine(cyclePeriod);
+			controller = new CycleBasedSimulationEngine(statechart, cyclePeriod);
 		} else {
-			controller = new EventDrivenSimulationEngine();
+			controller = new EventDrivenSimulationEngine(statechart);
 		}
 		injector.injectMembers(controller);
 

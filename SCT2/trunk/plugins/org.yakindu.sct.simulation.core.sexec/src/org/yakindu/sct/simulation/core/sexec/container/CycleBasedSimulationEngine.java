@@ -13,6 +13,7 @@ package org.yakindu.sct.simulation.core.sexec.container;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 
 /**
@@ -27,7 +28,8 @@ public class CycleBasedSimulationEngine extends AbstractExecutionFlowSimulationE
 
 	private long cyclePeriod;
 
-	public CycleBasedSimulationEngine(long cyclePeriod) {
+	public CycleBasedSimulationEngine(Statechart statechart, long cyclePeriod) {
+		super(statechart);
 		this.cyclePeriod = cyclePeriod;
 		timer = new Timer();
 	}
