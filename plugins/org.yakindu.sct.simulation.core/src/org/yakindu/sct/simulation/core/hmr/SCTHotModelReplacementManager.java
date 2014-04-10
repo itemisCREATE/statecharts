@@ -159,8 +159,8 @@ public class SCTHotModelReplacementManager implements IResourceChangeListener, I
 		if (event.getResource() instanceof IProject) {
 			IProject project = ((IProject) event.getResource());
 			for (IDebugTarget target : activeTargets) {
-				EObject statechart = (EObject) target.getAdapter(EObject.class);
-				IFile file = WorkspaceSynchronizer.getFile(statechart.eResource());
+				EObject object = (EObject) target.getAdapter(EObject.class);
+				IFile file = WorkspaceSynchronizer.getFile(object.eResource());
 				if (project.equals(file.getProject())) {
 					try {
 						target.terminate();
