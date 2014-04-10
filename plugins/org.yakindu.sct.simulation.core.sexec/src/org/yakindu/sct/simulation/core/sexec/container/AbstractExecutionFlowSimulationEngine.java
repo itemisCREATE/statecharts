@@ -44,7 +44,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	@Inject
 	private IModelSequencer sequencer;
 	@Inject
-	protected IExecutionFlowInterpreter interpreter;
+	private IExecutionFlowInterpreter interpreter;
 	@Inject
 	private IExecutionContextInitializer contextInitializer;
 
@@ -52,6 +52,10 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	protected boolean suspended = false;
 
 	private Statechart statechart;
+
+	public AbstractExecutionFlowSimulationEngine(Statechart statechart) {
+		this.statechart = statechart;
+	}
 
 	protected final void runCycle() {
 		try {
@@ -69,6 +73,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		}
 	}
 
+	@Override
 	public void init() {
 		ExecutionFlow flow = sequencer.transform(statechart);
 		if (!context.isSnapshot()) {

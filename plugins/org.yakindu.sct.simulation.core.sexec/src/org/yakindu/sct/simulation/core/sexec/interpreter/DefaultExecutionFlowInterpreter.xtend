@@ -42,7 +42,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
  * @author axel terfloth - minimized changes on execution context
  * 
  */
-@Singleton
+ @Singleton
 class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 
 	@Inject
@@ -50,7 +50,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	@Inject
 	ITimingService timingService
 	@Inject extension SexecExtensions
-	@Inject(optional=true)
+	@Inject(optional = true)
 	ITraceStepInterpreter traceInterpreter
 
 	ExecutionFlow flow
@@ -69,48 +69,37 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 		activeStateConfiguration = newArrayOfSize(flow.stateVector.size)
 		activeStateIndex = 0
 		historyStateConfiguration = newHashMap()
-		if (!executionContext.snapshot)
+		if(!executionContext.snapshot)
 			flow.initSequence.scheduleAndRun
 	}
 
 	override enter() {
-		if (!executionContext.snapshot)
+		if(!executionContext.snapshot)
 			flow.enterSequences?.defaultSequence?.scheduleAndRun
-		else {
-			executionContext.activeStates.forEach[state|
-				activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)]
+		else{
+			executionContext.activeStates.forEach[state | activeStateConfiguration.set(state.toExecutionState.stateVector.offset, state.toExecutionState)]
 		}
 	}
-
-	def ExecutionState toExecutionState(RegularState state) {
-		return flow.eAllContents.filter[
-			it instanceof ExecutionState && EcoreUtil::equals((it as ExecutionState).sourceElement, state)].head as ExecutionState
+	
+	def ExecutionState toExecutionState(RegularState state){
+		return flow.eAllContents.filter[it instanceof ExecutionState && EcoreUtil::equals((it as ExecutionState).sourceElement,state)].head as ExecutionState
 	}
 
 	override runCycle() {
-		raiseScheduledEvents()
+		//Raise all schedules events
+		executionContext.allEvents.filter[scheduled].forEach[raised = true scheduled = false]
 		activeStateIndex = 0
-		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
-		clearOutEvents()
+		if (executionContext.executedElements.size > 0) executionContext.executedElements.clear
+		//Clear all out events
+		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[if(raised) raised=false]
 		while (activeStateIndex < activeStateConfiguration.size) {
 			var state = activeStateConfiguration.get(activeStateIndex)
 			state?.reactSequence?.scheduleAndRun
 			activeStateIndex = activeStateIndex + 1
 		}
-		clearLocalAndInEvents()
-	}
-
-	def raiseScheduledEvents() {
-		executionContext.allEvents.filter[scheduled].forEach[raised = true scheduled = false]
-	}
-
-	def clearOutEvents() {
-		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[if(raised) raised = false]
-	}
-
-	def clearLocalAndInEvents() {
+		//clear all local and in events
 		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
-			if(raised) raised = false]
+			if(raised) raised=false]
 	}
 
 	override resume() {
@@ -160,7 +149,8 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 		traceInterpreter?.evaluate(trace, executionContext)
 		null
 	}
-
+	
+	
 	def dispatch Object execute(Check check) {
 		if (check.condition == null)
 			return true
@@ -181,7 +171,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 
 	def dispatch Object execute(ExitState exitState) {
 		activeStateConfiguration.set(exitState.state.stateVector.offset, null)
-		var activeStates = executionContext.activeStates.filter[EcoreUtil::equals(it, exitState.state.sourceElement)]
+		var activeStates = executionContext.activeStates.filter[EcoreUtil::equals(it,exitState.state.sourceElement)]
 		executionContext.activeStates.removeAll(activeStates)
 		null
 	}

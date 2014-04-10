@@ -51,7 +51,7 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 		});
 		Guice.createInjector(module).injectMembers(this);
 		try {
-			return factory.createExecutionContainer(launch);
+			return factory.createExecutionContainer(statechart, launch);
 		} catch (CoreException e) {
 			e.printStackTrace();
 			return null;

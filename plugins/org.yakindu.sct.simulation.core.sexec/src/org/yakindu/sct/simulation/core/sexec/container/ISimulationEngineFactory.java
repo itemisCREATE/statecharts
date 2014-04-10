@@ -12,6 +12,7 @@ package org.yakindu.sct.simulation.core.sexec.container;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 
 /**
@@ -22,5 +23,5 @@ import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
  */
 public interface ISimulationEngineFactory {
 
-	public ISimulationEngine createExecutionContainer(ILaunch launch) throws CoreException;
+	public ISimulationEngine createExecutionContainer(Statechart statechart, ILaunch launch) throws CoreException;
 }
