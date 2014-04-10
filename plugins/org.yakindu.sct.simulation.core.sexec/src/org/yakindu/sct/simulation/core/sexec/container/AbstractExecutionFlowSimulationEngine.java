@@ -68,8 +68,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 			}
 		}
 	}
-	
-	@Override
+
 	public void init() {
 		ExecutionFlow flow = sequencer.transform(statechart);
 		if (!context.isSnapshot()) {
