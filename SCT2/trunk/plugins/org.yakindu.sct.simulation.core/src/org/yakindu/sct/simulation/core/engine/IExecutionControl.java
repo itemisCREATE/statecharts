@@ -20,6 +20,8 @@ import com.google.inject.Singleton;
 @Singleton
 public interface IExecutionControl {
 
+	public void init();
+
 	public void start();
 
 	public void suspend();
