@@ -29,9 +29,9 @@ import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.RegularState;
-import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.IExecutionControl;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
@@ -52,7 +52,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	private boolean terminated = false;
 	private boolean suspended = false;
 
-	private final Statechart statechart;
+	private final NamedElement element;
 	private List<SCTDebugThread> threads;
 
 	private ISimulationEngine engine;
@@ -61,11 +61,11 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 
 	private UpdateTreeAdapter updater = new UpdateTreeAdapter();
 
-	public SCTDebugTarget(ILaunch launch, Statechart statechart, ISimulationEngine engine) throws CoreException {
-		super(null, statechart.eResource().getURI().toPlatformString(true));
-		Assert.isNotNull(statechart);
+	public SCTDebugTarget(ILaunch launch, NamedElement element, ISimulationEngine engine) throws CoreException {
+		super(null, element.eResource().getURI().toPlatformString(true));
+		Assert.isNotNull(element);
 		this.launch = launch;
-		this.statechart = statechart;
+		this.element = element;
 		this.engine = engine;
 		init();
 	}
@@ -126,7 +126,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	}
 
 	public String getName() throws DebugException {
-		return statechart.getName();
+		return element.getName();
 	}
 
 	public boolean supportsBreakpoint(IBreakpoint breakpoint) {
@@ -220,7 +220,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 			return engine.getExecutionContext();
 		}
 		if (adapter == EObject.class) {
-			return statechart;
+			return element;
 		}
 		return super.getAdapter(adapter);
 	}
