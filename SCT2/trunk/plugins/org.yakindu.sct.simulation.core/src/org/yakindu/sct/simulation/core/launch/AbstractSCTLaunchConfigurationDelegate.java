@@ -42,10 +42,14 @@ public abstract class AbstractSCTLaunchConfigurationDelegate extends LaunchConfi
 			throws CoreException {
 		String filename = configuration.getAttribute(FILE_NAME, DEFAULT_FILE_NAME);
 		Statechart statechart = loadStatechart(filename);
-		Assert.isNotNull(statechart);
-		SCTDebugTarget target = new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
+		SCTDebugTarget target = createDebugTarget(launch, statechart);
 		launch.addDebugTarget(target);
 		target.start();
+	}
+
+	protected SCTDebugTarget createDebugTarget(ILaunch launch, Statechart statechart) throws CoreException {
+		Assert.isNotNull(statechart);
+		return new SCTDebugTarget(launch, statechart, createExecutionContainer(launch, statechart));
 	}
 
 	protected Statechart loadStatechart(String filename) {
