@@ -41,6 +41,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
+import org.yakindu.base.expressions.expressions.NullLiteral
 
 class ExpressionCode {
 
@@ -95,6 +96,10 @@ class ExpressionCode {
 
 	def dispatch String code(RealLiteral expression) {
 		expression.value.toString();
+	}
+	
+	def dispatch String code(NullLiteral expression) {
+		'null'
 	}
 
 	def dispatch String code(StringLiteral expression) {
