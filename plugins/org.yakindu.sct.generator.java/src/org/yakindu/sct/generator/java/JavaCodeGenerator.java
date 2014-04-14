@@ -53,6 +53,7 @@ public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 				}
 			}
 		});
+		
 	}
 
 }
