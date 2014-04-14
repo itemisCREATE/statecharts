@@ -62,6 +62,8 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		if (notationHandler == null) {
 			notationHandler = new DefaultDynamicNotationHandler();
 			IHighlightingSupport support = (IHighlightingSupport) editor.getAdapter(IHighlightingSupport.class);
+			if (support == null)
+				return;
 			notationHandler.setHighlightingSupport(support);
 			handler.put(editor, notationHandler);
 		}
