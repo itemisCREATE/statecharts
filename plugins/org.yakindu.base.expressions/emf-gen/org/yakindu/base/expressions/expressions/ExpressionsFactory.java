@@ -85,6 +85,15 @@ public interface ExpressionsFactory extends EFactory {
 	StringLiteral createStringLiteral();
 
 	/**
+	 * Returns a new object of class '<em>Null Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Null Literal</em>'.
+	 * @generated
+	 */
+	NullLiteral createNullLiteral();
+
+	/**
 	 * Returns a new object of class '<em>Assignment Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -97,7 +97,7 @@ ParenthesizedExpression returns Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
 
 Literal:
-	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral;
+	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral | NullLiteral;
 
 BoolLiteral:
 	{BoolLiteral} value=BOOL;
@@ -113,7 +113,9 @@ HexLiteral:
 
 StringLiteral:
 	{StringLiteral} value=STRING;
-
+NullLiteral:
+	{NullLiteral} 'null'
+;
 LogicalAndOperator:
 	'&&';
 

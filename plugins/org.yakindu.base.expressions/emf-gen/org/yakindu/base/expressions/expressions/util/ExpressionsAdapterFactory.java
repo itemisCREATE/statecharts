@@ -96,6 +96,10 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createStringLiteralAdapter();
 			}
 			@Override
+			public Adapter caseNullLiteral(NullLiteral object) {
+				return createNullLiteralAdapter();
+			}
+			@Override
 			public Adapter caseAssignmentExpression(AssignmentExpression object) {
 				return createAssignmentExpressionAdapter();
 			}
@@ -278,6 +282,20 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStringLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.NullLiteral <em>Null Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.NullLiteral
+	 * @generated
+	 */
+	public Adapter createNullLiteralAdapter() {
 		return null;
 	}
 

@@ -64,6 +64,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.REAL_LITERAL: return createRealLiteral();
 			case ExpressionsPackage.HEX_LITERAL: return createHexLiteral();
 			case ExpressionsPackage.STRING_LITERAL: return createStringLiteral();
+			case ExpressionsPackage.NULL_LITERAL: return createNullLiteral();
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION: return createAssignmentExpression();
 			case ExpressionsPackage.CONDITIONAL_EXPRESSION: return createConditionalExpression();
 			case ExpressionsPackage.LOGICAL_OR_EXPRESSION: return createLogicalOrExpression();
@@ -204,6 +205,16 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public StringLiteral createStringLiteral() {
 		StringLiteralImpl stringLiteral = new StringLiteralImpl();
 		return stringLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NullLiteral createNullLiteral() {
+		NullLiteralImpl nullLiteral = new NullLiteralImpl();
+		return nullLiteral;
 	}
 
 	/**

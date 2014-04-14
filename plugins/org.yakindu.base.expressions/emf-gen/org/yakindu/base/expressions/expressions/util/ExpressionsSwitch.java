@@ -113,6 +113,13 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case ExpressionsPackage.NULL_LITERAL: {
+				NullLiteral nullLiteral = (NullLiteral)theEObject;
+				T result = caseNullLiteral(nullLiteral);
+				if (result == null) result = caseLiteral(nullLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case ExpressionsPackage.ASSIGNMENT_EXPRESSION: {
 				AssignmentExpression assignmentExpression = (AssignmentExpression)theEObject;
 				T result = caseAssignmentExpression(assignmentExpression);
@@ -338,6 +345,21 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStringLiteral(StringLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Null Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Null Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNullLiteral(NullLiteral object) {
 		return null;
 	}
 
