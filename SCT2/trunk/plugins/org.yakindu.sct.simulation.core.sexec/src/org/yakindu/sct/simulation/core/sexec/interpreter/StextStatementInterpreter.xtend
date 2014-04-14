@@ -44,6 +44,7 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.yakindu.base.expressions.expressions.NullLiteral
 
 /**
  * 
@@ -273,6 +274,9 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch valueLiteral(StringLiteral literal) {
 		return literal.value
+	}
+	def dispatch valueLiteral(NullLiteral literal) {
+		return null
 	}
 
 }

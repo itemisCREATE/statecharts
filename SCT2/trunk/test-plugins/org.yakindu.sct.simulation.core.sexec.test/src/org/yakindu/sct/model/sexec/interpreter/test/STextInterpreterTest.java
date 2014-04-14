@@ -84,6 +84,12 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("stringVar = 'fortytwo'");
 		assertEquals("fortytwo", getStringValue());
 	}
+	
+	@Test
+	public void testStringNullAssignment() {
+		executeWithDefaultScope("stringVar = null");
+		assertEquals(null, getStringValue());
+	}
 
 	@Test
 	public void testConditionalTrue() {
