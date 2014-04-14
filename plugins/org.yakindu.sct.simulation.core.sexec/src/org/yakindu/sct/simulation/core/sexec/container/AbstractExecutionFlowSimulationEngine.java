@@ -57,7 +57,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		this.statechart = statechart;
 	}
 
-	protected final void runCycle() {
+	protected void runCycle() {
 		try {
 			interpreter.runCycle();
 		} catch (WrappedException ex) {
