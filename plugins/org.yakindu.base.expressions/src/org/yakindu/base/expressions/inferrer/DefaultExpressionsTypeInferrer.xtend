@@ -50,6 +50,7 @@ import org.yakindu.base.types.InferenceIssue
 import org.yakindu.base.types.InferenceResult
 import org.yakindu.base.types.InferredType
 import org.yakindu.base.types.TypedElement
+import org.yakindu.base.expressions.expressions.NullLiteral
 
 /**
  * 
@@ -196,6 +197,10 @@ class DefaultExpressionsTypeInferrer implements IExpressionsTypeInferrer {
 
 	def dispatch InferenceResult doInferType(IntLiteral literal) {
 		return inferTypeForLiteral(literal.value);
+	}
+	
+	def dispatch InferenceResult doInferType(NullLiteral literal) {
+		return  inferTypeForLiteral(null);
 	}
 
 	def dispatch InferenceResult doInferType(Literal l) {

@@ -55,6 +55,8 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		return resource;
 	}
 
+	private PrimitiveType nullType;
+
 	public Type getBooleanType() {
 		synchronized (DefaultTypeSystem.class) {
 			if (booleanType == null) {
@@ -110,6 +112,17 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		}
 	}
 
+	private Type getNullType() {
+		synchronized (DefaultTypeSystem.class) {
+			if (nullType == null) {
+				nullType = TypesFactory.eINSTANCE.createPrimitiveType();
+				nullType.setName("null");
+				getResource().getContents().add(nullType);
+			}
+			return nullType;
+		}
+	}
+
 	public InferenceResult inferTypeForLiteral(Object literal) {
 		if (literal instanceof String) {
 			return new InferenceResult(getStringType());
@@ -119,6 +132,8 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			return new InferenceResult(getIntegerType());
 		} else if (literal instanceof Float) {
 			return new InferenceResult(getRealType());
+		} else if (literal == null) {
+			return new InferenceResult(getNullType());
 		}
 		throw new IllegalArgumentException("Literal of unknown kind " + literal);
 	}
@@ -188,11 +203,11 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 					+ binaryOperator.getSymbol() + ", because types were not inferred for all of its operands.",
 					IStatus.ERROR));
 		}
-		//TODO:
-		if(firstOperandType.getType() instanceof TypeParameter || secondOperandType.getType() instanceof TypeParameter)
+		// TODO:
+		if (firstOperandType.getType() instanceof TypeParameter || secondOperandType.getType() instanceof TypeParameter)
 			return null;
 
-			// infer type base on operator (fist pass: check types are valid, second
+		// infer type base on operator (fist pass: check types are valid, second
 		// pass: compute result type)
 		BinaryOperators o = (BinaryOperators) binaryOperator;
 		switch (o) {
@@ -213,7 +228,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 						+ " and " + secondOperandType.getType().getName() + ".", IStatus.ERROR));
 			}
 			// second pass: compute common type
-			switch (o) { 
+			switch (o) {
 			case BITWISE_OR:
 			case BITWISE_XOR:
 			case BITWISE_AND:
@@ -462,6 +477,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		types.add(getIntegerType());
 		types.add(getRealType());
 		types.add(getStringType());
+		types.add(getNullType());
 		return types;
 	}
 
@@ -541,7 +557,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		if (type instanceof EnumerationType) {
 			return ((EnumerationType) type).getEnumerator().get(0);
 		}
-		if(type instanceof ComplexType){
+		if (type instanceof ComplexType) {
 			return "{}";
 		}
 		return null;
