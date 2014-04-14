@@ -84,6 +84,12 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("''", rule);
 	}
 
+	@Test
+	public void testNullLiteral() {
+		String rule = PrimitiveValueExpression.class.getSimpleName();
+		parseExpression("null", rule);
+	}
+
 	/**
 	 * VariableDefinition: {VariableDefinition} 'var' ((readonly?='readonly')? &
 	 * (external?='external')?) name=ID ':' type=[types::Type|FQN] ('='
@@ -99,6 +105,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("var readonly external MyVar : integer", rule);
 		parseExpression("var external readonly MyVar : integer", rule);
 		parseExpression("var MyVar : integer = 3 * 3", rule);
+		parseExpression("var MyVar : string = null", rule);
 	}
 
 	/**
@@ -114,6 +121,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("in event event1 : integer", rule);
 		parseExpression("out event event1 : integer", rule);
 		parseExpression("event event1 : integer", rule);
+		parseExpression("event event1 : string", rule);
 
 	}
 
@@ -129,25 +137,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("operation myOpp() : boolean", rule);
 		parseExpression("operation myOpp(param1: integer)", rule);
 		parseExpression("operation myOpp(param1 : boolean) : integer", rule);
-		parseExpression(
-				"operation myOpp(param1 : boolean, param2 : real) : integer",
-				rule);
-		parseExpression(
-				"operation myOpp(param1 : real, param2 : real) : integer", rule);
-	}
-
-	@Test
-	@Ignore("Disabled entry / exit points for release")
-	public void testEntryPoint() {
-		// String rule = Entrypoint.class.getSimpleName();
-		// parseExpression("entrypoint MyentryPoint", rule);
-	}
-
-	@Test
-	@Ignore("Disabled entry / exit points for release")
-	public void testExitPoint() {
-		// String rule = Exitpoint.class.getSimpleName();
-		// parseExpression("exitpoint MyentryPoint", rule);
+		parseExpression("operation myOpp(param1 : boolean, param2 : real) : integer", rule);
+		parseExpression("operation myOpp(param1 : real, param2 : real) : integer", rule);
 	}
 
 	/**
@@ -171,8 +162,8 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("always", rule);
 		parseExpression("intEvent, after 10s", internalScope(), rule);
 		parseExpression("intEvent, after 10s, every 10 ms", internalScope(), rule);
-		parseExpression("intEvent, after 10s [false == true]", internalScope(),
-				rule);
+		parseExpression("intEvent, after 10s [false == true]", internalScope(), rule);
+		parseExpression("intEvent, after 10s ['' != null]", internalScope(), rule);
 		parseExpression("intEvent, after 10s [5  > 10]", internalScope(), rule);
 		parseExpression("ABC.intEvent", interfaceScope(), rule);
 	}
@@ -205,20 +196,17 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("raise ABC.intEvent : 5", interfaceScope(), rule);
 		parseExpression("ABC.paramOp()", interfaceScope(), rule);
 		parseExpression("ABC.paramOp(5,false)", interfaceScope(), rule);
-		parseExpression("ABC.paramOp(); raise ABC.voidEvent ", interfaceScope(),
-				rule);
+		parseExpression("ABC.paramOp(null)", interfaceScope(), rule);
+		parseExpression("ABC.paramOp(); raise ABC.voidEvent ", interfaceScope(), rule);
 
 	}
 
-	/**
-	 * ReactionProperties: {ReactionProperties} (properties+=ReactionProperty)*;
-	 */
 	@Test
 	@Ignore("Disabled entry / exit points for release")
 	public void testReactionProperties() {
-		// String rule = ReactionProperties.class.getSimpleName();
-		// parseExpression("> ABC.EntryPoint", interfaceScope(), rule);
-		// parseExpression("ABC.ExitPoint >", interfaceScope(), rule);
+//		 String rule = ReactionProperties.class.getSimpleName();
+//		 parseExpression("> ABC.EntryPoint", interfaceScope(), rule);
+//		 parseExpression("ABC.ExitPoint >", interfaceScope(), rule);
 	}
 
 	/**
@@ -228,8 +216,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 	@Test
 	public void tesLocalReaction() {
 		String rule = LocalReaction.class.getSimpleName();
-		parseExpression("entry [ABC.intVar > 10] / raise ABC.intEvent",
-				interfaceScope(), rule);
+		parseExpression("entry [ABC.intVar > 10] / raise ABC.intEvent", interfaceScope(), rule);
 	}
 
 	/**
@@ -269,8 +256,7 @@ public class StextParserRuleTest extends AbstractSTextTest {
 		parseExpression("internal : event voidEvent", rule);
 		parseExpression("internal : var intVar : integer", rule);
 		parseExpression("internal : operation voidOp()", rule);
-		parseExpression("internal : every 10 ms / raise intEvent", internalScope(),
-				rule);
+		parseExpression("internal : every 10 ms / raise intEvent", internalScope(), rule);
 	}
 
 	/**
