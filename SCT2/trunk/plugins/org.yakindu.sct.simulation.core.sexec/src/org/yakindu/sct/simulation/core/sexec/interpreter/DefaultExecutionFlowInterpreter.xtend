@@ -33,7 +33,6 @@ import org.yakindu.sct.model.sexec.Trace
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.transformation.SexecExtensions
 import org.yakindu.sct.model.sgraph.RegularState
-import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 
 /**
@@ -52,13 +51,14 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	@Inject extension SexecExtensions
 	@Inject(optional=true)
 	ITraceStepInterpreter traceInterpreter
+	@Inject protected extension ExecutionContextExtensions
 
-	ExecutionFlow flow
-	ExecutionContext executionContext
-	ExecutionState[] activeStateConfiguration
-	Map<Integer, ExecutionState> historyStateConfiguration
-	List<Step> executionStack
-	int activeStateIndex
+	protected ExecutionFlow flow
+	protected ExecutionContext executionContext
+	protected ExecutionState[] activeStateConfiguration
+	protected Map<Integer, ExecutionState> historyStateConfiguration
+	protected List<Step> executionStack
+	protected int activeStateIndex
 
 	boolean suspended = false
 
@@ -88,29 +88,16 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	}
 
 	override runCycle() {
-		raiseScheduledEvents()
+		executionContext.raiseScheduledEvents
 		activeStateIndex = 0
 		if(executionContext.executedElements.size > 0) executionContext.executedElements.clear
-		clearOutEvents()
+		executionContext.clearOutEvents
 		while (activeStateIndex < activeStateConfiguration.size) {
 			var state = activeStateConfiguration.get(activeStateIndex)
 			state?.reactSequence?.scheduleAndRun
 			activeStateIndex = activeStateIndex + 1
 		}
-		cleatLocalAndInEvents()
-	}
-
-	def cleatLocalAndInEvents() {
-		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
-			if(raised) raised = false]
-	}
-
-	def raiseScheduledEvents() {
-		executionContext.allEvents.filter[scheduled].forEach[raised = true scheduled = false]
-	}
-
-	def clearOutEvents() {
-		executionContext.allEvents.filter[direction == EventDirection.OUT].forEach[if(raised) raised = false]
+		executionContext.clearLocalAndInEvents
 	}
 
 	override resume() {

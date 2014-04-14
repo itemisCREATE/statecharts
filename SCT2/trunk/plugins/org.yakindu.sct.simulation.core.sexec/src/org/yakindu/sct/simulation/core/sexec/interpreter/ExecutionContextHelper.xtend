@@ -1,8 +1,10 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
+import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter
 import java.util.List
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.base.expressions.expressions.AssignmentExpression
@@ -18,22 +20,21 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 
 class ExecutionContextHelper {
-	
+
 	@Inject
 	extension IQualifiedNameProvider nameProvider
-	
+
 	def dispatch ExecutionSlot resolveVariable(ExecutionContext context, ElementReferenceExpression e) {
 		if (e.reference instanceof VariableDefinition) {
 			return context.getVariable(e.reference.getFullyQualifiedName.toString)
-		} 
-		else null
+		} else
+			null
 	}
 
 	def dispatch ExecutionSlot resolveVariable(ExecutionContext context, FeatureCall e) {
 		if (e.feature instanceof VariableDefinition) {
 			return context.getVariable(e.feature.getFullyQualifiedName.toString)
-		}
-		else if (e.feature instanceof Property) {
+		} else if (e.feature instanceof Property) {
 			var current = e
 			val List<EObject> calls = newArrayList
 			calls.add(0, e.feature)
@@ -41,42 +42,49 @@ class ExecutionContextHelper {
 				current = current.owner as FeatureCall
 				calls.add(0, current.feature)
 			}
-			
+
+			//TODO:!!!!!FIXME
 			val varDef = (current.owner as ElementReferenceExpression).reference as VariableDefinition
-			val varDefFqn = varDef.getFullyQualifiedName.toString
-			
+			var varDefFqn = varDef.getFullyQualifiedName.toString
+			if (varDefFqn.equals("this")) {
+				var flow = EcoreUtil.getRootContainer(current)
+				var ContextElementAdapter adapter = EcoreUtil.getExistingAdapter(flow, typeof(ContextElementAdapter)) as ContextElementAdapter
+				varDefFqn = (adapter.element as VariableDefinition).fullyQualifiedName.toString
+			}
+
 			var featureSlot = context.getSlot(varDefFqn)
 			if (featureSlot == null) {
 				featureSlot = context.getVariable(varDef.getFullyQualifiedName.toString)
 				if (featureSlot == null)
 					return null // could not find starting slot for feature call
 			}
-			
+
 			// go through all calls and traverse execution context hierarchy accordingly
 			for (EObject feature : calls) {
-				
+
 				if (featureSlot instanceof CompositeSlot && feature instanceof Property) {
-					featureSlot = (featureSlot as CompositeSlot).slots.findFirst[slot | slot.name == feature.name]
+					featureSlot = (featureSlot as CompositeSlot).slots.findFirst[slot|slot.name == feature.name]
 				}
 				if (featureSlot instanceof ExecutionVariable && feature instanceof Operation) {
-//					TODO (featureSlot as ExecutionVariable).value
+					//					TODO (featureSlot as ExecutionVariable).value
 				}
 			}
-			
+
 			return featureSlot
-		}
-		else if (e.feature instanceof Operation) {
+		} else if (e.feature instanceof Operation) {
+
 			// for operation return the execution variable of the operation call's owner on which the operation is to be executed
 			return context.resolveVariable(e.owner)
-		}
-		else null
+		} else
+			null
 	}
-	
+
 	def dispatch ExecutionSlot resolveVariable(ExecutionContext context, AssignmentExpression e) {
 		return context.resolveVariable(e.varRef)
 	}
-	
+
 	def ExecutionEvent resolveEvent(ExecutionContext context, FeatureCall call) {
+
 		// TODO consider deeper nested calls as done in resolveVariable
 		var fqn = call.feature.fullyQualifiedName.toString
 		if (call.owner instanceof ElementReferenceExpression) {
@@ -88,7 +96,7 @@ class ExecutionContextHelper {
 		}
 		context.getEvent(fqn)
 	}
-	
+
 	def private name(EObject e) {
 		return SimpleAttributeResolver::NAME_RESOLVER.apply(e)
 	}
