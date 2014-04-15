@@ -261,9 +261,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 */
 	@Override
 	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(fqName);
+		if (eIsProxy())
+			return super.toString();
+		StringBuffer result = new StringBuffer(fqName != null ? fqName : "");
 		return result.toString();
 	}
 

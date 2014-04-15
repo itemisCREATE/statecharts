@@ -111,8 +111,7 @@ public class SCTSourceDisplay implements ISourceDisplay {
 				Collection<Diagram> contents = EcoreUtil.getObjectsByType(sharedDomainResource.getContents(),
 						NotationPackage.Literals.DIAGRAM);
 				for (Diagram diag : contents) {
-					// TODO consider using resource uri as equality constraint
-					if (EcoreUtil.equals(diag.getElement(), diagram.getElement())) {
+					if (EcoreUtil.getURI(diag.getElement()).equals(EcoreUtil.getURI(diagram.getElement()))) {
 						return DiagramPartitioningUtil.openEditor((Diagram) diag);
 					}
 				}
