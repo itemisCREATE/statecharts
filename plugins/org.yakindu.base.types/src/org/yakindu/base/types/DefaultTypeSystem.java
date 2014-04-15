@@ -359,9 +359,10 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 				// no further checks for complex types required here
 				// (computation of type in second pass will result in null, if
 				// they are not compatible)
-			}
-			// TODO:
-			else {
+			} else if ((firstOperandType.getType() == getNullType() && secondOperandType.getType() instanceof ComplexType)
+					|| (firstOperandType.getType() instanceof ComplexType && secondOperandType.getType() == getNullType())) {
+				// no further checks required
+			} else {
 				return new InferenceResult(null, new InferenceIssue(
 						"Assignment and equality operations may only be applied on types of the same kind, not on "
 								+ firstOperandType.getType().getName() + " and "
