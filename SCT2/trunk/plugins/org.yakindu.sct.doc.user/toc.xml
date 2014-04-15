@@ -2,8 +2,22 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Statechart Tools User Guide">
-   <link toc="help/01_Overview/overview-toc.xml"/>
-   <link toc="help/02_Getting_started/getting_started-toc.xml"/>
-   <link toc="help/03_Tasks/tasks-toc.xml"/>
-   <link toc="help/04_Reference/reference-toc.xml"/>
+	
+	<topic label="SCT">
+		
+		   <link toc="help/01_Overview/overview-toc.xml"/>
+		   <link toc="help/02_Getting_started/getting_started-toc.xml"/>
+		   <link toc="help/03_Tasks/tasks-toc.xml"/>
+		   <link toc="help/04_Reference/reference-toc.xml"/>
+	</topic>
+	
+	<topic label="SCT Simulation">
+		<anchor id ="sctSimulation" />
+	</topic>	   
+		  
+	<topic label="SCTUnit">
+		<anchor id ="sctUnit" />
+	</topic>	
+		  
+		  
 </toc>
