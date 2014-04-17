@@ -53,7 +53,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	private boolean suspended = false;
 
 	private final NamedElement element;
-	private List<SCTDebugThread> threads;
+	protected List<SCTDebugThread> threads;
 
 	private ISimulationEngine engine;
 
