@@ -64,7 +64,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 				declarationSlot.setFqName(namespace + "." + declName)
 				declarationSlot.setName(declName)
 				// only add imported variables/events when they have not yet been imported
-				if (!slot.slots.containsSlotForFqn(declarationSlot.fqName)) {
+				if (!slot.slots.exists[fqName == declarationSlot.fqName]) {
 					slot.slots += declarationSlot
 				}
 			}
@@ -72,15 +72,6 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 				composite.slots += decl.transform
 			}
 		}
-	}
-	
-	def boolean containsSlotForFqn(List<ExecutionSlot> slots, String fqn) {
-		for (ExecutionSlot slot : slots) {
-			if (slot.fqName == fqn) {
-				return true
-			}	
-		}
-		return false
 	}
 	
 	/**
