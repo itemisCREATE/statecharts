@@ -17,8 +17,8 @@ import java.util.List;
 import org.eclipse.debug.core.model.DebugElement;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 /**
  * 
@@ -46,7 +46,7 @@ public class SCTDebugElement extends DebugElement {
 		List<String> qfnFragments = new ArrayList<String>();
 		qfnFragments.add(element.getName());
 		EObject current = element;
-		while (!(current.eContainer() instanceof Statechart)) {
+		while (!(current.eContainer() != EcoreUtil.getRootContainer(current))) {
 			current = current.eContainer();
 			if (current instanceof NamedElement) {
 				String name = ((NamedElement) current).getName();

@@ -19,7 +19,7 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
@@ -31,16 +31,19 @@ import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
  */
 public class SCTDebugThread extends SCTDebugElement implements IThread {
 
-	private final Region region;
-	private List<SCTStackFrame> stateStack;
+	private final NamedElement element;
+	protected List<SCTStackFrame> stateStack;
 	private Vertex lastActiveState;
 	private ISimulationEngine container;
 
-	public SCTDebugThread(SCTDebugTarget target, ISimulationEngine container, String resourceString, Region region) {
+	public SCTDebugThread(SCTDebugTarget target, ISimulationEngine container, String resourceString,
+			NamedElement element) {
 		super(target, resourceString);
-		Assert.isNotNull(region);
+		Assert.isNotNull(element);
 		this.container = container;
-		this.region = region;
+		this.element = element;
+		// TODO
+		stateStack = new ArrayList<SCTStackFrame>();
 	}
 
 	public int getPriority() throws DebugException {
@@ -51,7 +54,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 		List<RegularState> activeLeafStates = container.getExecutionContext().getActiveStates();
 		Vertex activeState = null;
 		for (Vertex vertex : activeLeafStates) {
-			if (vertex.getParentRegion() == region) {
+			if (vertex.getParentRegion() == element) {
 				activeState = vertex;
 				break;
 			}
@@ -76,7 +79,7 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public String getName() throws DebugException {
-		return fullQfn(region);
+		return fullQfn(element);
 	}
 
 	public IBreakpoint[] getBreakpoints() {
@@ -146,10 +149,10 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
-		if(adapter == ISimulationEngine.class)
+		if (adapter == ISimulationEngine.class)
 			return container;
 		if (adapter == EObject.class)
-			return region;
+			return element;
 		return super.getAdapter(adapter);
 	}
 
@@ -157,8 +160,8 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 		return (SCTDebugTarget) super.getDebugTarget();
 	}
 
-	public Region getRegion() {
-		return region;
+	public NamedElement getElement() {
+		return element;
 	}
 
 }

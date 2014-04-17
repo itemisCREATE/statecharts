@@ -17,7 +17,7 @@ import org.eclipse.debug.core.model.IRegisterGroup;
 import org.eclipse.debug.core.model.IStackFrame;
 import org.eclipse.debug.core.model.IVariable;
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.base.base.NamedElement;
 
 /**
  * 
@@ -27,13 +27,12 @@ import org.yakindu.sct.model.sgraph.Vertex;
 public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 
 	private final SCTDebugThread thread;
-	// the active state that is entered
-	private final Vertex state;
+	private final NamedElement element;
 
-	public SCTStackFrame(SCTDebugThread thread, Vertex state, String resourceString) {
+	public SCTStackFrame(SCTDebugThread thread, NamedElement element, String resourceString) {
 		super(thread.getDebugTarget(), resourceString);
 		this.thread = thread;
-		this.state = state;
+		this.element = element;
 	}
 
 	public String getModelIdentifier() {
@@ -129,7 +128,7 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 	}
 
 	public String getName() throws DebugException {
-		return fullQfn(state);
+		return fullQfn(element);
 
 	}
 
@@ -150,17 +149,17 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 	}
 
 	public String getResourceString() {
-		return state.eResource().getURI().toPlatformString(true);
+		return element.eResource().getURI().toPlatformString(true);
 	}
 
 	public Object getAdapter(@SuppressWarnings("rawtypes") Class adapter) {
 		if (adapter == EObject.class)
-			return state;
+			return element;
 		return super.getAdapter(adapter);
 	}
 
-	public Vertex getState() {
-		return state;
+	public NamedElement getState() {
+		return element;
 	}
 
 }
