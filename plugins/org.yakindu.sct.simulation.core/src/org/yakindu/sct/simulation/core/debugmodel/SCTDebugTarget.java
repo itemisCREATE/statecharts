@@ -101,7 +101,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 		Iterator<SCTDebugThread> iterator = threads.iterator();
 		while (iterator.hasNext()) {
 			SCTDebugThread next = iterator.next();
-			if (!activeRegions.contains(next.getRegion())) {
+			if (!activeRegions.contains(next.getElement())) {
 				iterator.remove();
 			}
 		}
@@ -109,7 +109,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 		for (Region region : activeRegions) {
 			boolean found = false;
 			for (SCTDebugThread thread : threads) {
-				if (thread.getRegion() == region) {
+				if (thread.getElement() == region) {
 					found = true;
 				}
 			}
