@@ -1,10 +1,8 @@
 package org.yakindu.sct.simulation.core.sexec.interpreter
 
 import com.google.inject.Inject
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter
 import java.util.List
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.base.expressions.expressions.AssignmentExpression
@@ -43,15 +41,8 @@ class ExecutionContextHelper {
 				calls.add(0, current.feature)
 			}
 
-			//TODO:!!!!!FIXME
 			val varDef = (current.owner as ElementReferenceExpression).reference as VariableDefinition
-			var varDefFqn = varDef.getFullyQualifiedName.toString
-			if (varDefFqn.equals("this")) {
-				var flow = EcoreUtil.getRootContainer(current)
-				var ContextElementAdapter adapter = EcoreUtil.getExistingAdapter(flow, typeof(ContextElementAdapter)) as ContextElementAdapter
-				varDefFqn = (adapter.element as VariableDefinition).fullyQualifiedName.toString
-			}
-
+			var varDefFqn = getFqn(varDef).toString
 			var featureSlot = context.getSlot(varDefFqn)
 			if (featureSlot == null) {
 				featureSlot = context.getVariable(varDef.getFullyQualifiedName.toString)
@@ -77,6 +68,10 @@ class ExecutionContextHelper {
 			return context.resolveVariable(e.owner)
 		} else
 			null
+	}
+	
+	def getFqn(VariableDefinition varDef) {
+		varDef.getFullyQualifiedName
 	}
 
 	def dispatch ExecutionSlot resolveVariable(ExecutionContext context, AssignmentExpression e) {
