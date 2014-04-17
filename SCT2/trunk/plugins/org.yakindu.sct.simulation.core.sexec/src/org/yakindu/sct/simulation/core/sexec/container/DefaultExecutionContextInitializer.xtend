@@ -11,12 +11,16 @@
 package org.yakindu.sct.simulation.core.sexec.container
 
 import com.google.inject.Inject
+import java.util.List
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.InferredType
 import org.yakindu.base.types.Package
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sgraph.Declaration
+import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
@@ -25,17 +29,13 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
+import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
+import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
-import org.yakindu.sct.model.sgraph.Declaration
-import java.util.List
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
-import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
-import org.eclipse.xtext.EcoreUtil2
-import org.yakindu.sct.model.sgraph.ImportDeclaration
 
 /**
  * 
@@ -52,8 +52,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		flow.scopes.forEach[context.slots += transform]
 	}
 	
-	def dispatch ExecutionSlot create composite : new CompositeSlotImpl() transform(ImportScope scope) {
-		composite.name = "imports"
+	def dispatch ExecutionSlot create composite : createImportSlot() transform(ImportScope scope) {
 		// retrieve namespaces from variable names and create corresponding composite slots
 		for (Declaration decl : scope.declarations.filter(ImportDeclaration).map[declaration]) {
 			val pkg = EcoreUtil2.getContainerOfType(decl, Package)
@@ -64,12 +63,31 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 				val declarationSlot = decl.transform
 				declarationSlot.setFqName(namespace + "." + declName)
 				declarationSlot.setName(declName)
-				slot.slots += declarationSlot
+				// only add imported variables/events when they have not yet been imported
+				if (!slot.slots.containsSlotForFqn(declarationSlot.fqName)) {
+					slot.slots += declarationSlot
+				}
 			}
 			else {
 				composite.slots += decl.transform
 			}
 		}
+	}
+	
+	def boolean containsSlotForFqn(List<ExecutionSlot> slots, String fqn) {
+		for (ExecutionSlot slot : slots) {
+			if (slot.fqName == fqn) {
+				return true
+			}	
+		}
+		return false
+	}
+	
+	/**
+	 * Create only one root slot for imports independently on how many ImportScopes exist
+	 */
+	def CompositeSlot create slot : new CompositeSlotImpl() createImportSlot() {
+		slot.name = "imports"
 	}
 	
 	def getSlotFor(List<ExecutionSlot> slots, String name) {
