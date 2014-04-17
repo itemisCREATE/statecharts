@@ -7,17 +7,17 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
+import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 
-class ExecutionContextHelper {
+class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
 	@Inject
 	extension IQualifiedNameProvider nameProvider
@@ -70,15 +70,11 @@ class ExecutionContextHelper {
 			null
 	}
 	
-	def getFqn(VariableDefinition varDef) {
-		varDef.getFullyQualifiedName
-	}
-
 	def dispatch ExecutionSlot resolveVariable(ExecutionContext context, AssignmentExpression e) {
 		return context.resolveVariable(e.varRef)
 	}
 
-	def ExecutionEvent resolveEvent(ExecutionContext context, FeatureCall call) {
+	def dispatch resolveEvent(ExecutionContext context, FeatureCall call) {
 
 		// TODO consider deeper nested calls as done in resolveVariable
 		var fqn = call.feature.fullyQualifiedName.toString
@@ -92,7 +88,18 @@ class ExecutionContextHelper {
 		context.getEvent(fqn)
 	}
 
+	def dispatch resolveEvent(ExecutionContext context, Expression expression) {}
+	def dispatch resolveVariable(ExecutionContext context, EObject expression) {}
+
+	def getFqn(VariableDefinition varDef) {
+		varDef.getFullyQualifiedName
+	}
+
+
 	def private name(EObject e) {
 		return SimpleAttributeResolver::NAME_RESOLVER.apply(e)
 	}
+	
+	
+	
 }

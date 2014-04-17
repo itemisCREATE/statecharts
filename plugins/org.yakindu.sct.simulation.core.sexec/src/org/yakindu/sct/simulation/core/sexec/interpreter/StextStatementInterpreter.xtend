@@ -59,7 +59,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	@Inject
 	protected IOperationMockup operationDelegate
 	@Inject
-	protected extension ExecutionContextHelper helper
+	protected extension IExecutionSlotResolver resolver
 
 	protected ExecutionContext context
 
