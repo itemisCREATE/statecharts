@@ -45,7 +45,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 
 	@Inject
-	IStatementInterpreter statementInterpreter
+	protected IStatementInterpreter statementInterpreter
 	@Inject
 	ITimingService timingService
 	@Inject extension SexecExtensions

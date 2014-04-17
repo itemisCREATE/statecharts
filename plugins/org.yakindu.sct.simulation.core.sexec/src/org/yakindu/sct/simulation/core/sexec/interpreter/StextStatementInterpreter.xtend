@@ -59,7 +59,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	@Inject
 	protected IOperationMockup operationDelegate
 	@Inject
-	extension ExecutionContextHelper helper
+	protected extension ExecutionContextHelper helper
 
 	protected ExecutionContext context
 
@@ -97,7 +97,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
-		var event = context.getEvent(eventRaising.event.event.getFullyQualifiedName.toString)
+		var fqnName = eventRaising.event.event.getFullyQualifiedName.toString
+		var event = context.getEvent(fqnName)
 		if (eventRaising.value != null) {
 			event.value = eventRaising.value.execute
 		}
