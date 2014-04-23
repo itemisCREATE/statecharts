@@ -148,8 +148,8 @@ public class Function {
 		Class<?>[] paramTypes = new Class<?>[params.length];
 		for (int i = 0; i < params.length; i++) {
 			if (params[i] == null)
-				continue;
-			if (params[i] instanceof EObject) {
+				paramTypes[1] = Object.class;
+			else if (params[i] instanceof EObject) {
 				paramTypes[i] = EObject.class; // enumerators and complex types
 			} else {
 				paramTypes[i] = params[i].getClass(); // primitive values (boxed
