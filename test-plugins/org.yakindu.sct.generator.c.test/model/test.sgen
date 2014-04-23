@@ -208,6 +208,14 @@ GeneratorModel for sctunit::c {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test NullCheck{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
 
 	test OutEventLifeCycle{
 		

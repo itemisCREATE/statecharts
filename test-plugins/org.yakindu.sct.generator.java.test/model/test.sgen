@@ -210,6 +210,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 
+	test NullCheck{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
 	test OutEventLifeCycle{
 		
 		feature Outlet{ 
