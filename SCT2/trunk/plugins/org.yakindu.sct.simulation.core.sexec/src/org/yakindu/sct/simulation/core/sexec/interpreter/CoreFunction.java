@@ -13,6 +13,8 @@ package org.yakindu.sct.simulation.core.sexec.interpreter;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.google.common.base.Objects;
+
 public class CoreFunction extends Function {
 
 	public static final String EQUALS = "==";
@@ -453,6 +455,11 @@ public class CoreFunction extends Function {
 	public Boolean equals(EObject e1, EObject e2) {
 		return EcoreUtil.equals(e1, e2);
 	}
+	
+	@FunctionMethod(EQUALS)
+	public Boolean equals(Object e1, Object e2) {
+		return Objects.equal(e1, e2);
+	}
 
 	@FunctionMethod(EQUALS)
 	public Boolean equals(String string1, String string2) {
@@ -527,6 +534,11 @@ public class CoreFunction extends Function {
 	@FunctionMethod(NOT_EQUALS)
 	public Boolean notEquals(EObject e1, EObject e2) {
 		return !EcoreUtil.equals(e1, e2);
+	}
+	
+	@FunctionMethod(NOT_EQUALS)
+	public Boolean notEquals(Object e1, Object e2) {
+		return ! Objects.equal(e1, e2);
 	}
 
 	@FunctionMethod(NOT_EQUALS)
