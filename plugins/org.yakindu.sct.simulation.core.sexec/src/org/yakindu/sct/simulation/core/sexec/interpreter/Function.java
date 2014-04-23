@@ -66,7 +66,7 @@ public class Function {
 			Class<?>[] parameterTypes2 = method2.getParameterTypes();
 
 			if (parameterTypes1.length != parameterTypes2.length)
-				return -1;
+				return 0;
 
 			for (int i = 0; i < parameterTypes1.length; i++) {
 				final Class<?> class1 = parameterTypes1[i];
@@ -87,15 +87,14 @@ public class Function {
 	protected Method functionMethod;
 
 	/**
-	 * Looks up the appropriate function for the given parameter types. This
-	 * lookup currently does not perform a polymophic lookup.
+	 * Looks up the appropriate function for the given parameter types.
 	 * 
 	 * @param name
 	 * @param paramTypes
 	 * @return
 	 */
 	public Function lookup(Class<?> functionClass, String name, Class<?>... paramTypes) {
-		System.out.println("Lookup");
+
 		List<Method> functionMethods = new ArrayList<Method>();
 		addFunctionMethods(functionClass, functionMethods);
 		Collections.sort(functionMethods, new PolymorphicComparator());
