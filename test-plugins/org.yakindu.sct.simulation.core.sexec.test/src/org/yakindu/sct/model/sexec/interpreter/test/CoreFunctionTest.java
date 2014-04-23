@@ -634,6 +634,15 @@ public class CoreFunctionTest {
 	}
 
 	@Test
+	public void testEqualsObjectObject() {
+		Object obj1 = new Object();
+		assertTrue(cFunction.equals(obj1, obj1));
+		assertFalse(cFunction.equals(obj1, null));
+		assertFalse(cFunction.equals(null, obj1));
+		assertFalse(cFunction.equals(new Object(), new Object()));
+	}
+
+	@Test
 	public void testEqualsStringString() {
 		String test = "test";
 		assertTrue(cFunction.equals(test, "test"));
@@ -692,8 +701,8 @@ public class CoreFunctionTest {
 	public void testEqualsFloatDouble() {
 		assertTrue(cFunction.equals(1.0F, 1.0));
 		assertTrue(cFunction.equals(1.5F, 1.5));
-		//Since Java and C are not able to compare 
-		//float and double values with absolute precision -> 1.3F != 1.3  
+		// Since Java and C are not able to compare
+		// float and double values with absolute precision -> 1.3F != 1.3
 		assertFalse(cFunction.equals(1.3F, 1.3));
 	}
 
@@ -705,8 +714,8 @@ public class CoreFunctionTest {
 
 	@Test
 	public void testEqualsDoubleFloat() {
-		//Since Java and C are not able to compare 
-		//float and double values with absolute precision -> 1.3 != 1.3F  
+		// Since Java and C are not able to compare
+		// float and double values with absolute precision -> 1.3 != 1.3F
 		assertFalse(cFunction.equals(1.3, 1.3F));
 
 		assertTrue(cFunction.equals(1.5, 1.5F));
@@ -727,7 +736,6 @@ public class CoreFunctionTest {
 	@Test
 	public void testNotEqualsEObjectEObject() {
 		assertFalse(cFunction.notEquals(obj1, obj1));
-
 	}
 
 	@Test
@@ -776,6 +784,15 @@ public class CoreFunctionTest {
 	public void testNotEqualsIntegerDouble() {
 		assertTrue(cFunction.notEquals(1, 1.1));
 		assertFalse(cFunction.notEquals(1, 1.0));
+	}
+
+	@Test
+	public void testNotEqualsObjectObject() {
+		Object obj1 = new Object();
+		assertFalse(cFunction.notEquals(obj1, obj1));
+		assertTrue(cFunction.notEquals(obj1, null));
+		assertTrue(cFunction.notEquals(null, obj1));
+		assertTrue(cFunction.notEquals(new Object(), new Object()));
 	}
 
 	@Test
@@ -972,8 +989,8 @@ public class CoreFunctionTest {
 		assertTrue(cFunction.smallerEqual(1.0F, 1.0));
 		assertTrue(cFunction.smallerEqual(1.5F, 1.5));
 		assertTrue(cFunction.smallerEqual(1.1F, 1.2));
-		//Since Java and C are not able to compare 
-		//float and double values with absolute precision -> 1.2 ! <= 1.2F
+		// Since Java and C are not able to compare
+		// float and double values with absolute precision -> 1.2 ! <= 1.2F
 		assertFalse(cFunction.smallerEqual(1.2F, 1.2));
 		assertFalse(cFunction.smallerEqual(1.2F, 1.1));
 	}
