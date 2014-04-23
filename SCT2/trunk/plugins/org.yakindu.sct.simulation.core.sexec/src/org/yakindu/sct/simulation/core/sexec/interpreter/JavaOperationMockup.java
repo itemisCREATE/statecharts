@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class JavaOperationMockup implements IOperationMockup {
 
 	@Inject(optional = true)
 	private ILaunch launch;
-	
+
 	@Inject
 	protected IExecutionSlotResolver resolver;
 
@@ -109,16 +110,17 @@ public class JavaOperationMockup implements IOperationMockup {
 	public Object execute(FeatureCall call, Object[] parameter) {
 		Operation operation = (Operation) call.getFeature();
 		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionSlot variable = resolver.resolveVariable(context, call); 
+		ExecutionSlot variable = resolver.resolveVariable(context, call);
 		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(operation.getName(), operation
 				.getParameters().size(), operation.getParameters().size(), Collections.singletonList(variable
 				.getValue()));
 		try {
 			return dispatcher.invoke(parameter);
 		} catch (Exception ex) {
+			System.err.println("Error invoking operation " + operation.getName() + " with parameters  "
+					+ Arrays.toString(parameter));
 			ex.printStackTrace();
 			return null;
 		}
 	}
-
 }
