@@ -450,14 +450,12 @@ public class CoreFunction extends Function {
 	public Boolean equals(Boolean b1, Boolean b2) {
 		return b1.equals(b2);
 	}
-
-	@FunctionMethod(EQUALS)
-	public Boolean equals(EObject e1, EObject e2) {
-		return EcoreUtil.equals(e1, e2);
-	}
 	
 	@FunctionMethod(EQUALS)
 	public Boolean equals(Object e1, Object e2) {
+		if (e1 instanceof EObject && e2 instanceof EObject) {
+			return EcoreUtil.equals((EObject)e1, (EObject)e2);
+		}
 		return Objects.equal(e1, e2);
 	}
 
@@ -532,15 +530,13 @@ public class CoreFunction extends Function {
 	}
 
 	@FunctionMethod(NOT_EQUALS)
-	public Boolean notEquals(EObject e1, EObject e2) {
-		return !EcoreUtil.equals(e1, e2);
-	}
-	
-	@FunctionMethod(NOT_EQUALS)
 	public Boolean notEquals(Object e1, Object e2) {
+		if (e1 instanceof EObject && e2 instanceof EObject) {
+			return !EcoreUtil.equals((EObject)e1, (EObject)e2);
+		}
 		return ! Objects.equal(e1, e2);
 	}
-
+	
 	@FunctionMethod(NOT_EQUALS)
 	public Boolean notEquals(Boolean b1, Boolean b2) {
 		return b1.booleanValue() != b2.booleanValue();
