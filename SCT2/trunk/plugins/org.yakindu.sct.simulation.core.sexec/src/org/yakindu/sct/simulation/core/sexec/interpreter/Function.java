@@ -95,7 +95,7 @@ public class Function {
 	 * @return
 	 */
 	public Function lookup(Class<?> functionClass, String name, Class<?>... paramTypes) {
-
+		System.out.println("Lookup");
 		List<Method> functionMethods = new ArrayList<Method>();
 		addFunctionMethods(functionClass, functionMethods);
 		Collections.sort(functionMethods, new PolymorphicComparator());
@@ -148,7 +148,7 @@ public class Function {
 		Class<?>[] paramTypes = new Class<?>[params.length];
 		for (int i = 0; i < params.length; i++) {
 			if (params[i] == null)
-				paramTypes[1] = Object.class;
+				paramTypes[i] = Object.class;
 			else if (params[i] instanceof EObject) {
 				paramTypes[i] = EObject.class; // enumerators and complex types
 			} else {
