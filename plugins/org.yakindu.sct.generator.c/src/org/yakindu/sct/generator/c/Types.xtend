@@ -50,7 +50,7 @@ class Types {
 		
 		#include <stdint.h>
 		#include <stdbool.h>
-		
+		 
 		typedef bool			sc_boolean;
 		typedef int_fast16_t	sc_short;
 		typedef uint_fast16_t	sc_ushort;
@@ -63,6 +63,14 @@ class Types {
 		
 		#ifdef __cplusplus
 		}
+		#endif
+		
+		#ifndef «Naming::NULL_STRING»
+			#ifdef __cplusplus
+				#define «Naming::NULL_STRING» 0
+			#else
+				#define «Naming::NULL_STRING» ((void *)0)
+			#endif
 		#endif
 		
 		#define bool_true true

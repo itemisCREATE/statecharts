@@ -33,6 +33,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
+import org.yakindu.base.expressions.expressions.NullLiteral
 
 class ExpressionCode {
 
@@ -65,7 +66,9 @@ class ExpressionCode {
 
 	/* HANDLING LITERALS */
 	def dispatch CharSequence code(Literal it) '''#error unknown literal type «getClass().name» '''
-
+	
+	def dispatch CharSequence code(NullLiteral it) '''«Naming::NULL_STRING»'''
+	
 	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 
 	def String escaped(String it) {

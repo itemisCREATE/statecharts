@@ -41,6 +41,8 @@ class Naming {
 	
 	@Inject extension GenmodelEntries
 	
+	public static final String NULL_STRING = "null";
+	
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
 	}
