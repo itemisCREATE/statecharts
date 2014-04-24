@@ -102,9 +102,20 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		}
 		context.getEvent(fqn)
 	}
+	
+	def dispatch resolveEvent(ExecutionContext context, ElementReferenceExpression expression) {
+		return context.getEvent(expression.reference.fullyQualifiedName.toString)
+	}
 
-	def dispatch resolveEvent(ExecutionContext context, Expression expression) {}
-	def dispatch resolveVariable(ExecutionContext context, EObject expression) {}
+	def dispatch resolveEvent(ExecutionContext context, Expression expression) {
+		println("Unhandled expression on event slot resolution: "+expression)
+		null
+	}
+	
+	def dispatch resolveVariable(ExecutionContext context, EObject expression) {
+		println("Unhandled expression on variable slot resolution: "+expression)
+		null
+	}
 
 	def getFqn(VariableDefinition varDef) {
 		varDef.getFullyQualifiedName

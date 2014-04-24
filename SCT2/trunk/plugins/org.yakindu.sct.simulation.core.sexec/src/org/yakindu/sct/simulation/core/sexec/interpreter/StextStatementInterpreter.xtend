@@ -97,8 +97,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
-		var fqnName = eventRaising.event.event.getFullyQualifiedName.toString
-		var event = context.getEvent(fqnName)
+		var event = context.resolveEvent(eventRaising.event)
 		if (eventRaising.value != null) {
 			event.value = eventRaising.value.execute
 		}
