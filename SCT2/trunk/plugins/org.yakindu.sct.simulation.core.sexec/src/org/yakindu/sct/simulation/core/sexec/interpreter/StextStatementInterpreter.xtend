@@ -45,7 +45,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.base.expressions.expressions.NullLiteral
-import org.eclipse.core.runtime.Assert
 
 /**
  * 
@@ -69,8 +68,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		statement.execute()
 	}
 
-	def dispatch Object execute(Expression expression) {
-		println("Unknown expression " + expression)
+	def dispatch Object execute(Expression statement) {
+		null
 	}
 
 	def dispatch Object execute(AssignmentExpression assignment) {
@@ -98,7 +97,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
-		var event = resolver.resolveEvent(context, eventRaising.event)
+		var fqnName = eventRaising.event.event.getFullyQualifiedName.toString
+		var event = context.getEvent(fqnName)
 		if (eventRaising.value != null) {
 			event.value = eventRaising.value.execute
 		}
