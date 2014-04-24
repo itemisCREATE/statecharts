@@ -44,7 +44,8 @@ import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.expressions.expressions.NullLiteralimport org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
+import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 
 /**
  * 
@@ -120,17 +121,19 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
-		val fqn = expression.reference.getFullyQualifiedName.toString
-		var variableRef = context.getVariable(fqn)
+		var variableRef = context.resolveVariable(expression)
 		if (variableRef != null) {
-			return variableRef.getValue
+			if (variableRef instanceof ExecutionVariable)
+				return variableRef.getValue
+			// reference to an element with complex type is not reflected in an execution variable but in a composite slot
+			if (variableRef instanceof CompositeSlot)
+				return variableRef
 		}
-		val eventRef = context.getEvent(fqn)
+		val eventRef = context.resolveEvent(expression)
 		if (eventRef != null) {
 			return eventRef.raised
 		}
-		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
-		return context.getSlot(fqn)
+		return null
 	}
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
