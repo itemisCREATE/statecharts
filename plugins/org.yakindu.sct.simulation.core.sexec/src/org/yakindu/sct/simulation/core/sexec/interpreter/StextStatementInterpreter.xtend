@@ -46,6 +46,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.base.expressions.expressions.NullLiteralimport org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
+import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 
 /**
  * 
@@ -78,7 +79,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def Object executeAssignment(AssignmentExpression assignment) {
-		var scopeVariable = context.resolveVariable(assignment.varRef)
+		var scopeVariable = context.resolve(assignment.varRef)
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
 			scopeVariable.value = result
@@ -98,11 +99,13 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
-		var event = context.resolveEvent(eventRaising.event)
+		var event = context.resolve(eventRaising.event)
 		if (eventRaising.value != null) {
 			event.value = eventRaising.value.execute
 		}
-		event.raised = true
+		if (event instanceof ExecutionEvent) {
+			(event as ExecutionEvent).raised = true
+		}
 		null
 	}
 
@@ -121,18 +124,16 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
-		var variableRef = context.resolveVariable(expression)
-		if (variableRef != null) {
-			if (variableRef instanceof ExecutionVariable)
-				return variableRef.getValue
-			// reference to an element with complex type is not reflected in an execution variable but in a composite slot
-			if (variableRef instanceof CompositeSlot)
-				return variableRef
-		}
-		val eventRef = context.resolveEvent(expression)
-		if (eventRef != null) {
-			return eventRef.raised
-		}
+		val executionSlot = context.resolve(expression)
+		if (executionSlot instanceof ExecutionVariable)
+			return executionSlot.getValue
+		if (executionSlot instanceof ExecutionEvent)
+			return (executionSlot as ExecutionEvent).raised
+		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
+		// TODO hide reference mechanism in resolver
+		if (executionSlot instanceof CompositeSlot)
+			return executionSlot
+			
 		return null
 	}
 
@@ -234,13 +235,13 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		} else if (call.getFeature() instanceof Enumerator) {
 			return call.getFeature();
 		} else {
-			var variableRef = context.resolveVariable(call)
-			if (variableRef != null) {
+			var variableRef = context.resolve(call)
+			if (variableRef instanceof ExecutionVariable || variableRef instanceof CompositeSlot) {
 				return variableRef.getValue
 			}
-			var event = context.resolveEvent(call)
-			if (event != null)
-				return event.raised
+			if (variableRef instanceof ExecutionEvent)
+				return (variableRef as ExecutionEvent).raised
+				
 			println("No feature found for " + call.feature.fqn + " -> returning null")
 			return null;
 		}

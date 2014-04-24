@@ -99,7 +99,7 @@ public class JavaOperationMockup implements IOperationMockup {
 	@Override
 	public boolean canExecute(FeatureCall call, Object[] parameter) {
 		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionSlot variable = resolver.resolveVariable(context, call);
+		ExecutionSlot variable = resolver.resolve(context, call);
 		if (variable != null)
 			return true;
 		return false;
@@ -110,7 +110,7 @@ public class JavaOperationMockup implements IOperationMockup {
 	public Object execute(FeatureCall call, Object[] parameter) {
 		Operation operation = (Operation) call.getFeature();
 		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionSlot variable = resolver.resolveVariable(context, call);
+		ExecutionSlot variable = resolver.resolve(context, call);
 		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(operation.getName(), operation
 				.getParameters().size(), operation.getParameters().size(), Collections.singletonList(variable
 				.getValue()));

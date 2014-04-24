@@ -17,18 +17,16 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.eclipse.xtext.util.SimpleAttributeResolver
 import org.yakindu.base.expressions.expressions.AssignmentExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
-import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Property
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
-import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 /**
  * Default implementation for resolving execution slots based on expressions.
@@ -46,7 +44,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 		}
 		if (e.feature instanceof Operation) {
 			// for operation return the execution variable of the operation call's owner on which the operation is to be executed
-			return context.resolveVariable(e.owner)
+			return context.resolve(e.owner)
 		}
 		if (e.feature instanceof Property || e.feature instanceof Event) {
 			var current = e
@@ -92,48 +90,9 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 	def dispatch ExecutionSlot resolve(ExecutionContext context, ElementReferenceExpression e) {
 		context.getSlot(e.reference.fullyQualifiedName.toString)
 	}
-
-	def dispatch ExecutionSlot resolveVariable(ExecutionContext context, ElementReferenceExpression e) {
-		val resolved = resolve(context, e)
-		if (resolved.isVariable) {
-			return resolved
-		}
-	}
-
-	def dispatch ExecutionSlot resolveVariable(ExecutionContext context, FeatureCall e) {
-		val resolved = resolve(context, e)
-		if (resolved.isVariable) {
-			return resolved
-		}
-	}
 	
 	def dispatch ExecutionSlot resolve(ExecutionContext context, AssignmentExpression e) {
 		return context.resolve(e.varRef)
-	}
-
-	def dispatch resolveEvent(ExecutionContext context, FeatureCall call) {
-		var resolved = resolve(context, call)
-		if (resolved.isEvent) {
-			return resolved as ExecutionEvent
-		}
-		
-	}
-	
-	def dispatch resolveEvent(ExecutionContext context, ElementReferenceExpression expression) {
-		val resolved = resolve(context, expression)
-		if (resolved.isEvent) {
-			return resolved as ExecutionEvent
-		}
-	}
-
-	def dispatch resolveEvent(ExecutionContext context, Expression expression) {
-		println("Unhandled expression on event slot resolution: "+expression)
-		null
-	}
-	
-	def dispatch resolveVariable(ExecutionContext context, EObject expression) {
-		println("Unhandled expression on variable slot resolution: "+expression)
-		null
 	}
 	
 	def getFqn(EObject varDef) {
@@ -142,13 +101,5 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 
 	def private name(EObject e) {
 		return SimpleAttributeResolver::NAME_RESOLVER.apply(e)
-	}
-	
-	def	boolean isEvent(ExecutionSlot slot) {
-		(slot instanceof ExecutionEvent)
-	}
-	
-	def boolean isVariable(ExecutionSlot slot) {
-		!slot.isEvent
 	}
 }
