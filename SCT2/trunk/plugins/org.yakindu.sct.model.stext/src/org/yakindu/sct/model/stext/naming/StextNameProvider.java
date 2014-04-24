@@ -24,7 +24,7 @@ import com.google.inject.Inject;
 
 public class StextNameProvider extends SGraphNameProvider {
 	@Inject
-	IQualifiedNameConverter nameConverter;
+	protected IQualifiedNameConverter nameConverter;
 
 	public QualifiedName qualifiedName(Event ele) {
 		QualifiedName name = null;
