@@ -139,7 +139,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch Object execute(EventValueReferenceExpression expression) {
 		for (event : context.raisedEvents) {
-			if (event.fqName.equals(expression.value.qname)) {
+			val executionSlot = context.resolve(expression.value)
+			if (executionSlot instanceof ExecutionEvent && executionSlot.fqName == event.fqName) {
 				return event.getValue;
 			};
 		}
