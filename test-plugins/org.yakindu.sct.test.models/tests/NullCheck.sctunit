@@ -1,0 +1,13 @@
+
+testgroup NullCheck for statechart NullCheck {
+	
+	test SimpleNullCheckTest { 
+		enter
+				
+		assert active(NullCheck.main_region.A)
+		cycle
+		assert active(NullCheck.main_region.B)			
+
+	} 
+}
+	
