@@ -113,8 +113,11 @@ class ModelSequencer implements IModelSequencer {
 
 	def retarget(FeatureCall call, Collection<Declaration> declared) {
 		if (call.feature != null && ! declared.contains(call.feature) ) {
-			val r = call.feature.replaced 
-			if ( r != null ) call.feature = r as Feature	
+			// elements within externally declared packages should not be replaced but referenced
+			if (EcoreUtil2.getContainerOfType(call.feature, Package) == null) {
+				val r = call.feature.replaced 
+				if ( r != null ) call.feature = r as Feature
+			}
 		}
 	}
 	
