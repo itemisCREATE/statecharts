@@ -108,9 +108,7 @@ class StatemachineImplementation {
 		
 			clearInEvents();
 			clearOutEvents();
-		
-			// TODO: initialize all events ...
-
+			
 			«initSequence.code»
 
 		}

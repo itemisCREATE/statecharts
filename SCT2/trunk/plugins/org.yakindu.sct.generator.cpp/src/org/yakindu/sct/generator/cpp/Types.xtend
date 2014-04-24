@@ -55,6 +55,10 @@ class Types {
 		
 		typedef void*			sc_eventid;
 		
+		#ifndef «Naming::NULL_STRING»
+			#define «Naming::NULL_STRING» 0
+		#endif
+		
 		#endif /* «typesModule.define»_H_ */
 	'''
 }
