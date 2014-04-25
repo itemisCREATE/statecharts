@@ -55,7 +55,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 	private final NamedElement element;
 	protected List<SCTDebugThread> threads;
 
-	private ISimulationEngine engine;
+	protected ISimulationEngine engine;
 
 	private IExecutionControl executionControl;
 
