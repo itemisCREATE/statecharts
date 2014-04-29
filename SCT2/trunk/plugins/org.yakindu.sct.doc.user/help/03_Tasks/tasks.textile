@@ -116,12 +116,18 @@ p. Congratulations, you successfully created a custom generator project! Add
 bc. 
 The Statemachine contains «flow.states.size» states
 
-to the *CustomGenerator.xtend* and regenerate. The result in *MyStatechart.txt* is updated immediately. This is a very powerful feature of Yakindu Statechart Tools. You can develop your code generator with zero turn around time without the need to restart your workbench or redeploying plugins. Just hit *generate* and see the result.
-
+to the *CustomGenerator.xtend* and regenerate. The result in *MyStatechart.txt* is updated immediately. This is a very powerful feature of Yakindu Statechart Tools. You can develop your code generator at runtime with zero turn around time. Just hit *generate* and see the result.
 
 h3. Different meta models for different use cases
 
-TBD: SGraph, SText and ExecutionFlow
+*The SGraph meta model*
+The SGraph meta model defines the structural aspects of the Statechart model and is similiar to the statemachine model defined by the Unified Modeling Language (UML). A simplified version is shown in the following diagram.   
+
+!images/sgraph_simple.png!
+
+
+A *Statechart* extends __CompositeElement__, therefore it contains 0..* __Regions__. It is the root element of the model. A *CompositeElement* is an abstract type that contains __Regions__. Known sub classes are __Statechart__ and __State__. A *Region* contains 1..* __Vertices__. A *Vertex* is a abstract type representing nodes in the SGraph tree. Vertices contain outgoing __Transitions__. A *RegularState* is an abstract type derived from __Vertex__. It has no additional features, but is the common base type for __State__ and __FinalState__. A *State* is derived from __RegularState__ and __CompositeElement__. and thus may contain __Regions__ and __Transitions__. A *FinalState*
+is derived from "RegularState". It indicated the completion of its containing __Region__. A *PseudoState* is an abstract type derived from __Vertex__. It has no additional features, but is the common base type for __Choice__, __Entry__, __Exit__ and __Synchronization__. A *Choice* is a __Pseudostate__ with the additional attribute __kind__, that determines if the element has __static__ or __dynamic__ execution semantics. An *Entry* is a __Pseudostate__ with the additional attribute "kind". A Entry may be of the kind __Initial__, __ShallowHistory__ or __DeepHistory__. An *Exit* is a __Pseudostate__. It is defined as the point where a region is left. A *Synchronization* is a __Pseudostate__. It is equivalent to a __Fork__ and a __Join__. A *Transition* is defined as a directed relationship between two vertices. 
 
 
 
