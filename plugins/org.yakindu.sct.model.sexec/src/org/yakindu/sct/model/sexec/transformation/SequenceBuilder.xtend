@@ -17,8 +17,10 @@ import org.yakindu.base.types.ITypeSystem
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.StateSwitch
 import org.yakindu.sct.model.sgraph.FinalState
+import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
 import org.yakindu.sct.model.sgraph.State
@@ -29,7 +31,6 @@ import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.yakindu.sct.model.sgraph.ImportDeclaration
 
 class SequenceBuilder {
 
@@ -445,18 +446,26 @@ class SequenceBuilder {
 		initSequence.name = "init"
 		initSequence.comment = "Default init sequence for statechart " + sc.name
 	
-		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))
-		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(d|d.declaration).filter(typeof(VariableDefinition))
-	
-		for (VariableDefinition vd : statechartVariables+importedVariables) {
-			if (vd.effectiveInitialValue != null) {
-				initSequence.steps.add(vd.createInitialization)
-			}
+		for (VariableDefinition vd : flow.getVariablesForInitSequence) {
+			initSequence.addVariableInitializationStep(vd)
 		}
 
 		flow.initSequence = initSequence
 		return initSequence
 	}
+	
+	protected def getVariablesForInitSequence(ExecutionFlow flow) {
+		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))
+		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(d|d.declaration).filter(typeof(VariableDefinition))
+		return statechartVariables + importedVariables
+	}
+	
+	def addVariableInitializationStep(Sequence initSequence, VariableDefinition vd) {
+		if (vd.effectiveInitialValue != null) {
+			initSequence.steps.add(vd.createInitialization)
+		}
+	}
+	
 	//TODO: Move to type system
 	def effectiveInitialValue(VariableDefinition vd) {
 		if (vd.initialValue != null) {
