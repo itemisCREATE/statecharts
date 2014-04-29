@@ -74,9 +74,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatVariableAssignment() {
+	public void testRealVariableAssignment() {
 		executeWithDefaultScope("realVar = 42.0");
-		assertEquals(42.0f, getContext().getVariable("realVar").getValue());
+		assertEquals(42.0d, getContext().getVariable("realVar").getValue());
 	}
 
 	@Test
@@ -153,7 +153,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatEqual() {
+	public void testRealEqual() {
 		executeWithDefaultScope("boolVar = 1.0f == 1.0f");
 		assertEquals(true, getBoolValue());
 	}
@@ -177,7 +177,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatNotEqual() {
+	public void testRealNotEqual() {
 		executeWithDefaultScope("boolVar = 1.0f != 2.0f");
 		assertEquals(true, getBoolValue());
 	}
@@ -196,7 +196,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatGreaterEqual() {
+	public void testRealGreaterEqual() {
 		executeWithDefaultScope("boolVar = 2.0f >= 2.0f");
 		assertEquals(true, getBoolValue());
 	}
@@ -208,7 +208,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatSmallerEqual() {
+	public void testRealSmallerEqual() {
 		executeWithDefaultScope("boolVar = 2.0f <= 2.0f");
 		assertEquals(true, getBoolValue());
 	}
@@ -220,7 +220,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatGreater() {
+	public void testRealGreater() {
 		executeWithDefaultScope("boolVar = 2.1f > 2.0f");
 		assertEquals(true, getBoolValue());
 	}
@@ -232,7 +232,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatSmaller() {
+	public void testRealSmaller() {
 		executeWithDefaultScope("boolVar = 2.0f < 2.1f");
 		assertEquals(true, getBoolValue());
 	}
@@ -246,9 +246,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatPositive() {
+	public void testRealPositive() {
 		executeWithDefaultScope("realVar = +1.0");
-		assertEquals(1.0f, getFloatValue());
+		assertEquals(1.0d, getRealValue());
 	}
 
 	@Test
@@ -260,21 +260,10 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	}
 
-	// @Test
-	// public void testIntNegativeVar() {
-	// RTVariable a = new RTVariable("a");
-	// scope.addVariable(a);
-	// scope.setVariableValue(a, 42);
-	// executeWithDefaultScope("a = -a;");
-	// stmt.execute(scope);
-	//
-	// assertEquals(-42, scope.getValue("a"));
-	// }
-
 	@Test
-	public void testFloatNegative() {
+	public void testRealNegative() {
 		executeWithDefaultScope("realVar = -1.0f");
-		assertEquals(-1.0f, getFloatValue());
+		assertEquals(-1.0d, getRealValue());
 	}
 
 	@Test
@@ -284,9 +273,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatPlus() {
+	public void testRealPlus() {
 		executeWithDefaultScope("realVar = 42.0 + 1.0");
-		assertEquals(43.0f, getFloatValue());
+		assertEquals(43.0d, getRealValue());
 	}
 
 	@Test
@@ -296,9 +285,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatMinus() {
+	public void testRealMinus() {
 		executeWithDefaultScope("realVar = 42.0f - 1.0f");
-		assertEquals(41.0f, getFloatValue());
+		assertEquals(41.0d, getRealValue());
 	}
 
 	@Test
@@ -308,9 +297,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatMultiply() {
+	public void testRealMultiply() {
 		executeWithDefaultScope("realVar = 42.0f * 2.0f");
-		assertEquals(84.0f, getFloatValue());
+		assertEquals(84.0d, getRealValue());
 	}
 
 	@Test
@@ -320,9 +309,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatDivide() {
+	public void testRealDivide() {
 		executeWithDefaultScope("realVar = 42.0f / 2.0f");
-		assertEquals(21.0f, getFloatValue());
+		assertEquals(21.0d, getRealValue());
 	}
 
 	@Test
@@ -332,9 +321,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatModulo() {
+	public void testRealModulo() {
 		executeWithDefaultScope("realVar = 42.0f % 2.0f");
-		assertEquals(0.0f, getFloatValue());
+		assertEquals(0.0d, getRealValue());
 	}
 
 	@Test
@@ -399,10 +388,10 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatPlusAssign() {
+	public void testRealPlusAssign() {
 		executeWithDefaultScope("realVar = 42.0");
 		executeWithDefaultScope("realVar+=42.0");
-		assertEquals(84.0f, getFloatValue());
+		assertEquals(84.0d, getRealValue());
 	}
 
 	@Test
@@ -413,10 +402,10 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatMinusAssign() {
+	public void testRealMinusAssign() {
 		executeWithDefaultScope("realVar=42.0f");
 		executeWithDefaultScope("realVar-=10.0");
-		assertEquals(32.0f, getFloatValue());
+		assertEquals(32.0d, getRealValue());
 	}
 
 	@Test
@@ -427,10 +416,10 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatMultAssign() {
+	public void testRealMultAssign() {
 		executeWithDefaultScope("realVar=42.0f");
 		executeWithDefaultScope("realVar*=1.0");
-		assertEquals(42.0f, getFloatValue());
+		assertEquals(42.0d, getRealValue());
 	}
 
 	@Test
@@ -441,10 +430,10 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatDivAssign() {
+	public void testRealDivAssign() {
 		executeWithDefaultScope("realVar=42.0f");
 		executeWithDefaultScope("realVar/=1.0f");
-		assertEquals(42.0f, getFloatValue());
+		assertEquals(42.0d, getRealValue());
 	}
 
 	@Test
@@ -455,10 +444,10 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	}
 
 	@Test
-	public void testFloatModAssign() {
+	public void testRealModAssign() {
 		executeWithDefaultScope("realVar=42.0f");
 		executeWithDefaultScope("realVar%=1.0f");
-		assertEquals(0.0f, getFloatValue());
+		assertEquals(0.0d, getRealValue());
 	}
 
 	@Test
@@ -524,7 +513,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		return context.getVariable("intVar").getValue();
 	}
 
-	protected Object getFloatValue() {
+	protected Object getRealValue() {
 		return context.getVariable("realVar").getValue();
 	}
 
