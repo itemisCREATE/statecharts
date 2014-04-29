@@ -29,12 +29,12 @@ public interface RealLiteral extends Literal {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Value</em>' attribute.
-	 * @see #setValue(float)
+	 * @see #setValue(double)
 	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getRealLiteral_Value()
 	 * @model
 	 * @generated
 	 */
-	float getValue();
+	double getValue();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.base.expressions.expressions.RealLiteral#getValue <em>Value</em>}' attribute.
@@ -44,6 +44,6 @@ public interface RealLiteral extends Literal {
 	 * @see #getValue()
 	 * @generated
 	 */
-	void setValue(float value);
+	void setValue(double value);
 
 } // RealLiteral
