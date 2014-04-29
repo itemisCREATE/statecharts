@@ -40,13 +40,12 @@ class StatemachineRequired {
 			#define «module.client.define»_H_
 
 			#include "«typesModule.h»"
+			«IF timed»#include "«module.h»"«ENDIF»
 
 			#ifdef __cplusplus
 			extern "C" {
 			#endif 
 			
-			
-
 			/*! \file This header defines prototypes for all functions that are required by the state machine implementation.
 			
 			«IF timed»
@@ -54,28 +53,26 @@ class StatemachineRequired {
 					- «type.toFirstLower»_setTimer and
 					- «type.toFirstLower»_unsetTimer
 				are defined.
+				
 			«ENDIF»
-			
 			«IF operations.size > 0»
 				This state machine makes use of operations declared in the state machines interface or internal scopes. Thus the function prototypes:
 					«FOR o : operations»
 					- «o.asFunction»
 					«ENDFOR»
 				are defined.
+				
 			«ENDIF»
-					
 			These functions will be called during a 'run to completion step' (runCycle) of the statechart. 
 			There are some constraints that have to be considered for the implementation of these functions:
 				- never call the statechart API functions from within these functions.
 				- make sure that the execution time is as short as possible.
 			 
 			*/
-
 			«FOR s : it.scopes »
 			«s.scopeFunctionPrototypes»
 			
 			«ENDFOR»
-			
 			«IF timed»
 			//
 			// This is a timed state machine that requires timer services
@@ -88,14 +85,14 @@ class StatemachineRequired {
 				\time_ms The time in milli seconds
 				\periodic Indicates the the time event must be raised periodically until the timer is unset 
 			*/
-			extern void «type.toFirstLower»_setTimer(const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
+			extern void «type.toFirstLower»_setTimer(«scHandleDecl», const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
 
 			//! This function has to unset timers for the time events that are required by the state machine.
 			/*! 
 				This function will be called for each time event taht is relevant for a state when a state will be left.
 				\param evid An unique identifier of the event.
 			*/
-			extern void «type.toFirstLower»_unsetTimer(const sc_eventid evid);
+			extern void «type.toFirstLower»_unsetTimer(«scHandleDecl», const sc_eventid evid);
 			«ENDIF»
 			
 			#ifdef __cplusplus
