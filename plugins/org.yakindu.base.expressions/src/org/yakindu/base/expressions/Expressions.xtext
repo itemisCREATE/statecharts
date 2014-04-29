@@ -106,7 +106,7 @@ IntLiteral:
 	{IntLiteral} value=INT;
 
 RealLiteral:
-	{RealLiteral} value=FLOAT;
+	{RealLiteral} value=DOUBLE;
 
 HexLiteral:
 	{HexLiteral} value=HEX;
@@ -170,5 +170,5 @@ terminal BOOL returns ecore::EBoolean:
 terminal HEX returns ecore::EInt:
 	('0') ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 
-terminal FLOAT returns ecore::EFloat:
+terminal DOUBLE returns ecore::EDouble:
 	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F' | 'd' | 'D')?;
