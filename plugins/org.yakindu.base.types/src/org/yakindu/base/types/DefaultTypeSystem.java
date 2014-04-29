@@ -130,7 +130,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			return new InferenceResult(getBooleanType());
 		} else if (literal instanceof Integer) {
 			return new InferenceResult(getIntegerType());
-		} else if (literal instanceof Float) {
+		} else if (literal instanceof Double) {
 			return new InferenceResult(getRealType());
 		} else if (literal == null) {
 			return new InferenceResult(getNullType());
