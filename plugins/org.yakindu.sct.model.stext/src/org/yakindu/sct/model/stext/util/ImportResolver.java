@@ -34,7 +34,7 @@ public class ImportResolver {
 
 	public <T extends EObject> List<T> getImportedElementsOfType(Import importedNamespace, Class<T> type) {
 		List<T> varDefs = Lists.newArrayList();
-		Package importedPackage = getPackageForImport(importedNamespace);
+		Package importedPackage = getPackageForImport(importedNamespace.eResource(), importedNamespace.getImportedNamespace());
 		if (importedPackage != null) {
 			TreeIterator<EObject> iter = importedPackage.eAllContents();
 			while (iter.hasNext()) {
@@ -47,16 +47,13 @@ public class ImportResolver {
 		return varDefs;
 	}
 
-	public Package getPackageForImport(Import importElement) {
-		initResourceDescriptions(importElement);
-
-		String namespace = importElement.getImportedNamespace();
+	public Package getPackageForImport(Resource contextResource, String namespace) {
+		initResourceDescriptions(contextResource);
 		// remove wildcard
 		if (namespace.endsWith(".*")) {
 			namespace = namespace.substring(0, namespace.length() - 2);
 		}
-		Resource res = importElement.eResource();
-		URI uri = res.getURI();
+		URI uri = contextResource.getURI();
 		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(uri);
 		if (resourceDescription == null) {
 			// no resource description could be found, so package cannot be resolved anyway
@@ -77,17 +74,16 @@ public class ImportResolver {
 		return null;
 	}
 
-	private void initResourceDescriptions(Import importedNamespace) {
+	private void initResourceDescriptions(Resource contextResource) {
 		if (resourceDescriptions instanceof ResourceSetBasedResourceDescriptions) {
-			ResourceSet rset = buildResourceSet(importedNamespace);
+			ResourceSet rset = buildResourceSet(contextResource);
 			((ResourceSetBasedResourceDescriptions) resourceDescriptions).setContext(rset);
 		}
 	}
 
-	private ResourceSet buildResourceSet(EObject ctx) {
+	private ResourceSet buildResourceSet(Resource contextResource) {
 		final ResourceSet rset = new ResourceSetImpl();
-		Resource contextRes = ctx.eResource();
-		IProject project = WorkspaceSynchronizer.getFile(contextRes).getProject();
+		IProject project = WorkspaceSynchronizer.getFile(contextResource).getProject();
 		try {
 			project.accept(new IResourceVisitor() {
 				public boolean visit(IResource resource) throws CoreException {
@@ -102,7 +98,7 @@ public class ImportResolver {
 		} catch (CoreException e) {
 			e.printStackTrace();
 		}
-		rset.getResources().add(contextRes);
+		rset.getResources().add(contextResource);
 
 		return rset;
 	}
