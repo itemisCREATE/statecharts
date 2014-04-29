@@ -216,7 +216,7 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 	}
 
 	@Override
-	public void complete_FLOAT(EObject model, RuleCall ruleCall, ContentAssistContext context,
+	public void complete_DOUBLE(EObject model, RuleCall ruleCall, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		ICompletionProposalAcceptor priorityOptimizer = getCustomAcceptor(model, "real", acceptor);
 
