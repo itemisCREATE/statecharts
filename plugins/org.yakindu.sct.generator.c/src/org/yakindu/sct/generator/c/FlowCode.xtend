@@ -77,12 +77,12 @@ class FlowCode {
 
 	def dispatch CharSequence code(ScheduleTimeEvent it) '''
 		«stepComment»
-		«flow.type.toFirstLower»_setTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
+		«flow.type.toFirstLower»_setTimer(«scHandle», (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) , «timeValue.code», «IF timeEvent.periodic»bool_true«ELSE»bool_false«ENDIF»);
 	'''
 
 	def dispatch CharSequence code(UnscheduleTimeEvent it) '''
 		«stepComment»
-		«flow.type.toFirstLower»_unsetTimer( (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) );		
+		«flow.type.toFirstLower»_unsetTimer(«scHandle», (sc_eventid) &(«scHandle»->timeEvents.«timeEvent.shortName»_raised) );		
 	'''
 
 	def dispatch CharSequence code(Execution it) 
