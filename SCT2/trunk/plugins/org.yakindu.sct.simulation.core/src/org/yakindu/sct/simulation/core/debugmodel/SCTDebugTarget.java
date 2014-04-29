@@ -25,6 +25,7 @@ import org.eclipse.debug.core.model.IBreakpoint;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.debug.core.model.IMemoryBlock;
 import org.eclipse.debug.core.model.IProcess;
+import org.eclipse.debug.core.model.IStep;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EObject;
@@ -44,7 +45,7 @@ import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter
  * @author axel terfloth - extensions
  * 
  */
-public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
+public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, IStep {
 
 	private ILaunch launch;
 
@@ -253,4 +254,23 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget {
 			super.notifyChanged(notification);
 		}
 	}
+
+	public boolean canStepInto() {
+		// Not used
+		return false;
+	}
+
+	public boolean canStepReturn() {
+		// Not used
+		return false;
+	}
+
+	public void stepInto() throws DebugException {
+
+	}
+
+	public void stepReturn() throws DebugException {
+
+	}
+
 }
