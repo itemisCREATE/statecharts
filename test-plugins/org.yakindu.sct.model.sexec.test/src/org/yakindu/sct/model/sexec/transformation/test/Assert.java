@@ -91,7 +91,7 @@ public class Assert {
 						.getValue());
 			}
 			else if (literal instanceof RealLiteral) {
-				currentValue = Float.toString(((RealLiteral) literal)
+				currentValue = Double.toString(((RealLiteral) literal)
 						.getValue());
 			}
 			else if (literal instanceof StringLiteral) {

@@ -30,13 +30,12 @@ public class RealEditingSupport extends ScopeSlotEditingSupport {
 
 	@Override
 	public CellEditor getCellEditor(Object element) {
-		TextCellEditor textCellEditor = new TextCellEditor(
-				(Composite) getViewer().getControl());
+		TextCellEditor textCellEditor = new TextCellEditor((Composite) getViewer().getControl());
 		textCellEditor.setValidator(new ICellEditorValidator() {
 			public String isValid(Object value) {
 				String stringValue = (String) value;
 				try {
-					Float.parseFloat(stringValue);
+					Double.parseDouble(stringValue);
 				} catch (NumberFormatException e) {
 					return "No valid real value!";
 				}
@@ -48,14 +47,13 @@ public class RealEditingSupport extends ScopeSlotEditingSupport {
 
 	@Override
 	public Class<?> getSupportedType() {
-		return Float.class;
+		return Double.class;
 	}
 
 	@Override
 	protected Object convertValue(Object element, Object value) {
-		if (value != null && value instanceof String
-				&& ((String) value).trim().length() > 0) {
-			return Float.parseFloat((String) value);
+		if (value != null && value instanceof String && ((String) value).trim().length() > 0) {
+			return Double.parseDouble((String) value);
 		}
 		return null;
 	}

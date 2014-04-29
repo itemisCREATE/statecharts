@@ -457,7 +457,7 @@ class SequenceBuilder {
 		flow.initSequence = initSequence
 		return initSequence
 	}
-
+	//TODO: Move to type system
 	def effectiveInitialValue(VariableDefinition vd) {
 		if (vd.initialValue != null) {
 			return vd.initialValue
@@ -465,7 +465,7 @@ class SequenceBuilder {
 			switch (vd) {
 				case isBooleanType(vd.type): false.buildValue
 				case isIntegerType(vd.type): 0.buildValue
-				case isRealType(vd.type): buildValue(0.0 as float)
+				case isRealType(vd.type): buildValue(0.0d as double)
 				case isStringType(vd.type): "".buildValue
 				default: null
 			}
@@ -487,11 +487,6 @@ class SequenceBuilder {
 	}
 
 	def Expression buildValueExpression(TimeEventSpec tes) {
-
-		//		val PrimitiveValueExpression pve = stext.factory.createPrimitiveValueExpression 
-		//		val IntLiteral intLit = stext.factory.createIntLiteral
-		//		intLit.value = tes.value
-		//		pve.value = intLit
 		val pve = tes.value.copy
 
 		switch (tes.unit) {
@@ -549,10 +544,10 @@ class SequenceBuilder {
 		pve
 	}
 
-	def Expression buildValue(float r) {
+	def Expression buildValue(double d) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val RealLiteral lit = factory.createRealLiteral
-		lit.value = r
+		lit.value = d
 		pve.value = lit
 
 		pve
