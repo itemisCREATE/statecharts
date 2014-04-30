@@ -46,7 +46,7 @@ public class SCTDebugElement extends DebugElement {
 		List<String> qfnFragments = new ArrayList<String>();
 		qfnFragments.add(element.getName());
 		EObject current = element;
-		while (!(current.eContainer() != EcoreUtil.getRootContainer(current))) {
+		while (current.eContainer() != EcoreUtil.getRootContainer(current)) {
 			current = current.eContainer();
 			if (current instanceof NamedElement) {
 				String name = ((NamedElement) current).getName();
