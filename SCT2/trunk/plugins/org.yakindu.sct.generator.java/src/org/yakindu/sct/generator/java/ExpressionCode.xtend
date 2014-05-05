@@ -42,6 +42,7 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 
 class ExpressionCode {
 
@@ -114,6 +115,10 @@ class ExpressionCode {
 	def dispatch String code(LogicalOrExpression expression) {
 		expression.leftOperand.code + " || " + expression.rightOperand.code
 	}
+	
+	def dispatch String code(ConditionalExpression expression) {
+		expression.condition.code + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
+	}
 
 	def dispatch String code(LogicalAndExpression expression) {
 		expression.leftOperand.code + " && " + expression.rightOperand.code
@@ -162,7 +167,6 @@ class ExpressionCode {
 
 	def dispatch String code(NumericalMultiplyDivideExpression expression) {
 		expression.leftOperand.code + expression.operator.code + expression.rightOperand.code
-
 	}
 
 	def dispatch String code(NumericalUnaryExpression expression) {
