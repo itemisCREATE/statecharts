@@ -56,6 +56,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
+	test ConditionalExpression{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test Declarations{
 		
 		feature Outlet{ 

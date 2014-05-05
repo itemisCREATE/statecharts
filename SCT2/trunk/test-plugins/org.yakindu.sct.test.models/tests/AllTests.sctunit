@@ -5,6 +5,7 @@ testsuite AllTests {
 	BooleanExpressions,
 	Choice, 
 	CKeywords,
+	ConditionalExpression,
 	Declarations, 
 	DeepEntry,
 	DeepHistory,

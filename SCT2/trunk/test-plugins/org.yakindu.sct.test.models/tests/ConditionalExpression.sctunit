@@ -1,0 +1,21 @@
+
+testgroup ConditionalExpression for statechart ConditionalExpressions{
+	
+	test ConditionalExpressionTest { 
+		enter
+		assert active (ConditionalExpressions.main_region.A)
+		assert condition == 1
+		
+		raise e
+		cycle
+		
+		assert active (ConditionalExpressions.main_region.B)
+		assert condition == 2
+		
+		
+		
+		 
+		 
+	} 
+}
+	

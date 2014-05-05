@@ -50,8 +50,6 @@ public interface IJavaKeywordsStatemachine extends IStatemachine {
 		public void setIf(boolean value);
 		public boolean getImplements();
 		public void setImplements(boolean value);
-		public boolean getImport();
-		public void setImport(boolean value);
 		public boolean getInstanceof();
 		public void setInstanceof(boolean value);
 		public boolean getInt();
@@ -62,8 +60,6 @@ public interface IJavaKeywordsStatemachine extends IStatemachine {
 		public void setNative(boolean value);
 		public boolean getNew();
 		public void setNew(boolean value);
-		public boolean getNull();
-		public void setNull(boolean value);
 		public boolean getPackage();
 		public void setPackage(boolean value);
 		public boolean getPrivate();
