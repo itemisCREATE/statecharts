@@ -56,6 +56,14 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
+	test ConditionalExpression{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test Declarations{
 		
 		feature Outlet{ 

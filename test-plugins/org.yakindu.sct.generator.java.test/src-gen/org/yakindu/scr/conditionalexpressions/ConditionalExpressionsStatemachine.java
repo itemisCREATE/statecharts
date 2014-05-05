@@ -1,6 +1,44 @@
-package org.yakindu.scr.nullcheck;
+package org.yakindu.scr.conditionalexpressions;
 
-public class NullCheckStatemachine implements INullCheckStatemachine {
+public class ConditionalExpressionsStatemachine
+		implements
+			IConditionalExpressionsStatemachine {
+
+	private final class SCInterfaceImpl implements SCInterface {
+
+		private boolean e;
+
+		public void raiseE() {
+			e = true;
+		}
+
+		private long condition;
+
+		public long getCondition() {
+			return condition;
+		}
+
+		public void setCondition(long value) {
+			this.condition = value;
+		}
+
+		private boolean boolVar;
+
+		public boolean getBoolVar() {
+			return boolVar;
+		}
+
+		public void setBoolVar(boolean value) {
+			this.boolVar = value;
+		}
+
+		public void clearEvents() {
+			e = false;
+		}
+
+	}
+
+	private SCInterfaceImpl sCInterface;
 
 	public enum State {
 		main_region_A, main_region_B, $NullState$
@@ -10,8 +48,9 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 
 	private int nextStateIndex;
 
-	public NullCheckStatemachine() {
+	public ConditionalExpressionsStatemachine() {
 
+		sCInterface = new SCInterfaceImpl();
 	}
 
 	public void init() {
@@ -22,10 +61,15 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 		clearEvents();
 		clearOutEvents();
 
+		sCInterface.condition = sCInterface.boolVar ? 3 : 2;
+
+		sCInterface.boolVar = true;
 	}
 
 	public void enter() {
 		entryAction();
+
+		sCInterface.condition = sCInterface.boolVar ? 1 : 0;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
@@ -54,6 +98,7 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 	 * This method resets the incoming events (time events included).
 	 */
 	protected void clearEvents() {
+		sCInterface.clearEvents();
 
 	}
 
@@ -77,19 +122,44 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 		}
 	}
 
-	/* Entry action for statechart 'NullCheck'. */
+	public SCInterface getSCInterface() {
+		return sCInterface;
+	}
+
+	public void raiseE() {
+		sCInterface.raiseE();
+	}
+
+	public long getCondition() {
+		return sCInterface.getCondition();
+	}
+
+	public void setCondition(long value) {
+		sCInterface.setCondition(value);
+	}
+	public boolean getBoolVar() {
+		return sCInterface.getBoolVar();
+	}
+
+	public void setBoolVar(boolean value) {
+		sCInterface.setBoolVar(value);
+	}
+
+	/* Entry action for statechart 'ConditionalExpressions'. */
 	private void entryAction() {
 	}
 
-	/* Exit action for state 'NullCheck'. */
+	/* Exit action for state 'ConditionalExpressions'. */
 	private void exitAction() {
 	}
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (null == null) {
+		if (sCInterface.e && 1 == (sCInterface.boolVar ? 1 : 0)) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
+
+			sCInterface.condition = ((sCInterface.condition == 2) ? 1 : 2);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_B;

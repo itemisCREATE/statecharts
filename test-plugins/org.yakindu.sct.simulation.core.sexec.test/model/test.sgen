@@ -56,6 +56,14 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
+	test ConditionalExpression{ 
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test Declarations{
 		
 		feature Outlet{ 

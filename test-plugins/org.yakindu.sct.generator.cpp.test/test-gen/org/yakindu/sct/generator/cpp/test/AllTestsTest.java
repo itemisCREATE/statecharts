@@ -16,9 +16,9 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
 		BitExpressionsTest.class, BooleanExpressionsTest.class,
-		ChoiceTest.class, CKeywordsTest.class, DeclarationsTest.class,
-		DeepEntryTest.class, DeepHistoryTest.class, DynamicChoiceTest.class,
-		EnterStateTest.class, EntryChoiceTest.class,
+		ChoiceTest.class, CKeywordsTest.class, ConditionalExpressionTest.class,
+		DeclarationsTest.class, DeepEntryTest.class, DeepHistoryTest.class,
+		DynamicChoiceTest.class, EnterStateTest.class, EntryChoiceTest.class,
 		ExitOnSelfTransitionTest.class, ExitStateTest.class,
 		FeatureCallsTest.class, GuardTest.class, GuardedEntryTest.class,
 		GuardedExitTest.class, HistoryWithoutInitialStepTest.class,

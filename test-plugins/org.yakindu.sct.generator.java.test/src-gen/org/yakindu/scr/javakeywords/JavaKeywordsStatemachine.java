@@ -236,16 +236,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.implements_ID = value;
 		}
 
-		private boolean import_ID;
-
-		public boolean getImport() {
-			return import_ID;
-		}
-
-		public void setImport(boolean value) {
-			this.import_ID = value;
-		}
-
 		private boolean instanceof_ID;
 
 		public boolean getInstanceof() {
@@ -294,16 +284,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 		public void setNew(boolean value) {
 			this.new_ID = value;
-		}
-
-		private boolean null_ID;
-
-		public boolean getNull() {
-			return null_ID;
-		}
-
-		public void setNull(boolean value) {
-			this.null_ID = value;
 		}
 
 		private boolean package_ID;
@@ -564,8 +544,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 		sCInterface.implements_ID = false;
 
-		sCInterface.import_ID = false;
-
 		sCInterface.instanceof_ID = false;
 
 		sCInterface.int_ID = false;
@@ -575,8 +553,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.native_ID = false;
 
 		sCInterface.new_ID = false;
-
-		sCInterface.null_ID = false;
 
 		sCInterface.package_ID = false;
 
@@ -662,8 +638,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 		sCInterface.implements_ID = true;
 
-		sCInterface.import_ID = true;
-
 		sCInterface.instanceof_ID = true;
 
 		sCInterface.int_ID = true;
@@ -673,8 +647,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.native_ID = true;
 
 		sCInterface.new_ID = true;
-
-		sCInterface.null_ID = true;
 
 		sCInterface.package_ID = true;
 
@@ -957,13 +929,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	public void setImplements(boolean value) {
 		sCInterface.setImplements(value);
 	}
-	public boolean getImport() {
-		return sCInterface.getImport();
-	}
-
-	public void setImport(boolean value) {
-		sCInterface.setImport(value);
-	}
 	public boolean getInstanceof() {
 		return sCInterface.getInstanceof();
 	}
@@ -998,13 +963,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	public void setNew(boolean value) {
 		sCInterface.setNew(value);
-	}
-	public boolean getNull() {
-		return sCInterface.getNull();
-	}
-
-	public void setNull(boolean value) {
-		sCInterface.setNull(value);
 	}
 	public boolean getPackage() {
 		return sCInterface.getPackage();
@@ -1174,7 +1132,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	/* The reactions of state abstract. */
 	private void reactGoto_abstract() {
-		if (sCInterface.while_ID && sCInterface.null_ID) {
+		if (sCInterface.while_ID && true) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -1224,8 +1182,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 			sCInterface.implements_ID = false;
 
-			sCInterface.import_ID = false;
-
 			sCInterface.instanceof_ID = false;
 
 			sCInterface.int_ID = false;
@@ -1233,8 +1189,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			sCInterface.long_ID = false;
 
 			sCInterface.new_ID = false;
-
-			sCInterface.null_ID = false;
 
 			sCInterface.package_ID = false;
 
