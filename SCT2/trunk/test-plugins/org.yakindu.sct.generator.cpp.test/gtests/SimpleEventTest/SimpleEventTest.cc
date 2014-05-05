@@ -21,5 +21,7 @@ TEST(StatemachineTest, simpleEventTest) {
 	statechart->raise_event1();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(SimpleEvent::B)) << "Expected B to be active" ;
+	statechart->runCycle();
+	EXPECT_TRUE(!statechart->isActive(SimpleEvent::B));
 	delete statechart;
 }

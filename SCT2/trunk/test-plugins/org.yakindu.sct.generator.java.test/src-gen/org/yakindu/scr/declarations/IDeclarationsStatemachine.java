@@ -20,6 +20,8 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 		public void setVarC(double value);
 		public String getVarD();
 		public void setVarD(String value);
+		public long getVarE();
+		public void setVarE(long value);
 
 	}
 
@@ -42,6 +44,8 @@ public interface IDeclarationsStatemachine extends IStatemachine {
 		public void setVarC(double value);
 		public String getVarD();
 		public void setVarD(String value);
+		public long getVarE();
+		public void setVarE(long value);
 
 	}
 

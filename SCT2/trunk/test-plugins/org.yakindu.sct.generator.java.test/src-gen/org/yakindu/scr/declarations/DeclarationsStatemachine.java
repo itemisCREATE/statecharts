@@ -149,6 +149,16 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varD = value;
 		}
 
+		private long varE;
+
+		public long getVarE() {
+			return varE;
+		}
+
+		public void setVarE(long value) {
+			this.varE = value;
+		}
+
 		public void clearEvents() {
 			evA = false;
 			evC = false;
@@ -293,6 +303,16 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 			this.varD = value;
 		}
 
+		private long varE;
+
+		public long getVarE() {
+			return varE;
+		}
+
+		public void setVarE(long value) {
+			this.varE = value;
+		}
+
 		public void clearEvents() {
 			evA = false;
 			evC = false;
@@ -316,6 +336,7 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	private long varInB;
 	private double varInC;
 	private String varInD;
+	private long varInE;
 
 	private final State[] stateVector = new State[1];
 
@@ -343,6 +364,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 		sCInterface.varD = "myString";
 
+		sCInterface.varE = 16;
+
 		sCIIfA.varA = false;
 
 		sCIIfA.varB = 1;
@@ -351,6 +374,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 		sCIIfA.varD = "myString";
 
+		sCIIfA.varE = 16;
+
 		varInA = false;
 
 		varInB = 1;
@@ -358,6 +383,8 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		varInC = 1.0;
 
 		varInD = "myString";
+
+		varInE = 16;
 	}
 
 	public void enter() {
@@ -528,6 +555,13 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
 	public void setVarD(String value) {
 		sCInterface.setVarD(value);
+	}
+	public long getVarE() {
+		return sCInterface.getVarE();
+	}
+
+	public void setVarE(long value) {
+		sCInterface.setVarE(value);
 	}
 
 	/* Entry action for statechart 'Declarations'. */
