@@ -48,13 +48,13 @@ Workflow {
 				xmlVersion = "1.0"
 			}
 
-			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {
-				generateEdit = true
-				genModel = "model/SText.genmodel"
-				emfRuntimeVersion = "2.8"
-				xmiModelDirectory = "${runtimeProject}/model"
-			}
+//			// generates Java API for the generated EPackages 
+//			fragment = ecore.EcoreGeneratorFragment {
+//				generateEdit = true
+//				genModel = "model/SText.genmodel"
+//				emfRuntimeVersion = "2.8"
+//				xmiModelDirectory = "${runtimeProject}/model"
+//			}
 
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
