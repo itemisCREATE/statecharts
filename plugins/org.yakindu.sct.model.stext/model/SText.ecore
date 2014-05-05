@@ -79,7 +79,7 @@
     <eLiterals name="after" literal="after"/>
     <eLiterals name="every" value="1" literal="every"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BuiltinEventSpec" eSuperTypes="#//EventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BuiltinEventSpec" abstract="true" eSuperTypes="#//EventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="EntryEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExitEvent" eSuperTypes="#//BuiltinEventSpec"/>
   <eClassifiers xsi:type="ecore:EClass" name="AlwaysEvent" eSuperTypes="#//BuiltinEventSpec"/>
