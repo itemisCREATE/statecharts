@@ -72,52 +72,6 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.Expression} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ExpressionItemProvider expressionItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.Expression}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createExpressionAdapter() {
-		if (expressionItemProvider == null) {
-			expressionItemProvider = new ExpressionItemProvider(this);
-		}
-
-		return expressionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.Literal} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected LiteralItemProvider literalItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.Literal}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createLiteralAdapter() {
-		if (literalItemProvider == null) {
-			literalItemProvider = new LiteralItemProvider(this);
-		}
-
-		return literalItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.BoolLiteral} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -230,6 +184,29 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		}
 
 		return stringLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.NullLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected NullLiteralItemProvider nullLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.NullLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createNullLiteralAdapter() {
+		if (nullLiteralItemProvider == null) {
+			nullLiteralItemProvider = new NullLiteralItemProvider(this);
+		}
+
+		return nullLiteralItemProvider;
 	}
 
 	/**
@@ -722,13 +699,12 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	 * @generated
 	 */
 	public void dispose() {
-		if (expressionItemProvider != null) expressionItemProvider.dispose();
-		if (literalItemProvider != null) literalItemProvider.dispose();
 		if (boolLiteralItemProvider != null) boolLiteralItemProvider.dispose();
 		if (intLiteralItemProvider != null) intLiteralItemProvider.dispose();
 		if (realLiteralItemProvider != null) realLiteralItemProvider.dispose();
 		if (hexLiteralItemProvider != null) hexLiteralItemProvider.dispose();
 		if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
+		if (nullLiteralItemProvider != null) nullLiteralItemProvider.dispose();
 		if (assignmentExpressionItemProvider != null) assignmentExpressionItemProvider.dispose();
 		if (conditionalExpressionItemProvider != null) conditionalExpressionItemProvider.dispose();
 		if (logicalOrExpressionItemProvider != null) logicalOrExpressionItemProvider.dispose();

@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EObject;
  *
  *
  * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getLiteral()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface Literal extends EObject {

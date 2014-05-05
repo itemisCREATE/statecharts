@@ -182,11 +182,6 @@ public class LogicalRelationExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.LOGICAL_RELATION_EXPRESSION__LEFT_OPERAND,
-				 ExpressionsFactory.eINSTANCE.createExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOGICAL_RELATION_EXPRESSION__LEFT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
 		newChildDescriptors.add
@@ -268,11 +263,6 @@ public class LogicalRelationExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.LOGICAL_RELATION_EXPRESSION__LEFT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.LOGICAL_RELATION_EXPRESSION__RIGHT_OPERAND,
-				 ExpressionsFactory.eINSTANCE.createExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

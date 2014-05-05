@@ -149,11 +149,6 @@ public class BitwiseOrExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.BITWISE_OR_EXPRESSION__LEFT_OPERAND,
-				 ExpressionsFactory.eINSTANCE.createExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.BITWISE_OR_EXPRESSION__LEFT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
 		newChildDescriptors.add
@@ -235,11 +230,6 @@ public class BitwiseOrExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.BITWISE_OR_EXPRESSION__LEFT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.BITWISE_OR_EXPRESSION__RIGHT_OPERAND,
-				 ExpressionsFactory.eINSTANCE.createExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter

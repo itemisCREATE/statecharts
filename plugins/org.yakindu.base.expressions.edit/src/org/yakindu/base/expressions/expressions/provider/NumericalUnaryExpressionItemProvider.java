@@ -180,11 +180,6 @@ public class NumericalUnaryExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
-				 ExpressionsFactory.eINSTANCE.createExpression()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION__OPERAND,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
 		newChildDescriptors.add

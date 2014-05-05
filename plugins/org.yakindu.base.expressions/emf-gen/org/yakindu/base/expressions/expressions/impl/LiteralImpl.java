@@ -18,7 +18,7 @@ import org.yakindu.base.expressions.expressions.Literal;
  *
  * @generated
  */
-public class LiteralImpl extends MinimalEObjectImpl.Container implements Literal {
+public abstract class LiteralImpl extends MinimalEObjectImpl.Container implements Literal {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
