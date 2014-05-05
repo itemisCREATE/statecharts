@@ -462,11 +462,6 @@ public class StateItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-				 SGraphFactory.eINSTANCE.createScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS,
 				 SGraphFactory.eINSTANCE.createTransition()));
 

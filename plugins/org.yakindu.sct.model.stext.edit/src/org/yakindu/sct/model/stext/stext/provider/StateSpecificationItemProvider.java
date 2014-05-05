@@ -22,8 +22,6 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.yakindu.sct.model.sgraph.SGraphFactory;
-
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -185,11 +183,6 @@ public class StateSpecificationItemProvider
       (createChildParameter
         (StextPackage.Literals.STATE_SPECIFICATION__SCOPE,
          StextFactory.eINSTANCE.createSimpleScope()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.STATE_SPECIFICATION__SCOPE,
-         SGraphFactory.eINSTANCE.createScope()));
   }
 
   /**

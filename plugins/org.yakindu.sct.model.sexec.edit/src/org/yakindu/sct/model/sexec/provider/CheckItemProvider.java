@@ -24,7 +24,6 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.SexecPackage;
-import org.yakindu.sct.model.sgraph.SGraphFactory;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.sexec.Check} object.
@@ -172,11 +171,6 @@ public class CheckItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SexecPackage.Literals.CHECK__CONDITION,
-				 ExpressionsFactory.eINSTANCE.createExpression()));
 
 		newChildDescriptors.add
 			(createChildParameter
