@@ -15,6 +15,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.Assert;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitializer;
@@ -97,9 +98,10 @@ public abstract class AbstractExecutionFlowTest {
 	}
 
 	protected boolean isActive(String stateName) {
+		Assert.isNotNull(stateName);
 		List<RegularState> allActiveStates = context().getAllActiveStates();
 		for (RegularState regularState : allActiveStates) {
-			if (regularState.getName().equals(stateName)) {
+			if (stateName.equals(regularState.getName())) {
 				return true;
 			}
 		}
@@ -113,7 +115,7 @@ public abstract class AbstractExecutionFlowTest {
 	protected void raiseEvent(String eventName, Object value) {
 		context().getEvent(eventName).setValue(value);
 		context().getEvent(eventName).setRaised(true);
-		
+
 	}
 
 	protected boolean isRaised(String eventName) {
