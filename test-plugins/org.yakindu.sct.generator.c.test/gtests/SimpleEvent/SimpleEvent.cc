@@ -23,6 +23,8 @@ TEST(StatemachineTest, simpleEventTest) {
 	simpleEventIface_raise_event1(&handle);
 	simpleEvent_runCycle(&handle);
 	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_B)) << "Expected B to be active" ;
+	simpleEvent_runCycle(&handle);
+	EXPECT_TRUE(!simpleEvent_isActive(&handle, SimpleEvent_B));
 }
 
 		

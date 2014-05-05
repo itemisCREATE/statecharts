@@ -19,7 +19,7 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	private SCInterfaceImpl sCInterface;
 
 	public enum State {
-		main_region_A, main_region_B, $NullState$
+		main_region_A, main_region_B, main_region__final_, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -60,6 +60,11 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 				stateVector[0] = State.$NullState$;
 				break;
 
+			case main_region__final_ :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
 			default :
 				break;
 		}
@@ -90,6 +95,8 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 				return stateVector[0] == State.main_region_A;
 			case main_region_B :
 				return stateVector[0] == State.main_region_B;
+			case main_region__final_ :
+				return stateVector[0] == State.main_region__final_;
 			default :
 				return false;
 		}
@@ -124,6 +131,15 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region__final_;
+	}
+
+	/* The reactions of state null. */
+	private void reactMain_region__final_0() {
 	}
 
 	public void runCycle() {
@@ -138,6 +154,9 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 					break;
 				case main_region_B :
 					reactMain_region_B();
+					break;
+				case main_region__final_ :
+					reactMain_region__final_0();
 					break;
 				default :
 					// $NullState$

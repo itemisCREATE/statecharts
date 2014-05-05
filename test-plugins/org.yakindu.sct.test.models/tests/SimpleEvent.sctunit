@@ -8,6 +8,9 @@ testgroup SimpleEvent for statechart SimpleEvent {
 		raise Event1
 		cycle
 		assert active (SimpleEvent.main_region.B) "Expected B to be active"
+		
+		cycle
+		assert !active (SimpleEvent.main_region.B)	
 		      
 	}        
 }

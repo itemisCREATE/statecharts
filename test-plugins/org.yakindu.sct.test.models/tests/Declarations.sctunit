@@ -1,7 +1,6 @@
 testgroup Declarations for statechart Declarations {
 	
 	test declarationsTest {
-		
 		enter
 	}
 }

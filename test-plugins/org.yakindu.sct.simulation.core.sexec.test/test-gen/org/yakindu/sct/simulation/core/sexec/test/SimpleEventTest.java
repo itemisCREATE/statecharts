@@ -41,5 +41,7 @@ public class SimpleEventTest extends AbstractExecutionFlowTest {
 		raiseEvent("Event1");
 		interpreter.runCycle();
 		assertTrue("Expected B to be active", isActive("B"));
+		interpreter.runCycle();
+		assertTrue(!isActive("B"));
 	}
 }
