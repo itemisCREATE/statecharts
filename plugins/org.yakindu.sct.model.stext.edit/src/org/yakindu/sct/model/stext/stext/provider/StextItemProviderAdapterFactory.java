@@ -266,30 +266,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 	}
 
   /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.StatechartScope} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected StatechartScopeItemProvider statechartScopeItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.StatechartScope}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createStatechartScopeAdapter()
-  {
-		if (statechartScopeItemProvider == null) {
-			statechartScopeItemProvider = new StatechartScopeItemProvider(this);
-		}
-
-		return statechartScopeItemProvider;
-	}
-
-  /**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.InterfaceScope} instances.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -479,30 +455,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		}
 
 		return localReactionItemProvider;
-	}
-
-  /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.TransitionReaction} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected TransitionReactionItemProvider transitionReactionItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.TransitionReaction}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createTransitionReactionAdapter()
-  {
-		if (transitionReactionItemProvider == null) {
-			transitionReactionItemProvider = new TransitionReactionItemProvider(this);
-		}
-
-		return transitionReactionItemProvider;
 	}
 
   /**
@@ -981,7 +933,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (statechartSpecificationItemProvider != null) statechartSpecificationItemProvider.dispose();
 		if (stateSpecificationItemProvider != null) stateSpecificationItemProvider.dispose();
 		if (transitionSpecificationItemProvider != null) transitionSpecificationItemProvider.dispose();
-		if (statechartScopeItemProvider != null) statechartScopeItemProvider.dispose();
 		if (interfaceScopeItemProvider != null) interfaceScopeItemProvider.dispose();
 		if (internalScopeItemProvider != null) internalScopeItemProvider.dispose();
 		if (importScopeItemProvider != null) importScopeItemProvider.dispose();
@@ -990,7 +941,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (variableDefinitionItemProvider != null) variableDefinitionItemProvider.dispose();
 		if (operationDefinitionItemProvider != null) operationDefinitionItemProvider.dispose();
 		if (localReactionItemProvider != null) localReactionItemProvider.dispose();
-		if (transitionReactionItemProvider != null) transitionReactionItemProvider.dispose();
 		if (guardItemProvider != null) guardItemProvider.dispose();
 		if (entryPointSpecItemProvider != null) entryPointSpecItemProvider.dispose();
 		if (exitPointSpecItemProvider != null) exitPointSpecItemProvider.dispose();

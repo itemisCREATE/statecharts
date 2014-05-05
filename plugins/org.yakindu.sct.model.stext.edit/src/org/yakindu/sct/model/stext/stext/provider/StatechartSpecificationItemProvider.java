@@ -123,11 +123,6 @@ public class StatechartSpecificationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-				 StextFactory.eINSTANCE.createStatechartScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
 				 StextFactory.eINSTANCE.createInterfaceScope()));
 
 		newChildDescriptors.add

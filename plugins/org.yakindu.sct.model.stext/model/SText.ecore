@@ -27,7 +27,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="reaction" eType="#//TransitionReaction"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="StatechartScope" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Scope"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StatechartScope" abstract="true" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Scope"/>
   <eClassifiers xsi:type="ecore:EClass" name="InterfaceScope" eSuperTypes="#//StatechartScope ../../org.yakindu.base.types/model/base.ecore#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="InternalScope" eSuperTypes="#//StatechartScope"/>
   <eClassifiers xsi:type="ecore:EClass" name="ImportScope" eSuperTypes="#//StatechartScope">
@@ -53,7 +53,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="OperationDefinition" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration ../../org.yakindu.base.types/model/types.ecore#//Operation"/>
   <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TransitionReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TransitionReaction" abstract="true"
+      eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Guard">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
         containment="true"/>

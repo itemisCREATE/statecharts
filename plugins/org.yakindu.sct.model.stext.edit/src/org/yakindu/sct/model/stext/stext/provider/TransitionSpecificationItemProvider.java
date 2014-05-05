@@ -155,11 +155,6 @@ public class TransitionSpecificationItemProvider
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(StextPackage.Literals.TRANSITION_SPECIFICATION__REACTION,
-				 StextFactory.eINSTANCE.createTransitionReaction()));
 	}
 
   /**
