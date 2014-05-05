@@ -97,7 +97,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 			case SGraphPackage.SCOPE: return createScope();
 			case SGraphPackage.SYNCHRONIZATION: return createSynchronization();
 			case SGraphPackage.STATE: return createState();
-			case SGraphPackage.REGULAR_STATE: return createRegularState();
 			case SGraphPackage.IMPORT: return createImport();
 			case SGraphPackage.IMPORT_DECLARATION: return createImportDeclaration();
 			default:
@@ -247,16 +246,6 @@ public class SGraphFactoryImpl extends EFactoryImpl implements SGraphFactory {
 	public State createState() {
 		StateImpl state = new StateImpl();
 		return state;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public RegularState createRegularState() {
-		RegularStateImpl regularState = new RegularStateImpl();
-		return regularState;
 	}
 
 	/**

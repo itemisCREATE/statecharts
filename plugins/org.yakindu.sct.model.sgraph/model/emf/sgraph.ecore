@@ -93,7 +93,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="leaf" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="RegularState" eSuperTypes="#//Vertex"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RegularState" abstract="true" eSuperTypes="#//Vertex"/>
   <eClassifiers xsi:type="ecore:EEnum" name="ChoiceKind">
     <eLiterals name="dynamic"/>
     <eLiterals name="static" value="1"/>

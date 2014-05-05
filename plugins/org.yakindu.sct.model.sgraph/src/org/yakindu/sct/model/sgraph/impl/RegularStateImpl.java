@@ -23,7 +23,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  *
  * @generated
  */
-public class RegularStateImpl extends VertexImpl implements RegularState {
+public abstract class RegularStateImpl extends VertexImpl implements RegularState {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

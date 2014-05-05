@@ -16,8 +16,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -25,20 +24,18 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
-import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.sct.model.sgraph.SGraphFactory;
+
+import org.yakindu.sct.model.sgraph.ImportDeclaration;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.sgraph.Scope;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.Scope} object.
+ * This is the item provider adapter for a {@link org.yakindu.sct.model.sgraph.ImportDeclaration} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ScopeItemProvider
-	extends ItemProviderAdapter
+public class ImportDeclarationItemProvider
+	extends DeclarationItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -58,7 +55,7 @@ public class ScopeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ScopeItemProvider(AdapterFactory adapterFactory) {
+	public ImportDeclarationItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -73,95 +70,42 @@ public class ScopeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addEventsPropertyDescriptor(object);
-			addVariablesPropertyDescriptor(object);
+			addDeclarationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Events feature.
+	 * This adds a property descriptor for the Declaration feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addEventsPropertyDescriptor(Object object) {
+	protected void addDeclarationPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Scope_events_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Scope_events_feature", "_UI_Scope_type"),
-				 SGraphPackage.Literals.SCOPE__EVENTS,
+				 getString("_UI_ImportDeclaration_declaration_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_ImportDeclaration_declaration_feature", "_UI_ImportDeclaration_type"),
+				 SGraphPackage.Literals.IMPORT_DECLARATION__DECLARATION,
+				 true,
 				 false,
-				 false,
-				 false,
+				 true,
 				 null,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Variables feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addVariablesPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_Scope_variables_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Scope_variables_feature", "_UI_Scope_type"),
-				 SGraphPackage.Literals.SCOPE__VARIABLES,
-				 false,
-				 false,
-				 false,
-				 null,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(SGraphPackage.Literals.SCOPE__DECLARATIONS);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
-	 * This returns Scope.gif.
+	 * This returns ImportDeclaration.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/Scope"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/ImportDeclaration"));
 	}
 
 	/**
@@ -172,7 +116,10 @@ public class ScopeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_Scope_type");
+		String label = ((ImportDeclaration)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_ImportDeclaration_type") :
+			getString("_UI_ImportDeclaration_type") + " " + label;
 	}
 
 	/**
@@ -185,12 +132,6 @@ public class ScopeItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(Scope.class)) {
-			case SGraphPackage.SCOPE__DECLARATIONS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -204,22 +145,6 @@ public class ScopeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(SGraphPackage.Literals.SCOPE__DECLARATIONS,
-				 SGraphFactory.eINSTANCE.createImportDeclaration()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return SGraphEditPlugin.INSTANCE;
 	}
 
 }
