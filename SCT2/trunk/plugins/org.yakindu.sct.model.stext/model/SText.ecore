@@ -64,7 +64,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="ExitPointSpec" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//ReactionProperty">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="exitpoint" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventSpec"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventSpec" abstract="true"/>
   <eClassifiers xsi:type="ecore:EClass" name="RegularEventSpec" eSuperTypes="#//EventSpec">
     <eStructuralFeatures xsi:type="ecore:EReference" name="event" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
         containment="true"/>

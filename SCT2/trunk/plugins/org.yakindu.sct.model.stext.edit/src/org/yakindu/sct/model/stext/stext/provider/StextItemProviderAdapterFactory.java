@@ -578,30 +578,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 	}
 
   /**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.EventSpec} instances.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  protected EventSpecItemProvider eventSpecItemProvider;
-
-  /**
-	 * This creates an adapter for a {@link org.yakindu.sct.model.stext.stext.EventSpec}.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
-	 */
-  @Override
-  public Adapter createEventSpecAdapter()
-  {
-		if (eventSpecItemProvider == null) {
-			eventSpecItemProvider = new EventSpecItemProvider(this);
-		}
-
-		return eventSpecItemProvider;
-	}
-
-  /**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.stext.stext.RegularEventSpec} instances.
 	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1018,7 +994,6 @@ public class StextItemProviderAdapterFactory extends StextAdapterFactory impleme
 		if (guardItemProvider != null) guardItemProvider.dispose();
 		if (entryPointSpecItemProvider != null) entryPointSpecItemProvider.dispose();
 		if (exitPointSpecItemProvider != null) exitPointSpecItemProvider.dispose();
-		if (eventSpecItemProvider != null) eventSpecItemProvider.dispose();
 		if (regularEventSpecItemProvider != null) regularEventSpecItemProvider.dispose();
 		if (timeEventSpecItemProvider != null) timeEventSpecItemProvider.dispose();
 		if (entryEventItemProvider != null) entryEventItemProvider.dispose();
