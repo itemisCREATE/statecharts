@@ -272,11 +272,6 @@ public class StatechartItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-				 SGraphFactory.eINSTANCE.createScope()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
 				 SGraphFactory.eINSTANCE.createRegion()));
 

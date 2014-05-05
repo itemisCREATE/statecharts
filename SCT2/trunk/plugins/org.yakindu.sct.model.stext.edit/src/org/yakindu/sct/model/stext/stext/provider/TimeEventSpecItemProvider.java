@@ -235,11 +235,6 @@ public class TimeEventSpecItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
-         ExpressionsFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
          ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add

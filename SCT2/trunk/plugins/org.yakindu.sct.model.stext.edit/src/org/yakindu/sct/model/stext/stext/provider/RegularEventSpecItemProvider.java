@@ -176,11 +176,6 @@ public class RegularEventSpecItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
-         ExpressionsFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
          ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add

@@ -180,11 +180,6 @@ public class ReactionEffectItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
-         ExpressionsFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
          ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add

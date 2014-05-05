@@ -179,11 +179,6 @@ public class GuardItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.GUARD__EXPRESSION,
-         ExpressionsFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.GUARD__EXPRESSION,
          ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add

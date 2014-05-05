@@ -180,11 +180,6 @@ public class EventValueReferenceExpressionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
-         ExpressionsFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
          ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add

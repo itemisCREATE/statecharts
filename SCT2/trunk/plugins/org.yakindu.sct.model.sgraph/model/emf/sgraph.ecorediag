@@ -35,10 +35,6 @@
   <children xmi:type="notation:Node" xmi:id="_uS15khnREeGudMwC1qhCZg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_uS2goRnREeGudMwC1qhCZg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_uS3HsBnREeGudMwC1qhCZg" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_uS3HuBnREeGudMwC1qhCZg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="sgraph.ecore#//Region/priority"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_uS3HuRnREeGudMwC1qhCZg"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_uS3HsRnREeGudMwC1qhCZg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_uS3HshnREeGudMwC1qhCZg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_uS3HsxnREeGudMwC1qhCZg"/>
@@ -55,10 +51,6 @@
   <children xmi:type="notation:Node" xmi:id="_uS3uwBnREeGudMwC1qhCZg" type="1001">
     <children xmi:type="notation:Node" xmi:id="_uS3uwxnREeGudMwC1qhCZg" type="4001"/>
     <children xmi:type="notation:Node" xmi:id="_uS3uxBnREeGudMwC1qhCZg" type="5001">
-      <children xmi:type="notation:Node" xmi:id="_uS4V1BnREeGudMwC1qhCZg" type="2001">
-        <element xmi:type="ecore:EAttribute" href="sgraph.ecore#//Transition/priority"/>
-        <layoutConstraint xmi:type="notation:Location" xmi:id="_uS4V1RnREeGudMwC1qhCZg"/>
-      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_uS3uxRnREeGudMwC1qhCZg"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_uS3uxhnREeGudMwC1qhCZg"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_uS3uxxnREeGudMwC1qhCZg"/>

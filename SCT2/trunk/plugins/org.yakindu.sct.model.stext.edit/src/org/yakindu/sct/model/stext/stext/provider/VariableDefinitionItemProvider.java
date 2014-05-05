@@ -287,11 +287,6 @@ public class VariableDefinitionItemProvider
     newChildDescriptors.add
       (createChildParameter
         (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
-         ExpressionsFactory.eINSTANCE.createExpression()));
-
-    newChildDescriptors.add
-      (createChildParameter
-        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
          ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
     newChildDescriptors.add
