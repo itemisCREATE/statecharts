@@ -34,6 +34,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 
 class ExpressionCode {
 
@@ -96,6 +97,8 @@ class ExpressionCode {
 
 	/* Logical Expressions */
 	def dispatch CharSequence code(LogicalOrExpression it) '''«leftOperand.code» || «rightOperand.code»'''
+	
+	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
 
 	def dispatch CharSequence code(LogicalAndExpression it) '''«leftOperand.code» && «rightOperand.code»'''
 
