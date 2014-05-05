@@ -184,6 +184,7 @@ public class StatechartItemProvider
 			childrenFeatures.add(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS);
 			childrenFeatures.add(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES);
 			childrenFeatures.add(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS);
+			childrenFeatures.add(SGraphPackage.Literals.STATECHART__IMPORTS);
 		}
 		return childrenFeatures;
 	}
@@ -246,6 +247,7 @@ public class StatechartItemProvider
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
 			case SGraphPackage.STATECHART__SCOPES:
 			case SGraphPackage.STATECHART__REGIONS:
+			case SGraphPackage.STATECHART__IMPORTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -277,6 +279,11 @@ public class StatechartItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
 				 SGraphFactory.eINSTANCE.createRegion()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.STATECHART__IMPORTS,
+				 SGraphFactory.eINSTANCE.createImport()));
 	}
 
 }

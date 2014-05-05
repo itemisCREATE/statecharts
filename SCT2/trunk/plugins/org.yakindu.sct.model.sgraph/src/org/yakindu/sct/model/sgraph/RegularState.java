@@ -18,7 +18,7 @@ package org.yakindu.sct.model.sgraph;
  *
  *
  * @see org.yakindu.sct.model.sgraph.SGraphPackage#getRegularState()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface RegularState extends Vertex {
