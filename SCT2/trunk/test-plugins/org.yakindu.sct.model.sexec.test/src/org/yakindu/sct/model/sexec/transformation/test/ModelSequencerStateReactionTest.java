@@ -383,6 +383,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 	 * If a time trigger is defined for a transition then an event must be
 	 * introduced into the execution flow.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testSingleTransitionTimeTrigger() {
 
@@ -436,6 +437,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 	/**
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testSingleLocalTimeTrigger() {
 
@@ -477,6 +479,7 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 	/**
 	 * Local reactions must be created for behavior with 'always' trigger
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testAlwaysLocalReaction() {
 

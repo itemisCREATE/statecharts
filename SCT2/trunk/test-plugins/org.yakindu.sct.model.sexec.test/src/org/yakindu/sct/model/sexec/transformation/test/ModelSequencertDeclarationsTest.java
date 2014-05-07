@@ -65,6 +65,7 @@ public class ModelSequencertDeclarationsTest extends ModelSequencerTest {
 		assertTrue(_scope instanceof InternalScope);
 	}
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testMapScope() {
 

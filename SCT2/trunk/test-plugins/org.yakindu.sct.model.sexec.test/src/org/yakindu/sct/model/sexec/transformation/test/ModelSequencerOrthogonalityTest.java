@@ -92,6 +92,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 	 * The transition to a leaf state with orthogonal siblings must invoke the
 	 * entry sequence of the orthogonal sibling regions.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testSiblingRegionEntryOnTargetState() {
 
@@ -286,6 +287,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 	 * Local transition within a region with orthogonal siblings does not have
 	 * to invoke sibling region entries or exists.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testSiblingStateTransition() {
 
@@ -392,6 +394,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 	 * orthogonal sibling state must exclude the source state sibling entry
 	 * behavior.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testSourceSiblingEnterExclusion() {
 
@@ -496,15 +499,15 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 		assertCall(_effect, 0, _s3z.getExitSequence());
 		assertCall(_effect, 1, _s3.getEntryAction());
 		assertCall(_effect, 2, _s3a.getSuperScope().getEnterSequences().get(0));
-		assertCall(_s3a.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
-				.get(3).getReactSequence());
-		assertCall(flow.getNodes().get(3).getReactSequence(), 0,
+		Sequence r3a_entryReactSequence = flow.getNodes().get(3).getReactSequence();
+		assertCall(_s3a.getSuperScope().getEnterSequences().get(0), 0, r3a_entryReactSequence);
+		assertCall(((Sequence) r3a_entryReactSequence.getSteps().get(0)), 0,
 				_s3a.getEnterSequences().get(0));
 		assertCall(_effect, 3, _s3b2.getEnterSequences().get(0));
 		assertCall(_effect, 4, _s3c.getSuperScope().getEnterSequences().get(0));
-		assertCall(_s3c.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes()
-				.get(5).getReactSequence());
-		assertCall(flow.getNodes().get(5).getReactSequence(), 0,
+		Sequence r3c_entryReactSequence = flow.getNodes().get(5).getReactSequence();
+		assertCall(_s3c.getSuperScope().getEnterSequences().get(0), 0, r3c_entryReactSequence);
+		assertCall(((Sequence) r3c_entryReactSequence.getSteps().get(0)), 0,
 				_s3c.getEnterSequences().get(0));
 		assertTrue(_s3c.getEnterSequences().get(0).getSteps().get(0).getClass()
 				.getSimpleName(),
@@ -522,6 +525,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 	 * The transition from a leaf state with orthogonal siblings must invoke the
 	 * exit sequence of the orthogonal sibling regions.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testSiblingRegionExitFromSourceState() {
 
@@ -741,6 +745,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 	 * orthogonal sibling state must exclude the source state sibling exit or
 	 * enter behavior.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testSourceSiblingExitExclusion() {
 
@@ -1063,6 +1068,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 	 * When exiting an orthogonal state exits must be performed in a well
 	 * defined order bottom up with highest priority/order states first.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testBottomUpExitSequence_ThreeLevels() {
 
@@ -1399,6 +1405,7 @@ public class ModelSequencerOrthogonalityTest extends ModelSequencerTest {
 
 	}
 
+	@SuppressWarnings("unused")
 	private Statechart setUpDeepExitSC() {
 		Statechart sc = _createStatechart("sc");
 		{

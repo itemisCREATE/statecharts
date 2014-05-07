@@ -37,6 +37,7 @@ import com.google.common.collect.Lists;
 
 public class ModelSequencerHistoryTest extends ModelSequencerTest {
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testFlowName() {
 		Statechart sc = _createStatechart("sc");
@@ -91,14 +92,14 @@ public class ModelSequencerHistoryTest extends ModelSequencerTest {
 		HistoryEntry historyStep = (HistoryEntry) reactSequence_history
 				.getSteps().get(0);
 		assertFalse(historyStep.isDeep());
-		assertCall(historyStep.getInitialStep(), _s3.getEnterSequences().get(0));
+		assertCall(((Sequence) historyStep.getInitialStep()).getSteps().get(0), _s3.getEnterSequences().get(0));
 		Reaction reaction_history = _t1.get(0);
 		assertCall(assertedSequence(reaction_history.getEffect()), 1,
 				reactSequence_history);
 
 		Sequence reactSequence_initial = flow.getNodes().get(2)
 				.getReactSequence();
-		assertCall(reactSequence_initial, 0, _s4.getEnterSequences().get(0));
+		assertCall(((Sequence) reactSequence_initial.getSteps().get(0)), 0, _s4.getEnterSequences().get(0));
 		Reaction reaction = _t1.get(1);
 		assertCall(assertedSequence(reaction.getEffect()), 1,
 				_s2.getEnterSequences().get(0));

@@ -67,7 +67,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.LocalReaction;
 import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
-import org.yakindu.sct.model.stext.stext.StextFactory;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class ModelSequencerStateTest extends ModelSequencerTest {
@@ -172,6 +171,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * A leaf state must have a enter sequence. This enter sequence consists of
 	 * an entry action call and a state enter step.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testFinalStateEnterSequence() {
 		Statechart sc = _createStatechart("cs");
@@ -197,6 +197,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * A leaf state must have a enter sequence. This enter sequence consists of
 	 * an entry action call and a state enter step.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testLeafStateEnterSequence() {
 		Statechart sc = _createStatechart("cs");
@@ -279,12 +280,14 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 		assertCall(_s1.getEnterSequences().get(0), 0, _s1.getEntryAction());
 		assertCall(_s1.getEnterSequences().get(0), 1, _s2.getSuperScope().getEnterSequences().get(0));
-		assertCall(_s2.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes().get(0).getReactSequence());
-		assertCall(flow.getNodes().get(0).getReactSequence(), 0, _s2.getEnterSequences().get(0));
+		Sequence r1EntryReactSequence = flow.getNodes().get(0).getReactSequence();
+		assertCall(_s2.getSuperScope().getEnterSequences().get(0), 0, r1EntryReactSequence);
+		assertCall(((Sequence) r1EntryReactSequence.getSteps().get(0)), 0, _s2.getEnterSequences().get(0));
 
 		assertCall(_s1.getEnterSequences().get(0), 2, _s3.getSuperScope().getEnterSequences().get(0));
-		assertCall(_s3.getSuperScope().getEnterSequences().get(0), 0, flow.getNodes().get(1).getReactSequence());
-		assertCall(flow.getNodes().get(1).getReactSequence(), 0, _s3.getEnterSequences().get(0));
+		Sequence r2EntryReactSequence = flow.getNodes().get(1).getReactSequence();
+		assertCall(_s3.getSuperScope().getEnterSequences().get(0), 0, r2EntryReactSequence);
+		assertCall(((Sequence) r2EntryReactSequence.getSteps().get(0)), 0, _s3.getEnterSequences().get(0));
 	}
 
 	/**
@@ -321,6 +324,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * A final state must have a exit sequence. This exit sequence consists of a
 	 * state exit step.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testFinalStateExitSequence() {
 		Statechart sc = _createStatechart("cs");
@@ -345,6 +349,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * A composite state must have a exit sequence. This exit sequence consists
 	 * of an exit action call and a state switch for all leaf states.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testCompositeStateExitSequence() {
 		Statechart sc = _createStatechart("cs");
@@ -402,9 +407,9 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 		assertEquals(3, _s1.getExitSequence().getSteps().size());
 
 		Sequence _r1_s1 = _s2.getSuperScope().getExitSequence();
-		assertCall(assertedSequence(_s1.getExitSequence()), 0, _r1_s1);
+		assertCall(_s1.getExitSequence(), 0, _r1_s1);
 		Sequence _r2_s1 = _s4.getSuperScope().getExitSequence();
-		assertCall(assertedSequence(_s1.getExitSequence()), 1, _r2_s1);
+		assertCall(_s1.getExitSequence(), 1, _r2_s1);
 
 		Step _switch = _r1_s1.getSteps().get(0);
 		assertStateSwitch(_switch, _s2, _s3);
@@ -424,6 +429,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * A composite state must have a exit sequence. This exit sequence consists
 	 * of an exit action call and a state switch for all leaf states.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testCompositeStateExitSequence_Deep() {
 
@@ -569,6 +575,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	/**
 	 * The exit action must be part of the reaction effect sequence
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testStateReaction_WithExitAction() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
@@ -601,6 +608,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	/**
 	 * The exit action must be part of the reaction effect sequence
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testStateReaction_WithEntryAction() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
@@ -674,6 +682,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 
 	}
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testStateCycle_WithLocalReactions() {
 		SimpleFlatTSC tsc = new SimpleFlatTSC();
@@ -764,6 +773,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * The cycle sequence of a state that only consists of local reactions
 	 * includes sequential processing of the local reactions.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testStateCycle_WithLocalReactionsOnly() {
 		MinimalTSC tsc = new MinimalTSC();
@@ -844,6 +854,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	}
 
 	/** Entry action behaviors are not directly part of the states cycle steps */
+	@SuppressWarnings("unused")
 	@Test
 	public void testStateCycle_EntryActionExclusion() {
 		MinimalTSC tsc = new MinimalTSC();
@@ -868,6 +879,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	}
 
 	/** Exit action behaviors are not directly part of the states cycle steps */
+	@SuppressWarnings("unused")
 	@Test
 	public void testStateCycle_ExitActionExclusion() {
 		MinimalTSC tsc = new MinimalTSC();
@@ -895,6 +907,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * Local reactions that define regular and entry triggers side by side must
 	 * also be part of the cycle steps.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testStateCycle_LocalReactionWithMixedRegularAndEntryTrigger() {
 		MinimalTSC tsc = new MinimalTSC();
@@ -931,6 +944,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	/**
 	 * The state cycle must contain all reactions of parent states.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testStateCycle_WithParent() {
 
@@ -1030,6 +1044,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	 * A final state must be transformed into a execution state with name
 	 * '_final_'. and must include parent reactions.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testFinalState() {
 
@@ -1127,6 +1142,7 @@ public class ModelSequencerStateTest extends ModelSequencerTest {
 	/**
 	 * The enter sequence must be called withnin incoming transitions.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testFinalStateEnterSequenceCall() {
 
