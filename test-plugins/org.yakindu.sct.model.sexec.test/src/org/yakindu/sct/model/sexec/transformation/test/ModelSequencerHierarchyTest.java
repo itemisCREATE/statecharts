@@ -34,6 +34,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 	 * The transition sequence must contain all exit actions for parent states
 	 * that will be left by a transition.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testParentEntryDeep() {
 
@@ -114,6 +115,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 	 * action.
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testParentEntryPartial() {
 
@@ -188,6 +190,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 	/**
 	 * Transitions to sibling state must nut invoke parent exit actions.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testParentEntryExclusionForSiblingTransitions() {
 
@@ -263,6 +266,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 	 * The transition sequence must contain all exit actions for parent states
 	 * that will be left by a transition.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testParentExitDeep() {
 
@@ -352,6 +356,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 	 * action.
 	 * 
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testParentExitPartial() {
 
@@ -423,6 +428,7 @@ public class ModelSequencerHierarchyTest extends ModelSequencerTest {
 	/**
 	 * Transitions to sibling state must nut invoke parent exit actions.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testParentExitExclusionForSiblingTransitions() {
 

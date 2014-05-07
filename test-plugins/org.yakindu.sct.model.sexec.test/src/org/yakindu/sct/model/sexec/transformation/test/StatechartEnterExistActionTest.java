@@ -37,6 +37,7 @@ public class StatechartEnterExistActionTest extends ModelSequencerTest {
 	 * The transition sequence must contain all exit actions for parent states
 	 * that will be left by a transition.
 	 */
+	@SuppressWarnings("unused")
 	@Test
 	public void testSCLocalReaction() {
 

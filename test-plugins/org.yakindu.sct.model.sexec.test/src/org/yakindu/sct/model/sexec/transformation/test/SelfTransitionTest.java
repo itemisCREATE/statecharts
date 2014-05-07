@@ -26,6 +26,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 public class SelfTransitionTest extends ModelSequencerTest {
 
+	@SuppressWarnings("unused")
 	@Test
 	public void testFlowName() {
 		Statechart sc = _createStatechart("sc");

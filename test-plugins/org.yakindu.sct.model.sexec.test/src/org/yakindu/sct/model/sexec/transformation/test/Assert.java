@@ -118,13 +118,6 @@ public class Assert {
 		return null;
 	}
 
-	/**
-	 * @deprecated Already Sequence in this case. Assert will never fail
-	 */
-	@Deprecated
-	public static Sequence assertedSequence(Sequence step) {
-		return step;
-	}
 
 	public static Sequence assertedSequence(Step step) {
 
