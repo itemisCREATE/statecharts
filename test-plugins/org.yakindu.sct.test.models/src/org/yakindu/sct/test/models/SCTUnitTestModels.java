@@ -55,6 +55,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String LOGICAL_AND = "LogicalAnd.sct";
 	public static final String LOGICAL_OR = "LogicalOr.sct";
 	public static final String NAMED_INTERFACE_ACCESS = "NamedInterfaceAccess.sct";
+	public static final String NULL_CHECK = "Nullcheck.sct";
 	public static final String OPERATIONS = "Operations.sct";
 	public static final String OUT_EVENT_LIFE_CYCLE = "OutEventLifeCycle.sct";
 	public static final String PARENTHESIS = "Parenthesis.sct";
