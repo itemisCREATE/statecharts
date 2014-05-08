@@ -72,10 +72,10 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 
 	public void init() {
 		threads = new ArrayList<SCTDebugThread>();
-		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
 		executionControl = engine.getExecutionControl();
-		engine.getExecutionContext().eAdapters().add(updater);
 		executionControl.init();
+		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
+		engine.getExecutionContext().eAdapters().add(updater);
 	}
 
 	public void start() {
