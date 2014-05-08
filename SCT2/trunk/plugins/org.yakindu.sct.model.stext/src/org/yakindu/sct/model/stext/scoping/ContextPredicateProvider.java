@@ -24,6 +24,7 @@ import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Litera
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.NUMERICAL_UNARY_EXPRESSION;
 import static org.yakindu.base.expressions.expressions.ExpressionsPackage.Literals.SHIFT_EXPRESSION;
+import static org.yakindu.base.types.TypesPackage.Literals.TYPED_ELEMENT__TYPE;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_RAISING_EXPRESSION__VALUE;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION;
@@ -33,29 +34,16 @@ import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.REGULAR_EV
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_REACTION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.TRANSITION_SPECIFICATION;
 import static org.yakindu.sct.model.stext.stext.StextPackage.Literals.VARIABLE_DEFINITION;
-import static org.yakindu.base.types.TypesPackage.Literals.TYPED_ELEMENT__TYPE;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.Event;
-import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.TypesPackage;
-import org.yakindu.sct.model.stext.stext.StextPackage;
-import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
@@ -69,11 +57,11 @@ public class ContextPredicateProvider {
 
 	static class TypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
-			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass()) && 
-					!TypesPackage.Literals.TYPE_PARAMETER.isSuperTypeOf(input.getEClass());
+			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass())
+					&& !TypesPackage.Literals.TYPE_PARAMETER.isSuperTypeOf(input.getEClass());
 		}
 	}
-	
+
 	static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
 			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass())
@@ -86,36 +74,10 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()) || isVariableWithTypeContainingEvent(input);
+			// TODO: Check if the propertys type is of type ComplexType
+			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass())
+					|| TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass());
 		}
-	}
-	
-	private static boolean isVariableWithTypeContainingEvent(IEObjectDescription input) {
-		if (StextPackage.Literals.VARIABLE_DEFINITION.isSuperTypeOf(input.getEClass())) {
-			EObject eObjectOrProxy = input.getEObjectOrProxy();
-			VariableDefinition varDef = (VariableDefinition) eObjectOrProxy;
-			if (eObjectOrProxy.eIsProxy()) {
-				URI uri = input.getEObjectURI().trimFragment();
-				ResourceSet rs = new ResourceSetImpl();
-				Resource res = rs.createResource(uri);
-				try {
-					res.load(null);
-					EObject resolved = EcoreUtil.resolve(eObjectOrProxy, res);
-					varDef = (VariableDefinition) resolved;
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (varDef.getType() instanceof ComplexType) {
-				ComplexType complexType = (ComplexType) varDef.getType();
-				for (Feature feature : complexType.getAllFeatures()) {
-					if (feature instanceof Event) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
 	}
 
 	static class VariablePredicate extends FeaturedTypePredicate {
@@ -123,8 +85,7 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return TypesPackage.Literals.PROPERTY.isSuperTypeOf(input
-					.getEClass());
+			return TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass());
 		}
 
 	};
@@ -134,8 +95,7 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input
-					.getEClass()) || TypesPackage.Literals.OPERATION
+			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass()) || TypesPackage.Literals.OPERATION
 					.isSuperTypeOf(input.getEClass()));
 		}
 	}
@@ -145,12 +105,10 @@ public class ContextPredicateProvider {
 		public boolean apply(IEObjectDescription input) {
 			if (super.apply(input))
 				return true;
-			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input
-					.getEClass())
-					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input
-							.getEClass()) || TypesPackage.Literals.EVENT
-						.isSuperTypeOf(input.getEClass())
-						|| TypesPackage.Literals.ENUMERATOR.isSuperTypeOf(input.getEClass()));
+			return (TypesPackage.Literals.PROPERTY.isSuperTypeOf(input.getEClass())
+					|| TypesPackage.Literals.OPERATION.isSuperTypeOf(input.getEClass())
+					|| TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()) || TypesPackage.Literals.ENUMERATOR
+						.isSuperTypeOf(input.getEClass()));
 		}
 	}
 
@@ -212,10 +170,8 @@ public class ContextPredicateProvider {
 		filter.put(key(VARIABLE_DEFINITION, TYPED_ELEMENT__TYPE), TYPES);
 	}
 
-	public Predicate<IEObjectDescription> getPredicate(EClass clazz,
-			EReference reference) {
-		Predicate<IEObjectDescription> predicate = filter.get(key(clazz,
-				reference));
+	public Predicate<IEObjectDescription> getPredicate(EClass clazz, EReference reference) {
+		Predicate<IEObjectDescription> predicate = filter.get(key(clazz, reference));
 		if (predicate == null) {
 			predicate = filter.get(key(clazz, null));
 			if (predicate == null) {
