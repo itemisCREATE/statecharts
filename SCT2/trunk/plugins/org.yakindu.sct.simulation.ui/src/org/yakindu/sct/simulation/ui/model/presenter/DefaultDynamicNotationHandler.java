@@ -39,6 +39,8 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.util.CrossDocumentContentAdapter;
 import org.yakindu.sct.simulation.ui.SimulationActivator;
 
+import com.google.common.collect.Lists;
+
 import de.itemis.gmf.runtime.commons.highlighting.HighlightingParameters;
 
 /**
@@ -104,32 +106,51 @@ public class DefaultDynamicNotationHandler extends AbstractDynamicNotationHandle
 			super.notifyChanged(notification);
 			Display.getDefault().syncExec(new Runnable() {
 				public void run() {
-					int eventType = notification.getEventType();
 					if (notification.getFeature() == EXECUTION_CONTEXT__ACTIVE_STATES) {
-						if (eventType == ADD || eventType == ADD_MANY) {
-							getHighlightingSupport().fadeIn((EObject) notification.getNewValue(),
-									HighlightingParameters.DEFAULT);
-						} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
-							getHighlightingSupport().fadeOut((EObject) notification.getOldValue(),
-									HighlightingParameters.DEFAULT);
-						}
+						highlight(notification, HighlightingParameters.DEFAULT);
 					} else if (notification.getFeature() == EXECUTION_CONTEXT__EXECUTED_ELEMENTS) {
-						if (eventType == ADD || eventType == ADD_MANY) {
-							getHighlightingSupport().fadeIn((EObject) notification.getNewValue(), TRANSITION_PARAMS);
-						} else if (eventType == REMOVE) {
-							getHighlightingSupport().fadeOut((EObject) notification.getOldValue(),
-									HighlightingParameters.DEFAULT);
-						}
+						highlight(notification, TRANSITION_PARAMS);
 					} else if (notification.getFeature() == EXECUTION_CONTEXT__SUSPENDED_ELEMENTS) {
-						if (eventType == ADD || eventType == ADD_MANY) {
-							getHighlightingSupport().fadeIn((EObject) notification.getNewValue(), SUSPENDED_PARAMS);
-						} else if (eventType == REMOVE) {
-							getHighlightingSupport().fadeOut((EObject) notification.getOldValue(), SUSPENDED_PARAMS);
-						}
+						highlight(notification, SUSPENDED_PARAMS);
 					}
 				}
 			});
 		}
+
+		protected void highlight(final Notification notification, HighlightingParameters params) {
+			int eventType = notification.getEventType();
+			if (eventType == ADD || eventType == ADD_MANY) {
+				fadeIn(notification.getNewValue(), params);
+			} else if (eventType == REMOVE || eventType == REMOVE_MANY) {
+				fadeOut(notification.getOldValue(), params);
+			}
+		}
+
+		protected void fadeOut(Object value, HighlightingParameters parameters) {
+			List<EObject> objects = toList(value);
+			for (EObject eObject : objects) {
+				getHighlightingSupport().fadeOut(eObject, parameters);
+			}
+		}
+
+		protected void fadeIn(Object value, HighlightingParameters parameters) {
+			List<EObject> objects = toList(value);
+			for (EObject eObject : objects) {
+				getHighlightingSupport().fadeIn(eObject, parameters);
+			}
+		}
+
+		@SuppressWarnings("unchecked")
+		private List<EObject> toList(Object value) {
+			List<EObject> objects = Lists.newArrayList();
+			if (value instanceof EObject) {
+				objects.add((EObject) value);
+			} else if (value instanceof List) {
+				objects.addAll((List<EObject>) value);
+			}
+			return objects;
+		}
+
 	}
 
 	protected void updatePreferences() {
