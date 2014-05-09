@@ -24,12 +24,14 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.Check;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
@@ -305,7 +307,7 @@ public class SGraphJavaValidationTest {
 	 * An initial entry should have no incoming transition
 	 */
 	@Test
-	public void incomingTransitionCount() {
+	public void initialEntryWithoutIncomingTransitions() {
 		prepareStateTest();
 
 		Entry entry = factory.createEntry();
@@ -337,7 +339,7 @@ public class SGraphJavaValidationTest {
 	 * An initial entry should have an outgoing transition
 	 */
 	@Test
-	public void initialEntryWithoutOutTransition() {
+	public void initialEntryWithoutOutgoingTransition() {
 		prepareStateTest();
 
 		Entry entry = factory.createEntry();
@@ -352,7 +354,7 @@ public class SGraphJavaValidationTest {
 	 * An entry should not have more than one outgoing transition
 	 */
 	@Test
-	public void entryMultipleOutTransition() {
+	public void initialEntryWithMultipleOutgoingTransition() {
 		prepareStateTest();
 
 		Entry entry = factory.createEntry();
@@ -378,6 +380,92 @@ public class SGraphJavaValidationTest {
 
 	}
 
+	
+	/**
+	 * An exit node should have at leat one incoming transition.
+	 */
+	@Test
+	public void exitWithoutIncomingTransition() {
+		prepareStateTest();
+		
+		Region subRegion = factory.createRegion();
+		state.getRegions().add(subRegion);
+		Exit exit = factory.createExit();
+		subRegion.getVertices().add(exit);
+		
+		assertFalse(validate(exit));
+		
+		assertWarning(diagnostics, ISSUE_EXIT_WITHOUT_IN_TRANS);
+	}
+	
+	
+	/**
+	 * An exit node must have no outgoing transitions.
+	 */
+	@Test
+	public void exitWithOutgoingTransition() {
+		prepareStateTest();
+		
+		Region subRegion = factory.createRegion();
+		state.getRegions().add(subRegion);
+		Exit exit = factory.createExit();
+		subRegion.getVertices().add(exit);
+		
+		State s = factory.createState();
+		subRegion.getVertices().add(s);
+
+		Transition t = factory.createTransition();
+		t.setSource(exit);
+		t.setTarget(s);
+
+		assertFalse(validate(exit));
+		
+		assertError(diagnostics, ISSUE_EXIT_WITH_OUT_TRANS);
+	}
+	
+	
+	/**
+	 * An exit node must not be used in top level regions.
+	 */
+	@Test
+	public void exitOnStatechart() {
+		prepareStateTest();
+		
+		Exit exit = factory.createExit();
+		region.getVertices().add(exit);
+		
+		assertFalse(validate(exit));
+		
+		assertError(diagnostics, ISSUE_EXIT_ON_STATECHART);
+	}
+	
+	
+	/**
+	 * Tests a scenario where no issues for an exit nodes exists.
+	 */
+	@Test
+	public void cleanExit() {
+		prepareStateTest();
+		
+		Region subRegion = factory.createRegion();
+		state.getRegions().add(subRegion);
+		Exit exit = factory.createExit();
+		subRegion.getVertices().add(exit);
+
+		State s = factory.createState();
+		subRegion.getVertices().add(s);
+
+		Transition t = factory.createTransition();
+		t.setTarget(exit);
+		t.setSource(s);
+		
+		assertTrue(validate(exit));
+		assertNoIssues(diagnostics);
+	}
+	
+	
+	
+	
 	@Test
 	public void disallowTrigger() {
 		prepareStateTest();
@@ -430,7 +518,7 @@ public class SGraphJavaValidationTest {
 	 * A final state should have no outgoing transitions
 	 */
 	@Test
-	public void outgoingTransitionCount() {
+	public void finalStateWithOutgoingTransition() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -452,7 +540,7 @@ public class SGraphJavaValidationTest {
 	 * A choice must have at least one outgoing transition
 	 */
 	@Test
-	public void choiceOutgoingTransitions() {
+	public void choiceWithoutOutgoingTransition() {
 		statechart = factory.createStatechart();
 		Region region = factory.createRegion();
 		statechart.getRegions().add(region);
@@ -581,6 +669,32 @@ public class SGraphJavaValidationTest {
 			Method testMethod = getClass().getMethod(checkMethod.getName());
 			assertNotNull("Missing @Test Annotation for method " + checkMethod.getName(),
 					testMethod.getAnnotation(Test.class));
+		}
+	}
+
+	/**
+	 * checks that no two @Check method of {@link STextJavaValidator} have the same name. 
+	 * Avoiding overloaded check methods in the validator class allows to check it tests 
+	 * methods are explicilty written for all elelemnt types. It this is not checked than 
+	 * a single test implementation may satisfy the previous test for all overloaded functions. 
+	 */
+	@Test
+	public void testOverloadedCheckMethods() throws Exception {
+		Iterable<Method> methods = Lists.newArrayList(SGraphJavaValidator.class.getMethods());
+		methods = Iterables.filter(methods, new Predicate<Method>() {
+			public boolean apply(Method input) {
+				return input.getAnnotation(Check.class) != null;
+			}
+			
+		});
+		for (Method methodToCheck : methods) {
+			for (Method method : methods) {
+				if ( methodToCheck != method ) {
+					assertFalse(
+							"@Check method '" + methodToCheck + "' is overloaded.",
+							methodToCheck.getName().equals(method.getName()));
+				}
+			}
 		}
 	}
 

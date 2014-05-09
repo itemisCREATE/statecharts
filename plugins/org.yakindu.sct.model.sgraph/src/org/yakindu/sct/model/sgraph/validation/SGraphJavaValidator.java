@@ -27,8 +27,10 @@ import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
+import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Region;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
@@ -59,6 +61,9 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS = "Initial entry should have a single outgoing transition";
 	public static final String ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS = "Entries must not have more than one outgoing transition";
 	public static final String ISSUE_ENTRY_WITH_TRIGGER = "Outgoing Transitions from Entries can not have a Trigger or Guard.";
+	public static final String ISSUE_EXIT_WITH_OUT_TRANS = "Exit node should have no outgoing transition.";
+	public static final String ISSUE_EXIT_WITHOUT_IN_TRANS = "Exit node should have at least one incoming transition";
+	public static final String ISSUE_EXIT_ON_STATECHART = "Exit node in top level region not supported - use final states instaed.";
 	public static final String ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION = "A choice must have at least one outgoing transition.";
 	public static final String ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY = "The region can't be entered using the shallow history. Add an entry node.";
 	public static final String ISSUE_SUBMACHINE_UNRESOLVABLE = "Referenced Substatemachine '%s'does not exist!";
@@ -128,16 +133,9 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	 * Calculates all predecessor states
 	 */
 
-	@Check(CheckType.FAST)
-	public void incomingTransitionCount(Vertex vertex) {
-		if (vertex.getIncomingTransitions().size() > 0 && vertex instanceof Entry
-				&& ((Entry) vertex).getKind().equals(EntryKind.INITIAL)) {
-			warning(ISSUE_INITIAL_ENTRY_WITH_IN_TRANS, vertex, null, -1);
-		}
-	}
 
 	@Check(CheckType.FAST)
-	public void outgoingTransitionCount(FinalState finalState) {
+	public void finalStateWithOutgoingTransition(FinalState finalState) {
 		if ((finalState.getOutgoingTransitions().size() > 0)) {
 			warning(ISSUE_FINAL_STATE_OUTGOING_TRANSITION, finalState, null, -1);
 		}
@@ -151,7 +149,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 
 	@Check(CheckType.FAST)
-	public void outgoingTransitionCount(Choice choice) {
+	public void choiceWithoutOutgoingTransition(Choice choice) {
 		// Choice without outgoing transition
 		if (choice.getOutgoingTransitions().size() == 0) {
 			error(ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION, choice, null, -1);
@@ -167,15 +165,56 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
+
 	@Check(CheckType.FAST)
-	public void outgoingTransitionCount(Entry entry) {
+	public void initialEntryWithoutIncomingTransitions(Entry entry) {
+		if (entry.getIncomingTransitions().size() > 0 
+				&& entry.getKind().equals(EntryKind.INITIAL)) {
+			warning(ISSUE_INITIAL_ENTRY_WITH_IN_TRANS, entry, null, -1);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void initialEntryWithoutOutgoingTransition(Entry entry) {
 		if (entry.getOutgoingTransitions().size() == 0 && ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
 			warning(ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS, entry, null, -1);
 		}
+	}
+
+	@Check(CheckType.FAST)
+	public void initialEntryWithMultipleOutgoingTransition(Entry entry) {
 		if (entry.getOutgoingTransitions().size() > 1) {
 			error(ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS, entry, null, -1);
 		}
 	}
+
+
+	@Check(CheckType.FAST)
+	public void exitWithoutIncomingTransition(Exit exit) {
+		if (exit.getIncomingTransitions().size() == 0) {
+			warning(ISSUE_EXIT_WITHOUT_IN_TRANS, exit, null, -1);
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void exitWithOutgoingTransition(Exit exit) {
+		if (exit.getOutgoingTransitions().size() > 0) {
+			error(ISSUE_EXIT_WITH_OUT_TRANS, exit, null, -1);
+		}
+	}
+
+	/**
+	 * Exit nodes in top level regions are not supported. 
+	 *  
+	 * @param exit
+	 */
+	@Check(CheckType.FAST)
+	public void exitOnStatechart(Exit exit) {
+		if (exit.getParentRegion().getComposite() instanceof Statechart) {
+			error(ISSUE_EXIT_ON_STATECHART, exit, null, -1);
+		}
+	}
+
 
 	@Check(CheckType.FAST)
 	public void synchronizationTransitionCount(Synchronization sync) {
