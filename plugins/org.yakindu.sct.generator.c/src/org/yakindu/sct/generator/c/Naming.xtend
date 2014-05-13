@@ -26,6 +26,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sexec.TimeEvent
 
 class Naming {
 	
@@ -230,6 +231,9 @@ class Naming {
 	
 	def dispatch access (Event it) 
 		'''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
+		
+	def dispatch access (TimeEvent it)
+		'''«scHandle»->«scope.instance».«shortName.raised»'''
 				
 	def dispatch access (EObject it) 
 		'''#error cannot access elements of type «getClass().name»'''
