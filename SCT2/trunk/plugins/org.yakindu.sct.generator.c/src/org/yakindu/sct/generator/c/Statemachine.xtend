@@ -109,7 +109,7 @@ class Statemachine {
 	'''
 
 	def dispatch structDeclaration(TimeEvent it) '''
-		sc_boolean «name.asIdentifier»_raised;
+		sc_boolean «shortName.raised»;
 	'''
 
 	def dispatch structDeclaration(VariableDefinition it) '''
