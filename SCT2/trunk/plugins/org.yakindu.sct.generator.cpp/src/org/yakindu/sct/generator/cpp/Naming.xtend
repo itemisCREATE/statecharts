@@ -121,7 +121,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	override dispatch access (OperationDefinition it) 
 		'''«asFunction»'''
 		
-	def dispatch access(TimeEvent it)
+	override dispatch access(TimeEvent it)
 		'''«timeEventsInstance»[«indexOf»]'''
 		
 	override dispatch access (VariableDefinition it) 
