@@ -29,6 +29,7 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
@@ -40,13 +41,12 @@ import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
-import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
-import org.yakindu.base.expressions.expressions.NullLiteralimport org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
+import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
+import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
 
 /**
  * 
@@ -88,14 +88,6 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			scopeVariable.value = evaluate(operator, scopeVariable.getValue, result)
 		}
 		scopeVariable.value
-	}
-
-	def dispatch event(ElementReferenceExpression e) {
-		if(e.reference instanceof EventDefinition ) e.reference else null
-	}
-
-	def dispatch event(FeatureCall e) {
-		if(e.feature instanceof EventDefinition) e.feature else null
 	}
 
 	def dispatch Object execute(EventRaisingExpression eventRaising) {
