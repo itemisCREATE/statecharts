@@ -17,7 +17,7 @@ class ExecutionContextExtensions {
 
 	def clearLocalAndInEvents(ExecutionContext executionContext) {
 		executionContext.allEvents.filter[direction == EventDirection.IN || direction == EventDirection.LOCAL].forEach[
-			if(raised) raised = false]
+			if(raised) {raised = false; value = null}]
 	}
 
 	def raiseScheduledEvents(ExecutionContext executionContext) {
