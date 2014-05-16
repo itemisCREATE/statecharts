@@ -42,7 +42,6 @@ public class SCTDebugThread extends SCTDebugElement implements IThread {
 		Assert.isNotNull(element);
 		this.container = container;
 		this.element = element;
-		// TODO
 		stateStack = new ArrayList<SCTStackFrame>();
 	}
 

@@ -158,7 +158,7 @@ public class SCTStackFrame extends SCTDebugElement implements IStackFrame {
 		return super.getAdapter(adapter);
 	}
 
-	public NamedElement getState() {
+	public NamedElement getElement() {
 		return element;
 	}
 
