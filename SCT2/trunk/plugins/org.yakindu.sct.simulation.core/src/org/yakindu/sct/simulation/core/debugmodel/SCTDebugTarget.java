@@ -28,6 +28,7 @@ import org.eclipse.debug.core.model.IProcess;
 import org.eclipse.debug.core.model.IStep;
 import org.eclipse.debug.core.model.IThread;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.yakindu.base.base.NamedElement;
@@ -60,7 +61,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 
 	private IExecutionControl executionControl;
 
-	private UpdateTreeAdapter updater = new UpdateTreeAdapter();
+	private AdapterImpl updater;
 
 	public SCTDebugTarget(ILaunch launch, NamedElement element, ISimulationEngine engine) throws CoreException {
 		super(null, element.eResource().getURI().toPlatformString(true));
@@ -75,7 +76,11 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 		executionControl = engine.getExecutionControl();
 		executionControl.init();
 		DebugPlugin.getDefault().getBreakpointManager().addBreakpointListener(this);
-		engine.getExecutionContext().eAdapters().add(updater);
+		engine.getExecutionContext().eAdapters().add(updater = createUpdater());
+	}
+
+	protected AdapterImpl createUpdater() {
+		return new UpdateTreeAdapter();
 	}
 
 	public void start() {
@@ -145,6 +150,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 		fireEvent(new DebugEvent(getDebugTarget(), DebugEvent.TERMINATE));
 		terminated = true;
 		executionControl.terminate();
+		engine.getExecutionContext().eAdapters().remove(updater);
 	}
 
 	public boolean canResume() {
@@ -239,7 +245,7 @@ public class SCTDebugTarget extends SCTDebugElement implements IDebugTarget, ISt
 
 	// Fires fireChangeEvents to refresh the DebugUI TreeViewer with the active
 	// states
-	protected class UpdateTreeAdapter extends CrossDocumentContentAdapter {
+	public class UpdateTreeAdapter extends CrossDocumentContentAdapter {
 
 		@Override
 		protected boolean shouldAdapt(EStructuralFeature feature) {
