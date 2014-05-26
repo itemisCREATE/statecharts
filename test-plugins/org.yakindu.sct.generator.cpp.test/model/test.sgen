@@ -192,6 +192,14 @@ GeneratorModel for sctunit::cpp {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test LocalReactions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
 		 
 	test LogicalAndTests{
 		
