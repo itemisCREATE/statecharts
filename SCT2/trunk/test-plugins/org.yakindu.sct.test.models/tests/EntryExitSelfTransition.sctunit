@@ -1,0 +1,15 @@
+
+testgroup EntryExitSelfTransition for statechart EntryExitSelfTransition{
+	test EntryExitSelfTransitionTest { 
+		enter
+		
+		cycle
+		assert x == 1 
+		
+		raise e
+		cycle
+		assert x == 3
+		 
+	} 
+}
+	
