@@ -95,9 +95,7 @@ GeneratorModel for sctunit::java {
 			targetFolder = "test-gen"			
 		}			
 	}
-	
-	
-	
+		
 	test EnterState{
 		
 		feature Outlet{ 
@@ -107,6 +105,14 @@ GeneratorModel for sctunit::java {
 	}
 	
 	test EntryChoice{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test EntryExitSelfTransition{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.java.test" 

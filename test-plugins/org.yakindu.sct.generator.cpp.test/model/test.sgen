@@ -104,7 +104,15 @@ GeneratorModel for sctunit::cpp {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test EntryExitSelfTransition{
 		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
 	test EnterState{
 		
 		feature Outlet{ 
