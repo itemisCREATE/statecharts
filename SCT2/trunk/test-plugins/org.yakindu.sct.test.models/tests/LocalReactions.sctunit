@@ -1,0 +1,12 @@
+
+testgroup LocalReactions for statechart LocalReactions{
+	test LocalReactionsTest { 
+		
+		enter
+		assert active(LocalReactions.main_region.A) 
+		cycle
+		assert x == 1
+		 
+	} 
+}
+	

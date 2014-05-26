@@ -194,6 +194,16 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 		
+		
+	test LocalReactions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
+		
+		
 	test LogicalAndTests{
 		
 		feature Outlet{ 
