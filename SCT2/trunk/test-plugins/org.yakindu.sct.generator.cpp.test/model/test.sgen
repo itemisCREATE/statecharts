@@ -5,6 +5,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 		
@@ -13,7 +17,11 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
-		}			
+		}	
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}				
 	}
 	
 	test AssignmentAsExpression{
@@ -21,6 +29,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -30,6 +42,10 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}		
 	}
 	
 	test BooleanExpressions{
@@ -37,6 +53,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -45,6 +65,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -53,6 +77,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -61,6 +89,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -69,6 +101,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -77,6 +113,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -87,6 +127,10 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}		
 	}
 	
 	test DynamicChoice{
@@ -95,6 +139,10 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}		
 	}
 	
 	test EntryChoice{
@@ -103,6 +151,10 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}		
 	}
 	
 	test EntryExitSelfTransition{
@@ -110,6 +162,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 
@@ -118,6 +174,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -126,6 +186,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -134,6 +198,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -142,6 +210,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -150,6 +222,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -158,6 +234,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -166,6 +246,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -174,6 +258,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -182,6 +270,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -190,6 +282,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}	
 	
@@ -198,6 +294,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -206,6 +306,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 		 
@@ -214,6 +318,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -222,6 +330,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -230,6 +342,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -238,6 +354,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 
@@ -247,6 +367,10 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}		
 	}	
 	
 	test Parenthesis{
@@ -254,6 +378,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 		
@@ -262,6 +390,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}	
 	
@@ -270,6 +402,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 		
@@ -278,6 +414,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}	
 	
@@ -287,6 +427,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -295,6 +439,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -303,6 +451,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -311,6 +463,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -319,6 +475,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}	
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}	
 	
@@ -328,14 +488,21 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}		
 	}
-	
-	
+		
 	test STextKeywordsInStatesAndRegions{
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -344,6 +511,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -352,6 +523,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -360,6 +535,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}
 	
@@ -369,6 +548,10 @@ GeneratorModel for sctunit::cpp {
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
 		}			
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}		
 	}	
 
 	test TransitionWithoutCondition{
@@ -376,7 +559,11 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
-		}			
+		}	
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}				
 	}	
 
 	test ValuedEvents{
@@ -384,6 +571,10 @@ GeneratorModel for sctunit::cpp {
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.generator.cpp.test" 
 			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
 		}			
 	}	
 		
