@@ -17,7 +17,7 @@ import org.eclipse.xtext.parser.IParser;
 import org.junit.Assert;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.refactoring.refactor.util.SctEqualityHelper;
+import org.yakindu.sct.refactoring.refactor.util.StatechartEqualityHelper;
 import org.yakindu.sct.refactoring.test.models.RefactoringTestModels;
 
 import com.google.inject.Inject;
@@ -36,7 +36,7 @@ public class RefactoringTest {
 	protected RefactoringTestModels models;
 
 	protected void compareStatecharts(Statechart initial, Statechart expected) {
-		SctEqualityHelper equalityHelper = new SctEqualityHelper();
+		StatechartEqualityHelper equalityHelper = new StatechartEqualityHelper();
 		if (!equalityHelper.equals(initial, expected)) {
 			Assert.fail("Equality check on statecharts failed!");
 		}
