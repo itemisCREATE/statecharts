@@ -29,13 +29,37 @@ import com.google.inject.Singleton;
  * <code>boolean</code>, <code>integer</code>, <code>real</code>,
  * <code>string</code>.
  * 
- * @author Alexander Nyßen (alexander.nyssen@itemis.de) - Initial contributino
+ * @author Alexander Nyßen (alexander.nyssen@itemis.de) - Initial contribution
  *         and API
+ * @author oliver bohl - String constants extract
  * 
  */
 @Singleton
-public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem {
+public class DefaultTypeSystem extends AbstractTypeSystem implements
+		ITypeSystem {
 
+	public static final String COULD_NOT_INFER_A_TYPE_FOR_THE_OPERATION_NO_TYPE = "Could not infer a type for the operation %s, because no type was inferred for its operand.";
+	public static final String COULD_NOT_INFER_A_TYPE_FOR_THE_OPERATION_NOT_INFERRED = "Could not infer a type for the operation %s, because types were not inferred for all of its operands.";
+	
+	public static final String OPERATOR_MAY_ONLY_BE_APPLIED_ON_A_PRIMITIVE_TYPE = "Operator %s may only be applied on a primitive type.";
+	
+	public static final String BITWISE_OPERATOR_MAY_ONLY_BE_APPLIED_ON_INTEGER_TYPES = "Bitwise operator '%s' may only be applied on integer types, not on %s.";
+	public static final String BITWISE_OPERATOR_MAY_ONLY_BE_APPLIED_ON_INTEGER_TYPES_2 = "Bitwise operator '%s' may only be applied on integer types, not on %s and %s.";
+	
+	public static final String ARITHMETIC_OPERATORS_MAY_ONLY_BE_APPLIED_ON_NUMERIC_TYPES = "Arithmetic operator '%s' may only be applied on numeric types, not on %s";
+	public static final String ARITHMETIC_OPERATORS_MAY_ONLY_BE_APPLIED_ON_NUMERIC_TYPES_2 = "Arithmetic operator '%s' may only be applied on numeric types, not on %s and %s.";
+	
+	public static final String LOGICAL_OPERATORS_MAY_ONLY_BE_APPLIED_ON_BOOLEAN_TYPES = "Logical operator '%s' may only be applied on boolean types, not on %s.";
+	public static final String LOGICAL_OPERATORS_MAY_ONLY_BE_APPLIED_ON_BOOLEAN_TYPES_2 = "Logical operator '%s' may only be applied on boolean types, not on %s and %s.";
+	
+	public static final String COMPARSION_OPERATOR_MAY_ONLY_BE_APPLIED_ON_PRIMITIVE_TYPES = "Comparison operator '%s' may only be applied on primitive types, not on %s and %s.";
+	public static final String COMPARSION_OPERATOR_MAY_ONLY_BE_APPLIED_ON_COMPATIBLE_TYPES = "Comparison operator '%s' may only be applied on compatible types, not on %s and %s.";
+	
+	public static final String ASSIGNMENT_OPERATOR_MAY_ONLY_BE_APPLIED_ON_COMPATIBLE_TYPES = "Assignment operator '%s' may only be applied on compatible types, not on %s and %s.";
+	public static final String ASSIGNMENT_AND_EQUALITY_OPERATIONS_MAY_ONLY_BE_APPLIED_ON_TYPES_OF_THE_SAME_KIND = "Assignment and equality operations may only be applied on types of the same kind, not on %s and %s.";
+	
+	public static String NO_VALID_TYPE_CAN_BE_INFERRED_FOR_CONDITIONAL_EXPRESSION_BECAUSE_FIRST_OPERAND_NOT_BOOLEAN = "No valid type can be inferred for conditional expression, because type of first operand is not boolean.";
+	
 	/**
 	 * Dummy resource. Xtext linker expects types to be contained in a resource.
 	 */
@@ -46,11 +70,13 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 	private static PrimitiveType integerType;
 	private static PrimitiveType booleanType;
 
+
 	protected static synchronized Resource getResource() {
 		if (resource == null) {
 			resource = new ResourceImpl();
 			// use old uri for backwards compatibility
-			resource.setURI(URI.createURI("platform:/plugin/org.yakindu.sct.model.stext/libraries/Primitives.types"));
+			resource.setURI(URI
+					.createURI("platform:/plugin/org.yakindu.sct.model.stext/libraries/Primitives.types"));
 		}
 		return resource;
 	}
@@ -138,7 +164,8 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		throw new IllegalArgumentException("Literal of unknown kind " + literal);
 	}
 
-	public InferenceResult inferType(InferredType operandType, ITypeSystemOperator unaryOperator) {
+	public InferenceResult inferType(InferredType operandType,
+			ITypeSystemOperator unaryOperator) {
 		// some defense programming
 		if (operandType == null) {
 			throw new NullPointerException("operandType may not be null.");
@@ -147,14 +174,17 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		// if the operand type could not be inferred, there is not much we can
 		// do here
 		if (operandType.getType() == null) {
-			return new InferenceResult(null, new InferenceIssue("Could not infer a type for the operation "
-					+ unaryOperator.getSymbol() + ", because no type was inferred for its operand.", IStatus.ERROR));
+			return new InferenceResult(null, new InferenceIssue(String.format(
+					COULD_NOT_INFER_A_TYPE_FOR_THE_OPERATION_NO_TYPE,
+					unaryOperator.getSymbol()), IStatus.ERROR));
 		}
 
 		// check we have a primitive type
 		if (!(operandType.getType() instanceof PrimitiveType)) {
-			return new InferenceResult(null, new InferenceIssue("Operator " + unaryOperator.getSymbol()
-					+ " may only be applied on a primitive type.", IStatus.ERROR));
+			return new InferenceResult(null, new InferenceIssue(
+
+			String.format(OPERATOR_MAY_ONLY_BE_APPLIED_ON_A_PRIMITIVE_TYPE,
+					unaryOperator.getSymbol()), IStatus.ERROR));
 		}
 
 		// infer type based on given operator
@@ -162,35 +192,48 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		switch (o) {
 		case COMPLEMENT:
 			if (!isIntegerType(operandType.getType())) {
-				return new InferenceResult(null, new InferenceIssue("Bitwise operator '" + o.getSymbol()
-						+ "' may only be applied on integer types, not on " + operandType.getType().getName() + ".",
-						IStatus.ERROR));
-
+				return new InferenceResult(
+						null,
+						new InferenceIssue(
+								String.format(
+										BITWISE_OPERATOR_MAY_ONLY_BE_APPLIED_ON_INTEGER_TYPES,
+										o.getSymbol(), operandType.getType()
+												.getName()), IStatus.ERROR));
 			}
 			return new InferenceResult(operandType);
 		case NEGATIVE:
 		case POSITIVE:
-			if (!isIntegerType(operandType.getType()) && !isRealType(operandType.getType())) {
-				return new InferenceResult(null, new InferenceIssue("Arithmetic operator '" + o.getSymbol()
-						+ "' may only be applied on numeric types, not on " + operandType.getType().getName() + ".",
-						IStatus.ERROR));
+			if (!isIntegerType(operandType.getType())
+					&& !isRealType(operandType.getType())) {
+				return new InferenceResult(
+						null,
+						new InferenceIssue(
+								String.format(
+										ARITHMETIC_OPERATORS_MAY_ONLY_BE_APPLIED_ON_NUMERIC_TYPES,
+										o.getSymbol(), operandType.getType()
+												.getName()), IStatus.ERROR));
 			}
 			return new InferenceResult(operandType);
 		case LOGICAL_NOT:
 			if (!isBooleanType(operandType.getType())) {
-				return new InferenceResult(null, new InferenceIssue("Logical operator '" + o.getSymbol()
-						+ "' may only be applied on boolean types, not on " + operandType.getType().getName() + ".",
-						IStatus.ERROR));
+				return new InferenceResult(
+						null,
+						new InferenceIssue(
+								String.format(
+										LOGICAL_OPERATORS_MAY_ONLY_BE_APPLIED_ON_BOOLEAN_TYPES,
+										o.getSymbol(), operandType.getType()
+												.getName()), IStatus.ERROR));
 
 			}
 			return new InferenceResult(operandType);
 		default:
-			throw new IllegalArgumentException("Unsupported unary operator: " + unaryOperator);
+			throw new IllegalArgumentException("Unsupported unary operator: "
+					+ unaryOperator);
 		}
 	}
 
-	public InferenceResult inferType(InferredType firstOperandType, InferredType secondOperandType,
-			ITypeSystemOperator binaryOperator) {
+	public InferenceResult inferType(InferredType firstOperandType,
+			InferredType secondOperandType, ITypeSystemOperator binaryOperator) {
 		// some defense programming
 		if (firstOperandType == null || secondOperandType == null) {
 			throw new NullPointerException("Operand types may not be null.");
@@ -198,13 +241,15 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 
 		// if the operand type could not be inferred, there is not much we can
 		// do here
-		if (firstOperandType.getType() == null || secondOperandType.getType() == null) {
-			return new InferenceResult(null, new InferenceIssue("Could not infer a type for the operation "
-					+ binaryOperator.getSymbol() + ", because types were not inferred for all of its operands.",
-					IStatus.ERROR));
+		if (firstOperandType.getType() == null
+				|| secondOperandType.getType() == null) {
+			return new InferenceResult(null, new InferenceIssue(String.format(
+					COULD_NOT_INFER_A_TYPE_FOR_THE_OPERATION_NOT_INFERRED,
+					binaryOperator.getSymbol()), IStatus.ERROR));
 		}
 		// TODO:
-		if (firstOperandType.getType() instanceof TypeParameter || secondOperandType.getType() instanceof TypeParameter)
+		if (firstOperandType.getType() instanceof TypeParameter
+				|| secondOperandType.getType() instanceof TypeParameter)
 			return null;
 
 		// infer type base on operator (fist pass: check types are valid, second
@@ -222,10 +267,17 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		case ASSIGN_LEFT_SHIFT:
 		case ASSIGN_RIGHT_SHIFT:
 			// check only integer types are used
-			if (!isIntegerType(firstOperandType.getType()) || !isIntegerType(secondOperandType.getType())) {
-				return new InferenceResult(null, new InferenceIssue("Bitwise operator '" + o.getSymbol()
-						+ "' may only be applied on integer types, not on " + firstOperandType.getType().getName()
-						+ " and " + secondOperandType.getType().getName() + ".", IStatus.ERROR));
+			if (!isIntegerType(firstOperandType.getType())
+					|| !isIntegerType(secondOperandType.getType())) {
+				return new InferenceResult(
+						null,
+						new InferenceIssue(
+								String.format(
+										BITWISE_OPERATOR_MAY_ONLY_BE_APPLIED_ON_INTEGER_TYPES_2,
+										o.getSymbol(), firstOperandType
+												.getType().getName(),
+										secondOperandType.getType().getName()),
+								IStatus.ERROR));
 			}
 			// second pass: compute common type
 			switch (o) {
@@ -257,10 +309,17 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		case ASSIGN_DIV:
 		case ASSIGN_MOD:
 			// only numeric types
-			if (!isNumericType(firstOperandType.getType()) || !isNumericType(secondOperandType.getType())) {
-				return new InferenceResult(null, new InferenceIssue("Arithmetic operator '" + o.getSymbol()
-						+ "' may only be applied on numeric types, not on " + firstOperandType.getType().getName()
-						+ " and " + secondOperandType.getType().getName() + ".", IStatus.ERROR));
+			if (!isNumericType(firstOperandType.getType())
+					|| !isNumericType(secondOperandType.getType())) {
+				return new InferenceResult(
+						null,
+						new InferenceIssue(
+								String.format(
+										ARITHMETIC_OPERATORS_MAY_ONLY_BE_APPLIED_ON_NUMERIC_TYPES_2,
+										o.getSymbol(), firstOperandType
+												.getType().getName(),
+										secondOperandType.getType().getName()),
+								IStatus.ERROR));
 			}
 
 			// second pass: compute type
@@ -284,10 +343,17 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		case LOGICAL_OR:
 		case LOGICAL_AND:
 			// only boolean types allowed
-			if (!isBooleanType(firstOperandType.getType()) || !isBooleanType(secondOperandType.getType())) {
-				return new InferenceResult(null, new InferenceIssue("Logical operator '" + o.getSymbol()
-						+ "' may only be applied on boolean types, not on " + firstOperandType.getType().getName()
-						+ " and " + secondOperandType.getType().getName() + ".", IStatus.ERROR));
+			if (!isBooleanType(firstOperandType.getType())
+					|| !isBooleanType(secondOperandType.getType())) {
+				return new InferenceResult(
+						null,
+						new InferenceIssue(
+								String.format(
+										LOGICAL_OPERATORS_MAY_ONLY_BE_APPLIED_ON_BOOLEAN_TYPES_2,
+										o.getSymbol(), firstOperandType
+												.getType().getName(),
+										secondOperandType.getType().getName()),
+								IStatus.ERROR));
 			}
 
 			// second pass: compute type
@@ -305,19 +371,33 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			// check we have primitive types
 			if (!(firstOperandType.getType() instanceof PrimitiveType)
 					|| !(secondOperandType.getType() instanceof PrimitiveType)) {
-				return new InferenceResult(null, new InferenceIssue("Comparison operator '" + o.getSymbol()
-						+ "' may only be applied on primitive types, not on " + firstOperandType.getType().getName()
-						+ " and " + secondOperandType.getType().getName() + ".", IStatus.ERROR));
+				return new InferenceResult(
+						null,
+						new InferenceIssue(
+								String.format(
+										COMPARSION_OPERATOR_MAY_ONLY_BE_APPLIED_ON_PRIMITIVE_TYPES,
+										o.getSymbol(), firstOperandType
+												.getType().getName(),
+										secondOperandType.getType().getName()),
+								IStatus.ERROR));
 			}
 			// check types have the same base type
-			if (!EcoreUtil.equals(getBaseType((PrimitiveType) firstOperandType.getType()),
+			if (!EcoreUtil.equals(
+					getBaseType((PrimitiveType) firstOperandType.getType()),
 					getBaseType((PrimitiveType) secondOperandType.getType()))) {
 				// exclude coercion case (integer -> real)
-				if (!(isNumericType(firstOperandType.getType()) && isNumericType(secondOperandType.getType()))) {
-					return new InferenceResult(null, new InferenceIssue("Comparison operator '" + o.getSymbol()
-							+ "' may only be applied on compatible types, not on "
-							+ firstOperandType.getType().getName() + " and " + secondOperandType.getType().getName()
-							+ ".", IStatus.ERROR));
+				if (!(isNumericType(firstOperandType.getType()) && isNumericType(secondOperandType
+						.getType()))) {
+					return new InferenceResult(
+							null,
+							new InferenceIssue(
+									String.format(
+											COMPARSION_OPERATOR_MAY_ONLY_BE_APPLIED_ON_COMPATIBLE_TYPES,
+											o.getSymbol(), firstOperandType
+													.getType(),
+											secondOperandType.getType(),
+											secondOperandType.getType()
+													.getName()), IStatus.ERROR));
 				}
 
 			}
@@ -330,27 +410,54 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			if (firstOperandType.getType() instanceof PrimitiveType
 					&& secondOperandType.getType() instanceof PrimitiveType) {
 				// check primitive types have the same base type
-				if (!EcoreUtil.equals(getBaseType((PrimitiveType) firstOperandType.getType()),
-						getBaseType((PrimitiveType) secondOperandType.getType()))) {
+				if (!EcoreUtil
+						.equals(getBaseType((PrimitiveType) firstOperandType
+								.getType()),
+								getBaseType((PrimitiveType) secondOperandType
+										.getType()))) {
 					// handle coercion
-					if (!(isNumericType(firstOperandType.getType()) && isNumericType(secondOperandType.getType()))) {
-						return new InferenceResult(null, o.equals(BinaryOperators.ASSIGN) ? new InferenceIssue(
-								"Assignment operator '" + o.getSymbol()
-										+ "' may only be applied on compatible types, not on "
-										+ firstOperandType.getType().getName() + " and "
-										+ secondOperandType.getType().getName() + ".", IStatus.ERROR)
-								: new InferenceIssue("Comparison operator '" + o.getSymbol()
-										+ "' may only be applied on compatible types, not on "
-										+ firstOperandType.getType().getName() + " and "
-										+ secondOperandType.getType().getName() + ".", IStatus.ERROR));
+					if (!(isNumericType(firstOperandType.getType()) && isNumericType(secondOperandType
+							.getType()))) {
+
+						return new InferenceResult(
+								null,
+								o.equals(BinaryOperators.ASSIGN) ? new InferenceIssue(
+										String.format(
+												ASSIGNMENT_OPERATOR_MAY_ONLY_BE_APPLIED_ON_COMPATIBLE_TYPES,
+												o.getSymbol(), firstOperandType
+														.getType().getName(),
+												secondOperandType.getType()
+														.getName()),
+										IStatus.ERROR)
+
+										: new InferenceIssue(
+												String.format(
+														COMPARSION_OPERATOR_MAY_ONLY_BE_APPLIED_ON_COMPATIBLE_TYPES,
+														o.getSymbol(),
+														firstOperandType
+																.getType()
+																.getName(),
+														secondOperandType
+																.getType()
+																.getName()),
+
+												IStatus.ERROR));
 					} else {
-						if (o.equals(BinaryOperators.ASSIGN) && !isRealType(firstOperandType.getType())
+						if (o.equals(BinaryOperators.ASSIGN)
+								&& !isRealType(firstOperandType.getType())
 								&& isRealType(secondOperandType.getType())) {
 							// may only assign integer to real, not vice versa
-							return new InferenceResult(null, new InferenceIssue("Assignment operator '" + o.getSymbol()
-									+ "' may only be applied on compatible types, not on "
-									+ firstOperandType.getType().getName() + " and "
-									+ secondOperandType.getType().getName() + ".", IStatus.ERROR));
+							return new InferenceResult(
+									null,
+									new InferenceIssue(
+											String.format(
+													ASSIGNMENT_OPERATOR_MAY_ONLY_BE_APPLIED_ON_COMPATIBLE_TYPES,
+													o.getSymbol(),
+													firstOperandType.getType()
+															.getName(),
+													secondOperandType.getType()
+															.getName()),
+											IStatus.ERROR));
 						}
 					}
 				}
@@ -359,14 +466,20 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 				// no further checks for complex types required here
 				// (computation of type in second pass will result in null, if
 				// they are not compatible)
-			} else if ((firstOperandType.getType() == getNullType() && secondOperandType.getType() instanceof ComplexType)
-					|| (firstOperandType.getType() instanceof ComplexType && secondOperandType.getType() == getNullType())) {
+			} else if ((firstOperandType.getType() == getNullType() && secondOperandType
+					.getType() instanceof ComplexType)
+					|| (firstOperandType.getType() instanceof ComplexType && secondOperandType
+							.getType() == getNullType())) {
 				// no further checks required
 			} else {
-				return new InferenceResult(null, new InferenceIssue(
-						"Assignment and equality operations may only be applied on types of the same kind, not on "
-								+ firstOperandType.getType().getName() + " and "
-								+ secondOperandType.getType().getName() + ".", IStatus.ERROR));
+				return new InferenceResult(
+						null,
+						new InferenceIssue(
+								String.format(
+										ASSIGNMENT_AND_EQUALITY_OPERATIONS_MAY_ONLY_BE_APPLIED_ON_TYPES_OF_THE_SAME_KIND,
+										firstOperandType.getType().getName(),
+										secondOperandType.getType().getName()),
+								IStatus.ERROR));
 			}
 
 			// second pass, compute types
@@ -382,24 +495,28 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 				throw new IllegalStateException("Unsupported operator kind.");
 			}
 		default:
-			throw new IllegalArgumentException("Unsupported binary operator: " + binaryOperator);
+			throw new IllegalArgumentException("Unsupported binary operator: "
+					+ binaryOperator);
 		}
 	}
 
-	public InferenceResult inferType(InferredType firstOperandType, InferredType secondOperandType,
-			InferredType thirdOperandType, ITypeSystemOperator ternaryOperator) {
+	public InferenceResult inferType(InferredType firstOperandType,
+			InferredType secondOperandType, InferredType thirdOperandType,
+			ITypeSystemOperator ternaryOperator) {
 		// some defense programming
-		if (firstOperandType == null || secondOperandType == null || thirdOperandType == null) {
+		if (firstOperandType == null || secondOperandType == null
+				|| thirdOperandType == null) {
 			throw new NullPointerException("Operand types may not be null");
 		}
 
 		// if the operand type could not be inferred, there is not much we can
 		// do here
-		if (firstOperandType.getType() == null || secondOperandType.getType() == null
+		if (firstOperandType.getType() == null
+				|| secondOperandType.getType() == null
 				|| thirdOperandType.getType() == null) {
-			return new InferenceResult(null, new InferenceIssue("Could not infer a type for the operation "
-					+ ternaryOperator.getSymbol() + ", because types were not inferred for all of its operands.",
-					IStatus.ERROR));
+			return new InferenceResult(null, new InferenceIssue(String.format(
+					COULD_NOT_INFER_A_TYPE_FOR_THE_OPERATION_NOT_INFERRED,
+					ternaryOperator.getSymbol()), IStatus.ERROR));
 		}
 
 		// infer type based on operator
@@ -411,35 +528,42 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			List<InferenceIssue> issues = new ArrayList<InferenceIssue>();
 			if (!isBooleanType(firstOperandType.getType())) {
 				issues.add(new InferenceIssue(
-						"No valid type can be inferred for conditional expression, because type of first operand is not boolean.",
+						NO_VALID_TYPE_CAN_BE_INFERRED_FOR_CONDITIONAL_EXPRESSION_BECAUSE_FIRST_OPERAND_NOT_BOOLEAN,
 						IStatus.ERROR));
 			}
 			// compute a union of the second and third operand types
-			InferenceResult unionResult = union(secondOperandType, thirdOperandType);
+			InferenceResult unionResult = union(secondOperandType,
+					thirdOperandType);
 			unionResult.getIssues().addAll(issues);
 			return unionResult;
 		default:
-			throw new IllegalArgumentException("Unsupported ternary operator: " + ternaryOperator);
+			throw new IllegalArgumentException("Unsupported ternary operator: "
+					+ ternaryOperator);
 		}
 	}
 
 	public InferenceResult union(InferredType firstType, InferredType secondType) {
 		// defense programming
 		if (firstType == null || secondType == null) {
-			throw new NullPointerException("firstType and secondType may not be null.");
+			throw new NullPointerException(
+					"firstType and secondType may not be null.");
 		}
 
 		// if the operand type could not be inferred, there is not much we can
 		// do here
 		if (firstType.getType() == null || secondType.getType() == null) {
-			return new InferenceResult(null, new InferenceIssue(
-					"Could not infer a type union, because not all given types were properly inferred in advance.",
-					IStatus.ERROR));
+			return new InferenceResult(
+					null,
+					new InferenceIssue(
+							"Could not infer a type union, because not all given types were properly inferred in advance.",
+							IStatus.ERROR));
 		}
 
 		// infer the union of both given types
-		if (firstType.getType() instanceof PrimitiveType && secondType.getType() instanceof PrimitiveType) {
-			Type commonType = computeCommonType((PrimitiveType) firstType.getType(),
+		if (firstType.getType() instanceof PrimitiveType
+				&& secondType.getType() instanceof PrimitiveType) {
+			Type commonType = computeCommonType(
+					(PrimitiveType) firstType.getType(),
 					(PrimitiveType) secondType.getType());
 			if (commonType != null) {
 				return new InferenceResult(new InferredType(commonType));
@@ -455,19 +579,22 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 				}
 			}
 		}
-		return new InferenceResult(null, new InferenceIssue("Cannot compute a type union for the given types: "
-				+ firstType + ", " + secondType, IStatus.ERROR));
+		return new InferenceResult(null, new InferenceIssue(
+				"Cannot compute a type union for the given types: " + firstType
+						+ ", " + secondType, IStatus.ERROR));
 	}
 
 	public List<Type> getTypes(InferenceResult inferenceResult) {
 		if (inferenceResult == null) {
-			throw new NullPointerException("InferenceResult result may not be null.");
+			throw new NullPointerException(
+					"InferenceResult result may not be null.");
 		}
 		// we do not evaluate constraints and we only have one type of a kind
 		if (inferenceResult.getType() == null) {
 			return Collections.<Type> emptyList();
 		} else {
-			return Collections.singletonList(inferenceResult.getType().getType());
+			return Collections.singletonList(inferenceResult.getType()
+					.getType());
 		}
 	}
 
@@ -523,7 +650,8 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 	}
 
 	public boolean isNumericType(Type type) {
-		boolean isNumeric = EcoreUtil.equals(getIntegerType(), type) || EcoreUtil.equals(getRealType(), type);
+		boolean isNumeric = EcoreUtil.equals(getIntegerType(), type)
+				|| EcoreUtil.equals(getRealType(), type);
 		if (!isNumeric && type instanceof PrimitiveType) {
 			PrimitiveType baseType = ((PrimitiveType) type).getBaseType();
 			if (baseType != null) {
