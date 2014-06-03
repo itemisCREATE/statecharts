@@ -28,7 +28,8 @@ public class RefactoringTestModels extends AbstractTestModelsUtil {
 	public static final String UNFOLD_EXIT_ACTIONS = "unfold_exit_action/";
 	public static final String GROUPING_STATES = "grouping_states/";
 	public static final String RENAMING = "renaming/";
-	public static final String CREATE_SUBMACHINE = "create_submachine/";
+	public static final String EXTRACT_SUBDIAGRAM = "extract_subdiagram/";
+	public static final String INLINE_SUBDIAGRAM = "inline_subdiagram/";
 
 	@Override
 	public String getModelDirectory() {
