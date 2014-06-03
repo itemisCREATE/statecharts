@@ -1,3 +1,13 @@
+/**
+ * Copyright (c) 2013 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ * Contributors:
+ * 	committers of YAKINDU - initial API and implementation
+ * 
+ */
 package org.yakindu.sct.refactoring.refactor.util;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -15,7 +25,7 @@ import org.eclipse.emf.ecore.util.FeatureMapUtil;
  *
  */
 @SuppressWarnings("serial")
-public class SctEqualityHelper extends EqualityHelper{
+public class StatechartEqualityHelper extends EqualityHelper{
 
 	@Override
 	public boolean equals(EObject eObject1, EObject eObject2) {
