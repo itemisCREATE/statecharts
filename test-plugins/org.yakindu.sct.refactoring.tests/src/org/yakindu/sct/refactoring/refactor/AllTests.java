@@ -17,6 +17,7 @@ import org.yakindu.sct.refactoring.refactor.impl.ExtractSubdiagramRefactoringTes
 import org.yakindu.sct.refactoring.refactor.impl.FoldIncomingActionsRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.FoldOutgoingActionsRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.GroupStatesIntoCompositeRefactoringTest;
+import org.yakindu.sct.refactoring.refactor.impl.InlineSubdiagramRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.RenameRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldEntryActionsRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoringTest;
@@ -32,7 +33,8 @@ import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoringTes
 		UnfoldEntryActionsRefactoringTest.class,
 		UnfoldExitActionsRefactoringTest.class,
 		GroupStatesIntoCompositeRefactoringTest.class,
-		ExtractSubdiagramRefactoringTest.class})
+		ExtractSubdiagramRefactoringTest.class,
+		InlineSubdiagramRefactoringTest.class})
 public class AllTests {
 
 }
