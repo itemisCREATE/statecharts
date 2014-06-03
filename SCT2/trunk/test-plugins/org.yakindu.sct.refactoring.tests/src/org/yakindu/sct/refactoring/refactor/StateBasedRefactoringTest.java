@@ -10,9 +10,6 @@
  */
 package org.yakindu.sct.refactoring.refactor;
 
-import java.util.List;
-
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Assert;
@@ -67,13 +64,4 @@ public abstract class StateBasedRefactoringTest extends RefactoringTest {
 
 	protected abstract AbstractRefactoring<?> getRefactoring(State state);
 
-	protected State getStateByName(Statechart statechart, String name) {
-		List<State> allStates = EcoreUtil2.getAllContentsOfType(statechart, State.class);
-		for (State state : allStates) {
-			if (state.getName().equals(name)) {
-				return state;
-			}
-		}
-		return null;
-	}
 }

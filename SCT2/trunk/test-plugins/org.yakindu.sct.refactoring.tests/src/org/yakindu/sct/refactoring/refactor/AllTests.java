@@ -13,6 +13,7 @@ package org.yakindu.sct.refactoring.refactor;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.yakindu.sct.refactoring.refactor.impl.ExtractSubdiagramRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.FoldIncomingActionsRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.FoldOutgoingActionsRefactoringTest;
 import org.yakindu.sct.refactoring.refactor.impl.GroupStatesIntoCompositeRefactoringTest;
@@ -30,7 +31,8 @@ import org.yakindu.sct.refactoring.refactor.impl.UnfoldExitActionsRefactoringTes
 		FoldOutgoingActionsRefactoringTest.class, RenameRefactoringTest.class,
 		UnfoldEntryActionsRefactoringTest.class,
 		UnfoldExitActionsRefactoringTest.class,
-		GroupStatesIntoCompositeRefactoringTest.class})
+		GroupStatesIntoCompositeRefactoringTest.class,
+		ExtractSubdiagramRefactoringTest.class})
 public class AllTests {
 
 }
