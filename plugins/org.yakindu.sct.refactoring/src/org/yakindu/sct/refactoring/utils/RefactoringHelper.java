@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.gmf.runtime.notation.Diagram;
+import org.eclipse.gmf.runtime.notation.View;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.sct.model.sgraph.CompositeElement;
 import org.yakindu.sct.model.sgraph.Effect;
@@ -23,9 +27,7 @@ import org.yakindu.sct.model.stext.stext.ReactionEffect;
 import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 
 /**
- * Utility class providing several methods useful for refactoring commands.
- * 
- * TODO should be split up if it gets too big
+ * Utility class providing several convenience methods used in refactoring commands.
  * 
  * @author thomas kutz - Initial contribution and API
  *
@@ -291,6 +293,26 @@ public class RefactoringHelper {
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Returns for the given semantic element the notation view element in the given diagram
+	 * @param semanticElement
+	 * @param diagram
+	 * @return
+	 */
+	public View getViewForSemanticElement(EObject semanticElement, Diagram diagram) {
+		TreeIterator<EObject> allContents = diagram.eAllContents();
+		while (allContents.hasNext()) {
+			EObject next = allContents.next();
+			if (next instanceof View) {
+				View view = (View) next;
+				if (EcoreUtil.equals(view.getElement(), semanticElement)) {
+					return view;
+				}
+			}
+		}
+		throw new IllegalArgumentException("No view found for semantic element "+semanticElement);
 	}
 	
 }

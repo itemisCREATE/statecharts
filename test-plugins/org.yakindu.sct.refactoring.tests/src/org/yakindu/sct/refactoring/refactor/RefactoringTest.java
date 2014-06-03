@@ -10,8 +10,12 @@
  */
 package org.yakindu.sct.refactoring.refactor;
 
+import java.util.List;
+
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.parser.IParser;
 import org.junit.Assert;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.refactoring.refactor.util.SctEqualityHelper;
 import org.yakindu.sct.refactoring.test.models.RefactoringTestModels;
@@ -36,5 +40,15 @@ public class RefactoringTest {
 		if (!equalityHelper.equals(initial, expected)) {
 			Assert.fail("Equality check on statecharts failed!");
 		}
+	}
+	
+	protected State getStateByName(Statechart statechart, String name) {
+		List<State> allStates = EcoreUtil2.getAllContentsOfType(statechart, State.class);
+		for (State state : allStates) {
+			if (state.getName().equals(name)) {
+				return state;
+			}
+		}
+		return null;
 	}
 }

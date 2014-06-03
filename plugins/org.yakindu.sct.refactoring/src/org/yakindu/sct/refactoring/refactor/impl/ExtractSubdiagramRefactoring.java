@@ -37,6 +37,7 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.State;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
@@ -152,7 +153,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	}
 
 	protected void createSemanticEntryPoint(Transition transition, String name) {
-		Region entryPointTarget = transition.getTarget().getParentRegion();
+		Region entryPointTarget = getEntryPointContainer(transition);
 		Entry entryPoint = null;
 		Iterator<Vertex> iterator = entryPointTarget.getVertices().iterator();
 		while (iterator.hasNext()) {
@@ -173,15 +174,53 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		entryPointTransition.setTarget(transition.getTarget());
 	}
 
+	private Region getEntryPointContainer(Transition transition) {
+		// entry point container is the subdiagram's state's region which contains the transition target
+		EObject firstParentRegion = transition.getTarget().getParentRegion();
+		return getOutermostParentRegion(firstParentRegion);
+	}
+	
+	private Region getExitPointContainer(Transition transition) {
+		// exit point container is the subdiagram's state's region which contains the transition source
+		EObject firstParentRegion = transition.getSource().getParentRegion();
+		return getOutermostParentRegion(firstParentRegion);
+	}
+
+	private Region getOutermostParentRegion(EObject element) {
+		while (!(element.eContainer() instanceof Statechart)) {
+			EObject container = element.eContainer();
+			if (container instanceof State) {
+				State parentState = (State) container;
+				if (parentState.equals(subdiagram.getElement())) {
+					return (Region) element;
+				}
+				element = parentState.getParentRegion();
+			}
+			else {
+				element = element.eContainer();
+			}
+		}
+		return null;
+	}
+	
 	protected void createExitPoint(Edge edge, Diagram subdiagram) {
 		Transition transition = (Transition) edge.getElement();
+		// create semantic exit point
 		String name = getExitPointName(transition);
-		Region exitPointTarget = transition.getSource().getParentRegion();
+		Region exitPointContainer = getExitPointContainer(transition);
 		Exit exitPoint = SGraphFactory.eINSTANCE.createExit();
 		exitPoint.setName(name);
-		exitPointTarget.getVertices().add(exitPoint);
+		exitPointContainer.getVertices().add(exitPoint);
+		// create node for exit point
+		View exitPointContainerView = helper.getViewForSemanticElement(exitPointContainer, subdiagram);
+		View exitPointRegionCompartment = ViewUtil.getChildBySemanticHint(exitPointContainerView, SemanticHints.REGION_COMPARTMENT);
+		Node exitNode = ViewService.createNode(exitPointRegionCompartment, exitPoint, SemanticHints.EXIT, preferencesHint);
+		// re-wire existing transition to new exit point
 		Vertex oldTarget = transition.getTarget();
 		transition.setTarget(exitPoint);
+		ViewService.createEdge(edge.getSource(), exitNode, transition, SemanticHints.TRANSITION,
+				preferencesHint);
+		// create transition from selected state to former transition target
 		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		exitPointTransition.setSource((State) subdiagram.getElement());
 		exitPointTransition.setTarget(oldTarget);
@@ -189,7 +228,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 				preferencesHint);
 		EList<ReactionProperty> properties = exitPointTransition.getProperties();
 		ExitPointSpec exitPointSpec = StextFactory.eINSTANCE.createExitPointSpec();
-		// A transition can only have one entry point so alter the existing
+		// A transition can only have one exit point so alter the existing
 		for (ReactionProperty reactionProperty : properties) {
 			if (reactionProperty instanceof ExitPointSpec) {
 				exitPointSpec = (ExitPointSpec) reactionProperty;
