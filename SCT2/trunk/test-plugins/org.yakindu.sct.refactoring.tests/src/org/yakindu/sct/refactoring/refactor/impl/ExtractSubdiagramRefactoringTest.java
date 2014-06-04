@@ -28,8 +28,8 @@ public class ExtractSubdiagramRefactoringTest extends ViewBasedRefactoringTest {
 	@Test
 	public void testTwoEntryPoints() {
 		testRefactoring(
-				EXTRACT_SUBDIAGRAM + "before_twoEntryPoints.sct", 
-				EXTRACT_SUBDIAGRAM + "after_twoEntryPoints.sct", 
+				EXTRACT_SUBDIAGRAM + "before_twoEntryExitPoints.sct", 
+				EXTRACT_SUBDIAGRAM + "after_twoEntryExitPoints.sct", 
 				"Composite");
 	}
 	
