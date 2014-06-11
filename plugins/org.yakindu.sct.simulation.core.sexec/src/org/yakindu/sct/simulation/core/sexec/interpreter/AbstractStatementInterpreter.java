@@ -41,6 +41,8 @@ public abstract class AbstractStatementInterpreter extends CoreFunction
 
 	public Object evaluate(String name, Object... params) {
 		Function lookup = lookup(name, params);
+		if(lookup == null)
+			throw new RuntimeException("Unknown Function " + name);
 		return lookup.execute(params);
 
 	}
