@@ -489,9 +489,18 @@ public class TypeInferrerTest extends AbstractSTextTest {
 
 	@Test
 	public void testAssignmentExpressionFailure() {
-		// integer and boolean
+		// integer and real
+		expectIssue(inferType("intVar += 2.0"),
+				"Assignment operator '+=' may only be applied on compatible types, not on integer and real.");
+		expectIssue(inferType("intVar -= 2.0"),
+				"Assignment operator '-=' may only be applied on compatible types, not on integer and real.");
+		expectIssue(inferType("intVar /= 2.0"),
+				"Assignment operator '/=' may only be applied on compatible types, not on integer and real.");
+		expectIssue(inferType("intVar *= 2.0"),
+				"Assignment operator '*=' may only be applied on compatible types, not on integer and real.");
 		expectIssue(inferType("intVar = true"),
 				"Assignment operator '=' may only be applied on compatible types, not on integer and boolean.");
+		// integer and boolean
 		expectIssue(inferType("intVar = boolVar"),
 				"Assignment operator '=' may only be applied on compatible types, not on integer and boolean.");
 		expectIssue(inferType("intVar &= boolVar"),
