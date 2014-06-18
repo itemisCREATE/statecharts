@@ -20,7 +20,7 @@ import com.google.inject.ImplementedBy;
  * available types ({@link #getTypes()}) and inferring types for certain
  * operations (or feature calls - not yet supported).
  * 
- * @author Alexander Nyßen - Initial contribution and API
+ * @author Alexander Ny��en - Initial contribution and API
  */
 @ImplementedBy(DefaultTypeSystem.class)
 public interface ITypeSystem {
@@ -84,7 +84,7 @@ public interface ITypeSystem {
 	public Type getRealType();
 
 	public Type getStringType();
-	
+
 	public boolean isVoidType(InferredType inferredType);
 
 	public boolean isBooleanType(InferredType inferredType);
@@ -94,7 +94,7 @@ public interface ITypeSystem {
 	public boolean isRealType(InferredType inferredType);
 
 	public boolean isStringType(InferredType inferredType);
-	
+
 	public boolean isVoidType(Type type);
 
 	public boolean isBooleanType(Type type);
@@ -104,13 +104,11 @@ public interface ITypeSystem {
 	public boolean isRealType(Type type);
 
 	public boolean isStringType(Type type);
-	
+
 	public Object defaultValue(InferredType type);
 
 	public Object defaultValue(Type type);
 
-	public void createArrayType(Type array);
-	
 	/**
 	 * Returns a list of all types known in this type system.
 	 * 
