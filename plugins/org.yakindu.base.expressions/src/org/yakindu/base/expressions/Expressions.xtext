@@ -76,22 +76,33 @@ NumericalUnaryExpression returns Expression:
 PrimaryExpression returns Expression:
 	PrimitiveValueExpression
 	| FeatureCall
+	| ArrayInitializationExpression
 	| ParenthesizedExpression;
+
 
 PrimitiveValueExpression returns Expression:
 	{PrimitiveValueExpression} value=Literal;
-
+  
+    
 FeatureCall returns Expression:
-	ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[ecore::EObject]
-	(=> operationCall?='('
-	(args+=Expression (',' args+=Expression)*)?
-	')')?)*;
+    ElementReferenceExpression ({FeatureCall.owner=current} '.' feature=[ecore::EObject] 
+    	(=> operationCall?= '('(args+=Expression (',' args+=Expression)*)?')'
+    	 |  
+    	 =>(arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')* 
+    	)? 
+    )*;
+    
 
 ElementReferenceExpression returns Expression:
 	{ElementReferenceExpression} reference=[ecore::EObject|ID]
-	(=> operationCall?='('
-	(args+=Expression (',' args+=Expression)*)?
-	')')?;
+		(=> operationCall?='('	(args+=Expression (',' args+=Expression)*)?	')' 
+	   	 | 
+	 	 => (arrayAccess ?= '[' arraySelector+=Expression ']') => ('[' arraySelector+=Expression ']')*
+		)?;
+
+ArrayInitializationExpression returns Expression:
+	{ArrayInitializationExpression} ( ('{' (values+=Literal (',' values+=Literal)*)+ '}') 
+		| ('{' (dim+=ArrayInitializationExpression (',' dim+=ArrayInitializationExpression)*)+ '}' ));
 
 ParenthesizedExpression returns Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
@@ -113,6 +124,7 @@ HexLiteral:
 
 StringLiteral:
 	{StringLiteral} value=STRING;
+	
 NullLiteral:
 	{NullLiteral} 'null'
 ;
