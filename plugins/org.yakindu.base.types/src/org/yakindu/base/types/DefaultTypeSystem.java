@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+
 import com.google.inject.Singleton;
 
 /**
@@ -28,7 +29,7 @@ import com.google.inject.Singleton;
  * <code>boolean</code>, <code>integer</code>, <code>real</code>,
  * <code>string</code>.
  * 
- * @author Alexander Nyßen (alexander.nyssen@itemis.de) - Initial contribution
+ * @author Alexander Ny��en (alexander.nyssen@itemis.de) - Initial contribution
  *         and API
  * @author oliver bohl - String constants extract
  * 
@@ -67,7 +68,6 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 	private static PrimitiveType realType;
 	private static PrimitiveType integerType;
 	private static PrimitiveType booleanType;
-	private static List<Type> arrayTypes;
 
 	protected static synchronized Resource getResource() {
 		if (resource == null) {
@@ -134,18 +134,6 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			return voidType;
 		}
 	}
-	
-	
-	@Override
-	public void createArrayType(Type arrayType) {
-		synchronized (DefaultTypeSystem.class) {
-			if (!arrayTypes.contains(arrayType)){
-				arrayTypes.add(arrayType);
-				getResource().getContents().add(arrayType);
-			}
-		}
-	}
-	
 
 	private Type getNullType() {
 		synchronized (DefaultTypeSystem.class) {
@@ -423,12 +411,6 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			} else if ((firstOperandType.getType() == getNullType() && secondOperandType.getType() instanceof ComplexType)
 					|| (firstOperandType.getType() instanceof ComplexType && secondOperandType.getType() == getNullType())) {
 				// no further checks required
-			} else if (secondOperandType.getType() instanceof ArrayType || secondOperandType.getType() instanceof ArrayType){
-				if (!(isNumericType(firstOperandType.getType()) && isNumericType(secondOperandType.getType()))) {
-					return new InferenceResult(null, new InferenceIssue("Assignment operator '" + o.getSymbol()
-							+ "' may only be applied on compatible types, not on "
-							+ secondOperandType.getType().getName() + ".", IStatus.ERROR));
-				}
 			} else {
 				return new InferenceResult(null, new InferenceIssue(String.format(
 						ASSIGNMENT_AND_EQUALITY_OPERATIONS_MAY_ONLY_BE_APPLIED_ON_TYPES_OF_THE_SAME_KIND,
@@ -586,7 +568,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 	public boolean isStringType(InferredType type) {
 		return isStringType(type.getType());
 	}
-	
+
 	public boolean isNumericType(Type type) {
 		boolean isNumeric = EcoreUtil.equals(getIntegerType(), type) || EcoreUtil.equals(getRealType(), type);
 		if (!isNumeric && type instanceof PrimitiveType) {
@@ -627,11 +609,11 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			return "{}";
 		}
 		return null;
+
 	}
 
 	public Object defaultValue(InferredType type) {
 		return defaultValue(type.getType());
 	}
-
 
 }
