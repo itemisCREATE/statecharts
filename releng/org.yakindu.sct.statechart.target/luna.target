@@ -2,7 +2,7 @@
 <?pde version="3.8"?><target name="Luna (SCT)" sequenceNumber="16">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.4.0.I20140606-1215"/>
+<unit id="org.eclipse.platform.ide" version="4.4.0.I20140612-0600"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.4"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
