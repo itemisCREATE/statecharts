@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Luna (SCT)" sequenceNumber="16">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.platform.ide" version="4.4.0.I20140606-1215"/>
+<repository location="http://download.eclipse.org/eclipse/updates/4.4"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="de.itemis.xtext.utils.gmf.feature.group" version="0.0.0"/>
+<unit id="de.itemis.xtext.utils.jface.feature.group" version="0.0.0"/>
+<unit id="org.yakindu.base.feature.group" version="0.0.0"/>
+<repository location="https://builds.itemis.de/jenkins/job/YAKINDU_Base_CI/lastSuccessfulBuild/artifact/update-site/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.yakindu.sct.generator.feature.group" version="0.0.0"/>
+<unit id="org.yakindu.sct.feature.group" version="0.0.0"/>
+<unit id="org.yakindu.sct.test.feature.group" version="0.0.0"/>
+<unit id="org.yakindu.sct.sdk.feature.group" version="0.0.0"/>
+<repository location="https://builds.itemis.de/jenkins/job/YAKINDU_SCT2_CI/ws/full-update-site/"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201405281433"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.10.0.v20140519-0339"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.10.0.v20140606-1536"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.6.0.v201405210727"/>
+<unit id="org.eclipse.gmf.feature.group" version="1.8.0.201406111639"/>
+<repository location="http://download.eclipse.org/releases/luna"/>
+</location>
+</locations>
+</target>
