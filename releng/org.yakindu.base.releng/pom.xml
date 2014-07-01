@@ -10,9 +10,9 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.18.1</tycho-version>
+		<tycho-version>0.20.0</tycho-version>
 		<antrun-version>1.6</antrun-version>
-		<tycho-extras-version>0.18.1</tycho-extras-version>
+		<tycho-extras-version>0.20.0</tycho-extras-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
@@ -35,7 +35,7 @@
 			<plugin>
 				<groupId>org.fornax.toolsupport</groupId>
 				<artifactId>fornax-oaw-m2-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>3.4.0</version>
 			</plugin>
 			<!-- Convert mappings in about.mappings -->
 			<plugin>
@@ -164,41 +164,6 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!-- TODO sign here -->
-			<!-- pack plugins with pack200, which are smaller class files (Part II) 
-				and add them to p2-metadata -->
-			<plugin>
-				<groupId>org.eclipse.tycho.extras</groupId>
-				<artifactId>tycho-pack200b-plugin</artifactId>
-				<version>${tycho-extras-version}</version>
-				<executions>
-					<execution>
-						<id>pack200-pack</id>
-						<goals>
-							<goal>pack</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<!-- Then, alter p2-metadata to make the .pack.gz and the source bundles 
-				visible from other modules -->
-			<plugin>
-				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>tycho-p2-plugin</artifactId>
-				<version>${tycho-version}</version>
-				<executions>
-					<execution>
-						<id>p2-metadata</id>
-						<goals>
-							<goal>p2-metadata</goal>
-						</goals>
-						<phase>package</phase>
-					</execution>
-				</executions>
-				<configuration>
-					<defaultP2Metadata>false</defaultP2Metadata>
-				</configuration>
-			</plugin>
 		</plugins>
 		<pluginManagement>
 			<plugins>
@@ -222,7 +187,7 @@
 				<plugin>
 					<groupId>org.eclipse.xtend</groupId>
 					<artifactId>xtend-maven-plugin</artifactId>
-					<version>2.4.2</version>
+					<version>2.4.3</version>
 					<configuration>
 						<!-- need to prefix by basedir to generate to currently built module -->
 						<outputDirectory>${basedir}/xtend-gen</outputDirectory>
@@ -300,10 +265,20 @@
 				<enabled>true</enabled>
 			</snapshots>
 		</pluginRepository>
+		<pluginRepository>
+			<id>fornax</id>
+			<url>http://www.fornax-platform.org/m2/repository</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</pluginRepository>
 	</pluginRepositories>
 	<profiles>
 		<profile>
-			<id>Indigo.target</id>
+			<id>Kepler.target</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -319,7 +294,7 @@
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
 									<version>2.2.0-SNAPSHOT</version>
-									<classifier>Juno</classifier>
+									<classifier>Kepler</classifier>
 								</artifact>
 							</target>
 						</configuration>
@@ -328,7 +303,7 @@
 			</build>
 		</profile>
 		<profile>
-			<id>Kepler.target</id>
+			<id>Luna.target</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
@@ -347,7 +322,7 @@
 									<groupId>org.yakindu.base</groupId>
 									<artifactId>org.yakindu.base.target</artifactId>
 									<version>2.2.0-SNAPSHOT</version>
-									<classifier>Kepler</classifier>
+									<classifier>Luna</classifier>
 								</artifact>
 							</target>
 						</configuration>
@@ -376,22 +351,6 @@
 							</execution>
 						</executions>
 					</plugin>
-					<!-- pack plugins with pack200, which are smaller class files (Part 
-						II) and add them to p2-metadata -->
-					<!-- Configured again to place behind jarsigner in same phase -->
-					<plugin>
-						<groupId>org.eclipse.tycho.extras</groupId>
-						<artifactId>tycho-pack200b-plugin</artifactId>
-						<version>${tycho-extras-version}</version>
-						<executions>
-							<execution>
-								<id>pack200-pack</id>
-								<goals>
-									<goal>pack</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
 				</plugins>
 			</build>
 			<pluginRepositories>
@@ -416,10 +375,10 @@
 						<enabled>false</enabled>
 					</snapshots>
 				</pluginRepository>
-				<pluginRepository>
-					<id>eclipse-xtend</id>
-					<url>http://build.eclipse.org/common/xtend/maven</url>
-				</pluginRepository>
+<!-- 				<pluginRepository> -->
+<!-- 					<id>eclipse-xtend</id> -->
+<!-- 					<url>http://build.eclipse.org/common/xtend/maven</url> -->
+<!-- 				</pluginRepository> -->
 			</pluginRepositories>
 		</profile>
 	</profiles>
@@ -439,10 +398,8 @@
 		<module>../de.itemis.gmf.runtime.commons-feature</module>
 		<module>../de.itemis.xtext.utils.gmf</module>
 		<module>../de.itemis.xtext.utils.gmf-feature</module>
-		<!-- <module>../de.itemis.xtext.utils.gmf.source-feature</module> -->
 		<module>../de.itemis.xtext.utils.jface</module>
 		<module>../de.itemis.xtext.utils.jface-feature</module>
-		<!-- <module>../de.itemis.xtext.utils.jface.source-feature</module> -->
 		<module>../org.yakindu.base-feature</module>
 		<module>../org.yakindu.base.repository</module>
 	</modules>

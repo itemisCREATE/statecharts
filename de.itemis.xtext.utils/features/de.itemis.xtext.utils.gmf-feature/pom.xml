@@ -12,5 +12,5 @@
 	<artifactId>de.itemis.xtext.utils.gmf</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<groupId>de.itemis.utils.features</groupId>
-	
+	<name>de.itemis.xtext.utils.gmf-feature</name>
 </project>

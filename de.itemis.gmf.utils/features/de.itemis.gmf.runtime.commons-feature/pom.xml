@@ -12,5 +12,5 @@
 	<artifactId>de.itemis.gmf.runtime.commons</artifactId>
 	<packaging>eclipse-feature</packaging>
 	<groupId>de.itemis.utils.features</groupId>
-	
+	<name>de.itemis.gmf.runtime.commons-feature</name>
 </project>
