@@ -12,15 +12,7 @@
 	<artifactId>org.yakindu.sct.simulation.core.sexec.test</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-test-plugin</packaging>
-	
-
-	
-	<properties>
-		<testFailureIgnore>true</testFailureIgnore>
-	</properties>
-	
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>

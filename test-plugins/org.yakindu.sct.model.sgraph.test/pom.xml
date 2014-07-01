@@ -12,15 +12,7 @@
 	<artifactId>org.yakindu.sct.model.sgraph.test</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-test-plugin</packaging>
-	
-
-
-	<properties>
-		<testFailureIgnore>false</testFailureIgnore>
-	</properties>
-
 	<build>
-
 		<plugins>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
