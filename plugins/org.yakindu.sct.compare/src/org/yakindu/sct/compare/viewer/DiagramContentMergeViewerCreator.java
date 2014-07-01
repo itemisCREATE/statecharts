@@ -13,6 +13,7 @@ package org.yakindu.sct.compare.viewer;
 import org.eclipse.compare.CompareConfiguration;
 import org.eclipse.compare.IViewerCreator;
 import org.eclipse.emf.compare.diagram.ide.ui.internal.contentmergeviewer.diagram.DiagramContentMergeViewer;
+import org.eclipse.emf.compare.ide.ui.internal.configuration.EMFCompareConfiguration;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.widgets.Composite;
 
@@ -24,7 +25,7 @@ import org.eclipse.swt.widgets.Composite;
 public class DiagramContentMergeViewerCreator implements IViewerCreator {
 
 	public Viewer createViewer(Composite parent, CompareConfiguration config) {
-		return new DiagramContentMergeViewer(parent, config);
+		return new DiagramContentMergeViewer(parent, (EMFCompareConfiguration) config);
 	}
 
 }
