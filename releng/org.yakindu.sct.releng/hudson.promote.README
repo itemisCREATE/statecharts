@@ -9,13 +9,12 @@ Parameterized-build:
 + Selection
 	Name: promotionTarget
 	Selections:
-		kepler/nightly
+		luna/integration
+		luna/milestones
+		luna/releases
 		kepler/integration
 		kepler/milestones
 		kepler/releases
-		juno/integration
-		juno/milestones
-		juno/releases
 	Description:
 		Select the update site to promote to.
 
