@@ -19,7 +19,7 @@
    </license>
 
    <url>
-      <discovery label="Yakindu SCT Repository" url="http://updates.yakindu.org/sct/kepler/releases"/>
+      <discovery label="Yakindu SCT Repository" url="http://updates.yakindu.org/sct/luna/releases"/>
    </url>
 
    <requires>
