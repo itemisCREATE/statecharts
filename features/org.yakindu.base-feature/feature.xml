@@ -18,7 +18,7 @@
    </license>
 
    <url>
-      <discovery label="Yakindu SCT Repository" url="http://updates.yakindu.org/kepler/releases"/>
+      <discovery label="Yakindu SCT Repository" url="http://updates.yakindu.org/luna/releases"/>
    </url>
 
    <includes
@@ -35,44 +35,26 @@
 
    <plugin
          id="org.yakindu.base.types"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.yakindu.base.types.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.yakindu.base.types.scope"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.yakindu.base.expressions"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.yakindu.base.expressions.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="org.yakindu.base.expressions.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>
