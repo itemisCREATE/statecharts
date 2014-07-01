@@ -34,7 +34,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class GuardItemProvider
+public class GuardItemProvider 
   extends ItemProviderAdapter
   implements
     IEditingDomainItemProvider,
@@ -127,6 +127,7 @@ public class GuardItemProvider
   {
     return getString("_UI_Guard_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

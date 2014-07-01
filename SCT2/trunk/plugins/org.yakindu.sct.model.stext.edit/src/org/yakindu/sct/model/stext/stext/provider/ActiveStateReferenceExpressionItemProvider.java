@@ -12,12 +12,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import org.yakindu.base.expressions.expressions.provider.ExpressionItemProvider;
 
@@ -29,14 +24,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ActiveStateReferenceExpressionItemProvider
-  extends ExpressionItemProvider
-  implements
-    IEditingDomainItemProvider,
-    IStructuredItemContentProvider,
-    ITreeItemContentProvider,
-    IItemLabelProvider,
-    IItemPropertySource
+public class ActiveStateReferenceExpressionItemProvider extends ExpressionItemProvider
 {
   /**
    * This constructs an instance from a factory and a notifier.
@@ -113,6 +101,7 @@ public class ActiveStateReferenceExpressionItemProvider
   {
     return getString("_UI_ActiveStateReferenceExpression_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

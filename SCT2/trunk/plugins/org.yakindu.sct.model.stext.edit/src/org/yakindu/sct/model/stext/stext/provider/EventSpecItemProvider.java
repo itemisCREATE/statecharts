@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
  * <!-- end-user-doc -->
  * @generated
  */
-public class EventSpecItemProvider
+public class EventSpecItemProvider 
   extends ItemProviderAdapter
   implements
     IEditingDomainItemProvider,
@@ -85,6 +85,7 @@ public class EventSpecItemProvider
   {
     return getString("_UI_EventSpec_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

@@ -14,12 +14,7 @@ import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -39,14 +34,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
  * <!-- end-user-doc -->
  * @generated
  */
-public class VariableDefinitionItemProvider
-  extends VariableItemProvider
-  implements
-    IEditingDomainItemProvider,
-    IStructuredItemContentProvider,
-    ITreeItemContentProvider,
-    IItemLabelProvider,
-    IItemPropertySource
+public class VariableDefinitionItemProvider extends VariableItemProvider
 {
   /**
    * This constructs an instance from a factory and a notifier.
@@ -231,6 +219,7 @@ public class VariableDefinitionItemProvider
       getString("_UI_VariableDefinition_type") :
       getString("_UI_VariableDefinition_type") + " " + label;
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

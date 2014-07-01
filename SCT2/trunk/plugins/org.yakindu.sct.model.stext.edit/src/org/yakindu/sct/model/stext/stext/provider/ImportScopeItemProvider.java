@@ -11,12 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.yakindu.sct.model.stext.stext.ImportScope;
@@ -29,14 +24,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ImportScopeItemProvider
-  extends StatechartScopeItemProvider
-  implements
-    IEditingDomainItemProvider,
-    IStructuredItemContentProvider,
-    ITreeItemContentProvider,
-    IItemLabelProvider,
-    IItemPropertySource
+public class ImportScopeItemProvider extends StatechartScopeItemProvider
 {
   /**
    * This constructs an instance from a factory and a notifier.
@@ -122,6 +110,7 @@ public class ImportScopeItemProvider
   {
     return getString("_UI_ImportScope_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

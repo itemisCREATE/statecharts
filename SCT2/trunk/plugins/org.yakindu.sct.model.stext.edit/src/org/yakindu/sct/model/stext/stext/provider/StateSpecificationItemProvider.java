@@ -34,7 +34,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class StateSpecificationItemProvider
+public class StateSpecificationItemProvider 
   extends ItemProviderAdapter
   implements
     IEditingDomainItemProvider,
@@ -127,6 +127,7 @@ public class StateSpecificationItemProvider
   {
     return getString("_UI_StateSpecification_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
