@@ -25,7 +25,7 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
  * <!-- end-user-doc -->
  * @generated
  */
-public class DefRootItemProvider
+public class DefRootItemProvider 
   extends ItemProviderAdapter
   implements
     IEditingDomainItemProvider,
@@ -85,6 +85,7 @@ public class DefRootItemProvider
   {
     return getString("_UI_DefRoot_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

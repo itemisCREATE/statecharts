@@ -11,12 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
@@ -30,14 +25,7 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TransitionReactionItemProvider
-  extends ReactionItemProvider
-  implements
-    IEditingDomainItemProvider,
-    IStructuredItemContentProvider,
-    ITreeItemContentProvider,
-    IItemLabelProvider,
-    IItemPropertySource
+public class TransitionReactionItemProvider extends ReactionItemProvider
 {
   /**
    * This constructs an instance from a factory and a notifier.
@@ -90,6 +78,7 @@ public class TransitionReactionItemProvider
   {
     return getString("_UI_TransitionReaction_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

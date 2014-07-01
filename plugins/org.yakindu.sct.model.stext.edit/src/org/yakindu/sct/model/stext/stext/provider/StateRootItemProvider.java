@@ -11,12 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 import org.yakindu.sct.model.stext.stext.StateRoot;
@@ -29,14 +24,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class StateRootItemProvider
-  extends DefRootItemProvider
-  implements
-    IEditingDomainItemProvider,
-    IStructuredItemContentProvider,
-    ITreeItemContentProvider,
-    IItemLabelProvider,
-    IItemPropertySource
+public class StateRootItemProvider extends DefRootItemProvider
 {
   /**
    * This constructs an instance from a factory and a notifier.
@@ -122,6 +110,7 @@ public class StateRootItemProvider
   {
     return getString("_UI_StateRoot_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

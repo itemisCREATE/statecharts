@@ -32,7 +32,7 @@ import org.yakindu.sct.model.stext.stext.StextPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-public class RootItemProvider
+public class RootItemProvider 
   extends ItemProviderAdapter
   implements
     IEditingDomainItemProvider,
@@ -125,6 +125,7 @@ public class RootItemProvider
   {
     return getString("_UI_Root_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

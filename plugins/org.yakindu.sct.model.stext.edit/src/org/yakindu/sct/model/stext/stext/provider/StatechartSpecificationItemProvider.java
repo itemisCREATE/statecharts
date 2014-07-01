@@ -11,12 +11,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
@@ -31,14 +26,7 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class StatechartSpecificationItemProvider
-  extends ScopedElementItemProvider
-  implements
-    IEditingDomainItemProvider,
-    IStructuredItemContentProvider,
-    ITreeItemContentProvider,
-    IItemLabelProvider,
-    IItemPropertySource
+public class StatechartSpecificationItemProvider extends ScopedElementItemProvider
 {
   /**
    * This constructs an instance from a factory and a notifier.
@@ -94,6 +82,7 @@ public class StatechartSpecificationItemProvider
       getString("_UI_StatechartSpecification_type") :
       getString("_UI_StatechartSpecification_type") + " " + label;
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached

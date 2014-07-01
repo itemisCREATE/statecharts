@@ -32,7 +32,7 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
  * <!-- end-user-doc -->
  * @generated
  */
-public class TransitionSpecificationItemProvider
+public class TransitionSpecificationItemProvider 
   extends ItemProviderAdapter
   implements
     IEditingDomainItemProvider,
@@ -125,6 +125,7 @@ public class TransitionSpecificationItemProvider
   {
     return getString("_UI_TransitionSpecification_type");
   }
+  
 
   /**
    * This handles model notifications by calling {@link #updateChildren} to update any cached
