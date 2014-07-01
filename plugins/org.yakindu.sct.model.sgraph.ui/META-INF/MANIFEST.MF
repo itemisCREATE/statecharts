@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Statechart Tools (SCT) SGraph UI
 Bundle-SymbolicName: org.yakindu.sct.model.sgraph.ui
-Bundle-Version: 2.2.0.qualifier
+Bundle-Version: 2.3.0.qualifier
 Bundle-Activator: org.yakindu.sct.model.sgraph.ui.Activator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.ui,
