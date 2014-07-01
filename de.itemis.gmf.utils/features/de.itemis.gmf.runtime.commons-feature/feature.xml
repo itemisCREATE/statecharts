@@ -2,7 +2,7 @@
 <feature
       id="de.itemis.gmf.runtime.commons"
       label="GMF Runtime Commons"
-      version="2.2.0.qualifier"
+      version="2.3.0.qualifier"
       provider-name="itemis AG">
 
    <description>
