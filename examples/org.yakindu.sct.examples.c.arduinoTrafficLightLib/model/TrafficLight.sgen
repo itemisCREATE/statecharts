@@ -1,0 +1,10 @@
+GeneratorModel for yakindu::c {
+
+	statechart Trafficlight {
+
+		feature Outlet {
+			targetProject = "arduinoAmpel"
+			targetFolder = "src-gen"
+		}
+	}
+}
