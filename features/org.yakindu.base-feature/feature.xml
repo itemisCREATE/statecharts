@@ -24,7 +24,7 @@
    <includes
          id="de.itemis.gmf.runtime.commons"
          version="0.0.0"/>
-
+         
    <includes
          id="de.itemis.xtext.utils.gmf"
          version="0.0.0"/>

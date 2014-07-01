@@ -150,6 +150,20 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-p2-plugin</artifactId>
+				<version>${tycho-version}</version>
+				<executions>
+					<execution>
+						<id>attached-p2-metadata</id>
+						<phase>package</phase>
+						<goals>
+							<goal>p2-metadata</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<!-- pack plugins with pack200, which are smaller class files (Part I) -->
 			<plugin>
 				<groupId>org.eclipse.tycho.extras</groupId>
@@ -375,10 +389,10 @@
 						<enabled>false</enabled>
 					</snapshots>
 				</pluginRepository>
-<!-- 				<pluginRepository> -->
-<!-- 					<id>eclipse-xtend</id> -->
-<!-- 					<url>http://build.eclipse.org/common/xtend/maven</url> -->
-<!-- 				</pluginRepository> -->
+				<!-- <pluginRepository> -->
+				<!-- <id>eclipse-xtend</id> -->
+				<!-- <url>http://build.eclipse.org/common/xtend/maven</url> -->
+				<!-- </pluginRepository> -->
 			</pluginRepositories>
 		</profile>
 	</profiles>
