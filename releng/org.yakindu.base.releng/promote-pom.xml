@@ -6,19 +6,15 @@
 	<parent>
 		<groupId>org.yakindu.base</groupId>
 		<artifactId>org.yakindu.base.releng</artifactId>
-		<version>2.2.0-SNAPSHOT</version>
+		<version>2.3.0-SNAPSHOT</version>
 		<relativePath>../org.yakindu.base.releng/pom.xml</relativePath>
 	</parent>
 	<artifactId>de.itemis.xtext.utils.promote</artifactId>
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-extras-version>0.16.0</tycho-extras-version>
+		<tycho-extras-version>0.20.0</tycho-extras-version>
 		<!-- scp settings for publishing udpdate site -->
-		<promotionTarget>indigo/integration</promotionTarget>
-		<promotionSource>http://builds.itemis.de/urlToCIJob/lastSuccessfulBuild</promotionSource>
-		<updateSiteUrl>http://updates.yakindu.org/sct/${promotionTarget}</updateSiteUrl>
-		<local.update.site>${project.build.directory}/local-update-site</local.update.site>
 	</properties>
 
 	<build>
