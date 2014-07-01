@@ -11,15 +11,4 @@
 	</parent>
 	<artifactId>org.yakindu.sct.repository.full</artifactId>
 	<packaging>eclipse-repository</packaging>
-
-	<properties>
-		<eclipse.mirror.url>http://mirror.netcologne.de/eclipse</eclipse.mirror.url>
-		<distro.work.dir>${project.build.directory}/distro/work</distro.work.dir>
-		<distro.dir>${project.build.directory}/distro</distro.dir>
-		
-		<profile>epp.package.java</profile>
-		<features>org.eclipse.xtext.sdk.feature.group,org.eclipse.xtend.sdk.feature.group,org.yakindu.sct.feature.group</features>
-		<!-- TODO ,org.eclipse.gmf.runtime.emf.clipboard.core.patch.feature.group -->
-		<update.sites>${project.baseUri}/target/repository,${p2.target.repository},${p2.base.repository}</update.sites>
-	</properties>
 </project>
