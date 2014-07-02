@@ -118,13 +118,25 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	protected void createEntryPoint(Edge edge, Diagram subdiagram) {
 		Transition transition = (Transition) edge.getElement();
-		String name = getEntryPointName(transition);
 		Region entryPointContainer = getEntryPointContainer(transition);
-		Entry entryPoint = createSemanticEntryPoint(transition, name);
+		Entry entryPoint = createSemanticEntryPoint(transition);
+		
 		// re-wire old transition to targeting the selected state
 		transition.setTarget((State) subdiagram.getElement());
 		View oldTarget = edge.getTarget();
 		edge.setTarget(getContextObject());
+		
+		// create node for entry point
+		View entryPointContainerView = helper.getViewForSemanticElement(entryPointContainer, subdiagram);
+		View entryPointRegionCompartment = ViewUtil.getChildBySemanticHint(entryPointContainerView, SemanticHints.REGION_COMPARTMENT);
+		Node entryNode = ViewService.createNode(entryPointRegionCompartment, entryPoint, SemanticHints.EXIT, preferencesHint);
+		ViewService.createEdge(entryNode, oldTarget, entryPoint.getOutgoingTransitions().get(0), SemanticHints.TRANSITION,
+				preferencesHint);
+		
+		addEntryPointSpec(transition, entryPoint);
+	}
+
+	private void addEntryPointSpec(Transition transition, Entry entryPoint) {
 		EList<ReactionProperty> properties = transition.getProperties();
 		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
 		// A transition can only have one entry point so alter the existing
@@ -133,16 +145,21 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 				entryPointSpec = (EntryPointSpec) reactionProperty;
 			}
 		}
-		entryPointSpec.setEntrypoint(name);
+		entryPointSpec.setEntrypoint(entryPoint.getName());
 		properties.add(entryPointSpec);
-		
-		// create node for entry point
-		View entryPointContainerView = helper.getViewForSemanticElement(entryPointContainer, subdiagram);
-		View entryPointRegionCompartment = ViewUtil.getChildBySemanticHint(entryPointContainerView, SemanticHints.REGION_COMPARTMENT);
-		Node entryNode = ViewService.createNode(entryPointRegionCompartment, entryPoint, SemanticHints.EXIT, preferencesHint);
-		ViewService.createEdge(entryNode, oldTarget, entryPoint.getOutgoingTransitions().get(0), SemanticHints.TRANSITION,
-				preferencesHint);
-
+	}
+	
+	private void addExitPointSpec(Transition transition, Exit exitPoint) {
+		EList<ReactionProperty> properties = transition.getProperties();
+		ExitPointSpec exitPointSpec = StextFactory.eINSTANCE.createExitPointSpec();
+		// A transition can only have one exit point so alter the existing
+		for (ReactionProperty reactionProperty : properties) {
+			if (reactionProperty instanceof ExitPointSpec) {
+				exitPointSpec = (ExitPointSpec) reactionProperty;
+			}
+		}
+		exitPointSpec.setExitpoint(exitPoint.getName());
+		properties.add(exitPointSpec);
 	}
 
 	protected String getEntryPointName(Transition transition) {
@@ -163,8 +180,9 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		return stringBuilder.toString();
 	}
 
-	protected Entry createSemanticEntryPoint(Transition transition, String name) {
+	protected Entry createSemanticEntryPoint(Transition transition) {
 		Region entryPointTarget = getEntryPointContainer(transition);
+		String name = getEntryPointName(transition);
 		Entry entryPoint = null;
 		Iterator<Vertex> iterator = entryPointTarget.getVertices().iterator();
 		while (iterator.hasNext()) {
@@ -185,6 +203,30 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		entryPointTransition.setTarget(transition.getTarget());
 		
 		return entryPoint;
+	}
+	
+	private Exit createSemanticExitPoint(Transition transition) {
+		Region exitPointContainer = getExitPointContainer(transition);
+		String name = getExitPointName(transition);
+		
+		Exit exitPoint = null;
+		Iterator<Vertex> iterator = exitPointContainer.getVertices().iterator();
+		while (iterator.hasNext()) {
+			Vertex next = iterator.next();
+			if (next instanceof Exit) {
+				Exit current = (Exit) next;
+				if (name.equals(current.getName())) {
+					// Do nothing, there already exists an entry point
+					return current;
+				}
+			}
+		}
+		
+		exitPoint = SGraphFactory.eINSTANCE.createExit();
+		exitPoint.setName(name);
+		exitPointContainer.getVertices().add(exitPoint);
+		
+		return exitPoint;
 	}
 
 	private Region getEntryPointContainer(Transition transition) {
@@ -219,38 +261,30 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	protected void createExitPoint(Edge edge, Diagram subdiagram) {
 		Transition transition = (Transition) edge.getElement();
 		// create semantic exit point
-		String name = getExitPointName(transition);
 		Region exitPointContainer = getExitPointContainer(transition);
-		Exit exitPoint = SGraphFactory.eINSTANCE.createExit();
-		exitPoint.setName(name);
-		exitPointContainer.getVertices().add(exitPoint);
+		Exit exitPoint = createSemanticExitPoint(transition);
+		
 		// create node for exit point
 		View exitPointContainerView = helper.getViewForSemanticElement(exitPointContainer, subdiagram);
 		View exitPointRegionCompartment = ViewUtil.getChildBySemanticHint(exitPointContainerView, SemanticHints.REGION_COMPARTMENT);
 		Node exitNode = ViewService.createNode(exitPointRegionCompartment, exitPoint, SemanticHints.EXIT, preferencesHint);
+		
 		// re-wire existing transition to new exit point
 		Vertex oldTarget = transition.getTarget();
 		transition.setTarget(exitPoint);
 		ViewService.createEdge(edge.getSource(), exitNode, transition, SemanticHints.TRANSITION,
 				preferencesHint);
+		
 		// create transition from selected state to former transition target
 		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		exitPointTransition.setSource((State) subdiagram.getElement());
 		exitPointTransition.setTarget(oldTarget);
 		ViewService.createEdge(getContextObject(), edge.getTarget(), exitPointTransition, SemanticHints.TRANSITION,
 				preferencesHint);
-		EList<ReactionProperty> properties = exitPointTransition.getProperties();
-		ExitPointSpec exitPointSpec = StextFactory.eINSTANCE.createExitPointSpec();
-		// A transition can only have one exit point so alter the existing
-		for (ReactionProperty reactionProperty : properties) {
-			if (reactionProperty instanceof ExitPointSpec) {
-				exitPointSpec = (ExitPointSpec) reactionProperty;
-			}
-		}
-		exitPointSpec.setExitpoint(name);
-		properties.add(exitPointSpec);
+		
+		addExitPointSpec(exitPointTransition, exitPoint);
 	}
-
+	
 	/**
 	 * Sets the GMF inline {@link Style} to true
 	 */
