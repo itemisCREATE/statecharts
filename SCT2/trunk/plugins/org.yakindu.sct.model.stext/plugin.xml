@@ -9,13 +9,5 @@
        genModel = "model/SText.genmodel" /> 
 	
   </extension>
-   <extension
-         point="org.eclipse.emf.ecore.uri_mapping">
-      <mapping
-            source="platform:/resource/org.yakindu.sct.model.stext/model/"
-            target="model/">
-      </mapping>
-
-   </extension>
    
 </plugin>
