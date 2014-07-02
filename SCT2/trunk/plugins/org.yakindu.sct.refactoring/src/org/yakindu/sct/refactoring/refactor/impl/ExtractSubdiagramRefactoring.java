@@ -119,8 +119,12 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	protected void createEntryPoint(Edge edge, Diagram subdiagram) {
 		Transition transition = (Transition) edge.getElement();
 		String name = getEntryPointName(transition);
-		createSemanticEntryPoint(transition, name);
+		Region entryPointContainer = getEntryPointContainer(transition);
+		Entry entryPoint = createSemanticEntryPoint(transition, name);
+		// re-wire old transition to targeting the selected state
 		transition.setTarget((State) subdiagram.getElement());
+		View oldTarget = edge.getTarget();
+		edge.setTarget(getContextObject());
 		EList<ReactionProperty> properties = transition.getProperties();
 		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
 		// A transition can only have one entry point so alter the existing
@@ -131,7 +135,14 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		}
 		entryPointSpec.setEntrypoint(name);
 		properties.add(entryPointSpec);
-		edge.setTarget(getContextObject());
+		
+		// create node for entry point
+		View entryPointContainerView = helper.getViewForSemanticElement(entryPointContainer, subdiagram);
+		View entryPointRegionCompartment = ViewUtil.getChildBySemanticHint(entryPointContainerView, SemanticHints.REGION_COMPARTMENT);
+		Node entryNode = ViewService.createNode(entryPointRegionCompartment, entryPoint, SemanticHints.EXIT, preferencesHint);
+		ViewService.createEdge(entryNode, oldTarget, entryPoint.getOutgoingTransitions().get(0), SemanticHints.TRANSITION,
+				preferencesHint);
+
 	}
 
 	protected String getEntryPointName(Transition transition) {
@@ -152,7 +163,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		return stringBuilder.toString();
 	}
 
-	protected void createSemanticEntryPoint(Transition transition, String name) {
+	protected Entry createSemanticEntryPoint(Transition transition, String name) {
 		Region entryPointTarget = getEntryPointContainer(transition);
 		Entry entryPoint = null;
 		Iterator<Vertex> iterator = entryPointTarget.getVertices().iterator();
@@ -162,7 +173,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 				Entry current = (Entry) next;
 				if (name.equals(current.getName())) {
 					// Do nothing, there already exists an entry point
-					return;
+					return current;
 				}
 			}
 		}
@@ -172,6 +183,8 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		Transition entryPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		entryPointTransition.setSource(entryPoint);
 		entryPointTransition.setTarget(transition.getTarget());
+		
+		return entryPoint;
 	}
 
 	private Region getEntryPointContainer(Transition transition) {
