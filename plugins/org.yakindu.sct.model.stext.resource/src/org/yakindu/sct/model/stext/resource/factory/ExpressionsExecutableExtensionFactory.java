@@ -1,11 +1,8 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- * Contributors:
- * 	committers of YAKINDU - initial API and implementation
+ * Copyright (c) 2011 committers of YAKINDU and others. All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0 which accompanies this distribution, and is
+ * available at http://www.eclipse.org/legal/epl-v10.html Contributors: committers of YAKINDU - initial API and
+ * implementation
  * 
  */
 package org.yakindu.sct.model.stext.resource.factory;
@@ -35,7 +32,7 @@ public class ExpressionsExecutableExtensionFactory extends
 	@Override
 	protected Injector getInjector() {
 		return STextActivator.getInstance().getInjector(
-				"org.yakindu.sct.model.stext.SText"); //$//$NON-NLS-N$
+				STextActivator.ORG_YAKINDU_SCT_MODEL_STEXT_STEXT); //$//$NON-NLS-N$
 	}
 
 }
