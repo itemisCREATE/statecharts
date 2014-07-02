@@ -103,7 +103,8 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 
 	public final void generate(GeneratorEntry entry) {
 		EObject element = entry.getElementRef();
-		if (element != null && !element.eIsProxy() && !(element instanceof Statechart)) {
+		if (element == null || !element.eIsProxy()
+				&& !(element instanceof Statechart)) {
 			writeToConsole("No Statechart selected in genmodel (" + entry + ")");
 			return;
 		}
