@@ -36,4 +36,3 @@ Export-Package: org.yakindu.base.expressions,
  org.yakindu.base.expressions.services,
  org.yakindu.base.expressions.validation
 Bundle-ClassPath: .
-
