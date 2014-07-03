@@ -27,4 +27,14 @@
             ranking="11">
       </engineFactory>
    </extension>
+   <extension
+         point="org.eclipse.emf.compare.rcp.postProcessor">
+      <processor
+            class="org.yakindu.sct.compare.postprocessor.EdgeChangePostProcessor"
+            ordinal="100">
+         <nsURI
+               value="http://www.eclipse.org/gmf/runtime/\d.\d.\d/notation">
+         </nsURI>
+      </processor>
+   </extension>
 </plugin>
