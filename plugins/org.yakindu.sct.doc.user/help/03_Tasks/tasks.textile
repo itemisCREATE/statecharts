@@ -32,9 +32,9 @@ h2. Generating Code
 For configuring the code generation process, YAKINDU Statechart Tools uses a textual generator model called *SGen*. It can be created either by using the provided wizard *Yakindu Statechart Generator Model* or by creating a new text file with the file extension '.sgen'.
 To create a generator model with the wizard,
 
-# Click *File* > *New* > *Other...* > *Yakindu Statechart Generator Model*
+# Click *File* > *New* > *Other...* > *Code Generator Model*
 # Type a name and click *Next*
-# Choose the desired generator, i.e. *YAKINDU Java Code Generator*
+# Choose the desired generator, i.e. *YAKINDU SCT Java Code Generator*
 # Check the model(s) to generate code from and click *Finish*
 
 !images/genmodelwizardchooselanguage.jpg!
