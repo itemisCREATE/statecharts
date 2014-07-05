@@ -18,14 +18,24 @@ public class EntryExitSelfTransitionStatemachine
 			e1 = true;
 		}
 
-		private long x;
+		private long exits;
 
-		public long getX() {
-			return x;
+		public long getExits() {
+			return exits;
 		}
 
-		public void setX(long value) {
-			this.x = value;
+		public void setExits(long value) {
+			this.exits = value;
+		}
+
+		private long entries;
+
+		public long getEntries() {
+			return entries;
+		}
+
+		public void setEntries(long value) {
+			this.entries = value;
 		}
 
 		public void clearEvents() {
@@ -58,13 +68,15 @@ public class EntryExitSelfTransitionStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.x = 0;
+		sCInterface.exits = 0;
+
+		sCInterface.entries = 0;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCInterface.x += 1;
+		sCInterface.entries += 1;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A__region0_B;
@@ -76,14 +88,14 @@ public class EntryExitSelfTransitionStatemachine
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
-				sCInterface.x += 1;
+				sCInterface.exits += 1;
 				break;
 
 			case main_region_A__region0_C :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
-				sCInterface.x += 1;
+				sCInterface.exits += 1;
 				break;
 
 			default :
@@ -137,12 +149,19 @@ public class EntryExitSelfTransitionStatemachine
 		sCInterface.raiseE1();
 	}
 
-	public long getX() {
-		return sCInterface.getX();
+	public long getExits() {
+		return sCInterface.getExits();
 	}
 
-	public void setX(long value) {
-		sCInterface.setX(value);
+	public void setExits(long value) {
+		sCInterface.setExits(value);
+	}
+	public long getEntries() {
+		return sCInterface.getEntries();
+	}
+
+	public void setEntries(long value) {
+		sCInterface.setEntries(value);
 	}
 
 	/* Entry action for statechart 'EntryExitSelfTransition'. */
@@ -156,6 +175,25 @@ public class EntryExitSelfTransitionStatemachine
 	/* The reactions of state B. */
 	private void reactMain_region_A_region0_B() {
 		if (sCInterface.e) {
+			switch (stateVector[0]) {
+				case main_region_A__region0_B :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
+				case main_region_A__region0_C :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
+				default :
+					break;
+			}
+
+			sCInterface.exits += 1;
+
+			sCInterface.entries += 1;
+
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A__region0_C;
 		} else {
@@ -172,9 +210,51 @@ public class EntryExitSelfTransitionStatemachine
 	/* The reactions of state C. */
 	private void reactMain_region_A_region0_C() {
 		if (sCInterface.e) {
+			switch (stateVector[0]) {
+				case main_region_A__region0_B :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
+				case main_region_A__region0_C :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
+				default :
+					break;
+			}
+
+			sCInterface.exits += 1;
+
+			sCInterface.entries += 1;
+
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A__region0_C;
 		} else {
+			if (sCInterface.e1) {
+				switch (stateVector[0]) {
+					case main_region_A__region0_B :
+						nextStateIndex = 0;
+						stateVector[0] = State.$NullState$;
+						break;
+
+					case main_region_A__region0_C :
+						nextStateIndex = 0;
+						stateVector[0] = State.$NullState$;
+						break;
+
+					default :
+						break;
+				}
+
+				sCInterface.exits += 1;
+
+				sCInterface.entries += 1;
+
+				nextStateIndex = 0;
+				stateVector[0] = State.main_region_A__region0_B;
+			}
 		}
 	}
 

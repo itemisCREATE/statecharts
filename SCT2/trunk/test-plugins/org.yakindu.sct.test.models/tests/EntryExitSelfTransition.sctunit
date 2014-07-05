@@ -1,15 +1,41 @@
 
 testgroup EntryExitSelfTransition for statechart EntryExitSelfTransition{
-	test EntryExitSelfTransitionTest { 
+
+	test SelfTransitionToChildState { 
 		enter
 		
 		cycle
-		assert x == 1 
+		assert entries == 1 
+		assert active(EntryExitSelfTransition.main_region.A._region0.B)
 		
+		entries = 0
 		raise e
 		cycle
-		assert x == 3
-		 
+		assert entries == 1
+		assert exits == 1
+		assert active(EntryExitSelfTransition.main_region.A._region0.C)
 	} 
+
+
+	test SelfTransitionFromChildState { 
+		enter
+		
+		cycle
+		assert entries == 1 
+		
+		entries = 0
+		raise e1
+		cycle
+		assert entries == 0
+		assert exits == 0
+		assert active(EntryExitSelfTransition.main_region.A._region0.C)
+	
+		raise e1
+		cycle
+		assert active(EntryExitSelfTransition.main_region.A._region0.B)
+		assert entries == 1
+		assert exits == 1 
+	} 
+
 }
 	

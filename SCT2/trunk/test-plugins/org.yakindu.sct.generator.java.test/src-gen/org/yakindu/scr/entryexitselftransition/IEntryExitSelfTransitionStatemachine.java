@@ -6,8 +6,10 @@ public interface IEntryExitSelfTransitionStatemachine extends IStatemachine {
 	public interface SCInterface {
 		public void raiseE();
 		public void raiseE1();
-		public long getX();
-		public void setX(long value);
+		public long getExits();
+		public void setExits(long value);
+		public long getEntries();
+		public void setEntries(long value);
 
 	}
 

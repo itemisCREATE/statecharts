@@ -34,12 +34,33 @@ public class EntryExitSelfTransitionTest extends AbstractExecutionFlowTest {
 		initInterpreter(flow);
 	}
 	@Test
-	public void EntryExitSelfTransitionTest() throws Exception {
+	public void SelfTransitionToChildState() throws Exception {
 		interpreter.enter();
 		interpreter.runCycle();
-		assertTrue(getInteger("x") == 1);
+		assertTrue(getInteger("entries") == 1);
+		assertTrue(isActive("B"));
+		setInteger("entries", 0);
 		raiseEvent("e");
 		interpreter.runCycle();
-		assertTrue(getInteger("x") == 3);
+		assertTrue(getInteger("entries") == 1);
+		assertTrue(getInteger("exits") == 1);
+		assertTrue(isActive("C"));
+	}
+	@Test
+	public void SelfTransitionFromChildState() throws Exception {
+		interpreter.enter();
+		interpreter.runCycle();
+		assertTrue(getInteger("entries") == 1);
+		setInteger("entries", 0);
+		raiseEvent("e1");
+		interpreter.runCycle();
+		assertTrue(getInteger("entries") == 0);
+		assertTrue(getInteger("exits") == 0);
+		assertTrue(isActive("C"));
+		raiseEvent("e1");
+		interpreter.runCycle();
+		assertTrue(isActive("B"));
+		assertTrue(getInteger("entries") == 1);
+		assertTrue(getInteger("exits") == 1);
 	}
 }

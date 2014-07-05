@@ -37,12 +37,33 @@ public class EntryExitSelfTransitionTest {
 	}
 
 	@Test
-	public void testEntryExitSelfTransitionTest() {
+	public void testSelfTransitionToChildState() {
 		statemachine.enter();
 		statemachine.runCycle();
-		assertTrue(statemachine.getX() == 1);
+		assertTrue(statemachine.getEntries() == 1);
+		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
+		statemachine.setEntries(0);
 		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.getX() == 3);
+		assertTrue(statemachine.getEntries() == 1);
+		assertTrue(statemachine.getExits() == 1);
+		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
+	}
+	@Test
+	public void testSelfTransitionFromChildState() {
+		statemachine.enter();
+		statemachine.runCycle();
+		assertTrue(statemachine.getEntries() == 1);
+		statemachine.setEntries(0);
+		statemachine.raiseE1();
+		statemachine.runCycle();
+		assertTrue(statemachine.getEntries() == 0);
+		assertTrue(statemachine.getExits() == 0);
+		assertTrue(statemachine.isStateActive(State.main_region_A__region0_C));
+		statemachine.raiseE1();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.main_region_A__region0_B));
+		assertTrue(statemachine.getEntries() == 1);
+		assertTrue(statemachine.getExits() == 1);
 	}
 }
