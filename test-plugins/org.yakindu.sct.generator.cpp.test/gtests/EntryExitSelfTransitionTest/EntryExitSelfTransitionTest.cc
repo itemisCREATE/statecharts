@@ -12,14 +12,37 @@
 #include "gtest/gtest.h"
 #include "EntryExitSelfTransition.h"
 
-TEST(StatemachineTest, EntryExitSelfTransitionTest) {
+TEST(StatemachineTest, SelfTransitionToChildState) {
 	EntryExitSelfTransition* statechart = new EntryExitSelfTransition();
 	statechart->init();
 	statechart->enter();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCInterface()->get_x()== 1);
+	EXPECT_TRUE(statechart->getSCInterface()->get_entries()== 1);
+	EXPECT_TRUE(statechart->isActive(EntryExitSelfTransition::B));
+	statechart->getSCInterface()->set_entries(0);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCInterface()->get_x()== 3);
+	EXPECT_TRUE(statechart->getSCInterface()->get_entries()== 1);
+	EXPECT_TRUE(statechart->getSCInterface()->get_exits()== 1);
+	EXPECT_TRUE(statechart->isActive(EntryExitSelfTransition::C));
+	delete statechart;
+}
+TEST(StatemachineTest, SelfTransitionFromChildState) {
+	EntryExitSelfTransition* statechart = new EntryExitSelfTransition();
+	statechart->init();
+	statechart->enter();
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->getSCInterface()->get_entries()== 1);
+	statechart->getSCInterface()->set_entries(0);
+	statechart->raise_e1();
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->getSCInterface()->get_entries()== 0);
+	EXPECT_TRUE(statechart->getSCInterface()->get_exits()== 0);
+	EXPECT_TRUE(statechart->isActive(EntryExitSelfTransition::C));
+	statechart->raise_e1();
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->isActive(EntryExitSelfTransition::B));
+	EXPECT_TRUE(statechart->getSCInterface()->get_entries()== 1);
+	EXPECT_TRUE(statechart->getSCInterface()->get_exits()== 1);
 	delete statechart;
 }
