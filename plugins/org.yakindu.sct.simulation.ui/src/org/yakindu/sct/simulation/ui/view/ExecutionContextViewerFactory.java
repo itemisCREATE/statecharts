@@ -17,7 +17,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.yakindu.sct.simulation.ui.view.editing.BooleanEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.EnumerationEditingSupport;
-import org.yakindu.sct.simulation.ui.view.editing.IntegerEditingSupport;
+import org.yakindu.sct.simulation.ui.view.editing.LongEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.MultiEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.RealEditingSupport;
 import org.yakindu.sct.simulation.ui.view.editing.StringEditingSupport;
@@ -48,7 +48,7 @@ public class ExecutionContextViewerFactory {
 		valueColumn.getColumn().setWidth(100);
 		if (!readOnly)
 			valueColumn.setEditingSupport(new MultiEditingSupport(viewer, new BooleanEditingSupport(viewer),
-					new IntegerEditingSupport(viewer), new RealEditingSupport(viewer),
+					new LongEditingSupport(viewer), new RealEditingSupport(viewer),
 					new StringEditingSupport(viewer), new EnumerationEditingSupport(viewer)));
 
 		valueColumn.setLabelProvider(new ExecutionContextLabelProvider(1));
