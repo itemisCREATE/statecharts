@@ -24,7 +24,7 @@ public interface ITimingService {
 	 * TimeEvents can be scheduled as periodical with a duration in ms.
 	 * 
 	 */
-	public void scheduleTimeEvent(ExecutionContext context, String eventName, boolean periodical, int duration);
+	public void scheduleTimeEvent(ExecutionContext context, String eventName, boolean periodical, long duration);
 
 	/**
 	 * unschedules a scheduled TimeEvent

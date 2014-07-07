@@ -35,7 +35,7 @@ public class DefaultTimingService implements ITimingService {
 		timerTasks = new HashMap<String, TimerTask>();
 	}
 
-	public void scheduleTimeEvent(ExecutionContext context, String eventName, boolean isPeriodical, int duration) {
+	public void scheduleTimeEvent(ExecutionContext context, String eventName, boolean isPeriodical, long duration) {
 		TimeEventTask timeEventTask = new TimeEventTask(context, eventName);
 		timerTasks.put(eventName, timeEventTask);
 		if (isPeriodical) {
