@@ -254,7 +254,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch valueLiteral(IntLiteral literal) {
-		return literal.value
+		return literal.value as long 
 	}
 
 	def dispatch valueLiteral(HexLiteral literal) {

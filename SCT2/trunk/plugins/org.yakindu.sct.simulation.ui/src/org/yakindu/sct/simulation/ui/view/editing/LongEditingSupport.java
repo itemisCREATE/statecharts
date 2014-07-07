@@ -22,9 +22,9 @@ import org.eclipse.swt.widgets.Composite;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class IntegerEditingSupport extends ScopeSlotEditingSupport {
+public class LongEditingSupport extends ScopeSlotEditingSupport {
 
-	public IntegerEditingSupport(ColumnViewer viewer) {
+	public LongEditingSupport(ColumnViewer viewer) {
 		super(viewer);
 	}
 
@@ -35,7 +35,7 @@ public class IntegerEditingSupport extends ScopeSlotEditingSupport {
 		textCellEditor.setValidator(new ICellEditorValidator() {
 			public String isValid(Object value) {
 				try {
-					Integer.parseInt((String) value);
+					Long.parseLong((String) value);
 				} catch (NumberFormatException e) {
 					return "No valid integer value!";
 				}
@@ -48,14 +48,14 @@ public class IntegerEditingSupport extends ScopeSlotEditingSupport {
 
 	@Override
 	public Class<?> getSupportedType() {
-		return Integer.class;
+		return Long.class;
 	}
 
 	@Override
 	protected Object convertValue(Object element, Object value) {
 		if (value != null && value instanceof String
 				&& ((String) value).trim().length() > 0) {
-			return Integer.parseInt((String) value);
+			return Long.parseLong((String) value);
 		}
 		return null;
 	}
