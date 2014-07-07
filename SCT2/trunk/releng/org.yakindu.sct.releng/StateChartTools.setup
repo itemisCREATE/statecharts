@@ -1801,7 +1801,7 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.xtend.core.Xtend/newline.after.constructor.annotations"
-          value="false"/>
+          value="true"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.xtend.core.Xtend/blank.lines.after.last.member"
@@ -1817,7 +1817,7 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.xtend.core.Xtend/newline.after.method.annotations"
-          value="false"/>
+          value="true"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.xtend.core.Xtend/blank.lines.before.first.member"
@@ -1825,7 +1825,7 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.xtend.core.Xtend/newline.after.class.annotations"
-          value="false"/>
+          value="true"/>
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.xtend.core.Xtend/indentation.length"
@@ -1833,7 +1833,7 @@
       <setupTask
           xsi:type="setup:PreferenceTask"
           key="/instance/org.eclipse.xtend.core.Xtend/newline.after.field.annotations"
-          value="false"/>
+          value="true"/>
     </setupTask>
     <setupTask
         xsi:type="setup:CompoundTask"
