@@ -137,11 +137,11 @@ class ExpressionCode {
 
 	def String logicalString(LogicalRelationExpression expression) {
 		if (expression.operator == RelationalOperator::EQUALS) {
-			expression.leftOperand.code + "== null?" + expression.rightOperand.code + " ==null :" +
-				expression.leftOperand.code + ".equals(" + expression.rightOperand.code + ")"
+			"(" + expression.leftOperand.code + "== null?" + expression.rightOperand.code + " ==null :" +
+				expression.leftOperand.code + ".equals(" + expression.rightOperand.code + "))"
 		} else if (expression.operator == RelationalOperator::NOT_EQUALS) {
-			expression.leftOperand.code + "== null?" + expression.rightOperand.code + " ==null : !" +
-				expression.leftOperand.code + ".equals(" + expression.rightOperand.code + ")"
+			"(" + expression.leftOperand.code + "== null?" + expression.rightOperand.code + " !=null : !" +
+				expression.leftOperand.code + ".equals(" + expression.rightOperand.code + "))"
 		}
 	}
 
