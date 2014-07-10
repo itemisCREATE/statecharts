@@ -217,7 +217,7 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 	def dispatch Object execute(ScheduleTimeEvent scheduleTimeEvent) {
 		var timeEvent = scheduleTimeEvent.timeEvent
 		var duration = statementInterpreter.evaluateStatement(scheduleTimeEvent.timeValue, executionContext)
-		timingService.scheduleTimeEvent(executionContext, timeEvent.name, timeEvent.periodic, duration as Integer)
+		timingService.scheduleTimeEvent(executionContext, timeEvent.name, timeEvent.periodic, duration as Long)
 		null
 	}
 
