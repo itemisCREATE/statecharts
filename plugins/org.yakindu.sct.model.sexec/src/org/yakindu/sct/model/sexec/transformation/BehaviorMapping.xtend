@@ -304,7 +304,10 @@ class BehaviorMapping {
 		return null
 	}
 	
-	/** Transitions to synchronization points are part of joins and must be handled specifically. */
+	/** Transitions to synchronization points are part of joins and must be handled specifically.
+	 *  
+	 * TODO: check if code redundancy is produced. The behaviors could be associated with the synchronization. 
+	 */
 	def dispatch Reaction mapTransition(Transition t, State source, Synchronization target) {
 		val r = t.create 
 		
@@ -626,22 +629,39 @@ class BehaviorMapping {
 		
 	
 	def List<ExecutionScope> entryScopes(Transition t) {
-		val l = t.target.containers
-		l.removeAll(t.source.containers)
-		l.map( c | 
+		// we determine the scopes that have to be exited by 		
+		val targetPath = t.target.containers // getting the path elements from the target node
+		val sourcePath = t.source.containers // and the path elements from the target all target node
+		{ // and for the case of self transitions
+			sourcePath.remove(t.target) // we make sure that target node
+			sourcePath.remove(t.source) // and source node are not part of the target path
+		}
+		targetPath.removeAll(sourcePath) // the relevant entry scopes are then determined by removing all common source scopes
+
+		// and map the elements to scopes...
+		targetPath.map( c | 
 			if ( c instanceof RegularState ) (c as RegularState).create as ExecutionScope
 			else if ( c instanceof Region ) (c as Region).create as ExecutionScope
 			else if ( c instanceof Statechart ) (c as Statechart).create as ExecutionScope
 		).toList
 	}
 	
+	/**
+	 * Determines the list of states that are exited by a transition.
+	 */
 	def Iterable<State> exitStates(Transition t) {
-		val l = t.source.containers
-		l.removeAll(t.target.containers)
-		if (t.source == t.target) l.add(0, t.source)
-		l.filter( typeof(State) )
+		// we determine the states that have to be exited by 
+		val sourcePath = t.source.containers // getting the path elements from the source node 
+		val targetPath = t.target.containers // and the path elements from the target all target node
+		{ // and for the case of self transitions
+			targetPath.remove(t.target) // we make sure that target node
+			targetPath.remove(t.source) // and source node are not part of the target path
+		}
+		sourcePath.removeAll(targetPath) // the relevant exit elements are then determined by removing all common target path elements
+		sourcePath.filter( typeof(State) ) // and reducing this exit path to states 
 	}
 
+	/** Determines the  */
 	def Iterable<State> entryStates(Transition t) {
 		val l = t.target.containers
 		l.removeAll(t.source.containers)
