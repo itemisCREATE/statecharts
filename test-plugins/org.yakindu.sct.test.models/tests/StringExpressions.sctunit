@@ -1,20 +1,43 @@
 testgroup StringExpressions for statechart StringExpressions	{
 	test StringExpressionsTest {
 		
-		assert quotedString == '"x"'
+		assert quotedStringX == '"X"'
+		assert quotedStringY == "\"Y\""
 		enter
+		assert active(StringExpressions.main_region.AssignmentChecked)
 		
-		assert active (StringExpressions.main_region.StateA)
-		assert myString == "hello"
-		assert myString2 == "world"
-		assert quotedString == "'y'"
 		
-		raise e1
+		raise e
 		cycle
-		assert active (StringExpressions.main_region.StateB)
-		assert equals == false
-		assert notEqual == true
-		assert quotedString == "\"z\"" 
+		assert active(StringExpressions.main_region.VarToVarCompareSucceeded)
+		assert guardStringEqual
+		assert guardStringNotEqual
+		assert stringVarEqual
+		assert stringVarNotEqual
+		
+		raise e
+		cycle
+		assert active(StringExpressions.main_region.VarToConstCompareSucceeded)	
+		assert guardStringEqual
+		assert guardStringNotEqual
+		assert stringVarEqual
+		assert stringVarNotEqual
+		
+		raise e
+		cycle
+		assert active(StringExpressions.main_region.ConstToVarCompareSucceeded)		
+		assert guardStringEqual
+		assert guardStringNotEqual
+		assert stringVarEqual
+		assert stringVarNotEqual
+		
+		raise e		
+		cycle
+		assert active(StringExpressions.main_region.ConstToConstCompareSucceeded)
+		assert guardStringEqual
+		assert guardStringNotEqual
+		assert stringVarEqual
+		assert stringVarNotEqual
 		
 	}
 }

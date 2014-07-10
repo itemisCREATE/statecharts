@@ -17,18 +17,38 @@ StringExpressions handle;
 
 TEST(StatemachineTest, StringExpressionsTest) {
 	stringExpressions_init(&handle);
-	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedString(&handle) , "\"x\"") == 0);
+	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringX(&handle) , "\"X\"") == 0);
+	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedStringY(&handle) , "\"Y\"") == 0);
 	stringExpressions_enter(&handle);
-	EXPECT_TRUE(stringExpressions_isActive(&handle, StringExpressions_StateA));
-	EXPECT_TRUE(strcmp(stringExpressionsIface_get_myString(&handle) , "hello") == 0);
-	EXPECT_TRUE(strcmp(stringExpressionsIface_get_myString2(&handle) , "world") == 0);
-	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedString(&handle) , "'y'") == 0);
-	stringExpressionsIface_raise_e1(&handle);
+	EXPECT_TRUE(stringExpressions_isActive(&handle, StringExpressions_AssgnmntChckd));
+	stringExpressionsIface_raise_e(&handle);
 	stringExpressions_runCycle(&handle);
-	EXPECT_TRUE(stringExpressions_isActive(&handle, StringExpressions_StateB));
-	EXPECT_TRUE(stringExpressionsIface_get_equals(&handle) == false);
-	EXPECT_TRUE(stringExpressionsIface_get_notEqual(&handle) == true);
-	EXPECT_TRUE(strcmp(stringExpressionsIface_get_quotedString(&handle) , "\"z\"") == 0);
+	EXPECT_TRUE(stringExpressions_isActive(&handle, StringExpressions_dcadafegaecgdcacfdhcgaeibegiefc));
+	EXPECT_TRUE(stringExpressionsIface_get_guardStringEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_guardStringNotEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_stringVarEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_stringVarNotEqual(&handle) );
+	stringExpressionsIface_raise_e(&handle);
+	stringExpressions_runCycle(&handle);
+	EXPECT_TRUE(stringExpressions_isActive(&handle, StringExpressions_dcdgfcbchgddheeibbdfdgegecffbbg));
+	EXPECT_TRUE(stringExpressionsIface_get_guardStringEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_guardStringNotEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_stringVarEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_stringVarNotEqual(&handle) );
+	stringExpressionsIface_raise_e(&handle);
+	stringExpressions_runCycle(&handle);
+	EXPECT_TRUE(stringExpressions_isActive(&handle, StringExpressions_ijjeeifacbfgbebabeffagffbdfbfag));
+	EXPECT_TRUE(stringExpressionsIface_get_guardStringEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_guardStringNotEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_stringVarEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_stringVarNotEqual(&handle) );
+	stringExpressionsIface_raise_e(&handle);
+	stringExpressions_runCycle(&handle);
+	EXPECT_TRUE(stringExpressions_isActive(&handle, StringExpressions_eeddeeifjffeiaacejcibgeegabbbic));
+	EXPECT_TRUE(stringExpressionsIface_get_guardStringEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_guardStringNotEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_stringVarEqual(&handle) );
+	EXPECT_TRUE(stringExpressionsIface_get_stringVarNotEqual(&handle) );
 }
 
 		

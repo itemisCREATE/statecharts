@@ -6,64 +6,104 @@ public class StringExpressionsStatemachine
 
 	private final class SCInterfaceImpl implements SCInterface {
 
-		private boolean e1;
+		private boolean e;
 
-		public void raiseE1() {
-			e1 = true;
+		public void raiseE() {
+			e = true;
 		}
 
-		private String myString;
+		private String stringA;
 
-		public String getMyString() {
-			return myString;
+		public String getStringA() {
+			return stringA;
 		}
 
-		public void setMyString(String value) {
-			this.myString = value;
+		public void setStringA(String value) {
+			this.stringA = value;
 		}
 
-		private String myString2;
+		private String stringA2;
 
-		public String getMyString2() {
-			return myString2;
+		public String getStringA2() {
+			return stringA2;
 		}
 
-		public void setMyString2(String value) {
-			this.myString2 = value;
+		public void setStringA2(String value) {
+			this.stringA2 = value;
 		}
 
-		private String quotedString;
+		private String stringB;
 
-		public String getQuotedString() {
-			return quotedString;
+		public String getStringB() {
+			return stringB;
 		}
 
-		public void setQuotedString(String value) {
-			this.quotedString = value;
+		public void setStringB(String value) {
+			this.stringB = value;
 		}
 
-		private boolean equals;
+		private String quotedStringX;
 
-		public boolean getEquals() {
-			return equals;
+		public String getQuotedStringX() {
+			return quotedStringX;
 		}
 
-		public void setEquals(boolean value) {
-			this.equals = value;
+		public void setQuotedStringX(String value) {
+			this.quotedStringX = value;
 		}
 
-		private boolean notEqual;
+		private String quotedStringY;
 
-		public boolean getNotEqual() {
-			return notEqual;
+		public String getQuotedStringY() {
+			return quotedStringY;
 		}
 
-		public void setNotEqual(boolean value) {
-			this.notEqual = value;
+		public void setQuotedStringY(String value) {
+			this.quotedStringY = value;
+		}
+
+		private boolean stringVarEqual;
+
+		public boolean getStringVarEqual() {
+			return stringVarEqual;
+		}
+
+		public void setStringVarEqual(boolean value) {
+			this.stringVarEqual = value;
+		}
+
+		private boolean stringVarNotEqual;
+
+		public boolean getStringVarNotEqual() {
+			return stringVarNotEqual;
+		}
+
+		public void setStringVarNotEqual(boolean value) {
+			this.stringVarNotEqual = value;
+		}
+
+		private boolean guardStringNotEqual;
+
+		public boolean getGuardStringNotEqual() {
+			return guardStringNotEqual;
+		}
+
+		public void setGuardStringNotEqual(boolean value) {
+			this.guardStringNotEqual = value;
+		}
+
+		private boolean guardStringEqual;
+
+		public boolean getGuardStringEqual() {
+			return guardStringEqual;
+		}
+
+		public void setGuardStringEqual(boolean value) {
+			this.guardStringEqual = value;
 		}
 
 		public void clearEvents() {
-			e1 = false;
+			e = false;
 		}
 
 	}
@@ -71,7 +111,7 @@ public class StringExpressionsStatemachine
 	private SCInterfaceImpl sCInterface;
 
 	public enum State {
-		main_region_StateA, main_region_StateB, $NullState$
+		main_region_AssignmentChecked, main_region_Failed, main_region_VarToVarCompareSucceeded, main_region_VarToConstCompareSucceeded, main_region_ConstToVarCompareSucceeded, main_region_ConstToConstCompareSucceeded, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -91,38 +131,68 @@ public class StringExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.myString = "";
+		sCInterface.stringA = "A";
 
-		sCInterface.myString2 = "";
+		sCInterface.stringA2 = "A";
 
-		sCInterface.quotedString = "\"x\"";
+		sCInterface.stringB = "B";
 
-		sCInterface.equals = false;
+		sCInterface.quotedStringX = "\"X\"";
 
-		sCInterface.notEqual = false;
+		sCInterface.quotedStringY = "\"Y\"";
+
+		sCInterface.stringVarEqual = false;
+
+		sCInterface.stringVarNotEqual = false;
+
+		sCInterface.guardStringNotEqual = false;
+
+		sCInterface.guardStringEqual = false;
 	}
 
 	public void enter() {
 		entryAction();
 
-		sCInterface.myString = "hello";
+		sCInterface.stringVarNotEqual = !(sCInterface.stringA == null
+				? sCInterface.stringB == null
+				: sCInterface.stringA.equals(sCInterface.stringB));
 
-		sCInterface.myString2 = "world";
-
-		sCInterface.quotedString = "'y'";
+		sCInterface.stringVarEqual = !(sCInterface.stringA == null
+				? sCInterface.stringA2 != null
+				: !sCInterface.stringA.equals(sCInterface.stringA2));
 
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		stateVector[0] = State.main_region_AssignmentChecked;
 	}
 
 	public void exit() {
 		switch (stateVector[0]) {
-			case main_region_StateA :
+			case main_region_AssignmentChecked :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
-			case main_region_StateB :
+			case main_region_Failed :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_VarToVarCompareSucceeded :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_VarToConstCompareSucceeded :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_ConstToVarCompareSucceeded :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_ConstToConstCompareSucceeded :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
@@ -153,10 +223,18 @@ public class StringExpressionsStatemachine
 	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
-			case main_region_StateA :
-				return stateVector[0] == State.main_region_StateA;
-			case main_region_StateB :
-				return stateVector[0] == State.main_region_StateB;
+			case main_region_AssignmentChecked :
+				return stateVector[0] == State.main_region_AssignmentChecked;
+			case main_region_Failed :
+				return stateVector[0] == State.main_region_Failed;
+			case main_region_VarToVarCompareSucceeded :
+				return stateVector[0] == State.main_region_VarToVarCompareSucceeded;
+			case main_region_VarToConstCompareSucceeded :
+				return stateVector[0] == State.main_region_VarToConstCompareSucceeded;
+			case main_region_ConstToVarCompareSucceeded :
+				return stateVector[0] == State.main_region_ConstToVarCompareSucceeded;
+			case main_region_ConstToConstCompareSucceeded :
+				return stateVector[0] == State.main_region_ConstToConstCompareSucceeded;
 			default :
 				return false;
 		}
@@ -166,44 +244,72 @@ public class StringExpressionsStatemachine
 		return sCInterface;
 	}
 
-	public void raiseE1() {
-		sCInterface.raiseE1();
+	public void raiseE() {
+		sCInterface.raiseE();
 	}
 
-	public String getMyString() {
-		return sCInterface.getMyString();
+	public String getStringA() {
+		return sCInterface.getStringA();
 	}
 
-	public void setMyString(String value) {
-		sCInterface.setMyString(value);
+	public void setStringA(String value) {
+		sCInterface.setStringA(value);
 	}
-	public String getMyString2() {
-		return sCInterface.getMyString2();
-	}
-
-	public void setMyString2(String value) {
-		sCInterface.setMyString2(value);
-	}
-	public String getQuotedString() {
-		return sCInterface.getQuotedString();
+	public String getStringA2() {
+		return sCInterface.getStringA2();
 	}
 
-	public void setQuotedString(String value) {
-		sCInterface.setQuotedString(value);
+	public void setStringA2(String value) {
+		sCInterface.setStringA2(value);
 	}
-	public boolean getEquals() {
-		return sCInterface.getEquals();
-	}
-
-	public void setEquals(boolean value) {
-		sCInterface.setEquals(value);
-	}
-	public boolean getNotEqual() {
-		return sCInterface.getNotEqual();
+	public String getStringB() {
+		return sCInterface.getStringB();
 	}
 
-	public void setNotEqual(boolean value) {
-		sCInterface.setNotEqual(value);
+	public void setStringB(String value) {
+		sCInterface.setStringB(value);
+	}
+	public String getQuotedStringX() {
+		return sCInterface.getQuotedStringX();
+	}
+
+	public void setQuotedStringX(String value) {
+		sCInterface.setQuotedStringX(value);
+	}
+	public String getQuotedStringY() {
+		return sCInterface.getQuotedStringY();
+	}
+
+	public void setQuotedStringY(String value) {
+		sCInterface.setQuotedStringY(value);
+	}
+	public boolean getStringVarEqual() {
+		return sCInterface.getStringVarEqual();
+	}
+
+	public void setStringVarEqual(boolean value) {
+		sCInterface.setStringVarEqual(value);
+	}
+	public boolean getStringVarNotEqual() {
+		return sCInterface.getStringVarNotEqual();
+	}
+
+	public void setStringVarNotEqual(boolean value) {
+		sCInterface.setStringVarNotEqual(value);
+	}
+	public boolean getGuardStringNotEqual() {
+		return sCInterface.getGuardStringNotEqual();
+	}
+
+	public void setGuardStringNotEqual(boolean value) {
+		sCInterface.setGuardStringNotEqual(value);
+	}
+	public boolean getGuardStringEqual() {
+		return sCInterface.getGuardStringEqual();
+	}
+
+	public void setGuardStringEqual(boolean value) {
+		sCInterface.setGuardStringEqual(value);
 	}
 
 	/* Entry action for statechart 'StringExpressions'. */
@@ -214,29 +320,201 @@ public class StringExpressionsStatemachine
 	private void exitAction() {
 	}
 
-	/* The reactions of state StateA. */
-	private void reactMain_region_StateA() {
-		if (sCInterface.e1) {
+	/* The reactions of state AssignmentChecked. */
+	private void reactMain_region_AssignmentChecked() {
+		if (sCInterface.e) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
-			sCInterface.equals = (sCInterface.myString == null
-					? sCInterface.myString2 == null
-					: sCInterface.myString.equals(sCInterface.myString2));
+			sCInterface.stringVarEqual = (sCInterface.stringA == null
+					? sCInterface.stringA2 == null
+					: sCInterface.stringA.equals(sCInterface.stringA2));
 
-			sCInterface.notEqual = (sCInterface.myString == null
-					? sCInterface.myString2 == null
-					: !sCInterface.myString.equals(sCInterface.myString2));
+			if (sCInterface.e) {
+				sCInterface.stringVarNotEqual = (sCInterface.stringA == null
+						? sCInterface.stringB != null
+						: !sCInterface.stringA.equals(sCInterface.stringB));
 
-			sCInterface.quotedString = "\"z\"";
+				if (sCInterface.e
+						&& (sCInterface.stringA == null
+								? sCInterface.stringA2 == null
+								: sCInterface.stringA
+										.equals(sCInterface.stringA2))) {
+					sCInterface.guardStringEqual = (sCInterface.stringA == null
+							? sCInterface.stringA2 == null
+							: sCInterface.stringA.equals(sCInterface.stringA2));
 
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_StateB;
+					if (sCInterface.e
+							&& (sCInterface.stringA == null
+									? sCInterface.stringB != null
+									: !sCInterface.stringA
+											.equals(sCInterface.stringB))) {
+						sCInterface.guardStringNotEqual = (sCInterface.stringA == null
+								? sCInterface.stringB != null
+								: !sCInterface.stringA
+										.equals(sCInterface.stringB));
+
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_VarToVarCompareSucceeded;
+					} else {
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_Failed;
+					}
+				} else {
+					nextStateIndex = 0;
+					stateVector[0] = State.main_region_Failed;
+				}
+			} else {
+				nextStateIndex = 0;
+				stateVector[0] = State.main_region_Failed;
+			}
 		}
 	}
 
-	/* The reactions of state StateB. */
-	private void reactMain_region_StateB() {
+	/* The reactions of state Failed. */
+	private void reactMain_region_Failed() {
+	}
+
+	/* The reactions of state VarToVarCompareSucceeded. */
+	private void reactMain_region_VarToVarCompareSucceeded() {
+		if (sCInterface.e) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			sCInterface.stringVarEqual = (sCInterface.stringA == null
+					? "A" == null
+					: sCInterface.stringA.equals("A"));
+
+			if (sCInterface.e) {
+				sCInterface.stringVarNotEqual = (sCInterface.stringA == null
+						? "B" != null
+						: !sCInterface.stringA.equals("B"));
+
+				if (sCInterface.e
+						&& (sCInterface.stringA == null
+								? "A" == null
+								: sCInterface.stringA.equals("A"))) {
+					sCInterface.guardStringEqual = (sCInterface.stringA == null
+							? "A" == null
+							: sCInterface.stringA.equals("A"));
+
+					if (sCInterface.e
+							&& (sCInterface.stringA == null
+									? "B" != null
+									: !sCInterface.stringA.equals("B"))) {
+						sCInterface.guardStringNotEqual = (sCInterface.stringA == null
+								? "B" != null
+								: !sCInterface.stringA.equals("B"));
+
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_VarToConstCompareSucceeded;
+					} else {
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_Failed;
+					}
+				} else {
+					nextStateIndex = 0;
+					stateVector[0] = State.main_region_Failed;
+				}
+			} else {
+				nextStateIndex = 0;
+				stateVector[0] = State.main_region_Failed;
+			}
+		}
+	}
+
+	/* The reactions of state VarToConstCompareSucceeded. */
+	private void reactMain_region_VarToConstCompareSucceeded() {
+		if (sCInterface.e) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			sCInterface.stringVarEqual = ("A" == null
+					? sCInterface.stringA == null
+					: "A".equals(sCInterface.stringA));
+
+			if (sCInterface.e) {
+				sCInterface.stringVarNotEqual = ("A" == null
+						? sCInterface.stringB != null
+						: !"A".equals(sCInterface.stringB));
+
+				if (sCInterface.e
+						&& ("A" == null ? sCInterface.stringA == null : "A"
+								.equals(sCInterface.stringA))) {
+					sCInterface.guardStringEqual = ("A" == null
+							? sCInterface.stringA == null
+							: "A".equals(sCInterface.stringA));
+
+					if (sCInterface.e
+							&& ("A" == null
+									? sCInterface.stringB != null
+									: !"A".equals(sCInterface.stringB))) {
+						sCInterface.guardStringNotEqual = ("A" == null
+								? sCInterface.stringB != null
+								: !"A".equals(sCInterface.stringB));
+
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_ConstToVarCompareSucceeded;
+					} else {
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_Failed;
+					}
+				} else {
+					nextStateIndex = 0;
+					stateVector[0] = State.main_region_Failed;
+				}
+			} else {
+				nextStateIndex = 0;
+				stateVector[0] = State.main_region_Failed;
+			}
+		}
+	}
+
+	/* The reactions of state ConstToVarCompareSucceeded. */
+	private void reactMain_region_ConstToVarCompareSucceeded() {
+		if (sCInterface.e) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			sCInterface.stringVarEqual = ("A" == null ? "A" == null : "A"
+					.equals("A"));
+
+			if (sCInterface.e) {
+				sCInterface.stringVarNotEqual = ("A" == null
+						? "B" != null
+						: !"A".equals("B"));
+
+				if (sCInterface.e
+						&& ("A" == null ? "A" == null : "A".equals("A"))) {
+					sCInterface.guardStringEqual = ("A" == null
+							? "A" == null
+							: "A".equals("A"));
+
+					if (sCInterface.e
+							&& ("A" == null ? "B" != null : !"A".equals("B"))) {
+						sCInterface.guardStringNotEqual = ("A" == null
+								? "B" != null
+								: !"A".equals("B"));
+
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_ConstToConstCompareSucceeded;
+					} else {
+						nextStateIndex = 0;
+						stateVector[0] = State.main_region_Failed;
+					}
+				} else {
+					nextStateIndex = 0;
+					stateVector[0] = State.main_region_Failed;
+				}
+			} else {
+				nextStateIndex = 0;
+				stateVector[0] = State.main_region_Failed;
+			}
+		}
+	}
+
+	/* The reactions of state ConstToConstCompareSucceeded. */
+	private void reactMain_region_ConstToConstCompareSucceeded() {
 	}
 
 	public void runCycle() {
@@ -246,11 +524,23 @@ public class StringExpressionsStatemachine
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case main_region_StateA :
-					reactMain_region_StateA();
+				case main_region_AssignmentChecked :
+					reactMain_region_AssignmentChecked();
 					break;
-				case main_region_StateB :
-					reactMain_region_StateB();
+				case main_region_Failed :
+					reactMain_region_Failed();
+					break;
+				case main_region_VarToVarCompareSucceeded :
+					reactMain_region_VarToVarCompareSucceeded();
+					break;
+				case main_region_VarToConstCompareSucceeded :
+					reactMain_region_VarToConstCompareSucceeded();
+					break;
+				case main_region_ConstToVarCompareSucceeded :
+					reactMain_region_ConstToVarCompareSucceeded();
+					break;
+				case main_region_ConstToConstCompareSucceeded :
+					reactMain_region_ConstToConstCompareSucceeded();
 					break;
 				default :
 					// $NullState$

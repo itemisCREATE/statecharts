@@ -38,17 +38,42 @@ public class StringExpressionsTest {
 
 	@Test
 	public void testStringExpressionsTest() {
-		assertTrue(statemachine.getQuotedString().equals("\"x\""));
+		assertTrue(statemachine.getQuotedStringX().equals("\"X\""));
+		assertTrue(statemachine.getQuotedStringY().equals("\"Y\""));
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.main_region_StateA));
-		assertTrue(statemachine.getMyString().equals("hello"));
-		assertTrue(statemachine.getMyString2().equals("world"));
-		assertTrue(statemachine.getQuotedString().equals("'y'"));
-		statemachine.raiseE1();
+		assertTrue(statemachine
+				.isStateActive(State.main_region_AssignmentChecked));
+		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_StateB));
-		assertTrue(statemachine.getEquals() == false);
-		assertTrue(statemachine.getNotEqual() == true);
-		assertTrue(statemachine.getQuotedString().equals("\"z\""));
+		assertTrue(statemachine
+				.isStateActive(State.main_region_VarToVarCompareSucceeded));
+		assertTrue(statemachine.getGuardStringEqual());
+		assertTrue(statemachine.getGuardStringNotEqual());
+		assertTrue(statemachine.getStringVarEqual());
+		assertTrue(statemachine.getStringVarNotEqual());
+		statemachine.raiseE();
+		statemachine.runCycle();
+		assertTrue(statemachine
+				.isStateActive(State.main_region_VarToConstCompareSucceeded));
+		assertTrue(statemachine.getGuardStringEqual());
+		assertTrue(statemachine.getGuardStringNotEqual());
+		assertTrue(statemachine.getStringVarEqual());
+		assertTrue(statemachine.getStringVarNotEqual());
+		statemachine.raiseE();
+		statemachine.runCycle();
+		assertTrue(statemachine
+				.isStateActive(State.main_region_ConstToVarCompareSucceeded));
+		assertTrue(statemachine.getGuardStringEqual());
+		assertTrue(statemachine.getGuardStringNotEqual());
+		assertTrue(statemachine.getStringVarEqual());
+		assertTrue(statemachine.getStringVarNotEqual());
+		statemachine.raiseE();
+		statemachine.runCycle();
+		assertTrue(statemachine
+				.isStateActive(State.main_region_ConstToConstCompareSucceeded));
+		assertTrue(statemachine.getGuardStringEqual());
+		assertTrue(statemachine.getGuardStringNotEqual());
+		assertTrue(statemachine.getStringVarEqual());
+		assertTrue(statemachine.getStringVarNotEqual());
 	}
 }
