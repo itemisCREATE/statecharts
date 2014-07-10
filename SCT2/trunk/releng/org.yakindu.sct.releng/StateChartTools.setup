@@ -26,18 +26,6 @@
       value="256m"
       vm="true"/>
   <setupTask
-      xsi:type="setup:VariableTask"
-      name="train.url"
-      label="Release Train URL">
-    <choice
-        value="http://download.eclipse.org/releases/kepler"
-        label="Kepler - 4.3"/>
-    <choice
-        value="http://download.eclipse.org/releases/luna"
-        label="Luna - 4.4"/>
-    <description>The release train repository location that will be used to materialize a target platform.  EMF and XSD are built and tested with Eclipse 3.5, i.e., Galileo.</description>
-  </setupTask>
-  <setupTask
       xsi:type="setup:PreferenceTask"
       key="instance/org.eclipse.jdt.launching/org.eclipse.jdt.launching.PREF_STRICTLY_COMPATIBLE_JRE_NOT_AVAILABLE"
       value="ignore"/>
@@ -46,7 +34,8 @@
       name="Installation">
     <setupTask
         xsi:type="setup.p2:P2Task"
-        id="">
+        id=""
+        label="Core">
       <requirement
           id="org.eclipse.egit.feature.group"/>
       <requirement
@@ -109,7 +98,8 @@
       <description>Core</description>
     </setupTask>
     <setupTask
-        xsi:type="setup.p2:P2Task">
+        xsi:type="setup.p2:P2Task"
+        label="Mylyn">
       <requirement
           id="org.eclipse.mylyn_feature.feature.group"/>
       <requirement
@@ -131,31 +121,12 @@
       <repository
           url="http://download.eclipse.org/mylyn/releases/latest"/>
       <repository
-          url="${train.url}"/>
+          url="http://download.eclipse.org/releases/luna"/>
       <description>Mylyn</description>
     </setupTask>
     <setupTask
-        xsi:type="setup.p2:P2Task">
-      <requirement
-          id="org.eclipse.rmf.reqif10.sdk.feature.feature.group"/>
-      <repository
-          url="http://download.eclipse.org/rmf/updates"/>
-      <description>RMF</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task">
-      <requirement
-          id="org.yakindu.sct.generator.java.feature.group"
-          optional="true"/>
-      <requirement
-          id="org.yakindu.base.feature.group"
-          optional="true"/>
-      <repository
-          url="http://updates.yakindu.org/sct/luna/integration"/>
-      <description>State chart tools</description>
-    </setupTask>
-    <setupTask
-        xsi:type="setup.p2:P2Task">
+        xsi:type="setup.p2:P2Task"
+        label="Oomph">
       <requirement
           id="org.eclipse.pde.api.tools.ee.feature.feature.group"/>
       <requirement
@@ -173,13 +144,15 @@
       <description>Oomph</description>
     </setupTask>
     <setupTask
-        xsi:type="setup.p2:P2Task">
+        xsi:type="setup.p2:P2Task"
+        id="p2.director.polarion"
+        label="Polarion SVN">
       <requirement
           id="org.polarion.eclipse.team.svn.connector.feature.group"/>
       <requirement
-          id="org.polarion.eclipse.team.svn.connector.javahl17.feature.group"/>
+          id="org.polarion.eclipse.team.svn.connector.svnkit18.feature.group"/>
       <repository
-          url="http://community.polarion.com/projects/subversive/download/eclipse/3.0/kepler-site/"/>
+          url="http://community.polarion.com/projects/subversive/download/eclipse/4.0/update-site/"/>
       <description>Polarion SVN</description>
     </setupTask>
   </setupTask>
@@ -1876,13 +1849,26 @@
           value="false"/>
     </setupTask>
   </setupTask>
-  <stream name="master">
+  <stream name="Luna">
     <setupTask
         xsi:type="projectset:ProjectSetImportTask"
         uRL="https://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng/org.yakindu.base.target/projectSet.psf"/>
     <setupTask
         xsi:type="pde:TargetPlatformTask"
+        id="sct.target.luna"
         name="Luna (SCT)"/>
+    <description>Activation of Luna Target</description>
+  </stream>
+  <stream name="Kepler"
+      label="">
+    <setupTask
+        xsi:type="projectset:ProjectSetImportTask"
+        uRL="https://svn.codespot.com/a/eclipselabs.org/yakindu/BASE/trunk/releng/org.yakindu.base.target/projectSet.psf"/>
+    <setupTask
+        xsi:type="pde:TargetPlatformTask"
+        id="sct.target.kepler"
+        name="Kepler SCT Target"/>
+    <description>Activation of Kepler target</description>
   </stream>
   <logicalProjectContainer
       xsi:type="setup:ProjectCatalog"
