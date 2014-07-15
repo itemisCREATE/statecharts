@@ -63,10 +63,56 @@ public class FeatureTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addDeprecatedPropertyDescriptor(object);
+			addCommentPropertyDescriptor(object);
 			addLibraryPropertyDescriptor(object);
 			addOptionalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Deprecated feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDeprecatedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DeprecatableElement_deprecated_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DeprecatableElement_deprecated_feature", "_UI_DeprecatableElement_type"),
+				 SGenPackage.Literals.DEPRECATABLE_ELEMENT__DEPRECATED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Comment feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCommentPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DeprecatableElement_comment_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DeprecatableElement_comment_feature", "_UI_DeprecatableElement_type"),
+				 SGenPackage.Literals.DEPRECATABLE_ELEMENT__COMMENT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -180,6 +226,8 @@ public class FeatureTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(FeatureType.class)) {
+			case SGenPackage.FEATURE_TYPE__DEPRECATED:
+			case SGenPackage.FEATURE_TYPE__COMMENT:
 			case SGenPackage.FEATURE_TYPE__OPTIONAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

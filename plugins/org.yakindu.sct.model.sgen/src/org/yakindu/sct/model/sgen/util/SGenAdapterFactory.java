@@ -131,6 +131,10 @@ public class SGenAdapterFactory extends AdapterFactoryImpl {
 				return createStringLiteralAdapter();
 			}
 			@Override
+			public Adapter caseDeprecatableElement(DeprecatableElement object) {
+				return createDeprecatableElementAdapter();
+			}
+			@Override
 			public Adapter caseNamedElement(NamedElement object) {
 				return createNamedElementAdapter();
 			}
@@ -333,6 +337,20 @@ public class SGenAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createStringLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgen.DeprecatableElement <em>Deprecatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.sct.model.sgen.DeprecatableElement
+	 * @generated
+	 */
+	public Adapter createDeprecatableElementAdapter() {
 		return null;
 	}
 

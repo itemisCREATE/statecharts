@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sgen"
-    nsURI="http://www.yakindu.org/sct/statechart/SGen" nsPrefix="sgen">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sgen" nsURI="http://www.yakindu.org/sct/statechart/SGen" nsPrefix="sgen">
   <eClassifiers xsi:type="ecore:EClass" name="GeneratorModel">
     <eStructuralFeatures xsi:type="ecore:EReference" name="entries" upperBound="-1"
         eType="#//GeneratorEntry" containment="true"/>
@@ -12,7 +10,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="configurations" upperBound="-1"
         eType="#//FeatureConfiguration" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureType" eSuperTypes="http://www.yakindu.org/base/base/2.0.0#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureType" eSuperTypes="http://www.yakindu.org/base/base/2.0.0#//NamedElement #//DeprecatableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//FeatureParameter" containment="true" eOpposite="#//FeatureParameter/featureType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="library" lowerBound="1"
@@ -21,7 +19,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="FeatureParameter" eSuperTypes="http://www.yakindu.org/base/base/2.0.0#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureParameter" eSuperTypes="http://www.yakindu.org/base/base/2.0.0#//NamedElement #//DeprecatableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="featureType" eType="#//FeatureType"
         eOpposite="#//FeatureType/parameters"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
@@ -83,5 +81,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Literal">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeprecatableElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deprecated" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

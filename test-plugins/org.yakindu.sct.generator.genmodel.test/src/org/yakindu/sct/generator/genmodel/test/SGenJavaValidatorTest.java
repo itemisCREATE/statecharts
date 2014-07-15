@@ -11,6 +11,14 @@
 package org.yakindu.sct.generator.genmodel.test;
 
 import static org.junit.Assert.fail;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DEPRECATED;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DUPLICATE_FEATURE;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.DUPLICATE_PARAMETER;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.INCOMPATIBLE_TYPE_STRING_EXPECTED;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_FEATURE;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.MISSING_REQUIRED_PARAMETER;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKNOWN_CONTENT_TYPE;
+import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.UNKOWN_GENERATOR;
 
 import java.lang.reflect.Method;
 
@@ -29,8 +37,8 @@ import org.yakindu.sct.generator.genmodel.test.util.AbstractSGenTest;
 import org.yakindu.sct.generator.genmodel.test.util.SGenInjectorProvider;
 import org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
+import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgen.GeneratorModel;
-import static org.yakindu.sct.generator.genmodel.validation.SGenJavaValidator.*;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -154,6 +162,44 @@ public class SGenJavaValidatorTest extends AbstractSGenTest {
 				GeneratorModel.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertAny(new MsgPredicate(MISSING_REQUIRED_PARAMETER));
+	}
+
+	/**
+	 * @see SGenJavaValidator#checkDeprecatedFeatures(GeneratorEntry)
+	 */
+	@Test
+	public void checkDeprecatedFeatures() {
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { statechart Example { feature Outlet {targetFolder = \"src-gen\"  targetProject = \"TestProject\" }}}",
+				GeneratorModel.class.getSimpleName());
+		if (!(model instanceof GeneratorModel)) {
+			fail("Model is of the wrong type");
+		} else {
+			GeneratorModel genModel = (GeneratorModel) model;
+			genModel.getEntries().get(0).getFeatures().get(0).getType()
+					.setDeprecated(true);
+			AssertableDiagnostics result = tester.validate(genModel);
+			result.assertAny(new MsgPredicate(DEPRECATED));
+		}
+	}
+
+	/**
+	 * @see SGenJavaValidator#checkDeprecatedParameters(GeneratorEntry)
+	 */
+	@Test
+	public void checkDeprecatedParameters() {
+		EObject model = parseExpression(
+				"GeneratorModel for yakindu::java { statechart Example { feature Outlet {targetFolder = \"src-gen\"  targetProject = \"TestProject\" }}}",
+				GeneratorModel.class.getSimpleName());
+		if (!(model instanceof GeneratorModel)) {
+			fail("Model is of the wrong type");
+		} else {
+			GeneratorModel genModel = (GeneratorModel) model;
+			genModel.getEntries().get(0).getFeatures().get(0).getType()
+					.getParameters().get(0).setDeprecated(true);
+			AssertableDiagnostics result = tester.validate(genModel);
+			result.assertAny(new MsgPredicate(DEPRECATED));
+		}
 	}
 
 	/**

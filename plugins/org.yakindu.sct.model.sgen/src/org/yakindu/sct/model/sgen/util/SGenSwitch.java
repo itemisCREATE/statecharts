@@ -94,6 +94,7 @@ public class SGenSwitch<T> extends Switch<T> {
 				FeatureType featureType = (FeatureType)theEObject;
 				T result = caseFeatureType(featureType);
 				if (result == null) result = caseNamedElement(featureType);
+				if (result == null) result = caseDeprecatableElement(featureType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -101,6 +102,7 @@ public class SGenSwitch<T> extends Switch<T> {
 				FeatureParameter featureParameter = (FeatureParameter)theEObject;
 				T result = caseFeatureParameter(featureParameter);
 				if (result == null) result = caseNamedElement(featureParameter);
+				if (result == null) result = caseDeprecatableElement(featureParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -159,6 +161,12 @@ public class SGenSwitch<T> extends Switch<T> {
 				StringLiteral stringLiteral = (StringLiteral)theEObject;
 				T result = caseStringLiteral(stringLiteral);
 				if (result == null) result = caseLiteral(stringLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case SGenPackage.DEPRECATABLE_ELEMENT: {
+				DeprecatableElement deprecatableElement = (DeprecatableElement)theEObject;
+				T result = caseDeprecatableElement(deprecatableElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -358,6 +366,21 @@ public class SGenSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseStringLiteral(StringLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Deprecatable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Deprecatable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeprecatableElement(DeprecatableElement object) {
 		return null;
 	}
 

@@ -146,13 +146,31 @@ public interface SGenPackage extends EPackage {
 	int FEATURE_TYPE__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_TYPE__DEPRECATED = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_TYPE__COMMENT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE__PARAMETERS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int FEATURE_TYPE__PARAMETERS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Library</b></em>' reference.
@@ -161,7 +179,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE__LIBRARY = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int FEATURE_TYPE__LIBRARY = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -170,7 +188,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE__OPTIONAL = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int FEATURE_TYPE__OPTIONAL = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Feature Type</em>' class.
@@ -179,7 +197,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_TYPE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int FEATURE_TYPE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureParameterImpl <em>Feature Parameter</em>}' class.
@@ -201,13 +219,31 @@ public interface SGenPackage extends EPackage {
 	int FEATURE_PARAMETER__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_PARAMETER__DEPRECATED = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FEATURE_PARAMETER__COMMENT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Feature Type</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER__FEATURE_TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int FEATURE_PARAMETER__FEATURE_TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Optional</b></em>' attribute.
@@ -216,7 +252,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER__OPTIONAL = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int FEATURE_PARAMETER__OPTIONAL = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Type</b></em>' attribute.
@@ -225,7 +261,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER__PARAMETER_TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int FEATURE_PARAMETER__PARAMETER_TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Feature Parameter</em>' class.
@@ -234,7 +270,7 @@ public interface SGenPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FEATURE_PARAMETER_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int FEATURE_PARAMETER_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.FeatureConfigurationImpl <em>Feature Configuration</em>}' class.
@@ -535,6 +571,43 @@ public interface SGenPackage extends EPackage {
 	int STRING_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.impl.DeprecatableElementImpl <em>Deprecatable Element</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.sct.model.sgen.impl.DeprecatableElementImpl
+	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getDeprecatableElement()
+	 * @generated
+	 */
+	int DEPRECATABLE_ELEMENT = 13;
+
+	/**
+	 * The feature id for the '<em><b>Deprecated</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPRECATABLE_ELEMENT__DEPRECATED = 0;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPRECATABLE_ELEMENT__COMMENT = 1;
+
+	/**
+	 * The number of structural features of the '<em>Deprecatable Element</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DEPRECATABLE_ELEMENT_FEATURE_COUNT = 2;
+
+	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -542,7 +615,7 @@ public interface SGenPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getParameterTypes()
 	 * @generated
 	 */
-	int PARAMETER_TYPES = 13;
+	int PARAMETER_TYPES = 14;
 
 
 	/**
@@ -929,6 +1002,38 @@ public interface SGenPackage extends EPackage {
 	EAttribute getStringLiteral_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgen.DeprecatableElement <em>Deprecatable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Deprecatable Element</em>'.
+	 * @see org.yakindu.sct.model.sgen.DeprecatableElement
+	 * @generated
+	 */
+	EClass getDeprecatableElement();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.DeprecatableElement#isDeprecated <em>Deprecated</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Deprecated</em>'.
+	 * @see org.yakindu.sct.model.sgen.DeprecatableElement#isDeprecated()
+	 * @see #getDeprecatableElement()
+	 * @generated
+	 */
+	EAttribute getDeprecatableElement_Deprecated();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgen.DeprecatableElement#getComment <em>Comment</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Comment</em>'.
+	 * @see org.yakindu.sct.model.sgen.DeprecatableElement#getComment()
+	 * @see #getDeprecatableElement()
+	 * @generated
+	 */
+	EAttribute getDeprecatableElement_Comment();
+
+	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1273,6 +1378,32 @@ public interface SGenPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STRING_LITERAL__VALUE = eINSTANCE.getStringLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.impl.DeprecatableElementImpl <em>Deprecatable Element</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.sct.model.sgen.impl.DeprecatableElementImpl
+		 * @see org.yakindu.sct.model.sgen.impl.SGenPackageImpl#getDeprecatableElement()
+		 * @generated
+		 */
+		EClass DEPRECATABLE_ELEMENT = eINSTANCE.getDeprecatableElement();
+
+		/**
+		 * The meta object literal for the '<em><b>Deprecated</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPRECATABLE_ELEMENT__DEPRECATED = eINSTANCE.getDeprecatableElement_Deprecated();
+
+		/**
+		 * The meta object literal for the '<em><b>Comment</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DEPRECATABLE_ELEMENT__COMMENT = eINSTANCE.getDeprecatableElement_Comment();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgen.ParameterTypes <em>Parameter Types</em>}' enum.

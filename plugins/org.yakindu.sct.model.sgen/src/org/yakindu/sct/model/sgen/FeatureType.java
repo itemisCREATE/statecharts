@@ -27,7 +27,7 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface FeatureType extends NamedElement {
+public interface FeatureType extends NamedElement, DeprecatableElement {
 	/**
 	 * Returns the value of the '<em><b>Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.yakindu.sct.model.sgen.FeatureParameter}.

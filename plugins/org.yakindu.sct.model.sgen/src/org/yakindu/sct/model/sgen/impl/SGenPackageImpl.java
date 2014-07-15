@@ -135,6 +135,13 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass deprecatableElementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EEnum parameterTypesEEnum = null;
 
 	/**
@@ -560,6 +567,36 @@ public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	 */
 	public EAttribute getStringLiteral_Value() {
         return (EAttribute)getStringLiteral().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getDeprecatableElement() {
+		if (deprecatableElementEClass == null) {
+			deprecatableElementEClass = (EClass)EPackage.Registry.INSTANCE.getEPackage(SGenPackage.eNS_URI).getEClassifiers().get(14);
+		}
+		return deprecatableElementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDeprecatableElement_Deprecated() {
+        return (EAttribute)getDeprecatableElement().getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDeprecatableElement_Comment() {
+        return (EAttribute)getDeprecatableElement().getEStructuralFeatures().get(1);
 	}
 
 	/**
