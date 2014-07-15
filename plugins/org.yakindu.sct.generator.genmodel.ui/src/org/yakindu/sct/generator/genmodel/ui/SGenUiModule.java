@@ -12,12 +12,14 @@ import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.ResourceForIEditorInputFactory;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.SimpleResourceSetProvider;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.ui.shared.Access;
 import org.yakindu.sct.generator.genmodel.ui.help.SGenUserHelpDocumentationProvider;
+import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenHighlightingConfiguration;
 import org.yakindu.sct.generator.genmodel.ui.highlighting.SGenSemanticHighlightingCalculator;
 import org.yakindu.sct.generator.genmodel.ui.templates.SGenTemplateProposalProvider;
 
@@ -35,6 +37,10 @@ public class SGenUiModule extends
 
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SGenSemanticHighlightingCalculator.class;
+	}
+
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
+		return SGenHighlightingConfiguration.class;
 	}
 
 	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProvider() {
@@ -59,6 +65,7 @@ public class SGenUiModule extends
 		return SGenTemplateProposalProvider.class;
 	}
 
+	@Override
 	public com.google.inject.Provider<org.eclipse.xtext.resource.containers.IAllContainersState> provideIAllContainersState() {
 		return Access.getWorkspaceProjectsState();
 	}
