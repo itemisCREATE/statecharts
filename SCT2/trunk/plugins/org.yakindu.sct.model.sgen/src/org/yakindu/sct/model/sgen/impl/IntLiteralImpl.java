@@ -21,18 +21,16 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.yakindu.sct.model.sgen.impl.IntLiteralImpl#getValue <em>Value
- * </em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.impl.IntLiteralImpl#getValue <em>Value</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class IntLiteralImpl extends LiteralImpl implements IntLiteral {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -42,7 +40,6 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral {
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -51,7 +48,6 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected IntLiteralImpl() {
@@ -60,7 +56,6 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -70,7 +65,6 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getValue() {
@@ -79,71 +73,65 @@ public class IntLiteralImpl extends LiteralImpl implements IntLiteral {
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setValue(int newValue) {
 		int oldValue = value;
 		value = newValue;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET,
-					SGenPackage.INT_LITERAL__VALUE, oldValue, value));
+			eNotify(new ENotificationImpl(this, Notification.SET, SGenPackage.INT_LITERAL__VALUE, oldValue, value));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case SGenPackage.INT_LITERAL__VALUE:
-			return getValue();
+			case SGenPackage.INT_LITERAL__VALUE:
+				return getValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case SGenPackage.INT_LITERAL__VALUE:
-			setValue((Integer) newValue);
-			return;
+			case SGenPackage.INT_LITERAL__VALUE:
+				setValue((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case SGenPackage.INT_LITERAL__VALUE:
-			setValue(VALUE_EDEFAULT);
-			return;
+			case SGenPackage.INT_LITERAL__VALUE:
+				setValue(VALUE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case SGenPackage.INT_LITERAL__VALUE:
-			return value != VALUE_EDEFAULT;
+			case SGenPackage.INT_LITERAL__VALUE:
+				return value != VALUE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

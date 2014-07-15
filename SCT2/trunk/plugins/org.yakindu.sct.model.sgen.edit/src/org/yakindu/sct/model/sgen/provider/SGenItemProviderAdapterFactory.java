@@ -350,6 +350,29 @@ public class SGenItemProviderAdapterFactory extends SGenAdapterFactory implement
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.sct.model.sgen.DeprecatableElement} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DeprecatableElementItemProvider deprecatableElementItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.sct.model.sgen.DeprecatableElement}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDeprecatableElementAdapter() {
+		if (deprecatableElementItemProvider == null) {
+			deprecatableElementItemProvider = new DeprecatableElementItemProvider(this);
+		}
+
+		return deprecatableElementItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -460,6 +483,7 @@ public class SGenItemProviderAdapterFactory extends SGenAdapterFactory implement
 		if (intLiteralItemProvider != null) intLiteralItemProvider.dispose();
 		if (realLiteralItemProvider != null) realLiteralItemProvider.dispose();
 		if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
+		if (deprecatableElementItemProvider != null) deprecatableElementItemProvider.dispose();
 	}
 
 }

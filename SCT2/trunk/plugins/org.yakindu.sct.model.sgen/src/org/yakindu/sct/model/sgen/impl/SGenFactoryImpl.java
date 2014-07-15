@@ -40,7 +40,7 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	 */
 	public static SGenFactory init() {
 		try {
-			SGenFactory theSGenFactory = (SGenFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.yakindu.org/sct/statechart/SGen"); 
+			SGenFactory theSGenFactory = (SGenFactory)EPackage.Registry.INSTANCE.getEFactory(SGenPackage.eNS_URI);
 			if (theSGenFactory != null) {
 				return theSGenFactory;
 			}
@@ -81,6 +81,7 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 			case SGenPackage.INT_LITERAL: return createIntLiteral();
 			case SGenPackage.REAL_LITERAL: return createRealLiteral();
 			case SGenPackage.STRING_LITERAL: return createStringLiteral();
+			case SGenPackage.DEPRECATABLE_ELEMENT: return createDeprecatableElement();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -234,6 +235,16 @@ public class SGenFactoryImpl extends EFactoryImpl implements SGenFactory {
 	public StringLiteral createStringLiteral() {
 		StringLiteralImpl stringLiteral = new StringLiteralImpl();
 		return stringLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DeprecatableElement createDeprecatableElement() {
+		DeprecatableElementImpl deprecatableElement = new DeprecatableElementImpl();
+		return deprecatableElement;
 	}
 
 	/**

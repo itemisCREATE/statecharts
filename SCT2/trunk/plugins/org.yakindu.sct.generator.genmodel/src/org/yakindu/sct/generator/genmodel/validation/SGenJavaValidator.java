@@ -27,6 +27,7 @@ import org.yakindu.sct.generator.core.extensions.LibraryExtensions;
 import org.yakindu.sct.generator.core.extensions.LibraryExtensions.LibraryDescriptor;
 import org.yakindu.sct.generator.core.features.IDefaultFeatureValueProvider;
 import org.yakindu.sct.model.sgen.BoolLiteral;
+import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureConfiguration;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
@@ -64,6 +65,7 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	public static final String INCOMPATIBLE_TYPE_FLOAT_EXPECTED = "Incompatible type, Float expected";
 	public static final String INCOMPATIBLE_TYPE_STRING_EXPECTED = "Incompatible type, String expected";
 	public static final String UNKNOWN_CONTENT_TYPE = "Unknown content type '";
+	public static final String DEPRECATED = "Element is depricated";
 	// Failure codes
 	public static final String CODE_REQUIRED_FEATURE = "code_req_feature";
 
@@ -123,13 +125,14 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			return;
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(value);
-		
+
 		GeneratorDescriptor generatorDescriptor = GeneratorExtensions
 				.getGeneratorDescriptorForId(model.getGeneratorId());
-		
+
 		IDefaultFeatureValueProvider provider = LibraryExtensions
-				.getDefaultFeatureValueProvider(generatorDescriptor.getLibraryIDs(), value
-						.getParameter().getFeatureType().getLibrary());
+				.getDefaultFeatureValueProvider(
+						generatorDescriptor.getLibraryIDs(), value
+								.getParameter().getFeatureType().getLibrary());
 		IStatus status = provider.validateParameterValue(value);
 		createMarker(status);
 	}
@@ -221,6 +224,19 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 	}
 
 	@Check
+	public void checkDeprecatedFeatures(GeneratorEntry entry) {
+		Iterable<FeatureConfiguration> features = entry.getFeatures();
+		Iterable<FeatureType> deprecatedFeatures = filter(
+				transform(features, getFeatureType()), isDeprecated());
+		for (FeatureType feature : deprecatedFeatures) {
+			warning(String.format(DEPRECATED + " %s : %f", feature.getName(),
+					feature.getComment()),
+					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,
+					feature.getName());
+		}
+	}
+
+	@Check
 	public void checkRequiredParameters(FeatureConfiguration configuration) {
 		GeneratorModel model = (GeneratorModel) EcoreUtil2
 				.getRootContainer(configuration);
@@ -254,6 +270,20 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 		}
 	}
 
+	@Check
+	public void checkDeprecatedParameters(GeneratorEntry entry) {
+		Iterable<FeatureParameter> deprecatedParameters = filter(
+				concat(transform(
+						transform(entry.getFeatures(), getFeatureType()),
+						getParmeter())), isDeprecated());
+		for (FeatureParameter parameter : deprecatedParameters) {
+			warning(String.format(DEPRECATED + " %s : %f", parameter.getName(),
+					parameter.getComment()),
+					SGenPackage.Literals.GENERATOR_ENTRY__ELEMENT_REF,
+					parameter.getName());
+		}
+	}
+
 	private Function<NamedElement, String> getName() {
 		return new Function<NamedElement, String>() {
 
@@ -268,6 +298,14 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 
 			public boolean apply(FeatureParameter input) {
 				return !input.isOptional();
+			}
+		};
+	}
+
+	private Predicate<DeprecatableElement> isDeprecated() {
+		return new Predicate<DeprecatableElement>() {
+			public boolean apply(DeprecatableElement input) {
+				return input.isDeprecated();
 			}
 		};
 	}
@@ -317,6 +355,14 @@ public class SGenJavaValidator extends AbstractSGenJavaValidator {
 			public FeatureTypeLibrary apply(LibraryDescriptor from) {
 				return (FeatureTypeLibrary) new ResourceSetImpl()
 						.getResource(from.getURI(), true).getContents().get(0);
+			}
+		};
+	}
+
+	private static Function<FeatureConfiguration, FeatureType> getFeatureType() {
+		return new Function<FeatureConfiguration, FeatureType>() {
+			public FeatureType apply(FeatureConfiguration input) {
+				return input.getType();
 			}
 		};
 	}

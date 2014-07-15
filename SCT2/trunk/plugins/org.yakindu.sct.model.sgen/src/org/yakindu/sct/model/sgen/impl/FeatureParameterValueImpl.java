@@ -114,7 +114,7 @@ public class FeatureParameterValueImpl extends EObjectImpl implements
 	 */
 	public FeatureConfiguration getFeatureConfiguration() {
 		if (eContainerFeatureID() != SGenPackage.FEATURE_PARAMETER_VALUE__FEATURE_CONFIGURATION) return null;
-		return (FeatureConfiguration)eContainer();
+		return (FeatureConfiguration)eInternalContainer();
 	}
 
 	/**

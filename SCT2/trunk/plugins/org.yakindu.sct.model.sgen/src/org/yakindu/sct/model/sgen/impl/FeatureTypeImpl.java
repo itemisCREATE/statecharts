@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.impl.NamedElementImpl;
+import org.yakindu.sct.model.sgen.DeprecatableElement;
 import org.yakindu.sct.model.sgen.FeatureParameter;
 import org.yakindu.sct.model.sgen.FeatureType;
 import org.yakindu.sct.model.sgen.FeatureTypeLibrary;
@@ -29,6 +30,8 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#isDeprecated <em>Deprecated</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#getLibrary <em>Library</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgen.impl.FeatureTypeImpl#isOptional <em>Optional</em>}</li>
@@ -38,6 +41,46 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * @generated
  */
 public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
+	/**
+	 * The default value of the '{@link #isDeprecated() <em>Deprecated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDeprecated()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DEPRECATED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDeprecated() <em>Deprecated</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDeprecated()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean deprecated = DEPRECATED_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String COMMENT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getComment() <em>Comment</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComment()
+	 * @generated
+	 * @ordered
+	 */
+	protected String comment = COMMENT_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getParameters() <em>Parameters</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -84,6 +127,48 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 	@Override
 	protected EClass eStaticClass() {
 		return SGenPackage.Literals.FEATURE_TYPE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isDeprecated() {
+		return deprecated;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDeprecated(boolean newDeprecated) {
+		boolean oldDeprecated = deprecated;
+		deprecated = newDeprecated;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGenPackage.FEATURE_TYPE__DEPRECATED, oldDeprecated, deprecated));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setComment(String newComment) {
+		String oldComment = comment;
+		comment = newComment;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SGenPackage.FEATURE_TYPE__COMMENT, oldComment, comment));
 	}
 
 	/**
@@ -175,6 +260,10 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case SGenPackage.FEATURE_TYPE__DEPRECATED:
+				return isDeprecated();
+			case SGenPackage.FEATURE_TYPE__COMMENT:
+				return getComment();
 			case SGenPackage.FEATURE_TYPE__PARAMETERS:
 				return getParameters();
 			case SGenPackage.FEATURE_TYPE__LIBRARY:
@@ -195,6 +284,12 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case SGenPackage.FEATURE_TYPE__DEPRECATED:
+				setDeprecated((Boolean)newValue);
+				return;
+			case SGenPackage.FEATURE_TYPE__COMMENT:
+				setComment((String)newValue);
+				return;
 			case SGenPackage.FEATURE_TYPE__PARAMETERS:
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends FeatureParameter>)newValue);
@@ -214,6 +309,12 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case SGenPackage.FEATURE_TYPE__DEPRECATED:
+				setDeprecated(DEPRECATED_EDEFAULT);
+				return;
+			case SGenPackage.FEATURE_TYPE__COMMENT:
+				setComment(COMMENT_EDEFAULT);
+				return;
 			case SGenPackage.FEATURE_TYPE__PARAMETERS:
 				getParameters().clear();
 				return;
@@ -232,6 +333,10 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case SGenPackage.FEATURE_TYPE__DEPRECATED:
+				return deprecated != DEPRECATED_EDEFAULT;
+			case SGenPackage.FEATURE_TYPE__COMMENT:
+				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case SGenPackage.FEATURE_TYPE__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
 			case SGenPackage.FEATURE_TYPE__LIBRARY:
@@ -248,11 +353,49 @@ public class FeatureTypeImpl extends NamedElementImpl implements FeatureType {
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == DeprecatableElement.class) {
+			switch (derivedFeatureID) {
+				case SGenPackage.FEATURE_TYPE__DEPRECATED: return SGenPackage.DEPRECATABLE_ELEMENT__DEPRECATED;
+				case SGenPackage.FEATURE_TYPE__COMMENT: return SGenPackage.DEPRECATABLE_ELEMENT__COMMENT;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == DeprecatableElement.class) {
+			switch (baseFeatureID) {
+				case SGenPackage.DEPRECATABLE_ELEMENT__DEPRECATED: return SGenPackage.FEATURE_TYPE__DEPRECATED;
+				case SGenPackage.DEPRECATABLE_ELEMENT__COMMENT: return SGenPackage.FEATURE_TYPE__COMMENT;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (optional: ");
+		result.append(" (deprecated: ");
+		result.append(deprecated);
+		result.append(", comment: ");
+		result.append(comment);
+		result.append(", optional: ");
 		result.append(optional);
 		result.append(')');
 		return result.toString();

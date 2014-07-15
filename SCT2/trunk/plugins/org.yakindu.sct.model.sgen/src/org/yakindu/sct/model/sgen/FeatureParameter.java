@@ -26,7 +26,7 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface FeatureParameter extends NamedElement {
+public interface FeatureParameter extends NamedElement, DeprecatableElement {
 	/**
 	 * Returns the value of the '<em><b>Feature Type</b></em>' container reference.
 	 * It is bidirectional and its opposite is '{@link org.yakindu.sct.model.sgen.FeatureType#getParameters <em>Parameters</em>}'.
