@@ -50,9 +50,9 @@ public abstract class AbstractExecutionFlowTest {
 		interpreter.initialize(flow, context);
 	}
 
-	protected int getInteger(String varName) {
+	protected long getInteger(String varName) {
 		ExecutionVariable variable = context().getVariable(varName);
-		return (Integer) variable.getValue();
+		return (Long) variable.getValue();
 	}
 
 	protected boolean getBoolean(String varName) {
@@ -70,8 +70,8 @@ public abstract class AbstractExecutionFlowTest {
 		return (String) variable.getValue();
 	}
 
-	protected int setInteger(String varName, int v) {
-		context().getVariable(varName).setValue((Integer) v);
+	protected long setInteger(String varName, long v) {
+		context().getVariable(varName).setValue((Long) v);
 		return v;
 	}
 
@@ -93,7 +93,8 @@ public abstract class AbstractExecutionFlowTest {
 	// -> Assertion methods...
 	protected void assertVarValue(String variableName, Object value) {
 		ExecutionVariable variable = context().getVariable(variableName);
-		assertNotNull("Variable '" + variableName + "' is not defined", variable);
+		assertNotNull("Variable '" + variableName + "' is not defined",
+				variable);
 		assertEquals(value, variable.getValue());
 	}
 
