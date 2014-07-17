@@ -387,41 +387,57 @@ public class PerformanceTestStatemachine
 			case mr_B_r1_X :
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_X;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mr_B_r1_Y :
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_Y;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mr_B_r1_Z :
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_Z;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mr_B_r1_V :
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mr_B_r1_W :
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_W;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mr_B_r1_S :
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_S;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mr_B_r1_T :
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_T;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mr_B_r1_U :
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_U;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			default :
@@ -451,6 +467,8 @@ public class PerformanceTestStatemachine
 			} else {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_S;
+
+				historyVector[0] = stateVector[0];
 			}
 
 			nextStateIndex = 1;
@@ -479,35 +497,51 @@ public class PerformanceTestStatemachine
 			if (sCInterface.x == 4) {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.x == 5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.mr_B_r1_W;
+
+					historyVector[0] = stateVector[0];
 				} else {
 					if (sCInterface.x == 6) {
 						nextStateIndex = 0;
 						stateVector[0] = State.mr_B_r1_X;
+
+						historyVector[0] = stateVector[0];
 					} else {
 						if (sCInterface.x == 7) {
 							nextStateIndex = 0;
 							stateVector[0] = State.mr_B_r1_Y;
+
+							historyVector[0] = stateVector[0];
 						} else {
 							if (sCInterface.x == 8) {
 								sCInterface.x = 0;
 
 								nextStateIndex = 0;
 								stateVector[0] = State.mr_B_r1_Z;
+
+								historyVector[0] = stateVector[0];
 							} else {
 								if (sCInterface.x == 3) {
 									nextStateIndex = 0;
 									stateVector[0] = State.mr_B_r1_U;
+
+									historyVector[0] = stateVector[0];
 								} else {
 									if (sCInterface.x == 2) {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_T;
+
+										historyVector[0] = stateVector[0];
 									} else {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_S;
+
+										historyVector[0] = stateVector[0];
 									}
 								}
 							}
@@ -539,35 +573,51 @@ public class PerformanceTestStatemachine
 			if (sCInterface.x == 4) {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.x == 5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.mr_B_r1_W;
+
+					historyVector[0] = stateVector[0];
 				} else {
 					if (sCInterface.x == 6) {
 						nextStateIndex = 0;
 						stateVector[0] = State.mr_B_r1_X;
+
+						historyVector[0] = stateVector[0];
 					} else {
 						if (sCInterface.x == 7) {
 							nextStateIndex = 0;
 							stateVector[0] = State.mr_B_r1_Y;
+
+							historyVector[0] = stateVector[0];
 						} else {
 							if (sCInterface.x == 8) {
 								sCInterface.x = 0;
 
 								nextStateIndex = 0;
 								stateVector[0] = State.mr_B_r1_Z;
+
+								historyVector[0] = stateVector[0];
 							} else {
 								if (sCInterface.x == 3) {
 									nextStateIndex = 0;
 									stateVector[0] = State.mr_B_r1_U;
+
+									historyVector[0] = stateVector[0];
 								} else {
 									if (sCInterface.x == 2) {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_T;
+
+										historyVector[0] = stateVector[0];
 									} else {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_S;
+
+										historyVector[0] = stateVector[0];
 									}
 								}
 							}
@@ -599,35 +649,51 @@ public class PerformanceTestStatemachine
 			if (sCInterface.x == 4) {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.x == 5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.mr_B_r1_W;
+
+					historyVector[0] = stateVector[0];
 				} else {
 					if (sCInterface.x == 6) {
 						nextStateIndex = 0;
 						stateVector[0] = State.mr_B_r1_X;
+
+						historyVector[0] = stateVector[0];
 					} else {
 						if (sCInterface.x == 7) {
 							nextStateIndex = 0;
 							stateVector[0] = State.mr_B_r1_Y;
+
+							historyVector[0] = stateVector[0];
 						} else {
 							if (sCInterface.x == 8) {
 								sCInterface.x = 0;
 
 								nextStateIndex = 0;
 								stateVector[0] = State.mr_B_r1_Z;
+
+								historyVector[0] = stateVector[0];
 							} else {
 								if (sCInterface.x == 3) {
 									nextStateIndex = 0;
 									stateVector[0] = State.mr_B_r1_U;
+
+									historyVector[0] = stateVector[0];
 								} else {
 									if (sCInterface.x == 2) {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_T;
+
+										historyVector[0] = stateVector[0];
 									} else {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_S;
+
+										historyVector[0] = stateVector[0];
 									}
 								}
 							}
@@ -659,35 +725,51 @@ public class PerformanceTestStatemachine
 			if (sCInterface.x == 4) {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.x == 5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.mr_B_r1_W;
+
+					historyVector[0] = stateVector[0];
 				} else {
 					if (sCInterface.x == 6) {
 						nextStateIndex = 0;
 						stateVector[0] = State.mr_B_r1_X;
+
+						historyVector[0] = stateVector[0];
 					} else {
 						if (sCInterface.x == 7) {
 							nextStateIndex = 0;
 							stateVector[0] = State.mr_B_r1_Y;
+
+							historyVector[0] = stateVector[0];
 						} else {
 							if (sCInterface.x == 8) {
 								sCInterface.x = 0;
 
 								nextStateIndex = 0;
 								stateVector[0] = State.mr_B_r1_Z;
+
+								historyVector[0] = stateVector[0];
 							} else {
 								if (sCInterface.x == 3) {
 									nextStateIndex = 0;
 									stateVector[0] = State.mr_B_r1_U;
+
+									historyVector[0] = stateVector[0];
 								} else {
 									if (sCInterface.x == 2) {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_T;
+
+										historyVector[0] = stateVector[0];
 									} else {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_S;
+
+										historyVector[0] = stateVector[0];
 									}
 								}
 							}
@@ -719,35 +801,51 @@ public class PerformanceTestStatemachine
 			if (sCInterface.x == 4) {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.x == 5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.mr_B_r1_W;
+
+					historyVector[0] = stateVector[0];
 				} else {
 					if (sCInterface.x == 6) {
 						nextStateIndex = 0;
 						stateVector[0] = State.mr_B_r1_X;
+
+						historyVector[0] = stateVector[0];
 					} else {
 						if (sCInterface.x == 7) {
 							nextStateIndex = 0;
 							stateVector[0] = State.mr_B_r1_Y;
+
+							historyVector[0] = stateVector[0];
 						} else {
 							if (sCInterface.x == 8) {
 								sCInterface.x = 0;
 
 								nextStateIndex = 0;
 								stateVector[0] = State.mr_B_r1_Z;
+
+								historyVector[0] = stateVector[0];
 							} else {
 								if (sCInterface.x == 3) {
 									nextStateIndex = 0;
 									stateVector[0] = State.mr_B_r1_U;
+
+									historyVector[0] = stateVector[0];
 								} else {
 									if (sCInterface.x == 2) {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_T;
+
+										historyVector[0] = stateVector[0];
 									} else {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_S;
+
+										historyVector[0] = stateVector[0];
 									}
 								}
 							}
@@ -779,35 +877,51 @@ public class PerformanceTestStatemachine
 			if (sCInterface.x == 4) {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.x == 5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.mr_B_r1_W;
+
+					historyVector[0] = stateVector[0];
 				} else {
 					if (sCInterface.x == 6) {
 						nextStateIndex = 0;
 						stateVector[0] = State.mr_B_r1_X;
+
+						historyVector[0] = stateVector[0];
 					} else {
 						if (sCInterface.x == 7) {
 							nextStateIndex = 0;
 							stateVector[0] = State.mr_B_r1_Y;
+
+							historyVector[0] = stateVector[0];
 						} else {
 							if (sCInterface.x == 8) {
 								sCInterface.x = 0;
 
 								nextStateIndex = 0;
 								stateVector[0] = State.mr_B_r1_Z;
+
+								historyVector[0] = stateVector[0];
 							} else {
 								if (sCInterface.x == 3) {
 									nextStateIndex = 0;
 									stateVector[0] = State.mr_B_r1_U;
+
+									historyVector[0] = stateVector[0];
 								} else {
 									if (sCInterface.x == 2) {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_T;
+
+										historyVector[0] = stateVector[0];
 									} else {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_S;
+
+										historyVector[0] = stateVector[0];
 									}
 								}
 							}
@@ -817,8 +931,6 @@ public class PerformanceTestStatemachine
 			}
 		} else {
 			if (true && isStateActive(State.mr_B_r2_W) && sCInterface.e3) {
-				historyVector[0] = stateVector[0];
-
 				switch (stateVector[0]) {
 					case mr_B_r1_X :
 						nextStateIndex = 0;
@@ -920,35 +1032,51 @@ public class PerformanceTestStatemachine
 			if (sCInterface.x == 4) {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.x == 5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.mr_B_r1_W;
+
+					historyVector[0] = stateVector[0];
 				} else {
 					if (sCInterface.x == 6) {
 						nextStateIndex = 0;
 						stateVector[0] = State.mr_B_r1_X;
+
+						historyVector[0] = stateVector[0];
 					} else {
 						if (sCInterface.x == 7) {
 							nextStateIndex = 0;
 							stateVector[0] = State.mr_B_r1_Y;
+
+							historyVector[0] = stateVector[0];
 						} else {
 							if (sCInterface.x == 8) {
 								sCInterface.x = 0;
 
 								nextStateIndex = 0;
 								stateVector[0] = State.mr_B_r1_Z;
+
+								historyVector[0] = stateVector[0];
 							} else {
 								if (sCInterface.x == 3) {
 									nextStateIndex = 0;
 									stateVector[0] = State.mr_B_r1_U;
+
+									historyVector[0] = stateVector[0];
 								} else {
 									if (sCInterface.x == 2) {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_T;
+
+										historyVector[0] = stateVector[0];
 									} else {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_S;
+
+										historyVector[0] = stateVector[0];
 									}
 								}
 							}
@@ -980,35 +1108,51 @@ public class PerformanceTestStatemachine
 			if (sCInterface.x == 4) {
 				nextStateIndex = 0;
 				stateVector[0] = State.mr_B_r1_V;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.x == 5) {
 					nextStateIndex = 0;
 					stateVector[0] = State.mr_B_r1_W;
+
+					historyVector[0] = stateVector[0];
 				} else {
 					if (sCInterface.x == 6) {
 						nextStateIndex = 0;
 						stateVector[0] = State.mr_B_r1_X;
+
+						historyVector[0] = stateVector[0];
 					} else {
 						if (sCInterface.x == 7) {
 							nextStateIndex = 0;
 							stateVector[0] = State.mr_B_r1_Y;
+
+							historyVector[0] = stateVector[0];
 						} else {
 							if (sCInterface.x == 8) {
 								sCInterface.x = 0;
 
 								nextStateIndex = 0;
 								stateVector[0] = State.mr_B_r1_Z;
+
+								historyVector[0] = stateVector[0];
 							} else {
 								if (sCInterface.x == 3) {
 									nextStateIndex = 0;
 									stateVector[0] = State.mr_B_r1_U;
+
+									historyVector[0] = stateVector[0];
 								} else {
 									if (sCInterface.x == 2) {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_T;
+
+										historyVector[0] = stateVector[0];
 									} else {
 										nextStateIndex = 0;
 										stateVector[0] = State.mr_B_r1_S;
+
+										historyVector[0] = stateVector[0];
 									}
 								}
 							}
@@ -1082,8 +1226,6 @@ public class PerformanceTestStatemachine
 	/* The reactions of state W. */
 	private void reactMr_B_r2_W() {
 		if (sCInterface.e3 && isStateActive(State.mr_B_r1_S) && true) {
-			historyVector[0] = stateVector[0];
-
 			switch (stateVector[0]) {
 				case mr_B_r1_X :
 					nextStateIndex = 0;

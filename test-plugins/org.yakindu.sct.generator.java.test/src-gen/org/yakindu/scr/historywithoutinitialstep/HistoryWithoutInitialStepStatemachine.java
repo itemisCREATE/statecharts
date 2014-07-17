@@ -149,11 +149,15 @@ public class HistoryWithoutInitialStepStatemachine
 			case main_region_B_r1_C :
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B_r1_C;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case main_region_B_r1_D :
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B_r1_D;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			default :
@@ -169,6 +173,8 @@ public class HistoryWithoutInitialStepStatemachine
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_B_r1_C;
+
+			historyVector[0] = stateVector[0];
 		} else {
 			if (sCInterface.e2) {
 				nextStateIndex = 0;
@@ -185,8 +191,6 @@ public class HistoryWithoutInitialStepStatemachine
 	/* The reactions of state C. */
 	private void reactMain_region_B_r1_C() {
 		if (sCInterface.e1) {
-			historyVector[0] = stateVector[0];
-
 			switch (stateVector[0]) {
 				case main_region_B_r1_C :
 					nextStateIndex = 0;
@@ -211,6 +215,8 @@ public class HistoryWithoutInitialStepStatemachine
 
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B_r1_D;
+
+				historyVector[0] = stateVector[0];
 			}
 		}
 	}
@@ -218,8 +224,6 @@ public class HistoryWithoutInitialStepStatemachine
 	/* The reactions of state D. */
 	private void reactMain_region_B_r1_D() {
 		if (sCInterface.e1) {
-			historyVector[0] = stateVector[0];
-
 			switch (stateVector[0]) {
 				case main_region_B_r1_C :
 					nextStateIndex = 0;
@@ -244,6 +248,8 @@ public class HistoryWithoutInitialStepStatemachine
 
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B_r1_C;
+
+				historyVector[0] = stateVector[0];
 			}
 		}
 	}

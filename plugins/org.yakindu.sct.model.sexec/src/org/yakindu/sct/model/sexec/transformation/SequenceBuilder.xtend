@@ -242,6 +242,13 @@ class SequenceBuilder {
 					}
 				}
 			}
+			
+			// save the history on entering a state 
+			val execRegion = state.parentRegion.create
+			if (execRegion.historyVector != null) {
+				seq.steps += execRegion.newSaveHistory()
+			}
+			
 
 			execState.enterSequences += seq
 		}
@@ -267,10 +274,6 @@ class SequenceBuilder {
 		// process all states of a region
 		for (s : r.vertices)
 			defineStateExitSequence(s)
-
-		if (execRegion.historyVector != null) {
-			seq.steps += execRegion.newSaveHistory()
-		}
 
 		// collect leaf states
 		val Iterable<ExecutionState> leafStates = r.collectLeafStates(new ArrayList<RegularState>()).map(rs|rs.create)

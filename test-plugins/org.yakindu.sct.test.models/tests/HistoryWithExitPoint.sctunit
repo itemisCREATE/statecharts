@@ -1,0 +1,31 @@
+
+testgroup HistoryWithExitPoint for statechart HistoryWithExitPoint {
+	
+	test historyEntryAfterExit {
+		enter
+		
+		assert active ( HistoryWithExitPoint.mr.A.r.X1 )
+		
+		raise push 
+		cycle
+		assert active ( HistoryWithExitPoint.mr.B )
+		
+		raise back
+		cycle
+		assert active ( HistoryWithExitPoint.mr.A.r.X1 )
+		
+		raise next
+		cycle
+		assert active ( HistoryWithExitPoint.mr.A.r.X2 )
+		
+		raise push 
+		cycle
+		assert active ( HistoryWithExitPoint.mr.B )
+		
+		raise back
+		cycle
+		assert active ( HistoryWithExitPoint.mr.A.r.X2 )
+		
+	}
+	
+}

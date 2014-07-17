@@ -252,6 +252,18 @@ GeneratorModel for sctunit::c {
 		}			
 	}
 	
+	test HistoryWithExitPoint{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}		
+				
+		feature JUnitWrapper {
+			WrapToJUnit =  "true" 
+		}			
+	}
+	
 	test HistoryWithoutInitialStep{
 		
 		feature Outlet{ 

@@ -19,6 +19,7 @@ testsuite AllTests {
 	Guard, 
 	GuardedEntry, 
 	GuardedExit, 
+	HistoryWithExitPoint,
 	HistoryWithoutInitialStep,
 	InEventLifeCycle, 
 	IntegerExpressions, 

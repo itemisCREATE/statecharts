@@ -245,6 +245,18 @@ GeneratorModel for yakindu::java {
 		}
 	}
 		
+	statechart HistoryWithExitPoint {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+	
 	statechart HistoryWithoutInitialStep {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"
