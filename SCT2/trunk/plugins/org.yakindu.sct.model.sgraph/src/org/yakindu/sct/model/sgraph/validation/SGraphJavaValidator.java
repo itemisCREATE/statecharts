@@ -16,6 +16,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
@@ -63,7 +64,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_ENTRY_WITH_TRIGGER = "Outgoing Transitions from Entries can not have a Trigger or Guard.";
 	public static final String ISSUE_EXIT_WITH_OUT_TRANS = "Exit node should have no outgoing transition.";
 	public static final String ISSUE_EXIT_WITHOUT_IN_TRANS = "Exit node should have at least one incoming transition";
-	public static final String ISSUE_EXIT_ON_STATECHART = "Exit node in top level region not supported - use final states instaed.";
+	public static final String ISSUE_EXIT_ON_STATECHART = "Exit node in top level region not supported - use final states instead.";
 	public static final String ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION = "A choice must have at least one outgoing transition.";
 	public static final String ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY = "The region can't be entered using the shallow history. Add an entry node.";
 	public static final String ISSUE_SUBMACHINE_UNRESOLVABLE = "Referenced Substatemachine '%s'does not exist!";
@@ -72,6 +73,7 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL = "The source states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The source states of a synchronization have to be contained in the same parent state within different regions!";
 	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions";
+	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing Transitions from Entries can only target to sibling or inner states.";
 
 
 	@Check(CheckType.FAST)
@@ -223,6 +225,22 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
+	@Check(CheckType.FAST)
+	public void initialEntryWithTransitionToContainer(Transition t) {
+		if (t.getSource() instanceof Entry && !isChildOrSibling(t.getSource(), t.getTarget())) {
+			error(ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER, t, null, -1);
+		}
+	}
+	
+	private boolean isChildOrSibling(Vertex source, Vertex target) {
+		TreeIterator<EObject> iter = source.getParentRegion().eAllContents();
+		while (iter.hasNext()) {
+			if (target == iter.next()) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	@Check(CheckType.FAST)
 	public void regionCantBeEnteredUsingShallowHistory(org.yakindu.sct.model.sgraph.State s) {
