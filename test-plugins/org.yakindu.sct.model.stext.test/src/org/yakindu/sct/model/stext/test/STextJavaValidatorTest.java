@@ -30,6 +30,7 @@ import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITI
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT;
 import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT;
+import static org.yakindu.sct.model.stext.validation.STextJavaValidator.EXITPOINTSPEC_WITH_TRIGGER;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.lang.reflect.Method;
@@ -558,6 +559,23 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 			}
 		}
 		assertIssueCount(diagnostics, 4);
+	}
+	
+	@Test
+	public void checkExitPointSpecWithTrigger() {
+		BasicDiagnostic diagnostics = new BasicDiagnostic();
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoTriggerOnTransitionWithExitPointSpec.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics, EXITPOINTSPEC_WITH_TRIGGER);
 	}
 
 	/**
