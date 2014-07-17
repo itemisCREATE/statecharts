@@ -746,7 +746,11 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 					nextStateIndex = 0;
 					stateVector[0] = State.auto_const_switch_case_enum_asm;
+
+					historyVector[1] = stateVector[0];
 				}
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			default :
@@ -812,6 +816,8 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 				nextStateIndex = 0;
 				stateVector[0] = State.auto_const_switch_case_enum_asm;
+
+				historyVector[1] = stateVector[0];
 				break;
 
 			default :
@@ -889,7 +895,11 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 					nextStateIndex = 0;
 					stateVector[0] = State.auto_const_switch_case_enum_asm;
+
+					historyVector[1] = stateVector[0];
 				}
+
+				historyVector[0] = stateVector[0];
 			}
 		}
 	}

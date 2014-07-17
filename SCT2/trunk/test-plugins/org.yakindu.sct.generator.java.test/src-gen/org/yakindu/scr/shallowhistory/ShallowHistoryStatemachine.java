@@ -248,26 +248,36 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 			case mainRegion_State2__region0_State3 :
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State3;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State6 :
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State4__region0_State6;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State4__region0_State6;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State4__region0_State6;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case mainRegion_State2__region0_State5 :
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State5;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			default :
@@ -281,11 +291,15 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State8;
+
+				historyVector[1] = stateVector[0];
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State9;
+
+				historyVector[1] = stateVector[0];
 				break;
 
 			default :
@@ -305,6 +319,8 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 			} else {
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State3;
+
+				historyVector[0] = stateVector[0];
 			}
 		}
 	}
@@ -312,8 +328,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* The reactions of state State3. */
 	private void reactMainRegion_State2_region0_State3() {
 		if (sCInterface.event2) {
-			historyVector[0] = stateVector[0];
-
 			switch (stateVector[0]) {
 				case mainRegion_State2__region0_State3 :
 					nextStateIndex = 0;
@@ -357,6 +371,8 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State4__region0_State6;
+
+				historyVector[0] = stateVector[0];
 			}
 		}
 	}
@@ -364,8 +380,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* The reactions of state State6. */
 	private void reactMainRegion_State2_region0_State4_region0_State6() {
 		if (sCInterface.event2) {
-			historyVector[0] = stateVector[0];
-
 			switch (stateVector[0]) {
 				case mainRegion_State2__region0_State3 :
 					nextStateIndex = 0;
@@ -430,6 +444,8 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State5;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.event5) {
 					nextStateIndex = 0;
@@ -441,6 +457,8 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 					} else {
 						nextStateIndex = 0;
 						stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State8;
+
+						historyVector[1] = stateVector[0];
 					}
 				}
 			}
@@ -450,8 +468,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* The reactions of state State8. */
 	private void reactMainRegion_State2_region0_State4_region0_State7_region0_State8() {
 		if (sCInterface.event2) {
-			historyVector[0] = stateVector[0];
-
 			switch (stateVector[0]) {
 				case mainRegion_State2__region0_State3 :
 					nextStateIndex = 0;
@@ -516,10 +532,10 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State5;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.event6) {
-					historyVector[1] = stateVector[0];
-
 					switch (stateVector[0]) {
 						case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
 							nextStateIndex = 0;
@@ -544,6 +560,8 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 						nextStateIndex = 0;
 						stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State9;
+
+						historyVector[1] = stateVector[0];
 					}
 				}
 			}
@@ -553,8 +571,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* The reactions of state State9. */
 	private void reactMainRegion_State2_region0_State4_region0_State7_region0_State9() {
 		if (sCInterface.event2) {
-			historyVector[0] = stateVector[0];
-
 			switch (stateVector[0]) {
 				case mainRegion_State2__region0_State3 :
 					nextStateIndex = 0;
@@ -619,10 +635,10 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 				nextStateIndex = 0;
 				stateVector[0] = State.mainRegion_State2__region0_State5;
+
+				historyVector[0] = stateVector[0];
 			} else {
 				if (sCInterface.event6) {
-					historyVector[1] = stateVector[0];
-
 					switch (stateVector[0]) {
 						case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
 							nextStateIndex = 0;
@@ -647,6 +663,8 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 						nextStateIndex = 0;
 						stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State8;
+
+						historyVector[1] = stateVector[0];
 					}
 				}
 			}
@@ -656,8 +674,6 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	/* The reactions of state State5. */
 	private void reactMainRegion_State2_region0_State5() {
 		if (sCInterface.event2) {
-			historyVector[0] = stateVector[0];
-
 			switch (stateVector[0]) {
 				case mainRegion_State2__region0_State3 :
 					nextStateIndex = 0;

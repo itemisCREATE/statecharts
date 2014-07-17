@@ -1105,11 +1105,17 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			case goto_void_volatile_transient_throw_false :
 				nextStateIndex = 0;
 				stateVector[0] = State.goto_void_volatile_transient_throw_false;
+
+				historyVector[1] = stateVector[0];
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			case goto_void_volatile_state :
 				nextStateIndex = 0;
 				stateVector[0] = State.goto_void_volatile_state;
+
+				historyVector[0] = stateVector[0];
 				break;
 
 			default :
@@ -1123,6 +1129,8 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			case goto_void_volatile_transient_throw_false :
 				nextStateIndex = 0;
 				stateVector[0] = State.goto_void_volatile_transient_throw_false;
+
+				historyVector[1] = stateVector[0];
 				break;
 
 			default :
@@ -1239,6 +1247,10 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 			nextStateIndex = 0;
 			stateVector[0] = State.goto_void_volatile_transient_throw_false;
+
+			historyVector[1] = stateVector[0];
+
+			historyVector[0] = stateVector[0];
 		} else {
 			if (sCInterface.ev) {
 				nextStateIndex = 0;
@@ -1250,6 +1262,8 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				} else {
 					nextStateIndex = 0;
 					stateVector[0] = State.goto_void_volatile_state;
+
+					historyVector[0] = stateVector[0];
 				}
 			}
 		}
@@ -1271,7 +1285,11 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			} else {
 				nextStateIndex = 0;
 				stateVector[0] = State.goto_void_volatile_transient_throw_false;
+
+				historyVector[1] = stateVector[0];
 			}
+
+			historyVector[0] = stateVector[0];
 		}
 	}
 

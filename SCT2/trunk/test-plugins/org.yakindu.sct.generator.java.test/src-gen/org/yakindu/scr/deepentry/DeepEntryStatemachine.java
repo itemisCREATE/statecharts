@@ -115,6 +115,8 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 			nextStateIndex = 2;
 			stateVector[2] = State.r3_D_r_DA_r_DAA;
+
+			historyVector[3] = stateVector[2];
 		}
 	}
 
@@ -152,8 +154,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			default :
 				break;
 		}
-
-		historyVector[1] = stateVector[2];
 
 		switch (stateVector[2]) {
 			case r3_D_r_DA_r_DAA :
@@ -274,11 +274,15 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 				nextStateIndex = 1;
 				stateVector[1] = State.r2_B_r_BA_r_BAA;
+
+				historyVector[0] = stateVector[1];
 				break;
 
 			case r2_B_r_BB :
 				nextStateIndex = 1;
 				stateVector[1] = State.r2_B_r_BB;
+
+				historyVector[0] = stateVector[1];
 				break;
 
 			default :
@@ -320,6 +324,8 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			case r3_D_r_DA_r_DAA :
 				nextStateIndex = 2;
 				stateVector[2] = State.r3_D_r_DA_r_DAA;
+
+				historyVector[3] = stateVector[2];
 				break;
 
 			default :
@@ -334,8 +340,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* The reactions of state BAA. */
 	private void reactR2_B_r_BA_r_BAA() {
 		if (sCInterface.f) {
-			historyVector[0] = stateVector[1];
-
 			switch (stateVector[1]) {
 				case r2_B_r_BA_r_BAA :
 					nextStateIndex = 1;
@@ -367,6 +371,8 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 				nextStateIndex = 1;
 				stateVector[1] = State.r2_B_r_BB;
+
+				historyVector[0] = stateVector[1];
 			} else {
 			}
 		}
@@ -375,8 +381,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	/* The reactions of state BB. */
 	private void reactR2_B_r_BB() {
 		if (sCInterface.f) {
-			historyVector[0] = stateVector[1];
-
 			switch (stateVector[1]) {
 				case r2_B_r_BA_r_BAA :
 					nextStateIndex = 1;

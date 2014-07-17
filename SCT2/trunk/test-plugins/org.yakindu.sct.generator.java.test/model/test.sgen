@@ -168,6 +168,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
+	test HistoryWithExitPoint {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test HistoryWithoutInitialStep{
 		
 		feature Outlet{ 

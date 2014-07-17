@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::c {
+	statechart HistoryWithExitPoint {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "HistoryWithExitPoint"
+		}
+	}
+}
