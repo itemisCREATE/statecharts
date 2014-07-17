@@ -421,9 +421,19 @@ public class CoreFunction extends Function {
 		return i1 << i2;
 	}
 
+	@FunctionMethod(BIT_LSHIFT)
+	public Long left(Long l1, Long l2) {
+		return l1 << l2;
+	}
+
 	@FunctionMethod(BIT_RSHIFT)
 	public Integer right(Integer i1, Integer i2) {
 		return i1 >> i2;
+	}
+
+	@FunctionMethod(BIT_RSHIFT)
+	public Long right(Long l1, Long l2) {
+		return l1 >> l2;
 	}
 
 	@FunctionMethod(BIT_AND)
@@ -431,9 +441,19 @@ public class CoreFunction extends Function {
 		return i1 & i2;
 	}
 
+	@FunctionMethod(BIT_AND)
+	public Long bitwiseAnd(Long l1, Long l2) {
+		return l1 & l2;
+	}
+
 	@FunctionMethod(BIT_OR)
 	public Integer bitwiseOr(Integer i1, Integer i2) {
 		return i1 | i2;
+	}
+
+	@FunctionMethod(BIT_OR)
+	public Long bitwiseOr(Long l1, Long l2) {
+		return l1 | l2;
 	}
 
 	@FunctionMethod(BIT_XOR)
@@ -455,7 +475,7 @@ public class CoreFunction extends Function {
 	public Boolean equals(EObject e1, EObject e2) {
 		return EcoreUtil.equals(e1, e2);
 	}
-	
+
 	@FunctionMethod(EQUALS)
 	public Boolean equals(Object e1, Object e2) {
 		return Objects.equal(e1, e2);
@@ -535,10 +555,10 @@ public class CoreFunction extends Function {
 	public Boolean notEquals(EObject e1, EObject e2) {
 		return !EcoreUtil.equals(e1, e2);
 	}
-	
+
 	@FunctionMethod(NOT_EQUALS)
 	public Boolean notEquals(Object e1, Object e2) {
-		return ! Objects.equal(e1, e2);
+		return !Objects.equal(e1, e2);
 	}
 
 	@FunctionMethod(NOT_EQUALS)
@@ -884,5 +904,10 @@ public class CoreFunction extends Function {
 	@FunctionMethod(BIT_COMPLEMENT)
 	public Integer complement(Integer i) {
 		return ~i;
+	}
+
+	@FunctionMethod(BIT_COMPLEMENT)
+	public Long complement(Long l) {
+		return ~l;
 	}
 }
