@@ -663,6 +663,22 @@ public class SGraphJavaValidationTest {
 
 		assertIssueCount(diagnostics, 0);
 	}
+	
+	@Test
+	public void initialEntryWithTransitionToContainer() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "EntryTransitionToParentState.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 1);
+		assertError(diagnostics, ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER);
+	}
 
 
 	/**
