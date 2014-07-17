@@ -1,26 +1,26 @@
 package org.yakindu.sct.model.sexec.naming
 
-import javax.inject.Inject
-import org.yakindu.base.base.NamedElement
-import java.util.Map
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import java.util.HashMap
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import java.util.Comparator
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.ExecutionScope
-import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.CompositeElement
-import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.eclipse.emf.ecore.EObject
+import java.util.HashMap
 import java.util.List
+import java.util.Map
+import javax.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.base.NamedElement
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.ExecutionScope
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
+import org.yakindu.sct.model.sgraph.CompositeElement
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Vertex
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 class StepDepthComparator implements Comparator<Step> {
 	@Inject
@@ -334,6 +334,14 @@ class DefaultNamingService implements INamingService {
 			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
 		}
 	}
+	
+	def protected dispatch String elementName(Vertex it, NameShorteningStrategy nameShorteningType) {
+		switch nameShorteningType {
+			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::REMOVE_VOWELS: return name.removeVowels
+			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
+		}
+	}
 
 	def protected dispatch String elementName(ExecutionNode it, NameShorteningStrategy nameShorteningType) {
 		simpleName
@@ -364,7 +372,15 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected asIndexPosition(ExecutionScope it) {
-		superScope.subScopes.indexOf(it).toString;
+		superScope.subScopes.indexOf(it).toString
+	}
+	
+	def protected dispatch asSGraphIndexPosition(Vertex it) {
+		parentRegion.vertices.toList.indexOf(it).toString
+	}
+	
+	def protected dispatch asSGraphIndexPosition(State it) {
+		parentRegion.vertices.filter(typeof(State)).toList.indexOf(it).toString
 	}
 
 	def protected removeVowels(String it) {
