@@ -15,7 +15,7 @@ import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 import static org.yakindu.sct.generator.c.CKeywords.*
 
-class CNamingService extends DefaultNamingService {
+public class CNamingService extends DefaultNamingService {
 	
 	@Inject
 	extension GenmodelEntries
