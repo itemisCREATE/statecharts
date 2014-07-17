@@ -131,7 +131,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::default_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::entry));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::always));
@@ -153,7 +153,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::entry));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::always));
@@ -175,7 +175,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::always));
@@ -197,7 +197,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -219,7 +219,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -241,7 +241,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -263,7 +263,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -285,7 +285,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -307,7 +307,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -329,7 +329,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -351,7 +351,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -373,7 +373,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -395,7 +395,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -417,7 +417,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -439,7 +439,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
@@ -461,7 +461,7 @@ TEST(StatemachineTest, activeCheckWithSTextNamedStates) {
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::local));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::out));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::readonly));
-	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::operation));
+	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::internal_operation));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::else_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::exit_ID));
 	EXPECT_TRUE(statechart->isActive(STextKeywordsInStatesAndRegions::oncycle));
