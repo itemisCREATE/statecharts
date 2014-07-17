@@ -52,7 +52,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntVariableAssignment() {
 		executeWithDefaultScope("intVar = 42");
-		assertEquals(42, getIntValue());
+		assertEquals(42L, getIntValue());
 	}
 
 	@Test
@@ -84,7 +84,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		executeWithDefaultScope("stringVar = 'fortytwo'");
 		assertEquals("fortytwo", getStringValue());
 	}
-	
+
 	@Test
 	public void testStringNullAssignment() {
 		executeWithDefaultScope("stringVar = null");
@@ -94,19 +94,19 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testConditionalTrue() {
 		executeWithDefaultScope("intVar = true ? 42 : 1");
-		assertEquals(42, getIntValue());
+		assertEquals(42L, getIntValue());
 	}
 
 	@Test
 	public void testConditionalFalse() {
 		executeWithDefaultScope("intVar = false ? 42 : 1");
-		assertEquals(1, getIntValue());
+		assertEquals(1L, getIntValue());
 	}
 
 	@Test
 	public void testNestedExpression() {
 		executeWithDefaultScope("intVar = (1 + 1) * 2");
-		assertEquals(4, getIntValue());
+		assertEquals(4L, getIntValue());
 	}
 
 	@Test
@@ -240,9 +240,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntPositive() {
 		executeWithDefaultScope("intVar = + 1");
-		assertEquals(1, getIntValue());
+		assertEquals(1L, getIntValue());
 		executeWithDefaultScope("intVar = +2");
-		assertEquals(2, getIntValue());
+		assertEquals(2L, getIntValue());
 	}
 
 	@Test
@@ -254,9 +254,9 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntNegative() {
 		executeWithDefaultScope("intVar = - 1");
-		assertEquals(-1, getIntValue());
+		assertEquals(-1L, getIntValue());
 		executeWithDefaultScope("intVar = -2");
-		assertEquals(-2, getIntValue());
+		assertEquals(-2L, getIntValue());
 
 	}
 
@@ -269,7 +269,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntPlus() {
 		executeWithDefaultScope("intVar = 42 + 1");
-		assertEquals(43, getIntValue());
+		assertEquals(43L, getIntValue());
 	}
 
 	@Test
@@ -281,7 +281,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntMinus() {
 		executeWithDefaultScope("intVar = 42 - 1");
-		assertEquals(41, getIntValue());
+		assertEquals(41L, getIntValue());
 	}
 
 	@Test
@@ -293,7 +293,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntMultiply() {
 		executeWithDefaultScope("intVar = 42 * 2");
-		assertEquals(84, getIntValue());
+		assertEquals(84L, getIntValue());
 	}
 
 	@Test
@@ -305,7 +305,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntDivide() {
 		executeWithDefaultScope("intVar = 42 / 2");
-		assertEquals(21, getIntValue());
+		assertEquals(21L, getIntValue());
 	}
 
 	@Test
@@ -317,7 +317,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntModulo() {
 		executeWithDefaultScope("intVar = 42 % 2");
-		assertEquals(0, getIntValue());
+		assertEquals(0L, getIntValue());
 	}
 
 	@Test
@@ -329,37 +329,37 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testIntLeft() {
 		executeWithDefaultScope("intVar = 42 << 2");
-		assertEquals(168, getIntValue());
+		assertEquals(168L, getIntValue());
 	}
 
 	@Test
 	public void testIntRight() {
 		executeWithDefaultScope("intVar = 42 >> 2");
-		assertEquals(10, getIntValue());
+		assertEquals(10L, getIntValue());
 	}
 
 	@Test
 	public void testIntAnd() {
 		executeWithDefaultScope("intVar= 9 & 12");
-		assertEquals(8, getIntValue());
+		assertEquals(8L, getIntValue());
 	}
 
 	@Test
 	public void testIntXor() {
 		executeWithDefaultScope("intVar= 9 ^ 12");
-		assertEquals(5, getIntValue());
+		assertEquals(5L, getIntValue());
 	}
 
 	@Test
 	public void testIntOr() {
 		executeWithDefaultScope("intVar= 9 | 12");
-		assertEquals(13, getIntValue());
+		assertEquals(13L, getIntValue());
 	}
 
 	@Test
 	public void testIntBitComplement() {
 		executeWithDefaultScope("intVar= ~9");
-		assertEquals(-10, getIntValue());
+		assertEquals(-10L, getIntValue());
 	}
 
 	@Test
@@ -371,20 +371,20 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testPrirority() {
 		executeWithDefaultScope("intVar = 1 + 2 * 3");
-		assertEquals(7, getIntValue());
+		assertEquals(7L, getIntValue());
 	}
 
 	@Test
 	public void testNested() {
 		executeWithDefaultScope("intVar = (1 + 2) * 3");
-		assertEquals(9, getIntValue());
+		assertEquals(9L, getIntValue());
 	}
 
 	@Test
 	public void testIntPlusAssign() {
 		executeWithDefaultScope("intVar=42");
 		executeWithDefaultScope("intVar+=42");
-		assertEquals(84, getIntValue());
+		assertEquals(84L, getIntValue());
 	}
 
 	@Test
@@ -398,7 +398,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testIntMinusAssign() {
 		executeWithDefaultScope("intVar=42");
 		executeWithDefaultScope("intVar-=10");
-		assertEquals(32, getIntValue());
+		assertEquals(32L, getIntValue());
 	}
 
 	@Test
@@ -412,7 +412,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testIntMultAssign() {
 		executeWithDefaultScope("intVar=42");
 		executeWithDefaultScope("intVar*=1");
-		assertEquals(42, getIntValue());
+		assertEquals(42L, getIntValue());
 	}
 
 	@Test
@@ -426,7 +426,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testIntDivAssign() {
 		executeWithDefaultScope("intVar=42");
 		executeWithDefaultScope("intVar/=1");
-		assertEquals(42, getIntValue());
+		assertEquals(42L, getIntValue());
 	}
 
 	@Test
@@ -440,7 +440,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	public void testIntModAssign() {
 		executeWithDefaultScope("intVar=42");
 		executeWithDefaultScope("intVar%=1");
-		assertEquals(0, getIntValue());
+		assertEquals(0L, getIntValue());
 	}
 
 	@Test
@@ -523,19 +523,22 @@ public class STextInterpreterTest extends AbstractSTextTest {
 
 	protected Object executeWithDefaultScope(String expression) {
 		Scope defaultScope = internalScope();
-		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object execute(String scope, String expression) {
 		Scope defaultScope = createInternalScope(scope);
-		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
 	protected Object executeExpression(String scope, String expression) {
 		Scope defaultScope = createInternalScope(scope);
-		Expression statement = (Expression) parseExpression(expression, defaultScope, Expression.class.getSimpleName());
+		Expression statement = (Expression) parseExpression(expression,
+				defaultScope, Expression.class.getSimpleName());
 		return interpreter.evaluateStatement(statement, context);
 	}
 
