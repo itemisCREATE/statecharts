@@ -537,7 +537,7 @@ p. ==<!-- End sgen_feature_debug -->==
 
 h2(#JavaGeneratorFeatures). Java Generator Features
 
-==<!-- Start sgen_feature_javatargetfeatures -->==
+==<!-- Start sgen_feature_naming -->==
 
 h4. Naming-Feature
 
@@ -554,7 +554,7 @@ feature Naming {
 	basePackage = "org.yakindu.sct"
 	implementationSuffix = "Impl"
 }
-p. ==<!-- End sgen_feature_javatargetfeatures -->==	
+p. ==<!-- End sgen_feature_naming -->==	
 ==<!-- Start sgen_feature_generalfeatures -->==	
 
 h4(#GeneralFeatures). GeneralFeatures
