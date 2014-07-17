@@ -25,5 +25,6 @@ encoding//testmodels/SCTUnit/TimedTransitions.sct=UTF-8
 encoding//testmodels/SCTUnit/TransitionWithoutCondition.sct=UTF-8
 encoding//testmodels/SCTUnit/VariableInitialization.sct=UTF-8
 encoding//testmodels/validation/RegionCantBeEnteredUsingShallowHistory.sct=UTF-8
+encoding//testmodels/validation/ValidTransitionToInnerChoice.sct=UTF-8
 encoding//tests/EntryExitSelfTransition.sctunit=UTF-8
 encoding/<project>=UTF-8

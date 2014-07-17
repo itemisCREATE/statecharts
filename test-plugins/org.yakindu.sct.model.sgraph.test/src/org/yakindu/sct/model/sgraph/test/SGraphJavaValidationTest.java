@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.validation.Check;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -648,6 +647,21 @@ public class SGraphJavaValidationTest {
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY);
+	}
+	
+	@Test
+	public void validTransitionToInnerChoice() {
+		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
+				+ "ValidTransitionToInnerChoice.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof State) {
+				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 0);
 	}
 
 
