@@ -40,6 +40,7 @@ class StatemachineImplementation {
 		«entry.licenseText»
 		
 		#include "«module.h»"
+		#include <string.h>
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		

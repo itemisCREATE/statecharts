@@ -15,8 +15,8 @@
 TEST(StatemachineTest, StringExpressionsTest) {
 	StringExpressions* statechart = new StringExpressions();
 	statechart->init();
-	EXPECT_TRUE(statechart->getSCInterface()->get_quotedStringX().compare("\"X\"") == 0);
-	EXPECT_TRUE(statechart->getSCInterface()->get_quotedStringY().compare("\"Y\"") == 0);
+	EXPECT_TRUE(strcmp(statechart->getSCInterface()->get_quotedStringX(), "\"X\"") == 0);
+	EXPECT_TRUE(strcmp(statechart->getSCInterface()->get_quotedStringY(), "\"Y\"") == 0);
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(StringExpressions::AssignmentChecked));
 	statechart->raise_e();
