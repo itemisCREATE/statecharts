@@ -14,6 +14,7 @@ import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 import static org.yakindu.sct.generator.c.CKeywords.*
+import org.yakindu.sct.model.sgraph.Statechart
 
 public class CNamingService extends DefaultNamingService {
 	
@@ -41,6 +42,39 @@ public class CNamingService extends DefaultNamingService {
 		
 		return super.getShortNameMap(flow)
 	}
+	
+	override void initializeNamingService(Statechart statechart) {
+		if (map == null || activeStatechart != statechart) {
+			activeFlow = null
+			activeStatechart = statechart
+			
+			var Integer lengthSGen			
+			if(entry.identifierLength != null){
+				lengthSGen = entry.identifierLength			
+				super.maxLength =lengthSGen
+			}			
+			
+			map = statechart.createShortNameMap(maxLength, separator)
+		}
+	}
+	
+	
+	override void initializeNamingService(ExecutionFlow flow) {
+		if (map == null || activeFlow != flow) {
+			activeFlow = flow
+			activeStatechart = null
+			
+			var Integer lengthSGen			
+			if(entry.identifierLength != null){
+				lengthSGen = entry.identifierLength			
+				super.maxLength =lengthSGen
+			}	
+			
+			map = flow.createShortNameMap(maxLength, separator)
+		}
+	}
+	
+	
 	
 	override protected prefix(Step it, char separator) {
 		var prefix = flow.name.toFirstLower

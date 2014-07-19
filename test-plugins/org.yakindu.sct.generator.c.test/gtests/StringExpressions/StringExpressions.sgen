@@ -4,5 +4,11 @@ GeneratorModel for yakindu::c {
 			targetProject = "gtests"
 			targetFolder = "StringExpressions"
 		}
+		feature IdentifierSettings {
+			moduleName =  "StringExpressions" 
+			statemachinePrefix =  "stringExpressions" 
+			maxIdentifierLength = 254
+			separator =  "_" 
+		}
 	}
 }
