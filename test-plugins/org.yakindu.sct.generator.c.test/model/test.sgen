@@ -526,7 +526,14 @@ GeneratorModel for sctunit::c {
 				
 		feature JUnitWrapper {
 			WrapToJUnit =  "true" 
-		}			
+		}
+
+		feature IdentifierSettings {
+			moduleName =  "StringExpressions" 
+			statemachinePrefix =  "stringExpressions" 
+			maxIdentifierLength = 254
+			separator =  "_" 
+		}		
 	}
 	
 	test SyncFork{
