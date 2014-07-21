@@ -529,8 +529,6 @@ GeneratorModel for sctunit::c {
 		}
 
 		feature IdentifierSettings {
-			moduleName =  "StringExpressions" 
-			statemachinePrefix =  "stringExpressions" 
 			maxIdentifierLength = 254
 			separator =  "_" 
 		}		

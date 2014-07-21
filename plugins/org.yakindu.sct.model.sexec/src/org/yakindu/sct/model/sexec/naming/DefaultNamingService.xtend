@@ -335,13 +335,13 @@ class DefaultNamingService implements INamingService {
 		}
 	}
 
-//	def protected dispatch String elementName(Vertex it, NameShorteningStrategy nameShorteningType) {
-//		switch nameShorteningType {
-//			case NameShorteningStrategy::STANDARD: return name
-//			case NameShorteningStrategy::REMOVE_VOWELS: return name.removeVowels
-//			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
-//		}
-//	}
+	def protected dispatch String elementName(Vertex it, NameShorteningStrategy nameShorteningType) {
+		switch nameShorteningType {
+			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::REMOVE_VOWELS: return name.removeVowels
+			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
+		}
+	}
 
 	def protected dispatch String elementName(ExecutionNode it, NameShorteningStrategy nameShorteningType) {
 		simpleName
@@ -375,13 +375,13 @@ class DefaultNamingService implements INamingService {
 		superScope.subScopes.indexOf(it).toString;
 	}
 	
-//	def protected dispatch asSGraphIndexPosition(Vertex it) {
-//		parentRegion.vertices.toList.indexOf(it).toString
-//	}
-//	
-//	def protected dispatch asSGraphIndexPosition(State it) {
-//		parentRegion.vertices.filter(typeof(State)).toList.indexOf(it).toString
-//	}
+	def protected dispatch asSGraphIndexPosition(Vertex it) {
+		parentRegion.vertices.toList.indexOf(it).toString
+	}
+	
+	def protected dispatch asSGraphIndexPosition(State it) {
+		parentRegion.vertices.filter(typeof(State)).toList.indexOf(it).toString
+	}
 
 	def protected removeVowels(String it) {
 		replaceAll('[aeiou]', '')
