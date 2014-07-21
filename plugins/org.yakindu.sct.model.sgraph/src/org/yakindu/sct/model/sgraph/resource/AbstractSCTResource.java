@@ -127,13 +127,13 @@ public abstract class AbstractSCTResource extends GMFResource {
 	}
 
 	@Override
-	public void attached(EObject eObject) {
-		super.attached(eObject);
+	protected void attachedHelper(EObject eObject) {
+		super.attachedHelper(eObject);
 		if (eObject instanceof SpecificationElement) {
-			parseSpecificationElement((SpecificationElement) eObject);
-			linkSpecificationElement((SpecificationElement) eObject);
 			Adapter parseAdapter = EcoreUtil.getExistingAdapter(eObject, ParseAdapter.class);
 			if (parseAdapter == null) {
+				parseSpecificationElement((SpecificationElement) eObject);
+				linkSpecificationElement((SpecificationElement) eObject);
 				eObject.eAdapters().add(new ParseAdapter());
 			}
 			Adapter serializeAdapter = EcoreUtil.getExistingAdapter(eObject, SerializeAdapter.class);
@@ -145,6 +145,12 @@ public abstract class AbstractSCTResource extends GMFResource {
 
 	@Override
 	public void detached(EObject eObject) {
+		super.detached(eObject);
+		DETACHED_EOBJECT_TO_ID_MAP.clear();
+	}
+
+	@Override
+	protected void detachedHelper(EObject eObject) {
 		if (eObject instanceof SpecificationElement) {
 			Adapter parseAdapter = EcoreUtil.getExistingAdapter(eObject, ParseAdapter.class);
 			if (parseAdapter != null) {
@@ -155,8 +161,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 				eObject.eAdapters().remove(serializeAdapter);
 			}
 		}
-		super.detached(eObject);
-		DETACHED_EOBJECT_TO_ID_MAP.clear();
+		super.detachedHelper(eObject);
 	}
 
 	@Override
