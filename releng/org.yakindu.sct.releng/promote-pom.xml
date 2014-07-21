@@ -331,23 +331,6 @@
 				<artifactId>tycho-eclipserun-plugin</artifactId>
 				<version>${tycho.extras.version}</version>
 				<executions>
-					<!-- Add execution per 'target architecture' 
-					<execution>
-						<id>install-features-into-distro-macosx-cocoa-x86_64</id>
-						<phase>package</phase>
-						<goals>
-							<goal>eclipse-run</goal>
-						</goals>
-						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application\
-								org.eclipse.equinox.p2.director -destination \
-								${distro.work.dir}/macosx-cocoa-x86_64/eclipse/ -profile \
-								${profile} -p2.os macosx -p2.ws cocoa -p2.arch x86_64 \
-								-repository ${update.sites} -installIUs ${features}
-							</appArgLine>
-						</configuration>
-					</execution>-->
 					<execution>
 						<id>install-features-into-distro-win32-win-32-x86</id>
 						<phase>package</phase>
@@ -355,14 +338,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application \
-								org.eclipse.equinox.p2.director -destination \
-								${distro.work.dir}/win32-win32-x86/eclipse/ \
-								-profile\
-								${profile}\
-								-p2.os win32 -p2.ws win32 -p2.arch x86 -repository \
-								${update.sites} -installIUs ${features}
+							<appArgLine>-consoleLog -clean -nosplash -debug -application org.eclipse.equinox.p2.director -destination ${distro.work.dir}/win32-win32-x86/eclipse/ -profile\ ${profile} -p2.os win32 -p2.ws win32 -p2.arch x86 -repository ${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -373,13 +349,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application \
-								org.eclipse.equinox.p2.director -destination \
-								${distro.work.dir}/win32-win32-x86_64/eclipse/ -profile \
-								${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 \
-								-repository \
-								${update.sites} -installIUs ${features}
+							<appArgLine>-consoleLog -clean -nosplash -debug -application org.eclipse.equinox.p2.director -destination ${distro.work.dir}/win32-win32-x86_64/eclipse/ -profile ${profile} -p2.os win32 -p2.ws win32 -p2.arch x86_64 -repository ${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -390,14 +360,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application \
-								org.eclipse.equinox.p2.director -destination \
-								${distro.work.dir}/linux-gtk-x86/eclipse/ -profile \
-								${profile} \
-								-p2.os linux -p2.ws gtk -p2.arch x86 \
-								-repository \
-								${update.sites} -installIUs ${features}
+							<appArgLine>-consoleLog -clean -nosplash -debug -application org.eclipse.equinox.p2.director -destination ${distro.work.dir}/linux-gtk-x86/eclipse/ -profile ${profile} -p2.os linux -p2.ws gtk -p2.arch x86 -repository ${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
@@ -408,13 +371,7 @@
 							<goal>eclipse-run</goal>
 						</goals>
 						<configuration>
-							<appArgLine>-consoleLog -clean -nosplash -debug \
-								-application \
-								org.eclipse.equinox.p2.director -destination \
-								${distro.work.dir}/linux-gtk-x86_64/eclipse/ -profile \
-								${profile} -p2.os linux -p2.ws gtk -p2.arch x86_64 \
-								-repository \
-								${update.sites} -installIUs ${features}
+							<appArgLine>-consoleLog -clean -nosplash -debug -application org.eclipse.equinox.p2.director -destination ${distro.work.dir}/linux-gtk-x86_64/eclipse/ -profile ${profile} -p2.os linux -p2.ws gtk -p2.arch x86_64 -repository ${update.sites} -installIUs ${features}
 							</appArgLine>
 						</configuration>
 					</execution>
