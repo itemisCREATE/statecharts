@@ -427,6 +427,14 @@
 								<artifactId>org.eclipse.equinox.ds</artifactId>
 								<type>eclipse-plugin</type>
 							</dependency>
+				      <dependency>
+					       <type>eclipse-plugin</type>
+					       <artifactId>org.eclipse.osgi.compatibility.state</artifactId>
+				      </dependency>
+				      <dependency>
+					       <type>eclipse-feature</type>
+					       <artifactId>org.eclipse.e4.rcp</artifactId>
+				      </dependency>
 						</dependencies>
 					</configuration>
 				</plugin>
