@@ -31,6 +31,30 @@ public class CNamingService extends DefaultNamingService {
 		this.entry = entry
 	}
 	
+	override void initializeNamingService(Statechart statechart) {
+		if (entry.identifierLength != null) {
+			maxLength = entry.identifierLength
+		}
+		
+		if (entry.separator != null) {
+			separator = entry.separator.charAt(0)
+		}
+		
+		super.initializeNamingService(statechart)
+	}
+	
+	override void initializeNamingService(ExecutionFlow flow) {
+		if (entry.identifierLength != null) {
+			maxLength = entry.identifierLength
+		}
+		
+		if (entry.separator != null) {
+			separator = entry.separator.charAt(0)
+		}
+		
+		super.initializeNamingService(flow)
+	}
+	
 	override Map<NamedElement, String> getShortNameMap(ExecutionFlow flow) {
 		if (entry.identifierLength != null) {
 			maxLength = entry.identifierLength
@@ -43,38 +67,17 @@ public class CNamingService extends DefaultNamingService {
 		return super.getShortNameMap(flow)
 	}
 	
-	override void initializeNamingService(Statechart statechart) {
-		if (map == null || activeStatechart != statechart) {
-			activeFlow = null
-			activeStatechart = statechart
-			
-			var Integer lengthSGen			
-			if(entry.identifierLength != null){
-				lengthSGen = entry.identifierLength			
-				super.maxLength =lengthSGen
-			}			
-			
-			map = statechart.createShortNameMap(maxLength, separator)
+	override Map<NamedElement, String> getShortNameMap(Statechart statechart) {
+		if (entry.identifierLength != null) {
+			maxLength = entry.identifierLength
 		}
-	}
-	
-	
-	override void initializeNamingService(ExecutionFlow flow) {
-		if (map == null || activeFlow != flow) {
-			activeFlow = flow
-			activeStatechart = null
-			
-			var Integer lengthSGen			
-			if(entry.identifierLength != null){
-				lengthSGen = entry.identifierLength			
-				super.maxLength =lengthSGen
-			}	
-			
-			map = flow.createShortNameMap(maxLength, separator)
+		
+		if (entry.separator != null) {
+			separator = entry.separator.charAt(0)
 		}
+		
+		return super.getShortNameMap(statechart)
 	}
-	
-	
 	
 	override protected prefix(Step it, char separator) {
 		var prefix = flow.name.toFirstLower

@@ -5,8 +5,6 @@ GeneratorModel for yakindu::c {
 			targetFolder = "StringExpressions"
 		}
 		feature IdentifierSettings {
-			moduleName =  "StringExpressions" 
-			statemachinePrefix =  "stringExpressions" 
 			maxIdentifierLength = 254
 			separator =  "_" 
 		}
