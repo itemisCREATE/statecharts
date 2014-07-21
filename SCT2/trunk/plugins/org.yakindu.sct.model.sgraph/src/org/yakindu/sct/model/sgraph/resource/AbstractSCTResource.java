@@ -156,6 +156,7 @@ public abstract class AbstractSCTResource extends GMFResource {
 			}
 		}
 		super.detached(eObject);
+		DETACHED_EOBJECT_TO_ID_MAP.clear();
 	}
 
 	@Override
