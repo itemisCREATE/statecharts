@@ -61,26 +61,45 @@ public class SGenWizardPage2ContentProvider implements ITreeContentProvider {
 	public boolean containsFile(IFolder folder) throws CoreException {
 		if (folder.members() != null) {
 			for (Object member : folder.members()) {
-				if (member instanceof IFile && ((IFile) member).getFileExtension().equals(fileExtension)) {
+
+				// No file extension check
+				if (member instanceof IFile && hasFileExtension((IFile) member)) {
+					return false;
+				}
+				// check if file extension is proper
+				else if (member instanceof IFile
+						&& ((IFile) member).getFileExtension().equals(
+								fileExtension)) {
 					return true;
 				} else if (member instanceof IFolder) {
 					return containsFile((IFolder) member);
+
 				}
 			}
 		}
 		return false;
 	}
 
-	public Object[] filterForContent(Object[] inputElements) throws CoreException {
+	public Object[] filterForContent(Object[] inputElements)
+			throws CoreException {
 		final Set<Object> result = new HashSet<Object>();
 		for (final Object obj : inputElements) {
 			((IResource) obj).accept(new IResourceVisitor() {
 				public boolean visit(IResource resource) throws CoreException {
-					if (resource instanceof IFile && resource.getFileExtension().equals(fileExtension)) {
+					// no file extension check
+					if (resource instanceof IFile
+							&& hasFileExtension((IFile) resource)) {
+						return false;
+					}
+					// check if file extension is proper
+					else if (resource instanceof IFile
+							&& resource.getFileExtension()
+									.equals(fileExtension)) {
 						if (!containsErrors(resource))
 							result.add(obj);
 						return true;
-					} else if (resource instanceof IFolder && containsFile((IFolder) resource)) {
+					} else if (resource instanceof IFolder
+							&& containsFile((IFolder) resource)) {
 						result.add(obj);
 						return true;
 					}
@@ -94,7 +113,8 @@ public class SGenWizardPage2ContentProvider implements ITreeContentProvider {
 	public boolean containsErrors(IResource resource) {
 		int maxSeverity;
 		try {
-			maxSeverity = resource.findMaxProblemSeverity(IMarker.PROBLEM, true, IResource.DEPTH_INFINITE);
+			maxSeverity = resource.findMaxProblemSeverity(IMarker.PROBLEM,
+					true, IResource.DEPTH_INFINITE);
 			return maxSeverity == IMarker.SEVERITY_ERROR;
 		} catch (CoreException e) {
 			return true;
@@ -119,5 +139,9 @@ public class SGenWizardPage2ContentProvider implements ITreeContentProvider {
 
 	public void setFileExtension(String fileExtension) {
 		this.fileExtension = fileExtension;
+	}
+
+	public boolean hasFileExtension(IFile res) {
+		return (res.getFileExtension() == null);
 	}
 }
