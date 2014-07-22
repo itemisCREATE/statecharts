@@ -362,8 +362,8 @@ class SequenceBuilder {
 				[cs, exitScope|
 					{
 						if (exitScope instanceof ExecutionRegion && (exitScope as ExecutionRegion).historyVector != null) {
-							val execRegion = exitScope as ExecutionRegion
-							cs.steps += execRegion.newSaveHistory
+							// val execRegion = exitScope as ExecutionRegion
+							// cs.steps += execRegion.newSaveHistory
 						}
 						cs
 					}])

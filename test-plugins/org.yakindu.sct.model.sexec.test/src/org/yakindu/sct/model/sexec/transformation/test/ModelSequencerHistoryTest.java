@@ -92,22 +92,28 @@ public class ModelSequencerHistoryTest extends ModelSequencerTest {
 		HistoryEntry historyStep = (HistoryEntry) reactSequence_history
 				.getSteps().get(0);
 		assertFalse(historyStep.isDeep());
-		assertCall(((Sequence) historyStep.getInitialStep()).getSteps().get(0), _s3.getEnterSequences().get(0));
+		assertCall(((Sequence) historyStep.getInitialStep()).getSteps().get(0),
+				_s3.getEnterSequences().get(0));
 		Reaction reaction_history = _t1.get(0);
 		assertCall(assertedSequence(reaction_history.getEffect()), 1,
 				reactSequence_history);
 
 		Sequence reactSequence_initial = flow.getNodes().get(2)
 				.getReactSequence();
-		assertCall(((Sequence) reactSequence_initial.getSteps().get(0)), 0, _s4.getEnterSequences().get(0));
+		assertCall(((Sequence) reactSequence_initial.getSteps().get(0)), 0, _s4
+				.getEnterSequences().get(0));
 		Reaction reaction = _t1.get(1);
-		assertCall(assertedSequence(reaction.getEffect()), 1,
-				_s2.getEnterSequences().get(0));
+		assertCall(assertedSequence(reaction.getEffect()), 1, _s2
+				.getEnterSequences().get(0));
 
 		assertCall(_s3.getSuperScope().getEnterSequences().get(0), 0,
 				r2_history_entry.getReactSequence());
 
-		Step saveStep = _s3.getSuperScope().getExitSequence().getSteps().get(0);
+		Step saveStep = _s3.getEnterSequences().get(0).getSteps().get(1);
+		assertTrue(saveStep.eClass().toString(),
+				saveStep instanceof SaveHistory);
+
+		saveStep = _s4.getEnterSequences().get(0).getSteps().get(1);
 		assertTrue(saveStep.eClass().toString(),
 				saveStep instanceof SaveHistory);
 	}
@@ -164,20 +170,30 @@ public class ModelSequencerHistoryTest extends ModelSequencerTest {
 		assertEquals("sc.r.s1", _s1.getName());
 		ExecutionState _s2 = flow.getStates().get(1);
 		assertEquals("sc.r.s2", _s2.getName());
+		ExecutionState _s3 = flow.getStates().get(2);
+		assertEquals("sc.r.s2.r2.s3", _s3.getName());
 		ExecutionState _s4 = flow.getStates().get(3);
 		assertEquals("sc.r.s2.r2.s4", _s4.getName());
 		ExecutionState _s5 = flow.getStates().get(4);
 		assertEquals("sc.r.s2.r2.s4.r4.s5", _s5.getName());
 
+		// get the transition effect from s5 to s1
 		Step effect = _s5.getReactions().get(0).getEffect();
 
 		assertedOrder(effect, Lists.newArrayList(_s5), Lists.newArrayList(
-		//
-		// new StepSaveHistory((ExecutionRegion) _s2.getSuperScope()),//
-				new StepSaveHistory((ExecutionRegion) _s4.getSuperScope()),//
-				new StepSaveHistory((ExecutionRegion) _s5.getSuperScope()),//
-				new StepLeaf(_s5.getExitSequence().getSteps().get(0)),//
-				new StepLeaf(_s1.getEnterSequences().get(0).getSteps().get(0))//
+				// new StepSaveHistory((ExecutionRegion) _s5.getSuperScope()),
+				new StepLeaf(_s5.getExitSequence().getSteps().get(0)),
+				new StepLeaf(_s1.getEnterSequences().get(0).getSteps().get(0)),
+				new StepSaveHistory((ExecutionRegion) _s1.getSuperScope())));
+
+		// get the transition effect from s3 to s4(s5)
+		effect = _s3.getReactions().get(0).getEffect();
+
+		assertedOrder(effect, Lists.newArrayList(_s5), Lists.newArrayList(
+				new StepLeaf(_s3.getExitSequence().getSteps().get(0)),
+				new StepSaveHistory((ExecutionRegion) _s4.getSuperScope())
+		// , new StepLeaf(_s5.getEnterSequences().get(0).getSteps().get(0))
+		// , new StepSaveHistory((ExecutionRegion) _s5.getSuperScope())
 				));
 	}
 
