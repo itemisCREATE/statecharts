@@ -242,13 +242,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.compare"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.sct.simulation.core.sexec"
          download-size="0"
          install-size="0"
@@ -257,6 +250,13 @@
 
    <plugin
          id="org.yakindu.sct.simulation.ui.sexec"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.ui.intro"
          download-size="0"
          install-size="0"
          version="0.0.0"
