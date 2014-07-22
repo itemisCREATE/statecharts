@@ -87,7 +87,7 @@ public class Assert {
 				currentValue = Boolean.toString(((BoolLiteral) literal)
 						.isValue());
 			} else if (literal instanceof IntLiteral) {
-				currentValue = Integer.toString(((IntLiteral) literal)
+				currentValue = Long.toString(((IntLiteral) literal)
 						.getValue());
 			}
 			else if (literal instanceof RealLiteral) {
