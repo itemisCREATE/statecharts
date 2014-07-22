@@ -11,6 +11,7 @@
 package org.yakindu.sct.generator.java;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.JavaCore;
 import org.yakindu.sct.generator.core.features.ICoreFeatureConstants;
@@ -48,6 +49,8 @@ abstract public class AbstractJavaCodeGenerator extends GenericJavaBasedGenerato
 	}
 
 	public boolean hasJavaNature(IProject project) {
+		Assert.isNotNull(project);
+		Assert.isTrue(project.exists());
 		try {
 			String[] natures = project.getDescription().getNatureIds();
 			for (String s : natures) {
