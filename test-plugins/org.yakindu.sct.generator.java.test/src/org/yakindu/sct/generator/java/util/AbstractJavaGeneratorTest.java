@@ -55,8 +55,8 @@ public abstract class AbstractJavaGeneratorTest {
 				IncrementalProjectBuilder.INCREMENTAL_BUILD, null);
 		targetProject = GeneratorUtils.getTargetProject(entry);
 		if (!targetProject.exists()) {
-			throw new IllegalStateException("Target Project "
-					+ targetProject.getName() + " does not exist!");
+			targetProject.create(new NullProgressMonitor());
+			targetProject.open(new NullProgressMonitor());
 		}
 		targetProject.build(IncrementalProjectBuilder.INCREMENTAL_BUILD,
 				new NullProgressMonitor());
