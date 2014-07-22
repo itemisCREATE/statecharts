@@ -282,7 +282,11 @@ class DefaultNamingService implements INamingService {
 		NameShorteningStrategy nameShorteningType, char separator) {
 
 		var name = element.elementName(nameShorteningType)
-
+		
+		if (name.nullOrEmpty) {
+			name = element.class.simpleName
+		}
+		
 		if (!suffix.nullOrEmpty) {
 			if (!name.nullOrEmpty) {
 				name = name + separator + suffix
@@ -322,7 +326,7 @@ class DefaultNamingService implements INamingService {
 	def protected dispatch String elementName(ExecutionScope it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
 			case NameShorteningStrategy::STANDARD: return name
-			case NameShorteningStrategy::REMOVE_VOWELS: return name.removeVowels
+			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
 		}
 	}
@@ -338,7 +342,7 @@ class DefaultNamingService implements INamingService {
 	def protected dispatch String elementName(Vertex it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
 			case NameShorteningStrategy::STANDARD: return name
-			case NameShorteningStrategy::REMOVE_VOWELS: return name.removeVowels
+			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
 		}
 	}
@@ -356,14 +360,10 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected dispatch String elementName(NamedElement it, NameShorteningStrategy nameShorteningType) {
-		var ret = name
-		if (ret.nullOrEmpty) {
-			ret = it.class.simpleName
-		}
 		switch nameShorteningType {
-			case NameShorteningStrategy::STANDARD: return ret
-			case NameShorteningStrategy::REMOVE_VOWELS: return ret.removeVowels
-			case NameShorteningStrategy::INDEX_POSITION: return ret.removeVowels
+			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
+			case NameShorteningStrategy::INDEX_POSITION: return name?.removeVowels
 		}
 	}
 
