@@ -21,8 +21,8 @@ import org.yakindu.sct.model.sexec.ExecutionRegion;
 import org.yakindu.sct.model.sexec.ExecutionState;
 import org.yakindu.sct.model.sexec.HistoryEntry;
 import org.yakindu.sct.model.sexec.Reaction;
-import org.yakindu.sct.model.sexec.SaveHistory;
 import org.yakindu.sct.model.sexec.Sequence;
+import org.yakindu.sct.model.sexec.StateSwitch;
 import org.yakindu.sct.model.sexec.Step;
 import org.yakindu.sct.model.sexec.transformation.test.SCTTestUtil.SimpleFlatTSC;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -99,7 +99,7 @@ public class HistoryTest extends ModelSequencerTest {
 		Reaction regionLeave = _s5.getReactions().get(0);
 		Sequence sequence = assertedSequence(regionLeave.getEffect());
 		assertCall(sequence, 0, _s2.getExitSequence());
-		assertClass(SaveHistory.class, _s3.getSuperScope().getExitSequence()
+		assertClass(StateSwitch.class, _s3.getSuperScope().getExitSequence()
 				.getSteps().get(0));
 
 	}
@@ -329,7 +329,8 @@ public class HistoryTest extends ModelSequencerTest {
 
 		HistoryEntry historyEntry = (HistoryEntry) historyEntryStep;
 		Sequence initialStep = (Sequence) historyEntry.getInitialStep();
-		assertCall(initialStep.getSteps().get(0), _s3.getEnterSequences().get(0));
+		assertCall(initialStep.getSteps().get(0), _s3.getEnterSequences()
+				.get(0));
 		ExecutionRegion _r2 = (ExecutionRegion) _s3.getSuperScope();
 		assertCall(historyEntry.getHistoryStep(), _r2.getDeepEnterSequence());
 
