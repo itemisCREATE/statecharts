@@ -468,15 +468,9 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 				+ "TransitionExitSpecNotComposite.sct");
 		iter = statechart.eAllContents();
 
-		// create and add triggers to all transitions to prevent to trigger
-		// additional warnings
-		// (see Check in SGrapJavaValidator transitionsWithNoGuard)
-		Trigger trigger = StextFactoryImpl.init().createDefaultTrigger();
-
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				((Transition) element).setTrigger(trigger);
 				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
 			}
 		}
@@ -492,7 +486,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				((Transition) element).setTrigger(trigger);
 				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
 			}
 		}
@@ -508,7 +501,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				((Transition) element).setTrigger(trigger);
 				validator.validate(element, diagnostics, new HashMap<Object, Object>());
 			}
 		}

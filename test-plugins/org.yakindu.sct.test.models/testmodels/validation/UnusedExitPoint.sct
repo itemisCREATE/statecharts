@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_KY5PIK10EeKDu_-BQi0Wmg" name="UnusedExitPoint">
+  <sgraph:Statechart xmi:id="_KY5PIK10EeKDu_-BQi0Wmg" specification="internal:&#xA;event e1&#xA;event e2" name="UnusedExitPoint">
     <regions xmi:id="_KY6dQq10EeKDu_-BQi0Wmg" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_KY_Vwa10EeKDu_-BQi0Wmg">
         <outgoingTransitions xmi:id="_KZByA610EeKDu_-BQi0Wmg" target="_KY_81a10EeKDu_-BQi0Wmg"/>
@@ -12,13 +12,13 @@
             <outgoingTransitions xmi:id="_WI7bwK2BEeK1webgUiVXVA" specification="" target="_U9Y1sK2BEeK1webgUiVXVA"/>
           </vertices>
           <vertices xsi:type="sgraph:State" xmi:id="_U9Y1sK2BEeK1webgUiVXVA" name="A" incomingTransitions="_WI7bwK2BEeK1webgUiVXVA">
-            <outgoingTransitions xmi:id="_jPrW4LCzEeKkd8C7aZWapg" specification="" target="_i044ULCzEeKkd8C7aZWapg"/>
+            <outgoingTransitions xmi:id="_jPrW4LCzEeKkd8C7aZWapg" specification="e1" target="_i044ULCzEeKkd8C7aZWapg"/>
           </vertices>
           <vertices xsi:type="sgraph:Exit" xmi:id="_i044ULCzEeKkd8C7aZWapg" name="exitA" incomingTransitions="_jPrW4LCzEeKkd8C7aZWapg"/>
         </regions>
         <regions xmi:id="_Oh0MUK10EeKDu_-BQi0Wmg">
           <vertices xsi:type="sgraph:State" xmi:id="_yQy0cK14EeKDu_-BQi0Wmg" name="B" incomingTransitions="_l-xdoK2CEeK1webgUiVXVA">
-            <outgoingTransitions xmi:id="_GvjWoK2EEeK6f61rDSOHrA" specification="" target="_GCA7MK2EEeK6f61rDSOHrA"/>
+            <outgoingTransitions xmi:id="_GvjWoK2EEeK6f61rDSOHrA" specification="e2" target="_GCA7MK2EEeK6f61rDSOHrA"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_lhmZcK2CEeK1webgUiVXVA">
             <outgoingTransitions xmi:id="_l-xdoK2CEeK1webgUiVXVA" specification="" target="_yQy0cK14EeKDu_-BQi0Wmg"/>

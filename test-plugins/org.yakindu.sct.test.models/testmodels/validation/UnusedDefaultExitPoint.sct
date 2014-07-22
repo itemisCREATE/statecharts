@@ -9,7 +9,7 @@
         <outgoingTransitions xmi:id="_Sb04IKziEeK3BbA-xenOSw" specification="# exit1 > exit2 >" target="_ME3wcKwOEeKDK5u47htxww"/>
         <regions xmi:id="_Ixvy0KwOEeKDK5u47htxww">
           <vertices xsi:type="sgraph:State" xmi:id="_3okGgKwcEeKcBsi8YLfGGg" name="A" incomingTransitions="_6Bj-MKwcEeKcBsi8YLfGGg">
-            <outgoingTransitions xmi:id="_bYaYoKziEeK3BbA-xenOSw" specification="" target="_adr1wKziEeK3BbA-xenOSw"/>
+            <outgoingTransitions xmi:id="_bYaYoKziEeK3BbA-xenOSw" specification="oncycle" target="_adr1wKziEeK3BbA-xenOSw"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_5dlHYKwcEeKcBsi8YLfGGg">
             <outgoingTransitions xmi:id="_6Bj-MKwcEeKcBsi8YLfGGg" specification="" target="_3okGgKwcEeKcBsi8YLfGGg"/>
@@ -18,7 +18,7 @@
         </regions>
         <regions xmi:id="_JE2VAKwOEeKDK5u47htxww">
           <vertices xsi:type="sgraph:State" xmi:id="_RtFC8Ky6EeKrnKvtzsUbpw" name="B" incomingTransitions="_SnpNwKy6EeKrnKvtzsUbpw">
-            <outgoingTransitions xmi:id="_fINEIKziEeK3BbA-xenOSw" specification="" target="_de_qoKziEeK3BbA-xenOSw"/>
+            <outgoingTransitions xmi:id="_fINEIKziEeK3BbA-xenOSw" specification="oncycle" target="_de_qoKziEeK3BbA-xenOSw"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_SPZF0Ky6EeKrnKvtzsUbpw" name="">
             <outgoingTransitions xmi:id="_SnpNwKy6EeKrnKvtzsUbpw" specification="" target="_RtFC8Ky6EeKrnKvtzsUbpw"/>
@@ -27,7 +27,7 @@
         </regions>
         <regions xmi:id="_qYhFIKy-EeKDTYVyKywyGw">
           <vertices xsi:type="sgraph:State" xmi:id="_tc600Ky_EeKDTYVyKywyGw" name="C" incomingTransitions="_v0lPwKy_EeKDTYVyKywyGw">
-            <outgoingTransitions xmi:id="_fpFjoKziEeK3BbA-xenOSw" specification="" target="_eK7jkKziEeK3BbA-xenOSw"/>
+            <outgoingTransitions xmi:id="_fpFjoKziEeK3BbA-xenOSw" specification="oncycle" target="_eK7jkKziEeK3BbA-xenOSw"/>
           </vertices>
           <vertices xsi:type="sgraph:Entry" xmi:id="_u47f0Ky_EeKDTYVyKywyGw" name="">
             <outgoingTransitions xmi:id="_v0lPwKy_EeKDTYVyKywyGw" target="_tc600Ky_EeKDTYVyKywyGw"/>
