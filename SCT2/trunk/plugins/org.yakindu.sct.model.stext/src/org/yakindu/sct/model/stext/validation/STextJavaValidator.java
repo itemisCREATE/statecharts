@@ -172,6 +172,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 				}
 			}
 		}
+		
+		if (!STextValidationModelUtils.getExitPointSpecs(trans.getProperties())
+				.isEmpty()) {
+			return;
+		}
+		
 		if (trans.getTrigger() == null) {
 			warning(ISSUE_TRANSITION_WITHOUT_TRIGGER, trans, null, -1);
 		}
@@ -645,9 +651,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator {
 
 	@Check(CheckType.FAST)
 	public void checkExitPointSpecWithTrigger(Transition t) {
-		if (!STextValidationModelUtils.getExitPointSpecs(
-				t.getProperties()).isEmpty()
-				&& t.getTrigger() != null && t.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
+		if (!STextValidationModelUtils.getExitPointSpecs(t.getProperties())
+				.isEmpty()
+				&& t.getTrigger() != null
+				&& t.getSource() instanceof org.yakindu.sct.model.sgraph.State) {
 			error(EXITPOINTSPEC_WITH_TRIGGER, t, null, -1);
 		}
 	}
