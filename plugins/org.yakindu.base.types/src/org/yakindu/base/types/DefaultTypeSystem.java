@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
 
 /**
@@ -512,7 +513,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		}
 		// we do not evaluate constraints and we only have one type of a kind
 		if (inferenceResult.getType() == null) {
-			return Collections.<Type> emptyList();
+			return Lists.newArrayList();
 		} else {
 			return Collections.singletonList(inferenceResult.getType().getType());
 		}
@@ -595,7 +596,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 		if (isBooleanType(type))
 			return true;
 		if (isIntegerType(type))
-			return 0;
+			return 0L;
 		if (isRealType(type))
 			return 0.0;
 		if (isVoidType(type))

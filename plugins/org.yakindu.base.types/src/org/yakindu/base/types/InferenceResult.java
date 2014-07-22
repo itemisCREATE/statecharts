@@ -17,6 +17,8 @@ import java.util.Collections;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeConstraint;
 
+import com.google.common.collect.Lists;
+
 /**
  * Representation of a (type) inference result, which is consists of an
  * {@link InferredType} and a list of {@link InferenceIssue}.
@@ -49,7 +51,7 @@ public class InferenceResult {
 	}
 
 	public InferenceResult(InferredType inferredType) {
-		this(inferredType, Collections.<InferenceIssue> emptyList());
+		this(inferredType, Lists.<InferenceIssue> newArrayList());
 	}
 
 	public InferenceResult(InferredType inferredType, InferenceIssue inferenceIssue) {
