@@ -590,7 +590,7 @@ The *IdentifierSettings* feature allows the configuration of module names and id
 
 # __moduleName__  (String, optional): The name for the header and implementation. The statechart name is used in default.
 # __statemachinePrefix__  (Boolean, optional): A prefix which is added before function, state names and types.
-# __maxIdentifierLength (Integer, optional): The maximum character length of an identifier. In default 31 chars are used which matches ANSI C99 standard.
+# __maxIdentifierLength__ (Integer, optional): The maximum character length of an identifier. In default 31 chars are used which matches ANSI C99 standard.
 # __separator__ (String, optional): To specify a separator to replace whitescpaces and illegal characters.
 
 Example configuration:
@@ -603,6 +603,28 @@ feature IdentifierSettings {
 	separator =  "_" 
 }
 p. ==<!-- End sgen_feature_identifiersettings -->==		
+
+
+==<!-- Start sgen_feature_junitwrapper -->==
+
+h4. JUnitWrapper
+
+With the *JUnitWrapper* feature it is possible to create JUnit tests that will run the generated gtests  
+
+# __WrapToJUnit__ (Boolean): The only parameter determines if a JUnit wrapper test is generated or not. Possible inputs: "true" or "false" (not case-sensitive).
+
+
+Example configuration:
+
+bc(prettyprint).. 
+feature JUnitWrapper {
+	WrapToJUnit =  "false" 
+}
+p. ==<!-- End sgen_feature_junitwrapper -->==		
+
+
+
+
 
 h2(#CreateCustomCodeGenerators). Create Custom Code Generators
 
