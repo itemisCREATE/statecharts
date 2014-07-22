@@ -508,9 +508,9 @@
 		<module>../org.yakindu.sct.ui.editor</module>
 		<module>../org.yakindu.sct.ui.examples</module>
 		<module>../org.yakindu.sct.ui.integration.stext</module>
+		<module>../org.yakindu.sct.ui.intro</module>
 		<module>../org.yakindu.sct.ui.navigator</module>
 		<module>../org.yakindu.sct-feature</module>
-
 		<module>../org.yakindu.sct.test.models</module>
 
 		<module>../org.yakindu.sct.generator.c</module>
