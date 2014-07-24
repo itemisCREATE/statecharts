@@ -99,7 +99,8 @@ public class ExecutionContextContentProvider implements ITreeContentProvider, IP
 		public void notifyChanged(Notification notification) {
 			if (notification.getFeature() == SRuntimePackage.Literals.EXECUTION_SLOT__VALUE
 					|| notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__RAISED
-					|| notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__SCHEDULED)
+					|| notification.getFeature() == SRuntimePackage.Literals.EXECUTION_EVENT__SCHEDULED
+					|| notification.getFeature() == SRuntimePackage.Literals.COMPOSITE_SLOT__SLOTS)
 				Display.getDefault().asyncExec(new Runnable() {
 					public void run() {
 						if (viewer != null && !viewer.getControl().isDisposed())
