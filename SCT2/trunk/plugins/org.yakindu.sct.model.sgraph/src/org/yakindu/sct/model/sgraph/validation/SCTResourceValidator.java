@@ -43,8 +43,8 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 			return;
 		}
 		AbstractSCTResource resource = (AbstractSCTResource) sc.eResource();
-		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource
-				.getLinkingDiagnostics().asMap().entrySet()) {
+		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource.getLinkingDiagnostics().asMap()
+				.entrySet()) {
 			for (Diagnostic diag : entry.getValue()) {
 				error(diag.getMessage(), entry.getKey(), null, -1);
 			}
@@ -57,10 +57,11 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 			return;
 		}
 		AbstractSCTResource resource = (AbstractSCTResource) sc.eResource();
-		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource
-				.getSyntaxDiagnostics().asMap().entrySet()) {
+		for (Map.Entry<SpecificationElement, Collection<Diagnostic>> entry : resource.getSyntaxDiagnostics().asMap()
+				.entrySet()) {
 			for (Diagnostic diag : entry.getValue()) {
-				error(diag.getMessage(), entry.getKey(), null, -1);
+				if (entry.getKey().eResource() != null)
+					error(diag.getMessage(), entry.getKey(), null, -1);
 			}
 		}
 	}
@@ -69,10 +70,10 @@ public class SCTResourceValidator extends AbstractDeclarativeValidator {
 	public boolean isLanguageSpecific() {
 		return false;
 	}
-	
+
 	@Override
 	@Inject
 	public void register(EValidatorRegistrar registrar) {
-		//Do not register because this validator is only a composite #398987
+		// Do not register because this validator is only a composite #398987
 	}
 }
