@@ -17,6 +17,6 @@ TEST(StatemachineTest, simple) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(Parenthesis::A));
-	EXPECT_TRUE(statechart->getSCInterface()->get_erg()== 8);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8);
 	delete statechart;
 }

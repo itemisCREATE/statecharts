@@ -17,7 +17,7 @@ TEST(StatemachineTest, elseChoiceUsingNonDefaultTransition) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(Choice::A));
-	statechart->getSCInterface()->set_c(true);
+	statechart->getDefaultSCI()->set_c(true);
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(Choice::C));
@@ -28,7 +28,7 @@ TEST(StatemachineTest, elseChoiceUsingDefaultTransition) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(Choice::A));
-	statechart->getSCInterface()->set_c(false);
+	statechart->getDefaultSCI()->set_c(false);
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(Choice::B));
@@ -39,7 +39,7 @@ TEST(StatemachineTest, defaultChoiceUsingNonDefaultTransition) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(Choice::A));
-	statechart->getSCInterface()->set_c(true);
+	statechart->getDefaultSCI()->set_c(true);
 	statechart->raise_g();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(Choice::C));
@@ -50,7 +50,7 @@ TEST(StatemachineTest, defaultChoiceUsingDefaultTransition) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(Choice::A));
-	statechart->getSCInterface()->set_c(false);
+	statechart->getDefaultSCI()->set_c(false);
 	statechart->raise_g();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(Choice::B));
@@ -61,7 +61,7 @@ TEST(StatemachineTest, uncheckedChoiceUsingNonDefaultTransition) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(Choice::A));
-	statechart->getSCInterface()->set_c(true);
+	statechart->getDefaultSCI()->set_c(true);
 	statechart->raise_f();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(Choice::C));
@@ -72,7 +72,7 @@ TEST(StatemachineTest, uncheckedChoiceUsingDefaultTransition) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(Choice::A));
-	statechart->getSCInterface()->set_c(false);
+	statechart->getDefaultSCI()->set_c(false);
 	statechart->raise_f();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(Choice::B));
@@ -83,7 +83,7 @@ TEST(StatemachineTest, alwaysTrueTransitionInChoice) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(Choice::A));
-	statechart->getSCInterface()->set_c(true);
+	statechart->getDefaultSCI()->set_c(true);
 	statechart->raise_h();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(Choice::C));

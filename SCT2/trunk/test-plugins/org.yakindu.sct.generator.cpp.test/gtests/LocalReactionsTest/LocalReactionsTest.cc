@@ -18,6 +18,6 @@ TEST(StatemachineTest, LocalReactionsTest) {
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(LocalReactions::A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getSCInterface()->get_x()== 1);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1);
 	delete statechart;
 }

@@ -10,16 +10,19 @@
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
+import org.yakindu.base.types.Parameter
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgraph.Scope
 
 class Naming extends org.yakindu.sct.generator.c.Naming {
 	
@@ -61,30 +64,63 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'timeEvents'
 	}
 	
+	def protected signature(OperationDefinition it)
+	'''
+		«type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.targetLanguageName» «parameter.identifier»«ENDFOR»)'''
+		
+	def protected OCB_InterfaceSetter(StatechartScope scope) '''
+		void set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''
+	
+	def protected identifier(Parameter parameter) {
+		if (parameter.name.isKeyword) {
+			return parameter.name + "Arg"
+		}
+		else {
+			parameter.name
+		}
+	}
+	
 	override dispatch instance(InternalScope it) {
 		'iface' + interfaceName.asIdentifier.toFirstUpper	
 	}
 	
+	def OCB_Instance(Scope it) {
+		it.instance + "_OCB"
+	}
+	
 	def dispatch String getInterfaceName(InterfaceScope it) {  
 		if (name != null) {
-			return "SCI" + name.toFirstUpper()
+			return "SCI_" + name.toFirstUpper()
 		}
 		else {
-			return "SCInterface";
+			return "DefaultSCI";
 		}
 	}
 	
 	def dispatch String getInterfaceName(InternalScope it) {  
-		"InternalSCIScope"
+		"InternalSCI"
 	}
 	
-	def String getInterfaceOperationCallbackName(InterfaceScope it) {
-		interfaceName + "OperationCallback"
+	def dispatch String getSimpleName(InterfaceScope it) {  
+		if (name != null) {
+			return name
+		}
+		else {
+			return "default";
+		}
 	}
 	
-	def String getInternalOperationCallbackName() {
-		"InternalOperationCallback"
+	def dispatch String getSimpleName(InternalScope it) {  
+		"internal"
 	}
+	
+	def String getInterfaceOCBName(StatechartScope it) {
+		interfaceName + "_OCB"
+	}
+	
+//	def String getInternalOperationCallbackName() {
+//		"InternalOCB"
+//	}
 	
 	override asFunction(OperationDefinition it) {
 		name.asIdentifier.toFirstLower	
@@ -119,7 +155,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	}
 	
 	override dispatch access (OperationDefinition it) 
-		'''«asFunction»'''
+		'''«scope.OCB_Instance»->«asFunction»'''
 		
 	override dispatch access(TimeEvent it)
 		'''«timeEventsInstance»[«indexOf»]'''
