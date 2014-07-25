@@ -1,0 +1,13 @@
+GeneratorModel for sctunit::cpp {
+test NamedInterfaceAccess{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}			
+	}		
+}

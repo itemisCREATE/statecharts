@@ -18,9 +18,9 @@ TEST(StatemachineTest, statechartLocalReactionsTest) {
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::S1));
 	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::a));
-	while (statechart->getSCInterface()->get_myInt()< 10) {
+	while (statechart->getDefaultSCI()->get_myInt()< 10) {
 		EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::a));
-		if (statechart->getSCInterface()->get_myInt()%2== 0) {
+		if (statechart->getDefaultSCI()->get_myInt()%2== 0) {
 					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::S1));
 				  }
 				else {

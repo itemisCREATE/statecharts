@@ -17,10 +17,10 @@ TEST(StatemachineTest, ConditionalExpressionTest) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(ConditionalExpressions::A));
-	EXPECT_TRUE(statechart->getSCInterface()->get_condition()== 1);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 1);
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(ConditionalExpressions::B));
-	EXPECT_TRUE(statechart->getSCInterface()->get_condition()== 2);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_condition()== 2);
 	delete statechart;
 }

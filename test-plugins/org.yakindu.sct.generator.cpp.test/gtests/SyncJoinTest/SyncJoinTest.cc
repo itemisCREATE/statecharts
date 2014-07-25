@@ -95,6 +95,6 @@ TEST(StatemachineTest, doubleEntryActionBug) {
 	statechart->raise_jd();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(SyncJoin::A));
-	EXPECT_TRUE(statechart->getSCInterface()->get_x()== 1);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1);
 	delete statechart;
 }

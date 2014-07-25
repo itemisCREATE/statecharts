@@ -17,15 +17,15 @@ TEST(StatemachineTest, booleanExpressions) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(BooleanExpressions::StateA));
-	EXPECT_TRUE(statechart->getSCInterface()->get_myBool1()== true);
-	EXPECT_TRUE(statechart->getSCInterface()->get_myBool2()== false);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool1()== true);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool2()== false);
 	statechart->raise_e1();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(BooleanExpressions::StateB));
-	EXPECT_TRUE(statechart->getSCInterface()->get_and()== false);
-	EXPECT_TRUE(statechart->getSCInterface()->get_or()== true);
-	EXPECT_TRUE(statechart->getSCInterface()->get_not()== false);
-	EXPECT_TRUE(statechart->getSCInterface()->get_equal()== false);
-	EXPECT_TRUE(statechart->getSCInterface()->get_notequal()== true);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_and()== false);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_or()== true);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_not()== false);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_equal()== false);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_notequal()== true);
 	delete statechart;
 }

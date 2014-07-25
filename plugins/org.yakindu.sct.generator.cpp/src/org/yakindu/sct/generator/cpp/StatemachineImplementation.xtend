@@ -308,12 +308,17 @@ class StatemachineImplementation {
 					
 					«IF scope.defaultInterface»
 						void «module»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
-						«variable.access» = value;
+							«variable.access» = value;
 						}
 						
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
+			«IF scope.hasOperations»
+				void «module»::«scope.OCB_InterfaceSetter» {
+					«scope.OCB_Instance» = operationCallback;
+				}
+			«ENDIF»
 		«ENDFOR»
 	'''
 	
