@@ -1609,3 +1609,255 @@ void org_yakindu_sct_examples_c_trafficlight::update(
 org_yakindu_sct_examples_c_trafficlight::~org_yakindu_sct_examples_c_trafficlight() {
 
 }
+
+h3. Specifications of C++ code
+
+For C++ you can checkout the project 'QtTrafficLightCpp' from the Yakindu google code repository ( "Google code link":http://svn.codespot.com/a/eclipselabs.org/yakindu/SCT2/trunk/examples ). The C++ example contains the statechart, sgen model, graphical widgets and some glue code to connect the generated code with the widgets. The graphical widgets are based on Qt.
+
+The generated C++ files are in the folder 'src-gen' located. The most basic statemachine interface methods are defined in the 'StatemachineInterface.h' header file. Here the abstract class StatemachineInterface is defined which contains pure virtual functions only.
+
+h4. Abstract class StatemachineInterface
+
+The abstract class @StatemachineInterface@ is implemented by each generated statemachine:
+
+bc(prettyprint).. 
+package org.yakindu.sct.examples.trafficlight.cyclebased;
+
+#ifndef STATEMACHINEINTERFACE_H_
+#define STATEMACHINEINTERFACE_H_
+
+/*
+ * Basic interface for statemachines.
+ */
+class StatemachineInterface {
+	public:
+	
+		virtual ~StatemachineInterface() = 0;
+		
+		/*
+		* Initializes the statemachine. Use to init internal variables etc.
+		*/
+		virtual void init() = 0;
+	
+		/*
+		* Enters the statemachine. Sets the statemachine in a defined state.
+		*/
+		virtual void enter() = 0;
+	
+		/*
+		* Exits the statemachine. Leaves the statemachine with a defined state.
+		*/
+		virtual void exit() = 0;
+	
+		/*
+		* Start a run-to-completion cycle.
+		*/
+		virtual void runCycle() = 0;
+};
+
+inline StatemachineInterface::~StatemachineInterface() {}
+
+#endif /* STATEMACHINEINTERFACE_H_ */
+p. It contains the four functions @init()@, @enter()@, @exit()@ and @runCycle()@. The @init()@ function is used to initialize the internal objects of the statemachine after instantiation. Variables are initialized to a default value. If you have initialized variables in the statechart definition these initializations are done in the init function too. The @enter()@ function should be called if the statemachine is entered. It sets the statemachine into a defined state. The @exit()@ function is used to leave a statemachine statefully. If in example a history state is used in one of the top regions the last active state is stored and the statemachine is leaved via @exit()@ and reentered via @enter()@ it continues working with this state. The @runCycle()@ function is used to trigger a run to completion step in which the statemachine evaluates arising events and computes possible state changes.  A run to completion step consists in a simplified view of the following steps:
+
+* Clear list of outgoing events.
+* Check whether events have occurred which lead to a state change
+* If a state change has to be done:
+** Execute exit actions of leaving state.
+** Save history state if necessary.
+** Set the new State active.
+** Execute entry action of the new state.
+* Clear list of incoming events.
+
+
+h4. Timed statemachines
+
+In the traffic light example timing is used (after clauses). To support this the abstract classes 'TimedStatemachineInterface' and 'TimerInterface' are generated.
+
+bc(prettyprint).. 
+#ifndef TIMEDSTATEMACHINEINTERFACE_H_
+#define TIMEDSTATEMACHINEINTERFACE_H_
+
+#include "sc_types.h"
+#include "TimerInterface.h"
+
+/*
+* Interface for state machines which use timed event triggers.
+*/
+class TimedStatemachineInterface {
+	public:
+	
+		virtual ~TimedStatemachineInterface() = 0;
+		
+		/*
+		* Set the ITimerService for the state machine. It must be set
+		* externally on a timed state machine before a run cycle can be correct
+		* executed.
+		*/
+		virtual void setTimer(TimerInterface* timer) = 0;
+		
+		/*
+		* Returns the currently used timer service.
+		*/
+		virtual TimerInterface* getTimer() = 0;
+		
+		/*
+		* Callback method if a time event occurred.
+		*/
+		virtual void raiseTimeEvent(sc_eventid event) = 0;
+};
+
+inline TimedStatemachineInterface::~TimedStatemachineInterface() {}
+
+#endif /* TIMEDSTATEMACHINEINTERFACE_H_ */
+p. @TimedStatemachineInterface@ extends the generated statemachine to set an @TimerInterface@ and provides a callback function @raiseTimeEvent(sc_eventid event)@ to let the timer raise time events.
+
+Basically the correct handling of time has to be implemented by the developer because timer functions generally depend on the hardware target used. So for every hardware target a timer class which implements the @TimerInterface@ has to be developed. Let's have a look at the @TimerInterface@:
+
+bc(prettyprint).. 
+#ifndef TIMERINTERFACE_H_
+#define TIMERINTERFACE_H_
+
+#include "sc_types.h"
+
+//forward declaration of TimedStatemachineInterface to avoid cyclic dependency
+class TimedStatemachineInterface;
+
+/*
+ * Basic interface for statemachines.
+ */
+class TimerInterface {
+	public:
+		
+		virtual ~TimerInterface() = 0;
+	
+		/*
+		 * Starts the timing for a time event.
+		 */ 
+		virtual void setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time, sc_boolean isPeriodic) = 0;
+		
+		/*
+		 * Unsets the given time event.
+		 */
+		virtual void unsetTimer(TimedStatemachineInterface* statemachine, sc_eventid event) = 0;
+	
+		/*
+		 * Cancel timer service. Use this to end possible timing threads and free
+		 * memory resources.
+		 */
+		virtual void cancel() = 0;
+};
+
+inline TimerInterface::~TimerInterface() {}
+
+#endif /* TIMERINTERFACE_H_ */
+p. The @TimerInterface@ class defines four functions. The @setTimer(TimedStatemachineInterface* statemachine, sc_eventid event, sc_integer time, sc_boolean isPeriodic)@ function is called by a statemachine to tell the timer implementation that it has to start a timer for the given time event id and raise it after the time given by the same named parameter is expired. It is important that within the 'setTimer' function only a timer thread or a hardware timer interrupt is started and no long time taking operations like Thread.sleep(...) or waiting are done. Otherwise the statemachine execution may hang within the timer implementation or it shows a not expected runtime behavior.
+
+To raise a time event after the time is expired the function @raiseTimeEvent(sc_eventid event)@ has to be called on the statemachine (it should be implementing a @TimedStatemachineInterface@). So the time event is recognized by the statemachine and will be processed by the next run cycle. You can conclude that the runtime environment has to call the statemachines 'runCycle' function as often as needed to process time events raised by the timer as fast as possible. If you have in example a time event which should be raised by the timer after 500 ms and the runtime environment only calls the statemachines @runCycle@ function with a time period of 1000 ms the event could not be processed in the correct time.
+
+The function @unsetTimer(TimedStatemachineInterface* statemachine, sc_eventid event)@ is called by the statemachine to unset the timer.
+
+h4(#InterVarCpp). Interfaces, Variable and Event access
+
+In a yakindu statechart variables and events are contained in interfaces. There could be one default interface defined (without a name) and several named interfaces. In the generated code these interfaces are defined as internal sub classes of the main statemachine class. Let's have a look at following example statechart interface declaration:
+
+bc(prettyprint).. 
+interface:
+	var a:boolean
+	in event evA:boolean
+	out event evB:integer
+p. The generated interface code looks like following:
+
+bc(prettyprint).. 
+//! Inner class for SCInterface interface scope.
+class SCInterface {
+	
+	public:
+		/*! Gets the value of the variable 'a' that is defined in the default interface scope. */ 
+		sc_boolean get_a();
+		
+		/*! Sets the value of the variable 'a' that is defined in the default interface scope. */ 
+		void set_a(sc_boolean value);
+		
+		/*! Raises the in event 'evA' that is defined in the default interface scope. */ 
+		void raise_evA(sc_boolean value);
+		
+		/*! Checks if the out event 'evB' that is defined in the default interface scope has been raised. */ 
+		sc_boolean isRaised_evB();
+		
+		/*! Gets the value of the out event 'evB' that is defined in the default interface scope. */ 
+		sc_integer get_evB_value();
+		
+		
+	private:
+		friend class Default;
+		sc_boolean a;
+		sc_boolean evA_raised;
+		sc_boolean evA_value;
+		sc_boolean evB_raised;
+		sc_integer evB_value;
+};
+p. For the unnamed statechart interface a C++ class @SCInterface@ is generated. For the incoming event 'evA' a raise function with a boolean parameter is created because the event has a boolean type set. For the outgoing event 'evB' the functions @isRaised_evB()@ and @get_evB_value()@ are generated. The first one can be used to determine if the event is raised by the statemachine and the second function serves to query the boolean value of the event. For variables getters and setters are generated too. Additionally the parent class describes getter methods to acquire each nested interface class.
+
+The statemachine implements the parent interface class by itself and each nested interface class is implemented as internal class. It holds an instance of each nested interface class implementation which is accessible through a getter method. Have a look at the code snipped of the 'unnamed' default interface implementation:
+
+bc(prettyprint).. 
+void Default::SCInterface::raise_evA(sc_boolean value) {
+	evA_value = value;
+	evA_raised = true;
+}
+
+sc_boolean Default::SCInterface::isRaised_evB() {
+	return evB_raised;
+}
+
+sc_integer Default::SCInterface::get_evB_value() {
+	return evB_value;
+}
+
+sc_boolean Default::SCInterface::get_a() {
+	return a;
+}
+
+void Default::SCInterface::set_a(sc_boolean value) {
+	a = value;
+}
+p. Now even a few notes on the naming of the generated interfaces and the value access of events. The default (unnamed) interface class is named 'SCInterface'. If an interface has a dedicated name then this name is used with the prefix 'SCI' (e.g. 'SCIInterfacename') as class name. Additionally a value of an event should only be accessed if the event occured during the run to completion step. Otherwise the event could contain an illegal value.
+
+h4(#OperationCallbackCpp). Operation callbacks
+
+The yakindu statecharts support the declaration of operations which can be used within a statechart as actions. These operations have to be implemented by the user before a statechart is executable. Here is an example statechart using an operation:
+
+!images/OperationExample.png!
+
+Now have a look at the additional generated code for operation support in the 'default.h' header file:
+
+bc(prettyprint).. 
+//! Inner class for default interface scope operation callbacks.
+class DefaultSCI_OCB {
+	public:
+		virtual sc_integer myOp(sc_integer param1, sc_boolean param2) = 0;
+};
+
+/*! Set the working instance of the operation callback interface 'DefaultSCI_OCB'. */
+void setDefaultSCI_OCB(DefaultSCI_OCB* operationCallback);
+p. An additional interface @DefaultSCI_OCB@ class with the pure virtual function @myOp(sc_integer param1, sc_boolean param2)@ is generated. This class has to be implemented by the user and set with the @setDefaultSCI_OCB(DefaultSCI_OCB* operationCallback)@ function so that the statechart can use it:
+
+bc(prettyprint).. 
+#include "default.h"
+
+sc_integer Default::DefaultSCI_OCB::myOp(sc_integer param1, sc_boolean param2) {
+	// Your operation code should be placed here;
+	return 0;
+}
+
+int main(int argc, char *argv[]) {
+    Default *defaultSM = new Default();
+    DefaultSCI_OCB *defaultSCI_OCB = new DefaultSCI_OCB();
+    
+    defaultSM->setDefaultSCI_OCB(defaultSCI_OCB);
+    
+    defaultSM->init();
+    defaultSM->enter();
+    defaultSM->runCycle();
+}
