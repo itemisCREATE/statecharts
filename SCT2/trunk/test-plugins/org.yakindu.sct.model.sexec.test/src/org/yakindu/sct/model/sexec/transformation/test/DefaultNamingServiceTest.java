@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
@@ -26,7 +27,8 @@ public class DefaultNamingServiceTest extends ModelSequencerTest {
 
 	@Inject
 	protected INamingService flowNamingService;
-
+	
+	@Ignore
 	@Test
 	public void testDefaultNamingServiceState_NameMatch() {
 
