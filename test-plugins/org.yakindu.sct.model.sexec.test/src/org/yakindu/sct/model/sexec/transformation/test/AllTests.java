@@ -18,7 +18,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		ModelSequencerStateVectorTest.class, 
 		ModelSequencerHistoryTest.class,
 		SelfTransitionTest.class,
-		StatechartEnterExistActionTest.class 
+		StatechartEnterExistActionTest.class,
+		DefaultNamingServiceTest.class
 		})
 public class AllTests {
 
