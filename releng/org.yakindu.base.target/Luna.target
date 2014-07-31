@@ -14,6 +14,7 @@
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201405281433"/>
 <unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="3.0.0.201406111328"/>
 <unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.0.v20140602-0749"/>
+<unit id="org.eclipse.epp.mpc.feature.group" version="1.3.0.v20140529-2031"/>
 <repository location="http://download.eclipse.org/releases/luna"/>
 </location>
 </locations>
