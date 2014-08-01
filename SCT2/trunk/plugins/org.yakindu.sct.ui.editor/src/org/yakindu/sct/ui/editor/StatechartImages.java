@@ -12,7 +12,9 @@ public enum StatechartImages {
 
 	SUB_STATECHART_PICTOGRAM("icons/obj16/Statechart-Pictogram-16.png"),
 
-	LOGO("icons/obj16/logo-16.png");
+	LOGO("icons/obj16/logo-16.png"),
+	
+	MENU("icons/obj16/Menu-16.png");
 	
 
 	private final String path;

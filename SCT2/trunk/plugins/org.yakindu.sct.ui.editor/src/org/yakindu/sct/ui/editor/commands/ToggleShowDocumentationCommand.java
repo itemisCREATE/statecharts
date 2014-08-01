@@ -46,6 +46,12 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		List<View> views = unwrap(HandlerUtil.getCurrentSelection(event));
+		toggleDocumentation(views);
+		return null;
+
+	}
+
+	public static void toggleDocumentation(List<View> views) {
 		CompositeCommand command = new CompositeCommand("toggle documentation");
 		for (View view : views) {
 			StringValueStyle style = GMFNotationUtil.getStringValueStyle(view, FEATURE_TO_SHOW);
@@ -59,11 +65,9 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 					NotationPackage.Literals.STRING_VALUE_STYLE__STRING_VALUE, featureName)));
 		}
 		executeCommand(command);
-		return null;
-
 	}
 
-	protected StringValueStyle createInitialStyle(View view) {
+	protected static StringValueStyle createInitialStyle(View view) {
 		StringValueStyle style = NotationFactory.eINSTANCE.createStringValueStyle();
 		style.setName(FEATURE_TO_SHOW);
 		style.setStringValue(SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName());
@@ -72,7 +76,7 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 		return style;
 	}
 
-	protected void executeCommand(ICommand cmd) {
+	protected static void executeCommand(ICommand cmd) {
 		try {
 			OperationHistoryFactory.getOperationHistory().execute(cmd, new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {
