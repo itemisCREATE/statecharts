@@ -116,46 +116,26 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 				break;
 
 			case mainRegion_State2__region0_a :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State6 :
-				historyVector[1] = stateVector[0];
-
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-				historyVector[2] = stateVector[0];
-
-				historyVector[1] = stateVector[0];
-
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-				historyVector[2] = stateVector[0];
-
-				historyVector[1] = stateVector[0];
-
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mainRegion_State2__region0_State5 :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
@@ -365,26 +345,16 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State6 :
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
@@ -425,26 +395,16 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State6 :
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
@@ -469,15 +429,11 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 						break;
 
 					case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-						historyVector[2] = stateVector[0];
-
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 						break;
 
 					case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-						historyVector[2] = stateVector[0];
-
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 						break;
@@ -516,26 +472,16 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State6 :
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
@@ -560,15 +506,11 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 						break;
 
 					case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-						historyVector[2] = stateVector[0];
-
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 						break;
 
 					case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-						historyVector[2] = stateVector[0];
-
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 						break;
@@ -627,26 +569,16 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State6 :
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
@@ -671,15 +603,11 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 						break;
 
 					case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-						historyVector[2] = stateVector[0];
-
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 						break;
 
 					case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-						historyVector[2] = stateVector[0];
-
 						nextStateIndex = 0;
 						stateVector[0] = State.$NullState$;
 						break;
@@ -738,26 +666,16 @@ public class DeepHistoryStatemachine implements IDeepHistoryStatemachine {
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State6 :
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;
 
 				case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-					historyVector[2] = stateVector[0];
-
-					historyVector[1] = stateVector[0];
-
 					nextStateIndex = 0;
 					stateVector[0] = State.$NullState$;
 					break;

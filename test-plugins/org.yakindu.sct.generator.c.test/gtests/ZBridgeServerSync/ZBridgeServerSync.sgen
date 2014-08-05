@@ -1,0 +1,14 @@
+GeneratorModel for yakindu::c {
+	statechart ZBridgeServerSync {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ZBridgeServerSync"
+		}
+		feature IdentifierSettings {
+			moduleName =  "ZBridgeServerSync" 
+			statemachinePrefix =  "zBridgeServerSync" 
+			maxIdentifierLength = 31
+			separator =  "_" 
+		}
+	}
+}

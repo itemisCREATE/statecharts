@@ -78,15 +78,11 @@ public class HistoryWithExitPointStatemachine
 	public void exit() {
 		switch (stateVector[0]) {
 			case mr_A_r_X1 :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mr_A_r_X2 :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;

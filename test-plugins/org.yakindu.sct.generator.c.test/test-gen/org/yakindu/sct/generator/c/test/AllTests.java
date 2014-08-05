@@ -32,6 +32,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		StateIsActive.class, StaticChoice.class,
 		STextKeywordsInStatesAndRegions.class, StringExpressions.class,
 		SyncFork.class, SyncJoin.class, TransitionWithoutCondition.class,
-		ValuedEvents.class})
+		ValuedEvents.class, ZBridgeServerSync.class})
 public class AllTests {
 }
