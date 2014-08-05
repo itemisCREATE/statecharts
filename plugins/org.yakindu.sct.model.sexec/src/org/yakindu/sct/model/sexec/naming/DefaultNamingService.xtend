@@ -56,7 +56,7 @@ class DefaultNamingService implements INamingService {
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension NamingHelper
 
-	var protected int maxLength = 31
+	var protected int maxLength = Integer.MAX_VALUE
 
 	var protected char separator = '_'
 
@@ -72,7 +72,7 @@ class DefaultNamingService implements INamingService {
 	}
 
 	new() {
-		this.maxLength = 31
+		this.maxLength = Integer.MAX_VALUE
 		this.separator = '_'
 	}
 	
@@ -309,9 +309,16 @@ class DefaultNamingService implements INamingService {
 			switch element {
 				ExecutionScope:
 					shortName = element.superScope.createShortName(prefix, name, nameList, nameShorteningType, separator)
-				Step:
+				Step: {
+					if (element.scopeDepth > 0) {
 					shortName = element.parentExecutionScope.superScope.createShortName(prefix, name, nameList,
 						nameShorteningType, separator)
+					}
+					else {
+						shortName = element.parentExecutionScope.createShortName(prefix, name, nameList,
+						nameShorteningType, separator)
+					}
+				}
 				default: {
 					if (element.eContainer instanceof NamedElement) {
 						shortName = (element.eContainer as NamedElement).createShortName(prefix, name, nameList,
@@ -368,7 +375,7 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected dispatch String elementName(EObject it, NameShorteningStrategy nameShorteningType) {
-		eContainer.elementName(nameShorteningType)
+		eContainer?.elementName(nameShorteningType)
 	}
 
 	def protected asIndexPosition(ExecutionScope it) {
