@@ -106,6 +106,14 @@ public class CNamingService extends DefaultNamingService {
 		}
 	}
 	
+	override protected prefix(State it, char separator) {
+		if (entry.statemachinePrefix.nullOrEmpty) {
+			super.prefix(it, separator).toFirstUpper
+		} else {
+			entry.statemachinePrefix
+		}
+	}
+	
 	override protected prefix(TimeEventSpec it, State state, char separator) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
 			super.prefix(it, state, separator).toFirstLower
