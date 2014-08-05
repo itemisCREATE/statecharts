@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
 import org.yakindu.sct.model.sexec.ExecutionNode
 import org.eclipse.emf.ecore.EObject
 import java.util.List
+import org.yakindu.sct.model.sgraph.Region
 
 class StepDepthComparator implements Comparator<Step> {
 	@Inject
@@ -330,6 +331,14 @@ class DefaultNamingService implements INamingService {
 		return shortName;
 	}
 	
+	def protected dispatch String elementName(NamedElement it, NameShorteningStrategy nameShorteningType) {
+		switch nameShorteningType {
+			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
+			case NameShorteningStrategy::INDEX_POSITION: return name?.removeVowels
+		}
+	}
+	
 	def protected dispatch String elementName(ExecutionScope it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
 			case NameShorteningStrategy::STANDARD: return name
@@ -343,6 +352,14 @@ class DefaultNamingService implements INamingService {
 			case NameShorteningStrategy::STANDARD: return simpleName
 			case NameShorteningStrategy::REMOVE_VOWELS: return simpleName.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
+		}
+	}
+	
+	def protected dispatch String elementName(Region it, NameShorteningStrategy nameShorteningType) {
+		switch nameShorteningType {
+			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
+			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
 		}
 	}
 
@@ -366,14 +383,6 @@ class DefaultNamingService implements INamingService {
 		eContainer.elementName(nameShorteningType)
 	}
 
-	def protected dispatch String elementName(NamedElement it, NameShorteningStrategy nameShorteningType) {
-		switch nameShorteningType {
-			case NameShorteningStrategy::STANDARD: return name
-			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
-			case NameShorteningStrategy::INDEX_POSITION: return name?.removeVowels
-		}
-	}
-
 	def protected dispatch String elementName(EObject it, NameShorteningStrategy nameShorteningType) {
 		eContainer?.elementName(nameShorteningType)
 	}
@@ -382,12 +391,16 @@ class DefaultNamingService implements INamingService {
 		superScope.subScopes.indexOf(it).toString;
 	}
 	
-	def protected dispatch asSGraphIndexPosition(Vertex it) {
-		parentRegion.vertices.toList.indexOf(it).toString
+	def protected dispatch asSGraphIndexPosition(Region it) {
+		composite.regions.toList.indexOf(it).toString
 	}
 	
 	def protected dispatch asSGraphIndexPosition(State it) {
 		parentRegion.vertices.filter(typeof(State)).toList.indexOf(it).toString
+	}
+	
+	def protected dispatch asSGraphIndexPosition(Vertex it) {
+		parentRegion.vertices.toList.indexOf(it).toString
 	}
 
 	def protected removeVowels(String it) {
