@@ -701,17 +701,11 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 				break;
 
 			case goto_void_volatile_transient_throw_false :
-				historyVector[1] = stateVector[0];
-
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case goto_void_volatile_state :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;

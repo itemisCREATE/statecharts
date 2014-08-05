@@ -133,15 +133,11 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 		switch (stateVector[1]) {
 			case r2_B_r_BA_r_BAA :
-				historyVector[0] = stateVector[1];
-
 				nextStateIndex = 1;
 				stateVector[1] = State.$NullState$;
 				break;
 
 			case r2_B_r_BB :
-				historyVector[0] = stateVector[1];
-
 				nextStateIndex = 1;
 				stateVector[1] = State.$NullState$;
 				break;
@@ -157,10 +153,6 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 		switch (stateVector[2]) {
 			case r3_D_r_DA_r_DAA :
-				historyVector[3] = stateVector[2];
-
-				historyVector[2] = stateVector[2];
-
 				nextStateIndex = 2;
 				stateVector[2] = State.$NullState$;
 				break;

@@ -129,57 +129,41 @@ public class PerformanceTestStatemachine
 				break;
 
 			case mr_B_r1_X :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mr_B_r1_Y :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mr_B_r1_Z :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mr_B_r1_V :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mr_B_r1_W :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mr_B_r1_S :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mr_B_r1_T :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case mr_B_r1_U :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;

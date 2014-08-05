@@ -8,8 +8,11 @@ GeneratorModel for sctunit::c {
 		}			
 				
 		feature JUnitWrapper {
-			WrapToJUnit =  "true" 
+			WrapToJUnit="true"	
 		}	
+		
+		
+  
 	}	
 		
 	test AlwaysOncycle{
@@ -21,7 +24,8 @@ GeneratorModel for sctunit::c {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true" 
-		}
+		}	
+		
 	}
 	
 	test AssignmentAsExpression{
@@ -593,5 +597,26 @@ GeneratorModel for sctunit::c {
 			WrapToJUnit =  "true" 
 		}		
 	}	
+			
+	test ZBridgeServerSync{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}			
+				
+		feature JUnitWrapper {
+			WrapToJUnit =  "true" 
+		}		
+		
+		feature IdentifierSettings {
+			moduleName =  "ZBridgeServerSync" 
+			statemachinePrefix =  "zBridgeServerSync" 
+			maxIdentifierLength = 31
+			separator =  "_" 
+		}
+		
+	}	
+	
 		
 }

@@ -397,5 +397,14 @@ GeneratorModel for sctunit::interpreter {
 			targetFolder = "test-gen"			
 		}			
 	}
+	
+	test ZBridgeServerSync{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 		
 }

@@ -69,15 +69,11 @@ public class HistoryWithoutInitialStepStatemachine
 				break;
 
 			case main_region_B_r1_C :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case main_region_B_r1_D :
-				historyVector[0] = stateVector[0];
-
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;

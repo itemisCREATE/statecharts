@@ -33,6 +33,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		SimpleHierachyTest.class, StateIsActiveTest.class,
 		StaticChoiceTest.class, STextKeywordsInStatesAndRegionsTest.class,
 		StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
-		TransitionWithoutConditionTest.class, ValuedEventsTest.class})
+		TransitionWithoutConditionTest.class, ValuedEventsTest.class,
+		ZBridgeServerSyncTest.class})
 public class AllTestsTest {
 }
