@@ -38,13 +38,13 @@ TEST(StatemachineTest, simpleAssignment) {
 	EXPECT_TRUE(assignmentAsExpressionIface_get_j(&handle) == 16);
 	EXPECT_TRUE(assignmentAsExpressionIface_get_k(&handle) == 4);
 	assignmentAsExpression_runCycle(&handle);
-	EXPECT_TRUE(assignmentAsExpression_isActive(&handle, AssignmentAsExpression_bln_And));
+	EXPECT_TRUE(assignmentAsExpression_isActive(&handle, AssignmentAsExpression_boolean_And));
 	EXPECT_TRUE(assignmentAsExpressionIface_get_l(&handle) == 1);
 	assignmentAsExpression_runCycle(&handle);
-	EXPECT_TRUE(assignmentAsExpression_isActive(&handle, AssignmentAsExpression_bln_Or));
+	EXPECT_TRUE(assignmentAsExpression_isActive(&handle, AssignmentAsExpression_boolean_Or));
 	EXPECT_TRUE(assignmentAsExpressionIface_get_p(&handle) == 15);
 	assignmentAsExpression_runCycle(&handle);
-	EXPECT_TRUE(assignmentAsExpression_isActive(&handle, AssignmentAsExpression_bln_Xr));
+	EXPECT_TRUE(assignmentAsExpression_isActive(&handle, AssignmentAsExpression_boolean_Xor));
 	EXPECT_TRUE(assignmentAsExpressionIface_get_u(&handle) == 12);
 	assignmentAsExpression_exit(&handle);
 }
