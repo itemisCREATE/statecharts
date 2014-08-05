@@ -22,11 +22,11 @@ TEST(StatemachineTest, sameNameDifferenRegionTest) {
 	sameNameDifferentRegionIface_raise_e1(&handle);
 	sameNameDifferentRegion_runCycle(&handle);
 	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_StateB));
-	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_SttA));
+	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_r1_StateA));
 	sameNameDifferentRegionIface_raise_e1(&handle);
 	sameNameDifferentRegion_runCycle(&handle);
 	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_StateB));
-	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_SttB));
+	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_r1_StateB));
 }
 
 		
