@@ -16,12 +16,12 @@ TEST(StatemachineTest, BitExpressions) {
 	BitExpressions* statechart = new BitExpressions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(BitExpressions::StateA));
+	EXPECT_TRUE(statechart->isActive(BitExpressions::main_region_StateA));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit1()== 5);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit2()== 7);
 	statechart->raise_e1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(BitExpressions::StateB));
+	EXPECT_TRUE(statechart->isActive(BitExpressions::main_region_StateB));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_leftBitshift()== 10);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_rightBitshift()== 2);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_complementBitshift()== - 6 );

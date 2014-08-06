@@ -20,7 +20,7 @@ TEST(StatemachineTest, EntryChoiceTest) {
 	entryChoice_enter(&handle);
 	entryChoice_runCycle(&handle);
 	entryChoice_runCycle(&handle);
-	EXPECT_TRUE(entryChoice_isActive(&handle, EntryChoice_A));
+	EXPECT_TRUE(entryChoice_isActive(&handle, EntryChoice_main_region_A));
 }
 
 		

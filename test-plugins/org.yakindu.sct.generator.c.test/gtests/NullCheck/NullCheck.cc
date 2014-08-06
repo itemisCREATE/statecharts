@@ -18,9 +18,9 @@ NullCheck handle;
 TEST(StatemachineTest, SimpleNullCheckTest) {
 	nullCheck_init(&handle);
 	nullCheck_enter(&handle);
-	EXPECT_TRUE(nullCheck_isActive(&handle, NullCheck_A));
+	EXPECT_TRUE(nullCheck_isActive(&handle, NullCheck_main_region_A));
 	nullCheck_runCycle(&handle);
-	EXPECT_TRUE(nullCheck_isActive(&handle, NullCheck_B));
+	EXPECT_TRUE(nullCheck_isActive(&handle, NullCheck_main_region_B));
 }
 
 		

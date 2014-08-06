@@ -18,15 +18,15 @@ SameNameDifferentRegion handle;
 TEST(StatemachineTest, sameNameDifferenRegionTest) {
 	sameNameDifferentRegion_init(&handle);
 	sameNameDifferentRegion_enter(&handle);
-	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_StateA));
+	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_main_region_StateA));
 	sameNameDifferentRegionIface_raise_e1(&handle);
 	sameNameDifferentRegion_runCycle(&handle);
-	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_StateB));
-	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_r1_StateA));
+	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_main_region_StateB));
+	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_main_region_StateB_r1_StateA));
 	sameNameDifferentRegionIface_raise_e1(&handle);
 	sameNameDifferentRegion_runCycle(&handle);
-	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_StateB));
-	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_r1_StateB));
+	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_main_region_StateB));
+	EXPECT_TRUE(sameNameDifferentRegion_isActive(&handle, SameNameDifferentRegion_main_region_StateB_r1_StateB));
 }
 
 		

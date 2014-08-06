@@ -18,21 +18,21 @@ GuardedExit handle;
 TEST(StatemachineTest, ExitTaken) {
 	guardedExit_init(&handle);
 	guardedExit_enter(&handle);
-	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_A));
+	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_A));
 	EXPECT_TRUE(!guardedExitIface_get_guard(&handle) );
 	guardedExitIface_raise_e(&handle);
 	guardedExit_runCycle(&handle);
-	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_B));
+	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_B));
 	EXPECT_TRUE(!guardedExitIface_get_done(&handle) );
 }
 TEST(StatemachineTest, ExitNotTaken) {
 	guardedExit_init(&handle);
 	guardedExit_enter(&handle);
-	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_A));
+	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_A));
 	guardedExitIface_set_guard(&handle, true);
 	guardedExitIface_raise_e(&handle);
 	guardedExit_runCycle(&handle);
-	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_B));
+	EXPECT_TRUE(guardedExit_isActive(&handle, GuardedExit_main_region_B));
 	EXPECT_TRUE(guardedExitIface_get_done(&handle) );
 }
 

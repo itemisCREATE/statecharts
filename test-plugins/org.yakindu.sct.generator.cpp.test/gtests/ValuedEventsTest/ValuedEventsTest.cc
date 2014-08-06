@@ -17,8 +17,8 @@ TEST(StatemachineTest, valuedEventsTest) {
 	statechart->init();
 	statechart->enter();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ValuedEvents::A));
-	EXPECT_TRUE(statechart->isActive(ValuedEvents::C));
+	EXPECT_TRUE(statechart->isActive(ValuedEvents::main_region_A));
+	EXPECT_TRUE(statechart->isActive(ValuedEvents::_region1_C));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myVar()== 42);
 	delete statechart;
 }

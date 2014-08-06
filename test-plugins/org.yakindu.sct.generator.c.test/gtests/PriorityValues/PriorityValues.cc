@@ -21,16 +21,16 @@ TEST(StatemachineTest, transitionPriority) {
 	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_main_region_A));
 	priorityValuesIface_raise_event1(&handle);
 	priorityValues_runCycle(&handle);
-	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_C));
+	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_main_region_C));
 }
 TEST(StatemachineTest, regionPriority) {
 	priorityValues_init(&handle);
 	priorityValues_enter(&handle);
-	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_A));
+	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_someRegion_A));
 	priorityValuesIface_raise_event2(&handle);
 	priorityValues_runCycle(&handle);
-	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_B));
-	EXPECT_TRUE(!priorityValues_isActive(&handle, PriorityValues_E));
+	EXPECT_TRUE(priorityValues_isActive(&handle, PriorityValues_someRegion_B));
+	EXPECT_TRUE(!priorityValues_isActive(&handle, PriorityValues_main_region_E));
 }
 
 		

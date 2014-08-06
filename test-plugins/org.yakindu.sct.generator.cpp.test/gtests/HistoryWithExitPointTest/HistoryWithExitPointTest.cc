@@ -16,21 +16,21 @@ TEST(StatemachineTest, historyEntryAfterExit) {
 	HistoryWithExitPoint* statechart = new HistoryWithExitPoint();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::X1));
+	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::mr_A_r_X1));
 	statechart->raise_push();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::B));
+	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::mr_B));
 	statechart->raise_back();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::X1));
+	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::mr_A_r_X1));
 	statechart->raise_next();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::X2));
+	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::mr_A_r_X2));
 	statechart->raise_push();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::B));
+	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::mr_B));
 	statechart->raise_back();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::X2));
+	EXPECT_TRUE(statechart->isActive(HistoryWithExitPoint::mr_A_r_X2));
 	delete statechart;
 }

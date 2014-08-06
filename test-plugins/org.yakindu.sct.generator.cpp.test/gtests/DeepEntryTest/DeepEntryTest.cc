@@ -24,13 +24,13 @@ TEST(StatemachineTest, enterToSubstate) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_z()== 2);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(DeepEntry::BB));
+	EXPECT_TRUE(statechart->isActive(DeepEntry::r2_B_r_BB));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(DeepEntry::C));
+	EXPECT_TRUE(statechart->isActive(DeepEntry::r2_C));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(DeepEntry::BB));
+	EXPECT_TRUE(statechart->isActive(DeepEntry::r2_B_r_BB));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 1);
 	delete statechart;
 }

@@ -16,7 +16,7 @@ TEST(StatemachineTest, simple) {
 	Parenthesis* statechart = new Parenthesis();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Parenthesis::A));
+	EXPECT_TRUE(statechart->isActive(Parenthesis::mainRegion_A));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_erg()== 8);
 	delete statechart;
 }

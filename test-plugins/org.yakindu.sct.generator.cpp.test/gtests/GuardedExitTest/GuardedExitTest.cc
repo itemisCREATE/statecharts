@@ -16,11 +16,11 @@ TEST(StatemachineTest, ExitTaken) {
 	GuardedExit* statechart = new GuardedExit();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedExit::A));
+	EXPECT_TRUE(statechart->isActive(GuardedExit::main_region_A));
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_guard());
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedExit::B));
+	EXPECT_TRUE(statechart->isActive(GuardedExit::main_region_B));
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
 	delete statechart;
 }
@@ -28,11 +28,11 @@ TEST(StatemachineTest, ExitNotTaken) {
 	GuardedExit* statechart = new GuardedExit();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedExit::A));
+	EXPECT_TRUE(statechart->isActive(GuardedExit::main_region_A));
 	statechart->getDefaultSCI()->set_guard(true);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedExit::B));
+	EXPECT_TRUE(statechart->isActive(GuardedExit::main_region_B));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
 	delete statechart;
 }

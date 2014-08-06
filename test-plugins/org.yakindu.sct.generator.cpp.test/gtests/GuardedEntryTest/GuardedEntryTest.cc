@@ -17,7 +17,7 @@ TEST(StatemachineTest, EntryNotTakenOnStatechartEnter) {
 	statechart->init();
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_guard()== false);
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry::A));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::main_region_A));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== false);
 	delete statechart;
 }
@@ -26,7 +26,7 @@ TEST(StatemachineTest, EntryTakenOnStatechartEnter) {
 	statechart->init();
 	statechart->getDefaultSCI()->set_guard(true);
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry::A));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::main_region_A));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done()== true);
 	delete statechart;
 }
@@ -34,15 +34,15 @@ TEST(StatemachineTest, EntryTakenInTransition) {
 	GuardedEntry* statechart = new GuardedEntry();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry::A));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::main_region_A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry::B));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::main_region_B));
 	statechart->getDefaultSCI()->set_guard(true);
 	statechart->getDefaultSCI()->set_done(false);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry::A));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::main_region_A));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_done());
 	delete statechart;
 }
@@ -50,15 +50,15 @@ TEST(StatemachineTest, EntryNotTakenInTransition) {
 	GuardedEntry* statechart = new GuardedEntry();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry::A));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::main_region_A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry::B));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::main_region_B));
 	statechart->getDefaultSCI()->set_guard(false);
 	statechart->getDefaultSCI()->set_done(false);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(GuardedEntry::A));
+	EXPECT_TRUE(statechart->isActive(GuardedEntry::main_region_A));
 	EXPECT_TRUE(!statechart->getDefaultSCI()->get_done());
 	delete statechart;
 }

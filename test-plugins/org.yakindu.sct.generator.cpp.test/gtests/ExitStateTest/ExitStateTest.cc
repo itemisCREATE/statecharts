@@ -16,38 +16,38 @@ TEST(StatemachineTest, defaultExit) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState::A));
+	EXPECT_TRUE(statechart->isActive(ExitState::r_A));
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState::E));
+	EXPECT_TRUE(statechart->isActive(ExitState::r_E));
 	delete statechart;
 }
 TEST(StatemachineTest, namedExitThroughNamedTransition) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState::A));
+	EXPECT_TRUE(statechart->isActive(ExitState::r_A));
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState::F));
+	EXPECT_TRUE(statechart->isActive(ExitState::r_F));
 	delete statechart;
 }
 TEST(StatemachineTest, namedExitThroughDefaultTransition) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState::A));
+	EXPECT_TRUE(statechart->isActive(ExitState::r_A));
 	statechart->raise_g();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState::E));
+	EXPECT_TRUE(statechart->isActive(ExitState::r_E));
 	delete statechart;
 }
 TEST(StatemachineTest, remainInA) {
 	ExitState* statechart = new ExitState();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitState::A));
+	EXPECT_TRUE(statechart->isActive(ExitState::r_A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(ExitState::A));
+	EXPECT_TRUE(statechart->isActive(ExitState::r_A));
 	delete statechart;
 }

@@ -18,7 +18,7 @@ StaticChoice handle;
 TEST(StatemachineTest, StaticChoiceTest) {
 	staticChoice_init(&handle);
 	staticChoice_enter(&handle);
-	EXPECT_TRUE(staticChoice_isActive(&handle, StaticChoice_Start));
+	EXPECT_TRUE(staticChoice_isActive(&handle, StaticChoice_main_region_Start));
 	staticChoice_runCycle(&handle);
 }
 

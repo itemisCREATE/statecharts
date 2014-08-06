@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sexec.ExecutionNode
 import org.eclipse.emf.ecore.EObject
 import java.util.List
 import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.stext.naming.StextNameProvider
 
 class StepDepthComparator implements Comparator<Step> {
 	@Inject
@@ -42,7 +43,8 @@ class ExecutionScopeDepthComparator implements Comparator<ExecutionScope> {
 }
 
 enum NameShorteningStrategy {
-	STANDARD,
+	FQN_NAME,
+	SHORT_NAME,
 	REMOVE_VOWELS,
 	INDEX_POSITION
 }
@@ -56,15 +58,17 @@ class DefaultNamingService implements INamingService {
 	@Inject extension StepDepthComparator stepDepthComparator
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension NamingHelper
+	
+	@Inject private StextNameProvider provider
 
-	var protected int maxLength = Integer.MAX_VALUE
+	var protected int maxLength = 0
 
 	var protected char separator = '_'
 
 	var protected Map<NamedElement, String> map
 
 	var protected ExecutionFlow activeFlow
-	
+
 	var protected Statechart activeStatechart
 
 	new(int maxLength, char separator) {
@@ -73,10 +77,10 @@ class DefaultNamingService implements INamingService {
 	}
 
 	new() {
-		this.maxLength = Integer.MAX_VALUE
+		this.maxLength = 0
 		this.separator = '_'
 	}
-	
+
 	override void initializeNamingService(Statechart statechart) {
 		if (map == null || activeStatechart != statechart) {
 			activeFlow = null
@@ -84,7 +88,7 @@ class DefaultNamingService implements INamingService {
 			map = statechart.createShortNameMap(maxLength, separator)
 		}
 	}
-	
+
 	override void initializeNamingService(ExecutionFlow flow) {
 		if (map == null || activeFlow != flow) {
 			activeFlow = flow
@@ -92,49 +96,50 @@ class DefaultNamingService implements INamingService {
 			map = flow.createShortNameMap(maxLength, separator)
 		}
 	}
-	
+
 	override getShortNameMap(Statechart statechart) {
 		if (map == null || activeStatechart != statechart) {
 			statechart.initializeNamingService()
 		}
 		return map
 	}
-	
+
 	override Map<NamedElement, String> getShortNameMap(ExecutionFlow flow) {
 		if (map == null || activeFlow != flow) {
 			flow.initializeNamingService()
 		}
 		return map
 	}
-	
+
 	override getShortName(NamedElement element) {
 		if (map == null || !map.containsKey(element)) {
 			var statechart = element.statechart
 			if (statechart != null) {
 				statechart.initializeNamingService
-			}
-			else {
+			} else {
 				element.flow?.initializeNamingService
 			}
 		}
 		map?.get(element)
 	}
-	
+
 	def Map<NamedElement, String> createShortNameMap(Statechart statechart, int maxLength, char separator) {
 		var HashMap<NamedElement, String> map = new HashMap<NamedElement, String>
 		map.addShortVertexNames(statechart, maxLength, separator)
 		return map;
 	}
-	
+
 	def protected void addShortVertexNames(Map<NamedElement, String> map, CompositeElement element, int maxLength,
 		char separator) {
 		for (region : element.regions) {
 			for (vertex : region.vertices) {
 				switch vertex {
-					State :
-						map.putShortName(vertex, vertex.prefix(separator), vertex.suffix(separator), maxLength, separator)
+					State:
+						map.putShortName(vertex, vertex.prefix(separator), vertex.suffix(separator), maxLength,
+							separator)
 					default:
-						map.putShortName(vertex, vertex.prefix(separator), vertex.suffix(separator), maxLength, separator)
+						map.putShortName(vertex, vertex.prefix(separator), vertex.suffix(separator), maxLength,
+							separator)
 				}
 			}
 		}
@@ -229,11 +234,11 @@ class DefaultNamingService implements INamingService {
 	def protected suffix(TimeEventSpec it, State state, char separator) {
 		"tev" + state.timeEventSpecs.indexOf(it)
 	}
-	
+
 	def protected prefix(State it, char separator) {
 		activeStatechart.name
 	}
-	
+
 	def protected prefix(Vertex it, char separator) {
 		""
 	}
@@ -241,40 +246,50 @@ class DefaultNamingService implements INamingService {
 	def protected suffix(Vertex it, char separator) {
 		""
 	}
-	
+
 	override asIdentifier(String string) {
 		string.replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', separator.toString)
 	}
-	
+
 	override asEscapedIdentifier(String string) {
 		string.asIdentifier
 	}
-	
+
 	override isKeyword(String string) {
 		return false
 	}
-	
-	def protected String getShortName(NamedElement element, String prefix, String suffix, List<String> nameList, int maxLength,
-		char separator) {
-		var shortName = element.createShortName(prefix, suffix, nameList, NameShorteningStrategy::STANDARD, separator)
 
-		//second reduction removing vowels
-		if (shortName.length > maxLength) {
-			shortName = element.createShortName(prefix, suffix, nameList, NameShorteningStrategy::REMOVE_VOWELS,
-				separator);
-		}
+	def protected String getShortName(NamedElement element, String prefix, String suffix, List<String> nameList,
+		int maxLength, char separator) {
+		var shortName = ""
 
-		//third reduction using index position as name
-		if (shortName.length > maxLength) {
-			shortName = element.createShortName(prefix, suffix, nameList, NameShorteningStrategy::INDEX_POSITION,
-				separator);
-		}
+		if (maxLength > 0) {
 
-		//fourth reduction using hash value
-		if (shortName.length > maxLength) {
+			//first reduction use short name
+			shortName = element.createShortName(prefix, suffix, nameList, NameShorteningStrategy::SHORT_NAME,
+				separator)
 
-			//Important: FQN has to be the same if the input model is a Statechart or an ExecutionFlow
-			shortName = prefix + separator + element.fqElementName.asIdentifier.getHash(maxLength)
+			//second reduction removing vowels
+			if (shortName.length > maxLength) {
+				shortName = element.createShortName(prefix, suffix, nameList, NameShorteningStrategy::REMOVE_VOWELS,
+					separator);
+			}
+
+			//third reduction using index position as name
+			if (shortName.length > maxLength) {
+				shortName = element.createShortName(prefix, suffix, nameList, NameShorteningStrategy::INDEX_POSITION,
+					separator);
+			}
+
+			//fourth reduction using hash value
+			if (shortName.length > maxLength) {
+
+				//Important: FQN has to be the same if the input model is a Statechart or an ExecutionFlow
+				shortName = element.fqElementName(separator).asIdentifier.getHash(maxLength)
+			}
+		} else {
+			//use full qualified name
+			shortName = element.createShortName(prefix, suffix, nameList, NameShorteningStrategy::FQN_NAME, separator)
 		}
 		return shortName
 	}
@@ -283,11 +298,11 @@ class DefaultNamingService implements INamingService {
 		NameShorteningStrategy nameShorteningType, char separator) {
 
 		var name = element.elementName(nameShorteningType)
-		
+
 		if (name.nullOrEmpty) {
 			name = element.class.simpleName
 		}
-		
+
 		if (!suffix.nullOrEmpty) {
 			if (!name.nullOrEmpty) {
 				name = name + separator + suffix
@@ -305,19 +320,18 @@ class DefaultNamingService implements INamingService {
 				shortName = (prefix + separator + name).asEscapedIdentifier
 			}
 		}
-		
+
 		if (nameList.containsName(shortName)) {
 			switch element {
 				ExecutionScope:
 					shortName = element.superScope.createShortName(prefix, name, nameList, nameShorteningType, separator)
 				Step: {
 					if (element.scopeDepth > 0) {
-					shortName = element.parentExecutionScope.superScope.createShortName(prefix, name, nameList,
-						nameShorteningType, separator)
-					}
-					else {
+						shortName = element.parentExecutionScope.superScope.createShortName(prefix, name, nameList,
+							nameShorteningType, separator)
+					} else {
 						shortName = element.parentExecutionScope.createShortName(prefix, name, nameList,
-						nameShorteningType, separator)
+							nameShorteningType, separator)
 					}
 				}
 				default: {
@@ -330,18 +344,20 @@ class DefaultNamingService implements INamingService {
 		}
 		return shortName;
 	}
-	
+
 	def protected dispatch String elementName(NamedElement it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+			case NameShorteningStrategy::SHORT_NAME: return name
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return name?.removeVowels
 		}
 	}
-	
+
 	def protected dispatch String elementName(ExecutionScope it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+			case NameShorteningStrategy::SHORT_NAME: return name
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
 		}
@@ -349,15 +365,31 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(ExecutionState it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::STANDARD: return simpleName
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+			case NameShorteningStrategy::SHORT_NAME: return simpleName
 			case NameShorteningStrategy::REMOVE_VOWELS: return simpleName.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
+		}
+	}
+
+	def protected dispatch String elementName(ExecutionNode it, NameShorteningStrategy nameShorteningType) {
+		switch nameShorteningType {
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+			case NameShorteningStrategy::SHORT_NAME: return simpleName
+			case NameShorteningStrategy::REMOVE_VOWELS: return simpleName
+			case NameShorteningStrategy::INDEX_POSITION: return simpleName
 		}
 	}
 	
 	def protected dispatch String elementName(Region it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+			case NameShorteningStrategy::SHORT_NAME: {
+				if (name.nullOrEmpty) {		
+					return provider.getFullyQualifiedName(it).lastSegment.toString.substring(1)
+				}
+				return name
+			}
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
 		}
@@ -365,14 +397,11 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(Vertex it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::STANDARD: return name
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+			case NameShorteningStrategy::SHORT_NAME: return name
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
 		}
-	}
-
-	def protected dispatch String elementName(ExecutionNode it, NameShorteningStrategy nameShorteningType) {
-		simpleName
 	}
 
 	def protected dispatch String elementName(ExecutionFlow it, NameShorteningStrategy nameShorteningType) {
@@ -390,15 +419,15 @@ class DefaultNamingService implements INamingService {
 	def protected asIndexPosition(ExecutionScope it) {
 		superScope.subScopes.indexOf(it).toString;
 	}
-	
+
 	def protected dispatch asSGraphIndexPosition(Region it) {
 		composite.regions.toList.indexOf(it).toString
 	}
-	
+
 	def protected dispatch asSGraphIndexPosition(State it) {
 		parentRegion.vertices.filter(typeof(State)).toList.indexOf(it).toString
 	}
-	
+
 	def protected dispatch asSGraphIndexPosition(Vertex it) {
 		parentRegion.vertices.toList.indexOf(it).toString
 	}

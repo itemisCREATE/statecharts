@@ -9,10 +9,7 @@ GeneratorModel for sctunit::c {
 				
 		feature JUnitWrapper {
 			WrapToJUnit="true"	
-		}	
-		
-		
-  
+		}
 	}	
 		
 	test AlwaysOncycle{

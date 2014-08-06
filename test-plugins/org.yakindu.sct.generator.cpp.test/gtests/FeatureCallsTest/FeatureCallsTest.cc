@@ -16,8 +16,8 @@ TEST(StatemachineTest, FeatureCalls) {
 	FeatureCalls* statechart = new FeatureCalls();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(FeatureCalls::A));
+	EXPECT_TRUE(statechart->isActive(FeatureCalls::main_region_A));
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(FeatureCalls::A));
+	EXPECT_TRUE(statechart->isActive(FeatureCalls::main_region_A));
 	delete statechart;
 }

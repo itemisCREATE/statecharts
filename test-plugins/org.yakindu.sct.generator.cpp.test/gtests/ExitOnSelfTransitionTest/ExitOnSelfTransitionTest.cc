@@ -16,7 +16,7 @@ TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	ExitOnSelfTransition* statechart = new ExitOnSelfTransition();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(ExitOnSelfTransition::A));
+	EXPECT_TRUE(statechart->isActive(ExitOnSelfTransition::main_region_A));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 1);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 0);
 	statechart->raise_e();

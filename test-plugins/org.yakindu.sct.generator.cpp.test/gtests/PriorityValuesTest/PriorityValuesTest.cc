@@ -19,17 +19,17 @@ TEST(StatemachineTest, transitionPriority) {
 	EXPECT_TRUE(statechart->isActive(PriorityValues::main_region_A));
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(PriorityValues::C));
+	EXPECT_TRUE(statechart->isActive(PriorityValues::main_region_C));
 	delete statechart;
 }
 TEST(StatemachineTest, regionPriority) {
 	PriorityValues* statechart = new PriorityValues();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(PriorityValues::A));
+	EXPECT_TRUE(statechart->isActive(PriorityValues::someRegion_A));
 	statechart->raise_event2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(PriorityValues::B));
-	EXPECT_TRUE(!statechart->isActive(PriorityValues::E));
+	EXPECT_TRUE(statechart->isActive(PriorityValues::someRegion_B));
+	EXPECT_TRUE(!statechart->isActive(PriorityValues::main_region_E));
 	delete statechart;
 }

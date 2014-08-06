@@ -16,12 +16,12 @@ TEST(StatemachineTest, raiseEvent) {
 	RaiseEvent* statechart = new RaiseEvent();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(RaiseEvent::SateA));
-	EXPECT_TRUE(statechart->isActive(RaiseEvent::StateA));
+	EXPECT_TRUE(statechart->isActive(RaiseEvent::second_region_SateA));
+	EXPECT_TRUE(statechart->isActive(RaiseEvent::main_region_StateA));
 	statechart->raise_e2();
 	statechart->runCycle();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(RaiseEvent::second_region_StateB));
-	EXPECT_TRUE(statechart->isActive(RaiseEvent::StateB));
+	EXPECT_TRUE(statechart->isActive(RaiseEvent::main_region_StateB));
 	delete statechart;
 }

@@ -18,26 +18,26 @@ EnterState handle;
 TEST(StatemachineTest, defaultEntry) {
 	enterState_init(&handle);
 	enterState_enter(&handle);
-	EXPECT_TRUE(enterState_isActive(&handle, EnterState_A));
+	EXPECT_TRUE(enterState_isActive(&handle, EnterState_r_A));
 	enterStateIface_raise_e(&handle);
 	enterState_runCycle(&handle);
-	EXPECT_TRUE(enterState_isActive(&handle, EnterState_E));
+	EXPECT_TRUE(enterState_isActive(&handle, EnterState_r_B_r_E));
 }
 TEST(StatemachineTest, namedEntryThroughNamedTransition) {
 	enterState_init(&handle);
 	enterState_enter(&handle);
-	EXPECT_TRUE(enterState_isActive(&handle, EnterState_A));
+	EXPECT_TRUE(enterState_isActive(&handle, EnterState_r_A));
 	enterStateIface_raise_f(&handle);
 	enterState_runCycle(&handle);
-	EXPECT_TRUE(enterState_isActive(&handle, EnterState_F));
+	EXPECT_TRUE(enterState_isActive(&handle, EnterState_r_B_r_F));
 }
 TEST(StatemachineTest, namedEntryThroughDefaultTransition) {
 	enterState_init(&handle);
 	enterState_enter(&handle);
-	EXPECT_TRUE(enterState_isActive(&handle, EnterState_A));
+	EXPECT_TRUE(enterState_isActive(&handle, EnterState_r_A));
 	enterStateIface_raise_g(&handle);
 	enterState_runCycle(&handle);
-	EXPECT_TRUE(enterState_isActive(&handle, EnterState_E));
+	EXPECT_TRUE(enterState_isActive(&handle, EnterState_r_B_r_E));
 }
 
 		

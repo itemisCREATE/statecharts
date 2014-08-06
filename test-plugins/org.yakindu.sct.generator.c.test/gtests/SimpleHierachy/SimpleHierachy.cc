@@ -18,13 +18,13 @@ SimpleHierachy handle;
 TEST(StatemachineTest, simpleHierachyTest) {
 	simpleHierachy_init(&handle);
 	simpleHierachy_enter(&handle);
-	EXPECT_TRUE(simpleHierachy_isActive(&handle, SimpleHierachy_A));
+	EXPECT_TRUE(simpleHierachy_isActive(&handle, SimpleHierachy_main_region_A));
 	simpleHierachyIface_raise_event1(&handle);
 	simpleHierachyIface_raise_event1(&handle);
 	simpleHierachyIface_raise_event1(&handle);
 	simpleHierachy_runCycle(&handle);
-	EXPECT_TRUE(simpleHierachy_isActive(&handle, SimpleHierachy_B));
-	EXPECT_TRUE(simpleHierachy_isActive(&handle, SimpleHierachy_B1));
+	EXPECT_TRUE(simpleHierachy_isActive(&handle, SimpleHierachy_main_region_B));
+	EXPECT_TRUE(simpleHierachy_isActive(&handle, SimpleHierachy_main_region_B_subregion1_B1));
 }
 
 		
