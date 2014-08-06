@@ -16,7 +16,7 @@ TEST(StatemachineTest, integerExpressions) {
 	IntegerExpressions* statechart = new IntegerExpressions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(IntegerExpressions::StateA));
+	EXPECT_TRUE(statechart->isActive(IntegerExpressions::main_region_StateA));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt1()== 10);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt2()== 5);
 	statechart->raise_e1();

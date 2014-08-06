@@ -16,12 +16,12 @@ TEST(StatemachineTest, simpleHierachyTest) {
 	SimpleHierachy* statechart = new SimpleHierachy();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(SimpleHierachy::A));
+	EXPECT_TRUE(statechart->isActive(SimpleHierachy::main_region_A));
 	statechart->raise_event1();
 	statechart->raise_event1();
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(SimpleHierachy::B));
-	EXPECT_TRUE(statechart->isActive(SimpleHierachy::B1));
+	EXPECT_TRUE(statechart->isActive(SimpleHierachy::main_region_B));
+	EXPECT_TRUE(statechart->isActive(SimpleHierachy::main_region_B_subregion1_B1));
 	delete statechart;
 }

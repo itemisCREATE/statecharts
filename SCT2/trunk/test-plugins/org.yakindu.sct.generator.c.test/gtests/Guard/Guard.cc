@@ -18,22 +18,22 @@ Guard handle;
 TEST(StatemachineTest, guardTest) {
 	guard_init(&handle);
 	guard_enter(&handle);
-	EXPECT_TRUE(guard_isActive(&handle, Guard_A));
+	EXPECT_TRUE(guard_isActive(&handle, Guard_main_region_A));
 	guardIface_raise_event1(&handle);
 	guard_runCycle(&handle);
-	EXPECT_TRUE(guard_isActive(&handle, Guard_A));
+	EXPECT_TRUE(guard_isActive(&handle, Guard_main_region_A));
 	guardIface_raise_event2(&handle);
 	guard_runCycle(&handle);
-	EXPECT_TRUE(guard_isActive(&handle, Guard_B));
+	EXPECT_TRUE(guard_isActive(&handle, Guard_main_region_B));
 	guardIface_raise_return(&handle);
 	guard_runCycle(&handle);
-	EXPECT_TRUE(guard_isActive(&handle, Guard_A));
+	EXPECT_TRUE(guard_isActive(&handle, Guard_main_region_A));
 	guardIface_raise_event1(&handle);
 	guard_runCycle(&handle);
-	EXPECT_TRUE(guard_isActive(&handle, Guard_B));
+	EXPECT_TRUE(guard_isActive(&handle, Guard_main_region_B));
 	guardIface_raise_return(&handle);
 	guard_runCycle(&handle);
-	EXPECT_TRUE(guard_isActive(&handle, Guard_A));
+	EXPECT_TRUE(guard_isActive(&handle, Guard_main_region_A));
 }
 
 		

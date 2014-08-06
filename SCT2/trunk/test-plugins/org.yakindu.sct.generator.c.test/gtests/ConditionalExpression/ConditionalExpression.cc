@@ -18,11 +18,11 @@ ConditionalExpressions handle;
 TEST(StatemachineTest, ConditionalExpressionTest) {
 	conditionalExpressions_init(&handle);
 	conditionalExpressions_enter(&handle);
-	EXPECT_TRUE(conditionalExpressions_isActive(&handle, ConditionalExpressions_A));
+	EXPECT_TRUE(conditionalExpressions_isActive(&handle, ConditionalExpressions_main_region_A));
 	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle) == 1);
 	conditionalExpressionsIface_raise_e(&handle);
 	conditionalExpressions_runCycle(&handle);
-	EXPECT_TRUE(conditionalExpressions_isActive(&handle, ConditionalExpressions_B));
+	EXPECT_TRUE(conditionalExpressions_isActive(&handle, ConditionalExpressions_main_region_B));
 	EXPECT_TRUE(conditionalExpressionsIface_get_condition(&handle) == 2);
 }
 

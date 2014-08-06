@@ -16,15 +16,15 @@ TEST(StatemachineTest, statechartLocalReactionsTest) {
 	StatechartLocalReactions* statechart = new StatechartLocalReactions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::S1));
-	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::a));
+	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::main_region_S1));
+	EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::region2_a));
 	while (statechart->getDefaultSCI()->get_myInt()< 10) {
-		EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::a));
+		EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::region2_a));
 		if (statechart->getDefaultSCI()->get_myInt()%2== 0) {
-					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::S1));
+					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::main_region_S1));
 				  }
 				else {
-					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::S2));;
+					EXPECT_TRUE(statechart->isActive(StatechartLocalReactions::main_region_S2));;
 				}
 		statechart->runCycle();
 	}

@@ -16,11 +16,11 @@ TEST(StatemachineTest, CKeywordsTest) {
 	CKeywords* statechart = new CKeywords();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(CKeywords::char_ID));
+	EXPECT_TRUE(statechart->isActive(CKeywords::auto_char));
 	statechart->raise_auto();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(CKeywords::const_ID));
-	EXPECT_TRUE(statechart->isActive(CKeywords::case_ID));
-	EXPECT_TRUE(statechart->isActive(CKeywords::asm_ID));
+	EXPECT_TRUE(statechart->isActive(CKeywords::auto_const));
+	EXPECT_TRUE(statechart->isActive(CKeywords::auto_const_switch_case));
+	EXPECT_TRUE(statechart->isActive(CKeywords::auto_const_switch_case_enum_asm));
 	delete statechart;
 }

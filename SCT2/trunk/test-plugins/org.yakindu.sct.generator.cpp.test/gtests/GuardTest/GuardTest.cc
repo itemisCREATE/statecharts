@@ -16,21 +16,21 @@ TEST(StatemachineTest, guardTest) {
 	Guard* statechart = new Guard();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(Guard::A));
+	EXPECT_TRUE(statechart->isActive(Guard::main_region_A));
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard::A));
+	EXPECT_TRUE(statechart->isActive(Guard::main_region_A));
 	statechart->raise_event2();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard::B));
+	EXPECT_TRUE(statechart->isActive(Guard::main_region_B));
 	statechart->raise_return();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard::A));
+	EXPECT_TRUE(statechart->isActive(Guard::main_region_A));
 	statechart->raise_event1();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard::B));
+	EXPECT_TRUE(statechart->isActive(Guard::main_region_B));
 	statechart->raise_return();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(Guard::A));
+	EXPECT_TRUE(statechart->isActive(Guard::main_region_A));
 	delete statechart;
 }

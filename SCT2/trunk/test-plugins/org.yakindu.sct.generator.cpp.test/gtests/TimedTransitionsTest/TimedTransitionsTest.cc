@@ -16,9 +16,9 @@ TEST(StatemachineTest, Timer01) {
 	TimedTransitions* statechart = new TimedTransitions();
 	statechart->init();
 	statechart->enter();
-	EXPECT_TRUE(statechart->isActive(TimedTransitions::Start));
+	EXPECT_TRUE(statechart->isActive(TimedTransitions::main_region_Start));
 	/*not implemented: WaitStatement*/
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->isActive(TimedTransitions::End));
+	EXPECT_TRUE(statechart->isActive(TimedTransitions::main_region_End));
 	delete statechart;
 }

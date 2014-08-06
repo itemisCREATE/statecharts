@@ -41,9 +41,14 @@ class GenmodelEntries {
 	
 	def getIdentifierLength(GeneratorEntry it) {
 		if (maxIdentifierLengthParameter != null) {
-			return Integer.valueOf(maxIdentifierLengthParameter.stringValue)
+			try {
+				return Integer.valueOf(maxIdentifierLengthParameter.stringValue)
+			}
+			catch (NumberFormatException e) {
+				return 0
+			}
 		}
-		return null
+		return 0
 	}
 	
 	def private FeatureParameterValue getSeparatorParameter(GeneratorEntry it) {

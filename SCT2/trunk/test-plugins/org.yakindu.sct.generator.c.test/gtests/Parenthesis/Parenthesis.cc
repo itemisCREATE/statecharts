@@ -18,7 +18,7 @@ Parenthesis handle;
 TEST(StatemachineTest, simple) {
 	parenthesis_init(&handle);
 	parenthesis_enter(&handle);
-	EXPECT_TRUE(parenthesis_isActive(&handle, Parenthesis_A));
+	EXPECT_TRUE(parenthesis_isActive(&handle, Parenthesis_mainRegion_A));
 	EXPECT_TRUE(parenthesisIface_get_erg(&handle) == 8);
 }
 

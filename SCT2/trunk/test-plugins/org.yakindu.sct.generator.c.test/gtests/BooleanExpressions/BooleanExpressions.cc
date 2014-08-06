@@ -18,12 +18,12 @@ BooleanExpressions handle;
 TEST(StatemachineTest, booleanExpressions) {
 	booleanExpressions_init(&handle);
 	booleanExpressions_enter(&handle);
-	EXPECT_TRUE(booleanExpressions_isActive(&handle, BooleanExpressions_StateA));
+	EXPECT_TRUE(booleanExpressions_isActive(&handle, BooleanExpressions_main_region_StateA));
 	EXPECT_TRUE(booleanExpressionsIface_get_myBool1(&handle) == true);
 	EXPECT_TRUE(booleanExpressionsIface_get_myBool2(&handle) == false);
 	booleanExpressionsIface_raise_e1(&handle);
 	booleanExpressions_runCycle(&handle);
-	EXPECT_TRUE(booleanExpressions_isActive(&handle, BooleanExpressions_StateB));
+	EXPECT_TRUE(booleanExpressions_isActive(&handle, BooleanExpressions_main_region_StateB));
 	EXPECT_TRUE(booleanExpressionsIface_get_and(&handle) == false);
 	EXPECT_TRUE(booleanExpressionsIface_get_or(&handle) == true);
 	EXPECT_TRUE(booleanExpressionsIface_get_not(&handle) == false);

@@ -18,12 +18,12 @@ CKeywords handle;
 TEST(StatemachineTest, CKeywordsTest) {
 	cKeywords_init(&handle);
 	cKeywords_enter(&handle);
-	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_char));
+	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_char));
 	cKeywordsIface_raise_auto(&handle);
 	cKeywords_runCycle(&handle);
-	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_const));
-	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_case));
-	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_asm));
+	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_const));
+	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_const_switch_case));
+	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_const_switch_case_enum_asm));
 }
 
 		

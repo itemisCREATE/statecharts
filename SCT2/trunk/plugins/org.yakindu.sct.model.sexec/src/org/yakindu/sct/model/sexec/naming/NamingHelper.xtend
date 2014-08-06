@@ -21,6 +21,9 @@ import org.yakindu.sct.model.sexec.ExecutionNode
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sgraph.Statechart
 import java.util.List
+import org.yakindu.sct.model.sexec.ExecutionScope
+import com.google.inject.Inject
+import org.yakindu.sct.model.stext.naming.StextNameProvider
 
 /**
  * Helper class with methods to create meaningful short names for {@link ExecutionFlow}
@@ -31,30 +34,35 @@ import java.util.List
  * 
  */
 class NamingHelper {
+	
+	@Inject private StextNameProvider provider
 
-	def dispatch String fqElementName(ExecutionState it) {
-		(if(superScope != null && ! superScope.fqElementName.empty) superScope.fqElementName + "_" else "") + simpleName
+	def dispatch String fqElementName(ExecutionState it, char separator) {
+		provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+	}
+	
+	def dispatch String fqElementName(ExecutionScope it, char separator) {
+		provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
 	}
 
-	def dispatch String fqElementName(EObject it) {
-		eContainer.fqElementName
+	def dispatch String fqElementName(EObject it, char separator) {
+		eContainer.fqElementName(separator)
 	}
 
-	def dispatch String fqElementName(ExecutionNode it) {
-		name
+	def dispatch String fqElementName(ExecutionNode it, char separator) {
+		provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
 	}
 
-	def dispatch String fqElementName(ExecutionFlow it) {
+	def dispatch String fqElementName(ExecutionFlow it, char separator) {
 		""
 	}
 
-	def dispatch String fqElementName(Statechart it) {
+	def dispatch String fqElementName(Statechart it, char separator) {
 		""
 	}
-
-	def dispatch String fqElementName(NamedElement it) {
-		(if(eContainer instanceof NamedElement && !(eContainer as NamedElement).fqElementName.nullOrEmpty) (eContainer as NamedElement).
-			fqElementName + "_" else "") + name
+	
+	def dispatch String fqElementName(NamedElement it, char separator) {
+		provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
 	}
 	
 	def containsName(List<String> it, String shortName) {
