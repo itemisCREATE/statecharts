@@ -25,7 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		InEventLifeCycle.class, IntegerExpressions.class,
 		InternalEventLifeCycle.class, LocalReactions.class,
 		LogicalAndTests.class, LogicalOrTests.class,
-		NamedInterfaceAccess.class, Operations.class, OutEventLifeCycle.class,
+		NamedInterfaceAccess.class, OutEventLifeCycle.class,
 		Parenthesis.class, PriorityValues.class, RaiseEvent.class,
 		SameNameDifferentRegion.class, ShallowHistory.class, SimpleEvent.class,
 		StatechartLocalReactions.class, SimpleHierachy.class,
