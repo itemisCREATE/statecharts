@@ -2,7 +2,7 @@
 <feature
       id="de.itemis.xtext.utils.jface"
       label="Xtext JFace Integration Feature"
-      version="2.3.0.qualifier"
+      version="2.3.1.qualifier"
       provider-name="itemis AG">
 
    <description url="http://www.example.com/description">
