@@ -38,7 +38,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	private SCInterfaceImpl sCInterface;
 
 	public enum State {
-		main_region_A, main_region_B, main_region_C, $NullState$
+		main_region_B, main_region_C, main_region_D, main_region_A, $NullState$
 	};
 
 	private boolean myBool;
@@ -69,27 +69,28 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public void enter() {
 		entryAction();
 
-		operationCallback.internalOperation1();
-
-		myBool = operationCallback.internalOperation2(4);
-
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	public void exit() {
 		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
 			case main_region_B :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
 
 			case main_region_C :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_D :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
+			case main_region_A :
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 				break;
@@ -120,12 +121,14 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	 */
 	public boolean isStateActive(State state) {
 		switch (state) {
-			case main_region_A :
-				return stateVector[0] == State.main_region_A;
 			case main_region_B :
 				return stateVector[0] == State.main_region_B;
 			case main_region_C :
 				return stateVector[0] == State.main_region_C;
+			case main_region_D :
+				return stateVector[0] == State.main_region_D;
+			case main_region_A :
+				return stateVector[0] == State.main_region_A;
 			default :
 				return false;
 		}
@@ -155,8 +158,8 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	private void exitAction() {
 	}
 
-	/* The reactions of state A. */
-	private void reactMain_region_A() {
+	/* The reactions of state B. */
+	private void reactMain_region_B() {
 		if (sCInterface.ev) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
@@ -166,12 +169,12 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			sCIInterface1.operationCallback.interfaceOperation2(4);
 
 			nextStateIndex = 0;
-			stateVector[0] = State.main_region_B;
+			stateVector[0] = State.main_region_C;
 		}
 	}
 
-	/* The reactions of state B. */
-	private void reactMain_region_B() {
+	/* The reactions of state C. */
+	private void reactMain_region_C() {
 		if (sCInterface.ev) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
@@ -181,12 +184,25 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			sCInterface.operationCallback.unnamedInterfaceOperation2(4);
 
 			nextStateIndex = 0;
-			stateVector[0] = State.main_region_C;
+			stateVector[0] = State.main_region_D;
 		}
 	}
 
-	/* The reactions of state C. */
-	private void reactMain_region_C() {
+	/* The reactions of state D. */
+	private void reactMain_region_D() {
+	}
+
+	/* The reactions of state A. */
+	private void reactMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		operationCallback.internalOperation1();
+
+		myBool = operationCallback.internalOperation2(4);
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
 	}
 
 	public void runCycle() {
@@ -196,14 +212,17 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		for (nextStateIndex = 0; nextStateIndex < stateVector.length; nextStateIndex++) {
 
 			switch (stateVector[nextStateIndex]) {
-				case main_region_A :
-					reactMain_region_A();
-					break;
 				case main_region_B :
 					reactMain_region_B();
 					break;
 				case main_region_C :
 					reactMain_region_C();
+					break;
+				case main_region_D :
+					reactMain_region_D();
+					break;
+				case main_region_A :
+					reactMain_region_A();
 					break;
 				default :
 					// $NullState$
