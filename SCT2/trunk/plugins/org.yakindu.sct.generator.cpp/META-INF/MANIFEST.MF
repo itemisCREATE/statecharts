@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Statechart Tools (SCT) C++ Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.cpp;singleton:=true
-Bundle-Version: 2.3.0.qualifier
+Bundle-Version: 2.3.1.qualifier
 Require-Bundle: org.yakindu.sct.model.sexec,
  org.eclipse.jdt.core,
  org.apache.commons.logging,
