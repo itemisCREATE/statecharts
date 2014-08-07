@@ -21,7 +21,7 @@
 				<configuration>
 					 						 		
 					<includes>
-						<!--include>**/AllTestsTest.class</include-->
+						<include>**/AllTestsTest.class</include>
 						<include>**/AllTestsTestCustom.class</include>
 					</includes>
 					 	 		
