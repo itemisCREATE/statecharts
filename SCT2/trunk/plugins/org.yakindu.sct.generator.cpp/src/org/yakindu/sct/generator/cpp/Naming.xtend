@@ -68,8 +68,8 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	'''
 		«type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.targetLanguageName» «parameter.identifier»«ENDFOR»)'''
 		
-	def protected OCB_InterfaceSetter(StatechartScope scope) '''
-		void set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''
+	def protected OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
+		void «IF fqn»«scope.flow.module»::«ENDIF»set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''
 	
 	def protected identifier(Parameter parameter) {
 		if (parameter.name.isKeyword) {

@@ -74,6 +74,7 @@ class StatemachineImplementation {
 			
 			«FOR s : scopes.filter(typeof(StatechartScope))»
 			«s.instance» = new «s.interfaceName»();
+			«IF s.hasOperations»«s.OCB_Instance» = null;«ENDIF»
 		«ENDFOR»
 		«IF hasHistory»
 			
@@ -315,7 +316,7 @@ class StatemachineImplementation {
 				«ENDIF»
 			«ENDFOR»
 			«IF scope.hasOperations»
-				void «module»::«scope.OCB_InterfaceSetter» {
+				«scope.OCB_InterfaceSetterDeclaration(true)» {
 					«scope.OCB_Instance» = operationCallback;
 				}
 			«ENDIF»
