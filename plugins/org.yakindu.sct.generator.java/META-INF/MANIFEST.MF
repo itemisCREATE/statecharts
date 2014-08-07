@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Statechart Tools (SCT) Java Generator
 Bundle-SymbolicName: org.yakindu.sct.generator.java;singleton:=true
-Bundle-Version: 2.3.0.qualifier
+Bundle-Version: 2.3.1.qualifier
 Require-Bundle: org.eclipse.jdt.core;bundle-version="3.5.0",
  org.apache.commons.logging,
  org.apache.log4j;resolution:=optional,
