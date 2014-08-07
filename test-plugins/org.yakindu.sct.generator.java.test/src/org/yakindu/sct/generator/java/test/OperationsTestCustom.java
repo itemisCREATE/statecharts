@@ -9,7 +9,7 @@
  *     committers of YAKINDU - initial API and implementation
  */
 
-package org.yakindu.sct.generator.java;
+package org.yakindu.sct.generator.java.test;
 
 import org.junit.After;
 import org.junit.Before;
