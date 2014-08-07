@@ -12,8 +12,9 @@ package org.yakindu.sct.generator.java.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+import org.yakindu.sct.generator.java.JavaSCTGeneratorTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({OperationsTestCustom.class})
+@SuiteClasses({OperationsTestCustom.class, JavaSCTGeneratorTest.class})
 public class AllTestsTestCustom {
 }
