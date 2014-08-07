@@ -19,7 +19,12 @@
 				<artifactId>tycho-surefire-plugin</artifactId>
 				<version>${tycho-version}</version>
 				<configuration>
-					 		
+					 						 		
+					<includes>
+						<!--include>**/AllTestsTest.class</include-->
+						<include>**/AllTestsTestCustom.class</include>
+					</includes>
+					 	 		
 					<useUIHarness>false</useUIHarness>
 					<useUIThread>false</useUIThread>
 					<testFailureIgnore>${testFailureIgnore}</testFailureIgnore>
