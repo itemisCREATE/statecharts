@@ -21,6 +21,7 @@
 				<configuration>
 					<includes>
 						<include>**/AllTestsTest.class</include>
+						<include>**/AllTestsTestCustom.class</include>
 					</includes> 
 					<useUIHarness>false</useUIHarness>
 					<useUIThread>false</useUIThread>

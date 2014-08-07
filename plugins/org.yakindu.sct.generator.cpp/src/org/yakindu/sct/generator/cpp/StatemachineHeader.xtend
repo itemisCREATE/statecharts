@@ -84,6 +84,9 @@ class StatemachineHeader extends Statemachine {
 				«functionPrototypes»
 		};
 		
+		«FOR s : it.scopes.filter(typeof(StatechartScope)) SEPARATOR StringConcatenation.DEFAULT_LINE_DELIMITER»
+			«s.createInlineOCB_Destructor»
+		«ENDFOR»
 		#endif /* «module().define»_H_ */
 	'''
 	
@@ -98,6 +101,13 @@ class StatemachineHeader extends Statemachine {
 		interfaces = interfaces + "public " + statemachineInterface
 		
 		return interfaces;
+	}
+	
+	def protected createInlineOCB_Destructor(StatechartScope it) {
+		if (hasOperations) {
+			return '''inline «flow.module»::«interfaceOCBName»::~«interfaceOCBName»() {}'''
+		}
+		return ''''''
 	}
 	
 	def protected createPublicScope(Scope scope) {
@@ -154,13 +164,15 @@ class StatemachineHeader extends Statemachine {
 			//! Inner class for «scope.simpleName» interface scope operation callbacks.
 			class «scope.interfaceOCBName» {
 				public:
+					virtual ~«scope.interfaceOCBName»() = 0;
+					
 					«FOR operation : scope.operations SEPARATOR StringConcatenation.DEFAULT_LINE_DELIMITER»
 						virtual «operation.signature» = 0;
 					«ENDFOR»
 			};
 			
 			/*! Set the working instance of the operation callback interface '«scope.interfaceOCBName»'. */
-			«scope.OCB_InterfaceSetter»;
+			«scope.OCB_InterfaceSetterDeclaration(false)»;
 		«ENDIF»
 		'''
 	}
@@ -184,7 +196,7 @@ class StatemachineHeader extends Statemachine {
 		
 		«FOR s : scopes.filter(typeof(StatechartScope))»
 			«s.interfaceName»* «s.instance»;
-			«IF s.hasOperations»«s.interfaceOCBName»* «s.OCB_Instance»«ENDIF»
+			«IF s.hasOperations»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
 	'''
 	
