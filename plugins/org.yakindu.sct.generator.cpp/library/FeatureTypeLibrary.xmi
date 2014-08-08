@@ -15,7 +15,7 @@
         name="statemachinePrefix"
         optional="true"/>
     <parameters
-        name="maxIdentiefierLength"
+        name="maxIdentifierLength"
         optional="true"
         parameterType="INTEGER"/>
     <parameters
