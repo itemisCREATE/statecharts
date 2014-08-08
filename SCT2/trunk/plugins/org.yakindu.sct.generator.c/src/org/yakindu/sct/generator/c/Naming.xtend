@@ -79,19 +79,19 @@ class Naming {
 		flow.type + 'States'	
 	}
 	
-	def dispatch type(InterfaceScope it) {
+	def dispatch String type(InterfaceScope it) {
 		flow.type + 'Iface' + (if (name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper	
 	}
 	
-	def dispatch type(InternalScope it) {
+	def dispatch String type(InternalScope it) {
 		flow.type + 'Internal'	
 	}
 	
-	def dispatch type(Scope it) {
+	def dispatch String type(Scope it) {
 		flow.type + 'TimeEvents'	
 	}
 	
-	def dispatch type(ExecutionFlow it) {
+	def dispatch String type(ExecutionFlow it) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
 			return name.asIdentifier.toFirstUpper	
 		}
@@ -145,7 +145,7 @@ class Naming {
 	}
 	
 	def dispatch last_state(Step it) {
-		execution_flow.module + lastStateID
+		execution_flow.type + lastStateID
 	}
 	
 	def lastStateID() {
