@@ -42,6 +42,7 @@ import org.yakindu.base.expressions.expressions.RelationalOperator;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.ShiftOperator;
 import org.yakindu.base.expressions.expressions.StringLiteral;
+import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
 
 /**
@@ -225,6 +226,13 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * @generated
 	 */
 	private EClass parenthesizedExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeCastExpressionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -964,6 +972,33 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTypeCastExpression() {
+		return typeCastExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeCastExpression_Operand() {
+		return (EReference)typeCastExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeCastExpression_Type() {
+		return (EReference)typeCastExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getAssignmentOperator() {
 		return assignmentOperatorEEnum;
 	}
@@ -1136,6 +1171,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		parenthesizedExpressionEClass = createEClass(PARENTHESIZED_EXPRESSION);
 		createEReference(parenthesizedExpressionEClass, PARENTHESIZED_EXPRESSION__EXPRESSION);
 
+		typeCastExpressionEClass = createEClass(TYPE_CAST_EXPRESSION);
+		createEReference(typeCastExpressionEClass, TYPE_CAST_EXPRESSION__OPERAND);
+		createEReference(typeCastExpressionEClass, TYPE_CAST_EXPRESSION__TYPE);
+
 		// Create enums
 		assignmentOperatorEEnum = createEEnum(ASSIGNMENT_OPERATOR);
 		shiftOperatorEEnum = createEEnum(SHIFT_OPERATOR);
@@ -1196,6 +1235,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		featureCallEClass.getESuperTypes().add(this.getExpression());
 		elementReferenceExpressionEClass.getESuperTypes().add(this.getExpression());
 		parenthesizedExpressionEClass.getESuperTypes().add(this.getExpression());
+		typeCastExpressionEClass.getESuperTypes().add(this.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1292,6 +1332,10 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		initEClass(parenthesizedExpressionEClass, ParenthesizedExpression.class, "ParenthesizedExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParenthesizedExpression_Expression(), this.getExpression(), null, "expression", null, 0, 1, ParenthesizedExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeCastExpressionEClass, TypeCastExpression.class, "TypeCastExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeCastExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeCastExpression_Type(), ecorePackage.getEObject(), null, "type", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");

@@ -229,6 +229,15 @@ public interface ExpressionsFactory extends EFactory {
 	ParenthesizedExpression createParenthesizedExpression();
 
 	/**
+	 * Returns a new object of class '<em>Type Cast Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Cast Expression</em>'.
+	 * @generated
+	 */
+	TypeCastExpression createTypeCastExpression();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

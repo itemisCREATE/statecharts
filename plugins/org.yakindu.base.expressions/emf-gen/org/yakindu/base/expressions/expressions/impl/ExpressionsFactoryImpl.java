@@ -80,6 +80,7 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 			case ExpressionsPackage.FEATURE_CALL: return createFeatureCall();
 			case ExpressionsPackage.ELEMENT_REFERENCE_EXPRESSION: return createElementReferenceExpression();
 			case ExpressionsPackage.PARENTHESIZED_EXPRESSION: return createParenthesizedExpression();
+			case ExpressionsPackage.TYPE_CAST_EXPRESSION: return createTypeCastExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -363,6 +364,16 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	public ParenthesizedExpression createParenthesizedExpression() {
 		ParenthesizedExpressionImpl parenthesizedExpression = new ParenthesizedExpressionImpl();
 		return parenthesizedExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeCastExpression createTypeCastExpression() {
+		TypeCastExpressionImpl typeCastExpression = new TypeCastExpressionImpl();
+		return typeCastExpression;
 	}
 
 	/**

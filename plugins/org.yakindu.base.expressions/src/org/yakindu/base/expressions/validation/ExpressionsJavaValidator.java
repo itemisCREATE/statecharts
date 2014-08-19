@@ -163,7 +163,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			// linking problem occurred, which is handled in other locations
 		}
 	}
-
+	
 	protected void report(InferenceResult result, EStructuralFeature feature) {
 		if (result.getIssues().isEmpty())
 			return;

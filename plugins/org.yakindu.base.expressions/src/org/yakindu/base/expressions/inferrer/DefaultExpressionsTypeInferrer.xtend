@@ -32,6 +32,7 @@ import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
@@ -42,6 +43,7 @@ import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.ShiftOperator
 import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryOperator
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.ITypeSystem
@@ -50,7 +52,7 @@ import org.yakindu.base.types.InferenceIssue
 import org.yakindu.base.types.InferenceResult
 import org.yakindu.base.types.InferredType
 import org.yakindu.base.types.TypedElement
-import org.yakindu.base.expressions.expressions.NullLiteral
+import org.yakindu.base.types.Type
 
 /**
  * 
@@ -169,6 +171,11 @@ class DefaultExpressionsTypeInferrer implements IExpressionsTypeInferrer {
 		return expression.value.doInferType
 	}
 
+	def dispatch InferenceResult doInferType(TypeCastExpression expression) {
+		return inferResult(expression.operand.doInferType, new InferenceResult(expression.type as Type),
+			ITypeSystem.BinaryOperators::CAST)
+	}
+
 	def dispatch InferenceResult doInferType(ShiftExpression expression) {
 		return inferResult(expression.leftOperand.doInferType, expression.rightOperand.doInferType,
 			getTypeSystemOperator(expression.operator))
@@ -198,9 +205,9 @@ class DefaultExpressionsTypeInferrer implements IExpressionsTypeInferrer {
 	def dispatch InferenceResult doInferType(IntLiteral literal) {
 		return inferTypeForLiteral(literal.value);
 	}
-	
+
 	def dispatch InferenceResult doInferType(NullLiteral literal) {
-		return  inferTypeForLiteral(null);
+		return inferTypeForLiteral(null);
 	}
 
 	def dispatch InferenceResult doInferType(Literal l) {
