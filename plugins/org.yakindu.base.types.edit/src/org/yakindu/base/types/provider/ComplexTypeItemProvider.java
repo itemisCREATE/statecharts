@@ -31,7 +31,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class ComplexTypeItemProvider
-	extends TypeItemProvider
+	extends ParameterizedTypeItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,

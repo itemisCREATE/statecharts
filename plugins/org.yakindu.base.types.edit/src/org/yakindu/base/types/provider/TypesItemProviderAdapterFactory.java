@@ -72,6 +72,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Package} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PackageItemProvider packageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.Package}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPackageAdapter() {
+		if (packageItemProvider == null) {
+			packageItemProvider = new PackageItemProvider(this);
+		}
+
+		return packageItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Operation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -279,6 +302,98 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.TypeParameter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeParameterItemProvider typeParameterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.TypeParameter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeParameterAdapter() {
+		if (typeParameterItemProvider == null) {
+			typeParameterItemProvider = new TypeParameterItemProvider(this);
+		}
+
+		return typeParameterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.ParameterizedType} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ParameterizedTypeItemProvider parameterizedTypeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.ParameterizedType}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createParameterizedTypeAdapter() {
+		if (parameterizedTypeItemProvider == null) {
+			parameterizedTypeItemProvider = new ParameterizedTypeItemProvider(this);
+		}
+
+		return parameterizedTypeItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.PackageMember} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected PackageMemberItemProvider packageMemberItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.PackageMember}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createPackageMemberAdapter() {
+		if (packageMemberItemProvider == null) {
+			packageMemberItemProvider = new PackageMemberItemProvider(this);
+		}
+
+		return packageMemberItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.RangeConstraint} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected RangeConstraintItemProvider rangeConstraintItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.RangeConstraint}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createRangeConstraintAdapter() {
+		if (rangeConstraintItemProvider == null) {
+			rangeConstraintItemProvider = new RangeConstraintItemProvider(this);
+		}
+
+		return rangeConstraintItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -377,6 +492,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
+		if (packageItemProvider != null) packageItemProvider.dispose();
 		if (operationItemProvider != null) operationItemProvider.dispose();
 		if (propertyItemProvider != null) propertyItemProvider.dispose();
 		if (parameterItemProvider != null) parameterItemProvider.dispose();
@@ -386,6 +502,10 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (complexTypeItemProvider != null) complexTypeItemProvider.dispose();
 		if (enumeratorItemProvider != null) enumeratorItemProvider.dispose();
 		if (typeConstraintItemProvider != null) typeConstraintItemProvider.dispose();
+		if (typeParameterItemProvider != null) typeParameterItemProvider.dispose();
+		if (parameterizedTypeItemProvider != null) parameterizedTypeItemProvider.dispose();
+		if (packageMemberItemProvider != null) packageMemberItemProvider.dispose();
+		if (rangeConstraintItemProvider != null) rangeConstraintItemProvider.dispose();
 	}
 
 }

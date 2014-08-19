@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -17,19 +17,19 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.yakindu.base.types.TypeConstraint;
+
+import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.types.TypeConstraint} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.types.RangeConstraint} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TypeConstraintItemProvider
-	extends ItemProviderAdapter
+public class RangeConstraintItemProvider
+	extends TypeConstraintItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -42,7 +42,7 @@ public class TypeConstraintItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeConstraintItemProvider(AdapterFactory adapterFactory) {
+	public RangeConstraintItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -57,42 +57,65 @@ public class TypeConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addValuePropertyDescriptor(object);
+			addLowerBoundPropertyDescriptor(object);
+			addUpperBoundPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Value feature.
+	 * This adds a property descriptor for the Lower Bound feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addValuePropertyDescriptor(Object object) {
+	protected void addLowerBoundPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_TypeConstraint_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeConstraint_value_feature", "_UI_TypeConstraint_type"),
-				 TypesPackage.Literals.TYPE_CONSTRAINT__VALUE,
+				 getString("_UI_RangeConstraint_lowerBound_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RangeConstraint_lowerBound_feature", "_UI_RangeConstraint_type"),
+				 TypesPackage.Literals.RANGE_CONSTRAINT__LOWER_BOUND,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This returns TypeConstraint.gif.
+	 * This adds a property descriptor for the Upper Bound feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUpperBoundPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_RangeConstraint_upperBound_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_RangeConstraint_upperBound_feature", "_UI_RangeConstraint_type"),
+				 TypesPackage.Literals.RANGE_CONSTRAINT__UPPER_BOUND,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This returns RangeConstraint.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TypeConstraint"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/RangeConstraint"));
 	}
 
 	/**
@@ -103,11 +126,11 @@ public class TypeConstraintItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		Object labelValue = ((TypeConstraint)object).getValue();
+		Object labelValue = ((RangeConstraint)object).getValue();
 		String label = labelValue == null ? null : labelValue.toString();
 		return label == null || label.length() == 0 ?
-			getString("_UI_TypeConstraint_type") :
-			getString("_UI_TypeConstraint_type") + " " + label;
+			getString("_UI_RangeConstraint_type") :
+			getString("_UI_RangeConstraint_type") + " " + label;
 	}
 
 	/**
@@ -121,8 +144,9 @@ public class TypeConstraintItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TypeConstraint.class)) {
-			case TypesPackage.TYPE_CONSTRAINT__VALUE:
+		switch (notification.getFeatureID(RangeConstraint.class)) {
+			case TypesPackage.RANGE_CONSTRAINT__LOWER_BOUND:
+			case TypesPackage.RANGE_CONSTRAINT__UPPER_BOUND:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -139,17 +163,6 @@ public class TypeConstraintItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return TypesEditPlugin.INSTANCE;
 	}
 
 }
