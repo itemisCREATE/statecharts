@@ -1,28 +1,28 @@
 package org.yakindu.sct.model.sexec.naming
 
-import javax.inject.Inject
-import org.yakindu.base.base.NamedElement
-import java.util.Map
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import java.util.HashMap
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import java.util.Comparator
-import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sexec.ExecutionScope
-import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.sct.model.sexec.ExecutionState
-import org.yakindu.sct.model.sgraph.State
-import org.yakindu.sct.model.stext.stext.TimeEventSpec
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgraph.CompositeElement
-import org.yakindu.sct.model.sgraph.Vertex
-import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.eclipse.emf.ecore.EObject
+import java.util.HashMap
 import java.util.List
+import java.util.Map
+import javax.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.base.NamedElement
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.ExecutionNode
+import org.yakindu.sct.model.sexec.ExecutionScope
+import org.yakindu.sct.model.sexec.ExecutionState
+import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
+import org.yakindu.sct.model.sexec.transformation.SgraphExtensions
+import org.yakindu.sct.model.sexec.transformation.StatechartExtensions
+import org.yakindu.sct.model.sgraph.CompositeElement
 import org.yakindu.sct.model.sgraph.Region
+import org.yakindu.sct.model.sgraph.State
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.model.stext.stext.TimeEventSpec
 
 class StepDepthComparator implements Comparator<Step> {
 	@Inject
@@ -58,8 +58,11 @@ class DefaultNamingService implements INamingService {
 	@Inject extension StepDepthComparator stepDepthComparator
 	@Inject extension ExecutionScopeDepthComparator executionScopeDepthComparator
 	@Inject extension NamingHelper
-	
+
 	@Inject private StextNameProvider provider
+	
+	// from public class org.yakindu.sct.generator.c.features.CDefaultFeatureValueProvider extends		
+	private static final String VALID_IDENTIFIER_REGEX = "[_a-zA-Z][_a-zA-Z0-9]*";	
 
 	var protected int maxLength = 0
 
@@ -288,6 +291,7 @@ class DefaultNamingService implements INamingService {
 				shortName = element.fqElementName(separator).asIdentifier.getHash(maxLength)
 			}
 		} else {
+
 			//use full qualified name
 			shortName = element.createShortName(prefix, suffix, nameList, NameShorteningStrategy::FQN_NAME, separator)
 		}
@@ -347,7 +351,8 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(NamedElement it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).
+				toString(separator.toString)
 			case NameShorteningStrategy::SHORT_NAME: return name
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return name?.removeVowels
@@ -356,7 +361,8 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(ExecutionScope it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).
+				toString(separator.toString)
 			case NameShorteningStrategy::SHORT_NAME: return name
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
@@ -365,7 +371,8 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(ExecutionState it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).
+				toString(separator.toString)
 			case NameShorteningStrategy::SHORT_NAME: return simpleName
 			case NameShorteningStrategy::REMOVE_VOWELS: return simpleName.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
@@ -374,30 +381,35 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(ExecutionNode it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).
+				toString(separator.toString)
 			case NameShorteningStrategy::SHORT_NAME: return simpleName
 			case NameShorteningStrategy::REMOVE_VOWELS: return simpleName
 			case NameShorteningStrategy::INDEX_POSITION: return simpleName
 		}
 	}
-	
+
 	def protected dispatch String elementName(Region it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+			case NameShorteningStrategy::FQN_NAME:
+				return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
 			case NameShorteningStrategy::SHORT_NAME: {
-				if (name.nullOrEmpty) {		
+				if (name.nullOrEmpty) {
 					return provider.getFullyQualifiedName(it).lastSegment.toString.substring(1)
 				}
 				return name
 			}
-			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
-			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
+			case NameShorteningStrategy::REMOVE_VOWELS:
+				return name?.removeVowels
+			case NameShorteningStrategy::INDEX_POSITION:
+				return asSGraphIndexPosition
 		}
 	}
 
 	def protected dispatch String elementName(Vertex it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).toString(separator.toString)
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).
+				toString(separator.toString)
 			case NameShorteningStrategy::SHORT_NAME: return name
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asSGraphIndexPosition
@@ -435,4 +447,26 @@ class DefaultNamingService implements INamingService {
 	def protected removeVowels(String it) {
 		replaceAll('[aeiou]', '')
 	}
+
+	override public setMaxLength(int length) {
+		maxLength = length
+	}
+
+	override public setSeparator(char sep) {
+		// Check if Prefix is ok		
+		var String sepString =  sep+""		
+		if(!(sepString.matches(VALID_IDENTIFIER_REGEX))){
+			throw new IllegalArgumentException
+		}
+		separator = sep
+	}
+
+	override public getMaxLength() {
+		return maxLength
+	}
+
+	override public getSeparator() {
+		return separator
+	}
+
 }

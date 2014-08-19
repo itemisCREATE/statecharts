@@ -76,4 +76,35 @@ public interface INamingService {
 	 * @return
 	 */
 	boolean isKeyword(String string);
+	
+	/**
+	 * Sets the maximum length for shorted names. 
+	 * 
+	 * @param int
+	 */
+	void setMaxLength (int length);
+	
+	/**
+	 * Sets the separator for shorted names.
+	 * 
+	 * @param char
+	 */
+	void setSeparator(char sep);
+	
+	
+	/**
+	 * Returns the maximum length of shorted names.
+	 * 
+	 * @return int
+	 */
+	int getMaxLength();
+	
+	/**
+	 * Returns the separator for shorted names. 
+	 * 
+	 * @return char 
+	 */
+	char getSeparator();
+	
+	
 }
