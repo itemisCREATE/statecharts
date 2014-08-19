@@ -357,6 +357,11 @@ public class VariableDefinitionItemProvider extends VariableItemProvider
       (createChildParameter
         (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
          ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE,
+         ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
   }
 
   /**

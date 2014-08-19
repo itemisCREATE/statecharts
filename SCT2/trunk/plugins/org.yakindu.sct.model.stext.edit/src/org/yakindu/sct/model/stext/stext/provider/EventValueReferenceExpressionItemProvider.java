@@ -250,6 +250,11 @@ public class EventValueReferenceExpressionItemProvider extends ExpressionItemPro
       (createChildParameter
         (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
          ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.EVENT_VALUE_REFERENCE_EXPRESSION__VALUE,
+         ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
   }
 
   /**
