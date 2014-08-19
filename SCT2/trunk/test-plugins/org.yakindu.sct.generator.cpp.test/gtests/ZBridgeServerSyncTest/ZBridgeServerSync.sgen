@@ -1,8 +1,0 @@
-GeneratorModel for yakindu::cpp {
-	statechart ZBridgeServerSync {
-		feature Outlet {
-			targetProject = "gtests"
-			targetFolder = "ZBridgeServerSyncTest"
-		}
-	}
-}
