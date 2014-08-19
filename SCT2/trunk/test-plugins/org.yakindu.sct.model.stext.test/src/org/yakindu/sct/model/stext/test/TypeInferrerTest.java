@@ -746,6 +746,25 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isRealType(inferType("( 7.5 / 1.2 )")));
 		assertTrue(isStringType(inferType("( 'abc' )")));
 	}
+	
+	@Test
+	public void testTypeCastExpressionSuccess() {
+		assertTrue(isBooleanType(inferType("( true as boolean)")));
+		assertTrue(isIntegerType(inferType("( 7.5 as integer )")));
+		assertTrue(isRealType(inferType(" 7 as real ")));
+		assertTrue(isStringType(inferType("( 'abc' as string )")));
+	}
+	@Test
+	public void testTypeCastExpressionFailure() {
+		expectIssue(inferType("true as integer"),
+				"Cannot cast from boolean to integer.");
+		expectIssue(inferType("true as string"),
+				"Cannot cast from boolean to string.");
+		expectIssue(inferType("5 as string"),
+				"Cannot cast from integer to string.");
+		expectIssue(inferType("5.5 as string"),
+				"Cannot cast from real to string.");
+	}
 
 	@Test
 	public void testTernaryExpression() {
