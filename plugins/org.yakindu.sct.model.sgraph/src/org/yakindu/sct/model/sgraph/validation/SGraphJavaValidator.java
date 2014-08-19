@@ -66,7 +66,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_EXIT_WITHOUT_IN_TRANS = "Exit node should have at least one incoming transition";
 	public static final String ISSUE_EXIT_ON_STATECHART = "Exit node in top level region not supported - use final states instead.";
 	public static final String ISSUE_CHOICE_WITHOUT_OUTGOING_TRANSITION = "A choice must have at least one outgoing transition.";
-	public static final String ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY = "The region can't be entered using the shallow history. Add an entry node.";
+	public static final String ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY = "The region can't be entered using the shallow history. Add a default entry node.";
+	public static final String ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY = "The region can't be entered using the shallow history. Add a transition from default entry to a state.";
 	public static final String ISSUE_SUBMACHINE_UNRESOLVABLE = "Referenced Substatemachine '%s'does not exist!";
 	public static final String ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL = "The target states of a synchronization must be orthogonal!";
 	public static final String ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The target states of a synchronization have to be contained in the same parent state within different regions!";
@@ -74,7 +75,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	public static final String ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE = "The source states of a synchronization have to be contained in the same parent state within different regions!";
 	public static final String ISSUE_SYNCHRONIZATION_TRANSITION_COUNT = "A synchronization should have at least two incoming or two outgoing transitions";
 	public static final String ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER = "Outgoing Transitions from Entries can only target to sibling or inner states.";
-
 
 	@Check(CheckType.FAST)
 	public void vertexNotReachable(final Vertex vertex) {
@@ -98,8 +98,10 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 						if (!stateScopeSet.contains(element)) {
 							externalPredecessors.add(element);
 						} else {
-							elements.addAll(((org.yakindu.sct.model.sgraph.State) element).getRegions());
-							elements.addAll(((org.yakindu.sct.model.sgraph.State) element).getIncomingTransitions());
+							elements.addAll(((org.yakindu.sct.model.sgraph.State) element)
+									.getRegions());
+							elements.addAll(((org.yakindu.sct.model.sgraph.State) element)
+									.getIncomingTransitions());
 						}
 
 					} else if (element instanceof Region) {
@@ -108,11 +110,13 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 						if (!stateScopeSet.contains(element)) {
 							externalPredecessors.add(element);
 						} else {
-							elements.addAll(((Entry) element).getIncomingTransitions());
+							elements.addAll(((Entry) element)
+									.getIncomingTransitions());
 						}
 
 					} else if (element instanceof Vertex) {
-						elements.addAll(((Vertex) element).getIncomingTransitions());
+						elements.addAll(((Vertex) element)
+								.getIncomingTransitions());
 
 					} else if (element instanceof Transition) {
 						elements.add(((Transition) element).getSource());
@@ -135,7 +139,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	 * Calculates all predecessor states
 	 */
 
-
 	@Check(CheckType.FAST)
 	public void finalStateWithOutgoingTransition(FinalState finalState) {
 		if ((finalState.getOutgoingTransitions().size() > 0)) {
@@ -145,7 +148,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void nameIsNotEmpty(org.yakindu.sct.model.sgraph.State state) {
-		if ((state.getName() == null || state.getName().trim().length() == 0) && !(state instanceof FinalState)) {
+		if ((state.getName() == null || state.getName().trim().length() == 0)
+				&& !(state instanceof FinalState)) {
 			error(ISSUE_STATE_WITHOUT_NAME, state, null, -1);
 		}
 	}
@@ -167,10 +171,9 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-
 	@Check(CheckType.FAST)
 	public void initialEntryWithoutIncomingTransitions(Entry entry) {
-		if (entry.getIncomingTransitions().size() > 0 
+		if (entry.getIncomingTransitions().size() > 0
 				&& entry.getKind().equals(EntryKind.INITIAL)) {
 			warning(ISSUE_INITIAL_ENTRY_WITH_IN_TRANS, entry, null, -1);
 		}
@@ -178,7 +181,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 
 	@Check(CheckType.FAST)
 	public void initialEntryWithoutOutgoingTransition(Entry entry) {
-		if (entry.getOutgoingTransitions().size() == 0 && ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
+		if (entry.getOutgoingTransitions().size() == 0
+				&& ((Entry) entry).getKind().equals(EntryKind.INITIAL)) {
 			warning(ISSUE_INITIAL_ENTRY_WITHOUT_OUT_TRANS, entry, null, -1);
 		}
 	}
@@ -189,7 +193,6 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 			error(ISSUE_ENTRY_WITH_MULTIPLE_OUT_TRANS, entry, null, -1);
 		}
 	}
-
 
 	@Check(CheckType.FAST)
 	public void exitWithoutIncomingTransition(Exit exit) {
@@ -206,8 +209,8 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 	}
 
 	/**
-	 * Exit nodes in top level regions are not supported. 
-	 *  
+	 * Exit nodes in top level regions are not supported.
+	 * 
 	 * @param exit
 	 */
 	@Check(CheckType.FAST)
@@ -217,21 +220,22 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-
 	@Check(CheckType.FAST)
 	public void synchronizationTransitionCount(Synchronization sync) {
-		if (sync.getIncomingTransitions().size() < 2 && sync.getOutgoingTransitions().size() < 2) {
+		if (sync.getIncomingTransitions().size() < 2
+				&& sync.getOutgoingTransitions().size() < 2) {
 			warning(ISSUE_SYNCHRONIZATION_TRANSITION_COUNT, sync, null, -1);
 		}
 	}
 
 	@Check(CheckType.FAST)
 	public void initialEntryWithTransitionToContainer(Transition t) {
-		if (t.getSource() instanceof Entry && !isChildOrSibling(t.getSource(), t.getTarget())) {
+		if (t.getSource() instanceof Entry
+				&& !isChildOrSibling(t.getSource(), t.getTarget())) {
 			error(ISSUE_INITIAL_ENTRY_WITH_TRANSITION_TO_CONTAINER, t, null, -1);
 		}
 	}
-	
+
 	private boolean isChildOrSibling(Vertex source, Vertex target) {
 		TreeIterator<EObject> iter = source.getParentRegion().eAllContents();
 		while (iter.hasNext()) {
@@ -241,29 +245,57 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		}
 		return false;
 	}
-	
+
+	/**
+	 * Checks if all composite states that are siblings of a shallow history can
+	 * enter their regions.
+	 * 
+	 * @param e
+	 */
 	@Check(CheckType.FAST)
-	public void regionCantBeEnteredUsingShallowHistory(org.yakindu.sct.model.sgraph.State s) {
-		
-		for (Vertex v : s.getParentRegion().getVertices()) {
-			if (v instanceof Entry && ((Entry)v).getKind() == EntryKind.SHALLOW_HISTORY) {
-				for (Region r : s.getRegions() ) {
-					boolean entryExists = false;
-					for (Vertex childVertex : r.getVertices() ) {
-						if ( childVertex instanceof Entry ) {
-							entryExists = true;
+	public void regionCantBeEnteredUsingShallowHistory(Entry e) {
+
+		if (e.getKind() == EntryKind.SHALLOW_HISTORY) {
+
+			// get all regions off all sibling states
+			List<Region> regions = new ArrayList<Region>();
+			for (Vertex v : e.getParentRegion().getVertices()) {
+				if (v instanceof org.yakindu.sct.model.sgraph.State) {
+					org.yakindu.sct.model.sgraph.State state = (org.yakindu.sct.model.sgraph.State) v;
+					regions.addAll(state.getRegions());
+				}
+			}
+
+			// check each region
+			for (Region r : regions) {
+
+				// first determine if the region contains a default entry
+				Entry defaultEntry = null;
+				for (Vertex v : r.getVertices()) {
+					if (v instanceof Entry) {
+						String name = v.getName().trim().toLowerCase();
+						if (name != null || "".equals(name)
+								|| "default".equals(name)) {
+							defaultEntry = (Entry) v;
+							break;
 						}
 					}
-					if (!entryExists ) {
-						error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY, r, null, -1);
-					}
 				}
-				break;
+
+				// now check error conditions
+				if (defaultEntry == null) {
+					error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NO_DEFAULT_ENTRY,
+							r, null, -1);
+				} else if (defaultEntry.getOutgoingTransitions().size() != 1) {
+					error(ISSUE_REGION_CANT_BE_ENTERED_USING_SHALLOW_HISTORY_NON_CONNECTED_DEFAULT_ENTRY,
+							r, null, -1);
+				}
 			}
+
 		}
+
 	}
 
-	
 	@Check(CheckType.FAST)
 	public void orthogonalStates(Synchronization fork) {
 		// check target states
@@ -272,51 +304,60 @@ public class SGraphJavaValidator extends AbstractDeclarativeValidator {
 		orthogonalStates(fork, false);
 	}
 
-	
-	
 	private void orthogonalStates(Synchronization fork, boolean searchTarget) {
-		List<Transition> transitions = searchTarget ? fork.getOutgoingTransitions() : fork.getIncomingTransitions();
+		List<Transition> transitions = searchTarget ? fork
+				.getOutgoingTransitions() : fork.getIncomingTransitions();
 		if (transitions.size() > 1) {
 			final Transition firstTransition = transitions.get(0);
-			final Vertex vertex = searchTarget ? firstTransition.getTarget() : firstTransition.getSource();
+			final Vertex vertex = searchTarget ? firstTransition.getTarget()
+					: firstTransition.getSource();
 
-			CompositeElement root = findCommonRootCompositeElement(vertex.getParentRegion().getComposite(), fork,
-					searchTarget);
+			CompositeElement root = findCommonRootCompositeElement(vertex
+					.getParentRegion().getComposite(), fork, searchTarget);
 
 			if (root != null) {
 				for (Transition t : transitions) {
-					Region parentRegion = searchTarget ? t.getTarget().getParentRegion() : t.getSource()
+					Region parentRegion = searchTarget ? t.getTarget()
+							.getParentRegion() : t.getSource()
 							.getParentRegion();
 					for (Transition transition : transitions) {
 						if (transition != t
-								&& EcoreUtil.isAncestor(parentRegion, searchTarget ? transition.getTarget()
-										: transition.getSource())) {
+								&& EcoreUtil.isAncestor(parentRegion,
+										searchTarget ? transition.getTarget()
+												: transition.getSource())) {
 							error(searchTarget ? ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_ORTHOGONAL
-									: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL, fork, null, -1);
+									: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_ORTHOGONAL,
+									fork, null, -1);
 							break;
 						}
 					}
 				}
 			} else {
 				error(searchTarget ? ISSUE_SYNCHRONIZATION_TARGET_STATES_NOT_WITHIN_SAME_PARENTSTATE
-						: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE, fork, null, -1);
+						: ISSUE_SYNCHRONIZATION_SOURCE_STATES_NOT_WITHIN_SAME_PARENTSTATE,
+						fork, null, -1);
 			}
 
 		}
 	}
 
-	private CompositeElement findCommonRootCompositeElement(CompositeElement root, Synchronization fork,
-			boolean searchTarget) {
+	private CompositeElement findCommonRootCompositeElement(
+			CompositeElement root, Synchronization fork, boolean searchTarget) {
 
 		CompositeElement ret = root;
 
 		if (ret != fork.getParentRegion().getComposite()) {
-			for (Transition transition : searchTarget ? fork.getOutgoingTransitions() : fork.getIncomingTransitions()) {
+			for (Transition transition : searchTarget ? fork
+					.getOutgoingTransitions() : fork.getIncomingTransitions()) {
 				if (ret != null
-						&& !EcoreUtil.isAncestor(ret, searchTarget ? transition.getTarget() : transition.getSource())) {
+						&& !EcoreUtil.isAncestor(ret,
+								searchTarget ? transition.getTarget()
+										: transition.getSource())) {
 					if (ret.eContainer() instanceof Region) {
-						final CompositeElement newRoot = ((Region) root.eContainer()).getComposite();
-						ret = findCommonRootCompositeElement(newRoot, fork, searchTarget);
+						final CompositeElement newRoot = ((Region) root
+								.eContainer()).getComposite();
+						ret = findCommonRootCompositeElement(newRoot, fork,
+								searchTarget);
 					}
 				}
 			}
