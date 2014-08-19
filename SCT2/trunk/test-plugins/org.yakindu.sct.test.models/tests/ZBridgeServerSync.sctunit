@@ -1,9 +1,0 @@
-
-testgroup ZBridgeServerSync for statechart ZBridgeServerSync{
-	test ZBridgeServerSyncTest { 
-		enter
-
-		 
-	} 
-}
-	
