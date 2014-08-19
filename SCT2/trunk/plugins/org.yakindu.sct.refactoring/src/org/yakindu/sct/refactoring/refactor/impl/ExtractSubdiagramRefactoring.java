@@ -61,10 +61,13 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	@Override
 	public boolean isExecutable() {
-		State state = (State) getContextObject().getElement();
+		EObject element = getContextObject().getElement();
+		if (!(element instanceof State)) {
+			return false;
+		}
+		State state = (State) element;
 		BooleanValueStyle inlineStyle = getInlineStyle(getContextObject());
-		return super.isExecutable() && state.isComposite()
-				&& (inlineStyle == null || inlineStyle.isBooleanValue());
+		return super.isExecutable() && state.isComposite() && (inlineStyle == null || inlineStyle.isBooleanValue());
 	}
 
 	@Override
@@ -77,8 +80,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	@Override
 	protected boolean internalDoUndo() {
-		boolean close = DiagramPartitioningUtil
-				.closeSubdiagramEditors((State) subdiagram.getElement());
+		boolean close = DiagramPartitioningUtil.closeSubdiagramEditors((State) subdiagram.getElement());
 		if (!close)
 			return false;
 		// Since the canonical edit policy creates edges for the semantic
@@ -129,23 +131,20 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		edge.setTarget(getContextObject());
 
 		// create node for entry point
-		View entryPointContainerView = helper.getViewForSemanticElement(
-				entryPointContainer, subdiagram);
-		View entryPointRegionCompartment = ViewUtil.getChildBySemanticHint(
-				entryPointContainerView, SemanticHints.REGION_COMPARTMENT);
-		Node entryNode = ViewService.createNode(entryPointRegionCompartment,
-				entryPoint, SemanticHints.ENTRY, preferencesHint);
-		ViewService.createEdge(entryNode, oldTarget, entryPoint
-				.getOutgoingTransitions().get(0), SemanticHints.TRANSITION,
+		View entryPointContainerView = helper.getViewForSemanticElement(entryPointContainer, subdiagram);
+		View entryPointRegionCompartment = ViewUtil.getChildBySemanticHint(entryPointContainerView,
+				SemanticHints.REGION_COMPARTMENT);
+		Node entryNode = ViewService.createNode(entryPointRegionCompartment, entryPoint, SemanticHints.ENTRY,
 				preferencesHint);
+		ViewService.createEdge(entryNode, oldTarget, entryPoint.getOutgoingTransitions().get(0),
+				SemanticHints.TRANSITION, preferencesHint);
 
 		addEntryPointSpec(transition, entryPoint);
 	}
 
 	private void addEntryPointSpec(Transition transition, Entry entryPoint) {
 		EList<ReactionProperty> properties = transition.getProperties();
-		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE
-				.createEntryPointSpec();
+		EntryPointSpec entryPointSpec = StextFactory.eINSTANCE.createEntryPointSpec();
 		// A transition can only have one entry point so alter the existing
 		for (ReactionProperty reactionProperty : properties) {
 			if (reactionProperty instanceof EntryPointSpec) {
@@ -158,8 +157,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 
 	private void addExitPointSpec(Transition transition, Exit exitPoint) {
 		EList<ReactionProperty> properties = transition.getProperties();
-		ExitPointSpec exitPointSpec = StextFactory.eINSTANCE
-				.createExitPointSpec();
+		ExitPointSpec exitPointSpec = StextFactory.eINSTANCE.createExitPointSpec();
 		// A transition can only have one exit point so alter the existing
 		for (ReactionProperty reactionProperty : properties) {
 			if (reactionProperty instanceof ExitPointSpec) {
@@ -174,8 +172,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("entry_");
 		stringBuilder.append(transition.getTarget().getName());
-		int index = transition.getSource().getOutgoingTransitions()
-				.indexOf(transition);
+		int index = transition.getSource().getOutgoingTransitions().indexOf(transition);
 		stringBuilder.append(index);
 		return stringBuilder.toString();
 	}
@@ -184,8 +181,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append("exit_");
 		stringBuilder.append(transition.getSource().getName());
-		int index = transition.getSource().getOutgoingTransitions()
-				.indexOf(transition);
+		int index = transition.getSource().getOutgoingTransitions().indexOf(transition);
 		stringBuilder.append(index);
 		return stringBuilder.toString();
 	}
@@ -208,8 +204,7 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		entryPoint = SGraphFactory.eINSTANCE.createEntry();
 		entryPoint.setName(name);
 		entryPointTarget.getVertices().add(entryPoint);
-		Transition entryPointTransition = SGraphFactory.eINSTANCE
-				.createTransition();
+		Transition entryPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		entryPointTransition.setSource(entryPoint);
 		entryPointTransition.setTarget(transition.getTarget());
 
@@ -277,26 +272,23 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 		Exit exitPoint = createSemanticExitPoint(transition);
 
 		// create node for exit point
-		View exitPointContainerView = helper.getViewForSemanticElement(
-				exitPointContainer, subdiagram);
-		View exitPointRegionCompartment = ViewUtil.getChildBySemanticHint(
-				exitPointContainerView, SemanticHints.REGION_COMPARTMENT);
-		Node exitNode = ViewService.createNode(exitPointRegionCompartment,
-				exitPoint, SemanticHints.EXIT, preferencesHint);
+		View exitPointContainerView = helper.getViewForSemanticElement(exitPointContainer, subdiagram);
+		View exitPointRegionCompartment = ViewUtil.getChildBySemanticHint(exitPointContainerView,
+				SemanticHints.REGION_COMPARTMENT);
+		Node exitNode = ViewService.createNode(exitPointRegionCompartment, exitPoint, SemanticHints.EXIT,
+				preferencesHint);
 
 		// re-wire existing transition to new exit point
 		Vertex oldTarget = transition.getTarget();
 		transition.setTarget(exitPoint);
-		ViewService.createEdge(edge.getSource(), exitNode, transition,
-				SemanticHints.TRANSITION, preferencesHint);
+		ViewService.createEdge(edge.getSource(), exitNode, transition, SemanticHints.TRANSITION, preferencesHint);
 
 		// create transition from selected state to former transition target
-		Transition exitPointTransition = SGraphFactory.eINSTANCE
-				.createTransition();
+		Transition exitPointTransition = SGraphFactory.eINSTANCE.createTransition();
 		exitPointTransition.setSource((State) subdiagram.getElement());
 		exitPointTransition.setTarget(oldTarget);
-		ViewService.createEdge(getContextObject(), edge.getTarget(),
-				exitPointTransition, SemanticHints.TRANSITION, preferencesHint);
+		ViewService.createEdge(getContextObject(), edge.getTarget(), exitPointTransition, SemanticHints.TRANSITION,
+				preferencesHint);
 
 		addExitPointSpec(exitPointTransition, exitPoint);
 	}
@@ -320,14 +312,11 @@ public class ExtractSubdiagramRefactoring extends AbstractRefactoring<View> {
 	protected Diagram createSubdiagram() {
 		View contextView = getContextObject();
 		State contextElement = (State) contextView.getElement();
-		Diagram subdiagram = ViewService.createDiagram(contextElement,
-				StatechartDiagramEditor.ID, preferencesHint);
-		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView,
-				SemanticHints.STATE_FIGURE_COMPARTMENT);
+		Diagram subdiagram = ViewService.createDiagram(contextElement, StatechartDiagramEditor.ID, preferencesHint);
+		View figureCompartment = ViewUtil.getChildBySemanticHint(contextView, SemanticHints.STATE_FIGURE_COMPARTMENT);
 		getResource().getContents().add(subdiagram);
 		while (figureCompartment.getChildren().size() > 0) {
-			subdiagram.insertChild((View) figureCompartment.getChildren()
-					.get(0));
+			subdiagram.insertChild((View) figureCompartment.getChildren().get(0));
 		}
 		return subdiagram;
 	}
