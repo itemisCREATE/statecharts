@@ -47,6 +47,5 @@ testsuite AllTests {
 	SyncJoin, 
 //	TimedTransitions,
 	TransitionWithoutCondition,
-	ValuedEvents,
-	ZBridgeServerSync
+	ValuedEvents
 } 

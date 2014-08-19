@@ -630,18 +630,5 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 			RuntimeService = true
 		}
-	}
-	
-	statechart ZBridgeServerSync{
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "src-gen"
-		}
-
-		feature GeneralFeatures {
-			TimerService = true
-			RuntimeService = true
-		}
 	}	
-	
 }
