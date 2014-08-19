@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 <plugin>
+   <extension-point id="typesystem" name="org.yakindu.base.types.typesystem" schema="schema/typesystem.exsd"/>
    <extension point="org.eclipse.emf.ecore.generated_package">
       <package
             uri="http://www.yakindu.org/base/types/2.0.0"
@@ -12,4 +13,19 @@
             uri="http://www.yakindu.org/base/base/2.0.0">
       </package>
    </extension>
+   <extension
+         point="org.yakindu.base.types.typesystem">
+      <contribution
+            scheme="default"
+            typesystem="org.yakindu.base.types.DefaultTypeSystem">
+      </contribution>
+   </extension>
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated base -->
+      <package
+            uri="http://www.yakindu.org/base/base/2.0.0"
+            class="org.yakindu.base.base.BasePackage"
+            genModel="model/base.genmodel"/>
+   </extension>
+
 </plugin>

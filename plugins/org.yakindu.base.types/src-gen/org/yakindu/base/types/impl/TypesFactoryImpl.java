@@ -21,6 +21,7 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypesFactory;
@@ -83,6 +84,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
 			case TypesPackage.PARAMETERIZED_TYPE: return createParameterizedType();
 			case TypesPackage.PACKAGE_MEMBER: return createPackageMember();
+			case TypesPackage.RANGE_CONSTRAINT: return createRangeConstraint();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -216,6 +218,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public PackageMember createPackageMember() {
 		PackageMemberImpl packageMember = new PackageMemberImpl();
 		return packageMember;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public RangeConstraint createRangeConstraint() {
+		RangeConstraintImpl rangeConstraint = new RangeConstraintImpl();
+		return rangeConstraint;
 	}
 
 	/**

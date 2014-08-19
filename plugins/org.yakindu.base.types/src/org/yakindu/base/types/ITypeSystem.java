@@ -44,7 +44,7 @@ public interface ITypeSystem {
 				"<="), GREATER(">"), GREATER_EQUAL(">="), EQUAL("=="), NOT_EQUAL("!="), MULTIPLY("*"), DIV("/"), MOD(
 				"%"), ADD("+"), SUBTRACT("-"), LEFT_SHIFT("<<"), RIGHT_SHIFT(">>"), ASSIGN("="), ASSIGN_MULTIPLY("*="), ASSIGN_DIV(
 				"/="), ASSIGN_MOD("%="), ASSIGN_ADD("+="), ASSIGN_SUBTRACT("-="), ASSIGN_LEFT_SHIFT("<<="), ASSIGN_RIGHT_SHIFT(
-				">>="), ASSIGN_BITWISE_AND("&="), ASSIGN_BITWISE_XOR("^="), ASSIGN_BITWISE_OR("|=");
+				">>="), ASSIGN_BITWISE_AND("&="), ASSIGN_BITWISE_XOR("^="), ASSIGN_BITWISE_OR("|="), CAST("as");
 
 		private String symbol;
 
@@ -199,17 +199,5 @@ public interface ITypeSystem {
 	 */
 	public InferenceResult inferType(InferredType firstOperandType, InferredType secondOperandType,
 			InferredType thirdOperandType, ITypeSystemOperator ternaryOperator);
-
-	/**
-	 * Returns the list of all concrete types, provided by the type system, that
-	 * match the given inferred type, i.e. are compatible to its listed type and
-	 * fulfill the given type constraints.
-	 * 
-	 * @param inferredType
-	 *            The inferred type to evaluate
-	 * @return The subset of all types returned via {@link #getTypes()} that is
-	 *         compatible to the given inferred type.
-	 */
-	public List<Type> getTypes(InferredType inferredType);
 
 }

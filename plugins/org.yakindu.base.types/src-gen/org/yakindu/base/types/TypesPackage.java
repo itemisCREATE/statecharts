@@ -204,13 +204,22 @@ public interface TypesPackage extends EPackage {
 	int TYPE__CONSTRAINT = PACKAGE_MEMBER_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__SCHEME = PACKAGE_MEMBER_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 1;
+	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -524,6 +533,15 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
+	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__SCHEME = TYPE__SCHEME;
+
+	/**
 	 * The feature id for the '<em><b>Base Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -558,6 +576,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__CONSTRAINT = PRIMITIVE_TYPE__CONSTRAINT;
+
+	/**
+	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__SCHEME = PRIMITIVE_TYPE__SCHEME;
 
 	/**
 	 * The feature id for the '<em><b>Base Type</b></em>' reference.
@@ -615,6 +642,15 @@ public interface TypesPackage extends EPackage {
 	int PARAMETERIZED_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
+	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__SCHEME = TYPE__SCHEME;
+
+	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -659,6 +695,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPLEX_TYPE__CONSTRAINT = PARAMETERIZED_TYPE__CONSTRAINT;
+
+	/**
+	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__SCHEME = PARAMETERIZED_TYPE__SCHEME;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference list.
@@ -754,22 +799,13 @@ public interface TypesPackage extends EPackage {
 	int TYPE_CONSTRAINT = 12;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_CONSTRAINT__NAME = BasePackage.NAMED_ELEMENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONSTRAINT__VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+	int TYPE_CONSTRAINT__VALUE = 0;
 
 	/**
 	 * The number of structural features of the '<em>Type Constraint</em>' class.
@@ -778,7 +814,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_CONSTRAINT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int TYPE_CONSTRAINT_FEATURE_COUNT = 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
@@ -809,6 +845,15 @@ public interface TypesPackage extends EPackage {
 	int TYPE_PARAMETER__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
+	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__SCHEME = TYPE__SCHEME;
+
+	/**
 	 * The feature id for the '<em><b>Bound</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -825,6 +870,52 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int TYPE_PARAMETER_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.RangeConstraintImpl <em>Range Constraint</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.RangeConstraintImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getRangeConstraint()
+	 * @generated
+	 */
+	int RANGE_CONSTRAINT = 16;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_CONSTRAINT__VALUE = TYPE_CONSTRAINT__VALUE;
+
+	/**
+	 * The feature id for the '<em><b>Lower Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_CONSTRAINT__LOWER_BOUND = TYPE_CONSTRAINT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Upper Bound</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_CONSTRAINT__UPPER_BOUND = TYPE_CONSTRAINT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Range Constraint</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RANGE_CONSTRAINT_FEATURE_COUNT = TYPE_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
@@ -867,6 +958,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getType_Constraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Type#getScheme <em>Scheme</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Scheme</em>'.
+	 * @see org.yakindu.base.types.Type#getScheme()
+	 * @see #getType()
+	 * @generated
+	 */
+	EAttribute getType_Scheme();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Feature <em>Feature</em>}'.
@@ -1163,6 +1265,38 @@ public interface TypesPackage extends EPackage {
 	EClass getPackageMember();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.RangeConstraint <em>Range Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Range Constraint</em>'.
+	 * @see org.yakindu.base.types.RangeConstraint
+	 * @generated
+	 */
+	EClass getRangeConstraint();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.RangeConstraint#getLowerBound <em>Lower Bound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Lower Bound</em>'.
+	 * @see org.yakindu.base.types.RangeConstraint#getLowerBound()
+	 * @see #getRangeConstraint()
+	 * @generated
+	 */
+	EAttribute getRangeConstraint_LowerBound();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.RangeConstraint#getUpperBound <em>Upper Bound</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Upper Bound</em>'.
+	 * @see org.yakindu.base.types.RangeConstraint#getUpperBound()
+	 * @see #getRangeConstraint()
+	 * @generated
+	 */
+	EAttribute getRangeConstraint_UpperBound();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1219,6 +1353,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE__CONSTRAINT = eINSTANCE.getType_Constraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Scheme</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE__SCHEME = eINSTANCE.getType_Scheme();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.FeatureImpl <em>Feature</em>}' class.
@@ -1471,6 +1613,32 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass PACKAGE_MEMBER = eINSTANCE.getPackageMember();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.RangeConstraintImpl <em>Range Constraint</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.RangeConstraintImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getRangeConstraint()
+		 * @generated
+		 */
+		EClass RANGE_CONSTRAINT = eINSTANCE.getRangeConstraint();
+
+		/**
+		 * The meta object literal for the '<em><b>Lower Bound</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RANGE_CONSTRAINT__LOWER_BOUND = eINSTANCE.getRangeConstraint_LowerBound();
+
+		/**
+		 * The meta object literal for the '<em><b>Upper Bound</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute RANGE_CONSTRAINT__UPPER_BOUND = eINSTANCE.getRangeConstraint_UpperBound();
 
 	}
 

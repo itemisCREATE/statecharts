@@ -2,7 +2,7 @@
  */
 package org.yakindu.base.types;
 
-import org.yakindu.base.base.NamedElement;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +20,7 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface TypeConstraint extends NamedElement {
+public interface TypeConstraint extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

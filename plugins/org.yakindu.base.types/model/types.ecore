@@ -8,6 +8,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Type" abstract="true" eSuperTypes="#//PackageMember">
     <eStructuralFeatures xsi:type="ecore:EReference" name="constraint" upperBound="-1"
         eType="#//TypeConstraint" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheme" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Feature" abstract="true" eSuperTypes="#//TypedElement base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" eType="#//ComplexType"
@@ -47,7 +48,7 @@
         eOpposite="#//EnumerationType/enumerator"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="literalValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeConstraint" eSuperTypes="base.ecore#//NamedElement">
+  <eClassifiers xsi:type="ecore:EClass" name="TypeConstraint">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="TypeParameter" eSuperTypes="#//Type">
@@ -58,4 +59,8 @@
         eType="#//TypeParameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="PackageMember" eSuperTypes="base.ecore#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RangeConstraint" eSuperTypes="#//TypeConstraint">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -31,7 +31,7 @@ public class BaseFactoryImpl extends EFactoryImpl implements BaseFactory {
 	 */
 	public static BaseFactory init() {
 		try {
-			BaseFactory theBaseFactory = (BaseFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.yakindu.org/base/base/2.0.0"); 
+			BaseFactory theBaseFactory = (BaseFactory)EPackage.Registry.INSTANCE.getEFactory(BasePackage.eNS_URI);
 			if (theBaseFactory != null) {
 				return theBaseFactory;
 			}

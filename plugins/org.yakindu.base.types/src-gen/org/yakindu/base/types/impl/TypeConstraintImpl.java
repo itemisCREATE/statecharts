@@ -5,7 +5,7 @@ package org.yakindu.base.types.impl;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.yakindu.base.base.impl.NamedElementImpl;
+import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypesPackage;
 
@@ -22,7 +22,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class TypeConstraintImpl extends NamedElementImpl implements TypeConstraint {
+public class TypeConstraintImpl extends EObjectImpl implements TypeConstraint {
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->

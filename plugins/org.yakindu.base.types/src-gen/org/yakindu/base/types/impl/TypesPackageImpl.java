@@ -23,6 +23,7 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
@@ -138,6 +139,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	private EClass packageMemberEClass = null;
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass rangeConstraintEClass = null;
+
+	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the
 	 * package package URI value.
@@ -233,6 +241,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EReference getType_Constraint() {
 		return (EReference)typeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getType_Scheme() {
+		return (EAttribute)typeEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -469,6 +486,33 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getRangeConstraint() {
+		return rangeConstraintEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRangeConstraint_LowerBound() {
+		return (EAttribute)rangeConstraintEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getRangeConstraint_UpperBound() {
+		return (EAttribute)rangeConstraintEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -499,6 +543,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		typeEClass = createEClass(TYPE);
 		createEReference(typeEClass, TYPE__CONSTRAINT);
+		createEAttribute(typeEClass, TYPE__SCHEME);
 
 		featureEClass = createEClass(FEATURE);
 		createEReference(featureEClass, FEATURE__OWNING_TYPE);
@@ -541,6 +586,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__PARAMETER);
 
 		packageMemberEClass = createEClass(PACKAGE_MEMBER);
+
+		rangeConstraintEClass = createEClass(RANGE_CONSTRAINT);
+		createEAttribute(rangeConstraintEClass, RANGE_CONSTRAINT__LOWER_BOUND);
+		createEAttribute(rangeConstraintEClass, RANGE_CONSTRAINT__UPPER_BOUND);
 	}
 
 	/**
@@ -586,10 +635,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		primitiveTypeEClass.getESuperTypes().add(this.getType());
 		complexTypeEClass.getESuperTypes().add(this.getParameterizedType());
 		enumeratorEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		typeConstraintEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		typeParameterEClass.getESuperTypes().add(this.getType());
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		rangeConstraintEClass.getESuperTypes().add(this.getTypeConstraint());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -597,6 +646,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(typeEClass, Type.class, "Type", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getType_Constraint(), this.getTypeConstraint(), null, "constraint", null, 0, -1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getType_Scheme(), ecorePackage.getEString(), "scheme", null, 0, 1, Type.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(featureEClass, Feature.class, "Feature", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getFeature_OwningType(), this.getComplexType(), this.getComplexType_Features(), "owningType", null, 0, 1, Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -641,6 +691,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getParameterizedType_Parameter(), this.getTypeParameter(), null, "parameter", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(packageMemberEClass, PackageMember.class, "PackageMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(rangeConstraintEClass, RangeConstraint.class, "RangeConstraint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getRangeConstraint_LowerBound(), ecorePackage.getELong(), "lowerBound", null, 0, 1, RangeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getRangeConstraint_UpperBound(), ecorePackage.getELong(), "upperBound", null, 0, 1, RangeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

@@ -22,6 +22,7 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
@@ -144,6 +145,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter casePackageMember(PackageMember object) {
 				return createPackageMemberAdapter();
+			}
+			@Override
+			public Adapter caseRangeConstraint(RangeConstraint object) {
+				return createRangeConstraintAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -408,6 +413,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPackageMemberAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.RangeConstraint <em>Range Constraint</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.RangeConstraint
+	 * @generated
+	 */
+	public Adapter createRangeConstraintAdapter() {
 		return null;
 	}
 

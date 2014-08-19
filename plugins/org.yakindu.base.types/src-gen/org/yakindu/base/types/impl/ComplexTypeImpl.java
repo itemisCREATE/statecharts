@@ -26,20 +26,17 @@ import org.yakindu.base.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getFeatures <em>
- * Features</em>}</li>
- * <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getSuperTypes <em>
- * Super Types</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getFeatures <em>Features</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.ComplexTypeImpl#getSuperTypes <em>Super Types</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexType {
 	/**
-	 * The cached value of the '{@link #getFeatures() <em>Features</em>}'
-	 * containment reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getFeatures() <em>Features</em>}' containment reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getFeatures()
 	 * @generated
 	 * @ordered
@@ -47,9 +44,8 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 	protected EList<Feature> features;
 
 	/**
-	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}'
-	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSuperTypes()
 	 * @generated
 	 * @ordered
@@ -58,7 +54,6 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected ComplexTypeImpl() {
@@ -67,7 +62,6 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -77,26 +71,22 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<Feature> getFeatures() {
 		if (features == null) {
-			features = new EObjectContainmentWithInverseEList<Feature>(Feature.class, this,
-					TypesPackage.COMPLEX_TYPE__FEATURES, TypesPackage.FEATURE__OWNING_TYPE);
+			features = new EObjectContainmentWithInverseEList<Feature>(Feature.class, this, TypesPackage.COMPLEX_TYPE__FEATURES, TypesPackage.FEATURE__OWNING_TYPE);
 		}
 		return features;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<ComplexType> getSuperTypes() {
 		if (superTypes == null) {
-			superTypes = new EObjectResolvingEList<ComplexType>(ComplexType.class, this,
-					TypesPackage.COMPLEX_TYPE__SUPER_TYPES);
+			superTypes = new EObjectResolvingEList<ComplexType>(ComplexType.class, this, TypesPackage.COMPLEX_TYPE__SUPER_TYPES);
 		}
 		return superTypes;
 	}
@@ -131,100 +121,94 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case TypesPackage.COMPLEX_TYPE__FEATURES:
-			return ((InternalEList<InternalEObject>) (InternalEList<?>) getFeatures()).basicAdd(otherEnd, msgs);
+			case TypesPackage.COMPLEX_TYPE__FEATURES:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFeatures()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case TypesPackage.COMPLEX_TYPE__FEATURES:
-			return ((InternalEList<?>) getFeatures()).basicRemove(otherEnd, msgs);
+			case TypesPackage.COMPLEX_TYPE__FEATURES:
+				return ((InternalEList<?>)getFeatures()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case TypesPackage.COMPLEX_TYPE__FEATURES:
-			return getFeatures();
-		case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
-			return getSuperTypes();
+			case TypesPackage.COMPLEX_TYPE__FEATURES:
+				return getFeatures();
+			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
+				return getSuperTypes();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case TypesPackage.COMPLEX_TYPE__FEATURES:
-			getFeatures().clear();
-			getFeatures().addAll((Collection<? extends Feature>) newValue);
-			return;
-		case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
-			getSuperTypes().clear();
-			getSuperTypes().addAll((Collection<? extends ComplexType>) newValue);
-			return;
+			case TypesPackage.COMPLEX_TYPE__FEATURES:
+				getFeatures().clear();
+				getFeatures().addAll((Collection<? extends Feature>)newValue);
+				return;
+			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
+				getSuperTypes().clear();
+				getSuperTypes().addAll((Collection<? extends ComplexType>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case TypesPackage.COMPLEX_TYPE__FEATURES:
-			getFeatures().clear();
-			return;
-		case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
-			getSuperTypes().clear();
-			return;
+			case TypesPackage.COMPLEX_TYPE__FEATURES:
+				getFeatures().clear();
+				return;
+			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
+				getSuperTypes().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case TypesPackage.COMPLEX_TYPE__FEATURES:
-			return features != null && !features.isEmpty();
-		case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
-			return superTypes != null && !superTypes.isEmpty();
+			case TypesPackage.COMPLEX_TYPE__FEATURES:
+				return features != null && !features.isEmpty();
+			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
+				return superTypes != null && !superTypes.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
