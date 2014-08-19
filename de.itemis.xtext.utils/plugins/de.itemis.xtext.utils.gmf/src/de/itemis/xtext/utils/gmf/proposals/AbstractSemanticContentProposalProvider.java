@@ -56,7 +56,8 @@ public abstract class AbstractSemanticContentProposalProvider implements IConten
 	}
 
 	public final ISemanticContentProposal[] getProposals(String contents, int position) {
-		// TODO: How to handle multi selection
+		if (viewer.getSelectedEditParts().size() <= 0)
+			return new ISemanticContentProposal[0];
 		final IGraphicalEditPart selectedEditPart = (IGraphicalEditPart) viewer.getSelectedEditParts().get(0);
 		Iterable<ISemanticContentProposal> validProposals = Iterables.filter(acceptor.getAllProposals(),
 				new Predicate<ISemanticContentProposal>() {
@@ -64,6 +65,9 @@ public abstract class AbstractSemanticContentProposalProvider implements IConten
 						return input.getSemanticModification().IsModificationFor((selectedEditPart.getNotationView()));
 					}
 				});
+		if (Iterables.size(validProposals) == 0) {
+			return new ISemanticContentProposal[0];
+		}
 		return Iterables.toArray(validProposals, ISemanticContentProposal.class);
 	}
 
