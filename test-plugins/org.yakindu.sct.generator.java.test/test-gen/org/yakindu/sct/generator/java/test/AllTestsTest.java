@@ -8,14 +8,13 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.core.sexec.test;
-
+package org.yakindu.sct.generator.java.test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
+@SuiteClasses({AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
 		BitExpressionsTest.class, BooleanExpressionsTest.class,
 		ChoiceTest.class, CKeywordsTest.class, ConditionalExpressionTest.class,
 		DeclarationsTest.class, DeepEntryTest.class, DeepHistoryTest.class,
@@ -27,13 +26,14 @@ import org.junit.runners.Suite.SuiteClasses;
 		InEventLifeCycleTest.class, IntegerExpressionsTest.class,
 		InternalEventLifeCycleTest.class, LocalReactionsTest.class,
 		LogicalAndTestsTest.class, LogicalOrTestsTest.class,
-		NamedInterfaceAccessTest.class, OutEventLifeCycleTest.class,
-		ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
+		NamedInterfaceAccessTest.class, OperationsTest.class,
+		OutEventLifeCycleTest.class, ParenthesisTest.class,
+		PriorityValuesTest.class, RaiseEventTest.class,
 		SameNameDifferentRegionTest.class, ShallowHistoryTest.class,
 		SimpleEventTest.class, StatechartLocalReactionsTest.class,
 		SimpleHierachyTest.class, StateIsActiveTest.class,
 		StaticChoiceTest.class, STextKeywordsInStatesAndRegionsTest.class,
 		StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
-		TransitionWithoutConditionTest.class, ValuedEventsTest.class })
+		TransitionWithoutConditionTest.class, ValuedEventsTest.class})
 public class AllTestsTest {
 }
