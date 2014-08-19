@@ -1,8 +1,9 @@
-testsuite AllTests {  
+testsuite AllTests {
 	AlwaysOncycle, 
 	AssignmentAsExpression,
 	BitExpressions, 
 	BooleanExpressions,
+	CastExpressions,
 	Choice, 
 	CKeywords,
 	ConditionalExpression,
