@@ -31,6 +31,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String ASSIGNMENT_AS_EXPRESSION ="AssignmentAsExpression.sct";
 	public static final String BIT_EXPRESSIONS = "BitExpressions.sct";
 	public static final String BOOLEAN_EXPRESSIONS = "BooleanExpressions.sct";
+	public static final String CAST_EXPRESSIONS = "CastExpressions.sct";
 	public static final String CHOICE = "Choice.sct";
 	public static final String C_KEYWORDS_M = "CKeywords.sct";
 	public static final String CONDITIONAL_EXPRESSIONS = "ConditionalExpressions.sct";
