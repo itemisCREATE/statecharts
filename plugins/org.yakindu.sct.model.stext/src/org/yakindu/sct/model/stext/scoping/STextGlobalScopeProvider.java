@@ -20,6 +20,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.yakindu.base.types.ITypeSystem;
+import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.scope.TypeSystemAwareScope;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.stext.stext.StextPackage;
@@ -38,7 +39,7 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 
 	@Inject
-	private ITypeSystem typeSystem;
+	private ITypeSystemRegistry typeSystem;
 
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
@@ -48,7 +49,7 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		parentScope = filterExternalDeclarations(context, parentScope);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
 				reference.getEReferenceType());
-		return parentScope;
+		return parentScope; 
 	}
 
 	/**
