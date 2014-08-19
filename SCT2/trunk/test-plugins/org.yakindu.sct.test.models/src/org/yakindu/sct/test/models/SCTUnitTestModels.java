@@ -78,7 +78,9 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String TRANSITIONS_WITHOUT_CONDITION = "TransitionWithoutCondition.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
 	public static final String VARIABLE_INITIALIZATION = "VariableInitialization.sct";
+	public static final String ZBRIDGE_SERVER_SYNC = "ZBridgeServerSync.sct";
 
+	
 	@Override
 	public String getModelDirectory() {
 		return TESTMODEL_DIR;
@@ -104,5 +106,16 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 			}
 		});
 	}
-
+	
+	public Statechart loadStatechartByFilename(String requestedStatechart) throws Exception {
+		Statechart result = null;		
+		Field[] fields = getClass().getFields();
+		for (Field field : fields) {			
+			String value = (String) field.get(this);
+			if (value.endsWith(requestedStatechart)) {
+				result  = (loadStatechartFromResource(value));
+			}			
+		}
+		return result;
+	}
 }
