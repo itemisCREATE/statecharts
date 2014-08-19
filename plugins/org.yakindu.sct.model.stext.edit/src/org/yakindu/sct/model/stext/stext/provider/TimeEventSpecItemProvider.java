@@ -305,6 +305,11 @@ public class TimeEventSpecItemProvider extends EventSpecItemProvider
       (createChildParameter
         (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
          ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.TIME_EVENT_SPEC__VALUE,
+         ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
   }
 
 }

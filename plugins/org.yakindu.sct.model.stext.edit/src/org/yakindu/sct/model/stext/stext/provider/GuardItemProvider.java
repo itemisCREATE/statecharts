@@ -261,6 +261,11 @@ public class GuardItemProvider
       (createChildParameter
         (StextPackage.Literals.GUARD__EXPRESSION,
          ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.GUARD__EXPRESSION,
+         ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
   }
 
   /**

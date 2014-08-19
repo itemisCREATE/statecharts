@@ -250,6 +250,11 @@ public class ReactionEffectItemProvider extends EffectItemProvider
       (createChildParameter
         (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
          ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.REACTION_EFFECT__ACTIONS,
+         ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
   }
 
   /**

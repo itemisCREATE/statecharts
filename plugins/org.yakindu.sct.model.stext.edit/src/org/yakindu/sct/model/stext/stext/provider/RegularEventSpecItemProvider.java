@@ -246,6 +246,11 @@ public class RegularEventSpecItemProvider extends EventSpecItemProvider
       (createChildParameter
         (StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
          ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+    newChildDescriptors.add
+      (createChildParameter
+        (StextPackage.Literals.REGULAR_EVENT_SPEC__EVENT,
+         ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
   }
 
 }
