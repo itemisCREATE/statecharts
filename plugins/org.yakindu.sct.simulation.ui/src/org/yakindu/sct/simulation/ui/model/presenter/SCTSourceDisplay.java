@@ -24,15 +24,19 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.gmf.runtime.notation.Diagram;
 import org.eclipse.gmf.runtime.notation.NotationPackage;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IPartListener;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
+import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 
 import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
@@ -45,19 +49,25 @@ import de.itemis.gmf.runtime.commons.highlighting.IHighlightingSupport;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SCTSourceDisplay implements ISourceDisplay {
+public class SCTSourceDisplay implements ISourceDisplay, IPartListener {
 
 	private Map<IEditorPart, IDynamicNotationHandler> handler = null;
 	private ISimulationEngine container = null;
+	private DebugElement debugElement;
 
 	public SCTSourceDisplay(ISimulationEngine container) {
 		this.container = container;
 		handler = new HashMap<IEditorPart, IDynamicNotationHandler>();
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().addPartListener(this);
 	}
 
 	public void displaySource(Object element, IWorkbenchPage page, boolean forceSourceLookup) {
-		DebugElement debugElement = (DebugElement) element;
+		debugElement = (DebugElement) element;
 		IEditorPart editor = openEditor(debugElement, page);
+		displaySource(editor);
+	}
+
+	private void displaySource(IEditorPart editor) {
 		IDynamicNotationHandler notationHandler = handler.get(editor);
 		if (notationHandler == null) {
 			notationHandler = new DefaultDynamicNotationHandler();
@@ -75,11 +85,20 @@ public class SCTSourceDisplay implements ISourceDisplay {
 	}
 
 	public void terminate() {
+		container = null;
+		debugElement = null;
 		Collection<IDynamicNotationHandler> values = handler.values();
 		for (IDynamicNotationHandler notationHandler : values) {
 			if (notationHandler.getHighlightingSupport().isLocked())
 				notationHandler.getHighlightingSupport().releaseEditor();
 		}
+		handler.clear();
+		Display.getDefault().syncExec(new Runnable() {
+
+			public void run() {
+				PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().removePartListener(SCTSourceDisplay.this);
+			}
+		});
 	}
 
 	private IEditorPart openEditor(DebugElement debugElement, IWorkbenchPage page) {
@@ -128,6 +147,23 @@ public class SCTSourceDisplay implements ISourceDisplay {
 		}
 		// No editor found
 		throw new RuntimeException("No editor found for semantic element " + semanticObject);
+	}
+
+	public void partOpened(IWorkbenchPart part) {
+		if (part instanceof StatechartDiagramEditor && debugElement != null)
+			displaySource((IEditorPart) part);
+	}
+
+	public void partActivated(IWorkbenchPart part) {
+	}
+
+	public void partBroughtToTop(IWorkbenchPart part) {
+	}
+
+	public void partClosed(IWorkbenchPart part) {
+	}
+
+	public void partDeactivated(IWorkbenchPart part) {
 	}
 
 }
