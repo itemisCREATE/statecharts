@@ -12,7 +12,6 @@
 package org.yakindu.base.types;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.core.runtime.IStatus;
@@ -21,7 +20,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
 
 /**
@@ -33,6 +31,8 @@ import com.google.inject.Singleton;
  * @author Alexander Ny��en (alexander.nyssen@itemis.de) - Initial contribution
  *         and API
  * @author oliver bohl - String constants extract
+ * 
+ * @author andreas muelder - Added type casts
  * 
  */
 @Singleton
@@ -59,6 +59,8 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 	public static final String ASSIGNMENT_AND_EQUALITY_OPERATIONS_MAY_ONLY_BE_APPLIED_ON_TYPES_OF_THE_SAME_KIND = "Assignment and equality operations may only be applied on types of the same kind, not on %s and %s.";
 
 	public static String NO_VALID_TYPE_CAN_BE_INFERRED_FOR_CONDITIONAL_EXPRESSION_BECAUSE_FIRST_OPERAND_NOT_BOOLEAN = "No valid type can be inferred for conditional expression, because type of first operand is not boolean.";
+
+	public static String CANNOT_CAST_FROM_TO = "Cannot cast from %s to %s.";
 
 	/**
 	 * Dummy resource. Xtext linker expects types to be contained in a resource.
@@ -430,6 +432,18 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 			default:
 				throw new IllegalStateException("Unsupported operator kind.");
 			}
+		case CAST:
+			if (firstOperandType.getType() instanceof PrimitiveType
+					&& secondOperandType.getType() instanceof PrimitiveType) {
+				if (!EcoreUtil.equals(firstOperandType.getType(), secondOperandType.getType())) {
+					if (!isNumericType(firstOperandType) || !isNumericType(secondOperandType)) {
+						return new InferenceResult(null, new InferenceIssue(String.format(CANNOT_CAST_FROM_TO,
+								firstOperandType.getType().getName(), secondOperandType.getType().getName()),
+								IStatus.ERROR));
+					}
+				}
+			}
+			return new InferenceResult(secondOperandType);
 		default:
 			throw new IllegalArgumentException("Unsupported binary operator: " + binaryOperator);
 		}
@@ -507,18 +521,6 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 				+ firstType + ", " + secondType, IStatus.ERROR));
 	}
 
-	public List<Type> getTypes(InferenceResult inferenceResult) {
-		if (inferenceResult == null) {
-			throw new NullPointerException("InferenceResult result may not be null.");
-		}
-		// we do not evaluate constraints and we only have one type of a kind
-		if (inferenceResult.getType() == null) {
-			return Lists.newArrayList();
-		} else {
-			return Collections.singletonList(inferenceResult.getType().getType());
-		}
-	}
-
 	public List<Type> getTypes() {
 		List<Type> types = new ArrayList<Type>();
 		types.add(getVoidType());
@@ -583,13 +585,6 @@ public class DefaultTypeSystem extends AbstractTypeSystem implements ITypeSystem
 
 	public boolean isNumericType(InferredType type) {
 		return isNumericType(type.getType());
-	}
-
-	public List<Type> getTypes(InferredType inferredType) {
-		if (inferredType == null) {
-			throw new NullPointerException("inferredType may not be null.");
-		}
-		return Collections.singletonList(inferredType.getType());
 	}
 
 	public Object defaultValue(Type type) {
