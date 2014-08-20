@@ -5,7 +5,7 @@
     forceOverwrite="true" modelName="Expressions" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
     editPluginID="org.yakindu.base.expressions.edit" editorPluginID="org.yakindu.base.expressions.editor"
-    runtimeVersion="2.9" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types">
+    runtimeVersion="2.9" usedGenPackages="platform:/resource/org.yakindu.base.types/model/base.genmodel#//base platform:/resource/org.yakindu.base.types/model/types.genmodel#//types">
   <foreignModel>Expressions.ecore</foreignModel>
   <foreignModel>../../org.yakindu.base.types/model/types.ecore</foreignModel>
   <genPackages prefix="Expressions" basePackage="org.yakindu.base.expressions" disposableProviderFactory="true"

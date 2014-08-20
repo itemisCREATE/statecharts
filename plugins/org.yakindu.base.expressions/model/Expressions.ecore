@@ -166,6 +166,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypeCastExpression" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="operand" eType="#//Expression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass platform:/resource/org.yakindu.base.types/model/types.ecore#//Type"/>
   </eClassifiers>
 </ecore:EPackage>
