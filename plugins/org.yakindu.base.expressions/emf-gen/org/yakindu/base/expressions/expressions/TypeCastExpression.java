@@ -2,7 +2,7 @@
  */
 package org.yakindu.base.expressions.expressions;
 
-import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.types.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -57,12 +57,12 @@ public interface TypeCastExpression extends Expression {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(EObject)
+	 * @see #setType(Type)
 	 * @see org.yakindu.base.expressions.expressions.ExpressionsPackage#getTypeCastExpression_Type()
 	 * @model
 	 * @generated
 	 */
-	EObject getType();
+	Type getType();
 
 	/**
 	 * Sets the value of the '{@link org.yakindu.base.expressions.expressions.TypeCastExpression#getType <em>Type</em>}' reference.
@@ -72,6 +72,6 @@ public interface TypeCastExpression extends Expression {
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(EObject value);
+	void setType(Type value);
 
 } // TypeCastExpression

@@ -44,6 +44,7 @@ import org.yakindu.base.expressions.expressions.ShiftOperator;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -321,6 +322,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		ExpressionsPackageImpl theExpressionsPackage = (ExpressionsPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ExpressionsPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ExpressionsPackageImpl());
 
 		isInited = true;
+
+		// Initialize simple dependencies
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theExpressionsPackage.createPackageContents();
@@ -1207,6 +1211,9 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
 
+		// Obtain other dependent packages
+		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
+
 		// Create type parameters
 
 		// Set bounds for type parameters
@@ -1335,7 +1342,7 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 
 		initEClass(typeCastExpressionEClass, TypeCastExpression.class, "TypeCastExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getTypeCastExpression_Operand(), this.getExpression(), null, "operand", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypeCastExpression_Type(), ecorePackage.getEObject(), null, "type", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeCastExpression_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, TypeCastExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(assignmentOperatorEEnum, AssignmentOperator.class, "AssignmentOperator");

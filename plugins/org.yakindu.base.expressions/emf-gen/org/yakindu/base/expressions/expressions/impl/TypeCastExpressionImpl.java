@@ -4,16 +4,13 @@ package org.yakindu.base.expressions.expressions.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.types.Type;
 
 /**
  * <!-- begin-user-doc -->
@@ -48,7 +45,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * @generated
 	 * @ordered
 	 */
-	protected EObject type;
+	protected Type type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -117,10 +114,10 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject getType() {
+	public Type getType() {
 		if (type != null && type.eIsProxy()) {
 			InternalEObject oldType = (InternalEObject)type;
-			type = eResolveProxy(oldType);
+			type = (Type)eResolveProxy(oldType);
 			if (type != oldType) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE, oldType, type));
@@ -134,7 +131,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EObject basicGetType() {
+	public Type basicGetType() {
 		return type;
 	}
 
@@ -143,8 +140,8 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(EObject newType) {
-		EObject oldType = type;
+	public void setType(Type newType) {
+		Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE, oldType, type));
@@ -193,7 +190,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 				setOperand((Expression)newValue);
 				return;
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE:
-				setType((EObject)newValue);
+				setType((Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -211,7 +208,7 @@ public class TypeCastExpressionImpl extends ExpressionImpl implements TypeCastEx
 				setOperand((Expression)null);
 				return;
 			case ExpressionsPackage.TYPE_CAST_EXPRESSION__TYPE:
-				setType((EObject)null);
+				setType((Type)null);
 				return;
 		}
 		super.eUnset(featureID);
