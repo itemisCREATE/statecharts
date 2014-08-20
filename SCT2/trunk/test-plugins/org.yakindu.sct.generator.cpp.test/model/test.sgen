@@ -72,6 +72,18 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
+	test CastExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}			
+	}
+	
 	test CKeywords{
 		
 		feature Outlet{ 

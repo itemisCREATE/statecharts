@@ -60,6 +60,18 @@ GeneratorModel for yakindu::java {
 		}
 	} 
 	
+	statechart CastExpressions {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	} 
+	
 	statechart CKeywords {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"

@@ -48,6 +48,14 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
+	test CastExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test CKeywords{
 		
 		feature Outlet{ 
