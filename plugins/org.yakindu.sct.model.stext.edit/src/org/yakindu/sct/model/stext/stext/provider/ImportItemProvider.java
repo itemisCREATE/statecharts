@@ -64,33 +64,9 @@ public class ImportItemProvider
     {
       super.getPropertyDescriptors(object);
 
-      addSchemePropertyDescriptor(object);
       addImportedNamespacePropertyDescriptor(object);
     }
     return itemPropertyDescriptors;
-  }
-
-  /**
-   * This adds a property descriptor for the Scheme feature.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  protected void addSchemePropertyDescriptor(Object object)
-  {
-    itemPropertyDescriptors.add
-      (createItemPropertyDescriptor
-        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-         getResourceLocator(),
-         getString("_UI_Import_scheme_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_Import_scheme_feature", "_UI_Import_type"),
-         StextPackage.Literals.IMPORT__SCHEME,
-         true,
-         false,
-         false,
-         ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-         null,
-         null));
   }
 
   /**
@@ -158,7 +134,6 @@ public class ImportItemProvider
 
     switch (notification.getFeatureID(Import.class))
     {
-      case StextPackage.IMPORT__SCHEME:
       case StextPackage.IMPORT__IMPORTED_NAMESPACE:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
         return;
