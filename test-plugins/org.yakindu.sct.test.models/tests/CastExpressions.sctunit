@@ -1,0 +1,12 @@
+
+testgroup CastExpressions for statechart CastExpressions{
+	
+	test CastExpressionTest { 
+		enter
+		assert realValue == 5
+		assert intValue == 5
+		cycle
+		assert realValue == 15
+	} 
+}
+	

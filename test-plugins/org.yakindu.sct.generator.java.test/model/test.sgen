@@ -48,6 +48,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
+	test CastExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test CKeywords{
 		
 		feature Outlet{ 
