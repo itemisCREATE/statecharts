@@ -35,6 +35,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
+import org.yakindu.base.expressions.expressions.TypeCastExpression
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 class ExpressionCode {
 
@@ -43,6 +45,7 @@ class ExpressionCode {
 	@Inject extension ITypeSystem
 	@Inject extension ISTextTypeInferrer
 	@Inject extension INamingService
+	@Inject extension ICodegenTypeSystemAccess
 
 	/* Refering to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
@@ -133,4 +136,7 @@ class ExpressionCode {
 	def dispatch CharSequence code(ActiveStateReferenceExpression it) '''«flow.activeFctID»(«value.shortName»)'''
 
 	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
+	
+	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
+	
 }

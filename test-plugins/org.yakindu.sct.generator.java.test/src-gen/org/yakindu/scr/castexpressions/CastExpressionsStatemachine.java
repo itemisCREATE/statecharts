@@ -47,20 +47,15 @@ public class CastExpressionsStatemachine
 		for (int i = 0; i < 1; i++) {
 			stateVector[i] = State.$NullState$;
 		}
-		
+
 		clearEvents();
 		clearOutEvents();
-		
-		sCInterface.realValue
-		=(//ERROR: Template in ExpressionCode.xtend for class 'org.yakindu.base.expressions.expressions.impl.TypeCastExpressionImpl' not define.
-		//Container: org.yakindu.base.expressions.expressions.impl.ParenthesizedExpressionImpl
-		);
-		
-		sCInterface.intValue
-		=(//ERROR: Template in ExpressionCode.xtend for class 'org.yakindu.base.expressions.expressions.impl.TypeCastExpressionImpl' not define.
-		//Container: org.yakindu.base.expressions.expressions.impl.ParenthesizedExpressionImpl
-		);
+
+		sCInterface.realValue = (((double) 5));
+
+		sCInterface.intValue = (((long) 5.5));
 	}
+
 	public void enter() {
 		entryAction();
 
@@ -145,15 +140,13 @@ public class CastExpressionsStatemachine
 	private void reactMain_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
-		
-		sCInterface.realValue
-		=3*//ERROR: Template in ExpressionCode.xtend for class 'org.yakindu.base.expressions.expressions.impl.TypeCastExpressionImpl' not define.
-		//Container: org.yakindu.base.expressions.expressions.impl.NumericalMultiplyDivideExpressionImpl
-		;
-		
+
+		sCInterface.realValue = 3 * ((long) 5.5);
+
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B;
 	}
+
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
 	}
