@@ -43,6 +43,8 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.base.expressions.expressions.TypeCastExpression
 
 class ExpressionCode {
 
@@ -50,6 +52,7 @@ class ExpressionCode {
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
 	@Inject extension ISTextTypeInferrer
+	@Inject extension ICodegenTypeSystemAccess
 
 	private var List<TimeEvent> timeEvents;
 
@@ -236,6 +239,10 @@ class ExpressionCode {
 	def dispatch String code(TimeEvent it) {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
 	}
+	
+	def dispatch String code(TypeCastExpression it){
+		 '''((«type.getTargetLanguageName») «operand.code»)'''
+	}	
 
 	def dispatch String getContext(Variable it) {
 		if (scope != null) {
@@ -261,4 +268,6 @@ class ExpressionCode {
 	def dispatch String getContext(EObject it) {
 		return "//ERROR: No context for " + it
 	}
+	
+	
 }
