@@ -20,6 +20,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.sgraph.ImportDeclaration
+import org.yakindu.sct.model.stext.stext.InterfaceScope
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -86,6 +87,9 @@ class ModelSequencer implements IModelSequencer {
 
 	/************** retarget declaration refs **************/
 	
+	/** The execution model contains mapped elements for all variables and events from the original model. All references 
+	 * to the original declarations in the expressions must be retargeted to those in the execution model
+	 */
 	def retargetDeclRefs(ExecutionFlow flow) {
 		val allContent = EcoreUtil2::eAllContentsAsList(flow)
 		val declared = flow.scopes.map[
@@ -100,9 +104,16 @@ class ModelSequencer implements IModelSequencer {
 		allContent.filter(typeof(FeatureCall)).forEach( call|call.retarget(declared))
 	}
 	
-	
+	/**
+	 * TODO: handle use of interface scope elements explicitly. Since element reference expressions that refer to scopes 
+	 * have no concrete functionality at runtime and could be removed from the expression tree. This should be reworked 
+	 * as soon as the sequencer will be extended to cover the complete behavior.
+	 */
 	def retarget(ElementReferenceExpression ere, Collection<Declaration> declared) {
-		if (ere.reference != null && ! declared.contains(ere.reference) ) {
+		if (ere.reference != null 
+			&& ! declared.contains(ere.reference) 
+			&& ! (ere.reference instanceof InterfaceScope)
+		) {
 			// elements within externally declared packages should not be replaced but referenced
 			if (EcoreUtil2.getContainerOfType(ere.reference, Package) == null) {
 				val r = ere.reference.replaced 
@@ -124,9 +135,13 @@ class ModelSequencer implements IModelSequencer {
 	
 	def dispatch Declaration replaced(EObject ne) {
 		try {
-			println("Replace with unknown eObject called: "+if (ne ==null) "null" else ne.fullyQualifiedName)
+			var name = if (ne == null) "null" else ne.fullyQualifiedName
+			var type = if (ne == null) "unknown type" else ne.class.simpleName
+			var resource = if (ne == null) "unknown resource" else ne.eResource.URI.toString
 			
-			LogFactory::getLog(typeof(ModelSequencer)).error("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.fullyQualifiedName)
+			println("Replace with unknown EObject ("+type+") called: " + name + " in " + resource)
+			
+			LogFactory::getLog(typeof(ModelSequencer)).error("Replace with unknown EObject ("+type+") called: " + name + " in " + resource)
 		} catch (LogConfigurationException e) {
 			e.printStackTrace
 			println("Replace with unknown NamedElement called: "+if (ne ==null) "null" else ne.fullyQualifiedName)
