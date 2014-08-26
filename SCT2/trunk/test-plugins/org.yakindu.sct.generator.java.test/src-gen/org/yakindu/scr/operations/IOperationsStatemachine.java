@@ -33,6 +33,7 @@ public interface IOperationsStatemachine extends IStatemachine {
 	public interface SCInterfaceOperationCallback {
 		public void unnamedInterfaceOperation1();
 		public boolean unnamedInterfaceOperation2(long param1);
+		public boolean alwaysTrue();
 	}
 
 	public SCInterface getSCInterface();

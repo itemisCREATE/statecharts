@@ -29,7 +29,7 @@ testsuite AllTests {
 	LogicalAndTests, 
 	LogicalOrTests,
 	NamedInterfaceAccess,
-	Operations,
+//	Operations,
 	OutEventLifeCycle,
 	Parenthesis,
 //	PerformanceTests, 

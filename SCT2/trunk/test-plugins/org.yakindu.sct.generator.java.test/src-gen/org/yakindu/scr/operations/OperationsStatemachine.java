@@ -160,7 +160,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (sCInterface.ev) {
+		if (sCInterface.ev && !sCInterface.operationCallback.alwaysTrue()) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 

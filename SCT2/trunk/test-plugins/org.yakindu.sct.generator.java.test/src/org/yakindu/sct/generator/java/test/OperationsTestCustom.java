@@ -99,4 +99,8 @@ public class OperationsTestCustom implements InternalOperationCallback, SCIInter
 		assertTrue(param1 == 4);	
 		return false;
 	}
+
+	public boolean alwaysTrue() {
+		return true;
+	}
 }
