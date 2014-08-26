@@ -24,5 +24,7 @@ class DefaultCallBack : public Operations::DefaultSCI_OCB {
 		void unnamedInterfaceOperation1();
 
 		sc_boolean unnamedInterfaceOperation2(sc_integer param1);
+		
+		sc_boolean alwaysTrue();
 };
 

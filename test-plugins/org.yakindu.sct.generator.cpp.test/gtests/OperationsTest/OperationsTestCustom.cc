@@ -95,3 +95,8 @@ sc_boolean DefaultCallBack::unnamedInterfaceOperation2(sc_integer param1) {
 	unnamedInterfaceOp2Param = param1;
 	return true;
 }
+
+sc_boolean DefaultCallBack::alwaysTrue() {
+	return true;
+}
+
