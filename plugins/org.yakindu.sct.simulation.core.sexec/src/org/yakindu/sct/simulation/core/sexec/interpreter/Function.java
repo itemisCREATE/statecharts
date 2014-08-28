@@ -25,9 +25,6 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.types.ITypeSystem;
-
-import com.google.inject.Inject;
 
 /**
  * 
@@ -36,9 +33,6 @@ import com.google.inject.Inject;
  * 
  */
 public class Function {
-
-	@Inject
-	ITypeSystem typeSystem;
 
 	/**
 	 * Indicates that a method is a function.
