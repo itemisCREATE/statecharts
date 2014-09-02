@@ -40,5 +40,8 @@ public class CastExpressionsTest extends AbstractExecutionFlowTest {
 		assertTrue(getInteger("intValue") == 5);
 		interpreter.runCycle();
 		assertTrue(getReal("realValue") == 15);
+		interpreter.runCycle();
+		assertTrue(isActive("C"));
+		assertTrue(getReal("realValue") == 757);
 	}
 }

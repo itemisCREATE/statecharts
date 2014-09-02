@@ -43,5 +43,8 @@ public class CastExpressionsTest {
 		assertTrue(statemachine.getIntValue() == 5);
 		statemachine.runCycle();
 		assertTrue(statemachine.getRealValue() == 15);
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.getRealValue() == 757);
 	}
 }

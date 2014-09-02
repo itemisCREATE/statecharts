@@ -20,5 +20,8 @@ TEST(StatemachineTest, CastExpressionTest) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_intValue()== 5);
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 15);
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->isActive(CastExpressions::main_region_C));
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_realValue()== 757);
 	delete statechart;
 }

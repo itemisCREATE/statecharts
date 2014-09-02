@@ -22,6 +22,9 @@ TEST(StatemachineTest, CastExpressionTest) {
 	EXPECT_TRUE(castExpressionsIface_get_intValue(&handle) == 5);
 	castExpressions_runCycle(&handle);
 	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 15);
+	castExpressions_runCycle(&handle);
+	EXPECT_TRUE(castExpressions_isActive(&handle, CastExpressions_main_region_C));
+	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 757);
 }
 
 		

@@ -7,6 +7,10 @@ testgroup CastExpressions for statechart CastExpressions{
 		assert intValue == 5
 		cycle
 		assert realValue == 15
+		cycle
+		assert active(CastExpressions.main_region.C)
+		
+		assert realValue == 757
 	} 
 }
 	
