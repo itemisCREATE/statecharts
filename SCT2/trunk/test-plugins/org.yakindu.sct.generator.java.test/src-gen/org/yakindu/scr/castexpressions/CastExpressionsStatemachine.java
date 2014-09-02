@@ -31,7 +31,7 @@ public class CastExpressionsStatemachine
 	private SCInterfaceImpl sCInterface;
 
 	public enum State {
-		main_region_A, main_region_B, $NullState$
+		main_region_A, main_region_B, main_region_C, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -75,6 +75,11 @@ public class CastExpressionsStatemachine
 				stateVector[0] = State.$NullState$;
 				break;
 
+			case main_region_C :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
 			default :
 				break;
 		}
@@ -104,6 +109,8 @@ public class CastExpressionsStatemachine
 				return stateVector[0] == State.main_region_A;
 			case main_region_B :
 				return stateVector[0] == State.main_region_B;
+			case main_region_C :
+				return stateVector[0] == State.main_region_C;
 			default :
 				return false;
 		}
@@ -149,6 +156,22 @@ public class CastExpressionsStatemachine
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
+		if (true
+				&& ((double) (sCInterface.realValue * 0.1)) > ((long) 1.4)
+				&& ((long) (sCInterface.realValue * sCInterface.intValue)) < ((double) 100)) {
+			nextStateIndex = 0;
+			stateVector[0] = State.$NullState$;
+
+			sCInterface.realValue = ((long) (sCInterface.realValue
+					* sCInterface.intValue * 10.1));
+
+			nextStateIndex = 0;
+			stateVector[0] = State.main_region_C;
+		}
+	}
+
+	/* The reactions of state C. */
+	private void reactMain_region_C() {
 	}
 
 	public void runCycle() {
@@ -163,6 +186,9 @@ public class CastExpressionsStatemachine
 					break;
 				case main_region_B :
 					reactMain_region_B();
+					break;
+				case main_region_C :
+					reactMain_region_C();
 					break;
 				default :
 					// $NullState$
