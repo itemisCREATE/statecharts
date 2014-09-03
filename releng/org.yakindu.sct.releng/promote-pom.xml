@@ -375,6 +375,17 @@
 							</appArgLine>
 						</configuration>
 					</execution>
+					<execution>
+						<id>install-features-into-distro-macosx-cocoa-x86_64</id>
+						<phase>package</phase>
+						<goals>
+							<goal>eclipse-run</goal>
+						</goals>
+						<configuration>
+							<appArgLine>-consoleLog -clean -nosplash -debug -application org.eclipse.equinox.p2.director -destination ${distro.work.dir}/macosx-cocoa-x86_64/eclipse/ -profile ${profile} -p2.os macosx -p2.ws cocoa -p2.arch x86_64 -repository ${update.sites} -installIUs ${features}
+							</appArgLine>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
