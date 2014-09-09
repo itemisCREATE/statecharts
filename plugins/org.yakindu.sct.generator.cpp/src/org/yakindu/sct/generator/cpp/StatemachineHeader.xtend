@@ -81,7 +81,7 @@ class StatemachineHeader extends Statemachine {
 			
 				«statemachineTypeDecl»
 				
-				«functionPrototypes»
+				«prototypes»
 		};
 		
 		«FOR s : it.scopes.filter(typeof(StatechartScope)) SEPARATOR StringConcatenation.DEFAULT_LINE_DELIMITER»
@@ -271,7 +271,7 @@ class StatemachineHeader extends Statemachine {
 	 */
 	 
 	/** */
-	def dispatch functionPrototypes(ExecutionFlow it) '''
+	def prototypes(ExecutionFlow it) '''
 		// prototypes of all internal functions
 		
 		«checkFunctions.toPrototypes»
