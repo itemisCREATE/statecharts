@@ -20,6 +20,10 @@
 				<version>${tycho-version}</version>
 				<configuration>
 
+					<includes>
+						<include>**/AllTestsTest.class</include>
+					</includes>
+
 					<excludes>
 						<exclude>**/util/TestModels.class</exclude>
 						<!-- It's toooo slow in the interpreter -->
