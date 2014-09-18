@@ -195,7 +195,7 @@ class StatemachineHeader extends Statemachine {
 		sc_ushort stateConfVectorPosition;
 		
 		«FOR s : scopes.filter(typeof(StatechartScope))»
-			«s.interfaceName»* «s.instance»;
+			«s.interfaceName» «s.instance»;
 			«IF s.hasOperations»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
 	'''
