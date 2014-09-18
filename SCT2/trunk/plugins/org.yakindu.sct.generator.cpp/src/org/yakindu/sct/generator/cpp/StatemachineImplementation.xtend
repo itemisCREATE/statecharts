@@ -72,10 +72,7 @@ class StatemachineImplementation {
 	def constructorDecl(ExecutionFlow it) '''
 		«module»::«module»() {
 			
-			«FOR s : scopes.filter(typeof(StatechartScope))»
-			«s.instance» = new «s.interfaceName»();
-			«IF s.hasOperations»«s.OCB_Instance» = null;«ENDIF»
-		«ENDFOR»
+			«scopes.filter(typeof(StatechartScope)).filter[hasOperations].map['''«OCB_Instance» = null;'''].join('\n')»
 		«IF hasHistory»
 			
 				for (int i = 0; i < «historyStatesConst»; ++i)
@@ -228,7 +225,7 @@ class StatemachineImplementation {
 		«FOR scope : statechartScopes»
 			«IF scope instanceof InterfaceScope»
 			«module»::«scope.interfaceName»* «module»::get«scope.interfaceName»() {
-				return «scope.instance»;
+				return &«scope.instance»;
 			}
 			
 			«ENDIF»
@@ -242,7 +239,7 @@ class StatemachineImplementation {
 				
 				«IF scope.defaultInterface»
 					void «module»::«event.asRaiser»(«event.valueParams») {
-						«scope.instance»->«event.asRaiser»(«IF event.hasValue»value«ENDIF»);
+						«scope.instance».«event.asRaiser»(«IF event.hasValue»value«ENDIF»);
 					}
 					
 				«ENDIF»
@@ -254,7 +251,7 @@ class StatemachineImplementation {
 				
 				«IF scope.defaultInterface»
 					sc_boolean «module»::«event.asRaised»() {
-						return «scope.instance»->«event.asRaised»();
+						return «scope.instance».«event.asRaised»();
 					}
 					
 				«ENDIF»
@@ -265,7 +262,7 @@ class StatemachineImplementation {
 					
 					«IF scope.defaultInterface»
 						«event.type.targetLanguageName» «module»::«event.asGetter»() {
-							return «scope.instance»->«event.asGetter»();
+							return «scope.instance».«event.asGetter»();
 						}
 						
 					«ENDIF»

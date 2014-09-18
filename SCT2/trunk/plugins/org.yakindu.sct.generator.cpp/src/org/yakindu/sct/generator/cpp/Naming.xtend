@@ -161,13 +161,13 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		'''«timeEventsInstance»[«indexOf»]'''
 		
 	override dispatch access (VariableDefinition it) 
-		'''«scope.instance»->«name.asEscapedIdentifier»'''
+		'''«scope.instance».«name.asEscapedIdentifier»'''
 	
 	override dispatch access (Event it) 
-		'''«scope.instance»->«name.asIdentifier.raised»'''
+		'''«scope.instance».«name.asIdentifier.raised»'''
 	
 	override valueAccess(Event it) 
-		'''«scope.instance»->«name.asIdentifier.value»'''
+		'''«scope.instance».«name.asIdentifier.value»'''
 		
 	def dispatch localAccess (VariableDefinition it) 
 		'''«name.asEscapedIdentifier»'''
