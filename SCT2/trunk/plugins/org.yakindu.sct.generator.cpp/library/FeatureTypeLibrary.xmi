@@ -22,4 +22,10 @@
         name="separator"
         optional="true"/>
   </types>
+  <types name="GeneratorOptions"
+      optional="true">
+    <parameters
+        name="innerFunctionVisibility"
+        optional="true"/>
+  </types>
 </sgen:FeatureTypeLibrary>
