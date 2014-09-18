@@ -14,9 +14,9 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.sct.generator.c.GenmodelEntries
 import org.yakindu.sct.generator.c.Statemachine
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
@@ -36,7 +36,7 @@ class StatemachineHeader extends Statemachine {
 	@Inject extension Naming cNaming
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension GenmodelEntries
+	@Inject extension GenmodelEntriesExtension
 	@Inject extension INamingService
 	
 	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
@@ -68,16 +68,16 @@ class StatemachineHeader extends Statemachine {
 				
 				«statesEnumDecl»
 				
-				«FOR s : it.scopes»«s.createPublicScope()»«ENDFOR»
+				«FOR s : it.scopes»«s.createPublicScope(entry)»«ENDFOR»
 				
 				«publicFunctionPrototypes»
 				
 				/*! Checks if the specified state is active. */
 				sc_boolean «activeFctID»(«statesEnumType» state);
 			
-			private:
+			«entry.innerClassVisibility»:
 			
-				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
+				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface(entry)»«ENDFOR»
 			
 				«statemachineTypeDecl»
 				
@@ -110,16 +110,16 @@ class StatemachineHeader extends Statemachine {
 		return ''''''
 	}
 	
-	def protected createPublicScope(Scope scope) {
+	def protected createPublicScope(Scope scope, GeneratorEntry entry) {
 		switch scope {
-			InterfaceScope: scope.createPublicScope()
+			InterfaceScope: scope.createPublicScope(entry)
 			InternalScope: scope.createPublicScope
 		}
 	}
 	
-	def protected createPublicScope(InterfaceScope scope)
+	def protected createPublicScope(InterfaceScope scope, GeneratorEntry entry)
 	'''
-		«scope.createInterface()»
+		«scope.createInterface(entry)»
 «««		«scope.createListenerInterface(entry)»
 		«scope.createOCBInterface»
 		
@@ -139,7 +139,7 @@ class StatemachineHeader extends Statemachine {
 		'''
 	}
 	
-	def protected createInterface(StatechartScope scope)
+	def protected createInterface(StatechartScope scope, GeneratorEntry entry)
 	'''
 		//! Inner class for «scope.simpleName» interface scope.
 		class «scope.interfaceName» {
@@ -149,7 +149,7 @@ class StatemachineHeader extends Statemachine {
 					«d.functionPrototypes»
 				«ENDFOR»
 				
-			private:
+			«entry.innerClassVisibility»:
 				friend class «scope.execution_flow.module()»;
 				«FOR d : scope.declarations»
 				 «d.structDeclaration»
