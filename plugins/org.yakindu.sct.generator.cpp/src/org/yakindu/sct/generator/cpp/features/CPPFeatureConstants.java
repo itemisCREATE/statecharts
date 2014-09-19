@@ -27,4 +27,6 @@ public interface CPPFeatureConstants {
 	public static final String FEATURE_GENERATOR_OPTIONS = "GeneratorOptions";
 	
 	public static final String PARAMETER_INNER_FUNCTION_VISIBILITY = "innerFunctionVisibility";
+	
+	public static final String PARAMETER_STATIC_OPC = "staticOperationCallback";
 }

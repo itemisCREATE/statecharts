@@ -1,25 +1,25 @@
 package org.yakindu.sct.generator.cpp
 
-import org.yakindu.sct.model.sexec.SaveHistory
-import org.yakindu.sct.model.sexec.HistoryEntry
-import org.yakindu.sct.model.sexec.StateSwitch
-import org.yakindu.sct.model.sexec.ScheduleTimeEvent
-import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
-import org.yakindu.sct.model.sexec.Call
 import com.google.inject.Inject
+import org.yakindu.sct.model.sexec.Call
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.CheckRef
 import org.yakindu.sct.model.sexec.EnterState
-import org.yakindu.sct.model.sexec.ExitState
 import org.yakindu.sct.model.sexec.Execution
+import org.yakindu.sct.model.sexec.ExitState
+import org.yakindu.sct.model.sexec.HistoryEntry
+import org.yakindu.sct.model.sexec.SaveHistory
+import org.yakindu.sct.model.sexec.ScheduleTimeEvent
 import org.yakindu.sct.model.sexec.Sequence
+import org.yakindu.sct.model.sexec.StateSwitch
+import org.yakindu.sct.model.sexec.UnscheduleTimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
 
 class FlowCode extends org.yakindu.sct.generator.c.FlowCode {
 	
-	@Inject extension Naming
+	@Inject extension Naming naming
+	@Inject extension ExpressionCode expressions
 	@Inject extension Navigation
-	@Inject extension ExpressionCode
 	@Inject extension INamingService
 	
 	override dispatch CharSequence code(SaveHistory it) '''

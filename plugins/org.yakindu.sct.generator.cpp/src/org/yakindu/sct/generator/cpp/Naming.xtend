@@ -23,12 +23,16 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgraph.Scope
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 
 class Naming extends org.yakindu.sct.generator.c.Naming {
 	
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
+	@Inject extension GenmodelEntriesExtension
+	@Inject GeneratorEntry entry
 	
 	def cpp(String it) { it + ".cpp" }
 	
@@ -154,13 +158,17 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 		"isActive"
 	}
 	
-	override dispatch access (OperationDefinition it) 
-		'''«scope.OCB_Instance»->«asFunction»'''
+	override dispatch access(OperationDefinition it){
+		if (entry.useStaticOPC) {
+			return '''«(scope as StatechartScope).interfaceOCBName»::«asFunction»'''
+		}
+		return '''«scope.OCB_Instance»->«asFunction»'''
+	}
 		
 	override dispatch access(TimeEvent it)
 		'''«timeEventsInstance»[«indexOf»]'''
 		
-	override dispatch access (VariableDefinition it) 
+	override dispatch access(VariableDefinition it) 
 		'''«scope.instance».«name.asEscapedIdentifier»'''
 	
 	override dispatch access (Event it) 
@@ -169,10 +177,10 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 	override valueAccess(Event it) 
 		'''«scope.instance».«name.asIdentifier.value»'''
 		
-	def dispatch localAccess (VariableDefinition it) 
+	def dispatch localAccess(VariableDefinition it) 
 		'''«name.asEscapedIdentifier»'''
 	
-	def dispatch localAccess (Event it) 
+	def dispatch localAccess(Event it) 
 		'''«name.asIdentifier.raised»'''
 	
 	def localValueAccess(Event it) 

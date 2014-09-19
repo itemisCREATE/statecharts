@@ -27,5 +27,9 @@
     <parameters
         name="innerFunctionVisibility"
         optional="true"/>
+    <parameters
+        name="staticOperationCallback"
+        optional="true"
+        parameterType="BOOLEAN"/>
   </types>
 </sgen:FeatureTypeLibrary>

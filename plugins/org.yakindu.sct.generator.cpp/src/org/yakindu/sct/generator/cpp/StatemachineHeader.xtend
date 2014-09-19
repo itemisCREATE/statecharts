@@ -33,14 +33,17 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StatemachineHeader extends Statemachine {
 	
-	@Inject extension Naming cNaming
+	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntriesExtension
 	@Inject extension INamingService
 	
+	protected GeneratorEntry entry
+	
 	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		 fsa.generateFile(flow.module().h, flow.statemachineHContent(entry) )
+		this.entry = entry
+		fsa.generateFile(flow.module().h, flow.statemachineHContent(entry) )
 	}
 	
 	override statemachineHContent(ExecutionFlow it,  GeneratorEntry entry) '''
@@ -58,17 +61,17 @@ class StatemachineHeader extends Statemachine {
 		/*! \file Header of the state machine '«name»'.
 		*/
 		
-		class «module()» : «interfaceExtensions» {
+		class «module» : «interfaceExtensions» {
 			
 			public:
 				
-				«flow.module()»();
+				«module»();
 				
-				~«flow.module()»();
+				~«module»();
 				
 				«statesEnumDecl»
 				
-				«FOR s : it.scopes»«s.createPublicScope(entry)»«ENDFOR»
+				«FOR s : it.scopes»«s.createPublicScope»«ENDFOR»
 				
 				«publicFunctionPrototypes»
 				
@@ -77,16 +80,15 @@ class StatemachineHeader extends Statemachine {
 			
 			«entry.innerClassVisibility»:
 			
-				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface(entry)»«ENDFOR»
+				«FOR s : scopes.filter(typeof(InternalScope))»«s.createInterface»«ENDFOR»
 			
 				«statemachineTypeDecl»
 				
 				«prototypes»
 		};
-		
-		«FOR s : it.scopes.filter(typeof(StatechartScope)) SEPARATOR StringConcatenation.DEFAULT_LINE_DELIMITER»
-			«s.createInlineOCB_Destructor»
-		«ENDFOR»
+		«IF !entry.useStaticOPC»
+			«scopes.filter(typeof(StatechartScope)).map[createInlineOCB_Destructor].filterNullOrEmptyAndJoin»
+		«ENDIF»
 		#endif /* «module().define»_H_ */
 	'''
 	
@@ -103,23 +105,23 @@ class StatemachineHeader extends Statemachine {
 		return interfaces;
 	}
 	
-	def protected createInlineOCB_Destructor(StatechartScope it) {
+	def protected CharSequence createInlineOCB_Destructor(StatechartScope it) {
 		if (hasOperations) {
 			return '''inline «flow.module»::«interfaceOCBName»::~«interfaceOCBName»() {}'''
 		}
 		return ''''''
 	}
 	
-	def protected createPublicScope(Scope scope, GeneratorEntry entry) {
+	def protected createPublicScope(Scope scope) {
 		switch scope {
-			InterfaceScope: scope.createPublicScope(entry)
+			InterfaceScope: scope.createPublicScope
 			InternalScope: scope.createPublicScope
 		}
 	}
 	
-	def protected createPublicScope(InterfaceScope scope, GeneratorEntry entry)
+	def protected createPublicScope(InterfaceScope scope)
 	'''
-		«scope.createInterface(entry)»
+		«scope.createInterface»
 «««		«scope.createListenerInterface(entry)»
 		«scope.createOCBInterface»
 		
@@ -139,7 +141,7 @@ class StatemachineHeader extends Statemachine {
 		'''
 	}
 	
-	def protected createInterface(StatechartScope scope, GeneratorEntry entry)
+	def protected createInterface(StatechartScope scope)
 	'''
 		//! Inner class for «scope.simpleName» interface scope.
 		class «scope.interfaceName» {
@@ -164,15 +166,19 @@ class StatemachineHeader extends Statemachine {
 			//! Inner class for «scope.simpleName» interface scope operation callbacks.
 			class «scope.interfaceOCBName» {
 				public:
-					virtual ~«scope.interfaceOCBName»() = 0;
-					
+					«IF !entry.useStaticOPC»
+						virtual ~«scope.interfaceOCBName»() = 0;
+						
+					«ENDIF»
 					«FOR operation : scope.operations SEPARATOR StringConcatenation.DEFAULT_LINE_DELIMITER»
-						virtual «operation.signature» = 0;
+						«IF entry.useStaticOPC»static«ELSE»virtual«ENDIF» «operation.signature»«IF !entry.useStaticOPC» = 0«ENDIF»;
 					«ENDFOR»
 			};
-			
-			/*! Set the working instance of the operation callback interface '«scope.interfaceOCBName»'. */
-			«scope.OCB_InterfaceSetterDeclaration(false)»;
+			«IF !entry.useStaticOPC»
+				
+				/*! Set the working instance of the operation callback interface '«scope.interfaceOCBName»'. */
+				«scope.OCB_InterfaceSetterDeclaration(false)»;
+			«ENDIF»
 		«ENDIF»
 		'''
 	}
@@ -196,7 +202,7 @@ class StatemachineHeader extends Statemachine {
 		
 		«FOR s : scopes.filter(typeof(StatechartScope))»
 			«s.interfaceName» «s.instance»;
-			«IF s.hasOperations»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
+			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
 	'''
 	

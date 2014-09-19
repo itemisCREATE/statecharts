@@ -602,8 +602,25 @@ feature IdentifierSettings {
 	maxIdentifierLength = 31
 	separator =  "_" 
 }
-p. ==<!-- End sgen_feature_identifiersettings -->==		
+p. ==<!-- End sgen_feature_identifiersettings -->==
 
+==<!-- Start sgen_feature_generatoroptions -->==
+
+h4. GeneratorOptions
+
+The *GeneratorOptions* feature allows change the behavior of the C++ generator:
+
+# __innerFunctionVisibility__  (String, optional): This parameter is used to change the visibility of inner functions and variables. In default the "private" visibility is used. It can be changed to "protected" to allow function overriding for a class which inherits from the generated statemachine base class.
+# __staticOperationCallback__  (Boolean, optional): If set to 'true' the callback function declaration for statechart operations is static and the functions are called by the statemachine code statically.
+
+Example configuration:
+
+bc(prettyprint).. 
+feature GeneratorOptions {
+	innerFunctionVisibility =  "protected"
+	staticOperationCallback = true
+}
+p. ==<!-- End sgen_feature_generatoroptions -->==
 
 ==<!-- Start sgen_feature_junitwrapper -->==
 

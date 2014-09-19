@@ -63,6 +63,9 @@ public class CPPDefaultFeatureValueProvider extends
 				.getName()
 				.equals(CPPFeatureConstants.PARAMETER_INNER_FUNCTION_VISIBILITY)) {
 			parameterValue.setValue(Visibility.PRIVATE.toString().toLowerCase());
+		} else if (parameterValue.getParameter().getName()
+				.equals(CPPFeatureConstants.PARAMETER_STATIC_OPC)) {
+			parameterValue.setValue(false);
 		}
 	}
 
