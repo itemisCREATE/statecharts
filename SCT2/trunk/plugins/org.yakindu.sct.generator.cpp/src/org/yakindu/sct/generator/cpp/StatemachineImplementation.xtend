@@ -13,30 +13,34 @@ package org.yakindu.sct.generator.cpp
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.Step
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.sct.generator.c.GenmodelEntriesimport org.yakindu.sct.model.stext.stext.StatechartScope
-import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.sexec.naming.INamingService
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.StatechartScope
 
 class StatemachineImplementation {
 	
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension FlowCode
-	@Inject extension GenmodelEntries
+	@Inject extension GenmodelEntriesExtension
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
 	
+	protected GeneratorEntry entry
+	
 	def generateStatemachineImplemenation(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
-		 fsa.generateFile(flow.module.cpp, flow.statemachineContent(entry) )
+		this.entry = entry
+		fsa.generateFile(flow.module.cpp, flow.statemachineContent)
 	}
 	
-	def statemachineContent(ExecutionFlow it, GeneratorEntry entry) '''
+	def statemachineContent(ExecutionFlow it) '''
 		«entry.licenseText»
 		
 		#include "«module.h»"
@@ -72,9 +76,9 @@ class StatemachineImplementation {
 	def constructorDecl(ExecutionFlow it) '''
 		«module»::«module»() {
 			
-			«scopes.filter(typeof(StatechartScope)).filter[hasOperations].map['''«OCB_Instance» = null;'''].join('\n')»
-		«IF hasHistory»
-			
+			«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
+			«IF hasHistory»
+				
 				for (int i = 0; i < «historyStatesConst»; ++i)
 					historyVector[i] = «last_state»;
 			«ENDIF»
@@ -312,7 +316,7 @@ class StatemachineImplementation {
 					«ENDIF»
 				«ENDIF»
 			«ENDFOR»
-			«IF scope.hasOperations»
+			«IF scope.hasOperations && !entry.useStaticOPC»
 				«scope.OCB_InterfaceSetterDeclaration(true)» {
 					«scope.OCB_Instance» = operationCallback;
 				}

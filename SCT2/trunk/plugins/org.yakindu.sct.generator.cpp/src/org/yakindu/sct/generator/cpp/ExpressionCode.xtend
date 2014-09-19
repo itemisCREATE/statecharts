@@ -6,6 +6,7 @@ import org.yakindu.base.expressions.expressions.BitwiseAndExpression
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
@@ -16,6 +17,7 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression
 import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
+import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
@@ -24,7 +26,9 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.ITypeSystem
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
@@ -33,10 +37,6 @@ import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
-import org.yakindu.base.expressions.expressions.NullLiteral
-import org.yakindu.base.expressions.expressions.ConditionalExpression
-import org.yakindu.base.expressions.expressions.TypeCastExpression
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 class ExpressionCode {
 
@@ -46,7 +46,7 @@ class ExpressionCode {
 	@Inject extension ISTextTypeInferrer
 	@Inject extension INamingService
 	@Inject extension ICodegenTypeSystemAccess
-
+	
 	/* Refering to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
 		it.code(it.definition)

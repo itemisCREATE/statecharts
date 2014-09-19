@@ -27,6 +27,7 @@ import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sexec.TimeEvent
+import java.util.List
 
 class Naming {
 	
@@ -58,6 +59,14 @@ class Naming {
 //	def module(InterfaceScope it) {
 //		flow.type + (if (name.nullOrEmpty) 'Default' else name).asIdentifier.toFirstUpper	
 //	}
+	
+	def filterNullOrEmptyAndJoin(Iterable<CharSequence> it) {
+		filter[!it?.toString.nullOrEmpty].join('\n')
+	}
+
+	def filterNullOrEmptyAndJoin(List<String> it) {
+		filter[!it?.toString.nullOrEmpty].join('\n')
+	}
 	
 	def client(String it) {
 		it + "Required"	
