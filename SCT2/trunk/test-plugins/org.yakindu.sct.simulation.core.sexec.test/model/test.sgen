@@ -258,14 +258,6 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 
-	test Operations{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
-			targetFolder = "test-gen"			
-		}			
-	}	
-	
 	test OutEventLifeCycle{
 		
 		feature Outlet{ 

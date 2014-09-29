@@ -384,19 +384,7 @@ GeneratorModel for sctunit::cpp {
 			WrapToJUnit =  "true"
 		}			
 	}
-	
-	test Operations{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.cpp.test" 
-			targetFolder = "test-gen"			
-		}		
-		
-		feature JUnitWrapper {
-			WrapToJUnit =  "true"
-		}			
-	}
-	
+
 	test OutEventLifeCycle{
 		
 		feature Outlet{ 
