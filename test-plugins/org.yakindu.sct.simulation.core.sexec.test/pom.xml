@@ -22,6 +22,8 @@
 
 					<includes>
 						<include>**/AllTestsTest.class</include>
+						<include>**/CoreFunctionTest.class</include>
+						<include>**/STextInterpreterTest.class</include>
 					</includes>
 
 					<excludes>
