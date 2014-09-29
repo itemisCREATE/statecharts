@@ -16,7 +16,11 @@ import static org.yakindu.sct.model.sgraph.SGraphPackage.Literals.SPECIFICATION_
 import org.eclipse.draw2d.Label;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.gef.EditPolicy;
+import org.eclipse.gef.Handle;
+import org.eclipse.gef.handles.AbstractHandle;
 import org.eclipse.gef.tools.DirectEditManager;
+import org.eclipse.gmf.runtime.diagram.ui.editpolicies.NonResizableLabelEditPolicy;
+import org.eclipse.gmf.runtime.diagram.ui.tools.DragEditPartsTrackerEx;
 import org.eclipse.gmf.runtime.diagram.ui.tools.TextDirectEditManager;
 import org.eclipse.gmf.runtime.notation.StringValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
@@ -59,6 +63,20 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 		installEditPolicy(EditPolicy.COMPONENT_ROLE, new TransitionExpressionComponentEditPolicy());
 		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new ContextSensitiveHelpPolicy(
 				HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION));
+		//BUGFIX: https://code.google.com/a/eclipselabs.org/p/yakindu/issues/detail?id=26
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableLabelEditPolicy(){
+			@Override
+			protected void replaceHandleDragEditPartsTracker(Handle handle) {
+				if (handle instanceof AbstractHandle) {
+					AbstractHandle h = (AbstractHandle) handle;
+					h.setDragTracker(new DragEditPartsTrackerEx(getHost()){
+						protected boolean isMove() {
+							return true;
+						};
+					});
+				}
+			}
+		});
 	}
 
 	@Override
