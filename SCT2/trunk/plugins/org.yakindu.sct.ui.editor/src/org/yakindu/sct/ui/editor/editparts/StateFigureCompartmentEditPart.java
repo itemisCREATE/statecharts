@@ -55,6 +55,19 @@ public class StateFigureCompartmentEditPart extends CompartmentEditPart {
 	}
 
 	@Override
+	protected void addNotationalListeners() {
+		super.addNotationalListeners();
+		  addListenerFilter("ParentView", this,((View)getModel()).eContainer());
+		
+	}
+	
+	@Override
+	protected void removeNotationalListeners() {
+		super.removeNotationalListeners();
+		removeListenerFilter("ParentView"); 
+	}
+	
+	@Override
 	public boolean isSelectable() {
 		return false;
 	}
@@ -84,6 +97,7 @@ public class StateFigureCompartmentEditPart extends CompartmentEditPart {
 
 	@Override
 	protected void handleNotificationEvent(Notification event) {
+		System.out.println();
 		if (event.getFeature() == NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE) {
 			updateLayout();
 		}
