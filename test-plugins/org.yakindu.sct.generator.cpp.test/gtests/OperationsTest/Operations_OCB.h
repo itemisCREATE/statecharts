@@ -6,7 +6,7 @@ class InternalCallBack : public Operations::InternalSCI_OCB {
 
 		void internalOperation1();
 
-		sc_boolean internalOperation2(sc_integer param1);
+		sc_boolean InternalOperation2(sc_integer param1);
 };
 
 class Interface1CallBack : public Operations::SCI_Interface1_OCB {
@@ -14,7 +14,7 @@ class Interface1CallBack : public Operations::SCI_Interface1_OCB {
 
 		void interfaceOperation1();
 
-		sc_boolean interfaceOperation2(sc_integer param1);
+		sc_boolean InterfaceOperation2(sc_integer param1);
 };
 
 class DefaultCallBack : public Operations::DefaultSCI_OCB {
@@ -23,7 +23,7 @@ class DefaultCallBack : public Operations::DefaultSCI_OCB {
 
 		void unnamedInterfaceOperation1();
 
-		sc_boolean unnamedInterfaceOperation2(sc_integer param1);
+		sc_boolean UnnamedInterfaceOperation2(sc_integer param1);
 		
 		sc_boolean alwaysTrue();
 };
