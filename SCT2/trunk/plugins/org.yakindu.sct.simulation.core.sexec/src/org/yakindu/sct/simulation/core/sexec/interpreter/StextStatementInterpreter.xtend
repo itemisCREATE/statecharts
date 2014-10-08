@@ -38,8 +38,11 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Enumerator
+import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Type
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
@@ -62,6 +65,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	protected IOperationMockup operationDelegate
 	@Inject
 	protected extension IExecutionSlotResolver resolver
+	@Inject
+	protected extension ITypeSystem ts;
 
 	protected ExecutionContext context
 
@@ -77,6 +82,34 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(AssignmentExpression assignment) {
 		executeAssignment(assignment)
 	}
+	
+	def dispatch Object execute(TypeCastExpression expression) {
+		var operand = expression.operand.execute
+		typeCast(operand, expression.type)		
+	}
+	
+	def dispatch Object typeCast(Long value, Type type){
+		if (ts.isIntegerType(type)) return value
+		if (ts.isRealType(type)) return Double.valueOf(value)
+		throw new IllegalArgumentException
+	}
+	
+	def dispatch Object typeCast(Float value, Type type){
+		if (ts.isIntegerType(type)) return value.longValue
+		if (ts.isRealType(type)) return Double.valueOf(value)
+		throw new IllegalArgumentException
+	}
+	
+	def dispatch Object typeCast(Double value, Type type){
+		if (ts.isIntegerType(type)) return value.longValue
+		if (ts.isRealType(type)) return Double.valueOf(value)
+		throw new IllegalArgumentException
+	}
+	
+	def dispatch Object typeCast(Object value, Type type){
+		throw new IllegalArgumentException("Invalid cast")
+	}
+	
 
 	def Object executeAssignment(AssignmentExpression assignment) {
 		var scopeVariable = context.resolve(assignment.varRef)
