@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_o9WJwD1DEeK7haHJZ9RPwA" specification="internal:&#xD;&#xA;operation internalOperation1() &#xD;&#xA;operation internalOperation2(param1 : integer) :boolean&#xD;&#xA;var  myBool  : boolean &#xD;&#xA;&#xD;&#xA;interface Interface1:&#xD;&#xA;operation interfaceOperation1() &#xD;&#xA;operation interfaceOperation2(param1 : integer) :boolean&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;in event ev&#xD;&#xA;operation unnamedInterfaceOperation1()&#xD;&#xA;operation unnamedInterfaceOperation2(param1 : integer) :boolean&#xD;&#xA;operation alwaysTrue() : boolean" name="Operations">
+  <sgraph:Statechart xmi:id="_o9WJwD1DEeK7haHJZ9RPwA" specification="internal:&#xD;&#xA;operation internalOperation1() &#xD;&#xA;operation InternalOperation2(param1 : integer) :boolean&#xD;&#xA;var  myBool  : boolean &#xD;&#xA;&#xD;&#xA;interface Interface1:&#xD;&#xA;operation interfaceOperation1() &#xD;&#xA;operation InterfaceOperation2(param1 : integer) :boolean&#xD;&#xA;&#xD;&#xA;interface:&#xD;&#xA;in event ev&#xD;&#xA;operation unnamedInterfaceOperation1()&#xD;&#xA;operation UnnamedInterfaceOperation2(param1 : integer) :boolean&#xD;&#xA;operation alwaysTrue() : boolean" name="Operations">
     <regions xmi:id="_o9WJwz1DEeK7haHJZ9RPwA" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_o9cQYD1DEeK7haHJZ9RPwA">
         <outgoingTransitions xmi:id="_o9cQej1DEeK7haHJZ9RPwA" specification="" target="_YFq94B17EeSUu8X40Qay1A"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_o9cQaz1DEeK7haHJZ9RPwA" specification="entry / internalOperation1()&#xD;&#xA;entry / myBool = internalOperation2(4)" name="B" incomingTransitions="_fgphsB17EeSUu8X40Qay1A">
+      <vertices xsi:type="sgraph:State" xmi:id="_o9cQaz1DEeK7haHJZ9RPwA" specification="entry / internalOperation1()&#xD;&#xA;entry / myBool = InternalOperation2(4)" name="B" incomingTransitions="_fgphsB17EeSUu8X40Qay1A">
         <outgoingTransitions xmi:id="__4FnMD1DEeK7haHJZ9RPwA" specification="ev [alwaysTrue()]" target="__d3JUD1DEeK7haHJZ9RPwA"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="__d3JUD1DEeK7haHJZ9RPwA" specification="entry / Interface1.interfaceOperation1()&#xD;&#xA;entry / Interface1.interfaceOperation2(4)" name="C" incomingTransitions="__4FnMD1DEeK7haHJZ9RPwA">
+      <vertices xsi:type="sgraph:State" xmi:id="__d3JUD1DEeK7haHJZ9RPwA" specification="entry / Interface1.interfaceOperation1()&#xD;&#xA;entry / Interface1.InterfaceOperation2(4)" name="C" incomingTransitions="__4FnMD1DEeK7haHJZ9RPwA">
         <outgoingTransitions xmi:id="_PPFoUD3yEeK47LT8Vd-Q2Q" specification="ev" target="_AJilgD3yEeK47LT8Vd-Q2Q"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_AJilgD3yEeK47LT8Vd-Q2Q" specification="entry / unnamedInterfaceOperation1(); unnamedInterfaceOperation2(4)" name="D" incomingTransitions="_PPFoUD3yEeK47LT8Vd-Q2Q"/>
+      <vertices xsi:type="sgraph:State" xmi:id="_AJilgD3yEeK47LT8Vd-Q2Q" specification="entry / unnamedInterfaceOperation1(); UnnamedInterfaceOperation2(4)" name="D" incomingTransitions="_PPFoUD3yEeK47LT8Vd-Q2Q"/>
       <vertices xsi:type="sgraph:State" xmi:id="_YFq94B17EeSUu8X40Qay1A" name="A" incomingTransitions="_o9cQej1DEeK7haHJZ9RPwA">
         <outgoingTransitions xmi:id="_fgphsB17EeSUu8X40Qay1A" specification="oncycle" target="_o9cQaz1DEeK7haHJZ9RPwA"/>
       </vertices>

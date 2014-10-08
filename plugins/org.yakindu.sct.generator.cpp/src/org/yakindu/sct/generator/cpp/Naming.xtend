@@ -127,7 +127,7 @@ class Naming extends org.yakindu.sct.generator.c.Naming {
 //	}
 	
 	override asFunction(OperationDefinition it) {
-		name.asIdentifier.toFirstLower	
+		name.asEscapedIdentifier	
 	}
 	
 	override asRaiser(EventDefinition it) {

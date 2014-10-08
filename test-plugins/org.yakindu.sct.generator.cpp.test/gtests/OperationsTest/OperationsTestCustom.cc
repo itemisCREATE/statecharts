@@ -70,7 +70,7 @@ void InternalCallBack::internalOperation1() {
 	internalOperation1Called = true;
 }
 
-sc_boolean InternalCallBack::internalOperation2(sc_integer param1) {
+sc_boolean InternalCallBack::InternalOperation2(sc_integer param1) {
 	internalOperation2Called = true;
 	internalOp2Param = param1;
 	return true;
@@ -80,7 +80,7 @@ void Interface1CallBack::interfaceOperation1() {
 	interfaceOperation1Called = true;
 }
 
-sc_boolean Interface1CallBack::interfaceOperation2(sc_integer param1) {
+sc_boolean Interface1CallBack::InterfaceOperation2(sc_integer param1) {
 	interfaceOperation2Called = true;
 	interfaceOp2Param = param1;
 	return true;
@@ -90,7 +90,7 @@ void DefaultCallBack::unnamedInterfaceOperation1() {
 	unnamedInterfaceOperation1Called = true;
 }
 
-sc_boolean DefaultCallBack::unnamedInterfaceOperation2(sc_integer param1) {
+sc_boolean DefaultCallBack::UnnamedInterfaceOperation2(sc_integer param1) {
 	unnamedInterfaceOperation2Called = true;
 	unnamedInterfaceOp2Param = param1;
 	return true;
