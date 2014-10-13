@@ -31,7 +31,7 @@ p(#Createastatechartmodel). The first step is to create a new Project by choosin
 
 h3. Create a statechart model
 
-p(#UsetheEditor). Next, create a new statechart model by choosing _File -> New -> Other -> Yakindu -> YAKINDU Statechart Model_. The wizard asks for the parent folder and we choose *CallHandling/model*. Name the File *CallHandling.sct* and finish the wizard. Last, confirm the perspective switch with *Yes*. The statechart editor opens and show the definition of a very simple statechart.
+p(#UsetheEditor). Next, create a new statechart model by choosing _File -> New -> Other -> Yakindu -> YAKINDU Statechart Model_ and name it *CallHandling.sct*. The wizard asks for the parent folder and we choose *CallHandling/model*. Name the File *CallHandling.sct* and finish the wizard. Last, confirm the perspective switch with *Yes*. The statechart editor opens and show the definition of a very simple statechart.
 
 h3. Use the Editor
 
@@ -64,7 +64,7 @@ p(#Simulatingthemodel). If something went wrong, you can still download the exam
 
 h3. Simulating the model
 
-To start the simulation, select your model in the project explorer on the left and select _Run As -> Yakindu Statechart_ from the context menu. The perspective is switched from *SC Modeling* to *SC Simulation*. The simulation perspective defines two additional views. The _Debug View_ on the top shows all running statechart instances and allows the selection of one. Note that SCT allows multiple execution of one statechart as well as parallel execution of different statecharts at the same time. 
+To start the simulation, select your model in the project explorer on the left and select _Run As -> Statechart Simulation_ from the context menu. The perspective is switched from *SC Modeling* to *SC Simulation*. The simulation perspective defines two additional views. The _Debug View_ on the top shows all running statechart instances and allows the selection of one. Note that SCT allows multiple execution of one statechart as well as parallel execution of different statecharts at the same time. 
 The _Simulation View_ on the right allows raising of events and inspection and modification of variables. 
 When the simulation starts, the *Idle* state becomes active since it is connected with the *Initial State*. This is illustrated by a red foreground color in the editor. Now, raise a event by clicking on the _incoming_call_ hyperlink in the _Simulation View_ on the right. This will trigger a state transition from *(#GenerateJavacode)Idle* to *Incoming Call*. Accept the call by raising the event _accept_call_. State *Active Call* becomes active and the value for duration in the _Simulation View_ increases every second. If you are done with your phone call, raise the _dismiss_call_ event. After 2 seconds, the system will return to its *Idle* State.
 If your statechart behaves as expected, we can now go one step further and generate code out of it. Therefore, stop the simulation by pressing the _Terminate_ button from the toolbar on the top.
@@ -73,7 +73,7 @@ h3. Generate Java code
 
 YAKINDU SCT includes code generators for Java and C out of the box. Our code generators follow a "code-only" approach and do not rely on any additional runtime library. The generated code provides a well-defined interface and can be integrated easily with any client code. In this tutorial we will generate Java code for our *CallHandling* example.
 
-For code generation, SCT uses a textual generator model called SGen. This model allows customization of the code generation process. To create a new SGen model select the model folder in the project explorer on the left, and select _New – Yakindu Statechart Generator Model_ from the context menu. On the first wizard page, enter *CallHandling.sgen* as the file name and press next. On the second wizard page, select _Yakindu SCT Java Code Generator_ from the drop down menu on the top. In the statechart tree below, check the *CallHandling.sct* model and press Finish. The SGen Editor opens and show the following simple generator model:
+For code generation, SCT uses a textual generator model called SGen. This model allows customization of the code generation process. To create a new SGen model select the model folder in the project explorer on the left, and select _New – Code Generator Model_ from the context menu. On the first wizard page, enter *CallHandling.sgen* as the file name and press next. On the second wizard page, select _Yakindu SCT Java Code Generator_ from the drop down menu on the top. In the statechart tree below, check the *CallHandling.sct* model and press Finish. The SGen Editor opens and show the following simple generator model:
 
 bc(prettyprint).  
 GeneratorModel for yakindu::java {
@@ -109,7 +109,7 @@ bc(prettyprint linenums).
 3  public class CallHandlingClient {
 4        public static void main(String[] args) throws Exception {
 5               CallHandlingStatemachine sm = new CallHandlingStatemachine();
-6               sm.setTimerService(new TimerService());
+6               sm.setTimer(new TimerService());
 7               // enter the sm and active the Idle state
 8               sm.enter();
 9               // Raise an incoming call
