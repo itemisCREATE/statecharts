@@ -25,7 +25,8 @@ import org.eclipse.emf.compare.postprocessor.IPostProcessor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
- * Postprocessor for adjusting dependencies between {@link EdgeChange} diffs and {@link ReferenceChange}s for incoming/outgoing transitions.
+ * Postprocessor for adjusting dependencies between {@link EdgeChange} diffs and
+ * {@link ReferenceChange}s for incoming/outgoing transitions.
  * 
  * @author thomas kutz - Initial contribution
  *
@@ -63,24 +64,30 @@ public class EdgeChangePostProcessor implements IPostProcessor {
 			if (diff instanceof EdgeChange) {
 				EdgeChange edgeChange = (EdgeChange) diff;
 				switch (edgeChange.getKind()) {
-					case ADD : 		postProcessEdgeAddition(edgeChange); break;
-					case DELETE : 	postProcessEdgeDeletion(edgeChange); break;
-					default : // do nothing
+				case ADD:
+					postProcessEdgeAddition(edgeChange);
+					break;
+				case DELETE:
+					postProcessEdgeDeletion(edgeChange);
+					break;
+				default: // do nothing
 				}
-				
+
 			}
 		}
 	}
 
-	
 	/**
 	 * In this case by default following dependencies are created:<br>
 	 * <br>
-	 * EdgeDeletion --requires-> OutgoingTransitionDeletion <-requires-- IncomingTransitionDeletion<br>
+	 * EdgeDeletion --requires-> OutgoingTransitionDeletion <-requires--
+	 * IncomingTransitionDeletion<br>
 	 * <br>
 	 * Needs to be changed into:<br>
 	 * <br>
-	 * EdgeDeletion --requires-> IncomingTransitionDeletion --requires-> OutgoingTransitionDeletion<br>
+	 * EdgeDeletion --requires-> IncomingTransitionDeletion --requires->
+	 * OutgoingTransitionDeletion<br>
+	 * 
 	 * @param edgeChange
 	 */
 	@SuppressWarnings("restriction")
@@ -89,35 +96,60 @@ public class EdgeChangePostProcessor implements IPostProcessor {
 		for (Diff requireds : edgeChange.getRequires()) {
 			if (requireds instanceof ReferenceChange) {
 				ReferenceChange requiredRefChange = (ReferenceChange) requireds;
-				// for required changes in outgoing transition refs we also need to add the corresponding change in incoming transition refs
-				if (requiredRefChange.getReference() == SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS && requiredRefChange.getKind() == DifferenceKind.ADD) {
-					requiredIncomingTransitionAdditions.addAll(findRequiredIncomingTransitionRefChange(requiredRefChange, DifferenceKind.ADD));
+				// for required changes in outgoing transition refs we also need
+				// to add the corresponding change in incoming transition refs
+				if (requiredRefChange.getReference() == SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS
+						&& requiredRefChange.getKind() == DifferenceKind.ADD) {
+					requiredIncomingTransitionAdditions
+							.addAll(findRequiredIncomingTransitionRefChange(
+									requiredRefChange, DifferenceKind.ADD));
 				}
 			}
 		}
 		edgeChange.getRequires().addAll(requiredIncomingTransitionAdditions);
 	}
 
-	private Collection<Diff> findRequiredIncomingTransitionRefChange(ReferenceChange requiredRefChange, DifferenceKind changeKind) {
+	private Collection<Diff> findRequiredIncomingTransitionRefChange(
+			ReferenceChange requiredRefChange, DifferenceKind changeKind) {
 		for (Diff requiredBy : requiredRefChange.getRequiredBy()) {
 			if (requiredBy instanceof ReferenceChange) {
 				ReferenceChange requiredByRefChange = (ReferenceChange) requiredBy;
-				if (requiredByRefChange.getReference() == SGraphPackage.Literals.VERTEX__INCOMING_TRANSITIONS && requiredByRefChange.getKind() == changeKind) {
-					return Collections.<Diff>singletonList(requiredByRefChange); // FIXME: collect all and return set? Are there cases where more than one should be returned?
+				if (requiredByRefChange.getReference() == SGraphPackage.Literals.VERTEX__INCOMING_TRANSITIONS
+						&& requiredByRefChange.getKind() == changeKind) {
+					return Collections
+							.<Diff> singletonList(requiredByRefChange); // FIXME:
+																		// collect
+																		// all
+																		// and
+																		// return
+																		// set?
+																		// Are
+																		// there
+																		// cases
+																		// where
+																		// more
+																		// than
+																		// one
+																		// should
+																		// be
+																		// returned?
 				}
 			}
 		}
 		return Collections.emptyList();
 	}
-	
+
 	/**
 	 * In this case by default following dependencies are created:<br>
 	 * <br>
-	 * EdgeDeletion <-requires-- OutgoingTransitionDeletion --requires-> IncomingTransitionDeletion<br>
+	 * EdgeDeletion <-requires-- OutgoingTransitionDeletion --requires->
+	 * IncomingTransitionDeletion<br>
 	 * <br>
 	 * Needs to be changed into:<br>
 	 * <br>
-	 * EdgeDeletion --requires-> OutgoingTransitionDeletion --requires-> IncomingTransitionDeletion<br>
+	 * EdgeDeletion --requires-> OutgoingTransitionDeletion --requires->
+	 * IncomingTransitionDeletion<br>
+	 * 
 	 * @param edgeChange
 	 */
 	@SuppressWarnings("restriction")
@@ -126,14 +158,15 @@ public class EdgeChangePostProcessor implements IPostProcessor {
 		for (Diff requireds : edgeChange.getRequiredBy()) {
 			if (requireds instanceof ReferenceChange) {
 				ReferenceChange requiredRefChange = (ReferenceChange) requireds;
-				// for required changes in outgoing transition refs we also need to add the corresponding change in incoming transition refs
-				if (requiredRefChange.getReference() == SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS && requiredRefChange.getKind() == DifferenceKind.DELETE) {
+				// for required changes in outgoing transition refs we also need
+				// to add the corresponding change in incoming transition refs
+				if (requiredRefChange.getReference() == SGraphPackage.Literals.VERTEX__OUTGOING_TRANSITIONS
+						&& requiredRefChange.getKind() == DifferenceKind.DELETE) {
 					requiredOutgoingTransitionDeletions.add(requiredRefChange);
 				}
 			}
 		}
 		edgeChange.getRequires().addAll(requiredOutgoingTransitionDeletions);
 	}
-
 
 }
