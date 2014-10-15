@@ -18,6 +18,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.yakindu.sct.simulation.core.sexec.interpreter.CoreFunction;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EcoreFactory;
 
 /**
  * 
@@ -732,14 +734,70 @@ public class CoreFunctionTest {
 		int actual = cFunction.bitwiseAnd(5, 2);
 		assertEquals(expected, actual);
 	}
-
+	
+	@Test
+	public void testBitwiseAndIntegerInteger() {
+		int expected = 1;
+		int actual = cFunction.bitwiseAnd(5, 3);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testBitwiseAndLongLong() {
+		long expected = 1L;
+		long actual = cFunction.bitwiseAnd(5L, 3L);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testBitwiseAndLongInteger() {
+		long expected = 1L;
+		long actual = cFunction.bitwiseAnd(5L, 3);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testBitwiseAndIntegerLong() {
+		long expected = 1L;
+		long actual = cFunction.bitwiseAnd(5, 3L);
+		assertEquals(expected, actual);
+	}
+	
 	@Test
 	public void testBitwiseOr() {
 		int expected = 7;
 		int actual = cFunction.bitwiseOr(5, 2);
 		assertEquals(expected, actual);
 	}
+	
+	@Test
+	public void testBitwiseOrIntegerInteger() {
+		int expected = 7;
+		int actual = cFunction.bitwiseOr(5, 3);
+		assertEquals(expected, actual);
+	}
 
+	@Test
+	public void testBitwiseOrLongLong() {
+		long expected = 7L;
+		long actual = cFunction.bitwiseOr(5L, 3L);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testBitwiseOrLongInteger() {
+		long expected = 7L;
+		long actual = cFunction.bitwiseOr(5L, 3);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testBitwiseOrIntegerLong() {
+		long expected = 7L;
+		long actual = cFunction.bitwiseOr(5, 3L);
+		assertEquals(expected, actual);
+	}
+	
 	@Test
 	public void testBitwiseXorIntegerInteger() {
 		int expected = 6;
@@ -751,6 +809,20 @@ public class CoreFunctionTest {
 	public void testBitwiseXorLongLong() {
 		long expected = 6L;
 		long actual = cFunction.bitwiseXor(5L, 3L);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testBitwiseXorLongInteger() {
+		long expected = 6L;
+		long actual = cFunction.bitwiseXor(5L, 3);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
+	public void testBitwiseXorIntegerLong() {
+		long expected = 6L;
+		long actual = cFunction.bitwiseXor(5, 3L);
 		assertEquals(expected, actual);
 	}
 
@@ -767,6 +839,15 @@ public class CoreFunctionTest {
 		assertFalse(cFunction.equals(obj1, null));
 		assertFalse(cFunction.equals(null, obj1));
 		assertFalse(cFunction.equals(new Object(), new Object()));
+	}
+	
+	@Test
+	public void testEqualsEObjectEObject() {
+		EObject obj1 = EcoreFactory.eINSTANCE.createEObject();
+		assertTrue(cFunction.equals(obj1, obj1));
+		assertFalse(cFunction.equals(obj1, null));
+		assertFalse(cFunction.equals(null, obj1));
+		assertTrue(cFunction.equals(EcoreFactory.eINSTANCE.createEObject(), EcoreFactory.eINSTANCE.createEObject()));
 	}
 
 	@Test
@@ -848,6 +929,7 @@ public class CoreFunctionTest {
 	@Test
 	public void testEqualsFloatLong() {
 		assertTrue(cFunction.equals(1.0F, 1L));
+		assertFalse(cFunction.equals(1.1F, 1L));
 		// Since Java and C are not able to compare
 		// float and double values with absolute precision -> 1.3F != 1.3
 		assertFalse(cFunction.equals(1.3F, 1.3));
@@ -948,6 +1030,15 @@ public class CoreFunctionTest {
 		assertTrue(cFunction.notEquals(null, obj1));
 		assertTrue(cFunction.notEquals(new Object(), new Object()));
 	}
+	
+	@Test
+	public void testNotEqualsEObjectEObject() {
+		EObject obj1 = EcoreFactory.eINSTANCE.createEObject();
+		assertFalse(cFunction.notEquals(obj1, obj1));
+		assertTrue(cFunction.notEquals(obj1, null));
+		assertTrue(cFunction.notEquals(null, obj1));
+		assertFalse(cFunction.notEquals(EcoreFactory.eINSTANCE.createEObject(), EcoreFactory.eINSTANCE.createEObject()));
+	}
 
 	@Test
 	public void testNotEqualsIntegerLong() {
@@ -1015,7 +1106,7 @@ public class CoreFunctionTest {
 	public void testGreaterEqualDoubleDouble() {
 		assertTrue(cFunction.greaterEqual(1.0, 1.0));
 		assertTrue(cFunction.greaterEqual(1.1, 1));
-		assertFalse(cFunction.greaterEqual(1, 1.1));
+		assertFalse(cFunction.greaterEqual(1.0, 1.1));
 	}
 
 	@Test
@@ -1069,10 +1160,10 @@ public class CoreFunctionTest {
 
 
 	@Test
-	public void testGreaterEqualDoubleInteger() {
+	public void testGreaterEqualDoubleInteger() {		
 		assertTrue(cFunction.greaterEqual(1.0, 1));
 		assertTrue(cFunction.greaterEqual(1.1, 1));
-		assertFalse(cFunction.greaterEqual(1, 1.2));
+		assertFalse(cFunction.greaterEqual(1.0, 2));
 	}
 
 	@Test
@@ -1299,8 +1390,8 @@ public class CoreFunctionTest {
 	@Test
 	public void testGreaterDoubleInteger() {
 		assertTrue(cFunction.greater(1.1, 1));
-		assertFalse(cFunction.greater(1.0F, 1));
-		assertFalse(cFunction.greater(0.9F, 1));
+		assertFalse(cFunction.greater(1.0, 1));
+		assertFalse(cFunction.greater(0.9, 1));
 	}
 
 	@Test
