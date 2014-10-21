@@ -67,8 +67,8 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 			parentScope = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
 				
 				public boolean apply(IEObjectDescription input) {
-					// only accept events, regular states and variables from own statechart
-					if (input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
+					// only accept events, operations,  regular states and variables from own statechart
+					if (input.getEClass() == StextPackage.Literals.OPERATION_DEFINITION || input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
 							|| SGraphPackage.Literals.REGULAR_STATE.isSuperTypeOf(input.getEClass())
 							|| (input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION && 
 								input.getEObjectURI().fileExtension().equals("sct"))) {
