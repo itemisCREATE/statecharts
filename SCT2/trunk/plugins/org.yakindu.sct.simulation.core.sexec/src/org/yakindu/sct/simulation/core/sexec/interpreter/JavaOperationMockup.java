@@ -50,9 +50,10 @@ public class JavaOperationMockup implements IOperationMockup {
 	private List<Object> callbacks;
 
 	private void initOperationCallbacks() {
+		callbacks = Lists.newArrayList();
 		if (launch == null)
 			return;
-		callbacks = Lists.newArrayList();
+		
 		IFile file = WorkspaceSynchronizer.getFile(((EObject) launch.getDebugTarget().getAdapter(EObject.class))
 				.eResource());
 		ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(file.getProject(), getClass()
