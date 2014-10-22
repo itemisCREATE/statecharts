@@ -114,7 +114,7 @@ public class JavaOperationMockup implements IOperationMockup {
 			return false;
 		}
 		
-		if (!(definition.getParameters().size() == method.getParameterCount())) {
+		if (!(definition.getParameters().size() == method.getParameters().length)) {
 			return false;
 		}
 
