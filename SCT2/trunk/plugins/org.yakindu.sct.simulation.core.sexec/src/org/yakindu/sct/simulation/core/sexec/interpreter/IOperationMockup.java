@@ -10,7 +10,6 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
-import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 
 /**
@@ -29,15 +28,11 @@ public interface IOperationMockup {
 	 */
 	public boolean canExecute(Operation definition, Object[] parameter);
 
-	public boolean canExecute(FeatureCall call, Object[] parameter);
-
 	/**
 	 * Called when the operation is executed
 	 * 
 	 * @return the operations return value, maybe null
 	 */
 	public Object execute(Operation definition, Object[] parameter);
-
-	public Object execute(FeatureCall definition, Object[] parameter);
-
+	
 }
