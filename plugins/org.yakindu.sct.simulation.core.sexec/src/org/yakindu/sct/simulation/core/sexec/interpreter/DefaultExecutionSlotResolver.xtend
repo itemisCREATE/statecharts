@@ -43,8 +43,7 @@ class DefaultExecutionSlotResolver implements IExecutionSlotResolver {
 			return context.getVariable(e.feature.fullyQualifiedName.toString)
 		}
 		if (e.feature instanceof Operation) {
-			// for operation return the execution variable of the operation call's owner on which the operation is to be executed
-			return context.resolve(e.owner)
+			return context.getVariable(e.feature.fullyQualifiedName.toString)
 		}
 		if (e.feature instanceof Property || e.feature instanceof Event) {
 			var current = e

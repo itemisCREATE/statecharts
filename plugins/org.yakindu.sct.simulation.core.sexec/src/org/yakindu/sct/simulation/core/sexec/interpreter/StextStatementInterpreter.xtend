@@ -82,34 +82,33 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(AssignmentExpression assignment) {
 		executeAssignment(assignment)
 	}
-	
+
 	def dispatch Object execute(TypeCastExpression expression) {
 		var operand = expression.operand.execute
-		typeCast(operand, expression.type)		
+		typeCast(operand, expression.type)
 	}
-	
-	def dispatch Object typeCast(Long value, Type type){
-		if (ts.isIntegerType(type)) return value
-		if (ts.isRealType(type)) return Double.valueOf(value)
+
+	def dispatch Object typeCast(Long value, Type type) {
+		if(ts.isIntegerType(type)) return value
+		if(ts.isRealType(type)) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
-	
-	def dispatch Object typeCast(Float value, Type type){
-		if (ts.isIntegerType(type)) return value.longValue
-		if (ts.isRealType(type)) return Double.valueOf(value)
+
+	def dispatch Object typeCast(Float value, Type type) {
+		if(ts.isIntegerType(type)) return value.longValue
+		if(ts.isRealType(type)) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
-	
-	def dispatch Object typeCast(Double value, Type type){
-		if (ts.isIntegerType(type)) return value.longValue
-		if (ts.isRealType(type)) return Double.valueOf(value)
+
+	def dispatch Object typeCast(Double value, Type type) {
+		if(ts.isIntegerType(type)) return value.longValue
+		if(ts.isRealType(type)) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
-	
-	def dispatch Object typeCast(Object value, Type type){
+
+	def dispatch Object typeCast(Object value, Type type) {
 		throw new IllegalArgumentException("Invalid cast")
 	}
-	
 
 	def Object executeAssignment(AssignmentExpression assignment) {
 		var scopeVariable = context.resolve(assignment.varRef)
@@ -154,11 +153,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			return executionSlot.getValue
 		if (executionSlot instanceof ExecutionEvent)
 			return (executionSlot as ExecutionEvent).raised
+
 		// reference to an element with complex type is not reflected in an execution variable but in a composite slot
 		// TODO hide reference mechanism in resolver
 		if (executionSlot instanceof CompositeSlot)
 			return executionSlot
-			
+
 		return null
 	}
 
@@ -251,27 +251,30 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(FeatureCall call) {
 		executeFeatureCall(call)
 	}
-	
+
 	def executeFeatureCall(FeatureCall call) {
 		if (call.operationCall) {
 			var parameter = call.args.map(it|execute)
-			if (operationDelegate.canExecute(call, parameter)) {
-				return operationDelegate.execute(call, parameter)
+			if (call.feature instanceof Operation) {
+				var Operation operation = call.feature as Operation
+				if (operationDelegate.canExecute(operation, parameter)) {
+					return operationDelegate.execute(operation, parameter)
+				}
 			}
+
 		} else if (call.getFeature() instanceof Enumerator) {
 			return call.getFeature();
-		} else {
-			var variableRef = context.resolve(call)
-			if (variableRef instanceof ExecutionVariable || variableRef instanceof CompositeSlot) {
-				return variableRef.getValue
-			}
-			if (variableRef instanceof ExecutionEvent)
-				return (variableRef as ExecutionEvent).raised
-				
-			println("No feature found for " + call.feature.fqn + " -> returning null")
-			return null;
 		}
 		
+		var variableRef = context.resolve(call)
+		if (variableRef instanceof ExecutionVariable || variableRef instanceof CompositeSlot) {
+			return variableRef.getValue
+		}
+		if (variableRef instanceof ExecutionEvent)
+			return (variableRef as ExecutionEvent).raised
+
+		println("No feature found for " + call.feature.fqn + " -> returning null")
+		return null;
 	}
 
 	def String fqn(EObject obj) {
@@ -287,7 +290,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch valueLiteral(IntLiteral literal) {
-		return literal.value as long 
+		return literal.value as long
 	}
 
 	def dispatch valueLiteral(HexLiteral literal) {
@@ -305,6 +308,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch valueLiteral(StringLiteral literal) {
 		return literal.value
 	}
+
 	def dispatch valueLiteral(NullLiteral literal) {
 		return null
 	}

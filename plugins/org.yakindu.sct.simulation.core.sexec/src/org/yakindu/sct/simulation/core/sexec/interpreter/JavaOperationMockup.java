@@ -10,8 +10,7 @@
  */
 package org.yakindu.sct.simulation.core.sexec.interpreter;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.lang.reflect.Method;
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -21,12 +20,9 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
 import org.yakindu.sct.commons.WorkspaceClassLoaderFactory;
 import org.yakindu.sct.simulation.core.sexec.launch.ISCTLaunchParameters;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
-import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -53,14 +49,16 @@ public class JavaOperationMockup implements IOperationMockup {
 		callbacks = Lists.newArrayList();
 		if (launch == null)
 			return;
-		
-		IFile file = WorkspaceSynchronizer.getFile(((EObject) launch.getDebugTarget().getAdapter(EObject.class))
-				.eResource());
-		ClassLoader classLoader = new WorkspaceClassLoaderFactory().createClassLoader(file.getProject(), getClass()
-				.getClassLoader());
+
+		IFile file = WorkspaceSynchronizer.getFile(((EObject) launch
+				.getDebugTarget().getAdapter(EObject.class)).eResource());
+		ClassLoader classLoader = new WorkspaceClassLoaderFactory()
+				.createClassLoader(file.getProject(), getClass()
+						.getClassLoader());
 		ILaunchConfiguration config = launch.getLaunchConfiguration();
 		try {
-			String classes = config.getAttribute(ISCTLaunchParameters.OPERATION_CLASS, "");
+			String classes = config.getAttribute(
+					ISCTLaunchParameters.OPERATION_CLASS, "");
 			String[] split = classes.split(",");
 			if (split.length > 0)
 				for (String string : split) {
@@ -77,51 +75,53 @@ public class JavaOperationMockup implements IOperationMockup {
 
 	@Override
 	public boolean canExecute(Operation definition, Object[] parameter) {
-		if (callbacks == null)
+		if (callbacks == null) {
 			initOperationCallbacks();
-		// TODO: Check if there is a operation in the callbacks for the given
-		// signature
-		return callbacks.size() > 0;
+		}
+
+		for (Object callback : callbacks) {
+			Class<?> current = callback.getClass();
+			while (current != Object.class) {
+				Method[] methods = current.getDeclaredMethods();
+				for (Method method : methods) {
+					if (hasSignatureMatch(definition, method)) {
+						return true;
+					}
+				}
+				current = current.getSuperclass();
+			}
+		}
+
+		return false;
 	}
 
 	public Object execute(Operation definition, Object[] parameter) {
-		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(definition.getName(), definition
-				.getParameters().size(), definition.getParameters().size(), callbacks);
+		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(
+				definition.getName(), definition.getParameters().size(),
+				definition.getParameters().size(), callbacks);
 		try {
 			return dispatcher.invoke(parameter);
-		} catch (WrappedException e) {
-			throw e;
-		} catch (Exception ex) {
-			throw new WrappedException("Error during invocation of operation '" + definition.getName()
-					+ "' with params " + definition.getParameters() + " '", ex);
+		} 
+		catch (Exception ex) {
+			throw new WrappedException("Error during invocation of operation '"
+					+ definition.getName() + "' with params "
+					+ definition.getParameters() + " '", ex);
 		}
 	}
 
-	@Override
-	public boolean canExecute(FeatureCall call, Object[] parameter) {
-		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionSlot variable = resolver.resolve(context, call);
-		if (variable != null)
-			return true;
-		return false;
-
-	}
-
-	@Override
-	public Object execute(FeatureCall call, Object[] parameter) {
-		Operation operation = (Operation) call.getFeature();
-		ExecutionContext context = (ExecutionContext) launch.getDebugTarget().getAdapter(ExecutionContext.class);
-		ExecutionSlot variable = resolver.resolve(context, call);
-		PolymorphicDispatcher<Object> dispatcher = new PolymorphicDispatcher<Object>(operation.getName(), operation
-				.getParameters().size(), operation.getParameters().size(), Collections.singletonList(variable
-				.getValue()));
-		try {
-			return dispatcher.invoke(parameter);
-		} catch (Exception ex) {
-			System.err.println("Error invoking operation " + operation.getName() + " with parameters  "
-					+ Arrays.toString(parameter));
-			ex.printStackTrace();
-			return null;
+	protected boolean hasSignatureMatch(Operation definition, Method method) {
+		if (!definition.getName().equals(method.getName())) {
+			return false;
 		}
+		
+		if (!(definition.getParameters().size() == method.getParameterCount())) {
+			return false;
+		}
+
+		// TODO: Check parameter types and return type match. For this a
+		// JavaTypeChecker should be introduced to get a matching Java type for
+		// a Yakindu Type System type.
+
+		return true;
 	}
 }
