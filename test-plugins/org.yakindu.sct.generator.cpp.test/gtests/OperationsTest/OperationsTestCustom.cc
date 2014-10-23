@@ -25,6 +25,8 @@ bool unnamedInterfaceOperation1Called;
 bool unnamedInterfaceOperation2Called;
 sc_integer unnamedInterfaceOp2Param;
 
+char myChar;
+
 TEST(StatemachineTest, OperationCallback) {
 	internalOperation1Called = false;
 	internalOperation2Called = false;
@@ -76,6 +78,43 @@ sc_boolean InternalCallBack::InternalOperation2(sc_integer param1) {
 	return true;
 }
 
+sc_real InternalCallBack::internalOperation3() {
+	return 0.0d;
+}
+
+sc_real InternalCallBack::internalOperation3a(sc_real param1) {
+	return 0.0d;
+}
+
+sc_integer InternalCallBack::internalOperation4() {
+	return 0;
+}
+
+sc_integer InternalCallBack::internalOperation4a(sc_integer param1) {
+	return 0;
+}
+
+sc_string InternalCallBack::internalOperation5() {
+	return &myChar;
+}
+
+sc_string InternalCallBack::internalOperation5a(sc_string param1) {
+	return &myChar;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void Interface1CallBack::interfaceOperation1() {
 	interfaceOperation1Called = true;
 }
@@ -86,6 +125,34 @@ sc_boolean Interface1CallBack::InterfaceOperation2(sc_integer param1) {
 	return true;
 }
 
+sc_real Interface1CallBack::interfaceOperation3() {
+	return 0.0d;
+}
+
+sc_real Interface1CallBack::interfaceOperation3a(sc_real param1) {
+	return 0.0d;
+}
+
+sc_integer Interface1CallBack::interfaceOperation4() {
+	return 0;
+}
+
+sc_integer Interface1CallBack::interfaceOperation4a(sc_integer param1) {
+	return 0;
+}
+
+sc_string Interface1CallBack::interfaceOperation5() {
+	return &myChar;
+}
+
+sc_string Interface1CallBack::interfaceOperation5a(sc_string param1) {
+	return &myChar;
+}
+
+
+
+
+
 void DefaultCallBack::unnamedInterfaceOperation1() {
 	unnamedInterfaceOperation1Called = true;
 }
@@ -94,6 +161,30 @@ sc_boolean DefaultCallBack::UnnamedInterfaceOperation2(sc_integer param1) {
 	unnamedInterfaceOperation2Called = true;
 	unnamedInterfaceOp2Param = param1;
 	return true;
+}
+
+sc_real DefaultCallBack::unnamedOperation3() {
+	return 0.0d;
+}
+
+sc_real DefaultCallBack::unnamedOperation3a(sc_real param1) {
+	return 0.0d;
+}
+
+sc_integer DefaultCallBack::unnamedOperation4() {
+	return 0;
+}
+
+sc_integer DefaultCallBack::unnamedOperation4a(sc_integer param1) {
+	return 0;
+}
+
+sc_string DefaultCallBack::unnamedOperation5() {
+	return &myChar;
+}
+
+sc_string DefaultCallBack::unnamedOperation5a(sc_string param1) {
+	return &myChar;
 }
 
 sc_boolean DefaultCallBack::alwaysTrue() {
