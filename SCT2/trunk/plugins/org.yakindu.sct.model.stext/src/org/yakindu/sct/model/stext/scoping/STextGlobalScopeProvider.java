@@ -49,7 +49,7 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		parentScope = filterExternalDeclarations(context, parentScope);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
 				reference.getEReferenceType());
-		return parentScope; 
+		return parentScope;
 	}
 
 	/**
@@ -63,23 +63,24 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	protected IScope filterExternalDeclarations(Resource context, IScope parentScope) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
 				ContextElementAdapter.class);
-		if (provider != null) {
-			parentScope = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
-				
-				public boolean apply(IEObjectDescription input) {
-					// only accept events, operations,  regular states and variables from own statechart
-					if (input.getEClass() == StextPackage.Literals.OPERATION_DEFINITION || input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
-							|| SGraphPackage.Literals.REGULAR_STATE.isSuperTypeOf(input.getEClass())
-							|| (input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION && 
-								input.getEObjectURI().fileExtension().equals("sct"))) {
-						
-						URI sourceURI = input.getEObjectURI().trimFragment();
-						return sourceURI.equals(provider.getElement().eResource().getURI());
-					}
-					return true;
+		final URI resourceURI = provider != null ? provider.getElement().eResource().getURI() : context.getURI();
+		parentScope = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
+
+			public boolean apply(IEObjectDescription input) {
+				// only accept events, operations, regular states and variables
+				// from own statechart
+				if (input.getEClass() == StextPackage.Literals.OPERATION_DEFINITION
+						|| input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
+						|| SGraphPackage.Literals.REGULAR_STATE.isSuperTypeOf(input.getEClass())
+						|| (input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION && input.getEObjectURI()
+								.fileExtension().equals("sct"))) {
+
+					URI sourceURI = input.getEObjectURI().trimFragment();
+					return sourceURI.equals(resourceURI);
 				}
-			});
-		}
+				return true;
+			}
+		});
 		return parentScope;
 	}
 }
