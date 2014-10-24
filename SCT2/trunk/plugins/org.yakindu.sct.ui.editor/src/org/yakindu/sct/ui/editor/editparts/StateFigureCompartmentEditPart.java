@@ -97,7 +97,6 @@ public class StateFigureCompartmentEditPart extends CompartmentEditPart {
 
 	@Override
 	protected void handleNotificationEvent(Notification event) {
-		System.out.println();
 		if (event.getFeature() == NotationPackage.Literals.BOOLEAN_VALUE_STYLE__BOOLEAN_VALUE) {
 			updateLayout();
 		}
