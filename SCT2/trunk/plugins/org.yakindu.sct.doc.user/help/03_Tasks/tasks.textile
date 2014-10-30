@@ -10,11 +10,21 @@ For that to work, it is required to provide one or more custom java classes havi
 
 To simulate the statechart above, a new Java Class must be created matching the method signature defined in the statechart. This class must be placed onto the classpath of the
 statecharts project. 
+
+Yakindu Statechart Tools default types are mapped to java types as follows:
+
+table{border:1px solid black}.
+|*SCT Type* |  |*Java Type*  |
+|integer|=>|long|
+|real|=>|double|
+|boolean|=>|boolean|
+|string|=>|String|
+|void|=>|void| 
  
 bc(prettyprint). 
 package example;
 public class Calculator {
-   public int add(int param1, int param2) {
+   public long add(long param1, long param2) {
       return param1 + param2;
    }
 }
