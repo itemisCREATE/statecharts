@@ -72,6 +72,7 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
 		try {
 			statusHandler.handleStatus(errorStatus, getDebugTarget());
+			interpreter.suspend();
 			interpreter.tearDown();
 		} catch (CoreException e) {
 			e.printStackTrace();
