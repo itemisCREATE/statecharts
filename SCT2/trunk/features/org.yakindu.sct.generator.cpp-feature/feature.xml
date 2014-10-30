@@ -2,7 +2,7 @@
 <feature
       id="org.yakindu.sct.generator.cpp"
       label="Yakindu Statechart Tools (SCT) C++ Generator Feature"
-      version="2.3.1.qualifier"
+      version="2.4.0.qualifier"
       provider-name="statecharts.org"
       plugin="org.yakindu.sct.doc.user">
 
@@ -19,7 +19,7 @@
    </license>
 
    <requires>
-      <import feature="org.yakindu.sct" version="2.3.1.qualifier"/>
+      <import feature="org.yakindu.sct" version="2.4.0.qualifier"/>
    </requires>
 
    <plugin
