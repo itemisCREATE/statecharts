@@ -22,8 +22,6 @@ import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.scope.TypeSystemAwareScope;
-import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.model.stext.stext.StextPackage;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -44,6 +42,8 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;
 
+	public static final String FILE_EXTENSION = "sct";
+
 	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = filterExternalDeclarations(context, parentScope);
@@ -53,8 +53,8 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	}
 
 	/**
-	 * Filter all Variables and Events that are not contained in context
-	 * resource
+	 * Filter all Elements that are part of an SCT file bug from another
+	 * resource...
 	 * 
 	 * @param context
 	 * @param parentScope
@@ -67,14 +67,7 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		parentScope = new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
 
 			public boolean apply(IEObjectDescription input) {
-				// only accept events, operations, regular states and variables
-				// from own statechart
-				if (input.getEClass() == StextPackage.Literals.OPERATION_DEFINITION
-						|| input.getEClass() == StextPackage.Literals.EVENT_DEFINITION
-						|| SGraphPackage.Literals.REGULAR_STATE.isSuperTypeOf(input.getEClass())
-						|| (input.getEClass() == StextPackage.Literals.VARIABLE_DEFINITION && input.getEObjectURI()
-								.fileExtension().equals("sct"))) {
-
+				if (input.getEObjectURI().fileExtension().equals(FILE_EXTENSION)) {
 					URI sourceURI = input.getEObjectURI().trimFragment();
 					return sourceURI.equals(resourceURI);
 				}
