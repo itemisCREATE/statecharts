@@ -50,6 +50,7 @@ import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 /**
  * 
@@ -143,7 +144,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch Object execute(ElementReferenceExpression expression) {
 		var parameter = expression.args.map(it|execute)
-		if (expression.operationCall) {
+		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
 			if (operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
@@ -253,7 +254,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def executeFeatureCall(FeatureCall call) {
-		if (call.operationCall) {
+		if (call.operationCall || call.feature instanceof OperationDefinition) {
 			var parameter = call.args.map(it|execute)
 			if (call.feature instanceof Operation) {
 				var Operation operation = call.feature as Operation
@@ -265,7 +266,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		} else if (call.getFeature() instanceof Enumerator) {
 			return call.getFeature();
 		}
-		
+
 		var variableRef = context.resolve(call)
 		if (variableRef instanceof ExecutionVariable || variableRef instanceof CompositeSlot) {
 			return variableRef.getValue
