@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IStatusHandler;
+import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.emf.common.util.WrappedException;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
@@ -61,16 +62,31 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		try {
 			interpreter.runCycle();
 		} catch (WrappedException ex) {
-			Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION, ex.getCause()
-					.getMessage(), ex.getCause());
-			IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
-			try {
-				statusHandler.handleStatus(errorStatus, this);
-				interpreter.tearDown();
-			} catch (CoreException e) {
-				e.printStackTrace();
-			}
+			handleWrappedException(ex);
 		}
+	}
+
+	private void handleWrappedException(WrappedException ex) {
+		Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION, ex.getCause()
+				.getMessage(), ex.getCause());
+		IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
+		try {
+			statusHandler.handleStatus(errorStatus, getDebugTarget());
+			interpreter.tearDown();
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+	}
+
+	protected Object getDebugTarget() {
+		IDebugTarget[] debugTargets = DebugPlugin.getDefault().getLaunchManager().getDebugTargets();
+		for (IDebugTarget iDebugTarget : debugTargets) {
+			if (iDebugTarget.isTerminated())
+				continue;
+			if (iDebugTarget.getAdapter(ISimulationEngine.class) == this)
+				return iDebugTarget;
+		}
+		return null;
 	}
 
 	@Override
@@ -83,7 +99,11 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	}
 
 	public void start() {
-		interpreter.enter();
+		try {
+			interpreter.enter();
+		} catch (WrappedException ex) {
+			handleWrappedException(ex);
+		}
 	}
 
 	public void suspend() {
@@ -91,9 +111,12 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	}
 
 	public void resume() {
-		suspended = false;
-		interpreter.resume();
-
+		try {
+			suspended = false;
+			interpreter.resume();
+		} catch (WrappedException ex) {
+			handleWrappedException(ex);
+		}
 	}
 
 	public void terminate() {
@@ -102,9 +125,13 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 	}
 
 	public void stepForward() {
-		interpreter.resume();
-		interpreter.runCycle();
-		interpreter.suspend();
+		try {
+			interpreter.resume();
+			interpreter.runCycle();
+			interpreter.suspend();
+		} catch (WrappedException ex) {
+			handleWrappedException(ex);
+		}
 	}
 
 	public void stepBackward() {
