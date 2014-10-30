@@ -18,8 +18,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
  org.yakindu.base.types;bundle-version="2.1.2",
- org.eclipse.xtext.xbase.lib,
- org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
+ org.eclipse.xtext.xbase.lib
 Import-Package: org.apache.log4j,
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.xtext.xbase.lib
