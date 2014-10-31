@@ -42,7 +42,6 @@ import org.yakindu.sct.model.sgen.GeneratorModel;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.test.models.SCTUnitTestModels;
 
-
 /**
  * @author Andreas Unger - Initial contribution and API
  * @author Markus Mühlbrandt
@@ -67,27 +66,35 @@ public class GTestHelper {
 			File directory = resource.getLocation().toFile();
 			List<String> command = createCommand();
 
+			// System.out.println("compile: " + command);
+
 			ProcessBuilder processBuilder = new ProcessBuilder(command)
 					.directory(directory);
 			Process process = processBuilder.redirectErrorStream(true).start();
 			String message = readProcessInputStream(process);
-			
+
 			boolean wait = true;
 			int exitCode = 0;
-			
+
 			do {
 				wait = false;
 
 				// waiting for the processes termination
 				try {
 					process.waitFor();
-				} catch ( InterruptedException e ) { /* we ignore if waiting was interrupted ... */ }
+				} catch (InterruptedException e) { /*
+													 * we ignore if waiting was
+													 * interrupted ...
+													 */
+				}
 
-				// if we get an exit code then we know that the process is finished
+				// if we get an exit code then we know that the process is
+				// finished
 				try {
 					exitCode = process.exitValue();
-				} catch ( IllegalThreadStateException e ) {
-					wait = true; // if we get an exception then the process has not finished ...
+				} catch (IllegalThreadStateException e) {
+					wait = true; // if we get an exception then the process has
+									// not finished ...
 				}
 			} while (wait);
 
@@ -187,11 +194,13 @@ public class GTestHelper {
 		command.add("-o");
 		command.add(getFileName(getTestProgram()));
 		command.add("-O2");
-		if (gTestDirectory != null) command.add("-I" + gTestDirectory + "/include");
+		if (gTestDirectory != null)
+			command.add("-I" + gTestDirectory + "/include");
 		for (String include : includes) {
 			command.add("-I" + include);
 		}
-		if (gTestDirectory != null) command.add("-L" + gTestDirectory);
+		if (gTestDirectory != null)
+			command.add("-L" + gTestDirectory);
 		for (String sourceFile : sourceFiles) {
 			command.add(sourceFile);
 		}
@@ -199,7 +208,7 @@ public class GTestHelper {
 		command.add("-lgtest_main");
 		command.add("-lstdc++");
 		command.add("-pthread");
-//		command.add("-pg");
+		// command.add("-pg");
 		return command;
 	}
 
@@ -215,9 +224,10 @@ public class GTestHelper {
 	 */
 	private String getGTestDirectory() {
 		String gTestDirectory = System.getenv("GTEST_DIR");
-//		if (gTestDirectory == null) {
-//			throw new RuntimeException("GTEST_DIR environment variable not set");
-//		}
+		// if (gTestDirectory == null) {
+		// throw new RuntimeException("GTEST_DIR environment variable not set");
+		// }
+		// System.out.println("GTEST_DIR = " + gTestDirectory);
 		return gTestDirectory;
 	}
 
