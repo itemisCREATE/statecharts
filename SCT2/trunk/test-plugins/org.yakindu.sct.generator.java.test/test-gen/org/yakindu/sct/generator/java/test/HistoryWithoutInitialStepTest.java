@@ -40,10 +40,10 @@ public class HistoryWithoutInitialStepTest {
 	public void testenterThroughInitialEntry() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseE1();
+		statemachine.raiseToB();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
-		statemachine.raiseE2();
+		statemachine.raiseNext();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}
@@ -51,13 +51,13 @@ public class HistoryWithoutInitialStepTest {
 	public void testenterCThroughHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseE1();
+		statemachine.raiseToB();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
-		statemachine.raiseE1();
+		statemachine.raiseToA();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseE2();
+		statemachine.raiseToHistory();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_C));
 	}
@@ -65,15 +65,15 @@ public class HistoryWithoutInitialStepTest {
 	public void testenterDThroughHistory() {
 		statemachine.enter();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseE1();
+		statemachine.raiseToB();
 		statemachine.runCycle();
-		statemachine.raiseE2();
+		statemachine.raiseNext();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
-		statemachine.raiseE1();
+		statemachine.raiseToA();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_A));
-		statemachine.raiseE2();
+		statemachine.raiseToHistory();
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_B_r1_D));
 	}

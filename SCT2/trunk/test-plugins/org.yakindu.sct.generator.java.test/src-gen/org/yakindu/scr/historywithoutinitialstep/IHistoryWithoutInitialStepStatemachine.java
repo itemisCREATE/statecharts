@@ -4,8 +4,10 @@ import org.yakindu.scr.IStatemachine;
 public interface IHistoryWithoutInitialStepStatemachine extends IStatemachine {
 
 	public interface SCInterface {
-		public void raiseE1();
-		public void raiseE2();
+		public void raiseToA();
+		public void raiseToB();
+		public void raiseToHistory();
+		public void raiseNext();
 
 	}
 

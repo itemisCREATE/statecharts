@@ -6,21 +6,35 @@ public class HistoryWithoutInitialStepStatemachine
 
 	private final class SCInterfaceImpl implements SCInterface {
 
-		private boolean e1;
+		private boolean toA;
 
-		public void raiseE1() {
-			e1 = true;
+		public void raiseToA() {
+			toA = true;
 		}
 
-		private boolean e2;
+		private boolean toB;
 
-		public void raiseE2() {
-			e2 = true;
+		public void raiseToB() {
+			toB = true;
+		}
+
+		private boolean toHistory;
+
+		public void raiseToHistory() {
+			toHistory = true;
+		}
+
+		private boolean next;
+
+		public void raiseNext() {
+			next = true;
 		}
 
 		public void clearEvents() {
-			e1 = false;
-			e2 = false;
+			toA = false;
+			toB = false;
+			toHistory = false;
+			next = false;
 		}
 
 	}
@@ -28,7 +42,7 @@ public class HistoryWithoutInitialStepStatemachine
 	private SCInterfaceImpl sCInterface;
 
 	public enum State {
-		main_region_A, main_region_B, main_region_B_r1_C, main_region_B_r1_D, $NullState$
+		main_region_A, main_region_B, main_region_B_r1_C, main_region_B_r1_D, main_region_B_r1_E, main_region_B_r1_E__region0_F, $NullState$
 	};
 
 	private State[] historyVector = new State[1];
@@ -78,6 +92,11 @@ public class HistoryWithoutInitialStepStatemachine
 				stateVector[0] = State.$NullState$;
 				break;
 
+			case main_region_B_r1_E__region0_F :
+				nextStateIndex = 0;
+				stateVector[0] = State.$NullState$;
+				break;
+
 			default :
 				break;
 		}
@@ -109,12 +128,19 @@ public class HistoryWithoutInitialStepStatemachine
 			case main_region_B :
 				return stateVector[0].ordinal() >= State.main_region_B
 						.ordinal()
-						&& stateVector[0].ordinal() <= State.main_region_B_r1_D
+						&& stateVector[0].ordinal() <= State.main_region_B_r1_E__region0_F
 								.ordinal();
 			case main_region_B_r1_C :
 				return stateVector[0] == State.main_region_B_r1_C;
 			case main_region_B_r1_D :
 				return stateVector[0] == State.main_region_B_r1_D;
+			case main_region_B_r1_E :
+				return stateVector[0].ordinal() >= State.main_region_B_r1_E
+						.ordinal()
+						&& stateVector[0].ordinal() <= State.main_region_B_r1_E__region0_F
+								.ordinal();
+			case main_region_B_r1_E__region0_F :
+				return stateVector[0] == State.main_region_B_r1_E__region0_F;
 			default :
 				return false;
 		}
@@ -124,11 +150,17 @@ public class HistoryWithoutInitialStepStatemachine
 		return sCInterface;
 	}
 
-	public void raiseE1() {
-		sCInterface.raiseE1();
+	public void raiseToA() {
+		sCInterface.raiseToA();
 	}
-	public void raiseE2() {
-		sCInterface.raiseE2();
+	public void raiseToB() {
+		sCInterface.raiseToB();
+	}
+	public void raiseToHistory() {
+		sCInterface.raiseToHistory();
+	}
+	public void raiseNext() {
+		sCInterface.raiseNext();
 	}
 
 	/* Entry action for statechart 'HistoryWithoutInitialStep'. */
@@ -156,6 +188,13 @@ public class HistoryWithoutInitialStepStatemachine
 				historyVector[0] = stateVector[0];
 				break;
 
+			case main_region_B_r1_E__region0_F :
+				nextStateIndex = 0;
+				stateVector[0] = State.main_region_B_r1_E__region0_F;
+
+				historyVector[0] = stateVector[0];
+				break;
+
 			default :
 				break;
 		}
@@ -163,7 +202,7 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCInterface.e1) {
+		if (sCInterface.toB) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -172,7 +211,7 @@ public class HistoryWithoutInitialStepStatemachine
 
 			historyVector[0] = stateVector[0];
 		} else {
-			if (sCInterface.e2) {
+			if (sCInterface.toHistory) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
@@ -186,7 +225,7 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state C. */
 	private void reactMain_region_B_r1_C() {
-		if (sCInterface.e1) {
+		if (sCInterface.toA) {
 			switch (stateVector[0]) {
 				case main_region_B_r1_C :
 					nextStateIndex = 0;
@@ -198,6 +237,11 @@ public class HistoryWithoutInitialStepStatemachine
 					stateVector[0] = State.$NullState$;
 					break;
 
+				case main_region_B_r1_E__region0_F :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
 				default :
 					break;
 			}
@@ -205,7 +249,7 @@ public class HistoryWithoutInitialStepStatemachine
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A;
 		} else {
-			if (sCInterface.e2) {
+			if (sCInterface.next) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
 
@@ -219,7 +263,7 @@ public class HistoryWithoutInitialStepStatemachine
 
 	/* The reactions of state D. */
 	private void reactMain_region_B_r1_D() {
-		if (sCInterface.e1) {
+		if (sCInterface.toA) {
 			switch (stateVector[0]) {
 				case main_region_B_r1_C :
 					nextStateIndex = 0;
@@ -231,6 +275,11 @@ public class HistoryWithoutInitialStepStatemachine
 					stateVector[0] = State.$NullState$;
 					break;
 
+				case main_region_B_r1_E__region0_F :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
 				default :
 					break;
 			}
@@ -238,14 +287,60 @@ public class HistoryWithoutInitialStepStatemachine
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_A;
 		} else {
-			if (sCInterface.e2) {
+			if (sCInterface.next) {
 				nextStateIndex = 0;
 				stateVector[0] = State.$NullState$;
+
+				nextStateIndex = 0;
+				stateVector[0] = State.main_region_B_r1_E__region0_F;
+
+				historyVector[0] = stateVector[0];
+			}
+		}
+	}
+
+	/* The reactions of state F. */
+	private void reactMain_region_B_r1_E_region0_F() {
+		if (sCInterface.toA) {
+			switch (stateVector[0]) {
+				case main_region_B_r1_C :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
+				case main_region_B_r1_D :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
+				case main_region_B_r1_E__region0_F :
+					nextStateIndex = 0;
+					stateVector[0] = State.$NullState$;
+					break;
+
+				default :
+					break;
+			}
+
+			nextStateIndex = 0;
+			stateVector[0] = State.main_region_A;
+		} else {
+			if (sCInterface.next) {
+				switch (stateVector[0]) {
+					case main_region_B_r1_E__region0_F :
+						nextStateIndex = 0;
+						stateVector[0] = State.$NullState$;
+						break;
+
+					default :
+						break;
+				}
 
 				nextStateIndex = 0;
 				stateVector[0] = State.main_region_B_r1_C;
 
 				historyVector[0] = stateVector[0];
+			} else {
 			}
 		}
 	}
@@ -265,6 +360,9 @@ public class HistoryWithoutInitialStepStatemachine
 					break;
 				case main_region_B_r1_D :
 					reactMain_region_B_r1_D();
+					break;
+				case main_region_B_r1_E__region0_F :
+					reactMain_region_B_r1_E_region0_F();
 					break;
 				default :
 					// $NullState$

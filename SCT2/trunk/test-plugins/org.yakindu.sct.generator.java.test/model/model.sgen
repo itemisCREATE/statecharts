@@ -499,6 +499,18 @@ GeneratorModel for yakindu::java {
 		}
 	}
 		
+	statechart ShallowHistoryWithDeepEntry {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}
+	}
+		
 	statechart SimpleEvent {
 		feature Outlet {
 			targetProject = "org.yakindu.sct.generator.java.test"

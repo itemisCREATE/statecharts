@@ -103,6 +103,8 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 			nextStateIndex = 1;
 			stateVector[1] = State.r2_B_r_BA_r_BAA;
+
+			historyVector[0] = stateVector[1];
 		}
 
 		/* Enter the region with deep history */
@@ -117,6 +119,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 			stateVector[2] = State.r3_D_r_DA_r_DAA;
 
 			historyVector[3] = stateVector[2];
+
+			historyVector[2] = stateVector[2];
+
+			historyVector[1] = stateVector[2];
 		}
 	}
 
@@ -408,6 +414,8 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 				nextStateIndex = 1;
 				stateVector[1] = State.r2_B_r_BA_r_BAA;
+
+				historyVector[0] = stateVector[1];
 			}
 		}
 	}
