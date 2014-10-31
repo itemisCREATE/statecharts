@@ -250,7 +250,9 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.yakindu.base.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+            class="org.yakindu.base.expressions.ui.ExpressionsExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
+            fileExtensions="exp"
+            >
       </participant>
    </extension>
    <extension
