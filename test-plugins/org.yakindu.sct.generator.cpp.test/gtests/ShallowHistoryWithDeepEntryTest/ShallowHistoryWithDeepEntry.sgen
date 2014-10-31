@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart ShallowHistoryWithDeepEntry {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ShallowHistoryWithDeepEntryTest"
+		}
+	}
+}
