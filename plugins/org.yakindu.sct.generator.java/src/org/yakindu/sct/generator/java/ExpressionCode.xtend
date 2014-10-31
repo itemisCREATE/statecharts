@@ -217,7 +217,7 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(ElementReferenceExpression it) '''
-		«IF operationCall»
+		«IF it.reference instanceof OperationDefinition»
 			«reference.code»(«FOR arg : args SEPARATOR ", "»«arg.code»«ENDFOR»)
 		«ELSE»
 			«definition.code»
