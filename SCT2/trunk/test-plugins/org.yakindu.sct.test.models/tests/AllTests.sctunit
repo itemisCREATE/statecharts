@@ -36,6 +36,7 @@ testsuite AllTests {
 	RaiseEvent,
 	SameNameDifferentRegion, 
 	ShallowHistory, 	
+	ShallowHistoryWithDeepEntry, 	
 	SimpleEvent,
 	StatechartLocalReactions,
 	SimpleHierachy , 
