@@ -21,57 +21,65 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- *  Unit TestCase for HistoryWithoutInitialStep
+ *  Unit TestCase for ShallowHistoryWithDeepEntry
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class HistoryWithoutInitialStepTest extends AbstractExecutionFlowTest {
+public class ShallowHistoryWithDeepEntryTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("HistoryWithoutInitialStep.sct");
+				.loadExecutionFlowFromResource("ShallowHistoryWithDeepEntry.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void enterThroughInitialEntry() throws Exception {
+	public void noDeepEntryWithinHistory() throws Exception {
 		interpreter.enter();
+		assertTrue(isActive("Y"));
+		raiseEvent("toZ");
+		interpreter.runCycle();
 		assertTrue(isActive("A"));
-		raiseEvent("toB");
+		raiseEvent("toY");
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
-		raiseEvent("next");
+		assertTrue(isActive("Y"));
+		raiseEvent("toZ");
 		interpreter.runCycle();
-		assertTrue(isActive("D"));
+		assertTrue(isActive("A"));
 	}
 	@Test
-	public void enterCThroughHistory() throws Exception {
+	public void deepEntryWithinHistory() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
-		raiseEvent("toB");
-		interpreter.runCycle();
-		assertTrue(isActive("C"));
-		raiseEvent("toA");
+		assertTrue(isActive("Y"));
+		raiseEvent("toZ");
 		interpreter.runCycle();
 		assertTrue(isActive("A"));
-		raiseEvent("toHistory");
+		raiseEvent("toC");
 		interpreter.runCycle();
 		assertTrue(isActive("C"));
+		assertTrue(isActive("B"));
+		raiseEvent("toY");
+		interpreter.runCycle();
+		assertTrue(isActive("Y"));
+		raiseEvent("toZ");
+		interpreter.runCycle();
+		assertTrue(isActive("C"));
+		assertTrue(isActive("B"));
 	}
 	@Test
-	public void enterDThroughHistory() throws Exception {
+	public void directDeepEntryIntoHistory() throws Exception {
 		interpreter.enter();
-		assertTrue(isActive("A"));
-		raiseEvent("toB");
+		assertTrue(isActive("Y"));
+		raiseEvent("toC");
 		interpreter.runCycle();
-		raiseEvent("next");
+		assertTrue(isActive("C"));
+		assertTrue(isActive("B"));
+		raiseEvent("toY");
 		interpreter.runCycle();
-		assertTrue(isActive("D"));
-		raiseEvent("toA");
+		assertTrue(isActive("Y"));
+		raiseEvent("toZ");
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		raiseEvent("toHistory");
-		interpreter.runCycle();
-		assertTrue(isActive("D"));
+		assertTrue(isActive("C"));
+		assertTrue(isActive("B"));
 	}
 }
