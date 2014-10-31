@@ -458,6 +458,18 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
+	test ShallowHistoryWithDeepEntry{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}			
+	}
+	
 	test SimpleEvent{
 		
 		feature Outlet{ 
