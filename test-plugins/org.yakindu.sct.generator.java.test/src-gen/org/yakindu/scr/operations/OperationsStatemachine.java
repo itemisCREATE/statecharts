@@ -168,6 +168,18 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 
 			sCIInterface1.operationCallback.interfaceOperation2(4);
 
+			sCIInterface1.operationCallback.interfaceOperation3();
+
+			sCIInterface1.operationCallback.interfaceOperation3a(1.0);
+
+			sCIInterface1.operationCallback.interfaceOperation4();
+
+			sCIInterface1.operationCallback.interfaceOperation4a(5);
+
+			sCIInterface1.operationCallback.interfaceOperation5();
+
+			sCIInterface1.operationCallback.interfaceOperation5a("");
+
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_C;
 		}
@@ -182,6 +194,18 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 			sCInterface.operationCallback.unnamedInterfaceOperation1();
 
 			sCInterface.operationCallback.unnamedInterfaceOperation2(4);
+
+			sCInterface.operationCallback.unnamedOperation3();
+
+			sCInterface.operationCallback.unnamedOperation3a(1.0);
+
+			sCInterface.operationCallback.unnamedOperation4();
+
+			sCInterface.operationCallback.unnamedOperation4a(5);
+
+			sCInterface.operationCallback.unnamedOperation5();
+
+			sCInterface.operationCallback.unnamedOperation5a("");
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_D;
@@ -200,6 +224,18 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		operationCallback.internalOperation1();
 
 		myBool = operationCallback.internalOperation2(4);
+
+		operationCallback.internalOperation3();
+
+		operationCallback.internalOperation3a(1.0);
+
+		operationCallback.internalOperation4();
+
+		operationCallback.internalOperation4a(5);
+
+		operationCallback.internalOperation5();
+
+		operationCallback.internalOperation5a("");
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B;

@@ -103,4 +103,79 @@ public class OperationsTestCustom implements InternalOperationCallback, SCIInter
 	public boolean alwaysTrue() {
 		return true;
 	}
+
+	public String interfaceOperation5a(String param1) {
+		return param1;
+	}
+
+	public double unnamedOperation3a(double param1) {
+		return param1;
+	}
+	
+	public long unnamedOperation4a(long param1) {
+		return param1;
+	}
+	
+	public String unnamedOperation5a(String param1) {
+		return param1;
+	}
+
+	public double unnamedOperation3() {
+		return 1.0;
+	}
+
+	public long unnamedOperation4() {
+		return 0;
+	}
+
+	public String unnamedOperation5() {
+		return "";
+	}
+
+	public double interfaceOperation3() {
+		return 0.0;
+	}
+
+	public double interfaceOperation3a(double param1) {
+		return param1;
+	}
+
+	public long interfaceOperation4() {
+		return 0;
+	}
+
+	public long interfaceOperation4a(long param1) {
+		return param1;
+	}
+
+	public String interfaceOperation5() {
+		return "";
+	}
+
+	public double internalOperation3() {
+		return 0.0;
+	}
+
+	public double internalOperation3a(double param1) {
+		return param1;
+	}
+
+	public long internalOperation4() {
+		return 0;
+	}
+
+	public long internalOperation4a(long param1) {
+		return 0;
+	}
+
+	public String internalOperation5() {
+		return "";
+	}
+
+	public String internalOperation5a(String param1) {
+		return param1;
+	}
+	
+	
+	
 }

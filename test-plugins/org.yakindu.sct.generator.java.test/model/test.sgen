@@ -315,6 +315,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
+	test ShallowHistoryWithDeepEntry{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
 	test SimpleEvent{
 		
 		feature Outlet{ 
