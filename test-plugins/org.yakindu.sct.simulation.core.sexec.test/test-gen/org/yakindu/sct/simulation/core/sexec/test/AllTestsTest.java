@@ -31,10 +31,11 @@ import org.junit.runners.Suite.SuiteClasses;
 		NamedInterfaceAccessTest.class, OutEventLifeCycleTest.class,
 		ParenthesisTest.class, PriorityValuesTest.class, RaiseEventTest.class,
 		SameNameDifferentRegionTest.class, ShallowHistoryTest.class,
-		SimpleEventTest.class, StatechartLocalReactionsTest.class,
-		SimpleHierachyTest.class, StateIsActiveTest.class,
-		StaticChoiceTest.class, STextKeywordsInStatesAndRegionsTest.class,
-		StringExpressionsTest.class, SyncForkTest.class, SyncJoinTest.class,
+		ShallowHistoryWithDeepEntryTest.class, SimpleEventTest.class,
+		StatechartLocalReactionsTest.class, SimpleHierachyTest.class,
+		StateIsActiveTest.class, StaticChoiceTest.class,
+		STextKeywordsInStatesAndRegionsTest.class, StringExpressionsTest.class,
+		SyncForkTest.class, SyncJoinTest.class,
 		TransitionWithoutConditionTest.class, ValuedEventsTest.class})
 public class AllTestsTest {
 }

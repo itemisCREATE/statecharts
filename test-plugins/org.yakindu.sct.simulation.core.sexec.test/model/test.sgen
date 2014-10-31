@@ -257,7 +257,7 @@ GeneratorModel for sctunit::interpreter {
 			targetFolder = "test-gen"			
 		}			
 	}
-
+	
 	test OutEventLifeCycle{
 		
 		feature Outlet{ 
@@ -300,6 +300,14 @@ GeneratorModel for sctunit::interpreter {
 	
 	
 	test ShallowHistory{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+	test ShallowHistoryWithDeepEntry {
 		
 		feature Outlet{ 
 			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
