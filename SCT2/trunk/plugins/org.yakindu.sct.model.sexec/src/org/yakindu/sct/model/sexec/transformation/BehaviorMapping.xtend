@@ -557,10 +557,19 @@ class BehaviorMapping {
 		else {
 			if ( it.entryAction != null ) seq.steps.add(it.entryAction.newCall)
 			if ( trace.addTraceSteps ) seq.steps.add(it.newTraceStateEntered)
+
 			
 			for (  subScope : it.subScopes ) {
 				subScope.addEnterStepsForTargetsToSequence(targets, seq)
 			}
+			
+			/* save state to shallow history if parent region contains one */ { 
+				val parentRegion = it.superScope as ExecutionRegion
+				if(parentRegion.historyVector != null) {
+					seq.steps += parentRegion.newSaveHistory()
+				}	
+			}
+						
 		}
 
 	}
@@ -629,7 +638,7 @@ class BehaviorMapping {
 		
 	
 	def List<ExecutionScope> entryScopes(Transition t) {
-		// we determine the scopes that have to be exited by 		
+		// we determine the scopes that have to be entered by 		
 		val targetPath = t.target.containers // getting the path elements from the target node
 		val sourcePath = t.source.containers // and the path elements from the target all target node
 		{ // and for the case of self transitions
