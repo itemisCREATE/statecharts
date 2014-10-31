@@ -1,0 +1,70 @@
+
+/**
+ * A shallow history must also for child states that are only indirectly entered through one of the childs.  
+ */
+testgroup ShallowHistoryWithDeepEntry for statechart ShallowHistoryWithDeepEntry{
+	
+	test noDeepEntryWithinHistory { 
+		enter
+		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
+		
+		raise toZ
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.A)
+		
+		raise toY
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Y)
+		
+		raise toZ
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.A)		
+		 
+	} 
+	
+	
+	test deepEntryWithinHistory {
+		enter
+		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
+		
+		raise toZ
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.A)
+		
+		raise toC
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B._region0.C)
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
+		
+		raise toY
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Y)
+		
+		raise toZ
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B._region0.C)
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
+		
+	}
+	
+	test directDeepEntryIntoHistory {
+		enter
+		assert active(ShallowHistoryWithDeepEntry.main_region.Y) 
+		
+		raise toC
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B._region0.C)
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
+		
+		raise toY
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Y)
+		
+		raise toZ
+		cycle
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B._region0.C)
+		assert active(ShallowHistoryWithDeepEntry.main_region.Z._region0.B)
+		
+	}
+}
+	
