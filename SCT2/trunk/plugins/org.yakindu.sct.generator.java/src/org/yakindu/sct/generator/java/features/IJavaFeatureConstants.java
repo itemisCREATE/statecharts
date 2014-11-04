@@ -19,7 +19,7 @@ public interface IJavaFeatureConstants {
 
 	public static final String LIBRARY_NAME = "Java Generator";
 
-	public static final String JAVA_TARGET_FEATURE = "JavaTargetFeatures";
+	public static final String NAMING_FEATURE = "Naming";
 
 	public static final String BASE_PACKAGE = "basePackage";
 
