@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011 committers of YAKINDU and others.
+ * Copyright (c) 2014 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,8 +18,8 @@ import static org.yakindu.sct.generator.core.features.ICoreFeatureConstants.LICE
  */
 public final class JavaFeatureConstants implements IJavaFeatureConstants {
 	
-	public static final String getJavaTargetFeature() {
-		return JAVA_TARGET_FEATURE;
+	public static final String getNamingFeature() {
+		return NAMING_FEATURE;
 	}
 	
 	public static final String getBasePackage() {
