@@ -21,27 +21,52 @@ import org.yakindu.sct.test.models.SCTUnitTestModels;
 import com.google.inject.Inject;
 import static org.junit.Assert.assertTrue;
 /**
- *  Unit TestCase for CastExpressions
+ *  Unit TestCase for TriggerGuardExpressions
  */
 @SuppressWarnings("all")
 @RunWith(XtextRunner.class)
 @InjectWith(SExecInjectionProvider.class)
-public class CastExpressionsTest extends AbstractExecutionFlowTest {
+public class TriggerGuardExpressionsTest extends AbstractExecutionFlowTest {
 	@Before
 	public void setup() throws Exception {
 		ExecutionFlow flow = models
-				.loadExecutionFlowFromResource("CastExpressions.sct");
+				.loadExecutionFlowFromResource("TriggerGuardExpressions.sct");
 		initInterpreter(flow);
 	}
 	@Test
-	public void CastExpressionTest() throws Exception {
+	public void trueGuard() throws Exception {
 		interpreter.enter();
-		assertTrue(getReal("realValue") == 5);
-		assertTrue(getInteger("intValue") == 5);
+		assertTrue(isActive("A"));
+		raiseEvent("e1");
+		setBoolean("b", true);
 		interpreter.runCycle();
-		assertTrue(getReal("realValue") == 15);
+		assertTrue(isActive("B"));
 		interpreter.runCycle();
-		assertTrue(isActive("C"));
-		assertTrue(getReal("realValue") == 757);
+		assertTrue(isActive("A"));
+		raiseEvent("e2");
+		interpreter.runCycle();
+		assertTrue(isActive("B"));
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
+		raiseEvent("e1");
+		raiseEvent("e2");
+		interpreter.runCycle();
+		assertTrue(isActive("B"));
+	}
+	@Test
+	public void falseGuard() throws Exception {
+		interpreter.enter();
+		assertTrue(isActive("A"));
+		setBoolean("b", false);
+		raiseEvent("e1");
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
+		raiseEvent("e2");
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
+		raiseEvent("e1");
+		raiseEvent("e2");
+		interpreter.runCycle();
+		assertTrue(isActive("A"));
 	}
 }

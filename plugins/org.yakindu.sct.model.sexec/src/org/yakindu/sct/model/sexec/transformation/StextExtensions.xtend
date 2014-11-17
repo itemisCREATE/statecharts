@@ -27,6 +27,12 @@ class StextExtensions {
 		and
 	}
 
+	def Expression parenthesis(Expression exp) {
+		val p = expfactory.createParenthesizedExpression
+		p.expression = exp
+		p
+	}
+
 
 	def Expression active(State state) {
 		val active = factory.createActiveStateReferenceExpression

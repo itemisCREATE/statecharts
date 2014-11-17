@@ -152,7 +152,7 @@ public class GuardStatemachine implements IGuardStatemachine {
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCInterface.event1 && sCInterface.myVar == 10) {
+		if ((sCInterface.event1) && sCInterface.myVar == 10) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 

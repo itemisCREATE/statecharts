@@ -202,7 +202,7 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 					nextStateIndex = 1;
 					stateVector[1] = State.main_region_D;
 				} else {
-					if (sCInterface.event2
+					if ((sCInterface.event2)
 							&& !isStateActive(State.someRegion_B)) {
 						nextStateIndex = 1;
 						stateVector[1] = State.$NullState$;

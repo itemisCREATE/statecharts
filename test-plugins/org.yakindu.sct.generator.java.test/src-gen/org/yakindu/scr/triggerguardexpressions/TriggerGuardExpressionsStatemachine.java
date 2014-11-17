@@ -1,39 +1,36 @@
-package org.yakindu.scr.conditionalexpressions;
+package org.yakindu.scr.triggerguardexpressions;
 
-public class ConditionalExpressionsStatemachine
+public class TriggerGuardExpressionsStatemachine
 		implements
-			IConditionalExpressionsStatemachine {
+			ITriggerGuardExpressionsStatemachine {
 
 	private final class SCInterfaceImpl implements SCInterface {
 
-		private boolean e;
+		private boolean e1;
 
-		public void raiseE() {
-			e = true;
+		public void raiseE1() {
+			e1 = true;
 		}
 
-		private long condition;
+		private boolean e2;
 
-		public long getCondition() {
-			return condition;
+		public void raiseE2() {
+			e2 = true;
 		}
 
-		public void setCondition(long value) {
-			this.condition = value;
+		private boolean b;
+
+		public boolean getB() {
+			return b;
 		}
 
-		private boolean boolVar;
-
-		public boolean getBoolVar() {
-			return boolVar;
-		}
-
-		public void setBoolVar(boolean value) {
-			this.boolVar = value;
+		public void setB(boolean value) {
+			this.b = value;
 		}
 
 		public void clearEvents() {
-			e = false;
+			e1 = false;
+			e2 = false;
 		}
 
 	}
@@ -48,7 +45,7 @@ public class ConditionalExpressionsStatemachine
 
 	private int nextStateIndex;
 
-	public ConditionalExpressionsStatemachine() {
+	public TriggerGuardExpressionsStatemachine() {
 
 		sCInterface = new SCInterfaceImpl();
 	}
@@ -61,15 +58,11 @@ public class ConditionalExpressionsStatemachine
 		clearEvents();
 		clearOutEvents();
 
-		sCInterface.condition = sCInterface.boolVar ? 3 : 2;
-
-		sCInterface.boolVar = true;
+		sCInterface.b = false;
 	}
 
 	public void enter() {
 		entryAction();
-
-		sCInterface.condition = sCInterface.boolVar ? 1 : 0;
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
@@ -126,40 +119,34 @@ public class ConditionalExpressionsStatemachine
 		return sCInterface;
 	}
 
-	public void raiseE() {
-		sCInterface.raiseE();
+	public void raiseE1() {
+		sCInterface.raiseE1();
+	}
+	public void raiseE2() {
+		sCInterface.raiseE2();
 	}
 
-	public long getCondition() {
-		return sCInterface.getCondition();
+	public boolean getB() {
+		return sCInterface.getB();
 	}
 
-	public void setCondition(long value) {
-		sCInterface.setCondition(value);
-	}
-	public boolean getBoolVar() {
-		return sCInterface.getBoolVar();
+	public void setB(boolean value) {
+		sCInterface.setB(value);
 	}
 
-	public void setBoolVar(boolean value) {
-		sCInterface.setBoolVar(value);
-	}
-
-	/* Entry action for statechart 'ConditionalExpressions'. */
+	/* Entry action for statechart 'TriggerGuardExpressions'. */
 	private void entryAction() {
 	}
 
-	/* Exit action for state 'ConditionalExpressions'. */
+	/* Exit action for state 'TriggerGuardExpressions'. */
 	private void exitAction() {
 	}
 
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if ((sCInterface.e) && 1 == (sCInterface.boolVar ? 1 : 0)) {
+		if ((sCInterface.e1 || sCInterface.e2) && sCInterface.b) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
-
-			sCInterface.condition = ((sCInterface.condition == 2) ? 1 : 2);
 
 			nextStateIndex = 0;
 			stateVector[0] = State.main_region_B;
@@ -168,6 +155,11 @@ public class ConditionalExpressionsStatemachine
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
 	}
 
 	public void runCycle() {

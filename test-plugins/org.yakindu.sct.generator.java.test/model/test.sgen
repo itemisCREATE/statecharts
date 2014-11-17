@@ -413,6 +413,15 @@ GeneratorModel for sctunit::java {
 	}
 
 
+	test TriggerGuardExpressions {
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
+
 	test ValuedEvents{
 		
 		feature Outlet{ 

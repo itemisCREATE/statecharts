@@ -35,6 +35,7 @@ import org.junit.runners.Suite.SuiteClasses;
 		StateIsActiveTest.class, StaticChoiceTest.class,
 		STextKeywordsInStatesAndRegionsTest.class, StringExpressionsTest.class,
 		SyncForkTest.class, SyncJoinTest.class,
-		TransitionWithoutConditionTest.class, ValuedEventsTest.class})
+		TransitionWithoutConditionTest.class,
+		TriggerGuardExpressionsTest.class, ValuedEventsTest.class})
 public class AllTestsTest {
 }

@@ -607,6 +607,18 @@ GeneratorModel for sctunit::c {
 		}			
 	}	
 
+	test TriggerGuardExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.c.test" 
+			targetFolder = "test-gen"			
+		}		
+				
+		feature JUnitWrapper {
+			WrapToJUnit =  "true" 
+		}			
+	}	
+
 	test ValuedEvents{
 		
 		feature Outlet{ 

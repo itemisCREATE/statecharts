@@ -823,7 +823,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 	/* The reactions of state char. */
 	private void reactAuto_char() {
-		if (sCInterface.auto && sCInterface.case_ID) {
+		if ((sCInterface.auto) && sCInterface.case_ID) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
