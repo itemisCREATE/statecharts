@@ -48,5 +48,6 @@ testsuite AllTests {
 	SyncJoin, 
 //	TimedTransitions,
 	TransitionWithoutCondition,
+	TriggerGuardExpressions,
 	ValuedEvents
 } 

@@ -213,7 +213,7 @@ public class NamedInterfaceAccessStatemachine
 
 	/* The reactions of state Idle. */
 	private void reactRegion_1_Idle() {
-		if (sCIUser.numberPressed && sCIUser.numberPressedValue == number1) {
+		if ((sCIUser.numberPressed) && sCIUser.numberPressedValue == number1) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -224,7 +224,7 @@ public class NamedInterfaceAccessStatemachine
 
 	/* The reactions of state Number1Pressed. */
 	private void reactRegion_1_Number1Pressed() {
-		if (sCIUser.numberPressed && sCIUser.numberPressedValue == number2) {
+		if ((sCIUser.numberPressed) && sCIUser.numberPressedValue == number2) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
@@ -245,7 +245,7 @@ public class NamedInterfaceAccessStatemachine
 
 	/* The reactions of state Number2Pressed. */
 	private void reactRegion_1_Number2Pressed() {
-		if (sCIUser.numberPressed && sCIUser.numberPressedValue == number3) {
+		if ((sCIUser.numberPressed) && sCIUser.numberPressedValue == number3) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 

@@ -406,6 +406,15 @@ GeneratorModel for sctunit::interpreter {
 	}
 	
 
+	test TriggerGuardExpressions{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+	
+
 	test ValuedEvents{
 		
 		feature Outlet{ 

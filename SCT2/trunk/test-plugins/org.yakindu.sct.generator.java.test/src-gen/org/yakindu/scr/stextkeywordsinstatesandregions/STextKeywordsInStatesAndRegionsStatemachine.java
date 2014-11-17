@@ -540,7 +540,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state interface. */
 	private void reactOperation_interface() {
-		if (sCInterface.e1 && isStateActive(State.default_namespace)) {
+		if ((sCInterface.e1) && isStateActive(State.default_namespace)) {
 			nextStateIndex = 1;
 			stateVector[1] = State.$NullState$;
 
@@ -555,7 +555,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state event. */
 	private void reactNamespace_event() {
-		if (sCInterface.e2 && isStateActive(State.operation_internal)) {
+		if ((sCInterface.e2) && isStateActive(State.operation_internal)) {
 			nextStateIndex = 2;
 			stateVector[2] = State.$NullState$;
 
@@ -570,7 +570,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state in. */
 	private void reactLocal_in() {
-		if (sCInterface.e1 && isStateActive(State.namespace_local)) {
+		if ((sCInterface.e1) && isStateActive(State.namespace_local)) {
 			nextStateIndex = 3;
 			stateVector[3] = State.$NullState$;
 
@@ -585,7 +585,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state var. */
 	private void reactInterface_var() {
-		if (sCInterface.e2 && isStateActive(State.local_out)) {
+		if ((sCInterface.e2) && isStateActive(State.local_out)) {
 			nextStateIndex = 4;
 			stateVector[4] = State.$NullState$;
 
@@ -600,7 +600,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state external. */
 	private void reactInternal_external() {
-		if (sCInterface.e1 && isStateActive(State.interface_readonly)) {
+		if ((sCInterface.e1) && isStateActive(State.interface_readonly)) {
 			nextStateIndex = 5;
 			stateVector[5] = State.$NullState$;
 
@@ -615,7 +615,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state default. */
 	private void reactEvent_default() {
-		if (sCInterface.e2 && isStateActive(State.internal_operation)) {
+		if ((sCInterface.e2) && isStateActive(State.internal_operation)) {
 			nextStateIndex = 6;
 			stateVector[6] = State.$NullState$;
 
@@ -630,7 +630,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state entry. */
 	private void reactIn_entry() {
-		if (sCInterface.e1 && isStateActive(State.event_else)) {
+		if ((sCInterface.e1) && isStateActive(State.event_else)) {
 			nextStateIndex = 7;
 			stateVector[7] = State.$NullState$;
 
@@ -645,7 +645,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state always. */
 	private void reactOut_always() {
-		if (sCInterface.e2 && isStateActive(State.in_exit)) {
+		if ((sCInterface.e2) && isStateActive(State.in_exit)) {
 			nextStateIndex = 8;
 			stateVector[8] = State.$NullState$;
 
@@ -660,7 +660,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state raise. */
 	private void reactVar_raise() {
-		if (sCInterface.e1 && isStateActive(State.out_oncycle)) {
+		if ((sCInterface.e1) && isStateActive(State.out_oncycle)) {
 			nextStateIndex = 9;
 			stateVector[9] = State.$NullState$;
 
@@ -675,7 +675,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state active. */
 	private void reactReadonly_active() {
-		if (sCInterface.e2 && isStateActive(State.var_valueof)) {
+		if ((sCInterface.e2) && isStateActive(State.var_valueof)) {
 			nextStateIndex = 10;
 			stateVector[10] = State.$NullState$;
 
@@ -690,7 +690,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state interface. */
 	private void reactExternal_interface() {
-		if (sCInterface.e1 && isStateActive(State.readonly_namespace)) {
+		if ((sCInterface.e1) && isStateActive(State.readonly_namespace)) {
 			nextStateIndex = 11;
 			stateVector[11] = State.$NullState$;
 
@@ -705,7 +705,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state event. */
 	private void reactElse_event() {
-		if (sCInterface.e2 && isStateActive(State.external_internal)) {
+		if ((sCInterface.e2) && isStateActive(State.external_internal)) {
 			nextStateIndex = 12;
 			stateVector[12] = State.$NullState$;
 
@@ -720,7 +720,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state in. */
 	private void reactEntry_in() {
-		if (sCInterface.e1 && isStateActive(State.else_local)) {
+		if ((sCInterface.e1) && isStateActive(State.else_local)) {
 			nextStateIndex = 13;
 			stateVector[13] = State.$NullState$;
 
@@ -735,7 +735,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state var. */
 	private void reactExit_var() {
-		if (sCInterface.e2 && isStateActive(State.entry_out)) {
+		if ((sCInterface.e2) && isStateActive(State.entry_out)) {
 			nextStateIndex = 14;
 			stateVector[14] = State.$NullState$;
 
@@ -750,7 +750,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state external. */
 	private void reactAlways_external() {
-		if (sCInterface.e1 && isStateActive(State.exit_readonly)) {
+		if ((sCInterface.e1) && isStateActive(State.exit_readonly)) {
 			nextStateIndex = 15;
 			stateVector[15] = State.$NullState$;
 
@@ -765,7 +765,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state default. */
 	private void reactOncycle_default() {
-		if (sCInterface.e2 && isStateActive(State.always_operation)) {
+		if ((sCInterface.e2) && isStateActive(State.always_operation)) {
 			nextStateIndex = 16;
 			stateVector[16] = State.$NullState$;
 
@@ -780,7 +780,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state entry. */
 	private void reactRaise_entry() {
-		if (sCInterface.e1 && isStateActive(State.oncycle_else)) {
+		if ((sCInterface.e1) && isStateActive(State.oncycle_else)) {
 			nextStateIndex = 17;
 			stateVector[17] = State.$NullState$;
 
@@ -795,7 +795,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state always. */
 	private void reactValueof_always() {
-		if (sCInterface.e2 && isStateActive(State.raise_exit)) {
+		if ((sCInterface.e2) && isStateActive(State.raise_exit)) {
 			nextStateIndex = 18;
 			stateVector[18] = State.$NullState$;
 
@@ -810,7 +810,7 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 	/* The reactions of state raise. */
 	private void reactActive_raise() {
-		if (sCInterface.e1 && isStateActive(State.valueof_oncycle)) {
+		if ((sCInterface.e1) && isStateActive(State.valueof_oncycle)) {
 			nextStateIndex = 19;
 			stateVector[19] = State.$NullState$;
 

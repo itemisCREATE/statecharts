@@ -48,11 +48,13 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String GUARD = "Guard.sct";
 	public static final String GUARDED_ENTRY = "GuardedEntry.sct";
 	public static final String GUARDED_EXIT = "GuardedExit.sct";
+	public static final String HISTORY_WITH_EXIT_POINT = "HistoryWithExitPoint.sct";
 	public static final String HISTORY_WITHOUT_INITIAL_STEP = "HistoryWithoutInitialStep.sct";
 	public static final String IN_EVENT_LIFE_CYCLE = "InEventLifeCycle.sct";
 	public static final String INTEGER_EXPRESSIONS = "IntegerExpressions.sct";
 	public static final String INTERNAT_EVENT_LIFE_CYCLE = "InternalEventLifeCycle.sct";
 	public static final String JAVA_KEYWORDS_M = "JavaKeywords.sct";
+	public static final String LOCAL_REACTIONS = "LocalReactions.sct";
 	public static final String LOGICAL_AND = "LogicalAnd.sct";
 	public static final String LOGICAL_OR = "LogicalOr.sct";
 	public static final String NAMED_INTERFACE_ACCESS = "NamedInterfaceAccess.sct";
@@ -77,6 +79,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String SYNC_FORK = "SyncFork.sct";
 	public static final String TIMED_TRANSITIONS = "TimedTransitions.sct";
 	public static final String TRANSITIONS_WITHOUT_CONDITION = "TransitionWithoutCondition.sct";
+	public static final String TRIFFER_GUARD_EXPRESSIONS = "TriggerGuardExpressions.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
 	public static final String VARIABLE_INITIALIZATION = "VariableInitialization.sct";
 	

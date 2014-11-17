@@ -1,0 +1,50 @@
+
+testgroup TriggerGuardExpressions for statechart TriggerGuardExpressions {
+	
+	/** If the guard is true then the transition will be taken on any event that matches a trigger.  */
+	test trueGuard {
+
+		enter
+		assert active (TriggerGuardExpressions.main_region.A)
+		
+		raise e1
+		b = true
+		cycle
+		assert active (TriggerGuardExpressions.main_region.B)
+		
+		cycle
+		assert active (TriggerGuardExpressions.main_region.A)
+		raise e2
+		cycle
+		assert active (TriggerGuardExpressions.main_region.B)
+		
+		cycle
+		assert active (TriggerGuardExpressions.main_region.A)
+		raise e1
+		raise e2
+		cycle
+		assert active (TriggerGuardExpressions.main_region.B)
+	}
+	
+	/** If the guard is false then the transition will be taken on any event that matches a trigger.  */
+	test falseGuard {
+
+		enter
+		assert active (TriggerGuardExpressions.main_region.A)
+		b = false
+		
+		raise e1
+		cycle
+		assert active (TriggerGuardExpressions.main_region.A)
+		
+		raise e2
+		cycle
+		assert active (TriggerGuardExpressions.main_region.A)
+		
+		raise e1
+		raise e2
+		cycle
+		assert active (TriggerGuardExpressions.main_region.A)
+	}
+	
+}

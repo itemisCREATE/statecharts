@@ -156,7 +156,7 @@ public class CastExpressionsStatemachine
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (true
+		if ((true)
 				&& ((double) (sCInterface.realValue * 0.1)) > ((long) 1.4)
 				&& ((long) (sCInterface.realValue * sCInterface.intValue)) < ((double) 100)) {
 			nextStateIndex = 0;

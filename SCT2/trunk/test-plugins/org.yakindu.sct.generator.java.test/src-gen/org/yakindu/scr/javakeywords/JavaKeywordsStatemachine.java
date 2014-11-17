@@ -1134,7 +1134,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	/* The reactions of state abstract. */
 	private void reactGoto_abstract() {
-		if (sCInterface.while_ID && true) {
+		if ((sCInterface.while_ID) && true) {
 			nextStateIndex = 0;
 			stateVector[0] = State.$NullState$;
 
