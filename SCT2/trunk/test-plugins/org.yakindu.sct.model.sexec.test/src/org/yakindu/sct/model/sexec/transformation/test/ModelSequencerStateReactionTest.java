@@ -38,6 +38,7 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression;
 import org.yakindu.base.expressions.expressions.LogicalOrExpression;
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression;
+import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.ExecutionState;
@@ -104,8 +105,10 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Expression s = behaviorMapping.buildCondition(tr1);
 
 		assertTrue(s instanceof LogicalOrExpression);
-		assertClass(ElementReferenceExpression.class, ((LogicalOrExpression) s).getLeftOperand());
-		assertClass(ElementReferenceExpression.class, ((LogicalOrExpression) s).getRightOperand());
+		assertClass(ElementReferenceExpression.class,
+				((LogicalOrExpression) s).getLeftOperand());
+		assertClass(ElementReferenceExpression.class,
+				((LogicalOrExpression) s).getRightOperand());
 	}
 
 	public static void assertBoolLiteral(boolean value, Literal lit) {
@@ -157,14 +160,22 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		assertTrue(reaction.getCheck().getCondition() instanceof LogicalOrExpression);
 		assertClass(ElementReferenceExpression.class,
-				((LogicalOrExpression) reaction.getCheck().getCondition()).getLeftOperand());
+				((LogicalOrExpression) reaction.getCheck().getCondition())
+						.getLeftOperand());
 		assertClass(ElementReferenceExpression.class,
-				((LogicalOrExpression) reaction.getCheck().getCondition()).getRightOperand());
+				((LogicalOrExpression) reaction.getCheck().getCondition())
+						.getRightOperand());
 
-		assertEquals(e1.getName(), ((NamedElement) ((ElementReferenceExpression) ((LogicalOrExpression) reaction
-				.getCheck().getCondition()).getLeftOperand()).getReference()).getName());
-		assertEquals(e2.getName(), ((NamedElement) ((ElementReferenceExpression) ((LogicalOrExpression) reaction
-				.getCheck().getCondition()).getRightOperand()).getReference()).getName());
+		assertEquals(
+				e1.getName(),
+				((NamedElement) ((ElementReferenceExpression) ((LogicalOrExpression) reaction
+						.getCheck().getCondition()).getLeftOperand())
+						.getReference()).getName());
+		assertEquals(
+				e2.getName(),
+				((NamedElement) ((ElementReferenceExpression) ((LogicalOrExpression) reaction
+						.getCheck().getCondition()).getRightOperand())
+						.getReference()).getName());
 	}
 
 	@Test
@@ -194,16 +205,25 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		// the root is an and condition with the trigger check as the first
 		// (left) part and the guard as the right (second) part.
-		LogicalAndExpression and = (LogicalAndExpression) reaction.getCheck().getCondition();
-		LogicalOrExpression triggerCheck = (LogicalOrExpression) and.getLeftOperand();
-		PrimitiveValueExpression guardCheck = (PrimitiveValueExpression) and.getRightOperand();
+		LogicalAndExpression and = (LogicalAndExpression) reaction.getCheck()
+				.getCondition();
+		ParenthesizedExpression parenthesis = (ParenthesizedExpression) and
+				.getLeftOperand();
+		LogicalOrExpression triggerCheck = (LogicalOrExpression) parenthesis
+				.getExpression();
+		PrimitiveValueExpression guardCheck = (PrimitiveValueExpression) and
+				.getRightOperand();
 
-		assertClass(ElementReferenceExpression.class, triggerCheck.getLeftOperand());
-		assertClass(ElementReferenceExpression.class, triggerCheck.getRightOperand());
+		assertClass(ElementReferenceExpression.class,
+				triggerCheck.getLeftOperand());
+		assertClass(ElementReferenceExpression.class,
+				triggerCheck.getRightOperand());
 		assertEquals(e1.getName(),
-				((NamedElement) ((ElementReferenceExpression) triggerCheck.getLeftOperand()).getReference()).getName());
+				((NamedElement) ((ElementReferenceExpression) triggerCheck
+						.getLeftOperand()).getReference()).getName());
 		assertEquals(e2.getName(),
-				((NamedElement) ((ElementReferenceExpression) triggerCheck.getRightOperand()).getReference()).getName());
+				((NamedElement) ((ElementReferenceExpression) triggerCheck
+						.getRightOperand()).getReference()).getName());
 
 		assertBoolLiteral(false, guardCheck.getValue());
 	}
@@ -229,7 +249,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		// the root is an and condition with the trigger check as the first
 		// (left) part and the guard as the right (second) part.
-		PrimitiveValueExpression guard = (PrimitiveValueExpression) reaction.getCheck().getCondition();
+		PrimitiveValueExpression guard = (PrimitiveValueExpression) reaction
+				.getCheck().getCondition();
 		assertBoolLiteral(false, guard.getValue());
 	}
 
@@ -242,7 +263,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
 		Region r = _createRegion("main", sc);
 		Entry e = _createEntry(EntryKind.INITIAL, null, r);
 		State s1 = _createState("s1", r);
@@ -250,9 +272,10 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		_createTransition(e, s1);
 		_createTransition(s1, s2);
 		LocalReaction entryAction = _createEntryAction(s2);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42),
-				(ReactionEffect) entryAction.getEffect());
-		((ReactionTrigger) entryAction.getTrigger()).setGuard(createGuardExpression(_createValue(true)));
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
+				_createValue(42), (ReactionEffect) entryAction.getEffect());
+		((ReactionTrigger) entryAction.getTrigger())
+				.setGuard(createGuardExpression(_createValue(true)));
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
@@ -264,9 +287,12 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Sequence _entrySeq = (Sequence) _s2.getEntryAction();
 
 		assertClass(If.class, _entrySeq.getSteps().get(0));
-		assertClass(PrimitiveValueExpression.class, ((If) _entrySeq.getSteps().get(0)).getCheck().getCondition());
-		assertAssignment(((Sequence) ((If) _entrySeq.getSteps().get(0)).getThenStep()).getSteps().get(0), "v1",
-				AssignmentOperator.ASSIGN, "42");
+		assertClass(PrimitiveValueExpression.class, ((If) _entrySeq.getSteps()
+				.get(0)).getCheck().getCondition());
+		assertAssignment(
+				((Sequence) ((If) _entrySeq.getSteps().get(0)).getThenStep())
+						.getSteps().get(0), "v1", AssignmentOperator.ASSIGN,
+				"42");
 
 	}
 
@@ -279,7 +305,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
 		Region r = _createRegion("main", sc);
 		Entry e = _createEntry(EntryKind.INITIAL, null, r);
 		State s1 = _createState("s1", r);
@@ -287,8 +314,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		_createTransition(e, s1);
 		_createTransition(s1, s2);
 		LocalReaction entryAction = _createEntryAction(s2);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42),
-				(ReactionEffect) entryAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
+				_createValue(42), (ReactionEffect) entryAction.getEffect());
 		// ((ReactionTrigger)entryAction.getTrigger()).setGuardExpression(_createValue(true));
 
 		ExecutionFlow flow = sequencer.transform(sc);
@@ -301,8 +328,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Sequence _entrySeq = (Sequence) _s2.getEntryAction();
 
 		assertClass(Sequence.class, _entrySeq.getSteps().get(0));
-		assertAssignment(((Sequence) _entrySeq.getSteps().get(0)).getSteps().get(0), "v1", AssignmentOperator.ASSIGN,
-				"42");
+		assertAssignment(((Sequence) _entrySeq.getSteps().get(0)).getSteps()
+				.get(0), "v1", AssignmentOperator.ASSIGN, "42");
 
 	}
 
@@ -315,7 +342,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
 		Region r = _createRegion("main", sc);
 		Entry e = _createEntry(EntryKind.INITIAL, null, r);
 		State s1 = _createState("s1", r);
@@ -323,9 +351,10 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		_createTransition(e, s1);
 		_createTransition(s1, s2);
 		LocalReaction exitAction = _createExitAction(s2);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42),
-				(ReactionEffect) exitAction.getEffect());
-		((ReactionTrigger) exitAction.getTrigger()).setGuard(createGuardExpression(_createValue(true)));
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
+				_createValue(42), (ReactionEffect) exitAction.getEffect());
+		((ReactionTrigger) exitAction.getTrigger())
+				.setGuard(createGuardExpression(_createValue(true)));
 
 		ExecutionFlow flow = sequencer.transform(sc);
 
@@ -337,9 +366,12 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Sequence _exitSeq = (Sequence) _s2.getExitAction();
 
 		assertClass(If.class, _exitSeq.getSteps().get(0));
-		assertClass(PrimitiveValueExpression.class, ((If) _exitSeq.getSteps().get(0)).getCheck().getCondition());
-		assertAssignment(((Sequence) ((If) _exitSeq.getSteps().get(0)).getThenStep()).getSteps().get(0), "v1",
-				AssignmentOperator.ASSIGN, "42");
+		assertClass(PrimitiveValueExpression.class, ((If) _exitSeq.getSteps()
+				.get(0)).getCheck().getCondition());
+		assertAssignment(
+				((Sequence) ((If) _exitSeq.getSteps().get(0)).getThenStep())
+						.getSteps().get(0), "v1", AssignmentOperator.ASSIGN,
+				"42");
 
 	}
 
@@ -352,7 +384,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
 		Region r = _createRegion("main", sc);
 		Entry e = _createEntry(EntryKind.INITIAL, null, r);
 		State s1 = _createState("s1", r);
@@ -360,8 +393,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		_createTransition(e, s1);
 		_createTransition(s1, s2);
 		LocalReaction exitAction = _createExitAction(s2);
-		_createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42),
-				(ReactionEffect) exitAction.getEffect());
+		_createVariableAssignment(v1, AssignmentOperator.ASSIGN,
+				_createValue(42), (ReactionEffect) exitAction.getEffect());
 		// ((ReactionTrigger)entryAction.getTrigger()).setGuardExpression(_createValue(true));
 
 		ExecutionFlow flow = sequencer.transform(sc);
@@ -374,8 +407,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		Sequence _exitSeq = (Sequence) _s2.getExitAction();
 
 		assertClass(Sequence.class, _exitSeq.getSteps().get(0));
-		assertAssignment(((Sequence) _exitSeq.getSteps().get(0)).getSteps().get(0), "v1", AssignmentOperator.ASSIGN,
-				"42");
+		assertAssignment(((Sequence) _exitSeq.getSteps().get(0)).getSteps()
+				.get(0), "v1", AssignmentOperator.ASSIGN, "42");
 
 	}
 
@@ -389,15 +422,18 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
 		Region r = _createRegion("main", sc);
 		State s = _createState("s", r);
 
 		Transition t = _createTransition(s, s);
 		ReactionTrigger tr1 = _createReactionTrigger(t);
-		_createTimeEventSpec(TimeEventType.AFTER, _createValue(1), TimeUnit.SECOND, tr1);
+		_createTimeEventSpec(TimeEventType.AFTER, _createValue(1),
+				TimeUnit.SECOND, tr1);
 
-		AssignmentExpression assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42),
+		AssignmentExpression assign = _createVariableAssignment(v1,
+				AssignmentOperator.ASSIGN, _createValue(42),
 				(ReactionEffect) t.getEffect());
 
 		ExecutionFlow flow = sequencer.transform(sc);
@@ -412,25 +448,34 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		assertEquals(1, flow.getStates().size());
 		ExecutionState _s = flow.getStates().get(0);
 		assertEquals(s.getName(), _s.getSimpleName());
-		If _if = (If) SCTTestUtil.flattenSequenceStepsAsList(flow.getStates().get(0).getReactSequence()).get(0);
+		If _if = (If) SCTTestUtil.flattenSequenceStepsAsList(
+				flow.getStates().get(0).getReactSequence()).get(0);
 
-		ElementReferenceExpression _ere = (ElementReferenceExpression) _if.getCheck().getCondition();
+		ElementReferenceExpression _ere = (ElementReferenceExpression) _if
+				.getCheck().getCondition();
 		assertSame(te, _ere.getReference());
 
 		// assert the scheduling of the time event during state entry
 		assertNotNull(_s.getEntryAction());
 		Sequence entryAction = (Sequence) _s.getEntryAction();
-		ScheduleTimeEvent ste = (ScheduleTimeEvent) entryAction.getSteps().get(0);
+		ScheduleTimeEvent ste = (ScheduleTimeEvent) entryAction.getSteps().get(
+				0);
 		assertSame(te, ste.getTimeEvent());
-		NumericalMultiplyDivideExpression multiply = (NumericalMultiplyDivideExpression) ste.getTimeValue();
-		assertIntLiteral(1, ((PrimitiveValueExpression) multiply.getLeftOperand()).getValue());
-		assertIntLiteral(1000, ((PrimitiveValueExpression) multiply.getRightOperand()).getValue());
+		NumericalMultiplyDivideExpression multiply = (NumericalMultiplyDivideExpression) ste
+				.getTimeValue();
+		assertIntLiteral(1,
+				((PrimitiveValueExpression) multiply.getLeftOperand())
+						.getValue());
+		assertIntLiteral(1000,
+				((PrimitiveValueExpression) multiply.getRightOperand())
+						.getValue());
 		assertEquals(MultiplicativeOperator.MUL, multiply.getOperator());
 
 		// assert the unscheduling of the time events during state exit
 		assertNotNull(_s.getExitAction());
 		Sequence exitAction = (Sequence) _s.getExitAction();
-		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps().get(0);
+		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps()
+				.get(0);
 		assertSame(te, ute.getTimeEvent());
 	}
 
@@ -443,13 +488,15 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
 		Region r = _createRegion("main", sc);
 		State s = _createState("s", r);
 
-		LocalReaction timeTriggeredReaction = _createTimeTriggeredReaction(s, TimeEventType.AFTER, _createValue(2),
-				TimeUnit.MILLISECOND);
-		AssignmentExpression assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42),
+		LocalReaction timeTriggeredReaction = _createTimeTriggeredReaction(s,
+				TimeEventType.AFTER, _createValue(2), TimeUnit.MILLISECOND);
+		AssignmentExpression assign = _createVariableAssignment(v1,
+				AssignmentOperator.ASSIGN, _createValue(42),
 				(ReactionEffect) timeTriggeredReaction.getEffect());
 
 		ExecutionFlow flow = sequencer.transform(sc);
@@ -465,13 +512,16 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 		// assert the scheduling of the time event during state entry
 		assertNotNull(_s.getEntryAction());
 		Sequence entryAction = (Sequence) _s.getEntryAction();
-		ScheduleTimeEvent ste = (ScheduleTimeEvent) entryAction.getSteps().get(0);
+		ScheduleTimeEvent ste = (ScheduleTimeEvent) entryAction.getSteps().get(
+				0);
 		assertSame(te, ste.getTimeEvent());
-		PrimitiveValueExpression value = (PrimitiveValueExpression) ste.getTimeValue();
+		PrimitiveValueExpression value = (PrimitiveValueExpression) ste
+				.getTimeValue();
 		assertIntLiteral(2, value.getValue());
 		assertNotNull(_s.getExitAction());
 		Sequence exitAction = (Sequence) _s.getExitAction();
-		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps().get(0);
+		UnscheduleTimeEvent ute = (UnscheduleTimeEvent) exitAction.getSteps()
+				.get(0);
 		assertSame(te, ute.getTimeEvent());
 
 	}
@@ -485,12 +535,15 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		Statechart sc = _createStatechart("test");
 		Scope scope = _createInterfaceScope("interface", sc);
-		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER, scope);
+		VariableDefinition v1 = _createVariableDefinition("v1", TYPE_INTEGER,
+				scope);
 		Region r = _createRegion("main", sc);
 		State s = _createState("s", r);
 
-		LocalReaction timeTriggeredReaction = _createLocalReaction(s, StextFactory.eINSTANCE.createAlwaysEvent());
-		AssignmentExpression assign = _createVariableAssignment(v1, AssignmentOperator.ASSIGN, _createValue(42),
+		LocalReaction timeTriggeredReaction = _createLocalReaction(s,
+				StextFactory.eINSTANCE.createAlwaysEvent());
+		AssignmentExpression assign = _createVariableAssignment(v1,
+				AssignmentOperator.ASSIGN, _createValue(42),
 				(ReactionEffect) timeTriggeredReaction.getEffect());
 
 		ExecutionFlow flow = sequencer.transform(sc);
@@ -499,7 +552,8 @@ public class ModelSequencerStateReactionTest extends ModelSequencerTest {
 
 		// assert that a local reaction is created
 		Reaction reaction = _s.getReactions().get(0);
-		PrimitiveValueExpression pve = (PrimitiveValueExpression) reaction.getCheck().getCondition();
+		PrimitiveValueExpression pve = (PrimitiveValueExpression) reaction
+				.getCheck().getCondition();
 		assertBoolLiteral(true, pve.getValue());
 
 	}
