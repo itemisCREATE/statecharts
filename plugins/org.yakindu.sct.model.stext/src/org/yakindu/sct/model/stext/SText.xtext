@@ -93,7 +93,7 @@ VariableFeature returns types::Property:
 	VariableDefinition;
 
 VariableDefinition:
-	{VariableDefinition} 'var' ((readonly?='readonly')? & (external?='external')?) name=XID ':' type=[types::Type|FQN]
+	{VariableDefinition} (writeable?='var'|'val') ((readonly?='readonly')? & (external?='external')?) name=XID ':' type=[types::Type|FQN]
 	(('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])* '>'))?
 	('=' initialValue=Expression)?; /* ---- operation definition ---- */ OperationDeclaration returns
 sgraph::Declaration:
