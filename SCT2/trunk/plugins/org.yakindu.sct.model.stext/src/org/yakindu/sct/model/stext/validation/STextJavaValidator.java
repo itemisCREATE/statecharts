@@ -196,6 +196,21 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
+	public void checkAssignmentToFinalVariable(AssignmentExpression exp) {
+		Expression varRef = exp.getVarRef();
+		EObject referencedObject = null;
+		if (varRef instanceof FeatureCall)
+			referencedObject = ((FeatureCall) varRef).getFeature();
+		else if (varRef instanceof ElementReferenceExpression)
+			referencedObject = ((ElementReferenceExpression) varRef).getReference();
+		if (referencedObject instanceof VariableDefinition) {
+			if (!((VariableDefinition) referencedObject).isWriteable()) {
+				error(ASSIGNMENT_TO_VALUE, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
+			}
+		}
+	}
+
+	@Check(CheckType.FAST)
 	public void checkUnusedExit(final Exit exit) {
 		if (exit.getParentRegion().getComposite() instanceof org.yakindu.sct.model.sgraph.State
 				&& exit.getOutgoingTransitions().isEmpty()) {
