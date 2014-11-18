@@ -14,10 +14,11 @@ import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Variable
+import org.yakindu.sct.model.stext.naming.StextNameProvider
+import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
-import org.yakindu.sct.model.stext.naming.StextNameProvider
-import org.yakindu.sct.generator.java.JavaKeywords
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Naming implements JavaKeywords {
 	
@@ -105,6 +106,13 @@ class Naming implements JavaKeywords {
 		else {
 			return "SCInterface";
 		}
+	}
+	
+	def dispatch getSymbol(VariableDefinition it){
+		if(writeable) name.asEscapedIdentifier else name.asEscapedIdentifier.toUpperCase
+	}
+	def dispatch getSymbol(EventDefinition it){
+		name.asEscapedIdentifier
 	}
 	
 	def String getInterfaceImplName(InterfaceScope it) {
