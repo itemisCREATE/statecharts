@@ -162,7 +162,7 @@ class StatemachineInterface {
 	def variableAccessors(InterfaceScope scope) '''
 		«FOR variable : scope.variableDefinitions»
 			public «variable.type.targetLanguageName» «variable.getter»;
-			«IF !variable.readonly»
+			«IF !variable.readonly && variable.writeable»
 				public void «variable.setter»(«variable.type.targetLanguageName» value);	
 			«ENDIF»
 		«ENDFOR»
