@@ -62,6 +62,7 @@ public class VariableDefinitionItemProvider extends VariableItemProvider
 
       addTypePropertyDescriptor(object);
       addTypeArgumentsPropertyDescriptor(object);
+      addWriteablePropertyDescriptor(object);
       addReadonlyPropertyDescriptor(object);
       addExternalPropertyDescriptor(object);
     }
@@ -110,6 +111,29 @@ public class VariableDefinitionItemProvider extends VariableItemProvider
          false,
          true,
          null,
+         null,
+         null));
+  }
+
+  /**
+   * This adds a property descriptor for the Writeable feature.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected void addWriteablePropertyDescriptor(Object object)
+  {
+    itemPropertyDescriptors.add
+      (createItemPropertyDescriptor
+        (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+         getResourceLocator(),
+         getString("_UI_VariableDefinition_writeable_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_VariableDefinition_writeable_feature", "_UI_VariableDefinition_type"),
+         StextPackage.Literals.VARIABLE_DEFINITION__WRITEABLE,
+         true,
+         false,
+         false,
+         ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
          null,
          null));
   }
@@ -235,6 +259,7 @@ public class VariableDefinitionItemProvider extends VariableItemProvider
 
     switch (notification.getFeatureID(VariableDefinition.class))
     {
+      case StextPackage.VARIABLE_DEFINITION__WRITEABLE:
       case StextPackage.VARIABLE_DEFINITION__READONLY:
       case StextPackage.VARIABLE_DEFINITION__EXTERNAL:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
