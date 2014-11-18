@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
@@ -93,6 +94,7 @@ import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -206,6 +208,33 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		if (referencedObject instanceof VariableDefinition) {
 			if (!((VariableDefinition) referencedObject).isWriteable()) {
 				error(ASSIGNMENT_TO_VALUE, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
+			}
+		}
+	}
+
+	@Check(CheckType.FAST)
+	public void checkValueDefinitionExpression(VariableDefinition definition) {
+		// applies only to constants
+		if (definition.isWriteable())
+			return;
+		Expression initialValue = definition.getInitialValue();
+		List<Expression> toCheck = Lists.newArrayList(initialValue);
+		TreeIterator<EObject> eAllContents = initialValue.eAllContents();
+		while (eAllContents.hasNext()) {
+			EObject next = eAllContents.next();
+			if (next instanceof Expression)
+				toCheck.add((Expression) next);
+		}
+		for (Expression expression : toCheck) {
+			EObject referencedObject = null;
+			if (expression instanceof FeatureCall)
+				referencedObject = ((FeatureCall) expression).getFeature();
+			else if (expression instanceof ElementReferenceExpression)
+				referencedObject = ((ElementReferenceExpression) expression).getReference();
+			if (referencedObject instanceof VariableDefinition) {
+				if (((VariableDefinition) referencedObject).isWriteable()) {
+					error(REFERENCE_TO_VARIABLE, StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
+				}
 			}
 		}
 	}
