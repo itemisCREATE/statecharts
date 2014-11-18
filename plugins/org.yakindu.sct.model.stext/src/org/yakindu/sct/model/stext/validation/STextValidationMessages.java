@@ -46,5 +46,8 @@ public interface STextValidationMessages {
 	public static final String ISSUE_TRANSITION_WITHOUT_TRIGGER = "Missing trigger. Transisition is never taken. Use 'oncycle' or 'always' instead";
 	public static final String IMPORT_NOT_RESOLVED = "Import cannot be resolved";
 	public static final String EXITPOINTSPEC_WITH_TRIGGER = "Transitions with an exit point spec does not have a trigger or guard.";
-	public static final String ASSIGNMENT_TO_VALUE = "Assignment to final variable";
+	public static final String ASSIGNMENT_TO_VALUE = "Assignment to final field";
+	public static final String REFERENCE_TO_VARIABLE = "Cannot reference a variable in final field initialization";
+	public static final String REFERENCE_FIELD_BEFORE_DEFINED = "Cannot reference a field before it is defined";
+	
 }
