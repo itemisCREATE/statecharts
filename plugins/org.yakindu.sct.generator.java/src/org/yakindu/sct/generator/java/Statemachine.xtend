@@ -21,6 +21,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Statemachine {
 	
@@ -30,7 +31,6 @@ class Statemachine {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension ITypeSystem
 	@Inject extension FlowCode
-	
 	
 	@Inject Beautifier beautifier
 	
@@ -89,7 +89,7 @@ class Statemachine {
 	
 	def private createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR event : flow.internalScopeEvents»
-		private boolean «event.name.asEscapedIdentifier»;
+		private boolean «event.symbol»;
 		
 		«IF event.type != null && !event.type.voidType»
 			private «event.type.targetLanguageName» «event.valueIdentifier»;
@@ -113,7 +113,11 @@ class Statemachine {
 		};
 		
 		«FOR variable : flow.internalScopeVariables»
-		private «variable.type.targetLanguageName» «variable.name.asEscapedIdentifier»;
+			«IF variable.writeable»
+				«variable.writeableFieldDeclaration»
+			«ELSE»
+				«variable.constantFieldDeclaration»
+			«ENDIF»
 		«ENDFOR»
 		
 		«IF flow.hasHistory»
@@ -133,6 +137,14 @@ class Statemachine {
 		«ENDIF»
 		«ENDFOR»
 	'''
+	
+	def private writeableFieldDeclaration(VariableDefinition variable){
+		'''private «variable.type.targetLanguageName» «variable.symbol»;'''
+	}
+	
+	def private constantFieldDeclaration(VariableDefinition variable){
+		'''private static final «variable.type.targetLanguageName» «variable.symbol»;'''
+	}
 	
 	def private createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
@@ -178,7 +190,7 @@ class Statemachine {
 			«ENDFOR»
 			«FOR scope : flow.internalScopes»
 				«FOR event : scope.eventDefinitions»
-					«event.name.asEscapedIdentifier» = false;
+					«event.symbol» = false;
 				«ENDFOR»
 			«ENDFOR»
 			
@@ -278,7 +290,7 @@ class Statemachine {
 		
 		«FOR event : scope.eventDefinitions»
 			
-			private boolean «event.name.asEscapedIdentifier»;
+			private boolean «event.symbol»;
 			
 			«IF event.type != null && !event.type.voidType»
 				private «event.type.targetLanguageName» «event.valueIdentifier»;
@@ -287,7 +299,7 @@ class Statemachine {
 			«IF event.direction == Direction::IN»
 				«IF event.type != null && !event.type.voidType»
 					public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
-						«event.name.asEscapedIdentifier» = true;
+						«event.symbol» = true;
 						«event.valueIdentifier» = value;
 					}
 					
@@ -298,7 +310,7 @@ class Statemachine {
 					
 				«ELSE»
 					public void raise«event.name.asName»() {
-						«event.name.asEscapedIdentifier» = true;
+						«event.symbol» = true;
 					}
 					
 				«ENDIF»
@@ -307,12 +319,12 @@ class Statemachine {
 			«IF event.direction == Direction::OUT»
 				
 				public boolean isRaised«event.name.asName»() {
-					return «event.name.asEscapedIdentifier»;
+					return «event.symbol»;
 				}
 				
 				«IF event.type != null && !event.type.voidType»
 					private void raise«event.name.asName»(«event.type.targetLanguageName» value) {
-						«event.name.asEscapedIdentifier» = true;
+						«event.symbol» = true;
 						«event.valueIdentifier» = value;
 						«IF entry.createInterfaceObserver»
 						for («scope.interfaceListenerName» listener : listeners) {
@@ -327,7 +339,7 @@ class Statemachine {
 					}
 				«ELSE»
 					private void raise«event.name.asName»() {
-						«event.name.asEscapedIdentifier» = true;
+						«event.symbol» = true;
 						«IF entry.createInterfaceObserver»
 							for («scope.interfaceListenerName» listener : listeners) {
 								listener.on«event.name.asEscapedName»Raised();
@@ -340,15 +352,19 @@ class Statemachine {
 		
 		«FOR variable : scope.variableDefinitions»
 				
-				private «variable.type.targetLanguageName» «variable.name.asEscapedIdentifier»;
+				«IF variable.writeable»
+					«variable.writeableFieldDeclaration»
+				«ELSE»
+					«variable.constantFieldDeclaration»
+				«ENDIF»
 				
 				public «variable.type.targetLanguageName» «variable.getter» {
-					return «variable.name.asEscapedIdentifier»;
+					return «variable.symbol»;
 				}
 				
-				«IF  !variable.readonly»
+				«IF  !variable.readonly && variable.isWriteable»
 					public void «variable.setter»(«variable.type.targetLanguageName» value) {
-						this.«variable.name.asEscapedIdentifier» = value;
+						this.«variable.symbol» = value;
 					}
 				«ENDIF»
 		«ENDFOR»
@@ -357,7 +373,7 @@ class Statemachine {
 			public void clearEvents() {
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction != Direction::OUT»
-				«event.name.asEscapedIdentifier» = false;
+				«event.symbol» = false;
 				«ENDIF»
 			«ENDFOR»
 			}
@@ -368,7 +384,7 @@ class Statemachine {
 			public void clearOutEvents() {
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::OUT»
-					«event.name.asEscapedIdentifier» = false;
+					«event.symbol» = false;
 				«ENDIF»
 			«ENDFOR»
 			}
@@ -386,7 +402,7 @@ class Statemachine {
 			«IF event.type != null && !event.type.voidType»
 				private void raise«event.name.asEscapedName»(«event.type.targetLanguageName» value) {
 					«event.valueIdentifier» = value;
-					«event.name.asEscapedIdentifier» = true;
+					«event.symbol» = true;
 				}
 				
 				private «event.type.targetLanguageName» get«event.name.asEscapedName»Value() {
@@ -396,20 +412,11 @@ class Statemachine {
 			«ELSE»
 			
 				private void raise«event.name.asEscapedName»() {
-					«event.name.asEscapedIdentifier» = true;
+					«event.symbol» = true;
 				}
 				
 			«ENDIF»
 		«ENDFOR»
-«««		«FOR variable : flow.internalScopeVariables»
-«««		private «variable.type.targetLanguageName» «variable.getter» {
-«««			return «variable.name.asEscapedIdentifier»;
-«««		}
-«««		
-«««		private void «variable.setter»(«variable.type.targetLanguageName» value) {
-«««			«variable.name.asEscapedIdentifier» = value;
-«««		}	
-«««		«ENDFOR»
 		
 		«FOR internal : flow.internalScopes»
 			«IF internal.hasOperations»
