@@ -15,22 +15,6 @@ import static org.eclipse.xtext.junit4.validation.AssertableDiagnostics.errorCod
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ENTRY_UNUSED;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.EXIT_DEFAULT_UNUSED;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.EXIT_UNUSED;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_HAS_NO_EFFECT;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.FEATURE_CALL_TO_SCOPE;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.IN_OUT_DECLARATIONS;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_DECLARATIONS;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.LOCAL_REACTIONS_NOT_ALLOWED;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.ONLY_ONE_INTERFACE;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.REGION_UNBOUND_DEFAULT_ENTRY_POINT;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_ENTRY_SPEC_NOT_COMPOSITE;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_EXIT_SPEC_NOT_COMPOSITE;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_NOT_EXISTING_NAMED_EXIT_POINT;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT;
-import static org.yakindu.sct.model.stext.validation.STextJavaValidator.EXITPOINTSPEC_WITH_TRIGGER;
 import static org.yakindu.sct.test.models.AbstractTestModelsUtil.VALIDATION_TESTMODEL_DIR;
 
 import java.lang.reflect.Method;
@@ -41,6 +25,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.AssertableDiagnostics;
@@ -74,6 +59,7 @@ import org.yakindu.sct.model.stext.stext.impl.StextFactoryImpl;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.validation.STextJavaValidator;
+import org.yakindu.sct.model.stext.validation.STextValidationMessages;
 import org.yakindu.sct.test.models.AbstractTestModelsUtil;
 
 import com.google.common.base.Predicate;
@@ -88,7 +74,7 @@ import com.google.inject.Injector;
  */
 @RunWith(XtextRunner.class)
 @InjectWith(STextInjectorProvider.class)
-public class STextJavaValidatorTest extends AbstractSTextTest {
+public class STextJavaValidatorTest extends AbstractSTextTest implements STextValidationMessages {
 
 	@Inject
 	private STextJavaValidator validator;
@@ -569,6 +555,15 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, EXITPOINTSPEC_WITH_TRIGGER);
 	}
+	
+	@Test
+	public void checkAssignmentToFinalVariable() {
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "AssignmentToValue.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics, ASSIGNMENT_TO_VALUE);
+	}
 
 	/**
 	 * Show warning when transition has no guard
@@ -679,24 +674,24 @@ public class STextJavaValidatorTest extends AbstractSTextTest {
 		return trans;
 	}
 
-	protected void assertError(BasicDiagnostic diag, String message) {
+	protected void assertError(Diagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
 		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
 		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR, d.getSeverity());
 	}
 
-	protected void assertWarning(BasicDiagnostic diag, String message) {
+	protected void assertWarning(Diagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
 		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
 		assertEquals("Issue '" + message + "' is no warning.", Diagnostic.WARNING, d.getSeverity());
 	}
 
-	protected void assertIssueCount(BasicDiagnostic diag, int count) {
+	protected void assertIssueCount(Diagnostic diag, int count) {
 		int c = diag.getChildren().size();
 		assertEquals("expected " + count + " issue(s) but were " + c + " [" + diag.toString() + "]", count, c);
 	}
 
-	protected Diagnostic issueByName(BasicDiagnostic diag, String message) {
+	protected Diagnostic issueByName(Diagnostic diag, String message) {
 		for (Diagnostic issue : diag.getChildren()) {
 			if (message.equals(issue.getMessage()))
 				return issue;
