@@ -60,9 +60,9 @@ public abstract class AbstractExecutionFlowTest {
 		return (Boolean) variable.getValue();
 	}
 
-	protected Float getReal(String varName) {
+	protected Double getReal(String varName) {
 		ExecutionVariable variable = context().getVariable(varName);
-		return (Float) variable.getValue();
+		return (Double) variable.getValue();
 	}
 
 	protected String getString(String varName) {
