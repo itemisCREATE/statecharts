@@ -64,6 +64,7 @@ class ModelSequencer implements IModelSequencer {
 		ef.defineStatechartExitSequence(sc)
 
 		ef.defineStatechartInitSequence(sc)
+		ef.defineStatechartStaticInitSequence(sc)
 		
 		sc.mapTransitions(ef)
 		sc.mapEntries(ef)
