@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getHistoryVector <em>History Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getExitAction <em>Exit Action</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStaticInitSequence <em>Static Init Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -156,5 +157,31 @@ public interface ExecutionFlow extends ScopedElement, ExecutionScope, ExecutionN
 	 * @generated
 	 */
 	void setExitAction(Step value);
+
+	/**
+	 * Returns the value of the '<em><b>Static Init Sequence</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Static Init Sequence</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Static Init Sequence</em>' containment reference.
+	 * @see #setStaticInitSequence(Sequence)
+	 * @see org.yakindu.sct.model.sexec.SexecPackage#getExecutionFlow_StaticInitSequence()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Sequence getStaticInitSequence();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.model.sexec.ExecutionFlow#getStaticInitSequence <em>Static Init Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Static Init Sequence</em>' containment reference.
+	 * @see #getStaticInitSequence()
+	 * @generated
+	 */
+	void setStaticInitSequence(Sequence value);
 
 } // ExecutionFlow

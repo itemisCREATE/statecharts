@@ -439,6 +439,25 @@ class SequenceBuilder {
 	}
 
 	/**
+	 * Defines the sequence of static initialization steps for constant values. 
+	 * 
+	 * These steps basically include the initialization of constants.
+	 */
+	def defineStatechartStaticInitSequence(ExecutionFlow flow, Statechart sc) {
+
+		val initSequence = sexec.factory.createSequence
+		initSequence.name = "staticInit"
+		initSequence.comment = "The statecharts init sequence for constants." + sc.name
+	
+		for (VariableDefinition vd : flow.getVariablesForInitSequence(true)) {
+			initSequence.addVariableInitializationStep(vd)
+		}
+
+		flow.staticInitSequence = initSequence
+		return initSequence
+	}
+	
+	/**
 	 * Defines the sequence of initialization steps. 
 	 * 
 	 * These steps basically include the initialization of variables.
@@ -449,7 +468,7 @@ class SequenceBuilder {
 		initSequence.name = "init"
 		initSequence.comment = "Default init sequence for statechart " + sc.name
 	
-		for (VariableDefinition vd : flow.getVariablesForInitSequence) {
+		for (VariableDefinition vd : flow.getVariablesForInitSequence(false)) {
 			initSequence.addVariableInitializationStep(vd)
 		}
 
@@ -457,8 +476,8 @@ class SequenceBuilder {
 		return initSequence
 	}
 	
-	protected def getVariablesForInitSequence(ExecutionFlow flow) {
-		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition))
+	protected def getVariablesForInitSequence(ExecutionFlow flow, boolean const) {
+		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition)).filter(v | v.writeable == const)
 		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(d|d.declaration).filter(typeof(VariableDefinition))
 		return statechartVariables + importedVariables
 	}

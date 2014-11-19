@@ -57,6 +57,7 @@ import org.yakindu.sct.model.sgraph.impl.ScopedElementImpl;
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getHistoryVector <em>History Vector</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getEntryAction <em>Entry Action</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getExitAction <em>Exit Action</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sexec.impl.ExecutionFlowImpl#getStaticInitSequence <em>Static Init Sequence</em>}</li>
  * </ul>
  * </p>
  *
@@ -252,6 +253,16 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * @ordered
 	 */
 	protected Step exitAction;
+
+	/**
+	 * The cached value of the '{@link #getStaticInitSequence() <em>Static Init Sequence</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getStaticInitSequence()
+	 * @generated
+	 * @ordered
+	 */
+	protected Sequence staticInitSequence;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -714,6 +725,49 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Sequence getStaticInitSequence() {
+		return staticInitSequence;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetStaticInitSequence(Sequence newStaticInitSequence, NotificationChain msgs) {
+		Sequence oldStaticInitSequence = staticInitSequence;
+		staticInitSequence = newStaticInitSequence;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE, oldStaticInitSequence, newStaticInitSequence);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setStaticInitSequence(Sequence newStaticInitSequence) {
+		if (newStaticInitSequence != staticInitSequence) {
+			NotificationChain msgs = null;
+			if (staticInitSequence != null)
+				msgs = ((InternalEObject)staticInitSequence).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE, null, msgs);
+			if (newStaticInitSequence != null)
+				msgs = ((InternalEObject)newStaticInitSequence).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE, null, msgs);
+			msgs = basicSetStaticInitSequence(newStaticInitSequence, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE, newStaticInitSequence, newStaticInitSequence));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<Reaction> getReactions() {
 		if (reactions == null) {
 			reactions = new EObjectContainmentEList<Reaction>(Reaction.class, this, SexecPackage.EXECUTION_FLOW__REACTIONS);
@@ -840,6 +894,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return basicSetEntryAction(null, msgs);
 			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
 				return basicSetExitAction(null, msgs);
+			case SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE:
+				return basicSetStaticInitSequence(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -888,6 +944,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return getEntryAction();
 			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
 				return getExitAction();
+			case SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE:
+				return getStaticInitSequence();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -958,6 +1016,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
 				setExitAction((Step)newValue);
 				return;
+			case SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE:
+				setStaticInitSequence((Sequence)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -1021,6 +1082,9 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
 				setExitAction((Step)null);
 				return;
+			case SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE:
+				setStaticInitSequence((Sequence)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -1067,6 +1131,8 @@ public class ExecutionFlowImpl extends ScopedElementImpl implements ExecutionFlo
 				return entryAction != null;
 			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
 				return exitAction != null;
+			case SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE:
+				return staticInitSequence != null;
 		}
 		return super.eIsSet(featureID);
 	}
