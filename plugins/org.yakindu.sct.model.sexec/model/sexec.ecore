@@ -17,6 +17,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="exitAction" eType="#//Step"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="staticInitSequence" eType="#//Sequence"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionNode" eSuperTypes="#//MappedElement ../../org.yakindu.base.types/model/base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="reactions" upperBound="-1"
