@@ -81,9 +81,24 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Inject
 	private Injector injector;
 	private ValidatorTester<STextJavaValidator> tester;
+	protected BasicDiagnostic diagnostics;
+	protected SGraphFactory factory;
+	protected Statechart statechart;
+	protected StextResource resource;
+
+	public STextJavaValidatorTest() {
+	}
 
 	@Before
 	public void setup() {
+		factory = SGraphFactory.eINSTANCE;
+
+		resource = new StextResource(URI.createURI(""));
+		injector.injectMembers(resource);
+		statechart = factory.createStatechart();
+		resource.getContents().add(statechart);
+
+		diagnostics = new BasicDiagnostic();
 		tester = new ValidatorTester<STextJavaValidator>(validator, injector);
 	}
 
@@ -97,10 +112,11 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	 */
 	@Test
 	public void checkVariableDefinition() {
-		Scope context = (Scope) parseExpression("interface if : var i : void", null,
-				InterfaceScope.class.getSimpleName());
+		Scope context = (Scope) parseExpression("interface if : var i : void",
+				null, InterfaceScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
-		validationResult.assertErrorContains(STextJavaValidator.VARIABLE_VOID_TYPE);
+		validationResult
+				.assertErrorContains(STextJavaValidator.VARIABLE_VOID_TYPE);
 	}
 
 	/**
@@ -109,23 +125,29 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Test
 	public void checkAssignmentExpression() {
 
-		Scope context = (Scope) parseExpression("interface: var i : integer = 42 var j : integer =23", null,
+		Scope context = (Scope) parseExpression(
+				"interface: var i : integer = 42 var j : integer =23", null,
 				InterfaceScope.class.getSimpleName());
 
-		EObject expression = super.parseExpression("i += (i+=3) +4", context, Expression.class.getSimpleName());
+		EObject expression = super.parseExpression("i += (i+=3) +4", context,
+				Expression.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.ASSIGNMENT_EXPRESSION);
+		validationResult
+				.assertErrorContains(STextJavaValidator.ASSIGNMENT_EXPRESSION);
 
-		expression = super.parseExpression("i += (j+=3) +4", context, Expression.class.getSimpleName());
+		expression = super.parseExpression("i += (j+=3) +4", context,
+				Expression.class.getSimpleName());
 		validationResult = tester.validate(expression);
 		validationResult.assertOK();
 	}
 
 	@Test
 	public void checkTimeEventSpecValueExpression() {
-		EObject expression = super.parseExpression("after true s", ReactionTrigger.class.getSimpleName());
+		EObject expression = super.parseExpression("after true s",
+				ReactionTrigger.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.TIME_EXPRESSION);
+		validationResult
+				.assertErrorContains(STextJavaValidator.TIME_EXPRESSION);
 	}
 
 	@Test
@@ -137,40 +159,52 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	public void checkLeftHandAssignment() {
 
 		Scope scope = (Scope) parseExpression(
-				"interface if : operation myOperation() : boolean event Event1 : boolean var myVar : boolean", null,
-				InterfaceScope.class.getSimpleName());
+				"interface if : operation myOperation() : boolean event Event1 : boolean var myVar : boolean",
+				null, InterfaceScope.class.getSimpleName());
 
-		EObject model = super.parseExpression("3 = 3", Expression.class.getSimpleName(), scope);
+		EObject model = super.parseExpression("3 = 3",
+				Expression.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult
+				.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
 
 		// Check for referenced elements in interface
-		model = super.parseExpression("if.myOperation() = true", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("if.myOperation() = true",
+				Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult
+				.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
 
-		model = super.parseExpression("if.Event1 = true", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("if.Event1 = true",
+				Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult
+				.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
 
-		model = super.parseExpression("if.myVar = true", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("if.myVar = true",
+				Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
 
 		// check for internal referenced elements
 		scope = (Scope) parseExpression(
-				"internal : operation myOperation() : integer event Event1 : integer var myVar : integer", null,
-				InternalScope.class.getSimpleName());
+				"internal : operation myOperation() : integer event Event1 : integer var myVar : integer",
+				null, InternalScope.class.getSimpleName());
 
-		model = super.parseExpression("myOperation() = 5", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("myOperation() = 5",
+				Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult
+				.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
 
-		model = super.parseExpression("Event1 = 3", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("Event1 = 3",
+				Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
-		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
+		validationResult
+				.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
 
-		model = super.parseExpression("myVar = 5", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("myVar = 5",
+				Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
 
@@ -182,9 +216,10 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Test
 	public void checkOperationArguments_FeatureCall() {
 		Scope scope = (Scope) parseExpression(
-				"interface if : operation myOperation(param1 : integer, param2: boolean)", null,
-				InterfaceScope.class.getSimpleName());
-		EObject model = super.parseExpression("if.myOperation(5,true)", Expression.class.getSimpleName(), scope);
+				"interface if : operation myOperation(param1 : integer, param2: boolean)",
+				null, InterfaceScope.class.getSimpleName());
+		EObject model = super.parseExpression("if.myOperation(5,true)",
+				Expression.class.getSimpleName(), scope);
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
@@ -195,7 +230,8 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Test
 	public void checkOperationArguments_TypedElementReferenceExpression() {
 		Scope context = createInternalScope("internal: operation myOperation(param1 : integer, param2: boolean)");
-		EObject model = super.parseExpression("myOperation(5,true)", context, Expression.class.getSimpleName());
+		EObject model = super.parseExpression("myOperation(5,true)", context,
+				Expression.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
@@ -205,16 +241,21 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	 */
 	@Test
 	public void checkGuard() {
-		EObject expression = super.parseExpression("[3 * 3]", ReactionTrigger.class.getSimpleName());
+		EObject expression = super.parseExpression("[3 * 3]",
+				ReactionTrigger.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
+		validationResult
+				.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
 
 		Scope context = createInternalScope("internal: var myInt : integer var myBool : boolean = true)");
-		expression = super.parseExpression("[myInt = 5]", context, ReactionTrigger.class.getSimpleName());
+		expression = super.parseExpression("[myInt = 5]", context,
+				ReactionTrigger.class.getSimpleName());
 		validationResult = tester.validate(expression);
-		validationResult.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
+		validationResult
+				.assertErrorContains(STextJavaValidator.GUARD_EXPRESSION);
 
-		expression = super.parseExpression("[myInt <= 5 || !myBool ]", context, ReactionTrigger.class.getSimpleName());
+		expression = super.parseExpression("[myInt <= 5 || !myBool ]", context,
+				ReactionTrigger.class.getSimpleName());
 		validationResult = tester.validate(expression);
 		validationResult.assertOK();
 
@@ -226,18 +267,21 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	 */
 	@Test
 	public void checkFeatureCall() {
-		Scope context = (Scope) parseExpression("interface if : in event a : integer", null,
+		Scope context = (Scope) parseExpression(
+				"interface if : in event a : integer", null,
 				InterfaceScope.class.getSimpleName());
 		EObject model = super.parseExpression("if.a / raise if.a:1", context,
 				TransitionSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
 
-		model = super.parseExpression("if / raise if.a:1", context, TransitionSpecification.class.getSimpleName());
+		model = super.parseExpression("if / raise if.a:1", context,
+				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(FEATURE_CALL_TO_SCOPE);
 
-		model = super.parseExpression("if.a / raise if", context, TransitionSpecification.class.getSimpleName());
+		model = super.parseExpression("if.a / raise if", context,
+				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(FEATURE_CALL_TO_SCOPE);
 	}
@@ -249,22 +293,26 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Test
 	public void checkReactionTrigger() {
 		// ENTRY, EXIT not allowed in transitions
-		Scope context = (Scope) parseExpression("internal : event a : integer var myVar : integer", null,
+		Scope context = (Scope) parseExpression(
+				"internal : event a : integer var myVar : integer", null,
 				InternalScope.class.getSimpleName());
 		EObject model = super.parseExpression("entry / myVar = 5", context,
 				TransitionSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
 
-		model = super.parseExpression("exit / myVar = 5", context, TransitionSpecification.class.getSimpleName());
+		model = super.parseExpression("exit / myVar = 5", context,
+				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertError(LOCAL_REACTIONS_NOT_ALLOWED);
 
-		model = super.parseExpression("oncycle / myVar = 5", context, TransitionSpecification.class.getSimpleName());
+		model = super.parseExpression("oncycle / myVar = 5", context,
+				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
 
-		model = super.parseExpression("always / myVar = 5", context, TransitionSpecification.class.getSimpleName());
+		model = super.parseExpression("always / myVar = 5", context,
+				TransitionSpecification.class.getSimpleName());
 		validationResult = tester.validate(model);
 		validationResult.assertOK();
 	}
@@ -274,36 +322,45 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	 */
 	@Test
 	public void checkReactionEffectActions() {
-		Scope s1 = (InternalScope) parseExpression("internal : var a : integer event e operation o () : void", null,
-				InternalScope.class.getSimpleName());
-		Scope s2 = (InterfaceScope) parseExpression("interface if : var a : integer in event e operation o()", null,
-				InterfaceScope.class.getSimpleName());
+		Scope s1 = (InternalScope) parseExpression(
+				"internal : var a : integer event e operation o () : void",
+				null, InternalScope.class.getSimpleName());
+		Scope s2 = (InterfaceScope) parseExpression(
+				"interface if : var a : integer in event e operation o()",
+				null, InterfaceScope.class.getSimpleName());
 
-		EObject model = super.parseExpression("a", s1, ReactionEffect.class.getSimpleName());
+		EObject model = super.parseExpression("a", s1,
+				ReactionEffect.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
 
-		model = super.parseExpression("1+3", s1, ReactionEffect.class.getSimpleName());
+		model = super.parseExpression("1+3", s1,
+				ReactionEffect.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
 
-		model = super.parseExpression("valueof(e)", s1, ReactionEffect.class.getSimpleName());
+		model = super.parseExpression("valueof(e)", s1,
+				ReactionEffect.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
 
-		model = super.parseExpression("o()", s1, ReactionEffect.class.getSimpleName());
+		model = super.parseExpression("o()", s1,
+				ReactionEffect.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertOK();
 
-		model = super.parseExpression("if.a", s2, ReactionEffect.class.getSimpleName());
+		model = super.parseExpression("if.a", s2,
+				ReactionEffect.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
 
-		model = super.parseExpression("valueof(if.e)", s2, ReactionEffect.class.getSimpleName());
+		model = super.parseExpression("valueof(if.e)", s2,
+				ReactionEffect.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertError(FEATURE_CALL_HAS_NO_EFFECT);
 
-		model = super.parseExpression("if.o", s2, ReactionEffect.class.getSimpleName());
+		model = super.parseExpression("if.o", s2,
+				ReactionEffect.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertOK();
 
@@ -315,17 +372,20 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Test
 	public void checkEventDefinition() {
 		// No local declarations in interface scope
-		EObject model = super.parseExpression("interface MyInterface: event Event1", null,
+		EObject model = super.parseExpression(
+				"interface MyInterface: event Event1", null,
 				InterfaceScope.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertErrorContains(LOCAL_DECLARATIONS);
 		// No in declarations in internal scope
-		model = super.parseExpression("internal: in event Event1", null, InternalScope.class.getSimpleName());
+		model = super.parseExpression("internal: in event Event1", null,
+				InternalScope.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
 		result.assertErrorContains(STextJavaValidator.IN_OUT_DECLARATIONS);
 		// No out declarations in internal scope
-		model = super.parseExpression("internal: out event Event1", null, InternalScope.class.getSimpleName());
+		model = super.parseExpression("internal: out event Event1", null,
+				InternalScope.class.getSimpleName());
 		result = tester.validate(model);
 		result.assertDiagnosticsCount(1);
 		result.assertErrorContains(IN_OUT_DECLARATIONS);
@@ -336,11 +396,13 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	 */
 	@Test
 	public void checkInterfaceScope() {
-		EObject model = super.parseExpression("interface: in event event1 interface: in event event2", null,
+		EObject model = super.parseExpression(
+				"interface: in event event1 interface: in event event2", null,
 				StatechartSpecification.class.getSimpleName());
 		AssertableDiagnostics result = tester.validate(model);
 		result.assertDiagnosticsCount(2);
-		result.assertAll(errorCode(ONLY_ONE_INTERFACE), errorCode(ONLY_ONE_INTERFACE));
+		result.assertAll(errorCode(ONLY_ONE_INTERFACE),
+				errorCode(ONLY_ONE_INTERFACE));
 	}
 
 	/**
@@ -373,7 +435,8 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	 */
 	@Test
 	public void testAllChecksHaveTests() throws Exception {
-		Iterable<Method> methods = Lists.newArrayList(STextJavaValidator.class.getDeclaredMethods());
+		Iterable<Method> methods = Lists.newArrayList(STextJavaValidator.class
+				.getDeclaredMethods());
 		methods = Iterables.filter(methods, new Predicate<Method>() {
 			public boolean apply(Method input) {
 				return input.getAnnotation(Check.class) != null;
@@ -381,21 +444,24 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		});
 		for (Method checkMethod : methods) {
 			Method testMethod = getClass().getMethod(checkMethod.getName());
-			assertNotNull("Missing @Test Annotation for method " + checkMethod.getName(),
+			assertNotNull(
+					"Missing @Test Annotation for method "
+							+ checkMethod.getName(),
 					testMethod.getAnnotation(Test.class));
 		}
 	}
 
 	@Test
 	public void checkUnusedEntry() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedEntryPoint.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "UnusedEntryPoint.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Entry) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 		}
 
@@ -405,26 +471,31 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 
 	@Test
 	public void checkUnusedExit() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedExitPoint.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "UnusedExitPoint.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Exit) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 		}
 
 		assertIssueCount(diagnostics, 1);
 		assertError(diagnostics, EXIT_UNUSED);
 
-		diagnostics = new BasicDiagnostic();
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnusedDefaultExitPoint.sct");
+		resetDiagnostics();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "UnusedDefaultExitPoint.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Exit) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 		}
 
@@ -435,29 +506,32 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Test
 	public void checkTransitionPropertySpec() {
 		// Test source state isn't composite
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
-				+ "TransitionEntrySpecNotComposite.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "TransitionEntrySpecNotComposite.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
 			}
 		}
 		// Test target state isn't composite
 		assertIssueCount(diagnostics, 2);
 		assertWarning(diagnostics, TRANSITION_ENTRY_SPEC_NOT_COMPOSITE);
 
-		diagnostics = new BasicDiagnostic();
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
-				+ "TransitionExitSpecNotComposite.sct");
+		resetDiagnostics();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "TransitionExitSpecNotComposite.sct");
 		iter = statechart.eAllContents();
 
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
 			}
 		}
 
@@ -465,14 +539,16 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		assertWarning(diagnostics, TRANSITION_EXIT_SPEC_NOT_COMPOSITE);
 
 		// Test exit spec is used on multiple transition siblings.
-		diagnostics = new BasicDiagnostic();
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
-				+ "TransitionExitSpecOnMultipleSiblings.sct");
+		resetDiagnostics();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "TransitionExitSpecOnMultipleSiblings.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				assertTrue(validator.validate(element, diagnostics, new HashMap<Object, Object>()));
+				assertTrue(validator.validate(element, diagnostics,
+						new HashMap<Object, Object>()));
 			}
 		}
 
@@ -480,14 +556,16 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		assertWarning(diagnostics, TRANSITION_EXIT_SPEC_ON_MULTIPLE_SIBLINGS);
 
 		// Test transition unbound named exit point spec.
-		diagnostics = new BasicDiagnostic();
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
-				+ "TransitionNotExistingNamedExitPoint.sct");
+		resetDiagnostics();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "TransitionNotExistingNamedExitPoint.sct");
 		iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 		}
 
@@ -497,9 +575,9 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 
 	@Test
 	public void checkUnboundEntryPoints() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR
-				+ "UnboundDefaultEntryPoints.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "UnboundDefaultEntryPoints.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 
 		// create and add triggers to all transitions to prevent to trigger
@@ -511,10 +589,12 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 			EObject element = iter.next();
 			if (element instanceof Transition) {
 				((Transition) element).setTrigger(trigger);
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 			if (element instanceof State) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 		}
 
@@ -522,33 +602,38 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		assertError(diagnostics, TRANSITION_UNBOUND_DEFAULT_ENTRY_POINT);
 		assertError(diagnostics, REGION_UNBOUND_DEFAULT_ENTRY_POINT);
 
-		diagnostics = new BasicDiagnostic();
-		statechart = AbstractTestModelsUtil.loadStatechart(VALIDATION_TESTMODEL_DIR + "UnboundEntryPoints02.sct");
+		resetDiagnostics();
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "UnboundEntryPoints02.sct");
 		iter = statechart.eAllContents();
 
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
 				((Transition) element).setTrigger(trigger);
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 			if (element instanceof State) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 		}
 		assertIssueCount(diagnostics, 4);
 	}
-	
+
 	@Test
 	public void checkExitPointSpecWithTrigger() {
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
-		Statechart statechart = AbstractTestModelsUtil
-				.loadStatechart(VALIDATION_TESTMODEL_DIR + "NoTriggerOnTransitionWithExitPointSpec.sct");
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "NoTriggerOnTransitionWithExitPointSpec.sct");
 		Iterator<EObject> iter = statechart.eAllContents();
 		while (iter.hasNext()) {
 			EObject element = iter.next();
 			if (element instanceof Transition) {
-				validator.validate(element, diagnostics, new HashMap<Object, Object>());
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
 			}
 		}
 
@@ -580,11 +665,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Test
 	public void transitionsWithNoTrigger() {
 
-		StextResource resource = new StextResource(URI.createURI(""));
-		injector.injectMembers(resource);
-		SGraphFactory factory = SGraphFactory.eINSTANCE;
-		Statechart statechart = factory.createStatechart();
-		resource.getContents().add(statechart);
 		Region region = factory.createRegion();
 
 		// create vertices for main region
@@ -627,50 +707,85 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		region.getVertices().add(d);
 		statechart.getRegions().add(region);
 
-		BasicDiagnostic diagnostics = new BasicDiagnostic();
 		// transitions from entry point to State A -> valid model with no
 		// warnings
-		assertTrue(validator.validate(eToF, diagnostics, new HashMap<Object, Object>()));
+		assertTrue(validator.validate(eToF, diagnostics,
+				new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 0);
 
 		// transitions from entry point to State A -> valid model with no
 		// warnings
-		assertTrue(validator.validate(entryToA, diagnostics, new HashMap<Object, Object>()));
+		assertTrue(validator.validate(entryToA, diagnostics,
+				new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 0);
 
 		// transition from StateA to StateB -> valid model with warnings expect
 		// 1 warning in total
-		assertTrue(validator.validate(aToB, diagnostics, new HashMap<Object, Object>()));
+		assertTrue(validator.validate(aToB, diagnostics,
+				new HashMap<Object, Object>()));
 		assertIssueCount(diagnostics, 1);
+		resetDiagnostics();
 
 		// transition from EntryB to StateBB -> valid model with no warnings
 		// expect 1 warning in total
-		assertTrue(validator.validate(entryBToBB, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 1);
+		assertTrue(validator.validate(entryBToBB, diagnostics,
+				new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
 
 		// transition from BB to ExitB -> valid model with warnings expect 2
 		// warning in total
-		assertTrue(validator.validate(bbToExitB, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 2);
+		assertTrue(validator.validate(bbToExitB, diagnostics,
+				new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		resetDiagnostics();
 
 		// transition from B to C -> valid model with no warning warnings expect
 		// 2 warning in total
-		assertTrue(validator.validate(bToC, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 2);
+		assertTrue(validator.validate(bToC, diagnostics,
+				new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 0);
 
 		// transition from C to D -> valid model with warning warning expect 3
 		// warning in total
-		assertTrue(validator.validate(cToD, diagnostics, new HashMap<Object, Object>()));
-		assertIssueCount(diagnostics, 3);
+		assertTrue(validator.validate(cToD, diagnostics,
+				new HashMap<Object, Object>()));
+		assertIssueCount(diagnostics, 1);
+		resetDiagnostics();
 
 	}
-	
+
+	/**
+	 * The outgoing transitions of a sync (fork / join) node must not have any
+	 * trigger part. Thus empty transitions must not have any warning. This test
+	 * case addresses a bug #75 (
+	 * https://code.google.com/a/eclipselabs.org/p/yakindu/issues/detail?id=75 )
+	 * .
+	 */
+	@Test
+	public void validEmptyTransitionFromSync() {
+		statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR
+						+ "ValidEmptyTransitionFromSync.sct");
+		Iterator<EObject> iter = statechart.eAllContents();
+		while (iter.hasNext()) {
+			EObject element = iter.next();
+			if (element instanceof Transition) {
+				validator.validate(element, diagnostics,
+						new HashMap<Object, Object>());
+			}
+		}
+
+		assertIssueCount(diagnostics, 0);
+	}
+
 	@Test
 	public void checkImportExists() {
-		ImportScope importScope = (ImportScope) parseExpression("import: not.existing.*", null,
+		ImportScope importScope = (ImportScope) parseExpression(
+				"import: not.existing.*", null,
 				ImportScope.class.getSimpleName());
 
-		AssertableDiagnostics validationResult = tester.validate(importScope.getImports().get(0));
+		AssertableDiagnostics validationResult = tester.validate(importScope
+				.getImports().get(0));
 		validationResult.assertError(STextJavaValidator.IMPORT_NOT_RESOLVED);
 	}
 
@@ -685,19 +800,24 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 
 	protected void assertError(Diagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
-		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
-		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR, d.getSeverity());
+		assertNotNull("Issue '" + message + "' does not exist.",
+				issueByName(diag, message));
+		assertEquals("Issue '" + message + "' is no error.", Diagnostic.ERROR,
+				d.getSeverity());
 	}
 
 	protected void assertWarning(Diagnostic diag, String message) {
 		Diagnostic d = issueByName(diag, message);
-		assertNotNull("Issue '" + message + "' does not exist.", issueByName(diag, message));
-		assertEquals("Issue '" + message + "' is no warning.", Diagnostic.WARNING, d.getSeverity());
+		assertNotNull("Issue '" + message + "' does not exist.",
+				issueByName(diag, message));
+		assertEquals("Issue '" + message + "' is no warning.",
+				Diagnostic.WARNING, d.getSeverity());
 	}
 
 	protected void assertIssueCount(Diagnostic diag, int count) {
 		int c = diag.getChildren().size();
-		assertEquals("expected " + count + " issue(s) but were " + c + " [" + diag.toString() + "]", count, c);
+		assertEquals("expected " + count + " issue(s) but were " + c + " ["
+				+ diag.toString() + "]", count, c);
 	}
 
 	protected Diagnostic issueByName(Diagnostic diag, String message) {
@@ -706,5 +826,9 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 				return issue;
 		}
 		return null;
+	}
+
+	protected void resetDiagnostics() {
+		diagnostics = new BasicDiagnostic();
 	}
 }
