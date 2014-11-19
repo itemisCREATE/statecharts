@@ -28,6 +28,7 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getFqName <em>Fq Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#isWritable <em>Writable</em>}</li>
  * </ul>
  * </p>
  *
@@ -93,6 +94,26 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * @ordered
 	 */
 	protected String fqName = FQ_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isWritable() <em>Writable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWritable()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean WRITABLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isWritable() <em>Writable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWritable()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean writable = WRITABLE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -181,6 +202,27 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isWritable() {
+		return writable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWritable(boolean newWritable) {
+		boolean oldWritable = writable;
+		writable = newWritable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_SLOT__WRITABLE, oldWritable, writable));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -190,6 +232,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return getValue();
 			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
 				return getFqName();
+			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
+				return isWritable();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,6 +254,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return;
 			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
 				setFqName((String)newValue);
+				return;
+			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
+				setWritable((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -232,6 +279,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
 				setFqName(FQ_NAME_EDEFAULT);
 				return;
+			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
+				setWritable(WRITABLE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -250,6 +300,8 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
 				return FQ_NAME_EDEFAULT == null ? fqName != null : !FQ_NAME_EDEFAULT.equals(fqName);
+			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
+				return writable != WRITABLE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

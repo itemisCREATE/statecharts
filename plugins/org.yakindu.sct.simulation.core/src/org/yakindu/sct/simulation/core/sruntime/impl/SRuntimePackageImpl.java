@@ -287,6 +287,15 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getExecutionSlot_Writable() {
+		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getExecutionVariable() {
 		return executionVariableEClass;
 	}
@@ -397,6 +406,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__TYPE);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__VALUE);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__FQ_NAME);
+		createEAttribute(executionSlotEClass, EXECUTION_SLOT__WRITABLE);
 
 		executionVariableEClass = createEClass(EXECUTION_VARIABLE);
 
@@ -491,6 +501,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		initEAttribute(getExecutionSlot_Type(), this.getInferredType(), "type", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionSlot_Value(), this.getJavaObject(), "value", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionSlot_FqName(), ecorePackage.getEString(), "fqName", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExecutionSlot_Writable(), ecorePackage.getEBoolean(), "writable", "true", 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionVariableEClass, ExecutionVariable.class, "ExecutionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

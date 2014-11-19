@@ -114,13 +114,22 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_CONTEXT__FQ_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Writable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__WRITABLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SLOTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_CONTEXT__SLOTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Active States</b></em>' reference list.
@@ -129,7 +138,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__ACTIVE_STATES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
+	int EXECUTION_CONTEXT__ACTIVE_STATES = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Executed Elements</b></em>' reference list.
@@ -138,7 +147,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__EXECUTED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 5;
+	int EXECUTION_CONTEXT__EXECUTED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Suspended Elements</b></em>' reference list.
@@ -147,7 +156,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SUSPENDED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 6;
+	int EXECUTION_CONTEXT__SUSPENDED_ELEMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Snapshot</b></em>' attribute.
@@ -156,7 +165,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__SNAPSHOT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 7;
+	int EXECUTION_CONTEXT__SNAPSHOT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
 
 	/**
 	 * The number of structural features of the '<em>Execution Context</em>' class.
@@ -165,7 +174,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 8;
+	int EXECUTION_CONTEXT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl <em>Execution Slot</em>}' class.
@@ -214,13 +223,22 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_SLOT__FQ_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Writable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SLOT__WRITABLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Execution Slot</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SLOT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_SLOT_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl <em>Execution Event</em>}' class.
@@ -267,6 +285,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_EVENT__FQ_NAME = EXECUTION_SLOT__FQ_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Writable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_EVENT__WRITABLE = EXECUTION_SLOT__WRITABLE;
 
 	/**
 	 * The feature id for the '<em><b>Raised</b></em>' attribute.
@@ -351,6 +378,15 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_VARIABLE__FQ_NAME = EXECUTION_SLOT__FQ_NAME;
 
 	/**
+	 * The feature id for the '<em><b>Writable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_VARIABLE__WRITABLE = EXECUTION_SLOT__WRITABLE;
+
+	/**
 	 * The number of structural features of the '<em>Execution Variable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -404,6 +440,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_SLOT__FQ_NAME = EXECUTION_SLOT__FQ_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Writable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_SLOT__WRITABLE = EXECUTION_SLOT__WRITABLE;
 
 	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
@@ -468,6 +513,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE_SLOT__FQ_NAME = COMPOSITE_SLOT__FQ_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Writable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__WRITABLE = COMPOSITE_SLOT__WRITABLE;
 
 	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
@@ -667,6 +721,17 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getExecutionSlot_FqName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#isWritable <em>Writable</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Writable</em>'.
+	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#isWritable()
+	 * @see #getExecutionSlot()
+	 * @generated
+	 */
+	EAttribute getExecutionSlot_Writable();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionVariable <em>Execution Variable</em>}'.
@@ -883,6 +948,14 @@ public interface SRuntimePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute EXECUTION_SLOT__FQ_NAME = eINSTANCE.getExecutionSlot_FqName();
+
+		/**
+		 * The meta object literal for the '<em><b>Writable</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EXECUTION_SLOT__WRITABLE = eINSTANCE.getExecutionSlot_Writable();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl <em>Execution Variable</em>}' class.
