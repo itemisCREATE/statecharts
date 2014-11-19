@@ -449,7 +449,7 @@ class SequenceBuilder {
 		initSequence.name = "staticInit"
 		initSequence.comment = "The statecharts init sequence for constants." + sc.name
 	
-		for (VariableDefinition vd : flow.getVariablesForInitSequence(true)) {
+		for (VariableDefinition vd : flow.getVariablesForInitSequence(false)) {
 			initSequence.addVariableInitializationStep(vd)
 		}
 
@@ -468,7 +468,7 @@ class SequenceBuilder {
 		initSequence.name = "init"
 		initSequence.comment = "Default init sequence for statechart " + sc.name
 	
-		for (VariableDefinition vd : flow.getVariablesForInitSequence(false)) {
+		for (VariableDefinition vd : flow.getVariablesForInitSequence(true)) {
 			initSequence.addVariableInitializationStep(vd)
 		}
 
