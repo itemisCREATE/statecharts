@@ -48,7 +48,9 @@ class Statemachine {
 		public class «flow.statemachineClassName» implements «flow.statemachineInterfaceName» {
 			
 			«flow.createFieldDeclarations(entry)»
-			
+		
+			«flow.createStaticInitializer(entry)»
+				
 			«flow.createConstructor»
 			
 			«flow.initFunction»
@@ -137,6 +139,15 @@ class Statemachine {
 		«ENDIF»
 		«ENDFOR»
 	'''
+	
+	def private createStaticInitializer(ExecutionFlow flow, GeneratorEntry entry){
+		if(flow.staticInitSequence == null) return null
+		'''
+		static {
+			«flow.staticInitSequence?.code»
+		}
+		'''
+	}
 	
 	def private writeableFieldDeclaration(VariableDefinition variable){
 		'''private «variable.type.targetLanguageName» «variable.symbol»;'''
