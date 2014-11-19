@@ -106,19 +106,29 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if(ts.isRealType(type)) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
+	def dispatch Object typeCast(Boolean value, Type type) {
+		if(ts.isBooleanType(type)) return value
+		throw new IllegalArgumentException
+	}
+	
+	def dispatch Object typeCast(String value, Type type) {
+		if(ts.isStringType(type)) return value
+		throw new IllegalArgumentException
+	}
 
 	def dispatch Object typeCast(Object value, Type type) {
-		throw new IllegalArgumentException("Invalid cast")
+		throw new IllegalArgumentException("Invalid cast " + value.class + " to " + type.name)
 	}
 
 	def Object executeAssignment(AssignmentExpression assignment) {
 		var scopeVariable = context.resolve(assignment.varRef)
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
-			scopeVariable.value = result
+			//Strong typing, use the type of the scopeVariable instead of using new runtime type
+			scopeVariable.value = typeCast(result, scopeVariable.type.type)
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
-			scopeVariable.value = evaluate(operator, scopeVariable.getValue, result)
+			scopeVariable.value = typeCast(evaluate(operator, scopeVariable.getValue, result),scopeVariable.type.type)
 		}
 		scopeVariable.value
 	}
@@ -295,7 +305,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch valueLiteral(HexLiteral literal) {
-		return literal.value
+		return literal.value as long
 	}
 
 	def dispatch valueLiteral(BoolLiteral bool) {
