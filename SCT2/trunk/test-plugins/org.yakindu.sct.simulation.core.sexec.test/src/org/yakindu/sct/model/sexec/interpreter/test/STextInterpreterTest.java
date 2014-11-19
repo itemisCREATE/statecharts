@@ -58,7 +58,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testHexVariableAssignment() {
 		executeWithDefaultScope("intVar = 0xFF");
-		assertEquals(0xFF, getIntValue());
+		assertEquals(0xFFL, getIntValue());
 	}
 
 	@Test
@@ -124,20 +124,20 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Test
 	public void testBitwiseXor() {
 		executeWithDefaultScope("intVar = 0xF0F0 ^ 0xFF00");
-		assertEquals(0x0FF0, getContext().getVariable("intVar").getValue());
+		assertEquals(0x0FF0L, getContext().getVariable("intVar").getValue());
 
 	}
 
 	@Test
 	public void testBitwiseOr() {
 		executeWithDefaultScope("intVar = 0xF0F0 | 0xFFFF");
-		assertEquals(0xFFFF, getContext().getVariable("intVar").getValue());
+		assertEquals(0xFFFFL, getContext().getVariable("intVar").getValue());
 	}
 
 	@Test
 	public void testBitwiseAnd() {
 		executeWithDefaultScope("intVar = 0xF0F0 & 0xFFFF");
-		assertEquals(0x0F0F0, getContext().getVariable("intVar").getValue());
+		assertEquals(0x0F0F0L, getContext().getVariable("intVar").getValue());
 	}
 
 	@Test

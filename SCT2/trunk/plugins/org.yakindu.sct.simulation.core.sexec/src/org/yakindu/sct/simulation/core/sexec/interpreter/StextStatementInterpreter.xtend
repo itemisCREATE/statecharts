@@ -106,11 +106,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		if(ts.isRealType(type)) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
+
 	def dispatch Object typeCast(Boolean value, Type type) {
 		if(ts.isBooleanType(type)) return value
 		throw new IllegalArgumentException
 	}
-	
+
 	def dispatch Object typeCast(String value, Type type) {
 		if(ts.isStringType(type)) return value
 		throw new IllegalArgumentException
@@ -124,11 +125,13 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		var scopeVariable = context.resolve(assignment.varRef)
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
+
 			//Strong typing, use the type of the scopeVariable instead of using new runtime type
-			scopeVariable.value = typeCast(result, scopeVariable.type.type)
+			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type.type) else null
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
-			scopeVariable.value = typeCast(evaluate(operator, scopeVariable.getValue, result),scopeVariable.type.type)
+			scopeVariable.value = if(result != null) typeCast(evaluate(operator, scopeVariable.getValue, result),
+				scopeVariable.type.type) else null
 		}
 		scopeVariable.value
 	}
