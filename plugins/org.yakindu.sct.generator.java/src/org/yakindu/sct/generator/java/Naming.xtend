@@ -109,7 +109,7 @@ class Naming implements JavaKeywords {
 	}
 	
 	def dispatch getSymbol(VariableDefinition it){
-		if(writeable) name.asEscapedIdentifier else name.asEscapedIdentifier.toUpperCase
+		if(writeable) name.asEscapedIdentifier else name.asEscapedIdentifier
 	}
 	def dispatch getSymbol(EventDefinition it){
 		name.asEscapedIdentifier
@@ -141,7 +141,7 @@ class Naming implements JavaKeywords {
 	}
 	
 	def asIdentifier(String it) {
-		replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', '_').toFirstLower
+		replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', '_')
 	}
 	
 	def asName(String it) {
