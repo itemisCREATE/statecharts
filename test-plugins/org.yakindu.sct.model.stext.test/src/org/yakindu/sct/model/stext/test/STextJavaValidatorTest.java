@@ -564,6 +564,15 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		assertIssueCount(diagnostics, 2);
 		assertError(diagnostics, ASSIGNMENT_TO_VALUE);
 	}
+	
+	@Test
+	public void checkValueDefinitionExpression() {
+		Statechart statechart = AbstractTestModelsUtil
+				.loadStatechart(VALIDATION_TESTMODEL_DIR + "ValueWithVariable.sct");
+		Diagnostic diagnostics = Diagnostician.INSTANCE.validate(statechart);
+		assertIssueCount(diagnostics, 2);
+		assertError(diagnostics, REFERENCE_TO_VARIABLE);
+	}
 
 	/**
 	 * Show warning when transition has no guard
