@@ -84,7 +84,10 @@ public class ExecutionContextLabelProvider extends StyledCellLabelProvider {
 		} else if (element instanceof ExecutionVariable) {
 			ExecutionVariable variable = (ExecutionVariable) element;
 			cell.setText(variable.getName());
-			cell.setImage(SimulationImages.VARIABLE.image());
+			if (((ExecutionVariable) element).isWritable())
+				cell.setImage(SimulationImages.VARIABLE.image());
+			else
+				cell.setImage(SimulationImages.VARIABLE_LOCK.image());
 		} else if (element instanceof CompositeSlot) {
 			cell.setText(((CompositeSlot) element).getName());
 			cell.setImage(SimulationImages.SCOPE.image());

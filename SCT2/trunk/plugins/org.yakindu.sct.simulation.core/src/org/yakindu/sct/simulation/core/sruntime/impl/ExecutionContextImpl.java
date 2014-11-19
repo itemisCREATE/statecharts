@@ -50,6 +50,7 @@ import com.google.common.collect.Sets;
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getFqName <em>Fq Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#isWritable <em>Writable</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getSlots <em>Slots</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getActiveStates <em>Active States</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getExecutedElements <em>Executed Elements</em>}</li>
@@ -116,6 +117,26 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * @ordered
 	 */
 	protected String fqName = FQ_NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isWritable() <em>Writable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWritable()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean WRITABLE_EDEFAULT = true;
+
+	/**
+	 * The cached value of the '{@link #isWritable() <em>Writable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isWritable()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean writable = WRITABLE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getSlots() <em>Slots</em>}' containment reference list.
@@ -249,6 +270,27 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		fqName = newFqName;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME, oldFqName, fqName));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isWritable() {
+		return writable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWritable(boolean newWritable) {
+		boolean oldWritable = writable;
+		writable = newWritable;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_CONTEXT__WRITABLE, oldWritable, writable));
 	}
 
 	/**
@@ -509,6 +551,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return getValue();
 			case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME:
 				return getFqName();
+			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
+				return isWritable();
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				return getSlots();
 			case SRuntimePackage.EXECUTION_CONTEXT__ACTIVE_STATES:
@@ -539,6 +583,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME:
 				setFqName((String)newValue);
+				return;
+			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
+				setWritable((Boolean)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				getSlots().clear();
@@ -579,6 +626,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 			case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME:
 				setFqName(FQ_NAME_EDEFAULT);
 				return;
+			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
+				setWritable(WRITABLE_EDEFAULT);
+				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				getSlots().clear();
 				return;
@@ -611,6 +661,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME:
 				return FQ_NAME_EDEFAULT == null ? fqName != null : !FQ_NAME_EDEFAULT.equals(fqName);
+			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
+				return writable != WRITABLE_EDEFAULT;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				return slots != null && !slots.isEmpty();
 			case SRuntimePackage.EXECUTION_CONTEXT__ACTIVE_STATES:
@@ -636,6 +688,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				case SRuntimePackage.EXECUTION_CONTEXT__TYPE: return SRuntimePackage.EXECUTION_SLOT__TYPE;
 				case SRuntimePackage.EXECUTION_CONTEXT__VALUE: return SRuntimePackage.EXECUTION_SLOT__VALUE;
 				case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME: return SRuntimePackage.EXECUTION_SLOT__FQ_NAME;
+				case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE: return SRuntimePackage.EXECUTION_SLOT__WRITABLE;
 				default: return -1;
 			}
 		}
@@ -659,6 +712,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				case SRuntimePackage.EXECUTION_SLOT__TYPE: return SRuntimePackage.EXECUTION_CONTEXT__TYPE;
 				case SRuntimePackage.EXECUTION_SLOT__VALUE: return SRuntimePackage.EXECUTION_CONTEXT__VALUE;
 				case SRuntimePackage.EXECUTION_SLOT__FQ_NAME: return SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME;
+				case SRuntimePackage.EXECUTION_SLOT__WRITABLE: return SRuntimePackage.EXECUTION_CONTEXT__WRITABLE;
 				default: return -1;
 			}
 		}
@@ -686,6 +740,8 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		result.append(value);
 		result.append(", fqName: ");
 		result.append(fqName);
+		result.append(", writable: ");
+		result.append(writable);
 		result.append(", snapshot: ");
 		result.append(snapshot);
 		result.append(')');

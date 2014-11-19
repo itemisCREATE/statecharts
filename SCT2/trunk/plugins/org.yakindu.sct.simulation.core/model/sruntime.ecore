@@ -35,6 +35,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//InferredType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//JavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="writable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="InferredType" instanceClassName="org.yakindu.base.types.InferredType"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionVariable" eSuperTypes="#//ExecutionSlot"/>

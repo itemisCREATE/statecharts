@@ -9,9 +9,9 @@ Bundle-Vendor: statecharts.org
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.debug.core;visibility:=reexport,
- org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,
- org.yakindu.sct.model.sgraph,
+ org.yakindu.sct.model.sgraph;visibility:=reexport,
  org.eclipse.jdt.debug,
  com.google.guava;bundle-version="10.0.1",
  org.eclipse.emf.workspace;bundle-version="1.5.1",

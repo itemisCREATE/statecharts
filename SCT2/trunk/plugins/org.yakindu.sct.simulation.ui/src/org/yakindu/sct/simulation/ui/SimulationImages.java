@@ -31,8 +31,10 @@ public enum SimulationImages {
 	
 	BREAKPOINT_DISABLED("icons/brkpd_obj.gif"),
 
-	LAUNCHER_ICON("icons/Statechart-Launcher-16.png");
-
+	LAUNCHER_ICON("icons/Statechart-Launcher-16.png"), 
+	
+	VARIABLE_LOCK("icons/Variable_lock.gif");
+	
 	private final String path;
 
 	private SimulationImages(String path) {

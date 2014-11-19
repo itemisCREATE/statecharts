@@ -32,6 +32,8 @@ public abstract class ScopeSlotEditingSupport extends PublicEditingSupport {
 	@Override
 	public boolean canEdit(Object element) {
 		if (element instanceof ExecutionSlot) {
+			if(!((ExecutionSlot) element).isWritable())
+				return false;
 			Object value = ((ExecutionSlot) element).getValue();
 			if (value == null) {
 				return false;

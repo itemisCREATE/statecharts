@@ -24,6 +24,7 @@ import org.yakindu.base.types.InferredType;
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getFqName <em>Fq Name</em>}</li>
+ *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#isWritable <em>Writable</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,5 +110,32 @@ public interface ExecutionSlot extends NamedElement {
 	 * @generated
 	 */
 	void setFqName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Writable</b></em>' attribute.
+	 * The default value is <code>"true"</code>.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Writable</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Writable</em>' attribute.
+	 * @see #setWritable(boolean)
+	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionSlot_Writable()
+	 * @model default="true"
+	 * @generated
+	 */
+	boolean isWritable();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#isWritable <em>Writable</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Writable</em>' attribute.
+	 * @see #isWritable()
+	 * @generated
+	 */
+	void setWritable(boolean value);
 
 } // ExecutionSlot

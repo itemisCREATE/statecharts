@@ -114,6 +114,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.fqName = variable.fullyQualifiedName.toString
 		it.type = variable.inferType.type
 		it.value = it.type.initialValue
+		it.writable = variable.writeable
 	}
 
 	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(EventDefinition event) {
