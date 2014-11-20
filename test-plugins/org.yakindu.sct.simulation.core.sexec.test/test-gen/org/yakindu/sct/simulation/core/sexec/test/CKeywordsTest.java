@@ -39,7 +39,7 @@ public class CKeywordsTest extends AbstractExecutionFlowTest {
 		assertTrue(isActive("char"));
 		raiseEvent("auto");
 		interpreter.runCycle();
-		assertTrue(isActive("const"));
+		assertTrue(isActive("loop"));
 		assertTrue(isActive("case"));
 		assertTrue(isActive("asm"));
 	}
