@@ -15,19 +15,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.yakindu.scr.ckeywords.CKeywordsStatemachine;
-import org.yakindu.scr.ckeywords.CKeywordsStatemachine.State;
+import org.yakindu.scr.constants.ConstantsStatemachine;
+import org.yakindu.scr.constants.ConstantsStatemachine.State;
 /**
- *  Unit TestCase for CKeywords
+ *  Unit TestCase for Constants
  */
 @SuppressWarnings("all")
-public class CKeywordsTest {
+public class ConstantsTestsTest {
 
-	private CKeywordsStatemachine statemachine;
+	private ConstantsStatemachine statemachine;
 
 	@Before
 	public void setUp() {
-		statemachine = new CKeywordsStatemachine();
+		statemachine = new ConstantsStatemachine();
 		statemachine.init();
 	}
 
@@ -37,14 +37,14 @@ public class CKeywordsTest {
 	}
 
 	@Test
-	public void testCKeywordsTest() {
+	public void testconstantDefinition() {
 		statemachine.enter();
-		assertTrue(statemachine.isStateActive(State.auto_char));
-		statemachine.raiseAuto();
+		assertTrue(statemachine.isStateActive(State.main_region_A));
+		assertTrue(statemachine.getX() == 10);
+		assertTrue(statemachine.getY() == 20);
+		assertTrue(statemachine.getSCINamed().getY().equals("Hello World"));
+		statemachine.raiseE();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.auto_loop));
-		assertTrue(statemachine.isStateActive(State.auto_loop_switch_case));
-		assertTrue(statemachine
-				.isStateActive(State.auto_loop_switch_case_enum_asm));
+		assertTrue(statemachine.getResult() == 20);
 	}
 }
