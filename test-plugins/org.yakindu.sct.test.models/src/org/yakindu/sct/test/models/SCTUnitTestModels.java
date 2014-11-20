@@ -35,6 +35,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String CHOICE = "Choice.sct";
 	public static final String C_KEYWORDS_M = "CKeywords.sct";
 	public static final String CONDITIONAL_EXPRESSIONS = "ConditionalExpressions.sct";
+	public static final String CONSTANTS = "Constants.sct";
 	public static final String DECLARATIONS = "Declarations.sct";
 	public static final String DEEP_ENTRY = "DeepEntry.sct";
 	public static final String DEEP_HISTORY = "DeepHistory.sct";
