@@ -212,7 +212,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		else if (varRef instanceof ElementReferenceExpression)
 			referencedObject = ((ElementReferenceExpression) varRef).getReference();
 		if (referencedObject instanceof VariableDefinition) {
-			if (!((VariableDefinition) referencedObject).isWriteable()) {
+			if (((VariableDefinition) referencedObject).isConst()) {
 				error(ASSIGNMENT_TO_VALUE, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 		}
@@ -221,7 +221,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check(CheckType.FAST)
 	public void checkValueDefinitionExpression(VariableDefinition definition) {
 		// applies only to constants
-		if (definition.isWriteable())
+		if (!definition.isConst())
 			return;
 		Expression initialValue = definition.getInitialValue();
 		List<Expression> toCheck = Lists.newArrayList(initialValue);
@@ -238,7 +238,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 			else if (expression instanceof ElementReferenceExpression)
 				referencedObject = ((ElementReferenceExpression) expression).getReference();
 			if (referencedObject instanceof VariableDefinition) {
-				if (((VariableDefinition) referencedObject).isWriteable()) {
+				if (!((VariableDefinition) referencedObject).isConst()) {
 					error(REFERENCE_TO_VARIABLE, StextPackage.Literals.VARIABLE_DEFINITION__INITIAL_VALUE);
 				}
 			}
@@ -252,7 +252,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		for (Declaration declaration : declarations) {
 			if (declaration instanceof VariableDefinition) {
 				VariableDefinition definition = (VariableDefinition) declaration;
-				if (definition.isWriteable())
+				if (!definition.isConst())
 					return;
 				Expression initialValue = definition.getInitialValue();
 				List<Expression> toCheck = Lists.newArrayList(initialValue);

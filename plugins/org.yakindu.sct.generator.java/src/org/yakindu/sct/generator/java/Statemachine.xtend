@@ -115,10 +115,10 @@ class Statemachine {
 		};
 		
 		«FOR variable : flow.internalScopeVariables»
-			«IF variable.writeable»
-				«variable.writeableFieldDeclaration»
-			«ELSE»
+			«IF variable.const»
 				«variable.constantFieldDeclaration»
+			«ELSE»
+				«variable.writeableFieldDeclaration»
 			«ENDIF»
 		«ENDFOR»
 		
@@ -154,7 +154,7 @@ class Statemachine {
 	}
 	
 	def private constantFieldDeclaration(VariableDefinition variable){
-		'''private static final «variable.type.targetLanguageName» «variable.symbol»;'''
+		'''public static final «variable.type.targetLanguageName» «variable.symbol»;'''
 	}
 	
 	def private createConstructor(ExecutionFlow flow) '''
@@ -363,17 +363,18 @@ class Statemachine {
 		
 		«FOR variable : scope.variableDefinitions»
 				
-				«IF variable.writeable»
-					«variable.writeableFieldDeclaration»
-				«ELSE»
+				«IF variable.const»
 					«variable.constantFieldDeclaration»
+				«ELSE»
+					«variable.writeableFieldDeclaration»
 				«ENDIF»
-				
+				«IF!variable.const»
 				public «variable.type.targetLanguageName» «variable.getter» {
 					return «variable.symbol»;
 				}
+				«ENDIF»
 				
-				«IF  !variable.readonly && variable.isWriteable»
+				«IF !variable.readonly && !variable.const»
 					public void «variable.setter»(«variable.type.targetLanguageName» value) {
 						this.«variable.symbol» = value;
 					}

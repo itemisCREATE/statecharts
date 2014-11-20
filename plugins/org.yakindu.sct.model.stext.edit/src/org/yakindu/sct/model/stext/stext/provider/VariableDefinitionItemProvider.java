@@ -62,7 +62,7 @@ public class VariableDefinitionItemProvider extends VariableItemProvider
 
       addTypePropertyDescriptor(object);
       addTypeArgumentsPropertyDescriptor(object);
-      addWriteablePropertyDescriptor(object);
+      addConstPropertyDescriptor(object);
       addReadonlyPropertyDescriptor(object);
       addExternalPropertyDescriptor(object);
     }
@@ -116,20 +116,20 @@ public class VariableDefinitionItemProvider extends VariableItemProvider
   }
 
   /**
-   * This adds a property descriptor for the Writeable feature.
+   * This adds a property descriptor for the Const feature.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected void addWriteablePropertyDescriptor(Object object)
+  protected void addConstPropertyDescriptor(Object object)
   {
     itemPropertyDescriptors.add
       (createItemPropertyDescriptor
         (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
          getResourceLocator(),
-         getString("_UI_VariableDefinition_writeable_feature"),
-         getString("_UI_PropertyDescriptor_description", "_UI_VariableDefinition_writeable_feature", "_UI_VariableDefinition_type"),
-         StextPackage.Literals.VARIABLE_DEFINITION__WRITEABLE,
+         getString("_UI_VariableDefinition_const_feature"),
+         getString("_UI_PropertyDescriptor_description", "_UI_VariableDefinition_const_feature", "_UI_VariableDefinition_type"),
+         StextPackage.Literals.VARIABLE_DEFINITION__CONST,
          true,
          false,
          false,
@@ -259,7 +259,7 @@ public class VariableDefinitionItemProvider extends VariableItemProvider
 
     switch (notification.getFeatureID(VariableDefinition.class))
     {
-      case StextPackage.VARIABLE_DEFINITION__WRITEABLE:
+      case StextPackage.VARIABLE_DEFINITION__CONST:
       case StextPackage.VARIABLE_DEFINITION__READONLY:
       case StextPackage.VARIABLE_DEFINITION__EXTERNAL:
         fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

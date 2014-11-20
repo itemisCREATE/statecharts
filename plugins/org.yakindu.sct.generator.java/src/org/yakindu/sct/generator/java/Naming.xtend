@@ -109,7 +109,7 @@ class Naming implements JavaKeywords {
 	}
 	
 	def dispatch getSymbol(VariableDefinition it){
-		if(writeable) name.asEscapedIdentifier else name.asEscapedIdentifier
+		name.asEscapedIdentifier
 	}
 	def dispatch getSymbol(EventDefinition it){
 		name.asEscapedIdentifier
