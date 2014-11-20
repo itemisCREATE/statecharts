@@ -69,8 +69,10 @@ class DefaultExecutionFlowInterpreter implements IExecutionFlowInterpreter {
 		activeStateConfiguration = newArrayOfSize(flow.stateVector.size)
 		activeStateIndex = 0
 		historyStateConfiguration = newHashMap()
-		if (!executionContext.snapshot)
+		if (!executionContext.snapshot){
+			flow.staticInitSequence.scheduleAndRun
 			flow.initSequence.scheduleAndRun
+		}
 	}
 
 	override enter() {
