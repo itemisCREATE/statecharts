@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns:sgraph="http://www.yakindu.org/sct/sgraph/2.0.0">
-  <sgraph:Statechart xmi:id="_u513oG5sEeSL5-Sh3xFGWw" specification="internal:&#xD;&#xA;//No Issue, initializing constant&#xD;&#xA;val x :integer = 10&#xD;&#xA;// No issue, initializing constant in named interface&#xD;&#xA;interface A:&#xD;&#xA;val x : integer = 4" name="ATM">
+  <sgraph:Statechart xmi:id="_u513oG5sEeSL5-Sh3xFGWw" specification="internal:&#xD;&#xA;//No Issue, initializing constant&#xD;&#xA;const x :integer = 10&#xD;&#xA;// No issue, initializing constant in named interface&#xD;&#xA;interface A:&#xD;&#xA;const x : integer = 4" name="ATM">
     <regions xmi:id="_u53s0m5sEeSL5-Sh3xFGWw" name="main region">
       <vertices xsi:type="sgraph:Entry" xmi:id="_u57-Q25sEeSL5-Sh3xFGWw">
         <outgoingTransitions xmi:id="_u5-agW5sEeSL5-Sh3xFGWw" target="_u58lV25sEeSL5-Sh3xFGWw"/>
