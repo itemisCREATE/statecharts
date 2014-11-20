@@ -1,0 +1,17 @@
+
+testgroup ConstantsTests for statechart Constants {
+
+	test constantDefinition { 
+		enter
+		assert active(Constants.main_region.A)
+		//After initialization, constant values must be set
+		assert x == 10
+		assert y == 20
+		assert Named.y == "Hello World"
+		//Caluclation with constants 
+		raise e
+		cycle
+		assert result == 20
+	} 
+}
+	
