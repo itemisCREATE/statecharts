@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::c {
+	statechart Constants {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "ConstantsTests"
+		}
+	}
+}

@@ -21,9 +21,9 @@ TEST(StatemachineTest, CKeywordsTest) {
 	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_char));
 	cKeywordsIface_raise_auto(&handle);
 	cKeywords_runCycle(&handle);
-	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_const));
-	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_const_switch_case));
-	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_const_switch_case_enum_asm));
+	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_loop));
+	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_loop_switch_case));
+	EXPECT_TRUE(cKeywords_isActive(&handle, CKeywords_auto_loop_switch_case_enum_asm));
 }
 
 		
