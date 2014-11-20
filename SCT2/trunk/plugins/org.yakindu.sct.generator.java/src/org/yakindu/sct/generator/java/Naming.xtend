@@ -141,7 +141,7 @@ class Naming implements JavaKeywords {
 	}
 	
 	def asIdentifier(String it) {
-		replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', '_')
+		replaceAll('[^a-z&&[^A-Z&&[^0-9]]]', '_').toFirstLower
 	}
 	
 	def asName(String it) {
