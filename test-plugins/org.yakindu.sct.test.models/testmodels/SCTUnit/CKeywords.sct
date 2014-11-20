@@ -8,7 +8,7 @@
       <vertices xsi:type="sgraph:State" xmi:id="_Daf-DMqFEeGCh8O3kx-14A" specification="entry /&#xD;&#xA; case = true;&#xD;&#xA; do = 0;&#xD;&#xA; continue = true;&#xD;&#xA; double = true;&#xD;&#xA; enum= true;&#xD;&#xA; extern = true;&#xD;&#xA; float = true;&#xD;&#xA; for = true;&#xD;&#xA; goto = true;&#xD;&#xA; if = true;&#xD;&#xA; int = true;&#xD;&#xA; long = true;&#xD;&#xA; register = true;&#xD;&#xA; return = true;&#xD;&#xA; short = true;&#xD;&#xA; signed = true;&#xD;&#xA; sizeof = true;&#xD;&#xA; static = true;&#xD;&#xA; struct = true;&#xD;&#xA; switch = true;&#xD;&#xA; typedef = true;&#xD;&#xA; union = true;&#xD;&#xA; unsigned = true;&#xD;&#xA; void = true;&#xD;&#xA; volatile = true;&#xD;&#xA; while = true" name="char" incomingTransitions="_DapvDsqFEeGCh8O3kx-14A">
         <outgoingTransitions xmi:id="_ekRnsMqFEeGCh8O3kx-14A" specification="auto[case]/do +=1" target="_YS1e0MqFEeGCh8O3kx-14A"/>
       </vertices>
-      <vertices xsi:type="sgraph:State" xmi:id="_YS1e0MqFEeGCh8O3kx-14A" name="const" incomingTransitions="_ekRnsMqFEeGCh8O3kx-14A">
+      <vertices xsi:type="sgraph:State" xmi:id="_YS1e0MqFEeGCh8O3kx-14A" name="loop" incomingTransitions="_ekRnsMqFEeGCh8O3kx-14A">
         <regions xmi:id="_YS1e0sqFEeGCh8O3kx-14A" name="switch">
           <vertices xsi:type="sgraph:Entry" xmi:id="_9teoQOLXEeG2O7J-yxt9BQ" name="" kind="SHALLOW_HISTORY">
             <outgoingTransitions xmi:id="_W9psAOLYEeG2O7J-yxt9BQ" specification="" target="_S1dHkOLYEeG2O7J-yxt9BQ"/>

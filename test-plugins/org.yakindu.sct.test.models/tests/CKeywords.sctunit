@@ -4,8 +4,8 @@ testgroup CKeywords for statechart CKeywords {
 		assert active ( CKeywords.auto.char ) 
 		raise auto 
 		cycle 
-		assert active (CKeywords.auto.const ) 
-		assert active ( CKeywords.auto.const.switch.case )
-		assert active ( CKeywords.auto.const.switch.case.enum.asm ) 
+		assert active (CKeywords.auto.loop) 
+		assert active ( CKeywords.auto.loop.switch.case )
+		assert active ( CKeywords.auto.loop.switch.case.enum.asm ) 
 	} 
 }
