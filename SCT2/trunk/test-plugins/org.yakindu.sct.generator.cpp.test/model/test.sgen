@@ -108,6 +108,18 @@ GeneratorModel for sctunit::cpp {
 		}			
 	}
 	
+	test ConstantsTests{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.cpp.test" 
+			targetFolder = "test-gen"			
+		}		
+		
+		feature JUnitWrapper {
+			WrapToJUnit =  "true"
+		}			
+	}
+	
 	test Declarations{
 		
 		feature Outlet{ 
