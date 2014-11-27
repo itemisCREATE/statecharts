@@ -26,10 +26,6 @@ Workflow {
 	}
 
 	component = DirectoryCleaner {
-		directory = "${runtimeProject}/model"
-	}
-
-	component = DirectoryCleaner {
 		directory = "${runtimeProject}.ui/src-gen"
 	}
 
@@ -48,13 +44,13 @@ Workflow {
 				xmlVersion = "1.0"
 			}
 
-			// generates Java API for the generated EPackages 
-			fragment = ecore.EcoreGeneratorFragment {
-				generateEdit = true
-				genModel = "model/SText.genmodel"
-				emfRuntimeVersion = "2.8"
-				xmiModelDirectory = "${runtimeProject}/model"
-			}
+//			// generates Java API for the generated EPackages 
+//			fragment = ecore.EcoreGeneratorFragment {
+//				generateEdit = true
+//				genModel = "model/SText.genmodel"
+//				emfRuntimeVersion = "2.8"
+//				xmiModelDirectory = "${runtimeProject}/model"
+//			}
 
 			// the serialization component
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
@@ -117,16 +113,6 @@ Workflow {
 
 			// generates junit test support classes into Generator#pathTestProject
 			fragment = junit.Junit4Fragment {}
-
-			// project wizard (optional) 
-			// fragment = projectWizard.SimpleProjectWizardFragment {
-			// 		generatorProjectName = "${projectName}.generator" 
-			//		modelFileExtension = file.extensions
-			// }
-			
-//			fragment = types.TypesGeneratorFragment {}
-			// generates the required bindings only if the grammar inherits from Xbase
-//			fragment = xbase.XbaseGeneratorFragment {}
 		}
 	}
 }
