@@ -1,108 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.sct.model.stext/src-gen" editDirectory="/org.yakindu.sct.model.stext.edit/src"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.yakindu.sct.model.stext/emf-gen" editDirectory="/org.yakindu.sct.model.stext.edit/src"
     editorDirectory="/org.yakindu.sct.model.stext.editor/src" modelPluginID="org.yakindu.sct.model.stext"
     forceOverwrite="true" modelName="SText" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.yakindu.sct.model.stext.edit"
-    editorPluginID="org.yakindu.sct.model.stext.editor" runtimeVersion="2.8" usedGenPackages="platform:/resource/org.yakindu.base.expressions/model/Expressions.genmodel#//expressions platform:/resource/org.yakindu.base.types/model/base.genmodel#//base platform:/resource/org.yakindu.base.types/model/types.genmodel#//types platform:/resource/org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
+    editorPluginID="org.yakindu.sct.model.stext.editor" runtimeVersion="2.8" usedGenPackages="../../org.yakindu.base.expressions/model/Expressions.genmodel#//expressions ../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.base.types/model/types.genmodel#//types ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph">
   <genPackages prefix="Stext" basePackage="org.yakindu.sct.model.stext" disposableProviderFactory="true"
-      ecorePackage="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#/">
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Direction">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Direction/LOCAL"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Direction/IN"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Direction/OUT"/>
+      ecorePackage="SText.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SText.ecore#//Direction">
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//Direction/LOCAL"/>
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//Direction/IN"/>
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//Direction/OUT"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventType">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventType/after"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventType/every"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SText.ecore#//TimeEventType">
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//TimeEventType/after"/>
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//TimeEventType/every"/>
     </genEnums>
-    <genEnums typeSafeEnumCompatible="false" ecoreEnum="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeUnit">
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeUnit/second"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeUnit/millisecond"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeUnit/microsecond"/>
-      <genEnumLiterals ecoreEnumLiteral="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeUnit/nanosecond"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="SText.ecore#//TimeUnit">
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//TimeUnit/second"/>
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//TimeUnit/millisecond"/>
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//TimeUnit/microsecond"/>
+      <genEnumLiterals ecoreEnumLiteral="SText.ecore#//TimeUnit/nanosecond"/>
     </genEnums>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Root">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Root/roots"/>
+    <genClasses ecoreClass="SText.ecore#//Root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//Root/roots"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//DefRoot"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StatechartRoot">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StatechartRoot/def"/>
+    <genClasses ecoreClass="SText.ecore#//DefRoot"/>
+    <genClasses ecoreClass="SText.ecore#//StatechartRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//StatechartRoot/def"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StateRoot">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StateRoot/def"/>
+    <genClasses ecoreClass="SText.ecore#//StateRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//StateRoot/def"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TransitionRoot">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TransitionRoot/def"/>
+    <genClasses ecoreClass="SText.ecore#//TransitionRoot">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//TransitionRoot/def"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StatechartSpecification"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StateSpecification">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StateSpecification/scope"/>
+    <genClasses ecoreClass="SText.ecore#//StatechartSpecification"/>
+    <genClasses ecoreClass="SText.ecore#//StateSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//StateSpecification/scope"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TransitionSpecification">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TransitionSpecification/reaction"/>
+    <genClasses ecoreClass="SText.ecore#//TransitionSpecification">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//TransitionSpecification/reaction"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//StatechartScope"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//InterfaceScope"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//InternalScope"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ImportScope">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ImportScope/imports"/>
+    <genClasses ecoreClass="SText.ecore#//StatechartScope"/>
+    <genClasses ecoreClass="SText.ecore#//InterfaceScope"/>
+    <genClasses ecoreClass="SText.ecore#//InternalScope"/>
+    <genClasses ecoreClass="SText.ecore#//ImportScope">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//ImportScope/imports"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Import">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Import/importedNamespace"/>
+    <genClasses ecoreClass="SText.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//Import/importedNamespace"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventDefinition/direction"/>
+    <genClasses ecoreClass="SText.ecore#//EventDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//EventDefinition/direction"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//VariableDefinition">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//VariableDefinition/const"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//VariableDefinition/readonly"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//VariableDefinition/external"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//VariableDefinition/initialValue"/>
+    <genClasses ecoreClass="SText.ecore#//VariableDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//VariableDefinition/const"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//VariableDefinition/readonly"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//VariableDefinition/external"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//VariableDefinition/initialValue"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//OperationDefinition"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//LocalReaction"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TransitionReaction"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Guard">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//Guard/expression"/>
+    <genClasses ecoreClass="SText.ecore#//OperationDefinition"/>
+    <genClasses ecoreClass="SText.ecore#//LocalReaction"/>
+    <genClasses ecoreClass="SText.ecore#//TransitionReaction"/>
+    <genClasses ecoreClass="SText.ecore#//Guard">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//Guard/expression"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EntryPointSpec">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EntryPointSpec/entrypoint"/>
+    <genClasses ecoreClass="SText.ecore#//EntryPointSpec">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//EntryPointSpec/entrypoint"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ExitPointSpec">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ExitPointSpec/exitpoint"/>
+    <genClasses ecoreClass="SText.ecore#//ExitPointSpec">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//ExitPointSpec/exitpoint"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventSpec"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//RegularEventSpec">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//RegularEventSpec/event"/>
+    <genClasses ecoreClass="SText.ecore#//EventSpec"/>
+    <genClasses ecoreClass="SText.ecore#//RegularEventSpec">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//RegularEventSpec/event"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec/type"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//TimeEventSpec/unit"/>
+    <genClasses ecoreClass="SText.ecore#//TimeEventSpec">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//TimeEventSpec/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//TimeEventSpec/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SText.ecore#//TimeEventSpec/unit"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//BuiltinEventSpec"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EntryEvent"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ExitEvent"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//AlwaysEvent"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//SimpleScope"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionTrigger">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionTrigger/triggers"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionTrigger/guard"/>
+    <genClasses ecoreClass="SText.ecore#//BuiltinEventSpec"/>
+    <genClasses ecoreClass="SText.ecore#//EntryEvent"/>
+    <genClasses ecoreClass="SText.ecore#//ExitEvent"/>
+    <genClasses ecoreClass="SText.ecore#//AlwaysEvent"/>
+    <genClasses ecoreClass="SText.ecore#//SimpleScope"/>
+    <genClasses ecoreClass="SText.ecore#//ReactionTrigger">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//ReactionTrigger/triggers"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//ReactionTrigger/guard"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//DefaultTrigger"/>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionEffect">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ReactionEffect/actions"/>
+    <genClasses ecoreClass="SText.ecore#//DefaultTrigger"/>
+    <genClasses ecoreClass="SText.ecore#//ReactionEffect">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//ReactionEffect/actions"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventRaisingExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventRaisingExpression/event"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventRaisingExpression/value"/>
+    <genClasses ecoreClass="SText.ecore#//EventRaisingExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//EventRaisingExpression/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//EventRaisingExpression/value"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventValueReferenceExpression">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//EventValueReferenceExpression/value"/>
+    <genClasses ecoreClass="SText.ecore#//EventValueReferenceExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SText.ecore#//EventValueReferenceExpression/value"/>
     </genClasses>
-    <genClasses ecoreClass="platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ActiveStateReferenceExpression">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference platform:/resource/org.yakindu.sct.model.stext/model/SText.ecore#//ActiveStateReferenceExpression/value"/>
+    <genClasses ecoreClass="SText.ecore#//ActiveStateReferenceExpression">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference SText.ecore#//ActiveStateReferenceExpression/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

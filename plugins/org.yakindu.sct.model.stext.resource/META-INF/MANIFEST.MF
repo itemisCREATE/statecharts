@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Statechart Tools (SCT) SText Resource
 Bundle-SymbolicName: org.yakindu.sct.model.stext.resource;singleton:=true
-Bundle-Version: 2.4.0.qualifier
+Bundle-Version: 2.4.1.qualifier
 Bundle-Vendor: statecharts.org
 Bundle-Activator: org.yakindu.sct.model.stext.resource.Activator
 Require-Bundle: org.eclipse.ui,
