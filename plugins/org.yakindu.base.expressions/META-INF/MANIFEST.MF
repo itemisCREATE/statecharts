@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Yakindu Base Expressions
 Bundle-Vendor: statecharts.org
-Bundle-Version: 2.4.0.qualifier
+Bundle-Version: 2.4.1.qualifier
 Bundle-SymbolicName: org.yakindu.base.expressions; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext;visibility:=reexport,
@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
  org.yakindu.base.types;bundle-version="2.1.2",
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
 Import-Package: org.apache.log4j,
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.xtext.xbase.lib
