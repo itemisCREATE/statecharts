@@ -14,21 +14,18 @@ package org.yakindu.base.expressions.validation;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.expressions.inferrer.IExpressionsTypeInferrer;
 import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.InferenceIssue;
-import org.yakindu.base.types.InferenceResult;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -37,7 +34,8 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class ExpressionsJavaValidator extends org.yakindu.base.expressions.validation.AbstractExpressionsJavaValidator {
+public class ExpressionsJavaValidator extends org.yakindu.base.expressions.validation.AbstractExpressionsJavaValidator
+		implements ITypeTraceAcceptor {
 
 	public static final String WARNING_IS_RAW_CODE = "WarningRaw";
 	public static final String WARNING_IS_RAW_MSG = "%s is a raw type. References to generic type %s should be parameterized";
@@ -61,7 +59,27 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	private GenericsPrettyPrinter printer;
 
 	@Inject
-	private IExpressionsTypeInferrer typeInferrer;
+	private ITypeSystemInferrer typeInferrer;
+	@Inject
+	private ITypeSystem typeSystem;
+
+	@Check
+	public void checkExpression(Expression expression) {
+		typeInferrer.inferType(expression, this);
+	}
+
+	public void accept(TypeTrace trace) {
+		switch (trace.getSeverity()) {
+		case ERROR:
+			error(trace.getMessage(), null);
+			break;
+		case WARNING:
+			warning(trace.getMessage(), null);
+			break;
+		case INFO:
+			break;
+		}
+	}
 
 	@Check
 	public void checkIsRaw(TypedElement typedElement) {
@@ -133,7 +151,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 			TypeParameter parameter = typeParameter.get(i);
 			if (parameter.getBound() != null) {
 				Type argument = typedElement.getTypeArguments().get(i);
-				if (!isTypeCompatible(parameter.getBound(), argument)) {
+				if (!typeSystem.isSuperType(parameter.getBound(), argument)) {
 					error(String.format(ERROR_BOUND_MISSMATCH_MSG, argument.getName(),
 							(parameter.getBound()).getName(), type.getName()), typedElement,
 							TypesPackage.Literals.TYPED_ELEMENT__TYPE_ARGUMENTS, i, ERROR_BOUND_MISSMATCH_CODE);
@@ -151,34 +169,5 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 						TypesPackage.Literals.COMPLEX_TYPE__SUPER_TYPES, ERROR_CYCLE_DETECTED_CODE);
 			}
 		}
-	}
-
-	@Check
-	public void checkExpressionIsTypeCompatible(Expression expression) {
-		try {
-			InferenceResult result = typeInferrer.inferType(expression);
-			report(result, null);
-		} catch (IllegalArgumentException e) {
-			// ignore unknown literals here, as this also happens when a
-			// linking problem occurred, which is handled in other locations
-		}
-	}
-	
-	protected void report(InferenceResult result, EStructuralFeature feature) {
-		if (result.getIssues().isEmpty())
-			return;
-		InferenceIssue error = Iterables.getLast(result.getIssues());
-		error(error.getMessage(), feature);
-	}
-
-	// TODO: USE ITypeSystem
-	private boolean isTypeCompatible(Type bound, Type argument) {
-		if (EcoreUtil.equals(bound, argument))
-			return true;
-		if (argument instanceof ComplexType && ((ComplexType) argument).getSuperTypes().size() > 0) {
-			ComplexType superType = ((ComplexType) argument).getSuperTypes().get(0);
-			return isTypeCompatible(bound, superType);
-		}
-		return false;
 	}
 }

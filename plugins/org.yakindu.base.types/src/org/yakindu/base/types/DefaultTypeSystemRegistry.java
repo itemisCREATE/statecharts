@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 
 import com.google.inject.Singleton;
 

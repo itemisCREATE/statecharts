@@ -20,8 +20,8 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
-import org.yakindu.base.types.ITypeSystem;
 import org.yakindu.base.types.ITypeSystemRegistry;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;

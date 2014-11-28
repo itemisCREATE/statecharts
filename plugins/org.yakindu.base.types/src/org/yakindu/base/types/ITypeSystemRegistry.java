@@ -1,5 +1,7 @@
 package org.yakindu.base.types;
 
+import org.yakindu.base.types.typesystem.ITypeSystem;
+
 import com.google.inject.ImplementedBy;
 
 @ImplementedBy(DefaultTypeSystemRegistry.class)

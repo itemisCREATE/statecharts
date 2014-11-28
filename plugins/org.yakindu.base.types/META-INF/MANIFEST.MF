@@ -12,6 +12,9 @@ Export-Package: org.yakindu.base.base,
  org.yakindu.base.base.util,
  org.yakindu.base.types,
  org.yakindu.base.types.impl,
+ org.yakindu.base.types.inferrer,
+ org.yakindu.base.types.interpreter,
+ org.yakindu.base.types.typesystem,
  org.yakindu.base.types.util
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
@@ -20,6 +23,7 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.inject;bundle-version="2.0.0",
  org.eclipse.xtend.lib,
  com.google.guava,
- org.eclipse.xtext.xbase.lib
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext.util;bundle-version="2.7.2"
 Bundle-ActivationPolicy: lazy
 

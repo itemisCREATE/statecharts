@@ -3,9 +3,13 @@
  */
 package org.yakindu.base.expressions;
 
-/**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
- */
+import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+
 public class ExpressionsRuntimeModule extends org.yakindu.base.expressions.AbstractExpressionsRuntimeModule {
+
+	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
+		return ExpressionsTypeInferrer.class;
+	}
 
 }
