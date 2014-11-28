@@ -39,6 +39,8 @@ public interface ITypeSystem {
 	public Type getCommonType(Type type1, Type type2);
 
 	public boolean haveCommonType(Type type1, Type type2);
-	
+
+	public Type getSuperType(Type type);
+
 	public boolean isSuperType(Type subtype, Type supertype);
 }

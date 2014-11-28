@@ -53,7 +53,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Type infer(AssignmentExpression e) {
 		Type type1 = inferTypeDispatch(e.getVarRef());
 		Type type2 = inferTypeDispatch(e.getExpression());
-		assertAssignable(type1, type2, String.format(ASSIGNMENT_OPERATOR, e.getOperator(), type1, type2));
+		assertAssignable(type2, type1, String.format(ASSIGNMENT_OPERATOR, e.getOperator(), type1, type2));
 		return inferTypeDispatch(e.getVarRef());
 	}
 
