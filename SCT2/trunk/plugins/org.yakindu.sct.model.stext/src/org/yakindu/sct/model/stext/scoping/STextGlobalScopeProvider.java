@@ -20,7 +20,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.yakindu.base.types.ITypeSystemRegistry;
-import org.yakindu.base.types.scope.TypeSystemAwareScope;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 
 import com.google.common.base.Predicate;

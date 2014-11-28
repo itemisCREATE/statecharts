@@ -20,7 +20,6 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  de.itemis.xtext.utils.gmf,
  org.eclipse.gmf.runtime.emf.core;bundle-version="1.4.1",
  org.yakindu.base.types;bundle-version="1.0.0",
- org.yakindu.base.types.scope;bundle-version="1.0.0",
  de.itemis.xtext.utils.jface;bundle-version="1.0.0",
  org.yakindu.base.expressions;bundle-version="1.0.0";visibility:=reexport,
  org.yakindu.sct.commons;bundle-version="2.1.2"
