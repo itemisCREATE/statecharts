@@ -24,35 +24,24 @@
    <includes
          id="de.itemis.gmf.runtime.commons"
          version="0.0.0"/>
-         
    <includes
          id="de.itemis.xtext.utils.gmf"
          version="0.0.0"/>
-
    <includes
          id="de.itemis.xtext.utils.jface"
          version="0.0.0"/>
-
    <plugin
          id="org.yakindu.base.types"
          version="0.0.0"/>
-
    <plugin
          id="org.yakindu.base.types.edit"
          version="0.0.0"/>
-
-   <plugin
-         id="org.yakindu.base.types.scope"
-         version="0.0.0"/>
-
    <plugin
          id="org.yakindu.base.expressions"
          version="0.0.0"/>
-
    <plugin
          id="org.yakindu.base.expressions.edit"
          version="0.0.0"/>
-
    <plugin
          id="org.yakindu.base.expressions.ui"
          version="0.0.0"/>
