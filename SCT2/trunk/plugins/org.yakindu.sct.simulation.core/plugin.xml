@@ -10,6 +10,5 @@
             class="org.yakindu.sct.simulation.core.sruntime.SRuntimePackage"
             genModel="model/sruntime.genmodel"/>
    </extension>
-   
-   
+
 </plugin>

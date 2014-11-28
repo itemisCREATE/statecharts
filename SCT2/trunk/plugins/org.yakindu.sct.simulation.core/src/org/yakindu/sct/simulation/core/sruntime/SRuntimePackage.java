@@ -87,22 +87,13 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_CONTEXT__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_CONTEXT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int EXECUTION_CONTEXT__VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
@@ -111,7 +102,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__FQ_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_CONTEXT__FQ_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Writable</b></em>' attribute.
@@ -120,7 +111,16 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_CONTEXT__WRITABLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_CONTEXT__WRITABLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_CONTEXT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
@@ -196,22 +196,13 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_SLOT__NAME = BasePackage.NAMED_ELEMENT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_SLOT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SLOT__VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int EXECUTION_SLOT__VALUE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Fq Name</b></em>' attribute.
@@ -220,7 +211,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SLOT__FQ_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+	int EXECUTION_SLOT__FQ_NAME = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Writable</b></em>' attribute.
@@ -229,7 +220,16 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_SLOT__WRITABLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
+	int EXECUTION_SLOT__WRITABLE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_SLOT__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Execution Slot</em>' class.
@@ -260,15 +260,6 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_EVENT__NAME = EXECUTION_SLOT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_EVENT__TYPE = EXECUTION_SLOT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -294,6 +285,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_EVENT__WRITABLE = EXECUTION_SLOT__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_EVENT__TYPE = EXECUTION_SLOT__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Raised</b></em>' attribute.
@@ -351,15 +351,6 @@ public interface SRuntimePackage extends EPackage {
 	int EXECUTION_VARIABLE__NAME = EXECUTION_SLOT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXECUTION_VARIABLE__TYPE = EXECUTION_SLOT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -385,6 +376,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int EXECUTION_VARIABLE__WRITABLE = EXECUTION_SLOT__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTION_VARIABLE__TYPE = EXECUTION_SLOT__TYPE;
 
 	/**
 	 * The number of structural features of the '<em>Execution Variable</em>' class.
@@ -415,15 +415,6 @@ public interface SRuntimePackage extends EPackage {
 	int COMPOSITE_SLOT__NAME = EXECUTION_SLOT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPOSITE_SLOT__TYPE = EXECUTION_SLOT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -449,6 +440,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPOSITE_SLOT__WRITABLE = EXECUTION_SLOT__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPOSITE_SLOT__TYPE = EXECUTION_SLOT__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
@@ -488,15 +488,6 @@ public interface SRuntimePackage extends EPackage {
 	int REFERENCE_SLOT__NAME = COMPOSITE_SLOT__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int REFERENCE_SLOT__TYPE = COMPOSITE_SLOT__TYPE;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -522,6 +513,15 @@ public interface SRuntimePackage extends EPackage {
 	 * @ordered
 	 */
 	int REFERENCE_SLOT__WRITABLE = COMPOSITE_SLOT__WRITABLE;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_SLOT__TYPE = COMPOSITE_SLOT__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Slots</b></em>' containment reference list.
@@ -561,17 +561,6 @@ public interface SRuntimePackage extends EPackage {
 	int EVENT_DIRECTION = 6;
 
 	/**
-	 * The meta object id for the '<em>Inferred Type</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.InferredType
-	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getInferredType()
-	 * @generated
-	 */
-	int INFERRED_TYPE = 7;
-
-
-	/**
 	 * The meta object id for the '<em>Java Object</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -579,7 +568,7 @@ public interface SRuntimePackage extends EPackage {
 	 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getJavaObject()
 	 * @generated
 	 */
-	int JAVA_OBJECT = 8;
+	int JAVA_OBJECT = 7;
 
 
 	/**
@@ -690,15 +679,15 @@ public interface SRuntimePackage extends EPackage {
 	EClass getExecutionSlot();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @return the meta object for the reference '<em>Type</em>'.
 	 * @see org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType()
 	 * @see #getExecutionSlot()
 	 * @generated
 	 */
-	EAttribute getExecutionSlot_Type();
+	EReference getExecutionSlot_Type();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getValue <em>Value</em>}'.
@@ -794,17 +783,6 @@ public interface SRuntimePackage extends EPackage {
 	 * @generated
 	 */
 	EEnum getEventDirection();
-
-	/**
-	 * Returns the meta object for data type '{@link org.yakindu.base.types.InferredType <em>Inferred Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Inferred Type</em>'.
-	 * @see org.yakindu.base.types.InferredType
-	 * @model instanceClass="org.yakindu.base.types.InferredType"
-	 * @generated
-	 */
-	EDataType getInferredType();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Object <em>Java Object</em>}'.
@@ -926,12 +904,12 @@ public interface SRuntimePackage extends EPackage {
 		EClass EXECUTION_SLOT = eINSTANCE.getExecutionSlot();
 
 		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute EXECUTION_SLOT__TYPE = eINSTANCE.getExecutionSlot_Type();
+		EReference EXECUTION_SLOT__TYPE = eINSTANCE.getExecutionSlot_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -1012,16 +990,6 @@ public interface SRuntimePackage extends EPackage {
 		 * @generated
 		 */
 		EEnum EVENT_DIRECTION = eINSTANCE.getEventDirection();
-
-		/**
-		 * The meta object literal for the '<em>Inferred Type</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.InferredType
-		 * @see org.yakindu.sct.simulation.core.sruntime.impl.SRuntimePackageImpl#getInferredType()
-		 * @generated
-		 */
-		EDataType INFERRED_TYPE = eINSTANCE.getInferredType();
 
 		/**
 		 * The meta object literal for the '<em>Java Object</em>' data type.

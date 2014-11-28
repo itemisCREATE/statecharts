@@ -32,6 +32,7 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.conversion,
  org.yakindu.sct.model.stext.formatting,
+ org.yakindu.sct.model.stext.inferrer,
  org.yakindu.sct.model.stext.naming,
  org.yakindu.sct.model.stext.parseTreeConstruction,
  org.yakindu.sct.model.stext.parser.antlr,
@@ -41,7 +42,6 @@ Export-Package: org.yakindu.sct.model.stext,
  org.yakindu.sct.model.stext.stext,
  org.yakindu.sct.model.stext.stext.impl,
  org.yakindu.sct.model.stext.stext.util,
- org.yakindu.sct.model.stext.types,
  org.yakindu.sct.model.stext.util,
  org.yakindu.sct.model.stext.validation
 Bundle-ClassPath: .

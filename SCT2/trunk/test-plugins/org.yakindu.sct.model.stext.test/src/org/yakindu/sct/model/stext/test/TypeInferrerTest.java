@@ -13,7 +13,6 @@ package org.yakindu.sct.model.stext.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.EObject;
@@ -24,8 +23,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.types.ITypeSystem;
-import org.yakindu.base.types.InferenceResult;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.TypeTrace.Severity;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
@@ -33,7 +33,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
 import org.yakindu.sct.model.stext.test.util.STextTestScopeProvider;
-import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 
 import com.google.inject.Inject;
 
@@ -50,9 +49,11 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	@Inject
-	public ITypeSystem typeSystem;
+	public org.yakindu.base.types.typesystem.ITypeSystem typeSystem;
 	@Inject
-	private ISTextTypeInferrer typeInferrer;
+	private ITypeSystemInferrer typeInferrer;
+
+	private ITypeSystemInferrer.ListBasedTypeTraceAcceptor acceptor;
 
 	// Unary
 	@Test
@@ -273,10 +274,10 @@ public class TypeInferrerTest extends AbstractSTextTest {
 				"Logical operator '&&' may only be applied on boolean types, not on real and boolean.");
 		expectIssue(inferType("5 && boolEvent"),
 				"Logical operator '&&' may only be applied on boolean types, not on integer and boolean.");
-		expectIssue(inferType("5 && 'string'"),
-				"Logical operator '&&' may only be applied on boolean types, not on integer and string.");
-		expectIssue(inferType("5 && 1.2"),
-				"Logical operator '&&' may only be applied on boolean types, not on integer and real.");
+		expectIssue(inferType("true && 'string'"),
+				"Logical operator '&&' may only be applied on boolean types, not on boolean and string.");
+		expectIssue(inferType("true && 1.2"),
+				"Logical operator '&&' may only be applied on boolean types, not on boolean and real.");
 	}
 
 	// LogicalOrExpression
@@ -504,26 +505,26 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(inferType("intVar = boolVar"),
 				"Assignment operator '=' may only be applied on compatible types, not on integer and boolean.");
 		expectIssue(inferType("intVar &= boolVar"),
-				"Bitwise operator '&=' may only be applied on integer types, not on integer and boolean.");
+				"Assignment operator '&=' may only be applied on compatible types, not on integer and boolean.");
 		expectIssue(inferType("intVar |= boolVar"),
-				"Bitwise operator '|=' may only be applied on integer types, not on integer and boolean.");
+				"Assignment operator '|=' may only be applied on compatible types, not on integer and boolean.");
 		expectIssue(inferType("intVar ^= boolVar"),
-				"Bitwise operator '^=' may only be applied on integer types, not on integer and boolean.");
+				"Assignment operator '^=' may only be applied on compatible types, not on integer and boolean.");
 		expectIssue(inferType("intVar >>= boolVar"),
-				"Bitwise operator '>>=' may only be applied on integer types, not on integer and boolean.");
+				"Assignment operator '>>=' may only be applied on compatible types, not on integer and boolean.");
 		expectIssue(inferType("intVar <<= boolVar"),
-				"Bitwise operator '<<=' may only be applied on integer types, not on integer and boolean.");
+				"Assignment operator '<<=' may only be applied on compatible types, not on integer and boolean.");
 		// integer and string
 		expectIssue(inferType("intVar &= 'string'"),
-				"Bitwise operator '&=' may only be applied on integer types, not on integer and string.");
+				"Assignment operator '&=' may only be applied on compatible types, not on integer and string.");
 		expectIssue(inferType("intVar |= 'string'"),
-				"Bitwise operator '|=' may only be applied on integer types, not on integer and string.");
+				"Assignment operator '|=' may only be applied on compatible types, not on integer and string.");
 		expectIssue(inferType("intVar ^= 'string'"),
-				"Bitwise operator '^=' may only be applied on integer types, not on integer and string.");
+				"Assignment operator '^=' may only be applied on compatible types, not on integer and string.");
 		expectIssue(inferType("intVar >>= 'string'"),
-				"Bitwise operator '>>=' may only be applied on integer types, not on integer and string.");
+				"Assignment operator '>>=' may only be applied on compatible types, not on integer and string.");
 		expectIssue(inferType("intVar <<= 'string'"),
-				"Bitwise operator '<<=' may only be applied on integer types, not on integer and string.");
+				"Assignment operator '<<=' may only be applied on compatible types, not on integer and string.");
 	}
 
 	/**
@@ -689,7 +690,6 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		expectIssue(
 				inferType("var boolVar : boolean = 'text'", VariableDefinition.class.getSimpleName(), interfaceScope()),
 				"Cannot assign a value of type string to a variable of type boolean.");
-
 		expectIssue(
 				inferType("var intVar : integer = true", VariableDefinition.class.getSimpleName(), interfaceScope()),
 				"Cannot assign a value of type boolean to a variable of type integer.");
@@ -746,7 +746,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isRealType(inferType("( 7.5 / 1.2 )")));
 		assertTrue(isStringType(inferType("( 'abc' )")));
 	}
-	
+
 	@Test
 	public void testTypeCastExpressionSuccess() {
 		assertTrue(isBooleanType(inferType("( true as boolean)")));
@@ -754,16 +754,13 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isRealType(inferType(" 7 as real ")));
 		assertTrue(isStringType(inferType("( 'abc' as string )")));
 	}
+
 	@Test
 	public void testTypeCastExpressionFailure() {
-		expectIssue(inferType("true as integer"),
-				"Cannot cast from boolean to integer.");
-		expectIssue(inferType("true as string"),
-				"Cannot cast from boolean to string.");
-		expectIssue(inferType("5 as string"),
-				"Cannot cast from integer to string.");
-		expectIssue(inferType("5.5 as string"),
-				"Cannot cast from real to string.");
+		expectIssue(inferType("true as integer"), "Cannot cast from boolean to integer.");
+		expectIssue(inferType("true as string"), "Cannot cast from boolean to string.");
+		expectIssue(inferType("5 as string"), "Cannot cast from integer to string.");
+		expectIssue(inferType("5.5 as string"), "Cannot cast from real to string.");
 	}
 
 	@Test
@@ -771,82 +768,61 @@ public class TypeInferrerTest extends AbstractSTextTest {
 		assertTrue(isIntegerType(inferType("(1<2) ? 4 : 5")));
 		assertTrue(isBooleanType(inferType("(true) ? false : true")));
 
-		expectIssue(inferType("(true) ? 4 : false"),
-				"Cannot compute a type union for the given types: integer, boolean");
+		expectIssue(inferType("(true) ? 4 : false"), "Could not determine a common type for integer and boolean.");
 	}
 
-	protected InferenceResult inferType(String expression) {
+	protected Type inferType(String expression) {
 		return inferType(expression, super.internalScope(), super.interfaceScope());
 	}
 
-	protected InferenceResult inferType(String expression, String parserRule) {
+	protected Type inferType(String expression, String parserRule) {
 		return inferType(expression, parserRule, super.internalScope(), super.interfaceScope());
 	}
 
-	protected InferenceResult inferType(String expression, Scope... scopes) {
+	protected Type inferType(String expression, Scope... scopes) {
 		return inferType(expression, Expression.class.getSimpleName(), scopes);
 	}
 
-	protected InferenceResult inferType(String expression, String parserRule, Scope... scopes) {
+	protected Type inferType(String expression, String parserRule, Scope... scopes) {
 		EObject parseResult = super.parseExpression(expression, parserRule, scopes);
 		assertNotNull(parseResult);
+		acceptor = new ITypeSystemInferrer.ListBasedTypeTraceAcceptor();
 		if (parseResult instanceof Expression) {
-			return typeInferrer.inferType((Expression) parseResult);
+			return typeInferrer.inferType((Expression) parseResult, acceptor);
 		} else if (parseResult instanceof EventDefinition) {
-			return typeInferrer.inferType((EventDefinition) parseResult);
+			return typeInferrer.inferType((EventDefinition) parseResult, acceptor);
 		} else if (parseResult instanceof VariableDefinition) {
-			return typeInferrer.inferType((VariableDefinition) parseResult);
+			return typeInferrer.inferType((VariableDefinition) parseResult, acceptor);
 		} else {
 			throw new IllegalArgumentException("Unsupported parse result.");
 		}
 	}
 
-	private boolean isVoidType(InferenceResult inferenceResult) {
-		if (inferenceResult.getType() == null) {
-			throw new IllegalArgumentException();
-		}
-		return typeSystem.isVoidType(inferenceResult.getType());
+	private boolean isVoidType(Type type) {
+		return typeSystem.isSame(type, typeSystem.getType("void"));
 	}
 
-	private boolean isIntegerType(InferenceResult inferenceResult) {
-		if (inferenceResult.getType() == null) {
-			throw new IllegalArgumentException(inferenceResult.getIssues().iterator().next().getMessage());
-		}
-		return typeSystem.isIntegerType(inferenceResult.getType());
+	private boolean isIntegerType(Type type) {
+		return typeSystem.isSame(type, typeSystem.getType("integer"));
 	}
 
-	private boolean isRealType(InferenceResult inferenceResult) {
-		if (inferenceResult.getType() == null) {
-			throw new IllegalArgumentException(inferenceResult.getIssues().iterator().next().getMessage());
-		}
-		return typeSystem.isRealType(inferenceResult.getType());
+	private boolean isRealType(Type type) {
+		return typeSystem.isSame(type, typeSystem.getType("real"));
 	}
 
-	private boolean isBooleanType(InferenceResult inferenceResult) {
-		if (inferenceResult.getType() == null) {
-			throw new IllegalArgumentException(inferenceResult.getIssues().iterator().next().getMessage());
-		}
-		return typeSystem.isBooleanType(inferenceResult.getType());
+	private boolean isBooleanType(Type type) {
+		return typeSystem.isSame(type, typeSystem.getType("boolean"));
 	}
 
-	private boolean isStringType(InferenceResult inferenceResult) {
-		if (inferenceResult.getType() == null) {
-			throw new IllegalArgumentException(inferenceResult.getIssues().iterator().next().getMessage());
-		}
-		return typeSystem.isStringType(inferenceResult.getType());
+	private boolean isStringType(Type type) {
+		return typeSystem.isSame(type, typeSystem.getType("string"));
 	}
 
-	private void expectIssue(InferenceResult inferenceResult, String message) {
-		if (inferenceResult == null) {
-			throw new IllegalArgumentException();
-		}
-		if (inferenceResult.getIssues().isEmpty()) {
+	private void expectIssue(Type object, String message) {
+		if (acceptor.getTraces(Severity.ERROR).isEmpty()) {
 			TestCase.fail("No issue detected.");
 		}
-		if (inferenceResult.getIssues().size() > 1) {
-			fail("Expected only one issue but detected " + inferenceResult.getIssues().size());
-		}
-		assertEquals(message, inferenceResult.getIssues().iterator().next().getMessage());
+		assertEquals(message, acceptor.getTraces(Severity.ERROR).iterator().next().getMessage());
 	}
 
 }

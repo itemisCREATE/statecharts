@@ -12,9 +12,9 @@ package org.yakindu.sct.simulation.core.sruntime.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.base.base.impl.NamedElementImpl;
-import org.yakindu.base.types.InferredType;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
@@ -25,36 +25,16 @@ import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getFqName <em>Fq Name</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#isWritable <em>Writable</em>}</li>
+ *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionSlotImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
 public abstract class ExecutionSlotImpl extends NamedElementImpl implements ExecutionSlot {
-	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final InferredType TYPE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected InferredType type = TYPE_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -116,6 +96,16 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	protected boolean writable = WRITABLE_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected org.yakindu.base.types.Type type;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -139,7 +129,15 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InferredType getType() {
+	public org.yakindu.base.types.Type getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (org.yakindu.base.types.Type)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SRuntimePackage.EXECUTION_SLOT__TYPE, oldType, type));
+			}
+		}
 		return type;
 	}
 
@@ -148,8 +146,17 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(InferredType newType) {
-		InferredType oldType = type;
+	public org.yakindu.base.types.Type basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(org.yakindu.base.types.Type newType) {
+		org.yakindu.base.types.Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_SLOT__TYPE, oldType, type));
@@ -226,14 +233,15 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SRuntimePackage.EXECUTION_SLOT__TYPE:
-				return getType();
 			case SRuntimePackage.EXECUTION_SLOT__VALUE:
 				return getValue();
 			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
 				return getFqName();
 			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
 				return isWritable();
+			case SRuntimePackage.EXECUTION_SLOT__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -246,9 +254,6 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SRuntimePackage.EXECUTION_SLOT__TYPE:
-				setType((InferredType)newValue);
-				return;
 			case SRuntimePackage.EXECUTION_SLOT__VALUE:
 				setValue(newValue);
 				return;
@@ -257,6 +262,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return;
 			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
 				setWritable((Boolean)newValue);
+				return;
+			case SRuntimePackage.EXECUTION_SLOT__TYPE:
+				setType((org.yakindu.base.types.Type)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -270,9 +278,6 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SRuntimePackage.EXECUTION_SLOT__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
 			case SRuntimePackage.EXECUTION_SLOT__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
@@ -281,6 +286,9 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 				return;
 			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
 				setWritable(WRITABLE_EDEFAULT);
+				return;
+			case SRuntimePackage.EXECUTION_SLOT__TYPE:
+				setType((org.yakindu.base.types.Type)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -294,14 +302,14 @@ public abstract class ExecutionSlotImpl extends NamedElementImpl implements Exec
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SRuntimePackage.EXECUTION_SLOT__TYPE:
-				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case SRuntimePackage.EXECUTION_SLOT__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case SRuntimePackage.EXECUTION_SLOT__FQ_NAME:
 				return FQ_NAME_EDEFAULT == null ? fqName != null : !FQ_NAME_EDEFAULT.equals(fqName);
 			case SRuntimePackage.EXECUTION_SLOT__WRITABLE:
 				return writable != WRITABLE_EDEFAULT;
+			case SRuntimePackage.EXECUTION_SLOT__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}

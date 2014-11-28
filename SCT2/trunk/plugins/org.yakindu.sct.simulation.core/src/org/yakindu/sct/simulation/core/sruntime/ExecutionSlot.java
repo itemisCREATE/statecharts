@@ -11,7 +11,6 @@
 package org.yakindu.sct.simulation.core.sruntime;
 
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.base.types.InferredType;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,10 +20,10 @@ import org.yakindu.base.types.InferredType;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getFqName <em>Fq Name</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#isWritable <em>Writable</em>}</li>
+ *   <li>{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,30 +33,30 @@ import org.yakindu.base.types.InferredType;
  */
 public interface ExecutionSlot extends NamedElement {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' attribute.
+	 * Returns the value of the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' attribute.
-	 * @see #setType(InferredType)
+	 * @return the value of the '<em>Type</em>' reference.
+	 * @see #setType(org.yakindu.base.types.Type)
 	 * @see org.yakindu.sct.simulation.core.sruntime.SRuntimePackage#getExecutionSlot_Type()
-	 * @model dataType="org.yakindu.sct.simulation.core.sruntime.InferredType"
+	 * @model
 	 * @generated
 	 */
-	InferredType getType();
+	org.yakindu.base.types.Type getType();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}' attribute.
+	 * Sets the value of the '{@link org.yakindu.sct.simulation.core.sruntime.ExecutionSlot#getType <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' attribute.
+	 * @param value the new value of the '<em>Type</em>' reference.
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(InferredType value);
+	void setType(org.yakindu.base.types.Type value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.

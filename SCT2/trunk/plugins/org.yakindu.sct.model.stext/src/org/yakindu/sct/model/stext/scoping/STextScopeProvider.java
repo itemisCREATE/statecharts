@@ -37,8 +37,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Feature;
-import org.yakindu.base.types.ITypeSystem;
-import org.yakindu.base.types.TypeSystemUtils;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -65,9 +64,6 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 
 	@Inject
 	ITypeSystem typeSystem;
-
-	@Inject
-	TypeSystemUtils typeSystemUtils;
 
 	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 
@@ -109,30 +105,29 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	private ContextPredicateProvider predicateProvider;
 
 	/**
-	 * Scoping for types and taking imported namespaces into account e.g. in variable declarations. 
+	 * Scoping for types and taking imported namespaces into account e.g. in
+	 * variable declarations.
 	 */
 	public IScope scope_TypedElement_type(final EObject context, EReference reference) {
 		Statechart statechart = getStatechart(context);
 		EList<Scope> scopes = statechart.getScopes();
 		IScope scope = retrieveImportScope(context, reference, scopes);
-		
+
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		return new FilteringScope(scope, predicate);
 	}
-	
+
 	public IScope scope_ElementReferenceExpression_reference(final EObject context, EReference reference) {
 		IScope namdScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
-		
-		// XXX: filter on EVENT is too restrictive because also variable definitions should be usable
+
+		// XXX: filter on EVENT is too restrictive because also variable
+		// definitions should be usable
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
-		
-		// add enum types
-		IScope scope = new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements(), Scopes
-				.scopeFor(typeSystemUtils.getEnumerationTypes(typeSystem)).getAllElements()));
-		
-		return scope;
+
+		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements()));
+
 	}
 
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
@@ -157,7 +152,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		if (element instanceof ComplexType) {
-			scope = Scopes.scopeFor(((ComplexType)element).getAllFeatures(), scope);
+			scope = Scopes.scopeFor(((ComplexType) element).getAllFeatures(), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
 
@@ -166,8 +161,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 			scope = new FilteringScope(scope, predicate);
 		}
 
-		if (element instanceof Feature && ((Feature)element).getType() instanceof ComplexType) {
-			scope = Scopes.scopeFor(((ComplexType)((Feature)element).getType()).getAllFeatures(), scope);
+		if (element instanceof Feature && ((Feature) element).getType() instanceof ComplexType) {
+			scope = Scopes.scopeFor(((ComplexType) ((Feature) element).getType()).getAllFeatures(), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
 
@@ -249,7 +244,7 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 				scopeCandidates.addAll(scope.getDeclarations());
 			}
 		}
-		
+
 		// Add import scope
 		IScope scope = retrieveImportScope(context, reference, scopes);
 		return Scopes.scopeFor(scopeCandidates, scope);
@@ -287,4 +282,3 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 	}
 }
-

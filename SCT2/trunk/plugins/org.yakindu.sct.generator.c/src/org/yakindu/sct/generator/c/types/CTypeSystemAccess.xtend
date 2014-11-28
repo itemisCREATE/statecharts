@@ -11,13 +11,13 @@
 package org.yakindu.sct.generator.c.types
 
 import com.google.inject.Inject
-import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import static org.yakindu.base.types.typesystem.DefaultTypeSystem.*
 
 /**
  * @author andreas muelder
- * @author Alexander Nyßen - Adopted to type system changes
  */
 class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
@@ -26,11 +26,11 @@ class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	override getTargetLanguageName(Type type) {
 		switch (type) {
-			case type == null || isVoidType(type): 'void'
-			case isIntegerType(type): 'sc_integer'
-			case isRealType(type): 'sc_real'
-			case isBooleanType(type): 'sc_boolean'
-			case isStringType(type): 'sc_string'
+			case type == null || ts.isSame(type, getType(VOID)) : 'void'
+			case ts.isSame(type, getType(INTEGER)): 'sc_integer'
+			case ts.isSame(type, getType(REAL)): 'sc_real'
+			case ts.isSame(type, getType(BOOLEAN)): 'sc_boolean'
+			case ts.isSame(type, getType(STRING)): 'sc_string'
 		}
 	}
 

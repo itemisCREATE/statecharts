@@ -14,9 +14,11 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.base.types.ITypeSystem
-import org.yakindu.base.types.InferredType
 import org.yakindu.base.types.Package
+import org.yakindu.base.types.Type
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer
+import org.yakindu.base.types.typesystem.DefaultTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Declaration
@@ -28,7 +30,6 @@ import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.EventDirection
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
@@ -36,6 +37,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
+import org.yakindu.base.types.interpreter.ITypeSystemInterpreter
 
 /**
  * 
@@ -46,7 +48,8 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 
 	@Inject extension IQualifiedNameProvider
 	@Inject extension ITypeSystem
-	@Inject extension ISTextTypeInferrer
+	@Inject extension ITypeSystemInferrer
+	@Inject extension ITypeSystemInterpreter
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
@@ -112,7 +115,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	def dispatch ExecutionSlot create new ExecutionVariableImpl() transform(VariableDefinition variable) {
 		it.name = variable.fullyQualifiedName.lastSegment
 		it.fqName = variable.fullyQualifiedName.toString
-		it.type = variable.inferType.type
+		it.type = variable.inferType(null)
 		it.value = it.type.initialValue
 		it.writable = !variable.const
 	}
@@ -120,7 +123,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(EventDefinition event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
-		it.type = event.inferType.type
+		it.type = event.inferType(null)
 		it.value = it.type.initialValue
 		it.direction = EventDirection.get(event.direction.value)
 	}
@@ -128,19 +131,19 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	def dispatch ExecutionSlot create new ExecutionVariableImpl() transform(OperationDefinition op) {
 		it.name = op.fullyQualifiedName.lastSegment
 		it.fqName = op.fullyQualifiedName.toString
-		it.type = new InferredType(if(op.type != null) op.type else voidType)
+		it.type = if(op.type != null) op.type else getType(DefaultTypeSystem.VOID)
 		it.value = it.type.initialValue
 	}
 
 	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(TimeEvent event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
-		it.type = new InferredType(integerType)
+		it.type = getType(DefaultTypeSystem.INTEGER)
 		it.value = initialValue(it.type)
 	}
 
-	def Object initialValue(InferredType inferredType) {
-		return inferredType.type.defaultValue
+	def Object initialValue(Type type) {
+		return type.defaultValue
 	}
 	
 }

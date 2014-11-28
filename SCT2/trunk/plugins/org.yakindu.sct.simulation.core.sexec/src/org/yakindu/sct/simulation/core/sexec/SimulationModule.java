@@ -14,14 +14,14 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
-import org.yakindu.base.types.DefaultTypeSystem;
-import org.yakindu.base.types.ITypeSystem;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.DefaultTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.SequencerModule;
+import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
-import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
-import org.yakindu.sct.model.stext.types.STextDefaultTypeInferrer;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.sexec.container.DefaultExecutionContextInitializer;
 import org.yakindu.sct.simulation.core.sexec.container.DefaultSimulationEngineFactory;
@@ -105,8 +105,8 @@ public class SimulationModule extends AbstractGenericModule {
 		return DefaultTypeSystem.class;
 	}
 
-	public Class<? extends ISTextTypeInferrer> bindISTextTypeInferrer() {
-		return STextDefaultTypeInferrer.class;
+	public Class<? extends ITypeSystemInferrer> bindISTextTypeInferrer() {
+		return STextTypeInferrer.class;
 	}
 	
 	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {

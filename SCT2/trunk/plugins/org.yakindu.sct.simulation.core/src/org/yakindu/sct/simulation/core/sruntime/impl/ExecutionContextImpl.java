@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.base.impl.NamedElementImpl;
-import org.yakindu.base.types.InferredType;
 import org.yakindu.sct.model.sgraph.RegularState;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
@@ -47,10 +46,10 @@ import com.google.common.collect.Sets;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getFqName <em>Fq Name</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#isWritable <em>Writable</em>}</li>
+ *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getSlots <em>Slots</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getActiveStates <em>Active States</em>}</li>
  *   <li>{@link org.yakindu.sct.simulation.core.sruntime.impl.ExecutionContextImpl#getExecutedElements <em>Executed Elements</em>}</li>
@@ -62,24 +61,6 @@ import com.google.common.collect.Sets;
  * @generated
  */
 public class ExecutionContextImpl extends NamedElementImpl implements ExecutionContext {
-	/**
-	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final InferredType TYPE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getType()
-	 * @generated
-	 * @ordered
-	 */
-	protected InferredType type = TYPE_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -137,6 +118,15 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * @ordered
 	 */
 	protected boolean writable = WRITABLE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected org.yakindu.base.types.Type type;
 
 	/**
 	 * The cached value of the '{@link #getSlots() <em>Slots</em>}' containment reference list.
@@ -216,7 +206,15 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InferredType getType() {
+	public org.yakindu.base.types.Type getType() {
+		if (type != null && type.eIsProxy()) {
+			InternalEObject oldType = (InternalEObject)type;
+			type = (org.yakindu.base.types.Type)eResolveProxy(oldType);
+			if (type != oldType) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, SRuntimePackage.EXECUTION_CONTEXT__TYPE, oldType, type));
+			}
+		}
 		return type;
 	}
 
@@ -225,8 +223,17 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setType(InferredType newType) {
-		InferredType oldType = type;
+	public org.yakindu.base.types.Type basicGetType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(org.yakindu.base.types.Type newType) {
+		org.yakindu.base.types.Type oldType = type;
 		type = newType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, SRuntimePackage.EXECUTION_CONTEXT__TYPE, oldType, type));
@@ -545,14 +552,15 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
-				return getType();
 			case SRuntimePackage.EXECUTION_CONTEXT__VALUE:
 				return getValue();
 			case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME:
 				return getFqName();
 			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
 				return isWritable();
+			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
+				if (resolve) return getType();
+				return basicGetType();
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				return getSlots();
 			case SRuntimePackage.EXECUTION_CONTEXT__ACTIVE_STATES:
@@ -575,9 +583,6 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
-				setType((InferredType)newValue);
-				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__VALUE:
 				setValue(newValue);
 				return;
@@ -586,6 +591,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
 				setWritable((Boolean)newValue);
+				return;
+			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
+				setType((org.yakindu.base.types.Type)newValue);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				getSlots().clear();
@@ -617,9 +625,6 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
-				setType(TYPE_EDEFAULT);
-				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
@@ -628,6 +633,9 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
 				setWritable(WRITABLE_EDEFAULT);
+				return;
+			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
+				setType((org.yakindu.base.types.Type)null);
 				return;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				getSlots().clear();
@@ -655,14 +663,14 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
-				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case SRuntimePackage.EXECUTION_CONTEXT__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME:
 				return FQ_NAME_EDEFAULT == null ? fqName != null : !FQ_NAME_EDEFAULT.equals(fqName);
 			case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE:
 				return writable != WRITABLE_EDEFAULT;
+			case SRuntimePackage.EXECUTION_CONTEXT__TYPE:
+				return type != null;
 			case SRuntimePackage.EXECUTION_CONTEXT__SLOTS:
 				return slots != null && !slots.isEmpty();
 			case SRuntimePackage.EXECUTION_CONTEXT__ACTIVE_STATES:
@@ -685,10 +693,10 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
 		if (baseClass == ExecutionSlot.class) {
 			switch (derivedFeatureID) {
-				case SRuntimePackage.EXECUTION_CONTEXT__TYPE: return SRuntimePackage.EXECUTION_SLOT__TYPE;
 				case SRuntimePackage.EXECUTION_CONTEXT__VALUE: return SRuntimePackage.EXECUTION_SLOT__VALUE;
 				case SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME: return SRuntimePackage.EXECUTION_SLOT__FQ_NAME;
 				case SRuntimePackage.EXECUTION_CONTEXT__WRITABLE: return SRuntimePackage.EXECUTION_SLOT__WRITABLE;
+				case SRuntimePackage.EXECUTION_CONTEXT__TYPE: return SRuntimePackage.EXECUTION_SLOT__TYPE;
 				default: return -1;
 			}
 		}
@@ -709,10 +717,10 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
 		if (baseClass == ExecutionSlot.class) {
 			switch (baseFeatureID) {
-				case SRuntimePackage.EXECUTION_SLOT__TYPE: return SRuntimePackage.EXECUTION_CONTEXT__TYPE;
 				case SRuntimePackage.EXECUTION_SLOT__VALUE: return SRuntimePackage.EXECUTION_CONTEXT__VALUE;
 				case SRuntimePackage.EXECUTION_SLOT__FQ_NAME: return SRuntimePackage.EXECUTION_CONTEXT__FQ_NAME;
 				case SRuntimePackage.EXECUTION_SLOT__WRITABLE: return SRuntimePackage.EXECUTION_CONTEXT__WRITABLE;
+				case SRuntimePackage.EXECUTION_SLOT__TYPE: return SRuntimePackage.EXECUTION_CONTEXT__TYPE;
 				default: return -1;
 			}
 		}
@@ -734,9 +742,7 @@ public class ExecutionContextImpl extends NamedElementImpl implements ExecutionC
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (type: ");
-		result.append(type);
-		result.append(", value: ");
+		result.append(" (value: ");
 		result.append(value);
 		result.append(", fqName: ");
 		result.append(fqName);

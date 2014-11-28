@@ -14,11 +14,13 @@ import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
-import org.yakindu.base.types.DefaultTypeSystem;
-import org.yakindu.base.types.ITypeSystem;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.DefaultTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.resource.SCTLinker;
 import org.yakindu.sct.model.sgraph.resource.provider.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
+import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
 
@@ -32,8 +34,7 @@ import com.google.inject.name.Names;
  * @author andreas muelder
  * @author axel terfloth
  */
-public class STextRuntimeModule extends
-		org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
+public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTextRuntimeModule {
 
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return STextGlobalScopeProvider.class;
@@ -58,14 +59,16 @@ public class STextRuntimeModule extends
 		return DefaultTypeSystem.class;
 	}
 
+	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
+		return STextTypeInferrer.class;
+	}
+
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {
 		return SCTResourceDescriptionStrategy.class;
 	}
 
 	public void configureFileExtensions(Binder binder) {
-		binder.bind(String.class)
-				.annotatedWith(Names.named(Constants.FILE_EXTENSIONS))
-				.toInstance("stext,sct");
+		binder.bind(String.class).annotatedWith(Names.named(Constants.FILE_EXTENSIONS)).toInstance("stext,sct");
 	}
 
 }

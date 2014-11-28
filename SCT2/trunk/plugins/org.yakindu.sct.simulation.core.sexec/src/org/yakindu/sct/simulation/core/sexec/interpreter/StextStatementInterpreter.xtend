@@ -40,17 +40,18 @@ import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Enumerator
-import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.typesystem.DefaultTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
+import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
-import org.yakindu.sct.model.stext.stext.OperationDefinition
 
 /**
  * 
@@ -90,30 +91,30 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object typeCast(Long value, Type type) {
-		if(ts.isIntegerType(type)) return value
-		if(ts.isRealType(type)) return Double.valueOf(value)
+		if(ts.isSame(type, ts.getType(DefaultTypeSystem.INTEGER))) return value
+		if(ts.isSame(type, ts.getType(DefaultTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Float value, Type type) {
-		if(ts.isIntegerType(type)) return value.longValue
-		if(ts.isRealType(type)) return Double.valueOf(value)
+		if(ts.isSame(type, ts.getType(DefaultTypeSystem.INTEGER))) return value.longValue
+		if(ts.isSame(type, ts.getType(DefaultTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Double value, Type type) {
-		if(ts.isIntegerType(type)) return value.longValue
-		if(ts.isRealType(type)) return Double.valueOf(value)
+		if(ts.isSame(type, ts.getType(DefaultTypeSystem.INTEGER))) return value.longValue
+		if(ts.isSame(type, ts.getType(DefaultTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Boolean value, Type type) {
-		if(ts.isBooleanType(type)) return value
+		if(ts.isSame(type, ts.getType(DefaultTypeSystem.BOOLEAN))) return value
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(String value, Type type) {
-		if(ts.isStringType(type)) return value
+		if(ts.isSame(type, ts.getType(DefaultTypeSystem.STRING))) return value
 		throw new IllegalArgumentException
 	}
 
@@ -125,13 +126,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		var scopeVariable = context.resolve(assignment.varRef)
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
-
 			//Strong typing, use the type of the scopeVariable instead of using new runtime type
-			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type.type) else null
+			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type) else null
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
 			scopeVariable.value = if(result != null) typeCast(evaluate(operator, scopeVariable.getValue, result),
-				scopeVariable.type.type) else null
+				scopeVariable.type) else null
 		}
 		scopeVariable.value
 	}
