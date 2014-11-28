@@ -109,7 +109,7 @@ class ExpressionCode {
 	def dispatch CharSequence code(LogicalNotExpression it) '''! «operand.code»'''
 
 	def dispatch CharSequence code(LogicalRelationExpression it) '''
-	«IF isSame(leftOperand.inferType, getType(DefaultTypeSystem.STRING))»
+	«IF isSame(leftOperand.inferType(null), getType(DefaultTypeSystem.STRING))»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 
