@@ -44,7 +44,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
 
 	public Object infer(VariableDefinition e) {
-		Type type = e.getType();
+		Type type = inferTypeDispatch(e.getType());
 		assertNotType(type, VARIABLE_VOID_TYPE, getType(VOID));
 		if (e.getInitialValue() == null)
 			return inferTypeDispatch(type);
