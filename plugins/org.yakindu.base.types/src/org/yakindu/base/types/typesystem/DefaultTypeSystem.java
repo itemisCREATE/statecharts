@@ -44,11 +44,10 @@ public class DefaultTypeSystem extends AbstractTypeSystem {
 		declareSuperType(getType(INTEGER), getType(REAL));
 	}
 
-	public Type declarePrimitive(String name) {
+	protected Type declarePrimitive(String name) {
 		PrimitiveType primitive = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitive.setName(name);
 		declareType(primitive, name);
 		return primitive;
-
 	}
 }

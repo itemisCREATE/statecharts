@@ -213,13 +213,22 @@ public interface TypesPackage extends EPackage {
 	int TYPE__SCHEME = PACKAGE_MEMBER_FEATURE_COUNT + 1;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE__ABSTRACT = PACKAGE_MEMBER_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 2;
+	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -542,6 +551,15 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__SCHEME = TYPE__SCHEME;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PRIMITIVE_TYPE__ABSTRACT = TYPE__ABSTRACT;
+
+	/**
 	 * The feature id for the '<em><b>Base Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -585,6 +603,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__SCHEME = PRIMITIVE_TYPE__SCHEME;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ENUMERATION_TYPE__ABSTRACT = PRIMITIVE_TYPE__ABSTRACT;
 
 	/**
 	 * The feature id for the '<em><b>Base Type</b></em>' reference.
@@ -651,6 +678,15 @@ public interface TypesPackage extends EPackage {
 	int PARAMETERIZED_TYPE__SCHEME = TYPE__SCHEME;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PARAMETERIZED_TYPE__ABSTRACT = TYPE__ABSTRACT;
+
+	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -704,6 +740,15 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPLEX_TYPE__SCHEME = PARAMETERIZED_TYPE__SCHEME;
+
+	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPLEX_TYPE__ABSTRACT = PARAMETERIZED_TYPE__ABSTRACT;
 
 	/**
 	 * The feature id for the '<em><b>Parameter</b></em>' containment reference list.
@@ -854,6 +899,15 @@ public interface TypesPackage extends EPackage {
 	int TYPE_PARAMETER__SCHEME = TYPE__SCHEME;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_PARAMETER__ABSTRACT = TYPE__ABSTRACT;
+
+	/**
 	 * The feature id for the '<em><b>Bound</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -969,6 +1023,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getType_Scheme();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Type#isAbstract <em>Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Abstract</em>'.
+	 * @see org.yakindu.base.types.Type#isAbstract()
+	 * @see #getType()
+	 * @generated
+	 */
+	EAttribute getType_Abstract();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Feature <em>Feature</em>}'.
@@ -1361,6 +1426,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute TYPE__SCHEME = eINSTANCE.getType_Scheme();
+
+		/**
+		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TYPE__ABSTRACT = eINSTANCE.getType_Abstract();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.FeatureImpl <em>Feature</em>}' class.

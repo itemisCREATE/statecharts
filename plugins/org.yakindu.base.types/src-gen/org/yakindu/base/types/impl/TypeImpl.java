@@ -29,6 +29,7 @@ import org.yakindu.base.types.TypesPackage;
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getConstraint <em>Constraint</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getScheme <em>Scheme</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isAbstract <em>Abstract</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,6 +64,26 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	 * @ordered
 	 */
 	protected String scheme = SCHEME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -121,6 +142,27 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE__ABSTRACT, oldAbstract, abstract_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -142,6 +184,8 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 				return getConstraint();
 			case TypesPackage.TYPE__SCHEME:
 				return getScheme();
+			case TypesPackage.TYPE__ABSTRACT:
+				return isAbstract();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -162,6 +206,9 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 			case TypesPackage.TYPE__SCHEME:
 				setScheme((String)newValue);
 				return;
+			case TypesPackage.TYPE__ABSTRACT:
+				setAbstract((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -180,6 +227,9 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 			case TypesPackage.TYPE__SCHEME:
 				setScheme(SCHEME_EDEFAULT);
 				return;
+			case TypesPackage.TYPE__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -196,6 +246,8 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 				return constraint != null && !constraint.isEmpty();
 			case TypesPackage.TYPE__SCHEME:
 				return SCHEME_EDEFAULT == null ? scheme != null : !SCHEME_EDEFAULT.equals(scheme);
+			case TypesPackage.TYPE__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

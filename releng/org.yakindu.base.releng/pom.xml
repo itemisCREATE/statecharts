@@ -377,7 +377,6 @@
 
 		<module>../org.yakindu.base.types</module>
 		<module>../org.yakindu.base.types.edit</module>
-		<module>../org.yakindu.base.types.scope</module>
 
 		<module>../org.yakindu.base.expressions</module>
 		<module>../org.yakindu.base.expressions.edit</module>
