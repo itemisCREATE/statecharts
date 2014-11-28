@@ -12,4 +12,5 @@ package org.yakindu.base.expressions.scoping
  */
 class ExpressionsScopeProvider extends org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider {
 
+
 }
