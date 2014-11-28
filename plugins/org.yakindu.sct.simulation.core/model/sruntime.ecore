@@ -32,13 +32,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//EventDirection"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionSlot" abstract="true" eSuperTypes="../../org.yakindu.base.types/model/base.ecore#//NamedElement">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//InferredType"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//JavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="writable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.yakindu.base.types/model/types.ecore#//Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="InferredType" instanceClassName="org.yakindu.base.types.InferredType"/>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionVariable" eSuperTypes="#//ExecutionSlot"/>
   <eClassifiers xsi:type="ecore:EClass" name="CompositeSlot" eSuperTypes="#//ExecutionSlot">
     <eStructuralFeatures xsi:type="ecore:EReference" name="slots" upperBound="-1"

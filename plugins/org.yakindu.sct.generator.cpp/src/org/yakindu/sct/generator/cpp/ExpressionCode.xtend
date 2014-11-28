@@ -27,7 +27,9 @@ import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
-import org.yakindu.base.types.ITypeSystem
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer
+import org.yakindu.base.types.typesystem.DefaultTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgraph.Event
@@ -36,17 +38,16 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
 
 class ExpressionCode {
 
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
-	@Inject extension ISTextTypeInferrer
+	@Inject extension ITypeSystemInferrer
 	@Inject extension INamingService
 	@Inject extension ICodegenTypeSystemAccess
-	
+
 	/* Refering to declared elements */
 	def dispatch CharSequence code(ElementReferenceExpression it) {
 		it.code(it.definition)
@@ -70,9 +71,9 @@ class ExpressionCode {
 
 	/* HANDLING LITERALS */
 	def dispatch CharSequence code(Literal it) '''#error unknown literal type «getClass().name» '''
-	
+
 	def dispatch CharSequence code(NullLiteral it) '''«Naming::NULL_STRING»'''
-	
+
 	def dispatch CharSequence code(StringLiteral it) '''"«value.escaped»"'''
 
 	def String escaped(String it) {
@@ -100,7 +101,7 @@ class ExpressionCode {
 
 	/* Logical Expressions */
 	def dispatch CharSequence code(LogicalOrExpression it) '''«leftOperand.code» || «rightOperand.code»'''
-	
+
 	def dispatch CharSequence code(ConditionalExpression it) '''«condition.code» ? «trueCase.code» : «falseCase.code»'''
 
 	def dispatch CharSequence code(LogicalAndExpression it) '''«leftOperand.code» && «rightOperand.code»'''
@@ -108,7 +109,7 @@ class ExpressionCode {
 	def dispatch CharSequence code(LogicalNotExpression it) '''! «operand.code»'''
 
 	def dispatch CharSequence code(LogicalRelationExpression it) '''
-	«IF leftOperand.inferType.type.stringType»
+	«IF isSame(leftOperand.inferType, getType(DefaultTypeSystem.STRING))»
 		(strcmp(«leftOperand.code», «rightOperand.code») «operator.literal» 0)
 	«ELSE»«leftOperand.code» «operator.literal» «rightOperand.code»«ENDIF»'''
 
@@ -136,7 +137,7 @@ class ExpressionCode {
 	def dispatch CharSequence code(ActiveStateReferenceExpression it) '''«flow.activeFctID»(«value.shortName»)'''
 
 	def dispatch CharSequence code(ParenthesizedExpression it) '''(«expression.code»)'''
-	
+
 	def dispatch CharSequence code(TypeCastExpression it) '''((«type.getTargetLanguageName») «operand.code»)'''
-	
+
 }

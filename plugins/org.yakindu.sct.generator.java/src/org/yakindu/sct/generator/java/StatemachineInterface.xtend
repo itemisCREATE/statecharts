@@ -11,8 +11,9 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.Parameter
+import org.yakindu.base.types.typesystem.DefaultTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -96,14 +97,14 @@ class StatemachineInterface {
 				«scope.eventAccessors»
 				«scope.variableAccessors»
 				«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
-					public List<«scope.getInterfaceListenerName()»> getListeners();
+				public List<«scope.getInterfaceListenerName()»> getListeners();
 				«ENDIF»
 			
 					«IF scope.hasOperations()»
 						public void set«scope.getInterfaceOperationCallbackName()»(«scope.getInterfaceOperationCallbackName()» operationCallback);
 					«ENDIF»
 				}
-			'''
+		'''
 	}
 
 	def private createListenerInterface(InterfaceScope scope, GeneratorEntry entry) {
@@ -113,7 +114,7 @@ class StatemachineInterface {
 				public interface «scope.getInterfaceListenerName()» {
 					«FOR event : scope.eventDefinitions»
 						«IF event.direction == Direction::OUT»
-							«IF event.type != null && !event.type.voidType»
+							«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
 								public void on«event.name.toFirstUpper()»Raised(«event.type.targetLanguageName» value);
 							«ELSE»
 								public void on«event.name.toFirstUpper()»Raised();
@@ -143,7 +144,7 @@ class StatemachineInterface {
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
-				«IF event.type != null && !event.type.voidType»
+				«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
 						public void raise«event.name.asName»(«event.type.targetLanguageName» value);
 					«ELSE»
 						public void raise«event.name.asName»();
@@ -151,7 +152,7 @@ class StatemachineInterface {
 				«ELSEIF event.direction == Direction::OUT»
 					public boolean isRaised«event.name.asName»();
 					««« IMPORTANT: An event not specifying a type is regarded to have a void type
-				«IF event.type != null && !event.type.voidType»
+				«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
 						public «event.type.targetLanguageName» get«event.name.asName»Value();
 					«ENDIF»	
 				«ENDIF»

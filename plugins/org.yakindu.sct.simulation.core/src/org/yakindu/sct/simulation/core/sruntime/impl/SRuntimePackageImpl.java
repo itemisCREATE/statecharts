@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.base.types.InferredType;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.EventDirection;
@@ -92,13 +91,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EDataType inferredTypeEDataType = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EDataType javaObjectEDataType = null;
 
 	/**
@@ -149,6 +141,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 
 		// Initialize simple dependencies
 		SGraphPackage.eINSTANCE.eClass();
+		org.yakindu.base.types.TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSRuntimePackage.createPackageContents();
@@ -260,8 +253,8 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getExecutionSlot_Type() {
-		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(0);
+	public EReference getExecutionSlot_Type() {
+		return (EReference)executionSlotEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -270,7 +263,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * @generated
 	 */
 	public EAttribute getExecutionSlot_Value() {
-		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -279,7 +272,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * @generated
 	 */
 	public EAttribute getExecutionSlot_FqName() {
-		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -288,7 +281,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * @generated
 	 */
 	public EAttribute getExecutionSlot_Writable() {
-		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)executionSlotEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -350,15 +343,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EDataType getInferredType() {
-		return inferredTypeEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EDataType getJavaObject() {
 		return javaObjectEDataType;
 	}
@@ -403,10 +387,10 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		createEAttribute(executionEventEClass, EXECUTION_EVENT__DIRECTION);
 
 		executionSlotEClass = createEClass(EXECUTION_SLOT);
-		createEAttribute(executionSlotEClass, EXECUTION_SLOT__TYPE);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__VALUE);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__FQ_NAME);
 		createEAttribute(executionSlotEClass, EXECUTION_SLOT__WRITABLE);
+		createEReference(executionSlotEClass, EXECUTION_SLOT__TYPE);
 
 		executionVariableEClass = createEClass(EXECUTION_VARIABLE);
 
@@ -420,7 +404,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		eventDirectionEEnum = createEEnum(EVENT_DIRECTION);
 
 		// Create data types
-		inferredTypeEDataType = createEDataType(INFERRED_TYPE);
 		javaObjectEDataType = createEDataType(JAVA_OBJECT);
 	}
 
@@ -450,6 +433,7 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
 		SGraphPackage theSGraphPackage = (SGraphPackage)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI);
+		org.yakindu.base.types.TypesPackage theTypesPackage = (org.yakindu.base.types.TypesPackage)EPackage.Registry.INSTANCE.getEPackage(org.yakindu.base.types.TypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -498,10 +482,10 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		initEAttribute(getExecutionEvent_Direction(), this.getEventDirection(), "direction", null, 0, 1, ExecutionEvent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionSlotEClass, ExecutionSlot.class, "ExecutionSlot", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getExecutionSlot_Type(), this.getInferredType(), "type", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionSlot_Value(), this.getJavaObject(), "value", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionSlot_FqName(), ecorePackage.getEString(), "fqName", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getExecutionSlot_Writable(), ecorePackage.getEBoolean(), "writable", "true", 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutionSlot_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, ExecutionSlot.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executionVariableEClass, ExecutionVariable.class, "ExecutionVariable", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -518,7 +502,6 @@ public class SRuntimePackageImpl extends EPackageImpl implements SRuntimePackage
 		addEEnumLiteral(eventDirectionEEnum, EventDirection.OUT);
 
 		// Initialize data types
-		initEDataType(inferredTypeEDataType, InferredType.class, "InferredType", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(javaObjectEDataType, Object.class, "JavaObject", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource

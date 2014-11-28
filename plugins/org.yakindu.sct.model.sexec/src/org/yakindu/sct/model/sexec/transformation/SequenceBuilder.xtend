@@ -13,7 +13,8 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.StringLiteral
-import org.yakindu.base.types.ITypeSystem
+import org.yakindu.base.types.interpreter.ITypeSystemInterpreter
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -39,7 +40,8 @@ class SequenceBuilder {
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping mapping
 	@Inject extension TraceExtensions trace
-
+	
+	@Inject extension ITypeSystemInterpreter
 	@Inject extension ITypeSystem ts
 
 	@Inject @Named("ADD_TRACES")
@@ -492,13 +494,7 @@ class SequenceBuilder {
 		if (vd.initialValue != null) {
 			return vd.initialValue
 		} else {
-			switch (vd) {
-				case isBooleanType(vd.type): false.buildValue
-				case isIntegerType(vd.type): 0.buildValue
-				case isRealType(vd.type): buildValue(0.0d as double)
-				case isStringType(vd.type): "".buildValue
-				default: null
-			}
+			return vd.type.defaultValue.buildValue
 		}
 	}
 
@@ -556,7 +552,7 @@ class SequenceBuilder {
 		div
 	}
 
-	def Expression buildValue(boolean b) {
+	def dispatch Expression buildValue(boolean b) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val BoolLiteral lit = factory.createBoolLiteral
 		lit.value = b
@@ -565,7 +561,7 @@ class SequenceBuilder {
 		pve
 	}
 
-	def Expression buildValue(int i) {
+	def dispatch Expression buildValue(int i) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val IntLiteral lit = factory.createIntLiteral
 		lit.value = i
@@ -574,7 +570,7 @@ class SequenceBuilder {
 		pve
 	}
 
-	def Expression buildValue(double d) {
+	def dispatch Expression buildValue(double d) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val RealLiteral lit = factory.createRealLiteral
 		lit.value = d
@@ -583,7 +579,7 @@ class SequenceBuilder {
 		pve
 	}
 
-	def Expression buildValue(String i) {
+	def dispatch Expression buildValue(String i) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val StringLiteral lit = factory.createStringLiteral
 		lit.value = i

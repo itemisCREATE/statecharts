@@ -19,8 +19,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.types.ITypeSystem;
-import org.yakindu.base.types.InferredType;
+import org.yakindu.base.types.typesystem.DefaultTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
@@ -473,35 +473,35 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		ExecutionVariable intVar = new ExecutionVariableImpl();
 		intVar.setName("intVar");
 		intVar.setFqName("intVar");
-		intVar.setType(new InferredType(typeSystem.getIntegerType()));
+		intVar.setType(typeSystem.getType(DefaultTypeSystem.INTEGER));
 		intVar.setValue(0);
 		context.getSlots().add(intVar);
 
 		ExecutionVariable boolVar = new ExecutionVariableImpl();
 		boolVar.setName("boolVar");
 		boolVar.setFqName("boolVar");
-		boolVar.setType(new InferredType(typeSystem.getBooleanType()));
+		boolVar.setType(typeSystem.getType(DefaultTypeSystem.BOOLEAN));
 		boolVar.setValue(false);
 		context.getSlots().add(boolVar);
 
 		ExecutionVariable realVar = new ExecutionVariableImpl();
 		realVar.setName("realVar");
 		realVar.setFqName("realVar");
-		realVar.setType(new InferredType(typeSystem.getRealType()));
+		realVar.setType(typeSystem.getType(DefaultTypeSystem.REAL));
 		realVar.setValue(0.0f);
 		context.getSlots().add(realVar);
 
 		ExecutionVariable stringVar = new ExecutionVariableImpl();
 		stringVar.setName("stringVar");
 		stringVar.setFqName("stringVar");
-		stringVar.setType(new InferredType(typeSystem.getStringType()));
+		stringVar.setType(typeSystem.getType(DefaultTypeSystem.STRING));
 		stringVar.setValue("");
 		context.getSlots().add(stringVar);
 
 		ExecutionEvent event = new ExecutionEventImpl();
 		event.setName("abc");
 		event.setFqName("abc");
-		event.setType(new InferredType(typeSystem.getIntegerType()));
+		event.setType(typeSystem.getType(DefaultTypeSystem.INTEGER));
 		context.getSlots().add(event);
 	}
 

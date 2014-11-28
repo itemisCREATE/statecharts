@@ -10,6 +10,7 @@ import org.yakindu.base.expressions.expressions.BitwiseAndExpression
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.ConditionalExpression
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
 import org.yakindu.base.expressions.expressions.HexLiteral
@@ -19,6 +20,7 @@ import org.yakindu.base.expressions.expressions.LogicalNotExpression
 import org.yakindu.base.expressions.expressions.LogicalOrExpression
 import org.yakindu.base.expressions.expressions.LogicalRelationExpression
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
+import org.yakindu.base.expressions.expressions.NullLiteral
 import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
@@ -29,9 +31,13 @@ import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.ShiftOperator
 import org.yakindu.base.expressions.expressions.StringLiteral
+import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryOperator
-import org.yakindu.base.types.ITypeSystem
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer
+import org.yakindu.base.types.typesystem.DefaultTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Event
@@ -40,18 +46,13 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.types.ISTextTypeInferrer
-import org.yakindu.base.expressions.expressions.NullLiteral
-import org.yakindu.base.expressions.expressions.ConditionalExpression
-import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
-import org.yakindu.base.expressions.expressions.TypeCastExpression
 
 class ExpressionCode {
 
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
-	@Inject extension ISTextTypeInferrer
+	@Inject extension ITypeSystemInferrer
 	@Inject extension ICodegenTypeSystemAccess
 
 	private var List<TimeEvent> timeEvents;
@@ -101,7 +102,7 @@ class ExpressionCode {
 	def dispatch String code(RealLiteral expression) {
 		expression.value.toString();
 	}
-	
+
 	def dispatch String code(NullLiteral expression) {
 		'null'
 	}
@@ -118,7 +119,7 @@ class ExpressionCode {
 	def dispatch String code(LogicalOrExpression expression) {
 		expression.leftOperand.code + " || " + expression.rightOperand.code
 	}
-	
+
 	def dispatch String code(ConditionalExpression expression) {
 		expression.condition.code + ' ? ' + expression.trueCase.code + ' : ' + expression.falseCase.code
 	}
@@ -132,7 +133,7 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(LogicalRelationExpression expression) {
-		if (expression.leftOperand.inferType.type.stringType) {
+		if (isSame(expression.leftOperand.inferType, getType(DefaultTypeSystem.STRING))){
 			expression.logicalString
 		} else
 			expression.leftOperand.code + expression.operator.code + expression.rightOperand.code;
@@ -239,10 +240,10 @@ class ExpressionCode {
 	def dispatch String code(TimeEvent it) {
 		"timeEvents[" + getTimeEvents.indexOf(it) + "]"
 	}
-	
-	def dispatch String code(TypeCastExpression it){
-		 '''((«type.getTargetLanguageName») «operand.code»)'''
-	}	
+
+	def dispatch String code(TypeCastExpression it) {
+		'''((«type.getTargetLanguageName») «operand.code»)'''
+	}
 
 	def dispatch String getContext(Variable it) {
 		if (scope != null) {
@@ -268,6 +269,5 @@ class ExpressionCode {
 	def dispatch String getContext(EObject it) {
 		return "//ERROR: No context for " + it
 	}
-	
-	
+
 }

@@ -4,7 +4,7 @@
     modelDirectory="/org.yakindu.sct.simulation.core/src" modelPluginID="org.yakindu.sct.simulation.core"
     modelName="Sruntime" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     suppressEMFTypes="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
-    copyrightFields="false" publicConstructors="true" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph"
+    copyrightFields="false" publicConstructors="true" usedGenPackages="../../org.yakindu.base.types/model/base.genmodel#//base ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.genmodel#//sgraph ../../org.yakindu.base.types/model/types.genmodel#//types"
     interfaceNamePattern="" importOrganizing="true">
   <foreignModel>sruntime.ecore</foreignModel>
   <genPackages prefix="SRuntime" basePackage="org.yakindu.sct.simulation.core" disposableProviderFactory="true"
@@ -14,7 +14,6 @@
       <genEnumLiterals ecoreEnumLiteral="sruntime.ecore#//EventDirection/IN"/>
       <genEnumLiterals ecoreEnumLiteral="sruntime.ecore#//EventDirection/OUT"/>
     </genEnums>
-    <genDataTypes ecoreDataType="sruntime.ecore#//InferredType"/>
     <genDataTypes ecoreDataType="sruntime.ecore#//JavaObject"/>
     <genClasses ecoreClass="sruntime.ecore#//ExecutionContext">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sruntime.ecore#//ExecutionContext/activeStates"/>
@@ -32,6 +31,10 @@
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllActiveStates"/>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllEvents"/>
       <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllVariables"/>
+      <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getAllSlots"/>
+      <genOperations ecoreOperation="sruntime.ecore#//ExecutionContext/getSlot">
+        <genParameters ecoreParameter="sruntime.ecore#//ExecutionContext/getSlot/qualifiedName"/>
+      </genOperations>
     </genClasses>
     <genClasses ecoreClass="sruntime.ecore#//ExecutionEvent">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionEvent/raised"/>
@@ -39,13 +42,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionEvent/direction"/>
     </genClasses>
     <genClasses image="false" ecoreClass="sruntime.ecore#//ExecutionSlot">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionSlot/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionSlot/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionSlot/fqName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sruntime.ecore#//ExecutionSlot/writable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference sruntime.ecore#//ExecutionSlot/type"/>
     </genClasses>
     <genClasses ecoreClass="sruntime.ecore#//ExecutionVariable"/>
     <genClasses ecoreClass="sruntime.ecore#//CompositeSlot">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sruntime.ecore#//CompositeSlot/slots"/>
+    </genClasses>
+    <genClasses ecoreClass="sruntime.ecore#//ReferenceSlot">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sruntime.ecore#//ReferenceSlot/reference"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

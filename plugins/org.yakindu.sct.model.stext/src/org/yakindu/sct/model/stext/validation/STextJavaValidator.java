@@ -51,12 +51,12 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Feature;
-import org.yakindu.base.types.ITypeSystem;
-import org.yakindu.base.types.InferenceResult;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -94,7 +94,6 @@ import org.yakindu.sct.model.stext.stext.ReactionTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
-import org.yakindu.sct.model.stext.types.ISTextTypeInferrer;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -113,12 +112,11 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
  * 
  */
 @ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class })
-public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
+public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages,
+		ITypeTraceAcceptor {
 
 	@Inject
-	private ISTextTypeInferrer typeInferrer;
-	@Inject
-	private ITypeSystem typeSystem;
+	private ITypeSystemInferrer typeInferrer;
 	@Inject
 	private STextGrammarAccess grammarAccess;
 	@Inject
@@ -130,6 +128,34 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private IContainer.Manager containerManager;
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
+
+	@Check
+	public void checkExpression(VariableDefinition expression) {
+		typeInferrer.inferType(expression, this);
+	}
+
+	@Check
+	public void checkExpression(TimeEventSpec expression) {
+		typeInferrer.inferType(expression, this);
+	}
+
+	@Check
+	public void checkExpression(Guard expression) {
+		typeInferrer.inferType(expression, this);
+	}
+
+	public void accept(TypeTrace trace) {
+		switch (trace.getSeverity()) {
+		case ERROR:
+			error(trace.getMessage(), null);
+			break;
+		case WARNING:
+			warning(trace.getMessage(), null);
+			break;
+		case INFO:
+			break;
+		}
+	}
 
 	@Check(CheckType.FAST)
 	public void transitionsWithNoTrigger(Transition trans) {
@@ -417,21 +443,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
-	public void checkVariableDefinition(final VariableDefinition definition) {
-		try {
-			InferenceResult result = typeInferrer.inferType(definition);
-			if (result.getType() != null && typeSystem.isVoidType(result.getType())) {
-				error(VARIABLE_VOID_TYPE, null);
-			} else {
-				report(result, null);
-			}
-		} catch (IllegalArgumentException e) {
-			// ignore unknown literals here, as this also happens when a
-			// linking problem occurred, which is handled in other locations
-		}
-	}
-
-	@Check(CheckType.FAST)
 	public void checkOperationArguments_FeatureCall(final FeatureCall call) {
 		if (call.getFeature() instanceof Operation) {
 			Operation operation = (Operation) call.getFeature();
@@ -512,34 +523,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	@Check(CheckType.FAST)
-	public void checkGuard(Guard guard) {
-		try {
-			InferenceResult result = typeInferrer.inferType(guard.getExpression());
-			if (result.getType() == null || !typeSystem.isBooleanType(result.getType())) {
-				error(GUARD_EXPRESSION, StextPackage.Literals.GUARD__EXPRESSION);
-			}
-			report(result, null);
-		} catch (IllegalArgumentException e) {
-			// ignore unknown literals here, as this also happens when a
-			// linking problem occurred, which is handled in other locations
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkTimeEventSpecValueExpression(TimeEventSpec spec) {
-		try {
-			InferenceResult result = typeInferrer.inferType(spec.getValue());
-			if (result.getType() == null || !typeSystem.isIntegerType(result.getType())) {
-				error(TIME_EXPRESSION, null);
-			}
-			report(result, StextPackage.Literals.TIME_EVENT_SPEC__VALUE);
-		} catch (IllegalArgumentException e) {
-			// ignore unknown literals here, as this also happens when a
-			// linking problem occurred, which is handled in other locations
-		}
-	}
-
-	@Check(CheckType.FAST)
 	public void checkReactionTrigger(ReactionTrigger reactionTrigger) {
 		for (EventSpec eventSpec : reactionTrigger.getTriggers()) {
 			if (!(reactionTrigger.eContainer() instanceof LocalReaction)
@@ -547,19 +530,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 				error("entry and exit events are allowed as local reactions only.",
 						StextPackage.Literals.REACTION_TRIGGER__TRIGGERS, INSIGNIFICANT_INDEX,
 						LOCAL_REACTIONS_NOT_ALLOWED);
-			}
-		}
-	}
-
-	@Check(CheckType.FAST)
-	public void checkReactionEffectActionExpression(ReactionEffect effect) {
-		EList<Expression> actions = effect.getActions();
-		for (Expression expression : actions) {
-			try {
-				report(typeInferrer.inferType(expression), null);
-			} catch (IllegalArgumentException e) {
-				// ignore unknown literals here, as this also happens when a
-				// linking problem occurred, which is handled in other locations
 			}
 		}
 	}

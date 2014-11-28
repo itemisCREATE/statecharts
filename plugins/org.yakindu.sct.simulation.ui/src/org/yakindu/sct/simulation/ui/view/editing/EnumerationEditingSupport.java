@@ -49,7 +49,7 @@ public class EnumerationEditingSupport extends ScopeSlotEditingSupport {
 	}
 
 	public EnumerationType getEnumerationType(ExecutionSlot element) {
-		EnumerationType e = (EnumerationType) element.getType().getType();
+		EnumerationType e = (EnumerationType) element.getType();
 		return e;
 	}
 

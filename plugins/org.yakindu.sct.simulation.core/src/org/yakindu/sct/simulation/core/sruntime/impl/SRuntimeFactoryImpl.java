@@ -16,15 +16,12 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.yakindu.base.types.InferredType;
-import org.yakindu.base.types.PrimitiveType;
-import org.yakindu.base.types.TypesFactory;
-import org.yakindu.sct.simulation.core.sruntime.*;
 import org.yakindu.sct.simulation.core.sruntime.CompositeSlot;
 import org.yakindu.sct.simulation.core.sruntime.EventDirection;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
+import org.yakindu.sct.simulation.core.sruntime.ReferenceSlot;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimeFactory;
 import org.yakindu.sct.simulation.core.sruntime.SRuntimePackage;
 
@@ -89,8 +86,6 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 		switch (eDataType.getClassifierID()) {
 			case SRuntimePackage.EVENT_DIRECTION:
 				return createEventDirectionFromString(eDataType, initialValue);
-			case SRuntimePackage.INFERRED_TYPE:
-				return createInferredTypeFromString(eDataType, initialValue);
 			case SRuntimePackage.JAVA_OBJECT:
 				return createJavaObjectFromString(eDataType, initialValue);
 			default:
@@ -107,8 +102,6 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 		switch (eDataType.getClassifierID()) {
 			case SRuntimePackage.EVENT_DIRECTION:
 				return convertEventDirectionToString(eDataType, instanceValue);
-			case SRuntimePackage.INFERRED_TYPE:
-				return convertInferredTypeToString(eDataType, instanceValue);
 			case SRuntimePackage.JAVA_OBJECT:
 				return convertJavaObjectToString(eDataType, instanceValue);
 			default:
@@ -178,25 +171,6 @@ public class SRuntimeFactoryImpl extends EFactoryImpl implements SRuntimeFactory
 	 */
 	public String convertEventDirectionToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated NOT
-	 */
-	public InferredType createInferredTypeFromString(EDataType eDataType, String initialValue) {
-		PrimitiveType type = TypesFactory.eINSTANCE.createPrimitiveType();
-		type.setName(initialValue);
-		return new InferredType(type);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertInferredTypeToString(EDataType eDataType, Object instanceValue) {
-		return super.convertToString(eDataType, instanceValue);
 	}
 
 	/**
