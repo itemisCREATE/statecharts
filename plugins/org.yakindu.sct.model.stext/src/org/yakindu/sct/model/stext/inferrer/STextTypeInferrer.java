@@ -11,6 +11,7 @@
 package org.yakindu.sct.model.stext.inferrer;
 
 import static org.yakindu.base.types.typesystem.DefaultTypeSystem.BOOLEAN;
+import static org.yakindu.base.types.typesystem.DefaultTypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.DefaultTypeSystem.VOID;
 
 import org.eclipse.emf.ecore.EObject;
@@ -19,11 +20,14 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
 import org.yakindu.base.types.Type;
+import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
+import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
@@ -34,14 +38,16 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
 	public static final String VARIABLE_DEFINITION = "Cannot assign a value of type %s to a variable of type %s.";
 	public static final String EVENT_DEFINITION = "Cannot assign a value of type %s to an event of type %s.";
+	public static final String GUARD = "The evaluation result of a guard expression must be of type boolean";
+	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer";
 
 	public Object infer(VariableDefinition e) {
 		Type type = e.getType();
 		if (e.getInitialValue() == null)
-			return inferType(type);
-		Type type2 = inferType(e.getInitialValue());
+			return inferTypeDispatch(type);
+		Type type2 = inferTypeDispatch(e.getInitialValue());
 		assertCompatibleType(type, type2, String.format(VARIABLE_DEFINITION, type2, type));
-		return inferType(type);
+		return inferTypeDispatch(type);
 	}
 
 	public Object infer(EventDefinition e) {
@@ -50,24 +56,40 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		return getType(BOOLEAN);
 	}
 
+	public Object infer(Guard e) {
+		Type type = inferTypeDispatch(e.getExpression());
+		assertSame(type, getType(BOOLEAN), GUARD);
+		return inferTypeDispatch(type);
+	}
+	
+	public Object infer(TimeEventSpec e) {
+		Type type = inferTypeDispatch(e.getValue());
+		assertSame(type, getType(INTEGER), TIME_SPEC);
+		return inferTypeDispatch(type);
+	}
+	
+	public Object infer(Scope scope) {
+		return getType(VOID);
+	}
+
 	public Object infer(EventValueReferenceExpression e) {
 		EventDefinition definition = deresolve(e.getValue());
-		if(definition != null)
-			return inferType(definition.getType());
-		return inferType(e.getValue());
+		if (definition != null)
+			return inferTypeDispatch(definition.getType());
+		return inferTypeDispatch(e.getValue());
 	}
 
 	public Object infer(OperationDefinition e) {
-		return inferType(e.getType());
+		return inferTypeDispatch(e.getType() != null ? e.getType() : getType(VOID));
 	}
 
 	public Object infer(EventRaisingExpression e) {
 		if (e.getValue() == null)
 			return getType(VOID);
-		Type type1 = inferType(deresolve(e.getEvent()).getType());
-		Type type2 = inferType(e.getValue());
+		Type type1 = inferTypeDispatch(deresolve(e.getEvent()).getType());
+		Type type2 = inferTypeDispatch(e.getValue());
 		assertIsSuperType(type1, type2, String.format(EVENT_DEFINITION, type2, type1));
-		return inferType(e.getValue());
+		return inferTypeDispatch(e.getValue());
 
 	}
 
