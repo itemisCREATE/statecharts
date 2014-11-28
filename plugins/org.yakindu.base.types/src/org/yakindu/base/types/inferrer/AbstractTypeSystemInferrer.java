@@ -13,6 +13,8 @@ package org.yakindu.base.types.inferrer;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -21,6 +23,9 @@ import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.Ty
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.TypeTrace.Severity;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.inject.Inject;
 
 /**
@@ -38,8 +43,11 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	private PolymorphicDispatcher<Object> dispatcher;
 
+	private LoadingCache<EObject, Type> typeCache;
+
 	public AbstractTypeSystemInferrer() {
 		initDispatcher();
+		initTypeCache();
 	}
 
 	protected Type getType(String name) {
@@ -47,23 +55,40 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected Type getCommonType(EObject object1, EObject object2) {
-		return typeSystem.getCommonType(inferType(object1), inferType(object2));
+		return typeSystem.getCommonType(inferTypeDispatch(object1), inferTypeDispatch(object2));
 	}
 
 	@Override
 	public final Type inferType(EObject object, ITypeTraceAcceptor acceptor) {
-		this.acceptor = acceptor;
+		this.acceptor = (acceptor != null ? acceptor : new ListBasedTypeTraceAcceptor());
 		info("infering type for object " + object);
-		Collection<Type> types = typeSystem.getTypes();
-		for (Type type : types) {
-			if (object instanceof Type && typeSystem.isSame((Type) object, type))
-				return type;
-		}
-		return (Type) (EObject) dispatcher.invoke(object);
+		Type result = inferTypeDispatch(object);
+		typeCache.invalidateAll();
+		return result;
 	}
 
-	public final Type inferType(EObject object) {
-		return inferType(object, acceptor == null ? new ListBasedTypeTraceAcceptor() : acceptor);
+	protected Type inferTypeDispatch(EObject object) {
+		try {
+			return typeCache.get(object);
+		} catch (IllegalStateException e) {
+			// Detection of recursive loads
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	private void initTypeCache() {
+		typeCache = CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<EObject, Type>() {
+			public Type load(EObject key) {
+				Collection<Type> types = typeSystem.getTypes();
+				for (Type type : types) {
+					if (key instanceof Type && typeSystem.isSame((Type) key, type))
+						return type;
+				}
+				return (Type) (EObject) dispatcher.invoke(key);
+			}
+		});
 	}
 
 	protected void initDispatcher() {

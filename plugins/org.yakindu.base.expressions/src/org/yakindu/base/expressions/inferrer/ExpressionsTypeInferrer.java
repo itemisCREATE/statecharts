@@ -40,6 +40,7 @@ import org.yakindu.base.expressions.expressions.RealLiteral;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.expressions.expressions.UnaryOperator;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
@@ -50,85 +51,85 @@ import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implements ExpressionsTypeInferrerMessages {
 
 	public Type infer(AssignmentExpression e) {
-		Type type1 = inferType(e.getVarRef());
-		Type type2 = inferType(e.getExpression());
+		Type type1 = inferTypeDispatch(e.getVarRef());
+		Type type2 = inferTypeDispatch(e.getExpression());
 		assertIsSuperType(type2, type1, String.format(ASSIGNMENT_OPERATOR, e.getOperator(), type1, type2));
-		return inferType(e.getVarRef());
+		return inferTypeDispatch(e.getVarRef());
 	}
 
 	public Type infer(ConditionalExpression e) {
-		Type type1 = inferType(e.getTrueCase());
-		Type type2 = inferType(e.getFalseCase());
+		Type type1 = inferTypeDispatch(e.getTrueCase());
+		Type type2 = inferTypeDispatch(e.getFalseCase());
 		assertCompatibleType(type1, type2, String.format(COMMON_TYPE, type1, type2));
-		assertType(inferType(e.getCondition()), CONDITIONAL_BOOLEAN, getType(BOOLEAN));
+		assertType(inferTypeDispatch(e.getCondition()), CONDITIONAL_BOOLEAN, getType(BOOLEAN));
 		return getCommonType(type1, type2);
 	}
 
 	public Type infer(LogicalOrExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertType(type1, String.format(LOGICAL_OPERATORS, "||", type1, type2), getType(BOOLEAN));
 		assertType(type2, String.format(LOGICAL_OPERATORS, "||", type1, type2), getType(BOOLEAN));
 		return getType(BOOLEAN);
 	}
 
 	public Type infer(LogicalAndExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertType(type1, String.format(LOGICAL_OPERATORS, "&&", type1, type2), getType(BOOLEAN));
 		assertType(type2, String.format(LOGICAL_OPERATORS, "&&", type1, type2), getType(BOOLEAN));
 		return getType(BOOLEAN);
 	}
 
 	public Type infer(LogicalNotExpression e) {
-		Type type = inferType(e.getOperand());
+		Type type = inferTypeDispatch(e.getOperand());
 		assertType(type, String.format(LOGICAL_OPERATOR, "!", type), getType(BOOLEAN));
 		return getType(BOOLEAN);
 	}
 
 	public Type infer(BitwiseXorExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertType(type1, String.format(BITWISE_OPERATORS, "^", type1, type2), getType(INTEGER));
 		assertType(type2, String.format(BITWISE_OPERATORS, "^", type1, type2), getType(INTEGER));
 		return getType(INTEGER);
 	}
 
 	public Type infer(BitwiseOrExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertType(type1, String.format(BITWISE_OPERATORS, "|", type1, type2), getType(INTEGER));
 		assertType(type2, String.format(BITWISE_OPERATORS, "|", type1, type2), getType(INTEGER));
 		return getType(INTEGER);
 	}
 
 	public Type infer(BitwiseAndExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertType(type1, String.format(BITWISE_OPERATORS, "&", type1, type2), getType(INTEGER));
 		assertType(type2, String.format(BITWISE_OPERATORS, "&", type1, type2), getType(INTEGER));
 		return getType(INTEGER);
 	}
 
 	public Type infer(ShiftExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertType(type1, String.format(BITWISE_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER));
 		assertType(type2, String.format(BITWISE_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER));
 		return getType(INTEGER);
 	}
 
 	public Type infer(LogicalRelationExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatibleType(type1, type2, String.format(COMPARSION_OPERATOR, e.getOperator(), type1, type2));
 		return getType(BOOLEAN);
 
 	}
 
 	public Type infer(NumericalAddSubtractExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatibleType(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
 		assertType(type1, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
 				getType(REAL));
@@ -136,8 +137,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(NumericalMultiplyDivideExpression e) {
-		Type type1 = inferType(e.getLeftOperand());
-		Type type2 = inferType(e.getRightOperand());
+		Type type1 = inferTypeDispatch(e.getLeftOperand());
+		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatibleType(type1, type2, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2));
 		assertType(type1, String.format(ARITHMETIC_OPERATORS, e.getOperator(), type1, type2), getType(INTEGER),
 				getType(REAL));
@@ -145,32 +146,36 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(NumericalUnaryExpression e) {
-		Type type1 = inferType(e.getOperand());
-		assertType(type1, String.format(BITWISE_OPERATOR, '~', type1), getType(INTEGER));
+		Type type1 = inferTypeDispatch(e.getOperand());
+		if (e.getOperator() == UnaryOperator.COMPLEMENT)
+			assertType(type1, String.format(BITWISE_OPERATOR, '~', type1), getType(INTEGER));
+		else {
+			assertType(type1, String.format(BITWISE_OPERATOR, '~', type1), getType(INTEGER), getType(REAL));
+		}
 		return type1;
 	}
 
 	public Type infer(TypeCastExpression e) {
-		Type type1 = inferType(e.getOperand());
-		Type type2 = inferType(e.getType());
+		Type type1 = inferTypeDispatch(e.getOperand());
+		Type type2 = inferTypeDispatch(e.getType());
 		assertCompatibleType(type1, type2, String.format(CAST_OPERATORS, type1, type2));
-		return e.getType();
+		return inferTypeDispatch(e.getType());
 	}
 
 	public Type infer(FeatureCall e) {
-		return inferType(e.getFeature());
+		return inferTypeDispatch(e.getFeature());
 	}
 
 	public Type infer(ElementReferenceExpression e) {
-		return inferType(e.getReference());
+		return inferTypeDispatch(e.getReference());
 	}
 
 	public Type infer(ParenthesizedExpression e) {
-		return inferType(e.getExpression());
+		return inferTypeDispatch(e.getExpression());
 	}
 
 	public Type infer(PrimitiveValueExpression e) {
-		return inferType(e.getValue());
+		return inferTypeDispatch(e.getValue());
 	}
 
 	public Type infer(BoolLiteral literal) {

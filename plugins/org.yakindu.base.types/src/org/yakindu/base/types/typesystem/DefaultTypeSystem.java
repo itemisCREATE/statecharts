@@ -39,6 +39,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem {
 		declarePrimitive(INTEGER);
 		declarePrimitive(BOOLEAN);
 		declarePrimitive(VOID);
+		declarePrimitive(NULL);
 
 		declareSuperType(getType(INTEGER), getType(REAL));
 	}

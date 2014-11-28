@@ -28,8 +28,6 @@ public interface ITypeSystemInferrer {
 
 	public Type inferType(EObject object, ITypeTraceAcceptor acceptor);
 	
-	public Type inferType(EObject object);
-
 	public interface ITypeTraceAcceptor {
 
 		public static class TypeTrace {
