@@ -42,12 +42,6 @@
 									<type>target</type>
 									<classifier>Luna</classifier>
 								</artifact>
-								<artifact>
-									<!-- note: the file name must be ${classifier}.target -->
-									<file>Kepler.target</file>
-									<type>target</type>
-									<classifier>Kepler</classifier>
-								</artifact>
 							</artifacts>
 						</configuration>
 					</execution>

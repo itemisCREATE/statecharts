@@ -13,8 +13,6 @@ package org.yakindu.base.types.inferrer;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
@@ -71,7 +69,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		try {
 			return typeCache.get(object);
 		} catch (IllegalStateException e) {
-			// Detection of recursive loads
+			// Prevents recursive inference
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
