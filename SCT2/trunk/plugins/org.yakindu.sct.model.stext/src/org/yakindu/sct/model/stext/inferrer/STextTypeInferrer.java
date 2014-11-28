@@ -41,6 +41,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public static final String GUARD = "The evaluation result of a guard expression must be of type boolean";
 	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer";
 	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
+	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
 
 	public Object infer(VariableDefinition e) {
 		Type type = e.getType();
@@ -48,7 +49,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		if (e.getInitialValue() == null)
 			return inferTypeDispatch(type);
 		Type type2 = inferTypeDispatch(e.getInitialValue());
-		assertCompatibleType(type, type2, String.format(VARIABLE_DEFINITION, type2, type));
+		assertAssignable(type, type2, String.format(VARIABLE_DEFINITION, type2, type));
 		return inferTypeDispatch(type);
 	}
 
@@ -86,11 +87,13 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	}
 
 	public Object infer(EventRaisingExpression e) {
-		if (e.getValue() == null)
-			return getType(VOID);
 		Type type1 = inferTypeDispatch(deresolve(e.getEvent()).getType());
+		if (e.getValue() == null){
+			assertSame(type1, getType(VOID), String.format(MISSING_VALUE,type1));
+			return getType(VOID);
+		}
 		Type type2 = inferTypeDispatch(e.getValue());
-		assertIsSuperType(type1, type2, String.format(EVENT_DEFINITION, type2, type1));
+		assertAssignable(type1, type2, String.format(EVENT_DEFINITION, type2, type1));
 		return inferTypeDispatch(e.getValue());
 
 	}
