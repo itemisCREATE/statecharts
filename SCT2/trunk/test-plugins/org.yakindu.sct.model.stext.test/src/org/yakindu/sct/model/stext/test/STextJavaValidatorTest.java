@@ -47,6 +47,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
+import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.resource.impl.StextResource;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
@@ -115,7 +116,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		Scope context = (Scope) parseExpression("interface if : var i : void", null,
 				InterfaceScope.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(context);
-		validationResult.assertErrorContains(STextJavaValidator.VARIABLE_VOID_TYPE);
+		validationResult.assertErrorContains(STextTypeInferrer.VARIABLE_VOID_TYPE);
 	}
 
 	/**
@@ -181,7 +182,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 		validationResult = tester.validate(model);
 		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
 
-		model = super.parseExpression("Event1 = 3", Expression.class.getSimpleName(), scope);
+		model = super.parseExpression("Event1 = true", Expression.class.getSimpleName(), scope);
 		validationResult = tester.validate(model);
 		validationResult.assertErrorContains(STextJavaValidator.LEFT_HAND_ASSIGNMENT);
 
@@ -379,6 +380,11 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	 */
 	@Test
 	public void checkSyntaxErrors() {
+		// Nothing to do
+	}
+	
+	@Test
+	public void checkExpression() {
 		// Nothing to do
 	}
 

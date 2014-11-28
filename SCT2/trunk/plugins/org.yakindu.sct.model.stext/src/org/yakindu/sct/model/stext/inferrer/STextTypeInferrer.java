@@ -40,9 +40,11 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public static final String EVENT_DEFINITION = "Cannot assign a value of type %s to an event of type %s.";
 	public static final String GUARD = "The evaluation result of a guard expression must be of type boolean";
 	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer";
+	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 
 	public Object infer(VariableDefinition e) {
 		Type type = e.getType();
+		assertNotType(type, VARIABLE_VOID_TYPE, getType(VOID));
 		if (e.getInitialValue() == null)
 			return inferTypeDispatch(type);
 		Type type2 = inferTypeDispatch(e.getInitialValue());
