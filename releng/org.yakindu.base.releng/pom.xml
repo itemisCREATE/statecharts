@@ -292,31 +292,6 @@
 	</pluginRepositories>
 	<profiles>
 		<profile>
-			<id>Kepler.target</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-platform-configuration</artifactId>
-						<version>${tycho-version}</version>
-						<configuration>
-							<!-- Necessary for pack200 files -->
-							<includePackedArtifacts>true</includePackedArtifacts>
-							<!-- add target file content to target platform -->
-							<target>
-								<artifact>
-									<groupId>org.yakindu.base</groupId>
-									<artifactId>org.yakindu.base.target</artifactId>
-									<version>2.4.1-SNAPSHOT</version>
-									<classifier>Kepler</classifier>
-								</artifact>
-							</target>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
 			<id>Luna.target</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
