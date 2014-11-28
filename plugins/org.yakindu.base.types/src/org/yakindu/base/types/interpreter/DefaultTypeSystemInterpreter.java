@@ -20,7 +20,7 @@ public class DefaultTypeSystemInterpreter extends AbstractTypeSystemInterpreter 
 	@Override
 	public Object defaultValue(Type type) {
 		if (typeSystem.isSame(type, typeSystem.getType(DefaultTypeSystem.INTEGER))) {
-			return 0L;
+			return 0;
 		}
 		if (typeSystem.isSame(type, typeSystem.getType(DefaultTypeSystem.REAL))) {
 			return 0.0D;
