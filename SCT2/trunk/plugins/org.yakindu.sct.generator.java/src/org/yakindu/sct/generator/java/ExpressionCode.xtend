@@ -133,7 +133,7 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(LogicalRelationExpression expression) {
-		if (isSame(expression.leftOperand.inferType, getType(DefaultTypeSystem.STRING))){
+		if (isSame(expression.leftOperand.inferType(null), getType(DefaultTypeSystem.STRING))){
 			expression.logicalString
 		} else
 			expression.leftOperand.code + expression.operator.code + expression.rightOperand.code;
