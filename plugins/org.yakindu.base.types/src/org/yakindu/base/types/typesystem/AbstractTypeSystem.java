@@ -16,6 +16,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
@@ -48,7 +50,13 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	public Type getSuperType(Type type) {
-		return extendsRegistry.get(type);
+		Set<Entry<Type, Type>> entrySet = extendsRegistry.entrySet();
+		for (Entry<Type, Type> entry : entrySet) {
+			if (isSame(type, entry.getKey())) {
+				return entry.getValue();
+			}
+		}
+		return null;
 	}
 
 	public boolean isSuperType(Type subtype, Type supertype) {

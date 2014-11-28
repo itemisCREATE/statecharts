@@ -104,51 +104,51 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 				});
 	}
 
-	protected void assertType(Type type1, String msg, Type... types) {
-		if (type1 == null)
+	protected void assertIsType(Type currentType, String msg, Type... candidates) {
+		if (currentType == null)
 			return;
 		boolean same = false;
-		for (Type type : types) {
-			if (typeSystem.isSame(type1, type)) {
+		for (Type type : candidates) {
+			if (typeSystem.isSame(currentType, type)) {
 				same = true;
 			}
 		}
 		if (!same) {
-			error(msg != null ? msg : "Expected one of " + Arrays.toString(types) + " but was " + type1);
+			error(msg != null ? msg : "Expected one of " + Arrays.toString(candidates) + " but was " + currentType);
 		}
 	}
 
-	protected void assertNotType(Type type1, String msg, Type... types) {
-		if(type1 == null)
+	protected void assertNotType(Type currentType, String msg, Type... candidates) {
+		if (currentType == null)
 			return;
-		for (Type type : types) {
-			if (typeSystem.isSame(type1, type)) {
-				error(msg != null ? msg : "Expected one of " + Arrays.toString(types) + " but was " + type1);
+		for (Type type : candidates) {
+			if (typeSystem.isSame(currentType, type)) {
+				error(msg != null ? msg : "Expected one of " + Arrays.toString(candidates) + " but was " + currentType);
 			}
 		}
 	}
 
 	protected void assertSame(Type type1, Type type2, String msg) {
-		if(type1 == null || type2 == null)
+		if (type1 == null || type2 == null)
 			return;
 		if (!typeSystem.isSame(type1, type2)) {
 			error(msg != null ? msg : "Types not the same : " + type1 + " and " + type2);
 		}
 	}
-
-	protected void assertCompatibleType(Type type1, Type type2, String msg) {
-		if(type1 == null || type2 == null)
+	
+	protected void assertCompatible(Type type1, Type type2, String msg) {
+		if (type1 == null || type2 == null)
 			return;
 		if (!typeSystem.haveCommonType(type1, type2)) {
 			error(msg != null ? msg : "Incompatible types " + type1 + " and " + type2);
 		}
 	}
 
-	protected void assertIsSuperType(Type subType, Type superType, String msg) {
-		if(subType == null || superType == null)
+	protected void assertAssignable(Type varType, Type valueType, String msg) {
+		if (varType == null || valueType == null)
 			return;
-		if (!typeSystem.isSuperType(subType, superType)) {
-			error(msg != null ? msg : "Incompatible types " + subType + " and " + superType);
+		if (!typeSystem.isSuperType(valueType, varType)) {
+			error(msg != null ? msg : "Incompatible types " + varType + " and " + valueType);
 		}
 	}
 
