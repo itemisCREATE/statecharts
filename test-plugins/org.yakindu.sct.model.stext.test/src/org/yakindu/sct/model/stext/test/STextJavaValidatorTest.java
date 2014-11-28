@@ -386,7 +386,7 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 	@Test
 	public void checkExpression() {
 		// Nothing to do
-	}
+	} 
 
 	/**
 	 * checks tht each @Check method of {@link STextJavaValidator} has a @Test
