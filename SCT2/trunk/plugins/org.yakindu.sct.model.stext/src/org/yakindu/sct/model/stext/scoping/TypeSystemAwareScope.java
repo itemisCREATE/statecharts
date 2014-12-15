@@ -28,24 +28,29 @@ import com.google.common.collect.Lists;
 
 public class TypeSystemAwareScope extends AbstractScope {
 
+	private static final String DEFAULT_TYPE_SYSTEM = "Default";
+
 	private final ITypeSystemRegistry typeSystemAccess;
 
 	private final IQualifiedNameProvider qualifiedNameProvider;
 
 	private EClass eClass;
 
+	private String typesystemURI;
+
 	public TypeSystemAwareScope(IScope parent, ITypeSystemRegistry typeSystemAccess,
-			IQualifiedNameProvider qualifiedNameProvider, EClass eClass) {
+			IQualifiedNameProvider qualifiedNameProvider, EClass eClass, String typesystemURI) {
 		super(parent, false);
 		this.typeSystemAccess = typeSystemAccess;
 		this.qualifiedNameProvider = qualifiedNameProvider;
 		this.eClass = eClass;
+		this.typesystemURI = typesystemURI != null ? typesystemURI : DEFAULT_TYPE_SYSTEM;
 	}
 
 	@Override
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayList();
-		Iterable<ITypeSystem> allTypeSystems = typeSystemAccess.getAllTypeSystems();
+		Iterable<ITypeSystem> allTypeSystems = typeSystemAccess.getTypeSystems(typesystemURI);
 		for (ITypeSystem iTypeSystem : allTypeSystems) {
 			Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(
 					EcoreUtil2.<EObject> getObjectsByType(iTypeSystem.getTypes(), eClass), qualifiedNameProvider);
@@ -53,4 +58,4 @@ public class TypeSystemAwareScope extends AbstractScope {
 		}
 		return result;
 	}
-}
+} 

@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -21,6 +22,8 @@ import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.typesystem.ITypeSystem;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Inject;
@@ -47,8 +50,20 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = filterExternalDeclarations(context, parentScope);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
-				reference.getEReferenceType());
+				reference.getEReferenceType(),getStatechart(context).getTypesystemURI());
 		return parentScope;
+	}
+	
+	private Statechart getStatechart(Resource context) {
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(
+				context, ContextElementAdapter.class);
+
+		if (provider == null) {
+			return (Statechart) EcoreUtil2.getObjectByType(context.getContents(), SGraphPackage.Literals.STATECHART);
+		} else {
+			return (Statechart) EcoreUtil.getObjectByType(provider.getElement().eResource().getContents(),
+					SGraphPackage.Literals.STATECHART);
+		}
 	}
 
 	/**
