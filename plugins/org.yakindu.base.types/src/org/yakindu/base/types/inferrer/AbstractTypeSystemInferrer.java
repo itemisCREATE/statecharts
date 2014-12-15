@@ -16,6 +16,7 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.TypeTrace;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.TypeTrace.Severity;
@@ -33,9 +34,10 @@ import com.google.inject.Inject;
 public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer {
 
 	private static final String METHOD_NAME = "infer";
-
 	@Inject
 	private ITypeSystem typeSystem;
+	@Inject
+	private ITypeSystemRegistry registry;
 
 	private ITypeTraceAcceptor acceptor;
 
@@ -79,10 +81,13 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	private void initTypeCache() {
 		typeCache = CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<EObject, Type>() {
 			public Type load(EObject key) {
-				Collection<Type> types = typeSystem.getTypes();
-				for (Type type : types) {
-					if (key instanceof Type && typeSystem.isSame((Type) key, type))
-						return type;
+				Iterable<ITypeSystem> allTypeSystems = registry.getAllTypeSystems();
+				for (ITypeSystem iTypeSystem : allTypeSystems) {
+					Collection<Type> types = iTypeSystem.getTypes();
+					for (Type type : types) {
+						if (key instanceof Type && typeSystem.isSame((Type) key, type))
+							return type;
+					}
 				}
 				return (Type) (EObject) dispatcher.invoke(key);
 			}
@@ -135,7 +140,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 			error(msg != null ? msg : "Types not the same : " + type1 + " and " + type2);
 		}
 	}
-	
+
 	protected void assertCompatible(Type type1, Type type2, String msg) {
 		if (type1 == null || type2 == null)
 			return;

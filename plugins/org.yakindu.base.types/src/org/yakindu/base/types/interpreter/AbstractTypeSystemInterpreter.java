@@ -15,9 +15,6 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.yakindu.base.types.typesystem.ITypeSystem;
-
-import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
