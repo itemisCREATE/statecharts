@@ -17,7 +17,9 @@ import org.yakindu.base.types.TypesFactory;
 import com.google.inject.Singleton;
 
 /**
- * The Statechart Tools default type system.
+ * The Statechart Tools default type system. This class is not intended to be
+ * subclassed. Instead, extend from {@link AbstractTypeSystem} and contribute
+ * via extension point org.yakindu.base.types.typesystem.
  * 
  * @author andreas muelder - Initial contribution and API
  * 

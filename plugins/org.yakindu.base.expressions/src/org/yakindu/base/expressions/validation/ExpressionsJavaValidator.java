@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.validation.Check;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeParameter;
@@ -24,7 +25,6 @@ import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -61,7 +61,7 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 	@Inject
-	private ITypeSystem typeSystem;
+	private ITypeSystemRegistry typeSystem;
 
 	@Check
 	public void checkExpression(Expression expression) {

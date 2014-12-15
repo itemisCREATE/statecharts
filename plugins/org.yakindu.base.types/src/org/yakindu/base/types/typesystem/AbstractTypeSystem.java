@@ -112,4 +112,14 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 			return type1;
 		return null;
 	}
+
+	@Override
+	public boolean isTypeSystemFor(Type type) {
+		Collection<Type> types = getTypes();
+		for (Type type2 : types) {
+			if (isSame(type, type2))
+				return true;
+		}
+		return false;
+	}
 }

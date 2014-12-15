@@ -20,13 +20,10 @@ import com.google.inject.ImplementedBy;
  * 
  */
 @ImplementedBy(DefaultTypeSystemRegistry.class)
-public interface ITypeSystemRegistry {
+public interface ITypeSystemRegistry extends ITypeSystem {
 
-	public ITypeSystem getTypeSystem(String uriScheme);
-
-	public void addTypeSystem(String uriScheme, ITypeSystem system);
-
-	public void removeTypeSystem(String uriScheme);
-	
 	public Iterable<ITypeSystem> getAllTypeSystems();
+	
+	public Iterable<ITypeSystem> getTypeSystems(String uriScheme);
+	
 }

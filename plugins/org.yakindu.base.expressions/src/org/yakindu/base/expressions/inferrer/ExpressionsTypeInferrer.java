@@ -201,5 +201,4 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	public Type infer(NullLiteral literal) {
 		return getType(NULL);
 	}
-
 }
