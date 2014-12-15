@@ -698,13 +698,22 @@ public interface SGraphPackage extends EPackage {
 	int STATECHART__IMPORTS = SPECIFICATION_ELEMENT_FEATURE_COUNT + 7;
 
 	/**
+	 * The feature id for the '<em><b>Typesystem URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATECHART__TYPESYSTEM_URI = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Statechart</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 8;
+	int STATECHART_FEATURE_COUNT = SPECIFICATION_ELEMENT_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.
@@ -1739,6 +1748,17 @@ public interface SGraphPackage extends EPackage {
 	EReference getStatechart_Imports();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.sgraph.Statechart#getTypesystemURI <em>Typesystem URI</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Typesystem URI</em>'.
+	 * @see org.yakindu.sct.model.sgraph.Statechart#getTypesystemURI()
+	 * @see #getStatechart()
+	 * @generated
+	 */
+	EAttribute getStatechart_TypesystemURI();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Entry <em>Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2323,6 +2343,14 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EReference STATECHART__IMPORTS = eINSTANCE.getStatechart_Imports();
+
+		/**
+		 * The meta object literal for the '<em><b>Typesystem URI</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATECHART__TYPESYSTEM_URI = eINSTANCE.getStatechart_TypesystemURI();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.EntryImpl <em>Entry</em>}' class.

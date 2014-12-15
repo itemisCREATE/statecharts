@@ -12,8 +12,6 @@ package org.yakindu.sct.model.stext.test.util;
 
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.typesystem.DefaultTypeSystem;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
@@ -27,11 +25,6 @@ public class STextRuntimeTestModule extends STextRuntimeModule {
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return STextTestScopeProvider.class;
-	}
-	
-	@Override
-	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return DefaultTypeSystem.class;
 	}
 	
 	@Override

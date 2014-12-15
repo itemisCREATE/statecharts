@@ -15,8 +15,6 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.typesystem.DefaultTypeSystem;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.resource.SCTLinker;
 import org.yakindu.sct.model.sgraph.resource.provider.SCTResourceDescriptionStrategy;
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
@@ -53,10 +51,6 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
 		return StextValueConverterService.class;
-	}
-
-	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return DefaultTypeSystem.class;
 	}
 
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {

@@ -131,6 +131,8 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 
 	@Check
 	public void checkExpression(VariableDefinition expression) {
+		if (expression.getType() == null || expression.getType().eIsProxy())
+			return;
 		typeInferrer.inferType(expression, this);
 	}
 
