@@ -19,6 +19,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
+import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
@@ -65,7 +66,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		return inferTypeDispatch(e.getType() != null ? e.getType() : getType(VOID));
 	}
 
-	public Object infer(EventDefinition e) {
+	public Object infer(Event e) {
 		// if an event is used within an expression, the type is boolean and the
 		// value indicates if the event is raised or not
 		return getType(BOOLEAN);
