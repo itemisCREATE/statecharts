@@ -19,6 +19,7 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
+import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
@@ -26,7 +27,6 @@ import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
@@ -52,6 +52,10 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		assertAssignable(type, type2, String.format(VARIABLE_DEFINITION, type2, type));
 		return inferTypeDispatch(type);
 	}
+	
+	public Object infer(Operation e) {
+		return inferTypeDispatch(e.getType() != null ? e.getType() : getType(VOID));
+	}
 
 	public Object infer(EventDefinition e) {
 		// if an event is used within an expression, the type is boolean and the
@@ -64,13 +68,13 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		assertSame(type, getType(BOOLEAN), GUARD);
 		return inferTypeDispatch(type);
 	}
-	
+
 	public Object infer(TimeEventSpec e) {
 		Type type = inferTypeDispatch(e.getValue());
 		assertSame(type, getType(INTEGER), TIME_SPEC);
 		return inferTypeDispatch(type);
 	}
-	
+
 	public Object infer(Scope scope) {
 		return getType(VOID);
 	}
@@ -82,14 +86,10 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		return inferTypeDispatch(e.getValue());
 	}
 
-	public Object infer(OperationDefinition e) {
-		return inferTypeDispatch(e.getType() != null ? e.getType() : getType(VOID));
-	}
-
 	public Object infer(EventRaisingExpression e) {
 		Type type1 = inferTypeDispatch(deresolve(e.getEvent()).getType());
-		if (e.getValue() == null){
-			assertSame(type1, getType(VOID), String.format(MISSING_VALUE,type1));
+		if (e.getValue() == null) {
+			assertSame(type1, getType(VOID), String.format(MISSING_VALUE, type1));
 			return getType(VOID);
 		}
 		Type type2 = inferTypeDispatch(e.getValue());
