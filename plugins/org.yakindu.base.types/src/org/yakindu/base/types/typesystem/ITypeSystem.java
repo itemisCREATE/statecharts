@@ -26,6 +26,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultTypeSystem.class)
 public interface ITypeSystem {
 
+	public void init();
+
 	public Collection<Type> getTypes();
 
 	public Type getType(String name);
@@ -39,6 +41,7 @@ public interface ITypeSystem {
 	public Type getSuperType(Type type);
 
 	public boolean isSuperType(Type subtype, Type supertype);
-	
+
 	public boolean isTypeSystemFor(Type type);
+
 }

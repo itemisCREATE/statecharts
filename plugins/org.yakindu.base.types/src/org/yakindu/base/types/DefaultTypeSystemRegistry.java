@@ -14,6 +14,8 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.Singleton;
 
 /**
@@ -32,21 +34,34 @@ public class DefaultTypeSystemRegistry extends AbstractTypeSystemRegistry implem
 	private static final String URI_SCHEME = "scheme";
 
 	public DefaultTypeSystemRegistry() {
-		loadFromExtension();
+		init();
 	}
 
-	protected void loadFromExtension() {
+	protected synchronized void loadFromExtension() {
 		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(
 				EXTENSION_POINT_ID);
 		for (IConfigurationElement element : configurationElements) {
 			try {
-				addTypeSystem(element.getAttribute(URI_SCHEME),
-						(ITypeSystem) element.createExecutableExtension(ITYPESYSTEM_CLASS));
+				ITypeSystem typeSystem = (ITypeSystem) element.createExecutableExtension(ITYPESYSTEM_CLASS);
+				Guice.createInjector(new AbstractModule() {
+					@Override
+					protected void configure() {
+						bind(ITypeSystemRegistry.class).toInstance(DefaultTypeSystemRegistry.this);
+					}
+				}).injectMembers(typeSystem);
+				addTypeSystem(element.getAttribute(URI_SCHEME), typeSystem);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-
 	}
 
+	@Override
+	public void init() {
+		loadFromExtension();
+		Iterable<ITypeSystem> allTypeSystems = getAllTypeSystems();
+		for (ITypeSystem iTypeSystem : allTypeSystems) {
+			iTypeSystem.init();
+		}
+	}
 }

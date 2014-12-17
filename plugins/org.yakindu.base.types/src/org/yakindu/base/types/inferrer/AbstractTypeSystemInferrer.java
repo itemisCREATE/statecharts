@@ -72,6 +72,8 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected Type inferTypeDispatch(EObject object) {
+		if (object.eIsProxy())
+			return null;
 		try {
 			return typeCache.get(object);
 		} catch (IllegalStateException e) {
@@ -85,7 +87,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	private void initTypeCache() {
 		typeCache = CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<EObject, Type>() {
 			public Type load(EObject key) {
-				if(key instanceof Type){
+				if (key instanceof Type) {
 					Collection<Type> types = registry.getTypes();
 					for (Type type : types) {
 						if (registry.isSame((Type) key, type))

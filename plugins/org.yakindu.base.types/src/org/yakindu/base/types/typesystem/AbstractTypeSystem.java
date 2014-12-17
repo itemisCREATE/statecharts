@@ -22,7 +22,10 @@ import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.Type;
+
+import com.google.inject.Inject;
 
 /**
  * Abstract base implementation if {@link ITypeSystem}. Provides convenience
@@ -39,9 +42,13 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	// Types must be contained in a resource to avoid dangling reference errors
 	private Resource resource = new ResourceImpl();
 
+	@Inject
+	private ITypeSystemRegistry registry;
+
 	protected abstract void declareTypes();
 
-	public AbstractTypeSystem() {
+	@Override
+	public final void init() {
 		declareTypes();
 	}
 
@@ -122,4 +129,9 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		}
 		return false;
 	}
+
+	public ITypeSystemRegistry getTypeSystemRegistry() {
+		return registry;
+	}
+
 }
