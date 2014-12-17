@@ -72,20 +72,16 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected Type inferTypeDispatch(EObject object) {
-		if (object.eIsProxy())
-			return null;
 		try {
 			return typeCache.get(object);
-		} catch (IllegalStateException e) {
-			// Prevents recursive inference
 		} catch (Exception e) {
-			e.printStackTrace();
+			//Ignore invalid expressions and recursions
 		}
 		return null;
 	}
 
 	private void initTypeCache() {
-		typeCache = CacheBuilder.newBuilder().maximumSize(1000).build(new CacheLoader<EObject, Type>() {
+		typeCache = CacheBuilder.newBuilder().maximumSize(100).build(new CacheLoader<EObject, Type>() {
 			public Type load(EObject key) {
 				if (key instanceof Type) {
 					Collection<Type> types = registry.getTypes();
