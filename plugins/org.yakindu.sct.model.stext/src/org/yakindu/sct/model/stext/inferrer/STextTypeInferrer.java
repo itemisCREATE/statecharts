@@ -20,6 +20,7 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
@@ -51,6 +52,13 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		Type type2 = inferTypeDispatch(e.getInitialValue());
 		assertAssignable(type, type2, String.format(VARIABLE_DEFINITION, type2, type));
 		return inferTypeDispatch(type);
+	}
+	
+	public Object infer(Property p){
+		Type type = inferTypeDispatch(p.getType());
+		assertNotType(type, VARIABLE_VOID_TYPE, getType(VOID));
+		return inferTypeDispatch(type);
+		
 	}
 	
 	public Object infer(Operation e) {
