@@ -13,8 +13,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.StringLiteral
-import org.yakindu.base.types.interpreter.ITypeSystemInterpreter
-import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.ITypeSystemRegistry
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -40,9 +39,8 @@ class SequenceBuilder {
 	@Inject extension SexecExtensions sexec
 	@Inject extension SexecElementMapping mapping
 	@Inject extension TraceExtensions trace
-	
-	@Inject extension ITypeSystemInterpreter
-	@Inject extension ITypeSystem ts
+
+	@Inject extension ITypeSystemRegistry ts
 
 	@Inject @Named("ADD_TRACES")
 	boolean _addTraceSteps
@@ -243,13 +241,12 @@ class SequenceBuilder {
 					}
 				}
 			}
-			
+
 			// save the history on entering a state 
 			val execRegion = state.parentRegion.create
 			if (execRegion.historyVector != null) {
 				seq.steps += execRegion.newSaveHistory()
 			}
-			
 
 			execState.enterSequences += seq
 		}
@@ -449,7 +446,7 @@ class SequenceBuilder {
 		val initSequence = sexec.factory.createSequence
 		initSequence.name = "staticInit"
 		initSequence.comment = "The statecharts init sequence for constants." + sc.name
-	
+
 		for (VariableDefinition vd : flow.getVariablesForInitSequence(true)) {
 			initSequence.addVariableInitializationStep(vd)
 		}
@@ -457,7 +454,7 @@ class SequenceBuilder {
 		flow.staticInitSequence = initSequence
 		return initSequence
 	}
-	
+
 	/**
 	 * Defines the sequence of initialization steps. 
 	 * 
@@ -468,7 +465,7 @@ class SequenceBuilder {
 		val initSequence = sexec.factory.createSequence
 		initSequence.name = "init"
 		initSequence.comment = "Default init sequence for statechart " + sc.name
-	
+
 		for (VariableDefinition vd : flow.getVariablesForInitSequence(false)) {
 			initSequence.addVariableInitializationStep(vd)
 		}
@@ -476,19 +473,21 @@ class SequenceBuilder {
 		flow.initSequence = initSequence
 		return initSequence
 	}
-	
+
 	protected def getVariablesForInitSequence(ExecutionFlow flow, boolean const) {
-		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition)).filter(v | v.const == const)
-		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(d|d.declaration).filter(typeof(VariableDefinition))
+		val statechartVariables = flow.scopes.map(s|s.variables).flatten.filter(typeof(VariableDefinition)).filter(
+			v|v.const == const)
+		val importedVariables = flow.scopes.map(s|s.declarations).flatten.filter(typeof(ImportDeclaration)).map(
+			d|d.declaration).filter(typeof(VariableDefinition))
 		return statechartVariables + importedVariables
 	}
-	
+
 	def addVariableInitializationStep(Sequence initSequence, VariableDefinition vd) {
 		if (vd.effectiveInitialValue != null) {
 			initSequence.steps.add(vd.createInitialization)
 		}
 	}
-	
+
 	//TODO: Move to type system
 	def effectiveInitialValue(VariableDefinition vd) {
 		if (vd.initialValue != null) {

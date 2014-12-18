@@ -20,8 +20,6 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.inferrer.ExpressionsTypeInferrer;
 import org.yakindu.base.types.Event;
-import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
@@ -42,7 +40,6 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public static final String EVENT_DEFINITION = "Cannot assign a value of type %s to an event of type %s.";
 	public static final String GUARD = "The evaluation result of a guard expression must be of type boolean";
 	public static final String TIME_SPEC = "The evaluation result of a time expression must be of type integer";
-	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 	public static final String MISSING_VALUE = "Need to assign a value to an event of type %s.";
 
 	public Object infer(VariableDefinition e) {
@@ -55,17 +52,6 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		return inferTypeDispatch(type);
 	}
 	
-	public Object infer(Property p){
-		Type type = inferTypeDispatch(p.getType());
-		assertNotType(type, VARIABLE_VOID_TYPE, getType(VOID));
-		return inferTypeDispatch(type);
-		
-	}
-	
-	public Object infer(Operation e) {
-		return inferTypeDispatch(e.getType() != null ? e.getType() : getType(VOID));
-	}
-
 	public Object infer(Event e) {
 		// if an event is used within an expression, the type is boolean and the
 		// value indicates if the event is raised or not
