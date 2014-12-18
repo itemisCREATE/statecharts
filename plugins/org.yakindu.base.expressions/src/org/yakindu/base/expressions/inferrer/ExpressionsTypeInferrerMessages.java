@@ -10,6 +10,10 @@
  */
 package org.yakindu.base.expressions.inferrer;
 
+/**
+ * @author andreas muelder - Initial contribution and API
+ * 
+ */
 public interface ExpressionsTypeInferrerMessages {
 
 	public static final String LOGICAL_OPERATOR = "Logical operator '%s' may only be applied on boolean types, not on %s.";
@@ -23,5 +27,7 @@ public interface ExpressionsTypeInferrerMessages {
 	public static final String COMMON_TYPE = "Could not determine a common type for %s and %s.";
 	public static final String CONDITIONAL_BOOLEAN = "conditional expression must be of type boolean.";
 	public static final String CAST_OPERATORS = "Cannot cast from %s to %s.";
+	public static final String INCOMPATIBLE_TYPES = "Incompatible types %s and %s.";
+	public static final String VARIABLE_VOID_TYPE = "'void' is an invalid type for variables";
 
 }

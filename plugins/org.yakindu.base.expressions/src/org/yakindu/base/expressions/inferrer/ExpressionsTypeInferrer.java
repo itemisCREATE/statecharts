@@ -15,7 +15,9 @@ import static org.yakindu.base.types.typesystem.DefaultTypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.DefaultTypeSystem.NULL;
 import static org.yakindu.base.types.typesystem.DefaultTypeSystem.REAL;
 import static org.yakindu.base.types.typesystem.DefaultTypeSystem.STRING;
+import static org.yakindu.base.types.typesystem.DefaultTypeSystem.VOID;
 
+import org.eclipse.emf.common.util.EList;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
@@ -23,6 +25,7 @@ import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
@@ -41,6 +44,9 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Parameter;
+import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
@@ -163,6 +169,18 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 	}
 
 	public Type infer(FeatureCall e) {
+		if (e.isOperationCall()) {
+			Operation operation = (Operation) e.getFeature();
+			EList<Parameter> parameters = operation.getParameters();
+			EList<Expression> args = e.getArgs();
+			if (parameters.size() == args.size()) {
+				for (int i = 0; i < parameters.size(); i++) {
+					Type type1 = inferTypeDispatch(parameters.get(i));
+					Type type2 = inferTypeDispatch(args.get(i));
+					assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
+				}
+			}
+		}
 		return inferTypeDispatch(e.getFeature());
 	}
 
@@ -200,5 +218,20 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	public Type infer(NullLiteral literal) {
 		return getType(NULL);
+	}
+
+	public Object infer(Property p) {
+		Type type = inferTypeDispatch(p.getType());
+		assertNotType(type, VARIABLE_VOID_TYPE, getType(VOID));
+		return inferTypeDispatch(type);
+
+	}
+
+	public Object infer(Operation e) {
+		return inferTypeDispatch(e.getType() != null ? e.getType() : getType(VOID));
+	}
+
+	public Object infer(Parameter e) {
+		return inferTypeDispatch(e.getType());
 	}
 }

@@ -101,4 +101,15 @@ public abstract class AbstractTypeSystemRegistry implements ITypeSystemRegistry 
 		return getDelegate(type) != null;
 	}
 
+	@Override
+	public Object defaultValue(Type type) {
+		Iterable<ITypeSystem> allTypeSystems = getAllTypeSystems();
+		for (ITypeSystem iTypeSystem : allTypeSystems) {
+			if (iTypeSystem.isTypeSystemFor(type)) {
+				return iTypeSystem.defaultValue(type);
+			}
+		}
+		throw new IllegalStateException(String.format("No Type System for type %s found!", type));
+	}
+
 }

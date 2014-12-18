@@ -10,9 +10,7 @@
  */
 package org.yakindu.base.types.typesystem;
 
-import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
-import org.yakindu.base.types.TypesFactory;
 
 import com.google.inject.Singleton;
 
@@ -46,10 +44,23 @@ public class DefaultTypeSystem extends AbstractTypeSystem {
 		declareSuperType(getType(INTEGER), getType(REAL));
 	}
 
-	protected Type declarePrimitive(String name) {
-		PrimitiveType primitive = TypesFactory.eINSTANCE.createPrimitiveType();
-		primitive.setName(name);
-		declareType(primitive, name);
-		return primitive;
+	@Override
+	public Object defaultValue(Type type) {
+		if (isSame(type, getType(INTEGER))) {
+			return 0;
+		}
+		if (isSame(type, getType(REAL))) {
+			return 0.0D;
+		}
+		if (isSame(type, getType(BOOLEAN))) {
+			return false;
+		}
+		if (isSame(type, getType(STRING))) {
+			return "";
+		}
+		Type superType = getSuperType(type);
+		if (superType != null)
+			return defaultValue(superType);
+		throw new IllegalArgumentException("Unknown type " + type);
 	}
 }

@@ -43,5 +43,7 @@ public interface ITypeSystem {
 	public boolean isSuperType(Type subtype, Type supertype);
 
 	public boolean isTypeSystemFor(Type type);
-
+	
+	public Object defaultValue(Type type);
+	
 }

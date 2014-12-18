@@ -23,7 +23,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.yakindu.base.types.ITypeSystemRegistry;
+import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypesFactory;
 
 import com.google.inject.Inject;
 
@@ -47,6 +49,10 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	protected abstract void declareTypes();
 
+	protected void reset(){
+		typeRegistry.clear();
+		extendsRegistry.clear();
+	}
 	@Override
 	public final void init() {
 		declareTypes();
@@ -92,6 +98,13 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return Collections.unmodifiableCollection(typeRegistry.values());
 	}
 
+	protected Type declarePrimitive(String name) {
+		PrimitiveType primitive = TypesFactory.eINSTANCE.createPrimitiveType();
+		primitive.setName(name);
+		declareType(primitive, name);
+		return primitive;
+	}
+	
 	public void declareType(Type type, String name) {
 		resource.getContents().add(type);
 		typeRegistry.put(name, type);
@@ -120,7 +133,6 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return null;
 	}
 
-	@Override
 	public boolean isTypeSystemFor(Type type) {
 		Collection<Type> types = getTypes();
 		for (Type type2 : types) {

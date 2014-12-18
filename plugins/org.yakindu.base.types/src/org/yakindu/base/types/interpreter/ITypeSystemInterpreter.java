@@ -11,7 +11,6 @@
 package org.yakindu.base.types.interpreter;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.types.Type;
 
 import com.google.inject.ImplementedBy;
 
@@ -24,5 +23,4 @@ public interface ITypeSystemInterpreter {
 
 	public Object interpret(EObject object);
 
-	public Object defaultValue(Type type);
 }
