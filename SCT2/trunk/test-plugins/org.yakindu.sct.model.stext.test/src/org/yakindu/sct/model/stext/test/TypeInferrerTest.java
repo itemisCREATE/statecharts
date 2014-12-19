@@ -23,6 +23,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.TypeTrace.Severity;
@@ -49,7 +50,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	@Inject
-	public org.yakindu.base.types.typesystem.ITypeSystem typeSystem;
+	public ITypeSystemRegistry typeSystem;
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 
