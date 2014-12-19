@@ -19,8 +19,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.typesystem.DefaultTypeSystem;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
 import org.yakindu.sct.model.stext.test.util.STextInjectorProvider;
@@ -47,7 +47,7 @@ public class STextInterpreterTest extends AbstractSTextTest {
 	@Inject
 	private IStatementInterpreter interpreter;
 	@Inject
-	private ITypeSystem typeSystem;
+	private ITypeSystemRegistry typeSystem;
 
 	@Test
 	public void testIntVariableAssignment() {
