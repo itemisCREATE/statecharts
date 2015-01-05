@@ -15,11 +15,14 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@ImplementedBy(DefaultExecutionContextInitializer.class)
 public interface IExecutionContextInitializer {
 	/**
 	 * Called before the interpreter is started to initialize the
