@@ -40,10 +40,10 @@ import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Enumerator
+import org.yakindu.base.types.ITypeSystemRegistry
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.typesystem.DefaultTypeSystem
-import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
@@ -63,12 +63,12 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	@Inject
 	extension IQualifiedNameProvider provider
-	@Inject
+	@Inject (optional = true)
 	protected IOperationMockup operationDelegate
 	@Inject
 	protected extension IExecutionSlotResolver resolver
 	@Inject
-	protected extension ITypeSystem ts;
+	protected extension ITypeSystemRegistry ts;
 
 	protected ExecutionContext context
 
@@ -158,7 +158,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(ElementReferenceExpression expression) {
 		var parameter = expression.args.map(it|execute)
 		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
-			if (operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
+			if (operationDelegate!=null && operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
@@ -271,7 +271,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			var parameter = call.args.map(it|execute)
 			if (call.feature instanceof Operation) {
 				var Operation operation = call.feature as Operation
-				if (operationDelegate.canExecute(operation, parameter)) {
+				if (operationDelegate!=null && operationDelegate.canExecute(operation, parameter)) {
 					return operationDelegate.execute(operation, parameter)
 				}
 			}
