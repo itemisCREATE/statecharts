@@ -19,11 +19,11 @@ import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
-public class CreationWizardPage extends WizardNewFileCreationPage {
+public class ModelCreationWizardPage extends WizardNewFileCreationPage {
 
 	private final String fileExtension;
 
-	public CreationWizardPage(String pageName, IStructuredSelection selection,
+	public ModelCreationWizardPage(String pageName, IStructuredSelection selection,
 			String fileExtension) {
 		super(pageName, selection);
 		this.fileExtension = fileExtension;
