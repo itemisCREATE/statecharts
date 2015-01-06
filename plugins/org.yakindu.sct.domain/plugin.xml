@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="org.yakindu.sct.domain" name="org.yakindu.sct.domain" schema="schema/domain.exsd"/>
+   <extension
+         point="org.yakindu.sct.domain">
+      <Domain
+            description="The default Domain for Yakindu Statechart Tools"
+            domainID="org.yakindu.domain.default">
+      </Domain>
+   </extension>
+
+</plugin>
