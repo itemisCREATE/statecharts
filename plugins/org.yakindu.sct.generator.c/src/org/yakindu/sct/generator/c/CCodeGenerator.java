@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.c;
 
 import static org.yakindu.sct.generator.core.util.GeneratorUtils.isDumpSexec;
 
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.yakindu.sct.generator.c.types.CTypeSystemAccess;
 import org.yakindu.sct.generator.core.impl.GenericJavaBasedGenerator;
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess;
@@ -19,6 +20,7 @@ import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
+import org.yakindu.sct.model.stext.naming.StextNameProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.Module;
@@ -51,6 +53,7 @@ public class CCodeGenerator extends GenericJavaBasedGenerator {
 						.to(CTypeSystemAccess.class);
 				binder.bind(INamingService.class).to(CNamingService.class);
 				binder.bind(GeneratorEntry.class).toInstance(entry);
+				binder.bind(IQualifiedNameProvider.class).to(StextNameProvider.class);
 			}
 		});
 	}

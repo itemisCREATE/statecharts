@@ -30,36 +30,35 @@ import org.yakindu.sct.model.sexec.TimeEvent
 import java.util.List
 
 class Naming {
-	
+
 	@Inject extension Navigation
-	
+
 	@Inject extension ICodegenTypeSystemAccess
-	
+
 	@Inject private StextNameProvider provider
-	
+
 	@Inject extension INamingService
-	
+
 	@Inject GeneratorEntry entry
-	
+
 	@Inject extension GenmodelEntries
-	
+
 	public static final String NULL_STRING = "null";
-	
+
 	def getFullyQualifiedName(State state) {
 		provider.getFullyQualifiedName(state).toString.asEscapedIdentifier
 	}
-	
+
 	def module(ExecutionFlow it) {
 		if (entry.moduleName.nullOrEmpty) {
-			return name.asIdentifier.toFirstUpper	
+			return name.asIdentifier.toFirstUpper
 		}
 		return entry.moduleName.toFirstUpper
 	}
-	
-//	def module(InterfaceScope it) {
-//		flow.type + (if (name.nullOrEmpty) 'Default' else name).asIdentifier.toFirstUpper	
-//	}
-	
+
+	//	def module(InterfaceScope it) {
+	//		flow.type + (if (name.nullOrEmpty) 'Default' else name).asIdentifier.toFirstUpper	
+	//	}
 	def filterNullOrEmptyAndJoin(Iterable<CharSequence> it) {
 		filter[!it?.toString.nullOrEmpty].join('\n')
 	}
@@ -67,72 +66,72 @@ class Naming {
 	def filterNullOrEmptyAndJoin(List<String> it) {
 		filter[!it?.toString.nullOrEmpty].join('\n')
 	}
-	
+
 	def client(String it) {
-		it + "Required"	
+		it + "Required"
 	}
-	
+
 	def timerModule(ExecutionFlow it) {
-		'sc_timer'	
+		'sc_timer'
 	}
-	
+
 	def typesModule(ExecutionFlow it) {
-		'sc_types'	
+		'sc_types'
 	}
-	
+
 	def timerType(ExecutionFlow it) {
 		'SCTimer'
 	}
-	
+
 	def statesEnumType(ExecutionFlow it) {
-		flow.type + 'States'	
+		flow.type + 'States'
 	}
-	
+
 	def dispatch String type(InterfaceScope it) {
-		flow.type + 'Iface' + (if (name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper	
+		flow.type + 'Iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
 	}
-	
+
 	def dispatch String type(InternalScope it) {
-		flow.type + 'Internal'	
+		flow.type + 'Internal'
 	}
-	
+
 	def dispatch String type(Scope it) {
-		flow.type + 'TimeEvents'	
+		flow.type + 'TimeEvents'
 	}
-	
+
 	def dispatch String type(ExecutionFlow it) {
 		if (entry.statemachinePrefix.nullOrEmpty) {
-			return name.asIdentifier.toFirstUpper	
+			return name.asIdentifier.toFirstUpper
 		}
 		return entry.statemachinePrefix.toFirstUpper
 	}
-	
+
 	def dispatch instance(InterfaceScope it) {
-		'iface' + (if (name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper	
+		'iface' + (if(name.nullOrEmpty) '' else name).asIdentifier.toFirstUpper
 	}
-	
+
 	def dispatch instance(Scope it) {
 		'timeEvents'
 	}
-	
+
 	def dispatch instance(InternalScope it) {
 		'internal'
 	}
-	
+
 	def functionPrefix(Scope it) {
 		if (!entry.statemachinePrefix.nullOrEmpty) {
 			return entry.statemachinePrefix
 		}
-		return type.toFirstLower	
+		return type.toFirstLower
 	}
-	
+
 	def functionPrefix(ExecutionFlow it) {
 		if (!entry.statemachinePrefix.nullOrEmpty) {
 			return entry.statemachinePrefix + separator
 		}
 		type.toFirstLower + separator
 	}
-	
+
 	def separator() {
 		var sep = entry.separator
 		if (sep.nullOrEmpty) {
@@ -140,39 +139,42 @@ class Naming {
 		}
 		return sep
 	}
-	
+
 	def clearInEventsFctID(ExecutionFlow it) {
 		functionPrefix + "clearInEvents"
 	}
-	
+
 	def clearOutEventsFctID(ExecutionFlow it) {
 		functionPrefix + "clearOutEvents"
 	}
-	
+
 	def dispatch last_state(ExecutionFlow it) {
 		type + lastStateID
 	}
-	
+
 	def dispatch last_state(Step it) {
 		execution_flow.type + lastStateID
 	}
-	
+
 	def lastStateID() {
 		separator + "last" + separator + "state"
-	} 
-	
+	}
+
 	def ExecutionFlow execution_flow(EObject element) {
 		var ret = element;
-		
+
 		while (ret != null) {
 			if (ret instanceof ExecutionFlow) {
 				return ret as ExecutionFlow
-			}
-			else {
+			} else {
 				ret = ret.eContainer;
-			}	
+			}
 		}
 		return null;
+	}
+
+	def constantName(VariableDefinition it) {
+		(flow.type + separator + scope.type + separator + name.asEscapedIdentifier).toUpperCase
 	}
 
 	def raiseTimeEventFctID(ExecutionFlow it) {
@@ -184,69 +186,64 @@ class Naming {
 	}
 
 	def asRaiser(EventDefinition it) {
-		scope.functionPrefix + separator + 'raise' + separator + name.asIdentifier.toFirstLower	
+		scope.functionPrefix + separator + 'raise' + separator + name.asIdentifier.toFirstLower
 	}
-	
+
 	def asRaised(EventDefinition it) {
-		scope.functionPrefix + separator + 'israised' + separator + name.asIdentifier.toFirstLower	
+		scope.functionPrefix + separator + 'israised' + separator + name.asIdentifier.toFirstLower
 	}
-	
+
 	def asGetter(EventDefinition it) {
 		scope.functionPrefix + separator + 'get' + separator + name.asIdentifier.toFirstLower + separator + 'value'
 	}
-	
-	def asGetter(VariableDefinition it) {
-		scope.functionPrefix + separator + 'get' + separator + name.asIdentifier.toFirstLower	
-	}
-	
-	def asSetter(VariableDefinition it) {
-		scope.functionPrefix + separator + 'set' + separator + name.asIdentifier.toFirstLower	
-	}
-	
-	def asFunction(OperationDefinition it) {
-		scope.functionPrefix + separator + name.asIdentifier.toFirstLower	
-	}
-	
-	def raised(CharSequence it) { it + separator + 'raised' }
-	
-	def value(CharSequence it)  { it + separator + 'value' }
-	
-	def h(String it) { it + ".h" }
-	
-	def c(String it) { it + ".c" }
-	
-	def define(String it) { it.replaceAll('\\.', '_').toUpperCase }
-		
-	def dispatch scopeDescription(Scope it) '''scope'''
-	
-	def dispatch scopeDescription(InterfaceScope it) '''«IF name==null || name.empty»default interface scope«ELSE»interface scope '«name»'«ENDIF»'''
-	
-	def dispatch scopeDescription(InternalScope it) '''internal scope'''
-	
-	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
-	
-	def scHandle() { 'handle' }
-	
-	def valueParams(EventDefinition it) {
-		if (hasValue) ', ' + type.targetLanguageName + ' value' 
-		else ''
-	}
-	
-	def dispatch access (VariableDefinition it) 
-		'''«scHandle»->«scope.instance».«name.asEscapedIdentifier»'''
 
-	def dispatch access (OperationDefinition it) 
-		'''«asFunction»'''
-	
-	def dispatch access (Event it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
-		
-	def dispatch access (TimeEvent it)
-		'''«scHandle»->«scope.instance».«shortName.raised»'''
-				
-	def dispatch access (EObject it) 
-		'''#error cannot access elements of type «getClass().name»'''
-	
-	def valueAccess(Event it) 
-		'''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
+	def asGetter(VariableDefinition it) {
+		scope.functionPrefix + separator + 'get' + separator + name.asIdentifier.toFirstLower
+	}
+
+	def asSetter(VariableDefinition it) {
+		scope.functionPrefix + separator + 'set' + separator + name.asIdentifier.toFirstLower
+	}
+
+	def asFunction(OperationDefinition it) {
+		scope.functionPrefix + separator + name.asIdentifier.toFirstLower
+	}
+
+	def raised(CharSequence it) { it + separator + 'raised' }
+
+	def value(CharSequence it) { it + separator + 'value' }
+
+	def h(String it) { it + ".h" }
+
+	def c(String it) { it + ".c" }
+
+	def define(String it) { it.replaceAll('\\.', '_').toUpperCase }
+
+	def dispatch scopeDescription(Scope it) '''scope'''
+
+	def dispatch scopeDescription(InterfaceScope it) '''«IF name == null || name.empty»default interface scope«ELSE»interface scope '«name»'«ENDIF»'''
+
+	def dispatch scopeDescription(InternalScope it) '''internal scope'''
+
+	def scHandleDecl(EObject it) { flow.type + '* ' + scHandle }
+
+	def scHandle() { 'handle' }
+
+	def valueParams(EventDefinition it) {
+		if(hasValue) ', ' + type.targetLanguageName + ' value' else ''
+	}
+
+	def dispatch access(VariableDefinition it) {
+		if (isConst) '''«it.constantName»''' else '''«scHandle»->«scope.instance».«name.asEscapedIdentifier»'''
+	}
+
+	def dispatch access(OperationDefinition it) '''«asFunction»'''
+
+	def dispatch access(Event it) '''«scHandle»->«scope.instance».«name.asIdentifier.raised»'''
+
+	def dispatch access(TimeEvent it) '''«scHandle»->«scope.instance».«shortName.raised»'''
+
+	def dispatch access(EObject it) '''#error cannot access elements of type «getClass().name»'''
+
+	def valueAccess(Event it) '''«scHandle»->«scope.instance».«name.asIdentifier.value»'''
 }

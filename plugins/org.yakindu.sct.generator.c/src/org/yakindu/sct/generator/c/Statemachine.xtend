@@ -33,6 +33,7 @@ class Statemachine {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntries
 	@Inject extension INamingService
+	@Inject extension ConstantInitializationResolver
 	
 	def generateStatemachineH(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		 flow.initializeNamingService
@@ -113,19 +114,24 @@ class Statemachine {
 	'''
 
 	def dispatch structDeclaration(VariableDefinition it) '''
-		«IF type.name != 'void'»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
+		«IF type.name != 'void' && !isConst»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
 	'''
 	
 	def dispatch structDeclaration(Declaration it) ''''''
 	
 	
 	def scopeTypeDecl(Scope it) '''
-		//! Type definition of the data structure for the «it.type» interface scope.
+		//! Type definition of the data structure for the «type» interface scope.
 		typedef struct {
 			«FOR d : declarations »
-			«d.structDeclaration »
+			«d.structDeclaration»
 			«ENDFOR»
 		} «it.type»;
+		
+		//declaration of constants for scope «type»
+		«FOR d : declarations.filter(typeof(VariableDefinition)).filter[const]»
+			«IF d.type.name != 'void'»const «d.type.targetLanguageName» «d.constantName» = «d.initialValue.resolveConstants»;«ENDIF»
+		«ENDFOR»
 
 	'''
 
@@ -181,7 +187,7 @@ class Statemachine {
 	def dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 		extern «type.targetLanguageName» «it.asGetter»(«it.flow.type»* handle);
-		«IF ! readonly »
+		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			extern void «asSetter»(«it.flow.type»* handle, «type.targetLanguageName» value);
 		«ENDIF»
