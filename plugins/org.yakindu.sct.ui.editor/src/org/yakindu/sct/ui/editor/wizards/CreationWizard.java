@@ -28,6 +28,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
@@ -46,6 +47,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.StatechartImages;
 import org.yakindu.sct.ui.editor.editor.StatechartDiagramEditor;
@@ -63,7 +66,9 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	protected IStructuredSelection selection = new StructuredSelection();
 
-	protected CreationWizardPage modelFilePage;
+	protected ModelCreationWizardPage modelCreationPage;
+
+	protected DomainWizardPage domainWizardPage;
 
 	protected Resource diagram;
 
@@ -82,35 +87,36 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	@Override
 	public void addPages() {
-		modelFilePage = new CreationWizardPage("DiagramModelFile",
-				getSelection(), "sct");
-		modelFilePage.setTitle("YAKINDU SCT Diagram");
-		modelFilePage.setDescription("Create a new YAKINDU SCT Diagram File");
-		modelFilePage.setImageDescriptor(StatechartImages.LOGO
-				.imageDescriptor());
-		addPage(modelFilePage);
+		modelCreationPage = new ModelCreationWizardPage("DiagramModelFile", getSelection(), "sct");
+		modelCreationPage.setTitle("YAKINDU SCT Diagram");
+		modelCreationPage.setDescription("Create a new YAKINDU SCT Diagram File");
+		modelCreationPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
+
+		domainWizardPage = new DomainWizardPage("DomainWizard");
+		domainWizardPage.setTitle("Select Statechart Domain");
+		domainWizardPage.setDescription("Select the domain you want to create a statechart for.");
+		domainWizardPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
+
+		addPage(domainWizardPage);
+		addPage(modelCreationPage);
 	}
 
 	@Override
 	public boolean performFinish() {
 		IRunnableWithProgress op = new WorkspaceModifyOperation(null) {
 			@Override
-			protected void execute(IProgressMonitor monitor)
-					throws CoreException, InterruptedException {
-				diagram = createDiagram(modelFilePage.getURI(),
-						modelFilePage.getURI(), monitor);
+			protected void execute(IProgressMonitor monitor) throws CoreException, InterruptedException {
+				diagram = createDiagram(modelCreationPage.getURI(), modelCreationPage.getURI(), monitor);
 				if (isOpenOnCreate() && diagram != null) {
 					try {
 						openDiagram(diagram);
-						PerspectiveUtil.switchToModelingPerspective(workbench
-								.getActiveWorkbenchWindow());
+						PerspectiveUtil.switchToModelingPerspective(workbench.getActiveWorkbenchWindow());
 					} catch (PartInitException e) {
 						DiagramActivator
 								.getDefault()
 								.getLog()
-								.log(new Status(IStatus.WARNING,
-										DiagramActivator.PLUGIN_ID,
-										"Editor can't be opened", e));
+								.log(new Status(IStatus.WARNING, DiagramActivator.PLUGIN_ID, "Editor can't be opened",
+										e));
 					}
 				}
 			}
@@ -125,13 +131,10 @@ public class CreationWizard extends Wizard implements INewWizard {
 
 	protected boolean openDiagram(Resource diagram) throws PartInitException {
 		String path = diagram.getURI().toPlatformString(true);
-		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot()
-				.findMember(new Path(path));
+		IResource workspaceResource = ResourcesPlugin.getWorkspace().getRoot().findMember(new Path(path));
 		if (workspaceResource instanceof IFile) {
-			IWorkbenchPage page = PlatformUI.getWorkbench()
-					.getActiveWorkbenchWindow().getActivePage();
-			return null != page.openEditor(new FileEditorInput(
-					(IFile) workspaceResource), getEditorID());
+			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			return null != page.openEditor(new FileEditorInput((IFile) workspaceResource), getEditorID());
 		}
 		return false;
 	}
@@ -146,22 +149,20 @@ public class CreationWizard extends Wizard implements INewWizard {
 		return StatechartDiagramEditor.ID;
 	}
 
-	protected Resource createDiagram(final URI diagramURI, final URI modelURI,
-			IProgressMonitor progressMonitor) {
-		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE
-				.createEditingDomain();
+	protected Resource createDiagram(final URI diagramURI, final URI modelURI, IProgressMonitor progressMonitor) {
+		TransactionalEditingDomain editingDomain = GMFEditingDomainFactory.INSTANCE.createEditingDomain();
 		progressMonitor.beginTask("Creating diagram file ...", 3);
-		final Resource resource = editingDomain.getResourceSet()
-				.createResource(modelURI);
-		AbstractTransactionalCommand command = new AbstractTransactionalCommand(
-				editingDomain, "Creating diagram file ...",
-				Collections.EMPTY_LIST) {
+		final Resource resource = editingDomain.getResourceSet().createResource(modelURI);
+		AbstractTransactionalCommand command = new AbstractTransactionalCommand(editingDomain,
+				"Creating diagram file ...", Collections.EMPTY_LIST) {
 			@Override
-			protected CommandResult doExecuteWithResult(
-					IProgressMonitor monitor, IAdaptable info)
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 
 				FactoryUtils.createStatechartModel(resource, preferencesHint);
+				Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
+						SGraphPackage.Literals.STATECHART);
+				statechart.setDomainID(domainWizardPage.getDomainID());
 
 				try {
 					resource.save(getSaveOptions());
@@ -185,8 +186,7 @@ public class CreationWizard extends Wizard implements INewWizard {
 	protected Map<String, String> getSaveOptions() {
 		Map<String, String> saveOptions = new HashMap<String, String>();
 		saveOptions.put(XMLResource.OPTION_ENCODING, "UTF-8");
-		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED,
-				Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
+		saveOptions.put(Resource.OPTION_SAVE_ONLY_IF_CHANGED, Resource.OPTION_SAVE_ONLY_IF_CHANGED_MEMORY_BUFFER);
 		return saveOptions;
 	}
 
