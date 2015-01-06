@@ -24,7 +24,7 @@ import org.yakindu.base.base.NamedElement;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.sct.model.sgraph.Statechart#getImports <em>Imports</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.Statechart#getTypesystemURI <em>Typesystem URI</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.Statechart#getDomainID <em>Domain ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -57,30 +57,30 @@ public interface Statechart extends SpecificationElement, ReactiveElement, Scope
 	EList<Import> getImports();
 
 	/**
-	 * Returns the value of the '<em><b>Typesystem URI</b></em>' attribute.
+	 * Returns the value of the '<em><b>Domain ID</b></em>' attribute.
 	 * The default value is <code>"Default"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Typesystem URI</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Domain ID</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Typesystem URI</em>' attribute.
-	 * @see #setTypesystemURI(String)
-	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getStatechart_TypesystemURI()
+	 * @return the value of the '<em>Domain ID</em>' attribute.
+	 * @see #setDomainID(String)
+	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getStatechart_DomainID()
 	 * @model default="Default"
 	 * @generated
 	 */
-	String getTypesystemURI();
+	String getDomainID();
 
 	/**
-	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.Statechart#getTypesystemURI <em>Typesystem URI</em>}' attribute.
+	 * Sets the value of the '{@link org.yakindu.sct.model.sgraph.Statechart#getDomainID <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Typesystem URI</em>' attribute.
-	 * @see #getTypesystemURI()
+	 * @param value the new value of the '<em>Domain ID</em>' attribute.
+	 * @see #getDomainID()
 	 * @generated
 	 */
-	void setTypesystemURI(String value);
+	void setDomainID(String value);
 
 } // Statechart
