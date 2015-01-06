@@ -50,7 +50,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDocumentation <em>Documentation</em>}</li>
  *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getImports <em>Imports</em>}</li>
- *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getTypesystemURI <em>Typesystem URI</em>}</li>
+ *   <li>{@link org.yakindu.sct.model.sgraph.impl.StatechartImpl#getDomainID <em>Domain ID</em>}</li>
  * </ul>
  * </p>
  *
@@ -149,24 +149,24 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	protected EList<Import> imports;
 
 	/**
-	 * The default value of the '{@link #getTypesystemURI() <em>Typesystem URI</em>}' attribute.
+	 * The default value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypesystemURI()
+	 * @see #getDomainID()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String TYPESYSTEM_URI_EDEFAULT = "Default";
+	protected static final String DOMAIN_ID_EDEFAULT = "Default";
 
 	/**
-	 * The cached value of the '{@link #getTypesystemURI() <em>Typesystem URI</em>}' attribute.
+	 * The cached value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTypesystemURI()
+	 * @see #getDomainID()
 	 * @generated
 	 * @ordered
 	 */
-	protected String typesystemURI = TYPESYSTEM_URI_EDEFAULT;
+	protected String domainID = DOMAIN_ID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -313,8 +313,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getTypesystemURI() {
-		return typesystemURI;
+	public String getDomainID() {
+		return domainID;
 	}
 
 	/**
@@ -322,11 +322,11 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setTypesystemURI(String newTypesystemURI) {
-		String oldTypesystemURI = typesystemURI;
-		typesystemURI = newTypesystemURI;
+	public void setDomainID(String newDomainID) {
+		String oldDomainID = domainID;
+		domainID = newDomainID;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__TYPESYSTEM_URI, oldTypesystemURI, typesystemURI));
+			eNotify(new ENotificationImpl(this, Notification.SET, SGraphPackage.STATECHART__DOMAIN_ID, oldDomainID, domainID));
 	}
 
 	/**
@@ -385,8 +385,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return getDocumentation();
 			case SGraphPackage.STATECHART__IMPORTS:
 				return getImports();
-			case SGraphPackage.STATECHART__TYPESYSTEM_URI:
-				return getTypesystemURI();
+			case SGraphPackage.STATECHART__DOMAIN_ID:
+				return getDomainID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -420,8 +420,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				getImports().clear();
 				getImports().addAll((Collection<? extends Import>)newValue);
 				return;
-			case SGraphPackage.STATECHART__TYPESYSTEM_URI:
-				setTypesystemURI((String)newValue);
+			case SGraphPackage.STATECHART__DOMAIN_ID:
+				setDomainID((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -452,8 +452,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 			case SGraphPackage.STATECHART__IMPORTS:
 				getImports().clear();
 				return;
-			case SGraphPackage.STATECHART__TYPESYSTEM_URI:
-				setTypesystemURI(TYPESYSTEM_URI_EDEFAULT);
+			case SGraphPackage.STATECHART__DOMAIN_ID:
+				setDomainID(DOMAIN_ID_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -482,8 +482,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 				return DOCUMENTATION_EDEFAULT == null ? documentation != null : !DOCUMENTATION_EDEFAULT.equals(documentation);
 			case SGraphPackage.STATECHART__IMPORTS:
 				return imports != null && !imports.isEmpty();
-			case SGraphPackage.STATECHART__TYPESYSTEM_URI:
-				return TYPESYSTEM_URI_EDEFAULT == null ? typesystemURI != null : !TYPESYSTEM_URI_EDEFAULT.equals(typesystemURI);
+			case SGraphPackage.STATECHART__DOMAIN_ID:
+				return DOMAIN_ID_EDEFAULT == null ? domainID != null : !DOMAIN_ID_EDEFAULT.equals(domainID);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -585,8 +585,8 @@ public class StatechartImpl extends SpecificationElementImpl implements
 		result.append(name);
 		result.append(", documentation: ");
 		result.append(documentation);
-		result.append(", typesystemURI: ");
-		result.append(typesystemURI);
+		result.append(", domainID: ");
+		result.append(domainID);
 		result.append(')');
 		return result.toString();
 	}
