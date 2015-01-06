@@ -223,7 +223,7 @@ class StatemachineC {
 				«variable.type.targetLanguageName» «variable.asGetter»(«scHandleDecl») {
 					return «variable.access»;
 				}
-				«IF !variable.readonly »
+				«IF !variable.readonly && !variable.const»
 				void «variable.asSetter»(«scHandleDecl», «variable.type.targetLanguageName» value) {
 					«variable.access» = value;
 				}
