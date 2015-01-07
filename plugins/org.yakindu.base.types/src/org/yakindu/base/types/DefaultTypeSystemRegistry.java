@@ -10,6 +10,7 @@
  */
 package org.yakindu.base.types;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
 import org.yakindu.base.types.typesystem.ITypeSystem;
@@ -31,7 +32,7 @@ public class DefaultTypeSystemRegistry extends AbstractTypeSystemRegistry implem
 
 	private static final String EXTENSION_POINT_ID = "org.yakindu.base.types.typesystem";
 	private static final String ITYPESYSTEM_CLASS = "typesystem";
-	private static final String URI_SCHEME = "scheme";
+	private static final String DOMAIN_ID = "domainID";
 
 	public DefaultTypeSystemRegistry() {
 		init();
@@ -49,7 +50,9 @@ public class DefaultTypeSystemRegistry extends AbstractTypeSystemRegistry implem
 						bind(ITypeSystemRegistry.class).toInstance(DefaultTypeSystemRegistry.this);
 					}
 				}).injectMembers(typeSystem);
-				addTypeSystem(element.getAttribute(URI_SCHEME), typeSystem);
+				String attribute = element.getAttribute(DOMAIN_ID);
+				Assert.isNotNull(attribute);
+				addTypeSystem(attribute, typeSystem);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

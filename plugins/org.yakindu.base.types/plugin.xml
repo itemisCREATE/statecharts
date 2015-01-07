@@ -16,7 +16,7 @@
    <extension
          point="org.yakindu.base.types.typesystem">
       <contribution
-            scheme="Default"
+            domainID="org.yakindu.domain.default"
             typesystem="org.yakindu.base.types.typesystem.DefaultTypeSystem">
       </contribution>
    </extension>

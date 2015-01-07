@@ -59,7 +59,7 @@
                </appInfo>
             </annotation>
          </attribute>
-         <attribute name="scheme" type="string" use="required">
+         <attribute name="domainID" type="string" use="required">
             <annotation>
                <documentation>
                   The import uri scheme this type system is responsible for
