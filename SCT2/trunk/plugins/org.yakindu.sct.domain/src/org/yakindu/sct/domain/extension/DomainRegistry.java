@@ -22,6 +22,9 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
+
 /**
  * @author andreas muelder - Initial contribution and API
  * 
@@ -33,6 +36,7 @@ public class DomainRegistry {
 	private static final String DOMAIN_ID = "domainID";
 	private static final String DESCRIPTION = "description";
 	private static final String IMAGE = "image";
+	private static final String NAME = "name";
 
 	private static List<DomainDescriptor> descriptors = null;
 
@@ -48,6 +52,10 @@ public class DomainRegistry {
 
 		public String getDomainID() {
 			return configElement.getAttribute(DOMAIN_ID);
+		}
+
+		public String getName() {
+			return configElement.getAttribute(NAME);
 		}
 
 		public String getDescription() {
@@ -89,4 +97,13 @@ public class DomainRegistry {
 		return descriptors;
 	}
 
+	public static DomainDescriptor getDomainDescriptor(final String id) {
+		return Iterables.find(getDomainDescriptors(), new Predicate<DomainDescriptor>() {
+
+			@Override
+			public boolean apply(DomainDescriptor input) {
+				return input.getDomainID().equals(id);
+			}
+		});
+	}
 }
