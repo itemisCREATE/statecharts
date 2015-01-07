@@ -27,6 +27,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
+import org.yakindu.sct.domain.extension.DefaultDomain;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
 
@@ -41,6 +42,8 @@ public class DomainWizardPage extends WizardPage {
 
 	private Label description;
 
+	private Label image;
+
 	protected DomainWizardPage(String pageName) {
 		super(pageName);
 	}
@@ -49,34 +52,46 @@ public class DomainWizardPage extends WizardPage {
 		final Composite composite = new Composite(parent, SWT.NONE);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(composite);
 		GridLayoutFactory.fillDefaults().applyTo(composite);
-		Group domainSelectionGroup = new Group(composite, SWT.NONE);
+		final Group domainSelectionGroup = new Group(composite, SWT.NONE);
 		domainSelectionGroup.setText("Select the Statechart domain:");
-		GridLayoutFactory.fillDefaults().applyTo(domainSelectionGroup);
+
+		GridLayoutFactory.fillDefaults().numColumns(2).applyTo(domainSelectionGroup);
 		GridDataFactory.fillDefaults().grab(true, true).applyTo(domainSelectionGroup);
+
+		Label spacer = new Label(domainSelectionGroup, SWT.NONE);
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer);
+
+		image = new Label(domainSelectionGroup, SWT.NONE);
+		GridDataFactory.fillDefaults().grab(false, false).applyTo(image);
 		domainCombo = new ComboViewer(domainSelectionGroup, SWT.READ_ONLY);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(domainCombo.getCombo());
+		GridDataFactory.fillDefaults().grab(true, false).align(SWT.FILL, SWT.CENTER).applyTo(domainCombo.getCombo());
 		domainCombo.setContentProvider(new ArrayContentProvider());
 		domainCombo.setLabelProvider(new LabelProvider() {
 			@Override
 			public String getText(Object element) {
-				return ((DomainDescriptor) element).getDomainID();
+				return ((DomainDescriptor) element).getName();
 			}
 		});
 		domainCombo.setInput(DomainRegistry.getDomainDescriptors());
-		description = new Label(domainSelectionGroup, SWT.NONE);
-		GridDataFactory.fillDefaults().grab(true, false).applyTo(description);
+
+		Label spacer2 = new Label(domainSelectionGroup, SWT.NONE);
+		GridDataFactory.fillDefaults().span(2, 1).applyTo(spacer2);
+
+		description = new Label(domainSelectionGroup, SWT.WRAP);
+		GridDataFactory.fillDefaults().grab(true, false).span(2, 1).applyTo(description);
 		setControl(composite);
 		domainCombo.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			public void selectionChanged(SelectionChangedEvent event) {
 				DomainDescriptor domain = unwrap(event.getSelection());
 				description.setText(domain.getDescription());
-				composite.layout();
+				image.setImage(domain.getImage());
+				domainSelectionGroup.layout();
 
 			}
 
 		});
-		domainCombo.setSelection(new StructuredSelection(DomainRegistry.getDomainDescriptors().get(0)));
+		domainCombo.setSelection(new StructuredSelection(DomainRegistry.getDomainDescriptor(DefaultDomain.DOMAIN_ID)));
 
 		Link sctLink = new Link(composite, SWT.NONE);
 		sctLink.setText("<a>Get additional Statechart Domain Extensions</a>");
@@ -84,6 +99,7 @@ public class DomainWizardPage extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				org.eclipse.swt.program.Program.launch("http://statecharts.org/");
 			}
+
 			public void widgetDefaultSelected(SelectionEvent e) {
 			}
 		});
