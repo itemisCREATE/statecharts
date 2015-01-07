@@ -5,8 +5,10 @@
    <extension
          point="org.yakindu.sct.domain">
       <Domain
-            description="The default Domain for Yakindu Statechart Tools"
-            domainID="org.yakindu.domain.default">
+            description="The default domain for Yakindu Statechart Tools."
+            domainID="org.yakindu.domain.default"
+            image="icons/logo_small.png"
+            name="Default">
       </Domain>
    </extension>
 
