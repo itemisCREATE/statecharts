@@ -26,7 +26,7 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.TypeTrace.Severity;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
@@ -54,7 +54,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 
-	private ITypeSystemInferrer.ListBasedTypeTraceAcceptor acceptor;
+	private ListBasedValidationIssueAcceptor acceptor;
 
 	// Unary
 	@Test
@@ -787,7 +787,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	protected Type inferType(String expression, String parserRule, Scope... scopes) {
 		EObject parseResult = super.parseExpression(expression, parserRule, scopes);
 		assertNotNull(parseResult);
-		acceptor = new ITypeSystemInferrer.ListBasedTypeTraceAcceptor();
+		acceptor = new ListBasedValidationIssueAcceptor();
 		if (parseResult instanceof Expression) {
 			return typeInferrer.inferType((Expression) parseResult, acceptor);
 		} else if (parseResult instanceof EventDefinition) {
@@ -820,10 +820,15 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	}
 
 	private void expectIssue(Type object, String message) {
-		if (acceptor.getTraces(Severity.ERROR).isEmpty()) {
+		if (acceptor.getTraces(
+				org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR).isEmpty()) {
 			TestCase.fail("No issue detected.");
 		}
-		assertEquals(message, acceptor.getTraces(Severity.ERROR).iterator().next().getMessage());
+		assertEquals(
+				message,
+				acceptor.getTraces(
+						org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity.ERROR)
+						.iterator().next().getMessage());
 	}
 
 }
