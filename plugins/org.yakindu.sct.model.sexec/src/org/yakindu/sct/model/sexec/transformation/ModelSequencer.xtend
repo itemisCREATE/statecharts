@@ -21,6 +21,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.base.types.validation.IValidationIssueAcceptor
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -37,7 +38,8 @@ class ModelSequencer implements IModelSequencer {
 	 */ 
 
 
-	override ExecutionFlow transform(Statechart sc) {
+	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
+		
 		val ef = sc.create
 		
 		// during mapping the basic structural elements will be mapped from the source statechart to the execution flow
