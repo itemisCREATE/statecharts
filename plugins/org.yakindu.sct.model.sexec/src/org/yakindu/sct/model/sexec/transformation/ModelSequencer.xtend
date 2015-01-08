@@ -22,6 +22,7 @@ import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -36,7 +37,9 @@ class ModelSequencer implements IModelSequencer {
 	/* ==========================================================================
 	 * TRANSFORMATION ROOT
 	 */ 
-
+	override ExecutionFlow transform(Statechart sc) {
+		transform(sc, new ListBasedValidationIssueAcceptor)
+	}
 
 	override ExecutionFlow transform(Statechart sc, IValidationIssueAcceptor acceptor) {
 		
