@@ -82,7 +82,8 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	}
 
 	public Object infer(EventRaisingExpression e) {
-		Type type1 = inferTypeDispatch(deresolve(e.getEvent()).getType());
+		Type type1 = deresolve(e.getEvent()).getType();
+		type1 = type1 != null ? type1 : getType(VOID);
 		if (e.getValue() == null) {
 			assertSame(type1, getType(VOID), String.format(MISSING_VALUE, type1));
 			return getType(VOID);
