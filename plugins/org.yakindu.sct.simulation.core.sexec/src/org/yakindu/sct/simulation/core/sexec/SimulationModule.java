@@ -97,14 +97,6 @@ public class SimulationModule extends AbstractGenericModule {
 		return StextNameProvider.class;
 	}
 
-	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return DefaultTypeSystem.class;
-	}
-
-	public Class<? extends ITypeSystem> bindISTextTypeSystem() {
-		return DefaultTypeSystem.class;
-	}
-
 	public Class<? extends ITypeSystemInferrer> bindISTextTypeInferrer() {
 		return STextTypeInferrer.class;
 	}

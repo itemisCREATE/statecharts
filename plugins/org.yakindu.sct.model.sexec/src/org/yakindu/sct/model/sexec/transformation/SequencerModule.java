@@ -38,10 +38,6 @@ public class SequencerModule extends AbstractGenericModule {
 		return SGraphNameProvider.class;
 	}
 
-	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return ITypeSystem.class;
-	}
-
 	public Class<? extends ITypeSystemInferrer> bindISTextTypeInferrer() {
 		return STextTypeInferrer.class;
 	}

@@ -33,7 +33,7 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 /**
  * @author andreas muelder - Initial contribution and API
  * @author Alexander Nyßen - Ensured type system information is only inferred
- *         via {@link ITypeSystem} facade.
+ *         via {@link ITypeSystemRegistry} facade.
  * 
  */
 public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {

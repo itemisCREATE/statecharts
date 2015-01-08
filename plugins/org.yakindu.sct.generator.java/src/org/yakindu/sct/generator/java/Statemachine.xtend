@@ -12,7 +12,8 @@ package org.yakindu.sct.generator.java
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.ITypeSystemRegistry
+import org.yakindu.base.types.typesystem.DefaultTypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -22,7 +23,6 @@ import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.base.types.typesystem.DefaultTypeSystem
 
 class Statemachine {
 	
@@ -30,7 +30,7 @@ class Statemachine {
 	@Inject extension GenmodelEntries
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension ITypeSystem
+	@Inject extension ITypeSystemRegistry
 	@Inject extension FlowCode
 	
 	@Inject Beautifier beautifier
