@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -42,7 +43,11 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	private Map<Type, Type> extendsRegistry = new HashMap<Type, Type>();
 
 	// Types must be contained in a resource to avoid dangling reference errors
-	private Resource resource = new ResourceImpl();
+	private Resource resource;
+	
+	public AbstractTypeSystem() {
+		 resource = new ResourceImpl(URI.createURI("types"));
+	}
 
 	@Inject
 	private ITypeSystemRegistry registry;

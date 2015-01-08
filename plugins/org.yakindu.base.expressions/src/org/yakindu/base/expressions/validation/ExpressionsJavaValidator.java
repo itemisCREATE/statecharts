@@ -24,7 +24,7 @@ import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  * 
  */
 public class ExpressionsJavaValidator extends org.yakindu.base.expressions.validation.AbstractExpressionsJavaValidator
-		implements ITypeTraceAcceptor {
+		implements IValidationIssueAcceptor {
 
 	public static final String WARNING_IS_RAW_CODE = "WarningRaw";
 	public static final String WARNING_IS_RAW_MSG = "%s is a raw type. References to generic type %s should be parameterized";
@@ -68,13 +68,13 @@ public class ExpressionsJavaValidator extends org.yakindu.base.expressions.valid
 		typeInferrer.inferType(expression, this);
 	}
 
-	public void accept(TypeTrace trace) {
-		switch (trace.getSeverity()) {
+	public void accept(ValidationIssue issue) {
+		switch (issue.getSeverity()) {
 		case ERROR:
-			error(trace.getMessage(), null);
+			error(issue.getMessage(), null);
 			break;
 		case WARNING:
-			warning(trace.getMessage(), null);
+			warning(issue.getMessage(), null);
 			break;
 		case INFO:
 			break;

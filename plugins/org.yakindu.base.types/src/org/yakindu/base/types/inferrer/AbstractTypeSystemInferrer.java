@@ -18,8 +18,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.Type;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.TypeTrace;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor.TypeTrace.Severity;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
@@ -43,7 +45,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	@Inject
 	private ITypeSystemRegistry registry;
 
-	private ITypeTraceAcceptor acceptor;
+	private IValidationIssueAcceptor acceptor;
 
 	private PolymorphicDispatcher<Object> dispatcher;
 
@@ -63,8 +65,8 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	@Override
-	public final Type inferType(EObject object, ITypeTraceAcceptor acceptor) {
-		this.acceptor = (acceptor != null ? acceptor : new ListBasedTypeTraceAcceptor());
+	public final Type inferType(EObject object, IValidationIssueAcceptor acceptor) {
+		this.acceptor = (acceptor != null ? acceptor : new ListBasedValidationIssueAcceptor());
 		info("infering type for object " + object);
 		Type result = inferTypeDispatch(object);
 		typeCache.invalidateAll();
@@ -72,12 +74,12 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected Type inferTypeDispatch(EObject object) {
-		if(object.eIsProxy())
+		if (object.eIsProxy())
 			return null;
 		try {
 			return typeCache.get(object);
 		} catch (Exception e) {
-			//Ignore invalid expressions and recursions
+			// Ignore invalid expressions and recursions
 		}
 		return null;
 	}
@@ -161,14 +163,14 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected void info(String msg) {
-		acceptor.accept(new TypeTrace(Severity.INFO, msg));
+		acceptor.accept(new ValidationIssue(Severity.INFO, msg));
 	}
 
 	protected void warning(String msg) {
-		acceptor.accept(new TypeTrace(Severity.WARNING, msg));
+		acceptor.accept(new ValidationIssue(Severity.WARNING, msg));
 	}
 
 	protected void error(String msg) {
-		acceptor.accept(new TypeTrace(Severity.ERROR, msg));
+		acceptor.accept(new ValidationIssue(Severity.ERROR, msg));
 	}
 }

@@ -15,7 +15,8 @@ Export-Package: org.yakindu.base.base,
  org.yakindu.base.types.inferrer,
  org.yakindu.base.types.interpreter,
  org.yakindu.base.types.typesystem,
- org.yakindu.base.types.util
+ org.yakindu.base.types.util,
+ org.yakindu.base.types.validation
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,
