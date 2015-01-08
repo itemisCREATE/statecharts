@@ -97,8 +97,8 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 		ListBasedValidationIssueAcceptor acceptor = new ListBasedValidationIssueAcceptor();
 		ExecutionFlow flow = sequencer.transform(statechart, acceptor);
 		if (acceptor.getTraces(Severity.ERROR).size() > 0) {
-			Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, acceptor.getTraces(Severity.ERROR)
-					.iterator().next().toString());
+			Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, ERROR_DURING_SIMULATION, acceptor
+					.getTraces(Severity.ERROR).iterator().next().toString(), null);
 			IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
 			try {
 				statusHandler.handleStatus(errorStatus, getDebugTarget());

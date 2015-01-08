@@ -31,12 +31,11 @@ import org.yakindu.sct.simulation.ui.dialogs.SimulationLaunchErrorDialog;
 public class TerminateLaunchStatusHandler implements IStatusHandler {
 
 	public Object handleStatus(final IStatus status, final Object source) {
-		final Throwable cause = status.getException();
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				Shell shell = DebugUIPlugin.getShell();
 				SimulationLaunchErrorDialog dialog = new SimulationLaunchErrorDialog(shell,
-						"Exception occured during simulation", cause.toString(), status, Collections
+						"Exception occured during simulation", status.getMessage(), status, Collections
 								.singletonList((IDebugTarget) source));
 				dialog.setBlockOnOpen(false);
 				dialog.open();
