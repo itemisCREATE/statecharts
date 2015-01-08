@@ -33,7 +33,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
         eType="#//Import" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        defaultValueLiteral="Default"/>
+        defaultValueLiteral="org.yakindu.domain.default"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//EntryKind"/>

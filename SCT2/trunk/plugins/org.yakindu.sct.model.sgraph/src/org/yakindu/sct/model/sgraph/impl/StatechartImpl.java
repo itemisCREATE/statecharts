@@ -156,7 +156,7 @@ public class StatechartImpl extends SpecificationElementImpl implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String DOMAIN_ID_EDEFAULT = "Default";
+	protected static final String DOMAIN_ID_EDEFAULT = "org.yakindu.domain.default";
 
 	/**
 	 * The cached value of the '{@link #getDomainID() <em>Domain ID</em>}' attribute.
