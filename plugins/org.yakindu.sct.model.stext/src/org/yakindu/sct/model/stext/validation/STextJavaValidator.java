@@ -56,7 +56,6 @@ import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.inferrer.ITypeSystemInferrer.ITypeTraceAcceptor;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Entry;
@@ -112,8 +111,7 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
  * 
  */
 @ComposedChecks(validators = { SGraphJavaValidator.class, SCTResourceValidator.class, ExpressionsJavaValidator.class })
-public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages,
-		ITypeTraceAcceptor {
+public class STextJavaValidator extends AbstractSTextJavaValidator implements STextValidationMessages {
 
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
@@ -128,7 +126,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	private IContainer.Manager containerManager;
 	@Inject
 	private ResourceDescriptionsProvider resourceDescriptionsProvider;
-
+	
 	@Check
 	public void checkExpression(VariableDefinition expression) {
 		if (expression.getType() == null || expression.getType().eIsProxy())
@@ -144,19 +142,6 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check
 	public void checkExpression(Guard expression) {
 		typeInferrer.inferType(expression, this);
-	}
-
-	public void accept(TypeTrace trace) {
-		switch (trace.getSeverity()) {
-		case ERROR:
-			error(trace.getMessage(), null);
-			break;
-		case WARNING:
-			warning(trace.getMessage(), null);
-			break;
-		case INFO:
-			break;
-		}
 	}
 
 	@Check(CheckType.FAST)
