@@ -17,4 +17,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 public interface IModelSequencer {
 
 	public ExecutionFlow transform(Statechart statechart, IValidationIssueAcceptor acceptor);
+	
+	public ExecutionFlow transform(Statechart statechart);
 }
