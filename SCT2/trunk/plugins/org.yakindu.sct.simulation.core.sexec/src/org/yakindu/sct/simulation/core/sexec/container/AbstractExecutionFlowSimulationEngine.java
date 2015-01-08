@@ -17,6 +17,8 @@ import org.eclipse.debug.core.DebugPlugin;
 import org.eclipse.debug.core.IStatusHandler;
 import org.eclipse.debug.core.model.IDebugTarget;
 import org.eclipse.emf.common.util.WrappedException;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
+import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -92,7 +94,19 @@ public abstract class AbstractExecutionFlowSimulationEngine implements ISimulati
 
 	@Override
 	public void init() {
-		ExecutionFlow flow = sequencer.transform(statechart);
+		ListBasedValidationIssueAcceptor acceptor = new ListBasedValidationIssueAcceptor();
+		ExecutionFlow flow = sequencer.transform(statechart, acceptor);
+		if (acceptor.getTraces(Severity.ERROR).size() > 0) {
+			Status errorStatus = new Status(Status.ERROR, Activator.PLUGIN_ID, acceptor.getTraces(Severity.ERROR)
+					.iterator().next().toString());
+			IStatusHandler statusHandler = DebugPlugin.getDefault().getStatusHandler(errorStatus);
+			try {
+				statusHandler.handleStatus(errorStatus, getDebugTarget());
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+		}
+
 		if (!context.isSnapshot()) {
 			contextInitializer.initialize(context, flow);
 		}
