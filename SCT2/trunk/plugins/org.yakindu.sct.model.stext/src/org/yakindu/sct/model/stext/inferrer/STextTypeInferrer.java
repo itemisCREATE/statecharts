@@ -77,7 +77,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 	public Object infer(EventValueReferenceExpression e) {
 		EventDefinition definition = deresolve(e.getValue());
 		if (definition != null)
-			return inferTypeDispatch(definition.getType());
+			return inferTypeDispatch(definition.getType() != null ? definition.getType() : getType(VOID));
 		return inferTypeDispatch(e.getValue());
 	}
 

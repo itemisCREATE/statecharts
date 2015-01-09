@@ -248,14 +248,6 @@ public class STextJavaValidatorTest extends AbstractSTextTest implements STextVa
 				TransitionSpecification.class.getSimpleName());
 		AssertableDiagnostics validationResult = tester.validate(model);
 		validationResult.assertOK();
-
-		model = super.parseExpression("if / raise if.a:1", context, TransitionSpecification.class.getSimpleName());
-		validationResult = tester.validate(model);
-		validationResult.assertError(FEATURE_CALL_TO_SCOPE);
-
-		model = super.parseExpression("if.a / raise if", context, TransitionSpecification.class.getSimpleName());
-		validationResult = tester.validate(model);
-		validationResult.assertError(FEATURE_CALL_TO_SCOPE);
 	}
 
 	/**
