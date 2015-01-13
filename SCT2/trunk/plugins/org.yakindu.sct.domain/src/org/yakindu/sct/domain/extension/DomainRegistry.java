@@ -99,10 +99,9 @@ public class DomainRegistry {
 
 	public static DomainDescriptor getDomainDescriptor(final String id) {
 		return Iterables.find(getDomainDescriptors(), new Predicate<DomainDescriptor>() {
-
 			@Override
 			public boolean apply(DomainDescriptor input) {
-				return input.getDomainID().equals(id);
+				return input.getDomainID().equals(id != null ? id : DefaultDomain.DOMAIN_ID);
 			}
 		});
 	}

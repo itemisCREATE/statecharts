@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
+import java.util.List;
+
 import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.runtime.IStatus;
@@ -21,7 +23,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.jface.databinding.swt.ISWTObservableValue;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.databinding.viewers.IViewerObservableValue;
+import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.layout.GridDataFactory;
+import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.GridLayout;
@@ -31,6 +39,9 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.sct.domain.extension.DefaultDomain;
+import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
@@ -49,6 +60,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	private Text txtName;
 	private OrderElementControl orderElementControl;
 	private Text documentation;
+	private ComboViewer domainCombo;
 
 	@Override
 	protected Layout createLeftColumnLayout() {
@@ -58,7 +70,31 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	@Override
 	protected void createLeftColumnControls(Composite leftColumn) {
 		createNameControl(leftColumn);
+		createDomainCombo(leftColumn);
 		createSpecificationControl(leftColumn);
+	}
+
+	protected void createDomainCombo(Composite leftColumn) {
+		Label label = getToolkit().createLabel(leftColumn, "Statechart domain");
+		GridDataFactory.fillDefaults().span(2, 1).align(SWT.FILL, SWT.CENTER).applyTo(label);
+		domainCombo = new ComboViewer(leftColumn);
+		GridDataFactory.fillDefaults().span(1, 1).align(SWT.FILL, SWT.CENTER).applyTo(domainCombo.getCombo());
+		Label spacer = getToolkit().createLabel(leftColumn, "");
+		GridDataFactory.fillDefaults().applyTo(spacer);
+		domainCombo.setContentProvider(new ArrayContentProvider());
+		domainCombo.setLabelProvider(new LabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return ((DomainDescriptor) element).getName();
+			}
+		});
+
+		List<DomainDescriptor> domains = DomainRegistry.getDomainDescriptors();
+		for (DomainDescriptor domainDescriptor : domains) {
+			domainCombo.add(domainDescriptor);
+		}
+		domainCombo.setSelection(new StructuredSelection(DomainRegistry.getDomainDescriptor(DefaultDomain.DOMAIN_ID)));
+
 	}
 
 	@Override
@@ -109,9 +145,30 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 	@Override
 	public void bindModel(EMFDataBindingContext context) {
 		bindNameControl(context);
+		bindDomainCombo(context);
 		bindSpecificationControl(context);
 		bindDocumentationControl(context);
 		orderElementControl.refreshInput();
+	}
+
+	private void bindDomainCombo(EMFDataBindingContext context) {
+		IEMFValueProperty property = EMFEditProperties.value(TransactionUtil.getEditingDomain(eObject),
+				SGraphPackage.Literals.STATECHART__DOMAIN_ID);
+
+		IViewerObservableValue observeSingleSelection = ViewersObservables.observeSingleSelection(domainCombo);
+		UpdateValueStrategy modelToTarget = new UpdateValueStrategy() {
+			@Override
+			public Object convert(Object value) {
+				return ((DomainDescriptor) value).getDomainID();
+			}
+		};
+		UpdateValueStrategy targetToModel = new UpdateValueStrategy() {
+			@Override
+			public Object convert(Object value) {
+				return DomainRegistry.getDomainDescriptor((String) value);
+			}
+		};
+		context.bindValue(observeSingleSelection, property.observe(eObject), modelToTarget, targetToModel);
 	}
 
 	private void bindDocumentationControl(EMFDataBindingContext context) {
