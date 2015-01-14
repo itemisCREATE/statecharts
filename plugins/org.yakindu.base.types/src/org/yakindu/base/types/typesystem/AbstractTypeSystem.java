@@ -20,6 +20,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -41,26 +42,23 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	private Map<String, Type> typeRegistry = new HashMap<String, Type>();
 	private Map<Type, Type> extendsRegistry = new HashMap<Type, Type>();
+	private Map<Type, Type> conversionRegistry = new HashMap<Type, Type>();
 
-	// Types must be contained in a resource to avoid dangling reference errors
+	protected abstract void initStaticTypes();
+
 	private Resource resource;
-	
-	public AbstractTypeSystem() {
-		 resource = new ResourceImpl(URI.createURI("types"));
-	}
-
 	@Inject
 	private ITypeSystemRegistry registry;
 
-	protected abstract void declareTypes();
+	public AbstractTypeSystem() {
+		resource = new ResourceImpl(URI.createURI("types"));
+		initStaticTypes();
+	}
 
-	protected void reset(){
+	protected void reset() {
 		typeRegistry.clear();
 		extendsRegistry.clear();
-	}
-	@Override
-	public final void init() {
-		declareTypes();
+		conversionRegistry.clear();
 	}
 
 	public Type getType(String type) {
@@ -99,7 +97,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	}
 
-	public Collection<Type> getTypes() {
+	public Collection<Type> getTypes(EObject context) {
 		return Collections.unmodifiableCollection(typeRegistry.values());
 	}
 
@@ -109,14 +107,27 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		declareType(primitive, name);
 		return primitive;
 	}
-	
+
 	public void declareType(Type type, String name) {
 		resource.getContents().add(type);
 		typeRegistry.put(name, type);
 	}
 
+	public void removeType(String name) {
+		Type type = typeRegistry.get(name);
+		if (type != null) {
+			extendsRegistry.remove(type);
+			resource.getContents().remove(type);
+			typeRegistry.remove(type);
+		}
+	}
+
 	public void declareSuperType(Type baseType, Type superType) {
 		extendsRegistry.put(baseType, superType);
+	}
+
+	public void declareConversion(Type baseType, Type targetType) {
+		conversionRegistry.put(baseType, targetType);
 	}
 
 	public boolean haveCommonType(Type type1, Type type2) {
@@ -128,8 +139,28 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	public Type getCommonType(Type type1, Type type2) {
+		Type result = getCommonTypeInternal(type1, type2);
+		if (result != null)
+			return result;
+
+		Type conversionType1 = getConversionType(type1);
+		if (conversionType1 != null) {
+			result = getCommonTypeInternal(conversionType1, type2);
+			if (result != null)
+				return result;
+		}
+
+		Type conversionType2 = getConversionType(type2);
+		if (conversionType2 != null)
+			return getCommonTypeInternal(type1, conversionType2);
+
+		return null;
+	}
+
+	private Type getCommonTypeInternal(Type type1, Type type2) {
 		if (isSame(type1, type2))
 			return type1;
+
 		if (isSuperType(type1, type2)) {
 			return type2;
 		}
@@ -138,8 +169,12 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return null;
 	}
 
+	protected Type getConversionType(Type sourceType) {
+		return conversionRegistry.get(sourceType);
+	}
+
 	public boolean isTypeSystemFor(Type type) {
-		Collection<Type> types = getTypes();
+		Collection<Type> types = typeRegistry.values();
 		for (Type type2 : types) {
 			if (isSame(type, type2))
 				return true;

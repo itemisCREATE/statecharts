@@ -33,7 +33,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem {
 	public static final String VOID = "void";
 
 	@Override
-	protected void declareTypes() {
+	protected void initStaticTypes() {
 		declarePrimitive(STRING);
 		declarePrimitive(REAL);
 		declarePrimitive(INTEGER);
@@ -63,4 +63,5 @@ public class DefaultTypeSystem extends AbstractTypeSystem {
 			return defaultValue(superType);
 		throw new IllegalArgumentException("Unknown type " + type);
 	}
+
 }

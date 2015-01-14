@@ -28,7 +28,6 @@ import org.yakindu.base.types.TypesPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getConstraint <em>Constraint</em>}</li>
- *   <li>{@link org.yakindu.base.types.impl.TypeImpl#getScheme <em>Scheme</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeImpl#isAbstract <em>Abstract</em>}</li>
  * </ul>
  * </p>
@@ -45,25 +44,6 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	 * @ordered
 	 */
 	protected EList<TypeConstraint> constraint;
-
-	/**
-	 * The default value of the '{@link #getScheme() <em>Scheme</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getScheme()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SCHEME_EDEFAULT = null;
-	/**
-	 * The cached value of the '{@link #getScheme() <em>Scheme</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getScheme()
-	 * @generated
-	 * @ordered
-	 */
-	protected String scheme = SCHEME_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
@@ -121,27 +101,6 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getScheme() {
-		return scheme;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setScheme(String newScheme) {
-		String oldScheme = scheme;
-		scheme = newScheme;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE__SCHEME, oldScheme, scheme));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isAbstract() {
 		return abstract_;
 	}
@@ -182,8 +141,6 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 		switch (featureID) {
 			case TypesPackage.TYPE__CONSTRAINT:
 				return getConstraint();
-			case TypesPackage.TYPE__SCHEME:
-				return getScheme();
 			case TypesPackage.TYPE__ABSTRACT:
 				return isAbstract();
 		}
@@ -203,9 +160,6 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 				getConstraint().clear();
 				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
 				return;
-			case TypesPackage.TYPE__SCHEME:
-				setScheme((String)newValue);
-				return;
 			case TypesPackage.TYPE__ABSTRACT:
 				setAbstract((Boolean)newValue);
 				return;
@@ -224,9 +178,6 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 			case TypesPackage.TYPE__CONSTRAINT:
 				getConstraint().clear();
 				return;
-			case TypesPackage.TYPE__SCHEME:
-				setScheme(SCHEME_EDEFAULT);
-				return;
 			case TypesPackage.TYPE__ABSTRACT:
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
@@ -244,8 +195,6 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 		switch (featureID) {
 			case TypesPackage.TYPE__CONSTRAINT:
 				return constraint != null && !constraint.isEmpty();
-			case TypesPackage.TYPE__SCHEME:
-				return SCHEME_EDEFAULT == null ? scheme != null : !SCHEME_EDEFAULT.equals(scheme);
 			case TypesPackage.TYPE__ABSTRACT:
 				return abstract_ != ABSTRACT_EDEFAULT;
 		}

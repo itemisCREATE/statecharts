@@ -204,22 +204,13 @@ public interface TypesPackage extends EPackage {
 	int TYPE__CONSTRAINT = PACKAGE_MEMBER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE__SCHEME = PACKAGE_MEMBER_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE__ABSTRACT = PACKAGE_MEMBER_FEATURE_COUNT + 2;
+	int TYPE__ABSTRACT = PACKAGE_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Type</em>' class.
@@ -228,7 +219,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 3;
+	int TYPE_FEATURE_COUNT = PACKAGE_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -542,15 +533,6 @@ public interface TypesPackage extends EPackage {
 	int PRIMITIVE_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
-	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PRIMITIVE_TYPE__SCHEME = TYPE__SCHEME;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -594,15 +576,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int ENUMERATION_TYPE__CONSTRAINT = PRIMITIVE_TYPE__CONSTRAINT;
-
-	/**
-	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ENUMERATION_TYPE__SCHEME = PRIMITIVE_TYPE__SCHEME;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -669,15 +642,6 @@ public interface TypesPackage extends EPackage {
 	int PARAMETERIZED_TYPE__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
-	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PARAMETERIZED_TYPE__SCHEME = TYPE__SCHEME;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -731,15 +695,6 @@ public interface TypesPackage extends EPackage {
 	 * @ordered
 	 */
 	int COMPLEX_TYPE__CONSTRAINT = PARAMETERIZED_TYPE__CONSTRAINT;
-
-	/**
-	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMPLEX_TYPE__SCHEME = PARAMETERIZED_TYPE__SCHEME;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -890,15 +845,6 @@ public interface TypesPackage extends EPackage {
 	int TYPE_PARAMETER__CONSTRAINT = TYPE__CONSTRAINT;
 
 	/**
-	 * The feature id for the '<em><b>Scheme</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_PARAMETER__SCHEME = TYPE__SCHEME;
-
-	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1012,17 +958,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getType_Constraint();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Type#getScheme <em>Scheme</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Scheme</em>'.
-	 * @see org.yakindu.base.types.Type#getScheme()
-	 * @see #getType()
-	 * @generated
-	 */
-	EAttribute getType_Scheme();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Type#isAbstract <em>Abstract</em>}'.
@@ -1418,14 +1353,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference TYPE__CONSTRAINT = eINSTANCE.getType_Constraint();
-
-		/**
-		 * The meta object literal for the '<em><b>Scheme</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPE__SCHEME = eINSTANCE.getType_Scheme();
 
 		/**
 		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.

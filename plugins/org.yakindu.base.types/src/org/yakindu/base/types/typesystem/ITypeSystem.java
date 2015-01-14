@@ -12,6 +12,7 @@ package org.yakindu.base.types.typesystem;
 
 import java.util.Collection;
 
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.Type;
 
 import com.google.inject.ImplementedBy;
@@ -26,9 +27,7 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultTypeSystem.class)
 public interface ITypeSystem {
 
-	public void init();
-
-	public Collection<Type> getTypes();
+	public Collection<Type> getTypes(EObject context);
 
 	public Type getType(String name);
 
@@ -43,7 +42,7 @@ public interface ITypeSystem {
 	public boolean isSuperType(Type subtype, Type supertype);
 
 	public boolean isTypeSystemFor(Type type);
-	
+
 	public Object defaultValue(Type type);
-	
+
 }

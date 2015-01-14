@@ -31,13 +31,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class ComplexTypeItemProvider
-	extends ParameterizedTypeItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends ParameterizedTypeItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

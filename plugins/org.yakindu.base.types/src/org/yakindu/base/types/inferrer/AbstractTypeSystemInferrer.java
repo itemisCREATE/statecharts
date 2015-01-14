@@ -53,7 +53,6 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	public AbstractTypeSystemInferrer() {
 		initDispatcher();
-		initTypeCache();
 	}
 
 	protected Type getType(String name) {
@@ -66,6 +65,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 
 	@Override
 	public final Type inferType(EObject object, IValidationIssueAcceptor acceptor) {
+		initTypeCache(object);
 		this.acceptor = (acceptor != null ? acceptor : new ListBasedValidationIssueAcceptor());
 		info("infering type for object " + object);
 		Type result = inferTypeDispatch(object);
@@ -84,11 +84,11 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		return null;
 	}
 
-	private void initTypeCache() {
+	private void initTypeCache(final EObject context) {
 		typeCache = CacheBuilder.newBuilder().maximumSize(100).build(new CacheLoader<EObject, Type>() {
 			public Type load(EObject key) {
 				if (key instanceof Type) {
-					Collection<Type> types = registry.getTypes();
+					Collection<Type> types = registry.getTypes(context);
 					for (Type type : types) {
 						if (registry.isSame((Type) key, type))
 							return type;

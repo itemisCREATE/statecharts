@@ -29,13 +29,7 @@ import org.yakindu.base.types.TypesPackage;
  * @generated
  */
 public class TypeItemProvider
-	extends PackageMemberItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends PackageMemberItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -57,29 +51,29 @@ public class TypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addSchemePropertyDescriptor(object);
+			addAbstractPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Scheme feature.
+	 * This adds a property descriptor for the Abstract feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addSchemePropertyDescriptor(Object object) {
+	protected void addAbstractPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_Type_scheme_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_Type_scheme_feature", "_UI_Type_type"),
-				 TypesPackage.Literals.TYPE__SCHEME,
+				 getString("_UI_Type_abstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Type_abstract_feature", "_UI_Type_type"),
+				 TypesPackage.Literals.TYPE__ABSTRACT,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -151,7 +145,7 @@ public class TypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(Type.class)) {
-			case TypesPackage.TYPE__SCHEME:
+			case TypesPackage.TYPE__ABSTRACT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.TYPE__CONSTRAINT:

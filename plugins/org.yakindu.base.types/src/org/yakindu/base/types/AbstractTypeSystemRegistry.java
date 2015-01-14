@@ -13,6 +13,7 @@ package org.yakindu.base.types;
 import java.util.Collection;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 
 import com.google.common.collect.ArrayListMultimap;
@@ -28,8 +29,8 @@ public abstract class AbstractTypeSystemRegistry implements ITypeSystemRegistry 
 
 	private Multimap<String, ITypeSystem> typeSystemRegistry = ArrayListMultimap.create();
 
-	public Iterable<ITypeSystem> getTypeSystems(String uriScheme) {
-		return typeSystemRegistry.get(uriScheme);
+	public Iterable<ITypeSystem> getTypeSystems(String typesystemID) {
+		return typeSystemRegistry.get(typesystemID);
 	}
 
 	protected void addTypeSystem(String uriScheme, ITypeSystem system) {
@@ -42,11 +43,11 @@ public abstract class AbstractTypeSystemRegistry implements ITypeSystemRegistry 
 	}
 
 	@Override
-	public Collection<Type> getTypes() {
+	public Collection<Type> getTypes(EObject context) {
 		List<Type> allTypes = Lists.newArrayList();
 		Iterable<ITypeSystem> allTypeSystems = getAllTypeSystems();
 		for (ITypeSystem iTypeSystem : allTypeSystems) {
-			allTypes.addAll(iTypeSystem.getTypes());
+			allTypes.addAll(iTypeSystem.getTypes(context));
 		}
 		return allTypes;
 	}
@@ -103,13 +104,7 @@ public abstract class AbstractTypeSystemRegistry implements ITypeSystemRegistry 
 
 	@Override
 	public Object defaultValue(Type type) {
-		Iterable<ITypeSystem> allTypeSystems = getAllTypeSystems();
-		for (ITypeSystem iTypeSystem : allTypeSystems) {
-			if (iTypeSystem.isTypeSystemFor(type)) {
-				return iTypeSystem.defaultValue(type);
-			}
-		}
-		throw new IllegalStateException(String.format("No Type System for type %s found!", type));
+		return getDelegate(type).defaultValue(type);
 	}
 
 }

@@ -35,7 +35,7 @@ public class DefaultTypeSystemRegistry extends AbstractTypeSystemRegistry implem
 	private static final String DOMAIN_ID = "domainID";
 
 	public DefaultTypeSystemRegistry() {
-		init();
+		loadFromExtension();
 	}
 
 	protected synchronized void loadFromExtension() {
@@ -56,15 +56,6 @@ public class DefaultTypeSystemRegistry extends AbstractTypeSystemRegistry implem
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
-	}
-
-	@Override
-	public void init() {
-		loadFromExtension();
-		Iterable<ITypeSystem> allTypeSystems = getAllTypeSystems();
-		for (ITypeSystem iTypeSystem : allTypeSystems) {
-			iTypeSystem.init();
 		}
 	}
 }
