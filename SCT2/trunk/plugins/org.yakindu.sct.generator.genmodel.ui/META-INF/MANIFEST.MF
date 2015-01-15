@@ -34,9 +34,10 @@ Import-Package: org.apache.commons.logging,
  org.eclipse.jdt.core
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.yakindu.sct.generator.genmodel.ui,
+ org.yakindu.sct.generator.genmodel.ui.contentassist,
  org.yakindu.sct.generator.genmodel.ui.contentassist.antlr,
  org.yakindu.sct.generator.genmodel.ui.help,
  org.yakindu.sct.generator.genmodel.ui.internal,
- org.yakindu.sct.generator.genmodel.ui.contentassist,
- org.yakindu.sct.generator.genmodel.ui.quickfix
+ org.yakindu.sct.generator.genmodel.ui.quickfix,
+ org.yakindu.sct.generator.genmodel.ui.wizard
 Bundle-Activator: org.yakindu.sct.generator.genmodel.ui.internal.SGenActivator
