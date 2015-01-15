@@ -21,7 +21,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
 import org.yakindu.base.types.ITypeSystemRegistry;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -50,13 +49,13 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = filterExternalDeclarations(context, parentScope);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
-				reference.getEReferenceType(),getStatechart(context).getDomainID());
+				reference.getEReferenceType(), getStatechart(context).getDomainID(), getStatechart(context));
 		return parentScope;
 	}
-	
+
 	private Statechart getStatechart(Resource context) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(
-				context, ContextElementAdapter.class);
+		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(context,
+				ContextElementAdapter.class);
 
 		if (provider == null) {
 			return (Statechart) EcoreUtil2.getObjectByType(context.getContents(), SGraphPackage.Literals.STATECHART);
