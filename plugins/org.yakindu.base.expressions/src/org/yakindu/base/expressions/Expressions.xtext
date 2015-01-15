@@ -75,7 +75,7 @@ NumericalUnaryExpression returns Expression:
 	operator=UnaryOperator operand=TypeCastExpression;
 
 TypeCastExpression returns Expression:
-	PrimaryExpression (({TypeCastExpression.operand=current} 'as') type=[types::Type|ID])*
+	PrimaryExpression (({TypeCastExpression.operand=current} 'as') type=[types::Type|QID])*
 ;
 
 PrimaryExpression returns Expression:
@@ -177,3 +177,6 @@ terminal HEX returns ecore::EInt:
 
 terminal DOUBLE returns ecore::EDouble:
 	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F' | 'd' | 'D')?;
+	
+QID:
+	ID ('.' ID)*;
