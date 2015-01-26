@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::c {
+	statechart EmptyTransition {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "EmptyTransition"
+		}
+	}
+}

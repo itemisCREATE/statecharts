@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 committers of YAKINDU and others.
+ * Copyright (c) 2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -19,7 +19,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		CastExpressionsTest.class, ChoiceTest.class, CKeywordsTest.class,
 		ConditionalExpressionTest.class, ConstantsTestsTest.class,
 		DeclarationsTest.class, DeepEntryTest.class, DeepHistoryTest.class,
-		DynamicChoiceTest.class, EnterStateTest.class, EntryChoiceTest.class,
+		DynamicChoiceTest.class, EmptyTransitionTest.class,
+		EnterStateTest.class, EntryChoiceTest.class,
 		EntryExitSelfTransitionTest.class, ExitOnSelfTransitionTest.class,
 		ExitStateTest.class, FeatureCallsTest.class, GuardTest.class,
 		GuardedEntryTest.class, GuardedExitTest.class,

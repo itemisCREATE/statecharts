@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014 committers of YAKINDU and others.
+ * Copyright (c) 2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,8 +18,8 @@ import org.junit.runners.Suite.SuiteClasses;
 		BitExpressions.class, BooleanExpressions.class, CastExpressions.class,
 		Choice.class, CKeywords.class, ConditionalExpression.class,
 		ConstantsTests.class, Declarations.class, DeepEntry.class,
-		DeepHistory.class, DynamicChoice.class, EnterState.class,
-		EntryChoice.class, EntryExitSelfTransition.class,
+		DeepHistory.class, DynamicChoice.class, EmptyTransition.class,
+		EnterState.class, EntryChoice.class, EntryExitSelfTransition.class,
 		ExitOnSelfTransition.class, ExitState.class, FeatureCalls.class,
 		Guard.class, GuardedEntry.class, GuardedExit.class,
 		HistoryWithExitPoint.class, HistoryWithoutInitialStep.class,
