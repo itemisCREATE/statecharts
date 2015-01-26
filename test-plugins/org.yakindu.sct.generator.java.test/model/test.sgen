@@ -112,6 +112,14 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 		
+	test EmptyTransition{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
+		
 	test EnterState{
 		
 		feature Outlet{ 
