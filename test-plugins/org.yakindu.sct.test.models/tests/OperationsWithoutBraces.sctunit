@@ -1,0 +1,26 @@
+
+testgroup OperationsWithoutBraces for statechart OperationsWithoutBraces{
+	test OperationsWithoutBracesTest { 
+		enter
+		assert active (OperationsWithoutBraces.main_region.A)
+		assert active (OperationsWithoutBraces.another_region.A)
+		
+		cycle
+		assert active (OperationsWithoutBraces.main_region.B)
+		assert active (OperationsWithoutBraces.another_region.B)
+		 
+		cycle
+		
+		assert active (OperationsWithoutBraces.main_region.C)
+		assert active (OperationsWithoutBraces.another_region.C) 
+		
+		cycle
+		
+		assert active (OperationsWithoutBraces.main_region.D)
+		assert active (OperationsWithoutBraces.another_region.D)
+
+				 
+		 
+	} 
+}
+	

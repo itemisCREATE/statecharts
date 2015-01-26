@@ -1,0 +1,8 @@
+GeneratorModel for yakindu::cpp {
+	statechart OperationsWithoutBraces {
+		feature Outlet {
+			targetProject = "gtests"
+			targetFolder = "OperationsWithoutBracesTest"
+		}
+	}
+}
