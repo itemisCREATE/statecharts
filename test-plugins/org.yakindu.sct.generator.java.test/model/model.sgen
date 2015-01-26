@@ -1,4 +1,5 @@
 GeneratorModel for yakindu::java {
+
 	
 	statechart AlwaysOncycle {
 		feature Outlet {
@@ -71,18 +72,6 @@ GeneratorModel for yakindu::java {
 			RuntimeService = true
 		}
 	} 
-	
-	statechart CKeywords {
-		feature Outlet {
-			targetProject = "org.yakindu.sct.generator.java.test"
-			targetFolder = "src-gen"
-		}
-
-		feature GeneralFeatures {
-			TimerService = true
-			RuntimeService = true
-		}
-	}
 	
 	statechart ConditionalExpressions {
 		feature Outlet {
