@@ -9,18 +9,18 @@
  *     committers of YAKINDU - initial API and implementation
  */
 package org.yakindu.sct.generator.java.test;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
+@SuiteClasses({ AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
 		BitExpressionsTest.class, BooleanExpressionsTest.class,
-		CastExpressionsTest.class, ChoiceTest.class, CKeywordsTest.class,
-		ConditionalExpressionTest.class,
-		DeclarationsTest.class, DeepEntryTest.class, DeepHistoryTest.class,
-		DynamicChoiceTest.class, EmptyTransitionTest.class,
-		EnterStateTest.class, EntryChoiceTest.class,
+		CastExpressionsTest.class, ChoiceTest.class,
+		ConditionalExpressionTest.class, DeclarationsTest.class,
+		DeepEntryTest.class, DeepHistoryTest.class, DynamicChoiceTest.class,
+		EmptyTransitionTest.class, EnterStateTest.class, EntryChoiceTest.class,
 		EntryExitSelfTransitionTest.class, ExitOnSelfTransitionTest.class,
 		ExitStateTest.class, FeatureCallsTest.class, GuardTest.class,
 		GuardedEntryTest.class, GuardedExitTest.class,
@@ -38,6 +38,6 @@ import org.junit.runners.Suite.SuiteClasses;
 		STextKeywordsInStatesAndRegionsTest.class, StringExpressionsTest.class,
 		SyncForkTest.class, SyncJoinTest.class,
 		TransitionWithoutConditionTest.class,
-		TriggerGuardExpressionsTest.class, ValuedEventsTest.class})
+		TriggerGuardExpressionsTest.class, ValuedEventsTest.class })
 public class AllTestsTest {
 }
