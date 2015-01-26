@@ -5,6 +5,7 @@ encoding//testmodels/SCTUnit/ConditionalExpressions.sct=UTF-8
 encoding//testmodels/SCTUnit/Declarations.sct=UTF-8
 encoding//testmodels/SCTUnit/DeepEntry.sct=UTF-8
 encoding//testmodels/SCTUnit/DynamicChoice.sct=UTF-8
+encoding//testmodels/SCTUnit/EmptyTransition.sct=UTF-8
 encoding//testmodels/SCTUnit/EnterState.sct=UTF-8
 encoding//testmodels/SCTUnit/ExitOnSelfTransition.sct=UTF-8
 encoding//testmodels/SCTUnit/ExitState.sct=UTF-8
