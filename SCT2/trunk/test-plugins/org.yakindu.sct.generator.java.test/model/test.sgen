@@ -266,14 +266,6 @@ GeneratorModel for sctunit::java {
 		}			
 	}
 	
-	test OperationsWithoutBraces{
-		
-		feature Outlet{ 
-			targetProject = "org.yakindu.sct.generator.java.test" 
-			targetFolder = "test-gen"			
-		}			
-	}
-	
 	test OutEventLifeCycle{
 		
 		feature Outlet{ 
