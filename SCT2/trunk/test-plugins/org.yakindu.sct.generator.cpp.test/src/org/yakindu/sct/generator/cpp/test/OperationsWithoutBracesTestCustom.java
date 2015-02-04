@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2015 committers of YAKINDU and others.
+ * Copyright (c) 2014 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -18,17 +18,24 @@ import org.yakindu.sct.generator.c.gtest.GTest;
 import org.yakindu.sct.generator.c.gtest.GTestRunner;
 import org.yakindu.sct.generator.c.gtest.GTestHelper;
 
-@GTest(sourceFile = "gtests/OperationsWithoutBracesTest/OperationsWithoutBracesTest.cc", program = "gtests/OperationsWithoutBracesTest/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct")
+@GTest(sourceFile = "gtests/OperationsWithoutBracesTest/OperationsWithoutBracesTestCustom.cc", program = "gtests/OperationsWithoutBracesTest/OperationsWithoutBraces", model = "testmodels/SCTUnit/OperationsWithoutBraces.sct")
 @RunWith(GTestRunner.class)
-public class OperationsWithoutBracesTest {
+public class OperationsWithoutBracesTestCustom {
 
 	protected final GTestHelper helper = new GTestHelper(this) {
 
+		@Override
+		protected void getTestDataFiles(Collection<String> files) {
+			super.getTestDataFiles(files);
+			files.add("gtests/OperationsWithoutBracesTest/OperationsWithoutBraces_OCB.h");
+		}
+		
 		@Override
 		protected void getSourceFiles(Collection<String> files) {
 			super.getSourceFiles(files);
 			files.add(getFileName(getTestProgram()) + ".cpp");
 		}
+		
 	};
 
 	@Before
