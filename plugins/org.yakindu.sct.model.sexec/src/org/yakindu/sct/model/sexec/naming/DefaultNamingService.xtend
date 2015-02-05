@@ -421,7 +421,9 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected dispatch String elementName(Step it, NameShorteningStrategy nameShorteningType) {
-		eContainer.elementName(nameShorteningType)
+		var parentName = eContainer.elementName(nameShorteningType)
+		if( isEnterSequence && (name != null) && (!name.trim.empty) ) parentName + separator + name
+		else parentName
 	}
 
 	def protected dispatch String elementName(EObject it, NameShorteningStrategy nameShorteningType) {
