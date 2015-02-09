@@ -541,11 +541,11 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceGoto();
+		enterSequence_goto_default();
 	}
 
 	public void exit() {
-		exitSequenceGoto();
+		exitSequence_goto();
 
 		exitAction();
 	}
@@ -911,46 +911,46 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.setVolatile(value);
 	}
 
-	private boolean checkGoto_abstractTr0() {
+	private boolean check_goto_abstract_tr0() {
 		return (sCInterface.while_ID) && true;
 	}
 
-	private boolean checkGoto_booleanTr0() {
+	private boolean check_goto_boolean_tr0() {
 		return sCInterface.while_ID;
 	}
 
-	private boolean checkGoto_booleanTr1() {
+	private boolean check_goto_boolean_tr1() {
 		return sCInterface.ev;
 	}
 
-	private boolean checkGoto_void_volatile_stateTr0() {
+	private boolean check_goto_void_volatile_state_tr0() {
 		return sCInterface.ev;
 	}
 
-	private void effectGoto_abstractTr0() {
-		exitSequenceGoto_abstract();
+	private void effect_goto_abstract_tr0() {
+		exitSequence_goto_abstract();
 
 		sCInterface.native_ID = false;
 
-		enterSequenceGoto_boolean();
+		enterSequence_goto_boolean_default();
 	}
 
-	private void effectGoto_booleanTr0() {
-		exitSequenceGoto_boolean();
+	private void effect_goto_boolean_tr0() {
+		exitSequence_goto_boolean();
 
-		enterSequenceGoto_void();
+		enterSequence_goto_void_default();
 	}
 
-	private void effectGoto_booleanTr1() {
-		exitSequenceGoto_boolean();
+	private void effect_goto_boolean_tr1() {
+		exitSequence_goto_boolean();
 
-		enterSequenceGoto_void();
+		enterSequence_goto_void_try();
 	}
 
-	private void effectGoto_void_volatile_stateTr0() {
-		exitSequenceGoto_void_volatile_state();
+	private void effect_goto_void_volatile_state_tr0() {
+		exitSequence_goto_void_volatile_state();
 
-		enterSequenceGoto_void_volatile_transient();
+		enterSequence_goto_void_volatile_transient_this();
 	}
 
 	/* Entry action for statechart 'JavaKeywords'. */
@@ -958,7 +958,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* Entry action for state 'abstract'. */
-	private void entryActionGoto_abstract() {
+	private void entryAction_goto_abstract() {
 		sCInterface.abstract_ID = true;
 
 		sCInterface.assert_ID = true;
@@ -1049,7 +1049,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* Entry action for state 'boolean'. */
-	private void entryActionGoto_boolean() {
+	private void entryAction_goto_boolean() {
 		sCInterface.abstract_ID = false;
 
 		sCInterface.assert_ID = false;
@@ -1142,47 +1142,47 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* 'default' enter sequence for state abstract */
-	private void enterSequenceGoto_abstract() {
-		entryActionGoto_abstract();
+	private void enterSequence_goto_abstract_default() {
+		entryAction_goto_abstract();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.goto_abstract;
 	}
 
 	/* 'default' enter sequence for state boolean */
-	private void enterSequenceGoto_boolean() {
-		entryActionGoto_boolean();
+	private void enterSequence_goto_boolean_default() {
+		entryAction_goto_boolean();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.goto_boolean;
 	}
 
 	/* 'default' enter sequence for state void */
-	private void enterSequenceGoto_void() {
-		enterSequenceGoto_void_volatile();
+	private void enterSequence_goto_void_default() {
+		enterSequence_goto_void_volatile_default();
 	}
 
 	/* 'try' enter sequence for state void */
-	private void enterSequenceGoto_void() {
-		enterSequenceGoto_void_volatile();
+	private void enterSequence_goto_void_try() {
+		enterSequence_goto_void_volatile_try();
 	}
 
 	/* 'default' enter sequence for state transient */
-	private void enterSequenceGoto_void_volatile_transient() {
-		enterSequenceGoto_void_volatile_transient_throw();
+	private void enterSequence_goto_void_volatile_transient_default() {
+		enterSequence_goto_void_volatile_transient_throw_default();
 
 		historyVector[0] = stateVector[0];
 	}
 
 	/* 'this' enter sequence for state transient */
-	private void enterSequenceGoto_void_volatile_transient() {
-		enterSequenceGoto_void_volatile_transient_throw();
+	private void enterSequence_goto_void_volatile_transient_this() {
+		enterSequence_goto_void_volatile_transient_throw_this();
 
 		historyVector[0] = stateVector[0];
 	}
 
 	/* 'default' enter sequence for state false */
-	private void enterSequenceGoto_void_volatile_transient_throw_false() {
+	private void enterSequence_goto_void_volatile_transient_throw_false_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.goto_void_volatile_transient_throw_false;
 
@@ -1190,7 +1190,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* 'default' enter sequence for state state */
-	private void enterSequenceGoto_void_volatile_state() {
+	private void enterSequence_goto_void_volatile_state_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.goto_void_volatile_state;
 
@@ -1198,29 +1198,29 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* 'default' enter sequence for region goto */
-	private void enterSequenceGoto() {
-		reactJavaKeywords_goto__entry_Default();
+	private void enterSequence_goto_default() {
+		react_goto__entry_Default();
 	}
 
 	/* 'try' enter sequence for region volatile */
-	private void enterSequenceGoto_void_volatile() {
-		reactJavaKeywords_goto_void_volatile_try();
+	private void enterSequence_goto_void_volatile_try() {
+		react_goto_void_volatile_try();
 	}
 
 	/* 'default' enter sequence for region volatile */
-	private void enterSequenceGoto_void_volatile() {
-		reactJavaKeywords_goto_void_volatile__entry_Default();
+	private void enterSequence_goto_void_volatile_default() {
+		react_goto_void_volatile__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child volatile */
-	private void shallowEnterSequenceGoto_void_volatile() {
+	private void shallowEnterSequence_goto_void_volatile() {
 		switch (historyVector[0]) {
 			case goto_void_volatile_transient_throw_false :
-				enterSequenceGoto_void_volatile_transient();
+				enterSequence_goto_void_volatile_transient_default();
 				break;
 
 			case goto_void_volatile_state :
-				enterSequenceGoto_void_volatile_state();
+				enterSequence_goto_void_volatile_state_default();
 				break;
 
 			default :
@@ -1229,20 +1229,20 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* 'this' enter sequence for region throw */
-	private void enterSequenceGoto_void_volatile_transient_throw() {
-		reactJavaKeywords_goto_void_volatile_transient_throw_this();
+	private void enterSequence_goto_void_volatile_transient_throw_this() {
+		react_goto_void_volatile_transient_throw_this();
 	}
 
 	/* 'default' enter sequence for region throw */
-	private void enterSequenceGoto_void_volatile_transient_throw() {
-		reactJavaKeywords_goto_void_volatile_transient_throw__entry_Default();
+	private void enterSequence_goto_void_volatile_transient_throw_default() {
+		react_goto_void_volatile_transient_throw__entry_Default();
 	}
 
 	/* deep enterSequence with history in child throw */
-	private void deepEnterSequenceGoto_void_volatile_transient_throw() {
+	private void deepEnterSequence_goto_void_volatile_transient_throw() {
 		switch (historyVector[1]) {
 			case goto_void_volatile_transient_throw_false :
-				enterSequenceGoto_void_volatile_transient_throw_false();
+				enterSequence_goto_void_volatile_transient_throw_false_default();
 				break;
 
 			default :
@@ -1251,46 +1251,46 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* Default exit sequence for state abstract */
-	private void exitSequenceGoto_abstract() {
+	private void exitSequence_goto_abstract() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state boolean */
-	private void exitSequenceGoto_boolean() {
+	private void exitSequence_goto_boolean() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state false */
-	private void exitSequenceGoto_void_volatile_transient_throw_false() {
+	private void exitSequence_goto_void_volatile_transient_throw_false() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state state */
-	private void exitSequenceGoto_void_volatile_state() {
+	private void exitSequence_goto_void_volatile_state() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region goto */
-	private void exitSequenceGoto() {
+	private void exitSequence_goto() {
 		switch (stateVector[0]) {
 			case goto_abstract :
-				exitSequenceGoto_abstract();
+				exitSequence_goto_abstract();
 				break;
 
 			case goto_boolean :
-				exitSequenceGoto_boolean();
+				exitSequence_goto_boolean();
 				break;
 
 			case goto_void_volatile_transient_throw_false :
-				exitSequenceGoto_void_volatile_transient_throw_false();
+				exitSequence_goto_void_volatile_transient_throw_false();
 				break;
 
 			case goto_void_volatile_state :
-				exitSequenceGoto_void_volatile_state();
+				exitSequence_goto_void_volatile_state();
 				break;
 
 			default :
@@ -1299,14 +1299,14 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* Default exit sequence for region volatile */
-	private void exitSequenceGoto_void_volatile() {
+	private void exitSequence_goto_void_volatile() {
 		switch (stateVector[0]) {
 			case goto_void_volatile_transient_throw_false :
-				exitSequenceGoto_void_volatile_transient_throw_false();
+				exitSequence_goto_void_volatile_transient_throw_false();
 				break;
 
 			case goto_void_volatile_state :
-				exitSequenceGoto_void_volatile_state();
+				exitSequence_goto_void_volatile_state();
 				break;
 
 			default :
@@ -1315,10 +1315,10 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* Default exit sequence for region throw */
-	private void exitSequenceGoto_void_volatile_transient_throw() {
+	private void exitSequence_goto_void_volatile_transient_throw() {
 		switch (stateVector[0]) {
 			case goto_void_volatile_transient_throw_false :
-				exitSequenceGoto_void_volatile_transient_throw_false();
+				exitSequence_goto_void_volatile_transient_throw_false();
 				break;
 
 			default :
@@ -1327,67 +1327,67 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	}
 
 	/* The reactions of state abstract. */
-	private void reactGoto_abstract() {
-		if (checkGoto_abstractTr0()) {
-			effectGoto_abstractTr0();
+	private void react_goto_abstract() {
+		if (check_goto_abstract_tr0()) {
+			effect_goto_abstract_tr0();
 		}
 	}
 
 	/* The reactions of state boolean. */
-	private void reactGoto_boolean() {
-		if (checkGoto_booleanTr0()) {
-			effectGoto_booleanTr0();
+	private void react_goto_boolean() {
+		if (check_goto_boolean_tr0()) {
+			effect_goto_boolean_tr0();
 		} else {
-			if (checkGoto_booleanTr1()) {
-				effectGoto_booleanTr1();
+			if (check_goto_boolean_tr1()) {
+				effect_goto_boolean_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state false. */
-	private void reactGoto_void_volatile_transient_throw_false() {
+	private void react_goto_void_volatile_transient_throw_false() {
 	}
 
 	/* The reactions of state state. */
-	private void reactGoto_void_volatile_state() {
-		if (checkGoto_void_volatile_stateTr0()) {
-			effectGoto_void_volatile_stateTr0();
+	private void react_goto_void_volatile_state() {
+		if (check_goto_void_volatile_state_tr0()) {
+			effect_goto_void_volatile_state_tr0();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactJavaKeywords_goto__entry_Default() {
-		enterSequenceGoto_abstract();
+	private void react_goto__entry_Default() {
+		enterSequence_goto_abstract_default();
 	}
 
 	/* Default react sequence for shallow history entry try */
-	private void reactJavaKeywords_goto_void_volatile_try() {
+	private void react_goto_void_volatile_try() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequenceGoto_void_volatile();
+			shallowEnterSequence_goto_void_volatile();
 		} else {
-			enterSequenceGoto_void_volatile_state();
+			enterSequence_goto_void_volatile_state_default();
 		}
 	}
 
 	/* Default react sequence for deep history entry this */
-	private void reactJavaKeywords_goto_void_volatile_transient_throw_this() {
+	private void react_goto_void_volatile_transient_throw_this() {
 		/* Enter the region with deep history */
 		if (historyVector[1] != State.$NullState$) {
-			deepEnterSequenceGoto_void_volatile_transient_throw();
+			deepEnterSequence_goto_void_volatile_transient_throw();
 		} else {
-			enterSequenceGoto_void_volatile_transient_throw_false();
+			enterSequence_goto_void_volatile_transient_throw_false_default();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactJavaKeywords_goto_void_volatile_transient_throw__entry_Default() {
-		enterSequenceGoto_void_volatile_transient_throw_false();
+	private void react_goto_void_volatile_transient_throw__entry_Default() {
+		enterSequence_goto_void_volatile_transient_throw_false_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactJavaKeywords_goto_void_volatile__entry_Default() {
-		enterSequenceGoto_void_volatile_transient();
+	private void react_goto_void_volatile__entry_Default() {
+		enterSequence_goto_void_volatile_transient_default();
 	}
 
 	public void runCycle() {
@@ -1398,16 +1398,16 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case goto_abstract :
-					reactGoto_abstract();
+					react_goto_abstract();
 					break;
 				case goto_boolean :
-					reactGoto_boolean();
+					react_goto_boolean();
 					break;
 				case goto_void_volatile_transient_throw_false :
-					reactGoto_void_volatile_transient_throw_false();
+					react_goto_void_volatile_transient_throw_false();
 					break;
 				case goto_void_volatile_state :
-					reactGoto_void_volatile_state();
+					react_goto_void_volatile_state();
 					break;
 				default :
 					// $NullState$

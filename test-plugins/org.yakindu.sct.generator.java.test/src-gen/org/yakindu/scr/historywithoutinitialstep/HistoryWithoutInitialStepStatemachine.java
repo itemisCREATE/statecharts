@@ -74,11 +74,11 @@ public class HistoryWithoutInitialStepStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -142,64 +142,64 @@ public class HistoryWithoutInitialStepStatemachine
 		sCInterface.raiseNext();
 	}
 
-	private boolean checkMain_region_ATr0() {
+	private boolean check_main_region_A_tr0() {
 		return sCInterface.toB;
 	}
 
-	private boolean checkMain_region_ATr1() {
+	private boolean check_main_region_A_tr1() {
 		return sCInterface.toHistory;
 	}
 
-	private boolean checkMain_region_BTr0() {
+	private boolean check_main_region_B_tr0() {
 		return sCInterface.toA;
 	}
 
-	private boolean checkMain_region_B_r1_CTr0() {
+	private boolean check_main_region_B_r1_C_tr0() {
 		return sCInterface.next;
 	}
 
-	private boolean checkMain_region_B_r1_DTr0() {
+	private boolean check_main_region_B_r1_D_tr0() {
 		return sCInterface.next;
 	}
 
-	private boolean checkMain_region_B_r1_ETr0() {
+	private boolean check_main_region_B_r1_E_tr0() {
 		return sCInterface.next;
 	}
 
-	private void effectMain_region_ATr0() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_B();
+		enterSequence_main_region_B_default();
 	}
 
-	private void effectMain_region_ATr1() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr1() {
+		exitSequence_main_region_A();
 
-		reactHistoryWithoutInitialStep_main_region_B_r1_he();
+		react_main_region_B_r1_he();
 	}
 
-	private void effectMain_region_BTr0() {
-		exitSequenceMain_region_B();
+	private void effect_main_region_B_tr0() {
+		exitSequence_main_region_B();
 
-		enterSequenceMain_region_A();
+		enterSequence_main_region_A_default();
 	}
 
-	private void effectMain_region_B_r1_CTr0() {
-		exitSequenceMain_region_B_r1_C();
+	private void effect_main_region_B_r1_C_tr0() {
+		exitSequence_main_region_B_r1_C();
 
-		enterSequenceMain_region_B_r1_D();
+		enterSequence_main_region_B_r1_D_default();
 	}
 
-	private void effectMain_region_B_r1_DTr0() {
-		exitSequenceMain_region_B_r1_D();
+	private void effect_main_region_B_r1_D_tr0() {
+		exitSequence_main_region_B_r1_D();
 
-		enterSequenceMain_region_B_r1_E();
+		enterSequence_main_region_B_r1_E_default();
 	}
 
-	private void effectMain_region_B_r1_ETr0() {
-		exitSequenceMain_region_B_r1_E();
+	private void effect_main_region_B_r1_E_tr0() {
+		exitSequence_main_region_B_r1_E();
 
-		enterSequenceMain_region_B_r1_C();
+		enterSequence_main_region_B_r1_C_default();
 	}
 
 	/* Entry action for statechart 'HistoryWithoutInitialStep'. */
@@ -211,18 +211,18 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_B() {
-		enterSequenceMain_region_B_r1();
+	private void enterSequence_main_region_B_default() {
+		enterSequence_main_region_B_r1_default();
 	}
 
 	/* 'default' enter sequence for state C */
-	private void enterSequenceMain_region_B_r1_C() {
+	private void enterSequence_main_region_B_r1_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B_r1_C;
 
@@ -230,7 +230,7 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	/* 'default' enter sequence for state D */
-	private void enterSequenceMain_region_B_r1_D() {
+	private void enterSequence_main_region_B_r1_D_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B_r1_D;
 
@@ -238,41 +238,41 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	/* 'default' enter sequence for state E */
-	private void enterSequenceMain_region_B_r1_E() {
-		enterSequenceMain_region_B_r1_E_region0();
+	private void enterSequence_main_region_B_r1_E_default() {
+		enterSequence_main_region_B_r1_E__region0_default();
 
 		historyVector[0] = stateVector[0];
 	}
 
 	/* 'default' enter sequence for state F */
-	private void enterSequenceMain_region_B_r1_E_region0_F() {
+	private void enterSequence_main_region_B_r1_E__region0_F_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B_r1_E__region0_F;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactHistoryWithoutInitialStep_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r1 */
-	private void enterSequenceMain_region_B_r1() {
-		reactHistoryWithoutInitialStep_main_region_B_r1__entry_Default();
+	private void enterSequence_main_region_B_r1_default() {
+		react_main_region_B_r1__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child r1 */
-	private void shallowEnterSequenceMain_region_B_r1() {
+	private void shallowEnterSequence_main_region_B_r1() {
 		switch (historyVector[0]) {
 			case main_region_B_r1_C :
-				enterSequenceMain_region_B_r1_C();
+				enterSequence_main_region_B_r1_C_default();
 				break;
 
 			case main_region_B_r1_D :
-				enterSequenceMain_region_B_r1_D();
+				enterSequence_main_region_B_r1_D_default();
 				break;
 
 			case main_region_B_r1_E__region0_F :
-				enterSequenceMain_region_B_r1_E();
+				enterSequence_main_region_B_r1_E_default();
 				break;
 
 			default :
@@ -281,61 +281,61 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	/* 'default' enter sequence for region null */
-	private void enterSequenceMain_region_B_r1_E_region0() {
-		reactHistoryWithoutInitialStep_main_region_B_r1_E__region0__entry_Default();
+	private void enterSequence_main_region_B_r1_E__region0_default() {
+		react_main_region_B_r1_E__region0__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMain_region_B() {
-		exitSequenceMain_region_B_r1();
+	private void exitSequence_main_region_B() {
+		exitSequence_main_region_B_r1();
 	}
 
 	/* Default exit sequence for state C */
-	private void exitSequenceMain_region_B_r1_C() {
+	private void exitSequence_main_region_B_r1_C() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state D */
-	private void exitSequenceMain_region_B_r1_D() {
+	private void exitSequence_main_region_B_r1_D() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state E */
-	private void exitSequenceMain_region_B_r1_E() {
-		exitSequenceMain_region_B_r1_E_region0();
+	private void exitSequence_main_region_B_r1_E() {
+		exitSequence_main_region_B_r1_E__region0();
 	}
 
 	/* Default exit sequence for state F */
-	private void exitSequenceMain_region_B_r1_E_region0_F() {
+	private void exitSequence_main_region_B_r1_E__region0_F() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			case main_region_B_r1_C :
-				exitSequenceMain_region_B_r1_C();
+				exitSequence_main_region_B_r1_C();
 				break;
 
 			case main_region_B_r1_D :
-				exitSequenceMain_region_B_r1_D();
+				exitSequence_main_region_B_r1_D();
 				break;
 
 			case main_region_B_r1_E__region0_F :
-				exitSequenceMain_region_B_r1_E_region0_F();
+				exitSequence_main_region_B_r1_E__region0_F();
 				break;
 
 			default :
@@ -344,18 +344,18 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	/* Default exit sequence for region r1 */
-	private void exitSequenceMain_region_B_r1() {
+	private void exitSequence_main_region_B_r1() {
 		switch (stateVector[0]) {
 			case main_region_B_r1_C :
-				exitSequenceMain_region_B_r1_C();
+				exitSequence_main_region_B_r1_C();
 				break;
 
 			case main_region_B_r1_D :
-				exitSequenceMain_region_B_r1_D();
+				exitSequence_main_region_B_r1_D();
 				break;
 
 			case main_region_B_r1_E__region0_F :
-				exitSequenceMain_region_B_r1_E_region0_F();
+				exitSequence_main_region_B_r1_E__region0_F();
 				break;
 
 			default :
@@ -364,10 +364,10 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	/* Default exit sequence for region null */
-	private void exitSequenceMain_region_B_r1_E_region0() {
+	private void exitSequence_main_region_B_r1_E__region0() {
 		switch (stateVector[0]) {
 			case main_region_B_r1_E__region0_F :
-				exitSequenceMain_region_B_r1_E_region0_F();
+				exitSequence_main_region_B_r1_E__region0_F();
 				break;
 
 			default :
@@ -376,71 +376,71 @@ public class HistoryWithoutInitialStepStatemachine
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
-		if (checkMain_region_ATr0()) {
-			effectMain_region_ATr0();
+	private void react_main_region_A() {
+		if (check_main_region_A_tr0()) {
+			effect_main_region_A_tr0();
 		} else {
-			if (checkMain_region_ATr1()) {
-				effectMain_region_ATr1();
+			if (check_main_region_A_tr1()) {
+				effect_main_region_A_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state C. */
-	private void reactMain_region_B_r1_C() {
-		if (checkMain_region_BTr0()) {
-			effectMain_region_BTr0();
+	private void react_main_region_B_r1_C() {
+		if (check_main_region_B_tr0()) {
+			effect_main_region_B_tr0();
 		} else {
-			if (checkMain_region_B_r1_CTr0()) {
-				effectMain_region_B_r1_CTr0();
+			if (check_main_region_B_r1_C_tr0()) {
+				effect_main_region_B_r1_C_tr0();
 			}
 		}
 	}
 
 	/* The reactions of state D. */
-	private void reactMain_region_B_r1_D() {
-		if (checkMain_region_BTr0()) {
-			effectMain_region_BTr0();
+	private void react_main_region_B_r1_D() {
+		if (check_main_region_B_tr0()) {
+			effect_main_region_B_tr0();
 		} else {
-			if (checkMain_region_B_r1_DTr0()) {
-				effectMain_region_B_r1_DTr0();
+			if (check_main_region_B_r1_D_tr0()) {
+				effect_main_region_B_r1_D_tr0();
 			}
 		}
 	}
 
 	/* The reactions of state F. */
-	private void reactMain_region_B_r1_E_region0_F() {
-		if (checkMain_region_BTr0()) {
-			effectMain_region_BTr0();
+	private void react_main_region_B_r1_E__region0_F() {
+		if (check_main_region_B_tr0()) {
+			effect_main_region_B_tr0();
 		} else {
-			if (checkMain_region_B_r1_ETr0()) {
-				effectMain_region_B_r1_ETr0();
+			if (check_main_region_B_r1_E_tr0()) {
+				effect_main_region_B_r1_E_tr0();
 			} else {
 			}
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactHistoryWithoutInitialStep_main_region__entry_Default() {
-		enterSequenceMain_region_A();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactHistoryWithoutInitialStep_main_region_B_r1__entry_Default() {
-		enterSequenceMain_region_B_r1_C();
+	private void react_main_region_B_r1__entry_Default() {
+		enterSequence_main_region_B_r1_C_default();
 	}
 
 	/* Default react sequence for shallow history entry he */
-	private void reactHistoryWithoutInitialStep_main_region_B_r1_he() {
+	private void react_main_region_B_r1_he() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequenceMain_region_B_r1();
+			shallowEnterSequence_main_region_B_r1();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactHistoryWithoutInitialStep_main_region_B_r1_E__region0__entry_Default() {
-		enterSequenceMain_region_B_r1_E_region0_F();
+	private void react_main_region_B_r1_E__region0__entry_Default() {
+		enterSequence_main_region_B_r1_E__region0_F_default();
 	}
 
 	public void runCycle() {
@@ -451,16 +451,16 @@ public class HistoryWithoutInitialStepStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				case main_region_B_r1_C :
-					reactMain_region_B_r1_C();
+					react_main_region_B_r1_C();
 					break;
 				case main_region_B_r1_D :
-					reactMain_region_B_r1_D();
+					react_main_region_B_r1_D();
 					break;
 				case main_region_B_r1_E__region0_F :
-					reactMain_region_B_r1_E_region0_F();
+					react_main_region_B_r1_E__region0_F();
 					break;
 				default :
 					// $NullState$

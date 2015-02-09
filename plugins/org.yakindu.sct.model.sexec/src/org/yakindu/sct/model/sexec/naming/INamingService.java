@@ -1,3 +1,14 @@
+/*
+  Copyright (c) 2014-2015 committers of YAKINDU Statechart Tools.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+  
+  Contributors:
+  	Markus Muelhbrand - Initial contribution
+ */
+
 package org.yakindu.sct.model.sexec.naming;
 
 import java.util.Map;
@@ -60,7 +71,7 @@ public interface INamingService {
 	 * @return
 	 */
 	String asIdentifier(String string);
-	
+
 	/**
 	 * If the given string equals a target language keyword it is escaped.
 	 * 
@@ -68,7 +79,7 @@ public interface INamingService {
 	 * @return
 	 */
 	String asEscapedIdentifier(String string);
-	
+
 	/**
 	 * Checks if the given string is a target language keyword
 	 * 
@@ -76,35 +87,33 @@ public interface INamingService {
 	 * @return
 	 */
 	boolean isKeyword(String string);
-	
+
 	/**
-	 * Sets the maximum length for shorted names. 
+	 * Sets the maximum length for shorted names.
 	 * 
 	 * @param int
 	 */
-	void setMaxLength (int length);
-	
+	void setMaxLength(int length);
+
 	/**
 	 * Sets the separator for shorted names.
 	 * 
 	 * @param char
 	 */
 	void setSeparator(char sep);
-	
-	
+
 	/**
 	 * Returns the maximum length of shorted names.
 	 * 
 	 * @return int
 	 */
 	int getMaxLength();
-	
+
 	/**
-	 * Returns the separator for shorted names. 
+	 * Returns the separator for shorted names.
 	 * 
-	 * @return char 
+	 * @return char
 	 */
 	char getSeparator();
-	
-	
+
 }

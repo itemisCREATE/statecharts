@@ -1,3 +1,16 @@
+/**
+  Copyright (c) 2014-2015 committers of YAKINDU Statechart Tools.
+  All rights reserved. This program and the accompanying materials
+  are made available under the terms of the Eclipse Public License v1.0
+  which accompanies this distribution, and is available at
+  http://www.eclipse.org/legal/epl-v10.html
+  
+  Contributors:
+  	Markus Mühlbrandt - Initial contribution and API
+  	Axel Terfloth - Extensions
+*/
+
+
 package org.yakindu.sct.model.sexec.naming
 
 import java.util.Comparator
@@ -49,6 +62,11 @@ enum NameShorteningStrategy {
 	INDEX_POSITION
 }
 
+
+/** Default implementation of the naming service for various identifiers used in the generated code. 
+ * It is responsible for identifier construction depending on the thing to be named including different strategies 
+ * which also include name shortening.
+ */
 class DefaultNamingService implements INamingService {
 
 	@Inject extension SExecExtensions
@@ -303,7 +321,7 @@ class DefaultNamingService implements INamingService {
 
 		var name = element.elementName(nameShorteningType)
 
-		if (name.nullOrEmpty) {
+		if (name.nullOrEmpty && prefix.nullOrEmpty && suffix.nullOrEmpty) {
 			name = element.class.simpleName
 		}
 
@@ -316,15 +334,17 @@ class DefaultNamingService implements INamingService {
 			}
 		}
 
-		var shortName = prefix
-		if (!name.nullOrEmpty) {
-			if (prefix.nullOrEmpty) {
-				shortName = name.asEscapedIdentifier
+		if (! prefix.nullOrEmpty) {
+			if ( ! name.nullOrEmpty ) {
+				name = prefix + separator + name
 			} else {
-				shortName = (prefix + separator + name).asEscapedIdentifier
+				name = prefix
 			}
+			
 		}
-
+				
+		var shortName = name.asEscapedIdentifier
+		
 		if (nameList.containsName(shortName)) {
 			switch element {
 				ExecutionScope:
@@ -351,7 +371,7 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(NamedElement it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(1).
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).
 				toString(separator.toString)
 			case NameShorteningStrategy::SHORT_NAME: return name
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
@@ -371,8 +391,8 @@ class DefaultNamingService implements INamingService {
 
 	def protected dispatch String elementName(ExecutionState it, NameShorteningStrategy nameShorteningType) {
 		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).
-				toString(separator.toString)
+			case NameShorteningStrategy::FQN_NAME: 
+				return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
 			case NameShorteningStrategy::SHORT_NAME: return simpleName
 			case NameShorteningStrategy::REMOVE_VOWELS: return simpleName.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition

@@ -56,87 +56,87 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceDefault();
+		enterSequence_default_default();
 
-		enterSequenceOperation();
+		enterSequence_operation_default();
 
-		enterSequenceNamespace();
+		enterSequence_namespace_default();
 
-		enterSequenceLocal();
+		enterSequence_local_default();
 
-		enterSequenceInterface();
+		enterSequence_interface_default();
 
-		enterSequenceInternal();
+		enterSequence_internal_default();
 
-		enterSequenceEvent();
+		enterSequence_event_default();
 
-		enterSequenceIn();
+		enterSequence_in_default();
 
-		enterSequenceOut();
+		enterSequence_out_default();
 
-		enterSequenceVar();
+		enterSequence_var_default();
 
-		enterSequenceReadonly();
+		enterSequence_readonly_default();
 
-		enterSequenceExternal();
+		enterSequence_external_default();
 
-		enterSequenceElse();
+		enterSequence_else_default();
 
-		enterSequenceEntry();
+		enterSequence_entry_default();
 
-		enterSequenceExit();
+		enterSequence_exit_default();
 
-		enterSequenceAlways();
+		enterSequence_always_default();
 
-		enterSequenceOncycle();
+		enterSequence_oncycle_default();
 
-		enterSequenceRaise();
+		enterSequence_raise_default();
 
-		enterSequenceValueof();
+		enterSequence_valueof_default();
 
-		enterSequenceActive();
+		enterSequence_active_default();
 	}
 
 	public void exit() {
-		exitSequenceDefault();
+		exitSequence_default();
 
-		exitSequenceOperation();
+		exitSequence_operation();
 
-		exitSequenceNamespace();
+		exitSequence_namespace();
 
-		exitSequenceLocal();
+		exitSequence_local();
 
-		exitSequenceInterface();
+		exitSequence_interface();
 
-		exitSequenceInternal();
+		exitSequence_internal();
 
-		exitSequenceEvent();
+		exitSequence_event();
 
-		exitSequenceIn();
+		exitSequence_in();
 
-		exitSequenceOut();
+		exitSequence_out();
 
-		exitSequenceVar();
+		exitSequence_var();
 
-		exitSequenceReadonly();
+		exitSequence_readonly();
 
-		exitSequenceExternal();
+		exitSequence_external();
 
-		exitSequenceElse();
+		exitSequence_else();
 
-		exitSequenceEntry();
+		exitSequence_entry();
 
-		exitSequenceExit();
+		exitSequence_exit();
 
-		exitSequenceAlways();
+		exitSequence_always();
 
-		exitSequenceOncycle();
+		exitSequence_oncycle();
 
-		exitSequenceRaise();
+		exitSequence_raise();
 
-		exitSequenceValueof();
+		exitSequence_valueof();
 
-		exitSequenceActive();
+		exitSequence_active();
 
 		exitAction();
 	}
@@ -254,194 +254,194 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 		sCInterface.raiseE2();
 	}
 
-	private boolean checkOperation_interfaceTr0() {
+	private boolean check_operation_interface_tr0() {
 		return (sCInterface.e1) && isStateActive(State.default_namespace);
 	}
 
-	private boolean checkNamespace_eventTr0() {
+	private boolean check_namespace_event_tr0() {
 		return (sCInterface.e2) && isStateActive(State.operation_internal);
 	}
 
-	private boolean checkLocal_inTr0() {
+	private boolean check_local_in_tr0() {
 		return (sCInterface.e1) && isStateActive(State.namespace_local);
 	}
 
-	private boolean checkInterface_varTr0() {
+	private boolean check_interface_var_tr0() {
 		return (sCInterface.e2) && isStateActive(State.local_out);
 	}
 
-	private boolean checkInternal_externalTr0() {
+	private boolean check_internal_external_tr0() {
 		return (sCInterface.e1) && isStateActive(State.interface_readonly);
 	}
 
-	private boolean checkEvent_defaultTr0() {
+	private boolean check_event_default_tr0() {
 		return (sCInterface.e2) && isStateActive(State.internal_operation);
 	}
 
-	private boolean checkIn_entryTr0() {
+	private boolean check_in_entry_tr0() {
 		return (sCInterface.e1) && isStateActive(State.event_else);
 	}
 
-	private boolean checkOut_alwaysTr0() {
+	private boolean check_out_always_tr0() {
 		return (sCInterface.e2) && isStateActive(State.in_exit);
 	}
 
-	private boolean checkVar_raiseTr0() {
+	private boolean check_var_raise_tr0() {
 		return (sCInterface.e1) && isStateActive(State.out_oncycle);
 	}
 
-	private boolean checkReadonly_activeTr0() {
+	private boolean check_readonly_active_tr0() {
 		return (sCInterface.e2) && isStateActive(State.var_valueof);
 	}
 
-	private boolean checkExternal_interfaceTr0() {
+	private boolean check_external_interface_tr0() {
 		return (sCInterface.e1) && isStateActive(State.readonly_namespace);
 	}
 
-	private boolean checkElse_eventTr0() {
+	private boolean check_else_event_tr0() {
 		return (sCInterface.e2) && isStateActive(State.external_internal);
 	}
 
-	private boolean checkEntry_inTr0() {
+	private boolean check_entry_in_tr0() {
 		return (sCInterface.e1) && isStateActive(State.else_local);
 	}
 
-	private boolean checkExit_varTr0() {
+	private boolean check_exit_var_tr0() {
 		return (sCInterface.e2) && isStateActive(State.entry_out);
 	}
 
-	private boolean checkAlways_externalTr0() {
+	private boolean check_always_external_tr0() {
 		return (sCInterface.e1) && isStateActive(State.exit_readonly);
 	}
 
-	private boolean checkOncycle_defaultTr0() {
+	private boolean check_oncycle_default_tr0() {
 		return (sCInterface.e2) && isStateActive(State.always_operation);
 	}
 
-	private boolean checkRaise_entryTr0() {
+	private boolean check_raise_entry_tr0() {
 		return (sCInterface.e1) && isStateActive(State.oncycle_else);
 	}
 
-	private boolean checkValueof_alwaysTr0() {
+	private boolean check_valueof_always_tr0() {
 		return (sCInterface.e2) && isStateActive(State.raise_exit);
 	}
 
-	private boolean checkActive_raiseTr0() {
+	private boolean check_active_raise_tr0() {
 		return (sCInterface.e1) && isStateActive(State.valueof_oncycle);
 	}
 
-	private void effectOperation_interfaceTr0() {
-		exitSequenceOperation_interface();
+	private void effect_operation_interface_tr0() {
+		exitSequence_operation_interface();
 
-		enterSequenceOperation_internal();
+		enterSequence_operation_internal_default();
 	}
 
-	private void effectNamespace_eventTr0() {
-		exitSequenceNamespace_event();
+	private void effect_namespace_event_tr0() {
+		exitSequence_namespace_event();
 
-		enterSequenceNamespace_local();
+		enterSequence_namespace_local_default();
 	}
 
-	private void effectLocal_inTr0() {
-		exitSequenceLocal_in();
+	private void effect_local_in_tr0() {
+		exitSequence_local_in();
 
-		enterSequenceLocal_out();
+		enterSequence_local_out_default();
 	}
 
-	private void effectInterface_varTr0() {
-		exitSequenceInterface_var();
+	private void effect_interface_var_tr0() {
+		exitSequence_interface_var();
 
-		enterSequenceInterface_readonly();
+		enterSequence_interface_readonly_default();
 	}
 
-	private void effectInternal_externalTr0() {
-		exitSequenceInternal_external();
+	private void effect_internal_external_tr0() {
+		exitSequence_internal_external();
 
-		enterSequenceInternal_operation();
+		enterSequence_internal_operation_default();
 	}
 
-	private void effectEvent_defaultTr0() {
-		exitSequenceEvent_default();
+	private void effect_event_default_tr0() {
+		exitSequence_event_default();
 
-		enterSequenceEvent_else();
+		enterSequence_event_else_default();
 	}
 
-	private void effectIn_entryTr0() {
-		exitSequenceIn_entry();
+	private void effect_in_entry_tr0() {
+		exitSequence_in_entry();
 
-		enterSequenceIn_exit();
+		enterSequence_in_exit_default();
 	}
 
-	private void effectOut_alwaysTr0() {
-		exitSequenceOut_always();
+	private void effect_out_always_tr0() {
+		exitSequence_out_always();
 
-		enterSequenceOut_oncycle();
+		enterSequence_out_oncycle_default();
 	}
 
-	private void effectVar_raiseTr0() {
-		exitSequenceVar_raise();
+	private void effect_var_raise_tr0() {
+		exitSequence_var_raise();
 
-		enterSequenceVar_valueof();
+		enterSequence_var_valueof_default();
 	}
 
-	private void effectReadonly_activeTr0() {
-		exitSequenceReadonly_active();
+	private void effect_readonly_active_tr0() {
+		exitSequence_readonly_active();
 
-		enterSequenceReadonly_namespace();
+		enterSequence_readonly_namespace_default();
 	}
 
-	private void effectExternal_interfaceTr0() {
-		exitSequenceExternal_interface();
+	private void effect_external_interface_tr0() {
+		exitSequence_external_interface();
 
-		enterSequenceExternal_internal();
+		enterSequence_external_internal_default();
 	}
 
-	private void effectElse_eventTr0() {
-		exitSequenceElse_event();
+	private void effect_else_event_tr0() {
+		exitSequence_else_event();
 
-		enterSequenceElse_local();
+		enterSequence_else_local_default();
 	}
 
-	private void effectEntry_inTr0() {
-		exitSequenceEntry_in();
+	private void effect_entry_in_tr0() {
+		exitSequence_entry_in();
 
-		enterSequenceEntry_out();
+		enterSequence_entry_out_default();
 	}
 
-	private void effectExit_varTr0() {
-		exitSequenceExit_var();
+	private void effect_exit_var_tr0() {
+		exitSequence_exit_var();
 
-		enterSequenceExit_readonly();
+		enterSequence_exit_readonly_default();
 	}
 
-	private void effectAlways_externalTr0() {
-		exitSequenceAlways_external();
+	private void effect_always_external_tr0() {
+		exitSequence_always_external();
 
-		enterSequenceAlways_operation();
+		enterSequence_always_operation_default();
 	}
 
-	private void effectOncycle_defaultTr0() {
-		exitSequenceOncycle_default();
+	private void effect_oncycle_default_tr0() {
+		exitSequence_oncycle_default();
 
-		enterSequenceOncycle_else();
+		enterSequence_oncycle_else_default();
 	}
 
-	private void effectRaise_entryTr0() {
-		exitSequenceRaise_entry();
+	private void effect_raise_entry_tr0() {
+		exitSequence_raise_entry();
 
-		enterSequenceRaise_exit();
+		enterSequence_raise_exit_default();
 	}
 
-	private void effectValueof_alwaysTr0() {
-		exitSequenceValueof_always();
+	private void effect_valueof_always_tr0() {
+		exitSequence_valueof_always();
 
-		enterSequenceValueof_oncycle();
+		enterSequence_valueof_oncycle_default();
 	}
 
-	private void effectActive_raiseTr0() {
-		exitSequenceActive_raise();
+	private void effect_active_raise_tr0() {
+		exitSequence_active_raise();
 
-		enterSequenceActive_valueof();
+		enterSequence_active_valueof_default();
 	}
 
 	/* Entry action for statechart 'STextKeywordsInStatesAndRegions'. */
@@ -453,578 +453,578 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* 'default' enter sequence for state namespace */
-	private void enterSequenceDefault_namespace() {
+	private void enterSequence_default_namespace_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.default_namespace;
 	}
 
 	/* 'default' enter sequence for state interface */
-	private void enterSequenceOperation_interface() {
+	private void enterSequence_operation_interface_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.operation_interface;
 	}
 
 	/* 'default' enter sequence for state internal */
-	private void enterSequenceOperation_internal() {
+	private void enterSequence_operation_internal_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.operation_internal;
 	}
 
 	/* 'default' enter sequence for state event */
-	private void enterSequenceNamespace_event() {
+	private void enterSequence_namespace_event_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.namespace_event;
 	}
 
 	/* 'default' enter sequence for state local */
-	private void enterSequenceNamespace_local() {
+	private void enterSequence_namespace_local_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.namespace_local;
 	}
 
 	/* 'default' enter sequence for state in */
-	private void enterSequenceLocal_in() {
+	private void enterSequence_local_in_default() {
 		nextStateIndex = 3;
 		stateVector[3] = State.local_in;
 	}
 
 	/* 'default' enter sequence for state out */
-	private void enterSequenceLocal_out() {
+	private void enterSequence_local_out_default() {
 		nextStateIndex = 3;
 		stateVector[3] = State.local_out;
 	}
 
 	/* 'default' enter sequence for state var */
-	private void enterSequenceInterface_var() {
+	private void enterSequence_interface_var_default() {
 		nextStateIndex = 4;
 		stateVector[4] = State.interface_var;
 	}
 
 	/* 'default' enter sequence for state readonly */
-	private void enterSequenceInterface_readonly() {
+	private void enterSequence_interface_readonly_default() {
 		nextStateIndex = 4;
 		stateVector[4] = State.interface_readonly;
 	}
 
 	/* 'default' enter sequence for state external */
-	private void enterSequenceInternal_external() {
+	private void enterSequence_internal_external_default() {
 		nextStateIndex = 5;
 		stateVector[5] = State.internal_external;
 	}
 
 	/* 'default' enter sequence for state operation */
-	private void enterSequenceInternal_operation() {
+	private void enterSequence_internal_operation_default() {
 		nextStateIndex = 5;
 		stateVector[5] = State.internal_operation;
 	}
 
 	/* 'default' enter sequence for state default */
-	private void enterSequenceEvent_default() {
+	private void enterSequence_event_default_default() {
 		nextStateIndex = 6;
 		stateVector[6] = State.event_default;
 	}
 
 	/* 'default' enter sequence for state else */
-	private void enterSequenceEvent_else() {
+	private void enterSequence_event_else_default() {
 		nextStateIndex = 6;
 		stateVector[6] = State.event_else;
 	}
 
 	/* 'default' enter sequence for state entry */
-	private void enterSequenceIn_entry() {
+	private void enterSequence_in_entry_default() {
 		nextStateIndex = 7;
 		stateVector[7] = State.in_entry;
 	}
 
 	/* 'default' enter sequence for state exit */
-	private void enterSequenceIn_exit() {
+	private void enterSequence_in_exit_default() {
 		nextStateIndex = 7;
 		stateVector[7] = State.in_exit;
 	}
 
 	/* 'default' enter sequence for state always */
-	private void enterSequenceOut_always() {
+	private void enterSequence_out_always_default() {
 		nextStateIndex = 8;
 		stateVector[8] = State.out_always;
 	}
 
 	/* 'default' enter sequence for state oncycle */
-	private void enterSequenceOut_oncycle() {
+	private void enterSequence_out_oncycle_default() {
 		nextStateIndex = 8;
 		stateVector[8] = State.out_oncycle;
 	}
 
 	/* 'default' enter sequence for state raise */
-	private void enterSequenceVar_raise() {
+	private void enterSequence_var_raise_default() {
 		nextStateIndex = 9;
 		stateVector[9] = State.var_raise;
 	}
 
 	/* 'default' enter sequence for state valueof */
-	private void enterSequenceVar_valueof() {
+	private void enterSequence_var_valueof_default() {
 		nextStateIndex = 9;
 		stateVector[9] = State.var_valueof;
 	}
 
 	/* 'default' enter sequence for state active */
-	private void enterSequenceReadonly_active() {
+	private void enterSequence_readonly_active_default() {
 		nextStateIndex = 10;
 		stateVector[10] = State.readonly_active;
 	}
 
 	/* 'default' enter sequence for state namespace */
-	private void enterSequenceReadonly_namespace() {
+	private void enterSequence_readonly_namespace_default() {
 		nextStateIndex = 10;
 		stateVector[10] = State.readonly_namespace;
 	}
 
 	/* 'default' enter sequence for state interface */
-	private void enterSequenceExternal_interface() {
+	private void enterSequence_external_interface_default() {
 		nextStateIndex = 11;
 		stateVector[11] = State.external_interface;
 	}
 
 	/* 'default' enter sequence for state internal */
-	private void enterSequenceExternal_internal() {
+	private void enterSequence_external_internal_default() {
 		nextStateIndex = 11;
 		stateVector[11] = State.external_internal;
 	}
 
 	/* 'default' enter sequence for state event */
-	private void enterSequenceElse_event() {
+	private void enterSequence_else_event_default() {
 		nextStateIndex = 12;
 		stateVector[12] = State.else_event;
 	}
 
 	/* 'default' enter sequence for state local */
-	private void enterSequenceElse_local() {
+	private void enterSequence_else_local_default() {
 		nextStateIndex = 12;
 		stateVector[12] = State.else_local;
 	}
 
 	/* 'default' enter sequence for state in */
-	private void enterSequenceEntry_in() {
+	private void enterSequence_entry_in_default() {
 		nextStateIndex = 13;
 		stateVector[13] = State.entry_in;
 	}
 
 	/* 'default' enter sequence for state out */
-	private void enterSequenceEntry_out() {
+	private void enterSequence_entry_out_default() {
 		nextStateIndex = 13;
 		stateVector[13] = State.entry_out;
 	}
 
 	/* 'default' enter sequence for state var */
-	private void enterSequenceExit_var() {
+	private void enterSequence_exit_var_default() {
 		nextStateIndex = 14;
 		stateVector[14] = State.exit_var;
 	}
 
 	/* 'default' enter sequence for state readonly */
-	private void enterSequenceExit_readonly() {
+	private void enterSequence_exit_readonly_default() {
 		nextStateIndex = 14;
 		stateVector[14] = State.exit_readonly;
 	}
 
 	/* 'default' enter sequence for state external */
-	private void enterSequenceAlways_external() {
+	private void enterSequence_always_external_default() {
 		nextStateIndex = 15;
 		stateVector[15] = State.always_external;
 	}
 
 	/* 'default' enter sequence for state operation */
-	private void enterSequenceAlways_operation() {
+	private void enterSequence_always_operation_default() {
 		nextStateIndex = 15;
 		stateVector[15] = State.always_operation;
 	}
 
 	/* 'default' enter sequence for state default */
-	private void enterSequenceOncycle_default() {
+	private void enterSequence_oncycle_default_default() {
 		nextStateIndex = 16;
 		stateVector[16] = State.oncycle_default;
 	}
 
 	/* 'default' enter sequence for state else */
-	private void enterSequenceOncycle_else() {
+	private void enterSequence_oncycle_else_default() {
 		nextStateIndex = 16;
 		stateVector[16] = State.oncycle_else;
 	}
 
 	/* 'default' enter sequence for state entry */
-	private void enterSequenceRaise_entry() {
+	private void enterSequence_raise_entry_default() {
 		nextStateIndex = 17;
 		stateVector[17] = State.raise_entry;
 	}
 
 	/* 'default' enter sequence for state exit */
-	private void enterSequenceRaise_exit() {
+	private void enterSequence_raise_exit_default() {
 		nextStateIndex = 17;
 		stateVector[17] = State.raise_exit;
 	}
 
 	/* 'default' enter sequence for state always */
-	private void enterSequenceValueof_always() {
+	private void enterSequence_valueof_always_default() {
 		nextStateIndex = 18;
 		stateVector[18] = State.valueof_always;
 	}
 
 	/* 'default' enter sequence for state oncycle */
-	private void enterSequenceValueof_oncycle() {
+	private void enterSequence_valueof_oncycle_default() {
 		nextStateIndex = 18;
 		stateVector[18] = State.valueof_oncycle;
 	}
 
 	/* 'default' enter sequence for state raise */
-	private void enterSequenceActive_raise() {
+	private void enterSequence_active_raise_default() {
 		nextStateIndex = 19;
 		stateVector[19] = State.active_raise;
 	}
 
 	/* 'default' enter sequence for state valueof */
-	private void enterSequenceActive_valueof() {
+	private void enterSequence_active_valueof_default() {
 		nextStateIndex = 19;
 		stateVector[19] = State.active_valueof;
 	}
 
 	/* 'default' enter sequence for region default */
-	private void enterSequenceDefault() {
-		reactSTextKeywordsInStatesAndRegions_default__entry_Default();
+	private void enterSequence_default_default() {
+		react_default__entry_Default();
 	}
 
 	/* 'default' enter sequence for region operation */
-	private void enterSequenceOperation() {
-		reactSTextKeywordsInStatesAndRegions_operation__entry_Default();
+	private void enterSequence_operation_default() {
+		react_operation__entry_Default();
 	}
 
 	/* 'default' enter sequence for region namespace */
-	private void enterSequenceNamespace() {
-		reactSTextKeywordsInStatesAndRegions_namespace__entry_Default();
+	private void enterSequence_namespace_default() {
+		react_namespace__entry_Default();
 	}
 
 	/* 'default' enter sequence for region local */
-	private void enterSequenceLocal() {
-		reactSTextKeywordsInStatesAndRegions_local__entry_Default();
+	private void enterSequence_local_default() {
+		react_local__entry_Default();
 	}
 
 	/* 'default' enter sequence for region interface */
-	private void enterSequenceInterface() {
-		reactSTextKeywordsInStatesAndRegions_interface__entry_Default();
+	private void enterSequence_interface_default() {
+		react_interface__entry_Default();
 	}
 
 	/* 'default' enter sequence for region internal */
-	private void enterSequenceInternal() {
-		reactSTextKeywordsInStatesAndRegions_internal__entry_Default();
+	private void enterSequence_internal_default() {
+		react_internal__entry_Default();
 	}
 
 	/* 'default' enter sequence for region event */
-	private void enterSequenceEvent() {
-		reactSTextKeywordsInStatesAndRegions_event__entry_Default();
+	private void enterSequence_event_default() {
+		react_event__entry_Default();
 	}
 
 	/* 'default' enter sequence for region in */
-	private void enterSequenceIn() {
-		reactSTextKeywordsInStatesAndRegions_in__entry_Default();
+	private void enterSequence_in_default() {
+		react_in__entry_Default();
 	}
 
 	/* 'default' enter sequence for region out */
-	private void enterSequenceOut() {
-		reactSTextKeywordsInStatesAndRegions_out__entry_Default();
+	private void enterSequence_out_default() {
+		react_out__entry_Default();
 	}
 
 	/* 'default' enter sequence for region var */
-	private void enterSequenceVar() {
-		reactSTextKeywordsInStatesAndRegions_var__entry_Default();
+	private void enterSequence_var_default() {
+		react_var__entry_Default();
 	}
 
 	/* 'default' enter sequence for region readonly */
-	private void enterSequenceReadonly() {
-		reactSTextKeywordsInStatesAndRegions_readonly__entry_Default();
+	private void enterSequence_readonly_default() {
+		react_readonly__entry_Default();
 	}
 
 	/* 'default' enter sequence for region external */
-	private void enterSequenceExternal() {
-		reactSTextKeywordsInStatesAndRegions_external__entry_Default();
+	private void enterSequence_external_default() {
+		react_external__entry_Default();
 	}
 
 	/* 'default' enter sequence for region else */
-	private void enterSequenceElse() {
-		reactSTextKeywordsInStatesAndRegions_else__entry_Default();
+	private void enterSequence_else_default() {
+		react_else__entry_Default();
 	}
 
 	/* 'default' enter sequence for region entry */
-	private void enterSequenceEntry() {
-		reactSTextKeywordsInStatesAndRegions_entry__entry_Default();
+	private void enterSequence_entry_default() {
+		react_entry__entry_Default();
 	}
 
 	/* 'default' enter sequence for region exit */
-	private void enterSequenceExit() {
-		reactSTextKeywordsInStatesAndRegions_exit__entry_Default();
+	private void enterSequence_exit_default() {
+		react_exit__entry_Default();
 	}
 
 	/* 'default' enter sequence for region always */
-	private void enterSequenceAlways() {
-		reactSTextKeywordsInStatesAndRegions_always__entry_Default();
+	private void enterSequence_always_default() {
+		react_always__entry_Default();
 	}
 
 	/* 'default' enter sequence for region oncycle */
-	private void enterSequenceOncycle() {
-		reactSTextKeywordsInStatesAndRegions_oncycle__entry_Default();
+	private void enterSequence_oncycle_default() {
+		react_oncycle__entry_Default();
 	}
 
 	/* 'default' enter sequence for region raise */
-	private void enterSequenceRaise() {
-		reactSTextKeywordsInStatesAndRegions_raise__entry_Default();
+	private void enterSequence_raise_default() {
+		react_raise__entry_Default();
 	}
 
 	/* 'default' enter sequence for region valueof */
-	private void enterSequenceValueof() {
-		reactSTextKeywordsInStatesAndRegions_valueof__entry_Default();
+	private void enterSequence_valueof_default() {
+		react_valueof__entry_Default();
 	}
 
 	/* 'default' enter sequence for region active */
-	private void enterSequenceActive() {
-		reactSTextKeywordsInStatesAndRegions_active__entry_Default();
+	private void enterSequence_active_default() {
+		react_active__entry_Default();
 	}
 
 	/* Default exit sequence for state namespace */
-	private void exitSequenceDefault_namespace() {
+	private void exitSequence_default_namespace() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state interface */
-	private void exitSequenceOperation_interface() {
+	private void exitSequence_operation_interface() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state internal */
-	private void exitSequenceOperation_internal() {
+	private void exitSequence_operation_internal() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state event */
-	private void exitSequenceNamespace_event() {
+	private void exitSequence_namespace_event() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state local */
-	private void exitSequenceNamespace_local() {
+	private void exitSequence_namespace_local() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state in */
-	private void exitSequenceLocal_in() {
+	private void exitSequence_local_in() {
 		nextStateIndex = 3;
 		stateVector[3] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state out */
-	private void exitSequenceLocal_out() {
+	private void exitSequence_local_out() {
 		nextStateIndex = 3;
 		stateVector[3] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state var */
-	private void exitSequenceInterface_var() {
+	private void exitSequence_interface_var() {
 		nextStateIndex = 4;
 		stateVector[4] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state readonly */
-	private void exitSequenceInterface_readonly() {
+	private void exitSequence_interface_readonly() {
 		nextStateIndex = 4;
 		stateVector[4] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state external */
-	private void exitSequenceInternal_external() {
+	private void exitSequence_internal_external() {
 		nextStateIndex = 5;
 		stateVector[5] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state operation */
-	private void exitSequenceInternal_operation() {
+	private void exitSequence_internal_operation() {
 		nextStateIndex = 5;
 		stateVector[5] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state default */
-	private void exitSequenceEvent_default() {
+	private void exitSequence_event_default() {
 		nextStateIndex = 6;
 		stateVector[6] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state else */
-	private void exitSequenceEvent_else() {
+	private void exitSequence_event_else() {
 		nextStateIndex = 6;
 		stateVector[6] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state entry */
-	private void exitSequenceIn_entry() {
+	private void exitSequence_in_entry() {
 		nextStateIndex = 7;
 		stateVector[7] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state exit */
-	private void exitSequenceIn_exit() {
+	private void exitSequence_in_exit() {
 		nextStateIndex = 7;
 		stateVector[7] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state always */
-	private void exitSequenceOut_always() {
+	private void exitSequence_out_always() {
 		nextStateIndex = 8;
 		stateVector[8] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state oncycle */
-	private void exitSequenceOut_oncycle() {
+	private void exitSequence_out_oncycle() {
 		nextStateIndex = 8;
 		stateVector[8] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state raise */
-	private void exitSequenceVar_raise() {
+	private void exitSequence_var_raise() {
 		nextStateIndex = 9;
 		stateVector[9] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state valueof */
-	private void exitSequenceVar_valueof() {
+	private void exitSequence_var_valueof() {
 		nextStateIndex = 9;
 		stateVector[9] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state active */
-	private void exitSequenceReadonly_active() {
+	private void exitSequence_readonly_active() {
 		nextStateIndex = 10;
 		stateVector[10] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state namespace */
-	private void exitSequenceReadonly_namespace() {
+	private void exitSequence_readonly_namespace() {
 		nextStateIndex = 10;
 		stateVector[10] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state interface */
-	private void exitSequenceExternal_interface() {
+	private void exitSequence_external_interface() {
 		nextStateIndex = 11;
 		stateVector[11] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state internal */
-	private void exitSequenceExternal_internal() {
+	private void exitSequence_external_internal() {
 		nextStateIndex = 11;
 		stateVector[11] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state event */
-	private void exitSequenceElse_event() {
+	private void exitSequence_else_event() {
 		nextStateIndex = 12;
 		stateVector[12] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state local */
-	private void exitSequenceElse_local() {
+	private void exitSequence_else_local() {
 		nextStateIndex = 12;
 		stateVector[12] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state in */
-	private void exitSequenceEntry_in() {
+	private void exitSequence_entry_in() {
 		nextStateIndex = 13;
 		stateVector[13] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state out */
-	private void exitSequenceEntry_out() {
+	private void exitSequence_entry_out() {
 		nextStateIndex = 13;
 		stateVector[13] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state var */
-	private void exitSequenceExit_var() {
+	private void exitSequence_exit_var() {
 		nextStateIndex = 14;
 		stateVector[14] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state readonly */
-	private void exitSequenceExit_readonly() {
+	private void exitSequence_exit_readonly() {
 		nextStateIndex = 14;
 		stateVector[14] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state external */
-	private void exitSequenceAlways_external() {
+	private void exitSequence_always_external() {
 		nextStateIndex = 15;
 		stateVector[15] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state operation */
-	private void exitSequenceAlways_operation() {
+	private void exitSequence_always_operation() {
 		nextStateIndex = 15;
 		stateVector[15] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state default */
-	private void exitSequenceOncycle_default() {
+	private void exitSequence_oncycle_default() {
 		nextStateIndex = 16;
 		stateVector[16] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state else */
-	private void exitSequenceOncycle_else() {
+	private void exitSequence_oncycle_else() {
 		nextStateIndex = 16;
 		stateVector[16] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state entry */
-	private void exitSequenceRaise_entry() {
+	private void exitSequence_raise_entry() {
 		nextStateIndex = 17;
 		stateVector[17] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state exit */
-	private void exitSequenceRaise_exit() {
+	private void exitSequence_raise_exit() {
 		nextStateIndex = 17;
 		stateVector[17] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state always */
-	private void exitSequenceValueof_always() {
+	private void exitSequence_valueof_always() {
 		nextStateIndex = 18;
 		stateVector[18] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state oncycle */
-	private void exitSequenceValueof_oncycle() {
+	private void exitSequence_valueof_oncycle() {
 		nextStateIndex = 18;
 		stateVector[18] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state raise */
-	private void exitSequenceActive_raise() {
+	private void exitSequence_active_raise() {
 		nextStateIndex = 19;
 		stateVector[19] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state valueof */
-	private void exitSequenceActive_valueof() {
+	private void exitSequence_active_valueof() {
 		nextStateIndex = 19;
 		stateVector[19] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region default */
-	private void exitSequenceDefault() {
+	private void exitSequence_default() {
 		switch (stateVector[0]) {
 			case default_namespace :
-				exitSequenceDefault_namespace();
+				exitSequence_default_namespace();
 				break;
 
 			default :
@@ -1033,14 +1033,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region operation */
-	private void exitSequenceOperation() {
+	private void exitSequence_operation() {
 		switch (stateVector[1]) {
 			case operation_interface :
-				exitSequenceOperation_interface();
+				exitSequence_operation_interface();
 				break;
 
 			case operation_internal :
-				exitSequenceOperation_internal();
+				exitSequence_operation_internal();
 				break;
 
 			default :
@@ -1049,14 +1049,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region namespace */
-	private void exitSequenceNamespace() {
+	private void exitSequence_namespace() {
 		switch (stateVector[2]) {
 			case namespace_event :
-				exitSequenceNamespace_event();
+				exitSequence_namespace_event();
 				break;
 
 			case namespace_local :
-				exitSequenceNamespace_local();
+				exitSequence_namespace_local();
 				break;
 
 			default :
@@ -1065,14 +1065,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region local */
-	private void exitSequenceLocal() {
+	private void exitSequence_local() {
 		switch (stateVector[3]) {
 			case local_in :
-				exitSequenceLocal_in();
+				exitSequence_local_in();
 				break;
 
 			case local_out :
-				exitSequenceLocal_out();
+				exitSequence_local_out();
 				break;
 
 			default :
@@ -1081,14 +1081,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region interface */
-	private void exitSequenceInterface() {
+	private void exitSequence_interface() {
 		switch (stateVector[4]) {
 			case interface_var :
-				exitSequenceInterface_var();
+				exitSequence_interface_var();
 				break;
 
 			case interface_readonly :
-				exitSequenceInterface_readonly();
+				exitSequence_interface_readonly();
 				break;
 
 			default :
@@ -1097,14 +1097,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region internal */
-	private void exitSequenceInternal() {
+	private void exitSequence_internal() {
 		switch (stateVector[5]) {
 			case internal_external :
-				exitSequenceInternal_external();
+				exitSequence_internal_external();
 				break;
 
 			case internal_operation :
-				exitSequenceInternal_operation();
+				exitSequence_internal_operation();
 				break;
 
 			default :
@@ -1113,14 +1113,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region event */
-	private void exitSequenceEvent() {
+	private void exitSequence_event() {
 		switch (stateVector[6]) {
 			case event_default :
-				exitSequenceEvent_default();
+				exitSequence_event_default();
 				break;
 
 			case event_else :
-				exitSequenceEvent_else();
+				exitSequence_event_else();
 				break;
 
 			default :
@@ -1129,14 +1129,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region in */
-	private void exitSequenceIn() {
+	private void exitSequence_in() {
 		switch (stateVector[7]) {
 			case in_entry :
-				exitSequenceIn_entry();
+				exitSequence_in_entry();
 				break;
 
 			case in_exit :
-				exitSequenceIn_exit();
+				exitSequence_in_exit();
 				break;
 
 			default :
@@ -1145,14 +1145,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region out */
-	private void exitSequenceOut() {
+	private void exitSequence_out() {
 		switch (stateVector[8]) {
 			case out_always :
-				exitSequenceOut_always();
+				exitSequence_out_always();
 				break;
 
 			case out_oncycle :
-				exitSequenceOut_oncycle();
+				exitSequence_out_oncycle();
 				break;
 
 			default :
@@ -1161,14 +1161,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region var */
-	private void exitSequenceVar() {
+	private void exitSequence_var() {
 		switch (stateVector[9]) {
 			case var_raise :
-				exitSequenceVar_raise();
+				exitSequence_var_raise();
 				break;
 
 			case var_valueof :
-				exitSequenceVar_valueof();
+				exitSequence_var_valueof();
 				break;
 
 			default :
@@ -1177,14 +1177,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region readonly */
-	private void exitSequenceReadonly() {
+	private void exitSequence_readonly() {
 		switch (stateVector[10]) {
 			case readonly_active :
-				exitSequenceReadonly_active();
+				exitSequence_readonly_active();
 				break;
 
 			case readonly_namespace :
-				exitSequenceReadonly_namespace();
+				exitSequence_readonly_namespace();
 				break;
 
 			default :
@@ -1193,14 +1193,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region external */
-	private void exitSequenceExternal() {
+	private void exitSequence_external() {
 		switch (stateVector[11]) {
 			case external_interface :
-				exitSequenceExternal_interface();
+				exitSequence_external_interface();
 				break;
 
 			case external_internal :
-				exitSequenceExternal_internal();
+				exitSequence_external_internal();
 				break;
 
 			default :
@@ -1209,14 +1209,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region else */
-	private void exitSequenceElse() {
+	private void exitSequence_else() {
 		switch (stateVector[12]) {
 			case else_event :
-				exitSequenceElse_event();
+				exitSequence_else_event();
 				break;
 
 			case else_local :
-				exitSequenceElse_local();
+				exitSequence_else_local();
 				break;
 
 			default :
@@ -1225,14 +1225,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region entry */
-	private void exitSequenceEntry() {
+	private void exitSequence_entry() {
 		switch (stateVector[13]) {
 			case entry_in :
-				exitSequenceEntry_in();
+				exitSequence_entry_in();
 				break;
 
 			case entry_out :
-				exitSequenceEntry_out();
+				exitSequence_entry_out();
 				break;
 
 			default :
@@ -1241,14 +1241,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region exit */
-	private void exitSequenceExit() {
+	private void exitSequence_exit() {
 		switch (stateVector[14]) {
 			case exit_var :
-				exitSequenceExit_var();
+				exitSequence_exit_var();
 				break;
 
 			case exit_readonly :
-				exitSequenceExit_readonly();
+				exitSequence_exit_readonly();
 				break;
 
 			default :
@@ -1257,14 +1257,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region always */
-	private void exitSequenceAlways() {
+	private void exitSequence_always() {
 		switch (stateVector[15]) {
 			case always_external :
-				exitSequenceAlways_external();
+				exitSequence_always_external();
 				break;
 
 			case always_operation :
-				exitSequenceAlways_operation();
+				exitSequence_always_operation();
 				break;
 
 			default :
@@ -1273,14 +1273,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region oncycle */
-	private void exitSequenceOncycle() {
+	private void exitSequence_oncycle() {
 		switch (stateVector[16]) {
 			case oncycle_default :
-				exitSequenceOncycle_default();
+				exitSequence_oncycle_default();
 				break;
 
 			case oncycle_else :
-				exitSequenceOncycle_else();
+				exitSequence_oncycle_else();
 				break;
 
 			default :
@@ -1289,14 +1289,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region raise */
-	private void exitSequenceRaise() {
+	private void exitSequence_raise() {
 		switch (stateVector[17]) {
 			case raise_entry :
-				exitSequenceRaise_entry();
+				exitSequence_raise_entry();
 				break;
 
 			case raise_exit :
-				exitSequenceRaise_exit();
+				exitSequence_raise_exit();
 				break;
 
 			default :
@@ -1305,14 +1305,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region valueof */
-	private void exitSequenceValueof() {
+	private void exitSequence_valueof() {
 		switch (stateVector[18]) {
 			case valueof_always :
-				exitSequenceValueof_always();
+				exitSequence_valueof_always();
 				break;
 
 			case valueof_oncycle :
-				exitSequenceValueof_oncycle();
+				exitSequence_valueof_oncycle();
 				break;
 
 			default :
@@ -1321,14 +1321,14 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* Default exit sequence for region active */
-	private void exitSequenceActive() {
+	private void exitSequence_active() {
 		switch (stateVector[19]) {
 			case active_raise :
-				exitSequenceActive_raise();
+				exitSequence_active_raise();
 				break;
 
 			case active_valueof :
-				exitSequenceActive_valueof();
+				exitSequence_active_valueof();
 				break;
 
 			default :
@@ -1337,316 +1337,316 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 	}
 
 	/* The reactions of state namespace. */
-	private void reactDefault_namespace() {
+	private void react_default_namespace() {
 	}
 
 	/* The reactions of state interface. */
-	private void reactOperation_interface() {
-		if (checkOperation_interfaceTr0()) {
-			effectOperation_interfaceTr0();
+	private void react_operation_interface() {
+		if (check_operation_interface_tr0()) {
+			effect_operation_interface_tr0();
 		}
 	}
 
 	/* The reactions of state internal. */
-	private void reactOperation_internal() {
+	private void react_operation_internal() {
 	}
 
 	/* The reactions of state event. */
-	private void reactNamespace_event() {
-		if (checkNamespace_eventTr0()) {
-			effectNamespace_eventTr0();
+	private void react_namespace_event() {
+		if (check_namespace_event_tr0()) {
+			effect_namespace_event_tr0();
 		}
 	}
 
 	/* The reactions of state local. */
-	private void reactNamespace_local() {
+	private void react_namespace_local() {
 	}
 
 	/* The reactions of state in. */
-	private void reactLocal_in() {
-		if (checkLocal_inTr0()) {
-			effectLocal_inTr0();
+	private void react_local_in() {
+		if (check_local_in_tr0()) {
+			effect_local_in_tr0();
 		}
 	}
 
 	/* The reactions of state out. */
-	private void reactLocal_out() {
+	private void react_local_out() {
 	}
 
 	/* The reactions of state var. */
-	private void reactInterface_var() {
-		if (checkInterface_varTr0()) {
-			effectInterface_varTr0();
+	private void react_interface_var() {
+		if (check_interface_var_tr0()) {
+			effect_interface_var_tr0();
 		}
 	}
 
 	/* The reactions of state readonly. */
-	private void reactInterface_readonly() {
+	private void react_interface_readonly() {
 	}
 
 	/* The reactions of state external. */
-	private void reactInternal_external() {
-		if (checkInternal_externalTr0()) {
-			effectInternal_externalTr0();
+	private void react_internal_external() {
+		if (check_internal_external_tr0()) {
+			effect_internal_external_tr0();
 		}
 	}
 
 	/* The reactions of state operation. */
-	private void reactInternal_operation() {
+	private void react_internal_operation() {
 	}
 
 	/* The reactions of state default. */
-	private void reactEvent_default() {
-		if (checkEvent_defaultTr0()) {
-			effectEvent_defaultTr0();
+	private void react_event_default() {
+		if (check_event_default_tr0()) {
+			effect_event_default_tr0();
 		}
 	}
 
 	/* The reactions of state else. */
-	private void reactEvent_else() {
+	private void react_event_else() {
 	}
 
 	/* The reactions of state entry. */
-	private void reactIn_entry() {
-		if (checkIn_entryTr0()) {
-			effectIn_entryTr0();
+	private void react_in_entry() {
+		if (check_in_entry_tr0()) {
+			effect_in_entry_tr0();
 		}
 	}
 
 	/* The reactions of state exit. */
-	private void reactIn_exit() {
+	private void react_in_exit() {
 	}
 
 	/* The reactions of state always. */
-	private void reactOut_always() {
-		if (checkOut_alwaysTr0()) {
-			effectOut_alwaysTr0();
+	private void react_out_always() {
+		if (check_out_always_tr0()) {
+			effect_out_always_tr0();
 		}
 	}
 
 	/* The reactions of state oncycle. */
-	private void reactOut_oncycle() {
+	private void react_out_oncycle() {
 	}
 
 	/* The reactions of state raise. */
-	private void reactVar_raise() {
-		if (checkVar_raiseTr0()) {
-			effectVar_raiseTr0();
+	private void react_var_raise() {
+		if (check_var_raise_tr0()) {
+			effect_var_raise_tr0();
 		}
 	}
 
 	/* The reactions of state valueof. */
-	private void reactVar_valueof() {
+	private void react_var_valueof() {
 	}
 
 	/* The reactions of state active. */
-	private void reactReadonly_active() {
-		if (checkReadonly_activeTr0()) {
-			effectReadonly_activeTr0();
+	private void react_readonly_active() {
+		if (check_readonly_active_tr0()) {
+			effect_readonly_active_tr0();
 		}
 	}
 
 	/* The reactions of state namespace. */
-	private void reactReadonly_namespace() {
+	private void react_readonly_namespace() {
 	}
 
 	/* The reactions of state interface. */
-	private void reactExternal_interface() {
-		if (checkExternal_interfaceTr0()) {
-			effectExternal_interfaceTr0();
+	private void react_external_interface() {
+		if (check_external_interface_tr0()) {
+			effect_external_interface_tr0();
 		}
 	}
 
 	/* The reactions of state internal. */
-	private void reactExternal_internal() {
+	private void react_external_internal() {
 	}
 
 	/* The reactions of state event. */
-	private void reactElse_event() {
-		if (checkElse_eventTr0()) {
-			effectElse_eventTr0();
+	private void react_else_event() {
+		if (check_else_event_tr0()) {
+			effect_else_event_tr0();
 		}
 	}
 
 	/* The reactions of state local. */
-	private void reactElse_local() {
+	private void react_else_local() {
 	}
 
 	/* The reactions of state in. */
-	private void reactEntry_in() {
-		if (checkEntry_inTr0()) {
-			effectEntry_inTr0();
+	private void react_entry_in() {
+		if (check_entry_in_tr0()) {
+			effect_entry_in_tr0();
 		}
 	}
 
 	/* The reactions of state out. */
-	private void reactEntry_out() {
+	private void react_entry_out() {
 	}
 
 	/* The reactions of state var. */
-	private void reactExit_var() {
-		if (checkExit_varTr0()) {
-			effectExit_varTr0();
+	private void react_exit_var() {
+		if (check_exit_var_tr0()) {
+			effect_exit_var_tr0();
 		}
 	}
 
 	/* The reactions of state readonly. */
-	private void reactExit_readonly() {
+	private void react_exit_readonly() {
 	}
 
 	/* The reactions of state external. */
-	private void reactAlways_external() {
-		if (checkAlways_externalTr0()) {
-			effectAlways_externalTr0();
+	private void react_always_external() {
+		if (check_always_external_tr0()) {
+			effect_always_external_tr0();
 		}
 	}
 
 	/* The reactions of state operation. */
-	private void reactAlways_operation() {
+	private void react_always_operation() {
 	}
 
 	/* The reactions of state default. */
-	private void reactOncycle_default() {
-		if (checkOncycle_defaultTr0()) {
-			effectOncycle_defaultTr0();
+	private void react_oncycle_default() {
+		if (check_oncycle_default_tr0()) {
+			effect_oncycle_default_tr0();
 		}
 	}
 
 	/* The reactions of state else. */
-	private void reactOncycle_else() {
+	private void react_oncycle_else() {
 	}
 
 	/* The reactions of state entry. */
-	private void reactRaise_entry() {
-		if (checkRaise_entryTr0()) {
-			effectRaise_entryTr0();
+	private void react_raise_entry() {
+		if (check_raise_entry_tr0()) {
+			effect_raise_entry_tr0();
 		}
 	}
 
 	/* The reactions of state exit. */
-	private void reactRaise_exit() {
+	private void react_raise_exit() {
 	}
 
 	/* The reactions of state always. */
-	private void reactValueof_always() {
-		if (checkValueof_alwaysTr0()) {
-			effectValueof_alwaysTr0();
+	private void react_valueof_always() {
+		if (check_valueof_always_tr0()) {
+			effect_valueof_always_tr0();
 		}
 	}
 
 	/* The reactions of state oncycle. */
-	private void reactValueof_oncycle() {
+	private void react_valueof_oncycle() {
 	}
 
 	/* The reactions of state raise. */
-	private void reactActive_raise() {
-		if (checkActive_raiseTr0()) {
-			effectActive_raiseTr0();
+	private void react_active_raise() {
+		if (check_active_raise_tr0()) {
+			effect_active_raise_tr0();
 		}
 	}
 
 	/* The reactions of state valueof. */
-	private void reactActive_valueof() {
+	private void react_active_valueof() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_default__entry_Default() {
-		enterSequenceDefault_namespace();
+	private void react_default__entry_Default() {
+		enterSequence_default_namespace_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_operation__entry_Default() {
-		enterSequenceOperation_interface();
+	private void react_operation__entry_Default() {
+		enterSequence_operation_interface_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_namespace__entry_Default() {
-		enterSequenceNamespace_event();
+	private void react_namespace__entry_Default() {
+		enterSequence_namespace_event_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_local__entry_Default() {
-		enterSequenceLocal_in();
+	private void react_local__entry_Default() {
+		enterSequence_local_in_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_interface__entry_Default() {
-		enterSequenceInterface_var();
+	private void react_interface__entry_Default() {
+		enterSequence_interface_var_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_internal__entry_Default() {
-		enterSequenceInternal_external();
+	private void react_internal__entry_Default() {
+		enterSequence_internal_external_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_event__entry_Default() {
-		enterSequenceEvent_default();
+	private void react_event__entry_Default() {
+		enterSequence_event_default_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_in__entry_Default() {
-		enterSequenceIn_entry();
+	private void react_in__entry_Default() {
+		enterSequence_in_entry_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_out__entry_Default() {
-		enterSequenceOut_always();
+	private void react_out__entry_Default() {
+		enterSequence_out_always_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_var__entry_Default() {
-		enterSequenceVar_raise();
+	private void react_var__entry_Default() {
+		enterSequence_var_raise_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_readonly__entry_Default() {
-		enterSequenceReadonly_active();
+	private void react_readonly__entry_Default() {
+		enterSequence_readonly_active_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_external__entry_Default() {
-		enterSequenceExternal_interface();
+	private void react_external__entry_Default() {
+		enterSequence_external_interface_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_else__entry_Default() {
-		enterSequenceElse_event();
+	private void react_else__entry_Default() {
+		enterSequence_else_event_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_entry__entry_Default() {
-		enterSequenceEntry_in();
+	private void react_entry__entry_Default() {
+		enterSequence_entry_in_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_exit__entry_Default() {
-		enterSequenceExit_var();
+	private void react_exit__entry_Default() {
+		enterSequence_exit_var_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_always__entry_Default() {
-		enterSequenceAlways_external();
+	private void react_always__entry_Default() {
+		enterSequence_always_external_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_oncycle__entry_Default() {
-		enterSequenceOncycle_default();
+	private void react_oncycle__entry_Default() {
+		enterSequence_oncycle_default_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_raise__entry_Default() {
-		enterSequenceRaise_entry();
+	private void react_raise__entry_Default() {
+		enterSequence_raise_entry_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_valueof__entry_Default() {
-		enterSequenceValueof_always();
+	private void react_valueof__entry_Default() {
+		enterSequence_valueof_always_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSTextKeywordsInStatesAndRegions_active__entry_Default() {
-		enterSequenceActive_raise();
+	private void react_active__entry_Default() {
+		enterSequence_active_raise_default();
 	}
 
 	public void runCycle() {
@@ -1657,121 +1657,121 @@ public class STextKeywordsInStatesAndRegionsStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case default_namespace :
-					reactDefault_namespace();
+					react_default_namespace();
 					break;
 				case operation_interface :
-					reactOperation_interface();
+					react_operation_interface();
 					break;
 				case operation_internal :
-					reactOperation_internal();
+					react_operation_internal();
 					break;
 				case namespace_event :
-					reactNamespace_event();
+					react_namespace_event();
 					break;
 				case namespace_local :
-					reactNamespace_local();
+					react_namespace_local();
 					break;
 				case local_in :
-					reactLocal_in();
+					react_local_in();
 					break;
 				case local_out :
-					reactLocal_out();
+					react_local_out();
 					break;
 				case interface_var :
-					reactInterface_var();
+					react_interface_var();
 					break;
 				case interface_readonly :
-					reactInterface_readonly();
+					react_interface_readonly();
 					break;
 				case internal_external :
-					reactInternal_external();
+					react_internal_external();
 					break;
 				case internal_operation :
-					reactInternal_operation();
+					react_internal_operation();
 					break;
 				case event_default :
-					reactEvent_default();
+					react_event_default();
 					break;
 				case event_else :
-					reactEvent_else();
+					react_event_else();
 					break;
 				case in_entry :
-					reactIn_entry();
+					react_in_entry();
 					break;
 				case in_exit :
-					reactIn_exit();
+					react_in_exit();
 					break;
 				case out_always :
-					reactOut_always();
+					react_out_always();
 					break;
 				case out_oncycle :
-					reactOut_oncycle();
+					react_out_oncycle();
 					break;
 				case var_raise :
-					reactVar_raise();
+					react_var_raise();
 					break;
 				case var_valueof :
-					reactVar_valueof();
+					react_var_valueof();
 					break;
 				case readonly_active :
-					reactReadonly_active();
+					react_readonly_active();
 					break;
 				case readonly_namespace :
-					reactReadonly_namespace();
+					react_readonly_namespace();
 					break;
 				case external_interface :
-					reactExternal_interface();
+					react_external_interface();
 					break;
 				case external_internal :
-					reactExternal_internal();
+					react_external_internal();
 					break;
 				case else_event :
-					reactElse_event();
+					react_else_event();
 					break;
 				case else_local :
-					reactElse_local();
+					react_else_local();
 					break;
 				case entry_in :
-					reactEntry_in();
+					react_entry_in();
 					break;
 				case entry_out :
-					reactEntry_out();
+					react_entry_out();
 					break;
 				case exit_var :
-					reactExit_var();
+					react_exit_var();
 					break;
 				case exit_readonly :
-					reactExit_readonly();
+					react_exit_readonly();
 					break;
 				case always_external :
-					reactAlways_external();
+					react_always_external();
 					break;
 				case always_operation :
-					reactAlways_operation();
+					react_always_operation();
 					break;
 				case oncycle_default :
-					reactOncycle_default();
+					react_oncycle_default();
 					break;
 				case oncycle_else :
-					reactOncycle_else();
+					react_oncycle_else();
 					break;
 				case raise_entry :
-					reactRaise_entry();
+					react_raise_entry();
 					break;
 				case raise_exit :
-					reactRaise_exit();
+					react_raise_exit();
 					break;
 				case valueof_always :
-					reactValueof_always();
+					react_valueof_always();
 					break;
 				case valueof_oncycle :
-					reactValueof_oncycle();
+					react_valueof_oncycle();
 					break;
 				case active_raise :
-					reactActive_raise();
+					react_active_raise();
 					break;
 				case active_valueof :
-					reactActive_valueof();
+					react_active_valueof();
 					break;
 				default :
 					// $NullState$

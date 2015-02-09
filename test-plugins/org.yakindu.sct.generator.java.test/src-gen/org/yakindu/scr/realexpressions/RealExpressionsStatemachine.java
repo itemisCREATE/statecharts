@@ -268,11 +268,11 @@ public class RealExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -454,14 +454,14 @@ public class RealExpressionsStatemachine
 		sCInterface.setModuloAssign(value);
 	}
 
-	private boolean checkMain_region_StateATr0() {
+	private boolean check_main_region_StateA_tr0() {
 		return sCInterface.e1;
 	}
 
-	private void effectMain_region_StateATr0() {
-		exitSequenceMain_region_StateA();
+	private void effect_main_region_StateA_tr0() {
+		exitSequence_main_region_StateA();
 
-		enterSequenceMain_region_StateB();
+		enterSequence_main_region_StateB_default();
 	}
 
 	/* Entry action for statechart 'RealExpressions'. */
@@ -469,14 +469,14 @@ public class RealExpressionsStatemachine
 	}
 
 	/* Entry action for state 'StateA'. */
-	private void entryActionMain_region_StateA() {
+	private void entryAction_main_region_StateA() {
 		sCInterface.myReal1 = 5.3;
 
 		sCInterface.myReal2 = 10.6;
 	}
 
 	/* Entry action for state 'StateB'. */
-	private void entryActionMain_region_StateB() {
+	private void entryAction_main_region_StateB() {
 		sCInterface.less = sCInterface.myReal1 < sCInterface.myReal2;
 
 		sCInterface.greater = sCInterface.myReal1 > sCInterface.myReal2;
@@ -517,47 +517,47 @@ public class RealExpressionsStatemachine
 	}
 
 	/* 'default' enter sequence for state StateA */
-	private void enterSequenceMain_region_StateA() {
-		entryActionMain_region_StateA();
+	private void enterSequence_main_region_StateA_default() {
+		entryAction_main_region_StateA();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
 	}
 
 	/* 'default' enter sequence for state StateB */
-	private void enterSequenceMain_region_StateB() {
-		entryActionMain_region_StateB();
+	private void enterSequence_main_region_StateB_default() {
+		entryAction_main_region_StateB();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateB;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactRealExpressions_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state StateA */
-	private void exitSequenceMain_region_StateA() {
+	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state StateB */
-	private void exitSequenceMain_region_StateB() {
+	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_StateA :
-				exitSequenceMain_region_StateA();
+				exitSequence_main_region_StateA();
 				break;
 
 			case main_region_StateB :
-				exitSequenceMain_region_StateB();
+				exitSequence_main_region_StateB();
 				break;
 
 			default :
@@ -566,19 +566,19 @@ public class RealExpressionsStatemachine
 	}
 
 	/* The reactions of state StateA. */
-	private void reactMain_region_StateA() {
-		if (checkMain_region_StateATr0()) {
-			effectMain_region_StateATr0();
+	private void react_main_region_StateA() {
+		if (check_main_region_StateA_tr0()) {
+			effect_main_region_StateA_tr0();
 		}
 	}
 
 	/* The reactions of state StateB. */
-	private void reactMain_region_StateB() {
+	private void react_main_region_StateB() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactRealExpressions_main_region__entry_Default() {
-		enterSequenceMain_region_StateA();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_StateA_default();
 	}
 
 	public void runCycle() {
@@ -589,10 +589,10 @@ public class RealExpressionsStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_StateA :
-					reactMain_region_StateA();
+					react_main_region_StateA();
 					break;
 				case main_region_StateB :
-					reactMain_region_StateB();
+					react_main_region_StateB();
 					break;
 				default :
 					// $NullState$

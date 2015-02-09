@@ -547,7 +547,7 @@ class Statemachine {
 	
 	def dispatch functionImplementation(Check it) '''
 		«stepComment»
-		private boolean «asCheckFunction»() {
+		private boolean «functionName»() {
 			return «code»;
 		}
 		

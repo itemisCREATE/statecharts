@@ -54,15 +54,15 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceSomeRegion();
+		enterSequence_someRegion_default();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceSomeRegion();
+		exitSequence_someRegion();
 
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -116,54 +116,54 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 		sCInterface.raiseEvent2();
 	}
 
-	private boolean checkSomeRegion_ATr0() {
+	private boolean check_someRegion_A_tr0() {
 		return sCInterface.event2;
 	}
 
-	private boolean checkMain_region_ATr0() {
+	private boolean check_main_region_A_tr0() {
 		return sCInterface.event1;
 	}
 
-	private boolean checkMain_region_ATr1() {
+	private boolean check_main_region_A_tr1() {
 		return sCInterface.event1;
 	}
 
-	private boolean checkMain_region_ATr2() {
+	private boolean check_main_region_A_tr2() {
 		return sCInterface.event1;
 	}
 
-	private boolean checkMain_region_ATr3() {
+	private boolean check_main_region_A_tr3() {
 		return (sCInterface.event2) && !isStateActive(State.someRegion_B);
 	}
 
-	private void effectSomeRegion_ATr0() {
-		exitSequenceSomeRegion_A();
+	private void effect_someRegion_A_tr0() {
+		exitSequence_someRegion_A();
 
-		enterSequenceSomeRegion_B();
+		enterSequence_someRegion_B_default();
 	}
 
-	private void effectMain_region_ATr0() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_C();
+		enterSequence_main_region_C_default();
 	}
 
-	private void effectMain_region_ATr1() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr1() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_B();
+		enterSequence_main_region_B_default();
 	}
 
-	private void effectMain_region_ATr2() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr2() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_D();
+		enterSequence_main_region_D_default();
 	}
 
-	private void effectMain_region_ATr3() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr3() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_E();
+		enterSequence_main_region_E_default();
 	}
 
 	/* Entry action for statechart 'PriorityValues'. */
@@ -175,108 +175,108 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceSomeRegion_A() {
+	private void enterSequence_someRegion_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.someRegion_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceSomeRegion_B() {
+	private void enterSequence_someRegion_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.someRegion_B;
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_B() {
+	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.main_region_B;
 	}
 
 	/* 'default' enter sequence for state C */
-	private void enterSequenceMain_region_C() {
+	private void enterSequence_main_region_C_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.main_region_C;
 	}
 
 	/* 'default' enter sequence for state D */
-	private void enterSequenceMain_region_D() {
+	private void enterSequence_main_region_D_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.main_region_D;
 	}
 
 	/* 'default' enter sequence for state E */
-	private void enterSequenceMain_region_E() {
+	private void enterSequence_main_region_E_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.main_region_E;
 	}
 
 	/* 'default' enter sequence for region someRegion */
-	private void enterSequenceSomeRegion() {
-		reactPriorityValues_someRegion__entry_Default();
+	private void enterSequence_someRegion_default() {
+		react_someRegion__entry_Default();
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactPriorityValues_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceSomeRegion_A() {
+	private void exitSequence_someRegion_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceSomeRegion_B() {
+	private void exitSequence_someRegion_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMain_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state C */
-	private void exitSequenceMain_region_C() {
+	private void exitSequence_main_region_C() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state D */
-	private void exitSequenceMain_region_D() {
+	private void exitSequence_main_region_D() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state E */
-	private void exitSequenceMain_region_E() {
+	private void exitSequence_main_region_E() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region someRegion */
-	private void exitSequenceSomeRegion() {
+	private void exitSequence_someRegion() {
 		switch (stateVector[0]) {
 			case someRegion_A :
-				exitSequenceSomeRegion_A();
+				exitSequence_someRegion_A();
 				break;
 
 			case someRegion_B :
-				exitSequenceSomeRegion_B();
+				exitSequence_someRegion_B();
 				break;
 
 			default :
@@ -285,26 +285,26 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[1]) {
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			case main_region_B :
-				exitSequenceMain_region_B();
+				exitSequence_main_region_B();
 				break;
 
 			case main_region_C :
-				exitSequenceMain_region_C();
+				exitSequence_main_region_C();
 				break;
 
 			case main_region_D :
-				exitSequenceMain_region_D();
+				exitSequence_main_region_D();
 				break;
 
 			case main_region_E :
-				exitSequenceMain_region_E();
+				exitSequence_main_region_E();
 				break;
 
 			default :
@@ -313,29 +313,29 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	/* The reactions of state A. */
-	private void reactSomeRegion_A() {
-		if (checkSomeRegion_ATr0()) {
-			effectSomeRegion_ATr0();
+	private void react_someRegion_A() {
+		if (check_someRegion_A_tr0()) {
+			effect_someRegion_A_tr0();
 		}
 	}
 
 	/* The reactions of state B. */
-	private void reactSomeRegion_B() {
+	private void react_someRegion_B() {
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
-		if (checkMain_region_ATr0()) {
-			effectMain_region_ATr0();
+	private void react_main_region_A() {
+		if (check_main_region_A_tr0()) {
+			effect_main_region_A_tr0();
 		} else {
-			if (checkMain_region_ATr1()) {
-				effectMain_region_ATr1();
+			if (check_main_region_A_tr1()) {
+				effect_main_region_A_tr1();
 			} else {
-				if (checkMain_region_ATr2()) {
-					effectMain_region_ATr2();
+				if (check_main_region_A_tr2()) {
+					effect_main_region_A_tr2();
 				} else {
-					if (checkMain_region_ATr3()) {
-						effectMain_region_ATr3();
+					if (check_main_region_A_tr3()) {
+						effect_main_region_A_tr3();
 					}
 				}
 			}
@@ -343,29 +343,29 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 	}
 
 	/* The reactions of state B. */
-	private void reactMain_region_B() {
+	private void react_main_region_B() {
 	}
 
 	/* The reactions of state C. */
-	private void reactMain_region_C() {
+	private void react_main_region_C() {
 	}
 
 	/* The reactions of state D. */
-	private void reactMain_region_D() {
+	private void react_main_region_D() {
 	}
 
 	/* The reactions of state E. */
-	private void reactMain_region_E() {
+	private void react_main_region_E() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactPriorityValues_someRegion__entry_Default() {
-		enterSequenceSomeRegion_A();
+	private void react_someRegion__entry_Default() {
+		enterSequence_someRegion_A_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactPriorityValues_main_region__entry_Default() {
-		enterSequenceMain_region_A();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 
 	public void runCycle() {
@@ -376,25 +376,25 @@ public class PriorityValuesStatemachine implements IPriorityValuesStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case someRegion_A :
-					reactSomeRegion_A();
+					react_someRegion_A();
 					break;
 				case someRegion_B :
-					reactSomeRegion_B();
+					react_someRegion_B();
 					break;
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				case main_region_B :
-					reactMain_region_B();
+					react_main_region_B();
 					break;
 				case main_region_C :
-					reactMain_region_C();
+					react_main_region_C();
 					break;
 				case main_region_D :
-					reactMain_region_D();
+					react_main_region_D();
 					break;
 				case main_region_E :
-					reactMain_region_E();
+					react_main_region_E();
 					break;
 				default :
 					// $NullState$

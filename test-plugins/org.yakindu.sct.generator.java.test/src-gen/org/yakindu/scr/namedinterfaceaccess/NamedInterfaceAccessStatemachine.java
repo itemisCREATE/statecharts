@@ -108,15 +108,15 @@ public class NamedInterfaceAccessStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceRegion_1();
+		enterSequence_region_1_default();
 
-		enterSequenceRegion1();
+		enterSequence__region1_default();
 	}
 
 	public void exit() {
-		exitSequenceRegion_1();
+		exitSequence_region_1();
 
-		exitSequenceRegion1();
+		exitSequence__region1();
 
 		exitAction();
 	}
@@ -166,84 +166,84 @@ public class NamedInterfaceAccessStatemachine
 		return sCIUser;
 	}
 
-	private boolean checkRegion_1_IdleTr0() {
+	private boolean check_region_1_Idle_tr0() {
 		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number1;
 	}
 
-	private boolean checkRegion_1_Number1PressedTr0() {
+	private boolean check_region_1_Number1Pressed_tr0() {
 		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number2;
 	}
 
-	private boolean checkRegion_1_Number1PressedTr1() {
+	private boolean check_region_1_Number1Pressed_tr1() {
 		return sCIUser.numberPressed;
 	}
 
-	private boolean checkRegion_1_Number2PressedTr0() {
+	private boolean check_region_1_Number2Pressed_tr0() {
 		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number3;
 	}
 
-	private boolean checkRegion_1_Number2PressedTr1() {
+	private boolean check_region_1_Number2Pressed_tr1() {
 		return sCIUser.numberPressed;
 	}
 
-	private boolean checkRegion_1_Number3PressedTr0() {
+	private boolean check_region_1_Number3Pressed_tr0() {
 		return sCIUser.numberPressed;
 	}
 
-	private boolean checkRegion1_ClosedTr0() {
+	private boolean check__region1_Closed_tr0() {
 		return sCISafe.open;
 	}
 
-	private boolean checkRegion1_OpenTr0() {
+	private boolean check__region1_Open_tr0() {
 		return sCISafe.close;
 	}
 
-	private void effectRegion_1_IdleTr0() {
-		exitSequenceRegion_1_Idle();
+	private void effect_region_1_Idle_tr0() {
+		exitSequence_region_1_Idle();
 
-		enterSequenceRegion_1_Number1Pressed();
+		enterSequence_region_1_Number1Pressed_default();
 	}
 
-	private void effectRegion_1_Number1PressedTr0() {
-		exitSequenceRegion_1_Number1Pressed();
+	private void effect_region_1_Number1Pressed_tr0() {
+		exitSequence_region_1_Number1Pressed();
 
-		enterSequenceRegion_1_Number2Pressed();
+		enterSequence_region_1_Number2Pressed_default();
 	}
 
-	private void effectRegion_1_Number1PressedTr1() {
-		exitSequenceRegion_1_Number1Pressed();
+	private void effect_region_1_Number1Pressed_tr1() {
+		exitSequence_region_1_Number1Pressed();
 
-		enterSequenceRegion_1_Idle();
+		enterSequence_region_1_Idle_default();
 	}
 
-	private void effectRegion_1_Number2PressedTr0() {
-		exitSequenceRegion_1_Number2Pressed();
+	private void effect_region_1_Number2Pressed_tr0() {
+		exitSequence_region_1_Number2Pressed();
 
-		enterSequenceRegion_1_Number3Pressed();
+		enterSequence_region_1_Number3Pressed_default();
 	}
 
-	private void effectRegion_1_Number2PressedTr1() {
-		exitSequenceRegion_1_Number2Pressed();
+	private void effect_region_1_Number2Pressed_tr1() {
+		exitSequence_region_1_Number2Pressed();
 
-		enterSequenceRegion_1_Idle();
+		enterSequence_region_1_Idle_default();
 	}
 
-	private void effectRegion_1_Number3PressedTr0() {
-		exitSequenceRegion_1_Number3Pressed();
+	private void effect_region_1_Number3Pressed_tr0() {
+		exitSequence_region_1_Number3Pressed();
 
-		enterSequenceRegion_1_Idle();
+		enterSequence_region_1_Idle_default();
 	}
 
-	private void effectRegion1_ClosedTr0() {
-		exitSequenceRegion1_Closed();
+	private void effect__region1_Closed_tr0() {
+		exitSequence__region1_Closed();
 
-		enterSequenceRegion1_Open();
+		enterSequence__region1_Open_default();
 	}
 
-	private void effectRegion1_OpenTr0() {
-		exitSequenceRegion1_Open();
+	private void effect__region1_Open_tr0() {
+		exitSequence__region1_Open();
 
-		enterSequenceRegion1_Closed();
+		enterSequence__region1_Closed_default();
 	}
 
 	/* Entry action for statechart 'NamedInterfaceAccess'. */
@@ -251,12 +251,12 @@ public class NamedInterfaceAccessStatemachine
 	}
 
 	/* Entry action for state 'Idle'. */
-	private void entryActionRegion_1_Idle() {
+	private void entryAction_region_1_Idle() {
 		sCISafe.raiseClose();
 	}
 
 	/* Entry action for state 'Number3Pressed'. */
-	private void entryActionRegion_1_Number3Pressed() {
+	private void entryAction_region_1_Number3Pressed() {
 		sCISafe.raiseOpen();
 	}
 
@@ -265,108 +265,108 @@ public class NamedInterfaceAccessStatemachine
 	}
 
 	/* 'default' enter sequence for state Idle */
-	private void enterSequenceRegion_1_Idle() {
-		entryActionRegion_1_Idle();
+	private void enterSequence_region_1_Idle_default() {
+		entryAction_region_1_Idle();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.region_1_Idle;
 	}
 
 	/* 'default' enter sequence for state Number1Pressed */
-	private void enterSequenceRegion_1_Number1Pressed() {
+	private void enterSequence_region_1_Number1Pressed_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.region_1_Number1Pressed;
 	}
 
 	/* 'default' enter sequence for state Number2Pressed */
-	private void enterSequenceRegion_1_Number2Pressed() {
+	private void enterSequence_region_1_Number2Pressed_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.region_1_Number2Pressed;
 	}
 
 	/* 'default' enter sequence for state Number3Pressed */
-	private void enterSequenceRegion_1_Number3Pressed() {
-		entryActionRegion_1_Number3Pressed();
+	private void enterSequence_region_1_Number3Pressed_default() {
+		entryAction_region_1_Number3Pressed();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.region_1_Number3Pressed;
 	}
 
 	/* 'default' enter sequence for state Closed */
-	private void enterSequenceRegion1_Closed() {
+	private void enterSequence__region1_Closed_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State._region1_Closed;
 	}
 
 	/* 'default' enter sequence for state Open */
-	private void enterSequenceRegion1_Open() {
+	private void enterSequence__region1_Open_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State._region1_Open;
 	}
 
 	/* 'default' enter sequence for region region 1 */
-	private void enterSequenceRegion_1() {
-		reactNamedInterfaceAccess_region_1__entry_Default();
+	private void enterSequence_region_1_default() {
+		react_region_1__entry_Default();
 	}
 
 	/* 'default' enter sequence for region null */
-	private void enterSequenceRegion1() {
-		reactNamedInterfaceAccess__region1__entry_Default();
+	private void enterSequence__region1_default() {
+		react__region1__entry_Default();
 	}
 
 	/* Default exit sequence for state Idle */
-	private void exitSequenceRegion_1_Idle() {
+	private void exitSequence_region_1_Idle() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Number1Pressed */
-	private void exitSequenceRegion_1_Number1Pressed() {
+	private void exitSequence_region_1_Number1Pressed() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Number2Pressed */
-	private void exitSequenceRegion_1_Number2Pressed() {
+	private void exitSequence_region_1_Number2Pressed() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Number3Pressed */
-	private void exitSequenceRegion_1_Number3Pressed() {
+	private void exitSequence_region_1_Number3Pressed() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Closed */
-	private void exitSequenceRegion1_Closed() {
+	private void exitSequence__region1_Closed() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Open */
-	private void exitSequenceRegion1_Open() {
+	private void exitSequence__region1_Open() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region region 1 */
-	private void exitSequenceRegion_1() {
+	private void exitSequence_region_1() {
 		switch (stateVector[0]) {
 			case region_1_Idle :
-				exitSequenceRegion_1_Idle();
+				exitSequence_region_1_Idle();
 				break;
 
 			case region_1_Number1Pressed :
-				exitSequenceRegion_1_Number1Pressed();
+				exitSequence_region_1_Number1Pressed();
 				break;
 
 			case region_1_Number2Pressed :
-				exitSequenceRegion_1_Number2Pressed();
+				exitSequence_region_1_Number2Pressed();
 				break;
 
 			case region_1_Number3Pressed :
-				exitSequenceRegion_1_Number3Pressed();
+				exitSequence_region_1_Number3Pressed();
 				break;
 
 			default :
@@ -375,14 +375,14 @@ public class NamedInterfaceAccessStatemachine
 	}
 
 	/* Default exit sequence for region null */
-	private void exitSequenceRegion1() {
+	private void exitSequence__region1() {
 		switch (stateVector[1]) {
 			case _region1_Closed :
-				exitSequenceRegion1_Closed();
+				exitSequence__region1_Closed();
 				break;
 
 			case _region1_Open :
-				exitSequenceRegion1_Open();
+				exitSequence__region1_Open();
 				break;
 
 			default :
@@ -391,63 +391,63 @@ public class NamedInterfaceAccessStatemachine
 	}
 
 	/* The reactions of state Idle. */
-	private void reactRegion_1_Idle() {
-		if (checkRegion_1_IdleTr0()) {
-			effectRegion_1_IdleTr0();
+	private void react_region_1_Idle() {
+		if (check_region_1_Idle_tr0()) {
+			effect_region_1_Idle_tr0();
 		}
 	}
 
 	/* The reactions of state Number1Pressed. */
-	private void reactRegion_1_Number1Pressed() {
-		if (checkRegion_1_Number1PressedTr0()) {
-			effectRegion_1_Number1PressedTr0();
+	private void react_region_1_Number1Pressed() {
+		if (check_region_1_Number1Pressed_tr0()) {
+			effect_region_1_Number1Pressed_tr0();
 		} else {
-			if (checkRegion_1_Number1PressedTr1()) {
-				effectRegion_1_Number1PressedTr1();
+			if (check_region_1_Number1Pressed_tr1()) {
+				effect_region_1_Number1Pressed_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state Number2Pressed. */
-	private void reactRegion_1_Number2Pressed() {
-		if (checkRegion_1_Number2PressedTr0()) {
-			effectRegion_1_Number2PressedTr0();
+	private void react_region_1_Number2Pressed() {
+		if (check_region_1_Number2Pressed_tr0()) {
+			effect_region_1_Number2Pressed_tr0();
 		} else {
-			if (checkRegion_1_Number2PressedTr1()) {
-				effectRegion_1_Number2PressedTr1();
+			if (check_region_1_Number2Pressed_tr1()) {
+				effect_region_1_Number2Pressed_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state Number3Pressed. */
-	private void reactRegion_1_Number3Pressed() {
-		if (checkRegion_1_Number3PressedTr0()) {
-			effectRegion_1_Number3PressedTr0();
+	private void react_region_1_Number3Pressed() {
+		if (check_region_1_Number3Pressed_tr0()) {
+			effect_region_1_Number3Pressed_tr0();
 		}
 	}
 
 	/* The reactions of state Closed. */
-	private void reactRegion1_Closed() {
-		if (checkRegion1_ClosedTr0()) {
-			effectRegion1_ClosedTr0();
+	private void react__region1_Closed() {
+		if (check__region1_Closed_tr0()) {
+			effect__region1_Closed_tr0();
 		}
 	}
 
 	/* The reactions of state Open. */
-	private void reactRegion1_Open() {
-		if (checkRegion1_OpenTr0()) {
-			effectRegion1_OpenTr0();
+	private void react__region1_Open() {
+		if (check__region1_Open_tr0()) {
+			effect__region1_Open_tr0();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactNamedInterfaceAccess_region_1__entry_Default() {
-		enterSequenceRegion_1_Idle();
+	private void react_region_1__entry_Default() {
+		enterSequence_region_1_Idle_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactNamedInterfaceAccess__region1__entry_Default() {
-		enterSequenceRegion1_Closed();
+	private void react__region1__entry_Default() {
+		enterSequence__region1_Closed_default();
 	}
 
 	public void runCycle() {
@@ -458,22 +458,22 @@ public class NamedInterfaceAccessStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case region_1_Idle :
-					reactRegion_1_Idle();
+					react_region_1_Idle();
 					break;
 				case region_1_Number1Pressed :
-					reactRegion_1_Number1Pressed();
+					react_region_1_Number1Pressed();
 					break;
 				case region_1_Number2Pressed :
-					reactRegion_1_Number2Pressed();
+					react_region_1_Number2Pressed();
 					break;
 				case region_1_Number3Pressed :
-					reactRegion_1_Number3Pressed();
+					react_region_1_Number3Pressed();
 					break;
 				case _region1_Closed :
-					reactRegion1_Closed();
+					react__region1_Closed();
 					break;
 				case _region1_Open :
-					reactRegion1_Open();
+					react__region1_Open();
 					break;
 				default :
 					// $NullState$

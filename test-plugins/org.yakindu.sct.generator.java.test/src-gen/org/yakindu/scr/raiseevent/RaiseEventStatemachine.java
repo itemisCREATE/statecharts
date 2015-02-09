@@ -60,15 +60,15 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 
-		enterSequenceSecond_region();
+		enterSequence_second_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
-		exitSequenceSecond_region();
+		exitSequence_second_region();
 
 		exitAction();
 	}
@@ -117,24 +117,24 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 		sCInterface.raiseE2();
 	}
 
-	private boolean checkMain_region_StateATr0() {
+	private boolean check_main_region_StateA_tr0() {
 		return sCInterface.e2;
 	}
 
-	private boolean checkSecond_region_SateATr0() {
+	private boolean check_second_region_SateA_tr0() {
 		return sCInterface.e1;
 	}
 
-	private void effectMain_region_StateATr0() {
-		exitSequenceMain_region_StateA();
+	private void effect_main_region_StateA_tr0() {
+		exitSequence_main_region_StateA();
 
-		enterSequenceMain_region_StateB();
+		enterSequence_main_region_StateB_default();
 	}
 
-	private void effectSecond_region_SateATr0() {
-		exitSequenceSecond_region_SateA();
+	private void effect_second_region_SateA_tr0() {
+		exitSequence_second_region_SateA();
 
-		enterSequenceSecond_region_StateB();
+		enterSequence_second_region_StateB_default();
 	}
 
 	/* Entry action for statechart 'RaiseEvent'. */
@@ -142,7 +142,7 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	/* Entry action for state 'StateB'. */
-	private void entryActionMain_region_StateB() {
+	private void entryAction_main_region_StateB() {
 		sCInterface.raiseE1();
 	}
 
@@ -151,74 +151,74 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	/* 'default' enter sequence for state StateA */
-	private void enterSequenceMain_region_StateA() {
+	private void enterSequence_main_region_StateA_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateA;
 	}
 
 	/* 'default' enter sequence for state StateB */
-	private void enterSequenceMain_region_StateB() {
-		entryActionMain_region_StateB();
+	private void enterSequence_main_region_StateB_default() {
+		entryAction_main_region_StateB();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_StateB;
 	}
 
 	/* 'default' enter sequence for state SateA */
-	private void enterSequenceSecond_region_SateA() {
+	private void enterSequence_second_region_SateA_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.second_region_SateA;
 	}
 
 	/* 'default' enter sequence for state StateB */
-	private void enterSequenceSecond_region_StateB() {
+	private void enterSequence_second_region_StateB_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.second_region_StateB;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactRaiseEvent_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* 'default' enter sequence for region second region */
-	private void enterSequenceSecond_region() {
-		reactRaiseEvent_second_region__entry_Default();
+	private void enterSequence_second_region_default() {
+		react_second_region__entry_Default();
 	}
 
 	/* Default exit sequence for state StateA */
-	private void exitSequenceMain_region_StateA() {
+	private void exitSequence_main_region_StateA() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state StateB */
-	private void exitSequenceMain_region_StateB() {
+	private void exitSequence_main_region_StateB() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state SateA */
-	private void exitSequenceSecond_region_SateA() {
+	private void exitSequence_second_region_SateA() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state StateB */
-	private void exitSequenceSecond_region_StateB() {
+	private void exitSequence_second_region_StateB() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_StateA :
-				exitSequenceMain_region_StateA();
+				exitSequence_main_region_StateA();
 				break;
 
 			case main_region_StateB :
-				exitSequenceMain_region_StateB();
+				exitSequence_main_region_StateB();
 				break;
 
 			default :
@@ -227,14 +227,14 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	/* Default exit sequence for region second region */
-	private void exitSequenceSecond_region() {
+	private void exitSequence_second_region() {
 		switch (stateVector[1]) {
 			case second_region_SateA :
-				exitSequenceSecond_region_SateA();
+				exitSequence_second_region_SateA();
 				break;
 
 			case second_region_StateB :
-				exitSequenceSecond_region_StateB();
+				exitSequence_second_region_StateB();
 				break;
 
 			default :
@@ -243,35 +243,35 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 	}
 
 	/* The reactions of state StateA. */
-	private void reactMain_region_StateA() {
-		if (checkMain_region_StateATr0()) {
-			effectMain_region_StateATr0();
+	private void react_main_region_StateA() {
+		if (check_main_region_StateA_tr0()) {
+			effect_main_region_StateA_tr0();
 		}
 	}
 
 	/* The reactions of state StateB. */
-	private void reactMain_region_StateB() {
+	private void react_main_region_StateB() {
 	}
 
 	/* The reactions of state SateA. */
-	private void reactSecond_region_SateA() {
-		if (checkSecond_region_SateATr0()) {
-			effectSecond_region_SateATr0();
+	private void react_second_region_SateA() {
+		if (check_second_region_SateA_tr0()) {
+			effect_second_region_SateA_tr0();
 		}
 	}
 
 	/* The reactions of state StateB. */
-	private void reactSecond_region_StateB() {
+	private void react_second_region_StateB() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactRaiseEvent_main_region__entry_Default() {
-		enterSequenceMain_region_StateA();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_StateA_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactRaiseEvent_second_region__entry_Default() {
-		enterSequenceSecond_region_SateA();
+	private void react_second_region__entry_Default() {
+		enterSequence_second_region_SateA_default();
 	}
 
 	public void runCycle() {
@@ -282,16 +282,16 @@ public class RaiseEventStatemachine implements IRaiseEventStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_StateA :
-					reactMain_region_StateA();
+					react_main_region_StateA();
 					break;
 				case main_region_StateB :
-					reactMain_region_StateB();
+					react_main_region_StateB();
 					break;
 				case second_region_SateA :
-					reactSecond_region_SateA();
+					react_second_region_SateA();
 					break;
 				case second_region_StateB :
-					reactSecond_region_StateB();
+					react_second_region_StateB();
 					break;
 				default :
 					// $NullState$

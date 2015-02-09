@@ -343,11 +343,11 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceAuto();
+		enterSequence_auto_default();
 	}
 
 	public void exit() {
-		exitSequenceAuto();
+		exitSequence_auto();
 
 		exitAction();
 	}
@@ -583,16 +583,16 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 		sCInterface.setWhile(value);
 	}
 
-	private boolean checkAuto_charTr0() {
+	private boolean check_auto_char_tr0() {
 		return (sCInterface.auto) && sCInterface.case_ID;
 	}
 
-	private void effectAuto_charTr0() {
-		exitSequenceAuto_char();
+	private void effect_auto_char_tr0() {
+		exitSequence_auto_char();
 
 		sCInterface.do_ID += 1;
 
-		enterSequenceAuto_loop();
+		enterSequence_auto_loop_default();
 	}
 
 	/* Entry action for statechart 'CKeywords'. */
@@ -600,7 +600,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* Entry action for state 'char'. */
-	private void entryActionAuto_char() {
+	private void entryAction_auto_char() {
 		sCInterface.case_ID = true;
 
 		sCInterface.do_ID = 0;
@@ -655,7 +655,7 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* Entry action for state 'asm'. */
-	private void entryActionAuto_loop_switch_case_enum_asm() {
+	private void entryAction_auto_loop_switch_case_enum_asm() {
 		sCInterface.case_ID = false;
 
 		sCInterface.do_ID = 0;
@@ -714,28 +714,28 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* 'default' enter sequence for state char */
-	private void enterSequenceAuto_char() {
-		entryActionAuto_char();
+	private void enterSequence_auto_char_default() {
+		entryAction_auto_char();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.auto_char;
 	}
 
 	/* 'default' enter sequence for state loop */
-	private void enterSequenceAuto_loop() {
-		enterSequenceAuto_loop_switch();
+	private void enterSequence_auto_loop_default() {
+		enterSequence_auto_loop_switch_default();
 	}
 
 	/* 'default' enter sequence for state case */
-	private void enterSequenceAuto_loop_switch_case() {
-		enterSequenceAuto_loop_switch_case_enum();
+	private void enterSequence_auto_loop_switch_case_default() {
+		enterSequence_auto_loop_switch_case_enum_default();
 
 		historyVector[0] = stateVector[0];
 	}
 
 	/* 'default' enter sequence for state asm */
-	private void enterSequenceAuto_loop_switch_case_enum_asm() {
-		entryActionAuto_loop_switch_case_enum_asm();
+	private void enterSequence_auto_loop_switch_case_enum_asm_default() {
+		entryAction_auto_loop_switch_case_enum_asm();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.auto_loop_switch_case_enum_asm;
@@ -744,20 +744,20 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* 'default' enter sequence for region auto */
-	private void enterSequenceAuto() {
-		reactCKeywords_auto__entry_Default();
+	private void enterSequence_auto_default() {
+		react_auto__entry_Default();
 	}
 
 	/* 'default' enter sequence for region switch */
-	private void enterSequenceAuto_loop_switch() {
-		reactCKeywords_auto_loop_switch__entry_Default();
+	private void enterSequence_auto_loop_switch_default() {
+		react_auto_loop_switch__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child switch */
-	private void shallowEnterSequenceAuto_loop_switch() {
+	private void shallowEnterSequence_auto_loop_switch() {
 		switch (historyVector[0]) {
 			case auto_loop_switch_case_enum_asm :
-				enterSequenceAuto_loop_switch_case();
+				enterSequence_auto_loop_switch_case_default();
 				break;
 
 			default :
@@ -766,15 +766,15 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* 'default' enter sequence for region enum */
-	private void enterSequenceAuto_loop_switch_case_enum() {
-		reactCKeywords_auto_loop_switch_case_enum__entry_Default();
+	private void enterSequence_auto_loop_switch_case_enum_default() {
+		react_auto_loop_switch_case_enum__entry_Default();
 	}
 
 	/* deep enterSequence with history in child enum */
-	private void deepEnterSequenceAuto_loop_switch_case_enum() {
+	private void deepEnterSequence_auto_loop_switch_case_enum() {
 		switch (historyVector[1]) {
 			case auto_loop_switch_case_enum_asm :
-				enterSequenceAuto_loop_switch_case_enum_asm();
+				enterSequence_auto_loop_switch_case_enum_asm_default();
 				break;
 
 			default :
@@ -783,26 +783,26 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* Default exit sequence for state char */
-	private void exitSequenceAuto_char() {
+	private void exitSequence_auto_char() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state asm */
-	private void exitSequenceAuto_loop_switch_case_enum_asm() {
+	private void exitSequence_auto_loop_switch_case_enum_asm() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region auto */
-	private void exitSequenceAuto() {
+	private void exitSequence_auto() {
 		switch (stateVector[0]) {
 			case auto_char :
-				exitSequenceAuto_char();
+				exitSequence_auto_char();
 				break;
 
 			case auto_loop_switch_case_enum_asm :
-				exitSequenceAuto_loop_switch_case_enum_asm();
+				exitSequence_auto_loop_switch_case_enum_asm();
 				break;
 
 			default :
@@ -811,10 +811,10 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* Default exit sequence for region switch */
-	private void exitSequenceAuto_loop_switch() {
+	private void exitSequence_auto_loop_switch() {
 		switch (stateVector[0]) {
 			case auto_loop_switch_case_enum_asm :
-				exitSequenceAuto_loop_switch_case_enum_asm();
+				exitSequence_auto_loop_switch_case_enum_asm();
 				break;
 
 			default :
@@ -823,10 +823,10 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* Default exit sequence for region enum */
-	private void exitSequenceAuto_loop_switch_case_enum() {
+	private void exitSequence_auto_loop_switch_case_enum() {
 		switch (stateVector[0]) {
 			case auto_loop_switch_case_enum_asm :
-				exitSequenceAuto_loop_switch_case_enum_asm();
+				exitSequence_auto_loop_switch_case_enum_asm();
 				break;
 
 			default :
@@ -835,38 +835,38 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 	}
 
 	/* The reactions of state char. */
-	private void reactAuto_char() {
-		if (checkAuto_charTr0()) {
-			effectAuto_charTr0();
+	private void react_auto_char() {
+		if (check_auto_char_tr0()) {
+			effect_auto_char_tr0();
 		}
 	}
 
 	/* The reactions of state asm. */
-	private void reactAuto_loop_switch_case_enum_asm() {
+	private void react_auto_loop_switch_case_enum_asm() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactCKeywords_auto__entry_Default() {
-		enterSequenceAuto_char();
+	private void react_auto__entry_Default() {
+		enterSequence_auto_char_default();
 	}
 
 	/* Default react sequence for shallow history entry  */
-	private void reactCKeywords_auto_loop_switch__entry_Default() {
+	private void react_auto_loop_switch__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequenceAuto_loop_switch();
+			shallowEnterSequence_auto_loop_switch();
 		} else {
-			enterSequenceAuto_loop_switch_case();
+			enterSequence_auto_loop_switch_case_default();
 		}
 	}
 
 	/* Default react sequence for deep history entry  */
-	private void reactCKeywords_auto_loop_switch_case_enum__entry_Default() {
+	private void react_auto_loop_switch_case_enum__entry_Default() {
 		/* Enter the region with deep history */
 		if (historyVector[1] != State.$NullState$) {
-			deepEnterSequenceAuto_loop_switch_case_enum();
+			deepEnterSequence_auto_loop_switch_case_enum();
 		} else {
-			enterSequenceAuto_loop_switch_case_enum_asm();
+			enterSequence_auto_loop_switch_case_enum_asm_default();
 		}
 	}
 
@@ -878,10 +878,10 @@ public class CKeywordsStatemachine implements ICKeywordsStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case auto_char :
-					reactAuto_char();
+					react_auto_char();
 					break;
 				case auto_loop_switch_case_enum_asm :
-					reactAuto_loop_switch_case_enum_asm();
+					react_auto_loop_switch_case_enum_asm();
 					break;
 				default :
 					// $NullState$

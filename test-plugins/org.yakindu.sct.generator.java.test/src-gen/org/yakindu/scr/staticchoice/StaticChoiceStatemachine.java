@@ -57,11 +57,11 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -112,32 +112,32 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 		sCInterface.setNumber(value);
 	}
 
-	private boolean checkMain_region_StartTr0() {
+	private boolean check_main_region_Start_tr0() {
 		return true;
 	}
 
-	private boolean checkStaticChoice_main_region__choice_0Tr1() {
+	private boolean check_main_region__choice_0_tr1() {
 		return sCInterface.number == 2;
 	}
 
-	private boolean checkStaticChoice_main_region__choice_0Tr0() {
+	private boolean check_main_region__choice_0_tr0() {
 		return true;
 	}
 
-	private void effectMain_region_StartTr0() {
-		exitSequenceMain_region_Start();
+	private void effect_main_region_Start_tr0() {
+		exitSequence_main_region_Start();
 
 		sCInterface.number += 1;
 
-		reactStaticChoice_main_region__choice_0();
+		react_main_region__choice_0();
 	}
 
-	private void effectStaticChoice_main_region__choice_0Tr1() {
-		enterSequenceMain_region_A();
+	private void effect_main_region__choice_0_tr1() {
+		enterSequence_main_region_A_default();
 	}
 
-	private void effectStaticChoice_main_region__choice_0Tr0() {
-		enterSequenceMain_region_B();
+	private void effect_main_region__choice_0_tr0() {
+		enterSequence_main_region_B_default();
 	}
 
 	/* Entry action for statechart 'StaticChoice'. */
@@ -145,7 +145,7 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	}
 
 	/* Entry action for state 'Start'. */
-	private void entryActionMain_region_Start() {
+	private void entryAction_main_region_Start() {
 		sCInterface.number = 1;
 	}
 
@@ -154,61 +154,61 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	}
 
 	/* 'default' enter sequence for state Start */
-	private void enterSequenceMain_region_Start() {
-		entryActionMain_region_Start();
+	private void enterSequence_main_region_Start_default() {
+		entryAction_main_region_Start();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Start;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_B() {
+	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B;
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactStaticChoice_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state Start */
-	private void exitSequenceMain_region_Start() {
+	private void exitSequence_main_region_Start() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMain_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_Start :
-				exitSequenceMain_region_Start();
+				exitSequence_main_region_Start();
 				break;
 
 			case main_region_B :
-				exitSequenceMain_region_B();
+				exitSequence_main_region_B();
 				break;
 
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			default :
@@ -217,30 +217,30 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 	}
 
 	/* The reactions of state Start. */
-	private void reactMain_region_Start() {
-		effectMain_region_StartTr0();
+	private void react_main_region_Start() {
+		effect_main_region_Start_tr0();
 	}
 
 	/* The reactions of state B. */
-	private void reactMain_region_B() {
+	private void react_main_region_B() {
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
+	private void react_main_region_A() {
 	}
 
 	/* The reactions of state null. */
-	private void reactStaticChoice_main_region__choice_0() {
-		if (checkStaticChoice_main_region__choice_0Tr1()) {
-			effectStaticChoice_main_region__choice_0Tr1();
+	private void react_main_region__choice_0() {
+		if (check_main_region__choice_0_tr1()) {
+			effect_main_region__choice_0_tr1();
 		} else {
-			effectStaticChoice_main_region__choice_0Tr0();
+			effect_main_region__choice_0_tr0();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactStaticChoice_main_region__entry_Default() {
-		enterSequenceMain_region_Start();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_Start_default();
 	}
 
 	public void runCycle() {
@@ -251,13 +251,13 @@ public class StaticChoiceStatemachine implements IStaticChoiceStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_Start :
-					reactMain_region_Start();
+					react_main_region_Start();
 					break;
 				case main_region_B :
-					reactMain_region_B();
+					react_main_region_B();
 					break;
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				default :
 					// $NullState$
