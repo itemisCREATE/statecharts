@@ -31,7 +31,7 @@ testsuite AllTests {
 	LogicalAndTests, 
 	LogicalOrTests,
 	NamedInterfaceAccess,
-	OperationsWithoutBraces,
+//	OperationsWithoutBraces,
 	OutEventLifeCycle,
 	Parenthesis,
 	PriorityValues,
