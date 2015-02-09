@@ -11,6 +11,19 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 			RuntimeService = true
 		}
+		
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+		
 	}
 	
 	statechart AssignmentAsExpression {
@@ -23,6 +36,18 @@ GeneratorModel for yakindu::java {
 			TimerService = true
 			RuntimeService = true
 		}
+		
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
 	}
 	
 	statechart BooleanExpressions {
@@ -34,6 +59,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}	
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -46,6 +83,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -58,6 +107,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	} 
 	
@@ -70,8 +131,44 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	} 
+	
+	statechart CKeywords {
+		feature Outlet {
+			targetProject = "org.yakindu.sct.generator.java.test"
+			targetFolder = "src-gen"
+		}
+
+		feature GeneralFeatures {
+			TimerService = true
+			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
+	}
 	
 	statechart ConditionalExpressions {
 		feature Outlet {
@@ -82,6 +179,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 	
@@ -94,6 +203,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 	
@@ -106,6 +227,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -118,6 +251,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 		
@@ -130,6 +275,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -142,6 +299,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -154,6 +323,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 			
@@ -166,6 +347,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -178,6 +371,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -190,6 +395,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 			
@@ -202,6 +419,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -218,6 +447,14 @@ GeneratorModel for yakindu::java {
 		
 		feature FunctionInlining {
 			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 		
 	}
@@ -231,6 +468,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -243,6 +492,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -255,6 +516,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -267,6 +540,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -279,6 +564,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -291,6 +588,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -303,6 +612,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 			
@@ -315,6 +636,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -327,6 +660,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -339,7 +684,19 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
- 		}
+ 		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
 	}		
 	
 	statechart LocalReactions {
@@ -351,7 +708,19 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
- 		}
+ 		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
 	}	
 		
 	statechart LogicalAnd {
@@ -363,6 +732,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 		
 	}
@@ -376,6 +757,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 		
 	}	
@@ -389,6 +782,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -401,6 +806,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 	
@@ -413,7 +830,19 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
- 		}
+ 		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
 	}
 	
 	statechart Operations {
@@ -425,7 +854,19 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
- 		}
+ 		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}
 	}	
 	
 	statechart OutEventLifeCycle {
@@ -437,6 +878,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 	
@@ -449,6 +902,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -461,6 +926,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -473,6 +950,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 
@@ -485,6 +974,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -497,6 +998,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 
@@ -509,6 +1022,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -521,6 +1046,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -533,6 +1070,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -545,6 +1094,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 
 	}
@@ -558,6 +1119,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -570,6 +1143,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 	
@@ -582,6 +1167,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -594,6 +1191,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 
@@ -606,6 +1215,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -618,6 +1239,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 
@@ -630,6 +1263,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 
@@ -642,6 +1287,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -654,6 +1311,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 	
@@ -666,6 +1335,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -678,6 +1359,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}
 		
@@ -690,6 +1383,18 @@ GeneratorModel for yakindu::java {
 		feature GeneralFeatures {
 			TimerService = true
 			RuntimeService = true
+		}		
+			
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}
 	}	
 }

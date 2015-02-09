@@ -24,8 +24,6 @@ public interface IJavaKeywordsStatemachine extends IStatemachine {
 		public void setChar(boolean value);
 		public boolean getClass_ID();
 		public void setClass_ID(boolean value);
-		public boolean getConst();
-		public void setConst(boolean value);
 		public boolean getContinue();
 		public void setContinue(boolean value);
 		public boolean getDo();

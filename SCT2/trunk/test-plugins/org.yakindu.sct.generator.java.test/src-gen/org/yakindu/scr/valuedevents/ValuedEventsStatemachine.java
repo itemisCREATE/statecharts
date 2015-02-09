@@ -2,6 +2,9 @@ package org.yakindu.scr.valuedevents;
 
 public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean integerEvent;
@@ -21,7 +24,6 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		}
 
 		private long myVar;
-
 		public long getMyVar() {
 			return myVar;
 		}
@@ -65,40 +67,15 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	public void enter() {
 		entryAction();
 
-		sCInterface.raiseIntegerEvent(2 * 21);
+		enterSequenceMain_region();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
-
-		nextStateIndex = 1;
-		stateVector[1] = State._region1_B;
+		enterSequenceRegion1();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
+		exitSequenceMain_region();
 
-			default :
-				break;
-		}
-
-		switch (stateVector[1]) {
-			case _region1_B :
-				nextStateIndex = 1;
-				stateVector[1] = State.$NullState$;
-				break;
-
-			case _region1_C :
-				nextStateIndex = 1;
-				stateVector[1] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceRegion1();
 
 		exitAction();
 	}
@@ -149,12 +126,105 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		sCInterface.setMyVar(value);
 	}
 
+	private boolean checkRegion1_BTr0() {
+		return sCInterface.integerEvent;
+	}
+
+	private void effectRegion1_BTr0() {
+		exitSequenceRegion1_B();
+
+		sCInterface.myVar = sCInterface.integerEventValue;
+
+		enterSequenceRegion1_C();
+	}
+
 	/* Entry action for statechart 'ValuedEvents'. */
 	private void entryAction() {
 	}
 
+	/* Entry action for state 'A'. */
+	private void entryActionMain_region_A() {
+		sCInterface.raiseIntegerEvent(2 * 21);
+	}
+
 	/* Exit action for state 'ValuedEvents'. */
 	private void exitAction() {
+	}
+
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		entryActionMain_region_A();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceRegion1_B() {
+		nextStateIndex = 1;
+		stateVector[1] = State._region1_B;
+	}
+
+	/* 'default' enter sequence for state C */
+	private void enterSequenceRegion1_C() {
+		nextStateIndex = 1;
+		stateVector[1] = State._region1_C;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactValuedEvents_main_region__entry_Default();
+	}
+
+	/* 'default' enter sequence for region null */
+	private void enterSequenceRegion1() {
+		reactValuedEvents__region1__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceRegion1_B() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state C */
+	private void exitSequenceRegion1_C() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region null */
+	private void exitSequenceRegion1() {
+		switch (stateVector[1]) {
+			case _region1_B :
+				exitSequenceRegion1_B();
+				break;
+
+			case _region1_C :
+				exitSequenceRegion1_C();
+				break;
+
+			default :
+				break;
+		}
 	}
 
 	/* The reactions of state A. */
@@ -163,19 +233,23 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 	/* The reactions of state B. */
 	private void reactRegion1_B() {
-		if (sCInterface.integerEvent) {
-			nextStateIndex = 1;
-			stateVector[1] = State.$NullState$;
-
-			sCInterface.myVar = sCInterface.integerEventValue;
-
-			nextStateIndex = 1;
-			stateVector[1] = State._region1_C;
+		if (checkRegion1_BTr0()) {
+			effectRegion1_BTr0();
 		}
 	}
 
 	/* The reactions of state C. */
 	private void reactRegion1_C() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactValuedEvents_main_region__entry_Default() {
+		enterSequenceMain_region_A();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactValuedEvents__region1__entry_Default() {
+		enterSequenceRegion1_B();
 	}
 
 	public void runCycle() {

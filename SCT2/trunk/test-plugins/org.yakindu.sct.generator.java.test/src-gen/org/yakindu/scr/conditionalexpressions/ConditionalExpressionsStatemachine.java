@@ -4,6 +4,9 @@ public class ConditionalExpressionsStatemachine
 		implements
 			IConditionalExpressionsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -13,7 +16,6 @@ public class ConditionalExpressionsStatemachine
 		}
 
 		private long condition;
-
 		public long getCondition() {
 			return condition;
 		}
@@ -23,7 +25,6 @@ public class ConditionalExpressionsStatemachine
 		}
 
 		private boolean boolVar;
-
 		public boolean getBoolVar() {
 			return boolVar;
 		}
@@ -69,27 +70,11 @@ public class ConditionalExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		sCInterface.condition = sCInterface.boolVar ? 1 : 0;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -145,29 +130,97 @@ public class ConditionalExpressionsStatemachine
 		sCInterface.setBoolVar(value);
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return (sCInterface.e) && 1 == (sCInterface.boolVar ? 1 : 0);
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_B();
+	}
+
 	/* Entry action for statechart 'ConditionalExpressions'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'A'. */
+	private void entryActionMain_region_A() {
+		sCInterface.condition = sCInterface.boolVar ? 1 : 0;
+	}
+
+	/* Entry action for state 'B'. */
+	private void entryActionMain_region_B() {
+		sCInterface.condition = ((sCInterface.condition == 2) ? 1 : 2);
 	}
 
 	/* Exit action for state 'ConditionalExpressions'. */
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		entryActionMain_region_A();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_B() {
+		entryActionMain_region_B();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactConditionalExpressions_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			case main_region_B :
+				exitSequenceMain_region_B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if ((sCInterface.e) && 1 == (sCInterface.boolVar ? 1 : 0)) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.condition = ((sCInterface.condition == 2) ? 1 : 2);
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_B;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactConditionalExpressions_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

@@ -4,6 +4,9 @@ public class NamedInterfaceAccessStatemachine
 		implements
 			INamedInterfaceAccessStatemachine {
 
+	static {
+	}
+
 	private final class SCISafeImpl implements SCISafe {
 
 		private boolean open;
@@ -105,55 +108,15 @@ public class NamedInterfaceAccessStatemachine
 	public void enter() {
 		entryAction();
 
-		sCISafe.raiseClose();
+		enterSequenceRegion_1();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.region_1_Idle;
-
-		nextStateIndex = 1;
-		stateVector[1] = State._region1_Closed;
+		enterSequenceRegion1();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case region_1_Idle :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
+		exitSequenceRegion_1();
 
-			case region_1_Number1Pressed :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case region_1_Number2Pressed :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case region_1_Number3Pressed :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
-
-		switch (stateVector[1]) {
-			case _region1_Closed :
-				nextStateIndex = 1;
-				stateVector[1] = State.$NullState$;
-				break;
-
-			case _region1_Open :
-				nextStateIndex = 1;
-				stateVector[1] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceRegion1();
 
 		exitAction();
 	}
@@ -203,102 +166,288 @@ public class NamedInterfaceAccessStatemachine
 		return sCIUser;
 	}
 
+	private boolean checkRegion_1_IdleTr0() {
+		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number1;
+	}
+
+	private boolean checkRegion_1_Number1PressedTr0() {
+		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number2;
+	}
+
+	private boolean checkRegion_1_Number1PressedTr1() {
+		return sCIUser.numberPressed;
+	}
+
+	private boolean checkRegion_1_Number2PressedTr0() {
+		return (sCIUser.numberPressed) && sCIUser.numberPressedValue == number3;
+	}
+
+	private boolean checkRegion_1_Number2PressedTr1() {
+		return sCIUser.numberPressed;
+	}
+
+	private boolean checkRegion_1_Number3PressedTr0() {
+		return sCIUser.numberPressed;
+	}
+
+	private boolean checkRegion1_ClosedTr0() {
+		return sCISafe.open;
+	}
+
+	private boolean checkRegion1_OpenTr0() {
+		return sCISafe.close;
+	}
+
+	private void effectRegion_1_IdleTr0() {
+		exitSequenceRegion_1_Idle();
+
+		enterSequenceRegion_1_Number1Pressed();
+	}
+
+	private void effectRegion_1_Number1PressedTr0() {
+		exitSequenceRegion_1_Number1Pressed();
+
+		enterSequenceRegion_1_Number2Pressed();
+	}
+
+	private void effectRegion_1_Number1PressedTr1() {
+		exitSequenceRegion_1_Number1Pressed();
+
+		enterSequenceRegion_1_Idle();
+	}
+
+	private void effectRegion_1_Number2PressedTr0() {
+		exitSequenceRegion_1_Number2Pressed();
+
+		enterSequenceRegion_1_Number3Pressed();
+	}
+
+	private void effectRegion_1_Number2PressedTr1() {
+		exitSequenceRegion_1_Number2Pressed();
+
+		enterSequenceRegion_1_Idle();
+	}
+
+	private void effectRegion_1_Number3PressedTr0() {
+		exitSequenceRegion_1_Number3Pressed();
+
+		enterSequenceRegion_1_Idle();
+	}
+
+	private void effectRegion1_ClosedTr0() {
+		exitSequenceRegion1_Closed();
+
+		enterSequenceRegion1_Open();
+	}
+
+	private void effectRegion1_OpenTr0() {
+		exitSequenceRegion1_Open();
+
+		enterSequenceRegion1_Closed();
+	}
+
 	/* Entry action for statechart 'NamedInterfaceAccess'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'Idle'. */
+	private void entryActionRegion_1_Idle() {
+		sCISafe.raiseClose();
+	}
+
+	/* Entry action for state 'Number3Pressed'. */
+	private void entryActionRegion_1_Number3Pressed() {
+		sCISafe.raiseOpen();
 	}
 
 	/* Exit action for state 'NamedInterfaceAccess'. */
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state Idle */
+	private void enterSequenceRegion_1_Idle() {
+		entryActionRegion_1_Idle();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.region_1_Idle;
+	}
+
+	/* 'default' enter sequence for state Number1Pressed */
+	private void enterSequenceRegion_1_Number1Pressed() {
+		nextStateIndex = 0;
+		stateVector[0] = State.region_1_Number1Pressed;
+	}
+
+	/* 'default' enter sequence for state Number2Pressed */
+	private void enterSequenceRegion_1_Number2Pressed() {
+		nextStateIndex = 0;
+		stateVector[0] = State.region_1_Number2Pressed;
+	}
+
+	/* 'default' enter sequence for state Number3Pressed */
+	private void enterSequenceRegion_1_Number3Pressed() {
+		entryActionRegion_1_Number3Pressed();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.region_1_Number3Pressed;
+	}
+
+	/* 'default' enter sequence for state Closed */
+	private void enterSequenceRegion1_Closed() {
+		nextStateIndex = 1;
+		stateVector[1] = State._region1_Closed;
+	}
+
+	/* 'default' enter sequence for state Open */
+	private void enterSequenceRegion1_Open() {
+		nextStateIndex = 1;
+		stateVector[1] = State._region1_Open;
+	}
+
+	/* 'default' enter sequence for region region 1 */
+	private void enterSequenceRegion_1() {
+		reactNamedInterfaceAccess_region_1__entry_Default();
+	}
+
+	/* 'default' enter sequence for region null */
+	private void enterSequenceRegion1() {
+		reactNamedInterfaceAccess__region1__entry_Default();
+	}
+
+	/* Default exit sequence for state Idle */
+	private void exitSequenceRegion_1_Idle() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Number1Pressed */
+	private void exitSequenceRegion_1_Number1Pressed() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Number2Pressed */
+	private void exitSequenceRegion_1_Number2Pressed() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Number3Pressed */
+	private void exitSequenceRegion_1_Number3Pressed() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Closed */
+	private void exitSequenceRegion1_Closed() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Open */
+	private void exitSequenceRegion1_Open() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region region 1 */
+	private void exitSequenceRegion_1() {
+		switch (stateVector[0]) {
+			case region_1_Idle :
+				exitSequenceRegion_1_Idle();
+				break;
+
+			case region_1_Number1Pressed :
+				exitSequenceRegion_1_Number1Pressed();
+				break;
+
+			case region_1_Number2Pressed :
+				exitSequenceRegion_1_Number2Pressed();
+				break;
+
+			case region_1_Number3Pressed :
+				exitSequenceRegion_1_Number3Pressed();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region null */
+	private void exitSequenceRegion1() {
+		switch (stateVector[1]) {
+			case _region1_Closed :
+				exitSequenceRegion1_Closed();
+				break;
+
+			case _region1_Open :
+				exitSequenceRegion1_Open();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state Idle. */
 	private void reactRegion_1_Idle() {
-		if ((sCIUser.numberPressed) && sCIUser.numberPressedValue == number1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.region_1_Number1Pressed;
+		if (checkRegion_1_IdleTr0()) {
+			effectRegion_1_IdleTr0();
 		}
 	}
 
 	/* The reactions of state Number1Pressed. */
 	private void reactRegion_1_Number1Pressed() {
-		if ((sCIUser.numberPressed) && sCIUser.numberPressedValue == number2) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.region_1_Number2Pressed;
+		if (checkRegion_1_Number1PressedTr0()) {
+			effectRegion_1_Number1PressedTr0();
 		} else {
-			if (sCIUser.numberPressed) {
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				sCISafe.raiseClose();
-
-				nextStateIndex = 0;
-				stateVector[0] = State.region_1_Idle;
+			if (checkRegion_1_Number1PressedTr1()) {
+				effectRegion_1_Number1PressedTr1();
 			}
 		}
 	}
 
 	/* The reactions of state Number2Pressed. */
 	private void reactRegion_1_Number2Pressed() {
-		if ((sCIUser.numberPressed) && sCIUser.numberPressedValue == number3) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCISafe.raiseOpen();
-
-			nextStateIndex = 0;
-			stateVector[0] = State.region_1_Number3Pressed;
+		if (checkRegion_1_Number2PressedTr0()) {
+			effectRegion_1_Number2PressedTr0();
 		} else {
-			if (sCIUser.numberPressed) {
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				sCISafe.raiseClose();
-
-				nextStateIndex = 0;
-				stateVector[0] = State.region_1_Idle;
+			if (checkRegion_1_Number2PressedTr1()) {
+				effectRegion_1_Number2PressedTr1();
 			}
 		}
 	}
 
 	/* The reactions of state Number3Pressed. */
 	private void reactRegion_1_Number3Pressed() {
-		if (sCIUser.numberPressed) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCISafe.raiseClose();
-
-			nextStateIndex = 0;
-			stateVector[0] = State.region_1_Idle;
+		if (checkRegion_1_Number3PressedTr0()) {
+			effectRegion_1_Number3PressedTr0();
 		}
 	}
 
 	/* The reactions of state Closed. */
 	private void reactRegion1_Closed() {
-		if (sCISafe.open) {
-			nextStateIndex = 1;
-			stateVector[1] = State.$NullState$;
-
-			nextStateIndex = 1;
-			stateVector[1] = State._region1_Open;
+		if (checkRegion1_ClosedTr0()) {
+			effectRegion1_ClosedTr0();
 		}
 	}
 
 	/* The reactions of state Open. */
 	private void reactRegion1_Open() {
-		if (sCISafe.close) {
-			nextStateIndex = 1;
-			stateVector[1] = State.$NullState$;
-
-			nextStateIndex = 1;
-			stateVector[1] = State._region1_Closed;
+		if (checkRegion1_OpenTr0()) {
+			effectRegion1_OpenTr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactNamedInterfaceAccess_region_1__entry_Default() {
+		enterSequenceRegion_1_Idle();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactNamedInterfaceAccess__region1__entry_Default() {
+		enterSequenceRegion1_Closed();
 	}
 
 	public void runCycle() {

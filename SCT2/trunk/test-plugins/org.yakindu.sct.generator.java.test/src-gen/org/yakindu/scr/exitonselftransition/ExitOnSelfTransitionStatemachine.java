@@ -4,6 +4,9 @@ public class ExitOnSelfTransitionStatemachine
 		implements
 			IExitOnSelfTransitionStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -19,7 +22,6 @@ public class ExitOnSelfTransitionStatemachine
 		}
 
 		private long entryCount;
-
 		public long getEntryCount() {
 			return entryCount;
 		}
@@ -29,7 +31,6 @@ public class ExitOnSelfTransitionStatemachine
 		}
 
 		private long exitCount;
-
 		public long getExitCount() {
 			return exitCount;
 		}
@@ -76,29 +77,11 @@ public class ExitOnSelfTransitionStatemachine
 	public void enter() {
 		entryAction();
 
-		sCInterface.entryCount += 1;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				sCInterface.exitCount += 1;
-				break;
-
-			case main_region_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -157,50 +140,124 @@ public class ExitOnSelfTransitionStatemachine
 		sCInterface.setExitCount(value);
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return sCInterface.e;
+	}
+
+	private boolean checkMain_region_ATr1() {
+		return sCInterface.f;
+	}
+
+	private boolean checkMain_region_BTr0() {
+		return sCInterface.f;
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_A();
+	}
+
+	private void effectMain_region_ATr1() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_B();
+	}
+
+	private void effectMain_region_BTr0() {
+		exitSequenceMain_region_B();
+
+		enterSequenceMain_region_A();
+	}
+
 	/* Entry action for statechart 'ExitOnSelfTransition'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'A'. */
+	private void entryActionMain_region_A() {
+		sCInterface.entryCount += 1;
 	}
 
 	/* Exit action for state 'ExitOnSelfTransition'. */
 	private void exitAction() {
 	}
 
+	/* Exit action for state 'A'. */
+	private void exitActionMain_region_A() {
+		sCInterface.exitCount += 1;
+	}
+
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		entryActionMain_region_A();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactExitOnSelfTransition_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		exitActionMain_region_A();
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			case main_region_B :
+				exitSequenceMain_region_B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCInterface.e) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.exitCount += 1;
-
-			sCInterface.entryCount += 1;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_A;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		} else {
-			if (sCInterface.f) {
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				sCInterface.exitCount += 1;
-
-				nextStateIndex = 0;
-				stateVector[0] = State.main_region_B;
+			if (checkMain_region_ATr1()) {
+				effectMain_region_ATr1();
 			}
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (sCInterface.f) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.entryCount += 1;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_A;
+		if (checkMain_region_BTr0()) {
+			effectMain_region_BTr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactExitOnSelfTransition_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

@@ -4,10 +4,12 @@ public class AssignmentAsExpressionStatemachine
 		implements
 			IAssignmentAsExpressionStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long a;
-
 		public long getA() {
 			return a;
 		}
@@ -17,7 +19,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long b;
-
 		public long getB() {
 			return b;
 		}
@@ -27,7 +28,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long c;
-
 		public long getC() {
 			return c;
 		}
@@ -37,7 +37,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long d;
-
 		public long getD() {
 			return d;
 		}
@@ -47,7 +46,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long e;
-
 		public long getE() {
 			return e;
 		}
@@ -57,7 +55,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long f;
-
 		public long getF() {
 			return f;
 		}
@@ -67,7 +64,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long g;
-
 		public long getG() {
 			return g;
 		}
@@ -77,7 +73,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long h;
-
 		public long getH() {
 			return h;
 		}
@@ -87,7 +82,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long i;
-
 		public long getI() {
 			return i;
 		}
@@ -97,7 +91,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long i1;
-
 		public long getI1() {
 			return i1;
 		}
@@ -107,7 +100,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long j;
-
 		public long getJ() {
 			return j;
 		}
@@ -117,7 +109,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long j1;
-
 		public long getJ1() {
 			return j1;
 		}
@@ -127,7 +118,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long k;
-
 		public long getK() {
 			return k;
 		}
@@ -137,7 +127,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long k1;
-
 		public long getK1() {
 			return k1;
 		}
@@ -147,7 +136,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long l;
-
 		public long getL() {
 			return l;
 		}
@@ -157,7 +145,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long m;
-
 		public long getM() {
 			return m;
 		}
@@ -167,7 +154,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long n;
-
 		public long getN() {
 			return n;
 		}
@@ -177,7 +163,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long p;
-
 		public long getP() {
 			return p;
 		}
@@ -187,7 +172,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long r;
-
 		public long getR() {
 			return r;
 		}
@@ -197,7 +181,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long t;
-
 		public long getT() {
 			return t;
 		}
@@ -207,7 +190,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long u;
-
 		public long getU() {
 			return u;
 		}
@@ -217,7 +199,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long v;
-
 		public long getV() {
 			return v;
 		}
@@ -227,7 +208,6 @@ public class AssignmentAsExpressionStatemachine
 		}
 
 		private long w;
-
 		public long getW() {
 			return w;
 		}
@@ -311,62 +291,11 @@ public class AssignmentAsExpressionStatemachine
 	public void enter() {
 		entryAction();
 
-		sCInterface.a = (sCInterface.b = 5) + 4;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Add;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_Add :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_Multiply :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_Divide :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_Modulo :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_Shift :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_boolean_And :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_boolean_Or :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_boolean_Xor :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_Subtract :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -578,91 +507,349 @@ public class AssignmentAsExpressionStatemachine
 		sCInterface.setW(value);
 	}
 
+	private boolean checkMain_region_AddTr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_MultiplyTr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_DivideTr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_ModuloTr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_ShiftTr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_boolean_AndTr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_boolean_OrTr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_SubtractTr0() {
+		return true;
+	}
+
+	private void effectMain_region_AddTr0() {
+		exitSequenceMain_region_Add();
+
+		enterSequenceMain_region_Subtract();
+	}
+
+	private void effectMain_region_MultiplyTr0() {
+		exitSequenceMain_region_Multiply();
+
+		enterSequenceMain_region_Divide();
+	}
+
+	private void effectMain_region_DivideTr0() {
+		exitSequenceMain_region_Divide();
+
+		enterSequenceMain_region_Modulo();
+	}
+
+	private void effectMain_region_ModuloTr0() {
+		exitSequenceMain_region_Modulo();
+
+		enterSequenceMain_region_Shift();
+	}
+
+	private void effectMain_region_ShiftTr0() {
+		exitSequenceMain_region_Shift();
+
+		enterSequenceMain_region_boolean_And();
+	}
+
+	private void effectMain_region_boolean_AndTr0() {
+		exitSequenceMain_region_boolean_And();
+
+		enterSequenceMain_region_boolean_Or();
+	}
+
+	private void effectMain_region_boolean_OrTr0() {
+		exitSequenceMain_region_boolean_Or();
+
+		enterSequenceMain_region_boolean_Xor();
+	}
+
+	private void effectMain_region_SubtractTr0() {
+		exitSequenceMain_region_Subtract();
+
+		enterSequenceMain_region_Multiply();
+	}
+
 	/* Entry action for statechart 'AssignmentAsExpression'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'Add'. */
+	private void entryActionMain_region_Add() {
+		sCInterface.a = (sCInterface.b = 5) + 4;
+	}
+
+	/* Entry action for state 'Multiply'. */
+	private void entryActionMain_region_Multiply() {
+		sCInterface.e *= (sCInterface.f *= 5) * 3;
+	}
+
+	/* Entry action for state 'Divide'. */
+	private void entryActionMain_region_Divide() {
+		sCInterface.g /= (sCInterface.h /= 2) / 4;
+	}
+
+	/* Entry action for state 'Modulo'. */
+	private void entryActionMain_region_Modulo() {
+		sCInterface.i %= (sCInterface.i1 %= 4) % 4;
+	}
+
+	/* Entry action for state 'Shift'. */
+	private void entryActionMain_region_Shift() {
+		sCInterface.j <<= (sCInterface.j1 >>= 1);
+
+		sCInterface.k >>= (sCInterface.k1 >>= 2);
+	}
+
+	/* Entry action for state 'boolean And'. */
+	private void entryActionMain_region_boolean_And() {
+		sCInterface.l &= (sCInterface.n &= sCInterface.m);
+	}
+
+	/* Entry action for state 'boolean Or'. */
+	private void entryActionMain_region_boolean_Or() {
+		sCInterface.p |= (sCInterface.r |= sCInterface.t);
+	}
+
+	/* Entry action for state 'boolean Xor'. */
+	private void entryActionMain_region_boolean_Xor() {
+		sCInterface.u ^= (sCInterface.v ^= sCInterface.w);
+	}
+
+	/* Entry action for state 'Subtract'. */
+	private void entryActionMain_region_Subtract() {
+		sCInterface.d -= (sCInterface.c -= 5) - 1;
 	}
 
 	/* Exit action for state 'AssignmentAsExpression'. */
 	private void exitAction() {
 	}
 
-	/* The reactions of state Add. */
-	private void reactMain_region_Add() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		sCInterface.d -= (sCInterface.c -= 5) - 1;
+	/* 'default' enter sequence for state Add */
+	private void enterSequenceMain_region_Add() {
+		entryActionMain_region_Add();
 
 		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Subtract;
+		stateVector[0] = State.main_region_Add;
 	}
 
-	/* The reactions of state Multiply. */
-	private void reactMain_region_Multiply() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+	/* 'default' enter sequence for state Multiply */
+	private void enterSequenceMain_region_Multiply() {
+		entryActionMain_region_Multiply();
 
-		sCInterface.g /= (sCInterface.h /= 2) / 4;
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_Multiply;
+	}
+
+	/* 'default' enter sequence for state Divide */
+	private void enterSequenceMain_region_Divide() {
+		entryActionMain_region_Divide();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Divide;
 	}
 
-	/* The reactions of state Divide. */
-	private void reactMain_region_Divide() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		sCInterface.i %= (sCInterface.i1 %= 4) % 4;
+	/* 'default' enter sequence for state Modulo */
+	private void enterSequenceMain_region_Modulo() {
+		entryActionMain_region_Modulo();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Modulo;
 	}
 
-	/* The reactions of state Modulo. */
-	private void reactMain_region_Modulo() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		sCInterface.j <<= (sCInterface.j1 >>= 1);
-
-		sCInterface.k >>= (sCInterface.k1 >>= 2);
+	/* 'default' enter sequence for state Shift */
+	private void enterSequenceMain_region_Shift() {
+		entryActionMain_region_Shift();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Shift;
 	}
 
-	/* The reactions of state Shift. */
-	private void reactMain_region_Shift() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		sCInterface.l &= (sCInterface.n &= sCInterface.m);
+	/* 'default' enter sequence for state boolean And */
+	private void enterSequenceMain_region_boolean_And() {
+		entryActionMain_region_boolean_And();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_boolean_And;
 	}
 
-	/* The reactions of state boolean And. */
-	private void reactMain_region_boolean_And() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		sCInterface.p |= (sCInterface.r |= sCInterface.t);
+	/* 'default' enter sequence for state boolean Or */
+	private void enterSequenceMain_region_boolean_Or() {
+		entryActionMain_region_boolean_Or();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_boolean_Or;
 	}
 
-	/* The reactions of state boolean Or. */
-	private void reactMain_region_boolean_Or() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		sCInterface.u ^= (sCInterface.v ^= sCInterface.w);
+	/* 'default' enter sequence for state boolean Xor */
+	private void enterSequenceMain_region_boolean_Xor() {
+		entryActionMain_region_boolean_Xor();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_boolean_Xor;
+	}
+
+	/* 'default' enter sequence for state Subtract */
+	private void enterSequenceMain_region_Subtract() {
+		entryActionMain_region_Subtract();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_Subtract;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactAssignmentAsExpression_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state Add */
+	private void exitSequenceMain_region_Add() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Multiply */
+	private void exitSequenceMain_region_Multiply() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Divide */
+	private void exitSequenceMain_region_Divide() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Modulo */
+	private void exitSequenceMain_region_Modulo() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Shift */
+	private void exitSequenceMain_region_Shift() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state boolean And */
+	private void exitSequenceMain_region_boolean_And() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state boolean Or */
+	private void exitSequenceMain_region_boolean_Or() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state boolean Xor */
+	private void exitSequenceMain_region_boolean_Xor() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state Subtract */
+	private void exitSequenceMain_region_Subtract() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_Add :
+				exitSequenceMain_region_Add();
+				break;
+
+			case main_region_Multiply :
+				exitSequenceMain_region_Multiply();
+				break;
+
+			case main_region_Divide :
+				exitSequenceMain_region_Divide();
+				break;
+
+			case main_region_Modulo :
+				exitSequenceMain_region_Modulo();
+				break;
+
+			case main_region_Shift :
+				exitSequenceMain_region_Shift();
+				break;
+
+			case main_region_boolean_And :
+				exitSequenceMain_region_boolean_And();
+				break;
+
+			case main_region_boolean_Or :
+				exitSequenceMain_region_boolean_Or();
+				break;
+
+			case main_region_boolean_Xor :
+				exitSequenceMain_region_boolean_Xor();
+				break;
+
+			case main_region_Subtract :
+				exitSequenceMain_region_Subtract();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* The reactions of state Add. */
+	private void reactMain_region_Add() {
+		effectMain_region_AddTr0();
+	}
+
+	/* The reactions of state Multiply. */
+	private void reactMain_region_Multiply() {
+		effectMain_region_MultiplyTr0();
+	}
+
+	/* The reactions of state Divide. */
+	private void reactMain_region_Divide() {
+		effectMain_region_DivideTr0();
+	}
+
+	/* The reactions of state Modulo. */
+	private void reactMain_region_Modulo() {
+		effectMain_region_ModuloTr0();
+	}
+
+	/* The reactions of state Shift. */
+	private void reactMain_region_Shift() {
+		effectMain_region_ShiftTr0();
+	}
+
+	/* The reactions of state boolean And. */
+	private void reactMain_region_boolean_And() {
+		effectMain_region_boolean_AndTr0();
+	}
+
+	/* The reactions of state boolean Or. */
+	private void reactMain_region_boolean_Or() {
+		effectMain_region_boolean_OrTr0();
 	}
 
 	/* The reactions of state boolean Xor. */
@@ -671,13 +858,12 @@ public class AssignmentAsExpressionStatemachine
 
 	/* The reactions of state Subtract. */
 	private void reactMain_region_Subtract() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		effectMain_region_SubtractTr0();
+	}
 
-		sCInterface.e *= (sCInterface.f *= 5) * 3;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Multiply;
+	/* Default react sequence for initial entry  */
+	private void reactAssignmentAsExpression_main_region__entry_Default() {
+		enterSequenceMain_region_Add();
 	}
 
 	public void runCycle() {

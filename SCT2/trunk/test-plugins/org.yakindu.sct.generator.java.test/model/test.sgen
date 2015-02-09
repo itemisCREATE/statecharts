@@ -55,7 +55,15 @@ GeneratorModel for sctunit::java {
 			targetFolder = "test-gen"			
 		}			
 	}
-	
+
+	test CKeywords{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.generator.java.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
 	test ConditionalExpression{
 		
 		feature Outlet{ 

@@ -2,6 +2,9 @@ package org.yakindu.scr.featurecalls;
 
 public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 
+	static {
+	}
+
 	private final class SCIMyInterfaceImpl implements SCIMyInterface {
 
 		private boolean event1;
@@ -11,7 +14,6 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		}
 
 		private long myInt;
-
 		public long getMyInt() {
 			return myInt;
 		}
@@ -55,25 +57,11 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -110,38 +98,105 @@ public class FeatureCallsStatemachine implements IFeatureCallsStatemachine {
 		return sCIMyInterface;
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return sCIMyInterface.event1;
+	}
+
+	private boolean checkMain_region_BTr0() {
+		return sCIMyInterface.event1;
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_B();
+	}
+
+	private void effectMain_region_BTr0() {
+		exitSequenceMain_region_B();
+
+		enterSequenceMain_region_A();
+	}
+
 	/* Entry action for statechart 'FeatureCalls'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'B'. */
+	private void entryActionMain_region_B() {
+		sCIMyInterface.myInt = 42;
+
+		sCIMyInterface.raiseEvent1();
 	}
 
 	/* Exit action for state 'FeatureCalls'. */
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_B() {
+		entryActionMain_region_B();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactFeatureCalls_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			case main_region_B :
+				exitSequenceMain_region_B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCIMyInterface.event1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCIMyInterface.myInt = 42;
-
-			sCIMyInterface.raiseEvent1();
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_B;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if (sCIMyInterface.event1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_A;
+		if (checkMain_region_BTr0()) {
+			effectMain_region_BTr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactFeatureCalls_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

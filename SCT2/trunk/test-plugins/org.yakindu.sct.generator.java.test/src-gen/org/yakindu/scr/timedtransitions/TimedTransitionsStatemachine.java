@@ -5,6 +5,9 @@ public class TimedTransitionsStatemachine
 		implements
 			ITimedTransitionsStatemachine {
 
+	static {
+	}
+
 	private final boolean[] timeEvents = new boolean[1];
 
 	public enum State {
@@ -40,29 +43,11 @@ public class TimedTransitionsStatemachine
 		}
 		entryAction();
 
-		timer.setTimer(this, 0, 2 * 1000, false);
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_Start;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_Start :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				timer.unsetTimer(this, 0);
-				break;
-
-			case main_region_End :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -121,29 +106,98 @@ public class TimedTransitionsStatemachine
 		timeEvents[eventID] = true;
 	}
 
+	private boolean checkMain_region_StartTr0() {
+		return timeEvents[0];
+	}
+
+	private void effectMain_region_StartTr0() {
+		exitSequenceMain_region_Start();
+
+		enterSequenceMain_region_End();
+	}
+
 	/* Entry action for statechart 'TimedTransitions'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'Start'. */
+	private void entryActionMain_region_Start() {
+
+		timer.setTimer(this, 0, 2 * 1000, false);
 	}
 
 	/* Exit action for state 'TimedTransitions'. */
 	private void exitAction() {
 	}
 
+	/* Exit action for state 'Start'. */
+	private void exitActionMain_region_Start() {
+		timer.unsetTimer(this, 0);
+	}
+
+	/* 'default' enter sequence for state Start */
+	private void enterSequenceMain_region_Start() {
+		entryActionMain_region_Start();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_Start;
+	}
+
+	/* 'default' enter sequence for state End */
+	private void enterSequenceMain_region_End() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_End;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactTimedTransitions_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state Start */
+	private void exitSequenceMain_region_Start() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		exitActionMain_region_Start();
+	}
+
+	/* Default exit sequence for state End */
+	private void exitSequenceMain_region_End() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_Start :
+				exitSequenceMain_region_Start();
+				break;
+
+			case main_region_End :
+				exitSequenceMain_region_End();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state Start. */
 	private void reactMain_region_Start() {
-		if (timeEvents[0]) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			timer.unsetTimer(this, 0);
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_End;
+		if (checkMain_region_StartTr0()) {
+			effectMain_region_StartTr0();
 		}
 	}
 
 	/* The reactions of state End. */
 	private void reactMain_region_End() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactTimedTransitions_main_region__entry_Default() {
+		enterSequenceMain_region_Start();
 	}
 
 	public void runCycle() {

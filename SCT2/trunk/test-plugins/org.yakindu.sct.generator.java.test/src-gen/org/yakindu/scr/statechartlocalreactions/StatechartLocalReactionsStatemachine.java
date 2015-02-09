@@ -4,10 +4,12 @@ public class StatechartLocalReactionsStatemachine
 		implements
 			IStatechartLocalReactionsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long myInt;
-
 		public long getMyInt() {
 			return myInt;
 		}
@@ -47,38 +49,15 @@ public class StatechartLocalReactionsStatemachine
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_S1;
+		enterSequenceMain_region();
 
-		nextStateIndex = 1;
-		stateVector[1] = State.region2_a;
+		enterSequenceRegion2();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_S1 :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
+		exitSequenceMain_region();
 
-			case main_region_S2 :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
-
-		switch (stateVector[1]) {
-			case region2_a :
-				nextStateIndex = 1;
-				stateVector[1] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceRegion2();
 
 		exitAction();
 	}
@@ -128,8 +107,28 @@ public class StatechartLocalReactionsStatemachine
 		return true;
 	}
 
+	private boolean checkMain_region_S1Tr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_S2Tr0() {
+		return true;
+	}
+
 	private void effectLr0() {
 		sCInterface.myInt += 1;
+	}
+
+	private void effectMain_region_S1Tr0() {
+		exitSequenceMain_region_S1();
+
+		enterSequenceMain_region_S2();
+	}
+
+	private void effectMain_region_S2Tr0() {
+		exitSequenceMain_region_S2();
+
+		enterSequenceMain_region_S1();
 	}
 
 	/* Entry action for statechart 'StatechartLocalReactions'. */
@@ -140,30 +139,106 @@ public class StatechartLocalReactionsStatemachine
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state S1 */
+	private void enterSequenceMain_region_S1() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_S1;
+	}
+
+	/* 'default' enter sequence for state S2 */
+	private void enterSequenceMain_region_S2() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_S2;
+	}
+
+	/* 'default' enter sequence for state a */
+	private void enterSequenceRegion2_a() {
+		nextStateIndex = 1;
+		stateVector[1] = State.region2_a;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactStatechartLocalReactions_main_region__entry_Default();
+	}
+
+	/* 'default' enter sequence for region region2 */
+	private void enterSequenceRegion2() {
+		reactStatechartLocalReactions_region2__entry_Default();
+	}
+
+	/* Default exit sequence for state S1 */
+	private void exitSequenceMain_region_S1() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state S2 */
+	private void exitSequenceMain_region_S2() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state a */
+	private void exitSequenceRegion2_a() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_S1 :
+				exitSequenceMain_region_S1();
+				break;
+
+			case main_region_S2 :
+				exitSequenceMain_region_S2();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region region2 */
+	private void exitSequenceRegion2() {
+		switch (stateVector[1]) {
+			case region2_a :
+				exitSequenceRegion2_a();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state S1. */
 	private void reactMain_region_S1() {
 		effectLr0();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_S2;
+		effectMain_region_S1Tr0();
 	}
 
 	/* The reactions of state S2. */
 	private void reactMain_region_S2() {
 		effectLr0();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_S1;
+		effectMain_region_S2Tr0();
 	}
 
 	/* The reactions of state a. */
 	private void reactRegion2_a() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactStatechartLocalReactions_main_region__entry_Default() {
+		enterSequenceMain_region_S1();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactStatechartLocalReactions_region2__entry_Default() {
+		enterSequenceRegion2_a();
 	}
 
 	public void runCycle() {

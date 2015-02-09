@@ -4,6 +4,9 @@ public class BooleanExpressionsStatemachine
 		implements
 			IBooleanExpressionsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -13,7 +16,6 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean myBool1;
-
 		public boolean getMyBool1() {
 			return myBool1;
 		}
@@ -23,7 +25,6 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean myBool2;
-
 		public boolean getMyBool2() {
 			return myBool2;
 		}
@@ -33,7 +34,6 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean and;
-
 		public boolean getAnd() {
 			return and;
 		}
@@ -43,7 +43,6 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean or;
-
 		public boolean getOr() {
 			return or;
 		}
@@ -53,7 +52,6 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean not;
-
 		public boolean getNot() {
 			return not;
 		}
@@ -63,7 +61,6 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean equal;
-
 		public boolean getEqual() {
 			return equal;
 		}
@@ -73,7 +70,6 @@ public class BooleanExpressionsStatemachine
 		}
 
 		private boolean notequal;
-
 		public boolean getNotequal() {
 			return notequal;
 		}
@@ -129,29 +125,11 @@ public class BooleanExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		sCInterface.myBool1 = true;
-
-		sCInterface.myBool2 = false;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_StateA :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_StateB :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -242,37 +220,107 @@ public class BooleanExpressionsStatemachine
 		sCInterface.setNotequal(value);
 	}
 
+	private boolean checkMain_region_StateATr0() {
+		return sCInterface.e1;
+	}
+
+	private void effectMain_region_StateATr0() {
+		exitSequenceMain_region_StateA();
+
+		enterSequenceMain_region_StateB();
+	}
+
 	/* Entry action for statechart 'BooleanExpressions'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'StateA'. */
+	private void entryActionMain_region_StateA() {
+		sCInterface.myBool1 = true;
+
+		sCInterface.myBool2 = false;
+	}
+
+	/* Entry action for state 'StateB'. */
+	private void entryActionMain_region_StateB() {
+		sCInterface.and = sCInterface.myBool1 && sCInterface.myBool2;
+
+		sCInterface.or = sCInterface.myBool1 || sCInterface.myBool2;
+
+		sCInterface.not = !sCInterface.myBool1;
+
+		sCInterface.equal = sCInterface.myBool1 == sCInterface.myBool2;
+
+		sCInterface.notequal = (sCInterface.myBool1 != sCInterface.myBool2);
 	}
 
 	/* Exit action for state 'BooleanExpressions'. */
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state StateA */
+	private void enterSequenceMain_region_StateA() {
+		entryActionMain_region_StateA();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	/* 'default' enter sequence for state StateB */
+	private void enterSequenceMain_region_StateB() {
+		entryActionMain_region_StateB();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateB;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactBooleanExpressions_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state StateA */
+	private void exitSequenceMain_region_StateA() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state StateB */
+	private void exitSequenceMain_region_StateB() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				exitSequenceMain_region_StateA();
+				break;
+
+			case main_region_StateB :
+				exitSequenceMain_region_StateB();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCInterface.e1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.and = sCInterface.myBool1 && sCInterface.myBool2;
-
-			sCInterface.or = sCInterface.myBool1 || sCInterface.myBool2;
-
-			sCInterface.not = !sCInterface.myBool1;
-
-			sCInterface.equal = sCInterface.myBool1 == sCInterface.myBool2;
-
-			sCInterface.notequal = (sCInterface.myBool1 != sCInterface.myBool2);
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_StateB;
+		if (checkMain_region_StateATr0()) {
+			effectMain_region_StateATr0();
 		}
 	}
 
 	/* The reactions of state StateB. */
 	private void reactMain_region_StateB() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactBooleanExpressions_main_region__entry_Default() {
+		enterSequenceMain_region_StateA();
 	}
 
 	public void runCycle() {

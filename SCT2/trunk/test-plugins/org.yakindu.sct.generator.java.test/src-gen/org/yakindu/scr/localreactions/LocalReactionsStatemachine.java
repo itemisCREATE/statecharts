@@ -2,10 +2,12 @@ package org.yakindu.scr.localreactions;
 
 public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long x;
-
 		public long getX() {
 			return x;
 		}
@@ -45,20 +47,11 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -100,6 +93,14 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		sCInterface.setX(value);
 	}
 
+	private boolean checkMain_region_ALr0() {
+		return sCInterface.x == 0;
+	}
+
+	private void effectMain_region_ALr0() {
+		sCInterface.x += 1;
+	}
+
 	/* Entry action for statechart 'LocalReactions'. */
 	private void entryAction() {
 	}
@@ -108,11 +109,45 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactLocalReactions_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCInterface.x == 0) {
-			sCInterface.x += 1;
+		if (checkMain_region_ALr0()) {
+			effectMain_region_ALr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactLocalReactions_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

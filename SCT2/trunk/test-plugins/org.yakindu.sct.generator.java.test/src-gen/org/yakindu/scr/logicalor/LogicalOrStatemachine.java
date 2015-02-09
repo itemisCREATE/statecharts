@@ -2,10 +2,12 @@ package org.yakindu.scr.logicalor;
 
 public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long x;
-
 		public long getX() {
 			return x;
 		}
@@ -15,7 +17,6 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		}
 
 		private boolean b;
-
 		public boolean getB() {
 			return b;
 		}
@@ -57,20 +58,11 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -119,6 +111,18 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 		sCInterface.setB(value);
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return sCInterface.x == 1;
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		sCInterface.b = ((sCInterface.x += 1) != 2 || (sCInterface.x *= 2) == 4);
+
+		enterSequenceMain_region_A();
+	}
+
 	/* Entry action for statechart 'LogicalOr'. */
 	private void entryAction() {
 	}
@@ -127,17 +131,45 @@ public class LogicalOrStatemachine implements ILogicalOrStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactLogicalOr_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCInterface.x == 1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.b = ((sCInterface.x += 1) != 2 || (sCInterface.x *= 2) == 4);
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_A;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactLogicalOr_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {
