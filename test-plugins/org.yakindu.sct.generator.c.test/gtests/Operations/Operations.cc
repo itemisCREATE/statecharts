@@ -1,5 +1,5 @@
 /**
-* Copyright (c) 2014 committers of YAKINDU and others.
+* Copyright (c) 2015 committers of YAKINDU and others.
 * All rights reserved. This program and the accompanying materials
 * are made available under the terms of the Eclipse Public License v1.0
 * which accompanies this distribution, and is available at
@@ -15,9 +15,17 @@
 
 Operations handle;
 
-TEST(StatemachineTest, OperationCallback) {
+TEST(StatemachineTest, OperationsTest) {
 	operations_init(&handle);
 	operations_enter(&handle);
+	operations_runCycle(&handle);
+	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_B));
+	operationsIface_raise_ev(&handle);
+	operations_runCycle(&handle);
+	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_C));
+	operationsIface_raise_ev(&handle);
+	operations_runCycle(&handle);
+	EXPECT_TRUE(operations_isActive(&handle, Operations_main_region_D));
 }
 
 		

@@ -1,0 +1,22 @@
+
+testgroup Operations for statechart Operations{
+	test OperationsTest { 
+		enter
+		 
+		cycle
+		assert active (Operations.main_region.B)
+		
+		
+		raise ev
+		cycle
+		
+		assert active(Operations.main_region.C)
+		
+		raise ev
+		cycle
+		
+		assert active(Operations.main_region.D)
+		 
+	} 
+}
+	
