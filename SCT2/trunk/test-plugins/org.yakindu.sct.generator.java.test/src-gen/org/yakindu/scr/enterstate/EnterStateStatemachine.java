@@ -61,11 +61,11 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceR();
+		enterSequence_r_default();
 	}
 
 	public void exit() {
-		exitSequenceR();
+		exitSequence_r();
 
 		exitAction();
 	}
@@ -117,34 +117,34 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		sCInterface.raiseG();
 	}
 
-	private boolean checkR_ATr0() {
+	private boolean check_r_A_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkR_ATr1() {
+	private boolean check_r_A_tr1() {
 		return sCInterface.f;
 	}
 
-	private boolean checkR_ATr2() {
+	private boolean check_r_A_tr2() {
 		return sCInterface.g;
 	}
 
-	private void effectR_ATr0() {
-		exitSequenceR_A();
+	private void effect_r_A_tr0() {
+		exitSequence_r_A();
 
-		enterSequenceR_B();
+		enterSequence_r_B_default();
 	}
 
-	private void effectR_ATr1() {
-		exitSequenceR_A();
+	private void effect_r_A_tr1() {
+		exitSequence_r_A();
 
-		enterSequenceR_B();
+		enterSequence_r_B_f();
 	}
 
-	private void effectR_ATr2() {
-		exitSequenceR_A();
+	private void effect_r_A_tr2() {
+		exitSequence_r_A();
 
-		enterSequenceR_B();
+		enterSequence_r_B_g();
 	}
 
 	/* Entry action for statechart 'EnterState'. */
@@ -156,84 +156,84 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceR_A() {
+	private void enterSequence_r_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.r_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceR_B() {
-		enterSequenceR_B_r();
+	private void enterSequence_r_B_default() {
+		enterSequence_r_B_r_default();
 	}
 
 	/* 'f' enter sequence for state B */
-	private void enterSequenceR_B() {
-		enterSequenceR_B_r();
+	private void enterSequence_r_B_f() {
+		enterSequence_r_B_r_f();
 	}
 
 	/* 'g' enter sequence for state B */
-	private void enterSequenceR_B() {
-		enterSequenceR_B_r();
+	private void enterSequence_r_B_g() {
+		enterSequence_r_B_r_default();
 	}
 
 	/* 'default' enter sequence for state E */
-	private void enterSequenceR_B_r_E() {
+	private void enterSequence_r_B_r_E_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.r_B_r_E;
 	}
 
 	/* 'default' enter sequence for state F */
-	private void enterSequenceR_B_r_F() {
+	private void enterSequence_r_B_r_F_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.r_B_r_F;
 	}
 
 	/* 'default' enter sequence for region r */
-	private void enterSequenceR() {
-		reactEnterState_r__entry_Default();
+	private void enterSequence_r_default() {
+		react_r__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r */
-	private void enterSequenceR_B_r() {
-		reactEnterState_r_B_r__entry_Default();
+	private void enterSequence_r_B_r_default() {
+		react_r_B_r__entry_Default();
 	}
 
 	/* 'f' enter sequence for region r */
-	private void enterSequenceR_B_r() {
-		reactEnterState_r_B_r_f();
+	private void enterSequence_r_B_r_f() {
+		react_r_B_r_f();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceR_A() {
+	private void exitSequence_r_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state E */
-	private void exitSequenceR_B_r_E() {
+	private void exitSequence_r_B_r_E() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state F */
-	private void exitSequenceR_B_r_F() {
+	private void exitSequence_r_B_r_F() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceR() {
+	private void exitSequence_r() {
 		switch (stateVector[0]) {
 			case r_A :
-				exitSequenceR_A();
+				exitSequence_r_A();
 				break;
 
 			case r_B_r_E :
-				exitSequenceR_B_r_E();
+				exitSequence_r_B_r_E();
 				break;
 
 			case r_B_r_F :
-				exitSequenceR_B_r_F();
+				exitSequence_r_B_r_F();
 				break;
 
 			default :
@@ -242,14 +242,14 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceR_B_r() {
+	private void exitSequence_r_B_r() {
 		switch (stateVector[0]) {
 			case r_B_r_E :
-				exitSequenceR_B_r_E();
+				exitSequence_r_B_r_E();
 				break;
 
 			case r_B_r_F :
-				exitSequenceR_B_r_F();
+				exitSequence_r_B_r_F();
 				break;
 
 			default :
@@ -258,41 +258,41 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	}
 
 	/* The reactions of state A. */
-	private void reactR_A() {
-		if (checkR_ATr0()) {
-			effectR_ATr0();
+	private void react_r_A() {
+		if (check_r_A_tr0()) {
+			effect_r_A_tr0();
 		} else {
-			if (checkR_ATr1()) {
-				effectR_ATr1();
+			if (check_r_A_tr1()) {
+				effect_r_A_tr1();
 			} else {
-				if (checkR_ATr2()) {
-					effectR_ATr2();
+				if (check_r_A_tr2()) {
+					effect_r_A_tr2();
 				}
 			}
 		}
 	}
 
 	/* The reactions of state E. */
-	private void reactR_B_r_E() {
+	private void react_r_B_r_E() {
 	}
 
 	/* The reactions of state F. */
-	private void reactR_B_r_F() {
+	private void react_r_B_r_F() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactEnterState_r__entry_Default() {
-		enterSequenceR_A();
+	private void react_r__entry_Default() {
+		enterSequence_r_A_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactEnterState_r_B_r__entry_Default() {
-		enterSequenceR_B_r_E();
+	private void react_r_B_r__entry_Default() {
+		enterSequence_r_B_r_E_default();
 	}
 
 	/* Default react sequence for initial entry f */
-	private void reactEnterState_r_B_r_f() {
-		enterSequenceR_B_r_F();
+	private void react_r_B_r_f() {
+		enterSequence_r_B_r_F_default();
 	}
 
 	public void runCycle() {
@@ -303,13 +303,13 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case r_A :
-					reactR_A();
+					react_r_A();
 					break;
 				case r_B_r_E :
-					reactR_B_r_E();
+					react_r_B_r_E();
 					break;
 				case r_B_r_F :
-					reactR_B_r_F();
+					react_r_B_r_F();
 					break;
 				default :
 					// $NullState$

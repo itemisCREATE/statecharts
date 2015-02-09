@@ -60,11 +60,11 @@ public class CastExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -117,26 +117,26 @@ public class CastExpressionsStatemachine
 		sCInterface.setIntValue(value);
 	}
 
-	private boolean checkMain_region_ATr0() {
+	private boolean check_main_region_A_tr0() {
 		return true;
 	}
 
-	private boolean checkMain_region_BTr0() {
+	private boolean check_main_region_B_tr0() {
 		return (true)
 				&& ((double) (sCInterface.realValue * 0.1)) > ((long) 1.4)
 				&& ((long) (sCInterface.realValue * sCInterface.intValue)) < ((double) 100);
 	}
 
-	private void effectMain_region_ATr0() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_B();
+		enterSequence_main_region_B_default();
 	}
 
-	private void effectMain_region_BTr0() {
-		exitSequenceMain_region_B();
+	private void effect_main_region_B_tr0() {
+		exitSequence_main_region_B();
 
-		enterSequenceMain_region_C();
+		enterSequence_main_region_C_default();
 	}
 
 	/* Entry action for statechart 'CastExpressions'. */
@@ -144,12 +144,12 @@ public class CastExpressionsStatemachine
 	}
 
 	/* Entry action for state 'B'. */
-	private void entryActionMain_region_B() {
+	private void entryAction_main_region_B() {
 		sCInterface.realValue = 3 * ((long) 5.5);
 	}
 
 	/* Entry action for state 'C'. */
-	private void entryActionMain_region_C() {
+	private void entryAction_main_region_C() {
 		sCInterface.realValue = ((long) (sCInterface.realValue
 				* sCInterface.intValue * 10.1));
 	}
@@ -159,63 +159,63 @@ public class CastExpressionsStatemachine
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_B() {
-		entryActionMain_region_B();
+	private void enterSequence_main_region_B_default() {
+		entryAction_main_region_B();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B;
 	}
 
 	/* 'default' enter sequence for state C */
-	private void enterSequenceMain_region_C() {
-		entryActionMain_region_C();
+	private void enterSequence_main_region_C_default() {
+		entryAction_main_region_C();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_C;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactCastExpressions_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMain_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state C */
-	private void exitSequenceMain_region_C() {
+	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			case main_region_B :
-				exitSequenceMain_region_B();
+				exitSequence_main_region_B();
 				break;
 
 			case main_region_C :
-				exitSequenceMain_region_C();
+				exitSequence_main_region_C();
 				break;
 
 			default :
@@ -224,24 +224,24 @@ public class CastExpressionsStatemachine
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
-		effectMain_region_ATr0();
+	private void react_main_region_A() {
+		effect_main_region_A_tr0();
 	}
 
 	/* The reactions of state B. */
-	private void reactMain_region_B() {
-		if (checkMain_region_BTr0()) {
-			effectMain_region_BTr0();
+	private void react_main_region_B() {
+		if (check_main_region_B_tr0()) {
+			effect_main_region_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
-	private void reactMain_region_C() {
+	private void react_main_region_C() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactCastExpressions_main_region__entry_Default() {
-		enterSequenceMain_region_A();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 
 	public void runCycle() {
@@ -252,13 +252,13 @@ public class CastExpressionsStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				case main_region_B :
-					reactMain_region_B();
+					react_main_region_B();
 					break;
 				case main_region_C :
-					reactMain_region_C();
+					react_main_region_C();
 					break;
 				default :
 					// $NullState$

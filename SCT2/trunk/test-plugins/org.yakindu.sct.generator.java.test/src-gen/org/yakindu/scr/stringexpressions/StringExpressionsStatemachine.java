@@ -147,11 +147,11 @@ public class StringExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -264,337 +264,337 @@ public class StringExpressionsStatemachine
 		sCInterface.setGuardStringEqual(value);
 	}
 
-	private boolean checkMain_region_AssignmentCheckedTr0() {
+	private boolean check_main_region_AssignmentChecked_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkMain_region_VarToVarCompareSucceededTr0() {
+	private boolean check_main_region_VarToVarCompareSucceeded_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkMain_region_VarToConstCompareSucceededTr0() {
+	private boolean check_main_region_VarToConstCompareSucceeded_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkMain_region_ConstToVarCompareSucceededTr0() {
+	private boolean check_main_region_ConstToVarCompareSucceeded_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_0Tr1() {
+	private boolean check_main_region__choice_0_tr1() {
 		return sCInterface.e;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_0Tr0() {
+	private boolean check_main_region__choice_0_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_1Tr1() {
+	private boolean check_main_region__choice_1_tr1() {
 		return (sCInterface.e)
 				&& (sCInterface.stringA == null
 						? sCInterface.stringA2 == null
 						: sCInterface.stringA.equals(sCInterface.stringA2));
 	}
 
-	private boolean checkStringExpressions_main_region__choice_1Tr0() {
+	private boolean check_main_region__choice_1_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_2Tr1() {
+	private boolean check_main_region__choice_2_tr1() {
 		return (sCInterface.e)
 				&& (sCInterface.stringA == null
 						? sCInterface.stringB != null
 						: !sCInterface.stringA.equals(sCInterface.stringB));
 	}
 
-	private boolean checkStringExpressions_main_region__choice_2Tr0() {
+	private boolean check_main_region__choice_2_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_3Tr0() {
+	private boolean check_main_region__choice_3_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_3Tr1() {
+	private boolean check_main_region__choice_3_tr1() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_4Tr1() {
+	private boolean check_main_region__choice_4_tr1() {
 		return (sCInterface.e)
 				&& (sCInterface.stringA == null
 						? "A" == null
 						: sCInterface.stringA.equals("A"));
 	}
 
-	private boolean checkStringExpressions_main_region__choice_4Tr0() {
+	private boolean check_main_region__choice_4_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_5Tr1() {
+	private boolean check_main_region__choice_5_tr1() {
 		return (sCInterface.e)
 				&& (sCInterface.stringA == null
 						? "B" != null
 						: !sCInterface.stringA.equals("B"));
 	}
 
-	private boolean checkStringExpressions_main_region__choice_5Tr0() {
+	private boolean check_main_region__choice_5_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_6Tr0() {
+	private boolean check_main_region__choice_6_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_7Tr0() {
+	private boolean check_main_region__choice_7_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_7Tr1() {
+	private boolean check_main_region__choice_7_tr1() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_8Tr1() {
+	private boolean check_main_region__choice_8_tr1() {
 		return (sCInterface.e)
 				&& ("A" == null ? sCInterface.stringA == null : "A"
 						.equals(sCInterface.stringA));
 	}
 
-	private boolean checkStringExpressions_main_region__choice_8Tr0() {
+	private boolean check_main_region__choice_8_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_9Tr1() {
+	private boolean check_main_region__choice_9_tr1() {
 		return (sCInterface.e)
 				&& ("A" == null ? sCInterface.stringB != null : !"A"
 						.equals(sCInterface.stringB));
 	}
 
-	private boolean checkStringExpressions_main_region__choice_9Tr0() {
+	private boolean check_main_region__choice_9_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_10Tr0() {
+	private boolean check_main_region__choice_10_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_11Tr0() {
+	private boolean check_main_region__choice_11_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_11Tr1() {
+	private boolean check_main_region__choice_11_tr1() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_12Tr1() {
+	private boolean check_main_region__choice_12_tr1() {
 		return (sCInterface.e) && ("A" == null ? "A" == null : "A".equals("A"));
 	}
 
-	private boolean checkStringExpressions_main_region__choice_12Tr0() {
+	private boolean check_main_region__choice_12_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_13Tr1() {
+	private boolean check_main_region__choice_13_tr1() {
 		return (sCInterface.e)
 				&& ("A" == null ? "B" != null : !"A".equals("B"));
 	}
 
-	private boolean checkStringExpressions_main_region__choice_13Tr0() {
+	private boolean check_main_region__choice_13_tr0() {
 		return true;
 	}
 
-	private boolean checkStringExpressions_main_region__choice_14Tr0() {
+	private boolean check_main_region__choice_14_tr0() {
 		return true;
 	}
 
-	private void effectMain_region_AssignmentCheckedTr0() {
-		exitSequenceMain_region_AssignmentChecked();
+	private void effect_main_region_AssignmentChecked_tr0() {
+		exitSequence_main_region_AssignmentChecked();
 
 		sCInterface.stringVarEqual = (sCInterface.stringA == null
 				? sCInterface.stringA2 == null
 				: sCInterface.stringA.equals(sCInterface.stringA2));
 
-		reactStringExpressions_main_region__choice_0();
+		react_main_region__choice_0();
 	}
 
-	private void effectMain_region_VarToVarCompareSucceededTr0() {
-		exitSequenceMain_region_VarToVarCompareSucceeded();
+	private void effect_main_region_VarToVarCompareSucceeded_tr0() {
+		exitSequence_main_region_VarToVarCompareSucceeded();
 
 		sCInterface.stringVarEqual = (sCInterface.stringA == null
 				? "A" == null
 				: sCInterface.stringA.equals("A"));
 
-		reactStringExpressions_main_region__choice_3();
+		react_main_region__choice_3();
 	}
 
-	private void effectMain_region_VarToConstCompareSucceededTr0() {
-		exitSequenceMain_region_VarToConstCompareSucceeded();
+	private void effect_main_region_VarToConstCompareSucceeded_tr0() {
+		exitSequence_main_region_VarToConstCompareSucceeded();
 
 		sCInterface.stringVarEqual = ("A" == null
 				? sCInterface.stringA == null
 				: "A".equals(sCInterface.stringA));
 
-		reactStringExpressions_main_region__choice_7();
+		react_main_region__choice_7();
 	}
 
-	private void effectMain_region_ConstToVarCompareSucceededTr0() {
-		exitSequenceMain_region_ConstToVarCompareSucceeded();
+	private void effect_main_region_ConstToVarCompareSucceeded_tr0() {
+		exitSequence_main_region_ConstToVarCompareSucceeded();
 
 		sCInterface.stringVarEqual = ("A" == null ? "A" == null : "A"
 				.equals("A"));
 
-		reactStringExpressions_main_region__choice_11();
+		react_main_region__choice_11();
 	}
 
-	private void effectStringExpressions_main_region__choice_0Tr1() {
+	private void effect_main_region__choice_0_tr1() {
 		sCInterface.stringVarNotEqual = (sCInterface.stringA == null
 				? sCInterface.stringB != null
 				: !sCInterface.stringA.equals(sCInterface.stringB));
 
-		reactStringExpressions_main_region__choice_1();
+		react_main_region__choice_1();
 	}
 
-	private void effectStringExpressions_main_region__choice_0Tr0() {
-		enterSequenceMain_region_Failed();
+	private void effect_main_region__choice_0_tr0() {
+		enterSequence_main_region_Failed_default();
 	}
 
-	private void effectStringExpressions_main_region__choice_1Tr1() {
+	private void effect_main_region__choice_1_tr1() {
 		sCInterface.guardStringEqual = (sCInterface.stringA == null
 				? sCInterface.stringA2 == null
 				: sCInterface.stringA.equals(sCInterface.stringA2));
 
-		reactStringExpressions_main_region__choice_2();
+		react_main_region__choice_2();
 	}
 
-	private void effectStringExpressions_main_region__choice_1Tr0() {
-		enterSequenceMain_region_Failed();
+	private void effect_main_region__choice_1_tr0() {
+		enterSequence_main_region_Failed_default();
 	}
 
-	private void effectStringExpressions_main_region__choice_2Tr1() {
+	private void effect_main_region__choice_2_tr1() {
 		sCInterface.guardStringNotEqual = (sCInterface.stringA == null
 				? sCInterface.stringB != null
 				: !sCInterface.stringA.equals(sCInterface.stringB));
 
-		enterSequenceMain_region_VarToVarCompareSucceeded();
+		enterSequence_main_region_VarToVarCompareSucceeded_default();
 	}
 
-	private void effectStringExpressions_main_region__choice_2Tr0() {
-		enterSequenceMain_region_Failed();
+	private void effect_main_region__choice_2_tr0() {
+		enterSequence_main_region_Failed_default();
 	}
 
-	private void effectStringExpressions_main_region__choice_3Tr0() {
+	private void effect_main_region__choice_3_tr0() {
 		sCInterface.stringVarNotEqual = (sCInterface.stringA == null
 				? "B" != null
 				: !sCInterface.stringA.equals("B"));
 
-		reactStringExpressions_main_region__choice_4();
+		react_main_region__choice_4();
 	}
 
-	private void effectStringExpressions_main_region__choice_3Tr1() {
-		reactStringExpressions_main_region__choice_6();
+	private void effect_main_region__choice_3_tr1() {
+		react_main_region__choice_6();
 	}
 
-	private void effectStringExpressions_main_region__choice_4Tr1() {
+	private void effect_main_region__choice_4_tr1() {
 		sCInterface.guardStringEqual = (sCInterface.stringA == null
 				? "A" == null
 				: sCInterface.stringA.equals("A"));
 
-		reactStringExpressions_main_region__choice_5();
+		react_main_region__choice_5();
 	}
 
-	private void effectStringExpressions_main_region__choice_4Tr0() {
-		reactStringExpressions_main_region__choice_6();
+	private void effect_main_region__choice_4_tr0() {
+		react_main_region__choice_6();
 	}
 
-	private void effectStringExpressions_main_region__choice_5Tr1() {
+	private void effect_main_region__choice_5_tr1() {
 		sCInterface.guardStringNotEqual = (sCInterface.stringA == null
 				? "B" != null
 				: !sCInterface.stringA.equals("B"));
 
-		enterSequenceMain_region_VarToConstCompareSucceeded();
+		enterSequence_main_region_VarToConstCompareSucceeded_default();
 	}
 
-	private void effectStringExpressions_main_region__choice_5Tr0() {
-		reactStringExpressions_main_region__choice_6();
+	private void effect_main_region__choice_5_tr0() {
+		react_main_region__choice_6();
 	}
 
-	private void effectStringExpressions_main_region__choice_6Tr0() {
-		enterSequenceMain_region_Failed();
+	private void effect_main_region__choice_6_tr0() {
+		enterSequence_main_region_Failed_default();
 	}
 
-	private void effectStringExpressions_main_region__choice_7Tr0() {
+	private void effect_main_region__choice_7_tr0() {
 		sCInterface.stringVarNotEqual = ("A" == null
 				? sCInterface.stringB != null
 				: !"A".equals(sCInterface.stringB));
 
-		reactStringExpressions_main_region__choice_8();
+		react_main_region__choice_8();
 	}
 
-	private void effectStringExpressions_main_region__choice_7Tr1() {
-		reactStringExpressions_main_region__choice_10();
+	private void effect_main_region__choice_7_tr1() {
+		react_main_region__choice_10();
 	}
 
-	private void effectStringExpressions_main_region__choice_8Tr1() {
+	private void effect_main_region__choice_8_tr1() {
 		sCInterface.guardStringEqual = ("A" == null
 				? sCInterface.stringA == null
 				: "A".equals(sCInterface.stringA));
 
-		reactStringExpressions_main_region__choice_9();
+		react_main_region__choice_9();
 	}
 
-	private void effectStringExpressions_main_region__choice_8Tr0() {
-		reactStringExpressions_main_region__choice_10();
+	private void effect_main_region__choice_8_tr0() {
+		react_main_region__choice_10();
 	}
 
-	private void effectStringExpressions_main_region__choice_9Tr1() {
+	private void effect_main_region__choice_9_tr1() {
 		sCInterface.guardStringNotEqual = ("A" == null
 				? sCInterface.stringB != null
 				: !"A".equals(sCInterface.stringB));
 
-		enterSequenceMain_region_ConstToVarCompareSucceeded();
+		enterSequence_main_region_ConstToVarCompareSucceeded_default();
 	}
 
-	private void effectStringExpressions_main_region__choice_9Tr0() {
-		reactStringExpressions_main_region__choice_10();
+	private void effect_main_region__choice_9_tr0() {
+		react_main_region__choice_10();
 	}
 
-	private void effectStringExpressions_main_region__choice_10Tr0() {
-		reactStringExpressions_main_region__choice_6();
+	private void effect_main_region__choice_10_tr0() {
+		react_main_region__choice_6();
 	}
 
-	private void effectStringExpressions_main_region__choice_11Tr0() {
+	private void effect_main_region__choice_11_tr0() {
 		sCInterface.stringVarNotEqual = ("A" == null ? "B" != null : !"A"
 				.equals("B"));
 
-		reactStringExpressions_main_region__choice_12();
+		react_main_region__choice_12();
 	}
 
-	private void effectStringExpressions_main_region__choice_11Tr1() {
-		reactStringExpressions_main_region__choice_14();
+	private void effect_main_region__choice_11_tr1() {
+		react_main_region__choice_14();
 	}
 
-	private void effectStringExpressions_main_region__choice_12Tr1() {
+	private void effect_main_region__choice_12_tr1() {
 		sCInterface.guardStringEqual = ("A" == null ? "A" == null : "A"
 				.equals("A"));
 
-		reactStringExpressions_main_region__choice_13();
+		react_main_region__choice_13();
 	}
 
-	private void effectStringExpressions_main_region__choice_12Tr0() {
-		reactStringExpressions_main_region__choice_14();
+	private void effect_main_region__choice_12_tr0() {
+		react_main_region__choice_14();
 	}
 
-	private void effectStringExpressions_main_region__choice_13Tr1() {
+	private void effect_main_region__choice_13_tr1() {
 		sCInterface.guardStringNotEqual = ("A" == null ? "B" != null : !"A"
 				.equals("B"));
 
-		enterSequenceMain_region_ConstToConstCompareSucceeded();
+		enterSequence_main_region_ConstToConstCompareSucceeded_default();
 	}
 
-	private void effectStringExpressions_main_region__choice_13Tr0() {
-		reactStringExpressions_main_region__choice_14();
+	private void effect_main_region__choice_13_tr0() {
+		react_main_region__choice_14();
 	}
 
-	private void effectStringExpressions_main_region__choice_14Tr0() {
-		reactStringExpressions_main_region__choice_10();
+	private void effect_main_region__choice_14_tr0() {
+		react_main_region__choice_10();
 	}
 
 	/* Entry action for statechart 'StringExpressions'. */
@@ -602,7 +602,7 @@ public class StringExpressionsStatemachine
 	}
 
 	/* Entry action for state 'AssignmentChecked'. */
-	private void entryActionMain_region_AssignmentChecked() {
+	private void entryAction_main_region_AssignmentChecked() {
 		sCInterface.stringVarNotEqual = !(sCInterface.stringA == null
 				? sCInterface.stringB == null
 				: sCInterface.stringA.equals(sCInterface.stringB));
@@ -617,109 +617,109 @@ public class StringExpressionsStatemachine
 	}
 
 	/* 'default' enter sequence for state AssignmentChecked */
-	private void enterSequenceMain_region_AssignmentChecked() {
-		entryActionMain_region_AssignmentChecked();
+	private void enterSequence_main_region_AssignmentChecked_default() {
+		entryAction_main_region_AssignmentChecked();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_AssignmentChecked;
 	}
 
 	/* 'default' enter sequence for state Failed */
-	private void enterSequenceMain_region_Failed() {
+	private void enterSequence_main_region_Failed_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Failed;
 	}
 
 	/* 'default' enter sequence for state VarToVarCompareSucceeded */
-	private void enterSequenceMain_region_VarToVarCompareSucceeded() {
+	private void enterSequence_main_region_VarToVarCompareSucceeded_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_VarToVarCompareSucceeded;
 	}
 
 	/* 'default' enter sequence for state VarToConstCompareSucceeded */
-	private void enterSequenceMain_region_VarToConstCompareSucceeded() {
+	private void enterSequence_main_region_VarToConstCompareSucceeded_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_VarToConstCompareSucceeded;
 	}
 
 	/* 'default' enter sequence for state ConstToVarCompareSucceeded */
-	private void enterSequenceMain_region_ConstToVarCompareSucceeded() {
+	private void enterSequence_main_region_ConstToVarCompareSucceeded_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_ConstToVarCompareSucceeded;
 	}
 
 	/* 'default' enter sequence for state ConstToConstCompareSucceeded */
-	private void enterSequenceMain_region_ConstToConstCompareSucceeded() {
+	private void enterSequence_main_region_ConstToConstCompareSucceeded_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_ConstToConstCompareSucceeded;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactStringExpressions_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state AssignmentChecked */
-	private void exitSequenceMain_region_AssignmentChecked() {
+	private void exitSequence_main_region_AssignmentChecked() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Failed */
-	private void exitSequenceMain_region_Failed() {
+	private void exitSequence_main_region_Failed() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state VarToVarCompareSucceeded */
-	private void exitSequenceMain_region_VarToVarCompareSucceeded() {
+	private void exitSequence_main_region_VarToVarCompareSucceeded() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state VarToConstCompareSucceeded */
-	private void exitSequenceMain_region_VarToConstCompareSucceeded() {
+	private void exitSequence_main_region_VarToConstCompareSucceeded() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state ConstToVarCompareSucceeded */
-	private void exitSequenceMain_region_ConstToVarCompareSucceeded() {
+	private void exitSequence_main_region_ConstToVarCompareSucceeded() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state ConstToConstCompareSucceeded */
-	private void exitSequenceMain_region_ConstToConstCompareSucceeded() {
+	private void exitSequence_main_region_ConstToConstCompareSucceeded() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_AssignmentChecked :
-				exitSequenceMain_region_AssignmentChecked();
+				exitSequence_main_region_AssignmentChecked();
 				break;
 
 			case main_region_Failed :
-				exitSequenceMain_region_Failed();
+				exitSequence_main_region_Failed();
 				break;
 
 			case main_region_VarToVarCompareSucceeded :
-				exitSequenceMain_region_VarToVarCompareSucceeded();
+				exitSequence_main_region_VarToVarCompareSucceeded();
 				break;
 
 			case main_region_VarToConstCompareSucceeded :
-				exitSequenceMain_region_VarToConstCompareSucceeded();
+				exitSequence_main_region_VarToConstCompareSucceeded();
 				break;
 
 			case main_region_ConstToVarCompareSucceeded :
-				exitSequenceMain_region_ConstToVarCompareSucceeded();
+				exitSequence_main_region_ConstToVarCompareSucceeded();
 				break;
 
 			case main_region_ConstToConstCompareSucceeded :
-				exitSequenceMain_region_ConstToConstCompareSucceeded();
+				exitSequence_main_region_ConstToConstCompareSucceeded();
 				break;
 
 			default :
@@ -728,167 +728,167 @@ public class StringExpressionsStatemachine
 	}
 
 	/* The reactions of state AssignmentChecked. */
-	private void reactMain_region_AssignmentChecked() {
-		if (checkMain_region_AssignmentCheckedTr0()) {
-			effectMain_region_AssignmentCheckedTr0();
+	private void react_main_region_AssignmentChecked() {
+		if (check_main_region_AssignmentChecked_tr0()) {
+			effect_main_region_AssignmentChecked_tr0();
 		}
 	}
 
 	/* The reactions of state Failed. */
-	private void reactMain_region_Failed() {
+	private void react_main_region_Failed() {
 	}
 
 	/* The reactions of state VarToVarCompareSucceeded. */
-	private void reactMain_region_VarToVarCompareSucceeded() {
-		if (checkMain_region_VarToVarCompareSucceededTr0()) {
-			effectMain_region_VarToVarCompareSucceededTr0();
+	private void react_main_region_VarToVarCompareSucceeded() {
+		if (check_main_region_VarToVarCompareSucceeded_tr0()) {
+			effect_main_region_VarToVarCompareSucceeded_tr0();
 		}
 	}
 
 	/* The reactions of state VarToConstCompareSucceeded. */
-	private void reactMain_region_VarToConstCompareSucceeded() {
-		if (checkMain_region_VarToConstCompareSucceededTr0()) {
-			effectMain_region_VarToConstCompareSucceededTr0();
+	private void react_main_region_VarToConstCompareSucceeded() {
+		if (check_main_region_VarToConstCompareSucceeded_tr0()) {
+			effect_main_region_VarToConstCompareSucceeded_tr0();
 		}
 	}
 
 	/* The reactions of state ConstToVarCompareSucceeded. */
-	private void reactMain_region_ConstToVarCompareSucceeded() {
-		if (checkMain_region_ConstToVarCompareSucceededTr0()) {
-			effectMain_region_ConstToVarCompareSucceededTr0();
+	private void react_main_region_ConstToVarCompareSucceeded() {
+		if (check_main_region_ConstToVarCompareSucceeded_tr0()) {
+			effect_main_region_ConstToVarCompareSucceeded_tr0();
 		}
 	}
 
 	/* The reactions of state ConstToConstCompareSucceeded. */
-	private void reactMain_region_ConstToConstCompareSucceeded() {
+	private void react_main_region_ConstToConstCompareSucceeded() {
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_0() {
-		if (checkStringExpressions_main_region__choice_0Tr1()) {
-			effectStringExpressions_main_region__choice_0Tr1();
+	private void react_main_region__choice_0() {
+		if (check_main_region__choice_0_tr1()) {
+			effect_main_region__choice_0_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_0Tr0();
+			effect_main_region__choice_0_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_1() {
-		if (checkStringExpressions_main_region__choice_1Tr1()) {
-			effectStringExpressions_main_region__choice_1Tr1();
+	private void react_main_region__choice_1() {
+		if (check_main_region__choice_1_tr1()) {
+			effect_main_region__choice_1_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_1Tr0();
+			effect_main_region__choice_1_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_2() {
-		if (checkStringExpressions_main_region__choice_2Tr1()) {
-			effectStringExpressions_main_region__choice_2Tr1();
+	private void react_main_region__choice_2() {
+		if (check_main_region__choice_2_tr1()) {
+			effect_main_region__choice_2_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_2Tr0();
+			effect_main_region__choice_2_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_3() {
-		if (checkStringExpressions_main_region__choice_3Tr0()) {
-			effectStringExpressions_main_region__choice_3Tr0();
+	private void react_main_region__choice_3() {
+		if (check_main_region__choice_3_tr0()) {
+			effect_main_region__choice_3_tr0();
 		} else {
-			effectStringExpressions_main_region__choice_3Tr1();
+			effect_main_region__choice_3_tr1();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_4() {
-		if (checkStringExpressions_main_region__choice_4Tr1()) {
-			effectStringExpressions_main_region__choice_4Tr1();
+	private void react_main_region__choice_4() {
+		if (check_main_region__choice_4_tr1()) {
+			effect_main_region__choice_4_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_4Tr0();
+			effect_main_region__choice_4_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_5() {
-		if (checkStringExpressions_main_region__choice_5Tr1()) {
-			effectStringExpressions_main_region__choice_5Tr1();
+	private void react_main_region__choice_5() {
+		if (check_main_region__choice_5_tr1()) {
+			effect_main_region__choice_5_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_5Tr0();
+			effect_main_region__choice_5_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_6() {
-		effectStringExpressions_main_region__choice_6Tr0();
+	private void react_main_region__choice_6() {
+		effect_main_region__choice_6_tr0();
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_7() {
-		if (checkStringExpressions_main_region__choice_7Tr0()) {
-			effectStringExpressions_main_region__choice_7Tr0();
+	private void react_main_region__choice_7() {
+		if (check_main_region__choice_7_tr0()) {
+			effect_main_region__choice_7_tr0();
 		} else {
-			effectStringExpressions_main_region__choice_7Tr1();
+			effect_main_region__choice_7_tr1();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_8() {
-		if (checkStringExpressions_main_region__choice_8Tr1()) {
-			effectStringExpressions_main_region__choice_8Tr1();
+	private void react_main_region__choice_8() {
+		if (check_main_region__choice_8_tr1()) {
+			effect_main_region__choice_8_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_8Tr0();
+			effect_main_region__choice_8_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_9() {
-		if (checkStringExpressions_main_region__choice_9Tr1()) {
-			effectStringExpressions_main_region__choice_9Tr1();
+	private void react_main_region__choice_9() {
+		if (check_main_region__choice_9_tr1()) {
+			effect_main_region__choice_9_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_9Tr0();
+			effect_main_region__choice_9_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_10() {
-		effectStringExpressions_main_region__choice_10Tr0();
+	private void react_main_region__choice_10() {
+		effect_main_region__choice_10_tr0();
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_11() {
-		if (checkStringExpressions_main_region__choice_11Tr0()) {
-			effectStringExpressions_main_region__choice_11Tr0();
+	private void react_main_region__choice_11() {
+		if (check_main_region__choice_11_tr0()) {
+			effect_main_region__choice_11_tr0();
 		} else {
-			effectStringExpressions_main_region__choice_11Tr1();
+			effect_main_region__choice_11_tr1();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_12() {
-		if (checkStringExpressions_main_region__choice_12Tr1()) {
-			effectStringExpressions_main_region__choice_12Tr1();
+	private void react_main_region__choice_12() {
+		if (check_main_region__choice_12_tr1()) {
+			effect_main_region__choice_12_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_12Tr0();
+			effect_main_region__choice_12_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_13() {
-		if (checkStringExpressions_main_region__choice_13Tr1()) {
-			effectStringExpressions_main_region__choice_13Tr1();
+	private void react_main_region__choice_13() {
+		if (check_main_region__choice_13_tr1()) {
+			effect_main_region__choice_13_tr1();
 		} else {
-			effectStringExpressions_main_region__choice_13Tr0();
+			effect_main_region__choice_13_tr0();
 		}
 	}
 
 	/* The reactions of state null. */
-	private void reactStringExpressions_main_region__choice_14() {
-		effectStringExpressions_main_region__choice_14Tr0();
+	private void react_main_region__choice_14() {
+		effect_main_region__choice_14_tr0();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactStringExpressions_main_region__entry_Default() {
-		enterSequenceMain_region_AssignmentChecked();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_AssignmentChecked_default();
 	}
 
 	public void runCycle() {
@@ -899,22 +899,22 @@ public class StringExpressionsStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_AssignmentChecked :
-					reactMain_region_AssignmentChecked();
+					react_main_region_AssignmentChecked();
 					break;
 				case main_region_Failed :
-					reactMain_region_Failed();
+					react_main_region_Failed();
 					break;
 				case main_region_VarToVarCompareSucceeded :
-					reactMain_region_VarToVarCompareSucceeded();
+					react_main_region_VarToVarCompareSucceeded();
 					break;
 				case main_region_VarToConstCompareSucceeded :
-					reactMain_region_VarToConstCompareSucceeded();
+					react_main_region_VarToConstCompareSucceeded();
 					break;
 				case main_region_ConstToVarCompareSucceeded :
-					reactMain_region_ConstToVarCompareSucceeded();
+					react_main_region_ConstToVarCompareSucceeded();
 					break;
 				case main_region_ConstToConstCompareSucceeded :
-					reactMain_region_ConstToConstCompareSucceeded();
+					react_main_region_ConstToConstCompareSucceeded();
 					break;
 				default :
 					// $NullState$

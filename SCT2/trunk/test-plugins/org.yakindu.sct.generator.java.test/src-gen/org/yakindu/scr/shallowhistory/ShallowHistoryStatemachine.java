@@ -100,11 +100,11 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMainRegion();
+		enterSequence_mainRegion_default();
 	}
 
 	public void exit() {
-		exitSequenceMainRegion();
+		exitSequence_mainRegion();
 
 		exitAction();
 	}
@@ -189,84 +189,84 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 		sCInterface.raiseEvent8();
 	}
 
-	private boolean checkMainRegion_State1Tr0() {
+	private boolean check_mainRegion_State1_tr0() {
 		return sCInterface.event1;
 	}
 
-	private boolean checkMainRegion_State2Tr0() {
+	private boolean check_mainRegion_State2_tr0() {
 		return sCInterface.event2;
 	}
 
-	private boolean checkMainRegion_State2_region0_State3Tr0() {
+	private boolean check_mainRegion_State2__region0_State3_tr0() {
 		return sCInterface.event3;
 	}
 
-	private boolean checkMainRegion_State2_region0_State4Tr0() {
+	private boolean check_mainRegion_State2__region0_State4_tr0() {
 		return sCInterface.event4;
 	}
 
-	private boolean checkMainRegion_State2_region0_State4_region0_State6Tr0() {
+	private boolean check_mainRegion_State2__region0_State4__region0_State6_tr0() {
 		return sCInterface.event5;
 	}
 
-	private boolean checkMainRegion_State2_region0_State4_region0_State7Tr0() {
+	private boolean check_mainRegion_State2__region0_State4__region0_State7_tr0() {
 		return sCInterface.event6;
 	}
 
-	private boolean checkMainRegion_State2_region0_State4_region0_State7_region0_State8Tr0() {
+	private boolean check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0() {
 		return sCInterface.event7;
 	}
 
-	private boolean checkMainRegion_State2_region0_State4_region0_State7_region0_State9Tr0() {
+	private boolean check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0() {
 		return sCInterface.event8;
 	}
 
-	private void effectMainRegion_State1Tr0() {
-		exitSequenceMainRegion_State1();
+	private void effect_mainRegion_State1_tr0() {
+		exitSequence_mainRegion_State1();
 
-		enterSequenceMainRegion_State2();
+		enterSequence_mainRegion_State2_default();
 	}
 
-	private void effectMainRegion_State2Tr0() {
-		exitSequenceMainRegion_State2();
+	private void effect_mainRegion_State2_tr0() {
+		exitSequence_mainRegion_State2();
 
-		enterSequenceMainRegion_State1();
+		enterSequence_mainRegion_State1_default();
 	}
 
-	private void effectMainRegion_State2_region0_State3Tr0() {
-		exitSequenceMainRegion_State2_region0_State3();
+	private void effect_mainRegion_State2__region0_State3_tr0() {
+		exitSequence_mainRegion_State2__region0_State3();
 
-		enterSequenceMainRegion_State2_region0_State4();
+		enterSequence_mainRegion_State2__region0_State4_default();
 	}
 
-	private void effectMainRegion_State2_region0_State4Tr0() {
-		exitSequenceMainRegion_State2_region0_State4();
+	private void effect_mainRegion_State2__region0_State4_tr0() {
+		exitSequence_mainRegion_State2__region0_State4();
 
-		enterSequenceMainRegion_State2_region0_State5();
+		enterSequence_mainRegion_State2__region0_State5_default();
 	}
 
-	private void effectMainRegion_State2_region0_State4_region0_State6Tr0() {
-		exitSequenceMainRegion_State2_region0_State4_region0_State6();
+	private void effect_mainRegion_State2__region0_State4__region0_State6_tr0() {
+		exitSequence_mainRegion_State2__region0_State4__region0_State6();
 
-		enterSequenceMainRegion_State2_region0_State4_region0_State7();
+		enterSequence_mainRegion_State2__region0_State4__region0_State7_default();
 	}
 
-	private void effectMainRegion_State2_region0_State4_region0_State7Tr0() {
-		exitSequenceMainRegion_State2_region0_State4_region0_State7();
+	private void effect_mainRegion_State2__region0_State4__region0_State7_tr0() {
+		exitSequence_mainRegion_State2__region0_State4__region0_State7();
 
-		enterSequenceMainRegion_State2_region0_State4_region0_State6();
+		enterSequence_mainRegion_State2__region0_State4__region0_State6_default();
 	}
 
-	private void effectMainRegion_State2_region0_State4_region0_State7_region0_State8Tr0() {
-		exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8();
+	private void effect_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0() {
+		exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 
-		enterSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9();
+		enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default();
 	}
 
-	private void effectMainRegion_State2_region0_State4_region0_State7_region0_State9Tr0() {
-		exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9();
+	private void effect_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0() {
+		exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 
-		enterSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8();
+		enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
 	}
 
 	/* Entry action for statechart 'ShallowHistory'. */
@@ -278,18 +278,18 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* 'default' enter sequence for state State1 */
-	private void enterSequenceMainRegion_State1() {
+	private void enterSequence_mainRegion_State1_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mainRegion_State1;
 	}
 
 	/* 'default' enter sequence for state State2 */
-	private void enterSequenceMainRegion_State2() {
-		enterSequenceMainRegion_State2_region0();
+	private void enterSequence_mainRegion_State2_default() {
+		enterSequence_mainRegion_State2__region0_default();
 	}
 
 	/* 'default' enter sequence for state State3 */
-	private void enterSequenceMainRegion_State2_region0_State3() {
+	private void enterSequence_mainRegion_State2__region0_State3_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mainRegion_State2__region0_State3;
 
@@ -297,25 +297,25 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* 'default' enter sequence for state State4 */
-	private void enterSequenceMainRegion_State2_region0_State4() {
-		enterSequenceMainRegion_State2_region0_State4_region0();
+	private void enterSequence_mainRegion_State2__region0_State4_default() {
+		enterSequence_mainRegion_State2__region0_State4__region0_default();
 
 		historyVector[0] = stateVector[0];
 	}
 
 	/* 'default' enter sequence for state State6 */
-	private void enterSequenceMainRegion_State2_region0_State4_region0_State6() {
+	private void enterSequence_mainRegion_State2__region0_State4__region0_State6_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mainRegion_State2__region0_State4__region0_State6;
 	}
 
 	/* 'default' enter sequence for state State7 */
-	private void enterSequenceMainRegion_State2_region0_State4_region0_State7() {
-		enterSequenceMainRegion_State2_region0_State4_region0_State7_region0();
+	private void enterSequence_mainRegion_State2__region0_State4__region0_State7_default() {
+		enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_default();
 	}
 
 	/* 'default' enter sequence for state State8 */
-	private void enterSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8() {
+	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State8;
 
@@ -323,7 +323,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* 'default' enter sequence for state State9 */
-	private void enterSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9() {
+	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mainRegion_State2__region0_State4__region0_State7__region0_State9;
 
@@ -331,7 +331,7 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* 'default' enter sequence for state State5 */
-	private void enterSequenceMainRegion_State2_region0_State5() {
+	private void enterSequence_mainRegion_State2__region0_State5_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mainRegion_State2__region0_State5;
 
@@ -339,36 +339,36 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* 'default' enter sequence for region mainRegion */
-	private void enterSequenceMainRegion() {
-		reactShallowHistory_mainRegion__entry_Default();
+	private void enterSequence_mainRegion_default() {
+		react_mainRegion__entry_Default();
 	}
 
 	/* 'default' enter sequence for region null */
-	private void enterSequenceMainRegion_State2_region0() {
-		reactShallowHistory_mainRegion_State2__region0__entry_Default();
+	private void enterSequence_mainRegion_State2__region0_default() {
+		react_mainRegion_State2__region0__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child null */
-	private void shallowEnterSequenceMainRegion_State2_region0() {
+	private void shallowEnterSequence_mainRegion_State2__region0() {
 		switch (historyVector[0]) {
 			case mainRegion_State2__region0_State3 :
-				enterSequenceMainRegion_State2_region0_State3();
+				enterSequence_mainRegion_State2__region0_State3_default();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State6 :
-				enterSequenceMainRegion_State2_region0_State4();
+				enterSequence_mainRegion_State2__region0_State4_default();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-				enterSequenceMainRegion_State2_region0_State4();
+				enterSequence_mainRegion_State2__region0_State4_default();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-				enterSequenceMainRegion_State2_region0_State4();
+				enterSequence_mainRegion_State2__region0_State4_default();
 				break;
 
 			case mainRegion_State2__region0_State5 :
-				enterSequenceMainRegion_State2_region0_State5();
+				enterSequence_mainRegion_State2__region0_State5_default();
 				break;
 
 			default :
@@ -377,24 +377,24 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* 'default' enter sequence for region null */
-	private void enterSequenceMainRegion_State2_region0_State4_region0() {
-		reactShallowHistory_mainRegion_State2__region0_State4__region0__entry_Default();
+	private void enterSequence_mainRegion_State2__region0_State4__region0_default() {
+		react_mainRegion_State2__region0_State4__region0__entry_Default();
 	}
 
 	/* 'default' enter sequence for region null */
-	private void enterSequenceMainRegion_State2_region0_State4_region0_State7_region0() {
-		reactShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default();
+	private void enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_default() {
+		react_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child null */
-	private void shallowEnterSequenceMainRegion_State2_region0_State4_region0_State7_region0() {
+	private void shallowEnterSequence_mainRegion_State2__region0_State4__region0_State7__region0() {
 		switch (historyVector[1]) {
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-				enterSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8();
+				enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-				enterSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9();
+				enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9_default();
 				break;
 
 			default :
@@ -403,81 +403,81 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* Default exit sequence for state State1 */
-	private void exitSequenceMainRegion_State1() {
+	private void exitSequence_mainRegion_State1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state State2 */
-	private void exitSequenceMainRegion_State2() {
-		exitSequenceMainRegion_State2_region0();
+	private void exitSequence_mainRegion_State2() {
+		exitSequence_mainRegion_State2__region0();
 	}
 
 	/* Default exit sequence for state State3 */
-	private void exitSequenceMainRegion_State2_region0_State3() {
+	private void exitSequence_mainRegion_State2__region0_State3() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state State4 */
-	private void exitSequenceMainRegion_State2_region0_State4() {
-		exitSequenceMainRegion_State2_region0_State4_region0();
+	private void exitSequence_mainRegion_State2__region0_State4() {
+		exitSequence_mainRegion_State2__region0_State4__region0();
 	}
 
 	/* Default exit sequence for state State6 */
-	private void exitSequenceMainRegion_State2_region0_State4_region0_State6() {
+	private void exitSequence_mainRegion_State2__region0_State4__region0_State6() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state State7 */
-	private void exitSequenceMainRegion_State2_region0_State4_region0_State7() {
-		exitSequenceMainRegion_State2_region0_State4_region0_State7_region0();
+	private void exitSequence_mainRegion_State2__region0_State4__region0_State7() {
+		exitSequence_mainRegion_State2__region0_State4__region0_State7__region0();
 	}
 
 	/* Default exit sequence for state State8 */
-	private void exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8() {
+	private void exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state State9 */
-	private void exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9() {
+	private void exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state State5 */
-	private void exitSequenceMainRegion_State2_region0_State5() {
+	private void exitSequence_mainRegion_State2__region0_State5() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region mainRegion */
-	private void exitSequenceMainRegion() {
+	private void exitSequence_mainRegion() {
 		switch (stateVector[0]) {
 			case mainRegion_State1 :
-				exitSequenceMainRegion_State1();
+				exitSequence_mainRegion_State1();
 				break;
 
 			case mainRegion_State2__region0_State3 :
-				exitSequenceMainRegion_State2_region0_State3();
+				exitSequence_mainRegion_State2__region0_State3();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State6 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State6();
+				exitSequence_mainRegion_State2__region0_State4__region0_State6();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8();
+				exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9();
+				exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 				break;
 
 			case mainRegion_State2__region0_State5 :
-				exitSequenceMainRegion_State2_region0_State5();
+				exitSequence_mainRegion_State2__region0_State5();
 				break;
 
 			default :
@@ -486,26 +486,26 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* Default exit sequence for region null */
-	private void exitSequenceMainRegion_State2_region0() {
+	private void exitSequence_mainRegion_State2__region0() {
 		switch (stateVector[0]) {
 			case mainRegion_State2__region0_State3 :
-				exitSequenceMainRegion_State2_region0_State3();
+				exitSequence_mainRegion_State2__region0_State3();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State6 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State6();
+				exitSequence_mainRegion_State2__region0_State4__region0_State6();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8();
+				exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9();
+				exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 				break;
 
 			case mainRegion_State2__region0_State5 :
-				exitSequenceMainRegion_State2_region0_State5();
+				exitSequence_mainRegion_State2__region0_State5();
 				break;
 
 			default :
@@ -514,18 +514,18 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* Default exit sequence for region null */
-	private void exitSequenceMainRegion_State2_region0_State4_region0() {
+	private void exitSequence_mainRegion_State2__region0_State4__region0() {
 		switch (stateVector[0]) {
 			case mainRegion_State2__region0_State4__region0_State6 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State6();
+				exitSequence_mainRegion_State2__region0_State4__region0_State6();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8();
+				exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9();
+				exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 				break;
 
 			default :
@@ -534,14 +534,14 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* Default exit sequence for region null */
-	private void exitSequenceMainRegion_State2_region0_State4_region0_State7_region0() {
+	private void exitSequence_mainRegion_State2__region0_State4__region0_State7__region0() {
 		switch (stateVector[0]) {
 			case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8();
+				exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 				break;
 
 			case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-				exitSequenceMainRegion_State2_region0_State4_region0_State7_region0_State9();
+				exitSequence_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 				break;
 
 			default :
@@ -550,51 +550,51 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* The reactions of state State1. */
-	private void reactMainRegion_State1() {
-		if (checkMainRegion_State1Tr0()) {
-			effectMainRegion_State1Tr0();
+	private void react_mainRegion_State1() {
+		if (check_mainRegion_State1_tr0()) {
+			effect_mainRegion_State1_tr0();
 		}
 	}
 
 	/* The reactions of state State3. */
-	private void reactMainRegion_State2_region0_State3() {
-		if (checkMainRegion_State2Tr0()) {
-			effectMainRegion_State2Tr0();
+	private void react_mainRegion_State2__region0_State3() {
+		if (check_mainRegion_State2_tr0()) {
+			effect_mainRegion_State2_tr0();
 		} else {
-			if (checkMainRegion_State2_region0_State3Tr0()) {
-				effectMainRegion_State2_region0_State3Tr0();
+			if (check_mainRegion_State2__region0_State3_tr0()) {
+				effect_mainRegion_State2__region0_State3_tr0();
 			}
 		}
 	}
 
 	/* The reactions of state State6. */
-	private void reactMainRegion_State2_region0_State4_region0_State6() {
-		if (checkMainRegion_State2Tr0()) {
-			effectMainRegion_State2Tr0();
+	private void react_mainRegion_State2__region0_State4__region0_State6() {
+		if (check_mainRegion_State2_tr0()) {
+			effect_mainRegion_State2_tr0();
 		} else {
-			if (checkMainRegion_State2_region0_State4Tr0()) {
-				effectMainRegion_State2_region0_State4Tr0();
+			if (check_mainRegion_State2__region0_State4_tr0()) {
+				effect_mainRegion_State2__region0_State4_tr0();
 			} else {
-				if (checkMainRegion_State2_region0_State4_region0_State6Tr0()) {
-					effectMainRegion_State2_region0_State4_region0_State6Tr0();
+				if (check_mainRegion_State2__region0_State4__region0_State6_tr0()) {
+					effect_mainRegion_State2__region0_State4__region0_State6_tr0();
 				}
 			}
 		}
 	}
 
 	/* The reactions of state State8. */
-	private void reactMainRegion_State2_region0_State4_region0_State7_region0_State8() {
-		if (checkMainRegion_State2Tr0()) {
-			effectMainRegion_State2Tr0();
+	private void react_mainRegion_State2__region0_State4__region0_State7__region0_State8() {
+		if (check_mainRegion_State2_tr0()) {
+			effect_mainRegion_State2_tr0();
 		} else {
-			if (checkMainRegion_State2_region0_State4Tr0()) {
-				effectMainRegion_State2_region0_State4Tr0();
+			if (check_mainRegion_State2__region0_State4_tr0()) {
+				effect_mainRegion_State2__region0_State4_tr0();
 			} else {
-				if (checkMainRegion_State2_region0_State4_region0_State7Tr0()) {
-					effectMainRegion_State2_region0_State4_region0_State7Tr0();
+				if (check_mainRegion_State2__region0_State4__region0_State7_tr0()) {
+					effect_mainRegion_State2__region0_State4__region0_State7_tr0();
 				} else {
-					if (checkMainRegion_State2_region0_State4_region0_State7_region0_State8Tr0()) {
-						effectMainRegion_State2_region0_State4_region0_State7_region0_State8Tr0();
+					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0()) {
+						effect_mainRegion_State2__region0_State4__region0_State7__region0_State8_tr0();
 					}
 				}
 			}
@@ -602,18 +602,18 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* The reactions of state State9. */
-	private void reactMainRegion_State2_region0_State4_region0_State7_region0_State9() {
-		if (checkMainRegion_State2Tr0()) {
-			effectMainRegion_State2Tr0();
+	private void react_mainRegion_State2__region0_State4__region0_State7__region0_State9() {
+		if (check_mainRegion_State2_tr0()) {
+			effect_mainRegion_State2_tr0();
 		} else {
-			if (checkMainRegion_State2_region0_State4Tr0()) {
-				effectMainRegion_State2_region0_State4Tr0();
+			if (check_mainRegion_State2__region0_State4_tr0()) {
+				effect_mainRegion_State2__region0_State4_tr0();
 			} else {
-				if (checkMainRegion_State2_region0_State4_region0_State7Tr0()) {
-					effectMainRegion_State2_region0_State4_region0_State7Tr0();
+				if (check_mainRegion_State2__region0_State4__region0_State7_tr0()) {
+					effect_mainRegion_State2__region0_State4__region0_State7_tr0();
 				} else {
-					if (checkMainRegion_State2_region0_State4_region0_State7_region0_State9Tr0()) {
-						effectMainRegion_State2_region0_State4_region0_State7_region0_State9Tr0();
+					if (check_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0()) {
+						effect_mainRegion_State2__region0_State4__region0_State7__region0_State9_tr0();
 					}
 				}
 			}
@@ -621,40 +621,40 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 	}
 
 	/* The reactions of state State5. */
-	private void reactMainRegion_State2_region0_State5() {
-		if (checkMainRegion_State2Tr0()) {
-			effectMainRegion_State2Tr0();
+	private void react_mainRegion_State2__region0_State5() {
+		if (check_mainRegion_State2_tr0()) {
+			effect_mainRegion_State2_tr0();
 		} else {
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactShallowHistory_mainRegion__entry_Default() {
-		enterSequenceMainRegion_State1();
+	private void react_mainRegion__entry_Default() {
+		enterSequence_mainRegion_State1_default();
 	}
 
 	/* Default react sequence for shallow history entry  */
-	private void reactShallowHistory_mainRegion_State2__region0__entry_Default() {
+	private void react_mainRegion_State2__region0__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequenceMainRegion_State2_region0();
+			shallowEnterSequence_mainRegion_State2__region0();
 		} else {
-			enterSequenceMainRegion_State2_region0_State3();
+			enterSequence_mainRegion_State2__region0_State3_default();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactShallowHistory_mainRegion_State2__region0_State4__region0__entry_Default() {
-		enterSequenceMainRegion_State2_region0_State4_region0_State6();
+	private void react_mainRegion_State2__region0_State4__region0__entry_Default() {
+		enterSequence_mainRegion_State2__region0_State4__region0_State6_default();
 	}
 
 	/* Default react sequence for shallow history entry  */
-	private void reactShallowHistory_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default() {
+	private void react_mainRegion_State2__region0_State4__region0_State7__region0__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[1] != State.$NullState$) {
-			shallowEnterSequenceMainRegion_State2_region0_State4_region0_State7_region0();
+			shallowEnterSequence_mainRegion_State2__region0_State4__region0_State7__region0();
 		} else {
-			enterSequenceMainRegion_State2_region0_State4_region0_State7_region0_State8();
+			enterSequence_mainRegion_State2__region0_State4__region0_State7__region0_State8_default();
 		}
 	}
 
@@ -666,22 +666,22 @@ public class ShallowHistoryStatemachine implements IShallowHistoryStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case mainRegion_State1 :
-					reactMainRegion_State1();
+					react_mainRegion_State1();
 					break;
 				case mainRegion_State2__region0_State3 :
-					reactMainRegion_State2_region0_State3();
+					react_mainRegion_State2__region0_State3();
 					break;
 				case mainRegion_State2__region0_State4__region0_State6 :
-					reactMainRegion_State2_region0_State4_region0_State6();
+					react_mainRegion_State2__region0_State4__region0_State6();
 					break;
 				case mainRegion_State2__region0_State4__region0_State7__region0_State8 :
-					reactMainRegion_State2_region0_State4_region0_State7_region0_State8();
+					react_mainRegion_State2__region0_State4__region0_State7__region0_State8();
 					break;
 				case mainRegion_State2__region0_State4__region0_State7__region0_State9 :
-					reactMainRegion_State2_region0_State4_region0_State7_region0_State9();
+					react_mainRegion_State2__region0_State4__region0_State7__region0_State9();
 					break;
 				case mainRegion_State2__region0_State5 :
-					reactMainRegion_State2_region0_State5();
+					react_mainRegion_State2__region0_State5();
 					break;
 				default :
 					// $NullState$

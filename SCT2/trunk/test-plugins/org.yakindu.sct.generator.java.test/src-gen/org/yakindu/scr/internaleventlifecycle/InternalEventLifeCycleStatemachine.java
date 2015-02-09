@@ -60,15 +60,15 @@ public class InternalEventLifeCycleStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceR1();
+		enterSequence_r1_default();
 
-		enterSequenceR2();
+		enterSequence_r2_default();
 	}
 
 	public void exit() {
-		exitSequenceR1();
+		exitSequence_r1();
 
-		exitSequenceR2();
+		exitSequence_r2();
 
 		exitAction();
 	}
@@ -126,54 +126,54 @@ public class InternalEventLifeCycleStatemachine
 		sCInterface.raiseF();
 	}
 
-	private boolean checkR1_ATr0() {
+	private boolean check_r1_A_tr0() {
 		return i2;
 	}
 
-	private boolean checkR1_ALr0() {
+	private boolean check_r1_A_lr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkR1_BTr0() {
+	private boolean check_r1_B_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkR2_CTr0() {
+	private boolean check_r2_C_tr0() {
 		return i1;
 	}
 
-	private boolean checkR2_DTr0() {
+	private boolean check_r2_D_tr0() {
 		return sCInterface.f;
 	}
 
-	private void effectR1_ATr0() {
-		exitSequenceR1_A();
+	private void effect_r1_A_tr0() {
+		exitSequence_r1_A();
 
-		enterSequenceR1_B();
+		enterSequence_r1_B_default();
 	}
 
-	private void effectR1_ALr0() {
+	private void effect_r1_A_lr0() {
 		raiseI1();
 	}
 
-	private void effectR1_BTr0() {
-		exitSequenceR1_B();
+	private void effect_r1_B_tr0() {
+		exitSequence_r1_B();
 
-		enterSequenceR1_A();
+		enterSequence_r1_A_default();
 	}
 
-	private void effectR2_CTr0() {
-		exitSequenceR2_C();
+	private void effect_r2_C_tr0() {
+		exitSequence_r2_C();
 
-		enterSequenceR2_D();
+		enterSequence_r2_D_default();
 	}
 
-	private void effectR2_DTr0() {
-		exitSequenceR2_D();
+	private void effect_r2_D_tr0() {
+		exitSequence_r2_D();
 
 		raiseI2();
 
-		enterSequenceR2_C();
+		enterSequence_r2_C_default();
 	}
 
 	/* Entry action for statechart 'InternalEventLifeCycle'. */
@@ -185,72 +185,72 @@ public class InternalEventLifeCycleStatemachine
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceR1_A() {
+	private void enterSequence_r1_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.r1_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceR1_B() {
+	private void enterSequence_r1_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.r1_B;
 	}
 
 	/* 'default' enter sequence for state C */
-	private void enterSequenceR2_C() {
+	private void enterSequence_r2_C_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.r2_C;
 	}
 
 	/* 'default' enter sequence for state D */
-	private void enterSequenceR2_D() {
+	private void enterSequence_r2_D_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.r2_D;
 	}
 
 	/* 'default' enter sequence for region r1 */
-	private void enterSequenceR1() {
-		reactInternalEventLifeCycle_r1__entry_Default();
+	private void enterSequence_r1_default() {
+		react_r1__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r2 */
-	private void enterSequenceR2() {
-		reactInternalEventLifeCycle_r2__entry_Default();
+	private void enterSequence_r2_default() {
+		react_r2__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceR1_A() {
+	private void exitSequence_r1_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceR1_B() {
+	private void exitSequence_r1_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state C */
-	private void exitSequenceR2_C() {
+	private void exitSequence_r2_C() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state D */
-	private void exitSequenceR2_D() {
+	private void exitSequence_r2_D() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region r1 */
-	private void exitSequenceR1() {
+	private void exitSequence_r1() {
 		switch (stateVector[0]) {
 			case r1_A :
-				exitSequenceR1_A();
+				exitSequence_r1_A();
 				break;
 
 			case r1_B :
-				exitSequenceR1_B();
+				exitSequence_r1_B();
 				break;
 
 			default :
@@ -259,14 +259,14 @@ public class InternalEventLifeCycleStatemachine
 	}
 
 	/* Default exit sequence for region r2 */
-	private void exitSequenceR2() {
+	private void exitSequence_r2() {
 		switch (stateVector[1]) {
 			case r2_C :
-				exitSequenceR2_C();
+				exitSequence_r2_C();
 				break;
 
 			case r2_D :
-				exitSequenceR2_D();
+				exitSequence_r2_D();
 				break;
 
 			default :
@@ -275,45 +275,45 @@ public class InternalEventLifeCycleStatemachine
 	}
 
 	/* The reactions of state A. */
-	private void reactR1_A() {
-		if (checkR1_ATr0()) {
-			effectR1_ATr0();
+	private void react_r1_A() {
+		if (check_r1_A_tr0()) {
+			effect_r1_A_tr0();
 		} else {
-			if (checkR1_ALr0()) {
-				effectR1_ALr0();
+			if (check_r1_A_lr0()) {
+				effect_r1_A_lr0();
 			}
 		}
 	}
 
 	/* The reactions of state B. */
-	private void reactR1_B() {
-		if (checkR1_BTr0()) {
-			effectR1_BTr0();
+	private void react_r1_B() {
+		if (check_r1_B_tr0()) {
+			effect_r1_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
-	private void reactR2_C() {
-		if (checkR2_CTr0()) {
-			effectR2_CTr0();
+	private void react_r2_C() {
+		if (check_r2_C_tr0()) {
+			effect_r2_C_tr0();
 		}
 	}
 
 	/* The reactions of state D. */
-	private void reactR2_D() {
-		if (checkR2_DTr0()) {
-			effectR2_DTr0();
+	private void react_r2_D() {
+		if (check_r2_D_tr0()) {
+			effect_r2_D_tr0();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactInternalEventLifeCycle_r1__entry_Default() {
-		enterSequenceR1_A();
+	private void react_r1__entry_Default() {
+		enterSequence_r1_A_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactInternalEventLifeCycle_r2__entry_Default() {
-		enterSequenceR2_C();
+	private void react_r2__entry_Default() {
+		enterSequence_r2_C_default();
 	}
 
 	public void runCycle() {
@@ -324,16 +324,16 @@ public class InternalEventLifeCycleStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case r1_A :
-					reactR1_A();
+					react_r1_A();
 					break;
 				case r1_B :
-					reactR1_B();
+					react_r1_B();
 					break;
 				case r2_C :
-					reactR2_C();
+					react_r2_C();
 					break;
 				case r2_D :
-					reactR2_D();
+					react_r2_D();
 					break;
 				default :
 					// $NullState$

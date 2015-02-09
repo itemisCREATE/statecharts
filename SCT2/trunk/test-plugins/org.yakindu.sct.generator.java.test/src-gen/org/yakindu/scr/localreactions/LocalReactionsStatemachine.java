@@ -47,11 +47,11 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -93,11 +93,11 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 		sCInterface.setX(value);
 	}
 
-	private boolean checkMain_region_ALr0() {
+	private boolean check_main_region_A_lr0() {
 		return sCInterface.x == 0;
 	}
 
-	private void effectMain_region_ALr0() {
+	private void effect_main_region_A_lr0() {
 		sCInterface.x += 1;
 	}
 
@@ -110,27 +110,27 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactLocalReactions_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			default :
@@ -139,15 +139,15 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
-		if (checkMain_region_ALr0()) {
-			effectMain_region_ALr0();
+	private void react_main_region_A() {
+		if (check_main_region_A_lr0()) {
+			effect_main_region_A_lr0();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactLocalReactions_main_region__entry_Default() {
-		enterSequenceMain_region_A();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 
 	public void runCycle() {
@@ -158,7 +158,7 @@ public class LocalReactionsStatemachine implements ILocalReactionsStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				default :
 					// $NullState$

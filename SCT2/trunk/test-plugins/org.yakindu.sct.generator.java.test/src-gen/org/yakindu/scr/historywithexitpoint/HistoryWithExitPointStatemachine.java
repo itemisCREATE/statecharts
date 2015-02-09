@@ -67,11 +67,11 @@ public class HistoryWithExitPointStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceMr();
+		enterSequence_mr_default();
 	}
 
 	public void exit() {
-		exitSequenceMr();
+		exitSequence_mr();
 
 		exitAction();
 	}
@@ -124,60 +124,60 @@ public class HistoryWithExitPointStatemachine
 		sCInterface.raiseNext();
 	}
 
-	private boolean checkMr_A_r_X1Tr0() {
+	private boolean check_mr_A_r_X1_tr0() {
 		return sCInterface.next;
 	}
 
-	private boolean checkMr_A_r_X1Tr1() {
+	private boolean check_mr_A_r_X1_tr1() {
 		return sCInterface.push;
 	}
 
-	private boolean checkMr_A_r_X2Tr0() {
+	private boolean check_mr_A_r_X2_tr0() {
 		return sCInterface.next;
 	}
 
-	private boolean checkMr_A_r_X2Tr1() {
+	private boolean check_mr_A_r_X2_tr1() {
 		return sCInterface.push;
 	}
 
-	private boolean checkMr_BTr0() {
+	private boolean check_mr_B_tr0() {
 		return sCInterface.back;
 	}
 
-	private void effectMr_ATr0() {
-		exitSequenceMr_A();
+	private void effect_mr_A_tr0() {
+		exitSequence_mr_A();
 
-		enterSequenceMr_B();
+		enterSequence_mr_B_default();
 	}
 
-	private void effectMr_A_r_X1Tr0() {
-		exitSequenceMr_A_r_X1();
+	private void effect_mr_A_r_X1_tr0() {
+		exitSequence_mr_A_r_X1();
 
-		enterSequenceMr_A_r_X2();
+		enterSequence_mr_A_r_X2_default();
 	}
 
-	private void effectMr_A_r_X1Tr1() {
-		exitSequenceMr_A_r_X1();
+	private void effect_mr_A_r_X1_tr1() {
+		exitSequence_mr_A_r_X1();
 
-		reactHistoryWithExitPoint_mr_A_r_exit_to_B();
+		react_mr_A_r_exit_to_B();
 	}
 
-	private void effectMr_A_r_X2Tr0() {
-		exitSequenceMr_A_r_X2();
+	private void effect_mr_A_r_X2_tr0() {
+		exitSequence_mr_A_r_X2();
 
-		enterSequenceMr_A_r_X1();
+		enterSequence_mr_A_r_X1_default();
 	}
 
-	private void effectMr_A_r_X2Tr1() {
-		exitSequenceMr_A_r_X2();
+	private void effect_mr_A_r_X2_tr1() {
+		exitSequence_mr_A_r_X2();
 
-		reactHistoryWithExitPoint_mr_A_r_exit_to_B();
+		react_mr_A_r_exit_to_B();
 	}
 
-	private void effectMr_BTr0() {
-		exitSequenceMr_B();
+	private void effect_mr_B_tr0() {
+		exitSequence_mr_B();
 
-		enterSequenceMr_A();
+		enterSequence_mr_A_default();
 	}
 
 	/* Entry action for statechart 'HistoryWithExitPoint'. */
@@ -189,12 +189,12 @@ public class HistoryWithExitPointStatemachine
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMr_A() {
-		enterSequenceMr_A_r();
+	private void enterSequence_mr_A_default() {
+		enterSequence_mr_A_r_default();
 	}
 
 	/* 'default' enter sequence for state X1 */
-	private void enterSequenceMr_A_r_X1() {
+	private void enterSequence_mr_A_r_X1_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_A_r_X1;
 
@@ -202,7 +202,7 @@ public class HistoryWithExitPointStatemachine
 	}
 
 	/* 'default' enter sequence for state X2 */
-	private void enterSequenceMr_A_r_X2() {
+	private void enterSequence_mr_A_r_X2_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_A_r_X2;
 
@@ -210,30 +210,30 @@ public class HistoryWithExitPointStatemachine
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMr_B() {
+	private void enterSequence_mr_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.mr_B;
 	}
 
 	/* 'default' enter sequence for region mr */
-	private void enterSequenceMr() {
-		reactHistoryWithExitPoint_mr__entry_Default();
+	private void enterSequence_mr_default() {
+		react_mr__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r */
-	private void enterSequenceMr_A_r() {
-		reactHistoryWithExitPoint_mr_A_r__entry_Default();
+	private void enterSequence_mr_A_r_default() {
+		react_mr_A_r__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child r */
-	private void shallowEnterSequenceMr_A_r() {
+	private void shallowEnterSequence_mr_A_r() {
 		switch (historyVector[0]) {
 			case mr_A_r_X1 :
-				enterSequenceMr_A_r_X1();
+				enterSequence_mr_A_r_X1_default();
 				break;
 
 			case mr_A_r_X2 :
-				enterSequenceMr_A_r_X2();
+				enterSequence_mr_A_r_X2_default();
 				break;
 
 			default :
@@ -242,41 +242,41 @@ public class HistoryWithExitPointStatemachine
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMr_A() {
-		exitSequenceMr_A_r();
+	private void exitSequence_mr_A() {
+		exitSequence_mr_A_r();
 	}
 
 	/* Default exit sequence for state X1 */
-	private void exitSequenceMr_A_r_X1() {
+	private void exitSequence_mr_A_r_X1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state X2 */
-	private void exitSequenceMr_A_r_X2() {
+	private void exitSequence_mr_A_r_X2() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMr_B() {
+	private void exitSequence_mr_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region mr */
-	private void exitSequenceMr() {
+	private void exitSequence_mr() {
 		switch (stateVector[0]) {
 			case mr_A_r_X1 :
-				exitSequenceMr_A_r_X1();
+				exitSequence_mr_A_r_X1();
 				break;
 
 			case mr_A_r_X2 :
-				exitSequenceMr_A_r_X2();
+				exitSequence_mr_A_r_X2();
 				break;
 
 			case mr_B :
-				exitSequenceMr_B();
+				exitSequence_mr_B();
 				break;
 
 			default :
@@ -285,14 +285,14 @@ public class HistoryWithExitPointStatemachine
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceMr_A_r() {
+	private void exitSequence_mr_A_r() {
 		switch (stateVector[0]) {
 			case mr_A_r_X1 :
-				exitSequenceMr_A_r_X1();
+				exitSequence_mr_A_r_X1();
 				break;
 
 			case mr_A_r_X2 :
-				exitSequenceMr_A_r_X2();
+				exitSequence_mr_A_r_X2();
 				break;
 
 			default :
@@ -301,52 +301,52 @@ public class HistoryWithExitPointStatemachine
 	}
 
 	/* The reactions of state X1. */
-	private void reactMr_A_r_X1() {
-		if (checkMr_A_r_X1Tr0()) {
-			effectMr_A_r_X1Tr0();
+	private void react_mr_A_r_X1() {
+		if (check_mr_A_r_X1_tr0()) {
+			effect_mr_A_r_X1_tr0();
 		} else {
-			if (checkMr_A_r_X1Tr1()) {
-				effectMr_A_r_X1Tr1();
+			if (check_mr_A_r_X1_tr1()) {
+				effect_mr_A_r_X1_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state X2. */
-	private void reactMr_A_r_X2() {
-		if (checkMr_A_r_X2Tr0()) {
-			effectMr_A_r_X2Tr0();
+	private void react_mr_A_r_X2() {
+		if (check_mr_A_r_X2_tr0()) {
+			effect_mr_A_r_X2_tr0();
 		} else {
-			if (checkMr_A_r_X2Tr1()) {
-				effectMr_A_r_X2Tr1();
+			if (check_mr_A_r_X2_tr1()) {
+				effect_mr_A_r_X2_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state B. */
-	private void reactMr_B() {
-		if (checkMr_BTr0()) {
-			effectMr_BTr0();
+	private void react_mr_B() {
+		if (check_mr_B_tr0()) {
+			effect_mr_B_tr0();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactHistoryWithExitPoint_mr__entry_Default() {
-		enterSequenceMr_A();
+	private void react_mr__entry_Default() {
+		enterSequence_mr_A_default();
 	}
 
 	/* Default react sequence for shallow history entry  */
-	private void reactHistoryWithExitPoint_mr_A_r__entry_Default() {
+	private void react_mr_A_r__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequenceMr_A_r();
+			shallowEnterSequence_mr_A_r();
 		} else {
-			enterSequenceMr_A_r_X1();
+			enterSequence_mr_A_r_X1_default();
 		}
 	}
 
 	/* The reactions of exit exit_to_B. */
-	private void reactHistoryWithExitPoint_mr_A_r_exit_to_B() {
-		effectMr_ATr0();
+	private void react_mr_A_r_exit_to_B() {
+		effect_mr_A_tr0();
 	}
 
 	public void runCycle() {
@@ -357,13 +357,13 @@ public class HistoryWithExitPointStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case mr_A_r_X1 :
-					reactMr_A_r_X1();
+					react_mr_A_r_X1();
 					break;
 				case mr_A_r_X2 :
-					reactMr_A_r_X2();
+					react_mr_A_r_X2();
 					break;
 				case mr_B :
-					reactMr_B();
+					react_mr_B();
 					break;
 				default :
 					// $NullState$

@@ -2,15 +2,12 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import java.util.Arrays
-import java.util.List
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import org.eclipse.emf.ecore.EObject
 import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.ExecutionNode
-import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.Step
+import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Variable
@@ -23,7 +20,8 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 class Naming implements JavaKeywords {
 	
 	@Inject extension Navigation
-	
+
+	@Inject extension INamingService namingService;	
 	@Inject StextNameProvider provider;
 	
 	def iStatemachine() {
@@ -185,53 +183,7 @@ class Naming implements JavaKeywords {
 		"$NullState$";
 	}
 	
-	def functionName(Step it) {
-		switch (it) {
-			case isCheckFunction : asCheckFunction
-			case isEntryAction: asEntryActionFunction
-			case isExitAction : asExitActionFunction
-			case isEffect : asEffectFunction
-			case isEnterSequence : asEnterSequenceFunction
-			case isDeepEnterSequence : asDeepEnterSequenceFunction
-			case isShallowEnterSequence : asShallowEnterSequenceFunction
-			case isExitSequence : asExitSequenceFunction
-			case isReactSequence : asReactFunction
-			default : ""
-		} 
-	}
+	def functionName(Step it) { shortName }
 	
-	def asCheckFunction(Step it) { functionName(newArrayList('check', elementName, reaction.name)) }
-	 
-	def asEffectFunction(Step it) { functionName(newArrayList('effect', elementName, reaction.name)) }
-	 
-	def asEntryActionFunction(Step it) { functionName('entryAction') }
 	
-	def asExitActionFunction(Step it) { functionName('exitAction') }
-	 
-	def asEnterSequenceFunction(Step it) { functionName('enterSequence') }
-		 
-	def asDeepEnterSequenceFunction(Step it) { functionName('deepEnterSequence') }
-	 
-	def asShallowEnterSequenceFunction(Step it) { functionName('shallowEnterSequence') }
-	 
-	def asExitSequenceFunction(Step it) { functionName('exitSequence') }
-	 
-	def asReactFunction(Step it) { functionName('react') }
-	
-	def functionName(Step it, String fName) { functionName(newArrayList(fName, elementName)) }
-	
-	//Changed compared to c
-	def functionName(EObject it, List<String> segments) {
-		segments.fold("", [s, seg | s + if (seg.empty) "" else seg.toFirstUpper]).asIdentifier
-	}
-	
-	def dispatch String elementName(EObject it) { eContainer.elementName }
-	
-	def dispatch String elementName(ExecutionScope it) { (if (superScope != null && ! superScope.elementName.empty) superScope.elementName + "_" else "") + name }	
-	
-	def dispatch String elementName(ExecutionState it) { (if (superScope != null && ! superScope.elementName.empty) superScope.elementName + "_" else "") + simpleName }	
-	
-	def dispatch String elementName(ExecutionNode it) { name }	
-	
-	def dispatch String elementName(ExecutionFlow it) { "" }
 }

@@ -67,15 +67,15 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 
-		enterSequenceRegion1();
+		enterSequence__region1_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
-		exitSequenceRegion1();
+		exitSequence__region1();
 
 		exitAction();
 	}
@@ -126,16 +126,16 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 		sCInterface.setMyVar(value);
 	}
 
-	private boolean checkRegion1_BTr0() {
+	private boolean check__region1_B_tr0() {
 		return sCInterface.integerEvent;
 	}
 
-	private void effectRegion1_BTr0() {
-		exitSequenceRegion1_B();
+	private void effect__region1_B_tr0() {
+		exitSequence__region1_B();
 
 		sCInterface.myVar = sCInterface.integerEventValue;
 
-		enterSequenceRegion1_C();
+		enterSequence__region1_C_default();
 	}
 
 	/* Entry action for statechart 'ValuedEvents'. */
@@ -143,7 +143,7 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	/* Entry action for state 'A'. */
-	private void entryActionMain_region_A() {
+	private void entryAction_main_region_A() {
 		sCInterface.raiseIntegerEvent(2 * 21);
 	}
 
@@ -152,58 +152,58 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
-		entryActionMain_region_A();
+	private void enterSequence_main_region_A_default() {
+		entryAction_main_region_A();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceRegion1_B() {
+	private void enterSequence__region1_B_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State._region1_B;
 	}
 
 	/* 'default' enter sequence for state C */
-	private void enterSequenceRegion1_C() {
+	private void enterSequence__region1_C_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State._region1_C;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactValuedEvents_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* 'default' enter sequence for region null */
-	private void enterSequenceRegion1() {
-		reactValuedEvents__region1__entry_Default();
+	private void enterSequence__region1_default() {
+		react__region1__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceRegion1_B() {
+	private void exitSequence__region1_B() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state C */
-	private void exitSequenceRegion1_C() {
+	private void exitSequence__region1_C() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			default :
@@ -212,14 +212,14 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	/* Default exit sequence for region null */
-	private void exitSequenceRegion1() {
+	private void exitSequence__region1() {
 		switch (stateVector[1]) {
 			case _region1_B :
-				exitSequenceRegion1_B();
+				exitSequence__region1_B();
 				break;
 
 			case _region1_C :
-				exitSequenceRegion1_C();
+				exitSequence__region1_C();
 				break;
 
 			default :
@@ -228,28 +228,28 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
+	private void react_main_region_A() {
 	}
 
 	/* The reactions of state B. */
-	private void reactRegion1_B() {
-		if (checkRegion1_BTr0()) {
-			effectRegion1_BTr0();
+	private void react__region1_B() {
+		if (check__region1_B_tr0()) {
+			effect__region1_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
-	private void reactRegion1_C() {
+	private void react__region1_C() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactValuedEvents_main_region__entry_Default() {
-		enterSequenceMain_region_A();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactValuedEvents__region1__entry_Default() {
-		enterSequenceRegion1_B();
+	private void react__region1__entry_Default() {
+		enterSequence__region1_B_default();
 	}
 
 	public void runCycle() {
@@ -260,13 +260,13 @@ public class ValuedEventsStatemachine implements IValuedEventsStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				case _region1_B :
-					reactRegion1_B();
+					react__region1_B();
 					break;
 				case _region1_C :
-					reactRegion1_C();
+					react__region1_C();
 					break;
 				default :
 					// $NullState$

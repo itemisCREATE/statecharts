@@ -90,19 +90,19 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceR();
+		enterSequence_r_default();
 
-		enterSequenceR2();
+		enterSequence_r2_default();
 
-		enterSequenceR3();
+		enterSequence_r3_default();
 	}
 
 	public void exit() {
-		exitSequenceR();
+		exitSequence_r();
 
-		exitSequenceR2();
+		exitSequence_r2();
 
-		exitSequenceR3();
+		exitSequence_r3();
 
 		exitAction();
 	}
@@ -193,34 +193,34 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 		sCInterface.setZ(value);
 	}
 
-	private boolean checkR2_BTr0() {
+	private boolean check_r2_B_tr0() {
 		return sCInterface.f;
 	}
 
-	private boolean checkR2_B_r_BATr0() {
+	private boolean check_r2_B_r_BA_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkR2_CTr0() {
+	private boolean check_r2_C_tr0() {
 		return sCInterface.f;
 	}
 
-	private void effectR2_BTr0() {
-		exitSequenceR2_B();
+	private void effect_r2_B_tr0() {
+		exitSequence_r2_B();
 
-		enterSequenceR2_C();
+		enterSequence_r2_C_default();
 	}
 
-	private void effectR2_B_r_BATr0() {
-		exitSequenceR2_B_r_BA();
+	private void effect_r2_B_r_BA_tr0() {
+		exitSequence_r2_B_r_BA();
 
-		enterSequenceR2_B_r_BB();
+		enterSequence_r2_B_r_BB_default();
 	}
 
-	private void effectR2_CTr0() {
-		exitSequenceR2_C();
+	private void effect_r2_C_tr0() {
+		exitSequence_r2_C();
 
-		enterSequenceR2_B();
+		enterSequence_r2_B_default();
 	}
 
 	/* Entry action for statechart 'DeepEntry'. */
@@ -228,22 +228,22 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Entry action for state 'A'. */
-	private void entryActionR_A() {
+	private void entryAction_r_A() {
 		sCInterface.x += 1;
 	}
 
 	/* Entry action for state 'BA'. */
-	private void entryActionR2_B_r_BA() {
+	private void entryAction_r2_B_r_BA() {
 		sCInterface.y += 1;
 	}
 
 	/* Entry action for state 'D'. */
-	private void entryActionR3_D() {
+	private void entryAction_r3_D() {
 		sCInterface.z += 1;
 	}
 
 	/* Entry action for state 'DA'. */
-	private void entryActionR3_D_r_DA() {
+	private void entryAction_r3_D_r_DA() {
 		sCInterface.z += 1;
 	}
 
@@ -252,33 +252,33 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceR_A_r_B() {
+	private void enterSequence_r_A_r_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.r_A_r_B;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceR2_B() {
-		enterSequenceR2_B_r();
+	private void enterSequence_r2_B_default() {
+		enterSequence_r2_B_r_default();
 	}
 
 	/* 'default' enter sequence for state BA */
-	private void enterSequenceR2_B_r_BA() {
-		entryActionR2_B_r_BA();
+	private void enterSequence_r2_B_r_BA_default() {
+		entryAction_r2_B_r_BA();
 
-		enterSequenceR2_B_r_BA_r();
+		enterSequence_r2_B_r_BA_r_default();
 
 		historyVector[0] = stateVector[1];
 	}
 
 	/* 'default' enter sequence for state BAA */
-	private void enterSequenceR2_B_r_BA_r_BAA() {
+	private void enterSequence_r2_B_r_BA_r_BAA_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.r2_B_r_BA_r_BAA;
 	}
 
 	/* 'default' enter sequence for state BB */
-	private void enterSequenceR2_B_r_BB() {
+	private void enterSequence_r2_B_r_BB_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.r2_B_r_BB;
 
@@ -286,13 +286,13 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* 'default' enter sequence for state C */
-	private void enterSequenceR2_C() {
+	private void enterSequence_r2_C_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.r2_C;
 	}
 
 	/* 'default' enter sequence for state DAA */
-	private void enterSequenceR3_D_r_DA_r_DAA() {
+	private void enterSequence_r3_D_r_DA_r_DAA_default() {
 		nextStateIndex = 2;
 		stateVector[2] = State.r3_D_r_DA_r_DAA;
 
@@ -300,29 +300,29 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* 'default' enter sequence for region r */
-	private void enterSequenceR() {
-		reactDeepEntry_r__entry_Default();
+	private void enterSequence_r_default() {
+		react_r__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r2 */
-	private void enterSequenceR2() {
-		reactDeepEntry_r2__entry_Default();
+	private void enterSequence_r2_default() {
+		react_r2__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r */
-	private void enterSequenceR2_B_r() {
-		reactDeepEntry_r2_B_r__entry_Default();
+	private void enterSequence_r2_B_r_default() {
+		react_r2_B_r__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child r */
-	private void shallowEnterSequenceR2_B_r() {
+	private void shallowEnterSequence_r2_B_r() {
 		switch (historyVector[0]) {
 			case r2_B_r_BA_r_BAA :
-				enterSequenceR2_B_r_BA();
+				enterSequence_r2_B_r_BA_default();
 				break;
 
 			case r2_B_r_BB :
-				enterSequenceR2_B_r_BB();
+				enterSequence_r2_B_r_BB_default();
 				break;
 
 			default :
@@ -331,22 +331,22 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* 'default' enter sequence for region r */
-	private void enterSequenceR2_B_r_BA_r() {
-		reactDeepEntry_r2_B_r_BA_r__entry_Default();
+	private void enterSequence_r2_B_r_BA_r_default() {
+		react_r2_B_r_BA_r__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r3 */
-	private void enterSequenceR3() {
-		reactDeepEntry_r3__entry_Default();
+	private void enterSequence_r3_default() {
+		react_r3__entry_Default();
 	}
 
 	/* deep enterSequence with history in child r3 */
-	private void deepEnterSequenceR3() {
+	private void deepEnterSequence_r3() {
 		switch (historyVector[1]) {
 			case r3_D_r_DA_r_DAA :
-				entryActionR3_D();
+				entryAction_r3_D();
 
-				deepEnterSequenceR3_D_r();
+				deepEnterSequence_r3_D_r();
 				break;
 
 			default :
@@ -355,12 +355,12 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* deep enterSequence with history in child r */
-	private void deepEnterSequenceR3_D_r() {
+	private void deepEnterSequence_r3_D_r() {
 		switch (historyVector[2]) {
 			case r3_D_r_DA_r_DAA :
-				entryActionR3_D_r_DA();
+				entryAction_r3_D_r_DA();
 
-				deepEnterSequenceR3_D_r_DA_r();
+				deepEnterSequence_r3_D_r_DA_r();
 				break;
 
 			default :
@@ -369,10 +369,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* deep enterSequence with history in child r */
-	private void deepEnterSequenceR3_D_r_DA_r() {
+	private void deepEnterSequence_r3_D_r_DA_r() {
 		switch (historyVector[3]) {
 			case r3_D_r_DA_r_DAA :
-				enterSequenceR3_D_r_DA_r_DAA();
+				enterSequence_r3_D_r_DA_r_DAA_default();
 				break;
 
 			default :
@@ -381,50 +381,50 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceR_A_r_B() {
+	private void exitSequence_r_A_r_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceR2_B() {
-		exitSequenceR2_B_r();
+	private void exitSequence_r2_B() {
+		exitSequence_r2_B_r();
 	}
 
 	/* Default exit sequence for state BA */
-	private void exitSequenceR2_B_r_BA() {
-		exitSequenceR2_B_r_BA_r();
+	private void exitSequence_r2_B_r_BA() {
+		exitSequence_r2_B_r_BA_r();
 	}
 
 	/* Default exit sequence for state BAA */
-	private void exitSequenceR2_B_r_BA_r_BAA() {
+	private void exitSequence_r2_B_r_BA_r_BAA() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state BB */
-	private void exitSequenceR2_B_r_BB() {
+	private void exitSequence_r2_B_r_BB() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state C */
-	private void exitSequenceR2_C() {
+	private void exitSequence_r2_C() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state DAA */
-	private void exitSequenceR3_D_r_DA_r_DAA() {
+	private void exitSequence_r3_D_r_DA_r_DAA() {
 		nextStateIndex = 2;
 		stateVector[2] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceR() {
+	private void exitSequence_r() {
 		switch (stateVector[0]) {
 			case r_A_r_B :
-				exitSequenceR_A_r_B();
+				exitSequence_r_A_r_B();
 				break;
 
 			default :
@@ -433,10 +433,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceR_A_r() {
+	private void exitSequence_r_A_r() {
 		switch (stateVector[0]) {
 			case r_A_r_B :
-				exitSequenceR_A_r_B();
+				exitSequence_r_A_r_B();
 				break;
 
 			default :
@@ -445,18 +445,18 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Default exit sequence for region r2 */
-	private void exitSequenceR2() {
+	private void exitSequence_r2() {
 		switch (stateVector[1]) {
 			case r2_B_r_BA_r_BAA :
-				exitSequenceR2_B_r_BA_r_BAA();
+				exitSequence_r2_B_r_BA_r_BAA();
 				break;
 
 			case r2_B_r_BB :
-				exitSequenceR2_B_r_BB();
+				exitSequence_r2_B_r_BB();
 				break;
 
 			case r2_C :
-				exitSequenceR2_C();
+				exitSequence_r2_C();
 				break;
 
 			default :
@@ -465,14 +465,14 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceR2_B_r() {
+	private void exitSequence_r2_B_r() {
 		switch (stateVector[1]) {
 			case r2_B_r_BA_r_BAA :
-				exitSequenceR2_B_r_BA_r_BAA();
+				exitSequence_r2_B_r_BA_r_BAA();
 				break;
 
 			case r2_B_r_BB :
-				exitSequenceR2_B_r_BB();
+				exitSequence_r2_B_r_BB();
 				break;
 
 			default :
@@ -481,10 +481,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceR2_B_r_BA_r() {
+	private void exitSequence_r2_B_r_BA_r() {
 		switch (stateVector[1]) {
 			case r2_B_r_BA_r_BAA :
-				exitSequenceR2_B_r_BA_r_BAA();
+				exitSequence_r2_B_r_BA_r_BAA();
 				break;
 
 			default :
@@ -493,10 +493,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Default exit sequence for region r3 */
-	private void exitSequenceR3() {
+	private void exitSequence_r3() {
 		switch (stateVector[2]) {
 			case r3_D_r_DA_r_DAA :
-				exitSequenceR3_D_r_DA_r_DAA();
+				exitSequence_r3_D_r_DA_r_DAA();
 				break;
 
 			default :
@@ -505,10 +505,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceR3_D_r() {
+	private void exitSequence_r3_D_r() {
 		switch (stateVector[2]) {
 			case r3_D_r_DA_r_DAA :
-				exitSequenceR3_D_r_DA_r_DAA();
+				exitSequence_r3_D_r_DA_r_DAA();
 				break;
 
 			default :
@@ -517,10 +517,10 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* Default exit sequence for region r */
-	private void exitSequenceR3_D_r_DA_r() {
+	private void exitSequence_r3_D_r_DA_r() {
 		switch (stateVector[2]) {
 			case r3_D_r_DA_r_DAA :
-				exitSequenceR3_D_r_DA_r_DAA();
+				exitSequence_r3_D_r_DA_r_DAA();
 				break;
 
 			default :
@@ -529,82 +529,82 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 	}
 
 	/* The reactions of state B. */
-	private void reactR_A_r_B() {
+	private void react_r_A_r_B() {
 	}
 
 	/* The reactions of state BAA. */
-	private void reactR2_B_r_BA_r_BAA() {
-		if (checkR2_BTr0()) {
-			effectR2_BTr0();
+	private void react_r2_B_r_BA_r_BAA() {
+		if (check_r2_B_tr0()) {
+			effect_r2_B_tr0();
 		} else {
-			if (checkR2_B_r_BATr0()) {
-				effectR2_B_r_BATr0();
+			if (check_r2_B_r_BA_tr0()) {
+				effect_r2_B_r_BA_tr0();
 			} else {
 			}
 		}
 	}
 
 	/* The reactions of state BB. */
-	private void reactR2_B_r_BB() {
-		if (checkR2_BTr0()) {
-			effectR2_BTr0();
+	private void react_r2_B_r_BB() {
+		if (check_r2_B_tr0()) {
+			effect_r2_B_tr0();
 		} else {
 		}
 	}
 
 	/* The reactions of state C. */
-	private void reactR2_C() {
-		if (checkR2_CTr0()) {
-			effectR2_CTr0();
+	private void react_r2_C() {
+		if (check_r2_C_tr0()) {
+			effect_r2_C_tr0();
 		}
 	}
 
 	/* The reactions of state DAA. */
-	private void reactR3_D_r_DA_r_DAA() {
+	private void react_r3_D_r_DA_r_DAA() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactDeepEntry_r__entry_Default() {
-		entryActionR_A();
+	private void react_r__entry_Default() {
+		entryAction_r_A();
 
-		enterSequenceR_A_r_B();
+		enterSequence_r_A_r_B_default();
 	}
 
 	/* Default react sequence for shallow history entry  */
-	private void reactDeepEntry_r2_B_r__entry_Default() {
+	private void react_r2_B_r__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequenceR2_B_r();
+			shallowEnterSequence_r2_B_r();
 		} else {
-			entryActionR2_B_r_BA();
+			entryAction_r2_B_r_BA();
 
-			enterSequenceR2_B_r_BA_r_BAA();
+			enterSequence_r2_B_r_BA_r_BAA_default();
 
 			historyVector[0] = stateVector[1];
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactDeepEntry_r2_B_r_BA_r__entry_Default() {
-		enterSequenceR2_B_r_BA_r_BAA();
+	private void react_r2_B_r_BA_r__entry_Default() {
+		enterSequence_r2_B_r_BA_r_BAA_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactDeepEntry_r2__entry_Default() {
-		enterSequenceR2_B();
+	private void react_r2__entry_Default() {
+		enterSequence_r2_B_default();
 	}
 
 	/* Default react sequence for deep history entry  */
-	private void reactDeepEntry_r3__entry_Default() {
+	private void react_r3__entry_Default() {
 		/* Enter the region with deep history */
 		if (historyVector[1] != State.$NullState$) {
-			deepEnterSequenceR3();
+			deepEnterSequence_r3();
 		} else {
-			entryActionR3_D();
+			entryAction_r3_D();
 
-			entryActionR3_D_r_DA();
+			entryAction_r3_D_r_DA();
 
-			enterSequenceR3_D_r_DA_r_DAA();
+			enterSequence_r3_D_r_DA_r_DAA_default();
 
 			historyVector[2] = stateVector[2];
 
@@ -620,19 +620,19 @@ public class DeepEntryStatemachine implements IDeepEntryStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case r_A_r_B :
-					reactR_A_r_B();
+					react_r_A_r_B();
 					break;
 				case r2_B_r_BA_r_BAA :
-					reactR2_B_r_BA_r_BAA();
+					react_r2_B_r_BA_r_BAA();
 					break;
 				case r2_B_r_BB :
-					reactR2_B_r_BB();
+					react_r2_B_r_BB();
 					break;
 				case r2_C :
-					reactR2_C();
+					react_r2_C();
 					break;
 				case r3_D_r_DA_r_DAA :
-					reactR3_D_r_DA_r_DAA();
+					react_r3_D_r_DA_r_DAA();
 					break;
 				default :
 					// $NullState$

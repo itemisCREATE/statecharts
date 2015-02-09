@@ -78,11 +78,11 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -151,56 +151,56 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 		sCInterface.setX(value);
 	}
 
-	private boolean checkMain_region_ATr0() {
+	private boolean check_main_region_A_tr0() {
 		return sCInterface.e || sCInterface.f;
 	}
 
-	private boolean checkMain_region_B_r1_C1Tr0() {
+	private boolean check_main_region_B_r1_C1_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkMain_region_B_r1_C2Tr0() {
+	private boolean check_main_region_B_r1_C2_tr0() {
 		return sCInterface.jc && isStateActive(State.main_region_B_r2_D2)
 				&& sCInterface.jd;
 	}
 
-	private boolean checkMain_region_B_r2_D1Tr0() {
+	private boolean check_main_region_B_r2_D1_tr0() {
 		return sCInterface.f;
 	}
 
-	private boolean checkMain_region_B_r2_D2Tr0() {
+	private boolean check_main_region_B_r2_D2_tr0() {
 		return sCInterface.jd && isStateActive(State.main_region_B_r1_C2)
 				&& sCInterface.jc;
 	}
 
-	private void effectMain_region_ATr0() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_B();
+		enterSequence_main_region_B_default();
 	}
 
-	private void effectMain_region_B_r1_C1Tr0() {
-		exitSequenceMain_region_B_r1_C1();
+	private void effect_main_region_B_r1_C1_tr0() {
+		exitSequence_main_region_B_r1_C1();
 
-		enterSequenceMain_region_B_r1_C2();
+		enterSequence_main_region_B_r1_C2_default();
 	}
 
-	private void effectMain_region_B_r1_C2Tr0() {
-		exitSequenceMain_region_B();
+	private void effect_main_region_B_r1_C2_tr0() {
+		exitSequence_main_region_B();
 
-		reactSyncJoin_main_region__sync0();
+		react_main_region__sync0();
 	}
 
-	private void effectMain_region_B_r2_D1Tr0() {
-		exitSequenceMain_region_B_r2_D1();
+	private void effect_main_region_B_r2_D1_tr0() {
+		exitSequence_main_region_B_r2_D1();
 
-		enterSequenceMain_region_B_r2_D2();
+		enterSequence_main_region_B_r2_D2_default();
 	}
 
-	private void effectMain_region_B_r2_D2Tr0() {
-		exitSequenceMain_region_B();
+	private void effect_main_region_B_r2_D2_tr0() {
+		exitSequence_main_region_B();
 
-		reactSyncJoin_main_region__sync0();
+		react_main_region__sync0();
 	}
 
 	/* Entry action for statechart 'SyncJoin'. */
@@ -208,7 +208,7 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	/* Entry action for state 'A'. */
-	private void entryActionMain_region_A() {
+	private void entryAction_main_region_A() {
 		sCInterface.x += 1;
 	}
 
@@ -217,109 +217,109 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
-		entryActionMain_region_A();
+	private void enterSequence_main_region_A_default() {
+		entryAction_main_region_A();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_B() {
-		enterSequenceMain_region_B_r1();
+	private void enterSequence_main_region_B_default() {
+		enterSequence_main_region_B_r1_default();
 
-		enterSequenceMain_region_B_r2();
+		enterSequence_main_region_B_r2_default();
 	}
 
 	/* 'default' enter sequence for state C1 */
-	private void enterSequenceMain_region_B_r1_C1() {
+	private void enterSequence_main_region_B_r1_C1_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B_r1_C1;
 	}
 
 	/* 'default' enter sequence for state C2 */
-	private void enterSequenceMain_region_B_r1_C2() {
+	private void enterSequence_main_region_B_r1_C2_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B_r1_C2;
 	}
 
 	/* 'default' enter sequence for state D1 */
-	private void enterSequenceMain_region_B_r2_D1() {
+	private void enterSequence_main_region_B_r2_D1_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.main_region_B_r2_D1;
 	}
 
 	/* 'default' enter sequence for state D2 */
-	private void enterSequenceMain_region_B_r2_D2() {
+	private void enterSequence_main_region_B_r2_D2_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.main_region_B_r2_D2;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactSyncJoin_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r1 */
-	private void enterSequenceMain_region_B_r1() {
-		reactSyncJoin_main_region_B_r1__entry_Default();
+	private void enterSequence_main_region_B_r1_default() {
+		react_main_region_B_r1__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r2 */
-	private void enterSequenceMain_region_B_r2() {
-		reactSyncJoin_main_region_B_r2__entry_Default();
+	private void enterSequence_main_region_B_r2_default() {
+		react_main_region_B_r2__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMain_region_B() {
-		exitSequenceMain_region_B_r1();
+	private void exitSequence_main_region_B() {
+		exitSequence_main_region_B_r1();
 
-		exitSequenceMain_region_B_r2();
+		exitSequence_main_region_B_r2();
 	}
 
 	/* Default exit sequence for state C1 */
-	private void exitSequenceMain_region_B_r1_C1() {
+	private void exitSequence_main_region_B_r1_C1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state C2 */
-	private void exitSequenceMain_region_B_r1_C2() {
+	private void exitSequence_main_region_B_r1_C2() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state D1 */
-	private void exitSequenceMain_region_B_r2_D1() {
+	private void exitSequence_main_region_B_r2_D1() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state D2 */
-	private void exitSequenceMain_region_B_r2_D2() {
+	private void exitSequence_main_region_B_r2_D2() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			case main_region_B_r1_C1 :
-				exitSequenceMain_region_B_r1_C1();
+				exitSequence_main_region_B_r1_C1();
 				break;
 
 			case main_region_B_r1_C2 :
-				exitSequenceMain_region_B_r1_C2();
+				exitSequence_main_region_B_r1_C2();
 				break;
 
 			default :
@@ -328,11 +328,11 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 		switch (stateVector[1]) {
 			case main_region_B_r2_D1 :
-				exitSequenceMain_region_B_r2_D1();
+				exitSequence_main_region_B_r2_D1();
 				break;
 
 			case main_region_B_r2_D2 :
-				exitSequenceMain_region_B_r2_D2();
+				exitSequence_main_region_B_r2_D2();
 				break;
 
 			default :
@@ -341,14 +341,14 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	/* Default exit sequence for region r1 */
-	private void exitSequenceMain_region_B_r1() {
+	private void exitSequence_main_region_B_r1() {
 		switch (stateVector[0]) {
 			case main_region_B_r1_C1 :
-				exitSequenceMain_region_B_r1_C1();
+				exitSequence_main_region_B_r1_C1();
 				break;
 
 			case main_region_B_r1_C2 :
-				exitSequenceMain_region_B_r1_C2();
+				exitSequence_main_region_B_r1_C2();
 				break;
 
 			default :
@@ -357,14 +357,14 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	/* Default exit sequence for region r2 */
-	private void exitSequenceMain_region_B_r2() {
+	private void exitSequence_main_region_B_r2() {
 		switch (stateVector[1]) {
 			case main_region_B_r2_D1 :
-				exitSequenceMain_region_B_r2_D1();
+				exitSequence_main_region_B_r2_D1();
 				break;
 
 			case main_region_B_r2_D2 :
-				exitSequenceMain_region_B_r2_D2();
+				exitSequence_main_region_B_r2_D2();
 				break;
 
 			default :
@@ -373,58 +373,58 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
-		if (checkMain_region_ATr0()) {
-			effectMain_region_ATr0();
+	private void react_main_region_A() {
+		if (check_main_region_A_tr0()) {
+			effect_main_region_A_tr0();
 		}
 	}
 
 	/* The reactions of state C1. */
-	private void reactMain_region_B_r1_C1() {
-		if (checkMain_region_B_r1_C1Tr0()) {
-			effectMain_region_B_r1_C1Tr0();
+	private void react_main_region_B_r1_C1() {
+		if (check_main_region_B_r1_C1_tr0()) {
+			effect_main_region_B_r1_C1_tr0();
 		}
 	}
 
 	/* The reactions of state C2. */
-	private void reactMain_region_B_r1_C2() {
-		if (checkMain_region_B_r1_C2Tr0()) {
-			effectMain_region_B_r1_C2Tr0();
+	private void react_main_region_B_r1_C2() {
+		if (check_main_region_B_r1_C2_tr0()) {
+			effect_main_region_B_r1_C2_tr0();
 		}
 	}
 
 	/* The reactions of state D1. */
-	private void reactMain_region_B_r2_D1() {
-		if (checkMain_region_B_r2_D1Tr0()) {
-			effectMain_region_B_r2_D1Tr0();
+	private void react_main_region_B_r2_D1() {
+		if (check_main_region_B_r2_D1_tr0()) {
+			effect_main_region_B_r2_D1_tr0();
 		}
 	}
 
 	/* The reactions of state D2. */
-	private void reactMain_region_B_r2_D2() {
-		if (checkMain_region_B_r2_D2Tr0()) {
-			effectMain_region_B_r2_D2Tr0();
+	private void react_main_region_B_r2_D2() {
+		if (check_main_region_B_r2_D2_tr0()) {
+			effect_main_region_B_r2_D2_tr0();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSyncJoin_main_region__entry_Default() {
-		enterSequenceMain_region_B();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_B_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSyncJoin_main_region_B_r1__entry_Default() {
-		enterSequenceMain_region_B_r1_C1();
+	private void react_main_region_B_r1__entry_Default() {
+		enterSequence_main_region_B_r1_C1_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSyncJoin_main_region_B_r2__entry_Default() {
-		enterSequenceMain_region_B_r2_D1();
+	private void react_main_region_B_r2__entry_Default() {
+		enterSequence_main_region_B_r2_D1_default();
 	}
 
 	/* The reactions of state null. */
-	private void reactSyncJoin_main_region__sync0() {
-		enterSequenceMain_region_A();
+	private void react_main_region__sync0() {
+		enterSequence_main_region_A_default();
 	}
 
 	public void runCycle() {
@@ -435,19 +435,19 @@ public class SyncJoinStatemachine implements ISyncJoinStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				case main_region_B_r1_C1 :
-					reactMain_region_B_r1_C1();
+					react_main_region_B_r1_C1();
 					break;
 				case main_region_B_r1_C2 :
-					reactMain_region_B_r1_C2();
+					react_main_region_B_r1_C2();
 					break;
 				case main_region_B_r2_D1 :
-					reactMain_region_B_r2_D1();
+					react_main_region_B_r2_D1();
 					break;
 				case main_region_B_r2_D2 :
-					reactMain_region_B_r2_D2();
+					react_main_region_B_r2_D2();
 					break;
 				default :
 					// $NullState$

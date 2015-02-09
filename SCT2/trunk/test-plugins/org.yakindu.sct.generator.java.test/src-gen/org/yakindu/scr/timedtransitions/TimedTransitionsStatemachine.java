@@ -43,11 +43,11 @@ public class TimedTransitionsStatemachine
 		}
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -106,14 +106,14 @@ public class TimedTransitionsStatemachine
 		timeEvents[eventID] = true;
 	}
 
-	private boolean checkMain_region_StartTr0() {
+	private boolean check_main_region_Start_tr0() {
 		return timeEvents[0];
 	}
 
-	private void effectMain_region_StartTr0() {
-		exitSequenceMain_region_Start();
+	private void effect_main_region_Start_tr0() {
+		exitSequence_main_region_Start();
 
-		enterSequenceMain_region_End();
+		enterSequence_main_region_End_default();
 	}
 
 	/* Entry action for statechart 'TimedTransitions'. */
@@ -121,7 +121,7 @@ public class TimedTransitionsStatemachine
 	}
 
 	/* Entry action for state 'Start'. */
-	private void entryActionMain_region_Start() {
+	private void entryAction_main_region_Start() {
 
 		timer.setTimer(this, 0, 2 * 1000, false);
 	}
@@ -131,52 +131,52 @@ public class TimedTransitionsStatemachine
 	}
 
 	/* Exit action for state 'Start'. */
-	private void exitActionMain_region_Start() {
+	private void exitAction_main_region_Start() {
 		timer.unsetTimer(this, 0);
 	}
 
 	/* 'default' enter sequence for state Start */
-	private void enterSequenceMain_region_Start() {
-		entryActionMain_region_Start();
+	private void enterSequence_main_region_Start_default() {
+		entryAction_main_region_Start();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Start;
 	}
 
 	/* 'default' enter sequence for state End */
-	private void enterSequenceMain_region_End() {
+	private void enterSequence_main_region_End_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_End;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactTimedTransitions_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state Start */
-	private void exitSequenceMain_region_Start() {
+	private void exitSequence_main_region_Start() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 
-		exitActionMain_region_Start();
+		exitAction_main_region_Start();
 	}
 
 	/* Default exit sequence for state End */
-	private void exitSequenceMain_region_End() {
+	private void exitSequence_main_region_End() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_Start :
-				exitSequenceMain_region_Start();
+				exitSequence_main_region_Start();
 				break;
 
 			case main_region_End :
-				exitSequenceMain_region_End();
+				exitSequence_main_region_End();
 				break;
 
 			default :
@@ -185,19 +185,19 @@ public class TimedTransitionsStatemachine
 	}
 
 	/* The reactions of state Start. */
-	private void reactMain_region_Start() {
-		if (checkMain_region_StartTr0()) {
-			effectMain_region_StartTr0();
+	private void react_main_region_Start() {
+		if (check_main_region_Start_tr0()) {
+			effect_main_region_Start_tr0();
 		}
 	}
 
 	/* The reactions of state End. */
-	private void reactMain_region_End() {
+	private void react_main_region_End() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactTimedTransitions_main_region__entry_Default() {
-		enterSequenceMain_region_Start();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_Start_default();
 	}
 
 	public void runCycle() {
@@ -208,10 +208,10 @@ public class TimedTransitionsStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_Start :
-					reactMain_region_Start();
+					react_main_region_Start();
 					break;
 				case main_region_End :
-					reactMain_region_End();
+					react_main_region_End();
 					break;
 				default :
 					// $NullState$

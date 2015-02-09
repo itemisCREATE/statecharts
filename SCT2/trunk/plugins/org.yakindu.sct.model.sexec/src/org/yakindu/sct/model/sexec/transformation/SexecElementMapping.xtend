@@ -62,7 +62,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	@Inject extension IQualifiedNameProvider qfnProvider
 	@Inject extension StatechartExtensions sce
 	@Inject extension SgraphExtensions sgraph
-	@Inject extension StextExtensions stext
 	@Inject extension SexecExtensions sexec
 	
 
@@ -193,6 +192,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 			} else {
 				r.name =  region.name
 			}
+			r.name= region.fullyQualifiedName.toString.replaceAll(" ", "")
 			r.sourceElement = region
 		}
 	}
@@ -227,6 +227,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 	} 
 
 	def Call newCall(Step step) {
+//	  if (step ==  null) throw new IllegalArgumentException("Attempt to create 'null' call.")
 		val r = sexecFactory.createCall
 		r.step = step
 		r

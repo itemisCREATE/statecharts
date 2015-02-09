@@ -47,11 +47,11 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -97,14 +97,14 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 		sCInterface.raiseEvent1();
 	}
 
-	private boolean checkMain_region_ATr0() {
+	private boolean check_main_region_A_tr0() {
 		return sCInterface.event1;
 	}
 
-	private void effectMain_region_ATr0() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_B();
+		enterSequence_main_region_B_default();
 	}
 
 	/* Entry action for statechart 'SimpleHierachy'. */
@@ -116,53 +116,53 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_B() {
-		enterSequenceMain_region_B_subregion1();
+	private void enterSequence_main_region_B_default() {
+		enterSequence_main_region_B_subregion1_default();
 	}
 
 	/* 'default' enter sequence for state B1 */
-	private void enterSequenceMain_region_B_subregion1_B1() {
+	private void enterSequence_main_region_B_subregion1_B1_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B_subregion1_B1;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactSimpleHierachy_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* 'default' enter sequence for region subregion1 */
-	private void enterSequenceMain_region_B_subregion1() {
-		reactSimpleHierachy_main_region_B_subregion1__entry_Default();
+	private void enterSequence_main_region_B_subregion1_default() {
+		react_main_region_B_subregion1__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B1 */
-	private void exitSequenceMain_region_B_subregion1_B1() {
+	private void exitSequence_main_region_B_subregion1_B1() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			case main_region_B_subregion1_B1 :
-				exitSequenceMain_region_B_subregion1_B1();
+				exitSequence_main_region_B_subregion1_B1();
 				break;
 
 			default :
@@ -171,10 +171,10 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	}
 
 	/* Default exit sequence for region subregion1 */
-	private void exitSequenceMain_region_B_subregion1() {
+	private void exitSequence_main_region_B_subregion1() {
 		switch (stateVector[0]) {
 			case main_region_B_subregion1_B1 :
-				exitSequenceMain_region_B_subregion1_B1();
+				exitSequence_main_region_B_subregion1_B1();
 				break;
 
 			default :
@@ -183,24 +183,24 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
-		if (checkMain_region_ATr0()) {
-			effectMain_region_ATr0();
+	private void react_main_region_A() {
+		if (check_main_region_A_tr0()) {
+			effect_main_region_A_tr0();
 		}
 	}
 
 	/* The reactions of state B1. */
-	private void reactMain_region_B_subregion1_B1() {
+	private void react_main_region_B_subregion1_B1() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSimpleHierachy_main_region__entry_Default() {
-		enterSequenceMain_region_A();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSimpleHierachy_main_region_B_subregion1__entry_Default() {
-		enterSequenceMain_region_B_subregion1_B1();
+	private void react_main_region_B_subregion1__entry_Default() {
+		enterSequence_main_region_B_subregion1_B1_default();
 	}
 
 	public void runCycle() {
@@ -211,10 +211,10 @@ public class SimpleHierachyStatemachine implements ISimpleHierachyStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				case main_region_B_subregion1_B1 :
-					reactMain_region_B_subregion1_B1();
+					react_main_region_B_subregion1_B1();
 					break;
 				default :
 					// $NullState$

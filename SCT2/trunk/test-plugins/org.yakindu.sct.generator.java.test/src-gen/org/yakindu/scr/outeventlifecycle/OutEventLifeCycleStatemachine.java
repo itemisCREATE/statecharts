@@ -83,15 +83,15 @@ public class OutEventLifeCycleStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceR1();
+		enterSequence_r1_default();
 
-		enterSequenceR2();
+		enterSequence_r2_default();
 	}
 
 	public void exit() {
-		exitSequenceR1();
+		exitSequence_r1();
 
-		exitSequenceR2();
+		exitSequence_r2();
 
 		exitAction();
 	}
@@ -153,31 +153,31 @@ public class OutEventLifeCycleStatemachine
 		sCInterface.setF_available_in_next_cycle(value);
 	}
 
-	private boolean checkR1_ATr0() {
+	private boolean check_r1_A_tr0() {
 		return sCInterface.e;
 	}
 
-	private boolean checkR1_BLr0() {
+	private boolean check_r1_B_lr0() {
 		return sCInterface.f;
 	}
 
-	private boolean checkR2_BLr0() {
+	private boolean check_r2_B_lr0() {
 		return sCInterface.f;
 	}
 
-	private void effectR1_ATr0() {
-		exitSequenceR1_A();
+	private void effect_r1_A_tr0() {
+		exitSequence_r1_A();
 
 		sCInterface.raiseF();
 
-		enterSequenceR1_B();
+		enterSequence_r1_B_default();
 	}
 
-	private void effectR1_BLr0() {
+	private void effect_r1_B_lr0() {
 		sCInterface.f_available_in_next_cycle = true;
 	}
 
-	private void effectR2_BLr0() {
+	private void effect_r2_B_lr0() {
 		sCInterface.f_available_in_cycle = true;
 	}
 
@@ -190,60 +190,60 @@ public class OutEventLifeCycleStatemachine
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceR1_A() {
+	private void enterSequence_r1_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.r1_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceR1_B() {
+	private void enterSequence_r1_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.r1_B;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceR2_B() {
+	private void enterSequence_r2_B_default() {
 		nextStateIndex = 1;
 		stateVector[1] = State.r2_B;
 	}
 
 	/* 'default' enter sequence for region r1 */
-	private void enterSequenceR1() {
-		reactOutEventLifeCycle_r1__entry_Default();
+	private void enterSequence_r1_default() {
+		react_r1__entry_Default();
 	}
 
 	/* 'default' enter sequence for region r2 */
-	private void enterSequenceR2() {
-		reactOutEventLifeCycle_r2__entry_Default();
+	private void enterSequence_r2_default() {
+		react_r2__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceR1_A() {
+	private void exitSequence_r1_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceR1_B() {
+	private void exitSequence_r1_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceR2_B() {
+	private void exitSequence_r2_B() {
 		nextStateIndex = 1;
 		stateVector[1] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region r1 */
-	private void exitSequenceR1() {
+	private void exitSequence_r1() {
 		switch (stateVector[0]) {
 			case r1_A :
-				exitSequenceR1_A();
+				exitSequence_r1_A();
 				break;
 
 			case r1_B :
-				exitSequenceR1_B();
+				exitSequence_r1_B();
 				break;
 
 			default :
@@ -252,10 +252,10 @@ public class OutEventLifeCycleStatemachine
 	}
 
 	/* Default exit sequence for region r2 */
-	private void exitSequenceR2() {
+	private void exitSequence_r2() {
 		switch (stateVector[1]) {
 			case r2_B :
-				exitSequenceR2_B();
+				exitSequence_r2_B();
 				break;
 
 			default :
@@ -264,34 +264,34 @@ public class OutEventLifeCycleStatemachine
 	}
 
 	/* The reactions of state A. */
-	private void reactR1_A() {
-		if (checkR1_ATr0()) {
-			effectR1_ATr0();
+	private void react_r1_A() {
+		if (check_r1_A_tr0()) {
+			effect_r1_A_tr0();
 		}
 	}
 
 	/* The reactions of state B. */
-	private void reactR1_B() {
-		if (checkR1_BLr0()) {
-			effectR1_BLr0();
+	private void react_r1_B() {
+		if (check_r1_B_lr0()) {
+			effect_r1_B_lr0();
 		}
 	}
 
 	/* The reactions of state B. */
-	private void reactR2_B() {
-		if (checkR2_BLr0()) {
-			effectR2_BLr0();
+	private void react_r2_B() {
+		if (check_r2_B_lr0()) {
+			effect_r2_B_lr0();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactOutEventLifeCycle_r1__entry_Default() {
-		enterSequenceR1_A();
+	private void react_r1__entry_Default() {
+		enterSequence_r1_A_default();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactOutEventLifeCycle_r2__entry_Default() {
-		enterSequenceR2_B();
+	private void react_r2__entry_Default() {
+		enterSequence_r2_B_default();
 	}
 
 	public void runCycle() {
@@ -302,13 +302,13 @@ public class OutEventLifeCycleStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case r1_A :
-					reactR1_A();
+					react_r1_A();
 					break;
 				case r1_B :
-					reactR1_B();
+					react_r1_B();
 					break;
 				case r2_B :
-					reactR2_B();
+					react_r2_B();
 					break;
 				default :
 					// $NullState$

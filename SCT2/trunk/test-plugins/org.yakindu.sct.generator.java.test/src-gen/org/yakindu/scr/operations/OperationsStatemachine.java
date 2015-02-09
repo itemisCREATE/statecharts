@@ -72,11 +72,11 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -129,34 +129,34 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 		sCInterface.raiseEv();
 	}
 
-	private boolean checkMain_region_BTr0() {
+	private boolean check_main_region_B_tr0() {
 		return (sCInterface.ev) && sCInterface.operationCallback.alwaysTrue();
 	}
 
-	private boolean checkMain_region_CTr0() {
+	private boolean check_main_region_C_tr0() {
 		return sCInterface.ev;
 	}
 
-	private boolean checkMain_region_ATr0() {
+	private boolean check_main_region_A_tr0() {
 		return true;
 	}
 
-	private void effectMain_region_BTr0() {
-		exitSequenceMain_region_B();
+	private void effect_main_region_B_tr0() {
+		exitSequence_main_region_B();
 
-		enterSequenceMain_region_C();
+		enterSequence_main_region_C_default();
 	}
 
-	private void effectMain_region_CTr0() {
-		exitSequenceMain_region_C();
+	private void effect_main_region_C_tr0() {
+		exitSequence_main_region_C();
 
-		enterSequenceMain_region_D();
+		enterSequence_main_region_D_default();
 	}
 
-	private void effectMain_region_ATr0() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_B();
+		enterSequence_main_region_B_default();
 	}
 
 	/* Entry action for statechart 'Operations'. */
@@ -164,7 +164,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	/* Entry action for state 'B'. */
-	private void entryActionMain_region_B() {
+	private void entryAction_main_region_B() {
 		operationCallback.internalOperation1();
 
 		myBool = operationCallback.internalOperation2(4);
@@ -183,7 +183,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	/* Entry action for state 'C'. */
-	private void entryActionMain_region_C() {
+	private void entryAction_main_region_C() {
 		sCIInterface1.operationCallback.interfaceOperation1();
 
 		sCIInterface1.operationCallback.interfaceOperation2(4);
@@ -202,7 +202,7 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	/* Entry action for state 'D'. */
-	private void entryActionMain_region_D() {
+	private void entryAction_main_region_D() {
 		sCInterface.operationCallback.unnamedInterfaceOperation1();
 
 		sCInterface.operationCallback.unnamedInterfaceOperation2(4);
@@ -225,81 +225,81 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_B() {
-		entryActionMain_region_B();
+	private void enterSequence_main_region_B_default() {
+		entryAction_main_region_B();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B;
 	}
 
 	/* 'default' enter sequence for state C */
-	private void enterSequenceMain_region_C() {
-		entryActionMain_region_C();
+	private void enterSequence_main_region_C_default() {
+		entryAction_main_region_C();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_C;
 	}
 
 	/* 'default' enter sequence for state D */
-	private void enterSequenceMain_region_D() {
-		entryActionMain_region_D();
+	private void enterSequence_main_region_D_default() {
+		entryAction_main_region_D();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_D;
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactOperations_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMain_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state C */
-	private void exitSequenceMain_region_C() {
+	private void exitSequence_main_region_C() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state D */
-	private void exitSequenceMain_region_D() {
+	private void exitSequence_main_region_D() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_B :
-				exitSequenceMain_region_B();
+				exitSequence_main_region_B();
 				break;
 
 			case main_region_C :
-				exitSequenceMain_region_C();
+				exitSequence_main_region_C();
 				break;
 
 			case main_region_D :
-				exitSequenceMain_region_D();
+				exitSequence_main_region_D();
 				break;
 
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			default :
@@ -308,31 +308,31 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 	}
 
 	/* The reactions of state B. */
-	private void reactMain_region_B() {
-		if (checkMain_region_BTr0()) {
-			effectMain_region_BTr0();
+	private void react_main_region_B() {
+		if (check_main_region_B_tr0()) {
+			effect_main_region_B_tr0();
 		}
 	}
 
 	/* The reactions of state C. */
-	private void reactMain_region_C() {
-		if (checkMain_region_CTr0()) {
-			effectMain_region_CTr0();
+	private void react_main_region_C() {
+		if (check_main_region_C_tr0()) {
+			effect_main_region_C_tr0();
 		}
 	}
 
 	/* The reactions of state D. */
-	private void reactMain_region_D() {
+	private void react_main_region_D() {
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
-		effectMain_region_ATr0();
+	private void react_main_region_A() {
+		effect_main_region_A_tr0();
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactOperations_main_region__entry_Default() {
-		enterSequenceMain_region_A();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 
 	public void runCycle() {
@@ -343,16 +343,16 @@ public class OperationsStatemachine implements IOperationsStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_B :
-					reactMain_region_B();
+					react_main_region_B();
 					break;
 				case main_region_C :
-					reactMain_region_C();
+					react_main_region_C();
 					break;
 				case main_region_D :
-					reactMain_region_D();
+					react_main_region_D();
 					break;
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				default :
 					// $NullState$

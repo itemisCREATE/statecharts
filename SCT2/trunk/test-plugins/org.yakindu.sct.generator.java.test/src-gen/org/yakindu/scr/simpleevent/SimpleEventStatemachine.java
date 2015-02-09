@@ -47,11 +47,11 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -94,24 +94,24 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		sCInterface.raiseEvent1();
 	}
 
-	private boolean checkMain_region_ATr0() {
+	private boolean check_main_region_A_tr0() {
 		return sCInterface.event1;
 	}
 
-	private boolean checkMain_region_BTr0() {
+	private boolean check_main_region_B_tr0() {
 		return true;
 	}
 
-	private void effectMain_region_ATr0() {
-		exitSequenceMain_region_A();
+	private void effect_main_region_A_tr0() {
+		exitSequence_main_region_A();
 
-		enterSequenceMain_region_B();
+		enterSequence_main_region_B_default();
 	}
 
-	private void effectMain_region_BTr0() {
-		exitSequenceMain_region_B();
+	private void effect_main_region_B_tr0() {
+		exitSequence_main_region_B();
 
-		enterSequenceMain_region__final_0();
+		enterSequence_main_region__final__default();
 	}
 
 	/* Entry action for statechart 'SimpleEvent'. */
@@ -123,59 +123,59 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_A() {
+	private void enterSequence_main_region_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_A;
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_B() {
+	private void enterSequence_main_region_B_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B;
 	}
 
 	/* Default enter sequence for state null */
-	private void enterSequenceMain_region__final_0() {
+	private void enterSequence_main_region__final__default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region__final_;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactSimpleEvent_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_A() {
+	private void exitSequence_main_region_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMain_region_B() {
+	private void exitSequence_main_region_B() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for final state. */
-	private void exitSequenceMain_region__final_0() {
+	private void exitSequence_main_region__final_() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_A :
-				exitSequenceMain_region_A();
+				exitSequence_main_region_A();
 				break;
 
 			case main_region_B :
-				exitSequenceMain_region_B();
+				exitSequence_main_region_B();
 				break;
 
 			case main_region__final_ :
-				exitSequenceMain_region__final_0();
+				exitSequence_main_region__final_();
 				break;
 
 			default :
@@ -184,24 +184,24 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_A() {
-		if (checkMain_region_ATr0()) {
-			effectMain_region_ATr0();
+	private void react_main_region_A() {
+		if (check_main_region_A_tr0()) {
+			effect_main_region_A_tr0();
 		}
 	}
 
 	/* The reactions of state B. */
-	private void reactMain_region_B() {
-		effectMain_region_BTr0();
+	private void react_main_region_B() {
+		effect_main_region_B_tr0();
 	}
 
 	/* The reactions of state null. */
-	private void reactMain_region__final_0() {
+	private void react_main_region__final_() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactSimpleEvent_main_region__entry_Default() {
-		enterSequenceMain_region_A();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_A_default();
 	}
 
 	public void runCycle() {
@@ -212,13 +212,13 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_A :
-					reactMain_region_A();
+					react_main_region_A();
 					break;
 				case main_region_B :
-					reactMain_region_B();
+					react_main_region_B();
 					break;
 				case main_region__final_ :
-					reactMain_region__final_0();
+					react_main_region__final_();
 					break;
 				default :
 					// $NullState$

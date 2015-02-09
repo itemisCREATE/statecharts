@@ -74,11 +74,11 @@ public class ShallowHistoryWithDeepEntryStatemachine
 	public void enter() {
 		entryAction();
 
-		enterSequenceMain_region();
+		enterSequence_main_region_default();
 	}
 
 	public void exit() {
-		exitSequenceMain_region();
+		exitSequence_main_region();
 
 		exitAction();
 	}
@@ -140,58 +140,58 @@ public class ShallowHistoryWithDeepEntryStatemachine
 		sCInterface.raiseToA();
 	}
 
-	private boolean checkMain_region_YTr0() {
+	private boolean check_main_region_Y_tr0() {
 		return sCInterface.toZ;
 	}
 
-	private boolean checkMain_region_YTr1() {
+	private boolean check_main_region_Y_tr1() {
 		return sCInterface.toC;
 	}
 
-	private boolean checkMain_region_ZTr0() {
+	private boolean check_main_region_Z_tr0() {
 		return sCInterface.toY;
 	}
 
-	private boolean checkMain_region_Z_region0_ATr0() {
+	private boolean check_main_region_Z__region0_A_tr0() {
 		return sCInterface.toC;
 	}
 
-	private boolean checkMain_region_Z_region0_B_region0_CTr0() {
+	private boolean check_main_region_Z__region0_B__region0_C_tr0() {
 		return sCInterface.toA;
 	}
 
-	private void effectMain_region_YTr0() {
-		exitSequenceMain_region_Y();
+	private void effect_main_region_Y_tr0() {
+		exitSequence_main_region_Y();
 
-		enterSequenceMain_region_Z();
+		enterSequence_main_region_Z_default();
 	}
 
-	private void effectMain_region_YTr1() {
-		exitSequenceMain_region_Y();
+	private void effect_main_region_Y_tr1() {
+		exitSequence_main_region_Y();
 
-		enterSequenceMain_region_Z_region0_B_region0_C();
+		enterSequence_main_region_Z__region0_B__region0_C_default();
 
 		historyVector[0] = stateVector[0];
 	}
 
-	private void effectMain_region_ZTr0() {
-		exitSequenceMain_region_Z();
+	private void effect_main_region_Z_tr0() {
+		exitSequence_main_region_Z();
 
-		enterSequenceMain_region_Y();
+		enterSequence_main_region_Y_default();
 	}
 
-	private void effectMain_region_Z_region0_ATr0() {
-		exitSequenceMain_region_Z_region0_A();
+	private void effect_main_region_Z__region0_A_tr0() {
+		exitSequence_main_region_Z__region0_A();
 
-		enterSequenceMain_region_Z_region0_B_region0_C();
+		enterSequence_main_region_Z__region0_B__region0_C_default();
 
 		historyVector[0] = stateVector[0];
 	}
 
-	private void effectMain_region_Z_region0_B_region0_CTr0() {
-		exitSequenceMain_region_Z_region0_B();
+	private void effect_main_region_Z__region0_B__region0_C_tr0() {
+		exitSequence_main_region_Z__region0_B();
 
-		enterSequenceMain_region_Z_region0_A();
+		enterSequence_main_region_Z__region0_A_default();
 	}
 
 	/* Entry action for statechart 'ShallowHistoryWithDeepEntry'. */
@@ -203,18 +203,18 @@ public class ShallowHistoryWithDeepEntryStatemachine
 	}
 
 	/* 'default' enter sequence for state Y */
-	private void enterSequenceMain_region_Y() {
+	private void enterSequence_main_region_Y_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Y;
 	}
 
 	/* 'default' enter sequence for state Z */
-	private void enterSequenceMain_region_Z() {
-		enterSequenceMain_region_Z_region0();
+	private void enterSequence_main_region_Z_default() {
+		enterSequence_main_region_Z__region0_default();
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMain_region_Z_region0_A() {
+	private void enterSequence_main_region_Z__region0_A_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Z__region0_A;
 
@@ -222,37 +222,37 @@ public class ShallowHistoryWithDeepEntryStatemachine
 	}
 
 	/* 'default' enter sequence for state B */
-	private void enterSequenceMain_region_Z_region0_B() {
-		enterSequenceMain_region_Z_region0_B_region0();
+	private void enterSequence_main_region_Z__region0_B_default() {
+		enterSequence_main_region_Z__region0_B__region0_default();
 
 		historyVector[0] = stateVector[0];
 	}
 
 	/* 'default' enter sequence for state C */
-	private void enterSequenceMain_region_Z_region0_B_region0_C() {
+	private void enterSequence_main_region_Z__region0_B__region0_C_default() {
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_Z__region0_B__region0_C;
 	}
 
 	/* 'default' enter sequence for region main region */
-	private void enterSequenceMain_region() {
-		reactShallowHistoryWithDeepEntry_main_region__entry_Default();
+	private void enterSequence_main_region_default() {
+		react_main_region__entry_Default();
 	}
 
 	/* 'default' enter sequence for region null */
-	private void enterSequenceMain_region_Z_region0() {
-		reactShallowHistoryWithDeepEntry_main_region_Z__region0__entry_Default();
+	private void enterSequence_main_region_Z__region0_default() {
+		react_main_region_Z__region0__entry_Default();
 	}
 
 	/* shallow enterSequence with history in child null */
-	private void shallowEnterSequenceMain_region_Z_region0() {
+	private void shallowEnterSequence_main_region_Z__region0() {
 		switch (historyVector[0]) {
 			case main_region_Z__region0_A :
-				enterSequenceMain_region_Z_region0_A();
+				enterSequence_main_region_Z__region0_A_default();
 				break;
 
 			case main_region_Z__region0_B__region0_C :
-				enterSequenceMain_region_Z_region0_B();
+				enterSequence_main_region_Z__region0_B_default();
 				break;
 
 			default :
@@ -261,51 +261,51 @@ public class ShallowHistoryWithDeepEntryStatemachine
 	}
 
 	/* 'default' enter sequence for region null */
-	private void enterSequenceMain_region_Z_region0_B_region0() {
-		reactShallowHistoryWithDeepEntry_main_region_Z__region0_B__region0__entry_Default();
+	private void enterSequence_main_region_Z__region0_B__region0_default() {
+		react_main_region_Z__region0_B__region0__entry_Default();
 	}
 
 	/* Default exit sequence for state Y */
-	private void exitSequenceMain_region_Y() {
+	private void exitSequence_main_region_Y() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state Z */
-	private void exitSequenceMain_region_Z() {
-		exitSequenceMain_region_Z_region0();
+	private void exitSequence_main_region_Z() {
+		exitSequence_main_region_Z__region0();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMain_region_Z_region0_A() {
+	private void exitSequence_main_region_Z__region0_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for state B */
-	private void exitSequenceMain_region_Z_region0_B() {
-		exitSequenceMain_region_Z_region0_B_region0();
+	private void exitSequence_main_region_Z__region0_B() {
+		exitSequence_main_region_Z__region0_B__region0();
 	}
 
 	/* Default exit sequence for state C */
-	private void exitSequenceMain_region_Z_region0_B_region0_C() {
+	private void exitSequence_main_region_Z__region0_B__region0_C() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region main region */
-	private void exitSequenceMain_region() {
+	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
 			case main_region_Y :
-				exitSequenceMain_region_Y();
+				exitSequence_main_region_Y();
 				break;
 
 			case main_region_Z__region0_A :
-				exitSequenceMain_region_Z_region0_A();
+				exitSequence_main_region_Z__region0_A();
 				break;
 
 			case main_region_Z__region0_B__region0_C :
-				exitSequenceMain_region_Z_region0_B_region0_C();
+				exitSequence_main_region_Z__region0_B__region0_C();
 				break;
 
 			default :
@@ -314,14 +314,14 @@ public class ShallowHistoryWithDeepEntryStatemachine
 	}
 
 	/* Default exit sequence for region null */
-	private void exitSequenceMain_region_Z_region0() {
+	private void exitSequence_main_region_Z__region0() {
 		switch (stateVector[0]) {
 			case main_region_Z__region0_A :
-				exitSequenceMain_region_Z_region0_A();
+				exitSequence_main_region_Z__region0_A();
 				break;
 
 			case main_region_Z__region0_B__region0_C :
-				exitSequenceMain_region_Z_region0_B_region0_C();
+				exitSequence_main_region_Z__region0_B__region0_C();
 				break;
 
 			default :
@@ -330,10 +330,10 @@ public class ShallowHistoryWithDeepEntryStatemachine
 	}
 
 	/* Default exit sequence for region null */
-	private void exitSequenceMain_region_Z_region0_B_region0() {
+	private void exitSequence_main_region_Z__region0_B__region0() {
 		switch (stateVector[0]) {
 			case main_region_Z__region0_B__region0_C :
-				exitSequenceMain_region_Z_region0_B_region0_C();
+				exitSequence_main_region_Z__region0_B__region0_C();
 				break;
 
 			default :
@@ -342,56 +342,56 @@ public class ShallowHistoryWithDeepEntryStatemachine
 	}
 
 	/* The reactions of state Y. */
-	private void reactMain_region_Y() {
-		if (checkMain_region_YTr0()) {
-			effectMain_region_YTr0();
+	private void react_main_region_Y() {
+		if (check_main_region_Y_tr0()) {
+			effect_main_region_Y_tr0();
 		} else {
-			if (checkMain_region_YTr1()) {
-				effectMain_region_YTr1();
+			if (check_main_region_Y_tr1()) {
+				effect_main_region_Y_tr1();
 			}
 		}
 	}
 
 	/* The reactions of state A. */
-	private void reactMain_region_Z_region0_A() {
-		if (checkMain_region_ZTr0()) {
-			effectMain_region_ZTr0();
+	private void react_main_region_Z__region0_A() {
+		if (check_main_region_Z_tr0()) {
+			effect_main_region_Z_tr0();
 		} else {
-			if (checkMain_region_Z_region0_ATr0()) {
-				effectMain_region_Z_region0_ATr0();
+			if (check_main_region_Z__region0_A_tr0()) {
+				effect_main_region_Z__region0_A_tr0();
 			}
 		}
 	}
 
 	/* The reactions of state C. */
-	private void reactMain_region_Z_region0_B_region0_C() {
-		if (checkMain_region_ZTr0()) {
-			effectMain_region_ZTr0();
+	private void react_main_region_Z__region0_B__region0_C() {
+		if (check_main_region_Z_tr0()) {
+			effect_main_region_Z_tr0();
 		} else {
-			if (checkMain_region_Z_region0_B_region0_CTr0()) {
-				effectMain_region_Z_region0_B_region0_CTr0();
+			if (check_main_region_Z__region0_B__region0_C_tr0()) {
+				effect_main_region_Z__region0_B__region0_C_tr0();
 			}
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactShallowHistoryWithDeepEntry_main_region__entry_Default() {
-		enterSequenceMain_region_Y();
+	private void react_main_region__entry_Default() {
+		enterSequence_main_region_Y_default();
 	}
 
 	/* Default react sequence for shallow history entry  */
-	private void reactShallowHistoryWithDeepEntry_main_region_Z__region0__entry_Default() {
+	private void react_main_region_Z__region0__entry_Default() {
 		/* Enter the region with shallow history */
 		if (historyVector[0] != State.$NullState$) {
-			shallowEnterSequenceMain_region_Z_region0();
+			shallowEnterSequence_main_region_Z__region0();
 		} else {
-			enterSequenceMain_region_Z_region0_A();
+			enterSequence_main_region_Z__region0_A_default();
 		}
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactShallowHistoryWithDeepEntry_main_region_Z__region0_B__region0__entry_Default() {
-		enterSequenceMain_region_Z_region0_B_region0_C();
+	private void react_main_region_Z__region0_B__region0__entry_Default() {
+		enterSequence_main_region_Z__region0_B__region0_C_default();
 	}
 
 	public void runCycle() {
@@ -402,13 +402,13 @@ public class ShallowHistoryWithDeepEntryStatemachine
 
 			switch (stateVector[nextStateIndex]) {
 				case main_region_Y :
-					reactMain_region_Y();
+					react_main_region_Y();
 					break;
 				case main_region_Z__region0_A :
-					reactMain_region_Z_region0_A();
+					react_main_region_Z__region0_A();
 					break;
 				case main_region_Z__region0_B__region0_C :
-					reactMain_region_Z_region0_B_region0_C();
+					react_main_region_Z__region0_B__region0_C();
 					break;
 				default :
 					// $NullState$

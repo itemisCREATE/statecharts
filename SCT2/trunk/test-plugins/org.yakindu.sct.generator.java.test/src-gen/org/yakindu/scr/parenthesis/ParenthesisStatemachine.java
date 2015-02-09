@@ -47,11 +47,11 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	public void enter() {
 		entryAction();
 
-		enterSequenceMainRegion();
+		enterSequence_mainRegion_default();
 	}
 
 	public void exit() {
-		exitSequenceMainRegion();
+		exitSequence_mainRegion();
 
 		exitAction();
 	}
@@ -98,7 +98,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	}
 
 	/* Entry action for state 'A'. */
-	private void entryActionMainRegion_A() {
+	private void entryAction_mainRegion_A() {
 		sCInterface.erg = 4 * (3 - 1);
 	}
 
@@ -107,29 +107,29 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	}
 
 	/* 'default' enter sequence for state A */
-	private void enterSequenceMainRegion_A() {
-		entryActionMainRegion_A();
+	private void enterSequence_mainRegion_A_default() {
+		entryAction_mainRegion_A();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.mainRegion_A;
 	}
 
 	/* 'default' enter sequence for region mainRegion */
-	private void enterSequenceMainRegion() {
-		reactParenthesis_mainRegion__entry_Default();
+	private void enterSequence_mainRegion_default() {
+		react_mainRegion__entry_Default();
 	}
 
 	/* Default exit sequence for state A */
-	private void exitSequenceMainRegion_A() {
+	private void exitSequence_mainRegion_A() {
 		nextStateIndex = 0;
 		stateVector[0] = State.$NullState$;
 	}
 
 	/* Default exit sequence for region mainRegion */
-	private void exitSequenceMainRegion() {
+	private void exitSequence_mainRegion() {
 		switch (stateVector[0]) {
 			case mainRegion_A :
-				exitSequenceMainRegion_A();
+				exitSequence_mainRegion_A();
 				break;
 
 			default :
@@ -138,12 +138,12 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	}
 
 	/* The reactions of state A. */
-	private void reactMainRegion_A() {
+	private void react_mainRegion_A() {
 	}
 
 	/* Default react sequence for initial entry  */
-	private void reactParenthesis_mainRegion__entry_Default() {
-		enterSequenceMainRegion_A();
+	private void react_mainRegion__entry_Default() {
+		enterSequence_mainRegion_A_default();
 	}
 
 	public void runCycle() {
@@ -154,7 +154,7 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
 			switch (stateVector[nextStateIndex]) {
 				case mainRegion_A :
-					reactMainRegion_A();
+					react_mainRegion_A();
 					break;
 				default :
 					// $NullState$
