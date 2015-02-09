@@ -4,6 +4,9 @@ public class OutEventLifeCycleStatemachine
 		implements
 			IOutEventLifeCycleStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -23,7 +26,6 @@ public class OutEventLifeCycleStatemachine
 		}
 
 		private boolean f_available_in_cycle;
-
 		public boolean getF_available_in_cycle() {
 			return f_available_in_cycle;
 		}
@@ -33,7 +35,6 @@ public class OutEventLifeCycleStatemachine
 		}
 
 		private boolean f_available_in_next_cycle;
-
 		public boolean getF_available_in_next_cycle() {
 			return f_available_in_next_cycle;
 		}
@@ -82,38 +83,15 @@ public class OutEventLifeCycleStatemachine
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.r1_A;
+		enterSequenceR1();
 
-		nextStateIndex = 1;
-		stateVector[1] = State.r2_B;
+		enterSequenceR2();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case r1_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
+		exitSequenceR1();
 
-			case r1_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
-
-		switch (stateVector[1]) {
-			case r2_B :
-				nextStateIndex = 1;
-				stateVector[1] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceR2();
 
 		exitAction();
 	}
@@ -175,6 +153,34 @@ public class OutEventLifeCycleStatemachine
 		sCInterface.setF_available_in_next_cycle(value);
 	}
 
+	private boolean checkR1_ATr0() {
+		return sCInterface.e;
+	}
+
+	private boolean checkR1_BLr0() {
+		return sCInterface.f;
+	}
+
+	private boolean checkR2_BLr0() {
+		return sCInterface.f;
+	}
+
+	private void effectR1_ATr0() {
+		exitSequenceR1_A();
+
+		sCInterface.raiseF();
+
+		enterSequenceR1_B();
+	}
+
+	private void effectR1_BLr0() {
+		sCInterface.f_available_in_next_cycle = true;
+	}
+
+	private void effectR2_BLr0() {
+		sCInterface.f_available_in_cycle = true;
+	}
+
 	/* Entry action for statechart 'OutEventLifeCycle'. */
 	private void entryAction() {
 	}
@@ -183,31 +189,109 @@ public class OutEventLifeCycleStatemachine
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceR1_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r1_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceR1_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r1_B;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceR2_B() {
+		nextStateIndex = 1;
+		stateVector[1] = State.r2_B;
+	}
+
+	/* 'default' enter sequence for region r1 */
+	private void enterSequenceR1() {
+		reactOutEventLifeCycle_r1__entry_Default();
+	}
+
+	/* 'default' enter sequence for region r2 */
+	private void enterSequenceR2() {
+		reactOutEventLifeCycle_r2__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceR1_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceR1_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceR2_B() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region r1 */
+	private void exitSequenceR1() {
+		switch (stateVector[0]) {
+			case r1_A :
+				exitSequenceR1_A();
+				break;
+
+			case r1_B :
+				exitSequenceR1_B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region r2 */
+	private void exitSequenceR2() {
+		switch (stateVector[1]) {
+			case r2_B :
+				exitSequenceR2_B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactR1_A() {
-		if (sCInterface.e) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.raiseF();
-
-			nextStateIndex = 0;
-			stateVector[0] = State.r1_B;
+		if (checkR1_ATr0()) {
+			effectR1_ATr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactR1_B() {
-		if (sCInterface.f) {
-			sCInterface.f_available_in_next_cycle = true;
+		if (checkR1_BLr0()) {
+			effectR1_BLr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactR2_B() {
-		if (sCInterface.f) {
-			sCInterface.f_available_in_cycle = true;
+		if (checkR2_BLr0()) {
+			effectR2_BLr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactOutEventLifeCycle_r1__entry_Default() {
+		enterSequenceR1_A();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactOutEventLifeCycle_r2__entry_Default() {
+		enterSequenceR2_B();
 	}
 
 	public void runCycle() {

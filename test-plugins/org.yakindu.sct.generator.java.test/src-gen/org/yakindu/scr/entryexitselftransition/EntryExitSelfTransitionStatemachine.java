@@ -4,6 +4,9 @@ public class EntryExitSelfTransitionStatemachine
 		implements
 			IEntryExitSelfTransitionStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -19,7 +22,6 @@ public class EntryExitSelfTransitionStatemachine
 		}
 
 		private long exits;
-
 		public long getExits() {
 			return exits;
 		}
@@ -29,7 +31,6 @@ public class EntryExitSelfTransitionStatemachine
 		}
 
 		private long entries;
-
 		public long getEntries() {
 			return entries;
 		}
@@ -76,31 +77,11 @@ public class EntryExitSelfTransitionStatemachine
 	public void enter() {
 		entryAction();
 
-		sCInterface.entries += 1;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A__region0_B;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A__region0_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				sCInterface.exits += 1;
-				break;
-
-			case main_region_A__region0_C :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				sCInterface.exits += 1;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -164,98 +145,170 @@ public class EntryExitSelfTransitionStatemachine
 		sCInterface.setEntries(value);
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return sCInterface.e;
+	}
+
+	private boolean checkMain_region_A_region0_BTr0() {
+		return sCInterface.e1;
+	}
+
+	private boolean checkMain_region_A_region0_CTr0() {
+		return sCInterface.e1;
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		entryActionMain_region_A();
+
+		enterSequenceMain_region_A_region0_C();
+	}
+
+	private void effectMain_region_A_region0_BTr0() {
+		exitSequenceMain_region_A_region0_B();
+
+		enterSequenceMain_region_A_region0_C();
+	}
+
+	private void effectMain_region_A_region0_CTr0() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_A();
+	}
+
 	/* Entry action for statechart 'EntryExitSelfTransition'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'A'. */
+	private void entryActionMain_region_A() {
+		sCInterface.entries += 1;
 	}
 
 	/* Exit action for state 'EntryExitSelfTransition'. */
 	private void exitAction() {
 	}
 
+	/* Exit action for state 'A'. */
+	private void exitActionMain_region_A() {
+		sCInterface.exits += 1;
+	}
+
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		entryActionMain_region_A();
+
+		enterSequenceMain_region_A_region0();
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_A_region0_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A__region0_B;
+	}
+
+	/* 'default' enter sequence for state C */
+	private void enterSequenceMain_region_A_region0_C() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A__region0_C;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactEntryExitSelfTransition_main_region__entry_Default();
+	}
+
+	/* 'default' enter sequence for region  */
+	private void enterSequenceMain_region_A_region0() {
+		reactEntryExitSelfTransition_main_region_A__region0__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		exitSequenceMain_region_A_region0();
+
+		exitActionMain_region_A();
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_A_region0_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state C */
+	private void exitSequenceMain_region_A_region0_C() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A__region0_B :
+				exitSequenceMain_region_A_region0_B();
+
+				exitActionMain_region_A();
+				break;
+
+			case main_region_A__region0_C :
+				exitSequenceMain_region_A_region0_C();
+
+				exitActionMain_region_A();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region  */
+	private void exitSequenceMain_region_A_region0() {
+		switch (stateVector[0]) {
+			case main_region_A__region0_B :
+				exitSequenceMain_region_A_region0_B();
+				break;
+
+			case main_region_A__region0_C :
+				exitSequenceMain_region_A_region0_C();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state B. */
 	private void reactMain_region_A_region0_B() {
-		if (sCInterface.e) {
-			switch (stateVector[0]) {
-				case main_region_A__region0_B :
-					nextStateIndex = 0;
-					stateVector[0] = State.$NullState$;
-					break;
-
-				case main_region_A__region0_C :
-					nextStateIndex = 0;
-					stateVector[0] = State.$NullState$;
-					break;
-
-				default :
-					break;
-			}
-
-			sCInterface.exits += 1;
-
-			sCInterface.entries += 1;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_A__region0_C;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		} else {
-			if (sCInterface.e1) {
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				nextStateIndex = 0;
-				stateVector[0] = State.main_region_A__region0_C;
+			if (checkMain_region_A_region0_BTr0()) {
+				effectMain_region_A_region0_BTr0();
 			}
 		}
 	}
 
 	/* The reactions of state C. */
 	private void reactMain_region_A_region0_C() {
-		if (sCInterface.e) {
-			switch (stateVector[0]) {
-				case main_region_A__region0_B :
-					nextStateIndex = 0;
-					stateVector[0] = State.$NullState$;
-					break;
-
-				case main_region_A__region0_C :
-					nextStateIndex = 0;
-					stateVector[0] = State.$NullState$;
-					break;
-
-				default :
-					break;
-			}
-
-			sCInterface.exits += 1;
-
-			sCInterface.entries += 1;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_A__region0_C;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		} else {
-			if (sCInterface.e1) {
-				switch (stateVector[0]) {
-					case main_region_A__region0_B :
-						nextStateIndex = 0;
-						stateVector[0] = State.$NullState$;
-						break;
-
-					case main_region_A__region0_C :
-						nextStateIndex = 0;
-						stateVector[0] = State.$NullState$;
-						break;
-
-					default :
-						break;
-				}
-
-				sCInterface.exits += 1;
-
-				sCInterface.entries += 1;
-
-				nextStateIndex = 0;
-				stateVector[0] = State.main_region_A__region0_B;
+			if (checkMain_region_A_region0_CTr0()) {
+				effectMain_region_A_region0_CTr0();
 			}
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactEntryExitSelfTransition_main_region__entry_Default() {
+		enterSequenceMain_region_A();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactEntryExitSelfTransition_main_region_A__region0__entry_Default() {
+		enterSequenceMain_region_A_region0_B();
 	}
 
 	public void runCycle() {

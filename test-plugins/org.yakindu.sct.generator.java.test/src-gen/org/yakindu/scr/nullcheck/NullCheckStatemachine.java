@@ -2,6 +2,9 @@ package org.yakindu.scr.nullcheck;
 
 public class NullCheckStatemachine implements INullCheckStatemachine {
 
+	static {
+	}
+
 	public enum State {
 		main_region_A, main_region_B, $NullState$
 	};
@@ -27,25 +30,11 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -77,6 +66,16 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 		}
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return null == null;
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_B();
+	}
+
 	/* Entry action for statechart 'NullCheck'. */
 	private void entryAction() {
 	}
@@ -85,19 +84,65 @@ public class NullCheckStatemachine implements INullCheckStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactNullCheck_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			case main_region_B :
+				exitSequenceMain_region_B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (null == null) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_B;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactNullCheck_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

@@ -2,6 +2,9 @@ package org.yakindu.scr.declarations;
 
 public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 
+	static {
+	}
+
 	private boolean evInA;
 
 	private boolean evInB;
@@ -110,7 +113,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private boolean varA;
-
 		public boolean getVarA() {
 			return varA;
 		}
@@ -120,7 +122,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private long varB;
-
 		public long getVarB() {
 			return varB;
 		}
@@ -130,7 +131,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private double varC;
-
 		public double getVarC() {
 			return varC;
 		}
@@ -140,7 +140,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private String varD;
-
 		public String getVarD() {
 			return varD;
 		}
@@ -150,7 +149,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private long varE;
-
 		public long getVarE() {
 			return varE;
 		}
@@ -264,7 +262,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private boolean varA;
-
 		public boolean getVarA() {
 			return varA;
 		}
@@ -274,7 +271,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private long varB;
-
 		public long getVarB() {
 			return varB;
 		}
@@ -284,7 +280,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private double varC;
-
 		public double getVarC() {
 			return varC;
 		}
@@ -294,7 +289,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private String varD;
-
 		public String getVarD() {
 			return varD;
 		}
@@ -304,7 +298,6 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 		}
 
 		private long varE;
-
 		public long getVarE() {
 			return varE;
 		}
@@ -390,20 +383,11 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -572,8 +556,42 @@ public class DeclarationsStatemachine implements IDeclarationsStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactDeclarations_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactDeclarations_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

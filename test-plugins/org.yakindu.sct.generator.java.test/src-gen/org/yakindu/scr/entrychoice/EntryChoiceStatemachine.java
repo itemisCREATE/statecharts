@@ -2,6 +2,9 @@ package org.yakindu.scr.entrychoice;
 
 public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 
+	static {
+	}
+
 	public enum State {
 		main_region_A, $NullState$
 	};
@@ -27,20 +30,11 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -70,6 +64,14 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 		}
 	}
 
+	private boolean checkEntryChoice_main_region__choice_0Tr0() {
+		return true;
+	}
+
+	private void effectEntryChoice_main_region__choice_0Tr0() {
+		enterSequenceMain_region_A();
+	}
+
 	/* Entry action for statechart 'EntryChoice'. */
 	private void entryAction() {
 	}
@@ -78,8 +80,47 @@ public class EntryChoiceStatemachine implements IEntryChoiceStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactEntryChoice_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
+	}
+
+	/* The reactions of state null. */
+	private void reactEntryChoice_main_region__choice_0() {
+		effectEntryChoice_main_region__choice_0Tr0();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactEntryChoice_main_region__entry_Default() {
+		reactEntryChoice_main_region__choice_0();
 	}
 
 	public void runCycle() {

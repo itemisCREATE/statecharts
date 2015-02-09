@@ -4,6 +4,9 @@ public class SameNameDifferentRegionStatemachine
 		implements
 			ISameNameDifferentRegionStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -46,30 +49,11 @@ public class SameNameDifferentRegionStatemachine
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_StateA :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_StateB_r1_StateA :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_StateB_r1_StateB :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -117,6 +101,26 @@ public class SameNameDifferentRegionStatemachine
 		sCInterface.raiseE1();
 	}
 
+	private boolean checkMain_region_StateATr0() {
+		return sCInterface.e1;
+	}
+
+	private boolean checkMain_region_StateB_r1_StateATr0() {
+		return sCInterface.e1;
+	}
+
+	private void effectMain_region_StateATr0() {
+		exitSequenceMain_region_StateA();
+
+		enterSequenceMain_region_StateB();
+	}
+
+	private void effectMain_region_StateB_r1_StateATr0() {
+		exitSequenceMain_region_StateB_r1_StateA();
+
+		enterSequenceMain_region_StateB_r1_StateB();
+	}
+
 	/* Entry action for statechart 'SameNameDifferentRegion'. */
 	private void entryAction() {
 	}
@@ -125,30 +129,119 @@ public class SameNameDifferentRegionStatemachine
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state StateA */
+	private void enterSequenceMain_region_StateA() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	/* 'default' enter sequence for state StateB */
+	private void enterSequenceMain_region_StateB() {
+		enterSequenceMain_region_StateB_r1();
+	}
+
+	/* 'default' enter sequence for state StateA */
+	private void enterSequenceMain_region_StateB_r1_StateA() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateB_r1_StateA;
+	}
+
+	/* 'default' enter sequence for state StateB */
+	private void enterSequenceMain_region_StateB_r1_StateB() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateB_r1_StateB;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactSameNameDifferentRegion_main_region__entry_Default();
+	}
+
+	/* 'default' enter sequence for region r1 */
+	private void enterSequenceMain_region_StateB_r1() {
+		reactSameNameDifferentRegion_main_region_StateB_r1__entry_Default();
+	}
+
+	/* Default exit sequence for state StateA */
+	private void exitSequenceMain_region_StateA() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state StateA */
+	private void exitSequenceMain_region_StateB_r1_StateA() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state StateB */
+	private void exitSequenceMain_region_StateB_r1_StateB() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				exitSequenceMain_region_StateA();
+				break;
+
+			case main_region_StateB_r1_StateA :
+				exitSequenceMain_region_StateB_r1_StateA();
+				break;
+
+			case main_region_StateB_r1_StateB :
+				exitSequenceMain_region_StateB_r1_StateB();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region r1 */
+	private void exitSequenceMain_region_StateB_r1() {
+		switch (stateVector[0]) {
+			case main_region_StateB_r1_StateA :
+				exitSequenceMain_region_StateB_r1_StateA();
+				break;
+
+			case main_region_StateB_r1_StateB :
+				exitSequenceMain_region_StateB_r1_StateB();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCInterface.e1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_StateB_r1_StateA;
+		if (checkMain_region_StateATr0()) {
+			effectMain_region_StateATr0();
 		}
 	}
 
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateB_r1_StateA() {
-		if (sCInterface.e1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_StateB_r1_StateB;
+		if (checkMain_region_StateB_r1_StateATr0()) {
+			effectMain_region_StateB_r1_StateATr0();
 		}
 	}
 
 	/* The reactions of state StateB. */
 	private void reactMain_region_StateB_r1_StateB() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactSameNameDifferentRegion_main_region__entry_Default() {
+		enterSequenceMain_region_StateA();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactSameNameDifferentRegion_main_region_StateB_r1__entry_Default() {
+		enterSequenceMain_region_StateB_r1_StateA();
 	}
 
 	public void runCycle() {

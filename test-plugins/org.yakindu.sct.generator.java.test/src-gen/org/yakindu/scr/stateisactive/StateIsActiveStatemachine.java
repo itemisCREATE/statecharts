@@ -2,6 +2,9 @@ package org.yakindu.scr.stateisactive;
 
 public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
@@ -44,43 +47,15 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.r1_R1A;
+		enterSequenceR1();
 
-		nextStateIndex = 1;
-		stateVector[1] = State.r2_R2A;
+		enterSequenceR2();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case r1_R1A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
+		exitSequenceR1();
 
-			case r1_R1B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
-
-		switch (stateVector[1]) {
-			case r2_R2A :
-				nextStateIndex = 1;
-				stateVector[1] = State.$NullState$;
-				break;
-
-			case r2_R2B :
-				nextStateIndex = 1;
-				stateVector[1] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceR2();
 
 		exitAction();
 	}
@@ -125,6 +100,26 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 		sCInterface.raiseEvent1();
 	}
 
+	private boolean checkR1_R1ATr0() {
+		return isStateActive(State.r2_R2B);
+	}
+
+	private boolean checkR2_R2ATr0() {
+		return sCInterface.event1;
+	}
+
+	private void effectR1_R1ATr0() {
+		exitSequenceR1_R1A();
+
+		enterSequenceR1_R1B();
+	}
+
+	private void effectR2_R2ATr0() {
+		exitSequenceR2_R2A();
+
+		enterSequenceR2_R2B();
+	}
+
 	/* Entry action for statechart 'StateIsActive'. */
 	private void entryAction() {
 	}
@@ -133,14 +128,100 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state R1A */
+	private void enterSequenceR1_R1A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r1_R1A;
+	}
+
+	/* 'default' enter sequence for state R1B */
+	private void enterSequenceR1_R1B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r1_R1B;
+	}
+
+	/* 'default' enter sequence for state R2A */
+	private void enterSequenceR2_R2A() {
+		nextStateIndex = 1;
+		stateVector[1] = State.r2_R2A;
+	}
+
+	/* 'default' enter sequence for state R2B */
+	private void enterSequenceR2_R2B() {
+		nextStateIndex = 1;
+		stateVector[1] = State.r2_R2B;
+	}
+
+	/* 'default' enter sequence for region R1 */
+	private void enterSequenceR1() {
+		reactStateIsActive_R1__entry_Default();
+	}
+
+	/* 'default' enter sequence for region R2 */
+	private void enterSequenceR2() {
+		reactStateIsActive_R2__entry_Default();
+	}
+
+	/* Default exit sequence for state R1A */
+	private void exitSequenceR1_R1A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state R1B */
+	private void exitSequenceR1_R1B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state R2A */
+	private void exitSequenceR2_R2A() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state R2B */
+	private void exitSequenceR2_R2B() {
+		nextStateIndex = 1;
+		stateVector[1] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region R1 */
+	private void exitSequenceR1() {
+		switch (stateVector[0]) {
+			case r1_R1A :
+				exitSequenceR1_R1A();
+				break;
+
+			case r1_R1B :
+				exitSequenceR1_R1B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region R2 */
+	private void exitSequenceR2() {
+		switch (stateVector[1]) {
+			case r2_R2A :
+				exitSequenceR2_R2A();
+				break;
+
+			case r2_R2B :
+				exitSequenceR2_R2B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state R1A. */
 	private void reactR1_R1A() {
-		if (isStateActive(State.r2_R2B)) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.r1_R1B;
+		if (checkR1_R1ATr0()) {
+			effectR1_R1ATr0();
 		}
 	}
 
@@ -150,17 +231,23 @@ public class StateIsActiveStatemachine implements IStateIsActiveStatemachine {
 
 	/* The reactions of state R2A. */
 	private void reactR2_R2A() {
-		if (sCInterface.event1) {
-			nextStateIndex = 1;
-			stateVector[1] = State.$NullState$;
-
-			nextStateIndex = 1;
-			stateVector[1] = State.r2_R2B;
+		if (checkR2_R2ATr0()) {
+			effectR2_R2ATr0();
 		}
 	}
 
 	/* The reactions of state R2B. */
 	private void reactR2_R2B() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactStateIsActive_R1__entry_Default() {
+		enterSequenceR1_R1A();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactStateIsActive_R2__entry_Default() {
+		enterSequenceR2_R2A();
 	}
 
 	public void runCycle() {

@@ -2,6 +2,9 @@ package org.yakindu.scr.choice;
 
 public class ChoiceStatemachine implements IChoiceStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -29,7 +32,6 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		}
 
 		private boolean c;
-
 		public boolean getC() {
 			return c;
 		}
@@ -76,30 +78,11 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_C :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -159,6 +142,130 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 		sCInterface.setC(value);
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return sCInterface.e;
+	}
+
+	private boolean checkMain_region_ATr1() {
+		return sCInterface.f;
+	}
+
+	private boolean checkMain_region_ATr2() {
+		return sCInterface.g;
+	}
+
+	private boolean checkMain_region_ATr3() {
+		return sCInterface.h;
+	}
+
+	private boolean checkMain_region_BTr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_CTr0() {
+		return true;
+	}
+
+	private boolean checkChoice_main_region__choice_0Tr1() {
+		return sCInterface.c;
+	}
+
+	private boolean checkChoice_main_region__choice_0Tr0() {
+		return true;
+	}
+
+	private boolean checkChoice_main_region__choice_1Tr0() {
+		return sCInterface.c;
+	}
+
+	private boolean checkChoice_main_region__choice_1Tr1() {
+		return true;
+	}
+
+	private boolean checkChoice_main_region__choice_2Tr1() {
+		return sCInterface.c;
+	}
+
+	private boolean checkChoice_main_region__choice_2Tr0() {
+		return true;
+	}
+
+	private boolean checkChoice_main_region__choice_3Tr1() {
+		return sCInterface.c;
+	}
+
+	private boolean checkChoice_main_region__choice_3Tr0() {
+		return true;
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		reactChoice_main_region__choice_0();
+	}
+
+	private void effectMain_region_ATr1() {
+		exitSequenceMain_region_A();
+
+		reactChoice_main_region__choice_2();
+	}
+
+	private void effectMain_region_ATr2() {
+		exitSequenceMain_region_A();
+
+		reactChoice_main_region__choice_1();
+	}
+
+	private void effectMain_region_ATr3() {
+		exitSequenceMain_region_A();
+
+		reactChoice_main_region__choice_3();
+	}
+
+	private void effectMain_region_BTr0() {
+		exitSequenceMain_region_B();
+
+		enterSequenceMain_region_A();
+	}
+
+	private void effectMain_region_CTr0() {
+		exitSequenceMain_region_C();
+
+		enterSequenceMain_region_A();
+	}
+
+	private void effectChoice_main_region__choice_0Tr1() {
+		enterSequenceMain_region_C();
+	}
+
+	private void effectChoice_main_region__choice_0Tr0() {
+		enterSequenceMain_region_B();
+	}
+
+	private void effectChoice_main_region__choice_1Tr0() {
+		enterSequenceMain_region_C();
+	}
+
+	private void effectChoice_main_region__choice_1Tr1() {
+		enterSequenceMain_region_B();
+	}
+
+	private void effectChoice_main_region__choice_2Tr1() {
+		enterSequenceMain_region_C();
+	}
+
+	private void effectChoice_main_region__choice_2Tr0() {
+		enterSequenceMain_region_B();
+	}
+
+	private void effectChoice_main_region__choice_3Tr1() {
+		enterSequenceMain_region_C();
+	}
+
+	private void effectChoice_main_region__choice_3Tr0() {
+		enterSequenceMain_region_B();
+	}
+
 	/* Entry action for statechart 'Choice'. */
 	private void entryAction() {
 	}
@@ -167,55 +274,80 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
+	}
+
+	/* 'default' enter sequence for state C */
+	private void enterSequenceMain_region_C() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_C;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactChoice_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state C */
+	private void exitSequenceMain_region_C() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			case main_region_B :
+				exitSequenceMain_region_B();
+				break;
+
+			case main_region_C :
+				exitSequenceMain_region_C();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCInterface.e) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			if (sCInterface.c) {
-				nextStateIndex = 0;
-				stateVector[0] = State.main_region_C;
-			} else {
-				nextStateIndex = 0;
-				stateVector[0] = State.main_region_B;
-			}
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		} else {
-			if (sCInterface.f) {
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				if (sCInterface.c) {
-					nextStateIndex = 0;
-					stateVector[0] = State.main_region_C;
-				} else {
-					nextStateIndex = 0;
-					stateVector[0] = State.main_region_B;
-				}
+			if (checkMain_region_ATr1()) {
+				effectMain_region_ATr1();
 			} else {
-				if (sCInterface.g) {
-					nextStateIndex = 0;
-					stateVector[0] = State.$NullState$;
-
-					if (sCInterface.c) {
-						nextStateIndex = 0;
-						stateVector[0] = State.main_region_C;
-					} else {
-						nextStateIndex = 0;
-						stateVector[0] = State.main_region_B;
-					}
+				if (checkMain_region_ATr2()) {
+					effectMain_region_ATr2();
 				} else {
-					if (sCInterface.h) {
-						nextStateIndex = 0;
-						stateVector[0] = State.$NullState$;
-
-						if (sCInterface.c) {
-							nextStateIndex = 0;
-							stateVector[0] = State.main_region_C;
-						} else {
-							nextStateIndex = 0;
-							stateVector[0] = State.main_region_B;
-						}
+					if (checkMain_region_ATr3()) {
+						effectMain_region_ATr3();
 					}
 				}
 			}
@@ -224,20 +356,53 @@ public class ChoiceStatemachine implements IChoiceStatemachine {
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		effectMain_region_BTr0();
 	}
 
 	/* The reactions of state C. */
 	private void reactMain_region_C() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		effectMain_region_CTr0();
+	}
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+	/* The reactions of state null. */
+	private void reactChoice_main_region__choice_0() {
+		if (checkChoice_main_region__choice_0Tr1()) {
+			effectChoice_main_region__choice_0Tr1();
+		} else {
+			effectChoice_main_region__choice_0Tr0();
+		}
+	}
+
+	/* The reactions of state null. */
+	private void reactChoice_main_region__choice_1() {
+		if (checkChoice_main_region__choice_1Tr0()) {
+			effectChoice_main_region__choice_1Tr0();
+		} else {
+			effectChoice_main_region__choice_1Tr1();
+		}
+	}
+
+	/* The reactions of state null. */
+	private void reactChoice_main_region__choice_2() {
+		if (checkChoice_main_region__choice_2Tr1()) {
+			effectChoice_main_region__choice_2Tr1();
+		} else {
+			effectChoice_main_region__choice_2Tr0();
+		}
+	}
+
+	/* The reactions of state null. */
+	private void reactChoice_main_region__choice_3() {
+		if (checkChoice_main_region__choice_3Tr1()) {
+			effectChoice_main_region__choice_3Tr1();
+		} else {
+			effectChoice_main_region__choice_3Tr0();
+		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactChoice_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

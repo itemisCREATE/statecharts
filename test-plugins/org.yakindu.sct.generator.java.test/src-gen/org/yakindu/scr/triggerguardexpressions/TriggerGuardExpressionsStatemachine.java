@@ -4,6 +4,9 @@ public class TriggerGuardExpressionsStatemachine
 		implements
 			ITriggerGuardExpressionsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -19,7 +22,6 @@ public class TriggerGuardExpressionsStatemachine
 		}
 
 		private boolean b;
-
 		public boolean getB() {
 			return b;
 		}
@@ -64,25 +66,11 @@ public class TriggerGuardExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -134,6 +122,26 @@ public class TriggerGuardExpressionsStatemachine
 		sCInterface.setB(value);
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return (sCInterface.e1 || sCInterface.e2) && sCInterface.b;
+	}
+
+	private boolean checkMain_region_BTr0() {
+		return true;
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_B();
+	}
+
+	private void effectMain_region_BTr0() {
+		exitSequenceMain_region_B();
+
+		enterSequenceMain_region_A();
+	}
+
 	/* Entry action for statechart 'TriggerGuardExpressions'. */
 	private void entryAction() {
 	}
@@ -142,24 +150,66 @@ public class TriggerGuardExpressionsStatemachine
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactTriggerGuardExpressions_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			case main_region_B :
+				exitSequenceMain_region_B();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if ((sCInterface.e1 || sCInterface.e2) && sCInterface.b) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_B;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		effectMain_region_BTr0();
+	}
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+	/* Default react sequence for initial entry  */
+	private void reactTriggerGuardExpressions_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

@@ -4,10 +4,12 @@ public class CastExpressionsStatemachine
 		implements
 			ICastExpressionsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private double realValue;
-
 		public double getRealValue() {
 			return realValue;
 		}
@@ -17,7 +19,6 @@ public class CastExpressionsStatemachine
 		}
 
 		private long intValue;
-
 		public long getIntValue() {
 			return intValue;
 		}
@@ -59,30 +60,11 @@ public class CastExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_C :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -135,43 +117,131 @@ public class CastExpressionsStatemachine
 		sCInterface.setIntValue(value);
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return true;
+	}
+
+	private boolean checkMain_region_BTr0() {
+		return (true)
+				&& ((double) (sCInterface.realValue * 0.1)) > ((long) 1.4)
+				&& ((long) (sCInterface.realValue * sCInterface.intValue)) < ((double) 100);
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_B();
+	}
+
+	private void effectMain_region_BTr0() {
+		exitSequenceMain_region_B();
+
+		enterSequenceMain_region_C();
+	}
+
 	/* Entry action for statechart 'CastExpressions'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'B'. */
+	private void entryActionMain_region_B() {
+		sCInterface.realValue = 3 * ((long) 5.5);
+	}
+
+	/* Entry action for state 'C'. */
+	private void entryActionMain_region_C() {
+		sCInterface.realValue = ((long) (sCInterface.realValue
+				* sCInterface.intValue * 10.1));
 	}
 
 	/* Exit action for state 'CastExpressions'. */
 	private void exitAction() {
 	}
 
-	/* The reactions of state A. */
-	private void reactMain_region_A() {
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
 		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		stateVector[0] = State.main_region_A;
+	}
 
-		sCInterface.realValue = 3 * ((long) 5.5);
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_B() {
+		entryActionMain_region_B();
 
 		nextStateIndex = 0;
 		stateVector[0] = State.main_region_B;
 	}
 
+	/* 'default' enter sequence for state C */
+	private void enterSequenceMain_region_C() {
+		entryActionMain_region_C();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_C;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactCastExpressions_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state C */
+	private void exitSequenceMain_region_C() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			case main_region_B :
+				exitSequenceMain_region_B();
+				break;
+
+			case main_region_C :
+				exitSequenceMain_region_C();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* The reactions of state A. */
+	private void reactMain_region_A() {
+		effectMain_region_ATr0();
+	}
+
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		if ((true)
-				&& ((double) (sCInterface.realValue * 0.1)) > ((long) 1.4)
-				&& ((long) (sCInterface.realValue * sCInterface.intValue)) < ((double) 100)) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.realValue = ((long) (sCInterface.realValue
-					* sCInterface.intValue * 10.1));
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_C;
+		if (checkMain_region_BTr0()) {
+			effectMain_region_BTr0();
 		}
 	}
 
 	/* The reactions of state C. */
 	private void reactMain_region_C() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactCastExpressions_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

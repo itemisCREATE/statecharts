@@ -4,6 +4,9 @@ public class InEventLifeCycleStatemachine
 		implements
 			IInEventLifeCycleStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -13,7 +16,6 @@ public class InEventLifeCycleStatemachine
 		}
 
 		private long i;
-
 		public long getI() {
 			return i;
 		}
@@ -57,20 +59,11 @@ public class InEventLifeCycleStatemachine
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -117,6 +110,14 @@ public class InEventLifeCycleStatemachine
 		sCInterface.setI(value);
 	}
 
+	private boolean checkMain_region_ALr0() {
+		return sCInterface.e;
+	}
+
+	private void effectMain_region_ALr0() {
+		sCInterface.i += 1;
+	}
+
 	/* Entry action for statechart 'InEventLifeCycle'. */
 	private void entryAction() {
 	}
@@ -125,11 +126,45 @@ public class InEventLifeCycleStatemachine
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactInEventLifeCycle_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCInterface.e) {
-			sCInterface.i += 1;
+		if (checkMain_region_ALr0()) {
+			effectMain_region_ALr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactInEventLifeCycle_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

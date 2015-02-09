@@ -4,6 +4,9 @@ public class IntegerExpressionsStatemachine
 		implements
 			IIntegerExpressionsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -13,7 +16,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long myInt1;
-
 		public long getMyInt1() {
 			return myInt1;
 		}
@@ -23,7 +25,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long myInt2;
-
 		public long getMyInt2() {
 			return myInt2;
 		}
@@ -33,7 +34,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean less;
-
 		public boolean getLess() {
 			return less;
 		}
@@ -43,7 +43,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean greater;
-
 		public boolean getGreater() {
 			return greater;
 		}
@@ -53,7 +52,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean equalOrLess;
-
 		public boolean getEqualOrLess() {
 			return equalOrLess;
 		}
@@ -63,7 +61,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean equalOrGreater;
-
 		public boolean getEqualOrGreater() {
 			return equalOrGreater;
 		}
@@ -73,7 +70,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean equal;
-
 		public boolean getEqual() {
 			return equal;
 		}
@@ -83,7 +79,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean notEqual;
-
 		public boolean getNotEqual() {
 			return notEqual;
 		}
@@ -93,7 +88,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long plus;
-
 		public long getPlus() {
 			return plus;
 		}
@@ -103,7 +97,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long minus;
-
 		public long getMinus() {
 			return minus;
 		}
@@ -113,7 +106,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long multiply;
-
 		public long getMultiply() {
 			return multiply;
 		}
@@ -123,7 +115,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long division;
-
 		public long getDivision() {
 			return division;
 		}
@@ -133,7 +124,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long modulo;
-
 		public long getModulo() {
 			return modulo;
 		}
@@ -143,7 +133,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long negat;
-
 		public long getNegat() {
 			return negat;
 		}
@@ -153,7 +142,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private boolean complement;
-
 		public boolean getComplement() {
 			return complement;
 		}
@@ -163,7 +151,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long multiAssign;
-
 		public long getMultiAssign() {
 			return multiAssign;
 		}
@@ -173,7 +160,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long divAssign;
-
 		public long getDivAssign() {
 			return divAssign;
 		}
@@ -183,7 +169,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long plusAssign;
-
 		public long getPlusAssign() {
 			return plusAssign;
 		}
@@ -193,7 +178,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long minusAssign;
-
 		public long getMinusAssign() {
 			return minusAssign;
 		}
@@ -203,7 +187,6 @@ public class IntegerExpressionsStatemachine
 		}
 
 		private long moduloAssign;
-
 		public long getModuloAssign() {
 			return moduloAssign;
 		}
@@ -285,29 +268,11 @@ public class IntegerExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		sCInterface.myInt1 = 10;
-
-		sCInterface.myInt2 = 5;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_StateA :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_StateB :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -489,61 +454,131 @@ public class IntegerExpressionsStatemachine
 		sCInterface.setModuloAssign(value);
 	}
 
+	private boolean checkMain_region_StateATr0() {
+		return sCInterface.e1;
+	}
+
+	private void effectMain_region_StateATr0() {
+		exitSequenceMain_region_StateA();
+
+		enterSequenceMain_region_StateB();
+	}
+
 	/* Entry action for statechart 'IntegerExpressions'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'StateA'. */
+	private void entryActionMain_region_StateA() {
+		sCInterface.myInt1 = 10;
+
+		sCInterface.myInt2 = 5;
+	}
+
+	/* Entry action for state 'StateB'. */
+	private void entryActionMain_region_StateB() {
+		sCInterface.less = (sCInterface.myInt1 < sCInterface.myInt2);
+
+		sCInterface.greater = (sCInterface.myInt1 > sCInterface.myInt2);
+
+		sCInterface.equalOrLess = (sCInterface.myInt1 <= sCInterface.myInt2);
+
+		sCInterface.equalOrGreater = (sCInterface.myInt1 >= sCInterface.myInt2);
+
+		sCInterface.equal = (sCInterface.myInt1 == sCInterface.myInt2);
+
+		sCInterface.notEqual = (sCInterface.myInt1 != sCInterface.myInt2);
+
+		sCInterface.plus = sCInterface.myInt1 + sCInterface.myInt2;
+
+		sCInterface.minus = sCInterface.myInt1 - sCInterface.myInt2;
+
+		sCInterface.multiply = sCInterface.myInt1 * sCInterface.myInt2;
+
+		sCInterface.division = sCInterface.myInt1 / sCInterface.myInt2;
+
+		sCInterface.modulo = sCInterface.myInt1 % sCInterface.myInt2;
+
+		sCInterface.negat = -sCInterface.myInt1;
+
+		sCInterface.multiAssign *= sCInterface.myInt1;
+
+		sCInterface.divAssign /= sCInterface.myInt1;
+
+		sCInterface.plusAssign += sCInterface.myInt1;
+
+		sCInterface.minusAssign -= sCInterface.myInt1;
+
+		sCInterface.moduloAssign %= sCInterface.myInt1;
 	}
 
 	/* Exit action for state 'IntegerExpressions'. */
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state StateA */
+	private void enterSequenceMain_region_StateA() {
+		entryActionMain_region_StateA();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	/* 'default' enter sequence for state StateB */
+	private void enterSequenceMain_region_StateB() {
+		entryActionMain_region_StateB();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateB;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactIntegerExpressions_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state StateA */
+	private void exitSequenceMain_region_StateA() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state StateB */
+	private void exitSequenceMain_region_StateB() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				exitSequenceMain_region_StateA();
+				break;
+
+			case main_region_StateB :
+				exitSequenceMain_region_StateB();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCInterface.e1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.less = (sCInterface.myInt1 < sCInterface.myInt2);
-
-			sCInterface.greater = (sCInterface.myInt1 > sCInterface.myInt2);
-
-			sCInterface.equalOrLess = (sCInterface.myInt1 <= sCInterface.myInt2);
-
-			sCInterface.equalOrGreater = (sCInterface.myInt1 >= sCInterface.myInt2);
-
-			sCInterface.equal = (sCInterface.myInt1 == sCInterface.myInt2);
-
-			sCInterface.notEqual = (sCInterface.myInt1 != sCInterface.myInt2);
-
-			sCInterface.plus = sCInterface.myInt1 + sCInterface.myInt2;
-
-			sCInterface.minus = sCInterface.myInt1 - sCInterface.myInt2;
-
-			sCInterface.multiply = sCInterface.myInt1 * sCInterface.myInt2;
-
-			sCInterface.division = sCInterface.myInt1 / sCInterface.myInt2;
-
-			sCInterface.modulo = sCInterface.myInt1 % sCInterface.myInt2;
-
-			sCInterface.negat = -sCInterface.myInt1;
-
-			sCInterface.multiAssign *= sCInterface.myInt1;
-
-			sCInterface.divAssign /= sCInterface.myInt1;
-
-			sCInterface.plusAssign += sCInterface.myInt1;
-
-			sCInterface.minusAssign -= sCInterface.myInt1;
-
-			sCInterface.moduloAssign %= sCInterface.myInt1;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_StateB;
+		if (checkMain_region_StateATr0()) {
+			effectMain_region_StateATr0();
 		}
 	}
 
 	/* The reactions of state StateB. */
 	private void reactMain_region_StateB() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactIntegerExpressions_main_region__entry_Default() {
+		enterSequenceMain_region_StateA();
 	}
 
 	public void runCycle() {

@@ -2,10 +2,12 @@ package org.yakindu.scr.alwaysoncycle;
 
 public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long value;
-
 		public long getValue() {
 			return value;
 		}
@@ -15,7 +17,6 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		}
 
 		private boolean v2;
-
 		public boolean getV2() {
 			return v2;
 		}
@@ -57,29 +58,11 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 	public void enter() {
 		entryAction();
 
-		sCInterface.value = 0;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_StateA :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				sCInterface.value = 0;
-				break;
-
-			case main_region_StateB :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -130,42 +113,130 @@ public class AlwaysOncycleStatemachine implements IAlwaysOncycleStatemachine {
 		sCInterface.setV2(value);
 	}
 
+	private boolean checkMain_region_StateATr0() {
+		return sCInterface.value == 5;
+	}
+
+	private boolean checkMain_region_StateALr1() {
+		return true;
+	}
+
+	private boolean checkMain_region_StateBTr0() {
+		return sCInterface.value == 5;
+	}
+
+	private boolean checkMain_region_StateBLr0() {
+		return true;
+	}
+
+	private void effectMain_region_StateATr0() {
+		exitSequenceMain_region_StateA();
+
+		enterSequenceMain_region_StateB();
+	}
+
+	private void effectMain_region_StateALr1() {
+		sCInterface.value += 1;
+	}
+
+	private void effectMain_region_StateBTr0() {
+		exitSequenceMain_region_StateB();
+
+		enterSequenceMain_region_StateA();
+	}
+
+	private void effectMain_region_StateBLr0() {
+		sCInterface.value += 1;
+	}
+
 	/* Entry action for statechart 'AlwaysOncycle'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'StateA'. */
+	private void entryActionMain_region_StateA() {
+		sCInterface.value = 0;
 	}
 
 	/* Exit action for state 'AlwaysOncycle'. */
 	private void exitAction() {
 	}
 
+	/* Exit action for state 'StateA'. */
+	private void exitActionMain_region_StateA() {
+		sCInterface.value = 0;
+	}
+
+	/* 'default' enter sequence for state StateA */
+	private void enterSequenceMain_region_StateA() {
+		entryActionMain_region_StateA();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	/* 'default' enter sequence for state StateB */
+	private void enterSequenceMain_region_StateB() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateB;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactAlwaysOncycle_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state StateA */
+	private void exitSequenceMain_region_StateA() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+
+		exitActionMain_region_StateA();
+	}
+
+	/* Default exit sequence for state StateB */
+	private void exitSequenceMain_region_StateB() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				exitSequenceMain_region_StateA();
+				break;
+
+			case main_region_StateB :
+				exitSequenceMain_region_StateB();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCInterface.value == 5) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.value = 0;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_StateB;
+		if (checkMain_region_StateATr0()) {
+			effectMain_region_StateATr0();
 		} else {
-			sCInterface.value += 1;
+			effectMain_region_StateALr1();
 		}
 	}
 
 	/* The reactions of state StateB. */
 	private void reactMain_region_StateB() {
-		if (sCInterface.value == 5) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.value = 0;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_StateA;
+		if (checkMain_region_StateBTr0()) {
+			effectMain_region_StateBTr0();
 		} else {
-			sCInterface.value += 1;
+			effectMain_region_StateBLr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactAlwaysOncycle_main_region__entry_Default() {
+		enterSequenceMain_region_StateA();
 	}
 
 	public void runCycle() {

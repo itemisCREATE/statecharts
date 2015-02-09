@@ -4,6 +4,9 @@ public class RealExpressionsStatemachine
 		implements
 			IRealExpressionsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e1;
@@ -13,7 +16,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private double myReal1;
-
 		public double getMyReal1() {
 			return myReal1;
 		}
@@ -23,7 +25,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private double myReal2;
-
 		public double getMyReal2() {
 			return myReal2;
 		}
@@ -33,7 +34,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean less;
-
 		public boolean getLess() {
 			return less;
 		}
@@ -43,7 +43,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean greater;
-
 		public boolean getGreater() {
 			return greater;
 		}
@@ -53,7 +52,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean equalOrLess;
-
 		public boolean getEqualOrLess() {
 			return equalOrLess;
 		}
@@ -63,7 +61,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean equalOrGreater;
-
 		public boolean getEqualOrGreater() {
 			return equalOrGreater;
 		}
@@ -73,7 +70,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean equal;
-
 		public boolean getEqual() {
 			return equal;
 		}
@@ -83,7 +79,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean notEqual;
-
 		public boolean getNotEqual() {
 			return notEqual;
 		}
@@ -93,7 +88,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean plus;
-
 		public boolean getPlus() {
 			return plus;
 		}
@@ -103,7 +97,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean minus;
-
 		public boolean getMinus() {
 			return minus;
 		}
@@ -113,7 +106,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean multiply;
-
 		public boolean getMultiply() {
 			return multiply;
 		}
@@ -123,7 +115,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean division;
-
 		public boolean getDivision() {
 			return division;
 		}
@@ -133,7 +124,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean modulo;
-
 		public boolean getModulo() {
 			return modulo;
 		}
@@ -143,7 +133,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private double negat;
-
 		public double getNegat() {
 			return negat;
 		}
@@ -153,7 +142,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean complement;
-
 		public boolean getComplement() {
 			return complement;
 		}
@@ -163,7 +151,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private double multiAssign;
-
 		public double getMultiAssign() {
 			return multiAssign;
 		}
@@ -173,7 +160,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private double divAssign;
-
 		public double getDivAssign() {
 			return divAssign;
 		}
@@ -183,7 +169,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private double plusAssign;
-
 		public double getPlusAssign() {
 			return plusAssign;
 		}
@@ -193,7 +178,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private double minusAssign;
-
 		public double getMinusAssign() {
 			return minusAssign;
 		}
@@ -203,7 +187,6 @@ public class RealExpressionsStatemachine
 		}
 
 		private boolean moduloAssign;
-
 		public boolean getModuloAssign() {
 			return moduloAssign;
 		}
@@ -285,29 +268,11 @@ public class RealExpressionsStatemachine
 	public void enter() {
 		entryAction();
 
-		sCInterface.myReal1 = 5.3;
-
-		sCInterface.myReal2 = 10.6;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_StateA;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_StateA :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_StateB :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -489,61 +454,131 @@ public class RealExpressionsStatemachine
 		sCInterface.setModuloAssign(value);
 	}
 
+	private boolean checkMain_region_StateATr0() {
+		return sCInterface.e1;
+	}
+
+	private void effectMain_region_StateATr0() {
+		exitSequenceMain_region_StateA();
+
+		enterSequenceMain_region_StateB();
+	}
+
 	/* Entry action for statechart 'RealExpressions'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'StateA'. */
+	private void entryActionMain_region_StateA() {
+		sCInterface.myReal1 = 5.3;
+
+		sCInterface.myReal2 = 10.6;
+	}
+
+	/* Entry action for state 'StateB'. */
+	private void entryActionMain_region_StateB() {
+		sCInterface.less = sCInterface.myReal1 < sCInterface.myReal2;
+
+		sCInterface.greater = sCInterface.myReal1 > sCInterface.myReal2;
+
+		sCInterface.equalOrLess = sCInterface.myReal1 <= sCInterface.myReal2;
+
+		sCInterface.equalOrGreater = sCInterface.myReal1 >= sCInterface.myReal2;
+
+		sCInterface.equal = sCInterface.myReal1 == sCInterface.myReal2;
+
+		sCInterface.notEqual = sCInterface.myReal1 != sCInterface.myReal2;
+
+		sCInterface.plus = (15.89 <= (sCInterface.myReal1 + sCInterface.myReal2) && (sCInterface.myReal1 + sCInterface.myReal2) <= 16.91);
+
+		sCInterface.minus = (5.29 <= (sCInterface.myReal2 - sCInterface.myReal1) && (sCInterface.myReal1 - sCInterface.myReal2) <= 5.31);
+
+		sCInterface.multiply = (56.17 <= (sCInterface.myReal1 * sCInterface.myReal2) && (sCInterface.myReal1 * sCInterface.myReal2) <= 56.19);
+
+		sCInterface.division = (1.9 <= (sCInterface.myReal2 / sCInterface.myReal1) && (sCInterface.myReal1 / sCInterface.myReal2) <= 2.1);
+
+		sCInterface.modulo = (-0.1 <= (sCInterface.myReal2 % sCInterface.myReal1) && (sCInterface.myReal1 % sCInterface.myReal2) <= 0.1);
+
+		sCInterface.negat = -sCInterface.myReal1;
+
+		sCInterface.multiAssign *= sCInterface.myReal1;
+
+		sCInterface.divAssign /= sCInterface.myReal1;
+
+		sCInterface.plusAssign += sCInterface.myReal1;
+
+		sCInterface.minusAssign -= sCInterface.myReal1;
+
+		sCInterface.moduloAssign = (-0.1 <= (sCInterface.myReal1 %= sCInterface.myReal1));
 	}
 
 	/* Exit action for state 'RealExpressions'. */
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state StateA */
+	private void enterSequenceMain_region_StateA() {
+		entryActionMain_region_StateA();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateA;
+	}
+
+	/* 'default' enter sequence for state StateB */
+	private void enterSequenceMain_region_StateB() {
+		entryActionMain_region_StateB();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_StateB;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactRealExpressions_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state StateA */
+	private void exitSequenceMain_region_StateA() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state StateB */
+	private void exitSequenceMain_region_StateB() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_StateA :
+				exitSequenceMain_region_StateA();
+				break;
+
+			case main_region_StateB :
+				exitSequenceMain_region_StateB();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state StateA. */
 	private void reactMain_region_StateA() {
-		if (sCInterface.e1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.less = sCInterface.myReal1 < sCInterface.myReal2;
-
-			sCInterface.greater = sCInterface.myReal1 > sCInterface.myReal2;
-
-			sCInterface.equalOrLess = sCInterface.myReal1 <= sCInterface.myReal2;
-
-			sCInterface.equalOrGreater = sCInterface.myReal1 >= sCInterface.myReal2;
-
-			sCInterface.equal = sCInterface.myReal1 == sCInterface.myReal2;
-
-			sCInterface.notEqual = sCInterface.myReal1 != sCInterface.myReal2;
-
-			sCInterface.plus = (15.89 <= (sCInterface.myReal1 + sCInterface.myReal2) && (sCInterface.myReal1 + sCInterface.myReal2) <= 16.91);
-
-			sCInterface.minus = (5.29 <= (sCInterface.myReal2 - sCInterface.myReal1) && (sCInterface.myReal1 - sCInterface.myReal2) <= 5.31);
-
-			sCInterface.multiply = (56.17 <= (sCInterface.myReal1 * sCInterface.myReal2) && (sCInterface.myReal1 * sCInterface.myReal2) <= 56.19);
-
-			sCInterface.division = (1.9 <= (sCInterface.myReal2 / sCInterface.myReal1) && (sCInterface.myReal1 / sCInterface.myReal2) <= 2.1);
-
-			sCInterface.modulo = (-0.1 <= (sCInterface.myReal2 % sCInterface.myReal1) && (sCInterface.myReal1 % sCInterface.myReal2) <= 0.1);
-
-			sCInterface.negat = -sCInterface.myReal1;
-
-			sCInterface.multiAssign *= sCInterface.myReal1;
-
-			sCInterface.divAssign /= sCInterface.myReal1;
-
-			sCInterface.plusAssign += sCInterface.myReal1;
-
-			sCInterface.minusAssign -= sCInterface.myReal1;
-
-			sCInterface.moduloAssign = (-0.1 <= (sCInterface.myReal1 %= sCInterface.myReal1));
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_StateB;
+		if (checkMain_region_StateATr0()) {
+			effectMain_region_StateATr0();
 		}
 	}
 
 	/* The reactions of state StateB. */
 	private void reactMain_region_StateB() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactRealExpressions_main_region__entry_Default() {
+		enterSequenceMain_region_StateA();
 	}
 
 	public void runCycle() {

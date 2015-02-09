@@ -2,6 +2,9 @@ package org.yakindu.scr.javakeywords;
 
 public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean while_ID;
@@ -17,7 +20,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean abstract_ID;
-
 		public boolean getAbstract() {
 			return abstract_ID;
 		}
@@ -27,7 +29,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean assert_ID;
-
 		public boolean getAssert() {
 			return assert_ID;
 		}
@@ -37,7 +38,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean boolean_ID;
-
 		public boolean getBoolean() {
 			return boolean_ID;
 		}
@@ -47,7 +47,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean break_ID;
-
 		public boolean getBreak() {
 			return break_ID;
 		}
@@ -57,7 +56,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean byte_ID;
-
 		public boolean getByte() {
 			return byte_ID;
 		}
@@ -67,7 +65,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean case_ID;
-
 		public boolean getCase() {
 			return case_ID;
 		}
@@ -77,7 +74,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean catch_ID;
-
 		public boolean getCatch() {
 			return catch_ID;
 		}
@@ -87,7 +83,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean char_ID;
-
 		public boolean getChar() {
 			return char_ID;
 		}
@@ -97,7 +92,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean class_ID;
-
 		public boolean getClass_ID() {
 			return class_ID;
 		}
@@ -106,18 +100,7 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 			this.class_ID = value;
 		}
 
-		private boolean const_ID;
-
-		public boolean getConst() {
-			return const_ID;
-		}
-
-		public void setConst(boolean value) {
-			this.const_ID = value;
-		}
-
 		private boolean continue_ID;
-
 		public boolean getContinue() {
 			return continue_ID;
 		}
@@ -127,7 +110,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean do_ID;
-
 		public boolean getDo() {
 			return do_ID;
 		}
@@ -137,7 +119,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean double_ID;
-
 		public boolean getDouble() {
 			return double_ID;
 		}
@@ -147,7 +128,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean enum_ID;
-
 		public boolean getEnum() {
 			return enum_ID;
 		}
@@ -157,7 +137,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean extends_ID;
-
 		public boolean getExtends() {
 			return extends_ID;
 		}
@@ -167,7 +146,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean final_ID;
-
 		public boolean getFinal() {
 			return final_ID;
 		}
@@ -177,7 +155,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean finally_ID;
-
 		public boolean getFinally() {
 			return finally_ID;
 		}
@@ -187,7 +164,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean float_ID;
-
 		public boolean getFloat() {
 			return float_ID;
 		}
@@ -197,7 +173,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean for_ID;
-
 		public boolean getFor() {
 			return for_ID;
 		}
@@ -207,7 +182,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean goto_ID;
-
 		public boolean getGoto() {
 			return goto_ID;
 		}
@@ -217,7 +191,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean if_ID;
-
 		public boolean getIf() {
 			return if_ID;
 		}
@@ -227,7 +200,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean implements_ID;
-
 		public boolean getImplements() {
 			return implements_ID;
 		}
@@ -237,7 +209,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean instanceof_ID;
-
 		public boolean getInstanceof() {
 			return instanceof_ID;
 		}
@@ -247,7 +218,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean int_ID;
-
 		public boolean getInt() {
 			return int_ID;
 		}
@@ -257,7 +227,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean long_ID;
-
 		public boolean getLong() {
 			return long_ID;
 		}
@@ -267,7 +236,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean native_ID;
-
 		public boolean getNative() {
 			return native_ID;
 		}
@@ -277,7 +245,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean new_ID;
-
 		public boolean getNew() {
 			return new_ID;
 		}
@@ -287,7 +254,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean package_ID;
-
 		public boolean getPackage() {
 			return package_ID;
 		}
@@ -297,7 +263,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean private_ID;
-
 		public boolean getPrivate() {
 			return private_ID;
 		}
@@ -307,7 +272,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean protected_ID;
-
 		public boolean getProtected() {
 			return protected_ID;
 		}
@@ -317,7 +281,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean public_ID;
-
 		public boolean getPublic() {
 			return public_ID;
 		}
@@ -327,7 +290,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean return_ID;
-
 		public boolean getReturn() {
 			return return_ID;
 		}
@@ -337,7 +299,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean short_ID;
-
 		public boolean getShort() {
 			return short_ID;
 		}
@@ -347,7 +308,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean static_ID;
-
 		public boolean getStatic() {
 			return static_ID;
 		}
@@ -357,7 +317,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean strictfp_ID;
-
 		public boolean getStrictfp() {
 			return strictfp_ID;
 		}
@@ -367,7 +326,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean super_ID;
-
 		public boolean getSuper() {
 			return super_ID;
 		}
@@ -377,7 +335,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean switch_ID;
-
 		public boolean getSwitch() {
 			return switch_ID;
 		}
@@ -387,7 +344,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean synchronized_ID;
-
 		public boolean getSynchronized() {
 			return synchronized_ID;
 		}
@@ -397,7 +353,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean this_ID;
-
 		public boolean getThis() {
 			return this_ID;
 		}
@@ -407,7 +362,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean throw_ID;
-
 		public boolean getThrow() {
 			return throw_ID;
 		}
@@ -417,7 +371,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean throws_ID;
-
 		public boolean getThrows() {
 			return throws_ID;
 		}
@@ -427,7 +380,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean transient_ID;
-
 		public boolean getTransient() {
 			return transient_ID;
 		}
@@ -437,7 +389,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean try_ID;
-
 		public boolean getTry() {
 			return try_ID;
 		}
@@ -447,7 +398,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean void_ID;
-
 		public boolean getVoid() {
 			return void_ID;
 		}
@@ -457,7 +407,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 
 		private boolean volatile_ID;
-
 		public boolean getVolatile() {
 			return volatile_ID;
 		}
@@ -517,8 +466,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.char_ID = false;
 
 		sCInterface.class_ID = false;
-
-		sCInterface.const_ID = false;
 
 		sCInterface.continue_ID = false;
 
@@ -594,125 +541,11 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 	public void enter() {
 		entryAction();
 
-		sCInterface.abstract_ID = true;
-
-		sCInterface.assert_ID = true;
-
-		sCInterface.boolean_ID = true;
-
-		sCInterface.break_ID = true;
-
-		sCInterface.byte_ID = true;
-
-		sCInterface.case_ID = true;
-
-		sCInterface.catch_ID = true;
-
-		sCInterface.char_ID = true;
-
-		sCInterface.class_ID = true;
-
-		sCInterface.const_ID = true;
-
-		sCInterface.continue_ID = true;
-
-		sCInterface.do_ID = true;
-
-		sCInterface.double_ID = true;
-
-		sCInterface.enum_ID = true;
-
-		sCInterface.extends_ID = true;
-
-		sCInterface.final_ID = true;
-
-		sCInterface.finally_ID = true;
-
-		sCInterface.float_ID = true;
-
-		sCInterface.for_ID = true;
-
-		sCInterface.goto_ID = true;
-
-		sCInterface.if_ID = true;
-
-		sCInterface.implements_ID = true;
-
-		sCInterface.instanceof_ID = true;
-
-		sCInterface.int_ID = true;
-
-		sCInterface.long_ID = true;
-
-		sCInterface.native_ID = true;
-
-		sCInterface.new_ID = true;
-
-		sCInterface.package_ID = true;
-
-		sCInterface.private_ID = true;
-
-		sCInterface.protected_ID = true;
-
-		sCInterface.public_ID = true;
-
-		sCInterface.return_ID = true;
-
-		sCInterface.short_ID = true;
-
-		sCInterface.static_ID = true;
-
-		sCInterface.strictfp_ID = true;
-
-		sCInterface.super_ID = true;
-
-		sCInterface.switch_ID = true;
-
-		sCInterface.synchronized_ID = true;
-
-		sCInterface.this_ID = true;
-
-		sCInterface.throw_ID = true;
-
-		sCInterface.throws_ID = true;
-
-		sCInterface.transient_ID = true;
-
-		sCInterface.try_ID = true;
-
-		sCInterface.void_ID = true;
-
-		sCInterface.volatile_ID = true;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.goto_abstract;
+		enterSequenceGoto();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case goto_abstract :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case goto_boolean :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case goto_void_volatile_transient_throw_false :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case goto_void_volatile_state :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceGoto();
 
 		exitAction();
 	}
@@ -831,13 +664,6 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	public void setClass_ID(boolean value) {
 		sCInterface.setClass_ID(value);
-	}
-	public boolean getConst() {
-		return sCInterface.getConst();
-	}
-
-	public void setConst(boolean value) {
-		sCInterface.setConst(value);
 	}
 	public boolean getContinue() {
 		return sCInterface.getContinue();
@@ -1085,31 +911,316 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		sCInterface.setVolatile(value);
 	}
 
+	private boolean checkGoto_abstractTr0() {
+		return (sCInterface.while_ID) && true;
+	}
+
+	private boolean checkGoto_booleanTr0() {
+		return sCInterface.while_ID;
+	}
+
+	private boolean checkGoto_booleanTr1() {
+		return sCInterface.ev;
+	}
+
+	private boolean checkGoto_void_volatile_stateTr0() {
+		return sCInterface.ev;
+	}
+
+	private void effectGoto_abstractTr0() {
+		exitSequenceGoto_abstract();
+
+		sCInterface.native_ID = false;
+
+		enterSequenceGoto_boolean();
+	}
+
+	private void effectGoto_booleanTr0() {
+		exitSequenceGoto_boolean();
+
+		enterSequenceGoto_void();
+	}
+
+	private void effectGoto_booleanTr1() {
+		exitSequenceGoto_boolean();
+
+		enterSequenceGoto_void();
+	}
+
+	private void effectGoto_void_volatile_stateTr0() {
+		exitSequenceGoto_void_volatile_state();
+
+		enterSequenceGoto_void_volatile_transient();
+	}
+
 	/* Entry action for statechart 'JavaKeywords'. */
 	private void entryAction() {
+	}
+
+	/* Entry action for state 'abstract'. */
+	private void entryActionGoto_abstract() {
+		sCInterface.abstract_ID = true;
+
+		sCInterface.assert_ID = true;
+
+		sCInterface.boolean_ID = true;
+
+		sCInterface.break_ID = true;
+
+		sCInterface.byte_ID = true;
+
+		sCInterface.case_ID = true;
+
+		sCInterface.catch_ID = true;
+
+		sCInterface.char_ID = true;
+
+		sCInterface.class_ID = true;
+
+		sCInterface.continue_ID = true;
+
+		sCInterface.do_ID = true;
+
+		sCInterface.double_ID = true;
+
+		sCInterface.enum_ID = true;
+
+		sCInterface.extends_ID = true;
+
+		sCInterface.final_ID = true;
+
+		sCInterface.finally_ID = true;
+
+		sCInterface.float_ID = true;
+
+		sCInterface.for_ID = true;
+
+		sCInterface.goto_ID = true;
+
+		sCInterface.if_ID = true;
+
+		sCInterface.implements_ID = true;
+
+		sCInterface.instanceof_ID = true;
+
+		sCInterface.int_ID = true;
+
+		sCInterface.long_ID = true;
+
+		sCInterface.native_ID = true;
+
+		sCInterface.new_ID = true;
+
+		sCInterface.package_ID = true;
+
+		sCInterface.private_ID = true;
+
+		sCInterface.protected_ID = true;
+
+		sCInterface.public_ID = true;
+
+		sCInterface.return_ID = true;
+
+		sCInterface.short_ID = true;
+
+		sCInterface.static_ID = true;
+
+		sCInterface.strictfp_ID = true;
+
+		sCInterface.super_ID = true;
+
+		sCInterface.switch_ID = true;
+
+		sCInterface.synchronized_ID = true;
+
+		sCInterface.this_ID = true;
+
+		sCInterface.throw_ID = true;
+
+		sCInterface.throws_ID = true;
+
+		sCInterface.transient_ID = true;
+
+		sCInterface.try_ID = true;
+
+		sCInterface.void_ID = true;
+
+		sCInterface.volatile_ID = true;
+	}
+
+	/* Entry action for state 'boolean'. */
+	private void entryActionGoto_boolean() {
+		sCInterface.abstract_ID = false;
+
+		sCInterface.assert_ID = false;
+
+		sCInterface.boolean_ID = false;
+
+		sCInterface.break_ID = false;
+
+		sCInterface.byte_ID = false;
+
+		sCInterface.case_ID = false;
+
+		sCInterface.catch_ID = false;
+
+		sCInterface.char_ID = false;
+
+		sCInterface.class_ID = false;
+
+		sCInterface.continue_ID = false;
+
+		sCInterface.do_ID = false;
+
+		sCInterface.double_ID = false;
+
+		sCInterface.enum_ID = false;
+
+		sCInterface.extends_ID = false;
+
+		sCInterface.final_ID = false;
+
+		sCInterface.finally_ID = false;
+
+		sCInterface.float_ID = false;
+
+		sCInterface.for_ID = false;
+
+		sCInterface.goto_ID = false;
+
+		sCInterface.if_ID = false;
+
+		sCInterface.implements_ID = false;
+
+		sCInterface.instanceof_ID = false;
+
+		sCInterface.int_ID = false;
+
+		sCInterface.long_ID = false;
+
+		sCInterface.new_ID = false;
+
+		sCInterface.package_ID = false;
+
+		sCInterface.private_ID = false;
+
+		sCInterface.protected_ID = false;
+
+		sCInterface.public_ID = false;
+
+		sCInterface.return_ID = false;
+
+		sCInterface.short_ID = false;
+
+		sCInterface.static_ID = false;
+
+		sCInterface.strictfp_ID = false;
+
+		sCInterface.super_ID = false;
+
+		sCInterface.switch_ID = false;
+
+		sCInterface.synchronized_ID = false;
+
+		sCInterface.this_ID = false;
+
+		sCInterface.throw_ID = false;
+
+		sCInterface.throws_ID = false;
+
+		sCInterface.transient_ID = false;
+
+		sCInterface.try_ID = false;
+
+		sCInterface.void_ID = false;
+
+		sCInterface.volatile_ID = false;
 	}
 
 	/* Exit action for state 'JavaKeywords'. */
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state abstract */
+	private void enterSequenceGoto_abstract() {
+		entryActionGoto_abstract();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.goto_abstract;
+	}
+
+	/* 'default' enter sequence for state boolean */
+	private void enterSequenceGoto_boolean() {
+		entryActionGoto_boolean();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.goto_boolean;
+	}
+
+	/* 'default' enter sequence for state void */
+	private void enterSequenceGoto_void() {
+		enterSequenceGoto_void_volatile();
+	}
+
+	/* 'try' enter sequence for state void */
+	private void enterSequenceGoto_void() {
+		enterSequenceGoto_void_volatile();
+	}
+
+	/* 'default' enter sequence for state transient */
+	private void enterSequenceGoto_void_volatile_transient() {
+		enterSequenceGoto_void_volatile_transient_throw();
+
+		historyVector[0] = stateVector[0];
+	}
+
+	/* 'this' enter sequence for state transient */
+	private void enterSequenceGoto_void_volatile_transient() {
+		enterSequenceGoto_void_volatile_transient_throw();
+
+		historyVector[0] = stateVector[0];
+	}
+
+	/* 'default' enter sequence for state false */
+	private void enterSequenceGoto_void_volatile_transient_throw_false() {
+		nextStateIndex = 0;
+		stateVector[0] = State.goto_void_volatile_transient_throw_false;
+
+		historyVector[1] = stateVector[0];
+	}
+
+	/* 'default' enter sequence for state state */
+	private void enterSequenceGoto_void_volatile_state() {
+		nextStateIndex = 0;
+		stateVector[0] = State.goto_void_volatile_state;
+
+		historyVector[0] = stateVector[0];
+	}
+
+	/* 'default' enter sequence for region goto */
+	private void enterSequenceGoto() {
+		reactJavaKeywords_goto__entry_Default();
+	}
+
+	/* 'try' enter sequence for region volatile */
+	private void enterSequenceGoto_void_volatile() {
+		reactJavaKeywords_goto_void_volatile_try();
+	}
+
+	/* 'default' enter sequence for region volatile */
+	private void enterSequenceGoto_void_volatile() {
+		reactJavaKeywords_goto_void_volatile__entry_Default();
+	}
+
 	/* shallow enterSequence with history in child volatile */
 	private void shallowEnterSequenceGoto_void_volatile() {
 		switch (historyVector[0]) {
 			case goto_void_volatile_transient_throw_false :
-				nextStateIndex = 0;
-				stateVector[0] = State.goto_void_volatile_transient_throw_false;
-
-				historyVector[1] = stateVector[0];
-
-				historyVector[0] = stateVector[0];
+				enterSequenceGoto_void_volatile_transient();
 				break;
 
 			case goto_void_volatile_state :
-				nextStateIndex = 0;
-				stateVector[0] = State.goto_void_volatile_state;
-
-				historyVector[0] = stateVector[0];
+				enterSequenceGoto_void_volatile_state();
 				break;
 
 			default :
@@ -1117,14 +1228,97 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 		}
 	}
 
+	/* 'this' enter sequence for region throw */
+	private void enterSequenceGoto_void_volatile_transient_throw() {
+		reactJavaKeywords_goto_void_volatile_transient_throw_this();
+	}
+
+	/* 'default' enter sequence for region throw */
+	private void enterSequenceGoto_void_volatile_transient_throw() {
+		reactJavaKeywords_goto_void_volatile_transient_throw__entry_Default();
+	}
+
 	/* deep enterSequence with history in child throw */
 	private void deepEnterSequenceGoto_void_volatile_transient_throw() {
 		switch (historyVector[1]) {
 			case goto_void_volatile_transient_throw_false :
-				nextStateIndex = 0;
-				stateVector[0] = State.goto_void_volatile_transient_throw_false;
+				enterSequenceGoto_void_volatile_transient_throw_false();
+				break;
 
-				historyVector[1] = stateVector[0];
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for state abstract */
+	private void exitSequenceGoto_abstract() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state boolean */
+	private void exitSequenceGoto_boolean() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state false */
+	private void exitSequenceGoto_void_volatile_transient_throw_false() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state state */
+	private void exitSequenceGoto_void_volatile_state() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region goto */
+	private void exitSequenceGoto() {
+		switch (stateVector[0]) {
+			case goto_abstract :
+				exitSequenceGoto_abstract();
+				break;
+
+			case goto_boolean :
+				exitSequenceGoto_boolean();
+				break;
+
+			case goto_void_volatile_transient_throw_false :
+				exitSequenceGoto_void_volatile_transient_throw_false();
+				break;
+
+			case goto_void_volatile_state :
+				exitSequenceGoto_void_volatile_state();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region volatile */
+	private void exitSequenceGoto_void_volatile() {
+		switch (stateVector[0]) {
+			case goto_void_volatile_transient_throw_false :
+				exitSequenceGoto_void_volatile_transient_throw_false();
+				break;
+
+			case goto_void_volatile_state :
+				exitSequenceGoto_void_volatile_state();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region throw */
+	private void exitSequenceGoto_void_volatile_transient_throw() {
+		switch (stateVector[0]) {
+			case goto_void_volatile_transient_throw_false :
+				exitSequenceGoto_void_volatile_transient_throw_false();
 				break;
 
 			default :
@@ -1134,131 +1328,18 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	/* The reactions of state abstract. */
 	private void reactGoto_abstract() {
-		if ((sCInterface.while_ID) && true) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			sCInterface.native_ID = false;
-
-			sCInterface.abstract_ID = false;
-
-			sCInterface.assert_ID = false;
-
-			sCInterface.boolean_ID = false;
-
-			sCInterface.break_ID = false;
-
-			sCInterface.byte_ID = false;
-
-			sCInterface.case_ID = false;
-
-			sCInterface.catch_ID = false;
-
-			sCInterface.char_ID = false;
-
-			sCInterface.class_ID = false;
-
-			sCInterface.const_ID = false;
-
-			sCInterface.continue_ID = false;
-
-			sCInterface.do_ID = false;
-
-			sCInterface.double_ID = false;
-
-			sCInterface.enum_ID = false;
-
-			sCInterface.extends_ID = false;
-
-			sCInterface.final_ID = false;
-
-			sCInterface.finally_ID = false;
-
-			sCInterface.float_ID = false;
-
-			sCInterface.for_ID = false;
-
-			sCInterface.goto_ID = false;
-
-			sCInterface.if_ID = false;
-
-			sCInterface.implements_ID = false;
-
-			sCInterface.instanceof_ID = false;
-
-			sCInterface.int_ID = false;
-
-			sCInterface.long_ID = false;
-
-			sCInterface.new_ID = false;
-
-			sCInterface.package_ID = false;
-
-			sCInterface.private_ID = false;
-
-			sCInterface.protected_ID = false;
-
-			sCInterface.public_ID = false;
-
-			sCInterface.return_ID = false;
-
-			sCInterface.short_ID = false;
-
-			sCInterface.static_ID = false;
-
-			sCInterface.strictfp_ID = false;
-
-			sCInterface.super_ID = false;
-
-			sCInterface.switch_ID = false;
-
-			sCInterface.synchronized_ID = false;
-
-			sCInterface.this_ID = false;
-
-			sCInterface.throw_ID = false;
-
-			sCInterface.throws_ID = false;
-
-			sCInterface.transient_ID = false;
-
-			sCInterface.try_ID = false;
-
-			sCInterface.void_ID = false;
-
-			sCInterface.volatile_ID = false;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.goto_boolean;
+		if (checkGoto_abstractTr0()) {
+			effectGoto_abstractTr0();
 		}
 	}
 
 	/* The reactions of state boolean. */
 	private void reactGoto_boolean() {
-		if (sCInterface.while_ID) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.goto_void_volatile_transient_throw_false;
-
-			historyVector[1] = stateVector[0];
-
-			historyVector[0] = stateVector[0];
+		if (checkGoto_booleanTr0()) {
+			effectGoto_booleanTr0();
 		} else {
-			if (sCInterface.ev) {
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				/* Enter the region with shallow history */
-				if (historyVector[0] != State.$NullState$) {
-					shallowEnterSequenceGoto_void_volatile();
-				} else {
-					nextStateIndex = 0;
-					stateVector[0] = State.goto_void_volatile_state;
-
-					historyVector[0] = stateVector[0];
-				}
+			if (checkGoto_booleanTr1()) {
+				effectGoto_booleanTr1();
 			}
 		}
 	}
@@ -1269,22 +1350,44 @@ public class JavaKeywordsStatemachine implements IJavaKeywordsStatemachine {
 
 	/* The reactions of state state. */
 	private void reactGoto_void_volatile_state() {
-		if (sCInterface.ev) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			/* Enter the region with deep history */
-			if (historyVector[1] != State.$NullState$) {
-				deepEnterSequenceGoto_void_volatile_transient_throw();
-			} else {
-				nextStateIndex = 0;
-				stateVector[0] = State.goto_void_volatile_transient_throw_false;
-
-				historyVector[1] = stateVector[0];
-			}
-
-			historyVector[0] = stateVector[0];
+		if (checkGoto_void_volatile_stateTr0()) {
+			effectGoto_void_volatile_stateTr0();
 		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactJavaKeywords_goto__entry_Default() {
+		enterSequenceGoto_abstract();
+	}
+
+	/* Default react sequence for shallow history entry try */
+	private void reactJavaKeywords_goto_void_volatile_try() {
+		/* Enter the region with shallow history */
+		if (historyVector[0] != State.$NullState$) {
+			shallowEnterSequenceGoto_void_volatile();
+		} else {
+			enterSequenceGoto_void_volatile_state();
+		}
+	}
+
+	/* Default react sequence for deep history entry this */
+	private void reactJavaKeywords_goto_void_volatile_transient_throw_this() {
+		/* Enter the region with deep history */
+		if (historyVector[1] != State.$NullState$) {
+			deepEnterSequenceGoto_void_volatile_transient_throw();
+		} else {
+			enterSequenceGoto_void_volatile_transient_throw_false();
+		}
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactJavaKeywords_goto_void_volatile_transient_throw__entry_Default() {
+		enterSequenceGoto_void_volatile_transient_throw_false();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactJavaKeywords_goto_void_volatile__entry_Default() {
+		enterSequenceGoto_void_volatile_transient();
 	}
 
 	public void runCycle() {

@@ -2,10 +2,12 @@ package org.yakindu.scr.parenthesis;
 
 public class ParenthesisStatemachine implements IParenthesisStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private long erg;
-
 		public long getErg() {
 			return erg;
 		}
@@ -45,22 +47,11 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	public void enter() {
 		entryAction();
 
-		sCInterface.erg = 4 * (3 - 1);
-
-		nextStateIndex = 0;
-		stateVector[0] = State.mainRegion_A;
+		enterSequenceMainRegion();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case mainRegion_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMainRegion();
 
 		exitAction();
 	}
@@ -106,12 +97,53 @@ public class ParenthesisStatemachine implements IParenthesisStatemachine {
 	private void entryAction() {
 	}
 
+	/* Entry action for state 'A'. */
+	private void entryActionMainRegion_A() {
+		sCInterface.erg = 4 * (3 - 1);
+	}
+
 	/* Exit action for state 'Parenthesis'. */
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMainRegion_A() {
+		entryActionMainRegion_A();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.mainRegion_A;
+	}
+
+	/* 'default' enter sequence for region mainRegion */
+	private void enterSequenceMainRegion() {
+		reactParenthesis_mainRegion__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMainRegion_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region mainRegion */
+	private void exitSequenceMainRegion() {
+		switch (stateVector[0]) {
+			case mainRegion_A :
+				exitSequenceMainRegion_A();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMainRegion_A() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactParenthesis_mainRegion__entry_Default() {
+		enterSequenceMainRegion_A();
 	}
 
 	public void runCycle() {

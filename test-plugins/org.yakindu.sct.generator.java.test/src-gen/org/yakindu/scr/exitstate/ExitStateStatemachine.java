@@ -2,6 +2,9 @@ package org.yakindu.scr.exitstate;
 
 public class ExitStateStatemachine implements IExitStateStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -58,30 +61,11 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.r_A_r_B;
+		enterSequenceR();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case r_A_r_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case r_E :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case r_F :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceR();
 
 		exitAction();
 	}
@@ -146,54 +130,33 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 	}
 
 	private void effectR_ATr0() {
-		switch (stateVector[0]) {
-			case r_A_r_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
+		exitSequenceR_A();
 
-			default :
-				break;
-		}
-
-		nextStateIndex = 0;
-		stateVector[0] = State.r_E;
+		enterSequenceR_E();
 	}
 
 	private void effectR_ATr1() {
-		switch (stateVector[0]) {
-			case r_A_r_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
+		exitSequenceR_A();
 
-			default :
-				break;
-		}
-
-		nextStateIndex = 0;
-		stateVector[0] = State.r_F;
+		enterSequenceR_F();
 	}
 
 	private void effectR_A_r_BTr0() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		exitSequenceR_A_r_B();
 
-		effectR_ATr0();
+		reactExitState_r_A_r_g();
 	}
 
 	private void effectR_A_r_BTr1() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		exitSequenceR_A_r_B();
 
-		effectR_ATr1();
+		reactExitState_r_A_r_f();
 	}
 
 	private void effectR_A_r_BTr2() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
+		exitSequenceR_A_r_B();
 
-		effectR_ATr0();
+		reactExitState_r_A_r__exit_Default();
 	}
 
 	/* Entry action for statechart 'ExitState'. */
@@ -202,6 +165,94 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 
 	/* Exit action for state 'ExitState'. */
 	private void exitAction() {
+	}
+
+	/* 'default' enter sequence for state A */
+	private void enterSequenceR_A() {
+		enterSequenceR_A_r();
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceR_A_r_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r_A_r_B;
+	}
+
+	/* 'default' enter sequence for state E */
+	private void enterSequenceR_E() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r_E;
+	}
+
+	/* 'default' enter sequence for state F */
+	private void enterSequenceR_F() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r_F;
+	}
+
+	/* 'default' enter sequence for region r */
+	private void enterSequenceR() {
+		reactExitState_r__entry_Default();
+	}
+
+	/* 'default' enter sequence for region r */
+	private void enterSequenceR_A_r() {
+		reactExitState_r_A_r__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceR_A() {
+		exitSequenceR_A_r();
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceR_A_r_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state E */
+	private void exitSequenceR_E() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state F */
+	private void exitSequenceR_F() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region r */
+	private void exitSequenceR() {
+		switch (stateVector[0]) {
+			case r_A_r_B :
+				exitSequenceR_A_r_B();
+				break;
+
+			case r_E :
+				exitSequenceR_E();
+				break;
+
+			case r_F :
+				exitSequenceR_F();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region r */
+	private void exitSequenceR_A_r() {
+		switch (stateVector[0]) {
+			case r_A_r_B :
+				exitSequenceR_A_r_B();
+				break;
+
+			default :
+				break;
+		}
 	}
 
 	/* The reactions of state B. */
@@ -225,6 +276,31 @@ public class ExitStateStatemachine implements IExitStateStatemachine {
 
 	/* The reactions of state F. */
 	private void reactR_F() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactExitState_r__entry_Default() {
+		enterSequenceR_A();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactExitState_r_A_r__entry_Default() {
+		enterSequenceR_A_r_B();
+	}
+
+	/* The reactions of exit default. */
+	private void reactExitState_r_A_r__exit_Default() {
+		effectR_ATr0();
+	}
+
+	/* The reactions of exit f. */
+	private void reactExitState_r_A_r_f() {
+		effectR_ATr1();
+	}
+
+	/* The reactions of exit g. */
+	private void reactExitState_r_A_r_g() {
+		effectR_ATr0();
 	}
 
 	public void runCycle() {

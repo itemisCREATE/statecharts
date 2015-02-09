@@ -2,6 +2,9 @@ package org.yakindu.scr.simpleevent;
 
 public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean event1;
@@ -44,30 +47,11 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region_A;
+		enterSequenceMain_region();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case main_region_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region_B :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case main_region__final_ :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceMain_region();
 
 		exitAction();
 	}
@@ -110,6 +94,26 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 		sCInterface.raiseEvent1();
 	}
 
+	private boolean checkMain_region_ATr0() {
+		return sCInterface.event1;
+	}
+
+	private boolean checkMain_region_BTr0() {
+		return true;
+	}
+
+	private void effectMain_region_ATr0() {
+		exitSequenceMain_region_A();
+
+		enterSequenceMain_region_B();
+	}
+
+	private void effectMain_region_BTr0() {
+		exitSequenceMain_region_B();
+
+		enterSequenceMain_region__final_0();
+	}
+
 	/* Entry action for statechart 'SimpleEvent'. */
 	private void entryAction() {
 	}
@@ -118,28 +122,86 @@ public class SimpleEventStatemachine implements ISimpleEventStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_B;
+	}
+
+	/* Default enter sequence for state null */
+	private void enterSequenceMain_region__final_0() {
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region__final_;
+	}
+
+	/* 'default' enter sequence for region main region */
+	private void enterSequenceMain_region() {
+		reactSimpleEvent_main_region__entry_Default();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceMain_region_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state B */
+	private void exitSequenceMain_region_B() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for final state. */
+	private void exitSequenceMain_region__final_0() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region main region */
+	private void exitSequenceMain_region() {
+		switch (stateVector[0]) {
+			case main_region_A :
+				exitSequenceMain_region_A();
+				break;
+
+			case main_region_B :
+				exitSequenceMain_region_B();
+				break;
+
+			case main_region__final_ :
+				exitSequenceMain_region__final_0();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactMain_region_A() {
-		if (sCInterface.event1) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.main_region_B;
+		if (checkMain_region_ATr0()) {
+			effectMain_region_ATr0();
 		}
 	}
 
 	/* The reactions of state B. */
 	private void reactMain_region_B() {
-		nextStateIndex = 0;
-		stateVector[0] = State.$NullState$;
-
-		nextStateIndex = 0;
-		stateVector[0] = State.main_region__final_;
+		effectMain_region_BTr0();
 	}
 
 	/* The reactions of state null. */
 	private void reactMain_region__final_0() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactSimpleEvent_main_region__entry_Default() {
+		enterSequenceMain_region_A();
 	}
 
 	public void runCycle() {

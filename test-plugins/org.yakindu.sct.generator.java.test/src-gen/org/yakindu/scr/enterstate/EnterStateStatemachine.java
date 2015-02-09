@@ -2,6 +2,9 @@ package org.yakindu.scr.enterstate;
 
 public class EnterStateStatemachine implements IEnterStateStatemachine {
 
+	static {
+	}
+
 	private final class SCInterfaceImpl implements SCInterface {
 
 		private boolean e;
@@ -58,30 +61,11 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	public void enter() {
 		entryAction();
 
-		nextStateIndex = 0;
-		stateVector[0] = State.r_A;
+		enterSequenceR();
 	}
 
 	public void exit() {
-		switch (stateVector[0]) {
-			case r_A :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case r_B_r_E :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			case r_B_r_F :
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-				break;
-
-			default :
-				break;
-		}
+		exitSequenceR();
 
 		exitAction();
 	}
@@ -133,6 +117,36 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 		sCInterface.raiseG();
 	}
 
+	private boolean checkR_ATr0() {
+		return sCInterface.e;
+	}
+
+	private boolean checkR_ATr1() {
+		return sCInterface.f;
+	}
+
+	private boolean checkR_ATr2() {
+		return sCInterface.g;
+	}
+
+	private void effectR_ATr0() {
+		exitSequenceR_A();
+
+		enterSequenceR_B();
+	}
+
+	private void effectR_ATr1() {
+		exitSequenceR_A();
+
+		enterSequenceR_B();
+	}
+
+	private void effectR_ATr2() {
+		exitSequenceR_A();
+
+		enterSequenceR_B();
+	}
+
 	/* Entry action for statechart 'EnterState'. */
 	private void entryAction() {
 	}
@@ -141,28 +155,118 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 	private void exitAction() {
 	}
 
+	/* 'default' enter sequence for state A */
+	private void enterSequenceR_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r_A;
+	}
+
+	/* 'default' enter sequence for state B */
+	private void enterSequenceR_B() {
+		enterSequenceR_B_r();
+	}
+
+	/* 'f' enter sequence for state B */
+	private void enterSequenceR_B() {
+		enterSequenceR_B_r();
+	}
+
+	/* 'g' enter sequence for state B */
+	private void enterSequenceR_B() {
+		enterSequenceR_B_r();
+	}
+
+	/* 'default' enter sequence for state E */
+	private void enterSequenceR_B_r_E() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r_B_r_E;
+	}
+
+	/* 'default' enter sequence for state F */
+	private void enterSequenceR_B_r_F() {
+		nextStateIndex = 0;
+		stateVector[0] = State.r_B_r_F;
+	}
+
+	/* 'default' enter sequence for region r */
+	private void enterSequenceR() {
+		reactEnterState_r__entry_Default();
+	}
+
+	/* 'default' enter sequence for region r */
+	private void enterSequenceR_B_r() {
+		reactEnterState_r_B_r__entry_Default();
+	}
+
+	/* 'f' enter sequence for region r */
+	private void enterSequenceR_B_r() {
+		reactEnterState_r_B_r_f();
+	}
+
+	/* Default exit sequence for state A */
+	private void exitSequenceR_A() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state E */
+	private void exitSequenceR_B_r_E() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for state F */
+	private void exitSequenceR_B_r_F() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
+	/* Default exit sequence for region r */
+	private void exitSequenceR() {
+		switch (stateVector[0]) {
+			case r_A :
+				exitSequenceR_A();
+				break;
+
+			case r_B_r_E :
+				exitSequenceR_B_r_E();
+				break;
+
+			case r_B_r_F :
+				exitSequenceR_B_r_F();
+				break;
+
+			default :
+				break;
+		}
+	}
+
+	/* Default exit sequence for region r */
+	private void exitSequenceR_B_r() {
+		switch (stateVector[0]) {
+			case r_B_r_E :
+				exitSequenceR_B_r_E();
+				break;
+
+			case r_B_r_F :
+				exitSequenceR_B_r_F();
+				break;
+
+			default :
+				break;
+		}
+	}
+
 	/* The reactions of state A. */
 	private void reactR_A() {
-		if (sCInterface.e) {
-			nextStateIndex = 0;
-			stateVector[0] = State.$NullState$;
-
-			nextStateIndex = 0;
-			stateVector[0] = State.r_B_r_E;
+		if (checkR_ATr0()) {
+			effectR_ATr0();
 		} else {
-			if (sCInterface.f) {
-				nextStateIndex = 0;
-				stateVector[0] = State.$NullState$;
-
-				nextStateIndex = 0;
-				stateVector[0] = State.r_B_r_F;
+			if (checkR_ATr1()) {
+				effectR_ATr1();
 			} else {
-				if (sCInterface.g) {
-					nextStateIndex = 0;
-					stateVector[0] = State.$NullState$;
-
-					nextStateIndex = 0;
-					stateVector[0] = State.r_B_r_E;
+				if (checkR_ATr2()) {
+					effectR_ATr2();
 				}
 			}
 		}
@@ -174,6 +278,21 @@ public class EnterStateStatemachine implements IEnterStateStatemachine {
 
 	/* The reactions of state F. */
 	private void reactR_B_r_F() {
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactEnterState_r__entry_Default() {
+		enterSequenceR_A();
+	}
+
+	/* Default react sequence for initial entry  */
+	private void reactEnterState_r_B_r__entry_Default() {
+		enterSequenceR_B_r_E();
+	}
+
+	/* Default react sequence for initial entry f */
+	private void reactEnterState_r_B_r_f() {
+		enterSequenceR_B_r_F();
 	}
 
 	public void runCycle() {
