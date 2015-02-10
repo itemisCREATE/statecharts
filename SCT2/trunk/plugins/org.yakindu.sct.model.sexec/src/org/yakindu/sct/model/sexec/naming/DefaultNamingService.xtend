@@ -183,20 +183,20 @@ class DefaultNamingService implements INamingService {
 
 	def protected void addShortStateNames(Map<NamedElement, String> map, ExecutionFlow flow, int maxLength,
 		char separator) {
-		for (s : flow.states.sort(executionScopeDepthComparator)) {
+		for (s : flow.states.sortWith(executionScopeDepthComparator)) {
 			map.putShortName(s, s.prefix(separator), s.suffix(separator), maxLength, separator)
 		}
 	}
 
 	def protected void addShortFctNames(Map<NamedElement, String> map, ExecutionFlow flow, int maxLength, char separator) {
-		for (s : flow.allFunctions.sort(stepDepthComparator)) {
+		for (s : flow.allFunctions.sortWith(stepDepthComparator)) {
 			map.putShortName(s, s.prefix(separator), s.suffix(separator), maxLength, separator)
 		}
 	}
 
 	def protected void addShortTimeEventNames(Map<NamedElement, String> map, ExecutionFlow flow, int maxLength,
 		char separator) {
-		for (executionState : flow.states.sort(executionScopeDepthComparator)) {
+		for (executionState : flow.states.sortWith(executionScopeDepthComparator)) {
 			if (executionState.sourceElement instanceof State) {
 				var state = executionState.sourceElement as State
 				var timeEventSpecs = state.timeEventSpecs
