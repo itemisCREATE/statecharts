@@ -33,7 +33,6 @@ import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
@@ -93,7 +92,7 @@ public class StatePropertySection extends AbstractTwoColumnEditorPropertySection
 	}
 
 	protected void createSpecificationControl(final Composite parent) {
-		Injector injector = getInjector(SemanticTarget.StateSpecification);
+		Injector injector = getInjector(State.class.getName());
 		if (injector != null) {
 			txtSpecification = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) txtSpecification).setAlwaysShowScrollBars(false);

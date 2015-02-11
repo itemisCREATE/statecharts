@@ -41,7 +41,6 @@ import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 
 import com.google.inject.Injector;
@@ -139,13 +138,13 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 		return completionProposalAdapter;
 	}
 
-	protected Injector getInjector(SemanticTarget semanticTarget) {
+	protected Injector getInjector(String semanticTarget) {
 		IEditorPart editor = ActiveEditorTracker.getLastActiveEditor();
 		IEditorInput editorInput = editor.getEditorInput();
 		if (editorInput instanceof IFileEditorInput) {
 			String extension = ((IFileEditorInput) editorInput).getFile().getFileExtension();
 			IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
-					.getRegisteredProvider(semanticTarget, extension);
+					.getLanguageProvider(semanticTarget, extension);
 			return registeredProvider.getInjector();
 		}
 		return null;

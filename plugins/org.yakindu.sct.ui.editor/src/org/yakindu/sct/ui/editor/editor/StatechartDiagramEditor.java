@@ -36,10 +36,10 @@ import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.proposals.ContentProposalViewerKeyHandler;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
@@ -106,8 +106,8 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		final IFile file = ((IFileEditorInput) getEditorInput()).getFile();
 		validationJob = new SCTValidationJob();
 		validationJob.setResource(getDiagram().eResource());
-		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getRegisteredProvider(
-				SemanticTarget.StatechartSpecification, file.getFileExtension());
+		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getLanguageProvider(
+				Statechart.class.getName(), file.getFileExtension());
 		Injector injector = registeredProvider.getInjector();
 		injector.injectMembers(validationJob);
 		validationJob.setRule(file);
@@ -197,9 +197,4 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		}
 		super.dispose();
 	}
-
-	public SCTValidationJob getValidationJob() {
-		return validationJob;
-	}
-
 }

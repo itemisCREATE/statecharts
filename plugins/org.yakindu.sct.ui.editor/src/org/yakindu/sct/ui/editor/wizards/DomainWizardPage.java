@@ -27,9 +27,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
-import org.yakindu.sct.domain.extension.DefaultDomain;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
  * 
@@ -91,7 +91,8 @@ public class DomainWizardPage extends WizardPage {
 			}
 
 		});
-		domainCombo.setSelection(new StructuredSelection(DomainRegistry.getDomainDescriptor(DefaultDomain.DOMAIN_ID)));
+		domainCombo.setSelection(new StructuredSelection(DomainRegistry
+				.getDomainDescriptor(SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral())));
 
 		Link sctLink = new Link(composite, SWT.NONE);
 		sctLink.setText("<a>Get additional Statechart Domain Extensions</a>");

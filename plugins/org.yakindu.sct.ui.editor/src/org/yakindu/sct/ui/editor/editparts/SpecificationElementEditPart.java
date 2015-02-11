@@ -24,7 +24,6 @@ import org.eclipse.gmf.runtime.notation.StringValueStyle;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
 
 /**
@@ -57,7 +56,7 @@ public abstract class SpecificationElementEditPart extends PlugableXtextLabelEdi
 		}
 	}
 
-	public SpecificationElementEditPart(View view, SemanticTarget target) {
+	public SpecificationElementEditPart(View view, String target) {
 		super(view, target);
 	}
 
