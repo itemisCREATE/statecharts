@@ -31,7 +31,7 @@ import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
 import com.google.inject.Injector;
@@ -55,7 +55,7 @@ public class TransitionPropertySection extends AbstractTwoColumnEditorPropertySe
 		Label lblExpression = getToolkit().createLabel(parent, "Expression: ");
 		GridDataFactory.fillDefaults().span(2, 1).applyTo(lblExpression);
 
-		Injector injector = getInjector(SemanticTarget.TransitionSpecification);
+		Injector injector = getInjector(Transition.class.getName());
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) textControl).setAlwaysShowScrollBars(false);

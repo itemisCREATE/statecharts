@@ -25,7 +25,6 @@ import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
 
@@ -51,7 +50,7 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 
 	protected abstract int getEditorStyles();
 
-	public PlugableExternalXtextLabelEditPart(View view, SemanticTarget target) {
+	public PlugableExternalXtextLabelEditPart(View view, String target) {
 		super(view);
 		init(target);
 	}
@@ -68,8 +67,8 @@ public abstract class PlugableExternalXtextLabelEditPart extends ExternalXtextLa
 		super.removeNotationalListeners();
 	}
 
-	private void init(SemanticTarget target) {
-		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getRegisteredProvider(
+	private void init(String target) {
+		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getLanguageProvider(
 				target, resolveSemanticElement().eResource().getURI().fileExtension());
 		injector = registeredProvider.getInjector();
 	}

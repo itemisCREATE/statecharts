@@ -19,7 +19,7 @@ import org.eclipse.gef.editpolicies.RootComponentEditPolicy;
 import org.eclipse.gmf.runtime.draw2d.ui.figures.WrappingLabel;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
@@ -31,9 +31,9 @@ import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 public class StatechartTextExpressionEditPart extends SpecificationElementEditPart {
 
 	public StatechartTextExpressionEditPart(View view) {
-		super(view, SemanticTarget.StatechartSpecification);
+		super(view, Statechart.class.getName());
 	}
-	
+
 	@Override
 	public WrappingLabel getFigure() {
 		// TODO Auto-generated method stub

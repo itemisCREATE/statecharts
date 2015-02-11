@@ -13,7 +13,7 @@ package org.yakindu.sct.ui.editor.editparts;
 import org.eclipse.gef.EditPolicy;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.swt.SWT;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
@@ -27,7 +27,7 @@ import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 public class StateTextCompartmentExpressionEditPart extends SpecificationElementEditPart implements IXtextAwareEditPart {
 
 	public StateTextCompartmentExpressionEditPart(View view) {
-		super(view, SemanticTarget.StateSpecification);
+		super(view, State.class.getName());
 	}
 
 	@Override

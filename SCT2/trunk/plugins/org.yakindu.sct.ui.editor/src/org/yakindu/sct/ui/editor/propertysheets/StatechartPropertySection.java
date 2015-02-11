@@ -39,11 +39,10 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Text;
 import org.yakindu.base.base.BasePackage;
-import org.yakindu.sct.domain.extension.DefaultDomain;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
+import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.propertysheets.OrderElementControl.ISourceObjectCallback;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 
@@ -93,7 +92,8 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 		for (DomainDescriptor domainDescriptor : domains) {
 			domainCombo.add(domainDescriptor);
 		}
-		domainCombo.setSelection(new StructuredSelection(DomainRegistry.getDomainDescriptor(DefaultDomain.DOMAIN_ID)));
+		domainCombo.setSelection(new StructuredSelection(DomainRegistry
+				.getDomainDescriptor(SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral())));
 
 	}
 
@@ -130,7 +130,7 @@ public class StatechartPropertySection extends AbstractTwoColumnEditorPropertySe
 
 	protected void createSpecificationControl(final Composite parent) {
 
-		Injector injector = getInjector(SemanticTarget.StatechartSpecification);
+		Injector injector = getInjector(Statechart.class.getName());
 		if (injector != null) {
 			textControl = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.V_SCROLL | SWT.WRAP);
 			((StyledText) textControl).setAlwaysShowScrollBars(false);

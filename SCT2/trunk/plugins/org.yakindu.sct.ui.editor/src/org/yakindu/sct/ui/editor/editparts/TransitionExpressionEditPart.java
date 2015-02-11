@@ -30,7 +30,6 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
 import org.yakindu.sct.ui.editor.editparts.SpecificationElementEditPart.MultilineTextCellEditor;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions.SemanticTarget;
 import org.yakindu.sct.ui.editor.policies.ContextSensitiveHelpPolicy;
 import org.yakindu.sct.ui.editor.policies.TransitionExpressionComponentEditPolicy;
 import org.yakindu.sct.ui.editor.utils.GMFNotationUtil;
@@ -46,7 +45,7 @@ import de.itemis.xtext.utils.gmf.directedit.IXtextAwareEditPart;
 public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEditPart implements IXtextAwareEditPart {
 
 	public TransitionExpressionEditPart(View view) {
-		super(view, SemanticTarget.TransitionSpecification);
+		super(view, Transition.class.getName());
 	}
 
 	@Override
@@ -63,13 +62,14 @@ public class TransitionExpressionEditPart extends PlugableExternalXtextLabelEdit
 		installEditPolicy(EditPolicy.COMPONENT_ROLE, new TransitionExpressionComponentEditPolicy());
 		installEditPolicy(EditPolicy.SELECTION_FEEDBACK_ROLE, new ContextSensitiveHelpPolicy(
 				HelpContextIds.SC_PROPERTIES_TRANSITION_EXPRESSION));
-		//BUGFIX: https://code.google.com/a/eclipselabs.org/p/yakindu/issues/detail?id=26
-		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableLabelEditPolicy(){
+		// BUGFIX:
+		// https://code.google.com/a/eclipselabs.org/p/yakindu/issues/detail?id=26
+		installEditPolicy(EditPolicy.PRIMARY_DRAG_ROLE, new NonResizableLabelEditPolicy() {
 			@Override
 			protected void replaceHandleDragEditPartsTracker(Handle handle) {
 				if (handle instanceof AbstractHandle) {
 					AbstractHandle h = (AbstractHandle) handle;
-					h.setDragTracker(new DragEditPartsTrackerEx(getHost()){
+					h.setDragTracker(new DragEditPartsTrackerEx(getHost()) {
 						protected boolean isMove() {
 							return true;
 						};

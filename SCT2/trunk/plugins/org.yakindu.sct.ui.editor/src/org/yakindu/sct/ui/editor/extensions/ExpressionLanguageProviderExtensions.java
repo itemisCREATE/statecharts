@@ -34,11 +34,6 @@ public class ExpressionLanguageProviderExtensions {
 
 	private static final Map<String, IExpressionLanguageProvider> providerMap = new HashMap<String, IExpressionLanguageProvider>();
 
-	@Deprecated
-	public enum SemanticTarget {
-		StatechartSpecification, StateSpecification, TransitionSpecification
-	}
-
 	protected ExpressionLanguageProviderExtensions() {
 		// Not intended to be instantiated
 	}
@@ -67,13 +62,5 @@ public class ExpressionLanguageProviderExtensions {
 			}
 		}
 		return new IExpressionLanguageProvider.NullLanguageProvider();
-	}
-
-	@Deprecated
-	/**
-	 * Deprecated, use getLanguageProvider instead.
-	 */
-	public static IExpressionLanguageProvider getRegisteredProvider(SemanticTarget target, String resourceExtension) {
-		return getLanguageProvider(target.name(), resourceExtension);
 	}
 }
