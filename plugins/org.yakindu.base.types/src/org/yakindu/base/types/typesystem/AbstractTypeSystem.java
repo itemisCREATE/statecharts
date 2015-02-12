@@ -24,12 +24,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesFactory;
-
-import com.google.inject.Inject;
 
 /**
  * Abstract base implementation if {@link ITypeSystem}. Provides convenience
@@ -47,8 +44,6 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected abstract void initStaticTypes();
 
 	private Resource resource;
-	@Inject
-	private ITypeSystemRegistry registry;
 
 	public AbstractTypeSystem() {
 		resource = new ResourceImpl(URI.createURI("types"));
@@ -181,9 +176,4 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		}
 		return false;
 	}
-
-	public ITypeSystemRegistry getTypeSystemRegistry() {
-		return registry;
-	}
-
 }

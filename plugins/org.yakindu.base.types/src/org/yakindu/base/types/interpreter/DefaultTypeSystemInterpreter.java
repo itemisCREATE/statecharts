@@ -11,21 +11,12 @@
 package org.yakindu.base.types.interpreter;
 
 import org.eclipse.emf.ecore.EObject;
-import org.yakindu.base.types.ITypeSystemRegistry;
-import org.yakindu.base.types.Type;
-import org.yakindu.base.types.typesystem.DefaultTypeSystem;
-import org.yakindu.base.types.typesystem.ITypeSystem;
-
-import com.google.inject.Inject;
 
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
 public class DefaultTypeSystemInterpreter extends AbstractTypeSystemInterpreter {
-
-	@Inject
-	private ITypeSystemRegistry typeSystem;
 
 	@Override
 	public Object interpret(EObject object) {

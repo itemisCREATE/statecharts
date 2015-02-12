@@ -16,8 +16,8 @@ import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
-import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue;
@@ -43,7 +43,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	private static final String METHOD_NAME = "infer";
 
 	@Inject
-	private ITypeSystemRegistry registry;
+	private ITypeSystem registry;
 
 	private IValidationIssueAcceptor acceptor;
 
