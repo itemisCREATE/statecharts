@@ -13,7 +13,7 @@
 	<packaging>pom</packaging>
 
 	<properties>
-		<tycho-extras-version>0.20.0</tycho-extras-version>
+		<tycho-extras-version>0.22.0</tycho-extras-version>
 		<!-- scp settings for publishing udpdate site -->
 	</properties>
 

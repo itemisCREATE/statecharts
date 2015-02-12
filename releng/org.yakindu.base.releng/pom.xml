@@ -10,9 +10,9 @@
 
 	<!-- this is the parent POM from which all modules inherit common settings -->
 	<properties>
-		<tycho-version>0.20.0</tycho-version>
+		<tycho-version>0.22.0</tycho-version>
 		<antrun-version>1.6</antrun-version>
-		<tycho-extras-version>0.20.0</tycho-extras-version>
+		<tycho-extras-version>0.22.0</tycho-extras-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<build>
