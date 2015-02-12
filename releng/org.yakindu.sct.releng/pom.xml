@@ -496,7 +496,7 @@
 		<module>../org.yakindu.sct.model.sgraph.ui</module>
 		<module>../org.yakindu.sct.model.stext</module>
 		<module>../org.yakindu.sct.model.stext.edit</module>
-		<module>../org.yakindu.sct.model.stext.resource</module>
+		<module>../org.yakindu.sct.model.resource</module>
 		<module>../org.yakindu.sct.model.stext.resource.test</module>
 		<module>../org.yakindu.sct.model.stext.test</module>
 		<module>../org.yakindu.sct.model.stext.ui</module>
