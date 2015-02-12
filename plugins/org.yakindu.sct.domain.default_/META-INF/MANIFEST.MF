@@ -9,8 +9,11 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.model.stext;bundle-version="2.4.1",
  org.yakindu.sct.domain;bundle-version="2.4.1",
  org.yakindu.sct.ui.integration.stext;bundle-version="2.4.1",
- org.yakindu.sct.simulation.core.sexec;bundle-version="2.4.1"
+ org.yakindu.sct.simulation.core.sexec;bundle-version="2.4.1",
+ org.yakindu.sct.model.sexec;bundle-version="2.4.1",
+ org.yakindu.sct.simulation.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.domain.default_,
- org.yakindu.sct.domain.default_.extension
+ org.yakindu.sct.domain.default_.extension,
+ org.yakindu.sct.domain.default_.modules

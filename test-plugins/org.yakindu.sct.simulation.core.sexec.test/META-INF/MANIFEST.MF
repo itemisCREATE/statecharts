@@ -16,6 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.yakindu.sct.model.stext.test;bundle-version="1.0.0",
  org.yakindu.sct.test.models;bundle-version="1.0.0",
- org.yakindu.sct.simulation.core.sexec;bundle-version="1.0.0"
+ org.yakindu.sct.simulation.core.sexec;bundle-version="1.0.0",
+ org.yakindu.sct.domain.default_
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy

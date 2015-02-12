@@ -16,6 +16,10 @@ import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
 /**
+ * 
+ * Default Module used for type contribution and type inference. Override
+ * bindings to specify custom behavior.
+ * 
  * @author andreas muelder - Initial contribution and API
  * 
  */

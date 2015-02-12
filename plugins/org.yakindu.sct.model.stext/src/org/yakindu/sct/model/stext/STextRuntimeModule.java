@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.model.stext;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -20,6 +21,7 @@ import org.yakindu.sct.model.sgraph.resource.provider.SCTResourceDescriptionStra
 import org.yakindu.sct.model.stext.conversion.StextValueConverterService;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 import org.yakindu.sct.model.stext.naming.StextNameProvider;
+import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.scoping.STextGlobalScopeProvider;
 
 import com.google.inject.Binder;
@@ -43,6 +45,10 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 		return SCTLinker.class;
 	}
 
+	public Class<? extends Resource> bindResource() {
+		return StextResource.class;
+	}
+
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return StextNameProvider.class;
@@ -51,10 +57,6 @@ public class STextRuntimeModule extends org.yakindu.sct.model.stext.AbstractSTex
 	@Override
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
 		return StextValueConverterService.class;
-	}
-
-	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
-		return STextTypeInferrer.class;
 	}
 
 	public Class<? extends IDefaultResourceDescriptionStrategy> bindIDefaultResourceDescriptionStrategy() {

@@ -10,13 +10,13 @@
  */
 package org.yakindu.sct.domain.default_.extension;
 
+import org.yakindu.sct.domain.default_.modules.DefaultSimulationModule;
 import org.yakindu.sct.domain.default_.modules.DefaultTypeSystemModule;
 import org.yakindu.sct.domain.extension.IDomainModuleProvider;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
-import org.yakindu.sct.simulation.core.sexec.SimulationModule;
 import org.yakindu.sct.ui.integration.stext.StateExpressionProvider;
 import org.yakindu.sct.ui.integration.stext.StatechartExpressionProvider;
 import org.yakindu.sct.ui.integration.stext.TransitionExpressionProvider;
@@ -25,6 +25,7 @@ import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
 /**
+ * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
@@ -32,6 +33,11 @@ public class DefaultDomainModuleProvider implements IDomainModuleProvider {
 
 	protected Module getTypeSystemModule() {
 		return new DefaultTypeSystemModule();
+	}
+
+	@Override
+	public Module getSimulationModule() {
+		return new DefaultSimulationModule();
 	}
 
 	@Override
@@ -69,11 +75,6 @@ public class DefaultDomainModuleProvider implements IDomainModuleProvider {
 		StatechartExpressionProvider provider = new StatechartExpressionProvider();
 		Module module = provider.getModule();
 		return Modules.combine(module, getTypeSystemModule());
-	}
-
-	@Override
-	public Module getSimulationModule() {
-		return new SimulationModule();
 	}
 
 }

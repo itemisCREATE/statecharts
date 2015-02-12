@@ -8,7 +8,7 @@
  * Contributors:
  *     committers of YAKINDU - initial API and implementation
  */
-package org.yakindu.sct.simulation.core.sexec;
+package org.yakindu.sct.domain.default_.modules;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -48,7 +48,7 @@ import com.google.inject.name.Names;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class SimulationModule extends AbstractGenericModule {
+public class DefaultSimulationModule extends AbstractGenericModule {
 
 	public void configure(Binder binder) {
 		super.configure(binder);
