@@ -9,7 +9,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}			
+		}		
+		
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}
 		
 	test AlwaysOncycle{
@@ -21,7 +33,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}				
+		}	
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}			
 	}
 	
 	test AssignmentAsExpression{
@@ -33,6 +57,18 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
+		}		
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}			
 	}
 	
@@ -45,7 +81,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}		
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}
 	
 	test BooleanExpressions{
@@ -58,6 +106,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test Choice{
@@ -70,6 +130,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test CastExpressions{
@@ -82,6 +154,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test CKeywords{
@@ -94,6 +178,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test ConditionalExpression{
@@ -106,6 +202,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test ConstantsTests{
@@ -118,6 +226,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test Declarations{
@@ -130,6 +250,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test DeepEntry{
@@ -142,6 +274,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	
@@ -154,7 +298,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}		
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}
 	
 	test DynamicChoice{
@@ -166,7 +322,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}		
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}
 	
 	
@@ -179,7 +347,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}		
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}
 	
 	test EntryChoice{
@@ -191,7 +371,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}		
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}
 	
 	test EntryExitSelfTransition{
@@ -204,6 +396,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 
 	test EnterState{
@@ -216,6 +420,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test ExitOnSelfTransition{
@@ -228,6 +444,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test ExitState{
@@ -240,6 +468,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test FeatureCalls{
@@ -252,6 +492,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test Guard{
@@ -264,6 +516,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test GuardedEntry{
@@ -276,6 +540,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test GuardedExit{
@@ -288,6 +564,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test HistoryWithExitPoint {
@@ -300,6 +588,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test HistoryWithoutInitialStep{
@@ -312,6 +612,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test InEventLifeCycle{
@@ -324,6 +636,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test IntegerExpressions{
@@ -336,6 +660,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}	
 	
 	test InternalEventLifeCycle{
@@ -348,6 +684,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test LocalReactions{
@@ -360,6 +708,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 		 
 	test LogicalAndTests{
@@ -372,6 +732,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test LogicalOrTests{
@@ -384,6 +756,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test NamedInterfaceAccess{
@@ -395,6 +779,18 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
+		}		
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}			
 	}
 	
@@ -407,6 +803,18 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
+		}		
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}			
 	}
 
@@ -419,7 +827,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}		
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}	
 	
 	test Parenthesis{
@@ -432,6 +852,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 		
 	test PriorityValues{
@@ -444,6 +876,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}	
 	
 	test RaiseEvent{
@@ -455,6 +899,18 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
+		}		
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}			
 	}
 		
@@ -468,6 +924,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}	
 	
 	
@@ -481,6 +949,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test ShallowHistoryWithDeepEntry{
@@ -492,6 +972,18 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
+		}		
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}			
 	}
 	
@@ -505,6 +997,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test SimpleHierachy{
@@ -517,6 +1021,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test StatechartLocalReactions{
@@ -529,6 +1045,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test StateIsActive{
@@ -541,6 +1069,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}	
 	
 	test StaticChoice{
@@ -553,6 +1093,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}		
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}
 		
 	test STextKeywordsInStatesAndRegions{
@@ -565,6 +1117,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test StringExpressions{
@@ -577,6 +1141,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test SyncFork{
@@ -589,6 +1165,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}
 	
 	test SyncJoin{
@@ -600,6 +1188,18 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
+		}		
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
 		}			
 	}
 	
@@ -612,7 +1212,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}		
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}	
 
 	test TransitionWithoutCondition{
@@ -624,7 +1236,19 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}				
+		}			
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}			
 	}	
 
 	test TriggerGuardExpressions {
@@ -637,6 +1261,18 @@ GeneratorModel for sctunit::cpp {
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
 		}				
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}		
 	}	
 
 	test ValuedEvents{
@@ -648,6 +1284,18 @@ GeneratorModel for sctunit::cpp {
 		
 		feature JUnitWrapper {
 			WrapToJUnit =  "true"
-		}			
+		}				
+				
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineExitActions = false
+			inlineEnterSequences = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+			inlineEntries = false
+		}	
 	}	
 }
