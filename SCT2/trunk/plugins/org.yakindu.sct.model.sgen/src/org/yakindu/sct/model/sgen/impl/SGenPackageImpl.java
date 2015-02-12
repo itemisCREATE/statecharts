@@ -30,7 +30,6 @@ import org.yakindu.sct.model.sgen.SGenPackage;
  * <!-- end-user-doc -->
  * @generated
  */
-@SuppressWarnings("restriction")
 public class SGenPackageImpl extends EPackageImpl implements SGenPackage {
 	/**
 	 * <!-- begin-user-doc -->
