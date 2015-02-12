@@ -19,8 +19,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Naming implements JavaKeywords {
 	
-	@Inject extension Navigation
-
 	@Inject extension INamingService namingService;	
 	@Inject StextNameProvider provider;
 	
