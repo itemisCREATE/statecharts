@@ -143,7 +143,6 @@ class StatemachineInterface {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					««« IMPORTANT: An event not specifying a type is regarded to have a void type
 				«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
 						public void raise«event.name.asName»(«event.type.targetLanguageName» value);
 					«ELSE»
