@@ -15,27 +15,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.Operation;
-import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
@@ -44,10 +35,7 @@ import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-
-import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * Several filters to make proposals more useful.
@@ -58,10 +46,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	@Inject
 	private STextGrammarAccess grammarAccess;
-	@Inject
-	private IContainer.Manager containerManager;
-	@Inject
-	private ResourceDescriptionsProvider resourceDescriptionsProvider;
 
 	/**
 	 * Validates if a keyword should be viewed by the proposal view.
@@ -93,10 +77,12 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		else if (contentAssistContext.getRootModel() instanceof StatechartSpecification) {
 			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
-			
-//			if (!atLeastOnePackageExistsInIndex(getSctResource(contentAssistContext.getRootModel()))) {
-//				suppressKeywords.addAll(getKeywords(grammarAccess.getImportScopeAccess().getGroup().eContents()));
-//			}
+
+			// if
+			// (!atLeastOnePackageExistsInIndex(getSctResource(contentAssistContext.getRootModel())))
+			// {
+			// suppressKeywords.addAll(getKeywords(grammarAccess.getImportScopeAccess().getGroup().eContents()));
+			// }
 		}
 
 		EObject currentModel = contentAssistContext.getCurrentModel();
@@ -260,32 +246,38 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			return delegate.canAcceptMoreProposals();
 		}
 	}
-	
-//	private boolean atLeastOnePackageExistsInIndex(Resource res) {
-//		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(res);
-//		URI uri = res.getURI();
-//		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(uri);
-//		for (IContainer container : containerManager.getVisibleContainers(resourceDescription, resourceDescriptions)) {
-//			final Iterable<IResourceDescription> currentDescriptions = container.getResourceDescriptions();
-//			for (IResourceDescription resDesc : currentDescriptions) {
-//				Iterable<IEObjectDescription> visisblePackages = resDesc
-//						.getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
-//				if (!Iterables.isEmpty(visisblePackages)) {
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
-	
-	private Resource getSctResource(EObject context) {
-		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(
-				context.eResource(), ContextElementAdapter.class);
-		if (provider == null) {
-			return context.eResource();
-		} else {
-			return provider.getElement().eResource();
-		}
-	}
+
+	// private boolean atLeastOnePackageExistsInIndex(Resource res) {
+	// IResourceDescriptions resourceDescriptions =
+	// resourceDescriptionsProvider.getResourceDescriptions(res);
+	// URI uri = res.getURI();
+	// IResourceDescription resourceDescription =
+	// resourceDescriptions.getResourceDescription(uri);
+	// for (IContainer container :
+	// containerManager.getVisibleContainers(resourceDescription,
+	// resourceDescriptions)) {
+	// final Iterable<IResourceDescription> currentDescriptions =
+	// container.getResourceDescriptions();
+	// for (IResourceDescription resDesc : currentDescriptions) {
+	// Iterable<IEObjectDescription> visisblePackages = resDesc
+	// .getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
+	// if (!Iterables.isEmpty(visisblePackages)) {
+	// return true;
+	// }
+	// }
+	// }
+	// return false;
+	// }
+
+	// private Resource getSctResource(EObject context) {
+	// final ContextElementAdapter provider = (ContextElementAdapter)
+	// EcoreUtil.getExistingAdapter(
+	// context.eResource(), ContextElementAdapter.class);
+	// if (provider == null) {
+	// return context.eResource();
+	// } else {
+	// return provider.getElement().eResource();
+	// }
+	// }
 
 }
