@@ -117,13 +117,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.ui.integration.stext"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.yakindu.sct.simulation.core"
          download-size="0"
          install-size="0"
@@ -159,13 +152,6 @@
 
    <plugin
          id="org.yakindu.sct.model.sexec.edit"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.yakindu.sct.model.stext.resource"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -271,6 +257,20 @@
 
    <plugin
          id="org.yakindu.sct.domain"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.model.resource"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.yakindu.sct.domain.default_"
          download-size="0"
          install-size="0"
          version="0.0.0"

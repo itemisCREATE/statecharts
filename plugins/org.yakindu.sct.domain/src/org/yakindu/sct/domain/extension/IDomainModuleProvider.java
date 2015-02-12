@@ -19,6 +19,21 @@ import com.google.inject.Module;
  * 
  */
 public interface IDomainModuleProvider {
+	/**
+	 * Returns the SharedStateModule that is used for in-diagram expression
+	 * language
+	 */
+	public Module getSharedStateModule();
+
+	/**
+	 * Returns the runtime module that is used as in-diagram expression language
+	 */
+	public Module getLanguageRuntimeModule();
+
+	/**
+	 * Returns the ui module that is used as in-diagram expression language
+	 */
+	public Module getLanguageUIModule();
 
 	/**
 	 * Module used to create an instance of {@link AbstractSCTResource}
