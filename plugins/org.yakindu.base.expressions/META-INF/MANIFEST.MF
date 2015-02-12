@@ -23,7 +23,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
 Import-Package: org.apache.log4j,
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.xtext.xbase.lib
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.yakindu.base.expressions,
  org.yakindu.base.expressions.expressions,
  org.yakindu.base.expressions.expressions.impl,

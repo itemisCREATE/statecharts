@@ -4,7 +4,7 @@ Bundle-Name: GMF Runtime Commons
 Bundle-SymbolicName: de.itemis.gmf.runtime.commons
 Bundle-Version: 2.4.1.qualifier
 Bundle-Vendor: itemis AG
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.eclipse.gmf.runtime.diagram.ui.properties;bundle-version="1.4.2",
  org.eclipse.gmf.runtime.diagram.ui.resources.editor;bundle-version="1.4.1",
  de.itemis.xtext.utils.jface;bundle-version="1.0.0",
