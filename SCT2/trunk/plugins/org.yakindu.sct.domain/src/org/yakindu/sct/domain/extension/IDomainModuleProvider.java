@@ -26,6 +26,16 @@ public interface IDomainModuleProvider {
 	public Module getResourceModule();
 
 	/**
+	 * Returns the module used during simulation
+	 */
+	public Module getSimulationModule();
+
+	/**
+	 * Returns the module used for model sequencing
+	 */
+	public Module getSequencerModule();
+
+	/**
 	 * Module used to create the embedded in-diagram Xtext Editor
 	 * 
 	 * @param elementKey
@@ -34,8 +44,4 @@ public interface IDomainModuleProvider {
 	 */
 	public Module getEmbeddedEditorModule(String elementKey);
 
-	/**
-	 * Returns the module used during simulation
-	 */
-	public Module getSimulationModule();
 }

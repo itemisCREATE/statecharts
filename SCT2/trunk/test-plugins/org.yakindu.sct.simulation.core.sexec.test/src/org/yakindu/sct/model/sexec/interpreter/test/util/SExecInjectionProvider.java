@@ -12,7 +12,7 @@ package org.yakindu.sct.model.sexec.interpreter.test.util;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.yakindu.sct.domain.default_.modules.DefaultSimulationModule;
-import org.yakindu.sct.model.sexec.transformation.SequencerModule;
+import org.yakindu.sct.domain.default_.modules.DefaultSequencerModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -26,7 +26,7 @@ import com.google.inject.util.Modules;
 public class SExecInjectionProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
-		return Guice.createInjector(Modules.override(new SequencerModule()).with(new DefaultSimulationModule()));
+		return Guice.createInjector(Modules.override(new DefaultSequencerModule()).with(new DefaultSimulationModule()));
 	}
 
 }
