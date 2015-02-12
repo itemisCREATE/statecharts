@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Default Domain
+Bundle-SymbolicName: org.yakindu.sct.domain.default_;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: org.yakindu.sct.domain.default_.Activator
+Bundle-Vendor: statecharts.org
+Require-Bundle: org.eclipse.core.runtime,
+ org.yakindu.sct.model.stext;bundle-version="2.4.1",
+ org.yakindu.sct.domain;bundle-version="2.4.1",
+ org.yakindu.sct.ui.integration.stext;bundle-version="2.4.1",
+ org.yakindu.sct.simulation.core.sexec;bundle-version="2.4.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Export-Package: org.yakindu.sct.domain.default_,
+ org.yakindu.sct.domain.default_.extension
