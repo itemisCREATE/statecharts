@@ -4,7 +4,7 @@ Bundle-Name: Yakindu Statechart Tools (SCT) SText Edit
 Bundle-SymbolicName: org.yakindu.sct.model.stext.edit;singleton:=true
 Bundle-Version: 2.4.1.qualifier
 Bundle-Vendor: statecharts.org
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Require-Bundle: org.yakindu.base.types.edit;bundle-version="1.0.0",
  org.yakindu.sct.model.stext;bundle-version="1.0.0",
  org.yakindu.sct.model.sgraph.edit;bundle-version="1.0.0",

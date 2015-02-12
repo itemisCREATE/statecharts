@@ -14,6 +14,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.xtext.ui;bundle-version="2.0.0",
  org.yakindu.sct.model.stext.ui;bundle-version="1.0.0",
  org.yakindu.sct.domain;bundle-version="2.4.1"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.model.resource

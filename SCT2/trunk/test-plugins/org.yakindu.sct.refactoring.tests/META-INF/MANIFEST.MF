@@ -10,6 +10,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.junit4;bundle-version="2.3.0",
  org.yakindu.sct.model.sexec;bundle-version="1.0.0",
  org.yakindu.sct.test.models;bundle-version="2.0.0"
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 
