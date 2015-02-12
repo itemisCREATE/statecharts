@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Default Domain
 Bundle-SymbolicName: org.yakindu.sct.domain.default_;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 2.4.1.qualifier
 Bundle-Activator: org.yakindu.sct.domain.default_.DefaultDomainActivator
 Bundle-Vendor: statecharts.org
 Require-Bundle: org.eclipse.core.runtime,
