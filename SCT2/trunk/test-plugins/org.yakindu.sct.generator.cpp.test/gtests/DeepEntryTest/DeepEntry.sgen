@@ -4,5 +4,16 @@ GeneratorModel for yakindu::cpp {
 			targetProject = "gtests"
 			targetFolder = "DeepEntryTest"
 		}
+		feature FunctionInlining {
+			inlineReactions = false
+			inlineEntryActions = false
+			inlineEnterSequences = false 
+			inlineExitActions = false
+			inlineExitSequences = false
+			inlineChoices = false
+			inlineEntries = false
+			inlineEnterRegion = false
+			inlineExitRegion = false
+		}
 	}
 }
