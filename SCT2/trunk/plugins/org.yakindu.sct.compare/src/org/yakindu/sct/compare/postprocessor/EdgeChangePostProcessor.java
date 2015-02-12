@@ -31,6 +31,7 @@ import org.yakindu.sct.model.sgraph.SGraphPackage;
  * @author thomas kutz - Initial contribution
  *
  */
+@SuppressWarnings("restriction")
 public class EdgeChangePostProcessor implements IPostProcessor {
 
 	public EdgeChangePostProcessor() {
