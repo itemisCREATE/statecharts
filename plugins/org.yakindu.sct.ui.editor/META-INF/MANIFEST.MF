@@ -49,7 +49,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.xbase.lib,
  org.yakindu.sct.domain;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.yakindu.sct.ui.editor,
  org.yakindu.sct.ui.editor.assistent,
  org.yakindu.sct.ui.editor.clipboardsupport,

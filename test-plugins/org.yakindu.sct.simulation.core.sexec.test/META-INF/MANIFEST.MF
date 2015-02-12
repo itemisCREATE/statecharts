@@ -18,5 +18,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.sct.test.models;bundle-version="1.0.0",
  org.yakindu.sct.simulation.core.sexec;bundle-version="1.0.0",
  org.yakindu.sct.domain.default_
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
