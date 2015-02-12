@@ -37,7 +37,6 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Feature;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -61,9 +60,6 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
  * 
  */
 public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
-
-	@Inject
-	private ITypeSystem typeSystem;
 
 	private static class ErrorHandlerDelegate<T> implements ErrorHandler<T> {
 

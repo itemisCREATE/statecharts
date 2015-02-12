@@ -48,6 +48,7 @@ public class GenerateModelAction implements IObjectActionDelegate {
 	@Inject
 	private GeneratorExecutor generatorExecutor;
 
+	@SuppressWarnings("unused")
 	private IWorkbenchPart workbenchPart;
 
 	public void run(IAction action) {
