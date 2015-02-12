@@ -58,7 +58,6 @@ public class EdgeChangePostProcessor implements IPostProcessor {
 	public void postConflicts(Comparison comparison, Monitor monitor) {
 	}
 
-	@SuppressWarnings("restriction")
 	@Override
 	public void postComparison(Comparison comparison, Monitor monitor) {
 		for (Diff diff : comparison.getDifferences()) {
@@ -91,7 +90,6 @@ public class EdgeChangePostProcessor implements IPostProcessor {
 	 * 
 	 * @param edgeChange
 	 */
-	@SuppressWarnings("restriction")
 	private void postProcessEdgeAddition(EdgeChange edgeChange) {
 		Set<Diff> requiredIncomingTransitionAdditions = new HashSet<Diff>();
 		for (Diff requireds : edgeChange.getRequires()) {
@@ -153,7 +151,6 @@ public class EdgeChangePostProcessor implements IPostProcessor {
 	 * 
 	 * @param edgeChange
 	 */
-	@SuppressWarnings("restriction")
 	private void postProcessEdgeDeletion(EdgeChange edgeChange) {
 		Set<Diff> requiredOutgoingTransitionDeletions = new HashSet<Diff>();
 		for (Diff requireds : edgeChange.getRequiredBy()) {
