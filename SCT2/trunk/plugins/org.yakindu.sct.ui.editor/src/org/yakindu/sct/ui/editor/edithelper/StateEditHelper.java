@@ -15,15 +15,11 @@ import org.eclipse.gmf.runtime.emf.type.core.commands.SetValueCommand;
 import org.eclipse.gmf.runtime.emf.type.core.requests.ConfigureRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.CreateElementRequest;
 import org.eclipse.gmf.runtime.emf.type.core.requests.SetRequest;
-import org.eclipse.jface.dialogs.Dialog;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.SGraphFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.ui.editor.commands.CreateRegionCommand;
-import org.yakindu.sct.ui.editor.dialogs.SelectSubmachineDialog;
 import org.yakindu.sct.ui.editor.editor.StatechartElementTypes;
 
 /**
@@ -39,15 +35,10 @@ public class StateEditHelper extends VertexEditHelper {
 	@Override
 	protected ICommand getConfigureCommand(ConfigureRequest req) {
 
-		if (StatechartElementTypes.COMPOSITE_STATE.equals(req
-				.getTypeToConfigure())) {
+		if (StatechartElementTypes.COMPOSITE_STATE.equals(req.getTypeToConfigure())) {
 			return createCompositeStateCommand(req);
-		} else if (StatechartElementTypes.ORTHOGONAL_STATE.equals(req
-				.getTypeToConfigure())) {
+		} else if (StatechartElementTypes.ORTHOGONAL_STATE.equals(req.getTypeToConfigure())) {
 			return createOrthogonalState(req);
-		} else if (StatechartElementTypes.SUBMACHINE_STATE.equals(req
-				.getTypeToConfigure())) {
-			return createSubmachineStateCommand(req);
 		}
 		return null;
 	}
@@ -60,30 +51,14 @@ public class StateEditHelper extends VertexEditHelper {
 		return super.getCreateCommand(req);
 	}
 
-	private ICommand createSubmachineStateCommand(ConfigureRequest req) {
-		SelectSubmachineDialog dialog = new SelectSubmachineDialog(new Shell(),
-				req.getElementToConfigure().eResource());
-		dialog.setElements(new Object[] { req.getElementToConfigure() });
-		if (Dialog.OK == dialog.open()) {
-			QualifiedName selectedSubmachine = dialog.getSelectedSubmachine();
-			if (selectedSubmachine != null) {
-				return new SetValueCommand(new SetRequest(
-						req.getElementToConfigure(),
-						SGraphPackage.Literals.STATE__SUBSTATECHART_ID,
-						selectedSubmachine.toString()));
-			}
-		}
-		return null;
-	}
-
 	private ICommand createOrthogonalState(ConfigureRequest req) {
 		Region region = SGraphFactory.eINSTANCE.createRegion();
 		region.setName("r1");
 		Region region2 = SGraphFactory.eINSTANCE.createRegion();
 		region2.setName("r2");
 		return new SetValueCommand(new SetRequest(req.getElementToConfigure(),
-				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS,
-				com.google.common.collect.Lists.newArrayList(region, region2)));
+				SGraphPackage.Literals.COMPOSITE_ELEMENT__REGIONS, com.google.common.collect.Lists.newArrayList(region,
+						region2)));
 	}
 
 	private ICommand createCompositeStateCommand(ConfigureRequest req) {
