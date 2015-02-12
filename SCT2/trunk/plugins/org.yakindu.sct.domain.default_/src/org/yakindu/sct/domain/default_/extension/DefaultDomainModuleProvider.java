@@ -13,14 +13,14 @@ package org.yakindu.sct.domain.default_.extension;
 import org.yakindu.sct.domain.default_.modules.DefaultSequencerModule;
 import org.yakindu.sct.domain.default_.modules.DefaultSimulationModule;
 import org.yakindu.sct.domain.default_.modules.DefaultTypeSystemModule;
+import org.yakindu.sct.domain.default_.modules.StateExpressionProvider;
+import org.yakindu.sct.domain.default_.modules.StatechartExpressionProvider;
+import org.yakindu.sct.domain.default_.modules.TransitionExpressionProvider;
 import org.yakindu.sct.domain.extension.IDomainModuleProvider;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
-import org.yakindu.sct.ui.integration.stext.StateExpressionProvider;
-import org.yakindu.sct.ui.integration.stext.StatechartExpressionProvider;
-import org.yakindu.sct.ui.integration.stext.TransitionExpressionProvider;
 
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
