@@ -29,7 +29,6 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.yakindu.sct.model.resource.SCTResourceFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
@@ -40,6 +39,7 @@ import org.yakindu.sct.model.stext.stext.InternalScope;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
@@ -55,10 +55,11 @@ public abstract class AbstractSTextTest {
 	@Inject
 	private ILinker linker;
 	@Inject
-	private SCTResourceFactory factory;
-
+	private Injector injector;
+	
 	protected StextResource getResource() {
-		final StextResource resource = (StextResource) factory.createResource(URI.createFileURI(""));
+		final StextResource resource = new StextResource(); 
+		injector.injectMembers(resource);
 		resource.eAdapters().add(new ContextElementAdapter(new ContextElementAdapter.IContextElementProvider() {
 			public EObject getContextObject() {
 				return (EObject) EcoreUtil.getObjectByType(resource.getContents(), SGraphPackage.Literals.STATECHART);
