@@ -16,7 +16,8 @@ Require-Bundle: org.yakindu.sct.simulation.core;bundle-version="2.1.2",
  org.yakindu.sct.commons;bundle-version="2.1.2",
  org.eclipse.emf.workspace;bundle-version="1.5.1",
  org.yakindu.sct.ui.integration.stext;bundle-version="2.1.2",
- de.itemis.xtext.utils.jface;bundle-version="2.1.2"
+ de.itemis.xtext.utils.jface;bundle-version="2.1.2",
+ org.yakindu.sct.domain;bundle-version="2.4.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Export-Package: org.yakindu.sct.simulation.core.sexec,

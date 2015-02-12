@@ -2,14 +2,4 @@
 <?eclipse version="3.4"?>
 <plugin>
    <extension-point id="org.yakindu.sct.domain" name="org.yakindu.sct.domain" schema="schema/domain.exsd"/>
-   <extension
-         point="org.yakindu.sct.domain">
-      <Domain
-            description="The default domain for Yakindu Statechart Tools."
-            domainID="org.yakindu.domain.default"
-            image="icons/logo_small.png"
-            name="Default">
-      </Domain>
-   </extension>
-
 </plugin>

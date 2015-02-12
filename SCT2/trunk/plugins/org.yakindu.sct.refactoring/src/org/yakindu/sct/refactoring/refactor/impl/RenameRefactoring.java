@@ -24,7 +24,7 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
-import org.yakindu.sct.model.stext.resource.impl.StextResource;
+import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.refactoring.refactor.AbstractRefactoring;
 
 import com.google.common.collect.Sets;
@@ -71,7 +71,7 @@ public class RenameRefactoring extends AbstractRefactoring<NamedElement> {
 		Collection<EObject> elementReferers = findReferers(element);
 		element.setName(newName);
 
-		StextResource res = (StextResource) getResource();
+		AbstractSCTResource res = (AbstractSCTResource) getResource();
 		Set<SpecificationElement> specificationsToParse = Sets.newHashSet();
 		
 		for (EObject referer : elementReferers) {

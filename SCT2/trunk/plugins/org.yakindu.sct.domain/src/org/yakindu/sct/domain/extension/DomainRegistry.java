@@ -13,14 +13,19 @@ package org.yakindu.sct.domain.extension;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
-import javax.inject.Singleton;
-
+import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.osgi.framework.Bundle;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -29,7 +34,6 @@ import com.google.common.collect.Iterables;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@Singleton
 public class DomainRegistry {
 
 	private static final String EXTENSION_POINT = "org.yakindu.sct.domain";
@@ -37,10 +41,14 @@ public class DomainRegistry {
 	private static final String DESCRIPTION = "description";
 	private static final String IMAGE = "image";
 	private static final String NAME = "name";
+	private static final String MODULE_PROVIDER = "domainModuleProvider";
+
+	private DomainRegistry() {
+	}
 
 	private static List<DomainDescriptor> descriptors = null;
 
-	public static class DomainDescriptor {
+	public static final class DomainDescriptor {
 
 		private final IConfigurationElement configElement;
 
@@ -60,6 +68,15 @@ public class DomainRegistry {
 
 		public String getDescription() {
 			return configElement.getAttribute(DESCRIPTION);
+		}
+
+		public IDomainModuleProvider getModuleProvider() {
+			try {
+				return (IDomainModuleProvider) configElement.createExecutableExtension(MODULE_PROVIDER);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}
+			return null;
 		}
 
 		public Image getImage() {
@@ -86,10 +103,10 @@ public class DomainRegistry {
 	}
 
 	public static List<DomainDescriptor> getDomainDescriptors() {
-		IConfigurationElement[] configurationElements = Platform.getExtensionRegistry().getConfigurationElementsFor(
-				EXTENSION_POINT);
 		if (descriptors == null) {
 			descriptors = new ArrayList<DomainDescriptor>();
+			IConfigurationElement[] configurationElements = Platform.getExtensionRegistry()
+					.getConfigurationElementsFor(EXTENSION_POINT);
 			for (IConfigurationElement iConfigurationElement : configurationElements) {
 				descriptors.add(new DomainDescriptor(iConfigurationElement));
 			}
@@ -98,11 +115,23 @@ public class DomainRegistry {
 	}
 
 	public static DomainDescriptor getDomainDescriptor(final String id) {
-		return Iterables.find(getDomainDescriptors(), new Predicate<DomainDescriptor>() {
-			@Override
-			public boolean apply(DomainDescriptor input) {
-				return input.getDomainID().equals(id != null ? id : DefaultDomain.DOMAIN_ID);
-			}
-		});
+		final String defaultValueLiteral = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
+		try {
+			return Iterables.find(getDomainDescriptors(), new Predicate<DomainDescriptor>() {
+				@Override
+				public boolean apply(DomainDescriptor input) {
+					return input.getDomainID().equals(id != null ? id : defaultValueLiteral);
+				}
+			});
+		} catch (NoSuchElementException e) {
+			System.err.println("Could not find domain descriptor for id " + id + " - > using default domain");
+			return getDomainDescriptor(defaultValueLiteral);
+		}
+	}
+
+	public static DomainDescriptor getDomainDescriptor(EObject object) {
+		EObject rootContainer = EcoreUtil.getRootContainer(object);
+		Assert.isTrue(rootContainer instanceof Statechart);
+		return getDomainDescriptor(((Statechart) rootContainer).getDomainID());
 	}
 }

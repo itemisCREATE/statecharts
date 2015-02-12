@@ -11,8 +11,8 @@
 package org.yakindu.sct.generator.c.types
 
 import com.google.inject.Inject
-import org.yakindu.base.types.ITypeSystemRegistry
 import org.yakindu.base.types.Type
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
 import static org.yakindu.base.types.typesystem.DefaultTypeSystem.*
@@ -23,7 +23,7 @@ import static org.yakindu.base.types.typesystem.DefaultTypeSystem.*
 class CTypeSystemAccess implements ICodegenTypeSystemAccess {
 
 	@Inject
-	extension ITypeSystemRegistry ts
+	extension ITypeSystem ts
 
 	override getTargetLanguageName(Type type) {
 		switch (type) {

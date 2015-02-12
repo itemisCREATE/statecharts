@@ -9,7 +9,9 @@ Require-Bundle: org.eclipse.core.runtime,
  com.google.inject;bundle-version="3.0.0",
  org.eclipse.swt;bundle-version="3.103.1",
  org.eclipse.jface;bundle-version="3.10.1",
- com.google.guava;bundle-version="15.0.0"
+ com.google.guava;bundle-version="15.0.0",
+ org.yakindu.sct.model.sgraph;bundle-version="2.4.1"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.sct.domain.extension
+Export-Package: org.yakindu.sct.domain,
+ org.yakindu.sct.domain.extension

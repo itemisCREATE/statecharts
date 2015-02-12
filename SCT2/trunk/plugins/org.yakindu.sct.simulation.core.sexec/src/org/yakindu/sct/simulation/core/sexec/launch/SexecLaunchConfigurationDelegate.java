@@ -13,10 +13,9 @@ package org.yakindu.sct.simulation.core.sexec.launch;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
+import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
-import org.yakindu.sct.simulation.core.extensions.SCLanguageProviderExtensions;
-import org.yakindu.sct.simulation.core.language.SCLanguageProviders;
 import org.yakindu.sct.simulation.core.launch.AbstractSCTLaunchConfigurationDelegate;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 
@@ -29,7 +28,8 @@ import com.google.inject.util.Modules;
 /**
  * 
  * @author andreas muelder - Initial contribution and API
- * @author terfloth - added dynamic module configuration based on statechart language type and language providers
+ * @author terfloth - added dynamic module configuration based on statechart
+ *         language type and language providers
  * 
  */
 public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigurationDelegate implements
@@ -40,9 +40,8 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 
 	@Override
 	protected ISimulationEngine createExecutionContainer(final ILaunch launch, Statechart statechart) {
-		
-		SCLanguageProviders providers = SCLanguageProviderExtensions.getLanguageProviders();
-		Module simulationModule = providers.getSimulationModuleFor(statechart); 
+		Module simulationModule = DomainRegistry.getDomainDescriptor(statechart).getModuleProvider()
+				.getSimulationModule();
 		Module module = Modules.override(simulationModule).with(new Module() {
 			@Override
 			public void configure(Binder binder) {

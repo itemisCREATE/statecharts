@@ -29,12 +29,12 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.yakindu.sct.model.resource.SCTResourceFactory;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.stext.resource.factory.StextResourceFactory;
-import org.yakindu.sct.model.stext.resource.impl.StextResource;
+import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
 
@@ -55,7 +55,7 @@ public abstract class AbstractSTextTest {
 	@Inject
 	private ILinker linker;
 	@Inject
-	private StextResourceFactory factory;
+	private SCTResourceFactory factory;
 
 	protected StextResource getResource() {
 		final StextResource resource = (StextResource) factory.createResource(URI.createFileURI(""));

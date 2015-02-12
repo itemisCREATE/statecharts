@@ -28,9 +28,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Menu;
-import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -40,9 +37,11 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ImageHyperlink;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
+import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
+import org.yakindu.sct.domain.extension.IDomainModuleProvider;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
@@ -50,7 +49,6 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import de.itemis.xtext.utils.jface.viewers.FilteringMenuManager;
 import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
-import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * 
@@ -139,15 +137,9 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 	}
 
 	protected Injector getInjector(String semanticTarget) {
-		IEditorPart editor = ActiveEditorTracker.getLastActiveEditor();
-		IEditorInput editorInput = editor.getEditorInput();
-		if (editorInput instanceof IFileEditorInput) {
-			String extension = ((IFileEditorInput) editorInput).getFile().getFileExtension();
-			IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions
-					.getLanguageProvider(semanticTarget, extension);
-			return registeredProvider.getInjector();
-		}
-		return null;
+		DomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(getContextObject());
+		IDomainModuleProvider moduleProvider = domainDescriptor.getModuleProvider();
+		return Guice.createInjector(moduleProvider.getEmbeddedEditorModule(semanticTarget));
 	}
 
 	public EObject getContextObject() {

@@ -35,17 +35,18 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
+import org.yakindu.sct.domain.extension.DomainRegistry;
+import org.yakindu.sct.domain.extension.IDomainModuleProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.editor.proposals.ContentProposalViewerKeyHandler;
-import org.yakindu.sct.ui.editor.extensions.ExpressionLanguageProviderExtensions;
-import org.yakindu.sct.ui.editor.extensions.IExpressionLanguageProvider;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningEditor;
 import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
+import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
@@ -106,9 +107,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		final IFile file = ((IFileEditorInput) getEditorInput()).getFile();
 		validationJob = new SCTValidationJob();
 		validationJob.setResource(getDiagram().eResource());
-		IExpressionLanguageProvider registeredProvider = ExpressionLanguageProviderExtensions.getLanguageProvider(
-				Statechart.class.getName(), file.getFileExtension());
-		Injector injector = registeredProvider.getInjector();
+		IDomainModuleProvider moduleProvider = DomainRegistry.getDomainDescriptor(getDiagram().getElement())
+				.getModuleProvider();
+		Injector injector = Guice.createInjector(moduleProvider.getEmbeddedEditorModule(Statechart.class.getName()));
 		injector.injectMembers(validationJob);
 		validationJob.setRule(file);
 	}

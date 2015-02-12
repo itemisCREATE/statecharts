@@ -28,7 +28,7 @@ import org.eclipse.emf.transaction.TransactionalEditingDomain;
 import org.eclipse.emf.transaction.util.TransactionUtil;
 import org.eclipse.gmf.runtime.common.core.command.CommandResult;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
-import org.yakindu.sct.model.stext.resource.impl.StextResource;
+import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.refactoring.utils.RefactoringHelper;
 
 /**
@@ -161,16 +161,16 @@ public abstract class AbstractRefactoring<T extends Object> implements IRefactor
 	public static void executeCommand(IUndoableOperation command, Resource resource) {
 		IOperationHistory history = OperationHistoryFactory.getOperationHistory();
 
-		if (resource instanceof StextResource) {
+		if (resource instanceof AbstractSCTResource) {
 			// enable serializer
-			((StextResource) resource).setSerializerEnabled(true);
+			((AbstractSCTResource) resource).setSerializerEnabled(true);
 			try {
 				history.execute(command, new NullProgressMonitor(), null);
 			} catch (ExecutionException e) {
 				e.printStackTrace();
 			} finally {
 				// disable serializer
-				((StextResource) resource).setSerializerEnabled(false);
+				((AbstractSCTResource) resource).setSerializerEnabled(false);
 			}
 		} else {
 			try {

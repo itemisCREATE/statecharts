@@ -11,9 +11,9 @@ package org.yakindu.sct.generator.java
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.base.types.ITypeSystemRegistry
 import org.yakindu.base.types.Parameter
 import org.yakindu.base.types.typesystem.DefaultTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sgen.GeneratorEntry
@@ -28,7 +28,7 @@ class StatemachineInterface {
 	@Inject extension Naming
 	@Inject extension GenmodelEntries
 	@Inject extension Navigation
-	@Inject extension ITypeSystemRegistry
+	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject Beautifier beautifier
 
