@@ -1,9 +1,9 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
 import org.junit.Before;
+import org.yakindu.sct.domain.default_.modules.DefaultSequencerModule;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
-import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sexec.transformation.StructureMapping;
 
 import com.google.inject.Guice;
@@ -28,7 +28,7 @@ public class ModelSequencerTest extends Assert {
 
 	@Before
 	public void setup() {
-		Injector injector = Guice.createInjector(new SequencerModule());
+		Injector injector = Guice.createInjector(new DefaultSequencerModule());
 		injector.injectMembers(this);
 	}
 

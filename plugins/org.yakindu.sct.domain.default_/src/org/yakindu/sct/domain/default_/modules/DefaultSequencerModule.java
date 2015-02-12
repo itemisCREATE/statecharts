@@ -1,13 +1,24 @@
-package org.yakindu.sct.model.sexec.transformation;
+/**
+ * Copyright (c) 2015 committers of YAKINDU and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ * Contributors:
+ *     committers of YAKINDU - initial API and implementation
+ */
+package org.yakindu.sct.domain.default_.modules;
 
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
 import org.yakindu.sct.model.sexec.naming.INamingService;
+import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
+import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
@@ -21,7 +32,7 @@ import com.google.inject.name.Names;
  *         AbstractGenericModule to allow subclasses to overwrite bindings
  * @author Markus Mühlbrandt - Added binding to DefaultNamingService
  */
-public class SequencerModule extends AbstractGenericModule {
+public class DefaultSequencerModule extends AbstractGenericModule {
 
 	public static final String ADD_TRACES = "ADD_TRACES";
 
@@ -38,7 +49,7 @@ public class SequencerModule extends AbstractGenericModule {
 		return SGraphNameProvider.class;
 	}
 
-	public Class<? extends ITypeSystemInferrer> bindISTextTypeInferrer() {
+	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
 	}
 

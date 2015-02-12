@@ -21,11 +21,11 @@ import org.eclipse.ui.console.IConsole;
 import org.eclipse.ui.console.IConsoleManager;
 import org.eclipse.ui.console.MessageConsole;
 import org.eclipse.ui.console.MessageConsoleStream;
+import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.generator.core.IGeneratorBridge;
 import org.yakindu.sct.generator.core.ISCTGenerator;
 import org.yakindu.sct.generator.core.util.GeneratorUtils;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
-import org.yakindu.sct.model.sexec.transformation.SequencerModule;
 import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -59,10 +59,8 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 			AbstractSGraphModelGenerator.this.writeToConsole(s);
 		}
 
-		public FeatureParameterValue getFeatureParameter(GeneratorEntry entry,
-				String featureName, String paramName) {
-			return GeneratorUtils.getFeatureParameter(entry, featureName,
-					paramName);
+		public FeatureParameterValue getFeatureParameter(GeneratorEntry entry, String featureName, String paramName) {
+			return GeneratorUtils.getFeatureParameter(entry, featureName, paramName);
 		}
 
 		public void refreshTargetProject(GeneratorEntry entry) {
@@ -70,8 +68,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 		}
 
 		public File getTargetProject(GeneratorEntry entry) {
-			IProject targetProject = AbstractSGraphModelGenerator.this
-					.getTargetProject(entry);
+			IProject targetProject = AbstractSGraphModelGenerator.this.getTargetProject(entry);
 			return targetProject.getLocation().toFile();
 		}
 
@@ -103,15 +100,13 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 
 	public final void generate(GeneratorEntry entry) {
 		EObject element = entry.getElementRef();
-		if (element == null || !element.eIsProxy()
-				&& !(element instanceof Statechart)) {
+		if (element == null || !element.eIsProxy() && !(element instanceof Statechart)) {
 			writeToConsole("No Statechart selected in genmodel (" + entry + ")");
 			return;
 		}
 		Statechart statechart = (Statechart) element;
 		try {
-			writeToConsole(String.format("Generating Statechart %s ...",
-					statechart.getName()));
+			writeToConsole(String.format("Generating Statechart %s ...", statechart.getName()));
 			prepareGenerator(entry);
 			runGenerator(statechart, entry);
 			writeToConsole("Done.");
@@ -144,8 +139,8 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	}
 
 	protected Module createModule(GeneratorEntry entry) {
-		Module defaultModule = new SequencerModule();
-
+		Module defaultModule = DomainRegistry.getDomainDescriptor(entry.getElementRef()).getModuleProvider()
+				.getSequencerModule();
 		Module bridgeModule = new Module() {
 			public void configure(Binder binder) {
 				binder.bind(IGeneratorBridge.class).toInstance(bridge);
@@ -184,8 +179,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 				return (MessageConsole) existing[i];
 			}
 		}
-		MessageConsole myConsole = new MessageConsole(SCT_GENERATOR_CONSOLE,
-				null);
+		MessageConsole myConsole = new MessageConsole(SCT_GENERATOR_CONSOLE, null);
 		conMan.addConsoles(new IConsole[] { myConsole });
 		return myConsole;
 	}

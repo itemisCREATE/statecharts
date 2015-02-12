@@ -35,3 +35,4 @@ encoding//testmodels/validation/ValidEmptyTransitionFromSync.sct=UTF-8
 encoding//testmodels/validation/ValidTransitionToInnerChoice.sct=UTF-8
 encoding//tests/EntryExitSelfTransition.sctunit=UTF-8
 encoding/<project>=UTF-8
+encoding/DefaultDomainTest.sct=UTF-8

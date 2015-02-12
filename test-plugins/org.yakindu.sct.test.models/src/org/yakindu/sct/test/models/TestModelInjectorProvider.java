@@ -11,7 +11,7 @@
 package org.yakindu.sct.test.models;
 
 import org.eclipse.xtext.junit4.IInjectorProvider;
-import org.yakindu.sct.model.sexec.transformation.SequencerModule;
+import org.yakindu.sct.domain.default_.modules.DefaultSequencerModule;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -24,7 +24,7 @@ import com.google.inject.Injector;
 public class TestModelInjectorProvider implements IInjectorProvider {
 
 	public Injector getInjector() {
-		return Guice.createInjector(new SequencerModule());
+		return Guice.createInjector(new DefaultSequencerModule());
 	}
 
 }

@@ -10,6 +10,7 @@
  */
 package org.yakindu.sct.domain.default_.extension;
 
+import org.yakindu.sct.domain.default_.modules.DefaultSequencerModule;
 import org.yakindu.sct.domain.default_.modules.DefaultSimulationModule;
 import org.yakindu.sct.domain.default_.modules.DefaultTypeSystemModule;
 import org.yakindu.sct.domain.extension.IDomainModuleProvider;
@@ -43,6 +44,11 @@ public class DefaultDomainModuleProvider implements IDomainModuleProvider {
 	@Override
 	public Module getResourceModule() {
 		return Modules.combine(new STextRuntimeModule(), getTypeSystemModule());
+	}
+	
+	@Override
+	public Module getSequencerModule() {
+		return new DefaultSequencerModule();
 	}
 
 	@Override

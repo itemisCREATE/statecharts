@@ -19,5 +19,6 @@ Require-Bundle: org.eclipse.core.runtime,
  org.yakindu.base.types;bundle-version="1.0.0",
  org.yakindu.sct.model.stext.test;bundle-version="1.0.0",
  org.yakindu.sct.model.sgraph.test;bundle-version="1.0.0",
- org.yakindu.sct.test.models;bundle-version="2.3.0"
+ org.yakindu.sct.test.models;bundle-version="2.3.0",
+ org.yakindu.sct.domain.default_;bundle-version="1.0.0"
 Export-Package: org.yakindu.sct.model.sexec.transformation.test
