@@ -105,7 +105,7 @@ class FlowOptimizer {
 	def dispatch empty(Sequence seq) { seq.steps.size == 0 }
 	
 	// INLINE REACTION CHECKS
-	def inlineReactionChecks(ExecutionFlow flow) {
+	def void inlineReactionChecks(ExecutionFlow flow) {
 		flow.states.forEach( state | state.inlineReactionChecks )
 	}
 	
@@ -144,7 +144,7 @@ class FlowOptimizer {
 	
 	// INLINE REACTION EFFECTS
 
-	def inlineReactionEffects(ExecutionFlow flow) {
+	def void inlineReactionEffects(ExecutionFlow flow) {
 		flow.states.forEach( state | state.inlineReactionEffects )
 	}
 	

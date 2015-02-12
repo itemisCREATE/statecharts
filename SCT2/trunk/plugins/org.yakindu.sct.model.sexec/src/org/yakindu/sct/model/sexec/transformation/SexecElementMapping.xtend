@@ -133,7 +133,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 			val region = entry.eContainer as Region
 			val regionName = region.name.toFirstUpper
 			val stateName = if(region.eContainer instanceof State) {(region.eContainer as State).name.toFirstUpper}
-			val entryName = {if (!entry.name?.empty) entry.name else "_entry_Default"}
+			val entryName = {if (!entry?.name.empty) entry.name else "_entry_Default"}
 			r.simpleName = {if (regionName!= null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+entryName
 			r.name = entry.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = entry	
@@ -157,7 +157,7 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 			val region = exit.eContainer as Region
 			val regionName = region.name.toFirstUpper
 			val stateName = if(region.eContainer instanceof State) {(region.eContainer as State).name.toFirstUpper}
-			val exitName = {if (!exit.name?.empty) exit.name else "default"}
+			val exitName = {if (!exit?.name.empty) exit.name else "default"}
 			r.simpleName = {if (regionName!= null)regionName else ""}+"_"+{if (stateName!= null)stateName else ""}+"_"+exitName
 			r.name = exit.fullyQualifiedName.toString.replaceAll(" ", "")	
 			r.sourceElement = exit	
