@@ -80,6 +80,16 @@
                </documentation>
             </annotation>
          </attribute>
+         <attribute name="domainModuleProvider" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":org.yakindu.sct.domain.extension.IDomainModuleProvider"/>
+               </appinfo>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 

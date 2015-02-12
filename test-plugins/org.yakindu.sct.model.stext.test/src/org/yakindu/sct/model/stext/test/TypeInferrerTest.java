@@ -23,9 +23,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.types.ITypeSystemRegistry;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
@@ -50,7 +50,7 @@ public class TypeInferrerTest extends AbstractSTextTest {
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	@Inject
-	public ITypeSystemRegistry typeSystem;
+	public ITypeSystem typeSystem;
 	@Inject
 	private ITypeSystemInferrer typeInferrer;
 

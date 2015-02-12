@@ -37,9 +37,9 @@ import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
-import org.yakindu.base.types.ITypeSystemRegistry
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.DefaultTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgraph.Event
@@ -53,7 +53,7 @@ class ExpressionCode {
 
 	@Inject extension Naming
 	@Inject extension Navigation
-	@Inject extension ITypeSystemRegistry
+	@Inject extension ITypeSystem
 	@Inject extension ITypeSystemInferrer
 	@Inject extension INamingService
 	@Inject extension ICodegenTypeSystemAccess

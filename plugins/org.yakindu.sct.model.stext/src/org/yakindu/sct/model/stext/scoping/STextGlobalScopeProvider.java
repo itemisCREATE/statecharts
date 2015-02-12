@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
-import org.yakindu.base.types.ITypeSystemRegistry;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
@@ -31,14 +31,12 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 
 /**
  * @author andreas muelder - Initial contribution and API
- * @author Alexander Nyßen - Ensured type system information is only inferred
- *         via {@link ITypeSystemRegistry} facade.
  * 
  */
 public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 
 	@Inject
-	private ITypeSystemRegistry typeSystem;
+	private ITypeSystem typeSystem;
 
 	@Inject
 	private IQualifiedNameProvider qualifiedNameProvider;

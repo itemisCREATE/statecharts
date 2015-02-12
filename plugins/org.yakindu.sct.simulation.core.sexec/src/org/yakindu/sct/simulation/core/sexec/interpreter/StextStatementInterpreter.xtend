@@ -40,10 +40,10 @@ import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Enumerator
-import org.yakindu.base.types.ITypeSystemRegistry
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
 import org.yakindu.base.types.typesystem.DefaultTypeSystem
+import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
@@ -68,7 +68,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	@Inject
 	protected extension IExecutionSlotResolver resolver
 	@Inject
-	protected extension ITypeSystemRegistry ts;
+	protected extension ITypeSystem ts;
 
 	protected ExecutionContext context
 

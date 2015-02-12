@@ -94,9 +94,9 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
 			
-			if (!atLeastOnePackageExistsInIndex(getSctResource(contentAssistContext.getRootModel()))) {
-				suppressKeywords.addAll(getKeywords(grammarAccess.getImportScopeAccess().getGroup().eContents()));
-			}
+//			if (!atLeastOnePackageExistsInIndex(getSctResource(contentAssistContext.getRootModel()))) {
+//				suppressKeywords.addAll(getKeywords(grammarAccess.getImportScopeAccess().getGroup().eContents()));
+//			}
 		}
 
 		EObject currentModel = contentAssistContext.getCurrentModel();
@@ -261,22 +261,22 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		}
 	}
 	
-	private boolean atLeastOnePackageExistsInIndex(Resource res) {
-		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(res);
-		URI uri = res.getURI();
-		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(uri);
-		for (IContainer container : containerManager.getVisibleContainers(resourceDescription, resourceDescriptions)) {
-			final Iterable<IResourceDescription> currentDescriptions = container.getResourceDescriptions();
-			for (IResourceDescription resDesc : currentDescriptions) {
-				Iterable<IEObjectDescription> visisblePackages = resDesc
-						.getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
-				if (!Iterables.isEmpty(visisblePackages)) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+//	private boolean atLeastOnePackageExistsInIndex(Resource res) {
+//		IResourceDescriptions resourceDescriptions = resourceDescriptionsProvider.getResourceDescriptions(res);
+//		URI uri = res.getURI();
+//		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(uri);
+//		for (IContainer container : containerManager.getVisibleContainers(resourceDescription, resourceDescriptions)) {
+//			final Iterable<IResourceDescription> currentDescriptions = container.getResourceDescriptions();
+//			for (IResourceDescription resDesc : currentDescriptions) {
+//				Iterable<IEObjectDescription> visisblePackages = resDesc
+//						.getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
+//				if (!Iterables.isEmpty(visisblePackages)) {
+//					return true;
+//				}
+//			}
+//		}
+//		return false;
+//	}
 	
 	private Resource getSctResource(EObject context) {
 		final ContextElementAdapter provider = (ContextElementAdapter) EcoreUtil.getExistingAdapter(

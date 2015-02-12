@@ -9,7 +9,7 @@
  * 
  */
 
-package org.yakindu.sct.model.stext.resource.impl;
+package org.yakindu.sct.model.stext.resource;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
@@ -34,10 +34,14 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
  */
 public class StextResource extends AbstractSCTResource {
 
+	public StextResource() {
+		super(null);
+	}
+
 	public StextResource(URI uri) {
 		super(uri);
 	}
-
+	
 	protected void serializeStatechart(Statechart statechart) {
 		StringBuilder builder = new StringBuilder();
 		for (Scope scope : statechart.getScopes()) {

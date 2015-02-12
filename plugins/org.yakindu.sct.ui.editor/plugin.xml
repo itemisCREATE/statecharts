@@ -3,7 +3,6 @@
 <plugin>
 	<!-- Extension Points -->
 	
-   <extension-point id="expressions" name="org.yakindu.sct.ui.editor.expressions" schema="schema/expressions.exsd"/>
    <extension-point id="org.yakindu.sct.ui.editor.proposals" name="proposals" schema="schema/org.yakindu.sct.ui.editor.proposals.exsd"/>
   
     <!-- Editor -->

@@ -1,27 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension
-         point="org.yakindu.sct.ui.editor.expressions">
-      <ExpressionLanguageProvider
-            class="org.yakindu.sct.ui.integration.stext.StatechartExpressionProvider"
-            resourceExtension="sct"
-            semanticTarget="org.yakindu.sct.model.sgraph.Statechart">
-      </ExpressionLanguageProvider>
-      <ExpressionLanguageProvider
-            class="org.yakindu.sct.ui.integration.stext.StateExpressionProvider"
-            resourceExtension="sct"
-            semanticTarget="org.yakindu.sct.model.sgraph.State">
-      </ExpressionLanguageProvider>
-      <ExpressionLanguageProvider
-            class="org.yakindu.sct.ui.integration.stext.TransitionExpressionProvider"
-            resourceExtension="sct"
-            semanticTarget="org.yakindu.sct.model.sgraph.Transition">
-      </ExpressionLanguageProvider>
-      <ExpressionLanguageProvider
-            class="org.yakindu.sct.ui.integration.stext.ExpressionExpressionProvider"
-            resourceExtension="sct"
-            semanticTarget="breakpointCondition">
-      </ExpressionLanguageProvider>
-   </extension>
 </plugin>

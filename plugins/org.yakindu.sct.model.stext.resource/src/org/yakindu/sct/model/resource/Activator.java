@@ -8,7 +8,7 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.model.stext.resource;
+package org.yakindu.sct.model.resource;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

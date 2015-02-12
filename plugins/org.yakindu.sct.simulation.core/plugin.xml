@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="org.yakindu.sct.simulation.core.languageprovider" name="SCLanguageProvider" schema="schema/languageprovider.exsd"/>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
       <!-- @generated sruntime -->

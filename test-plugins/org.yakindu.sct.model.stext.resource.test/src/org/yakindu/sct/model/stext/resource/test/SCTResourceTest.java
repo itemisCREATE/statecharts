@@ -44,7 +44,7 @@ import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
-import org.yakindu.sct.model.stext.resource.impl.StextResource;
+import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
 import org.yakindu.sct.model.stext.stext.ExitEvent;
 import org.yakindu.sct.model.stext.stext.InternalScope;

@@ -48,7 +48,7 @@ import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
-import org.yakindu.sct.model.stext.resource.impl.StextResource;
+import org.yakindu.sct.model.stext.resource.StextResource;
 import org.yakindu.sct.model.stext.stext.ImportScope;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.model.stext.stext.InternalScope;
