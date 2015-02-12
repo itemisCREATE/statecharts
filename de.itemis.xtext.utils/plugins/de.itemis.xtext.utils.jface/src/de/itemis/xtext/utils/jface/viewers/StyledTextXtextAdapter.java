@@ -22,12 +22,9 @@ import org.eclipse.swt.events.DisposeEvent;
 import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.ui.ISelectionService;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.editors.text.EditorsPlugin;
@@ -173,19 +170,13 @@ public class StyledTextXtextAdapter {
 		// Overrides the editors selection provider to provide the text
 		// selection if opened within an editor context
 		try {
-			final IWorkbenchPartSite site = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+			IWorkbenchPartSite site = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 					.getActiveEditor().getSite();
 			XtextStyledTextSelectionProvider xtextStyledTextSelectionProvider = new XtextStyledTextSelectionProvider();
 			ChangeSelectionProviderOnFocusGain listener = new ChangeSelectionProviderOnFocusGain(site,
 					xtextStyledTextSelectionProvider);
 			styledText.addFocusListener(listener);
 			styledText.addDisposeListener(listener);
-			styledText.addSelectionListener(new SelectionAdapter() {
-				@Override
-				public void widgetSelected(SelectionEvent e) {
-					ISelectionService service = (ISelectionService) site.getService(ISelectionService.class);
-				}
-			});
 		} catch (NullPointerException ex) {
 			//Do nothing, not opened within editor context
 		}
@@ -333,11 +324,7 @@ public class StyledTextXtextAdapter {
 
 	private class XtextStyledTextSelectionProvider implements ISelectionProvider {
 
-		public XtextStyledTextSelectionProvider() {
-		}
-		
 		public void setSelection(ISelection selection) {
-			
 		}
 
 		public void removeSelectionChangedListener(ISelectionChangedListener listener) {
