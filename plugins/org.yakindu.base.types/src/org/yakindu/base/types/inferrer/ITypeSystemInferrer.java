@@ -14,12 +14,24 @@ import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@ImplementedBy(ITypeSystemInferrer.NullTypeInferrer.class)
 public interface ITypeSystemInferrer {
 
 	public Type inferType(EObject object, IValidationIssueAcceptor acceptor);
-	
+
+	public static class NullTypeInferrer implements ITypeSystemInferrer {
+
+		@Override
+		public Type inferType(EObject object, IValidationIssueAcceptor acceptor) {
+			return null;
+		}
+
+	}
+
 }
