@@ -15,6 +15,7 @@ import org.junit.runners.Suite.SuiteClasses;
 import org.yakindu.sct.generator.java.JavaSCTGeneratorTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({OperationsTestCustom.class, OperationsWithoutBracesCustom.class, JavaSCTGeneratorTest.class})
+//TODO JavaSCTGeneratorTest.class
+@SuiteClasses({OperationsTestCustom.class, OperationsWithoutBracesCustom.class})
 public class AllTestsTestCustom {
 }
