@@ -45,4 +45,6 @@ public interface ITypeSystem {
 
 	public Object defaultValue(Type type);
 
+	public void declareType(Type type, String name);
+
 }

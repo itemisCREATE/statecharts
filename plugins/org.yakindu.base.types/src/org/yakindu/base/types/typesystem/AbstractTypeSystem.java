@@ -100,11 +100,11 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		PrimitiveType primitive = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitive.setName(name);
 		declareType(primitive, name);
+		resource.getContents().add(primitive);
 		return primitive;
 	}
 
 	public void declareType(Type type, String name) {
-		resource.getContents().add(type);
 		typeRegistry.put(name, type);
 	}
 
