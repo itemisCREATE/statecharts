@@ -10,8 +10,14 @@
  */
 package org.yakindu.sct.ui.editor.propertysheets;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFDataBindingContext;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.gmf.runtime.diagram.ui.properties.sections.AbstractModelerPropertySection;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.bindings.keys.KeyStroke;
@@ -28,6 +34,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Layout;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.ui.IWorkbenchWindow;
@@ -40,6 +49,8 @@ import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
 import org.yakindu.sct.domain.extension.IDomainModuleProvider;
+import org.yakindu.sct.model.sgraph.SGraphPackage;
+import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -49,6 +60,7 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
 import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter.IContextElementProvider;
 import de.itemis.xtext.utils.jface.viewers.FilteringMenuManager;
 import de.itemis.xtext.utils.jface.viewers.StyledTextXtextAdapter;
+import de.itemis.xtext.utils.jface.viewers.util.ActiveEditorTracker;
 
 /**
  * 
@@ -137,7 +149,23 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 	}
 
 	protected Injector getInjector(String semanticTarget) {
-		DomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(getContextObject());
+		IEditorPart editor = ActiveEditorTracker.getLastActiveEditor();
+		IEditorInput editorInput = editor.getEditorInput();
+		String domainId = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
+		// Since the context object is not set when getInjector is called from
+		// createControls, we have to determine the active domain id via the
+		// current editor input. 
+		if (editorInput instanceof IFileEditorInput) {
+			IFile file = ((IFileEditorInput) editorInput).getFile();
+			ResourceSet set = new ResourceSetImpl();
+			URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			Resource resource = set.getResource(uri, true);
+			Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
+					SGraphPackage.Literals.STATECHART);
+			domainId = statechart.getDomainID();
+			resource.unload();
+		}
+		DomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainId);
 		IDomainModuleProvider moduleProvider = domainDescriptor.getModuleProvider();
 		return Guice.createInjector(moduleProvider.getEmbeddedEditorModule(semanticTarget));
 	}
