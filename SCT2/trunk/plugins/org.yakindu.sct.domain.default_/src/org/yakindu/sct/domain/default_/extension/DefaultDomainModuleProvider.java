@@ -79,7 +79,7 @@ public class DefaultDomainModuleProvider implements IDomainModuleProvider {
 
 	@Override
 	public Module getResourceModule() {
-		return Modules.combine(getLanguageRuntimeModule(), getTypeSystemModule());
+		return Modules.override(getLanguageRuntimeModule()).with(getTypeSystemModule());
 	}
 
 	@Override

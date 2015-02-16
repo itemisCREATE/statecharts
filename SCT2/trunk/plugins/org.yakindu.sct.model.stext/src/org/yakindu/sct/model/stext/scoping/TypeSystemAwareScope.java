@@ -21,25 +21,24 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
 import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 public class TypeSystemAwareScope extends AbstractScope {
 
-	private final ITypeSystem typeSystemAccess;
+	private final ITypeSystem typeSystem;
 
 	private final IQualifiedNameProvider qualifiedNameProvider;
 
 	private EClass eClass;
 
-	private Statechart context;
+	private EObject context;
 
 	public TypeSystemAwareScope(IScope parent, ITypeSystem typeSystemAccess,
-			IQualifiedNameProvider qualifiedNameProvider, EClass eClass, String domainID, Statechart context) {
+			IQualifiedNameProvider qualifiedNameProvider, EClass eClass, EObject context) {
 		super(parent, false);
-		this.typeSystemAccess = typeSystemAccess;
+		this.typeSystem = typeSystemAccess;
 		this.qualifiedNameProvider = qualifiedNameProvider;
 		this.eClass = eClass;
 		this.context = context;
@@ -49,7 +48,7 @@ public class TypeSystemAwareScope extends AbstractScope {
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayList();
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(
-				EcoreUtil2.<EObject> getObjectsByType(typeSystemAccess.getTypes(context), eClass),
+				EcoreUtil2.<EObject> getObjectsByType(typeSystem.getTypes(context), eClass),
 				qualifiedNameProvider);
 		Iterables.addAll(result, iterable);
 		return result;

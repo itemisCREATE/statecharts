@@ -47,7 +47,7 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = filterExternalDeclarations(context, parentScope);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
-				reference.getEReferenceType(), getStatechart(context).getDomainID(), getStatechart(context));
+				reference.getEReferenceType(), getStatechart(context));
 		return parentScope;
 	}
 
