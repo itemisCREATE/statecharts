@@ -74,7 +74,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	}
 
 	protected Type inferTypeDispatch(EObject object) {
-		if (object.eIsProxy())
+		if (object == null || object.eIsProxy())
 			return null;
 		try {
 			return typeCache.get(object);

@@ -14,6 +14,7 @@ import org.yakindu.base.base.NamedElement;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.yakindu.base.types.Package#getMember <em>Member</em>}</li>
+ *   <li>{@link org.yakindu.base.types.Package#getDomain <em>Domain</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,5 +38,31 @@ public interface Package extends NamedElement {
 	 * @generated
 	 */
 	EList<PackageMember> getMember();
+
+	/**
+	 * Returns the value of the '<em><b>Domain</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Domain</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Domain</em>' containment reference.
+	 * @see #setDomain(Domain)
+	 * @see org.yakindu.base.types.TypesPackage#getPackage_Domain()
+	 * @model containment="true"
+	 * @generated
+	 */
+	Domain getDomain();
+
+	/**
+	 * Sets the value of the '{@link org.yakindu.base.types.Package#getDomain <em>Domain</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Domain</em>' containment reference.
+	 * @see #getDomain()
+	 * @generated
+	 */
+	void setDomain(Domain value);
 
 } // Package

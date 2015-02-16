@@ -89,13 +89,22 @@ public interface TypesPackage extends EPackage {
 	int PACKAGE__MEMBER = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Domain</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PACKAGE__DOMAIN = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Package</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PACKAGE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+	int PACKAGE_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.PackageMemberImpl <em>Package Member</em>}' class.
@@ -918,6 +927,34 @@ public interface TypesPackage extends EPackage {
 	int RANGE_CONSTRAINT_FEATURE_COUNT = TYPE_CONSTRAINT_FEATURE_COUNT + 2;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.DomainImpl <em>Domain</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.DomainImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDomain()
+	 * @generated
+	 */
+	int DOMAIN = 17;
+
+	/**
+	 * The feature id for the '<em><b>Domain ID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN__DOMAIN_ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>Domain</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DOMAIN_FEATURE_COUNT = 1;
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -937,6 +974,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getPackage_Member();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.yakindu.base.types.Package#getDomain <em>Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Domain</em>'.
+	 * @see org.yakindu.base.types.Package#getDomain()
+	 * @see #getPackage()
+	 * @generated
+	 */
+	EReference getPackage_Domain();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Type <em>Type</em>}'.
@@ -1297,6 +1345,27 @@ public interface TypesPackage extends EPackage {
 	EAttribute getRangeConstraint_UpperBound();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.Domain <em>Domain</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Domain</em>'.
+	 * @see org.yakindu.base.types.Domain
+	 * @generated
+	 */
+	EClass getDomain();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Domain#getDomainID <em>Domain ID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Domain ID</em>'.
+	 * @see org.yakindu.base.types.Domain#getDomainID()
+	 * @see #getDomain()
+	 * @generated
+	 */
+	EAttribute getDomain_DomainID();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1335,6 +1404,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference PACKAGE__MEMBER = eINSTANCE.getPackage_Member();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference PACKAGE__DOMAIN = eINSTANCE.getPackage_Domain();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypeImpl <em>Type</em>}' class.
@@ -1639,6 +1716,24 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute RANGE_CONSTRAINT__UPPER_BOUND = eINSTANCE.getRangeConstraint_UpperBound();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.DomainImpl <em>Domain</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.DomainImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDomain()
+		 * @generated
+		 */
+		EClass DOMAIN = eINSTANCE.getDomain();
+
+		/**
+		 * The meta object literal for the '<em><b>Domain ID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DOMAIN__DOMAIN_ID = eINSTANCE.getDomain_DomainID();
 
 	}
 

@@ -152,6 +152,15 @@ public interface TypesFactory extends EFactory {
 	RangeConstraint createRangeConstraint();
 
 	/**
+	 * Returns a new object of class '<em>Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Domain</em>'.
+	 * @generated
+	 */
+	Domain createDomain();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

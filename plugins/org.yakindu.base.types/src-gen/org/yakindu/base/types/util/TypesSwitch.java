@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
@@ -216,6 +217,12 @@ public class TypesSwitch<T> extends Switch<T> {
 				RangeConstraint rangeConstraint = (RangeConstraint)theEObject;
 				T result = caseRangeConstraint(rangeConstraint);
 				if (result == null) result = caseTypeConstraint(rangeConstraint);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.DOMAIN: {
+				Domain domain = (Domain)theEObject;
+				T result = caseDomain(domain);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -480,6 +487,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseRangeConstraint(RangeConstraint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Domain</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Domain</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDomain(Domain object) {
 		return null;
 	}
 

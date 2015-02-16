@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
@@ -85,6 +86,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.PARAMETERIZED_TYPE: return createParameterizedType();
 			case TypesPackage.PACKAGE_MEMBER: return createPackageMember();
 			case TypesPackage.RANGE_CONSTRAINT: return createRangeConstraint();
+			case TypesPackage.DOMAIN: return createDomain();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -228,6 +230,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public RangeConstraint createRangeConstraint() {
 		RangeConstraintImpl rangeConstraint = new RangeConstraintImpl();
 		return rangeConstraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Domain createDomain() {
+		DomainImpl domain = new DomainImpl();
+		return domain;
 	}
 
 	/**
