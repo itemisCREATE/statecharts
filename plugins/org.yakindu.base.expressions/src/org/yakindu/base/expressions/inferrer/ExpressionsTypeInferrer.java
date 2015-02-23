@@ -18,6 +18,7 @@ import static org.yakindu.base.types.typesystem.DefaultTypeSystem.STRING;
 import static org.yakindu.base.types.typesystem.DefaultTypeSystem.VOID;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.EcoreUtil2;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
 import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
@@ -44,6 +45,8 @@ import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.base.expressions.expressions.TypeCastExpression;
 import org.yakindu.base.expressions.expressions.UnaryOperator;
+import org.yakindu.base.types.EnumerationType;
+import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
@@ -129,7 +132,8 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatible(type1, type2, String.format(COMPARSION_OPERATOR, e.getOperator(), type1, type2));
-		return getType(BOOLEAN);
+		Type result =  getType(BOOLEAN);
+		return result;
 
 	}
 
@@ -168,24 +172,42 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		return inferTypeDispatch(e.getType());
 	}
 
+	public Type infer(EnumerationType enumType) {
+		return enumType;
+	}
+
+	public Type infer(Enumerator enumerator) {
+		return EcoreUtil2.getContainerOfType(enumerator, Type.class);
+	}
+
 	public Type infer(FeatureCall e) {
 		if (e.isOperationCall()) {
 			Operation operation = (Operation) e.getFeature();
 			EList<Parameter> parameters = operation.getParameters();
 			EList<Expression> args = e.getArgs();
-			if (parameters.size() == args.size()) {
-				for (int i = 0; i < parameters.size(); i++) {
-					Type type1 = inferTypeDispatch(parameters.get(i));
-					Type type2 = inferTypeDispatch(args.get(i));
-					assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
-				}
-			}
+			inferParameter(parameters, args);
 		}
 		return inferTypeDispatch(e.getFeature());
 	}
 
 	public Type infer(ElementReferenceExpression e) {
+		if (e.isOperationCall()) {
+			Operation operation = (Operation) e.getReference();
+			EList<Parameter> parameters = operation.getParameters();
+			EList<Expression> args = e.getArgs();
+			inferParameter(parameters, args);
+		}
 		return inferTypeDispatch(e.getReference());
+	}
+
+	protected void inferParameter(EList<Parameter> parameters, EList<Expression> args) {
+		if (parameters.size() == args.size()) {
+			for (int i = 0; i < parameters.size(); i++) {
+				Type type1 = inferTypeDispatch(parameters.get(i));
+				Type type2 = inferTypeDispatch(args.get(i));
+				assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
+			}
+		}
 	}
 
 	public Type infer(ParenthesizedExpression e) {
