@@ -66,7 +66,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 
 	public Object infer(TimeEventSpec e) {
 		Type type = inferTypeDispatch(e.getValue());
-		assertSame(type, getType(INTEGER), TIME_SPEC);
+		assertCompatible(type, getType(INTEGER), TIME_SPEC);
 		return inferTypeDispatch(type);
 	}
 
