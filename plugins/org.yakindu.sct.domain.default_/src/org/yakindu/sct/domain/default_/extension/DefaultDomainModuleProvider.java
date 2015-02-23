@@ -79,7 +79,9 @@ public class DefaultDomainModuleProvider implements IDomainModuleProvider {
 
 	@Override
 	public Module getResourceModule() {
-		return Modules.override(getLanguageRuntimeModule()).with(getTypeSystemModule());
+		Module uiModule = Modules.override(getLanguageRuntimeModule()).with(getLanguageUIModule());
+		Module result =  Modules.override(uiModule).with(getSharedStateModule());
+		return Modules.override(result).with (getTypeSystemModule());
 	}
 
 	@Override
@@ -88,8 +90,9 @@ public class DefaultDomainModuleProvider implements IDomainModuleProvider {
 	}
 
 	protected Module getEmbeddedEditorModule(Class<? extends EObject> rule) {
-		Module runtimeModule = Modules.override(getResourceModule()).with(new EntryRuleRuntimeModule(rule));
+		Module runtimeModule = Modules.override(getLanguageRuntimeModule()).with(new EntryRuleRuntimeModule(rule));
 		Module uiModule = Modules.override(getLanguageUIModule()).with(new EntryRuleUIModule(rule));
-		return Modules.override(Modules.override(runtimeModule).with(uiModule)).with(getSharedStateModule());
+		Module result =  Modules.override(Modules.override(runtimeModule).with(uiModule)).with(getSharedStateModule());
+		return Modules.override(result).with (getTypeSystemModule());
 	}
 }
