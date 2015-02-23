@@ -380,23 +380,11 @@ class DefaultNamingService implements INamingService {
 	}
 
 	def protected dispatch String elementName(ExecutionScope it, NameShorteningStrategy nameShorteningType) {
-		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).
-				toString(separator.toString)
-			case NameShorteningStrategy::SHORT_NAME: return name
-			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
-			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
-		}
+		return sourceElement.elementName(nameShorteningType)
 	}
 
 	def protected dispatch String elementName(ExecutionState it, NameShorteningStrategy nameShorteningType) {
-		switch nameShorteningType {
-			case NameShorteningStrategy::FQN_NAME: 
-				return provider.getFullyQualifiedName(it).skipFirst(2).toString(separator.toString)
-			case NameShorteningStrategy::SHORT_NAME: return simpleName
-			case NameShorteningStrategy::REMOVE_VOWELS: return simpleName.removeVowels
-			case NameShorteningStrategy::INDEX_POSITION: return asIndexPosition
-		}
+		return sourceElement.elementName(nameShorteningType)
 	}
 
 	def protected dispatch String elementName(ExecutionNode it, NameShorteningStrategy nameShorteningType) {
