@@ -26,6 +26,7 @@ import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssu
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
+import com.google.common.cache.CacheLoader.InvalidCacheLoadException;
 import com.google.inject.Inject;
 
 /**
@@ -78,6 +79,8 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 			return null;
 		try {
 			return typeCache.get(object);
+		} catch (InvalidCacheLoadException ex) {
+			System.err.println("Cache loader returned null for " + object);
 		} catch (Exception e) {
 			// Ignore invalid expressions and recursions
 		}
