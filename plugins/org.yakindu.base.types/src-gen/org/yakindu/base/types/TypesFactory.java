@@ -161,6 +161,15 @@ public interface TypesFactory extends EFactory {
 	Domain createDomain();
 
 	/**
+	 * Returns a new object of class '<em>Type Alias</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Alias</em>'.
+	 * @generated
+	 */
+	TypeAlias createTypeAlias();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

@@ -376,6 +376,7 @@
 		<module>../org.yakindu.base.target</module>
 
 		<module>../org.yakindu.base.types</module>
+		<module>../org.yakindu.base.types.test</module>
 		<module>../org.yakindu.base.types.edit</module>
 
 		<module>../org.yakindu.base.expressions</module>

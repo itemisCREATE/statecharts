@@ -24,6 +24,7 @@ import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypedElement;
@@ -109,6 +110,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				Operation operation = (Operation)theEObject;
 				T result = caseOperation(operation);
 				if (result == null) result = caseFeature(operation);
+				if (result == null) result = casePackageMember(operation);
 				if (result == null) result = caseTypedElement(operation);
 				if (result == null) result = caseNamedElement(operation);
 				if (result == null) result = defaultCase(theEObject);
@@ -223,6 +225,15 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.DOMAIN: {
 				Domain domain = (Domain)theEObject;
 				T result = caseDomain(domain);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.TYPE_ALIAS: {
+				TypeAlias typeAlias = (TypeAlias)theEObject;
+				T result = caseTypeAlias(typeAlias);
+				if (result == null) result = caseTypedElement(typeAlias);
+				if (result == null) result = casePackageMember(typeAlias);
+				if (result == null) result = caseNamedElement(typeAlias);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -502,6 +513,21 @@ public class TypesSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDomain(Domain object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Alias</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Alias</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeAlias(TypeAlias object) {
 		return null;
 	}
 

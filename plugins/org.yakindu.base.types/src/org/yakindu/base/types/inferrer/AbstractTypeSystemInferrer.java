@@ -79,8 +79,6 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 			return null;
 		try {
 			return typeCache.get(object);
-		} catch (InvalidCacheLoadException ex) {
-			System.err.println("Cache loader returned null for " + object);
 		} catch (Exception e) {
 			// Ignore invalid expressions and recursions
 		}

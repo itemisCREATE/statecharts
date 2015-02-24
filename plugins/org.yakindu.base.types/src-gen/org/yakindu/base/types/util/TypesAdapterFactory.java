@@ -25,6 +25,7 @@ import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypedElement;
@@ -154,6 +155,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDomain(Domain object) {
 				return createDomainAdapter();
+			}
+			@Override
+			public Adapter caseTypeAlias(TypeAlias object) {
+				return createTypeAliasAdapter();
 			}
 			@Override
 			public Adapter caseNamedElement(NamedElement object) {
@@ -446,6 +451,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDomainAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypeAlias <em>Type Alias</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.TypeAlias
+	 * @generated
+	 */
+	public Adapter createTypeAliasAdapter() {
 		return null;
 	}
 

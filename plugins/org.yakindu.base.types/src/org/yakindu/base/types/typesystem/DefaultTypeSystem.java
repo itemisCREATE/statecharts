@@ -15,9 +15,6 @@ import org.yakindu.base.types.Type;
 import com.google.inject.Singleton;
 
 /**
- * The Statechart Tools default type system. This class is not intended to be
- * subclassed. Instead, extend from {@link AbstractTypeSystem} and contribute
- * via extension point org.yakindu.base.types.typesystem.
  * 
  * @author andreas muelder - Initial contribution and API
  * 
@@ -41,7 +38,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem {
 		declarePrimitive(VOID);
 		declarePrimitive(NULL);
 
-		declareSuperType(getType(INTEGER), getType(REAL));
+		declareSuperType(getType(REAL), getType(INTEGER));
 	}
 
 	@Override

@@ -23,6 +23,7 @@ import org.yakindu.base.types.ParameterizedType;
 import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypesFactory;
@@ -87,6 +88,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.PACKAGE_MEMBER: return createPackageMember();
 			case TypesPackage.RANGE_CONSTRAINT: return createRangeConstraint();
 			case TypesPackage.DOMAIN: return createDomain();
+			case TypesPackage.TYPE_ALIAS: return createTypeAlias();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -240,6 +242,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public Domain createDomain() {
 		DomainImpl domain = new DomainImpl();
 		return domain;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeAlias createTypeAlias() {
+		TypeAliasImpl typeAlias = new TypeAliasImpl();
+		return typeAlias;
 	}
 
 	/**

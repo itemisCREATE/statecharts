@@ -117,8 +117,8 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		}
 	}
 
-	public void declareSuperType(Type baseType, Type superType) {
-		extendsRegistry.put(baseType, superType);
+	public void declareSuperType(Type superType, Type subType) {
+		extendsRegistry.put(subType, superType);
 	}
 
 	public void declareConversion(Type baseType, Type targetType) {
@@ -153,27 +153,35 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	private Type getCommonTypeInternal(Type type1, Type type2) {
+
 		if (isSame(type1, type2))
 			return type1;
-
 		if (isSuperType(type1, type2)) {
 			return type2;
 		}
 		if (isSuperType(type2, type1))
 			return type1;
+
+		List<Type> typehierachy1 = new ArrayList<Type>();
+		collectSupertypes(type1, typehierachy1);
+		List<Type> typehierachy2 = new ArrayList<Type>();
+		collectSupertypes(type2, typehierachy2);
+
+		for (Type type : typehierachy1) {
+			if (typehierachy2.contains(type)) {
+				return type;
+			}
+		}
+		for (Type type : typehierachy2) {
+			if (typehierachy1.contains(type)) {
+				return type;
+			}
+		}
+
 		return null;
 	}
 
 	protected Type getConversionType(Type sourceType) {
 		return conversionRegistry.get(sourceType);
-	}
-
-	public boolean isTypeSystemFor(Type type) {
-		Collection<Type> types = typeRegistry.values();
-		for (Type type2 : types) {
-			if (isSame(type, type2))
-				return true;
-		}
-		return false;
 	}
 }

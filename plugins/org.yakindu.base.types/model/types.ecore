@@ -16,7 +16,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningType" eType="#//ComplexType"
         eOpposite="#//ComplexType/features"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Feature">
+  <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//Feature #//PackageMember">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true" eOpposite="#//Parameter/owningOperation"/>
   </eClassifiers>
@@ -68,4 +68,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="Domain">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeAlias" eSuperTypes="base.ecore#//NamedElement #//TypedElement #//PackageMember"/>
 </ecore:EPackage>

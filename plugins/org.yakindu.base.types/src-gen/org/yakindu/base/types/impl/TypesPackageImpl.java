@@ -26,6 +26,7 @@ import org.yakindu.base.types.PrimitiveType;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.RangeConstraint;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypeParameter;
 import org.yakindu.base.types.TypedElement;
@@ -152,6 +153,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass domainEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeAliasEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -548,6 +556,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getTypeAlias() {
+		return typeAliasEClass;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -629,6 +646,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		domainEClass = createEClass(DOMAIN);
 		createEAttribute(domainEClass, DOMAIN__DOMAIN_ID);
+
+		typeAliasEClass = createEClass(TYPE_ALIAS);
 	}
 
 	/**
@@ -666,6 +685,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		featureEClass.getESuperTypes().add(this.getTypedElement());
 		featureEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		operationEClass.getESuperTypes().add(this.getFeature());
+		operationEClass.getESuperTypes().add(this.getPackageMember());
 		propertyEClass.getESuperTypes().add(this.getFeature());
 		parameterEClass.getESuperTypes().add(this.getTypedElement());
 		parameterEClass.getESuperTypes().add(theBasePackage.getNamedElement());
@@ -678,6 +698,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		rangeConstraintEClass.getESuperTypes().add(this.getTypeConstraint());
+		typeAliasEClass.getESuperTypes().add(theBasePackage.getNamedElement());
+		typeAliasEClass.getESuperTypes().add(this.getTypedElement());
+		typeAliasEClass.getESuperTypes().add(this.getPackageMember());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -738,6 +761,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(domainEClass, Domain.class, "Domain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getDomain_DomainID(), ecorePackage.getEString(), "domainID", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeAliasEClass, TypeAlias.class, "TypeAlias", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);

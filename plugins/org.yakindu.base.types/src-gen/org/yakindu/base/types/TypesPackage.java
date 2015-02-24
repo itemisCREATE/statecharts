@@ -955,6 +955,52 @@ public interface TypesPackage extends EPackage {
 	int DOMAIN_FEATURE_COUNT = 1;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.TypeAliasImpl <em>Type Alias</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.TypeAliasImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeAlias()
+	 * @generated
+	 */
+	int TYPE_ALIAS = 18;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__NAME = BasePackage.NAMED_ELEMENT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__TYPE = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS__TYPE_ARGUMENTS = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Type Alias</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_ALIAS_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1366,6 +1412,16 @@ public interface TypesPackage extends EPackage {
 	EAttribute getDomain_DomainID();
 
 	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.types.TypeAlias <em>Type Alias</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Alias</em>'.
+	 * @see org.yakindu.base.types.TypeAlias
+	 * @generated
+	 */
+	EClass getTypeAlias();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1734,6 +1790,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DOMAIN__DOMAIN_ID = eINSTANCE.getDomain_DomainID();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.TypeAliasImpl <em>Type Alias</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.impl.TypeAliasImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getTypeAlias()
+		 * @generated
+		 */
+		EClass TYPE_ALIAS = eINSTANCE.getTypeAlias();
 
 	}
 
