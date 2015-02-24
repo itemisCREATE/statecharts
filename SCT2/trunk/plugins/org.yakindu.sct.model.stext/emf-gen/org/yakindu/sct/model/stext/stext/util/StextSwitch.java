@@ -13,7 +13,10 @@ import org.yakindu.base.expressions.expressions.Expression;
 
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
+import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypedElement;
 
 import org.yakindu.sct.model.sgraph.Declaration;
@@ -205,8 +208,21 @@ public class StextSwitch<T> extends Switch<T> {
 				if (result == null) result = caseDeclaration(operationDefinition);
 				if (result == null) result = caseOperation(operationDefinition);
 				if (result == null) result = caseFeature(operationDefinition);
+				if (result == null) result = casePackageMember(operationDefinition);
 				if (result == null) result = caseNamedElement(operationDefinition);
 				if (result == null) result = caseTypedElement(operationDefinition);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case StextPackage.TYPE_ALIAS_DEFINITION: {
+				TypeAliasDefinition typeAliasDefinition = (TypeAliasDefinition)theEObject;
+				T result = caseTypeAliasDefinition(typeAliasDefinition);
+				if (result == null) result = caseTypeAlias(typeAliasDefinition);
+				if (result == null) result = caseDeclaration(typeAliasDefinition);
+				if (result == null) result = caseTypedElement(typeAliasDefinition);
+				if (result == null) result = caseType(typeAliasDefinition);
+				if (result == null) result = casePackageMember(typeAliasDefinition);
+				if (result == null) result = caseNamedElement(typeAliasDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -587,6 +603,21 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOperationDefinition(OperationDefinition object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Alias Definition</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Alias Definition</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeAliasDefinition(TypeAliasDefinition object) {
 		return null;
 	}
 
@@ -1026,6 +1057,21 @@ public class StextSwitch<T> extends Switch<T> {
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Package Member</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T casePackageMember(PackageMember object) {
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1037,6 +1083,36 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseOperation(Operation object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseType(Type object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Alias</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Alias</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeAlias(TypeAlias object) {
 		return null;
 	}
 
