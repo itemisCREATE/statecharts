@@ -37,6 +37,7 @@ import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Feature;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
@@ -116,14 +117,18 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 	public IScope scope_ElementReferenceExpression_reference(final EObject context, EReference reference) {
 		IScope namdScope = getNamedTopLevelScope(context, reference);
 		IScope unnamedScope = getUnnamedTopLevelScope(context, reference);
-
-		// XXX: filter on EVENT is too restrictive because also variable
-		// definitions should be usable
 		Predicate<IEObjectDescription> predicate = calculateFilterPredicate(context, reference);
 		unnamedScope = new FilteringScope(unnamedScope, predicate);
-
-		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements()));
-
+		// add enum types
+		IScope enumerations = new FilteringScope(getDelegate().getScope(context, reference),
+				new Predicate<IEObjectDescription>() {
+					@Override
+					public boolean apply(IEObjectDescription input) {
+						return input.getEClass() == TypesPackage.Literals.ENUMERATION_TYPE;
+					}
+				});
+		return new SimpleScope(Iterables.concat(namdScope.getAllElements(), unnamedScope.getAllElements(),
+				enumerations.getAllElements()));
 	}
 
 	public IScope scope_FeatureCall_feature(final FeatureCall context, EReference reference) {
@@ -153,8 +158,8 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		if (element instanceof EnumerationType) {
-			scope = Scopes.scopeFor(((EnumerationType) element).getEnumerator(), scope);
-			scope = new FilteringScope(scope, predicate);
+			return  Scopes.scopeFor(((EnumerationType) element).getEnumerator(), scope);
+//			scope = new FilteringScope(scope, predicate);
 		}
 
 		if (element instanceof Feature && ((Feature) element).getType() instanceof ComplexType) {
