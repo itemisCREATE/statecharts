@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypedElement;
@@ -362,6 +363,11 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
 				default: return -1;
 			}
 		}
+		if (baseClass == PackageMember.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == Operation.class) {
 			switch (derivedFeatureID) {
 				case StextPackage.OPERATION_DEFINITION__PARAMETERS: return TypesPackage.OPERATION__PARAMETERS;
@@ -388,6 +394,11 @@ public class OperationDefinitionImpl extends DeclarationImpl implements Operatio
 		if (baseClass == Feature.class) {
 			switch (baseFeatureID) {
 				case TypesPackage.FEATURE__OWNING_TYPE: return StextPackage.OPERATION_DEFINITION__OWNING_TYPE;
+				default: return -1;
+			}
+		}
+		if (baseClass == PackageMember.class) {
+			switch (baseFeatureID) {
 				default: return -1;
 			}
 		}

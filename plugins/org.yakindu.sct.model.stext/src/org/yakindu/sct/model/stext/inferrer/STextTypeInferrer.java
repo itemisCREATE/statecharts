@@ -28,6 +28,7 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
@@ -51,7 +52,7 @@ public class STextTypeInferrer extends ExpressionsTypeInferrer {
 		assertAssignable(type, type2, String.format(VARIABLE_DEFINITION, type2, type));
 		return inferTypeDispatch(type);
 	}
-	
+
 	public Object infer(Event e) {
 		// if an event is used within an expression, the type is boolean and the
 		// value indicates if the event is raised or not

@@ -52,11 +52,11 @@ NamedInterfaceScope returns base::NamedElement:
 	InterfaceScope;
 
 InterfaceScope:
-	{InterfaceScope} 'interface' (name=XID)? ':' (declarations+=(EventDeclarartion | VariableDeclaration |
+	{InterfaceScope} 'interface' (name=XID)? ':' (declarations+=(EventDeclarartion | VariableDeclaration | TypeAliasDeclaration |
 	OperationDeclaration))*;
 
 InternalScope:
-	{InternalScope} 'internal' ':' (declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration |
+	{InternalScope} 'internal' ':' (declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration | TypeAliasDeclaration |
 	LocalReaction))*;
 	
 ImportScope:
@@ -72,7 +72,7 @@ QID:
 	ID ('.' ID)*;
 
 Declaration returns sgraph::Declaration:
-	EventDeclarartion | VariableDeclaration | OperationDeclaration | LocalReaction;
+	EventDeclarartion | VariableDeclaration | OperationDeclaration | TypeAliasDeclaration | LocalReaction;
 
 EventDeclarartion returns sgraph::Event:
 	EventDefinition;
@@ -95,9 +95,18 @@ VariableFeature returns types::Property:
 VariableDefinition:
 	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' type=[types::Type|FQN]
 	(('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])* '>'))?
-	('=' initialValue=Expression)?; /* ---- operation definition ---- */ OperationDeclaration returns
-sgraph::Declaration:
+	('=' initialValue=Expression)?; /* ---- operation definition ---- */ 
+	
+OperationDeclaration returns sgraph::Declaration:
 	OperationDefinition;
+
+TypeAliasDeclaration returns sgraph::Declaration:
+	TypeAliasDefinition
+;
+
+TypeAliasDefinition:
+	{TypeAliasDefinition} 'alias' name=XID ':' type=[types::Type|FQN]
+;
 
 OperationFeature returns types::Operation:
 	OperationDefinition;

@@ -73,6 +73,7 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 			case StextPackage.EVENT_DEFINITION: return createEventDefinition();
 			case StextPackage.VARIABLE_DEFINITION: return createVariableDefinition();
 			case StextPackage.OPERATION_DEFINITION: return createOperationDefinition();
+			case StextPackage.TYPE_ALIAS_DEFINITION: return createTypeAliasDefinition();
 			case StextPackage.LOCAL_REACTION: return createLocalReaction();
 			case StextPackage.TRANSITION_REACTION: return createTransitionReaction();
 			case StextPackage.GUARD: return createGuard();
@@ -293,6 +294,16 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	public OperationDefinition createOperationDefinition() {
 		OperationDefinitionImpl operationDefinition = new OperationDefinitionImpl();
 		return operationDefinition;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeAliasDefinition createTypeAliasDefinition() {
+		TypeAliasDefinitionImpl typeAliasDefinition = new TypeAliasDefinitionImpl();
+		return typeAliasDefinition;
 	}
 
 	/**

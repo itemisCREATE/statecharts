@@ -57,6 +57,7 @@ import org.yakindu.sct.model.stext.stext.TimeUnit;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 import org.yakindu.sct.model.stext.stext.TransitionRoot;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
+import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
@@ -177,6 +178,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * @generated
 	 */
 	private EClass operationDefinitionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeAliasDefinitionEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -663,6 +671,15 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTypeAliasDefinition() {
+		return typeAliasDefinitionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getLocalReaction() {
 		return localReactionEClass;
 	}
@@ -1055,6 +1072,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 
 		operationDefinitionEClass = createEClass(OPERATION_DEFINITION);
 
+		typeAliasDefinitionEClass = createEClass(TYPE_ALIAS_DEFINITION);
+
 		localReactionEClass = createEClass(LOCAL_REACTION);
 
 		transitionReactionEClass = createEClass(TRANSITION_REACTION);
@@ -1162,6 +1181,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		variableDefinitionEClass.getESuperTypes().add(theTypesPackage.getProperty());
 		operationDefinitionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
 		operationDefinitionEClass.getESuperTypes().add(theTypesPackage.getOperation());
+		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getTypeAlias());
+		typeAliasDefinitionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
 		localReactionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
 		localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
 		transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
@@ -1226,6 +1247,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEReference(getVariableDefinition_InitialValue(), theExpressionsPackage.getExpression(), null, "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(typeAliasDefinitionEClass, TypeAliasDefinition.class, "TypeAliasDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(localReactionEClass, LocalReaction.class, "LocalReaction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
