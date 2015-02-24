@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Base Types Tests
+Bundle-SymbolicName: org.yakindu.base.types.test
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: statecharts.org
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.yakindu.base.types,
+ org.junit
