@@ -132,7 +132,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 		Type type1 = inferTypeDispatch(e.getLeftOperand());
 		Type type2 = inferTypeDispatch(e.getRightOperand());
 		assertCompatible(type1, type2, String.format(COMPARSION_OPERATOR, e.getOperator(), type1, type2));
-		Type result =  getType(BOOLEAN);
+		Type result = getType(BOOLEAN);
 		return result;
 
 	}
@@ -178,6 +178,10 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	public Type infer(Enumerator enumerator) {
 		return EcoreUtil2.getContainerOfType(enumerator, Type.class);
+	}
+
+	public Type infer(Type type) {
+		return type;
 	}
 
 	public Type infer(FeatureCall e) {
