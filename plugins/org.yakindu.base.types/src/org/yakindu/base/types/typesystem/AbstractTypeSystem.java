@@ -37,17 +37,17 @@ import org.yakindu.base.types.TypesFactory;
  */
 public abstract class AbstractTypeSystem implements ITypeSystem {
 
-	private Map<String, Type> typeRegistry = new HashMap<String, Type>();
-	private Map<Type, Type> extendsRegistry = new HashMap<Type, Type>();
-	private Map<Type, Type> conversionRegistry = new HashMap<Type, Type>();
+	protected Map<String, Type> typeRegistry = new HashMap<String, Type>();
+	protected Map<Type, Type> extendsRegistry = new HashMap<Type, Type>();
+	protected Map<Type, Type> conversionRegistry = new HashMap<Type, Type>();
 
-	protected abstract void initStaticTypes();
+	protected abstract void initBuiltInTypes();
 
-	private Resource resource;
+	protected Resource resource;
 
 	public AbstractTypeSystem() {
 		resource = new ResourceImpl(URI.createURI("types"));
-		initStaticTypes();
+		initBuiltInTypes();
 	}
 
 	protected void reset() {

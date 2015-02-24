@@ -30,7 +30,7 @@ public class DefaultTypeSystem extends AbstractTypeSystem {
 	public static final String VOID = "void";
 
 	@Override
-	protected void initStaticTypes() {
+	protected void initBuiltInTypes() {
 		declarePrimitive(STRING);
 		declarePrimitive(REAL);
 		declarePrimitive(INTEGER);
