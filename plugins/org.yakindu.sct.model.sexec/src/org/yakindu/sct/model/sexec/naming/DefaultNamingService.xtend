@@ -36,6 +36,7 @@ import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.naming.StextNameProvider
 import org.yakindu.sct.model.stext.stext.TimeEventSpec
+import org.yakindu.sct.model.sexec.Reaction
 
 class StepDepthComparator implements Comparator<Step> {
 	@Inject
@@ -376,6 +377,20 @@ class DefaultNamingService implements INamingService {
 			case NameShorteningStrategy::SHORT_NAME: return name
 			case NameShorteningStrategy::REMOVE_VOWELS: return name?.removeVowels
 			case NameShorteningStrategy::INDEX_POSITION: return name?.removeVowels
+		}
+	}
+	
+	def protected dispatch String elementName(Reaction it, NameShorteningStrategy nameShorteningType) {
+		var String prefix;
+		if (it.transition) {
+			prefix = it.eContainer.elementName(nameShorteningType)
+		}
+		switch nameShorteningType {
+			case NameShorteningStrategy::FQN_NAME: return provider.getFullyQualifiedName(it).skipFirst(2).
+				toString(separator.toString)
+			case NameShorteningStrategy::SHORT_NAME: return prefix + name
+			case NameShorteningStrategy::REMOVE_VOWELS: return (prefix + name)?.removeVowels
+			case NameShorteningStrategy::INDEX_POSITION: return (prefix + name)?.removeVowels
 		}
 	}
 
