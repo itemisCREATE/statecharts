@@ -68,5 +68,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="Domain">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="domainID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeAlias" eSuperTypes="base.ecore#//NamedElement #//TypedElement #//PackageMember"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeAlias" eSuperTypes="#//TypedElement #//Type"/>
 </ecore:EPackage>

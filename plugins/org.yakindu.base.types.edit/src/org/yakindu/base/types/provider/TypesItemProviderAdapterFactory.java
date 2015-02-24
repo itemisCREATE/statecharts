@@ -392,6 +392,52 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.Domain} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DomainItemProvider domainItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.Domain}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDomainAdapter() {
+		if (domainItemProvider == null) {
+			domainItemProvider = new DomainItemProvider(this);
+		}
+
+		return domainItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.types.TypeAlias} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeAliasItemProvider typeAliasItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.types.TypeAlias}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeAliasAdapter() {
+		if (typeAliasItemProvider == null) {
+			typeAliasItemProvider = new TypeAliasItemProvider(this);
+		}
+
+		return typeAliasItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -504,6 +550,8 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (parameterizedTypeItemProvider != null) parameterizedTypeItemProvider.dispose();
 		if (packageMemberItemProvider != null) packageMemberItemProvider.dispose();
 		if (rangeConstraintItemProvider != null) rangeConstraintItemProvider.dispose();
+		if (domainItemProvider != null) domainItemProvider.dispose();
+		if (typeAliasItemProvider != null) typeAliasItemProvider.dispose();
 	}
 
 }

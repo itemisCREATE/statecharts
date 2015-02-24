@@ -62,6 +62,7 @@ public class PackageItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.PACKAGE__MEMBER);
+			childrenFeatures.add(TypesPackage.Literals.PACKAGE__DOMAIN);
 		}
 		return childrenFeatures;
 	}
@@ -117,6 +118,7 @@ public class PackageItemProvider
 
 		switch (notification.getFeatureID(org.yakindu.base.types.Package.class)) {
 			case TypesPackage.PACKAGE__MEMBER:
+			case TypesPackage.PACKAGE__DOMAIN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -142,6 +144,11 @@ public class PackageItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createOperation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createPrimitiveType()));
 
 		newChildDescriptors.add
@@ -163,6 +170,16 @@ public class PackageItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.PACKAGE__MEMBER,
 				 TypesFactory.eINSTANCE.createTypeParameter()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__MEMBER,
+				 TypesFactory.eINSTANCE.createTypeAlias()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.PACKAGE__DOMAIN,
+				 TypesFactory.eINSTANCE.createDomain()));
 	}
 
 	/**

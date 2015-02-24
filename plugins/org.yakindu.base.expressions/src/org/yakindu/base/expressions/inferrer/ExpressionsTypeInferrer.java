@@ -51,6 +51,7 @@ import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
+import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.inferrer.AbstractTypeSystemInferrer;
 
 /**
@@ -182,6 +183,12 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 
 	public Type infer(Type type) {
 		return type;
+	}
+
+	// TODO: How to handle TypeAlias, like in C as weak types or like Lint
+	// strong types?
+	public Object infer(TypeAlias typeAlias) {
+		return inferTypeDispatch(typeAlias.getType());
 	}
 
 	public Type infer(FeatureCall e) {

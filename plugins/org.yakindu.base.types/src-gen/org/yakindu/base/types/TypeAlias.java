@@ -14,5 +14,5 @@ import org.yakindu.base.base.NamedElement;
  * @model
  * @generated
  */
-public interface TypeAlias extends NamedElement, TypedElement, PackageMember {
+public interface TypeAlias extends TypedElement, Type {
 } // TypeAlias

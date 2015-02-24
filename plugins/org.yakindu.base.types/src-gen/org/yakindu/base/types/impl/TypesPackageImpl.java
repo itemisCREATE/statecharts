@@ -698,9 +698,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		parameterizedTypeEClass.getESuperTypes().add(this.getType());
 		packageMemberEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		rangeConstraintEClass.getESuperTypes().add(this.getTypeConstraint());
-		typeAliasEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		typeAliasEClass.getESuperTypes().add(this.getTypedElement());
-		typeAliasEClass.getESuperTypes().add(this.getPackageMember());
+		typeAliasEClass.getESuperTypes().add(this.getType());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(packageEClass, org.yakindu.base.types.Package.class, "Package", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

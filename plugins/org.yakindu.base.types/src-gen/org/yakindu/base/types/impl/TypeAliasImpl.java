@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
@@ -13,13 +14,19 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.base.impl.NamedElementImpl;
 
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
+import org.yakindu.base.types.TypeConstraint;
 import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 
@@ -32,12 +39,15 @@ import org.yakindu.base.types.TypesPackage;
  * <ul>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getTypeArguments <em>Type Arguments</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#getConstraint <em>Constraint</em>}</li>
+ *   <li>{@link org.yakindu.base.types.impl.TypeAliasImpl#isAbstract <em>Abstract</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
+public class TypeAliasImpl extends EObjectImpl implements TypeAlias {
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
 	 * <!-- begin-user-doc -->
@@ -57,6 +67,56 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 	 * @ordered
 	 */
 	protected EList<Type> typeArguments;
+
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getConstraint() <em>Constraint</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConstraint()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<TypeConstraint> constraint;
+
+	/**
+	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ABSTRACT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isAbstract()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -132,6 +192,74 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_ALIAS__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<TypeConstraint> getConstraint() {
+		if (constraint == null) {
+			constraint = new EObjectContainmentEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.TYPE_ALIAS__CONSTRAINT);
+		}
+		return constraint;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract() {
+		return abstract_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbstract(boolean newAbstract) {
+		boolean oldAbstract = abstract_;
+		abstract_ = newAbstract;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_ALIAS__ABSTRACT, oldAbstract, abstract_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
+				return ((InternalEList<?>)getConstraint()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -140,6 +268,12 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 				return basicGetType();
 			case TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS:
 				return getTypeArguments();
+			case TypesPackage.TYPE_ALIAS__NAME:
+				return getName();
+			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
+				return getConstraint();
+			case TypesPackage.TYPE_ALIAS__ABSTRACT:
+				return isAbstract();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -160,6 +294,16 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 				getTypeArguments().clear();
 				getTypeArguments().addAll((Collection<? extends Type>)newValue);
 				return;
+			case TypesPackage.TYPE_ALIAS__NAME:
+				setName((String)newValue);
+				return;
+			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
+				getConstraint().clear();
+				getConstraint().addAll((Collection<? extends TypeConstraint>)newValue);
+				return;
+			case TypesPackage.TYPE_ALIAS__ABSTRACT:
+				setAbstract((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -178,6 +322,15 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 			case TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS:
 				getTypeArguments().clear();
 				return;
+			case TypesPackage.TYPE_ALIAS__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
+				getConstraint().clear();
+				return;
+			case TypesPackage.TYPE_ALIAS__ABSTRACT:
+				setAbstract(ABSTRACT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -194,6 +347,12 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 				return type != null;
 			case TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS:
 				return typeArguments != null && !typeArguments.isEmpty();
+			case TypesPackage.TYPE_ALIAS__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case TypesPackage.TYPE_ALIAS__CONSTRAINT:
+				return constraint != null && !constraint.isEmpty();
+			case TypesPackage.TYPE_ALIAS__ABSTRACT:
+				return abstract_ != ABSTRACT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -205,15 +364,21 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == TypedElement.class) {
+		if (baseClass == NamedElement.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.TYPE_ALIAS__TYPE: return TypesPackage.TYPED_ELEMENT__TYPE;
-				case TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS: return TypesPackage.TYPED_ELEMENT__TYPE_ARGUMENTS;
+				case TypesPackage.TYPE_ALIAS__NAME: return BasePackage.NAMED_ELEMENT__NAME;
 				default: return -1;
 			}
 		}
 		if (baseClass == PackageMember.class) {
 			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == Type.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.TYPE_ALIAS__CONSTRAINT: return TypesPackage.TYPE__CONSTRAINT;
+				case TypesPackage.TYPE_ALIAS__ABSTRACT: return TypesPackage.TYPE__ABSTRACT;
 				default: return -1;
 			}
 		}
@@ -227,10 +392,9 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == TypedElement.class) {
+		if (baseClass == NamedElement.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.TYPED_ELEMENT__TYPE: return TypesPackage.TYPE_ALIAS__TYPE;
-				case TypesPackage.TYPED_ELEMENT__TYPE_ARGUMENTS: return TypesPackage.TYPE_ALIAS__TYPE_ARGUMENTS;
+				case BasePackage.NAMED_ELEMENT__NAME: return TypesPackage.TYPE_ALIAS__NAME;
 				default: return -1;
 			}
 		}
@@ -239,7 +403,32 @@ public class TypeAliasImpl extends NamedElementImpl implements TypeAlias {
 				default: return -1;
 			}
 		}
+		if (baseClass == Type.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.TYPE__CONSTRAINT: return TypesPackage.TYPE_ALIAS__CONSTRAINT;
+				case TypesPackage.TYPE__ABSTRACT: return TypesPackage.TYPE_ALIAS__ABSTRACT;
+				default: return -1;
+			}
+		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", abstract: ");
+		result.append(abstract_);
+		result.append(')');
+		return result.toString();
 	}
 
 } //TypeAliasImpl

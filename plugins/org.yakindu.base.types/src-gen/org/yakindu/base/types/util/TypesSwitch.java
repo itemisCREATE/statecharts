@@ -232,6 +232,7 @@ public class TypesSwitch<T> extends Switch<T> {
 				TypeAlias typeAlias = (TypeAlias)theEObject;
 				T result = caseTypeAlias(typeAlias);
 				if (result == null) result = caseTypedElement(typeAlias);
+				if (result == null) result = caseType(typeAlias);
 				if (result == null) result = casePackageMember(typeAlias);
 				if (result == null) result = caseNamedElement(typeAlias);
 				if (result == null) result = defaultCase(theEObject);
