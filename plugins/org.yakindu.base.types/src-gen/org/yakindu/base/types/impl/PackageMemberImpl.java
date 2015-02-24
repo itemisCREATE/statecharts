@@ -3,9 +3,7 @@
 package org.yakindu.base.types.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.base.base.impl.NamedElementImpl;
-
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.TypesPackage;
 

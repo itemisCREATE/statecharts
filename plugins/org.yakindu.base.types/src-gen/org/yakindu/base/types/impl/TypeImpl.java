@@ -118,6 +118,16 @@ public abstract class TypeImpl extends PackageMemberImpl implements Type {
 	}
 
 	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated NOT
+	 */
+	public Type getOriginType() {
+		return this;
+	}
+
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated

@@ -69,4 +69,12 @@ public interface Type extends PackageMember {
 	 */
 	void setAbstract(boolean value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	Type getOriginType();
+
 } // Type

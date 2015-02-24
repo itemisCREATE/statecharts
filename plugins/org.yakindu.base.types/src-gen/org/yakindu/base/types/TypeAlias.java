@@ -2,7 +2,6 @@
  */
 package org.yakindu.base.types;
 
-import org.yakindu.base.base.NamedElement;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,12 +14,4 @@ import org.yakindu.base.base.NamedElement;
  * @generated
  */
 public interface TypeAlias extends TypedElement, Type {
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @model kind="operation"
-	 * @generated
-	 */
-	Type getOriginType();
 } // TypeAlias
