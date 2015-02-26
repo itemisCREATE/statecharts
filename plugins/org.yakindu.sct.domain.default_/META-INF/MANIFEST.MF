@@ -16,6 +16,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.ui.shared;bundle-version="2.7.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
-Export-Package: org.yakindu.sct.domain.default_,
+Export-Package: com.yakindu.sct.domain.default_.util,
+ org.yakindu.sct.domain.default_,
  org.yakindu.sct.domain.default_.extension,
  org.yakindu.sct.domain.default_.modules
