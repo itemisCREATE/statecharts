@@ -13,7 +13,7 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
 import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.StringLiteral
-import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionState
@@ -40,7 +40,7 @@ class SequenceBuilder {
 	@Inject extension SexecElementMapping mapping
 	@Inject extension TraceExtensions trace
 
-	@Inject extension ITypeSystem ts
+	@Inject extension ITypeValueProvider 
 
 	@Inject @Named("ADD_TRACES")
 	boolean _addTraceSteps

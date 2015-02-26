@@ -15,6 +15,8 @@ import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
+import org.yakindu.base.types.typesystem.DefaultTypeSystem;
+import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
@@ -51,6 +53,10 @@ public class DefaultSequencerModule extends AbstractGenericModule {
 
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {
 		return STextTypeInferrer.class;
+	}
+	
+	public Class<? extends ITypeSystem> bindITypesystem(){
+		return DefaultTypeSystem.class;
 	}
 
 	public Class<? extends INamingService> bindINamingService() {
