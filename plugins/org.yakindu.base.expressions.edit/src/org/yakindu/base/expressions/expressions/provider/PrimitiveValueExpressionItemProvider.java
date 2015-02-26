@@ -8,17 +8,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
@@ -30,13 +22,7 @@ import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
  * @generated
  */
 public class PrimitiveValueExpressionItemProvider
-	extends ExpressionItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends ExpressionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -157,7 +143,12 @@ public class PrimitiveValueExpressionItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(ExpressionsPackage.Literals.PRIMITIVE_VALUE_EXPRESSION__VALUE,
-				 ExpressionsFactory.eINSTANCE.createRealLiteral()));
+				 ExpressionsFactory.eINSTANCE.createDoubleLiteral()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.PRIMITIVE_VALUE_EXPRESSION__VALUE,
+				 ExpressionsFactory.eINSTANCE.createFloatLiteral()));
 
 		newChildDescriptors.add
 			(createChildParameter

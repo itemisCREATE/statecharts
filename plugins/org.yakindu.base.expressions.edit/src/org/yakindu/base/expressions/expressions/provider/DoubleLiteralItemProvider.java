@@ -8,41 +8,27 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
+import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
-import org.yakindu.base.expressions.expressions.RealLiteral;
 
 /**
- * This is the item provider adapter for a {@link org.yakindu.base.expressions.expressions.RealLiteral} object.
+ * This is the item provider adapter for a {@link org.yakindu.base.expressions.expressions.DoubleLiteral} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class RealLiteralItemProvider
-	extends LiteralItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+public class DoubleLiteralItemProvider extends LiteralItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RealLiteralItemProvider(AdapterFactory adapterFactory) {
+	public DoubleLiteralItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -73,9 +59,9 @@ public class RealLiteralItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_RealLiteral_value_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_RealLiteral_value_feature", "_UI_RealLiteral_type"),
-				 ExpressionsPackage.Literals.REAL_LITERAL__VALUE,
+				 getString("_UI_DoubleLiteral_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DoubleLiteral_value_feature", "_UI_DoubleLiteral_type"),
+				 ExpressionsPackage.Literals.DOUBLE_LITERAL__VALUE,
 				 true,
 				 false,
 				 false,
@@ -85,14 +71,14 @@ public class RealLiteralItemProvider
 	}
 
 	/**
-	 * This returns RealLiteral.gif.
+	 * This returns DoubleLiteral.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/RealLiteral"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/DoubleLiteral"));
 	}
 
 	/**
@@ -103,9 +89,10 @@ public class RealLiteralItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		RealLiteral realLiteral = (RealLiteral)object;
-		return getString("_UI_RealLiteral_type") + " " + realLiteral.getValue();
+		DoubleLiteral doubleLiteral = (DoubleLiteral)object;
+		return getString("_UI_DoubleLiteral_type") + " " + doubleLiteral.getValue();
 	}
+	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -118,8 +105,8 @@ public class RealLiteralItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(RealLiteral.class)) {
-			case ExpressionsPackage.REAL_LITERAL__VALUE:
+		switch (notification.getFeatureID(DoubleLiteral.class)) {
+			case ExpressionsPackage.DOUBLE_LITERAL__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

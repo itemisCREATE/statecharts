@@ -40,13 +40,22 @@ public interface ExpressionsFactory extends EFactory {
 	IntLiteral createIntLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Real Literal</em>'.
+	 * Returns a new object of class '<em>Double Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Real Literal</em>'.
+	 * @return a new object of class '<em>Double Literal</em>'.
 	 * @generated
 	 */
-	RealLiteral createRealLiteral();
+	DoubleLiteral createDoubleLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Float Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Float Literal</em>'.
+	 * @generated
+	 */
+	FloatLiteral createFloatLiteral();
 
 	/**
 	 * Returns a new object of class '<em>Hex Literal</em>'.

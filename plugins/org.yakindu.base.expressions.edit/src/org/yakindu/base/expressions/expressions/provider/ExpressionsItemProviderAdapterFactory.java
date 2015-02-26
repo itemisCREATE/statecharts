@@ -8,7 +8,6 @@ import java.util.Collection;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.edit.provider.ChangeNotifier;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -20,7 +19,6 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.yakindu.base.expressions.expressions.util.ExpressionsAdapterFactory;
 
 /**
@@ -118,26 +116,49 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.RealLiteral} instances.
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.DoubleLiteral} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected RealLiteralItemProvider realLiteralItemProvider;
+	protected DoubleLiteralItemProvider doubleLiteralItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.RealLiteral}.
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.DoubleLiteral}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createRealLiteralAdapter() {
-		if (realLiteralItemProvider == null) {
-			realLiteralItemProvider = new RealLiteralItemProvider(this);
+	public Adapter createDoubleLiteralAdapter() {
+		if (doubleLiteralItemProvider == null) {
+			doubleLiteralItemProvider = new DoubleLiteralItemProvider(this);
 		}
 
-		return realLiteralItemProvider;
+		return doubleLiteralItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.FloatLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected FloatLiteralItemProvider floatLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.FloatLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createFloatLiteralAdapter() {
+		if (floatLiteralItemProvider == null) {
+			floatLiteralItemProvider = new FloatLiteralItemProvider(this);
+		}
+
+		return floatLiteralItemProvider;
 	}
 
 	/**
@@ -601,6 +622,29 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.yakindu.base.expressions.expressions.TypeCastExpression} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected TypeCastExpressionItemProvider typeCastExpressionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.yakindu.base.expressions.expressions.TypeCastExpression}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createTypeCastExpressionAdapter() {
+		if (typeCastExpressionItemProvider == null) {
+			typeCastExpressionItemProvider = new TypeCastExpressionItemProvider(this);
+		}
+
+		return typeCastExpressionItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -701,7 +745,8 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 	public void dispose() {
 		if (boolLiteralItemProvider != null) boolLiteralItemProvider.dispose();
 		if (intLiteralItemProvider != null) intLiteralItemProvider.dispose();
-		if (realLiteralItemProvider != null) realLiteralItemProvider.dispose();
+		if (doubleLiteralItemProvider != null) doubleLiteralItemProvider.dispose();
+		if (floatLiteralItemProvider != null) floatLiteralItemProvider.dispose();
 		if (hexLiteralItemProvider != null) hexLiteralItemProvider.dispose();
 		if (stringLiteralItemProvider != null) stringLiteralItemProvider.dispose();
 		if (nullLiteralItemProvider != null) nullLiteralItemProvider.dispose();
@@ -722,6 +767,7 @@ public class ExpressionsItemProviderAdapterFactory extends ExpressionsAdapterFac
 		if (featureCallItemProvider != null) featureCallItemProvider.dispose();
 		if (elementReferenceExpressionItemProvider != null) elementReferenceExpressionItemProvider.dispose();
 		if (parenthesizedExpressionItemProvider != null) parenthesizedExpressionItemProvider.dispose();
+		if (typeCastExpressionItemProvider != null) typeCastExpressionItemProvider.dispose();
 	}
 
 }

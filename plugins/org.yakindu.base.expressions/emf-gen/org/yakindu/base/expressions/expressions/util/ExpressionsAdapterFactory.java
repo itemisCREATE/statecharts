@@ -84,8 +84,12 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 				return createIntLiteralAdapter();
 			}
 			@Override
-			public Adapter caseRealLiteral(RealLiteral object) {
-				return createRealLiteralAdapter();
+			public Adapter caseDoubleLiteral(DoubleLiteral object) {
+				return createDoubleLiteralAdapter();
+			}
+			@Override
+			public Adapter caseFloatLiteral(FloatLiteral object) {
+				return createFloatLiteralAdapter();
 			}
 			@Override
 			public Adapter caseHexLiteral(HexLiteral object) {
@@ -248,16 +252,30 @@ public class ExpressionsAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.RealLiteral <em>Real Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.DoubleLiteral <em>Double Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.base.expressions.expressions.RealLiteral
+	 * @see org.yakindu.base.expressions.expressions.DoubleLiteral
 	 * @generated
 	 */
-	public Adapter createRealLiteralAdapter() {
+	public Adapter createDoubleLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.expressions.expressions.FloatLiteral <em>Float Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.expressions.expressions.FloatLiteral
+	 * @generated
+	 */
+	public Adapter createFloatLiteralAdapter() {
 		return null;
 	}
 

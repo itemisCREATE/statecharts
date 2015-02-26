@@ -3,8 +3,9 @@
 package org.yakindu.base.expressions.expressions.provider;
 
 import org.eclipse.emf.common.EMFPlugin;
-
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.yakindu.base.base.provider.BaseEditPlugin;
+import org.yakindu.base.types.provider.TypesEditPlugin;
 
 /**
  * This is the central singleton for the Expressions edit plugin.
@@ -38,6 +39,8 @@ public final class ExpressionsEditPlugin extends EMFPlugin {
 	public ExpressionsEditPlugin() {
 		super
 		  (new ResourceLocator [] {
+		     BaseEditPlugin.INSTANCE,
+		     TypesEditPlugin.INSTANCE,
 		   });
 	}
 

@@ -92,10 +92,17 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case ExpressionsPackage.REAL_LITERAL: {
-				RealLiteral realLiteral = (RealLiteral)theEObject;
-				T result = caseRealLiteral(realLiteral);
-				if (result == null) result = caseLiteral(realLiteral);
+			case ExpressionsPackage.DOUBLE_LITERAL: {
+				DoubleLiteral doubleLiteral = (DoubleLiteral)theEObject;
+				T result = caseDoubleLiteral(doubleLiteral);
+				if (result == null) result = caseLiteral(doubleLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case ExpressionsPackage.FLOAT_LITERAL: {
+				FloatLiteral floatLiteral = (FloatLiteral)theEObject;
+				T result = caseFloatLiteral(floatLiteral);
+				if (result == null) result = caseLiteral(floatLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -311,17 +318,32 @@ public class ExpressionsSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Real Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Double Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Real Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Double Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRealLiteral(RealLiteral object) {
+	public T caseDoubleLiteral(DoubleLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Float Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Float Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFloatLiteral(FloatLiteral object) {
 		return null;
 	}
 

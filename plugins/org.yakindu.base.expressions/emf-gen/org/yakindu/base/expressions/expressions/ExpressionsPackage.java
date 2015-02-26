@@ -151,14 +151,14 @@ public interface ExpressionsPackage extends EPackage {
 	int INT_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.RealLiteralImpl <em>Real Literal</em>}' class.
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.expressions.expressions.impl.RealLiteralImpl
-	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRealLiteral()
+	 * @see org.yakindu.base.expressions.expressions.impl.DoubleLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getDoubleLiteral()
 	 * @generated
 	 */
-	int REAL_LITERAL = 4;
+	int DOUBLE_LITERAL = 4;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -167,16 +167,44 @@ public interface ExpressionsPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+	int DOUBLE_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Real Literal</em>' class.
+	 * The number of structural features of the '<em>Double Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REAL_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+	int DOUBLE_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl <em>Float Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl
+	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getFloatLiteral()
+	 * @generated
+	 */
+	int FLOAT_LITERAL = 5;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_LITERAL__VALUE = LITERAL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Float Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FLOAT_LITERAL_FEATURE_COUNT = LITERAL_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.impl.HexLiteralImpl <em>Hex Literal</em>}' class.
@@ -186,7 +214,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getHexLiteral()
 	 * @generated
 	 */
-	int HEX_LITERAL = 5;
+	int HEX_LITERAL = 6;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -214,7 +242,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getStringLiteral()
 	 * @generated
 	 */
-	int STRING_LITERAL = 6;
+	int STRING_LITERAL = 7;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -242,7 +270,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNullLiteral()
 	 * @generated
 	 */
-	int NULL_LITERAL = 7;
+	int NULL_LITERAL = 8;
 
 	/**
 	 * The number of structural features of the '<em>Null Literal</em>' class.
@@ -261,7 +289,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentExpression()
 	 * @generated
 	 */
-	int ASSIGNMENT_EXPRESSION = 8;
+	int ASSIGNMENT_EXPRESSION = 9;
 
 	/**
 	 * The feature id for the '<em><b>Var Ref</b></em>' containment reference.
@@ -307,7 +335,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getConditionalExpression()
 	 * @generated
 	 */
-	int CONDITIONAL_EXPRESSION = 9;
+	int CONDITIONAL_EXPRESSION = 10;
 
 	/**
 	 * The feature id for the '<em><b>Condition</b></em>' containment reference.
@@ -353,7 +381,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalOrExpression()
 	 * @generated
 	 */
-	int LOGICAL_OR_EXPRESSION = 10;
+	int LOGICAL_OR_EXPRESSION = 11;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -390,7 +418,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalAndExpression()
 	 * @generated
 	 */
-	int LOGICAL_AND_EXPRESSION = 11;
+	int LOGICAL_AND_EXPRESSION = 12;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -427,7 +455,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalNotExpression()
 	 * @generated
 	 */
-	int LOGICAL_NOT_EXPRESSION = 12;
+	int LOGICAL_NOT_EXPRESSION = 13;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -455,7 +483,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseXorExpression()
 	 * @generated
 	 */
-	int BITWISE_XOR_EXPRESSION = 13;
+	int BITWISE_XOR_EXPRESSION = 14;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -492,7 +520,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseOrExpression()
 	 * @generated
 	 */
-	int BITWISE_OR_EXPRESSION = 14;
+	int BITWISE_OR_EXPRESSION = 15;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -529,7 +557,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getBitwiseAndExpression()
 	 * @generated
 	 */
-	int BITWISE_AND_EXPRESSION = 15;
+	int BITWISE_AND_EXPRESSION = 16;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -566,7 +594,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getLogicalRelationExpression()
 	 * @generated
 	 */
-	int LOGICAL_RELATION_EXPRESSION = 16;
+	int LOGICAL_RELATION_EXPRESSION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -612,7 +640,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftExpression()
 	 * @generated
 	 */
-	int SHIFT_EXPRESSION = 17;
+	int SHIFT_EXPRESSION = 18;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -658,7 +686,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalAddSubtractExpression()
 	 * @generated
 	 */
-	int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 18;
+	int NUMERICAL_ADD_SUBTRACT_EXPRESSION = 19;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -704,7 +732,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalMultiplyDivideExpression()
 	 * @generated
 	 */
-	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 19;
+	int NUMERICAL_MULTIPLY_DIVIDE_EXPRESSION = 20;
 
 	/**
 	 * The feature id for the '<em><b>Left Operand</b></em>' containment reference.
@@ -750,7 +778,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getNumericalUnaryExpression()
 	 * @generated
 	 */
-	int NUMERICAL_UNARY_EXPRESSION = 20;
+	int NUMERICAL_UNARY_EXPRESSION = 21;
 
 	/**
 	 * The feature id for the '<em><b>Operator</b></em>' attribute.
@@ -787,7 +815,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getPrimitiveValueExpression()
 	 * @generated
 	 */
-	int PRIMITIVE_VALUE_EXPRESSION = 21;
+	int PRIMITIVE_VALUE_EXPRESSION = 22;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' containment reference.
@@ -815,7 +843,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getFeatureCall()
 	 * @generated
 	 */
-	int FEATURE_CALL = 22;
+	int FEATURE_CALL = 23;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' containment reference.
@@ -870,7 +898,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getElementReferenceExpression()
 	 * @generated
 	 */
-	int ELEMENT_REFERENCE_EXPRESSION = 23;
+	int ELEMENT_REFERENCE_EXPRESSION = 24;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' reference.
@@ -916,7 +944,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getParenthesizedExpression()
 	 * @generated
 	 */
-	int PARENTHESIZED_EXPRESSION = 24;
+	int PARENTHESIZED_EXPRESSION = 25;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -944,7 +972,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getTypeCastExpression()
 	 * @generated
 	 */
-	int TYPE_CAST_EXPRESSION = 25;
+	int TYPE_CAST_EXPRESSION = 26;
 
 	/**
 	 * The feature id for the '<em><b>Operand</b></em>' containment reference.
@@ -981,7 +1009,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAssignmentOperator()
 	 * @generated
 	 */
-	int ASSIGNMENT_OPERATOR = 26;
+	int ASSIGNMENT_OPERATOR = 27;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.ShiftOperator <em>Shift Operator</em>}' enum.
@@ -991,7 +1019,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getShiftOperator()
 	 * @generated
 	 */
-	int SHIFT_OPERATOR = 27;
+	int SHIFT_OPERATOR = 28;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.AdditiveOperator <em>Additive Operator</em>}' enum.
@@ -1001,7 +1029,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getAdditiveOperator()
 	 * @generated
 	 */
-	int ADDITIVE_OPERATOR = 28;
+	int ADDITIVE_OPERATOR = 29;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.MultiplicativeOperator <em>Multiplicative Operator</em>}' enum.
@@ -1011,7 +1039,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getMultiplicativeOperator()
 	 * @generated
 	 */
-	int MULTIPLICATIVE_OPERATOR = 29;
+	int MULTIPLICATIVE_OPERATOR = 30;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.UnaryOperator <em>Unary Operator</em>}' enum.
@@ -1021,7 +1049,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getUnaryOperator()
 	 * @generated
 	 */
-	int UNARY_OPERATOR = 30;
+	int UNARY_OPERATOR = 31;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.base.expressions.expressions.RelationalOperator <em>Relational Operator</em>}' enum.
@@ -1031,7 +1059,7 @@ public interface ExpressionsPackage extends EPackage {
 	 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRelationalOperator()
 	 * @generated
 	 */
-	int RELATIONAL_OPERATOR = 31;
+	int RELATIONAL_OPERATOR = 32;
 
 
 	/**
@@ -1097,25 +1125,46 @@ public interface ExpressionsPackage extends EPackage {
 	EAttribute getIntLiteral_Value();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.RealLiteral <em>Real Literal</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.DoubleLiteral <em>Double Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Real Literal</em>'.
-	 * @see org.yakindu.base.expressions.expressions.RealLiteral
+	 * @return the meta object for class '<em>Double Literal</em>'.
+	 * @see org.yakindu.base.expressions.expressions.DoubleLiteral
 	 * @generated
 	 */
-	EClass getRealLiteral();
+	EClass getDoubleLiteral();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.RealLiteral#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.DoubleLiteral#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.yakindu.base.expressions.expressions.RealLiteral#getValue()
-	 * @see #getRealLiteral()
+	 * @see org.yakindu.base.expressions.expressions.DoubleLiteral#getValue()
+	 * @see #getDoubleLiteral()
 	 * @generated
 	 */
-	EAttribute getRealLiteral_Value();
+	EAttribute getDoubleLiteral_Value();
+
+	/**
+	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.FloatLiteral <em>Float Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Float Literal</em>'.
+	 * @see org.yakindu.base.expressions.expressions.FloatLiteral
+	 * @generated
+	 */
+	EClass getFloatLiteral();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.expressions.expressions.FloatLiteral#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.yakindu.base.expressions.expressions.FloatLiteral#getValue()
+	 * @see #getFloatLiteral()
+	 * @generated
+	 */
+	EAttribute getFloatLiteral_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.expressions.expressions.HexLiteral <em>Hex Literal</em>}'.
@@ -1950,14 +1999,14 @@ public interface ExpressionsPackage extends EPackage {
 		EAttribute INT_LITERAL__VALUE = eINSTANCE.getIntLiteral_Value();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.RealLiteralImpl <em>Real Literal</em>}' class.
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.DoubleLiteralImpl <em>Double Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.expressions.expressions.impl.RealLiteralImpl
-		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getRealLiteral()
+		 * @see org.yakindu.base.expressions.expressions.impl.DoubleLiteralImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getDoubleLiteral()
 		 * @generated
 		 */
-		EClass REAL_LITERAL = eINSTANCE.getRealLiteral();
+		EClass DOUBLE_LITERAL = eINSTANCE.getDoubleLiteral();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -1965,7 +2014,25 @@ public interface ExpressionsPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute REAL_LITERAL__VALUE = eINSTANCE.getRealLiteral_Value();
+		EAttribute DOUBLE_LITERAL__VALUE = eINSTANCE.getDoubleLiteral_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl <em>Float Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.expressions.expressions.impl.FloatLiteralImpl
+		 * @see org.yakindu.base.expressions.expressions.impl.ExpressionsPackageImpl#getFloatLiteral()
+		 * @generated
+		 */
+		EClass FLOAT_LITERAL = eINSTANCE.getFloatLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FLOAT_LITERAL__VALUE = eINSTANCE.getFloatLiteral_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.expressions.expressions.impl.HexLiteralImpl <em>Hex Literal</em>}' class.

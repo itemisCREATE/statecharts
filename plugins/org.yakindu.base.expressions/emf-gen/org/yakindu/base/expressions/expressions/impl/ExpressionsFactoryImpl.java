@@ -6,12 +6,42 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.yakindu.base.expressions.expressions.*;
+import org.yakindu.base.expressions.expressions.AdditiveOperator;
+import org.yakindu.base.expressions.expressions.AssignmentExpression;
+import org.yakindu.base.expressions.expressions.AssignmentOperator;
+import org.yakindu.base.expressions.expressions.BitwiseAndExpression;
+import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
+import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
+import org.yakindu.base.expressions.expressions.BoolLiteral;
+import org.yakindu.base.expressions.expressions.ConditionalExpression;
+import org.yakindu.base.expressions.expressions.DoubleLiteral;
+import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
+import org.yakindu.base.expressions.expressions.ExpressionsFactory;
+import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.FloatLiteral;
+import org.yakindu.base.expressions.expressions.HexLiteral;
+import org.yakindu.base.expressions.expressions.IntLiteral;
+import org.yakindu.base.expressions.expressions.LogicalAndExpression;
+import org.yakindu.base.expressions.expressions.LogicalNotExpression;
+import org.yakindu.base.expressions.expressions.LogicalOrExpression;
+import org.yakindu.base.expressions.expressions.LogicalRelationExpression;
+import org.yakindu.base.expressions.expressions.MultiplicativeOperator;
+import org.yakindu.base.expressions.expressions.NullLiteral;
+import org.yakindu.base.expressions.expressions.NumericalAddSubtractExpression;
+import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression;
+import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
+import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
+import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
+import org.yakindu.base.expressions.expressions.RelationalOperator;
+import org.yakindu.base.expressions.expressions.ShiftExpression;
+import org.yakindu.base.expressions.expressions.ShiftOperator;
+import org.yakindu.base.expressions.expressions.StringLiteral;
+import org.yakindu.base.expressions.expressions.TypeCastExpression;
+import org.yakindu.base.expressions.expressions.UnaryOperator;
 
 /**
  * <!-- begin-user-doc -->
@@ -59,7 +89,8 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 		switch (eClass.getClassifierID()) {
 			case ExpressionsPackage.BOOL_LITERAL: return createBoolLiteral();
 			case ExpressionsPackage.INT_LITERAL: return createIntLiteral();
-			case ExpressionsPackage.REAL_LITERAL: return createRealLiteral();
+			case ExpressionsPackage.DOUBLE_LITERAL: return createDoubleLiteral();
+			case ExpressionsPackage.FLOAT_LITERAL: return createFloatLiteral();
 			case ExpressionsPackage.HEX_LITERAL: return createHexLiteral();
 			case ExpressionsPackage.STRING_LITERAL: return createStringLiteral();
 			case ExpressionsPackage.NULL_LITERAL: return createNullLiteral();
@@ -161,9 +192,19 @@ public class ExpressionsFactoryImpl extends EFactoryImpl implements ExpressionsF
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RealLiteral createRealLiteral() {
-		RealLiteralImpl realLiteral = new RealLiteralImpl();
-		return realLiteral;
+	public DoubleLiteral createDoubleLiteral() {
+		DoubleLiteralImpl doubleLiteral = new DoubleLiteralImpl();
+		return doubleLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public FloatLiteral createFloatLiteral() {
+		FloatLiteralImpl floatLiteral = new FloatLiteralImpl();
+		return floatLiteral;
 	}
 
 	/**

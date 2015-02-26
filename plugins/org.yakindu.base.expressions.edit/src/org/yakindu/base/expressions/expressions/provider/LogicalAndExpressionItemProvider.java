@@ -8,17 +8,9 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.LogicalAndExpression;
@@ -30,13 +22,7 @@ import org.yakindu.base.expressions.expressions.LogicalAndExpression;
  * @generated
  */
 public class LogicalAndExpressionItemProvider
-	extends ExpressionItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends ExpressionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -233,6 +219,11 @@ public class LogicalAndExpressionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION__LEFT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION__RIGHT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
@@ -315,6 +306,11 @@ public class LogicalAndExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION__RIGHT_OPERAND,
 				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.LOGICAL_AND_EXPRESSION__RIGHT_OPERAND,
+				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
 	}
 
 	/**

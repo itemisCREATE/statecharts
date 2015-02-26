@@ -75,8 +75,7 @@ NumericalUnaryExpression returns Expression:
 	operator=UnaryOperator operand=TypeCastExpression;
 
 TypeCastExpression returns Expression:
-	PrimaryExpression (({TypeCastExpression.operand=current} 'as') type=[types::Type|QID])*
-;
+	PrimaryExpression (({TypeCastExpression.operand=current} 'as') type=[types::Type|QID])*;
 
 PrimaryExpression returns Expression:
 	PrimitiveValueExpression
@@ -102,7 +101,7 @@ ParenthesizedExpression returns Expression:
 	{ParenthesizedExpression} '(' expression=Expression ')';
 
 Literal:
-	BoolLiteral | IntLiteral | HexLiteral | RealLiteral | StringLiteral | NullLiteral;
+	BoolLiteral | IntLiteral | HexLiteral | DoubleLiteral | FloatLiteral | StringLiteral | NullLiteral;
 
 BoolLiteral:
 	{BoolLiteral} value=BOOL;
@@ -110,17 +109,21 @@ BoolLiteral:
 IntLiteral:
 	{IntLiteral} value=INT;
 
-RealLiteral:
-	{RealLiteral} value=DOUBLE;
+DoubleLiteral:
+	{DoubleLiteral} value=DOUBLE;
+
+FloatLiteral:
+	{FloatLiteral} value=FLOAT;
 
 HexLiteral:
 	{HexLiteral} value=HEX;
 
 StringLiteral:
 	{StringLiteral} value=STRING;
+
 NullLiteral:
-	{NullLiteral} 'null'
-;
+	{NullLiteral} 'null';
+
 LogicalAndOperator:
 	'&&';
 
@@ -176,7 +179,10 @@ terminal HEX returns ecore::EInt:
 	('0') ('x' | 'X') ('0'..'9' | 'a'..'f' | 'A'..'F')+;
 
 terminal DOUBLE returns ecore::EDouble:
-	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F' | 'd' | 'D')?;
-	
+	(INT '.' INT) ('e' ('-' | '+') INT)? ('d' | 'D')?;
+
+terminal FLOAT returns ecore::EFloat:
+	(INT '.' INT) ('e' ('-' | '+') INT)? ('f' | 'F')?;
+
 QID:
 	ID ('.' ID)*;

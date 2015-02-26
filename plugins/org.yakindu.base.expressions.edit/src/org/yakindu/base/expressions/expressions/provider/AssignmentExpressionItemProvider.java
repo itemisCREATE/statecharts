@@ -8,19 +8,11 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
@@ -33,13 +25,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
  * @generated
  */
 public class AssignmentExpressionItemProvider
-	extends ExpressionItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends ExpressionItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -266,6 +252,11 @@ public class AssignmentExpressionItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF,
+				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createAssignmentExpression()));
 
@@ -348,6 +339,11 @@ public class AssignmentExpressionItemProvider
 			(createChildParameter
 				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
 				 ExpressionsFactory.eINSTANCE.createParenthesizedExpression()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__EXPRESSION,
+				 ExpressionsFactory.eINSTANCE.createTypeCastExpression()));
 	}
 
 	/**

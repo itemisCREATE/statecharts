@@ -7,9 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.yakindu.base.expressions.expressions.AdditiveOperator;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
@@ -18,11 +16,13 @@ import org.yakindu.base.expressions.expressions.BitwiseOrExpression;
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
 import org.yakindu.base.expressions.expressions.ConditionalExpression;
+import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsFactory;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.HexLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.Literal;
@@ -37,7 +37,6 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression;
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
-import org.yakindu.base.expressions.expressions.RealLiteral;
 import org.yakindu.base.expressions.expressions.RelationalOperator;
 import org.yakindu.base.expressions.expressions.ShiftExpression;
 import org.yakindu.base.expressions.expressions.ShiftOperator;
@@ -86,7 +85,14 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass realLiteralEClass = null;
+	private EClass doubleLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass floatLiteralEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -400,8 +406,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getRealLiteral() {
-		return realLiteralEClass;
+	public EClass getDoubleLiteral() {
+		return doubleLiteralEClass;
 	}
 
 	/**
@@ -409,8 +415,26 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getRealLiteral_Value() {
-		return (EAttribute)realLiteralEClass.getEStructuralFeatures().get(0);
+	public EAttribute getDoubleLiteral_Value() {
+		return (EAttribute)doubleLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getFloatLiteral() {
+		return floatLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getFloatLiteral_Value() {
+		return (EAttribute)floatLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1090,8 +1114,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		intLiteralEClass = createEClass(INT_LITERAL);
 		createEAttribute(intLiteralEClass, INT_LITERAL__VALUE);
 
-		realLiteralEClass = createEClass(REAL_LITERAL);
-		createEAttribute(realLiteralEClass, REAL_LITERAL__VALUE);
+		doubleLiteralEClass = createEClass(DOUBLE_LITERAL);
+		createEAttribute(doubleLiteralEClass, DOUBLE_LITERAL__VALUE);
+
+		floatLiteralEClass = createEClass(FLOAT_LITERAL);
+		createEAttribute(floatLiteralEClass, FLOAT_LITERAL__VALUE);
 
 		hexLiteralEClass = createEClass(HEX_LITERAL);
 		createEAttribute(hexLiteralEClass, HEX_LITERAL__VALUE);
@@ -1221,7 +1248,8 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		// Add supertypes to classes
 		boolLiteralEClass.getESuperTypes().add(this.getLiteral());
 		intLiteralEClass.getESuperTypes().add(this.getLiteral());
-		realLiteralEClass.getESuperTypes().add(this.getLiteral());
+		doubleLiteralEClass.getESuperTypes().add(this.getLiteral());
+		floatLiteralEClass.getESuperTypes().add(this.getLiteral());
 		hexLiteralEClass.getESuperTypes().add(this.getLiteral());
 		stringLiteralEClass.getESuperTypes().add(this.getLiteral());
 		nullLiteralEClass.getESuperTypes().add(this.getLiteral());
@@ -1255,8 +1283,11 @@ public class ExpressionsPackageImpl extends EPackageImpl implements ExpressionsP
 		initEClass(intLiteralEClass, IntLiteral.class, "IntLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getIntLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, IntLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(realLiteralEClass, RealLiteral.class, "RealLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getRealLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, RealLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(doubleLiteralEClass, DoubleLiteral.class, "DoubleLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDoubleLiteral_Value(), ecorePackage.getEDouble(), "value", null, 0, 1, DoubleLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(floatLiteralEClass, FloatLiteral.class, "FloatLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getFloatLiteral_Value(), ecorePackage.getEFloat(), "value", null, 0, 1, FloatLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(hexLiteralEClass, HexLiteral.class, "HexLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getHexLiteral_Value(), ecorePackage.getEInt(), "value", null, 0, 1, HexLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

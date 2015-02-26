@@ -9,6 +9,7 @@ package org.yakindu.base.base.util;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
+import org.yakindu.base.base.*;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
