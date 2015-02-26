@@ -20,9 +20,11 @@ import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
+import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
@@ -35,7 +37,6 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
@@ -63,7 +64,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	@Inject
 	extension IQualifiedNameProvider provider
-	@Inject (optional = true)
+	@Inject(optional=true)
 	protected IOperationMockup operationDelegate
 	@Inject
 	protected extension IExecutionSlotResolver resolver
@@ -126,12 +127,15 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		var scopeVariable = context.resolve(assignment.varRef)
 		var result = assignment.expression.execute
 		if (assignment.operator == AssignmentOperator::ASSIGN) {
+
 			//Strong typing, use the type of the scopeVariable instead of using new runtime type
 			scopeVariable.value = if(result != null) typeCast(result, scopeVariable.type) else null
 		} else {
 			var operator = AbstractStatementInterpreter::assignFunctionMap.get(assignment.operator.getName())
-			scopeVariable.value = if(result != null) typeCast(evaluate(operator, scopeVariable.getValue, result),
-				scopeVariable.type) else null
+			scopeVariable.value = if (result != null)
+				typeCast(evaluate(operator, scopeVariable.getValue, result), scopeVariable.type)
+			else
+				null
 		}
 		scopeVariable.value
 	}
@@ -158,7 +162,8 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	def dispatch Object execute(ElementReferenceExpression expression) {
 		var parameter = expression.args.map(it|execute)
 		if (expression.operationCall || expression.reference instanceof OperationDefinition) {
-			if (operationDelegate!=null && operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
+			if (operationDelegate != null &&
+				operationDelegate.canExecute(expression.reference as Operation, parameter.toArray)) {
 				return operationDelegate.execute((expression.reference as Operation), parameter.toArray)
 			}
 		}
@@ -271,7 +276,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 			var parameter = call.args.map(it|execute)
 			if (call.feature instanceof Operation) {
 				var Operation operation = call.feature as Operation
-				if (operationDelegate!=null && operationDelegate.canExecute(operation, parameter)) {
+				if (operationDelegate != null && operationDelegate.canExecute(operation, parameter)) {
 					return operationDelegate.execute(operation, parameter)
 				}
 			}
@@ -315,7 +320,11 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 		return bool.value
 	}
 
-	def dispatch valueLiteral(RealLiteral literal) {
+	def dispatch valueLiteral(DoubleLiteral literal) {
+		return literal.value
+	}
+
+	def dispatch valueLiteral(FloatLiteral literal) {
 		return literal.value
 	}
 

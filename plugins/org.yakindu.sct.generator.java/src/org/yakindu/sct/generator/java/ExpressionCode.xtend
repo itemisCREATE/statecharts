@@ -11,8 +11,10 @@ import org.yakindu.base.expressions.expressions.BitwiseOrExpression
 import org.yakindu.base.expressions.expressions.BitwiseXorExpression
 import org.yakindu.base.expressions.expressions.BoolLiteral
 import org.yakindu.base.expressions.expressions.ConditionalExpression
+import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.expressions.expressions.FloatLiteral
 import org.yakindu.base.expressions.expressions.HexLiteral
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.LogicalAndExpression
@@ -26,7 +28,6 @@ import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpressio
 import org.yakindu.base.expressions.expressions.NumericalUnaryExpression
 import org.yakindu.base.expressions.expressions.ParenthesizedExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.RelationalOperator
 import org.yakindu.base.expressions.expressions.ShiftExpression
 import org.yakindu.base.expressions.expressions.ShiftOperator
@@ -99,7 +100,11 @@ class ExpressionCode {
 		expression.value.toString();
 	}
 
-	def dispatch String code(RealLiteral expression) {
+	def dispatch String code(DoubleLiteral expression) {
+		expression.value.toString();
+	}
+
+	def dispatch String code(FloatLiteral expression) {
 		expression.value.toString();
 	}
 
@@ -133,7 +138,7 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(LogicalRelationExpression expression) {
-		if (isSame(expression.leftOperand.inferType(null), getType(DefaultTypeSystem.STRING))){
+		if (isSame(expression.leftOperand.inferType(null), getType(DefaultTypeSystem.STRING))) {
 			expression.logicalString
 		} else
 			expression.leftOperand.code + expression.operator.code + expression.rightOperand.code;
