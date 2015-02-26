@@ -69,7 +69,7 @@ public class DefaultSimulationModule extends AbstractGenericModule {
 	public Class<? extends IModelSequencer> bindIModelSequencer() {
 		return ModelSequencer.class;
 	}
-
+	
 	public Class<? extends IOperationMockup> bindIOperationMockup() {
 		return JavaOperationMockup.class;
 	}

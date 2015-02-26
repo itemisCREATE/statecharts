@@ -37,6 +37,7 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
+import org.yakindu.base.types.typesystem.ITypeValueProvider
 
 /**
  * 
@@ -48,6 +49,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	@Inject extension IQualifiedNameProvider
 	@Inject extension ITypeSystem
 	@Inject extension ITypeSystemInferrer
+	@Inject extension ITypeValueProvider
 
 	override initialize(ExecutionContext context, ExecutionFlow flow) {
 		flow.scopes.forEach[context.slots += transform]
