@@ -41,8 +41,6 @@ public interface ITypeSystem {
 
 	public boolean isSuperType(Type subtype, Type supertype);
 
-	public Object defaultValue(Type type);
-
 	public void declareType(Type type, String name);
 
 }

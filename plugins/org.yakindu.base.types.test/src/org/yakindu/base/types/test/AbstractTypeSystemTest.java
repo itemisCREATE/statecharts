@@ -55,12 +55,12 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		// SimpleType
 		simpleType = createPrimitive(SIMPLE_TYPE);
 		declareType(simpleType, SIMPLE_TYPE);
-		//simpleType can be converted into Conversiontype
+		// simpleType can be converted into Conversiontype
 		conversionType = createPrimitive(CONVERSION_TYPE);
 		declareConversion(simpleType, conversionType);
 		conversionSubType = createPrimitive(CONVERSION_SUB_TYPE);
 		declareSuperType(conversionType, conversionSubType);
-		
+
 	}
 
 	protected Type createPrimitive(String name) {
@@ -97,16 +97,11 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 
 		assertNull(getCommonType(superType, simpleType));
 	}
-	
+
 	@Test
 	public void testGetCommonTypeWithConversion() throws Exception {
 		assertTrue(isSame(conversionType, getCommonType(conversionType, simpleType)));
 		assertTrue(isSame(conversionType, getCommonType(conversionType, conversionSubType)));
-	}
-
-	@Override
-	public Object defaultValue(Type type) {
-		return null;
 	}
 
 }
