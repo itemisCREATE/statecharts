@@ -5,13 +5,13 @@ import com.google.inject.name.Named
 import java.util.ArrayList
 import org.yakindu.base.expressions.expressions.AssignmentOperator
 import org.yakindu.base.expressions.expressions.BoolLiteral
+import org.yakindu.base.expressions.expressions.DoubleLiteral
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.ExpressionsFactory
 import org.yakindu.base.expressions.expressions.IntLiteral
 import org.yakindu.base.expressions.expressions.MultiplicativeOperator
 import org.yakindu.base.expressions.expressions.NumericalMultiplyDivideExpression
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression
-import org.yakindu.base.expressions.expressions.RealLiteral
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -31,6 +31,7 @@ import org.yakindu.sct.model.stext.stext.TimeUnit
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
+import org.yakindu.base.expressions.expressions.FloatLiteral
 
 class SequenceBuilder {
 
@@ -571,7 +572,16 @@ class SequenceBuilder {
 
 	def dispatch Expression buildValue(double d) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
-		val RealLiteral lit = factory.createRealLiteral
+		val DoubleLiteral lit = factory.createDoubleLiteral
+		lit.value = d
+		pve.value = lit
+
+		pve
+	}
+	
+	def dispatch Expression buildValue(float d) {
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
+		val FloatLiteral lit = factory.createFloatLiteral
 		lit.value = d
 		pve.value = lit
 

@@ -16,13 +16,14 @@ import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.AssignmentExpression;
 import org.yakindu.base.expressions.expressions.AssignmentOperator;
 import org.yakindu.base.expressions.expressions.BoolLiteral;
+import org.yakindu.base.expressions.expressions.DoubleLiteral;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.expressions.expressions.FloatLiteral;
 import org.yakindu.base.expressions.expressions.IntLiteral;
 import org.yakindu.base.expressions.expressions.Literal;
 import org.yakindu.base.expressions.expressions.PrimitiveValueExpression;
-import org.yakindu.base.expressions.expressions.RealLiteral;
 import org.yakindu.base.expressions.expressions.StringLiteral;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Execution;
@@ -90,8 +91,12 @@ public class Assert {
 				currentValue = Long.toString(((IntLiteral) literal)
 						.getValue());
 			}
-			else if (literal instanceof RealLiteral) {
-				currentValue = Double.toString(((RealLiteral) literal)
+			else if (literal instanceof DoubleLiteral) {
+				currentValue = Double.toString(((DoubleLiteral) literal)
+						.getValue());
+			}
+			else if (literal instanceof FloatLiteral) {
+				currentValue = Double.toString(((FloatLiteral) literal)
 						.getValue());
 			}
 			else if (literal instanceof StringLiteral) {
