@@ -143,7 +143,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	}
 
 	def Object initialValue(Type type) {
-		return type.defaultValue
+		return type.originType.defaultValue
 	}
 	
 }

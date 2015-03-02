@@ -1,0 +1,12 @@
+GeneratorModel for sctunit::interpreter {
+
+	test ValuedEvents2{ 
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}
+
+
+}

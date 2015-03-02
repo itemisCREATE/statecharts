@@ -81,6 +81,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String TIMED_TRANSITIONS = "TimedTransitions.sct";
 	public static final String TRANSITIONS_WITHOUT_CONDITION = "TransitionWithoutCondition.sct";
 	public static final String TRIFFER_GUARD_EXPRESSIONS = "TriggerGuardExpressions.sct";
+	public static final String TYPE_ALIAS = "TypeAlias.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
 	public static final String VARIABLE_INITIALIZATION = "VariableInitialization.sct";
 	
@@ -117,6 +118,7 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 			String value = (String) field.get(this);
 			if (value.endsWith(requestedStatechart)) {
 				result  = (loadStatechartFromResource(value));
+				break;
 			}			
 		}
 		return result;
