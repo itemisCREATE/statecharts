@@ -438,6 +438,14 @@ GeneratorModel for sctunit::interpreter {
 		}			
 	}
 	
+	test TypeAlias{
+		
+		feature Outlet{ 
+			targetProject = "org.yakindu.sct.simulation.core.sexec.test" 
+			targetFolder = "test-gen"			
+		}			
+	}	
+	
 
 	test ValuedEvents{
 		

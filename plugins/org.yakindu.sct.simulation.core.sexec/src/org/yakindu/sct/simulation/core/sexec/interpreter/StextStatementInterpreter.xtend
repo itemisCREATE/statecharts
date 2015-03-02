@@ -88,7 +88,7 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 
 	def dispatch Object execute(TypeCastExpression expression) {
 		var operand = expression.operand.execute
-		typeCast(operand, expression.type)
+		typeCast(operand, expression.type.originType)
 	}
 
 	def dispatch Object typeCast(Long value, Type type) {

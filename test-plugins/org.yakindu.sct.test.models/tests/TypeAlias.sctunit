@@ -1,0 +1,23 @@
+
+testgroup TypeAlias for statechart TypeAlias{
+	test TypeAliasTest { 
+		enter
+		assert active(TypeAlias.main_region.Start)
+		assert myVar == 1
+		
+		cycle
+		
+		assert active(TypeAlias.main_region.Mid)
+		assert myString == "TypeSystem"
+		
+		cycle
+		
+		assert active(TypeAlias.main_region.Mid2)
+		
+		raise myEvent 
+		cycle
+		
+		assert active(TypeAlias.main_region.End)		 
+	} 
+}
+	
