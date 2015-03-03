@@ -29,7 +29,6 @@ encoding//testmodels/SCTUnit/TransitionWithoutCondition.sct=UTF-8
 encoding//testmodels/SCTUnit/TriggerGuardExpressions.sct=UTF-8
 encoding//testmodels/SCTUnit/TypeAlias.sct=UTF-8
 encoding//testmodels/SCTUnit/ValuedEvents.sct=UTF-8
-encoding//testmodels/SCTUnit/VariableInitialization.sct=UTF-8
 encoding//testmodels/validation/EntryTransitionToParentState.sct=UTF-8
 encoding//testmodels/validation/NoTriggerOnTransitionWithExitPointSpec.sct=UTF-8
 encoding//testmodels/validation/RegionCantBeEnteredUsingShallowHistory.sct=UTF-8
