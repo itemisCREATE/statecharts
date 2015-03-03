@@ -15,10 +15,10 @@ import java.util.List
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.types.Package
-import org.yakindu.base.types.Type
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.DefaultTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
+import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sgraph.Declaration
@@ -37,7 +37,6 @@ import org.yakindu.sct.simulation.core.sruntime.ExecutionSlot
 import org.yakindu.sct.simulation.core.sruntime.impl.CompositeSlotImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionEventImpl
 import org.yakindu.sct.simulation.core.sruntime.impl.ExecutionVariableImpl
-import org.yakindu.base.types.typesystem.ITypeValueProvider
 
 /**
  * 
