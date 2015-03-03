@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2013 committers of YAKINDU and others.
+ * Copyright (c) 2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -115,7 +115,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.name = variable.fullyQualifiedName.lastSegment
 		it.fqName = variable.fullyQualifiedName.toString
 		it.type = variable.inferType(null)
-		it.value = it.type.defaultValue
+		it.value = it.type?.defaultValue
 		it.writable = !variable.const
 	}
 
@@ -123,7 +123,7 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
 		it.type = event.type
-		it.value = it.type.defaultValue
+		it.value = it.type?.defaultValue
 		it.direction = EventDirection.get(event.direction.value)
 	}
 

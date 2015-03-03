@@ -494,7 +494,7 @@ class SequenceBuilder {
 		if (vd.initialValue != null) {
 			return vd.initialValue
 		} else {
-			return vd.type.defaultValue.buildValue
+			return vd.type?.defaultValue.buildValue
 		}
 	}
 
