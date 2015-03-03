@@ -116,15 +116,15 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.name = variable.fullyQualifiedName.lastSegment
 		it.fqName = variable.fullyQualifiedName.toString
 		it.type = variable.inferType(null)
-		it.value = it.type.initialValue
+		it.value = it.type.defaultValue
 		it.writable = !variable.const
 	}
 
 	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(EventDefinition event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
-		it.type = event.inferType(null)
-		it.value = it.type.initialValue
+		it.type = event.type
+		it.value = it.type.defaultValue
 		it.direction = EventDirection.get(event.direction.value)
 	}
 
@@ -132,18 +132,14 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 		it.name = op.fullyQualifiedName.lastSegment
 		it.fqName = op.fullyQualifiedName.toString
 		it.type = if(op.type != null) op.type else getType(DefaultTypeSystem.VOID)
-		it.value = it.type.initialValue
+		it.value = it.type.defaultValue
 	}
 
 	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(TimeEvent event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
 		it.type = getType(DefaultTypeSystem.INTEGER)
-		it.value = initialValue(it.type)
+		it.value = it.type.defaultValue
 	}
 
-	def Object initialValue(Type type) {
-		return type.originType.defaultValue
-	}
-	
 }

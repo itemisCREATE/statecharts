@@ -20,7 +20,7 @@ import org.yakindu.sct.domain.default_.modules.DefaultSimulationModule;
 import org.yakindu.sct.domain.default_.modules.DefaultTypeSystemModule;
 import org.yakindu.sct.domain.default_.modules.EntryRuleRuntimeModule;
 import org.yakindu.sct.domain.default_.modules.EntryRuleUIModule;
-import org.yakindu.sct.domain.extension.IDomainModuleProvider;
+import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
@@ -31,6 +31,8 @@ import org.yakindu.sct.model.stext.stext.TransitionSpecification;
 import org.yakindu.sct.model.stext.ui.STextUiModule;
 import org.yakindu.sct.model.stext.ui.internal.STextActivator;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
@@ -39,27 +41,30 @@ import com.google.inject.util.Modules;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class DefaultDomainModuleProvider implements IDomainModuleProvider {
+public class DefaultDomainInjectorProvider implements IDomainInjectorProvider {
 
 	private static final Map<String, Class<? extends EObject>> semanticTargetToRuleMap = new HashMap<String, Class<? extends EObject>>();
+
+	private Injector resourceInjector;
+	private Injector simulationInjector;
+	private Injector sequencerInjector;
+	private Map<String, Injector> embeddedInjectors = new HashMap<String, Injector>();
+
 	static {
 		semanticTargetToRuleMap.put(Statechart.class.getName(), StatechartSpecification.class);
 		semanticTargetToRuleMap.put(Transition.class.getName(), TransitionSpecification.class);
 		semanticTargetToRuleMap.put(State.class.getName(), StateSpecification.class);
 	}
 
-	@Override
-	public Module getSharedStateModule() {
+	protected Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
 
-	@Override
-	public Module getLanguageRuntimeModule() {
+	protected Module getLanguageRuntimeModule() {
 		return new STextRuntimeModule();
 	}
 
-	@Override
-	public Module getLanguageUIModule() {
+	protected Module getLanguageUIModule() {
 		return new STextUiModule(STextActivator.getInstance());
 	}
 
@@ -67,32 +72,53 @@ public class DefaultDomainModuleProvider implements IDomainModuleProvider {
 		return new DefaultTypeSystemModule();
 	}
 
-	@Override
-	public Module getSimulationModule() {
+	protected Module getSimulationModule() {
 		return new DefaultSimulationModule();
 	}
 
-	@Override
-	public Module getSequencerModule() {
+	protected Module getSequencerModule() {
 		return new DefaultSequencerModule();
 	}
 
-	@Override
-	public Module getResourceModule() {
+	protected Module getResourceModule() {
 		Module uiModule = Modules.override(getLanguageRuntimeModule()).with(getLanguageUIModule());
-		Module result =  Modules.override(uiModule).with(getSharedStateModule());
-		return Modules.override(result).with (getTypeSystemModule());
-	}
-
-	@Override
-	public Module getEmbeddedEditorModule(String semanticTarget) {
-		return getEmbeddedEditorModule(semanticTargetToRuleMap.get(semanticTarget));
+		Module result = Modules.override(uiModule).with(getSharedStateModule());
+		return Modules.override(result).with(getTypeSystemModule());
 	}
 
 	protected Module getEmbeddedEditorModule(Class<? extends EObject> rule) {
 		Module runtimeModule = Modules.override(getLanguageRuntimeModule()).with(new EntryRuleRuntimeModule(rule));
 		Module uiModule = Modules.override(getLanguageUIModule()).with(new EntryRuleUIModule(rule));
-		Module result =  Modules.override(Modules.override(runtimeModule).with(uiModule)).with(getSharedStateModule());
-		return Modules.override(result).with (getTypeSystemModule());
+		Module result = Modules.override(Modules.override(runtimeModule).with(uiModule)).with(getSharedStateModule());
+		return Modules.override(result).with(getTypeSystemModule());
+	}
+
+	@Override
+	public Injector getEmbeddedEditorInjector(String semanticTarget) {
+		if (embeddedInjectors.get(semanticTarget) == null)
+			embeddedInjectors.put(semanticTarget,
+					Guice.createInjector(getEmbeddedEditorModule(semanticTargetToRuleMap.get(semanticTarget))));
+		return embeddedInjectors.get(semanticTarget);
+	}
+
+	@Override
+	public Injector getResourceInjector() {
+		if (resourceInjector == null)
+			resourceInjector = Guice.createInjector(getResourceModule());
+		return resourceInjector;
+	}
+
+	@Override
+	public Injector getSimulationInjector() {
+		if (simulationInjector == null)
+			simulationInjector = Guice.createInjector(getSimulationModule());
+		return simulationInjector;
+	}
+
+	@Override
+	public Injector getSequencerInjector() {
+		if (sequencerInjector == null)
+			sequencerInjector = Guice.createInjector(getSequencerModule());
+		return sequencerInjector;
 	}
 }

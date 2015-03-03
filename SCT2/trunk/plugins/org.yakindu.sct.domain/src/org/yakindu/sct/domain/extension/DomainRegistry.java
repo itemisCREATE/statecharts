@@ -70,9 +70,9 @@ public class DomainRegistry {
 			return configElement.getAttribute(DESCRIPTION);
 		}
 
-		public IDomainModuleProvider getModuleProvider() {
+		public IDomainInjectorProvider getDomainInjectorProvider() {
 			try {
-				return (IDomainModuleProvider) configElement.createExecutableExtension(MODULE_PROVIDER);
+				return (IDomainInjectorProvider) configElement.createExecutableExtension(MODULE_PROVIDER);
 			} catch (CoreException e) {
 				e.printStackTrace();
 			}

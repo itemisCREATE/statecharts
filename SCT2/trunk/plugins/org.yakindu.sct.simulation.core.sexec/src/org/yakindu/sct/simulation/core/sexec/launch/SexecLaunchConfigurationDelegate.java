@@ -20,10 +20,9 @@ import org.yakindu.sct.simulation.core.launch.AbstractSCTLaunchConfigurationDele
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 
 import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Inject;
+import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.util.Modules;
 
 /**
  * 
@@ -40,15 +39,15 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 
 	@Override
 	protected ISimulationEngine createExecutionContainer(final ILaunch launch, Statechart statechart) {
-		Module simulationModule = DomainRegistry.getDomainDescriptor(statechart).getModuleProvider()
-				.getSimulationModule();
-		Module module = Modules.override(simulationModule).with(new Module() {
+		Injector injector = DomainRegistry.getDomainDescriptor(statechart).getDomainInjectorProvider()
+				.getSimulationInjector();
+		Module module = new Module() {
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(ILaunch.class).toInstance(launch);
 			}
-		});
-		Guice.createInjector(module).injectMembers(this);
+		};
+		injector.createChildInjector(module).injectMembers(this);
 		try {
 			return factory.createExecutionContainer(statechart, launch);
 		} catch (CoreException e) {
@@ -56,5 +55,4 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 			return null;
 		}
 	}
-
 }

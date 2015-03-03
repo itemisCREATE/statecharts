@@ -41,8 +41,8 @@ public class JavaCodeGenerator extends AbstractJavaCodeGenerator {
 	}
 
 	@Override
-	protected Module createModule(final GeneratorEntry entry) {
-		Module module = super.createModule(entry);
+	protected Module getChildInjectorModule(final GeneratorEntry entry) {
+		Module module = super.getChildInjectorModule(entry);
 		final GenmodelEntries entries = new GenmodelEntries();
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {

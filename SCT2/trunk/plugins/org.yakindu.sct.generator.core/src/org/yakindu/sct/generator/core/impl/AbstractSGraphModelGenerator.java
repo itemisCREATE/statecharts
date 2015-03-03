@@ -31,10 +31,8 @@ import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
 import com.google.inject.Binder;
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
-import com.google.inject.util.Modules;
 
 /**
  * abstract base class for all code generators that want to generate code based
@@ -135,19 +133,17 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 	private Injector injector;
 
 	protected Injector createInjector(GeneratorEntry entry) {
-		return Guice.createInjector(createModule(entry));
+		Injector sequencerInjector = DomainRegistry.getDomainDescriptor(entry.getElementRef()).getDomainInjectorProvider().getSequencerInjector();
+		return sequencerInjector.createChildInjector(getChildInjectorModule(entry));
 	}
 
-	protected Module createModule(GeneratorEntry entry) {
-		Module defaultModule = DomainRegistry.getDomainDescriptor(entry.getElementRef()).getModuleProvider()
-				.getSequencerModule();
+	protected Module getChildInjectorModule(GeneratorEntry entry) {
 		Module bridgeModule = new Module() {
 			public void configure(Binder binder) {
 				binder.bind(IGeneratorBridge.class).toInstance(bridge);
 			}
 		};
-		defaultModule = Modules.override(defaultModule).with(bridgeModule);
-		return defaultModule;
+		return bridgeModule;
 	}
 
 	protected Injector getInjector(GeneratorEntry entry) {

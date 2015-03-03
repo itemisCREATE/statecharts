@@ -43,8 +43,8 @@ public class CppCodeGenerator extends GenericJavaBasedGenerator {
 	}
 
 	@Override
-	protected Module createModule(final GeneratorEntry entry) {
-		Module module = super.createModule(entry);
+	protected Module getChildInjectorModule(final GeneratorEntry entry) {
+		Module module = super.getChildInjectorModule(entry);
 		return Modules.override(module).with(new Module() {
 			public void configure(Binder binder) {
 				binder.bind(ICodegenTypeSystemAccess.class).to(
