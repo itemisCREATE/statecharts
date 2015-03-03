@@ -83,7 +83,6 @@ public class SCTUnitTestModels extends AbstractTestModelsUtil {
 	public static final String TRIFFER_GUARD_EXPRESSIONS = "TriggerGuardExpressions.sct";
 	public static final String TYPE_ALIAS = "TypeAlias.sct";
 	public static final String VALUED_EVENTS = "ValuedEvents.sct";
-	public static final String VARIABLE_INITIALIZATION = "VariableInitialization.sct";
 	
 	@Override
 	public String getModelDirectory() {
