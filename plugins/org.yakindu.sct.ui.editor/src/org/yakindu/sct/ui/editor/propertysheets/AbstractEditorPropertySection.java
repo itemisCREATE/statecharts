@@ -48,11 +48,10 @@ import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.views.properties.tabbed.TabbedPropertySheetPage;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
-import org.yakindu.sct.domain.extension.IDomainModuleProvider;
+import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.jface.fieldassist.CompletionProposalAdapter;
@@ -154,7 +153,7 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 		String domainId = SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral();
 		// Since the context object is not set when getInjector is called from
 		// createControls, we have to determine the active domain id via the
-		// current editor input. 
+		// current editor input.
 		if (editorInput instanceof IFileEditorInput) {
 			IFile file = ((IFileEditorInput) editorInput).getFile();
 			ResourceSet set = new ResourceSetImpl();
@@ -166,8 +165,8 @@ public abstract class AbstractEditorPropertySection extends AbstractModelerPrope
 			resource.unload();
 		}
 		DomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainId);
-		IDomainModuleProvider moduleProvider = domainDescriptor.getModuleProvider();
-		return Guice.createInjector(moduleProvider.getEmbeddedEditorModule(semanticTarget));
+		IDomainInjectorProvider injectorProvider = domainDescriptor.getDomainInjectorProvider();
+		return injectorProvider.getEmbeddedEditorInjector(semanticTarget);
 	}
 
 	public EObject getContextObject() {

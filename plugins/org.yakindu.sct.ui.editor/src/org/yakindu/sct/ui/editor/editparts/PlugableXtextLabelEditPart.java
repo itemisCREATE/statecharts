@@ -23,12 +23,11 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.viewers.ICellEditorValidator;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainModuleProvider;
+import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.model.sgraph.SpecificationElement;
 import org.yakindu.sct.ui.editor.DiagramActivator;
 import org.yakindu.sct.ui.editor.policies.EAttributeDirectEditPolicy;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import de.itemis.gmf.runtime.commons.parsers.StringAttributeParser;
@@ -69,9 +68,9 @@ public abstract class PlugableXtextLabelEditPart extends XtextLabelEditPart impl
 	}
 
 	private void init(String target) {
-		IDomainModuleProvider moduleProvider = DomainRegistry.getDomainDescriptor(resolveSemanticElement())
-				.getModuleProvider();
-		injector = Guice.createInjector(moduleProvider.getEmbeddedEditorModule(target));
+		IDomainInjectorProvider injectorProvider = DomainRegistry.getDomainDescriptor(resolveSemanticElement())
+				.getDomainInjectorProvider();
+		injector = injectorProvider.getEmbeddedEditorInjector(target);
 	}
 
 	@Override
