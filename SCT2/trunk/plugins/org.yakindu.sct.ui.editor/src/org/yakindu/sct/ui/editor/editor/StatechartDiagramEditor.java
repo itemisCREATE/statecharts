@@ -36,7 +36,7 @@ import org.eclipse.ui.help.IWorkbenchHelpSystem;
 import org.eclipse.ui.ide.IGotoMarker;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.yakindu.sct.domain.extension.DomainRegistry;
-import org.yakindu.sct.domain.extension.IDomainModuleProvider;
+import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -46,7 +46,6 @@ import org.yakindu.sct.ui.editor.partitioning.DiagramPartitioningUtil;
 import org.yakindu.sct.ui.editor.utils.HelpContextIds;
 import org.yakindu.sct.ui.editor.validation.SCTValidationJob;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 import de.itemis.xtext.utils.gmf.resource.DirtyStateListener;
@@ -107,9 +106,9 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		final IFile file = ((IFileEditorInput) getEditorInput()).getFile();
 		validationJob = new SCTValidationJob();
 		validationJob.setResource(getDiagram().eResource());
-		IDomainModuleProvider moduleProvider = DomainRegistry.getDomainDescriptor(getDiagram().getElement())
-				.getModuleProvider();
-		Injector injector = Guice.createInjector(moduleProvider.getEmbeddedEditorModule(Statechart.class.getName()));
+		IDomainInjectorProvider injectorProvider = DomainRegistry.getDomainDescriptor(getDiagram().getElement())
+				.getDomainInjectorProvider();
+		Injector injector = injectorProvider.getEmbeddedEditorInjector(Statechart.class.getName());
 		injector.injectMembers(validationJob);
 		validationJob.setRule(file);
 	}
