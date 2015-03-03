@@ -40,5 +40,9 @@ public class ValuedEventsTest extends AbstractExecutionFlowTest {
 		assertTrue(isActive("A"));
 		assertTrue(isActive("C"));
 		assertTrue(getInteger("myVar") == 42);
+		raiseEvent("IntegerEvent", 23);
+		interpreter.runCycle();
+		assertTrue(isActive("D"));
+		assertTrue(getInteger("myVar") == 23);
 	}
 }

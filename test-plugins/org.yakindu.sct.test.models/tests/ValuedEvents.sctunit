@@ -2,10 +2,16 @@ testgroup ValuedEvents for statechart ValuedEvents {
 	test valuedEventsTest {
 		
 		enter
-		
 		cycle
 		assert active(ValuedEvents.main_region.A)
 		assert active (ValuedEvents._region1.C)
-		assert myVar == 42 
+		assert myVar == 42
+		
+		raise IntegerEvent : 23
+		cycle
+		
+		assert active (ValuedEvents._region1.D)
+		assert myVar == 23
+		 
 	}
 }

@@ -43,5 +43,9 @@ public class ValuedEventsTest {
 		assertTrue(statemachine.isStateActive(State.main_region_A));
 		assertTrue(statemachine.isStateActive(State._region1_C));
 		assertTrue(statemachine.getMyVar() == 42);
+		statemachine.raiseIntegerEvent(23);
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State._region1_D));
+		assertTrue(statemachine.getMyVar() == 23);
 	}
 }

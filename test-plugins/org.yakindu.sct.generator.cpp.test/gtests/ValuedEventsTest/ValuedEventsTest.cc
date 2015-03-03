@@ -20,5 +20,9 @@ TEST(StatemachineTest, valuedEventsTest) {
 	EXPECT_TRUE(statechart->isActive(ValuedEvents::main_region_A));
 	EXPECT_TRUE(statechart->isActive(ValuedEvents::_region1_C));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myVar()== 42);
+	statechart->raise_integerEvent( 23);
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->isActive(ValuedEvents::_region1_D));
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_myVar()== 23);
 	delete statechart;
 }
