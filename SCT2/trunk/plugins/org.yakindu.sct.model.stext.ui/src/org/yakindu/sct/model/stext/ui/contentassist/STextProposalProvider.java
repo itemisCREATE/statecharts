@@ -66,10 +66,6 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		else if (contentAssistContext.getRootModel() instanceof SimpleScope) {
 			suppressKeywords.addAll(getKeywords(grammarAccess.getVariableDefinitionAccess().getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getEventDefinitionAccess().getGroup().eContents()));
-			// suppressKeywords.addAll(getKeywords(grammarAccess.getExitpointAccess()
-			// .getGroup().eContents()));
-			// suppressKeywords.addAll(getKeywords(grammarAccess.getEntrypointAccess()
-			// .getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getDirectionAccess().getAlternatives().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getOperationDefinitionAccess().getGroup().eContents()));
 		}
@@ -77,20 +73,12 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 		else if (contentAssistContext.getRootModel() instanceof StatechartSpecification) {
 			suppressKeywords.addAll(getKeywords(grammarAccess.getExitEventAccess().getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getEntryEventAccess().getGroup().eContents()));
-
-			// if
-			// (!atLeastOnePackageExistsInIndex(getSctResource(contentAssistContext.getRootModel())))
-			// {
-			// suppressKeywords.addAll(getKeywords(grammarAccess.getImportScopeAccess().getGroup().eContents()));
-			// }
 		}
 
 		EObject currentModel = contentAssistContext.getCurrentModel();
 		if (currentModel instanceof InterfaceScope) {
 			suppressKeywords.addAll(getKeywords(grammarAccess.getLocalReactionAccess().getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getAlwaysEventAccess().getGroup().eContents()));
-			// suppressKeywords.addAll(getKeywords(grammarAccess.getOnCycleEventAccess()
-			// .getGroup().eContents()));
 			suppressKeywords.addAll(getKeywords(grammarAccess.getTimeEventTypeAccess().getAlternatives().eContents()));
 			suppressKeywords.add(grammarAccess.getDirectionAccess().getLOCALLocalKeyword_0_0());
 		}
@@ -246,38 +234,4 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			return delegate.canAcceptMoreProposals();
 		}
 	}
-
-	// private boolean atLeastOnePackageExistsInIndex(Resource res) {
-	// IResourceDescriptions resourceDescriptions =
-	// resourceDescriptionsProvider.getResourceDescriptions(res);
-	// URI uri = res.getURI();
-	// IResourceDescription resourceDescription =
-	// resourceDescriptions.getResourceDescription(uri);
-	// for (IContainer container :
-	// containerManager.getVisibleContainers(resourceDescription,
-	// resourceDescriptions)) {
-	// final Iterable<IResourceDescription> currentDescriptions =
-	// container.getResourceDescriptions();
-	// for (IResourceDescription resDesc : currentDescriptions) {
-	// Iterable<IEObjectDescription> visisblePackages = resDesc
-	// .getExportedObjectsByType(TypesPackage.Literals.PACKAGE);
-	// if (!Iterables.isEmpty(visisblePackages)) {
-	// return true;
-	// }
-	// }
-	// }
-	// return false;
-	// }
-
-	// private Resource getSctResource(EObject context) {
-	// final ContextElementAdapter provider = (ContextElementAdapter)
-	// EcoreUtil.getExistingAdapter(
-	// context.eResource(), ContextElementAdapter.class);
-	// if (provider == null) {
-	// return context.eResource();
-	// } else {
-	// return provider.getElement().eResource();
-	// }
-	// }
-
 }
