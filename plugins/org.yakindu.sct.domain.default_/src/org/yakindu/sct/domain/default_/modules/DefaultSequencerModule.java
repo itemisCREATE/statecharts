@@ -17,8 +17,6 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.base.types.typesystem.DefaultTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
-import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
-import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.IModelSequencer;
 import org.yakindu.sct.model.sexec.transformation.ModelSequencer;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
@@ -57,10 +55,6 @@ public class DefaultSequencerModule extends AbstractGenericModule {
 	
 	public Class<? extends ITypeSystem> bindITypesystem(){
 		return DefaultTypeSystem.class;
-	}
-
-	public Class<? extends INamingService> bindINamingService() {
-		return DefaultNamingService.class;
 	}
 
 	public Class<? extends IResourceDescriptions> bindIResourceDescriptions() {

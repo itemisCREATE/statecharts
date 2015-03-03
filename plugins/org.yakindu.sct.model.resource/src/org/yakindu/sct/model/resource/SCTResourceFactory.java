@@ -11,8 +11,6 @@
 package org.yakindu.sct.model.resource;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -28,9 +26,7 @@ import org.yakindu.sct.domain.extension.DomainRegistry.DomainDescriptor;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 
-import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 
 /**
  * 
@@ -39,21 +35,12 @@ import com.google.inject.Module;
  */
 public class SCTResourceFactory extends XMIResourceFactoryImpl {
 
-	private Map<String, Injector> injectorCache;
-
-	public SCTResourceFactory() {
-		injectorCache = new HashMap<String, Injector>();
-	}
-
 	@Override
 	public Resource createResource(URI uri) {
 		String domainID = determineDomainID(uri);
 		DomainDescriptor domainDescriptor = DomainRegistry.getDomainDescriptor(domainID);
-		Module resourceModule = domainDescriptor.getModuleProvider().getResourceModule();
-		if (injectorCache.get(domainID) == null) {
-			injectorCache.put(domainID, Guice.createInjector(resourceModule));
-		}
-		Resource resource = injectorCache.get(domainID).getInstance(Resource.class);
+		Injector injector = domainDescriptor.getDomainInjectorProvider().getResourceInjector();
+		Resource resource = injector.getInstance(Resource.class);
 		ResourceSet set = new ResourceSetImpl();
 		set.getResources().add(resource);
 		resource.setURI(uri);

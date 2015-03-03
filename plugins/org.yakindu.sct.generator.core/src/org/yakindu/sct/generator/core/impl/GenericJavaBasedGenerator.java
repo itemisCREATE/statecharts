@@ -32,7 +32,6 @@ import org.yakindu.sct.model.sgen.FeatureParameterValue;
 import org.yakindu.sct.model.sgen.GeneratorEntry;
 import org.yakindu.sct.model.sgraph.Statechart;
 
-import com.google.inject.Guice;
 import com.google.inject.Module;
 import com.google.inject.util.Modules;
 
@@ -44,13 +43,8 @@ import com.google.inject.util.Modules;
 public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 
 	@Override
-	protected com.google.inject.Injector createInjector(GeneratorEntry entry) {
-		return Guice.createInjector(createModule(entry));
-	}
-
-	@Override
-	protected Module createModule(final GeneratorEntry entry) {
-		Module defaultModule = super.createModule(entry);
+	protected Module getChildInjectorModule(final GeneratorEntry entry) {
+		Module defaultModule = super.getChildInjectorModule(entry);
 
 		String overridingModuleClass = null;
 		FeatureConfiguration featureConfiguration = entry
@@ -71,17 +65,9 @@ public class GenericJavaBasedGenerator extends AbstractSExecModelGenerator {
 					defaultModule = Modules.override(defaultModule)
 							.with(module);
 				}
-			} catch (ClassNotFoundException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 				writeToConsole("Overriding module not found: "
-						+ overridingModuleClass);
-			} catch (InstantiationException e) {
-				e.printStackTrace();
-				writeToConsole("Module can't be instantiated : "
-						+ overridingModuleClass);
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-				writeToConsole("Access to module denied: "
 						+ overridingModuleClass);
 			}
 		}
