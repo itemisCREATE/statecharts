@@ -31,6 +31,8 @@ public class DefaultTypeValueProvider implements ITypeValueProvider {
 
 	@Override
 	public Object defaultValue(Type type) {
+		type = type.getOriginType();
+		
 		if (is(type, INTEGER)) {
 			return new Integer(0);
 		}
