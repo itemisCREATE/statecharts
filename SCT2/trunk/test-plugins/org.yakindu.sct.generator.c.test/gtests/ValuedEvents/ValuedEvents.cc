@@ -22,6 +22,10 @@ TEST(StatemachineTest, valuedEventsTest) {
 	EXPECT_TRUE(valuedEvents_isActive(&handle, ValuedEvents_main_region_A));
 	EXPECT_TRUE(valuedEvents_isActive(&handle, ValuedEvents__region1_C));
 	EXPECT_TRUE(valuedEventsIface_get_myVar(&handle) == 42);
+	valuedEventsIface_raise_integerEvent(&handle, 23);
+	valuedEvents_runCycle(&handle);
+	EXPECT_TRUE(valuedEvents_isActive(&handle, ValuedEvents__region1_D));
+	EXPECT_TRUE(valuedEventsIface_get_myVar(&handle) == 23);
 }
 
 		
