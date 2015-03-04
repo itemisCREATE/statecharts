@@ -43,7 +43,6 @@ import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.types.Enumerator
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.Type
-import org.yakindu.base.types.typesystem.DefaultTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
@@ -53,6 +52,7 @@ import org.yakindu.sct.simulation.core.sruntime.CompositeSlot
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext
 import org.yakindu.sct.simulation.core.sruntime.ExecutionEvent
 import org.yakindu.sct.simulation.core.sruntime.ExecutionVariable
+import org.yakindu.base.types.typesystem.GenericTypeSystem
 
 /**
  * 
@@ -92,30 +92,30 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object typeCast(Long value, Type type) {
-		if(ts.isSame(type, ts.getType(DefaultTypeSystem.INTEGER))) return value
-		if(ts.isSame(type, ts.getType(DefaultTypeSystem.REAL))) return Double.valueOf(value)
+		if(ts.isSame(type, ts.getType(GenericTypeSystem.INTEGER))) return value
+		if(ts.isSame(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Float value, Type type) {
-		if(ts.isSame(type, ts.getType(DefaultTypeSystem.INTEGER))) return value.longValue
-		if(ts.isSame(type, ts.getType(DefaultTypeSystem.REAL))) return Double.valueOf(value)
+		if(ts.isSame(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
+		if(ts.isSame(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Double value, Type type) {
-		if(ts.isSame(type, ts.getType(DefaultTypeSystem.INTEGER))) return value.longValue
-		if(ts.isSame(type, ts.getType(DefaultTypeSystem.REAL))) return Double.valueOf(value)
+		if(ts.isSame(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
+		if(ts.isSame(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Boolean value, Type type) {
-		if(ts.isSame(type, ts.getType(DefaultTypeSystem.BOOLEAN))) return value
+		if(ts.isSame(type, ts.getType(GenericTypeSystem.BOOLEAN))) return value
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(String value, Type type) {
-		if(ts.isSame(type, ts.getType(DefaultTypeSystem.STRING))) return value
+		if(ts.isSame(type, ts.getType(GenericTypeSystem.STRING))) return value
 		throw new IllegalArgumentException
 	}
 
