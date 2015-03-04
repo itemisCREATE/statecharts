@@ -16,7 +16,6 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
-import org.yakindu.base.types.typesystem.DefaultTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -130,14 +129,14 @@ class DefaultExecutionContextInitializer implements IExecutionContextInitializer
 	def dispatch ExecutionSlot create new ExecutionVariableImpl() transform(OperationDefinition op) {
 		it.name = op.fullyQualifiedName.lastSegment
 		it.fqName = op.fullyQualifiedName.toString
-		it.type = if(op.type != null) op.type else getType(DefaultTypeSystem.VOID)
+		it.type = if(op.type != null) op.type else getType(ITypeSystem.VOID)
 		it.value = it.type.defaultValue
 	}
 
 	def dispatch ExecutionSlot create new ExecutionEventImpl() transform(TimeEvent event) {
 		it.name = event.fullyQualifiedName.lastSegment
 		it.fqName = event.fullyQualifiedName.toString
-		it.type = getType(DefaultTypeSystem.INTEGER)
+		it.type = getType(ITypeSystem.INTEGER)
 		it.value = it.type.defaultValue
 	}
 

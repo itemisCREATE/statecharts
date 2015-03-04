@@ -19,7 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.expressions.expressions.Expression;
-import org.yakindu.base.types.typesystem.DefaultTypeSystem;
+import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.stext.test.util.AbstractSTextTest;
@@ -473,35 +473,35 @@ public class STextInterpreterTest extends AbstractSTextTest {
 		ExecutionVariable intVar = new ExecutionVariableImpl();
 		intVar.setName("intVar");
 		intVar.setFqName("intVar");
-		intVar.setType(typeSystem.getType(DefaultTypeSystem.INTEGER));
+		intVar.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
 		intVar.setValue(0);
 		context.getSlots().add(intVar);
 
 		ExecutionVariable boolVar = new ExecutionVariableImpl();
 		boolVar.setName("boolVar");
 		boolVar.setFqName("boolVar");
-		boolVar.setType(typeSystem.getType(DefaultTypeSystem.BOOLEAN));
+		boolVar.setType(typeSystem.getType(GenericTypeSystem.BOOLEAN));
 		boolVar.setValue(false);
 		context.getSlots().add(boolVar);
 
 		ExecutionVariable realVar = new ExecutionVariableImpl();
 		realVar.setName("realVar");
 		realVar.setFqName("realVar");
-		realVar.setType(typeSystem.getType(DefaultTypeSystem.REAL));
+		realVar.setType(typeSystem.getType(GenericTypeSystem.REAL));
 		realVar.setValue(0.0f);
 		context.getSlots().add(realVar);
 
 		ExecutionVariable stringVar = new ExecutionVariableImpl();
 		stringVar.setName("stringVar");
 		stringVar.setFqName("stringVar");
-		stringVar.setType(typeSystem.getType(DefaultTypeSystem.STRING));
+		stringVar.setType(typeSystem.getType(GenericTypeSystem.STRING));
 		stringVar.setValue("");
 		context.getSlots().add(stringVar);
 
 		ExecutionEvent event = new ExecutionEventImpl();
 		event.setName("abc");
 		event.setFqName("abc");
-		event.setType(typeSystem.getType(DefaultTypeSystem.INTEGER));
+		event.setType(typeSystem.getType(GenericTypeSystem.INTEGER));
 		context.getSlots().add(event);
 	}
 
