@@ -12,7 +12,7 @@ package org.yakindu.sct.domain.default_.modules;
 
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
-import org.yakindu.base.types.typesystem.DefaultTypeSystem;
+import org.yakindu.base.types.typesystem.GenericTypeSystem;
 import org.yakindu.base.types.typesystem.ITypeSystem;
 import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 
@@ -27,7 +27,7 @@ import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
 public class DefaultTypeSystemModule extends AbstractGenericModule {
 
 	public Class<? extends ITypeSystem> bindITypeSystem() {
-		return DefaultTypeSystem.class;
+		return GenericTypeSystem.class;
 	}
 
 	public Class<? extends ITypeSystemInferrer> bindITypeSystemInferrer() {

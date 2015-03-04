@@ -10,9 +10,9 @@
  */
 package org.yakindu.sct.model.stext.inferrer;
 
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.BOOLEAN;
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.INTEGER;
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.VOID;
+import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN;
+import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
+import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
@@ -28,7 +28,6 @@ import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
 import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.TimeEventSpec;
-import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
 import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**

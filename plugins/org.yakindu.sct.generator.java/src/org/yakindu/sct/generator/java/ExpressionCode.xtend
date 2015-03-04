@@ -36,7 +36,6 @@ import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryOperator
 import org.yakindu.base.types.Operation
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
-import org.yakindu.base.types.typesystem.DefaultTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
@@ -47,6 +46,7 @@ import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.base.types.typesystem.GenericTypeSystem
 
 class ExpressionCode {
 
@@ -138,7 +138,7 @@ class ExpressionCode {
 	}
 
 	def dispatch String code(LogicalRelationExpression expression) {
-		if (isSame(expression.leftOperand.inferType(null), getType(DefaultTypeSystem.STRING))) {
+		if (isSame(expression.leftOperand.inferType(null), getType(GenericTypeSystem.STRING))) {
 			expression.logicalString
 		} else
 			expression.leftOperand.code + expression.operator.code + expression.rightOperand.code;
