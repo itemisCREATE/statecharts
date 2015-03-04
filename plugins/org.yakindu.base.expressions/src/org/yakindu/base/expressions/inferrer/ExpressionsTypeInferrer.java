@@ -10,12 +10,12 @@
  */
 package org.yakindu.base.expressions.inferrer;
 
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.BOOLEAN;
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.INTEGER;
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.NULL;
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.REAL;
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.STRING;
-import static org.yakindu.base.types.typesystem.DefaultTypeSystem.VOID;
+import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN;
+import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
+import static org.yakindu.base.types.typesystem.ITypeSystem.NULL;
+import static org.yakindu.base.types.typesystem.ITypeSystem.REAL;
+import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
+import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.EcoreUtil2;

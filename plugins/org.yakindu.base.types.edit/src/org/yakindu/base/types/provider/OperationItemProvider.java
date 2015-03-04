@@ -12,10 +12,12 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
 
@@ -94,17 +96,22 @@ public class OperationItemProvider
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Operation)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Operation_type") :
-			getString("_UI_Operation_type") + " " + label;
+		Operation operation = (Operation)object;
+		StringBuilder builder = new StringBuilder(operation.getName());
+		builder.append("(");
+		EList<Parameter> parameters = operation.getParameters();
+		for (Parameter parameter : parameters) {
+			builder.append(parameter.getName());
+			builder.append(" : " );
+			builder.append(parameter.getType().getName());
+		}
+		builder.append(")");
+
+		return builder.toString();
 	}
 
 	/**

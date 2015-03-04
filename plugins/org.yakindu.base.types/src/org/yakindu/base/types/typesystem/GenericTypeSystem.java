@@ -18,14 +18,7 @@ import com.google.inject.Singleton;
  * 
  */
 @Singleton
-public class DefaultTypeSystem extends AbstractTypeSystem {
-
-	public static final String NULL = "null";
-	public static final String STRING = "string";
-	public static final String REAL = "real";
-	public static final String INTEGER = "integer";
-	public static final String BOOLEAN = "boolean";
-	public static final String VOID = "void";
+public class GenericTypeSystem extends AbstractTypeSystem {
 
 	@Override
 	protected void initBuiltInTypes() {

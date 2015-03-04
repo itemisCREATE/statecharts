@@ -24,8 +24,15 @@ import com.google.inject.ImplementedBy;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@ImplementedBy(DefaultTypeSystem.class)
+@ImplementedBy(GenericTypeSystem.class)
 public interface ITypeSystem {
+	
+	public static final String STRING = "string";
+	public static final String REAL = "real";
+	public static final String INTEGER = "integer";
+	public static final String BOOLEAN = "boolean";
+	public static final String VOID = "void";
+	public static final String NULL = "null";
 
 	public Collection<Type> getTypes(EObject context);
 

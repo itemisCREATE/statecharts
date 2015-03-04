@@ -42,7 +42,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected Map<Type, Type> conversionRegistry = new HashMap<Type, Type>();
 
 	protected abstract void initBuiltInTypes();
-
+	
 	protected Resource resource;
 
 	public AbstractTypeSystem() {
