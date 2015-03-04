@@ -12,7 +12,6 @@ package org.yakindu.sct.generator.java
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.generator.IFileSystemAccess
-import org.yakindu.base.types.typesystem.DefaultTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.Check
@@ -23,6 +22,7 @@ import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
+import org.yakindu.base.types.typesystem.GenericTypeSystem
 
 class Statemachine {
 	
@@ -96,7 +96,7 @@ class Statemachine {
 		«FOR event : flow.internalScopeEvents»
 		private boolean «event.symbol»;
 		
-		«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
+		«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 			private «event.type.targetLanguageName» «event.valueIdentifier»;
 		«ENDIF»
 		«ENDFOR»
@@ -313,12 +313,12 @@ class Statemachine {
 			
 			private boolean «event.symbol»;
 			
-			«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
+			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 				private «event.type.targetLanguageName» «event.valueIdentifier»;
 			«ENDIF»
 			
 			«IF event.direction == Direction::IN»
-				«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
+				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
 						«event.symbol» = true;
 						«event.valueIdentifier» = value;
@@ -343,7 +343,7 @@ class Statemachine {
 					return «event.symbol»;
 				}
 				
-				«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
+				«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					private void raise«event.name.asName»(«event.type.targetLanguageName» value) {
 						«event.symbol» = true;
 						«event.valueIdentifier» = value;
@@ -419,7 +419,7 @@ class Statemachine {
 	
 	def private internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
-			«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
+			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 				private void raise«event.name.asEscapedName»(«event.type.targetLanguageName» value) {
 					«event.valueIdentifier» = value;
 					«event.symbol» = true;
@@ -453,7 +453,7 @@ class Statemachine {
 			«var InterfaceScope scope = flow.defaultScope»
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
-					«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
+					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 					public void raise«event.name.asName»(«event.type.targetLanguageName» value) {
 						«scope.interfaceName.asEscapedIdentifier».raise«event.name.asName»(value);
 					}
@@ -467,7 +467,7 @@ class Statemachine {
 					public boolean isRaised«event.name.asName»() {
 						return «scope.interfaceName.asEscapedIdentifier».isRaised«event.name.asName»();
 					}
-					«IF event.type != null && !isSame(event.type, getType(DefaultTypeSystem.VOID))»
+					«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 						public «event.type.targetLanguageName» get«event.name.asName»Value() {
 							return «scope.interfaceName.asEscapedIdentifier».get«event.name.asName»Value();
 						}
