@@ -16,7 +16,8 @@ Require-Bundle: org.eclipse.ui,
  com.google.guava;bundle-version="10.0.1",
  org.eclipse.gmf.runtime.notation;bundle-version="1.7.0",
  org.yakindu.sct.model.sgraph;bundle-version="2.1.1",
- org.eclipse.emf.compare.diagram
+ org.eclipse.emf.compare.diagram,
+ org.eclipse.emf.compare.edit;bundle-version="4.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: statecharts.org
