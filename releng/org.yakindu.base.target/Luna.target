@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="Luna (SCT)" sequenceNumber="22">
+<?pde version="3.8"?><target name="Luna (SCT)" sequenceNumber="24">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.platform.ide" version="4.4.1.M20140925-0400"/>
+<unit id="org.eclipse.platform.ide" version="4.4.2.M20150204-1700"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.4"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.gmf.feature.group" version="1.8.1.201408201453"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="2.7.2.v201409160908"/>
-<unit id="org.eclipse.jdt.feature.group" version="3.10.0.v20140925-0400"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.10.1.v20140901-1055"/>
-<unit id="org.eclipse.emf.compare.source.feature.group" version="3.0.1.201408191310"/>
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.7.3.v201411190455"/>
+<unit id="org.eclipse.jdt.feature.group" version="3.10.1.v20150204-1700"/>
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.10.2.v20150123-0452"/>
+<unit id="org.eclipse.emf.compare.source.feature.group" version="3.0.2.201501201328"/>
 <unit id="org.eclipse.gmf.runtime.notation.sdk.feature.group" version="1.8.0.201405281433"/>
-<unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="3.0.1.201408191310"/>
-<unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.1.v20140910-1354"/>
-<unit id="org.eclipse.epp.mpc.feature.group" version="1.3.1.v20140908-1651"/>
+<unit id="org.eclipse.emf.compare.diagram.gmf.feature.group" version="3.0.2.201501201328"/>
+<unit id="org.eclipse.uml2.sdk.feature.group" version="5.0.2.v20150202-0947"/>
+<unit id="org.eclipse.epp.mpc.feature.group" version="1.3.2.v20150218-2039"/>
+<unit id="org.eclipse.cdt.sdk.feature.group" version="8.6.0.201502131403"/>
 <repository location="http://download.eclipse.org/releases/luna"/>
 </location>
 </locations>
