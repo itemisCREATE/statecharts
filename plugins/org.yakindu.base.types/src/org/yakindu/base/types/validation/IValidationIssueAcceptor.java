@@ -12,6 +12,7 @@ package org.yakindu.base.types.validation;
 
 import java.util.List;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ValidationIssue.Severity;
 
@@ -32,19 +33,21 @@ public interface IValidationIssueAcceptor {
 
 		private Severity severity;
 		private String message;
+		private String issueCode;
 		private EObject target;
 
-		public ValidationIssue(Severity severity, String message) {
-			super();
-			this.severity = severity;
-			this.message = message;
+		public ValidationIssue(Severity severity, String message, String issueCode) {
+			this(severity, message, null, issueCode);
 		}
 
-		public ValidationIssue(Severity severity, String message, EObject target) {
-			super();
+		public ValidationIssue(Severity severity, String message, EObject target, String issueCode) {
+			Assert.isNotNull(message);
+			Assert.isNotNull(issueCode);
+			Assert.isNotNull(severity);
 			this.severity = severity;
 			this.message = message;
 			this.target = target;
+			this.issueCode = issueCode;
 		}
 
 		public Severity getSeverity() {
@@ -71,9 +74,14 @@ public interface IValidationIssueAcceptor {
 			this.target = target;
 		}
 
+		public String getIssueCode() {
+			return issueCode;
+		}
+
 		@Override
 		public String toString() {
-			return "ValidationIssue [severity=" + severity + ", message=" + message + ", target=" + target + "]";
+			return "ValidationIssue [severity=" + severity + ", message=" + message + ", issueCode=" + issueCode
+					+ ", target=" + target + "]";
 		}
 
 	}

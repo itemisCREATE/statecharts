@@ -39,7 +39,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	private static final String ASSERT_NOT_TYPE = "Expected type is not %s.";
 	private static final String ASSERT_SAME = "Expected types %s and %s are same.";
 	private static final String ASSERT_COMPATIBLE = "Incompatible types %s and %s.";
-
+	
 	private static final String METHOD_NAME = "infer";
 
 	@Inject
@@ -67,7 +67,6 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	public final Type inferType(EObject object, IValidationIssueAcceptor acceptor) {
 		initTypeCache(object);
 		this.acceptor = (acceptor != null ? acceptor : new ListBasedValidationIssueAcceptor());
-		info("infering type for object " + object);
 		Type result = inferTypeDispatch(object);
 		typeCache.invalidateAll();
 		return result;
@@ -105,9 +104,9 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 					@Override
 					public Object handle(Object[] params, Throwable throwable) {
 						if (throwable instanceof NoSuchMethodError) {
-							warning(String.format(NO_INFER_METHOD, Arrays.toString(params)));
+							warning(String.format(NO_INFER_METHOD, Arrays.toString(params)), NO_INFER_METHOD_CODE);
 						} else {
-							error(throwable.getMessage());
+							error(throwable.getMessage(), EXCEPTION_CODE);
 						}
 						return null;
 					}
@@ -124,7 +123,8 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 			}
 		}
 		if (!same) {
-			error(msg != null ? msg : String.format(ASSERT_IS_TYPE, Arrays.toString(candidates), currentType));
+			error(msg != null ? msg : String.format(ASSERT_IS_TYPE, Arrays.toString(candidates), currentType),
+					IS_TYPE_CODE);
 		}
 	}
 
@@ -133,7 +133,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 			return;
 		for (Type type : candidates) {
 			if (registry.isSame(currentType, type)) {
-				error(msg != null ? msg : String.format(ASSERT_NOT_TYPE, currentType));
+				error(msg != null ? msg : String.format(ASSERT_NOT_TYPE, currentType), NOT_TYPE_CODE);
 			}
 		}
 	}
@@ -142,7 +142,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		if (type1 == null || type2 == null)
 			return;
 		if (!registry.isSame(type1, type2)) {
-			error(msg != null ? msg : String.format(ASSERT_SAME, type1, type2));
+			error(msg != null ? msg : String.format(ASSERT_SAME, type1, type2), NOT_SAME_CODE);
 		}
 	}
 
@@ -150,7 +150,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		if (type1 == null || type2 == null)
 			return;
 		if (!registry.haveCommonType(type1, type2)) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, type1, type2));
+			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, type1, type2), NOT_COMPATIBLE_CODE);
 		}
 	}
 
@@ -158,19 +158,19 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 		if (varType == null || valueType == null)
 			return;
 		if (!registry.isSuperType(valueType, varType)) {
-			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, varType, valueType));
+			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, varType, valueType), NOT_COMPATIBLE_CODE);
 		}
 	}
 
-	protected void info(String msg) {
-		acceptor.accept(new ValidationIssue(Severity.INFO, msg));
+	protected void info(String msg, String issueCode) {
+		acceptor.accept(new ValidationIssue(Severity.INFO, msg, issueCode));
 	}
 
-	protected void warning(String msg) {
-		acceptor.accept(new ValidationIssue(Severity.WARNING, msg));
+	protected void warning(String msg, String issueCode) {
+		acceptor.accept(new ValidationIssue(Severity.WARNING, msg, issueCode));
 	}
 
-	protected void error(String msg) {
-		acceptor.accept(new ValidationIssue(Severity.ERROR, msg));
+	protected void error(String msg, String issueCode) {
+		acceptor.accept(new ValidationIssue(Severity.ERROR, msg, issueCode));
 	}
 }

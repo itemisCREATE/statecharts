@@ -23,6 +23,13 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(ITypeSystemInferrer.NullTypeInferrer.class)
 public interface ITypeSystemInferrer {
 
+	public static final String EXCEPTION_CODE = "RuntimeExcpetion";
+	public static final String NO_INFER_METHOD_CODE = "NoInferMethod";
+	public static final String IS_TYPE_CODE = "NotExpectedType.";
+	public static final String NOT_TYPE_CODE = "NotType";
+	public static final String NOT_SAME_CODE = "NotSame";
+	public static final String NOT_COMPATIBLE_CODE = "IncompatibleTypes";
+
 	public Type inferType(EObject object, IValidationIssueAcceptor acceptor);
 
 	public static class NullTypeInferrer implements ITypeSystemInferrer {
