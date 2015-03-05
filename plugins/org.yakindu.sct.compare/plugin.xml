@@ -25,4 +25,13 @@
          </nsURI>
       </processor>
    </extension>
+  <extension
+         point="org.eclipse.emf.compare.edit.adapterFactory">
+      <factory
+            class="org.yakindu.sct.compare.labelprovider.SCTCompareAdapterFactory"
+              supportedTypes="org.eclipse.emf.edit.provider.IItemLabelProvider"
+            ranking="11"
+            uri="http://www.eclipse.org/emf/compare">
+      </factory>
+</extension>
 </plugin>
