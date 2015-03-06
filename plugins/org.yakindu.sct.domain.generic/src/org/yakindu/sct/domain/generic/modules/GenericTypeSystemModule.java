@@ -24,7 +24,7 @@ import org.yakindu.sct.model.stext.inferrer.STextTypeInferrer;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class DefaultTypeSystemModule extends AbstractGenericModule {
+public class GenericTypeSystemModule extends AbstractGenericModule {
 
 	public Class<? extends ITypeSystem> bindITypeSystem() {
 		return GenericTypeSystem.class;

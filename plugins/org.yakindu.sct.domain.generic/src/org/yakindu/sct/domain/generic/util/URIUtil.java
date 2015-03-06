@@ -1,4 +1,4 @@
-package de.yakindu.sct.domain.generic.util;
+package org.yakindu.sct.domain.generic.util;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;

@@ -51,7 +51,7 @@ public class DefaultSimulationModule extends AbstractGenericModule {
 
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(Boolean.class).annotatedWith(Names.named(DefaultSequencerModule.ADD_TRACES)).toInstance(Boolean.TRUE);
+		binder.bind(Boolean.class).annotatedWith(Names.named(GenericSequencerModule.ADD_TRACES)).toInstance(Boolean.TRUE);
 	}
 
 	public Class<? extends IExecutionContextInitializer> bindIExecutionContextInitializer() {

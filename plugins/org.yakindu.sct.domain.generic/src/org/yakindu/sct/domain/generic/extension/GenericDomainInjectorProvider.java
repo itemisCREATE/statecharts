@@ -16,9 +16,9 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
-import org.yakindu.sct.domain.generic.modules.DefaultSequencerModule;
+import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.domain.generic.modules.DefaultSimulationModule;
-import org.yakindu.sct.domain.generic.modules.DefaultTypeSystemModule;
+import org.yakindu.sct.domain.generic.modules.GenericTypeSystemModule;
 import org.yakindu.sct.domain.generic.modules.EntryRuleRuntimeModule;
 import org.yakindu.sct.domain.generic.modules.EntryRuleUIModule;
 import org.yakindu.sct.model.sgraph.State;
@@ -41,7 +41,7 @@ import com.google.inject.util.Modules;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class DefaultDomainInjectorProvider implements IDomainInjectorProvider {
+public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 
 	private static final Map<String, Class<? extends EObject>> semanticTargetToRuleMap = new HashMap<String, Class<? extends EObject>>();
 
@@ -69,7 +69,7 @@ public class DefaultDomainInjectorProvider implements IDomainInjectorProvider {
 	}
 
 	protected Module getTypeSystemModule() {
-		return new DefaultTypeSystemModule();
+		return new GenericTypeSystemModule();
 	}
 
 	protected Module getSimulationModule() {
@@ -77,7 +77,7 @@ public class DefaultDomainInjectorProvider implements IDomainInjectorProvider {
 	}
 
 	protected Module getSequencerModule() {
-		return new DefaultSequencerModule();
+		return new GenericSequencerModule();
 	}
 
 	protected Module getResourceModule() {
