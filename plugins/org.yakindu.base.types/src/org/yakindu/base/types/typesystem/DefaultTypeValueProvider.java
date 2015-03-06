@@ -14,6 +14,7 @@ import static org.yakindu.base.types.typesystem.ITypeSystem.BOOLEAN;
 import static org.yakindu.base.types.typesystem.ITypeSystem.INTEGER;
 import static org.yakindu.base.types.typesystem.ITypeSystem.REAL;
 import static org.yakindu.base.types.typesystem.ITypeSystem.STRING;
+import static org.yakindu.base.types.typesystem.ITypeSystem.VOID;
 
 import org.yakindu.base.types.Type;
 
@@ -32,7 +33,9 @@ public class DefaultTypeValueProvider implements ITypeValueProvider {
 	@Override
 	public Object defaultValue(Type type) {
 		type = type.getOriginType();
-		
+		if (is(type, VOID)) {
+			return null;
+		}
 		if (is(type, INTEGER)) {
 			return new Integer(0);
 		}
