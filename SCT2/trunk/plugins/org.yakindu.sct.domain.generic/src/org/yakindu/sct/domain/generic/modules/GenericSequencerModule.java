@@ -32,7 +32,7 @@ import com.google.inject.name.Names;
  *         AbstractGenericModule to allow subclasses to overwrite bindings
  * @author Markus Mühlbrandt - Added binding to DefaultNamingService
  */
-public class DefaultSequencerModule extends AbstractGenericModule {
+public class GenericSequencerModule extends AbstractGenericModule {
 
 	public static final String ADD_TRACES = "ADD_TRACES";
 
