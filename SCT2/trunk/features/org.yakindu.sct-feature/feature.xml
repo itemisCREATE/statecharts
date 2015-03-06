@@ -270,7 +270,7 @@
          unpack="false"/>
 
    <plugin
-         id="org.yakindu.sct.domain.default_"
+         id="org.yakindu.sct.domain.generic"
          download-size="0"
          install-size="0"
          version="0.0.0"
