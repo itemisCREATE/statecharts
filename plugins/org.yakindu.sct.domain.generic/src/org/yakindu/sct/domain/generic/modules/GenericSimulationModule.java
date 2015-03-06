@@ -47,7 +47,7 @@ import com.google.inject.name.Names;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class DefaultSimulationModule extends AbstractGenericModule {
+public class GenericSimulationModule extends AbstractGenericModule {
 
 	public void configure(Binder binder) {
 		super.configure(binder);
