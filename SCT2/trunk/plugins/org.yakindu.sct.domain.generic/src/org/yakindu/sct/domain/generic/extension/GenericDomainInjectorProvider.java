@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
-import org.yakindu.sct.domain.generic.modules.DefaultSimulationModule;
+import org.yakindu.sct.domain.generic.modules.GenericSimulationModule;
 import org.yakindu.sct.domain.generic.modules.GenericTypeSystemModule;
 import org.yakindu.sct.domain.generic.modules.EntryRuleRuntimeModule;
 import org.yakindu.sct.domain.generic.modules.EntryRuleUIModule;
@@ -73,7 +73,7 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	}
 
 	protected Module getSimulationModule() {
-		return new DefaultSimulationModule();
+		return new GenericSimulationModule();
 	}
 
 	protected Module getSequencerModule() {
