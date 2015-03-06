@@ -8,19 +8,19 @@
  * 	committers of YAKINDU - initial API and implementation
  * 
  */
-package org.yakindu.sct.domain.default_.extension;
+package org.yakindu.sct.domain.generic.extension;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
-import org.yakindu.sct.domain.default_.modules.DefaultSequencerModule;
-import org.yakindu.sct.domain.default_.modules.DefaultSimulationModule;
-import org.yakindu.sct.domain.default_.modules.DefaultTypeSystemModule;
-import org.yakindu.sct.domain.default_.modules.EntryRuleRuntimeModule;
-import org.yakindu.sct.domain.default_.modules.EntryRuleUIModule;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
+import org.yakindu.sct.domain.generic.modules.DefaultSequencerModule;
+import org.yakindu.sct.domain.generic.modules.DefaultSimulationModule;
+import org.yakindu.sct.domain.generic.modules.DefaultTypeSystemModule;
+import org.yakindu.sct.domain.generic.modules.EntryRuleRuntimeModule;
+import org.yakindu.sct.domain.generic.modules.EntryRuleUIModule;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
