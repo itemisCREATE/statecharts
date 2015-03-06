@@ -1,7 +1,7 @@
 package org.yakindu.sct.model.sexec.transformation.test;
 
 import org.junit.Before;
-import org.yakindu.sct.domain.default_.modules.DefaultSequencerModule;
+import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.model.sexec.naming.DefaultNamingService;
 import org.yakindu.sct.model.sexec.naming.INamingService;
 import org.yakindu.sct.model.sexec.transformation.BehaviorMapping;
@@ -33,7 +33,7 @@ public class ModelSequencerTest extends Assert {
 
 	@Before
 	public void setup() {
-		Module m = Modules.override(new DefaultSequencerModule()).with(new Module(){
+		Module m = Modules.override(new GenericSequencerModule()).with(new Module(){
 			@Override
 			public void configure(Binder binder) {
 				binder.bind(INamingService.class).to(DefaultNamingService.class);
