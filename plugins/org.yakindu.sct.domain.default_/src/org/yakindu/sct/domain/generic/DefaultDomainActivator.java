@@ -1,4 +1,4 @@
-package org.yakindu.sct.domain.default_;
+package org.yakindu.sct.domain.generic;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

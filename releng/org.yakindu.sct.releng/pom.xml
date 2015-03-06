@@ -478,7 +478,7 @@
 		<module>../org.yakindu.base.target</module>
 		<module>../org.yakindu.sct.commons</module>
 		<module>../org.yakindu.sct.domain</module>
-		<module>../org.yakindu.sct.domain.default_</module>
+		<module>../org.yakindu.sct.domain.generic</module>
 		<module>../org.yakindu.sct.doc.user</module>
 		<module>../org.yakindu.sct.examples.trafficlight</module>
 		<module>../org.yakindu.sct.generator.core</module>

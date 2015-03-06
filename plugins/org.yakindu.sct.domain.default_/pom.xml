@@ -9,7 +9,7 @@
 		<version>2.4.1-SNAPSHOT</version>
 		<relativePath>../org.yakindu.sct.releng/pom.xml</relativePath>
 	</parent>
-	<artifactId>org.yakindu.sct.domain.default_</artifactId>
+	<artifactId>org.yakindu.sct.domain.generic</artifactId>
 	<groupId>org.yakindu.sct.plugins</groupId>
 	<packaging>eclipse-plugin</packaging>
 </project>
