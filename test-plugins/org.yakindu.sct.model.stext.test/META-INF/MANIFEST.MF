@@ -20,7 +20,7 @@ Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.yakindu.sct.simulation.core.sexec;bundle-version="2.1.2",
  org.yakindu.sct.simulation.core;bundle-version="2.1.2",
  org.yakindu.base.expressions;bundle-version="1.0.0",
- org.yakindu.sct.domain.default_;bundle-version="1.0.0"
+ org.yakindu.sct.domain.generic;bundle-version="1.0.0"
 Export-Package: org.yakindu.sct.model.stext.test,
  org.yakindu.sct.model.stext.test.util,
  org.yakindu.sct.model.stext
