@@ -18,7 +18,7 @@ import com.google.inject.ImplementedBy;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-@ImplementedBy(DefaultTypeValueProvider.class)
+@ImplementedBy(GenericTypeValueProvider.class)
 public interface ITypeValueProvider {
 
 	public Object defaultValue(Type type);

@@ -29,7 +29,7 @@ public class GenericTypeSystem extends AbstractTypeSystem {
 		declarePrimitive(VOID);
 		declarePrimitive(NULL);
 
-		declareSuperType(getType(REAL), getType(INTEGER));
+		declareSuperType(getType(INTEGER), getType(REAL));
 	}
 
 }

@@ -25,7 +25,7 @@ import com.google.inject.Inject;
  * @author andreas muelder - Initial contribution and API
  * 
  */
-public class DefaultTypeValueProvider implements ITypeValueProvider {
+public class GenericTypeValueProvider implements ITypeValueProvider {
 
 	@Inject
 	private ITypeSystem typeSystem;

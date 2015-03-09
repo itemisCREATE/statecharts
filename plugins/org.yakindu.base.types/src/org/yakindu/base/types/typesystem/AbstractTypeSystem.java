@@ -122,7 +122,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	}
 
 	public void declareSuperType(Type superType, Type subType) {
-		extendsRegistry.put(subType, superType);
+		extendsRegistry.put(superType, subType);
 	}
 
 	public void declareConversion(Type baseType, Type targetType) {
