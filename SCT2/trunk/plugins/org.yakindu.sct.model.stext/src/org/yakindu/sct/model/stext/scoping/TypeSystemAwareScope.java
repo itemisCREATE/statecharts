@@ -48,7 +48,7 @@ public class TypeSystemAwareScope extends AbstractScope {
 	protected Iterable<IEObjectDescription> getAllLocalElements() {
 		List<IEObjectDescription> result = Lists.newArrayList();
 		Iterable<IEObjectDescription> iterable = Scopes.scopedElementsFor(
-				EcoreUtil2.<EObject> getObjectsByType(typeSystem.getTypes(context), eClass),
+				EcoreUtil2.<EObject> getObjectsByType(typeSystem.getConcreteTypes(context), eClass),
 				qualifiedNameProvider);
 		Iterables.addAll(result, iterable);
 		return result;

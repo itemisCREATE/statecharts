@@ -35,6 +35,8 @@ import de.itemis.xtext.utils.jface.viewers.ContextElementAdapter;
  */
 public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 
+	private static final String DOMAIN_ID = "domainId";
+
 	@Inject
 	private ITypeSystem typeSystem;
 
@@ -46,9 +48,18 @@ public class STextGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	public IScope getScope(Resource context, EReference reference, Predicate<IEObjectDescription> filter) {
 		IScope parentScope = super.getScope(context, reference, filter);
 		parentScope = filterExternalDeclarations(context, parentScope);
+		final Statechart statechart = getStatechart(context);
 		parentScope = new TypeSystemAwareScope(parentScope, typeSystem, qualifiedNameProvider,
-				reference.getEReferenceType(), getStatechart(context));
-		return parentScope;
+				reference.getEReferenceType(), statechart);
+		return new FilteringScope(parentScope, new Predicate<IEObjectDescription>() {
+			@Override
+			public boolean apply(IEObjectDescription input) {
+				String userData = input.getUserData(DOMAIN_ID);
+				if (userData == null)
+					return true;
+				return statechart.getDomainID().equals(userData);
+			}
+		});
 	}
 
 	private Statechart getStatechart(Resource context) {
