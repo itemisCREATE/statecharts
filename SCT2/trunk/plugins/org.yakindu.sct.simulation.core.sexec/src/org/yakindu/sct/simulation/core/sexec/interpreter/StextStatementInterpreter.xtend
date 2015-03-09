@@ -92,30 +92,30 @@ class StextStatementInterpreter extends AbstractStatementInterpreter {
 	}
 
 	def dispatch Object typeCast(Long value, Type type) {
-		if(ts.isSame(type, ts.getType(GenericTypeSystem.INTEGER))) return value
-		if(ts.isSame(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Float value, Type type) {
-		if(ts.isSame(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
-		if(ts.isSame(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Double value, Type type) {
-		if(ts.isSame(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
-		if(ts.isSame(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.INTEGER))) return value.longValue
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.REAL))) return Double.valueOf(value)
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(Boolean value, Type type) {
-		if(ts.isSame(type, ts.getType(GenericTypeSystem.BOOLEAN))) return value
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.BOOLEAN))) return value
 		throw new IllegalArgumentException
 	}
 
 	def dispatch Object typeCast(String value, Type type) {
-		if(ts.isSame(type, ts.getType(GenericTypeSystem.STRING))) return value
+		if(ts.isSuperType(type, ts.getType(GenericTypeSystem.STRING))) return value
 		throw new IllegalArgumentException
 	}
 
