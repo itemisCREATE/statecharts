@@ -42,7 +42,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 	protected Map<Type, Type> conversionRegistry = new HashMap<Type, Type>();
 
 	protected abstract void initBuiltInTypes();
-	
+
 	protected Resource resource;
 
 	public AbstractTypeSystem() {
@@ -58,7 +58,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 
 	public Type getType(String type) {
 		Type result = typeRegistry.get(type);
-		if(result == null){
+		if (result == null) {
 			System.err.println("Could not find type " + type);
 		}
 		return result;
@@ -70,6 +70,7 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 			if (isSame(type, entry.getKey())) {
 				return entry.getValue();
 			}
+
 		}
 		return null;
 	}
@@ -121,8 +122,8 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		}
 	}
 
-	public void declareSuperType(Type superType, Type subType) {
-		extendsRegistry.put(superType, subType);
+	public void declareSuperType(Type subType, Type superType) {
+		extendsRegistry.put(subType, superType);
 	}
 
 	public void declareConversion(Type baseType, Type targetType) {

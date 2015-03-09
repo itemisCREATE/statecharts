@@ -217,7 +217,7 @@ public class ExpressionsTypeInferrer extends AbstractTypeSystemInferrer implemen
 			for (int i = 0; i < parameters.size(); i++) {
 				Type type1 = inferTypeDispatch(parameters.get(i));
 				Type type2 = inferTypeDispatch(args.get(i));
-				assertCompatible(type1, type2, String.format(INCOMPATIBLE_TYPES, type1, type2));
+				assertCompatible(type2, type1, String.format(INCOMPATIBLE_TYPES, type2, type1));
 			}
 		}
 	}

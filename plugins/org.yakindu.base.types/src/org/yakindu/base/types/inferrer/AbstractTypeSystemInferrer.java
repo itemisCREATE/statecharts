@@ -157,7 +157,7 @@ public abstract class AbstractTypeSystemInferrer implements ITypeSystemInferrer 
 	protected void assertAssignable(Type varType, Type valueType, String msg) {
 		if (varType == null || valueType == null)
 			return;
-		if (!registry.isSuperType(valueType, varType)) {
+		if (!registry.isSuperType(varType, valueType)) {
 			error(msg != null ? msg : String.format(ASSERT_COMPATIBLE, varType, valueType), NOT_COMPATIBLE_CODE);
 		}
 	}
