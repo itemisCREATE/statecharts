@@ -35,9 +35,11 @@ public interface ITypeSystem {
 	public static final String NULL = "null";
 
 	public Collection<Type> getTypes(EObject context);
+	
+	public Collection<Type> getConcreteTypes(EObject context);
 
 	public Type getType(String name);
-
+	
 	public boolean isSame(Type type1, Type type2);
 
 	public Type getCommonType(Type type1, Type type2);

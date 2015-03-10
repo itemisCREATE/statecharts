@@ -101,6 +101,15 @@ public abstract class AbstractTypeSystem implements ITypeSystem {
 		return Collections.unmodifiableCollection(typeRegistry.values());
 	}
 
+	public Collection<Type> getConcreteTypes(EObject context) {
+		List<Type> result = new ArrayList<Type>();
+		for (Type type : getTypes(context)) {
+			if (!type.isAbstract())
+				result.add(type);
+		}
+		return result;
+	}
+
 	protected Type declarePrimitive(String name) {
 		PrimitiveType primitive = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitive.setName(name);
