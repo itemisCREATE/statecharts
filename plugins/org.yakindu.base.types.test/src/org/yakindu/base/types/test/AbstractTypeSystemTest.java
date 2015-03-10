@@ -47,11 +47,11 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		declareType(superType, SUPER_TYPE);
 		subType = createPrimitive(SUB_TYPE);
 		declareType(subType, SUB_TYPE);
-		declareSuperType(superType, subType);
+		declareSuperType(subType, superType);
 		// SubType2 extends Supertype
 		subType2 = createPrimitive(SUB_TYPE2);
 		declareType(subType2, SUB_TYPE2);
-		declareSuperType(superType, subType2);
+		declareSuperType(subType2,superType);
 		// SimpleType
 		simpleType = createPrimitive(SIMPLE_TYPE);
 		declareType(simpleType, SIMPLE_TYPE);
@@ -59,7 +59,7 @@ public class AbstractTypeSystemTest extends AbstractTypeSystem {
 		conversionType = createPrimitive(CONVERSION_TYPE);
 		declareConversion(simpleType, conversionType);
 		conversionSubType = createPrimitive(CONVERSION_SUB_TYPE);
-		declareSuperType(conversionType, conversionSubType);
+		declareSuperType(conversionSubType, conversionType);
 
 	}
 
