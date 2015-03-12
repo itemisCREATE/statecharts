@@ -39,13 +39,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.Event;
+import org.yakindu.base.types.TypedElement;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 
@@ -58,8 +58,6 @@ import com.google.common.base.Predicates;
  * 
  */
 public class ContextPredicateProvider {
-
-	public static final String IS_COMPLEX_TYPE = "IS_COMPLEX_TYPE";
 
 	static class TypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
@@ -83,18 +81,13 @@ public class ContextPredicateProvider {
 			return TypesPackage.Literals.EVENT.isSuperTypeOf(input.getEClass()) || isComplexTypeVariable(input);
 		}
 
-		/**
-		 * {@link ComplexType} variables may have properties of type
-		 * {@link Event} So we have to made them visible. Since we do not want
-		 * to resolve proxies here, contributors of Complex Types have to
-		 * register an {@link IDefaultResourceDescriptionStrategy} that adds the
-		 * user data boolean flag.
-		 */
 		protected boolean isComplexTypeVariable(IEObjectDescription input) {
 			if (StextPackage.Literals.VARIABLE_DEFINITION.isSuperTypeOf(input.getEClass())) {
-				return Boolean.parseBoolean(input.getUserData(IS_COMPLEX_TYPE));
+				TypedElement definition = (TypedElement) input.getEObjectOrProxy();
+				EObject element = (EObject) definition.eGet(TypesPackage.Literals.TYPED_ELEMENT__TYPE, false);
+				return (!element.eIsProxy() && definition.getType() instanceof ComplexType);
 			}
-			return false;
+			return true;
 		}
 	}
 
