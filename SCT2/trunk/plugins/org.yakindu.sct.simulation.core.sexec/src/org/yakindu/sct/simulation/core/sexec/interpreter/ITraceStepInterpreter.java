@@ -13,11 +13,14 @@ package org.yakindu.sct.simulation.core.sexec.interpreter;
 import org.yakindu.sct.model.sexec.Trace;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * 
  * @author andreas muelder - Initial contribution and API
  * 
  */
+@ImplementedBy(DefaultTraceStepInterpreter.class)
 public interface ITraceStepInterpreter {
 
 	public void evaluate(Trace trace, ExecutionContext context);

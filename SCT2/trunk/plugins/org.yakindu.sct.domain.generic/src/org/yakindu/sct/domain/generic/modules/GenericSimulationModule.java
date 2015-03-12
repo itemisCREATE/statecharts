@@ -26,12 +26,10 @@ import org.yakindu.sct.simulation.core.sexec.container.IExecutionContextInitiali
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultTimingService;
-import org.yakindu.sct.simulation.core.sexec.interpreter.DefaultTraceStepInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IExecutionFlowInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.IStatementInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.ITimingService;
-import org.yakindu.sct.simulation.core.sexec.interpreter.ITraceStepInterpreter;
 import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
 import org.yakindu.sct.simulation.core.sexec.interpreter.StextStatementInterpreter;
 import org.yakindu.sct.simulation.core.sruntime.ExecutionContext;
@@ -60,10 +58,6 @@ public class GenericSimulationModule extends AbstractGenericModule {
 
 	public Class<? extends ISimulationEngineFactory> bindISimulationEngineFactory() {
 		return DefaultSimulationEngineFactory.class;
-	}
-
-	public Class<? extends ITraceStepInterpreter> bindITraceStepInterpreter() {
-		return DefaultTraceStepInterpreter.class;
 	}
 
 	public Class<? extends IModelSequencer> bindIModelSequencer() {

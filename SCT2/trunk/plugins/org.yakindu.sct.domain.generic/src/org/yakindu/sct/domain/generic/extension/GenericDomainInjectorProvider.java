@@ -16,15 +16,16 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.yakindu.sct.domain.extension.IDomainInjectorProvider;
+import org.yakindu.sct.domain.generic.modules.EntryRuleRuntimeModule;
+import org.yakindu.sct.domain.generic.modules.EntryRuleUIModule;
 import org.yakindu.sct.domain.generic.modules.GenericSequencerModule;
 import org.yakindu.sct.domain.generic.modules.GenericSimulationModule;
 import org.yakindu.sct.domain.generic.modules.GenericTypeSystemModule;
-import org.yakindu.sct.domain.generic.modules.EntryRuleRuntimeModule;
-import org.yakindu.sct.domain.generic.modules.EntryRuleUIModule;
 import org.yakindu.sct.model.sgraph.State;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.stext.STextRuntimeModule;
+import org.yakindu.sct.model.stext.stext.Guard;
 import org.yakindu.sct.model.stext.stext.StateSpecification;
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.TransitionSpecification;
@@ -54,29 +55,30 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 		semanticTargetToRuleMap.put(Statechart.class.getName(), StatechartSpecification.class);
 		semanticTargetToRuleMap.put(Transition.class.getName(), TransitionSpecification.class);
 		semanticTargetToRuleMap.put(State.class.getName(), StateSpecification.class);
+		semanticTargetToRuleMap.put(Guard.class.getName(), Guard.class);
 	}
 
-	protected Module getSharedStateModule() {
+	public Module getSharedStateModule() {
 		return new SharedStateModule();
 	}
 
-	protected Module getLanguageRuntimeModule() {
+	public Module getLanguageRuntimeModule() {
 		return new STextRuntimeModule();
 	}
 
-	protected Module getLanguageUIModule() {
+	public Module getLanguageUIModule() {
 		return new STextUiModule(STextActivator.getInstance());
 	}
 
-	protected Module getTypeSystemModule() {
+	public Module getTypeSystemModule() {
 		return new GenericTypeSystemModule();
 	}
 
-	protected Module getSimulationModule() {
+	public Module getSimulationModule() {
 		return new GenericSimulationModule();
 	}
 
-	protected Module getSequencerModule() {
+	public Module getSequencerModule() {
 		return new GenericSequencerModule();
 	}
 
@@ -95,9 +97,11 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 
 	@Override
 	public Injector getEmbeddedEditorInjector(String semanticTarget) {
-		if (embeddedInjectors.get(semanticTarget) == null)
-			embeddedInjectors.put(semanticTarget,
-					Guice.createInjector(getEmbeddedEditorModule(semanticTargetToRuleMap.get(semanticTarget))));
+		if (embeddedInjectors.get(semanticTarget) == null) {
+			Class<? extends EObject> rule = semanticTargetToRuleMap.get(semanticTarget);
+			org.eclipse.core.runtime.Assert.isNotNull(rule);
+			embeddedInjectors.put(semanticTarget, Guice.createInjector(getEmbeddedEditorModule(rule)));
+		}
 		return embeddedInjectors.get(semanticTarget);
 	}
 
