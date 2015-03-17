@@ -75,37 +75,37 @@ TEST(StatemachineTest, OperationCallback) {
 }
 
 
-void operationsInternal_internalOperation1(){
+void operationsInternal_internalOperation1(Operations* handle){
 	internalOperation1Called = true;
 }
 
-sc_boolean operationsInternal_internalOperation2(const sc_integer param1){
+sc_boolean operationsInternal_internalOperation2(Operations* handle, const sc_integer param1){
 	internalOperation2Called = true;
 	internalOp2Param = param1;
 	return true;
 }
 
-sc_real operationsInternal_internalOperation3(){
+sc_real operationsInternal_internalOperation3(Operations* handle){
 	return 0.0d;
 }
 
-sc_real operationsInternal_internalOperation3a(const sc_real param1){
+sc_real operationsInternal_internalOperation3a(Operations* handle, const sc_real param1){
 	return 0.0d;
 }
 
-sc_integer operationsInternal_internalOperation4(){
+sc_integer operationsInternal_internalOperation4(Operations* handle){
 	return 0;
 }
 
-sc_integer operationsInternal_internalOperation4a(const sc_integer param1){
+sc_integer operationsInternal_internalOperation4a(Operations* handle, const sc_integer param1){
 	return 0;
 }
 
-sc_string operationsInternal_internalOperation5(){
+sc_string operationsInternal_internalOperation5(Operations* handle){
 	return &myChar;
 }
 
-sc_string operationsInternal_internalOperation5a(const sc_string param1){
+sc_string operationsInternal_internalOperation5a(Operations* handle, const sc_string param1){
 	return &myChar;
 }
 
@@ -117,37 +117,37 @@ sc_string operationsInternal_internalOperation5a(const sc_string param1){
 
 
 
-void operationsIfaceInterface1_interfaceOperation1(){
+void operationsIfaceInterface1_interfaceOperation1(Operations* handle){
 	interfaceOperation1Called = true;
 }
 
-sc_boolean operationsIfaceInterface1_interfaceOperation2(const sc_integer param1){
+sc_boolean operationsIfaceInterface1_interfaceOperation2(Operations* handle, const sc_integer param1){
 	interfaceOperation2Called = true;
 	interfaceOp2Param = param1;
 	return true;
 }
 
-sc_real operationsIfaceInterface1_interfaceOperation3(){
+sc_real operationsIfaceInterface1_interfaceOperation3(Operations* handle){
 	return 0.0d;
 }
 
-sc_real operationsIfaceInterface1_interfaceOperation3a(const sc_real param1){
+sc_real operationsIfaceInterface1_interfaceOperation3a(Operations* handle, const sc_real param1){
 	return 0.0d;
 }
 
-sc_integer operationsIfaceInterface1_interfaceOperation4(){
+sc_integer operationsIfaceInterface1_interfaceOperation4(Operations* handle){
 	return 0;
 }
 
-sc_integer operationsIfaceInterface1_interfaceOperation4a(const sc_integer param1){
+sc_integer operationsIfaceInterface1_interfaceOperation4a(Operations* handle, const sc_integer param1){
 	return 0;
 }
 
-sc_string operationsIfaceInterface1_interfaceOperation5(){
+sc_string operationsIfaceInterface1_interfaceOperation5(Operations* handle){
 	return &myChar;
 }
 
-sc_string operationsIfaceInterface1_interfaceOperation5a(const sc_string param1){
+sc_string operationsIfaceInterface1_interfaceOperation5a(Operations* handle, const sc_string param1){
 	return &myChar;
 }
 
@@ -161,40 +161,40 @@ sc_string operationsIfaceInterface1_interfaceOperation5a(const sc_string param1)
 
 
 
-void operationsIface_unnamedInterfaceOperation1(){
+void operationsIface_unnamedInterfaceOperation1(Operations* handle){
 	unnamedInterfaceOperation1Called = true;
 }
 
-sc_boolean operationsIface_unnamedInterfaceOperation2(const sc_integer param1){
+sc_boolean operationsIface_unnamedInterfaceOperation2(Operations* handle, const sc_integer param1){
 	unnamedInterfaceOperation2Called = true;
 	unnamedInterfaceOp2Param = param1;
 	return true;
 }
 
-sc_real operationsIface_unnamedOperation3(){
+sc_real operationsIface_unnamedOperation3(Operations* handle){
 	return 0.0d;
 }
 
-sc_real operationsIface_unnamedOperation3a(const sc_real param1){
+sc_real operationsIface_unnamedOperation3a(Operations* handle, const sc_real param1){
 	return 0.0d;
 }
 
-sc_integer operationsIface_unnamedOperation4(){
+sc_integer operationsIface_unnamedOperation4(Operations* handle){
 	return 0;
 }
 
-sc_integer operationsIface_unnamedOperation4a(const sc_integer param1){
+sc_integer operationsIface_unnamedOperation4a(Operations* handle, const sc_integer param1){
 	return 0;
 }
 
-sc_string operationsIface_unnamedOperation5(){
+sc_string operationsIface_unnamedOperation5(Operations* handle){
 	return &myChar;
 }
 
-sc_string operationsIface_unnamedOperation5a(const sc_string param1){
+sc_string operationsIface_unnamedOperation5a(Operations* handle, const sc_string param1){
 	return &myChar;
 }
 
-sc_boolean operationsIface_alwaysTrue(){
+sc_boolean operationsIface_alwaysTrue(Operations* handle){
 	return true;
 }
