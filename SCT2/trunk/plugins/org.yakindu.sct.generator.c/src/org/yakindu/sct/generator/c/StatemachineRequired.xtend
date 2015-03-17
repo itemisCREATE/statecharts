@@ -40,7 +40,7 @@ class StatemachineRequired {
 			#define «module.client.define»_H_
 
 			#include "«typesModule.h»"
-			«IF timed»#include "«module.h»"«ENDIF»
+			«IF timed || operations.size > 0»#include "«module.h»"«ENDIF»
 
 			#ifdef __cplusplus
 			extern "C" {
@@ -115,7 +115,7 @@ class StatemachineRequired {
 	def dispatch functionPrototypes(Declaration it) ''''''
 
 	def dispatch functionPrototypes(OperationDefinition it) '''
-		extern «type.targetLanguageName» «asFunction»(«FOR p : parameters SEPARATOR ', '»const «p.type.targetLanguageName» «p.name.asIdentifier»«ENDFOR»);
+		extern «type.targetLanguageName» «asFunction»(«scHandleDecl»«FOR p : parameters BEFORE ', ' SEPARATOR ', '»const «p.type.targetLanguageName» «p.name.asIdentifier»«ENDFOR»);
 	'''
 
 }
