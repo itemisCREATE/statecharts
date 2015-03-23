@@ -22,7 +22,7 @@ import org.yakindu.base.types.Property;
  * @generated
  */
 public class PropertyItemProvider
-	extends FeatureItemProvider {
+	extends DeclarationItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

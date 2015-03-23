@@ -17,5 +17,5 @@ package org.yakindu.base.types;
  * @model
  * @generated
  */
-public interface Event extends Feature {
+public interface Event extends Declaration {
 } // Event

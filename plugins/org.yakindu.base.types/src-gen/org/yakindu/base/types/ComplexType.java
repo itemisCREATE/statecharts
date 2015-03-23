@@ -24,8 +24,7 @@ import org.eclipse.emf.common.util.EList;
 public interface ComplexType extends ParameterizedType {
 	/**
 	 * Returns the value of the '<em><b>Features</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.base.types.Feature}.
-	 * It is bidirectional and its opposite is '{@link org.yakindu.base.types.Feature#getOwningType <em>Owning Type</em>}'.
+	 * The list contents are of type {@link org.yakindu.base.types.Declaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Features</em>' containment reference list isn't clear,
@@ -34,11 +33,10 @@ public interface ComplexType extends ParameterizedType {
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Features</em>' containment reference list.
 	 * @see org.yakindu.base.types.TypesPackage#getComplexType_Features()
-	 * @see org.yakindu.base.types.Feature#getOwningType
-	 * @model opposite="owningType" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
-	EList<Feature> getFeatures();
+	EList<Declaration> getFeatures();
 
 	/**
 	 * Returns the value of the '<em><b>Super Types</b></em>' reference list.
@@ -62,6 +60,6 @@ public interface ComplexType extends ParameterizedType {
 	 * @model kind="operation"
 	 * @generated
 	 */
-	EList<Feature> getAllFeatures();
+	EList<Declaration> getAllFeatures();
 
 } // ComplexType

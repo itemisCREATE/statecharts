@@ -19,7 +19,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class EventImpl extends FeatureImpl implements Event {
+public class EventImpl extends DeclarationImpl implements Event {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

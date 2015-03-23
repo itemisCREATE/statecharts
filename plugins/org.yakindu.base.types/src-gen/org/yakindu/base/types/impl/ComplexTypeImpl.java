@@ -12,11 +12,11 @@ import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.yakindu.base.types.ComplexType;
-import org.yakindu.base.types.Feature;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypesPackage;
 
@@ -41,7 +41,7 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Feature> features;
+	protected EList<Declaration> features;
 
 	/**
 	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
@@ -73,9 +73,9 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Feature> getFeatures() {
+	public EList<Declaration> getFeatures() {
 		if (features == null) {
-			features = new EObjectContainmentWithInverseEList<Feature>(Feature.class, this, TypesPackage.COMPLEX_TYPE__FEATURES, TypesPackage.FEATURE__OWNING_TYPE);
+			features = new EObjectContainmentEList<Declaration>(Declaration.class, this, TypesPackage.COMPLEX_TYPE__FEATURES);
 		}
 		return features;
 	}
@@ -96,8 +96,8 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 	 * 
 	 * @generated NOT
 	 */
-	public EList<Feature> getAllFeatures() {
-		EList<Feature> features = new BasicEList<Feature>();
+	public EList<Declaration> getAllFeatures() {
+		EList<Declaration> features = new BasicEList<Declaration>();
 		collectFeatures(this, features, new HashSet<Type>());
 		return features;
 	}
@@ -107,7 +107,7 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 	 * super types.
 	 * 
 	 */
-	protected void collectFeatures(Type type, List<Feature> features, Set<Type> visited) {
+	protected void collectFeatures(Type type, List<Declaration> features, Set<Type> visited) {
 		if (type == null || visited.contains(type))
 			return;
 		if (type instanceof ComplexType) {
@@ -117,20 +117,6 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 			features.addAll(((ComplexType) type).getFeatures());
 		}
 		visited.add(type);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TypesPackage.COMPLEX_TYPE__FEATURES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getFeatures()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -171,7 +157,7 @@ public class ComplexTypeImpl extends ParameterizedTypeImpl implements ComplexTyp
 		switch (featureID) {
 			case TypesPackage.COMPLEX_TYPE__FEATURES:
 				getFeatures().clear();
-				getFeatures().addAll((Collection<? extends Feature>)newValue);
+				getFeatures().addAll((Collection<? extends Declaration>)newValue);
 				return;
 			case TypesPackage.COMPLEX_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();

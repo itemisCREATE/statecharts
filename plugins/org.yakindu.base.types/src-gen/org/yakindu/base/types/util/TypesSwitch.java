@@ -11,11 +11,11 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
 import org.yakindu.base.types.Event;
-import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Parameter;
@@ -98,18 +98,18 @@ public class TypesSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.FEATURE: {
-				Feature feature = (Feature)theEObject;
-				T result = caseFeature(feature);
-				if (result == null) result = caseTypedElement(feature);
-				if (result == null) result = caseNamedElement(feature);
+			case TypesPackage.DECLARATION: {
+				Declaration declaration = (Declaration)theEObject;
+				T result = caseDeclaration(declaration);
+				if (result == null) result = caseTypedElement(declaration);
+				if (result == null) result = caseNamedElement(declaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case TypesPackage.OPERATION: {
 				Operation operation = (Operation)theEObject;
 				T result = caseOperation(operation);
-				if (result == null) result = caseFeature(operation);
+				if (result == null) result = caseDeclaration(operation);
 				if (result == null) result = casePackageMember(operation);
 				if (result == null) result = caseTypedElement(operation);
 				if (result == null) result = caseNamedElement(operation);
@@ -119,7 +119,7 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.PROPERTY: {
 				Property property = (Property)theEObject;
 				T result = caseProperty(property);
-				if (result == null) result = caseFeature(property);
+				if (result == null) result = caseDeclaration(property);
 				if (result == null) result = caseTypedElement(property);
 				if (result == null) result = caseNamedElement(property);
 				if (result == null) result = defaultCase(theEObject);
@@ -142,7 +142,7 @@ public class TypesSwitch<T> extends Switch<T> {
 			case TypesPackage.EVENT: {
 				Event event = (Event)theEObject;
 				T result = caseEvent(event);
-				if (result == null) result = caseFeature(event);
+				if (result == null) result = caseDeclaration(event);
 				if (result == null) result = caseTypedElement(event);
 				if (result == null) result = caseNamedElement(event);
 				if (result == null) result = defaultCase(theEObject);
@@ -275,16 +275,17 @@ public class TypesSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
-	 * <!-- begin-user-doc --> This implementation returns
-	 * null; returning a non-null result will terminate the switch. <!--
-	 * end-user-doc -->
+	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeature(Feature object) {
+	public T caseDeclaration(Declaration object) {
 		return null;
 	}
 

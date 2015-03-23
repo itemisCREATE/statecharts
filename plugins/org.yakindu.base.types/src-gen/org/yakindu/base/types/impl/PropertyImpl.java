@@ -19,7 +19,7 @@ import org.yakindu.base.types.TypesPackage;
  *
  * @generated
  */
-public class PropertyImpl extends FeatureImpl implements Property {
+public class PropertyImpl extends DeclarationImpl implements Property {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

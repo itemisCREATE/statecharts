@@ -17,5 +17,5 @@ package org.yakindu.base.types;
  * @model
  * @generated
  */
-public interface Property extends Feature {
+public interface Property extends Declaration {
 } // Property

@@ -155,16 +155,6 @@ public interface TypesPackage extends EPackage {
 	int TYPED_ELEMENT = 6;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.base.types.impl.FeatureImpl <em>Feature</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.base.types.impl.FeatureImpl
-	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getFeature()
-	 * @generated
-	 */
-	int FEATURE = 2;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.base.types.impl.OperationImpl <em>Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -258,49 +248,14 @@ public interface TypesPackage extends EPackage {
 	int TYPED_ELEMENT_FEATURE_COUNT = 2;
 
 	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * The meta object id for the '{@link org.yakindu.base.types.impl.DeclarationImpl <em>Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.impl.DeclarationImpl
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDeclaration()
 	 * @generated
-	 * @ordered
 	 */
-	int FEATURE__TYPE = TYPED_ELEMENT__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__TYPE_ARGUMENTS = TYPED_ELEMENT__TYPE_ARGUMENTS;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__NAME = TYPED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE__OWNING_TYPE = TYPED_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Feature</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FEATURE_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 2;
+	int DECLARATION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -309,7 +264,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE = FEATURE__TYPE;
+	int DECLARATION__TYPE = TYPED_ELEMENT__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
@@ -318,7 +273,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE_ARGUMENTS = FEATURE__TYPE_ARGUMENTS;
+	int DECLARATION__TYPE_ARGUMENTS = TYPED_ELEMENT__TYPE_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -327,16 +282,43 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__NAME = FEATURE__NAME;
+	int DECLARATION__NAME = TYPED_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The number of structural features of the '<em>Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__OWNING_TYPE = FEATURE__OWNING_TYPE;
+	int DECLARATION_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TYPE = DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__TYPE_ARGUMENTS = DECLARATION__TYPE_ARGUMENTS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OPERATION__NAME = DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -345,7 +327,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__PARAMETERS = FEATURE_FEATURE_COUNT + 0;
+	int OPERATION__PARAMETERS = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Operation</em>' class.
@@ -354,7 +336,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 1;
+	int OPERATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -363,7 +345,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__TYPE = FEATURE__TYPE;
+	int PROPERTY__TYPE = DECLARATION__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
@@ -372,7 +354,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__TYPE_ARGUMENTS = FEATURE__TYPE_ARGUMENTS;
+	int PROPERTY__TYPE_ARGUMENTS = DECLARATION__TYPE_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -381,16 +363,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY__NAME = FEATURE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int PROPERTY__OWNING_TYPE = FEATURE__OWNING_TYPE;
+	int PROPERTY__NAME = DECLARATION__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Property</em>' class.
@@ -399,7 +372,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 0;
+	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -464,7 +437,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TYPE = FEATURE__TYPE;
+	int EVENT__TYPE = DECLARATION__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
@@ -473,7 +446,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__TYPE_ARGUMENTS = FEATURE__TYPE_ARGUMENTS;
+	int EVENT__TYPE_ARGUMENTS = DECLARATION__TYPE_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -482,16 +455,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT__NAME = FEATURE__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT__OWNING_TYPE = FEATURE__OWNING_TYPE;
+	int EVENT__NAME = DECLARATION__NAME;
 
 	/**
 	 * The number of structural features of the '<em>Event</em>' class.
@@ -500,7 +464,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 0;
+	int EVENT_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 0;
 
 
 	/**
@@ -1083,25 +1047,14 @@ public interface TypesPackage extends EPackage {
 	EAttribute getType_Abstract();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.base.types.Feature <em>Feature</em>}'.
+	 * Returns the meta object for class '{@link org.yakindu.base.types.Declaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Feature</em>'.
-	 * @see org.yakindu.base.types.Feature
+	 * @return the meta object for class '<em>Declaration</em>'.
+	 * @see org.yakindu.base.types.Declaration
 	 * @generated
 	 */
-	EClass getFeature();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.yakindu.base.types.Feature#getOwningType <em>Owning Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Owning Type</em>'.
-	 * @see org.yakindu.base.types.Feature#getOwningType()
-	 * @see #getFeature()
-	 * @generated
-	 */
-	EReference getFeature_OwningType();
+	EClass getDeclaration();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Operation <em>Operation</em>}'.
@@ -1514,22 +1467,14 @@ public interface TypesPackage extends EPackage {
 		EAttribute TYPE__ABSTRACT = eINSTANCE.getType_Abstract();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.base.types.impl.FeatureImpl <em>Feature</em>}' class.
+		 * The meta object literal for the '{@link org.yakindu.base.types.impl.DeclarationImpl <em>Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.yakindu.base.types.impl.FeatureImpl
-		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getFeature()
+		 * @see org.yakindu.base.types.impl.DeclarationImpl
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDeclaration()
 		 * @generated
 		 */
-		EClass FEATURE = eINSTANCE.getFeature();
-
-		/**
-		 * The meta object literal for the '<em><b>Owning Type</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FEATURE__OWNING_TYPE = eINSTANCE.getFeature_OwningType();
+		EClass DECLARATION = eINSTANCE.getDeclaration();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.OperationImpl <em>Operation</em>}' class.
