@@ -11,11 +11,11 @@ package org.yakindu.sct.generator.java
 
 import java.util.ArrayList
 import java.util.List
+import org.yakindu.base.types.Event
+import org.yakindu.base.types.Property
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.extensions.SExecExtensions
-import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sgraph.Variable
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -75,7 +75,7 @@ class Navigation extends SExecExtensions {
 	}
 	
 	
-	def dispatch scope(Variable it) {
+	def dispatch scope(Property it) {
 		if (eContainer instanceof InterfaceScope)
 			eContainer as InterfaceScope
 		else

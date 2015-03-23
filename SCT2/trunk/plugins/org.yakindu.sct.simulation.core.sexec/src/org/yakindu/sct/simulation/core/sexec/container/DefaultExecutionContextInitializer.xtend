@@ -14,13 +14,13 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Package
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.base.types.typesystem.ITypeValueProvider
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.ImportDeclaration
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition

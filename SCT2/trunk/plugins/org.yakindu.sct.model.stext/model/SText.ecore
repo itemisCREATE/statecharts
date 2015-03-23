@@ -37,7 +37,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Event ../../org.yakindu.base.types/model/types.ecore#//Event">
+  <eClassifiers xsi:type="ecore:EClass" name="EventDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="Direction">
@@ -45,16 +45,16 @@
     <eLiterals name="IN" value="1" literal="in"/>
     <eLiterals name="OUT" value="2" literal="out"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Variable ../../org.yakindu.base.types/model/types.ecore#//Property">
+  <eClassifiers xsi:type="ecore:EClass" name="VariableDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Property">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="external" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="initialValue" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="OperationDefinition" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration ../../org.yakindu.base.types/model/types.ecore#//Operation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="TypeAliasDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//TypeAlias ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Declaration ../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OperationDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Operation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeAliasDefinition" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//TypeAlias ../../org.yakindu.base.types/model/types.ecore#//Declaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction ../../org.yakindu.base.types/model/types.ecore#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="TransitionReaction" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Reaction"/>
   <eClassifiers xsi:type="ecore:EClass" name="Guard">
     <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass ../../org.yakindu.base.expressions/model/Expressions.ecore#//Expression"

@@ -16,16 +16,16 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.sct.model.sgraph.*;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.TypedElement;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
-import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Import;
+import org.yakindu.sct.model.sgraph.ImportDeclaration;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
@@ -41,7 +41,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
-import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
@@ -128,14 +127,6 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createFinalStateAdapter();
 			}
 			@Override
-			public Adapter caseVariable(Variable object) {
-				return createVariableAdapter();
-			}
-			@Override
-			public Adapter caseEvent(Event object) {
-				return createEventAdapter();
-			}
-			@Override
 			public Adapter caseChoice(Choice object) {
 				return createChoiceAdapter();
 			}
@@ -176,10 +167,6 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 				return createSpecificationElementAdapter();
 			}
 			@Override
-			public Adapter caseDeclaration(Declaration object) {
-				return createDeclarationAdapter();
-			}
-			@Override
 			public Adapter caseScope(Scope object) {
 				return createScopeAdapter();
 			}
@@ -218,6 +205,14 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseDocumentedElement(DocumentedElement object) {
 				return createDocumentedElementAdapter();
+			}
+			@Override
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseDeclaration(Declaration object) {
+				return createDeclarationAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -292,6 +287,34 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createDocumentedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.TypedElement
+	 * @generated
+	 */
+	public Adapter createTypedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Declaration <em>Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.Declaration
+	 * @generated
+	 */
+	public Adapter createDeclarationAdapter() {
 		return null;
 	}
 
@@ -408,34 +431,6 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Variable
-	 * @generated
-	 */
-	public Adapter createVariableAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Event <em>Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Event
-	 * @generated
-	 */
-	public Adapter createEventAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Choice <em>Choice</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -530,20 +525,6 @@ public class SGraphAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createSpecificationElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Declaration <em>Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Declaration
-	 * @generated
-	 */
-	public Adapter createDeclarationAdapter() {
 		return null;
 	}
 

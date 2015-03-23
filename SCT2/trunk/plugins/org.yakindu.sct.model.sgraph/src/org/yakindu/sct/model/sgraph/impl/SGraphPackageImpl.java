@@ -17,14 +17,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.ChoiceKind;
 import org.yakindu.sct.model.sgraph.CompositeElement;
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.EntryKind;
-import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Import;
@@ -45,7 +44,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
-import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
@@ -137,20 +135,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass variableEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass eventEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass choiceEClass = null;
 
 	/**
@@ -194,13 +178,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * @generated
 	 */
 	private EClass specificationElementEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass declarationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -305,7 +282,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		isInited = true;
 
 		// Initialize simple dependencies
-		BasePackage.eINSTANCE.eClass();
+		TypesPackage.eINSTANCE.eClass();
 
 		// Create package meta-data objects
 		theSGraphPackage.createPackageContents();
@@ -570,24 +547,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getVariable() {
-		return variableEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getEvent() {
-		return eventEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getChoice() {
 		return choiceEClass;
 	}
@@ -689,15 +648,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 	 */
 	public EAttribute getSpecificationElement_Specification() {
 		return (EAttribute)specificationElementEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getDeclaration() {
-		return declarationEClass;
 	}
 
 	/**
@@ -907,10 +857,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		finalStateEClass = createEClass(FINAL_STATE);
 
-		variableEClass = createEClass(VARIABLE);
-
-		eventEClass = createEClass(EVENT);
-
 		choiceEClass = createEClass(CHOICE);
 		createEAttribute(choiceEClass, CHOICE__KIND);
 
@@ -940,8 +886,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		specificationElementEClass = createEClass(SPECIFICATION_ELEMENT);
 		createEAttribute(specificationElementEClass, SPECIFICATION_ELEMENT__SPECIFICATION);
-
-		declarationEClass = createEClass(DECLARATION);
 
 		scopeEClass = createEClass(SCOPE);
 		createEReference(scopeEClass, SCOPE__DECLARATIONS);
@@ -1004,6 +948,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 
 		// Obtain other dependent packages
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -1017,8 +962,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		transitionEClass.getESuperTypes().add(this.getReaction());
 		transitionEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
 		finalStateEClass.getESuperTypes().add(this.getRegularState());
-		variableEClass.getESuperTypes().add(this.getDeclaration());
-		eventEClass.getESuperTypes().add(this.getDeclaration());
 		choiceEClass.getESuperTypes().add(this.getPseudostate());
 		statechartEClass.getESuperTypes().add(this.getSpecificationElement());
 		statechartEClass.getESuperTypes().add(this.getReactiveElement());
@@ -1028,7 +971,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		statechartEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
 		entryEClass.getESuperTypes().add(this.getPseudostate());
 		exitEClass.getESuperTypes().add(this.getPseudostate());
-		declarationEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		synchronizationEClass.getESuperTypes().add(this.getPseudostate());
 		stateEClass.getESuperTypes().add(this.getSpecificationElement());
 		stateEClass.getESuperTypes().add(this.getReactiveElement());
@@ -1037,7 +979,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		stateEClass.getESuperTypes().add(this.getCompositeElement());
 		stateEClass.getESuperTypes().add(theBasePackage.getDocumentedElement());
 		regularStateEClass.getESuperTypes().add(this.getVertex());
-		importDeclarationEClass.getESuperTypes().add(this.getDeclaration());
+		importDeclarationEClass.getESuperTypes().add(theTypesPackage.getDeclaration());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(pseudostateEClass, Pseudostate.class, "Pseudostate", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1056,10 +998,6 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		initEReference(getTransition_Source(), this.getVertex(), this.getVertex_OutgoingTransitions(), "source", null, 1, 1, Transition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, !IS_ORDERED);
 
 		initEClass(finalStateEClass, FinalState.class, "FinalState", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(variableEClass, Variable.class, "Variable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(choiceEClass, Choice.class, "Choice", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getChoice_Kind(), this.getChoiceKind(), "kind", null, 0, 1, Choice.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1091,12 +1029,10 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		initEClass(specificationElementEClass, SpecificationElement.class, "SpecificationElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSpecificationElement_Specification(), ecorePackage.getEString(), "specification", null, 0, 1, SpecificationElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(declarationEClass, Declaration.class, "Declaration", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(scopeEClass, Scope.class, "Scope", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getScope_Declarations(), this.getDeclaration(), null, "declarations", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_Events(), this.getEvent(), null, "events", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
-		initEReference(getScope_Variables(), this.getVariable(), null, "variables", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Declarations(), theTypesPackage.getDeclaration(), null, "declarations", null, 0, -1, Scope.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Events(), theTypesPackage.getEvent(), null, "events", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
+		initEReference(getScope_Variables(), theTypesPackage.getProperty(), null, "variables", null, 0, -1, Scope.class, IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(scopedElementEClass, ScopedElement.class, "ScopedElement", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getScopedElement_Scopes(), this.getScope(), null, "scopes", null, 0, -1, ScopedElement.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1122,7 +1058,7 @@ public class SGraphPackageImpl extends EPackageImpl implements SGraphPackage {
 		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(importDeclarationEClass, ImportDeclaration.class, "ImportDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getImportDeclaration_Declaration(), this.getDeclaration(), null, "declaration", null, 0, 1, ImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getImportDeclaration_Declaration(), theTypesPackage.getDeclaration(), null, "declaration", null, 0, 1, ImportDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(entryKindEEnum, EntryKind.class, "EntryKind");

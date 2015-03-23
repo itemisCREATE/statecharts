@@ -32,7 +32,7 @@ import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
-import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.refactoring.handlers.AbstractRefactoringHandler;

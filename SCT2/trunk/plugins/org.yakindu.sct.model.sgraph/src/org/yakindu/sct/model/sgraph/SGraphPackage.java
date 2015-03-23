@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -236,7 +237,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSpecificationElement()
 	 * @generated
 	 */
-	int SPECIFICATION_ELEMENT = 16;
+	int SPECIFICATION_ELEMENT = 14;
 
 	/**
 	 * The feature id for the '<em><b>Specification</b></em>' attribute.
@@ -346,7 +347,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getRegularState()
 	 * @generated
 	 */
-	int REGULAR_STATE = 22;
+	int REGULAR_STATE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -401,7 +402,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getState()
 	 * @generated
 	 */
-	int STATE = 21;
+	int STATE = 18;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.FinalStateImpl <em>Final State</em>}' class.
@@ -459,90 +460,6 @@ public interface SGraphPackage extends EPackage {
 	int FINAL_STATE_FEATURE_COUNT = REGULAR_STATE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.DeclarationImpl <em>Declaration</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgraph.impl.DeclarationImpl
-	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getDeclaration()
-	 * @generated
-	 */
-	int DECLARATION = 17;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECLARATION__NAME = BasePackage.NAMED_ELEMENT__NAME;
-
-	/**
-	 * The number of structural features of the '<em>Declaration</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DECLARATION_FEATURE_COUNT = BasePackage.NAMED_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.VariableImpl <em>Variable</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgraph.impl.VariableImpl
-	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getVariable()
-	 * @generated
-	 */
-	int VARIABLE = 5;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE__NAME = DECLARATION__NAME;
-
-	/**
-	 * The number of structural features of the '<em>Variable</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EventImpl <em>Event</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.sgraph.impl.EventImpl
-	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEvent()
-	 * @generated
-	 */
-	int EVENT = 6;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT__NAME = DECLARATION__NAME;
-
-	/**
-	 * The number of structural features of the '<em>Event</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ChoiceImpl <em>Choice</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -550,7 +467,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoice()
 	 * @generated
 	 */
-	int CHOICE = 7;
+	int CHOICE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -614,7 +531,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getStatechart()
 	 * @generated
 	 */
-	int STATECHART = 8;
+	int STATECHART = 6;
 
 	/**
 	 * The feature id for the '<em><b>Specification</b></em>' attribute.
@@ -723,7 +640,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntry()
 	 * @generated
 	 */
-	int ENTRY = 9;
+	int ENTRY = 7;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -787,7 +704,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getTrigger()
 	 * @generated
 	 */
-	int TRIGGER = 13;
+	int TRIGGER = 11;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.EffectImpl <em>Effect</em>}' class.
@@ -797,7 +714,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEffect()
 	 * @generated
 	 */
-	int EFFECT = 14;
+	int EFFECT = 12;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ReactionPropertyImpl <em>Reaction Property</em>}' class.
@@ -807,7 +724,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReactionProperty()
 	 * @generated
 	 */
-	int REACTION_PROPERTY = 15;
+	int REACTION_PROPERTY = 13;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl <em>Reaction</em>}' class.
@@ -817,7 +734,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReaction()
 	 * @generated
 	 */
-	int REACTION = 12;
+	int REACTION = 10;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ReactiveElementImpl <em>Reactive Element</em>}' class.
@@ -827,7 +744,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getReactiveElement()
 	 * @generated
 	 */
-	int REACTIVE_ELEMENT = 11;
+	int REACTIVE_ELEMENT = 9;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.impl.ExitImpl <em>Exit</em>}' class.
@@ -837,7 +754,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getExit()
 	 * @generated
 	 */
-	int EXIT = 10;
+	int EXIT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -982,7 +899,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getScope()
 	 * @generated
 	 */
-	int SCOPE = 18;
+	int SCOPE = 15;
 
 	/**
 	 * The feature id for the '<em><b>Declarations</b></em>' containment reference list.
@@ -1028,7 +945,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getScopedElement()
 	 * @generated
 	 */
-	int SCOPED_ELEMENT = 19;
+	int SCOPED_ELEMENT = 16;
 
 	/**
 	 * The feature id for the '<em><b>Scopes</b></em>' containment reference list.
@@ -1065,7 +982,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getSynchronization()
 	 * @generated
 	 */
-	int SYNCHRONIZATION = 20;
+	int SYNCHRONIZATION = 17;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1291,7 +1208,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getCompositeElement()
 	 * @generated
 	 */
-	int COMPOSITE_ELEMENT = 23;
+	int COMPOSITE_ELEMENT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Regions</b></em>' containment reference list.
@@ -1319,7 +1236,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getImport()
 	 * @generated
 	 */
-	int IMPORT = 24;
+	int IMPORT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -1347,7 +1264,25 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getImportDeclaration()
 	 * @generated
 	 */
-	int IMPORT_DECLARATION = 25;
+	int IMPORT_DECLARATION = 22;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__TYPE = TypesPackage.DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IMPORT_DECLARATION__TYPE_ARGUMENTS = TypesPackage.DECLARATION__TYPE_ARGUMENTS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1356,7 +1291,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_DECLARATION__NAME = DECLARATION__NAME;
+	int IMPORT_DECLARATION__NAME = TypesPackage.DECLARATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Declaration</b></em>' reference.
@@ -1365,7 +1300,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_DECLARATION__DECLARATION = DECLARATION_FEATURE_COUNT + 0;
+	int IMPORT_DECLARATION__DECLARATION = TypesPackage.DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Import Declaration</em>' class.
@@ -1374,7 +1309,7 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_DECLARATION_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
+	int IMPORT_DECLARATION_FEATURE_COUNT = TypesPackage.DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.sgraph.EntryKind <em>Entry Kind</em>}' enum.
@@ -1384,7 +1319,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEntryKind()
 	 * @generated
 	 */
-	int ENTRY_KIND = 26;
+	int ENTRY_KIND = 23;
 
 
 	/**
@@ -1395,7 +1330,7 @@ public interface SGraphPackage extends EPackage {
 	 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getChoiceKind()
 	 * @generated
 	 */
-	int CHOICE_KIND = 27;
+	int CHOICE_KIND = 24;
 
 
 	/**
@@ -1686,26 +1621,6 @@ public interface SGraphPackage extends EPackage {
 	EReference getImportDeclaration_Declaration();
 
 	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Variable</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Variable
-	 * @generated
-	 */
-	EClass getVariable();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Event <em>Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Event</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Event
-	 * @generated
-	 */
-	EClass getEvent();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Choice <em>Choice</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1829,16 +1744,6 @@ public interface SGraphPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getSpecificationElement_Specification();
-
-	/**
-	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Declaration <em>Declaration</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Declaration</em>'.
-	 * @see org.yakindu.sct.model.sgraph.Declaration
-	 * @generated
-	 */
-	EClass getDeclaration();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.sgraph.Reaction <em>Reaction</em>}'.
@@ -2289,26 +2194,6 @@ public interface SGraphPackage extends EPackage {
 		EReference IMPORT_DECLARATION__DECLARATION = eINSTANCE.getImportDeclaration_Declaration();
 
 		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.VariableImpl <em>Variable</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgraph.impl.VariableImpl
-		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getVariable()
-		 * @generated
-		 */
-		EClass VARIABLE = eINSTANCE.getVariable();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.EventImpl <em>Event</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgraph.impl.EventImpl
-		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getEvent()
-		 * @generated
-		 */
-		EClass EVENT = eINSTANCE.getEvent();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ChoiceImpl <em>Choice</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2417,16 +2302,6 @@ public interface SGraphPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute SPECIFICATION_ELEMENT__SPECIFICATION = eINSTANCE.getSpecificationElement_Specification();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.DeclarationImpl <em>Declaration</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.sgraph.impl.DeclarationImpl
-		 * @see org.yakindu.sct.model.sgraph.impl.SGraphPackageImpl#getDeclaration()
-		 * @generated
-		 */
-		EClass DECLARATION = eINSTANCE.getDeclaration();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.sgraph.impl.ReactionImpl <em>Reaction</em>}' class.

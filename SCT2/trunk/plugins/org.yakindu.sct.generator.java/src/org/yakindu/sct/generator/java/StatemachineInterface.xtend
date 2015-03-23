@@ -12,6 +12,7 @@ package org.yakindu.sct.generator.java
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.yakindu.base.types.Parameter
+import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
@@ -21,7 +22,6 @@ import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 
 class StatemachineInterface {
 

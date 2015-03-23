@@ -15,12 +15,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
@@ -36,13 +31,7 @@ import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
  * @generated
  */
 public class ExecutionFlowItemProvider
-	extends ScopedElementItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends ScopedElementItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -207,6 +196,7 @@ public class ExecutionFlowItemProvider
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__HISTORY_VECTOR);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION);
 			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION);
+			childrenFeatures.add(SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE);
 		}
 		return childrenFeatures;
 	}
@@ -277,6 +267,7 @@ public class ExecutionFlowItemProvider
 			case SexecPackage.EXECUTION_FLOW__HISTORY_VECTOR:
 			case SexecPackage.EXECUTION_FLOW__ENTRY_ACTION:
 			case SexecPackage.EXECUTION_FLOW__EXIT_ACTION:
+			case SexecPackage.EXECUTION_FLOW__STATIC_INIT_SEQUENCE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -573,6 +564,11 @@ public class ExecutionFlowItemProvider
 			(createChildParameter
 				(SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION,
 				 SexecFactory.eINSTANCE.createTraceEndRunCycle()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE,
+				 SexecFactory.eINSTANCE.createSequence()));
 	}
 
 	/**
@@ -595,6 +591,7 @@ public class ExecutionFlowItemProvider
 			childFeature == SexecPackage.Literals.EXECUTION_NODE__REACT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__ENTRY_ACTION ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__EXIT_ACTION ||
+			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATIC_INIT_SEQUENCE ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__STATES ||
 			childFeature == SexecPackage.Literals.EXECUTION_FLOW__NODES;
 

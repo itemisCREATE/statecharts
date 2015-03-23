@@ -2,7 +2,6 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
-import org.yakindu.sct.model.sgraph.Event;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +19,7 @@ import org.yakindu.sct.model.sgraph.Event;
  * @model
  * @generated
  */
-public interface EventDefinition extends Event, org.yakindu.base.types.Event {
+public interface EventDefinition extends org.yakindu.base.types.Event {
 	/**
 	 * Returns the value of the '<em><b>Direction</b></em>' attribute.
 	 * The literals are from the enumeration {@link org.yakindu.sct.model.stext.stext.Direction}.

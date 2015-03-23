@@ -7,9 +7,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
-
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
@@ -526,22 +524,13 @@ public interface StextPackage extends EPackage {
 	int EVENT_DEFINITION = 13;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EVENT_DEFINITION__NAME = SGraphPackage.EVENT__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_DEFINITION__TYPE = SGraphPackage.EVENT_FEATURE_COUNT + 0;
+	int EVENT_DEFINITION__TYPE = TypesPackage.EVENT__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
@@ -550,16 +539,16 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_DEFINITION__TYPE_ARGUMENTS = SGraphPackage.EVENT_FEATURE_COUNT + 1;
+	int EVENT_DEFINITION__TYPE_ARGUMENTS = TypesPackage.EVENT__TYPE_ARGUMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_DEFINITION__OWNING_TYPE = SGraphPackage.EVENT_FEATURE_COUNT + 2;
+	int EVENT_DEFINITION__NAME = TypesPackage.EVENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Direction</b></em>' attribute.
@@ -568,7 +557,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_DEFINITION__DIRECTION = SGraphPackage.EVENT_FEATURE_COUNT + 3;
+	int EVENT_DEFINITION__DIRECTION = TypesPackage.EVENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Event Definition</em>' class.
@@ -577,7 +566,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_DEFINITION_FEATURE_COUNT = SGraphPackage.EVENT_FEATURE_COUNT + 4;
+	int EVENT_DEFINITION_FEATURE_COUNT = TypesPackage.EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.VariableDefinitionImpl <em>Variable Definition</em>}' class.
@@ -590,22 +579,13 @@ public interface StextPackage extends EPackage {
 	int VARIABLE_DEFINITION = 14;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int VARIABLE_DEFINITION__NAME = SGraphPackage.VARIABLE__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__TYPE = SGraphPackage.VARIABLE_FEATURE_COUNT + 0;
+	int VARIABLE_DEFINITION__TYPE = TypesPackage.PROPERTY__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
@@ -614,16 +594,16 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__TYPE_ARGUMENTS = SGraphPackage.VARIABLE_FEATURE_COUNT + 1;
+	int VARIABLE_DEFINITION__TYPE_ARGUMENTS = TypesPackage.PROPERTY__TYPE_ARGUMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__OWNING_TYPE = SGraphPackage.VARIABLE_FEATURE_COUNT + 2;
+	int VARIABLE_DEFINITION__NAME = TypesPackage.PROPERTY__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Const</b></em>' attribute.
@@ -632,7 +612,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__CONST = SGraphPackage.VARIABLE_FEATURE_COUNT + 3;
+	int VARIABLE_DEFINITION__CONST = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
@@ -641,7 +621,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__READONLY = SGraphPackage.VARIABLE_FEATURE_COUNT + 4;
+	int VARIABLE_DEFINITION__READONLY = TypesPackage.PROPERTY_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>External</b></em>' attribute.
@@ -650,7 +630,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__EXTERNAL = SGraphPackage.VARIABLE_FEATURE_COUNT + 5;
+	int VARIABLE_DEFINITION__EXTERNAL = TypesPackage.PROPERTY_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
@@ -659,7 +639,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__INITIAL_VALUE = SGraphPackage.VARIABLE_FEATURE_COUNT + 6;
+	int VARIABLE_DEFINITION__INITIAL_VALUE = TypesPackage.PROPERTY_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Variable Definition</em>' class.
@@ -668,7 +648,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION_FEATURE_COUNT = SGraphPackage.VARIABLE_FEATURE_COUNT + 7;
+	int VARIABLE_DEFINITION_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl <em>Operation Definition</em>}' class.
@@ -681,22 +661,13 @@ public interface StextPackage extends EPackage {
 	int OPERATION_DEFINITION = 15;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OPERATION_DEFINITION__NAME = SGraphPackage.DECLARATION__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_DEFINITION__TYPE = SGraphPackage.DECLARATION_FEATURE_COUNT + 0;
+	int OPERATION_DEFINITION__TYPE = TypesPackage.OPERATION__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
@@ -705,16 +676,16 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_DEFINITION__TYPE_ARGUMENTS = SGraphPackage.DECLARATION_FEATURE_COUNT + 1;
+	int OPERATION_DEFINITION__TYPE_ARGUMENTS = TypesPackage.OPERATION__TYPE_ARGUMENTS;
 
 	/**
-	 * The feature id for the '<em><b>Owning Type</b></em>' container reference.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_DEFINITION__OWNING_TYPE = SGraphPackage.DECLARATION_FEATURE_COUNT + 2;
+	int OPERATION_DEFINITION__NAME = TypesPackage.OPERATION__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -723,7 +694,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_DEFINITION__PARAMETERS = SGraphPackage.DECLARATION_FEATURE_COUNT + 3;
+	int OPERATION_DEFINITION__PARAMETERS = TypesPackage.OPERATION__PARAMETERS;
 
 	/**
 	 * The number of structural features of the '<em>Operation Definition</em>' class.
@@ -732,7 +703,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_DEFINITION_FEATURE_COUNT = SGraphPackage.DECLARATION_FEATURE_COUNT + 4;
+	int OPERATION_DEFINITION_FEATURE_COUNT = TypesPackage.OPERATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TypeAliasDefinitionImpl <em>Type Alias Definition</em>}' class.
@@ -809,22 +780,13 @@ public interface StextPackage extends EPackage {
 	int LOCAL_REACTION = 17;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOCAL_REACTION__NAME = SGraphPackage.DECLARATION__NAME;
-
-	/**
 	 * The feature id for the '<em><b>Trigger</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_REACTION__TRIGGER = SGraphPackage.DECLARATION_FEATURE_COUNT + 0;
+	int LOCAL_REACTION__TRIGGER = SGraphPackage.REACTION__TRIGGER;
 
 	/**
 	 * The feature id for the '<em><b>Effect</b></em>' containment reference.
@@ -833,7 +795,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_REACTION__EFFECT = SGraphPackage.DECLARATION_FEATURE_COUNT + 1;
+	int LOCAL_REACTION__EFFECT = SGraphPackage.REACTION__EFFECT;
 
 	/**
 	 * The feature id for the '<em><b>Properties</b></em>' containment reference list.
@@ -842,7 +804,34 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_REACTION__PROPERTIES = SGraphPackage.DECLARATION_FEATURE_COUNT + 2;
+	int LOCAL_REACTION__PROPERTIES = SGraphPackage.REACTION__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_REACTION__TYPE = SGraphPackage.REACTION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_REACTION__TYPE_ARGUMENTS = SGraphPackage.REACTION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOCAL_REACTION__NAME = SGraphPackage.REACTION_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Local Reaction</em>' class.
@@ -851,7 +840,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.DECLARATION_FEATURE_COUNT + 3;
+	int LOCAL_REACTION_FEATURE_COUNT = SGraphPackage.REACTION_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.TransitionReactionImpl <em>Transition Reaction</em>}' class.

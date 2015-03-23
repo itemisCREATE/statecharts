@@ -7,17 +7,11 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.yakindu.base.base.BasePackage;
-
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
-
 import org.yakindu.base.types.TypesPackage;
-
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -1175,16 +1169,13 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		interfaceScopeEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		internalScopeEClass.getESuperTypes().add(this.getStatechartScope());
 		importScopeEClass.getESuperTypes().add(this.getStatechartScope());
-		eventDefinitionEClass.getESuperTypes().add(theSGraphPackage.getEvent());
 		eventDefinitionEClass.getESuperTypes().add(theTypesPackage.getEvent());
-		variableDefinitionEClass.getESuperTypes().add(theSGraphPackage.getVariable());
 		variableDefinitionEClass.getESuperTypes().add(theTypesPackage.getProperty());
-		operationDefinitionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
 		operationDefinitionEClass.getESuperTypes().add(theTypesPackage.getOperation());
 		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getTypeAlias());
-		typeAliasDefinitionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
-		localReactionEClass.getESuperTypes().add(theSGraphPackage.getDeclaration());
+		typeAliasDefinitionEClass.getESuperTypes().add(theTypesPackage.getDeclaration());
 		localReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
+		localReactionEClass.getESuperTypes().add(theTypesPackage.getDeclaration());
 		transitionReactionEClass.getESuperTypes().add(theSGraphPackage.getReaction());
 		entryPointSpecEClass.getESuperTypes().add(theSGraphPackage.getReactionProperty());
 		exitPointSpecEClass.getESuperTypes().add(theSGraphPackage.getReactionProperty());

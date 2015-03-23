@@ -6,12 +6,49 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
-import org.yakindu.sct.model.stext.stext.*;
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
+import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
+import org.yakindu.sct.model.stext.stext.DefRoot;
+import org.yakindu.sct.model.stext.stext.DefaultTrigger;
+import org.yakindu.sct.model.stext.stext.Direction;
+import org.yakindu.sct.model.stext.stext.EntryEvent;
+import org.yakindu.sct.model.stext.stext.EntryPointSpec;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
+import org.yakindu.sct.model.stext.stext.EventSpec;
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
+import org.yakindu.sct.model.stext.stext.ExitEvent;
+import org.yakindu.sct.model.stext.stext.ExitPointSpec;
+import org.yakindu.sct.model.stext.stext.Guard;
+import org.yakindu.sct.model.stext.stext.Import;
+import org.yakindu.sct.model.stext.stext.ImportScope;
+import org.yakindu.sct.model.stext.stext.InterfaceScope;
+import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
+import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.sct.model.stext.stext.Root;
+import org.yakindu.sct.model.stext.stext.SimpleScope;
+import org.yakindu.sct.model.stext.stext.StateRoot;
+import org.yakindu.sct.model.stext.stext.StateSpecification;
+import org.yakindu.sct.model.stext.stext.StatechartRoot;
+import org.yakindu.sct.model.stext.stext.StatechartScope;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.StextFactory;
+import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TimeEventType;
+import org.yakindu.sct.model.stext.stext.TimeUnit;
+import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.TransitionRoot;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
+import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->

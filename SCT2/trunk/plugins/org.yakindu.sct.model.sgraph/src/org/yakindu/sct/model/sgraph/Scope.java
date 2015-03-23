@@ -12,6 +12,9 @@ package org.yakindu.sct.model.sgraph;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Property;
 
 /**
  * <!-- begin-user-doc -->
@@ -41,7 +44,7 @@ public interface Scope extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Declarations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.Declaration}.
+	 * The list contents are of type {@link org.yakindu.base.types.Declaration}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Declarations</em>' containment reference list isn't clear,
@@ -57,7 +60,7 @@ public interface Scope extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Events</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.Event}.
+	 * The list contents are of type {@link org.yakindu.base.types.Event}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Events</em>' reference list isn't clear,
@@ -73,7 +76,7 @@ public interface Scope extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Variables</b></em>' reference list.
-	 * The list contents are of type {@link org.yakindu.sct.model.sgraph.Variable}.
+	 * The list contents are of type {@link org.yakindu.base.types.Property}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Variables</em>' reference list isn't clear,
@@ -85,6 +88,6 @@ public interface Scope extends EObject {
 	 * @model transient="true" changeable="false" volatile="true" derived="true"
 	 * @generated
 	 */
-	EList<Variable> getVariables();
+	EList<Property> getVariables();
 
 } // Scope

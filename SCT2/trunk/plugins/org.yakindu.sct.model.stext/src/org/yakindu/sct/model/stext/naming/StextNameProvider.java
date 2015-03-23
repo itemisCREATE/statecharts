@@ -15,8 +15,8 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
-import org.yakindu.sct.model.sgraph.Event;
-import org.yakindu.sct.model.sgraph.Variable;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgraph.naming.SGraphNameProvider;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 
@@ -44,7 +44,7 @@ public class StextNameProvider extends SGraphNameProvider {
 		return name;
 	}
 
-	public QualifiedName qualifiedName(Variable ele) {
+	public QualifiedName qualifiedName(Property ele) {
 		QualifiedName name = null;
 		if (!Strings.isEmpty(ele.getName())) {
 			name = nameConverter.toQualifiedName(ele.getName());

@@ -19,6 +19,7 @@
             class="org.yakindu.sct.model.sgraph.SGraphPackage"
             genModel="model/emf/sgraph.genmodel"/>
    </extension>
+
       <extension
          point="org.eclipse.emf.ecore.uri_mapping">
       <mapping

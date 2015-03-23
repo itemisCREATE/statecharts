@@ -4,34 +4,59 @@ package org.yakindu.sct.model.stext.stext.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.yakindu.base.base.NamedElement;
-
 import org.yakindu.base.expressions.expressions.Expression;
-
-import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypedElement;
-
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
-import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
-import org.yakindu.sct.model.sgraph.Variable;
-
-import org.yakindu.sct.model.stext.stext.*;
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
+import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
+import org.yakindu.sct.model.stext.stext.DefRoot;
+import org.yakindu.sct.model.stext.stext.DefaultTrigger;
+import org.yakindu.sct.model.stext.stext.EntryEvent;
+import org.yakindu.sct.model.stext.stext.EntryPointSpec;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
+import org.yakindu.sct.model.stext.stext.EventSpec;
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
+import org.yakindu.sct.model.stext.stext.ExitEvent;
+import org.yakindu.sct.model.stext.stext.ExitPointSpec;
+import org.yakindu.sct.model.stext.stext.Guard;
+import org.yakindu.sct.model.stext.stext.Import;
+import org.yakindu.sct.model.stext.stext.ImportScope;
+import org.yakindu.sct.model.stext.stext.InterfaceScope;
+import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
+import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.sct.model.stext.stext.Root;
+import org.yakindu.sct.model.stext.stext.SimpleScope;
+import org.yakindu.sct.model.stext.stext.StateRoot;
+import org.yakindu.sct.model.stext.stext.StateSpecification;
+import org.yakindu.sct.model.stext.stext.StatechartRoot;
+import org.yakindu.sct.model.stext.stext.StatechartScope;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.TransitionRoot;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
+import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -246,28 +271,16 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseDeclaration(Declaration object) {
-				return createDeclarationAdapter();
-			}
-			@Override
-			public Adapter caseEvent(Event object) {
-				return createEventAdapter();
-			}
-			@Override
 			public Adapter caseTypedElement(TypedElement object) {
 				return createTypedElementAdapter();
 			}
 			@Override
-			public Adapter caseFeature(Feature object) {
-				return createFeatureAdapter();
+			public Adapter caseDeclaration(org.yakindu.base.types.Declaration object) {
+				return createDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseTypes_Event(org.yakindu.base.types.Event object) {
-				return createTypes_EventAdapter();
-			}
-			@Override
-			public Adapter caseVariable(Variable object) {
-				return createVariableAdapter();
+			public Adapter caseEvent(org.yakindu.base.types.Event object) {
+				return createEventAdapter();
 			}
 			@Override
 			public Adapter caseProperty(Property object) {
@@ -876,13 +889,13 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Declaration <em>Declaration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Declaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Declaration
+	 * @see org.yakindu.base.types.Declaration
 	 * @generated
 	 */
 	public Adapter createDeclarationAdapter() {
@@ -890,13 +903,13 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Event <em>Event</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Event <em>Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Event
+	 * @see org.yakindu.base.types.Event
 	 * @generated
 	 */
 	public Adapter createEventAdapter() {
@@ -914,48 +927,6 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypedElementAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Feature <em>Feature</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.Feature
-	 * @generated
-	 */
-	public Adapter createFeatureAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Event <em>Event</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.base.types.Event
-	 * @generated
-	 */
-	public Adapter createTypes_EventAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Variable <em>Variable</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Variable
-	 * @generated
-	 */
-	public Adapter createVariableAdapter() {
 		return null;
 	}
 

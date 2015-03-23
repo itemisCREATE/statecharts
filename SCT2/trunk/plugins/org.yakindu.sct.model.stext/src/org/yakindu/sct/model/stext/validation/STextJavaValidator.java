@@ -49,15 +49,14 @@ import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.Event;
-import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer;
 import org.yakindu.sct.model.sgraph.Choice;
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Entry;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
@@ -68,7 +67,6 @@ import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
-import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
@@ -202,12 +200,12 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 		Expression varRef = expression.getVarRef();
 		if (varRef instanceof FeatureCall) {
 			EObject referencedObject = ((FeatureCall) varRef).getFeature();
-			if (!(referencedObject instanceof Variable) && !(referencedObject instanceof Property)) {
+			if (!(referencedObject instanceof Property) && !(referencedObject instanceof Property)) {
 				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 		} else if (varRef instanceof ElementReferenceExpression) {
 			EObject referencedObject = ((ElementReferenceExpression) varRef).getReference();
-			if (!(referencedObject instanceof Variable) && !(referencedObject instanceof Property)) {
+			if (!(referencedObject instanceof Property) && !(referencedObject instanceof Property)) {
 				error(LEFT_HAND_ASSIGNMENT, ExpressionsPackage.Literals.ASSIGNMENT_EXPRESSION__VAR_REF);
 			}
 
@@ -546,7 +544,7 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	}
 
 	protected void checkFeatureCallEffect(FeatureCall call) {
-		if (call.getFeature() != null && call.getFeature() instanceof Feature
+		if (call.getFeature() != null && call.getFeature() instanceof Declaration
 				&& !(call.getFeature() instanceof Operation)) {
 			if (call.getFeature() instanceof Property) {
 				error("Access to property '" + nameProvider.getFullyQualifiedName(call.getFeature())

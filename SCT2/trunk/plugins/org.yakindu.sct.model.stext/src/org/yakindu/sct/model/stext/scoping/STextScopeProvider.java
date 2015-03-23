@@ -35,8 +35,8 @@ import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.Expression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.types.ComplexType;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.EnumerationType;
-import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
@@ -158,12 +158,12 @@ public class STextScopeProvider extends AbstractDeclarativeScopeProvider {
 		}
 
 		if (element instanceof EnumerationType) {
-			return  Scopes.scopeFor(((EnumerationType) element).getEnumerator(), scope);
-//			scope = new FilteringScope(scope, predicate);
+			return Scopes.scopeFor(((EnumerationType) element).getEnumerator(), scope);
+			// scope = new FilteringScope(scope, predicate);
 		}
 
-		if (element instanceof Feature && ((Feature) element).getType() instanceof ComplexType) {
-			scope = Scopes.scopeFor(((ComplexType) ((Feature) element).getType()).getAllFeatures(), scope);
+		if (element instanceof Declaration && ((Declaration) element).getType() instanceof ComplexType) {
+			scope = Scopes.scopeFor(((ComplexType) ((Declaration) element).getType()).getAllFeatures(), scope);
 			scope = new FilteringScope(scope, predicate);
 		}
 

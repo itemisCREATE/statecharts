@@ -8,15 +8,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-
 import org.yakindu.sct.model.sgraph.provider.ScopedElementItemProvider;
-
 import org.yakindu.sct.model.stext.stext.StatechartSpecification;
 import org.yakindu.sct.model.stext.stext.StextFactory;
 
@@ -29,123 +24,122 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 public class StatechartSpecificationItemProvider extends ScopedElementItemProvider
 {
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public StatechartSpecificationItemProvider(AdapterFactory adapterFactory)
   {
-    super(adapterFactory);
-  }
+		super(adapterFactory);
+	}
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
   {
-    if (itemPropertyDescriptors == null)
-    {
-      super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-    }
-    return itemPropertyDescriptors;
-  }
+		}
+		return itemPropertyDescriptors;
+	}
 
   /**
-   * This returns StatechartSpecification.gif.
-   * <!-- begin-user-doc -->
+	 * This returns StatechartSpecification.gif.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object getImage(Object object)
   {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/StatechartSpecification"));
-  }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/StatechartSpecification"));
+	}
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String getText(Object object)
   {
-    String label = ((StatechartSpecification)object).getNamespace();
-    return label == null || label.length() == 0 ?
-      getString("_UI_StatechartSpecification_type") :
-      getString("_UI_StatechartSpecification_type") + " " + label;
-  }
+		String label = ((StatechartSpecification)object).getNamespace();
+		return label == null || label.length() == 0 ?
+			getString("_UI_StatechartSpecification_type") :
+			getString("_UI_StatechartSpecification_type") + " " + label;
+	}
   
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void notifyChanged(Notification notification)
   {
-    updateChildren(notification);
-    super.notifyChanged(notification);
-  }
+		updateChildren(notification);
+		super.notifyChanged(notification);
+	}
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
-    super.collectNewChildDescriptors(newChildDescriptors, object);
+		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createStatechartScope()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 StextFactory.eINSTANCE.createStatechartScope()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createInterfaceScope()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 StextFactory.eINSTANCE.createInterfaceScope()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createInternalScope()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 StextFactory.eINSTANCE.createInternalScope()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createImportScope()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 StextFactory.eINSTANCE.createImportScope()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
-         StextFactory.eINSTANCE.createSimpleScope()));
-  }
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 StextFactory.eINSTANCE.createSimpleScope()));
+	}
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public ResourceLocator getResourceLocator()
   {
-    return STextEditPlugin.INSTANCE;
-  }
+		return STextEditPlugin.INSTANCE;
+	}
 
 }

@@ -14,7 +14,7 @@ package org.yakindu.sct.model.stext.resource;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.parser.IParseResult;
-import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;

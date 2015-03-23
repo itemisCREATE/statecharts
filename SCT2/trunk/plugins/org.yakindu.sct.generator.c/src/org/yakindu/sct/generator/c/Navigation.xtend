@@ -12,13 +12,13 @@ package org.yakindu.sct.generator.c
 
 import java.util.ArrayList
 import org.eclipse.emf.ecore.EObject
+import org.yakindu.base.types.Declaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sgraph.Declaration
+import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.sexec.extensions.SExecExtensions
 
 class Navigation extends SExecExtensions {
 	

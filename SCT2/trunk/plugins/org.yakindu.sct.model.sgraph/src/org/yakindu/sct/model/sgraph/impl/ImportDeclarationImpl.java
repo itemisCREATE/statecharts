@@ -11,13 +11,11 @@
 package org.yakindu.sct.model.sgraph.impl;
 
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
-import org.yakindu.sct.model.sgraph.Declaration;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.impl.DeclarationImpl;
 import org.yakindu.sct.model.sgraph.ImportDeclaration;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 

@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.Expression
 import org.yakindu.base.expressions.expressions.FeatureCall
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Event
 import org.yakindu.sct.model.sexec.Check
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionNode
@@ -26,8 +28,6 @@ import org.yakindu.sct.model.sexec.Reaction
 import org.yakindu.sct.model.sexec.Sequence
 import org.yakindu.sct.model.sexec.Step
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.model.sgraph.Event
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.EventDefinition

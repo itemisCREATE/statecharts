@@ -4,8 +4,6 @@ package org.yakindu.sct.model.stext.stext;
 
 import org.yakindu.base.types.Operation;
 
-import org.yakindu.sct.model.sgraph.Declaration;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Operation Definition</b></em>'.
@@ -16,5 +14,5 @@ import org.yakindu.sct.model.sgraph.Declaration;
  * @model
  * @generated
  */
-public interface OperationDefinition extends Declaration, Operation {
+public interface OperationDefinition extends Operation {
 } // OperationDefinition

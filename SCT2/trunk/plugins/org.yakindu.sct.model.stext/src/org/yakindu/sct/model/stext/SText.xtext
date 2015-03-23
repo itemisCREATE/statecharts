@@ -71,10 +71,10 @@ QIDWithWildcards:
 QID:
 	ID ('.' ID)*;
 
-Declaration returns sgraph::Declaration:
+Declaration returns types::Declaration:
 	EventDeclarartion | VariableDeclaration | OperationDeclaration | TypeAliasDeclaration | LocalReaction;
 
-EventDeclarartion returns sgraph::Event:
+EventDeclarartion returns types::Event:
 	EventDefinition;
 
 EventFeature returns types::Event:
@@ -86,7 +86,7 @@ EventDefinition:
 enum Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
-VariableDeclaration returns sgraph::Variable:
+VariableDeclaration returns types::Property:
 	VariableDefinition;
 
 VariableFeature returns types::Property:
@@ -97,10 +97,10 @@ VariableDefinition:
 	(('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])* '>'))?
 	('=' initialValue=Expression)?; /* ---- operation definition ---- */ 
 	
-OperationDeclaration returns sgraph::Declaration:
+OperationDeclaration returns types::Declaration:
 	OperationDefinition;
 
-TypeAliasDeclaration returns sgraph::Declaration:
+TypeAliasDeclaration returns types::Declaration:
 	TypeAliasDefinition
 ;
 

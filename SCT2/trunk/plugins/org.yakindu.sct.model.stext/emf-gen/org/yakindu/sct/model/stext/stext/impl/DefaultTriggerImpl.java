@@ -3,9 +3,7 @@
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.sct.model.sgraph.impl.TriggerImpl;
-
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
 import org.yakindu.sct.model.stext.stext.StextPackage;
 

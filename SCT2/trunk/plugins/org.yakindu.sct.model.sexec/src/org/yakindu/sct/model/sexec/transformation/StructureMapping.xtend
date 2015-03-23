@@ -3,27 +3,27 @@ package org.yakindu.sct.model.sexec.transformation
 import com.google.inject.Inject
 import java.util.ArrayList
 import org.eclipse.xtext.EcoreUtil2
+import org.eclipse.xtext.naming.IQualifiedNameProvider
+import org.yakindu.base.types.Declaration
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.ExecutionRegion
 import org.yakindu.sct.model.sexec.ExecutionScope
 import org.yakindu.sct.model.sexec.ExecutionState
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.FinalState
 import org.yakindu.sct.model.sgraph.Region
 import org.yakindu.sct.model.sgraph.RegularState
+import org.yakindu.sct.model.sgraph.SGraphFactory
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.State
 import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.sgraph.Vertex
 import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.Import
+import org.yakindu.sct.model.stext.stext.ImportScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sgraph.Vertex
-import org.eclipse.xtext.naming.IQualifiedNameProvider
-import org.yakindu.sct.model.stext.stext.ImportScope
-import org.yakindu.sct.model.stext.stext.Import
 import org.yakindu.sct.model.stext.util.ImportResolver
-import org.yakindu.sct.model.sgraph.SGraphFactory
 
 class StructureMapping {
 	 

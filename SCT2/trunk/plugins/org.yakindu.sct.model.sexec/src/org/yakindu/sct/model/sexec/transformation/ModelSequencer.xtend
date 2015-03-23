@@ -9,20 +9,19 @@ import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression
 import org.yakindu.base.expressions.expressions.FeatureCall
-import org.yakindu.base.types.Feature
+import org.yakindu.base.types.Declaration
 import org.yakindu.base.types.Package
-import org.yakindu.sct.model.sexec.ExecutionFlow
-import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.EventDefinition
-import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.stext.stext.ImportScope
-import org.yakindu.sct.model.sgraph.ImportDeclaration
-import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.base.types.validation.IValidationIssueAcceptor
 import org.yakindu.base.types.validation.IValidationIssueAcceptor.ListBasedValidationIssueAcceptor
+import org.yakindu.sct.model.sexec.ExecutionFlow
+import org.yakindu.sct.model.sexec.TimeEvent
+import org.yakindu.sct.model.sgraph.ImportDeclaration
+import org.yakindu.sct.model.sgraph.Statechart
+import org.yakindu.sct.model.stext.stext.EventDefinition
+import org.yakindu.sct.model.stext.stext.ImportScope
+import org.yakindu.sct.model.stext.stext.InterfaceScope
+import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class ModelSequencer implements IModelSequencer {
 	 
@@ -133,7 +132,7 @@ class ModelSequencer implements IModelSequencer {
 			// elements within externally declared packages should not be replaced but referenced
 			if (EcoreUtil2.getContainerOfType(call.feature, Package) == null) {
 				val r = call.feature.replaced 
-				if ( r != null ) call.feature = r as Feature
+				if ( r != null ) call.feature = r as Declaration
 			}
 		}
 	}

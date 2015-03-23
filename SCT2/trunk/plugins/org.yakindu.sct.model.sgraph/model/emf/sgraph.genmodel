@@ -3,7 +3,7 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011 committers of YAKINDU and others.&#xD;&#xA;All rights reserved. This program and the accompanying materials&#xD;&#xA;are made available under the terms of the Eclipse Public License v1.0&#xD;&#xA;which accompanies this distribution, and is available at&#xD;&#xA;http://www.eclipse.org/legal/epl-v10.html&#xD;&#xA;Contributors:&#xD;&#xA;committers of YAKINDU - initial API and implementation&#xD;&#xA;"
     modelDirectory="/org.yakindu.sct.model.sgraph/src" modelPluginID="org.yakindu.sct.model.sgraph"
     modelName="SGraph" importerID="org.eclipse.emf.importer.ecore" containmentProxies="true"
-    complianceLevel="6.0" usedGenPackages="../../../org.yakindu.base.types/model/base.genmodel#//base">
+    complianceLevel="6.0" usedGenPackages="../../../org.yakindu.base.types/model/base.genmodel#//base ../../../org.yakindu.base.types/model/types.genmodel#//types">
   <foreignModel>sgraph.ecore</foreignModel>
   <genPackages prefix="SGraph" basePackage="org.yakindu.sct.model" disposableProviderFactory="true"
       ecorePackage="sgraph.ecore#/">
@@ -24,21 +24,20 @@
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Region">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Region/vertices"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Region/priority"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Region/composite"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Transition">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//Transition/target"/>
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Transition/source"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Transition/priority"/>
     </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//FinalState"/>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//Variable"/>
-    <genClasses ecoreClass="sgraph.ecore#//Event"/>
     <genClasses ecoreClass="sgraph.ecore#//Choice">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Choice/kind"/>
     </genClasses>
-    <genClasses ecoreClass="sgraph.ecore#//Statechart"/>
+    <genClasses ecoreClass="sgraph.ecore#//Statechart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Statechart/imports"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Statechart/domainID"/>
+    </genClasses>
     <genClasses ecoreClass="sgraph.ecore#//Entry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Entry/kind"/>
     </genClasses>
@@ -58,7 +57,6 @@
     <genClasses image="false" ecoreClass="sgraph.ecore#//SpecificationElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//SpecificationElement/specification"/>
     </genClasses>
-    <genClasses image="false" ecoreClass="sgraph.ecore#//Declaration"/>
     <genClasses ecoreClass="sgraph.ecore#//Scope">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/declarations"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference sgraph.ecore#//Scope/events"/>
@@ -78,10 +76,15 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/composite"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//State/leaf"/>
     </genClasses>
-    <genClasses ecoreClass="sgraph.ecore#//Statement"/>
     <genClasses ecoreClass="sgraph.ecore#//RegularState"/>
     <genClasses image="false" ecoreClass="sgraph.ecore#//CompositeElement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference sgraph.ecore#//CompositeElement/regions"/>
+    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute sgraph.ecore#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="sgraph.ecore#//ImportDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference sgraph.ecore#//ImportDeclaration/declaration"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

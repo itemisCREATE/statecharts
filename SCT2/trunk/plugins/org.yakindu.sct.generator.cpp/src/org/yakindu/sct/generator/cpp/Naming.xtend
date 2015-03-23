@@ -10,21 +10,21 @@
 package org.yakindu.sct.generator.cpp
 
 import com.google.inject.Inject
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Parameter
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
+import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
-import org.yakindu.sct.model.sgraph.Event
+import org.yakindu.sct.model.sgen.GeneratorEntry
+import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
 import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
-import org.yakindu.sct.model.sgraph.Scope
-import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
 
 class Naming extends org.yakindu.sct.generator.c.Naming {
 	

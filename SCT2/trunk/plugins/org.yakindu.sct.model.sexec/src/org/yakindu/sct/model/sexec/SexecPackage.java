@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.yakindu.base.base.BasePackage;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 
 /**
@@ -1303,13 +1304,31 @@ public interface SexecPackage extends EPackage {
 	int STATE_VECTOR_FEATURE_COUNT = 2;
 
 	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__TYPE = TypesPackage.EVENT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Type Arguments</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TIME_EVENT__TYPE_ARGUMENTS = TypesPackage.EVENT__TYPE_ARGUMENTS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TIME_EVENT__NAME = SGraphPackage.EVENT__NAME;
+	int TIME_EVENT__NAME = TypesPackage.EVENT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Periodic</b></em>' attribute.
@@ -1318,7 +1337,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIME_EVENT__PERIODIC = SGraphPackage.EVENT_FEATURE_COUNT + 0;
+	int TIME_EVENT__PERIODIC = TypesPackage.EVENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Time Event</em>' class.
@@ -1327,7 +1346,7 @@ public interface SexecPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TIME_EVENT_FEATURE_COUNT = SGraphPackage.EVENT_FEATURE_COUNT + 1;
+	int TIME_EVENT_FEATURE_COUNT = TypesPackage.EVENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
