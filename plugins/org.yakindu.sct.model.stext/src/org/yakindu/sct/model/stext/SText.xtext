@@ -52,11 +52,11 @@ NamedInterfaceScope returns base::NamedElement:
 	InterfaceScope;
 
 InterfaceScope:
-	{InterfaceScope} 'interface' (name=XID)? ':' (declarations+=(EventDeclarartion | VariableDeclaration | TypeAliasDeclaration |
-	OperationDeclaration))*;
+	{InterfaceScope} 'interface' (name=XID)? ':' (declarations+=(EventDefinition | VariableDefinition | TypeAliasDefinition |
+	OperationDefinition))*;
 
 InternalScope:
-	{InternalScope} 'internal' ':' (declarations+=(EventDeclarartion | VariableDeclaration | OperationDeclaration | TypeAliasDeclaration |
+	{InternalScope} 'internal' ':' (declarations+=(EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition |
 	LocalReaction))*;
 	
 ImportScope:
@@ -72,13 +72,7 @@ QID:
 	ID ('.' ID)*;
 
 Declaration returns types::Declaration:
-	EventDeclarartion | VariableDeclaration | OperationDeclaration | TypeAliasDeclaration | LocalReaction;
-
-EventDeclarartion returns types::Event:
-	EventDefinition;
-
-EventFeature returns types::Event:
-	EventDefinition;
+	EventDefinition | VariableDefinition | OperationDefinition | TypeAliasDefinition | LocalReaction;
 
 EventDefinition:
 	(direction=Direction)? 'event' name=XID (':' type=[types::Type|FQN])?;
@@ -86,30 +80,14 @@ EventDefinition:
 enum Direction returns types::Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
-VariableDeclaration returns types::Property:
-	VariableDefinition;
-
-VariableFeature returns types::Property:
-	VariableDefinition;
-
 VariableDefinition:
 	{VariableDefinition} (const?='const'|'var') ((readonly?='readonly')? & (external?='external')?) name=XID ':' type=[types::Type|FQN]
 	(('<' (typeArguments+=[types::Type|QID]) (',' typeArguments+=[types::Type|QID])* '>'))?
 	('=' initialValue=Expression)?; /* ---- operation definition ---- */ 
 	
-OperationDeclaration returns types::Declaration:
-	OperationDefinition;
-
-TypeAliasDeclaration returns types::Declaration:
-	TypeAliasDefinition
-;
-
 TypeAliasDefinition:
 	{TypeAliasDefinition} 'alias' name=XID ':' type=[types::Type|FQN]
 ;
-
-OperationFeature returns types::Operation:
-	OperationDefinition;
 
 OperationDefinition:
 	{OperationDefinition} 'operation' name=XID '(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')' (':'
