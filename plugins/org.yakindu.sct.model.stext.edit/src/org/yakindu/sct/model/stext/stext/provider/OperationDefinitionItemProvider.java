@@ -8,10 +8,12 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.yakindu.base.types.Operation;
+import org.yakindu.base.types.Parameter;
 import org.yakindu.base.types.provider.OperationItemProvider;
-import org.yakindu.sct.model.stext.stext.OperationDefinition;
 
 /**
  * This is the item provider adapter for a {@link org.yakindu.sct.model.stext.stext.OperationDefinition} object.
@@ -61,18 +63,26 @@ public class OperationDefinitionItemProvider extends OperationItemProvider
 	}
 
   /**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
-  @Override
-  public String getText(Object object)
-  {
-		String label = ((OperationDefinition)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_OperationDefinition_type") :
-			getString("_UI_OperationDefinition_type") + " " + label;
+	@Override
+	public String getText(Object object) {
+		Operation operation = (Operation)object;
+		StringBuilder builder = new StringBuilder(operation.getName());
+		builder.append("(");
+		EList<Parameter> parameters = operation.getParameters();
+		for (Parameter parameter : parameters) {
+			builder.append(parameter.getName());
+			builder.append(" : " );
+			builder.append(parameter.getType().getName());
+		}
+		builder.append(")");
+		if(operation.getType() != null){
+			builder.append(" : ");
+			String name = operation.getType().getName();
+			builder.append(name == null ? "void" : name);
+		}
+		return builder.toString();
 	}
   
 
