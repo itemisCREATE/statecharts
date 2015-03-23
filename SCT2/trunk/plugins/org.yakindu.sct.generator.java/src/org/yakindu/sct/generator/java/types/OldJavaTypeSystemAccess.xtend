@@ -15,7 +15,7 @@ import org.yakindu.base.types.Type
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 
-import static org.yakindu.base.types.typesystem.GenericTypeSystem.*
+import static org.yakindu.base.types.typesystem.ITypeSystem.*
 
 /**
  * @author andreas muelder
