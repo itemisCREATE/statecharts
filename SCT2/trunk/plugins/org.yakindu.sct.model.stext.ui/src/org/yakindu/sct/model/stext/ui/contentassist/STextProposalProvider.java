@@ -16,13 +16,17 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
@@ -46,6 +50,11 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 
 	@Inject
 	private STextGrammarAccess grammarAccess;
+	private ComposedAdapterFactory composedAdapterFactory = new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+	@Inject
+	@ContentProposalLabelProvider
+	private ILabelProvider labelProvider;
 
 	/**
 	 * Validates if a keyword should be viewed by the proposal view.
@@ -149,6 +158,16 @@ public class STextProposalProvider extends AbstractSTextProposalProvider {
 			}
 		}
 		return priorityOptimizer;
+	}
+
+	@Override
+	protected String getDisplayString(EObject element, String qualifiedNameAsString, String shortName) {
+		IItemLabelProvider adapter = (IItemLabelProvider) composedAdapterFactory.adapt(element,
+				IItemLabelProvider.class);
+		if (adapter != null) {
+			return adapter.getText(element);
+		}
+		return super.getDisplayString(element, qualifiedNameAsString, shortName);
 	}
 
 	@Override
