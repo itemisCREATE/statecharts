@@ -90,14 +90,15 @@ public class EventItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((Event)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_Event_type") :
-			getString("_UI_Event_type") + " " + label;
+		Event event = (Event) object;
+		StringBuilder builder = new StringBuilder(event.getName());
+		builder.append("() : ");
+		builder.append(event.getType() != null ? event.getType().getName() : "void");
+		return builder.toString();
 	}
 
 	/**

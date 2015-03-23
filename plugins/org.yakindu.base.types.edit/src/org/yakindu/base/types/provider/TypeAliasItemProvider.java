@@ -8,11 +8,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,9 +20,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
-
 import org.yakindu.base.base.BasePackage;
-
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypesFactory;
 import org.yakindu.base.types.TypesPackage;
@@ -206,14 +201,26 @@ public class TypeAliasItemProvider
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
 	@Override
 	public String getText(Object object) {
+		TypeAlias alias = (TypeAlias) object;
 		String label = ((TypeAlias)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_TypeAlias_type") :
-			getString("_UI_TypeAlias_type") + " " + label;
+		
+		StringBuilder builder=null;
+		if(label != null){
+			builder = new StringBuilder(label);
+			if(alias.getOriginType() != null){
+				builder.append(" : ");
+				builder.append(alias.getOriginType().getName());
+			}
+		}
+		else{
+			builder = new StringBuilder();
+			builder.append(getString("_UI_TypeAlias_type"));
+		}
+		return builder.toString();
 	}
 	
 

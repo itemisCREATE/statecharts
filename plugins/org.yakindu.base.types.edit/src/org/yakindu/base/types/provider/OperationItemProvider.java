@@ -95,18 +95,21 @@ public class OperationItemProvider extends DeclarationItemProvider {
 	 */
 	@Override
 	public String getText(Object object) {
-		Operation operation = (Operation) object;
+		Operation operation = (Operation)object;
 		StringBuilder builder = new StringBuilder(operation.getName());
 		builder.append("(");
 		EList<Parameter> parameters = operation.getParameters();
 		for (Parameter parameter : parameters) {
 			builder.append(parameter.getName());
-			builder.append(" : ");
+			builder.append(" : " );
 			builder.append(parameter.getType().getName());
 		}
-		builder.append(") : ");
-		builder.append(operation.getType() != null ? operation.getType().getName() : "void");
-
+		builder.append(")");
+		if(operation.getType() != null){
+			builder.append(" : ");
+			String name = operation.getType().getName();
+			builder.append(name == null ? "void" : name);
+		}
 		return builder.toString();
 	}
 
