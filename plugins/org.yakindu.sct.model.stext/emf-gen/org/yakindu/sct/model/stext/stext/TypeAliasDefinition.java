@@ -2,6 +2,7 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.base.types.Declaration;
 import org.yakindu.base.types.TypeAlias;
 
 /**
@@ -14,5 +15,5 @@ import org.yakindu.base.types.TypeAlias;
  * @model
  * @generated
  */
-public interface TypeAliasDefinition extends TypeAlias, org.yakindu.base.types.Declaration {
+public interface TypeAliasDefinition extends TypeAlias, Declaration {
 } // TypeAliasDefinition

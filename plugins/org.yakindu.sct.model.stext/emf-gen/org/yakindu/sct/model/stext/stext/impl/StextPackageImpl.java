@@ -17,7 +17,6 @@ import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
 import org.yakindu.sct.model.stext.stext.DefRoot;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
-import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
@@ -318,13 +317,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EEnum directionEEnum = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EEnum timeEventTypeEEnum = null;
 
 	/**
@@ -602,15 +594,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getEventDefinition_Direction() {
-		return (EAttribute)eventDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getVariableDefinition() {
 		return variableDefinitionEClass;
 	}
@@ -620,35 +603,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getVariableDefinition_Const() {
-		return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getVariableDefinition_Readonly() {
-		return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getVariableDefinition_External() {
-		return (EAttribute)variableDefinitionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getVariableDefinition_InitialValue() {
-		return (EReference)variableDefinitionEClass.getEStructuralFeatures().get(3);
+		return (EReference)variableDefinitionEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -971,15 +927,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EEnum getDirection() {
-		return directionEEnum;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EEnum getTimeEventType() {
 		return timeEventTypeEEnum;
 	}
@@ -1056,12 +1003,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		createEAttribute(importEClass, IMPORT__IMPORTED_NAMESPACE);
 
 		eventDefinitionEClass = createEClass(EVENT_DEFINITION);
-		createEAttribute(eventDefinitionEClass, EVENT_DEFINITION__DIRECTION);
 
 		variableDefinitionEClass = createEClass(VARIABLE_DEFINITION);
-		createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__CONST);
-		createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__READONLY);
-		createEAttribute(variableDefinitionEClass, VARIABLE_DEFINITION__EXTERNAL);
 		createEReference(variableDefinitionEClass, VARIABLE_DEFINITION__INITIAL_VALUE);
 
 		operationDefinitionEClass = createEClass(OPERATION_DEFINITION);
@@ -1121,7 +1064,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		createEReference(activeStateReferenceExpressionEClass, ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE);
 
 		// Create enums
-		directionEEnum = createEEnum(DIRECTION);
 		timeEventTypeEEnum = createEEnum(TIME_EVENT_TYPE);
 		timeUnitEEnum = createEEnum(TIME_UNIT);
 	}
@@ -1229,12 +1171,8 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEAttribute(getImport_ImportedNamespace(), ecorePackage.getEString(), "importedNamespace", null, 0, 1, Import.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventDefinitionEClass, EventDefinition.class, "EventDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getEventDefinition_Direction(), this.getDirection(), "direction", null, 0, 1, EventDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(variableDefinitionEClass, VariableDefinition.class, "VariableDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getVariableDefinition_Const(), ecorePackage.getEBoolean(), "const", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariableDefinition_Readonly(), ecorePackage.getEBoolean(), "readonly", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getVariableDefinition_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getVariableDefinition_InitialValue(), theExpressionsPackage.getExpression(), null, "initialValue", null, 0, 1, VariableDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(operationDefinitionEClass, OperationDefinition.class, "OperationDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1294,11 +1232,6 @@ public class StextPackageImpl extends EPackageImpl implements StextPackage {
 		initEReference(getActiveStateReferenceExpression_Value(), theSGraphPackage.getState(), null, "value", null, 0, 1, ActiveStateReferenceExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
-		initEEnum(directionEEnum, Direction.class, "Direction");
-		addEEnumLiteral(directionEEnum, Direction.LOCAL);
-		addEEnumLiteral(directionEEnum, Direction.IN);
-		addEEnumLiteral(directionEEnum, Direction.OUT);
-
 		initEEnum(timeEventTypeEEnum, TimeEventType.class, "TimeEventType");
 		addEEnumLiteral(timeEventTypeEEnum, TimeEventType.AFTER);
 		addEEnumLiteral(timeEventTypeEEnum, TimeEventType.EVERY);

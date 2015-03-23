@@ -83,7 +83,7 @@ EventFeature returns types::Event:
 EventDefinition:
 	(direction=Direction)? 'event' name=XID (':' type=[types::Type|FQN])?;
 
-enum Direction:
+enum Direction returns types::Direction:
 	LOCAL='local' | IN='in' | OUT='out';
 
 VariableDeclaration returns types::Property:

@@ -50,6 +50,7 @@ import org.yakindu.base.expressions.expressions.ExpressionsPackage;
 import org.yakindu.base.expressions.expressions.FeatureCall;
 import org.yakindu.base.expressions.validation.ExpressionsJavaValidator;
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.Parameter;
@@ -73,7 +74,6 @@ import org.yakindu.sct.model.sgraph.validation.SCTResourceValidator;
 import org.yakindu.sct.model.sgraph.validation.SGraphJavaValidator;
 import org.yakindu.sct.model.stext.services.STextGrammarAccess;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
-import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
@@ -586,10 +586,10 @@ public class STextJavaValidator extends AbstractSTextJavaValidator implements ST
 	@Check(CheckType.FAST)
 	public void checkEventDefinition(EventDefinition event) {
 		if (event.eContainer() instanceof InterfaceScope && event.getDirection() == Direction.LOCAL) {
-			error(LOCAL_DECLARATIONS, StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
+			error(LOCAL_DECLARATIONS, TypesPackage.Literals.EVENT__DIRECTION);
 		}
 		if (event.eContainer() instanceof InternalScope && event.getDirection() != Direction.LOCAL) {
-			error(IN_OUT_DECLARATIONS, StextPackage.Literals.EVENT_DEFINITION__DIRECTION);
+			error(IN_OUT_DECLARATIONS, TypesPackage.Literals.EVENT__DIRECTION);
 		}
 	}
 

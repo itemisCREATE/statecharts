@@ -13,7 +13,6 @@ import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
 import org.yakindu.sct.model.stext.stext.DefRoot;
 import org.yakindu.sct.model.stext.stext.DefaultTrigger;
-import org.yakindu.sct.model.stext.stext.Direction;
 import org.yakindu.sct.model.stext.stext.EntryEvent;
 import org.yakindu.sct.model.stext.stext.EntryPointSpec;
 import org.yakindu.sct.model.stext.stext.EventDefinition;
@@ -143,8 +142,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case StextPackage.DIRECTION:
-				return createDirectionFromString(eDataType, initialValue);
 			case StextPackage.TIME_EVENT_TYPE:
 				return createTimeEventTypeFromString(eDataType, initialValue);
 			case StextPackage.TIME_UNIT:
@@ -162,8 +159,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case StextPackage.DIRECTION:
-				return convertDirectionToString(eDataType, instanceValue);
 			case StextPackage.TIME_EVENT_TYPE:
 				return convertTimeEventTypeToString(eDataType, instanceValue);
 			case StextPackage.TIME_UNIT:
@@ -531,26 +526,6 @@ public class StextFactoryImpl extends EFactoryImpl implements StextFactory {
 	public ActiveStateReferenceExpression createActiveStateReferenceExpression() {
 		ActiveStateReferenceExpressionImpl activeStateReferenceExpression = new ActiveStateReferenceExpressionImpl();
 		return activeStateReferenceExpression;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Direction createDirectionFromString(EDataType eDataType, String initialValue) {
-		Direction result = Direction.get(initialValue);
-		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
-		return result;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String convertDirectionToString(EDataType eDataType, Object instanceValue) {
-		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

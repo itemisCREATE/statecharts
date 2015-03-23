@@ -14,6 +14,7 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.base.types.Direction
 import org.yakindu.sct.generator.c.Statemachine
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.generator.cpp.features.GenmodelEntriesExtension
@@ -24,7 +25,6 @@ import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
-import org.yakindu.sct.model.stext.stext.Direction
 import org.yakindu.sct.model.stext.stext.EventDefinition
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
@@ -32,32 +32,32 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StatemachineHeader extends Statemachine {
-	
+
 	@Inject extension Naming
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntriesExtension
 	@Inject extension INamingService
-	
+
 	protected GeneratorEntry entry
-	
+
 	def generateStatemachineHeader(ExecutionFlow flow, Statechart sc, IFileSystemAccess fsa, GeneratorEntry entry) {
 		this.entry = entry
-		fsa.generateFile(flow.module().h, flow.statemachineHContent(entry) )
+		fsa.generateFile(flow.module().h, flow.statemachineHContent(entry))
 	}
-	
-	override statemachineHContent(ExecutionFlow it,  GeneratorEntry entry) '''
+
+	override statemachineHContent(ExecutionFlow it, GeneratorEntry entry) '''
 		«entry.licenseText»
 		
 		#ifndef «module().define»_H_
 		#define «module().define»_H_
-
+		
 		#include "«typesModule.h»"
 		#include "«statemachineInterface.h»"
 		«IF timed»
 			#include "«timedStatemachineInterface.h»"
 		«ENDIF»
-
+		
 		/*! \file Header of the state machine '«name»'.
 		*/
 		
@@ -91,38 +91,37 @@ class StatemachineHeader extends Statemachine {
 		«ENDIF»
 		#endif /* «module().define»_H_ */
 	'''
-	
+
 	def protected getInterfaceExtensions(ExecutionFlow flow) {
 
 		var String interfaces = "";
 
 		if (flow.timed) {
-			interfaces = interfaces + "public " +timedStatemachineInterface+", "
+			interfaces = interfaces + "public " + timedStatemachineInterface + ", "
 		}
 
 		interfaces = interfaces + "public " + statemachineInterface
-		
+
 		return interfaces;
 	}
-	
+
 	def protected CharSequence createInlineOCB_Destructor(StatechartScope it) {
 		if (hasOperations) {
 			return '''inline «flow.module»::«interfaceOCBName»::~«interfaceOCBName»() {}'''
 		}
 		return ''''''
 	}
-	
+
 	def protected createPublicScope(Scope scope) {
 		switch scope {
 			InterfaceScope: scope.createPublicScope
 			InternalScope: scope.createPublicScope
 		}
 	}
-	
-	def protected createPublicScope(InterfaceScope scope)
-	'''
+
+	def protected createPublicScope(InterfaceScope scope) '''
 		«scope.createInterface»
-«««		«scope.createListenerInterface(entry)»
+		«««		«scope.createListenerInterface(entry)»
 		«scope.createOCBInterface»
 		
 		/*! Returns an instance of the interface class '«scope.interfaceName»'. */
@@ -130,19 +129,18 @@ class StatemachineHeader extends Statemachine {
 		
 		«IF scope.defaultInterface»
 			«FOR d : scope.declarations»
-			«d.functionPrototypes»
+				«d.functionPrototypes»
 			«ENDFOR»
 		«ENDIF»
 	'''
-	
+
 	def protected createPublicScope(InternalScope scope) {
 		'''
 			«scope.createOCBInterface»
 		'''
 	}
-	
-	def protected createInterface(StatechartScope scope)
-	'''
+
+	def protected createInterface(StatechartScope scope) '''
 		//! Inner class for «scope.simpleName» interface scope.
 		class «scope.interfaceName» {
 			
@@ -154,32 +152,32 @@ class StatemachineHeader extends Statemachine {
 			«entry.innerClassVisibility»:
 				friend class «scope.execution_flow.module()»;
 				«FOR d : scope.declarations»
-				 «d.structDeclaration»
+					«d.structDeclaration»
 				«ENDFOR»
 		};
 	'''
-	
+
 	def createOCBInterface(StatechartScope scope) {
 		'''
-		
-		«IF scope.hasOperations»
-			//! Inner class for «scope.simpleName» interface scope operation callbacks.
-			class «scope.interfaceOCBName» {
-				public:
-					«IF !entry.useStaticOPC»
-						virtual ~«scope.interfaceOCBName»() = 0;
-						
-					«ENDIF»
-					«FOR operation : scope.operations SEPARATOR StringConcatenation.DEFAULT_LINE_DELIMITER»
-						«IF entry.useStaticOPC»static«ELSE»virtual«ENDIF» «operation.signature»«IF !entry.useStaticOPC» = 0«ENDIF»;
-					«ENDFOR»
-			};
-			«IF !entry.useStaticOPC»
-				
-				/*! Set the working instance of the operation callback interface '«scope.interfaceOCBName»'. */
-				«scope.OCB_InterfaceSetterDeclaration(false)»;
+			
+			«IF scope.hasOperations»
+				//! Inner class for «scope.simpleName» interface scope operation callbacks.
+				class «scope.interfaceOCBName» {
+					public:
+						«IF !entry.useStaticOPC»
+							virtual ~«scope.interfaceOCBName»() = 0;
+							
+						«ENDIF»
+						«FOR operation : scope.operations SEPARATOR StringConcatenation.DEFAULT_LINE_DELIMITER»
+							«IF entry.useStaticOPC»static«ELSE»virtual«ENDIF» «operation.signature»«IF !entry.useStaticOPC» = 0«ENDIF»;
+						«ENDFOR»
+				};
+				«IF !entry.useStaticOPC»
+					
+					/*! Set the working instance of the operation callback interface '«scope.interfaceOCBName»'. */
+					«scope.OCB_InterfaceSetterDeclaration(false)»;
+				«ENDIF»
 			«ENDIF»
-		«ENDIF»
 		'''
 	}
 
@@ -187,7 +185,7 @@ class StatemachineHeader extends Statemachine {
 		//! the maximum number of orthogonal states defines the dimension of the state configuration vector.
 		static const sc_integer «orthogonalStatesConst» = «stateVector.size»;
 		«IF hasHistory»
-		//! dimension of the state configuration vector for history states
+			//! dimension of the state configuration vector for history states
 		static const sc_integer «historyStatesConst» = «historyVector.size»;«ENDIF»
 		
 		«IF timed»
@@ -205,7 +203,7 @@ class StatemachineHeader extends Statemachine {
 			«IF s.hasOperations && !entry.useStaticOPC»«s.interfaceOCBName»* «s.OCB_Instance»;«ENDIF»
 		«ENDFOR»
 	'''
-	
+
 	def protected publicFunctionPrototypes(ExecutionFlow it) '''
 		«IStatemachineFunctions»
 		
@@ -213,7 +211,7 @@ class StatemachineHeader extends Statemachine {
 			«timedStatemachineFunctions»
 		«ENDIF»
 	'''
-	
+
 	def protected IStatemachineFunctions() '''
 		void init();
 		
@@ -223,7 +221,7 @@ class StatemachineHeader extends Statemachine {
 		
 		void runCycle();
 	'''
-	
+
 	def timedStatemachineFunctions(ExecutionFlow it) '''
 		void setTimer(«timerInterface»* timer);
 		
@@ -231,7 +229,7 @@ class StatemachineHeader extends Statemachine {
 		
 		void «raiseTimeEventFctID»(sc_eventid event);
 	'''
-	
+
 	override dispatch functionPrototypes(EventDefinition it) '''
 		«IF direction == Direction::LOCAL»
 			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
@@ -246,9 +244,9 @@ class StatemachineHeader extends Statemachine {
 				
 			«ENDIF»
 		«ELSEIF direction == Direction::IN»
-		/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
-		void «asRaiser»(«valueParams»);
-		
+			/*! Raises the in event '«name»' that is defined in the «scope.scopeDescription». */ 
+			void «asRaiser»(«valueParams»);
+			
 		«ELSE»
 			/*! Checks if the out event '«name»' that is defined in the «scope.scopeDescription» has been raised. */ 
 			sc_boolean «asRaised»();
@@ -264,18 +262,17 @@ class StatemachineHeader extends Statemachine {
 	override dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 		«type.targetLanguageName» «it.asGetter»();
-
-		«IF ! readonly »
+		
+		«IF ! readonly»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			void «asSetter»(«type.targetLanguageName» value);
 			
 		«ENDIF»
 	'''
-	
+
 	/* ===================================================================================
 	 * Handling decralartion of function prototypes
 	 */
-	 
 	/** */
 	def prototypes(ExecutionFlow it) '''
 		// prototypes of all internal functions
@@ -291,19 +288,18 @@ class StatemachineHeader extends Statemachine {
 		void clearOutEvents();
 		
 	'''
-	
-	
+
 	def toPrototypes(List<Step> steps) '''
 		«FOR s : steps»
 			«s.functionPrototype»
 		«ENDFOR»
 	'''
-	
+
 	def dispatch functionPrototype(Check it) '''
 		sc_boolean «shortName»();
 	'''
-	
+
 	def dispatch functionPrototype(Step it) '''
 		void «shortName»();
-	'''	
+	'''
 }
