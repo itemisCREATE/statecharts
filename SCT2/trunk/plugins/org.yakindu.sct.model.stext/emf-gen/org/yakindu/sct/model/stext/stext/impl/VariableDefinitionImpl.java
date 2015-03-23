@@ -19,9 +19,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.VariableDefinitionImpl#isConst <em>Const</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.VariableDefinitionImpl#isReadonly <em>Readonly</em>}</li>
- *   <li>{@link org.yakindu.sct.model.stext.stext.impl.VariableDefinitionImpl#isExternal <em>External</em>}</li>
  *   <li>{@link org.yakindu.sct.model.stext.stext.impl.VariableDefinitionImpl#getInitialValue <em>Initial Value</em>}</li>
  * </ul>
  * </p>
@@ -29,66 +26,6 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition;
  * @generated
  */
 public class VariableDefinitionImpl extends PropertyImpl implements VariableDefinition {
-	/**
-	 * The default value of the '{@link #isConst() <em>Const</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isConst()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean CONST_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isConst() <em>Const</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isConst()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean const_ = CONST_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isReadonly() <em>Readonly</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isReadonly()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean READONLY_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isReadonly() <em>Readonly</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isReadonly()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean readonly = READONLY_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isExternal() <em>External</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isExternal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean EXTERNAL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isExternal() <em>External</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isExternal()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean external = EXTERNAL_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getInitialValue() <em>Initial Value</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -116,69 +53,6 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	@Override
 	protected EClass eStaticClass() {
 		return StextPackage.Literals.VARIABLE_DEFINITION;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isConst() {
-		return const_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setConst(boolean newConst) {
-		boolean oldConst = const_;
-		const_ = newConst;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.VARIABLE_DEFINITION__CONST, oldConst, const_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isReadonly() {
-		return readonly;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReadonly(boolean newReadonly) {
-		boolean oldReadonly = readonly;
-		readonly = newReadonly;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.VARIABLE_DEFINITION__READONLY, oldReadonly, readonly));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isExternal() {
-		return external;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setExternal(boolean newExternal) {
-		boolean oldExternal = external;
-		external = newExternal;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, StextPackage.VARIABLE_DEFINITION__EXTERNAL, oldExternal, external));
 	}
 
 	/**
@@ -246,12 +120,6 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case StextPackage.VARIABLE_DEFINITION__CONST:
-				return isConst();
-			case StextPackage.VARIABLE_DEFINITION__READONLY:
-				return isReadonly();
-			case StextPackage.VARIABLE_DEFINITION__EXTERNAL:
-				return isExternal();
 			case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
 				return getInitialValue();
 		}
@@ -266,15 +134,6 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case StextPackage.VARIABLE_DEFINITION__CONST:
-				setConst((Boolean)newValue);
-				return;
-			case StextPackage.VARIABLE_DEFINITION__READONLY:
-				setReadonly((Boolean)newValue);
-				return;
-			case StextPackage.VARIABLE_DEFINITION__EXTERNAL:
-				setExternal((Boolean)newValue);
-				return;
 			case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
 				setInitialValue((Expression)newValue);
 				return;
@@ -290,15 +149,6 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case StextPackage.VARIABLE_DEFINITION__CONST:
-				setConst(CONST_EDEFAULT);
-				return;
-			case StextPackage.VARIABLE_DEFINITION__READONLY:
-				setReadonly(READONLY_EDEFAULT);
-				return;
-			case StextPackage.VARIABLE_DEFINITION__EXTERNAL:
-				setExternal(EXTERNAL_EDEFAULT);
-				return;
 			case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
 				setInitialValue((Expression)null);
 				return;
@@ -314,36 +164,10 @@ public class VariableDefinitionImpl extends PropertyImpl implements VariableDefi
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case StextPackage.VARIABLE_DEFINITION__CONST:
-				return const_ != CONST_EDEFAULT;
-			case StextPackage.VARIABLE_DEFINITION__READONLY:
-				return readonly != READONLY_EDEFAULT;
-			case StextPackage.VARIABLE_DEFINITION__EXTERNAL:
-				return external != EXTERNAL_EDEFAULT;
 			case StextPackage.VARIABLE_DEFINITION__INITIAL_VALUE:
 				return initialValue != null;
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString() {
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (const: ");
-		result.append(const_);
-		result.append(", readonly: ");
-		result.append(readonly);
-		result.append(", external: ");
-		result.append(external);
-		result.append(')');
-		return result.toString();
 	}
 
 } //VariableDefinitionImpl

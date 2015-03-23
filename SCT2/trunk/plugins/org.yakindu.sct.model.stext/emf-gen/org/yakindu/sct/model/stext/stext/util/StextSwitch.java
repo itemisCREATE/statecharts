@@ -7,6 +7,8 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
@@ -999,7 +1001,7 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDeclaration(org.yakindu.base.types.Declaration object) {
+	public T caseDeclaration(Declaration object) {
 		return null;
 	}
 
@@ -1014,7 +1016,7 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEvent(org.yakindu.base.types.Event object) {
+	public T caseEvent(Event object) {
 		return null;
 	}
 

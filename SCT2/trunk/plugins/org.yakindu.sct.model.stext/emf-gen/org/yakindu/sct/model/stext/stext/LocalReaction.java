@@ -2,6 +2,7 @@
  */
 package org.yakindu.sct.model.stext.stext;
 
+import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sgraph.Reaction;
 
 /**
@@ -14,5 +15,5 @@ import org.yakindu.sct.model.sgraph.Reaction;
  * @model
  * @generated
  */
-public interface LocalReaction extends Reaction, org.yakindu.base.types.Declaration {
+public interface LocalReaction extends Reaction, Declaration {
 } // LocalReaction

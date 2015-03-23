@@ -557,7 +557,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_DEFINITION__DIRECTION = TypesPackage.EVENT_FEATURE_COUNT + 0;
+	int EVENT_DEFINITION__DIRECTION = TypesPackage.EVENT__DIRECTION;
 
 	/**
 	 * The number of structural features of the '<em>Event Definition</em>' class.
@@ -566,7 +566,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_DEFINITION_FEATURE_COUNT = TypesPackage.EVENT_FEATURE_COUNT + 1;
+	int EVENT_DEFINITION_FEATURE_COUNT = TypesPackage.EVENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.VariableDefinitionImpl <em>Variable Definition</em>}' class.
@@ -612,7 +612,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__CONST = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
+	int VARIABLE_DEFINITION__CONST = TypesPackage.PROPERTY__CONST;
 
 	/**
 	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
@@ -621,7 +621,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__READONLY = TypesPackage.PROPERTY_FEATURE_COUNT + 1;
+	int VARIABLE_DEFINITION__READONLY = TypesPackage.PROPERTY__READONLY;
 
 	/**
 	 * The feature id for the '<em><b>External</b></em>' attribute.
@@ -630,7 +630,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__EXTERNAL = TypesPackage.PROPERTY_FEATURE_COUNT + 2;
+	int VARIABLE_DEFINITION__EXTERNAL = TypesPackage.PROPERTY__EXTERNAL;
 
 	/**
 	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
@@ -639,7 +639,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION__INITIAL_VALUE = TypesPackage.PROPERTY_FEATURE_COUNT + 3;
+	int VARIABLE_DEFINITION__INITIAL_VALUE = TypesPackage.PROPERTY_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Variable Definition</em>' class.
@@ -648,7 +648,7 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VARIABLE_DEFINITION_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 4;
+	int VARIABLE_DEFINITION_FEATURE_COUNT = TypesPackage.PROPERTY_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.impl.OperationDefinitionImpl <em>Operation Definition</em>}' class.
@@ -1365,16 +1365,6 @@ public interface StextPackage extends EPackage {
 	int ACTIVE_STATE_REFERENCE_EXPRESSION_FEATURE_COUNT = ExpressionsPackage.EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.Direction <em>Direction</em>}' enum.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.yakindu.sct.model.stext.stext.Direction
-	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getDirection()
-	 * @generated
-	 */
-	int DIRECTION = 36;
-
-	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1382,7 +1372,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeEventType()
 	 * @generated
 	 */
-	int TIME_EVENT_TYPE = 37;
+	int TIME_EVENT_TYPE = 36;
 
 	/**
 	 * The meta object id for the '{@link org.yakindu.sct.model.stext.stext.TimeUnit <em>Time Unit</em>}' enum.
@@ -1392,7 +1382,7 @@ public interface StextPackage extends EPackage {
 	 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getTimeUnit()
 	 * @generated
 	 */
-	int TIME_UNIT = 38;
+	int TIME_UNIT = 37;
 
 
 	/**
@@ -1624,17 +1614,6 @@ public interface StextPackage extends EPackage {
 	EClass getEventDefinition();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.EventDefinition#getDirection <em>Direction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Direction</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.EventDefinition#getDirection()
-	 * @see #getEventDefinition()
-	 * @generated
-	 */
-	EAttribute getEventDefinition_Direction();
-
-	/**
 	 * Returns the meta object for class '{@link org.yakindu.sct.model.stext.stext.VariableDefinition <em>Variable Definition</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1643,39 +1622,6 @@ public interface StextPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getVariableDefinition();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#isConst <em>Const</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Const</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.VariableDefinition#isConst()
-	 * @see #getVariableDefinition()
-	 * @generated
-	 */
-	EAttribute getVariableDefinition_Const();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#isReadonly <em>Readonly</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Readonly</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.VariableDefinition#isReadonly()
-	 * @see #getVariableDefinition()
-	 * @generated
-	 */
-	EAttribute getVariableDefinition_Readonly();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#isExternal <em>External</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>External</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.VariableDefinition#isExternal()
-	 * @see #getVariableDefinition()
-	 * @generated
-	 */
-	EAttribute getVariableDefinition_External();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.yakindu.sct.model.stext.stext.VariableDefinition#getInitialValue <em>Initial Value</em>}'.
@@ -2053,16 +1999,6 @@ public interface StextPackage extends EPackage {
 	EReference getActiveStateReferenceExpression_Value();
 
 	/**
-	 * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.Direction <em>Direction</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Direction</em>'.
-	 * @see org.yakindu.sct.model.stext.stext.Direction
-	 * @generated
-	 */
-	EEnum getDirection();
-
-	/**
 	 * Returns the meta object for enum '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2309,14 +2245,6 @@ public interface StextPackage extends EPackage {
 		EClass EVENT_DEFINITION = eINSTANCE.getEventDefinition();
 
 		/**
-		 * The meta object literal for the '<em><b>Direction</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute EVENT_DEFINITION__DIRECTION = eINSTANCE.getEventDefinition_Direction();
-
-		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.impl.VariableDefinitionImpl <em>Variable Definition</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2325,30 +2253,6 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EClass VARIABLE_DEFINITION = eINSTANCE.getVariableDefinition();
-
-		/**
-		 * The meta object literal for the '<em><b>Const</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VARIABLE_DEFINITION__CONST = eINSTANCE.getVariableDefinition_Const();
-
-		/**
-		 * The meta object literal for the '<em><b>Readonly</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VARIABLE_DEFINITION__READONLY = eINSTANCE.getVariableDefinition_Readonly();
-
-		/**
-		 * The meta object literal for the '<em><b>External</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute VARIABLE_DEFINITION__EXTERNAL = eINSTANCE.getVariableDefinition_External();
 
 		/**
 		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.
@@ -2679,16 +2583,6 @@ public interface StextPackage extends EPackage {
 		 * @generated
 		 */
 		EReference ACTIVE_STATE_REFERENCE_EXPRESSION__VALUE = eINSTANCE.getActiveStateReferenceExpression_Value();
-
-		/**
-		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.Direction <em>Direction</em>}' enum.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.yakindu.sct.model.stext.stext.Direction
-		 * @see org.yakindu.sct.model.stext.stext.impl.StextPackageImpl#getDirection()
-		 * @generated
-		 */
-		EEnum DIRECTION = eINSTANCE.getDirection();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.sct.model.stext.stext.TimeEventType <em>Time Event Type</em>}' enum.

@@ -8,6 +8,8 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
 import org.yakindu.base.expressions.expressions.Expression;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.Event;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
@@ -20,6 +22,7 @@ import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
+import org.yakindu.sct.model.stext.stext.*;
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
 import org.yakindu.sct.model.stext.stext.AlwaysEvent;
 import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
@@ -275,11 +278,11 @@ public class StextAdapterFactory extends AdapterFactoryImpl {
 				return createTypedElementAdapter();
 			}
 			@Override
-			public Adapter caseDeclaration(org.yakindu.base.types.Declaration object) {
+			public Adapter caseDeclaration(Declaration object) {
 				return createDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseEvent(org.yakindu.base.types.Event object) {
+			public Adapter caseEvent(Event object) {
 				return createEventAdapter();
 			}
 			@Override
