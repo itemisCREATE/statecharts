@@ -3,10 +3,7 @@
 package org.yakindu.sct.model.stext.stext;
 
 import org.yakindu.base.expressions.expressions.Expression;
-
 import org.yakindu.base.types.Property;
-
-import org.yakindu.sct.model.sgraph.Variable;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +24,7 @@ import org.yakindu.sct.model.sgraph.Variable;
  * @model
  * @generated
  */
-public interface VariableDefinition extends Variable, Property {
+public interface VariableDefinition extends Property {
 	/**
 	 * Returns the value of the '<em><b>Const</b></em>' attribute.
 	 * <!-- begin-user-doc -->

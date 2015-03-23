@@ -8,15 +8,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-
 import org.yakindu.sct.model.sgraph.SGraphPackage;
-
 import org.yakindu.sct.model.sgraph.provider.ReactionItemProvider;
-
 import org.yakindu.sct.model.stext.stext.StextFactory;
 
 /**
@@ -28,120 +23,119 @@ import org.yakindu.sct.model.stext.stext.StextFactory;
 public class TransitionReactionItemProvider extends ReactionItemProvider
 {
   /**
-   * This constructs an instance from a factory and a notifier.
-   * <!-- begin-user-doc -->
+	 * This constructs an instance from a factory and a notifier.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   public TransitionReactionItemProvider(AdapterFactory adapterFactory)
   {
-    super(adapterFactory);
-  }
+		super(adapterFactory);
+	}
 
   /**
-   * This returns the property descriptors for the adapted class.
-   * <!-- begin-user-doc -->
+	 * This returns the property descriptors for the adapted class.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
   {
-    if (itemPropertyDescriptors == null)
-    {
-      super.getPropertyDescriptors(object);
+		if (itemPropertyDescriptors == null) {
+			super.getPropertyDescriptors(object);
 
-    }
-    return itemPropertyDescriptors;
-  }
+		}
+		return itemPropertyDescriptors;
+	}
 
   /**
-   * This returns TransitionReaction.gif.
-   * <!-- begin-user-doc -->
+	 * This returns TransitionReaction.gif.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public Object getImage(Object object)
   {
-    return overlayImage(object, getResourceLocator().getImage("full/obj16/TransitionReaction"));
-  }
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TransitionReaction"));
+	}
 
   /**
-   * This returns the label text for the adapted class.
-   * <!-- begin-user-doc -->
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public String getText(Object object)
   {
-    return getString("_UI_TransitionReaction_type");
-  }
+		return getString("_UI_TransitionReaction_type");
+	}
   
 
   /**
-   * This handles model notifications by calling {@link #updateChildren} to update any cached
-   * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-   * <!-- begin-user-doc -->
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public void notifyChanged(Notification notification)
   {
-    updateChildren(notification);
-    super.notifyChanged(notification);
-  }
+		updateChildren(notification);
+		super.notifyChanged(notification);
+	}
 
   /**
-   * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-   * that can be created under this object.
-   * <!-- begin-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
+	 * that can be created under this object.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
   {
-    super.collectNewChildDescriptors(newChildDescriptors, object);
+		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__TRIGGER,
-         StextFactory.eINSTANCE.createReactionTrigger()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REACTION__TRIGGER,
+				 StextFactory.eINSTANCE.createReactionTrigger()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__TRIGGER,
-         StextFactory.eINSTANCE.createDefaultTrigger()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REACTION__TRIGGER,
+				 StextFactory.eINSTANCE.createDefaultTrigger()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__EFFECT,
-         StextFactory.eINSTANCE.createReactionEffect()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REACTION__EFFECT,
+				 StextFactory.eINSTANCE.createReactionEffect()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__PROPERTIES,
-         StextFactory.eINSTANCE.createEntryPointSpec()));
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REACTION__PROPERTIES,
+				 StextFactory.eINSTANCE.createEntryPointSpec()));
 
-    newChildDescriptors.add
-      (createChildParameter
-        (SGraphPackage.Literals.REACTION__PROPERTIES,
-         StextFactory.eINSTANCE.createExitPointSpec()));
-  }
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.REACTION__PROPERTIES,
+				 StextFactory.eINSTANCE.createExitPointSpec()));
+	}
 
   /**
-   * Return the resource locator for this item provider's resources.
-   * <!-- begin-user-doc -->
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @generated
-   */
+	 * @generated
+	 */
   @Override
   public ResourceLocator getResourceLocator()
   {
-    return STextEditPlugin.INSTANCE;
-  }
+		return STextEditPlugin.INSTANCE;
+	}
 
 }

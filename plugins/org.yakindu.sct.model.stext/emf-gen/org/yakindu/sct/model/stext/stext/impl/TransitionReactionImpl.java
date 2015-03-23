@@ -3,9 +3,7 @@
 package org.yakindu.sct.model.stext.stext.impl;
 
 import org.eclipse.emf.ecore.EClass;
-
 import org.yakindu.sct.model.sgraph.impl.ReactionImpl;
-
 import org.yakindu.sct.model.stext.stext.StextPackage;
 import org.yakindu.sct.model.stext.stext.TransitionReaction;
 

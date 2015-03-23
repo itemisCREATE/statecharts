@@ -14,5 +14,5 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.edit;visibility:=reexport,
  org.yakindu.base.types;visibility:=reexport,
  org.eclipse.emf.ecore.edit;bundle-version="2.7.0",
- org.yakindu.base.types.edit;visibility:=reexport;bundle-version="1.0.0"
+ org.yakindu.base.types.edit;bundle-version="1.0.0";visibility:=reexport
 Bundle-ActivationPolicy: lazy

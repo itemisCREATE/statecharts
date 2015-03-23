@@ -76,7 +76,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
         defaultValueLiteral="0"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="TimeEvent" eSuperTypes="../../org.yakindu.sct.model.sgraph/model/emf/sgraph.ecore#//Event">
+  <eClassifiers xsi:type="ecore:EClass" name="TimeEvent" eSuperTypes="../../org.yakindu.base.types/model/types.ecore#//Event">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="periodic" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>

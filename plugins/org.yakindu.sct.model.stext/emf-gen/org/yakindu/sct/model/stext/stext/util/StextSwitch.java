@@ -4,32 +4,58 @@ package org.yakindu.sct.model.stext.stext.util;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.util.Switch;
-
 import org.yakindu.base.base.NamedElement;
-
 import org.yakindu.base.expressions.expressions.Expression;
-
-import org.yakindu.base.types.Feature;
 import org.yakindu.base.types.Operation;
 import org.yakindu.base.types.PackageMember;
 import org.yakindu.base.types.Property;
 import org.yakindu.base.types.Type;
 import org.yakindu.base.types.TypeAlias;
 import org.yakindu.base.types.TypedElement;
-
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
-import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 import org.yakindu.sct.model.sgraph.Trigger;
-import org.yakindu.sct.model.sgraph.Variable;
-
-import org.yakindu.sct.model.stext.stext.*;
+import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression;
+import org.yakindu.sct.model.stext.stext.AlwaysEvent;
+import org.yakindu.sct.model.stext.stext.BuiltinEventSpec;
+import org.yakindu.sct.model.stext.stext.DefRoot;
+import org.yakindu.sct.model.stext.stext.DefaultTrigger;
+import org.yakindu.sct.model.stext.stext.EntryEvent;
+import org.yakindu.sct.model.stext.stext.EntryPointSpec;
+import org.yakindu.sct.model.stext.stext.EventDefinition;
+import org.yakindu.sct.model.stext.stext.EventRaisingExpression;
+import org.yakindu.sct.model.stext.stext.EventSpec;
+import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression;
+import org.yakindu.sct.model.stext.stext.ExitEvent;
+import org.yakindu.sct.model.stext.stext.ExitPointSpec;
+import org.yakindu.sct.model.stext.stext.Guard;
+import org.yakindu.sct.model.stext.stext.Import;
+import org.yakindu.sct.model.stext.stext.ImportScope;
+import org.yakindu.sct.model.stext.stext.InterfaceScope;
+import org.yakindu.sct.model.stext.stext.InternalScope;
+import org.yakindu.sct.model.stext.stext.LocalReaction;
+import org.yakindu.sct.model.stext.stext.OperationDefinition;
+import org.yakindu.sct.model.stext.stext.ReactionEffect;
+import org.yakindu.sct.model.stext.stext.ReactionTrigger;
+import org.yakindu.sct.model.stext.stext.RegularEventSpec;
+import org.yakindu.sct.model.stext.stext.Root;
+import org.yakindu.sct.model.stext.stext.SimpleScope;
+import org.yakindu.sct.model.stext.stext.StateRoot;
+import org.yakindu.sct.model.stext.stext.StateSpecification;
+import org.yakindu.sct.model.stext.stext.StatechartRoot;
+import org.yakindu.sct.model.stext.stext.StatechartScope;
+import org.yakindu.sct.model.stext.stext.StatechartSpecification;
+import org.yakindu.sct.model.stext.stext.StextPackage;
+import org.yakindu.sct.model.stext.stext.TimeEventSpec;
+import org.yakindu.sct.model.stext.stext.TransitionReaction;
+import org.yakindu.sct.model.stext.stext.TransitionRoot;
+import org.yakindu.sct.model.stext.stext.TransitionSpecification;
+import org.yakindu.sct.model.stext.stext.TypeAliasDefinition;
+import org.yakindu.sct.model.stext.stext.VariableDefinition;
 
 /**
  * <!-- begin-user-doc -->
@@ -182,35 +208,30 @@ public class StextSwitch<T> extends Switch<T> {
 				EventDefinition eventDefinition = (EventDefinition)theEObject;
 				T result = caseEventDefinition(eventDefinition);
 				if (result == null) result = caseEvent(eventDefinition);
-				if (result == null) result = caseTypes_Event(eventDefinition);
 				if (result == null) result = caseDeclaration(eventDefinition);
-				if (result == null) result = caseFeature(eventDefinition);
-				if (result == null) result = caseNamedElement(eventDefinition);
 				if (result == null) result = caseTypedElement(eventDefinition);
+				if (result == null) result = caseNamedElement(eventDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StextPackage.VARIABLE_DEFINITION: {
 				VariableDefinition variableDefinition = (VariableDefinition)theEObject;
 				T result = caseVariableDefinition(variableDefinition);
-				if (result == null) result = caseVariable(variableDefinition);
 				if (result == null) result = caseProperty(variableDefinition);
 				if (result == null) result = caseDeclaration(variableDefinition);
-				if (result == null) result = caseFeature(variableDefinition);
-				if (result == null) result = caseNamedElement(variableDefinition);
 				if (result == null) result = caseTypedElement(variableDefinition);
+				if (result == null) result = caseNamedElement(variableDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case StextPackage.OPERATION_DEFINITION: {
 				OperationDefinition operationDefinition = (OperationDefinition)theEObject;
 				T result = caseOperationDefinition(operationDefinition);
-				if (result == null) result = caseDeclaration(operationDefinition);
 				if (result == null) result = caseOperation(operationDefinition);
-				if (result == null) result = caseFeature(operationDefinition);
+				if (result == null) result = caseDeclaration(operationDefinition);
 				if (result == null) result = casePackageMember(operationDefinition);
-				if (result == null) result = caseNamedElement(operationDefinition);
 				if (result == null) result = caseTypedElement(operationDefinition);
+				if (result == null) result = caseNamedElement(operationDefinition);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -229,8 +250,9 @@ public class StextSwitch<T> extends Switch<T> {
 			case StextPackage.LOCAL_REACTION: {
 				LocalReaction localReaction = (LocalReaction)theEObject;
 				T result = caseLocalReaction(localReaction);
-				if (result == null) result = caseDeclaration(localReaction);
 				if (result == null) result = caseReaction(localReaction);
+				if (result == null) result = caseDeclaration(localReaction);
+				if (result == null) result = caseTypedElement(localReaction);
 				if (result == null) result = caseNamedElement(localReaction);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -952,36 +974,6 @@ public class StextSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDeclaration(Declaration object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Event</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEvent(Event object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -997,17 +989,17 @@ public class StextSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeature(Feature object) {
+	public T caseDeclaration(org.yakindu.base.types.Declaration object) {
 		return null;
 	}
 
@@ -1022,22 +1014,7 @@ public class StextSwitch<T> extends Switch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypes_Event(org.yakindu.base.types.Event object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVariable(Variable object) {
+	public T caseEvent(org.yakindu.base.types.Event object) {
 		return null;
 	}
 

@@ -11,7 +11,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.yakindu.sct.model.sexec.SexecPackage;
 import org.yakindu.sct.model.sexec.TimeEvent;
-import org.yakindu.sct.model.sgraph.impl.EventImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -26,7 +25,7 @@ import org.yakindu.sct.model.sgraph.impl.EventImpl;
  *
  * @generated
  */
-public class TimeEventImpl extends EventImpl implements TimeEvent {
+public class TimeEventImpl extends org.yakindu.base.types.impl.EventImpl implements TimeEvent {
 	/**
 	 * The default value of the '{@link #isPeriodic() <em>Periodic</em>}' attribute.
 	 * <!-- begin-user-doc -->

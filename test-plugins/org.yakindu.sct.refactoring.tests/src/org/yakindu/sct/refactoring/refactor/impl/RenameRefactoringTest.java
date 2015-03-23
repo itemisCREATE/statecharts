@@ -21,10 +21,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.sct.model.sgraph.Event;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.Statechart;
-import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.resource.AbstractSCTResource;
 import org.yakindu.sct.model.stext.stext.InterfaceScope;
 import org.yakindu.sct.refactoring.refactor.RefactoringTest;
@@ -47,7 +47,7 @@ public class RenameRefactoringTest extends RefactoringTest {
 
 		Statechart initial = models.loadStatechartFromResource(RENAMING + INITIAL_STATECHART);
 		// get element to rename
-		Variable someVariable = null;
+		Property someVariable = null;
 		EList<Scope> scopes = initial.getScopes();
 		for (Scope scope : scopes) {
 			if (scope instanceof InterfaceScope) {

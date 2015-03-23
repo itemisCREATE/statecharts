@@ -34,19 +34,19 @@ import org.yakindu.base.expressions.expressions.ShiftOperator
 import org.yakindu.base.expressions.expressions.StringLiteral
 import org.yakindu.base.expressions.expressions.TypeCastExpression
 import org.yakindu.base.expressions.expressions.UnaryOperator
+import org.yakindu.base.types.Declaration
+import org.yakindu.base.types.Event
 import org.yakindu.base.types.Operation
+import org.yakindu.base.types.Property
 import org.yakindu.base.types.inferrer.ITypeSystemInferrer
+import org.yakindu.base.types.typesystem.GenericTypeSystem
 import org.yakindu.base.types.typesystem.ITypeSystem
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.TimeEvent
-import org.yakindu.sct.model.sgraph.Declaration
-import org.yakindu.sct.model.sgraph.Event
-import org.yakindu.sct.model.sgraph.Variable
 import org.yakindu.sct.model.stext.stext.ActiveStateReferenceExpression
 import org.yakindu.sct.model.stext.stext.EventRaisingExpression
 import org.yakindu.sct.model.stext.stext.EventValueReferenceExpression
 import org.yakindu.sct.model.stext.stext.OperationDefinition
-import org.yakindu.base.types.typesystem.GenericTypeSystem
 
 class ExpressionCode {
 
@@ -250,7 +250,7 @@ class ExpressionCode {
 		'''((«type.getTargetLanguageName») «operand.code»)'''
 	}
 
-	def dispatch String getContext(Variable it) {
+	def dispatch String getContext(Property it) {
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}

@@ -15,16 +15,16 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.Switch;
 import org.yakindu.base.base.DocumentedElement;
 import org.yakindu.base.base.NamedElement;
-import org.yakindu.sct.model.sgraph.*;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.TypedElement;
 import org.yakindu.sct.model.sgraph.Choice;
 import org.yakindu.sct.model.sgraph.CompositeElement;
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Effect;
 import org.yakindu.sct.model.sgraph.Entry;
-import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.Exit;
 import org.yakindu.sct.model.sgraph.FinalState;
 import org.yakindu.sct.model.sgraph.Import;
+import org.yakindu.sct.model.sgraph.ImportDeclaration;
 import org.yakindu.sct.model.sgraph.Pseudostate;
 import org.yakindu.sct.model.sgraph.Reaction;
 import org.yakindu.sct.model.sgraph.ReactionProperty;
@@ -40,7 +40,6 @@ import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.model.sgraph.Synchronization;
 import org.yakindu.sct.model.sgraph.Transition;
 import org.yakindu.sct.model.sgraph.Trigger;
-import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.Vertex;
 
 /**
@@ -147,22 +146,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SGraphPackage.VARIABLE: {
-				Variable variable = (Variable)theEObject;
-				T result = caseVariable(variable);
-				if (result == null) result = caseDeclaration(variable);
-				if (result == null) result = caseNamedElement(variable);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case SGraphPackage.EVENT: {
-				Event event = (Event)theEObject;
-				T result = caseEvent(event);
-				if (result == null) result = caseDeclaration(event);
-				if (result == null) result = caseNamedElement(event);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case SGraphPackage.CHOICE: {
 				Choice choice = (Choice)theEObject;
 				T result = caseChoice(choice);
@@ -238,13 +221,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case SGraphPackage.DECLARATION: {
-				Declaration declaration = (Declaration)theEObject;
-				T result = caseDeclaration(declaration);
-				if (result == null) result = caseNamedElement(declaration);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case SGraphPackage.SCOPE: {
 				Scope scope = (Scope)theEObject;
 				T result = caseScope(scope);
@@ -304,6 +280,7 @@ public class SGraphSwitch<T> extends Switch<T> {
 				ImportDeclaration importDeclaration = (ImportDeclaration)theEObject;
 				T result = caseImportDeclaration(importDeclaration);
 				if (result == null) result = caseDeclaration(importDeclaration);
+				if (result == null) result = caseTypedElement(importDeclaration);
 				if (result == null) result = caseNamedElement(importDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -369,6 +346,36 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseDocumentedElement(DocumentedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Typed Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Typed Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypedElement(TypedElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDeclaration(Declaration object) {
 		return null;
 	}
 
@@ -493,36 +500,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseVariable(Variable object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Event</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Event</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseEvent(Event object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Choice</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -624,21 +601,6 @@ public class SGraphSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseSpecificationElement(SpecificationElement object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Declaration</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Declaration</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDeclaration(Declaration object) {
 		return null;
 	}
 

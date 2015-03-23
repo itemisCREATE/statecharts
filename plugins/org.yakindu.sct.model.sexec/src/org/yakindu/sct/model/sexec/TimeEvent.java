@@ -6,7 +6,6 @@
  */
 package org.yakindu.sct.model.sexec;
 
-import org.yakindu.sct.model.sgraph.Event;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +23,7 @@ import org.yakindu.sct.model.sgraph.Event;
  * @model
  * @generated
  */
-public interface TimeEvent extends Event {
+public interface TimeEvent extends org.yakindu.base.types.Event {
 	/**
 	 * Returns the value of the '<em><b>Periodic</b></em>' attribute.
 	 * The default value is <code>"false"</code>.

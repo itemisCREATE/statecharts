@@ -69,7 +69,7 @@ public class ContextPredicateProvider {
 	static class FeaturedTypePredicate implements Predicate<IEObjectDescription> {
 		public boolean apply(IEObjectDescription input) {
 			return TypesPackage.Literals.TYPE.isSuperTypeOf(input.getEClass())
-					&& TypesPackage.Literals.FEATURE.isSuperTypeOf(input.getEClass());
+					&& TypesPackage.Literals.DECLARATION.isSuperTypeOf(input.getEClass());
 		}
 	}
 

@@ -10,6 +10,8 @@
  */
 package org.yakindu.sct.model.sgraph;
 
+import org.yakindu.base.types.Declaration;
+
 
 /**
  * <!-- begin-user-doc -->

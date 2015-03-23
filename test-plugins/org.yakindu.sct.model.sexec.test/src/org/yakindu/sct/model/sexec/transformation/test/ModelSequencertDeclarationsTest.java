@@ -24,12 +24,12 @@ import static org.yakindu.sct.model.stext.test.util.StextTestFactory.createGuard
 import org.junit.Test;
 import org.yakindu.base.expressions.expressions.ElementReferenceExpression;
 import org.yakindu.base.expressions.expressions.FeatureCall;
+import org.yakindu.base.types.Declaration;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Execution;
 import org.yakindu.sct.model.sexec.ExecutionFlow;
 import org.yakindu.sct.model.sexec.If;
 import org.yakindu.sct.model.sexec.Step;
-import org.yakindu.sct.model.sgraph.Declaration;
 import org.yakindu.sct.model.sgraph.Region;
 import org.yakindu.sct.model.sgraph.Scope;
 import org.yakindu.sct.model.sgraph.State;

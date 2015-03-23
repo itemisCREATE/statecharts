@@ -12,12 +12,12 @@ package org.yakindu.sct.generator.c
 
 import com.google.inject.Inject
 import org.eclipse.xtext.generator.IFileSystemAccess
+import org.yakindu.base.types.Declaration
 import org.yakindu.sct.generator.core.types.ICodegenTypeSystemAccess
 import org.yakindu.sct.model.sexec.ExecutionFlow
 import org.yakindu.sct.model.sexec.TimeEvent
 import org.yakindu.sct.model.sexec.naming.INamingService
 import org.yakindu.sct.model.sgen.GeneratorEntry
-import org.yakindu.sct.model.sgraph.Declaration
 import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.Direction

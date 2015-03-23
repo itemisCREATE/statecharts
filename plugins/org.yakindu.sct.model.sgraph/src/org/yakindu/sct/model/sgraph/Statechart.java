@@ -58,7 +58,7 @@ public interface Statechart extends SpecificationElement, ReactiveElement, Scope
 
 	/**
 	 * Returns the value of the '<em><b>Domain ID</b></em>' attribute.
-	 * The default value is <code>"Default"</code>.
+	 * The default value is <code>"org.yakindu.domain.default"</code>.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Domain ID</em>' attribute isn't clear,
@@ -68,7 +68,7 @@ public interface Statechart extends SpecificationElement, ReactiveElement, Scope
 	 * @return the value of the '<em>Domain ID</em>' attribute.
 	 * @see #setDomainID(String)
 	 * @see org.yakindu.sct.model.sgraph.SGraphPackage#getStatechart_DomainID()
-	 * @model default="Default"
+	 * @model default="org.yakindu.domain.default"
 	 * @generated
 	 */
 	String getDomainID();

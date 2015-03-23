@@ -11,6 +11,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.yakindu.base.base.NamedElement;
+import org.yakindu.base.types.TypedElement;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -48,8 +49,6 @@ import org.yakindu.sct.model.sexec.TraceReactionWillFire;
 import org.yakindu.sct.model.sexec.TraceStateEntered;
 import org.yakindu.sct.model.sexec.TraceStateExited;
 import org.yakindu.sct.model.sexec.UnscheduleTimeEvent;
-import org.yakindu.sct.model.sgraph.Declaration;
-import org.yakindu.sct.model.sgraph.Event;
 import org.yakindu.sct.model.sgraph.ScopedElement;
 
 /**
@@ -261,11 +260,15 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 				return createNamedElementAdapter();
 			}
 			@Override
-			public Adapter caseDeclaration(Declaration object) {
+			public Adapter caseTypedElement(TypedElement object) {
+				return createTypedElementAdapter();
+			}
+			@Override
+			public Adapter caseDeclaration(org.yakindu.base.types.Declaration object) {
 				return createDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseEvent(Event object) {
+			public Adapter caseEvent(org.yakindu.base.types.Event object) {
 				return createEventAdapter();
 			}
 			@Override
@@ -425,6 +428,20 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createNamedElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.TypedElement <em>Typed Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.yakindu.base.types.TypedElement
+	 * @generated
+	 */
+	public Adapter createTypedElementAdapter() {
 		return null;
 	}
 
@@ -821,13 +838,13 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Declaration <em>Declaration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Declaration <em>Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Declaration
+	 * @see org.yakindu.base.types.Declaration
 	 * @generated
 	 */
 	public Adapter createDeclarationAdapter() {
@@ -835,13 +852,13 @@ public class SexecAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.yakindu.sct.model.sgraph.Event <em>Event</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.yakindu.base.types.Event <em>Event</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.yakindu.sct.model.sgraph.Event
+	 * @see org.yakindu.base.types.Event
 	 * @generated
 	 */
 	public Adapter createEventAdapter() {

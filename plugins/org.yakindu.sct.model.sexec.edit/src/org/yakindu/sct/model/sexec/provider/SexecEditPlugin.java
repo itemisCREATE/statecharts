@@ -10,6 +10,7 @@ import org.eclipse.emf.common.EMFPlugin;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.yakindu.base.base.provider.BaseEditPlugin;
 import org.yakindu.base.expressions.expressions.provider.ExpressionsEditPlugin;
+import org.yakindu.base.types.provider.TypesEditPlugin;
 import org.yakindu.sct.model.sgraph.provider.SGraphEditPlugin;
 
 /**
@@ -47,6 +48,7 @@ public final class SexecEditPlugin extends EMFPlugin {
 		     BaseEditPlugin.INSTANCE,
 		     ExpressionsEditPlugin.INSTANCE,
 		     SGraphEditPlugin.INSTANCE,
+		     TypesEditPlugin.INSTANCE,
 		   });
 	}
 

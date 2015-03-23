@@ -18,12 +18,7 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 import org.yakindu.base.base.BasePackage;
@@ -38,13 +33,7 @@ import org.yakindu.sct.model.sgraph.Statechart;
  * @generated
  */
 public class StatechartItemProvider
-	extends SpecificationElementItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource {
+	extends SpecificationElementItemProvider {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -77,6 +66,7 @@ public class StatechartItemProvider
 			addNamespacePropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addDocumentationPropertyDescriptor(object);
+			addDomainIDPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -170,6 +160,28 @@ public class StatechartItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Domain ID feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDomainIDPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_Statechart_domainID_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_Statechart_domainID_feature", "_UI_Statechart_type"),
+				 SGraphPackage.Literals.STATECHART__DOMAIN_ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -242,6 +254,7 @@ public class StatechartItemProvider
 			case SGraphPackage.STATECHART__NAMESPACE:
 			case SGraphPackage.STATECHART__NAME:
 			case SGraphPackage.STATECHART__DOCUMENTATION:
+			case SGraphPackage.STATECHART__DOMAIN_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case SGraphPackage.STATECHART__LOCAL_REACTIONS:
@@ -269,6 +282,11 @@ public class StatechartItemProvider
 			(createChildParameter
 				(SGraphPackage.Literals.REACTIVE_ELEMENT__LOCAL_REACTIONS,
 				 SGraphFactory.eINSTANCE.createTransition()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(SGraphPackage.Literals.SCOPED_ELEMENT__SCOPES,
+				 SGraphFactory.eINSTANCE.createScope()));
 
 		newChildDescriptors.add
 			(createChildParameter

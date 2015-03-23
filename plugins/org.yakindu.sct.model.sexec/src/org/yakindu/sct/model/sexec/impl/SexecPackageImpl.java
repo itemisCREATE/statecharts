@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.expressions.expressions.ExpressionsPackage;
+import org.yakindu.base.types.TypesPackage;
 import org.yakindu.sct.model.sexec.Call;
 import org.yakindu.sct.model.sexec.Check;
 import org.yakindu.sct.model.sexec.CheckRef;
@@ -1448,6 +1449,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		// Obtain other dependent packages
 		SGraphPackage theSGraphPackage = (SGraphPackage)EPackage.Registry.INSTANCE.getEPackage(SGraphPackage.eNS_URI);
 		BasePackage theBasePackage = (BasePackage)EPackage.Registry.INSTANCE.getEPackage(BasePackage.eNS_URI);
+		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 		ExpressionsPackage theExpressionsPackage = (ExpressionsPackage)EPackage.Registry.INSTANCE.getEPackage(ExpressionsPackage.eNS_URI);
 
 		// Create type parameters
@@ -1471,7 +1473,7 @@ public class SexecPackageImpl extends EPackageImpl implements SexecPackage {
 		executionSynchronizationEClass.getESuperTypes().add(this.getExecutionNode());
 		reactionEClass.getESuperTypes().add(this.getMappedElement());
 		reactionEClass.getESuperTypes().add(theBasePackage.getNamedElement());
-		timeEventEClass.getESuperTypes().add(theSGraphPackage.getEvent());
+		timeEventEClass.getESuperTypes().add(theTypesPackage.getEvent());
 		stepEClass.getESuperTypes().add(theBasePackage.getNamedElement());
 		sequenceEClass.getESuperTypes().add(this.getStep());
 		checkEClass.getESuperTypes().add(this.getStep());

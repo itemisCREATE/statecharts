@@ -24,8 +24,6 @@
         lowerBound="1" eType="#//Vertex" eOpposite="#//Vertex/outgoingTransitions"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FinalState" eSuperTypes="#//RegularState"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Variable" abstract="true" eSuperTypes="#//Declaration"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="#//Declaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="Choice" eSuperTypes="#//Pseudostate">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//ChoiceKind"/>
   </eClassifiers>
@@ -64,15 +62,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="SpecificationElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="specification" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Declaration" abstract="true" eSuperTypes="../../../org.yakindu.base.types/model/base.ecore#//NamedElement"/>
   <eClassifiers xsi:type="ecore:EClass" name="Scope">
     <eStructuralFeatures xsi:type="ecore:EReference" name="declarations" upperBound="-1"
-        eType="#//Declaration" containment="true"/>
+        eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Declaration"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
-        eType="#//Event" changeable="false" volatile="true" transient="true" derived="true"/>
+        eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Event"
+        changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="variables" unique="false"
-        upperBound="-1" eType="#//Variable" changeable="false" volatile="true" transient="true"
-        derived="true"/>
+        upperBound="-1" eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Property"
+        changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ScopedElement" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
@@ -107,7 +106,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Import">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ImportDeclaration" eSuperTypes="#//Declaration">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" eType="#//Declaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportDeclaration" eSuperTypes="../../../org.yakindu.base.types/model/types.ecore#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaration" eType="ecore:EClass ../../../org.yakindu.base.types/model/types.ecore#//Declaration"/>
   </eClassifiers>
 </ecore:EPackage>

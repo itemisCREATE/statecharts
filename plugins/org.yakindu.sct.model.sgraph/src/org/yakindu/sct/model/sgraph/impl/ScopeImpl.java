@@ -19,11 +19,11 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.yakindu.sct.model.sgraph.Declaration;
-import org.yakindu.sct.model.sgraph.Event;
+import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.Event;
+import org.yakindu.base.types.Property;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Scope;
-import org.yakindu.sct.model.sgraph.Variable;
 import org.yakindu.sct.model.sgraph.util.DerivedSubsetEObjectEList;
 
 /**
@@ -102,8 +102,8 @@ public class ScopeImpl extends EObjectImpl implements Scope {
 	 * 
 	 * @generated NOT
 	 */
-	public EList<Variable> getVariables() {
-		return new DerivedSubsetEObjectEList<Variable>(Variable.class, this,
+	public EList<Property> getVariables() {
+		return new DerivedSubsetEObjectEList<Property>(Property.class, this,
 				SGraphPackage.SCOPE__VARIABLES,
 				SGraphPackage.SCOPE__DECLARATIONS);
 	}
