@@ -18,7 +18,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Parameter" containment="true" eOpposite="#//Parameter/owningOperation"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Declaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="const" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readonly" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="external" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//TypedElement base.ecore#//NamedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="owningOperation" eType="#//Operation"
         eOpposite="#//Operation/parameters"/>
@@ -28,7 +32,14 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeArguments" upperBound="-1"
         eType="#//Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Declaration"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Declaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="direction" eType="#//Direction"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Direction">
+    <eLiterals name="LOCAL" literal="local"/>
+    <eLiterals name="IN" value="1" literal="in"/>
+    <eLiterals name="OUT" value="2" literal="out"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EnumerationType" eSuperTypes="#//PrimitiveType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="enumerator" upperBound="-1"
         eType="#//Enumerator" containment="true" eOpposite="#//Enumerator/owningEnumeration"/>

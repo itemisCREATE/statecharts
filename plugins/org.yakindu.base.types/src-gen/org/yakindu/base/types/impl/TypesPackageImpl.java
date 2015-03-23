@@ -8,12 +8,14 @@ package org.yakindu.base.types.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.yakindu.base.base.BasePackage;
 import org.yakindu.base.types.ComplexType;
 import org.yakindu.base.types.Declaration;
+import org.yakindu.base.types.Direction;
 import org.yakindu.base.types.Domain;
 import org.yakindu.base.types.EnumerationType;
 import org.yakindu.base.types.Enumerator;
@@ -161,6 +163,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass typeAliasEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum directionEEnum = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -312,6 +321,33 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_Const() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_Readonly() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getProperty_External() {
+		return (EAttribute)propertyEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -358,6 +394,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EClass getEvent() {
 		return eventEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getEvent_Direction() {
+		return (EAttribute)eventEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -559,6 +604,15 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getDirection() {
+		return directionEEnum;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -598,6 +652,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(operationEClass, OPERATION__PARAMETERS);
 
 		propertyEClass = createEClass(PROPERTY);
+		createEAttribute(propertyEClass, PROPERTY__CONST);
+		createEAttribute(propertyEClass, PROPERTY__READONLY);
+		createEAttribute(propertyEClass, PROPERTY__EXTERNAL);
 
 		parameterEClass = createEClass(PARAMETER);
 		createEReference(parameterEClass, PARAMETER__OWNING_OPERATION);
@@ -607,6 +664,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(typedElementEClass, TYPED_ELEMENT__TYPE_ARGUMENTS);
 
 		eventEClass = createEClass(EVENT);
+		createEAttribute(eventEClass, EVENT__DIRECTION);
 
 		enumerationTypeEClass = createEClass(ENUMERATION_TYPE);
 		createEReference(enumerationTypeEClass, ENUMERATION_TYPE__ENUMERATOR);
@@ -641,6 +699,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEAttribute(domainEClass, DOMAIN__DOMAIN_ID);
 
 		typeAliasEClass = createEClass(TYPE_ALIAS);
+
+		// Create enums
+		directionEEnum = createEEnum(DIRECTION);
 	}
 
 	/**
@@ -711,6 +772,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getOperation_Parameters(), this.getParameter(), this.getParameter_OwningOperation(), "parameters", null, 0, -1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getProperty_Const(), ecorePackage.getEBoolean(), "const", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_Readonly(), ecorePackage.getEBoolean(), "readonly", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getProperty_External(), ecorePackage.getEBoolean(), "external", null, 0, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterEClass, Parameter.class, "Parameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameter_OwningOperation(), this.getOperation(), this.getOperation_Parameters(), "owningOperation", null, 0, 1, Parameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -720,6 +784,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEReference(getTypedElement_TypeArguments(), this.getType(), null, "typeArguments", null, 0, -1, TypedElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventEClass, Event.class, "Event", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getEvent_Direction(), this.getDirection(), "direction", null, 0, 1, Event.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(enumerationTypeEClass, EnumerationType.class, "EnumerationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEnumerationType_Enumerator(), this.getEnumerator(), this.getEnumerator_OwningEnumeration(), "enumerator", null, 0, -1, EnumerationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -756,6 +821,12 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEAttribute(getDomain_DomainID(), ecorePackage.getEString(), "domainID", null, 0, 1, Domain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeAliasEClass, TypeAlias.class, "TypeAlias", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		// Initialize enums and add enum literals
+		initEEnum(directionEEnum, Direction.class, "Direction");
+		addEEnumLiteral(directionEEnum, Direction.LOCAL);
+		addEEnumLiteral(directionEEnum, Direction.IN);
+		addEEnumLiteral(directionEEnum, Direction.OUT);
 
 		// Create resource
 		createResource(eNS_URI);

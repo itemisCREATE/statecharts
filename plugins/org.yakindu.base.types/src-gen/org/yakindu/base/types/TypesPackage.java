@@ -8,6 +8,7 @@ package org.yakindu.base.types;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.yakindu.base.base.BasePackage;
@@ -366,13 +367,40 @@ public interface TypesPackage extends EPackage {
 	int PROPERTY__NAME = DECLARATION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Const</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__CONST = DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Readonly</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__READONLY = DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>External</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int PROPERTY__EXTERNAL = DECLARATION_FEATURE_COUNT + 2;
+
+	/**
 	 * The number of structural features of the '<em>Property</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 0;
+	int PROPERTY_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -458,13 +486,22 @@ public interface TypesPackage extends EPackage {
 	int EVENT__NAME = DECLARATION__NAME;
 
 	/**
+	 * The feature id for the '<em><b>Direction</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EVENT__DIRECTION = DECLARATION_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Event</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EVENT_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 0;
+	int EVENT_FEATURE_COUNT = DECLARATION_FEATURE_COUNT + 1;
 
 
 	/**
@@ -983,6 +1020,16 @@ public interface TypesPackage extends EPackage {
 	int TYPE_ALIAS_FEATURE_COUNT = TYPED_ELEMENT_FEATURE_COUNT + 3;
 
 	/**
+	 * The meta object id for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.yakindu.base.types.Direction
+	 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
+	 * @generated
+	 */
+	int DIRECTION = 19;
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Package <em>Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1088,6 +1135,39 @@ public interface TypesPackage extends EPackage {
 	EClass getProperty();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Property#isConst <em>Const</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Const</em>'.
+	 * @see org.yakindu.base.types.Property#isConst()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_Const();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Property#isReadonly <em>Readonly</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Readonly</em>'.
+	 * @see org.yakindu.base.types.Property#isReadonly()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_Readonly();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Property#isExternal <em>External</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>External</em>'.
+	 * @see org.yakindu.base.types.Property#isExternal()
+	 * @see #getProperty()
+	 * @generated
+	 */
+	EAttribute getProperty_External();
+
+	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.Parameter <em>Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1149,6 +1229,17 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getEvent();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.yakindu.base.types.Event#getDirection <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Direction</em>'.
+	 * @see org.yakindu.base.types.Event#getDirection()
+	 * @see #getEvent()
+	 * @generated
+	 */
+	EAttribute getEvent_Direction();
 
 	/**
 	 * Returns the meta object for class '{@link org.yakindu.base.types.EnumerationType <em>Enumeration Type</em>}'.
@@ -1393,6 +1484,16 @@ public interface TypesPackage extends EPackage {
 	EClass getTypeAlias();
 
 	/**
+	 * Returns the meta object for enum '{@link org.yakindu.base.types.Direction <em>Direction</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Direction</em>'.
+	 * @see org.yakindu.base.types.Direction
+	 * @generated
+	 */
+	EEnum getDirection();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1505,6 +1606,30 @@ public interface TypesPackage extends EPackage {
 		EClass PROPERTY = eINSTANCE.getProperty();
 
 		/**
+		 * The meta object literal for the '<em><b>Const</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__CONST = eINSTANCE.getProperty_Const();
+
+		/**
+		 * The meta object literal for the '<em><b>Readonly</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__READONLY = eINSTANCE.getProperty_Readonly();
+
+		/**
+		 * The meta object literal for the '<em><b>External</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute PROPERTY__EXTERNAL = eINSTANCE.getProperty_External();
+
+		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.ParameterImpl <em>Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1557,6 +1682,14 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EVENT = eINSTANCE.getEvent();
+
+		/**
+		 * The meta object literal for the '<em><b>Direction</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute EVENT__DIRECTION = eINSTANCE.getEvent_Direction();
 
 		/**
 		 * The meta object literal for the '{@link org.yakindu.base.types.impl.EnumerationTypeImpl <em>Enumeration Type</em>}' class.
@@ -1763,6 +1896,16 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE_ALIAS = eINSTANCE.getTypeAlias();
+
+		/**
+		 * The meta object literal for the '{@link org.yakindu.base.types.Direction <em>Direction</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.yakindu.base.types.Direction
+		 * @see org.yakindu.base.types.impl.TypesPackageImpl#getDirection()
+		 * @generated
+		 */
+		EEnum DIRECTION = eINSTANCE.getDirection();
 
 	}
 
