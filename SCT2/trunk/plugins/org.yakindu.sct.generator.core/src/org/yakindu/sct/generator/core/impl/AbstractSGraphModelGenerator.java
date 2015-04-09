@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.console.ConsolePlugin;
 import org.eclipse.ui.console.IConsole;
@@ -98,7 +99,7 @@ public abstract class AbstractSGraphModelGenerator implements ISCTGenerator {
 
 	public final void generate(GeneratorEntry entry) {
 		EObject element = entry.getElementRef();
-		if (element == null || !element.eIsProxy() && !(element instanceof Statechart)) {
+		if (element == null || !(element instanceof Statechart)) {
 			writeToConsole("No Statechart selected in genmodel (" + entry + ")");
 			return;
 		}
