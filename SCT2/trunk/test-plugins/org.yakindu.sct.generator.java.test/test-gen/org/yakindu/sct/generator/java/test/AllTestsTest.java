@@ -17,7 +17,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({AlwaysOncycleTest.class, AssignmentAsExpressionTest.class,
 		BitExpressionsTest.class, BooleanExpressionsTest.class,
 		CastExpressionsTest.class, ChoiceTest.class, CKeywordsTest.class,
-		ConditionalExpressionTest.class, 
+		ConditionalExpressionTest.class, ConstantsTestsTest.class,
 		DeclarationsTest.class, DeepEntryTest.class, DeepHistoryTest.class,
 		DynamicChoiceTest.class, EmptyTransitionTest.class,
 		EnterStateTest.class, EntryChoiceTest.class,

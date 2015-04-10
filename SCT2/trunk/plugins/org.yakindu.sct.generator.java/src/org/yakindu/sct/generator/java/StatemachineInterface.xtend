@@ -22,6 +22,7 @@ import org.yakindu.sct.model.sgraph.Scope
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.InternalScope
 import org.yakindu.sct.model.stext.stext.OperationDefinition
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StatemachineInterface {
 
@@ -30,6 +31,7 @@ class StatemachineInterface {
 	@Inject extension Navigation
 	@Inject extension ITypeSystem
 	@Inject extension ICodegenTypeSystemAccess
+	@Inject extension ExpressionCode
 	@Inject Beautifier beautifier
 
 	def generateStatemachineInterface(ExecutionFlow flow, GeneratorEntry entry, IFileSystemAccess fsa) {
@@ -51,12 +53,18 @@ class StatemachineInterface {
 			«ENDIF»
 			
 			public interface «flow.statemachineInterfaceName» extends «flow.statemachineInterfaceExtensions» {
-				
+			
 				«FOR scope : flow.scopes»
 					«scope.createScope(entry)»
 				«ENDFOR»
 			}
 		'''
+	}
+	
+	
+	
+	def private constantFieldDeclaration(VariableDefinition variable){
+		'''public static final «variable.type.targetLanguageName» «variable.symbol» = «variable.initialValue.code»;'''
 	}
 
 	def private createScope(Scope scope, GeneratorEntry entry) {
@@ -94,6 +102,10 @@ class StatemachineInterface {
 	def private createInterface(InterfaceScope scope, GeneratorEntry entry) {
 		'''
 				public interface «scope.interfaceName» {
+				«var constants = scope.declarations.filter(VariableDefinition).filter[const]»
+				«FOR constant : constants»
+					«constant.constantFieldDeclaration()»
+				«ENDFOR»
 				«scope.eventAccessors»
 				«scope.variableAccessors»
 				«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»

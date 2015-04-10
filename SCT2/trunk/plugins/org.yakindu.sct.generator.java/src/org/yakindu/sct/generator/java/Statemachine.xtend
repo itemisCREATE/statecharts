@@ -6,6 +6,7 @@
   http://www.eclipse.org/legal/epl-v10.html
   Contributors:
   	Markus Muehlbrandt - Initial contribution and API
+  	Andreas Muelder - Added generation of constants
 */
 package org.yakindu.sct.generator.java
 
@@ -47,10 +48,6 @@ class Statemachine {
 		«flow.createImports(entry)»
 		
 		public class «flow.statemachineClassName» implements «flow.statemachineInterfaceName» {
-			«flow.createStaticDeclarations(entry)»
-			
-			«flow.createStaticInitializer(entry)»
-
 			«flow.createFieldDeclarations(entry)»
 		
 				
@@ -141,31 +138,11 @@ class Statemachine {
 		«ENDFOR»
 	'''
 	
-	def createStaticDeclarations(ExecutionFlow flow, GeneratorEntry entry){
-		var constants = flow.scopes.map[declarations].flatten.filter(VariableDefinition).filter[const]
-		'''
-			«FOR constant : constants»
-				«constant.constantFieldDeclaration()»
-			«ENDFOR»
-		'''
-	}
-	
-	def private createStaticInitializer(ExecutionFlow flow, GeneratorEntry entry){
-		if(flow.staticInitSequence == null) return null
-		'''
-		static {
-			«flow.staticInitSequence?.code»
-		}
-		'''
-	}
-	
 	def private writeableFieldDeclaration(VariableDefinition variable){
 		'''private «variable.type.targetLanguageName» «variable.symbol»;'''
 	}
 	
-	def private constantFieldDeclaration(VariableDefinition variable){
-		'''public static final «variable.type.targetLanguageName» «variable.symbol»;'''
-	}
+	
 	
 	def private createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
@@ -376,11 +353,9 @@ class Statemachine {
 				«IF !variable.const»
 					«variable.writeableFieldDeclaration»
 				«ENDIF»
-				«IF!variable.const»
 				public «variable.type.targetLanguageName» «variable.getter» {
 					return «variable.symbol»;
 				}
-				«ENDIF»
 				
 				«IF !variable.readonly && !variable.const»
 					public void «variable.setter»(«variable.type.targetLanguageName» value) {
@@ -476,13 +451,15 @@ class Statemachine {
 			«ENDFOR»
 			
 			«FOR variable : scope.variableDefinitions»
-			public «variable.type.targetLanguageName» «variable.getter()» {
-				return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
-			}
-			
-			public void «variable.setter»(«variable.type.targetLanguageName» value) {
-				«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
-			}	
+					public «variable.type.targetLanguageName» «variable.getter()» {
+						return «scope.interfaceName.asEscapedIdentifier».«variable.getter()»;
+					}
+					
+					«IF !variable.const && !variable.readonly»
+						public void «variable.setter»(«variable.type.targetLanguageName» value) {
+						«scope.interfaceName.asEscapedIdentifier».«variable.setter»(value);
+						}	
+					«ENDIF»
 			«ENDFOR»
 		«ENDIF»
 		

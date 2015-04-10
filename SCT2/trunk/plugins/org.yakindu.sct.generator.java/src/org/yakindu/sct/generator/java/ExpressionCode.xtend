@@ -251,10 +251,21 @@ class ExpressionCode {
 	}
 
 	def dispatch String getContext(Property it) {
+		if (it.const) {
+			return getConstContext(it)
+		}
 		if (scope != null) {
 			return scope.interfaceName.asEscapedIdentifier + "."
 		}
 		return ""
+	}
+	
+	def getConstContext(Property it){
+		if (scope != null) {
+			return scope.interfaceName + "."
+		}else{
+			return it.flow.statemachineInterfaceName + "."
+		}
 	}
 
 	def dispatch String getContext(Event it) {
