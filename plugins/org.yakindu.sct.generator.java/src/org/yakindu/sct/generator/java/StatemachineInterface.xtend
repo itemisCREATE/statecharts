@@ -53,7 +53,13 @@ class StatemachineInterface {
 			«ENDIF»
 			
 			public interface «flow.statemachineInterfaceName» extends «flow.statemachineInterfaceExtensions» {
-			
+				«IF flow.internalScope != null»
+				
+				«var constants = flow.internalScope.declarations.filter(VariableDefinition).filter[const]»
+				«FOR constant : constants»
+					«constant.constantFieldDeclaration()»
+				«ENDFOR»
+				«ENDIF»
 				«FOR scope : flow.scopes»
 					«scope.createScope(entry)»
 				«ENDFOR»
