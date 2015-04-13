@@ -49,7 +49,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	private SCINamedImpl sCINamed;
 
 	public enum State {
-		main_region_A, main_region_B, $NullState$
+		main_region_A, main_region_B, main_region_C, $NullState$
 	};
 
 	private final State[] stateVector = new State[1];
@@ -108,6 +108,8 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 				return stateVector[0] == State.main_region_A;
 			case main_region_B :
 				return stateVector[0] == State.main_region_B;
+			case main_region_C :
+				return stateVector[0] == State.main_region_C;
 			default :
 				return false;
 		}
@@ -144,10 +146,20 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		return sCInterface.e;
 	}
 
+	private boolean check_main_region_B_tr0() {
+		return sCInterface.e;
+	}
+
 	private void effect_main_region_A_tr0() {
 		exitSequence_main_region_A();
 
 		enterSequence_main_region_B_default();
+	}
+
+	private void effect_main_region_B_tr0() {
+		exitSequence_main_region_B();
+
+		enterSequence_main_region_C_default();
 	}
 
 	/* Entry action for statechart 'Constants'. */
@@ -157,6 +169,12 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	/* Entry action for state 'B'. */
 	private void entryAction_main_region_B() {
 		sCInterface.result = SCINamed.two * SCInterface.x;
+	}
+
+	/* Entry action for state 'C'. */
+	private void entryAction_main_region_C() {
+		sCInterface.result = sCInterface.result
+				* IConstantsStatemachine.internalConstant;
 	}
 
 	/* Exit action for state 'Constants'. */
@@ -177,6 +195,14 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		stateVector[0] = State.main_region_B;
 	}
 
+	/* 'default' enter sequence for state C */
+	private void enterSequence_main_region_C_default() {
+		entryAction_main_region_C();
+
+		nextStateIndex = 0;
+		stateVector[0] = State.main_region_C;
+	}
+
 	/* 'default' enter sequence for region main region */
 	private void enterSequence_main_region_default() {
 		react_main_region__entry_Default();
@@ -194,6 +220,12 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		stateVector[0] = State.$NullState$;
 	}
 
+	/* Default exit sequence for state C */
+	private void exitSequence_main_region_C() {
+		nextStateIndex = 0;
+		stateVector[0] = State.$NullState$;
+	}
+
 	/* Default exit sequence for region main region */
 	private void exitSequence_main_region() {
 		switch (stateVector[0]) {
@@ -203,6 +235,10 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 
 			case main_region_B :
 				exitSequence_main_region_B();
+				break;
+
+			case main_region_C :
+				exitSequence_main_region_C();
 				break;
 
 			default :
@@ -219,6 +255,13 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 
 	/* The reactions of state B. */
 	private void react_main_region_B() {
+		if (check_main_region_B_tr0()) {
+			effect_main_region_B_tr0();
+		}
+	}
+
+	/* The reactions of state C. */
+	private void react_main_region_C() {
 	}
 
 	/* Default react sequence for initial entry  */
@@ -238,6 +281,9 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 					break;
 				case main_region_B :
 					react_main_region_B();
+					break;
+				case main_region_C :
+					react_main_region_C();
 					break;
 				default :
 					// $NullState$

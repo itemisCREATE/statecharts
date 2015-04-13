@@ -3,6 +3,7 @@ import org.yakindu.scr.IStatemachine;
 
 public interface IConstantsStatemachine extends IStatemachine {
 
+	public static final long internalConstant = 5;
 	public interface SCInterface {
 		public static final long x = 10;
 		public static final long y = SCInterface.x * 2;
