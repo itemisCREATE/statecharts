@@ -12,6 +12,16 @@ testgroup ConstantsTests for statechart Constants {
 		raise e
 		cycle
 		assert result == 20
+		
+		raise e
+		cycle
+		
+		
+		assert active(Constants.main_region.C)
+		assert result == 100
+			
+		
+		
 	} 
 }
 	
