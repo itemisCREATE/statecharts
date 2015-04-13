@@ -46,5 +46,9 @@ public class ConstantsTestsTest {
 		statemachine.raiseE();
 		statemachine.runCycle();
 		assertTrue(statemachine.getResult() == 20);
+		statemachine.raiseE();
+		statemachine.runCycle();
+		assertTrue(statemachine.isStateActive(State.main_region_C));
+		assertTrue(statemachine.getResult() == 100);
 	}
 }
