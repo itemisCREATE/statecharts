@@ -8,6 +8,7 @@ public interface IConstantsStatemachine extends IStatemachine {
 		public static final long x = 10;
 		public static final long y = SCInterface.x * 2;
 		public void raiseE();
+		public void raiseE2(long value);
 		public long getX();
 		public long getY();
 		public long getResult();

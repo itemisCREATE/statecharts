@@ -50,5 +50,9 @@ public class ConstantsTestsTest {
 		statemachine.runCycle();
 		assertTrue(statemachine.isStateActive(State.main_region_C));
 		assertTrue(statemachine.getResult() == 100);
+		statemachine.raiseE2(statemachine.getX());
+		statemachine.runCycle();
+		assertTrue(statemachine.getResult() == 1000);
+		assertTrue(statemachine.isStateActive(State.main_region_A));
 	}
 }

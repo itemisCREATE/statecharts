@@ -19,9 +19,12 @@ testgroup ConstantsTests for statechart Constants {
 		
 		assert active(Constants.main_region.C)
 		assert result == 100
-			
 		
-		
+		raise e2 : x
+		cycle
+	
+		assert result == 1000
+		assert active(Constants.main_region.A)
 	} 
 }
 	

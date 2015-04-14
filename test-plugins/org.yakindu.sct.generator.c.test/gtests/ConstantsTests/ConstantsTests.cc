@@ -25,6 +25,14 @@ TEST(StatemachineTest, constantDefinition) {
 	constantsIface_raise_e(&handle);
 	constants_runCycle(&handle);
 	EXPECT_TRUE(constantsIface_get_result(&handle) == 20);
+	constantsIface_raise_e(&handle);
+	constants_runCycle(&handle);
+	EXPECT_TRUE(constants_isActive(&handle, Constants_main_region_C));
+	EXPECT_TRUE(constantsIface_get_result(&handle) == 100);
+	constantsIface_raise_e2(&handle, constantsIface_get_x(&handle) );
+	constants_runCycle(&handle);
+	EXPECT_TRUE(constantsIface_get_result(&handle) == 1000);
+	EXPECT_TRUE(constants_isActive(&handle, Constants_main_region_A));
 }
 
 		
