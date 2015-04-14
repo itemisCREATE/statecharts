@@ -40,12 +40,19 @@ public class ValuedEventsTest {
 	public void testvaluedEventsTest() {
 		statemachine.enter();
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State.main_region_A));
-		assertTrue(statemachine.isStateActive(State._region1_C));
-		assertTrue(statemachine.getMyVar() == 42);
-		statemachine.raiseIntegerEvent(23);
+		assertTrue(statemachine.getMyString().equals("sct"));
+		statemachine.raiseIntegerEvent(23l);
+		statemachine.raiseBooleanEvent(false);
+		statemachine.raiseRealEvent(20l);
+		statemachine.raiseStringEvent("tool");
 		statemachine.runCycle();
-		assertTrue(statemachine.isStateActive(State._region1_D));
-		assertTrue(statemachine.getMyVar() == 23);
+		assertTrue(statemachine.isStateActive(State.integer_region_D));
+		assertTrue(statemachine.isStateActive(State.string_region_D));
+		assertTrue(statemachine.isStateActive(State.boolean_region_D));
+		assertTrue(statemachine.isStateActive(State.real_region_D));
+		assertTrue(statemachine.getMyInt() == 23l);
+		assertTrue(statemachine.getMyBool() == false);
+		assertTrue(statemachine.getMyReal() == 20l);
+		assertTrue(statemachine.getMyString().equals("tool"));
 	}
 }

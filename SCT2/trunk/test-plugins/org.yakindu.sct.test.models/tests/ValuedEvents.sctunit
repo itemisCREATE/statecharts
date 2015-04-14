@@ -3,15 +3,34 @@ testgroup ValuedEvents for statechart ValuedEvents {
 		
 		enter
 		cycle
-		assert active(ValuedEvents.main_region.A)
-		assert active (ValuedEvents._region1.C)
-		assert myVar == 42
+//		assert active(ValuedEvents.main_region1.A)
+//		assert active (ValuedEvents.integer_region.C)
+//		assert active (ValuedEvents.string_region.C)
+//		assert active (ValuedEvents.boolean_region.C)
+//		assert active (ValuedEvents.real_region.C)
+//		assert myInt == 42
+//		assert myBool == true
+//		assert myReal == 10
+		assert myString == "sct"
 		
-		raise IntegerEvent : 23
+		raise integerEvent : 23
+		raise booleanEvent : false
+		raise realEvent : 20
+		raise stringEvent : "tool"
+		
 		cycle
+		assert active (ValuedEvents.integer_region.D)
+		assert active (ValuedEvents.string_region.D)
+		assert active (ValuedEvents.boolean_region.D)
+		assert active (ValuedEvents.real_region.D)
 		
-		assert active (ValuedEvents._region1.D)
-		assert myVar == 23
+		assert myInt == 23
+		assert myBool == false
+		assert myReal == 20
+		assert myString == "tool"
+		
+		
+
 		 
 	}
 }
