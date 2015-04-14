@@ -23,5 +23,13 @@ TEST(StatemachineTest, constantDefinition) {
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 20);
+	statechart->raise_e();
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->isActive(Constants::main_region_C));
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 100);
+	statechart->raise_e2( statechart->getDefaultSCI()->get_x());
+	statechart->runCycle();
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 1000);
+	EXPECT_TRUE(statechart->isActive(Constants::main_region_A));
 	delete statechart;
 }

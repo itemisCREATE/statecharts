@@ -43,5 +43,13 @@ public class ConstantsTestsTest extends AbstractExecutionFlowTest {
 		raiseEvent("e");
 		interpreter.runCycle();
 		assertTrue(getInteger("result") == 20);
+		raiseEvent("e");
+		interpreter.runCycle();
+		assertTrue(isActive("C"));
+		assertTrue(getInteger("result") == 100);
+		raiseEvent("e2", getInteger("x"));
+		interpreter.runCycle();
+		assertTrue(getInteger("result") == 1000);
+		assertTrue(isActive("A"));
 	}
 }

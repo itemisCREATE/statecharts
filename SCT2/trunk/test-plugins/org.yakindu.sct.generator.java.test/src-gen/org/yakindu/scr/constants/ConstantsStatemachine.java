@@ -10,6 +10,22 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 			e = true;
 		}
 
+		private boolean e2;
+
+		private long e2Value;
+
+		public void raiseE2(long value) {
+			e2 = true;
+			e2Value = value;
+		}
+
+		private long getE2Value() {
+			if (!e2)
+				throw new IllegalStateException(
+						"Illegal event value acces. Event E2 is not raised!");
+			return e2Value;
+		}
+
 		public long getX() {
 			return x;
 		}
@@ -29,6 +45,7 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 
 		public void clearEvents() {
 			e = false;
+			e2 = false;
 		}
 
 	}
@@ -125,6 +142,9 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 	public void raiseE() {
 		sCInterface.raiseE();
 	}
+	public void raiseE2(long value) {
+		sCInterface.raiseE2(value);
+	}
 
 	public long getX() {
 		return sCInterface.getX();
@@ -150,6 +170,10 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		return sCInterface.e;
 	}
 
+	private boolean check_main_region_C_tr0() {
+		return sCInterface.e2;
+	}
+
 	private void effect_main_region_A_tr0() {
 		exitSequence_main_region_A();
 
@@ -160,6 +184,15 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 		exitSequence_main_region_B();
 
 		enterSequence_main_region_C_default();
+	}
+
+	private void effect_main_region_C_tr0() {
+		exitSequence_main_region_C();
+
+		sCInterface.result = sCInterface.e2Value * SCInterface.x * SCINamed.two
+				* IConstantsStatemachine.internalConstant;
+
+		enterSequence_main_region_A_default();
 	}
 
 	/* Entry action for statechart 'Constants'. */
@@ -262,6 +295,9 @@ public class ConstantsStatemachine implements IConstantsStatemachine {
 
 	/* The reactions of state C. */
 	private void react_main_region_C() {
+		if (check_main_region_C_tr0()) {
+			effect_main_region_C_tr0();
+		}
 	}
 
 	/* Default react sequence for initial entry  */
