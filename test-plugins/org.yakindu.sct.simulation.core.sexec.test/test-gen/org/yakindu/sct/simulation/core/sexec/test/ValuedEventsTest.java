@@ -37,12 +37,19 @@ public class ValuedEventsTest extends AbstractExecutionFlowTest {
 	public void valuedEventsTest() throws Exception {
 		interpreter.enter();
 		interpreter.runCycle();
-		assertTrue(isActive("A"));
-		assertTrue(isActive("C"));
-		assertTrue(getInteger("myVar") == 42);
-		raiseEvent("IntegerEvent", 23);
+		assertTrue(getString("myString").equals("sct"));
+		raiseEvent("integerEvent", 23l);
+		raiseEvent("booleanEvent", false);
+		raiseEvent("realEvent", 20l);
+		raiseEvent("stringEvent", "tool");
 		interpreter.runCycle();
 		assertTrue(isActive("D"));
-		assertTrue(getInteger("myVar") == 23);
+		assertTrue(isActive("D"));
+		assertTrue(isActive("D"));
+		assertTrue(isActive("D"));
+		assertTrue(getInteger("myInt") == 23l);
+		assertTrue(getBoolean("myBool") == false);
+		assertTrue(getReal("myReal") == 20l);
+		assertTrue(getString("myString").equals("tool"));
 	}
 }
