@@ -292,6 +292,17 @@ var external variable3: integer = 34
 
 p. ==<!-- End stext_keyword_var -->==
 
+==<!-- Start stext_keyword_const -->==
+
+h3(#Constants). Constants
+
+Variables can be immutable, for this special variables the keyword "const" is used:
+
+bc(prettyprint).. 
+const variable1: real
+
+p. ==<!-- End stext_keyword_const -->==
+
 h3(#ReactionTriggers). Reaction Triggers
 
 Actions are key constructs in state machines to model behavior. The YAKINDU SCT 2 knows the following kinds of actions.
