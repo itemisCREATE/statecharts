@@ -19,7 +19,7 @@ TEST(StatemachineTest, constantDefinition) {
 	EXPECT_TRUE(statechart->isActive(Constants::main_region_A));
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 10l);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 20l);
-	EXPECT_TRUE(strcmp(statechart->getSCI_Named().get_y(), "Hello World") == 0);
+	EXPECT_TRUE(strcmp(statechart->getSCI_Named()->get_y(), "Hello World") == 0);
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_result()== 20l);
