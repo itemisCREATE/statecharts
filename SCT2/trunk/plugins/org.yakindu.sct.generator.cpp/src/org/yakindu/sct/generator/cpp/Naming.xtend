@@ -27,168 +27,168 @@ import org.yakindu.sct.model.stext.stext.StatechartScope
 import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Naming extends org.yakindu.sct.generator.c.Naming {
-	
+
 	@Inject extension Navigation
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
 	@Inject extension GenmodelEntriesExtension
 	@Inject GeneratorEntry entry
-	
+
 	def cpp(String it) { it + ".cpp" }
-	
+
 	def abstractModule(ExecutionFlow it) {
-		module() + 'Interface'	
+		module() + 'Interface'
 	}
-	
+
 	def statemachineInterface() {
 		'StatemachineInterface'
 	}
-	
+
 	def orthogonalStatesConst() {
 		'maxOrthogonalStates'
 	}
-	
+
 	def historyStatesConst() {
 		'maxHistoryStates'
 	}
-	
+
 	def timedStatemachineInterface() {
 		'TimedStatemachineInterface'
 	}
-	
+
 	def timerInterface() {
 		'TimerInterface'
 	}
-	
+
 	def timerInstance() {
 		'timer'
 	}
-	
+
 	def timeEventsInstance() {
 		'timeEvents'
 	}
-	
-	def protected signature(OperationDefinition it)
-	'''
-		«type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.targetLanguageName» «parameter.identifier»«ENDFOR»)'''
-		
+
+	def protected signature(OperationDefinition it) '''
+	«type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.type.
+		targetLanguageName» «parameter.identifier»«ENDFOR»)'''
+
 	def protected OCB_InterfaceSetterDeclaration(StatechartScope scope, boolean fqn) '''
-		void «IF fqn»«scope.flow.module»::«ENDIF»set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''
-	
+	void «IF fqn»«scope.flow.module»::«ENDIF»set«scope.interfaceOCBName»(«scope.interfaceOCBName»* operationCallback)'''
+
 	def protected identifier(Parameter parameter) {
 		if (parameter.name.isKeyword) {
 			return parameter.name + "Arg"
-		}
-		else {
+		} else {
 			parameter.name
 		}
 	}
-	
+
 	override dispatch instance(InternalScope it) {
-		'iface' + interfaceName.asIdentifier.toFirstUpper	
+		'iface' + interfaceName.asIdentifier.toFirstUpper
 	}
-	
+
 	def OCB_Instance(Scope it) {
 		it.instance + "_OCB"
 	}
 	
-	def dispatch String getInterfaceName(InterfaceScope it) {  
+	def dispatch String getInterfaceName(Scope it) '''
+		no interfaceName for «it»
+	'''
+
+	def dispatch String getInterfaceName(InterfaceScope it) {
 		if (name != null) {
 			return "SCI_" + name.toFirstUpper()
-		}
-		else {
+		} else {
 			return "DefaultSCI";
 		}
 	}
-	
-	def dispatch String getInterfaceName(InternalScope it) {  
+
+	def dispatch String getInterfaceName(InternalScope it) {
 		"InternalSCI"
 	}
-	
-	def dispatch String getSimpleName(InterfaceScope it) {  
+
+	def dispatch String getSimpleName(InterfaceScope it) {
 		if (name != null) {
 			return name
-		}
-		else {
+		} else {
 			return "default";
 		}
 	}
-	
-	def dispatch String getSimpleName(InternalScope it) {  
+
+	def dispatch String getSimpleName(InternalScope it) {
 		"internal"
 	}
-	
+
 	def String getInterfaceOCBName(StatechartScope it) {
 		interfaceName + "_OCB"
 	}
-	
-//	def String getInternalOperationCallbackName() {
-//		"InternalOCB"
-//	}
-	
+
+	//	def String getInternalOperationCallbackName() {
+	//		"InternalOCB"
+	//	}
 	override asFunction(OperationDefinition it) {
-		name.asEscapedIdentifier	
+		name.asEscapedIdentifier
 	}
-	
+
 	override asRaiser(EventDefinition it) {
 		'raise_' + name.asIdentifier.toFirstLower
 	}
-	
+
 	override asRaised(EventDefinition it) {
 		'isRaised_' + name.asIdentifier.toFirstLower
 	}
-	
+
 	override asGetter(EventDefinition it) {
-		'get_' + name.asIdentifier.toFirstLower	+ '_value'
+		'get_' + name.asIdentifier.toFirstLower + '_value'
 	}
-	
+
 	override asGetter(VariableDefinition it) {
-		'get_' + name.asIdentifier.toFirstLower	
+		'get_' + name.asIdentifier.toFirstLower
 	}
-	
+
 	override asSetter(VariableDefinition it) {
-		'set_' + name.asIdentifier.toFirstLower	
+		'set_' + name.asIdentifier.toFirstLower
 	}
-	
+
 	override raiseTimeEventFctID(ExecutionFlow it) {
 		"raiseTimeEvent"
 	}
-	
+
 	override isActiveFctID(ExecutionFlow it) {
 		"isActive"
 	}
-	
-	override dispatch access(OperationDefinition it){
+
+	override dispatch access(OperationDefinition it) {
 		if (entry.useStaticOPC) {
 			return '''«(scope as StatechartScope).interfaceOCBName»::«asFunction»'''
 		}
 		return '''«scope.OCB_Instance»->«asFunction»'''
 	}
-		
-	override dispatch access(TimeEvent it)
-		'''«timeEventsInstance»[«indexOf»]'''
-		
-	override dispatch access(VariableDefinition it) 
-		'''«scope.instance».«name.asEscapedIdentifier»'''
-	
-	override dispatch access (Event it) 
-		'''«scope.instance».«name.asIdentifier.raised»'''
-	
-	override valueAccess(Event it) 
-		'''«scope.instance».«name.asIdentifier.value»'''
-		
-	def dispatch localAccess(VariableDefinition it) 
-		'''«name.asEscapedIdentifier»'''
-	
-	def dispatch localAccess(Event it) 
-		'''«name.asIdentifier.raised»'''
-	
-	def localValueAccess(Event it) 
-		'''«name.asIdentifier.value»'''
-		
+
+	override dispatch access(TimeEvent it) '''«timeEventsInstance»[«indexOf»]'''
+
+	override dispatch access(VariableDefinition it) {
+		if (const) {
+			return '''«flow.module»::«scope.interfaceName»::«name.asEscapedIdentifier»'''
+		} else {
+			return '''«scope.instance».«name.asEscapedIdentifier»'''
+		}
+	}
+
+	override dispatch access(Event it) '''«scope.instance».«name.asIdentifier.raised»'''
+
+	override valueAccess(Event it) '''«scope.instance».«name.asIdentifier.value»'''
+
+	def dispatch localAccess(VariableDefinition it) '''«name.asEscapedIdentifier»'''
+
+	def dispatch localAccess(Event it) '''«name.asIdentifier.raised»'''
+
+	def localValueAccess(Event it) '''«name.asIdentifier.value»'''
+
 	override valueParams(EventDefinition it) {
-		if (hasValue) 
-			type.targetLanguageName + ' value' 
-		else ''
+		if (hasValue)
+			type.targetLanguageName + ' value'
+		else
+			''
 	}
 }

@@ -38,6 +38,7 @@ class StatemachineHeader extends Statemachine {
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension GenmodelEntriesExtension
 	@Inject extension INamingService
+	@Inject extension ExpressionCode
 
 	protected GeneratorEntry entry
 
@@ -157,6 +158,10 @@ class StatemachineHeader extends Statemachine {
 		};
 	'''
 
+	override dispatch structDeclaration(VariableDefinition it) '''
+		«IF type.name != 'void'»«IF const»static const «ENDIF»«type.targetLanguageName» «name.asEscapedIdentifier»;«ENDIF»
+	'''
+
 	def createOCBInterface(StatechartScope scope) {
 		'''
 			
@@ -262,8 +267,8 @@ class StatemachineHeader extends Statemachine {
 	override dispatch functionPrototypes(VariableDefinition it) '''
 		/*! Gets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 		«type.targetLanguageName» «it.asGetter»();
-		
-		«IF ! readonly»
+
+		«IF !readonly && !const»
 			/*! Sets the value of the variable '«name»' that is defined in the «scope.scopeDescription». */ 
 			void «asSetter»(«type.targetLanguageName» value);
 			

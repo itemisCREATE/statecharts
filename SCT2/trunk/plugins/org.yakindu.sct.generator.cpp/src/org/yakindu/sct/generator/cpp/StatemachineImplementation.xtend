@@ -23,6 +23,7 @@ import org.yakindu.sct.model.sgen.GeneratorEntry
 import org.yakindu.sct.model.sgraph.Statechart
 import org.yakindu.sct.model.stext.stext.InterfaceScope
 import org.yakindu.sct.model.stext.stext.StatechartScope
+import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class StatemachineImplementation {
 	
@@ -32,6 +33,7 @@ class StatemachineImplementation {
 	@Inject extension GenmodelEntriesExtension
 	@Inject extension ICodegenTypeSystemAccess
 	@Inject extension INamingService
+	@Inject extension ExpressionCode
 	
 	protected GeneratorEntry entry
 	
@@ -48,9 +50,11 @@ class StatemachineImplementation {
 		/*! \file Implementation of the state machine '«name»'
 		*/
 		
-		«constructorDecl»
+		«constructorDefinition»
 		
-		«destructorDecl»
+		«destructorDefinition»
+		
+		«constantDefinitions»
 		
 		«initFunction»
 		
@@ -73,7 +77,7 @@ class StatemachineImplementation {
 		«functionImplementations»
 	'''
 	
-	def constructorDecl(ExecutionFlow it) '''
+	def constructorDefinition(ExecutionFlow it) '''
 		«module»::«module»() {
 			
 			«scopes.filter(typeof(StatechartScope)).filter[hasOperations && !entry.useStaticOPC].map['''«OCB_Instance» = null;'''].join('\n')»
@@ -91,7 +95,7 @@ class StatemachineImplementation {
 		}
 	'''
 	
-	def destructorDecl(ExecutionFlow it) '''
+	def destructorDefinition(ExecutionFlow it) '''
 		«module»::~«module»() {
 		}
 	'''
@@ -222,7 +226,19 @@ class StatemachineImplementation {
 	'''
 	
 	/* ===================================================================================
-	 * Implementation of interface element accessor functions
+	 * Implementation of interface element access functions
+	 */
+	 
+	def constantDefinitions(ExecutionFlow it) '''
+		«FOR scope : statechartScopes»
+			«FOR d : scope.declarations.filter(typeof(VariableDefinition)).filter[const]»
+				«IF d.type.name != 'void'»const «d.type.targetLanguageName» «d.access» = «d.initialValue.code»;«ENDIF»
+			«ENDFOR»
+		«ENDFOR»
+	'''
+	
+	/* ===================================================================================
+	 * Implementation of interface element access functions
 	 */
 	
 	def interfaceFunctions(ExecutionFlow it) '''
@@ -303,7 +319,7 @@ class StatemachineImplementation {
 					}
 					
 				«ENDIF»
-				«IF !variable.readonly »
+				«IF !variable.readonly && !variable.const»
 					void «module»::«scope.interfaceName»::«variable.asSetter»(«variable.type.targetLanguageName» value) {
 						«variable.localAccess» = value;
 					}
