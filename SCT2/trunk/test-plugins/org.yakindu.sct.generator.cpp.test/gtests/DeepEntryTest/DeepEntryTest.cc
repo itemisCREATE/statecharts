@@ -15,13 +15,13 @@
 TEST(StatemachineTest, enterToSubstate) {
 	DeepEntry* statechart = new DeepEntry();
 	statechart->init();
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 0);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_z()== 0);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 0l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_z()== 0l);
 	statechart->enter();
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 1);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_z()== 2);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_x()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_z()== 2l);
 	statechart->raise_e();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(DeepEntry::r2_B_r_BB));
@@ -31,6 +31,6 @@ TEST(StatemachineTest, enterToSubstate) {
 	statechart->raise_f();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(DeepEntry::r2_B_r_BB));
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 1);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_y()== 1l);
 	delete statechart;
 }

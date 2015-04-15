@@ -19,19 +19,19 @@ TEST(StatemachineTest, constantDefinition) {
 	constants_init(&handle);
 	constants_enter(&handle);
 	EXPECT_TRUE(constants_isActive(&handle, Constants_main_region_A));
-	EXPECT_TRUE(constantsIface_get_x(&handle) == 10);
-	EXPECT_TRUE(constantsIface_get_y(&handle) == 20);
+	EXPECT_TRUE(constantsIface_get_x(&handle) == 10l);
+	EXPECT_TRUE(constantsIface_get_y(&handle) == 20l);
 	EXPECT_TRUE(strcmp(constantsIfaceNamed_get_y(&handle) , "Hello World") == 0);
 	constantsIface_raise_e(&handle);
 	constants_runCycle(&handle);
-	EXPECT_TRUE(constantsIface_get_result(&handle) == 20);
+	EXPECT_TRUE(constantsIface_get_result(&handle) == 20l);
 	constantsIface_raise_e(&handle);
 	constants_runCycle(&handle);
 	EXPECT_TRUE(constants_isActive(&handle, Constants_main_region_C));
-	EXPECT_TRUE(constantsIface_get_result(&handle) == 100);
+	EXPECT_TRUE(constantsIface_get_result(&handle) == 100l);
 	constantsIface_raise_e2(&handle, constantsIface_get_x(&handle) );
 	constants_runCycle(&handle);
-	EXPECT_TRUE(constantsIface_get_result(&handle) == 1000);
+	EXPECT_TRUE(constantsIface_get_result(&handle) == 1000l);
 	EXPECT_TRUE(constants_isActive(&handle, Constants_main_region_A));
 }
 

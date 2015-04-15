@@ -93,7 +93,7 @@ TEST(StatemachineTest, doubleEntryActionBug) {
 	syncJoinIface_raise_jd(&handle);
 	syncJoin_runCycle(&handle);
 	EXPECT_TRUE(syncJoin_isActive(&handle, SyncJoin_main_region_A));
-	EXPECT_TRUE(syncJoinIface_get_x(&handle) == 1);
+	EXPECT_TRUE(syncJoinIface_get_x(&handle) == 1l);
 }
 
 		

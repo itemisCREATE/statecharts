@@ -19,9 +19,9 @@ TEST(StatemachineTest, eventLifeCycle) {
 	inEventLifeCycle_init(&handle);
 	inEventLifeCycle_enter(&handle);
 	inEventLifeCycleIface_raise_e(&handle);
-	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle) == 0);
+	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle) == 0l);
 	inEventLifeCycle_runCycle(&handle);
-	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle) == 1);
+	EXPECT_TRUE(inEventLifeCycleIface_get_i(&handle) == 1l);
 }
 
 		

@@ -17,15 +17,15 @@ TEST(StatemachineTest, ExitOnSelfTransitionTest) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(ExitOnSelfTransition::main_region_A));
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 1);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 0);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 1l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 0l);
 	statechart->raise_e();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 1);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 1l);
 	statechart->raise_f();
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_entryCount()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_exitCount()== 2l);
 	delete statechart;
 }

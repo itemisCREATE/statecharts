@@ -17,13 +17,13 @@ TEST(StatemachineTest, alwaysOncycleTest) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateA));
-	while (statechart->getDefaultSCI()->get_value()< 5) {
+	while (statechart->getDefaultSCI()->get_value()< 5l) {
 		statechart->runCycle();
 		EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateA));
 	}
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateB));
-	while (statechart->getDefaultSCI()->get_value()< 5) {
+	while (statechart->getDefaultSCI()->get_value()< 5l) {
 		statechart->runCycle();
 		EXPECT_TRUE(statechart->isActive(AlwaysOncycle::main_region_StateB));
 	}

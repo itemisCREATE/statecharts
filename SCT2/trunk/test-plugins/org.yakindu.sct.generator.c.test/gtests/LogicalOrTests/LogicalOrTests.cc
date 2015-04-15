@@ -19,7 +19,7 @@ TEST(StatemachineTest, operandEvaluationOrder) {
 	logicalOr_init(&handle);
 	logicalOr_enter(&handle);
 	logicalOr_runCycle(&handle);
-	EXPECT_TRUE(logicalOrIface_get_x(&handle) == 4 && logicalOrIface_get_b(&handle) ) << "logical or expression was executed in wrong order..." ;
+	EXPECT_TRUE(logicalOrIface_get_x(&handle) == 4l && logicalOrIface_get_b(&handle) ) << "logical or expression was executed in wrong order..." ;
 }
 
 		

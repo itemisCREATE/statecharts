@@ -17,16 +17,16 @@ TEST(StatemachineTest, BitExpressions) {
 	statechart->init();
 	statechart->enter();
 	EXPECT_TRUE(statechart->isActive(BitExpressions::main_region_StateA));
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit1()== 5);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit2()== 7);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit1()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBit2()== 7l);
 	statechart->raise_e1();
 	statechart->runCycle();
 	EXPECT_TRUE(statechart->isActive(BitExpressions::main_region_StateB));
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_leftBitshift()== 10);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_rightBitshift()== 2);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_complementBitshift()== - 6 );
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseAnd()== 5);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseOr()== 7);
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseXor()== 2);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_leftBitshift()== 10l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_rightBitshift()== 2l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_complementBitshift()== - 6l );
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseAnd()== 5l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseOr()== 7l);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_bitwiseXor()== 2l);
 	delete statechart;
 }
