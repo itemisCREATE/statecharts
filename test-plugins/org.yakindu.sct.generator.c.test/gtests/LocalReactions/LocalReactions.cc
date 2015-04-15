@@ -20,7 +20,7 @@ TEST(StatemachineTest, LocalReactionsTest) {
 	localReactions_enter(&handle);
 	EXPECT_TRUE(localReactions_isActive(&handle, LocalReactions_main_region_A));
 	localReactions_runCycle(&handle);
-	EXPECT_TRUE(localReactionsIface_get_x(&handle) == 1);
+	EXPECT_TRUE(localReactionsIface_get_x(&handle) == 1l);
 }
 
 		

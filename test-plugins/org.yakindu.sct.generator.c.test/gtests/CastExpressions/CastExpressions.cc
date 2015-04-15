@@ -18,13 +18,13 @@ CastExpressions handle;
 TEST(StatemachineTest, CastExpressionTest) {
 	castExpressions_init(&handle);
 	castExpressions_enter(&handle);
-	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 5);
-	EXPECT_TRUE(castExpressionsIface_get_intValue(&handle) == 5);
+	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 5l);
+	EXPECT_TRUE(castExpressionsIface_get_intValue(&handle) == 5l);
 	castExpressions_runCycle(&handle);
-	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 15);
+	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 15l);
 	castExpressions_runCycle(&handle);
 	EXPECT_TRUE(castExpressions_isActive(&handle, CastExpressions_main_region_C));
-	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 757);
+	EXPECT_TRUE(castExpressionsIface_get_realValue(&handle) == 757l);
 }
 
 		

@@ -19,7 +19,7 @@ TEST(StatemachineTest, simpleEventTest) {
 	simpleEvent_init(&handle);
 	simpleEvent_enter(&handle);
 	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_A)) << "Expected A to be active" ;
-	EXPECT_TRUE(5== 5);
+	EXPECT_TRUE(5l== 5l);
 	simpleEventIface_raise_event1(&handle);
 	simpleEvent_runCycle(&handle);
 	EXPECT_TRUE(simpleEvent_isActive(&handle, SimpleEvent_main_region_B)) << "Expected B to be active" ;

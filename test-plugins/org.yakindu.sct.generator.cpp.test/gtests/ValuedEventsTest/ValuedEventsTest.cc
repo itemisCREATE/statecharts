@@ -17,7 +17,7 @@ TEST(StatemachineTest, valuedEventsTest) {
 	statechart->init();
 	statechart->enter();
 	statechart->runCycle();
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), ""sct"") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "sct") == 0);
 	statechart->raise_integerEvent( 23l);
 	statechart->raise_booleanEvent( false);
 	statechart->raise_realEvent( 20l);
@@ -30,6 +30,6 @@ TEST(StatemachineTest, valuedEventsTest) {
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myInt()== 23l);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myBool()== false);
 	EXPECT_TRUE(statechart->getDefaultSCI()->get_myReal()== 20l);
-	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), ""tool"") == 0);
+	EXPECT_TRUE(strcmp(statechart->getDefaultSCI()->get_myString(), "tool") == 0);
 	delete statechart;
 }

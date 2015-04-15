@@ -19,11 +19,11 @@ TEST(StatemachineTest, SafeOpenSuccess) {
 	namedInterfaceAccess_init(&handle);
 	namedInterfaceAccess_enter(&handle);
 	namedInterfaceAccess_runCycle(&handle);
-	namedInterfaceAccessIfaceUser_raise_numberPressed(&handle, 3);
+	namedInterfaceAccessIfaceUser_raise_numberPressed(&handle, 3l);
 	namedInterfaceAccess_runCycle(&handle);
-	namedInterfaceAccessIfaceUser_raise_numberPressed(&handle, 7);
+	namedInterfaceAccessIfaceUser_raise_numberPressed(&handle, 7l);
 	namedInterfaceAccess_runCycle(&handle);
-	namedInterfaceAccessIfaceUser_raise_numberPressed(&handle, 5);
+	namedInterfaceAccessIfaceUser_raise_numberPressed(&handle, 5l);
 	namedInterfaceAccess_runCycle(&handle);
 	EXPECT_TRUE(namedInterfaceAccessIfaceSafe_israised_open(&handle));
 }

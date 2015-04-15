@@ -19,7 +19,7 @@ TEST(StatemachineTest, valuedEventsTest) {
 	valuedEvents_init(&handle);
 	valuedEvents_enter(&handle);
 	valuedEvents_runCycle(&handle);
-	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&handle) , ""sct"") == 0);
+	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&handle) , "sct") == 0);
 	valuedEventsIface_raise_integerEvent(&handle, 23l);
 	valuedEventsIface_raise_booleanEvent(&handle, false);
 	valuedEventsIface_raise_realEvent(&handle, 20l);
@@ -32,7 +32,7 @@ TEST(StatemachineTest, valuedEventsTest) {
 	EXPECT_TRUE(valuedEventsIface_get_myInt(&handle) == 23l);
 	EXPECT_TRUE(valuedEventsIface_get_myBool(&handle) == false);
 	EXPECT_TRUE(valuedEventsIface_get_myReal(&handle) == 20l);
-	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&handle) , ""tool"") == 0);
+	EXPECT_TRUE(strcmp(valuedEventsIface_get_myString(&handle) , "tool") == 0);
 }
 
 		

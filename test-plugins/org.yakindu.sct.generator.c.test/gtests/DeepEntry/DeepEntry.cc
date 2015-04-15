@@ -17,13 +17,13 @@ DeepEntry handle;
 
 TEST(StatemachineTest, enterToSubstate) {
 	deepEntry_init(&handle);
-	EXPECT_TRUE(deepEntryIface_get_x(&handle) == 0);
-	EXPECT_TRUE(deepEntryIface_get_y(&handle) == 0);
-	EXPECT_TRUE(deepEntryIface_get_z(&handle) == 0);
+	EXPECT_TRUE(deepEntryIface_get_x(&handle) == 0l);
+	EXPECT_TRUE(deepEntryIface_get_y(&handle) == 0l);
+	EXPECT_TRUE(deepEntryIface_get_z(&handle) == 0l);
 	deepEntry_enter(&handle);
-	EXPECT_TRUE(deepEntryIface_get_x(&handle) == 1);
-	EXPECT_TRUE(deepEntryIface_get_y(&handle) == 1);
-	EXPECT_TRUE(deepEntryIface_get_z(&handle) == 2);
+	EXPECT_TRUE(deepEntryIface_get_x(&handle) == 1l);
+	EXPECT_TRUE(deepEntryIface_get_y(&handle) == 1l);
+	EXPECT_TRUE(deepEntryIface_get_z(&handle) == 2l);
 	deepEntryIface_raise_e(&handle);
 	deepEntry_runCycle(&handle);
 	EXPECT_TRUE(deepEntry_isActive(&handle, DeepEntry_r2_B_r_BB));
@@ -33,7 +33,7 @@ TEST(StatemachineTest, enterToSubstate) {
 	deepEntryIface_raise_f(&handle);
 	deepEntry_runCycle(&handle);
 	EXPECT_TRUE(deepEntry_isActive(&handle, DeepEntry_r2_B_r_BB));
-	EXPECT_TRUE(deepEntryIface_get_y(&handle) == 1);
+	EXPECT_TRUE(deepEntryIface_get_y(&handle) == 1l);
 }
 
 		

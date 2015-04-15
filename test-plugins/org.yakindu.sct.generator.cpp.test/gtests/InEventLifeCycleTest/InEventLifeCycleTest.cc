@@ -17,8 +17,8 @@ TEST(StatemachineTest, eventLifeCycle) {
 	statechart->init();
 	statechart->enter();
 	statechart->raise_e();
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 0);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 0l);
 	statechart->runCycle();
-	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1);
+	EXPECT_TRUE(statechart->getDefaultSCI()->get_i()== 1l);
 	delete statechart;
 }
