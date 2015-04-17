@@ -47,6 +47,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.ui.part.FileEditorInput;
+import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.SGraphPackage;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.ui.editor.DiagramActivator;
@@ -91,13 +92,14 @@ public class CreationWizard extends Wizard implements INewWizard {
 		modelCreationPage.setTitle("YAKINDU SCT Diagram");
 		modelCreationPage.setDescription("Create a new YAKINDU SCT Diagram File");
 		modelCreationPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
+		if (DomainRegistry.getDomainDescriptors().size() > 1) {
+			domainWizardPage = new DomainWizardPage("DomainWizard");
+			domainWizardPage.setTitle("Select Statechart Domain");
+			domainWizardPage.setDescription("Select the domain you want to create a statechart for.");
+			domainWizardPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
+			addPage(domainWizardPage);
+		}
 
-		domainWizardPage = new DomainWizardPage("DomainWizard");
-		domainWizardPage.setTitle("Select Statechart Domain");
-		domainWizardPage.setDescription("Select the domain you want to create a statechart for.");
-		domainWizardPage.setImageDescriptor(StatechartImages.LOGO.imageDescriptor());
-
-		addPage(domainWizardPage);
 		addPage(modelCreationPage);
 	}
 
@@ -162,7 +164,8 @@ public class CreationWizard extends Wizard implements INewWizard {
 				FactoryUtils.createStatechartModel(resource, preferencesHint);
 				Statechart statechart = (Statechart) EcoreUtil.getObjectByType(resource.getContents(),
 						SGraphPackage.Literals.STATECHART);
-				statechart.setDomainID(domainWizardPage.getDomainID());
+				statechart.setDomainID(domainWizardPage != null ? domainWizardPage.getDomainID()
+						: SGraphPackage.Literals.STATECHART__DOMAIN_ID.getDefaultValueLiteral());
 
 				try {
 					resource.save(getSaveOptions());
