@@ -37,7 +37,7 @@ public class GenericTypeValueProvider implements ITypeValueProvider {
 			return null;
 		}
 		if (is(type, INTEGER)) {
-			return new Integer(0);
+			return new Long(0);
 		}
 		if (is(type, REAL)) {
 			return new Double(0.0);
