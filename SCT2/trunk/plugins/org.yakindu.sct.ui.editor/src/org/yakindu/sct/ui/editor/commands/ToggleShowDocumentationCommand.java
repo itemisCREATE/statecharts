@@ -48,7 +48,6 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 		List<View> views = unwrap(HandlerUtil.getCurrentSelection(event));
 		toggleDocumentation(views);
 		return null;
-
 	}
 
 	public static void toggleDocumentation(List<View> views) {
@@ -67,7 +66,7 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 		executeCommand(command);
 	}
 
-	protected static StringValueStyle createInitialStyle(View view) {
+	public static StringValueStyle createInitialStyle(View view) {
 		StringValueStyle style = NotationFactory.eINSTANCE.createStringValueStyle();
 		style.setName(FEATURE_TO_SHOW);
 		style.setStringValue(SGraphPackage.Literals.SPECIFICATION_ELEMENT__SPECIFICATION.getName());
@@ -76,7 +75,7 @@ public class ToggleShowDocumentationCommand extends AbstractHandler {
 		return style;
 	}
 
-	protected static void executeCommand(ICommand cmd) {
+	public static void executeCommand(ICommand cmd) {
 		try {
 			OperationHistoryFactory.getOperationHistory().execute(cmd, new NullProgressMonitor(), null);
 		} catch (ExecutionException e) {

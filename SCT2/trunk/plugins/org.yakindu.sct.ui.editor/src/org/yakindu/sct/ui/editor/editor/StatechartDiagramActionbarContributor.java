@@ -10,24 +10,15 @@
  */
 package org.yakindu.sct.ui.editor.editor;
 
-import java.util.List;
-
 import org.eclipse.gmf.runtime.common.ui.action.global.GlobalActionId;
 import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramActionBarContributor;
-import org.eclipse.gmf.runtime.notation.Diagram;
-import org.eclipse.gmf.runtime.notation.View;
-import org.eclipse.jface.action.Action;
 import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.xtext.EcoreUtil2;
-import org.yakindu.sct.ui.editor.StatechartImages;
-import org.yakindu.sct.ui.editor.commands.ToggleShowDocumentationCommand;
+import org.yakindu.sct.ui.editor.commands.DocumentationMenuAction;
 
 /**
  * 
  * @author andreas muelder - Initial contribution and API
- * 
+ * @author bohl - extracted actions
  */
 public class StatechartDiagramActionbarContributor extends DiagramActionBarContributor {
 
@@ -36,7 +27,7 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 		super.init(bars);
 		// workaround for https://bugs.eclipse.org/bugs/show_bug.cgi?id=346648
 		bars.setGlobalActionHandler(GlobalActionId.SAVE, null);
-		bars.getToolBarManager().add(new ToggleDocumentationAction());
+		bars.getToolBarManager().add(new DocumentationMenuAction());
 	}
 
 	@Override
@@ -48,23 +39,5 @@ public class StatechartDiagramActionbarContributor extends DiagramActionBarContr
 	protected Class<StatechartDiagramEditor> getEditorClass() {
 		return StatechartDiagramEditor.class;
 	}
-
-	public static class ToggleDocumentationAction extends Action {
-		public ToggleDocumentationAction() {
-			setText("Toggle Documentation");
-			setImageDescriptor(StatechartImages.MENU.imageDescriptor());
-		}
-		@Override
-		public void run() {
-			IEditorPart activeEditor = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
-					.getActiveEditor();
-			if (activeEditor instanceof StatechartDiagramEditor) {
-				Diagram diagram = ((StatechartDiagramEditor) activeEditor).getDiagram();
-				List<View> result = EcoreUtil2.getAllContentsOfType(diagram, View.class);
-				ToggleShowDocumentationCommand.toggleDocumentation(result);
-			}
-
-		}
-	}
-
+	
 }
