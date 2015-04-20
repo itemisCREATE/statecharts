@@ -40,7 +40,7 @@ class StatemachineInterface {
 		fsa.generateFile(filename, content)
 	}
 
-	def private content(ExecutionFlow flow, GeneratorEntry entry) {
+	def protected content(ExecutionFlow flow, GeneratorEntry entry) {
 		'''
 			«entry.licenseText»
 			package «flow.getImplementationPackageName(entry)»;
@@ -69,18 +69,18 @@ class StatemachineInterface {
 	
 	
 	
-	def private constantFieldDeclaration(VariableDefinition variable){
+	def protected constantFieldDeclaration(VariableDefinition variable){
 		'''public static final «variable.type.targetLanguageName» «variable.symbol» = «variable.initialValue.code»;'''
 	}
 
-	def private createScope(Scope scope, GeneratorEntry entry) {
+	def protected createScope(Scope scope, GeneratorEntry entry) {
 		switch scope {
 			InterfaceScope: scope.createScope(entry)
 			InternalScope: scope.createScope
 		}
 	}
 
-	def private createScope(InterfaceScope scope, GeneratorEntry entry) {
+	def protected createScope(InterfaceScope scope, GeneratorEntry entry) {
 		'''
 			«scope.createInterface(entry)»
 			«scope.createListenerInterface(entry)»
@@ -91,7 +91,7 @@ class StatemachineInterface {
 		'''
 	}
 
-	def private createScope(InternalScope scope) {
+	def protected createScope(InternalScope scope) {
 		'''
 			«IF scope.hasOperations()»
 				public interface «scope.internalOperationCallbackName» {
@@ -105,7 +105,7 @@ class StatemachineInterface {
 		'''
 	}
 
-	def private createInterface(InterfaceScope scope, GeneratorEntry entry) {
+	def protected createInterface(InterfaceScope scope, GeneratorEntry entry) {
 		'''
 				public interface «scope.interfaceName» {
 				«var constants = scope.declarations.filter(VariableDefinition).filter[const]»
@@ -125,7 +125,7 @@ class StatemachineInterface {
 		'''
 	}
 
-	def private createListenerInterface(InterfaceScope scope, GeneratorEntry entry) {
+	def protected createListenerInterface(InterfaceScope scope, GeneratorEntry entry) {
 		'''
 			«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
 				
@@ -144,7 +144,7 @@ class StatemachineInterface {
 		'''
 	}
 
-	def createOperationCallbackInterface(InterfaceScope scope) {
+	def protected createOperationCallbackInterface(InterfaceScope scope) {
 		'''
 			«IF scope.hasOperations»
 				
@@ -157,7 +157,7 @@ class StatemachineInterface {
 		'''
 	}
 
-	def eventAccessors(InterfaceScope scope) {
+	def protected eventAccessors(InterfaceScope scope) {
 		'''
 			«FOR event : scope.eventDefinitions»
 				«IF event.direction == Direction::IN»
@@ -177,7 +177,7 @@ class StatemachineInterface {
 		'''
 	}
 
-	def variableAccessors(InterfaceScope scope) '''
+	def protected variableAccessors(InterfaceScope scope) '''
 		«FOR variable : scope.variableDefinitions»
 			public «variable.type.targetLanguageName» «variable.getter»;
 			«IF !variable.readonly && !variable.const»
@@ -186,7 +186,7 @@ class StatemachineInterface {
 		«ENDFOR»
 	'''
 
-	def getStatemachineInterfaceExtensions(ExecutionFlow flow) {
+	def protected getStatemachineInterfaceExtensions(ExecutionFlow flow) {
 
 		var String interfaces = "";
 
@@ -199,14 +199,14 @@ class StatemachineInterface {
 		return interfaces;
 	}
 
-	def private operationSignature(OperationDefinition it) {
+	def protected operationSignature(OperationDefinition it) {
 		'''
 			public «type.targetLanguageName» «name.asEscapedIdentifier»(«FOR parameter : parameters SEPARATOR ', '»«parameter.
 				type.targetLanguageName» «parameter.identifier»«ENDFOR»);
 		'''
 	}
 
-	def private identifier(Parameter parameter) {
+	def protected identifier(Parameter parameter) {
 		if (parameter.name.isJavaKeyword()) {
 			return parameter.name + "Arg"
 		} else {

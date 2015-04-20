@@ -27,12 +27,12 @@ import org.yakindu.sct.model.stext.stext.VariableDefinition
 
 class Statemachine {
 	
-	@Inject extension Naming
-	@Inject extension GenmodelEntries
-	@Inject extension Navigation
-	@Inject extension ICodegenTypeSystemAccess
-	@Inject extension ITypeSystem
-	@Inject extension FlowCode
+	@Inject protected extension Naming
+	@Inject protected extension GenmodelEntries
+	@Inject protected extension Navigation
+	@Inject protected extension ICodegenTypeSystemAccess
+	@Inject protected extension ITypeSystem
+	@Inject protected extension FlowCode
 	
 	@Inject Beautifier beautifier
 	
@@ -42,7 +42,7 @@ class Statemachine {
 		fsa.generateFile(filename, content)
 	}
 	
-	def private content(ExecutionFlow flow, GeneratorEntry entry) '''
+	def protected content(ExecutionFlow flow, GeneratorEntry entry) '''
 		«entry.licenseText»
 		package «flow.getImplementationPackageName(entry)»;
 		«flow.createImports(entry)»
@@ -79,7 +79,7 @@ class Statemachine {
 		}
 	'''
 	
-	def private createImports(ExecutionFlow flow, GeneratorEntry entry) '''
+	def protected createImports(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF entry.createInterfaceObserver && flow.hasOutgoingEvents»
 		import java.util.LinkedList;
 		import java.util.List;
@@ -89,7 +89,7 @@ class Statemachine {
 		«ENDIF»
 	'''
 	
-	def private createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
+	def protected createFieldDeclarations(ExecutionFlow flow, GeneratorEntry entry) '''
 		«FOR event : flow.internalScopeEvents»
 		private boolean «event.symbol»;
 		
@@ -138,13 +138,13 @@ class Statemachine {
 		«ENDFOR»
 	'''
 	
-	def private writeableFieldDeclaration(VariableDefinition variable){
+	def protected writeableFieldDeclaration(VariableDefinition variable){
 		'''private «variable.type.targetLanguageName» «variable.symbol»;'''
 	}
 	
 	
 	
-	def private createConstructor(ExecutionFlow flow) '''
+	def protected createConstructor(ExecutionFlow flow) '''
 		public «flow.statemachineClassName»() {
 			
 			«FOR scope : flow.interfaceScopes»
@@ -153,7 +153,7 @@ class Statemachine {
 		}
 	'''
 	
-	def private initFunction(ExecutionFlow flow) '''
+	def protected initFunction(ExecutionFlow flow) '''
 		public void init() {
 			«IF flow.timed»
 			if (timer == null) {
@@ -176,7 +176,7 @@ class Statemachine {
 		}
 	'''
 	
-	def private clearInEventsFunction(ExecutionFlow flow) '''
+	def protected clearInEventsFunction(ExecutionFlow flow) '''
 		/**
 		* This method resets the incoming events (time events included).
 		*/
@@ -200,7 +200,7 @@ class Statemachine {
 		}
 	'''
 	
-	def private clearOutEventsFunction(ExecutionFlow flow) '''
+	def protected clearOutEventsFunction(ExecutionFlow flow) '''
 		/**
 		* This method resets the outgoing events.
 		*/
@@ -213,7 +213,7 @@ class Statemachine {
 		}
 	'''
 	
-	def private isActiveFunction(ExecutionFlow flow) '''
+	def protected isActiveFunction(ExecutionFlow flow) '''
 		/**
 		* Returns true if the given state is currently active otherwise false.
 		*/
@@ -230,7 +230,7 @@ class Statemachine {
 		}
 	'''
 	
-	def private timingFunctions(ExecutionFlow flow) '''
+	def protected timingFunctions(ExecutionFlow flow) '''
 		«IF flow.timed»
 			/**
 			* Set the {@link ITimer} for the state machine. It must be set
@@ -258,7 +258,7 @@ class Statemachine {
 		«ENDIF»
 	'''
 	
-	def private interfaceAccessors(ExecutionFlow flow) '''
+	def protected interfaceAccessors(ExecutionFlow flow) '''
 		«FOR scope : flow.interfaceScopes»
 			public «scope.interfaceName» get«scope.interfaceName»() {
 				return «scope.interfaceName.toFirstLower()»;
@@ -266,7 +266,7 @@ class Statemachine {
 		«ENDFOR»
 	'''
 	
-	def private toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
+	def protected toImplementation(InterfaceScope scope, GeneratorEntry entry) '''
 		private final class «scope.getInterfaceImplName» implements «scope.getInterfaceName» {
 		
 		«IF entry.createInterfaceObserver && scope.hasOutgoingEvents»
@@ -387,12 +387,12 @@ class Statemachine {
 		}
 	'''
 	
-	def private getIllegalAccessValidation(EventDefinition it) '''
+	def protected getIllegalAccessValidation(EventDefinition it) '''
 		if (! «name.asEscapedIdentifier» ) 
 			throw new IllegalStateException("Illegal event value acces. Event «name.asEscapedName» is not raised!");
 	'''
 	
-	def private internalScopeFunctions (ExecutionFlow flow) '''
+	def protected internalScopeFunctions (ExecutionFlow flow) '''
 		«FOR event : flow.internalScopeEvents»
 			«IF event.type != null && !isSame(event.type, getType(GenericTypeSystem.VOID))»
 				private void raise«event.name.asEscapedName»(«event.type.targetLanguageName» value) {
@@ -423,7 +423,7 @@ class Statemachine {
 		«ENDFOR»
 	'''
 	
-	def private defaultInterfaceFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
+	def protected defaultInterfaceFunctions(ExecutionFlow flow, GeneratorEntry entry) '''
 		«IF flow.defaultScope != null»
 			«var InterfaceScope scope = flow.defaultScope»
 			«FOR event : scope.eventDefinitions»
@@ -465,7 +465,7 @@ class Statemachine {
 		
 	'''
 	
-	def private runCycleFunction(ExecutionFlow flow) '''
+	def protected runCycleFunction(ExecutionFlow flow) '''
 		public void runCycle() {
 			
 			clearOutEvents();
@@ -489,7 +489,7 @@ class Statemachine {
 		}
 	'''
 	
-	def private enterFunction(ExecutionFlow it) '''
+	def protected enterFunction(ExecutionFlow it) '''
 		public void enter() {
 			«IF timed»
 			if (timer == null) {
@@ -500,13 +500,13 @@ class Statemachine {
 		}
 	'''
 	
-	def private exitFunction(ExecutionFlow it) '''
+	def protected exitFunction(ExecutionFlow it) '''
 		public void exit(){
 			«exitSequence.code»
 		}
 	'''
 	
-	def private functionImplementations(ExecutionFlow it) '''
+	def protected functionImplementations(ExecutionFlow it) '''
 		«checkFunctions.toImplementation»
 		«effectFunctions.toImplementation»
 		«entryActionFunctions.toImplementation»
