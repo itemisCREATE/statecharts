@@ -551,6 +551,7 @@ class SequenceBuilder {
 
 		div
 	}
+	
 
 	def dispatch Expression buildValue(boolean b) {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
@@ -565,6 +566,15 @@ class SequenceBuilder {
 		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
 		val IntLiteral lit = factory.createIntLiteral
 		lit.value = i
+		pve.value = lit
+
+		pve
+	}
+	
+	def dispatch Expression buildValue(long i) {
+		val PrimitiveValueExpression pve = factory.createPrimitiveValueExpression
+		val IntLiteral lit = factory.createIntLiteral
+		lit.value = i.intValue
 		pve.value = lit
 
 		pve
