@@ -46,10 +46,10 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 
 	private static final Map<String, Class<? extends EObject>> semanticTargetToRuleMap = new HashMap<String, Class<? extends EObject>>();
 
-	private Injector resourceInjector;
-	private Injector simulationInjector;
-	private Injector sequencerInjector;
-	private Map<String, Injector> embeddedInjectors = new HashMap<String, Injector>();
+	private static Injector resourceInjector;
+	private static Injector simulationInjector;
+	private static Injector sequencerInjector;
+	private static Map<String, Injector> embeddedInjectors = new HashMap<String, Injector>();
 
 	static {
 		semanticTargetToRuleMap.put(Statechart.class.getName(), StatechartSpecification.class);
