@@ -189,7 +189,7 @@ public class StatechartDiagramEditor extends DiagramPartitioningEditor implement
 		try {
 			// Touch the file for revalidation, when the user did not save
 			// the changes
-			if (editorInput.getFile() != null && editorInput.getFile().exists()) {
+			if (isDirty() && editorInput.getFile() != null && editorInput.getFile().exists()) {
 				editorInput.getFile().touch(new NullProgressMonitor());
 			}
 		} catch (CoreException e) {
