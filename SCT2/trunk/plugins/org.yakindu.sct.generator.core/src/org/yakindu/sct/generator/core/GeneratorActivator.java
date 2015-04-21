@@ -13,6 +13,8 @@ public class GeneratorActivator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static GeneratorActivator plugin;
+	//Preference constant for automatic code generation
+	public static final String PREF_GENERATE_AUTOMATICALLY = "generate.automatically";
 	
 	/**
 	 * The constructor
