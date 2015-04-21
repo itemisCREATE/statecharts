@@ -80,9 +80,10 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
+        	category="org.yakindu.sct.ui.preferences.root"
             class="org.yakindu.sct.model.stext.ui.STextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.yakindu.sct.model.stext.SText"
-            name="SText">
+            name="Expressions">
             <keywordReference id="org.yakindu.sct.model.stext.ui.keyword_SText"/>
         </page>
         <page

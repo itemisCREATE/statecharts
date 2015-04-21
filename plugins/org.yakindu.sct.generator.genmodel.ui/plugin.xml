@@ -81,9 +81,10 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+        	category="org.yakindu.sct.ui.preferences.root"
+            class="org.yakindu.sct.generator.genmodel.ui.SGenExecutableExtensionFactory:org.yakindu.sct.generator.genmodel.ui.preferences.GeneratorRootPreferencePage"
             id="org.yakindu.sct.generator.genmodel.SGen"
-            name="SGen">
+            name="Generator Model">
             <keywordReference id="org.yakindu.sct.generator.genmodel.ui.keyword_SGen"/>
         </page>
         <page
