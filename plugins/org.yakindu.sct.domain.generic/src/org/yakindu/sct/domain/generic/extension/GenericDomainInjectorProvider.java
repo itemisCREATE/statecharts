@@ -47,8 +47,6 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 	private static final Map<String, Class<? extends EObject>> semanticTargetToRuleMap = new HashMap<String, Class<? extends EObject>>();
 
 	private static Injector resourceInjector;
-	private static Injector simulationInjector;
-	private static Injector sequencerInjector;
 	private static Map<String, Injector> embeddedInjectors = new HashMap<String, Injector>();
 
 	static {
@@ -114,15 +112,11 @@ public class GenericDomainInjectorProvider implements IDomainInjectorProvider {
 
 	@Override
 	public Injector getSimulationInjector() {
-		if (simulationInjector == null)
-			simulationInjector = Guice.createInjector(getSimulationModule());
-		return simulationInjector;
+		return Guice.createInjector(getSimulationModule());
 	}
 
 	@Override
 	public Injector getSequencerInjector() {
-		if (sequencerInjector == null)
-			sequencerInjector = Guice.createInjector(getSequencerModule());
-		return sequencerInjector;
+		return Guice.createInjector(getSequencerModule());
 	}
 }
