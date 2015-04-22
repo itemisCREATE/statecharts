@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2011-2013 committers of YAKINDU and others.
+ * Copyright (c) 2011-2015 committers of YAKINDU and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -10,19 +10,22 @@
  */
 package org.yakindu.sct.simulation.core.sexec.launch;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.ILaunchConfigurationDelegate;
+import org.eclipse.emf.workspace.util.WorkspaceSynchronizer;
 import org.yakindu.sct.domain.extension.DomainRegistry;
 import org.yakindu.sct.model.sgraph.Statechart;
 import org.yakindu.sct.simulation.core.engine.ISimulationEngine;
 import org.yakindu.sct.simulation.core.launch.AbstractSCTLaunchConfigurationDelegate;
 import org.yakindu.sct.simulation.core.sexec.container.ISimulationEngineFactory;
+import org.yakindu.sct.simulation.core.sexec.interpreter.IOperationMockup;
+import org.yakindu.sct.simulation.core.sexec.interpreter.JavaOperationMockup;
 
-import com.google.inject.Binder;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Module;
 
 /**
  * 
@@ -39,16 +42,19 @@ public class SexecLaunchConfigurationDelegate extends AbstractSCTLaunchConfigura
 
 	@Override
 	protected ISimulationEngine createExecutionContainer(final ILaunch launch, Statechart statechart) {
-		Injector injector = DomainRegistry.getDomainDescriptor(statechart).getDomainInjectorProvider()
-				.getSimulationInjector();
-		Module module = new Module() {
-			@Override
-			public void configure(Binder binder) {
-				binder.bind(ILaunch.class).toInstance(launch);
-			}
-		};
-		injector.createChildInjector(module).injectMembers(this);
 		try {
+
+			Injector injector = DomainRegistry.getDomainDescriptor(statechart).getDomainInjectorProvider()
+					.getSimulationInjector();
+			IFile file = WorkspaceSynchronizer.getFile(statechart.eResource());
+			injector.injectMembers(this);
+			IOperationMockup mockup = injector.getInstance(IOperationMockup.class);
+			if (mockup instanceof JavaOperationMockup) {
+				IProject project = file.getProject();
+				String classes = launch.getLaunchConfiguration().getAttribute(ISCTLaunchParameters.OPERATION_CLASS, "");
+				String[] split = classes.split(",");
+				((JavaOperationMockup) mockup).initOperationCallbacks(project, split);
+			}
 			return factory.createExecutionContainer(statechart, launch);
 		} catch (CoreException e) {
 			e.printStackTrace();
