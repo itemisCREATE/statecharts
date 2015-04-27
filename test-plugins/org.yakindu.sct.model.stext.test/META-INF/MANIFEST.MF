@@ -22,8 +22,7 @@ Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.0.1",
  org.yakindu.base.expressions;bundle-version="1.0.0",
  org.yakindu.sct.domain.generic;bundle-version="1.0.0"
 Export-Package: org.yakindu.sct.model.stext.test,
- org.yakindu.sct.model.stext.test.util,
- org.yakindu.sct.model.stext
+ org.yakindu.sct.model.stext.test.util
 Import-Package: org.junit.runner;version="4.5.0",
  org.junit.runner.manipulation;version="4.5.0",
  org.junit.runner.notification;version="4.5.0",
